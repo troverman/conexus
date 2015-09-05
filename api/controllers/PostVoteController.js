@@ -1,7 +1,7 @@
 /**
- * PostController
+ * PostVoteController
  *
- * @description :: Server-side logic for managing posts
+ * @description :: Server-side logic for managing PostVotes
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var _ = require('lodash');
@@ -9,46 +9,68 @@ var _ = require('lodash');
 module.exports = {
 
 	getAll: function(req, res) {
-		Post.getAll()
+
+		PostVote.getAll()
 		.spread(function(models) {
-			Post.watch(req);
-			Post.subscribe(req, models);
+			PostVote.watch(req);
+			PostVote.subscribe(req, models);
 
 			res.json(models);
 		})
 		.fail(function(err) {
 			// An error occured
 		});
+
 	},
 
 	getOne: function(req, res) {
-		Post.getOne(req.param('id'))
+
+		PostVote.getOne(req.param('id'))
 		.spread(function(model) {
-			Post.subscribe(req, model);
+			PostVote.subscribe(req, model);
 			res.json(model);
 		})
 		.fail(function(err) {
 			res.send(404);
 		});
+
 	},
 
+	getByPost: function(req, res) {
+
+		var postId = req.param('id');
+		PostVote.getByPost(postId)
+		.spread(function(model) {
+			PostVote.subscribe(req, model);
+			res.json(model);
+		})
+		.fail(function(err) {
+			res.send(404);
+		});
+
+	},
+
+
 	create: function (req, res) {
+
 		var userId = req.param('user');
+		//var postId = req.param('post');
+
 		var model = {
-			title: req.param('title'),
-			post_content: req.param('post_content'),
-			url_title: req.param('url_title'),
+			vote: req.param('vote'),
+			post: req.param('post'),
+
 			user: userId
 		};
 
-		Post.create(model)
-		.exec(function(err, post) {
+		PostVote.create(model)
+		.exec(function(err, PostVote) {
 			if (err) {
 				return console.log(err);
 			}
 			else {
-				Post.publishCreate(post);
-				res.json(post);
+				PostVote.publishCreate(PostVote);
+				res.json(PostVote);
 			}
 		});
 	},
@@ -60,7 +82,7 @@ module.exports = {
 		}
 
 		// Otherwise, find and destroy the model in question
-		Post.findOne(id).exec(function(err, model) {
+		PostVote.findOne(id).exec(function(err, model) {
 			if (err) {
 				return res.serverError(err);
 			}
@@ -68,12 +90,12 @@ module.exports = {
 				return res.notFound();
 			}
 
-			Post.destroy(id, function(err) {
+			PostVote.destroy(id, function(err) {
 				if (err) {
 					return res.serverError(err);
 				}
 
-				Post.publishDestroy(model.id);
+				PostVote.publishDestroy(model.id);
 				return res.json(model);
 			});
 		});

@@ -60,15 +60,38 @@ module.exports.routes = {
    * Message routes
    *
    */
+
   'get /api/message': 'MessageController.getAll',
   'get /api/message/:id': 'MessageController.getOne',
   'post /api/message': 'MessageController.create',
   'delete /api/message/:id': 'MessageController.destroy',
 
+  /**
+   * Post routes
+   *
+   */
   'get /api/post': 'PostController.getAll',
   'get /api/post/:id': 'PostController.getOne',
   'post /api/post': 'PostController.create',
   'delete /api/post/:id': 'PostController.destroy',
+
+
+  /**
+   * Post Vote routes
+   *
+   */
+  'get /api/postvote': 'PostVoteController.getAll',
+  'get /api/postvote/:id': 'PostVoteController.getOne',
+  'get /api/postvote/post/:id': 'PostVoteController.getByPost',
+
+  'post /api/postvote': 'PostVoteController.create',
+  'delete /api/postvote/:id': 'PostVoteController.destroy',
+
+
+
+
+
+
 
   'get /api/views/:id': 'TestController.getOne',
 
@@ -80,11 +103,14 @@ module.exports.routes = {
   'get /home': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /messages': 'HomeController.index',
-  'get /post': 'HomeController.index',
-  'get /search': 'HomeController.index',
   'get /member': 'HomeController.index',
   'get /member/:id': 'HomeController.index',
-  'get /member/:slug': 'HomeController.index'
+  'get /member/:slug': 'HomeController.index',
+  'get /post': 'HomeController.index',
+  'get /project/:id': 'HomeController.index',
+  'get /search': 'HomeController.index'
+
+
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options

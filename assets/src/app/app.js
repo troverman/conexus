@@ -13,6 +13,7 @@ angular.module( 'conexus', [
     'conexus.member',
     'conexus.messages',
     'conexus.post',
+    'conexus.project',
     'conexus.search'
 
 ])
@@ -30,26 +31,10 @@ angular.module( 'conexus', [
             window.location = '/';
         }
         else {
-            // pass through to let the web server handle this request
+            // pass through to let the web server handle this request, run multiple apps etc
             window.location = $location.$$absUrl;
         }
     });
-
-    /*$routeProvider.when("/", {
-        templateUrl: "/home/index.tpl.html",
-        controller: "HomeCtrl"
-    }).when("/about", {
-        templateUrl: "/about/index.tpl.html",
-        controller: "AboutCtrl"
-    }).when("/messages", {
-        templateUrl: "/messages/index.tpl.html",
-        controller: "MessagesController"
-    }).when("/member", {
-        templateUrl: "/member/index.tpl.html",
-        controller: "MemberCtrl"
-    }).otherwise({
-        redirectTo: "/"
-    });*/
     $locationProvider.html5Mode(true);
 
 

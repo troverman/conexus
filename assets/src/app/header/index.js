@@ -5,7 +5,9 @@ angular.module( 'conexus.header', [
     $scope.currentUser = config.currentUser;
 
     var navItems = [
-        {title: 'Post', translationKey: 'navigation:about', url:'/post',cssClass: 'fa fa-info-circle'},
+        {title: 'Search', translationKey: 'navigation:search', url:'/search',cssClass: 'fa fa-search'},
+        {title: 'Project', translationKey: 'navigation:project', url:'/project/lol',cssClass: 'fa fa-info-circle'},
+        {title: 'Post', translationKey: 'navigation:post', url:'/post',cssClass: 'fa fa-info-circle'},
         {title: 'Messages', translationKey: 'navigation:messages', url: '/messages', cssClass: 'fa fa-comments'},
         {title: 'About', translationKey: 'navigation:about', url:'/about',cssClass: 'fa fa-info-circle'}
     ];

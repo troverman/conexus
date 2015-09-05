@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'member/index.tpl.html', 'messages/index.tpl.html', 'post/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'member/index.tpl.html', 'messages/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -70,11 +70,7 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("home/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/index.tpl.html",
-    "<h1>test chat app</h1>\n" +
-    "\n" +
-    "\n" +
-    "<p ng-show=\"!currentUser\"><a href=\"/register/\">Register</a> to post a message!</p>\n" +
-    "<!--<p ng-show=\"currentUser\">welcome {{currentUser.email}}  -- {{currentUser.username}}</p>-->\n" +
+    "<!--<p ng-show=\"!currentUser\"><a href=\"/register/\">Register</a> to post a message!</p>\n" +
     "\n" +
     "<div ng-if=\"currentUser\">\n" +
     "	<p class=\"lead\">welcome {{currentUser.username}}!</p>\n" +
@@ -115,7 +111,14 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">crowdsourced team building</p></td>\n" +
     "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">earn value though working together</p></td>\n" +
     "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">when a fire starts to burn, it starts to spread<span style=\"font-size:32px;\" class=\"icon-fire\"></span></p></td>\n" +
-    "<br><br>");
+    "<br><br>\n" +
+    "\n" +
+    "-->\n" +
+    "\n" +
+    "\n" +
+    "CONEXUS\n" +
+    "\n" +
+    "");
 }]);
 
 angular.module("member/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -223,19 +226,55 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "  <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">Submit</button>\n" +
     "</form>\n" +
     "\n" +
+    "\n" +
     "<pre>form = {{newPost | json}}</pre>\n" +
     "\n" +
-    "<h3>All posts</h3>\n" +
-    "<ul>\n" +
-    "  <li ng-repeat=\"post in posts\">\n" +
+    "\n" +
+    "<pre>form = {{newVote| json}}</pre>\n" +
+    "<div>\n" +
+    "  <div ng-repeat=\"post in posts\">\n" +
+    "\n" +
     "    <a href=\"/post/{{post.url_title}}\">{{post.title}}</a>\n" +
+    "\n" +
+    "\n" +
+    "    <form role=\"form\" ng-submit=\"createVote(newPostVote, post)\">\n" +
+    "      <div class=\"form-group\">\n" +
+    "        <input type=\"text\" ng-model=\"post.vote\" class=\"form-control\" id=\"postVote\" ng-disabled=\"!currentUser\">\n" +
+    "      </div>\n" +
+    "      <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">Submit</button>\n" +
+    "    </form>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "    <b>by</b> {{post.user.username}}, <span am-time-ago=\"post.updatedAt\"></span> \n" +
+    "\n" +
+    "\n" +
     "    <br><br>\n" +
     "    {{post.post_content}}\n" +
+    "\n" +
     "    <br><br>\n" +
     "    <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyPost(post)\" ng-show=\"currentUser.id === post.user.id\"><i class=\"fa fa-trash-o\"></i></button>\n" +
-    "  </li>\n" +
-    "</ul>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<div ng-repeat=\"postvote in postvotes\">\n" +
+    "\n" +
+    "{{postvote.vote}}\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/index.tpl.html",
+    "<div ng-controller=\"ProjectCtrl\">\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
     "");
 }]);
 

@@ -14,16 +14,43 @@
   <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
 </form>
 
+
 <pre>form = {{newPost | json}}</pre>
 
-<h3>All posts</h3>
-<ul>
-  <li ng-repeat="post in posts">
+
+<pre>form = {{newVote| json}}</pre>
+<div>
+  <div ng-repeat="post in posts">
+
     <a href="/post/{{post.url_title}}">{{post.title}}</a>
+
+
+    <form role="form" ng-submit="createVote(newPostVote, post)">
+      <div class="form-group">
+        <input type="text" ng-model="post.vote" class="form-control" id="postVote" ng-disabled="!currentUser">
+      </div>
+      <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
+    </form>
+
+
+
+
     <b>by</b> {{post.user.username}}, <span am-time-ago="post.updatedAt"></span> 
+
+
     <br><br>
     {{post.post_content}}
+
     <br><br>
     <button type="button" class="btn btn-danger btn-xs" ng-click="destroyPost(post)" ng-show="currentUser.id === post.user.id"><i class="fa fa-trash-o"></i></button>
-  </li>
-</ul>
+  </div>
+</div>
+
+
+
+<div ng-repeat="postvote in postvotes">
+
+{{postvote.vote}}
+
+
+</div>

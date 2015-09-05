@@ -29,6 +29,7 @@ module.exports = {
 		var userId = req.param('user');
 		var model = {
 			title: req.param('title'),
+			lol: req.param('lol'),
 			user: userId
 		};
 

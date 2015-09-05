@@ -13,8 +13,8 @@ module.exports = {
             required: true
         },
         post_content: {
-            type: 'string'
-            //required: true
+            type: 'string',
+            required: true
         },
         url_title: {
             type: 'string',
