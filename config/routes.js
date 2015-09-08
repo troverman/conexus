@@ -87,6 +87,18 @@ module.exports.routes = {
   'post /api/postvote': 'PostVoteController.create',
   'delete /api/postvote/:id': 'PostVoteController.destroy',
 
+  /**
+   * Follower routes
+   *
+   */
+  'get /api/follower': 'FollowerController.getAll',
+  'get /api/follower/:id': 'FollowerController.getOne',
+
+  'get /api/follower/followers/:id': 'FollowerController.getFollowers',
+  'get /api/follower/following/:id': 'FollowerController.getFollowing',
+
+  'post /api/follower': 'FollowerController.create',
+  'delete /api/follower/:id': 'FollowerController.destroy',
 
 
 

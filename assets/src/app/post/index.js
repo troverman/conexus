@@ -30,7 +30,6 @@ angular.module( 'conexus.post', [
     $scope.currentUser = config.currentUser;
 
 
-
     //posts
     $scope.newPost = {};
     $scope.posts = posts;
@@ -64,14 +63,6 @@ angular.module( 'conexus.post', [
 
 
 
-
-
-
-
-
-
-
-
     //postvote
     //weird error here -- need to figureo out looping aka loop through posts, loop though votes in post. make votable etc
     $scope.newPostVote = {};
@@ -83,7 +74,7 @@ angular.module( 'conexus.post', [
                 $scope.postvotes.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.postvotes, {id: envelope1.id});
+                lodash.remove($scope.postvotes, {id: envelope.id});
                 break;
         }
     });
@@ -108,21 +99,6 @@ angular.module( 'conexus.post', [
             $scope.newPostVote = {};
         });
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

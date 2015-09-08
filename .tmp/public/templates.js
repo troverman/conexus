@@ -123,58 +123,58 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("member/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/index.tpl.html",
-    "<div ng-controller=\"MemberCtrl\">\n" +
+    "<title>conex.us</title>\n" +
+    "<style>\n" +
     "\n" +
-    "  <title>conex.us</title>\n" +
-    "  <style>\n" +
+    "  #header-section{background-color:#445065;height:200px;text-align:center;}\n" +
+    "  #header-section img{height:50px;}\n" +
+    "  #section1{height:100%;background-color:#687A94;padding-left:15%;padding-right:15%;}\n" +
+    "  #footer{background-color:#445065;padding-left:15%;padding-right:15%;min-height:100px;}\n" +
+    "  .navbar{margin-bottom:0px;}\n" +
     "\n" +
-    "    #header-section{background-color:#445065;height:200px;text-align:center;}\n" +
-    "    #header-section img{height:50px;}\n" +
-    "    #section1{height:100%;background-color:#687A94;padding-left:15%;padding-right:15%;}\n" +
-    "    #footer{background-color:#445065;padding-left:15%;padding-right:15%;min-height:100px;}\n" +
-    "    .navbar{margin-bottom:0px;}\n" +
-    "\n" +
-    "  </style>\n" +
+    "</style>\n" +
     "\n" +
     "\n" +
-    "  <div id=\"header-section\">\n" +
-    "    <br><br>\n" +
-    "    <br>\n" +
-    "    <h4><a href=\"\">member name</a></h4>\n" +
-    "    <a href=\"#0\" class=\"cd-read-more\">follow (n)</a>\n" +
-    "    <br><br>\n" +
-    "  </div>\n" +
     "\n" +
-    "  <div id=\"section1\">\n" +
     "\n" +
-    "    <br><br><br>\n" +
-    "    <section id=\"cd-timeline\" class=\"cd-container\">\n" +
-    "\n" +
-    "    <div class=\"cd-timeline-block\">\n" +
-    "      <div class=\"cd-timeline-img cd-picture\">\n" +
-    "        <p>x:xx - x:xx</p>\n" +
-    "        <!--<img src=\"static/img/cd-icon-picture.svg\" alt=\"Picture\">-->\n" +
-    "      </div> <!-- cd-timeline-img -->\n" +
-    "\n" +
-    "      <div class=\"cd-timeline-content\">\n" +
-    "        <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/8fpZ16cIVAQ\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "        <a href=\"#0\" class=\"cd-read-more\">like</a>\n" +
-    "        <a href=\"#0\" class=\"cd-read-more\">comment</a>\n" +
-    "        <span class=\"cd-date\">Jan 14</span>\n" +
-    "      </div> <!-- cd-timeline-content -->\n" +
-    "    </div> <!-- cd-timeline-block -->\n" +
-    "\n" +
-    "    </section> <!-- cd-timeline -->\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div id=\"footer\">\n" +
-    "    <br><br>\n" +
-    "    <a>conex.us</a>\n" +
-    "    <a>streams</a>\n" +
-    "    <a>live stream life</a>\n" +
-    "  </div>\n" +
-    "\n" +
+    "<div id=\"header-section\">\n" +
+    "  <br><br>\n" +
+    "  <br>\n" +
+    "  <h4><h1>{{member.username}}</h1></h4>\n" +
+    "  <form role=\"form\" ng-submit=\"follow()\">\n" +
+    "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">follow</button>\n" +
+    "  </form>\n" +
+    "  <a href=\"#0\" class=\"cd-read-more\">follow (n)</a>\n" +
+    "  <br><br>\n" +
     "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "{{followers}}\n" +
+    "\n" +
+    "\n" +
+    "<div id=\"section1\">\n" +
+    "\n" +
+    "  <br><br><br>\n" +
+    "  <section id=\"cd-timeline\" class=\"cd-container\">\n" +
+    "\n" +
+    "  <div class=\"cd-timeline-block\">\n" +
+    "    <div class=\"cd-timeline-img cd-picture\">\n" +
+    "      <p>x:xx - x:xx</p>\n" +
+    "      <!--<img src=\"static/img/cd-icon-picture.svg\" alt=\"Picture\">-->\n" +
+    "    </div> <!-- cd-timeline-img -->\n" +
+    "\n" +
+    "    <div class=\"cd-timeline-content\">\n" +
+    "      <a href=\"#0\" class=\"cd-read-more\">like</a>\n" +
+    "      <a href=\"#0\" class=\"cd-read-more\">comment</a>\n" +
+    "      <span class=\"cd-date\">Jan 14</span>\n" +
+    "    </div> <!-- cd-timeline-content -->\n" +
+    "  </div> <!-- cd-timeline-block -->\n" +
+    "\n" +
+    "  </section> <!-- cd-timeline -->\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "");
 }]);
