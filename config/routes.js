@@ -52,7 +52,7 @@ module.exports.routes = {
   'get /api/user': 'UserController.getAll',
   'get /api/user/:id': 'UserController.getOne',
 
-  //'get /api/user/:slug': 'UserController.profile',
+  'get /api/user/username/:path': 'UserController.getByUsername',
   'post /api/user': 'UserController.create',
 
 

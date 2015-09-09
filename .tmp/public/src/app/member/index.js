@@ -4,10 +4,6 @@ angular.module( 'conexus.member', [
 .config(function config( $stateProvider ) {
 	$stateProvider.state( 'member', {
 		url: '/member/:path',
-        controller: function($scope, $stateParams) {
-            // get the id
-            $scope.id = $stateParams.path;
-        },
 		views: {
 			"main": {
 				controller: 'MemberCtrl',
@@ -15,14 +11,31 @@ angular.module( 'conexus.member', [
 			}
 		},
 		resolve: {
-            followers: function(FollowerModel, $stateParams) {
-            	//get by current user id
-            	console.log('HELLLOOOO');
-            	console.log($stateParams.path);
+            followers: function(FollowerModel, $stateParams, $http, $q) {
 
-                return FollowerModel.getFollowersById($stateParams.path).then(function(models) {
-                    return models;
+                return $q.when()
+                .then(function () {
+
+                    var deferred = $q.defer();
+                    var url = '/api/user/username/' + $stateParams.path;
+
+                    $http.get(url).
+                        success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).
+                        error(function(data, status, headers, config) {
+                    });
+
+                    return deferred.promise;
+
+                })
+                .then(function (data) {
+                    return FollowerModel.getFollowersById(data.id).then(function(models) {
+                        return models;
+                    });
                 });
+
+
             }
         }
 	});
@@ -33,16 +46,13 @@ angular.module( 'conexus.member', [
 	titleService.setTitle('member');
 	$scope.currentUser = config.currentUser;
 
-	var url = '/api/user/' + $stateParams.path;
-
+	var url = '/api/user/username/' + $stateParams.path;
 	$http.get(url).
 	    success(function(data, status, headers, config) {
 	      $scope.member = data;
-
 	      if (data == ''){
 	      	$location.url('/');
 	      };
-
 	    }).
 	    error(function(data, status, headers, config) {
     });

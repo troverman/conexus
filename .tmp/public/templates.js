@@ -118,6 +118,10 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "CONEXUS\n" +
     "\n" +
+    "<br><br><br>\n" +
+    "\n" +
+    "CONNECT, COLLAB, CREATE\n" +
+    "\n" +
     "");
 }]);
 
@@ -135,44 +139,26 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "</style>\n" +
     "\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "<div id=\"header-section\">\n" +
-    "  <br><br>\n" +
     "  <br>\n" +
     "  <h4><h1>{{member.username}}</h1></h4>\n" +
+    "  <img src=\"/images/mikey.jpg\"/>\n" +
     "  <form role=\"form\" ng-submit=\"follow()\">\n" +
     "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">follow</button>\n" +
     "  </form>\n" +
-    "  <a href=\"#0\" class=\"cd-read-more\">follow (n)</a>\n" +
+    "  <a href=\"#0\" class=\"cd-read-more\">follow ({{followers.length}})</a>\n" +
     "  <br><br>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "{{followers}}\n" +
-    "\n" +
-    "\n" +
     "<div id=\"section1\">\n" +
     "\n" +
-    "  <br><br><br>\n" +
-    "  <section id=\"cd-timeline\" class=\"cd-container\">\n" +
+    "  <div ng-repeat=\"follower in followers\">\n" +
+    "    {{follower}}\n" +
+    "    <br><br><br>\n" +
+    "  </div>\n" +
     "\n" +
-    "  <div class=\"cd-timeline-block\">\n" +
-    "    <div class=\"cd-timeline-img cd-picture\">\n" +
-    "      <p>x:xx - x:xx</p>\n" +
-    "      <!--<img src=\"static/img/cd-icon-picture.svg\" alt=\"Picture\">-->\n" +
-    "    </div> <!-- cd-timeline-img -->\n" +
-    "\n" +
-    "    <div class=\"cd-timeline-content\">\n" +
-    "      <a href=\"#0\" class=\"cd-read-more\">like</a>\n" +
-    "      <a href=\"#0\" class=\"cd-read-more\">comment</a>\n" +
-    "      <span class=\"cd-date\">Jan 14</span>\n" +
-    "    </div> <!-- cd-timeline-content -->\n" +
-    "  </div> <!-- cd-timeline-block -->\n" +
-    "\n" +
-    "  </section> <!-- cd-timeline -->\n" +
     "</div>\n" +
+    "\n" +
     "\n" +
     "\n" +
     "\n" +

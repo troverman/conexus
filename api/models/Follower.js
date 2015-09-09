@@ -41,6 +41,8 @@ module.exports = {
 
     getFollowers: function(followed_model) {
         return Follower.find()
+        .populate('followed')
+        .populate('follower')
         .where({followed: followed_model})
         .then(function (model) {
             return [model];
@@ -49,6 +51,8 @@ module.exports = {
 
     getFollowing: function(follower_model) {
         return Follower.find()
+        .populate('followed')
+        .populate('follower')
         .where({follower: follower_model})
         .then(function (model) {
             return [model];

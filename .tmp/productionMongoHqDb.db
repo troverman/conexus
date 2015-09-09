@@ -26,6 +26,14 @@
         "createdAt": "2015-09-05T17:05:42.067Z",
         "updatedAt": "2015-09-05T17:05:42.067Z",
         "id": 1
+      },
+      {
+        "protocol": "local",
+        "password": "$2a$10$TlTi1cfQWIgu9EMfN941b.zj3jfJivHSyfguTuqKonM/JXx.T05aK",
+        "user": 3,
+        "createdAt": "2015-09-09T00:31:39.829Z",
+        "updatedAt": "2015-09-09T00:31:39.829Z",
+        "id": 2
       }
     ],
     "post": [
@@ -460,6 +468,14 @@
         "createdAt": "2015-09-05T17:05:41.819Z",
         "updatedAt": "2015-09-05T17:05:41.819Z",
         "id": 1
+      },
+      {
+        "username": "test",
+        "email": "test@test.test",
+        "first_name": "test",
+        "createdAt": "2015-09-09T00:31:39.581Z",
+        "updatedAt": "2015-09-09T00:31:39.581Z",
+        "id": 3
       }
     ],
     "follower": [
@@ -980,6 +996,321 @@
         "createdAt": "2015-09-07T06:49:10.967Z",
         "updatedAt": "2015-09-07T06:49:10.967Z",
         "id": 74
+      },
+      {
+        "followed": 3,
+        "follower": 3,
+        "createdAt": "2015-09-09T00:31:53.832Z",
+        "updatedAt": "2015-09-09T00:31:53.832Z",
+        "id": 75
+      },
+      {
+        "followed": 1,
+        "follower": 3,
+        "createdAt": "2015-09-09T00:32:00.277Z",
+        "updatedAt": "2015-09-09T00:32:00.277Z",
+        "id": 76
+      },
+      {
+        "followed": 1,
+        "follower": 3,
+        "createdAt": "2015-09-09T00:32:00.794Z",
+        "updatedAt": "2015-09-09T00:32:00.794Z",
+        "id": 77
+      },
+      {
+        "followed": 1,
+        "follower": 3,
+        "createdAt": "2015-09-09T00:32:01.034Z",
+        "updatedAt": "2015-09-09T00:32:01.034Z",
+        "id": 78
+      },
+      {
+        "followed": 1,
+        "follower": 3,
+        "createdAt": "2015-09-09T00:32:03.156Z",
+        "updatedAt": "2015-09-09T00:32:03.156Z",
+        "id": 79
+      },
+      {
+        "followed": 1,
+        "follower": 3,
+        "createdAt": "2015-09-09T00:32:04.102Z",
+        "updatedAt": "2015-09-09T00:32:04.102Z",
+        "id": 80
+      },
+      {
+        "followed": 3,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:32:29.902Z",
+        "updatedAt": "2015-09-09T00:32:29.902Z",
+        "id": 81
+      },
+      {
+        "followed": 3,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:32:30.545Z",
+        "updatedAt": "2015-09-09T00:32:30.545Z",
+        "id": 82
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:35:55.256Z",
+        "updatedAt": "2015-09-09T00:35:55.256Z",
+        "id": 83
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:35:55.958Z",
+        "updatedAt": "2015-09-09T00:35:55.958Z",
+        "id": 84
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:35:56.418Z",
+        "updatedAt": "2015-09-09T00:35:56.418Z",
+        "id": 85
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:35:56.774Z",
+        "updatedAt": "2015-09-09T00:35:56.774Z",
+        "id": 86
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:36:00.550Z",
+        "updatedAt": "2015-09-09T00:36:00.550Z",
+        "id": 87
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:36:00.684Z",
+        "updatedAt": "2015-09-09T00:36:00.684Z",
+        "id": 88
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:36:00.827Z",
+        "updatedAt": "2015-09-09T00:36:00.827Z",
+        "id": 89
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:36:00.989Z",
+        "updatedAt": "2015-09-09T00:36:00.989Z",
+        "id": 90
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:36:01.148Z",
+        "updatedAt": "2015-09-09T00:36:01.148Z",
+        "id": 91
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:36:01.302Z",
+        "updatedAt": "2015-09-09T00:36:01.302Z",
+        "id": 92
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:39:01.809Z",
+        "updatedAt": "2015-09-09T00:39:01.809Z",
+        "id": 93
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:39:03.470Z",
+        "updatedAt": "2015-09-09T00:39:03.470Z",
+        "id": 94
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:39:46.586Z",
+        "updatedAt": "2015-09-09T00:39:46.586Z",
+        "id": 95
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:39:48.018Z",
+        "updatedAt": "2015-09-09T00:39:48.018Z",
+        "id": 96
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:39:50.078Z",
+        "updatedAt": "2015-09-09T00:39:50.078Z",
+        "id": 97
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:40:00.664Z",
+        "updatedAt": "2015-09-09T00:40:00.664Z",
+        "id": 98
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:42:34.739Z",
+        "updatedAt": "2015-09-09T00:42:34.739Z",
+        "id": 99
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:44:14.340Z",
+        "updatedAt": "2015-09-09T00:44:14.340Z",
+        "id": 100
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:47:18.222Z",
+        "updatedAt": "2015-09-09T00:47:18.222Z",
+        "id": 101
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:48:19.608Z",
+        "updatedAt": "2015-09-09T00:48:19.608Z",
+        "id": 102
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:49:42.977Z",
+        "updatedAt": "2015-09-09T00:49:42.977Z",
+        "id": 103
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:25.076Z",
+        "updatedAt": "2015-09-09T00:53:25.076Z",
+        "id": 104
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:25.697Z",
+        "updatedAt": "2015-09-09T00:53:25.697Z",
+        "id": 105
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:25.874Z",
+        "updatedAt": "2015-09-09T00:53:25.874Z",
+        "id": 106
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.026Z",
+        "updatedAt": "2015-09-09T00:53:26.026Z",
+        "id": 107
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.204Z",
+        "updatedAt": "2015-09-09T00:53:26.204Z",
+        "id": 108
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.356Z",
+        "updatedAt": "2015-09-09T00:53:26.356Z",
+        "id": 109
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.508Z",
+        "updatedAt": "2015-09-09T00:53:26.508Z",
+        "id": 110
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.703Z",
+        "updatedAt": "2015-09-09T00:53:26.703Z",
+        "id": 111
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.824Z",
+        "updatedAt": "2015-09-09T00:53:26.824Z",
+        "id": 112
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:26.982Z",
+        "updatedAt": "2015-09-09T00:53:26.982Z",
+        "id": 113
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:27.133Z",
+        "updatedAt": "2015-09-09T00:53:27.133Z",
+        "id": 114
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:27.295Z",
+        "updatedAt": "2015-09-09T00:53:27.295Z",
+        "id": 115
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:27.461Z",
+        "updatedAt": "2015-09-09T00:53:27.461Z",
+        "id": 116
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:27.606Z",
+        "updatedAt": "2015-09-09T00:53:27.606Z",
+        "id": 117
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:27.767Z",
+        "updatedAt": "2015-09-09T00:53:27.767Z",
+        "id": 118
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-09T00:53:27.946Z",
+        "updatedAt": "2015-09-09T00:53:27.946Z",
+        "id": 119
       }
     ]
   },
@@ -1163,7 +1494,7 @@
       "id": 2
     },
     "passport": {
-      "id": 1
+      "id": 2
     },
     "post": {
       "id": 4
@@ -1172,10 +1503,10 @@
       "id": 48
     },
     "user": {
-      "id": 1
+      "id": 3
     },
     "follower": {
-      "id": 74
+      "id": 119
     }
   }
 }

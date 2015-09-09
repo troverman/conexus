@@ -11,44 +11,26 @@
 </style>
 
 
-
-
 <div id="header-section">
-  <br><br>
   <br>
   <h4><h1>{{member.username}}</h1></h4>
+  <img src="/images/mikey.jpg"/>
   <form role="form" ng-submit="follow()">
     <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">follow</button>
   </form>
-  <a href="#0" class="cd-read-more">follow (n)</a>
+  <a href="#0" class="cd-read-more">follow ({{followers.length}})</a>
   <br><br>
 </div>
 
-
-
-{{followers}}
-
-
 <div id="section1">
 
-  <br><br><br>
-  <section id="cd-timeline" class="cd-container">
+  <div ng-repeat="follower in followers">
+    {{follower}}
+    <br><br><br>
+  </div>
 
-  <div class="cd-timeline-block">
-    <div class="cd-timeline-img cd-picture">
-      <p>x:xx - x:xx</p>
-      <!--<img src="static/img/cd-icon-picture.svg" alt="Picture">-->
-    </div> <!-- cd-timeline-img -->
-
-    <div class="cd-timeline-content">
-      <a href="#0" class="cd-read-more">like</a>
-      <a href="#0" class="cd-read-more">comment</a>
-      <span class="cd-date">Jan 14</span>
-    </div> <!-- cd-timeline-content -->
-  </div> <!-- cd-timeline-block -->
-
-  </section> <!-- cd-timeline -->
 </div>
+
 
 
 

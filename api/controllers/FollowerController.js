@@ -34,7 +34,6 @@ module.exports = {
 	getFollowers: function(req, res) {
 
 		var FollowedId = req.param('id');
-
 		Follower.getFollowers(FollowedId)
 		.spread(function(models) {
 			Follower.watch(req);
@@ -49,7 +48,6 @@ module.exports = {
 	getFollowing: function(req, res) {
 
 		var FollowerId = req.param('id');
-
 		Follower.getFollowing(FollowerId)
 		.spread(function(models) {
 			Follower.watch(req);
