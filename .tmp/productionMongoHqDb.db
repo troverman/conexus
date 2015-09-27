@@ -16,6 +16,238 @@
         "createdAt": "2015-09-07T06:51:50.362Z",
         "updatedAt": "2015-09-07T06:51:50.362Z",
         "id": 2
+      },
+      {
+        "title": "r",
+        "lol": "ss",
+        "user": 1,
+        "createdAt": "2015-09-27T03:34:56.123Z",
+        "updatedAt": "2015-09-27T03:34:56.123Z",
+        "id": 3
+      },
+      {
+        "title": "ds",
+        "lol": "ds",
+        "user": 1,
+        "createdAt": "2015-09-27T03:35:35.676Z",
+        "updatedAt": "2015-09-27T03:35:35.676Z",
+        "id": 4
+      },
+      {
+        "title": "fs",
+        "lol": "fs",
+        "user": 1,
+        "createdAt": "2015-09-27T03:36:08.655Z",
+        "updatedAt": "2015-09-27T03:36:08.655Z",
+        "id": 5
+      },
+      {
+        "title": "f",
+        "lol": "f",
+        "user": 1,
+        "createdAt": "2015-09-27T03:37:38.567Z",
+        "updatedAt": "2015-09-27T03:37:38.567Z",
+        "id": 6
+      },
+      {
+        "title": "rw",
+        "lol": "rw",
+        "user": 1,
+        "createdAt": "2015-09-27T03:37:47.982Z",
+        "updatedAt": "2015-09-27T03:37:47.982Z",
+        "id": 7
+      },
+      {
+        "title": "1",
+        "lol": "1",
+        "user": 1,
+        "createdAt": "2015-09-27T03:38:44.802Z",
+        "updatedAt": "2015-09-27T03:38:44.802Z",
+        "id": 8
+      },
+      {
+        "title": "123",
+        "lol": "123",
+        "user": 1,
+        "createdAt": "2015-09-27T03:46:23.781Z",
+        "updatedAt": "2015-09-27T03:46:23.781Z",
+        "id": 9
+      },
+      {
+        "title": "ok",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:47:18.036Z",
+        "updatedAt": "2015-09-27T03:47:18.036Z",
+        "id": 10
+      },
+      {
+        "title": "123456767454312453647884563423134",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:47:46.281Z",
+        "updatedAt": "2015-09-27T03:47:46.281Z",
+        "id": 11
+      },
+      {
+        "title": "werwer",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:47:48.912Z",
+        "updatedAt": "2015-09-27T03:47:48.912Z",
+        "id": 12
+      },
+      {
+        "title": "rqwrrqwrwqerre",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:47:51.678Z",
+        "updatedAt": "2015-09-27T03:47:51.678Z",
+        "id": 13
+      },
+      {
+        "title": "werqewr",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:47:57.408Z",
+        "updatedAt": "2015-09-27T03:47:57.408Z",
+        "id": 14
+      },
+      {
+        "title": "wqerqwerqwe",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:47:58.887Z",
+        "updatedAt": "2015-09-27T03:47:58.887Z",
+        "id": 15
+      },
+      {
+        "title": "fdfd",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:49:56.590Z",
+        "updatedAt": "2015-09-27T03:49:56.590Z",
+        "id": 16
+      },
+      {
+        "title": "fdf",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:49:57.583Z",
+        "updatedAt": "2015-09-27T03:49:57.583Z",
+        "id": 17
+      },
+      {
+        "title": "dffd",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:49:57.948Z",
+        "updatedAt": "2015-09-27T03:49:57.948Z",
+        "id": 18
+      },
+      {
+        "title": "fd",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:49:58.116Z",
+        "updatedAt": "2015-09-27T03:49:58.116Z",
+        "id": 19
+      },
+      {
+        "title": "df",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:49:58.373Z",
+        "updatedAt": "2015-09-27T03:49:58.373Z",
+        "id": 20
+      },
+      {
+        "title": "14414",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:50:15.578Z",
+        "updatedAt": "2015-09-27T03:50:15.578Z",
+        "id": 21
+      },
+      {
+        "title": "21414",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:50:17.311Z",
+        "updatedAt": "2015-09-27T03:50:17.311Z",
+        "id": 22
+      },
+      {
+        "title": "faafafafa",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:50:44.919Z",
+        "updatedAt": "2015-09-27T03:50:44.919Z",
+        "id": 23
+      },
+      {
+        "title": "af",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:50:45.828Z",
+        "updatedAt": "2015-09-27T03:50:45.828Z",
+        "id": 24
+      },
+      {
+        "title": "sf",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:50:47.093Z",
+        "updatedAt": "2015-09-27T03:50:47.093Z",
+        "id": 25
+      },
+      {
+        "title": "sffssfa",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T03:50:48.447Z",
+        "updatedAt": "2015-09-27T03:50:48.447Z",
+        "id": 26
+      },
+      {
+        "title": "zczc",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T05:10:13.845Z",
+        "updatedAt": "2015-09-27T05:10:13.845Z",
+        "id": 27
+      },
+      {
+        "title": "d",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T05:10:16.652Z",
+        "updatedAt": "2015-09-27T05:10:16.652Z",
+        "id": 28
+      },
+      {
+        "title": "s",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T05:10:29.854Z",
+        "updatedAt": "2015-09-27T05:10:29.854Z",
+        "id": 29
+      },
+      {
+        "title": "dff",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T05:15:02.595Z",
+        "updatedAt": "2015-09-27T05:15:02.595Z",
+        "id": 30
+      },
+      {
+        "title": "sfg",
+        "lol": null,
+        "user": 1,
+        "createdAt": "2015-09-27T06:13:06.025Z",
+        "updatedAt": "2015-09-27T06:13:06.025Z",
+        "id": 31
       }
     ],
     "passport": [
@@ -1311,8 +1543,31 @@
         "createdAt": "2015-09-09T00:53:27.946Z",
         "updatedAt": "2015-09-09T00:53:27.946Z",
         "id": 119
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-27T06:27:03.254Z",
+        "updatedAt": "2015-09-27T06:27:03.254Z",
+        "id": 120
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-27T06:27:04.380Z",
+        "updatedAt": "2015-09-27T06:27:04.380Z",
+        "id": 121
+      },
+      {
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-09-27T06:27:05.155Z",
+        "updatedAt": "2015-09-27T06:27:05.155Z",
+        "id": 122
       }
-    ]
+    ],
+    "project": [],
+    "task": []
   },
   "schema": {
     "message": {
@@ -1487,11 +1742,63 @@
       "updatedAt": {
         "type": "datetime"
       }
+    },
+    "project": {
+      "title": {
+        "type": "string"
+      },
+      "url_title": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "task": {
+      "title": {
+        "type": "string"
+      },
+      "task_content": {
+        "type": "string"
+      },
+      "project": {
+        "type": "integer",
+        "model": "project",
+        "foreignKey": true,
+        "alias": "project"
+      },
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
     }
   },
   "counters": {
     "message": {
-      "id": 2
+      "id": 31
     },
     "passport": {
       "id": 2
@@ -1506,7 +1813,9 @@
       "id": 3
     },
     "follower": {
-      "id": 119
-    }
+      "id": 122
+    },
+    "project": {},
+    "task": {}
   }
 }

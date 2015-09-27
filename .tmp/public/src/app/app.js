@@ -11,7 +11,6 @@ angular.module( 'conexus', [
     'conexus.home',
     'conexus.about',
     'conexus.member',
-    'conexus.messages',
     'conexus.post',
     'conexus.project',
     'conexus.search'
@@ -20,7 +19,6 @@ angular.module( 'conexus', [
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
     $urlRouterProvider.when('/about/', '/about');
-    $urlRouterProvider.when('/messages/', '/messages');
     $urlRouterProvider.when('/member/', '/member');
     $urlRouterProvider.when('/search/', '/search');
     $urlRouterProvider.when('/post/', '/post');

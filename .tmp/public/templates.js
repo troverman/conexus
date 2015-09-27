@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'member/index.tpl.html', 'messages/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -50,17 +50,6 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "            <li class=\"divider-vertical\"></li>\n" +
     "\n" +
-    "            <li ng-if=\"currentUser\" id=\"current-user-dropdown\" class=\"dropdown\">\n" +
-    "                <div class=\"btn-group\">\n" +
-    "                    <a class=\"btn btn-default btn-sm dropdown-toggle\">\n" +
-    "                        <i class=\"fa fa-user\"></i> {{currentUser.email}}    <span class=\"caret\"></span>\n" +
-    "                    </a>\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li><a href=\"/logout\"><i class=\"fa fa-share\"></i> Logout</a></li>\n" +
-    "                    </ul>\n" +
-    "                </div>\n" +
-    "            </li>\n" +
-    "            \n" +
     "          </ul>\n" +
     "        </div><!--/.nav-collapse -->\n" +
     "      </div>\n" +
@@ -70,57 +59,15 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("home/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/index.tpl.html",
-    "<!--<p ng-show=\"!currentUser\"><a href=\"/register/\">Register</a> to post a message!</p>\n" +
+    "<h1>connect, collab, create</h1>\n" +
     "\n" +
-    "<div ng-if=\"currentUser\">\n" +
-    "	<p class=\"lead\">welcome {{currentUser.username}}!</p>\n" +
-    "</div>\n" +
+    "<p class=\"lead\">a transparent + opensource network</p>\n" +
+    "<p class=\"lead\">how can we work together for a common goal?</p>\n" +
     "\n" +
+    "<div style=\"height:400px;background-color:rgb(70,70,70)\"></div>\n" +
+    "<div style=\"height:400px;background-color:rgb(255,255,255)\"></div>\n" +
     "\n" +
-    "\n" +
-    "<div id=\"triangle-area\" style=\"height:400px\">\n" +
-    "    <br><br>\n" +
-    "    <div style=\"text-align:center\">\n" +
-    "        <div style=\"padding:15px;background-color:rgba(0,0,0,0.4);color:white;\">\n" +
-    "        <br>\n" +
-    "        <p style=\"font-size:48px;color:rgb(240,240,240);text-align:center\">create</p>\n" +
-    "        <hr>\n" +
-    "        <p style=\"font-size:24px;color:rgb(230,230,230);text-align:center\">a transparent + opensource network</p>\n" +
-    "        <br>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <br><br>\n" +
-    "\n" +
-    "    <div style=\"text-align:center\">\n" +
-    "        <div style=\"padding:15px;background-color:rgba(0,0,0,0.4);color:white;display:inline-block;border:1px solid rgb(150,150,150);border-radius:5px;\">\n" +
-    "            <div class=\"btn-group\">\n" +
-    "                <a href=\"#test\" id=\"testing123\" class=\"scroller\">streams</a>\n" +
-    "                <a href=\"/discover/\" id=\"testing123\">projects</a>\n" +
-    "                <a href=\"/about/\" id=\"testing123\">events</a>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <br><br><br>\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "<p>let's document every piece of information a person puts out and make it social media content that is interactive</p>\n" +
-    "\n" +
-    "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">how can we work together for a common goal?</p></td>\n" +
-    "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">imagine a 24/7 global hackaton</p></td>\n" +
-    "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">crowdsourced team building</p></td>\n" +
-    "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">earn value though working together</p></td>\n" +
-    "<td><p class=\"lead\" style=\"text-align:left;padding-left:25px;padding-right:25px;\">when a fire starts to burn, it starts to spread<span style=\"font-size:32px;\" class=\"icon-fire\"></span></p></td>\n" +
-    "<br><br>\n" +
-    "\n" +
-    "-->\n" +
-    "\n" +
-    "\n" +
-    "CONEXUS\n" +
-    "\n" +
-    "<br><br><br>\n" +
-    "\n" +
-    "CONNECT, COLLAB, CREATE\n" +
+    "equity. transparent work. so, based on what youve done and what alue you are bringing... determines equity, job position, and 'vote clout'\n" +
     "\n" +
     "");
 }]);
@@ -163,35 +110,6 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "\n" +
     "");
-}]);
-
-angular.module("messages/index.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("messages/index.tpl.html",
-    "<h2>Messages</h2>\n" +
-    "{{currentUser}}\n" +
-    "<p ng-show=\"!currentUser\"><a href=\"/register\">Register</a> to post a message!</p>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
-    "			<div class=\"form-group\">\n" +
-    "			<label for=\"messageTitle\">Your Message</label>\n" +
-    "				<input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
-    "				<input type=\"text\" ng-model=\"newMessage.lol\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
-    "\n" +
-    "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
-    "		</form>\n" +
-    "	</div>\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<h3>All Messages</h3>\n" +
-    "		<ul>\n" +
-    "\n" +
-    "			<li ng-repeat=\"message in messages\">{{message.title}} {{message.lol}}<b>by</b> {{message.user.username}}, <span am-time-ago=\"message.updatedAt\"></span> <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\"><i class=\"fa fa-trash-o\"></i></button></li>\n" +
-    "\n" +
-    "		</ul>\n" +
-    "	</div>\n" +
-    "</div>");
 }]);
 
 angular.module("post/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -257,7 +175,173 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<div ng-controller=\"ProjectCtrl\">\n" +
+    "<style>\n" +
+    "\n" +
+    "\n" +
+    "/* Toggle Styles */\n" +
+    "\n" +
+    "#wrapper {\n" +
+    "    padding-left: 0;\n" +
+    "    -webkit-transition: all 0.5s ease;\n" +
+    "    -moz-transition: all 0.5s ease;\n" +
+    "    -o-transition: all 0.5s ease;\n" +
+    "    transition: all 0.5s ease;\n" +
+    "}\n" +
+    "\n" +
+    "#wrapper.toggled {\n" +
+    "    padding-left: 250px;\n" +
+    "}\n" +
+    "\n" +
+    "#sidebar-wrapper {\n" +
+    "    z-index: 1000;\n" +
+    "    position: fixed;\n" +
+    "    left: 250px;\n" +
+    "    width: 0;\n" +
+    "    height: 100%;\n" +
+    "    margin-left: -250px;\n" +
+    "    overflow-y: auto;\n" +
+    "    background: #000;\n" +
+    "    -webkit-transition: all 0.5s ease;\n" +
+    "    -moz-transition: all 0.5s ease;\n" +
+    "    -o-transition: all 0.5s ease;\n" +
+    "    transition: all 0.5s ease;\n" +
+    "}\n" +
+    "\n" +
+    "#wrapper.toggled #sidebar-wrapper {\n" +
+    "    width: 250px;\n" +
+    "}\n" +
+    "\n" +
+    "#page-content-wrapper {\n" +
+    "    width: 100%;\n" +
+    "    position: absolute;\n" +
+    "    padding: 15px;\n" +
+    "}\n" +
+    "\n" +
+    "#wrapper.toggled #page-content-wrapper {\n" +
+    "    position: absolute;\n" +
+    "    margin-right: -250px;\n" +
+    "}\n" +
+    "\n" +
+    "/* Sidebar Styles */\n" +
+    "\n" +
+    ".sidebar-nav {\n" +
+    "    position: absolute;\n" +
+    "    top: 0;\n" +
+    "    width: 250px;\n" +
+    "    margin: 0;\n" +
+    "    padding: 0;\n" +
+    "    list-style: none;\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav li {\n" +
+    "    text-indent: 20px;\n" +
+    "    line-height: 40px;\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav li a {\n" +
+    "    display: block;\n" +
+    "    text-decoration: none;\n" +
+    "    color: #999999;\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav li a:hover {\n" +
+    "    text-decoration: none;\n" +
+    "    color: #fff;\n" +
+    "    background: rgba(255,255,255,0.2);\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav li a:active,\n" +
+    ".sidebar-nav li a:focus {\n" +
+    "    text-decoration: none;\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav > .sidebar-brand {\n" +
+    "    height: 65px;\n" +
+    "    font-size: 18px;\n" +
+    "    line-height: 60px;\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav > .sidebar-brand a {\n" +
+    "    color: #999999;\n" +
+    "}\n" +
+    "\n" +
+    ".sidebar-nav > .sidebar-brand a:hover {\n" +
+    "    color: #fff;\n" +
+    "    background: none;\n" +
+    "}\n" +
+    "\n" +
+    "@media(min-width:768px) {\n" +
+    "    #wrapper {\n" +
+    "        padding-left: 250px;\n" +
+    "    }\n" +
+    "\n" +
+    "    #wrapper.toggled {\n" +
+    "        padding-left: 0;\n" +
+    "    }\n" +
+    "\n" +
+    "    #sidebar-wrapper {\n" +
+    "        width: 250px;\n" +
+    "    }\n" +
+    "\n" +
+    "    #wrapper.toggled #sidebar-wrapper {\n" +
+    "        width: 0;\n" +
+    "    }\n" +
+    "\n" +
+    "    #page-content-wrapper {\n" +
+    "        padding: 20px;\n" +
+    "        position: relative;\n" +
+    "    }\n" +
+    "\n" +
+    "    #wrapper.toggled #page-content-wrapper {\n" +
+    "        position: relative;\n" +
+    "        margin-right: 0;\n" +
+    "    }\n" +
+    "}\n" +
+    "\n" +
+    "#main-container{margin-left:250px;}\n" +
+    "\n" +
+    "</style>\n" +
+    "<div id=\"sidebar-wrapper\">\n" +
+    "    <ul class=\"sidebar-nav\">\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">member-name</a>\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">members</a>\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">chatrooms</a>\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">tasks</a>\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">events</a>\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"main-container\">\n" +
+    "\n" +
+    "	<h1>project</h1>\n" +
+    "	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "		{{message.title}} - <a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>,\n" +
+    "		<span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "		<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
+    "			<i class=\"fa fa-trash-o\"></i>\n" +
+    "		</button>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "		<div class=\"form-group\">\n" +
+    "			<input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
+    "		</div>\n" +
+    "		<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "	</form>\n" +
+    "\n" +
+    "	<p>tasklist</p>\n" +
+    "	<hr>\n" +
+    "	<p>task</p>\n" +
     "\n" +
     "</div>\n" +
     "\n" +
