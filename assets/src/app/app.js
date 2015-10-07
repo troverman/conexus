@@ -7,12 +7,14 @@ angular.module( 'conexus', [
     'templates-app',
     'services',
     'models',
+    'conexus.about',
     'conexus.header',
     'conexus.home',
-    'conexus.about',
+    'conexus.login',
     'conexus.member',
     'conexus.post',
     'conexus.project',
+    'conexus.register',
     'conexus.search'
 
 ])

@@ -2,30 +2,21 @@ angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html'
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<span class=\"dropdown\" dropdown>\n" +
-    "	<a href=\"\" class=\"dropdown-toggle\" dropdown-toggle>\n" +
-    "	Click\n" +
-    "	</a>\n" +
+    "<div class=\"dropdown\" dropdown>\n" +
+    "	<a href=\"\" class=\"dropdown-toggle\" dropdown-toggle>Click</a>\n" +
     "	<ul class=\"dropdown-menu\" dropdown-menu>\n" +
-    "	<li> \n" +
-    "	<a ng-click=\"action1()\">Action1</a>\n" +
-    "	</li>\n" +
-    "	<li>\n" +
-    "	<a ng-click=\"action2()\">Action2</a>\n" +
-    "	</li>\n" +
-    "	<li>\n" +
-    "	<a ng-click=\"action3()\">Action3</a>\n" +
-    "	</li>\n" +
-    "	<li>\n" +
-    "	<a ng-click=\"action4()\">Action4</a>\n" +
-    "	</li>\n" +
-    "	<li>\n" +
-    "	<a ng-click=\"action5()\">Action5</a>\n" +
-    "	</li>\n" +
-    "</ul>\n" +
+    "		<li><a ng-click=\"action1()\">Action1</a></li>\n" +
+    "		<li><a ng-click=\"action2()\">Action2</a></li>\n" +
+    "		<li><a ng-click=\"action3()\">Action3</a></li>\n" +
+    "		<li><a ng-click=\"action4()\">Action4</a></li>\n" +
+    "		<li><a ng-click=\"action5()\">Action5</a></li>\n" +
+    "	</ul>\n" +
+    "</div>\n" +
     "\n" +
-    "<h1>about</h1>\n" +
-    "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>");
+    "<div style=\"margin-left:20%;margin-right:20%\">\n" +
+    "	<h1>about</h1>\n" +
+    "	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n" +
+    "</div>");
 }]);
 
 angular.module("header/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -64,10 +55,13 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "<p class=\"lead\">a transparent + opensource network</p>\n" +
     "<p class=\"lead\">how can we work together for a common goal?</p>\n" +
     "\n" +
-    "<div style=\"height:400px;background-color:rgb(70,70,70)\"></div>\n" +
+    "<img src=\"/images/loading.gif\"/>\n" +
+    "\n" +
     "<div style=\"height:400px;background-color:rgb(255,255,255)\"></div>\n" +
     "\n" +
     "equity. transparent work. so, based on what youve done and what alue you are bringing... determines equity, job position, and 'vote clout'\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "");
 }]);
@@ -137,9 +131,7 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "<pre>form = {{newVote| json}}</pre>\n" +
     "<div>\n" +
     "  <div ng-repeat=\"post in posts\">\n" +
-    "\n" +
     "    <a href=\"/post/{{post.url_title}}\">{{post.title}}</a>\n" +
-    "\n" +
     "\n" +
     "    <form role=\"form\" ng-submit=\"createVote(newPostVote, post)\">\n" +
     "      <div class=\"form-group\">\n" +
@@ -148,17 +140,14 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "      <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">Submit</button>\n" +
     "    </form>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "    <b>by</b> {{post.user.username}}, <span am-time-ago=\"post.updatedAt\"></span> \n" +
-    "\n" +
     "\n" +
     "    <br><br>\n" +
     "    {{post.post_content}}\n" +
     "\n" +
     "    <br><br>\n" +
     "    <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyPost(post)\" ng-show=\"currentUser.id === post.user.id\"><i class=\"fa fa-trash-o\"></i></button>\n" +
+    "\n" +
     "  </div>\n" +
     "</div>\n" +
     "\n" +
@@ -166,8 +155,7 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "<div ng-repeat=\"postvote in postvotes\">\n" +
     "\n" +
-    "{{postvote.vote}}\n" +
-    "\n" +
+    "  {{postvote.vote}}\n" +
     "\n" +
     "</div>\n" +
     "");
@@ -176,7 +164,6 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
     "<style>\n" +
-    "\n" +
     "\n" +
     "/* Toggle Styles */\n" +
     "\n" +
@@ -301,6 +288,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "#main-container{margin-left:250px;}\n" +
     "\n" +
     "</style>\n" +
+    "\n" +
     "<div id=\"sidebar-wrapper\">\n" +
     "    <ul class=\"sidebar-nav\">\n" +
     "        <li>\n" +

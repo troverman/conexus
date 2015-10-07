@@ -64,7 +64,7 @@ angular.module( 'conexus.post', [
 
 
     //postvote
-    //weird error here -- need to figureo out looping aka loop through posts, loop though votes in post. make votable etc
+    //get post votes by post
     $scope.newPostVote = {};
     $scope.postvotes = postvotes;
     $sailsSocket.subscribe('postvote', function (envelope) {

@@ -21,9 +21,7 @@
 <pre>form = {{newVote| json}}</pre>
 <div>
   <div ng-repeat="post in posts">
-
     <a href="/post/{{post.url_title}}">{{post.title}}</a>
-
 
     <form role="form" ng-submit="createVote(newPostVote, post)">
       <div class="form-group">
@@ -32,17 +30,14 @@
       <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
     </form>
 
-
-
-
     <b>by</b> {{post.user.username}}, <span am-time-ago="post.updatedAt"></span> 
-
 
     <br><br>
     {{post.post_content}}
 
     <br><br>
     <button type="button" class="btn btn-danger btn-xs" ng-click="destroyPost(post)" ng-show="currentUser.id === post.user.id"><i class="fa fa-trash-o"></i></button>
+
   </div>
 </div>
 
@@ -50,7 +45,6 @@
 
 <div ng-repeat="postvote in postvotes">
 
-{{postvote.vote}}
-
+  {{postvote.vote}}
 
 </div>
