@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -60,6 +60,52 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "<div style=\"height:400px;background-color:rgb(255,255,255)\"></div>\n" +
     "\n" +
     "equity. transparent work. so, based on what youve done and what alue you are bringing... determines equity, job position, and 'vote clout'\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "");
+}]);
+
+angular.module("login/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("login/index.tpl.html",
+    "<!--login-->\n" +
+    "<div class=\"form-wrapper\">\n" +
+    "    <div class=\"form-container\">\n" +
+    "        <h1>Welcome Back!</h1>\n" +
+    "        <form class=\"form ng-pristine ng-valid\" role=\"form\" action=\"/auth/local\" method=\"post\" _lpchecked=\"1\">\n" +
+    "            <label for=\"inputUsername3\"></label>\n" +
+    "            <input type=\"text\" placeholder=\"Username\" id=\"inputUsername3\" name=\"identifier\">\n" +
+    "            <label for=\"inputPassword3\"></label>\n" +
+    "            <input type=\"password\" placeholder=\"Password\" id=\"inputPassword3\" name=\"password\">\n" +
+    "            <button type=\"submit\" id=\"login-button\">Login</button>\n" +
+    "        </form>\n" +
+    "        <a href=\"/register\"><h1>register</h1></a>\n" +
+    "\n" +
+    "    </div>\n" +
+    "    <ul class=\"bg-bubbles\">\n" +
+    "        <li><img width=\"10px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"20px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"30px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"40px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"50px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"90px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"100px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"120px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"140px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"160px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"10px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"20px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"30px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"40px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"50px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"90px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"100px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"120px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"140px\" src=\"images/conex.png\"></li>\n" +
+    "        <li><img width=\"160px\" src=\"images/conex.png\"></li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
+    "\n" +
     "\n" +
     "\n" +
     "\n" +
@@ -334,6 +380,49 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "</div>\n" +
     "\n" +
     "");
+}]);
+
+angular.module("register/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("register/index.tpl.html",
+    "<!--register-->\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"col-md-6\">\n" +
+    "        <h3>Create an Account</h3>\n" +
+    "        <form class=\"form-horizontal\" role=\"form\" action=\"/auth/local/register\" method=\"post\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <label for=\"inputUsername3\" class=\"col-sm-2 control-label\">Username</label>\n" +
+    "                <div class=\"col-sm-10\">\n" +
+    "                    <input type=\"text\" class=\"form-control\" id=\"inputUsername3\" name=\"username\" placeholder=\"Username\" value=\"\">\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n" +
+    "                <div class=\"col-sm-10\">\n" +
+    "                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" name=\"password\" placeholder=\"Password\" value=\"\">\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n" +
+    "                <div class=\"col-sm-10\">\n" +
+    "                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" name=\"email\" placeholder=\"Email\" value=\"\">\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <label for=\"inputFirstName3\" class=\"col-sm-2 control-label\">First Name</label>\n" +
+    "                <div class=\"col-sm-10\">\n" +
+    "                    <input type=\"text\" class=\"form-control\" id=\"inputFirstName3\" name=\"first_name\" placeholder=\"First Name\" value=\"\">\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <div class=\"col-sm-offset-2 col-sm-10\">\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default\">Sign in</button>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<a href=\"/login\">already have an account?</a>");
 }]);
 
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
