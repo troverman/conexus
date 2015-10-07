@@ -34,6 +34,9 @@ module.exports.routes = {
 
 
   'get /': 'HomeController.index',
+
+  //'/*' : 'HomeController.index',
+
   'get /home': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /member': 'HomeController.index',

@@ -11,10 +11,14 @@ angular.module( 'conexus.header', [
         {title: 'Search', translationKey: 'navigation:search', url:'/search',cssClass: 'fa fa-search'}
     ];
 
+    if ($scope.currentUser) {
+        navItems.push({title: 'Logout', translationKey: 'navigation:logout', url: '/logout', cssClass: 'fa fa-sign-out'});
+    };
+
     if (!$scope.currentUser) {
         navItems.push({title: 'Register', translationKey: 'navigation:register', url: '/register', cssClass: 'fa fa-briefcase'});
         navItems.push({title: 'Log in', translationKey: 'navigation:login', url: '/login', cssClass: 'fa fa-sign-in'});
-    }
+    };
 
     $scope.navItems = navItems;
 });
