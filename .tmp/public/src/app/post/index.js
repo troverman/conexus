@@ -46,7 +46,7 @@ angular.module( 'conexus.post', [
 
     $scope.destroyPost = function(post) {
         // check here if this post belongs to the currentUser
-        if (post.user.id === config.currentUser.id) {
+        if (post.user.id.toString() === config.currentUser.id) {
             PostModel.delete(post).then(function(model) {
                 // [post] has been deleted, and removed from $scope.posts
             });
@@ -64,7 +64,6 @@ angular.module( 'conexus.post', [
 
 
     //postvote
-    //get post votes by post
     $scope.newPostVote = {};
     $scope.postvotes = postvotes;
     $sailsSocket.subscribe('postvote', function (envelope) {
@@ -88,12 +87,10 @@ angular.module( 'conexus.post', [
         }
     };
 
-    $scope.createVote = function(newPostVote, post) {
-        console.log(post);
-        newPostVote.user = config.currentUser.id;
-        newPostVote.post = post;
-        newPostVote.vote = newPostVote.vote;
+    $scope.createVote = function(post, newPostVote) {
 
+        newPostVote.post = post;
+        newPostVote.user = config.currentUser;
 
         PostVoteModel.create(newPostVote).then(function(model) {
             $scope.newPostVote = {};

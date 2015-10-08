@@ -54,12 +54,10 @@ module.exports = {
 	create: function (req, res) {
 
 		var userId = req.param('user');
-		//var postId = req.param('post');
 
 		var model = {
 			vote: req.param('vote'),
 			post: req.param('post'),
-
 			user: userId
 		};
 

@@ -14,37 +14,32 @@
   <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
 </form>
 
+<br><br>
 
 <pre>form = {{newPost | json}}</pre>
 
-
-<pre>form = {{newVote| json}}</pre>
 <div>
   <div ng-repeat="post in posts">
     <a href="/post/{{post.url_title}}">{{post.title}}</a>
+    <b>by</b> {{post.user.username}}, <span am-time-ago="post.updatedAt"></span> 
+    {{post.post_content}}
+    <button type="button" class="btn btn-danger btn-xs" ng-click="destroyPost(post)" ng-show="currentUser.id === post.user.id.toString()"><i class="fa fa-trash-o"></i></button>
 
-    <form role="form" ng-submit="createVote(newPostVote, post)">
+    <form role="form" ng-submit="createVote(post, newPostVote)">
       <div class="form-group">
-        <input type="text" ng-model="post.vote" class="form-control" id="postVote" ng-disabled="!currentUser">
+        <input type="text" ng-model="newPostVote.vote" class="form-control" id="postVote" ng-disabled="!currentUser">
       </div>
       <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
     </form>
 
-    <b>by</b> {{post.user.username}}, <span am-time-ago="post.updatedAt"></span> 
-
-    <br><br>
-    {{post.post_content}}
-
-    <br><br>
-    <button type="button" class="btn btn-danger btn-xs" ng-click="destroyPost(post)" ng-show="currentUser.id === post.user.id"><i class="fa fa-trash-o"></i></button>
+    <div ng-repeat="postvote in postvotes">
+      <div ng-if="postvote.post == post.id">
+        {{postvote.vote}}
+        {{postvote.user}}
+      </div>
+    </div>
 
   </div>
 </div>
 
 
-
-<div ng-repeat="postvote in postvotes">
-
-  {{postvote.vote}}
-
-</div>

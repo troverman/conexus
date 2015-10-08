@@ -2,20 +2,12 @@ angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html'
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<div class=\"dropdown\" dropdown>\n" +
-    "	<a href=\"\" class=\"dropdown-toggle\" dropdown-toggle>Click</a>\n" +
-    "	<ul class=\"dropdown-menu\" dropdown-menu>\n" +
-    "		<li><a ng-click=\"action1()\">Action1</a></li>\n" +
-    "		<li><a ng-click=\"action2()\">Action2</a></li>\n" +
-    "		<li><a ng-click=\"action3()\">Action3</a></li>\n" +
-    "		<li><a ng-click=\"action4()\">Action4</a></li>\n" +
-    "		<li><a ng-click=\"action5()\">Action5</a></li>\n" +
-    "	</ul>\n" +
-    "</div>\n" +
-    "\n" +
     "<div style=\"margin-left:20%;margin-right:20%\">\n" +
     "	<h1>about</h1>\n" +
-    "	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n" +
+    "	<h2>connect, collab, create</h2>\n" +
+    "	<br>\n" +
+    "	<p>crowd-owned organization</p>\n" +
+    "	<p>let's work together</p>\n" +
     "</div>");
 }]);
 
@@ -170,40 +162,35 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "  <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">Submit</button>\n" +
     "</form>\n" +
     "\n" +
+    "<br><br>\n" +
     "\n" +
     "<pre>form = {{newPost | json}}</pre>\n" +
     "\n" +
-    "\n" +
-    "<pre>form = {{newVote| json}}</pre>\n" +
     "<div>\n" +
     "  <div ng-repeat=\"post in posts\">\n" +
     "    <a href=\"/post/{{post.url_title}}\">{{post.title}}</a>\n" +
+    "    <b>by</b> {{post.user.username}}, <span am-time-ago=\"post.updatedAt\"></span> \n" +
+    "    {{post.post_content}}\n" +
+    "    <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyPost(post)\" ng-show=\"currentUser.id === post.user.id.toString()\"><i class=\"fa fa-trash-o\"></i></button>\n" +
     "\n" +
-    "    <form role=\"form\" ng-submit=\"createVote(newPostVote, post)\">\n" +
+    "    <form role=\"form\" ng-submit=\"createVote(post, newPostVote)\">\n" +
     "      <div class=\"form-group\">\n" +
-    "        <input type=\"text\" ng-model=\"post.vote\" class=\"form-control\" id=\"postVote\" ng-disabled=\"!currentUser\">\n" +
+    "        <input type=\"text\" ng-model=\"newPostVote.vote\" class=\"form-control\" id=\"postVote\" ng-disabled=\"!currentUser\">\n" +
     "      </div>\n" +
     "      <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">Submit</button>\n" +
     "    </form>\n" +
     "\n" +
-    "    <b>by</b> {{post.user.username}}, <span am-time-ago=\"post.updatedAt\"></span> \n" +
-    "\n" +
-    "    <br><br>\n" +
-    "    {{post.post_content}}\n" +
-    "\n" +
-    "    <br><br>\n" +
-    "    <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyPost(post)\" ng-show=\"currentUser.id === post.user.id\"><i class=\"fa fa-trash-o\"></i></button>\n" +
+    "    <div ng-repeat=\"postvote in postvotes\">\n" +
+    "      <div ng-if=\"postvote.post == post.id\">\n" +
+    "        {{postvote.vote}}\n" +
+    "        {{postvote.user}}\n" +
+    "      </div>\n" +
+    "    </div>\n" +
     "\n" +
     "  </div>\n" +
     "</div>\n" +
     "\n" +
     "\n" +
-    "\n" +
-    "<div ng-repeat=\"postvote in postvotes\">\n" +
-    "\n" +
-    "  {{postvote.vote}}\n" +
-    "\n" +
-    "</div>\n" +
     "");
 }]);
 

@@ -35,8 +35,6 @@ module.exports.routes = {
 
   'get /': 'HomeController.index',
 
-  //'/*' : 'HomeController.index',
-
   'get /home': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /member': 'HomeController.index',
@@ -115,6 +113,9 @@ module.exports.routes = {
   'get /api/votes/:id': 'TestController.getOne',
   'post /api/vote/:id': 'TestController.vote',
   'delete /api/vote/:id': 'TestController.destroy'
+
+  //'get /*' : 'HomeController.index'
+
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options
