@@ -1,3 +1,5 @@
 # conexus #
 
-what's up github?
+create a transparent network
+
+connect collab create

@@ -220,7 +220,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    height: 100%;\n" +
     "    margin-left: -250px;\n" +
     "    overflow-y: auto;\n" +
-    "    background: #000;\n" +
+    "    background: #0D2D4F;\n" +
     "    -webkit-transition: all 0.5s ease;\n" +
     "    -moz-transition: all 0.5s ease;\n" +
     "    -o-transition: all 0.5s ease;\n" +
@@ -261,7 +261,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     ".sidebar-nav li a {\n" +
     "    display: block;\n" +
     "    text-decoration: none;\n" +
-    "    color: #999999;\n" +
+    "    color: #fff;\n" +
     "}\n" +
     "\n" +
     ".sidebar-nav li a:hover {\n" +
@@ -318,39 +318,62 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    }\n" +
     "}\n" +
     "\n" +
-    "#main-container{margin-left:250px;}\n" +
+    "#main-container{margin-left:250px; padding:15px;}\n" +
     "\n" +
     "</style>\n" +
     "\n" +
     "<div id=\"sidebar-wrapper\">\n" +
     "    <ul class=\"sidebar-nav\">\n" +
+    "        <br>\n" +
     "        <li>\n" +
-    "            <a href=\"#\">member-name</a>\n" +
+    "            <a href=\"/\">conex.us</a>\n" +
+    "        </li>\n" +
+    "        <hr>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">channels</a>\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">events</a>\n" +
     "        </li>\n" +
     "        <li>\n" +
     "            <a href=\"#\">members</a>\n" +
     "        </li>\n" +
     "        <li>\n" +
-    "            <a href=\"#\">chatrooms</a>\n" +
+    "            <a href=\"#\">streams</a>\n" +
     "        </li>\n" +
     "        <li>\n" +
     "            <a href=\"#\">tasks</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">events</a>\n" +
     "        </li>\n" +
     "    </ul>\n" +
     "</div>\n" +
     "\n" +
     "<div id=\"main-container\">\n" +
     "\n" +
-    "	<h1>project</h1>\n" +
+    "    <div id=\"streams\">\n" +
+    "        <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/i4IXhceMWCU\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "        <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/sIbmtDplXA0\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"tasks\">\n" +
+    "        <br><br>\n" +
+    "        <p>task</p>\n" +
+    "        <p>task</p>\n" +
+    "        <p>task</p>\n" +
+    "        <p>task</p>\n" +
+    "        <p>task</p>\n" +
+    "        <p>task</p>\n" +
+    "        <p>task</p>\n" +
+    "        <br><br>\n" +
+    "    </div>\n" +
+    "\n" +
     "	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "		{{message.title}} - <a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>,\n" +
-    "		<span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "\n" +
+    "		<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "        <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
     "		<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
     "			<i class=\"fa fa-trash-o\"></i>\n" +
     "		</button>\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
     "	<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
@@ -360,9 +383,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "		<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
     "	</form>\n" +
     "\n" +
-    "	<p>tasklist</p>\n" +
-    "	<hr>\n" +
-    "	<p>task</p>\n" +
+    "\n" +
     "\n" +
     "</div>\n" +
     "\n" +
