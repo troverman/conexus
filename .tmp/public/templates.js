@@ -3,11 +3,12 @@ angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html'
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
     "<div style=\"margin-left:20%;margin-right:20%\">\n" +
-    "	<h1>about</h1>\n" +
+    "\n" +
     "	<h2>connect, collab, create</h2>\n" +
     "	<br>\n" +
-    "	<p>crowd-owned organization</p>\n" +
-    "	<p>let's work together</p>\n" +
+    "	<p>crowd-owned organizations</p>\n" +
+    "	<p>connect with collaborators, create awesome things</p>\n" +
+    "\n" +
     "</div>");
 }]);
 
@@ -42,16 +43,28 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("home/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/index.tpl.html",
-    "<h1>connect, collab, create</h1>\n" +
+    "<div style=\"text-align:center;\">\n" +
+    "	<h1>connect, collab, create</h1>\n" +
     "\n" +
-    "<p class=\"lead\">a transparent + opensource network</p>\n" +
-    "<p class=\"lead\">how can we work together for a common goal?</p>\n" +
+    "	<p class=\"lead\">a transparent + opensource network</p>\n" +
+    "	<p class=\"lead\">how can we work together for a common goal?</p>\n" +
     "\n" +
-    "<img src=\"/images/loading.gif\"/>\n" +
+    "	<img src=\"/images/loading.gif\"/>\n" +
     "\n" +
-    "<div style=\"height:400px;background-color:rgb(255,255,255)\"></div>\n" +
     "\n" +
-    "equity. transparent work. so, based on what youve done and what alue you are bringing... determines equity, job position, and 'vote clout'\n" +
+    "	<br><br>\n" +
+    "\n" +
+    "	<p class=\"lead\">equity. transparent work. based on what youve done..  equity, position, and 'vote clout'</p>\n" +
+    "\n" +
+    "\n" +
+    "	<div style=\"height:500px;background-color:rgb(100,100,100);\"></div>\n" +
+    "	<div style=\"height:500px;background-color:rgb(150,150,150);\"></div>\n" +
+    "	<div style=\"height:500px;background-color:rgb(200,200,200);\"></div>\n" +
+    "	<div style=\"height:500px;background-color:rgb(225,225,225);\">\n" +
+    "		<p>what's good</p>\n" +
+    "	</div>\n" +
+    "\n" +
+    "</div>\n" +
     "\n" +
     "\n" +
     "\n" +
