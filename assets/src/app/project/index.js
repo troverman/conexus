@@ -25,7 +25,7 @@ angular.module( 'conexus.project', [
 	});
 })
 
-.controller( 'ProjectCtrl', function ProjectController( $scope, titleService,  $sailsSocket, lodash, config, MessageModel, messages ) {
+.controller( 'ProjectCtrl', function ProjectController( $scope, $sce, titleService,  $sailsSocket, lodash, config, MessageModel, messages ) {
 	titleService.setTitle('project');
 
 	$scope.newMessage = {};
@@ -61,6 +61,9 @@ angular.module( 'conexus.project', [
         });
     };
 
+    $scope.renderHtml = function (htmlCode) {
+        return $sce.trustAsHtml(htmlCode);
+    };
 
 
 });

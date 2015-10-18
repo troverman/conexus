@@ -57,9 +57,19 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<p class=\"lead\">equity. transparent work. based on what youve done..  equity, position, and 'vote clout'</p>\n" +
     "\n" +
     "\n" +
-    "	<div style=\"height:500px;background-color:rgb(100,100,100);\"></div>\n" +
-    "	<div style=\"height:500px;background-color:rgb(150,150,150);\"></div>\n" +
-    "	<div style=\"height:500px;background-color:rgb(200,200,200);\"></div>\n" +
+    "	<div style=\"height:500px;background-color:rgb(100,100,100);\">\n" +
+    "		<img style=\"float:left;heightL100px;\" src=\"/images/loading.gif\"/>\n" +
+    "\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div style=\"height:500px;background-color:rgb(150,150,150);\">\n" +
+    "\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div style=\"height:500px;background-color:rgb(200,200,200);\">\n" +
+    "\n" +
+    "	</div>\n" +
+    "\n" +
     "	<div style=\"height:500px;background-color:rgb(225,225,225);\">\n" +
     "		<p>what's good</p>\n" +
     "	</div>\n" +
@@ -357,6 +367,9 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <li>\n" +
     "            <a href=\"#\">tasks</a>\n" +
     "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"#\">tools</a>\n" +
+    "        </li>\n" +
     "    </ul>\n" +
     "</div>\n" +
     "\n" +
@@ -378,6 +391,19 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <p>task</p>\n" +
     "        <br><br>\n" +
     "    </div>\n" +
+    "\n" +
+    "\n" +
+    "    <div id=\"html-edit\">\n" +
+    "        <h4>edit html tool</h4>\n" +
+    "        <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
+    "        <hr>\n" +
+    "        <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
+    "        <div style=\"height:100px;\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
     "\n" +

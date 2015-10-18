@@ -146,6 +146,9 @@
         <li>
             <a href="#">tasks</a>
         </li>
+        <li>
+            <a href="#">tools</a>
+        </li>
     </ul>
 </div>
 
@@ -167,6 +170,19 @@
         <p>task</p>
         <br><br>
     </div>
+
+
+    <div id="html-edit">
+        <h4>edit html tool</h4>
+        <textarea style="width:50%" ng-model="post.post_content" class="form-control"></textarea>
+        <hr>
+        <div ng-bind-html="renderHtml(post.post_content)"></div>
+        <div style="height:100px;"></div>
+    </div>
+
+
+
+
 
 	<div ng-repeat="message in messages.slice().reverse()">
 
