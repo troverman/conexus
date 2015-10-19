@@ -24,7 +24,11 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
     "            <span class=\"icon-bar\"></span>\n" +
     "            <span class=\"icon-bar\"></span>\n" +
     "          </button>\n" +
-    "          <a class=\"navbar-brand\" href=\"/\">conexus</a>\n" +
+    "\n" +
+    "          <a class=\"navbar-brand\" href=\"/\">\n" +
+    "            <!--<img style=\"height:20px;float:left\" src=\"/images/loading.gif\"/> -->\n" +
+    "            conexus\n" +
+    "          </a>\n" +
     "        </div>\n" +
     "        <div class=\"collapse navbar-collapse\">\n" +
     "          <ul class=\"nav navbar-nav\">\n" +
@@ -58,7 +62,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "\n" +
     "	<div style=\"height:500px;background-color:rgb(100,100,100);\">\n" +
-    "		<img style=\"float:left;heightL100px;\" src=\"/images/loading.gif\"/>\n" +
     "\n" +
     "	</div>\n" +
     "\n" +
@@ -243,7 +246,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    height: 100%;\n" +
     "    margin-left: -250px;\n" +
     "    overflow-y: auto;\n" +
-    "    background: #0D2D4F;\n" +
+    "    background: #34393d;\n" +
     "    -webkit-transition: all 0.5s ease;\n" +
     "    -moz-transition: all 0.5s ease;\n" +
     "    -o-transition: all 0.5s ease;\n" +
@@ -284,13 +287,14 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     ".sidebar-nav li a {\n" +
     "    display: block;\n" +
     "    text-decoration: none;\n" +
-    "    color: #fff;\n" +
+    "    color: #999;\n" +
     "}\n" +
     "\n" +
     ".sidebar-nav li a:hover {\n" +
     "    text-decoration: none;\n" +
     "    color: #fff;\n" +
-    "    background: rgba(255,255,255,0.2);\n" +
+    "    background: #4b5359;\n" +
+    "    //background: rgba(255,255,255,0.2);\n" +
     "}\n" +
     "\n" +
     ".sidebar-nav li a:active,\n" +
@@ -392,7 +396,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <br><br>\n" +
     "    </div>\n" +
     "\n" +
-    "\n" +
     "    <div id=\"html-edit\">\n" +
     "        <h4>edit html tool</h4>\n" +
     "        <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
@@ -400,10 +403,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
     "        <div style=\"height:100px;\"></div>\n" +
     "    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
     "\n" +
@@ -421,7 +420,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "		</div>\n" +
     "		<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
     "	</form>\n" +
-    "\n" +
     "\n" +
     "\n" +
     "</div>\n" +

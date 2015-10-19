@@ -53,46 +53,6 @@ module.exports.routes = {
   'post /auth/local': 'AuthController.callback',
   'post /auth/local/:action': 'AuthController.callback',
 
-  /**
-   * User routes
-   */
-  'get /api/user': 'UserController.getAll',
-  'get /api/user/:id': 'UserController.getOne',
-
-  'get /api/user/username/:path': 'UserController.getByUsername',
-  'post /api/user': 'UserController.create',
-
-
-  /**
-   * Message routes
-   *
-   */
-
-  'get /api/message': 'MessageController.getAll',
-  'get /api/message/:id': 'MessageController.getOne',
-  'post /api/message': 'MessageController.create',
-  'delete /api/message/:id': 'MessageController.destroy',
-
-  /**
-   * Post routes
-   *
-   */
-  'get /api/post': 'PostController.getAll',
-  'get /api/post/:id': 'PostController.getOne',
-  'post /api/post': 'PostController.create',
-  'delete /api/post/:id': 'PostController.destroy',
-
-
-  /**
-   * Post Vote routes
-   *
-   */
-  'get /api/postvote': 'PostVoteController.getAll',
-  'get /api/postvote/:id': 'PostVoteController.getOne',
-  'get /api/postvote/post/:id': 'PostVoteController.getByPost',
-
-  'post /api/postvote': 'PostVoteController.create',
-  'delete /api/postvote/:id': 'PostVoteController.destroy',
 
   /**
    * Follower routes
@@ -108,8 +68,60 @@ module.exports.routes = {
   'delete /api/follower/:id': 'FollowerController.destroy',
 
 
-  'get /api/views/:id': 'TestController.getOne',
+  /**
+   * Message routes
+   *
+   */
+  'get /api/message': 'MessageController.getAll',
+  'get /api/message/:id': 'MessageController.getOne',
+  'post /api/message': 'MessageController.create',
+  'delete /api/message/:id': 'MessageController.destroy',
 
+
+  /**
+   * Post routes
+   *
+   */
+  'get /api/post': 'PostController.getAll',
+  'get /api/post/:id': 'PostController.getOne',
+  'post /api/post': 'PostController.create',
+  'delete /api/post/:id': 'PostController.destroy',
+
+  'get /api/post/addView/:id': 'PostController.addView',
+
+
+  /**
+   * PostVote routes
+   *
+   */
+  'get /api/postvote': 'PostVoteController.getAll',
+  'get /api/postvote/:id': 'PostVoteController.getOne',
+  'get /api/postvote/post/:id': 'PostVoteController.getByPost',
+
+  'post /api/postvote': 'PostVoteController.create',
+  'delete /api/postvote/:id': 'PostVoteController.destroy',
+
+
+  /**
+   * Search routes
+   */
+  'get /api/search/:searchQuery': 'SearchController.search',
+
+
+  /**
+   * User routes
+   */
+  'get /api/user': 'UserController.getAll',
+  'get /api/user/:id': 'UserController.getOne',
+
+  'get /api/user/username/:path': 'UserController.getByUsername',
+  'post /api/user': 'UserController.create',
+
+
+  /**
+   * Test routes
+   */
+  'get /api/views/:id': 'TestController.getOne',
   'get /api/votes/:id': 'TestController.getOne',
   'post /api/vote/:id': 'TestController.vote',
   'delete /api/vote/:id': 'TestController.destroy'

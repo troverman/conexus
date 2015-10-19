@@ -428,8 +428,9 @@
         "url_title": "post-2",
         "user": 1,
         "createdAt": "2015-10-07T21:24:18.155Z",
-        "updatedAt": "2015-10-07T21:24:18.155Z",
-        "id": 7
+        "updatedAt": "2015-10-19T08:00:33.560Z",
+        "id": 7,
+        "views": 42
       }
     ],
     "postvote": [
@@ -1972,6 +1973,10 @@
         "model": "user",
         "foreignKey": true,
         "alias": "user"
+      },
+      "views": {
+        "type": "integer",
+        "defaultsTo": "0"
       },
       "id": {
         "type": "integer",

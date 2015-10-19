@@ -77,7 +77,40 @@ module.exports = {
 				return res.json(model);
 			});
 		});
-	}
+	},
+
+	addView: function (req, res, next) {
+		var id = req.param('id');
+
+		/*Post.findOne(id).exec(function(err, model){
+			var newCount = (model.views + 1);
+			model.views = newCount;
+			model.save(function(err) {
+				if (err) return next(err);
+				console.log('The new views count is: ' + newCount);
+			});
+		});*/
+
+		/*add view websockets??*/
+		Post.getOne(req.param('id'))
+		.spread(function(model) {
+			var newCount = (model.views + 1);
+			model.views = newCount;
+
+			model.save(function(err) {
+				if (err) return next(err);
+
+				Post.subscribe(req, model);
+				res.json(model);
+				
+			});
+
+
+		})
+		.fail(function(err) {
+			res.send(404);
+		});
+	},
 	
 };
 

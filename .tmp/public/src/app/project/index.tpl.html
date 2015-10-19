@@ -22,7 +22,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #0D2D4F;
+    background: #34393d;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -63,13 +63,14 @@
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #fff;
+    color: #999;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(255,255,255,0.2);
+    background: #4b5359;
+    //background: rgba(255,255,255,0.2);
 }
 
 .sidebar-nav li a:active,
@@ -171,7 +172,6 @@
         <br><br>
     </div>
 
-
     <div id="html-edit">
         <h4>edit html tool</h4>
         <textarea style="width:50%" ng-model="post.post_content" class="form-control"></textarea>
@@ -179,10 +179,6 @@
         <div ng-bind-html="renderHtml(post.post_content)"></div>
         <div style="height:100px;"></div>
     </div>
-
-
-
-
 
 	<div ng-repeat="message in messages.slice().reverse()">
 
@@ -200,7 +196,6 @@
 		</div>
 		<button type="submit" class="btn btn-primary" ng-disabled="!currentUser || !newMessage.title">Submit</button>
 	</form>
-
 
 
 </div>
