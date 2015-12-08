@@ -2,6 +2,7 @@ module.exports = {
 	getAll: function(req, res) {
 		User.getAll()
 		.spread(function(models) {
+			User.subscribe(req, models);
 			res.json(models);
 		})
 		.fail(function(err) {
@@ -12,6 +13,7 @@ module.exports = {
 	getOne: function(req, res) {
 		User.getOne(req.param('id'))
 		.spread(function(model) {
+			User.subscribe(req, model);
 			res.json(model);
 		})
 		.fail(function(err) {
@@ -23,7 +25,7 @@ module.exports = {
 		User.find()
 		.where({username: req.param('path')})
 		.spread(function(model) {
-			Post.subscribe(req, model);
+			User.subscribe(req, model);
 			res.json(model);
 		})
 		.fail(function(err) {
@@ -49,5 +51,19 @@ module.exports = {
 				res.json(model);
 			}
 		});
-	}
+	},
+
+
+	subscribe: function(req, res) {
+    	//Find all current users in the user model
+	    //User.find(function foundUsers(err, users) {
+	      //if (err) return next(err);
+	      // subscribe this socket to the user instance rooms
+		  //console.log('----')
+	      //User.subscribe(req, users);
+	      //console.log('----')
+	    //});
+  	}
+
+
 };

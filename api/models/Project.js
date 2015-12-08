@@ -12,33 +12,31 @@ module.exports = {
             type: 'string',
             required: true
         },
-        url_title: {
+        urlTitle: {
             type: 'string',
             required: true
         }
     },
 
-    afterCreate: function (post, next) {
+    afterCreate: function (project, next) {
         // set message.user = to appropriate user model
-        User.getOne(post.user)
+        User.getOne(project.user)
         .spread(function(user) {
-            post.user = user;
-            next(null, post);
+            project.user = user;
+            next(null, project);
         });
     },
 
     getAll: function() {
-        return Post.find()
+        return Project.find()
         .sort({createdAt: 'desc'})
-        .populate('user')
         .then(function (models) {
             return [models];
         });
     },
 
     getOne: function(id) {
-        return Post.findOne(id)
-        .populate('user')
+        return Project.findOne(id)
         .then(function (model) {
             return [model];
         });

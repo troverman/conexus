@@ -30,7 +30,7 @@ angular.module( 'conexus.member', [
 
                 })
                 .then(function (data) {
-                    return FollowerModel.getFollowersById(data.id).then(function(models) {
+                    return FollowerModel.getFollowersById(data).then(function(models) {
                         return models;
                     });
                 });

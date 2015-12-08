@@ -22,6 +22,11 @@ module.exports = {
             collection: 'message',
             via: 'user'
         },
+        online: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+
         passports : { collection: 'Passport', via: 'user' }
     },
 

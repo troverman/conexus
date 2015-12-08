@@ -12,7 +12,11 @@ module.exports = {
             type: 'string',
             required: true
         },
-        task_content: {
+        taskContent: {
+            type: 'string',
+            required: true
+        },
+        taskValue: {
             type: 'string',
             required: true
         },
@@ -24,17 +28,17 @@ module.exports = {
         }
     },
 
-    afterCreate: function (post, next) {
+    afterCreate: function (task, next) {
         // set message.user = to appropriate user model
-        User.getOne(post.user)
+        User.getOne(task.user)
         .spread(function(user) {
-            post.user = user;
-            next(null, post);
+            task.user = user;
+            next(null, task);
         });
     },
 
     getAll: function() {
-        return Post.find()
+        return Task.find()
         .sort({createdAt: 'desc'})
         .populate('user')
         .then(function (models) {
@@ -43,7 +47,7 @@ module.exports = {
     },
 
     getOne: function(id) {
-        return Post.findOne(id)
+        return Task.findOne(id)
         .populate('user')
         .then(function (model) {
             return [model];

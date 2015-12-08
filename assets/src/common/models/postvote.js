@@ -16,6 +16,11 @@ angular.module('models.postvote', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.delete(url).then(success, error);
     };
 
+    //this.getVoteByPost = function(model) {
+        //var url = utils.prepareUrl('postvote/post/' + model.id);
+        //return $sailsSocket.get(url).then(success, error);
+    //};
+
     var success = function(response) {
         return response.data;
     };

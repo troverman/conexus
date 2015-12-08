@@ -4,5 +4,7 @@ angular.module('models', [
 	'models.message',
 	'models.post',
 	'models.postvote',
+	'models.project',
+	'models.search',
 	'models.user'
 ]);

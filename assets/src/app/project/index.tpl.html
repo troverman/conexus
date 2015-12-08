@@ -129,7 +129,7 @@
     <ul class="sidebar-nav">
         <br>
         <li>
-            <a href="/">conex.us</a>
+            <a href="/">{{project.title}}</a>
         </li>
         <hr>
         <li>
@@ -172,13 +172,13 @@
         <br><br>
     </div>
 
-    <div id="html-edit">
+    <!--<div id="html-edit">
         <h4>edit html tool</h4>
         <textarea style="width:50%" ng-model="post.post_content" class="form-control"></textarea>
         <hr>
         <div ng-bind-html="renderHtml(post.post_content)"></div>
         <div style="height:100px;"></div>
-    </div>
+    </div>-->
 
 	<div ng-repeat="message in messages.slice().reverse()">
 

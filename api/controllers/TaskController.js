@@ -21,6 +21,19 @@ module.exports = {
 		});
 	},
 
+	getByProject: function(req, res) {
+		Task.find()
+		.where({project: req.param('path')})
+
+		.spread(function(model) {
+			Task.subscribe(req, model);
+			res.json(model);
+		})
+		.fail(function(err) {
+			res.send(404);
+		});
+	},
+
 	getOne: function(req, res) {
 		Task.getOne(req.param('id'))
 		.spread(function(model) {
@@ -36,8 +49,7 @@ module.exports = {
 		var userId = req.param('user');
 		var model = {
 			title: req.param('title'),
-			Task_content: req.param('Task_content'),
-			url_title: req.param('url_title'),
+			taskContent: req.param('taskContent'),
 			user: userId
 		};
 

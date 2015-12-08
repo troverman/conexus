@@ -1,5 +1,5 @@
 /**
-* Post.js
+* PostVote.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -22,17 +22,17 @@ module.exports = {
 
     afterCreate: function (postvote, next) {
         // set postvote.user = to appropriate user model
-        //User.getOne(post.user)
-        //.spread(function(user) {
-            //post.user = user;
-            //next(null, post);
-        //});
+        User.getOne(postvote.user)
+        .spread(function(user) {
+            postvote.user = user;
+            next(null, postvote);
+        });
 
         // set postvote.post = to appropriate post model
         //Post.getOne(postvote.post)
         //.spread(function(post) {
-            //postvote.post = post;
-            //next(null, post);
+        //    postvote.post = post;
+        //    next(null, postvote);
         //});
 
     },

@@ -47,6 +47,7 @@ module.exports = {
 				return console.log(err);
 			}
 			else {
+				sails.log('POST_CRE8')
 				Post.publishCreate(post);
 				res.json(post);
 			}
@@ -110,7 +111,7 @@ module.exports = {
 		.fail(function(err) {
 			res.send(404);
 		});
-	},
+	}
 	
 };
 

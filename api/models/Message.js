@@ -4,8 +4,9 @@ module.exports = {
             type: 'string',
             required: true
         },
-        lol: {
-            type: 'string'
+        project: {
+            model: 'project',
+            required: true
         },
         user: {
             model: 'user',

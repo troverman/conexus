@@ -61,15 +61,12 @@ angular.module( 'conexus.post', [
     };
 
 
-
-
     //postvote
     $scope.newPostVote = {};
     $scope.postvotes = postvotes;
     $sailsSocket.subscribe('postvote', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                console.log(envelope.data);
                 $scope.postvotes.unshift(envelope.data);
                 break;
             case 'destroyed':
@@ -78,13 +75,19 @@ angular.module( 'conexus.post', [
         }
     });
 
+    //gotta figure this out
+    //$scope.getVoteByPost = function(post){
+        //PostVoteModel.getVoteByPost(post).then(function(model) {
+        //});
+    //};
+
     $scope.destroyVote = function(postvote) {
         // check here if this post belongs to the currentUser
-        if (post.user.id === config.currentUser.id) {//and post id
+        //if (postvote.user.id === config.currentUser.id) {//and post id
             PostVoteModel.delete(postvote).then(function(model) {
                 // [post] has been deleted, and removed from $scope.posts
             });
-        }
+        //}
     };
 
     $scope.createVote = function(post, newPostVote) {
@@ -96,8 +99,6 @@ angular.module( 'conexus.post', [
             $scope.newPostVote = {};
         });
     };
-
-
 
 });
 

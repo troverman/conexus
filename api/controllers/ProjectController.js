@@ -13,7 +13,6 @@ module.exports = {
 		.spread(function(models) {
 			Project.watch(req);
 			Project.subscribe(req, models);
-
 			res.json(models);
 		})
 		.fail(function(err) {
@@ -32,23 +31,37 @@ module.exports = {
 		});
 	},
 
+	getByUrl: function(req, res) {
+		Project.find()
+		.where({urlTitle: req.param('path')})
+		.spread(function(model) {
+			Project.subscribe(req, model);
+			res.json(model);
+		})
+		.fail(function(err) {
+			res.send(404,err);
+		});
+	},
+
 	create: function (req, res) {
+		var title = req.param('title');
+		var urlTitle = req.param('urlTitle');
 		var userId = req.param('user');
+
 		var model = {
-			title: req.param('title'),
-			Project_content: req.param('Project_content'),
-			url_title: req.param('url_title'),
+			title: title,
+			urlTitle: urlTitle,
 			user: userId
 		};
 
 		Project.create(model)
-		.exec(function(err, Project) {
+		.exec(function(err, project) {
 			if (err) {
 				return console.log(err);
 			}
 			else {
-				Project.publishCreate(Project);
-				res.json(Project);
+				Project.publishCreate(project);
+				res.json(project);
 			}
 		});
 	},

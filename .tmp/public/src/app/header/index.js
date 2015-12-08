@@ -7,8 +7,7 @@ angular.module( 'conexus.header', [
     var navItems = [
         {title: 'About', translationKey: 'navigation:about', url:'/about',cssClass: 'fa fa-info-circle'},
         {title: 'Connect', translationKey: 'navigation:project', url:'/',cssClass: 'fa fa-random'},
-        {title: 'Projects', translationKey: 'navigation:project', url:'/project/lol',cssClass: 'fa fa-info-circle'},
-        //{title: 'Post', translationKey: 'navigation:post', url:'/post',cssClass: 'fa fa-info-circle'},
+        {title: 'Projects', translationKey: 'navigation:project', url:'/projects',cssClass: 'fa fa-info-circle'},
         {title: 'Search', translationKey: 'navigation:search', url:'/search',cssClass: 'fa fa-search'}
     ];
 

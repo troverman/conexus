@@ -41,6 +41,7 @@ module.exports.routes = {
   'get /member/:id': 'HomeController.index',
   'get /member/:slug': 'HomeController.index',
   'get /post': 'HomeController.index',
+  'get /projects': 'HomeController.index',
   'get /project/:id': 'HomeController.index',
   'get /project/:id/task': 'HomeController.index',
 
@@ -53,6 +54,11 @@ module.exports.routes = {
   'post /auth/local': 'AuthController.callback',
   'post /auth/local/:action': 'AuthController.callback',
 
+  'get /auth/:provider': 'AuthController.provider',
+  'get /auth/:provider/callback': 'AuthController.callback',
+  'get /auth/:provider/:action': 'AuthController.callback',
+
+
 
   /**
    * Follower routes
@@ -60,10 +66,8 @@ module.exports.routes = {
    */
   'get /api/follower': 'FollowerController.getAll',
   'get /api/follower/:id': 'FollowerController.getOne',
-
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
-
   'post /api/follower': 'FollowerController.create',
   'delete /api/follower/:id': 'FollowerController.destroy',
 
@@ -74,6 +78,7 @@ module.exports.routes = {
    */
   'get /api/message': 'MessageController.getAll',
   'get /api/message/:id': 'MessageController.getOne',
+  'get /api/message/project/:id': 'MessageController.getByProject',
   'post /api/message': 'MessageController.create',
   'delete /api/message/:id': 'MessageController.destroy',
 
@@ -86,7 +91,6 @@ module.exports.routes = {
   'get /api/post/:id': 'PostController.getOne',
   'post /api/post': 'PostController.create',
   'delete /api/post/:id': 'PostController.destroy',
-
   'get /api/post/addView/:id': 'PostController.addView',
 
 
@@ -97,9 +101,19 @@ module.exports.routes = {
   'get /api/postvote': 'PostVoteController.getAll',
   'get /api/postvote/:id': 'PostVoteController.getOne',
   'get /api/postvote/post/:id': 'PostVoteController.getByPost',
-
   'post /api/postvote': 'PostVoteController.create',
   'delete /api/postvote/:id': 'PostVoteController.destroy',
+
+
+  /**
+   * Project routes
+   *
+   */
+  'get /api/project': 'ProjectController.getAll',
+  'get /api/project/:id': 'ProjectController.getOne',
+  'get /api/project/url/:path': 'ProjectController.getByUrl',
+  'post /api/project': 'ProjectController.create',
+  'delete /api/project/:id': 'ProjectController.destroy',
 
 
   /**
@@ -109,22 +123,25 @@ module.exports.routes = {
 
 
   /**
+   * Task routes
+   *
+   */
+  'get /api/task': 'TaskController.getAll',
+  'get /api/task/:id': 'TaskController.getOne',
+  'get /api/task/project/:id': 'TaskController.getByProject',
+  'post /api/task': 'TaskController.create',
+  'delete /api/task/:id': 'TaskController.destroy',
+
+
+  /**
    * User routes
    */
   'get /api/user': 'UserController.getAll',
   'get /api/user/:id': 'UserController.getOne',
-
   'get /api/user/username/:path': 'UserController.getByUsername',
   'post /api/user': 'UserController.create',
+  'get /api/user/subscribe': 'UserController.subscribe',
 
-
-  /**
-   * Test routes
-   */
-  'get /api/views/:id': 'TestController.getOne',
-  'get /api/votes/:id': 'TestController.getOne',
-  'post /api/vote/:id': 'TestController.vote',
-  'delete /api/vote/:id': 'TestController.destroy'
 
   //'get /*' : 'HomeController.index'
 

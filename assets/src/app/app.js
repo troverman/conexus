@@ -14,6 +14,7 @@ angular.module( 'conexus', [
     'conexus.member',
     'conexus.post',
     'conexus.project',
+    'conexus.projects',
     'conexus.register',
     'conexus.search'
 

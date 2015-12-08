@@ -1,1908 +1,260 @@
 {
   "data": {
-    "message": [
+    "follower": [
       {
-        "title": "ds",
-        "lol": "ds",
-        "user": 1,
-        "createdAt": "2015-09-07T06:51:41.568Z",
-        "updatedAt": "2015-09-07T06:51:41.568Z",
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-11-25T02:50:17.224Z",
+        "updatedAt": "2015-11-25T02:50:17.224Z",
         "id": 1
       },
       {
-        "title": "message title",
-        "lol": "message content",
-        "user": 1,
-        "createdAt": "2015-09-07T06:51:50.362Z",
-        "updatedAt": "2015-09-07T06:51:50.362Z",
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-11-25T02:50:17.783Z",
+        "updatedAt": "2015-11-25T02:50:17.783Z",
         "id": 2
       },
       {
-        "title": "r",
-        "lol": "ss",
-        "user": 1,
-        "createdAt": "2015-09-27T03:34:56.123Z",
-        "updatedAt": "2015-09-27T03:34:56.123Z",
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-11-25T02:50:17.950Z",
+        "updatedAt": "2015-11-25T02:50:17.950Z",
         "id": 3
       },
       {
-        "title": "ds",
-        "lol": "ds",
-        "user": 1,
-        "createdAt": "2015-09-27T03:35:35.676Z",
-        "updatedAt": "2015-09-27T03:35:35.676Z",
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-11-25T02:50:18.134Z",
+        "updatedAt": "2015-11-25T02:50:18.134Z",
         "id": 4
       },
       {
-        "title": "fs",
-        "lol": "fs",
-        "user": 1,
-        "createdAt": "2015-09-27T03:36:08.655Z",
-        "updatedAt": "2015-09-27T03:36:08.655Z",
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-11-25T02:50:18.344Z",
+        "updatedAt": "2015-11-25T02:50:18.344Z",
         "id": 5
       },
       {
-        "title": "f",
-        "lol": "f",
+        "followed": 1,
+        "follower": 1,
+        "createdAt": "2015-11-25T02:52:06.982Z",
+        "updatedAt": "2015-11-25T02:52:06.982Z",
+        "id": 6
+      }
+    ],
+    "message": [
+      {
+        "title": "m",
+        "lol": null,
         "user": 1,
-        "createdAt": "2015-09-27T03:37:38.567Z",
-        "updatedAt": "2015-09-27T03:37:38.567Z",
+        "createdAt": "2015-11-25T02:50:07.112Z",
+        "updatedAt": "2015-11-25T02:50:07.112Z",
+        "id": 1
+      },
+      {
+        "title": "afafa",
+        "project": 5,
+        "user": 1,
+        "createdAt": "2015-11-29T07:32:26.040Z",
+        "updatedAt": "2015-11-29T07:32:26.040Z",
+        "id": 2
+      },
+      {
+        "title": "fafa",
+        "project": 5,
+        "user": 1,
+        "createdAt": "2015-11-29T07:32:29.093Z",
+        "updatedAt": "2015-11-29T07:32:29.093Z",
+        "id": 3
+      },
+      {
+        "title": "fa",
+        "project": 5,
+        "user": 1,
+        "createdAt": "2015-11-29T07:48:09.597Z",
+        "updatedAt": "2015-11-29T07:48:09.597Z",
+        "id": 4
+      },
+      {
+        "title": "afaf",
+        "project": 5,
+        "user": 1,
+        "createdAt": "2015-11-29T07:48:11.812Z",
+        "updatedAt": "2015-11-29T07:48:11.812Z",
+        "id": 5
+      },
+      {
+        "title": "conexus",
+        "project": 5,
+        "user": 1,
+        "createdAt": "2015-11-29T07:48:57.240Z",
+        "updatedAt": "2015-11-29T07:48:57.240Z",
         "id": 6
       },
       {
-        "title": "rw",
-        "lol": "rw",
+        "title": "conexus",
+        "project": 5,
         "user": 1,
-        "createdAt": "2015-09-27T03:37:47.982Z",
-        "updatedAt": "2015-09-27T03:37:47.982Z",
+        "createdAt": "2015-11-29T07:49:01.681Z",
+        "updatedAt": "2015-11-29T07:49:01.681Z",
         "id": 7
       },
       {
-        "title": "1",
-        "lol": "1",
+        "title": "fff",
+        "project": 5,
         "user": 1,
-        "createdAt": "2015-09-27T03:38:44.802Z",
-        "updatedAt": "2015-09-27T03:38:44.802Z",
+        "createdAt": "2015-11-29T07:50:20.139Z",
+        "updatedAt": "2015-11-29T07:50:20.139Z",
         "id": 8
-      },
-      {
-        "title": "123",
-        "lol": "123",
-        "user": 1,
-        "createdAt": "2015-09-27T03:46:23.781Z",
-        "updatedAt": "2015-09-27T03:46:23.781Z",
-        "id": 9
-      },
-      {
-        "title": "ok",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:47:18.036Z",
-        "updatedAt": "2015-09-27T03:47:18.036Z",
-        "id": 10
-      },
-      {
-        "title": "123456767454312453647884563423134",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:47:46.281Z",
-        "updatedAt": "2015-09-27T03:47:46.281Z",
-        "id": 11
-      },
-      {
-        "title": "werwer",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:47:48.912Z",
-        "updatedAt": "2015-09-27T03:47:48.912Z",
-        "id": 12
-      },
-      {
-        "title": "rqwrrqwrwqerre",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:47:51.678Z",
-        "updatedAt": "2015-09-27T03:47:51.678Z",
-        "id": 13
-      },
-      {
-        "title": "werqewr",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:47:57.408Z",
-        "updatedAt": "2015-09-27T03:47:57.408Z",
-        "id": 14
-      },
-      {
-        "title": "wqerqwerqwe",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:47:58.887Z",
-        "updatedAt": "2015-09-27T03:47:58.887Z",
-        "id": 15
-      },
-      {
-        "title": "fdfd",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:49:56.590Z",
-        "updatedAt": "2015-09-27T03:49:56.590Z",
-        "id": 16
-      },
-      {
-        "title": "fdf",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:49:57.583Z",
-        "updatedAt": "2015-09-27T03:49:57.583Z",
-        "id": 17
-      },
-      {
-        "title": "dffd",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:49:57.948Z",
-        "updatedAt": "2015-09-27T03:49:57.948Z",
-        "id": 18
-      },
-      {
-        "title": "fd",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:49:58.116Z",
-        "updatedAt": "2015-09-27T03:49:58.116Z",
-        "id": 19
-      },
-      {
-        "title": "df",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:49:58.373Z",
-        "updatedAt": "2015-09-27T03:49:58.373Z",
-        "id": 20
-      },
-      {
-        "title": "14414",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:50:15.578Z",
-        "updatedAt": "2015-09-27T03:50:15.578Z",
-        "id": 21
-      },
-      {
-        "title": "21414",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:50:17.311Z",
-        "updatedAt": "2015-09-27T03:50:17.311Z",
-        "id": 22
-      },
-      {
-        "title": "faafafafa",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:50:44.919Z",
-        "updatedAt": "2015-09-27T03:50:44.919Z",
-        "id": 23
-      },
-      {
-        "title": "af",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:50:45.828Z",
-        "updatedAt": "2015-09-27T03:50:45.828Z",
-        "id": 24
-      },
-      {
-        "title": "sf",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:50:47.093Z",
-        "updatedAt": "2015-09-27T03:50:47.093Z",
-        "id": 25
-      },
-      {
-        "title": "sffssfa",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T03:50:48.447Z",
-        "updatedAt": "2015-09-27T03:50:48.447Z",
-        "id": 26
-      },
-      {
-        "title": "zczc",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T05:10:13.845Z",
-        "updatedAt": "2015-09-27T05:10:13.845Z",
-        "id": 27
-      },
-      {
-        "title": "d",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T05:10:16.652Z",
-        "updatedAt": "2015-09-27T05:10:16.652Z",
-        "id": 28
-      },
-      {
-        "title": "s",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T05:10:29.854Z",
-        "updatedAt": "2015-09-27T05:10:29.854Z",
-        "id": 29
-      },
-      {
-        "title": "dff",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T05:15:02.595Z",
-        "updatedAt": "2015-09-27T05:15:02.595Z",
-        "id": 30
-      },
-      {
-        "title": "sfg",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-27T06:13:06.025Z",
-        "updatedAt": "2015-09-27T06:13:06.025Z",
-        "id": 31
-      },
-      {
-        "title": "af",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T02:54:33.176Z",
-        "updatedAt": "2015-09-28T02:54:33.176Z",
-        "id": 32
-      },
-      {
-        "title": "sfd",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:36.573Z",
-        "updatedAt": "2015-09-28T04:42:36.573Z",
-        "id": 33
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:37.813Z",
-        "updatedAt": "2015-09-28T04:42:37.813Z",
-        "id": 34
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:38.160Z",
-        "updatedAt": "2015-09-28T04:42:38.160Z",
-        "id": 35
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:38.361Z",
-        "updatedAt": "2015-09-28T04:42:38.361Z",
-        "id": 36
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:38.514Z",
-        "updatedAt": "2015-09-28T04:42:38.514Z",
-        "id": 37
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:38.647Z",
-        "updatedAt": "2015-09-28T04:42:38.647Z",
-        "id": 38
-      },
-      {
-        "title": "111",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:39.075Z",
-        "updatedAt": "2015-09-28T04:42:39.075Z",
-        "id": 39
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:39.227Z",
-        "updatedAt": "2015-09-28T04:42:39.227Z",
-        "id": 40
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:39.411Z",
-        "updatedAt": "2015-09-28T04:42:39.411Z",
-        "id": 41
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:39.613Z",
-        "updatedAt": "2015-09-28T04:42:39.613Z",
-        "id": 42
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:39.927Z",
-        "updatedAt": "2015-09-28T04:42:39.927Z",
-        "id": 43
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:40.257Z",
-        "updatedAt": "2015-09-28T04:42:40.257Z",
-        "id": 44
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:40.359Z",
-        "updatedAt": "2015-09-28T04:42:40.359Z",
-        "id": 45
-      },
-      {
-        "title": "1",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T04:42:40.516Z",
-        "updatedAt": "2015-09-28T04:42:40.516Z",
-        "id": 46
-      },
-      {
-        "title": "1212112",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T05:22:30.161Z",
-        "updatedAt": "2015-09-28T05:22:30.161Z",
-        "id": 47
-      },
-      {
-        "title": "121212",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T05:22:31.152Z",
-        "updatedAt": "2015-09-28T05:22:31.152Z",
-        "id": 48
-      },
-      {
-        "title": "2121121212",
-        "lol": null,
-        "user": 1,
-        "createdAt": "2015-09-28T05:22:32.351Z",
-        "updatedAt": "2015-09-28T05:22:32.351Z",
-        "id": 49
       }
     ],
     "passport": [
       {
         "protocol": "local",
-        "password": "$2a$10$NZI.7sNiO6u0a3y9CFRwPeEGROQD5o.myGpXXvSJXRIf5qIhY7FMi",
+        "password": "$2a$10$.j4leCcNEGGyt1eBKY7UVu2JMFTB8B1RCxrqebAO9YswJhrAfTx0m",
         "user": 1,
-        "createdAt": "2015-09-05T17:05:42.067Z",
-        "updatedAt": "2015-09-05T17:05:42.067Z",
+        "createdAt": "2015-11-25T02:19:34.047Z",
+        "updatedAt": "2015-11-25T02:19:34.047Z",
         "id": 1
       },
       {
         "protocol": "local",
-        "password": "$2a$10$TlTi1cfQWIgu9EMfN941b.zj3jfJivHSyfguTuqKonM/JXx.T05aK",
-        "user": 3,
-        "createdAt": "2015-09-09T00:31:39.829Z",
-        "updatedAt": "2015-09-09T00:31:39.829Z",
+        "password": "$2a$10$vcog37xBEWNBBe6i9njgBOagE5SbVCk6G28LrnUroN/nHwoEN5RjS",
+        "user": 2,
+        "createdAt": "2015-12-06T00:22:18.767Z",
+        "updatedAt": "2015-12-06T00:22:18.767Z",
         "id": 2
-      }
-    ],
-    "post": [
-      {
-        "title": "okkkkkk",
-        "post_content": "this is what's up",
-        "url_title": "yooe",
-        "user": 1,
-        "createdAt": "2015-10-07T20:50:20.944Z",
-        "updatedAt": "2015-10-07T20:50:20.944Z",
-        "id": 6
       },
       {
-        "title": "post 2",
-        "post_content": "post post post post post post post post post post post post post post post post post post post post post post post",
-        "url_title": "post-2",
-        "user": 1,
-        "createdAt": "2015-10-07T21:24:18.155Z",
-        "updatedAt": "2015-10-19T08:00:33.560Z",
-        "id": 7,
-        "views": 42
+        "protocol": "local",
+        "password": "$2a$10$5EVFzfaPWFBaGQqoGV1X.uAyrgiPvMFLhq7GFhxOefOMKvwJ7kqCm",
+        "user": 3,
+        "createdAt": "2015-12-06T00:26:00.564Z",
+        "updatedAt": "2015-12-06T00:26:00.564Z",
+        "id": 3
       }
     ],
-    "postvote": [
+    "post": [],
+    "postvote": [],
+    "project": [
       {
-        "vote": "third post",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:06:01.906Z",
-        "updatedAt": "2015-09-05T17:06:01.906Z",
+        "title": "test",
+        "urlTitle": "test",
+        "user": "1",
+        "createdAt": "2015-11-25T02:34:38.536Z",
+        "updatedAt": "2015-11-25T02:34:38.536Z",
         "id": 1
       },
       {
-        "vote": "2nd post",
-        "post": 2,
-        "user": 1,
-        "createdAt": "2015-09-05T17:06:05.297Z",
-        "updatedAt": "2015-09-05T17:06:05.297Z",
+        "title": "test",
+        "urlTitle": "test",
+        "user": "1",
+        "createdAt": "2015-11-25T02:35:57.191Z",
+        "updatedAt": "2015-11-25T02:35:57.191Z",
         "id": 2
       },
       {
-        "vote": "1st post",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T17:06:08.720Z",
-        "updatedAt": "2015-09-05T17:06:08.720Z",
+        "title": "yee",
+        "urlTitle": "yee",
+        "user": "1",
+        "createdAt": "2015-11-25T02:39:05.153Z",
+        "updatedAt": "2015-11-25T02:39:05.153Z",
         "id": 3
       },
       {
-        "vote": "3 test",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:07:47.092Z",
-        "updatedAt": "2015-09-05T17:07:47.092Z",
+        "title": "novo",
+        "urlTitle": "novo",
+        "user": "1",
+        "createdAt": "2015-11-28T23:51:09.088Z",
+        "updatedAt": "2015-11-28T23:51:09.088Z",
         "id": 4
       },
       {
-        "vote": "vote for the 3rd post",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:16:58.200Z",
-        "updatedAt": "2015-09-05T17:16:58.200Z",
+        "title": "conexus",
+        "urlTitle": "conexus",
+        "user": "1",
+        "createdAt": "2015-11-28T23:51:18.351Z",
+        "updatedAt": "2015-11-28T23:51:18.352Z",
         "id": 5
       },
       {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:36:58.459Z",
-        "updatedAt": "2015-09-05T17:36:58.459Z",
+        "title": "voetr",
+        "urlTitle": "voetr",
+        "user": "1",
+        "createdAt": "2015-12-08T09:31:01.832Z",
+        "updatedAt": "2015-12-08T09:31:01.832Z",
         "id": 6
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:36:59.961Z",
-        "updatedAt": "2015-09-05T17:36:59.961Z",
-        "id": 7
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:00.520Z",
-        "updatedAt": "2015-09-05T17:37:00.520Z",
-        "id": 8
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:00.681Z",
-        "updatedAt": "2015-09-05T17:37:00.681Z",
-        "id": 9
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:00.852Z",
-        "updatedAt": "2015-09-05T17:37:00.852Z",
-        "id": 10
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:01.026Z",
-        "updatedAt": "2015-09-05T17:37:01.026Z",
-        "id": 11
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:01.181Z",
-        "updatedAt": "2015-09-05T17:37:01.181Z",
-        "id": 12
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:01.345Z",
-        "updatedAt": "2015-09-05T17:37:01.345Z",
-        "id": 13
-      },
-      {
-        "vote": "333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T17:37:01.521Z",
-        "updatedAt": "2015-09-05T17:37:01.521Z",
-        "id": 14
-      },
-      {
-        "vote": "333sdsd",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:36.387Z",
-        "updatedAt": "2015-09-05T18:14:36.387Z",
-        "id": 15
-      },
-      {
-        "vote": "333sdsddssdsd",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:38.132Z",
-        "updatedAt": "2015-09-05T18:14:38.132Z",
-        "id": 16
-      },
-      {
-        "vote": "333sdsdddsdssdsd",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:40.346Z",
-        "updatedAt": "2015-09-05T18:14:40.346Z",
-        "id": 17
-      },
-      {
-        "vote": "333sdsdddsdssdsd",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:40.949Z",
-        "updatedAt": "2015-09-05T18:14:40.949Z",
-        "id": 18
-      },
-      {
-        "vote": "dsds",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:53.021Z",
-        "updatedAt": "2015-09-05T18:14:53.021Z",
-        "id": 19
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:55.572Z",
-        "updatedAt": "2015-09-05T18:14:55.572Z",
-        "id": 20
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:56.239Z",
-        "updatedAt": "2015-09-05T18:14:56.239Z",
-        "id": 21
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:56.718Z",
-        "updatedAt": "2015-09-05T18:14:56.718Z",
-        "id": 22
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:56.848Z",
-        "updatedAt": "2015-09-05T18:14:56.848Z",
-        "id": 23
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:57.000Z",
-        "updatedAt": "2015-09-05T18:14:57.000Z",
-        "id": 24
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:57.172Z",
-        "updatedAt": "2015-09-05T18:14:57.172Z",
-        "id": 25
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:57.331Z",
-        "updatedAt": "2015-09-05T18:14:57.331Z",
-        "id": 26
-      },
-      {
-        "vote": "dsdssss",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:14:57.516Z",
-        "updatedAt": "2015-09-05T18:14:57.516Z",
-        "id": 27
-      },
-      {
-        "vote": "121212",
-        "post": 4,
-        "user": 1,
-        "createdAt": "2015-09-05T18:15:20.035Z",
-        "updatedAt": "2015-09-05T18:15:20.035Z",
-        "id": 28
-      },
-      {
-        "vote": "222",
-        "post": 2,
-        "user": 1,
-        "createdAt": "2015-09-05T18:41:13.951Z",
-        "updatedAt": "2015-09-05T18:41:13.951Z",
-        "id": 29
-      },
-      {
-        "vote": "1",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:41:47.139Z",
-        "updatedAt": "2015-09-05T18:41:47.139Z",
-        "id": 30
-      },
-      {
-        "vote": "1",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:41:49.130Z",
-        "updatedAt": "2015-09-05T18:41:49.130Z",
-        "id": 31
-      },
-      {
-        "vote": "111",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-09-05T18:43:22.194Z",
-        "updatedAt": "2015-09-05T18:43:22.194Z",
-        "id": 32
-      },
-      {
-        "vote": "121212",
-        "post": 4,
-        "user": 1,
-        "createdAt": "2015-09-05T18:46:27.131Z",
-        "updatedAt": "2015-09-05T18:46:27.131Z",
-        "id": 33
-      },
-      {
-        "vote": "121212",
-        "post": 4,
-        "user": 1,
-        "createdAt": "2015-09-05T18:47:46.707Z",
-        "updatedAt": "2015-09-05T18:47:46.707Z",
-        "id": 34
-      },
-      {
-        "vote": "121212",
-        "post": 4,
-        "user": 1,
-        "createdAt": "2015-09-05T18:47:53.959Z",
-        "updatedAt": "2015-09-05T18:47:53.959Z",
-        "id": 35
-      },
-      {
-        "vote": "121212",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T18:47:56.141Z",
-        "updatedAt": "2015-09-05T18:47:56.141Z",
-        "id": 36
-      },
-      {
-        "vote": "121212",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T18:47:56.334Z",
-        "updatedAt": "2015-09-05T18:47:56.334Z",
-        "id": 37
-      },
-      {
-        "vote": "121212",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T18:47:56.509Z",
-        "updatedAt": "2015-09-05T18:47:56.509Z",
-        "id": 38
-      },
-      {
-        "vote": "121212",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T18:47:56.694Z",
-        "updatedAt": "2015-09-05T18:47:56.694Z",
-        "id": 39
-      },
-      {
-        "vote": "3333333333333",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-09-05T18:48:06.041Z",
-        "updatedAt": "2015-09-05T18:48:06.041Z",
-        "id": 40
-      },
-      {
-        "vote": "121212",
-        "post": 4,
-        "user": 1,
-        "createdAt": "2015-09-05T18:57:52.363Z",
-        "updatedAt": "2015-09-05T18:57:52.363Z",
-        "id": 41
-      },
-      {
-        "vote": "111",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:12:19.267Z",
-        "updatedAt": "2015-09-05T19:12:19.267Z",
-        "id": 42
-      },
-      {
-        "vote": "111111",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:12:23.805Z",
-        "updatedAt": "2015-09-05T19:12:23.805Z",
-        "id": 43
-      },
-      {
-        "vote": "111111111",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:12:25.555Z",
-        "updatedAt": "2015-09-05T19:12:25.555Z",
-        "id": 44
-      },
-      {
-        "vote": "222",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:12:31.365Z",
-        "updatedAt": "2015-09-05T19:12:31.365Z",
-        "id": 45
-      },
-      {
-        "vote": "22222",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:12:33.341Z",
-        "updatedAt": "2015-09-05T19:12:33.341Z",
-        "id": 46
-      },
-      {
-        "vote": "2323",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:12:34.763Z",
-        "updatedAt": "2015-09-05T19:12:34.763Z",
-        "id": 47
-      },
-      {
-        "vote": "111",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-09-05T19:13:32.790Z",
-        "updatedAt": "2015-09-05T19:13:32.790Z",
-        "id": 48
-      },
-      {
-        "vote": "121212121112212112112312313123131231231231231231231231313123211212312312312312312",
-        "post": 3,
-        "user": 1,
-        "createdAt": "2015-10-07T20:43:43.685Z",
-        "updatedAt": "2015-10-07T20:43:43.685Z",
-        "id": 49
-      },
-      {
-        "vote": "123",
-        "post": 5,
-        "user": 1,
-        "createdAt": "2015-10-07T20:45:01.111Z",
-        "updatedAt": "2015-10-07T20:45:01.111Z",
-        "id": 50
-      },
-      {
-        "vote": "121",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:48:42.031Z",
-        "updatedAt": "2015-10-07T20:48:42.031Z",
-        "id": 51
-      },
-      {
-        "vote": "1313",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:49:44.271Z",
-        "updatedAt": "2015-10-07T20:49:44.271Z",
-        "id": 52
-      },
-      {
-        "vote": "13131313",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:49:47.907Z",
-        "updatedAt": "2015-10-07T20:49:47.907Z",
-        "id": 53
-      },
-      {
-        "vote": "22",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:49:50.544Z",
-        "updatedAt": "2015-10-07T20:49:50.544Z",
-        "id": 54
-      },
-      {
-        "vote": "12",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:49:55.328Z",
-        "updatedAt": "2015-10-07T20:49:55.328Z",
-        "id": 55
-      },
-      {
-        "vote": "121",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:49:58.180Z",
-        "updatedAt": "2015-10-07T20:49:58.180Z",
-        "id": 56
-      },
-      {
-        "vote": "121121",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:49:59.687Z",
-        "updatedAt": "2015-10-07T20:49:59.687Z",
-        "id": 57
-      },
-      {
-        "vote": "vote",
-        "post": null,
-        "user": 1,
-        "createdAt": "2015-10-07T20:51:03.873Z",
-        "updatedAt": "2015-10-07T20:51:03.873Z",
-        "id": 58
-      },
-      {
-        "vote": "134",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T20:56:13.477Z",
-        "updatedAt": "2015-10-07T20:56:13.477Z",
-        "id": 59
-      },
-      {
-        "vote": "rqr",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T20:57:55.485Z",
-        "updatedAt": "2015-10-07T20:57:55.485Z",
-        "id": 60
-      },
-      {
-        "vote": "1414114",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T20:58:35.348Z",
-        "updatedAt": "2015-10-07T20:58:35.348Z",
-        "id": 61
-      },
-      {
-        "vote": "ok",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T20:59:00.570Z",
-        "updatedAt": "2015-10-07T20:59:00.570Z",
-        "id": 62
-      },
-      {
-        "vote": "fafa",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T20:59:49.426Z",
-        "updatedAt": "2015-10-07T20:59:49.426Z",
-        "id": 63
-      },
-      {
-        "vote": "ds",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:01:17.329Z",
-        "updatedAt": "2015-10-07T21:01:17.329Z",
-        "id": 64
-      },
-      {
-        "vote": "fwfw",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:06:37.379Z",
-        "updatedAt": "2015-10-07T21:06:37.379Z",
-        "id": 65
-      },
-      {
-        "vote": "232",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:06:45.817Z",
-        "updatedAt": "2015-10-07T21:06:45.817Z",
-        "id": 66
-      },
-      {
-        "vote": "3232",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-10-07T21:06:50.821Z",
-        "updatedAt": "2015-10-07T21:06:50.821Z",
-        "id": 67
-      },
-      {
-        "vote": "111",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:07:29.872Z",
-        "updatedAt": "2015-10-07T21:07:29.872Z",
-        "id": 68
-      },
-      {
-        "vote": "2rw",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:07:45.898Z",
-        "updatedAt": "2015-10-07T21:07:45.898Z",
-        "id": 69
-      },
-      {
-        "vote": "wew2rw",
-        "post": 1,
-        "user": 1,
-        "createdAt": "2015-10-07T21:07:49.884Z",
-        "updatedAt": "2015-10-07T21:07:49.884Z",
-        "id": 70
-      },
-      {
-        "vote": "wwww",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:07:56.408Z",
-        "updatedAt": "2015-10-07T21:07:56.408Z",
-        "id": 71
-      },
-      {
-        "vote": "yes",
-        "post": 6,
-        "user": 1,
-        "createdAt": "2015-10-07T21:14:20.691Z",
-        "updatedAt": "2015-10-07T21:14:20.691Z",
-        "id": 72
-      },
-      {
-        "vote": "vote on post 2",
-        "post": 7,
-        "user": 1,
-        "createdAt": "2015-10-07T21:24:24.712Z",
-        "updatedAt": "2015-10-07T21:24:24.712Z",
-        "id": 73
       }
     ],
+    "task": [],
     "user": [
       {
         "username": "troverman",
         "email": "troverman@gmail.com",
         "first_name": "Trevor",
-        "createdAt": "2015-09-05T17:05:41.819Z",
-        "updatedAt": "2015-09-05T17:05:41.819Z",
+        "online": true,
+        "createdAt": "2015-11-25T02:19:33.796Z",
+        "updatedAt": "2015-12-08T09:30:52.360Z",
         "id": 1
       },
       {
-        "username": "test",
-        "email": "test@test.test",
-        "first_name": "test",
-        "createdAt": "2015-09-09T00:31:39.581Z",
-        "updatedAt": "2015-09-09T00:31:39.581Z",
-        "id": 3
-      }
-    ],
-    "follower": [
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T05:57:13.559Z",
-        "updatedAt": "2015-09-07T05:57:13.559Z",
-        "id": 1
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T05:58:13.133Z",
-        "updatedAt": "2015-09-07T05:58:13.133Z",
+        "username": "troverman1",
+        "email": "troverman1@gmail.com",
+        "first_name": "Trevor",
+        "online": false,
+        "createdAt": "2015-12-06T00:22:18.524Z",
+        "updatedAt": "2015-12-06T00:24:44.109Z",
         "id": 2
       },
       {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T05:59:13.186Z",
-        "updatedAt": "2015-09-07T05:59:13.186Z",
+        "username": "troverman22",
+        "email": "troverman22@gmail.com",
+        "first_name": "Trevor",
+        "online": false,
+        "createdAt": "2015-12-06T00:26:00.321Z",
+        "updatedAt": "2015-12-06T00:26:08.532Z",
         "id": 3
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:00:21.155Z",
-        "updatedAt": "2015-09-07T06:00:21.155Z",
-        "id": 4
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:20.211Z",
-        "updatedAt": "2015-09-07T06:10:20.211Z",
-        "id": 5
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:21.740Z",
-        "updatedAt": "2015-09-07T06:10:21.740Z",
-        "id": 6
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:25.774Z",
-        "updatedAt": "2015-09-07T06:10:25.774Z",
-        "id": 7
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:25.922Z",
-        "updatedAt": "2015-09-07T06:10:25.922Z",
-        "id": 8
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:26.075Z",
-        "updatedAt": "2015-09-07T06:10:26.075Z",
-        "id": 9
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:26.226Z",
-        "updatedAt": "2015-09-07T06:10:26.226Z",
-        "id": 10
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:26.370Z",
-        "updatedAt": "2015-09-07T06:10:26.370Z",
-        "id": 11
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:10:26.530Z",
-        "updatedAt": "2015-09-07T06:10:26.530Z",
-        "id": 12
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:39.337Z",
-        "updatedAt": "2015-09-07T06:13:39.337Z",
-        "id": 13
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:43.953Z",
-        "updatedAt": "2015-09-07T06:13:43.953Z",
-        "id": 14
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:44.263Z",
-        "updatedAt": "2015-09-07T06:13:44.263Z",
-        "id": 15
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:44.591Z",
-        "updatedAt": "2015-09-07T06:13:44.591Z",
-        "id": 16
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:48.234Z",
-        "updatedAt": "2015-09-07T06:13:48.234Z",
-        "id": 17
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:48.398Z",
-        "updatedAt": "2015-09-07T06:13:48.398Z",
-        "id": 18
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:48.543Z",
-        "updatedAt": "2015-09-07T06:13:48.543Z",
-        "id": 19
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:48.705Z",
-        "updatedAt": "2015-09-07T06:13:48.705Z",
-        "id": 20
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:48.848Z",
-        "updatedAt": "2015-09-07T06:13:48.848Z",
-        "id": 21
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:49.000Z",
-        "updatedAt": "2015-09-07T06:13:49.000Z",
-        "id": 22
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:49.149Z",
-        "updatedAt": "2015-09-07T06:13:49.149Z",
-        "id": 23
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:49.302Z",
-        "updatedAt": "2015-09-07T06:13:49.302Z",
-        "id": 24
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:13:49.455Z",
-        "updatedAt": "2015-09-07T06:13:49.455Z",
-        "id": 25
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:15:33.270Z",
-        "updatedAt": "2015-09-07T06:15:33.270Z",
-        "id": 26
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:18:46.072Z",
-        "updatedAt": "2015-09-07T06:18:46.072Z",
-        "id": 27
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:18:46.418Z",
-        "updatedAt": "2015-09-07T06:18:46.418Z",
-        "id": 28
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:18:46.610Z",
-        "updatedAt": "2015-09-07T06:18:46.610Z",
-        "id": 29
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:23:46.709Z",
-        "updatedAt": "2015-09-07T06:23:46.709Z",
-        "id": 30
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:23:52.689Z",
-        "updatedAt": "2015-09-07T06:23:52.689Z",
-        "id": 31
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:23:52.833Z",
-        "updatedAt": "2015-09-07T06:23:52.833Z",
-        "id": 32
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:23:53.017Z",
-        "updatedAt": "2015-09-07T06:23:53.017Z",
-        "id": 33
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:23:53.258Z",
-        "updatedAt": "2015-09-07T06:23:53.258Z",
-        "id": 34
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:28:17.505Z",
-        "updatedAt": "2015-09-07T06:28:17.505Z",
-        "id": 35
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:43.732Z",
-        "updatedAt": "2015-09-07T06:33:43.732Z",
-        "id": 36
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:44.416Z",
-        "updatedAt": "2015-09-07T06:33:44.416Z",
-        "id": 37
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:44.565Z",
-        "updatedAt": "2015-09-07T06:33:44.565Z",
-        "id": 38
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:44.727Z",
-        "updatedAt": "2015-09-07T06:33:44.727Z",
-        "id": 39
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:44.878Z",
-        "updatedAt": "2015-09-07T06:33:44.878Z",
-        "id": 40
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:45.029Z",
-        "updatedAt": "2015-09-07T06:33:45.029Z",
-        "id": 41
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:45.175Z",
-        "updatedAt": "2015-09-07T06:33:45.175Z",
-        "id": 42
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:45.330Z",
-        "updatedAt": "2015-09-07T06:33:45.330Z",
-        "id": 43
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:45.478Z",
-        "updatedAt": "2015-09-07T06:33:45.478Z",
-        "id": 44
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:45.624Z",
-        "updatedAt": "2015-09-07T06:33:45.624Z",
-        "id": 45
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:33:45.809Z",
-        "updatedAt": "2015-09-07T06:33:45.809Z",
-        "id": 46
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:34:36.539Z",
-        "updatedAt": "2015-09-07T06:34:36.539Z",
-        "id": 47
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:35:44.348Z",
-        "updatedAt": "2015-09-07T06:35:44.348Z",
-        "id": 48
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:35:44.528Z",
-        "updatedAt": "2015-09-07T06:35:44.528Z",
-        "id": 49
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:35:44.701Z",
-        "updatedAt": "2015-09-07T06:35:44.701Z",
-        "id": 50
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:35:44.907Z",
-        "updatedAt": "2015-09-07T06:35:44.907Z",
-        "id": 51
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:14.928Z",
-        "updatedAt": "2015-09-07T06:37:14.928Z",
-        "id": 52
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:33.528Z",
-        "updatedAt": "2015-09-07T06:37:33.528Z",
-        "id": 53
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:33.613Z",
-        "updatedAt": "2015-09-07T06:37:33.613Z",
-        "id": 54
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:34.185Z",
-        "updatedAt": "2015-09-07T06:37:34.185Z",
-        "id": 55
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:34.345Z",
-        "updatedAt": "2015-09-07T06:37:34.345Z",
-        "id": 56
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:34.487Z",
-        "updatedAt": "2015-09-07T06:37:34.487Z",
-        "id": 57
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:37:34.643Z",
-        "updatedAt": "2015-09-07T06:37:34.643Z",
-        "id": 58
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:38:43.466Z",
-        "updatedAt": "2015-09-07T06:38:43.466Z",
-        "id": 59
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:42.214Z",
-        "updatedAt": "2015-09-07T06:46:42.214Z",
-        "id": 60
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:42.746Z",
-        "updatedAt": "2015-09-07T06:46:42.747Z",
-        "id": 61
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:48.364Z",
-        "updatedAt": "2015-09-07T06:46:48.364Z",
-        "id": 62
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:48.901Z",
-        "updatedAt": "2015-09-07T06:46:48.901Z",
-        "id": 63
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:49.151Z",
-        "updatedAt": "2015-09-07T06:46:49.151Z",
-        "id": 64
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:51.473Z",
-        "updatedAt": "2015-09-07T06:46:51.473Z",
-        "id": 65
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:51.645Z",
-        "updatedAt": "2015-09-07T06:46:51.645Z",
-        "id": 66
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:51.812Z",
-        "updatedAt": "2015-09-07T06:46:51.812Z",
-        "id": 67
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:46:51.987Z",
-        "updatedAt": "2015-09-07T06:46:51.987Z",
-        "id": 68
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:47:31.896Z",
-        "updatedAt": "2015-09-07T06:47:31.896Z",
-        "id": 69
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:47:32.640Z",
-        "updatedAt": "2015-09-07T06:47:32.640Z",
-        "id": 70
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:49:10.116Z",
-        "updatedAt": "2015-09-07T06:49:10.116Z",
-        "id": 71
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:49:10.623Z",
-        "updatedAt": "2015-09-07T06:49:10.623Z",
-        "id": 72
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:49:10.801Z",
-        "updatedAt": "2015-09-07T06:49:10.801Z",
-        "id": 73
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-07T06:49:10.967Z",
-        "updatedAt": "2015-09-07T06:49:10.967Z",
-        "id": 74
-      },
-      {
-        "followed": 3,
-        "follower": 3,
-        "createdAt": "2015-09-09T00:31:53.832Z",
-        "updatedAt": "2015-09-09T00:31:53.832Z",
-        "id": 75
-      },
-      {
-        "followed": 1,
-        "follower": 3,
-        "createdAt": "2015-09-09T00:32:00.277Z",
-        "updatedAt": "2015-09-09T00:32:00.277Z",
-        "id": 76
-      },
-      {
-        "followed": 1,
-        "follower": 3,
-        "createdAt": "2015-09-09T00:32:00.794Z",
-        "updatedAt": "2015-09-09T00:32:00.794Z",
-        "id": 77
-      },
-      {
-        "followed": 1,
-        "follower": 3,
-        "createdAt": "2015-09-09T00:32:01.034Z",
-        "updatedAt": "2015-09-09T00:32:01.034Z",
-        "id": 78
-      },
-      {
-        "followed": 1,
-        "follower": 3,
-        "createdAt": "2015-09-09T00:32:03.156Z",
-        "updatedAt": "2015-09-09T00:32:03.156Z",
-        "id": 79
-      },
-      {
-        "followed": 1,
-        "follower": 3,
-        "createdAt": "2015-09-09T00:32:04.102Z",
-        "updatedAt": "2015-09-09T00:32:04.102Z",
-        "id": 80
-      },
-      {
-        "followed": 3,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:32:29.902Z",
-        "updatedAt": "2015-09-09T00:32:29.902Z",
-        "id": 81
-      },
-      {
-        "followed": 3,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:32:30.545Z",
-        "updatedAt": "2015-09-09T00:32:30.545Z",
-        "id": 82
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:35:55.256Z",
-        "updatedAt": "2015-09-09T00:35:55.256Z",
-        "id": 83
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:35:55.958Z",
-        "updatedAt": "2015-09-09T00:35:55.958Z",
-        "id": 84
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:35:56.418Z",
-        "updatedAt": "2015-09-09T00:35:56.418Z",
-        "id": 85
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:35:56.774Z",
-        "updatedAt": "2015-09-09T00:35:56.774Z",
-        "id": 86
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:36:00.550Z",
-        "updatedAt": "2015-09-09T00:36:00.550Z",
-        "id": 87
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:36:00.684Z",
-        "updatedAt": "2015-09-09T00:36:00.684Z",
-        "id": 88
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:36:00.827Z",
-        "updatedAt": "2015-09-09T00:36:00.827Z",
-        "id": 89
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:36:00.989Z",
-        "updatedAt": "2015-09-09T00:36:00.989Z",
-        "id": 90
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:36:01.148Z",
-        "updatedAt": "2015-09-09T00:36:01.148Z",
-        "id": 91
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:36:01.302Z",
-        "updatedAt": "2015-09-09T00:36:01.302Z",
-        "id": 92
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:39:01.809Z",
-        "updatedAt": "2015-09-09T00:39:01.809Z",
-        "id": 93
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:39:03.470Z",
-        "updatedAt": "2015-09-09T00:39:03.470Z",
-        "id": 94
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:39:46.586Z",
-        "updatedAt": "2015-09-09T00:39:46.586Z",
-        "id": 95
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:39:48.018Z",
-        "updatedAt": "2015-09-09T00:39:48.018Z",
-        "id": 96
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:39:50.078Z",
-        "updatedAt": "2015-09-09T00:39:50.078Z",
-        "id": 97
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:40:00.664Z",
-        "updatedAt": "2015-09-09T00:40:00.664Z",
-        "id": 98
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:42:34.739Z",
-        "updatedAt": "2015-09-09T00:42:34.739Z",
-        "id": 99
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:44:14.340Z",
-        "updatedAt": "2015-09-09T00:44:14.340Z",
-        "id": 100
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:47:18.222Z",
-        "updatedAt": "2015-09-09T00:47:18.222Z",
-        "id": 101
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:48:19.608Z",
-        "updatedAt": "2015-09-09T00:48:19.608Z",
-        "id": 102
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:49:42.977Z",
-        "updatedAt": "2015-09-09T00:49:42.977Z",
-        "id": 103
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:25.076Z",
-        "updatedAt": "2015-09-09T00:53:25.076Z",
-        "id": 104
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:25.697Z",
-        "updatedAt": "2015-09-09T00:53:25.697Z",
-        "id": 105
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:25.874Z",
-        "updatedAt": "2015-09-09T00:53:25.874Z",
-        "id": 106
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.026Z",
-        "updatedAt": "2015-09-09T00:53:26.026Z",
-        "id": 107
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.204Z",
-        "updatedAt": "2015-09-09T00:53:26.204Z",
-        "id": 108
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.356Z",
-        "updatedAt": "2015-09-09T00:53:26.356Z",
-        "id": 109
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.508Z",
-        "updatedAt": "2015-09-09T00:53:26.508Z",
-        "id": 110
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.703Z",
-        "updatedAt": "2015-09-09T00:53:26.703Z",
-        "id": 111
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.824Z",
-        "updatedAt": "2015-09-09T00:53:26.824Z",
-        "id": 112
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:26.982Z",
-        "updatedAt": "2015-09-09T00:53:26.982Z",
-        "id": 113
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:27.133Z",
-        "updatedAt": "2015-09-09T00:53:27.133Z",
-        "id": 114
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:27.295Z",
-        "updatedAt": "2015-09-09T00:53:27.295Z",
-        "id": 115
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:27.461Z",
-        "updatedAt": "2015-09-09T00:53:27.461Z",
-        "id": 116
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:27.606Z",
-        "updatedAt": "2015-09-09T00:53:27.606Z",
-        "id": 117
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:27.767Z",
-        "updatedAt": "2015-09-09T00:53:27.767Z",
-        "id": 118
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-09T00:53:27.946Z",
-        "updatedAt": "2015-09-09T00:53:27.946Z",
-        "id": 119
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-27T06:27:03.254Z",
-        "updatedAt": "2015-09-27T06:27:03.254Z",
-        "id": 120
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-27T06:27:04.380Z",
-        "updatedAt": "2015-09-27T06:27:04.380Z",
-        "id": 121
-      },
-      {
-        "followed": 1,
-        "follower": 1,
-        "createdAt": "2015-09-27T06:27:05.155Z",
-        "updatedAt": "2015-09-27T06:27:05.155Z",
-        "id": 122
       }
-    ],
-    "project": [],
-    "task": []
+    ]
   },
   "schema": {
+    "follower": {
+      "followed": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "followed"
+      },
+      "follower": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "follower"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
     "message": {
       "title": {
         "type": "string"
       },
-      "lol": {
-        "type": "string"
+      "project": {
+        "type": "integer",
+        "model": "project",
+        "foreignKey": true,
+        "alias": "project"
       },
       "user": {
         "type": "integer",
@@ -2020,65 +372,11 @@
         "type": "datetime"
       }
     },
-    "user": {
-      "username": {
-        "type": "string",
-        "unique": true
-      },
-      "email": {
-        "type": "string",
-        "unique": true
-      },
-      "first_name": {
-        "type": "string"
-      },
-      "message_count": {
-        "type": "string"
-      },
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "primaryKey": true,
-        "unique": true
-      },
-      "createdAt": {
-        "type": "datetime"
-      },
-      "updatedAt": {
-        "type": "datetime"
-      }
-    },
-    "follower": {
-      "followed": {
-        "type": "integer",
-        "model": "user",
-        "foreignKey": true,
-        "alias": "followed"
-      },
-      "follower": {
-        "type": "integer",
-        "model": "user",
-        "foreignKey": true,
-        "alias": "follower"
-      },
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "primaryKey": true,
-        "unique": true
-      },
-      "createdAt": {
-        "type": "datetime"
-      },
-      "updatedAt": {
-        "type": "datetime"
-      }
-    },
     "project": {
       "title": {
         "type": "string"
       },
-      "url_title": {
+      "urlTitle": {
         "type": "string"
       },
       "id": {
@@ -2098,7 +396,10 @@
       "title": {
         "type": "string"
       },
-      "task_content": {
+      "taskContent": {
+        "type": "string"
+      },
+      "taskValue": {
         "type": "string"
       },
       "project": {
@@ -2125,28 +426,58 @@
       "updatedAt": {
         "type": "datetime"
       }
+    },
+    "user": {
+      "username": {
+        "type": "string",
+        "unique": true
+      },
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "first_name": {
+        "type": "string"
+      },
+      "message_count": {
+        "type": "string"
+      },
+      "online": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
     }
   },
   "counters": {
+    "follower": {
+      "id": 6
+    },
     "message": {
-      "id": 49
+      "id": 8
     },
     "passport": {
-      "id": 2
-    },
-    "post": {
-      "id": 7
-    },
-    "postvote": {
-      "id": 73
-    },
-    "user": {
       "id": 3
     },
-    "follower": {
-      "id": 122
+    "post": {},
+    "postvote": {},
+    "project": {
+      "id": 6
     },
-    "project": {},
-    "task": {}
+    "task": {},
+    "user": {
+      "id": 3
+    }
   }
 }

@@ -1,34 +1,90 @@
-<div style="text-align:center;">
-	<h1>connect, collab, create</h1>
+<div style="height:48px"></div>
+<div ng-show="currentUser">
 
-	<p class="lead">a transparent + opensource network</p>
-	<p class="lead">how can we work together for a common goal?</p>
-
-	<img src="/images/loading.gif"/>
-
-
-	<br><br>
-
-	<p class="lead">equity. transparent work. based on what youve done..  equity, position, and 'vote clout'</p>
-
-
-	<div style="height:500px;background-color:rgb(100,100,100);">
-
-	</div>
-
-	<div style="height:500px;background-color:rgb(150,150,150);">
-
-	</div>
-
-	<div style="height:500px;background-color:rgb(200,200,200);">
-
-	</div>
-
-	<div style="height:500px;background-color:rgb(225,225,225);">
-		<p>what's good</p>
-	</div>
+	projects
+	following
 
 </div>
+<div ng-show="!currentUser">
 
+	<div style="text-align:center;">
+		<h1>connect, collab, create</h1>
+
+		<p class="lead">a transparent + opensource network</p>
+		<p class="lead">working together toward a common goal</p>
+
+		<img src="/images/loading.gif"/>
+
+		<br><br><br>
+		<p class="lead">governed through transparent community driven directon</p>
+		<div style="height:100px"></div>
+		<div id="project-container">
+			<div ng-repeat="project in projects">
+				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+			</div>
+		</div>
+		<div style="height:100px"></div>
+		<div id="stream-container">
+			<div ng-repeat="project in projects">
+				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+			</div>
+		</div>
+		<div style="height:100px"></div>
+		<div id="task-container">
+			<div ng-repeat="project in projects">
+				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+			</div>
+		</div>
+		<div style="height:100px"></div>
+		<div id="member-container">
+			<div ng-repeat="member in members">
+				<a href="/member/{{member.username}}">{{member.username}}</a>
+			</div>
+		</div>
+
+		<div style="height:150px"></div>
+
+		<!--register-->
+		<div class="row">
+		    <div class="col-md-6 col-md-offset-3">
+		        <h3>Sign Up</h3>
+		        <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
+		            <div class="form-group">
+		                <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="inputUsername3" name="username" placeholder="Username" value="">
+		                </div>
+		            </div>
+					<div class="form-group">
+		                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+		                <div class="col-sm-10">
+		                    <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="inputFirstName3" class="col-sm-2 control-label">First Name</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="inputFirstName3" name="first_name" placeholder="First Name" value="">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+		                <div class="col-sm-10">
+		                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" value="">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <div class="col-sm-offset-2 col-sm-10">
+		                    <button type="submit" class="btn btn-default">Sign in</button>
+		                </div>
+		            </div>
+		        </form>
+		    </div>
+		</div>
+
+		<div style="height:100px"></div>
+
+	</div>
+</div>
 
 

@@ -1,36 +1,26 @@
 angular.module('models.user', ['lodash', 'services', 'sails.io',])
 
-.service('UserModel', function($q, lodash, utils, $sailsSocket) {
+.service('UserModel', function(lodash, utils, $sailsSocket) {
     this.getAll = function() {
-        var deferred = $q.defer();
         var url = utils.prepareUrl('user');
-
-        $sailsSocket.get(url, function(models) {
-            return deferred.resolve(models);
-        });
-
-        return deferred.promise;
+        return $sailsSocket.get(url).then(success, error);
     };
 
     this.getOne = function(id) {
-        var deferred = $q.defer();
         var url = utils.prepareUrl('user/' + id);
-
-        $sailsSocket.get(url, function(model) {
-            return deferred.resolve(model);
-        });
-
-        return deferred.promise;
+        return $sailsSocket.get(url).then(success, error);
     };
 
     this.create = function(newModel) {
-        var deferred = $q.defer();
         var url = utils.prepareUrl('user');
+        return $sailsSocket.post(url, newModel).then(success, error);
+    };
 
-        $sailsSocket.post(url, newModel, function(model) {
-            return deferred.resolve(model);
-        });
+    var success = function(response) {
+        return response.data;
+    };
 
-        return deferred.promise;
+    var error = function(error) {
+        console.log(error);
     };
 });

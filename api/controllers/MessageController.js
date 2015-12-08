@@ -25,11 +25,23 @@ module.exports = {
 		});
 	},
 
+	getByProject: function(req, res) {
+		Message.find()
+		.where({project: req.param('id')})
+		.spread(function(model) {
+			Message.subscribe(req, model);
+			res.json(model);
+		})
+		.fail(function(err) {
+			res.send(404,err);
+		});
+	},
+
 	create: function (req, res) {
 		var userId = req.param('user');
 		var model = {
 			title: req.param('title'),
-			lol: req.param('lol'),
+			project: req.param('project'),
 			user: userId
 		};
 
