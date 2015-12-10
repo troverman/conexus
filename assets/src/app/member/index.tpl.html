@@ -29,7 +29,7 @@
 
   <div ng-repeat="follower in followers">
     <div id="timeline-item">
-      {{follower}}
+      <a href="/member/{{follower.follower.username}}">{{follower.follower.username}}</a>
     </div>
   </div>
 

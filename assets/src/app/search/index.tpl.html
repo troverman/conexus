@@ -1,3 +1,8 @@
-<div ng-repeat="searchresult in searchResults">
-	<h2>{{searchresult}}</h2>
+<div ui-view="search">
+	<div>
+		SEARCH
+		<div ng-repeat="searchResult in searchResults">
+			<h2>{{searchResult}}</h2>
+		</div>
+	</div>
 </div>

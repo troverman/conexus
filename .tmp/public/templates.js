@@ -221,7 +221,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "  <div ng-repeat=\"follower in followers\">\n" +
     "    <div id=\"timeline-item\">\n" +
-    "      {{follower}}\n" +
+    "      <a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
@@ -291,11 +291,11 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <ul class=\"sidebar-nav\">\n" +
     "            <br>\n" +
     "            <li>\n" +
-    "                <a href=\"/\">{{project.title}}</a>\n" +
+    "                <a href=\"/project/{{project.title}}\">{{project.title}}</a>\n" +
     "            </li>\n" +
     "            <hr>\n" +
     "            <li><a href=\"/project/{{project.title}}/tasks\">channels</a></li>\n" +
-    "            <li><a href=\"/project/{{project.title}}/tasks\">events</a></li>\n" +
+    "            <!--<li><a href=\"/project/{{project.title}}/tasks\">events</a></li>-->\n" +
     "            <li><a href=\"/project/{{project.title}}/tasks\">members</a></li>\n" +
     "            <li><a href=\"/project/{{project.title}}/tasks\">streams</a></li>\n" +
     "            <li><a href=\"/project/{{project.title}}/tasks\">tasks</a></li>\n" +
@@ -424,7 +424,12 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("search/index.tpl.html",
-    "<div ng-repeat=\"searchresult in searchResults\">\n" +
-    "	<h2>{{searchresult}}</h2>\n" +
+    "<div ui-view=\"search\">\n" +
+    "	<div>\n" +
+    "		SEARCH\n" +
+    "		<div ng-repeat=\"searchResult in searchResults\">\n" +
+    "			<h2>{{searchResult}}</h2>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "</div>");
 }]);

@@ -46,6 +46,7 @@ module.exports.routes = {
   'get /project/:path/tasks': 'HomeController.index',
 
   'get /search': 'HomeController.index',
+  'get /search/:searchQuery': 'HomeController.index',
 
   'get /login': 'HomeController.index',
   'get /register': 'HomeController.index',
