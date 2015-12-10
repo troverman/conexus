@@ -29,6 +29,17 @@ module.exports = {
         });
     },
 
+    getByProject: function(project) {
+        return Message.find()
+        .where({project: project})
+        .sort({createdAt: 'desc'})
+        .populate('user')
+        .populate('project')
+        .then(function (models) {
+            return [models];
+        });
+    },
+
     getAll: function() {
         return Message.find()
         .sort({createdAt: 'desc'})

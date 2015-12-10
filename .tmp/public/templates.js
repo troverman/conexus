@@ -286,215 +286,71 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<style>\n" +
-    "\n" +
-    "/* Toggle Styles */\n" +
-    "\n" +
-    "#wrapper {\n" +
-    "    padding-left: 0;\n" +
-    "    -webkit-transition: all 0.5s ease;\n" +
-    "    -moz-transition: all 0.5s ease;\n" +
-    "    -o-transition: all 0.5s ease;\n" +
-    "    transition: all 0.5s ease;\n" +
-    "}\n" +
-    "\n" +
-    "#wrapper.toggled {\n" +
-    "    padding-left: 250px;\n" +
-    "}\n" +
-    "\n" +
-    "#sidebar-wrapper {\n" +
-    "    z-index: 1000;\n" +
-    "    position: fixed;\n" +
-    "    left: 250px;\n" +
-    "    width: 0;\n" +
-    "    height: 100%;\n" +
-    "    margin-left: -250px;\n" +
-    "    overflow-y: auto;\n" +
-    "    background: #34393d;\n" +
-    "    -webkit-transition: all 0.5s ease;\n" +
-    "    -moz-transition: all 0.5s ease;\n" +
-    "    -o-transition: all 0.5s ease;\n" +
-    "    transition: all 0.5s ease;\n" +
-    "}\n" +
-    "\n" +
-    "#wrapper.toggled #sidebar-wrapper {\n" +
-    "    width: 250px;\n" +
-    "}\n" +
-    "\n" +
-    "#page-content-wrapper {\n" +
-    "    width: 100%;\n" +
-    "    position: absolute;\n" +
-    "    padding: 15px;\n" +
-    "}\n" +
-    "\n" +
-    "#wrapper.toggled #page-content-wrapper {\n" +
-    "    position: absolute;\n" +
-    "    margin-right: -250px;\n" +
-    "}\n" +
-    "\n" +
-    "/* Sidebar Styles */\n" +
-    "\n" +
-    ".sidebar-nav {\n" +
-    "    position: absolute;\n" +
-    "    top: 0;\n" +
-    "    width: 250px;\n" +
-    "    margin: 0;\n" +
-    "    padding: 0;\n" +
-    "    list-style: none;\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav li {\n" +
-    "    text-indent: 20px;\n" +
-    "    line-height: 40px;\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav li a {\n" +
-    "    display: block;\n" +
-    "    text-decoration: none;\n" +
-    "    color: #999;\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav li a:hover {\n" +
-    "    text-decoration: none;\n" +
-    "    color: #fff;\n" +
-    "    background: #4b5359;\n" +
-    "    //background: rgba(255,255,255,0.2);\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav li a:active,\n" +
-    ".sidebar-nav li a:focus {\n" +
-    "    text-decoration: none;\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav > .sidebar-brand {\n" +
-    "    height: 65px;\n" +
-    "    font-size: 18px;\n" +
-    "    line-height: 60px;\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav > .sidebar-brand a {\n" +
-    "    color: #999999;\n" +
-    "}\n" +
-    "\n" +
-    ".sidebar-nav > .sidebar-brand a:hover {\n" +
-    "    color: #fff;\n" +
-    "    background: none;\n" +
-    "}\n" +
-    "\n" +
-    "@media(min-width:768px) {\n" +
-    "    #wrapper {\n" +
-    "        padding-left: 250px;\n" +
-    "    }\n" +
-    "\n" +
-    "    #wrapper.toggled {\n" +
-    "        padding-left: 0;\n" +
-    "    }\n" +
-    "\n" +
-    "    #sidebar-wrapper {\n" +
-    "        width: 250px;\n" +
-    "    }\n" +
-    "\n" +
-    "    #wrapper.toggled #sidebar-wrapper {\n" +
-    "        width: 0;\n" +
-    "    }\n" +
-    "\n" +
-    "    #page-content-wrapper {\n" +
-    "        padding: 20px;\n" +
-    "        position: relative;\n" +
-    "    }\n" +
-    "\n" +
-    "    #wrapper.toggled #page-content-wrapper {\n" +
-    "        position: relative;\n" +
-    "        margin-right: 0;\n" +
-    "    }\n" +
-    "}\n" +
-    "\n" +
-    "#main-container{margin-left:250px; padding:15px;}\n" +
-    "\n" +
-    "</style>\n" +
-    "\n" +
-    "<div id=\"sidebar-wrapper\">\n" +
-    "    <ul class=\"sidebar-nav\">\n" +
-    "        <br>\n" +
-    "        <li>\n" +
-    "            <a href=\"/\">{{project.title}}</a>\n" +
-    "        </li>\n" +
-    "        <hr>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">channels</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">events</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">members</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">streams</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">tasks</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"#\">tools</a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"main-container\">\n" +
-    "\n" +
-    "    <div id=\"streams\">\n" +
-    "        <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/i4IXhceMWCU\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "        <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/sIbmtDplXA0\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "<div ui-view=\"project\">\n" +
+    "    <div id=\"sidebar-wrapper\">\n" +
+    "        <ul class=\"sidebar-nav\">\n" +
+    "            <br>\n" +
+    "            <li>\n" +
+    "                <a href=\"/\">{{project.title}}</a>\n" +
+    "            </li>\n" +
+    "            <hr>\n" +
+    "            <li><a href=\"/project/{{project.title}}/tasks\">channels</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/tasks\">events</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/tasks\">members</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/tasks\">streams</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/tasks\">tasks</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/tasks\">tools</a></li>\n" +
+    "        </ul>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div id=\"tasks\">\n" +
-    "        <br><br>\n" +
-    "        <p>task</p>\n" +
-    "        <p>task</p>\n" +
-    "        <p>task</p>\n" +
-    "        <p>task</p>\n" +
-    "        <p>task</p>\n" +
-    "        <p>task</p>\n" +
-    "        <p>task</p>\n" +
-    "        <br><br>\n" +
+    "    <div id=\"main-container\">\n" +
+    "\n" +
+    "        <div id=\"streams\">\n" +
+    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/i4IXhceMWCU\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/sIbmtDplXA0\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div id=\"tasks\">\n" +
+    "            <br><br>\n" +
+    "            <p>task</p>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <!--\n" +
+    "        <div id=\"html-edit\">\n" +
+    "            <h4>edit html tool</h4>\n" +
+    "            <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
+    "            <hr>\n" +
+    "            <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
+    "            <div style=\"height:100px;\"></div>\n" +
+    "        </div>\n" +
+    "        -->\n" +
+    "\n" +
+    "    	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "\n" +
+    "    		<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "            <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
+    "    		<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
+    "    			<i class=\"fa fa-trash-o\"></i>\n" +
+    "    		</button>\n" +
+    "\n" +
+    "    	</div>\n" +
+    "\n" +
+    "    	<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "    		<div class=\"form-group\">\n" +
+    "    			<input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
+    "    		</div>\n" +
+    "    		<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "    	</form>\n" +
+    "\n" +
+    "\n" +
     "    </div>\n" +
-    "\n" +
-    "    <!--<div id=\"html-edit\">\n" +
-    "        <h4>edit html tool</h4>\n" +
-    "        <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
-    "        <hr>\n" +
-    "        <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
-    "        <div style=\"height:100px;\"></div>\n" +
-    "    </div>-->\n" +
-    "\n" +
-    "	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "\n" +
-    "		<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
-    "        <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
-    "		<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
-    "			<i class=\"fa fa-trash-o\"></i>\n" +
-    "		</button>\n" +
-    "\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
-    "		<div class=\"form-group\">\n" +
-    "			<input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
-    "		</div>\n" +
-    "		<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
-    "	</form>\n" +
-    "\n" +
-    "\n" +
     "</div>\n" +
-    "\n" +
     "");
 }]);
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("projects/index.tpl.html",
     "<!--if logged in-->\n" +
-    "<div style=\"height:100px;\"></div>\n" +
     "<div ng-show=\"currentUser\">\n" +
     "  <button class=\"btn btn-primary blog-button\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
     "  <br><br>\n" +
@@ -514,15 +370,13 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "</div>\n" +
     "<!--/if logged in-->\n" +
     "\n" +
-    "<div class=\"post-list-container\">\n" +
+    "<div class=\"project-list-container\">\n" +
     "  <br><br>\n" +
     "  <div class=\"post-container\" ng-repeat=\"project in projects | orderBy:'-createdAt'\">\n" +
     "    <h1 class=\"title\"><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h1>\n" +
     "  </div>\n" +
     "  <br><br>\n" +
     "</div>\n" +
-    "\n" +
-    "\n" +
     "<div style=\"height:100px;\"></div>");
 }]);
 

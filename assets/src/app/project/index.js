@@ -4,92 +4,70 @@ angular.module( 'conexus.project', [
 .config(function config( $stateProvider ) {
 
 	$stateProvider.state( 'project', {
-		url: '/project/:path',
-		views: {
-			"main": {
-				controller: 'ProjectCtrl',
-				templateUrl: 'project/index.tpl.html'
-			}
-		},
-        resolve:{
+        abstract: true,
+        url: '/project/:path',
+        views: {
+            "main": {
+                templateUrl: 'project/index.tpl.html'
+            }
+        },
+        resolve: {
             project: function(ProjectModel, $stateParams) {
-                console.log($stateParams.path);
-                return ProjectModel.getByUrl($stateParams.path).then(function(models) {
-                    return models;
-                });
+                return ProjectModel.getByUrl($stateParams.path);
             }
         }
     })
-    .state('project.child', {
-        /*resolve:{
-            messages: function(project){
-                return {'value': project.value + ':messages'};
+    .state( 'project.index', {
+        url: '',
+        views: {
+            "project": {
+                controller: 'ProjectCtrl',
+                templateUrl: 'project/index.tpl.html'
+            }
+        },
+        resolve: {
+            /*redirect: function($location, project){
+                if (project == undefined){
+                    $location.url('projects');
+                };
+            },*/
+            messages: function(project, MessageModel){
+                return MessageModel.getByProject(project);
             },
             tasks: function(project){
-                return {'value': project.value + ':tasks'};
+                return {'value': project + ':tasks'};
             },
-            users: function(project){
-                return {'value': project.value + ':users'};
-            }
-        }*/
-		resolve: {
-            /*project: function(ProjectModel, $stateParams) {
-                console.log($stateParams.path);
-                return ProjectModel.getByUrl($stateParams.path).then(function(models) {
-                    return models;
-                });
-            },*/
-            messages: function(MessageModel, $stateParams, $http, $q) {
-
-                /*return $q.when()
-                .then(function () {
-                    var deferred = $q.defer();
-                    var url = '/api/project/url/' + $stateParams.path;
-
-                    $http.get(url).
-                        success(function(data, status, headers, config) {
-                            deferred.resolve(data);
-                        }).
-                        error(function(data, status, headers, config) {
-                    });
-                    return deferred.promise;
-                })
-                .then(function (data) {
-                    return MessageModel.getByProject(data).then(function(models) {
-                        return models;
-                    });
-                });*/
-
-                return MessageModel.getAll().then(function(models) {
-                    return models;
-                });
-
-            },
-            users: function(UserModel, $sailsSocket) {
-                //return UserModel.getAll().then(function(models) {
-                    //return models;
-                //});
+            users: function(project, UserModel, $sailsSocket) {
+                //return UserModel.getAll();
                 return $sailsSocket.get('/api/user/subscribe').then(
                     function(response) {
-                        //console.log(response.data);
                         return response.data;
                     }
                 );
             }
         }
-	});
+	})
+    .state( 'project.index.tasks', {
+        url: '/tasks',
+        views: {
+            "project": {
+                controller: function($scope, $location, messages, project, tasks){
+                    $scope.messages = messages;
+                    $scope.project = project;
+                    $scope.tasks = tasks;
+                },
+                templateUrl: 'project/index.tpl.html'
+            }
+        }
+    });
 })
 
-.controller( 'ProjectCtrl', function ProjectController( $scope, $sce, $location, titleService,  $sailsSocket, lodash, config, MessageModel, messages, ProjectModel, project, users ) {
-	titleService.setTitle('project');
-
-	$scope.newMessage = {};
-    $scope.messages = messages;
-    $scope.project = project;
-    if (project == undefined){
-        $location.url('projects');
-    };
+.controller( 'ProjectCtrl', function ProjectController( $scope, $sailsSocket, $location, titleService, lodash, config, project, messages, MessageModel ) {
+    titleService.setTitle(project.title);
     $scope.currentUser = config.currentUser;
+    $scope.project = project;
+    $scope.newMessage = {};
+    $scope.messages = messages;
 
     $sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {
@@ -121,14 +99,18 @@ angular.module( 'conexus.project', [
         });
     };
 
-    $scope.renderHtml = function (htmlCode) {
-        return $sce.trustAsHtml(htmlCode);
-    };
-
-    $scope.users = users;
-    //console.log($scope.users);
 
 
 
 
-});
+
+
+
+
+
+
+
+
+
+
+})

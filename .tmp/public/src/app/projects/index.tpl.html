@@ -1,5 +1,4 @@
 <!--if logged in-->
-<div style="height:100px;"></div>
 <div ng-show="currentUser">
   <button class="btn btn-primary blog-button" ng-click="newProjectToggle()">+ project</button>
   <br><br>
@@ -19,13 +18,11 @@
 </div>
 <!--/if logged in-->
 
-<div class="post-list-container">
+<div class="project-list-container">
   <br><br>
   <div class="post-container" ng-repeat="project in projects | orderBy:'-createdAt'">
     <h1 class="title"><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h1>
   </div>
   <br><br>
 </div>
-
-
 <div style="height:100px;"></div>

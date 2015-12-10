@@ -6,7 +6,6 @@ module.exports = {
 		.spread(function(models) {
 			Message.watch(req);
 			Message.subscribe(req, models);
-
 			res.json(models);
 		})
 		.fail(function(err) {
@@ -26,9 +25,10 @@ module.exports = {
 	},
 
 	getByProject: function(req, res) {
-		Message.find()
-		.where({project: req.param('id')})
+		var projectId = req.param('id');
+		Message.getByProject(projectId)
 		.spread(function(model) {
+			Message.watch(req);
 			Message.subscribe(req, model);
 			res.json(model);
 		})

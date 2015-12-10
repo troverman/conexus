@@ -42,8 +42,8 @@ module.exports.routes = {
   'get /member/:slug': 'HomeController.index',
   'get /post': 'HomeController.index',
   'get /projects': 'HomeController.index',
-  'get /project/:id': 'HomeController.index',
-  'get /project/:id/task': 'HomeController.index',
+  'get /project/:path': 'HomeController.index',
+  'get /project/:path/tasks': 'HomeController.index',
 
   'get /search': 'HomeController.index',
 
