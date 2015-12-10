@@ -26,11 +26,6 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            /*redirect: function($location, project){
-                if (project == undefined){
-                    $location.url('projects');
-                };
-            },*/
             messages: function(project, MessageModel){
                 return MessageModel.getByProject(project);
             },
@@ -38,7 +33,6 @@ angular.module( 'conexus.project', [
                 return {'value': project + ':tasks'};
             },
             users: function(project, UserModel, $sailsSocket) {
-                //return UserModel.getAll();
                 return $sailsSocket.get('/api/user/subscribe').then(
                     function(response) {
                         return response.data;
@@ -68,6 +62,7 @@ angular.module( 'conexus.project', [
     $scope.project = project;
     $scope.newMessage = {};
     $scope.messages = messages;
+
 
     $sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {

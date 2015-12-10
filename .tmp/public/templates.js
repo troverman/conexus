@@ -314,7 +314,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "            <br><br>\n" +
     "            <p>task</p>\n" +
     "        </div>\n" +
-    "\n" +
     "        <!--\n" +
     "        <div id=\"html-edit\">\n" +
     "            <h4>edit html tool</h4>\n" +

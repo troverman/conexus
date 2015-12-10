@@ -22,7 +22,6 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
     };
 
     var success = function(response) {
-        console.log(response.data);
         if (response.data == undefined){
             $location.path('/projects');
             $rootScope.$apply()
