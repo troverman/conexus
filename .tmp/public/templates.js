@@ -69,6 +69,17 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		<br><br><br>\n" +
     "		<p class=\"lead\">governed through transparent community driven directon</p>\n" +
     "		<div style=\"height:100px\"></div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
+    "		<div ng-repeat=\"searchResult in searchResults\">\n" +
+    "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "		</div>\n" +
+    "		<div style=\"height:100px\"></div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "		<div id=\"project-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
@@ -425,9 +436,21 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("search/index.tpl.html",
     "<div ui-view=\"search\">\n" +
+    "	{{searchQuery}}\n" +
     "	<div>\n" +
+    "\n" +
+    "\n" +
+    "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
+    "		<div ng-repeat=\"searchResult in searchResults\">\n" +
+    "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "		</div>\n" +
+    "		<div style=\"height:100px\"></div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "		SEARCH\n" +
     "		<div ng-repeat=\"searchResult in searchResults\">\n" +
+    "			<br><br>\n" +
     "			<h2>{{searchResult}}</h2>\n" +
     "		</div>\n" +
     "	</div>\n" +

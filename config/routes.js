@@ -121,6 +121,7 @@ module.exports.routes = {
    * Search routes
    */
   'get /api/search/:searchQuery': 'SearchController.search',
+  'get /api/search': 'SearchController.searchAll',
 
 
   /**

@@ -26,9 +26,18 @@ angular.module( 'conexus.home', [
 	});
 })
 
-.controller( 'HomeCtrl', function HomeController( $scope, titleService, config, projects, ProjectModel, members, UserModel ) {
+.controller( 'HomeCtrl', function HomeController( $scope, $q, titleService, config, projects, ProjectModel, members, UserModel, SearchModel ) {
 	titleService.setTitle('conexus');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
 	$scope.members = members;
+
+	$scope.searchResults = [];
+	$scope.keyPress = function(searchValue){
+		SearchModel.search(searchValue).then(function(models){
+			$scope.searchResults = models;
+		});
+	}
+
+
 });

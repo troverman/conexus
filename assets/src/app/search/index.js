@@ -21,7 +21,7 @@ angular.module( 'conexus.search', [
         },
         resolve: {
             searchResults: function(SearchModel) {
-                return SearchModel.search('index');
+                return SearchModel.search('');
             }
         }
     })
@@ -44,5 +44,14 @@ angular.module( 'conexus.search', [
 .controller( 'SearchController', function SearchController( $scope, lodash, config, titleService, searchResults, SearchModel ) {
     titleService.setTitle('Search');
     $scope.searchResults = searchResults;
-    console.log("searchin");
+
+    $scope.keyPress = function(searchValue){
+        SearchModel.search(searchValue).then(function(models){
+            $scope.searchResults = models;
+        });
+    }
+
+
+
+    
 });
