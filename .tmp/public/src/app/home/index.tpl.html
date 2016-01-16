@@ -6,55 +6,38 @@
 
 </div>
 <div ng-show="!currentUser">
-
 	<div style="text-align:center;">
+		<img src="images/conexus-black.png" style="height:100px">
 		<h1>connect, collab, create</h1>
-
+		<p class="lead"><strong>The logo needs to evolve from its first conception to the above simplifed one. I love it 100% more.</strong></p>
 		<p class="lead">a transparent + opensource network</p>
 		<p class="lead">working together toward a common goal</p>
-
-		<img src="/images/loading.gif"/>
-
-		<br><br><br>
 		<p class="lead">governed through transparent community driven directon</p>
-		<div style="height:100px"></div>
-
-
 
 		<input ng-keyup="keyPress(searchValue)" ng-model="searchValue">
 		<div ng-repeat="searchResult in searchResults">
 			<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
 		</div>
-		<div style="height:100px"></div>
-
-
-
 		<div id="project-container">
 			<div ng-repeat="project in projects">
 				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 			</div>
 		</div>
-		<div style="height:100px"></div>
 		<div id="stream-container">
 			<div ng-repeat="project in projects">
 				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 			</div>
 		</div>
-		<div style="height:100px"></div>
 		<div id="task-container">
 			<div ng-repeat="project in projects">
 				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 			</div>
 		</div>
-		<div style="height:100px"></div>
 		<div id="member-container">
 			<div ng-repeat="member in members">
 				<a href="/member/{{member.username}}">{{member.username}}</a>
 			</div>
 		</div>
-
-		<div style="height:150px"></div>
-
 		<!--register-->
 		<div class="row">
 		    <div class="col-md-6 col-md-offset-3">
@@ -92,9 +75,6 @@
 		        </form>
 		    </div>
 		</div>
-
-		<div style="height:100px"></div>
-
 	</div>
 </div>
 

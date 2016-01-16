@@ -27,9 +27,8 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
     "            <span class=\"icon-bar\"></span>\n" +
     "          </button>\n" +
     "\n" +
-    "          <a class=\"navbar-brand\" href=\"/\">\n" +
-    "            <!--<img style=\"height:20px;float:left\" src=\"/images/loading.gif\"/> -->\n" +
-    "            conexus\n" +
+    "          <a class=\"navbar-brand\" href=\"/\" style=\"margin-left:15px\">\n" +
+    "            <img style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
     "          </a>\n" +
     "        </div>\n" +
     "        <div class=\"collapse navbar-collapse\">\n" +
@@ -57,55 +56,38 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "</div>\n" +
     "<div ng-show=\"!currentUser\">\n" +
-    "\n" +
     "	<div style=\"text-align:center;\">\n" +
+    "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
     "		<h1>connect, collab, create</h1>\n" +
-    "\n" +
+    "		<p class=\"lead\"><strong>The logo needs to evolve from its first conception to the above simplifed one. I love it 100% more.</strong></p>\n" +
     "		<p class=\"lead\">a transparent + opensource network</p>\n" +
     "		<p class=\"lead\">working together toward a common goal</p>\n" +
-    "\n" +
-    "		<img src=\"/images/loading.gif\"/>\n" +
-    "\n" +
-    "		<br><br><br>\n" +
     "		<p class=\"lead\">governed through transparent community driven directon</p>\n" +
-    "		<div style=\"height:100px\"></div>\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
     "		<div ng-repeat=\"searchResult in searchResults\">\n" +
     "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
     "		</div>\n" +
-    "		<div style=\"height:100px\"></div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "		<div id=\"project-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div style=\"height:100px\"></div>\n" +
     "		<div id=\"stream-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div style=\"height:100px\"></div>\n" +
     "		<div id=\"task-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div style=\"height:100px\"></div>\n" +
     "		<div id=\"member-container\">\n" +
     "			<div ng-repeat=\"member in members\">\n" +
     "				<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "\n" +
-    "		<div style=\"height:150px\"></div>\n" +
-    "\n" +
     "		<!--register-->\n" +
     "		<div class=\"row\">\n" +
     "		    <div class=\"col-md-6 col-md-offset-3\">\n" +
@@ -143,9 +125,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		        </form>\n" +
     "		    </div>\n" +
     "		</div>\n" +
-    "\n" +
-    "		<div style=\"height:100px\"></div>\n" +
-    "\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -436,7 +415,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("search/index.tpl.html",
     "<div ui-view=\"search\">\n" +
-    "	{{searchQuery}}\n" +
+    "	<h1>{{searchQuery}}</h1>\n" +
     "	<div>\n" +
     "\n" +
     "\n" +
