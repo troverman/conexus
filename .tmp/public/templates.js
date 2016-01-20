@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -14,10 +14,24 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "</div>");
 }]);
 
+angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("account/index.tpl.html",
+    "<div style=\"margin-left:20%;margin-right:20%\">\n" +
+    "\n" +
+    "	<h2>connect, collab, create</h2>\n" +
+    "	<br>\n" +
+    "	<p>connect with collaborators, create awesome things</p>\n" +
+    "	<p>crowd-owned organizations</p>\n" +
+    "	<p>a community of collaborators</p>\n" +
+    "	<p>transparent contrubition, equatable representation</p>\n" +
+    "\n" +
+    "</div>");
+}]);
+
 angular.module("header/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("header/index.tpl.html",
     "<div ng-controller=\"HeaderCtrl\">\n" +
-    "    <div class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
+    "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "      <div class=\"container\">\n" +
     "        <div class=\"navbar-header\">\n" +
     "          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
@@ -56,6 +70,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "</div>\n" +
     "<div ng-show=\"!currentUser\">\n" +
+    "	<div style=\"height:700px;background-color:rgb(100,100,110)\">\n" +
+    "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
+    "	</div>\n" +
     "	<div style=\"text-align:center;\">\n" +
     "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
     "		<h1>connect, collab, create</h1>\n" +
@@ -64,30 +81,36 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		<p class=\"lead\">working together toward a common goal</p>\n" +
     "		<p class=\"lead\">governed through transparent community driven directon</p>\n" +
     "\n" +
+    "\n" +
     "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
     "		<div ng-repeat=\"searchResult in searchResults\">\n" +
     "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div id=\"project-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div id=\"stream-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div id=\"task-container\">\n" +
     "			<div ng-repeat=\"project in projects\">\n" +
     "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div id=\"member-container\">\n" +
     "			<div ng-repeat=\"member in members\">\n" +
     "				<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<!--register-->\n" +
     "		<div class=\"row\">\n" +
     "		    <div class=\"col-md-6 col-md-offset-3\">\n" +
@@ -180,18 +203,6 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("member/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/index.tpl.html",
-    "<style>\n" +
-    "\n" +
-    "  #header-section{background-color:#445065;height:20%;text-align:center;}\n" +
-    "  #header-section img{height:200px;}\n" +
-    "  #section1{height:100%;background-color:#687A94;padding-left:15%;padding-right:15%;}\n" +
-    "  #footer{background-color:#445065;padding-left:15%;padding-right:15%;min-height:100px;}\n" +
-    "  #timeline-item{background-color:rgb(255,255,255);padding:30px;}\n" +
-    "  .navbar{margin-bottom:0px;}\n" +
-    "\n" +
-    "</style>\n" +
-    "\n" +
-    "\n" +
     "<div id=\"header-section\">\n" +
     "  <br>\n" +
     "  <h4><h1>{{member.username}}</h1></h4>\n" +

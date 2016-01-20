@@ -8,6 +8,7 @@ angular.module( 'conexus', [
     'services',
     'models',
     'conexus.about',
+    'conexus.account',
     'conexus.header',
     'conexus.home',
     'conexus.login',

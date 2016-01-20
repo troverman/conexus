@@ -28,11 +28,11 @@ angular.module( 'conexus.post', [
 .controller( 'PostController', function PostController( $scope, $sailsSocket, lodash, config, titleService, PostModel, PostVoteModel, posts, postvotes) {
     titleService.setTitle('Posts');
     $scope.currentUser = config.currentUser;
-
-
-    //posts
     $scope.newPost = {};
     $scope.posts = posts;
+    $scope.newPostVote = {};
+    $scope.postvotes = postvotes;
+
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -60,10 +60,6 @@ angular.module( 'conexus.post', [
         });
     };
 
-
-    //postvote
-    $scope.newPostVote = {};
-    $scope.postvotes = postvotes;
     $sailsSocket.subscribe('postvote', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -77,7 +73,8 @@ angular.module( 'conexus.post', [
 
     //gotta figure this out
     //$scope.getVoteByPost = function(post){
-        //PostVoteModel.getVoteByPost(post).then(function(model) {
+        //PostVoteModel.getVoteByPost(post).then(function(models) {
+        //$scope.post[i].votes = models;
         //});
     //};
 
@@ -91,10 +88,8 @@ angular.module( 'conexus.post', [
     };
 
     $scope.createVote = function(post, newPostVote) {
-
         newPostVote.post = post;
         newPostVote.user = config.currentUser;
-
         PostVoteModel.create(newPostVote).then(function(model) {
             $scope.newPostVote = {};
         });

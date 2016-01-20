@@ -20,15 +20,10 @@
  */
 module.exports.connections = {
 
-  //productionMongoHqDb: {
-    //adapter: 'sails-mongo',
-    //url: 'mongodb://heroku_4029wpvm:gcd9u8qfd1nernnqr147m1bl1@ds035260.mongolab.com:35260/heroku_4029wpvm'
-    //url: process.env.MONGOLAB_URI
-  //}
-
 	productionMongoHqDb: {
-		adapter: 'sails-disk'
-	},
-
+		adapter: 'sails-mongo',
+		url: 'mongodb://heroku_649378tw:1qddl9gs11p2vk1e9e652irg43@ds047065.mongolab.com:47065/heroku_649378tw'
+		//url: process.env.MONGOLAB_URI
+	}
 };
 
