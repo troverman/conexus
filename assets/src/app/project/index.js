@@ -95,17 +95,4 @@ angular.module( 'conexus.project', [
     };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 })

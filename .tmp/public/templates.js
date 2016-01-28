@@ -47,10 +47,19 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
     "        </div>\n" +
     "        <div class=\"collapse navbar-collapse\">\n" +
     "          <ul class=\"nav navbar-nav\">\n" +
-    "            <li ng-repeat=\"navItem in navItems\">\n" +
-    "                <a href=\"{{navItem.url}}\"><i class=\"{{navItem.cssClass}}\"></i> {{navItem.title}}</a>\n" +
-    "            </li>\n" +
-    "\n" +
+    "            <li><a href=\"/about\"><i class=\"fa fa-info-circle\"></i>About</a></li>\n" +
+    "            <li><a href=\"/connect\"><i class=\"fa fa-random\"></i>Connect</a></li>\n" +
+    "            <li><a href=\"/projects\"><i class=\"fa fa-info-circle\"></i>Projects</a></li>\n" +
+    "            <li><a href=\"/search\"><i class=\"fa fa-search\"></i>Search</a></li>\n" +
+    "            <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "              <div class=\"form-group\">\n" +
+    "                <input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "              </div>\n" +
+    "            </form>\n" +
+    "            <li ng-show=\"currentUser\"><a href=\"/account\"><i class=\"fa fa-briefcase\"></i>Account</a></li>\n" +
+    "            <li ng-show=\"currentUser\"><a href=\"/logout\"><i class=\"fa fa-sign-out\"></i>Logout</a></li>\n" +
+    "            <li ng-show=\"!currentUser\"><a href=\"/register\"><i class=\"fa fa-briefcase\"></i>Register</a></li>\n" +
+    "            <li ng-show=\"!currentUser\"><a href=\"/login\"><i class=\"fa fa-sign-in\"></i>Login</a></li>\n" +
     "            <li class=\"divider-vertical\"></li>\n" +
     "\n" +
     "          </ul>\n" +
@@ -71,6 +80,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "</div>\n" +
     "<div ng-show=\"!currentUser\">\n" +
     "	<div style=\"height:700px;background-color:rgb(100,100,110)\">\n" +
+    "		<img src=\"http://vector.childrenshospital.org/wp-content/uploads/2013/12/HackPeds-audience-raising-hands-enhanced-Michael-Docktor.jpg\">\n" +
     "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
     "	</div>\n" +
     "	<div style=\"text-align:center;\">\n" +
@@ -307,8 +317,8 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    <div id=\"main-container\">\n" +
     "\n" +
     "        <div id=\"streams\">\n" +
-    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/i4IXhceMWCU\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/sIbmtDplXA0\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "        </div>\n" +
     "\n" +
     "        <div id=\"tasks\">\n" +
