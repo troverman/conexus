@@ -9,6 +9,7 @@ angular.module( 'conexus', [
     'models',
     'conexus.about',
     'conexus.account',
+    'conexus.connect',
     'conexus.header',
     'conexus.home',
     'conexus.login',

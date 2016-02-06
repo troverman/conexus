@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -11,7 +11,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<p>a community of collaborators</p>\n" +
     "	<p>transparent contrubition, equatable representation</p>\n" +
     "\n" +
-    "</div>");
+    "	<img src=\"/images/loading.gif\">\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "");
 }]);
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -25,6 +29,19 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "	<p>a community of collaborators</p>\n" +
     "	<p>transparent contrubition, equatable representation</p>\n" +
     "\n" +
+    "</div>");
+}]);
+
+angular.module("connect/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("connect/index.tpl.html",
+    "<div style=\"margin-left:20%;margin-right:20%\">\n" +
+    "\n" +
+    "	<h2>connect</h2>\n" +
+    "\n" +
+    "	<div ng-repeat=\"user in users\">\n" +
+    "		<a href=\"/member/{{user.username}}\">{{user.username}}</a>\n" +
+    "	</div>\n" +
+    "	\n" +
     "</div>");
 }]);
 
@@ -86,8 +103,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div style=\"text-align:center;\">\n" +
     "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
     "		<h1>connect, collab, create</h1>\n" +
-    "		<p class=\"lead\"><strong>The logo needs to evolve from its first conception to the above simplifed one. I love it 100% more.</strong></p>\n" +
-    "		<p class=\"lead\">a transparent + opensource network</p>\n" +
+    "		<p class=\"lead\"><strong>a transparent + opensource network</strong></p>\n" +
     "		<p class=\"lead\">working together toward a common goal</p>\n" +
     "		<p class=\"lead\">governed through transparent community driven directon</p>\n" +
     "\n" +
