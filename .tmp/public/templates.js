@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -88,7 +88,6 @@ angular.module("header/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("home/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/index.tpl.html",
-    "<div style=\"height:48px\"></div>\n" +
     "<div ng-show=\"currentUser\">\n" +
     "\n" +
     "	projects\n" +
@@ -96,10 +95,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "</div>\n" +
     "<div ng-show=\"!currentUser\">\n" +
-    "	<div style=\"height:700px;background-color:rgb(100,100,110)\">\n" +
-    "		<img src=\"http://vector.childrenshospital.org/wp-content/uploads/2013/12/HackPeds-audience-raising-hands-enhanced-Michael-Docktor.jpg\">\n" +
-    "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
-    "	</div>\n" +
+    "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div style=\"text-align:center;\">\n" +
     "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
     "		<h1>connect, collab, create</h1>\n" +
@@ -178,6 +174,58 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "</div>\n" +
     "\n" +
     "\n" +
+    "");
+}]);
+
+angular.module("intro/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("intro/index.tpl.html",
+    "<!--<div class=\"intro-container\">\n" +
+    "    <img src=\"/images/intro.jpg\" style=\"height:100%;width:100%;\">\n" +
+    "</div>\n" +
+    "<h1>connecting creators with sponsors</h1>-->\n" +
+    "\n" +
+    "<div class=\"intro\" style=\"max-height:700px\">\n" +
+    "    <div class=\"intro-container\">\n" +
+    "      <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "        <symbol id=\"intro-desktop-text\">\n" +
+    "          <text style=\"font-size:32px;\" text-anchor=\"middle\"\n" +
+    "                x=\"960\"  \n" +
+    "                y=\"570\"\n" +
+    "                dy=\".35em\"\n" +
+    "                class=\"medium-text\"\n" +
+    "                >\n" +
+    "            connect, collab, create\n" +
+    "          </text> \n" +
+    "        </symbol>\n" +
+    "        <div style=\"text-align:center\">\n" +
+    "          <img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
+    "        </div>  \n" +
+    "      </svg> \n" +
+    "      <div class=\"box-with-text\">\n" +
+    "        <div class=\"text-fill\">\n" +
+    "          <video itemscope itemtype=\"VideoObject\"\n" +
+    "              class=\"video\" \n" +
+    "              src=\"videos/video.mp4\"\n" +
+    "              preload=\"auto\" \n" +
+    "              autoplay=\"autoplay\" \n" +
+    "              loop=\"loop\" \n" +
+    "              muted=\"muted\">\n" +
+    "          </video>\n" +
+    "        </div>\n" +
+    "        <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" \n" +
+    "             preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "          <rect\n" +
+    "            width=\"100%\"\n" +
+    "            height=\"100%\"\n" +
+    "            mask=\"url(#intro-desktop-mask)\"\n" +
+    "            class=\"shape--fill\"/>\n" +
+    "          <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
+    "          <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-novo\" class=\"text--transparent\"></use>\n" +
+    "        </svg> \n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  <div class=\"intro-mobile\"></div>\n" +
+    "</div>\n" +
     "");
 }]);
 
