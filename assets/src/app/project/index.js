@@ -3,7 +3,7 @@ angular.module( 'conexus.project', [
 
 .config(function config( $stateProvider ) {
 
-	$stateProvider.state( 'project', {
+	/*$stateProvider.state( 'project', {
         abstract: true,
         url: '/project/:path',
         views: {
@@ -16,16 +16,20 @@ angular.module( 'conexus.project', [
                 return ProjectModel.getByUrl($stateParams.path);
             }
         }
-    })
-    .state( 'project.index', {
-        url: '',
+    })*/
+
+    $stateProvider.state( 'project', {
+        url: '/project/:path',
         views: {
-            "project": {
+            "main": {
                 controller: 'ProjectCtrl',
                 templateUrl: 'project/index.tpl.html'
             }
         },
         resolve: {
+            project: function(ProjectModel, $stateParams) {
+                return ProjectModel.getByUrl($stateParams.path);
+            },
             messages: function(project, MessageModel){
                 return MessageModel.getByProject(project);
             },
@@ -41,19 +45,74 @@ angular.module( 'conexus.project', [
             }
         }
 	})
-    .state( 'project.index.tasks', {
-        url: '/tasks',
+
+    /*.state( 'project.home', {
+        url: '',
         views: {
-            "project": {
+            "home": {
                 controller: function($scope, $location, messages, project, tasks){
+                    console.log('home')
                     $scope.messages = messages;
                     $scope.project = project;
                     $scope.tasks = tasks;
                 },
-                templateUrl: 'project/index.tpl.html'
+                templateUrl: 'project/home.tpl.html'
+            }
+        }
+    })*/
+
+    .state( 'project.channels', {
+        url: '/channels',
+        views: {
+            "channels": {
+                controller: 'ProjectCtrl',
+                templateUrl: 'project/channels.tpl.html'
+            }
+        }
+    })
+    .state( 'project.members', {
+        url: '/members',
+        views: {
+            "members": {
+                controller: function($scope, $location, messages, project, tasks){
+                    console.log('members')
+                    $scope.messages = messages;
+                    $scope.project = project;
+                    $scope.tasks = tasks;
+                },
+                templateUrl: 'project/members.tpl.html'
+            }
+        }
+    })
+    .state( 'project.tasks', {
+        url: '/tasks',
+        views: {
+            "tasks": {
+                controller: function($scope, $location, messages, project, tasks){
+                    console.log('tasks')
+                    $scope.messages = messages;
+                    $scope.project = project;
+                    $scope.tasks = tasks;
+                },
+                templateUrl: 'project/tasks.tpl.html'
+            }
+        }
+    })
+    .state( 'project.streams', {
+        url: '/streams',
+        views: {
+            "streams": {
+                controller: function($scope, $location, messages, project, tasks){
+                    console.log('streams')
+                    $scope.messages = messages;
+                    $scope.project = project;
+                    $scope.tasks = tasks;
+                },
+                templateUrl: 'project/streams.tpl.html'
             }
         }
     });
+    
 })
 
 .controller( 'ProjectCtrl', function ProjectController( $scope, $sailsSocket, $location, titleService, lodash, config, project, messages, MessageModel ) {
@@ -62,7 +121,6 @@ angular.module( 'conexus.project', [
     $scope.project = project;
     $scope.newMessage = {};
     $scope.messages = messages;
-
 
     $sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {

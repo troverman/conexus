@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/channels.tpl.html', 'project/home.tpl.html', 'project/index.tpl.html', 'project/members.tpl.html', 'project/streams.tpl.html', 'project/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -97,80 +97,106 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "<div ng-show=\"!currentUser\">\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div style=\"text-align:center;\">\n" +
+    "		<div style=\"height:100px\"></div>\n" +
     "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
-    "		<h1>connect, collab, create</h1>\n" +
-    "		<p class=\"lead\"><strong>a transparent + opensource network</strong></p>\n" +
-    "		<p class=\"lead\">working together toward a common goal</p>\n" +
-    "		<p class=\"lead\">governed through transparent community driven directon</p>\n" +
-    "\n" +
-    "\n" +
-    "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
-    "		<div ng-repeat=\"searchResult in searchResults\">\n" +
-    "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "		<div class=\"header-area\">\n" +
+    "			<h1>connect, collab, create</h1>\n" +
+    "			<p class=\"lead\"><strong>a transparent + opensource network</strong></p>\n" +
+    "			<p class=\"lead\">working together toward a common goal</p>\n" +
+    "			<p class=\"lead\">governed through transparent community driven directon</p>\n" +
+    "			<div style=\"height:50px\"></div>\n" +
     "		</div>\n" +
     "\n" +
-    "		<div id=\"project-container\">\n" +
-    "			<div ng-repeat=\"project in projects\">\n" +
-    "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
+    "		<div class=\"dynamic-data\">\n" +
+    "			<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
+    "			<div style=\"height:8px\"></div>\n" +
+    "			<div ng-repeat=\"searchResult in searchResults\">\n" +
+    "				<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
     "			</div>\n" +
-    "		</div>\n" +
+    "			<div style=\"height:200px\"></div>\n" +
+    "			\n" +
+    "			<h4>projects</h4>\n" +
+    "			<div id=\"project-container\">\n" +
+    "				<div ng-repeat=\"project in projects\">\n" +
+    "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div style=\"height:200px\"></div>\n" +
     "\n" +
-    "		<div id=\"stream-container\">\n" +
-    "			<div ng-repeat=\"project in projects\">\n" +
-    "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
+    "			<!--<div id=\"stream-container\">\n" +
+    "				<div ng-repeat=\"project in projects\">\n" +
+    "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
+    "				</div>\n" +
     "			</div>\n" +
-    "		</div>\n" +
     "\n" +
-    "		<div id=\"task-container\">\n" +
-    "			<div ng-repeat=\"project in projects\">\n" +
-    "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
+    "			<div id=\"task-container\">\n" +
+    "				<div ng-repeat=\"project in projects\">\n" +
+    "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
+    "				</div>\n" +
+    "			</div>-->\n" +
     "\n" +
-    "		<div id=\"member-container\">\n" +
-    "			<div ng-repeat=\"member in members\">\n" +
-    "				<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
+    "			<h4>members</h4>\n" +
+    "			<div id=\"member-container\">\n" +
+    "				<div ng-repeat=\"member in members\">\n" +
+    "					<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
+    "				</div>\n" +
     "			</div>\n" +
+    "			<div style=\"height:200px\"></div>\n" +
+    "\n" +
     "		</div>\n" +
     "\n" +
     "		<!--register-->\n" +
-    "		<div class=\"row\">\n" +
-    "		    <div class=\"col-md-6 col-md-offset-3\">\n" +
-    "		        <h3>Sign Up</h3>\n" +
-    "		        <form class=\"form-horizontal\" role=\"form\" action=\"/auth/local/register\" method=\"post\">\n" +
-    "		            <div class=\"form-group\">\n" +
-    "		                <label for=\"inputUsername3\" class=\"col-sm-2 control-label\">Username</label>\n" +
-    "		                <div class=\"col-sm-10\">\n" +
-    "		                    <input type=\"text\" class=\"form-control\" id=\"inputUsername3\" name=\"username\" placeholder=\"Username\" value=\"\">\n" +
-    "		                </div>\n" +
-    "		            </div>\n" +
-    "					<div class=\"form-group\">\n" +
-    "		                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n" +
-    "		                <div class=\"col-sm-10\">\n" +
-    "		                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" name=\"email\" placeholder=\"Email\" value=\"\">\n" +
-    "		                </div>\n" +
-    "		            </div>\n" +
-    "		            <div class=\"form-group\">\n" +
-    "		                <label for=\"inputFirstName3\" class=\"col-sm-2 control-label\">First Name</label>\n" +
-    "		                <div class=\"col-sm-10\">\n" +
-    "		                    <input type=\"text\" class=\"form-control\" id=\"inputFirstName3\" name=\"first_name\" placeholder=\"First Name\" value=\"\">\n" +
-    "		                </div>\n" +
-    "		            </div>\n" +
-    "		            <div class=\"form-group\">\n" +
-    "		                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n" +
-    "		                <div class=\"col-sm-10\">\n" +
-    "		                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" name=\"password\" placeholder=\"Password\" value=\"\">\n" +
-    "		                </div>\n" +
-    "		            </div>\n" +
-    "		            <div class=\"form-group\">\n" +
-    "		                <div class=\"col-sm-offset-2 col-sm-10\">\n" +
-    "		                    <button type=\"submit\" class=\"btn btn-default\">Sign in</button>\n" +
-    "		                </div>\n" +
-    "		            </div>\n" +
-    "		        </form>\n" +
-    "		    </div>\n" +
+    "		<div class=\"register-form\">\n" +
+    "			<div class=\"row\">\n" +
+    "			    <div class=\"col-md-6 col-md-offset-3\">\n" +
+    "			        <h3>Sign Up</h3>\n" +
+    "			        <form class=\"form-horizontal\" role=\"form\" action=\"/auth/local/register\" method=\"post\">\n" +
+    "			            <div class=\"form-group\">\n" +
+    "			                <label for=\"inputUsername3\" class=\"col-sm-2 control-label\">Username</label>\n" +
+    "			                <div class=\"col-sm-10\">\n" +
+    "			                    <input type=\"text\" class=\"form-control\" id=\"inputUsername3\" name=\"username\" placeholder=\"Username\" value=\"\">\n" +
+    "			                </div>\n" +
+    "			            </div>\n" +
+    "						<div class=\"form-group\">\n" +
+    "			                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n" +
+    "			                <div class=\"col-sm-10\">\n" +
+    "			                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" name=\"email\" placeholder=\"Email\" value=\"\">\n" +
+    "			                </div>\n" +
+    "			            </div>\n" +
+    "			            <div class=\"form-group\">\n" +
+    "			                <label for=\"inputFirstName3\" class=\"col-sm-2 control-label\">First Name</label>\n" +
+    "			                <div class=\"col-sm-10\">\n" +
+    "			                    <input type=\"text\" class=\"form-control\" id=\"inputFirstName3\" name=\"first_name\" placeholder=\"First Name\" value=\"\">\n" +
+    "			                </div>\n" +
+    "			            </div>\n" +
+    "			            <div class=\"form-group\">\n" +
+    "			                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n" +
+    "			                <div class=\"col-sm-10\">\n" +
+    "			                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" name=\"password\" placeholder=\"Password\" value=\"\">\n" +
+    "			                </div>\n" +
+    "			            </div>\n" +
+    "			            <div class=\"form-group\">\n" +
+    "			                <div class=\"col-sm-offset-2 col-sm-10\">\n" +
+    "			                    <button type=\"submit\" class=\"btn btn-default\">Sign in</button>\n" +
+    "			                </div>\n" +
+    "			            </div>\n" +
+    "			        </form>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "			<div style=\"height:200px\"></div>\n" +
     "		</div>\n" +
+    "\n" +
     "	</div>\n" +
+    "</div>\n" +
+    "<div class=\"footer\">\n" +
+    "	2016 conexus\n" +
+    "\n" +
+    "\n" +
+    "	<a href=\"/about\">about</a>\n" +
+    "	<a href=\"/projects\">projects</a>\n" +
+    "	<a href=\"/\">stats</a>\n" +
+    "	<a href=\"/\">transparency</a>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "\n" +
@@ -359,37 +385,92 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "");
 }]);
 
+angular.module("project/channels.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/channels.tpl.html",
+    "<h1>channels</h1>\n" +
+    "<h3>channel</h3>\n" +
+    "<h3>channel</h3>\n" +
+    "<h3>channel</h3>\n" +
+    "\n" +
+    "<h5>chat</h5>\n" +
+    "<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "    <a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "    <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
+    "    <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
+    "        <i class=\"fa fa-trash-o\"></i>\n" +
+    "    </button>\n" +
+    "</div>\n" +
+    "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "    <div class=\"form-group\">\n" +
+    "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
+    "    </div>\n" +
+    "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "</form>\n" +
+    "");
+}]);
+
+angular.module("project/home.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/home.tpl.html",
+    "<div id=\"streams\">\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "</div>\n" +
+    "<div id=\"tasks\">\n" +
+    "    <br><br>\n" +
+    "    <p>task</p>\n" +
+    "</div>\n" +
+    "<!--\n" +
+    "<div id=\"html-edit\">\n" +
+    "    <h4>edit html tool</h4>\n" +
+    "    <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
+    "    <hr>\n" +
+    "    <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
+    "    <div style=\"height:100px;\"></div>\n" +
+    "</div>\n" +
+    "-->\n" +
+    "<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "	<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "    <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
+    "	<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
+    "		<i class=\"fa fa-trash-o\"></i>\n" +
+    "	</button>\n" +
+    "</div>\n" +
+    "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "	<div class=\"form-group\">\n" +
+    "		<input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
+    "	</div>\n" +
+    "	<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "</form>\n" +
+    "\n" +
+    "");
+}]);
+
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<div ui-view=\"project\">\n" +
+    "<!--<div ui-view=\"project\">-->\n" +
     "    <div id=\"sidebar-wrapper\">\n" +
     "        <ul class=\"sidebar-nav\">\n" +
     "            <br>\n" +
-    "            <li>\n" +
-    "                <a href=\"/project/{{project.title}}\">{{project.title}}</a>\n" +
-    "            </li>\n" +
+    "            <li><a style=\"font-weight:bold\" href=\"/project/{{project.title}}\">{{project.title}}</a></li>\n" +
     "            <hr>\n" +
-    "            <li><a href=\"/project/{{project.title}}/tasks\">channels</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/channels\">channels</a></li>\n" +
     "            <!--<li><a href=\"/project/{{project.title}}/tasks\">events</a></li>-->\n" +
-    "            <li><a href=\"/project/{{project.title}}/tasks\">members</a></li>\n" +
-    "            <li><a href=\"/project/{{project.title}}/tasks\">streams</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/members\">members</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}/streams\">streams</a></li>\n" +
     "            <li><a href=\"/project/{{project.title}}/tasks\">tasks</a></li>\n" +
-    "            <li><a href=\"/project/{{project.title}}/tasks\">tools</a></li>\n" +
+    "            <li><a href=\"/project/{{project.title}}\">tools</a></li>\n" +
     "        </ul>\n" +
     "    </div>\n" +
-    "\n" +
     "    <div id=\"main-container\">\n" +
-    "\n" +
-    "        <div id=\"streams\">\n" +
+    "        <!--<div ui-view=\"home\"></div>-->\n" +
+    "        <!--<div id=\"streams\">\n" +
     "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div id=\"tasks\">\n" +
     "            <br><br>\n" +
     "            <p>task</p>\n" +
     "        </div>\n" +
-    "        <!--\n" +
     "        <div id=\"html-edit\">\n" +
     "            <h4>edit html tool</h4>\n" +
     "            <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
@@ -397,29 +478,85 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "            <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
     "            <div style=\"height:100px;\"></div>\n" +
     "        </div>\n" +
-    "        -->\n" +
-    "\n" +
-    "    	<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "\n" +
-    "    		<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "        <div ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "            <a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
     "            <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
-    "    		<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
-    "    			<i class=\"fa fa-trash-o\"></i>\n" +
-    "    		</button>\n" +
+    "            <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
+    "                <i class=\"fa fa-trash-o\"></i>\n" +
+    "            </button>\n" +
+    "        </div>\n" +
+    "        <form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
+    "            </div>\n" +
+    "            <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "        </form>-->\n" +
+    "                <div ui-view=\"channels\"></div>\n" +
     "\n" +
-    "    	</div>\n" +
-    "\n" +
-    "    	<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
-    "    		<div class=\"form-group\">\n" +
-    "    			<input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
-    "    		</div>\n" +
-    "    		<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
-    "    	</form>\n" +
-    "\n" +
-    "\n" +
+    "        <div ui-view=\"members\"></div>\n" +
+    "        <div ui-view=\"tasks\"></div>\n" +
+    "        <div ui-view=\"streams\"></div>\n" +
     "    </div>\n" +
+    "<!--</div>-->\n" +
+    "\n" +
+    "");
+}]);
+
+angular.module("project/members.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/members.tpl.html",
+    "<h1>members</h1>\n" +
+    "<div id=\"members\">\n" +
+    "    <br><br>\n" +
+    "    <p>member</p>\n" +
+    "    <p>member</p>\n" +
+    "    <p>member</p>\n" +
+    "    <p>member</p>\n" +
+    "    <p>member</p>\n" +
+    "    <p>member</p>\n" +
+    "    <p>member</p>\n" +
     "</div>\n" +
     "");
+}]);
+
+angular.module("project/streams.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/streams.tpl.html",
+    "<h1>streams</h1>\n" +
+    "<div id=\"streams\">\n" +
+    "	<h3>stream title</h3>\n" +
+    "	<p>tags, description</p>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <h3>stream title</h3>\n" +
+    "   	<p>tags, description</p>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <h3>stream title</h3>\n" +
+    "	<p>tags, description</p>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <h3>stream title</h3>\n" +
+    "   	<p>tags, description</p>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <h3>stream title</h3>\n" +
+    "	<p>tags, description</p>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <h3>stream title</h3>\n" +
+    "   	<p>tags, description</p>\n" +
+    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("project/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/tasks.tpl.html",
+    "<h1>tasks</h1>\n" +
+    "<div id=\"tasks\">\n" +
+    "    <br><br>\n" +
+    "    <p>task</p>\n" +
+    "    <p>task</p>\n" +
+    "    <p>task</p>\n" +
+    "    <p>task</p>\n" +
+    "    <p>task</p>\n" +
+    "    <p>task</p>\n" +
+    "    <p>task</p>\n" +
+    "</div>");
 }]);
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -502,16 +639,11 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "<div ui-view=\"search\">\n" +
     "	<h1>{{searchQuery}}</h1>\n" +
     "	<div>\n" +
-    "\n" +
-    "\n" +
     "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
     "		<div ng-repeat=\"searchResult in searchResults\">\n" +
     "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
     "		</div>\n" +
-    "		<div style=\"height:100px\"></div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
+    "		<div style=\"height:30px\"></div>\n" +
     "		SEARCH\n" +
     "		<div ng-repeat=\"searchResult in searchResults\">\n" +
     "			<br><br>\n" +
