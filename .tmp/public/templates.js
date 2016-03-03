@@ -388,9 +388,9 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
 angular.module("project/channels.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/channels.tpl.html",
     "<h1>channels</h1>\n" +
-    "<h3>channel</h3>\n" +
-    "<h3>channel</h3>\n" +
-    "<h3>channel</h3>\n" +
+    "<div ng-repeat=\"channel in channels\">\n" +
+    "	<h3>channel {{channel}}</h3>\n" +
+    "</div>\n" +
     "\n" +
     "<h5>chat</h5>\n" +
     "<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
@@ -447,57 +447,25 @@ angular.module("project/home.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<!--<div ui-view=\"project\">-->\n" +
-    "    <div id=\"sidebar-wrapper\">\n" +
-    "        <ul class=\"sidebar-nav\">\n" +
-    "            <br>\n" +
-    "            <li><a style=\"font-weight:bold\" href=\"/project/{{project.title}}\">{{project.title}}</a></li>\n" +
-    "            <hr>\n" +
-    "            <li><a href=\"/project/{{project.title}}/channels\">channels</a></li>\n" +
-    "            <!--<li><a href=\"/project/{{project.title}}/tasks\">events</a></li>-->\n" +
-    "            <li><a href=\"/project/{{project.title}}/members\">members</a></li>\n" +
-    "            <li><a href=\"/project/{{project.title}}/streams\">streams</a></li>\n" +
-    "            <li><a href=\"/project/{{project.title}}/tasks\">tasks</a></li>\n" +
-    "            <li><a href=\"/project/{{project.title}}\">tools</a></li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
-    "    <div id=\"main-container\">\n" +
-    "        <!--<div ui-view=\"home\"></div>-->\n" +
-    "        <!--<div id=\"streams\">\n" +
-    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "            <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "        </div>\n" +
-    "        <div id=\"tasks\">\n" +
-    "            <br><br>\n" +
-    "            <p>task</p>\n" +
-    "        </div>\n" +
-    "        <div id=\"html-edit\">\n" +
-    "            <h4>edit html tool</h4>\n" +
-    "            <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
-    "            <hr>\n" +
-    "            <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
-    "            <div style=\"height:100px;\"></div>\n" +
-    "        </div>\n" +
-    "        <div ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "            <a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
-    "            <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
-    "            <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
-    "                <i class=\"fa fa-trash-o\"></i>\n" +
-    "            </button>\n" +
-    "        </div>\n" +
-    "        <form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
-    "            </div>\n" +
-    "            <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
-    "        </form>-->\n" +
-    "                <div ui-view=\"channels\"></div>\n" +
-    "\n" +
-    "        <div ui-view=\"members\"></div>\n" +
-    "        <div ui-view=\"tasks\"></div>\n" +
-    "        <div ui-view=\"streams\"></div>\n" +
-    "    </div>\n" +
-    "<!--</div>-->\n" +
+    "<div id=\"sidebar-wrapper\">\n" +
+    "    <ul class=\"sidebar-nav\">\n" +
+    "        <br>\n" +
+    "        <li><a style=\"font-weight:bold\" href=\"/project/{{project.title}}\">{{project.title}}</a></li>\n" +
+    "        <hr>\n" +
+    "        <li><a href=\"/project/{{project.title}}/channels\">channels</a></li>\n" +
+    "        <li><a href=\"/project/{{project.title}}/members\">members</a></li>\n" +
+    "        <li><a href=\"/project/{{project.title}}/streams\">streams</a></li>\n" +
+    "        <li><a href=\"/project/{{project.title}}/tasks\">tasks</a></li>\n" +
+    "        <li><a href=\"/project/{{project.title}}\">tools</a></li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
+    "<div id=\"main-container\">\n" +
+    "    <div ui-view=\"home\"></div>\n" +
+    "    <div ui-view=\"channels\"></div>\n" +
+    "    <div ui-view=\"members\"></div>\n" +
+    "    <div ui-view=\"tasks\"></div>\n" +
+    "    <div ui-view=\"streams\"></div>\n" +
+    "</div>\n" +
     "\n" +
     "");
 }]);
@@ -505,41 +473,18 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
 angular.module("project/members.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/members.tpl.html",
     "<h1>members</h1>\n" +
-    "<div id=\"members\">\n" +
-    "    <br><br>\n" +
-    "    <p>member</p>\n" +
-    "    <p>member</p>\n" +
-    "    <p>member</p>\n" +
-    "    <p>member</p>\n" +
-    "    <p>member</p>\n" +
-    "    <p>member</p>\n" +
-    "    <p>member</p>\n" +
-    "</div>\n" +
-    "");
+    "<div class=\"member-list\" ng-repeat=\"member in members\">\n" +
+    "	<h3>member {{member}}</h3>\n" +
+    "</div>");
 }]);
 
 angular.module("project/streams.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/streams.tpl.html",
     "<h1>streams</h1>\n" +
-    "<div id=\"streams\">\n" +
-    "	<h3>stream title</h3>\n" +
+    "<div id=\"stream-list\" ng-repeat=\"stream in streams\">\n" +
+    "	<h3>stream title {{stream}}</h3>\n" +
     "	<p>tags, description</p>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "    <h3>stream title</h3>\n" +
-    "   	<p>tags, description</p>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "    <h3>stream title</h3>\n" +
-    "	<p>tags, description</p>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "    <h3>stream title</h3>\n" +
-    "   	<p>tags, description</p>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "    <h3>stream title</h3>\n" +
-    "	<p>tags, description</p>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "    <h3>stream title</h3>\n" +
-    "   	<p>tags, description</p>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "  <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "</div>\n" +
     "");
 }]);
@@ -547,15 +492,8 @@ angular.module("project/streams.tpl.html", []).run(["$templateCache", function($
 angular.module("project/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/tasks.tpl.html",
     "<h1>tasks</h1>\n" +
-    "<div id=\"tasks\">\n" +
-    "    <br><br>\n" +
-    "    <p>task</p>\n" +
-    "    <p>task</p>\n" +
-    "    <p>task</p>\n" +
-    "    <p>task</p>\n" +
-    "    <p>task</p>\n" +
-    "    <p>task</p>\n" +
-    "    <p>task</p>\n" +
+    "<div id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
+    "	<h3>task {{task}}</h3>\n" +
     "</div>");
 }]);
 
