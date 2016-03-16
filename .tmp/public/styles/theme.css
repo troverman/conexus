@@ -6,5 +6,22 @@
     overflow-x: hidden;
 }
 .header{
-	background-color:#484848;
+	background-color:#101010;
 }
+
+.nav-links {
+	font-family: 'Titillium Web', sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size:16px;
+}    
+
+.nav-links a {
+	color: #BDBDBD!important;
+}    
+
+.nav-links:hover a {
+	color: #fff!important;
+}    
+

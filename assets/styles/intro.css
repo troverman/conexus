@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700);
+
 .intro {
 	position:relative;
 	top:0;
@@ -135,11 +137,25 @@ svg {
 }
 
 .shape--fill {
-	fill:rgba(0,0,0,0.62);
+	fill:rgba(0,0,0,0.25);
 }
 
 .text--transparent {
-	fill:rgba(255,255,255,0.25);
+	fill:rgba(255,255,255,0.75);
+	font-family: 'Titillium Web', sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.intro-shade {
+	background: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    z-index: -1;
 }
 
 .svg-defs {

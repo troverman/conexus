@@ -48,41 +48,39 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function($te
 angular.module("header/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("header/index.tpl.html",
     "<div ng-controller=\"HeaderCtrl\">\n" +
-    "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
-    "      <div class=\"container\">\n" +
-    "        <div class=\"navbar-header\">\n" +
-    "          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
-    "            <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "            <span class=\"icon-bar\"></span>\n" +
-    "            <span class=\"icon-bar\"></span>\n" +
-    "            <span class=\"icon-bar\"></span>\n" +
-    "          </button>\n" +
-    "\n" +
-    "          <a class=\"navbar-brand\" href=\"/\" style=\"margin-left:15px\">\n" +
-    "            <img style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
-    "          </a>\n" +
-    "        </div>\n" +
-    "        <div class=\"collapse navbar-collapse\">\n" +
-    "          <ul class=\"nav navbar-nav\">\n" +
-    "            <li><a href=\"/about\"><i class=\"fa fa-info-circle\"></i>About</a></li>\n" +
-    "            <li><a href=\"/connect\"><i class=\"fa fa-random\"></i>Connect</a></li>\n" +
-    "            <li><a href=\"/projects\"><i class=\"fa fa-info-circle\"></i>Projects</a></li>\n" +
-    "            <li><a href=\"/search\"><i class=\"fa fa-search\"></i>Search</a></li>\n" +
-    "            <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
-    "              <div class=\"form-group\">\n" +
-    "                <input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
-    "              </div>\n" +
-    "            </form>\n" +
-    "            <li ng-show=\"currentUser\"><a href=\"/account\"><i class=\"fa fa-briefcase\"></i>Account</a></li>\n" +
-    "            <li ng-show=\"currentUser\"><a href=\"/logout\"><i class=\"fa fa-sign-out\"></i>Logout</a></li>\n" +
-    "            <li ng-show=\"!currentUser\"><a href=\"/register\"><i class=\"fa fa-briefcase\"></i>Register</a></li>\n" +
-    "            <li ng-show=\"!currentUser\"><a href=\"/login\"><i class=\"fa fa-sign-in\"></i>Login</a></li>\n" +
-    "            <li class=\"divider-vertical\"></li>\n" +
-    "\n" +
-    "          </ul>\n" +
-    "        </div><!--/.nav-collapse -->\n" +
+    "  <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
+    "    <div class=\"container\">\n" +
+    "      <div class=\"navbar-header\">\n" +
+    "        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
+    "          <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "        </button>\n" +
+    "        <a class=\"navbar-brand\" href=\"/\" style=\"margin-left:15px\">\n" +
+    "          <img style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
+    "        </a>\n" +
+    "      </div>\n" +
+    "      <div class=\"collapse navbar-collapse\">\n" +
+    "        <ul class=\"nav navbar-nav\">\n" +
+    "          <li class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
+    "          <li class=\"nav-links\"><a href=\"/connect\">Connect</a></li>\n" +
+    "          <li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>\n" +
+    "          <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "              <input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\"\n" +
+    "                     style=\"margin-top: 5px;border-radius: 5px;color:#101010\">\n" +
+    "            </div>\n" +
+    "          </form>\n" +
+    "          <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/account\">Account</a></li>\n" +
+    "          <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/logout\">Logout</a></li>\n" +
+    "          <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
+    "          <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
+    "          <li class=\"divider-vertical\"></li>\n" +
+    "        </ul>\n" +
     "      </div>\n" +
     "    </div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 
@@ -97,52 +95,36 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "<div ng-show=\"!currentUser\">\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div style=\"text-align:center;\">\n" +
-    "		<div style=\"height:100px\"></div>\n" +
-    "		<img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
     "		<div class=\"header-area\">\n" +
-    "			<h1>connect, collab, create</h1>\n" +
-    "			<p class=\"lead\"><strong>a transparent + opensource network</strong></p>\n" +
-    "			<p class=\"lead\">working together toward a common goal</p>\n" +
-    "			<p class=\"lead\">governed through transparent community driven directon</p>\n" +
-    "			<div style=\"height:50px\"></div>\n" +
-    "		</div>\n" +
     "\n" +
+    "		</div>\n" +
     "		<div class=\"dynamic-data\">\n" +
     "			<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
-    "			<div style=\"height:8px\"></div>\n" +
     "			<div ng-repeat=\"searchResult in searchResults\">\n" +
     "				<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
     "			</div>\n" +
-    "			<div style=\"height:200px\"></div>\n" +
-    "			\n" +
     "			<h4>projects</h4>\n" +
     "			<div id=\"project-container\">\n" +
     "				<div ng-repeat=\"project in projects\">\n" +
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div style=\"height:200px\"></div>\n" +
-    "\n" +
     "			<!--<div id=\"stream-container\">\n" +
     "				<div ng-repeat=\"project in projects\">\n" +
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "\n" +
     "			<div id=\"task-container\">\n" +
     "				<div ng-repeat=\"project in projects\">\n" +
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "				</div>\n" +
     "			</div>-->\n" +
-    "\n" +
     "			<h4>members</h4>\n" +
     "			<div id=\"member-container\">\n" +
     "				<div ng-repeat=\"member in members\">\n" +
     "					<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div style=\"height:200px\"></div>\n" +
-    "\n" +
     "		</div>\n" +
     "\n" +
     "		<!--register-->\n" +
@@ -205,11 +187,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("intro/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("intro/index.tpl.html",
-    "<!--<div class=\"intro-container\">\n" +
-    "    <img src=\"/images/intro.jpg\" style=\"height:100%;width:100%;\">\n" +
-    "</div>\n" +
-    "<h1>connecting creators with sponsors</h1>-->\n" +
-    "\n" +
     "<div class=\"intro\" style=\"max-height:700px\">\n" +
     "    <div class=\"intro-container\">\n" +
     "      <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
@@ -220,12 +197,13 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function($temp
     "                dy=\".35em\"\n" +
     "                class=\"medium-text\"\n" +
     "                >\n" +
-    "            connect, collab, create\n" +
+    "            Connect. Collab. Create.\n" +
     "          </text> \n" +
     "        </symbol>\n" +
-    "        <div style=\"text-align:center\">\n" +
-    "          <img src=\"images/conexus-black.png\" style=\"height:100px\">\n" +
-    "        </div>  \n" +
+    "        <div style=\"text-align:center;\">\n" +
+    "          <img style=\"position:absolute;top:35%;bottom:0;left:0;right:0;margin:0 auto;height:100px\" src=\"images/conexus-white.png\">\n" +
+    "        </div>         \n" +
+    "        <div class=\"intro-shade\"></div>  \n" +
     "      </svg> \n" +
     "      <div class=\"box-with-text\">\n" +
     "        <div class=\"text-fill\">\n" +

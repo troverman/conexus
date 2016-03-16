@@ -7,52 +7,36 @@
 <div ng-show="!currentUser">
 	<div ng-include="'intro/index.tpl.html'"></div>
 	<div style="text-align:center;">
-		<div style="height:100px"></div>
-		<img src="images/conexus-black.png" style="height:100px">
 		<div class="header-area">
-			<h1>connect, collab, create</h1>
-			<p class="lead"><strong>a transparent + opensource network</strong></p>
-			<p class="lead">working together toward a common goal</p>
-			<p class="lead">governed through transparent community driven directon</p>
-			<div style="height:50px"></div>
-		</div>
 
+		</div>
 		<div class="dynamic-data">
 			<input ng-keyup="keyPress(searchValue)" ng-model="searchValue">
-			<div style="height:8px"></div>
 			<div ng-repeat="searchResult in searchResults">
 				<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
 			</div>
-			<div style="height:200px"></div>
-			
 			<h4>projects</h4>
 			<div id="project-container">
 				<div ng-repeat="project in projects">
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>
-			<div style="height:200px"></div>
-
 			<!--<div id="stream-container">
 				<div ng-repeat="project in projects">
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>
-
 			<div id="task-container">
 				<div ng-repeat="project in projects">
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>-->
-
 			<h4>members</h4>
 			<div id="member-container">
 				<div ng-repeat="member in members">
 					<a href="/member/{{member.username}}">{{member.username}}</a>
 				</div>
 			</div>
-			<div style="height:200px"></div>
-
 		</div>
 
 		<!--register-->
