@@ -1,0 +1,28 @@
+<!--if logged in-->
+<div ng-show="currentUser">
+  <button class="btn btn-primary blog-button" ng-click="newProjectToggle()">+ project</button>
+  <br><br>
+</div>
+<div ng-show="currentUser">
+  <div ng-show="newProjectToggleVar">
+    <div>
+      <form class="blog-input" role="form" ng-submit="createProject(newProject)">
+        <div class="form-group">
+          <input type="text" placeholder= "project title" ng-model="newProject.title" class="form-control">
+          <input type="text" placeholder= "post url" ng-model="newProject.urlTitle" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--/if logged in-->
+
+<div class="project-list-container">
+  <br><br>
+  <div class="post-container" ng-repeat="project in projects | orderBy:'-createdAt'">
+    <h1 class="title"><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h1>
+  </div>
+  <br><br>
+</div>
+<div style="height:100px;"></div>
