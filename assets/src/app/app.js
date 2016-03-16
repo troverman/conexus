@@ -2,6 +2,7 @@ angular.module( 'conexus', [
     'ui.router',
     'sails.io',
     'angularMoment',
+    'chart.js',
     'lodash',
     'ui.bootstrap',
     'templates-app',

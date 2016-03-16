@@ -2,7 +2,6 @@ angular.module( 'conexus.project', [
 ])
 
 .config(function config( $stateProvider ) {
-
 	$stateProvider.state( 'project', {
         abstract: true,
         url: '/project/:path',
@@ -45,7 +44,15 @@ angular.module( 'conexus.project', [
             }
         }
     })
-
+    .state( 'project.finance', {
+        url: '/finance',
+        views: {
+            "finance": {
+                controller: 'ProjectFinanceCtrl',
+                templateUrl: 'project/finance.tpl.html'
+            }
+        }
+    })
     .state( 'project.channels', {
         url: '/channels',
         views: {
@@ -182,6 +189,18 @@ angular.module( 'conexus.project', [
         MessageModel.create(newMessage).then(function(model) {
             $scope.newMessage = {};
         });
+    };
+})
+
+.controller( 'ProjectFinanceCtrl', function ProjectController( $scope ) {
+    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series = ['Series A', 'Series B'];
+    $scope.data = [
+        [65, 59, 80, 81, 56, 55, 40],
+        [28, 48, 40, 19, 86, 27, 90]
+    ];
+    $scope.onClick = function (points, evt) {
+        console.log(points, evt);
     };
 })
 
