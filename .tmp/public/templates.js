@@ -6,6 +6,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "	<h2>connect, collab, create</h2>\n" +
     "	<br>\n" +
+    "	<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
     "	<p>connect with collaborators, create awesome things</p>\n" +
     "	<p>crowd-owned organizations</p>\n" +
     "	<p>a community of collaborators</p>\n" +
@@ -96,7 +97,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div style=\"text-align:center;\">\n" +
     "		<div class=\"header-area\">\n" +
-    "\n" +
+    "			<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
     "		</div>\n" +
     "		<div class=\"dynamic-data\">\n" +
     "			<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
@@ -393,7 +394,7 @@ angular.module("project/finance.tpl.html", []).run(["$templateCache", function($
     "<h1>finance</h1>\n" +
     "<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
     "    chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
-    "    chart-click=\"onClick\" >\n" +
+    "    chart-click=\"onClick\">\n" +
     "</canvas> ");
 }]);
 
@@ -455,7 +456,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    <div ui-view=\"members\"></div>\n" +
     "    <div ui-view=\"tasks\"></div>\n" +
     "    <div ui-view=\"streams\"></div>\n" +
-    "\n" +
     "</div>\n" +
     "\n" +
     "");

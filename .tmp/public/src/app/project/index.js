@@ -193,6 +193,16 @@ angular.module( 'conexus.project', [
 })
 
 .controller( 'ProjectFinanceCtrl', function ProjectController( $scope, $interval, lodash ) {
+
+    //ChartJsProvider.setOptions({
+    //    responsive: true,
+    //    maintainAspectRatio: false,
+    //});
+
+    $scope.options = {
+        responsive: true,
+        maintainAspectRatio: false,
+    }
     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     $scope.series = ['Series A', 'Series B'];
     $scope.data = [
