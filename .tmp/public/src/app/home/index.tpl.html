@@ -7,10 +7,17 @@
 <div ng-show="!currentUser">
 	<div ng-include="'intro/index.tpl.html'"></div>
 	<div style="text-align:center;">
+
 		<div class="header-area">
-			<p>crowd-sourced, crowd-owned, crowd-operated</p>
+			<h3>crowd-sourced, crowd-owned, crowd-operated</h3>
+			<p>watch the world cre8</p>
+			<p>participate in crowd-sourced, transparent projects</p>
+			<p>collabor8</p>
 		</div>
-		<div class="dynamic-data">
+
+
+
+		<div class="dynamic-data" style="padding-top:100px;padding-bottom:100px;">
 			<input ng-keyup="keyPress(searchValue)" ng-model="searchValue">
 			<div ng-repeat="searchResult in searchResults">
 				<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
@@ -39,9 +46,12 @@
 			</div>
 		</div>
 
+
+
+
 		<!--register-->
 		<div class="register-form">
-			<div class="row">
+			<div class="row" style="background-color:#D8D8D8">
 			    <div class="col-md-6 col-md-offset-3">
 			        <h3>Sign Up</h3>
 			        <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
@@ -82,15 +92,4 @@
 
 	</div>
 </div>
-<div class="footer">
-	2016 conexus
-
-
-	<a href="/about">about</a>
-	<a href="/projects">projects</a>
-	<a href="/">stats</a>
-	<a href="/">transparency</a>
-
-</div>
-
-
+<div ng-include="'footer/index.tpl.html'"></div>

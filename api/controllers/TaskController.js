@@ -23,14 +23,11 @@ module.exports = {
 
 	getByProject: function(req, res) {
 		Task.find()
-		.where({project: req.param('path')})
-
-		.spread(function(model) {
-			Task.subscribe(req, model);
+		.where({project: req.param('id')})
+		.then(function(model) {
+			Task.watch(req);
+			//Task.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
 
@@ -46,21 +43,21 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-		var userId = req.param('user');
 		var model = {
 			title: req.param('title'),
+			project: req.param('project'),
 			taskContent: req.param('taskContent'),
-			user: userId
+			taskValue: req.param('taskValue'),
+			user: req.param('user')
 		};
-
 		Task.create(model)
-		.exec(function(err, Task) {
+		.exec(function(err, task) {
 			if (err) {
 				return console.log(err);
 			}
 			else {
-				Task.publishCreate(Task);
-				res.json(Task);
+				Task.publishCreate(task);
+				res.json(task);
 			}
 		});
 	},

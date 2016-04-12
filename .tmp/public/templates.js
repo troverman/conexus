@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/channels.tpl.html', 'project/finance.tpl.html', 'project/home.tpl.html', 'project/index.tpl.html', 'project/members.tpl.html', 'project/streams.tpl.html', 'project/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/channels.tpl.html', 'project/finance.tpl.html', 'project/home.tpl.html', 'project/index.tpl.html', 'project/members.tpl.html', 'project/streams.tpl.html', 'project/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -15,8 +15,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<img src=\"/images/loading.gif\">\n" +
     "\n" +
     "</div>\n" +
-    "\n" +
-    "");
+    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -43,6 +42,17 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function($te
     "		<a href=\"/member/{{user.username}}\">{{user.username}}</a>\n" +
     "	</div>\n" +
     "	\n" +
+    "</div>");
+}]);
+
+angular.module("footer/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("footer/index.tpl.html",
+    "<div class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
+    "	{{date | date:'yyyy'}} <a href=\"/\">conex.us</a>\n" +
+    "	<a href=\"/about\">about</a>\n" +
+    "	<a href=\"/projects\">projects</a>\n" +
+    "	<a href=\"/\">stats</a>\n" +
+    "	<a href=\"/\">transparency</a>\n" +
     "</div>");
 }]);
 
@@ -96,10 +106,17 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "<div ng-show=\"!currentUser\">\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div style=\"text-align:center;\">\n" +
+    "\n" +
     "		<div class=\"header-area\">\n" +
-    "			<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
+    "			<h3>crowd-sourced, crowd-owned, crowd-operated</h3>\n" +
+    "			<p>watch the world cre8</p>\n" +
+    "			<p>participate in crowd-sourced, transparent projects</p>\n" +
+    "			<p>collabor8</p>\n" +
     "		</div>\n" +
-    "		<div class=\"dynamic-data\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "		<div class=\"dynamic-data\" style=\"padding-top:100px;padding-bottom:100px;\">\n" +
     "			<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
     "			<div ng-repeat=\"searchResult in searchResults\">\n" +
     "				<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
@@ -128,9 +145,12 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			</div>\n" +
     "		</div>\n" +
     "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "		<!--register-->\n" +
     "		<div class=\"register-form\">\n" +
-    "			<div class=\"row\">\n" +
+    "			<div class=\"row\" style=\"background-color:#D8D8D8\">\n" +
     "			    <div class=\"col-md-6 col-md-offset-3\">\n" +
     "			        <h3>Sign Up</h3>\n" +
     "			        <form class=\"form-horizontal\" role=\"form\" action=\"/auth/local/register\" method=\"post\">\n" +
@@ -171,19 +191,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "	</div>\n" +
     "</div>\n" +
-    "<div class=\"footer\">\n" +
-    "	2016 conexus\n" +
-    "\n" +
-    "\n" +
-    "	<a href=\"/about\">about</a>\n" +
-    "	<a href=\"/projects\">projects</a>\n" +
-    "	<a href=\"/\">stats</a>\n" +
-    "	<a href=\"/\">transparency</a>\n" +
-    "\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "");
+    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
 
 angular.module("intro/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -400,14 +408,14 @@ angular.module("project/finance.tpl.html", []).run(["$templateCache", function($
 
 angular.module("project/home.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/home.tpl.html",
-    "<div id=\"streams\">\n" +
+    "<!--<div id=\"streams\">\n" +
     "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "</div>\n" +
     "<div id=\"tasks\">\n" +
     "    <br><br>\n" +
     "    <p>task</p>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
     "<!--\n" +
     "<div id=\"html-edit\">\n" +
     "    <h4>edit html tool</h4>\n" +
@@ -445,6 +453,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <li><a href=\"/project/{{project.title}}/finance\">finance</a></li>\n" +
     "        <li><a href=\"/project/{{project.title}}/members\">members</a></li>\n" +
     "        <li><a href=\"/project/{{project.title}}/streams\">streams</a></li>\n" +
+    "        <li ng-show=\"currentUser\"><a href=\"/project/{{project.title}}\">settings</a></li>\n" +
     "        <li><a href=\"/project/{{project.title}}/tasks\">tasks</a></li>\n" +
     "        <li><a href=\"/project/{{project.title}}\">tools</a></li>\n" +
     "    </ul>\n" +
@@ -483,8 +492,24 @@ angular.module("project/streams.tpl.html", []).run(["$templateCache", function($
 angular.module("project/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/tasks.tpl.html",
     "<h1>tasks</h1>\n" +
+    "<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
+    "	<div class=\"form-group\">\n" +
+    "		<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "	</div>\n" +
+    "	<div class=\"form-group\">\n" +
+    "		<input placeholder=\"task content\" type=\"text\" ng-model=\"newTask.taskContent\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "	</div>\n" +
+    "	<div class=\"form-group\">\n" +
+    "		<input placeholder=\"task value\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "	</div>\n" +
+    "	<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newTask.title\">Submit</button>\n" +
+    "</form>\n" +
+    "\n" +
     "<div id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
-    "	<h3>task {{task}}</h3>\n" +
+    "	<h3>{{task.title}}</h3>\n" +
+    "	<p>{{task.taskValue}}</p>\n" +
+    "	<p>{{task.taskContent}}</p>\n" +
+    "\n" +
     "</div>");
 }]);
 
@@ -509,7 +534,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "  </div>\n" +
     "</div>\n" +
     "<!--/if logged in-->\n" +
-    "\n" +
+    "<h1>projects</h1>\n" +
     "<div class=\"project-list-container\">\n" +
     "  <br><br>\n" +
     "  <div class=\"post-container\" ng-repeat=\"project in projects | orderBy:'-createdAt'\">\n" +
@@ -560,7 +585,25 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<a href=\"/login\">already have an account?</a>");
+    "<a href=\"/login\">already have an account?</a>\n" +
+    "\n" +
+    "<!--<div class=\"row\">\n" +
+    "    <div class=\"form-wrapper\">\n" +
+    "        <div class=\"form-container\">\n" +
+    "            <h1>Welcome to Bidio!</h1>\n" +
+    "            <form class=\"form ng-pristine ng-valid\" role=\"form\" action=\"/auth/local/register\" method=\"post\" _lpchecked=\"1\">\n" +
+    "                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\"></label>\n" +
+    "                <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" name=\"email\" placeholder=\"Email\" value=\"\">\n" +
+    "                <label for=\"inputUsername3\" class=\"col-sm-2 control-label\"></label>\n" +
+    "                <input type=\"text\" class=\"form-control\" id=\"inputUsername3\" name=\"username\" placeholder=\"Username\" value=\"\">\n" +
+    "                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\"></label>\n" +
+    "                <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" name=\"password\" placeholder=\"Password\" value=\"\">\n" +
+    "                <button type=\"submit\" id=\"login-button\">Sign Up</button>\n" +
+    "            </form>\n" +
+    "            <a href=\"/login\"><h3>Already Have An Account?</h3></a>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>-->");
 }]);
 
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {

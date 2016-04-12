@@ -11,6 +11,7 @@ angular.module( 'conexus', [
     'conexus.about',
     'conexus.account',
     'conexus.connect',
+    'conexus.footer',
     'conexus.header',
     'conexus.home',
     'conexus.intro',

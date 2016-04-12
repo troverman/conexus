@@ -6,5 +6,6 @@ angular.module('models', [
 	'models.postvote',
 	'models.project',
 	'models.search',
+	'models.task',
 	'models.user'
 ]);

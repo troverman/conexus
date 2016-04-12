@@ -32,8 +32,8 @@ angular.module( 'conexus.project', [
             messages: function(MessageModel, project){
                 return MessageModel.getByProject(project);
             },
-            tasks: function(project){
-                return {'value': project + ':tasks'};
+            tasks: function(TaskModel, project){
+                return TaskModel.getByProject(project);
             },
             users: function(UserModel, project, $sailsSocket) {
                 return $sailsSocket.get('/api/user/subscribe').then(
@@ -93,8 +93,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            tasks: function() {
-                return [1,2,3,4,5];
+            tasks: function(TaskModel, project){
+                return TaskModel.getByProject(project);
             }
         }
     })
@@ -119,14 +119,16 @@ angular.module( 'conexus.project', [
     $scope.project = project;
 })
 
-.controller( 'ProjectHomeCtrl', function ProjectHomeController( $scope, $sailsSocket, $location, titleService, lodash, config, project, messages, MessageModel ) {
+.controller( 'ProjectHomeCtrl', function ProjectHomeController( $scope, $sailsSocket, $location, titleService, lodash, config, project, messages, MessageModel, tasks ) {
     titleService.setTitle(project.title);
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.newMessage = {};
     $scope.messages = messages;
+    $scope.tasks = tasks;
 
     $sailsSocket.subscribe('message', function (envelope) {
+        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
                 console.log(envelope.data);
@@ -134,6 +136,19 @@ angular.module( 'conexus.project', [
                 break;
             case 'destroyed':
                 lodash.remove($scope.messages, {id: envelope.id});
+                break;
+        }
+    });
+
+    $sailsSocket.subscribe('task', function (envelope) {
+        console.log(envelope.verb)
+        switch(envelope.verb) {
+            case 'created':
+                console.log(envelope.data);
+                $scope.tasks.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.tasks, {id: envelope.id});
                 break;
         }
     });
@@ -224,8 +239,43 @@ angular.module( 'conexus.project', [
     $scope.members = members;
 })
 
-.controller( 'ProjectTasksCtrl', function ProjectController( $scope, tasks) {
+.controller( 'ProjectTasksCtrl', function ProjectController( $scope, config, tasks, project, TaskModel, $sailsSocket) {
+    $scope.currentUser = config.currentUser;
     $scope.tasks = tasks;
+    $scope.project = project
+    console.log(tasks)
+
+    $scope.createTask = function(newTask) {
+        newTask.user = config.currentUser.id;
+        newTask.project = project;
+        TaskModel.create(newTask).then(function(model) {
+            $scope.newTask = {};
+        });
+    };
+
+    $scope.destroyTask = function(task) {
+        // check here if this message belongs to the currentUser
+        console.log(task);
+        if (task.user.id === config.currentUser.id) {
+            MessageModel.delete(message).then(function(model) {
+                // message has been deleted, and removed from $scope.messages
+            });
+        }
+    };
+
+    $sailsSocket.subscribe('task', function (envelope) {
+        console.log(envelope.verb)
+        switch(envelope.verb) {
+            case 'created':
+                console.log(envelope.data);
+                $scope.tasks.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.tasks, {id: envelope.id});
+                break;
+        }
+    });
+
 })
 
 .controller( 'ProjectStreamsCtrl', function ProjectController( $scope, streams) {
