@@ -37,6 +37,19 @@ module.exports = {
 		});
 	},
 
+	getByUser: function(req, res) {
+		var userId = req.param('id');
+		Message.getByUser(userId)
+		.spread(function(model) {
+			Message.watch(req);
+			Message.subscribe(req, model);
+			res.json(model);
+		})
+		.fail(function(err) {
+			res.send(404,err);
+		});
+	},
+
 	create: function (req, res) {
 		var userId = req.param('user');
 		var model = {

@@ -40,10 +40,22 @@ module.exports = {
         });
     },
 
+    getByUser: function(user) {
+        return Message.find()
+        .where({user: user})
+        .sort({createdAt: 'desc'})
+        .populate('user')
+        .populate('project')
+        .then(function (models) {
+            return [models];
+        });
+    },
+
     getAll: function() {
         return Message.find()
         .sort({createdAt: 'desc'})
         .populate('user')
+        .populate('project')
         .then(function (models) {
             return [models];
         });
@@ -52,6 +64,7 @@ module.exports = {
     getOne: function(id) {
         return Message.findOne(id)
         .populate('user')
+        .populate('project')
         .then(function (model) {
             // you have the option to do something with the model here if needed, before returning it to the controller
             return [model];

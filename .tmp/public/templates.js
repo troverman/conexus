@@ -127,6 +127,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "				</div>\n" +
     "			</div>\n" +
+    "			\n" +
     "			<!--<div id=\"stream-container\">\n" +
     "				<div ng-repeat=\"project in projects\">\n" +
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
@@ -137,10 +138,20 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "				</div>\n" +
     "			</div>-->\n" +
+    "\n" +
     "			<h4>members</h4>\n" +
     "			<div id=\"member-container\">\n" +
     "				<div ng-repeat=\"member in members\">\n" +
     "					<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "\n" +
+    "			<h4>messages</h4>\n" +
+    "			<div id=\"member-container\">\n" +
+    "				<div ng-repeat=\"message in messages\">\n" +
+    "					<p>{{message.title}}</p>\n" +
+    "					<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>\n" +
+    "					<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a><hr>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -292,8 +303,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
   $templateCache.put("member/index.tpl.html",
     "<div id=\"header-section\">\n" +
     "  <br>\n" +
+    "  <img style=\"border-radius:100px; \"src=\"/images/mikey.jpg\"/>\n" +
     "  <h4><h1>{{member.username}}</h1></h4>\n" +
-    "  <img src=\"/images/mikey.jpg\"/>\n" +
     "  <form role=\"form\" ng-submit=\"follow()\">\n" +
     "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">follow ({{followers.length}})</button>\n" +
     "  </form>\n" +
@@ -310,6 +321,12 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "  <div ng-repeat=\"follower in followers\">\n" +
     "    <div id=\"timeline-item\">\n" +
     "      <a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div ng-repeat=\"message in messages\">\n" +
+    "    <div id=\"timeline-item\">\n" +
+    "      <a href=\"/project/{{message.project.urlTitle}}\">{{message.title}}</a>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
@@ -473,6 +490,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
 angular.module("project/members.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/members.tpl.html",
     "<h1>members</h1>\n" +
+    "<button ng-click=\"createMember()\">join!</button>\n" +
     "<div class=\"member-list\" ng-repeat=\"member in members\">\n" +
     "	<h3>member {{member}}</h3>\n" +
     "</div>");
@@ -534,13 +552,14 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "  </div>\n" +
     "</div>\n" +
     "<!--/if logged in-->\n" +
-    "<h1>projects</h1>\n" +
-    "<div class=\"project-list-container\">\n" +
+    "<div style=\"height:200px;text-align:center;background-color:rgb(240,240,240)\">\n" +
     "  <br><br>\n" +
+    "  <h1>projects</h1>\n" +
+    "</div>\n" +
+    "<div class=\"project-list-container\">\n" +
     "  <div class=\"post-container\" ng-repeat=\"project in projects | orderBy:'-createdAt'\">\n" +
     "    <h1 class=\"title\"><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h1>\n" +
     "  </div>\n" +
-    "  <br><br>\n" +
     "</div>\n" +
     "<div style=\"height:100px;\"></div>");
 }]);

@@ -17,12 +17,13 @@
   </div>
 </div>
 <!--/if logged in-->
-<h1>projects</h1>
-<div class="project-list-container">
+<div style="height:200px;text-align:center;background-color:rgb(240,240,240)">
   <br><br>
+  <h1>projects</h1>
+</div>
+<div class="project-list-container">
   <div class="post-container" ng-repeat="project in projects | orderBy:'-createdAt'">
     <h1 class="title"><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h1>
   </div>
-  <br><br>
 </div>
 <div style="height:100px;"></div>

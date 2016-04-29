@@ -86,6 +86,10 @@ module.exports.routes = {
   'get /api/message': 'MessageController.getAll',
   'get /api/message/:id': 'MessageController.getOne',
   'get /api/message/project/:id': 'MessageController.getByProject',
+
+  //'get /api/message/channel/:id': 'MessageController.getByChannel',
+
+  'get /api/message/user/:id': 'MessageController.getByUser',
   'post /api/message': 'MessageController.create',
   'delete /api/message/:id': 'MessageController.destroy',
 
@@ -118,6 +122,11 @@ module.exports.routes = {
    */
   'get /api/project': 'ProjectController.getAll',
   'get /api/project/:id': 'ProjectController.getOne',
+
+  'get /api/project/:id/member': 'ProjectController.getMembers',
+  'post /api/project/member': 'ProjectController.createMember',
+
+
   'get /api/project/url/:path': 'ProjectController.getByUrl',
   'post /api/project': 'ProjectController.create',
   'delete /api/project/:id': 'ProjectController.destroy',

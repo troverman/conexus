@@ -20,6 +20,9 @@ module.exports = {
             type: 'string',
             required: true
         },
+        finance: {
+            model: 'finance',
+        },
         project: {
             model: 'project',
         },

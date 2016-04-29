@@ -1,7 +1,7 @@
 <div id="header-section">
   <br>
+  <img style="border-radius:100px; "src="/images/mikey.jpg"/>
   <h4><h1>{{member.username}}</h1></h4>
-  <img src="/images/mikey.jpg"/>
   <form role="form" ng-submit="follow()">
     <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">follow ({{followers.length}})</button>
   </form>
@@ -18,6 +18,12 @@
   <div ng-repeat="follower in followers">
     <div id="timeline-item">
       <a href="/member/{{follower.follower.username}}">{{follower.follower.username}}</a>
+    </div>
+  </div>
+
+  <div ng-repeat="message in messages">
+    <div id="timeline-item">
+      <a href="/project/{{message.project.urlTitle}}">{{message.title}}</a>
     </div>
   </div>
 

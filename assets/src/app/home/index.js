@@ -20,17 +20,21 @@ angular.module( 'conexus.home', [
 				return UserModel.getAll().then(function(models) {
                     return models;
                 });
+			},
+			messages: function(MessageModel){
+				return MessageModel.getAll();
 			}
 
 		}
 	});
 })
 
-.controller( 'HomeCtrl', function HomeController( $scope, $q, titleService, config, projects, ProjectModel, members, UserModel, SearchModel ) {
+.controller( 'HomeCtrl', function HomeController( $scope, $q, titleService, config, projects, ProjectModel, members, messages, UserModel, SearchModel ) {
 	titleService.setTitle('conexus');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
 	$scope.members = members;
+	$scope.messages = messages;
 
 	$scope.searchResults = [];
 	$scope.keyPress = function(searchValue){

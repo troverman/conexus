@@ -11,6 +11,12 @@ angular.module('models.message', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.get(url).then(success, error);
     };
 
+    this.getByUser = function(model) {
+        var url = utils.prepareUrl('message/user/' + model.id);
+        console.log(url)
+        return $sailsSocket.get(url).then(success, error);
+    };
+
     this.create = function(newModel) {
         var url = utils.prepareUrl('message');
         return $sailsSocket.post(url, newModel).then(success, error);

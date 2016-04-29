@@ -6,7 +6,7 @@ angular.module('models.follower', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.get(url).then(success, error);
     };
 
-    this.getFollowersById = function(model) {
+    this.getByUser = function(model) {
         var url = utils.prepareUrl('follower/followers/' + model.id);
         return $sailsSocket.get(url).then(success, error);
     };

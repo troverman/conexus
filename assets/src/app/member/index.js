@@ -11,67 +11,30 @@ angular.module( 'conexus.member', [
 			}
 		},
 		resolve: {
-            followers: function(FollowerModel, $stateParams, $http, $q) {
 
-                return $q.when()
-                .then(function () {
-
-                    var deferred = $q.defer();
-                    var url = '/api/user/username/' + $stateParams.path;
-
-                    $http.get(url).
-                        success(function(data, status, headers, config) {
-                            deferred.resolve(data);
-                        }).
-                        error(function(data, status, headers, config) {
-                    });
-
-                    return deferred.promise;
-
-                })
-                .then(function (data) {
-                    return FollowerModel.getFollowersById(data).then(function(models) {
-                        return models;
-                    });
-                });
-
-
+            member: function(UserModel, $stateParams){
+                return UserModel.getByUsername($stateParams.path);
+            },
+            
+            followers: function(FollowerModel, $stateParams, $http, $q, member) {
+                return FollowerModel.getByUser(member);
+            },
+            messages: function(MessageModel, member) {
+                return MessageModel.getByUser(member);
             }
+
         }
 	});
 })
 
-.controller( 'MemberCtrl', function MemberController( $http, $location, $scope, $sailsSocket, $stateParams, lodash, config, titleService, FollowerModel, followers ) {
-
+.controller( 'MemberCtrl', function MemberController( $http, $location, $scope, $sailsSocket, $stateParams, lodash, config, titleService, FollowerModel, followers, MessageModel, member, messages ) {
 	titleService.setTitle('member');
 	$scope.currentUser = config.currentUser;
-
-	var url = '/api/user/username/' + $stateParams.path;
-	$http.get(url).
-	    success(function(data, status, headers, config) {
-	      $scope.member = data;
-	      if (data == ''){
-	      	$location.url('/');
-	      };
-	    }).
-	    error(function(data, status, headers, config) {
-    });
-
-
-    $scope.newFollower = {};
+    $scope.member = member;
+    if(!$scope.member){$location.path('/')}
+    $scope.messages = messages;
     $scope.followers = followers;
-
- 	$sailsSocket.subscribe('follower', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                //console.log(envelope.data);
-                $scope.followers.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.followers, {id: envelope.id});
-                break;
-        }
-    });
+    $scope.newFollower = {};
 
     $scope.unfollow = function(member) {
         // check here if this message belongs to the currentUser
@@ -83,17 +46,25 @@ angular.module( 'conexus.member', [
     };
 
     $scope.follow = function(newModel) {
-
-    	$scope.follow_model = {};
-        $scope.follow_model.followed = $scope.member
-        $scope.follow_model.follower = config.currentUser
-
-        FollowerModel.create($scope.follow_model).then(function(model) {
+    	$scope.followModel = {};
+        $scope.followModel.followed = $scope.member
+        $scope.followModel.follower = config.currentUser
+        FollowerModel.create($scope.followModel).then(function(model) {
             $scope.newFollower = {};
         });
     };
 
-
+    $sailsSocket.subscribe('follower', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                //console.log(envelope.data);
+                $scope.followers.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.followers, {id: envelope.id});
+                break;
+        }
+    });
 
 
 });

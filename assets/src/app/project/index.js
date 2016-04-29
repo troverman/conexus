@@ -79,8 +79,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            members: function() {
-                return [1,2,3,4,5];
+            members: function(MemberModel, project) {
+                return  MemberModel.getByProject(project);
             }
         }
     })
@@ -235,8 +235,20 @@ angular.module( 'conexus.project', [
     };
 })
 
-.controller( 'ProjectMembersCtrl', function ProjectController( $scope, members) {
+.controller( 'ProjectMembersCtrl', function ProjectController( $scope, config, project, members, MemberModel) {
+    $scope.currentUser = config.currentUser;
+    $scope.project = project
     $scope.members = members;
+    $scope.newMember = {}
+
+    $scope.createMember = function() {
+        $scope.newMember.user = config.currentUser.id;
+        $scope.newMember.project = project.id;
+        MemberModel.create(newMember).then(function(model) {
+            $scope.newMember = {};
+        });
+    };
+    
 })
 
 .controller( 'ProjectTasksCtrl', function ProjectController( $scope, config, tasks, project, TaskModel, $sailsSocket) {

@@ -28,6 +28,7 @@
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>
+			
 			<!--<div id="stream-container">
 				<div ng-repeat="project in projects">
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
@@ -38,10 +39,20 @@
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>-->
+
 			<h4>members</h4>
 			<div id="member-container">
 				<div ng-repeat="member in members">
 					<a href="/member/{{member.username}}">{{member.username}}</a>
+				</div>
+			</div>
+
+			<h4>messages</h4>
+			<div id="member-container">
+				<div ng-repeat="message in messages">
+					<p>{{message.title}}</p>
+					<a href="/member/{{message.user.username}}">{{message.user.username}}</a>
+					<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a><hr>
 				</div>
 			</div>
 		</div>
