@@ -115,8 +115,15 @@ angular.module( 'conexus.project', [
     
 })
 
-.controller( 'ProjectCtrl', function ProjectController( $scope, project) {
+.controller( 'ProjectCtrl', function ProjectController( $scope, project, config) {
+    $scope.currentUser = config.currentUser;
     $scope.project = project;
+    $scope.isProjectCreator = function(message) {
+        if($scope.currentUser){
+            return $scope.currentUser.id == $scope.project.user
+        }
+        else return false;
+    };
 })
 
 .controller( 'ProjectHomeCtrl', function ProjectHomeController( $scope, $sailsSocket, $location, titleService, lodash, config, project, messages, MessageModel, tasks ) {

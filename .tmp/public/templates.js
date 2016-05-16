@@ -464,7 +464,10 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<div id=\"sidebar-wrapper\">\n" +
     "    <ul class=\"sidebar-nav\">\n" +
     "        <br>\n" +
-    "        <li><a style=\"font-weight:bold\" href=\"/project/{{project.title}}\">{{project.title}}</a></li>\n" +
+    "        <li>\n" +
+    "            <a style=\"font-weight:bold\" href=\"/project/{{project.title}}\">{{project.title}}</a>\n" +
+    "            <a href=\"/project/{{project.title}}/edit\" ng-show=\"isProjectCreator()\">edit</a>\n" +
+    "        </li>\n" +
     "        <hr>\n" +
     "        <li><a href=\"/project/{{project.title}}/channels\">channels</a></li>\n" +
     "        <li><a href=\"/project/{{project.title}}/finance\">finance</a></li>\n" +

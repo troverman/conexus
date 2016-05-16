@@ -1,7 +1,10 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <br>
-        <li><a style="font-weight:bold" href="/project/{{project.title}}">{{project.title}}</a></li>
+        <li>
+            <a style="font-weight:bold" href="/project/{{project.title}}">{{project.title}}</a>
+            <a href="/project/{{project.title}}/edit" ng-show="isProjectCreator()">edit</a>
+        </li>
         <hr>
         <li><a href="/project/{{project.title}}/channels">channels</a></li>
         <li><a href="/project/{{project.title}}/finance">finance</a></li>
