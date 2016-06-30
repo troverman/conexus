@@ -1,4 +1,4 @@
-<div ng-controller="HeaderCtrl">
+<div ng-controller="NavCtrl">
   <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -20,7 +20,7 @@
           <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;">
             <div class="form-group">
               <input ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search"
-                     style="margin-top: 5px;border-radius: 5px;color:#101010">
+                     style="margin-top: 3px;border-radius: 5px;color:#101010">
             </div>
           </form>
           <li class="nav-links" ng-show="currentUser"><a href="/account">Account</a></li>

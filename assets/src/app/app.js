@@ -12,7 +12,7 @@ angular.module( 'conexus', [
     'conexus.account',
     'conexus.connect',
     'conexus.footer',
-    'conexus.header',
+    'conexus.nav',
     'conexus.home',
     'conexus.intro',
     'conexus.login',

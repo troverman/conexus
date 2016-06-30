@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'header/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'post/index.tpl.html', 'project/channels.tpl.html', 'project/finance.tpl.html', 'project/home.tpl.html', 'project/index.tpl.html', 'project/members.tpl.html', 'project/streams.tpl.html', 'project/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/channels.tpl.html', 'project/finance.tpl.html', 'project/home.tpl.html', 'project/index.tpl.html', 'project/members.tpl.html', 'project/streams.tpl.html', 'project/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -53,45 +53,6 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "	<a href=\"/projects\">projects</a>\n" +
     "	<a href=\"/\">stats</a>\n" +
     "	<a href=\"/\">transparency</a>\n" +
-    "</div>");
-}]);
-
-angular.module("header/index.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("header/index.tpl.html",
-    "<div ng-controller=\"HeaderCtrl\">\n" +
-    "  <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
-    "    <div class=\"container\">\n" +
-    "      <div class=\"navbar-header\">\n" +
-    "        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
-    "          <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "          <span class=\"icon-bar\"></span>\n" +
-    "          <span class=\"icon-bar\"></span>\n" +
-    "          <span class=\"icon-bar\"></span>\n" +
-    "        </button>\n" +
-    "        <a class=\"navbar-brand\" href=\"/\" style=\"margin-left:15px\">\n" +
-    "          <img style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
-    "        </a>\n" +
-    "      </div>\n" +
-    "      <div class=\"collapse navbar-collapse\">\n" +
-    "        <ul class=\"nav navbar-nav\">\n" +
-    "          <li class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
-    "          <li class=\"nav-links\"><a href=\"/connect\">Connect</a></li>\n" +
-    "          <li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>\n" +
-    "          <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\"\n" +
-    "                     style=\"margin-top: 5px;border-radius: 5px;color:#101010\">\n" +
-    "            </div>\n" +
-    "          </form>\n" +
-    "          <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/account\">Account</a></li>\n" +
-    "          <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/logout\">Logout</a></li>\n" +
-    "          <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
-    "          <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
-    "          <li class=\"divider-vertical\"></li>\n" +
-    "        </ul>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
     "</div>");
 }]);
 
@@ -336,6 +297,45 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "\n" +
     "");
+}]);
+
+angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/index.tpl.html",
+    "<div ng-controller=\"NavCtrl\">\n" +
+    "  <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
+    "    <div class=\"container\">\n" +
+    "      <div class=\"navbar-header\">\n" +
+    "        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
+    "          <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "        </button>\n" +
+    "        <a class=\"navbar-brand\" href=\"/\" style=\"margin-left:15px\">\n" +
+    "          <img style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
+    "        </a>\n" +
+    "      </div>\n" +
+    "      <div class=\"collapse navbar-collapse\">\n" +
+    "        <ul class=\"nav navbar-nav\">\n" +
+    "          <li class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
+    "          <li class=\"nav-links\"><a href=\"/connect\">Connect</a></li>\n" +
+    "          <li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>\n" +
+    "          <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "              <input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\"\n" +
+    "                     style=\"margin-top: 3px;border-radius: 5px;color:#101010\">\n" +
+    "            </div>\n" +
+    "          </form>\n" +
+    "          <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/account\">Account</a></li>\n" +
+    "          <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/logout\">Logout</a></li>\n" +
+    "          <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
+    "          <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
+    "          <li class=\"divider-vertical\"></li>\n" +
+    "        </ul>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "</div>");
 }]);
 
 angular.module("post/index.tpl.html", []).run(["$templateCache", function($templateCache) {
