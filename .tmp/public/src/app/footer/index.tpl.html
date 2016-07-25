@@ -1,7 +1,21 @@
+<style>
+.footer{
+	min-height:200px;
+	background-color:#414141;
+	padding:50px;
+}
+.footer a{
+	color:white;
+	padding:5px;
+}
+</style>
+
 <div class="footer" ng-controller="FooterCtrl">
 	{{date | date:'yyyy'}} <a href="/">conex.us</a>
 	<a href="/about">about</a>
 	<a href="/projects">projects</a>
 	<a href="/">stats</a>
 	<a href="/">transparency</a>
+	<img style="height:50px;float:right" src="images/conexus-white.png">
+
 </div>

@@ -47,12 +47,26 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("footer/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("footer/index.tpl.html",
+    "<style>\n" +
+    ".footer{\n" +
+    "	min-height:200px;\n" +
+    "	background-color:#414141;\n" +
+    "	padding:50px;\n" +
+    "}\n" +
+    ".footer a{\n" +
+    "	color:white;\n" +
+    "	padding:5px;\n" +
+    "}\n" +
+    "</style>\n" +
+    "\n" +
     "<div class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	{{date | date:'yyyy'}} <a href=\"/\">conex.us</a>\n" +
     "	<a href=\"/about\">about</a>\n" +
     "	<a href=\"/projects\">projects</a>\n" +
     "	<a href=\"/\">stats</a>\n" +
     "	<a href=\"/\">transparency</a>\n" +
+    "	<img style=\"height:50px;float:right\" src=\"images/conexus-white.png\">\n" +
+    "\n" +
     "</div>");
 }]);
 
@@ -68,6 +82,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div style=\"text-align:center;\">\n" +
     "\n" +
+    "\n" +
     "		<div class=\"header-area\">\n" +
     "			<h3>crowd-sourced, crowd-owned, crowd-operated</h3>\n" +
     "			<p>watch the world cre8</p>\n" +
@@ -75,6 +90,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			<p>collabor8</p>\n" +
     "		</div>\n" +
     "\n" +
+    "		<div>\n" +
+    "		</div>\n" +
     "\n" +
     "\n" +
     "		<div class=\"dynamic-data\" style=\"padding-top:100px;padding-bottom:100px;\">\n" +
@@ -116,9 +133,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "		<!--register-->\n" +
     "		<div class=\"register-form\">\n" +
@@ -274,10 +288,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "<div id=\"section1\">\n" +
     "\n" +
-    "\n" +
     "  <a>filter</a>\n" +
     "  <a>time</a>\n" +
-    "\n" +
     "\n" +
     "  <div ng-repeat=\"follower in followers\">\n" +
     "    <div id=\"timeline-item\">\n" +
@@ -293,7 +305,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
+    "<div ng-include=\"'footer/index.tpl.html'\"></div>\n" +
     "\n" +
     "\n" +
     "");
@@ -555,6 +567,10 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "  </div>\n" +
     "</div>\n" +
     "<!--/if logged in-->\n" +
+    "<!--<div ng-show=\"!currentUser\">\n" +
+    "  <button class=\"btn btn-primary blog-button\"><a href=\"/login\">+ project</a></button>\n" +
+    "  <br><br>\n" +
+    "</div>-->\n" +
     "<div style=\"height:200px;text-align:center;background-color:rgb(240,240,240)\">\n" +
     "  <br><br>\n" +
     "  <h1>projects</h1>\n" +
@@ -564,7 +580,8 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "    <h1 class=\"title\"><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h1>\n" +
     "  </div>\n" +
     "</div>\n" +
-    "<div style=\"height:100px;\"></div>");
+    "<div style=\"height:100px;\"></div>\n" +
+    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
 
 angular.module("register/index.tpl.html", []).run(["$templateCache", function($templateCache) {
