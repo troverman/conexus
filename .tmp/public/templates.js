@@ -2,18 +2,28 @@ angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<div style=\"margin-left:20%;margin-right:20%\">\n" +
+    "<div>\n" +
+    "	<div id=\"logo-container\">\n" +
+    "		<img src=\"/images/loading.gif\">\n" +
+    "	</div>\n" +
     "\n" +
-    "	<h2>connect, collab, create</h2>\n" +
-    "	<br>\n" +
-    "	<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
-    "	<p>connect with collaborators, create awesome things</p>\n" +
-    "	<p>crowd-owned organizations</p>\n" +
-    "	<p>a community of collaborators</p>\n" +
-    "	<p>transparent contrubition, equatable representation</p>\n" +
-    "\n" +
-    "	<img src=\"/images/loading.gif\">\n" +
-    "\n" +
+    "	<div id=\"title-container\">\n" +
+    "		<h1>connect, collab, create</h1>\n" +
+    "		<br>\n" +
+    "	</div>\n" +
+    "	<div id=\"about-section1\">\n" +
+    "		<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
+    "	</div>\n" +
+    "	<div id=\"about-section2\">\n" +
+    "		<p>connect with collaborators, create awesome things</p>\n" +
+    "	</div>\n" +
+    "	<div id=\"about-section3\">\n" +
+    "		<p>crowd-owned organizations</p>\n" +
+    "		<p>a community of collaborators</p>\n" +
+    "	</div>\n" +
+    "	<div id=\"about-section4\">\n" +
+    "		<p>transparent contrubition, equatable representation</p>\n" +
+    "	</div>\n" +
     "</div>\n" +
     "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
@@ -94,13 +104,17 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		</div>\n" +
     "\n" +
     "\n" +
-    "		<div class=\"dynamic-data\" style=\"padding-top:100px;padding-bottom:100px;\">\n" +
-    "			<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
-    "			<div ng-repeat=\"searchResult in searchResults\">\n" +
-    "				<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "		<div class=\"dynamic-data\">\n" +
+    "			<div id=\"search-container\">\n" +
+    "				<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
+    "				<div ng-repeat=\"searchResult in searchResults\">\n" +
+    "					<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "				</div>\n" +
     "			</div>\n" +
-    "			<h4>projects</h4>\n" +
+    "\n" +
+    "\n" +
     "			<div id=\"project-container\">\n" +
+    "				<h2>projects</h2>\n" +
     "				<div ng-repeat=\"project in projects\">\n" +
     "					<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
     "				</div>\n" +
@@ -117,28 +131,29 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				</div>\n" +
     "			</div>-->\n" +
     "\n" +
-    "			<h4>members</h4>\n" +
     "			<div id=\"member-container\">\n" +
+    "				<h2>members</h2>\n" +
     "				<div ng-repeat=\"member in members\">\n" +
     "					<a href=\"/member/{{member.username}}\">{{member.username}}</a>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "\n" +
-    "			<h4>messages</h4>\n" +
-    "			<div id=\"member-container\">\n" +
+    "			<div id=\"message-container\">\n" +
+    "				<h2>messages</h2>\n" +
     "				<div ng-repeat=\"message in messages\">\n" +
     "					<p>{{message.title}}</p>\n" +
     "					<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>\n" +
     "					<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a><hr>\n" +
     "				</div>\n" +
     "			</div>\n" +
+    "\n" +
     "		</div>\n" +
     "\n" +
     "		<!--register-->\n" +
     "		<div class=\"register-form\">\n" +
-    "			<div class=\"row\" style=\"background-color:#D8D8D8\">\n" +
+    "			<div class=\"row\">\n" +
     "			    <div class=\"col-md-6 col-md-offset-3\">\n" +
-    "			        <h3>Sign Up</h3>\n" +
+    "			        <h3>Sign Up</h3><hr>\n" +
     "			        <form class=\"form-horizontal\" role=\"form\" action=\"/auth/local/register\" method=\"post\">\n" +
     "			            <div class=\"form-group\">\n" +
     "			                <label for=\"inputUsername3\" class=\"col-sm-2 control-label\">Username</label>\n" +
@@ -165,14 +180,14 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			                </div>\n" +
     "			            </div>\n" +
     "			            <div class=\"form-group\">\n" +
-    "			                <div class=\"col-sm-offset-2 col-sm-10\">\n" +
+    "			                <div class=\"col-sm-offset-1 col-sm-10\">\n" +
     "			                    <button type=\"submit\" class=\"btn btn-default\">Sign in</button>\n" +
     "			                </div>\n" +
     "			            </div>\n" +
     "			        </form>\n" +
+    "					<a href=\"/login\">already have an account?</a>\n" +
     "			    </div>\n" +
     "			</div>\n" +
-    "			<div style=\"height:200px\"></div>\n" +
     "		</div>\n" +
     "\n" +
     "	</div>\n" +
@@ -267,9 +282,6 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "        <li><img width=\"160px\" src=\"images/conex.png\"></li>\n" +
     "    </ul>\n" +
     "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "");
 }]);

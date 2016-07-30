@@ -1,0 +1,38 @@
+.dynamic-data{
+
+}
+.header-area{
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+}
+.register-form{
+	background-color:rgb(250,250,250)
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+}
+#search-container{
+	background-color:rgb(230,230,230);
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+	max-height:350px;
+	overflow:scroll;
+}
+#project-container{
+	background-color:rgb(240,240,240);
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+}
+#member-container{
+	background-color:rgb(230,230,230);
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+}
+#message-container{
+	background-color:rgb(240,240,240);
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+	max-height:350px;
+	//overflow:scroll;
+	overflow:hidden;
+
+}

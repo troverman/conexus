@@ -1,38 +1,42 @@
-.dynamic-data{
 
-}
-.header-area{
+#logo-container{
 	padding-top:2.5%;
 	padding-bottom:2.5%;
+	padding-left:20%;
+	padding-right:20%;
 }
-.register-form{
-	background-color:rgb(250,250,250)
-	padding-top:2.5%;
-	padding-bottom:2.5%;
-}
-#search-container{
-	background-color:rgb(230,230,230);
-	padding-top:2.5%;
-	padding-bottom:2.5%;
-	max-height:350px;
-	overflow:scroll;
-}
-#project-container{
+#title-container{
 	background-color:rgb(240,240,240);
 	padding-top:2.5%;
 	padding-bottom:2.5%;
+	padding-left:20%;
+	padding-right:20%;
 }
-#member-container{
+#about-section1{
 	background-color:rgb(230,230,230);
 	padding-top:2.5%;
 	padding-bottom:2.5%;
+	padding-left:20%;
+	padding-right:20%;
 }
-#message-container{
+#about-section2{
 	background-color:rgb(240,240,240);
 	padding-top:2.5%;
 	padding-bottom:2.5%;
-	max-height:350px;
-	//overflow:scroll;
-	overflow:hidden;
-
+	padding-left:20%;
+	padding-right:20%;
+}
+#about-section3{
+	background-color:rgb(230,230,230);
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+	padding-left:20%;
+	padding-right:20%;
+}
+#about-section4{
+	background-color:rgb(240,240,240);
+	padding-top:2.5%;
+	padding-bottom:2.5%;
+	padding-left:20%;
+	padding-right:20%;
 }
