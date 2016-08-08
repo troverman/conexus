@@ -8,6 +8,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	</div>\n" +
     "	<div id=\"title-container\">\n" +
     "		<h1>connect, collab, create</h1>\n" +
+    "		<p>a transparent network</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section1\">\n" +
     "		<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
@@ -19,7 +20,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"col-md-8\">\n" +
     "					<p>connect with collaborators, create awesome things</p>\n" +
     "					<p>live streaming</p>\n" +
-    "					<p>24/7 continual hackathon</p>\n" +
+    "					<p>a 24/7 continual hackathon</p>\n" +
     "					<p>watch the world create</p>\n" +
     "				</div>\n" +
     "				<div class=\"col-md-4\">\n" +
@@ -31,7 +32,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div id=\"about-section3\">\n" +
     "		<p>crowd-owned organizations</p>\n" +
     "		<p>a community of collaborators</p>\n" +
-    "		<p>how can we work together for a common goal?</p>\n" +
+    "		<p>how can we work together toward a common goal?</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section4\">\n" +
     "		<h4>transparency</h4>\n" +
