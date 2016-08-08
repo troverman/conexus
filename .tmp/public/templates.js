@@ -6,22 +6,35 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div id=\"logo-container\">\n" +
     "		<img src=\"/images/loading.gif\">\n" +
     "	</div>\n" +
-    "\n" +
     "	<div id=\"title-container\">\n" +
     "		<h1>connect, collab, create</h1>\n" +
-    "		<br>\n" +
     "	</div>\n" +
     "	<div id=\"about-section1\">\n" +
     "		<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
+    "		<p>paving the way for a transparent future</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section2\">\n" +
-    "		<p>connect with collaborators, create awesome things</p>\n" +
+    "		<div class=\"container\">\n" +
+    "			<div class=\"row\">\n" +
+    "				<div class=\"col-md-8\">\n" +
+    "					<p>connect with collaborators, create awesome things</p>\n" +
+    "					<p>live streaming</p>\n" +
+    "					<p>24/7 continual hackathon</p>\n" +
+    "					<p>watch the world create</p>\n" +
+    "				</div>\n" +
+    "				<div class=\"col-md-4\">\n" +
+    "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "	<div id=\"about-section3\">\n" +
     "		<p>crowd-owned organizations</p>\n" +
     "		<p>a community of collaborators</p>\n" +
+    "		<p>how can we work together for a common goal?</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section4\">\n" +
+    "		<h4>transparency</h4>\n" +
     "		<p>transparent contrubition, equatable representation</p>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -51,6 +64,9 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function($te
     "	<div ng-repeat=\"user in users\">\n" +
     "		<a href=\"/member/{{user.username}}\">{{user.username}}</a>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<p>what is this page?</p>\n" +
+    "	<p>connect in your gps, bank info, and live stream google glass: +1 crazy</p>\n" +
     "	\n" +
     "</div>");
 }]);

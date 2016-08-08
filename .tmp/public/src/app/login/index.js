@@ -14,7 +14,7 @@ angular.module( 'conexus.login', [
 })
 
 .controller( 'LoginCtrl', function LoginController( $scope, titleService, config ) {
-	titleService.setTitle('login');
+	titleService.setTitle('login - conex.us');
 	$scope.currentUser = config.currentUser;
 
 });

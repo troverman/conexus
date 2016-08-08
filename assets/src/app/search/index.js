@@ -42,9 +42,10 @@ angular.module( 'conexus.search', [
 })
 
 .controller( 'SearchController', function SearchController( $scope, lodash, config, titleService, searchResults, SearchModel, $stateParams ) {
-    titleService.setTitle('Search');
     $scope.searchResults = searchResults;
     $scope.searchQuery = $stateParams.searchQuery;
+
+    titleService.setTitle($scope.searchQuery + ' - conex.us');
 
     $scope.keyPress = function(searchValue){
         SearchModel.search(searchValue).then(function(models){

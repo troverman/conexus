@@ -14,7 +14,7 @@ angular.module( 'conexus.register', [
 })
 
 .controller( 'RegisterCtrl', function RegisterController( $scope, titleService, config ) {
-	titleService.setTitle('register');
+	titleService.setTitle('register - conex.us');
 	$scope.currentUser = config.currentUser;
 
 });

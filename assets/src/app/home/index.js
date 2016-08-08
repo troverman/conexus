@@ -30,7 +30,7 @@ angular.module( 'conexus.home', [
 })
 
 .controller( 'HomeCtrl', function HomeController( $scope, $q, titleService, config, projects, ProjectModel, members, messages, UserModel, SearchModel ) {
-	titleService.setTitle('conexus');
+	titleService.setTitle('conex.us');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
 	$scope.members = members;

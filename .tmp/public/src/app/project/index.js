@@ -127,7 +127,7 @@ angular.module( 'conexus.project', [
 })
 
 .controller( 'ProjectHomeCtrl', function ProjectHomeController( $scope, $sailsSocket, $location, titleService, lodash, config, project, messages, MessageModel, tasks ) {
-    titleService.setTitle(project.title);
+    titleService.setTitle(project.title + ' - conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.newMessage = {};

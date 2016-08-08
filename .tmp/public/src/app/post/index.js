@@ -26,7 +26,7 @@ angular.module( 'conexus.post', [
 })
 
 .controller( 'PostController', function PostController( $scope, $sailsSocket, lodash, config, titleService, PostModel, PostVoteModel, posts, postvotes) {
-    titleService.setTitle('Posts');
+    titleService.setTitle('posts - conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.posts = posts;

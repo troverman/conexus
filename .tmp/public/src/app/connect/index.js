@@ -14,7 +14,7 @@ angular.module( 'conexus.connect', [
 })
 
 .controller( 'ConnectCtrl', function ConnectController( $scope, titleService, UserModel ) {
-	titleService.setTitle('Connect');
+	titleService.setTitle('connect - conex.us');
 
 	UserModel.getAll().then(function(users){
 		$scope.users = users;

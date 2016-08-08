@@ -14,5 +14,5 @@ angular.module( 'conexus.account', [
 })
 
 .controller( 'AccountCtrl', function AccountController( $scope, titleService ) {
-	titleService.setTitle('Account');
+	titleService.setTitle('account - conex.us');
 });

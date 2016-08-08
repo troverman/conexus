@@ -28,9 +28,9 @@ angular.module( 'conexus.member', [
 })
 
 .controller( 'MemberCtrl', function MemberController( $http, $location, $scope, $sailsSocket, $stateParams, lodash, config, titleService, FollowerModel, followers, MessageModel, member, messages ) {
-	titleService.setTitle('member');
 	$scope.currentUser = config.currentUser;
     $scope.member = member;
+    titleService.setTitle($scope.member.username + ' - conex.us');
     if(!$scope.member){$location.path('/')}
     $scope.messages = messages;
     $scope.followers = followers;

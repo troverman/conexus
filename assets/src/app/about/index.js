@@ -14,5 +14,5 @@ angular.module( 'conexus.about', [
 })
 
 .controller( 'AboutCtrl', function AboutController( $scope, titleService ) {
-	titleService.setTitle('About');
+	titleService.setTitle('about - conex.us');
 });
