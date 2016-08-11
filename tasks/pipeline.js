@@ -15,7 +15,8 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'styles/**/*.css'
+  'styles/**/*.css',
+  'bower_components/bootstrap/dist/css/bootstrap.min.css',
 ];
 
 
@@ -24,6 +25,7 @@ var cssFilesToInject = [
 var jsFilesToInject = [
   'bower_components/angular/angular.js',
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  'bower_components/bootstrap/dist/js/bootstrap.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.js',
   'bower_components/sails.io.js/dist/sails.io.js',
   'bower_components/angularSails/dist/ngsails.io.js',
