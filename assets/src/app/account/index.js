@@ -6,7 +6,7 @@ angular.module( 'conexus.account', [
 		url: '/account',
 		views: {
 			"main": {
-				controller: 'AccountController',
+				controller: 'AccountCtrl',
 				templateUrl: 'account/index.tpl.html'
 			}
 		}
