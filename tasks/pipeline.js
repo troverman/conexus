@@ -24,6 +24,7 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
   'bower_components/angular/angular.js',
+  'bower_components/jquery/dist/jquery-3.1.0.min.js',
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   'bower_components/bootstrap/dist/js/bootstrap.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.js',

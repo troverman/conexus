@@ -27,7 +27,8 @@ module.exports = function(sails) {
           grantTokenViaAjax: true,
           protectionEnabled: true,
           origin: '-',
-          routesDisabled: '-'
+          routesDisabled: '-',
+          route: '/csrfToken'
         };
       }
       else if (sails.config.csrf === false) {
@@ -35,7 +36,8 @@ module.exports = function(sails) {
           grantTokenViaAjax: false,
           protectionEnabled: false,
           origin: '-',
-          routesDisabled: '-'
+          routesDisabled: '-',
+          route: '/csrfToken'
         };
       }
       // If user provides ANY object (including empty object), enable all default
@@ -45,11 +47,21 @@ module.exports = function(sails) {
           grantTokenViaAjax: true,
           protectionEnabled: true,
           origin: '-',
-          routesDisabled: '-'
+          routesDisabled: '-',
+          route: '/csrfToken'
         });
       }
+      // Create a route path for getting _csrf parameter
+      var csrfRoute = {};
+      csrfRoute[sails.config.csrf.route] = {
+        target: csrfToken,
+        cors: {
+          origin: sails.config.csrf.origin,
+          credentials: true
+        }
+      };
       // Add the csrfToken directly to the config'd routes, so that the CORS hook can process it
-      sails.config.routes["/csrfToken"] = {target: csrfToken, cors: {origin: sails.config.csrf.origin, credentials:true}};
+      sails.config.routes = sails.util.extend(csrfRoute, sails.config.routes);
     },
 
     initialize: function(cb) {
@@ -65,7 +77,7 @@ module.exports = function(sails) {
           var allowCrossOriginCSRF = sails.config.csrf.origin.split(',').map(trim).indexOf(req.headers.origin) > -1;
 
           if (sails.config.csrf.protectionEnabled) {
-            var connect = require('express/node_modules/connect');
+            var connect = require('connect');
 
             try {
               return connect.csrf()(req, res, function() {
@@ -105,7 +117,12 @@ module.exports = function(sails) {
       });
 
       sails.on('router:after', function() {
-        sails.router.bind('/csrfToken', csrfToken, 'get', {cors: {origin: sails.config.csrf.origin, credentials: true}});
+        sails.router.bind(sails.config.csrf.route, csrfToken, 'get', {
+          cors: {
+            origin: sails.config.csrf.origin,
+            credentials: true
+          }
+        });
       });
 
       cb();

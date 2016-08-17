@@ -1,25 +1,16 @@
 <div ng-show="currentUser">
-
 	projects
 	following
-
 </div>
 <div ng-show="!currentUser">
 	<div ng-include="'intro/index.tpl.html'"></div>
 	<div style="text-align:center;">
-
-
 		<div class="header-area">
 			<h3>crowd-sourced, crowd-owned, crowd-operated</h3>
 			<p>watch the world cre8</p>
 			<p>participate in crowd-sourced, transparent projects</p>
 			<p>collabor8</p>
 		</div>
-
-		<div>
-		</div>
-
-
 		<div class="dynamic-data">
 			<div id="search-container">
 				<input ng-keyup="keyPress(searchValue)" ng-model="searchValue">
@@ -27,15 +18,12 @@
 					<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
 				</div>
 			</div>
-
-
 			<div id="project-container">
 				<h2>projects</h2>
 				<div ng-repeat="project in projects">
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>
-			
 			<!--<div id="stream-container">
 				<div ng-repeat="project in projects">
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
@@ -46,14 +34,12 @@
 					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 				</div>
 			</div>-->
-
 			<div id="member-container">
 				<h2>members</h2>
 				<div ng-repeat="member in members">
 					<a href="/member/{{member.username}}">{{member.username}}</a>
 				</div>
 			</div>
-
 			<div id="message-container">
 				<h2>messages</h2>
 				<div ng-repeat="message in messages">
@@ -62,9 +48,7 @@
 					<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a><hr>
 				</div>
 			</div>
-
 		</div>
-
 		<!--register-->
 		<div class="register-form">
 			<div class="row">
@@ -105,6 +89,5 @@
 			    </div>
 			</div>
 		</div>
-
 	</div>
 </div>

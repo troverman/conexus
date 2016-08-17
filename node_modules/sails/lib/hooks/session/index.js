@@ -22,7 +22,7 @@ var signCookie = require('cookie-signature').sign;
 
 // (this dependency is only here for sails.session.generate()-
 //  which is really only here to enable socket lifecycle callbacks)
-var ConnectSession = require('express/node_modules/connect').middleware.session.Session;
+var ConnectSession = require('connect').middleware.session.Session;
 
 
 
@@ -35,7 +35,7 @@ module.exports = function(app) {
     defaults: {
       session: {
         adapter: 'memory',
-        key: "sails.sid"
+        key: 'sails.sid'
       }
     },
 
