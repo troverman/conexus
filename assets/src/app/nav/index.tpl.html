@@ -17,7 +17,7 @@
           <li class="nav-links"><a href="/about"></i>About</a></li>
           <li class="nav-links"><a href="/connect">Connect</a></li>
           <li class="nav-links"><a href="/projects">Projects</a></li>
-          <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;" style="width:100%;margin-left:0;">
+          <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;" style=""><!--media query style="width:100%;margin-left:0;"-->"
             <div class="form-group">
               <input ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search"
                      style="margin-top: 3px;border-radius: 5px;color:#101010">
