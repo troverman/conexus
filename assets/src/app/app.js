@@ -24,7 +24,6 @@ angular.module( 'conexus', [
     'conexus.projects',
     'conexus.register',
     'conexus.search'
-
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {

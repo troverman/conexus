@@ -13,6 +13,7 @@ angular.module( 'conexus.account', [
 	});
 })
 
-.controller( 'AccountCtrl', function AccountController( $scope, titleService ) {
+.controller( 'AccountCtrl', function AccountController( $scope, config, titleService ) {
 	titleService.setTitle('account - conex.us');
+	$scope.currentUser = config.currentUser;
 });
