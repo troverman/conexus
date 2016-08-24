@@ -5,6 +5,8 @@ angular.module( 'conexus', [
     'chart.js',
     'lodash',
     'ui.bootstrap',
+    'nemLogging',
+    'uiGmapgoogle-maps',
     'templates-app',
     'services',
     'models',
@@ -44,7 +46,17 @@ angular.module( 'conexus', [
     $locationProvider.html5Mode(true);
 
 
-})
+},
+
+function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBfn7VlFh9rYu_RQHIc3eUtcrrrm1PkObQ',
+        v: '3.17',
+        libraries: 'weather,geometry'
+    });
+}
+
+)
 
 .run( function run () {
     moment.locale('en');

@@ -11,13 +11,33 @@ angular.module( 'conexus.connect', [
 			}
 		}
 	});
-})
+},
 
-.controller( 'ConnectCtrl', function ConnectController( $scope, titleService, UserModel ) {
+function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBfn7VlFh9rYu_RQHIc3eUtcrrrm1PkObQ',
+        v: '3.17',
+        libraries: 'weather,geometry'
+    });
+}
+
+)
+
+.controller( 'ConnectCtrl', function ConnectController( $scope, titleService, UserModel, uiGmapGoogleMapApi ) {
 	titleService.setTitle('connect - conex.us');
+
+	$scope.map = {
+		center: {latitude: 39.443659, longitude: -83.082276 },
+		zoom: 8
+	};
+	$scope.options = {scrollwheel: false};
+	$scope.windowOptions = {visible: false};
+
 
 	UserModel.getAll().then(function(users){
 		$scope.users = users;
 	});
+
+
 
 });

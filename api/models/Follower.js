@@ -41,6 +41,7 @@ module.exports = {
 
     getFollowers: function(followed_model) {
         return Follower.find()
+        .sort({createdAt: 'desc'})
         .populate('followed')
         .populate('follower')
         .where({followed: followed_model})
@@ -51,6 +52,7 @@ module.exports = {
 
     getFollowing: function(follower_model) {
         return Follower.find()
+        .sort({createdAt: 'desc'})
         .populate('followed')
         .populate('follower')
         .where({follower: follower_model})
