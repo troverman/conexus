@@ -109,9 +109,6 @@ digraph dependencies {
         "uiGmapPromise"[label="uiGmapPromise"]
         "uiGmapPromise" -> "uiGmapBasePolysParentModel"
       
-        "uiGmapFitHelper"[label="uiGmapFitHelper"]
-        "uiGmapFitHelper" -> "uiGmapBasePolysParentModel"
-      
     
       
         "uiGmapLogger"[label="uiGmapLogger"]
@@ -206,9 +203,6 @@ digraph dependencies {
       
         "uiGmapLogger"[label="uiGmapLogger"]
         "uiGmapLogger" -> "uiGmapMarkersParentModel"
-      
-        "uiGmapSpiderfierMarkerManager"[label="uiGmapSpiderfierMarkerManager"]
-        "uiGmapSpiderfierMarkerManager" -> "uiGmapMarkersParentModel"
       
     
       

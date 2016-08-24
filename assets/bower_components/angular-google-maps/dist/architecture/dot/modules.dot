@@ -28,8 +28,6 @@ digraph dependencies {
   node[shape="ellipse",style="filled",color=2]
   
     
-      "nemLogging" -> "uiGmapgoogle-maps.providers"
-    
   
     
   

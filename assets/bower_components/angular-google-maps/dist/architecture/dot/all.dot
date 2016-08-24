@@ -28,8 +28,6 @@ digraph dependencies {
 
     
       
-        "uiGmapgoogle-maps.providers" -> "nemLogging"
-      
     
       
     
@@ -89,8 +87,6 @@ digraph dependencies {
       
 
       
-        "uiGmapGoogleMapApiManualLoader"[label="uiGmapGoogleMapApiManualLoader", color=5]
-      
 
       
         "uiGmapMapScriptLoader"[label="uiGmapMapScriptLoader", color=6]
@@ -116,8 +112,6 @@ digraph dependencies {
 
       
 
-      
-        "uiGmapgoogle-maps.providers" -> "uiGmapGoogleMapApiManualLoader"
       
 
       
@@ -146,11 +140,6 @@ digraph dependencies {
       
 
       
-        
-          "uiGmapMapScriptLoader"[label="uiGmapMapScriptLoader"]
-          "uiGmapMapScriptLoader" -> "uiGmapGoogleMapApiManualLoader"
-        
-      
 
       
         
@@ -172,8 +161,6 @@ digraph dependencies {
         "uiGmapGoogleMapsUtilV3"[label="uiGmapGoogleMapsUtilV3", color=5]
       
         "uiGmapDataStructures"[label="uiGmapDataStructures", color=5]
-      
-        "uiGmapMarkerSpiderfier"[label="uiGmapMarkerSpiderfier", color=5]
       
 
       
@@ -203,8 +190,6 @@ digraph dependencies {
       
         "uiGmapgoogle-maps.wrapped" -> "uiGmapDataStructures"
       
-        "uiGmapgoogle-maps.wrapped" -> "uiGmapMarkerSpiderfier"
-      
 
       
 
@@ -232,11 +217,6 @@ digraph dependencies {
       
         
       
-        
-      
-        
-          "uiGmapGoogleMapApi"[label="uiGmapGoogleMapApi"]
-          "uiGmapGoogleMapApi" -> "uiGmapMarkerSpiderfier"
         
       
 
@@ -476,6 +456,9 @@ digraph dependencies {
           "uiGmapLogger"[label="uiGmapLogger"]
           "uiGmapLogger" -> "uiGmapFitHelper"
         
+          "uiGmap_async"[label="uiGmap_async"]
+          "uiGmap_async" -> "uiGmapFitHelper"
+        
       
         
           "uiGmapLogger"[label="uiGmapLogger"]
@@ -484,9 +467,6 @@ digraph dependencies {
       
         
       
-        
-          "nemSimpleLogger"[label="nemSimpleLogger"]
-          "nemSimpleLogger" -> "uiGmapLogger"
         
       
         
@@ -511,6 +491,9 @@ digraph dependencies {
         
           "uiGmapGmapUtil"[label="uiGmapGmapUtil"]
           "uiGmapGmapUtil" -> "uiGmapModelKey"
+        
+          "uiGmapPromise"[label="uiGmapPromise"]
+          "uiGmapPromise" -> "uiGmapModelKey"
         
       
         
@@ -542,15 +525,11 @@ digraph dependencies {
       
 
       
-        "uiGmapGoogleMapObjectManager"[label="uiGmapGoogleMapObjectManager", color=5]
-      
 
       
         "uiGmapClustererMarkerManager"[label="uiGmapClustererMarkerManager", color=6]
       
         "uiGmapMarkerManager"[label="uiGmapMarkerManager", color=6]
-      
-        "uiGmapSpiderfierMarkerManager"[label="uiGmapSpiderfierMarkerManager", color=6]
       
 
 
@@ -572,15 +551,11 @@ digraph dependencies {
       
 
       
-        "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapGoogleMapObjectManager"
-      
 
       
         "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapClustererMarkerManager"
       
         "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapMarkerManager"
-      
-        "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapSpiderfierMarkerManager"
       
 
       
@@ -603,8 +578,6 @@ digraph dependencies {
       
 
       
-        
-      
 
       
         
@@ -617,9 +590,6 @@ digraph dependencies {
           "uiGmapPropMap"[label="uiGmapPropMap"]
           "uiGmapPropMap" -> "uiGmapClustererMarkerManager"
         
-          "uiGmapEventsHelper"[label="uiGmapEventsHelper"]
-          "uiGmapEventsHelper" -> "uiGmapClustererMarkerManager"
-        
       
         
           "uiGmapLogger"[label="uiGmapLogger"]
@@ -630,20 +600,6 @@ digraph dependencies {
         
           "uiGmapPropMap"[label="uiGmapPropMap"]
           "uiGmapPropMap" -> "uiGmapMarkerManager"
-        
-      
-        
-          "uiGmapLogger"[label="uiGmapLogger"]
-          "uiGmapLogger" -> "uiGmapSpiderfierMarkerManager"
-        
-          "uiGmapFitHelper"[label="uiGmapFitHelper"]
-          "uiGmapFitHelper" -> "uiGmapSpiderfierMarkerManager"
-        
-          "uiGmapPropMap"[label="uiGmapPropMap"]
-          "uiGmapPropMap" -> "uiGmapSpiderfierMarkerManager"
-        
-          "uiGmapMarkerSpiderfier"[label="uiGmapMarkerSpiderfier"]
-          "uiGmapMarkerSpiderfier" -> "uiGmapSpiderfierMarkerManager"
         
       
 
@@ -1076,9 +1032,6 @@ digraph dependencies {
           "uiGmapPromise"[label="uiGmapPromise"]
           "uiGmapPromise" -> "uiGmapBasePolysParentModel"
         
-          "uiGmapFitHelper"[label="uiGmapFitHelper"]
-          "uiGmapFitHelper" -> "uiGmapBasePolysParentModel"
-        
       
         
           "uiGmapLogger"[label="uiGmapLogger"]
@@ -1173,9 +1126,6 @@ digraph dependencies {
         
           "uiGmapLogger"[label="uiGmapLogger"]
           "uiGmapLogger" -> "uiGmapMarkersParentModel"
-        
-          "uiGmapSpiderfierMarkerManager"[label="uiGmapSpiderfierMarkerManager"]
-          "uiGmapSpiderfierMarkerManager" -> "uiGmapMarkersParentModel"
         
       
         
@@ -1567,6 +1517,9 @@ digraph dependencies {
         
       
         
+          "uiGmapLogger"[label="uiGmapLogger"]
+          "uiGmapLogger" -> "uiGmapMap"
+        
           "uiGmapGmapUtil"[label="uiGmapGmapUtil"]
           "uiGmapGmapUtil" -> "uiGmapMap"
         
@@ -1596,9 +1549,6 @@ digraph dependencies {
         
           "uiGmapEventsHelper"[label="uiGmapEventsHelper"]
           "uiGmapEventsHelper" -> "uiGmapMap"
-        
-          "uiGmapGoogleMapObjectManager"[label="uiGmapGoogleMapObjectManager"]
-          "uiGmapGoogleMapObjectManager" -> "uiGmapMap"
         
       
         
@@ -1636,6 +1586,9 @@ digraph dependencies {
           "uiGmapIPolygon"[label="uiGmapIPolygon"]
           "uiGmapIPolygon" -> "uiGmapPolygon"
         
+          "uiGmaparray-sync"[label="uiGmaparray-sync"]
+          "uiGmaparray-sync" -> "uiGmapPolygon"
+        
           "uiGmapPolygonChildModel"[label="uiGmapPolygonChildModel"]
           "uiGmapPolygonChildModel" -> "uiGmapPolygon"
         
@@ -1643,6 +1596,9 @@ digraph dependencies {
         
           "uiGmapIPolygon"[label="uiGmapIPolygon"]
           "uiGmapIPolygon" -> "uiGmapPolygons"
+        
+          "uiGmaparray-sync"[label="uiGmaparray-sync"]
+          "uiGmaparray-sync" -> "uiGmapPolygons"
         
           "uiGmapPolygonsParentModel"[label="uiGmapPolygonsParentModel"]
           "uiGmapPolygonsParentModel" -> "uiGmapPolygons"
@@ -1655,6 +1611,9 @@ digraph dependencies {
           "uiGmapIPolyline"[label="uiGmapIPolyline"]
           "uiGmapIPolyline" -> "uiGmapPolyline"
         
+          "uiGmaparray-sync"[label="uiGmaparray-sync"]
+          "uiGmaparray-sync" -> "uiGmapPolyline"
+        
           "uiGmapPolylineChildModel"[label="uiGmapPolylineChildModel"]
           "uiGmapPolylineChildModel" -> "uiGmapPolyline"
         
@@ -1662,6 +1621,9 @@ digraph dependencies {
         
           "uiGmapIPolyline"[label="uiGmapIPolyline"]
           "uiGmapIPolyline" -> "uiGmapPolylines"
+        
+          "uiGmaparray-sync"[label="uiGmaparray-sync"]
+          "uiGmaparray-sync" -> "uiGmapPolylines"
         
           "uiGmapPolylinesParentModel"[label="uiGmapPolylinesParentModel"]
           "uiGmapPolylinesParentModel" -> "uiGmapPolylines"

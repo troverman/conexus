@@ -272,6 +272,9 @@ digraph dependencies {
       
     
       
+        "uiGmapLogger"[label="uiGmapLogger"]
+        "uiGmapLogger" -> "uiGmapMap"
+      
         "uiGmapGmapUtil"[label="uiGmapGmapUtil"]
         "uiGmapGmapUtil" -> "uiGmapMap"
       
@@ -301,9 +304,6 @@ digraph dependencies {
       
         "uiGmapEventsHelper"[label="uiGmapEventsHelper"]
         "uiGmapEventsHelper" -> "uiGmapMap"
-      
-        "uiGmapGoogleMapObjectManager"[label="uiGmapGoogleMapObjectManager"]
-        "uiGmapGoogleMapObjectManager" -> "uiGmapMap"
       
     
       
@@ -341,6 +341,9 @@ digraph dependencies {
         "uiGmapIPolygon"[label="uiGmapIPolygon"]
         "uiGmapIPolygon" -> "uiGmapPolygon"
       
+        "uiGmaparray-sync"[label="uiGmaparray-sync"]
+        "uiGmaparray-sync" -> "uiGmapPolygon"
+      
         "uiGmapPolygonChildModel"[label="uiGmapPolygonChildModel"]
         "uiGmapPolygonChildModel" -> "uiGmapPolygon"
       
@@ -348,6 +351,9 @@ digraph dependencies {
       
         "uiGmapIPolygon"[label="uiGmapIPolygon"]
         "uiGmapIPolygon" -> "uiGmapPolygons"
+      
+        "uiGmaparray-sync"[label="uiGmaparray-sync"]
+        "uiGmaparray-sync" -> "uiGmapPolygons"
       
         "uiGmapPolygonsParentModel"[label="uiGmapPolygonsParentModel"]
         "uiGmapPolygonsParentModel" -> "uiGmapPolygons"
@@ -360,6 +366,9 @@ digraph dependencies {
         "uiGmapIPolyline"[label="uiGmapIPolyline"]
         "uiGmapIPolyline" -> "uiGmapPolyline"
       
+        "uiGmaparray-sync"[label="uiGmaparray-sync"]
+        "uiGmaparray-sync" -> "uiGmapPolyline"
+      
         "uiGmapPolylineChildModel"[label="uiGmapPolylineChildModel"]
         "uiGmapPolylineChildModel" -> "uiGmapPolyline"
       
@@ -367,6 +376,9 @@ digraph dependencies {
       
         "uiGmapIPolyline"[label="uiGmapIPolyline"]
         "uiGmapIPolyline" -> "uiGmapPolylines"
+      
+        "uiGmaparray-sync"[label="uiGmaparray-sync"]
+        "uiGmaparray-sync" -> "uiGmapPolylines"
       
         "uiGmapPolylinesParentModel"[label="uiGmapPolylinesParentModel"]
         "uiGmapPolylinesParentModel" -> "uiGmapPolylines"

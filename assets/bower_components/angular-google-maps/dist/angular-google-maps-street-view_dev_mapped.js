@@ -1,9 +1,9 @@
-/*! angular-google-maps 2.3.3 2016-06-03
+/*! angular-google-maps 2.1.5 2015-06-18
  *  AngularJS directives for Google Maps
  *  git: https://github.com/angular-ui/angular-google-maps.git
  */
 ;
-(function( window, angular, _, undefined ){
+(function( window, angular, undefined ){
   'use strict';
 /*
 !
@@ -38,7 +38,7 @@ Nicholas McCready - https://twitter.com/nmccready
  */
 
 (function() {
-  angular.module('uiGmapgoogle-maps.providers', ['nemLogging']);
+  angular.module('uiGmapgoogle-maps.providers', []);
 
   angular.module('uiGmapgoogle-maps.wrapped', []);
 
@@ -64,7 +64,6 @@ Nicholas McCready - https://twitter.com/nmccready
 ;angular.module('uiGmapgoogle-maps.wrapped')
 .service('uiGmapuuid', function() {
   //BEGIN REPLACE
-  /* istanbul ignore next */
   /*
  Version: core-1.0
  The MIT License: Copyright (c) 2012 LiosK.
@@ -77,9 +76,8 @@ return UUID;
 ;(function() {
   angular.module('uiGmapgoogle-maps.providers').factory('uiGmapMapScriptLoader', [
     '$q', 'uiGmapuuid', function($q, uuid) {
-      var getScriptUrl, includeScript, isGoogleMapsLoaded, scriptId, usedConfiguration;
+      var getScriptUrl, includeScript, isGoogleMapsLoaded, scriptId;
       scriptId = void 0;
-      usedConfiguration = void 0;
       getScriptUrl = function(options) {
         if (options.china) {
           return 'http://maps.google.cn/maps/api/js?';
@@ -92,8 +90,8 @@ return UUID;
         }
       };
       includeScript = function(options) {
-        var omitOptions, query, script, scriptElem;
-        omitOptions = ['transport', 'isGoogleMapsForWork', 'china', 'preventLoad'];
+        var omitOptions, query, script;
+        omitOptions = ['transport', 'isGoogleMapsForWork', 'china'];
         if (options.isGoogleMapsForWork) {
           omitOptions.push('key');
         }
@@ -101,8 +99,7 @@ return UUID;
           return k + '=' + v;
         });
         if (scriptId) {
-          scriptElem = document.getElementById(scriptId);
-          scriptElem.parentNode.removeChild(scriptElem);
+          document.getElementById(scriptId).remove();
         }
         query = query.join('&');
         script = document.createElement('script');
@@ -127,29 +124,16 @@ return UUID;
             window[randomizedFunctionName] = null;
             deferred.resolve(window.google.maps);
           };
-          if (window.navigator.connection && window.Connection && window.navigator.connection.type === window.Connection.NONE && !options.preventLoad) {
+          if (window.navigator.connection && window.Connection && window.navigator.connection.type === window.Connection.NONE) {
             document.addEventListener('online', function() {
               if (!isGoogleMapsLoaded()) {
                 return includeScript(options);
               }
             });
-          } else if (!options.preventLoad) {
+          } else {
             includeScript(options);
           }
-          usedConfiguration = options;
-          usedConfiguration.randomizedFunctionName = randomizedFunctionName;
           return deferred.promise;
-        },
-        manualLoad: function() {
-          var config;
-          config = usedConfiguration;
-          if (!isGoogleMapsLoaded()) {
-            return includeScript(config);
-          } else {
-            if (window[config.randomizedFunctionName]) {
-              return window[config.randomizedFunctionName]();
-            }
-          }
         }
       };
     }
@@ -161,7 +145,7 @@ return UUID;
       v: '3',
       libraries: '',
       language: 'en',
-      preventLoad: false
+      sensor: 'false'
     };
     this.configure = function(options) {
       angular.extend(this.options, options);
@@ -174,29 +158,75 @@ return UUID;
       })(this)
     ];
     return this;
-  }).service('uiGmapGoogleMapApiManualLoader', [
-    'uiGmapMapScriptLoader', function(loader) {
-      return {
-        load: function() {
-          loader.manualLoad();
+  });
+
+}).call(this);
+;(function() {
+  angular.module('uiGmapgoogle-maps.directives.api.utils').service('uiGmapLogger', [
+    '$log', function($log) {
+      var LEVELS, Logger, log, maybeExecLevel;
+      LEVELS = {
+        log: 1,
+        info: 2,
+        debug: 3,
+        warn: 4,
+        error: 5,
+        none: 6
+      };
+      maybeExecLevel = function(level, current, fn) {
+        if (level >= current) {
+          return fn();
         }
       };
+      log = function(logLevelFnName, msg) {
+        if ($log != null) {
+          return $log[logLevelFnName](msg);
+        } else {
+          return console[logLevelFnName](msg);
+        }
+      };
+      Logger = (function() {
+        function Logger() {
+          var logFns;
+          this.doLog = true;
+          logFns = {};
+          ['log', 'info', 'debug', 'warn', 'error'].forEach((function(_this) {
+            return function(level) {
+              return logFns[level] = function(msg) {
+                if (_this.doLog) {
+                  return maybeExecLevel(LEVELS[level], _this.currentLevel, function() {
+                    return log(level, msg);
+                  });
+                }
+              };
+            };
+          })(this));
+          this.LEVELS = LEVELS;
+          this.currentLevel = LEVELS.error;
+          this.log = logFns['log'];
+          this.info = logFns['info'];
+          this.debug = logFns['debug'];
+          this.warn = logFns['warn'];
+          this.error = logFns['error'];
+        }
+
+        Logger.prototype.spawn = function() {
+          return new Logger();
+        };
+
+        Logger.prototype.setLog = function(someLogger) {
+          return $log = someLogger;
+        };
+
+        return Logger;
+
+      })();
+      return new Logger();
     }
   ]);
 
 }).call(this);
 ;(function() {
-  angular.module('uiGmapgoogle-maps.directives.api.utils').service('uiGmapLogger', [
-    'nemSimpleLogger', function(nemSimpleLogger) {
-      return nemSimpleLogger.spawn();
-    }
-  ]);
-
-}).call(this);
-;
-/*global _:true, angular:true, google:true */
-
-(function() {
   angular.module('uiGmapgoogle-maps.directives.api.utils').service('uiGmapGmapUtil', [
     'uiGmapLogger', '$compile', function(Logger, $compile) {
       var _isFalse, _isTruthy, getCoords, getLatitude, getLongitude, validateCoords;
@@ -228,9 +258,7 @@ return UUID;
         if (!value) {
           return;
         }
-        if (value instanceof google.maps.LatLng) {
-          return value;
-        } else if (Array.isArray(value) && value.length === 2) {
+        if (Array.isArray(value) && value.length === 2) {
           return new google.maps.LatLng(value[1], value[0]);
         } else if (angular.isDefined(value.type) && value.type === 'Point') {
           return new google.maps.LatLng(value.coordinates[1], value.coordinates[0]);
@@ -441,6 +469,16 @@ return UUID;
           }
           return result;
         },
+        extendMapBounds: function(map, points) {
+          var bounds, i;
+          bounds = new google.maps.LatLngBounds();
+          i = 0;
+          while (i < points.length) {
+            bounds.extend(points.getAt(i));
+            i++;
+          }
+          return map.fitBounds(bounds);
+        },
         getPath: function(object, key) {
           var obj;
           if ((key == null) || !_.isString(key)) {
@@ -496,7 +534,7 @@ return UUID;
             return _.compact(_.map(eventObj.events, function(eventHandler, eventName) {
               var doIgnore;
               if (ignores) {
-                doIgnore = _(ignores).includes(eventName);
+                doIgnore = _(ignores).contains(eventName);
               }
               if (eventObj.events.hasOwnProperty(eventName) && angular.isFunction(eventObj.events[eventName]) && !doIgnore) {
                 return google.maps.event.addListener(gObject, eventName, function() {
@@ -510,16 +548,14 @@ return UUID;
           }
         },
         removeEvents: function(listeners) {
-          var key, l;
           if (!listeners) {
             return;
           }
-          for (key in listeners) {
-            l = listeners[key];
-            if (l && listeners.hasOwnProperty(key)) {
-              google.maps.event.removeListener(l);
+          return listeners.forEach(function(l) {
+            if (l) {
+              return google.maps.event.removeListener(l);
             }
-          }
+          });
         }
       };
     }
@@ -674,5 +710,5 @@ StreetViewPanorama Directive to care of basic initialization of StreetViewPanora
   ]);
 
 }).call(this);
-}( window, angular, _));
+}( window,angular));
 //# sourceMappingURL=angular-google-maps-street-view_dev_mapped.js.map
