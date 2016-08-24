@@ -15,9 +15,9 @@ angular.module( 'conexus.connect', [
 
 function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyBfn7VlFh9rYu_RQHIc3eUtcrrrm1PkObQ',
-        v: '3.17',
-        libraries: 'weather,geometry'
+        key: 'AIzaSyDKPi-Krk_GCd_YfHS4ghUH3P4afPtPstA',
+        v: '3.20',
+        libraries: 'weather,geometry,visualization'
     });
 }
 
@@ -37,7 +37,5 @@ function(uiGmapGoogleMapApiProvider) {
 	UserModel.getAll().then(function(users){
 		$scope.users = users;
 	});
-
-
 
 });
