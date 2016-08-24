@@ -15,7 +15,8 @@ angular.module( 'conexus.connect', [
 
 function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyDKPi-Krk_GCd_YfHS4ghUH3P4afPtPstA',
+        //key: 'AIzaSyDKPi-Krk_GCd_YfHS4ghUH3P4afPtPstA',
+		key: 'AIzaSyBfn7VlFh9rYu_RQHIc3eUtcrrrm1PkObQ',
         v: '3.17',
         libraries: 'weather,geometry'
     });
