@@ -5,6 +5,8 @@ angular.module( 'conexus', [
     'chart.js',
     'lodash',
     'ui.bootstrap',
+    'nemLogging',
+    'uiGmapgoogle-maps',
     'templates-app',
     'services',
     'models',
@@ -42,7 +44,6 @@ angular.module( 'conexus', [
         }
     });
     $locationProvider.html5Mode(true);
-
 
 })
 

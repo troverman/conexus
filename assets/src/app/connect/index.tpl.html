@@ -1,9 +1,20 @@
+<style type="text/css">
+    .angular-google-map-container { height: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+</style>
+<div itemscope itemtype="Map" class="map-outter bottom-contact">
+    <div class="gmap-container" id="gmap">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+        </ui-gmap-google-map>
+    </div>
+</div>
+
 <div style="margin-left:20%;margin-right:20%">
 
-	<h2>connect</h2>
+	<h1>connect</h1><hr>
+	<div class="spacing-20"></div>
 
 	<div ng-repeat="user in users">
-		<a href="/member/{{user.username}}">{{user.username}}</a>
+		<h4><a href="/member/{{user.username}}">{{user.username}}</a></h4><hr>
 	</div>
 
 	<p>what is this page?</p>

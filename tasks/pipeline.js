@@ -32,6 +32,8 @@ var jsFilesToInject = [
   'bower_components/angularSails/dist/ngsails.io.js',
   'bower_components/lodash/lodash.js',
   'bower_components/moment/moment.js',
+  'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
+  'bower_components/angular-google-maps/dist/angular-google-maps.js',
   'bower_components/angular-moment/angular-moment.js',
   'bower_components/Chart.js/Chart.min.js',
   'bower_components/angular-chart.js/dist/angular-chart.js',

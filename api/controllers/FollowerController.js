@@ -70,13 +70,15 @@ module.exports = {
 		};
 
 		Follower.create(model)
-		.exec(function(err, post) {
+		.exec(function(err, follower) {
 			if (err) {
 				return console.log(err);
 			}
 			else {
-				Follower.publishCreate(post);
-				res.json(post);
+				Follower.getOne(follower.id).then(function(follower){
+					Follower.publishCreate(follower[0]);
+					res.json(follower[0]);
+				})
 			}
 		});
 	},
