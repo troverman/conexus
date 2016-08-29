@@ -24,6 +24,9 @@ digraph dependencies {
       "uiGmapDataStructures"[label="uiGmapDataStructures", color=5]
       "uiGmapgoogle-maps.wrapped" -> "uiGmapDataStructures"
     
+      "uiGmapMarkerSpiderfier"[label="uiGmapMarkerSpiderfier", color=5]
+      "uiGmapgoogle-maps.wrapped" -> "uiGmapMarkerSpiderfier"
+    
 
     
 
@@ -53,6 +56,11 @@ digraph dependencies {
     
       
     
+      
+    
+      
+        "uiGmapGoogleMapApi"[label="uiGmapGoogleMapApi"]
+        "uiGmapGoogleMapApi" -> "uiGmapMarkerSpiderfier"
       
     
 

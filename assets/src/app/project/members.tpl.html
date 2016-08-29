@@ -1,5 +1,6 @@
-<h1>members</h1>
-<button ng-click="createMember()">join!</button>
+<h1>members</h1><hr>
+<p>{{members.length}}</p>
+<button class="btn btn-primary" ng-click="createMember()">join</button>
 <div class="member-list" ng-repeat="member in members">
-	<h3>member {{member}}</h3>
+	<h3><a href="member/{{member.user.username}}">{{member.user.username}}</a></h3>
 </div>

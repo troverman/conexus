@@ -15,6 +15,9 @@ digraph dependencies {
     
 
     
+      "uiGmapGoogleMapObjectManager"[label="uiGmapGoogleMapObjectManager", color=5]
+      "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapGoogleMapObjectManager"
+    
 
     
       "uiGmapClustererMarkerManager"[label="uiGmapClustererMarkerManager", color=6]
@@ -22,6 +25,9 @@ digraph dependencies {
     
       "uiGmapMarkerManager"[label="uiGmapMarkerManager", color=6]
       "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapMarkerManager"
+    
+      "uiGmapSpiderfierMarkerManager"[label="uiGmapSpiderfierMarkerManager", color=6]
+      "uiGmapgoogle-maps.directives.api.managers" -> "uiGmapSpiderfierMarkerManager"
     
 
     node[shape="cds"]
@@ -46,6 +52,8 @@ digraph dependencies {
     
 
     
+      
+    
 
     
       
@@ -58,6 +66,9 @@ digraph dependencies {
         "uiGmapPropMap"[label="uiGmapPropMap"]
         "uiGmapPropMap" -> "uiGmapClustererMarkerManager"
       
+        "uiGmapEventsHelper"[label="uiGmapEventsHelper"]
+        "uiGmapEventsHelper" -> "uiGmapClustererMarkerManager"
+      
     
       
         "uiGmapLogger"[label="uiGmapLogger"]
@@ -68,6 +79,20 @@ digraph dependencies {
       
         "uiGmapPropMap"[label="uiGmapPropMap"]
         "uiGmapPropMap" -> "uiGmapMarkerManager"
+      
+    
+      
+        "uiGmapLogger"[label="uiGmapLogger"]
+        "uiGmapLogger" -> "uiGmapSpiderfierMarkerManager"
+      
+        "uiGmapFitHelper"[label="uiGmapFitHelper"]
+        "uiGmapFitHelper" -> "uiGmapSpiderfierMarkerManager"
+      
+        "uiGmapPropMap"[label="uiGmapPropMap"]
+        "uiGmapPropMap" -> "uiGmapSpiderfierMarkerManager"
+      
+        "uiGmapMarkerSpiderfier"[label="uiGmapMarkerSpiderfier"]
+        "uiGmapMarkerSpiderfier" -> "uiGmapSpiderfierMarkerManager"
       
     
 

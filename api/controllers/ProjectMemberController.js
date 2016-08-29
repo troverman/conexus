@@ -1,5 +1,5 @@
 /**
- * ProjectController
+ * ProjectMemberController
  *
  * @description :: Server-side logic for managing Projects
  * @help        :: See http://links.sailsjs.org/docs/controllers
@@ -8,35 +8,14 @@ var _ = require('lodash');
 
 module.exports = {
 
-	getAll: function(req, res) {
-		Project.getAll()
-		.spread(function(models) {
-			Project.watch(req);
-			Project.subscribe(req, models);
+
+	getByProject: function(req, res) {
+		ProjectMember.find()
+		.where({project: req.param('id')})
+		.populate('user')
+		.then(function(models) {
+			ProjectMember.watch(req);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
-		});
-	},
-
-	getOne: function(req, res) {
-		Project.getOne(req.param('id'))
-		.spread(function(model) {
-			Project.subscribe(req, model);
-			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
-		});
-	},
-
-	getByUrl: function(req, res) {
-		Project.find()
-		.where({urlTitle: req.param('path')})
-		.spread(function(model) {
-			Project.subscribe(req, model);
-			res.json(model);
 		})
 		.fail(function(err) {
 			res.send(404,err);
@@ -44,24 +23,23 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-		var title = req.param('title');
-		var urlTitle = req.param('urlTitle');
-		var userId = req.param('user');
+		var project = req.param('project');
+		var user = req.param('user');
 
 		var model = {
-			title: title,
-			urlTitle: urlTitle,
-			user: userId
+			project: project,
+			user: user
 		};
 
-		Project.create(model)
-		.exec(function(err, project) {
+
+		ProjectMember.create(model)
+		.exec(function(err, member) {
 			if (err) {
 				return console.log(err);
 			}
 			else {
-				Project.publishCreate(project);
-				res.json(project);
+				ProjectMember.publishCreate(member);
+				res.json(member);
 			}
 		});
 	},
@@ -73,7 +51,7 @@ module.exports = {
 		}
 
 		// Otherwise, find and destroy the model in question
-		Project.findOne(id).exec(function(err, model) {
+		ProjectMember.findOne(id).exec(function(err, model) {
 			if (err) {
 				return res.serverError(err);
 			}
@@ -81,12 +59,12 @@ module.exports = {
 				return res.notFound();
 			}
 
-			Project.destroy(id, function(err) {
+			ProjectMember.destroy(id, function(err) {
 				if (err) {
 					return res.serverError(err);
 				}
 
-				Project.publishDestroy(model.id);
+				ProjectMember.publishDestroy(model.id);
 				return res.json(model);
 			});
 		});

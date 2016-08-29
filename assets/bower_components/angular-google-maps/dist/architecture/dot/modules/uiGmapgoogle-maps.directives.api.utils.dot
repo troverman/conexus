@@ -121,9 +121,6 @@ digraph dependencies {
         "uiGmapLogger"[label="uiGmapLogger"]
         "uiGmapLogger" -> "uiGmapFitHelper"
       
-        "uiGmap_async"[label="uiGmap_async"]
-        "uiGmap_async" -> "uiGmapFitHelper"
-      
     
       
         "uiGmapLogger"[label="uiGmapLogger"]
@@ -132,6 +129,9 @@ digraph dependencies {
     
       
     
+      
+        "nemSimpleLogger"[label="nemSimpleLogger"]
+        "nemSimpleLogger" -> "uiGmapLogger"
       
     
       
@@ -156,9 +156,6 @@ digraph dependencies {
       
         "uiGmapGmapUtil"[label="uiGmapGmapUtil"]
         "uiGmapGmapUtil" -> "uiGmapModelKey"
-      
-        "uiGmapPromise"[label="uiGmapPromise"]
-        "uiGmapPromise" -> "uiGmapModelKey"
       
     
       

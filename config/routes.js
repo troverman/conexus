@@ -123,13 +123,19 @@ module.exports.routes = {
   'get /api/project': 'ProjectController.getAll',
   'get /api/project/:id': 'ProjectController.getOne',
 
-  'get /api/project/:id/member': 'ProjectController.getMembers',
-  'post /api/project/member': 'ProjectController.createMember',
-
-
   'get /api/project/url/:path': 'ProjectController.getByUrl',
   'post /api/project': 'ProjectController.create',
   'delete /api/project/:id': 'ProjectController.destroy',
+
+
+   /**
+   * ProjectMember routes
+   *
+   */
+
+  'get /api/project/:id/member': 'ProjectMemberController.getByProject',
+  'post /api/project/member': 'ProjectMemberController.create',
+  'delete /api/project/member/:id': 'ProjectMemberController.destroy',
 
 
   /**

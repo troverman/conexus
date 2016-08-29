@@ -6,6 +6,9 @@ digraph dependencies {
     "uiGmapgoogle-maps.providers"[label="uiGmapgoogle-maps.providers", color=1]
 
     
+      "nemLogging"[label="nemLogging", color=1]
+      "nemLogging" -> "uiGmapgoogle-maps.providers"
+    
 
 
     node[shape="ellipse"]
@@ -17,6 +20,9 @@ digraph dependencies {
 
     
 
+    
+      "uiGmapGoogleMapApiManualLoader"[label="uiGmapGoogleMapApiManualLoader", color=5]
+      "uiGmapgoogle-maps.providers" -> "uiGmapGoogleMapApiManualLoader"
     
 
     
@@ -47,6 +53,11 @@ digraph dependencies {
 
     
 
+    
+      
+        "uiGmapMapScriptLoader"[label="uiGmapMapScriptLoader"]
+        "uiGmapMapScriptLoader" -> "uiGmapGoogleMapApiManualLoader"
+      
     
 
     

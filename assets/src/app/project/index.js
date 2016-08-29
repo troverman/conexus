@@ -108,7 +108,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             streams: function() {
-                return [1,2,3,4,5];
+                return [1,2,3,4,5,6,7,8,9,10,11,12,13];
             }
         }
     });
@@ -216,11 +216,6 @@ angular.module( 'conexus.project', [
 
 .controller( 'ProjectFinanceCtrl', function ProjectController( $scope, $interval, lodash ) {
 
-    //ChartJsProvider.setOptions({
-    //    responsive: true,
-    //    maintainAspectRatio: false,
-    //});
-
     $scope.options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -242,19 +237,33 @@ angular.module( 'conexus.project', [
     };
 })
 
-.controller( 'ProjectMembersCtrl', function ProjectController( $scope, config, project, members, MemberModel) {
+.controller( 'ProjectMembersCtrl', function ProjectController( $scope, config, project, members, MemberModel, $sailsSocket) {
     $scope.currentUser = config.currentUser;
-    $scope.project = project
+    $scope.project = project;
     $scope.members = members;
-    $scope.newMember = {}
+    $scope.newMember = {};
+
 
     $scope.createMember = function() {
         $scope.newMember.user = config.currentUser.id;
         $scope.newMember.project = project.id;
-        MemberModel.create(newMember).then(function(model) {
+        MemberModel.create($scope.newMember).then(function(model) {
             $scope.newMember = {};
         });
     };
+
+    $sailsSocket.subscribe('projectmember', function (envelope) {
+        console.log(envelope.verb)
+        switch(envelope.verb) {
+            case 'created':
+                console.log(envelope.data);
+                $scope.members.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.members, {id: envelope.id});
+                break;
+        }
+    });
     
 })
 
