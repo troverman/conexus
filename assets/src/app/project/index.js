@@ -108,7 +108,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             streams: function() {
-                return [1,2,3,4,5,6,7,8,9,10,11,12,13];
+                return [1,2,3,4,5,6,7,8];
             }
         }
     });
@@ -228,7 +228,6 @@ angular.module( 'conexus.project', [
     ];
 
     $interval(function () {
-        //var randomNumber = Math.floor(Math.random() * (100 + 1));
         $scope.data = _.shuffle($scope.data);
     }, 10000);
 
@@ -271,7 +270,6 @@ angular.module( 'conexus.project', [
     $scope.currentUser = config.currentUser;
     $scope.tasks = tasks;
     $scope.project = project
-    console.log(tasks)
 
     $scope.createTask = function(newTask) {
         newTask.user = config.currentUser.id;
@@ -292,10 +290,8 @@ angular.module( 'conexus.project', [
     };
 
     $sailsSocket.subscribe('task', function (envelope) {
-        console.log(envelope.verb)
         switch(envelope.verb) {
             case 'created':
-                console.log(envelope.data);
                 $scope.tasks.unshift(envelope.data);
                 break;
             case 'destroyed':

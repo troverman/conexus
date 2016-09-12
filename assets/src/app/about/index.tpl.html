@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+<!--this is gonna be infographic like-->
 <div>
 	<div id="logo-container">
 		<img src="/images/loading.gif">
@@ -7,21 +9,23 @@
 		<p>a transparent network</p>
 	</div>
 	<div id="about-section1">
-		<p>crowd-sourced, crowd-owned, crowd-operated</p>
-		<p>paving the way for a transparent future</p>
+		<div class="row">
+			<div class="col-md-6">
+				<p>crowd-sourced, crowd-owned, crowd-operated</p>
+				<p>paving the way for a transparent future</p>
+			</div>
+		</div>
 	</div>
 	<div id="about-section2">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8">
-					<p>connect with collaborators, create awesome things</p>
-					<p>live streaming</p>
-					<p>a 24/7 continual hackathon</p>
-					<p>watch the world create</p>
-				</div>
-				<div class="col-md-4">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/jUQ_3kCcG_U" frameborder="0" allowfullscreen></iframe>
-				</div>
+		<div class="row">
+			<div class="col-md-6">
+				<p>connect with collaborators, create awesome things</p>
+				<p>live streaming</p>
+				<p>a 24/7 continual hackathon</p>
+				<p>watch the world create</p>
+			</div>
+			<div class="col-md-6">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/jUQ_3kCcG_U" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>
@@ -31,7 +35,17 @@
 		<p>how can we work together toward a common goal?</p>
 	</div>
 	<div id="about-section4">
-		<h4>transparency</h4>
-		<p>transparent contrubition, equatable representation</p>
+		<div class="row">
+			<div class="col-md-6">
+				<h4>transparency</h4>
+				<p>transparent contrubition, equatable representation</p>
+			</div>
+			<div class="col-md-6">
+				<canvas id="line" class="chart chart-line" chart-data="data"
+				    chart-labels="labels" chart-legend="true" chart-series="series"
+				    chart-click="onClick">
+				</canvas> 
+			</div>
+		</div>
 	</div>
 </div>
