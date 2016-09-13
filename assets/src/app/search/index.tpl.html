@@ -1,15 +1,11 @@
 <div ui-view="search">
-	<h1>{{searchQuery}}</h1>
-	<div>
-		<input ng-keyup="keyPress(searchValue)" ng-model="searchValue">
+	<div class="container">
+		<br><br>
+		<input ng-keyup="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
+		<hr>
 		<div ng-repeat="searchResult in searchResults">
 			<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
 		</div>
-		<div style="height:30px"></div>
-		SEARCH
-		<div ng-repeat="searchResult in searchResults">
-			<br><br>
-			<h2>{{searchResult}}</h2>
-		</div>
 	</div>
+
 </div>
