@@ -50,9 +50,9 @@ module.exports.routes = {
   'get /project/:path/members': 'HomeController.index',
   'get /project/:path/tasks': 'HomeController.index',
   'get /project/:path/streams': 'HomeController.index',
-
   'get /search': 'HomeController.index',
   'get /search/:searchQuery': 'HomeController.index',
+  'get /stream': 'HomeController.index',
 
   'get /login': 'HomeController.index',
   'get /register': 'HomeController.index',
