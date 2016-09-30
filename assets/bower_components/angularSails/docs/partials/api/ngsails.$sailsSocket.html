@@ -5,7 +5,6 @@
 </h1>
 <div><h2 id="description">Description</h2>
 <div class="description"><div class="ngsails-sailssocket-page"><p>The <code>$sailsSocket</code> service is the core service that facilitates communication with sails via socket.io</p>
-<p>For a higher level of abstraction, please check out the $sailsResource service.</p>
 <p>The $sailsSocket API is based on the deferred/promise APIs exposed by
 the $q service. While for simple usage patterns this doesn&#39;t matter much, for advanced usage
 it is important to familiarize yourself with these APIs and the guarantees they provide.</p>
@@ -277,7 +276,8 @@ functions.</li>
 <div class="subscribe"><div class="-sailssocket-subscribe-page"><p>Low-level method to register handlers for socket.io events.</p>
 </div><h5 id="methods_subscribe_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>eventName</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="-sailssocket-subscribe-page"><p>Name of server-emitted event to listen for.</p>
 </div></td></tr><tr><td>eventHandler</td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="-sailssocket-subscribe-page"><p>Method to fire when event is recieved.</p>
-</div></td></tr></tbody></table></div>
+</div></td></tr></tbody></table><h5 id="methods_subscribe_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="-sailssocket-subscribe-page"><p>A function which, if called, will remove the event handler</p>
+</div></td></tr></table></div>
 </li>
 </ul>
 </div>

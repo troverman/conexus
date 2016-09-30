@@ -10,6 +10,7 @@ angular.module( 'conexus', [
     'templates-app',
     'services',
     'models',
+    //'ngMaterial',
     'conexus.about',
     'conexus.account',
     'conexus.connect',

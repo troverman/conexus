@@ -17,6 +17,7 @@
 var cssFilesToInject = [
   'styles/**/*.css',
   'bower_components/bootstrap/dist/css/bootstrap.min.css',
+  'bower_components/angular-material/angular-material.css'
 ];
 
 
@@ -37,6 +38,9 @@ var jsFilesToInject = [
   'bower_components/angular-moment/angular-moment.js',
   'bower_components/Chart.js/Chart.min.js',
   'bower_components/angular-chart.js/dist/angular-chart.js',
+  'bower_components/angular-animate/angular-animate.min.js',
+  'bower_components/angular-aria/angular-aria.min.js',
+  'bower_components/angular-material/angular-material.js',
 
   //
   // *->    you might put other dependencies like jQuery or Angular here   <-*

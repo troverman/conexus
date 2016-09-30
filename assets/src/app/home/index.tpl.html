@@ -10,6 +10,7 @@
 			<p>watch the world cre8</p>
 			<p>participate in crowd-sourced, transparent projects</p>
 			<p>collabor8</p>
+			<a class="btn btn-primary" href="/about">learn more</a>
 		</div>
 		<div class="dynamic-data">
 			<div id="search-container">
@@ -19,9 +20,20 @@
 				</div>
 			</div>
 			<div id="project-container">
-				<h2>projects</h2>
-				<div ng-repeat="project in projects">
-					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+
+				<h2>projects</h2><hr>
+				<div class="container">
+				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
+				    <md-card flex="30" ng-repeat="project in projects">
+				      <md-card-title>
+				        <md-card-title-text>
+				          <a href="/project/{{project.urlTitle}}/">
+				            <span class="">{{project.title}}</span>
+				          </a>
+				        </md-card-title-text>
+				      </md-card-title>
+				    </md-card>
+				  </div>
 				</div>
 			</div>
 			<!--<div id="stream-container">
@@ -35,9 +47,19 @@
 				</div>
 			</div>-->
 			<div id="member-container">
-				<h2>members</h2>
-				<div ng-repeat="member in members">
-					<a href="/member/{{member.username}}">{{member.username}}</a>
+				<h2>members</h2><hr>
+				<div class="container">
+				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
+				    <md-card flex="30" ng-repeat="member in members">
+				      <md-card-title>
+				        <md-card-title-text>
+						  <a href="/member/{{member.username}}">
+				            <span class="">{{member.username}}</span>
+				          </a>
+				        </md-card-title-text>
+				      </md-card-title>
+				    </md-card>
+				  </div>
 				</div>
 			</div>
 			<div id="message-container">

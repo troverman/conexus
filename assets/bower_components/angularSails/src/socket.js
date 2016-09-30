@@ -120,8 +120,6 @@ function $sailsSocketProvider() {
              * The `$sailsSocket` service is the core service that facilitates communication with sails via socket.io
              *
              *
-             * For a higher level of abstraction, please check out the $sailsResource service.
-             *
              * The $sailsSocket API is based on the deferred/promise APIs exposed by
              * the $q service. While for simple usage patterns this doesn't matter much, for advanced usage
              * it is important to familiarize yourself with these APIs and the guarantees they provide.
@@ -382,7 +380,7 @@ function $sailsSocketProvider() {
                 config.method = uppercase(config.method);
 
                 var xsrfValue = urlIsSameOrigin(config.url)
-                    ? $browser.cookies()[config.xsrfCookieName || defaults.xsrfCookieName]
+                    ? getCookie(config.xsrfCookieName || defaults.xsrfCookieName)
                     : undefined;
                 if (xsrfValue) {
                     headers[(config.xsrfHeaderName || defaults.xsrfHeaderName)] = xsrfValue;
@@ -753,7 +751,11 @@ function $sailsSocketProvider() {
 
                     angular.forEach(value, function(v) {
                         if (isObject(v)) {
+                          if (isDate(v)) {
+                            v = v.toIsoString();
+                          } else {
                             v = toJson(v);
+                          }
                         }
                         parts.push(encodeUriQuery(key) + '=' +
                             encodeUriQuery(v));
@@ -763,6 +765,12 @@ function $sailsSocketProvider() {
                     url += ((url.indexOf('?') == -1) ? '?' : '&') + parts.join('&');
                 }
                 return url;
+            }
+            
+            
+            function getCookie(key) {
+                if (!key) return null;
+                return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
             }
 
 

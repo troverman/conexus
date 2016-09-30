@@ -42,13 +42,20 @@ function createSailsBackend($browser, $window, $injector, $q, $timeout){
         url = url || $browser.url();
 
 
-        $window.io.socket[method.toLowerCase()](url,fromJson(post),socketResponse);
+        $window.io.socket.request({
+            method: method.toLowerCase(),
+            url: url,
+            data: fromJson(post),
+            headers: headers
+        }, socketResponse);
 
     }
 
     //TODO normalize http paths to event names
     connection.subscribe = function(event,handler){
-        $window.io.socket.on(event,tick($window.io.socket,handler));
+        var callback = tick($window.io.socket,handler);
+        $window.io.socket.on(event,callback);
+        return angular.bind($window.io.socket, $window.io.socket.removeListener, event, callback);
     }
 
     return connection;
@@ -65,8 +72,8 @@ function createSailsBackend($browser, $window, $injector, $q, $timeout){
  * Service used by the $sailsSocket that delegates to a
  * Socket.io connection (or in theory, any connection type eventually)
  *
- * You should never need to use this service directly, instead use the higher-level abstractions:
- * $sailsSocket or $sailsResource.
+ * You should never need to use this service directly, instead use the higher-level abstraction:
+ * $sailsSocket.
  *
  * During testing this implementation is swapped with $sailsMockBackend
  *  which can be trained with responses.
@@ -76,4 +83,3 @@ function sailsBackendProvider() {
         return createSailsBackend($browser,$window, $injector, $q,$timeout);
     }];
 }
-

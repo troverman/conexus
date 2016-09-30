@@ -1,6 +1,6 @@
 {
   "name": "angularSails",
-  "version": "0.10.0-pre",
+  "version": "0.12.1",
   "homepage": "https://github.com/balderdashy/angularSails",
   "authors": [
     "Rob Wormald <rob.wormald@innitapps.com>",
@@ -24,20 +24,20 @@
     "tests"
   ],
   "devDependencies": {
-    "angular-mocks": "~1.2.14"
+    "angular-mocks": "~1.3.0"
   },
   "dependencies": {
-    "angular": "~1.2.14",
-    "sails.io.js": "latest",
-    "lodash": "~2.4.1"
+    "angular": "~1.3.0",
+    "sails.io.js": "latest"
   },
-  "_release": "0.10.0-pre",
+  "_release": "0.12.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.10.0-pre",
-    "commit": "7e4e91ba0acb29fb74366e4fa07b30c0a5b1cd80"
+    "tag": "v0.12.1",
+    "commit": "1deb8a05d737e5cb9224096378ebe949586cf570"
   },
-  "_source": "git://github.com/balderdashy/angularSails.git",
-  "_target": "0.10.0-pre",
-  "_originalSource": "angularSails"
+  "_source": "https://github.com/balderdashy/angularSails.git",
+  "_target": "~0.12.1",
+  "_originalSource": "angularSails",
+  "_direct": true
 }

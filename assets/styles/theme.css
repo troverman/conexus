@@ -22,11 +22,37 @@ body {
     padding:1rem;
     padding:50px;
     background-color:#414141;
+    color:#9d9d9d;
 }
 
 .footer a{
+    color:#9d9d9d;
+    padding:5px;
+    font-weight: 500;
+    font-size:15px;
+}
+
+.footer a:hover {
     color:white;
     padding:5px;
+    text-decoration:none;
+}
+
+.footer a:active {
+    color:white;
+    padding:5px;
+    text-decoration:none;
+}
+
+.footer img{
+  height:50px;
+  float:right;
+  padding-right:15px;
+}
+
+.footer-links{
+  display:inline;
+  padding-top:10px;
 }
 
 .main-container {
