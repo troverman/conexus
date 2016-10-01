@@ -28,8 +28,10 @@ body {
 .footer a{
     color:#9d9d9d;
     padding:5px;
-    font-weight: 500;
+    font-weight: 600;
     font-size:15px;
+    font-family:'Titillium Web', sans-serif;
+    text-transform: uppercase;
 }
 
 .footer a:hover {
@@ -38,7 +40,7 @@ body {
     text-decoration:none;
 }
 
-.footer a:active {
+.footer a:focus {
     color:white;
     padding:5px;
     text-decoration:none;

@@ -3,16 +3,16 @@
         <br>
         <li>
             <a style="font-weight:bold" href="/project/{{project.title}}">{{project.title}}</a>
-            <a href="/project/{{project.title}}/edit" ng-show="isProjectCreator()">edit</a>
+            <a href="/project/{{project.urlTitle}}/edit" ng-show="isProjectCreator()">edit</a>
         </li>
         <hr>
-        <li><a href="/project/{{project.title}}/channels">channels</a></li>
-        <li><a href="/project/{{project.title}}/finance">finance</a></li>
-        <li><a href="/project/{{project.title}}/members">members</a></li>
-        <li><a href="/project/{{project.title}}/streams">streams</a></li>
-        <li ng-show="currentUser"><a href="/project/{{project.title}}">settings</a></li>
-        <li><a href="/project/{{project.title}}/tasks">tasks</a></li>
-        <li><a href="/project/{{project.title}}">tools</a></li>
+        <li><a href="/project/{{project.urlTitle}}/channels">channels</a></li>
+        <li><a href="/project/{{project.urlTitle}}/finance">finance</a></li>
+        <li><a href="/project/{{project.urlTitle}}/members">members</a></li>
+        <li><a href="/project/{{project.urlTitle}}/streams">streams</a></li>
+        <li ng-show="currentUser"><a href="/project/{{project.urlTitle}}">settings</a></li>
+        <li><a href="/project/{{project.urlTitle}}/tasks">tasks</a></li>
+        <li><a href="/project/{{project.urlTitle}}">tools</a></li>
     </ul>
 </div>
 <div id="main-container">
