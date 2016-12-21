@@ -73,6 +73,8 @@ passport.connect = function (req, query, profile, next) {
   // as is the case for OpenID, for example
   provider = profile.provider || query.provider;
 
+  console.log(provider)
+
   // If the provider cannot be identified we cannot match it to a passport so
   // throw an error and let whoever's next in line take care of it.
   if (!provider){
@@ -100,6 +102,7 @@ passport.connect = function (req, query, profile, next) {
     provider   : provider
   , identifier : query.identifier.toString()
   }, function (err, passport) {
+    console.log(passport)
     if (err) {
       return next(err);
     }
