@@ -22,7 +22,7 @@ module.exports = {
             collection: 'message',
             via: 'user'
         },
-        online: {
+        loggedIn: {
             type: 'boolean',
             defaultsTo: false
         },

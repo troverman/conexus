@@ -53,5 +53,17 @@ module.exports.passport = {
       clientSecret: 'TiuwOilqlUC4dtxOXbyhdqu2',
       scope: ['email'] /* email is necessary for login behavior */
     }
-  }
+  },
+
+  fitbit: {
+    name: 'Fitbit',
+    protocol: 'oauth2',
+    strategy: require('passport-fitbit-oauth2').FitbitOAuth2Strategy,
+    options: {
+      clientID: '229VSS',
+      clientSecret: 'ad0ea5803c56be0754e186b356abc90b',
+      scope: ['activity','heartrate','location','profile'] /* email is necessary for login behavior */
+    }
+  },
+
 };

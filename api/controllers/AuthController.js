@@ -32,7 +32,7 @@ var AuthController = {
 
   logout: function (req, res) {
 
-    req.user.online = false;
+    req.user.loggedIn = false;
     req.user.save(function(err, user) {
       if (err) return next(err);
       // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged out
@@ -80,7 +80,7 @@ var AuthController = {
         // will available.
         else {
           req.session.User = user;
-          user.online = true;
+          user.loggedIn = true;
           user.save(function(err, user) {
             if (err) return next(err);
             // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
