@@ -78,7 +78,7 @@ module.exports = {
 				Follower.getOne(follower.id).then(function(follower){
 					Follower.publishCreate(follower[0]);
 					res.json(follower[0]);
-				})
+				});
 			}
 		});
 	},

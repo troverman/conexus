@@ -15,7 +15,6 @@ angular.module( 'conexus.member', [
             member: function(UserModel, $stateParams){
                 return UserModel.getByUsername($stateParams.path);
             },
-            
             followers: function(FollowerModel, $stateParams, $http, $q, member) {
                 return FollowerModel.getByUser(member);
             },
