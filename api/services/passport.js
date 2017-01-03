@@ -73,7 +73,7 @@ passport.connect = function (req, query, profile, next) {
   // as is the case for OpenID, for example
   provider = profile.provider || query.provider;
 
-  console.log(provider)
+  console.log(profile);
 
   // If the provider cannot be identified we cannot match it to a passport so
   // throw an error and let whoever's next in line take care of it.
@@ -91,6 +91,14 @@ passport.connect = function (req, query, profile, next) {
     user.username = profile.username;
   }
 
+  if (profile.hasOwnProperty('displayName')) {
+    user.username = profile.displayName;
+  }
+
+  if (!user.email) {
+     user.email = user.username+'@conex.us'
+  }
+
   // If neither an email or a username was available in the profile, we don't
   // have a way of identifying the user in the future. Throw an error and let
   // whoever's next in the line take care of it.
@@ -102,11 +110,10 @@ passport.connect = function (req, query, profile, next) {
     provider   : provider
   , identifier : query.identifier.toString()
   }, function (err, passport) {
-    console.log(passport)
     if (err) {
       return next(err);
     }
-
+    console.log(passport.tokens)
     if (!req.user) {
       // Scenario: A new user is attempting to sign up using a third-party
       //           authentication provider.
@@ -146,6 +153,7 @@ passport.connect = function (req, query, profile, next) {
         if (query.hasOwnProperty('tokens') && query.tokens !== passport.tokens) {
           passport.tokens = query.tokens;
         }
+        console.log(passport.tokens)
 
         // Save any updates to the Passport before moving on
         passport.save(function (err, passport) {
@@ -176,7 +184,24 @@ passport.connect = function (req, query, profile, next) {
       // Scenario: The user is a nutjob or spammed the back-button.
       // Action:   Simply pass along the already established session.
       else {
-        next(null, req.user);
+
+        //-- refresh the tokens if already attached.. and user logged in.. 
+        //-- this works fine without this by 'looging in with'
+
+        if (query.hasOwnProperty('tokens') && query.tokens !== passport.tokens) {
+          passport.tokens = query.tokens;
+        }
+
+        // Save any updates to the Passport before moving on
+        passport.save(function (err, passport) {
+          if (err) {
+            return next(err);
+          }
+
+          // Fetch the user associated with the Passport
+          User.findOne(passport.user.id, next);
+        });
+
       }
     }
   });

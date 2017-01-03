@@ -81,6 +81,7 @@ var AuthController = {
         else {
           req.session.User = user;
           user.loggedIn = true;
+          intervalService.getData(user);
           user.save(function(err, user) {
             if (err) return next(err);
             // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in

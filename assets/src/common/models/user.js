@@ -21,6 +21,11 @@ angular.module('models.user', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
+    this.update = function(newModel){
+        var url = utils.prepareUrl('user/' + newModel.id);
+        return $sailsSocket.post(url, newModel).then(success, error);
+    };
+
     var success = function(response) {
         return response.data;
     };

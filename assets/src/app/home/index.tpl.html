@@ -1,69 +1,91 @@
 <div ng-show="currentUser">
-	projects
-	following
+	<div class="container">
+	  <div class="col-md-4">
+			<img class="avatar" style="margin-top:0em" src="{{currentUser.avatarUrl}}"/>
+			<h2><a href="/member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
+	  </div>
+	  <div class="col-md-8">
+	    <h3>feed</h3>
+	    <md-divider></md-divider>
+		<div class='md-padding' layout="row" layout-align="center" layout-wrap>
+			<md-card flex="30" ng-repeat="project in projects">
+				<md-card-title>
+					<md-card-title-text>
+						<a href="/project/{{project.urlTitle}}/">
+							<span class="">{{project.title}}</span>
+						</a>
+					</md-card-title-text>
+				</md-card-title>
+			</md-card>
+		</div>
+	  </div>
+	</div>
 </div>
+
+
 <div ng-show="!currentUser">
 	<div ng-include="'intro/index.tpl.html'"></div>
-	<div style="text-align:center;">
-		<div class="header-area">
-			<p>watch the world cre8</p>
-			<h3>crowd-sourced, crowd-owned, crowd-operated</h3>
-			<p>participate in crowd-sourced, transparent projects</p>
-			<p>connect and collabor8, create a project on the spot with memebers you meet</p>
-			<p>stream your process - it's cool, creation becomes viral</p>
-			<a class="btn btn-primary" href="/about">learn more</a>
-			<div class="spacing-100"></div>
-			<div class="spacing-100"></div>
+	<div class="header-area container">
+		<p>watch the world cre8</p>
+		<h3>crowd-sourced, crowd-owned, crowd-operated</h3>
+		<p>participate in crowd-sourced, transparent projects</p>
+		<p>connect and collabor8, create a project on the spot with memebers you meet</p>
+		<p>stream your process - it's cool, creation becomes viral</p>
+		<a class="btn btn-primary" href="/about">learn more</a>
+		<div class="spacing-100"></div>
+		<div class="spacing-100"></div>
+	</div>
+	<!--register-->
+	<div class="register-form">
+		<div class="row">
+		    <div class="col-md-6 col-md-offset-3">
+		        <h3>Sign Up</h3><hr>
+		        <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
+		            <div class="form-group">
+		                <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="inputUsername3" name="username" placeholder="Username" value="">
+		                </div>
+		            </div>
+					<div class="form-group">
+		                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+		                <div class="col-sm-10">
+		                    <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="inputFirstName3" class="col-sm-2 control-label">First Name</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="inputFirstName3" name="first_name" placeholder="First Name" value="">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+		                <div class="col-sm-10">
+		                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" value="">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <div class="col-sm-offset-1 col-sm-10">
+		                    <button type="submit" class="btn btn-default">Sign in</button>
+		                </div>
+		            </div>
+		        </form>
+				<a href="/login">already have an account?</a>
+		    </div>
 		</div>
-		<!--register-->
-		<div class="register-form">
-			<div class="row">
-			    <div class="col-md-6 col-md-offset-3">
-			        <h3>Sign Up</h3><hr>
-			        <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
-			            <div class="form-group">
-			                <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
-			                <div class="col-sm-10">
-			                    <input type="text" class="form-control" id="inputUsername3" name="username" placeholder="Username" value="">
-			                </div>
-			            </div>
-						<div class="form-group">
-			                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-			                <div class="col-sm-10">
-			                    <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="">
-			                </div>
-			            </div>
-			            <div class="form-group">
-			                <label for="inputFirstName3" class="col-sm-2 control-label">First Name</label>
-			                <div class="col-sm-10">
-			                    <input type="text" class="form-control" id="inputFirstName3" name="first_name" placeholder="First Name" value="">
-			                </div>
-			            </div>
-			            <div class="form-group">
-			                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-			                <div class="col-sm-10">
-			                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" value="">
-			                </div>
-			            </div>
-			            <div class="form-group">
-			                <div class="col-sm-offset-1 col-sm-10">
-			                    <button type="submit" class="btn btn-default">Sign in</button>
-			                </div>
-			            </div>
-			        </form>
-					<a href="/login">already have an account?</a>
-			    </div>
-			</div>
-		</div>
-		<div class="dynamic-data">
-			<div id="search-container">
+	</div>
+	<div class="dynamic-data">
+		<div id="search-container">
+			<div class="container">
 				<input ng-keyup="keyPress(searchValue)" ng-model="searchValue">
 				<div ng-repeat="searchResult in searchResults">
 					<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
 				</div>
 			</div>
-			<div id="project-container">
-
+		</div>
+		<div id="project-container">
+			<div class="container">
 				<h2>projects</h2><hr>
 				<div class="container">
 				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
@@ -79,17 +101,19 @@
 				  </div>
 				</div>
 			</div>
-			<!--<div id="stream-container">
-				<div ng-repeat="project in projects">
-					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
-				</div>
+		</div>
+		<!--<div id="stream-container">
+			<div ng-repeat="project in projects">
+				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
 			</div>
-			<div id="task-container">
-				<div ng-repeat="project in projects">
-					<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
-				</div>
-			</div>-->
-			<div id="member-container">
+		</div>
+		<div id="task-container">
+			<div ng-repeat="project in projects">
+				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+			</div>
+		</div>-->
+		<div id="member-container">
+			<div class="container">
 				<h2>members</h2><hr>
 				<div class="container">
 				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
@@ -105,14 +129,25 @@
 				  </div>
 				</div>
 			</div>
-			<div id="message-container">
+		</div>
+		<div id="message-container">
+			<div class="container">
 				<h2>messages</h2>
-				<div ng-repeat="message in messages">
-					<p>{{message.title}}</p>
-					<a href="/member/{{message.user.username}}">{{message.user.username}}</a>
-					<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a><hr>
+				<div class="container">
+				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
+				    <md-card flex="30" ng-repeat="message in messages">
+				      <md-card-title>
+				        <md-card-title-text>
+							<p>{{message.title}}</p>
+							<a href="/member/{{message.user.username}}">{{message.user.username}}</a>
+							<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+				        </md-card-title-text>
+				      </md-card-title>
+				    </md-card>
+				  </div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="spacing-100"></div>

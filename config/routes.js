@@ -163,8 +163,11 @@ module.exports.routes = {
   'get /api/user': 'UserController.getAll',
   'get /api/user/:id': 'UserController.getOne',
   'get /api/user/username/:path': 'UserController.getByUsername',
-  'post /api/user': 'UserController.create',
   'get /api/user/subscribe': 'UserController.subscribe',
+  'post /api/user': 'UserController.create',
+  'post /api/user/upload': 'UserController.upload',
+  'post /api/user/:id': 'UserController.update',
+
 
 
   //'get /*' : 'HomeController.index'

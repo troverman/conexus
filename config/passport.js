@@ -62,7 +62,7 @@ module.exports.passport = {
     options: {
       clientID: '229VSS',
       clientSecret: 'ad0ea5803c56be0754e186b356abc90b',
-      callbackURL: 'http://www.conex.us/auth/fitbit/callback',
+      //callbackURL: 'http://www.conex.us/auth/fitbit/callback',
       scope: ['activity','heartrate','location','profile'] /* email is necessary for login behavior */
     }
   },
