@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+<!--this is gonna be infographic like-->
+<div>
+	<div id="logo-container">
+		<img style="max-height:400px" src="/images/loading.gif">
+	</div>
+	<div id="title-container">
+		<h1>connect, collab, create</h1>
+		<p>a transparent network</p>
+	</div>
+	<div id="about-section1">
+		<div class="row">
+			<div class="col-md-6">
+				<p>crowd-sourced, crowd-owned, crowd-operated</p>
+			</div>
+		</div>
+	</div>
+	<div id="about-section2">
+		<div class="row">
+			<div class="col-md-6">
+				<p>connect with collaborators, create awesome things</p>
+				<p>live streaming</p>
+				<p>a 24/7 continual hackathon</p>
+				<p>watch the world create</p>
+			</div>
+			<div class="col-md-6">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/jUQ_3kCcG_U" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	<div id="about-section3">
+		<p>crowd-owned organizations</p>
+		<p>a community of collaborators</p>
+		<p>let's work together toward a common goal</p>
+	</div>
+	<div id="about-section4">
+		<div class="row">
+			<div class="col-md-6">
+				<h4>transparency</h4>
+				<p>transparent contrubition, equatable representation</p>
+			</div>
+			<div class="col-md-6">
+				<canvas id="line" class="chart chart-line" chart-data="data"
+				    chart-labels="labels" chart-legend="true" chart-series="series"
+				    chart-click="onClick">
+				</canvas> 
+			</div>
+		</div>
+	</div>
+</div>

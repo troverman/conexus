@@ -53,7 +53,8 @@ module.exports.routes = {
   'get /project/:path/streams': 'HomeController.index',
   'get /search': 'HomeController.index',
   'get /search/:searchQuery': 'HomeController.index',
-  'get /stream': 'HomeController.index',
+  'get /stream/:id': 'HomeController.index',
+  'get /transparency': 'HomeController.index',
 
   'get /login': 'HomeController.index',
   'get /register': 'HomeController.index',
