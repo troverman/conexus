@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/" style="margin-left:15px">
+        <a class="navbar-brand" href="/">
           <img style="height:25px;margin-top:-3px" src="/images/conexus-white.png"/>
         </a>
       </div>
@@ -17,13 +17,14 @@
           <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
           <li class="nav-links"><a href="/connect">Connect</a></li>
           <li class="nav-links"><a href="/projects">Companies</a></li>
-          <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;" style=""><!--media query style="width:100%;margin-left:0;"-->"
+          <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;">
             <div class="form-group">
-              <input ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search"
-                     style="margin-top: 3px;border-radius: 5px;color:#101010">
+              <input style="margin-top:5px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search">
             </div>
           </form>
-          <li class="nav-links" ng-show="currentUser"><a href="/account">Account</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-links" ng-show="currentUser"><a href="/account">{{currentUser.username}}</a></li>
           <li class="nav-links" ng-show="currentUser"><a href="/logout">Logout</a></li>
           <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
           <li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>

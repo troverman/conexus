@@ -30,11 +30,15 @@ angular.module( 'conexus', [
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
-    $urlRouterProvider.when('/about/', '/about');
-    $urlRouterProvider.when('/member/', '/member');
-    $urlRouterProvider.when('/search/', '/search');
-    $urlRouterProvider.when('/post/', '/post');
 
+    $urlRouterProvider.rule(function($injector, $location) {
+        var path = $location.path();
+        var hasTrailingSlash = path[path.length-1] === '/';
+        if(hasTrailingSlash) {
+            var newPath = path.substr(0, path.length - 1); 
+            return newPath; 
+        } 
+    });
 
     $urlRouterProvider.otherwise(function ($injector, $location) {
         if ($location.$$url === '/') {
