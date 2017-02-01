@@ -1,42 +1,44 @@
 <div class="spacing-50"></div>
 <!--register-->
 <div class="register-form">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <h3><b>Create an Account</b></h3><hr>
-            <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
-                <div class="form-group">
-                    <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputUsername3" name="username" placeholder="Username" value="">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3><b>Create an Account</b></h3><hr>
+                <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
+                    <div class="form-group">
+                        <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUsername3" name="username" placeholder="Username" value="">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" value="">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" value="">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group" style="">
-                    <div class="col-sm-offset-1 col-sm-10">
-                        <button type="submit" class="btn btn-default">Sign in</button>
+                    <div class="form-group" style="">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <button type="submit" class="btn btn-default">Sign in</button>
+                        </div>
                     </div>
+                </form>
+                <div style="text-align:center;padding:2em">
+                    <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-facebook" href="/auth/facebook"><span class="fa fa-facebook"></span> Facebook</a>
+                    <a style="width:100%;margin:3px" class="btn btn-block btn-social" href="/auth/fitbit"> Fitbit</a>
+                    <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-twitter" href="/auth/twitter"><span class="fa fa-twitter"></span> Twitter</a>
+                    <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-google" href="/auth/google"><span class="fa fa-google"></span> Google</a>
                 </div>
-            </form>
-            <div style="text-align:center;padding:2em">
-                <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-facebook" href="/auth/facebook"><span class="fa fa-facebook"></span> Facebook</a>
-                <a style="width:100%;margin:3px" class="btn btn-block btn-social" href="/auth/fitbit"> Fitbit</a>
-                <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-twitter" href="/auth/twitter"><span class="fa fa-twitter"></span> Twitter</a>
-                <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-google" href="/auth/google"><span class="fa fa-google"></span> Google</a>
             </div>
         </div>
+        <hr>
+        <a href="/login">Already have an account?</a>
     </div>
-    <hr>
-    <a href="/login">Already have an account?</a>
 </div>
