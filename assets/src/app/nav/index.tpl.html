@@ -1,36 +1,34 @@
-<div ng-controller="NavCtrl">
-  <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-          <img style="height:25px;margin-top:-3px" src="/images/conexus-white.png"/>
-        </a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
-          <li class="nav-links"><a href="/connect">Connect</a></li>
-          <li class="nav-links"><a href="/projects">Companies</a></li>
-          <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;">
-            <div class="form-group">
-              <input style="margin-top:5px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search">
-            </div>
-          </form>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-links" ng-show="currentUser"><a href="/account">{{currentUser.username}}</a></li>
-          <li class="nav-links" ng-show="currentUser"><a href="/logout">Logout</a></li>
-          <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
-          <li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>
-          <li class="divider-vertical"></li>
-        </ul>
-      </div>
+<div ng-controller="NavCtrl" class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img style="height:25px;margin-top:-3px" src="/images/conexus-white.png"/>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
+        <li class="nav-links"><a href="/connect">Connect</a></li>
+        <li class="nav-links"><a href="/projects">Companies</a></li>
+        <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;">
+          <div class="form-group">
+            <input style="margin-top:5px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search">
+          </div>
+        </form>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-links" ng-show="currentUser"><a href="/account">{{currentUser.username}}</a></li>
+        <li class="nav-links" ng-show="currentUser"><a href="/logout">Logout</a></li>
+        <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
+        <li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>
+        <li class="divider-vertical"></li>
+      </ul>
     </div>
   </div>
   <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
