@@ -14,6 +14,106 @@ body {
     min-height: 100%
 }
 
+md-progress-linear .md-container {
+  background-color: rgba(36,36,46, 1)!important;
+}
+
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
+ background-color: #084b73!important;
+}
+
+.selfClear:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.social-log {
+    text-align: center;
+}
+.social-log a {
+    margin: 3px;
+    display: inline-block;
+}
+.social-log i {
+    color: #EF8D09;
+}
+.login-form {
+
+}
+.form-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+.form-control {
+    width: 100%;
+    height: 50px;
+    font-size: 1em;
+    border: none;
+    padding: 5px 7px 5px 15px;
+    background: #fff;
+    color: #666;
+    border: 2px solid #ddd;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.form-control:focus {
+    border-color: #002c54;
+    color: #002c54;
+    font-weight: bold;
+}
+.form-group .fa {
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    color: #EF8D09;
+}
+.log-status.wrong-entry {
+    -moz-animation: wrong-log 0.3s;
+    -webkit-animation: wrong-log 0.3s;
+    animation: wrong-log 0.3s;
+}
+.log-status.wrong-entry .form-control, .wrong-entry .form-control+.fa {
+    border-color: #ed1c24;
+    color: #ed1c24;
+}
+.log-btn {
+    background-color: #002c54;
+    color: #fff!important;
+    width: 100%;
+    padding: 10px;
+}
+.log-btn:hover {
+    background: #001B34;
+    color: #fff!important;
+}
+.log-btn:focus, .log-btn:active {
+    background-color: #001B34!important;
+    color: #fff!important;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.75);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.75);
+}
+.link {
+    text-decoration: none;
+    color: #C6C6C6;
+    float: right;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+.link:hover {
+    text-decoration: underline;
+    color: #8C918F;
+}
+.intro-header {
+    margin-bottom: 50px;
+    background: #EEEEEE;
+}
+.intro-header .site-heading, .intro-header .post-heading, .intro-header .page-heading {
+    padding: 50px 0 50px;
+    color: #252525;
+}
+
 .center {
   display: flex;
   flex-direction: row;
@@ -76,7 +176,7 @@ body {
 }
 
 .header{
-	background-color:#414141;
+	background-color:#24242e;
 }
 
 .nav-links {
@@ -163,3 +263,44 @@ body {
 .post-container {
     margin: 25px 0;
 }
+
+/* Bootstrap nav breakpoint override */
+
+@media (max-width: 991px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left, .navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in {
+        display: block !important;
+    }
+}
+
+/* End Bootstrap nav breakpoint override */

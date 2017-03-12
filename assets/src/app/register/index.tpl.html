@@ -1,43 +1,51 @@
-<!--register-->
-<div class="register-form">
+<div class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h3><b>Create an Account</b></h3><hr>
-                <form class="form-horizontal" role="form" action="/auth/local/register" method="post">
-                    <div class="form-group">
-                        <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputUsername3" name="username" placeholder="Username" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" value="">
-                        </div>
-                    </div>
-                    <div class="form-group" style="">
-                        <div class="col-sm-offset-1 col-sm-10">
-                            <button type="submit" class="btn btn-default">Sign in</button>
-                        </div>
-                    </div>
-                </form>
-                <!--<div style="text-align:center;padding:2em">
-                    <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-facebook" href="/auth/facebook"><span class="fa fa-facebook"></span> Facebook</a>
-                    <a style="width:100%;margin:3px" class="btn btn-block btn-social" href="/auth/fitbit"> Fitbit</a>
-                    <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-twitter" href="/auth/twitter"><span class="fa fa-twitter"></span> Twitter</a>
-                    <a style="width:100%;margin:3px" class="btn btn-block btn-social btn-google" href="/auth/google"><span class="fa fa-google"></span> Google</a>
-                </div>-->
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1 class="blue-title">Create an Account</h1>
+                    <hr class="small">
+                    <h2 class="post-title">
+                        Welcome!
+                    </h2>
+                </div>
             </div>
         </div>
-        <hr>
-        <a href="/login">Already have an account?</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+            <div class="login-form">
+                <form role="form" method="post" action="/auth/local/register">
+                    <div class="form-group">
+                        <input class="form-control" name="email" placeholder="email" title="email" type="email"> 
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="username" placeholder="username" title="username" type="text"> 
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group log-status">
+                        <input class="form-control" name="password" placeholder="password" title="password" type="password"> 
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div class="align-right">
+                        <button class="btn btn-default log-btn" type="submit" value="submit">Sign up</button>
+                    </div>
+                    <br><br>
+                    <div class="social-log">
+                        <a class="btn btn-social btn-facebook" ng-click=""><i class="fa fa-facebook"></i> Facebook</a>
+                        <a class="btn btn-social btn-twitter" ng-click=""><i class="fa fa-twitter"></i> Twitter</a>
+                        <a class="btn btn-social btn-google" ng-click=""><i class="fa fa-google"></i> Google</a>
+                    </div>
+                    <br><hr>
+                    <div class="social-log">
+                        <a href="/login">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+            <div class="selfClear"></div>
+        </div>
     </div>
 </div>
