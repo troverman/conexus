@@ -31,7 +31,8 @@ angular.module( 'conexus', [
 ])
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
-    $mdThemingProvider.setDefaultTheme('none');
+    $mdThemingProvider.disableTheming();
+
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
         var hasTrailingSlash = path[path.length-1] === '/';
