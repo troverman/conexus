@@ -32,7 +32,6 @@ angular.module( 'conexus', [
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
     $mdThemingProvider.disableTheming();
-
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
         var hasTrailingSlash = path[path.length-1] === '/';
@@ -41,6 +40,9 @@ angular.module( 'conexus', [
             return newPath; 
         } 
     });
+    if (window.location.hash && window.location.hash == '#_=_') {
+        window.location.hash = '';
+    }
     $urlRouterProvider.otherwise(function ($injector, $location) {
         if ($location.$$url === '/') {window.location = '/';}
         else {window.location = $location.$$absUrl;}

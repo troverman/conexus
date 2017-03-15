@@ -13,7 +13,6 @@ module.exports = {
 		.spread(function(models) {
 			Post.watch(req);
 			Post.subscribe(req, models);
-
 			res.json(models);
 		})
 		.fail(function(err) {

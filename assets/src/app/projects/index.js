@@ -12,9 +12,7 @@ angular.module( 'conexus.projects', [
 		},
 		resolve: {
             projects: function(ProjectModel) {
-                return ProjectModel.getAll().then(function(models) {
-                    return models;
-                });
+                return ProjectModel.getAll();
             }
         }
 	});

@@ -9,6 +9,7 @@ var _ = require('lodash');
 module.exports = {
 
 	getAll: function(req, res) {
+		console.log(req.query);
 		Project.getAll()
 		.spread(function(models) {
 			Project.watch(req);

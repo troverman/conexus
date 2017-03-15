@@ -3,7 +3,8 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
 .service('ProjectModel', function(lodash, utils, $sailsSocket, $location, $rootScope) {
     this.getAll = function() {
         var url = utils.prepareUrl('project');
-        return $sailsSocket.get(url).then(success, error);
+        var query = {params:{limit:1,skip:100}};
+        return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.getByUrl = function(model) {

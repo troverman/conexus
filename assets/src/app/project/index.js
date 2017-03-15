@@ -108,7 +108,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             streams: function() {
-                return [1,2,3,4,5,6,7,8];
+                return [1,2,3,4];
             }
         }
     });
@@ -304,4 +304,34 @@ angular.module( 'conexus.project', [
 
 .controller( 'ProjectStreamsCtrl', function ProjectController( $scope, streams) {
     $scope.streams = streams;
+
+    
+
+    //testing out streaming! :D
+    function initializeRecorder(stream) {
+        var audioContext = window.AudioContext;
+        var context = new audioContext();
+        var audioInput = context.createMediaStreamSource(stream);
+        var bufferSize = 2048;
+        // create a javascript node
+        var recorder = context.createScriptProcessor(bufferSize, 1, 1);
+        // specify the processing function
+        recorder.onaudioprocess = recorderProcess;
+        // connect stream to our recorder
+        audioInput.connect(recorder);
+        // connect our recorder to the previous destination
+        recorder.connect(context.destination);
+    };
+
+    function recorderProcess(e) {
+        var left = e.inputBuffer.getChannelData(0);
+        //console.log(left)
+    }
+    function onError(e) {console.log(e);}
+    var session = {audio: true, video: true};
+    var recordRTC = null;
+    navigator.getUserMedia(session, initializeRecorder, onError);
+
+
+
 })

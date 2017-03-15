@@ -1,26 +1,27 @@
-<!--<div id="streams">
+<div id="streams">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/jUQ_3kCcG_U" frameborder="0" allowfullscreen></iframe>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/I6m999ID280" frameborder="0" allowfullscreen></iframe>
 </div>
-<div id="tasks">
+<!--<div id="tasks">
     <br><br>
     <p>task</p>
 </div>-->
-<!--
-<div id="html-edit">
+<!--<div id="html-edit">
     <h4>edit html tool</h4>
     <textarea style="width:50%" ng-model="post.post_content" class="form-control"></textarea>
     <hr>
     <div ng-bind-html="renderHtml(post.post_content)"></div>
     <div style="height:100px;"></div>
-</div>
--->
+</div>-->
 <div ng-repeat="message in messages.slice().reverse()">
-	<a href="/member/{{message.user.username}}">{{message.user.username}}</a>, <span am-time-ago="message.updatedAt"></span>
+	<a href="/member/{{message.user.username}}">
+        <img src="{{message.user.avatarUrl}}" style="height:32px;">
+        {{message.user.username}}
+    </a>, <span am-time-ago="message.updatedAt"></span>
     <p style="margin-left:15px;">{{message.title}}</p>
-	<button type="button" class="btn btn-danger btn-xs" ng-click="destroyMessage(message)" ng-show="currentUser.id === message.user.id">
+	<!--<button type="button" class="btn btn-danger btn-xs" ng-click="destroyMessage(message)" ng-show="currentUser.id === message.user.id">
 		<i class="fa fa-trash-o"></i>
-	</button>
+	</button>-->
 </div>
 <form role="form" ng-submit="createMessage(newMessage)">
 	<div class="form-group">
