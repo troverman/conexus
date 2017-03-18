@@ -27,6 +27,13 @@ module.exports = {
         });
     },
 
+    getOne: function(id) {
+        return Project.findOne(id)
+        .then(function (model) {
+            return [model];
+        });
+    },
+
     getAll: function() {
         return Project.find()
         .sort({createdAt: 'desc'})
@@ -34,13 +41,6 @@ module.exports = {
             return [models];
         });
     },
-
-    getOne: function(id) {
-        return Project.findOne(id)
-        .then(function (model) {
-            return [model];
-        });
-    }
 
 };
 

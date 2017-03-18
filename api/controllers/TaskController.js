@@ -52,9 +52,7 @@ module.exports = {
 		};
 		Task.create(model)
 		.exec(function(err, task) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				Task.publishCreate(task);
 				res.json(task);
@@ -64,24 +62,13 @@ module.exports = {
 
 	destroy: function (req, res) {
 		var id = req.param('id');
-		if (!id) {
-			return res.badRequest('No id provided.');
-		}
-
+		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
 		Task.findOne(id).exec(function(err, model) {
-			if (err) {
-				return res.serverError(err);
-			}
-			if (!model) {
-				return res.notFound();
-			}
-
+			if (err) {return res.serverError(err);}
+			if (!model) {return res.notFound();}
 			Task.destroy(id, function(err) {
-				if (err) {
-					return res.serverError(err);
-				}
-
+				if (err) {return res.serverError(err);}
 				Task.publishDestroy(model.id);
 				return res.json(model);
 			});

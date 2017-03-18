@@ -1,10 +1,7 @@
 /**
  * FollowerController
  *
- * @description :: Server-side logic for managing posts
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var _ = require('lodash');
 
 module.exports = {
 
@@ -71,9 +68,7 @@ module.exports = {
 
 		Follower.create(model)
 		.exec(function(err, follower) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				Follower.getOne(follower.id).then(function(follower){
 					Follower.publishCreate(follower[0]);
@@ -85,24 +80,13 @@ module.exports = {
 
 	destroy: function (req, res) {
 		var id = req.param('id');
-		if (!id) {
-			return res.badRequest('No id provided.');
-		}
-
+		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
 		Follower.findOne(id).exec(function(err, model) {
-			if (err) {
-				return res.serverError(err);
-			}
-			if (!model) {
-				return res.notFound();
-			}
-
+			if (err) {return res.serverError(err);}
+			if (!model) {return res.notFound();}
 			Follower.destroy(id, function(err) {
-				if (err) {
-					return res.serverError(err);
-				}
-
+				if (err) {return res.serverError(err);}
 				Follower.publishDestroy(model.id);
 				return res.json(model);
 			});

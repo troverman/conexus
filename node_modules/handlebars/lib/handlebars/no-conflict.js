@@ -1,4 +1,4 @@
-/*global window */
+/* global window */
 export default function(Handlebars) {
   /* istanbul ignore next */
   let root = typeof global !== 'undefined' ? global : window,
@@ -8,5 +8,6 @@ export default function(Handlebars) {
     if (root.Handlebars === Handlebars) {
       root.Handlebars = $Handlebars;
     }
+    return Handlebars;
   };
 }

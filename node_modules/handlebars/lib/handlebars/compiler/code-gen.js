@@ -1,4 +1,4 @@
-/*global define */
+/* global define */
 import {isArray} from '../utils';
 
 let SourceNode;
@@ -69,6 +69,9 @@ function CodeGen(srcFile) {
 }
 
 CodeGen.prototype = {
+  isEmpty() {
+    return !this.source.length;
+  },
   prepend: function(source, loc) {
     this.source.unshift(this.wrap(source, loc));
   },
@@ -90,7 +93,8 @@ CodeGen.prototype = {
     }
   },
 
-  empty: function(loc = this.currentLocation || {start: {}}) {
+  empty: function() {
+    let loc = this.currentLocation || {start: {}};
     return new SourceNode(loc.start.line, loc.start.column, this.srcFile);
   },
   wrap: function(chunk, loc = this.currentLocation || {start: {}}) {
@@ -137,22 +141,22 @@ CodeGen.prototype = {
   },
 
 
-  generateList: function(entries, loc) {
-    let ret = this.empty(loc);
+  generateList: function(entries) {
+    let ret = this.empty();
 
     for (let i = 0, len = entries.length; i < len; i++) {
       if (i) {
         ret.add(',');
       }
 
-      ret.add(castChunk(entries[i], this, loc));
+      ret.add(castChunk(entries[i], this));
     }
 
     return ret;
   },
 
-  generateArray: function(entries, loc) {
-    let ret = this.generateList(entries, loc);
+  generateArray: function(entries) {
+    let ret = this.generateList(entries);
     ret.prepend('[');
     ret.add(']');
 

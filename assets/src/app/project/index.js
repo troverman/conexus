@@ -304,12 +304,34 @@ angular.module( 'conexus.project', [
 
 .controller( 'ProjectStreamsCtrl', function ProjectController( $scope, streams) {
     $scope.streams = streams;
+    $scope.AudioContext = {}
+    $scope.videoContext = {}
 
-    
-
+    /*var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {
+
+        var mediaStream = stream;
+        var recordAudio = RecordRTC(stream, {
+            onAudioProcessStarted: function() {
+                recordVideoSeparately && recordVideo.startRecording();
+                cameraPreview.src = window.URL.createObjectURL(stream);
+                cameraPreview.play();
+                cameraPreview.muted = true;
+                cameraPreview.controls = false;
+            }
+        });
+        var recordVideo = RecordRTC(stream, {
+            type: 'video'
+        });
+        recordAudio.startRecording();
+        stopRecording.disabled = false;
+
+
+
+        /*
         var audioContext = window.AudioContext;
+        var videoContext = win
         var context = new audioContext();
         var audioInput = context.createMediaStreamSource(stream);
         var bufferSize = 2048;
@@ -321,7 +343,10 @@ angular.module( 'conexus.project', [
         audioInput.connect(recorder);
         // connect our recorder to the previous destination
         recorder.connect(context.destination);
-    };
+        */
+
+
+    //};
 
     function recorderProcess(e) {
         var left = e.inputBuffer.getChannelData(0);

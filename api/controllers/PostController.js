@@ -1,10 +1,7 @@
 /**
  * PostController
  *
- * @description :: Server-side logic for managing posts
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var _ = require('lodash');
 
 module.exports = {
 
@@ -42,9 +39,7 @@ module.exports = {
 
 		Post.create(model)
 		.exec(function(err, post) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				sails.log('POST_CRE8')
 				Post.publishCreate(post);
@@ -55,60 +50,16 @@ module.exports = {
 
 	destroy: function (req, res) {
 		var id = req.param('id');
-		if (!id) {
-			return res.badRequest('No id provided.');
-		}
-
+		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
 		Post.findOne(id).exec(function(err, model) {
-			if (err) {
-				return res.serverError(err);
-			}
-			if (!model) {
-				return res.notFound();
-			}
-
+			if (err) {return res.serverError(err);}
+			if (!model) {return res.notFound();}
 			Post.destroy(id, function(err) {
-				if (err) {
-					return res.serverError(err);
-				}
-
+				if (err) {return res.serverError(err);}
 				Post.publishDestroy(model.id);
 				return res.json(model);
 			});
-		});
-	},
-
-	addView: function (req, res, next) {
-		var id = req.param('id');
-
-		/*Post.findOne(id).exec(function(err, model){
-			var newCount = (model.views + 1);
-			model.views = newCount;
-			model.save(function(err) {
-				if (err) return next(err);
-				console.log('The new views count is: ' + newCount);
-			});
-		});*/
-
-		/*add view websockets??*/
-		Post.getOne(req.param('id'))
-		.spread(function(model) {
-			var newCount = (model.views + 1);
-			model.views = newCount;
-
-			model.save(function(err) {
-				if (err) return next(err);
-
-				Post.subscribe(req, model);
-				res.json(model);
-				
-			});
-
-
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	}
 	

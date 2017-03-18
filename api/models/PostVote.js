@@ -37,6 +37,15 @@ module.exports = {
 
     },
 
+    getOne: function(id) {
+        return PostVote.findOne(id)
+        .populate('user')
+        //.populate('post')
+        .then(function (model) {
+            return [model];
+        });
+    },
+
     getByPost: function(a_post) {
         return PostVote.find()
         .where({post: a_post})
@@ -44,7 +53,6 @@ module.exports = {
             return [models];
         });
     },
-
 
     getAll: function() {
         return PostVote.find()
@@ -56,13 +64,5 @@ module.exports = {
         });
     },
 
-    getOne: function(id) {
-        return PostVote.findOne(id)
-        .populate('user')
-        //.populate('post')
-        .then(function (model) {
-            return [model];
-        });
-    }
 };
 

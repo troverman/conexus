@@ -106,27 +106,27 @@ module.exports.sockets = {
   * app's security.                                                          *
   *                                                                          *
   ***************************************************************************/
-  // beforeConnect: function(handshake, cb) {
-  //   // `true` allows the connection
-  //   return cb(null, true);
-  //
-  //   // (`false` would reject the connection)
-  // },
+  beforeConnect: function(handshake, cb) {
+    //console.log(session);
+    //User.getSession.then(function(session){})
+    //console.log(sails.session.User)
+    return cb(null, true);
+  },
 
 
   /***************************************************************************
   *                                                                          *
-  * This custom afterDisconnect function will be run each time a socket         *
+  * This custom afterDisconnect function will be run each time a socket      *
   * disconnects                                                              *
   *                                                                          *
   ***************************************************************************/
-  // afterDisconnect: function(session, socket, cb) {
-  //   // By default: do nothing.
-  //   return cb();
-  // },
-
-
-
+  afterDisconnect: function(session, socket, cb) {
+    //console.log(session.user)
+    //if (session.User){
+      //console.log(session.User.id);
+    //}
+    return cb();
+  },
 
 
   // More configuration options for Sails+Socket.io:

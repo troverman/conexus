@@ -16,6 +16,12 @@ module.exports = {
         }
     },
 
+    beforeCreate: function(model, next) {
+        ProjectMember.find({user:model.user, project:model.project}).then(function(projectMemberModel){
+            if (projectMemberModel.length == 0){next()}
+        });
+    },
+
     afterCreate: function (project, next) {
         // set message.user = to appropriate user model
         User.getOne(project.user)

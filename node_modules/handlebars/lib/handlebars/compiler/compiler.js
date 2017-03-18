@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+
 import Exception from '../exception';
 import {isArray, indexOf} from '../utils';
 import AST from './ast';
@@ -66,6 +68,7 @@ Compiler.prototype = {
     };
     if (knownHelpers) {
       for (let name in knownHelpers) {
+        /* istanbul ignore else */
         if (name in knownHelpers) {
           options.knownHelpers[name] = knownHelpers[name];
         }
@@ -89,6 +92,11 @@ Compiler.prototype = {
   },
 
   accept: function(node) {
+    /* istanbul ignore next: Sanity code */
+    if (!this[node.type]) {
+      throw new Exception('Unknown type: ' + node.type, node);
+    }
+
     this.sourceNode.unshift(node);
     let ret = this[node.type](node);
     this.sourceNode.shift();
@@ -148,14 +156,32 @@ Compiler.prototype = {
     this.opcode('append');
   },
 
+  DecoratorBlock(decorator) {
+    let program = decorator.program && this.compileProgram(decorator.program);
+    let params = this.setupFullMustacheParams(decorator, program, undefined),
+        path = decorator.path;
+
+    this.useDecorators = true;
+    this.opcode('registerDecorator', params.length, path.original);
+  },
+
   PartialStatement: function(partial) {
     this.usePartial = true;
+
+    let program = partial.program;
+    if (program) {
+      program = this.compileProgram(partial.program);
+    }
 
     let params = partial.params;
     if (params.length > 1) {
       throw new Exception('Unsupported number of partial arguments: ' + params.length, partial);
     } else if (!params.length) {
-      params.push({type: 'PathExpression', parts: [], depth: 0});
+      if (this.options.explicitPartialContext) {
+        this.opcode('pushLiteral', 'undefined');
+      } else {
+        params.push({type: 'PathExpression', parts: [], depth: 0});
+      }
     }
 
     let partialName = partial.name.original,
@@ -164,7 +190,7 @@ Compiler.prototype = {
       this.accept(partial.name);
     }
 
-    this.setupFullMustacheParams(partial, undefined, undefined, true);
+    this.setupFullMustacheParams(partial, program, undefined, true);
 
     let indent = partial.indent || '';
     if (this.options.preventIndent && indent) {
@@ -175,9 +201,12 @@ Compiler.prototype = {
     this.opcode('invokePartial', isDynamic, partialName, indent);
     this.opcode('append');
   },
+  PartialBlockStatement: function(partialBlock) {
+    this.PartialStatement(partialBlock);
+  },
 
   MustacheStatement: function(mustache) {
-    this.SubExpression(mustache);   // eslint-disable-line new-cap
+    this.SubExpression(mustache);
 
     if (mustache.escaped && !this.options.noEscape) {
       this.opcode('appendEscaped');
@@ -185,6 +214,10 @@ Compiler.prototype = {
       this.opcode('append');
     }
   },
+  Decorator(decorator) {
+    this.DecoratorBlock(decorator);
+  },
+
 
   ContentStatement: function(content) {
     if (content.value) {
@@ -216,13 +249,16 @@ Compiler.prototype = {
     this.opcode('pushProgram', program);
     this.opcode('pushProgram', inverse);
 
+    path.strict = true;
     this.accept(path);
 
     this.opcode('invokeAmbiguous', name, isBlock);
   },
 
   simpleSexpr: function(sexpr) {
-    this.accept(sexpr.path);
+    let path = sexpr.path;
+    path.strict = true;
+    this.accept(path);
     this.opcode('resolvePossibleLambda');
   },
 
@@ -236,6 +272,7 @@ Compiler.prototype = {
     } else if (this.options.knownHelpersOnly) {
       throw new Exception('You specified knownHelpersOnly, but used the unknown helper ' + name, sexpr);
     } else {
+      path.strict = true;
       path.falsy = true;
 
       this.accept(path);
@@ -258,9 +295,9 @@ Compiler.prototype = {
       this.opcode('pushContext');
     } else if (path.data) {
       this.options.data = true;
-      this.opcode('lookupData', path.depth, path.parts);
+      this.opcode('lookupData', path.depth, path.parts, path.strict);
     } else {
-      this.opcode('lookupOnContext', path.parts, path.falsy, scoped);
+      this.opcode('lookupOnContext', path.parts, path.falsy, path.strict, scoped);
     }
   },
 
@@ -389,8 +426,9 @@ Compiler.prototype = {
           value = val.original || value;
           if (value.replace) {
             value = value
-                .replace(/^\.\//g, '')
-                .replace(/^\.$/g, '');
+                .replace(/^this(?:\.|$)/, '')
+                .replace(/^\.\//, '')
+                .replace(/^\.$/, '');
           }
 
           this.opcode('pushId', val.type, value);
@@ -508,6 +546,13 @@ function transformLiteralToPath(sexpr) {
     let literal = sexpr.path;
     // Casting to string here to make false and 0 literal values play nicely with the rest
     // of the system.
-    sexpr.path = new AST.PathExpression(false, 0, [literal.original + ''], literal.original + '', literal.loc);
+    sexpr.path = {
+      type: 'PathExpression',
+      data: false,
+      depth: 0,
+      parts: [literal.original + ''],
+      original: literal.original + '',
+      loc: literal.loc
+    };
   }
 }

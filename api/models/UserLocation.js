@@ -14,12 +14,6 @@ module.exports = {
         }
     },
 
-    /**
-    * Callback to be run after creating a Message.
-    *
-    * @param {Object}   message The soon-to-be-created Message
-    * @param {Function} next
-    */
     afterCreate: function (message, next) {
         // set message.user = to appropriate user model
         User.getOne(message.user)

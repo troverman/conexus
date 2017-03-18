@@ -1,4 +1,4 @@
-/*eslint-disable new-cap */
+/* eslint-disable new-cap */
 import Visitor from './visitor';
 
 export function print(ast) {
@@ -15,10 +15,10 @@ PrintVisitor.prototype.pad = function(string) {
   let out = '';
 
   for (let i = 0, l = this.padding; i < l; i++) {
-    out = out + '  ';
+    out += '  ';
   }
 
-  out = out + string + '\n';
+  out += string + '\n';
   return out;
 };
 
@@ -37,7 +37,7 @@ PrintVisitor.prototype.Program = function(program) {
   }
 
   for (i = 0, l = body.length; i < l; i++) {
-    out = out + this.accept(body[i]);
+    out += this.accept(body[i]);
   }
 
   this.padding--;
@@ -48,24 +48,28 @@ PrintVisitor.prototype.Program = function(program) {
 PrintVisitor.prototype.MustacheStatement = function(mustache) {
   return this.pad('{{ ' + this.SubExpression(mustache) + ' }}');
 };
+PrintVisitor.prototype.Decorator = function(mustache) {
+  return this.pad('{{ DIRECTIVE ' + this.SubExpression(mustache) + ' }}');
+};
 
-PrintVisitor.prototype.BlockStatement = function(block) {
+PrintVisitor.prototype.BlockStatement =
+PrintVisitor.prototype.DecoratorBlock = function(block) {
   let out = '';
 
-  out = out + this.pad('BLOCK:');
+  out += this.pad((block.type === 'DecoratorBlock' ? 'DIRECTIVE ' : '') + 'BLOCK:');
   this.padding++;
-  out = out + this.pad(this.SubExpression(block));
+  out += this.pad(this.SubExpression(block));
   if (block.program) {
-    out = out + this.pad('PROGRAM:');
+    out += this.pad('PROGRAM:');
     this.padding++;
-    out = out + this.accept(block.program);
+    out += this.accept(block.program);
     this.padding--;
   }
   if (block.inverse) {
     if (block.program) { this.padding++; }
-    out = out + this.pad('{{^}}');
+    out += this.pad('{{^}}');
     this.padding++;
-    out = out + this.accept(block.inverse);
+    out += this.accept(block.inverse);
     this.padding--;
     if (block.program) { this.padding--; }
   }
@@ -82,6 +86,22 @@ PrintVisitor.prototype.PartialStatement = function(partial) {
   if (partial.hash) {
     content += ' ' + this.accept(partial.hash);
   }
+  return this.pad('{{> ' + content + ' }}');
+};
+PrintVisitor.prototype.PartialBlockStatement = function(partial) {
+  let content = 'PARTIAL BLOCK:' + partial.name.original;
+  if (partial.params[0]) {
+    content += ' ' + this.accept(partial.params[0]);
+  }
+  if (partial.hash) {
+    content += ' ' + this.accept(partial.hash);
+  }
+
+  content += ' ' + this.pad('PROGRAM:');
+  this.padding++;
+  content += this.accept(partial.program);
+  this.padding--;
+
   return this.pad('{{> ' + content + ' }}');
 };
 
@@ -148,4 +168,4 @@ PrintVisitor.prototype.Hash = function(hash) {
 PrintVisitor.prototype.HashPair = function(pair) {
   return pair.key + '=' + this.accept(pair.value);
 };
-/*eslint-enable new-cap */
+/* eslint-enable new-cap */

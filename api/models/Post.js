@@ -29,6 +29,15 @@ module.exports = {
         }
     },
 
+
+    getOne: function(id) {
+        return Post.findOne(id)
+        .populate('user')
+        .then(function (model) {
+            return [model];
+        });
+    },
+
     afterCreate: function (post, next) {
         // set message.user = to appropriate user model
         User.getOne(post.user)
@@ -47,12 +56,5 @@ module.exports = {
         });
     },
 
-    getOne: function(id) {
-        return Post.findOne(id)
-        .populate('user')
-        .then(function (model) {
-            return [model];
-        });
-    }
 };
 

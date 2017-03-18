@@ -1,10 +1,13 @@
 import Visitor from './visitor';
 
-function WhitespaceControl() {
+function WhitespaceControl(options = {}) {
+  this.options = options;
 }
 WhitespaceControl.prototype = new Visitor();
 
 WhitespaceControl.prototype.Program = function(program) {
+  const doStandalone = !this.options.ignoreStandalone;
+
   let isRoot = !this.isRootSeen;
   this.isRootSeen = true;
 
@@ -31,7 +34,7 @@ WhitespaceControl.prototype.Program = function(program) {
       omitLeft(body, i, true);
     }
 
-    if (inlineStandalone) {
+    if (doStandalone && inlineStandalone) {
       omitRight(body, i);
 
       if (omitLeft(body, i)) {
@@ -42,13 +45,13 @@ WhitespaceControl.prototype.Program = function(program) {
         }
       }
     }
-    if (openStandalone) {
+    if (doStandalone && openStandalone) {
       omitRight((current.program || current.inverse).body);
 
       // Strip out the previous content node if it's whitespace only
       omitLeft(body, i);
     }
-    if (closeStandalone) {
+    if (doStandalone && closeStandalone) {
       // Always strip the next node
       omitRight(body, i);
 
@@ -58,7 +61,10 @@ WhitespaceControl.prototype.Program = function(program) {
 
   return program;
 };
-WhitespaceControl.prototype.BlockStatement = function(block) {
+
+WhitespaceControl.prototype.BlockStatement =
+WhitespaceControl.prototype.DecoratorBlock =
+WhitespaceControl.prototype.PartialBlockStatement = function(block) {
   this.accept(block.program);
   this.accept(block.inverse);
 
@@ -106,7 +112,8 @@ WhitespaceControl.prototype.BlockStatement = function(block) {
     }
 
     // Find standalone else statments
-    if (isPrevWhitespace(program.body)
+    if (!this.options.ignoreStandalone
+        && isPrevWhitespace(program.body)
         && isNextWhitespace(firstInverse.body)) {
       omitLeft(program.body);
       omitRight(firstInverse.body);
@@ -118,6 +125,7 @@ WhitespaceControl.prototype.BlockStatement = function(block) {
   return strip;
 };
 
+WhitespaceControl.prototype.Decorator =
 WhitespaceControl.prototype.MustacheStatement = function(mustache) {
   return mustache.strip;
 };

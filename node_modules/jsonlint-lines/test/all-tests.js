@@ -7,6 +7,11 @@ exports["test object"] = function () {
     assert.deepEqual(parser.parse(json), {"foo": "bar"});
 };
 
+exports["test duplicate property detection"] = function () {
+    var json = '{"f":1,"f":2,"a":1,"a":2}';
+    assert.deepEqual(parser.parse(json).__duplicateProperties__, ["f", "a"]);
+};
+
 exports["test escaped backslash"] = function () {
     var json = '{"foo": "\\\\"}';
     assert.deepEqual(parser.parse(json), {"foo": "\\"});

@@ -9,18 +9,39 @@ angular.module( 'conexus.stream', [
                 controller: 'StreamCtrl',
                 templateUrl: 'stream/index.tpl.html'
             }
-        },
-
-        member: function(UserModel, $stateParams){
-            //return UserModel.getByUsername($stateParams.path);
-            return null;
-        },
-            
+        }            
     });
 })
 
-.controller( 'StreamCtrl', function StreamController( $http, $location, $scope, $sailsSocket, $stateParams, lodash, config, titleService, FollowerModel, followers, MessageModel, member, messages ) {
+.controller( 'StreamCtrl', function StreamController($scope, $sailsSocket, config, titleService ) {
     $scope.currentUser = config.currentUser;
-    $scope.member = member;
+
+    var cameraPreview = document.getElementById('camera-preview');
+    //testing out streaming! :D
+    function initializeRecorder(stream) {
+
+        var mediaStream = stream;
+        console.log(stream)
+        var recordAudio = RecordRTC(stream, {
+            onAudioProcessStarted: function() {
+                recordVideo.startRecording();
+                cameraPreview.src = window.URL.createObjectURL(stream);
+                cameraPreview.play();
+                cameraPreview.muted = true;
+                cameraPreview.controls = false;
+            }
+        });
+        var recordVideo = RecordRTC(stream, {
+            type: 'video'
+        });
+        recordAudio.startRecording();
+        stopRecording.disabled = false;
+
+    };
+
+    function onError(e) {console.log(e);}
+    var session = {audio: true, video: true};
+    var recordRTC = null;
+    navigator.getUserMedia(session, initializeRecorder, onError);
     
 });

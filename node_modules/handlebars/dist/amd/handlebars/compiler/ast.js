@@ -2,140 +2,18 @@ define(['exports', 'module'], function (exports, module) {
   'use strict';
 
   var AST = {
-    Program: function Program(statements, blockParams, strip, locInfo) {
-      this.loc = locInfo;
-      this.type = 'Program';
-      this.body = statements;
-
-      this.blockParams = blockParams;
-      this.strip = strip;
-    },
-
-    MustacheStatement: function MustacheStatement(path, params, hash, escaped, strip, locInfo) {
-      this.loc = locInfo;
-      this.type = 'MustacheStatement';
-
-      this.path = path;
-      this.params = params || [];
-      this.hash = hash;
-      this.escaped = escaped;
-
-      this.strip = strip;
-    },
-
-    BlockStatement: function BlockStatement(path, params, hash, program, inverse, openStrip, inverseStrip, closeStrip, locInfo) {
-      this.loc = locInfo;
-      this.type = 'BlockStatement';
-
-      this.path = path;
-      this.params = params || [];
-      this.hash = hash;
-      this.program = program;
-      this.inverse = inverse;
-
-      this.openStrip = openStrip;
-      this.inverseStrip = inverseStrip;
-      this.closeStrip = closeStrip;
-    },
-
-    PartialStatement: function PartialStatement(name, params, hash, strip, locInfo) {
-      this.loc = locInfo;
-      this.type = 'PartialStatement';
-
-      this.name = name;
-      this.params = params || [];
-      this.hash = hash;
-
-      this.indent = '';
-      this.strip = strip;
-    },
-
-    ContentStatement: function ContentStatement(string, locInfo) {
-      this.loc = locInfo;
-      this.type = 'ContentStatement';
-      this.original = this.value = string;
-    },
-
-    CommentStatement: function CommentStatement(comment, strip, locInfo) {
-      this.loc = locInfo;
-      this.type = 'CommentStatement';
-      this.value = comment;
-
-      this.strip = strip;
-    },
-
-    SubExpression: function SubExpression(path, params, hash, locInfo) {
-      this.loc = locInfo;
-
-      this.type = 'SubExpression';
-      this.path = path;
-      this.params = params || [];
-      this.hash = hash;
-    },
-
-    PathExpression: function PathExpression(data, depth, parts, original, locInfo) {
-      this.loc = locInfo;
-      this.type = 'PathExpression';
-
-      this.data = data;
-      this.original = original;
-      this.parts = parts;
-      this.depth = depth;
-    },
-
-    StringLiteral: function StringLiteral(string, locInfo) {
-      this.loc = locInfo;
-      this.type = 'StringLiteral';
-      this.original = this.value = string;
-    },
-
-    NumberLiteral: function NumberLiteral(number, locInfo) {
-      this.loc = locInfo;
-      this.type = 'NumberLiteral';
-      this.original = this.value = Number(number);
-    },
-
-    BooleanLiteral: function BooleanLiteral(bool, locInfo) {
-      this.loc = locInfo;
-      this.type = 'BooleanLiteral';
-      this.original = this.value = bool === 'true';
-    },
-
-    UndefinedLiteral: function UndefinedLiteral(locInfo) {
-      this.loc = locInfo;
-      this.type = 'UndefinedLiteral';
-      this.original = this.value = undefined;
-    },
-
-    NullLiteral: function NullLiteral(locInfo) {
-      this.loc = locInfo;
-      this.type = 'NullLiteral';
-      this.original = this.value = null;
-    },
-
-    Hash: function Hash(pairs, locInfo) {
-      this.loc = locInfo;
-      this.type = 'Hash';
-      this.pairs = pairs;
-    },
-    HashPair: function HashPair(key, value, locInfo) {
-      this.loc = locInfo;
-      this.type = 'HashPair';
-      this.key = key;
-      this.value = value;
-    },
-
     // Public API used to evaluate derived attributes regarding AST nodes
     helpers: {
       // a mustache is definitely a helper if:
       // * it is an eligible helper, and
       // * it has at least one parameter or hash segment
       helperExpression: function helperExpression(node) {
-        return !!(node.type === 'SubExpression' || node.params.length || node.hash);
+        return node.type === 'SubExpression' || (node.type === 'MustacheStatement' || node.type === 'BlockStatement') && !!(node.params && node.params.length || node.hash);
       },
 
       scopedId: function scopedId(path) {
-        return /^\.|this\b/.test(path.original);
+        return (/^\.|this\b/.test(path.original)
+        );
       },
 
       // an ID is simple if it only has one part, and that part is not
@@ -150,3 +28,4 @@ define(['exports', 'module'], function (exports, module) {
   // must modify the object to operate properly.
   module.exports = AST;
 });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL2NvbXBpbGVyL2FzdC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxNQUFJLEdBQUcsR0FBRzs7QUFFUixXQUFPLEVBQUU7Ozs7QUFJUCxzQkFBZ0IsRUFBRSwwQkFBUyxJQUFJLEVBQUU7QUFDL0IsZUFBTyxBQUFDLElBQUksQ0FBQyxJQUFJLEtBQUssZUFBZSxJQUM3QixDQUFDLElBQUksQ0FBQyxJQUFJLEtBQUssbUJBQW1CLElBQUksSUFBSSxDQUFDLElBQUksS0FBSyxnQkFBZ0IsQ0FBQSxJQUNuRSxDQUFDLEVBQUUsQUFBQyxJQUFJLENBQUMsTUFBTSxJQUFJLElBQUksQ0FBQyxNQUFNLENBQUMsTUFBTSxJQUFLLElBQUksQ0FBQyxJQUFJLENBQUEsQUFBQyxBQUFDLENBQUM7T0FDaEU7O0FBRUQsY0FBUSxFQUFFLGtCQUFTLElBQUksRUFBRTtBQUN2QixlQUFPLEFBQUMsYUFBWSxDQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDO1VBQUM7T0FDM0M7Ozs7QUFJRCxjQUFRLEVBQUUsa0JBQVMsSUFBSSxFQUFFO0FBQ3ZCLGVBQU8sSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDO09BQzlFO0tBQ0Y7R0FDRixDQUFDOzs7O21CQUthLEdBQUciLCJmaWxlIjoiYXN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsibGV0IEFTVCA9IHtcbiAgLy8gUHVibGljIEFQSSB1c2VkIHRvIGV2YWx1YXRlIGRlcml2ZWQgYXR0cmlidXRlcyByZWdhcmRpbmcgQVNUIG5vZGVzXG4gIGhlbHBlcnM6IHtcbiAgICAvLyBhIG11c3RhY2hlIGlzIGRlZmluaXRlbHkgYSBoZWxwZXIgaWY6XG4gICAgLy8gKiBpdCBpcyBhbiBlbGlnaWJsZSBoZWxwZXIsIGFuZFxuICAgIC8vICogaXQgaGFzIGF0IGxlYXN0IG9uZSBwYXJhbWV0ZXIgb3IgaGFzaCBzZWdtZW50XG4gICAgaGVscGVyRXhwcmVzc2lvbjogZnVuY3Rpb24obm9kZSkge1xuICAgICAgcmV0dXJuIChub2RlLnR5cGUgPT09ICdTdWJFeHByZXNzaW9uJylcbiAgICAgICAgICB8fCAoKG5vZGUudHlwZSA9PT0gJ011c3RhY2hlU3RhdGVtZW50JyB8fCBub2RlLnR5cGUgPT09ICdCbG9ja1N0YXRlbWVudCcpXG4gICAgICAgICAgICAmJiAhISgobm9kZS5wYXJhbXMgJiYgbm9kZS5wYXJhbXMubGVuZ3RoKSB8fCBub2RlLmhhc2gpKTtcbiAgICB9LFxuXG4gICAgc2NvcGVkSWQ6IGZ1bmN0aW9uKHBhdGgpIHtcbiAgICAgIHJldHVybiAoL15cXC58dGhpc1xcYi8pLnRlc3QocGF0aC5vcmlnaW5hbCk7XG4gICAgfSxcblxuICAgIC8vIGFuIElEIGlzIHNpbXBsZSBpZiBpdCBvbmx5IGhhcyBvbmUgcGFydCwgYW5kIHRoYXQgcGFydCBpcyBub3RcbiAgICAvLyBgLi5gIG9yIGB0aGlzYC5cbiAgICBzaW1wbGVJZDogZnVuY3Rpb24ocGF0aCkge1xuICAgICAgcmV0dXJuIHBhdGgucGFydHMubGVuZ3RoID09PSAxICYmICFBU1QuaGVscGVycy5zY29wZWRJZChwYXRoKSAmJiAhcGF0aC5kZXB0aDtcbiAgICB9XG4gIH1cbn07XG5cblxuLy8gTXVzdCBiZSBleHBvcnRlZCBhcyBhbiBvYmplY3QgcmF0aGVyIHRoYW4gdGhlIHJvb3Qgb2YgdGhlIG1vZHVsZSBhcyB0aGUgamlzb24gbGV4ZXJcbi8vIG11c3QgbW9kaWZ5IHRoZSBvYmplY3QgdG8gb3BlcmF0ZSBwcm9wZXJseS5cbmV4cG9ydCBkZWZhdWx0IEFTVDtcbiJdfQ==

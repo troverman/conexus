@@ -4,17 +4,18 @@ const escape = {
   '>': '&gt;',
   '"': '&quot;',
   "'": '&#x27;',
-  '`': '&#x60;'
+  '`': '&#x60;',
+  '=': '&#x3D;'
 };
 
-const badChars = /[&<>"'`]/g,
-      possible = /[&<>"'`]/;
+const badChars = /[&<>"'`=]/g,
+      possible = /[&<>"'`=]/;
 
 function escapeChar(chr) {
   return escape[chr];
 }
 
-export function extend(obj /* , ...source */) {
+export function extend(obj/* , ...source */) {
   for (let i = 1; i < arguments.length; i++) {
     for (let key in arguments[i]) {
       if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
@@ -30,8 +31,8 @@ export let toString = Object.prototype.toString;
 
 // Sourced from lodash
 // https://github.com/bestiejs/lodash/blob/master/LICENSE.txt
-/*eslint-disable func-style, no-var */
-var isFunction = function(value) {
+/* eslint-disable func-style */
+let isFunction = function(value) {
   return typeof value === 'function';
 };
 // fallback for older versions of Chrome and Safari
@@ -41,8 +42,8 @@ if (isFunction(/x/)) {
     return typeof value === 'function' && toString.call(value) === '[object Function]';
   };
 }
-export var isFunction;
-/*eslint-enable func-style, no-var */
+export {isFunction};
+/* eslint-enable func-style */
 
 /* istanbul ignore next */
 export const isArray = Array.isArray || function(value) {
@@ -89,6 +90,12 @@ export function isEmpty(value) {
   } else {
     return false;
   }
+}
+
+export function createFrame(object) {
+  let frame = extend({}, object);
+  frame._parent = object;
+  return frame;
 }
 
 export function blockParams(params, ids) {

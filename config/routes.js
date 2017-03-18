@@ -95,7 +95,6 @@ module.exports.routes = {
   'post /api/message': 'MessageController.create',
   'delete /api/message/:id': 'MessageController.destroy',
 
-
   /**
    * Post routes
    *
@@ -104,8 +103,6 @@ module.exports.routes = {
   'get /api/post/:id': 'PostController.getOne',
   'post /api/post': 'PostController.create',
   'delete /api/post/:id': 'PostController.destroy',
-  'get /api/post/addView/:id': 'PostController.addView',
-
 
   /**
    * PostVote routes
@@ -116,7 +113,6 @@ module.exports.routes = {
   'get /api/postvote/post/:id': 'PostVoteController.getByPost',
   'post /api/postvote': 'PostVoteController.create',
   'delete /api/postvote/:id': 'PostVoteController.destroy',
-
 
   /**
    * Project routes
@@ -129,16 +125,13 @@ module.exports.routes = {
   'post /api/project': 'ProjectController.create',
   'delete /api/project/:id': 'ProjectController.destroy',
 
-
    /**
    * ProjectMember routes
    *
    */
-
   'get /api/project/:id/member': 'ProjectMemberController.getByProject',
   'post /api/project/member': 'ProjectMemberController.create',
   'delete /api/project/member/:id': 'ProjectMemberController.destroy',
-
 
   /**
    * Search routes
@@ -157,7 +150,6 @@ module.exports.routes = {
   'post /api/task': 'TaskController.create',
   'delete /api/task/:id': 'TaskController.destroy',
 
-
   /**
    * User routes
    */
@@ -169,10 +161,7 @@ module.exports.routes = {
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
 
-
-
   //'get /*' : 'HomeController.index'
-
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options

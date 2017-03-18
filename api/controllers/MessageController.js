@@ -1,4 +1,3 @@
-var _ = require('lodash');
 
 module.exports = {
 	getAll: function(req, res) {
@@ -60,9 +59,7 @@ module.exports = {
 
 		Message.create(model)
 		.exec(function(err, message) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				Message.publishCreate(message);
 				res.json(message);
@@ -72,24 +69,13 @@ module.exports = {
 
 	destroy: function (req, res) {
 		var id = req.param('id');
-		if (!id) {
-			return res.badRequest('No id provided.');
-		}
-
+		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
 		Message.findOne(id).exec(function(err, model) {
-			if (err) {
-				return res.serverError(err);
-			}
-			if (!model) {
-				return res.notFound();
-			}
-
+			if (err) {return res.serverError(err);}
+			if (!model) {return res.notFound();}
 			Message.destroy(id, function(err) {
-				if (err) {
-					return res.serverError(err);
-				}
-
+				if (err) {return res.serverError(err);}
 				Message.publishDestroy(model.id);
 				return res.json(model);
 			});

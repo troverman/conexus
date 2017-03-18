@@ -1,20 +1,15 @@
 /**
  * PostVoteController
  *
- * @description :: Server-side logic for managing PostVotes
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var _ = require('lodash');
 
 module.exports = {
 
 	getAll: function(req, res) {
 		PostVote.getAll()
 		.spread(function(models) {
-
 			PostVote.watch(req);
 			PostVote.subscribe(req, models);
-
 			res.json(models);
 		})
 		.fail(function(err) {
@@ -60,9 +55,7 @@ module.exports = {
 
 		PostVote.create(model)
 		.exec(function(err, post) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				PostVote.publishCreate(post);
 				res.json(post);
@@ -73,24 +66,13 @@ module.exports = {
 
 	destroy: function (req, res) {
 		var id = req.param('id');
-		if (!id) {
-			return res.badRequest('No id provided.');
-		}
-
+		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
 		PostVote.findOne(id).exec(function(err, model) {
-			if (err) {
-				return res.serverError(err);
-			}
-			if (!model) {
-				return res.notFound();
-			}
-
+			if (err) {return res.serverError(err);}
+			if (!model) {return res.notFound();}
 			PostVote.destroy(id, function(err) {
-				if (err) {
-					return res.serverError(err);
-				}
-
+				if (err) {return res.serverError(err);}
 				PostVote.publishDestroy(model.id);
 				return res.json(model);
 			});

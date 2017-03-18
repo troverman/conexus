@@ -1,15 +1,12 @@
 /**
  * ProjectController
  *
- * @description :: Server-side logic for managing Projects
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var _ = require('lodash');
 
 module.exports = {
 
 	getAll: function(req, res) {
-		console.log(req.query);
+		//console.log(req.query);
 		Project.getAll()
 		.spread(function(models) {
 			Project.watch(req);
@@ -69,24 +66,13 @@ module.exports = {
 
 	destroy: function (req, res) {
 		var id = req.param('id');
-		if (!id) {
-			return res.badRequest('No id provided.');
-		}
-
+		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
 		Project.findOne(id).exec(function(err, model) {
-			if (err) {
-				return res.serverError(err);
-			}
-			if (!model) {
-				return res.notFound();
-			}
-
+			if (err) {return res.serverError(err);}
+			if (!model) {return res.notFound();}
 			Project.destroy(id, function(err) {
-				if (err) {
-					return res.serverError(err);
-				}
-
+				if (err) {return res.serverError(err);}
 				Project.publishDestroy(model.id);
 				return res.json(model);
 			});
