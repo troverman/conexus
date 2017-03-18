@@ -4,10 +4,11 @@ var upperCaseFirst = require('upper-case-first')
 /**
  * Pascal case a string.
  *
- * @param  {String} string
- * @param  {String} [locale]
- * @return {String}
+ * @param  {string}  value
+ * @param  {string}  [locale]
+ * @param  {boolean} [mergeNumbers]
+ * @return {string}
  */
-module.exports = function (string, locale) {
-  return upperCaseFirst(camelCase(string, locale), locale)
+module.exports = function (value, locale, mergeNumbers) {
+  return upperCaseFirst(camelCase(value, locale, mergeNumbers), locale)
 }

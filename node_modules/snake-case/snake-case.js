@@ -1,12 +1,12 @@
-var sentenceCase = require('sentence-case')
+var noCase = require('no-case')
 
 /**
  * Snake case a string.
  *
- * @param  {String} str
- * @param  {String} [locale]
- * @return {String}
+ * @param  {string} value
+ * @param  {string} [locale]
+ * @return {string}
  */
-module.exports = function (str, locale) {
-  return sentenceCase(str, locale, '_')
+module.exports = function (value, locale) {
+  return noCase(value, locale, '_')
 }
