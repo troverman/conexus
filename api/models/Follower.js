@@ -20,8 +20,8 @@ module.exports = {
 
     beforeCreate: function(model, next) {
         if (model.follower != model.followed){
-            Follower.find({followed:model.followed, follower:model.follower}).then(function(projectMemberModel){
-                if (projectMemberModel.length == 0){next()}
+            Follower.find({followed:model.followed, follower:model.follower}).then(function(followerModel){
+                if (followerModel.length == 0){next()}
             });
         }
     },

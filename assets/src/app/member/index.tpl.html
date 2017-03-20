@@ -1,33 +1,24 @@
-<div id="header-section">
-  <br>
+<div class="profile-header">
+  <div class="spacing-15"></div>
   <img class="avatar" style="border-radius:100px; "src="{{member.avatarUrl}}"/>
-  <h4><h1>{{member.username}}</h1></h4>
-  <form role="form" ng-submit="follow()">
-    <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">follow ({{followers.length}})</button>
-  </form>
-  <!--total time spent streaming?-->
-  <br><br>
+  <h1>{{member.username}}</h1>
+  <button ng-click="follow()" class="btn btn-primary" ng-disabled="!currentUser">follow ({{followers.length}})</button>
+  <div class="spacing-15"></div>
 </div>
 
-<div id="section1">
+<div class="profile-timeline">
+  <div class="container">
+    <div ng-repeat="follower in followers">
+      <div class="timeline-item">
+        <a href="/member/{{follower.follower.username}}">{{follower.follower.username}}</a><hr>
+      </div>
+    </div>
 
-  <div>
-    <a>filter</a>
-    <a>time</a>
-    <!--total time spent streaming?-->
-  </div>
-
-  <div ng-repeat="follower in followers">
-    <div id="timeline-item">
-      <a href="/member/{{follower.follower.username}}">{{follower.follower.username}}</a><hr>
+    <div ng-repeat="message in messages">
+      <div class="timeline-item">
+        <a href="/project/{{message.project.urlTitle}}">{{message.title}}</a><hr>
+      </div>
     </div>
   </div>
-
-  <div ng-repeat="message in messages">
-    <div id="timeline-item">
-      <a href="/project/{{message.project.urlTitle}}">{{message.title}}</a><hr>
-    </div>
-  </div>
-
 </div>
 

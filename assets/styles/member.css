@@ -1,9 +1,3 @@
-#header-section{background-color:#445065;height:20%;text-align:center;}
-#header-section img{height:200px;}
-#section1{height:100%;background-color:#687A94;padding-left:15%;padding-right:15%;}
-#footer{background-color:#445065;padding-left:15%;padding-right:15%;min-height:100px;}
-#timeline-item{background-color:rgb(255,255,255);padding:30px;}
-.navbar{margin-bottom:0px;}
 .avatar {
   margin: 0 auto;
   background: #fff;
@@ -11,6 +5,20 @@
   height: 15em;
   padding: 0.25em;
   border-radius: .4em;
-  //margin-top: -13em;//-8.4em;
   box-shadow: 0 0 .1em rgba(0, 0, 0, 0.35);
+}
+.profile-header{
+	background-color:#445065;
+	height:20%;
+	text-align:center;
+}
+.profile-header img{height:200px;}
+.profile-header h1{color:white;}
+.profile-timeline{
+	height:100%;
+	background-color:#687A94;
+}
+.timeline-item{
+	background-color:rgb(255,255,255);
+	padding:30px;
 }

@@ -393,37 +393,28 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
 
 angular.module("member/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/index.tpl.html",
-    "<div id=\"header-section\">\n" +
-    "  <br>\n" +
+    "<div class=\"profile-header\">\n" +
+    "  <div class=\"spacing-15\"></div>\n" +
     "  <img class=\"avatar\" style=\"border-radius:100px; \"src=\"{{member.avatarUrl}}\"/>\n" +
-    "  <h4><h1>{{member.username}}</h1></h4>\n" +
-    "  <form role=\"form\" ng-submit=\"follow()\">\n" +
-    "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">follow ({{followers.length}})</button>\n" +
-    "  </form>\n" +
-    "  <!--total time spent streaming?-->\n" +
-    "  <br><br>\n" +
+    "  <h1>{{member.username}}</h1>\n" +
+    "  <button ng-click=\"follow()\" class=\"btn btn-primary\" ng-disabled=\"!currentUser\">follow ({{followers.length}})</button>\n" +
+    "  <div class=\"spacing-15\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div id=\"section1\">\n" +
+    "<div class=\"profile-timeline\">\n" +
+    "  <div class=\"container\">\n" +
+    "    <div ng-repeat=\"follower in followers\">\n" +
+    "      <div class=\"timeline-item\">\n" +
+    "        <a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "  <div>\n" +
-    "    <a>filter</a>\n" +
-    "    <a>time</a>\n" +
-    "    <!--total time spent streaming?-->\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div ng-repeat=\"follower in followers\">\n" +
-    "    <div id=\"timeline-item\">\n" +
-    "      <a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
+    "    <div ng-repeat=\"message in messages\">\n" +
+    "      <div class=\"timeline-item\">\n" +
+    "        <a href=\"/project/{{message.project.urlTitle}}\">{{message.title}}</a><hr>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "\n" +
-    "  <div ng-repeat=\"message in messages\">\n" +
-    "    <div id=\"timeline-item\">\n" +
-    "      <a href=\"/project/{{message.project.urlTitle}}\">{{message.title}}</a><hr>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
-    "\n" +
     "</div>\n" +
     "\n" +
     "");
