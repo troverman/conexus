@@ -18,8 +18,13 @@ module.exports = {
         }
     },
 
-    //afterCreate: function (follower, next) {},
-
+    beforeCreate: function(model, next) {
+        if (model.follower != model.followed){
+            Follower.find({followed:model.followed, follower:model.follower}).then(function(projectMemberModel){
+                if (projectMemberModel.length == 0){next()}
+            });
+        }
+    },
     getAll: function() {
         return Follower.find()
         .sort({createdAt: 'desc'})
