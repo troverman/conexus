@@ -6,7 +6,7 @@ module.exports = {
         });
     },
     ssl: function(req, res) {
-    	res.send('w2T3bSE5RFiLHGWHoyBEIQjLP67A1k2MbbpP9tq-Mmw.yMz-EAV5agQah1zn-w6Aqp0JVzxv1jmSFH6dh5Ea9uI')
+    	res.send('C6ZD85-Tr5srNkC5aBAczAMEYMGqZ302dKArdb2vjwY.yMz-EAV5agQah1zn-w6Aqp0JVzxv1jmSFH6dh5Ea9uI')
     },
 
 };
