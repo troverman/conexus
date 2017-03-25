@@ -161,6 +161,9 @@ module.exports.routes = {
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
 
+  'post /.well-known/acme-challenge/C0p71ZD63hNh7GqkHdFHPJPE1YKwRMhsU-UYkGQ7Y98': 'HomeController.ssl',
+
+
   //'get /*' : 'HomeController.index'
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
