@@ -3,11 +3,21 @@
     <head>
         <title>conex.us</title>
         <base href="/">
-        <!-- Viewport mobile tag for sensible mobile support -->
+
+        <!--META TAGS-->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        
-        <!-- font awesome from BootstrapCDN -->
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+        <meta name="apple-mobile-web-app-title" content="conexus">
+        <meta name="application-name" content="conexus">
+        <meta name="theme-color" content="#ffffff">
+        <!--META TAGS END-->
+
+        <!--FAVICON-->
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/favicons/manifest.json">
+        <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <!--FAVICON END-->
 
         <!--STYLES-->
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -21,20 +31,20 @@
         <link rel="stylesheet" href="/styles/theme.css">
         <!--STYLES END-->
 
-        <!--Google Analytics-->
+        <!--FONTS-->
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+        <!--FONTS END-->
+
+        <!--ANALYTICS-->
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
           ga('create', 'UA-22491760-9', 'auto');
           ga('send', 'pageview');
-
         </script>
-        <!--Google Analytics-->
-
-
+        <!--ANALYTICS END-->
 
     </head>
 <body>
@@ -94,11 +104,13 @@
     <script src="/src/common/services/utils.js"></script>
     <!--SCRIPTS END-->
 
+    <!--CDNS-->
+    <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
+    <!--CDNS END-->
+
     <!--TEMPLATES-->
     <script type="text/javascript" src="/templates.js"></script>
     <!--TEMPLATES END-->
-
-    <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
 
 </body>
 </html>
