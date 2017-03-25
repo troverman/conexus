@@ -161,7 +161,7 @@ module.exports.routes = {
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
 
-  '/.well-known/acme-challenge/C6ZD85-Tr5srNkC5aBAczAMEYMGqZ302dKArdb2vjwY': 'HomeController.ssl',
+  '/.well-known/acme-challenge/cV2kFOb-PA_snEp6iR9udCIa1XFiJ8tm3JZkYOouqmw': 'HomeController.ssl',
 
 
   //'get /*' : 'HomeController.index'
