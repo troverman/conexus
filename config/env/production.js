@@ -35,4 +35,8 @@ module.exports = {
   //   level: "silent"
   // }
 
+  policies: {
+    '*': 'enforceSsl'
+  }
+
 };
