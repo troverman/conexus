@@ -29,7 +29,7 @@ angular.module( 'conexus', [
     'conexus.search',
     'conexus.transparency'
 ])
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider ) {
+.config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
     $mdThemingProvider.disableTheming();
     $urlRouterProvider.rule(function($injector, $location) {
@@ -48,11 +48,11 @@ angular.module( 'conexus', [
         else {window.location = $location.$$absUrl;}
     });
     $locationProvider.html5Mode(true);
-})
+}])
 .run( function run () {
     moment.locale('en');
 })
-.controller( 'AppCtrl', function AppCtrl ( $rootScope, $scope, config ) {
+.controller( 'AppCtrl', ['$rootScope', '$scope', 'config', function AppCtrl ( $rootScope, $scope, config ) {
     config.currentUser = window.currentUser;
     $rootScope.$on('$stateChangeStart',function(){
         $rootScope.stateIsLoading = true;
@@ -60,7 +60,7 @@ angular.module( 'conexus', [
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
     });
-})
+}])
 .directive('errSrc', function() {
   return {
     link: function(scope, element, attrs) {
