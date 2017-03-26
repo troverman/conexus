@@ -1,6 +1,7 @@
 angular.module('models.follower', ['lodash', 'services', 'sails.io',])
 
-.service('FollowerModel', function(lodash, utils, $sailsSocket) {
+.service('FollowerModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+
     this.getAll = function() {
         var url = utils.prepareUrl('follower');
         return $sailsSocket.get(url).then(success, error);
@@ -28,4 +29,5 @@ angular.module('models.follower', ['lodash', 'services', 'sails.io',])
     var error = function(error) {
         console.log(error);
     };
-});
+    
+}]);

@@ -1,6 +1,7 @@
 angular.module('models.message', ['lodash', 'services', 'sails.io',])
 
-.service('MessageModel', function(lodash, utils, $sailsSocket) {
+.service('MessageModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+
     this.getAll = function() {
         var url = utils.prepareUrl('message');
         return $sailsSocket.get(url).then(success, error);
@@ -34,4 +35,5 @@ angular.module('models.message', ['lodash', 'services', 'sails.io',])
     var error = function(error) {
         console.log(error);
     };
-});
+    
+}]);

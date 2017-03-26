@@ -1,6 +1,7 @@
 angular.module('models.postvote', ['lodash', 'services', 'sails.io',])
 
-.service('PostVoteModel', function(lodash, utils, $sailsSocket) {
+.service('PostVoteModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+
     this.getAll = function() {
         var url = utils.prepareUrl('postvote');
         return $sailsSocket.get(url).then(success, error);
@@ -28,4 +29,5 @@ angular.module('models.postvote', ['lodash', 'services', 'sails.io',])
     var error = function(error) {
         console.log(error);
     };
-});
+    
+}]);

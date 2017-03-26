@@ -1,6 +1,6 @@
 angular.module('models.member', ['lodash', 'services', 'sails.io',])
 
-.service('MemberModel', function(lodash, utils, $sailsSocket) {
+.service('MemberModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
     this.getByProject = function(model) {
 		var url = utils.prepareUrl('project/' + model.id + '/member');
@@ -20,4 +20,4 @@ angular.module('models.member', ['lodash', 'services', 'sails.io',])
         console.log(error);
     };
 
-});
+}]);

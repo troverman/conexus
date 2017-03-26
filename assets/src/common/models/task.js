@@ -1,6 +1,7 @@
 angular.module('models.task', ['lodash', 'services', 'sails.io',])
 
-.service('TaskModel', function(lodash, utils, $sailsSocket) {
+.service('TaskModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+
     this.getAll = function() {
         var url = utils.prepareUrl('task');
         return $sailsSocket.get(url).then(success, error);
@@ -28,4 +29,5 @@ angular.module('models.task', ['lodash', 'services', 'sails.io',])
     var error = function(error) {
         console.log(error);
     };
-});
+    
+}]);

@@ -1,5 +1,5 @@
 angular.module('services.title', [])
-.factory('titleService', function($document) {
+.factory('titleService',['$document', function($document) {
   var title;
   return {
     setTitle: function(t) {
@@ -10,4 +10,4 @@ angular.module('services.title', [])
       return $document.prop('title');
     }
   };
-});
+}]);

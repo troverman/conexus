@@ -1,6 +1,7 @@
 angular.module('models.project', ['lodash', 'services', 'sails.io',])
 
-.service('ProjectModel', function(lodash, utils, $sailsSocket, $location, $rootScope) {
+.service('ProjectModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+
     this.getAll = function() {
         var url = utils.prepareUrl('project');
         var query = {params:{limit:1,skip:100}};
@@ -23,14 +24,11 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
     };
 
     var success = function(response) {
-        if (response.data == undefined){
-            $location.path('/projects');
-            $rootScope.$apply()
-        }
         return response.data;
     };
 
     var error = function(error) {
         console.log(error);
     };
-});
+
+}]);
