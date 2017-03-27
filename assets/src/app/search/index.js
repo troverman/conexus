@@ -1,7 +1,7 @@
 angular.module( 'conexus.search', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'search', {
         abstract: true,
         url: '/search',
@@ -20,9 +20,9 @@ angular.module( 'conexus.search', [
             }
         },
         resolve: {
-            searchResults: function(SearchModel) {
+            searchResults: ['SearchModel', function(SearchModel) {
                 return SearchModel.search('');
-            }
+            }]
         }
     })
     .state( 'search.query', {
@@ -34,14 +34,14 @@ angular.module( 'conexus.search', [
             }
         },
         resolve: {
-            searchResults: function(SearchModel, $stateParams) {
+            searchResults: ['$stateParams','SearchModel', function($stateParams, SearchModel) {
                 return SearchModel.search($stateParams.searchQuery);
-            }
+            }]
          }
     });
-})
+}])
 
-.controller( 'SearchController', function SearchController( $scope, lodash, config, titleService, searchResults, SearchModel, $stateParams ) {
+.controller( 'SearchController', ['$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
     $scope.searchResults = searchResults;
     $scope.searchQuery = $stateParams.searchQuery;
 
@@ -52,8 +52,5 @@ angular.module( 'conexus.search', [
             $scope.searchResults = models;
         });
     }
-
-
-
-    
-});
+   
+}]);
