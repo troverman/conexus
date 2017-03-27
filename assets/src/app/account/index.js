@@ -9,13 +9,7 @@ angular.module( 'conexus.account', [
 				controller: 'AccountCtrl',
 				templateUrl: 'account/index.tpl.html'
 			}
-		},
-		//resolve: {
-        //    UserModel: 'UserModel',
-        //    user: function(UserModel){
-        //        return UserModel.getMine();
-        //    }
-        //}
+		}
 	});
 }])
 

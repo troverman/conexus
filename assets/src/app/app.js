@@ -13,21 +13,21 @@ angular.module( 'conexus', [
     'ngFileUpload',
     'ngMaterial',
     'conexus.about',
-    //'conexus.account',
-    //'conexus.connect',
+    'conexus.account',
+    'conexus.connect',
     'conexus.footer',
     'conexus.nav',
-    //'conexus.home',
-    //'conexus.intro',
-    //'conexus.login',
-    //'conexus.member',
-    //'conexus.post',
-    //'conexus.project',
-    //'conexus.projects',
-    //'conexus.register',
-    //'conexus.stream',
-    //'conexus.search',
-    //'conexus.transparency'
+    'conexus.home',
+    'conexus.intro',
+    'conexus.login',
+    'conexus.member',
+    'conexus.post',
+    'conexus.project',
+    'conexus.projects',
+    'conexus.register',
+    'conexus.stream',
+    'conexus.search',
+    'conexus.transparency'
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
@@ -53,6 +53,7 @@ angular.module( 'conexus', [
     moment.locale('en');
 })
 .controller( 'AppCtrl', ['$rootScope', '$scope', 'config', function AppCtrl ( $rootScope, $scope, config ) {
+    console.log('TEST')
     config.currentUser = window.currentUser;
     $rootScope.$on('$stateChangeStart',function(){
         $rootScope.stateIsLoading = true;

@@ -35,9 +35,9 @@ angular.module( 'conexus.project', [
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getByProject(project);
             }],
-            users: function() {
+            users: [function() {
                 return [1,2,3,4,5];
-            }
+            }]
         }
     })
     .state( 'project.finance', {
@@ -58,9 +58,9 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            channels: function() {
+            channels: [function() {
                 return [1,2,3,4,5];
-            },
+            }],
             messages: ['MemberModel', 'project', function(MessageModel, project){
                 return MessageModel.getByProject(project);
             }],
@@ -103,9 +103,9 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            streams: function() {
+            streams: [function() {
                 return [1,2,3,4];
-            }
+            }]
         }
     });
     
