@@ -1,7 +1,7 @@
 angular.module( 'conexus.member', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'member', {
 		url: '/member/:path',
 		views: {
@@ -11,25 +11,22 @@ angular.module( 'conexus.member', [
 			}
 		},
 		resolve: {
-
-            member: function(UserModel, $stateParams){
+            member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
-            },
-            followers: function(FollowerModel, $stateParams, $http, $q, member) {
+            }],
+            followers: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getByUser(member);
-            },
-            messages: function(MessageModel, member) {
+            }],
+            messages: ['member', 'MessageModel', function(member, MessageModel) {
                 return MessageModel.getByUser(member);
-            }
-
+            }]
         }
 	});
-})
+}])
 
-.controller( 'MemberCtrl', function MemberController( $http, $location, $scope, $sailsSocket, $stateParams, lodash, config, titleService, FollowerModel, followers, MessageModel, member, messages ) {
+.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'member', 'MessageModel', 'messages', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, member, MessageModel, messages, titleService) {
 	$scope.currentUser = config.currentUser;
     $scope.member = member;
-    console.log(member)
     titleService.setTitle($scope.member.username + ' - conex.us');
     if(!$scope.member){$location.path('/')}
     $scope.messages = messages;
@@ -37,18 +34,16 @@ angular.module( 'conexus.member', [
     $scope.newFollower = {};
 
     $scope.unfollow = function(member) {
-        // check here if this message belongs to the currentUser
         if (member.user.id === config.currentUser.id) {
             FollowerModel.delete(member).then(function(model) {
-                // message has been deleted, and removed from $scope.messages
             });
         }
     };
 
     $scope.follow = function(newModel) {
     	$scope.followModel = {};
-        $scope.followModel.followed = $scope.member
-        $scope.followModel.follower = config.currentUser
+        $scope.followModel.followed = $scope.member;
+        $scope.followModel.follower = config.currentUser;
         FollowerModel.create($scope.followModel).then(function(model) {
             $scope.newFollower = {};
         });
@@ -57,7 +52,6 @@ angular.module( 'conexus.member', [
     $sailsSocket.subscribe('follower', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                //console.log(envelope.data);
                 $scope.followers.unshift(envelope.data);
                 break;
             case 'destroyed':
@@ -66,5 +60,4 @@ angular.module( 'conexus.member', [
         }
     });
 
-
-});
+}]);

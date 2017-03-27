@@ -1,7 +1,7 @@
 angular.module( 'conexus.post', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'post', {
         url: '/post',
         views: {
@@ -12,26 +12,40 @@ angular.module( 'conexus.post', [
         },
         resolve: {
             posts: function(PostModel) {
-                return PostModel.getAll().then(function(models) {
-                    return models;
-                });
-            },
-            postvotes: function(PostVoteModel) {
-                return PostVoteModel.getAll().then(function(models) {
-                    return models;
-                });
+                return PostModel.getAll();
             }
         }
     });
-})
+}])
 
-.controller( 'PostController', function PostController( $scope, $sailsSocket, lodash, config, titleService, PostModel, PostVoteModel, posts, postvotes) {
+.controller( 'PostController', ['$sailsSocket', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'titleService', function PostController( $sailsSocket, $scope, config, lodash, PostModel, posts, titleService ) {
     titleService.setTitle('posts - conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.posts = posts;
     $scope.newPostVote = {};
-    $scope.postvotes = postvotes;
+
+    $scope.destroyPost = function(post) {
+        if (post.user.id.toString() === config.currentUser.id) {
+            PostModel.delete(post).then(function(model) {
+            });
+        }
+    };
+
+    $scope.createPost = function(newPost) {
+        newPost.user = config.currentUser.id;
+        PostModel.create(newPost).then(function(model) {
+            $scope.newPost = {};
+        });
+    };
+
+    $scope.createVote = function(post, newPostVote) {
+        newPostVote.post = post;
+        newPostVote.user = config.currentUser;
+        PostVoteModel.create(newPostVote).then(function(model) {
+            $scope.newPostVote = {};
+        });
+    };
 
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
@@ -44,64 +58,4 @@ angular.module( 'conexus.post', [
         }
     });
 
-    $scope.destroyPost = function(post) {
-        // check here if this post belongs to the currentUser
-        if (post.user.id.toString() === config.currentUser.id) {
-            PostModel.delete(post).then(function(model) {
-                // [post] has been deleted, and removed from $scope.posts
-            });
-        }
-    };
-
-    $scope.createPost = function(newPost) {
-        newPost.user = config.currentUser.id;
-        PostModel.create(newPost).then(function(model) {
-            $scope.newPost = {};
-        });
-    };
-
-    $sailsSocket.subscribe('postvote', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.postvotes.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.postvotes, {id: envelope.id});
-                break;
-        }
-    });
-
-    //gotta figure this out
-    //$scope.getVoteByPost = function(post){
-        //PostVoteModel.getVoteByPost(post).then(function(models) {
-        //$scope.post[i].votes = models;
-        //});
-    //};
-
-    $scope.destroyVote = function(postvote) {
-        // check here if this post belongs to the currentUser
-        //if (postvote.user.id === config.currentUser.id) {//and post id
-            PostVoteModel.delete(postvote).then(function(model) {
-                // [post] has been deleted, and removed from $scope.posts
-            });
-        //}
-    };
-
-    $scope.createVote = function(post, newPostVote) {
-        newPostVote.post = post;
-        newPostVote.user = config.currentUser;
-        PostVoteModel.create(newPostVote).then(function(model) {
-            $scope.newPostVote = {};
-        });
-    };
-
-});
-
-
-
-
-
-
-
-
-
+}]);

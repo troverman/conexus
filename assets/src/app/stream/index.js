@@ -1,7 +1,7 @@
 angular.module( 'conexus.stream', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'stream', {
         url: '/stream/:path',
         views: {
@@ -11,9 +11,9 @@ angular.module( 'conexus.stream', [
             }
         }            
     });
-})
+}])
 
-.controller( 'StreamCtrl', function StreamController($scope, $sailsSocket, config, titleService ) {
+.controller( 'StreamCtrl', ['$sailsSocket', '$scope', 'config', 'titleService', function StreamController($sailsSocket, $scope, config, titleService ) {
     $scope.currentUser = config.currentUser;
 
     var cameraPreview = document.getElementById('camera-preview');
@@ -44,4 +44,4 @@ angular.module( 'conexus.stream', [
     var recordRTC = null;
     navigator.getUserMedia(session, initializeRecorder, onError);
     
-});
+}]);

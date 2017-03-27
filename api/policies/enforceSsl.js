@@ -6,6 +6,6 @@ module.exports = function(req, res, next) {
 			req.url
 		].join(''));
 	}
-	if(req.isSocket){res.redirect('wss://' + req.host + req.url)}
+	//if(req.isSocket){res.redirect('wss://' + req.host + req.url)}
 	else {next()}
 };

@@ -1,7 +1,7 @@
 angular.module( 'conexus.projects', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'projects', {
 		url: '/projects',
 		views: {
@@ -11,30 +11,19 @@ angular.module( 'conexus.projects', [
 			}
 		},
 		resolve: {
-            projects: function(ProjectModel) {
+            projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.getAll();
-            }
+            }]
         }
 	});
-})
+}])
 
-.controller( 'ProjectsCtrl', function ProjectsController( $scope, titleService, $sailsSocket, lodash, config, ProjectModel, projects ) {
+.controller( 'ProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'titleService', function ProjectsController( $sailsSocket, $scope, config, lodash, ProjectModel, projects, titleService ) {
 	titleService.setTitle('projects - conex.us');
     $scope.currentUser = config.currentUser;
     $scope.projects = projects;
     $scope.newProject = {};
     $scope.newProjectToggleVar = false;
-
-    $sailsSocket.subscribe('project', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.projects.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.projects, {id: envelope.id});
-                break;
-        }
-    });
 
     $scope.newProjectToggle = function () {
         $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
@@ -47,4 +36,15 @@ angular.module( 'conexus.projects', [
         });
     };
 
-});
+    $sailsSocket.subscribe('project', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.projects.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.projects, {id: envelope.id});
+                break;
+        }
+    });
+
+}]);

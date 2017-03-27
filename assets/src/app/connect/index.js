@@ -1,7 +1,7 @@
 angular.module( 'conexus.connect', [
 ])
 
-.config(function config( $stateProvider, uiGmapGoogleMapApiProvider) {
+.config(['$stateProvider', 'uiGmapGoogleMapApiProvider', function config( $stateProvider, uiGmapGoogleMapApiProvider ) {
 	$stateProvider.state( 'connect', {
 		url: '/connect',
 		views: {
@@ -16,9 +16,9 @@ angular.module( 'conexus.connect', [
         v: '3.20',
         libraries: 'weather,geometry,visualization'
     });
-})
+}])
 
-.controller( 'ConnectCtrl', function ConnectController( $scope, titleService, UserModel, uiGmapGoogleMapApi ) {
+.controller( 'ConnectCtrl', ['$scope', 'titleService', 'UserModel', 'uiGmapGoogleMapApi', function ConnectController( $scope, titleService, UserModel, uiGmapGoogleMapApi ) {
 	titleService.setTitle('connect - conex.us');
 
 	$scope.map = {
@@ -33,4 +33,4 @@ angular.module( 'conexus.connect', [
 		$scope.users = users;
 	});
 
-});
+}]);

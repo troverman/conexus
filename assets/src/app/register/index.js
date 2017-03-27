@@ -1,7 +1,7 @@
 angular.module( 'conexus.register', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'register', {
 		url: '/register',
 		views: {
@@ -11,10 +11,9 @@ angular.module( 'conexus.register', [
 			}
 		}
 	});
-})
+}])
 
-.controller( 'RegisterCtrl', function RegisterController( $scope, titleService, config ) {
+.controller( 'RegisterCtrl', ['$scope', 'config', 'titleService', function RegisterController( $scope, config, titleService ) {
 	titleService.setTitle('register - conex.us');
 	$scope.currentUser = config.currentUser;
-
-});
+}]);

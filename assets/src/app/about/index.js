@@ -1,7 +1,7 @@
 angular.module( 'conexus.about', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'about', {
 		url: '/about',
 		views: {
@@ -11,9 +11,9 @@ angular.module( 'conexus.about', [
 			}
 		}
 	});
-})
+}])
 
-.controller( 'AboutCtrl', function AboutController( $scope, titleService ) {
+.controller( 'AboutCtrl', ['$scope', 'titleService', function AboutController( $scope, titleService ) {
 	titleService.setTitle('about - conex.us');
 	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     $scope.series = ['Series A', 'Series B'];
@@ -21,4 +21,4 @@ angular.module( 'conexus.about', [
         [65, 59, 80, 81, 56, 55, 40],
         [28, 48, 40, 19, 86, 27, 90]
     ];
-});
+}]);

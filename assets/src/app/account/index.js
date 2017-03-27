@@ -1,7 +1,7 @@
 angular.module( 'conexus.account', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'account', {
 		url: '/account',
 		views: {
@@ -17,9 +17,9 @@ angular.module( 'conexus.account', [
         //    }
         //}
 	});
-})
+}])
 
-.controller( 'AccountCtrl', function AccountController( $location, $scope, config, titleService, Upload, UserModel ) {
+.controller( 'AccountCtrl', ['$location', '$scope', 'config', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $scope, config, titleService, Upload, UserModel ) {
 	titleService.setTitle('account - conex.us');
 	$scope.currentUser = config.currentUser;
 	if(!$scope.currentUser){$location.path('/')}
@@ -53,4 +53,4 @@ angular.module( 'conexus.account', [
         return UserModel.update(model);
     }
 
-});
+}]);

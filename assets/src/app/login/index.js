@@ -1,7 +1,7 @@
 angular.module( 'conexus.login', [
 ])
 
-.config(function config( $stateProvider ) {
+.config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'login', {
 		url: '/login',
 		views: {
@@ -11,10 +11,9 @@ angular.module( 'conexus.login', [
 			}
 		}
 	});
-})
+}])
 
-.controller( 'LoginCtrl', function LoginController( $scope, titleService, config ) {
+.controller( 'LoginCtrl', ['$scope', 'config', 'titleService', function LoginController( $scope, config, titleService ) {
 	titleService.setTitle('login - conex.us');
 	$scope.currentUser = config.currentUser;
-
-});
+}]);
