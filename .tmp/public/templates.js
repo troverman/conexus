@@ -9,21 +9,26 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<img style=\"max-height:400px\" src=\"/images/loading.gif\">\n" +
     "	</div>\n" +
     "	<div id=\"title-container\">\n" +
-    "		<h1>connect, collab, create</h1>\n" +
+    "		<!--<h1>connect, collab, create</h1>-->\n" +
+    "		<h1>conex.us</h1>\n" +
     "		<p>a transparent network</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section1\">\n" +
     "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<h3>crowd-sourced, crowd-owned, crowd-operated</h3>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<p>crowd-sourced, crowd-owned, crowd-operated</p>\n" +
+    "				<p>open finance and contribution</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	<div id=\"about-section2\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<p>connect with collaborators, create awesome things</p>\n" +
-    "				<p>live streaming</p>\n" +
+    "				<p>connect with new collaborators and create awesome things</p>\n" +
     "				<p>a 24/7 continual hackathon</p>\n" +
     "				<p>watch the world create</p>\n" +
     "			</div>\n" +
@@ -33,15 +38,15 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		</div>\n" +
     "	</div>\n" +
     "	<div id=\"about-section3\">\n" +
-    "		<p>crowd-owned organizations</p>\n" +
+    "		<!--<p>crowd-owned organizations</p>-->\n" +
     "		<p>a community of collaborators</p>\n" +
-    "		<p>let's work together toward a common goal</p>\n" +
+    "		<p>working together toward a common goal</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section4\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h4>transparency</h4>\n" +
-    "				<p>transparent contrubition, equatable representation</p>\n" +
+    "				<p>transparent contrubitions and equatable representation</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
@@ -165,17 +170,73 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div ng-show=\"!currentUser\">\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div class=\"header-area container\">\n" +
-    "		<h2>crowd-sourced, crowd-owned, crowd-operated</h2>\n" +
-    "		<div class=\"spacing-5\"></div>\n" +
+    "		<!--<h2>crowd-sourced, crowd-owned, crowd-operated</h2>-->\n" +
+    "		<h2>the internet is creating</h2>\n" +
     "		<h4>participate in crowd-sourced, transparent projects</h4>\n" +
-    "		<br>\n" +
-    "		<p>watch the world create</p>\n" +
-    "		<p>connect and collaborate, create a project on the spot with memebers you meet</p>\n" +
-    "		<p>stream your process - creation is viral</p>\n" +
+    "		<h4>connect and collaborate, create projects with memebers you meet</h4>\n" +
+    "		<h5>earn though streaming your process - creation is a viral action</h5>\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<a class=\"btn btn-primary\" href=\"/about\">tell me more</a>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "	<!--<div id=\"search-container\">\n" +
+    "		<div class=\"container\">\n" +
+    "			<div class=\"row\">\n" +
+    "        		<div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
+    "					<input style=\"width:100%\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
+    "					<div ng-repeat=\"searchResult in searchResults.slice(0,8)\">\n" +
+    "						<h5><a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a></h5>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>-->\n" +
+    "	<!--<div id=\"member-container\">\n" +
+    "		<div class=\"container\">\n" +
+    "			<h2>connect</h2><hr>\n" +
+    "			<div class=\"container\">\n" +
+    "			  <div class='md-padding' layout=\"row\" layout-align=\"center\" layout-wrap>\n" +
+    "			    <md-card flex=\"30\" ng-repeat=\"member in members\">\n" +
+    "			      <md-card-title>\n" +
+    "			        <md-card-title-text>\n" +
+    "					  <a href=\"/member/{{member.username}}\">\n" +
+    "			            <span class=\"\">{{member.username}}</span>\n" +
+    "			          </a>\n" +
+    "			        </md-card-title-text>\n" +
+    "			      </md-card-title>\n" +
+    "			    </md-card>\n" +
+    "			  </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div id=\"project-container\">\n" +
+    "		<div class=\"container\">\n" +
+    "			<h2>collab</h2><hr>\n" +
+    "			<div class=\"container\">\n" +
+    "			  <div class='md-padding' layout=\"row\" layout-align=\"center\" layout-wrap>\n" +
+    "			    <md-card flex=\"30\" ng-repeat=\"project in projects\">\n" +
+    "			      <md-card-title>\n" +
+    "			        <md-card-title-text>\n" +
+    "			          <a href=\"/project/{{project.urlTitle}}/\">\n" +
+    "			            <span class=\"\">{{project.title}}</span>\n" +
+    "			          </a>\n" +
+    "			        </md-card-title-text>\n" +
+    "			      </md-card-title>\n" +
+    "			    </md-card>\n" +
+    "			  </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>-->\n" +
+    "	<!--\n" +
+    "	<div id=\"task-container\">\n" +
+    "		<div ng-repeat=\"project in projects\">\n" +
+    "			<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	-->\n" +
     "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
@@ -214,80 +275,21 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	        </div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "	<div class=\"dynamic-data\">\n" +
-    "		<div id=\"search-container\">\n" +
-    "			<div class=\"container\">\n" +
-    "				<!--<h2>search</h2><hr>-->\n" +
-    "				<div class=\"row\">\n" +
-    "	        		<div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
-    "						<input style=\"width:100%\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
-    "						<div ng-repeat=\"searchResult in searchResults.slice(0,8)\">\n" +
-    "							<h5><a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a></h5>\n" +
-    "						</div>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div id=\"project-container\">\n" +
-    "			<div class=\"container\">\n" +
-    "				<!--<h2>projects</h2><hr>-->\n" +
-    "				<div class=\"container\">\n" +
-    "				  <div class='md-padding' layout=\"row\" layout-align=\"center\" layout-wrap>\n" +
-    "				    <md-card flex=\"30\" ng-repeat=\"project in projects\">\n" +
-    "				      <md-card-title>\n" +
-    "				        <md-card-title-text>\n" +
-    "				          <a href=\"/project/{{project.urlTitle}}/\">\n" +
-    "				            <span class=\"\">{{project.title}}</span>\n" +
-    "				          </a>\n" +
-    "				        </md-card-title-text>\n" +
-    "				      </md-card-title>\n" +
-    "				    </md-card>\n" +
-    "				  </div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div id=\"member-container\">\n" +
-    "			<div class=\"container\">\n" +
-    "				<!--<h2>members</h2><hr>-->\n" +
-    "				<div class=\"container\">\n" +
-    "				  <div class='md-padding' layout=\"row\" layout-align=\"center\" layout-wrap>\n" +
-    "				    <md-card flex=\"30\" ng-repeat=\"member in members\">\n" +
-    "				      <md-card-title>\n" +
-    "				        <md-card-title-text>\n" +
-    "						  <a href=\"/member/{{member.username}}\">\n" +
-    "				            <span class=\"\">{{member.username}}</span>\n" +
-    "				          </a>\n" +
-    "				        </md-card-title-text>\n" +
-    "				      </md-card-title>\n" +
-    "				    </md-card>\n" +
-    "				  </div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<!--<div id=\"stream-container\">\n" +
-    "			<div ng-repeat=\"project in projects\">\n" +
-    "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div id=\"task-container\">\n" +
-    "			<div ng-repeat=\"project in projects\">\n" +
-    "				<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
-    "			</div>\n" +
-    "		</div>-->\n" +
-    "		<div id=\"message-container\">\n" +
-    "			<div class=\"container\">\n" +
-    "			    <md-card ng-repeat=\"message in messages.slice(0,5)\">\n" +
-    "			      <md-card-title>\n" +
-    "			        <md-card-title-text>\n" +
-    "						<p>{{message.title}}</p>\n" +
-    "						<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>\n" +
-    "						<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
-    "			        </md-card-title-text>\n" +
-    "			      </md-card-title>\n" +
-    "			    </md-card>\n" +
-    "			</div>\n" +
+    "	<div id=\"message-container\">\n" +
+    "		<div class=\"container\">\n" +
+    "			<h3>what's happening</h3>\n" +
+    "		    <md-card ng-repeat=\"message in messages.slice(0,5)\">\n" +
+    "		      <md-card-title>\n" +
+    "		        <md-card-title-text>\n" +
+    "					<p>{{message.title}}</p>\n" +
+    "					<a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>\n" +
+    "					<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
+    "		        </md-card-title-text>\n" +
+    "		      </md-card-title>\n" +
+    "		    </md-card>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>");
@@ -439,7 +441,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "      <ul class=\"nav navbar-nav\">\n" +
     "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/connect\">Connect</a></li>\n" +
-    "        <li class=\"nav-links\"><a href=\"/projects\">Companies</a></li>\n" +
+    "        <li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>\n" +
     "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\">\n" +

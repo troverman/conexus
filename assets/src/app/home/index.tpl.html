@@ -26,17 +26,73 @@
 <div ng-show="!currentUser">
 	<div ng-include="'intro/index.tpl.html'"></div>
 	<div class="header-area container">
-		<h2>crowd-sourced, crowd-owned, crowd-operated</h2>
-		<div class="spacing-5"></div>
+		<!--<h2>crowd-sourced, crowd-owned, crowd-operated</h2>-->
+		<h2>the internet is creating</h2>
 		<h4>participate in crowd-sourced, transparent projects</h4>
-		<br>
-		<p>watch the world create</p>
-		<p>connect and collaborate, create a project on the spot with memebers you meet</p>
-		<p>stream your process - creation is viral</p>
+		<h4>connect and collaborate, create projects with memebers you meet</h4>
+		<h5>earn though streaming your process - creation is a viral action</h5>
 		<div class="spacing-25"></div>
 		<a class="btn btn-primary" href="/about">tell me more</a>
 		<div class="spacing-50"></div>
 	</div>
+
+	<div class="spacing-50"></div>
+
+	<!--<div id="search-container">
+		<div class="container">
+			<div class="row">
+        		<div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+					<input style="width:100%" ng-keyup="keyPress(searchValue)" ng-model="searchValue">
+					<div ng-repeat="searchResult in searchResults.slice(0,8)">
+						<h5><a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>-->
+	<!--<div id="member-container">
+		<div class="container">
+			<h2>connect</h2><hr>
+			<div class="container">
+			  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
+			    <md-card flex="30" ng-repeat="member in members">
+			      <md-card-title>
+			        <md-card-title-text>
+					  <a href="/member/{{member.username}}">
+			            <span class="">{{member.username}}</span>
+			          </a>
+			        </md-card-title-text>
+			      </md-card-title>
+			    </md-card>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div id="project-container">
+		<div class="container">
+			<h2>collab</h2><hr>
+			<div class="container">
+			  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
+			    <md-card flex="30" ng-repeat="project in projects">
+			      <md-card-title>
+			        <md-card-title-text>
+			          <a href="/project/{{project.urlTitle}}/">
+			            <span class="">{{project.title}}</span>
+			          </a>
+			        </md-card-title-text>
+			      </md-card-title>
+			    </md-card>
+			  </div>
+			</div>
+		</div>
+	</div>-->
+	<!--
+	<div id="task-container">
+		<div ng-repeat="project in projects">
+			<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+		</div>
+	</div>
+	-->
 
 	<div class="container">
 	    <div class="row">
@@ -75,80 +131,21 @@
 	        </div>
 	    </div>
 	</div>
+
 	<div class="spacing-50"></div>
 
-	<div class="dynamic-data">
-		<div id="search-container">
-			<div class="container">
-				<!--<h2>search</h2><hr>-->
-				<div class="row">
-	        		<div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
-						<input style="width:100%" ng-keyup="keyPress(searchValue)" ng-model="searchValue">
-						<div ng-repeat="searchResult in searchResults.slice(0,8)">
-							<h5><a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a></h5>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="project-container">
-			<div class="container">
-				<!--<h2>projects</h2><hr>-->
-				<div class="container">
-				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
-				    <md-card flex="30" ng-repeat="project in projects">
-				      <md-card-title>
-				        <md-card-title-text>
-				          <a href="/project/{{project.urlTitle}}/">
-				            <span class="">{{project.title}}</span>
-				          </a>
-				        </md-card-title-text>
-				      </md-card-title>
-				    </md-card>
-				  </div>
-				</div>
-			</div>
-		</div>
-		<div id="member-container">
-			<div class="container">
-				<!--<h2>members</h2><hr>-->
-				<div class="container">
-				  <div class='md-padding' layout="row" layout-align="center" layout-wrap>
-				    <md-card flex="30" ng-repeat="member in members">
-				      <md-card-title>
-				        <md-card-title-text>
-						  <a href="/member/{{member.username}}">
-				            <span class="">{{member.username}}</span>
-				          </a>
-				        </md-card-title-text>
-				      </md-card-title>
-				    </md-card>
-				  </div>
-				</div>
-			</div>
-		</div>
-		<!--<div id="stream-container">
-			<div ng-repeat="project in projects">
-				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
-			</div>
-		</div>
-		<div id="task-container">
-			<div ng-repeat="project in projects">
-				<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
-			</div>
-		</div>-->
-		<div id="message-container">
-			<div class="container">
-			    <md-card ng-repeat="message in messages.slice(0,5)">
-			      <md-card-title>
-			        <md-card-title-text>
-						<p>{{message.title}}</p>
-						<a href="/member/{{message.user.username}}">{{message.user.username}}</a>
-						<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
-			        </md-card-title-text>
-			      </md-card-title>
-			    </md-card>
-			</div>
+	<div id="message-container">
+		<div class="container">
+			<h3>what's happening</h3>
+		    <md-card ng-repeat="message in messages.slice(0,5)">
+		      <md-card-title>
+		        <md-card-title-text>
+					<p>{{message.title}}</p>
+					<a href="/member/{{message.user.username}}">{{message.user.username}}</a>
+					<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+		        </md-card-title-text>
+		      </md-card-title>
+		    </md-card>
 		</div>
 	</div>
 </div>
