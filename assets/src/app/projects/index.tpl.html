@@ -1,4 +1,10 @@
-<!--if logged in-->
+<div class="page-heading">
+  <div class="container"> 
+    <div class="spacing-25"></div>
+    <h1><b>Projects</b></h1>
+  </div>
+</div>
+<div class="spacing-25"></div>
 <div ng-show="currentUser">
   <button class="btn btn-primary blog-button" ng-click="newProjectToggle()">+ project</button>
   <br><br>
@@ -16,25 +22,11 @@
     </div>
   </div>
 </div>
-<!--/if logged in-->
-<!--
-<div ng-show="!currentUser">
-  <button class="btn btn-primary blog-button"><a href="/login">+ project</a></button>
-  <br><br>
-</div>
--->
-<div class="page-heading">
-  <div class="container"> 
-    <div class="spacing-25"></div>
-    <h1><b>Projects</b></h1>
-  </div>
-</div>
-<div class="spacing-25"></div>
 <div class="container">
   <div class="row">
     <div class="post-container col-md-6" ng-repeat="project in projects | orderBy:'-createdAt'">
       <div class="col-md-2">
-        <img src="http://www.placehold.it/50x50">
+        <img style="width:50px;height:50px;" src="{{project.avatarUrl}}">
       </div>
       <div class="col-md-10">
         <h1 class="title"><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h1>

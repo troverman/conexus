@@ -253,7 +253,6 @@ md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
 .title {
     margin:0;
     line-height: 1.5;
-    text-transform: capitalize;
 }
 
 .title a {

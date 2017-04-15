@@ -664,7 +664,13 @@ angular.module("project/tasks.tpl.html", []).run(["$templateCache", function ($t
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("projects/index.tpl.html",
-    "<!--if logged in-->\n" +
+    "<div class=\"page-heading\">\n" +
+    "  <div class=\"container\"> \n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "    <h1><b>Projects</b></h1>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "<div class=\"spacing-25\"></div>\n" +
     "<div ng-show=\"currentUser\">\n" +
     "  <button class=\"btn btn-primary blog-button\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
     "  <br><br>\n" +
@@ -682,25 +688,11 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
-    "<!--/if logged in-->\n" +
-    "<!--\n" +
-    "<div ng-show=\"!currentUser\">\n" +
-    "  <button class=\"btn btn-primary blog-button\"><a href=\"/login\">+ project</a></button>\n" +
-    "  <br><br>\n" +
-    "</div>\n" +
-    "-->\n" +
-    "<div class=\"page-heading\">\n" +
-    "  <div class=\"container\"> \n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <h1><b>Projects</b></h1>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "<div class=\"spacing-25\"></div>\n" +
     "<div class=\"container\">\n" +
     "  <div class=\"row\">\n" +
     "    <div class=\"post-container col-md-6\" ng-repeat=\"project in projects | orderBy:'-createdAt'\">\n" +
     "      <div class=\"col-md-2\">\n" +
-    "        <img src=\"http://www.placehold.it/50x50\">\n" +
+    "        <img style=\"width:50px;height:50px;\" src=\"{{project.avatarUrl}}\">\n" +
     "      </div>\n" +
     "      <div class=\"col-md-10\">\n" +
     "        <h1 class=\"title\"><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h1>\n" +

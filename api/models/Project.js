@@ -12,6 +12,10 @@ module.exports = {
             type: 'string',
             required: true
         },
+        avatarUrl: {
+            type: 'string',
+            defaultsTo: '/images/loading.gif'
+        },
         urlTitle: {
             type: 'string',
             required: true
