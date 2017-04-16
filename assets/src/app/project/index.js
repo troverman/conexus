@@ -14,39 +14,27 @@ angular.module( 'conexus.project', [
         resolve: {
             project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
                 return ProjectModel.getByUrl($stateParams.path);
-            }]
+            }]//,
+            //memberCount: ['committee', 'CommitteeMemberModel', function(committee, CommitteeMemberModel){
+            //     return CommitteeMemberModel.getCommitteeMemberCount('committee', committee.id);
+            // }]
         }
     })
-    .state( 'project.home', {
+    .state( 'project.activity', {
         url: '',
         views: {
-            "home": {
-                controller: 'ProjectHomeCtrl',
-                templateUrl: 'project/home.tpl.html'
+            "activity": {
+                controller: 'ProjectActivityCtrl',
+                templateUrl: 'project/templates/activity.tpl.html'
             }
         },
         resolve: {
-            project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
-                return ProjectModel.getByUrl($stateParams.path);
-            }],
             messages: ['MessageModel', 'project', function(MessageModel, project){
                 return MessageModel.getByProject(project);
             }],
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getByProject(project);
-            }],
-            users: [function() {
-                return [1,2,3,4,5];
             }]
-        }
-    })
-    .state( 'project.finance', {
-        url: '/finance',
-        views: {
-            "finance": {
-                controller: 'ProjectFinanceCtrl',
-                templateUrl: 'project/finance.tpl.html'
-            }
         }
     })
     .state( 'project.channels', {
@@ -54,7 +42,7 @@ angular.module( 'conexus.project', [
         views: {
             "channels": {
                 controller: 'ProjectChannelsCtrl',
-                templateUrl: 'project/channels.tpl.html'
+                templateUrl: 'project/templates/channels.tpl.html'
             }
         },
         resolve: {
@@ -66,12 +54,21 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    .state( 'project.finance', {
+        url: '/finance',
+        views: {
+            "finance": {
+                controller: 'ProjectFinanceCtrl',
+                templateUrl: 'project/templates/finance.tpl.html'
+            }
+        }
+    })
     .state( 'project.members', {
         url: '/members',
         views: {
             "members": {
                 controller: 'ProjectMembersCtrl',
-                templateUrl: 'project/members.tpl.html'
+                templateUrl: 'project/templates/members.tpl.html'
             }
         },
         resolve: {
@@ -80,26 +77,12 @@ angular.module( 'conexus.project', [
             }]
         }
     })
-    .state( 'project.tasks', {
-        url: '/tasks',
-        views: {
-            "tasks": {
-                controller: 'ProjectTasksCtrl',
-                templateUrl: 'project/tasks.tpl.html'
-            }
-        },
-        resolve: {
-            tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getByProject(project);
-            }]
-        }
-    })
     .state( 'project.streams', {
         url: '/streams',
         views: {
             "streams": {
                 controller: 'ProjectStreamsCtrl',
-                templateUrl: 'project/streams.tpl.html'
+                templateUrl: 'project/templates/streams.tpl.html'
             }
         },
         resolve: {
@@ -107,28 +90,59 @@ angular.module( 'conexus.project', [
                 return [1,2,3,4];
             }]
         }
+    })
+    .state( 'project.tasks', {
+        url: '/tasks',
+        views: {
+            "tasks": {
+                controller: 'ProjectTasksCtrl',
+                templateUrl: 'project/templates/tasks.tpl.html'
+            }
+        },
+        resolve: {
+            tasks: ['project', 'TaskModel', function(project, TaskModel){
+                return TaskModel.getByProject(project);
+            }]
+        }
     });
     
 }])
 
-.controller( 'ProjectCtrl', ['$scope', 'config', 'project', function ProjectController( $scope, config, project ) {
+.controller( 'ProjectCtrl', ['$location', '$scope', 'config', 'MemberModel', 'project', function ProjectController( $location, $scope, config, MemberModel, project ) {
     $scope.currentUser = config.currentUser;
     $scope.project = project;
-    $scope.isProjectCreator = function(message) {
+    $scope.newMember = {};
+
+    $scope.isProjectCreator = function() {
         if($scope.currentUser){
             return $scope.currentUser.id == $scope.project.user
         }
-        else return false;
+        else {return false;}
     };
+
+    $scope.createMember = function(){
+        if($scope.currentUser){
+            $scope.newMember.user = config.currentUser.id;
+            $scope.newMember.project = project.id;
+            MemberModel.create($scope.newMember).then(function(model) {
+                $scope.newMember = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
+
+
 }])
 
-.controller( 'ProjectHomeCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', function ProjectHomeController( $location, $sailsSocket, $scope, config, lodash, MessageModel, messages, project, tasks, titleService ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', function ProjectActivityController( $location, $sailsSocket, $scope, config, lodash, MessageModel, messages, project, tasks, titleService ) {
     titleService.setTitle(project.title + ' - conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.newMessage = {};
     $scope.messages = messages;
     $scope.tasks = tasks;
+
+    console.log('hello')
 
     $scope.destroyMessage = function(message) {
         // check here if this message belongs to the currentUser
@@ -241,6 +255,8 @@ angular.module( 'conexus.project', [
     $scope.members = members;
     $scope.newMember = {};
 
+    console.log('hello')
+
     $scope.createMember = function() {
         $scope.newMember.user = config.currentUser.id;
         $scope.newMember.project = project.id;
@@ -264,46 +280,15 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks ) {
-    $scope.currentUser = config.currentUser;
-    $scope.tasks = tasks;
-    $scope.project = project
-
-    $scope.createTask = function(newTask) {
-        newTask.user = config.currentUser.id;
-        newTask.project = project;
-        TaskModel.create(newTask).then(function(model) {
-            $scope.newTask = {};
-        });
-    };
-
-    $scope.destroyTask = function(task) {
-        console.log(task);
-        if (task.user.id === config.currentUser.id) {
-            MessageModel.delete(message).then(function(model) {
-            });
-        }
-    };
-
-    $sailsSocket.subscribe('task', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.tasks.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.tasks, {id: envelope.id});
-                break;
-        }
-    });
-
-}])
-
 .controller( 'ProjectStreamsCtrl', ['$scope', 'streams', function ProjectController( $scope, streams ) {
     $scope.streams = streams;
-    $scope.AudioContext = {}
-    $scope.videoContext = {}
+    $scope.AudioContext = {};
+    $scope.videoContext = {};
 
-    /*var cameraPreview = document.getElementById('camera-preview');
+    console.log(streams)
+
+
+    var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {
 
@@ -340,7 +325,7 @@ angular.module( 'conexus.project', [
         */
 
 
-    //};
+    };
 
     function recorderProcess(e) {
         var left = e.inputBuffer.getChannelData(0);
@@ -351,5 +336,39 @@ angular.module( 'conexus.project', [
     var recordRTC = null;
     navigator.getUserMedia(session, initializeRecorder, onError);
 
+
+}])
+
+.controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks ) {
+    $scope.currentUser = config.currentUser;
+    $scope.tasks = tasks;
+    $scope.project = project
+
+    $scope.createTask = function(newTask) {
+        newTask.user = config.currentUser.id;
+        newTask.project = project;
+        TaskModel.create(newTask).then(function(model) {
+            $scope.newTask = {};
+        });
+    };
+
+    $scope.destroyTask = function(task) {
+        console.log(task);
+        if (task.user.id === config.currentUser.id) {
+            MessageModel.delete(message).then(function(model) {
+            });
+        }
+    };
+
+    $sailsSocket.subscribe('task', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.tasks.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.tasks, {id: envelope.id});
+                break;
+        }
+    });
 
 }])

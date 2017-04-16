@@ -1,0 +1,100 @@
+<div class="container">
+	<div class="profilePost">
+		<form role="form">
+			<md-input-container class="md-block">
+	        	<textarea ng-model="newPost.post" rows="5" md-select-on-focus aria-label="new post"></textarea>
+				<!--connect legislators-->
+				<!--<p>send as a fax? - send as mail (verified), send email (always) - send video??</p>-->
+			</md-input-container>
+			<button ng-click="createPost()" type="submit" class="btn btn-default"><i class="fa fa-paper-plane"></i> Submit</button>
+		</form>
+	</div>
+	<div class="spacing-25"></div>
+	<!--gotta make this unified with universally styled cards-->
+    <md-card ng-repeat="post in posts">
+        <div style="padding:16px 16px 16px">
+
+
+                <div>
+                    <a href="/member/{{post.user.username}}">
+                        <img class="post-img" ng-src="{{post.user.avatarUrl}}" class="md-card-image" alt="{{post.user.username}}">
+                        <h4 class="post-name">{{post.user.username}}</h4>
+                    </a>
+                    <div class="pull-right">
+                        <span class="grey" am-time-ago="post.updatedAt"></span>
+                        <a href="#" ng-click=""><i class="fa fa-angle-down grey"></i></a> 
+                    </div>
+                </div>
+
+                <div class="post-container">
+                    <p>{{post.post}}</p>
+                </div>
+
+                <div class="post-action-container">
+                    <div class="pull-left">
+                        <a href="#" ng-click=""><i class="fa fa-angle-up grey"></i></a> 
+                        <a href="#" ng-click=""><i class="fa fa-angle-down grey"></i></a> 
+                        <a href="#">reply</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+                    </div>
+                </div>
+
+                 <!--
+                <div class="profilePost">
+                    <form role="form">
+                        <md-input-container class="md-block">
+                            <textarea ng-model="newPost.post" rows="5" md-select-on-focus aria-label="new post" placeholder=""></textarea>
+                        </md-input-container>
+                    </form>
+                </div>
+                -->
+
+        </div>
+    </md-card>
+	<md-card ng-repeat="vote in votes">
+        <div style="padding:16px 16px 16px">
+
+
+			<div>
+	            <a href="/member/{{vote.user.username}}">
+	                <img class="post-img" ng-src="{{vote.user.avatarUrl}}" class="md-card-image" alt="{{vote.user.username}}">
+	                <h4 class="post-name">{{vote.user.username}}</h4>
+	            </a>
+	            <div class="pull-right">
+	                <span class="grey" am-time-ago="vote.updatedAt"></span>
+	                <a href="#" ng-click=""><i class="fa fa-angle-down grey"></i></a> 
+	            </div>
+	        </div>
+
+            <div class="post-container">
+				<p>{{vote.voteString}}<!-- on behalf of {{constituents.length}} constitutent<span ng-show="constituents.length > 1">s</span>--></p>
+				<a href="/vote/{{vote.vote.id}}">{{vote.vote.title}}</a> for 
+				<br>
+				<a href="/bill/{{vote.bill.id}}/{{vote.bill.title}}">{{vote.bill.title}}</a>
+				<br><br>
+			</div>
+
+ 			<div class="post-action-container">
+                <div class="pull-left">
+                    <a href="#" ng-click=""><i class="fa fa-angle-up grey"></i></a> 
+                    <a href="#" ng-click=""><i class="fa fa-angle-down grey"></i></a> 
+                    <a href="#">reply</a>
+                </div>
+                <div class="pull-right">
+                    <a href="votevote/{{vote.id}}"><i class="fa fa-link grey"></i></a>
+                </div>
+            </div>
+
+
+		</div>
+	</md-card>
+	<div class="spacing-10"></div>
+	<!--<div ng-show="votes.legnth != voteCount" ng-click="loadMore()" style="text-align:center">
+		<button class="btn btn-default col-xs-10 col-xs-offset-1">MORE</button>
+	</div>
+	<div ng-show="posts.legnth != postCount" ng-click="loadMore()" style="text-align:center">
+		<button class="btn btn-default col-xs-10 col-xs-offset-1">MORE</button>
+	</div>-->
+</div>

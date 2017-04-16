@@ -1,26 +1,120 @@
-<div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-        <br>
-        <li>
-            <a style="font-weight:bold" href="/project/{{project.title}}">{{project.title}}</a>
-            <a href="/project/{{project.urlTitle}}/edit" ng-show="isProjectCreator()">edit</a>
-        </li>
-        <hr>
-        <li><a href="/project/{{project.urlTitle}}/channels">channels</a></li>
-        <li><a href="/project/{{project.urlTitle}}/finance">finance</a></li>
-        <li><a href="/project/{{project.urlTitle}}/members">members</a></li>
-        <li><a href="/project/{{project.urlTitle}}/streams">streams</a></li>
-        <li ng-show="currentUser"><a href="/project/{{project.urlTitle}}">settings</a></li>
-        <li><a href="/project/{{project.urlTitle}}/tasks">tasks</a></li>
-        <li><a href="/project/{{project.urlTitle}}">tools</a></li>
-    </ul>
+<style>
+.avatar {
+    position:absolute;
+    top:6.4em;
+    margin: 0 auto;
+    background: #fff;
+    max-width: 15em;
+    height: 15em;
+    padding: 0.25em;
+    border-radius: .7em;
+    //box-shadow: 0 0 .1em rgba(0, 0, 0, 0.15);
+}
+
+.member-cover{
+    height:17em;
+    width: 100%;
+    overflow: hidden;
+}
+.member-cover img{
+    width: 100%;
+    margin-top: -10%
+}
+
+.member-tabs li{
+    display: inline;
+    font-size: 20px;
+    font-family:Jura;
+}
+
+.member-tabs > li > a{
+    padding:10px 15px;
+    color:rgb(125,125,125);
+}
+
+.member-tabs > li > a:hover{
+    background-color: #eee;
+    border-radius:3px;
+}
+
+.member-tab-container ul{
+    margin:10px 15px;
+}
+
+.imageContainer {
+  background:rgba(22,22,22,0.75);
+  overflow:hidden;
+  min-height: 500px;
+  font-family: 'Jura', sans-serif;
+  margin:0;padding:0;border:0 none;position: relative;
+}
+.imageContainerDiv {
+  width:100%;
+  height: 35em;
+  display: flex;
+  flex-direction: column;
+}
+.imageContainerDiv h1 {
+  color: rgba(255,255,255,0.9);
+  font-size: 50px;
+  font-weight: 400;
+  margin-top:auto;
+  margin-bottom:auto;
+}
+.imageContainerSmall {
+  background:rgba(22,22,22,0.75);
+  overflow:hidden;
+  min-height: 200px;
+  font-family: 'Jura', sans-serif;
+  margin:0;padding:0;border:0 none;position: relative;
+}
+.imageContainerSmallDiv {
+  width:100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.imageContainerSmallDiv h1 {
+  color: rgba(255,255,255,0.9);
+  font-size: 50px;
+  font-weight: 400;
+  margin-top:auto;
+  margin-bottom:auto;
+}
+
+</style>
+
+<div class="imageContainerSmall">
+    <div class="imageContainerSmallDiv">  
+        <h1 style="text-align:left" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/> {{project.title}}</h1>
+    </div>
 </div>
-<div id="main-container">
-    <div ui-view="home"></div>
+<div class="member-tab-container container">
+	<ul style="padding:0px;" class="member-tabs">
+		<li><a href="/project/{{project.urlTitle}}">Activity</a></li>
+		<li><a href="/project/{{project.urlTitle}}/channels">Channels</a></li>
+		<li><a href="/project/{{project.urlTitle}}/finance">Finance</a></li>
+		<!--<li><a href="/project/{{project.urlTitle}}/discussion">Discussion</a></li>-->
+		<li><a href="/project/{{project.urlTitle}}/members">{{memberCount}} Members</a></li>
+		<li><a href="/project/{{project.urlTitle}}/streams">Streams</a></li>
+    <!--<li><a href="/project/{{project.urlTitle}}/tasks">tasks</a></li>-->
+		<li ng-show="currentUser">
+			<a class="btn btn-default" ng-click="toggleEditproject()">Edit</a>
+		</li>
+		<li ng-show="currentUser">
+			<a class="btn btn-default" ng-click="createMember()">Join</a>
+		</li>
+	</ul>
+</div>
+<md-divider></md-divider>
+<div class="container" ng-show="editProjectToggle"><p>edit project form</p></div>
+<div class="project-container container">
+    <div ui-view="activity"></div>
     <div ui-view="channels"></div>
     <div ui-view="finance"></div>
     <div ui-view="members"></div>
     <div ui-view="tasks"></div>
     <div ui-view="streams"></div>
 </div>
-
+<div class="spacing-25"></div>
+<div ng-include="'footer/index.tpl.html'"></div>

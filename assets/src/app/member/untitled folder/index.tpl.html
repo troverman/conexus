@@ -1,0 +1,64 @@
+<div ui-view="member">
+	<div class="profile-header">
+		<div class="member-cover">
+			<img ng-src="{{member.coverUrl}}" err-src="/images/avatar.png" />
+		</div>
+		<div class="container">
+			<div class="pull-left">
+				<img class="avatar" ng-src="{{member.avatarUrl}}"/>
+			</div>
+			<div class="pull-right member-tab-container">
+				<ul class="member-tabs">
+					<li><a href="member/{{member.username}}">Activity</a></li>
+					<!--<li><a href="member/{{member.username}}/bills">{{committeeCount}} Bills</a></li>-->
+					<li><a href="member/{{member.username}}/committees">{{committeeCount}} Committees</a></li>
+					<li><a href="member/{{member.username}}/constituents">{{constituentCount}} Constituents</a></li>
+					<li><a href="member/{{member.username}}/representatives">{{representativeCount}} Representatives</a></li>
+					<li><a href="member/{{member.username}}/votes">{{voteCount}} Votes</a></li>
+					<li ng-show="currentUser.id != member.id">
+						<a ng-show="!isFollowing" class="btn btn-default" ng-click="selectAsRepresentative()">Elect</a>
+						<a ng-show="isFollowing" class="btn btn-default" ng-click="removeRepresentative()">Unelect</a>
+					</li>
+					<li ng-show="currentUser.id != member.id">
+						<a class="btn btn-default" ng-click="">Follow</a>
+					</li>
+					<li ng-show="currentUser.id == member.id">
+						<a class="btn btn-default" href="account">Edit Profile</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div class="container">
+			<div class="pull-left">
+				<h2>{{member.firstName}} {{member.lastName}}</h2>
+				<h5><span class="grey">@{{member.username}}</span></h5>
+				<h5 ng-show="member.title"><span class="grey">{{member.title}}</span></h5>
+				<h5 ng-show="member.district"><span class="grey">District {{member.district}}</span></h5>
+				<h5 ng-show="member.state"><span class="grey">{{member.state}}</span></h5>
+			</div>
+			<div class="pull-right">
+				<div class="spacing-10"></div>
+				<h5 ng-show="member.phone"><a ng-repeat="phone in member.phone.split(',')" style="color:grey;padding:5px" href="tel:{{phone}}" ng-show="phone.length>0"><i class="fa fa-phone"></i> {{phone}}</a></h5>
+				<h5 ng-show="showFax"><span style="color:grey"><i class="fa fa-fax"></i> {{member.fax}}</span></h5>
+				<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
+				<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
+				<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
+			</div>
+			<div class="spacing-10"></div>
+		</div>
+	</div>
+	<div class="spacing-15"></div>
+	<md-divider></md-divider>
+	<div class="spacing-15"></div>
+	<div class="profile-container">
+		<div ui-view="memberActivity"></div>
+		<div ui-view="memberBills"></div>
+		<div ui-view="memberCommittees"></div>
+		<div ui-view="memberConstituents"></div>
+		<div ui-view="memberRepresentatives"></div>
+		<div ui-view="memberVotes"></div>
+	</div>
+	<div class="spacing-50"></div>
+</div>
+<div ng-include="'footer/index.tpl.html'"></div>

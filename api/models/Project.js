@@ -19,7 +19,10 @@ module.exports = {
         urlTitle: {
             type: 'string',
             required: true
-        }
+        },
+        user: {
+            model: 'user'
+        },
     },
 
     afterCreate: function (project, next) {

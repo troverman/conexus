@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="col-lg-4 col-sm-6" ng-repeat="representative in representatives">
+		<div style="margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden">
+			<div class="image" style="background-image: url('{{representative.representative.coverUrl}}')">
+				<img alt="" style="position:absolute;left:0;right0;margin:0 auto;margin-top:4em" ng-src="{{representative.representative.avatarUrl}}" err-src="/images/avatar.png">
+			</div>
+			<div class="info">
+				<h2 class="name"><a href="member/{{representative.representative.username}}">{{representative.representative.username}}</a></h2>
+				<h3 class="position"><a href="member/{{representative.representative.username}}">{{representative.representative.title}}</a></h3>
+				<p>{{representative.representative.state}}</p>
+			</div>
+			<div class="social">
+				<a ng-show="representative.representative.socialAccounts.facebook.profileUrl" href="{{representative.representative.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook"></i></a>
+				<a ng-show="representative.representative.socialAccounts.twitter.profileUrl" href="{{representative.representative.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter"></i></a>
+				<a ng-show="representative.representative.socialAccounts.google.profileUrl" href="{{representative.representative.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="spacing-10"></div>
+	<button ng-show="representatives.length != representativeCount" ng-click="loadMore()" class="btn btn-default col-xs-10 col-xs-offset-1">MORE <i class="fa fa-angle-down"></i></button>
+</div>
