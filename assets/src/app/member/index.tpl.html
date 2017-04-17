@@ -1,24 +1,95 @@
-<div class="profile-header">
-  <div class="spacing-15"></div>
-  <img class="avatar" style="border-radius:100px; "src="{{member.avatarUrl}}"/>
-  <h1>{{member.username}}</h1>
-  <button ng-click="follow()" class="btn btn-primary" ng-disabled="!currentUser">follow ({{followers.length}})</button>
-  <div class="spacing-15"></div>
+<style>
+.avatar {
+    position:absolute;
+    top:6.4em;
+    margin: 0 auto;
+    background: #fff;
+    max-width: 15em;
+    height: 15em;
+    padding: 0.25em;
+    border-radius: .7em;
+    //box-shadow: 0 0 .1em rgba(0, 0, 0, 0.15);
+}
+
+.member-cover{
+    height:17em;
+    width: 100%;
+    overflow: hidden;
+}
+.member-cover img{
+    width: 100%;
+    margin-top: -10%
+}
+
+.member-tabs li{
+    display: inline;
+    font-size: 20px;
+    font-family:Jura;
+}
+
+.member-tabs > li > a{
+    padding:10px 15px;
+    color:rgb(125,125,125);
+}
+
+.member-tabs > li > a:hover{
+    background-color: #eee;
+    border-radius:3px;
+}
+
+.member-tab-container ul{
+    margin:10px 15px;
+}
+
+.profile-header{background-color:white;}
+</style>
+
+
+
+<div ui-view="member">
+	<div class="profile-header">
+		<div class="member-cover">
+			<!--<img ng-src="{{member.coverUrl}}" err-src="/images/avatar.png" />-->
+		</div>
+		<div class="container">
+			<div class="pull-left"><img class="avatar" ng-src="{{member.avatarUrl}}"/></div>
+			<div class="pull-right member-tab-container">
+				<ul class="member-tabs">
+					<li><a href="member/{{member.username}}">Activity</a></li>
+					<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
+					<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
+					<li ng-show="currentUser.id != member.id">
+						<a class="btn btn-default" ng-click="">Follow</a>
+						<a ng-show="isFollowing" class="btn btn-default" ng-click="">UnFollow</a>
+					</li>
+					<li ng-show="currentUser.id == member.id">
+						<a class="btn btn-default" href="account">Edit Profile</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div class="container">
+			<div class="pull-left">
+				<h2>{{member.firstName}} {{member.lastName}}</h2>
+				<h5><span class="grey">@{{member.username}}</span></h5>
+			</div>
+			<div class="pull-right">
+				<div class="spacing-10"></div>
+				<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
+				<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
+				<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
+			</div>
+			<div class="spacing-10"></div>
+		</div>
+	</div>
+	<div class="spacing-15"></div>
+	<md-divider></md-divider>
+	<div class="spacing-15"></div>
+	<div class="profile-container">
+		<div ui-view="memberActivity"></div>
+		<div ui-view="memberFollowers"></div>
+		<div ui-view="memberFollowing"></div>
+	</div>
+	<div class="spacing-50"></div>
 </div>
-
-<div class="profile-timeline">
-  <div class="container">
-    <div ng-repeat="follower in followers">
-      <div class="timeline-item">
-        <a href="/member/{{follower.follower.username}}">{{follower.follower.username}}</a><hr>
-      </div>
-    </div>
-
-    <div ng-repeat="message in messages">
-      <div class="timeline-item">
-        <a href="/project/{{message.project.urlTitle}}">{{message.title}}</a><hr>
-      </div>
-    </div>
-  </div>
-</div>
-

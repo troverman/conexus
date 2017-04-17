@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="col-md-12" ng-repeat="message in messages">
+        <div style="margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px">
+			<p>{{message.title}}</p>
+			<!--akin to voetr posts-->
+			<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+        </div>
+    </div>
+    <div class="spacing-10"></div>
+</div>

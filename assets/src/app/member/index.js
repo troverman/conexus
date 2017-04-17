@@ -3,6 +3,7 @@ angular.module( 'conexus.member', [
 
 .config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'member', {
+        abstract: true,
 		url: '/member/:path',
 		views: {
 			"main": {
@@ -14,50 +15,142 @@ angular.module( 'conexus.member', [
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
             }],
-            followers: ['member', 'FollowerModel', function(member, FollowerModel) {
+            followersCount: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getByUser(member);
             }],
+            followingCount: ['member', 'FollowerModel', function(member, FollowerModel) {
+                return FollowerModel.getByUser(member);
+            }]
+        }
+	})
+    .state( 'member.index', {
+        url: '',
+        views: {
+            "memberActivity": {
+                controller: 'MemberActivityCtrl',
+                templateUrl: 'member/templates/activity.tpl.html'
+            }
+        },
+        resolve: {
             messages: ['member', 'MessageModel', function(member, MessageModel) {
                 return MessageModel.getByUser(member);
             }]
         }
-	});
+    })
+    .state( 'member.followers', {
+        url: '/followers',
+        views: {
+            "memberFollowers": {
+                controller: 'MemberFollowersCtrl',
+                templateUrl: 'member/templates/followers.tpl.html'
+            }
+        },
+        resolve: {
+            followers: ['member', 'FollowerModel', function(member, FollowerModel) {
+                return FollowerModel.getByUser(member);
+            }],
+        }
+    })
+    .state( 'member.following', {
+        url: '/following',
+        views: {
+            "memberFollowing": {
+                controller: 'MemberFollowingCtrl',
+                templateUrl: 'member/templates/following.tpl.html'
+            }
+        },
+        resolve: {
+            following: ['member', 'FollowerModel', function(member, FollowerModel) {
+                return FollowerModel.getByUser(member);
+            }],
+        }
+    })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'member', 'MessageModel', 'messages', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, member, MessageModel, messages, titleService) {
+.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, titleService) {
 	$scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' - conex.us');
     if(!$scope.member){$location.path('/')}
-    $scope.messages = messages;
-    $scope.followers = followers;
+    $scope.followersCount = followersCount;
+    $scope.followingCount = followingCount;
+
     $scope.newFollower = {};
 
     $scope.unfollow = function(member) {
-        if (member.user.id === config.currentUser.id) {
-            FollowerModel.delete(member).then(function(model) {
-            });
-        }
+        FollowerModel.delete(member);
     };
 
     $scope.follow = function(newModel) {
-    	$scope.followModel = {};
-        $scope.followModel.followed = $scope.member;
-        $scope.followModel.follower = config.currentUser;
-        FollowerModel.create($scope.followModel).then(function(model) {
+        $scope.newFollower.followed = $scope.member;
+        $scope.newFollower.follower = $scope.config.currentUser;
+        FollowerModel.create($scope.newFollower).then(function(model) {
             $scope.newFollower = {};
         });
     };
 
-    $sailsSocket.subscribe('follower', function (envelope) {
+    //$sailsSocket.subscribe('follower', function (envelope) {
+    //    switch(envelope.verb) {
+    //        case 'created':
+                //$scope.followers.unshift(envelope.data);
+    //            break;
+    //        case 'destroyed':
+    //            //lodash.remove($scope.followers, {id: envelope.id});
+                //break;
+    //    }
+    //});
+
+}])
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', function MemberActivityController($sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService) {
+    $scope.currentUser = config.currentUser;
+    $scope.messages = messages;
+
+
+    /*$sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.followers.unshift(envelope.data);
+                //$scope.followers.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.followers, {id: envelope.id});
+                //lodash.remove($scope.followers, {id: envelope.id});
                 break;
         }
-    });
+    });*/
+
+}])
+
+.controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash) {
+    $scope.currentUser = config.currentUser;
+    $scope.followers = followers;
+
+    /*$sailsSocket.subscribe('follower', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                //$scope.followers.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                //lodash.remove($scope.followers, {id: envelope.id});
+                break;
+        }
+    });*/
+
+}])
+
+.controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'following', 'FollowerModel', 'lodash', function MemberFollowingController($sailsSocket, $scope, $stateParams, config, following, FollowerModel, lodash) {
+    $scope.currentUser = config.currentUser;
+    $scope.following = following;
+    console.log(following)
+
+    /*$sailsSocket.subscribe('follower', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                //$scope.followers.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                //lodash.remove($scope.followers, {id: envelope.id});
+                break;
+        }
+    });*/
 
 }]);
+

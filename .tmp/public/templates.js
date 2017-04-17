@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.tpl.html', 'member/untitled folder/index.tpl.html', 'member/untitled folder/templates/activity.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'transparency/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'transparency/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -393,8 +393,8 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
     "</div>");
 }]);
 
-angular.module("member/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("member/index.tpl.html",
+angular.module("member/index.old.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("member/index.old.tpl.html",
     "<div class=\"profile-header\">\n" +
     "  <div class=\"spacing-15\"></div>\n" +
     "  <img class=\"avatar\" style=\"border-radius:100px; \"src=\"{{member.avatarUrl}}\"/>\n" +
@@ -422,31 +422,71 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "");
 }]);
 
-angular.module("member/untitled folder/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("member/untitled folder/index.tpl.html",
+angular.module("member/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("member/index.tpl.html",
+    "<style>\n" +
+    ".avatar {\n" +
+    "    position:absolute;\n" +
+    "    top:6.4em;\n" +
+    "    margin: 0 auto;\n" +
+    "    background: #fff;\n" +
+    "    max-width: 15em;\n" +
+    "    height: 15em;\n" +
+    "    padding: 0.25em;\n" +
+    "    border-radius: .7em;\n" +
+    "    //box-shadow: 0 0 .1em rgba(0, 0, 0, 0.15);\n" +
+    "}\n" +
+    "\n" +
+    ".member-cover{\n" +
+    "    height:17em;\n" +
+    "    width: 100%;\n" +
+    "    overflow: hidden;\n" +
+    "}\n" +
+    ".member-cover img{\n" +
+    "    width: 100%;\n" +
+    "    margin-top: -10%\n" +
+    "}\n" +
+    "\n" +
+    ".member-tabs li{\n" +
+    "    display: inline;\n" +
+    "    font-size: 20px;\n" +
+    "    font-family:Jura;\n" +
+    "}\n" +
+    "\n" +
+    ".member-tabs > li > a{\n" +
+    "    padding:10px 15px;\n" +
+    "    color:rgb(125,125,125);\n" +
+    "}\n" +
+    "\n" +
+    ".member-tabs > li > a:hover{\n" +
+    "    background-color: #eee;\n" +
+    "    border-radius:3px;\n" +
+    "}\n" +
+    "\n" +
+    ".member-tab-container ul{\n" +
+    "    margin:10px 15px;\n" +
+    "}\n" +
+    "\n" +
+    ".profile-header{background-color:white;}\n" +
+    "</style>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "<div ui-view=\"member\">\n" +
     "	<div class=\"profile-header\">\n" +
     "		<div class=\"member-cover\">\n" +
-    "			<img ng-src=\"{{member.coverUrl}}\" err-src=\"/images/avatar.png\" />\n" +
+    "			<!--<img ng-src=\"{{member.coverUrl}}\" err-src=\"/images/avatar.png\" />-->\n" +
     "		</div>\n" +
     "		<div class=\"container\">\n" +
-    "			<div class=\"pull-left\">\n" +
-    "				<img class=\"avatar\" ng-src=\"{{member.avatarUrl}}\"/>\n" +
-    "			</div>\n" +
+    "			<div class=\"pull-left\"><img class=\"avatar\" ng-src=\"{{member.avatarUrl}}\"/></div>\n" +
     "			<div class=\"pull-right member-tab-container\">\n" +
     "				<ul class=\"member-tabs\">\n" +
     "					<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
-    "					<!--<li><a href=\"member/{{member.username}}/bills\">{{committeeCount}} Bills</a></li>-->\n" +
-    "					<li><a href=\"member/{{member.username}}/committees\">{{committeeCount}} Committees</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}/constituents\">{{constituentCount}} Constituents</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}/representatives\">{{representativeCount}} Representatives</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}/votes\">{{voteCount}} Votes</a></li>\n" +
-    "					<li ng-show=\"currentUser.id != member.id\">\n" +
-    "						<a ng-show=\"!isFollowing\" class=\"btn btn-default\" ng-click=\"selectAsRepresentative()\">Elect</a>\n" +
-    "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"removeRepresentative()\">Unelect</a>\n" +
-    "					</li>\n" +
+    "					<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
     "						<a class=\"btn btn-default\" ng-click=\"\">Follow</a>\n" +
+    "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"\">UnFollow</a>\n" +
     "					</li>\n" +
     "					<li ng-show=\"currentUser.id == member.id\">\n" +
     "						<a class=\"btn btn-default\" href=\"account\">Edit Profile</a>\n" +
@@ -459,14 +499,9 @@ angular.module("member/untitled folder/index.tpl.html", []).run(["$templateCache
     "			<div class=\"pull-left\">\n" +
     "				<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
     "				<h5><span class=\"grey\">@{{member.username}}</span></h5>\n" +
-    "				<h5 ng-show=\"member.title\"><span class=\"grey\">{{member.title}}</span></h5>\n" +
-    "				<h5 ng-show=\"member.district\"><span class=\"grey\">District {{member.district}}</span></h5>\n" +
-    "				<h5 ng-show=\"member.state\"><span class=\"grey\">{{member.state}}</span></h5>\n" +
     "			</div>\n" +
     "			<div class=\"pull-right\">\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "				<h5 ng-show=\"member.phone\"><a ng-repeat=\"phone in member.phone.split(',')\" style=\"color:grey;padding:5px\" href=\"tel:{{phone}}\" ng-show=\"phone.length>0\"><i class=\"fa fa-phone\"></i> {{phone}}</a></h5>\n" +
-    "				<h5 ng-show=\"showFax\"><span style=\"color:grey\"><i class=\"fa fa-fax\"></i> {{member.fax}}</span></h5>\n" +
     "				<a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><span class=\"grey facebook-icon\"><i class=\"fa fa-facebook\"></i> Facebook</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><span class=\"grey twitter-icon\"><i class=\"fa fa-twitter\"></i> Twitter</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><span class=\"grey google-icon\"><i class=\"fa fa-google\"></i> Google</span></a>\n" +
@@ -479,119 +514,50 @@ angular.module("member/untitled folder/index.tpl.html", []).run(["$templateCache
     "	<div class=\"spacing-15\"></div>\n" +
     "	<div class=\"profile-container\">\n" +
     "		<div ui-view=\"memberActivity\"></div>\n" +
-    "		<div ui-view=\"memberBills\"></div>\n" +
-    "		<div ui-view=\"memberCommittees\"></div>\n" +
-    "		<div ui-view=\"memberConstituents\"></div>\n" +
-    "		<div ui-view=\"memberRepresentatives\"></div>\n" +
-    "		<div ui-view=\"memberVotes\"></div>\n" +
+    "		<div ui-view=\"memberFollowers\"></div>\n" +
+    "		<div ui-view=\"memberFollowing\"></div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
-    "</div>\n" +
-    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
+    "</div>");
 }]);
 
-angular.module("member/untitled folder/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("member/untitled folder/templates/activity.tpl.html",
+angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("member/templates/activity.tpl.html",
     "<div class=\"container\">\n" +
-    "	<div class=\"profilePost\">\n" +
-    "		<form role=\"form\">\n" +
-    "			<md-input-container class=\"md-block\">\n" +
-    "	        	<textarea ng-model=\"newPost.post\" rows=\"5\" md-select-on-focus aria-label=\"new post\"></textarea>\n" +
-    "				<!--connect legislators-->\n" +
-    "				<!--<p>send as a fax? - send as mail (verified), send email (always) - send video??</p>-->\n" +
-    "			</md-input-container>\n" +
-    "			<button ng-click=\"createPost()\" type=\"submit\" class=\"btn btn-default\"><i class=\"fa fa-paper-plane\"></i> Submit</button>\n" +
-    "		</form>\n" +
-    "	</div>\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<!--gotta make this unified with universally styled cards-->\n" +
-    "    <md-card ng-repeat=\"post in posts\">\n" +
-    "        <div style=\"padding:16px 16px 16px\">\n" +
-    "\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <a href=\"/member/{{post.user.username}}\">\n" +
-    "                        <img class=\"post-img\" ng-src=\"{{post.user.avatarUrl}}\" class=\"md-card-image\" alt=\"{{post.user.username}}\">\n" +
-    "                        <h4 class=\"post-name\">{{post.user.username}}</h4>\n" +
-    "                    </a>\n" +
-    "                    <div class=\"pull-right\">\n" +
-    "                        <span class=\"grey\" am-time-ago=\"post.updatedAt\"></span>\n" +
-    "                        <a href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-down grey\"></i></a> \n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"post-container\">\n" +
-    "                    <p>{{post.post}}</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"post-action-container\">\n" +
-    "                    <div class=\"pull-left\">\n" +
-    "                        <a href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-up grey\"></i></a> \n" +
-    "                        <a href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-down grey\"></i></a> \n" +
-    "                        <a href=\"#\">reply</a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"pull-right\">\n" +
-    "                        <a href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                 <!--\n" +
-    "                <div class=\"profilePost\">\n" +
-    "                    <form role=\"form\">\n" +
-    "                        <md-input-container class=\"md-block\">\n" +
-    "                            <textarea ng-model=\"newPost.post\" rows=\"5\" md-select-on-focus aria-label=\"new post\" placeholder=\"\"></textarea>\n" +
-    "                        </md-input-container>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
-    "                -->\n" +
-    "\n" +
+    "    <div class=\"col-md-12\" ng-repeat=\"message in messages\">\n" +
+    "        <div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px\">\n" +
+    "			<p>{{message.title}}</p>\n" +
+    "			<!--akin to voetr posts-->\n" +
+    "			<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
     "        </div>\n" +
-    "    </md-card>\n" +
-    "	<md-card ng-repeat=\"vote in votes\">\n" +
-    "        <div style=\"padding:16px 16px 16px\">\n" +
-    "\n" +
-    "\n" +
-    "			<div>\n" +
-    "	            <a href=\"/member/{{vote.user.username}}\">\n" +
-    "	                <img class=\"post-img\" ng-src=\"{{vote.user.avatarUrl}}\" class=\"md-card-image\" alt=\"{{vote.user.username}}\">\n" +
-    "	                <h4 class=\"post-name\">{{vote.user.username}}</h4>\n" +
-    "	            </a>\n" +
-    "	            <div class=\"pull-right\">\n" +
-    "	                <span class=\"grey\" am-time-ago=\"vote.updatedAt\"></span>\n" +
-    "	                <a href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-down grey\"></i></a> \n" +
-    "	            </div>\n" +
-    "	        </div>\n" +
-    "\n" +
-    "            <div class=\"post-container\">\n" +
-    "				<p>{{vote.voteString}}<!-- on behalf of {{constituents.length}} constitutent<span ng-show=\"constituents.length > 1\">s</span>--></p>\n" +
-    "				<a href=\"/vote/{{vote.vote.id}}\">{{vote.vote.title}}</a> for \n" +
-    "				<br>\n" +
-    "				<a href=\"/bill/{{vote.bill.id}}/{{vote.bill.title}}\">{{vote.bill.title}}</a>\n" +
-    "				<br><br>\n" +
-    "			</div>\n" +
-    "\n" +
-    " 			<div class=\"post-action-container\">\n" +
-    "                <div class=\"pull-left\">\n" +
-    "                    <a href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-up grey\"></i></a> \n" +
-    "                    <a href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-down grey\"></i></a> \n" +
-    "                    <a href=\"#\">reply</a>\n" +
-    "                </div>\n" +
-    "                <div class=\"pull-right\">\n" +
-    "                    <a href=\"votevote/{{vote.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "\n" +
-    "		</div>\n" +
-    "	</md-card>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "	<!--<div ng-show=\"votes.legnth != voteCount\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
-    "		<button class=\"btn btn-default col-xs-10 col-xs-offset-1\">MORE</button>\n" +
-    "	</div>\n" +
-    "	<div ng-show=\"posts.legnth != postCount\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
-    "		<button class=\"btn btn-default col-xs-10 col-xs-offset-1\">MORE</button>\n" +
-    "	</div>-->\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
     "</div>");
+}]);
+
+angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("member/templates/followers.tpl.html",
+    "<div class=\"container\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"follower in followers\">\n" +
+    "		<div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden\">\n" +
+    "        	<a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "</div>");
+}]);
+
+angular.module("member/templates/following.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("member/templates/following.tpl.html",
+    "<div class=\"container\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"follower in following\">\n" +
+    "		<div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden\">\n" +
+    "        	<a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "</div>\n" +
+    "{{following}}");
 }]);
 
 angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
