@@ -23,15 +23,6 @@ module.exports = {
         }
     },
 
-    afterCreate: function (project, next) {
-        // set message.user = to appropriate user model
-        /*User.getOne(project.user)
-        .spread(function(user) {
-            project.user = user;
-            next(null, project);
-        });**/
-    },
-
     getAll: function() {
         return Finance.find()
         .sort({createdAt: 'desc'})

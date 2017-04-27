@@ -110,7 +110,7 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div style=\"margin-left:20%;margin-right:20%\">\n" +
+    "<div class=\"container\">\n" +
     "\n" +
     "	<h1>connect</h1><hr>\n" +
     "	<div class=\"spacing-20\"></div>\n" +
@@ -119,8 +119,9 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "		<h4><a href=\"/member/{{user.username}}\">{{user.username}}</a></h4><hr>\n" +
     "	</div>\n" +
     "\n" +
-    "	<p>what is this page?</p>\n" +
-    "	<p>connect in your gps, bank info, and live stream google glass: +1 crazy</p>\n" +
+    "	<!--<p>what is this page?</p>\n" +
+    "	<p>connect in your gps, bank info, and live stream google glass: +1 crazy</p>-->\n" +
+    "\n" +
     "</div>");
 }]);
 
@@ -578,8 +579,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "    <div class=\"collapse navbar-collapse\">\n" +
     "      <ul class=\"nav navbar-nav\">\n" +
     "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
-    "        <li class=\"nav-links\"><a href=\"/connect\">Connect</a></li>\n" +
-    "        <li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>\n" +
+    "        <!--<li class=\"nav-links\"><a href=\"/projects\">Events</a></li>-->\n" +
+    "        <!--<li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>-->\n" +
+    "        <li class=\"nav-links\"><a href=\"/connect\">Discover</a></li>\n" +
     "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\">\n" +
@@ -587,6 +589,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "        </form>\n" +
     "      </ul>\n" +
     "      <ul class=\"nav navbar-nav navbar-right\">\n" +
+    "        <!--notifications on username-->\n" +
     "        <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/account\">{{currentUser.username}}</a></li>\n" +
     "        <li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/logout\">Logout</a></li>\n" +
     "        <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
@@ -849,7 +852,6 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
-    "<h1>{{members.length}} members</h1><hr>\n" +
     "<button class=\"btn btn-primary\" ng-click=\"createMember()\">join</button>\n" +
     "<div class=\"member-list\" ng-repeat=\"member in members\">\n" +
     "	<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
@@ -862,8 +864,6 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
     "<div id=\"stream-list\" ng-repeat=\"stream in streams\">\n" +
     "	<div class=\"col-md-4\">\n" +
     "		<h3><a href=\"stream/{{stream}}\">stream title {{stream}}</a></h3>\n" +
-    "		<p>tags, description</p>\n" +
-    "		<iframe width=\"480\" height=\"256\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
@@ -1007,21 +1007,15 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function ($te
 
 angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("stream/index.tpl.html",
-    "<div id=\"header-section\">\n" +
-    "  <br>\n" +
-    "  <img style=\"border-radius:100px; \"src=\"/images/mikey.jpg\"/>\n" +
+    "<div class=\"header-contianer\">\n" +
+    "  <img style=\"width:100px;border-radius:100px; \"src=\"/images/mikey.jpg\"/>\n" +
     "  <h4><h1>membertitle</h1></h4>\n" +
-    "\n" +
-    "  <br><br>\n" +
     "</div>\n" +
     "\n" +
-    "<div id=\"section1\">\n" +
-    "	\n" +
-    "     <video id=\"camera-preview\" style=\"border: 1px solid rgb(15, 158, 238)\"></video>\n" +
-    "\n" +
+    "<div class=\"stream-container\">\n" +
+    "	<!--if streaming user-->\n" +
+    "    <video id=\"camera-preview\" style=\"border: 1px solid rgb(15, 158, 238)\"></video>\n" +
     "	<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "\n" +
-    "\n" +
     "</div>\n" +
     "\n" +
     "");
