@@ -13,7 +13,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<h1>conex.us</h1>\n" +
     "		<p>a transparent network</p>\n" +
     "	</div>\n" +
-    "	<div id=\"about-section1\">\n" +
+    "	<!--<div id=\"about-section1\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-12\">\n" +
     "				<h3>crowd-sourced, crowd-owned, crowd-operated</h3>\n" +
@@ -24,13 +24,14 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "				<p>open finance and contribution</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</div>\n" +
+    "	</div>-->\n" +
     "	<div id=\"about-section2\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<p>connect with new collaborators and create awesome things</p>\n" +
     "				<p>a 24/7 continual hackathon</p>\n" +
-    "				<p>watch the world create</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "				<h4>watch the world create</h4>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
@@ -38,8 +39,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		</div>\n" +
     "	</div>\n" +
     "	<div id=\"about-section3\">\n" +
-    "		<!--<p>crowd-owned organizations</p>-->\n" +
-    "		<p>a community of collaborators</p>\n" +
+    "		<h4>a community of collaborators</h4>\n" +
     "		<p>working together toward a common goal</p>\n" +
     "	</div>\n" +
     "	<div id=\"about-section4\">\n" +
@@ -47,6 +47,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "			<div class=\"col-md-6\">\n" +
     "				<h4>transparency</h4>\n" +
     "				<p>transparent contrubitions and equatable representation</p>\n" +
+    "				<p>open finance and contribution</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
