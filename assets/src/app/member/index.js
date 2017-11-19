@@ -65,6 +65,20 @@ angular.module( 'conexus.member', [
             }],
         }
     })
+    .state( 'member.wallet', {
+        url: '/wallet',
+        views: {
+            "memberWallet": {
+                controller: 'MemberWalletCtrl',
+                templateUrl: 'member/templates/wallet.tpl.html'
+            }
+        },
+        resolve: {
+            member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
+                return UserModel.getByUsername($stateParams.path);
+            }]
+        }
+    })
 }])
 
 .controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, titleService) {
@@ -151,6 +165,12 @@ angular.module( 'conexus.member', [
                 break;
         }
     });*/
+
+}])
+
+.controller( 'MemberWalletCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberWalletController($sailsSocket, $scope, $stateParams, config, lodash, member) {
+    $scope.currentUser = config.currentUser;
+    $scope.member = member;
 
 }]);
 

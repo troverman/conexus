@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'transparency/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'transparency/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -87,8 +87,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "	<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">fitbit</a></button>\n" +
     "	<br><br>\n" +
     "	<button class=\"btn btn-default\"><a href=\"#\">btc wallet</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"#\">paypal</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"#\">bank account</a></button>\n" +
+    "	\n" +
     "	<br><br>\n" +
     "\n" +
     "	<h3>Settings</h3>\n" +
@@ -173,13 +172,18 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "	<div class=\"header-area container\">\n" +
     "		<!--<h2>crowd-sourced, crowd-owned, crowd-operated</h2>-->\n" +
-    "		<h2>the internet is creating</h2>\n" +
-    "		<h4>participate in crowd-sourced, transparent projects</h4>\n" +
-    "		<h4>connect and collaborate, create projects with memebers you meet</h4>\n" +
-    "		<h5>earn though streaming your process - creation is a viral action</h5>\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
-    "		<a class=\"btn btn-primary\" href=\"/about\">tell me more</a>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"col-md-8\">\n" +
+    "			<h2>the internet is creating</h2>\n" +
+    "			<h4>participate in crowd-sourced, transparent projects</h4>\n" +
+    "			<h4>connect and collaborate, create projects with memebers you meet</h4>\n" +
+    "			<h5>earn though streaming your process - creation is a viral action</h5>\n" +
+    "			<div class=\"spacing-25\"></div>\n" +
+    "			<a class=\"btn btn-primary\" href=\"/about\">tell me more</a>\n" +
+    "			<div class=\"spacing-50\"></div>\n" +
+    "		</div>\n" +
+    "		<!--<div class=\"col-md-4\">\n" +
+    "			<img style=\"max-height:400px\" src=\"/images/loading.gif\">\n" +
+    "		</div>-->\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
@@ -486,6 +490,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>\n" +
+    "\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
     "						<a class=\"btn btn-default\" ng-click=\"\">Follow</a>\n" +
     "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"\">UnFollow</a>\n" +
@@ -518,6 +524,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "		<div ui-view=\"memberActivity\"></div>\n" +
     "		<div ui-view=\"memberFollowers\"></div>\n" +
     "		<div ui-view=\"memberFollowing\"></div>\n" +
+    "		<div ui-view=\"memberWallet\"></div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
@@ -560,6 +567,16 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "	<div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
     "{{following}}");
+}]);
+
+angular.module("member/templates/wallet.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("member/templates/wallet.tpl.html",
+    "<div class=\"container\">\n" +
+    "	<img src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\">\n" +
+    "	<h1>Transaction History</h1>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -799,7 +816,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "    <a href=\"/member/{{message.user.username}}\">\n" +
     "        <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
     "        {{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
-    "    <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
+    "        <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
     "    <!--<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
     "        <i class=\"fa fa-trash-o\"></i>\n" +
     "    </button>-->\n" +
