@@ -25,22 +25,45 @@
 
 <div ng-show="!currentUser">
 	<div ng-include="'intro/index.tpl.html'"></div>
+	<div class="spacing-50"></div>
 	<div class="header-area container">
-		<!--<h2>crowd-sourced, crowd-owned, crowd-operated</h2>-->
-		<div class="col-md-8">
-			<h2>the internet is creating</h2>
-			<h4>participate in crowd-sourced, transparent projects</h4>
-			<h4>connect and collaborate, create projects with memebers you meet</h4>
-			<h5>earn though streaming your process - creation is a viral action</h5>
-			<div class="spacing-25"></div>
-			<a class="btn btn-primary" href="/about">tell me more</a>
-			<div class="spacing-50"></div>
+		<div class="row">
+			<div class="col-md-8">
+				<h2>Create the next wave</h2>
+				<h4>Create and participate in transparent, crowd-sourced, organizations</h4>
+				<h4>Earn value though tokenized, organizational actions</h4>
+				<div class="spacing-25"></div>
+				<a style="width:100%" class="btn btn-default log-btn" href="/about">learn more</a>
+			</div>
+			<div class="col-md-4" style="text-align:right">
+				<img style="max-height:200px" src="/images/loading.gif">
+				<!--
+				<div class="block">
+					<div class="shape">
+						<div class="cube outer">
+							<div class="side left"></div>
+							<div class="side right"></div>
+							<div class="side top"></div>
+							<div class="side bottom"></div>
+							<div class="side front"></div>
+							<div class="side back"></div>
+							<div class="cube">
+								<div class="side left"></div>
+								<div class="side right"></div>
+								<div class="side top"></div>
+								<div class="side bottom"></div>
+								<div class="side front"></div>
+								<div class="side back"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				-->
+			</div>
 		</div>
-		<!--<div class="col-md-4">
-			<img style="max-height:400px" src="/images/loading.gif">
-		</div>-->
 	</div>
 
+	<div class="spacing-50"></div>
 	<div class="spacing-50"></div>
 
 	<!--<div id="search-container">
@@ -91,18 +114,14 @@
 			</div>
 		</div>
 	</div>-->
-	<!--
-	<div id="task-container">
-		<div ng-repeat="project in projects">
-			<a href="/project/{{project.urlTitle}}">{{project.title}}</a>
-		</div>
-	</div>
-	-->
 
 	<div class="container">
 	    <div class="row">
-	        <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
-				<h3><b>Create an Account</b></h3><hr>
+	    	<div class="col-lg-6 col-md-6" style="text-align:right">
+				<!--<img style="max-height:400px" src="/images/loading.gif">-->
+	        </div>
+	        <div class="col-lg-6 col-md-6">
+				<h3><b>Join the community</b></h3><hr>
 	            <div class="login-form">
 	                <form role="form" method="post" action="/auth/local/register">
 	                    <div class="form-group">
@@ -134,6 +153,7 @@
 	            </div>
 	            <div class="selfClear"></div>
 	        </div>
+	       
 	    </div>
 	</div>
 
@@ -141,7 +161,7 @@
 
 	<div id="message-container">
 		<div class="container">
-			<h3>what's happening</h3>
+			<h3>Activity</h3>
 		    <md-card ng-repeat="message in messages.slice(0,5)">
 		      <md-card-title>
 		        <md-card-title-text>

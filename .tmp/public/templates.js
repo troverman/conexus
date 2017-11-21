@@ -4,50 +4,52 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
   $templateCache.put("about/index.tpl.html",
     "<link rel=\"stylesheet\" href=\"bower_components/angular-chart.js/dist/angular-chart.css\">\n" +
     "<!--this is gonna be infographic like-->\n" +
-    "<div>\n" +
-    "	<div id=\"logo-container\">\n" +
-    "		<img style=\"max-height:400px\" src=\"/images/loading.gif\">\n" +
-    "	</div>\n" +
-    "	<div id=\"title-container\">\n" +
-    "		<!--<h1>connect, collab, create</h1>-->\n" +
+    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
+    "	<img style=\"max-height:400px\" src=\"/images/loading.gif\">\n" +
+    "</div>\n" +
+    "<div id=\"title-container\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "		<h1>conex.us</h1>\n" +
-    "		<p>a transparent network</p>\n" +
+    "		<h3>open, transparent organizations</h3>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "	<!--<div id=\"about-section1\">\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-12\">\n" +
-    "				<h3>crowd-sourced, crowd-owned, crowd-operated</h3>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<p>open finance and contribution</p>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>-->\n" +
-    "	<div id=\"about-section2\">\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<p>connect with new collaborators and create awesome things</p>\n" +
     "				<p>a 24/7 continual hackathon</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
-    "				<h4>watch the world create</h4>\n" +
+    "				<h4>create the next wave</h4>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "	<div id=\"about-section3\">\n" +
+    "</div>\n" +
+    "<div id=\"about-section2\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "		<h4>a community of collaborators</h4>\n" +
     "		<p>working together toward a common goal</p>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "	<div id=\"about-section4\">\n" +
+    "</div>\n" +
+    "<div id=\"about-section3\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h4>transparency</h4>\n" +
     "				<p>transparent contrubitions and equatable representation</p>\n" +
     "				<p>open finance and contribution</p>\n" +
+    "				<p>tokenized organizational actions on a blockchain</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
@@ -56,8 +58,51 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "				</canvas> \n" +
     "			</div>\n" +
     "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "</div>");
+    "</div>\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	    <div class=\"row\">\n" +
+    "	        <div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
+    "				<h3><b>Create an Account</b></h3><hr>\n" +
+    "	            <div class=\"login-form\">\n" +
+    "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
+    "	                    <div class=\"form-group\">\n" +
+    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"email\" title=\"email\" type=\"email\"> \n" +
+    "	                        <i class=\"fa fa-user\"></i>\n" +
+    "	                    </div>\n" +
+    "	                    <div class=\"form-group\">\n" +
+    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"username\" title=\"username\" type=\"text\"> \n" +
+    "	                        <i class=\"fa fa-user\"></i>\n" +
+    "	                    </div>\n" +
+    "	                    <div class=\"form-group log-status\">\n" +
+    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"password\" title=\"password\" type=\"password\"> \n" +
+    "	                        <i class=\"fa fa-lock\"></i>\n" +
+    "	                    </div>\n" +
+    "	                    <div class=\"align-right\">\n" +
+    "	                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
+    "	                    </div>\n" +
+    "	                    <br><br>\n" +
+    "	                    <div class=\"social-log\">\n" +
+    "	                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><i class=\"fa fa-facebook\"></i> Facebook</a>\n" +
+    "	                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><i class=\"fa fa-twitter\"></i> Twitter</a>\n" +
+    "	                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><i class=\"fa fa-google\"></i> Google</a>\n" +
+    "	                    </div>\n" +
+    "						<br><hr>\n" +
+    "	                    <div class=\"\">\n" +
+    "	                        <a href=\"/login\">Already have an account?</a>\n" +
+    "	                    </div>\n" +
+    "	                </form>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"selfClear\"></div>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -133,7 +178,7 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
     "			{{date | date:'yyyy'}}\n" +
     "			<a href=\"/\">conex.us</a>\n" +
     "			<a href=\"/about\">about</a>\n" +
-    "			<a href=\"/projects\">projects</a>\n" +
+    "			<a href=\"/projects\">organizations</a>\n" +
     "			<a href=\"/transparency\">transparency</a>\n" +
     "		</div>\n" +
     "		<img src=\"images/conexus-white.png\">\n" +
@@ -170,22 +215,45 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "<div ng-show=\"!currentUser\">\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
     "	<div class=\"header-area container\">\n" +
-    "		<!--<h2>crowd-sourced, crowd-owned, crowd-operated</h2>-->\n" +
-    "		<div class=\"col-md-8\">\n" +
-    "			<h2>the internet is creating</h2>\n" +
-    "			<h4>participate in crowd-sourced, transparent projects</h4>\n" +
-    "			<h4>connect and collaborate, create projects with memebers you meet</h4>\n" +
-    "			<h5>earn though streaming your process - creation is a viral action</h5>\n" +
-    "			<div class=\"spacing-25\"></div>\n" +
-    "			<a class=\"btn btn-primary\" href=\"/about\">tell me more</a>\n" +
-    "			<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-8\">\n" +
+    "				<h2>Create the next wave</h2>\n" +
+    "				<h4>Create and participate in transparent, crowd-sourced, organizations</h4>\n" +
+    "				<h4>Earn value though tokenized, organizational actions</h4>\n" +
+    "				<div class=\"spacing-25\"></div>\n" +
+    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-4\" style=\"text-align:right\">\n" +
+    "				<img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
+    "				<!--\n" +
+    "				<div class=\"block\">\n" +
+    "					<div class=\"shape\">\n" +
+    "						<div class=\"cube outer\">\n" +
+    "							<div class=\"side left\"></div>\n" +
+    "							<div class=\"side right\"></div>\n" +
+    "							<div class=\"side top\"></div>\n" +
+    "							<div class=\"side bottom\"></div>\n" +
+    "							<div class=\"side front\"></div>\n" +
+    "							<div class=\"side back\"></div>\n" +
+    "							<div class=\"cube\">\n" +
+    "								<div class=\"side left\"></div>\n" +
+    "								<div class=\"side right\"></div>\n" +
+    "								<div class=\"side top\"></div>\n" +
+    "								<div class=\"side bottom\"></div>\n" +
+    "								<div class=\"side front\"></div>\n" +
+    "								<div class=\"side back\"></div>\n" +
+    "							</div>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				-->\n" +
+    "			</div>\n" +
     "		</div>\n" +
-    "		<!--<div class=\"col-md-4\">\n" +
-    "			<img style=\"max-height:400px\" src=\"/images/loading.gif\">\n" +
-    "		</div>-->\n" +
     "	</div>\n" +
     "\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "	<!--<div id=\"search-container\">\n" +
@@ -236,18 +304,14 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "			</div>\n" +
     "		</div>\n" +
     "	</div>-->\n" +
-    "	<!--\n" +
-    "	<div id=\"task-container\">\n" +
-    "		<div ng-repeat=\"project in projects\">\n" +
-    "			<a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	-->\n" +
     "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
-    "	        <div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
-    "				<h3><b>Create an Account</b></h3><hr>\n" +
+    "	    	<div class=\"col-lg-6 col-md-6\" style=\"text-align:right\">\n" +
+    "				<!--<img style=\"max-height:400px\" src=\"/images/loading.gif\">-->\n" +
+    "	        </div>\n" +
+    "	        <div class=\"col-lg-6 col-md-6\">\n" +
+    "				<h3><b>Join the community</b></h3><hr>\n" +
     "	            <div class=\"login-form\">\n" +
     "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "	                    <div class=\"form-group\">\n" +
@@ -279,6 +343,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	            </div>\n" +
     "	            <div class=\"selfClear\"></div>\n" +
     "	        </div>\n" +
+    "	       \n" +
     "	    </div>\n" +
     "	</div>\n" +
     "\n" +
@@ -286,7 +351,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "	<div id=\"message-container\">\n" +
     "		<div class=\"container\">\n" +
-    "			<h3>what's happening</h3>\n" +
+    "			<h3>Activity</h3>\n" +
     "		    <md-card ng-repeat=\"message in messages.slice(0,5)\">\n" +
     "		      <md-card-title>\n" +
     "		        <md-card-title-text>\n" +
@@ -549,6 +614,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "<div class=\"container\">\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"follower in followers\">\n" +
     "		<div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden\">\n" +
+    "			<img src=\"{{follower.follower.avatarUrl}}\" style=\"max-height:250px;\">\n" +
     "        	<a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -561,12 +627,13 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "<div class=\"container\">\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"follower in following\">\n" +
     "		<div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden\">\n" +
+    "			<img src=\"{{follower.follower.avatarUrl}}\" style=\"max-height:250px;\">\n" +
     "        	<a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
-    "{{following}}");
+    "");
 }]);
 
 angular.module("member/templates/wallet.tpl.html", []).run(["$templateCache", function ($templateCache) {
