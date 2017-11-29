@@ -422,7 +422,6 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
     "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
     "                <div class=\"site-heading\">\n" +
     "                    <h1 class=\"blue-title\">Login</h1>\n" +
-    "                    <hr class=\"small\">\n" +
     "                    <h2 class=\"post-title\">\n" +
     "                        Welcome back!\n" +
     "                    </h2>\n" +
@@ -433,7 +432,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
     "</div>\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
+    "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
     "                <form role=\"form\" method=\"post\" action=\"/auth/local\">\n" +
     "                    <div class=\"form-group\">\n" +
@@ -521,7 +520,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     ".member-tabs li{\n" +
     "    display: inline;\n" +
     "    font-size: 20px;\n" +
-    "    font-family:Jura;\n" +
+    "    font-family:'Titillium Web',sans-serif;\n" +
     "}\n" +
     "\n" +
     ".member-tabs > li > a{\n" +
@@ -603,9 +602,9 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "<div class=\"container\">\n" +
     "    <div class=\"col-md-12\" ng-repeat=\"message in messages\">\n" +
     "        <div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px\">\n" +
-    "			<p>{{message.title}}</p>\n" +
-    "			<!--akin to voetr posts-->\n" +
+    "        	<!--akin to voetr posts-->\n" +
     "			<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
+    "			<p>{{message.title}}</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-10\"></div>\n" +
@@ -769,7 +768,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     ".member-tabs li{\n" +
     "    display: inline;\n" +
     "    font-size: 20px;\n" +
-    "    font-family:Jura;\n" +
+    "    font-family:'Titillium Web',sans-serif;\n" +
     "}\n" +
     "\n" +
     ".member-tabs > li > a{\n" +
@@ -790,7 +789,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "  background:rgba(22,22,22,0.75);\n" +
     "  overflow:hidden;\n" +
     "  min-height: 500px;\n" +
-    "  font-family: 'Jura', sans-serif;\n" +
+    "  font-family: 'Titillium Web',sans-serif;\n" +
     "  margin:0;padding:0;border:0 none;position: relative;\n" +
     "}\n" +
     ".imageContainerDiv {\n" +
@@ -810,7 +809,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "  background:rgba(22,22,22,0.75);\n" +
     "  overflow:hidden;\n" +
     "  min-height: 200px;\n" +
-    "  font-family: 'Jura', sans-serif;\n" +
+    "  font-family: 'Titillium Web',sans-serif;\n" +
     "  margin:0;padding:0;border:0 none;position: relative;\n" +
     "}\n" +
     ".imageContainerSmallDiv {\n" +
@@ -933,7 +932,6 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
 angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/finance.tpl.html",
     "<link rel=\"stylesheet\" href=\"bower_components/angular-chart.js/dist/angular-chart.css\">\n" +
-    "<h1>finance</h1><hr>\n" +
     "<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
     "    chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
     "    chart-click=\"onClick\">\n" +
@@ -967,7 +965,7 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
-    "<h1>tasks</h1><hr>\n" +
+    "<br><br>\n" +
     "<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "	<div class=\"form-group\">\n" +
     "		<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
@@ -1035,7 +1033,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function ($
     "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
     "                <div class=\"site-heading\">\n" +
     "                    <h1 class=\"blue-title\">Create an Account</h1>\n" +
-    "                    <hr class=\"small\">\n" +
     "                    <h2 class=\"post-title\">\n" +
     "                        Welcome!\n" +
     "                    </h2>\n" +
@@ -1046,7 +1043,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function ($
     "</div>\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
+    "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
     "                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "                    <div class=\"form-group\">\n" +
