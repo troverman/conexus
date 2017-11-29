@@ -246,7 +246,7 @@ md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
 }
 
 .page-heading {
-    height:200px;
+    min-height:200px;
     background-color:rgb(240,240,240);
 }
 

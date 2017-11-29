@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<input placeholder="task value" type="text" ng-model="newTask.taskValue" class="form-control" id="taskTitle" ng-disabled="!currentUser">
 	</div>
-	<button type="submit" class="btn btn-primary" ng-disabled="!currentUser || !newTask.title">Submit</button>
+	<button type="submit" class="btn btn-default log-btn" ng-disabled="!currentUser || !newTask.title">create</button>
 </form>
 
 <div id="task-list" ng-repeat="task in tasks">

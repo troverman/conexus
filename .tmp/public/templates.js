@@ -218,14 +218,14 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	<div class=\"spacing-50\"></div>\n" +
     "	<div class=\"header-area container\">\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-8\">\n" +
+    "			<div class=\"col-md-6\">\n" +
     "				<h2>Create the next wave</h2>\n" +
     "				<h4>Create and participate in transparent, crowd-sourced, organizations</h4>\n" +
     "				<h4>Earn value though tokenized, organizational actions</h4>\n" +
     "				<div class=\"spacing-25\"></div>\n" +
     "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
     "			</div>\n" +
-    "			<div class=\"col-md-4\" style=\"text-align:right\">\n" +
+    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
     "				<img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
     "				<!--\n" +
     "				<div class=\"block\">\n" +
@@ -545,8 +545,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "\n" +
     "<div ui-view=\"member\">\n" +
     "	<div class=\"profile-header\">\n" +
-    "		<div class=\"member-cover\">\n" +
-    "			<!--<img ng-src=\"{{member.coverUrl}}\" err-src=\"/images/avatar.png\" />-->\n" +
+    "		<div style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "			<img ng-src=\"{{member.coverUrl}}\" err-src=\"/images/avatar.png\" />\n" +
     "		</div>\n" +
     "		<div class=\"container\">\n" +
     "			<div class=\"pull-left\"><img class=\"avatar\" ng-src=\"{{member.avatarUrl}}\"/></div>\n" +
@@ -555,6 +555,9 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Organizations</a></li>-->\n" +
+    "					<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Streams</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Tasks</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>\n" +
     "\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
@@ -839,7 +842,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "		<!--<li><a href=\"/project/{{project.urlTitle}}/discussion\">Discussion</a></li>-->\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>\n" +
-    "    <!--<li><a href=\"/project/{{project.urlTitle}}/tasks\">tasks</a></li>-->\n" +
+    "    <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "		<li ng-show=\"currentUser\">\n" +
     "			<a class=\"btn btn-default\" ng-click=\"toggleEditproject()\">Edit</a>\n" +
     "		</li>\n" +
@@ -879,20 +882,22 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "    <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
     "    <div style=\"height:100px;\"></div>\n" +
     "</div>-->\n" +
-    "<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "    <a href=\"/member/{{message.user.username}}\">\n" +
-    "        <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
-    "        {{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
-    "        <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
-    "    <!--<button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
-    "        <i class=\"fa fa-trash-o\"></i>\n" +
-    "    </button>-->\n" +
-    "</div>\n" +
+    "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "        <a href=\"/member/{{message.user.username}}\">\n" +
+    "            <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
+    "            {{message.user.username}}\n" +
+    "        </a>\n" +
+    "        <br>\n" +
+    "        <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "        <p>{{message.title}}</p>\n" +
+    "    </div>\n" +
+    "</md-card>\n" +
     "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
     "    <div class=\"form-group\">\n" +
     "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
     "    </div>\n" +
-    "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newMessage.title\">create</button>\n" +
     "</form>\n" +
     "\n" +
     "");
@@ -900,24 +905,27 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/channels.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/channels.tpl.html",
-    "<h1>channels</h1><hr>\n" +
-    "<div ng-repeat=\"channel in channels\">\n" +
-    "	<h3>channel {{channel}}</h3>\n" +
-    "</div>\n" +
-    "\n" +
-    "<h5>chat</h5>\n" +
-    "<div ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "    <a href=\"/member/{{message.user.username}}\">{{message.user.username}}</a>, <span am-time-ago=\"message.updatedAt\"></span>\n" +
-    "    <p style=\"margin-left:15px;\">{{message.title}}</p>\n" +
-    "    <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"destroyMessage(message)\" ng-show=\"currentUser.id === message.user.id\">\n" +
-    "        <i class=\"fa fa-trash-o\"></i>\n" +
-    "    </button>\n" +
-    "</div>\n" +
+    "<md-card ng-repeat=\"channel in channels\" class=\"\">\n" +
+    "	 <div style=\"padding:10px;\">\n" +
+    "        <h3>channel</h3>\n" +
+    "    </div>\n" +
+    "</md-card>\n" +
+    "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "        <a href=\"/member/{{message.user.username}}\">\n" +
+    "            <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
+    "            {{message.user.username}}\n" +
+    "        </a>\n" +
+    "        <br>\n" +
+    "        <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "        <p>{{message.title}}</p>\n" +
+    "    </div>\n" +
+    "</md-card>\n" +
     "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
     "    <div class=\"form-group\">\n" +
     "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
     "    </div>\n" +
-    "    <button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
+    "    <button style=\"width:100%\" type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
     "</form>\n" +
     "");
 }]);
@@ -931,26 +939,29 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "    chart-click=\"onClick\">\n" +
     "</canvas> \n" +
     "<div class=\"\">\n" +
-    "	data here\n" +
     "</div>");
 }]);
 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
-    "<button class=\"btn btn-primary\" ng-click=\"createMember()\">join</button>\n" +
-    "<div class=\"member-list\" ng-repeat=\"member in members\">\n" +
-    "	<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
-    "</div>");
+    "<br><br>\n" +
+    "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
+    "<br><br>\n" +
+    "<md-card ng-repeat=\"member in members\" class=\"col-md-3\">\n" +
+    "	<div style=\"padding:10px;\">\n" +
+    "		<img src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
+    "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
+    "	</div>\n" +
+    "</md-card>");
 }]);
 
 angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/streams.tpl.html",
-    "<h1>streams</h1><hr>\n" +
-    "<div id=\"stream-list\" ng-repeat=\"stream in streams\">\n" +
-    "	<div class=\"col-md-4\">\n" +
+    "<md-card ng-repeat=\"stream in streams\" class=\"col-md-4\">\n" +
+    "	<div style=\"padding:10px;\">\n" +
     "		<h3><a href=\"stream/{{stream}}\">stream title {{stream}}</a></h3>\n" +
     "	</div>\n" +
-    "</div>\n" +
+    "</md-card>\n" +
     "");
 }]);
 
@@ -967,7 +978,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "	<div class=\"form-group\">\n" +
     "		<input placeholder=\"task value\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
     "	</div>\n" +
-    "	<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!currentUser || !newTask.title\">Submit</button>\n" +
+    "	<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newTask.title\">create</button>\n" +
     "</form>\n" +
     "\n" +
     "<div id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
@@ -984,26 +995,22 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "  <div class=\"container\"> \n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "    <h1><b>Projects</b></h1>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "<div class=\"spacing-25\"></div>\n" +
-    "<div ng-show=\"currentUser\">\n" +
-    "  <button class=\"btn btn-primary blog-button\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
-    "  <br><br>\n" +
-    "</div>\n" +
-    "<div ng-show=\"currentUser\">\n" +
-    "  <div ng-show=\"newProjectToggleVar\">\n" +
-    "    <div>\n" +
-    "      <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
-    "        <div class=\"form-group\">\n" +
-    "          <input type=\"text\" placeholder= \"project title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "          <input type=\"text\" placeholder= \"post url\" ng-model=\"newProject.urlTitle\" class=\"form-control\">\n" +
-    "        </div>\n" +
-    "        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n" +
-    "      </form>\n" +
+    "    <div ng-show=\"currentUser\">\n" +
+    "      <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button><br><br>\n" +
+    "      <div ng-show=\"newProjectToggleVar\">\n" +
+    "        <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
+    "          <div class=\"form-group\">\n" +
+    "            <input type=\"text\" placeholder= \"project title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "            <input type=\"text\" placeholder= \"post url\" ng-model=\"newProject.urlTitle\" class=\"form-control\">\n" +
+    "          </div>\n" +
+    "          <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "        </form>\n" +
+    "      </div>\n" +
+    "      <br><br>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
+    "<div class=\"spacing-25\"></div>\n" +
     "<div class=\"container\">\n" +
     "  <div class=\"row\">\n" +
     "    <div class=\"post-container col-md-6\" ng-repeat=\"project in projects | orderBy:'-createdAt'\">\n" +

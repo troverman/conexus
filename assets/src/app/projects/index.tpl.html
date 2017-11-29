@@ -2,26 +2,22 @@
   <div class="container"> 
     <div class="spacing-25"></div>
     <h1><b>Projects</b></h1>
-  </div>
-</div>
-<div class="spacing-25"></div>
-<div ng-show="currentUser">
-  <button class="btn btn-primary blog-button" ng-click="newProjectToggle()">+ project</button>
-  <br><br>
-</div>
-<div ng-show="currentUser">
-  <div ng-show="newProjectToggleVar">
-    <div>
-      <form class="blog-input" role="form" ng-submit="createProject(newProject)">
-        <div class="form-group">
-          <input type="text" placeholder= "project title" ng-model="newProject.title" class="form-control">
-          <input type="text" placeholder= "post url" ng-model="newProject.urlTitle" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    <div ng-show="currentUser">
+      <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button><br><br>
+      <div ng-show="newProjectToggleVar">
+        <form class="blog-input" role="form" ng-submit="createProject(newProject)">
+          <div class="form-group">
+            <input type="text" placeholder= "project title" ng-model="newProject.title" class="form-control">
+            <input type="text" placeholder= "post url" ng-model="newProject.urlTitle" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-default log-btn">create</button>
+        </form>
+      </div>
+      <br><br>
     </div>
   </div>
 </div>
+<div class="spacing-25"></div>
 <div class="container">
   <div class="row">
     <div class="post-container col-md-6" ng-repeat="project in projects | orderBy:'-createdAt'">

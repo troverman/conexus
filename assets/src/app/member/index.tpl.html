@@ -48,8 +48,8 @@
 
 <div ui-view="member">
 	<div class="profile-header">
-		<div class="member-cover">
-			<!--<img ng-src="{{member.coverUrl}}" err-src="/images/avatar.png" />-->
+		<div style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
+			<img ng-src="{{member.coverUrl}}" err-src="/images/avatar.png" />
 		</div>
 		<div class="container">
 			<div class="pull-left"><img class="avatar" ng-src="{{member.avatarUrl}}"/></div>
@@ -58,6 +58,9 @@
 					<li><a href="member/{{member.username}}">Activity</a></li>
 					<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
 					<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
+					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Organizations</a></li>-->
+					<li><a href="member/{{member.username}}">{{followersCount.length}} Streams</a></li>
+					<li><a href="member/{{member.username}}">{{followersCount.length}} Tasks</a></li>
 					<li><a href="member/{{member.username}}/wallet">Wallet</a></li>
 
 					<li ng-show="currentUser.id != member.id">
