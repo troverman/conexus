@@ -618,7 +618,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"follower in followers\">\n" +
     "		<div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden\">\n" +
     "			<img src=\"{{follower.follower.avatarUrl}}\" style=\"max-height:250px;\">\n" +
-    "        	<a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
+    "        	<h4><a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a></h4>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -631,7 +631,7 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"follower in following\">\n" +
     "		<div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden\">\n" +
     "			<img src=\"{{follower.follower.avatarUrl}}\" style=\"max-height:250px;\">\n" +
-    "        	<a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a><hr>\n" +
+    "        	<h4><a href=\"/member/{{follower.follower.username}}\">{{follower.follower.username}}</a></h4>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -672,7 +672,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "        <li class=\"nav-links\"><a href=\"/connect\">Discover</a></li>\n" +
     "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
-    "            <input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\">\n" +
+    "            <input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
     "          </div>\n" +
     "        </form>\n" +
     "      </ul>\n" +
@@ -944,6 +944,7 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
+    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<br><br>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "<br><br>\n" +
@@ -951,15 +952,19 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	<div style=\"padding:10px;\">\n" +
     "		<img src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
     "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
+    "		<p>org tokens / reputation </p>\n" +
+    "		<p>org title</p>\n" +
     "	</div>\n" +
     "</md-card>");
 }]);
 
 angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/streams.tpl.html",
-    "<md-card ng-repeat=\"stream in streams\" class=\"col-md-4\">\n" +
+    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
+    "<md-card ng-repeat=\"stream in streams\" class=\"col-md-6\">\n" +
     "	<div style=\"padding:10px;\">\n" +
     "		<h3><a href=\"stream/{{stream}}\">stream title {{stream}}</a></h3>\n" +
+    "		<iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
     "	</div>\n" +
     "</md-card>\n" +
     "");
@@ -967,6 +972,7 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
+    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<br>\n" +
     "<md-card>\n" +
     "    <div style=\"padding:10px;\">\n" +
@@ -984,7 +990,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "		</form>\n" +
     "	</div>\n" +
     "</md-card>\n" +
-    "<md-card id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
+    "<md-card id=\"task-list\" ng-repeat=\"task in tasks\" class=\"col-md-6\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "\n" +
     "	<h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5>\n" +
@@ -1105,25 +1111,37 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function ($te
 
 angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("stream/index.tpl.html",
-    "<div class=\"header-contianer\">\n" +
-    "  <img style=\"width:100px;border-radius:100px; \"src=\"/images/mikey.jpg\"/>\n" +
-    "  <h4><h1>membertitle</h1></h4>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"stream-container\">\n" +
+    "<div style=\"background:black\">\n" +
+    "	<div class=\"spacing-100\"></div>\n" +
     "	<!--if streaming user-->\n" +
-    "    <video id=\"camera-preview\" style=\"border: 1px solid rgb(15, 158, 238)\"></video>\n" +
-    "	<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "    <!--<video id=\"camera-preview\"></video>-->\n" +
+    "    <div style=\"text-align:center\">\n" +
+    "		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-100\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "");
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "	<img style=\"width:100px;border-radius:100px; \"src=\"/images/mikey.jpg\"/>\n" +
+    "	<h3><a href=\"member/troverman\">membertitle</a></h3>\n" +
+    "	<h3><a href=\"project/conexus\">organization</a></h3>\n" +
+    "	<h3><a href=\"task/task1\">task</a></h3>\n" +
+    "\n" +
+    "	<!--chat-->\n" +
+    "\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "</div>");
 }]);
 
 angular.module("task/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("task/index.tpl.html",
+    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<div class=\"container\">\n" +
     "  <h3>{{task.title}}</h3>\n" +
     "  <h3>{{task.content}}</h3>\n" +
+    "  <h3>88 conexus tokens</h3>\n" +
     "  <h3><a href=\"/project/{{task.orginization}}\">{{task.orginization}}</a></h3>\n" +
     "  <br>\n" +
     "  <button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button>\n" +
@@ -1131,11 +1149,14 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "  <md-card ng-repeat=\"work in taskWork\" class=\"col-md-6\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "      <h4><a href=\"stream/{{work}}\">{{work}}</a></h4>\n" +
-    "      <iframe width='560' height='315' src='https://www.bidio.co/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "      <h4><a href=\"member/troverman\">troverman</a></h4>\n" +
+    "      <!--<p>tokens?</p>-->\n" +
+    "      <iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
     "      <button type=\"submit\" class=\"btn btn-default log-btn\">Validate Work</button>\n" +
     "    </div>\n" +
     "  </md-card>\n" +
     "</div>\n" +
+    "<div class=\"spacing:50px;\"></div>\n" +
     "\n" +
     "\n" +
     "");

@@ -1,3 +1,4 @@
+<style>md-card{margin:0px; overflow:hidden;}</style>
 <br>
 <md-card>
     <div style="padding:10px;">
@@ -15,7 +16,7 @@
 		</form>
 	</div>
 </md-card>
-<md-card id="task-list" ng-repeat="task in tasks">
+<md-card id="task-list" ng-repeat="task in tasks" class="col-md-6">
     <div style="padding:10px;">
 
 	<h5><a href="task/{{task.id}}">{{task.title}}</a></h5>

@@ -1,6 +1,8 @@
+<style>md-card{margin:0px; overflow:hidden;}</style>
 <div class="container">
   <h3>{{task.title}}</h3>
   <h3>{{task.content}}</h3>
+  <h3>88 conexus tokens</h3>
   <h3><a href="/project/{{task.orginization}}">{{task.orginization}}</a></h3>
   <br>
   <button type="submit" class="btn btn-default log-btn">Start Work</button>
@@ -8,10 +10,13 @@
   <md-card ng-repeat="work in taskWork" class="col-md-6">
     <div style="padding:10px;">
       <h4><a href="stream/{{work}}">{{work}}</a></h4>
-      <iframe width='560' height='315' src='https://www.bidio.co/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+      <h4><a href="member/troverman">troverman</a></h4>
+      <!--<p>tokens?</p>-->
+      <iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
       <button type="submit" class="btn btn-default log-btn">Validate Work</button>
     </div>
   </md-card>
 </div>
+<div class="spacing:50px;"></div>
 
 

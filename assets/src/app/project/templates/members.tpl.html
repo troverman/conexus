@@ -1,3 +1,4 @@
+<style>md-card{margin:0px; overflow:hidden;}</style>
 <br><br>
 <button class="btn btn-default log-btn" ng-click="createMember()">join</button>
 <br><br>
@@ -5,5 +6,7 @@
 	<div style="padding:10px;">
 		<img src="{{member.user.avatarUrl}}" err-src="/images/avatar.png" style="height:128px;">
 		<h3><a href="member/{{member.user.username}}">{{member.user.username}}</a></h3>
+		<p>org tokens / reputation </p>
+		<p>org title</p>
 	</div>
 </md-card>
