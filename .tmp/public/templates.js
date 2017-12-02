@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'transparency/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'transparency/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -161,7 +161,7 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "	<div class=\"spacing-20\"></div>\n" +
     "\n" +
     "	<div ng-repeat=\"user in users\">\n" +
-    "		<h4><a href=\"/member/{{user.username}}\">{{user.username}}</a></h4><hr>\n" +
+    "		<h4><a href=\"/member/{{user.username}}\">{{user.username}}</a></h4>\n" +
     "	</div>\n" +
     "\n" +
     "	<!--<p>what is this page?</p>\n" +
@@ -906,7 +906,7 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
   $templateCache.put("project/templates/channels.tpl.html",
     "<md-card ng-repeat=\"channel in channels\" class=\"\">\n" +
     "	 <div style=\"padding:10px;\">\n" +
-    "        <h3>channel</h3>\n" +
+    "        <h3>{{channel.title}}</h3>\n" +
     "    </div>\n" +
     "</md-card>\n" +
     "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
@@ -937,6 +937,7 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "    chart-click=\"onClick\">\n" +
     "</canvas> \n" +
     "<div class=\"\">\n" +
+    "	<p>entry{title, description, amount}</p>\n" +
     "</div>");
 }]);
 
@@ -981,9 +982,9 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "<div id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
     "	<h3>{{task.title}}</h3>\n" +
-    "	<p>{{task.taskValue}}</p>\n" +
     "	<p>{{task.taskContent}}</p>\n" +
-    "\n" +
+    "	<br>\n" +
+    "	<p>{{task.taskValue}}</p>\n" +
     "</div>");
 }]);
 
@@ -1106,6 +1107,16 @@ angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($te
     "    <video id=\"camera-preview\" style=\"border: 1px solid rgb(15, 158, 238)\"></video>\n" +
     "	<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "</div>\n" +
+    "\n" +
+    "");
+}]);
+
+angular.module("task/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("task/index.tpl.html",
+    "<div style=\"margin-left:15%;margin-right:15%;\">\n" +
+    "  <h3>task</h3>\n" +
+    "</div>\n" +
+    "\n" +
     "\n" +
     "");
 }]);

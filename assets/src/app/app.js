@@ -27,6 +27,7 @@ angular.module( 'conexus', [
     'conexus.register',
     'conexus.stream',
     'conexus.search',
+    'conexus.task',
     'conexus.transparency'
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {

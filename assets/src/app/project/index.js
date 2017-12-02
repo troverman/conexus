@@ -47,7 +47,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             channels: [function() {
-                return [1,2,3,4,5];
+                return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
             messages: ['MemberModel', 'project', function(MessageModel, project){
                 return MessageModel.getByProject(project);

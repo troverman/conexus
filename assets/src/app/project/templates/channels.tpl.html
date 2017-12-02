@@ -1,6 +1,6 @@
 <md-card ng-repeat="channel in channels" class="">
 	 <div style="padding:10px;">
-        <h3>channel</h3>
+        <h3>{{channel.title}}</h3>
     </div>
 </md-card>
 <md-card ng-repeat="message in messages.slice().reverse()">
