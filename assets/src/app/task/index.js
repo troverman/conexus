@@ -11,17 +11,20 @@ angular.module( 'conexus.task', [
             }
         },
         resolve: {
-            task: function(PostModel) {
-                return PostModel.getAll();
+            task: function() {
+                return {title:'task', content:'this is the task', orginization:'conexus'};
+            },
+            taskWork: function() {
+                return ['work1', 'work2', 'work3', 'work4', 'work5'];
             }
         }
     });
 }])
 
-.controller( 'PostController', ['$sailsSocket', '$scope', 'config', 'lodash', 'PostModel', 'task', 'titleService', function PostController( $sailsSocket, $scope, config, lodash, PostModel, task, titleService ) {
-    titleService.setTitle('posts - conex.us');
+.controller( 'TaskController', ['$sailsSocket', '$scope', 'config', 'lodash', 'PostModel', 'task', 'taskWork', 'titleService', function TaskController( $sailsSocket, $scope, config, lodash, PostModel, task, taskWork, titleService ) {
+    titleService.setTitle('Task - conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.task = task;
-
+    $scope.taskWork = taskWork;
 }]);

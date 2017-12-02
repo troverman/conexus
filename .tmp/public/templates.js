@@ -157,8 +157,8 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "\n" +
     "<div class=\"container\">\n" +
     "\n" +
-    "	<h1>connect</h1><hr>\n" +
-    "	<div class=\"spacing-20\"></div>\n" +
+    "	<h1>connect</h1>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<div ng-repeat=\"user in users\">\n" +
     "		<h4><a href=\"/member/{{user.username}}\">{{user.username}}</a></h4>\n" +
@@ -167,7 +167,8 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "	<!--<p>what is this page?</p>\n" +
     "	<p>connect in your gps, bank info, and live stream google glass: +1 crazy</p>-->\n" +
     "\n" +
-    "</div>");
+    "</div>\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -966,26 +967,33 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
-    "<br><br>\n" +
-    "<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
-    "	<div class=\"form-group\">\n" +
-    "		<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "<br>\n" +
+    "<md-card>\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newTask.taskContent\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task value\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "			</div>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newTask.title\">create</button>\n" +
+    "		</form>\n" +
     "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "		<input placeholder=\"task content\" type=\"text\" ng-model=\"newTask.taskContent\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "		<input placeholder=\"task value\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
-    "	</div>\n" +
-    "	<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newTask.title\">create</button>\n" +
-    "</form>\n" +
+    "</md-card>\n" +
+    "<md-card id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
     "\n" +
-    "<div id=\"task-list\" ng-repeat=\"task in tasks\">\n" +
-    "	<h3>{{task.title}}</h3>\n" +
+    "	<h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5>\n" +
     "	<p>{{task.taskContent}}</p>\n" +
-    "	<br>\n" +
     "	<p>{{task.taskValue}}</p>\n" +
-    "</div>");
+    "	<button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button>\n" +
+    "	<!--<button type=\"submit\" class=\"btn btn-default log-btn\">Submit Work</button>-->\n" +
+    "	</div>\n" +
+    "</md-card>");
 }]);
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -1113,8 +1121,20 @@ angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($te
 
 angular.module("task/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("task/index.tpl.html",
-    "<div style=\"margin-left:15%;margin-right:15%;\">\n" +
-    "  <h3>task</h3>\n" +
+    "<div class=\"container\">\n" +
+    "  <h3>{{task.title}}</h3>\n" +
+    "  <h3>{{task.content}}</h3>\n" +
+    "  <h3><a href=\"/project/{{task.orginization}}\">{{task.orginization}}</a></h3>\n" +
+    "  <br>\n" +
+    "  <button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button>\n" +
+    "  <div class=\"spacing-25\"></div>\n" +
+    "  <md-card ng-repeat=\"work in taskWork\" class=\"col-md-6\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "      <h4><a href=\"stream/{{work}}\">{{work}}</a></h4>\n" +
+    "      <iframe width='560' height='315' src='https://www.bidio.co/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "      <button type=\"submit\" class=\"btn btn-default log-btn\">Validate Work</button>\n" +
+    "    </div>\n" +
+    "  </md-card>\n" +
     "</div>\n" +
     "\n" +
     "\n" +

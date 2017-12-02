@@ -28,6 +28,7 @@ module.exports.routes = {
   'get /search': 'HomeController.index',
   'get /search/:searchQuery': 'HomeController.index',
   'get /stream/:id': 'HomeController.index',
+  'get /task/:id': 'HomeController.index',
   'get /transparency': 'HomeController.index',
 
   'get /login': 'HomeController.index',

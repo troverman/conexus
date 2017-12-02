@@ -1,5 +1,17 @@
-<div style="margin-left:15%;margin-right:15%;">
-  <h3>task</h3>
+<div class="container">
+  <h3>{{task.title}}</h3>
+  <h3>{{task.content}}</h3>
+  <h3><a href="/project/{{task.orginization}}">{{task.orginization}}</a></h3>
+  <br>
+  <button type="submit" class="btn btn-default log-btn">Start Work</button>
+  <div class="spacing-25"></div>
+  <md-card ng-repeat="work in taskWork" class="col-md-6">
+    <div style="padding:10px;">
+      <h4><a href="stream/{{work}}">{{work}}</a></h4>
+      <iframe width='560' height='315' src='https://www.bidio.co/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+      <button type="submit" class="btn btn-default log-btn">Validate Work</button>
+    </div>
+  </md-card>
 </div>
 
 
