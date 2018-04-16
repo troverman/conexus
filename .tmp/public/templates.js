@@ -36,7 +36,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div id=\"about-section2\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "		<h4>a community of collaborators</h4>\n" +
+    "		<h4>governance of collaborators</h4>\n" +
     "		<p>working together toward a common goal</p>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
@@ -48,6 +48,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "			<div class=\"col-md-6\">\n" +
     "				<h4>transparency</h4>\n" +
     "				<p>transparent contrubitions and equatable representation</p>\n" +
+    "				<p>reputation systems and task verification</p>\n" +
     "				<p>open finance and contribution</p>\n" +
     "				<p>tokenized organizational actions on a blockchain</p>\n" +
     "			</div>\n" +
@@ -667,8 +668,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "    <div class=\"collapse navbar-collapse\">\n" +
     "      <ul class=\"nav navbar-nav\">\n" +
     "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
-    "        <!--<li class=\"nav-links\"><a href=\"/projects\">Events</a></li>-->\n" +
-    "        <!--<li class=\"nav-links\"><a href=\"/projects\">Projects</a></li>-->\n" +
     "        <li class=\"nav-links\"><a href=\"/connect\">Discover</a></li>\n" +
     "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
@@ -838,8 +837,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/finance\">Finance</a></li>\n" +
-    "		<!--<li><a href=\"/project/{{project.urlTitle}}/discussion\">Discussion</a></li>-->\n" +
+    "		<li><a href=\"/project/{{project.urlTitle}}/finance\">Ledger</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>\n" +
     "    <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
@@ -867,10 +865,10 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
-    "<div id=\"streams\">\n" +
+    "<!--<div id=\"streams\">\n" +
     "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
     "<!--<div id=\"tasks\">\n" +
     "    <br><br>\n" +
     "    <p>task</p>\n" +
@@ -932,13 +930,54 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/finance.tpl.html",
-    "<link rel=\"stylesheet\" href=\"bower_components/angular-chart.js/dist/angular-chart.css\">\n" +
-    "<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
-    "    chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
-    "    chart-click=\"onClick\">\n" +
-    "</canvas> \n" +
+    "<md-card>\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "		<form role=\"form\" ng-submit=\"createEntry(newEntry)\">\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newEntry.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newEntry.taskContent\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task value\" type=\"text\" ng-model=\"newEntry.value\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "			</div>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newEntry.title\">create</button>\n" +
+    "		</form>\n" +
+    "	</div>\n" +
+    "</md-card>\n" +
+    "\n" +
     "<div class=\"\">\n" +
-    "	<p>entry{title, description, amount}</p>\n" +
+    "\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Description</th>\n" +
+    "				<th>Type</th>\n" +
+    "				<th>Identifier</th>\n" +
+    "				<th>Amount</th>\n" +
+    "				<th>Date</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr ng-repeat=\"entry in entries\">\n" +
+    "				<td>{{entry.description}}</td>\n" +
+    "				<td>{{entry.type}}</td>\n" +
+    "				<td>{{entry.identifier}}</td>\n" +
+    "				<td>{{entry.amount}}</td>\n" +
+    "				<td>{{entry.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "	<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
+    "    	chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
+    "    	chart-click=\"onClick\">\n" +
+    "	</canvas> \n" +
+    "\n" +
+    "\n" +
     "</div>");
 }]);
 
@@ -952,8 +991,9 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	<div style=\"padding:10px;\">\n" +
     "		<img src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
     "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
-    "		<p>org tokens / reputation </p>\n" +
-    "		<p>org title</p>\n" +
+    "		<p style=\"color:gray\">creator</p>\n" +
+    "		<p style=\"color:gray\">total time: 888</p>\n" +
+    "		<p style=\"color:gray\">reputation: 888</p>\n" +
     "	</div>\n" +
     "</md-card>");
 }]);

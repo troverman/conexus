@@ -14,7 +14,7 @@ angular.module( 'conexus.transparency', [
 }])
 
 .controller( 'TransparencyCtrl', ['$scope', 'titleService', function TransparencyController( $scope, titleService ) {
-	titleService.setTitle('transparency - conex.us');
+	titleService.setTitle('transparency | conex.us');
 	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     $scope.series = ['Series A', 'Series B'];
     $scope.data = [

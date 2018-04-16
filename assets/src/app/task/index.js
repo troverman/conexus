@@ -22,7 +22,7 @@ angular.module( 'conexus.task', [
 }])
 
 .controller( 'TaskController', ['$sailsSocket', '$scope', 'config', 'lodash', 'PostModel', 'task', 'taskWork', 'titleService', function TaskController( $sailsSocket, $scope, config, lodash, PostModel, task, taskWork, titleService ) {
-    titleService.setTitle('Task - conex.us');
+    titleService.setTitle('Task | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.task = task;

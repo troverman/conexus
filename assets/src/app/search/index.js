@@ -45,7 +45,7 @@ angular.module( 'conexus.search', [
     $scope.searchResults = searchResults;
     $scope.searchQuery = $stateParams.searchQuery;
 
-    titleService.setTitle($scope.searchQuery + ' - conex.us');
+    titleService.setTitle($scope.searchQuery + ' | conex.us');
 
     $scope.keyPress = function(searchValue){
         SearchModel.search(searchValue).then(function(models){

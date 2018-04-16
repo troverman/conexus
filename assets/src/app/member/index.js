@@ -84,7 +84,7 @@ angular.module( 'conexus.member', [
 .controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, seoService, titleService) {
 	$scope.currentUser = config.currentUser;
     $scope.member = member;
-    titleService.setTitle($scope.member.username + ' - conex.us');
+    titleService.setTitle($scope.member.username + ' | conex.us');
     //seoService
     if(!$scope.member){$location.path('/')}
     $scope.followersCount = followersCount;

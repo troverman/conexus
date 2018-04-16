@@ -14,7 +14,7 @@ angular.module( 'conexus.account', [
 }])
 
 .controller( 'AccountCtrl', ['$location', '$scope', 'config', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $scope, config, titleService, Upload, UserModel ) {
-	titleService.setTitle('account - conex.us');
+	titleService.setTitle('account | conex.us');
 	$scope.currentUser = config.currentUser;
 	if(!$scope.currentUser){$location.path('/')}
 		

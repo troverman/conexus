@@ -15,6 +15,7 @@ angular.module( 'conexus.stream', [
 
 .controller( 'StreamCtrl', ['$sailsSocket', '$scope', 'config', 'titleService', function StreamController($sailsSocket, $scope, config, titleService ) {
     $scope.currentUser = config.currentUser;
+    titleService.setTitle('Stream | conex.us');
 
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D

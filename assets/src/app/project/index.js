@@ -61,6 +61,11 @@ angular.module( 'conexus.project', [
                 controller: 'ProjectFinanceCtrl',
                 templateUrl: 'project/templates/finance.tpl.html'
             }
+        },
+        resolve: {
+            entries: ['MemberModel', 'project', function(MemberModel, project) {
+                return [{description:'USD PAYMENT', type:'PAYMENT', amount:13, identifier:'USD'}, {description:'TOKEN TRANSFER', type:'TRANSFER', amount:223, identifier:'CONEX'}, {description:'TASK COMPLETED', type:'TASK BOUNTY', amount:342, identifier:'USD'}]
+            }]
         }
     })
     .state( 'project.members', {
@@ -135,7 +140,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', function ProjectActivityController( $location, $sailsSocket, $scope, config, lodash, MessageModel, messages, project, tasks, titleService ) {
-    titleService.setTitle(project.title + ' - conex.us');
+    titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.newMessage = {};
@@ -226,7 +231,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'lodash', function ProjectController( $interval, $scope, lodash ) {
+.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'entries', 'lodash', function ProjectController( $interval, $scope, entries, lodash ) {
 
     $scope.options = {
         responsive: true,
@@ -238,6 +243,8 @@ angular.module( 'conexus.project', [
         [65, 59, 80, 81, 56, 55, 40],
         [28, 48, 40, 19, 86, 27, 90]
     ];
+
+    $scope.entries = entries;
 
     $interval(function () {
         $scope.data = _.shuffle($scope.data);

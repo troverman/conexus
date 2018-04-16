@@ -14,7 +14,7 @@ angular.module( 'conexus.about', [
 }])
 
 .controller( 'AboutCtrl', ['$scope', 'titleService', function AboutController( $scope, titleService ) {
-	titleService.setTitle('about - conex.us');
+	titleService.setTitle('about | conex.us');
 	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     $scope.series = ['Series A', 'Series B'];
     $scope.data = [

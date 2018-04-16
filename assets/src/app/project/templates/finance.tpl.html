@@ -1,8 +1,49 @@
-<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
-<canvas id="line" class="chart chart-line" chart-data="data"
-    chart-labels="labels" chart-legend="true" chart-series="series"
-    chart-click="onClick">
-</canvas> 
+<md-card>
+    <div style="padding:10px;">
+		<form role="form" ng-submit="createEntry(newEntry)">
+			<div class="form-group">
+				<input placeholder="task title" type="text" ng-model="newEntry.title" class="form-control" id="taskTitle" ng-disabled="!currentUser">
+			</div>
+			<div class="form-group">
+				<input placeholder="task content" type="text" ng-model="newEntry.taskContent" class="form-control" id="taskTitle" ng-disabled="!currentUser">
+			</div>
+			<div class="form-group">
+				<input placeholder="task value" type="text" ng-model="newEntry.value" class="form-control" id="taskTitle" ng-disabled="!currentUser">
+			</div>
+			<button type="submit" class="btn btn-default log-btn" ng-disabled="!currentUser || !newEntry.title">create</button>
+		</form>
+	</div>
+</md-card>
+
 <div class="">
-	<p>entry{title, description, amount}</p>
+
+	<table class="table table-inverse table-hover">
+	    <thead>
+			<tr>
+				<th>Description</th>
+				<th>Type</th>
+				<th>Identifier</th>
+				<th>Amount</th>
+				<th>Date</th>
+			</tr>
+	    </thead>
+	    <tbody>
+			<tr ng-repeat="entry in entries">
+				<td>{{entry.description}}</td>
+				<td>{{entry.type}}</td>
+				<td>{{entry.identifier}}</td>
+				<td>{{entry.amount}}</td>
+				<td>{{entry.createdAt | date :  "y MM-dd hh:mm.ss a"}}</td>
+			</tr>
+	    </tbody>
+	</table>
+
+
+
+	<canvas id="line" class="chart chart-line" chart-data="data"
+    	chart-labels="labels" chart-legend="true" chart-series="series"
+    	chart-click="onClick">
+	</canvas> 
+
+
 </div>
