@@ -669,6 +669,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "      <ul class=\"nav navbar-nav\">\n" +
     "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/connect\">Discover</a></li>\n" +
+    "        <li class=\"nav-links\"><a href=\"#\">Market</a></li>\n" +
     "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
@@ -742,125 +743,7 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function ($temp
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<style>\n" +
-    ".avatar {\n" +
-    "    position:absolute;\n" +
-    "    top:6.4em;\n" +
-    "    margin: 0 auto;\n" +
-    "    background: #fff;\n" +
-    "    max-width: 15em;\n" +
-    "    height: 15em;\n" +
-    "    padding: 0.25em;\n" +
-    "    border-radius: .7em;\n" +
-    "    //box-shadow: 0 0 .1em rgba(0, 0, 0, 0.15);\n" +
-    "}\n" +
-    "\n" +
-    ".member-cover{\n" +
-    "    height:17em;\n" +
-    "    width: 100%;\n" +
-    "    overflow: hidden;\n" +
-    "}\n" +
-    ".member-cover img{\n" +
-    "    width: 100%;\n" +
-    "    margin-top: -10%\n" +
-    "}\n" +
-    "\n" +
-    ".member-tabs li{\n" +
-    "    display: inline;\n" +
-    "    font-size: 20px;\n" +
-    "    font-family:'Titillium Web',sans-serif;\n" +
-    "}\n" +
-    "\n" +
-    ".member-tabs > li > a{\n" +
-    "    padding:10px 15px;\n" +
-    "    color:rgb(125,125,125);\n" +
-    "}\n" +
-    "\n" +
-    ".member-tabs > li > a:hover{\n" +
-    "    background-color: #eee;\n" +
-    "    border-radius:3px;\n" +
-    "}\n" +
-    "\n" +
-    ".member-tab-container ul{\n" +
-    "    margin:10px 15px;\n" +
-    "}\n" +
-    "\n" +
-    ".imageContainer {\n" +
-    "  background:rgba(22,22,22,0.75);\n" +
-    "  overflow:hidden;\n" +
-    "  min-height: 500px;\n" +
-    "  font-family: 'Titillium Web',sans-serif;\n" +
-    "  margin:0;padding:0;border:0 none;position: relative;\n" +
-    "}\n" +
-    ".imageContainerDiv {\n" +
-    "  width:100%;\n" +
-    "  height: 35em;\n" +
-    "  display: flex;\n" +
-    "  flex-direction: column;\n" +
-    "}\n" +
-    ".imageContainerDiv h1 {\n" +
-    "  color: rgba(255,255,255,0.9);\n" +
-    "  font-size: 50px;\n" +
-    "  font-weight: 400;\n" +
-    "  margin-top:auto;\n" +
-    "  margin-bottom:auto;\n" +
-    "}\n" +
-    ".imageContainerSmall {\n" +
-    "  background:rgba(22,22,22,0.75);\n" +
-    "  overflow:hidden;\n" +
-    "  min-height: 200px;\n" +
-    "  font-family: 'Titillium Web',sans-serif;\n" +
-    "  margin:0;padding:0;border:0 none;position: relative;\n" +
-    "}\n" +
-    ".imageContainerSmallDiv {\n" +
-    "  width:100%;\n" +
-    "  height: 200px;\n" +
-    "  display: flex;\n" +
-    "  flex-direction: column;\n" +
-    "}\n" +
-    ".imageContainerSmallDiv h1 {\n" +
-    "  color: rgba(255,255,255,0.9);\n" +
-    "  font-size: 50px;\n" +
-    "  font-weight: 400;\n" +
-    "  margin-top:auto;\n" +
-    "  margin-bottom:auto;\n" +
-    "}\n" +
-    "\n" +
-    "</style>\n" +
-    "\n" +
-    "<div class=\"imageContainerSmall\">\n" +
-    "    <div class=\"imageContainerSmallDiv\">  \n" +
-    "        <h1 style=\"text-align:left\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/> {{project.title}}</h1>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "<div class=\"member-tab-container container\">\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/finance\">Ledger</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>\n" +
-    "    <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
-    "		<li ng-show=\"currentUser\">\n" +
-    "			<a class=\"btn btn-default\" ng-click=\"toggleEditproject()\">Edit</a>\n" +
-    "		</li>\n" +
-    "		<li ng-show=\"currentUser\">\n" +
-    "			<a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a>\n" +
-    "		</li>\n" +
-    "	</ul>\n" +
-    "</div>\n" +
-    "<md-divider></md-divider>\n" +
-    "<div class=\"container\" ng-show=\"editProjectToggle\"><p>edit project form</p></div>\n" +
-    "<div class=\"project-container container\">\n" +
-    "    <div ui-view=\"activity\"></div>\n" +
-    "    <div ui-view=\"channels\"></div>\n" +
-    "    <div ui-view=\"finance\"></div>\n" +
-    "    <div ui-view=\"members\"></div>\n" +
-    "    <div ui-view=\"tasks\"></div>\n" +
-    "    <div ui-view=\"streams\"></div>\n" +
-    "</div>\n" +
-    "<div class=\"spacing-25\"></div>\n" +
-    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
+    "");
 }]);
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
