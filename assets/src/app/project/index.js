@@ -109,6 +109,20 @@ angular.module( 'conexus.project', [
                 return TaskModel.getByProject(project);
             }]
         }
+    })
+    .state( 'project.projects', {
+        url: '/projects',
+        views: {
+            "tasks": {
+                controller: 'ProjectProjectsCtrl',
+                templateUrl: 'project/templates/projects.tpl.html'
+            }
+        },
+        resolve: {
+            projects: ['project', 'TaskModel', function(project, TaskModel){
+                return TaskModel.getByProject(project);
+            }]
+        }
     });
     
 }])
@@ -379,3 +393,15 @@ angular.module( 'conexus.project', [
     });
 
 }])
+.controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'projects', function ProjectController( $sailsSocket, $scope, config, project, projects ) {
+    $scope.currentUser = config.currentUser;
+    $scope.project = project;
+    $scope.projects = projects;
+
+
+
+
+
+
+}]);
+

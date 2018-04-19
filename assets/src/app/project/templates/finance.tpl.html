@@ -2,15 +2,15 @@
     <div style="padding:10px;">
 		<form role="form" ng-submit="createEntry(newEntry)">
 			<div class="form-group">
-				<input placeholder="task title" type="text" ng-model="newEntry.title" class="form-control" id="taskTitle" ng-disabled="!currentUser">
+				<input placeholder="task title" type="text" ng-model="newEntry.title" class="form-control" id="taskTitle">
 			</div>
 			<div class="form-group">
-				<input placeholder="task content" type="text" ng-model="newEntry.taskContent" class="form-control" id="taskTitle" ng-disabled="!currentUser">
+				<input placeholder="task content" type="text" ng-model="newEntry.taskContent" class="form-control" id="taskTitle">
 			</div>
 			<div class="form-group">
-				<input placeholder="task value" type="text" ng-model="newEntry.value" class="form-control" id="taskTitle" ng-disabled="!currentUser">
+				<input placeholder="task value" type="text" ng-model="newEntry.value" class="form-control" id="taskTitle">
 			</div>
-			<button type="submit" class="btn btn-default log-btn" ng-disabled="!currentUser || !newEntry.title">create</button>
+			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newEntry.title">create</button>
 		</form>
 	</div>
 </md-card>

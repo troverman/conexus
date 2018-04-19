@@ -1,22 +1,30 @@
-<md-card ng-repeat="channel in channels" class="">
-	 <div style="padding:10px;">
-        <h3>{{channel.title}}</h3>
+<div class="row">
+    <div class="col-md-2">
+        <md-card ng-repeat="channel in channels" class="">
+        	 <div style="padding:10px;">
+                <h4><a href="#">{{channel.title}}</a></h3>
+            </div>
+        </md-card>
     </div>
-</md-card>
-<md-card ng-repeat="message in messages.slice().reverse()">
-    <div style="padding:10px;">
-        <a href="/member/{{message.user.username}}">
-            <img src="{{message.user.avatarUrl}}" err-src="/images/avatar.png" style="height:32px;">
-            {{message.user.username}}
-        </a>
-        <br>
-        <span am-time-ago="message.updatedAt"></span>
-        <p>{{message.title}}</p>
+    <div class="col-md-10">
+        <md-card ng-repeat="message in messages.slice().reverse()">
+            <div style="padding:10px;">
+                <a href="/member/{{message.user.username}}">
+                    <img src="{{message.user.avatarUrl}}" err-src="/images/avatar.png" style="height:32px;">
+                    {{message.user.username}}
+                </a>
+                <br>
+                <span am-time-ago="message.updatedAt"></span>
+                <p>{{message.title}}</p>
+            </div>
+        </md-card>
+        <div class="spacing-15"></div>
+        <form role="form" ng-submit="createMessage(newMessage)">
+            <div class="form-group">
+                <input type="text" ng-model="newMessage.title" class="form-control" id="messageTitle">
+            </div>
+            <button style="width:100%" type="submit" class="btn btn-default log-btn" ng-disabled="!newMessage.title">Submit</button>
+        </form>
     </div>
-</md-card>
-<form role="form" ng-submit="createMessage(newMessage)">
-    <div class="form-group">
-        <input type="text" ng-model="newMessage.title" class="form-control" id="messageTitle" ng-disabled="!currentUser">
-    </div>
-    <button style="width:100%" type="submit" class="btn btn-default log-btn" ng-disabled="!currentUser || !newMessage.title">Submit</button>
-</form>
+</div>
+

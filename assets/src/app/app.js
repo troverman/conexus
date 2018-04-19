@@ -16,6 +16,8 @@ angular.module( 'conexus', [
     'conexus.account',
     'conexus.connect',
     'conexus.footer',
+    'conexus.market',
+    'conexus.markets',
     'conexus.nav',
     'conexus.home',
     'conexus.intro',
@@ -28,6 +30,7 @@ angular.module( 'conexus', [
     'conexus.stream',
     'conexus.search',
     'conexus.task',
+    'conexus.tasks',
     'conexus.transparency'
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {

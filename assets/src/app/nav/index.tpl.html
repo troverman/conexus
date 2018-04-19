@@ -15,7 +15,7 @@
       <ul class="nav navbar-nav">
         <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
         <li class="nav-links"><a href="/connect">Discover</a></li>
-        <li class="nav-links"><a href="#">Market</a></li>
+        <li class="nav-links"><a href="/market">Market</a></li>
         <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;">
           <div class="form-group">
             <input style="margin-top:5px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">

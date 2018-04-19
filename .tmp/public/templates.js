@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'transparency/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -465,6 +465,99 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
     "</div>");
 }]);
 
+angular.module("market/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("market/index.tpl.html",
+    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
+    "</div>\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "	<h1>Order Book</h1>\n" +
+    "	<h2>MARKETS | GRAPH | PAIRS</h2>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr>\n" +
+    "				<td>[2 NOVO, 3 CONEX]</td>\n" +
+    "				<td>[1 ALCOA]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 OAK RIDGE]</td>\n" +
+    "				<td>[2 NOVO]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 CONEX, 1 CHAPEL HILL]</td>\n" +
+    "				<td>[5 NOVO]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[1 NOVO]</td>\n" +
+    "				<td>[1 CHAPEL HILL COUNCIL, 1 DURHAM]</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "</div>");
+}]);
+
+angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("markets/index.tpl.html",
+    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
+    "</div>\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "	<h1>Order Book</h1>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr>\n" +
+    "				<td>[2 NOVO, 3 CONEX]</td>\n" +
+    "				<td>[1 ALCOA]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 OAK RIDGE]</td>\n" +
+    "				<td>[2 NOVO]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 CONEX, 1 CHAPEL HILL]</td>\n" +
+    "				<td>[5 NOVO]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[1 NOVO]</td>\n" +
+    "				<td>[1 CHAPEL HILL COUNCIL, 1 DURHAM]</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "\n" +
+    "	<h1>Markets</h1>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Token</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr><td><a href=\"market/NOVO\">NOVO</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/CONEX\">CONEX</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/DURHAM\">DURHAM</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/CHAPEL_HILL\">CHAPEL HILL</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/token4\">ALCOA</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/OAK_RIDGE\">OAK RIDGE</a></td></tr>\n" +
+    "\n" +
+    "		</tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "</div>");
+}]);
+
 angular.module("member/index.old.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/index.old.tpl.html",
     "<div class=\"profile-header\">\n" +
@@ -669,7 +762,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "      <ul class=\"nav navbar-nav\">\n" +
     "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/connect\">Discover</a></li>\n" +
-    "        <li class=\"nav-links\"><a href=\"#\">Market</a></li>\n" +
+    "        <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
     "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
@@ -743,26 +836,123 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function ($temp
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "");
+    "<style>\n" +
+    ".avatar {\n" +
+    "    position:absolute;\n" +
+    "    top:6.4em;\n" +
+    "    margin: 0 auto;\n" +
+    "    background: #fff;\n" +
+    "    max-width: 15em;\n" +
+    "    height: 15em;\n" +
+    "    padding: 0.25em;\n" +
+    "    border-radius: .7em;\n" +
+    "    //box-shadow: 0 0 .1em rgba(0, 0, 0, 0.15);\n" +
+    "}\n" +
+    ".member-cover{\n" +
+    "    height:17em;\n" +
+    "    width: 100%;\n" +
+    "    overflow: hidden;\n" +
+    "}\n" +
+    ".member-cover img{\n" +
+    "    width: 100%;\n" +
+    "    margin-top: -10%\n" +
+    "}\n" +
+    ".member-tabs li{\n" +
+    "    display: inline;\n" +
+    "    font-size: 20px;\n" +
+    "    font-family:'Titillium Web',sans-serif;\n" +
+    "}\n" +
+    ".member-tabs > li > a{\n" +
+    "    padding:10px 15px;\n" +
+    "    color:rgb(125,125,125);\n" +
+    "}\n" +
+    ".member-tabs > li > a:hover{\n" +
+    "    background-color: #eee;\n" +
+    "    border-radius:3px;\n" +
+    "}\n" +
+    ".member-tab-container ul{\n" +
+    "    margin:10px 15px;\n" +
+    "}\n" +
+    ".imageContainer {\n" +
+    "  background:rgba(22,22,22,0.75);\n" +
+    "  overflow:hidden;\n" +
+    "  min-height: 500px;\n" +
+    "  font-family: 'Titillium Web',sans-serif;\n" +
+    "  margin:0;padding:0;border:0 none;position: relative;\n" +
+    "}\n" +
+    ".imageContainerDiv {\n" +
+    "  width:100%;\n" +
+    "  height: 35em;\n" +
+    "  display: flex;\n" +
+    "  flex-direction: column;\n" +
+    "}\n" +
+    ".imageContainerDiv h1 {\n" +
+    "  color: rgba(255,255,255,0.9);\n" +
+    "  font-size: 50px;\n" +
+    "  font-weight: 400;\n" +
+    "  margin-top:auto;\n" +
+    "  margin-bottom:auto;\n" +
+    "}\n" +
+    ".imageContainerSmall {\n" +
+    "  background:rgba(22,22,22,0.75);\n" +
+    "  overflow:hidden;\n" +
+    "  min-height: 200px;\n" +
+    "  font-family: 'Titillium Web',sans-serif;\n" +
+    "  margin:0;padding:0;border:0 none;position: relative;\n" +
+    "}\n" +
+    ".imageContainerSmallDiv {\n" +
+    "  width:100%;\n" +
+    "  height: 200px;\n" +
+    "  display: flex;\n" +
+    "  flex-direction: column;\n" +
+    "}\n" +
+    ".imageContainerSmallDiv h1 {\n" +
+    "  color: rgba(255,255,255,0.9);\n" +
+    "  font-size: 50px;\n" +
+    "  font-weight: 400;\n" +
+    "  margin-top:auto;\n" +
+    "  margin-bottom:auto;\n" +
+    "}\n" +
+    "</style>\n" +
+    "\n" +
+    "<div class=\"imageContainerSmall\">\n" +
+    "    <div class=\"imageContainerSmallDiv\">  \n" +
+    "        <h1 style=\"text-align:left\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/> {{project.title}}</h1>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div class=\"member-tab-container container\">\n" +
+    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
+    "		<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
+    "		<li><a href=\"/project/{{project.urlTitle}}/finance\">Ledger</a></li>\n" +
+    "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
+    "    <li><a href=\"/project/{{project.urlTitle}}/projects\">Organizations</a></li>\n" +
+    "		<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>\n" +
+    "    <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
+    "		<li ng-show=\"currentUser\">\n" +
+    "			<a class=\"btn btn-default\" ng-click=\"toggleEditproject()\">Edit</a>\n" +
+    "		</li>\n" +
+    "		<li ng-show=\"currentUser\">\n" +
+    "			<a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a>\n" +
+    "		</li>\n" +
+    "	</ul>\n" +
+    "</div>\n" +
+    "<md-divider></md-divider>\n" +
+    "<div class=\"container\" ng-show=\"editProjectToggle\"><p>edit project form</p></div>\n" +
+    "<div class=\"project-container container\">\n" +
+    "    <div ui-view=\"activity\"></div>\n" +
+    "    <div ui-view=\"channels\"></div>\n" +
+    "    <div ui-view=\"finance\"></div>\n" +
+    "    <div ui-view=\"members\"></div>\n" +
+    "    <div ui-view=\"tasks\"></div>\n" +
+    "    <div ui-view=\"streams\"></div>\n" +
+    "</div>\n" +
+    "<div class=\"spacing-25\"></div>\n" +
+    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
-    "<!--<div id=\"streams\">\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "    <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I6m999ID280\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "</div>-->\n" +
-    "<!--<div id=\"tasks\">\n" +
-    "    <br><br>\n" +
-    "    <p>task</p>\n" +
-    "</div>-->\n" +
-    "<!--<div id=\"html-edit\">\n" +
-    "    <h4>edit html tool</h4>\n" +
-    "    <textarea style=\"width:50%\" ng-model=\"post.post_content\" class=\"form-control\"></textarea>\n" +
-    "    <hr>\n" +
-    "    <div ng-bind-html=\"renderHtml(post.post_content)\"></div>\n" +
-    "    <div style=\"height:100px;\"></div>\n" +
-    "</div>-->\n" +
     "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "        <a href=\"/member/{{message.user.username}}\">\n" +
@@ -774,40 +964,47 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        <p>{{message.title}}</p>\n" +
     "    </div>\n" +
     "</md-card>\n" +
+    "<div class=\"spacing-15\"></div>\n" +
     "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
     "    <div class=\"form-group\">\n" +
-    "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
+    "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\">\n" +
     "    </div>\n" +
-    "    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newMessage.title\">create</button>\n" +
-    "</form>\n" +
-    "\n" +
-    "");
+    "    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newMessage.title\">create</button>\n" +
+    "</form>");
 }]);
 
 angular.module("project/templates/channels.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/channels.tpl.html",
-    "<md-card ng-repeat=\"channel in channels\" class=\"\">\n" +
-    "	 <div style=\"padding:10px;\">\n" +
-    "        <h3>{{channel.title}}</h3>\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"col-md-2\">\n" +
+    "        <md-card ng-repeat=\"channel in channels\" class=\"\">\n" +
+    "        	 <div style=\"padding:10px;\">\n" +
+    "                <h4><a href=\"#\">{{channel.title}}</a></h3>\n" +
+    "            </div>\n" +
+    "        </md-card>\n" +
     "    </div>\n" +
-    "</md-card>\n" +
-    "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
-    "        <a href=\"/member/{{message.user.username}}\">\n" +
-    "            <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
-    "            {{message.user.username}}\n" +
-    "        </a>\n" +
-    "        <br>\n" +
-    "        <span am-time-ago=\"message.updatedAt\"></span>\n" +
-    "        <p>{{message.title}}</p>\n" +
+    "    <div class=\"col-md-10\">\n" +
+    "        <md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "            <div style=\"padding:10px;\">\n" +
+    "                <a href=\"/member/{{message.user.username}}\">\n" +
+    "                    <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
+    "                    {{message.user.username}}\n" +
+    "                </a>\n" +
+    "                <br>\n" +
+    "                <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "                <p>{{message.title}}</p>\n" +
+    "            </div>\n" +
+    "        </md-card>\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\">\n" +
+    "            </div>\n" +
+    "            <button style=\"width:100%\" type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newMessage.title\">Submit</button>\n" +
+    "        </form>\n" +
     "    </div>\n" +
-    "</md-card>\n" +
-    "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
-    "    <div class=\"form-group\">\n" +
-    "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\" ng-disabled=\"!currentUser\">\n" +
-    "    </div>\n" +
-    "    <button style=\"width:100%\" type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newMessage.title\">Submit</button>\n" +
-    "</form>\n" +
+    "</div>\n" +
+    "\n" +
     "");
 }]);
 
@@ -817,15 +1014,15 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createEntry(newEntry)\">\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newEntry.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newEntry.title\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newEntry.taskContent\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newEntry.taskContent\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task value\" type=\"text\" ng-model=\"newEntry.value\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "				<input placeholder=\"task value\" type=\"text\" ng-model=\"newEntry.value\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newEntry.title\">create</button>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newEntry.title\">create</button>\n" +
     "		</form>\n" +
     "	</div>\n" +
     "</md-card>\n" +
@@ -881,6 +1078,41 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "</md-card>");
 }]);
 
+angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("project/templates/projects.tpl.html",
+    "<table class=\"table table-inverse table-hover\">\n" +
+    "    <thead>\n" +
+    "		<tr>\n" +
+    "			<th>Title</th>\n" +
+    "			<th>Tasks</th>\n" +
+    "			<th>Members</th>\n" +
+    "		</tr>\n" +
+    "    </thead>\n" +
+    "    <tbody>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Department 1</a></td>\n" +
+    "			<td>22</td>\n" +
+    "			<td>43</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Department 2</a></td>\n" +
+    "			<td>17</td>\n" +
+    "			<td>2</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Department 3</a></td>\n" +
+    "			<td>33</td>\n" +
+    "			<td>42</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Project 1</a></td>\n" +
+    "			<td>3</td>\n" +
+    "			<td>2</td>\n" +
+    "		</tr>\n" +
+    "    </tbody>\n" +
+    "</table>");
+}]);
+
 angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/streams.tpl.html",
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
@@ -901,15 +1133,21 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newTask.taskContent\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newTask.taskContent\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task value\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" ng-disabled=\"!currentUser\">\n" +
+    "				<input placeholder=\"task identifier\" type=\"text\" ng-model=\"newTask.taskIdentifier\" class=\"form-control\" id=\"taskTitle\" >\n" +
     "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!currentUser || !newTask.title\">create</button>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task bounty\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"task Validation\" type=\"text\" ng-model=\"newTask.taskValidation\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "			</div>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
     "		</form>\n" +
     "	</div>\n" +
     "</md-card>\n" +
@@ -1083,6 +1321,17 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "\n" +
     "");
+}]);
+
+angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("tasks/index.tpl.html",
+    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
+    "</div>\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "	<h1>order book</h1>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "</div>");
 }]);
 
 angular.module("transparency/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
