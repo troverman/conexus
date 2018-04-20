@@ -1073,7 +1073,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
     "		<p style=\"color:gray\">creator</p>\n" +
     "		<p style=\"color:gray\">total time: 888</p>\n" +
-    "		<p style=\"color:gray\">reputation: 888</p>\n" +
+    "		<p style=\"color:gray\">dimensional reputation: 888</p>\n" +
     "	</div>\n" +
     "</md-card>");
 }]);
@@ -1090,19 +1090,49 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "    </thead>\n" +
     "    <tbody>\n" +
     "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Department 1</a></td>\n" +
+    "			<td><a href=\"project/conexus\">Electric Department</a></td>\n" +
     "			<td>22</td>\n" +
     "			<td>43</td>\n" +
     "		</tr>\n" +
     "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Department 2</a></td>\n" +
+    "			<td><a href=\"project/conexus\">Fire Department</a></td>\n" +
     "			<td>17</td>\n" +
     "			<td>2</td>\n" +
     "		</tr>\n" +
     "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Department 3</a></td>\n" +
+    "			<td><a href=\"project/conexus\">Police Department</a></td>\n" +
     "			<td>33</td>\n" +
     "			<td>42</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Public Works & Engineering Department</a></td>\n" +
+    "			<td>12</td>\n" +
+    "			<td>17</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Planning & Codes Department</a></td>\n" +
+    "			<td>9</td>\n" +
+    "			<td>14</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Finance Department</a></td>\n" +
+    "			<td>16</td>\n" +
+    "			<td>11</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Economic Development Department</a></td>\n" +
+    "			<td>16</td>\n" +
+    "			<td>8</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Administration Department</a></td>\n" +
+    "			<td>22</td>\n" +
+    "			<td>7</td>\n" +
+    "		</tr>\n" +
+    "		<tr>\n" +
+    "			<td><a href=\"project/conexus\">Human Resources Department</a></td>\n" +
+    "			<td>16</td>\n" +
+    "			<td>8</td>\n" +
     "		</tr>\n" +
     "		<tr>\n" +
     "			<td><a href=\"project/conexus\">Project 1</a></td>\n" +
