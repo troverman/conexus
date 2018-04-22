@@ -42,7 +42,7 @@ module.exports = {
 
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
         var colorInt = Math.floor(Math.random() * (colorArray.length + 1));
-        var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[randInt];
+        var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[colorInt];
         model.avatarUrl = avatarUrl;
 
         User.update({id: model.id}, model)

@@ -13,6 +13,12 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.get(url).then(success, error);
     };
 
+     this.getChildren = function(model) {
+        var url = utils.prepareUrl('project/children/' + model.id);
+        return $sailsSocket.get(url).then(success, error);
+    };
+
+
     this.create = function(newModel) {
         var url = utils.prepareUrl('project');
         return $sailsSocket.post(url, newModel).then(success, error);

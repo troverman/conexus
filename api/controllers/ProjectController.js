@@ -26,25 +26,29 @@ module.exports = {
 		Project.find()
 		.where({urlTitle: req.param('path')})
 		.then(function(model) {
-			Project.subscribe(req, model[0]);
-			res.json(model[0]);
-		})
+			//for x in // multiple parents
+			Project.find({id:model[0].parent}).then(function(parentModel){
+				model[0].parent = parentModel[0];
+				Project.subscribe(req, model[0]);
+				res.json(model[0]);
+			});
+		});
 	},
 
 	getChildren: function(req, res) {
 		Project.find()
-		.where({parent: req.param('parent')})
+		.where({parent: req.param('id').toString()})
 		.then(function(model) {
 			res.json(model);
 		})
-		
 	},
 
 	create: function (req, res) {
 
 		var model = {
 			title: req.param('title'),
-			urlTitle: req.param('urlTitle'),
+			description: req.param('description'),
+			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase(),
 			user: req.param('user'),
 			parent: req.param('parent'),
 		};

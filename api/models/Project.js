@@ -10,7 +10,15 @@ module.exports = {
 	attributes: {
         title: {
             type: 'string',
-            required: true
+        },
+        memberCount: {
+            type: 'string',
+        },
+        taskCount: {
+            type: 'string',
+        },
+        liveCount: {
+            type: 'string',
         },
         avatarUrl: {
             type: 'string',
@@ -18,19 +26,25 @@ module.exports = {
         },
         urlTitle: {
             type: 'string',
-            required: true
+        },
+        parent: {
+            type: 'string'
         },
         user: {
             model: 'user'
         },
     },
 
-    afterCreate: function (project, next) {
+    afterCreate: function (model, next) {
         // set message.user = to appropriate user model
-        User.getOne(project.user)
-        .spread(function(user) {
-            project.user = user;
-            next(null, project);
+        var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
+        var colorInt = Math.floor(Math.random() * (colorArray.length));
+        var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.title+'&color=fff&background='+colorArray[colorInt];
+        model.avatarUrl = avatarUrl;
+
+        Project.update({id: model.id}, model)
+        .then(function(model){
+            return next(null, model);
         });
     },
 

@@ -119,9 +119,10 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            projects: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getByProject(project);
-            }]
+            projects: ['project', 'ProjectModel', function(project, ProjectModel){
+                return ProjectModel.getChildren(project);
+            }],
+
         }
     });
     
@@ -397,7 +398,7 @@ angular.module( 'conexus.project', [
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.projects = projects;
-
+    console.log(projects);
 
 
 

@@ -79,7 +79,12 @@
 <div class="imageContainerSmall">
 <!--<div class="imageContainerSmall" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">-->
     <div class="imageContainerSmallDiv">  
-        <h1 style="text-align:left" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/> {{project.title}}</h1>
+        <h1 style="text-align:left" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/>
+          {{project.title}}
+          <span ng-show="project.parent"> | 
+            <a style="color:white" href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a>
+          </span> 
+        </h1>
     </div>
 </div>
 <div class="member-tab-container container">

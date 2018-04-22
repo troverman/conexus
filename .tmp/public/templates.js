@@ -669,6 +669,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "			<div class=\"pull-left\">\n" +
     "				<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
     "				<h5><span class=\"grey\">@{{member.username}}</span></h5>\n" +
+    "				<p>reputation: 888</p>\n" +
     "			</div>\n" +
     "			<div class=\"pull-right\">\n" +
     "				<div class=\"spacing-10\"></div>\n" +
@@ -917,7 +918,12 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "<div class=\"imageContainerSmall\">\n" +
     "<!--<div class=\"imageContainerSmall\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">-->\n" +
     "    <div class=\"imageContainerSmallDiv\">  \n" +
-    "        <h1 style=\"text-align:left\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/> {{project.title}}</h1>\n" +
+    "        <h1 style=\"text-align:left\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/>\n" +
+    "          {{project.title}}\n" +
+    "          <span ng-show=\"project.parent\"> | \n" +
+    "            <a style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a>\n" +
+    "          </span> \n" +
+    "        </h1>\n" +
     "    </div>\n" +
     "</div>\n" +
     "<div class=\"member-tab-container container\">\n" +
@@ -1079,67 +1085,25 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/projects.tpl.html",
-    "<table class=\"table table-inverse table-hover\">\n" +
-    "    <thead>\n" +
-    "		<tr>\n" +
-    "			<th>Title</th>\n" +
-    "			<th>Tasks</th>\n" +
-    "			<th>Members</th>\n" +
-    "		</tr>\n" +
-    "    </thead>\n" +
-    "    <tbody>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Electric Department</a></td>\n" +
-    "			<td>22</td>\n" +
-    "			<td>43</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Fire Department</a></td>\n" +
-    "			<td>17</td>\n" +
-    "			<td>2</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Police Department</a></td>\n" +
-    "			<td>33</td>\n" +
-    "			<td>42</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Public Works & Engineering Department</a></td>\n" +
-    "			<td>12</td>\n" +
-    "			<td>17</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Planning & Codes Department</a></td>\n" +
-    "			<td>9</td>\n" +
-    "			<td>14</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Finance Department</a></td>\n" +
-    "			<td>16</td>\n" +
-    "			<td>11</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Economic Development Department</a></td>\n" +
-    "			<td>16</td>\n" +
-    "			<td>8</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Administration Department</a></td>\n" +
-    "			<td>22</td>\n" +
-    "			<td>7</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Human Resources Department</a></td>\n" +
-    "			<td>16</td>\n" +
-    "			<td>8</td>\n" +
-    "		</tr>\n" +
-    "		<tr>\n" +
-    "			<td><a href=\"project/conexus\">Project 1</a></td>\n" +
-    "			<td>3</td>\n" +
-    "			<td>2</td>\n" +
-    "		</tr>\n" +
-    "    </tbody>\n" +
-    "</table>");
+    "<div class=\"container\">\n" +
+    "	<h3><a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
+    "	<table ng-show=\"projects.length != 0\" class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Title</th>\n" +
+    "				<th>Tasks</th>\n" +
+    "				<th>Members</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody ng-show=\"projects.length != 0\">\n" +
+    "			<tr ng-repeat=\"project in projects\">\n" +
+    "				<td><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></td>\n" +
+    "				<td>{{project.memeberCount}}</td>\n" +
+    "				<td>{{project.taskCount}}</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "</div>");
 }]);
 
 angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -1203,8 +1167,9 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "      <div ng-show=\"newProjectToggleVar\">\n" +
     "        <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
     "          <div class=\"form-group\">\n" +
-    "            <input type=\"text\" placeholder= \"project title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "            <input type=\"text\" placeholder= \"post url\" ng-model=\"newProject.urlTitle\" class=\"form-control\">\n" +
+    "            <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "            <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
+    "            <input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">\n" +
     "          </div>\n" +
     "          <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
     "        </form>\n" +

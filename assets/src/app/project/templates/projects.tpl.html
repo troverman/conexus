@@ -1,61 +1,19 @@
-<table class="table table-inverse table-hover">
-    <thead>
-		<tr>
-			<th>Title</th>
-			<th>Tasks</th>
-			<th>Members</th>
-		</tr>
-    </thead>
-    <tbody>
-		<tr>
-			<td><a href="project/conexus">Electric Department</a></td>
-			<td>22</td>
-			<td>43</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Fire Department</a></td>
-			<td>17</td>
-			<td>2</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Police Department</a></td>
-			<td>33</td>
-			<td>42</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Public Works & Engineering Department</a></td>
-			<td>12</td>
-			<td>17</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Planning & Codes Department</a></td>
-			<td>9</td>
-			<td>14</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Finance Department</a></td>
-			<td>16</td>
-			<td>11</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Economic Development Department</a></td>
-			<td>16</td>
-			<td>8</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Administration Department</a></td>
-			<td>22</td>
-			<td>7</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Human Resources Department</a></td>
-			<td>16</td>
-			<td>8</td>
-		</tr>
-		<tr>
-			<td><a href="project/conexus">Project 1</a></td>
-			<td>3</td>
-			<td>2</td>
-		</tr>
-    </tbody>
-</table>
+<div class="container">
+	<h3><a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
+	<table ng-show="projects.length != 0" class="table table-inverse table-hover">
+	    <thead>
+			<tr>
+				<th>Title</th>
+				<th>Tasks</th>
+				<th>Members</th>
+			</tr>
+	    </thead>
+	    <tbody ng-show="projects.length != 0">
+			<tr ng-repeat="project in projects">
+				<td><a href="project/{{project.urlTitle}}">{{project.title}}</a></td>
+				<td>{{project.memeberCount}}</td>
+				<td>{{project.taskCount}}</td>
+			</tr>
+	    </tbody>
+	</table>
+</div>

@@ -97,6 +97,7 @@ module.exports.routes = {
    */
   'get /api/project': 'ProjectController.getAll',
   'get /api/project/:id': 'ProjectController.getOne',
+  'get /api/project/children/:id': 'ProjectController.getChildren',
 
   'get /api/project/url/:path': 'ProjectController.getByUrl',
   'post /api/project': 'ProjectController.create',

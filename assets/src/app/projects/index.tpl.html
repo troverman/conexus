@@ -7,8 +7,9 @@
       <div ng-show="newProjectToggleVar">
         <form class="blog-input" role="form" ng-submit="createProject(newProject)">
           <div class="form-group">
-            <input type="text" placeholder= "project title" ng-model="newProject.title" class="form-control">
-            <input type="text" placeholder= "post url" ng-model="newProject.urlTitle" class="form-control">
+            <input type="text" placeholder= "Project Title" ng-model="newProject.title" class="form-control">
+            <input type="text" placeholder= "Project Description" ng-model="newProject.description" class="form-control">
+            <input type="text" placeholder= "Project Parent" ng-model="newProject.parent" class="form-control">
           </div>
           <button type="submit" class="btn btn-default log-btn">create</button>
         </form>
