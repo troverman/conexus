@@ -1,5 +1,5 @@
 <div class="container">
-	<h3><a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
+	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
 	<table ng-show="projects.length != 0" class="table table-inverse table-hover">
 	    <thead>
 			<tr>
@@ -10,7 +10,7 @@
 	    </thead>
 	    <tbody ng-show="projects.length != 0">
 			<tr ng-repeat="project in projects">
-				<td><a href="project/{{project.urlTitle}}">{{project.title}}</a></td>
+				<td><a href="project/{{project.urlTitle}}"><img style="height:24px" src="{{project.avatarUrl}}"> {{project.title}}</a></td>
 				<td>{{project.memeberCount}}</td>
 				<td>{{project.taskCount}}</td>
 			</tr>

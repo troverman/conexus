@@ -1033,6 +1033,15 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "	</div>\n" +
     "</md-card>\n" +
     "\n" +
+    "<p>TOTAL LEDGER</p>\n" +
+    "<p>ASSET LEDGER</p>\n" +
+    "<p>LIBALITIES LEDGER</p>\n" +
+    "<p>WORK LEDGER</p>\n" +
+    "<!--abstract ogv responsibilities-->\n" +
+    "<p>PROPERTY LEDGER</p>\n" +
+    "<p>BUSINESS LICENSE LEDGER</p>\n" +
+    "<!--tasks ~ finance-->\n" +
+    "\n" +
     "<div class=\"\">\n" +
     "\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
@@ -1086,7 +1095,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/projects.tpl.html",
     "<div class=\"container\">\n" +
-    "	<h3><a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
+    "	<h3><a href=\"project/{{project.urlTitle}}\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"> <a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
     "	<table ng-show=\"projects.length != 0\" class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -1097,7 +1106,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "	    </thead>\n" +
     "	    <tbody ng-show=\"projects.length != 0\">\n" +
     "			<tr ng-repeat=\"project in projects\">\n" +
-    "				<td><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></td>\n" +
+    "				<td><a href=\"project/{{project.urlTitle}}\"><img style=\"height:24px\" src=\"{{project.avatarUrl}}\"> {{project.title}}</a></td>\n" +
     "				<td>{{project.memeberCount}}</td>\n" +
     "				<td>{{project.taskCount}}</td>\n" +
     "			</tr>\n" +
