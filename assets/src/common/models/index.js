@@ -7,5 +7,6 @@ angular.module('models', [
 	'models.project',
 	'models.search',
 	'models.task',
-	'models.user'
+	'models.user',
+	'models.work'
 ]);

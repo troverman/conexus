@@ -1,21 +1,60 @@
 <style>md-card{margin:0px; overflow:hidden;}</style>
 <div class="container">
   <h3>{{task.title}}</h3>
-  <h3>{{task.content}}</h3>
-  <h3>88 conexus tokens</h3>
-  <h3><a href="/project/{{task.orginization}}">{{task.orginization}}</a></h3>
+  <div style="font-style:italic;color:gray">
+    <p>{{task.content}}</p>
+    <p>{{task.status}}</p>
+    <p>Time: {{task.timeBounty}} <a href="https://www.cre8bid.io/market/{{task.timeIdentifier}}">{{task.timeIdentifier}}</a></p>
+    <p>Time Stream: {{task.timeBounty*1.4}} <a href="https://www.cre8bid.io/market/{{task.timeIdentifier}}">{{task.timeIdentifier}}</a></p>
+    <p>Completion: {{task.completeBounty}} <a href="https://www.cre8bid.io/market/{{task.completeIdentifier}}">{{task.completeIdentifier}}</a></p>
+    <p>Verification: 0 -- rating by users w reputation</p>
+    <p>Verification Reward: 0 -- what you get for verification</p>
+    <h3>{{task.taskValue}} conexus tokens</h3>
+    <h3><a href="/project/{{task.project}}">{{task.project}}</a></h3>
+  </div>
+
   <br>
   <button type="submit" class="btn btn-default log-btn">Start Work</button>
   <div class="spacing-25"></div>
-  <md-card ng-repeat="work in taskWork" class="col-md-6">
+
+
+  <table class="table table-striped table-hover">
+      <thead>
+          <tr>
+              <th>Time</th>
+              <th>Member</th>
+              <th>Stream</th>
+              <th>Date</th>
+              <th>Score</th>
+              <th>Verify</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="item in work">
+              <td>132</td>
+              <td><a href="member/troverman">troverman</a></td>
+              <td><a href="stream/{{item}}">{{item}}</a></td>
+              <td>Yesterday</td>
+              <td>10</td>
+              <td><button style="width:100%;" class="btn btn-default log-btn" ng-click="verify(item)">verify</button></td>
+          </tr>
+      </tbody>
+  </table>
+
+
+  <!--
+  <md-card ng-repeat="item in work" class="col-md-6">
     <div style="padding:10px;">
-      <h4><a href="stream/{{work}}">{{work}}</a></h4>
+      <h4><a href="stream/{{item}}">{{item}}</a></h4>
       <h4><a href="member/troverman">troverman</a></h4>
-      <!--<p>tokens?</p>-->
       <iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
       <button type="submit" class="btn btn-default log-btn">Validate Work</button>
     </div>
   </md-card>
+  -->
+
+
+
 </div>
 <div class="spacing:50px;"></div>
 

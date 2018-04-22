@@ -1306,21 +1306,60 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<div class=\"container\">\n" +
     "  <h3>{{task.title}}</h3>\n" +
-    "  <h3>{{task.content}}</h3>\n" +
-    "  <h3>88 conexus tokens</h3>\n" +
-    "  <h3><a href=\"/project/{{task.orginization}}\">{{task.orginization}}</a></h3>\n" +
+    "  <div style=\"font-style:italic;color:gray\">\n" +
+    "    <p>{{task.content}}</p>\n" +
+    "    <p>{{task.status}}</p>\n" +
+    "    <p>Time: {{task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a></p>\n" +
+    "    <p>Time Stream: {{task.timeBounty*1.4}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a></p>\n" +
+    "    <p>Completion: {{task.completeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.completeIdentifier}}\">{{task.completeIdentifier}}</a></p>\n" +
+    "    <p>Verification: 0 -- rating by users w reputation</p>\n" +
+    "    <p>Verification Reward: 0 -- what you get for verification</p>\n" +
+    "    <h3>{{task.taskValue}} conexus tokens</h3>\n" +
+    "    <h3><a href=\"/project/{{task.project}}\">{{task.project}}</a></h3>\n" +
+    "  </div>\n" +
+    "\n" +
     "  <br>\n" +
     "  <button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button>\n" +
     "  <div class=\"spacing-25\"></div>\n" +
-    "  <md-card ng-repeat=\"work in taskWork\" class=\"col-md-6\">\n" +
+    "\n" +
+    "\n" +
+    "  <table class=\"table table-striped table-hover\">\n" +
+    "      <thead>\n" +
+    "          <tr>\n" +
+    "              <th>Time</th>\n" +
+    "              <th>Member</th>\n" +
+    "              <th>Stream</th>\n" +
+    "              <th>Date</th>\n" +
+    "              <th>Score</th>\n" +
+    "              <th>Verify</th>\n" +
+    "          </tr>\n" +
+    "      </thead>\n" +
+    "      <tbody>\n" +
+    "          <tr ng-repeat=\"item in work\">\n" +
+    "              <td>132</td>\n" +
+    "              <td><a href=\"member/troverman\">troverman</a></td>\n" +
+    "              <td><a href=\"stream/{{item}}\">{{item}}</a></td>\n" +
+    "              <td>Yesterday</td>\n" +
+    "              <td>10</td>\n" +
+    "              <td><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"verify(item)\">verify</button></td>\n" +
+    "          </tr>\n" +
+    "      </tbody>\n" +
+    "  </table>\n" +
+    "\n" +
+    "\n" +
+    "  <!--\n" +
+    "  <md-card ng-repeat=\"item in work\" class=\"col-md-6\">\n" +
     "    <div style=\"padding:10px;\">\n" +
-    "      <h4><a href=\"stream/{{work}}\">{{work}}</a></h4>\n" +
+    "      <h4><a href=\"stream/{{item}}\">{{item}}</a></h4>\n" +
     "      <h4><a href=\"member/troverman\">troverman</a></h4>\n" +
-    "      <!--<p>tokens?</p>-->\n" +
     "      <iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
     "      <button type=\"submit\" class=\"btn btn-default log-btn\">Validate Work</button>\n" +
     "    </div>\n" +
     "  </md-card>\n" +
+    "  -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "</div>\n" +
     "<div class=\"spacing:50px;\"></div>\n" +
     "\n" +
