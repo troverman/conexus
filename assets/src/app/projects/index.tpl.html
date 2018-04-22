@@ -20,14 +20,16 @@
 <div class="spacing-25"></div>
 <div class="container">
   <div class="row">
-    <div class="post-container col-md-6" ng-repeat="project in projects | orderBy:'-createdAt'">
-      <div class="col-md-2">
+    <div class="post-container col-md-12" ng-repeat="project in projects">
+      <div class="col-xs-1">
         <img style="width:50px;height:50px;" src="{{project.avatarUrl}}">
       </div>
-      <div class="col-md-10">
-        <h1 class="title"><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h1>
+      <div class="col-xs-11">
+        <h3><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h3>
       </div>
     </div>
   </div>
+
+
 </div>
 <div class="spacing-25"></div>

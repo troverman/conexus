@@ -6,50 +6,47 @@
 module.exports = {
 
 	getAll: function(req, res) {
-		//console.log(req.query);
 		Project.getAll()
 		.spread(function(models) {
 			Project.watch(req);
 			Project.subscribe(req, models);
 			res.json(models);
 		})
-		.fail(function(err) {
-			// An error occured
-		});
 	},
 
 	getOne: function(req, res) {
 		Project.getOne(req.param('id'))
-		.spread(function(model) {
-			Project.subscribe(req, model);
-			res.json(model);
+		.then(function(model) {
+			Project.subscribe(req, model[0]);
+			res.json(model[0]);
 		})
-		.fail(function(err) {
-			res.send(404);
-		});
 	},
 
 	getByUrl: function(req, res) {
 		Project.find()
 		.where({urlTitle: req.param('path')})
-		.spread(function(model) {
-			Project.subscribe(req, model);
+		.then(function(model) {
+			Project.subscribe(req, model[0]);
+			res.json(model[0]);
+		})
+	},
+
+	getChildren: function(req, res) {
+		Project.find()
+		.where({parent: req.param('parent')})
+		.then(function(model) {
 			res.json(model);
 		})
-		.fail(function(err) {
-			res.send(404,err);
-		});
+		
 	},
 
 	create: function (req, res) {
-		var title = req.param('title');
-		var urlTitle = req.param('urlTitle');
-		var userId = req.param('user');
 
 		var model = {
-			title: title,
-			urlTitle: urlTitle,
-			user: userId
+			title: req.param('title'),
+			urlTitle: req.param('urlTitle'),
+			user: req.param('user'),
+			parent: req.param('parent'),
 		};
 
 		Project.create(model)

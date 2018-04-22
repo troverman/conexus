@@ -914,8 +914,8 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "  margin-bottom:auto;\n" +
     "}\n" +
     "</style>\n" +
-    "\n" +
     "<div class=\"imageContainerSmall\">\n" +
+    "<!--<div class=\"imageContainerSmall\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">-->\n" +
     "    <div class=\"imageContainerSmallDiv\">  \n" +
     "        <h1 style=\"text-align:left\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/> {{project.title}}</h1>\n" +
     "    </div>\n" +
@@ -1049,7 +1049,6 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
-    "\n" +
     "\n" +
     "\n" +
     "	<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
@@ -1217,15 +1216,17 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "<div class=\"spacing-25\"></div>\n" +
     "<div class=\"container\">\n" +
     "  <div class=\"row\">\n" +
-    "    <div class=\"post-container col-md-6\" ng-repeat=\"project in projects | orderBy:'-createdAt'\">\n" +
-    "      <div class=\"col-md-2\">\n" +
+    "    <div class=\"post-container col-md-12\" ng-repeat=\"project in projects\">\n" +
+    "      <div class=\"col-xs-1\">\n" +
     "        <img style=\"width:50px;height:50px;\" src=\"{{project.avatarUrl}}\">\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-10\">\n" +
-    "        <h1 class=\"title\"><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h1>\n" +
+    "      <div class=\"col-xs-11\">\n" +
+    "        <h3><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
+    "\n" +
+    "\n" +
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "");
