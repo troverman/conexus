@@ -6,9 +6,9 @@
 	  </div>
 	  <div class="col-md-8">
 	    <h3>feed</h3>
-	    <md-divider></md-divider>
+	    <hr>
 		<div class='md-padding' layout="row" layout-align="center" layout-wrap>
-			<md-card flex="30" ng-repeat="project in projects">
+			<md-card flex="90" ng-repeat="project in projects">
 				<md-card-title>
 					<md-card-title-text>
 						<a href="/project/{{project.urlTitle}}/">
@@ -30,8 +30,8 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h2>Create the next wave</h2>
-				<h4>Create and participate in transparent, crowd-sourced, organizations</h4>
-				<h4>Earn value though tokenized, organizational actions</h4>
+				<p>Create and participate in transparent, crowd-sourced, organizations</p>
+				<p>Earn value though tokenized, market liquid, organizational actions</p>
 				<div class="spacing-25"></div>
 				<a style="width:100%" class="btn btn-default log-btn" href="/about">learn more</a>
 			</div>
@@ -66,7 +66,8 @@
 	<div class="spacing-50"></div>
 	<div class="spacing-50"></div>
 
-	<!--<div id="search-container">
+	<!--
+	<div id="search-container">
 		<div class="container">
 			<div class="row">
         		<div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
@@ -77,8 +78,8 @@
 				</div>
 			</div>
 		</div>
-	</div>-->
-	<!--<div id="member-container">
+	</div>
+	<div id="member-container">
 		<div class="container">
 			<h2>connect</h2><hr>
 			<div class="container">
@@ -113,7 +114,26 @@
 			  </div>
 			</div>
 		</div>
-	</div>-->
+	</div>
+	-->
+
+
+	<div style="background-color:black">
+		<div class="container">
+			<div class="row">
+		    	<div class="col-md-6">
+
+		        </div>
+				<div class="col-md-6">
+
+		        </div>
+	    	</div>
+			<div style="height:300px"></div>
+		</div>
+	</div>
+
+	<div class="spacing-50"></div>
+	<div class="spacing-50"></div>
 
 	<div class="container">
 	    <div class="row">
@@ -159,18 +179,26 @@
 
 	<div class="spacing-50"></div>
 
-	<div id="message-container">
+	<div id="">
 		<div class="container">
-			<h3>Activity</h3>
-		    <md-card ng-repeat="message in messages.slice(0,5)">
+		    <md-card ng-repeat="message in messages.slice(0,15)">
 		      <md-card-title>
 		        <md-card-title-text>
-					<p>{{message.title}}</p>
-					<a href="/member/{{message.user.username}}">{{message.user.username}}</a>
-					<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+		        	<div>
+						<a style="display:inline" href="/member/{{message.user.username}}">{{message.user.username}}</a>
+						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
+						<a style="display:inline" href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+					</div>
+					<p style="font-size:10px;color:gray" am-time-ago="message.createdAt"></p>
+					<div>
+						<p style="display:inline">{{message.title}}</p>
+        			</div>
 		        </md-card-title-text>
 		      </md-card-title>
 		    </md-card>
 		</div>
 	</div>
+	
+	<div class="spacing-50"></div>
+
 </div>
