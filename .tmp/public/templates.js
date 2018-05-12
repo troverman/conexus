@@ -995,7 +995,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "            {{message.user.username}}\n" +
     "        </a>\n" +
     "        <br>\n" +
-    "        <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"message.updatedAt\"></p>\n" +
     "        <p>{{message.title}}</p>\n" +
     "    </div>\n" +
     "</md-card>\n" +
@@ -1017,6 +1017,7 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "                <h4><a href=\"#\">{{channel.title}}</a></h3>\n" +
     "            </div>\n" +
     "        </md-card>\n" +
+    "        <button class=\"btn btn-default log-btn\">+ Channel</button>\n" +
     "    </div>\n" +
     "    <div class=\"col-md-10\">\n" +
     "        <md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
@@ -1026,7 +1027,7 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "                    {{message.user.username}}\n" +
     "                </a>\n" +
     "                <br>\n" +
-    "                <span am-time-ago=\"message.updatedAt\"></span>\n" +
+    "                <p style=\"color:gray;font-size:10px\" am-time-ago=\"message.updatedAt\"></p>\n" +
     "                <p>{{message.title}}</p>\n" +
     "            </div>\n" +
     "        </md-card>\n" +
