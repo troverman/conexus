@@ -1349,8 +1349,26 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "  </div>\n" +
     "\n" +
     "  <br>\n" +
-    "  <button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button>\n" +
+    "  <h3>{{taskTime}}</h3>\n" +
+    "  <p>{{(taskTime / totalTime)*task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a> </p>\n" +
+    "  <button ng-show=\"!working\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"start()\">Start Work</button>\n" +
+    "  <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">submit work</button>\n" +
+    "\n" +
     "  <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "  <!--<div class=\"col-md-6\">\n" +
+    "    <h3>{{taskTime}}</h3>\n" +
+    "    <p>{{(taskTime / totalTime)*task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a> </p>\n" +
+    "    <button ng-show=\"!working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"start()\">start work</button>\n" +
+    "    <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">submit work</button>\n" +
+    "    <br><br>\n" +
+    "  </div>\n" +
+    "  <div class=\"col-md-12\">\n" +
+    "    <iframe width='560' height='315' src='https://www.bidio.co/v/57954ce9dea046030031007a' frameborder='0' allowfullscreen></iframe>\n" +
+    "    <br><br>\n" +
+    "    <button style=\"width:50%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">start stream</button>\n" +
+    "    <br><br>\n" +
+    "  </div>-->\n" +
     "\n" +
     "\n" +
     "  <table class=\"table table-striped table-hover\">\n" +

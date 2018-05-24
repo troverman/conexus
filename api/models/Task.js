@@ -1,5 +1,5 @@
 /**
-* Post.js
+* Task.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -7,42 +7,49 @@
 
 module.exports = {
 
-	attributes: {
+    attributes: {
         title: {
             type: 'string',
-            required: true
+            required: true,
+            unique: true
         },
-        taskContent: {
+        content: {
             type: 'string',
-            required: true
         },
-        taskValue: {
+        status: {
             type: 'string',
-            required: true
+            defaultsTo:'Pending'
         },
-        finance: {
-            model: 'finance',
+        members: {
+            type: 'string',
+        },
+        parent: {
+            model: 'task',
+        },
+        completeBounty: {
+            type: 'string',
+        },
+        completeIdentifier: {
+            type: 'string',
+        },
+        timeBounty: {
+            type: 'string',
+        },
+        timeIdentifier: {
+            type: 'string',
         },
         project: {
             model: 'project',
         },
         user: {
-            model: 'user'
+            model: 'user',
+            required: true
         }
-    },
-
-    afterCreate: function (task, next) {
-        // set message.user = to appropriate user model
-        User.getOne(task.user)
-        .spread(function(user) {
-            task.user = user;
-            next(null, task);
-        });
     },
 
     getAll: function() {
         return Task.find()
-        .sort({createdAt: 'desc'})
+        .sort({createdAt: 'asc'})
         .populate('user')
         .then(function (models) {
             return [models];
@@ -51,11 +58,9 @@ module.exports = {
 
     getOne: function(id) {
         return Task.findOne(id)
-        .populate('user')
         .then(function (model) {
             return [model];
         });
     }
-
 };
 
