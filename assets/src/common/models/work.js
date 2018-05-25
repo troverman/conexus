@@ -5,6 +5,7 @@ angular.module('models.work', ['lodash', 'services', 'sails.io',])
     this.getSome = function(task, limit, skip, sort) {
         var query = {params:{task:task, limit:limit,skip:skip,sort:sort}};
         var url = utils.prepareUrl('work');
+        console.log(query)
         return $sailsSocket.get(url, query).then(success, error);
     };
 

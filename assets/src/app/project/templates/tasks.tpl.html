@@ -1,6 +1,7 @@
 <style>md-card{margin:0px; overflow:hidden;}</style>
 <br>
-<md-card>
+<button class="btn btn-default log-btn" ng-click="newTaskToggle()">+ Task</button><br><br>
+<md-card ng-show="newTaskToggleVar">
     <div style="padding:10px;">
 		<form role="form" ng-submit="createTask(newTask)">
 			<div class="form-group">
@@ -22,13 +23,24 @@
 		</form>
 	</div>
 </md-card>
-<md-card id="task-list" ng-repeat="task in tasks" class="col-md-6">
-    <div style="padding:10px;">
 
-	<h5><a href="task/{{task.id}}">{{task.title}}</a></h5>
-	<p>{{task.taskContent}}</p>
-	<p>{{task.taskValue}}</p>
-	<button type="submit" class="btn btn-default log-btn">Start Work</button>
-	<!--<button type="submit" class="btn btn-default log-btn">Submit Work</button>-->
-	</div>
-</md-card>
+<table class="table table-striped table-hover">
+  <thead>
+        <tr>
+      		<th>Title</th>
+			<th>Content</th>
+			<th>Bounty</th>
+			<th>Date</th>
+			<th></th>
+        </tr>
+  </thead>
+  <tbody>
+		<tr ng-repeat="task in tasks">
+			<td><h5><a href="task/{{task.id}}">{{task.title}}</a></h5></td>
+			<td>{{task.taskContent}}</td>
+			<td>{{task.taskValue}}</td>
+			<td><span  am-time-ago="task.createdAt"></span></td>
+			<td><a href="task/{{task.id}}"><button type="submit" class="btn btn-default log-btn">Start Work</button></a></td>
+		</tr>
+  </tbody>
+</table>

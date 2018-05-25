@@ -138,6 +138,12 @@ module.exports.routes = {
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
 
+  /**
+   * Work routes
+   */
+  'get /api/work': 'WorkController.getSome',
+  'post /api/work': 'WorkController.create',
+
   '/.well-known/acme-challenge/9gf-zaOshMDeJUOaL0j2lH7TnRTNxau1eF2z06fav-I': 'HomeController.ssl',
 
 

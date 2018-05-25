@@ -1046,7 +1046,9 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/finance.tpl.html",
-    "<md-card>\n" +
+    "<br>\n" +
+    "<button class=\"btn btn-default log-btn\" ng-click=\"newEntryToggle()\">+ Entry</button><br><br>\n" +
+    "<md-card ng-show=\"newEntryToggleVar\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createEntry(newEntry)\">\n" +
     "			<div class=\"form-group\">\n" +
@@ -1063,6 +1065,7 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "	</div>\n" +
     "</md-card>\n" +
     "\n" +
+    "<br><br>\n" +
     "<p>TOTAL LEDGER</p>\n" +
     "<p>ASSET LEDGER</p>\n" +
     "<p>LIBALITIES LEDGER</p>\n" +
@@ -1071,8 +1074,12 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "<p>PROPERTY LEDGER</p>\n" +
     "<p>BUSINESS LICENSE LEDGER</p>\n" +
     "<!--tasks ~ finance-->\n" +
+    "<br><br>\n" +
+    "\n" +
     "\n" +
     "<div class=\"\">\n" +
+    "\n" +
+    "	<highchart config=\"chart\"></highchart>\n" +
     "\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
@@ -1094,14 +1101,6 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
-    "\n" +
-    "\n" +
-    "	<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
-    "    	chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
-    "    	chart-click=\"onClick\">\n" +
-    "	</canvas> \n" +
-    "\n" +
-    "\n" +
     "</div>");
 }]);
 
@@ -1150,8 +1149,10 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<md-card ng-repeat=\"stream in streams\" class=\"col-md-6\">\n" +
     "	<div style=\"padding:10px;\">\n" +
-    "		<h3><a href=\"stream/{{stream}}\">stream title {{stream}}</a></h3>\n" +
     "		<iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "		<h3><a href=\"stream/{{stream}}\">stream title {{stream}}</a></h3>\n" +
+    "		<p><a href=\"member/troverman\">member</a> - <span>date</span></p>\n" +
+    "\n" +
     "	</div>\n" +
     "</md-card>\n" +
     "");
@@ -1161,7 +1162,8 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
   $templateCache.put("project/templates/tasks.tpl.html",
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<br>\n" +
-    "<md-card>\n" +
+    "<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button><br><br>\n" +
+    "<md-card ng-show=\"newTaskToggleVar\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "			<div class=\"form-group\">\n" +
@@ -1183,16 +1185,27 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "		</form>\n" +
     "	</div>\n" +
     "</md-card>\n" +
-    "<md-card id=\"task-list\" ng-repeat=\"task in tasks\" class=\"col-md-6\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
     "\n" +
-    "	<h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5>\n" +
-    "	<p>{{task.taskContent}}</p>\n" +
-    "	<p>{{task.taskValue}}</p>\n" +
-    "	<button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button>\n" +
-    "	<!--<button type=\"submit\" class=\"btn btn-default log-btn\">Submit Work</button>-->\n" +
-    "	</div>\n" +
-    "</md-card>");
+    "<table class=\"table table-striped table-hover\">\n" +
+    "  <thead>\n" +
+    "        <tr>\n" +
+    "      		<th>Title</th>\n" +
+    "			<th>Content</th>\n" +
+    "			<th>Bounty</th>\n" +
+    "			<th>Date</th>\n" +
+    "			<th></th>\n" +
+    "        </tr>\n" +
+    "  </thead>\n" +
+    "  <tbody>\n" +
+    "		<tr ng-repeat=\"task in tasks\">\n" +
+    "			<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
+    "			<td>{{task.taskContent}}</td>\n" +
+    "			<td>{{task.taskValue}}</td>\n" +
+    "			<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
+    "			<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +
+    "		</tr>\n" +
+    "  </tbody>\n" +
+    "</table>");
 }]);
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -1337,15 +1350,15 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div class=\"container\">\n" +
     "  <h3>{{task.title}}</h3>\n" +
     "  <div style=\"font-style:italic;color:gray\">\n" +
-    "    <p>{{task.content}}</p>\n" +
+    "    <p><a href=\"/project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "    <p>{{task.taskContent}}</p>\n" +
     "    <p>{{task.status}}</p>\n" +
+    "    <p>{{task.taskValue}}</p>\n" +
     "    <p>Time: {{task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a></p>\n" +
     "    <p>Time Stream: {{task.timeBounty*1.4}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a></p>\n" +
     "    <p>Completion: {{task.completeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.completeIdentifier}}\">{{task.completeIdentifier}}</a></p>\n" +
-    "    <p>Verification: 0 -- rating by users w reputation</p>\n" +
-    "    <p>Verification Reward: 0 -- what you get for verification</p>\n" +
-    "    <h3>{{task.taskValue}} conexus tokens</h3>\n" +
-    "    <h3><a href=\"/project/{{task.project}}\">{{task.project}}</a></h3>\n" +
+    "    <p>Verification (rating by users w reputation): 0</p>\n" +
+    "    <p>Verification Reward (what you get for verification): 0</p>\n" +
     "  </div>\n" +
     "\n" +
     "  <br>\n" +
@@ -1370,7 +1383,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    <br><br>\n" +
     "  </div>-->\n" +
     "\n" +
-    "\n" +
     "  <table class=\"table table-striped table-hover\">\n" +
     "      <thead>\n" +
     "          <tr>\n" +
@@ -1378,22 +1390,21 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "              <th>Member</th>\n" +
     "              <th>Stream</th>\n" +
     "              <th>Date</th>\n" +
-    "              <th>Score</th>\n" +
+    "              <th>Verification</th>\n" +
     "              <th>Verify</th>\n" +
     "          </tr>\n" +
     "      </thead>\n" +
     "      <tbody>\n" +
     "          <tr ng-repeat=\"item in work\">\n" +
-    "              <td>132</td>\n" +
-    "              <td><a href=\"member/troverman\">troverman</a></td>\n" +
-    "              <td><a href=\"stream/{{item}}\">{{item}}</a></td>\n" +
-    "              <td>Yesterday</td>\n" +
-    "              <td>10</td>\n" +
+    "              <td>{{item.amount}}</td>\n" +
+    "              <td><a href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
+    "              <td><a href=\"stream/{{item.stream || '1'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
+    "              <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +
+    "              <td>{{item.verificationScore}}</td>\n" +
     "              <td><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"verify(item)\">verify</button></td>\n" +
     "          </tr>\n" +
     "      </tbody>\n" +
     "  </table>\n" +
-    "\n" +
     "\n" +
     "  <!--\n" +
     "  <md-card ng-repeat=\"item in work\" class=\"col-md-6\">\n" +
@@ -1406,12 +1417,8 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "  </md-card>\n" +
     "  -->\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "</div>\n" +
     "<div class=\"spacing:50px;\"></div>\n" +
-    "\n" +
-    "\n" +
     "");
 }]);
 
@@ -1440,10 +1447,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "			<p>open balanace sheet</p>\n" +
     "		</div>\n" +
     "		<div class=\"col-md-6\">\n" +
-    "			<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
-    "			    chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
-    "			    chart-click=\"onClick\">\n" +
-    "			</canvas> \n" +
+    "			<highchart config=\"chart\"></highchart>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"row\">\n" +

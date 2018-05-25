@@ -12,6 +12,7 @@ angular.module( 'conexus', [
     'models',
     'ngFileUpload',
     'ngMaterial',
+    'highcharts-ng',
     'conexus.about',
     'conexus.account',
     'conexus.connect',

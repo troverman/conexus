@@ -1,4 +1,6 @@
-<md-card>
+<br>
+<button class="btn btn-default log-btn" ng-click="newEntryToggle()">+ Entry</button><br><br>
+<md-card ng-show="newEntryToggleVar">
     <div style="padding:10px;">
 		<form role="form" ng-submit="createEntry(newEntry)">
 			<div class="form-group">
@@ -15,6 +17,7 @@
 	</div>
 </md-card>
 
+<br><br>
 <p>TOTAL LEDGER</p>
 <p>ASSET LEDGER</p>
 <p>LIBALITIES LEDGER</p>
@@ -23,8 +26,12 @@
 <p>PROPERTY LEDGER</p>
 <p>BUSINESS LICENSE LEDGER</p>
 <!--tasks ~ finance-->
+<br><br>
+
 
 <div class="">
+
+	<highchart config="chart"></highchart>
 
 	<table class="table table-inverse table-hover">
 	    <thead>
@@ -46,12 +53,4 @@
 			</tr>
 	    </tbody>
 	</table>
-
-
-	<canvas id="line" class="chart chart-line" chart-data="data"
-    	chart-labels="labels" chart-legend="true" chart-series="series"
-    	chart-click="onClick">
-	</canvas> 
-
-
 </div>

@@ -249,29 +249,45 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'entries', 'lodash', function ProjectController( $interval, $scope, entries, lodash ) {
-    //$scope.currentUser = config.currentUser;
+.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', function ProjectController( $interval, $scope, config, entries, lodash ) {
+    $scope.currentUser = config.currentUser;
+    $scope.entries = entries;
+    $scope.newEntryToggleVar = false;
 
-    $scope.options = {
-        responsive: true,
-        maintainAspectRatio: false,
+    $scope.newEntryToggle = function () {
+        $scope.newEntryToggleVar = $scope.newEntryToggleVar ? false : true;
     };
 
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-    ];
+    $scope.chart = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [{
+            id: 'Expenses',
+            type: 'spline',
+            name: 'Expenses USD',
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },{
+            id: 'Revenue',
+            type: 'spline',
+            name: 'Revenue USD',
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
 
-    $scope.entries = entries;
-
-    $interval(function () {
-        $scope.data = _.shuffle($scope.data);
-    }, 10000);
-
-    $scope.onClick = function (points, evt) {
-        console.log(points, evt);
     };
 
 }])
@@ -310,6 +326,7 @@ angular.module( 'conexus.project', [
     $scope.streams = streams;
     $scope.AudioContext = {};
     $scope.videoContext = {};
+
 
     console.log(streams);
 
@@ -368,7 +385,12 @@ angular.module( 'conexus.project', [
     //titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.tasks = tasks;
-    $scope.project = project
+    $scope.project = project;
+    $scope.newTaskToggleVar = false;
+
+    $scope.newTaskToggle = function () {
+        $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
+    };
 
     $scope.createTask = function(newTask) {
         newTask.user = config.currentUser.id;

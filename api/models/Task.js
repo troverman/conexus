@@ -58,6 +58,8 @@ module.exports = {
 
     getOne: function(id) {
         return Task.findOne(id)
+        .populate('project')
+        .populate('user')
         .then(function (model) {
             return [model];
         });
