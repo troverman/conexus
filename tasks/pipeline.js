@@ -44,7 +44,9 @@ var jsFilesToInject = [
   'bower_components/angular-material/angular-material.js',
   'bower_components/ng-file-upload/ng-file-upload.min.js',
   'bower_components/web3/dist/web3.min.js',
+
   'bower_components/highcharts/highstock.js',
+  'bower_components/highcharts/highcharts-more.js',
   'bower_components/highcharts-ng/dist/highcharts-ng.js',
 
   //

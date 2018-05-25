@@ -1167,19 +1167,28 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Task Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task content\" type=\"text\" ng-model=\"newTask.taskContent\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Task Content\" type=\"text\" ng-model=\"newTask.content\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task identifier\" type=\"text\" ng-model=\"newTask.taskIdentifier\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "				<input placeholder=\"Task Complete Identifier Set\" type=\"text\" ng-model=\"newTask.completeIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task bounty\" type=\"text\" ng-model=\"newTask.taskValue\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "				<input placeholder=\"Task Complete Bounty Set\" type=\"text\" ng-model=\"newTask.completeBountySet\" class=\"form-control\" id=\"taskTitle\" >\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"task Validation\" type=\"text\" ng-model=\"newTask.taskValidation\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "				<input placeholder=\"Task Time Identifier Set\" type=\"text\" ng-model=\"newTask.timeIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Task Time Bounty Set\" type=\"text\" ng-model=\"newTask.timeBountySet\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Task Verification Identifier Set\" type=\"text\" ng-model=\"newTask.verificationIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Task Verification Bounty Set\" type=\"text\" ng-model=\"newTask.verificationBountySet\" class=\"form-control\" id=\"taskTitle\" >\n" +
     "			</div>\n" +
     "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
     "		</form>\n" +
@@ -1199,8 +1208,8 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "  <tbody>\n" +
     "		<tr ng-repeat=\"task in tasks\">\n" +
     "			<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
-    "			<td>{{task.taskContent}}</td>\n" +
-    "			<td>{{task.taskValue}}</td>\n" +
+    "			<td>{{task.content}}</td>\n" +
+    "			<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
     "			<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
     "			<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +
     "		</tr>\n" +
@@ -1351,37 +1360,29 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "  <h3>{{task.title}}</h3>\n" +
     "  <div style=\"font-style:italic;color:gray\">\n" +
     "    <p><a href=\"/project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
-    "    <p>{{task.taskContent}}</p>\n" +
+    "    <p>{{task.content}}</p>\n" +
     "    <p>{{task.status}}</p>\n" +
-    "    <p>{{task.taskValue}}</p>\n" +
-    "    <p>Time: {{task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a></p>\n" +
-    "    <p>Time Stream: {{task.timeBounty*1.4}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a></p>\n" +
-    "    <p>Completion: {{task.completeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.completeIdentifier}}\">{{task.completeIdentifier}}</a></p>\n" +
-    "    <p>Verification (rating by users w reputation): 0</p>\n" +
-    "    <p>Verification Reward (what you get for verification): 0</p>\n" +
+    "    <p>Time: {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
+    "    <p>Time Stream: {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
+    "    <p>Completion: {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></p>\n" +
+    "    <p>Verification Score (rating by users w reputation): 1</p>\n" +
+    "    <p>Verification Reward (what you get for verification): {{task.verificationIdentifierSet}}, {{task.verificationBountySet}}</p>\n" +
     "  </div>\n" +
     "\n" +
-    "  <br>\n" +
-    "  <h3>{{taskTime}}</h3>\n" +
-    "  <p>{{(taskTime / totalTime)*task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a> </p>\n" +
-    "  <button ng-show=\"!working\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"start()\">Start Work</button>\n" +
-    "  <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">submit work</button>\n" +
-    "\n" +
-    "  <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "  <!--<div class=\"col-md-6\">\n" +
+    "  <div>\n" +
     "    <h3>{{taskTime}}</h3>\n" +
-    "    <p>{{(taskTime / totalTime)*task.timeBounty}} <a href=\"https://www.cre8bid.io/market/{{task.timeIdentifier}}\">{{task.timeIdentifier}}</a> </p>\n" +
-    "    <button ng-show=\"!working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"start()\">start work</button>\n" +
-    "    <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">submit work</button>\n" +
-    "    <br><br>\n" +
-    "  </div>\n" +
-    "  <div class=\"col-md-12\">\n" +
+    "    <p>{{(taskTime / totalTime)*task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
+    "\n" +
+    "    <!--\n" +
     "    <iframe width='560' height='315' src='https://www.bidio.co/v/57954ce9dea046030031007a' frameborder='0' allowfullscreen></iframe>\n" +
-    "    <br><br>\n" +
-    "    <button style=\"width:50%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">start stream</button>\n" +
-    "    <br><br>\n" +
-    "  </div>-->\n" +
+    "    <button style=\"width:100%%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">start stream</button>\n" +
+    "    -->\n" +
+    "\n" +
+    "    <button ng-show=\"!working\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"start()\">Start Work</button>\n" +
+    "    <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "  <table class=\"table table-striped table-hover\">\n" +
     "      <thead>\n" +

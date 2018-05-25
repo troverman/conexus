@@ -21,7 +21,7 @@ angular.module( 'conexus.task', [
     });
 }])
 
-.controller( 'TaskController', ['$scope', 'config', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $scope, config, task, TaskModel, titleService, work, WorkModel) {
+.controller( 'TaskController', ['$location', '$scope', 'config', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $scope, config, task, TaskModel, titleService, work, WorkModel) {
     titleService.setTitle('Task | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
@@ -39,6 +39,7 @@ angular.module( 'conexus.task', [
             $scope.working = true;
             $scope.interval = setInterval($scope.updateCount, 1000);
         }
+        else{$location.path('/login')}
     };
 
     $scope.submit = function() {
@@ -65,9 +66,12 @@ angular.module( 'conexus.task', [
     };
 
     $scope.verify = function(item) {
-        var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.work[index].verificationScore++
-        //WorkModel.update();
+        if ($scope.currentUser){
+            var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.work[index].verificationScore++
+            //WorkModel.update();
+        }
+        else{$location.path('/login')}
     };
 
 

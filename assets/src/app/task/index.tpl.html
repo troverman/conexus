@@ -3,37 +3,29 @@
   <h3>{{task.title}}</h3>
   <div style="font-style:italic;color:gray">
     <p><a href="/project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-    <p>{{task.taskContent}}</p>
+    <p>{{task.content}}</p>
     <p>{{task.status}}</p>
-    <p>{{task.taskValue}}</p>
-    <p>Time: {{task.timeBounty}} <a href="https://www.cre8bid.io/market/{{task.timeIdentifier}}">{{task.timeIdentifier}}</a></p>
-    <p>Time Stream: {{task.timeBounty*1.4}} <a href="https://www.cre8bid.io/market/{{task.timeIdentifier}}">{{task.timeIdentifier}}</a></p>
-    <p>Completion: {{task.completeBounty}} <a href="https://www.cre8bid.io/market/{{task.completeIdentifier}}">{{task.completeIdentifier}}</a></p>
-    <p>Verification (rating by users w reputation): 0</p>
-    <p>Verification Reward (what you get for verification): 0</p>
+    <p>Time: {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
+    <p>Time Stream: {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
+    <p>Completion: {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></p>
+    <p>Verification Score (rating by users w reputation): 1</p>
+    <p>Verification Reward (what you get for verification): {{task.verificationIdentifierSet}}, {{task.verificationBountySet}}</p>
   </div>
 
-  <br>
-  <h3>{{taskTime}}</h3>
-  <p>{{(taskTime / totalTime)*task.timeBounty}} <a href="https://www.cre8bid.io/market/{{task.timeIdentifier}}">{{task.timeIdentifier}}</a> </p>
-  <button ng-show="!working" type="submit" class="btn btn-default log-btn" ng-click="start()">Start Work</button>
-  <button ng-show="working" style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">submit work</button>
-
-  <div class="spacing-25"></div>
-
-  <!--<div class="col-md-6">
+  <div>
     <h3>{{taskTime}}</h3>
-    <p>{{(taskTime / totalTime)*task.timeBounty}} <a href="https://www.cre8bid.io/market/{{task.timeIdentifier}}">{{task.timeIdentifier}}</a> </p>
-    <button ng-show="!working" style="width:100%;" class="btn btn-default log-btn" ng-click="start()">start work</button>
-    <button ng-show="working" style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">submit work</button>
-    <br><br>
-  </div>
-  <div class="col-md-12">
+    <p>{{(taskTime / totalTime)*task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
+
+    <!--
     <iframe width='560' height='315' src='https://www.bidio.co/v/57954ce9dea046030031007a' frameborder='0' allowfullscreen></iframe>
-    <br><br>
-    <button style="width:50%;" class="btn btn-default log-btn" ng-click="submit()">start stream</button>
-    <br><br>
-  </div>-->
+    <button style="width:100%%;" class="btn btn-default log-btn" ng-click="submit()">start stream</button>
+    -->
+
+    <button ng-show="!working" type="submit" class="btn btn-default log-btn" ng-click="start()">Start Work</button>
+    <button ng-show="working" style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
+  </div>
+
+  <div class="spacing-15"></div>
 
   <table class="table table-striped table-hover">
       <thead>

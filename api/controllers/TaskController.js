@@ -46,9 +46,20 @@ module.exports = {
 		var model = {
 			title: req.param('title'),
 			project: req.param('project'),
-			taskContent: req.param('taskContent'),
-			taskValue: req.param('taskValue'),
-			user: req.param('user')
+			content: req.param('content'),
+
+			completeIdentifierSet: req.param('completeIdentifierSet'),
+			completeBountySet: req.param('completeBountySet'),
+
+			timeIdentifierSet: req.param('timeIdentifierSet'),
+			timeBountySet: req.param('timeBountySet'),
+
+			verificationIdentifierSet: req.param('verificationIdentifierSet'),
+			verificationBountySet: req.param('verificationBountySet'),
+			
+			members: req.param('members'),
+			parent: req.param('parent'),
+			user: req.param('user'),
 		};
 		Task.create(model)
 		.exec(function(err, task) {

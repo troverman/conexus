@@ -26,16 +26,28 @@ module.exports = {
         parent: {
             model: 'task',
         },
-        completeBounty: {
+        completeBountySet: {
             type: 'string',
         },
-        completeIdentifier: {
+        completeIdentifierSet: {
             type: 'string',
         },
-        timeBounty: {
+        timeBountySet: {
             type: 'string',
         },
-        timeIdentifier: {
+        timeIdentifierSet: {
+            type: 'string',
+        },
+        timeStreamBountySet: {
+            type: 'string',
+        },
+        timeStreamIdentifierSet: {
+            type: 'string',
+        },
+        verificationBountySet: {
+            type: 'string',
+        },
+        verificationIdentifierSet: {
             type: 'string',
         },
         project: {
