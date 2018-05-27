@@ -11,9 +11,6 @@ module.exports = {
 			PostVote.watch(req);
 			PostVote.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
@@ -22,37 +19,25 @@ module.exports = {
 		.spread(function(model) {
 			PostVote.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
-
 	},
 
 	getByPost: function(req, res) {
-
 		var postId = req.param('id');
 		PostVote.getByPost(postId)
 		.spread(function(model) {
 			PostVote.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
-
 	},
 
-
 	create: function (req, res) {
-
 		var userId = req.param('user');
 		var model = {
 			vote: req.param('vote'),
 			post: req.param('post'),
 			user: userId
 		};
-
 		PostVote.create(model)
 		.exec(function(err, post) {
 			if (err) {return console.log(err);}
@@ -62,7 +47,6 @@ module.exports = {
 			}
 		});
 	},
-
 
 	destroy: function (req, res) {
 		var id = req.param('id');

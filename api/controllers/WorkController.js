@@ -9,23 +9,63 @@ module.exports = {
 
 	getSome: function(req, res) {
 
-		var task = req.query.task;
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 
+		if (req.query.task){
+			var task = req.query.task;
+			Work.find({task:task})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
 
-		Work.find({task:task})
-		.limit(limit)
-		.skip(skip)
-		.sort(sort)
-		.populate('user')
-		.then(function(models) {
-			res.json(models);
-		})
-		.fail(function(err) {
-		});
-	
+		if(req.query.project){
+			var project = req.query.project;
+			Work.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		if(req.query.user){
+			var user = req.query.user;
+			Work.find({user:user})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else{
+			Work.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
 	},
 
 
@@ -35,6 +75,7 @@ module.exports = {
 			identifer: req.param('identifer'),
 			task: req.param('task'),
 			user: req.param('user'),
+			project: req.param('project'),
 			verificationScore: req.param('verificationScore')
 		};
 

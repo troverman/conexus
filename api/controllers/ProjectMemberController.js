@@ -12,27 +12,19 @@ module.exports = {
 		.then(function(models) {
 			ProjectMember.watch(req);
 			res.json(models);
-		})
-		.fail(function(err) {
-			res.send(404,err);
 		});
 	},
 
 	create: function (req, res) {
 		var project = req.param('project');
 		var user = req.param('user');
-
 		var model = {
 			project: project,
 			user: user
 		};
-
-
 		ProjectMember.create(model)
 		.exec(function(err, member) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				ProjectMember.publishCreate(member);
 				res.json(member);

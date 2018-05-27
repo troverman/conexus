@@ -1,20 +1,21 @@
-angular.module( 'conexus.about', [
+angular.module( 'conexus.marketPair', [
 ])
 
 .config(['$stateProvider', function config( $stateProvider ) {
-	$stateProvider.state( 'about', {
-		url: '/about',
+	$stateProvider.state( 'marketPair', {
+		url: '/market/:id/:id1',
 		views: {
 			"main": {
-				controller: 'AboutCtrl',
-				templateUrl: 'about/index.tpl.html'
+				controller: 'MarketPairCtrl',
+				templateUrl: 'marketPair/index.tpl.html'
 			}
 		}
 	});
 }])
 
-.controller( 'AboutCtrl', ['$scope', 'titleService', function AboutController( $scope, titleService ) {
-	titleService.setTitle('about | conex.us');
+.controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'titleService', function MarketPairController( $scope, $stateParams, titleService ) {
+	titleService.setTitle('Marketplace | conex.us');
+    $scope.stateParams = $stateParams;
 	$scope.chart = {
         chart: {
             zoomType: 'x',

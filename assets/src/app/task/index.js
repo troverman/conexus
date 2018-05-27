@@ -15,7 +15,7 @@ angular.module( 'conexus.task', [
                 return TaskModel.getOne($stateParams.path);
             }],
             work: ['WorkModel', 'task', function(WorkModel, task){
-                return WorkModel.getSome(task.id, 100, 0, 'createdAt DESC');
+                return WorkModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
@@ -48,6 +48,7 @@ angular.module( 'conexus.task', [
         var workModel = {
             amount: $scope.taskTime,
             identifier: $scope.timeIdentifier,
+            project: $scope.task.project,
             task: $scope.task.id,
             user: $scope.currentUser.id,
             verificationScore: 0

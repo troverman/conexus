@@ -6,9 +6,6 @@ module.exports = {
 			Message.watch(req);
 			Message.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
@@ -17,9 +14,6 @@ module.exports = {
 		.spread(function(model) {
 			Message.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
 
@@ -30,9 +24,6 @@ module.exports = {
 			Message.watch(req);
 			Message.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404,err);
 		});
 	},
 
@@ -43,9 +34,6 @@ module.exports = {
 			Message.watch(req);
 			Message.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404,err);
 		});
 	},
 

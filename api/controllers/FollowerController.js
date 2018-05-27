@@ -11,9 +11,6 @@ module.exports = {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
@@ -22,50 +19,36 @@ module.exports = {
 		.spread(function(model) {
 			Follower.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
 
 	getFollowers: function(req, res) {
-
 		var FollowedId = req.param('id');
 		Follower.getFollowers(FollowedId)
 		.spread(function(models) {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
 	getFollowing: function(req, res) {
-
 		var FollowerId = req.param('id');
 		Follower.getFollowing(FollowerId)
 		.spread(function(models) {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
 	create: function (req, res) {
-
 		var FollowedId = req.param('followed');
 		var FollowerId = req.param('follower');
-
 		var model = {
 			followed: FollowedId,
 			follower: FollowerId,
 		};
-
 		Follower.create(model)
 		.exec(function(err, follower) {
 			if (err) {return console.log(err);}

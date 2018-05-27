@@ -2,9 +2,10 @@
 </div>
 <div class="container">
 	<div class="spacing-25"></div>
-	<h1>{{stateParams.id}} MARKETS</h1>
-	<p>token info | n markets | n tokens in circulation </p>
+	<h1>{{stateParams.id}} | {{stateParams.id1}}</h1>
+	<p> n tokens in circulation | n token volume | information </p>
 	<div class="spacing-25"></div>
+	<highchart config="chart"></highchart>
 	<h2>Order Book</h2>
 	<table class="table table-inverse table-hover">
 	    <thead>
@@ -15,7 +16,7 @@
 	    </thead>
 	    <tbody>
 			<tr>
-				<td>[2 <a href="/market/CONEX,NOVO">NOVO</a>, 3 <a href="/market/CONEX,NOVO">CONEX</a>]</td>
+				<td>[2 <a href="/market/NOVO">NOVO</a>, 3 <a href="/market/CONEX">CONEX</a>]</td>
 				<td>[1 <a href="/market/ALCOA">ALCOA</a>]</td>
 			</tr>
 			<tr>
@@ -23,12 +24,12 @@
 				<td>[2 <a href="/market/NOVO">NOVO</a>]</td>
 			</tr>
 			<tr>
-				<td>[2 <a href="/market/CONEX,CHAPEL HILL">CONEX</a>, 1 <a href="/market/CONEX,CHAPEL HILL">CHAPEL HILL</a>]</td>
+				<td>[2 <a href="/market/CONEX">CONEX</a>, 1 <a href="/market/CHAPEL HILL">CHAPEL HILL</a>]</td>
 				<td>[5 <a href="/market/NOVO">NOVO</a>]</td>
 			</tr>
 			<tr>
 				<td>[1 <a href="/market/NOVO">NOVO</a>]</td>
-				<td>[1 <a href="/market/CHAPEL HILL COUNCIL,DURHAM">CHAPEL HILL COUNCIL</a>, 1 <a href="/market/CHAPEL HILL COUNCIL,DURHAM">DURHAM</a>]</td>
+				<td>[1 <a href="/market/CHAPEL HILL COUNCIL">CHAPEL HILL COUNCIL</a>, 1 <a href="/market/DURHAM">DURHAM</a>]</td>
 			</tr>
 	    </tbody>
 	</table>

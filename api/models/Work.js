@@ -17,6 +17,9 @@ module.exports = {
         task: {
             model: 'task',
         },
+        project: {
+            model: 'project',
+        },
         user: {
             model: 'user',
         },

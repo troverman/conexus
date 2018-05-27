@@ -1,3 +1,15 @@
+<md-card ng-repeat="work in work">
+    <div style="padding:10px;">
+        <a href="/member/{{work.user.username}}">
+            <img src="{{work.user.avatarUrl}}" err-src="/images/avatar.png" style="height:32px;">
+            {{work.user.username}}
+        </a>
+        <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
+        <a href="task/{{work.task.id}}">{{work.task.title}}</a>
+        <p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+    </div>
+</md-card>
+
 <md-card ng-repeat="message in messages.slice().reverse()">
     <div style="padding:10px;">
         <a href="/member/{{message.user.username}}">

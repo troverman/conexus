@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -53,10 +53,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "				<p>tokenized & market liquid organizational actions</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<canvas id=\"line\" class=\"chart chart-line\" chart-data=\"data\"\n" +
-    "				    chart-labels=\"labels\" chart-legend=\"true\" chart-series=\"series\"\n" +
-    "				    chart-click=\"onClick\">\n" +
-    "				</canvas> \n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -499,9 +496,11 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
     "</div>\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
-    "	<h1>Order Book</h1>\n" +
-    "	<h2>MARKETS | GRAPH | PAIRS</h2>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h1>{{stateParams.id}} MARKETS</h1>\n" +
+    "	<p>token info | n markets | n tokens in circulation </p>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h2>Order Book</h2>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -511,20 +510,61 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "	    </thead>\n" +
     "	    <tbody>\n" +
     "			<tr>\n" +
-    "				<td>[2 NOVO, 3 CONEX]</td>\n" +
-    "				<td>[1 ALCOA]</td>\n" +
+    "				<td>[2 <a href=\"/market/CONEX,NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX,NOVO\">CONEX</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 OAK RIDGE]</td>\n" +
-    "				<td>[2 NOVO]</td>\n" +
+    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 CONEX, 1 CHAPEL HILL]</td>\n" +
-    "				<td>[5 NOVO]</td>\n" +
+    "				<td>[2 <a href=\"/market/CONEX,CHAPEL HILL\">CONEX</a>, 1 <a href=\"/market/CONEX,CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
+    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[1 NOVO]</td>\n" +
-    "				<td>[1 CHAPEL HILL COUNCIL, 1 DURHAM]</td>\n" +
+    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">DURHAM</a>]</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "</div>");
+}]);
+
+angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("marketPair/index.tpl.html",
+    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
+    "</div>\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h1>{{stateParams.id}} | {{stateParams.id1}}</h1>\n" +
+    "	<p> n tokens in circulation | n token volume | information </p>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<highchart config=\"chart\"></highchart>\n" +
+    "	<h2>Order Book</h2>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
+    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -537,7 +577,22 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
     "</div>\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h1>Markets</h1>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr><th>Token</th></tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr><td><a href=\"market/NOVO\">NOVO</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/CONEX\">CONEX</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/DURHAM\">DURHAM</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/CHAPEL_HILL\">CHAPEL HILL</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/token4\">ALCOA</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/OAK_RIDGE\">OAK RIDGE</a></td></tr>\n" +
+    "		</tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
     "	<h1>Order Book</h1>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
@@ -548,40 +603,22 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "	    </thead>\n" +
     "	    <tbody>\n" +
     "			<tr>\n" +
-    "				<td>[2 NOVO, 3 CONEX]</td>\n" +
-    "				<td>[1 ALCOA]</td>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 OAK RIDGE]</td>\n" +
-    "				<td>[2 NOVO]</td>\n" +
+    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 CONEX, 1 CHAPEL HILL]</td>\n" +
-    "				<td>[5 NOVO]</td>\n" +
+    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
+    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[1 NOVO]</td>\n" +
-    "				<td>[1 CHAPEL HILL COUNCIL, 1 DURHAM]</td>\n" +
+    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
-    "	</table>\n" +
-    "\n" +
-    "	<h1>Markets</h1>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Token</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr><td><a href=\"market/NOVO\">NOVO</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/CONEX\">CONEX</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/DURHAM\">DURHAM</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/CHAPEL_HILL\">CHAPEL HILL</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/token4\">ALCOA</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/OAK_RIDGE\">OAK RIDGE</a></td></tr>\n" +
-    "\n" +
-    "		</tbody>\n" +
     "	</table>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
@@ -988,6 +1025,18 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
+    "<md-card ng-repeat=\"work in work\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "        <a href=\"/member/{{work.user.username}}\">\n" +
+    "            <img src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
+    "            {{work.user.username}}\n" +
+    "        </a>\n" +
+    "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "        <a href=\"task/{{work.task.id}}\">{{work.task.title}}</a>\n" +
+    "        <p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
+    "    </div>\n" +
+    "</md-card>\n" +
+    "\n" +
     "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "        <a href=\"/member/{{message.user.username}}\">\n" +
@@ -1341,11 +1390,16 @@ angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($te
     "\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "	<img style=\"width:100px;border-radius:100px; \"src=\"/images/mikey.jpg\"/>\n" +
-    "	<h3><a href=\"member/troverman\">membertitle</a></h3>\n" +
-    "	<h3><a href=\"project/conexus\">organization</a></h3>\n" +
-    "	<h3><a href=\"task/task1\">task</a></h3>\n" +
+    "	<h2><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h2>\n" +
+    "	<p>plays, views, live</p>\n" +
+    "	<div class=\"\">\n" +
+    "		<img style=\"width:75px;border-radius:100px; \"src=\"{{stream.user.avatarUrl}}\"/>\n" +
+    "	</div>\n" +
+    "	<div class=\"\">\n" +
+    "		<p><a href=\"member/{{stream.user.username}}\">{{stream.user.username}}</a></p>\n" +
+    "		<p><a href=\"project/{{stream.project.title}}\">{{stream.project.title}}</a></p>\n" +
+    "		<p><a href=\"task/{{stream.task.id}}\">{{stream.task.title}}</a></p>\n" +
+    "	</div>\n" +
     "\n" +
     "	<!--chat-->\n" +
     "\n" +

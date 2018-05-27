@@ -34,7 +34,10 @@ angular.module( 'conexus.project', [
             }],
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getByProject(project);
-            }]
+            }],
+            work: ['WorkModel', 'project', function(WorkModel, project){
+                return WorkModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            }],
         }
     })
     .state( 'project.channels', {
@@ -122,7 +125,6 @@ angular.module( 'conexus.project', [
             projects: ['project', 'ProjectModel', function(project, ProjectModel){
                 return ProjectModel.getChildren(project);
             }],
-
         }
     });
     
@@ -154,13 +156,16 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', function ProjectActivityController( $location, $sailsSocket, $scope, config, lodash, MessageModel, messages, project, tasks, titleService ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $scope, config, lodash, MessageModel, messages, project, tasks, titleService, work ) {
     titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.newMessage = {};
     $scope.messages = messages;
     $scope.tasks = tasks;
+
+    $scope.work = work;
+    console.log(work, tasks)
 
     $scope.destroyMessage = function(message) {
         if (message.user.id === config.currentUser.id) {
@@ -327,9 +332,6 @@ angular.module( 'conexus.project', [
     $scope.AudioContext = {};
     $scope.videoContext = {};
 
-
-    console.log(streams);
-
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {
@@ -365,7 +367,6 @@ angular.module( 'conexus.project', [
         // connect our recorder to the previous destination
         recorder.connect(context.destination);
         */
-
 
     };
 
@@ -417,7 +418,6 @@ angular.module( 'conexus.project', [
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.projects = projects;
-
 
 }]);
 

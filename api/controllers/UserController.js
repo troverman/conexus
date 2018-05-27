@@ -4,9 +4,6 @@ module.exports = {
 		.spread(function(models) {
 			User.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
@@ -15,9 +12,6 @@ module.exports = {
 		.spread(function(model) {
 			User.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			// res.send(404);
 		});
 	},
 
@@ -27,25 +21,18 @@ module.exports = {
 		.spread(function(model) {
 			User.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
-
 
 	create: function (req, res) {
 		var model = {
 			username: req.param('username'),
 			email: req.param('email'),
-			first_name: req.param('first_name')
+			firstName: req.param('firstName')
 		};
-
 		User.create(model)
 		.exec(function(err, model) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
 				User.publishCreate(model.toJSON());
 				res.json(model);
@@ -61,15 +48,14 @@ module.exports = {
 			//username : req.param('username'),
 			avatarUrl: req.param('avatarUrl'),
 		};
-
 		User.update({id: id}, model)
 		.then(function(model){
 			User.publishUpdate(id, model);
 			res.json(model);
 		});
-
 	},
 
+	//TODO: REMOVE AND RESET KEYS
 	upload: function(req,res){
 		res.setTimeout(0)
 		var options = {
@@ -79,7 +65,6 @@ module.exports = {
 		 	bucket: 'conexus8',
 		}
 		var byteCount = req.file('picture')._files[0].stream.byteCount
-
 		req.file('picture')
 		.on('progress', function (event){
 			//why is this doubled
@@ -105,7 +90,6 @@ module.exports = {
 
 	},
 
-
 	subscribe: function(req, res) {
     	//Find all current users in the user model
 	    //User.find(function foundUsers(err, users) {
@@ -116,6 +100,5 @@ module.exports = {
 	      //console.log('----')
 	    //});
   	}
-
-
+  	
 };

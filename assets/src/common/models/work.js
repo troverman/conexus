@@ -2,10 +2,13 @@ angular.module('models.work', ['lodash', 'services', 'sails.io',])
 
 .service('WorkModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
     
-    this.getSome = function(task, limit, skip, sort) {
-        var query = {params:{task:task, limit:limit,skip:skip,sort:sort}};
+    this.getSome = function(type, filter, limit, skip, sort) {
+        var query = {};
+        if (type=="project"){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
+        if (type=="task"){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
+        if (type=="user"){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
+        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('work');
-        console.log(query)
         return $sailsSocket.get(url, query).then(success, error);
     };
 

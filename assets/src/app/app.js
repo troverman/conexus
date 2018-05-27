@@ -19,6 +19,7 @@ angular.module( 'conexus', [
     'conexus.footer',
     'conexus.market',
     'conexus.markets',
+    'conexus.marketPair',
     'conexus.nav',
     'conexus.home',
     'conexus.intro',

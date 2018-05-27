@@ -13,11 +13,7 @@ module.exports = {
 		.spread(function(models) {
 			Task.watch(req);
 			Task.subscribe(req, models);
-
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
@@ -36,12 +32,10 @@ module.exports = {
 		.spread(function(model) {
 			Task.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
 
+	//TODO
 	create: function (req, res) {
 		var model = {
 			title: req.param('title'),

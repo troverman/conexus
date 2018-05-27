@@ -1,5 +1,5 @@
 /**
- * TaskController
+ * StreamController
  *
  * @description :: Server-side logic for managing Tasks
  * @help        :: See http://links.sailsjs.org/docs/controllers
@@ -9,36 +9,29 @@ var _ = require('lodash');
 module.exports = {
 
 	getAll: function(req, res) {
-		Task.getAll()
+		Stream.getAll()
 		.spread(function(models) {
-			Task.watch(req);
-			Task.subscribe(req, models);
-
+			Stream.watch(req);
+			Stream.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
 	getByProject: function(req, res) {
-		Task.find()
+		Stream.find()
 		.where({project: req.param('id')})
 		.then(function(model) {
-			Task.watch(req);
-			//Task.subscribe(req, model);
+			Stream.watch(req);
+			//Stream.subscribe(req, model);
 			res.json(model);
 		});
 	},
 
 	getOne: function(req, res) {
-		Task.getOne(req.param('id'))
+		Stream.getOne(req.param('id'))
 		.spread(function(model) {
-			Task.subscribe(req, model);
+			Stream.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
 
@@ -50,11 +43,11 @@ module.exports = {
 			taskValue: req.param('taskValue'),
 			user: req.param('user')
 		};
-		Task.create(model)
+		Stream.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
 			else {
-				Task.publishCreate(task);
+				Stream.publishCreate(task);
 				res.json(task);
 			}
 		});
@@ -64,12 +57,12 @@ module.exports = {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
-		Task.findOne(id).exec(function(err, model) {
+		Stream.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}
-			Task.destroy(id, function(err) {
+			Stream.destroy(id, function(err) {
 				if (err) {return res.serverError(err);}
-				Task.publishDestroy(model.id);
+				Stream.publishDestroy(model.id);
 				return res.json(model);
 			});
 		});

@@ -12,9 +12,6 @@ module.exports = {
 		.then(function(models) {
 			ProjectEntry.watch(req);
 			res.json(models);
-		})
-		.fail(function(err) {
-			res.send(404,err);
 		});
 	},
 
@@ -23,21 +20,17 @@ module.exports = {
 		var category = req.param('category');
 		var project = req.param('project');
 		var user = req.param('user');
-
 		var model = {
 			amount: amount,
 			category: category,
 			project: project,
 			user: user
 		};
-
 		ProjectEntry.create(model)
 		.exec(function(err, member) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
-				ProjectMember.publishCreate(member);
+				ProjectEntry.publishCreate(member);
 				res.json(member);
 			}
 		});

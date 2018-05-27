@@ -11,9 +11,6 @@ module.exports = {
 			Post.watch(req);
 			Post.subscribe(req, models);
 			res.json(models);
-		})
-		.fail(function(err) {
-			// An error occured
 		});
 	},
 
@@ -22,9 +19,6 @@ module.exports = {
 		.spread(function(model) {
 			Post.subscribe(req, model);
 			res.json(model);
-		})
-		.fail(function(err) {
-			res.send(404);
 		});
 	},
 
@@ -36,7 +30,6 @@ module.exports = {
 			url_title: req.param('url_title'),
 			user: userId
 		};
-
 		Post.create(model)
 		.exec(function(err, post) {
 			if (err) {return console.log(err);}
