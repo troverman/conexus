@@ -501,6 +501,26 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "	<p>token info | n markets | n tokens in circulation </p>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<h2>Order Book</h2>\n" +
+    "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "	<md-card ng-show=\"newOrderToggleVar\">\n" +
+    "	    <div style=\"padding:10px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.orderIdentiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.orderAmountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.orderAmountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.orderAmountSet\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
+    "	</md-card>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -542,6 +562,26 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "	<div class=\"spacing-25\"></div>\n" +
     "	<highchart config=\"chart\"></highchart>\n" +
     "	<h2>Order Book</h2>\n" +
+    "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "	<md-card ng-show=\"newOrderToggleVar\">\n" +
+    "	    <div style=\"padding:10px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.orderIdentiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.orderAmountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Identifer Set 2\" ng-disabled=\"true\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.orderAmountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.orderAmountSet\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
+    "	</md-card>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -580,9 +620,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "	<div class=\"spacing-25\"></div>\n" +
     "	<h1>Markets</h1>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr><th>Token</th></tr>\n" +
-    "	    </thead>\n" +
+    "	    <thead><tr><th>Token</th></tr></thead>\n" +
     "	    <tbody>\n" +
     "			<tr><td><a href=\"market/NOVO\">NOVO</a></td></tr>\n" +
     "			<tr><td><a href=\"market/CONEX\">CONEX</a></td></tr>\n" +
@@ -594,6 +632,26 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "	</table>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<h1>Order Book</h1>\n" +
+    "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "	<md-card ng-show=\"newOrderToggleVar\">\n" +
+    "	    <div style=\"padding:10px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.orderAmountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.orderAmountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.orderAmountSet\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
+    "	</md-card>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
