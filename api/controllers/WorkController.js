@@ -25,7 +25,7 @@ module.exports = {
 			});
 		}
 
-		if(req.query.project){
+		else if(req.query.project){
 			var project = req.query.project;
 			Work.find({project:project})
 			.limit(limit)
@@ -39,7 +39,7 @@ module.exports = {
 			});
 		}
 
-		if(req.query.user){
+		else if(req.query.user){
 			var user = req.query.user;
 			Work.find({user:user})
 			.limit(limit)

@@ -65,9 +65,7 @@ module.exports.routes = {
   'get /api/message': 'MessageController.getAll',
   'get /api/message/:id': 'MessageController.getOne',
   'get /api/message/project/:id': 'MessageController.getByProject',
-
   //'get /api/message/channel/:id': 'MessageController.getByChannel',
-
   'get /api/message/user/:id': 'MessageController.getByUser',
   'post /api/message': 'MessageController.create',
   'delete /api/message/:id': 'MessageController.destroy',
@@ -98,7 +96,6 @@ module.exports.routes = {
   'get /api/project': 'ProjectController.getAll',
   'get /api/project/:id': 'ProjectController.getOne',
   'get /api/project/children/:id': 'ProjectController.getChildren',
-
   'get /api/project/url/:path': 'ProjectController.getByUrl',
   'post /api/project': 'ProjectController.create',
   'delete /api/project/:id': 'ProjectController.destroy',
@@ -116,6 +113,15 @@ module.exports.routes = {
    */
   'get /api/search/:searchQuery': 'SearchController.search',
   'get /api/search': 'SearchController.searchAll',
+
+  /**
+   * Stream routes
+   *
+   */
+  'get /api/stream': 'StreamController.getSome',
+  'get /api/stream/:id': 'StreamController.getOne',
+  'post /api/stream/:id': 'Stream.update',
+  'delete /api/stream/:id': 'TaskController.destroy',
 
   /**
    * Task routes
@@ -145,7 +151,6 @@ module.exports.routes = {
   'post /api/work': 'WorkController.create',
 
   '/.well-known/acme-challenge/9gf-zaOshMDeJUOaL0j2lH7TnRTNxau1eF2z06fav-I': 'HomeController.ssl',
-
 
   //'get /*' : 'HomeController.index'
 

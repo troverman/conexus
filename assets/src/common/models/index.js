@@ -6,6 +6,7 @@ angular.module('models', [
 	'models.postvote',
 	'models.project',
 	'models.search',
+	'models.stream',
 	'models.task',
 	'models.user',
 	'models.work'

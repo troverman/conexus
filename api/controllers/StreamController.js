@@ -8,23 +8,47 @@ var _ = require('lodash');
 
 module.exports = {
 
-	getAll: function(req, res) {
-		Stream.getAll()
-		.spread(function(models) {
-			Stream.watch(req);
-			Stream.subscribe(req, models);
-			res.json(models);
-		});
-	},
+	getSome: function(req, res) {
+		if(req.query.project){
+			var project = req.query.project;
+			Stream.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
 
-	getByProject: function(req, res) {
-		Stream.find()
-		.where({project: req.param('id')})
-		.then(function(model) {
-			Stream.watch(req);
-			//Stream.subscribe(req, model);
-			res.json(model);
-		});
+		else if(req.query.user){
+			var user = req.query.user;
+			Stream.find({user:user})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else{
+			Stream.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
 	},
 
 	getOne: function(req, res) {
@@ -52,6 +76,8 @@ module.exports = {
 			}
 		});
 	},
+
+	update: function (req, res) {},
 
 	destroy: function (req, res) {
 		var id = req.param('id');

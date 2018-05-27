@@ -1344,6 +1344,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "      </div>\n" +
     "      <br><br>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
@@ -1358,8 +1359,6 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "\n" +
-    "\n" +
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "");
@@ -1537,11 +1536,36 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
 
 angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
-    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
+    "<div class=\"page-heading\">\n" +
+    "	<div class=\"container\"> \n" +
+    "		<div class=\"spacing-25\"></div>\n" +
+    "		<h1>Tasks</h1>\n" +
+    "		<div class=\"spacing-25\"></div>\n" +
+    "	</div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
-    "	<h1>order book</h1>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<table class=\"table table-striped table-hover\">\n" +
+    "		<thead>\n" +
+    "		    <tr>\n" +
+    "		  		<th>Title</th>\n" +
+    "				<th>Content</th>\n" +
+    "				<th>Bounty</th>\n" +
+    "				<th>Date</th>\n" +
+    "				<th></th>\n" +
+    "		    </tr>\n" +
+    "		</thead>\n" +
+    "		<tbody>\n" +
+    "			<tr ng-repeat=\"task in tasks\">\n" +
+    "				<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
+    "				<td>{{task.content}}</td>\n" +
+    "				<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
+    "				<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
+    "				<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +
+    "			</tr>\n" +
+    "		</tbody>\n" +
+    "	</table>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
 }]);
