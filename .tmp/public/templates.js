@@ -177,8 +177,8 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
     "			{{date | date:'yyyy'}}\n" +
     "			<a href=\"/\">conex.us</a>\n" +
     "			<a href=\"/about\">about</a>\n" +
-    "			<a href=\"/tasks\">tasks</a>\n" +
     "			<a href=\"/projects\">organizations</a>\n" +
+    "			<a href=\"/tasks\">tasks</a>\n" +
     "			<a href=\"/transparency\">transparency</a>\n" +
     "		</div>\n" +
     "		<img src=\"images/conexus-white.png\">\n" +
@@ -500,6 +500,29 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "	<h1>{{stateParams.id}} MARKETS</h1>\n" +
     "	<p>token info | n markets | n tokens in circulation </p>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
+    "	<h2>Markets</h2>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr>\n" +
+    "				<td><a href=\"/market/{{stateParams.id}}/NOVO\">NOVO</a></td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td><a href=\"/market/{{stateParams.id}}/OAK RIDGE\">OAK RIDGE</a></td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td><a href=\"/market/{{stateParams.id}}/CONEX\">CONEX</a></td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td><a href=\"/market/{{stateParams.id}}/CRE8\">CRE8</a></td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
     "	<h2>Order Book</h2>\n" +
     "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
     "	<md-card ng-show=\"newOrderToggleVar\">\n" +
@@ -557,7 +580,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "</div>\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-25\"></div>\n" +
-    "	<h1>{{stateParams.id}} | {{stateParams.id1}}</h1>\n" +
+    "	<h1><a href=\"market/{{stateParams.id}}\">{{stateParams.id}}</a> | <a href=\"market/{{stateParams.id1}}\">{{stateParams.id1}}</a></h1>\n" +
     "	<p> n tokens in circulation | n token volume | information </p>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<highchart config=\"chart\"></highchart>\n" +
@@ -1574,7 +1597,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
   $templateCache.put("transparency/index.tpl.html",
     "<link rel=\"stylesheet\" href=\"bower_components/angular-chart.js/dist/angular-chart.css\">\n" +
     "<!--this is gonna be infographic like-->\n" +
-    "<div class=\"spacing-100\"></div>\n" +
+    "<div class=\"spacing-25\"></div>\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"col-md-6\">\n" +
@@ -1594,5 +1617,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "");
 }]);

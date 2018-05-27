@@ -9,7 +9,19 @@ angular.module( 'conexus.connect', [
 				controller: 'ConnectCtrl',
 				templateUrl: 'connect/index.tpl.html'
 			}
-		}
+		},
+        resolve: {
+        	projects: ['ProjectModel', function(ProjectModel){
+                return ProjectModel.getAll();
+            }],
+            tasks: ['TaskModel', function(TaskModel){
+                return TaskModel.getAll();
+            }],
+            users: ['UserModel', function(UserModel){
+                return UserModel.getAll();
+            }],
+        }
+
 	});
 	uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyDKPi-Krk_GCd_YfHS4ghUH3P4afPtPstA',
@@ -18,7 +30,7 @@ angular.module( 'conexus.connect', [
     });
 }])
 
-.controller( 'ConnectCtrl', ['$scope', 'titleService', 'UserModel', 'uiGmapGoogleMapApi', function ConnectController( $scope, titleService, UserModel, uiGmapGoogleMapApi ) {
+.controller( 'ConnectCtrl', ['$scope', 'titleService', 'projects', 'tasks', 'users', 'uiGmapGoogleMapApi', function ConnectController( $scope, titleService, projects, tasks, users, uiGmapGoogleMapApi ) {
 	titleService.setTitle('connect | conex.us');
 
 	$scope.map = {
@@ -27,10 +39,8 @@ angular.module( 'conexus.connect', [
 	};
 	$scope.options = {scrollwheel: false};
 	$scope.windowOptions = {visible: false};
-
-
-	UserModel.getAll().then(function(users){
-		$scope.users = users;
-	});
-
+	$scope.projects = projects;
+	$scope.tasks = tasks;
+	$scope.users = users;
+	
 }]);
