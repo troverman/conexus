@@ -19,16 +19,20 @@ angular.module( 'conexus.home', [
 			}],
 			messages: ['MessageModel', function(MessageModel){
 				return MessageModel.getAll();
-			}]
+			}],
+			tasks: ['TaskModel', function(TaskModel) {
+				return TaskModel.getAll();
+			}],
 
 		}
 	});
 }])
 
-.controller( 'HomeCtrl', ['$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'titleService', function HomeController( $scope, config, members, messages, projects, SearchModel, titleService ) {
+.controller( 'HomeCtrl', ['$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', function HomeController( $scope, config, members, messages, projects, SearchModel, tasks, titleService ) {
 	titleService.setTitle('conex.us');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
+	$scope.tasks = tasks;
 	$scope.members = members;
 	$scope.messages = messages;
 

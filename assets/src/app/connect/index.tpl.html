@@ -13,12 +13,29 @@
 	<h1>connect</h1>
 	<div class="spacing-10"></div>
 
+	<!--<input style="margin-top:5px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">-->
+	
 	<div ng-repeat="user in users">
-		<h4><a href="/member/{{user.username}}">{{user.username}}</a></h4>
+		<h3><a href="/member/{{user.username}}">{{user.username}}</a></h3>
+	</div>
+
+	<!--<h1>live</h1>
+	<div ng-repeat="task in tasks">
+		<div class="col-sm-6"><iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe></div>
+	</div>-->
+
+	<h1>organizations</h1>
+	<div ng-repeat="project in projects">
+		<h3><a href="/projects/{{project.urlTitle}}">{{project.title}}</a></h3>
+	</div>
+
+	<h1>tasks</h1>
+	<div ng-repeat="task in tasks">
+		<h3><a href="/task/{{task.id}}">{{task.title}}</a></h3>
 	</div>
 
 	<!--<p>what is this page?</p>
-	<p>connect in your gps, bank info, and live stream google glass: +1 crazy</p>-->
+	<p>connect in your gps, wallet info, and live stream google glass</p>-->
 
 </div>
 <div class="spacing-50"></div>

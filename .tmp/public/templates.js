@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -158,12 +158,29 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "	<h1>connect</h1>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "	<!--<input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">-->\n" +
+    "	\n" +
     "	<div ng-repeat=\"user in users\">\n" +
-    "		<h4><a href=\"/member/{{user.username}}\">{{user.username}}</a></h4>\n" +
+    "		<h3><a href=\"/member/{{user.username}}\">{{user.username}}</a></h3>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<!--<h1>live</h1>\n" +
+    "	<div ng-repeat=\"task in tasks\">\n" +
+    "		<div class=\"col-sm-6\"><iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe></div>\n" +
+    "	</div>-->\n" +
+    "\n" +
+    "	<h1>organizations</h1>\n" +
+    "	<div ng-repeat=\"project in projects\">\n" +
+    "		<h3><a href=\"/projects/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<h1>tasks</h1>\n" +
+    "	<div ng-repeat=\"task in tasks\">\n" +
+    "		<h3><a href=\"/task/{{task.id}}\">{{task.title}}</a></h3>\n" +
     "	</div>\n" +
     "\n" +
     "	<!--<p>what is this page?</p>\n" +
-    "	<p>connect in your gps, bank info, and live stream google glass: +1 crazy</p>-->\n" +
+    "	<p>connect in your gps, wallet info, and live stream google glass</p>-->\n" +
     "\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>");
@@ -189,25 +206,25 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
 angular.module("home/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("home/index.tpl.html",
     "<div ng-show=\"currentUser\">\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
     "	<div class=\"container\">\n" +
-    "	  <div class=\"col-md-4\">\n" +
+    "	  <div class=\"col-md-3\">\n" +
     "			<img class=\"avatar\" style=\"margin-top:0em\" src=\"{{currentUser.avatarUrl}}\"/>\n" +
     "			<h2><a href=\"/member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
+    "			<p>info | wallet</p>\n" +
     "	  </div>\n" +
-    "	  <div class=\"col-md-8\">\n" +
-    "	    <h3>feed</h3>\n" +
-    "	    <hr>\n" +
-    "		<div class='md-padding' layout=\"row\" layout-align=\"center\" layout-wrap>\n" +
-    "			<md-card flex=\"90\" ng-repeat=\"project in projects\">\n" +
-    "				<md-card-title>\n" +
-    "					<md-card-title-text>\n" +
-    "						<a href=\"/project/{{project.urlTitle}}/\">\n" +
-    "							<span class=\"\">{{project.title}}</span>\n" +
-    "						</a>\n" +
-    "					</md-card-title-text>\n" +
-    "				</md-card-title>\n" +
-    "			</md-card>\n" +
-    "		</div>\n" +
+    "	  <div class=\"col-md-9\">\n" +
+    "	    <h2>feed</h2>\n" +
+    "	    <!--tasks, work, posts, activity-->\n" +
+    "		<md-card ng-repeat=\"task in tasks\">\n" +
+    "			<md-card-title>\n" +
+    "				<md-card-title-text>\n" +
+    "					<a href=\"/task/{{task.id}}/\">\n" +
+    "						<span class=\"\">{{task.title}}</span>\n" +
+    "					</a>\n" +
+    "				</md-card-title-text>\n" +
+    "			</md-card-title>\n" +
+    "		</md-card>\n" +
     "	  </div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -570,6 +587,34 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h2>Trades</h2>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
+    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
 }]);
@@ -605,6 +650,34 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "			</form>\n" +
     "		</div>\n" +
     "	</md-card>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
+    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
+    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "			</tr>\n" +
+    "			<tr>\n" +
+    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h2>Trades</h2>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -1106,6 +1179,8 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
+    "<style>\n" +
+    "</style>\n" +
     "<md-card ng-repeat=\"work in work\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "        <a href=\"/member/{{work.user.username}}\">\n" +
@@ -1118,17 +1193,58 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "    </div>\n" +
     "</md-card>\n" +
     "\n" +
-    "<md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "<md-card ng-repeat=\"post in messages.slice().reverse()\">\n" +
     "    <div style=\"padding:10px;\">\n" +
-    "        <a href=\"/member/{{message.user.username}}\">\n" +
-    "            <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
-    "            {{message.user.username}}\n" +
+    "        <a href=\"/member/{{post.user.username}}\">\n" +
+    "            <img src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;radius:3px\">\n" +
+    "            {{post.user.username}}\n" +
     "        </a>\n" +
     "        <br>\n" +
-    "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"message.updatedAt\"></p>\n" +
-    "        <p>{{message.title}}</p>\n" +
+    "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"post.updatedAt\"></p>\n" +
+    "        <p>{{post.title}}</p>\n" +
+    "    </div>\n" +
+    "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a> \n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "    </div>\n" +
     "</md-card>\n" +
+    "\n" +
+    "\n" +
+    "<!--<md-card ng-repeat=\"post in messages.slice().reverse()\">\n" +
+    "    <div class=\"card-container\">\n" +
+    "        <div>\n" +
+    "            <a href=\"/member/{{post.user.username}}\">\n" +
+    "                <img class=\"post-img\" ng-src=\"{{post.user.avatarUrl}}\" class=\"md-card-image\" alt=\"{{post.user.username}}\">\n" +
+    "                <h4 class=\"post-name\">{{post.user.username}}</h4>\n" +
+    "            </a>\n" +
+    "            <div class=\"pull-right\">\n" +
+    "                <span class=\"grey\" am-time-ago=\"post.updatedAt\"></span>\n" +
+    "                <div style=\"display:inline\" uib-dropdown is-open=\"status.isopen\">\n" +
+    "                    <a uib-dropdown-toggle ng-disabled=\"disabled\" href=\"#\" ng-click=\"\"><i class=\"fa fa-angle-down grey\"></i></a> \n" +
+    "                    <ul class=\"dropdown-menu dropdown-menu-right\" uib-dropdown-menu role=\"menu\" aria-labelledby=\"single-button\">\n" +
+    "                        <li role=\"menuitem\"><a href=\"#\">Share</a></li>\n" +
+    "                        <li role=\"menuitem\"><a href=\"#\">Delete</a></li>\n" +
+    "                    </ul>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"post-container\">\n" +
+    "            <p>{{post.title}}</p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "        <a style=\"padding:5px\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\" class=\"grey\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "        <a style=\"padding:5px\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" class=\"grey\"><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a> \n" +
+    "        <a style=\"padding:5px\" href=\"#\" class=\"grey\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "        <a style=\"padding:5px\" href=\"#\" class=\"grey\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "        <a style=\"\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "    </div>\n" +
+    "</md-card>-->\n" +
+    "\n" +
+    "\n" +
     "<div class=\"spacing-15\"></div>\n" +
     "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
     "    <div class=\"form-group\">\n" +
@@ -1444,14 +1560,27 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function ($
 angular.module("search/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("search/index.tpl.html",
     "<div ui-view=\"search\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<br><br>\n" +
-    "		<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" placeholder=\"{{searchQuery}}\">\n" +
-    "		<hr>\n" +
-    "		<div ng-repeat=\"searchResult in searchResults\">\n" +
-    "			<a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "	<div class=\"page-heading\">\n" +
+    "		<div class=\"container\"> \n" +
+    "			<div class=\"spacing-25\"></div>\n" +
+    "			<h1><b>{{searchQuery}}</b></h1>\n" +
+    "			<input ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" placeholder=\"{{searchQuery}}\">\n" +
+    "			<div class=\"spacing-25\"></div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "	<div class=\"container\">\n" +
+    "		<md-card ng-repeat=\"searchResult in searchResults\">\n" +
+    "			<div style=\"padding:25px;\">\n" +
+    "				<a href=\"project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a>\n" +
+    "				<br>\n" +
+    "				<a href=\"member/{{searchResult.user.username}}\">{{searchResult.user.username}}</a>\n" +
+    "				<br>\n" +
+    "				<a href=\"project/{{searchResult.project}}\">{{searchResult.project}}</a>\n" +
+    "				<br>\n" +
+    "			</div>\n" +
+    "		</md-card>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "</div>");
 }]);
@@ -1562,7 +1691,10 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div class=\"page-heading\">\n" +
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
-    "		<h1>Tasks</h1>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\"><h1>Tasks</h1></div>\n" +
+    "			<div class=\"col-xs-6\"><h3 style=\"text-align:right\"><i class=\"fa fa-angle-down\"></i></h3></div>\n" +
+    "		</div>\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -1603,8 +1735,42 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "		<div class=\"col-md-6\">\n" +
     "			<h2><a href=\"project/conexus\">transparency</a></h2>\n" +
     "			<p>transparent contrubition, equatable representation</p>\n" +
+    "			<h3>open balanace sheet</h3>\n" +
+    "			<table class=\"table table-inverse table-hover\">\n" +
+    "			    <thead>\n" +
+    "					<tr>\n" +
+    "						<th>Description</th>\n" +
+    "						<th>Type</th>\n" +
+    "						<th>Identifier</th>\n" +
+    "						<th>Amount</th>\n" +
+    "						<th>Date</th>\n" +
+    "					</tr>\n" +
+    "			    </thead>\n" +
+    "			    <tbody>\n" +
+    "					<tr>\n" +
+    "						<td>DNS HOSTING</td>\n" +
+    "						<td>PAYMENT</td>\n" +
+    "						<td>CRE8</td>\n" +
+    "						<td>12.29</td>\n" +
+    "						<td>23 seconds ago</td>\n" +
+    "					</tr>\n" +
+    "					<tr>\n" +
+    "						<td>AMAZON S3</td>\n" +
+    "						<td>PAYMENT</td>\n" +
+    "						<td>CONEX</td>\n" +
+    "						<td>223.8</td>\n" +
+    "						<td>3 minutes ago</td>\n" +
+    "					</tr>\n" +
+    "					<tr>\n" +
+    "						<td>CONEX TASK</td>\n" +
+    "						<td>PAYMENT</td>\n" +
+    "						<td>CONEX</td>\n" +
+    "						<td>345</td>\n" +
+    "						<td>1 hour ago</td>\n" +
+    "					</tr>\n" +
+    "			    </tbody>\n" +
+    "			</table>\n" +
     "			<p>give to conex</p>\n" +
-    "			<p>open balanace sheet</p>\n" +
     "		</div>\n" +
     "		<div class=\"col-md-6\">\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
@@ -1619,5 +1785,20 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "\n" +
+    "");
+}]);
+
+angular.module("work/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("work/index.tpl.html",
+    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
+    "<div class=\"container\">\n" +
+    "  <h3>{{work}}</h3>\n" +
+    "  <h3>{{work.user}}</h3>\n" +
+    "  <h3>{{work.task}}</h3>\n" +
+    "  <h3>{{work.project}}</h3>\n" +
+    "  <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "</div>\n" +
+    "<div class=\"spacing:50px;\"></div>\n" +
     "");
 }]);

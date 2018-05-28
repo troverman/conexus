@@ -1,11 +1,24 @@
 <div ui-view="search">
-	<div class="container">
-		<br><br>
-		<input ng-keyup="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
-		<hr>
-		<div ng-repeat="searchResult in searchResults">
-			<a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
+	<div class="page-heading">
+		<div class="container"> 
+			<div class="spacing-25"></div>
+			<h1><b>{{searchQuery}}</b></h1>
+			<input ng-keyup="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
+			<div class="spacing-25"></div>
 		</div>
 	</div>
+	<div class="container">
+		<md-card ng-repeat="searchResult in searchResults">
+			<div style="padding:25px;">
+				<a href="project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
+				<br>
+				<a href="member/{{searchResult.user.username}}">{{searchResult.user.username}}</a>
+				<br>
+				<a href="project/{{searchResult.project}}">{{searchResult.project}}</a>
+				<br>
+			</div>
+		</md-card>
+	</div>
+	<div class="spacing-50"></div>
 
 </div>

@@ -33,7 +33,8 @@ angular.module( 'conexus', [
     'conexus.search',
     'conexus.task',
     'conexus.tasks',
-    'conexus.transparency'
+    'conexus.transparency',
+    'conexus.work',
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
