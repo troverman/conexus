@@ -61,7 +61,7 @@ module.exports = {
 
     getAll: function() {
         return Task.find()
-        .sort({createdAt: 'asc'})
+        .sort({createdAt: 'DESC'})
         .populate('user')
         .then(function (models) {
             return [models];

@@ -1,0 +1,36 @@
+
+<div class="page-heading">
+	<div class="container"> 
+		<div class="spacing-25"></div>
+		<div class="row">
+			<div class="col-xs-6"><h1>Tasks</h1></div>
+			<div class="col-xs-6"><h3 style="text-align:right"><i class="fa fa-angle-down"></i></h3></div>
+		</div>
+		<div class="spacing-25"></div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="spacing-25"></div>
+	<table class="table table-striped table-hover">
+		<thead>
+		    <tr>
+		  		<th>Title</th>
+				<th>Content</th>
+				<th>Bounty</th>
+				<th>Date</th>
+				<th></th>
+		    </tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="task in tasks">
+				<td><h5><a href="task/{{task.id}}">{{task.title}}</a></h5></td>
+				<td>{{task.content}}</td>
+				<td>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></td>
+				<td><span  am-time-ago="task.createdAt"></span></td>
+				<td><a href="task/{{task.id}}"><button type="submit" class="btn btn-default log-btn">Start Work</button></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="spacing-50"></div>
+</div>

@@ -1,9 +1,8 @@
 <style>md-card{margin:0px; overflow:hidden;}</style>
 <md-card ng-repeat="stream in streams" class="col-md-6">
 	<div style="padding:10px;">
-		<iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
-		<h3><a href="stream/{{stream}}">stream title {{stream}}</a></h3>
-		<p><a href="member/troverman">member</a> - <span>date</span></p>
-
+		<iframe width='510' height='265' ng-src='{{stream.streamUrl}}' frameborder='0' allowfullscreen></iframe>
+		<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
+		<p><a href="member/{{stream.user}}">{{stream.user}}</a> - <span am-time-ago="stream.createdAt"></span></p>
 	</div>
 </md-card>

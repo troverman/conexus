@@ -95,7 +95,12 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             streams: [function() {
-                return [1,2,3,4];
+                return [
+                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
+                ];
             }]
         }
     })

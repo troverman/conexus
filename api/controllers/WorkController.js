@@ -72,6 +72,7 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			amount: req.param('amount'),
+			content: req.param('content'),
 			identifer: req.param('identifer'),
 			task: req.param('task'),
 			user: req.param('user'),

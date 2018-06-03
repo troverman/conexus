@@ -123,14 +123,15 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "	</div>\n" +
     "	<br><br>\n" +
     "\n" +
+    "	<h3>Balances</h3>\n" +
+    "	<p>Tokens</p>\n" +
+    "\n" +
     "	<h3>Connected Accounts</h3>\n" +
     "	<button class=\"btn btn-default\"><a href=\"/auth/google\">google</a></button>\n" +
     "	<button class=\"btn btn-default\"><a href=\"/auth/twitter\">twitter</a></button>\n" +
     "	<button class=\"btn btn-default\"><a href=\"/auth/facebook\">facebook</a></button>\n" +
     "	<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">fitbit</a></button>\n" +
-    "	<br><br>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"#\">btc wallet</a></button>\n" +
-    "	\n" +
+    "	<!--tokenized apps.. connect in..-->\n" +
     "	<br><br>\n" +
     "\n" +
     "	<h3>Settings</h3>\n" +
@@ -1395,10 +1396,9 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<md-card ng-repeat=\"stream in streams\" class=\"col-md-6\">\n" +
     "	<div style=\"padding:10px;\">\n" +
-    "		<iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
-    "		<h3><a href=\"stream/{{stream}}\">stream title {{stream}}</a></h3>\n" +
-    "		<p><a href=\"member/troverman\">member</a> - <span>date</span></p>\n" +
-    "\n" +
+    "		<iframe width='510' height='265' ng-src='{{stream.streamUrl}}' frameborder='0' allowfullscreen></iframe>\n" +
+    "		<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
+    "		<p><a href=\"member/{{stream.user}}\">{{stream.user}}</a> - <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
     "	</div>\n" +
     "</md-card>\n" +
     "");
@@ -1642,6 +1642,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    -->\n" +
     "\n" +
     "    <button ng-show=\"!working\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"start()\">Start Work</button>\n" +
+    "    <!--form-->\n" +
     "    <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
     "  </div>\n" +
     "\n" +

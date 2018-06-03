@@ -49,7 +49,7 @@ module.exports = {
 
     getAll: function() {
         return Post.find()
-        .sort({createdAt: 'desc'})
+        .sort({createdAt: 'DESC'})
         .populate('user')
         .then(function (models) {
             return [models];

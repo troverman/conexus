@@ -11,6 +11,9 @@ module.exports = {
         amount: {
             type: 'string',
         },
+        content: {
+            type: 'string',
+        },
         identifer: {
             type: 'string',
         },
