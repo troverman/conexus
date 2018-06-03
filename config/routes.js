@@ -35,6 +35,8 @@ module.exports.routes = {
   'get /tasks': 'HomeController.index',
   'get /task/:id': 'HomeController.index',
   'get /transparency': 'HomeController.index',
+  'get /work': 'HomeController.index',
+  'get /work/:id': 'HomeController.index',
 
   'get /login': 'HomeController.index',
   'get /register': 'HomeController.index',

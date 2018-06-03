@@ -41,7 +41,7 @@
       </thead>
       <tbody>
           <tr ng-repeat="item in work">
-              <td>{{item.amount}}</td>
+              <td><a href="work/{{item.id}}">{{item.amount}}</a></td>
               <td><a href="member/{{item.user.username}}">{{item.user.username}}</a></td>
               <td><a href="stream/{{item.stream || '1'}}">{{item.stream || 'Not Available'}}</a></td>
               <td><span am-time-ago="item.createdAt"></span></td>
