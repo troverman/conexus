@@ -2,20 +2,28 @@
 	<div class="spacing-25"></div>
 	<div class="container">
 	  <div class="col-md-3">
-			<img class="avatar" style="margin-top:0em" src="{{currentUser.avatarUrl}}"/>
-			<h2><a href="/member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
-			<p>info | wallet</p>
+	  		<md-card style="padding:15px;">
+				<img class="avatar" style="margin-top:0em" src="{{currentUser.avatarUrl}}"/>
+				<h2><a href="/member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
+				<p>info | wallet</p>
+			</md-card>
+			<md-card ng-repeat="project in projects">
+				<md-card-title>
+					<a href="/project/{{project.urlTitle}}/"><span class="">{{project.title}}</span></a>
+				</md-card-title>
+			</md-card>
 	  </div>
 	  <div class="col-md-9">
-	    <h2>feed</h2>
 	    <!--tasks, work, posts, activity-->
+	    <!--TODO: ACTIVITY-->
+	    <!--<md-card ng-repeat="post in messages">
+			<md-card-title>
+				<a href="/post/{{post.id}}/"><span class="">{{post.title}}</span></a>
+			</md-card-title>
+		</md-card>-->
 		<md-card ng-repeat="task in tasks">
 			<md-card-title>
-				<md-card-title-text>
-					<a href="/task/{{task.id}}/">
-						<span class="">{{task.title}}</span>
-					</a>
-				</md-card-title-text>
+				<a href="/task/{{task.id}}/"><span class="">{{task.title}}</span></a>
 			</md-card-title>
 		</md-card>
 	  </div>

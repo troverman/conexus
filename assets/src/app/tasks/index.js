@@ -20,5 +20,5 @@ angular.module( 'conexus.tasks', [
 
 .controller( 'TasksCtrl', ['$scope', 'tasks', 'titleService', function TasksController( $scope, tasks, titleService ) {
 	titleService.setTitle('Tasks | conex.us');
-	$scope.tasks = tasks.reverse();
+	$scope.tasks = tasks;
 }]);

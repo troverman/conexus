@@ -210,24 +210,33 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	<div class=\"spacing-25\"></div>\n" +
     "	<div class=\"container\">\n" +
     "	  <div class=\"col-md-3\">\n" +
-    "			<img class=\"avatar\" style=\"margin-top:0em\" src=\"{{currentUser.avatarUrl}}\"/>\n" +
-    "			<h2><a href=\"/member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
-    "			<p>info | wallet</p>\n" +
+    "	  		<md-card style=\"padding:15px;\">\n" +
+    "				<img class=\"avatar\" style=\"margin-top:0em\" src=\"{{currentUser.avatarUrl}}\"/>\n" +
+    "				<h2><a href=\"/member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
+    "				<p>info | wallet</p>\n" +
+    "			</md-card>\n" +
+    "			<md-card ng-repeat=\"project in projects\">\n" +
+    "				<md-card-title>\n" +
+    "					<a href=\"/project/{{project.urlTitle}}/\"><span class=\"\">{{project.title}}</span></a>\n" +
+    "				</md-card-title>\n" +
+    "			</md-card>\n" +
     "	  </div>\n" +
     "	  <div class=\"col-md-9\">\n" +
-    "	    <h2>feed</h2>\n" +
     "	    <!--tasks, work, posts, activity-->\n" +
+    "	    <!--TODO: ACTIVITY-->\n" +
+    "	    <!--<md-card ng-repeat=\"post in messages\">\n" +
+    "			<md-card-title>\n" +
+    "				<a href=\"/post/{{post.id}}/\"><span class=\"\">{{post.title}}</span></a>\n" +
+    "			</md-card-title>\n" +
+    "		</md-card>-->\n" +
     "		<md-card ng-repeat=\"task in tasks\">\n" +
     "			<md-card-title>\n" +
-    "				<md-card-title-text>\n" +
-    "					<a href=\"/task/{{task.id}}/\">\n" +
-    "						<span class=\"\">{{task.title}}</span>\n" +
-    "					</a>\n" +
-    "				</md-card-title-text>\n" +
+    "				<a href=\"/task/{{task.id}}/\"><span class=\"\">{{task.title}}</span></a>\n" +
     "			</md-card-title>\n" +
     "		</md-card>\n" +
     "	  </div>\n" +
     "	</div>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "\n" +
@@ -1354,7 +1363,7 @@ angular.module("project/templates/finance.tpl.html", []).run(["$templateCache", 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
-    "<br><br>\n" +
+    "<br>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "<br><br>\n" +
     "<md-card ng-repeat=\"member in members\" class=\"col-md-3\">\n" +
@@ -1661,7 +1670,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "      </thead>\n" +
     "      <tbody>\n" +
     "          <tr ng-repeat=\"item in work\">\n" +
-    "              <td>{{item.amount}}</td>\n" +
+    "              <td><a href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
     "              <td><a href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
     "              <td><a href=\"stream/{{item.stream || '1'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
     "              <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +
@@ -1734,7 +1743,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "<div class=\"container\">\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"col-md-6\">\n" +
-    "			<h2><a href=\"project/conexus\">transparency</a></h2>\n" +
+    "			<h2><a href=\"project/conexus\">Transparency</a></h2>\n" +
     "			<p>transparent contrubition, equatable representation</p>\n" +
     "			<h3>open balanace sheet</h3>\n" +
     "			<table class=\"table table-inverse table-hover\">\n" +
@@ -1771,7 +1780,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "					</tr>\n" +
     "			    </tbody>\n" +
     "			</table>\n" +
-    "			<p>give to conex</p>\n" +
+    "			<button class=\"btn btn-default log-btn\">give to conex</button>\n" +
     "		</div>\n" +
     "		<div class=\"col-md-6\">\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
@@ -1779,7 +1788,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "	</div>\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"col-md-12\">\n" +
-    "			<h3>stats</h3>\n" +
+    "			<h3>Stats</h3>\n" +
     "			<p>13 companies, 35 collaborators, $8,000,000 monthly revenue</p>\n" +
     "		</div>\n" +
     "	</div>\n" +
