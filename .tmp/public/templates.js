@@ -172,7 +172,7 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "\n" +
     "	<h1>organizations</h1>\n" +
     "	<div ng-repeat=\"project in projects\">\n" +
-    "		<h3><a href=\"/projects/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
+    "		<h3><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
     "	</div>\n" +
     "\n" +
     "	<h1>tasks</h1>\n" +
@@ -231,7 +231,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		</md-card>-->\n" +
     "		<md-card ng-repeat=\"task in tasks\">\n" +
     "			<md-card-title>\n" +
-    "				<a href=\"/task/{{task.id}}/\"><span class=\"\">{{task.title}}</span></a>\n" +
+    "				<a href=\"/task/{{task.id}}\"><span class=\"\">{{task.title}}</span></a>\n" +
     "			</md-card-title>\n" +
     "		</md-card>\n" +
     "	  </div>\n" +
@@ -408,7 +408,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					</div>\n" +
     "					<p style=\"font-size:10px;color:gray\" am-time-ago=\"message.createdAt\"></p>\n" +
     "					<div>\n" +
-    "						<p style=\"display:inline\">{{message.title}}</p>\n" +
+    "						<span style=\"display:inline\" ng-bind-html=\"renderMessage(message.title)\"></span>\n" +
     "        			</div>\n" +
     "		        </md-card-title-text>\n" +
     "		      </md-card-title>\n" +
@@ -1211,7 +1211,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        </a>\n" +
     "        <br>\n" +
     "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"post.updatedAt\"></p>\n" +
-    "        <p>{{post.title}}</p>\n" +
+    "        <span ng-bind-html=\"renderMessage(post.title)\"></span>\n" +
     "    </div>\n" +
     "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +

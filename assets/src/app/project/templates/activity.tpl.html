@@ -20,7 +20,7 @@
         </a>
         <br>
         <p style="color:gray;font-size:10px" am-time-ago="post.updatedAt"></p>
-        <p>{{post.title}}</p>
+        <span ng-bind-html="renderMessage(post.title)"></span>
     </div>
     <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 

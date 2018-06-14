@@ -28,13 +28,19 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', function HomeController( $scope, config, members, messages, projects, SearchModel, tasks, titleService ) {
+.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', function HomeController( $sce, $scope, config, members, messages, projects, SearchModel, tasks, titleService ) {
 	titleService.setTitle('conex.us');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
 	$scope.tasks = tasks;
 	$scope.members = members;
 	$scope.messages = messages;
+
+	$scope.renderMessage = function(message){
+        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+        return $sce.trustAsHtml(replacedText);
+    };
 
 	$scope.searchResults = [];
 	$scope.keyPress = function(searchValue){

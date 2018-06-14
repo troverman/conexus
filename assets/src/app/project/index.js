@@ -161,7 +161,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $scope, config, lodash, MessageModel, messages, project, tasks, titleService, work ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, MessageModel, messages, project, tasks, titleService, work ) {
     titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
@@ -170,14 +170,12 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
 
     $scope.work = work;
-    console.log(work, tasks)
+    console.log(work, tasks);
 
-    $scope.destroyMessage = function(message) {
-        if (message.user.id === config.currentUser.id) {
-            MessageModel.delete(message).then(function(model) {
-                // message has been deleted, and removed from $scope.messages
-            });
-        }
+    $scope.renderMessage = function(message){
+        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+        return $sce.trustAsHtml(replacedText);
     };
 
     $scope.createMessage = function(newMessage) {

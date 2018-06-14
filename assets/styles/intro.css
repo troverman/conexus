@@ -274,19 +274,16 @@ svg {
 		display: none;
 	}
 }
-
 @media only screen and (max-width: 850px) {
 	.intro-container {
 		zoom: 0.7;
 	}
 }
-
 @media only screen and (max-width: 740px) {
 	.intro-container {
 		zoom: 0.6;
 	}
 }
-
 @media only screen and (max-width: 640px) {
 	.intro-container {
 		zoom: 0.55;
@@ -317,7 +314,6 @@ svg {
 		zoom: 0.325;
 	}
 }
-
 @media only screen and (max-width: 788px) {
 	.desktop {
 		visibility:hidden
@@ -327,7 +323,6 @@ svg {
 		visibility:visible
 	}
 }
-
 @media only screen and (max-width: 500px) {
 	.shape--fill {
 	    fill: rgba(0,0,0,0.8);

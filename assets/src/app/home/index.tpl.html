@@ -23,7 +23,7 @@
 		</md-card>-->
 		<md-card ng-repeat="task in tasks">
 			<md-card-title>
-				<a href="/task/{{task.id}}/"><span class="">{{task.title}}</span></a>
+				<a href="/task/{{task.id}}"><span class="">{{task.title}}</span></a>
 			</md-card-title>
 		</md-card>
 	  </div>
@@ -200,7 +200,7 @@
 					</div>
 					<p style="font-size:10px;color:gray" am-time-ago="message.createdAt"></p>
 					<div>
-						<p style="display:inline">{{message.title}}</p>
+						<span style="display:inline" ng-bind-html="renderMessage(message.title)"></span>
         			</div>
 		        </md-card-title-text>
 		      </md-card-title>
