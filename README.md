@@ -36,6 +36,7 @@ contract MultidimensionalToken {
         else {return false;}
     }
 }
+```
 
 ## Governance Protocol
 [gist](https://gist.github.com/troverman/809dba32d8510e7713aaa5c869e607ae)
