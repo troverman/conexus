@@ -24,6 +24,7 @@ module.exports.routes = {
   'get /project/:path': 'HomeController.index',
   'get /project/:path/edit': 'HomeController.index',
   'get /project/:path/channels': 'HomeController.index',//??
+  'get /project/:path/charter': 'HomeController.index',
   'get /project/:path/finance': 'HomeController.index',
   'get /project/:path/members': 'HomeController.index',
   'get /project/:path/tasks': 'HomeController.index',

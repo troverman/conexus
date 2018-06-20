@@ -1,0 +1,40 @@
+<style>md-card{margin:0px; overflow:hidden;}</style>
+<br>
+<button class="btn btn-default log-btn" ng-click="newMotionToggle()">+ Motion</button><br><br>
+<md-card ng-show="newMotionToggleVar">
+    <div style="padding:10px;">
+		<form role="form" ng-submit="createTask(newTask)">
+			<div class="form-group">
+				<input placeholder="Motion Title" type="text" ng-model="newBill.title" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="Motion Content" type="text" ng-model="newTask.content" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="Motion Task Basket" type="text" ng-model="newTask.basket" class="form-control" id="taskBasket">
+			</div>
+			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
+		</form>
+	</div>
+</md-card>
+<table class="table table-striped table-hover">
+  <thead>
+        <tr>
+      		<th>Title</th>
+			<th>Organizational Dimensions</th>
+			<th>Date</th>
+			<th>Vote</th>
+			<th></th>
+        </tr>
+  </thead>
+  <tbody>
+		<tr ng-repeat="bill in bills">
+			<td><h5><a href="https://www.voetr.com/bills">{{bill.title}}</a></h5></td>
+			<td>admin, engineering</td>
+			<td><span am-time-ago="bill.createdAt"></span>30 seconds ago</td>
+			<td><a href="https://www.voetr.com/bills"><button type="submit" class="btn btn-default log-btn">Vote Yes</button></a></td>
+			<td><a href="tasks"><button type="submit" class="btn btn-default log-btn">Vote No</button></a></td>
+		</tr>
+  </tbody>
+</table>
+<p style="text-align:right;font-style:italic"><a STYLE="color:gray" href="https://www.voetr.com">voetr API</a></p>

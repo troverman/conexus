@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/charter.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -207,7 +207,7 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
 angular.module("home/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("home/index.tpl.html",
     "<div ng-show=\"currentUser\">\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
     "	<div class=\"container\">\n" +
     "	  <div class=\"col-md-3\">\n" +
     "	  		<md-card style=\"padding:15px;\">\n" +
@@ -1160,6 +1160,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
+    "    <li><a href=\"/project/{{project.urlTitle}}/charter\">Charter</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/finance\">Ledger</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
     "    <li><a href=\"/project/{{project.urlTitle}}/projects\">Organizations</a></li>\n" +
@@ -1297,6 +1298,51 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "");
+}]);
+
+angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("project/templates/charter.tpl.html",
+    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
+    "<br>\n" +
+    "<button class=\"btn btn-default log-btn\" ng-click=\"newMotionToggle()\">+ Motion</button><br><br>\n" +
+    "<md-card ng-show=\"newMotionToggleVar\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Motion Title\" type=\"text\" ng-model=\"newBill.title\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Motion Content\" type=\"text\" ng-model=\"newTask.content\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Motion Task Basket\" type=\"text\" ng-model=\"newTask.basket\" class=\"form-control\" id=\"taskBasket\">\n" +
+    "			</div>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
+    "		</form>\n" +
+    "	</div>\n" +
+    "</md-card>\n" +
+    "<table class=\"table table-striped table-hover\">\n" +
+    "  <thead>\n" +
+    "        <tr>\n" +
+    "      		<th>Title</th>\n" +
+    "			<th>Organizational Dimensions</th>\n" +
+    "			<th>Date</th>\n" +
+    "			<th>Vote</th>\n" +
+    "			<th></th>\n" +
+    "        </tr>\n" +
+    "  </thead>\n" +
+    "  <tbody>\n" +
+    "		<tr ng-repeat=\"bill in bills\">\n" +
+    "			<td><h5><a href=\"https://www.voetr.com/bills\">{{bill.title}}</a></h5></td>\n" +
+    "			<td>admin, engineering</td>\n" +
+    "			<td><span am-time-ago=\"bill.createdAt\"></span>30 seconds ago</td>\n" +
+    "			<td><a href=\"https://www.voetr.com/bills\"><button type=\"submit\" class=\"btn btn-default log-btn\">Vote Yes</button></a></td>\n" +
+    "			<td><a href=\"tasks\"><button type=\"submit\" class=\"btn btn-default log-btn\">Vote No</button></a></td>\n" +
+    "		</tr>\n" +
+    "  </tbody>\n" +
+    "</table>\n" +
+    "<p style=\"text-align:right;font-style:italic\"><a STYLE=\"color:gray\" href=\"https://www.voetr.com\">voetr API</a></p>\n" +
     "");
 }]);
 

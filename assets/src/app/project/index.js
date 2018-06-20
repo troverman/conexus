@@ -57,6 +57,20 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    .state( 'project.charter', {
+        url: '/charter',
+        views: {
+            "channels": {
+                controller: 'ProjectCharterCtrl',
+                templateUrl: 'project/templates/charter.tpl.html'
+            }
+        },
+        resolve: {
+            bills: [function() {
+                return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
+            }],
+        }
+    })
     .state( 'project.finance', {
         url: '/finance',
         views: {
@@ -254,6 +268,16 @@ angular.module( 'conexus.project', [
                 break;
         }
     });
+
+}])
+
+.controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', function ProjectController( $location, $sailsSocket, $scope, bills, config ) {
+    $scope.currentUser = config.currentUser;
+    $scope.bills = bills;  
+    $scope.newMotionToggleVar = false;
+    $scope.newMotionToggle = function () {
+        $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
+    };
 
 }])
 
