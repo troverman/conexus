@@ -10,7 +10,7 @@ module.exports = {
             required: true,
             unique: true
         },
-        message_count: {
+        totalWork: {
             type: 'number'
         },
         avatarUrl: {

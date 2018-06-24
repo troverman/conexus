@@ -81,11 +81,11 @@ module.exports = {
 		};
 
 		Work.create(model)
-		.exec(function(err, post) {
+		.exec(function(err, work) {
 			if (err) {return console.log(err);}
 			else {
-				Post.publishCreate(post);
-				res.json(post);
+				Work.publishCreate(work);
+				Work.json(work);
 			}
 		});
 	},
