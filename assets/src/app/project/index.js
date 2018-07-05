@@ -354,10 +354,15 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectStreamsCtrl', ['$scope', 'streams', function ProjectController( $scope, streams ) {
+.controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'streams', function ProjectController( $sce, $scope, streams ) {
     $scope.streams = streams;
     $scope.AudioContext = {};
     $scope.videoContext = {};
+
+    $scope.renderMessage = function(stream){
+        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+        return $sce.trustAsHtml(html);
+    };
 
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D

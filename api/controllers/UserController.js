@@ -1,13 +1,14 @@
 module.exports = {
-	getAll: function(req, res) {
-		User.getAll()
-		.spread(function(models) {
-			User.subscribe(req, models);
-			res.json(models);
+
+	getOne: function(req, res) {
+		User.getOne(req.param('id'))
+		.spread(function(model) {
+			User.subscribe(req, model);
+			res.json(model);
 		});
 	},
 
-	getOne: function(req, res) {
+	getSome: function(req, res) {
 		User.getOne(req.param('id'))
 		.spread(function(model) {
 			User.subscribe(req, model);
@@ -55,14 +56,14 @@ module.exports = {
 		});
 	},
 
-	//TODO: REMOVE AND RESET KEYS
+	//TODO: RESET KEYS
 	upload: function(req,res){
 		res.setTimeout(0)
 		var options = {
 			adapter: require("skipper-s3"),
-			key: 'AKIAIC7MJDK462RVROSA',
-		 	secret: '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',
-		 	bucket: 'conexus8',
+			key: sails.config.secret.AMAZON.key,
+		 	secret: sails.config.secret.AMAZON.secret,
+		 	bucket: sails.config.secret.AMAZON.bucket,
 		}
 		var byteCount = req.file('picture')._files[0].stream.byteCount
 		req.file('picture')

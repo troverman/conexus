@@ -1,37 +1,36 @@
 <br>
-<button class="btn btn-default log-btn" ng-click="newEntryToggle()">+ Entry</button><br><br>
-<md-card ng-show="newEntryToggleVar">
-    <div style="padding:10px;">
-		<form role="form" ng-submit="createEntry(newEntry)">
-			<div class="form-group">
-				<input placeholder="task title" type="text" ng-model="newEntry.title" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="task content" type="text" ng-model="newEntry.taskContent" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="task value" type="text" ng-model="newEntry.value" class="form-control" id="taskTitle">
-			</div>
-			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newEntry.title">create</button>
-		</form>
-	</div>
-</md-card>
-
-<br><br>
-<p>TOTAL LEDGER</p>
-<p>ASSET LEDGER</p>
-<p>LIBALITIES LEDGER</p>
-<p>WORK LEDGER</p>
-<!--abstract ogv responsibilities-->
-<p>PROPERTY LEDGER</p>
-<p>BUSINESS LICENSE LEDGER</p>
-<!--tasks ~ finance-->
-<br><br>
-
-
+<!--<button class="btn btn-default log-btn" ng-click="newLedgerToggle()">+ LEDGER</button><br><br>-->
+<!--<ul style="padding:0px;" class="member-tabs">
+	<li><a href="">Total</a></li>
+	<li><a href="">Assets</a></li>
+	<li><a href="">Liabilities</a></li>
+	<li><a href="">Work</a></li>-->
+	<!--abstract gov responsibilities-->
+	<!--<li><a href="">Property</a></li>
+	<li><a href="">Liscense</a></li>-->
+<!--</ul>-->
+<br>
 <div class="">
 
 	<highchart config="chart"></highchart>
+
+	<button class="btn btn-default log-btn" ng-click="newEntryToggle()">+ Entry</button><br><br>
+	<md-card ng-show="newEntryToggleVar">
+	    <div style="padding:10px;">
+			<form role="form" ng-submit="createEntry(newEntry)">
+				<div class="form-group">
+					<input placeholder="task title" type="text" ng-model="newEntry.title" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group">
+					<input placeholder="task content" type="text" ng-model="newEntry.taskContent" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group">
+					<input placeholder="task value" type="text" ng-model="newEntry.value" class="form-control" id="taskTitle">
+				</div>
+				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newEntry.title">create</button>
+			</form>
+		</div>
+	</md-card>
 
 	<table class="table table-inverse table-hover">
 	    <thead>
@@ -53,4 +52,5 @@
 			</tr>
 	    </tbody>
 	</table>
+
 </div>

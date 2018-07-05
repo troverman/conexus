@@ -34,6 +34,9 @@ angular.module( 'conexus.member', [
         resolve: {
             messages: ['member', 'MessageModel', function(member, MessageModel) {
                 return MessageModel.getByUser(member);
+            }],
+            work: ['member', 'WorkModel', function(member, WorkModel) {
+                return WorkModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }]
         }
     })
@@ -116,11 +119,11 @@ angular.module( 'conexus.member', [
     //});
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', function MemberActivityController($sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
     $scope.currentUser = config.currentUser;
     $scope.messages = messages;
-
-
+    $scope.work = work;
+    console.log(work)
     /*$sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {
             case 'created':

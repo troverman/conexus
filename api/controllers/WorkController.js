@@ -85,7 +85,7 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 				Work.publishCreate(work);
-				Work.json(work);
+				res.json(work);
 			}
 		});
 	},
