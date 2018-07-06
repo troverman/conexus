@@ -439,6 +439,13 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "        			</div>\n" +
     "		        </md-card-title-text>\n" +
     "		      </md-card-title>\n" +
+    "		      <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{message.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "              </div>\n" +
     "		    </md-card>\n" +
     "		</div>\n" +
     "	</div>\n" +
