@@ -1,37 +1,35 @@
 module.exports = {
     attributes: {
-        username: {
+        avatarUrl: {
             type: 'string',
-            required: true,
-            unique: true
+            defaultsTo: 'images/avatar.png'
+        },
+        coverUrl: {
+            type: 'string',
         },
         email: {
             type: 'email',
             required: true,
             unique: true
         },
-        totalWork: {
-            type: 'number'
-        },
-        avatarUrl: {
-            type: 'string',
-            defaultsTo: 'images/avatar.png'
-
-        },
-        coverUrl: {
-            type: 'string',
-        },
-        // A User can have many messages
-        messages: {
-            collection: 'message',
-            via: 'user'
-        },
         loggedIn: {
             type: 'boolean',
             defaultsTo: false
         },
-
-        passports : { collection: 'Passport', via: 'user' }
+        messages: {
+            collection: 'message',
+            via: 'user'
+        },
+        passports : { collection: 'Passport', via: 'user' },
+        totalWork: {
+            type: 'string',
+            defaultsTo: 0
+        },
+        username: {
+            type: 'string',
+            required: true,
+            unique: true
+        },
     },
 
     afterCreate: function(model,next){

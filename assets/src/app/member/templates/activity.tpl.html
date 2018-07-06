@@ -1,18 +1,35 @@
 <div class="container">
 	<div class="col-md-12" ng-repeat="work in work">
-        <div style="margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px">
-        	<a href="task/{{work.task.id}}">{{work.task.title}}</a>
-        	<a href="market/{{work.task.tags}}">{{work.task.tags}}</a>
-        	<p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-            <p>{{work.content}}</p>
-            <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
+        <div style="box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;">
+            <div style="padding:16px;">
+                <p><a href="task/{{work.task.id}}">{{work.task.title}}</a></p>
+                <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+            	<p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+                <p>{{work.content}}</p>
+                <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
+            </div>
+            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
+                <a style="color:grey" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
         </div>
     </div>
     <div class="col-md-12" ng-repeat="message in messages">
-        <div style="margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px">
-        	<!--akin to voetr posts-->
-			<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
-			<p>{{message.title}}</p>
+        <div style="box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;">
+            <div style="padding:16px">
+    			<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+    			<p>{{message.title}}</p>
+            </div>
+            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
+                <a style="color:grey" class="pull-right" href="post/{{message.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
         </div>
     </div>
     <div class="spacing-10"></div>

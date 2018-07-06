@@ -84,6 +84,27 @@ module.exports = {
 		.exec(function(err, work) {
 			if (err) {return console.log(err);}
 			else {
+				User.find({id:model.user}).then(function(userModel){
+					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
+					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
+				});
+
+				/*
+				User.find().then(function(userModel){
+					for (x in userModel){
+						Work.find({user:userModel[x].id})
+						.then(function(models) {
+							if (models.length > 0){
+								var sum = 0;
+								for (y in models){sum += parseInt(models[y].amount)}
+								User.update({id:models[0].user}, {totalWork:sum}).then(function(user){});
+								console.log(sum);
+							}
+						});
+					}
+				});
+				*/
+
 				Work.publishCreate(work);
 				res.json(work);
 			}

@@ -882,6 +882,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Organizations</a></li>-->\n" +
     "					<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Streams</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Tasks</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}\">Work</a></li>-->\n" +
     "					<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>\n" +
     "\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
@@ -896,10 +897,10 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "		</div>\n" +
     "		<md-divider></md-divider>\n" +
     "		<div class=\"container\">\n" +
-    "			<div class=\"pull-left\">\n" +
+    "			<div class=\"pull-left\" style=\"text-align:left\">\n" +
     "				<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
-    "				<h5><span class=\"grey\">@{{member.username}}</span></h5>\n" +
-    "				<p>reputation: 888</p>\n" +
+    "				<p>@{{member.username}}</p>\n" +
+    "				<p>reputation: {{member.totalWork}}</p>\n" +
     "			</div>\n" +
     "			<div class=\"pull-right\">\n" +
     "				<div class=\"spacing-10\"></div>\n" +
@@ -927,19 +928,36 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
   $templateCache.put("member/templates/activity.tpl.html",
     "<div class=\"container\">\n" +
     "	<div class=\"col-md-12\" ng-repeat=\"work in work\">\n" +
-    "        <div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px\">\n" +
-    "        	<a href=\"task/{{work.task.id}}\">{{work.task.title}}</a>\n" +
-    "        	<a href=\"market/{{work.task.tags}}\">{{work.task.tags}}</a>\n" +
-    "        	<p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
-    "            <p>{{work.content}}</p>\n" +
-    "            <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "        <div style=\"box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <p><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a></p>\n" +
+    "                <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "            	<p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
+    "                <p>{{work.content}}</p>\n" +
+    "                <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "            </div>\n" +
+    "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"work/{{work.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"col-md-12\" ng-repeat=\"message in messages\">\n" +
-    "        <div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px\">\n" +
-    "        	<!--akin to voetr posts-->\n" +
-    "			<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
-    "			<p>{{message.title}}</p>\n" +
+    "        <div style=\"box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "    			<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
+    "    			<p>{{message.title}}</p>\n" +
+    "            </div>\n" +
+    "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{message.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-10\"></div>\n" +
@@ -1207,10 +1225,17 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "            {{work.user.username}}\n" +
     "        </a>\n" +
     "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
-    "        <a href=\"task/{{work.task.id}}\">{{work.task.title}}</a>\n" +
-    "        <a href=\"market/{{work.task.tags}}\">{{work.task.tags}}</a>\n" +
-    "        <a href=\"task/{{work.task.id}}\">{{work.task.content}}</a>\n" +
+    "        <p><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a></p>\n" +
+    "        <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "        <p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
+    "        <p>{{work.content}}</p>\n" +
+    "    </div>\n" +
+    "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "    </div>\n" +
     "</md-card>\n" +
     "\n" +
@@ -1226,7 +1251,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "    </div>\n" +
     "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a> \n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
     "        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
@@ -1692,19 +1717,35 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "  <h3>{{task.title}}</h3>\n" +
     "  <div style=\"font-style:italic;color:gray\">\n" +
     "    <p><a href=\"/project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
-    "    <p>{{task.tags.split(',')}}</p>\n" +
+    "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "    <p>{{task.content}}</p>\n" +
     "    <p>{{task.status}}</p>\n" +
+    "\n" +
     "    <p>Time: {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
     "    <p>Time Stream: {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
     "    <p>Completion: {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></p>\n" +
-    "    <p>Verification Score (rating by users w reputation): 1</p>\n" +
-    "    <p>Verification Reward (what you get for verification): {{task.verificationIdentifierSet}}, {{task.verificationBountySet}}</p>\n" +
-    "\n" +
+    "    <p>Task Verification Score: 1 </p>\n" +
+    "    <p>Work Verification Reward: {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a></p>\n" +
     "\n" +
     "    <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->\n" +
     "    <!--TOKENS MINTING PER ACTION-->\n" +
     "\n" +
+    "    <br>\n" +
+    "    <p>Tokens</p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onTime\">{{task.id}}+onTime</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onTimeStream\">{{task.id}}+onTimeStream</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onCompletion\">{{task.id}}+onCompletion</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a></p>\n" +
+    "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "\n" +
+    "    <br>\n" +
+    "    <p>Token Liquidity</p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onTime\">{{task.id}}+onTime</a> | {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onTimeStream\">{{task.id}}+onTimeStream</a> | {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onCompletion\">{{task.id}}+onCompletion</a> | {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a> | {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a></p>\n" +
+    "\n" +
+    "    <br><br>\n" +
     "\n" +
     "  </div>\n" +
     "\n" +
@@ -1796,7 +1837,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "			<tr ng-repeat=\"task in tasks\">\n" +
     "				<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
     "				<td>{{task.content}}</td>\n" +
-    "				<td>{{task.tags.split(',')}}</td>\n" +
+    "				<td><span><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></td>\n" +
     "				<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
     "				<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
     "				<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +

@@ -61,6 +61,7 @@
 					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Organizations</a></li>-->
 					<li><a href="member/{{member.username}}">{{followersCount.length}} Streams</a></li>
 					<li><a href="member/{{member.username}}">{{followersCount.length}} Tasks</a></li>
+					<!--<li><a href="member/{{member.username}}">Work</a></li>-->
 					<li><a href="member/{{member.username}}/wallet">Wallet</a></li>
 
 					<li ng-show="currentUser.id != member.id">
@@ -75,10 +76,10 @@
 		</div>
 		<md-divider></md-divider>
 		<div class="container">
-			<div class="pull-left">
+			<div class="pull-left" style="text-align:left">
 				<h2>{{member.firstName}} {{member.lastName}}</h2>
-				<h5><span class="grey">@{{member.username}}</span></h5>
-				<p>reputation: 888</p>
+				<p>@{{member.username}}</p>
+				<p>reputation: {{member.totalWork}}</p>
 			</div>
 			<div class="pull-right">
 				<div class="spacing-10"></div>

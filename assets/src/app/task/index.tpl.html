@@ -3,19 +3,35 @@
   <h3>{{task.title}}</h3>
   <div style="font-style:italic;color:gray">
     <p><a href="/project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-    <p>{{task.tags.split(',')}}</p>
+    <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
     <p>{{task.content}}</p>
     <p>{{task.status}}</p>
+
     <p>Time: {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
     <p>Time Stream: {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
     <p>Completion: {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></p>
-    <p>Verification Score (rating by users w reputation): 1</p>
-    <p>Verification Reward (what you get for verification): {{task.verificationIdentifierSet}}, {{task.verificationBountySet}}</p>
-
+    <p>Task Verification Score: 1 </p>
+    <p>Work Verification Reward: {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a></p>
 
     <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
     <!--TOKENS MINTING PER ACTION-->
 
+    <br>
+    <p>Tokens</p>
+    <p><a href="market/{{task.id}}+onTime">{{task.id}}+onTime</a></p>
+    <p><a href="market/{{task.id}}+onTimeStream">{{task.id}}+onTimeStream</a></p>
+    <p><a href="market/{{task.id}}+onCompletion">{{task.id}}+onCompletion</a></p>
+    <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a></p>
+    <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+
+    <br>
+    <p>Token Liquidity</p>
+    <p><a href="market/{{task.id}}+onTime">{{task.id}}+onTime</a> | {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
+    <p><a href="market/{{task.id}}+onTimeStream">{{task.id}}+onTimeStream</a> | {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
+    <p><a href="market/{{task.id}}+onCompletion">{{task.id}}+onCompletion</a> | {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></p>
+    <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a> | {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a></p>
+
+    <br>
 
   </div>
 
