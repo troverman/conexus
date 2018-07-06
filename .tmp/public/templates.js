@@ -1716,11 +1716,12 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div class=\"container\">\n" +
     "  <h3>{{task.title}}</h3>\n" +
     "  <div style=\"font-style:italic;color:gray\">\n" +
-    "    <p><a href=\"/project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "    <p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
     "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "    <p>{{task.content}}</p>\n" +
     "    <p>{{task.status}}</p>\n" +
     "\n" +
+    "    <br>\n" +
     "    <p>Time: {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
     "    <p>Time Stream: {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
     "    <p>Completion: {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></p>\n" +
@@ -1737,15 +1738,16 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    <p><a href=\"market/{{task.id}}+onCompletion\">{{task.id}}+onCompletion</a></p>\n" +
     "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a></p>\n" +
     "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "    <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
     "\n" +
     "    <br>\n" +
     "    <p>Token Liquidity</p>\n" +
-    "    <p><a href=\"market/{{task.id}}+onTime\">{{task.id}}+onTime</a> | {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
-    "    <p><a href=\"market/{{task.id}}+onTimeStream\">{{task.id}}+onTimeStream</a> | {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
-    "    <p><a href=\"market/{{task.id}}+onCompletion\">{{task.id}}+onCompletion</a> | {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></p>\n" +
-    "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a> | {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onTime\">{{task.id}}+onTime</a> / {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onTime/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onTimeStream\">{{task.id}}+onTimeStream</a> / {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onCompletion\">{{task.id}}+onCompletion</a> / {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}\">MARKET</a></p>\n" +
+    "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onVerification/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
     "\n" +
-    "    <br><br>\n" +
+    "    <br>\n" +
     "\n" +
     "  </div>\n" +
     "\n" +
@@ -1781,7 +1783,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "      <tbody>\n" +
     "          <tr ng-repeat=\"item in work\">\n" +
     "              <td><a href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
-    "              <td>{{item.content}}</td>\n" +
+    "              <td>{{item.content || 'N/A'}}</td>\n" +
     "              <td><a href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
     "              <td><a href=\"stream/{{item.stream || '1'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
     "              <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +

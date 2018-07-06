@@ -2,7 +2,7 @@
 <div class="container">
   <h3>{{task.title}}</h3>
   <div style="font-style:italic;color:gray">
-    <p><a href="/project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+    <p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
     <p>{{task.content}}</p>
     <p>{{task.status}}</p>
@@ -24,13 +24,14 @@
     <p><a href="market/{{task.id}}+onCompletion">{{task.id}}+onCompletion</a></p>
     <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a></p>
     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+    <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
 
     <br>
     <p>Token Liquidity</p>
-    <p><a href="market/{{task.id}}+onTime">{{task.id}}+onTime</a> | {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
-    <p><a href="market/{{task.id}}+onTimeStream">{{task.id}}+onTimeStream</a> | {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
-    <p><a href="market/{{task.id}}+onCompletion">{{task.id}}+onCompletion</a> | {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></p>
-    <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a> | {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a></p>
+    <p><a href="market/{{task.id}}+onTime">{{task.id}}+onTime</a> / {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/{{task.id}}+onTime/{{task.timeIdentifierSet}}">MARKET</a></p>
+    <p><a href="market/{{task.id}}+onTimeStream">{{task.id}}+onTimeStream</a> / {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}">MARKET</a></p>
+    <p><a href="market/{{task.id}}+onCompletion">{{task.id}}+onCompletion</a> / {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a> / <a href="market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}">MARKET</a></p>
+    <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a> / {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a> / <a href="market/{{task.id}}+onVerification/{{task.verificationIdentifierSet}}">MARKET</a></p>
 
     <br>
 
@@ -68,7 +69,7 @@
       <tbody>
           <tr ng-repeat="item in work">
               <td><a href="work/{{item.id}}">{{item.amount}}</a></td>
-              <td>{{item.content}}</td>
+              <td>{{item.content || 'N/A'}}</td>
               <td><a href="member/{{item.user.username}}">{{item.user.username}}</a></td>
               <td><a href="stream/{{item.stream || '1'}}">{{item.stream || 'Not Available'}}</a></td>
               <td><span am-time-ago="item.createdAt"></span></td>
