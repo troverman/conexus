@@ -47,6 +47,7 @@ angular.module( 'conexus.task', [
         $scope.working = false;
         var workModel = {
             amount: $scope.taskTime,
+            content: $scope.workContent,
             identifier: $scope.timeIdentifier,
             project: $scope.task.project,
             task: $scope.task.id,
@@ -54,8 +55,9 @@ angular.module( 'conexus.task', [
             verificationScore: 0
         };
         WorkModel.create(workModel).then(function(model){
-            console.log(model)
+            console.log(model);
             $scope.work.push(model);
+            $scope.workContent = '';
         }); 
         $scope.taskTime=0;
         clearInterval($scope.interval);

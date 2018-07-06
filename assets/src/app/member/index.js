@@ -123,7 +123,7 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     $scope.messages = messages;
     $scope.work = work;
-    console.log(work)
+    console.log(work);
     /*$sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {
             case 'created':

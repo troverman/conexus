@@ -1,9 +1,11 @@
 <div class="container">
 	<div class="col-md-12" ng-repeat="work in work">
         <div style="margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px">
-        	<p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
         	<a href="task/{{work.task.id}}">{{work.task.title}}</a>
+        	<a href="market/{{work.task.tags}}">{{work.task.tags}}</a>
         	<p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+            <p>{{work.content}}</p>
+            <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
         </div>
     </div>
     <div class="col-md-12" ng-repeat="message in messages">

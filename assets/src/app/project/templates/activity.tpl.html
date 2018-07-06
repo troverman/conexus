@@ -8,6 +8,8 @@
         </a>
         <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
         <a href="task/{{work.task.id}}">{{work.task.title}}</a>
+        <a href="market/{{work.task.tags}}">{{work.task.tags}}</a>
+        <a href="task/{{work.task.id}}">{{work.task.content}}</a>
         <p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
     </div>
 </md-card>

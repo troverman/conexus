@@ -928,9 +928,11 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "<div class=\"container\">\n" +
     "	<div class=\"col-md-12\" ng-repeat=\"work in work\">\n" +
     "        <div style=\"margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden;padding:16px\">\n" +
-    "        	<p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
     "        	<a href=\"task/{{work.task.id}}\">{{work.task.title}}</a>\n" +
+    "        	<a href=\"market/{{work.task.tags}}\">{{work.task.tags}}</a>\n" +
     "        	<p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
+    "            <p>{{work.content}}</p>\n" +
+    "            <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"col-md-12\" ng-repeat=\"message in messages\">\n" +
@@ -1206,6 +1208,8 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        </a>\n" +
     "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
     "        <a href=\"task/{{work.task.id}}\">{{work.task.title}}</a>\n" +
+    "        <a href=\"market/{{work.task.tags}}\">{{work.task.tags}}</a>\n" +
+    "        <a href=\"task/{{work.task.id}}\">{{work.task.content}}</a>\n" +
     "        <p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
     "    </div>\n" +
     "</md-card>\n" +
@@ -1479,6 +1483,9 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "				<input placeholder=\"Task Content\" type=\"text\" ng-model=\"newTask.content\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
+    "				<input placeholder=\"Task Tags\" type=\"text\" ng-model=\"newTask.tags\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group\">\n" +
     "				<input placeholder=\"Task Complete Identifier Set\" type=\"text\" ng-model=\"newTask.completeIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
@@ -1506,6 +1513,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "        <tr>\n" +
     "      		<th>Title</th>\n" +
     "			<th>Content</th>\n" +
+    "			<th>Tags</th>\n" +
     "			<th>Bounty</th>\n" +
     "			<th>Date</th>\n" +
     "			<th></th>\n" +
@@ -1515,6 +1523,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "		<tr ng-repeat=\"task in tasks\">\n" +
     "			<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
     "			<td>{{task.content}}</td>\n" +
+    "			<td>{{task.tags}}</td>\n" +
     "			<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
     "			<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
     "			<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +
@@ -1683,6 +1692,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "  <h3>{{task.title}}</h3>\n" +
     "  <div style=\"font-style:italic;color:gray\">\n" +
     "    <p><a href=\"/project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "    <p>{{task.tags.split(',')}}</p>\n" +
     "    <p>{{task.content}}</p>\n" +
     "    <p>{{task.status}}</p>\n" +
     "    <p>Time: {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
@@ -1709,6 +1719,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "    <button ng-show=\"!working\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"start()\">Start Work</button>\n" +
     "    <!--form-->\n" +
+    "    <input ng-show=\"working\" type=\"text\" placeholder=\"Content\" ng-model=\"workContent\" class=\"form-control\">\n" +
     "    <button ng-show=\"working\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
     "  </div>\n" +
     "\n" +
@@ -1718,6 +1729,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "      <thead>\n" +
     "          <tr>\n" +
     "              <th>Time</th>\n" +
+    "              <th>Content</th>\n" +
     "              <th>Member</th>\n" +
     "              <th>Stream</th>\n" +
     "              <th>Date</th>\n" +
@@ -1728,6 +1740,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "      <tbody>\n" +
     "          <tr ng-repeat=\"item in work\">\n" +
     "              <td><a href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
+    "              <td>{{item.content}}</td>\n" +
     "              <td><a href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
     "              <td><a href=\"stream/{{item.stream || '1'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
     "              <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +
@@ -1773,6 +1786,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "		    <tr>\n" +
     "		  		<th>Title</th>\n" +
     "				<th>Content</th>\n" +
+    "				<th>Tags</th>\n" +
     "				<th>Bounty</th>\n" +
     "				<th>Date</th>\n" +
     "				<th></th>\n" +
@@ -1782,6 +1796,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "			<tr ng-repeat=\"task in tasks\">\n" +
     "				<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
     "				<td>{{task.content}}</td>\n" +
+    "				<td>{{task.tags.split(',')}}</td>\n" +
     "				<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
     "				<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
     "				<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +

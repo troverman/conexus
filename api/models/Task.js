@@ -34,7 +34,7 @@ module.exports = {
         },
         tags:{
             type: 'string',
-        }
+        },
         timeBountySet: {
             type: 'string',
         },
