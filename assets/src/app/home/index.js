@@ -23,18 +23,22 @@ angular.module( 'conexus.home', [
 			tasks: ['TaskModel', function(TaskModel) {
 				return TaskModel.getAll();
 			}],
+			work: ['WorkModel', function(WorkModel) {
+                return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
+            }]
 
 		}
 	});
 }])
 
-.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', function HomeController( $sce, $scope, config, members, messages, projects, SearchModel, tasks, titleService ) {
+.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', 'work', function HomeController( $sce, $scope, config, members, messages, projects, SearchModel, tasks, titleService, work ) {
 	titleService.setTitle('conex.us');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
 	$scope.tasks = tasks;
 	$scope.members = members;
 	$scope.messages = messages;
+	$scope.work = work;
 
 	$scope.renderMessage = function(message){
         var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');

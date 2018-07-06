@@ -395,8 +395,35 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
+    "	\n" +
+    "	<!--TEMP-->\n" +
+    "	<div class=\"container\">\n" +
+    "		<div ng-repeat=\"work in work\">\n" +
+    "	        <div style=\"box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;\">\n" +
+    "	            <div style=\"padding:16px;\">\n" +
+    "					<div>\n" +
+    "						<a style=\"display:inline\" href=\"/member/{{work.user.username}}\">{{work.user.username}}</a>\n" +
+    "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "		                <a style=\"display:inline\" href=\"task/{{work.task.id}}\">{{work.task.title}}</a>\n" +
+    "					</div>\n" +
+    "	                <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "	            	<p>{{work.amount}}, <a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
+    "	                <p>{{work.content}}</p>\n" +
+    "	                <p style=\"color:gray;font-size:10px\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "	                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "	                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "	                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-share\"></i> share </a>\n" +
+    "	                <a style=\"color:grey\" class=\"pull-right\" href=\"work/{{work.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
+    "    </div>\n" +
+    "    <!--TEMP-->\n" +
     "\n" +
-    "	<div id=\"\">\n" +
+    "	<div>\n" +
     "		<div class=\"container\">\n" +
     "		    <md-card ng-repeat=\"message in messages.slice(0,15)\">\n" +
     "		      <md-card-title>\n" +
