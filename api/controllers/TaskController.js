@@ -42,8 +42,11 @@ module.exports = {
 			project: req.param('project'),
 			content: req.param('content'),
 
+
 			completeIdentifierSet: req.param('completeIdentifierSet'),
 			completeBountySet: req.param('completeBountySet'),
+
+			tags: req.param('tags'),
 
 			timeIdentifierSet: req.param('timeIdentifierSet'),
 			timeBountySet: req.param('timeBountySet'),

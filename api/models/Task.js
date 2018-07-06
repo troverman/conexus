@@ -32,6 +32,9 @@ module.exports = {
         completeIdentifierSet: {
             type: 'string',
         },
+        tags:{
+            type: 'string',
+        }
         timeBountySet: {
             type: 'string',
         },

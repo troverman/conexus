@@ -3,6 +3,7 @@
   <h3>{{task.title}}</h3>
   <div style="font-style:italic;color:gray">
     <p><a href="/project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+    <p>{{task.tags.split(',')}}</p>
     <p>{{task.content}}</p>
     <p>{{task.status}}</p>
     <p>Time: {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
