@@ -16,6 +16,15 @@ module.exports = {
 		});
 	},
 
+	getAll: function(req, res) {
+		User.getAll()
+		.spread(function(models) {
+			User.watch(req);
+			User.subscribe(req, models);
+			res.json(models);
+		})
+	},
+
 	getByUsername: function(req, res) {
 		User.find()
 		.where({username: req.param('path')})
