@@ -2,6 +2,7 @@
 <div class="container">
   <h3>{{task.title}}</h3>
   <div style="font-style:italic;color:gray">
+    
     <p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
     <p>{{task.content}}</p>
@@ -25,6 +26,7 @@
     <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a></p>
     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
     <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+    <p><a href="market/general">general</a></p>
 
     <br>
     <p>Token Liquidity</p>
@@ -34,7 +36,6 @@
     <p><a href="market/{{task.id}}+onVerification">{{task.id}}+onVerification</a> / {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a> / <a href="market/{{task.id}}+onVerification/{{task.verificationIdentifierSet}}">MARKET</a></p>
 
     <br>
-
   </div>
 
   <div>

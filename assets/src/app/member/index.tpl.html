@@ -44,8 +44,6 @@
 .profile-header{background-color:white;}
 </style>
 
-
-
 <div ui-view="member">
 	<div class="profile-header">
 		<div style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
@@ -78,14 +76,18 @@
 		<div class="container">
 			<div class="pull-left" style="text-align:left">
 				<h2>{{member.firstName}} {{member.lastName}}</h2>
-				<p>@{{member.username}}</p>
-				<p>reputation: {{member.totalWork}}</p>
+				<h5>@{{member.username}}</h5>
+				<p>{{member.totalWork}} | total reputation</p>
 			</div>
 			<div class="pull-right">
-				<div class="spacing-10"></div>
+
+				<!--<h2>{{member.totalWork}} | total work</h2>-->
+				<!--<input type="text" placeholder="Reputation" ng-model="reputationLookup" class="form-control">-->
+
 				<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
 				<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
 				<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
+
 			</div>
 			<div class="spacing-10"></div>
 		</div>

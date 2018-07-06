@@ -865,8 +865,6 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     ".profile-header{background-color:white;}\n" +
     "</style>\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "<div ui-view=\"member\">\n" +
     "	<div class=\"profile-header\">\n" +
     "		<div style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
@@ -899,14 +897,18 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "		<div class=\"container\">\n" +
     "			<div class=\"pull-left\" style=\"text-align:left\">\n" +
     "				<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
-    "				<p>@{{member.username}}</p>\n" +
-    "				<p>reputation: {{member.totalWork}}</p>\n" +
+    "				<h5>@{{member.username}}</h5>\n" +
+    "				<p>{{member.totalWork}} | total reputation</p>\n" +
     "			</div>\n" +
     "			<div class=\"pull-right\">\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "				<!--<h2>{{member.totalWork}} | total work</h2>-->\n" +
+    "				<!--<input type=\"text\" placeholder=\"Reputation\" ng-model=\"reputationLookup\" class=\"form-control\">-->\n" +
+    "\n" +
     "				<a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><span class=\"grey facebook-icon\"><i class=\"fa fa-facebook\"></i> Facebook</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><span class=\"grey twitter-icon\"><i class=\"fa fa-twitter\"></i> Twitter</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><span class=\"grey google-icon\"><i class=\"fa fa-google\"></i> Google</span></a>\n" +
+    "\n" +
     "			</div>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
     "		</div>\n" +
@@ -1716,6 +1718,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div class=\"container\">\n" +
     "  <h3>{{task.title}}</h3>\n" +
     "  <div style=\"font-style:italic;color:gray\">\n" +
+    "    \n" +
     "    <p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
     "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "    <p>{{task.content}}</p>\n" +
@@ -1739,6 +1742,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a></p>\n" +
     "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "    <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "    <p><a href=\"market/general\">general</a></p>\n" +
     "\n" +
     "    <br>\n" +
     "    <p>Token Liquidity</p>\n" +
@@ -1748,7 +1752,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    <p><a href=\"market/{{task.id}}+onVerification\">{{task.id}}+onVerification</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onVerification/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
     "\n" +
     "    <br>\n" +
-    "\n" +
     "  </div>\n" +
     "\n" +
     "  <div>\n" +
