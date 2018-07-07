@@ -8,7 +8,7 @@
         </a>
         <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
         <p><a href="task/{{work.task.id}}">{{work.task.title}}</a></p>
-        <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+        <td><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></td>
         <p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
         <p>{{work.content}}</p>
     </div>

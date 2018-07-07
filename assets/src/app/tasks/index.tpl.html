@@ -27,7 +27,7 @@
 			<tr ng-repeat="task in tasks">
 				<td><h5><a href="task/{{task.id}}">{{task.title}}</a></h5></td>
 				<td>{{task.content}}</td>
-				<td><span><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></td>
+                <td><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></td>
 				<td>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></td>
 				<td><span  am-time-ago="task.createdAt"></span></td>
 				<td><a href="task/{{task.id}}"><button type="submit" class="btn btn-default log-btn">Start Work</button></a></td>

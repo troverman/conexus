@@ -24,14 +24,14 @@ angular.module( 'conexus.home', [
 				return TaskModel.getAll();
 			}],
 			work: ['WorkModel', function(WorkModel) {
-                return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return WorkModel.getSome('', '', 15, 0, 'createdAt DESC');
             }]
 
 		}
 	});
 }])
 
-.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', 'work', function HomeController( $sce, $scope, config, members, messages, projects, SearchModel, tasks, titleService, work ) {
+.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $sce, $scope, config, members, messages, projects, SearchModel, tasks, titleService, UserModel, work ) {
 	titleService.setTitle('conex.us');
 	$scope.currentUser = config.currentUser;
 	$scope.projects = projects;
@@ -39,6 +39,12 @@ angular.module( 'conexus.home', [
 	$scope.members = members;
 	$scope.messages = messages;
 	$scope.work = work;
+
+	if ($scope.currentUser){
+		UserModel.getByUsername($scope.currentUser.username).then(function(member){
+			$scope.member = member;
+		});
+	}
 
 	$scope.renderMessage = function(message){
         var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');

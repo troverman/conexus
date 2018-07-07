@@ -5,7 +5,14 @@
 	  		<md-card style="padding:15px;">
 				<img class="avatar" style="margin-top:0em" src="{{currentUser.avatarUrl}}"/>
 				<h2><a href="/member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
-				<p>info | wallet</p>
+				<p>{{member.totalWork}}</p>
+				<!--<p>{{member.walletAddress}}</p>-->
+				<!--<p>info | wallet</p>-->
+			</md-card>
+			<md-card>
+				<md-card-title>
+					<h5>Organizations</h5>
+				</md-card-title>
 			</md-card>
 			<md-card ng-repeat="project in projects">
 				<md-card-title>
@@ -16,15 +23,41 @@
 	  <div class="col-md-9">
 	    <!--tasks, work, posts, activity-->
 	    <!--TODO: ACTIVITY-->
-	    <!--<md-card ng-repeat="post in messages">
+	    <md-card ng-repeat="post in messages">
 			<md-card-title>
-				<a href="/post/{{post.id}}/"><span class="">{{post.title}}</span></a>
+				<md-card-title-text>
+					<div>
+						<a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a>
+						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
+						<a style="display:inline" href="/project/{{post.project.urlTitle}}"><span class="">{{post.project.title}}</span></a>
+					</div>
+					<div>
+						<span style="display:inline" ng-bind-html="renderMessage(post.title)"></span>
+	    			</div>
+				</md-card-title-text>
 			</md-card-title>
-		</md-card>-->
+			<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
+                <a style="color:grey" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+		</md-card>
 		<md-card ng-repeat="task in tasks">
-			<md-card-title>
+			<div style="padding:16px;">
 				<a href="/task/{{task.id}}"><span class="">{{task.title}}</span></a>
-			</md-card-title>
+				<br>
+				<a href="/project/{{task.project.urlTitle}}"><span class="">{{task.project}}</span></a>
+				<button type="submit" class="btn btn-default log-btn" style="width:100%">create</button>
+			</div>
+			<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="task/{{task.id}}" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
+                <a style="color:grey" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
 		</md-card>
 	  </div>
 	</div>
@@ -198,7 +231,7 @@
 						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
 		                <a style="display:inline" href="task/{{work.task.id}}">{{work.task.title}}</a>
 					</div>
-	                <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+        			<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
 	            	<p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
 	                <p>{{work.content}}</p>
 	                <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
