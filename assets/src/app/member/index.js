@@ -119,7 +119,7 @@ angular.module( 'conexus.member', [
     //});
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $scope, $sce, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
     $scope.currentUser = config.currentUser;
     $scope.messages = messages;
     $scope.work = work;
