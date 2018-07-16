@@ -27,7 +27,7 @@
     <p><a href="market/{{task.id}}+onCompletion">onCompletion+{{task.id}}</a></p>
     <p><a href="market/{{task.id}}+onVerification">onVerification+{{task.id}}</a></p>
     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}} </a></p>
-    <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.id}})</a></p>
+    <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.project.id}})</a></p>
     <p><a href="market/general">general</a></p>
 
     <br>

@@ -1818,7 +1818,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
     "    <p><a href=\"market/{{task.id}}+onVerification\">onVerification+{{task.id}}</a></p>\n" +
     "    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}} </a></p>\n" +
-    "    <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.id}})</a></p>\n" +
+    "    <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.project.id}})</a></p>\n" +
     "    <p><a href=\"market/general\">general</a></p>\n" +
     "\n" +
     "    <br>\n" +

@@ -1,6 +1,10 @@
 angular.module('models.work', ['lodash', 'services', 'sails.io',])
 
 .service('WorkModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
+
+    this.getOne = function(model) {
+        return model;
+    };
     
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};

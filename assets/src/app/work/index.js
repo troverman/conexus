@@ -18,13 +18,12 @@ angular.module( 'conexus.work', [
     });
 }])
 
-.controller( 'WorkController', ['$location', '$scope', 'config', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function WorkController( $location, $scope, config, task, TaskModel, titleService, work, WorkModel) {
+.controller( 'WorkController', ['$location', '$scope', 'config', 'titleService', 'work', 'WorkModel', function WorkController( $location, $scope, config, titleService, work, WorkModel) {
     titleService.setTitle('Task | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
 
     $scope.reputationMultiplier = 1;
-    $scope.task = task;
     $scope.taskTime = 0;
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
