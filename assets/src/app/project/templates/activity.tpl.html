@@ -10,7 +10,7 @@
         <p><a href="task/{{work.task.id}}">{{work.task.title}}</a></p>
         <td><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></td>
         <p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-        <p>{{work.content}}</p>
+        <span ng-bind-html="renderMessage(work.content)"></span>
     </div>
     <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 

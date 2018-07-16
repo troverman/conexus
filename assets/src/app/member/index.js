@@ -119,11 +119,18 @@ angular.module( 'conexus.member', [
     //});
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $scope, $sce, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
     $scope.currentUser = config.currentUser;
     $scope.messages = messages;
     $scope.work = work;
     console.log(work);
+
+    $scope.renderMessage = function(message){
+        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+        return $sce.trustAsHtml(replacedText);
+    };
+
     /*$sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {
             case 'created':

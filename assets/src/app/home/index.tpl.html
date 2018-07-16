@@ -208,7 +208,7 @@
 	                        <a class="btn btn-social btn-google" ng-click=""><i class="fa fa-google"></i> Google</a>
 	                    </div>
 						<br><hr>
-	                    <div class="">
+	                    <div style="text-align:center">
 	                        <a href="/login">Already have an account?</a>
 	                    </div>
 	                </form>
@@ -233,7 +233,9 @@
 					</div>
         			<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
 	            	<p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-	                <p>{{work.content}}</p>
+	                <div>
+						<span style="display:inline" ng-bind-html="renderMessage(work.content)"></span>
+        			</div>
 	                <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
 	            </div>
 	            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">

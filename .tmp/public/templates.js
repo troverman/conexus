@@ -370,7 +370,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	-->\n" +
     "\n" +
     "\n" +
-    "	<div style=\"background-color:black\">\n" +
+    "	<!--<div style=\"background-color:black\">\n" +
     "		<div class=\"container\">\n" +
     "			<div class=\"row\">\n" +
     "		    	<div class=\"col-md-6\">\n" +
@@ -385,14 +385,14 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
+    "	<div class=\"spacing-50\"></div>-->\n" +
     "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
     "	    	<div class=\"col-lg-6 col-md-6\" style=\"text-align:right\">\n" +
     "				<!--<img style=\"max-height:400px\" src=\"/images/loading.gif\">-->\n" +
     "	        </div>\n" +
-    "	        <div class=\"col-lg-6 col-md-6\">\n" +
+    "	        <div class=\"col-lg-12 col-md-12\">\n" +
     "				<h3><b>Join the community</b></h3><hr>\n" +
     "	            <div class=\"login-form\">\n" +
     "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
@@ -418,7 +418,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><i class=\"fa fa-google\"></i> Google</a>\n" +
     "	                    </div>\n" +
     "						<br><hr>\n" +
-    "	                    <div class=\"\">\n" +
+    "	                    <div style=\"text-align:center\">\n" +
     "	                        <a href=\"/login\">Already have an account?</a>\n" +
     "	                    </div>\n" +
     "	                </form>\n" +
