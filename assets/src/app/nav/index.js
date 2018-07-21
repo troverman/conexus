@@ -8,6 +8,7 @@ angular.module( 'conexus.nav', [
     });
 }])
 
+//TODO: IMPROVE | ON EXIT CLICK CLOSE NAV
 .directive('navCollapse', function () {
     return {
         restrict: 'A',

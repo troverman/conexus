@@ -11,6 +11,7 @@ angular.module( 'conexus.tasks', [
 			}
 		},
         resolve: {
+        	//TODO: GETSOME
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getAll();
             }],
@@ -21,4 +22,7 @@ angular.module( 'conexus.tasks', [
 .controller( 'TasksCtrl', ['$scope', 'tasks', 'titleService', function TasksController( $scope, tasks, titleService ) {
 	titleService.setTitle('Tasks | conex.us');
 	$scope.tasks = tasks;
+	
+	//TODO: FILTERS ETC
+
 }]);

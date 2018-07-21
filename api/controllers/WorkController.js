@@ -53,6 +53,8 @@ module.exports = {
 			});
 		}
 
+		//else if (req.query.work){}
+
 		else{
 			Work.find({})
 			.limit(limit)
@@ -113,7 +115,7 @@ module.exports = {
 
 	update: function(req, res) {
 		var id = req.param('id');
-		//OR CREATE VERIFICATION..
+		//AND CREATE VERIFICATION..
 		var model = {verificationScore: 100};
 		Work.update({id: id}, model).exec(function afterwards(err, updated){
 		  if (err) {

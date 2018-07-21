@@ -37,11 +37,11 @@
 				</md-card-title-text>
 			</md-card-title>
 			<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
                 <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
-                <a style="color:grey" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
             </div>
 		</md-card>
 		<md-card ng-repeat="task in tasks">
@@ -52,11 +52,11 @@
 				<button type="submit" class="btn btn-default log-btn" style="width:100%">create</button>
 			</div>
 			<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
                 <a style="padding:5px;color:grey" href="task/{{task.id}}" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
-                <a style="color:grey" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="color:grey" class="pull-right" href="task/{{task.id}}"><i class="fa fa-link grey"></i></a>
             </div>
 		</md-card>
 	  </div>
@@ -252,17 +252,17 @@
 
 	<div>
 		<div class="container">
-		    <md-card ng-repeat="message in messages.slice(0,15)">
+		    <md-card ng-repeat="post in posts.slice(0,15)">
 		      <md-card-title>
 		        <md-card-title-text>
 		        	<div>
-						<a style="display:inline" href="/member/{{message.user.username}}">{{message.user.username}}</a>
+						<a style="display:inline" href="/member/{{post.user.username}}">{{post.user.username}}</a>
 						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-						<a style="display:inline" href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
+						<a style="display:inline" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
 					</div>
-					<p style="font-size:10px;color:gray" am-time-ago="message.createdAt"></p>
+					<p style="font-size:10px;color:gray" am-time-ago="post.createdAt"></p>
 					<div>
-						<span style="display:inline" ng-bind-html="renderMessage(message.title)"></span>
+						<span style="display:inline" ng-bind-html="renderMessage(post.title)"></span>
         			</div>
 		        </md-card-title-text>
 		      </md-card-title>
@@ -271,7 +271,7 @@
                 <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
                 <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
-                <a style="color:grey" class="pull-right" href="post/{{message.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
               </div>
 		    </md-card>
 		</div>

@@ -51,6 +51,6 @@ angular.module( 'conexus.search', [
         SearchModel.search(searchValue).then(function(models){
             $scope.searchResults = models;
         });
-    }
+    };
    
 }]);

@@ -15,6 +15,7 @@ angular.module( 'conexus.member', [
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
             }],
+            //TODO: REFACTOR
             followersCount: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getByUser(member);
             }],
@@ -32,6 +33,7 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
+            //TODO: MODEL | POST | GET SOME
             messages: ['member', 'MessageModel', function(member, MessageModel) {
                 return MessageModel.getByUser(member);
             }],
@@ -49,6 +51,7 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
+            //TODO: REFACTOR
             followers: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getByUser(member);
             }],
@@ -63,6 +66,7 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
+            //TODO: REFACTOR
             following: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getByUser(member);
             }],
@@ -86,18 +90,17 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, seoService, titleService) {
 	$scope.currentUser = config.currentUser;
-    $scope.member = member;
-    titleService.setTitle($scope.member.username + ' | conex.us');
-    //seoService
-    if(!$scope.member){$location.path('/')}
+    
+    //TODO: PART OF MEMBER
     $scope.followersCount = followersCount;
     $scope.followingCount = followingCount;
-
     $scope.newFollower = {};
+    $scope.member = member;
+    titleService.setTitle($scope.member.username + ' | conex.us');
 
-    $scope.unfollow = function(member) {
-        FollowerModel.delete(member);
-    };
+    //TODO: seoService
+
+    if(!$scope.member){$location.path('/')}
 
     $scope.follow = function(newModel) {
         $scope.newFollower.followed = $scope.member;
@@ -107,23 +110,32 @@ angular.module( 'conexus.member', [
         });
     };
 
-    //$sailsSocket.subscribe('follower', function (envelope) {
-    //    switch(envelope.verb) {
-    //        case 'created':
-                //$scope.followers.unshift(envelope.data);
-    //            break;
-    //        case 'destroyed':
-    //            //lodash.remove($scope.followers, {id: envelope.id});
-                //break;
-    //    }
-    //});
+    $scope.unfollow = function(member) {
+        FollowerModel.delete(member);
+    };
+
+    //TODO: SOCKET | WEB3
+    /*
+    $sailsSocket.subscribe('follower', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                  $scope.followers.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.followers, {id: envelope.id});
+                break;
+        }
+    });
+    */
 
 }])
 .controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
     $scope.currentUser = config.currentUser;
+
+    //TODO: ACTIVITY FEED ~ BLEND OF MODELS
+    //TODO: POST
     $scope.messages = messages;
     $scope.work = work;
-    console.log(work);
 
     $scope.renderMessage = function(message){
         var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
@@ -131,16 +143,18 @@ angular.module( 'conexus.member', [
         return $sce.trustAsHtml(replacedText);
     };
 
-    /*$sailsSocket.subscribe('message', function (envelope) {
+    /*
+    $sailsSocket.subscribe('message', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                //$scope.followers.unshift(envelope.data);
+                $scope.followers.unshift(envelope.data);
                 break;
             case 'destroyed':
-                //lodash.remove($scope.followers, {id: envelope.id});
+                lodash.remove($scope.followers, {id: envelope.id});
                 break;
         }
-    });*/
+    });
+    */
 
 }])
 
@@ -148,16 +162,18 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     $scope.followers = followers;
 
-    /*$sailsSocket.subscribe('follower', function (envelope) {
+    /*
+    $sailsSocket.subscribe('follower', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                //$scope.followers.unshift(envelope.data);
+                $scope.followers.unshift(envelope.data);
                 break;
             case 'destroyed':
-                //lodash.remove($scope.followers, {id: envelope.id});
+                lodash.remove($scope.followers, {id: envelope.id});
                 break;
         }
-    });*/
+    });
+    */
 
 }])
 
@@ -166,22 +182,23 @@ angular.module( 'conexus.member', [
     $scope.following = following;
     console.log(following)
 
-    /*$sailsSocket.subscribe('follower', function (envelope) {
+    /*
+    $sailsSocket.subscribe('follower', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                //$scope.followers.unshift(envelope.data);
+                $scope.followers.unshift(envelope.data);
                 break;
             case 'destroyed':
-                //lodash.remove($scope.followers, {id: envelope.id});
+                lodash.remove($scope.followers, {id: envelope.id});
                 break;
         }
-    });*/
+    });
+    */
 
 }])
 
 .controller( 'MemberWalletCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberWalletController($sailsSocket, $scope, $stateParams, config, lodash, member) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
-
 }]);
 

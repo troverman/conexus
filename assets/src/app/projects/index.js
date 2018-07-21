@@ -11,6 +11,7 @@ angular.module( 'conexus.projects', [
 			}
 		},
 		resolve: {
+            //TODO: GET SOME
             projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.getAll();
             }]
@@ -21,19 +22,21 @@ angular.module( 'conexus.projects', [
 .controller( 'ProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'titleService', function ProjectsController( $sailsSocket, $scope, config, lodash, ProjectModel, projects, titleService ) {
 	titleService.setTitle('projects | conex.us');
     $scope.currentUser = config.currentUser;
-    $scope.projects = projects;
     $scope.newProject = {};
     $scope.newProjectToggleVar = false;
+    $scope.projects = projects;
+
+    //TODO: FILTERS ETC
+
+    $scope.createProject = function(newProject) {
+        $scope.newProject.user = $scope.currentUser.id;
+        ProjectModel.create($scope.newProject).then(function(model) {
+            $scope.newProject = {};
+        });
+    };
 
     $scope.newProjectToggle = function () {
         $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
-    };
-
-    $scope.createProject = function(newProject) {
-        newProject.user = config.currentUser.id;
-        ProjectModel.create(newProject).then(function(model) {
-            $scope.newProject = {};
-        });
     };
 
     $sailsSocket.subscribe('project', function (envelope) {

@@ -12,15 +12,19 @@ angular.module( 'conexus.home', [
 		},
 		resolve:{
 			projects: ['ProjectModel', function(ProjectModel) {
+				//TODO: GET SOME
 				return ProjectModel.getAll();
 			}],
 			members: ['UserModel', function(UserModel){
+				//TODO: GET SOME
 				return UserModel.getAll();
 			}],
-			messages: ['MessageModel', function(MessageModel){
+			posts: ['MessageModel', function(MessageModel){
+				//TODO: GET SOME | RENAME TO POSTS
 				return MessageModel.getAll();
 			}],
 			tasks: ['TaskModel', function(TaskModel) {
+				//TODO: GET SOME
 				return TaskModel.getAll();
 			}],
 			work: ['WorkModel', function(WorkModel) {
@@ -31,32 +35,63 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'messages', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $sce, $scope, config, members, messages, projects, SearchModel, tasks, titleService, UserModel, work ) {
+.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $sce, $scope, config, members, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
 	titleService.setTitle('conex.us');
+	
 	$scope.currentUser = config.currentUser;
-	$scope.projects = projects;
-	$scope.tasks = tasks;
+	$scope.newPost = {};
 	$scope.members = members;
-	$scope.messages = messages;
+	$scope.posts = posts;
+	$scope.projects = projects;
+	$scope.newReaction = {};
+	$scope.searchResults = [];
+	$scope.tasks = tasks;
 	$scope.work = work;
 
+	//TODO: REFACTOR
 	if ($scope.currentUser){
 		UserModel.getByUsername($scope.currentUser.username).then(function(member){
 			$scope.member = member;
 		});
 	}
 
-	$scope.renderMessage = function(message){
-        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-        return $sce.trustAsHtml(replacedText);
+	//TODO: MODEL | CREATE REACTION | UPDATE POST
+    $scope.createReaction = function(post, type){
+    	$scope.newReaction.post = post.id;
+    	$scope.newReaction.type = type;
+    	//TODO: MODEL | CREATE REACTION
+    	//Reaction.create(newReaction);
+    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+    	if (type =='plus'){$scope.posts[index].plusCount++}
+    	if (type =='minus'){$scope.posts[index].minusCount++;}
+    	//TODO: UPDATE POST
     };
 
-	$scope.searchResults = [];
+    //TODO: MODEL | CREATE | NESTED?
+	$scope.createPost = function(post){
+		$scope.newPost.parent = post.id;
+		//TODO: MODEL |CREATE
+		//PostModel.create($scope.newPost);
+		//TODO: NESTED RENDERING N STUFF
+	};
+
+	//TODO: NESTED RENDERING N STUFF
+
 	$scope.keyPress = function(searchValue){
 		SearchModel.search(searchValue).then(function(models){
 			$scope.searchResults = models;
 		});
 	};
+
+	$scope.renderMessage = function(post){
+        var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+        return $sce.trustAsHtml(replacedText);
+    };
+
+    $scope.reply = function(post){
+    	$scope.post.reply = true;
+    	$scope.newPost.parent = post.id;
+    };
 
 }]);

@@ -11,6 +11,7 @@ angular.module( 'conexus.task', [
             }
         },
         resolve: {
+            //TODO: GETSOME?
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
                 return TaskModel.getOne($stateParams.path);
             }],
@@ -77,10 +78,8 @@ angular.module( 'conexus.task', [
         else{$location.path('/login')}
     };
 
-
-
+    //TODO: STREAM??
     $scope.startStream = function(){
-
 
         var cameraPreview = document.getElementById('camera-preview');
         //testing out streaming! :D
@@ -128,6 +127,6 @@ angular.module( 'conexus.task', [
 
     };
 
-
+    //TODO: WEBSOCKETS
 
 }]);

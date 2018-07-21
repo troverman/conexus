@@ -11,6 +11,7 @@ angular.module( 'conexus.post', [
             }
         },
         resolve: {
+            //TODO: MERGE WITH MESSAGE | GET SOME
             posts: function(PostModel) {
                 return PostModel.getAll();
             }
@@ -23,28 +24,17 @@ angular.module( 'conexus.post', [
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.posts = posts;
-    $scope.newPostVote = {};
 
-    $scope.destroyPost = function(post) {
-        if (post.user.id.toString() === config.currentUser.id) {
-            PostModel.delete(post).then(function(model) {
-            });
-        }
+    //TODO
+    $scope.createPost = function(post) {
+       
     };
 
-    $scope.createPost = function(newPost) {
-        newPost.user = config.currentUser.id;
-        PostModel.create(newPost).then(function(model) {
-            $scope.newPost = {};
-        });
-    };
+    //TODO: NESTED ISH | LOOK AT VOET
 
-    $scope.createVote = function(post, newPostVote) {
-        newPostVote.post = post;
-        newPostVote.user = config.currentUser;
-        PostVoteModel.create(newPostVote).then(function(model) {
-            $scope.newPostVote = {};
-        });
+    //TODO
+    $scope.createReaction = function(post, type) {
+       
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

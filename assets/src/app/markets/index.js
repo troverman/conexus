@@ -10,6 +10,7 @@ angular.module( 'conexus.markets', [
 				templateUrl: 'markets/index.tpl.html'
 			}
 		}
+        //TODO: RESOLVE
 	});
 }])
 
@@ -45,21 +46,21 @@ angular.module( 'conexus.markets', [
         },
         credits:{enabled:false},
     };
-
     $scope.newOrderToggleVar = false;
     $scope.orders = [];
     $scope.newOrder = {};
     $scope.trades = {};
 
-    $scope.newOrderToggle = function () {
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
-    };
-
+    //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {
         $scope.orders.push($scope.newOrder);
         $scope.newOrder = {};
         //$scope.newOrderToggle();
         //OrderModel.create($scope.newOrder).then(function(model) {});
+    };
+
+    $scope.newOrderToggle = function () {
+        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
 }]);

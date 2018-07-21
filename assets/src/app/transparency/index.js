@@ -15,6 +15,8 @@ angular.module( 'conexus.transparency', [
 
 .controller( 'TransparencyCtrl', ['$scope', 'titleService', function TransparencyController( $scope, titleService ) {
 	titleService.setTitle('transparency | conex.us');
+
+    //TODO: REAL DATA
 	$scope.chart = {
         chart: {
             zoomType: 'x',
