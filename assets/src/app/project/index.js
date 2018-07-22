@@ -14,7 +14,9 @@ angular.module( 'conexus.project', [
         resolve: {
             project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
                 return ProjectModel.getByUrl($stateParams.path);
-            }]//,
+            }]
+            //TODO: COUNT IN PROJECT MODEL
+            //,
             //memberCount: ['committee', 'CommitteeMemberModel', function(committee, CommitteeMemberModel){
             //     return CommitteeMemberModel.getCommitteeMemberCount('committee', committee.id);
             // }]
@@ -29,9 +31,11 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
+            //TODO: GET SOME | REFACTOR POST
             messages: ['MessageModel', 'project', function(MessageModel, project){
                 return MessageModel.getByProject(project);
             }],
+            //TODO: GET SOME
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getByProject(project);
             }],
@@ -40,6 +44,7 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    //TODO: FEATURE?
     .state( 'project.channels', {
         url: '/channels',
         views: {
@@ -49,14 +54,17 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
+            //TODO: ALL
             channels: [function() {
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
+            //TODO: GET SOME | REFACTOR POST
             messages: ['MemberModel', 'project', function(MessageModel, project){
                 return MessageModel.getByProject(project);
             }],
         }
     })
+    //TODO: FEATURE | ALLOWS FOR BUDGET MANAGING PROCESS -- AKA CREATE MARKET ORDERS FOR AN ORG BASED ON REPUTATION VOTING
     .state( 'project.charter', {
         url: '/charter',
         views: {
@@ -66,11 +74,13 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
+            //TODO: ALL
             bills: [function() {
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
         }
     })
+    //TODO: FEATURE | ALLOW FOR OPEN BUDGETING / INPUT OUTPUT LEGER. ALLOW FOR DONATIONS / FUND TRANSFERRANCE | MULTIPLE LEDGERS
     .state( 'project.finance', {
         url: '/finance',
         views: {
@@ -94,6 +104,7 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
+            //TODO: GET SOME
             members: ['MemberModel', 'project', function(MemberModel, project) {
                 return  MemberModel.getByProject(project);
             }]
@@ -108,6 +119,7 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
+            //TOD: ALL
             streams: [function() {
                 return [
                     {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
@@ -126,6 +138,7 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/tasks.tpl.html'
             }
         },
+        //TODO: GET SOME
         resolve: {
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getByProject(project);
@@ -150,16 +163,10 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectCtrl', ['$location', '$scope', 'config', 'MemberModel', 'project', function ProjectController( $location, $scope, config, MemberModel, project ) {
+    titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
-    $scope.project = project;
     $scope.newMember = {};
-
-    $scope.isProjectCreator = function() {
-        if($scope.currentUser){
-            return $scope.currentUser.id == $scope.project.user
-        }
-        else {return false;}
-    };
+    $scope.project = project;
 
     $scope.createMember = function(){
         if($scope.currentUser){
@@ -172,25 +179,25 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
+    $scope.isProjectCreator = function() {
+        if($scope.currentUser){
+            return $scope.currentUser.id == $scope.project.user;
+        }
+        else {return false;}
+    };
 
 }])
 
 .controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'MessageModel', 'messages', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, MessageModel, messages, project, tasks, titleService, work ) {
-    titleService.setTitle(project.title + ' | conex.us');
+    titleService.setTitle(project.title + ' | Activity | conex.us');
     $scope.currentUser = config.currentUser;
-    $scope.project = project;
     $scope.newMessage = {};
     $scope.messages = messages;
+    $scope.project = project;
     $scope.tasks = tasks;
-
     $scope.work = work;
-    console.log(work, tasks);
 
-    $scope.renderMessage = function(message){
-        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-        return $sce.trustAsHtml(replacedText);
-    };
+    console.log(work, tasks);
 
     $scope.createMessage = function(newMessage) {
         if ($scope.currentUser){
@@ -201,6 +208,12 @@ angular.module( 'conexus.project', [
             });
         }
         else{$location.path('/login')}
+    };
+
+    $scope.renderMessage = function(message){
+        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+        return $sce.trustAsHtml(replacedText);
     };
 
     $sailsSocket.subscribe('message', function (envelope) {
@@ -232,19 +245,12 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$scope', 'channels', 'config', 'messages', function ProjectController( $location, $sailsSocket, $scope, channels, config, messages ) {
+    //TODO: TITLE
+    //titleService.setTitle(project.title + ' | Channels | conex.us');
+    
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
     $scope.messages = messages;
-
-    $scope.destroyMessage = function(message) {
-        // check here if this message belongs to the currentUser
-        console.log(message);
-        if (message.user.id === config.currentUser.id) {
-            MessageModel.delete(message).then(function(model) {
-                // message has been deleted, and removed from $scope.messages
-            });
-        }
-    };
 
     $scope.createMessage = function(newMessage) {
         if ($scope.currentUser){
@@ -272,6 +278,9 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', function ProjectController( $location, $sailsSocket, $scope, bills, config ) {
+    //TODO: TITLE
+    //titleService.setTitle(project.title + ' | Charter | conex.us');
+
     $scope.currentUser = config.currentUser;
     $scope.bills = bills;  
     $scope.newMotionToggleVar = false;
@@ -282,6 +291,8 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', function ProjectController( $interval, $scope, config, entries, lodash ) {
+    //TODO: TITLE
+    //titleService.setTitle(project.title + ' | Finance | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.entries = entries;
     $scope.newEntryToggleVar = false;
@@ -325,7 +336,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectMembersCtrl', ['$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
-    titleService.setTitle(project.title + ' | conex.us');
+    titleService.setTitle(project.title + ' | Members | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.members = members;
@@ -355,6 +366,9 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'streams', function ProjectController( $sce, $scope, streams ) {
+    //TODO: TITLE
+    //titleService.setTitle(project.title + ' | Streams | conex.us');
+
     $scope.streams = streams;
     $scope.AudioContext = {};
     $scope.videoContext = {};
@@ -364,6 +378,8 @@ angular.module( 'conexus.project', [
         return $sce.trustAsHtml(html);
     };
 
+    //TODO: ALL | BROWSER BASED STREAMING OF THE SCREEN. . . ~ OBS INPUT 
+    //TODO: MOVE TO 'WORK' OR DEDICATED STREAMING AREA
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {
@@ -413,13 +429,12 @@ angular.module( 'conexus.project', [
 
 
 }])
-
 .controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks ) {
-    //titleService.setTitle(project.title + ' | conex.us');
+    titleService.setTitle(project.title + ' | Tasks | conex.us');
     $scope.currentUser = config.currentUser;
+    $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
     $scope.project = project;
-    $scope.newTaskToggleVar = false;
 
     $scope.newTaskToggle = function () {
         $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
@@ -446,10 +461,8 @@ angular.module( 'conexus.project', [
 
 }])
 .controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'projects', function ProjectController( $sailsSocket, $scope, config, project, projects ) {
-    //titleService.setTitle(project.title + ' | conex.us');
+    titleService.setTitle(project.title + ' | Projects | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.projects = projects;
-
 }]);
-
