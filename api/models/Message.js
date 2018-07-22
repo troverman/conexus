@@ -1,12 +1,25 @@
 module.exports = {
     attributes: {
-        title: {
+        content: {
             type: 'string',
             required: true
         },
         project: {
             model: 'project',
-            required: true
+        },
+        post: {
+            model: 'post'
+        },
+        member: {
+            model: 'post'
+        },
+        plusCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        minusCount: {
+            type: 'integer',
+            defaultsTo: 0
         },
         user: {
             model: 'user',

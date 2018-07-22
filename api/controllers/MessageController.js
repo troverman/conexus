@@ -9,6 +9,10 @@ module.exports = {
 		});
 	},
 
+	getSome: function(req, res) {
+
+	},
+
 	getOne: function(req, res) {
 		Message.getOne(req.param('id'))
 		.spread(function(model) {
@@ -44,7 +48,6 @@ module.exports = {
 			project: req.param('project'),
 			user: userId
 		};
-
 		Message.create(model)
 		.exec(function(err, message) {
 			if (err) {return console.log(err);}

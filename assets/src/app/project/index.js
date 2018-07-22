@@ -373,6 +373,7 @@ angular.module( 'conexus.project', [
     $scope.AudioContext = {};
     $scope.videoContext = {};
 
+    //TODO: DOESNT WORK
     $scope.renderMessage = function(stream){
         var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
         return $sce.trustAsHtml(html);

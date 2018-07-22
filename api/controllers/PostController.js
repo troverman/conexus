@@ -14,6 +14,10 @@ module.exports = {
 		});
 	},
 
+	getSome: function(req, res) {
+
+	},
+
 	getOne: function(req, res) {
 		Post.getOne(req.param('id'))
 		.spread(function(model) {

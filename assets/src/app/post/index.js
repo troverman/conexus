@@ -3,7 +3,7 @@ angular.module( 'conexus.post', [
 
 .config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'post', {
-        url: '/post',
+        url: '/post/:id',
         views: {
             "main": {
                 controller: 'PostController',

@@ -1,8 +1,5 @@
 /**
-* Finance.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
+* Entry.js
 */
 
 module.exports = {
@@ -11,6 +8,13 @@ module.exports = {
         amount: {
             type: 'string',
             required: true
+        },
+        identifer: {
+            type: 'string',
+            required: true
+        },
+        type: {
+            type: 'string',
         },
         project: {
             model: 'project'

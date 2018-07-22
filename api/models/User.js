@@ -16,13 +16,17 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
+        isLive: {
+            type: 'boolean',
+            defaultsTo: false
+        },
         messages: {
             collection: 'message',
             via: 'user'
         },
         passports : { collection: 'Passport', via: 'user' },
         totalWork: {
-            type: 'string',
+            type: 'integer',
             defaultsTo: 0
         },
         username: {

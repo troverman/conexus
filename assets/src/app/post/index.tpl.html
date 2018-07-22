@@ -1,46 +1,5 @@
-<div style="margin-left:15%;margin-right:15%;">
-  <h3>new post</h3>
-
-  <form role="form" ng-submit="createPost(newPost)">
-    <div class="form-group">
-
-      <label for="postTitle">Post Title</label>
-      <input type="text" ng-model="newPost.title" class="form-control" id="postTitle" ng-disabled="!currentUser">
-      <label for="postTitle">Post Content</label>
-      <input type="text" ng-model="newPost.post_content" class="form-control" id="postContent" ng-disabled="!currentUser">
-      <label for="postTitle">Post URL</label>
-      <input type="text" ng-model="newPost.url_title" class="form-control" id="postURL" ng-disabled="!currentUser">
-
-    </div>
-    <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
-  </form>
-
-  <br><br>
-
-  <div>
-    <div ng-repeat="post in posts">
-      <a href="/post/{{post.url_title}}">{{post.title}}</a>
-      <b>by</b> {{post.user.username}}, <span am-time-ago="post.updatedAt"></span> 
-      {{post.post_content}}
-      <button type="button" class="btn btn-danger btn-xs" ng-click="destroyPost(post)" ng-show="currentUser.id === post.user.id.toString()"><i class="fa fa-trash-o"></i></button>
-
-      <form role="form" ng-submit="createVote(post, newPostVote)">
-        <div class="form-group">
-          <input type="text" ng-model="newPostVote.vote" class="form-control" id="postVote" ng-disabled="!currentUser">
-        </div>
-        <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
-      </form>
-
-      <div ng-repeat="postvote in postvotes">
-        <div ng-if="postvote.post == post.id">
-          {{postvote.vote}}
-          {{postvote.user}}
-          <button type="button" class="btn btn-danger btn-xs" ng-click="destroyVote(postvote)" ng-show="currentUser.id === post.user.id.toString()"><i class="fa fa-trash-o"></i></button>
-        </div>
-      </div>
-
-    </div>
-  </div>
+<div class="container">
+  <p>1234</p>
 </div>
 
 

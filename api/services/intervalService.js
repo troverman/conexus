@@ -2,6 +2,8 @@ var request = require('request');
 
 module.exports = {
 
+	//TODO: MOVE OUT OF INTERVAL
+	//TODO: TOKENIZE LOCATION | EXERCISE
 	getData: function(req){
 
 		User.getOne(req.id)
