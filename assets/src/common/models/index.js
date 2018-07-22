@@ -3,11 +3,12 @@ angular.module('models', [
 	'models.member',
 	'models.message',
 	'models.post',
-	'models.postvote',
 	'models.project',
+	'models.reaction',
 	'models.search',
 	'models.stream',
 	'models.task',
 	'models.user',
+	'models.validation'
 	'models.work'
 ]);
