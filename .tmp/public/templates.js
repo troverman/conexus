@@ -232,6 +232,15 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "			</md-card>\n" +
     "	  </div>\n" +
     "	  <div class=\"col-md-9\">\n" +
+    "	  	\n" +
+    "		<div class=\"spacing-15\"></div>\n" +
+    "	  	<form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
+    "		    <div class=\"form-group\">\n" +
+    "		        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "		    </div>\n" +
+    "		    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "		</form>\n" +
+    "		<div class=\"spacing-15\"></div>\n" +
     "\n" +
     "	    <!--tasks, work, posts, activity-->\n" +
     "	    <!--TODO: ACTIVITY-->\n" +
@@ -243,9 +252,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "						<a style=\"display:inline\" href=\"/project/{{post.project.urlTitle}}\"><span class=\"\">{{post.project.title}}</span></a>\n" +
     "					</div>\n" +
-    "					<div>\n" +
-    "						<span style=\"display:inline\" ng-bind-html=\"renderMessage(post.title)\"></span>\n" +
-    "	    			</div>\n" +
+    "					<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
     "				</md-card-title-text>\n" +
     "			</md-card-title>\n" +
     "			<div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
@@ -254,6 +261,15 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "            </div>\n" +
+    "            <!--TODO: NESTED -->\n" +
+    "			<div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "				<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "				    <div class=\"form-group\">\n" +
+    "				        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "				    </div>\n" +
+    "				    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "				</form>\n" +
+    "			</div>\n" +
     "		</md-card>\n" +
     "\n" +
     "		<md-card ng-repeat=\"task in tasks\">\n" +
@@ -428,7 +444,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "						<a style=\"display:inline\" href=\"/project/{{post.project.urlTitle}}\">{{post.project.title}}</a>\n" +
     "					</div>\n" +
     "					<p style=\"font-size:10px;color:gray\" am-time-ago=\"post.createdAt\"></p>\n" +
-    "					<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.title)\"></span></div>\n" +
+    "					<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
     "				</md-card-title-text>\n" +
     "			</md-card-title>\n" +
     "	      <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
@@ -987,6 +1003,18 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
 angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/activity.tpl.html",
     "<div class=\"container\">\n" +
+    "\n" +
+    "    <div class=\"col-md-12\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "            </div>\n" +
+    "            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "        </form>\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
     "	<div class=\"col-md-12\" ng-repeat=\"work in work\">\n" +
     "        <div style=\"box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -1006,19 +1034,26 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"col-md-12\" ng-repeat=\"message in messages\">\n" +
+    "    <div class=\"col-md-12\" ng-repeat=\"post in posts\">\n" +
     "        <div style=\"box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;\">\n" +
     "            <div style=\"padding:16px\">\n" +
-    "    			<a href=\"/project/{{message.project.urlTitle}}\">{{message.project.title}}</a>\n" +
-    "                <div>\n" +
-    "                    <span style=\"display:inline\" ng-bind-html=\"renderMessage(message.title)\"></span>\n" +
-    "                </div>\n" +
+    "    			<a href=\"/project/{{post.project.urlTitle}}\">{{post.project.title}}</a>\n" +
+    "                <div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
     "            </div>\n" +
     "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
     "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
     "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{message.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "            <!--TODO: NESTED -->\n" +
+    "            <div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                </form>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -1237,8 +1272,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
-    "<style>\n" +
-    "</style>\n" +
+    "<!--TODO: UNIFY MODELS? -->\n" +
     "<md-card ng-repeat=\"work in work\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "        <a href=\"/member/{{work.user.username}}\">\n" +
@@ -1252,14 +1286,23 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        <span ng-bind-html=\"renderMessage(work.content)\"></span>\n" +
     "    </div>\n" +
     "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'work')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'work')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "    </div>\n" +
+    "     <!--TODO: NESTED -->\n" +
+    "    <div ng-show=\"work.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "        <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "            </div>\n" +
+    "            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
     "</md-card>\n" +
     "\n" +
-    "<md-card ng-repeat=\"post in messages.slice().reverse()\">\n" +
+    "<md-card ng-repeat=\"post in posts\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "        <a href=\"/member/{{post.user.username}}\">\n" +
     "            <img src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;radius:3px\">\n" +
@@ -1267,7 +1310,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        </a>\n" +
     "        <br>\n" +
     "        <p style=\"color:gray;font-size:10px\" am-time-ago=\"post.updatedAt\"></p>\n" +
-    "        <span ng-bind-html=\"renderMessage(post.title)\"></span>\n" +
+    "        <span ng-bind-html=\"renderMessage(post.content)\"></span>\n" +
     "    </div>\n" +
     "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
@@ -1275,14 +1318,23 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "    </div>\n" +
+    "    <!--TODO: NESTED -->\n" +
+    "    <div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "        <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <input type=\"text\" ng-model=\"post.newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "            </div>\n" +
+    "            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
     "</md-card>\n" +
     "\n" +
     "<div class=\"spacing-15\"></div>\n" +
-    "<form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "<form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
     "    <div class=\"form-group\">\n" +
-    "        <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\">\n" +
+    "        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
     "    </div>\n" +
-    "    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newMessage.title\">create</button>\n" +
+    "    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "</form>");
 }]);
 
@@ -1298,23 +1350,23 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "        <button class=\"btn btn-default log-btn\">+ Channel</button>\n" +
     "    </div>\n" +
     "    <div class=\"col-md-10\">\n" +
-    "        <md-card ng-repeat=\"message in messages.slice().reverse()\">\n" +
+    "        <md-card ng-repeat=\"post in posts\">\n" +
     "            <div style=\"padding:10px;\">\n" +
-    "                <a href=\"/member/{{message.user.username}}\">\n" +
-    "                    <img src=\"{{message.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
-    "                    {{message.user.username}}\n" +
+    "                <a href=\"/member/{{post.user.username}}\">\n" +
+    "                    <img src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
+    "                    {{post.user.username}}\n" +
     "                </a>\n" +
     "                <br>\n" +
-    "                <p style=\"color:gray;font-size:10px\" am-time-ago=\"message.updatedAt\"></p>\n" +
-    "                <p>{{message.title}}</p>\n" +
+    "                <p style=\"color:gray;font-size:10px\" am-time-ago=\"post.updatedAt\"></p>\n" +
+    "                <p>{{post.content}}</p>\n" +
     "            </div>\n" +
     "        </md-card>\n" +
     "        <div class=\"spacing-15\"></div>\n" +
-    "        <form role=\"form\" ng-submit=\"createMessage(newMessage)\">\n" +
+    "        <form role=\"form\" ng-submit=\"createPost(newMessage)\">\n" +
     "            <div class=\"form-group\">\n" +
-    "                <input type=\"text\" ng-model=\"newMessage.title\" class=\"form-control\" id=\"messageTitle\">\n" +
+    "                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
     "            </div>\n" +
-    "            <button style=\"width:100%\" type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newMessage.title\">Submit</button>\n" +
+    "            <button style=\"width:100%\" type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">Submit</button>\n" +
     "        </form>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -1782,16 +1834,16 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "      </tbody>\n" +
     "  </table>\n" +
     "\n" +
-    "  <!--\n" +
-    "  <md-card ng-repeat=\"item in work\" class=\"col-md-6\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
-    "      <h4><a href=\"stream/{{item}}\">{{item}}</a></h4>\n" +
-    "      <h4><a href=\"member/troverman\">troverman</a></h4>\n" +
-    "      <iframe width='510' height='265' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
-    "      <button type=\"submit\" class=\"btn btn-default log-btn\">Validate Work</button>\n" +
-    "    </div>\n" +
-    "  </md-card>\n" +
-    "  -->\n" +
+    "  <div class=\"col-md-12\">\n" +
+    "      <div class=\"spacing-15\"></div>\n" +
+    "      <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
+    "          <div class=\"form-group\">\n" +
+    "              <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "          </div>\n" +
+    "          <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "      </form>\n" +
+    "      <div class=\"spacing-15\"></div>\n" +
+    "  </div>\n" +
     "\n" +
     "</div>\n" +
     "<div class=\"spacing:50px;\"></div>\n" +

@@ -33,9 +33,8 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            //TODO: MODEL | POST | GET SOME
-            messages: ['member', 'MessageModel', function(member, MessageModel) {
-                return MessageModel.getByUser(member);
+            posts: ['member', 'PostModel', function(member, PostModel) {
+                return PostModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }],
             work: ['member', 'WorkModel', function(member, WorkModel) {
                 return WorkModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
@@ -129,18 +128,32 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'messages', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, messages, titleService, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, posts, titleService, work) {
     $scope.currentUser = config.currentUser;
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
-    //TODO: POST
-    $scope.messages = messages;
+    $scope.posts = posts;
     $scope.work = work;
 
+    $scope.createPost = function(post){
+        $scope.newReaction.user = $scope.currentUser.id;
+        $scope.newPost.parent = post.id;
+        //TODO: MODEL | CREATE
+        //PostModel.create($scope.newPost);
+        //TODO: NESTED RENDERING N STUFF
+    };  
+
     $scope.renderMessage = function(message){
-        var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-        return $sce.trustAsHtml(replacedText);
+        if (message){
+            var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
+    };
+
+    $scope.reply = function(post){
+        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+        $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
     /*

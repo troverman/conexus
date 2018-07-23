@@ -1,46 +1,85 @@
-/**
- * PostController
- *
- */
 
 module.exports = {
-
-	getAll: function(req, res) {
-		Post.getAll()
-		.spread(function(models) {
-			Post.watch(req);
-			Post.subscribe(req, models);
-			res.json(models);
-		});
+	
+	getOne: function(req, res) {
+		Post.findOne(id)
+        .populate('user')
+        .populate('project')
+        .then(function (model) {
+			res.json(model);
+        });
 	},
 
 	getSome: function(req, res) {
 
-	},
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
 
-	getOne: function(req, res) {
-		Post.getOne(req.param('id'))
-		.spread(function(model) {
-			Post.subscribe(req, model);
-			res.json(model);
-		});
+		if (req.query.task){
+			var task = req.query.task;
+			Post.find({task:task})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else if(req.query.project){
+			var project = req.query.project;
+			Post.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else if(req.query.user){
+			var user = req.query.user;
+			Post.find({user:user})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else{
+			Post.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
 	},
 
 	create: function (req, res) {
-		var userId = req.param('user');
 		var model = {
-			title: req.param('title'),
-			post_content: req.param('post_content'),
-			url_title: req.param('url_title'),
-			user: userId
+			content: req.param('content'),
+			parent: req.param('parent'),
+			project: req.param('project'),
+			user: req.param('user'),
 		};
 		Post.create(model)
-		.exec(function(err, post) {
+		.exec(function(err, message) {
 			if (err) {return console.log(err);}
 			else {
-				sails.log('POST_CRE8')
-				Post.publishCreate(post);
-				res.json(post);
+				Post.publishCreate(message);
+				res.json(message);
 			}
 		});
 	},
@@ -59,6 +98,5 @@ module.exports = {
 			});
 		});
 	}
-	
-};
 
+};

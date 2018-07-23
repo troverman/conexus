@@ -11,19 +11,19 @@ angular.module( 'conexus.post', [
             }
         },
         resolve: {
-            //TODO: MERGE WITH MESSAGE | GET SOME
-            posts: function(PostModel) {
-                return PostModel.getAll();
-            }
+            post: ['$stateParams', 'PostModel', function($stateParams, PostModel){
+                return null;
+                //return PostModel.getOne($stateParams.id);
+            }],
         }
     });
 }])
 
-.controller( 'PostController', ['$sailsSocket', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'titleService', function PostController( $sailsSocket, $scope, config, lodash, PostModel, posts, titleService ) {
+.controller( 'PostController', ['$sailsSocket', '$scope', 'config', 'lodash', 'post', 'PostModel', 'titleService', function PostController( $sailsSocket, $scope, config, lodash, post, PostModel, titleService ) {
     titleService.setTitle('posts | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
-    $scope.posts = posts;
+    $scope.post = post;
 
     //TODO
     $scope.createPost = function(post) {

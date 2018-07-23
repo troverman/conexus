@@ -19,9 +19,8 @@ angular.module( 'conexus.home', [
 				//TODO: GET SOME
 				return UserModel.getAll();
 			}],
-			posts: ['MessageModel', function(MessageModel){
-				//TODO: GET SOME | RENAME TO POSTS
-				return MessageModel.getAll();
+			posts: ['PostModel', function(PostModel){
+                return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
 			}],
 			tasks: ['TaskModel', function(TaskModel) {
 				//TODO: GET SOME
@@ -55,25 +54,27 @@ angular.module( 'conexus.home', [
 		});
 	}
 
+	//TODO: MODEL | CREATE | NESTED?
+	$scope.createPost = function(post){
+		$scope.newReaction.user = $scope.currentUser.id;
+		$scope.newPost.parent = post.id;
+		//TODO: MODEL | CREATE
+		//PostModel.create($scope.newPost);
+		//TODO: NESTED RENDERING N STUFF
+	};
+
 	//TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type){
+    	$scope.newReaction.user = $scope.currentUser.id;
     	$scope.newReaction.post = post.id;
     	$scope.newReaction.type = type;
     	//TODO: MODEL | CREATE REACTION
     	//Reaction.create(newReaction);
     	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
     	if (type =='plus'){$scope.posts[index].plusCount++}
-    	if (type =='minus'){$scope.posts[index].minusCount++;}
+    	if (type =='minus'){$scope.posts[index].minusCount++}
     	//TODO: UPDATE POST
     };
-
-    //TODO: MODEL | CREATE | NESTED?
-	$scope.createPost = function(post){
-		$scope.newPost.parent = post.id;
-		//TODO: MODEL |CREATE
-		//PostModel.create($scope.newPost);
-		//TODO: NESTED RENDERING N STUFF
-	};
 
 	//TODO: NESTED RENDERING N STUFF
 
@@ -84,14 +85,16 @@ angular.module( 'conexus.home', [
 	};
 
 	$scope.renderMessage = function(post){
-        var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-        var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-        return $sce.trustAsHtml(replacedText);
+		if (post){
+        	var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+        	var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+        	return $sce.trustAsHtml(replacedText);
+        }
     };
 
     $scope.reply = function(post){
-    	$scope.post.reply = true;
-    	$scope.newPost.parent = post.id;
+    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+    	$scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
 }]);

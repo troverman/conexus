@@ -1,4 +1,16 @@
 <div class="container">
+
+    <div class="col-md-12">
+        <div class="spacing-15"></div>
+        <form role="form" ng-submit="createPost(newPost)">
+            <div class="form-group">
+                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+            </div>
+            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+        </form>
+        <div class="spacing-15"></div>
+    </div>
+
 	<div class="col-md-12" ng-repeat="work in work">
         <div style="box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;">
             <div style="padding:16px;">
@@ -18,19 +30,26 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12" ng-repeat="message in messages">
+    <div class="col-md-12" ng-repeat="post in posts">
         <div style="box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;">
             <div style="padding:16px">
-    			<a href="/project/{{message.project.urlTitle}}">{{message.project.title}}</a>
-                <div>
-                    <span style="display:inline" ng-bind-html="renderMessage(message.title)"></span>
-                </div>
+    			<a href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+                <div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
             </div>
             <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                 <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
                 <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
                 <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="color:grey" class="pull-right" href="post/{{message.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <!--TODO: NESTED -->
+            <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <form role="form" ng-submit="createPost(post)">
+                    <div class="form-group">
+                        <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
+                    </div>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
             </div>
         </div>
     </div>

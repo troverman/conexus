@@ -1,5 +1,4 @@
-<style>
-</style>
+<!--TODO: UNIFY MODELS? -->
 <md-card ng-repeat="work in work">
     <div style="padding:10px;">
         <a href="/member/{{work.user.username}}">
@@ -13,14 +12,23 @@
         <span ng-bind-html="renderMessage(work.content)"></span>
     </div>
     <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'work')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'work')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
         <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
         <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
+     <!--TODO: NESTED -->
+    <div ng-show="work.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+        <form role="form" ng-submit="createPost(post)">
+            <div class="form-group">
+                <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
+            </div>
+            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+        </form>
+    </div>
 </md-card>
 
-<md-card ng-repeat="post in messages.slice().reverse()">
+<md-card ng-repeat="post in posts">
     <div style="padding:10px;">
         <a href="/member/{{post.user.username}}">
             <img src="{{post.user.avatarUrl}}" err-src="/images/avatar.png" style="height:32px;radius:3px">
@@ -28,7 +36,7 @@
         </a>
         <br>
         <p style="color:gray;font-size:10px" am-time-ago="post.updatedAt"></p>
-        <span ng-bind-html="renderMessage(post.title)"></span>
+        <span ng-bind-html="renderMessage(post.content)"></span>
     </div>
     <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -36,12 +44,21 @@
         <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
         <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
+    <!--TODO: NESTED -->
+    <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+        <form role="form" ng-submit="createPost(post)">
+            <div class="form-group">
+                <input type="text" ng-model="post.newPost.content" class="form-control" id="postContent-{{post.id}}">
+            </div>
+            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+        </form>
+    </div>
 </md-card>
 
 <div class="spacing-15"></div>
-<form role="form" ng-submit="createMessage(newMessage)">
+<form role="form" ng-submit="createPost(newPost)">
     <div class="form-group">
-        <input type="text" ng-model="newMessage.title" class="form-control" id="messageTitle">
+        <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
     </div>
-    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newMessage.title">create</button>
+    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 </form>

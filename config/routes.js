@@ -60,23 +60,11 @@ module.exports.routes = {
   'post /api/follower': 'FollowerController.create',
   'delete /api/follower/:id': 'FollowerController.destroy',
 
-  //TODO: MERGE WITH POST
-  /**
-   * Message routes
-   *
-   */
-  'get /api/message': 'MessageController.getAll',
-  'get /api/message/:id': 'MessageController.getOne',
-  'get /api/message/project/:id': 'MessageController.getByProject',
-  'get /api/message/user/:id': 'MessageController.getByUser',
-  'post /api/message': 'MessageController.create',
-  'delete /api/message/:id': 'MessageController.destroy',
-
   /**
    * Post routes
    *
    */
-  'get /api/post': 'PostController.getAll',
+  'get /api/post': 'PostController.getSome',
   'get /api/post/:id': 'PostController.getOne',
   'post /api/post': 'PostController.create',
   'delete /api/post/:id': 'PostController.destroy',
@@ -150,6 +138,7 @@ module.exports.routes = {
    * Work routes
    */
   'get /api/work': 'WorkController.getSome',
+  'get /api/work/:id': 'WorkController.getOne',
   'post /api/work': 'WorkController.create',
 
   '/.well-known/acme-challenge/9gf-zaOshMDeJUOaL0j2lH7TnRTNxau1eF2z06fav-I': 'HomeController.ssl',

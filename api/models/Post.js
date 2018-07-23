@@ -1,49 +1,43 @@
-/**
-* Post.js
-*/
-
 module.exports = {
-
-	attributes: {
+    attributes: {
         content: {
             type: 'string',
             required: true
         },
-        user: {
-            model: 'user'
+        parent: {
+            type: 'string',
+        },
+        project: {
+            model: 'project',
+        },
+        post: {
+            model: 'post'
+        },
+        plusCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        minusCount: {
+            type: 'integer',
+            defaultsTo: 0
         },
         views: {
             type: 'integer',
             defaultsTo: 0,
+        },
+        user: {
+            model: 'user',
+            required: true
         }
     },
 
-
-    getOne: function(id) {
-        return Post.findOne(id)
-        .populate('user')
-        .then(function (model) {
-            return [model];
-        });
-    },
-
-    afterCreate: function (post, next) {
+    afterCreate: function (message, next) {
         // set message.user = to appropriate user model
-        User.getOne(post.user)
+        User.getOne(message.user)
         .spread(function(user) {
-            post.user = user;
-            next(null, post);
+            message.user = user;
+            next(null, message);
         });
-    },
-
-    getAll: function() {
-        return Post.find()
-        .sort({createdAt: 'DESC'})
-        .populate('user')
-        .then(function (models) {
-            return [models];
-        });
-    },
-
+    }
+    
 };
-

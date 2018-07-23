@@ -6,7 +6,7 @@
 module.exports = {
 
 	getAll: function(req, res) {
-		PostVote.getAll()
+		Reaction.getAll()
 		.spread(function(models) {
 			PostVote.watch(req);
 			PostVote.subscribe(req, models);
@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	getOne: function(req, res) {
-		PostVote.getOne(req.param('id'))
+		Reaction.getOne(req.param('id'))
 		.spread(function(model) {
 			PostVote.subscribe(req, model);
 			res.json(model);
@@ -24,9 +24,9 @@ module.exports = {
 
 	getByPost: function(req, res) {
 		var postId = req.param('id');
-		PostVote.getByPost(postId)
+		Reaction.getByPost(postId)
 		.spread(function(model) {
-			PostVote.subscribe(req, model);
+			Reaction.subscribe(req, model);
 			res.json(model);
 		});
 	},
@@ -38,11 +38,11 @@ module.exports = {
 			post: req.param('post'),
 			user: userId
 		};
-		PostVote.create(model)
+		Reaction.create(model)
 		.exec(function(err, post) {
 			if (err) {return console.log(err);}
 			else {
-				PostVote.publishCreate(post);
+				Reaction.publishCreate(post);
 				res.json(post);
 			}
 		});
@@ -52,12 +52,12 @@ module.exports = {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
-		PostVote.findOne(id).exec(function(err, model) {
+		Reaction.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}
-			PostVote.destroy(id, function(err) {
+			Reaction.destroy(id, function(err) {
 				if (err) {return res.serverError(err);}
-				PostVote.publishDestroy(model.id);
+				Reaction.publishDestroy(model.id);
 				return res.json(model);
 			});
 		});
