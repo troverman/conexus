@@ -9,6 +9,6 @@ angular.module('models', [
 	'models.stream',
 	'models.task',
 	'models.user',
-	'models.validation'
-	'models.work'
+	'models.validation',
+	'models.work',
 ]);
