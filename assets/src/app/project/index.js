@@ -431,7 +431,7 @@ angular.module( 'conexus.project', [
 
 }])
 .controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks ) {
-    titleService.setTitle(project.title + ' | Tasks | conex.us');
+    //titleService.setTitle(project.title + ' | Tasks | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;

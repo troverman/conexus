@@ -16,7 +16,6 @@
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
         <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-        <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
         <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
 </md-card>
@@ -35,43 +34,9 @@
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
         <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-        <a style="padding:5px;color:grey" href="#"><i class="fa fa-share"></i> share </a>
         <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
 </md-card>
-
-
-<!--<md-card ng-repeat="post in messages.slice().reverse()">
-    <div class="card-container">
-        <div>
-            <a href="/member/{{post.user.username}}">
-                <img class="post-img" ng-src="{{post.user.avatarUrl}}" class="md-card-image" alt="{{post.user.username}}">
-                <h4 class="post-name">{{post.user.username}}</h4>
-            </a>
-            <div class="pull-right">
-                <span class="grey" am-time-ago="post.updatedAt"></span>
-                <div style="display:inline" uib-dropdown is-open="status.isopen">
-                    <a uib-dropdown-toggle ng-disabled="disabled" href="#" ng-click=""><i class="fa fa-angle-down grey"></i></a> 
-                    <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem"><a href="#">Share</a></li>
-                        <li role="menuitem"><a href="#">Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="post-container">
-            <p>{{post.title}}</p>
-        </div>
-    </div>
-    <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-        <a style="padding:5px" href="#" ng-click="createReaction(post, 'like', 'post')" class="grey"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-        <a style="padding:5px" href="#" ng-click="createReaction(post, 'dislike', 'post')" class="grey"><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a> 
-        <a style="padding:5px" href="#" class="grey" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-        <a style="padding:5px" href="#" class="grey"><i class="fa fa-share"></i> share </a>
-        <a style="" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
-    </div>
-</md-card>-->
-
 
 <div class="spacing-15"></div>
 <form role="form" ng-submit="createMessage(newMessage)">
