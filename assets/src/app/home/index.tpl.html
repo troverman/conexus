@@ -225,7 +225,7 @@
 
     <!-- TEMP | POST -->
 	<div class="container">
-	    <md-card ng-repeat="post in posts.slice(0,15)">
+	    <md-card ng-repeat="post in posts">
 			<md-card-title>
 				<md-card-title-text>
 					<div>
@@ -237,12 +237,12 @@
 					<div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
 				</md-card-title-text>
 			</md-card-title>
-	      <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-            <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-            <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
-          </div>
+			<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+				<a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+				<a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+				<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+				<a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+			</div>
 	    </md-card>
 	</div>
 

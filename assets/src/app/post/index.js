@@ -12,14 +12,16 @@ angular.module( 'conexus.post', [
         },
         resolve: {
             post: ['$stateParams', 'PostModel', function($stateParams, PostModel){
-                return null;
-                //return PostModel.getOne($stateParams.id);
+                return PostModel.getOne($stateParams.id);
             }],
+            //postChildren:['post', 'PostModel', function(post, PostModel) {
+            //    return PostModel.getByPost(post.id);
+            //}],
         }
     });
 }])
 
-.controller( 'PostController', ['$sailsSocket', '$scope', 'config', 'lodash', 'post', 'PostModel', 'titleService', function PostController( $sailsSocket, $scope, config, lodash, post, PostModel, titleService ) {
+.controller( 'PostController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'titleService', function PostController( $sailsSocket, $sce, $scope, config, lodash, post, PostModel, titleService ) {
     titleService.setTitle('posts | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
@@ -35,6 +37,18 @@ angular.module( 'conexus.post', [
     //TODO
     $scope.createReaction = function(post, type) {
        
+    };
+
+    $scope.renderMessage = function(message){
+        if (message){
+            var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
+    };
+
+    $scope.reply = function(post){
+        $scope.post.showReply = !$scope.post.showReply
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

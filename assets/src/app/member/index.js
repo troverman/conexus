@@ -137,7 +137,7 @@ angular.module( 'conexus.member', [
 
     $scope.createPost = function(post){
         $scope.newReaction.user = $scope.currentUser.id;
-        $scope.newPost.parent = post.id;
+        $scope.newPost.post = post.id;
         //TODO: MODEL | CREATE
         //PostModel.create($scope.newPost);
         //TODO: NESTED RENDERING N STUFF

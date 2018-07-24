@@ -1,0 +1,37 @@
+<md-card>
+    <div class="card-container">
+        <div class="post-controller-container">
+            <a href="/member/{{post.user.username}}">
+                <img class="post-img" ng-src="{{post.user.avatarUrl}}" class="md-card-image" alt="{{post.user.username}}">
+                <h4 class="post-name">{{post.user.username}}</h4>
+            </a>
+            <div class="pull-right">
+                <span class="grey" am-time-ago="post.updatedAt"></span>
+                <a href="#" ng-click=""><i class="fa fa-angle-down grey"></i></a>
+            </div>
+        </div>
+        <div class="post-container">
+            <div ng-show="post.profile.id != post.user.id">
+                <div class="spacing-5"></div>
+                <a ng-show="post.bill" href="bill/{{post.bill.id}}/1"><h4>{{post.bill.title}}</h4></a>
+                <a ng-show="post.committee" href="committee/{{post.committee.urlTitle}}"><h4>{{post.committee.title}}</h4></a>
+                <a ng-show="post.profile" href="member/{{post.profile.username}}"><h4>{{post.profile.username}}</h4></a>
+                <a ng-show="post.vote" href="vote/{{post.vote.id}}"><h4>{{post.vote.title}}</h4></a>
+                <div class="spacing-5"></div>
+            </div>
+            <p>{{post.post}}</p>
+        </div>
+        <div class="post-action-container">
+            <div class="pull-left">
+                <a href="#" ng-click="" class="grey"><i class="fa fa-angle-up"></i> 0 like </a> 
+                <a href="#" ng-click="" class="grey"><i class="fa fa-angle-down"></i> 0 dislike </a> 
+                <a href="#" class="grey" ng-click="reply(post)"><i class="fa fa-reply"></i> reply </a>
+            </div>
+            <div class="pull-right">
+                <a href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+        </div>
+        <br><br>
+        <div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children"></div>
+    </div>
+</md-card>

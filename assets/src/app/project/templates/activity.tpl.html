@@ -1,3 +1,12 @@
+<div class="spacing-15"></div>
+<form role="form" ng-submit="createPost(newPost)">
+    <div class="form-group">
+        <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+    </div>
+    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+</form>
+<div class="spacing-15"></div>
+
 <!--TODO: UNIFY MODELS? -->
 <md-card ng-repeat="work in work">
     <div style="padding:10px;">
@@ -55,10 +64,4 @@
     </div>
 </md-card>
 
-<div class="spacing-15"></div>
-<form role="form" ng-submit="createPost(newPost)">
-    <div class="form-group">
-        <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
-    </div>
-    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-</form>
+<div class="spacing-50"></div>

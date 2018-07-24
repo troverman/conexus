@@ -7,6 +7,16 @@
 
 module.exports = {
 
+	getOne: function(req, res) {
+		Work.findOne(req.param('id'))
+        .populate('user')
+        .populate('project')
+        .populate('task')
+        .then(function (model) {
+			res.json(model);
+        });
+	},
+
 	getSome: function(req, res) {
 
 		var limit = req.query.limit;
@@ -69,7 +79,6 @@ module.exports = {
 		}
 
 	},
-
 
 	create: function (req, res) {
 		var model = {

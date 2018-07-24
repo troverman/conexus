@@ -3,7 +3,7 @@ angular.module('models.work', ['lodash', 'services', 'sails.io',])
 .service('WorkModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
 
     this.getOne = function(model) {
-        var url = utils.prepareUrl('work/' + model.id);
+        var url = utils.prepareUrl('work/' + model);
         return $sailsSocket.get(url).then(success, error);    
     };
     

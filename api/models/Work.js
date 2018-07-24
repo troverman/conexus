@@ -14,6 +14,9 @@ module.exports = {
         content: {
             type: 'string',
         },
+        stream: {
+            type: 'string',
+        },
         identifer: {
             type: 'string',
         },

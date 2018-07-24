@@ -2,9 +2,12 @@
 module.exports = {
 	
 	getOne: function(req, res) {
-		Post.findOne(id)
+		Post.findOne(req.param('id'))
         .populate('user')
         .populate('project')
+        .populate('profile')
+        .populate('task')
+        .populate('work')
         .then(function (model) {
 			res.json(model);
         });
@@ -24,6 +27,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
+				Post.subscribe(req, models);
 				res.json(models);
 			});
 		}
@@ -37,6 +41,7 @@ module.exports = {
 			.populate('user')
 			.populate('project')
 			.then(function(models) {
+				Post.subscribe(req, models);
 				res.json(models);
 			});
 		}
@@ -50,6 +55,7 @@ module.exports = {
 			.populate('user')
 			.populate('project')
 			.then(function(models) {
+				Post.subscribe(req, models);
 				res.json(models);
 			});
 		}
@@ -62,6 +68,7 @@ module.exports = {
 			.populate('user')
 			.populate('project')
 			.then(function(models) {
+				Post.subscribe(req, models);
 				res.json(models);
 			});
 		}
@@ -70,16 +77,19 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			content: req.param('content'),
-			parent: req.param('parent'),
+			post: req.param('post'),
 			project: req.param('project'),
+			task: req.param('task'),
 			user: req.param('user'),
+			work: req.param('work'),
 		};
+		console.log(model)
 		Post.create(model)
-		.exec(function(err, message) {
+		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
-				Post.publishCreate(message);
-				res.json(message);
+				Post.publishCreate(model);
+				res.json(model);
 			}
 		});
 	},

@@ -4,14 +4,20 @@ module.exports = {
             type: 'string',
             required: true
         },
-        parent: {
-            type: 'string',
-        },
         project: {
             model: 'project',
         },
+        profile: {
+            model: 'user',
+        },
         post: {
             model: 'post'
+        },
+        task: {
+            model: 'task'
+        },
+        work: {
+            model: 'work'
         },
         plusCount: {
             type: 'integer',
@@ -31,12 +37,11 @@ module.exports = {
         }
     },
 
-    afterCreate: function (message, next) {
-        // set message.user = to appropriate user model
-        User.getOne(message.user)
+    afterCreate: function (post, next) {
+        User.getOne(post.user)
         .spread(function(user) {
-            message.user = user;
-            next(null, message);
+            post.user = user;
+            next(null, post);
         });
     }
     

@@ -196,13 +196,16 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.work = work;
 
+    //POST, WORK, TASK CREATE, VALIDATION (VOTE) | REACTION
+    //$scope.activity = $scope.work.concat(posts);
+
     console.log(work, tasks);
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){
-            $scope.newPost.parent = post.id;
+            $scope.newPost.post = post.id;
             $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.project = $scope.project;
+            $scope.newPost.project = $scope.project.id;
             console.log($scope.newPost)
             PostModel.create($scope.newPost).then(function(model) {
                 $scope.newPost = {};
@@ -232,8 +235,8 @@ angular.module( 'conexus.project', [
         }
     };
 
+    //TODO: GENERALIZED ACTIVITY
     $scope.reply = function(post){
-        //TODO: GENERALIZED ACTIVITY
         var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
         $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
@@ -266,11 +269,12 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$scope', 'channels', 'config', 'posts', 'titleService', function ProjectController( $location, $sailsSocket, $scope, channels, config, posts, titleService ) {
+.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, channels, config, posts, project, titleService ) {
     titleService.setTitle(project.title + ' | Channels | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
     $scope.newPost = {};
+    $scope.project = project;
     $scope.posts = posts;
 
     $scope.createPost = function(newPost) {
@@ -298,22 +302,25 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, project, titleService ) {
     titleService.setTitle(project.title + ' | Charter | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.bills = bills;  
     $scope.newMotionToggleVar = false;
+    $scope.project = project;
+
     $scope.newMotionToggle = function () {
         $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
     };
 
 }])
 
-.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', 'titleService', function ProjectController( $interval, $scope, config, entries, lodash, titleService ) {
+.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', 'project', 'titleService', function ProjectController( $interval, $scope, config, entries, lodash, project, titleService ) {
     titleService.setTitle(project.title + ' | Finance | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.entries = entries;
     $scope.newEntryToggleVar = false;
+    $scope.project = project;
 
     $scope.newEntryToggle = function () {
         $scope.newEntryToggleVar = $scope.newEntryToggleVar ? false : true;
@@ -356,9 +363,9 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectMembersCtrl', ['$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
     titleService.setTitle(project.title + ' | Members | conex.us');
     $scope.currentUser = config.currentUser;
-    $scope.project = project;
     $scope.members = members;
     $scope.newMember = {};
+    $scope.project = project;
 
     $scope.createMember = function() {
         $scope.newMember.user = config.currentUser.id;
@@ -383,8 +390,9 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'streams', 'titleService', function ProjectController( $sce, $scope, streams, titleService ) {
+.controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, project, streams, titleService ) {
     titleService.setTitle(project.title + ' | Streams | conex.us');
+    $scope.project = project;
     $scope.streams = streams;
     $scope.AudioContext = {};
     $scope.videoContext = {};
