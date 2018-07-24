@@ -173,13 +173,9 @@ angular.module( 'conexus.task', [
 
     //TODO: WEBSOCKETS | WEB3
     $sailsSocket.subscribe('post', function (envelope) {
-        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
                 $scope.posts.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
                 break;
         }
     });

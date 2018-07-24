@@ -18,10 +18,25 @@ module.exports = {
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
+		
+		Post.watch(req);
 
 		if (req.query.task){
 			var task = req.query.task;
 			Post.find({task:task})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if(req.query.work){
+			var work = req.query.work;
+			Post.find({work:work})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)

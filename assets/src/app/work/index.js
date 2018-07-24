@@ -14,30 +14,35 @@ angular.module( 'conexus.work', [
             work: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
                 return WorkModel.getOne($stateParams.id);
             }],
-            posts: ['PostModel', 'work', function(PostModel, task){
-                return null;
-                //return PostModel.getSome('work', task.id, 100, 0, 'createdAt DESC');
+            posts: ['PostModel', 'work', function(PostModel, work){
+                return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
-.controller( 'WorkController', ['$location', '$scope', 'config', 'titleService', 'work', 'WorkModel', function WorkController( $location, $scope, config, titleService, work, WorkModel) {
+.controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, work, WorkModel) {
     titleService.setTitle('Task | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
+    $scope.newReaction = {};
     $scope.reputationMultiplier = 1;
+    $scope.posts = posts;
     $scope.taskTime = 0;
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.work = work;
 
-    $scope.createPost = function(post){
-        $scope.newReaction.user = $scope.currentUser.id;
-        $scope.newPost.post = post.id;
-        //TODO: MODEL | CREATE
-        //PostModel.create($scope.newPost);
-        //TODO: NESTED RENDERING N STUFF
+    $scope.createPost = function(post) {
+        if ($scope.currentUser){
+            $scope.newPost.post = post.id;
+            $scope.newPost.user = $scope.currentUser.id;
+            $scope.newPost.work = $scope.work.id;
+            PostModel.create($scope.newPost).then(function(model) {
+                $scope.newPost = {};
+            });
+        }
+        else{$location.path('/login')}
     };
 
     //TODO: MODEL | CREATE REACTION | UPDATE POST
@@ -52,5 +57,33 @@ angular.module( 'conexus.work', [
         if (type =='minus'){$scope.posts[index].minusCount++}
         //TODO: UPDATE POST
     };
+
+    $scope.createVerification = function(post) {};
+
+    $scope.renderMessage = function(post){
+        if (post){
+            var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
+    };
+
+    $scope.reply = function(post){
+        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+        $scope.posts[index].showReply = !$scope.posts[index].showReply
+    };
+
+    //TODO: WEBSOCKETS | WEB3
+    $sailsSocket.subscribe('post', function (envelope) {
+        console.log(envelope)
+        switch(envelope.verb) {
+            case 'created':
+                $scope.posts.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.posts, {id: envelope.id});
+                break;
+        }
+    });
 
 }]);
