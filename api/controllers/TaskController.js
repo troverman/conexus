@@ -7,6 +7,7 @@ module.exports = {
 	getOne: function(req, res) {
 		Task.watch(req);
 		Task.findOne(req.param('id'))
+		.populate('project')
 		.then(function(model) {
 			Task.subscribe(req, model);
 			res.json(model);
