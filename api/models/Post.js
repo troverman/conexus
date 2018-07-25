@@ -36,13 +36,5 @@ module.exports = {
             required: true
         }
     },
-
-    afterCreate: function (post, next) {
-        User.getOne(post.user)
-        .spread(function(user) {
-            post.user = user;
-            next(null, post);
-        });
-    }
     
 };

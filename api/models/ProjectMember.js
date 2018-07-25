@@ -18,15 +18,6 @@ module.exports = {
             if (projectMemberModel.length == 0){next()}
         });
     },
-
-    afterCreate: function (project, next) {
-        // set message.user = to appropriate user model
-        User.getOne(project.user)
-        .spread(function(user) {
-            project.user = user;
-            next(null, project);
-        });
-    },
-    
+ 
 };
 

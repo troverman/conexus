@@ -276,7 +276,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "			<div style=\"padding:16px;\">\n" +
     "				<a href=\"/task/{{task.id}}\"><span class=\"\">{{task.title}}</span></a>\n" +
     "				<br>\n" +
-    "				<a href=\"/project/{{task.project.urlTitle}}\"><span class=\"\">{{task.project}}</span></a>\n" +
+    "				<a href=\"/project/{{task.project.urlTitle}}\"><span class=\"\">{{task.project.title}}</span></a>\n" +
     "				<button type=\"submit\" class=\"btn btn-default log-btn\" style=\"width:100%\">create</button>\n" +
     "			</div>\n" +
     "			<div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
@@ -2102,31 +2102,25 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "	<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "	<p>{{work.content}}</p>\n" +
     "	<br>\n" +
-    "\n" +
     "	<h3>Stream</h3>\n" +
     "	<p><a href=\"stream/1\">N/A</a></p>\n" +
     "	<br>\n" +
-    "\n" +
     "	<h3>Verification | {{work.verificationScore}}</h3>\n" +
-    "	<p>{{work.user.id}}</p>\n" +
-    "	<button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"verify(item)\">verify</button>\n" +
-    "	<br><br>\n" +
-    "\n" +
+    "	<p ng-repeat=\"verification in verifications\"><a href=\"member/{{verification.user.username}}\">{{verification.user.username}}</a> | {{verification.score}}</p>\n" +
+    "	<button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification()\">verify</button>\n" +
+    "	<br>\n" +
+    "	<br>\n" +
     "	<h3>Liquidity | Market Orders | Tokens</h3>\n" +
     "	<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
     "	<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
     "	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
     "	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->\n" +
-    "\n" +
     "	<br>\n" +
     "	<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
     "    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
-    "    <p><a href=\"market/{{work.task.id}}+onCompletion\">onCompletion+{{work.task.id}}</a></p>\n" +
-    "\n" +
     "    <br>\n" +
     "    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
     "    <p><a href=\"market/general\">general</a></p>\n" +
-    "\n" +
     "    <br>\n" +
     "	<div class=\"col-md-12\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
@@ -2138,7 +2132,6 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "        </form>\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "    </div>\n" +
-    "\n" +
     "	<div class=\"col-md-12\">\n" +
     "	    <md-card ng-repeat=\"post in posts\">\n" +
     "	        <md-card-title>\n" +
@@ -2166,7 +2159,6 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "	        </div>\n" +
     "	    </md-card>\n" +
     "    </div>\n" +
-    "\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "");

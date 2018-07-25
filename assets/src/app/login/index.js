@@ -11,7 +11,8 @@ angular.module( 'conexus.login', [
 		}
 	});
 }])
-.controller( 'LoginCtrl', ['$scope', 'config', 'titleService', function LoginController( $scope, config, titleService ) {
+.controller( 'LoginCtrl', ['$location', '$scope', 'config', 'titleService', function LoginController( $location, $scope, config, titleService ) {
 	titleService.setTitle('login | conex.us');
 	$scope.currentUser = config.currentUser;
+	if ($scope.currentUser){$location.path('/')}
 }]);

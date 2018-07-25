@@ -3,8 +3,8 @@ module.exports = {
 
 	getData: function(req){
 
-		User.getOne(req.id)
-		.spread(function(model) {
+		User.findOne(req.id)
+		.then(function(model) {
 
 			var fitbitPassport = model.passports.filter(function(obj){return obj.provider=='fitbit'});
 			var userId = fitbitPassport[0].identifier;
@@ -27,9 +27,6 @@ module.exports = {
 			});
 
 		})
-		.fail(function(err) {
-			console.log(err);
-		});
 		
 	}
 

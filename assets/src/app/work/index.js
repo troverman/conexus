@@ -17,6 +17,9 @@ angular.module( 'conexus.work', [
             posts: ['PostModel', 'work', function(PostModel, work){
                 return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
+            verifications: ['PostModel', 'work', function(PostModel, work){
+                return null;
+            }],
         }
     });
 }])
@@ -31,6 +34,7 @@ angular.module( 'conexus.work', [
     $scope.taskTime = 0;
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
+    $scope.verifications =[];
     $scope.work = work;
 
     $scope.createPost = function(post) {
@@ -58,7 +62,15 @@ angular.module( 'conexus.work', [
         //TODO: UPDATE POST
     };
 
-    $scope.createVerification = function(post) {};
+    $scope.createVerification = function(post) {
+        if ($scope.currentUser){
+            $scope.verifications.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
+            $scope.work.verificationScore = parseFloat($scope.work.verificationScore);
+            $scope.work.verificationScore += parseFloat($scope.currentUser.totalWork);
+        }
+        else{$location.path('/login')}
+
+    };
 
     $scope.renderMessage = function(post){
         if (post){

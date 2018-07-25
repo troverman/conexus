@@ -49,6 +49,7 @@ var AuthController = {
   callback: function (req, res) {
     passport.callback(req, res, function (err, user) {
       req.login(user, function (err) {
+        console.log(err)
         if (err) {res.redirect('/login');}
         // Upon successful login, send the user to the homepage were req.user
         // will available.

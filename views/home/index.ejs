@@ -1,3 +1,4 @@
+<!--TODO: REFACTOR-->
 <% if (currentUser !== undefined) { %>
     <script>
     var currentUser = {
@@ -5,7 +6,8 @@
     username: '<%= currentUser.username %>',
     email: '<%= currentUser.email %>',
     avatarUrl: '<%= currentUser.avatarUrl %>',
-    first_name: '<%= currentUser.first_name %>',
+    firstName: '<%= currentUser.first_name %>',
+    totalWork: '<%= currentUser.totalWork %>',
     createdAt: '<%= currentUser.createdAt %>',
     updatedAt: '<%= currentUser.updatedAt %>'
     };

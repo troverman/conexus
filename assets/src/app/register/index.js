@@ -11,7 +11,8 @@ angular.module( 'conexus.register', [
 		}
 	});
 }])
-.controller( 'RegisterCtrl', ['$scope', 'config', 'titleService', function RegisterController( $scope, config, titleService ) {
+.controller( 'RegisterCtrl', ['$location', '$scope', 'config', 'titleService', function RegisterController( $location, $scope, config, titleService ) {
 	titleService.setTitle('register | conex.us');
 	$scope.currentUser = config.currentUser;
+	if ($scope.currentUser){$location.path('/')}
 }]);

@@ -102,6 +102,7 @@ module.exports = {
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
+				//TODO: POPULATE USER
 				Post.publishCreate(model);
 				res.json(model);
 			}

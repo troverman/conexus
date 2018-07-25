@@ -135,7 +135,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/tasks.tpl.html'
             }
         },
-        //TODO: GET SOME
         resolve: {
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');

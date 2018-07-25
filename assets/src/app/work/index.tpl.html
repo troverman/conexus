@@ -5,31 +5,25 @@
 	<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 	<p>{{work.content}}</p>
 	<br>
-
 	<h3>Stream</h3>
 	<p><a href="stream/1">N/A</a></p>
 	<br>
-
 	<h3>Verification | {{work.verificationScore}}</h3>
-	<p>{{work.user.id}}</p>
-	<button style="width:100%;" class="btn btn-default log-btn" ng-click="verify(item)">verify</button>
-	<br><br>
-
+	<p ng-repeat="verification in verifications"><a href="member/{{verification.user.username}}">{{verification.user.username}}</a> | {{verification.score}}</p>
+	<button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification()">verify</button>
+	<br>
+	<br>
 	<h3>Liquidity | Market Orders | Tokens</h3>
 	<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
 	<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
 	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
 	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-
 	<br>
 	<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
     <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
-    <p><a href="market/{{work.task.id}}+onCompletion">onCompletion+{{work.task.id}}</a></p>
-
     <br>
     <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
     <p><a href="market/general">general</a></p>
-
     <br>
 	<div class="col-md-12">
         <div class="spacing-15"></div>
@@ -41,7 +35,6 @@
         </form>
         <div class="spacing-15"></div>
     </div>
-
 	<div class="col-md-12">
 	    <md-card ng-repeat="post in posts">
 	        <md-card-title>
@@ -69,6 +62,5 @@
 	        </div>
 	    </md-card>
     </div>
-
 </div>
 <div class="spacing-50"></div>
