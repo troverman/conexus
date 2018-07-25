@@ -9,12 +9,16 @@ angular.module( 'conexus.markets', [
 				controller: 'MarketsCtrl',
 				templateUrl: 'markets/index.tpl.html'
 			}
-		}
-        //TODO: RESOLVE
+		},
+        resolve:{
+            orders: ['OrderModel', function(OrderModel) {
+                return OrderModel.getSome('', '', '', 100, 0, 'createdAt DESC');
+            }],
+        }
 	});
 }])
 
-.controller( 'MarketsCtrl', ['$scope', 'titleService', function MarketsController( $scope, titleService ) {
+.controller( 'MarketsCtrl', ['$scope', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, OrderModel, orders, titleService ) {
 	titleService.setTitle('Marketplace | conex.us');
     $scope.chart = {
         chart: {
@@ -46,17 +50,17 @@ angular.module( 'conexus.markets', [
         },
         credits:{enabled:false},
     };
-    $scope.newOrderToggleVar = false;
-    $scope.orders = [];
     $scope.newOrder = {};
+    $scope.newOrderToggleVar = false;
+    $scope.orders = orders;
     $scope.trades = {};
 
     //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {
-        $scope.orders.push($scope.newOrder);
-        $scope.newOrder = {};
-        //$scope.newOrderToggle();
-        //OrderModel.create($scope.newOrder).then(function(model) {});
+        OrderModel.create($scope.newOrder).then(function(model) {
+            $scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
     };
 
     $scope.newOrderToggle = function () {

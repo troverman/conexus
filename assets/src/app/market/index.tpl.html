@@ -34,18 +34,18 @@
 	    <div style="padding:10px;">
 			<form role="form" ng-submit="createOrder(newTask)">
 				<div class="form-group">
-					<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.orderIdentiferSet" class="form-control" id="taskTitle">
+					<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group">
-					<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.orderAmountSet" class="form-control" id="taskTitle">
+					<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group">
-					<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.orderIdentiferSet1" class="form-control" id="taskTitle">
+					<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group">
-					<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.orderAmountSet1" class="form-control" id="taskTitle">
+					<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
 				</div>
-				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.orderAmountSet">create</button>
+				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
 			</form>
 		</div>
 	</md-card>

@@ -6,7 +6,7 @@ module.exports = {
 
 	attributes: {
         amount: {
-            type: 'string',
+            type: 'integer',
             required: true
         },
         identifer: {
@@ -26,21 +26,6 @@ module.exports = {
             model: 'user'
         }
     },
-
-    getAll: function() {
-        return Finance.find()
-        .sort({createdAt: 'desc'})
-        .then(function (models) {
-            return [models];
-        });
-    },
-
-    getOne: function(id) {
-        return Finance.findOne(id)
-        .then(function (model) {
-            return [model];
-        });
-    }
 
 };
 

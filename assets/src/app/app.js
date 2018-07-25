@@ -25,6 +25,7 @@ angular.module( 'conexus', [
     'conexus.intro',
     'conexus.login',
     'conexus.member',
+    'conexus.order',
     'conexus.post',
     'conexus.project',
     'conexus.projects',

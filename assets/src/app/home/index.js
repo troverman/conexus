@@ -56,11 +56,12 @@ angular.module( 'conexus.home', [
 
 	//TODO: MODEL | CREATE | NESTED?
 	$scope.createPost = function(post){
-		$scope.newReaction.user = $scope.currentUser.id;
-        $scope.newPost.post = post.id;
-		//TODO: MODEL | CREATE
-		//PostModel.create($scope.newPost);
-		//TODO: NESTED RENDERING N STUFF
+		$scope.newPost.post = post.id;
+		$scope.newPost.user = $scope.currentUser.id;
+		$scope.newPost.profile = $scope.currentUser.id;
+		PostModel.create($scope.newPost).then(function(model) {
+			$scope.newPost = {};
+		});
 	};
 
 	//TODO: MODEL | CREATE REACTION | UPDATE POST

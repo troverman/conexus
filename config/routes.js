@@ -19,12 +19,13 @@ module.exports.routes = {
   'get /member/:path/followers': 'HomeController.index',
   'get /member/:path/following': 'HomeController.index',
   'get /member/:path/wallet': 'HomeController.index',
+  'get /order/:id': 'HomeController.index',
   'get /post/:id': 'HomeController.index',
   'get /projects': 'HomeController.index',
   'get /project/:path': 'HomeController.index',
   'get /project/:path/edit': 'HomeController.index',
   'get /project/:path/channels': 'HomeController.index',//??
-  'get /project/:path/charter': 'HomeController.index',
+  'get /project/:path/charter': 'HomeController.index',//??
   'get /project/:path/finance': 'HomeController.index',
   'get /project/:path/members': 'HomeController.index',
   'get /project/:path/tasks': 'HomeController.index',
@@ -59,6 +60,15 @@ module.exports.routes = {
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
   'post /api/follower': 'FollowerController.create',
   'delete /api/follower/:id': 'FollowerController.destroy',
+
+  /**
+   * Order routes
+   *
+   */
+  'get /api/order': 'OrderController.getSome',
+  'get /api/order/:id': 'OrderController.getOne',
+  'post /api/order': 'OrderController.create',
+  'delete /api/post/:id': 'OrderController.destroy',
 
   /**
    * Post routes

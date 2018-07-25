@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'post/index.tpl.html', 'post/post.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/charter.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'connect/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.old.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/wallet.tpl.html', 'nav/index.tpl.html', 'order/index.tpl.html', 'post/index.tpl.html', 'post/post.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/charter.tpl.html', 'project/templates/finance.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -630,18 +630,18 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "	    <div style=\"padding:10px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.orderIdentiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.orderAmountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.orderAmountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.orderAmountSet\">create</button>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
     "			</form>\n" +
     "		</div>\n" +
     "	</md-card>\n" +
@@ -719,18 +719,18 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "	    <div style=\"padding:10px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.orderIdentiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.orderAmountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Identifer Set 2\" ng-disabled=\"true\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Identifer Set 2\" ng-disabled=\"true\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.orderAmountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.orderAmountSet\">create</button>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
     "			</form>\n" +
     "		</div>\n" +
     "	</md-card>\n" +
@@ -817,18 +817,18 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "	    <div style=\"padding:10px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.orderAmountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.orderIdentiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.orderAmountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.orderAmountSet\">create</button>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
     "			</form>\n" +
     "		</div>\n" +
     "	</md-card>\n" +
@@ -1135,6 +1135,46 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "  </div>\n" +
     "  <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "</div>");
+}]);
+
+angular.module("order/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("order/index.tpl.html",
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
+    "	<md-card>\n" +
+    "		<md-card-title>\n" +
+    "			<md-card-title-text>\n" +
+    "				<div>\n" +
+    "					<a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span class=\"\">{{post.user.username}}</span></a>\n" +
+    "					<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "				</div>\n" +
+    "				<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "			</md-card-title-text>\n" +
+    "		</md-card-title>\n" +
+    "		<div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "	        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "	        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "	        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	    </div>\n" +
+    "	    <!--TODO: NESTED -->\n" +
+    "		<div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "			<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "			    <div class=\"form-group\">\n" +
+    "			        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "			    </div>\n" +
+    "			    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
+    "		<!--<div ng-include=\"'post/post.tpl.html'\" ng-repeat=\"post in post.children\"></div>-->\n" +
+    "	</md-card>\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "");
 }]);
 
 angular.module("post/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -1561,13 +1601,13 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "<br>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "<br><br>\n" +
-    "<md-card ng-repeat=\"member in members\" class=\"col-md-3\">\n" +
+    "<md-card ng-repeat=\"member in members\" class=\"col-sm-3 col-xs-6\">\n" +
     "	<div style=\"padding:10px;\">\n" +
     "		<img src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
     "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
-    "		<p style=\"color:gray\">creator</p>\n" +
-    "		<p style=\"color:gray\">total time: {{member.user.totalWork}}</p>\n" +
-    "		<p style=\"color:gray\">dimensional reputation: 888</p>\n" +
+    "		<!--<p style=\"color:gray\">creator</p>-->\n" +
+    "		<p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
+    "		<p style=\"color:gray\">dimensional reputation | 888</p>\n" +
     "	</div>\n" +
     "</md-card>");
 }]);

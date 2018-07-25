@@ -9,12 +9,16 @@ angular.module( 'conexus.market', [
 				controller: 'MarketCtrl',
 				templateUrl: 'market/index.tpl.html'
 			}
-		}
-        //TODO: RESOLVE
+		},
+        resolve:{
+            orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
+                return OrderModel.getSome('market', $stateParams.id, '', 100, 0, 'createdAt DESC');
+            }],
+        }
 	});
 }])
 
-.controller( 'MarketCtrl', ['$scope', '$stateParams', 'titleService', function MarketController( $scope, $stateParams, titleService ) {
+.controller( 'MarketCtrl', ['$scope', '$stateParams', 'OrderModel', 'orders', 'titleService', function MarketController( $scope, $stateParams, OrderModel, orders, titleService ) {
 	titleService.setTitle('Marketplace | conex.us');
     $scope.stateParams = $stateParams;
 	$scope.chart = {
@@ -47,17 +51,18 @@ angular.module( 'conexus.market', [
         },
         credits:{enabled:false},
     };
-    $scope.newOrderToggleVar = false;
-    $scope.orders = [];
     $scope.newOrder = {};
-    $scope.newOrder.orderIdentiferSet = $scope.stateParams.id;
+    $scope.newOrderToggleVar = false;
+    $scope.orders = orders;
+    $scope.newOrder.identiferSet = $scope.stateParams.id;
     $scope.trades = {};
 
     $scope.createOrder = function() {
-        $scope.orders.push($scope.newOrder);
-        $scope.newOrder = {};
-        $scope.newOrder.orderIdentiferSet = $scope.stateParams.id;
-        //OrderModel.create($scope.newOrder).then(function(model) {});
+        $scope.newOrder.identiferSet = $scope.stateParams.id;
+        OrderModel.create($scope.newOrder).then(function(model) {
+            $scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
     };
 
     $scope.newOrderToggle = function () {

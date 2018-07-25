@@ -12,6 +12,7 @@ angular.module( 'conexus.member', [
 			}
 		},
 		resolve: {
+            //TODO: REFACTOR
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
             }],
@@ -128,20 +129,22 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, posts, titleService, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, posts, titleService, work) {
     $scope.currentUser = config.currentUser;
+    $scope.member = member;
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.posts = posts;
     $scope.work = work;
 
     $scope.createPost = function(post){
-        $scope.newReaction.user = $scope.currentUser.id;
         $scope.newPost.post = post.id;
-        //TODO: MODEL | CREATE
-        //PostModel.create($scope.newPost);
-        //TODO: NESTED RENDERING N STUFF
-    };  
+        $scope.newPost.user = $scope.currentUser.id;
+        $scope.newPost.profile = $scope.member.id;
+        PostModel.create($scope.newPost).then(function(model) {
+            $scope.newPost = {};
+        });
+    };
 
     $scope.renderMessage = function(message){
         if (message){

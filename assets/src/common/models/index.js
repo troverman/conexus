@@ -1,6 +1,7 @@
 angular.module('models', [
 	'models.follower',
 	'models.member',
+	'models.order',
 	'models.post',
 	'models.project',
 	'models.reaction',

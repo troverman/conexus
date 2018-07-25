@@ -98,7 +98,6 @@ module.exports = {
 			user: req.param('user'),
 			work: req.param('work'),
 		};
-		console.log(model)
 		Post.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}

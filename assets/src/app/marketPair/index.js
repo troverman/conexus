@@ -9,12 +9,16 @@ angular.module( 'conexus.marketPair', [
 				controller: 'MarketPairCtrl',
 				templateUrl: 'marketPair/index.tpl.html'
 			}
-		}
-        //TODO: RESOLVE
+		},
+        resolve:{
+            orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
+                return OrderModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 100, 0, 'createdAt DESC');
+            }],
+        }
 	});
 }])
 
-.controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'titleService', function MarketPairController( $scope, $stateParams, titleService ) {
+.controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'OrderModel', 'orders', 'titleService', function MarketPairController( $scope, $stateParams, OrderModel, orders, titleService ) {
 	titleService.setTitle('Marketplace | conex.us');
     $scope.stateParams = $stateParams;
 	$scope.chart = {
@@ -47,20 +51,21 @@ angular.module( 'conexus.marketPair', [
         },
         credits:{enabled:false},
     };
-    $scope.newOrderToggleVar = false;
-    $scope.orders = [];
     $scope.newOrder = {};
-    $scope.newOrder.orderIdentiferSet = $scope.stateParams.id;
-    $scope.newOrder.orderIdentiferSet1 = $scope.stateParams.id1;
+    $scope.newOrderToggleVar = false;
+    $scope.orders = orders;
+    $scope.newOrder.identiferSet = $scope.stateParams.id;
+    $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
     $scope.trades = {};
 
     //TODO: CREATE ORDER
     $scope.createOrder = function() {
-        $scope.orders.push($scope.newOrder);
-        $scope.newOrder = {};
-        $scope.newOrder.orderIdentiferSet = $scope.stateParams.id;
-        $scope.newOrder.orderIdentiferSet1 = $scope.stateParams.id1;
-        //OrderModel.create($scope.newOrder).then(function(model) {});
+        $scope.newOrder.identiferSet = $scope.stateParams.id;
+        $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
+        OrderModel.create($scope.newOrder).then(function(model) {
+            $scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
     };
 
     $scope.newOrderToggle = function () {

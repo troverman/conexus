@@ -242,10 +242,19 @@ angular.module( 'conexus.project', [
     };
 
     $sailsSocket.subscribe('post', function (envelope) {
-        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
-                console.log(envelope.data);
+                $scope.posts.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.posts, {id: envelope.id});
+                break;
+        }
+    });
+
+    $sailsSocket.subscribe('reaction', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
                 $scope.posts.unshift(envelope.data);
                 break;
             case 'destroyed':
@@ -277,11 +286,11 @@ angular.module( 'conexus.project', [
     $scope.project = project;
     $scope.posts = posts;
 
-    $scope.createPost = function(newPost) {
+    $scope.createPost = function() {
         if ($scope.currentUser){
-            newPost.user = config.currentUser.id;
-            newPost.project = project;
-            PostModel.create(newPost).then(function(model) {
+            $scope.newPost.newPost.user = $scope.currentUser.id;
+            $scope.newPost.newPost.project = $scope.project.id;
+            PostModel.create($scope.newPost).then(function(model) {
                 $scope.newPost = {};
             });
         }
@@ -355,7 +364,6 @@ angular.module( 'conexus.project', [
             }
         },
         credits:{enabled:false},
-
     };
 
 }])

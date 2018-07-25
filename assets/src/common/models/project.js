@@ -8,6 +8,12 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.get(url, query).then(success, error);
     };
 
+    this.getSome = function(limit, skip) {
+        var url = utils.prepareUrl('project');
+        var query = {params:{limit:limit,skip:skip}};
+        return $sailsSocket.get(url, query).then(success, error);
+    };
+
     this.getByUrl = function(model) {
         var url = utils.prepareUrl('project/url/' + model);
         return $sailsSocket.get(url).then(success, error);
