@@ -79,12 +79,12 @@ angular.module( 'conexus.project', [
         }
     })
     //TODO: FEATURE | ALLOW FOR OPEN BUDGETING / INPUT OUTPUT LEGER. ALLOW FOR DONATIONS / FUND TRANSFERRANCE | MULTIPLE LEDGERS
-    .state( 'project.finance', {
-        url: '/finance',
+    .state( 'project.ledger', {
+        url: '/ledger',
         views: {
-            "finance": {
-                controller: 'ProjectFinanceCtrl',
-                templateUrl: 'project/templates/finance.tpl.html'
+            "ledger": {
+                controller: 'ProjectLedgerCtrl',
+                templateUrl: 'project/templates/ledger.tpl.html'
             }
         },
         resolve: {
@@ -324,8 +324,8 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectFinanceCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', 'project', 'titleService', function ProjectController( $interval, $scope, config, entries, lodash, project, titleService ) {
-    titleService.setTitle(project.title + ' | Finance | conex.us');
+.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', 'project', 'titleService', function ProjectController( $interval, $scope, config, entries, lodash, project, titleService ) {
+    titleService.setTitle(project.title + ' | Ledger | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.entries = entries;
     $scope.newEntryToggleVar = false;
