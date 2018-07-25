@@ -13,7 +13,7 @@ angular.module( 'conexus.projects', [
 		resolve: {
             //TODO: GET SOME
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getAll();
+                return ProjectModel.getSome(100, 0, 'createdAt DESC');
             }]
         }
 	});
@@ -27,6 +27,7 @@ angular.module( 'conexus.projects', [
     $scope.projects = projects;
 
     //TODO: FILTERS ETC
+    //TODO: GET SOME
 
     $scope.createProject = function(newProject) {
         $scope.newProject.user = $scope.currentUser.id;

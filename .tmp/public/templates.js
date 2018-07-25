@@ -163,8 +163,8 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "\n" +
     "	<!--<input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">-->\n" +
     "	\n" +
-    "	<div ng-repeat=\"user in users\">\n" +
-    "		<h3><a href=\"/member/{{user.username}}\">{{user.username}}</a></h3>\n" +
+    "	<div ng-repeat=\"member in members\">\n" +
+    "		<h3><a href=\"/member/{{member.username}}\">{{member.username}}</a></h3>\n" +
     "	</div>\n" +
     "\n" +
     "	<!--<h1>live</h1>\n" +

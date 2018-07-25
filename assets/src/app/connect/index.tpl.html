@@ -15,8 +15,8 @@
 
 	<!--<input style="margin-top:5px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">-->
 	
-	<div ng-repeat="user in users">
-		<h3><a href="/member/{{user.username}}">{{user.username}}</a></h3>
+	<div ng-repeat="member in members">
+		<h3><a href="/member/{{member.username}}">{{member.username}}</a></h3>
 	</div>
 
 	<!--<h1>live</h1>

@@ -26,24 +26,5 @@ module.exports = {
         },
     },
 
-    getOne: function(id) {
-        return Stream.find()
-        .where({id: id})
-        .populate('project')
-        .populate('task')
-        .populate('user')
-        .then(function (models) {
-            return [models];
-        });
-    },
-
-     getOne: function(filter) {
-        return Stream.find()
-        .where(filter)
-        .then(function (models) {
-            return [models];
-        });
-    },
-
 };
 

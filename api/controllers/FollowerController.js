@@ -1,26 +1,19 @@
 /**
  * FollowerController
- *
  */
 
 module.exports = {
 
-	getAll: function(req, res) {
-		Follower.getAll()
-		.spread(function(models) {
-			Follower.watch(req);
-			Follower.subscribe(req, models);
-			res.json(models);
-		});
-	},
 
 	getOne: function(req, res) {
-		Follower.getOne(req.param('id'))
+		Follower.findOne(req.param('id'))
 		.spread(function(model) {
 			Follower.subscribe(req, model);
 			res.json(model);
 		});
 	},
+
+	getSome: function(req, res) {},
 
 	getFollowers: function(req, res) {
 		var FollowedId = req.param('id');

@@ -25,15 +25,10 @@ angular.module( 'conexus.markets', [
             zoomType: 'x',
         },
         series: [{
-            id: 'Expenses',
+            id: 'ExchangePrice',
             type: 'spline',
-            name: 'Expenses USD',
+            name: 'Exchange Price',
             data: [65, 59, 80, 81, 56, 55, 40]
-        },{
-            id: 'Revenue',
-            type: 'spline',
-            name: 'Revenue USD',
-            data: [28, 48, 40, 19, 86, 27, 90]
         }],
         title: {
             text: ''

@@ -5,21 +5,28 @@
 
 module.exports = {
 
-	getAll: function(req, res) {
-		Project.getAll()
-		.spread(function(models) {
-			Project.watch(req);
-			Project.subscribe(req, models);
-			res.json(models);
+	getOne: function(req, res) {
+		Project.findOne(req.param('id'))
+		.then(function(model) {
+			Project.subscribe(req, model);
+			res.json(model);
 		})
 	},
 
-	getOne: function(req, res) {
-		Project.getOne(req.param('id'))
-		.then(function(model) {
-			Project.subscribe(req, model[0]);
-			res.json(model[0]);
-		})
+	getSome: function(req, res) {
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
+		Project.watch(req);
+		Project.find({})
+		.limit(limit)
+		.skip(skip)
+		.sort(sort)
+		.populate('user')
+		.then(function(models) {
+			Project.subscribe(req, models);
+			res.json(models);
+		});
 	},
 
 	getByUrl: function(req, res) {
@@ -44,7 +51,6 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-
 		var model = {
 			title: req.param('title'),
 			description: req.param('description'),
@@ -52,7 +58,6 @@ module.exports = {
 			user: req.param('user'),
 			parent: req.param('parent'),
 		};
-
 		Project.create(model)
 		.exec(function(err, project) {
 			if (err) {
@@ -68,7 +73,6 @@ module.exports = {
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Project.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

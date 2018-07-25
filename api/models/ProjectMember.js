@@ -27,21 +27,6 @@ module.exports = {
             next(null, project);
         });
     },
-
-    getAll: function() {
-        return ProjectMember.find()
-        .sort({createdAt: 'desc'})
-        .then(function (models) {
-            return [models];
-        });
-    },
-
-    getOne: function(id) {
-        return ProjectMember.findOne(id)
-        .then(function (model) {
-            return [model];
-        });
-    }
-
+    
 };
 

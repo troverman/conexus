@@ -5,6 +5,10 @@ angular.module('models.validation', ['lodash', 'services', 'sails.io',])
     this.getOne = function(model) {
         return model;
     };
+
+    this.getSome = function(model) {
+        return model;
+    };
     
     this.create = function(newModel) {
         var url = utils.prepareUrl('work');

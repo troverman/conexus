@@ -1,7 +1,5 @@
 /**
  * Route Mappings
- * (sails.config.routes)
- *
  */
 
 module.exports.routes = {
@@ -52,9 +50,8 @@ module.exports.routes = {
 
   /**
    * Follower routes
-   *
    */
-  'get /api/follower': 'FollowerController.getAll',
+  'get /api/follower': 'FollowerController.getSome',
   'get /api/follower/:id': 'FollowerController.getOne',
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
@@ -63,7 +60,6 @@ module.exports.routes = {
 
   /**
    * Order routes
-   *
    */
   'get /api/order': 'OrderController.getSome',
   'get /api/order/:id': 'OrderController.getOne',
@@ -72,7 +68,6 @@ module.exports.routes = {
 
   /**
    * Post routes
-   *
    */
   'get /api/post': 'PostController.getSome',
   'get /api/post/:id': 'PostController.getOne',
@@ -81,28 +76,25 @@ module.exports.routes = {
 
   /**
    * Reaction routes
-   *
    */
-  'get /api/reaction': 'ReactionController.getAll',
+  'get /api/reaction': 'ReactionController.getSome',
   'get /api/reaction/:id': 'ReactionController.getOne',
-  'get /api/reaction/post/:id': 'ReactionController.getByPost',
   'post /api/reaction': 'ReactionController.create',
   'delete /api/reaction/:id': 'ReactionController.destroy',
 
   /**
    * Project routes
-   *
    */
-  'get /api/project': 'ProjectController.getAll',
+  'get /api/project': 'ProjectController.getSome',
   'get /api/project/:id': 'ProjectController.getOne',
   'get /api/project/children/:id': 'ProjectController.getChildren',
   'get /api/project/url/:path': 'ProjectController.getByUrl',
   'post /api/project': 'ProjectController.create',
+  'post /api/stream/:id': 'ProjectController.update',
   'delete /api/project/:id': 'ProjectController.destroy',
 
    /**
    * ProjectMember routes
-   *
    */
   'get /api/project/:id/member': 'ProjectMemberController.getByProject',
   'post /api/project/member': 'ProjectMemberController.create',
@@ -116,30 +108,29 @@ module.exports.routes = {
 
   /**
    * Stream routes
-   *
    */
   'get /api/stream': 'StreamController.getSome',
   'get /api/stream/:id': 'StreamController.getOne',
-  'post /api/stream/:id': 'Stream.update',
-  'delete /api/stream/:id': 'TaskController.destroy',
+  'post /api/stream/:id': 'StreamController.update',
+  'post /api/stream': 'StreamController.create',
+  'delete /api/stream/:id': 'StreamController.destroy',
 
   /**
    * Task routes
-   *
    */
-  'get /api/task': 'TaskController.getAll',
+  'get /api/task': 'TaskController.getSome',
   'get /api/task/:id': 'TaskController.getOne',
-  'get /api/task/project/:id': 'TaskController.getByProject',
+  'post /api/task/:id': 'TaskController.update',
   'post /api/task': 'TaskController.create',
   'delete /api/task/:id': 'TaskController.destroy',
 
   /**
    * User routes
    */
-  'get /api/user': 'UserController.getAll',
+  'get /api/user': 'UserController.getSome',
   'get /api/user/:id': 'UserController.getOne',
   'get /api/user/username/:path': 'UserController.getByUsername',
-  'get /api/user/subscribe': 'UserController.subscribe',
+  //'get /api/user/subscribe': 'UserController.subscribe',
   'post /api/user': 'UserController.create',
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
@@ -151,9 +142,6 @@ module.exports.routes = {
   'get /api/work/:id': 'WorkController.getOne',
   'post /api/work': 'WorkController.create',
 
-  '/.well-known/acme-challenge/9gf-zaOshMDeJUOaL0j2lH7TnRTNxau1eF2z06fav-I': 'HomeController.ssl',
-
   //'get /*' : 'HomeController.index'
-
 
 };

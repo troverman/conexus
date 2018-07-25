@@ -1,9 +1,30 @@
 /**
  * ProjectMemberController
- *
  */
 
 module.exports = {
+
+	getSome: function(req, res) {
+		
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
+		var project = req.query.project;
+
+		ProjectMember.watch(req);
+
+		ProjectMember.find({project:project})
+		.limit(limit)
+		.skip(skip)
+		.sort(sort)
+		.populate('user')
+		.populate('project')
+		.then(function(models) {
+			ProjectMember.subscribe(req, models);
+			res.json(models);
+		});
+
+	},
 
 	getByProject: function(req, res) {
 		ProjectMember.find()

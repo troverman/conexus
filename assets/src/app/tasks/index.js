@@ -13,7 +13,7 @@ angular.module( 'conexus.tasks', [
         resolve: {
         	//TODO: GETSOME
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getAll();
+                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -24,5 +24,6 @@ angular.module( 'conexus.tasks', [
 	$scope.tasks = tasks;
 	
 	//TODO: FILTERS ETC
+	//TODO: getSome
 
 }]);

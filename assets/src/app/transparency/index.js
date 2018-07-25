@@ -24,12 +24,12 @@ angular.module( 'conexus.transparency', [
         series: [{
             id: 'Expenses',
             type: 'spline',
-            name: 'Expenses USD',
+            name: 'Expenses',
             data: [65, 59, 80, 81, 56, 55, 40]
         },{
             id: 'Revenue',
             type: 'spline',
-            name: 'Revenue USD',
+            name: 'Revenue',
             data: [28, 48, 40, 19, 86, 27, 90]
         }],
         title: {

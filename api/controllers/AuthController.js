@@ -1,7 +1,7 @@
 /**
  * Authentication Controller
- *
  */
+ 
 var AuthController = {
 
   login: function (req, res) {

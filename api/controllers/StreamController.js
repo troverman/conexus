@@ -1,12 +1,16 @@
 /**
  * StreamController
- *
- * @description :: Server-side logic for managing Tasks
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var _ = require('lodash');
 
 module.exports = {
+
+	getOne: function(req, res) {
+		Stream.findOne(req.param('id'))
+		.then(function(model) {
+			Stream.subscribe(req, model);
+			res.json(model);
+		});
+	},
 
 	getSome: function(req, res) {
 		if(req.query.project){
@@ -51,20 +55,12 @@ module.exports = {
 		}
 	},
 
-	getOne: function(req, res) {
-		Stream.getOne(req.param('id'))
-		.spread(function(model) {
-			Stream.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	create: function (req, res) {
 		var model = {
 			title: req.param('title'),
+			streamUrl: req.param('streamUrl'),
 			project: req.param('project'),
-			taskContent: req.param('taskContent'),
-			taskValue: req.param('taskValue'),
+			task: req.param('task'),
 			user: req.param('user')
 		};
 		Stream.create(model)

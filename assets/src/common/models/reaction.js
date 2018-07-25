@@ -2,9 +2,10 @@ angular.module('models.reaction', ['lodash', 'services', 'sails.io',])
 
 .service('ReactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function() {
+    this.getSome = function(type, filter, limit, skip, sort) {
         var url = utils.prepareUrl('reaction');
-        return $sailsSocket.get(url).then(success, error);
+        var query = {};
+        return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.create = function(newModel) {

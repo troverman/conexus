@@ -50,19 +50,5 @@ module.exports = {
         });
             
     },
-
-    getAll: function() {
-        return User.find()
-        .then(function (models) {
-            return [models];
-        });
-    },
-
-    getOne: function(id) {
-        return User.findOne(id)
-        .populate('passports')
-        .then(function (model) {
-            return [model];
-        });
-    }
+    
 };

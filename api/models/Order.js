@@ -17,6 +17,9 @@ module.exports = {
 		identiferSet1: {
             type: 'string',
 		},
+		status: {
+            type: 'string',
+		},
 		user: {
             model: 'user',
         }

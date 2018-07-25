@@ -1,33 +1,31 @@
 module.exports = {
 
 	getOne: function(req, res) {
-		User.getOne(req.param('id'))
-		.spread(function(model) {
+		User.findOne(req.param('id'))
+		.populate('passports')
+		.then(function(model) {
 			User.subscribe(req, model);
 			res.json(model);
 		});
 	},
 
 	getSome: function(req, res) {
-		User.getOne(req.param('id'))
-		.spread(function(model) {
-			User.subscribe(req, model);
-			res.json(model);
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
+		User.watch(req);
+		User.find({})
+		.limit(limit)
+		.skip(skip)
+		.sort(sort)
+		.then(function(models) {
+			User.subscribe(req, models);
+			res.json(models);
 		});
 	},
 
-	getAll: function(req, res) {
-		User.getAll()
-		.spread(function(models) {
-			User.watch(req);
-			User.subscribe(req, models);
-			res.json(models);
-		})
-	},
-
 	getByUsername: function(req, res) {
-		User.find()
-		.where({username: req.param('path')})
+		User.find({username: req.param('path')})
 		.spread(function(model) {
 			User.subscribe(req, model);
 			res.json(model);
@@ -54,7 +52,6 @@ module.exports = {
 		var id = req.param('id');
 		var model = {
 			//email: req.param('email'),
-			//first_name : req.param('first_name'),
 			//username : req.param('username'),
 			avatarUrl: req.param('avatarUrl'),
 		};

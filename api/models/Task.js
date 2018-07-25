@@ -61,22 +61,5 @@ module.exports = {
         },
     },
 
-    getAll: function() {
-        return Task.find()
-        .sort({createdAt: 'DESC'})
-        .populate('user')
-        .then(function (models) {
-            return [models];
-        });
-    },
-
-    getOne: function(id) {
-        return Task.findOne(id)
-        .populate('project')
-        .populate('user')
-        .then(function (model) {
-            return [model];
-        });
-    }
 };
 

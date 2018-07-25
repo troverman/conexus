@@ -73,6 +73,8 @@ angular.module( 'conexus.work', [
         $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
+    //TODO: GET SOME
+
     //TODO: WEBSOCKETS | WEB3
     $sailsSocket.subscribe('post', function (envelope) {
         console.log(envelope)

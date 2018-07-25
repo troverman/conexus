@@ -23,25 +23,6 @@ module.exports = {
         }
     },
     
-    getAll: function() {
-        return Follower.find()
-        .sort({createdAt: 'desc'})
-        .populate('followed')
-        .populate('follower')
-        .then(function (models) {
-            return [models];
-        });
-    },
-
-    getOne: function(id) {
-        return Follower.findOne(id)
-        .populate('followed')
-        .populate('follower')
-        .then(function (model) {
-            return [model];
-        });
-    },
-
     getFollowers: function(followed_model) {
         return Follower.find()
         .sort({createdAt: 'desc'})

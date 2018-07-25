@@ -2,13 +2,16 @@ angular.module('models.task', ['lodash', 'services', 'sails.io',])
 
 .service('TaskModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getAll = function() {
-        var url = utils.prepareUrl('task');
+    this.getOne = function(model) {
+        var url = utils.prepareUrl('task/'+model);
         return $sailsSocket.get(url).then(success, error);
     };
 
-    this.getOne = function(model) {
-        var url = utils.prepareUrl('task/'+model);
+    this.getSome = function(type, filter, limit, skip, sort) {
+        var query = {};
+        if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
+        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+        var url = utils.prepareUrl('task');
         return $sailsSocket.get(url).then(success, error);
     };
 

@@ -2,12 +2,7 @@ angular.module('models.stream', ['lodash', 'services', 'sails.io',])
 
 .service('StreamModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getAll = function() {
-        var url = utils.prepareUrl('stream');
-        return $sailsSocket.get(url).then(success, error);
-    };
-
-    this.getSome = function(model) {
+    this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
         var url = utils.prepareUrl('stream');
         return $sailsSocket.get(url, query).then(success, error);

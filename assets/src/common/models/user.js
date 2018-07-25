@@ -2,14 +2,15 @@ angular.module('models.user', ['lodash', 'services', 'sails.io',])
 
 .service('UserModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getAll = function() {
-        var url = utils.prepareUrl('user');
-        return $sailsSocket.get(url).then(success, error);
-    };
-
     this.getOne = function(id) {
         var url = utils.prepareUrl('user/' + id);
         return $sailsSocket.get(url).then(success, error);
+    };
+
+    this.getSome = function(limit, skip, sort) {
+        var url = utils.prepareUrl('user');
+        var query = {params:{limit:limit,skip:skip,sort:sort}};
+        return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.getByUsername = function(model) {

@@ -1,38 +1,51 @@
 /**
  * TaskController
- *
- * @description :: Server-side logic for managing Tasks
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var _ = require('lodash');
 
 module.exports = {
 
-	getAll: function(req, res) {
-		Task.getAll()
-		.spread(function(models) {
-			Task.watch(req);
-			Task.subscribe(req, models);
-			res.json(models);
-		});
-	},
-
-	getByProject: function(req, res) {
-		Task.find()
-		.where({project: req.param('id')})
-		.then(function(model) {
-			Task.watch(req);
-			//Task.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	getOne: function(req, res) {
-		Task.getOne(req.param('id'))
-		.spread(function(model) {
+		Task.watch(req);
+		Task.findOne(req.param('id'))
+		.then(function(model) {
 			Task.subscribe(req, model);
 			res.json(model);
 		});
+	},
+
+	getSome: function(req, res) {
+
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
+		
+		Task.watch(req);
+
+		if (req.query.project){
+			var task = req.query.task;
+			Task.find({task:task})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Task.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else{
+			Task.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				Task.subscribe(req, models);
+				res.json(models);
+			});
+		}
 	},
 
 	//TODO
@@ -41,12 +54,11 @@ module.exports = {
 			title: req.param('title'),
 			project: req.param('project'),
 			content: req.param('content'),
-
+			tags: req.param('tags'),
 
 			completeIdentifierSet: req.param('completeIdentifierSet'),
 			completeBountySet: req.param('completeBountySet'),
 
-			tags: req.param('tags'),
 
 			timeIdentifierSet: req.param('timeIdentifierSet'),
 			timeBountySet: req.param('timeBountySet'),
@@ -71,7 +83,6 @@ module.exports = {
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Task.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

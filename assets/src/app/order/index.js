@@ -12,18 +12,16 @@ angular.module( 'conexus.order', [
         },
         resolve: {
             order: ['$stateParams', 'OrderModel', function($stateParams, OrderModel){
-                return null;
-                //return OrderModel.getOne($stateParams.id);
+                return OrderModel.getOne($stateParams.id);
             }],
             posts: ['$stateParams', 'PostModel', function($stateParams, PostModel){
-                return null;
-                //return PostModel.getSome($stateParams.id);
+                return PostModel.getSome('order', $stateParams.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
-.controller( 'OrderController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'order', 'PostModel', 'posts', 'titleService', function PostController( $sailsSocket, $sce, $scope, config, lodash, order, PostModel, posts, titleService ) {
+.controller( 'OrderController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'order', 'PostModel', 'posts', 'titleService', function OrderController( $sailsSocket, $sce, $scope, config, lodash, order, PostModel, posts, titleService ) {
     titleService.setTitle('Order | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
@@ -31,6 +29,17 @@ angular.module( 'conexus.order', [
     $scope.posts = posts;
 
     $sailsSocket.subscribe('order', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.posts.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.posts, {id: envelope.id});
+                break;
+        }
+    });
+
+    $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.posts.unshift(envelope.data);

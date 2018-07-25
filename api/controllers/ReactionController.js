@@ -1,35 +1,18 @@
 /**
- * PostVoteController
- *
+ * ReactionController
  */
 
 module.exports = {
 
-	getAll: function(req, res) {
-		Reaction.getAll()
-		.spread(function(models) {
-			PostVote.watch(req);
-			PostVote.subscribe(req, models);
-			res.json(models);
-		});
-	},
-
 	getOne: function(req, res) {
-		Reaction.getOne(req.param('id'))
-		.spread(function(model) {
-			PostVote.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
-	getByPost: function(req, res) {
-		var postId = req.param('id');
-		Reaction.getByPost(postId)
-		.spread(function(model) {
+		Reaction.findOne(req.param('id'))
+		.then(function(model) {
 			Reaction.subscribe(req, model);
 			res.json(model);
 		});
 	},
+
+	getSome: function(req, res) {},
 
 	create: function (req, res) {
 		var userId = req.param('user');

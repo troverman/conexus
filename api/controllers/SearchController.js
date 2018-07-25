@@ -1,6 +1,5 @@
 /**
  * SearchController
- *
  */
 
 module.exports = {

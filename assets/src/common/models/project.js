@@ -2,15 +2,14 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
 
 .service('ProjectModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getAll = function() {
-        var url = utils.prepareUrl('project');
-        var query = {params:{limit:1,skip:100}};
-        return $sailsSocket.get(url, query).then(success, error);
+    this.getOne = function(id) {
+        var url = utils.prepareUrl('project/' + id);
+        return $sailsSocket.get(url).then(success, error);
     };
 
-    this.getSome = function(limit, skip) {
+    this.getSome = function(limit, skip, sort) {
         var url = utils.prepareUrl('project');
-        var query = {params:{limit:limit,skip:skip}};
+        var query = {params:{limit:limit,skip:skip,sort:sort}};
         return $sailsSocket.get(url, query).then(success, error);
     };
 
@@ -23,7 +22,6 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
         var url = utils.prepareUrl('project/children/' + model.id);
         return $sailsSocket.get(url).then(success, error);
     };
-
 
     this.create = function(newModel) {
         var url = utils.prepareUrl('project');

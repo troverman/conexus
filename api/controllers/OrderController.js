@@ -4,6 +4,14 @@
 
 module.exports = {
 
+	getOne: function(req, res) {
+		Order.findOne(req.param('id'))
+		.then(function(model) {
+			Order.subscribe(req, model);
+			res.json(model);
+		});
+	},
+
 	getSome: function(req, res) {
 
 		var limit = req.query.limit;
@@ -63,14 +71,6 @@ module.exports = {
 				res.json(models);
 			});
 		}
-	},
-
-	getOne: function(req, res) {
-		Order.findOne(req.param('id'))
-		.then(function(model) {
-			Order.subscribe(req, model);
-			res.json(model);
-		});
 	},
 
 	create: function (req, res) {
