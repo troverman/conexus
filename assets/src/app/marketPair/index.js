@@ -28,7 +28,7 @@ angular.module( 'conexus.marketPair', [
         series: [{
             id: 'ExchangePrice',
             type: 'spline',
-            name: 'Exchange Price' + $stateParams.id + ' | ' + $stateParams.id1,
+            name: 'Exchange Price ' + $stateParams.id + ' | ' + $stateParams.id1,
             data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40]
         }],
         title: {

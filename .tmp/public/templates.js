@@ -770,21 +770,9 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
-    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>{{order.amountSet}} <a href=\"market/{{order.identiferSet}}\">{{order.identiferSet}}</a></td>\n" +
+    "				<td>{{order.amountSet1}} <a href=\"market/{{order.identiferSet1}}\">{{order.identiferSet1}}</a></td>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +

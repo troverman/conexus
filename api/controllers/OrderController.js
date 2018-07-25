@@ -77,8 +77,8 @@ module.exports = {
 		var model = {
 			amountSet: req.param('amountSet'),
 			identiferSet: req.param('identiferSet'),
-			amountSet1: req.param('amountSet'),
-			identiferSet1: req.param('identiferSet'),
+			amountSet1: req.param('amountSet1'),
+			identiferSet1: req.param('identiferSet1'),
 			user: req.param('user'),
 		};
 		Order.create(model)

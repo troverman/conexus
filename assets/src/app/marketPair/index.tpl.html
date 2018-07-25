@@ -63,21 +63,9 @@
 			</tr>
 	    </thead>
 	    <tbody>
-			<tr>
-				<td>[2 <a href="/market/NOVO">NOVO</a>, 3 <a href="/market/CONEX">CONEX</a>]</td>
-				<td>[1 <a href="/market/ALCOA">ALCOA</a>]</td>
-			</tr>
-			<tr>
-				<td>[2 <a href="/market/OAK RIDGE">OAK RIDGE</a>]</td>
-				<td>[2 <a href="/market/NOVO">NOVO</a>]</td>
-			</tr>
-			<tr>
-				<td>[2 <a href="/market/CONEX">CONEX</a>, 1 <a href="/market/CHAPEL HILL">CHAPEL HILL</a>]</td>
-				<td>[5 <a href="/market/NOVO">NOVO</a>]</td>
-			</tr>
-			<tr>
-				<td>[1 <a href="/market/NOVO">NOVO</a>]</td>
-				<td>[1 <a href="/market/CHAPEL HILL COUNCIL">CHAPEL HILL COUNCIL</a>, 1 <a href="/market/DURHAM">DURHAM</a>]</td>
+			<tr ng-repeat="order in orders">
+				<td>{{order.amountSet}} <a href="market/{{order.identiferSet}}">{{order.identiferSet}}</a></td>
+				<td>{{order.amountSet1}} <a href="market/{{order.identiferSet1}}">{{order.identiferSet1}}</a></td>
 			</tr>
 	    </tbody>
 	</table>
