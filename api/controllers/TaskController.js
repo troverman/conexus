@@ -22,8 +22,8 @@ module.exports = {
 		Task.watch(req);
 
 		if (req.query.project){
-			var task = req.query.task;
-			Task.find({task:task})
+			var project = req.query.project;
+			Task.find({project:project})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)

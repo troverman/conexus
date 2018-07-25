@@ -34,11 +34,10 @@ angular.module( 'conexus.project', [
             posts: ['PostModel', 'project', function(PostModel, project){
                 return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
-            //TODO: GET SOME
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getByProject(project);
+                return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
-            work: ['WorkModel', 'project', function(WorkModel, project){
+            work: ['project', 'WorkModel', function(project, WorkModel){
                 return WorkModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
         }
@@ -139,8 +138,8 @@ angular.module( 'conexus.project', [
         //TODO: GET SOME
         resolve: {
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getByProject(project);
-            }]
+                return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            }],
         }
     })
     .state( 'project.projects', {

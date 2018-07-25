@@ -15,11 +15,6 @@ angular.module('models.task', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.get(url).then(success, error);
     };
 
-    this.getByProject = function(model) {
-        var url = utils.prepareUrl('task/project/' + model.id);
-        return $sailsSocket.get(url).then(success, error);
-    };
-
     this.create = function(newModel) {
         var url = utils.prepareUrl('task');
         return $sailsSocket.post(url, newModel).then(success, error);
