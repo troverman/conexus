@@ -11,7 +11,6 @@ angular.module( 'conexus.projects', [
 			}
 		},
 		resolve: {
-            //TODO: GET SOME
             projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.getSome(100, 0, 'createdAt DESC');
             }]
@@ -24,15 +23,23 @@ angular.module( 'conexus.projects', [
     $scope.currentUser = config.currentUser;
     $scope.newProject = {};
     $scope.newProjectToggleVar = false;
+    $scope.selectedSort = 'createdAt DESC';
     $scope.projects = projects;
-
-    //TODO: FILTERS ETC
-    //TODO: GET SOME
 
     $scope.createProject = function(newProject) {
         $scope.newProject.user = $scope.currentUser.id;
         ProjectModel.create($scope.newProject).then(function(model) {
             $scope.newProject = {};
+        });
+    };
+
+    //TODO: FILTERS ETC
+    $scope.loadMore = function() {
+        $scope.skip = $scope.skip + 100;
+        //$rootScope.stateIsLoading = true;
+        ProjectModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(projects) {
+            //$rootScope.stateIsLoading = false;
+            Array.prototype.push.apply($scope.projects, projects);
         });
     };
 
