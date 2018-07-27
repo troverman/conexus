@@ -194,15 +194,22 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
     "<div class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"footer-links\">\n" +
-    "			{{date | date:'yyyy'}}\n" +
+    "			<a>{{date | date:'yyyy'}}</a>\n" +
     "			<a href=\"/\">conex.us</a>\n" +
     "			<a href=\"/about\">about</a>\n" +
+    "			<!--<a href=\"/connect\">discover</a>-->\n" +
+    "			<a href=\"/market\">market</a>\n" +
     "			<a href=\"/projects\">organizations</a>\n" +
     "			<a href=\"/tasks\">tasks</a>\n" +
     "			<a href=\"/transparency\">transparency</a>\n" +
     "		</div>\n" +
-    "		<img src=\"images/conexus-white.png\">\n" +
-    "	</div>\n" +
+    "		<div>\n" +
+    "			<img src=\"images/conexus-white.png\">\n" +
+    "			<br><br><br>\n" +
+    "			<a style=\"float:right\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-instagram\"></i></a>\n" +
+    "			<a style=\"float:right\" href=\"https://www.twitter.com/conex_us\"><i class=\"fa fa-twitter\"></i></a>\n" +
+    "		</div>\n" +
+    "	</div>	\n" +
     "</div>");
 }]);
 
@@ -1363,7 +1370,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "<div class=\"project-container container\">\n" +
     "    <div ui-view=\"activity\"></div>\n" +
     "    <div ui-view=\"channels\"></div>\n" +
-    "    <div ui-view=\"finance\"></div>\n" +
+    "    <div ui-view=\"ledger\"></div>\n" +
     "    <div ui-view=\"members\"></div>\n" +
     "    <div ui-view=\"tasks\"></div>\n" +
     "    <div ui-view=\"streams\"></div>\n" +

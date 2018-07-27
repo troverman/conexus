@@ -1,13 +1,20 @@
 <div class="footer" ng-controller="FooterCtrl">
 	<div class="container">
 		<div class="footer-links">
-			{{date | date:'yyyy'}}
+			<a>{{date | date:'yyyy'}}</a>
 			<a href="/">conex.us</a>
 			<a href="/about">about</a>
+			<!--<a href="/connect">discover</a>-->
+			<a href="/market">market</a>
 			<a href="/projects">organizations</a>
 			<a href="/tasks">tasks</a>
 			<a href="/transparency">transparency</a>
 		</div>
-		<img src="images/conexus-white.png">
-	</div>
+		<div>
+			<img src="images/conexus-white.png">
+			<br><br><br>
+			<a style="float:right" href="https://www.instagram.com/conex.us"><i class="fa fa-instagram"></i></a>
+			<a style="float:right" href="https://www.twitter.com/conex_us"><i class="fa fa-twitter"></i></a>
+		</div>
+	</div>	
 </div>

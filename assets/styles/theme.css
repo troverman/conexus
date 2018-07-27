@@ -169,7 +169,7 @@ a:focus{text-decoration: none}
 .footer img{
   height:50px;
   float:right;
-  padding-right:15px;
+  //padding-right:15px;
 }
 
 .footer-links{
