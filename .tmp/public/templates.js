@@ -208,6 +208,7 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
     "			<br><br><br>\n" +
     "			<a style=\"float:right\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-instagram\"></i></a>\n" +
     "			<a style=\"float:right\" href=\"https://www.twitter.com/conex_us\"><i class=\"fa fa-twitter\"></i></a>\n" +
+    "			<a style=\"float:right\" href=\"https://www.voetr.com/committee/conexus\"><i class=\"fa fa-check\"></i></a>\n" +
     "		</div>\n" +
     "	</div>	\n" +
     "</div>");
