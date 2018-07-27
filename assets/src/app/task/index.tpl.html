@@ -7,10 +7,11 @@
         <p>{{task.content}}</p>
         <!--<p>{{task.status}}</p>-->
         <br>
-        <h4>Dimensional Task Verification Score | 1 </h4>
-        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item)">+</button>
-        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item)">-</button>
-        <br>
+        <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>
+        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'plus')">+</button>
+        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'minus')">-</button>
+        <br><br>
+        <p ng-repeat="verification in taskVerification"><a href="member/{{verification.user.username}}">{{verification.user.username}}</a> | {{verification.score}}</p>
 
         <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
         <!--TOKENS MINTING PER ACTION-->
@@ -47,16 +48,10 @@
 
     <div>
         <h3>{{taskTime}}</h3>
-        <p>{{(taskTime / totalTime)*task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a></p>
-
-        <!--
-        <iframe width='560' height='315' src='https://www.bidio.co/v/57954ce9dea046030031007a' frameborder='0' allowfullscreen></iframe>
-        <button style="width:100%%;" class="btn btn-default log-btn" ng-click="submit()">start stream</button>
-        -->
-
+        <!--<p>{{(taskTime / totalTime)*task.timeBountySet}}></p>-->
         <button ng-show="!working" type="submit" class="btn btn-default log-btn" ng-click="start()">Start Work</button>
-        <!--form-->
         <input ng-show="working" type="text" placeholder="Content" ng-model="workContent" class="form-control">
+        <!--<button ng-show="working" type="submit" class="btn btn-default log-btn" ng-click="start()">Start Stream</button>-->
         <button ng-show="working" style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
     </div>
 
@@ -82,7 +77,7 @@
                 <td><a href="stream/{{item.stream || '1'}}">{{item.stream || 'Not Available'}}</a></td>
                 <td><span am-time-ago="item.createdAt"></span></td>
                 <td>{{item.verificationScore}}</td>
-                <td><button style="width:100%;" class="btn btn-default log-btn" ng-click="verify(item)">verify</button></td>
+                <td><button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification(item)">verify</button></td>
             </tr>
         </tbody>
     </table>
@@ -105,7 +100,7 @@
                     <div>
                         <a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a>
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                        <a style="display:inline" href="/task/{{post.task.id}}"><span class="">{{post.task.title}}</span></a>
+                        <a style="display:inline" href="task/{{post.task.id}}"><span class="">{{post.task.title}}</span></a>
                     </div>
                     <div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
                 </md-card-title-text>

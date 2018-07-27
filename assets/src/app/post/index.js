@@ -25,6 +25,7 @@ angular.module( 'conexus.post', [
     titleService.setTitle('posts | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
+    $scope.newReaction = {};
     $scope.post = post;
 
     //TODO
@@ -36,7 +37,15 @@ angular.module( 'conexus.post', [
 
     //TODO
     $scope.createReaction = function(post, type) {
-       
+        $scope.newReaction.user = $scope.currentUser.id;
+        $scope.newReaction.post = post.id;
+        $scope.newReaction.type = type;
+        //weight?
+        //TODO: MODEL | CREATE REACTION
+        //Reaction.create(newReaction);
+        if (type =='plus'){$scope.post.plusCount++}
+        if (type =='minus'){$scope.post.minusCount++}
+        //TODO: UPDATE POST
     };
 
     $scope.renderMessage = function(message){

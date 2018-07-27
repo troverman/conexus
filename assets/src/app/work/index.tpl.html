@@ -9,8 +9,9 @@
 	<p><a href="stream/1">N/A</a></p>
 	<br>
 	<h3>Verification | {{work.verificationScore}}</h3>
-	<p ng-repeat="verification in verifications"><a href="member/{{verification.user.username}}">{{verification.user.username}}</a> | {{verification.score}}</p>
 	<button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification()">verify</button>
+	<br>
+	<p ng-repeat="verification in verifications"><a href="member/{{verification.user.username}}">{{verification.user.username}}</a> | {{verification.score}}</p>
 	<br>
 	<br>
 	<h3>Liquidity | Market Orders | Tokens</h3>

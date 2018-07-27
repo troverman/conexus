@@ -129,9 +129,10 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, posts, titleService, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'PostModel', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, PostModel, posts, titleService, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    $scope.newPost = {};
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.posts = posts;
@@ -159,18 +160,18 @@ angular.module( 'conexus.member', [
         $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
-    /*
-    $sailsSocket.subscribe('message', function (envelope) {
+    
+    $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.followers.unshift(envelope.data);
+                $scope.posts.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.followers, {id: envelope.id});
+                lodash.remove($scope.posts, {id: envelope.id});
                 break;
         }
     });
-    */
+    
 
 }])
 

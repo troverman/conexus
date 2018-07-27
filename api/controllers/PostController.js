@@ -27,6 +27,7 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
+			.populate('task')
 			.populate('user')
 			.then(function(models) {
 				Post.subscribe(req, models);
@@ -40,6 +41,7 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
+			.populate('work')
 			.populate('user')
 			.then(function(models) {
 				Post.subscribe(req, models);

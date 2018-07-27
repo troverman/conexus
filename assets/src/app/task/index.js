@@ -32,7 +32,9 @@ angular.module( 'conexus.task', [
     $scope.posts = posts;
     $scope.reputationMultiplier = 1;
     $scope.task = task;
+    $scope.task.verificationScore = 0;
     $scope.taskTime = 0;
+    $scope.taskVerification = [];
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.verification = {};
@@ -63,7 +65,14 @@ angular.module( 'conexus.task', [
         //TODO: UPDATE POST
     };
 
-    $scope.createVerification = function(post) {};
+    $scope.createVerification = function(item) {
+        if ($scope.currentUser){
+            var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.work[index].verificationScore++
+            //WorkModel.update();
+        }
+        else{$location.path('/login')}
+    };
 
     $scope.renderMessage = function(post){
         if (post){
@@ -113,11 +122,16 @@ angular.module( 'conexus.task', [
         $scope.$apply();
     };
 
-    $scope.verify = function(item) {
+    $scope.verifyTask = function(item, type) {
         if ($scope.currentUser){
-            var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.work[index].verificationScore++
-            //WorkModel.update();
+            if (type == 'plus'){
+                $scope.taskVerification.push({user:$scope.currentUser, score:$scope.currentUser.totalWork});
+                $scope.task.verificationScore += parseFloat($scope.currentUser.totalWork);
+            }
+            if (type == 'minus'){
+                $scope.taskVerification.push({user:$scope.currentUser, score:-$scope.currentUser.totalWork});
+                $scope.task.verificationScore -= parseFloat($scope.currentUser.totalWork);
+            }
         }
         else{$location.path('/login')}
     };

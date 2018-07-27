@@ -9,19 +9,46 @@ angular.module( 'conexus.stream', [
                 controller: 'StreamCtrl',
                 templateUrl: 'stream/index.tpl.html'
             }
-        }            
+        },
+        resolve: {
+            stream: ['$stateParams', 'StreamModel', function($stateParams, StreamModel){
+                //return StreamModel.getOne($stateParams.path);
+                return {title:'stream title', user:{username:'troverman', avatarUrl:'/images/mikey.jpg'}, streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', project:{title:'NOVO'}, task:{title:'This is a task', id:1}};
+            }],
+            posts: ['PostModel', 'stream', function(PostModel, stream){
+                //return PostModel.getSome('stream', stream.id, 100, 0, 'createdAt DESC');
+                return [{content:'cool guy', user:{username:'troverman', avatarUrl:'/images/mikey.jpg'}}, {content:'yaaa boiiiiii', user:{username:'troverman', avatarUrl:'/images/mikey.jpg'}}];
+            }],
+        }
     });
 }])
 
-.controller( 'StreamCtrl', ['$sailsSocket', '$sce', '$scope', 'config', 'titleService', function StreamController($sailsSocket, $sce, $scope, config, titleService ) {
+.controller( 'StreamCtrl', ['$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'stream', 'titleService', function StreamController($sailsSocket, $sce, $scope, config, PostModel, posts, stream, titleService ) {
+    $scope.stream = stream;
+    titleService.setTitle('Stream | ' + $scope.stream.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
-    titleService.setTitle('Stream | conex.us');
-    $scope.stream = {title:'stream title', user:{username:'troverman', avatarUrl:'/images/mikey.jpg'}, streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', project:{title:'NOVO'}, task:{title:'This is a task', id:1}}
+    $scope.posts = posts;
+
+    $scope.createPost = function(post){
+        $scope.newPost.post = post.id;
+        $scope.newPost.user = $scope.currentUser.id;
+        $scope.newPost.profile = $scope.currentUser.id;
+        PostModel.create($scope.newPost).then(function(model) {
+            $scope.newPost = {};
+        });
+    };
+
+    $scope.renderMessage = function(post){
+        if (post){
+            var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
+    };
 
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {
-
         var mediaStream = stream;
         console.log(stream)
         var recordAudio = RecordRTC(stream, {
@@ -38,7 +65,6 @@ angular.module( 'conexus.stream', [
         });
         recordAudio.startRecording();
         stopRecording.disabled = false;
-
     };
 
     function onError(e) {console.log(e);}

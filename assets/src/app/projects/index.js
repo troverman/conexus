@@ -24,6 +24,7 @@ angular.module( 'conexus.projects', [
     $scope.newProject = {};
     $scope.newProjectToggleVar = false;
     $scope.selectedSort = 'createdAt DESC';
+    $scope.skip = 0;
     $scope.projects = projects;
 
     $scope.createProject = function(newProject) {
@@ -36,6 +37,7 @@ angular.module( 'conexus.projects', [
     //TODO: FILTERS ETC
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
+        console.log($scope.skip)
         //$rootScope.stateIsLoading = true;
         ProjectModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(projects) {
             //$rootScope.stateIsLoading = false;
