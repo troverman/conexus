@@ -19,7 +19,7 @@ angular.module( 'conexus.markets', [
 }])
 
 .controller( 'MarketsCtrl', ['$scope', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, OrderModel, orders, titleService ) {
-	titleService.setTitle('Marketplace | conex.us');
+	titleService.setTitle('Market | conex.us');
     $scope.chart = {
         chart: {
             zoomType: 'x',

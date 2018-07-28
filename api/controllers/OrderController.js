@@ -24,26 +24,24 @@ module.exports = {
 		if(req.query.identiferSet && req.query.identiferSet1){
 			var identiferSet = req.query.identiferSet;
 			var identiferSet1 = req.query.identiferSet1;
-			Order.find({identiferSet:identiferSet, identiferSet1:identiferSet1})
+			Order.find({identiferSet:{contains: identiferSet}, identiferSet1:{contains: identiferSet1}})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				console.log(models);
 				res.json(models);
 			});
 		}
 
 		else if(req.query.identiferSet && !req.query.identiferSet1){
 			var identiferSet = req.query.identiferSet;
-			Order.find({identiferSet:identiferSet})
+			Order.find({identiferSet:{contains: identiferSet}})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				console.log(models);
 				res.json(models);
 			});
 		}
@@ -56,7 +54,6 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				console.log(models);
 				res.json(models);
 			});
 		}
@@ -68,7 +65,6 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				console.log(models);
 				res.json(models);
 			});
 		}

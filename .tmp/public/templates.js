@@ -619,18 +619,26 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
-    "			<tr>\n" +
-    "				<td><a href=\"/market/{{stateParams.id}}/NOVO\">NOVO</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td><a href=\"/market/{{stateParams.id}}/OAK RIDGE\">OAK RIDGE</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td><a href=\"/market/{{stateParams.id}}/CONEX\">CONEX</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td><a href=\"/market/{{stateParams.id}}/CRE8\">CRE8</a></td>\n" +
-    "			</tr>\n" +
+    "\n" +
+    "\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onTime\">onTime</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream\">onTimeStream</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onReact\">onReact</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onPost\">onPost</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onOrder\">onOrder</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onVote\">onVote</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onView\">onView</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onValidate\">onValidate</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onMine\">onMine</a></td></tr>\n" +
+    "\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/CRE8\">CRE8</a></td></tr>\n" +
+    "\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream+5b0b34c1d0f57258271d8b17\">onTimeStream+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onTime+5b0b34c1d0f57258271d8b17\">onTime+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream+5b143af632b5561400b184ec\">onTimeStream+5b143af632b5561400b184ec</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream+5b143af632b5561400b184ec\">onTime+5b143af632b5561400b184ec</a></td></tr>\n" +
+    "\n" +
+    "\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
@@ -660,24 +668,23 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "			<tr>\n" +
     "				<th>Asset Set 1</th>\n" +
     "				<th>Asset Set 2</th>\n" +
+    "				<th>Order Id</th>\n" +
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
-    "			<tr>\n" +
-    "				<td>2 <a href=\"/market/CONEX,NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX,NOVO\">CONEX</a></td>\n" +
-    "				<td>1 <a href=\"/market/ALCOA\">ALCOA</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a></td>\n" +
-    "				<td>2 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>2 <a href=\"/market/CONEX,CHAPEL HILL\">CONEX</a>, 1 <a href=\"/market/CONEX,CHAPEL HILL\">CHAPEL HILL</a></td>\n" +
-    "				<td>5 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>1 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
-    "				<td>1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">DURHAM</a></td>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -743,6 +750,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "			</form>\n" +
     "		</div>\n" +
     "	</md-card>\n" +
+    "	<!--<h4>Bids</h4>-->\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -751,24 +759,47 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
-    "			<tr>\n" +
-    "				<td>2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a></td>\n" +
-    "				<td>1 <a href=\"/market/ALCOA\">ALCOA</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a></td>\n" +
-    "				<td>2 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a></td>\n" +
-    "				<td>5 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "				<td>1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a></td>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
+    "	<!--<h4>Asks</h4>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>-->\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<h2>Trades</h2>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
@@ -810,12 +841,30 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead><tr><th>Token</th></tr></thead>\n" +
     "	    <tbody>\n" +
+    "\n" +
+    "			<tr><td><a href=\"market/onTime\">onTime</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onTimeStream\">onTimeStream</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onReact\">onReact</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onPost\">onPost</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onOrder\">onOrder</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onVote\">onVote</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onView\">onView</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onValidate\">onValidate</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/{{stateParams.id}}/onMine\">onMine</a></td></tr>\n" +
+    "\n" +
+    "			<tr><td><a href=\"market/onTimeStream+5b0b34c1d0f57258271d8b17\">onTimeStream+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onTime+5b0b34c1d0f57258271d8b17\">onTime+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onTimeStream+5b143af632b5561400b184ec\">onTimeStream+5b143af632b5561400b184ec</a></td></tr>\n" +
+    "			<tr><td><a href=\"market/onTimeStream+5b143af632b5561400b184ec\">onTime+5b143af632b5561400b184ec</a></td></tr>\n" +
+    "\n" +
+    "			<tr><td><a href=\"market/CRE8\">CRE8</a></td></tr>\n" +
     "			<tr><td><a href=\"market/NOVO\">NOVO</a></td></tr>\n" +
     "			<tr><td><a href=\"market/CONEX\">CONEX</a></td></tr>\n" +
     "			<tr><td><a href=\"market/DURHAM\">DURHAM</a></td></tr>\n" +
     "			<tr><td><a href=\"market/CHAPEL_HILL\">CHAPEL HILL</a></td></tr>\n" +
     "			<tr><td><a href=\"market/token4\">ALCOA</a></td></tr>\n" +
     "			<tr><td><a href=\"market/OAK_RIDGE\">OAK RIDGE</a></td></tr>\n" +
+    "			\n" +
     "		</tbody>\n" +
     "	</table>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
@@ -840,6 +889,33 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "			</form>\n" +
     "		</div>\n" +
     "	</md-card>\n" +
+    "	<table class=\"table table-inverse table-hover\">\n" +
+    "	    <thead>\n" +
+    "			<tr>\n" +
+    "				<th>Asset Set 1</th>\n" +
+    "				<th>Asset Set 2</th>\n" +
+    "				<th>Order Id</th>\n" +
+    "			</tr>\n" +
+    "	    </thead>\n" +
+    "	    <tbody>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "			</tr>\n" +
+    "	    </tbody>\n" +
+    "	</table>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "	<h2>Trades</h2>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -1152,6 +1228,8 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
     "	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
     "	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
     "	<a href=\"member/{{order.user.username}}\">{{order.user.username}}</a>\n" +
+    "	<h4>onBooks | Filled | Date</h4>\n" +
+    "\n" +
     "\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "\n" +
@@ -1193,6 +1271,8 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
     "    </div>\n" +
     "	\n" +
     "</div>\n" +
+    "<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "\n" +
     "\n" +
     "\n" +

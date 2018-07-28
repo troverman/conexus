@@ -9,9 +9,9 @@ angular.module('models.order', ['lodash', 'services', 'sails.io',])
 
     this.getSome = function(type, filter, filter1, limit, skip, sort) {
         var query = {};
-        if (type=='market'){query = {params:{identiferSet:filter, limit:limit,skip:skip,sort:sort}};}
-        if (type=='marketPair'){query = {params:{identiferSet:filter, identiferSet1:filter1, limit:limit,skip:skip,sort:sort}};}
-        if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
+        if (type=='market'){query = {params:{identiferSet:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='marketPair'){query = {params:{identiferSet:filter,identiferSet1:filter1,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('order');
         return $sailsSocket.get(url, query).then(success, error);
