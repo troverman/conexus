@@ -11,7 +11,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<h1>conex.us</h1>\n" +
-    "		<p>open & transparent organizations</p>\n" +
+    "		<h3>creating the next wave</h3>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -20,10 +20,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
+    "				<h2>Discover a transparent, creative, and collaborative network</h2>\n" +
     "				<p>connect with new collaborators and create awesome things</p>\n" +
-    "				<p>a 24/7 continual hackathon</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "				<h4>create the next wave</h4>\n" +
+    "				<p>a 24/7 continual hackathon</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
@@ -35,8 +36,16 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div id=\"about-section2\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "		<h4>governance of collaborators</h4>\n" +
-    "		<p>working together toward a common goal</p>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h2>MultiDimensional Token Market</h2>\n" +
+    "				<p>turn your creative effort into dimensional tokens with market liquidity</p>\n" +
+    "				<p>create dimensional liquidty for transparent and reputationally validated work</p> \n" +
+    "				<p>create dimensional liquidty, build the value matrix, manifest pluralism, put your money where you mouth is</p> \n" +
+    "				<h4>governance of collaborators</h4>\n" +
+    "				<p>reputation protocols | working together toward a common goal</p>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -45,7 +54,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h4>transparency</h4>\n" +
+    "				<h3>Transparency</h3>\n" +
     "				<p>transparent contrubitions and equatable representation</p>\n" +
     "				<p>reputation systems and task verification</p>\n" +
     "				<p>open finance and contribution</p>\n" +
@@ -1708,7 +1717,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	<div style=\"padding:10px;\">\n" +
     "		<img src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
     "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
-    "		<!--<p style=\"color:gray\">creator</p>-->\n" +
+    "		<p style=\"color:gray\">live | online | working</p>\n" +
     "		<p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
     "		<p style=\"color:gray\">dimensional reputation | 888</p>\n" +
     "	</div>\n" +
