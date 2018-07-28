@@ -28,6 +28,14 @@ angular.module( 'conexus.order', [
     $scope.order = order;
     $scope.posts = posts;
 
+    $scope.renderMessage = function(message){
+        if (message){
+            var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
+    };
+
     $sailsSocket.subscribe('order', function (envelope) {
         switch(envelope.verb) {
             case 'created':

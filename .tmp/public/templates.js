@@ -664,20 +664,20 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "	    </thead>\n" +
     "	    <tbody>\n" +
     "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/CONEX,NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX,NOVO\">CONEX</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
+    "				<td>2 <a href=\"/market/CONEX,NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX,NOVO\">CONEX</a></td>\n" +
+    "				<td>1 <a href=\"/market/ALCOA\">ALCOA</a></td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a></td>\n" +
+    "				<td>2 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/CONEX,CHAPEL HILL\">CONEX</a>, 1 <a href=\"/market/CONEX,CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
-    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>2 <a href=\"/market/CONEX,CHAPEL HILL\">CONEX</a>, 1 <a href=\"/market/CONEX,CHAPEL HILL\">CHAPEL HILL</a></td>\n" +
+    "				<td>5 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">DURHAM</a>]</td>\n" +
+    "				<td>1 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
+    "				<td>1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/CHAPEL HILL COUNCIL,DURHAM\">DURHAM</a></td>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -688,24 +688,23 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "			<tr>\n" +
     "				<th>Asset Set 1</th>\n" +
     "				<th>Asset Set 2</th>\n" +
+    "				<th>Order Id</th>\n" +
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
-    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -753,20 +752,20 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "	    </thead>\n" +
     "	    <tbody>\n" +
     "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
+    "				<td>2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a></td>\n" +
+    "				<td>1 <a href=\"/market/ALCOA\">ALCOA</a></td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a></td>\n" +
+    "				<td>2 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
-    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a></td>\n" +
+    "				<td>5 <a href=\"/market/NOVO\">NOVO</a></td>\n" +
     "			</tr>\n" +
     "			<tr>\n" +
-    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
+    "				<td>1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
+    "				<td>1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a></td>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -777,12 +776,23 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "			<tr>\n" +
     "				<th>Asset Set 1</th>\n" +
     "				<th>Asset Set 2</th>\n" +
+    "				<th>Order Id</th>\n" +
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
     "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>{{order.amountSet}} <a href=\"market/{{order.identiferSet}}\">{{order.identiferSet}}</a></td>\n" +
-    "				<td>{{order.amountSet1}} <a href=\"market/{{order.identiferSet1}}\">{{order.identiferSet1}}</a></td>\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -835,24 +845,23 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "			<tr>\n" +
     "				<th>Asset Set 1</th>\n" +
     "				<th>Asset Set 2</th>\n" +
+    "				<th>Order Id</th>\n" +
     "			</tr>\n" +
     "	    </thead>\n" +
     "	    <tbody>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>, 3 <a href=\"/market/CONEX\">CONEX</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/ALCOA\">ALCOA</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/OAK RIDGE\">OAK RIDGE</a>]</td>\n" +
-    "				<td>[2 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[2 <a href=\"/market/CONEX\">CONEX</a>, 1 <a href=\"/market/CHAPEL HILL\">CHAPEL HILL</a>]</td>\n" +
-    "				<td>[5 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "			</tr>\n" +
-    "			<tr>\n" +
-    "				<td>[1 <a href=\"/market/NOVO\">NOVO</a>]</td>\n" +
-    "				<td>[1 <a href=\"/market/CHAPEL HILL COUNCIL\">CHAPEL HILL COUNCIL</a>, 1 <a href=\"/market/DURHAM\">DURHAM</a>]</td>\n" +
+    "			<tr ng-repeat=\"order in orders\">\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "\n" +
+    "				<td>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "				</td>\n" +
+    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
     "			</tr>\n" +
     "	    </tbody>\n" +
     "	</table>\n" +
@@ -1139,34 +1148,50 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
   $templateCache.put("order/index.tpl.html",
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
-    "	<md-card>\n" +
-    "		<md-card-title>\n" +
-    "			<md-card-title-text>\n" +
-    "				<div>\n" +
-    "					<a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span class=\"\">{{post.user.username}}</span></a>\n" +
-    "					<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "				</div>\n" +
-    "				<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
-    "			</md-card-title-text>\n" +
-    "		</md-card-title>\n" +
-    "		<div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "	        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "	        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "	        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "	        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "	    </div>\n" +
-    "	    <!--TODO: NESTED -->\n" +
-    "		<div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "			<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "			    <div class=\"form-group\">\n" +
-    "			        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
-    "			    </div>\n" +
-    "			    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "			</form>\n" +
-    "		</div>\n" +
-    "		<!--<div ng-include=\"'post/post.tpl.html'\" ng-repeat=\"post in post.children\"></div>-->\n" +
-    "	</md-card>\n" +
+    "	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
+    "	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
+    "	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
+    "	<a href=\"member/{{order.user.username}}\">{{order.user.username}}</a>\n" +
+    "\n" +
     "	<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "	<div class=\"col-md-12\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
+    "            <div class=\"form-group\">\n" +
+    "                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "            </div>\n" +
+    "            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "        </form>\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"col-md-12\">\n" +
+    "        <md-card ng-repeat=\"post in posts\">\n" +
+    "            <md-card-title>\n" +
+    "                <md-card-title-text>\n" +
+    "                    <div><a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span class=\"\">{{post.user.username}}</span></a></div>\n" +
+    "                    <div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "                </md-card-title-text>\n" +
+    "            </md-card-title>\n" +
+    "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "            <!--TODO: NESTED -->\n" +
+    "            <div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "        </md-card>\n" +
+    "    </div>\n" +
+    "	\n" +
     "</div>\n" +
     "\n" +
     "\n" +

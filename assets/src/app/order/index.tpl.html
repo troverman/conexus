@@ -1,33 +1,49 @@
 <div class="container">
 	<div class="spacing-15"></div>
-	<md-card>
-		<md-card-title>
-			<md-card-title-text>
-				<div>
-					<a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a>
-					<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-				</div>
-				<div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
-			</md-card-title-text>
-		</md-card-title>
-		<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-	        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-	        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-	        <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-	        <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
-	    </div>
-	    <!--TODO: NESTED -->
-		<div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-			<form role="form" ng-submit="createPost(post)">
-			    <div class="form-group">
-			        <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
-			    </div>
-			    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-			</form>
-		</div>
-		<!--<div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children"></div>-->
-	</md-card>
+	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
+	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
+	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
+	<a href="member/{{order.user.username}}">{{order.user.username}}</a>
+
 	<div class="spacing-15"></div>
+
+	<div class="col-md-12">
+        <div class="spacing-15"></div>
+        <form role="form" ng-submit="createPost(newPost)">
+            <div class="form-group">
+                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+            </div>
+            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+        </form>
+        <div class="spacing-15"></div>
+    </div>
+
+    <div class="col-md-12">
+        <md-card ng-repeat="post in posts">
+            <md-card-title>
+                <md-card-title-text>
+                    <div><a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a></div>
+                    <div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+                </md-card-title-text>
+            </md-card-title>
+            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <!--TODO: NESTED -->
+            <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <form role="form" ng-submit="createPost(post)">
+                    <div class="form-group">
+                        <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
+                    </div>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
+            </div>
+        </md-card>
+    </div>
+	
 </div>
 
 

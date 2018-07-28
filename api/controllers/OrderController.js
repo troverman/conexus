@@ -6,6 +6,7 @@ module.exports = {
 
 	getOne: function(req, res) {
 		Order.findOne(req.param('id'))
+		.populate('user')
 		.then(function(model) {
 			Order.subscribe(req, model);
 			res.json(model);

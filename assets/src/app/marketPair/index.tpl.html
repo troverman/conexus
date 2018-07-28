@@ -36,20 +36,20 @@
 	    </thead>
 	    <tbody>
 			<tr>
-				<td>[2 <a href="/market/NOVO">NOVO</a>, 3 <a href="/market/CONEX">CONEX</a>]</td>
-				<td>[1 <a href="/market/ALCOA">ALCOA</a>]</td>
+				<td>2 <a href="/market/NOVO">NOVO</a>, 3 <a href="/market/CONEX">CONEX</a></td>
+				<td>1 <a href="/market/ALCOA">ALCOA</a></td>
 			</tr>
 			<tr>
-				<td>[2 <a href="/market/OAK RIDGE">OAK RIDGE</a>]</td>
-				<td>[2 <a href="/market/NOVO">NOVO</a>]</td>
+				<td>2 <a href="/market/OAK RIDGE">OAK RIDGE</a></td>
+				<td>2 <a href="/market/NOVO">NOVO</a></td>
 			</tr>
 			<tr>
-				<td>[2 <a href="/market/CONEX">CONEX</a>, 1 <a href="/market/CHAPEL HILL">CHAPEL HILL</a>]</td>
-				<td>[5 <a href="/market/NOVO">NOVO</a>]</td>
+				<td>2 <a href="/market/CONEX">CONEX</a>, 1 <a href="/market/CHAPEL HILL">CHAPEL HILL</a></td>
+				<td>5 <a href="/market/NOVO">NOVO</a></td>
 			</tr>
 			<tr>
-				<td>[1 <a href="/market/NOVO">NOVO</a>]</td>
-				<td>[1 <a href="/market/CHAPEL HILL COUNCIL">CHAPEL HILL COUNCIL</a>, 1 <a href="/market/DURHAM">DURHAM</a>]</td>
+				<td>1 <a href="/market/NOVO">NOVO</a>]</td>
+				<td>1 <a href="/market/CHAPEL HILL COUNCIL">CHAPEL HILL COUNCIL</a>, 1 <a href="/market/DURHAM">DURHAM</a></td>
 			</tr>
 	    </tbody>
 	</table>
@@ -60,12 +60,23 @@
 			<tr>
 				<th>Asset Set 1</th>
 				<th>Asset Set 2</th>
+				<th>Order Id</th>
 			</tr>
 	    </thead>
 	    <tbody>
 			<tr ng-repeat="order in orders">
-				<td>{{order.amountSet}} <a href="market/{{order.identiferSet}}">{{order.identiferSet}}</a></td>
-				<td>{{order.amountSet1}} <a href="market/{{order.identiferSet1}}">{{order.identiferSet1}}</a></td>
+				<td>
+					<span ng-repeat="item in order.amountSet">
+						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+					</span>
+				</td>
+
+				<td>
+					<span ng-repeat="item in order.amountSet1">
+						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+					</span>
+				</td>
+				<td><a href="order/{{order.id}}">{{order.id}}</a>
 			</tr>
 	    </tbody>
 	</table>

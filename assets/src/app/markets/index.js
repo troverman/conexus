@@ -48,10 +48,20 @@ angular.module( 'conexus.markets', [
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
     $scope.orders = orders;
+        $scope.orders.forEach(function(part, index) {
+        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
+        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
+        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
+        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
+    });
     $scope.trades = {};
 
     //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {
+
+        //TODO: PARSE INPUT
+        //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+        //$scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
         OrderModel.create($scope.newOrder).then(function(model) {
             $scope.orders.push($scope.newOrder);
             $scope.newOrder = {};

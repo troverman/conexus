@@ -328,7 +328,6 @@ angular.module( 'conexus.project', [
     $scope.entries = entries;
     $scope.newEntryToggleVar = false;
     $scope.project = project;
-    console.log('test')
 
     $scope.newEntryToggle = function () {
         $scope.newEntryToggleVar = $scope.newEntryToggleVar ? false : true;
