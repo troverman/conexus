@@ -14,7 +14,7 @@ angular.module( 'conexus.about', [
 }])
 
 .controller( 'AboutCtrl', ['$scope', 'titleService', function AboutController( $scope, titleService ) {
-	titleService.setTitle('about | conex.us');
+	titleService.setTitle('About | conex.us');
 	$scope.chart = {
         chart: {
             zoomType: 'x',

@@ -31,7 +31,7 @@ angular.module( 'conexus.connect', [
 }])
 
 .controller( 'ConnectCtrl', ['$scope', 'members', 'titleService', 'projects', 'tasks', 'uiGmapGoogleMapApi', function ConnectController( $scope, members, titleService, projects, tasks, uiGmapGoogleMapApi ) {
-	titleService.setTitle('connect | conex.us');
+	titleService.setTitle('Discover | conex.us');
 
 	$scope.map = {
 		center: {latitude: 39.443659, longitude: -83.082276 },

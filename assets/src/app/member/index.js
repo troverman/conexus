@@ -18,10 +18,10 @@ angular.module( 'conexus.member', [
             }],
             //TODO: REFACTOR
             followersCount: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getByUser(member);
+                return FollowerModel.getFollowers(member);
             }],
             followingCount: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getByUser(member);
+                return FollowerModel.getFollowing(member);
             }]
         }
 	})
@@ -53,7 +53,7 @@ angular.module( 'conexus.member', [
         resolve: {
             //TODO: REFACTOR
             followers: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getByUser(member);
+                return FollowerModel.getFollowers(member);
             }],
         }
     })
@@ -68,7 +68,7 @@ angular.module( 'conexus.member', [
         resolve: {
             //TODO: REFACTOR
             following: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getByUser(member);
+                return FollowerModel.getFollowing(member);
             }],
         }
     })

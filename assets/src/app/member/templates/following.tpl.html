@@ -1,9 +1,9 @@
-<div class="container">
-	<div class="col-lg-4 col-sm-6" ng-repeat="follower in following">
-		<div style="margin:10px; box-shadow: 2px 2px 10px #999;overflow:hidden">
-			<img src="{{follower.follower.avatarUrl}}" style="max-height:250px;">
-        	<h4><a href="/member/{{follower.follower.username}}">{{follower.follower.username}}</a></h4>
-		</div>
+<md-card ng-repeat="follower in following" class="col-sm-3 col-xs-6">
+	<div style="padding:10px;">
+		<img src="{{follower.follower.avatarUrl}}" err-src="/images/avatar.png" style="height:128px;">
+		<h3><a href="member/{{follower.follower.username}}">{{follower.follower.username}}</a></h3>
+		<p style="color:gray">live | online | working</p>
+		<p style="color:gray">total reputation | {{follower.follower.totalWork}}</p>
+		<p style="color:gray">dimensional reputation | 888</p>
 	</div>
-	<div class="spacing-10"></div>
-</div>
+</md-card>

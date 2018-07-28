@@ -56,9 +56,9 @@
 					<li><a href="member/{{member.username}}">Activity</a></li>
 					<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
 					<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
+					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Orders</a></li>-->
 					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Organizations</a></li>-->
 					<li><a href="member/{{member.username}}">{{followersCount.length}} Streams</a></li>
-					<li><a href="member/{{member.username}}">{{followersCount.length}} Tasks</a></li>
 					<!--<li><a href="member/{{member.username}}">Work</a></li>-->
 					<li><a href="member/{{member.username}}/wallet">Wallet</a></li>
 
@@ -95,7 +95,7 @@
 	<div class="spacing-15"></div>
 	<md-divider></md-divider>
 	<div class="spacing-15"></div>
-	<div class="profile-container">
+	<div class="profile-container container">
 		<div ui-view="memberActivity"></div>
 		<div ui-view="memberFollowers"></div>
 		<div ui-view="memberFollowing"></div>
