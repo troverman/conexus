@@ -20,7 +20,7 @@ angular.module( 'conexus.marketPair', [
 
 .controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'OrderModel', 'orders', 'titleService', function MarketPairController( $scope, $stateParams, OrderModel, orders, titleService ) {
     $scope.stateParams = $stateParams;
-    titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + 'conex.us');
+    titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | conex.us');
 	$scope.chart = {
         chart: {
             zoomType: 'x',

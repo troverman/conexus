@@ -10,8 +10,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div id=\"title-container\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "		<h1>conex.us</h1>\n" +
-    "		<h3>creating the next wave</h3>\n" +
+    "		<h1>conex.us | cre8.xyz</h1>\n" +
+    "		<h4>Creating the Next Wave of Pulbic Organizations</h4>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -20,14 +20,29 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h2>Discover a transparent, creative, and collaborative network</h2>\n" +
-    "				<p>connect with new collaborators and create awesome things</p>\n" +
+    "				<h3>Discover a transparent, creative, and collaborative network</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">connect with new collaborators and create awesome things</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "				<h4>create the next wave</h4>\n" +
-    "				<p>a 24/7 continual hackathon</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">a 24/7 continual hackathon</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/connect\">Discover</a>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "<div id=\"about-section2\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h2>Governance of Collaborators</h2>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">reputation protocols | working together toward a common goal</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -37,13 +52,12 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
+    "			<!--<div class=\"col-md-6\"></div>-->\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h2>MultiDimensional Token Market</h2>\n" +
-    "				<p>turn your creative effort into dimensional tokens with market liquidity</p>\n" +
-    "				<p>create dimensional liquidty for transparent and reputationally validated work</p> \n" +
-    "				<p>create dimensional liquidty, build the value matrix, manifest pluralism, put your money where you mouth is</p> \n" +
-    "				<h4>governance of collaborators</h4>\n" +
-    "				<p>reputation protocols | working together toward a common goal</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">turn your creative effort into dimensional tokens with market liquidity</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">create dimensional liquidty for transparent and reputationally validated work</p> \n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">create dimensional liquidty, build the value matrix, manifest pluralism, put your money where you mouth is</p> \n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -55,10 +69,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h3>Transparency</h3>\n" +
-    "				<p>transparent contrubitions and equatable representation</p>\n" +
-    "				<p>reputation systems and task verification</p>\n" +
-    "				<p>open finance and contribution</p>\n" +
-    "				<p>tokenized & market liquid organizational actions</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">transparent contrubitions and equatable representation</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">reputation systems and task verification</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">open finance and contribution</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">tokenized & market liquid organizational actions</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
@@ -318,79 +332,65 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	<div class=\"header-area container\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h2>Create the next wave</h2>\n" +
-    "				<p>Create and participate in transparent, crowd-sourced, organizations</p>\n" +
-    "				<p>Earn value though tokenized, market liquid, organizational actions</p>\n" +
-    "				<div class=\"spacing-25\"></div>\n" +
+    "				<h1>Create the Next Wave</h1>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<p style=\"font-style:italic;margin:0px;color:gray\">Create and participate in transparent, crowd-sourced, organizations</p>\n" +
+    "				<p style=\"font-style:italic;margin:0px;color:gray\">Earn value though tokenized, market-liquid, organizational actions</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
     "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "			<div class=\"col-md-6\" style=\"text-align:center\">\n" +
     "				<img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</div>\n" +
     "\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "	<!--\n" +
-    "	<div id=\"search-container\">\n" +
-    "		<div class=\"container\">\n" +
-    "			<div class=\"row\">\n" +
-    "        		<div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
-    "					<input style=\"width:100%\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\">\n" +
-    "					<div ng-repeat=\"searchResult in searchResults.slice(0,8)\">\n" +
-    "						<h5><a href=\"/project/{{searchResult.urlTitle}}\">{{searchResult.title}}</a></h5>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<div class=\"block\">\n" +
+    "					<div class=\"shape\">\n" +
+    "						<div class=\"cube outer\">\n" +
+    "							<div class=\"side left\"></div>\n" +
+    "							<div class=\"side right\"></div>\n" +
+    "							<div class=\"side top\"></div>\n" +
+    "							<div class=\"side bottom\"></div>\n" +
+    "							<div class=\"side front\"></div>\n" +
+    "							<div class=\"side back\"></div>\n" +
+    "							<div class=\"cube\">\n" +
+    "								<div class=\"side left\"></div>\n" +
+    "								<div class=\"side right\"></div>\n" +
+    "								<div class=\"side top\"></div>\n" +
+    "								<div class=\"side bottom\"></div>\n" +
+    "								<div class=\"side front\"></div>\n" +
+    "								<div class=\"side back\"></div>\n" +
+    "							</div>\n" +
+    "						</div>\n" +
     "					</div>\n" +
     "				</div>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h2>Our Collective Responsibility</h2>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism; vote and map your value respective to a comple set of tokenized actions -- explore the value map</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the value map</a>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "	-->\n" +
-    "\n" +
-    "	<!--\n" +
-    "	<div style=\"background-color:black\">\n" +
-    "		<div class=\"container\">\n" +
-    "			<div class=\"row\">\n" +
-    "		    	<div class=\"col-md-6\">\n" +
-    "\n" +
-    "		        </div>\n" +
-    "				<div class=\"col-md-6\">\n" +
-    "\n" +
-    "		        </div>\n" +
-    "	    	</div>\n" +
-    "			<div style=\"height:300px\"></div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	-->\n" +
-    "\n" +
-    "	<!--\n" +
-    "	<div class=\"block\">\n" +
-    "		<div class=\"shape\">\n" +
-    "			<div class=\"cube outer\">\n" +
-    "				<div class=\"side left\"></div>\n" +
-    "				<div class=\"side right\"></div>\n" +
-    "				<div class=\"side top\"></div>\n" +
-    "				<div class=\"side bottom\"></div>\n" +
-    "				<div class=\"side front\"></div>\n" +
-    "				<div class=\"side back\"></div>\n" +
-    "				<div class=\"cube\">\n" +
-    "					<div class=\"side left\"></div>\n" +
-    "					<div class=\"side right\"></div>\n" +
-    "					<div class=\"side top\"></div>\n" +
-    "					<div class=\"side bottom\"></div>\n" +
-    "					<div class=\"side front\"></div>\n" +
-    "					<div class=\"side back\"></div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	-->\n" +
     "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
     "	        <div class=\"col-lg-12 col-md-12\">\n" +
-    "				<h3><b>Join the community</b></h3><hr>\n" +
+    "				<h3><b>Join the Community</b></h3><hr>\n" +
     "	            <div class=\"login-form\">\n" +
     "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "	                    <div class=\"form-group\">\n" +
@@ -426,11 +426,11 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
-    "	\n" +
+    "\n" +
     "	<!-- TEMP | WORK -->\n" +
     "	<div class=\"container\">\n" +
     "		<div ng-repeat=\"work in work\">\n" +
-    "	        <div style=\"box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;\">\n" +
+    "	        <div style=\"box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);overflow:hidden;margin:10px;\">\n" +
     "	            <div style=\"padding:16px;\">\n" +
     "					<div>\n" +
     "						<a style=\"display:inline\" href=\"/member/{{work.user.username}}\">{{work.user.username}}</a>\n" +
@@ -454,9 +454,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "    <!-- TEMP | POST -->\n" +
     "	<div class=\"container\">\n" +
-    "	    <md-card ng-repeat=\"post in posts\">\n" +
-    "			<md-card-title>\n" +
-    "				<md-card-title-text>\n" +
+    "	    <div ng-repeat=\"post in posts\">\n" +
+    "	        <div style=\"box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);overflow:hidden;margin:10px;\">\n" +
+    "	            <div style=\"padding:16px;\">\n" +
     "					<div>\n" +
     "						<a style=\"display:inline\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
@@ -464,15 +464,15 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					</div>\n" +
     "					<p style=\"font-size:10px;color:gray\" am-time-ago=\"post.createdAt\"></p>\n" +
     "					<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
-    "				</md-card-title-text>\n" +
-    "			</md-card-title>\n" +
-    "			<div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "				<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "				<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "				<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "				<a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "				</div>\n" +
+    "				<div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "					<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "					<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "					<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "					<a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "				</div>\n" +
     "			</div>\n" +
-    "	    </md-card>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "    <!-- TEMP | PROJECTS -->\n" +
@@ -1016,6 +1016,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Orders</a></li>-->\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Organizations</a></li>-->\n" +
+    "					<li><a href=\"member/{{member.username}}\">Positions</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Streams</a></li>\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">Work</a></li>-->\n" +
     "					<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>\n" +
@@ -1631,6 +1632,8 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "<!--</ul>-->\n" +
     "<br>\n" +
     "<div class=\"\">\n" +
+    "\n" +
+    "	<h1>Wallet</h1> <!--org/proj vs member-->\n" +
     "\n" +
     "	<highchart config=\"chart\"></highchart>\n" +
     "\n" +

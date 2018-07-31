@@ -34,7 +34,7 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$sce', '$scope', 'config', 'members', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $sce, $scope, config, members, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
+.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
 	titleService.setTitle('conex.us');
 	
 	$scope.currentUser = config.currentUser;
@@ -66,15 +66,18 @@ angular.module( 'conexus.home', [
 
 	//TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type){
-    	$scope.newReaction.user = $scope.currentUser.id;
-    	$scope.newReaction.post = post.id;
-    	$scope.newReaction.type = type;
-    	//TODO: MODEL | CREATE REACTION
-    	//Reaction.create(newReaction);
-    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-    	if (type =='plus'){$scope.posts[index].plusCount++}
-    	if (type =='minus'){$scope.posts[index].minusCount++}
-    	//TODO: UPDATE POST
+    	if($scope.currentUser){
+	    	$scope.newReaction.user = $scope.currentUser.id;
+	    	$scope.newReaction.post = post.id;
+	    	$scope.newReaction.type = type;
+	    	//TODO: MODEL | CREATE REACTION
+	    	//Reaction.create(newReaction);
+	    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+	    	if (type =='plus'){$scope.posts[index].plusCount++}
+	    	if (type =='minus'){$scope.posts[index].minusCount++}
+	    	//TODO: UPDATE POST
+		}
+    	else{$location.path('/login')}
     };
 
 	//TODO: NESTED RENDERING N STUFF
@@ -94,8 +97,11 @@ angular.module( 'conexus.home', [
     };
 
     $scope.reply = function(post){
-    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-    	$scope.posts[index].showReply = !$scope.posts[index].showReply
+    	if($scope.currentUser){
+    		var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+    		$scope.posts[index].showReply = !$scope.posts[index].showReply;
+    	}
+    	else{$location.path('/login')}
     };
 
 }]);

@@ -91,79 +91,65 @@
 	<div class="header-area container">
 		<div class="row">
 			<div class="col-md-6">
-				<h2>Create the next wave</h2>
-				<p>Create and participate in transparent, crowd-sourced, organizations</p>
-				<p>Earn value though tokenized, market liquid, organizational actions</p>
-				<div class="spacing-25"></div>
+				<h1>Create the Next Wave</h1>
+				<div class="spacing-5"></div>
+				<p style="font-style:italic;margin:0px;color:gray">Create and participate in transparent, crowd-sourced, organizations</p>
+				<p style="font-style:italic;margin:0px;color:gray">Earn value though tokenized, market-liquid, organizational actions</p>
+				<div class="spacing-15"></div>
 				<a style="width:100%" class="btn btn-default log-btn" href="/about">learn more</a>
+				<div class="spacing-50"></div>
+				<div class="spacing-50"></div>
 			</div>
-			<div class="col-md-6" style="text-align:right">
+			<div class="col-md-6" style="text-align:center">
 				<img style="max-height:200px" src="/images/loading.gif">
+				<div class="spacing-50"></div>
 			</div>
 		</div>
-	</div>
 
-	<div class="spacing-50"></div>
-	<div class="spacing-50"></div>
+		<div class="spacing-50"></div>
 
-	<!--
-	<div id="search-container">
-		<div class="container">
-			<div class="row">
-        		<div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
-					<input style="width:100%" ng-keyup="keyPress(searchValue)" ng-model="searchValue">
-					<div ng-repeat="searchResult in searchResults.slice(0,8)">
-						<h5><a href="/project/{{searchResult.urlTitle}}">{{searchResult.title}}</a></h5>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="block">
+					<div class="shape">
+						<div class="cube outer">
+							<div class="side left"></div>
+							<div class="side right"></div>
+							<div class="side top"></div>
+							<div class="side bottom"></div>
+							<div class="side front"></div>
+							<div class="side back"></div>
+							<div class="cube">
+								<div class="side left"></div>
+								<div class="side right"></div>
+								<div class="side top"></div>
+								<div class="side bottom"></div>
+								<div class="side front"></div>
+								<div class="side back"></div>
+							</div>
+						</div>
 					</div>
 				</div>
+				<div class="spacing-50"></div>
+				<div class="spacing-50"></div>
+			</div>
+			<div class="col-md-6">
+				<h2>Our Collective Responsibility</h2>
+				<div class="spacing-5"></div>
+				<p style="font-style:italic;margin:0px;color:gray">Manifest pluralism; vote and map your value respective to a comple set of tokenized actions -- explore the value map</p>
+				<div class="spacing-15"></div>
+				<a style="width:100%" class="btn btn-default log-btn" href="/market">explore the value map</a>
+				<div class="spacing-50"></div>
+				<div class="spacing-50"></div>
+
 			</div>
 		</div>
 	</div>
-	-->
-
-	<!--
-	<div style="background-color:black">
-		<div class="container">
-			<div class="row">
-		    	<div class="col-md-6">
-
-		        </div>
-				<div class="col-md-6">
-
-		        </div>
-	    	</div>
-			<div style="height:300px"></div>
-		</div>
-	</div>
-	-->
-
-	<!--
-	<div class="block">
-		<div class="shape">
-			<div class="cube outer">
-				<div class="side left"></div>
-				<div class="side right"></div>
-				<div class="side top"></div>
-				<div class="side bottom"></div>
-				<div class="side front"></div>
-				<div class="side back"></div>
-				<div class="cube">
-					<div class="side left"></div>
-					<div class="side right"></div>
-					<div class="side top"></div>
-					<div class="side bottom"></div>
-					<div class="side front"></div>
-					<div class="side back"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
 
 	<div class="container">
 	    <div class="row">
 	        <div class="col-lg-12 col-md-12">
-				<h3><b>Join the community</b></h3><hr>
+				<h3><b>Join the Community</b></h3><hr>
 	            <div class="login-form">
 	                <form role="form" method="post" action="/auth/local/register">
 	                    <div class="form-group">
@@ -199,11 +185,11 @@
 	</div>
 
 	<div class="spacing-50"></div>
-	
+
 	<!-- TEMP | WORK -->
 	<div class="container">
 		<div ng-repeat="work in work">
-	        <div style="box-shadow: 2px 2px 10px #999;overflow:hidden;margin:10px;">
+	        <div style="box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);overflow:hidden;margin:10px;">
 	            <div style="padding:16px;">
 					<div>
 						<a style="display:inline" href="/member/{{work.user.username}}">{{work.user.username}}</a>
@@ -227,9 +213,9 @@
 
     <!-- TEMP | POST -->
 	<div class="container">
-	    <md-card ng-repeat="post in posts">
-			<md-card-title>
-				<md-card-title-text>
+	    <div ng-repeat="post in posts">
+	        <div style="box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);overflow:hidden;margin:10px;">
+	            <div style="padding:16px;">
 					<div>
 						<a style="display:inline" href="/member/{{post.user.username}}">{{post.user.username}}</a>
 						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
@@ -237,15 +223,15 @@
 					</div>
 					<p style="font-size:10px;color:gray" am-time-ago="post.createdAt"></p>
 					<div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
-				</md-card-title-text>
-			</md-card-title>
-			<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-				<a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-				<a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-				<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-				<a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+				</div>
+				<div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+					<a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+					<a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+					<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+					<a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+				</div>
 			</div>
-	    </md-card>
+	    </div>
 	</div>
 
     <!-- TEMP | PROJECTS -->
