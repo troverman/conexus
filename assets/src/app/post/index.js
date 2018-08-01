@@ -14,38 +14,63 @@ angular.module( 'conexus.post', [
             post: ['$stateParams', 'PostModel', function($stateParams, PostModel){
                 return PostModel.getOne($stateParams.id);
             }],
-            //postChildren:['post', 'PostModel', function(post, PostModel) {
-            //    return PostModel.getByPost(post.id);
-            //}],
+            posts:['post', 'PostModel', function(post, PostModel) {
+                return PostModel.getSome('post', post.id, 100, 0, 'createdAt DESC');
+            }],
         }
     });
 }])
 
-.controller( 'PostController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'titleService', function PostController( $sailsSocket, $sce, $scope, config, lodash, post, PostModel, titleService ) {
+.controller( 'PostController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'titleService', function PostController( $location, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, titleService ) {
     titleService.setTitle('posts | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};
     $scope.post = post;
 
+    //TODO: FINALIZE.. WORKS ON FRONTEND
+    //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED
+    function populateChildren(posts, depth, limit){
+        posts.forEach(function(post) {
+            PostModel.getSome('post', post.id, 100, 0, 'createdAt DESC').then(function(posts){
+                if (posts.length > 0){
+                    depth++ 
+                    post.children = posts;
+                    $scope.post.children.push(post);
+                    if (depth < limit){populateChildren(posts, depth, limit)}
+                }
+            });
+        });
+    }
+    populateChildren(posts, 0, 5);
+    $scope.post.children = posts;
+
     //TODO
     $scope.createPost = function(post) {
-       
+        if($scope.currentUser){
+            $scope.newPost.post = post.id;
+            $scope.newPost.user = $scope.currentUser.id;
+            PostModel.create($scope.newPost).then(function(model) {
+                $scope.newPost = {};
+            });
+        }
+        else{$location.path('/login')}
     };
-
-    //TODO: NESTED ISH | LOOK AT VOET
 
     //TODO
     $scope.createReaction = function(post, type) {
-        $scope.newReaction.user = $scope.currentUser.id;
-        $scope.newReaction.post = post.id;
-        $scope.newReaction.type = type;
-        //weight?
-        //TODO: MODEL | CREATE REACTION
-        //Reaction.create(newReaction);
-        if (type =='plus'){$scope.post.plusCount++}
-        if (type =='minus'){$scope.post.minusCount++}
-        //TODO: UPDATE POST
+        if($scope.currentUser){
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.post = post.id;
+            $scope.newReaction.type = type;
+            //weight?
+            //TODO: MODEL | CREATE REACTION
+            //Reaction.create(newReaction);
+            if (type =='plus'){$scope.post.plusCount++}
+            if (type =='minus'){$scope.post.minusCount++}
+            //TODO: UPDATE POST
+        }
+        else{$location.path('/login')}
     };
 
     $scope.renderMessage = function(message){

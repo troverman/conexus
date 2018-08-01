@@ -4,11 +4,17 @@ module.exports = {
             type: 'string',
             required: true
         },
-        project: {
-            model: 'project',
+        market: {
+            type: 'string'
+        },
+        order: {
+            model: 'order'
         },
         profile: {
             model: 'user',
+        },
+        project: {
+            model: 'project',
         },
         post: {
             model: 'post'

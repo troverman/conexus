@@ -9,7 +9,11 @@ angular.module('models.post', ['lodash', 'services', 'sails.io',])
 
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
-        if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
+        if (type=='market'){query = {params:{market:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='order'){query = {params:{order:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='post'){query = {params:{post:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='profile'){query = {params:{profile:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='task'){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='work'){query = {params:{work:filter, limit:limit,skip:skip,sort:sort}};}

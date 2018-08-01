@@ -21,7 +21,74 @@ module.exports = {
 		
 		Post.watch(req);
 
-		if (req.query.task){
+		if(req.query.market){
+			var market = req.query.market;
+			Post.find({market:market})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if(req.query.order){
+			var order = req.query.order;
+			Post.find({order:order})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if (req.query.post){
+			var post = req.query.post;
+			Post.find({post:post})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if(req.query.profile){
+			var profile = req.query.profile;
+			Post.find({profile:profile})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('profile')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if(req.query.project){
+			var project = req.query.project;
+			Post.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if (req.query.task){
 			var task = req.query.task;
 			Post.find({task:task})
 			.limit(limit)
@@ -43,20 +110,6 @@ module.exports = {
 			.sort(sort)
 			.populate('work')
 			.populate('user')
-			.then(function(models) {
-				Post.subscribe(req, models);
-				res.json(models);
-			});
-		}
-
-		else if(req.query.project){
-			var project = req.query.project;
-			Post.find({project:project})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.populate('project')
 			.then(function(models) {
 				Post.subscribe(req, models);
 				res.json(models);
@@ -94,7 +147,10 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			content: req.param('content'),
+			market: req.param('market'),
+			order: req.param('market'),
 			post: req.param('post'),
+			profile: req.param('profile'),
 			project: req.param('project'),
 			task: req.param('task'),
 			user: req.param('user'),
