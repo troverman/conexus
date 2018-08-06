@@ -8,6 +8,7 @@ angular.module('models', [
 	'models.search',
 	'models.stream',
 	'models.task',
+	'models.transaction',
 	'models.user',
 	'models.validation',
 	'models.work',

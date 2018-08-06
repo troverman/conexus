@@ -87,8 +87,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            entries: ['MemberModel', 'project', function(MemberModel, project) {
-                return [{description:'USD PAYMENT', type:'PAYMENT', amount:13, identifier:'USD'}, {description:'TOKEN TRANSFER', type:'TRANSFER', amount:223, identifier:'CONEX'}, {description:'TASK COMPLETED', type:'TASK BOUNTY', amount:342, identifier:'USD'}]
+            transactions: ['TransactionModel', 'project', function(TransactionModel, project) {
+                return TransactionModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }]
         }
     })
@@ -316,21 +316,30 @@ angular.module( 'conexus.project', [
     $scope.newMotionToggleVar = false;
     $scope.project = project;
 
-    $scope.newMotionToggle = function () {
+    $scope.newMotionToggle = function(){
         $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
     };
 
 }])
 
-.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'entries', 'lodash', 'project', 'titleService', function ProjectController( $interval, $scope, config, entries, lodash, project, titleService ) {
+.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', function ProjectController( $interval, $scope, config, lodash, project, titleService, TransactionModel, transactions ) {
     titleService.setTitle(project.title + ' | Ledger | conex.us');
     $scope.currentUser = config.currentUser;
-    $scope.entries = entries;
-    $scope.newEntryToggleVar = false;
+    $scope.newTransaction = {};
+    $scope.newTransactionToggleVar = false;
     $scope.project = project;
+    $scope.transactions = transactions;
 
-    $scope.newEntryToggle = function () {
-        $scope.newEntryToggleVar = $scope.newEntryToggleVar ? false : true;
+    $scope.newTransactionToggle = function(){
+        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
+    };
+
+    $scope.createTransaction = function(){
+        $scope.newTransaction.project = $scope.project.id;
+        $scope.newTransaction.user = $scope.currentUser.id;
+        TransactionModel.create($scope.newTransaction).then(function(model){
+            $scope.newTransaction = {};
+        });
     };
 
     $scope.chart = {

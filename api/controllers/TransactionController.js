@@ -1,18 +1,22 @@
 /**
- * EntryController
+ * TransactionController
  */
 
 module.exports = {
 
 	getSome: function(req, res) {
+		
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
+		Transaction.watch(req);
 		if(req.query.project){
 			var project = req.query.project;
-			Entry.find({project:project})
+			Transaction.find({project:project})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
 			.populate('project')
 			.then(function(models) {
 				res.json(models);
@@ -21,12 +25,37 @@ module.exports = {
 
 		else if(req.query.user){
 			var user = req.query.user;
-			Entry.find({user:user})
+			Transaction.find({user:user})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else if(req.query.to){
+			var to = req.query.to;
+			Transaction.find({to:to})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else if(req.query.from){
+			var from = req.query.from;
+			Transaction.find({from:from})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
 			.populate('project')
 			.then(function(models) {
 				res.json(models);
@@ -34,12 +63,11 @@ module.exports = {
 		}
 
 		else{
-			Entry.find({})
+			Transaction.find({})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
 			.populate('project')
 			.then(function(models) {
 				res.json(models);
@@ -48,7 +76,7 @@ module.exports = {
 	},
 
 	getOne: function(req, res) {
-		Entry.getOne(req.param('id'))
+		Transaction.getOne(req.param('id'))
 		.spread(function(model) {
 			Stream.subscribe(req, model);
 			res.json(model);
@@ -58,11 +86,15 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			amount: req.param('amount'),
-			identifer: req.param('amount'),
+			content: req.param('content'),
+			identifier: req.param('identifier'),
+			to: req.param('to'),
+			from: req.param('from'),
+			ledger: req.param('ledger'),
 			project: req.param('project'),
 			user: req.param('user'),
 		};
-		Entry.create(model)
+		Transaction.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
 			else {
@@ -78,12 +110,12 @@ module.exports = {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
 		// Otherwise, find and destroy the model in question
-		Entry.findOne(id).exec(function(err, model) {
+		Transaction.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}
-			Entry.destroy(id, function(err) {
+			Transaction.destroy(id, function(err) {
 				if (err) {return res.serverError(err);}
-				Entry.publishDestroy(model.id);
+				Transaction.publishDestroy(model.id);
 				return res.json(model);
 			});
 		});

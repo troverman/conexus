@@ -1,35 +1,41 @@
 <br>
-<!--<button class="btn btn-default log-btn" ng-click="newLedgerToggle()">+ LEDGER</button><br><br>-->
-<!--<ul style="padding:0px;" class="member-tabs">
-	<li><a href="">Total</a></li>
-	<li><a href="">Assets</a></li>
-	<li><a href="">Liabilities</a></li>
-	<li><a href="">Work</a></li>-->
-	<!--abstract gov responsibilities-->
-	<!--<li><a href="">Property</a></li>
-	<li><a href="">Liscense</a></li>-->
-<!--</ul>-->
-<br>
 <div class="">
 
-	<h1>Wallet</h1> <!--org/proj vs member-->
+	<!--<button class="btn btn-default log-btn" ng-click="newLedgerToggle()">+ LEDGER</button><br><br>-->
+	<ul style="padding:0px;" class="member-tabs">
+		<li class="active"><a href="">Total</a></li>
+		<li><a href="">Assets</a></li>
+		<li><a href="">Liabilities</a></li>
+		<!--<li><a href="">Work</a></li>
+		<li><a href="">Property</a></li>
+		<li><a href="">Liscense</a></li>-->
+	</ul>
 
 	<highchart config="chart"></highchart>
 
-	<button class="btn btn-default log-btn" ng-click="newEntryToggle()">+ Entry</button><br><br>
-	<md-card ng-show="newEntryToggleVar">
+	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
+	<md-card ng-show="newTransactionToggleVar">
 	    <div style="padding:10px;">
-			<form role="form" ng-submit="createEntry(newEntry)">
+			<form role="form" ng-submit="createTransaction(newTransaction)">
 				<div class="form-group">
-					<input placeholder="task title" type="text" ng-model="newEntry.title" class="form-control" id="taskTitle">
+					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group">
-					<input placeholder="task content" type="text" ng-model="newEntry.taskContent" class="form-control" id="taskTitle">
+					<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group">
-					<input placeholder="task value" type="text" ng-model="newEntry.value" class="form-control" id="taskTitle">
+					<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
 				</div>
-				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newEntry.title">create</button>
+				<div class="form-group">
+					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group">
+					<input placeholder="Ledger" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group">
+					<input placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle">
+				</div>
+				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
 			</form>
 		</div>
 	</md-card>
@@ -37,20 +43,24 @@
 	<table class="table table-inverse table-hover">
 	    <thead>
 			<tr>
-				<th>Description</th>
-				<th>Type</th>
-				<th>Identifier</th>
+				<th>To</th>
+				<th>From</th>
+				<th>Asset Identifier</th>
 				<th>Amount</th>
+				<th>Ledger</th>
+				<th>Content</th>
 				<th>Date</th>
 			</tr>
 	    </thead>
 	    <tbody>
-			<tr ng-repeat="entry in entries">
-				<td>{{entry.description}}</td>
-				<td>{{entry.type}}</td>
-				<td>{{entry.identifier}}</td>
-				<td>{{entry.amount}}</td>
-				<td>{{entry.createdAt | date :  "y MM-dd hh:mm.ss a"}}</td>
+			<tr ng-repeat="transaction in transactions">
+				<td>{{transaction.to}}</td>
+				<td>{{transaction.from}}</td>
+				<td>{{transaction.identifier}}</td>
+				<td>{{transaction.amount}}</td>
+				<td>{{transaction.ledger}}</td>
+				<td>{{transaction.content}}</td>
+				<td>{{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</td>
 			</tr>
 	    </tbody>
 	</table>

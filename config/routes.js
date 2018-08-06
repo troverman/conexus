@@ -34,6 +34,7 @@ module.exports.routes = {
   'get /stream/:id': 'HomeController.index',
   'get /tasks': 'HomeController.index',
   'get /task/:id': 'HomeController.index',
+  'get /transaction/:id': 'HomeController.index',
   'get /transparency': 'HomeController.index',
   'get /work/:id': 'HomeController.index',
 
@@ -123,6 +124,15 @@ module.exports.routes = {
   'post /api/task/:id': 'TaskController.update',
   'post /api/task': 'TaskController.create',
   'delete /api/task/:id': 'TaskController.destroy',
+
+  /**
+   * Transaction routes
+   */
+  'get /api/transaction': 'TransactionController.getSome',
+  'get /api/transaction/:id': 'TransactionController.getOne',
+  'post /api/transaction': 'TransactionController.create',
+  'delete /api/transaction/:id': 'TransactionController.destroy',
+
 
   /**
    * User routes
