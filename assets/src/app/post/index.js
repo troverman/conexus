@@ -80,7 +80,8 @@ angular.module( 'conexus.post', [
             return $sce.trustAsHtml(replacedText);
         }
     };
-
+    
+    //TODO
     $scope.reply = function(post){
         $scope.post.showReply = !$scope.post.showReply
     };

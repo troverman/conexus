@@ -58,7 +58,7 @@
 					<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
 					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Orders</a></li>-->
 					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Organizations</a></li>-->
-					<li><a href="member/{{member.username}}">Positions</a></li>
+					<li><a href="member/{{member.username}}/positions">Positions</a></li>
 					<li><a href="member/{{member.username}}">{{followersCount.length}} Streams</a></li>
 					<!--<li><a href="member/{{member.username}}">Work</a></li>-->
 					<li><a href="member/{{member.username}}/wallet">Wallet</a></li>
@@ -100,6 +100,7 @@
 		<div ui-view="memberActivity"></div>
 		<div ui-view="memberFollowers"></div>
 		<div ui-view="memberFollowing"></div>
+		<div ui-view="memberPositions"></div>
 		<div ui-view="memberWallet"></div>
 	</div>
 	<div class="spacing-50"></div>

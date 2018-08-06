@@ -1,0 +1,31 @@
+<br>
+<h1>Create Your Value Map</h1>
+<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
+<br><br>
+<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
+<md-card ng-show="newOrderToggleVar">
+    <div style="padding:10px;">
+		<form role="form" ng-submit="createOrder()">
+			<div class="form-group">
+				<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="Ledger" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group">
+				<input placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle">
+			</div>
+			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
+		</form>
+	</div>
+</md-card>
+<div class="spacing-10"></div>

@@ -72,6 +72,20 @@ angular.module( 'conexus.member', [
             }],
         }
     })
+    .state( 'member.positions', {
+        url: '/positions',
+        views: {
+            "memberWallet": {
+                controller: 'MemberPositionsCtrl',
+                templateUrl: 'member/templates/positions.tpl.html'
+            }
+        },
+        resolve: {
+            member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
+                return UserModel.getByUsername($stateParams.path);
+            }]
+        }
+    })
     .state( 'member.wallet', {
         url: '/wallet',
         views: {
@@ -132,6 +146,7 @@ angular.module( 'conexus.member', [
 .controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'PostModel', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, PostModel, posts, titleService, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    //titleService.setTitle($scope.member.username + ' | conex.us');
     $scope.newPost = {};
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
@@ -177,6 +192,7 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash) {
     $scope.currentUser = config.currentUser;
+    //titleService.setTitle($scope.member.username + ' | conex.us');
     $scope.followers = followers;
 
     /*
@@ -196,6 +212,7 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'following', 'FollowerModel', 'lodash', function MemberFollowingController($sailsSocket, $scope, $stateParams, config, following, FollowerModel, lodash) {
     $scope.currentUser = config.currentUser;
+    //titleService.setTitle($scope.member.username + ' | conex.us');
     $scope.following = following;
     console.log(following)
 
@@ -214,9 +231,25 @@ angular.module( 'conexus.member', [
 
 }])
 
+.controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member) {
+    $scope.currentUser = config.currentUser;
+    $scope.member = member;
+     //titleService.setTitle($scope.member.username + ' | conex.us');
+    
+     $scope.newOrderToggle = function(){
+        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    };
+
+    $scope.createOrder = function(){
+
+    };
+
+}])
+
 .controller( 'MemberWalletCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberWalletController($sailsSocket, $scope, $stateParams, config, lodash, member) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    //titleService.setTitle($scope.member.username + ' | conex.us');
     
      $scope.newTransactionToggle = function(){
         $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
