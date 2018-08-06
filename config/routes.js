@@ -50,6 +50,14 @@ module.exports.routes = {
   'get /auth/:provider/:action': 'AuthController.callback',
 
   /**
+   * Entry routes
+   */
+  'get /api/entry': 'EntryController.getSome',
+  'get /api/entry/:id': 'EntryController.getOne',
+  'post /api/entry': 'EntryController.create',
+  'delete /api/entry/:id': 'EntryController.destroy',
+
+  /**
    * Follower routes
    */
   'get /api/follower': 'FollowerController.getSome',

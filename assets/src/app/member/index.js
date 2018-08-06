@@ -217,5 +217,18 @@ angular.module( 'conexus.member', [
 .controller( 'MemberWalletCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberWalletController($sailsSocket, $scope, $stateParams, config, lodash, member) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    
+     $scope.newTransactionToggle = function(){
+        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
+    };
+
+    $scope.createTransaction = function(){
+        $scope.newTransaction.project = $scope.project.id;
+        $scope.newTransaction.user = $scope.currentUser.id;
+        TransactionModel.create($scope.newTransaction).then(function(model){
+            $scope.newTransaction = {};
+        });
+    };
+
 }]);
 
