@@ -37,7 +37,7 @@
 	<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
 	<md-card ng-show="newOrderToggleVar">
 	    <div style="padding:10px;">
-			<form role="form" ng-submit="createOrder(newTask)">
+			<form role="form" ng-submit="createOrder()">
 				<div class="form-group">
 					<input placeholder="Order Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
 				</div>
