@@ -18,7 +18,8 @@ angular.module( 'conexus.marketPair', [
 	});
 }])
 
-.controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'OrderModel', 'orders', 'titleService', function MarketPairController( $scope, $stateParams, OrderModel, orders, titleService ) {
+.controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', function MarketPairController( $scope, $stateParams, config, OrderModel, orders, titleService ) {
+    $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | conex.us');
 	$scope.chart = {
@@ -63,6 +64,7 @@ angular.module( 'conexus.marketPair', [
     $scope.createOrder = function() {
         $scope.newOrder.identiferSet = $scope.stateParams.id;
         $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
+        $scope.newOrder.user = $scope.currentUser.id;
 
         //TODO: PARSE INPUT
         //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);

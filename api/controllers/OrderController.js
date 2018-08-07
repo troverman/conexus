@@ -76,7 +76,7 @@ module.exports = {
 			identiferSet: req.param('identiferSet'),
 			amountSet1: req.param('amountSet1'),
 			identiferSet1: req.param('identiferSet1'),
-			user: req.param('user'),
+			user: req.param('user'), //TODO: CHANGE TO CREATOR | ADDRESS | IE ORGS MAKING ORDERS
 		};
 		Order.create(model)
 		.exec(function(err, order) {

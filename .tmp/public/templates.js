@@ -1182,6 +1182,32 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "	</div>\n" +
     "</md-card>\n" +
     "<div class=\"spacing-10\"></div>\n" +
+    "<table class=\"table table-inverse table-hover\">\n" +
+    "    <thead>\n" +
+    "		<tr>\n" +
+    "			<th>Asset Set 1</th>\n" +
+    "			<th>Asset Set 2</th>\n" +
+    "			<th>Order Id</th>\n" +
+    "		</tr>\n" +
+    "    </thead>\n" +
+    "    <tbody>\n" +
+    "		<tr ng-repeat=\"order in orders\">\n" +
+    "			<td>\n" +
+    "				<span ng-repeat=\"item in order.amountSet\">\n" +
+    "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "				</span>\n" +
+    "			</td>\n" +
+    "\n" +
+    "			<td>\n" +
+    "				<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "				</span>\n" +
+    "			</td>\n" +
+    "			<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "		</tr>\n" +
+    "    </tbody>\n" +
+    "</table>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "");
 }]);
 

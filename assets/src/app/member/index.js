@@ -83,7 +83,10 @@ angular.module( 'conexus.member', [
         resolve: {
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
-            }]
+            }],
+            orders: ['member', 'OrderModel', function(member, OrderModel){
+                return OrderModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+            }],
         }
     })
     .state( 'member.wallet', {
@@ -231,17 +234,31 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member) {
+.controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    $scope.orders = orders;
+    $scope.orders.forEach(function(part, index) {
+        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
+        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
+        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
+        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
+    });
     //titleService.setTitle($scope.member.username + ' | conex.us');
     
     $scope.newOrderToggle = function(){
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
-    $scope.createOrder = function(){
-
+    $scope.createOrder = function() {
+        $scope.newOrder.user = $scope.currentUser.id;
+        //TODO: PARSE INPUT
+        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+        OrderModel.create($scope.newOrder).then(function(model) {
+            //$scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
     };
 
     $scope.chart = {

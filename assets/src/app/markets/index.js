@@ -18,8 +18,9 @@ angular.module( 'conexus.markets', [
 	});
 }])
 
-.controller( 'MarketsCtrl', ['$scope', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, OrderModel, orders, titleService ) {
+.controller( 'MarketsCtrl', ['$scope', 'config', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, config, OrderModel, orders, titleService ) {
 	titleService.setTitle('Market | conex.us');
+    $scope.currentUser = config.currentUser;
     $scope.chart = {
         chart: {
             zoomType: 'x',
@@ -58,6 +59,7 @@ angular.module( 'conexus.markets', [
 
     //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {
+        $scope.newOrder.user = $scope.currentUser.id;
 
         //TODO: PARSE INPUT
         //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
