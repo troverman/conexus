@@ -234,14 +234,67 @@ angular.module( 'conexus.member', [
 .controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
-     //titleService.setTitle($scope.member.username + ' | conex.us');
+    //titleService.setTitle($scope.member.username + ' | conex.us');
     
-     $scope.newOrderToggle = function(){
+    $scope.newOrderToggle = function(){
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
     $scope.createOrder = function(){
 
+    };
+
+    $scope.chart = {
+        chart: {polar: true},
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
+            color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values1',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.2, 0.1, 0.2, 0.1, 0.1],
+            color: 'rgba(0,0,153,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values2',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.1, 0.1, 0.3, 0.2, 0.25, 0.05],
+            color: 'rgba(0,153,0,0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['Sales', 'Marketing', 'Development', 'Customer Support', 'Information Technology', 'Administration'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: false,
+            //align: 'right',
+            //verticalAlign: 'top',
+            //y: 70,
+            //layout: 'vertical'
+        },
+        tooltip: {
+        //    shared: true,
+        },
+        credits:{enabled:false},
     };
 
 }])

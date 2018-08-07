@@ -377,12 +377,12 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "			<div class=\"col-md-6\">\n" +
     "				<h2>Our Collective Responsibility</h2>\n" +
     "				<div class=\"spacing-5\"></div>\n" +
-    "				<p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism; vote and map your value respective to a complete set of tokenized actions -- explore the value map</p>\n" +
+    "				<p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism</p>\n" +
+    "				<p style=\"font-style:italic;margin:0px;color:gray\">Vote and map your value respective to a complete set of tokenized potiental</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the value map</a>\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<div class=\"spacing-50\"></div>\n" +
-    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -881,7 +881,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
     "	<md-card ng-show=\"newOrderToggleVar\">\n" +
     "	    <div style=\"padding:10px;\">\n" +
-    "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
+    "			<form role=\"form\" ng-submit=\"createOrder()\">\n" +
     "				<div class=\"form-group\">\n" +
     "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
@@ -1158,29 +1158,26 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "<h1>Create Your Value Map</h1>\n" +
     "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
     "<br><br>\n" +
+    "<highchart config=\"chart\"></highchart>\n" +
+    "<br><br>\n" +
+    "\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
     "<md-card ng-show=\"newOrderToggleVar\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createOrder()\">\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
     "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Ledger\" type=\"text\" ng-model=\"newTransaction.ledger\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
     "		</form>\n" +
     "	</div>\n" +
     "</md-card>\n" +
@@ -1494,6 +1491,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "		<li><a href=\"/project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
     "    <li><a href=\"/project/{{project.urlTitle}}/projects\">Organizations</a></li>\n" +
+    "    <!--<li><a href=\"/project/{{project.urlTitle}}/positions\">Positions</a></li>-->\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>\n" +
     "    <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "		<li ng-show=\"currentUser\">\n" +
