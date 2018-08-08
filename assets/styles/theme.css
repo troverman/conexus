@@ -14,6 +14,8 @@ body {
     min-height: 100%
 }
 
+.h1, .h2, .h3, h1, h2, h3{margin-top:10px;margin-bottom:10px;}
+
 md-progress-linear .md-container {
   background-color: rgba(36,36,46, 1)!important;
 }
@@ -22,6 +24,7 @@ md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
  background-color: #084b73!important;
 }
 
+//a{color:#002c53}
 a:hover{text-decoration: none}
 a:active{text-decoration: none}
 a:focus{text-decoration: none}
@@ -148,7 +151,7 @@ a:focus{text-decoration: none}
 .footer a{
     color:#9d9d9d;
     padding:5px;
-    font-weight: 600;
+    font-weight: 500;
     font-size:15px;
     font-family:'Titillium Web', sans-serif;
     text-transform: uppercase;
@@ -192,7 +195,7 @@ a:focus{text-decoration: none}
 
 .nav-links {
 	font-family: 'Titillium Web', sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size:16px;
@@ -254,7 +257,9 @@ a:focus{text-decoration: none}
 }
 
 .page-heading {
-    background-color:rgb(240,240,240);
+    //background-color:rgb(240,240,240);
+    background-color: #33312d;
+    color:white;
 }
 
 .title {

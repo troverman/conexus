@@ -185,7 +185,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, tasks, titleService, work ) {
-    titleService.setTitle(project.title + ' | Activity | conex.us');
+    titleService.setTitle('Activity | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};
@@ -276,8 +276,8 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, channels, config, posts, project, titleService ) {
-    titleService.setTitle(project.title + ' | Channels | conex.us');
+.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, channels, config, posts, project, titleService ) {
+    titleService.setTitle('Channels | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
     $scope.newPost = {};
@@ -295,6 +295,14 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
+    $scope.renderMessage = function(post){
+        if (post){
+            var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
+    };
+
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -310,7 +318,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, project, titleService ) {
-    titleService.setTitle(project.title + ' | Charter | conex.us');
+    titleService.setTitle('Charter | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.bills = bills;  
     $scope.newMotionToggleVar = false;
@@ -323,7 +331,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', function ProjectController( $interval, $scope, config, lodash, project, titleService, TransactionModel, transactions ) {
-    titleService.setTitle(project.title + ' | Ledger | conex.us');
+    titleService.setTitle('Ledger | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
@@ -376,7 +384,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectMembersCtrl', ['$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
-    titleService.setTitle(project.title + ' | Members | conex.us');
+    titleService.setTitle('Members | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.members = members;
     $scope.newMember = {};
@@ -406,7 +414,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, project, streams, titleService ) {
-    titleService.setTitle(project.title + ' | Streams | conex.us');
+    titleService.setTitle('Streams | ' + project.title + ' | conex.us');
     $scope.project = project;
     $scope.streams = streams;
     $scope.AudioContext = {};
@@ -470,7 +478,7 @@ angular.module( 'conexus.project', [
 
 }])
 .controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks, titleService ) {
-    titleService.setTitle(project.title + ' | Tasks | conex.us');
+    titleService.setTitle('Tasks | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
@@ -501,7 +509,7 @@ angular.module( 'conexus.project', [
 
 }])
 .controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'projects', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, projects, titleService ) {
-    titleService.setTitle(project.title + ' | Projects | conex.us');
+    titleService.setTitle('Projects | ' + project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.projects = projects;

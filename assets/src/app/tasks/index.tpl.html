@@ -1,12 +1,3 @@
-<style>
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-	vertical-align:middle;
-	padding:3px;
-	min-width:100px;
-}
-
-</style>
-
 <div class="page-heading">
 	<div class="container"> 
 		<div class="spacing-25"></div>
@@ -14,7 +5,7 @@
 			<div class="col-xs-6"><h1>Tasks</h1></div>
 			<div class="col-xs-6">
 			    <div class="dropdown sort-dropdown noselect" style="float:right">
-                    <a href="#" style="color:gray" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			            <h3 style="text-align:right" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h3>
 			        </a>
 			        <ul class="dropdown-menu">
@@ -34,17 +25,6 @@
 <div class="container">
 	<div class="spacing-25"></div>
 	<table class="table table-striped table-hover">
-		<thead>
-		    <tr>
-				<!--<th></th>-->
-		  		<th>Title</th>
-				<th>Content</th>
-				<th>Tags</th>
-				<th>Token Liquidity</th>
-				<th>Date</th>
-				<!--<th></th>-->
-		    </tr>
-		</thead>
 		<tbody>
 			<tr ng-repeat="task in tasks">
 				<!--<td>

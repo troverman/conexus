@@ -1512,7 +1512,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "<div class=\"member-tab-container container\">\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
+    "		<!--<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>-->\n" +
     "    <!--<li><a href=\"/project/{{project.urlTitle}}/charter\">Charter</a></li>-->\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
@@ -1629,12 +1629,26 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "        <md-card ng-repeat=\"post in posts\">\n" +
     "            <div style=\"padding:10px;\">\n" +
     "                <a href=\"/member/{{post.user.username}}\">\n" +
-    "                    <img src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;\">\n" +
+    "                    <img src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:32px;radius:3px\">\n" +
     "                    {{post.user.username}}\n" +
     "                </a>\n" +
     "                <br>\n" +
     "                <p style=\"color:gray;font-size:10px\" am-time-ago=\"post.updatedAt\"></p>\n" +
-    "                <p>{{post.content}}</p>\n" +
+    "                <span ng-bind-html=\"renderMessage(post.content)\"></span>\n" +
+    "            </div>\n" +
+    "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'like', 'post')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'dislike', 'post')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "            <div ng-show=\"post.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" ng-model=\"post.newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                </form>\n" +
     "            </div>\n" +
     "        </md-card>\n" +
     "        <div class=\"spacing-15\"></div>\n" +
@@ -1823,6 +1837,8 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
   $templateCache.put("project/templates/tasks.tpl.html",
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<br>\n" +
+    "<!--FILTERS AND SEARCH HERE-->\n" +
+    "\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button><br><br>\n" +
     "<md-card ng-show=\"newTaskToggleVar\">\n" +
     "    <div style=\"padding:10px;\">\n" +
@@ -1864,11 +1880,11 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "<table class=\"table table-striped table-hover\">\n" +
     "  <thead>\n" +
     "        <tr>\n" +
-    "      		<th>Title</th>\n" +
-    "			<th>Content</th>\n" +
-    "			<th>Tags</th>\n" +
-    "			<th>Bounty</th>\n" +
-    "			<th>Date</th>\n" +
+    "      		<th></th>\n" +
+    "			<th></th>\n" +
+    "			<th></th>\n" +
+    "			<th></th>\n" +
+    "			<th></th>\n" +
     "			<th></th>\n" +
     "        </tr>\n" +
     "  </thead>\n" +
@@ -1891,10 +1907,10 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1><b>Projects</b></h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h1>Projects</h1></div>\n" +
     "            <div class=\"col-xs-6\">\n" +
     "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                    <a href=\"#\" style=\"color:gray\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "                        <h3 style=\"text-align:right\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h3>\n" +
     "                    </a>\n" +
     "                    <ul class=\"dropdown-menu\">\n" +
@@ -1907,30 +1923,29 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
-    "        <div class=\"row\" ng-show=\"currentUser\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button><br><br>\n" +
-    "                <div ng-show=\"newProjectToggleVar\">\n" +
-    "                    <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                            <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
-    "                            <input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">\n" +
-    "                        </div>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
-    "                <br><br>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "<div class=\"container\">\n" +
+    "    <div class=\"row\" ng-show=\"currentUser\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button><br><br>\n" +
+    "            <div ng-show=\"newProjectToggleVar\">\n" +
+    "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "            <br><br>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"post-container col-md-12\" ng-repeat=\"project in projects\">\n" +
+    "        <div class=\"post-container col-xs-12\" ng-repeat=\"project in projects\">\n" +
     "            <div class=\"col-xs-1\">\n" +
     "                <img style=\"width:50px;height:50px;\" src=\"{{project.avatarUrl}}\">\n" +
     "            </div>\n" +
@@ -2234,15 +2249,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
 
 angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
-    "<style>\n" +
-    ".table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{\n" +
-    "	vertical-align:middle;\n" +
-    "	padding:3px;\n" +
-    "	min-width:100px;\n" +
-    "}\n" +
-    "\n" +
-    "</style>\n" +
-    "\n" +
     "<div class=\"page-heading\">\n" +
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
@@ -2250,7 +2256,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "			<div class=\"col-xs-6\"><h1>Tasks</h1></div>\n" +
     "			<div class=\"col-xs-6\">\n" +
     "			    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                    <a href=\"#\" style=\"color:gray\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "			            <h3 style=\"text-align:right\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h3>\n" +
     "			        </a>\n" +
     "			        <ul class=\"dropdown-menu\">\n" +
@@ -2270,17 +2276,6 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<table class=\"table table-striped table-hover\">\n" +
-    "		<thead>\n" +
-    "		    <tr>\n" +
-    "				<!--<th></th>-->\n" +
-    "		  		<th>Title</th>\n" +
-    "				<th>Content</th>\n" +
-    "				<th>Tags</th>\n" +
-    "				<th>Token Liquidity</th>\n" +
-    "				<th>Date</th>\n" +
-    "				<!--<th></th>-->\n" +
-    "		    </tr>\n" +
-    "		</thead>\n" +
     "		<tbody>\n" +
     "			<tr ng-repeat=\"task in tasks\">\n" +
     "				<!--<td>\n" +
