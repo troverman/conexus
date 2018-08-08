@@ -18,13 +18,14 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'titleService', function ProjectsController( $sailsSocket, $scope, config, lodash, ProjectModel, projects, titleService ) {
+.controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $scope, config, lodash, ProjectModel, projects, titleService ) {
 	titleService.setTitle('projects | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newProject = {};
     $scope.newProjectToggleVar = false;
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;
+    $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','memberCount DESC': 'Member Count'}
     $scope.projects = projects;
 
     $scope.createProject = function(newProject) {
@@ -34,19 +35,26 @@ angular.module( 'conexus.projects', [
         });
     };
 
-    //TODO: FILTERS ETC
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
-        console.log($scope.skip)
-        //$rootScope.stateIsLoading = true;
+        $rootScope.stateIsLoading = true;
         ProjectModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(projects) {
-            //$rootScope.stateIsLoading = false;
+            $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.projects, projects);
         });
     };
 
     $scope.newProjectToggle = function () {
         $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+    };
+
+    $scope.selectSort = function(sort){
+        $scope.selectedSort = sort;
+        $rootScope.stateIsLoading = true;
+        ProjectModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(projects) {
+            $rootScope.stateIsLoading = false;
+            $scope.projects = projects;
+        });
     };
 
     $sailsSocket.subscribe('project', function (envelope) {

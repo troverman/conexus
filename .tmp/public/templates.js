@@ -1888,38 +1888,57 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("projects/index.tpl.html",
     "<div class=\"page-heading\">\n" +
-    "  <div class=\"container\"> \n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <h1><b>Projects</b></h1>\n" +
-    "    <div ng-show=\"currentUser\">\n" +
-    "      <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button><br><br>\n" +
-    "      <div ng-show=\"newProjectToggleVar\">\n" +
-    "        <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
-    "          <div class=\"form-group\">\n" +
-    "            <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "            <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
-    "            <input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">\n" +
-    "          </div>\n" +
-    "          <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "        </form>\n" +
-    "      </div>\n" +
-    "      <br><br>\n" +
+    "    <div class=\"container\"> \n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-6\"><h1><b>Projects</b></h1></div>\n" +
+    "            <div class=\"col-xs-6\">\n" +
+    "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                    <a href=\"#\" style=\"color:gray\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                        <h3 style=\"text-align:right\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h3>\n" +
+    "                    </a>\n" +
+    "                    <ul class=\"dropdown-menu\">\n" +
+    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "                        <hr class=\"sort-hr\">\n" +
+    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
+    "                        <hr class=\"sort-hr\">\n" +
+    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "                    </ul>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"row\" ng-show=\"currentUser\">\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button><br><br>\n" +
+    "                <div ng-show=\"newProjectToggleVar\">\n" +
+    "                    <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">\n" +
+    "                        </div>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "                <br><br>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "  </div>\n" +
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "<div class=\"container\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div class=\"post-container col-md-12\" ng-repeat=\"project in projects\">\n" +
-    "      <div class=\"col-xs-1\">\n" +
-    "        <img style=\"width:50px;height:50px;\" src=\"{{project.avatarUrl}}\">\n" +
-    "      </div>\n" +
-    "      <div class=\"col-xs-11\">\n" +
-    "        <h3><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
-    "      </div>\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"post-container col-md-12\" ng-repeat=\"project in projects\">\n" +
+    "            <div class=\"col-xs-1\">\n" +
+    "                <img style=\"width:50px;height:50px;\" src=\"{{project.avatarUrl}}\">\n" +
+    "            </div>\n" +
+    "            <div class=\"col-xs-11\">\n" +
+    "                <h3><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "  </div>\n" +
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "<div ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
@@ -2215,12 +2234,34 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
 
 angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
+    "<style>\n" +
+    ".table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{\n" +
+    "	vertical-align:middle;\n" +
+    "	padding:3px;\n" +
+    "	min-width:100px;\n" +
+    "}\n" +
+    "\n" +
+    "</style>\n" +
+    "\n" +
     "<div class=\"page-heading\">\n" +
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-xs-6\"><h1>Tasks</h1></div>\n" +
-    "			<div class=\"col-xs-6\"><h3 style=\"text-align:right\"><i class=\"fa fa-angle-down\"></i></h3></div>\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "			    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                    <a href=\"#\" style=\"color:gray\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "			            <h3 style=\"text-align:right\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h3>\n" +
+    "			        </a>\n" +
+    "			        <ul class=\"dropdown-menu\">\n" +
+    "			            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "			            <hr class=\"sort-hr\">\n" +
+    "			            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('workCount DESC')\"><h5>Total Work</h5></a></li>\n" +
+    "			            <hr class=\"sort-hr\">\n" +
+    "			            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "			        </ul>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "	</div>\n" +
@@ -2231,22 +2272,27 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "	<table class=\"table table-striped table-hover\">\n" +
     "		<thead>\n" +
     "		    <tr>\n" +
+    "				<!--<th></th>-->\n" +
     "		  		<th>Title</th>\n" +
     "				<th>Content</th>\n" +
     "				<th>Tags</th>\n" +
-    "				<th>Liquidity</th>\n" +
+    "				<th>Token Liquidity</th>\n" +
     "				<th>Date</th>\n" +
-    "				<th></th>\n" +
+    "				<!--<th></th>-->\n" +
     "		    </tr>\n" +
     "		</thead>\n" +
     "		<tbody>\n" +
     "			<tr ng-repeat=\"task in tasks\">\n" +
-    "				<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
+    "				<!--<td>\n" +
+    "					<a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\"><i class=\"fa fa-angle-up\"></i></button></a>\n" +
+    "					<a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\"><i class=\"fa fa-angle-down\"></i></button></a>\n" +
+    "				</td>-->\n" +
+    "				<td><h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4></td>\n" +
     "				<td>{{task.content}}</td>\n" +
     "                <td><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></td>\n" +
     "				<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
-    "				<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
-    "				<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +
+    "				<td><span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span></td>\n" +
+    "				<!--<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>-->\n" +
     "			</tr>\n" +
     "		</tbody>\n" +
     "	</table>\n" +

@@ -19,23 +19,29 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $scope, TaskModel, tasks, titleService ) {
+.controller( 'TasksCtrl', ['$rootScope', '$sailsSocket', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $rootScope, $sailsSocket, $scope, TaskModel, tasks, titleService ) {
 	titleService.setTitle('Tasks | conex.us');
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
+	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','workCount DESC': 'Total Work'}
 	$scope.tasks = tasks;
-	
-	//TODO: FILTERS ETC
-	//TODO: getSome
 
-	//TODO: FILTERS ETC
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
-        //$rootScope.stateIsLoading = true;
+        $rootScope.stateIsLoading = true;
         TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
-            //$rootScope.stateIsLoading = false;
+            $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.tasks, tasks);
         });
     };
+
+    $scope.selectSort = function(sort){
+		$scope.selectedSort = sort;
+		$rootScope.stateIsLoading = true;
+        TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
+			$rootScope.stateIsLoading = false;
+			$scope.tasks = tasks;
+		});
+	};
 
 }]);
