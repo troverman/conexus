@@ -110,7 +110,7 @@ angular.module( 'conexus.home', [
 	$scope.createPost = function(post){
 		$scope.newPost.post = post.id;
 		$scope.newPost.user = $scope.currentUser.id;
-		//$scope.newPost.profile = $scope.currentUser.id;
+		$scope.newPost.profile = $scope.currentUser.id;
 		PostModel.create($scope.newPost).then(function(model) {
 			$scope.newPost = {};
 		});
