@@ -10,7 +10,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div id=\"title-container\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "		<h1>conex.us | cre8.xyz</h1>\n" +
+    "		<!--<h1>conex.us | CRE8.XYZ</h1>-->\n" +
+    "		<h1>CRE8.XYZ</h1>\n" +
     "		<h4>Creating the Next Wave of Public Organizations</h4>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
@@ -373,6 +374,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h1>Create the Next Wave</h1>\n" +
+    "				<!--<h1>CRE8 Multidimensional Value</h1>-->\n" +
     "				<div class=\"spacing-5\"></div>\n" +
     "				<p style=\"font-style:italic;margin:0px;color:gray\">Create and participate in transparent, crowdsourced, organizations</p>\n" +
     "				<p style=\"font-style:italic;margin:0px;color:gray\">Earn value through tokenized, market-liquid, organizational actions</p>\n" +
@@ -560,6 +562,7 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function ($tem
     "                class=\"medium-text\"\n" +
     "                >\n" +
     "            Connect. Collab. Create.\n" +
+    "            <!--CRE8 MULTIDIMENSIONAL VALUE-->\n" +
     "          </text> \n" +
     "        </symbol>\n" +
     "        <div style=\"text-align:center;\">\n" +
