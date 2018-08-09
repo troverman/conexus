@@ -3,11 +3,20 @@
 		<div class="container"> 
 			<div class="spacing-25"></div>
 			<h1><b>{{searchQuery}}</b></h1>
-			<input ng-keyup="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
 			<div class="spacing-25"></div>
 		</div>
 	</div>
 	<div class="container">
+
+		<div class="spacing-25"></div>
+		<form role="form" >
+			<div class="form-group">
+				<input type="text" class="form-control" ng-keyup="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
+			</div>
+			<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+		</form>
+		<div class="spacing-25"></div>
+
 		<md-card ng-repeat="searchResult in searchResults">
 			<div style="padding:25px;">
 				<a href="project/{{searchResult.urlTitle}}">{{searchResult.title}}</a>
@@ -18,6 +27,7 @@
 				<br>
 			</div>
 		</md-card>
+		
 	</div>
 </div>
 <div class="spacing-50"></div>

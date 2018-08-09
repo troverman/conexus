@@ -35,23 +35,117 @@ a:focus{text-decoration: none}
   display: table;
 }
 
+.card{
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    overflow:hidden;
+    margin:10px;
+}
+
+.card-footer{
+    padding: 8px 16px 8px;
+    background-color: #f9f9f9
+}
+
+.card-footer a{
+    padding:5px;
+    color:gray;
+}
+
+.member-tabs li{
+    display: inline;
+    font-size: 20px;
+    font-family:'Titillium Web',sans-serif;
+}
+
+.member-tabs > li > a{
+    padding:10px 15px;
+    color:rgb(125,125,125);
+}
+
+.member-tabs > li > a:hover{
+    background-color: #eee;
+    border-radius:3px;
+}
+
+.member-cover{
+    height:17em;
+    width: 100%;
+    overflow: hidden;
+}
+
+.member-cover img{
+    width: 100%;
+    margin-top: -10%
+}
+
+.member-tab-container ul{
+    margin:10px 15px;
+}
+
+.imageContainer {
+    background:#33312d;
+    overflow:hidden;
+    min-height: 500px;
+    font-family: 'Titillium Web',sans-serif;
+    margin:0;padding:0;border:0 none;position: relative;
+}
+
+.imageContainerDiv {
+    width:100%;
+    height: 35em;
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainerDiv h1 {
+    color: rgba(255,255,255,0.9);
+    font-size: 50px;
+    font-weight: 400;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.imageContainerSmall {
+    background:#33312d;
+    overflow:hidden;
+    min-height: 200px;
+    font-family: 'Titillium Web',sans-serif;
+    margin:0;padding:0;border:0 none;position: relative;
+}
+
+.imageContainerSmallDiv {
+    width:100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainerSmallDiv h1 {
+    color: rgba(255,255,255,0.9);
+    font-size: 50px;
+    font-weight: 400;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
 .social-log {
     text-align: center;
 }
+
 .social-log a {
     margin: 3px;
     display: inline-block;
 }
+
 .social-log i {
     color: #EF8D09;
 }
-.login-form {
 
-}
 .form-group {
     position: relative;
     margin-bottom: 15px;
 }
+
 .form-control {
     width: 100%;
     height: 50px;
@@ -65,26 +159,31 @@ a:focus{text-decoration: none}
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
+
 .form-control:focus {
     border-color: #002c54;
     color: #002c54;
     font-weight: bold;
 }
+
 .form-group .fa {
     position: absolute;
     right: 15px;
     top: 17px;
     color: #EF8D09;
 }
+
 .log-status.wrong-entry {
     -moz-animation: wrong-log 0.3s;
     -webkit-animation: wrong-log 0.3s;
     animation: wrong-log 0.3s;
 }
+
 .log-status.wrong-entry .form-control, .wrong-entry .form-control+.fa {
     border-color: #ed1c24;
     color: #ed1c24;
 }
+
 .log-btn {
     background-color: #002c54;
     color: #fff!important;
@@ -96,16 +195,19 @@ a:focus{text-decoration: none}
     letter-spacing: 1px;
     border-radius: 0;
 }
+
 .log-btn:hover {
     background: #001B34;
     color: #fff!important;
 }
+
 .log-btn:focus, .log-btn:active {
     background-color: #001B34!important;
     color: #fff!important;
     -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.75);
     box-shadow: inset 0 3px 5px rgba(0,0,0,0.75);
 }
+
 .link {
     text-decoration: none;
     color: #C6C6C6;
@@ -113,14 +215,17 @@ a:focus{text-decoration: none}
     font-size: 12px;
     margin-bottom: 15px;
 }
+
 .link:hover {
     text-decoration: underline;
     color: #8C918F;
 }
+
 .intro-header {
     margin-bottom: 50px;
     background: #EEEEEE;
 }
+
 .intro-header .site-heading, .intro-header .post-heading, .intro-header .page-heading {
     padding: 50px 0 50px;
     color: #252525;
@@ -212,49 +317,18 @@ a:focus{text-decoration: none}
 .btn-default.disabled, .btn-default.disabled.active, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled], .btn-default[disabled].active, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default.active, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover{
     background-color:red!important;
 }
-.spacing-5 {
-  padding:5px;
-}
 
-.spacing-10 {
-  padding:10px;
-}
-
-.spacing-15 {
-  padding:15px;
-}
-
-.spacing-25 {
-  padding:25px;
-}
-
-.spacing-50 {
-  padding:50px;
-}
-
-.spacing-75 {
-  padding:75px;
-}
-
-.spacing-100 {
-  padding:100px;
-}
-
-.spacing-125 {
-  padding:125px;
-}
-
-.spacing-150 {
-  padding:150px;
-}
-
-.spacing-200 {
-  padding:200px;
-}
-
-.spacing-250 {
-  padding:250px;
-}
+.spacing-5 {padding:5px;}
+.spacing-10 {padding:10px;}
+.spacing-15 {padding:15px;}
+.spacing-25 {padding:25px;}
+.spacing-50 {padding:50px;}
+.spacing-75 {padding:75px;}
+.spacing-100 {padding:100px;}
+.spacing-125 {padding:125px;}
+.spacing-150 {padding:150px;}
+.spacing-200 {padding:200px;}
+.spacing-250 {padding:250px;}
 
 .page-heading {
     //background-color:rgb(240,240,240);
