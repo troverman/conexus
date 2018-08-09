@@ -57,12 +57,28 @@
 		        <div class="card">
 		            <div style="padding:16px;">
 						<div>
-							<a style="display:inline" href="/member/{{post.user.username}}">{{post.user.username}}</a>
+
+
+							<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+							<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
 							<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-							<a style="display:inline" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+
+							<a style="display:inline;font-weight:600;margin-left:5px" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+
+							<!--TODO: POST PARENT TYPES-->
+
+							<a ng-show="post.market" style="display:inline;font-weight:600" href="/market/{{post.market}}">market {{post.market}}</a>
+							<a ng-show="post.order" style="display:inline;font-weight:600" href="/order/{{post.order}}">order {{post.order}}</a>
+							<a ng-show="post.post" style="display:inline;font-weight:600" href="/post/{{post.post}}">post {{post.post}}</a>
+							<a ng-show="post.profile" style="display:inline;font-weight:600" href="/member/{{post.profile}}">profile {{post.profile}}</a>
+							<a ng-show="post.project" style="display:inline;font-weight:600" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+							<a ng-show="post.task" style="display:inline;font-weight:600" href="/task/{{post.task}}">task {{post.task}}</a>
+							<a ng-show="post.work" style="display:inline;font-weight:600" href="/work/{{post.work}}">work {{post.work}}</a>
+
+							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+
 						</div>
-						<p style="font-size:10px;color:gray" am-time-ago="post.createdAt"></p>
-						<div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+						<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
 					</div>
 					<div class="card-footer">
 						<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -214,14 +230,17 @@
 	        <div class="card">
 	            <div style="padding:16px;">
 					<div>
-						<a style="display:inline" href="/member/{{work.user.username}}">{{work.user.username}}</a>
+						<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{work.user.username}}">{{work.user.username}}</a>
 						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-		                <a style="display:inline" href="task/{{work.task.id}}">{{work.task.title}}</a>
+		                <a style="display:inline;font-weight:600" href="task/{{work.task.id}}">{{work.task.title}}</a>
+		                <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+						<a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
+						<p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
 					</div>
-        			<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
-	            	<p>{{work.amount}}, <a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-	                <div><span style="display:inline" ng-bind-html="renderMessage(work.content)"></span></div>
-	                <p style="color:gray;font-size:10px" am-time-ago="work.createdAt"></p>
+        			<p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+	            	<p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+	                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(work.content)"></span></div>
 	            </div>
 	            <div class="card-footer">
 	                <a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -239,12 +258,27 @@
 	        <div class="card">
 	            <div style="padding:16px;">
 					<div>
-						<a style="display:inline" href="/member/{{post.user.username}}">{{post.user.username}}</a>
+
+						
+
+						<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
 						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-						<a style="display:inline" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+
+						<!--TODO: POST TYPES-->
+
+						<a ng-show="post.market" style="display:inline;font-weight:600" href="/market/{{post.market}}">market {{post.market}}</a>
+						<a ng-show="post.order" style="display:inline;font-weight:600" href="/order/{{post.order}}">order {{post.order}}</a>
+						<a ng-show="post.post" style="display:inline;font-weight:600" href="/post/{{post.post}}">post {{post.post}}</a>
+						<a ng-show="post.profile" style="display:inline;font-weight:600" href="/member/{{post.profile}}">profile {{post.profile}}</a>
+						<a ng-show="post.project" style="display:inline;font-weight:600" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+						<a ng-show="post.task" style="display:inline;font-weight:600" href="/task/{{post.task}}">task {{post.task}}</a>
+						<a ng-show="post.work" style="display:inline;font-weight:600" href="/work/{{post.work}}">work {{post.work}}</a>
+
+						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+
 					</div>
-					<p style="font-size:10px;color:gray" am-time-ago="post.createdAt"></p>
-					<div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+					<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
 				</div>
 				<div class="card-footer">
 					<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 

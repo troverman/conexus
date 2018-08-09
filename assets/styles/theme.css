@@ -41,6 +41,13 @@ a:focus{text-decoration: none}
     margin:10px;
 }
 
+.card-avatar{
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    border-radius: 3px;
+}
+
 .card-footer{
     padding: 8px 16px 8px;
     background-color: #f9f9f9
@@ -359,6 +366,7 @@ a:focus{text-decoration: none}
     padding:3px;
     min-width:100px;
 }
+
 
 /* Bootstrap nav breakpoint override */
 

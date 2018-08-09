@@ -12,18 +12,15 @@ angular.module( 'conexus.home', [
 		},
 		resolve:{
 			projects: ['ProjectModel', function(ProjectModel) {
-				//TODO: GET SOME
 				return ProjectModel.getSome(100, 0, 'createdAt DESC');
 			}],
 			members: ['UserModel', function(UserModel){
-				//TODO: GET SOME
 				return UserModel.getSome(100, 0, 'createdAt DESC');
 			}],
 			posts: ['PostModel', function(PostModel){
                 return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
 			}],
 			tasks: ['TaskModel', function(TaskModel) {
-				//TODO: GET SOME
 				return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
 			}],
 			work: ['WorkModel', function(WorkModel) {
