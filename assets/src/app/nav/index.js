@@ -6,6 +6,11 @@ angular.module( 'conexus.nav', [
     $rootScope.$on("$stateChangeSuccess", function() {
     	window.scrollTo(0, 0);
     });
+    //TEMP
+    $scope.cre8xyz = false;
+    if (window.location.hostname.split('.')[window.location.hostname.split('.').length-1].toLowerCase()=='cre8'){$scope.cre8xyz = true;}
+    console.log(window.location.hostname.split('.'));
+
 }])
 
 //TODO: IMPROVE | ON EXIT CLICK CLOSE NAV

@@ -263,6 +263,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "				<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
+    "				<li><a href=\"\">Discover</a></li>\n" +
     "				<li><a href=\"\">Posts</a></li>\n" +
     "				<li><a href=\"\">Projects</a></li>\n" +
     "				<li><a href=\"\">Positions</a></li>\n" +
@@ -1245,7 +1246,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "        <span class=\"icon-bar\"></span>\n" +
     "      </button>\n" +
     "      <a class=\"navbar-brand\" href=\"/\">\n" +
-    "        <img style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
+    "        <img ng-show=\"!cre8xyz\" style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
+    "        <span ng-show=\"cre8xyz\" class=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
     "      </a>\n" +
     "    </div>\n" +
     "    <div class=\"collapse navbar-collapse\">\n" +
