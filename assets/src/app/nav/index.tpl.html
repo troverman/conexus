@@ -12,9 +12,9 @@
         <span ng-show="cre8xyz" style="font-weight:bold;color:white">CRE8.XYZ</span>
       </a>
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" style="text-align:center">
       <ul class="nav navbar-nav">
-        <form class="navbar-form pull-left" role="search" action="/search/" onSubmit=" location.href = 'search/' + document.getElementById('search-link').value; return false;">
+        <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
           <div class="form-group">
             <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">
           </div>

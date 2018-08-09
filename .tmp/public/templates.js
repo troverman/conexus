@@ -220,11 +220,12 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
     "			<a>{{date | date:'yyyy'}}</a>\n" +
     "			<a href=\"/\">conex.us</a>\n" +
     "			<a href=\"/about\">about</a>\n" +
-    "			<!--<a href=\"/connect\">discover</a>-->\n" +
+    "			<a href=\"/connect\">discover</a>\n" +
     "			<a href=\"/market\">market</a>\n" +
-    "			<a href=\"/projects\">organizations</a>\n" +
+    "			<a href=\"/projects\">projects</a>\n" +
     "			<a href=\"/tasks\">tasks</a>\n" +
-    "			<a href=\"/transparency\">transparency</a>\n" +
+    "			<a href=\"/tasks\">Work</a>\n" +
+    "			<!--<a href=\"/transparency\">transparency</a>-->\n" +
     "			<!--<a href=\"/project/conexus/ledger\">transparency</a>-->\n" +
     "		</div>\n" +
     "		<div>\n" +
@@ -277,6 +278,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "		        	<h1>Create Your Value Map</h1>\n" +
     "					<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
     "					<!--<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>-->\n" +
     "\n" +
     "		        </div>\n" +
@@ -305,10 +307,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "							<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "							<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
-    "							<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/project/{{post.project.urlTitle}}\">{{post.project.title}}</a>\n" +
-    "\n" +
     "							<!--TODO: POST PARENT TYPES-->\n" +
-    "\n" +
     "							<a ng-show=\"post.market\" style=\"display:inline;font-weight:600\" href=\"/market/{{post.market}}\">market {{post.market}}</a>\n" +
     "							<a ng-show=\"post.order\" style=\"display:inline;font-weight:600\" href=\"/order/{{post.order}}\">order {{post.order}}</a>\n" +
     "							<a ng-show=\"post.post\" style=\"display:inline;font-weight:600\" href=\"/post/{{post.post}}\">post {{post.post}}</a>\n" +
@@ -340,6 +339,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "				</div>\n" +
     "		    </div>\n" +
     "				\n" +
+    "			<!--\n" +
     "			<div ng-repeat=\"task in tasks\">\n" +
     "				<div class=\"card\">\n" +
     "					<div style=\"padding:16px;\">\n" +
@@ -354,6 +354,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
+    "			-->\n" +
     "\n" +
     "			<div class=\"spacing-25\"></div>\n" +
     "			<div ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
@@ -466,6 +467,18 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
+    "	<div class=\"container\">\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
+    "			<li><a href=\"\">Discover</a></li>\n" +
+    "			<li><a href=\"\">Posts</a></li>\n" +
+    "			<li><a href=\"\">Projects</a></li>\n" +
+    "			<li><a href=\"\">Positions</a></li>\n" +
+    "			<li><a href=\"\">Tasks</a></li>\n" +
+    "			<li><a href=\"\">Time</a></li>\n" +
+    "		</ul>\n" +
+    "	</div>\n" +
+    "\n" +
     "	<!-- TEMP | WORK -->\n" +
     "	<div class=\"container\">\n" +
     "		<div ng-repeat=\"work in work\">\n" +
@@ -501,14 +514,11 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	            <div style=\"padding:16px;\">\n" +
     "					<div>\n" +
     "\n" +
-    "						\n" +
-    "\n" +
     "						<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
     "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
     "						<!--TODO: POST TYPES-->\n" +
-    "\n" +
     "						<a ng-show=\"post.market\" style=\"display:inline;font-weight:600\" href=\"/market/{{post.market}}\">market {{post.market}}</a>\n" +
     "						<a ng-show=\"post.order\" style=\"display:inline;font-weight:600\" href=\"/order/{{post.order}}\">order {{post.order}}</a>\n" +
     "						<a ng-show=\"post.post\" style=\"display:inline;font-weight:600\" href=\"/post/{{post.post}}\">post {{post.post}}</a>\n" +
@@ -1284,9 +1294,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "        <span ng-show=\"cre8xyz\" style=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
     "      </a>\n" +
     "    </div>\n" +
-    "    <div class=\"collapse navbar-collapse\">\n" +
+    "    <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
     "      <ul class=\"nav navbar-nav\">\n" +
-    "        <form class=\"navbar-form pull-left\" role=\"search\" action=\"/search/\" onSubmit=\" location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "        <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
     "          </div>\n" +

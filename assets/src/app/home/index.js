@@ -31,7 +31,7 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
+.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'PostModel', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, PostModel, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
 	titleService.setTitle('conex.us');
 	
 	$scope.currentUser = config.currentUser;
@@ -44,6 +44,61 @@ angular.module( 'conexus.home', [
 	$scope.tasks = tasks;
 	$scope.work = work;
 
+	//TODO: MERGE MODELS
+
+	$scope.chart = {
+        chart: {polar: true},
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
+            color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values1',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.2, 0.1, 0.2, 0.1, 0.1],
+            color: 'rgba(0,0,153,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values2',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.1, 0.1, 0.3, 0.2, 0.25, 0.05],
+            color: 'rgba(0,153,0,0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['Sales', 'Marketing', 'Development', 'Customer Support', 'Information Technology', 'Administration'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: false,
+            //align: 'right',
+            //verticalAlign: 'top',
+            //y: 70,
+            //layout: 'vertical'
+        },
+        tooltip: {
+        //    shared: true,
+        },
+        credits:{enabled:false},
+    };
+
 	//TODO: REFACTOR
 	if ($scope.currentUser){
 		UserModel.getByUsername($scope.currentUser.username).then(function(member){
@@ -55,7 +110,7 @@ angular.module( 'conexus.home', [
 	$scope.createPost = function(post){
 		$scope.newPost.post = post.id;
 		$scope.newPost.user = $scope.currentUser.id;
-		$scope.newPost.profile = $scope.currentUser.id;
+		//$scope.newPost.profile = $scope.currentUser.id;
 		PostModel.create($scope.newPost).then(function(model) {
 			$scope.newPost = {};
 		});

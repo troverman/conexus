@@ -35,6 +35,7 @@
 
 		        	<h1>Create Your Value Map</h1>
 					<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
+					<highchart config="chart"></highchart>
 					<!--<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>-->
 
 		        </div>
@@ -95,6 +96,7 @@
 				</div>
 		    </div>
 				
+			<!--
 			<div ng-repeat="task in tasks">
 				<div class="card">
 					<div style="padding:16px;">
@@ -109,6 +111,7 @@
 					</div>
 				</div>
 			</div>
+			-->
 
 			<div class="spacing-25"></div>
 			<div ng-click="loadMore()" style="text-align:center">
@@ -221,6 +224,18 @@
 
 	<div class="spacing-50"></div>
 
+	<div class="container">
+		<ul style="padding:0px;" class="member-tabs">
+			<li class="active"><a href="">Activity</a></li>
+			<li><a href="">Discover</a></li>
+			<li><a href="">Posts</a></li>
+			<li><a href="">Projects</a></li>
+			<li><a href="">Positions</a></li>
+			<li><a href="">Tasks</a></li>
+			<li><a href="">Time</a></li>
+		</ul>
+	</div>
+
 	<!-- TEMP | WORK -->
 	<div class="container">
 		<div ng-repeat="work in work">
@@ -255,8 +270,6 @@
 	        <div class="card">
 	            <div style="padding:16px;">
 					<div>
-
-						
 
 						<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
 						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
