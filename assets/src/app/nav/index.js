@@ -9,8 +9,6 @@ angular.module( 'conexus.nav', [
     //TEMP
     $scope.cre8xyz = false;
     if (window.location.hostname.split('.')[window.location.hostname.split('.').length-1].toLowerCase()=='xyz'){$scope.cre8xyz = true;}
-    console.log(window.location.hostname.split('.'));
-
 }])
 
 //TODO: IMPROVE | ON EXIT CLICK CLOSE NAV
