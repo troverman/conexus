@@ -8,7 +8,7 @@ angular.module( 'conexus.nav', [
     });
     //TEMP
     $scope.cre8xyz = false;
-    if (window.location.hostname.split('.')[window.location.hostname.split('.').length-1].toLowerCase()=='cre8'){$scope.cre8xyz = true;}
+    if (window.location.hostname.split('.')[window.location.hostname.split('.').length-1].toLowerCase()=='xyz'){$scope.cre8xyz = true;}
     console.log(window.location.hostname.split('.'));
 
 }])
@@ -19,20 +19,9 @@ angular.module( 'conexus.nav', [
         restrict: 'A',
         link: function (scope, element, attrs) {
             var visible = false;
-
-            element.on('show.bs.collapse', function () {
-                visible = true;
-            });
-
-            element.on("hide.bs.collapse", function () {
-                visible = false;
-            });
-
-            element.on('click', function(event) {
-                if (visible && 'auto' == element.css('overflow-y')) {
-                    element.collapse('hide');
-                }
-            });
+            element.on('show.bs.collapse', function () {visible = true;});
+            element.on("hide.bs.collapse", function () {visible = false;});
+            element.on('click', function(event) {if (visible && 'auto' == element.css('overflow-y')) {element.collapse('hide');}});
         }
     };
 });
