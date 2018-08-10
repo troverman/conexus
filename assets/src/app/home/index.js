@@ -32,8 +32,7 @@ angular.module( 'conexus.home', [
 }])
 
 .controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'PostModel', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, PostModel, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
-	//titleService.setTitle('CRE8.XYZ');
-	titleService.setTitle('conex.us');
+	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
 	$scope.newPost = {};
