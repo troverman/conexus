@@ -8,31 +8,33 @@
         <button class="btn btn-default log-btn">+ Channel</button>
     </div>
     <div class="col-md-10">
-        <md-card ng-repeat="post in posts">
-            <div style="padding:10px;">
-                <a href="/member/{{post.user.username}}">
-                    <img src="{{post.user.avatarUrl}}" err-src="/images/avatar.png" style="height:32px;radius:3px">
-                    {{post.user.username}}
-                </a>
-                <br>
-                <p style="color:gray;font-size:10px" am-time-ago="post.updatedAt"></p>
-                <span ng-bind-html="renderMessage(post.content)"></span>
-            </div>
-            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'like', 'post')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'dislike', 'post')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-                <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
-            </div>
-            <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <form role="form" ng-submit="createPost(post)">
-                    <div class="form-group">
-                        <input type="text" ng-model="post.newPost.content" class="form-control" id="postContent-{{post.id}}">
+        <div ng-repeat="post in posts">
+            <div class="card">
+                <div style="padding:16px;">
+                    <div>
+                        <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
+                        <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
                     </div>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-                </form>
+                    <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                    <a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                    <a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                    <a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+                </div>
+                <!--TODO: NESTED -->
+                <div ng-show="post.showReply" class="card-footer">
+                    <form role="form" ng-submit="createPost(post)">
+                        <div class="form-group">
+                            <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
+                        </div>
+                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                    </form>
+                </div>
             </div>
-        </md-card>
+        </div>
         <div class="spacing-15"></div>
         <form role="form" ng-submit="createPost(newMessage)">
             <div class="form-group">

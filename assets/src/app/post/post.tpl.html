@@ -2,6 +2,7 @@
     <div>
         <div style="padding:16px;">
             <div>
+                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
                 <a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a>
             </div>
             <div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
