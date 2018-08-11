@@ -87,7 +87,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"spacing-50\"></div>\n" +
     "	    <div class=\"row\">\n" +
     "	        <div class=\"col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1\">\n" +
-    "				<h3><b>Create an Account</b></h3><hr>\n" +
+    "				<h3><b>Join Our Community</b></h3><hr>\n" +
     "	            <div class=\"login-form\">\n" +
     "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "	                    <div class=\"form-group\">\n" +
@@ -107,13 +107,13 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "	                    </div>\n" +
     "	                    <br><br>\n" +
     "	                    <div class=\"social-log\">\n" +
-    "	                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><i class=\"fa fa-facebook\"></i> Facebook</a>\n" +
-    "	                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><i class=\"fa fa-twitter\"></i> Twitter</a>\n" +
-    "	                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><i class=\"fa fa-google\"></i> Google</a>\n" +
+    "	                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><h4><i class=\"fa fa-facebook\"></i> Facebook</h4></a>\n" +
+    "	                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><h4><i class=\"fa fa-twitter\"></i> Twitter</h4></a>\n" +
+    "	                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><h4><i class=\"fa fa-google\"></i> Google</h4></a>\n" +
     "	                    </div>\n" +
     "						<br><hr>\n" +
     "	                    <div class=\"social-log\">\n" +
-    "	                        <a href=\"/login\">Already have an account?</a>\n" +
+    "	                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
     "	                    </div>\n" +
     "	                </form>\n" +
     "	            </div>\n" +
@@ -433,13 +433,13 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	                    </div>\n" +
     "	                    <br><br>\n" +
     "	                    <div class=\"social-log\">\n" +
-    "	                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><i class=\"fa fa-facebook\"></i> Facebook</a>\n" +
-    "	                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><i class=\"fa fa-twitter\"></i> Twitter</a>\n" +
-    "	                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><i class=\"fa fa-google\"></i> Google</a>\n" +
+    "	                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><h4><i class=\"fa fa-facebook\"></i> Facebook</h4></a>\n" +
+    "	                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><h4><i class=\"fa fa-twitter\"></i> Twitter</h4></a>\n" +
+    "	                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><h4><i class=\"fa fa-google\"></i> Google</h4></a>\n" +
     "	                    </div>\n" +
     "						<br><hr>\n" +
     "	                    <div style=\"text-align:center\">\n" +
-    "	                        <a href=\"/login\">Already have an account?</a>\n" +
+    "	                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
     "	                    </div>\n" +
     "	                </form>\n" +
     "	            </div>\n" +
@@ -597,21 +597,19 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function ($tem
 
 angular.module("login/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("login/index.tpl.html",
-    "<div class=\"intro-header\">\n" +
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
-    "                <div class=\"site-heading\">\n" +
-    "                    <h1 class=\"blue-title\">Login</h1>\n" +
-    "                    <h2 class=\"post-title\">\n" +
-    "                        Welcome back!\n" +
-    "                    </h2>\n" +
-    "                </div>\n" +
+    "                <h1>Login |  Welcome back!</h1>   \n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
     "<div class=\"container\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
@@ -629,13 +627,13 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
     "                    </div>\n" +
     "                    <br><br>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a class=\"btn btn-social btn-facebook\" href=\"\"><i class=\"fa fa-facebook\"></i> Facebook</a>\n" +
-    "                        <a class=\"btn btn-social btn-twitter\" href=\"\"><i class=\"fa fa-twitter\"></i> Twitter</a>\n" +
-    "                        <a class=\"btn btn-social btn-google\" href=\"\"><i class=\"fa fa-google\"></i> Google</a>\n" +
+    "                        <a class=\"btn btn-social btn-facebook\" href=\"\"><h4><i class=\"fa fa-facebook\"></i> Facebook</h4></a>\n" +
+    "                        <a class=\"btn btn-social btn-twitter\" href=\"\"><h4><i class=\"fa fa-twitter\"></i> Twitter</h4></a>\n" +
+    "                        <a class=\"btn btn-social btn-google\" href=\"\"><h4><i class=\"fa fa-google\"></i> Google</h4></a>\n" +
     "                    </div>\n" +
     "                    <br><hr>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a style=\"text-align:center\" href=\"/register\">Need an account?</a>\n" +
+    "                        <a style=\"text-align:center\" href=\"/register\"><h4>Need an Account?</h4></a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -1709,17 +1707,25 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "	<!--<button class=\"btn btn-default log-btn\" ng-click=\"newLedgerToggle()\">+ LEDGER</button><br><br>-->\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li class=\"active\"><a href=\"\">Total</a></li>\n" +
+    "		<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
     "		<li><a href=\"\">Assets</a></li>\n" +
+    "		<li><a href=\"\">Expenses</a></li>\n" +
     "		<li><a href=\"\">Liabilities</a></li>\n" +
+    "		<li><a href=\"\">Revenue</a></li>\n" +
     "		<li><a href=\"\">Positions</a></li>\n" +
-    "\n" +
     "		<!--<li><a href=\"\">Work</a></li>\n" +
     "		<li><a href=\"\">Property</a></li>\n" +
     "		<li><a href=\"\">Liscense</a></li>-->\n" +
     "	</ul>\n" +
     "\n" +
-    "	<highchart config=\"chart\"></highchart>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-md-8\">\n" +
+    "			<highchart config=\"chart\"></highchart>\n" +
+    "		</div>\n" +
+    "		<div class=\"col-md-4\">\n" +
+    "			<highchart config=\"pie\"></highchart>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "\n" +
     "	<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
     "	<md-card ng-show=\"newTransactionToggleVar\">\n" +
@@ -1959,21 +1965,19 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
 
 angular.module("register/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("register/index.tpl.html",
-    "<div class=\"intro-header\">\n" +
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
-    "                <div class=\"site-heading\">\n" +
-    "                    <h1 class=\"blue-title\">Create an Account</h1>\n" +
-    "                    <h2 class=\"post-title\">\n" +
-    "                        Welcome!\n" +
-    "                    </h2>\n" +
-    "                </div>\n" +
+    "                <h1>Join Our Community</h1>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
     "<div class=\"container\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
@@ -1995,13 +1999,13 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function ($
     "                    </div>\n" +
     "                    <br><br>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><i class=\"fa fa-facebook\"></i> Facebook</a>\n" +
-    "                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><i class=\"fa fa-twitter\"></i> Twitter</a>\n" +
-    "                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><i class=\"fa fa-google\"></i> Google</a>\n" +
+    "                        <a class=\"btn btn-social btn-facebook\" ng-click=\"\"><h4><i class=\"fa fa-facebook\"></i> Facebook</h4></a>\n" +
+    "                        <a class=\"btn btn-social btn-twitter\" ng-click=\"\"><h4><i class=\"fa fa-twitter\"></i> Twitter</h4></a>\n" +
+    "                        <a class=\"btn btn-social btn-google\" ng-click=\"\"><h4><i class=\"fa fa-google\"></i> Google</h4></a>\n" +
     "                    </div>\n" +
     "                    <br><hr>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a href=\"/login\">Already have an account?</a>\n" +
+    "                        <a href=\"/login\"><h4>Already Have an account?</h4></a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +

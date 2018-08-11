@@ -3,17 +3,25 @@
 
 	<!--<button class="btn btn-default log-btn" ng-click="newLedgerToggle()">+ LEDGER</button><br><br>-->
 	<ul style="padding:0px;" class="member-tabs">
-		<li class="active"><a href="">Total</a></li>
+		<li class="active"><a href="">Overview</a></li>
 		<li><a href="">Assets</a></li>
+		<li><a href="">Expenses</a></li>
 		<li><a href="">Liabilities</a></li>
+		<li><a href="">Revenue</a></li>
 		<li><a href="">Positions</a></li>
-
 		<!--<li><a href="">Work</a></li>
 		<li><a href="">Property</a></li>
 		<li><a href="">Liscense</a></li>-->
 	</ul>
 
-	<highchart config="chart"></highchart>
+	<div class="row">
+		<div class="col-md-8">
+			<highchart config="chart"></highchart>
+		</div>
+		<div class="col-md-4">
+			<highchart config="pie"></highchart>
+		</div>
+	</div>
 
 	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
 	<md-card ng-show="newTransactionToggleVar">

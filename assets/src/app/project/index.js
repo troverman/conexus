@@ -336,8 +336,16 @@ angular.module( 'conexus.project', [
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
-    $scope.transactions = transactions;
+    $scope.transactions = transactions
 
+    //TODO: TO FROM ISH | TO; FROM DECIDEDS LEDGER
+    if ($scope.transactions.length == 0){
+        for (var i=0, t=88; i<t; i++) {
+            $scope.transactions.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
+            $scope.transactions.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
+        }
+    }
+    console.log($scope.transactions)
     $scope.newTransactionToggle = function(){
         $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
     };
@@ -350,21 +358,71 @@ angular.module( 'conexus.project', [
         });
     };
 
+    //TODO: BACKEND WRT FROM AND TO
+    $scope.sumTransactions = [];
+    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
+        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
+    }, 0);
+
+    $scope.sumExpense = [];
+    $scope.transactions.reduce(function(a,b,i) {
+        if (b.ledger == 'EXPENSE'){return $scope.sumExpense[i] = parseFloat(a)+parseFloat(b.amount);}
+        else{return $scope.sumExpense[i] = parseFloat(a)}
+    }, 0);
+
+    $scope.sumRevenue = [];
+    $scope.transactions.reduce(function(a,b,i) {
+        if (b.ledger == 'REVENUE'){return $scope.sumRevenue[i] = parseFloat(a)+parseFloat(b.amount);}
+        else{return $scope.sumRevenue[i] = parseFloat(a)}
+    }, 0);
+
     $scope.chart = {
         chart: {
             zoomType: 'x',
         },
         series: [{
-            id: 'Expenses',
+            id: 'Expense',
             type: 'spline',
-            name: 'Expenses',
-            data: [65, 59, 80, 81, 56, 55, 40]
+            name: 'Expense',
+            data: $scope.sumExpense,
         },{
             id: 'Revenue',
             type: 'spline',
             name: 'Revenue',
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: $scope.sumRevenue,
         }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+    };
+
+    $scope.pie = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [{
+                name: 'Expense',
+                y: $scope.sumExpense[$scope.sumExpense.length-1],
+            }, {
+                name: 'Revenue',
+                y: $scope.sumRevenue[$scope.sumRevenue.length-1],
+            }]
+        }],
+        
         title: {
             text: ''
         },

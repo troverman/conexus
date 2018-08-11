@@ -12,7 +12,7 @@ angular.module( 'conexus.register', [
 	});
 }])
 .controller( 'RegisterCtrl', ['$location', '$scope', 'config', 'titleService', function RegisterController( $location, $scope, config, titleService ) {
-	titleService.setTitle('register | conex.us');
+	titleService.setTitle('Register | CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
 	if ($scope.currentUser){$location.path('/')}
 }]);
