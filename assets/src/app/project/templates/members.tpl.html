@@ -1,13 +1,21 @@
-<style>md-card{margin:0px; overflow:hidden;}</style>
 <br>
 <button class="btn btn-default log-btn" ng-click="createMember()">join</button>
 <br><br>
-<md-card ng-repeat="member in members" class="col-sm-3 col-xs-6">
-	<div style="padding:10px;">
-		<img src="{{member.user.avatarUrl}}" err-src="/images/avatar.png" style="height:128px;">
-		<h3><a href="member/{{member.user.username}}">{{member.user.username}}</a></h3>
-		<p style="color:gray">live | online | working</p>
-		<p style="color:gray">total reputation | {{member.user.totalWork}}</p>
-		<p style="color:gray">dimensional reputation | 888</p>
+<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
+	<div class="member-card">
+	    <div class="member-card-image" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
+	        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
+	    </div>
+	    <div class="member-card-info">
+	        <h4><a href="member/{{member.user.username}}">{{member.user.username}}</a></h4>
+	        <p style="color:gray">{{member.status}} live | online | working</p>
+	        <p style="color:gray">total reputation | {{member.user.totalWork}}</p>
+	        <p style="color:gray">dimensional | 888</p>
+	    </div>
+	    <div class="member-card-social">
+	        <a ng-show="member.user.socialAccounts.facebook.profileUrl" href="{{member.user.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
+	        <a ng-show="member.user.socialAccounts.twitter.profileUrl" href="{{member.user.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
+	        <a ng-show="member.user.socialAccounts.google.profileUrl" href="{{member.user.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
+	    </div>
 	</div>
-</md-card>
+</div>

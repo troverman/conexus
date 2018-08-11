@@ -89,6 +89,58 @@ a:focus{text-decoration: none}
     margin:10px 15px;
 }
 
+.member-card{
+  margin-bottom:30px;
+  box-shadow: 2px 2px 10px #999;
+  overflow:hidden
+}
+
+.member-card-image {
+  height: 125px;
+  background: center center no-repeat;
+  background-size: cover;
+}
+
+.member-card-image img{
+  position:absolute;
+  left: 10%;
+  top:14%;
+  margin: 0 auto;
+  background: #fff;
+  height: 11em;
+  padding: 0.25em;
+  border-radius: .4em;
+  max-width:10em;
+}
+
+.member-card-social {
+  height: 40px;
+  background: #DAE0DE;
+  text-align: right;
+  padding-top: 12px;
+  padding-right:20px;
+}
+
+.member-card-info {
+  padding:10px;
+  height: 100px;
+  background: #FAFAFA;
+  text-align: right;
+  padding-right:5%;
+  padding-left:50%;
+  overflow:hidden;
+}
+
+.member-card-info h4{
+  margin:0px;
+  overflow:hidden;
+}
+
+.member-card-info p{
+  color: #666;
+  margin:0px;
+}
+
 .imageContainer {
     background:#33312d;
     overflow:hidden;

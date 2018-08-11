@@ -1185,30 +1185,45 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
 
 angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/followers.tpl.html",
-    "<md-card ng-repeat=\"follower in followers\" class=\"col-sm-3 col-xs-6\">\n" +
-    "	<div style=\"padding:10px;\">\n" +
-    "		<img src=\"{{follower.follower.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
-    "		<h3><a href=\"member/{{follower.follower.username}}\">{{follower.follower.username}}</a></h3>\n" +
-    "		<p style=\"color:gray\">live | online | working</p>\n" +
-    "		<p style=\"color:gray\">total reputation | {{follower.follower.totalWork}}</p>\n" +
-    "		<p style=\"color:gray\">dimensional reputation | 888</p>\n" +
+    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
+    "	<div class=\"member-card\">\n" +
+    "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "	        <a href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-info\">\n" +
+    "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
+    "	        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">total reputation | {{member.follower.totalWork}}</p>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-social\">\n" +
+    "	        <a ng-show=\"member.follower.socialAccounts.facebook.profileUrl\" href=\"{{member.follower.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.follower.socialAccounts.twitter.profileUrl\" href=\"{{member.follower.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.follower.socialAccounts.google.profileUrl\" href=\"{{member.follower.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
-    "</md-card>\n" +
+    "</div>\n" +
     "");
 }]);
 
 angular.module("member/templates/following.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/following.tpl.html",
-    "<md-card ng-repeat=\"follower in following\" class=\"col-sm-3 col-xs-6\">\n" +
-    "	<div style=\"padding:10px;\">\n" +
-    "		<img src=\"{{follower.follower.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
-    "		<h3><a href=\"member/{{follower.follower.username}}\">{{follower.follower.username}}</a></h3>\n" +
-    "		<p style=\"color:gray\">live | online | working</p>\n" +
-    "		<p style=\"color:gray\">total reputation | {{follower.follower.totalWork}}</p>\n" +
-    "		<p style=\"color:gray\">dimensional reputation | 888</p>\n" +
+    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
+    "	<div class=\"member-card\">\n" +
+    "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "	        <a href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-info\">\n" +
+    "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
+    "	        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">total reputation | {{member.follower.totalWork}}</p>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-social\">\n" +
+    "	        <a ng-show=\"member.follower.socialAccounts.facebook.profileUrl\" href=\"{{member.follower.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.follower.socialAccounts.twitter.profileUrl\" href=\"{{member.follower.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.follower.socialAccounts.google.profileUrl\" href=\"{{member.follower.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
-    "</md-card>\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -1784,19 +1799,27 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
-    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<br>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "<br><br>\n" +
-    "<md-card ng-repeat=\"member in members\" class=\"col-sm-3 col-xs-6\">\n" +
-    "	<div style=\"padding:10px;\">\n" +
-    "		<img src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\" style=\"height:128px;\">\n" +
-    "		<h3><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h3>\n" +
-    "		<p style=\"color:gray\">live | online | working</p>\n" +
-    "		<p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
-    "		<p style=\"color:gray\">dimensional reputation | 888</p>\n" +
+    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
+    "	<div class=\"member-card\">\n" +
+    "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "	        <a href=\"member/{{member.user.username}}\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-info\">\n" +
+    "	        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
+    "	        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
+    "	        <p style=\"color:gray\">dimensional | 888</p>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-social\">\n" +
+    "	        <a ng-show=\"member.user.socialAccounts.facebook.profileUrl\" href=\"{{member.user.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.user.socialAccounts.twitter.profileUrl\" href=\"{{member.user.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.user.socialAccounts.google.profileUrl\" href=\"{{member.user.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
-    "</md-card>");
+    "</div>");
 }]);
 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function ($templateCache) {
