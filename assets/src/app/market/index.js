@@ -21,7 +21,7 @@ angular.module( 'conexus.market', [
 .controller( 'MarketCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', function MarketController( $scope, $stateParams, config, OrderModel, orders, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
-    titleService.setTitle('Market | ' + $stateParams.id + ' | conex.us');
+    titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 	$scope.chart = {
         chart: {
             zoomType: 'x',

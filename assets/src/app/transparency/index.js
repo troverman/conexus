@@ -14,7 +14,7 @@ angular.module( 'conexus.transparency', [
 }])
 
 .controller( 'TransparencyCtrl', ['$scope', 'titleService', function TransparencyController( $scope, titleService ) {
-	titleService.setTitle('transparency | conex.us');
+	titleService.setTitle('transparency | CRE8.XYZ');
 
     //TODO: REAL DATA
 	$scope.chart = {

@@ -185,7 +185,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, tasks, titleService, work ) {
-    titleService.setTitle('Activity | ' + project.title + ' | conex.us');
+    titleService.setTitle('Activity | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};
@@ -277,7 +277,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, channels, config, posts, project, titleService ) {
-    titleService.setTitle('Channels | ' + project.title + ' | conex.us');
+    titleService.setTitle('Channels | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
     $scope.newPost = {};
@@ -318,7 +318,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, project, titleService ) {
-    titleService.setTitle('Charter | ' + project.title + ' | conex.us');
+    titleService.setTitle('Charter | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.bills = bills;  
     $scope.newMotionToggleVar = false;
@@ -331,7 +331,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', function ProjectController( $interval, $scope, config, lodash, project, titleService, TransactionModel, transactions ) {
-    titleService.setTitle('Ledger | ' + project.title + ' | conex.us');
+    titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
@@ -442,7 +442,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectMembersCtrl', ['$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
-    titleService.setTitle('Members | ' + project.title + ' | conex.us');
+    titleService.setTitle('Members | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.members = members;
     $scope.newMember = {};
@@ -472,7 +472,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, project, streams, titleService ) {
-    titleService.setTitle('Streams | ' + project.title + ' | conex.us');
+    titleService.setTitle('Streams | ' + project.title + ' | CRE8.XYZ');
     $scope.project = project;
     $scope.streams = streams;
     $scope.AudioContext = {};
@@ -536,7 +536,7 @@ angular.module( 'conexus.project', [
 
 }])
 .controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks, titleService ) {
-    titleService.setTitle('Tasks | ' + project.title + ' | conex.us');
+    titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
@@ -567,7 +567,7 @@ angular.module( 'conexus.project', [
 
 }])
 .controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'projects', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, projects, titleService ) {
-    titleService.setTitle('Projects | ' + project.title + ' | conex.us');
+    titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.projects = projects;

@@ -19,7 +19,7 @@ angular.module( 'conexus.markets', [
 }])
 
 .controller( 'MarketsCtrl', ['$scope', 'config', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, config, OrderModel, orders, titleService ) {
-	titleService.setTitle('Market | conex.us');
+	titleService.setTitle('Market | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.chart = {
         chart: {

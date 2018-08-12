@@ -22,7 +22,7 @@ angular.module( 'conexus.order', [
 }])
 
 .controller( 'OrderController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'order', 'PostModel', 'posts', 'titleService', function OrderController( $sailsSocket, $sce, $scope, config, lodash, order, PostModel, posts, titleService ) {
-    titleService.setTitle('Order | conex.us');
+    titleService.setTitle('Order | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.order = order;

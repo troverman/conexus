@@ -20,7 +20,7 @@ angular.module( 'conexus.tasks', [
 }])
 
 .controller( 'TasksCtrl', ['$rootScope', '$sailsSocket', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $rootScope, $sailsSocket, $scope, TaskModel, tasks, titleService ) {
-	titleService.setTitle('Tasks | conex.us');
+	titleService.setTitle('Tasks | CRE8.XYZ');
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
 	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','workCount DESC': 'Total Work'}

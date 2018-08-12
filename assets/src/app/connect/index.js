@@ -6,7 +6,7 @@ angular.module( 'conexus.connect', [
 		url: '/connect',
 		views: {
 			"main": {
-				controller: 'ConnectCtrl',
+				controller: 'DiscoverCtrl',
 				templateUrl: 'connect/index.tpl.html'
 			}
 		},
@@ -30,8 +30,8 @@ angular.module( 'conexus.connect', [
     });
 }])
 
-.controller( 'ConnectCtrl', ['$scope', 'members', 'titleService', 'projects', 'tasks', 'uiGmapGoogleMapApi', function ConnectController( $scope, members, titleService, projects, tasks, uiGmapGoogleMapApi ) {
-	titleService.setTitle('Discover | conex.us');
+.controller( 'DiscoverCtrl', ['$scope', 'members', 'titleService', 'projects', 'tasks', 'uiGmapGoogleMapApi', function DiscoverController( $scope, members, titleService, projects, tasks, uiGmapGoogleMapApi ) {
+	titleService.setTitle('Discover | CRE8.XYZ');
 
 	$scope.map = {
 		center: {latitude: 39.443659, longitude: -83.082276 },

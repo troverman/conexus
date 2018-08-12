@@ -22,7 +22,7 @@ angular.module( 'conexus.post', [
 }])
 
 .controller( 'PostController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'titleService', function PostController( $location, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, titleService ) {
-    titleService.setTitle('posts | conex.us');
+    titleService.setTitle('Post | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};

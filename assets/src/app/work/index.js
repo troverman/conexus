@@ -25,7 +25,7 @@ angular.module( 'conexus.work', [
 }])
 
 .controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, work, WorkModel) {
-    titleService.setTitle('Task | conex.us');
+    titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};

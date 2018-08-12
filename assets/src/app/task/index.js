@@ -25,7 +25,7 @@ angular.module( 'conexus.task', [
 }])
 
 .controller( 'TaskController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, task, TaskModel, titleService, work, WorkModel) {
-    titleService.setTitle('Task | conex.us');
+    titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};

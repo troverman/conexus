@@ -25,7 +25,7 @@ angular.module( 'conexus.stream', [
 
 .controller( 'StreamCtrl', ['$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'stream', 'titleService', function StreamController($sailsSocket, $sce, $scope, config, PostModel, posts, stream, titleService ) {
     $scope.stream = stream;
-    titleService.setTitle('Stream | ' + $scope.stream.title + ' | conex.us');
+    titleService.setTitle('Stream | ' + $scope.stream.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.posts = posts;
 
