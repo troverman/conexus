@@ -319,7 +319,7 @@ angular.module( 'conexus.member', [
 .controller( 'MemberWalletCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', function MemberWalletController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
-    titleService.setTitle($scope.member.username + '| Wallet | CRE8.XYZ');
+    titleService.setTitle($scope.member.username + ' | Wallet | CRE8.XYZ');
     
      $scope.newTransactionToggle = function(){
         $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
