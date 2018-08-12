@@ -1053,8 +1053,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>\n" +
     "\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
-    "						<a class=\"btn btn-default\" ng-click=\"\">Follow</a>\n" +
-    "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"\">UnFollow</a>\n" +
+    "						<a class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
+    "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"unfollow()\">UnFollow</a>\n" +
     "					</li>\n" +
     "					<li ng-show=\"currentUser.id == member.id\">\n" +
     "						<a class=\"btn btn-default\" href=\"account\">Edit Profile</a>\n" +
@@ -1210,17 +1210,17 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
     "	<div class=\"member-card\">\n" +
     "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
-    "	        <a href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "	        <a href=\"member/{{member.followed.username}}\"><img ng-src=\"{{member.followed.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "	    </div>\n" +
     "	    <div class=\"member-card-info\">\n" +
-    "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
-    "	        <p style=\"color:gray\">total reputation | {{member.follower.totalWork}}</p>\n" +
+    "	        <h4><a href=\"member/{{member.followed.username}}\">{{member.followed.username}}</a></h4>\n" +
+    "	        <p style=\"color:gray\">{{member.followed.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">total reputation | {{member.followed.totalWork}}</p>\n" +
     "	    </div>\n" +
     "	    <div class=\"member-card-social\">\n" +
-    "	        <a ng-show=\"member.follower.socialAccounts.facebook.profileUrl\" href=\"{{member.follower.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
-    "	        <a ng-show=\"member.follower.socialAccounts.twitter.profileUrl\" href=\"{{member.follower.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
-    "	        <a ng-show=\"member.follower.socialAccounts.google.profileUrl\" href=\"{{member.follower.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.followed.socialAccounts.facebook.profileUrl\" href=\"{{member.followed.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.followed.socialAccounts.twitter.profileUrl\" href=\"{{member.followed.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "	        <a ng-show=\"member.followed.socialAccounts.google.profileUrl\" href=\"{{member.followed.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "</div>");

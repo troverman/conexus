@@ -1,17 +1,17 @@
 <div class="col-lg-4 col-sm-6" ng-repeat="member in following">
 	<div class="member-card">
 	    <div class="member-card-image" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
-	        <a href="member/{{member.follower.username}}"><img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png"></a>
+	        <a href="member/{{member.followed.username}}"><img ng-src="{{member.followed.avatarUrl}}" err-src="/images/avatar.png"></a>
 	    </div>
 	    <div class="member-card-info">
-	        <h4><a href="member/{{member.follower.username}}">{{member.follower.username}}</a></h4>
-	        <p style="color:gray">{{member.status}} live | online | working</p>
-	        <p style="color:gray">total reputation | {{member.follower.totalWork}}</p>
+	        <h4><a href="member/{{member.followed.username}}">{{member.followed.username}}</a></h4>
+	        <p style="color:gray">{{member.followed.status}} live | online | working</p>
+	        <p style="color:gray">total reputation | {{member.followed.totalWork}}</p>
 	    </div>
 	    <div class="member-card-social">
-	        <a ng-show="member.follower.socialAccounts.facebook.profileUrl" href="{{member.follower.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
-	        <a ng-show="member.follower.socialAccounts.twitter.profileUrl" href="{{member.follower.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
-	        <a ng-show="member.follower.socialAccounts.google.profileUrl" href="{{member.follower.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
+	        <a ng-show="member.followed.socialAccounts.facebook.profileUrl" href="{{member.followed.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
+	        <a ng-show="member.followed.socialAccounts.twitter.profileUrl" href="{{member.followed.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
+	        <a ng-show="member.followed.socialAccounts.google.profileUrl" href="{{member.followed.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
 	    </div>
 	</div>
 </div>

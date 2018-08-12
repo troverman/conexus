@@ -64,8 +64,8 @@
 					<li><a href="member/{{member.username}}/wallet">Wallet</a></li>
 
 					<li ng-show="currentUser.id != member.id">
-						<a class="btn btn-default" ng-click="">Follow</a>
-						<a ng-show="isFollowing" class="btn btn-default" ng-click="">UnFollow</a>
+						<a class="btn btn-default" ng-click="follow()">Follow</a>
+						<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
 					</li>
 					<li ng-show="currentUser.id == member.id">
 						<a class="btn btn-default" href="account">Edit Profile</a>

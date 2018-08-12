@@ -119,9 +119,9 @@ angular.module( 'conexus.member', [
 
     if(!$scope.member){$location.path('/')}
 
-    $scope.follow = function(newModel) {
-        $scope.newFollower.followed = $scope.member;
-        $scope.newFollower.follower = $scope.config.currentUser;
+    $scope.follow = function() {
+        $scope.newFollower.followed = $scope.member.id;
+        $scope.newFollower.follower = $scope.currentUser.id;
         FollowerModel.create($scope.newFollower).then(function(model) {
             $scope.newFollower = {};
         });

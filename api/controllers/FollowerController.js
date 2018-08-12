@@ -4,15 +4,6 @@
 
 module.exports = {
 
-
-	getOne: function(req, res) {
-		Follower.findOne(req.param('id'))
-		.spread(function(model) {
-			Follower.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	getSome: function(req, res) {},
 
 	getFollowers: function(req, res) {
@@ -46,7 +37,7 @@ module.exports = {
 		.exec(function(err, follower) {
 			if (err) {return console.log(err);}
 			else {
-				Follower.getOne(follower.id).then(function(follower){
+				Follower.find({follower:follower.id}).then(function(follower){
 					Follower.publishCreate(follower[0]);
 					res.json(follower[0]);
 				});
