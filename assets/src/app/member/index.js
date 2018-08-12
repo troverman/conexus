@@ -195,7 +195,7 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {
     $scope.currentUser = config.currentUser;
-    titleService.setTitle($scope.member.username + '| Followers | CRE8.XYZ');
+    titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
     $scope.followers = followers;
 
     /*
