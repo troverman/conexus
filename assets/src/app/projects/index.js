@@ -19,7 +19,7 @@ angular.module( 'conexus.projects', [
 }])
 
 .controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $scope, config, lodash, ProjectModel, projects, titleService ) {
-	titleService.setTitle('projects | CRE8.XYZ');
+	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newProject = {};
     $scope.newProjectToggleVar = false;

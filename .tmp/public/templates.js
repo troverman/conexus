@@ -2149,53 +2149,64 @@ angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($te
 
 angular.module("task/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("task/index.tpl.html",
-    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
-    "    <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
+    "    <div>\n" +
+    "        <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
+    "        <div style=\"font-style:italic;color:gray\">\n" +
+    "            <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "            <p>{{task.content}}</p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
     "    <div style=\"font-style:italic;color:gray\">\n" +
-    "        <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "        <p>{{task.content}}</p>\n" +
-    "        <!--<p>{{task.status}}</p>-->\n" +
-    "        <br>\n" +
+    "        <div class=\"spacing-5\"></div>\n" +
     "        <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>\n" +
     "        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'plus')\">+</button>\n" +
     "        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'minus')\">-</button>\n" +
-    "        <br><br>\n" +
-    "        <p ng-repeat=\"verification in taskVerification\"><a href=\"member/{{verification.user.username}}\">{{verification.user.username}}</a> | {{verification.score}}</p>\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "        <div ng-repeat=\"verification in taskVerification\">\n" +
+    "            <a href=\"member/{{verification.user.username}}\">\n" +
+    "                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
+    "                {{verification.user.username}}\n" +
+    "            </a> | {{verification.score}}\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "    <div class=\"row well\">\n" +
+    "\n" +
+    "        <!--TOKENS MINTING PER ACTION-->\n" +
+    "        <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "            <h4>Tokens</h4>\n" +
+    "            <p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
+    "            <p><a href=\"market/{{task.id}}+onTimeStream\">onTimeStream+{{task.id}}</a></p>\n" +
+    "            <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
+    "            <p><a href=\"market/{{task.id}}+onVerification\">onVerification+{{task.id}}</a></p>\n" +
+    "            <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}} </a></p>\n" +
+    "            <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.project.id}})</a></p>\n" +
+    "            <p><a href=\"market/general\">general</a></p>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "        </div>\n" +
     "\n" +
     "        <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->\n" +
-    "        <!--TOKENS MINTING PER ACTION-->\n" +
-    "\n" +
-    "        <br>\n" +
-    "        <p>Tokens</p>\n" +
-    "        <p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
-    "        <p><a href=\"market/{{task.id}}+onTimeStream\">onTimeStream+{{task.id}}</a></p>\n" +
-    "        <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
-    "        <p><a href=\"market/{{task.id}}+onVerification\">onVerification+{{task.id}}</a></p>\n" +
-    "        <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}} </a></p>\n" +
-    "        <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.project.id}})</a></p>\n" +
-    "        <p><a href=\"market/general\">general</a></p>\n" +
-    "        <br>\n" +
-    "\n" +
-    "        <br>\n" +
-    "        <p>Token Liquidity</p>\n" +
-    "        <p>1 <a href=\"market/onTime+{{task.id}}\">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/onTime+{{task.id}}/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
-    "        <p>1 <a href=\"market/onTimeStream+{{task.id}}\">onTimeStream+{{task.id}}</a> / {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
-    "        <p>1 <a href=\"market/onCompletion+{{task.id}}\">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}\">MARKET</a></p>\n" +
-    "        <p>1 <a href=\"market/onVerification+{{task.id}}\">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
-    "        <br>\n" +
-    "\n" +
-    "        <!--\n" +
-    "        <br>\n" +
-    "        <p>onTime: {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
-    "        <p>onTimeStream: {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a></p>\n" +
-    "        <p>onCompletion: {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></p>\n" +
-    "        <p>onVerification: {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a></p>\n" +
-    "        <br>\n" +
-    "        -->\n" +
+    "        <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "            <h4>Token Liquidity</h4>\n" +
+    "            <p>1 <a href=\"market/onTime+{{task.id}}\">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/onTime+{{task.id}}/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
+    "            <p>1 <a href=\"market/onTimeStream+{{task.id}}\">onTimeStream+{{task.id}}</a> / {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
+    "            <p>1 <a href=\"market/onCompletion+{{task.id}}\">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}\">MARKET</a></p>\n" +
+    "            <p>1 <a href=\"market/onVerification+{{task.id}}\">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "        </div>\n" +
     "\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"spacing-15\"></div>\n" +
+    "\n" +
     "\n" +
     "    <div>\n" +
     "        <h3>{{taskTime}}</h3>\n" +
@@ -2398,34 +2409,65 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
 
 angular.module("work/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("work/index.tpl.html",
-    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
-    "	<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | <a href=\"member/{{work.user.username}}\">{{work.user.username}}</a> | {{work.amount}}</h3>\n" +
-    "	<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "	<p>{{work.content}}</p>\n" +
-    "	<br>\n" +
-    "	<h3>Stream</h3>\n" +
-    "	<p><a href=\"stream/1\">N/A</a></p>\n" +
-    "	<br>\n" +
-    "	<h3>Verification | {{work.verificationScore}}</h3>\n" +
-    "	<button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification()\">verify</button>\n" +
-    "	<br>\n" +
-    "	<p ng-repeat=\"verification in verifications\"><a href=\"member/{{verification.user.username}}\">{{verification.user.username}}</a> | {{verification.score}}</p>\n" +
-    "	<br>\n" +
-    "	<br>\n" +
-    "	<h3>Liquidity | Market Orders | Tokens</h3>\n" +
-    "	<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
-    "	<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
-    "	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
-    "	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->\n" +
-    "	<br>\n" +
-    "	<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
-    "    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
-    "    <br>\n" +
-    "    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
-    "    <p><a href=\"market/general\">general</a></p>\n" +
-    "    <br>\n" +
+    "\n" +
+    "	<div>\n" +
+    "		<a href=\"member/{{work.user.username}}\">\n" +
+    "			<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\">\n" +
+    "			{{work.user.username}}\n" +
+    "		</a>\n" +
+    "		<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
+    "		<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "		<p>{{work.content}}</p>\n" +
+    "		<div class=\"spacing-5\"></div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div>\n" +
+    "		<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
+    "		<!--TODO: DIMENSIONALITY-->\n" +
+    "		<h3>Dimensional Work Verification Score | {{work.verificationScore}}</h3>\n" +
+    "		<button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
+    "        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "   		<div ng-repeat=\"verification in workVerification\">\n" +
+    "            <a href=\"member/{{verification.user.username}}\">\n" +
+    "                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
+    "                {{verification.user.username}}\n" +
+    "            </a> | {{verification.score}}\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "        </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "	<div>\n" +
+    "		<h3>Stream</h3>\n" +
+    "		<h4><a href=\"stream/example\">Example Stream</a></h4>\n" +
+    "		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "		<div class=\"spacing-5\"></div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "	<div class=\"well\">\n" +
+    "		<!--TODO: TOKEN CLARITY-->\n" +
+    "		<h3>Liquidity | Market Orders | Tokens</h3>\n" +
+    "		<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
+    "		<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
+    "		<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
+    "		<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->\n" +
+    "		<div class=\"spacing-5\"></div>\n" +
+    "		<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
+    "	    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
+    "	    <div class=\"spacing-5\"></div>\n" +
+    "	    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
+    "	    <p><a href=\"market/general\">general</a></p>\n" +
+    "	    <div class=\"spacing-5\"></div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "	<div class=\"col-md-12\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +

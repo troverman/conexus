@@ -17,7 +17,7 @@ angular.module( 'conexus.work', [
             posts: ['PostModel', 'work', function(PostModel, work){
                 return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
-            verifications: ['PostModel', 'work', function(PostModel, work){
+            workVerifications: ['PostModel', 'work', function(PostModel, work){
                 return null;
             }],
         }
@@ -34,7 +34,7 @@ angular.module( 'conexus.work', [
     $scope.taskTime = 0;
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
-    $scope.verifications =[];
+    $scope.workVerification = [];
     $scope.work = work;
 
     $scope.createPost = function(post) {
@@ -62,14 +62,20 @@ angular.module( 'conexus.work', [
         //TODO: UPDATE POST
     };
 
-    $scope.createVerification = function(post) {
+    //TODO: REFACTOR
+    $scope.verifyWork = function(post, type) {
+        $scope.work.verificationScore = parseFloat($scope.work.verificationScore);
         if ($scope.currentUser){
-            $scope.verifications.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
-            $scope.work.verificationScore = parseFloat($scope.work.verificationScore);
-            $scope.work.verificationScore += parseFloat($scope.currentUser.totalWork);
+            if (type == 'plus'){
+                $scope.workVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
+                $scope.work.verificationScore += parseFloat($scope.currentUser.totalWork);
+            }
+            if (type == 'minus'){
+                $scope.workVerification.push({user:$scope.currentUser, score: -$scope.currentUser.totalWork});
+                $scope.work.verificationScore -= parseFloat($scope.currentUser.totalWork);
+            }
         }
         else{$location.path('/login')}
-
     };
 
     $scope.renderMessage = function(post){

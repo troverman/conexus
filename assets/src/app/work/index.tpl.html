@@ -1,31 +1,62 @@
-<style>md-card{margin:0px; overflow:hidden;}</style>
 <div class="container">
 	<div class="spacing-15"></div>
-	<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | <a href="member/{{work.user.username}}">{{work.user.username}}</a> | {{work.amount}}</h3>
-	<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-	<p>{{work.content}}</p>
-	<br>
-	<h3>Stream</h3>
-	<p><a href="stream/1">N/A</a></p>
-	<br>
-	<h3>Verification | {{work.verificationScore}}</h3>
-	<button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification()">verify</button>
-	<br>
-	<p ng-repeat="verification in verifications"><a href="member/{{verification.user.username}}">{{verification.user.username}}</a> | {{verification.score}}</p>
-	<br>
-	<br>
-	<h3>Liquidity | Market Orders | Tokens</h3>
-	<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
-	<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
-	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
-	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-	<br>
-	<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
-    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
-    <br>
-    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
-    <p><a href="market/general">general</a></p>
-    <br>
+
+	<div>
+		<a href="member/{{work.user.username}}">
+			<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+			{{work.user.username}}
+		</a>
+		<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
+		<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+		<p>{{work.content}}</p>
+		<div class="spacing-5"></div>
+	</div>
+
+	<div>
+		<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
+		<!--TODO: DIMENSIONALITY-->
+		<h3>Dimensional Work Verification Score | {{work.verificationScore}}</h3>
+		<button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
+        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>
+        <div class="spacing-10"></div>
+   		<div ng-repeat="verification in workVerification">
+            <a href="member/{{verification.user.username}}">
+                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
+                {{verification.user.username}}
+            </a> | {{verification.score}}
+            <div class="spacing-10"></div>
+        </div>
+	</div>
+
+	<div class="spacing-5"></div>
+
+	<div>
+		<h3>Stream</h3>
+		<h4><a href="stream/example">Example Stream</a></h4>
+		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+		<div class="spacing-5"></div>
+	</div>
+
+	<div class="spacing-15"></div>
+
+	<div class="well">
+		<!--TODO: TOKEN CLARITY-->
+		<h3>Liquidity | Market Orders | Tokens</h3>
+		<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
+		<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
+		<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
+		<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
+		<div class="spacing-5"></div>
+		<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
+	    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
+	    <div class="spacing-5"></div>
+	    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
+	    <p><a href="market/general">general</a></p>
+	    <div class="spacing-5"></div>
+	</div>
+
+	<div class="spacing-10"></div>
+
 	<div class="col-md-12">
         <div class="spacing-15"></div>
         <form role="form" ng-submit="createPost(newPost)">
