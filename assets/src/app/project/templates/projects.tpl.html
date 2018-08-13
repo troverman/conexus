@@ -1,5 +1,20 @@
 <div class="container">
 	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
+	<div class="row" ng-show="currentUser">
+        <div class="col-xs-12">
+            <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button><br><br>
+            <div ng-show="newProjectToggleVar">
+                <form class="blog-input" role="form" ng-submit="createProject()">
+                    <div class="form-group">
+                        <input type="text" placeholder= "Project Title" ng-model="newProject.title" class="form-control">
+                        <input type="text" placeholder= "Project Description" ng-model="newProject.description" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-default log-btn">create</button>
+                </form>
+            </div>
+            <br><br>
+        </div>
+    </div>
 	<table ng-show="projects.length != 0" class="table table-inverse table-hover">
 	    <thead>
 			<tr>

@@ -89,7 +89,13 @@ angular.module( 'conexus.project', [
         resolve: {
             transactions: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
-            }]
+            }],
+            revenue: ['TransactionModel', 'project', function(TransactionModel, project) {
+                return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
+            }],
+            expense: ['TransactionModel', 'project', function(TransactionModel, project) {
+                return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
+            }],
         }
     })
     .state( 'project.members', {
@@ -119,10 +125,10 @@ angular.module( 'conexus.project', [
             //TOD: ALL
             streams: [function() {
                 return [
-                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'multiDimensional Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
+                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'multiDimensional Stream 597c55e56833048165c6720c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
                 ];
             }]
         }
@@ -330,13 +336,15 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', function ProjectController( $interval, $scope, config, lodash, project, titleService, TransactionModel, transactions ) {
+.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'expense', 'lodash', 'project', 'revenue', 'titleService', 'TransactionModel', 'transactions', function ProjectController( $interval, $scope, config, expense, lodash, project, revenue, titleService, TransactionModel, transactions ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
-    $scope.transactions = transactions
+    $scope.transactions = transactions;
+
+    console.log(expense,revenue);
 
     //TODO: TO FROM ISH | TO; FROM DECIDEDS LEDGER
     if ($scope.transactions.length == 0){
@@ -566,9 +574,25 @@ angular.module( 'conexus.project', [
     });
 
 }])
-.controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'projects', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, projects, titleService ) {
+.controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, ProjectModel, projects, titleService ) {
     titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.newProjectToggleVar = false;
     $scope.project = project;
     $scope.projects = projects;
+
+    $scope.createProject = function(newProject) {
+        if ($scope.currentUser){
+            $scope.newProject.user = $scope.currentUser.id;
+            $scope.newProject.parent = $scope.project.id
+            ProjectModel.create($scope.newProject).then(function(model) {
+                $scope.newProject = {};
+            });
+        }
+    };
+
+    $scope.newProjectToggle = function () {
+        $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+    };
+
 }]);

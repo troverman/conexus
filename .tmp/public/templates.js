@@ -1393,9 +1393,14 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
     "    \n" +
     "    <div>\n" +
     "    	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "        \n" +
     "    	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
     "    	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
-    "    	<a href=\"member/{{order.user.username}}\">{{order.user.username}}</a>\n" +
+    "    	<a href=\"member/{{order.user.username}}\">\n" +
+    "            <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "            {{order.user.username}}\n" +
+    "        </a>\n" +
     "    	<h4>onBooks | Filled | Date</h4>\n" +
     "    </div>\n" +
     "\n" +
@@ -1854,6 +1859,21 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
   $templateCache.put("project/templates/projects.tpl.html",
     "<div class=\"container\">\n" +
     "	<h3><a href=\"project/{{project.urlTitle}}\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"> <a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
+    "	<div class=\"row\" ng-show=\"currentUser\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button><br><br>\n" +
+    "            <div ng-show=\"newProjectToggleVar\">\n" +
+    "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "            <br><br>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "	<table ng-show=\"projects.length != 0\" class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -1877,7 +1897,7 @@ angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", 
   $templateCache.put("project/templates/streams.tpl.html",
     "<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
     "	<div class=\"card\">\n" +
-    "	    <div style=\"padding:0px;\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
     "			<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
     "			<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
     "			<p><a href=\"member/{{stream.user}}\">\n" +
@@ -1992,7 +2012,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "                    <div class=\"form-group\">\n" +
     "                        <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
     "                        <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
-    "                        <input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">\n" +
+    "                        <!--<input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">-->\n" +
     "                    </div>\n" +
     "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
     "                </form>\n" +
