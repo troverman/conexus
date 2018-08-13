@@ -129,38 +129,64 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
 angular.module("account/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("account/index.tpl.html",
     "<div class=\"container\">\n" +
-    "	<a href=\"/member/{{currentUser.username}}\"><img class=\"avatar\" src=\"{{currentUser.avatarUrl}}\"/></a>\n" +
-    "	<h3><a href=\"/member/{{currentUser.username}}\">{{currentUser.username}}</a></h3>\n" +
-    "	<br>\n" +
-    "	{{currentUser.email}}\n" +
-    "	<br><br>\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
+    "	\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-md-4\">\n" +
+    "			<div class=\"member-card\">\n" +
+    "			    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"member-card-info\">\n" +
+    "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.status}} live | online | working</p>\n" +
+    "			        <p style=\"color:gray\">total reputation | {{currentUser.totalWork}}</p>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"member-card-social\">\n" +
+    "			        <a ng-show=\"currentUser.socialAccounts.facebook.profileUrl\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "			        <a ng-show=\"currentUser.socialAccounts.twitter.profileUrl\" href=\"{{currentUser.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "			        <a ng-show=\"currentUser.socialAccounts.google.profileUrl\" href=\"{{currentUser.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"col-md-8\">\n" +
+    "			<h3>Balances</h3>\n" +
+    "			<p>Tokens | Peer Contrubution</p>\n" +
+    "			<div class=\"spacing-10\"></div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<h4>{{currentUser.email}}</h4>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<h3>Update Avatar</h3>\n" +
-    "	<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "		<div>Drag photos or click here to upload.</div>\n" +
-    "		<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>  		\n" +
-    "	</div>\n" +
+    "	<a href=\"#\">\n" +
+    "		<div class=\"well\" ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "			<div>Drag photos or click here to upload.</div>\n" +
+    "			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>  		\n" +
+    "		</div>\n" +
+    "	</a>\n" +
     "	<p ng-show=\"avatarLoading\" style=\"text-align:center\"><i class=\"fa fa-spin fa-spinner\"></i>&nbsp;{{pp}}%</p>\n" +
     "	<div ng-show=\"avatarLoading\" class=\"progress\">\n" +
     "		<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: {{avatarPercentage}}%;\"></div>\n" +
     "	</div>\n" +
-    "	<br><br>\n" +
-    "\n" +
-    "	<h3>Balances</h3>\n" +
-    "	<p>Tokens</p>\n" +
-    "\n" +
-    "	<!--<h3>Peer Contrubution</h3>-->\n" +
-    "\n" +
-    "	<h3>Connected Accounts</h3>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/google\">google</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/twitter\">twitter</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/facebook\">facebook</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">fitbit</a></button>\n" +
-    "	<!--tokenized apps.. connect in..-->\n" +
-    "	<br><br>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<h3>Settings</h3>\n" +
-    "	<p>gps tracking</p>\n" +
+    "	<p>GPS Tracking</p>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	<h3>Connected Accounts</h3>\n" +
+    "	<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
+    "	<button class=\"btn btn-default\"><a href=\"/auth/twitter\">Twitter</a></button>\n" +
+    "	<button class=\"btn btn-default\"><a href=\"/auth/facebook\">Facebook</a></button>\n" +
+    "	<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">Fitbit</a></button>\n" +
+    "	<!--TODO: tokenized apps.. connect in..-->\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	<button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"\">Edit Account</button>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
@@ -1364,12 +1390,14 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
   $templateCache.put("order/index.tpl.html",
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
-    "	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
-    "	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
-    "	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
-    "	<a href=\"member/{{order.user.username}}\">{{order.user.username}}</a>\n" +
-    "	<h4>onBooks | Filled | Date</h4>\n" +
-    "\n" +
+    "    \n" +
+    "    <div>\n" +
+    "    	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
+    "    	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
+    "    	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
+    "    	<a href=\"member/{{order.user.username}}\">{{order.user.username}}</a>\n" +
+    "    	<h4>onBooks | Filled | Date</h4>\n" +
+    "    </div>\n" +
     "\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "\n" +
@@ -2452,6 +2480,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "	<div class=\"well\">\n" +
     "		<!--TODO: TOKEN CLARITY-->\n" +
+    "		<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->\n" +
     "		<h3>Liquidity | Market Orders | Tokens</h3>\n" +
     "		<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
     "		<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +

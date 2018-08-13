@@ -1,36 +1,62 @@
 <div class="container">
-	<a href="/member/{{currentUser.username}}"><img class="avatar" src="{{currentUser.avatarUrl}}"/></a>
-	<h3><a href="/member/{{currentUser.username}}">{{currentUser.username}}</a></h3>
-	<br>
-	{{currentUser.email}}
-	<br><br>
+	<div class="spacing-15"></div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<div class="member-card">
+			    <div class="member-card-image" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
+			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
+			    </div>
+			    <div class="member-card-info">
+			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
+			        <p style="color:gray">{{currentUser.status}} live | online | working</p>
+			        <p style="color:gray">total reputation | {{currentUser.totalWork}}</p>
+			    </div>
+			    <div class="member-card-social">
+			        <a ng-show="currentUser.socialAccounts.facebook.profileUrl" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
+			        <a ng-show="currentUser.socialAccounts.twitter.profileUrl" href="{{currentUser.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
+			        <a ng-show="currentUser.socialAccounts.google.profileUrl" href="{{currentUser.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
+			    </div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h3>Balances</h3>
+			<p>Tokens | Peer Contrubution</p>
+			<div class="spacing-10"></div>
+		</div>
+	</div>
+
+	<div class="spacing-5"></div>
+	<h4>{{currentUser.email}}</h4>
+	<div class="spacing-10"></div>
 
 	<h3>Update Avatar</h3>
-	<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-		<div>Drag photos or click here to upload.</div>
-		<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>  		
-	</div>
+	<a href="#">
+		<div class="well" ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+			<div>Drag photos or click here to upload.</div>
+			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>  		
+		</div>
+	</a>
 	<p ng-show="avatarLoading" style="text-align:center"><i class="fa fa-spin fa-spinner"></i>&nbsp;{{pp}}%</p>
 	<div ng-show="avatarLoading" class="progress">
 		<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{avatarPercentage}}%;"></div>
 	</div>
-	<br><br>
-
-	<h3>Balances</h3>
-	<p>Tokens</p>
-
-	<!--<h3>Peer Contrubution</h3>-->
-
-	<h3>Connected Accounts</h3>
-	<button class="btn btn-default"><a href="/auth/google">google</a></button>
-	<button class="btn btn-default"><a href="/auth/twitter">twitter</a></button>
-	<button class="btn btn-default"><a href="/auth/facebook">facebook</a></button>
-	<button class="btn btn-default"><a href="/auth/fitbit">fitbit</a></button>
-	<!--tokenized apps.. connect in..-->
-	<br><br>
+	<div class="spacing-10"></div>
 
 	<h3>Settings</h3>
-	<p>gps tracking</p>
+	<p>GPS Tracking</p>
+	<div class="spacing-10"></div>
+
+	<h3>Connected Accounts</h3>
+	<button class="btn btn-default"><a href="/auth/google">Google</a></button>
+	<button class="btn btn-default"><a href="/auth/twitter">Twitter</a></button>
+	<button class="btn btn-default"><a href="/auth/facebook">Facebook</a></button>
+	<button class="btn btn-default"><a href="/auth/fitbit">Fitbit</a></button>
+	<!--TODO: tokenized apps.. connect in..-->
+	<div class="spacing-10"></div>
+
+	<button style="width:100%;" class="btn btn-default log-btn" ng-click="">Edit Account</button>
+	<div class="spacing-10"></div>
 
 </div>
 <div class="spacing-50"></div>
