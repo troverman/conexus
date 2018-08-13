@@ -1,8 +1,12 @@
-<style>md-card{margin:0px; overflow:hidden;}</style>
-<md-card ng-repeat="stream in streams" class="col-md-6">
-	<div style="padding:10px;">
-		<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
-		<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
-		<p><a href="member/{{stream.user}}">{{stream.user}}</a> | <span am-time-ago="stream.createdAt"></span></p>
+<div class="col-md-6" ng-repeat="stream in streams">
+	<div class="card">
+	    <div style="padding:16px;">
+			<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
+			<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
+			<p><a href="member/{{stream.user}}">
+				<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">
+				{{stream.user}}
+			</a> | <span am-time-ago="stream.createdAt"></span></p>
+		</div>
 	</div>
-</md-card>
+</div>

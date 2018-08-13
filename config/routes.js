@@ -62,7 +62,6 @@ module.exports.routes = {
    * Follower routes
    */
   'get /api/follower': 'FollowerController.getSome',
-  'get /api/follower/:id': 'FollowerController.getOne',
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
   'post /api/follower': 'FollowerController.create',

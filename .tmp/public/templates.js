@@ -1875,14 +1875,18 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/streams.tpl.html",
-    "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
-    "<md-card ng-repeat=\"stream in streams\" class=\"col-md-6\">\n" +
-    "	<div style=\"padding:10px;\">\n" +
-    "		<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
-    "		<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
-    "		<p><a href=\"member/{{stream.user}}\">{{stream.user}}</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
+    "<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
+    "	<div class=\"card\">\n" +
+    "	    <div style=\"padding:0px;\">\n" +
+    "			<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
+    "			<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
+    "			<p><a href=\"member/{{stream.user}}\">\n" +
+    "				<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
+    "				{{stream.user}}\n" +
+    "			</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
+    "		</div>\n" +
     "	</div>\n" +
-    "</md-card>");
+    "</div>");
 }]);
 
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -2003,6 +2007,8 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "            </div>\n" +
     "            <div class=\"col-xs-11\">\n" +
     "                <h3><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
+    "                <!--<p style=\"color:gray;font-style:italic\">{{project.description}}</p>-->\n" +
+    "                <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
