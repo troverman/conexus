@@ -1,34 +1,46 @@
-<div class="container">
+<div class="spacing-10"></div>
+<div ng-show="project.parent">
 	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
-	<div class="row" ng-show="currentUser">
-        <div class="col-xs-12">
-            <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button><br><br>
-            <div ng-show="newProjectToggleVar">
-                <form class="blog-input" role="form" ng-submit="createProject()">
-                    <div class="form-group">
-                        <input type="text" placeholder= "Project Title" ng-model="newProject.title" class="form-control">
-                        <input type="text" placeholder= "Project Description" ng-model="newProject.description" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn">create</button>
-                </form>
-            </div>
-            <br><br>
+	<div class="spacing-10"></div>
+</div>
+<div class="row" ng-show="currentUser">
+    <div class="col-xs-12">
+        <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ Project</button><br><br>
+        <div ng-show="newProjectToggleVar">
+            <form class="blog-input" role="form" ng-submit="createProject()">
+                <div class="form-group">
+                    <input type="text" placeholder= "Project Title" ng-model="newProject.title" class="form-control">
+                    <input type="text" placeholder= "Project Description" ng-model="newProject.description" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-default log-btn">create</button>
+				<div class="spacing-15"></div>
+            </form>
         </div>
     </div>
-	<table ng-show="projects.length != 0" class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Title</th>
-				<th>Tasks</th>
-				<th>Members</th>
-			</tr>
-	    </thead>
-	    <tbody ng-show="projects.length != 0">
-			<tr ng-repeat="project in projects">
-				<td><a href="project/{{project.urlTitle}}"><img style="height:24px" src="{{project.avatarUrl}}"> {{project.title}}</a></td>
-				<td>{{project.memeberCount}}</td>
-				<td>{{project.taskCount}}</td>
-			</tr>
-	    </tbody>
-	</table>
+</div>
+<div ng-repeat="project in projects">
+	<div class="card">
+		<div style="padding:16px;">
+			<div class="row">
+				<div class="col-sm-10">
+					<h4><a href="project/{{project.urlTitle}}"><img style="height:24px" src="{{project.avatarUrl}}"> {{project.title}}</a></h4>
+					<p style="color:gray">{{project.description}}</p>
+
+					<!--
+					<p>{{project.memeberCount}}</p>
+					<p>{{project.taskCount}}</p>
+					<p>{{project.totalWork}}</p>
+
+					-->
+					<!--
+					<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+					-->
+
+				</div>
+				<div class="col-sm-2" style="text-align:right">
+					<!--<h4><a href="project/{{project.urlTitle}}">Request | Join</a></h4>-->
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

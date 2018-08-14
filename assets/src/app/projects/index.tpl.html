@@ -21,12 +21,20 @@
         <div class="spacing-25"></div>
     </div>
 </div>
-<div class="spacing-25"></div>
-<div class="container">
-    <div class="row" ng-show="currentUser">
+
+<!--TODO: FILTER / SEARCH -->
+<!--<div>
+    <input type="text" placeholder= "Seach | Filter" ng-model="searchQuery" class="form-control">
+    <button>Filters</button>
+</div>-->
+
+<div class="container" ng-show="currentUser">
+    <div class="spacing-15"></div>
+    <div class="row">
         <div class="col-xs-12">
-            <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button><br><br>
+            <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button>
             <div ng-show="newProjectToggleVar">
+                <div class="spacing-10"></div>
                 <form class="blog-input" role="form" ng-submit="createProject(newProject)">
                     <div class="form-group">
                         <input type="text" placeholder= "Project Title" ng-model="newProject.title" class="form-control">
@@ -36,22 +44,41 @@
                     <button type="submit" class="btn btn-default log-btn">create</button>
                 </form>
             </div>
-            <br><br>
         </div>
     </div>
-    <div class="row">
-        <div class="post-container col-xs-12" ng-repeat="project in projects">
-            <div class="col-xs-1">
-                <img style="width:50px;height:50px;" src="{{project.avatarUrl}}">
-            </div>
-            <div class="col-xs-11">
-                <h3><a href="/project/{{project.urlTitle}}">{{project.title}}</a></h3>
-                <!--<p style="color:gray;font-style:italic">{{project.description}}</p>-->
-                <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
+</div>
+
+<div class="container">
+    <div class="spacing-15"></div>
+    <!--TODO: FINALIZE STRUCTURE.. -->
+    <div ng-repeat="project in projects">
+        <div class="card">
+            <div style="padding:16px;">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <a href="/project/{{project.urlTitle}}"><img style="width:50px;height:50px;" src="{{project.avatarUrl}}"></a>
+                    </div>
+                    <div class="col-xs-9">
+                        <h3 style="margin-top:0px">
+                            <a href="/project/{{project.urlTitle}}">
+                                <!--<img style="width:50px;height:50px;margin-right:5px" src="{{project.avatarUrl}}">-->
+                                {{project.title}}
+                            </a>
+                        </h3>
+                        <p style="color:gray;font-style:italic;">{{project.description}}</p>
+                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
+                        <!--<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>-->
+                    </div>
+                    <div class="col-xs-2" style="text-align:right">
+                        <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
+                        <!--<h4>0 <i class="fa fa-user"></i></h4>-->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="spacing-25"></div>
 <div ng-click="loadMore()" class="container" style="text-align:center">
     <button style="width:100%" class="btn btn-default">MORE <i class="fa fa-angle-down"></i></button>

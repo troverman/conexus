@@ -47,13 +47,10 @@
 		<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
 		<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
 		<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-		<div class="spacing-5"></div>
 		<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
 	    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
-	    <div class="spacing-5"></div>
 	    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
 	    <p><a href="market/general">general</a></p>
-	    <div class="spacing-5"></div>
 	</div>
 
 	<div class="spacing-10"></div>

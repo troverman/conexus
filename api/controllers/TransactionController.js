@@ -42,9 +42,17 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
-			.populate('project')
 			.then(function(models) {
+				/*User.find({id:to}).then(function(userModel){
+					if (userModel.length == 0){
+						Project.find({id:to}).then(function(userModel){
+
+						});
+					}
+					else{
+
+					}
+				});*/
 				res.json(models);
 			});
 		}
@@ -55,8 +63,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
-			.populate('project')
 			.then(function(models) {
 				res.json(models);
 			});
@@ -91,7 +97,6 @@ module.exports = {
 			to: req.param('to'),
 			from: req.param('from'),
 			ledger: req.param('ledger'),
-			project: req.param('project'),
 			user: req.param('user'),
 		};
 		Transaction.create(model)
@@ -109,7 +114,6 @@ module.exports = {
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Transaction.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

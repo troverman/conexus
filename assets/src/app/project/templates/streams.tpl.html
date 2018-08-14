@@ -1,3 +1,33 @@
+<div class="spacing-10"></div>
+
+<div class="row" ng-show="false">
+    <div class="col-xs-12">
+    	<!-- POST WITH ATTACHMENT -->
+    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->
+        <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ Content</button><br><br>
+        <div ng-show="newProjectToggleVar">
+            <form class="blog-input" role="form" ng-submit="createContent()">
+                <div class="form-group">
+                    <input type="text" placeholder= "Content Project" ng-model="newContent.project" class="form-control">
+                    <input type="text" placeholder= "Content Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
+                    <input type="text" placeholder= "Content Title" ng-model="newContent.title" class="form-control">
+                    <input type="text" placeholder= "Content Content" ng-model="newContent.content" class="form-control">
+                    <input type="text" placeholder= "Content Attachment" ng-model="newContent.attachment" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-default log-btn">create</button>
+				<div class="spacing-15"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div ng-show="false" class="">
+	<ul style="padding:0px;" class="member-tabs">
+		<li class="active"><a href="">Files</a></li>
+		<li><a href="">Videos</a></li>
+	</ul>
+</div>
+
 <div class="col-md-6" ng-repeat="stream in streams">
 	<div class="card">
 	    <div style="padding:16px;">
