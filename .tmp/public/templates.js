@@ -311,6 +311,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		        </div>\n" +
     "		    </div>\n" +
     "\n" +
+    "			<!--\n" +
     "			<div class=\"card\">\n" +
     "		        <div style=\"padding:16px;\">\n" +
     "		        	<form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
@@ -321,6 +322,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					</form>\n" +
     "				</div>\n" +
     "		    </div>\n" +
+    "			-->\n" +
     "\n" +
     "			<!--tasks, work, posts, activity-->\n" +
     "			<!--TODO: ACTIVITY-->\n" +
@@ -1073,12 +1075,11 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Organizations</a></li>-->\n" +
-    "					<!--<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>-->\n" +
-    "					<li><a href=\"member/{{member.username}}/wallet\">Ledger</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}\">Map</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}\">Time</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}/wallet\">Ledger</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}\">Map</a></li>-->\n" +
+    "					<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}\">Time</a></li>-->\n" +
     "					<!--<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>-->\n" +
-    "					<!--<li><a href=\"member/{{member.username}}\">Work</a></li>-->\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
     "						<a class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
     "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"unfollow()\">UnFollow</a>\n" +
