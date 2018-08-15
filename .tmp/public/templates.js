@@ -429,7 +429,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "				<p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism</p>\n" +
     "				<p style=\"font-style:italic;margin:0px;color:gray\">Vote and map your value respective to a complete set of tokenized potiental</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
-    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the value map</a>\n" +
+    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the market</a>\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
@@ -1069,15 +1069,16 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "			<div class=\"pull-right member-tab-container\">\n" +
     "				<ul class=\"member-tabs\">\n" +
     "					<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}\">Content</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
-    "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Orders</a></li>-->\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Organizations</a></li>-->\n" +
-    "					<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Streams</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>-->\n" +
+    "					<li><a href=\"member/{{member.username}}/wallet\">Ledger</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}\">Map</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}\">Time</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>-->\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">Work</a></li>-->\n" +
-    "					<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>\n" +
-    "\n" +
     "					<li ng-show=\"currentUser.id != member.id\">\n" +
     "						<a class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
     "						<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"unfollow()\">UnFollow</a>\n" +
@@ -1124,7 +1125,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
 
 angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/activity.tpl.html",
-    "<div class=\"col-md-12\">\n" +
+    "<div class=\"col-md-12\" ng-show=\"currentUser\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "    <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
     "        <div class=\"form-group\">\n" +
@@ -2334,10 +2335,11 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "    <div class=\"row well\">\n" +
     "\n" +
+    "        <!--TODO: COLLAPSE UI-->\n" +
     "        <!--TOKENS MINTING PER ACTION-->\n" +
     "        <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
     "            <div class=\"spacing-5\"></div>\n" +
-    "            <h4>Tokens</h4>\n" +
+    "            <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "            <p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
     "            <p><a href=\"market/{{task.id}}+onTimeStream\">onTimeStream+{{task.id}}</a></p>\n" +
     "            <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
@@ -2491,6 +2493,8 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "					<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "						<!--<a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a>-->\n" +
     "						<h4>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></h4>\n" +
+    "						<!--TODO: DO IT FOR REAL-->\n" +
+    "						<!--<h4 ng-show=\"!task.completeBountySet\"><a href=\"market/{{task.id}}\">Create Liquidity</a></h4>-->\n" +
     "						<!--<p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>-->\n" +
     "					</div>\n" +
     "				</div>\n" +
@@ -2604,6 +2608,8 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "		<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "		<p>{{work.content}}</p>\n" +
     "		<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
     "	<div>\n" +
@@ -2624,6 +2630,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "	<div class=\"spacing-5\"></div>\n" +
     "\n" +
+    "	<!--TODO: REAL STREAM-->\n" +
     "	<div>\n" +
     "		<h3>Stream</h3>\n" +
     "		<h4><a href=\"stream/example\">Example Stream</a></h4>\n" +
@@ -2635,8 +2642,10 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "	<div class=\"well\">\n" +
     "		<!--TODO: TOKEN CLARITY-->\n" +
+    "		<!--TODO: COLLAPSE UI-->\n" +
     "		<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->\n" +
     "		<h3>Liquidity | Market Orders | Tokens</h3>\n" +
+    "		<!--<h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>-->\n" +
     "		<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
     "		<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
     "		<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
@@ -2645,6 +2654,9 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "	    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
     "	    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
     "	    <p><a href=\"market/general\">general</a></p>\n" +
+    "\n" +
+    "	    <!--<h4><a href=\"market/{{work.id}}\">Create Liquidity</a></h4>-->\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-10\"></div>\n" +

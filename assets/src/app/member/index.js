@@ -291,7 +291,7 @@ angular.module( 'conexus.member', [
         title: {text: ''},
         xAxis: {
             title: {text: null},
-            categories: ['Sales', 'Marketing', 'Development', 'Customer Support', 'Information Technology', 'Administration'],
+            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security'],
             tickmarkPlacement: 'on',
             lineWidth: 0,
         },
