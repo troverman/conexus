@@ -1074,9 +1074,9 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "					<li><a href=\"member/{{member.username}}\">Content</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
     "					<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
-    "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Organizations</a></li>-->\n" +
-    "					<!--<li><a href=\"member/{{member.username}}/wallet\">Ledger</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}\">Map</a></li>-->\n" +
+    "					<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Projects</a></li>-->\n" +
+    "					<li><a href=\"member/{{member.username}}/wallet\">Ledger</a></li>\n" +
+    "					<!--<li><a href=\"member/{{member.username}}\">Map</a></li>-->\n" +
     "					<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
     "					<!--<li><a href=\"member/{{member.username}}\">Time</a></li>-->\n" +
     "					<!--<li><a href=\"member/{{member.username}}/wallet\">Wallet</a></li>-->\n" +
@@ -1101,7 +1101,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "\n" +
     "				<!--<h2>{{member.totalWork}} | total work</h2>-->\n" +
     "				<!--<input type=\"text\" placeholder=\"Reputation\" ng-model=\"reputationLookup\" class=\"form-control\">-->\n" +
-    "\n" +
+    "				<img style=\"height:75px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\">\n" +
     "				<a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><span class=\"grey facebook-icon\"><i class=\"fa fa-facebook\"></i> Facebook</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><span class=\"grey twitter-icon\"><i class=\"fa fa-twitter\"></i> Twitter</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><span class=\"grey google-icon\"><i class=\"fa fa-google\"></i> Google</span></a>\n" +
@@ -1315,7 +1315,15 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
 
 angular.module("member/templates/wallet.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/wallet.tpl.html",
-    "<img src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\">\n" +
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "	<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
+    "	<li><a href=\"\">Assets</a></li>\n" +
+    "	<li><a href=\"\">Expenses</a></li>\n" +
+    "	<li><a href=\"\">Liabilities</a></li>\n" +
+    "	<li><a href=\"\">Revenue</a></li>\n" +
+    "	<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "</ul>\n" +
+    "\n" +
     "<h1>Transaction History</h1>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
     "<md-card ng-show=\"newTransactionToggleVar\">\n" +

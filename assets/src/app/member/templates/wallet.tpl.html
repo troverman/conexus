@@ -1,4 +1,12 @@
-<img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}">
+<ul style="padding:0px;" class="member-tabs">
+	<li class="active"><a href="">Overview</a></li>
+	<li><a href="">Assets</a></li>
+	<li><a href="">Expenses</a></li>
+	<li><a href="">Liabilities</a></li>
+	<li><a href="">Revenue</a></li>
+	<li><a href="member/{{member.username}}/positions">Positions</a></li>
+</ul>
+
 <h1>Transaction History</h1>
 <button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
 <md-card ng-show="newTransactionToggleVar">
