@@ -1324,6 +1324,15 @@ angular.module("member/templates/wallet.tpl.html", []).run(["$templateCache", fu
     "	<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
     "</ul>\n" +
     "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-md-8\">\n" +
+    "		<highchart config=\"chart\"></highchart>\n" +
+    "	</div>\n" +
+    "	<div class=\"col-md-4\">\n" +
+    "		<highchart config=\"pie\"></highchart>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
     "<h1>Transaction History</h1>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
     "<md-card ng-show=\"newTransactionToggleVar\">\n" +
@@ -1351,6 +1360,32 @@ angular.module("member/templates/wallet.tpl.html", []).run(["$templateCache", fu
     "		</form>\n" +
     "	</div>\n" +
     "</md-card>\n" +
+    "\n" +
+    "<table class=\"table table-inverse table-hover\">\n" +
+    "    <thead>\n" +
+    "		<tr>\n" +
+    "			<th>To</th>\n" +
+    "			<th>From</th>\n" +
+    "			<th>Asset Identifier</th>\n" +
+    "			<th>Amount</th>\n" +
+    "			<th>Ledger</th>\n" +
+    "			<th>Content</th>\n" +
+    "			<th>Date</th>\n" +
+    "		</tr>\n" +
+    "    </thead>\n" +
+    "    <tbody>\n" +
+    "		<tr ng-repeat=\"transaction in transactions\">\n" +
+    "			<td>{{transaction.to}}</td>\n" +
+    "			<td>{{transaction.from}}</td>\n" +
+    "			<td>{{transaction.identifier}}</td>\n" +
+    "			<td>{{transaction.amount}}</td>\n" +
+    "			<td>{{transaction.ledger}}</td>\n" +
+    "			<td>{{transaction.content}}</td>\n" +
+    "			<td>{{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</td>\n" +
+    "		</tr>\n" +
+    "    </tbody>\n" +
+    "</table>\n" +
+    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "");
 }]);

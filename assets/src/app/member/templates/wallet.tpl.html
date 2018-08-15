@@ -7,6 +7,15 @@
 	<li><a href="member/{{member.username}}/positions">Positions</a></li>
 </ul>
 
+<div class="row">
+	<div class="col-md-8">
+		<highchart config="chart"></highchart>
+	</div>
+	<div class="col-md-4">
+		<highchart config="pie"></highchart>
+	</div>
+</div>
+
 <h1>Transaction History</h1>
 <button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
 <md-card ng-show="newTransactionToggleVar">
@@ -34,4 +43,30 @@
 		</form>
 	</div>
 </md-card>
+
+<table class="table table-inverse table-hover">
+    <thead>
+		<tr>
+			<th>To</th>
+			<th>From</th>
+			<th>Asset Identifier</th>
+			<th>Amount</th>
+			<th>Ledger</th>
+			<th>Content</th>
+			<th>Date</th>
+		</tr>
+    </thead>
+    <tbody>
+		<tr ng-repeat="transaction in transactions">
+			<td>{{transaction.to}}</td>
+			<td>{{transaction.from}}</td>
+			<td>{{transaction.identifier}}</td>
+			<td>{{transaction.amount}}</td>
+			<td>{{transaction.ledger}}</td>
+			<td>{{transaction.content}}</td>
+			<td>{{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</td>
+		</tr>
+    </tbody>
+</table>
+
 <div class="spacing-10"></div>

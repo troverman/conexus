@@ -320,8 +320,95 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Wallet | CRE8.XYZ');
-    
-     $scope.newTransactionToggle = function(){
+
+    $scope.transactions= [];
+    for (var i=0, t=88; i<t; i++) {
+        $scope.transactions.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
+        $scope.transactions.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
+    }
+
+    //TODO: BACKEND WRT FROM AND TO
+    $scope.sumTransactions = [];
+    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
+        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
+    }, 0);
+
+    $scope.sumExpense = [];
+    $scope.transactions.reduce(function(a,b,i) {
+        if (b.ledger == 'EXPENSE'){return $scope.sumExpense[i] = parseFloat(a)+parseFloat(b.amount);}
+        else{return $scope.sumExpense[i] = parseFloat(a)}
+    }, 0);
+
+    $scope.sumRevenue = [];
+    $scope.transactions.reduce(function(a,b,i) {
+        if (b.ledger == 'REVENUE'){return $scope.sumRevenue[i] = parseFloat(a)+parseFloat(b.amount);}
+        else{return $scope.sumRevenue[i] = parseFloat(a)}
+    }, 0);
+
+    $scope.chart = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [{
+            id: 'Expense',
+            type: 'spline',
+            name: 'Expense',
+            data: $scope.sumExpense,
+        },{
+            id: 'Revenue',
+            type: 'spline',
+            name: 'Revenue',
+            data: $scope.sumRevenue,
+        }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+    };
+
+    $scope.pie = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [{
+                name: 'Expense',
+                y: $scope.sumExpense[$scope.sumExpense.length-1],
+            }, {
+                name: 'Revenue',
+                y: $scope.sumRevenue[$scope.sumRevenue.length-1],
+            }]
+        }],
+        
+        title: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+    };
+
+    $scope.newTransactionToggle = function(){
         $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
     };
 
