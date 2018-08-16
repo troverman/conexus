@@ -207,32 +207,99 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "\n" +
     "<div class=\"container\">\n" +
     "\n" +
-    "	<h1>connect</h1>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "	<h1>Discover</h1>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "	<!--<input style=\"margin-top:5px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">-->\n" +
-    "	\n" +
-    "	<div ng-repeat=\"member in members\">\n" +
-    "		<h3><a href=\"/member/{{member.username}}\">{{member.username}}</a></h3>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<h1>Members</h1>\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
+    "		<div class=\"member-card\">\n" +
+    "		    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "		        <a href=\"member/{{member.username}}\"><img ng-src=\"{{member.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"member-card-info\">\n" +
+    "		        <h4><a href=\"member/{{member.username}}\">{{member.username}}</a></h4>\n" +
+    "		        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "		        <p style=\"color:gray\">total reputation | {{member.totalWork}}</p>\n" +
+    "		        <p style=\"color:gray\">dimensional | 888</p>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"member-card-social\">\n" +
+    "		        <a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "		        <a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "		        <a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<!--<h1>live</h1>\n" +
-    "	<div ng-repeat=\"task in tasks\">\n" +
-    "		<div class=\"col-sm-6\"><iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe></div>\n" +
-    "	</div>-->\n" +
+    "</div>\n" +
     "\n" +
-    "	<h1>organizations</h1>\n" +
+    "<div class=\"container\">\n" +
+    "\n" +
+    "	<h1>Projects</h1>\n" +
     "	<div ng-repeat=\"project in projects\">\n" +
-    "		<h3><a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
-    "	</div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-1\">\n" +
+    "                        <a href=\"/project/{{project.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{project.avatarUrl}}\"></a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-xs-9\">\n" +
+    "                        <h3 style=\"margin-top:0px\">\n" +
+    "                            <a href=\"/project/{{project.urlTitle}}\">\n" +
+    "                                <!--<img style=\"width:50px;height:50px;margin-right:5px\" src=\"{{project.avatarUrl}}\">-->\n" +
+    "                                {{project.title}}\n" +
+    "                            </a>\n" +
+    "                        </h3>\n" +
+    "                        <p style=\"color:gray;font-style:italic;\">{{project.description}}</p>\n" +
+    "                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->\n" +
+    "                        <!--<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>-->\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-xs-2\" style=\"text-align:right\">\n" +
+    "                        <h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
+    "                        <!--<h4>0 <i class=\"fa fa-user\"></i></h4>-->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "	<h1>tasks</h1>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "\n" +
+    "	<h1>Tasks</h1>\n" +
     "	<div ng-repeat=\"task in tasks\">\n" +
-    "		<h3><a href=\"/task/{{task.id}}\">{{task.title}}</a></h3>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<div class=\"row\">\n" +
+    "					<div class=\"col-sm-10\">\n" +
+    "						<h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
+    "						<p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "						<p>{{task.content}}</p>\n" +
+    "						<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
+    "						<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
+    "					</div>\n" +
+    "					<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
+    "						<!--<a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a>-->\n" +
+    "						<h4>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></h4>\n" +
+    "						<!--TODO: DO IT FOR REAL-->\n" +
+    "						<!--<h4 ng-show=\"!task.completeBountySet\"><a href=\"market/{{task.id}}\">Create Liquidity</a></h4>-->\n" +
+    "						<!--<p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>-->\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"card-footer\">\n" +
+    "				<!--TODO: TASK VERIFICATION-->\n" +
+    "				<a href=\"task/{{task.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "				<a href=\"task/{{task.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "				<!--<a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>-->\n" +
+    "				<!--<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{task.id}}\"><i class=\"fa fa-link grey\"></i></a>-->\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
-    "\n" +
-    "	<!--<p>what is this page?</p>\n" +
-    "	<p>connect in your gps, wallet info, and live stream google glass</p>-->\n" +
     "\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>");
