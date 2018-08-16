@@ -22,9 +22,20 @@
 	</div>
 </div>
 
+<!--TODO: FILTER / SEARCH -->
+<!--
 <div class="container">
-	<div class="spacing-25"></div>
+    <div class="spacing-15"></div>
+    <div class="card">
+        <form style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+        </form>
+    </div>
+</div>
+-->
 
+<div class="container">
+	<div class="spacing-15"></div>
 	<div ng-repeat="task in tasks">
 		<div class="card">
 			<div style="padding:16px;">

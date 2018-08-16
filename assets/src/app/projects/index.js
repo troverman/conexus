@@ -18,7 +18,7 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $scope, config, lodash, ProjectModel, projects, titleService ) {
+.controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
 	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newProject = {};
@@ -32,6 +32,12 @@ angular.module( 'conexus.projects', [
         $scope.newProject.user = $scope.currentUser.id;
         ProjectModel.create($scope.newProject).then(function(model) {
             $scope.newProject = {};
+        });
+    };
+
+    $scope.keyPress = function(searchValue){
+        SearchModel.search(searchValue).then(function(models){
+            $scope.projects = models;
         });
     };
 

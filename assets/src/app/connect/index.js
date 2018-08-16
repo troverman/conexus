@@ -17,8 +17,24 @@ angular.module( 'conexus.connect', [
         	projects: ['ProjectModel', function(ProjectModel){
                 return ProjectModel.getSome(100, 0, 'createdAt DESC');
             }],
+            posts: ['PostModel', function(PostModel){
+                return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
+			}],
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
+            }],
+            //TODO: ALL 
+            //TODO: CONVERT TO 'CONTENT'
+            streams: [function() {
+                return [
+                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 597c55e56833048165c6720c Stream 3',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
+                ];
+            }],
+            work: ['WorkModel', function(WorkModel){
+                return WorkModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
         }
 
@@ -30,7 +46,7 @@ angular.module( 'conexus.connect', [
     });
 }])
 
-.controller( 'DiscoverCtrl', ['$scope', 'members', 'titleService', 'projects', 'tasks', 'uiGmapGoogleMapApi', function DiscoverController( $scope, members, titleService, projects, tasks, uiGmapGoogleMapApi ) {
+.controller( 'DiscoverCtrl', ['$sce', '$scope', 'members', 'titleService', 'posts', 'projects', 'streams', 'tasks', 'uiGmapGoogleMapApi', 'work', function DiscoverController( $sce, $scope, members, titleService, posts, projects, streams, tasks, uiGmapGoogleMapApi, work ) {
 	titleService.setTitle('Discover | CRE8.XYZ');
 
 	$scope.map = {
@@ -39,8 +55,20 @@ angular.module( 'conexus.connect', [
 	};
 	$scope.members = members;
 	$scope.options = {scrollwheel: false};
+	$scope.posts = posts;
 	$scope.projects = projects;
+	$scope.streams = streams;
 	$scope.tasks = tasks;
 	$scope.windowOptions = {visible: false};
+	$scope.work = work;
+
+	//TODO: UNITY W POSTS | CONTENT | STREAMS
+
+	//TODO: HMM
+	$scope.renderMessage = function(stream){
+        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+        return $sce.trustAsHtml(html);
+    };
+
 
 }]);

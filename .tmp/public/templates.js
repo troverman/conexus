@@ -233,7 +233,22 @@ angular.module("connect/index.tpl.html", []).run(["$templateCache", function ($t
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "</div>\n" +
     "\n" +
+    "<div class=\"container\">\n" +
+    "	<h1>Streams | Content | Posts</h1>\n" +
+    "	<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
+    "		<div class=\"card\">\n" +
+    "		    <div style=\"padding:16px;\">\n" +
+    "				<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
+    "				<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
+    "				<p><a href=\"member/{{stream.user}}\">\n" +
+    "					<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
+    "					{{stream.user}}\n" +
+    "				</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -2188,12 +2203,6 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<!--TODO: FILTER / SEARCH -->\n" +
-    "<!--<div>\n" +
-    "    <input type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" class=\"form-control\">\n" +
-    "    <button>Filters</button>\n" +
-    "</div>-->\n" +
-    "\n" +
     "<div class=\"container\" ng-show=\"currentUser\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "    <div class=\"row\">\n" +
@@ -2214,8 +2223,32 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--TODO: FILTER / SEARCH -->\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
+    "    <div class=\"card\">\n" +
+    "        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "            <!--\n" +
+    "            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Filters <i class=\"fa fa-angle-down\"></i></h5>\n" +
+    "                </a>\n" +
+    "                <ul style=\"position:relative\" class=\"dropdown-menu\">\n" +
+    "                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>tag:</h5></a></li>\n" +
+    "                    <hr class=\"sort-hr\">\n" +
+    "                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>@:</h5></a></li>\n" +
+    "                    <hr class=\"sort-hr\">\n" +
+    "                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>has:</h5></a></li>\n" +
+    "                </ul>\n" +
+    "            </div>\n" +
+    "            -->\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-15\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
     "    <!--TODO: FINALIZE STRUCTURE.. -->\n" +
     "    <div ng-repeat=\"project in projects\">\n" +
     "        <div class=\"card\">\n" +
@@ -2318,10 +2351,9 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function ($te
     "\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<form role=\"form\" >\n" +
-    "			<div class=\"form-group\">\n" +
+    "			<div class=\"card\">\n" +
     "				<input type=\"text\" class=\"form-control\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" placeholder=\"{{searchQuery}}\">\n" +
     "			</div>\n" +
-    "			<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "		</form>\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "\n" +
@@ -2585,9 +2617,20 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "	</div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--TODO: FILTER / SEARCH -->\n" +
+    "<!--\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"spacing-15\"></div>\n" +
+    "    <div class=\"card\">\n" +
+    "        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "-->\n" +
     "\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
     "	<div ng-repeat=\"task in tasks\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
