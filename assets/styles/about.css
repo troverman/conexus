@@ -1,19 +1,21 @@
-
-#logo-container{
-
-}
 #title-container{
-	background-color:rgb(240,240,240);
+	color:white;
+	background-color:black;
 }
 #about-section1{
-	background-color:rgb(230,230,230);
+	background-color:white
 }
 #about-section2{
-	background-color:rgb(240,240,240);
+	color:white;
+	background-color:black;
 }
 #about-section3{
-	background-color:rgb(230,230,230);
+	color:white;
+	background-color:black;
 }
 #about-section4{
-	background-color:rgb(240,240,240);
+	background-color:white
+}
+#about-section5{
+	background-color:white
 }

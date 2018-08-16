@@ -72,6 +72,20 @@ angular.module( 'conexus.member', [
             }],
         }
     })
+    .state( 'member.ledger', {
+        url: '/ledger',
+        views: {
+            "memberLedger": {
+                controller: 'MemberLedgerCtrl',
+                templateUrl: 'member/templates/ledger.tpl.html'
+            }
+        },
+        resolve: {
+            member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
+                return UserModel.getByUsername($stateParams.path);
+            }]
+        }
+    })
     .state( 'member.positions', {
         url: '/positions',
         views: {
@@ -87,20 +101,6 @@ angular.module( 'conexus.member', [
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }],
-        }
-    })
-    .state( 'member.wallet', {
-        url: '/wallet',
-        views: {
-            "memberWallet": {
-                controller: 'MemberWalletCtrl',
-                templateUrl: 'member/templates/wallet.tpl.html'
-            }
-        },
-        resolve: {
-            member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
-                return UserModel.getByUsername($stateParams.path);
-            }]
         }
     })
 }])
@@ -234,89 +234,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
-    $scope.currentUser = config.currentUser;
-    $scope.member = member;
-    $scope.orders = orders;
-    $scope.orders.forEach(function(part, index) {
-        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
-        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
-        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
-        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
-    });
-    titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
-    
-    $scope.newOrderToggle = function(){
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
-    };
-
-    $scope.createOrder = function() {
-        $scope.newOrder.user = $scope.currentUser.id;
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-        OrderModel.create($scope.newOrder).then(function(model) {
-            //$scope.orders.push($scope.newOrder);
-            $scope.newOrder = {};
-        });
-    };
-
-    $scope.chart = {
-        chart: {polar: true},
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values1',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.2, 0.1, 0.2, 0.1, 0.1],
-            color: 'rgba(0,0,153,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values2',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.1, 0.1, 0.3, 0.2, 0.25, 0.05],
-            color: 'rgba(0,153,0,0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security'],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {
-            enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
-        },
-        tooltip: {
-        //    shared: true,
-        },
-        credits:{enabled:false},
-    };
-
-}])
-
-.controller( 'MemberWalletCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', function MemberWalletController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService) {
+.controller( 'MemberLedgerCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', function MemberLedgerController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Wallet | CRE8.XYZ');
@@ -420,5 +338,86 @@ angular.module( 'conexus.member', [
         });
     };
 
-}]);
+}])
 
+.controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
+    $scope.currentUser = config.currentUser;
+    $scope.member = member;
+    $scope.orders = orders;
+    $scope.orders.forEach(function(part, index) {
+        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
+        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
+        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
+        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
+    });
+    titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
+    
+    $scope.newOrderToggle = function(){
+        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    };
+
+    $scope.createOrder = function() {
+        $scope.newOrder.user = $scope.currentUser.id;
+        //TODO: PARSE INPUT
+        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+        OrderModel.create($scope.newOrder).then(function(model) {
+            //$scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
+    };
+
+    $scope.chart = {
+        chart: {polar: true},
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
+            color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values1',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.2, 0.1, 0.2, 0.1, 0.1],
+            color: 'rgba(0,0,153,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values2',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.1, 0.1, 0.3, 0.2, 0.25, 0.05],
+            color: 'rgba(0,153,0,0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: false,
+            //align: 'right',
+            //verticalAlign: 'top',
+            //y: 70,
+            //layout: 'vertical'
+        },
+        tooltip: {
+        //    shared: true,
+        },
+        credits:{enabled:false},
+    };
+
+}]);

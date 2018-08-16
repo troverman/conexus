@@ -58,11 +58,10 @@
 					<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
 					<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
 					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Projects</a></li>-->
-					<li><a href="member/{{member.username}}/wallet">Ledger</a></li>
+					<li><a href="member/{{member.username}}/ledger">Ledger</a></li>
 					<!--<li><a href="member/{{member.username}}">Map</a></li>-->
 					<li><a href="member/{{member.username}}/positions">Positions</a></li>
-					<!--<li><a href="member/{{member.username}}">Time</a></li>-->
-					<!--<li><a href="member/{{member.username}}/wallet">Wallet</a></li>-->
+					<li><a href="member/{{member.username}}">Time</a></li>
 					<li ng-show="currentUser.id != member.id">
 						<a class="btn btn-default" ng-click="follow()">Follow</a>
 						<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
@@ -100,8 +99,8 @@
 		<div ui-view="memberActivity"></div>
 		<div ui-view="memberFollowers"></div>
 		<div ui-view="memberFollowing"></div>
+		<div ui-view="memberLedger"></div>
 		<div ui-view="memberPositions"></div>
-		<div ui-view="memberWallet"></div>
 	</div>
 	<div class="spacing-50"></div>
 </div>
