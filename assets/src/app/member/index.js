@@ -89,7 +89,7 @@ angular.module( 'conexus.member', [
     .state( 'member.positions', {
         url: '/positions',
         views: {
-            "memberWallet": {
+            "memberPositions": {
                 controller: 'MemberPositionsCtrl',
                 templateUrl: 'member/templates/positions.tpl.html'
             }

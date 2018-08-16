@@ -1331,12 +1331,12 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
-    "<br>\n" +
+    "<div class=\"spacing-5\"></div>\n" +
     "<h1>Create Your Value Map</h1>\n" +
     "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
-    "<br><br>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "<highchart config=\"chart\"></highchart>\n" +
-    "<br><br>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
     "<md-card ng-show=\"newOrderToggleVar\">\n" +
