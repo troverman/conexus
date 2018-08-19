@@ -43,17 +43,18 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				/*User.find({id:to}).then(function(userModel){
-					if (userModel.length == 0){
-						Project.find({id:to}).then(function(userModel){
 
-						});
-					}
-					else{
 
-					}
-				});*/
-				res.json(models);
+				//Project.find({id:to})
+
+				//User.find({id:to})
+
+				//Project.find({id:from})
+
+				//User.find({id:from})
+
+
+				res.json(models)
 			});
 		}
 

@@ -1,6 +1,7 @@
 <div class="spacing-5"></div>
 <h1>Create Your Value Map</h1>
 <h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
+<p>Browse.., Discover..</p>
 <div class="spacing-10"></div>
 <highchart config="chart"></highchart>
 <div class="spacing-10"></div>
@@ -9,16 +10,16 @@
 <md-card ng-show="newOrderToggleVar">
     <div style="padding:10px;">
 		<form role="form" ng-submit="createOrder()">
-			<div class="form-group">
-				<input placeholder="Order Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
+			<div class="form-group col-sm-6">
+				<input placeholder="Order Asset Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
 			</div>
-			<div class="form-group">
+			<div class="form-group col-sm-6">
 				<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
 			</div>
-			<div class="form-group">
-				<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
+			<div class="form-group col-sm-6">
+				<input placeholder="Order Asset Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
 			</div>
-			<div class="form-group">
+			<div class="form-group col-sm-6">
 				<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
 			</div>
 			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>

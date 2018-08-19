@@ -15,7 +15,7 @@ angular.module( 'conexus', [
     'highcharts-ng',
     'conexus.about',
     'conexus.account',
-    'conexus.connect',
+    'conexus.discover',
     'conexus.footer',
     'conexus.market',
     'conexus.markets',

@@ -30,7 +30,10 @@ angular.module( 'conexus.task', [
     $scope.newPost = {};
     $scope.newReaction = {};
     $scope.posts = posts;
+    $scope.question = false;
     $scope.reputationMultiplier = 1;
+    $scope.streaming = false;
+    $scope.streamUrl = 'https://www.cre8bid.io/v/597c55e56833048165c6720c';
     $scope.task = task;
     $scope.task.verificationScore = 0;
     $scope.taskTime = 0;
@@ -39,6 +42,13 @@ angular.module( 'conexus.task', [
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.verification = {};
     $scope.work = work;
+
+    $scope.askQuestion = function() {
+        if ($scope.currentUser){
+            $scope.question = true;
+        }
+        else{$location.path('/login')}
+    };
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){
@@ -82,12 +92,24 @@ angular.module( 'conexus.task', [
         }
     };
 
+    $scope.renderStream = function(stream){
+        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+        return $sce.trustAsHtml(html);
+    };
+
     $scope.reply = function(post){
         var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
         $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
-    $scope.start = function() {
+    $scope.startStreaming = function() {
+        if ($scope.currentUser){
+            $scope.streaming = true;
+        }
+        else{$location.path('/login')}
+    }
+
+    $scope.startWork = function() {
         if ($scope.currentUser){
             if($scope.working === true) return false;
             $scope.working = true;
@@ -95,6 +117,8 @@ angular.module( 'conexus.task', [
         }
         else{$location.path('/login')}
     };
+
+
 
     $scope.submit = function() {
         if($scope.working === false) return false;
@@ -106,6 +130,7 @@ angular.module( 'conexus.task', [
             project: $scope.task.project,
             task: $scope.task.id,
             user: $scope.currentUser.id,
+            stream: $scope.streamUrl,
             verificationScore: 0
         };
         WorkModel.create(workModel).then(function(model){
@@ -190,6 +215,14 @@ angular.module( 'conexus.task', [
         switch(envelope.verb) {
             case 'created':
                 $scope.posts.unshift(envelope.data);
+                break;
+        }
+    });
+
+    $sailsSocket.subscribe('work', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.work.unshift(envelope.data);
                 break;
         }
     });

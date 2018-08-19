@@ -58,7 +58,7 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			title: req.param('title'),
-			streamUrl: req.param('streamUrl'),
+			stream: req.param('stream'),
 			project: req.param('project'),
 			task: req.param('task'),
 			user: req.param('user')

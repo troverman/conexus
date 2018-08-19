@@ -85,6 +85,7 @@ module.exports = {
 			task: req.param('task'),
 			user: req.param('user'),
 			project: req.param('project'),
+			stream: req.param('stream'),
 			verificationScore: req.param('verificationScore')
 		};
 

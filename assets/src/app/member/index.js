@@ -42,6 +42,29 @@ angular.module( 'conexus.member', [
             }]
         }
     })
+    .state( 'member.content', {
+        url: '/content',
+        views: {
+            "memberContent": {
+                controller: 'MemberContentCtrl',
+                templateUrl: 'member/templates/content.tpl.html'
+            }
+        },
+        resolve: {
+            //TODO: REFACTOR
+            posts: ['member', 'PostModel', function(member, PostModel) {
+                return PostModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+            }],
+            videos: ['member', function(member) {
+                return [
+                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()},
+                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()},
+                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()},
+                    {title:'Task 597c55e56833048165c6720c Stream 3',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()}
+                ];
+            }],
+        }
+    })
     .state( 'member.followers', {
         url: '/followers',
         views: {
@@ -83,7 +106,13 @@ angular.module( 'conexus.member', [
         resolve: {
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
-            }]
+            }],
+            transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
+                return TransactionModel.getSome('from', member.id, 100, 0, 'createdAt DESC');
+            }],
+            transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
+                return TransactionModel.getSome('to', member.id, 100, 0, 'createdAt DESC');
+            }],
         }
     })
     .state( 'member.positions', {
@@ -105,19 +134,27 @@ angular.module( 'conexus.member', [
     })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, seoService, titleService) {
+.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
 	$scope.currentUser = config.currentUser;
-    
     //TODO: PART OF MEMBER
     $scope.followersCount = followersCount;
     $scope.followingCount = followingCount;
     $scope.newFollower = {};
+    $scope.newTransactionToggleVar = false;
+    $scope.newTransaction = {};
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
 
     //TODO: seoService
 
     if(!$scope.member){$location.path('/')}
+
+    $scope.createTransaction = function(){
+        $scope.newTransaction.to = $scope.member.id;
+        TransactionModel.create($scope.newTransaction).then(function(model){
+            $scope.newTransaction = {};
+        });
+    };
 
     $scope.follow = function() {
         $scope.newFollower.followed = $scope.member.id;
@@ -130,6 +167,11 @@ angular.module( 'conexus.member', [
     $scope.unfollow = function(member) {
         FollowerModel.delete(member);
     };
+
+    $scope.newTransactionToggle = function() {
+        $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
+    }
+
 
     //TODO: SOCKET | WEB3
     /*
@@ -193,6 +235,17 @@ angular.module( 'conexus.member', [
 
 }])
 
+.controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', 'videos', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService, videos) {
+    $scope.currentUser = config.currentUser;
+    titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
+    $scope.posts = posts;
+    $scope.videos = videos;
+    $scope.renderMessage = function(stream){
+        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+        return $sce.trustAsHtml(html);
+    };
+}])
+
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {
     $scope.currentUser = config.currentUser;
     titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
@@ -234,15 +287,20 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberLedgerCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', function MemberLedgerController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService) {
+.controller( 'MemberLedgerCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
-    titleService.setTitle($scope.member.username + ' | Wallet | CRE8.XYZ');
+    titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
-    $scope.transactions= [];
-    for (var i=0, t=88; i<t; i++) {
-        $scope.transactions.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
-        $scope.transactions.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
+    $scope.transactionsFrom = transactionsFrom;
+    $scope.transactionsTo = transactionsTo;
+    $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+
+    if ($scope.transactions.length == 0){
+        for (var i=0, t=88; i<t; i++) {
+            $scope.transactions.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
+            $scope.transactions.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
+        }
     }
 
     //TODO: BACKEND WRT FROM AND TO

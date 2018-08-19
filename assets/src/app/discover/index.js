@@ -1,13 +1,13 @@
-angular.module( 'conexus.connect', [
+angular.module( 'conexus.discover', [
 ])
 
 .config(['$stateProvider', 'uiGmapGoogleMapApiProvider', function config( $stateProvider, uiGmapGoogleMapApiProvider ) {
-	$stateProvider.state( 'connect', {
-		url: '/connect',
+	$stateProvider.state( 'discover', {
+		url: '/discover',
 		views: {
 			"main": {
 				controller: 'DiscoverCtrl',
-				templateUrl: 'connect/index.tpl.html'
+				templateUrl: 'discover/index.tpl.html'
 			}
 		},
         resolve: {

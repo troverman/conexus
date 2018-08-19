@@ -20,24 +20,24 @@
 <button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
 <md-card ng-show="newTransactionToggleVar">
     <div style="padding:10px;">
-		<form role="form" ng-submit="createTransaction(newTransaction)">
-			<div class="form-group">
-				<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
+		<form role="form" ng-submit="createTransaction()">
+			<div class="form-group col-sm-6">
 				<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
 			</div>
-			<div class="form-group">
-				<input placeholder="Ledger" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+			<div class="form-group col-sm-6">
+				<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
 			</div>
-			<div class="form-group">
-				<input placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle">
+			<div class="form-group col-sm-6">
+				<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group col-sm-6">
+				<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group col-sm-12">
+				<input placeholder="Tags" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+			</div>
+			<div class="form-group col-sm-12">
+				<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
 			</div>
 			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
 		</form>
@@ -58,8 +58,8 @@
     </thead>
     <tbody>
 		<tr ng-repeat="transaction in transactions">
-			<td>{{transaction.to}}</td>
-			<td>{{transaction.from}}</td>
+			<td><a href="member/{{transaction.to}}">{{transaction.to}}</a></td>
+			<td><a href="member/{{transaction.from}}">{{transaction.from}}</a></td>
 			<td><a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></td>
 			<td>{{transaction.amount}}</td>
 			<td>{{transaction.ledger}}</td>

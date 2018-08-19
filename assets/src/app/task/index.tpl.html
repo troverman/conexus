@@ -55,20 +55,52 @@
 
     </div>
 
-    <div class="spacing-15"></div>
+    <div class="spacing-10"></div>
 
-
+    <!--TODO: STREAM-->
     <div>
-        <h3>{{taskTime}}</h3>
-        <!--<p>{{(taskTime / totalTime)*task.timeBountySet}}></p>-->
-        <button ng-show="!working" type="submit" class="btn btn-default log-btn" ng-click="start()">Start Work</button>
-        <input ng-show="working" type="text" placeholder="Content" ng-model="workContent" class="form-control">
-        <!--<button ng-show="working" type="submit" class="btn btn-default log-btn" ng-click="start()">Start Stream</button>-->
-        <button ng-show="working" style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
+
+        <div ng-show="!working">
+            <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Start Work</button>
+
+            <div ng-show="question && !streaming">
+                <h3>Streaming?</h3>
+                <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
+                <div class="spacing-5"></div>
+                <button type="submit" class="btn btn-default log-btn" ng-click="startWork()">No</button>
+            </div>
+
+            <div ng-show="streaming">
+                <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
+                <!--<input type="text" placeholder="IFPS SECRET" ng-model="workContent" class="form-control">
+                <input type="text" placeholder="IFPS KEY" ng-model="workContent" class="form-control">-->
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="startWork()">Start Stream</button>
+            </div>
+
+        </div>
+
+        <div ng-show="working">
+                <h3>{{taskTime}}</h3>
+                <div ng-show="!streaming">
+                    <!--<input type="text" placeholder="Link" ng-model="workContent" class="form-control">
+                    <input type="text" placeholder="IFPS SECRET" ng-model="workContent" class="form-control">
+                    <input type="text" placeholder="IFPS KEY" ng-model="workContent" class="form-control">
+                    <button style="width:100%;" class="btn btn-default log-btn" ng-click="startStream()">Start Stream</button>-->
+                </div>
+                <div ng-show="streaming"> 
+                    <div ng-bind-html="renderStream(streamUrl)">></div>
+                </div>
+                <div class="spacing-5"></div>
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
+                <input type="text" placeholder="Content" ng-model="workContent" class="form-control">
+
+        </div>
     </div>
 
     <div class="spacing-15"></div>
 
+
+    <!--TODO CARD VS TABLE-->
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -86,7 +118,7 @@
                 <td><a href="work/{{item.id}}">{{item.amount}}</a></td>
                 <td>{{item.content || 'N/A'}}</td>
                 <td><a href="member/{{item.user.username}}">{{item.user.username}}</a></td>
-                <td><a href="stream/{{item.stream || '1'}}">{{item.stream || 'Not Available'}}</a></td>
+                <td style="max-width:50px"><a href="stream/{{item.stream || 'example'}}">{{item.stream || 'Not Available'}}</a></td>
                 <td><span am-time-ago="item.createdAt"></span></td>
                 <td>{{item.verificationScore}}</td>
                 <td><button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification(item)">verify</button></td>
