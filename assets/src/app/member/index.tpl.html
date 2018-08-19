@@ -46,8 +46,9 @@
 
 <div ui-view="member">
 	<div class="profile-header">
-		<div style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
-			<img ng-src="{{member.coverUrl}}" err-src="/images/avatar.png" />
+		<div style="background-image: url('{{member.coverUrl}}')">
+			<div class="spacing-100"></div>
+			<!--<img ng-src="{{member.coverUrl}}" err-src="/images/avatar.png" />-->
 		</div>
 		<div class="container">
 			<div class="pull-left"><img class="avatar" ng-src="{{member.avatarUrl}}"/></div>

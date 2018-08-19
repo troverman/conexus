@@ -60,19 +60,13 @@
 	<h1>Members</h1>
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
 		<div class="member-card">
-		    <div class="member-card-image" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
+		    <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
 		        <a href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
 		    <div class="member-card-info">
 		        <h4><a href="member/{{member.username}}">{{member.username}}</a></h4>
-		        <p style="color:gray">{{member.status}} live | online | working</p>
+		        <p style="color:gray">{{member.status}} offline</p>
 		        <p style="color:gray">total reputation | {{member.totalWork}}</p>
-		        <p style="color:gray">dimensional | 888</p>
-		    </div>
-		    <div class="member-card-social">
-		        <a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
-		        <a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
-		        <a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
 		    </div>
 		</div>
 	</div>

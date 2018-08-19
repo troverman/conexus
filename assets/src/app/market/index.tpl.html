@@ -3,9 +3,17 @@
 <div class="container">
 	<div class="spacing-25"></div>
 	<h1>{{stateParams.id}} MARKETS</h1>
-	<p>token info | n markets | n tokens in circulation </p>
+	<p>{{stateParams.id}} | 12 markets | 88123 tokens in circulation </p>
 	<div class="spacing-25"></div>
 	<h2>Markets</h2>
+	<!--TODO: FILTER / SEARCH -->
+    <div class="spacing-5"></div>
+    <div class="card">
+        <form style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+        </form>
+    </div>
+    <div class="spacing-15"></div>
 	<table class="table table-inverse table-hover">
 	    <thead>
 			<tr>

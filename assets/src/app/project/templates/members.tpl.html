@@ -3,12 +3,12 @@
 <br><br>
 <div class="col-lg-4 col-sm-6" ng-repeat="member in members">
 	<div class="member-card">
-	    <div class="member-card-image" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">
+	    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 	        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
 	    </div>
 	    <div class="member-card-info">
 	        <h4><a href="member/{{member.user.username}}">{{member.user.username}}</a></h4>
-	        <p style="color:gray">{{member.status}} live | online | working</p>
+	        <p style="color:gray">{{member.status}} offline</p>
 	        <p style="color:gray">total reputation | {{member.user.totalWork}}</p>
 	        <p style="color:gray">dimensional | 888</p>
 	    </div>

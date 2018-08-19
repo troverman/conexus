@@ -132,12 +132,12 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "	<div class=\"row\">\n" +
     "		<div class=\"col-md-4\">\n" +
     "			<div class=\"member-card\">\n" +
-    "			    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "			    <div class=\"member-card-image\" style=\"background-image: url('{{member.avatarUrl}}'')\">\n" +
     "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "			    </div>\n" +
     "			    <div class=\"member-card-info\">\n" +
     "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
-    "			        <p style=\"color:gray\">{{currentUser.status}} live | online | working</p>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
     "			        <p style=\"color:gray\">total reputation | {{currentUser.totalWork}}</p>\n" +
     "			    </div>\n" +
     "			    <div class=\"member-card-social\">\n" +
@@ -256,19 +256,13 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "	<h1>Members</h1>\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
     "		<div class=\"member-card\">\n" +
-    "		    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
     "		        <a href=\"member/{{member.username}}\"><img ng-src=\"{{member.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		    </div>\n" +
     "		    <div class=\"member-card-info\">\n" +
     "		        <h4><a href=\"member/{{member.username}}\">{{member.username}}</a></h4>\n" +
-    "		        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "		        <p style=\"color:gray\">{{member.status}} offline</p>\n" +
     "		        <p style=\"color:gray\">total reputation | {{member.totalWork}}</p>\n" +
-    "		        <p style=\"color:gray\">dimensional | 888</p>\n" +
-    "		    </div>\n" +
-    "		    <div class=\"member-card-social\">\n" +
-    "		        <a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
-    "		        <a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
-    "		        <a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -797,9 +791,17 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<h1>{{stateParams.id}} MARKETS</h1>\n" +
-    "	<p>token info | n markets | n tokens in circulation </p>\n" +
+    "	<p>{{stateParams.id}} | 12 markets | 88123 tokens in circulation </p>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "	<h2>Markets</h2>\n" +
+    "	<!--TODO: FILTER / SEARCH -->\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
+    "    <div class=\"card\">\n" +
+    "        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-15\"></div>\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
     "			<tr>\n" +
@@ -1207,8 +1209,9 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "\n" +
     "<div ui-view=\"member\">\n" +
     "	<div class=\"profile-header\">\n" +
-    "		<div style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
-    "			<img ng-src=\"{{member.coverUrl}}\" err-src=\"/images/avatar.png\" />\n" +
+    "		<div style=\"background-image: url('{{member.coverUrl}}')\">\n" +
+    "			<div class=\"spacing-100\"></div>\n" +
+    "			<!--<img ng-src=\"{{member.coverUrl}}\" err-src=\"/images/avatar.png\" />-->\n" +
     "		</div>\n" +
     "		<div class=\"container\">\n" +
     "			<div class=\"pull-left\"><img class=\"avatar\" ng-src=\"{{member.avatarUrl}}\"/></div>\n" +
@@ -1441,12 +1444,12 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
   $templateCache.put("member/templates/followers.tpl.html",
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
     "	<div class=\"member-card\">\n" +
-    "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
     "	        <a href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "	    </div>\n" +
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">{{member.status}} offline</p>\n" +
     "	        <p style=\"color:gray\">total reputation | {{member.follower.totalWork}}</p>\n" +
     "	    </div>\n" +
     "	    <div class=\"member-card-social\">\n" +
@@ -1463,18 +1466,13 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
   $templateCache.put("member/templates/following.tpl.html",
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
     "	<div class=\"member-card\">\n" +
-    "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.followed.coverUrl}}')\">\n" +
     "	        <a href=\"member/{{member.followed.username}}\"><img ng-src=\"{{member.followed.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "	    </div>\n" +
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.followed.username}}\">{{member.followed.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.followed.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">{{member.followed.status}} offline</p>\n" +
     "	        <p style=\"color:gray\">total reputation | {{member.followed.totalWork}}</p>\n" +
-    "	    </div>\n" +
-    "	    <div class=\"member-card-social\">\n" +
-    "	        <a ng-show=\"member.followed.socialAccounts.facebook.profileUrl\" href=\"{{member.followed.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
-    "	        <a ng-show=\"member.followed.socialAccounts.twitter.profileUrl\" href=\"{{member.followed.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
-    "	        <a ng-show=\"member.followed.socialAccounts.google.profileUrl\" href=\"{{member.followed.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "</div>");
@@ -1485,10 +1483,8 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "	<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
     "	<li><a href=\"\">Assets</a></li>\n" +
-    "	<li><a href=\"\">Expenses</a></li>\n" +
-    "	<li><a href=\"\">Liabilities</a></li>\n" +
-    "	<li><a href=\"\">Revenue</a></li>\n" +
     "	<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "	<li><a href=\"\">Transactions</a></li>\n" +
     "</ul>\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -1663,17 +1659,18 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "    \n" +
-    "    <div>\n" +
-    "    	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
-    "        <div class=\"spacing-10\"></div>\n" +
-    "        \n" +
-    "    	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
-    "    	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
-    "    	<a href=\"member/{{order.user.username}}\">\n" +
-    "            <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
-    "            {{order.user.username}}\n" +
-    "        </a>\n" +
-    "    	<h4>onBooks | Filled | Date</h4>\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "        	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "        	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
+    "        	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
+    "        	<a href=\"member/{{order.user.username}}\">\n" +
+    "                <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "                {{order.user.username}}\n" +
+    "            </a>\n" +
+    "        	<h4>onBooks | Filled | Date</h4>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "\n" +
     "	<div class=\"spacing-15\"></div>\n" +
@@ -2177,12 +2174,12 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "<br><br>\n" +
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
     "	<div class=\"member-card\">\n" +
-    "	    <div class=\"member-card-image\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">\n" +
+    "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
     "	        <a href=\"member/{{member.user.username}}\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "	    </div>\n" +
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.status}} live | online | working</p>\n" +
+    "	        <p style=\"color:gray\">{{member.status}} offline</p>\n" +
     "	        <p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
     "	        <p style=\"color:gray\">dimensional | 888</p>\n" +
     "	    </div>\n" +
@@ -2746,7 +2743,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "    <!--TODO: STREAM-->\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"\">\n" +
+    "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div ng-show=\"!working\">\n" +
     "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Start Work</button>\n" +
@@ -2790,8 +2787,8 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "    <!--TODO CARD VS TABLE-->\n" +
-    "    <div class=\"\">\n" +
-    "        <div class=\"\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <table class=\"table table-striped table-hover\">\n" +
     "                    <thead>\n" +

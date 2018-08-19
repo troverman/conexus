@@ -1,3 +1,5 @@
+var request = require('request');
+
 module.exports = {
     attributes: {
         avatarUrl: {
@@ -32,7 +34,7 @@ module.exports = {
         },
     },
 
-    afterCreate: function(model,next){
+    afterCreate: function(model, next){
 
         //var coverUrlArray = ['images/congress.jpg', 'images/congress1.jpg', 'images/crowd.jpg', 'images/capitol.jpg', 'images/capitol1.jpg', 'images/bokeh.jpg', 'images/metro.jpg', 'images/natural.jpg' ,'images/nature.jpg'];
         //var randInt = Math.floor(Math.random() * (coverUrlArray.length + 1));
@@ -43,12 +45,17 @@ module.exports = {
         var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[colorInt];
         model.avatarUrl = avatarUrl;
 
-        User.update({id: model.id}, model)
-        .then(function(model){
-            //emailService.sendTemplate('welcome', model.email, 'Welcome To Voetr!', {username: model.username});
-            return next(null, model);
+        var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
+        request(url, function (error, response, body) {
+            var body = JSON.parse(body);
+            if (body.urls){model.coverUrl = body.urls.full;}
+            User.update({id: model.id}, model)
+            .then(function(model){
+                //emailService.sendTemplate('welcome', model.email, 'Welcome To Voetr!', {username: model.username});
+                return next(null, model);
+            });
         });
-            
+        
     },
     
 };

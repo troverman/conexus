@@ -1,17 +1,18 @@
 <div class="container">
 	<div class="spacing-15"></div>
     
-    <div>
-    	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
-        <div class="spacing-10"></div>
-        
-    	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
-    	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
-    	<a href="member/{{order.user.username}}">
-            <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
-            {{order.user.username}}
-        </a>
-    	<h4>onBooks | Filled | Date</h4>
+    <div class="card">
+        <div style="padding:16px">
+        	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
+            <div class="spacing-10"></div>
+        	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
+        	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
+        	<a href="member/{{order.user.username}}">
+                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                {{order.user.username}}
+            </a>
+        	<h4>onBooks | Filled | Date</h4>
+        </div>
     </div>
 
 	<div class="spacing-15"></div>
