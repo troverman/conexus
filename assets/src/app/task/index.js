@@ -122,7 +122,7 @@ angular.module( 'conexus.task', [
 
     $scope.submit = function() {
         if($scope.working === false) return false;
-        $scope.working = false;
+        $scope.working = false; $scope.question = false; $scope.streaming = false;
         var workModel = {
             amount: $scope.taskTime,
             content: $scope.workContent,

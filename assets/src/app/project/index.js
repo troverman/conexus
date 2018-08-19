@@ -111,10 +111,10 @@ angular.module( 'conexus.project', [
                 return TransactionModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
             }],
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
             }],
         }
     })
@@ -425,18 +425,20 @@ angular.module( 'conexus.project', [
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
 
-    $scope.transactions = transactions;
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
+    $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
 
     //TODO: TO FROM ISH | TO; FROM DECIDEDS LEDGER
     if ($scope.transactions.length == 0){
         for (var i=0, t=88; i<t; i++) {
-            $scope.transactions.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
-            $scope.transactions.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
+            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
+            $scope.transactionsTo.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
         }
+        $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     }
-    console.log($scope.transactions)
+
+
     $scope.newTransactionToggle = function(){
         $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
     };
@@ -455,16 +457,14 @@ angular.module( 'conexus.project', [
         return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
     }, 0);
 
-    $scope.sumExpense = [];
-    $scope.transactions.reduce(function(a,b,i) {
-        if (b.ledger == 'EXPENSE'){return $scope.sumExpense[i] = parseFloat(a)+parseFloat(b.amount);}
-        else{return $scope.sumExpense[i] = parseFloat(a)}
+    $scope.sumFrom = [];
+    $scope.transactionsFrom.reduce(function(a,b,i) {
+        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
     }, 0);
 
-    $scope.sumRevenue = [];
-    $scope.transactions.reduce(function(a,b,i) {
-        if (b.ledger == 'REVENUE'){return $scope.sumRevenue[i] = parseFloat(a)+parseFloat(b.amount);}
-        else{return $scope.sumRevenue[i] = parseFloat(a)}
+    $scope.sumTo = [];
+    $scope.transactionsTo.reduce(function(a,b,i) {
+        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);;
     }, 0);
 
     $scope.chart = {
@@ -475,12 +475,12 @@ angular.module( 'conexus.project', [
             id: 'Expense',
             type: 'spline',
             name: 'Expense',
-            data: $scope.sumExpense,
+            data: $scope.sumFrom,
         },{
             id: 'Revenue',
             type: 'spline',
             name: 'Revenue',
-            data: $scope.sumRevenue,
+            data: $scope.sumTo,
         }],
         title: {
             text: ''
@@ -507,10 +507,10 @@ angular.module( 'conexus.project', [
             colorByPoint: true,
             data: [{
                 name: 'Expense',
-                y: $scope.sumExpense[$scope.sumExpense.length-1],
+                y: $scope.sumFrom[$scope.sumFrom.length-1],
             }, {
                 name: 'Revenue',
-                y: $scope.sumRevenue[$scope.sumRevenue.length-1],
+                y: $scope.sumTo[$scope.sumTo.length-1],
             }]
         }],
         

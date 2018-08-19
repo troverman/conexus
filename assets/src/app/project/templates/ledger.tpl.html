@@ -34,23 +34,23 @@
 	<div class="card" ng-show="newTransactionToggleVar">
 	    <div style="padding:10px;">
 			<form role="form" ng-submit="createTransaction(newTransaction)">
-				<div class="form-group">
+				<div class="form-group col-sm-6">
 					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
 				</div>
-				<div class="form-group">
+				<div class="form-group col-sm-6">
 					<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
 				</div>
-				<div class="form-group">
+				<div class="form-group col-sm-6">
 					<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
 				</div>
-				<div class="form-group">
+				<div class="form-group col-sm-6">
 					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
 				</div>
-				<div class="form-group">
-					<input placeholder="Ledger" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+				<div class="form-group col-sm-12">
+					<input placeholder="Tags" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
 				</div>
-				<div class="form-group">
-					<input placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle">
+				<div class="form-group col-sm-12">
+					<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
 				</div>
 				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
 			</form>

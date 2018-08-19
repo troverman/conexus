@@ -2116,23 +2116,23 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
     "	    <div style=\"padding:10px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
-    "				<div class=\"form-group\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<div class=\"form-group\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<div class=\"form-group\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<div class=\"form-group\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Ledger\" type=\"text\" ng-model=\"newTransaction.ledger\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<div class=\"form-group col-sm-12\">\n" +
+    "					<input placeholder=\"Tags\" type=\"text\" ng-model=\"newTransaction.ledger\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
-    "				<div class=\"form-group\">\n" +
-    "					<input placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<div class=\"form-group col-sm-12\">\n" +
+    "					<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
     "				</div>\n" +
     "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
     "			</form>\n" +
