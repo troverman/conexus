@@ -1,4 +1,4 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'discover/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/content.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/ledger.tpl.html', 'member/templates/positions.tpl.html', 'nav/index.tpl.html', 'order/index.tpl.html', 'post/index.tpl.html', 'post/post.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/charter.tpl.html', 'project/templates/ledger.tpl.html', 'project/templates/members.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/streams.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
+angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'discover/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/content.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/ledger.tpl.html', 'member/templates/positions.tpl.html', 'nav/index.tpl.html', 'order/index.tpl.html', 'post/index.tpl.html', 'post/post.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/charter.tpl.html', 'project/templates/content.tpl.html', 'project/templates/ledger.tpl.html', 'project/templates/members.tpl.html', 'project/templates/positions.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -21,11 +21,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3>Discover a transparent, creative, and collaborative network</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">connect with new collaborators and create awesome things</p>\n" +
+    "				<h3>Discover a Transparent, Creative, and Collaborative Network</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and create awesome things</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
-    "				<h4>create the next wave</h4>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">a 24/7 continual hackathon</p>\n" +
+    "				<h4>Create the Next Wave</h4>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A 24/7 continual hackathon</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/connect\">Discover</a>\n" +
     "				<div class=\"spacing-50\"></div>\n" +
@@ -43,7 +43,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h2>Governance of Collaborators</h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">reputation protocols | working together toward a common goal</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Protocols | Working together toward a common goal</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -56,9 +56,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "			<!--<div class=\"col-md-6\"></div>-->\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h2>MultiDimensional Token Market</h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">turn your creative effort into dimensional tokens with market liquidity</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">create dimensional liquidity for transparent and reputationally validated work</p> \n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">create dimensional liquidity, build the value matrix, manifest pluralism, put your money where your mouth is</p> \n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create dimensional liquidity for transparent and reputationally validated work</p> \n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -70,10 +69,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h3>Transparency</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">transparent contributions and equitable representation</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">reputation systems and task verification</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">open finance and contribution</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">tokenized & market liquid organizational actions</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Systems and Task Verification</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Finance and Contribution</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
@@ -1416,7 +1415,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "\n" +
     "<!--POST MODEL | CONTENT TYPE -->\n" +
     "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
-    "<div ng-show=\"true\" class=\"\">\n" +
+    "<div ng-show=\"false\" class=\"\">\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		<li class=\"active\"><a href=\"\">Files</a></li>\n" +
     "		<li class=\"active\"><a href=\"\">Posts</a></li>\n" +
@@ -1429,7 +1428,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "	    <div style=\"padding:16px;\">\n" +
     "			<div ng-bind-html=\"renderMessage(video.streamUrl)\">></div>\n" +
     "			<h3><a href=\"stream/{{video.title}}\">{{video.title}}</a></h3>\n" +
-    "			<p><a href=\"member/{{video.user}}\">\n" +
+    "			<p><a style=\"font-weight:700\"  href=\"member/{{video.user}}\">\n" +
     "				<img class=\"card-avatar\" ng-src=\"{{video.user.avatarUrl}}\" src=\"{{video.user.avatarUrl}}\">\n" +
     "				{{video.user.username}}\n" +
     "			</a> | <span am-time-ago=\"video.createdAt\"></span></p>\n" +
@@ -1819,7 +1818,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
     "		<!--<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
     "        <li><a href=\"/project/{{project.urlTitle}}/charter\">Charter</a></li>-->\n" +
-    "        <li><a href=\"/project/{{project.urlTitle}}/streams\">Content</a></li>\n" +
+    "        <li><a href=\"/project/{{project.urlTitle}}/content\">Content</a></li>\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
     "        <!--<li><a href=\"/project/{{project.urlTitle}}\">Map</a></li>-->\n" +
     "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
@@ -1840,10 +1839,13 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "<div class=\"project-container container\">\n" +
     "    <div ui-view=\"activity\"></div>\n" +
     "    <div ui-view=\"channels\"></div>\n" +
+    "    <div ui-view=\"content\"></div>\n" +
+    "    <div ui-view=\"charter\"></div>\n" +
     "    <div ui-view=\"ledger\"></div>\n" +
     "    <div ui-view=\"members\"></div>\n" +
+    "    <div ui-view=\"positions\"></div>\n" +
+    "    <div ui-view=\"projects\"></div>\n" +
     "    <div ui-view=\"tasks\"></div>\n" +
-    "    <div ui-view=\"streams\"></div>\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "<div ng-include=\"'footer/index.tpl.html'\"></div>");
@@ -2023,6 +2025,62 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "");
 }]);
 
+angular.module("project/templates/content.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("project/templates/content.tpl.html",
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"false\">\n" +
+    "    <div class=\"col-xs-12\">\n" +
+    "    	<!-- POST WITH ATTACHMENT -->\n" +
+    "    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ Content</button><br><br>\n" +
+    "        <div ng-show=\"newProjectToggleVar\">\n" +
+    "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input type=\"text\" placeholder= \"Content Project\" ng-model=\"newContent.project\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder= \"Content Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
+    "                    <input type=\"text\" placeholder= \"Content Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder= \"Content Content\" ng-model=\"newContent.content\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder= \"Content Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"card\">\n" +
+    "    <form style=\"display:flex;flex-direction:row;\">\n" +
+    "        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "    </form>\n" +
+    "</div>\n" +
+    "<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "<!--POST MODEL | CONTENT TYPE -->\n" +
+    "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
+    "<div ng-show=\"false\" class=\"\">\n" +
+    "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "        <li class=\"active\"><a href=\"\">Files</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Posts</a></li>\n" +
+    "        <li><a href=\"\">Videos</a></li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
+    "	<div class=\"card\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
+    "			<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
+    "			<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
+    "			<p><a style=\"font-weight:700\" href=\"member/{{stream.user}}\">\n" +
+    "				<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
+    "				{{stream.user}}\n" +
+    "			</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>");
+}]);
+
 angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/ledger.tpl.html",
     "<br>\n" +
@@ -2030,15 +2088,22 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "	<!--<button class=\"btn btn-default log-btn\" ng-click=\"newLedgerToggle()\">+ LEDGER</button><br><br>-->\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "\n" +
     "		<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
     "		<li><a href=\"\">Assets</a></li>\n" +
+    "		<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
+    "		<li><a href=\"\">Transactions</a></li>\n" +
+    "\n" +
+    "		<!--<li><a href=\"\">Assets</a></li>\n" +
     "		<li><a href=\"\">Expenses</a></li>\n" +
     "		<li><a href=\"\">Liabilities</a></li>\n" +
     "		<li><a href=\"\">Revenue</a></li>\n" +
-    "		<li><a href=\"\">Positions</a></li>\n" +
+    "		<li><a href=\"\">Positions</a></li>-->\n" +
+    "\n" +
     "		<!--<li><a href=\"\">Work</a></li>\n" +
     "		<li><a href=\"\">Property</a></li>\n" +
     "		<li><a href=\"\">Liscense</a></li>-->\n" +
+    "\n" +
     "	</ul>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
@@ -2051,7 +2116,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "	</div>\n" +
     "\n" +
     "	<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
-    "	<md-card ng-show=\"newTransactionToggleVar\">\n" +
+    "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
     "	    <div style=\"padding:10px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
     "				<div class=\"form-group\">\n" +
@@ -2075,7 +2140,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
     "			</form>\n" +
     "		</div>\n" +
-    "	</md-card>\n" +
+    "	</div>\n" +
     "\n" +
     "	<table class=\"table table-inverse table-hover\">\n" +
     "	    <thead>\n" +
@@ -2091,8 +2156,8 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "	    </thead>\n" +
     "	    <tbody>\n" +
     "			<tr ng-repeat=\"transaction in transactions\">\n" +
-    "				<td>{{transaction.to}}</td>\n" +
-    "				<td>{{transaction.from}}</td>\n" +
+    "				<td><a href=\"\">{{transaction.to}}</a></td>\n" +
+    "				<td><a href=\"\">{{transaction.from}}</a></td>\n" +
     "				<td><a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></td>\n" +
     "				<td>{{transaction.amount}}</td>\n" +
     "				<td>{{transaction.ledger}}</td>\n" +
@@ -2128,6 +2193,66 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	    </div>\n" +
     "	</div>\n" +
     "</div>");
+}]);
+
+angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("project/templates/positions.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "<h1>Create Your Value Map</h1>\n" +
+    "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
+    "<p>Browse.., Discover..</p>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "<highchart config=\"chart\"></highchart>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "<md-card ng-show=\"newOrderToggleVar\">\n" +
+    "    <div style=\"padding:10px;\">\n" +
+    "		<form role=\"form\" ng-submit=\"createOrder()\">\n" +
+    "			<div class=\"form-group col-sm-6\">\n" +
+    "				<input placeholder=\"Order Asset Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group col-sm-6\">\n" +
+    "				<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group col-sm-6\">\n" +
+    "				<input placeholder=\"Order Asset Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<div class=\"form-group col-sm-6\">\n" +
+    "				<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "			</div>\n" +
+    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "		</form>\n" +
+    "	</div>\n" +
+    "</md-card>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "<table class=\"table table-inverse table-hover\">\n" +
+    "    <thead>\n" +
+    "		<tr>\n" +
+    "			<th>Asset Set 1</th>\n" +
+    "			<th>Asset Set 2</th>\n" +
+    "			<th>Order Id</th>\n" +
+    "		</tr>\n" +
+    "    </thead>\n" +
+    "    <tbody>\n" +
+    "		<tr ng-repeat=\"order in orders\">\n" +
+    "			<td>\n" +
+    "				<span ng-repeat=\"item in order.amountSet\">\n" +
+    "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "				</span>\n" +
+    "			</td>\n" +
+    "\n" +
+    "			<td>\n" +
+    "				<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "				</span>\n" +
+    "			</td>\n" +
+    "			<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "		</tr>\n" +
+    "    </tbody>\n" +
+    "</table>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "");
 }]);
 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -2175,52 +2300,6 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "					<!--<h4><a href=\"project/{{project.urlTitle}}\">Request | Join</a></h4>-->\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "</div>");
-}]);
-
-angular.module("project/templates/streams.tpl.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("project/templates/streams.tpl.html",
-    "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "<div class=\"row\" ng-show=\"false\">\n" +
-    "    <div class=\"col-xs-12\">\n" +
-    "    	<!-- POST WITH ATTACHMENT -->\n" +
-    "    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ Content</button><br><br>\n" +
-    "        <div ng-show=\"newProjectToggleVar\">\n" +
-    "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                <div class=\"form-group\">\n" +
-    "                    <input type=\"text\" placeholder= \"Content Project\" ng-model=\"newContent.project\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Content Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
-    "                    <input type=\"text\" placeholder= \"Content Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Content Content\" ng-model=\"newContent.content\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Content Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
-    "                </div>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "            </form>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div ng-show=\"false\" class=\"\">\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li class=\"active\"><a href=\"\">Files</a></li>\n" +
-    "		<li><a href=\"\">Videos</a></li>\n" +
-    "	</ul>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
-    "	<div class=\"card\">\n" +
-    "	    <div style=\"padding:16px;\">\n" +
-    "			<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
-    "			<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
-    "			<p><a href=\"member/{{stream.user}}\">\n" +
-    "				<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
-    "				{{stream.user}}\n" +
-    "			</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>");
@@ -2597,60 +2676,70 @@ angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($te
 angular.module("task/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("task/index.tpl.html",
     "<div class=\"container\">\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
-    "    <div>\n" +
-    "        <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
-    "        <div style=\"font-style:italic;color:gray\">\n" +
-    "            <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "            <p>{{task.content}}</p>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div style=\"font-style:italic;color:gray\">\n" +
-    "        <div class=\"spacing-5\"></div>\n" +
-    "        <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>\n" +
-    "        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'plus')\">+</button>\n" +
-    "        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'minus')\">-</button>\n" +
-    "        <div class=\"spacing-10\"></div>\n" +
-    "        <div ng-repeat=\"verification in taskVerification\">\n" +
-    "            <a href=\"member/{{verification.user.username}}\">\n" +
-    "                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
-    "                {{verification.user.username}}\n" +
-    "            </a> | {{verification.score}}\n" +
-    "            <div class=\"spacing-10\"></div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "    <div class=\"row well\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
+    "                <div style=\"font-style:italic;color:gray\">\n" +
+    "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                    <p>{{task.content}}</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "\n" +
-    "        <!--TODO: COLLAPSE UI-->\n" +
-    "        <!--TOKENS MINTING PER ACTION-->\n" +
-    "        <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "            <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "            <p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
-    "            <p><a href=\"market/{{task.id}}+onTimeStream\">onTimeStream+{{task.id}}</a></p>\n" +
-    "            <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
-    "            <p><a href=\"market/{{task.id}}+onVerification\">onVerification+{{task.id}}</a></p>\n" +
-    "            <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}} </a></p>\n" +
-    "            <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.project.id}})</a></p>\n" +
-    "            <p><a href=\"market/general\">general</a></p>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
+    "            <div style=\"padding:16px;font-style:italic;color:gray\">\n" +
+    "                <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>\n" +
+    "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'plus')\">+</button>\n" +
+    "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'minus')\">-</button>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div ng-repeat=\"verification in taskVerification\">\n" +
+    "                    <a href=\"member/{{verification.user.username}}\">\n" +
+    "                        <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
+    "                        {{verification.user.username}}\n" +
+    "                    </a> | {{verification.score}}\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
     "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "        <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->\n" +
-    "        <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "            <h4>Token Liquidity</h4>\n" +
-    "            <p>1 <a href=\"market/onTime+{{task.id}}\">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/onTime+{{task.id}}/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
-    "            <p>1 <a href=\"market/onTimeStream+{{task.id}}\">onTimeStream+{{task.id}}</a> / {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
-    "            <p>1 <a href=\"market/onCompletion+{{task.id}}\">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}\">MARKET</a></p>\n" +
-    "            <p>1 <a href=\"market/onVerification+{{task.id}}\">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                <!--TODO: COLLAPSE UI-->\n" +
+    "                <!--TOKENS MINTING PER ACTION-->\n" +
+    "                <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
+    "                    <p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
+    "                    <p><a href=\"market/{{task.id}}+onTimeStream\">onTimeStream+{{task.id}}</a></p>\n" +
+    "                    <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
+    "                    <p><a href=\"market/{{task.id}}+onVerification\">onVerification+{{task.id}}</a></p>\n" +
+    "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}} </a></p>\n" +
+    "                    <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.project.id}})</a></p>\n" +
+    "                    <p><a href=\"market/general\">general</a></p>\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->\n" +
+    "                <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <h4>Token Liquidity</h4>\n" +
+    "                    <p>1 <a href=\"market/onTime+{{task.id}}\">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/onTime+{{task.id}}/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
+    "                    <p>1 <a href=\"market/onTimeStream+{{task.id}}\">onTimeStream+{{task.id}}</a> / {{task.timeBountySet*1.4}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
+    "                    <p>1 <a href=\"market/onCompletion+{{task.id}}\">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}\">MARKET</a></p>\n" +
+    "                    <p>1 <a href=\"market/onVerification+{{task.id}}\">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
@@ -2689,9 +2778,9 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "                    <div ng-bind-html=\"renderStream(streamUrl)\">></div>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
     "                <input type=\"text\" placeholder=\"Content\" ng-model=\"workContent\" class=\"form-control\">\n" +
-    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -2724,45 +2813,45 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "        </tbody>\n" +
     "    </table>\n" +
     "\n" +
-    "    <div class=\"col-md-12\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
-    "            </div>\n" +
-    "            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "        </form>\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "                </div>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "            </form>\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"col-md-12\">\n" +
-    "        <div ng-repeat=\"post in posts\">\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div>\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
-    "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
-    "                        <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "                        <astyle=\"display:inline;font-weight:600\" href=\"/task/{{post.task.is}}\">task {{post.task.title}}</a>\n" +
-    "                        <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
+    "    <div ng-repeat=\"post in posts\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div>\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
+    "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                    <astyle=\"display:inline;font-weight:600\" href=\"/task/{{post.task.is}}\">task {{post.task.title}}</a>\n" +
+    "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
+    "                </div>\n" +
+    "                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "            <!--TODO: NESTED -->\n" +
+    "            <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
+    "                <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
     "                    </div>\n" +
-    "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
-    "                </div>\n" +
-    "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "                    <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "                </div>\n" +
-    "                <!--TODO: NESTED -->\n" +
-    "                <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
-    "                    <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
-    "                        </div>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                </form>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2932,107 +3021,118 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "	<div>\n" +
-    "		<a href=\"member/{{work.user.username}}\">\n" +
-    "			<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\">\n" +
-    "			{{work.user.username}}\n" +
-    "		</a>\n" +
-    "		<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
-    "		<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "		<p>{{work.content}}</p>\n" +
-    "		<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"card\">\n" +
     "\n" +
+    "		<div style=\"padding:16px\" class=\"col-md-12\">\n" +
+    "			<a style=\"font-weight:700\" href=\"member/{{work.user.username}}\">\n" +
+    "				<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\">\n" +
+    "				{{work.user.username}}\n" +
+    "			</a>\n" +
+    "			<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
+    "			<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "			<p>{{work.content}}</p>\n" +
+    "			<span style=\"color:gray\" am-time-ago=\"work.createdAt\"></span>\n" +
+    "		</div>\n" +
     "\n" +
-    "	</div>\n" +
+    "		<div style=\"padding:16px\" class=\"col-md-12\">\n" +
+    "			<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
+    "			<!--TODO: DIMENSIONALITY-->\n" +
+    "			<h4>Dimensional Work Verification Score | {{work.verificationScore}}</h4>\n" +
+    "			<button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
+    "	        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
+    "	        <div class=\"spacing-10\"></div>\n" +
+    "	   		<div ng-repeat=\"verification in workVerification\">\n" +
+    "	            <a href=\"member/{{verification.user.username}}\">\n" +
+    "	                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
+    "	                {{verification.user.username}}\n" +
+    "	            </a> | {{verification.score}}\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "	        </div>\n" +
+    "		</div>\n" +
     "\n" +
-    "	<div>\n" +
-    "		<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
-    "		<!--TODO: DIMENSIONALITY-->\n" +
-    "		<h3>Dimensional Work Verification Score | {{work.verificationScore}}</h3>\n" +
-    "		<button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
-    "        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
-    "        <div class=\"spacing-10\"></div>\n" +
-    "   		<div ng-repeat=\"verification in workVerification\">\n" +
-    "            <a href=\"member/{{verification.user.username}}\">\n" +
-    "                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
-    "                {{verification.user.username}}\n" +
-    "            </a> | {{verification.score}}\n" +
-    "            <div class=\"spacing-10\"></div>\n" +
-    "        </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "	<!--TODO: REAL STREAM-->\n" +
-    "	<div>\n" +
-    "		<h3>Stream</h3>\n" +
-    "		<h4><a href=\"stream/example\">Example Stream</a></h4>\n" +
-    "		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
-    "		<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<h3>Stream</h3>\n" +
+    "			<h4><a href=\"stream/example\">Example Stream</a></h4>\n" +
+    "			<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "			<div class=\"spacing-5\"></div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"spacing-15\"></div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "	<div class=\"well\">\n" +
-    "		<!--TODO: TOKEN CLARITY-->\n" +
-    "		<!--TODO: COLLAPSE UI-->\n" +
-    "		<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->\n" +
-    "		<h3>Liquidity | Market Orders | Tokens</h3>\n" +
-    "		<!--<h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>-->\n" +
-    "		<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
-    "		<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
-    "		<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
-    "		<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->\n" +
-    "		<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
-    "	    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
-    "	    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
-    "	    <p><a href=\"market/general\">general</a></p>\n" +
-    "\n" +
-    "	    <!--<h4><a href=\"market/{{work.id}}\">Create Liquidity</a></h4>-->\n" +
-    "\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<!--TODO: TOKEN CLARITY-->\n" +
+    "			<!--TODO: COLLAPSE UI-->\n" +
+    "			<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->\n" +
+    "			<h3>Liquidity | Market Orders | Tokens</h3>\n" +
+    "			<h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
+    "			<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
+    "			<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
+    "			<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
+    "			<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->\n" +
+    "			<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
+    "		    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
+    "		    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
+    "		    <p><a href=\"market/general\">general</a></p>\n" +
+    "		   	<!--<h4><a href=\"market/{{work.id}}\">Create Liquidity</a></h4>-->\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "	<div class=\"col-md-12\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
-    "            </div>\n" +
-    "            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "        </form>\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "		        <div class=\"spacing-15\"></div>\n" +
+    "		        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
+    "		            <div class=\"form-group\">\n" +
+    "		                <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "		            </div>\n" +
+    "		            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "		        </form>\n" +
+    "		        <div class=\"spacing-15\"></div>\n" +
+    "		    </div>\n" +
+    "    	</div>\n" +
     "    </div>\n" +
-    "	<div class=\"col-md-12\">\n" +
-    "	   <div ng-repeat=\"post in posts\">\n" +
-    "	        <div class=\"card\">\n" +
-    "	            <div style=\"padding:16px;\">\n" +
-    "					<div>\n" +
-    "						<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
-    "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
-    "						<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
-    "					</div>\n" +
-    "					<div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "    <div ng-repeat=\"post in posts\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "				<div>\n" +
+    "					<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "					<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "				</div>\n" +
-    "				<div class=\"card-footer\">\n" +
-    "					<a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "					<a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "					<a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "					<a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "				</div>\n" +
-    "				<!--TODO: NESTED -->\n" +
-    "				<div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
-    "					<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "						<div class=\"form-group\">\n" +
-    "							<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
-    "						</div>\n" +
-    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "					</form>\n" +
-    "				</div>\n" +
+    "				<div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
     "			</div>\n" +
-    "	   </div>\n" +
-    "    </div>\n" +
+    "			<div class=\"card-footer\">\n" +
+    "				<a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "				<a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "				<a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "				<a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "			</div>\n" +
+    "			<!--TODO: NESTED -->\n" +
+    "			<div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
+    "				<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "					<div class=\"form-group\">\n" +
+    "						<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "					</div>\n" +
+    "					<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "				</form>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "   </div>\n" +
+    "\n" +
+    "\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "");

@@ -21,11 +21,21 @@
     </div>
 </div>
 
+<div class="card">
+    <form style="display:flex;flex-direction:row;">
+        <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+    </form>
+</div>
+<div class="spacing-15"></div>
+
+<!--POST MODEL | CONTENT TYPE -->
+<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->
 <div ng-show="false" class="">
-	<ul style="padding:0px;" class="member-tabs">
-		<li class="active"><a href="">Files</a></li>
-		<li><a href="">Videos</a></li>
-	</ul>
+    <ul style="padding:0px;" class="member-tabs">
+        <li class="active"><a href="">Files</a></li>
+        <li class="active"><a href="">Posts</a></li>
+        <li><a href="">Videos</a></li>
+    </ul>
 </div>
 
 <div class="col-md-6" ng-repeat="stream in streams">
@@ -33,7 +43,7 @@
 	    <div style="padding:16px;">
 			<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
 			<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
-			<p><a href="member/{{stream.user}}">
+			<p><a style="font-weight:700" href="member/{{stream.user}}">
 				<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">
 				{{stream.user}}
 			</a> | <span am-time-ago="stream.createdAt"></span></p>

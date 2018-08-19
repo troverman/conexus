@@ -1,106 +1,117 @@
 <div class="container">
 	<div class="spacing-15"></div>
 
-	<div>
-		<a href="member/{{work.user.username}}">
-			<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
-			{{work.user.username}}
-		</a>
-		<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
-		<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-		<p>{{work.content}}</p>
-		<div class="spacing-5"></div>
+	<div class="card">
 
+		<div style="padding:16px" class="col-md-12">
+			<a style="font-weight:700" href="member/{{work.user.username}}">
+				<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+				{{work.user.username}}
+			</a>
+			<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
+			<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+			<p>{{work.content}}</p>
+			<span style="color:gray" am-time-ago="work.createdAt"></span>
+		</div>
 
-	</div>
+		<div style="padding:16px" class="col-md-12">
+			<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
+			<!--TODO: DIMENSIONALITY-->
+			<h4>Dimensional Work Verification Score | {{work.verificationScore}}</h4>
+			<button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
+	        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>
+	        <div class="spacing-10"></div>
+	   		<div ng-repeat="verification in workVerification">
+	            <a href="member/{{verification.user.username}}">
+	                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
+	                {{verification.user.username}}
+	            </a> | {{verification.score}}
+				<div class="spacing-10"></div>
+	        </div>
+		</div>
 
-	<div>
-		<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
-		<!--TODO: DIMENSIONALITY-->
-		<h3>Dimensional Work Verification Score | {{work.verificationScore}}</h3>
-		<button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
-        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>
-        <div class="spacing-10"></div>
-   		<div ng-repeat="verification in workVerification">
-            <a href="member/{{verification.user.username}}">
-                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
-                {{verification.user.username}}
-            </a> | {{verification.score}}
-            <div class="spacing-10"></div>
-        </div>
 	</div>
 
 	<div class="spacing-5"></div>
 
 	<!--TODO: REAL STREAM-->
-	<div>
-		<h3>Stream</h3>
-		<h4><a href="stream/example">Example Stream</a></h4>
-		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
-		<div class="spacing-5"></div>
+	<div class="card">
+		<div style="padding:16px">
+			<h3>Stream</h3>
+			<h4><a href="stream/example">Example Stream</a></h4>
+			<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+			<div class="spacing-5"></div>
+		</div>
 	</div>
 
-	<div class="spacing-15"></div>
+	<div class="spacing-5"></div>
 
-	<div class="well">
-		<!--TODO: TOKEN CLARITY-->
-		<!--TODO: COLLAPSE UI-->
-		<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
-		<h3>Liquidity | Market Orders | Tokens</h3>
-		<!--<h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>-->
-		<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
-		<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
-		<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
-		<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-		<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
-	    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
-	    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
-	    <p><a href="market/general">general</a></p>
-
-	    <!--<h4><a href="market/{{work.id}}">Create Liquidity</a></h4>-->
-
+	<div class="card">
+		<div style="padding:16px">
+			<!--TODO: TOKEN CLARITY-->
+			<!--TODO: COLLAPSE UI-->
+			<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
+			<h3>Liquidity | Market Orders | Tokens</h3>
+			<h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+			<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
+			<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
+			<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
+			<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
+			<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
+		    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
+		    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
+		    <p><a href="market/general">general</a></p>
+		   	<!--<h4><a href="market/{{work.id}}">Create Liquidity</a></h4>-->
+		</div>
 	</div>
 
-	<div class="spacing-10"></div>
+	<div class="spacing-5"></div>
 
-	<div class="col-md-12">
-        <div class="spacing-15"></div>
-        <form role="form" ng-submit="createPost(newPost)">
-            <div class="form-group">
-                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
-            </div>
-            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-        </form>
-        <div class="spacing-15"></div>
+	<div class="card">
+		<div style="padding:16px">
+			<div class="col-md-12">
+		        <div class="spacing-15"></div>
+		        <form role="form" ng-submit="createPost(newPost)">
+		            <div class="form-group">
+		                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+		            </div>
+		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+		        </form>
+		        <div class="spacing-15"></div>
+		    </div>
+    	</div>
     </div>
-	<div class="col-md-12">
-	   <div ng-repeat="post in posts">
-	        <div class="card">
-	            <div style="padding:16px;">
-					<div>
-						<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
-						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
-						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
-					</div>
-					<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+
+	<div class="spacing-5"></div>
+
+    <div ng-repeat="post in posts">
+        <div class="card">
+            <div style="padding:16px;">
+				<div>
+					<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+					<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
 				</div>
-				<div class="card-footer">
-					<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-					<a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-					<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-					<a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
-				</div>
-				<!--TODO: NESTED -->
-				<div ng-show="post.showReply" class="card-footer">
-					<form role="form" ng-submit="createPost(post)">
-						<div class="form-group">
-							<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
-						</div>
-						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-					</form>
-				</div>
+				<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
 			</div>
-	   </div>
-    </div>
+			<div class="card-footer">
+				<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+				<a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+				<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+				<a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+			</div>
+			<!--TODO: NESTED -->
+			<div ng-show="post.showReply" class="card-footer">
+				<form role="form" ng-submit="createPost(post)">
+					<div class="form-group">
+						<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
+					</div>
+					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+				</form>
+			</div>
+		</div>
+   </div>
+
+
 </div>
 <div class="spacing-50"></div>

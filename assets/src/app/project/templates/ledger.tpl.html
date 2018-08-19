@@ -3,15 +3,22 @@
 
 	<!--<button class="btn btn-default log-btn" ng-click="newLedgerToggle()">+ LEDGER</button><br><br>-->
 	<ul style="padding:0px;" class="member-tabs">
+
 		<li class="active"><a href="">Overview</a></li>
 		<li><a href="">Assets</a></li>
+		<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
+		<li><a href="">Transactions</a></li>
+
+		<!--<li><a href="">Assets</a></li>
 		<li><a href="">Expenses</a></li>
 		<li><a href="">Liabilities</a></li>
 		<li><a href="">Revenue</a></li>
-		<li><a href="">Positions</a></li>
+		<li><a href="">Positions</a></li>-->
+
 		<!--<li><a href="">Work</a></li>
 		<li><a href="">Property</a></li>
 		<li><a href="">Liscense</a></li>-->
+
 	</ul>
 
 	<div class="row">
@@ -24,7 +31,7 @@
 	</div>
 
 	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
-	<md-card ng-show="newTransactionToggleVar">
+	<div class="card" ng-show="newTransactionToggleVar">
 	    <div style="padding:10px;">
 			<form role="form" ng-submit="createTransaction(newTransaction)">
 				<div class="form-group">
@@ -48,7 +55,7 @@
 				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
 			</form>
 		</div>
-	</md-card>
+	</div>
 
 	<table class="table table-inverse table-hover">
 	    <thead>
@@ -64,8 +71,8 @@
 	    </thead>
 	    <tbody>
 			<tr ng-repeat="transaction in transactions">
-				<td>{{transaction.to}}</td>
-				<td>{{transaction.from}}</td>
+				<td><a href="">{{transaction.to}}</a></td>
+				<td><a href="">{{transaction.from}}</a></td>
 				<td><a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></td>
 				<td>{{transaction.amount}}</td>
 				<td>{{transaction.ledger}}</td>

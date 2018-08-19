@@ -61,11 +61,31 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    .state( 'project.content', {
+        url: '/content',
+        views: {
+            "content": {
+                controller: 'ProjectContentCtrl',
+                templateUrl: 'project/templates/content.tpl.html'
+            }
+        },
+        resolve: {
+            //TOD: ALL
+            streams: [function() {
+                return [
+                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
+                    {title:'multiDimensional Stream 597c55e56833048165c6720c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
+                ];
+            }]
+        }
+    })
     //TODO: FEATURE | ALLOWS FOR BUDGET MANAGING PROCESS -- AKA CREATE MARKET ORDERS FOR AN ORG BASED ON REPUTATION VOTING
     .state( 'project.charter', {
         url: '/charter',
         views: {
-            "channels": {
+            "charter": {
                 controller: 'ProjectCharterCtrl',
                 templateUrl: 'project/templates/charter.tpl.html'
             }
@@ -113,26 +133,6 @@ angular.module( 'conexus.project', [
             }]
         }
     })
-    .state( 'project.streams', {
-        url: '/streams',
-        views: {
-            "streams": {
-                controller: 'ProjectStreamsCtrl',
-                templateUrl: 'project/templates/streams.tpl.html'
-            }
-        },
-        resolve: {
-            //TOD: ALL
-            streams: [function() {
-                return [
-                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'multiDimensional Stream 597c55e56833048165c6720c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
-                ];
-            }]
-        }
-    })
     .state( 'project.tasks', {
         url: '/tasks',
         views: {
@@ -147,10 +147,27 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    .state( 'project.positions', {
+        url: '/positions',
+        views: {
+            "positions": {
+                controller: 'ProjectPositionsCtrl',
+                templateUrl: 'project/templates/positions.tpl.html'
+            }
+        },
+        resolve: {
+            member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
+                return UserModel.getByUsername($stateParams.path);
+            }],
+            orders: ['OrderModel', 'project', function(OrderModel, project){
+                return OrderModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            }],
+        }
+    })
     .state( 'project.projects', {
         url: '/projects',
         views: {
-            "tasks": {
+            "projects": {
                 controller: 'ProjectProjectsCtrl',
                 templateUrl: 'project/templates/projects.tpl.html'
             }
@@ -323,6 +340,71 @@ angular.module( 'conexus.project', [
 
 }])
 
+.controller( 'ProjectContentCtrl', ['$sce', '$scope', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, project, streams, titleService ) {
+    titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
+    $scope.project = project;
+    $scope.streams = streams;
+    $scope.AudioContext = {};
+    $scope.videoContext = {};
+
+    //TODO: DOESNT WORK
+    $scope.renderMessage = function(stream){
+        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+        return $sce.trustAsHtml(html);
+    };
+
+    //TODO: ALL | BROWSER BASED STREAMING OF THE SCREEN. . . ~ OBS INPUT 
+    //TODO: MOVE TO 'WORK' OR DEDICATED STREAMING AREA
+    var cameraPreview = document.getElementById('camera-preview');
+    //testing out streaming! :D
+    function initializeRecorder(stream) {
+
+        var mediaStream = stream;
+        var recordAudio = RecordRTC(stream, {
+            onAudioProcessStarted: function() {
+                recordVideoSeparately && recordVideo.startRecording();
+                cameraPreview.src = window.URL.createObjectURL(stream);
+                cameraPreview.play();
+                cameraPreview.muted = true;
+                cameraPreview.controls = false;
+            }
+        });
+        var recordVideo = RecordRTC(stream, {
+            type: 'video'
+        });
+        recordAudio.startRecording();
+        stopRecording.disabled = false;
+
+        /*
+        var audioContext = window.AudioContext;
+        var videoContext = win
+        var context = new audioContext();
+        var audioInput = context.createMediaStreamSource(stream);
+        var bufferSize = 2048;
+        // create a javascript node
+        var recorder = context.createScriptProcessor(bufferSize, 1, 1);
+        // specify the processing function
+        recorder.onaudioprocess = recorderProcess;
+        // connect stream to our recorder
+        audioInput.connect(recorder);
+        // connect our recorder to the previous destination
+        recorder.connect(context.destination);
+        */
+
+    };
+
+    function recorderProcess(e) {
+        var left = e.inputBuffer.getChannelData(0);
+        //console.log(left)
+    }
+    function onError(e) {console.log(e);}
+    var session = {audio: true, video: true};
+    var recordRTC = null;
+    navigator.getUserMedia(session, initializeRecorder, onError);
+
+
+}])
+
 .controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, project, titleService ) {
     titleService.setTitle('Charter | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
@@ -480,70 +562,6 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectStreamsCtrl', ['$sce', '$scope', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, project, streams, titleService ) {
-    titleService.setTitle('Streams | ' + project.title + ' | CRE8.XYZ');
-    $scope.project = project;
-    $scope.streams = streams;
-    $scope.AudioContext = {};
-    $scope.videoContext = {};
-
-    //TODO: DOESNT WORK
-    $scope.renderMessage = function(stream){
-        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
-        return $sce.trustAsHtml(html);
-    };
-
-    //TODO: ALL | BROWSER BASED STREAMING OF THE SCREEN. . . ~ OBS INPUT 
-    //TODO: MOVE TO 'WORK' OR DEDICATED STREAMING AREA
-    var cameraPreview = document.getElementById('camera-preview');
-    //testing out streaming! :D
-    function initializeRecorder(stream) {
-
-        var mediaStream = stream;
-        var recordAudio = RecordRTC(stream, {
-            onAudioProcessStarted: function() {
-                recordVideoSeparately && recordVideo.startRecording();
-                cameraPreview.src = window.URL.createObjectURL(stream);
-                cameraPreview.play();
-                cameraPreview.muted = true;
-                cameraPreview.controls = false;
-            }
-        });
-        var recordVideo = RecordRTC(stream, {
-            type: 'video'
-        });
-        recordAudio.startRecording();
-        stopRecording.disabled = false;
-
-        /*
-        var audioContext = window.AudioContext;
-        var videoContext = win
-        var context = new audioContext();
-        var audioInput = context.createMediaStreamSource(stream);
-        var bufferSize = 2048;
-        // create a javascript node
-        var recorder = context.createScriptProcessor(bufferSize, 1, 1);
-        // specify the processing function
-        recorder.onaudioprocess = recorderProcess;
-        // connect stream to our recorder
-        audioInput.connect(recorder);
-        // connect our recorder to the previous destination
-        recorder.connect(context.destination);
-        */
-
-    };
-
-    function recorderProcess(e) {
-        var left = e.inputBuffer.getChannelData(0);
-        //console.log(left)
-    }
-    function onError(e) {console.log(e);}
-    var session = {audio: true, video: true};
-    var recordRTC = null;
-    navigator.getUserMedia(session, initializeRecorder, onError);
-
-
-}])
 .controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks, titleService ) {
     titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
@@ -573,6 +591,87 @@ angular.module( 'conexus.project', [
                 break;
         }
     });
+
+}])
+.controller( 'ProjectPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
+    $scope.currentUser = config.currentUser;
+    $scope.member = member;
+    $scope.orders = orders;
+    $scope.orders.forEach(function(part, index) {
+        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
+        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
+        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
+        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
+    });
+    titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
+    
+    $scope.newOrderToggle = function(){
+        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    };
+
+    $scope.createOrder = function() {
+        $scope.newOrder.user = $scope.currentUser.id;
+        //TODO: PARSE INPUT
+        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+        OrderModel.create($scope.newOrder).then(function(model) {
+            //$scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
+    };
+
+    $scope.chart = {
+        chart: {polar: true},
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
+            color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values1',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.2, 0.1, 0.2, 0.1, 0.1],
+            color: 'rgba(0,0,153,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values2',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.1, 0.1, 0.3, 0.2, 0.25, 0.05],
+            color: 'rgba(0,153,0,0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: false,
+            //align: 'right',
+            //verticalAlign: 'top',
+            //y: 70,
+            //layout: 'vertical'
+        },
+        tooltip: {
+        //    shared: true,
+        },
+        credits:{enabled:false},
+    };
 
 }])
 .controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, ProjectModel, projects, titleService ) {

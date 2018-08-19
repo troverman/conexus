@@ -1,58 +1,68 @@
 <div class="container">
-    <div class="spacing-15"></div>
-    <div>
-        <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
-        <div style="font-style:italic;color:gray">
-            <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-            <p>{{task.content}}</p>
-        </div>
-    </div>
-
-    <div style="font-style:italic;color:gray">
-        <div class="spacing-5"></div>
-        <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>
-        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'plus')">+</button>
-        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'minus')">-</button>
-        <div class="spacing-10"></div>
-        <div ng-repeat="verification in taskVerification">
-            <a href="member/{{verification.user.username}}">
-                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
-                {{verification.user.username}}
-            </a> | {{verification.score}}
-            <div class="spacing-10"></div>
-        </div>
-    </div>
 
     <div class="spacing-15"></div>
 
-    <div class="row well">
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px">
+                <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
+                <div style="font-style:italic;color:gray">
+                    <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                    <p>{{task.content}}</p>
+                </div>
+            </div>
 
-        <!--TODO: COLLAPSE UI-->
-        <!--TOKENS MINTING PER ACTION-->
-        <div class="col-md-6" style="font-style:italic;color:gray">
-            <div class="spacing-5"></div>
-            <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-            <p><a href="market/{{task.id}}+onTime">onTime+{{task.id}}</a></p>
-            <p><a href="market/{{task.id}}+onTimeStream">onTimeStream+{{task.id}}</a></p>
-            <p><a href="market/{{task.id}}+onCompletion">onCompletion+{{task.id}}</a></p>
-            <p><a href="market/{{task.id}}+onVerification">onVerification+{{task.id}}</a></p>
-            <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}} </a></p>
-            <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.project.id}})</a></p>
-            <p><a href="market/general">general</a></p>
-            <div class="spacing-5"></div>
+            <div style="padding:16px;font-style:italic;color:gray">
+                <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>
+                <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'plus')">+</button>
+                <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'minus')">-</button>
+                <div class="spacing-10"></div>
+                <div ng-repeat="verification in taskVerification">
+                    <a href="member/{{verification.user.username}}">
+                        <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
+                        {{verification.user.username}}
+                    </a> | {{verification.score}}
+                    <div class="spacing-10"></div>
+                </div>
+            </div>
+
         </div>
+    </div>
 
-        <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
-        <div class="col-md-6" style="font-style:italic;color:gray">
-            <div class="spacing-5"></div>
-            <h4>Token Liquidity</h4>
-            <p>1 <a href="market/onTime+{{task.id}}">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/onTime+{{task.id}}/{{task.timeIdentifierSet}}">MARKET</a></p>
-            <p>1 <a href="market/onTimeStream+{{task.id}}">onTimeStream+{{task.id}}</a> / {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}">MARKET</a></p>
-            <p>1 <a href="market/onCompletion+{{task.id}}">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a> / <a href="market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}">MARKET</a></p>
-            <p>1 <a href="market/onVerification+{{task.id}}">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a> / <a href="market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}">MARKET</a></p>
-            <div class="spacing-5"></div>
+    <div class="spacing-5"></div>
+
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px">
+
+                <!--TODO: COLLAPSE UI-->
+                <!--TOKENS MINTING PER ACTION-->
+                <div class="col-md-6" style="font-style:italic;color:gray">
+                    <div class="spacing-5"></div>
+                    <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+                    <p><a href="market/{{task.id}}+onTime">onTime+{{task.id}}</a></p>
+                    <p><a href="market/{{task.id}}+onTimeStream">onTimeStream+{{task.id}}</a></p>
+                    <p><a href="market/{{task.id}}+onCompletion">onCompletion+{{task.id}}</a></p>
+                    <p><a href="market/{{task.id}}+onVerification">onVerification+{{task.id}}</a></p>
+                    <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}} </a></p>
+                    <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.project.id}})</a></p>
+                    <p><a href="market/general">general</a></p>
+                    <div class="spacing-5"></div>
+                </div>
+
+                <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
+                <div class="col-md-6" style="font-style:italic;color:gray">
+                    <div class="spacing-5"></div>
+                    <h4>Token Liquidity</h4>
+                    <p>1 <a href="market/onTime+{{task.id}}">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/onTime+{{task.id}}/{{task.timeIdentifierSet}}">MARKET</a></p>
+                    <p>1 <a href="market/onTimeStream+{{task.id}}">onTimeStream+{{task.id}}</a> / {{task.timeBountySet*1.4}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/{{task.id}}+onTimeStream/{{task.timeIdentifierSet}}">MARKET</a></p>
+                    <p>1 <a href="market/onCompletion+{{task.id}}">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a> / <a href="market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}">MARKET</a></p>
+                    <p>1 <a href="market/onVerification+{{task.id}}">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a> / <a href="market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}">MARKET</a></p>
+                    <div class="spacing-5"></div>
+                </div>
+            </div>
+
         </div>
-
     </div>
 
     <div class="spacing-10"></div>
@@ -91,9 +101,9 @@
                     <div ng-bind-html="renderStream(streamUrl)">></div>
                 </div>
                 <div class="spacing-5"></div>
-                <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
                 <input type="text" placeholder="Content" ng-model="workContent" class="form-control">
-
+                <div class="spacing-5"></div>
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
         </div>
     </div>
 
@@ -126,45 +136,45 @@
         </tbody>
     </table>
 
-    <div class="col-md-12">
-        <div class="spacing-15"></div>
-        <form role="form" ng-submit="createPost(newPost)">
-            <div class="form-group">
-                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
-            </div>
-            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-        </form>
-        <div class="spacing-15"></div>
+    <div class="card">
+        <div style="padding:16px">
+            <div class="spacing-15"></div>
+            <form role="form" ng-submit="createPost(newPost)">
+                <div class="form-group">
+                    <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+                </div>
+                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+            </form>
+            <div class="spacing-15"></div>
+        </div>
     </div>
 
-    <div class="col-md-12">
-        <div ng-repeat="post in posts">
-            <div class="card">
-                <div style="padding:16px;">
-                    <div>
-                        <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
-                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
-                        <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                        <astyle="display:inline;font-weight:600" href="/task/{{post.task.is}}">task {{post.task.title}}</a>
-                        <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+    <div ng-repeat="post in posts">
+        <div class="card">
+            <div style="padding:16px;">
+                <div>
+                    <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
+                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+                    <astyle="display:inline;font-weight:600" href="/task/{{post.task.is}}">task {{post.task.title}}</a>
+                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+                </div>
+                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+            </div>
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <!--TODO: NESTED -->
+            <div ng-show="post.showReply" class="card-footer">
+                <form role="form" ng-submit="createPost(post)">
+                    <div class="form-group">
+                        <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
                     </div>
-                    <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
-                </div>
-                <div class="card-footer">
-                    <a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-                    <a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-                    <a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
-                </div>
-                <!--TODO: NESTED -->
-                <div ng-show="post.showReply" class="card-footer">
-                    <form role="form" ng-submit="createPost(post)">
-                        <div class="form-group">
-                            <input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
-                        </div>
-                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-                    </form>
-                </div>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
             </div>
         </div>
     </div>
