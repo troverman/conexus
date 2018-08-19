@@ -2742,116 +2742,128 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "    <!--TODO: STREAM-->\n" +
-    "    <div>\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div ng-show=\"!working\">\n" +
+    "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Start Work</button>\n" +
     "\n" +
-    "        <div ng-show=\"!working\">\n" +
-    "            <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Start Work</button>\n" +
+    "                    <div ng-show=\"question && !streaming\">\n" +
+    "                        <h3>Streaming?</h3>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</button>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">No</button>\n" +
+    "                    </div>\n" +
     "\n" +
-    "            <div ng-show=\"question && !streaming\">\n" +
-    "                <h3>Streaming?</h3>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</button>\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">No</button>\n" +
-    "            </div>\n" +
+    "                    <div ng-show=\"streaming\">\n" +
+    "                        <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
+    "                        <!--<input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"workContent\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"workContent\" class=\"form-control\">-->\n" +
+    "                        <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">Start Stream</button>\n" +
+    "                    </div>\n" +
     "\n" +
-    "            <div ng-show=\"streaming\">\n" +
-    "                <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
-    "                <!--<input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"workContent\" class=\"form-control\">\n" +
-    "                <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"workContent\" class=\"form-control\">-->\n" +
-    "                <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">Start Stream</button>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div ng-show=\"working\">\n" +
-    "                <h3>{{taskTime}}</h3>\n" +
-    "                <div ng-show=\"!streaming\">\n" +
-    "                    <!--<input type=\"text\" placeholder=\"Link\" ng-model=\"workContent\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"workContent\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"workContent\" class=\"form-control\">\n" +
-    "                    <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startStream()\">Start Stream</button>-->\n" +
     "                </div>\n" +
-    "                <div ng-show=\"streaming\"> \n" +
-    "                    <div ng-bind-html=\"renderStream(streamUrl)\">></div>\n" +
+    "\n" +
+    "                <div ng-show=\"working\">\n" +
+    "                    <h3>{{taskTime}}</h3>\n" +
+    "                    <div ng-show=\"!streaming\">\n" +
+    "                        <!--<input type=\"text\" placeholder=\"Link\" ng-model=\"workContent\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"workContent\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"workContent\" class=\"form-control\">\n" +
+    "                        <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startStream()\">Start Stream</button>-->\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"streaming\"> \n" +
+    "                        <div ng-bind-html=\"renderStream(streamUrl)\">></div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <input type=\"text\" placeholder=\"Content\" ng-model=\"workContent\" class=\"form-control\">\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "                <input type=\"text\" placeholder=\"Content\" ng-model=\"workContent\" class=\"form-control\">\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "                <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
-    "\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "    <!--TODO CARD VS TABLE-->\n" +
-    "    <table class=\"table table-striped table-hover\">\n" +
-    "        <thead>\n" +
-    "            <tr>\n" +
-    "                <th>Time</th>\n" +
-    "                <th>Content</th>\n" +
-    "                <th>Member</th>\n" +
-    "                <th>Stream</th>\n" +
-    "                <th>Date</th>\n" +
-    "                <th>Verification</th>\n" +
-    "                <th>Verify</th>\n" +
-    "            </tr>\n" +
-    "        </thead>\n" +
-    "        <tbody>\n" +
-    "            <tr ng-repeat=\"item in work\">\n" +
-    "                <td><a style=\"font-weight:700\" href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
-    "                <td>{{item.content || 'N/A'}}</td>\n" +
-    "                <td><a style=\"font-weight:700\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
-    "                <td style=\"max-width:50px\"><a href=\"stream/{{item.stream || 'example'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
-    "                <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +
-    "                <td>{{item.verificationScore}}</td>\n" +
-    "                <td><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification(item)\">verify</button></td>\n" +
-    "            </tr>\n" +
-    "        </tbody>\n" +
-    "    </table>\n" +
-    "\n" +
-    "    <div class=\"card\">\n" +
-    "        <div style=\"padding:16px\">\n" +
-    "            <div class=\"spacing-15\"></div>\n" +
-    "            <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
-    "                <div class=\"form-group\">\n" +
-    "                    <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
-    "                </div>\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "            </form>\n" +
-    "            <div class=\"spacing-15\"></div>\n" +
+    "    <div class=\"\">\n" +
+    "        <div class=\"\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <table class=\"table table-striped table-hover\">\n" +
+    "                    <thead>\n" +
+    "                        <tr>\n" +
+    "                            <th>Time</th>\n" +
+    "                            <th>Content</th>\n" +
+    "                            <th>Member</th>\n" +
+    "                            <th>Stream</th>\n" +
+    "                            <th>Date</th>\n" +
+    "                            <th>Verification</th>\n" +
+    "                            <th>Verify</th>\n" +
+    "                        </tr>\n" +
+    "                    </thead>\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"item in work\">\n" +
+    "                            <td><a style=\"font-weight:700\" href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
+    "                            <td>{{item.content || 'N/A'}}</td>\n" +
+    "                            <td><a style=\"font-weight:700\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
+    "                            <td style=\"max-width:50px\"><a href=\"stream/{{item.stream || 'example'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
+    "                            <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +
+    "                            <td>{{item.verificationScore}}</td>\n" +
+    "                            <td><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification(item)\">verify</button></td>\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
+    "                </table>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div ng-repeat=\"post in posts\">\n" +
+    "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
-    "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
-    "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "                    <astyle=\"display:inline;font-weight:600\" href=\"/task/{{post.task.is}}\">task {{post.task.title}}</a>\n" +
-    "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
-    "                </div>\n" +
-    "                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
-    "            </div>\n" +
-    "            <div class=\"card-footer\">\n" +
-    "                <a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "                <a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "                <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                <a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "            </div>\n" +
-    "            <!--TODO: NESTED -->\n" +
-    "            <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
-    "                <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "                        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
     "                    </div>\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "                </form>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div ng-repeat=\"post in posts\">\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <div>\n" +
+    "                        <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
+    "                        <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                        <astyle=\"display:inline;font-weight:600\" href=\"/task/{{post.task.is}}\">task {{post.task.title}}</a>\n" +
+    "                        <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "                </div>\n" +
+    "                <div class=\"card-footer\">\n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                    <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                </div>\n" +
+    "                <!--TODO: NESTED -->\n" +
+    "                <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
+    "                    <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
+    "                        </div>\n" +
+    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
