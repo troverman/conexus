@@ -47,16 +47,18 @@
             <div>
                 <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
                 <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
-                <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
                 <!--TODO: POST TYPES-->
-                <a ng-show="post.market" style="display:inline;font-weight:600" href="/market/{{post.market}}">market {{post.market}}</a>
-                <a ng-show="post.order" style="display:inline;font-weight:600" href="/order/{{post.order}}">order {{post.order}}</a>
-                <a ng-show="post.post" style="display:inline;font-weight:600" href="/post/{{post.post}}">post {{post.post}}</a>
-                <a ng-show="post.profile" style="display:inline;font-weight:600" href="/member/{{post.profile}}">profile {{post.profile}}</a>
-                <a ng-show="post.project" style="display:inline;font-weight:600" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
-                <a ng-show="post.task" style="display:inline;font-weight:600" href="/task/{{post.task}}">task {{post.task}}</a>
-                <a ng-show="post.work" style="display:inline;font-weight:600" href="/work/{{post.work}}">work {{post.work}}</a>
+                <div style="display:inline;" ng-show="post.profile != post.user.id && post.profile != member.id">
+                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+                    <a ng-show="post.market" style="display:inline;font-weight:600" href="/market/{{post.market}}">market {{post.market}}</a>
+                    <a ng-show="post.order" style="display:inline;font-weight:600" href="/order/{{post.order}}">order {{post.order}}</a>
+                    <a ng-show="post.post" style="display:inline;font-weight:600" href="/post/{{post.post}}">post {{post.post}}</a>
+                    <a ng-show="post.profile" style="display:inline;font-weight:600" href="/member/{{post.profile}}">profile {{post.profile}}</a>
+                    <a ng-show="post.project" style="display:inline;font-weight:600" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+                    <a ng-show="post.task" style="display:inline;font-weight:600" href="/task/{{post.task}}">task {{post.task}}</a>
+                    <a ng-show="post.work" style="display:inline;font-weight:600" href="/work/{{post.work}}">work {{post.work}}</a>
+                </div>
 
                 <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
             </div>

@@ -90,10 +90,10 @@ angular.module( 'conexus.project', [
             transactions: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
-            revenue: ['TransactionModel', 'project', function(TransactionModel, project) {
+            transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
             }],
-            expense: ['TransactionModel', 'project', function(TransactionModel, project) {
+            transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
             }],
         }
@@ -336,15 +336,16 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'expense', 'lodash', 'project', 'revenue', 'titleService', 'TransactionModel', 'transactions', function ProjectController( $interval, $scope, config, expense, lodash, project, revenue, titleService, TransactionModel, transactions ) {
+.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
-    $scope.transactions = transactions;
 
-    console.log(expense,revenue);
+    $scope.transactions = transactions;
+    $scope.transactionsFrom = transactionsFrom;
+    $scope.transactionsTo = transactionsTo;
 
     //TODO: TO FROM ISH | TO; FROM DECIDEDS LEDGER
     if ($scope.transactions.length == 0){

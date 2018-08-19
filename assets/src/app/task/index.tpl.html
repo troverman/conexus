@@ -115,9 +115,9 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in work">
-                <td><a href="work/{{item.id}}">{{item.amount}}</a></td>
+                <td><a style="font-weight:700" href="work/{{item.id}}">{{item.amount}}</a></td>
                 <td>{{item.content || 'N/A'}}</td>
-                <td><a href="member/{{item.user.username}}">{{item.user.username}}</a></td>
+                <td><a style="font-weight:700" href="member/{{item.user.username}}">{{item.user.username}}</a></td>
                 <td style="max-width:50px"><a href="stream/{{item.stream || 'example'}}">{{item.stream || 'Not Available'}}</a></td>
                 <td><span am-time-ago="item.createdAt"></span></td>
                 <td>{{item.verificationScore}}</td>

@@ -1346,16 +1346,18 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            <div>\n" +
     "                <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
     "                <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
-    "                <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
     "                <!--TODO: POST TYPES-->\n" +
-    "                <a ng-show=\"post.market\" style=\"display:inline;font-weight:600\" href=\"/market/{{post.market}}\">market {{post.market}}</a>\n" +
-    "                <a ng-show=\"post.order\" style=\"display:inline;font-weight:600\" href=\"/order/{{post.order}}\">order {{post.order}}</a>\n" +
-    "                <a ng-show=\"post.post\" style=\"display:inline;font-weight:600\" href=\"/post/{{post.post}}\">post {{post.post}}</a>\n" +
-    "                <a ng-show=\"post.profile\" style=\"display:inline;font-weight:600\" href=\"/member/{{post.profile}}\">profile {{post.profile}}</a>\n" +
-    "                <a ng-show=\"post.project\" style=\"display:inline;font-weight:600\" href=\"/project/{{post.project.urlTitle}}\">{{post.project.title}}</a>\n" +
-    "                <a ng-show=\"post.task\" style=\"display:inline;font-weight:600\" href=\"/task/{{post.task}}\">task {{post.task}}</a>\n" +
-    "                <a ng-show=\"post.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{post.work}}\">work {{post.work}}</a>\n" +
+    "                <div style=\"display:inline;\" ng-show=\"post.profile != post.user.id && post.profile != member.id\">\n" +
+    "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                    <a ng-show=\"post.market\" style=\"display:inline;font-weight:600\" href=\"/market/{{post.market}}\">market {{post.market}}</a>\n" +
+    "                    <a ng-show=\"post.order\" style=\"display:inline;font-weight:600\" href=\"/order/{{post.order}}\">order {{post.order}}</a>\n" +
+    "                    <a ng-show=\"post.post\" style=\"display:inline;font-weight:600\" href=\"/post/{{post.post}}\">post {{post.post}}</a>\n" +
+    "                    <a ng-show=\"post.profile\" style=\"display:inline;font-weight:600\" href=\"/member/{{post.profile}}\">profile {{post.profile}}</a>\n" +
+    "                    <a ng-show=\"post.project\" style=\"display:inline;font-weight:600\" href=\"/project/{{post.project.urlTitle}}\">{{post.project.title}}</a>\n" +
+    "                    <a ng-show=\"post.task\" style=\"display:inline;font-weight:600\" href=\"/task/{{post.task}}\">task {{post.task}}</a>\n" +
+    "                    <a ng-show=\"post.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{post.work}}\">work {{post.work}}</a>\n" +
+    "                </div>\n" +
     "\n" +
     "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "            </div>\n" +
@@ -2711,9 +2713,9 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "        </thead>\n" +
     "        <tbody>\n" +
     "            <tr ng-repeat=\"item in work\">\n" +
-    "                <td><a href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
+    "                <td><a style=\"font-weight:700\" href=\"work/{{item.id}}\">{{item.amount}}</a></td>\n" +
     "                <td>{{item.content || 'N/A'}}</td>\n" +
-    "                <td><a href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
+    "                <td><a style=\"font-weight:700\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a></td>\n" +
     "                <td style=\"max-width:50px\"><a href=\"stream/{{item.stream || 'example'}}\">{{item.stream || 'Not Available'}}</a></td>\n" +
     "                <td><span am-time-ago=\"item.createdAt\"></span></td>\n" +
     "                <td>{{item.verificationScore}}</td>\n" +
