@@ -20,31 +20,37 @@
 			</div>
 		</div>
 		<div class="col-md-8">
+
 			<h3>Balances</h3>
 			<p>Tokens | Peer Contrubution</p>
 			<div class="spacing-10"></div>
+
+			<h4>{{currentUser.email}}</h4>
+			<div class="spacing-10"></div>
+
+			<a href="#">
+				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+					<h3>Update Avatar</h3>
+				</div>
+			</a>
+			<div class="spacing-10"></div>
+
+			<a href="#">
+				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+					<h3>Update Cover</h3>
+				</div>
+			</a>
+
 		</div>
 	</div>
 
-	<div class="spacing-5"></div>
-	<h4>{{currentUser.email}}</h4>
-	<div class="spacing-10"></div>
-
-	<h3>Update Avatar</h3>
-	<a href="#">
-		<div class="well" ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-			<div>Drag photos or click here to upload.</div>
-			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>  		
-		</div>
-	</a>
-	<p ng-show="avatarLoading" style="text-align:center"><i class="fa fa-spin fa-spinner"></i>&nbsp;{{pp}}%</p>
-	<div ng-show="avatarLoading" class="progress">
-		<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{avatarPercentage}}%;"></div>
-	</div>
+	<h3>Identification Information</h3>
+	<p>Human Proof ID | ON</p>
 	<div class="spacing-10"></div>
 
 	<h3>Settings</h3>
-	<p>GPS Tracking</p>
+	<p>GPS Tracking | ON</p>
+	<p>Notifications | ON</p>
 	<div class="spacing-10"></div>
 
 	<h3>Connected Accounts</h3>

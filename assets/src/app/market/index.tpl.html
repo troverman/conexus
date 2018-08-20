@@ -1,135 +1,139 @@
-<div id="logo-container" style="text-align:center;background:black">
-</div>
 <div class="container">
-	<div class="spacing-25"></div>
-	<h1>{{stateParams.id}} MARKETS</h1>
-	<p>{{stateParams.id}} | 12 markets | 88123 tokens in circulation </p>
-	<div class="spacing-25"></div>
-	<h2>Markets</h2>
-	<!--TODO: FILTER / SEARCH -->
-    <div class="spacing-5"></div>
-    <div class="card">
-        <form style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
-        </form>
-    </div>
-    <div class="spacing-15"></div>
-	<table class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Asset Set 1</th>
-			</tr>
-	    </thead>
-	    <tbody>
-
-
-			<tr><td><a href="market/{{stateParams.id}}/onTime">onTime</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onTimeStream">onTimeStream</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onReact">onReact</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onPost">onPost</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onOrder">onOrder</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onVote">onVote</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onView">onView</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onValidate">onValidate</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onMine">onMine</a></td></tr>
-
-			<tr><td><a href="market/{{stateParams.id}}/CRE8">CRE8</a></td></tr>
-
-			<tr><td><a href="market/{{stateParams.id}}/onTimeStream+5b0b34c1d0f57258271d8b17">onTimeStream+5b0b34c1d0f57258271d8b17</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onTime+5b0b34c1d0f57258271d8b17">onTime+5b0b34c1d0f57258271d8b17</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onTimeStream+5b143af632b5561400b184ec">onTimeStream+5b143af632b5561400b184ec</a></td></tr>
-			<tr><td><a href="market/{{stateParams.id}}/onTimeStream+5b143af632b5561400b184ec">onTime+5b143af632b5561400b184ec</a></td></tr>
-
-
-	    </tbody>
-	</table>
-	<div class="spacing-25"></div>
-	<h2>Order Book</h2>
-	<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
-	<md-card ng-show="newOrderToggleVar">
-	    <div style="padding:10px;">
-			<form role="form" ng-submit="createOrder(newTask)">
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-				</div>
-				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-			</form>
+	<div class="spacing-15"></div>
+	<div class="row">
+		<div class="">
+			<div style="">
+				<h1>{{stateParams.id}} MARKETS</h1>
+				<p>{{stateParams.id}} | 12 markets | 88123 tokens in circulation </p>
+			</div>
 		</div>
-	</md-card>
-	<table class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Asset Set 1</th>
-				<th>Asset Set 2</th>
-				<th>Order Id</th>
-			</tr>
-	    </thead>
-	    <tbody>
-			<tr ng-repeat="order in orders">
-				<td>
-					<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-				</td>
+	</div>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="">
+			<div style="">
+				<h2>Markets</h2>
+				<!--TODO: FILTER / SEARCH -->
+			    <div class="spacing-5"></div>
+			    <div class="card">
+			        <form style="display:flex;flex-direction:row;">
+			            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+			        </form>
+			    </div>
+			    <div class="spacing-15"></div>
+				<div class="card" ng-repeat="market in markets">
+				    <div style="padding:16px;">
+				    	<a href="market/{{stateParams.id}}/{{market}}"><h4>{{market}}</h4></a>
+				    	<p>{{stateParams.id}}/{{market}} markets</p>
+				    </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Order Book</h2>
+				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
+				<div class="card" ng-show="newOrderToggleVar">
+				    <div style="padding:10px;">
+						<form role="form" ng-submit="createOrder(newTask)">
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
+							</div>
+							<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
+						</form>
+					</div>
+				</div>
+				<table class="table table-inverse table-hover">
+				    <thead>
+						<tr>
+							<th>Asset Set 1</th>
+							<th>Asset Set 2</th>
+							<th>Order Id</th>
+						</tr>
+				    </thead>
+				    <tbody>
+						<tr ng-repeat="order in orders">
+							<td>
+								<span ng-repeat="item in order.amountSet">
+									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+								</span>
+							</td>
 
-				<td>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-				</td>
-				<td><a href="order/{{order.id}}">{{order.id}}</a>
-			</tr>
-	    </tbody>
-	</table>
+							<td>
+								<span ng-repeat="item in order.amountSet1">
+									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+								</span>
+							</td>
+							<td><a href="order/{{order.id}}">{{order.id}}</a>
+						</tr>
+				    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Trades</h2>
+				<table class="table table-inverse table-hover">
+				    <thead>
+						<tr>
+							<th>Asset Set 1</th>
+							<th>Asset Set 2</th>
+							<th>Order Id</th>
+						</tr>
+				    </thead>
+				    <tbody>
+						<tr ng-repeat="order in orders">
+							<td>
+								<span ng-repeat="item in order.amountSet">
+									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+								</span>
+							</td>
+
+							<td>
+								<span ng-repeat="item in order.amountSet1">
+									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+								</span>
+							</td>
+							<td><a href="order/{{order.id}}">{{order.id}}</a>
+						</tr>
+				    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Transactions</h2>
+				<table class="table table-inverse table-hover">
+				 <thead>
+						<tr>
+							<th>Asset Set</th>
+							<th>Value Set</th>
+							<th>To</th>
+							<th>From</th>
+							<th>Transaction Id</th>
+						</tr>
+				    </thead>
+				</table>
+			</div>
+		</div>
+	</div>
 	<div class="spacing-25"></div>
-	<h2>Trades</h2>
-	<table class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Asset Set 1</th>
-				<th>Asset Set 2</th>
-				<th>Order Id</th>
-			</tr>
-	    </thead>
-	    <tbody>
-			<tr ng-repeat="order in orders">
-				<td>
-					<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-				</td>
-
-				<td>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-				</td>
-				<td><a href="order/{{order.id}}">{{order.id}}</a>
-			</tr>
-	    </tbody>
-	</table>
-	<div class="spacing-25"></div>
-	<h2>Transactions</h2>
-	<table class="table table-inverse table-hover">
-	 <thead>
-			<tr>
-				<th>Asset Set</th>
-				<th>Value Set</th>
-				<th>To</th>
-				<th>From</th>
-				<th>Transaction Id</th>
-			</tr>
-	    </thead>
-	</table>
-
-	<div class="spacing-50"></div>
 </div>

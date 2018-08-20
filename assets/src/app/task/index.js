@@ -118,8 +118,6 @@ angular.module( 'conexus.task', [
         else{$location.path('/login')}
     };
 
-
-
     $scope.submit = function() {
         if($scope.working === false) return false;
         $scope.working = false; $scope.question = false; $scope.streaming = false;

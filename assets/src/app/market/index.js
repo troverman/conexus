@@ -47,6 +47,14 @@ angular.module( 'conexus.market', [
         },
         credits:{enabled:false},
     };
+
+    $scope.markets = ['onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','CRE8','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    var length = $scope.markets.length;
+    for (x in $scope.markets){
+        $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
+        $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
+    } 
+
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
     $scope.orders = orders;
@@ -58,6 +66,16 @@ angular.module( 'conexus.market', [
     });
     $scope.newOrder.identiferSet = $scope.stateParams.id;
     $scope.trades = {};
+
+    $scope.keyPress = function(searchValue){
+        $scope.markets = $scope.markets.filter(function(obj){
+            console.log(obj.includes(searchValue))
+            return obj.includes(searchValue);
+        });
+        //SearchModel.search(searchValue).then(function(models){
+        //    $scope.searchResults = models;
+        //});
+    };
 
     $scope.createOrder = function() {
         $scope.newOrder.identiferSet = $scope.stateParams.id;

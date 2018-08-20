@@ -2,20 +2,36 @@
 <div ng-show="currentUser">
 	<div class="spacing-5"></div>
 	<div class="container">
-		<div class="col-md-3">
-			<div class="card">
+		<div class="col-md-4">
+			<!--<div class="card">
 				<div style="padding:16px;">
-
 					<img class="avatar" style="margin-top:0em" ng-src="{{currentUser.avatarUrl}}"/>
 					<h2><a href="/member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
 					<p>{{member.totalWork}}</p>
-					<!--<p>{{member.walletAddress}}</p>-->
-					<!--<p>info | wallet</p>-->
-
+				</div>
+		    </div>-->
+		    <div class="member-card">
+			    <div class="member-card-image" style="background-image: url('{{member.avatarUrl}}'')">
+			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
+			    </div>
+			    <div class="member-card-info">
+			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
+			        <p style="color:gray">{{currentUser.status}} online</p>
+			        <p style="color:gray">{{currentUser.totalWork}}</p>
+			    </div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="card">
+				<div style="padding:16px;">
+					<p>MEMBER INFORMATION</p>
+					<p>MEMBER NOTIFICATION</p>
+					<p>MEMBER PROJECTS</p>
+					<p>MEMBER INFORMATION</p>
 				</div>
 		    </div>
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-12">
 
 			<div class="spacing-15"></div>
 

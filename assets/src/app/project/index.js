@@ -593,9 +593,9 @@ angular.module( 'conexus.project', [
     });
 
 }])
-.controller( 'ProjectPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
+.controller( 'ProjectPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
     $scope.currentUser = config.currentUser;
-    $scope.member = member;
+    $scope.project = project;
     $scope.orders = orders;
     $scope.orders.forEach(function(part, index) {
         if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
@@ -603,7 +603,7 @@ angular.module( 'conexus.project', [
         if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
-    titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
+    titleService.setTitle($scope.project.title + ' | Positions | CRE8.XYZ');
     
     $scope.newOrderToggle = function(){
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;

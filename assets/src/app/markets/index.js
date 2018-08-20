@@ -21,6 +21,13 @@ angular.module( 'conexus.markets', [
 .controller( 'MarketsCtrl', ['$scope', 'config', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, config, OrderModel, orders, titleService ) {
 	titleService.setTitle('Market | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.markets = ['onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','CRE8','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    var length = $scope.markets.length;
+    for (x in $scope.markets){
+        $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
+        $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
+    } 
+
     $scope.chart = {
         chart: {
             zoomType: 'x',
@@ -56,6 +63,17 @@ angular.module( 'conexus.markets', [
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
     $scope.trades = {};
+
+    $scope.keyPress = function(searchValue){
+        $scope.markets = $scope.markets.filter(function(obj){
+            console.log(obj.includes(searchValue))
+            return obj.includes(searchValue);
+        });
+        //SearchModel.search(searchValue).then(function(models){
+        //    $scope.searchResults = models;
+        //});
+    };
+   
 
     //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {

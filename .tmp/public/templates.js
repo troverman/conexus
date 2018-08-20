@@ -148,31 +148,37 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"col-md-8\">\n" +
+    "\n" +
     "			<h3>Balances</h3>\n" +
     "			<p>Tokens | Peer Contrubution</p>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "			<h4>{{currentUser.email}}</h4>\n" +
+    "			<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "			<a href=\"#\">\n" +
+    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "					<h3>Update Avatar</h3>\n" +
+    "				</div>\n" +
+    "			</a>\n" +
+    "			<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "			<a href=\"#\">\n" +
+    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "					<h3>Update Cover</h3>\n" +
+    "				</div>\n" +
+    "			</a>\n" +
+    "\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"spacing-5\"></div>\n" +
-    "	<h4>{{currentUser.email}}</h4>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "	<h3>Update Avatar</h3>\n" +
-    "	<a href=\"#\">\n" +
-    "		<div class=\"well\" ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "			<div>Drag photos or click here to upload.</div>\n" +
-    "			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>  		\n" +
-    "		</div>\n" +
-    "	</a>\n" +
-    "	<p ng-show=\"avatarLoading\" style=\"text-align:center\"><i class=\"fa fa-spin fa-spinner\"></i>&nbsp;{{pp}}%</p>\n" +
-    "	<div ng-show=\"avatarLoading\" class=\"progress\">\n" +
-    "		<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: {{avatarPercentage}}%;\"></div>\n" +
-    "	</div>\n" +
+    "	<h3>Identification Information</h3>\n" +
+    "	<p>Human Proof ID | ON</p>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<h3>Settings</h3>\n" +
-    "	<p>GPS Tracking</p>\n" +
+    "	<p>GPS Tracking | ON</p>\n" +
+    "	<p>Notifications | ON</p>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<h3>Connected Accounts</h3>\n" +
@@ -386,20 +392,36 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div ng-show=\"currentUser\">\n" +
     "	<div class=\"spacing-5\"></div>\n" +
     "	<div class=\"container\">\n" +
-    "		<div class=\"col-md-3\">\n" +
-    "			<div class=\"card\">\n" +
+    "		<div class=\"col-md-4\">\n" +
+    "			<!--<div class=\"card\">\n" +
     "				<div style=\"padding:16px;\">\n" +
-    "\n" +
     "					<img class=\"avatar\" style=\"margin-top:0em\" ng-src=\"{{currentUser.avatarUrl}}\"/>\n" +
     "					<h2><a href=\"/member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
     "					<p>{{member.totalWork}}</p>\n" +
-    "					<!--<p>{{member.walletAddress}}</p>-->\n" +
-    "					<!--<p>info | wallet</p>-->\n" +
-    "\n" +
+    "				</div>\n" +
+    "		    </div>-->\n" +
+    "		    <div class=\"member-card\">\n" +
+    "			    <div class=\"member-card-image\" style=\"background-image: url('{{member.avatarUrl}}'')\">\n" +
+    "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"member-card-info\">\n" +
+    "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.totalWork}}</p>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"col-md-8\">\n" +
+    "			<div class=\"card\">\n" +
+    "				<div style=\"padding:16px;\">\n" +
+    "					<p>MEMBER INFORMATION</p>\n" +
+    "					<p>MEMBER NOTIFICATION</p>\n" +
+    "					<p>MEMBER PROJECTS</p>\n" +
+    "					<p>MEMBER INFORMATION</p>\n" +
     "				</div>\n" +
     "		    </div>\n" +
     "		</div>\n" +
-    "		<div class=\"col-md-9\">\n" +
+    "		<div class=\"col-md-12\">\n" +
     "\n" +
     "			<div class=\"spacing-15\"></div>\n" +
     "\n" +
@@ -692,25 +714,13 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function ($tem
     "                dy=\".35em\"\n" +
     "                class=\"medium-text\"\n" +
     "                >\n" +
-    "            <!--Connect. Collab. Create.-->\n" +
     "            CRE8 MULTIDIMENSIONAL VALUE\n" +
     "          </text> \n" +
-    "        </symbol>\n" +
-    "        <!--<div style=\"text-align:center;\">\n" +
-    "          <img style=\"position:absolute;top:35%;bottom:0;left:0;right:0;margin:0 auto;height:100px\" src=\"images/conexus-white.png\">\n" +
-    "        </div>-->         \n" +
+    "        </symbol>       \n" +
     "        <div class=\"intro-shade\"></div>  \n" +
     "      </svg> \n" +
     "      <div class=\"box-with-text\">\n" +
     "        <div class=\"text-fill\">\n" +
-    "          <!--<video itemscope itemtype=\"VideoObject\"\n" +
-    "              class=\"video\" \n" +
-    "              src=\"videos/video.mp4\"\n" +
-    "              preload=\"auto\" \n" +
-    "              autoplay=\"autoplay\" \n" +
-    "              loop=\"loop\" \n" +
-    "              muted=\"muted\">\n" +
-    "          </video>-->\n" +
     "          <video itemscope itemtype=\"VideoObject\"\n" +
     "              class=\"video\" \n" +
     "              src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\"\n" +
@@ -786,140 +796,144 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
 
 angular.module("market/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("market/index.tpl.html",
-    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
-    "</div>\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h1>{{stateParams.id}} MARKETS</h1>\n" +
-    "	<p>{{stateParams.id}} | 12 markets | 88123 tokens in circulation </p>\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h2>Markets</h2>\n" +
-    "	<!--TODO: FILTER / SEARCH -->\n" +
-    "    <div class=\"spacing-5\"></div>\n" +
-    "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "\n" +
-    "\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onTime\">onTime</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream\">onTimeStream</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onReact\">onReact</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onPost\">onPost</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onOrder\">onOrder</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onVote\">onVote</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onView\">onView</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onValidate\">onValidate</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onMine\">onMine</a></td></tr>\n" +
-    "\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/CRE8\">CRE8</a></td></tr>\n" +
-    "\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream+5b0b34c1d0f57258271d8b17\">onTimeStream+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onTime+5b0b34c1d0f57258271d8b17\">onTime+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream+5b143af632b5561400b184ec\">onTimeStream+5b143af632b5561400b184ec</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onTimeStream+5b143af632b5561400b184ec\">onTime+5b143af632b5561400b184ec</a></td></tr>\n" +
-    "\n" +
-    "\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h2>Order Book</h2>\n" +
-    "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
-    "	<md-card ng-show=\"newOrderToggleVar\">\n" +
-    "	    <div style=\"padding:10px;\">\n" +
-    "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
-    "			</form>\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"\">\n" +
+    "			<div style=\"\">\n" +
+    "				<h1>{{stateParams.id}} MARKETS</h1>\n" +
+    "				<p>{{stateParams.id}} | 12 markets | 88123 tokens in circulation </p>\n" +
+    "			</div>\n" +
     "		</div>\n" +
-    "	</md-card>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "				<th>Order Id</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"\">\n" +
+    "			<div style=\"\">\n" +
+    "				<h2>Markets</h2>\n" +
+    "				<!--TODO: FILTER / SEARCH -->\n" +
+    "			    <div class=\"spacing-5\"></div>\n" +
+    "			    <div class=\"card\">\n" +
+    "			        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "			            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "			        </form>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"spacing-15\"></div>\n" +
+    "				<div class=\"card\" ng-repeat=\"market in markets\">\n" +
+    "				    <div style=\"padding:16px;\">\n" +
+    "				    	<a href=\"market/{{stateParams.id}}/{{market}}\"><h4>{{market}}</h4></a>\n" +
+    "				    	<p>{{stateParams.id}}/{{market}} markets</p>\n" +
+    "				    </div>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h2>Order Book</h2>\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "				<div class=\"card\" ng-show=\"newOrderToggleVar\">\n" +
+    "				    <div style=\"padding:10px;\">\n" +
+    "						<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "						</form>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				    <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set 1</th>\n" +
+    "							<th>Asset Set 2</th>\n" +
+    "							<th>Order Id</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				    <tbody>\n" +
+    "						<tr ng-repeat=\"order in orders\">\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet\">\n" +
+    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
     "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "							<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "						</tr>\n" +
+    "				    </tbody>\n" +
+    "				</table>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h2>Trades</h2>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				    <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set 1</th>\n" +
+    "							<th>Asset Set 2</th>\n" +
+    "							<th>Order Id</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				    <tbody>\n" +
+    "						<tr ng-repeat=\"order in orders\">\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet\">\n" +
+    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "							<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "						</tr>\n" +
+    "				    </tbody>\n" +
+    "				</table>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h2>Transactions</h2>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				 <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set</th>\n" +
+    "							<th>Value Set</th>\n" +
+    "							<th>To</th>\n" +
+    "							<th>From</th>\n" +
+    "							<th>Transaction Id</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				</table>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
-    "	<h2>Trades</h2>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "				<th>Order Id</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h2>Transactions</h2>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	 <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set</th>\n" +
-    "				<th>Value Set</th>\n" +
-    "				<th>To</th>\n" +
-    "				<th>From</th>\n" +
-    "				<th>Transaction Id</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	</table>\n" +
-    "\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
 }]);
 
@@ -928,110 +942,103 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
     "</div>\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h1><a href=\"market/{{stateParams.id}}\">{{stateParams.id}}</a> | <a href=\"market/{{stateParams.id1}}\">{{stateParams.id1}}</a></h1>\n" +
-    "	<p> n tokens in circulation | n token volume | information </p>\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<highchart config=\"chart\"></highchart>\n" +
-    "	<h2>Order Book</h2>\n" +
-    "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
-    "	<md-card ng-show=\"newOrderToggleVar\">\n" +
-    "	    <div style=\"padding:10px;\">\n" +
-    "			<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Identifer Set 2\" ng-disabled=\"true\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
-    "			</form>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h1><a href=\"market/{{stateParams.id}}\">{{stateParams.id}}</a> | <a href=\"market/{{stateParams.id1}}\">{{stateParams.id1}}</a></h1>\n" +
+    "				<p> {{stateParams.id}} | {{stateParams.id1}} | 47021 tokens in circulation | 452451 token trade volume</p>\n" +
+    "				<div class=\"spacing-25\"></div>\n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
+    "			</div>\n" +
     "		</div>\n" +
-    "	</md-card>\n" +
-    "	<!--<h4>Bids</h4>-->\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h2>Order Book</h2>\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "				<div class=\"card\" ng-show=\"newOrderToggleVar\">\n" +
+    "				    <div style=\"padding:10px;\">\n" +
+    "						<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Identifer Set 2\" ng-disabled=\"true\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "						</form>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				    <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set 1</th>\n" +
+    "							<th>Asset Set 2</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				    <tbody>\n" +
+    "						<tr ng-repeat=\"order in orders\">\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet\">\n" +
+    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
     "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
-    "	<!--<h4>Asks</h4>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "							<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "						</tr>\n" +
+    "				    </tbody>\n" +
+    "				</table>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h2>Trades</h2>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				    <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set 1</th>\n" +
+    "							<th>Asset Set 2</th>\n" +
+    "							<th>Order Id</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				    <tbody>\n" +
+    "						<tr ng-repeat=\"order in orders\">\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet\">\n" +
+    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
     "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>-->\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h2>Trades</h2>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "				<th>Order Id</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "							<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "						</tr>\n" +
+    "				    </tbody>\n" +
+    "				</table>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
     "</div>");
 }]);
 
@@ -1040,122 +1047,120 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
     "</div>\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h1>Markets</h1>\n" +
+    "	<div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "	<!--TODO: FILTER / SEARCH -->\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
-    "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead><tr><th>Token</th></tr></thead>\n" +
-    "	    <tbody>\n" +
-    "\n" +
-    "			<tr><td><a href=\"market/onTime\">onTime</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onTimeStream\">onTimeStream</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onReact\">onReact</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onPost\">onPost</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onOrder\">onOrder</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onVote\">onVote</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onView\">onView</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onValidate\">onValidate</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/{{stateParams.id}}/onMine\">onMine</a></td></tr>\n" +
-    "\n" +
-    "			<tr><td><a href=\"market/onTimeStream+5b0b34c1d0f57258271d8b17\">onTimeStream+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onTime+5b0b34c1d0f57258271d8b17\">onTime+5b0b34c1d0f57258271d8b17</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onTimeStream+5b143af632b5561400b184ec\">onTimeStream+5b143af632b5561400b184ec</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/onTimeStream+5b143af632b5561400b184ec\">onTime+5b143af632b5561400b184ec</a></td></tr>\n" +
-    "\n" +
-    "			<tr><td><a href=\"market/CRE8\">CRE8</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/NOVO\">NOVO</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/CONEX\">CONEX</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/DURHAM\">DURHAM</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/CHAPEL_HILL\">CHAPEL HILL</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/token4\">ALCOA</a></td></tr>\n" +
-    "			<tr><td><a href=\"market/OAK_RIDGE\">OAK RIDGE</a></td></tr>\n" +
-    "			\n" +
-    "		</tbody>\n" +
-    "	</table>\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<h1>Order Book</h1>\n" +
-    "	<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
-    "	<md-card ng-show=\"newOrderToggleVar\">\n" +
-    "	    <div style=\"padding:10px;\">\n" +
-    "			<form role=\"form\" ng-submit=\"createOrder()\">\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
-    "			</form>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"\">\n" +
+    "			<div style=\"\">\n" +
+    "				<h1>Markets</h1>\n" +
+    "				<!--TODO: FILTER / SEARCH -->\n" +
+    "			    <div class=\"spacing-15\"></div>\n" +
+    "			    <div class=\"card\">\n" +
+    "			        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "			            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "			        </form>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"spacing-15\"></div>\n" +
+    "			    <div class=\"card\" ng-repeat=\"market in markets\">\n" +
+    "				    <div style=\"padding:16px;\">\n" +
+    "				    	<a href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
+    "				    	<p>{{market}} markets</p>\n" +
+    "				    </div>\n" +
+    "			    </div>\n" +
+    "	  		</div>\n" +
     "		</div>\n" +
-    "	</md-card>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "				<th>Order Id</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
+    "	</div>\n" +
     "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"\">\n" +
+    "			<div style=\"\">\n" +
+    "				<h1>Order Book</h1>\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "				<div class=\"card\" ng-show=\"newOrderToggleVar\">\n" +
+    "				    <div style=\"padding:10px;\">\n" +
+    "						<form role=\"form\" ng-submit=\"createOrder()\">\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<div class=\"form-group col-sm-6\">\n" +
+    "								<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "							</div>\n" +
+    "							<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "						</form>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				    <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set 1</th>\n" +
+    "							<th>Asset Set 2</th>\n" +
+    "							<th>Order Id</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				    <tbody>\n" +
+    "						<tr ng-repeat=\"order in orders\">\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet\">\n" +
+    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "							<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "						</tr>\n" +
+    "				    </tbody>\n" +
+    "				</table>\n" +
+    "		  	</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"\">\n" +
+    "			<div style=\"\">\n" +
+    "				<h2>Trades</h2>\n" +
+    "				<table class=\"table table-inverse table-hover\">\n" +
+    "				    <thead>\n" +
+    "						<tr>\n" +
+    "							<th>Asset Set 1</th>\n" +
+    "							<th>Asset Set 2</th>\n" +
+    "							<th>Order Id</th>\n" +
+    "						</tr>\n" +
+    "				    </thead>\n" +
+    "				    <tbody>\n" +
+    "						<tr ng-repeat=\"order in orders\">\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet\">\n" +
+    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "\n" +
+    "							<td>\n" +
+    "								<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "								</span>\n" +
+    "							</td>\n" +
+    "							<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
+    "						</tr>\n" +
+    "				    </tbody>\n" +
+    "				</table>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
     "	<div class=\"spacing-25\"></div>\n" +
-    "	<h2>Trades</h2>\n" +
-    "	<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>Asset Set 1</th>\n" +
-    "				<th>Asset Set 2</th>\n" +
-    "				<th>Order Id</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"order in orders\">\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "\n" +
-    "				<td>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "				</td>\n" +
-    "				<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
 }]);
 

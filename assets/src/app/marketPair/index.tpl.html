@@ -1,108 +1,101 @@
 <div id="logo-container" style="text-align:center;background:black">
 </div>
 <div class="container">
-	<div class="spacing-25"></div>
-	<h1><a href="market/{{stateParams.id}}">{{stateParams.id}}</a> | <a href="market/{{stateParams.id1}}">{{stateParams.id1}}</a></h1>
-	<p> n tokens in circulation | n token volume | information </p>
-	<div class="spacing-25"></div>
-	<highchart config="chart"></highchart>
-	<h2>Order Book</h2>
-	<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
-	<md-card ng-show="newOrderToggleVar">
-	    <div style="padding:10px;">
-			<form role="form" ng-submit="createOrder(newTask)">
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Identifer Set 2" ng-disabled="true" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-				</div>
-				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-			</form>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h1><a href="market/{{stateParams.id}}">{{stateParams.id}}</a> | <a href="market/{{stateParams.id1}}">{{stateParams.id1}}</a></h1>
+				<p> {{stateParams.id}} | {{stateParams.id1}} | 47021 tokens in circulation | 452451 token trade volume</p>
+				<div class="spacing-25"></div>
+				<highchart config="chart"></highchart>
+			</div>
 		</div>
-	</md-card>
-	<!--<h4>Bids</h4>-->
-	<table class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Asset Set 1</th>
-				<th>Asset Set 2</th>
-			</tr>
-	    </thead>
-	    <tbody>
-			<tr ng-repeat="order in orders">
-				<td>
-					<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-				</td>
+	</div>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Order Book</h2>
+				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
+				<div class="card" ng-show="newOrderToggleVar">
+				    <div style="padding:10px;">
+						<form role="form" ng-submit="createOrder(newTask)">
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Identifer Set 2" ng-disabled="true" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-sm-6">
+								<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
+							</div>
+							<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
+						</form>
+					</div>
+				</div>
+				<table class="table table-inverse table-hover">
+				    <thead>
+						<tr>
+							<th>Asset Set 1</th>
+							<th>Asset Set 2</th>
+						</tr>
+				    </thead>
+				    <tbody>
+						<tr ng-repeat="order in orders">
+							<td>
+								<span ng-repeat="item in order.amountSet">
+									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+								</span>
+							</td>
 
-				<td>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-				</td>
-				<td><a href="order/{{order.id}}">{{order.id}}</a>
-			</tr>
-	    </tbody>
-	</table>
-	<!--<h4>Asks</h4>
-	<table class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Asset Set 1</th>
-				<th>Asset Set 2</th>
-			</tr>
-	    </thead>
-	    <tbody>
-			<tr ng-repeat="order in orders">
-				<td>
-					<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-				</td>
+							<td>
+								<span ng-repeat="item in order.amountSet1">
+									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+								</span>
+							</td>
+							<td><a href="order/{{order.id}}">{{order.id}}</a>
+						</tr>
+				    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="spacing-5"></div>
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Trades</h2>
+				<table class="table table-inverse table-hover">
+				    <thead>
+						<tr>
+							<th>Asset Set 1</th>
+							<th>Asset Set 2</th>
+							<th>Order Id</th>
+						</tr>
+				    </thead>
+				    <tbody>
+						<tr ng-repeat="order in orders">
+							<td>
+								<span ng-repeat="item in order.amountSet">
+									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+								</span>
+							</td>
 
-				<td>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-				</td>
-				<td><a href="order/{{order.id}}">{{order.id}}</a>
-			</tr>
-	    </tbody>
-	</table>-->
-	<div class="spacing-25"></div>
-	<h2>Trades</h2>
-	<table class="table table-inverse table-hover">
-	    <thead>
-			<tr>
-				<th>Asset Set 1</th>
-				<th>Asset Set 2</th>
-				<th>Order Id</th>
-			</tr>
-	    </thead>
-	    <tbody>
-			<tr ng-repeat="order in orders">
-				<td>
-					<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-				</td>
-
-				<td>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-				</td>
-				<td><a href="order/{{order.id}}">{{order.id}}</a>
-			</tr>
-	    </tbody>
-	</table>
-	<div class="spacing-50"></div>
+							<td>
+								<span ng-repeat="item in order.amountSet1">
+									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+								</span>
+							</td>
+							<td><a href="order/{{order.id}}">{{order.id}}</a>
+						</tr>
+				    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="spacing-15"></div>
 </div>
