@@ -167,7 +167,7 @@
                         <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                        <astyle="display:inline;font-weight:600" href="/task/{{post.task.is}}">task {{post.task.title}}</a>
+                        <a style="display:inline;font-weight:600" href="/task/{{post.task.id}}">{{post.task.title}}</a>
                         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
                     </div>
                     <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
