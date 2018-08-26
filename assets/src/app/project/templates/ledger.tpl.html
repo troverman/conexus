@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
+	<button ng-show="currentUser" class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
 	<div class="card" ng-show="newTransactionToggleVar">
 	    <div style="padding:10px;">
 			<form role="form" ng-submit="createTransaction(newTransaction)">

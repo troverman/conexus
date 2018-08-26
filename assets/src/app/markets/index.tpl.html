@@ -15,11 +15,22 @@
 			        </form>
 			    </div>
 			    <div class="spacing-15"></div>
-			    <div class="card" ng-repeat="market in markets">
-				    <div style="padding:16px;">
-				    	<a href="market/{{market}}"><h4>{{market}}</h4></a>
-				    	<p>{{market}} markets</p>
-				    </div>
+			    <div class="col-md-4">
+					<highchart config="chartMap"></highchart>
+				</div>
+				<div class="col-md-4">
+					<highchart config="chartMap"></highchart>
+				</div>
+				<div class="col-md-4">
+					<highchart config="chartMap"></highchart>
+				</div>
+			    <div class="" ng-repeat="market in markets">
+			    	<div class="card">
+					    <div style="padding:16px;">
+					    	<a href="market/{{market}}"><h4>{{market}}</h4></a>
+					    	<p>{{market}} markets</p>
+					    </div>
+					</div>
 			    </div>
 	  		</div>
 		</div>

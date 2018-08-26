@@ -27,29 +27,42 @@ angular.module( 'conexus.markets', [
         $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
         $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
     } 
-
-    $scope.chart = {
+    $scope.chartMap = {
         chart: {
-            zoomType: 'x',
+            polar: true,
+            margin: [30, 30, 30, 30]
         },
         series: [{
-            id: 'ExchangePrice',
-            type: 'spline',
-            name: 'Exchange Price',
-            data: [65, 59, 80, 81, 56, 55, 40]
+            id: 'values',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
+            color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
         }],
-        title: {
-            text: ''
-        },
+        title: {text: ''},
         xAxis: {
-            title: {
-                text: null
-            }
+            title: {text: null},
+            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
         },
         yAxis: {
-            title: {
-                text: null
-            }
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: false,
+            //align: 'right',
+            //verticalAlign: 'top',
+            //y: 70,
+            //layout: 'vertical'
+        },
+        tooltip: {
+        //    shared: true,
         },
         credits:{enabled:false},
     };

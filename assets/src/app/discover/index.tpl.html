@@ -1,29 +1,29 @@
-<style type="text/css">
-    .angular-google-map-container { height: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
-</style>
-<div itemscope itemtype="Map" class="map-outter bottom-contact">
-    <div class="gmap-container" id="gmap">
-        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-        </ui-gmap-google-map>
+<!--<div class="page-heading">
+    <div class="container"> 
+        <div class="spacing-25"></div>
+        <div class="row">
+            <div class="col-xs-6"><h1>Discover</h1></div>
+        </div>
+        <div class="spacing-25"></div>
     </div>
-</div>
+</div>-->
 
 <div class="container">
-
 	<div class="spacing-10"></div>
 	<h1>Discover</h1>
 	<div class="spacing-10"></div>
-
 </div>
 
 <div class="container">
 	<ul style="padding:0px;" class="member-tabs">
 		<li class="active"><a href="">Activity</a></li>
-		<li><a href="">Content</a></li>
-		<li><a href="">Members</a></li>
+		<li><a href="/discover">Content</a></li>
+		<li><a href="/">Members</a></li>
+		<li><a href="/market">Orders</a></li>
 		<li><a href="/projects">Projects</a></li>
 		<li><a href="/tasks">Tasks</a></li>
-		<li><a href="">Work</a></li>
+		<li><a href="/">Value</a></li>
+		<li><a href="/">Work</a></li>
 	</ul>
 </div>
 
@@ -33,7 +33,6 @@
     <div class="card">
         <form style="display:flex;flex-direction:row;">
             <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
-            <!--
             <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
                 <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <h5 style="color:black;text-align:right" class="noselect">Filters <i class="fa fa-angle-down"></i></h5>
@@ -46,34 +45,31 @@
                     <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>has:</h5></a></li>
                 </ul>
             </div>
-            -->
         </form>
     </div>
     <div class="spacing-15"></div>
 </div>
 
-<div class="container">
-	<h1>Value Sets</h1>
-</div>
 
 <div class="container">
-	<h1>Members</h1>
-	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
-		<div class="member-card">
-		    <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
-		        <a href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
-		    </div>
-		    <div class="member-card-info">
-		        <h4><a href="member/{{member.username}}">{{member.username}}</a></h4>
-		        <p style="color:gray">{{member.status}} offline</p>
-		        <p style="color:gray">total reputation | {{member.totalWork}}</p>
-		    </div>
-		</div>
+	<h2>Value Sets</h2>
+	<div class="col-lg-3 col-xs-6">
+		<highchart config="chart"></highchart>
+	</div>
+	<div class="col-lg-3 col-xs-6">
+		<highchart config="chart"></highchart>
+	</div>
+	<div class="col-lg-3 col-xs-6">
+		<highchart config="chart"></highchart>
+	</div>
+	<div class="col-lg-3 col-xs-6">
+		<highchart config="chart"></highchart>
 	</div>
 </div>
 
 <div class="container">
-	<h1>Streams | Content | Posts</h1>
+	<h2>Content</h2>
+	<div class="spacing-10"></div>
 	<div class="col-md-6" ng-repeat="stream in streams">
 		<div class="card">
 		    <div style="padding:16px;">
@@ -89,39 +85,52 @@
 </div>
 
 <div class="container">
+	<div class="spacing-10"></div>
+	<h2>Members</h2>
+	<div class="spacing-10"></div>
+	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
+		<div class="member-card" style="margin-bottom:10px">
+		    <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
+		        <a href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
+		    </div>
+		    <div class="member-card-info">
+		        <h4><a href="member/{{member.username}}">{{member.username}}</a></h4>
+		        <p style="color:gray">{{member.status}} offline</p>
+		        <p style="color:gray">total reputation | {{member.totalWork}}</p>
+		    </div>
+		</div>
+	</div>
+</div>
 
-	<h1>Projects</h1>
-	<div ng-repeat="project in projects">
+<div class="container">
+	<h2>Projects</h2>
+	<div class="spacing-10"></div>
+	<div ng-repeat="project in projects.slice(0,10)">
         <div class="card">
             <div style="padding:16px;">
                 <div class="row">
-                    <div class="col-xs-1">
+                    <div class="col-sm-1 col-xs-2">
                         <a href="/project/{{project.urlTitle}}"><img style="width:50px;height:50px;" src="{{project.avatarUrl}}"></a>
                     </div>
-                    <div class="col-xs-9">
+                    <div class="col-sm-9 col-xs-10">
                         <h3 style="margin-top:0px">
                             <a href="/project/{{project.urlTitle}}">
-                                <!--<img style="width:50px;height:50px;margin-right:5px" src="{{project.avatarUrl}}">-->
                                 {{project.title}}
                             </a>
                         </h3>
                         <p style="color:gray;font-style:italic;">{{project.description}}</p>
-                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
-                        <!--<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>-->
                     </div>
-                    <div class="col-xs-2" style="text-align:right">
+                    <div class="col-sm-2" style="text-align:right">
                         <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
-                        <!--<h4>0 <i class="fa fa-user"></i></h4>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
+<!--
 <div class="container">
-
 	<h1>Tasks</h1>
 	<div ng-repeat="task in tasks">
 		<div class="card">
@@ -135,23 +144,18 @@
 						<span style="color:gray" am-time-ago="task.createdAt"></span>
 					</div>
 					<div class="col-sm-2" style="text-align:right">
-						<!--<a href="task/{{task.id}}"><button type="submit" class="btn btn-default log-btn">Start Work</button></a>-->
 						<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
-						<!--TODO: DO IT FOR REAL-->
-						<!--<h4 ng-show="!task.completeBountySet"><a href="market/{{task.id}}">Create Liquidity</a></h4>-->
-						<!--<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>-->
+						<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="card-footer">
-				<!--TODO: TASK VERIFICATION-->
 				<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
 				<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-				<!--<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>-->
-				<!--<a style="padding:0px" class="pull-right" href="task/{{task.id}}"><i class="fa fa-link grey"></i></a>-->
 			</div>
 		</div>
 	</div>
-
 </div>
+-->
+
 <div class="spacing-50"></div>
