@@ -114,6 +114,31 @@
 
     <!--TODO CARD VS TABLE-->
     <div class="row">
+        <div class="card" ng-repeat="work in work">
+            <div style="padding:16px;">
+                <div>
+                    <img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{work.user.username}}">{{work.user.username}}</a>
+                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+                    <a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
+                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+                    <a style="display:inline;font-weight:600" href="#">{{work.verificationScore}}</a>
+
+                    <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
+                </div>
+                <p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+                <p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+                <div style="margin-left:42px">
+                    {{item.stream}}
+                   <!-- <p><button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification(item)">verify</button></p>-->
+                    <span style="display:inline" ng-bind-html="renderMessage(work.content)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div class="row">
         <div class="card">
             <div style="padding:16px;">
                 <table class="table table-striped table-hover">
@@ -143,6 +168,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <div class="row">
         <div class="card">

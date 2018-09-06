@@ -1,6 +1,40 @@
 <!--TEMP | LOGGED IN / DASH-->
 <div ng-show="currentUser">
 	<div class="spacing-5"></div>
+
+
+	<div class="container">
+		<div class="col-md-12">
+
+			<div class="card">
+		        <div style="padding:16px;">
+
+					<h1>Welcome to CRE8</h1>
+		        	<h4>Create Your Value Map</h4>
+		        	<h5>Universal Dimension</h5>
+					<highchart config="chart"></highchart>
+
+					<h4>Discover</h4>
+					<p>Trending Tags | tokens | task tokens ~ and tasks with tags</p>
+					<h5>I believe the following is valuable</h5>
+					{{discoverTags}}
+					{{transactions}}
+					<div ng-repeat="order in orders"><a href="#" ng-click="addToOrder(order.identiferSet)">{{order.identiferSet}}</a></div>
+					<h4>What is the ideal day?</h4>
+					<p>the ideal day contains at least 8 hours of rest</p>
+					<p>the ideal day contains at least 8 hours of work</p>
+					<p>the ideal day contains at least 8 hours of fun</p>
+					<h4>Who are you?</h4>
+					<h4>Your Positions</h4>
+					<p>{{newOrder}}</p>
+					<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">create</button>
+
+		        </div>
+		    </div>
+
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="col-md-4">
 			<!--<div class="card">
@@ -45,17 +79,6 @@
 				<li><a href="">Tasks</a></li>
 				<li><a href="">Work</a></li>
 			</ul>
-
-			<div class="card">
-		        <div style="padding:16px;">
-
-		        	<h1>Create Your Value Map</h1>
-					<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
-					<highchart config="chart"></highchart>
-					<!--<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>-->
-
-		        </div>
-		    </div>
 
 			<!--
 			<div class="card">

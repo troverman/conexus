@@ -283,9 +283,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "		    <div style=\"padding:16px;\">\n" +
     "				<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
     "				<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
-    "				<p><a href=\"member/{{stream.user}}\">\n" +
+    "				<p><a href=\"member/{{stream.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
-    "					{{stream.user}}\n" +
+    "					{{stream.user.username}}\n" +
     "				</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -401,6 +401,40 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "<!--TEMP | LOGGED IN / DASH-->\n" +
     "<div ng-show=\"currentUser\">\n" +
     "	<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"col-md-12\">\n" +
+    "\n" +
+    "			<div class=\"card\">\n" +
+    "		        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "					<h1>Welcome to CRE8</h1>\n" +
+    "		        	<h4>Create Your Value Map</h4>\n" +
+    "		        	<h5>Universal Dimension</h5>\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
+    "\n" +
+    "					<h4>Discover</h4>\n" +
+    "					<p>Trending Tags | tokens | task tokens ~ and tasks with tags</p>\n" +
+    "					<h5>I believe the following is valuable</h5>\n" +
+    "					{{discoverTags}}\n" +
+    "					{{transactions}}\n" +
+    "					<div ng-repeat=\"order in orders\"><a href=\"#\" ng-click=\"addToOrder(order.identiferSet)\">{{order.identiferSet}}</a></div>\n" +
+    "					<h4>What is the ideal day?</h4>\n" +
+    "					<p>the ideal day contains at least 8 hours of rest</p>\n" +
+    "					<p>the ideal day contains at least 8 hours of work</p>\n" +
+    "					<p>the ideal day contains at least 8 hours of fun</p>\n" +
+    "					<h4>Who are you?</h4>\n" +
+    "					<h4>Your Positions</h4>\n" +
+    "					<p>{{newOrder}}</p>\n" +
+    "					<button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
+    "		        </div>\n" +
+    "		    </div>\n" +
+    "\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"col-md-4\">\n" +
     "			<!--<div class=\"card\">\n" +
@@ -445,17 +479,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "				<li><a href=\"\">Tasks</a></li>\n" +
     "				<li><a href=\"\">Work</a></li>\n" +
     "			</ul>\n" +
-    "\n" +
-    "			<div class=\"card\">\n" +
-    "		        <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "		        	<h1>Create Your Value Map</h1>\n" +
-    "					<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
-    "					<highchart config=\"chart\"></highchart>\n" +
-    "					<!--<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>-->\n" +
-    "\n" +
-    "		        </div>\n" +
-    "		    </div>\n" +
     "\n" +
     "			<!--\n" +
     "			<div class=\"card\">\n" +
@@ -753,6 +776,7 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function ($tem
     "      </div>\n" +
     "    </div>\n" +
     "  <div class=\"intro-mobile\"></div>\n" +
+    "  <!--https://vimeo.com/153676878-->\n" +
     "</div>\n" +
     "");
 }]);
@@ -2085,7 +2109,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "\n" +
     "<!--POST MODEL | CONTENT TYPE -->\n" +
     "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
-    "<div ng-show=\"false\" class=\"\">\n" +
+    "<div class=\"\">\n" +
     "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "        <li class=\"active\"><a href=\"\">Files</a></li>\n" +
     "        <li class=\"active\"><a href=\"\">Posts</a></li>\n" +
@@ -2093,14 +2117,26 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "    </ul>\n" +
     "</div>\n" +
     "\n" +
+    "<div class=\"col-md-12\" ng-repeat=\"item in content\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            {{item.content}}\n" +
+    "            <p><a style=\"font-weight:700\" href=\"member/{{item.user.username}}\">\n" +
+    "                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "                {{item.user.username}}\n" +
+    "            </a> | <span am-time-ago=\"item.createdAt\"></span></p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
     "	<div class=\"card\">\n" +
     "	    <div style=\"padding:16px;\">\n" +
     "			<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
     "			<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
-    "			<p><a style=\"font-weight:700\" href=\"member/{{stream.user}}\">\n" +
+    "			<p><a style=\"font-weight:700\" href=\"member/{{stream.user.username}}\">\n" +
     "				<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
-    "				{{stream.user}}\n" +
+    "				{{stream.user.username}}\n" +
     "			</a> | <span am-time-ago=\"stream.createdAt\"></span></p>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -2833,6 +2869,31 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "    <!--TODO CARD VS TABLE-->\n" +
     "    <div class=\"row\">\n" +
+    "        <div class=\"card\" ng-repeat=\"work in work\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div>\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\">\n" +
+    "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{work.user.username}}\">{{work.user.username}}</a>\n" +
+    "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                    <a style=\"display:inline;font-weight:600\" href=\"work/{{work.id}}\">{{work.amount}}</a>\n" +
+    "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                    <a style=\"display:inline;font-weight:600\" href=\"#\">{{work.verificationScore}}</a>\n" +
+    "\n" +
+    "                    <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "                </div>\n" +
+    "                <p ng-show=\"work.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
+    "                <p style=\"margin-left:42px\" ng-show=\"work.task.completeIdentifierSet\"><a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
+    "                <div style=\"margin-left:42px\">\n" +
+    "                    {{item.stream}}\n" +
+    "                   <!-- <p><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification(item)\">verify</button></p>-->\n" +
+    "                    <span style=\"display:inline\" ng-bind-html=\"renderMessage(work.content)\"></span>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--\n" +
+    "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <table class=\"table table-striped table-hover\">\n" +
@@ -2862,6 +2923,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    -->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +

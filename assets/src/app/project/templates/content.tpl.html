@@ -30,7 +30,7 @@
 
 <!--POST MODEL | CONTENT TYPE -->
 <!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->
-<div ng-show="false" class="">
+<div class="">
     <ul style="padding:0px;" class="member-tabs">
         <li class="active"><a href="">Files</a></li>
         <li class="active"><a href="">Posts</a></li>
@@ -38,14 +38,26 @@
     </ul>
 </div>
 
+<div class="col-md-12" ng-repeat="item in content">
+    <div class="card">
+        <div style="padding:16px;">
+            {{item.content}}
+            <p><a style="font-weight:700" href="member/{{item.user.username}}">
+                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
+                {{item.user.username}}
+            </a> | <span am-time-ago="item.createdAt"></span></p>
+        </div>
+    </div>
+</div>
+
 <div class="col-md-6" ng-repeat="stream in streams">
 	<div class="card">
 	    <div style="padding:16px;">
 			<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
 			<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
-			<p><a style="font-weight:700" href="member/{{stream.user}}">
+			<p><a style="font-weight:700" href="member/{{stream.user.username}}">
 				<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">
-				{{stream.user}}
+				{{stream.user.username}}
 			</a> | <span am-time-ago="stream.createdAt"></span></p>
 		</div>
 	</div>

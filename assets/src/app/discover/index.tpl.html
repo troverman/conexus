@@ -75,9 +75,9 @@
 		    <div style="padding:16px;">
 				<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
 				<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
-				<p><a href="member/{{stream.user}}">
+				<p><a href="member/{{stream.user.username}}">
 					<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">
-					{{stream.user}}
+					{{stream.user.username}}
 				</a> | <span am-time-ago="stream.createdAt"></span></p>
 			</div>
 		</div>

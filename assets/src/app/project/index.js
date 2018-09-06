@@ -73,12 +73,15 @@ angular.module( 'conexus.project', [
             //TOD: ALL
             streams: [function() {
                 return [
-                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()},
-                    {title:'multiDimensional Stream 597c55e56833048165c6720c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:'troverman', createdAt: new Date()}
+                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
+                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
+                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
+                    {title:'multiDimensional Stream 597c55e56833048165c6720c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()}
                 ];
-            }]
+            }],
+            content: ['PostModel', 'project', function(PostModel, project){
+                return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            }],            
         }
     })
     //TODO: FEATURE | ALLOWS FOR BUDGET MANAGING PROCESS -- AKA CREATE MARKET ORDERS FOR AN ORG BASED ON REPUTATION VOTING
@@ -340,8 +343,9 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$sce', '$scope', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, project, streams, titleService ) {
+.controller( 'ProjectContentCtrl', ['$sce', '$scope', 'content', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, content, project, streams, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
+    $scope.content = content;
     $scope.project = project;
     $scope.streams = streams;
     $scope.AudioContext = {};

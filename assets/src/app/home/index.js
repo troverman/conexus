@@ -17,12 +17,18 @@ angular.module( 'conexus.home', [
 			members: ['UserModel', function(UserModel){
 				return UserModel.getSome(100, 0, 'createdAt DESC');
 			}],
+            orders: ['OrderModel', function(OrderModel) {
+                return OrderModel.getSome('', '', '', 100, 0, 'createdAt DESC');
+            }],
 			posts: ['PostModel', function(PostModel){
                 return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
 			}],
 			tasks: ['TaskModel', function(TaskModel) {
 				return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
 			}],
+            transactions: ['TransactionModel', function(TransactionModel) {
+                return TransactionModel.getSome('','', 100, 0, 'createdAt DESC');
+            }],
 			work: ['WorkModel', function(WorkModel) {
                 return WorkModel.getSome('', '', 15, 0, 'createdAt DESC');
             }]
@@ -31,18 +37,24 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'PostModel', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, PostModel, posts, projects, SearchModel, tasks, titleService, UserModel, work ) {
+.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, orders, PostModel, posts, projects, SearchModel, tasks, titleService, transactions, UserModel, work ) {
 	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
 	$scope.newPost = {};
 	$scope.members = members;
+    $scope.newOrder = [];
+    $scope.orders = orders;//.map(function(obj){return obj.identiferSet});
 	$scope.posts = posts;
 	$scope.projects = projects;
 	$scope.newReaction = {};
 	$scope.searchResults = [];
 	$scope.tasks = tasks;
+    $scope.transactions = transactions.map(function(obj){return obj.ledger});
 	$scope.work = work;
+
+    $scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
+    //$scope.orderTags = orders;
 
 	//TODO: MERGE MODELS
 
@@ -104,7 +116,15 @@ angular.module( 'conexus.home', [
 		UserModel.getByUsername($scope.currentUser.username).then(function(member){
 			$scope.member = member;
 		});
-	}
+	};
+
+    $scope.addToOrder = function(model){
+        $scope.newOrder.push([model,'0.1 UNIVERSAL TOKEN']);
+    };
+
+    $scope.createOrder = function(post){
+        $scope.newOrder = [];
+    };
 
 	//TODO: MODEL | CREATE | NESTED?
 	$scope.createPost = function(post){
