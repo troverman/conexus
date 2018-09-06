@@ -50,13 +50,86 @@ angular.module( 'conexus.home', [
 	$scope.newReaction = {};
 	$scope.searchResults = [];
 	$scope.tasks = tasks;
-    $scope.transactions = transactions.map(function(obj){return obj.ledger});
+    $scope.transactions = transactions//.map(function(obj){return obj.ledger});
 	$scope.work = work;
 
-    $scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
+    //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
     //$scope.orderTags = orders;
 
-	//TODO: MERGE MODELS
+    //tags
+    //orders, tasks, transactions
+    $scope.orders = $scope.orders.map(function(obj){
+        obj.model = 'ORDER';
+        return obj;
+    });
+    $scope.tasks = $scope.tasks.map(function(obj){
+        obj.model = 'TASK';
+        return obj;
+    });
+    $scope.transactions = $scope.transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
+        return obj;
+    });
+
+    $scope.discover = [].concat.apply([], [$scope.orders, $scope.tasks, $scope.transactions]);
+
+    //TEMP | TODO: FIX
+    $scope.discover = $scope.discover.map(function(obj){
+        var returnObj = {};
+        console.log(obj.model)
+        if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
+        if (obj.model == 'TASK'){
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+        }
+        if (obj.model == 'TRANSACTION'){
+            if(obj.ledger){obj.ledger = obj.ledger.split(',')}
+            returnObj = obj.ledger;
+        }
+        return returnObj;
+    });
+
+    console.log($scope.discover);
+
+    $scope.discover = [].concat.apply([], $scope.discover);
+    $scope.discover = $scope.discover.filter(function(e){return e}); 
+
+    function countInArray(array, value) {
+        return array.reduce((n, x) => n + (x === value), 0);
+    }
+
+    $scope.finalArray = [];
+    for (x in $scope.discover){
+        var amount = countInArray($scope.discover, $scope.discover[x]);
+        if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
+            $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
+        }
+    }
+    $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);} ); 
+
+    console.log($scope.finalArray);
+
+
+
+    $scope.posts = $scope.posts.map(function(obj){
+        obj.model = 'CONTENT';
+        return obj;
+    });
+    $scope.projects = $scope.projects.map(function(obj){
+        obj.model = 'PROJECT';
+        return obj;
+    });
+    $scope.tasks = $scope.tasks.map(function(obj){
+        obj.model = 'TASK';
+        return obj;
+    });
+    $scope.work = $scope.work.map(function(obj){
+        obj.model = 'WORK';
+        return obj;
+    });
+    
+    $scope.activity = [].concat.apply([], [$scope.posts, $scope.projects, $scope.tasks, $scope.work]);
+    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
 	$scope.chart = {
         chart: {polar: true},
@@ -156,7 +229,12 @@ angular.module( 'conexus.home', [
 
 	$scope.keyPress = function(searchValue){
 		SearchModel.search(searchValue).then(function(models){
-			$scope.searchResults = models;
+			$scope.activity = models;
+            $scope.activity = $scope.activity.map(function(obj){
+                obj.model = 'CONTENT';
+                return obj;
+            });
+            $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 		});
 	};
 

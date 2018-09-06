@@ -220,10 +220,22 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.work = work;
 
-    //POST, WORK, TASK CREATE, VALIDATION (VOTE) | REACTION
-    //$scope.activity = $scope.work.concat(posts);
-
-    console.log(work, tasks);
+    //POST, WORK, TASK CREATE, VALIDATION (VOTE)
+    $scope.posts = $scope.posts.map(function(obj){
+        obj.model = 'CONTENT';
+        return obj;
+    });
+    $scope.tasks = $scope.tasks.map(function(obj){
+        obj.model = 'TASK';
+        return obj;
+    });
+    $scope.work = $scope.work.map(function(obj){
+        obj.model = 'WORK';
+        return obj;
+    });
+    
+    $scope.activity = [].concat.apply([], [$scope.posts, $scope.tasks, $scope.work]);
+    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){

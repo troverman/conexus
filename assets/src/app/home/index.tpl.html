@@ -1,32 +1,85 @@
 <!--TEMP | LOGGED IN / DASH-->
-<div ng-show="currentUser">
+<div class="container" ng-show="currentUser">
 	<div class="spacing-5"></div>
 
-
-	<div class="container">
+	<div class="row" ng-show="false">
 		<div class="col-md-12">
-
 			<div class="card">
 		        <div style="padding:16px;">
 
 					<h1>Welcome to CRE8</h1>
 		        	<h4>Create Your Value Map</h4>
-		        	<h5>Universal Dimension</h5>
+		        	<h5>Universal Dimension && Universal+{{currentUser.id}} Dimension </h5>
 					<highchart config="chart"></highchart>
 
-					<h4>Discover</h4>
-					<p>Trending Tags | tokens | task tokens ~ and tasks with tags</p>
-					<h5>I believe the following is valuable</h5>
-					{{discoverTags}}
-					{{transactions}}
-					<div ng-repeat="order in orders"><a href="#" ng-click="addToOrder(order.identiferSet)">{{order.identiferSet}}</a></div>
-					<h4>What is the ideal day?</h4>
-					<p>the ideal day contains at least 8 hours of rest</p>
-					<p>the ideal day contains at least 8 hours of work</p>
-					<p>the ideal day contains at least 8 hours of fun</p>
-					<h4>Who are you?</h4>
-					<h4>Your Positions</h4>
-					<p>{{newOrder}}</p>
+					<img style="max-height:200px" src="http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg">
+		        	<img style="max-height:200px" src="http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg">
+		        	<img style="max-height:200px" src="http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png">
+		        	<img style="max-height:200px" src="http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif">
+		        	<img style="max-height:200px" src="http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg">
+		        	<img style="max-height:200px" src="http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg">
+		        	<img style="max-height:200px" src="http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg">
+		        	<img style="max-height:200px" src="http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg">
+		        	<img style="max-height:200px" src="http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg">
+		        	<img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
+		        	<img style="max-height:200px" src="http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif">
+
+					<div class="card">
+						<div style="padding:16px;">
+							<h3>Discover</h3>
+							<h4>I believe the following is of value</h4>
+							<!--<div ng-repeat="item in discover">
+								<div ng-show="item.model='ORDER'">{{item}}</div>
+							</div>-->
+							<!--<div ng-repeat="order in orders"><a href="#" ng-click="addToOrder(order.identiferSet)">{{order.identiferSet}}</a></div>-->
+							<div class="row"><div ng-repeat="item in finalArray"><a style="font-weight:800" class="col-xs-3" href="#" ng-click="addToOrder(item.element)">{{item.element}}</a></div></div>
+							<div class="spacing-15"></div>
+							<div class="">
+								<div class="form-group" style="width:33%">
+									<input type="text" class="form-control" id="postContent">
+									<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div style="padding:16px;">
+							<h4>A Day Of Value</h4>
+							<p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">REST</span></p>
+							<p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">WORK</span></p>
+							<p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">FUN</span></p>
+			        		<img style="max-height:200px" src="http://68.media.tumblr.com/78b2c984797b14adfa8658ae32f2d39d/tumblr_ny5wg8Uo3v1qd8bbxo1_500.gif">
+							<div class="spacing-15"></div>
+							<div class="form-group" style="width:33%">
+								<input type="text" placeholder="Hours" class="form-control" id="postContent">
+								<input type="text" placeholder="Activity" class="form-control" id="postContent">
+								<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div style="padding:16px;">
+							<h4>Who Are You?</h4>
+							<img style="max-height:200px" src="http://36.media.tumblr.com/tumblr_md8qu5OBkq1qizi55o1_500.jpg">
+							<img style="max-height:200px" src="http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg">
+							<div class="spacing-15"></div>
+							<div class="form-group" style="width:33%">
+								<input type="text" placeholder="Name" class="form-control" id="postContent">
+								<input type="text" placeholder="Birthday" class="form-control" id="postContent">
+								<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div style="padding:16px;">
+							<h4>Your Positions</h4>
+							<p>{{newOrder}}</p>
+						</div>
+					</div>
+
 					<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">create</button>
 
 		        </div>
@@ -35,7 +88,9 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="spacing-15"></div>
+
+	<div class="row">
 		<div class="col-md-4">
 			<!--<div class="card">
 				<div style="padding:16px;">
@@ -45,7 +100,7 @@
 				</div>
 		    </div>-->
 		    <div class="member-card">
-			    <div class="member-card-image" style="background-image: url('{{member.avatarUrl}}'')">
+			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
 			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
 			    </div>
 			    <div class="member-card-info">
@@ -58,27 +113,41 @@
 		<div class="col-md-8">
 			<div class="card">
 				<div style="padding:16px;">
-					<p>MEMBER INFORMATION</p>
-					<p>MEMBER NOTIFICATION</p>
-					<p>MEMBER PROJECTS</p>
-					<p>MEMBER INFORMATION</p>
+					<!--<p>{{currentUser.firstName}}</p>
+					<p>{{currentUser.lastName}}</p>-->
+					<h4>{{currentUser.email}}</h4>
+					<p><a href="/projects">25 Projects,</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
+					<h5>Balance Lookup</h5>
+		       		<form style="display:flex;flex-direction:row;">
+		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+			                <a href="#">
+			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+			                </a>
+						</div>
+		        	</form>
 				</div>
 		    </div>
 		</div>
 		<div class="col-md-12">
 
-			<div class="spacing-15"></div>
-
-			<ul style="padding:0px;" class="member-tabs">
-				<li class="active"><a href="">Activity</a></li>
-				<li><a href="">Discover</a></li>
-				<li><a href="">Posts</a></li>
-				<li><a href="">Projects</a></li>
-				<li><a href="">Positions</a></li>
-				<li><a href="">Notifications</a></li>
-				<li><a href="">Tasks</a></li>
-				<li><a href="">Work</a></li>
-			</ul>
+		    <div class="card">
+		        <form style="display:flex;flex-direction:row;">
+		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+		            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+		                <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		                    <h5 style="color:black;text-align:right" class="noselect">Filters <i class="fa fa-angle-down"></i></h5>
+		                </a>
+		                <ul style="position:relative" class="dropdown-menu">
+		                    <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>tag:</h5></a></li>
+		                    <hr class="sort-hr">
+		                    <li><a href="#" class="sort-a" ng-click="selectSort('memberCount DESC')"><h5>@:</h5></a></li>
+		                    <hr class="sort-hr">
+		                    <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>has:</h5></a></li>
+		                </ul>
+		            </div>
+		        </form>
+		    </div>
 
 			<!--
 			<div class="card">
@@ -93,48 +162,106 @@
 		    </div>
 			-->
 
-			<!--tasks, work, posts, activity-->
-			<!--TODO: ACTIVITY-->
-			<div ng-repeat="post in posts">
-		        <div class="card">
+			<div ng-repeat="item in activity">
+				<div class="card" ng-show="item.model=='CONTENT'">
 		            <div style="padding:16px;">
 						<div>
-
-
-							<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
-							<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
+							<img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
+							<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
 							<p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
 							<!--TODO: POST PARENT TYPES-->
-							<a ng-show="post.market" style="display:inline;font-weight:600" href="/market/{{post.market}}">market {{post.market}}</a>
-							<a ng-show="post.order" style="display:inline;font-weight:600" href="/order/{{post.order}}">order {{post.order}}</a>
-							<a ng-show="post.post" style="display:inline;font-weight:600" href="/post/{{post.post}}">post {{post.post}}</a>
-							<a ng-show="post.profile" style="display:inline;font-weight:600" href="/member/{{post.profile}}">profile {{post.profile}}</a>
-							<a ng-show="post.project" style="display:inline;font-weight:600" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
-							<a ng-show="post.task" style="display:inline;font-weight:600" href="/task/{{post.task}}">task {{post.task}}</a>
-							<a ng-show="post.work" style="display:inline;font-weight:600" href="/work/{{post.work}}">work {{post.work}}</a>
-
-							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
-
+							<a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
+							<a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
+							<a ng-show="item.post" style="display:inline;font-weight:600" href="/post/{{item.post}}">post {{item.post}}</a>
+							<a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile}}">profile {{item.profile}}</a>
+							<a ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
+							<a ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
+							<a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
+							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 						</div>
-						<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+						<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
 					</div>
 					<div class="card-footer">
-						<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-						<a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-						<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-						<a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+						<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+						<a style="padding:0px" class="pull-right" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
 					<!--TODO: NESTED -->
-					<div ng-show="post.showReply" class="card-footer">
-						<form role="form" ng-submit="createPost(post)">
+					<div ng-show="item.showReply" class="card-footer">
+						<form role="form" ng-submit="createPost(item)">
 							<div class="form-group">
-								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
+								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
 							</div>
 							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 						</form>
 					</div>
 				</div>
+				<!--TODO: FINALIZE-->
+				<div class="card" ng-show="item.model=='PROJECT'">
+					<div style="padding:16px;">
+		                <div class="row">
+		                    <div class="col-sm-1 col-xs-2">
+		                        <a href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;" src="{{item.avatarUrl}}"></a>
+		                    </div>
+		                    <div class="col-sm-9 col-xs-10">
+		                        <h3 style="margin-top:0px">
+		                            <a href="project/{{item.urlTitle}}">
+		                                {{item.title}}
+		                            </a>
+		                        </h3>
+		                        <p style="color:gray;font-style:italic;">{{item.description}}</p>
+		                    </div>
+		                    <div class="col-sm-2" style="text-align:right">
+		                        <h4><a href="project/{{item.urlTitle}}">Join</a></h4>
+		                    </div>
+		                </div>
+		            </div>
+				</div>
+				<!--TODO: FINALIZE-->
+				<div class="card" ng-show="item.model=='TASK'">
+					<div style="padding:16px;">
+						<div class="row">
+							<div class="col-sm-10">
+								<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+								<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+								<p>{{item.content}}</p>
+								<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+								<span style="color:gray" am-time-ago="item.createdAt"></span>
+							</div>
+							<div class="col-sm-2" style="text-align:right">
+								<h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+					</div>
+			    </div>
+				<div class="card" ng-show="item.model=='WORK'">
+		            <div style="padding:16px;">
+						<div>
+							<img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
+							<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+							<p style="display:inline"><i class="fa fa-angle-right"></i></p>
+			                <a style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
+			                <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+							<a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
+							<p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
+						</div>
+	        			<p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+		            	<p style="margin-left:42px" ng-show="item.task.completeIdentifierSet"><a href="market/{{item.task.completeIdentifierSet}}">{{item.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+		                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+		            </div>
+		            <div class="card-footer">
+		                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+		                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+		                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+		                <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
+		            </div>
+			    </div>
 		    </div>
 			<div class="spacing-25"></div>
 			<div ng-click="loadMore()" style="text-align:center">
@@ -246,82 +373,112 @@
 	</div>
 
 	<div class="spacing-50"></div>
-
 	<div class="container">
-		<ul style="padding:0px;" class="member-tabs">
-			<li class="active"><a href="">Activity</a></li>
-			<li><a href="">Discover</a></li>
-			<li><a href="">Posts</a></li>
-			<li><a href="">Projects</a></li>
-			<li><a href="">Positions</a></li>
-			<li><a href="">Tasks</a></li>
-			<li><a href="">Time</a></li>
-		</ul>
-	</div>
+	    <div class="row">
+			<div ng-repeat="item in activity">
+				<div class="card" ng-show="item.model=='CONTENT'">
+		            <div style="padding:16px;">
+						<div>
+							<img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
+							<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+							<p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
-	<!-- TEMP | WORK -->
-	<div class="container">
-		<div ng-repeat="work in work">
-	        <div class="card">
-	            <div style="padding:16px;">
-					<div>
-						<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
-						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{work.user.username}}">{{work.user.username}}</a>
-						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-		                <a style="display:inline;font-weight:600" href="task/{{work.task.id}}">{{work.task.title}}</a>
-		                <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-						<a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
-						<p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
+							<!--TODO: POST PARENT TYPES-->
+							<a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
+							<a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
+							<a ng-show="item.post" style="display:inline;font-weight:600" href="/post/{{item.post}}">post {{item.post}}</a>
+							<a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile}}">profile {{item.profile}}</a>
+							<a ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
+							<a ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
+							<a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
+							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
+						</div>
+						<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
 					</div>
-        			<p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
-	            	<p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-	                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(work.content)"></span></div>
-	            </div>
-	            <div class="card-footer">
-	                <a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-	                <a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-	                <a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-	                <a style="padding:0px" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
-	            </div>
-	        </div>
-	    </div>
-    </div>
-
-    <!-- TEMP | POST -->
-	<div class="container">
-	    <div ng-repeat="post in posts">
-	        <div class="card">
-	            <div style="padding:16px;">
-					<div>
-
-						<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
-						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
-						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
-
-						<!--TODO: POST TYPES-->
-						<a ng-show="post.market" style="display:inline;font-weight:600" href="/market/{{post.market}}">market {{post.market}}</a>
-						<a ng-show="post.order" style="display:inline;font-weight:600" href="/order/{{post.order}}">order {{post.order}}</a>
-						<a ng-show="post.post" style="display:inline;font-weight:600" href="/post/{{post.post}}">post {{post.post}}</a>
-						<a ng-show="post.profile" style="display:inline;font-weight:600" href="/member/{{post.profile}}">profile {{post.profile}}</a>
-						<a ng-show="post.project" style="display:inline;font-weight:600" href="/project/{{post.project.urlTitle}}">{{post.project.title}}</a>
-						<a ng-show="post.task" style="display:inline;font-weight:600" href="/task/{{post.task}}">task {{post.task}}</a>
-						<a ng-show="post.work" style="display:inline;font-weight:600" href="/work/{{post.work}}">work {{post.work}}</a>
-
-						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
-
+					<div class="card-footer">
+						<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+						<a style="padding:0px" class="pull-right" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
-					<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+					<!--TODO: NESTED -->
+					<div ng-show="item.showReply" class="card-footer">
+						<form role="form" ng-submit="createPost(item)">
+							<div class="form-group">
+								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+							</div>
+							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+						</form>
+					</div>
 				</div>
-				<div class="card-footer">
-					<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-					<a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-					<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-					<a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+
+				<div class="card" ng-show="item.model=='PROJECT'">
+					<div style="padding:16px;">
+		                <div class="row">
+		                    <div class="col-sm-1 col-xs-2">
+		                        <a href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;" src="{{item.avatarUrl}}"></a>
+		                    </div>
+		                    <div class="col-sm-9 col-xs-10">
+		                        <h3 style="margin-top:0px">
+		                            <a href="project/{{item.urlTitle}}">
+		                                {{item.title}}
+		                            </a>
+		                        </h3>
+		                        <p style="color:gray;font-style:italic;">{{item.description}}</p>
+		                    </div>
+		                    <div class="col-sm-2" style="text-align:right">
+		                        <h4><a href="project/{{item.urlTitle}}">Join</a></h4>
+		                    </div>
+		                </div>
+		            </div>
 				</div>
-			</div>
-	    </div>
+
+				<div class="card" ng-show="item.model=='TASK'">
+					<div style="padding:16px;">
+						<div class="row">
+							<div class="col-sm-10">
+								<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+								<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+								<p>{{item.content}}</p>
+								<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+								<span style="color:gray" am-time-ago="item.createdAt"></span>
+							</div>
+							<div class="col-sm-2" style="text-align:right">
+								<h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+					</div>
+			    </div>
+
+				<div class="card" ng-show="item.model=='WORK'">
+		            <div style="padding:16px;">
+						<div>
+							<img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
+							<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+							<p style="display:inline"><i class="fa fa-angle-right"></i></p>
+			                <a style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
+			                <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+							<a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
+							<p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
+						</div>
+		    			<p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+		            	<p style="margin-left:42px" ng-show="item.task.completeIdentifierSet"><a href="market/{{item.task.completeIdentifierSet}}">{{item.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
+		                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+		            </div>
+		            <div class="card-footer">
+		                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+		                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+		                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+		                <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
+		            </div>
+			    </div>
+		    </div>
+    	</div>
 	</div>
-	
 	<div class="spacing-50"></div>
 
 </div>
