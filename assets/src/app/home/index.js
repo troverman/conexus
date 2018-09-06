@@ -95,7 +95,7 @@ angular.module( 'conexus.home', [
     $scope.discover = $scope.discover.filter(function(e){return e}); 
 
     function countInArray(array, value) {
-        return array.reduce((n, x) => n + (x === value), 0);
+        return array.reduce(function(n, x){ return n + (x === value)}, 0);
     }
 
     $scope.finalArray = [];
