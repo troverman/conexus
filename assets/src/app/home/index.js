@@ -89,8 +89,6 @@ angular.module( 'conexus.home', [
         return returnObj;
     });
 
-    console.log($scope.discover);
-
     $scope.discover = [].concat.apply([], $scope.discover);
     $scope.discover = $scope.discover.filter(function(e){return e}); 
 
@@ -105,11 +103,7 @@ angular.module( 'conexus.home', [
             $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
         }
     }
-    $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);} ); 
-
-    console.log($scope.finalArray);
-
-
+    $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
 
     $scope.posts = $scope.posts.map(function(obj){
         obj.model = 'CONTENT';
