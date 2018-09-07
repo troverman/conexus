@@ -57,6 +57,26 @@
 		</div>
 	</div>
 
+	<!--
+	<div class="card" ng-repeat="transaction in transactions">
+		<div style="padding:16px">
+			<p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
+			<p style="font-weight:800">{{transaction.amount}} <a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
+			<p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+			<p>{{transaction.content}}</p>
+			<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+			<a href="transaction/{{transaction.id}}"></a>
+		</div>
+		<div class="card-footer">
+			<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+			<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+			<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+			<a class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}"><i class="fa fa-link grey"></i></a>
+		</div>
+	</div>
+	-->
+
+
 	<table class="table table-inverse table-hover">
 	    <thead>
 			<tr>

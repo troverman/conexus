@@ -2,7 +2,7 @@
 <div class="container" ng-show="currentUser">
 	<div class="spacing-5"></div>
 
-	<div class="row" ng-show="false">
+	<div class="row" ng-show="true">
 		<div class="col-md-12">
 			<div class="card">
 		        <div style="padding:16px;">
@@ -116,7 +116,7 @@
 					<!--<p>{{currentUser.firstName}}</p>
 					<p>{{currentUser.lastName}}</p>-->
 					<h4>{{currentUser.email}}</h4>
-					<p><a href="/projects">25 Projects,</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
+					<p><a href="/projects">25 Projects</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
 					<h5>Balance Lookup</h5>
 		       		<form style="display:flex;flex-direction:row;">
 		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
@@ -149,9 +149,9 @@
 		        </form>
 		    </div>
 
-			<!--
 			<div class="card">
 		        <div style="padding:16px;">
+		        	<h4>Create Post Content</h4>
 		        	<form role="form" ng-submit="createPost(newPost)">
 						<div class="form-group">
 							<input type="text" ng-model="newPost.content" class="form-control" id="postContent">
@@ -160,8 +160,7 @@
 					</form>
 				</div>
 		    </div>
-			-->
-
+			
 			<div ng-repeat="item in activity">
 				<div class="card" ng-show="item.model=='CONTENT'">
 		            <div style="padding:16px;">
@@ -188,7 +187,6 @@
 						<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 						<a style="padding:0px" class="pull-right" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
-					<!--TODO: NESTED -->
 					<div ng-show="item.showReply" class="card-footer">
 						<form role="form" ng-submit="createPost(item)">
 							<div class="form-group">
@@ -238,6 +236,16 @@
 					<div class="card-footer">
 						<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
 						<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+            			<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
+					</div>
+					<div ng-show="item.showReply" class="card-footer">
+						<form role="form" ng-submit="createPost(item)">
+							<div class="form-group">
+								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+							</div>
+							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+						</form>
 					</div>
 			    </div>
 				<div class="card" ng-show="item.model=='WORK'">
@@ -261,6 +269,14 @@
 		                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 		                <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
 		            </div>
+		            <div ng-show="item.showReply" class="card-footer">
+						<form role="form" ng-submit="createPost(item)">
+							<div class="form-group">
+								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+							</div>
+							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+						</form>
+					</div>
 			    </div>
 		    </div>
 			<div class="spacing-25"></div>

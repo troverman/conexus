@@ -198,6 +198,18 @@ angular.module( 'conexus.member', [
     $scope.posts = posts;
     $scope.work = work;
 
+    $scope.posts = $scope.posts.map(function(obj){
+        obj.model = 'CONTENT';
+        return obj;
+    });
+    $scope.work = $scope.work.map(function(obj){
+        obj.model = 'WORK';
+        return obj;
+    });
+    
+    $scope.activity = [].concat.apply([], [$scope.posts, $scope.work]);
+    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+
     $scope.createPost = function(post){
         $scope.newPost.post = post.id;
         $scope.newPost.user = $scope.currentUser.id;

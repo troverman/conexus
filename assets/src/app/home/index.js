@@ -44,13 +44,13 @@ angular.module( 'conexus.home', [
 	$scope.newPost = {};
 	$scope.members = members;
     $scope.newOrder = [];
-    $scope.orders = orders;//.map(function(obj){return obj.identiferSet});
+    $scope.orders = orders;
 	$scope.posts = posts;
 	$scope.projects = projects;
 	$scope.newReaction = {};
 	$scope.searchResults = [];
 	$scope.tasks = tasks;
-    $scope.transactions = transactions//.map(function(obj){return obj.ledger});
+    $scope.transactions = transactions;
 	$scope.work = work;
 
     //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
@@ -240,10 +240,10 @@ angular.module( 'conexus.home', [
         }
     };
 
-    $scope.reply = function(post){
+    $scope.reply = function(item){
     	if($scope.currentUser){
-    		var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-    		$scope.posts[index].showReply = !$scope.posts[index].showReply;
+    		var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+    		$scope.activity[index].showReply = !$scope.activity[index].showReply;
     	}
     	else{$location.path('/login')}
     };

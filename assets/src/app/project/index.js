@@ -252,15 +252,18 @@ angular.module( 'conexus.project', [
 
     //TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type, model){
-        $scope.newReaction.user = $scope.currentUser.id;
-        $scope.newReaction.post = post.id;
-        $scope.newReaction.type = type;
-        //TODO: MODEL | CREATE REACTION
-        //Reaction.create(newReaction);
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        if (type =='plus'){$scope.posts[index].plusCount++}
-        if (type =='minus'){$scope.posts[index].minusCount++}
-        //TODO: UPDATE POST
+        if ($scope.currentUser){
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.post = post.id;
+            $scope.newReaction.type = type;
+            //TODO: MODEL | CREATE REACTION
+            //Reaction.create(newReaction);
+            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+            if (type =='plus'){$scope.posts[index].plusCount++}
+            if (type =='minus'){$scope.posts[index].minusCount++}
+            //TODO: UPDATE POST
+        }
+        else{$location.path('/login')}
     };
 
     $scope.renderMessage = function(post){
@@ -272,9 +275,12 @@ angular.module( 'conexus.project', [
     };
 
     //TODO: GENERALIZED ACTIVITY
-    $scope.reply = function(post){
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        $scope.posts[index].showReply = !$scope.posts[index].showReply
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.activity[index].showReply = !$scope.activity[index].showReply;
+        }
+        else{$location.path('/login')}
     };
 
     $sailsSocket.subscribe('post', function (envelope) {
@@ -705,6 +711,7 @@ angular.module( 'conexus.project', [
                 $scope.newProject = {};
             });
         }
+        else{}
     };
 
     $scope.newProjectToggle = function () {

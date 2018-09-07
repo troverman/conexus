@@ -41,7 +41,7 @@ angular.module( 'conexus.search', [
     });
 }])
 
-.controller( 'SearchController', ['$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
+.controller( 'SearchController', ['$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
     $scope.searchResults = searchResults;
     $scope.searchQuery = $stateParams.searchQuery;
 
@@ -51,6 +51,14 @@ angular.module( 'conexus.search', [
         SearchModel.search(searchValue).then(function(models){
             $scope.searchResults = models;
         });
+    };
+
+    $scope.renderContent = function(message){
+        if (message){
+            var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+            return $sce.trustAsHtml(replacedText);
+        }
     };
    
 }]);
