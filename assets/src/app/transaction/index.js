@@ -23,7 +23,7 @@ angular.module( 'conexus.transaction', [
 }])
 
 .controller( 'TransactionController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'titleService', 'transaction', function TransactionController( $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, titleService, transaction ) {
-    titleService.setTitle('Order | CRE8.XYZ');
+    titleService.setTitle('Transaction | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.posts = posts;
