@@ -18,7 +18,7 @@ module.exports = {
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
-		
+
 		Post.watch(req);
 
 		if(req.query.market){
@@ -95,6 +95,19 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('task')
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if (req.query.transaction){
+			var transaction = req.query.transaction;
+			Post.find({transaction:transaction})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
 			.populate('user')
 			.then(function(models) {
 				Post.subscribe(req, models);

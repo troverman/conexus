@@ -15,8 +15,7 @@ angular.module( 'conexus.transaction', [
                 return TransactionModel.getOne($stateParams.id);
             }],
             posts: ['PostModel', 'transaction', function(PostModel, transaction){
-                //return PostModel.getSome('transaction', transaction.id, 100, 0, 'createdAt DESC');
-                return [];
+                return PostModel.getSome('transaction', transaction.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
@@ -28,7 +27,33 @@ angular.module( 'conexus.transaction', [
     $scope.newPost = {};
     $scope.posts = posts;
     $scope.transaction = transaction;
-    console.log(transaction)
+
+    console.log(posts);
+
+    $scope.createPost = function(post) {
+        if ($scope.currentUser){
+            $scope.newPost.post = post.id;
+            $scope.newPost.user = $scope.currentUser.id;
+            $scope.newPost.transaction = $scope.transaction.id;
+            PostModel.create($scope.newPost).then(function(model) {
+                $scope.newPost = {};
+            });
+        }
+        else{}
+    };
+
+    //TODO: MODEL | CREATE REACTION | UPDATE POST
+    $scope.createReaction = function(post, type){
+        $scope.newReaction.user = $scope.currentUser.id;
+        $scope.newReaction.post = post.id;
+        $scope.newReaction.type = type;
+        //TODO: MODEL | CREATE REACTION
+        //Reaction.create(newReaction);
+        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+        if (type =='plus'){$scope.posts[index].plusCount++}
+        if (type =='minus'){$scope.posts[index].minusCount++}
+        //TODO: UPDATE POST
+    };
 
     $scope.renderMessage = function(message){
         if (message){

@@ -20,7 +20,7 @@ module.exports = {
         from: {
             type: 'string',
         },
-        ledger: {
+        tags: {
             type: 'string',
         },
         project: {

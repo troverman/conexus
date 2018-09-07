@@ -14,7 +14,7 @@
 
 	<div class="spacing-15"></div>
 
-     <div class="card">
+    <div class="card">
         <div style="padding:16px">
             <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
             <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
@@ -25,6 +25,7 @@
             <a href="market/{{transaction.id}}">{{transaction.id}}</a>
         </div>
     </div>
+    
     <div class="spacing-15"></div>
 
 	<div class="col-md-12">

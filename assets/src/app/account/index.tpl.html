@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="member-card">
-			    <div class="member-card-image" style="background-image: url('{{member.avatarUrl}}'')">
+			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
 			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
 			    </div>
 			    <div class="member-card-info">
@@ -21,28 +21,42 @@
 		</div>
 		<div class="col-md-8">
 
-			<h3>Balances</h3>
+			<h4>Balance Lookup</h4>
+       		<form style="display:flex;flex-direction:row;">
+            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+	                <a href="#">
+	                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+	                </a>
+				</div>
+        	</form>
+
+        	<h4>Reputation Lookup</h4>
+       		<form style="display:flex;flex-direction:row;">
+            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+	                <a href="#">
+	                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+	                </a>
+				</div>
+        	</form>
+
 			<p>Tokens | Peer Contrubution</p>
-			<div class="spacing-10"></div>
-
+			<a href="#">
+				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+					<h5>Update Avatar</h5>
+				</div>
+			</a>
+			<a href="#">
+				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+					<h5>Update Cover</h5>
+				</div>
+			</a>
 			<h4>{{currentUser.email}}</h4>
-			<div class="spacing-10"></div>
-
-			<a href="#">
-				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-					<h3>Update Avatar</h3>
-				</div>
-			</a>
-			<div class="spacing-10"></div>
-
-			<a href="#">
-				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-					<h3>Update Cover</h3>
-				</div>
-			</a>
 
 		</div>
 	</div>
+
 
 	<h3>Identification Information</h3>
 	<p>Human Proof ID | ON</p>

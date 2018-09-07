@@ -1,9 +1,11 @@
+//TODO: CONTENT
 module.exports = {
     attributes: {
         content: {
             type: 'string',
             required: true
         },
+        //TODO; TYPE.. vs MODEL BASED | REFACTOR
         market: {
             type: 'string'
         },
@@ -21,6 +23,9 @@ module.exports = {
         },
         task: {
             model: 'task'
+        },
+        transaction: {
+            type: 'string'
         },
         work: {
             model: 'work'

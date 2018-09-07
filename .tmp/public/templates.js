@@ -138,7 +138,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "	<div class=\"row\">\n" +
     "		<div class=\"col-md-4\">\n" +
     "			<div class=\"member-card\">\n" +
-    "			    <div class=\"member-card-image\" style=\"background-image: url('{{member.avatarUrl}}'')\">\n" +
+    "			    <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
     "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "			    </div>\n" +
     "			    <div class=\"member-card-info\">\n" +
@@ -155,28 +155,42 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "		</div>\n" +
     "		<div class=\"col-md-8\">\n" +
     "\n" +
-    "			<h3>Balances</h3>\n" +
+    "			<h4>Balance Lookup</h4>\n" +
+    "       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "	                <a href=\"#\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "	                </a>\n" +
+    "				</div>\n" +
+    "        	</form>\n" +
+    "\n" +
+    "        	<h4>Reputation Lookup</h4>\n" +
+    "       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "	                <a href=\"#\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "	                </a>\n" +
+    "				</div>\n" +
+    "        	</form>\n" +
+    "\n" +
     "			<p>Tokens | Peer Contrubution</p>\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "\n" +
+    "			<a href=\"#\">\n" +
+    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "					<h5>Update Avatar</h5>\n" +
+    "				</div>\n" +
+    "			</a>\n" +
+    "			<a href=\"#\">\n" +
+    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "					<h5>Update Cover</h5>\n" +
+    "				</div>\n" +
+    "			</a>\n" +
     "			<h4>{{currentUser.email}}</h4>\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "			<a href=\"#\">\n" +
-    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "					<h3>Update Avatar</h3>\n" +
-    "				</div>\n" +
-    "			</a>\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "			<a href=\"#\">\n" +
-    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "					<h3>Update Cover</h3>\n" +
-    "				</div>\n" +
-    "			</a>\n" +
     "\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "\n" +
     "	<h3>Identification Information</h3>\n" +
     "	<p>Human Proof ID | ON</p>\n" +
@@ -1556,6 +1570,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                        <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"/member/{{item.profile}}\">profile {{item.profile}}</a>\n" +
     "                        <a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"/project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
     "                        <a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"/task/{{item.task}}\">task {{item.task}}</a>\n" +
+    "                        <a ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"/transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
     "                        <a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{item.work}}\">work {{item.work}}</a>\n" +
     "                    </div>\n" +
     "\n" +
@@ -1953,8 +1968,9 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function ($temp
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "	<div>\n" +
-    "		<div style=\"box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);overflow:hidden;padding:0px;\">\n" +
+    "		<div class=\"card\">\n" +
     "	        <div style=\"padding:16px;\">\n" +
+    "	        	<!--<h4>Post {{post.id}}</h4>-->	\n" +
     "				<div>\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
     "					<a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span class=\"\">{{post.user.username}}</span></a>\n" +
@@ -1977,6 +1993,18 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function ($temp
     "			</div>\n" +
     "			<div ng-include=\"'post/post.tpl.html'\" ng-repeat=\"post in post.children track by post.id\"></div>\n" +
     "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	    <!--<div class=\"card\">\n" +
+    "	        <div style=\"padding:16px\">\n" +
+    "	            <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
+    "	            <p><a href=\"market/onCreate\">onCreate </a></p>\n" +
+    "	            <p><a href=\"market/onCreate+{{post.id}}\">onCreate+{{post.id}} </a></p>\n" +
+    "	            <p><a href=\"market/{{post.id}}\">{{post.id}} </a></p>\n" +
+    "	        </div>\n" +
+    "	    </div>-->\n" +
+    "	    \n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -3368,6 +3396,7 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "    \n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px\">\n" +
+    "            <h2>Transaction {{transaction.id}}</h2>\n" +
     "            <p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
     "            <p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
     "            <p><a ng-repeat=\"tag in transaction.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
@@ -3378,7 +3407,7 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "     <div class=\"card\">\n" +
+    "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "            <p><a ng-repeat=\"tag in transaction.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
@@ -3389,6 +3418,7 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "            <a href=\"market/{{transaction.id}}\">{{transaction.id}}</a>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    \n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "	<div class=\"col-md-12\">\n" +
