@@ -321,16 +321,14 @@ angular.module( 'conexus.member', [
         return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
     }, 0);
 
-    $scope.sumExpense = [];
-    $scope.transactions.reduce(function(a,b,i) {
-        if (b.ledger == 'EXPENSE'){return $scope.sumExpense[i] = parseFloat(a)+parseFloat(b.amount);}
-        else{return $scope.sumExpense[i] = parseFloat(a)}
+    $scope.sumFrom = [];
+    $scope.transactionsFrom.reduce(function(a,b,i) {
+        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
     }, 0);
 
-    $scope.sumRevenue = [];
-    $scope.transactions.reduce(function(a,b,i) {
-        if (b.ledger == 'REVENUE'){return $scope.sumRevenue[i] = parseFloat(a)+parseFloat(b.amount);}
-        else{return $scope.sumRevenue[i] = parseFloat(a)}
+    $scope.sumTo = [];
+    $scope.transactionsTo.reduce(function(a,b,i) {
+        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);;
     }, 0);
 
     $scope.chart = {
@@ -341,12 +339,12 @@ angular.module( 'conexus.member', [
             id: 'Expense',
             type: 'spline',
             name: 'Expense',
-            data: $scope.sumExpense,
+            data: $scope.sumFrom,
         },{
             id: 'Revenue',
             type: 'spline',
             name: 'Revenue',
-            data: $scope.sumRevenue,
+            data: $scope.sumTo,
         }],
         title: {
             text: ''
@@ -373,10 +371,10 @@ angular.module( 'conexus.member', [
             colorByPoint: true,
             data: [{
                 name: 'Expense',
-                y: $scope.sumExpense[$scope.sumExpense.length-1],
+                y: $scope.sumFrom[$scope.sumFrom.length-1],
             }, {
                 name: 'Revenue',
-                y: $scope.sumRevenue[$scope.sumRevenue.length-1],
+                y: $scope.sumTo[$scope.sumTo.length-1],
             }]
         }],
         
@@ -427,14 +425,17 @@ angular.module( 'conexus.member', [
     };
 
     $scope.createOrder = function() {
-        $scope.newOrder.user = $scope.currentUser.id;
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-        OrderModel.create($scope.newOrder).then(function(model) {
-            //$scope.orders.push($scope.newOrder);
-            $scope.newOrder = {};
-        });
+        if ($scope.currentUser){
+            $scope.newOrder.user = $scope.currentUser.id;
+            //TODO: PARSE INPUT
+            //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+            //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+            OrderModel.create($scope.newOrder).then(function(model) {
+                //$scope.orders.push($scope.newOrder);
+                $scope.newOrder = {};
+            });
+        }
+        else{}
     };
 
     $scope.chart = {

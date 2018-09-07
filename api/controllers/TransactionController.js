@@ -83,10 +83,10 @@ module.exports = {
 	},
 
 	getOne: function(req, res) {
-		Transaction.getOne(req.param('id'))
-		.spread(function(model) {
-			Stream.subscribe(req, model);
-			res.json(model);
+		Transaction.find({id:req.param('id')})
+		.then(function(model) {
+			Transaction.subscribe(req, model[0]);
+			res.json(model[0]);
 		});
 	},
 
@@ -104,7 +104,7 @@ module.exports = {
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
 			else {
-				Stream.publishCreate(task);
+				Transaction.publishCreate(task);
 				res.json(task);
 			}
 		});

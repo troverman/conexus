@@ -2,7 +2,7 @@
 <div class="container" ng-show="currentUser">
 	<div class="spacing-5"></div>
 
-	<div class="row" ng-show="true">
+	<div class="row" ng-show="false">
 		<div class="col-md-12">
 			<div class="card">
 		        <div style="padding:16px;">
@@ -149,7 +149,7 @@
 		        </form>
 		    </div>
 
-			<div class="card">
+			<div class="card" ng-show="false">
 		        <div style="padding:16px;">
 		        	<h4>Create Post Content</h4>
 		        	<form role="form" ng-submit="createPost(newPost)">

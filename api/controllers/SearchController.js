@@ -22,6 +22,7 @@ module.exports = {
 		        obj.model = 'PROJECT';
 		        return obj;
 		    });
+		    
 			Project.watch(req);
 			Project.subscribe(req, models);
 
@@ -46,7 +47,7 @@ module.exports = {
 				Post.watch(req);
 				Post.subscribe(req, models);
 				res.json(combinedModels);
-				
+
 			});
 		});
 	},
