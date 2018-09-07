@@ -54,6 +54,23 @@
             </div>
         </div>
 
+        <div class="card" ng-show="item.model=='TRANSACTION'">
+            <div style="padding:16px">
+                <p style="font-weight:800">From: <a href="member/{{item.from}}">{{item.from}}</a> To: <a href="member/{{item.to}}">{{item.to}}</a></p>
+                <p style="font-weight:800">{{item.amount}} <a href="market/{{item.identifier}}">{{item.identifier}}</a></p>
+                <p><a ng-repeat="tag in item.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                <p>{{item.content}}</p>
+                <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+                <a href="transaction/{{item.id}}"></a>
+            </div>
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+        </div>
+
         <div class="card" ng-show="item.model=='WORK'">
             <div style="padding:16px;">
                 <div>

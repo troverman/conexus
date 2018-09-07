@@ -37,6 +37,12 @@ angular.module( 'conexus.member', [
             posts: ['member', 'PostModel', function(member, PostModel) {
                 return PostModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }],
+            transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
+                return TransactionModel.getSome('from', member.id, 100, 0, 'createdAt DESC');
+            }],
+            transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
+                return TransactionModel.getSome('to', member.id, 100, 0, 'createdAt DESC');
+            }],
             work: ['member', 'WorkModel', function(member, WorkModel) {
                 return WorkModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }]
@@ -188,7 +194,7 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'PostModel', 'posts', 'titleService', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, PostModel, posts, titleService, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'PostModel', 'posts', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, PostModel, posts, titleService, transactionsFrom, transactionsTo, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
@@ -196,18 +202,26 @@ angular.module( 'conexus.member', [
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.posts = posts;
+    $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
+    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.work = work;
 
     $scope.posts = $scope.posts.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
     });
+
+    $scope.transactions = $scope.transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
+        return obj;
+    });
+
     $scope.work = $scope.work.map(function(obj){
         obj.model = 'WORK';
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.posts, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.posts, $scope.transactions, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
     $scope.createPost = function(post){

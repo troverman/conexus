@@ -1595,6 +1595,23 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
+    "        <div class=\"card\" ng-show=\"item.model=='TRANSACTION'\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <p style=\"font-weight:800\">From: <a href=\"member/{{item.from}}\">{{item.from}}</a> To: <a href=\"member/{{item.to}}\">{{item.to}}</a></p>\n" +
+    "                <p style=\"font-weight:800\">{{item.amount}} <a href=\"market/{{item.identifier}}\">{{item.identifier}}</a></p>\n" +
+    "                <p><a ng-repeat=\"tag in item.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                <p>{{item.content}}</p>\n" +
+    "                <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "                <a href=\"transaction/{{item.id}}\"></a>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
     "        <div class=\"card\" ng-show=\"item.model=='WORK'\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
@@ -1996,14 +2013,16 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function ($temp
     "\n" +
     "		<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "	    <!--<div class=\"card\">\n" +
+    "	    <!--\n" +
+    "	    <div class=\"card\">\n" +
     "	        <div style=\"padding:16px\">\n" +
     "	            <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "	            <p><a href=\"market/onCreate\">onCreate </a></p>\n" +
     "	            <p><a href=\"market/onCreate+{{post.id}}\">onCreate+{{post.id}} </a></p>\n" +
     "	            <p><a href=\"market/{{post.id}}\">{{post.id}} </a></p>\n" +
     "	        </div>\n" +
-    "	    </div>-->\n" +
+    "	    </div>\n" +
+    "		-->\n" +
     "	    \n" +
     "	</div>\n" +
     "</div>\n" +
