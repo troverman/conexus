@@ -170,12 +170,14 @@
 							<p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
 							<!--TODO: POST PARENT TYPES-->
-							<a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
-							<a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
-							<a ng-show="item.post" style="display:inline;font-weight:600" href="/post/{{item.post}}">post {{item.post}}</a>
-							<a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile}}">profile {{item.profile}}</a>
-							<a ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
-							<a ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
+							<a ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
+							<a ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
+							<a ng-show="item.post" style="display:inline;font-weight:600" href="post/{{item.post}}">post {{item.post}}</a>
+							<a ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile}}">profile {{item.profile}}</a>
+							<a ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
+							<a ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
+							<a ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
+
 							<a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
 							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 						</div>

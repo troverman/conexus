@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="spacing-15"></div>
+    <div class="spacing-10"></div>
 
     <div class="row">
         <div class="card">
@@ -28,8 +28,6 @@
 
         </div>
     </div>
-
-    <div class="spacing-5"></div>
 
     <div class="row">
         <div class="card">
@@ -64,8 +62,6 @@
 
         </div>
     </div>
-
-    <div class="spacing-5"></div>
 
     <!--TODO: STREAM-->
     <div class="row">
@@ -110,9 +106,6 @@
         </div>
     </div>
 
-    <div class="spacing-5"></div>
-
-    <!--TODO CARD VS TABLE-->
     <div class="row">
         <div class="card" ng-repeat="work in work">
             <div style="padding:16px;">
@@ -121,18 +114,18 @@
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{work.user.username}}">{{work.user.username}}</a>
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                     <a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
-                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                    <a style="display:inline;font-weight:600" href="#">{{work.verificationScore}}</a>
-
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
                 </div>
                 <p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
                 <p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
                 <div style="margin-left:42px">
                     {{item.stream}}
-                   <!-- <p><button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification(item)">verify</button></p>-->
+                    <!--<p><button style="width:100%;" class="btn btn-default log-btn" ng-click="createVerification(item)">verify</button></p>-->
                     <span style="display:inline" ng-bind-html="renderMessage(work.content)"></span>
+                    <span style="text-align:right;float:right"><span style="color:gray;font-style:italic">Verification Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a></span>
+                    <div style="clear:both"></div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -173,7 +166,7 @@
     <div class="row">
         <div class="card">
             <div style="padding:16px">
-                <div class="spacing-15"></div>
+                <h4>Create a Task Post</h4>
                 <form role="form" ng-submit="createPost(newPost)">
                     <div class="form-group">
                         <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
@@ -216,6 +209,7 @@
             </div>
         </div>
     </div>
+    
+    <div class="spacing-10"></div>
 
 </div>
-<div class="spacing-50"></div>

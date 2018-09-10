@@ -1,13 +1,17 @@
 <div class="row" ng-show="currentUser">
-    <div class="col-md-12">
-        <div class="spacing-15"></div>
-        <form role="form" ng-submit="createPost(newPost)">
-            <div class="form-group">
-                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+    <div class="card">
+        <div style="padding:16px;">
+            <div class="col-md-12">
+                <h4>Create a Profile Post</h4>
+                <form role="form" ng-submit="createPost(newPost)">
+                    <div class="form-group">
+                        <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+                    </div>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
+                <div class="spacing-15"></div>
             </div>
-            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-        </form>
-        <div class="spacing-15"></div>
+        </div>
     </div>
 </div>
 
@@ -124,7 +128,5 @@
         
     </div>
 </div>
-
-
 
 <div class="spacing-10"></div>
