@@ -49,9 +49,6 @@
                 <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
             </div> 
             <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
-
-            <!--<div><a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a></div>
-            <div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>-->
         </div>
         <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
             <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
