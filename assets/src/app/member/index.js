@@ -250,12 +250,11 @@ angular.module( 'conexus.member', [
         }
     };
 
-    $scope.reply = function(post){
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        $scope.posts[index].showReply = !$scope.posts[index].showReply
+    $scope.reply = function(item){
+        var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.activity[index].showReply = !$scope.activity[index].showReply
     };
 
-    
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -266,7 +265,6 @@ angular.module( 'conexus.member', [
                 break;
         }
     });
-    
 
 }])
 
