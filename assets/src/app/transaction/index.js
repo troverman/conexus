@@ -28,7 +28,6 @@ angular.module( 'conexus.transaction', [
     $scope.posts = posts;
     $scope.transaction = transaction;
 
-    console.log(posts);
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){

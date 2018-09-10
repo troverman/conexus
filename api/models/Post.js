@@ -10,7 +10,7 @@ module.exports = {
             type: 'string'
         },
         order: {
-            model: 'order'
+            type: 'string'
         },
         profile: {
             model: 'user',

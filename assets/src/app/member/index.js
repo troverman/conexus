@@ -34,6 +34,9 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
+            orders: ['member', 'OrderModel', function(member, OrderModel){
+                return OrderModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+            }],
             posts: ['member', 'PostModel', function(member, PostModel) {
                 return PostModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }],
@@ -194,17 +197,23 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'PostModel', 'posts', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, PostModel, posts, titleService, transactionsFrom, transactionsTo, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, titleService, transactionsFrom, transactionsTo, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
     $scope.newPost = {};
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
+    $scope.orders = orders;
     $scope.posts = posts;
     $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
     $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.work = work;
+
+    $scope.orders = $scope.orders.map(function(obj){
+        obj.model = 'ORDER';
+        return obj;
+    });
 
     $scope.posts = $scope.posts.map(function(obj){
         obj.model = 'CONTENT';
@@ -221,7 +230,7 @@ angular.module( 'conexus.member', [
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.posts, $scope.transactions, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.orders, $scope.posts, $scope.transactions, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
     $scope.createPost = function(post){

@@ -28,6 +28,19 @@ angular.module( 'conexus.order', [
     $scope.order = order;
     $scope.posts = posts;
 
+    //TODO
+    $scope.createPost = function(post) {
+        if($scope.currentUser){
+            $scope.newPost.post = post.id;
+            $scope.newPost.user = $scope.currentUser.id;
+            $scope.newPost.order = order.id;
+            PostModel.create($scope.newPost).then(function(model) {
+                $scope.newPost = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
+
     $scope.renderMessage = function(message){
         if (message){
             var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');

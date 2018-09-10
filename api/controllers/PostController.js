@@ -161,11 +161,12 @@ module.exports = {
 		var model = {
 			content: req.param('content'),
 			market: req.param('market'),
-			order: req.param('market'),
+			order: req.param('order'),
 			post: req.param('post'),
 			profile: req.param('profile'),
 			project: req.param('project'),
 			task: req.param('task'),
+			transaction: req.param('transaction'),
 			user: req.param('user'),
 			work: req.param('work'),
 		};
