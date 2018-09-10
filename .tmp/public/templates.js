@@ -450,7 +450,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "							<div class=\"spacing-15\"></div>\n" +
     "							<div class=\"\">\n" +
     "								<div class=\"form-group\" style=\"width:33%\">\n" +
-    "									<input type=\"text\" class=\"form-control\" id=\"postContent\">\n" +
+    "									<input type=\"text\" class=\"form-control\">\n" +
     "									<button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button>\n" +
     "								</div>\n" +
     "							</div>\n" +
@@ -466,8 +466,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "			        		<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/78b2c984797b14adfa8658ae32f2d39d/tumblr_ny5wg8Uo3v1qd8bbxo1_500.gif\">\n" +
     "							<div class=\"spacing-15\"></div>\n" +
     "							<div class=\"form-group\" style=\"width:33%\">\n" +
-    "								<input type=\"text\" placeholder=\"Hours\" class=\"form-control\" id=\"postContent\">\n" +
-    "								<input type=\"text\" placeholder=\"Activity\" class=\"form-control\" id=\"postContent\">\n" +
+    "								<input type=\"text\" placeholder=\"Hours\" class=\"form-control\">\n" +
+    "								<input type=\"text\" placeholder=\"Activity\" class=\"form-control\">\n" +
     "								<button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button>\n" +
     "							</div>\n" +
     "						</div>\n" +
@@ -480,8 +480,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "							<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg\">\n" +
     "							<div class=\"spacing-15\"></div>\n" +
     "							<div class=\"form-group\" style=\"width:33%\">\n" +
-    "								<input type=\"text\" placeholder=\"Name\" class=\"form-control\" id=\"postContent\">\n" +
-    "								<input type=\"text\" placeholder=\"Birthday\" class=\"form-control\" id=\"postContent\">\n" +
+    "								<input type=\"text\" placeholder=\"Name\" class=\"form-control\">\n" +
+    "								<input type=\"text\" placeholder=\"Birthday\" class=\"form-control\">\n" +
     "								<button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button>\n" +
     "							</div>\n" +
     "						</div>\n" +
@@ -568,7 +568,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		        	<h4>Create Post Content</h4>\n" +
     "		        	<form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
     "						<div class=\"form-group\">\n" +
-    "							<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
+    "							<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\">\n" +
     "						</div>\n" +
     "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "					</form>\n" +
@@ -606,7 +606,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "						<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
     "							<div class=\"form-group\">\n" +
-    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{item.id}}\">\n" +
+    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"CONTENT1-{{item.id}}\">\n" +
     "							</div>\n" +
     "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "						</form>\n" +
@@ -640,7 +640,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "							<div class=\"col-sm-10\">\n" +
     "								<h4><a href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "								<p><a href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
-    "								<p>{{item.content}}</p>\n" +
+    "								<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(item.content)\"></span></div>\n" +
     "								<a ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
     "								<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "							</div>\n" +
@@ -658,7 +658,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "						<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
     "							<div class=\"form-group\">\n" +
-    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{item.id}}\">\n" +
+    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"TASK-{{item.id}}\">\n" +
     "							</div>\n" +
     "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "						</form>\n" +
@@ -688,7 +688,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "						<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
     "							<div class=\"form-group\">\n" +
-    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{item.id}}\">\n" +
+    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"WORK-{{item.id}}\">\n" +
     "							</div>\n" +
     "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "						</form>\n" +
@@ -837,7 +837,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "						<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
     "							<div class=\"form-group\">\n" +
-    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{item.id}}\">\n" +
+    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"CONTENT-{{item.id}}\">\n" +
     "							</div>\n" +
     "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "						</form>\n" +
@@ -871,7 +871,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "							<div class=\"col-sm-10\">\n" +
     "								<h4><a href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "								<p><a href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
-    "								<p>{{item.content}}</p>\n" +
+    "								<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(item.content)\"></span></div>\n" +
     "								<a ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
     "								<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "							</div>\n" +
@@ -3354,7 +3354,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "                <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "                    <p>{{task.content}}</p>\n" +
+    "                    <div><span style=\"display:inline\" ng-bind-html=\"renderMessage(task.content)\"></span></div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +

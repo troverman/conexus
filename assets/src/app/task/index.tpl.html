@@ -8,7 +8,7 @@
                 <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
                 <div style="font-style:italic;color:gray">
                     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-                    <p>{{task.content}}</p>
+                    <div><span style="display:inline" ng-bind-html="renderMessage(task.content)"></span></div>
                 </div>
             </div>
 

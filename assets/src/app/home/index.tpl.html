@@ -36,7 +36,7 @@
 							<div class="spacing-15"></div>
 							<div class="">
 								<div class="form-group" style="width:33%">
-									<input type="text" class="form-control" id="postContent">
+									<input type="text" class="form-control">
 									<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
 								</div>
 							</div>
@@ -52,8 +52,8 @@
 			        		<img style="max-height:200px" src="http://68.media.tumblr.com/78b2c984797b14adfa8658ae32f2d39d/tumblr_ny5wg8Uo3v1qd8bbxo1_500.gif">
 							<div class="spacing-15"></div>
 							<div class="form-group" style="width:33%">
-								<input type="text" placeholder="Hours" class="form-control" id="postContent">
-								<input type="text" placeholder="Activity" class="form-control" id="postContent">
+								<input type="text" placeholder="Hours" class="form-control">
+								<input type="text" placeholder="Activity" class="form-control">
 								<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
 							</div>
 						</div>
@@ -66,8 +66,8 @@
 							<img style="max-height:200px" src="http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg">
 							<div class="spacing-15"></div>
 							<div class="form-group" style="width:33%">
-								<input type="text" placeholder="Name" class="form-control" id="postContent">
-								<input type="text" placeholder="Birthday" class="form-control" id="postContent">
+								<input type="text" placeholder="Name" class="form-control">
+								<input type="text" placeholder="Birthday" class="form-control">
 								<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
 							</div>
 						</div>
@@ -154,7 +154,7 @@
 		        	<h4>Create Post Content</h4>
 		        	<form role="form" ng-submit="createPost(newPost)">
 						<div class="form-group">
-							<input type="text" ng-model="newPost.content" class="form-control" id="postContent">
+							<input type="text" ng-model="newPost.content" class="form-control">
 						</div>
 						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 					</form>
@@ -192,7 +192,7 @@
 					<div ng-show="item.showReply" class="card-footer">
 						<form role="form" ng-submit="createPost(item)">
 							<div class="form-group">
-								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+								<input type="text" ng-model="newPost.content" class="form-control" id="CONTENT1-{{item.id}}">
 							</div>
 							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 						</form>
@@ -226,7 +226,7 @@
 							<div class="col-sm-10">
 								<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
 								<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-								<p>{{item.content}}</p>
+								<div><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
 								<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 								<span style="color:gray" am-time-ago="item.createdAt"></span>
 							</div>
@@ -244,7 +244,7 @@
 					<div ng-show="item.showReply" class="card-footer">
 						<form role="form" ng-submit="createPost(item)">
 							<div class="form-group">
-								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+								<input type="text" ng-model="newPost.content" class="form-control" id="TASK-{{item.id}}">
 							</div>
 							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 						</form>
@@ -274,7 +274,7 @@
 		            <div ng-show="item.showReply" class="card-footer">
 						<form role="form" ng-submit="createPost(item)">
 							<div class="form-group">
-								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+								<input type="text" ng-model="newPost.content" class="form-control" id="WORK-{{item.id}}">
 							</div>
 							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 						</form>
@@ -423,7 +423,7 @@
 					<div ng-show="item.showReply" class="card-footer">
 						<form role="form" ng-submit="createPost(item)">
 							<div class="form-group">
-								<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{item.id}}">
+								<input type="text" ng-model="newPost.content" class="form-control" id="CONTENT-{{item.id}}">
 							</div>
 							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 						</form>
@@ -457,7 +457,7 @@
 							<div class="col-sm-10">
 								<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
 								<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-								<p>{{item.content}}</p>
+								<div><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
 								<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 								<span style="color:gray" am-time-ago="item.createdAt"></span>
 							</div>
