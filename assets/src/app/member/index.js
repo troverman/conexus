@@ -323,11 +323,14 @@ angular.module( 'conexus.member', [
 .controller( 'MemberLedgerCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    $scope.newTransaction = {};
     titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+    
+    if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
     if ($scope.transactions.length == 0){
         for (var i=0, t=88; i<t; i++) {

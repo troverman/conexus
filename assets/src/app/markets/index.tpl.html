@@ -41,7 +41,6 @@
 		</div>
 	</div>
 
-
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px">
@@ -67,52 +66,17 @@
 					</div>
 				</div>
 
-				<!--<table class="table table-inverse table-hover">
-				    <thead>
-						<tr>
-							<th>Asset Set 1</th>
-							<th>Asset Set 2</th>
-							<th>Order Id</th>
-						</tr>
-				    </thead>
-				    <tbody>
-						<tr ng-repeat="order in orders">
-							<td>
-								<span ng-repeat="item in order.amountSet">
-									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-								</span>
-							</td>
-
-							<td>
-								<span ng-repeat="item in order.amountSet1">
-									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-								</span>
-							</td>
-							<td><a href="order/{{order.id}}">{{order.id}}</a>
-						</tr>
-				    </tbody>
-				</table>-->
-
-
 			    <div ng-repeat="order in orders">
 			        <div class="card">
 			            <div style="padding:16px">
-			                <!--<div>
-			                    <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}">
-			                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{order.user.username}}">{{order.user.username}}</a>
-			                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-			                </div>--> 
-			                <!--<div style="margin-left:42px">-->
-			                	<span ng-repeat="item in order.amountSet">
-									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-								</span>
-								<span> | </span>
-								<span ng-repeat="item in order.amountSet1">
-									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-								</span>
-								<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-
-			                <!--</div>-->
+		                	<span ng-repeat="item in order.amountSet">
+								{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+							</span>
+							<span> | </span>
+							<span ng-repeat="item in order.amountSet1">
+								{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+							</span>
+							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
 			            </div>
 			            <div class="card-footer">
 			                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.plusCount}} like </a> 
@@ -135,22 +99,14 @@
 			    <div ng-repeat="order in orders">
 			        <div class="card">
 			            <div style="padding:16px">
-			                <!--<div>
-			                    <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}">
-			                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{order.user.username}}">{{order.user.username}}</a>
-			                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-			                </div>--> 
-			                <!--<div style="margin-left:42px">-->
-			                	<span ng-repeat="item in order.amountSet">
-									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-								</span>
-								<span> | </span>
-								<span ng-repeat="item in order.amountSet1">
-									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-								</span>
-								<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-
-			                <!--</div>-->
+		                	<span ng-repeat="item in order.amountSet">
+								{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+							</span>
+							<span> | </span>
+							<span ng-repeat="item in order.amountSet1">
+								{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+							</span>
+							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
 			            </div>
 			            <div class="card-footer">
 			                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.plusCount}} like </a> 
@@ -160,34 +116,6 @@
 			            </div>
 			        </div>
 				</div>
-
-
-				<!--<table class="table table-inverse table-hover">
-				    <thead>
-						<tr>
-							<th>Asset Set 1</th>
-							<th>Asset Set 2</th>
-							<th>Order Id</th>
-						</tr>
-				    </thead>
-				    <tbody>
-						<tr ng-repeat="order in orders">
-							<td>
-								<span ng-repeat="item in order.amountSet">
-									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-								</span>
-							</td>
-
-							<td>
-								<span ng-repeat="item in order.amountSet1">
-									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-								</span>
-							</td>
-							<td><a href="order/{{order.id}}">{{order.id}}</a>
-						</tr>
-				    </tbody>
-				</table>-->
-
 
 			</div>
 		</div>

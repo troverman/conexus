@@ -82,13 +82,14 @@ angular.module( 'conexus.market', [
             //layout: 'vertical'
         },
         tooltip: {
-        //    shared: true,
+            shared: true,
         },
         credits:{enabled:false},
     };
-    $scope.markets = ['onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','CRE8','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','CRE8','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     var length = $scope.markets.length;
     for (x in $scope.markets){
+        $scope.chartMap.xAxis.categories.push($scope.markets[x])
         $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
         $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
     } 

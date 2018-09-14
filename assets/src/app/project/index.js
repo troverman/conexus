@@ -446,6 +446,8 @@ angular.module( 'conexus.project', [
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
+    $scope.newTransaction.to = $scope.project.id;
+    if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
