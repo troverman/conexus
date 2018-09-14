@@ -1043,7 +1043,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h1>{{stateParams.id}} MARKETS</h1>\n" +
-    "				<p>{{stateParams.id}} | 122053 markets | 8812233 tokens in circulation </p>\n" +
+    "				<p>{{stateParams.id}} | 1253 markets | 53233 tokens in circulation </p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1377,7 +1377,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<h1>Markets</h1>\n" +
-    "				<p>8866774 markets | 8812334523 tokens in circulation </p>\n" +
+    "				<p>88674 markets | 833423 tokens in circulation </p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1517,6 +1517,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "    width: 100%;\n" +
     "    overflow: hidden;\n" +
     "}\n" +
+    "\n" +
     ".member-cover img{\n" +
     "    width: 100%;\n" +
     "    margin-top: -10%\n" +
@@ -1599,18 +1600,15 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "			    <div style=\"padding:10px;\">\n" +
     "			    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens</h3>\n" +
     "					<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
-    "						<div class=\"form-group col-md-12\">\n" +
+    "						<div class=\"form-group col-md-4\">\n" +
     "							<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
     "						</div>\n" +
-    "						<div class=\"form-group col-md-6\">\n" +
+    "						<div class=\"form-group col-md-4\">\n" +
     "							<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
     "						</div>\n" +
-    "						<div class=\"form-group col-md-6\">\n" +
+    "						<div class=\"form-group col-md-4\">\n" +
     "							<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
     "						</div>\n" +
-    "						<!--<div class=\"form-group col-md-6\">\n" +
-    "							<button class=\"btn btn-secondary\">Add Token</button>\n" +
-    "						</div>-->\n" +
     "						<div class=\"form-group col-md-12\">\n" +
     "							<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
     "						</div>\n" +
@@ -1874,10 +1872,10 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "</ul>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-md-8\">\n" +
+    "	<div class=\"col-md-6\">\n" +
     "		<highchart config=\"chart\"></highchart>\n" +
     "	</div>\n" +
-    "	<div class=\"col-md-4\">\n" +
+    "	<div class=\"col-md-6\">\n" +
     "		<highchart config=\"pie\"></highchart>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -1914,7 +1912,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "	<div style=\"padding:16px\">\n" +
     "		<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
     "		<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
-    "		<p><a ng-repeat=\"tag in transaction.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "		<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "		<p>{{transaction.content}}</p>\n" +
     "		<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
     "		<a href=\"transaction/{{transaction.id}}\"></a>\n" +
@@ -1936,9 +1934,12 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "<div class=\"spacing-5\"></div>\n" +
     "<h1>Create Your Value Map</h1>\n" +
     "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
-    "<p>Browse.., Discover..</p>\n" +
+    "<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
+    "<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "<highchart config=\"chart\"></highchart>\n" +
+    "<a href=\"/discover\">Discover</a>\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
@@ -2591,6 +2592,9 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		</div>\n" +
     "		<div class=\"col-md-4\">\n" +
     "			<highchart config=\"pie\"></highchart>\n" +
+    "		</div>\n" +
+    "		<div class=\"col-md-12\">\n" +
+    "			<p><span ng-repeat=\"tag in sortedTransactionTags\"><a href=\"#\">{{tag.element}} </a></span><p>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +

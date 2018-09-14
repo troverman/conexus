@@ -153,6 +153,11 @@ angular.module( 'conexus.member', [
     $scope.newTransaction = {};
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
+    if($scope.currentUser){
+        $scope.newTransaction.from = $scope.currentUser.id;
+        $scope.newTransaction.identifier = 'CRE8';
+        $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
+    }
 
     //TODO: seoService
 
@@ -329,31 +334,11 @@ angular.module( 'conexus.member', [
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
-    
-    if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
-    if ($scope.transactions.length == 0){
-        for (var i=0, t=88; i<t; i++) {
-            $scope.transactions.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
-            $scope.transactions.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
-        }
+    if($scope.currentUser){
+        $scope.newTransaction.from = $scope.currentUser.id;
+        $scope.newTransaction.to = $scope.member.id;
     }
-
-    //TODO: BACKEND WRT FROM AND TO
-    $scope.sumTransactions = [];
-    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
-        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
-    }, 0);
-
-    $scope.sumFrom = [];
-    $scope.transactionsFrom.reduce(function(a,b,i) {
-        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
-    }, 0);
-
-    $scope.sumTo = [];
-    $scope.transactionsTo.reduce(function(a,b,i) {
-        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);;
-    }, 0);
 
     $scope.chart = {
         chart: {
@@ -363,12 +348,12 @@ angular.module( 'conexus.member', [
             id: 'Expense',
             type: 'spline',
             name: 'Expense',
-            data: $scope.sumFrom,
+            data: [],
         },{
             id: 'Revenue',
             type: 'spline',
             name: 'Revenue',
-            data: $scope.sumTo,
+            data: [],
         }],
         title: {
             text: ''
@@ -395,10 +380,10 @@ angular.module( 'conexus.member', [
             colorByPoint: true,
             data: [{
                 name: 'Expense',
-                y: $scope.sumFrom[$scope.sumFrom.length-1],
+                y: [],
             }, {
                 name: 'Revenue',
-                y: $scope.sumTo[$scope.sumTo.length-1],
+                y: [],
             }]
         }],
         
@@ -418,6 +403,100 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
+    if ($scope.transactions.length == 0){
+        for (var i=0, t=88; i<t; i++) {
+            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE, SEED, EXAMPLE'})
+            $scope.transactionsTo.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE, SEED, EXAMPLE'})
+        }
+        $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+    }
+
+    function countInArray(array, value) {
+        return array.reduce(function(n, x){ return n + (x === value)}, 0);
+    }
+
+    function amountInArray(array, value) {
+        return array.reduce(function(n, x){
+            if (x.tag == value.tag){n+=parseFloat(x.amount)}
+            return n;
+        },0);
+    }
+
+    /*$scope.transactionTags = $scope.transactions.map(function(obj){
+        var returnObj = {};
+        if(obj.ledger){obj.ledger = obj.ledger.split(',')}
+        returnObj = obj.ledger;
+        return returnObj;
+    });
+    $scope.transactionTags = [].concat.apply([], $scope.transactionTags);*/
+
+
+    $scope.transactionTags = $scope.transactions.map(function(obj){
+        var returnArray = [];
+        if(obj.ledger){
+            obj.ledger = obj.ledger.split(',');
+            for (x in obj.ledger){
+                returnArray.push({tag:obj.ledger[x].trim().toLowerCase(),amount:obj.amount})
+            }
+        }
+        return returnArray;
+    });
+    $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+
+    $scope.sortedTransactionTags = [];
+    for (x in $scope.transactionTags){
+        var amount = amountInArray($scope.transactionTags, $scope.transactionTags[x]);
+        if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x].tag) == -1){
+            $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x].tag})
+        }
+    }
+    $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
+    console.log( $scope.sortedTransactionTags)
+
+    /*$scope.sortedTransactionTags = [];
+    for (x in $scope.transactionTags){
+        var amount = countInArray($scope.transactionTags, $scope.transactionTags[x]);
+        if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x]) == -1){
+            $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x]})
+        }
+    }
+    $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});*/
+
+    $scope.sumTransactions = [];
+    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
+        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
+    }, 0);
+
+    $scope.sumFrom = [];
+    $scope.transactionsFrom.reduce(function(a,b,i) {
+        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
+    }, 0);
+
+    $scope.sumTo = [];
+    $scope.transactionsTo.reduce(function(a,b,i) {
+        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);;
+    }, 0);
+
+
+    $scope.chart.series[0].data = $scope.sumFrom;
+    $scope.chart.series[1].data = $scope.sumTo;
+
+    /*$scope.pie.series[0].data = [{
+        name: 'Expense',
+        y: $scope.sumFrom[$scope.sumFrom.length-1],
+    }, {
+        name: 'Revenue',
+        y: $scope.sumTo[$scope.sumTo.length-1],
+    }];*/
+
+    //console.log($scope.sortedTransactionTags)
+    for (x in $scope.sortedTransactionTags){
+        $scope.pie.series[0].data.push({
+            name: $scope.sortedTransactionTags[x].element,
+            y: $scope.sortedTransactionTags[x].amount,
+        });
+    }
+
     $scope.newTransactionToggle = function(){
         $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
     };
@@ -429,6 +508,7 @@ angular.module( 'conexus.member', [
             $scope.newTransaction = {};
         });
     };
+
 
 }])
 
@@ -471,22 +551,6 @@ angular.module( 'conexus.member', [
             pointPlacement: 'on',
             data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
             color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values1',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.2, 0.1, 0.2, 0.1, 0.1],
-            color: 'rgba(0,0,153,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values2',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.1, 0.1, 0.3, 0.2, 0.25, 0.05],
-            color: 'rgba(0,153,0,0.3)',
             fillOpacity: 0.3,
         }],
         title: {text: ''},

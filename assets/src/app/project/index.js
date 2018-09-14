@@ -453,44 +453,6 @@ angular.module( 'conexus.project', [
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
 
-    //TODO: TO FROM ISH | TO; FROM DECIDEDS LEDGER
-    if ($scope.transactions.length == 0){
-        for (var i=0, t=88; i<t; i++) {
-            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE'})
-            $scope.transactionsTo.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE'})
-        }
-        $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
-    }
-
-
-    $scope.newTransactionToggle = function(){
-        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
-    };
-
-    $scope.createTransaction = function(){
-        $scope.newTransaction.project = $scope.project.id;
-        $scope.newTransaction.user = $scope.currentUser.id;
-        TransactionModel.create($scope.newTransaction).then(function(model){
-            $scope.newTransaction = {};
-        });
-    };
-
-    //TODO: BACKEND WRT FROM AND TO
-    $scope.sumTransactions = [];
-    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
-        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
-    }, 0);
-
-    $scope.sumFrom = [];
-    $scope.transactionsFrom.reduce(function(a,b,i) {
-        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
-    }, 0);
-
-    $scope.sumTo = [];
-    $scope.transactionsTo.reduce(function(a,b,i) {
-        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);;
-    }, 0);
-
     $scope.chart = {
         chart: {
             zoomType: 'x',
@@ -499,12 +461,12 @@ angular.module( 'conexus.project', [
             id: 'Expense',
             type: 'spline',
             name: 'Expense',
-            data: $scope.sumFrom,
+            data: [],
         },{
             id: 'Revenue',
             type: 'spline',
             name: 'Revenue',
-            data: $scope.sumTo,
+            data: [],
         }],
         title: {
             text: ''
@@ -529,13 +491,7 @@ angular.module( 'conexus.project', [
             type: 'pie',
             name: 'Pie',
             colorByPoint: true,
-            data: [{
-                name: 'Expense',
-                y: $scope.sumFrom[$scope.sumFrom.length-1],
-            }, {
-                name: 'Revenue',
-                y: $scope.sumTo[$scope.sumTo.length-1],
-            }]
+            data: [],
         }],
         
         title: {
@@ -552,6 +508,90 @@ angular.module( 'conexus.project', [
             }
         },
         credits:{enabled:false},
+    };
+
+    if ($scope.transactions.length == 0){
+        for (var i=0, t=88; i<t; i++) {
+            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE, SEED, EXAMPLE'})
+            $scope.transactionsTo.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE, SEED, EXAMPLE'})
+        }
+        $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+    }
+
+    function countInArray(array, value) {
+        return array.reduce(function(n, x){ return n + (x === value)}, 0);
+    }
+
+    $scope.transactionTags = $scope.transactions.map(function(obj){
+        var returnObj = {};
+        if(obj.ledger){
+            obj.ledger = obj.ledger.split(',');
+        }
+        returnObj = obj.ledger;
+        return returnObj;
+    });
+    $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+
+    $scope.sortedTransactionTags = [];
+    for (x in $scope.transactionTags){
+        var amount = countInArray($scope.transactionTags, $scope.transactionTags[x]);
+        if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x]) == -1){
+            $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x]})
+        }
+    }
+    $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+
+    $scope.sumTransactions = [];
+    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
+        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
+    }, 0);
+
+    $scope.sumFrom = [];
+    $scope.transactionsFrom.reduce(function(a,b,i) {
+        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
+    }, 0);
+
+    $scope.sumTo = [];
+    $scope.transactionsTo.reduce(function(a,b,i) {
+        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);
+    }, 0);
+
+    function sumFunction(obj){
+        var sumArray = [];
+        obj.reduce(function(a,b,i) {
+            return $scope.sumArray[i] = parseFloat(a) + parseFloat(b.amount);
+        }, 0);
+        return sumArray;
+    }
+
+    $scope.chart.series[0].data = $scope.sumFrom;
+    $scope.chart.series[1].data = $scope.sumTo;
+
+    /*$scope.pie.series[0].data = [{
+        name: 'Expense',
+        y: $scope.sumFrom[$scope.sumFrom.length-1],
+    }, {
+        name: 'Revenue',
+        y: $scope.sumTo[$scope.sumTo.length-1],
+    }];*/
+
+    for (x in $scope.sortedTransactionTags){
+        $scope.pie.series[0].data.push({
+            name: $scope.sortedTransactionTags[x].element,
+            y: $scope.sortedTransactionTags[x].amount,
+        });
+    }
+
+    $scope.newTransactionToggle = function(){
+        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
+    };
+
+    $scope.createTransaction = function(){
+        $scope.newTransaction.project = $scope.project.id;
+        $scope.newTransaction.user = $scope.currentUser.id;
+        TransactionModel.create($scope.newTransaction).then(function(model){
+            $scope.newTransaction = {};
+        });
     };
 
 }])

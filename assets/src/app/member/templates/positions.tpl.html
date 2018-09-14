@@ -1,9 +1,12 @@
 <div class="spacing-5"></div>
 <h1>Create Your Value Map</h1>
 <h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
-<p>Browse.., Discover..</p>
+<span><a href="market/UniversalToken">Universal Dimension</a> | <a href="#">+ Dimension</a></span><br>
+<span><span ng-repeat="dimension in chart.xAxis.categories"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
+
 <div class="spacing-10"></div>
 <highchart config="chart"></highchart>
+<a href="/discover">Discover</a>
 <div class="spacing-10"></div>
 
 <button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>

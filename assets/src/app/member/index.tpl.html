@@ -16,6 +16,7 @@
     width: 100%;
     overflow: hidden;
 }
+
 .member-cover img{
     width: 100%;
     margin-top: -10%
@@ -98,18 +99,15 @@
 			    <div style="padding:10px;">
 			    	<h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens</h3>
 					<form role="form" ng-submit="createTransaction(newTransaction)">
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-4">
 							<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
 						</div>
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
 						</div>
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
 						</div>
-						<!--<div class="form-group col-md-6">
-							<button class="btn btn-secondary">Add Token</button>
-						</div>-->
 						<div class="form-group col-md-12">
 							<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
 						</div>
