@@ -427,7 +427,41 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "<!--TEMP | LOGGED IN / DASH-->\n" +
     "<div class=\"container\" ng-show=\"currentUser\">\n" +
     "\n" +
+    "\n" +
+    "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-md-4\" style=\"margin-left:-5px;\">\n" +
+    "		    <div class=\"member-card\">\n" +
+    "			    <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
+    "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"member-card-info\">\n" +
+    "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.totalWork}}</p>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"col-md-8\" style=\"margin-right:-5px;\">\n" +
+    "			<div class=\"card\" style=\"min-width:100%\">\n" +
+    "				<div style=\"padding:16px;\">\n" +
+    "					<h4>{{currentUser.email}}</h4>\n" +
+    "					<p><a href=\"/projects\">25 Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">23 Followers</a> | <a href=\"/member/{{currentUser.username}}/followers\">22 Following</a>\n" +
+    "					<h5>Balance Lookup</h5>\n" +
+    "		       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "		            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "		            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "			                <a href=\"#\">\n" +
+    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "			                </a>\n" +
+    "						</div>\n" +
+    "		        	</form>\n" +
+    "				</div>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "\n" +
     "	<div class=\"row\" ng-show=\"false\">\n" +
     "		<div class=\"col-md-12\">\n" +
@@ -515,40 +549,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "	<div class=\"row\">\n" +
-    "		<div class=\"col-md-4\" style=\"margin-left:-5px;\">\n" +
-    "		    <div class=\"member-card\">\n" +
-    "			    <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
-    "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "			    </div>\n" +
-    "			    <div class=\"member-card-info\">\n" +
-    "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
-    "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
-    "			        <p style=\"color:gray\">{{currentUser.totalWork}}</p>\n" +
-    "			    </div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"col-md-8\" style=\"margin-right:-5px;\">\n" +
-    "			<div class=\"card\" style=\"min-width:100%\">\n" +
-    "				<div style=\"padding:16px;\">\n" +
-    "					<h4>{{currentUser.email}}</h4>\n" +
-    "					<p><a href=\"/projects\">25 Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">23 Followers</a> | <a href=\"/member/{{currentUser.username}}/followers\">22 Following</a>\n" +
-    "					<h5>Balance Lookup</h5>\n" +
-    "		       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "		            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "		            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "			                <a href=\"#\">\n" +
-    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			                </a>\n" +
-    "						</div>\n" +
-    "		        	</form>\n" +
-    "				</div>\n" +
-    "		    </div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "		    <div style=\"\">\n" +
@@ -629,9 +629,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "				</div>\n" +
     "				<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "					<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<div class=\"form-group\">\n" +
-    "							<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"CONTENT1-{{item.id}}\">\n" +
-    "						</div>\n" +
+    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
@@ -681,9 +679,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "				</div>\n" +
     "				<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "					<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<div class=\"form-group\">\n" +
-    "							<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"TASK-{{item.id}}\">\n" +
-    "						</div>\n" +
+    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
@@ -711,9 +707,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	            </div>\n" +
     "	            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "					<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<div class=\"form-group\">\n" +
-    "							<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"WORK-{{item.id}}\">\n" +
-    "						</div>\n" +
+    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
@@ -860,9 +854,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "					<!--TODO: NESTED -->\n" +
     "					<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "						<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "							<div class=\"form-group\">\n" +
-    "								<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"CONTENT-{{item.id}}\">\n" +
-    "							</div>\n" +
+    "							<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "						</form>\n" +
     "					</div>\n" +

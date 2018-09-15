@@ -1,7 +1,41 @@
 <!--TEMP | LOGGED IN / DASH-->
 <div class="container" ng-show="currentUser">
 
+
+
 	<div class="spacing-10"></div>
+
+	<div class="row">
+		<div class="col-md-4" style="margin-left:-5px;">
+		    <div class="member-card">
+			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
+			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
+			    </div>
+			    <div class="member-card-info">
+			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
+			        <p style="color:gray">{{currentUser.status}} online</p>
+			        <p style="color:gray">{{currentUser.totalWork}}</p>
+			    </div>
+			</div>
+		</div>
+		<div class="col-md-8" style="margin-right:-5px;">
+			<div class="card" style="min-width:100%">
+				<div style="padding:16px;">
+					<h4>{{currentUser.email}}</h4>
+					<p><a href="/projects">25 Projects</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
+					<h5>Balance Lookup</h5>
+		       		<form style="display:flex;flex-direction:row;">
+		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+			                <a href="#">
+			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+			                </a>
+						</div>
+		        	</form>
+				</div>
+		    </div>
+		</div>
+	</div>
 
 	<div class="row" ng-show="false">
 		<div class="col-md-12">
@@ -86,40 +120,6 @@
 		        </div>
 		    </div>
 
-		</div>
-	</div>
-
-	<div class="spacing-10"></div>
-
-	<div class="row">
-		<div class="col-md-4" style="margin-left:-5px;">
-		    <div class="member-card">
-			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
-			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
-			    </div>
-			    <div class="member-card-info">
-			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
-			        <p style="color:gray">{{currentUser.status}} online</p>
-			        <p style="color:gray">{{currentUser.totalWork}}</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-md-8" style="margin-right:-5px;">
-			<div class="card" style="min-width:100%">
-				<div style="padding:16px;">
-					<h4>{{currentUser.email}}</h4>
-					<p><a href="/projects">25 Projects</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
-					<h5>Balance Lookup</h5>
-		       		<form style="display:flex;flex-direction:row;">
-		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
-		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-			                <a href="#">
-			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-			                </a>
-						</div>
-		        	</form>
-				</div>
-		    </div>
 		</div>
 	</div>
 
