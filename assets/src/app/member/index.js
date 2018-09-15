@@ -448,7 +448,6 @@ angular.module( 'conexus.member', [
     });
     $scope.transactionTags = [].concat.apply([], $scope.transactionTags);*/
 
-
     $scope.transactionTags = $scope.transactions.map(function(obj){
         var returnArray = [];
         if(obj.ledger){
@@ -469,7 +468,7 @@ angular.module( 'conexus.member', [
         }
     }
     $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
-    console.log( $scope.sortedTransactionTags)
+    console.log($scope.sortedTransactionTags)
 
     /*$scope.sortedTransactionTags = [];
     for (x in $scope.transactionTags){

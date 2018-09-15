@@ -1,9 +1,39 @@
-<ul style="padding:0px;" class="member-tabs">
-	<li class="active"><a href="">Overview</a></li>
-	<li><a href="">Assets</a></li>
-	<li><a href="member/{{member.username}}/positions">Positions</a></li>
-	<li><a href="">Transactions</a></li>
-</ul>
+<div class="row">
+	<div class="col-md-6">
+		<ul style="padding:0px;" class="member-tabs">
+			<li><a href="">Assets</a></li>
+			<li><a href="member/{{member.username}}/positions">Positions</a></li>
+			<li><a href="">Transactions</a></li>
+		</ul>
+		<ul style="padding:0px;" class="member-tabs">
+			<li class="active"><a href="">Expense</a></li>
+			<li><a href="">Revenue</a></li>
+		</ul>
+	</div>
+	<div class="col-md-6" style="text-align:right">
+		<!--<h1>888,888,888 USD</h1>-->
+		<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>
+		<!--<h4>Filter</h4>
+		<form style="display:flex;flex-direction:row;">
+	    	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+	    	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+	            <a href="#">
+	                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+	            </a>
+			</div>
+		</form>-->
+	</div>
+</div>
+
+<div class="row">
+	<div class="card">
+	    <form style="display:flex;flex-direction:row;">
+	        <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+	    </form>
+	</div>
+</div>
+
+<div class="spacing-10"></div>
 
 <div class="row">
 	<div class="col-md-6">
@@ -14,48 +44,54 @@
 	</div>
 </div>
 
-<h1>Transaction History</h1>
-<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
-<div class="card" ng-show="newTransactionToggleVar">
-    <div style="padding:10px;">
-		<form role="form" ng-submit="createTransaction()">
-			<div class="form-group col-sm-6">
-				<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group col-sm-6">
-				<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group col-sm-6">
-				<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group col-sm-6">
-				<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group col-sm-12">
-				<input placeholder="Tags" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group col-sm-12">
-				<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
-			</div>
-			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
-		</form>
+<div class="spacing-10"></div>
+
+<div class="">
+	<h1>Transaction History</h1>
+	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
+	<div class="card" ng-show="newTransactionToggleVar">
+	    <div style="padding:10px;">
+			<form role="form" ng-submit="createTransaction()">
+				<div class="form-group col-sm-6">
+					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group col-sm-6">
+					<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group col-sm-6">
+					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group col-sm-6">
+					<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group col-sm-12">
+					<input placeholder="Tags" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+				</div>
+				<div class="form-group col-sm-12">
+					<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
+				</div>
+				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
+			</form>
+		</div>
 	</div>
 </div>
 
-<div class="card" ng-repeat="transaction in transactions">
-	<div style="padding:16px">
-		<p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
-		<p style="font-weight:800">{{transaction.amount}} <a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
-		<p><a ng-repeat="tag in transaction.ledger" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-		<p>{{transaction.content}}</p>
-		<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-		<a href="transaction/{{transaction.id}}"></a>
-	</div>
-	<div class="card-footer">
-		<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-		<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-		<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-		<a class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}"><i class="fa fa-link grey"></i></a>
+<div class="row">
+	<div class="card" ng-repeat="transaction in transactions">
+		<div style="padding:16px">
+			<p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
+			<p style="font-weight:800">{{transaction.amount}} <a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
+			<p><a ng-repeat="tag in transaction.ledger" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+			<p>{{transaction.content}}</p>
+			<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+			<a href="transaction/{{transaction.id}}"></a>
+		</div>
+		<div class="card-footer">
+			<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+			<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+			<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+			<a class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}"><i class="fa fa-link grey"></i></a>
+		</div>
 	</div>
 </div>
 

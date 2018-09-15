@@ -1783,12 +1783,42 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
 
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
-    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "	<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
-    "	<li><a href=\"\">Assets</a></li>\n" +
-    "	<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "	<li><a href=\"\">Transactions</a></li>\n" +
-    "</ul>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-md-6\">\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li><a href=\"\">Assets</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "			<li><a href=\"\">Transactions</a></li>\n" +
+    "		</ul>\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li class=\"active\"><a href=\"\">Expense</a></li>\n" +
+    "			<li><a href=\"\">Revenue</a></li>\n" +
+    "		</ul>\n" +
+    "	</div>\n" +
+    "	<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "		<!--<h1>888,888,888 USD</h1>-->\n" +
+    "		<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>\n" +
+    "		<!--<h4>Filter</h4>\n" +
+    "		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "	    	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "	    	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "	            <a href=\"#\">\n" +
+    "	                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "	            </a>\n" +
+    "			</div>\n" +
+    "		</form>-->\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "	    <form style=\"display:flex;flex-direction:row;\">\n" +
+    "	        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	    </form>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"col-md-6\">\n" +
@@ -1799,48 +1829,54 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<h1>Transaction History</h1>\n" +
-    "<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
-    "<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
-    "		<form role=\"form\" ng-submit=\"createTransaction()\">\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-12\">\n" +
-    "				<input placeholder=\"Tags\" type=\"text\" ng-model=\"newTransaction.ledger\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-12\">\n" +
-    "				<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
-    "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "		</form>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<div class=\"\">\n" +
+    "	<h1>Transaction History</h1>\n" +
+    "	<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
+    "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
+    "	    <div style=\"padding:10px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createTransaction()\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-12\">\n" +
+    "					<input placeholder=\"Tags\" type=\"text\" ng-model=\"newTransaction.ledger\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-12\">\n" +
+    "					<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"card\" ng-repeat=\"transaction in transactions\">\n" +
-    "	<div style=\"padding:16px\">\n" +
-    "		<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
-    "		<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
-    "		<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "		<p>{{transaction.content}}</p>\n" +
-    "		<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
-    "		<a href=\"transaction/{{transaction.id}}\"></a>\n" +
-    "	</div>\n" +
-    "	<div class=\"card-footer\">\n" +
-    "		<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "		<a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "		<a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "		<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\" ng-repeat=\"transaction in transactions\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
+    "			<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
+    "			<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "			<p>{{transaction.content}}</p>\n" +
+    "			<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "			<a href=\"transaction/{{transaction.id}}\"></a>\n" +
+    "		</div>\n" +
+    "		<div class=\"card-footer\">\n" +
+    "			<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "			<a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "			<a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "			<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -1850,6 +1886,17 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-md-6\">\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li class=\"active\"><a href=\"member/{{member.username}}/ledger\">Overview</a></li>\n" +
+    "			<li><a href=\"\">Assets</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
+    "		</ul>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "<h1>Create Your Value Map</h1>\n" +
     "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
@@ -2162,30 +2209,32 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "        </h1>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<div class=\"member-tab-container container\">\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
-    "		<!--<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
-    "        <li><a href=\"/project/{{project.urlTitle}}/charter\">Charter</a></li>-->\n" +
-    "        <li><a href=\"/project/{{project.urlTitle}}/content\">Content</a></li>\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
-    "        <!--<li><a href=\"/project/{{project.urlTitle}}\">Map</a></li>-->\n" +
-    "		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
-    "        <li><a href=\"/project/{{project.urlTitle}}/projects\">Projects</a></li>\n" +
-    "        <!--<li><a href=\"/project/{{project.urlTitle}}/store\">Store</a></li>-->\n" +
-    "		<!--<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>-->\n" +
-    "        <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
-    "		<li ng-show=\"currentUser\">\n" +
-    "			<a class=\"btn btn-default\" ng-click=\"toggleEditproject()\">Edit</a>\n" +
-    "		</li>\n" +
-    "		<li ng-show=\"currentUser\">\n" +
-    "			<a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a>\n" +
-    "		</li>\n" +
-    "	</ul>\n" +
+    "<div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
+    "    <div class=\"row\">\n" +
+    "    	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
+    "    		<!--<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
+    "            <li><a href=\"/project/{{project.urlTitle}}/charter\">Charter</a></li>-->\n" +
+    "            <li><a href=\"/project/{{project.urlTitle}}/content\">Content</a></li>\n" +
+    "    		<li><a href=\"/project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
+    "            <!--<li><a href=\"/project/{{project.urlTitle}}\">Map</a></li>-->\n" +
+    "    		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
+    "            <li><a href=\"/project/{{project.urlTitle}}/projects\">Projects</a></li>\n" +
+    "            <!--<li><a href=\"/project/{{project.urlTitle}}/store\">Store</a></li>-->\n" +
+    "    		<!--<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>-->\n" +
+    "            <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
+    "    		<li ng-show=\"currentUser\">\n" +
+    "    			<a class=\"btn btn-default\" ng-click=\"toggleEditproject()\">Edit</a>\n" +
+    "    		</li>\n" +
+    "    		<li ng-show=\"currentUser\">\n" +
+    "    			<a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a>\n" +
+    "    		</li>\n" +
+    "    	</ul>\n" +
+    "    </div>\n" +
     "</div>\n" +
     "<md-divider></md-divider>\n" +
     "<div class=\"container\" ng-show=\"editProjectToggle\"><p>edit project form</p></div>\n" +
-    "<div class=\"project-container container\">\n" +
+    "<div class=\"container\">\n" +
     "    <div ui-view=\"activity\"></div>\n" +
     "    <div ui-view=\"channels\"></div>\n" +
     "    <div ui-view=\"content\"></div>\n" +
@@ -2468,44 +2517,55 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("project/templates/ledger.tpl.html",
-    "<br>\n" +
-    "<div class=\"\">\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "	<!--<button class=\"btn btn-default log-btn\" ng-click=\"newLedgerToggle()\">+ LEDGER</button><br><br>-->\n" +
+    "<div class=\"row\">\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "\n" +
     "		<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
     "		<li><a href=\"\">Assets</a></li>\n" +
     "		<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
     "		<li><a href=\"\">Transactions</a></li>\n" +
     "\n" +
-    "		<!--<li><a href=\"\">Assets</a></li>\n" +
-    "		<li><a href=\"\">Expenses</a></li>\n" +
-    "		<li><a href=\"\">Liabilities</a></li>\n" +
-    "		<li><a href=\"\">Revenue</a></li>\n" +
-    "		<li><a href=\"\">Positions</a></li>-->\n" +
-    "\n" +
     "		<!--<li><a href=\"\">Work</a></li>\n" +
     "		<li><a href=\"\">Property</a></li>\n" +
     "		<li><a href=\"\">Liscense</a></li>-->\n" +
-    "\n" +
     "	</ul>\n" +
     "\n" +
-    "	<div class=\"row\">\n" +
-    "		<div class=\"col-md-8\">\n" +
-    "			<highchart config=\"chart\"></highchart>\n" +
-    "		</div>\n" +
-    "		<div class=\"col-md-4\">\n" +
-    "			<highchart config=\"pie\"></highchart>\n" +
-    "		</div>\n" +
-    "		<div class=\"col-md-12\">\n" +
-    "			<p><span ng-repeat=\"tag in sortedTransactionTags\"><a href=\"/market/{{tag.element}}\">{{tag.element}} </a></span><p>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
+    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "		<li><a href=\"\">Expenses</a></li>\n" +
+    "		<li><a href=\"\">Revenue</a></li>\n" +
+    "	</ul>\n" +
     "\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-md-6\">\n" +
+    "		<highchart config=\"chart\"></highchart>\n" +
+    "	</div>\n" +
+    "	<div class=\"col-md-6\">\n" +
+    "		<highchart config=\"pie\"></highchart>\n" +
+    "	</div>\n" +
+    "	<div class=\"col-md-12\">\n" +
+    "		<p><span ng-repeat=\"tag in sortedTransactionTags\"><a href=\"/market/{{tag.element}}\">{{tag.element}} </a></span><p>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "	    <form style=\"display:flex;flex-direction:row;\">\n" +
+    "	        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	    </form>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"\">\n" +
     "	<button ng-show=\"currentUser\" class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
     "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
-    "	    <div style=\"padding:10px;\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
     "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
@@ -2529,51 +2589,28 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "			</form>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "</div>\n" +
     "\n" +
+    "<div class=\"row\">\n" +
     "	<div class=\"card\" ng-repeat=\"transaction in transactions\">\n" +
-    "		<div style=\"padding:16px\">\n" +
-    "			<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
-    "			<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
-    "			<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "			<p>{{transaction.content}}</p>\n" +
-    "			<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
-    "			<a href=\"transaction/{{transaction.id}}\"></a>\n" +
-    "		</div>\n" +
-    "		<div class=\"card-footer\">\n" +
-    "			<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "			<a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "			<a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "		</div>\n" +
+    "	<div style=\"padding:16px\">\n" +
+    "		<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
+    "		<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
+    "		<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "		<p>{{transaction.content}}</p>\n" +
+    "		<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "		<a href=\"transaction/{{transaction.id}}\"></a>\n" +
     "	</div>\n" +
-    "	\n" +
+    "	<div class=\"card-footer\">\n" +
+    "		<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "		<a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "		<a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
     "\n" +
-    "	<!--<table class=\"table table-inverse table-hover\">\n" +
-    "	    <thead>\n" +
-    "			<tr>\n" +
-    "				<th>To</th>\n" +
-    "				<th>From</th>\n" +
-    "				<th>Asset Identifier</th>\n" +
-    "				<th>Amount</th>\n" +
-    "				<th>Ledger</th>\n" +
-    "				<th>Content</th>\n" +
-    "				<th>Date</th>\n" +
-    "			</tr>\n" +
-    "	    </thead>\n" +
-    "	    <tbody>\n" +
-    "			<tr ng-repeat=\"transaction in transactions\">\n" +
-    "				<td><a href=\"\">{{transaction.to}}</a></td>\n" +
-    "				<td><a href=\"\">{{transaction.from}}</a></td>\n" +
-    "				<td><a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></td>\n" +
-    "				<td>{{transaction.amount}}</td>\n" +
-    "				<td>{{transaction.ledger}}</td>\n" +
-    "				<td>{{transaction.content}}</td>\n" +
-    "				<td>{{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</td>\n" +
-    "			</tr>\n" +
-    "	    </tbody>\n" +
-    "	</table>-->\n" +
-    "\n" +
-    "</div>");
+    "");
 }]);
 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
