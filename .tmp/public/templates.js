@@ -427,8 +427,6 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "<!--TEMP | LOGGED IN / DASH-->\n" +
     "<div class=\"container\" ng-show=\"currentUser\">\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
@@ -718,13 +716,18 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "			<button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "<!--TEMP | LOGGED OUT / SPLASH -->\n" +
     "<div ng-show=\"!currentUser\">\n" +
+    "\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
+    "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "	<div class=\"header-area container\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
@@ -822,6 +825,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
     "			<div ng-repeat=\"item in activity\">\n" +
@@ -928,6 +932,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		    </div>\n" +
     "    	</div>\n" +
     "	</div>\n" +
+    "	\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "</div>");

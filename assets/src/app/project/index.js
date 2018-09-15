@@ -236,6 +236,7 @@ angular.module( 'conexus.project', [
     
     $scope.activity = [].concat.apply([], [$scope.posts, $scope.tasks, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+    $scope.activity = $scope.activity.slice(0,100);
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){

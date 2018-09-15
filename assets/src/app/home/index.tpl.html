@@ -1,8 +1,6 @@
 <!--TEMP | LOGGED IN / DASH-->
 <div class="container" ng-show="currentUser">
 
-
-
 	<div class="spacing-10"></div>
 
 	<div class="row">
@@ -292,13 +290,18 @@
 			<button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
 		</div>
 	</div>
+
 	<div class="spacing-50"></div>
+
 </div>
 
 <!--TEMP | LOGGED OUT / SPLASH -->
 <div ng-show="!currentUser">
+
 	<div ng-include="'intro/index.tpl.html'"></div>
+
 	<div class="spacing-50"></div>
+
 	<div class="header-area container">
 		<div class="row">
 			<div class="col-md-6">
@@ -396,6 +399,7 @@
 	</div>
 
 	<div class="spacing-50"></div>
+
 	<div class="container">
 	    <div class="row">
 			<div ng-repeat="item in activity">
@@ -502,6 +506,7 @@
 		    </div>
     	</div>
 	</div>
+	
 	<div class="spacing-50"></div>
 
 </div>

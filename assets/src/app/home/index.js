@@ -12,26 +12,26 @@ angular.module( 'conexus.home', [
 		},
 		resolve:{
 			projects: ['ProjectModel', function(ProjectModel) {
-				return ProjectModel.getSome(50, 0, 'createdAt DESC');
+				return ProjectModel.getSome(15, 0, 'createdAt DESC');
 			}],
 			members: ['UserModel', function(UserModel){
 				//return UserModel.getSome(100, 0, 'createdAt DESC');
                 return null;
 			}],
             orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome('', '', '', 50, 0, 'createdAt DESC');
+                return OrderModel.getSome('', '', '', 15, 0, 'createdAt DESC');
             }],
 			posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 50, 0, 'createdAt DESC');
+                return PostModel.getSome('', '', 15, 0, 'createdAt DESC');
 			}],
 			tasks: ['TaskModel', function(TaskModel) {
-				return TaskModel.getSome('', '', 50, 0, 'createdAt DESC');
+				return TaskModel.getSome('', '', 15, 0, 'createdAt DESC');
 			}],
             transactions: ['TransactionModel', function(TransactionModel) {
-                return TransactionModel.getSome('','', 50, 0, 'createdAt DESC');
+                return TransactionModel.getSome('','', 15, 0, 'createdAt DESC');
             }],
 			work: ['WorkModel', function(WorkModel) {
-                return WorkModel.getSome('', '', 50, 0, 'createdAt DESC');
+                return WorkModel.getSome('', '', 15, 0, 'createdAt DESC');
             }]
 
 		}
@@ -70,6 +70,7 @@ angular.module( 'conexus.home', [
     $scope.activity = [].concat.apply([], [$scope.posts, $scope.projects, $scope.tasks, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
+    
 	$scope.chart = {
         chart: {polar: true},
         series: [{

@@ -35,19 +35,19 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             orders: ['member', 'OrderModel', function(member, OrderModel){
-                return OrderModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
             }],
             posts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+                return PostModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
             }],
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('from', member.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome('from', member.id, 50, 0, 'createdAt DESC');
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('to', member.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome('to', member.id, 50, 0, 'createdAt DESC');
             }],
             work: ['member', 'WorkModel', function(member, WorkModel) {
-                return WorkModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+                return WorkModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
             }]
         }
     })
@@ -164,10 +164,13 @@ angular.module( 'conexus.member', [
     if(!$scope.member){$location.path('/')}
 
     $scope.createTransaction = function(){
-        $scope.newTransaction.to = $scope.member.id;
-        TransactionModel.create($scope.newTransaction).then(function(model){
-            $scope.newTransaction = {};
-        });
+        if($scope.currentUser){
+            $scope.newTransaction.to = $scope.member.id;
+            TransactionModel.create($scope.newTransaction).then(function(model){
+                $scope.newTransaction = {};
+            });
+        }
+        else{$location.path('/login')}
     };
 
     $scope.follow = function() {
@@ -237,6 +240,7 @@ angular.module( 'conexus.member', [
     
     $scope.activity = [].concat.apply([], [$scope.orders, $scope.posts, $scope.transactions, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+    $scope.activity = $scope.activity.slice(0,100);
 
     $scope.createPost = function(post){
         $scope.newPost.post = post.id;
