@@ -232,7 +232,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
 
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("discover/index.tpl.html",
-    "<!--<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -240,15 +240,11 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
-    "</div>-->\n" +
-    "\n" +
-    "<div class=\"container\">\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "	<h1>Discover</h1>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
     "		<li><a href=\"/discover\">Content</a></li>\n" +
@@ -256,14 +252,14 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "		<li><a href=\"/market\">Orders</a></li>\n" +
     "		<li><a href=\"/projects\">Projects</a></li>\n" +
     "		<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "		<li><a href=\"/\">Value</a></li>\n" +
-    "		<li><a href=\"/\">Work</a></li>\n" +
+    "		<!--<li><a href=\"/\">Value</a></li>\n" +
+    "		<li><a href=\"/\">Work</a></li>-->\n" +
     "	</ul>\n" +
     "</div>\n" +
     "\n" +
     "<!--TODO: FILTER / SEARCH -->\n" +
     "<div class=\"container\">\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
     "    <div class=\"card\">\n" +
     "        <form style=\"display:flex;flex-direction:row;\">\n" +
     "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
@@ -281,7 +277,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
     "\n" +
     "\n" +
