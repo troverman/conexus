@@ -161,13 +161,11 @@
 	</div>
 
 	<div class="row">
-		<div class="card" ng-show="false">
+		<div class="card" ng-show="true">
 	        <div style="padding:16px;">
 	        	<h4>Create Post Content</h4>
 	        	<form role="form" ng-submit="createPost(newPost)">
-					<div class="form-group">
-						<input type="text" ng-model="newPost.content" class="form-control">
-					</div>
+					<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 				</form>
 			</div>
@@ -195,7 +193,7 @@
 						<a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
 						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 					</div>
-					<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+					<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 				</div>
 				<div class="card-footer">
 					<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
@@ -240,7 +238,7 @@
 						<div class="col-sm-10">
 							<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
 							<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-							<p><span ng-bind-html="renderMessage(item.content)"></span></p>
+							<p><span ng-bind-html="renderContent(item.content)"></span></p>
 							<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 							<span style="color:gray" am-time-ago="item.createdAt"></span>
 						</div>
@@ -276,8 +274,8 @@
 						<p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 					</div>
         			<p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
-	            	<p style="margin-left:42px" ng-show="item.task.completeIdentifierSet"><a href="market/{{item.task.completeIdentifierSet}}">{{item.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-	                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+        			<!--liqudity lookup-->
+	                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 	            </div>
 	            <div class="card-footer">
 	                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
@@ -425,7 +423,7 @@
 							<a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
 							<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 						</div>
-						<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+						<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 					</div>
 					<div class="card-footer">
 						<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
@@ -471,7 +469,7 @@
 							<div class="col-sm-10">
 								<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
 								<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-								<p><span ng-bind-html="renderMessage(item.content)"></span></p>
+								<p><span ng-bind-html="renderContent(item.content)"></span></p>
 								<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 								<span style="color:gray" am-time-ago="item.createdAt"></span>
 							</div>
@@ -500,8 +498,7 @@
 							<p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 						</div>
 		    			<p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
-		            	<p style="margin-left:42px" ng-show="item.task.completeIdentifierSet"><a href="market/{{item.task.completeIdentifierSet}}">{{item.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
-		                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+		                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 		            </div>
 		            <div class="card-footer">
 		                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 

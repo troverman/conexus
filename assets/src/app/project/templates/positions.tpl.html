@@ -1,12 +1,15 @@
 <div class="spacing-5"></div>
 <h1>Create Your Value Map</h1>
 <h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
-<p>Browse.., Discover..</p>
+<span><a href="market/UniversalToken">Universal Dimension</a> | <a href="#">+ Dimension</a></span><br>
+<span><span ng-repeat="dimension in chart.xAxis.categories"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
+
 <div class="spacing-10"></div>
 <highchart config="chart"></highchart>
+<a href="/discover">Discover</a>
 <div class="spacing-10"></div>
 
-<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
+<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Motion to Create Order</button><br><br>
 <md-card ng-show="newOrderToggleVar">
     <div style="padding:10px;">
 		<form role="form" ng-submit="createOrder()">
@@ -27,29 +30,33 @@
 	</div>
 </md-card>
 <div class="spacing-10"></div>
-<table class="table table-inverse table-hover">
-    <thead>
-		<tr>
-			<th>Asset Set 1</th>
-			<th>Asset Set 2</th>
-			<th>Order Id</th>
-		</tr>
-    </thead>
-    <tbody>
-		<tr ng-repeat="order in orders">
-			<td>
-				<span ng-repeat="item in order.amountSet">
-					{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-				</span>
-			</td>
-
-			<td>
-				<span ng-repeat="item in order.amountSet1">
-					{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-				</span>
-			</td>
-			<td><a href="order/{{order.id}}">{{order.id}}</a>
-		</tr>
-    </tbody>
-</table>
+<div class="row">
+    <div ng-repeat="order in orders">
+        <div class="card">
+            <div style="padding:16px">
+                <!--<div>
+                    <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}">
+                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{order.user.username}}">{{order.user.username}}</a>
+                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
+                </div>--> 
+                <!--<div style="margin-left:42px">-->
+                	<span ng-repeat="item in order.amountSet">
+						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+					</span>
+					<span> | </span>
+					<span ng-repeat="item in order.amountSet1">
+						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+					</span>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
+                <!--</div>-->
+            </div>
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+        </div>
+	</div>
+</div>
 <div class="spacing-10"></div>

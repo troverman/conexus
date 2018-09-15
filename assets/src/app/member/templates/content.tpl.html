@@ -1,17 +1,18 @@
 <div class="spacing-10"></div>
-<div class="row" ng-show="true">
+<div class="row">
     <div class="col-xs-12">
     	<!-- POST WITH ATTACHMENT -->
     	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->
-        <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ Content</button><br><br>
-        <div ng-show="newProjectToggleVar">
+        <button class="btn btn-default log-btn" ng-click="newContentToggle()">+ Content</button><br><br>
+        <div ng-show="newContentToggleVar">
             <form class="blog-input" role="form" ng-submit="createContent()">
-                <div class="form-group">
-                    <input type="text" placeholder= "Content Project" ng-model="newContent.project" class="form-control">
-                    <input type="text" placeholder= "Content Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
-                    <input type="text" placeholder= "Content Title" ng-model="newContent.title" class="form-control">
-                    <input type="text" placeholder= "Content Content" ng-model="newContent.content" class="form-control">
-                    <input type="text" placeholder= "Content Attachment" ng-model="newContent.attachment" class="form-control">
+                <div class="">
+                    <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
+                    <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
+                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
+                    <input type="text" placeholder= "tags" ng-model="newContent.tags" class="form-control">
+                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-default log-btn">create</button>
 				<div class="spacing-15"></div>
@@ -39,7 +40,7 @@
 <div class="col-md-6" ng-repeat="video in videos">
 	<div class="card">
 	    <div style="padding:16px;">
-			<div ng-bind-html="renderMessage(video.streamUrl)">></div>
+			<div ng-bind-html="renderContent(video.streamUrl)">></div>
 			<h3><a href="stream/{{video.title}}">{{video.title}}</a></h3>
 			<p><a style="font-weight:700"  href="member/{{video.user}}">
 				<img class="card-avatar" ng-src="{{video.user.avatarUrl}}" src="{{video.user.avatarUrl}}">

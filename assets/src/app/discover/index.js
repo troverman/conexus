@@ -105,7 +105,7 @@ angular.module( 'conexus.discover', [
 	//TODO: UNITY W POSTS | CONTENT | STREAMS
 
 	//TODO: HMM
-	$scope.renderMessage = function(stream){
+	$scope.renderContent = function(stream){
         var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
         return $sce.trustAsHtml(html);
     };

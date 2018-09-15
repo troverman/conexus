@@ -1,17 +1,12 @@
 <div class="col-lg-4 col-sm-6" ng-repeat="member in followers">
 	<div class="member-card">
-	    <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
+	    <div class="member-card-image" style="background-image: url('{{member.follower.coverUrl}}')">
 	        <a href="member/{{member.follower.username}}"><img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png"></a>
 	    </div>
 	    <div class="member-card-info">
 	        <h4><a href="member/{{member.follower.username}}">{{member.follower.username}}</a></h4>
-	        <p style="color:gray">{{member.status}} offline</p>
+	        <p style="color:gray">{{member.follower.status}} offline</p>
 	        <p style="color:gray">total reputation | {{member.follower.totalWork}}</p>
-	    </div>
-	    <div class="member-card-social">
-	        <a ng-show="member.follower.socialAccounts.facebook.profileUrl" href="{{member.follower.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
-	        <a ng-show="member.follower.socialAccounts.twitter.profileUrl" href="{{member.follower.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
-	        <a ng-show="member.follower.socialAccounts.google.profileUrl" href="{{member.follower.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
 	    </div>
 	</div>
 </div>

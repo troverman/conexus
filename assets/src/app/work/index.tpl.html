@@ -12,7 +12,7 @@
 				</a>
 				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
 				<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-				<p>{{work.content}}</p>
+                <p><span style="display:inline" ng-bind-html="renderMessage(work.content)"></span></p>
 				<span style="color:gray" am-time-ago="work.createdAt"></span>
 			</div>
 
@@ -38,10 +38,13 @@
 	<!--TODO: REAL STREAM-->
 	<div class="row">
 		<div class="card">
-			<div style="padding:16px">
-				<h3>Stream</h3>
-				<h4><a href="stream/example">Example Stream</a></h4>
-				<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+		    <div style="padding:16px;">
+				<div ng-bind-html="renderStream(work.stream)">></div>
+				<h3><a href="stream/{{work.id}}">{{work.id}} Stream</a></h3>
+				<!--<p><a style="font-weight:700" href="member/{{work.user.username}}">
+					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+					{{work.user.username}}
+				</a> | <span am-time-ago="work.createdAt"></span></p>-->
 			</div>
 		</div>
 	</div>
@@ -73,9 +76,7 @@
 				<div class="col-md-12">
 	                <h4>Create a Work Post</h4>
 			        <form role="form" ng-submit="createPost(newPost)">
-			            <div class="form-group">
-			                <input type="text" ng-model="newPost.content" class="form-control" id="postContent">
-			            </div>
+                    	<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 			            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 			        </form>
 			        <div class="spacing-15"></div>
@@ -104,9 +105,7 @@
 				<!--TODO: NESTED -->
 				<div ng-show="post.showReply" class="card-footer">
 					<form role="form" ng-submit="createPost(post)">
-						<div class="form-group">
-							<input type="text" ng-model="newPost.content" class="form-control" id="postContent-{{post.id}}">
-						</div>
+						<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
 					</form>
 				</div>

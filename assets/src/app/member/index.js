@@ -247,11 +247,15 @@ angular.module( 'conexus.member', [
         });
     };
 
-    $scope.renderMessage = function(message){
-        if (message){
-            var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-            return $sce.trustAsHtml(replacedText);
+    //YIKES
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
         }
     };
 
@@ -275,13 +279,23 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', 'videos', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService, videos) {
     $scope.currentUser = config.currentUser;
+    $scope.content = [{}];
+    $scope.newContent = {};
+    $scope.newContentToggleVar = false;
+
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
     $scope.posts = posts;
     $scope.videos = videos;
-    $scope.renderMessage = function(stream){
+
+    $scope.newContentToggle = function() {
+        $scope.newContentToggleVar = !$scope.newContentToggleVar;
+    };
+
+    $scope.renderContent = function(stream){
         var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
         return $sce.trustAsHtml(html);
     };
+
 }])
 
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {

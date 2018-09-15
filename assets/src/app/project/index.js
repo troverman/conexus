@@ -266,11 +266,15 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
+    //YIKES
     $scope.renderMessage = function(post){
         if (post){
-            var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-            return $sce.trustAsHtml(replacedText);
+            if (!post.includes('>')){
+                var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{$sce.trustAsHtml(post)}
         }
     };
 
@@ -339,11 +343,15 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
-    $scope.renderMessage = function(post){
-        if (post){
-            var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-            return $sce.trustAsHtml(replacedText);
+    //YIKES
+    $scope.renderMessage = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
         }
     };
 
@@ -364,10 +372,18 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectContentCtrl', ['$sce', '$scope', 'content', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, content, project, streams, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
     $scope.content = content;
+    $scope.newContent = {};
+    $scope.newContentToggleVar = false;
     $scope.project = project;
     $scope.streams = streams;
     $scope.AudioContext = {};
     $scope.videoContext = {};
+
+    $scope.newContent.parent = project.id;
+
+     $scope.newContentToggle = function() {
+        $scope.newContentToggleVar = !$scope.newContentToggleVar;
+    };
 
     //TODO: DOESNT WORK
     $scope.renderMessage = function(stream){

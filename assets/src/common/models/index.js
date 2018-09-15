@@ -1,4 +1,5 @@
 angular.module('models', [
+	'models.content',
 	'models.entry',
 	'models.follower',
 	'models.member',

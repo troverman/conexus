@@ -73,11 +73,15 @@ angular.module( 'conexus.post', [
         else{$location.path('/login')}
     };
 
-    $scope.renderMessage = function(message){
-        if (message){
-            var replacedText = message.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-            return $sce.trustAsHtml(replacedText);
+    //YIKES
+    $scope.renderMessage = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
         }
     };
     

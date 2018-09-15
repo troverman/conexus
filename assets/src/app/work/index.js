@@ -78,12 +78,21 @@ angular.module( 'conexus.work', [
         else{$location.path('/login')}
     };
 
+    //YIKES
     $scope.renderMessage = function(post){
         if (post){
-            var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-            var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-            return $sce.trustAsHtml(replacedText);
+            if (!post.includes('>')){
+                var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(post)}
         }
+    };
+
+    $scope.renderStream = function(stream){
+        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+        return $sce.trustAsHtml(html);
     };
 
     $scope.reply = function(post){
