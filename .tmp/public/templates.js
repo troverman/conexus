@@ -285,8 +285,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "</div>\n" +
     "\n" +
     "\n" +
-    "<div class=\"container\">\n" +
-    "	<h2>Value Sets</h2>\n" +
+    "<!--<div class=\"container\">\n" +
     "	<div class=\"col-lg-3 col-xs-6\">\n" +
     "		<highchart config=\"chart\"></highchart>\n" +
     "	</div>\n" +
@@ -302,8 +301,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
-    "	<h2>Content</h2>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
     "	<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
     "		<div class=\"card\">\n" +
     "		    <div style=\"padding:16px;\">\n" +
@@ -316,12 +313,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
     "\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "	<h2>Members</h2>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
     "		<div class=\"member-card\" style=\"margin-bottom:10px\">\n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
@@ -337,8 +331,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
-    "	<h2>Projects</h2>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
     "	<div ng-repeat=\"project in projects.slice(0,10)\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +

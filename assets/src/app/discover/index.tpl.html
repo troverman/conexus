@@ -51,8 +51,7 @@
 </div>
 
 
-<div class="container">
-	<h2>Value Sets</h2>
+<!--<div class="container">
 	<div class="col-lg-3 col-xs-6">
 		<highchart config="chart"></highchart>
 	</div>
@@ -68,8 +67,6 @@
 </div>
 
 <div class="container">
-	<h2>Content</h2>
-	<div class="spacing-10"></div>
 	<div class="col-md-6" ng-repeat="stream in streams">
 		<div class="card">
 		    <div style="padding:16px;">
@@ -82,12 +79,9 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->
 
 <div class="container">
-	<div class="spacing-10"></div>
-	<h2>Members</h2>
-	<div class="spacing-10"></div>
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
 		<div class="member-card" style="margin-bottom:10px">
 		    <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
@@ -103,8 +97,6 @@
 </div>
 
 <div class="container">
-	<h2>Projects</h2>
-	<div class="spacing-10"></div>
 	<div ng-repeat="project in projects.slice(0,10)">
         <div class="card">
             <div style="padding:16px;">
