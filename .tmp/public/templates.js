@@ -154,60 +154,72 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"col-md-8\">\n" +
+    "			<div class=\"card\">\n" +
+    "				<div style=\"padding:16px\">\n" +
     "\n" +
-    "			<h4>Balance Lookup</h4>\n" +
-    "       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "	                <a href=\"#\">\n" +
-    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "	                </a>\n" +
-    "				</div>\n" +
-    "        	</form>\n" +
+    "					<h4>Balance Lookup</h4>\n" +
+    "		       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "		            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "		            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "			                <a href=\"#\">\n" +
+    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "			                </a>\n" +
+    "						</div>\n" +
+    "		        	</form>\n" +
     "\n" +
-    "        	<h4>Reputation Lookup</h4>\n" +
-    "       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "	                <a href=\"#\">\n" +
-    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "	                </a>\n" +
-    "				</div>\n" +
-    "        	</form>\n" +
+    "		        	<h4>Reputation Lookup</h4>\n" +
+    "		       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "		            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "		            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "			                <a href=\"#\">\n" +
+    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "			                </a>\n" +
+    "						</div>\n" +
+    "		        	</form>\n" +
     "\n" +
-    "			<p>Tokens | Peer Contrubution</p>\n" +
-    "			<a href=\"#\">\n" +
-    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "					<h5>Update Avatar</h5>\n" +
-    "				</div>\n" +
-    "			</a>\n" +
-    "			<a href=\"#\">\n" +
-    "				<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "					<h5>Update Cover</h5>\n" +
-    "				</div>\n" +
-    "			</a>\n" +
-    "			<h4>{{currentUser.email}}</h4>\n" +
+    "					<p>Tokens | Peer Contrubution</p>\n" +
+    "					<a href=\"#\">\n" +
+    "						<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "							<h5>Update Avatar</h5>\n" +
+    "						</div>\n" +
+    "					</a>\n" +
+    "					<a href=\"#\">\n" +
+    "						<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "							<h5>Update Cover</h5>\n" +
+    "						</div>\n" +
+    "					</a>\n" +
+    "					<h4>{{currentUser.email}}</h4>\n" +
     "\n" +
+    "				</div>\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<h3>Identification Information</h3>\n" +
+    "			<p>Human Proof ID | ON</p>\n" +
+    "		</div>\n" +
+    "    </div>\n" +
     "\n" +
-    "	<h3>Identification Information</h3>\n" +
-    "	<p>Human Proof ID | ON</p>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<h3>Settings</h3>\n" +
+    "			<p>GPS Tracking | ON</p>\n" +
+    "			<p>Notifications | ON</p>\n" +
+    "		</div>\n" +
+    "    </div>\n" +
     "\n" +
-    "	<h3>Settings</h3>\n" +
-    "	<p>GPS Tracking | ON</p>\n" +
-    "	<p>Notifications | ON</p>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "	<h3>Connected Accounts</h3>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/twitter\">Twitter</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/facebook\">Facebook</a></button>\n" +
-    "	<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">Fitbit</a></button>\n" +
-    "	<!--TODO: tokenized apps.. connect in..-->\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px\">\n" +
+    "			<h3>Connected Accounts</h3>\n" +
+    "			<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
+    "			<button class=\"btn btn-default\"><a href=\"/auth/twitter\">Twitter</a></button>\n" +
+    "			<button class=\"btn btn-default\"><a href=\"/auth/facebook\">Facebook</a></button>\n" +
+    "			<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">Fitbit</a></button>\n" +
+    "			<!--TODO: tokenized apps.. connect in..-->\n" +
+    "		</div>\n" +
+    "    </div>\n" +
     "\n" +
     "	<button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"\">Edit Account</button>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -1689,18 +1701,22 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->\n" +
     "        <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button><br><br>\n" +
     "        <div ng-show=\"newContentToggleVar\">\n" +
-    "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                <div class=\"\">\n" +
-    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
-    "                    <input type=\"text\" placeholder= \"tags\" ng-model=\"newContent.tags\" class=\"form-control\">\n" +
-    "                    <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px\">\n" +
+    "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                        <div class=\"\">\n" +
+    "                            <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
+    "                            <input type=\"text\" placeholder= \"Tags\" ng-model=\"newContent.tags\" class=\"form-control\">\n" +
+    "                            <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
+    "                        </div>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "        				<div class=\"spacing-15\"></div>\n" +
+    "                    </form>\n" +
     "                </div>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "            </form>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -2390,18 +2406,21 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->\n" +
     "        <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button><br><br>\n" +
     "        <div ng-show=\"newContentToggleVar\">\n" +
-    "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                <div class=\"\">\n" +
-    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
-    "                    <input type=\"text\" placeholder= \"Tags\" ng-model=\"newContent.tags\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
-    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
-    "                </div>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "            </form>\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px\">\n" +
+    "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                        <div class=\"\">\n" +
+    "                            <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
+    "                            <input type=\"text\" placeholder= \"Tags\" ng-model=\"newContent.tags\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
+    "                            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
+    "                        </div>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                    </form>\n" +
+    "                 </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -2427,7 +2446,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "<div class=\"col-md-12\" ng-repeat=\"item in content\">\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px;\">\n" +
-    "            {{item.content}}\n" +
+    "            <div ng-bind-html=\"renderContent(item.content)\">></div>\n" +
     "            <p><a style=\"font-weight:700\" href=\"member/{{item.user.username}}\">\n" +
     "                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
     "                {{item.user.username}}\n" +
@@ -2439,7 +2458,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "<div class=\"col-md-6\" ng-repeat=\"stream in streams\">\n" +
     "	<div class=\"card\">\n" +
     "	    <div style=\"padding:16px;\">\n" +
-    "			<div ng-bind-html=\"renderMessage(stream.streamUrl)\">></div>\n" +
+    "			<div ng-bind-html=\"renderStream(stream.streamUrl)\">></div>\n" +
     "			<h3><a href=\"stream/{{stream.title}}\">{{stream.title}}</a></h3>\n" +
     "			<p><a style=\"font-weight:700\" href=\"member/{{stream.user.username}}\">\n" +
     "				<img class=\"card-avatar\" ng-src=\"{{stream.user.avatarUrl}}\" src=\"{{stream.user.avatarUrl}}\">\n" +
@@ -2665,7 +2684,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
     "                <div class=\"form-group\">\n" +
     "                    <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
+    "                    <text-angular ng-model=\"newProject.description\" ta-toolbar=\"[['']]\"></text-angular>\n" +
     "                </div>\n" +
     "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
@@ -2711,34 +2730,10 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				<input placeholder=\"Tags\" type=\"text\" ng-model=\"newTask.tags\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "                <text-angular placeholder=\"Content\" ng-model=\"newTask.content\" ta-toolbar=\"''\"></text-angular>\n" +
     "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Content\" type=\"text\" ng-model=\"newTask.content\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Tags\" type=\"text\" ng-model=\"newTask.tags\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<!--\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Complete Identifier Set\" type=\"text\" ng-model=\"newTask.completeIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Complete Bounty Set\" type=\"text\" ng-model=\"newTask.completeBountySet\" class=\"form-control\" id=\"taskTitle\" >\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Time Identifier Set\" type=\"text\" ng-model=\"newTask.timeIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Time Bounty Set\" type=\"text\" ng-model=\"newTask.timeBountySet\" class=\"form-control\" id=\"taskTitle\" >\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Verification Identifier Set\" type=\"text\" ng-model=\"newTask.verificationIdentifierSet\" class=\"form-control\" id=\"taskTitle\" >\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Task Verification Bounty Set\" type=\"text\" ng-model=\"newTask.verificationBountySet\" class=\"form-control\" id=\"taskTitle\" >\n" +
-    "			</div>\n" +
-    "			-->\n" +
     "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
     "		</form>\n" +
     "	</div>\n" +
@@ -2836,8 +2831,9 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "                <div class=\"spacing-10\"></div>\n" +
     "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input type=\"text\" placeholder= \"Project Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                        <input type=\"text\" placeholder= \"Project Description\" ng-model=\"newProject.description\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                        <!--<input type=\"text\" placeholder= \"Tags\" ng-model=\"newProject.tags\" class=\"form-control\">-->\n" +
+    "                        <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
     "                        <!--<input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">-->\n" +
     "                    </div>\n" +
     "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +

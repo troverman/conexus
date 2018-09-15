@@ -8,6 +8,9 @@
 module.exports = {
 
 	attributes: {
+        parent:{
+            type: 'string',
+        },
         title: {
             type: 'string',
         },

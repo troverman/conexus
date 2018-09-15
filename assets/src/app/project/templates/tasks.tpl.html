@@ -6,34 +6,10 @@
     <div style="padding:10px;">
 		<form role="form" ng-submit="createTask(newTask)">
 			<div class="form-group">
-				<input placeholder="Task Title" type="text" ng-model="newTask.title" class="form-control" id="taskTitle">
+				<input placeholder="Title" type="text" ng-model="newTask.title" class="form-control" id="taskTitle">
+				<input placeholder="Tags" type="text" ng-model="newTask.tags" class="form-control" id="taskTitle">
+                <text-angular placeholder="Content" ng-model="newTask.content" ta-toolbar="''"></text-angular>
 			</div>
-			<div class="form-group">
-				<input placeholder="Task Content" type="text" ng-model="newTask.content" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="Task Tags" type="text" ng-model="newTask.tags" class="form-control" id="taskTitle">
-			</div>
-			<!--
-			<div class="form-group">
-				<input placeholder="Task Complete Identifier Set" type="text" ng-model="newTask.completeIdentifierSet" class="form-control" id="taskTitle" >
-			</div>
-			<div class="form-group">
-				<input placeholder="Task Complete Bounty Set" type="text" ng-model="newTask.completeBountySet" class="form-control" id="taskTitle" >
-			</div>
-			<div class="form-group">
-				<input placeholder="Task Time Identifier Set" type="text" ng-model="newTask.timeIdentifierSet" class="form-control" id="taskTitle" >
-			</div>
-			<div class="form-group">
-				<input placeholder="Task Time Bounty Set" type="text" ng-model="newTask.timeBountySet" class="form-control" id="taskTitle" >
-			</div>
-			<div class="form-group">
-				<input placeholder="Task Verification Identifier Set" type="text" ng-model="newTask.verificationIdentifierSet" class="form-control" id="taskTitle" >
-			</div>
-			<div class="form-group">
-				<input placeholder="Task Verification Bounty Set" type="text" ng-model="newTask.verificationBountySet" class="form-control" id="taskTitle" >
-			</div>
-			-->
 			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
 		</form>
 	</div>

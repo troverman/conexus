@@ -6,18 +6,21 @@
     	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->
         <button class="btn btn-default log-btn" ng-click="newContentToggle()">+ Content</button><br><br>
         <div ng-show="newContentToggleVar">
-            <form class="blog-input" role="form" ng-submit="createContent()">
-                <div class="">
-                    <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
-                    <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
-                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
-                    <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control"> <!-- VIDEO | FILE... ? -->
-                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-default log-btn">create</button>
-				<div class="spacing-15"></div>
-            </form>
+            <div class="card">
+                <div style="padding:16px">
+                    <form role="form" ng-submit="createContent()">
+                        <div class="">
+                            <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
+                            <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
+                            <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
+                            <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control"> <!-- VIDEO | FILE... ? -->
+                            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                            <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-default log-btn">create</button>
+                    </form>
+                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -43,7 +46,7 @@
 <div class="col-md-12" ng-repeat="item in content">
     <div class="card">
         <div style="padding:16px;">
-            {{item.content}}
+            <div ng-bind-html="renderContent(item.content)">></div>
             <p><a style="font-weight:700" href="member/{{item.user.username}}">
                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
                 {{item.user.username}}
@@ -55,7 +58,7 @@
 <div class="col-md-6" ng-repeat="stream in streams">
 	<div class="card">
 	    <div style="padding:16px;">
-			<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
+			<div ng-bind-html="renderStream(stream.streamUrl)">></div>
 			<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
 			<p><a style="font-weight:700" href="member/{{stream.user.username}}">
 				<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">

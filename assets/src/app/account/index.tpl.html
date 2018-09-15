@@ -20,60 +20,72 @@
 			</div>
 		</div>
 		<div class="col-md-8">
+			<div class="card">
+				<div style="padding:16px">
 
-			<h4>Balance Lookup</h4>
-       		<form style="display:flex;flex-direction:row;">
-            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
-            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-	                <a href="#">
-	                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-	                </a>
-				</div>
-        	</form>
+					<h4>Balance Lookup</h4>
+		       		<form style="display:flex;flex-direction:row;">
+		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+			                <a href="#">
+			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+			                </a>
+						</div>
+		        	</form>
 
-        	<h4>Reputation Lookup</h4>
-       		<form style="display:flex;flex-direction:row;">
-            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
-            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-	                <a href="#">
-	                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-	                </a>
-				</div>
-        	</form>
+		        	<h4>Reputation Lookup</h4>
+		       		<form style="display:flex;flex-direction:row;">
+		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+			                <a href="#">
+			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+			                </a>
+						</div>
+		        	</form>
 
-			<p>Tokens | Peer Contrubution</p>
-			<a href="#">
-				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-					<h5>Update Avatar</h5>
-				</div>
-			</a>
-			<a href="#">
-				<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-					<h5>Update Cover</h5>
-				</div>
-			</a>
-			<h4>{{currentUser.email}}</h4>
+					<p>Tokens | Peer Contrubution</p>
+					<a href="#">
+						<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+							<h5>Update Avatar</h5>
+						</div>
+					</a>
+					<a href="#">
+						<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+							<h5>Update Cover</h5>
+						</div>
+					</a>
+					<h4>{{currentUser.email}}</h4>
 
+				</div>
+			</div>
 		</div>
 	</div>
 
+	<div class="card">
+		<div style="padding:16px">
+			<h3>Identification Information</h3>
+			<p>Human Proof ID | ON</p>
+		</div>
+    </div>
 
-	<h3>Identification Information</h3>
-	<p>Human Proof ID | ON</p>
-	<div class="spacing-10"></div>
+	<div class="card">
+		<div style="padding:16px">
+			<h3>Settings</h3>
+			<p>GPS Tracking | ON</p>
+			<p>Notifications | ON</p>
+		</div>
+    </div>
 
-	<h3>Settings</h3>
-	<p>GPS Tracking | ON</p>
-	<p>Notifications | ON</p>
-	<div class="spacing-10"></div>
-
-	<h3>Connected Accounts</h3>
-	<button class="btn btn-default"><a href="/auth/google">Google</a></button>
-	<button class="btn btn-default"><a href="/auth/twitter">Twitter</a></button>
-	<button class="btn btn-default"><a href="/auth/facebook">Facebook</a></button>
-	<button class="btn btn-default"><a href="/auth/fitbit">Fitbit</a></button>
-	<!--TODO: tokenized apps.. connect in..-->
-	<div class="spacing-10"></div>
+	<div class="card">
+		<div style="padding:16px">
+			<h3>Connected Accounts</h3>
+			<button class="btn btn-default"><a href="/auth/google">Google</a></button>
+			<button class="btn btn-default"><a href="/auth/twitter">Twitter</a></button>
+			<button class="btn btn-default"><a href="/auth/facebook">Facebook</a></button>
+			<button class="btn btn-default"><a href="/auth/fitbit">Fitbit</a></button>
+			<!--TODO: tokenized apps.. connect in..-->
+		</div>
+    </div>
 
 	<button style="width:100%;" class="btn btn-default log-btn" ng-click="">Edit Account</button>
 	<div class="spacing-10"></div>

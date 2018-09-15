@@ -5,18 +5,22 @@
     	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->
         <button class="btn btn-default log-btn" ng-click="newContentToggle()">+ Content</button><br><br>
         <div ng-show="newContentToggleVar">
-            <form class="blog-input" role="form" ng-submit="createContent()">
-                <div class="">
-                    <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
-                    <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
-                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
-                    <input type="text" placeholder= "tags" ng-model="newContent.tags" class="form-control">
-                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
+            <div class="card">
+                <div style="padding:16px">
+                    <form role="form" ng-submit="createContent()">
+                        <div class="">
+                            <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
+                            <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
+                            <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
+                            <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control">
+                            <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                            <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-default log-btn">create</button>
+        				<div class="spacing-15"></div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-default log-btn">create</button>
-				<div class="spacing-15"></div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
