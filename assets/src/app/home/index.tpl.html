@@ -219,7 +219,7 @@
 	                                {{item.title}}
 	                            </a>
 	                        </h3>
-	                        <p style="color:gray;font-style:italic;">{{item.description}}</p>
+	                        <p style="color:gray;font-style:italic;"><span style="display:inline" ng-bind-html="renderContent(item.description)"></span></p>
 	                    </div>
 	                    <div class="col-sm-2" style="text-align:right">
 	                        <h4><a href="project/{{item.urlTitle}}">Join</a></h4>
@@ -450,7 +450,7 @@
 		                                {{item.title}}
 		                            </a>
 		                        </h3>
-		                        <p style="color:gray;font-style:italic;">{{item.description}}</p>
+	                        	<p style="color:gray;font-style:italic;"><span style="display:inline" ng-bind-html="renderContent(item.description)"></span></p>
 		                    </div>
 		                    <div class="col-sm-2" style="text-align:right">
 		                        <h4><a href="project/{{item.urlTitle}}">Join</a></h4>

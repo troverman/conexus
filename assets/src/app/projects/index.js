@@ -18,7 +18,7 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
+.controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $sce, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
 	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newProject = {};
@@ -52,6 +52,17 @@ angular.module( 'conexus.projects', [
 
     $scope.newProjectToggle = function () {
         $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+    };
+
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
     };
 
     $scope.selectSort = function(sort){

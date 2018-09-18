@@ -49,7 +49,6 @@
     <div class="card">
         <form style="display:flex;flex-direction:row;">
             <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
-            <!--
             <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
                 <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <h5 style="color:black;text-align:right" class="noselect">Filters <i class="fa fa-angle-down"></i></h5>
@@ -62,7 +61,6 @@
                     <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>has:</h5></a></li>
                 </ul>
             </div>
-            -->
         </form>
     </div>
     <div class="spacing-15"></div>
@@ -84,7 +82,7 @@
                                 {{project.title}}
                             </a>
                         </h3>
-                        <p style="color:gray;font-style:italic;">{{project.description}}</p>
+                        <p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p>
                         <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
                         <!--<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>-->
                     </div>
@@ -100,6 +98,6 @@
 
 <div class="spacing-25"></div>
 <div ng-click="loadMore()" class="container" style="text-align:center">
-    <button style="width:100%" class="btn btn-default">MORE <i class="fa fa-angle-down"></i></button>
+    <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
 </div>
 <div class="spacing-50"></div>

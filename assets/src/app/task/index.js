@@ -64,15 +64,19 @@ angular.module( 'conexus.task', [
 
     //TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type){
-        $scope.newReaction.user = $scope.currentUser.id;
-        $scope.newReaction.post = post.id;
-        $scope.newReaction.type = type;
-        //TODO: MODEL | CREATE REACTION
-        //Reaction.create(newReaction);
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        if (type =='plus'){$scope.posts[index].plusCount++}
-        if (type =='minus'){$scope.posts[index].minusCount++}
-        //TODO: UPDATE POST
+        if ($scope.currentUser){
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.post = post.id;
+            $scope.newReaction.type = type;
+            //TODO: MODEL | CREATE REACTION
+            //Reaction.create(newReaction);
+            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+            if (type =='plus'){$scope.posts[index].plusCount++}
+            if (type =='minus'){$scope.posts[index].minusCount++}
+            //TODO: UPDATE POST
+        }
+        else{$location.path('/login')}
+
     };
 
     $scope.createVerification = function(item) {
@@ -85,7 +89,7 @@ angular.module( 'conexus.task', [
     };
 
     //YIKES
-    $scope.renderMessage = function(content){
+    $scope.renderContent = function(content){
         if (content){
             if (!content.includes('>')){
                 var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');

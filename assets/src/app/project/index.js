@@ -405,6 +405,7 @@ angular.module( 'conexus.project', [
 
     //TODO: ALL | BROWSER BASED STREAMING OF THE SCREEN. . . ~ OBS INPUT 
     //TODO: MOVE TO 'WORK' OR DEDICATED STREAMING AREA
+    /*
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {
@@ -425,7 +426,6 @@ angular.module( 'conexus.project', [
         recordAudio.startRecording();
         stopRecording.disabled = false;
 
-        /*
         var audioContext = window.AudioContext;
         var videoContext = win
         var context = new audioContext();
@@ -439,8 +439,6 @@ angular.module( 'conexus.project', [
         audioInput.connect(recorder);
         // connect our recorder to the previous destination
         recorder.connect(context.destination);
-        */
-
     };
 
     function recorderProcess(e) {
@@ -451,6 +449,7 @@ angular.module( 'conexus.project', [
     var session = {audio: true, video: true};
     var recordRTC = null;
     navigator.getUserMedia(session, initializeRecorder, onError);
+    */
 
 
 }])
@@ -624,7 +623,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMembersCtrl', ['$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
+.controller( 'ProjectMembersCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
     titleService.setTitle('Members | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.members = members;
@@ -632,11 +631,14 @@ angular.module( 'conexus.project', [
     $scope.project = project;
 
     $scope.createMember = function() {
-        $scope.newMember.user = config.currentUser.id;
-        $scope.newMember.project = project.id;
-        MemberModel.create($scope.newMember).then(function(model) {
-            $scope.newMember = {};
-        });
+        if ($scope.currentUser){
+            $scope.newMember.user = $scope.currentUser.id;
+            $scope.newMember.project = project.id;
+            MemberModel.create($scope.newMember).then(function(model) {
+                $scope.newMember = {};
+            });
+        }
+        else{$location.path('/login')}
     };
 
     $sailsSocket.subscribe('projectmember', function (envelope) {
@@ -654,23 +656,59 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectTasksCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, TaskModel, tasks, titleService ) {
+.controller( 'ProjectTasksCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
     titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.newTask = {};
     $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
     $scope.project = project;
+
+    $scope.createPost = function(post) {
+        if ($scope.currentUser){
+            $scope.newPost.post = post.id;
+            $scope.newPost.user = $scope.currentUser.id;
+            $scope.newPost.task = $scope.task.id;
+            PostModel.create($scope.newPost).then(function(model) {
+                $scope.newPost = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.createTask = function(newTask) {
+        if ($scope.currentUser){
+            $scope.newTask.user = $scope.currentUser.id;
+            $scope.newTask.project = $scope.project.id;
+            TaskModel.create(newTask).then(function(model) {
+                $scope.newTask = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
 
     $scope.newTaskToggle = function () {
         $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
     };
 
-    $scope.createTask = function(newTask) {
-        newTask.user = config.currentUser.id;
-        newTask.project = project;
-        TaskModel.create(newTask).then(function(model) {
-            $scope.newTask = {};
-        });
+    //YIKES
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
+    };
+
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.tasks[index].showReply = !$scope.tasks[index].showReply;
+        }
+        else{$location.path('/login')}
     };
 
     $sailsSocket.subscribe('task', function (envelope) {
@@ -766,7 +804,7 @@ angular.module( 'conexus.project', [
     };
 
 }])
-.controller( 'ProjectProjectsCtrl', ['$sailsSocket', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $sailsSocket, $scope, config, project, ProjectModel, projects, titleService ) {
+.controller( 'ProjectProjectsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
     titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newProjectToggleVar = false;
@@ -781,11 +819,22 @@ angular.module( 'conexus.project', [
                 $scope.newProject = {};
             });
         }
-        else{}
+        else{$location.path('/location')}
     };
 
     $scope.newProjectToggle = function () {
         $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+    };
+
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
     };
 
 }]);

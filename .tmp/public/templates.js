@@ -1,6 +1,6 @@
-angular.module('templates-app', ['about/index.tpl.html', 'account/index.tpl.html', 'discover/index.tpl.html', 'footer/index.tpl.html', 'home/index.tpl.html', 'intro/index.tpl.html', 'login/index.tpl.html', 'market/index.tpl.html', 'marketPair/index.tpl.html', 'markets/index.tpl.html', 'member/index.tpl.html', 'member/templates/activity.tpl.html', 'member/templates/content.tpl.html', 'member/templates/followers.tpl.html', 'member/templates/following.tpl.html', 'member/templates/ledger.tpl.html', 'member/templates/positions.tpl.html', 'nav/index.tpl.html', 'order/index.tpl.html', 'post/index.tpl.html', 'post/post.tpl.html', 'project/index.tpl.html', 'project/templates/activity.tpl.html', 'project/templates/channels.tpl.html', 'project/templates/charter.tpl.html', 'project/templates/content.tpl.html', 'project/templates/ledger.tpl.html', 'project/templates/members.tpl.html', 'project/templates/positions.tpl.html', 'project/templates/projects.tpl.html', 'project/templates/tasks.tpl.html', 'projects/index.tpl.html', 'register/index.tpl.html', 'search/index.tpl.html', 'stream/index.tpl.html', 'task/index.tpl.html', 'tasks/index.tpl.html', 'transaction/index.tpl.html', 'transparency/index.tpl.html', 'work/index.tpl.html']);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "intro/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "post/index.tpl.html", "post/post.tpl.html", "project/index.tpl.html", "project/templates/activity.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "projects/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "stream/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "work/index.tpl.html"]);
 
-angular.module("about/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
     "<!--<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
     "	<img style=\"max-height:400px\" src=\"/images/loading.gif\">\n" +
@@ -130,7 +130,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function ($tem
     "</div>");
 }]);
 
-angular.module("account/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("account/index.tpl.html",
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
@@ -230,7 +230,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function ($t
     "");
 }]);
 
-angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("discover/index.tpl.html",
     "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
@@ -383,7 +383,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function ($
     "<div class=\"spacing-50\"></div>");
 }]);
 
-angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("footer/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("footer/index.tpl.html",
     "<div class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	<div class=\"container\">\n" +
@@ -410,7 +410,7 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function ($te
     "</div>");
 }]);
 
-angular.module("home/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("home/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/index.tpl.html",
     "<!--TEMP | LOGGED IN / DASH-->\n" +
     "<div class=\"container\" ng-show=\"currentUser\">\n" +
@@ -633,7 +633,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "	                                {{item.title}}\n" +
     "	                            </a>\n" +
     "	                        </h3>\n" +
-    "	                        <p style=\"color:gray;font-style:italic;\">{{item.description}}</p>\n" +
+    "	                        <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "	                        <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
@@ -864,7 +864,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "		                                {{item.title}}\n" +
     "		                            </a>\n" +
     "		                        </h3>\n" +
-    "		                        <p style=\"color:gray;font-style:italic;\">{{item.description}}</p>\n" +
+    "	                        	<p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
     "		                    </div>\n" +
     "		                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "		                        <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
@@ -926,7 +926,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function ($temp
     "</div>");
 }]);
 
-angular.module("intro/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("intro/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("intro/index.tpl.html",
     "<div class=\"intro\" style=\"max-height:500px\">\n" +
     "    <div class=\"intro-container\">\n" +
@@ -980,7 +980,7 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function ($tem
     "");
 }]);
 
-angular.module("login/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("login/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("login/index.tpl.html",
     "<div class=\"page-heading\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
@@ -1027,7 +1027,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function ($tem
     "</div>");
 }]);
 
-angular.module("market/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("market/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("market/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
@@ -1172,7 +1172,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function ($te
     "</div>");
 }]);
 
-angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("marketPair/index.tpl.html",
     "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
     "</div>\n" +
@@ -1281,7 +1281,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function 
     "</div>");
 }]);
 
-angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("markets/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("markets/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
@@ -1411,7 +1411,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function ($t
     "</div>");
 }]);
 
-angular.module("member/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/index.tpl.html",
     "<style>\n" +
     ".avatar {\n" +
@@ -1547,7 +1547,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function ($te
     "</div>");
 }]);
 
-angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/activity.tpl.html",
     "<div class=\"row\" ng-show=\"currentUser\">\n" +
     "    <div class=\"card\">\n" +
@@ -1677,7 +1677,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "");
 }]);
 
-angular.module("member/templates/content.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/content.tpl.html",
     "<div class=\"spacing-10\"></div>\n" +
     "<div class=\"row\">\n" +
@@ -1736,7 +1736,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "</div>");
 }]);
 
-angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/followers.tpl.html",
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
     "	<div class=\"member-card\">\n" +
@@ -1753,7 +1753,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "");
 }]);
 
-angular.module("member/templates/following.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/templates/following.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/following.tpl.html",
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
     "	<div class=\"member-card\">\n" +
@@ -1769,7 +1769,7 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "</div>");
 }]);
 
-angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
     "<div class=\"row\">\n" +
     "	<div class=\"col-md-6\">\n" +
@@ -1872,7 +1872,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "");
 }]);
 
-angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
     "<div class=\"row\">\n" +
     "	<div class=\"col-md-6\">\n" +
@@ -1979,7 +1979,7 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "");
 }]);
 
-angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/index.tpl.html",
     "<div ng-controller=\"NavCtrl\" class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "  <div class=\"container\">\n" +
@@ -2020,7 +2020,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function ($templ
     "</div>");
 }]);
 
-angular.module("order/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("order/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("order/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
@@ -2098,7 +2098,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function ($tem
     "");
 }]);
 
-angular.module("post/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("post/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("post/index.tpl.html",
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
@@ -2150,7 +2150,7 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function ($temp
     "");
 }]);
 
-angular.module("post/post.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("post/post.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("post/post.tpl.html",
     "<div style=\"box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);overflow:hidden;margin:5px\">\n" +
     "    <div>\n" +
@@ -2184,7 +2184,7 @@ angular.module("post/post.tpl.html", []).run(["$templateCache", function ($templ
     "");
 }]);
 
-angular.module("project/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
     "<div class=\"imageContainerSmall\">\n" +
     "<!--<div class=\"imageContainerSmall\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">-->\n" +
@@ -2237,7 +2237,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function ($t
     "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
 
-angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -2337,7 +2337,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "");
 }]);
 
-angular.module("project/templates/channels.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/channels.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/channels.tpl.html",
     "<div class=\"row\">\n" +
     "    <div class=\"col-md-2\">\n" +
@@ -2385,7 +2385,7 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "");
 }]);
 
-angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/charter.tpl.html",
     "<style>md-card{margin:0px; overflow:hidden;}</style>\n" +
     "<br>\n" +
@@ -2430,7 +2430,7 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "");
 }]);
 
-angular.module("project/templates/content.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/content.tpl.html",
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -2503,7 +2503,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "</div>");
 }]);
 
-angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/ledger.tpl.html",
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -2517,6 +2517,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		<!--<li><a href=\"\">Work</a></li>\n" +
     "		<li><a href=\"\">Property</a></li>\n" +
     "		<li><a href=\"\">Liscense</a></li>-->\n" +
+    "		\n" +
     "	</ul>\n" +
     "\n" +
     "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
@@ -2601,7 +2602,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "");
 }]);
 
-angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
     "<br>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
@@ -2613,20 +2614,20 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	    </div>\n" +
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.status}} offline</p>\n" +
+    "	        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
     "	        <p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
-    "	        <p style=\"color:gray\">dimensional | 888</p>\n" +
+    "	        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
     "	    </div>\n" +
-    "	    <div class=\"member-card-social\">\n" +
+    "	    <!--<div class=\"member-card-social\">\n" +
     "	        <a ng-show=\"member.user.socialAccounts.facebook.profileUrl\" href=\"{{member.user.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
     "	        <a ng-show=\"member.user.socialAccounts.twitter.profileUrl\" href=\"{{member.user.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
     "	        <a ng-show=\"member.user.socialAccounts.google.profileUrl\" href=\"{{member.user.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
-    "	    </div>\n" +
+    "	    </div>-->\n" +
     "	</div>\n" +
     "</div>");
 }]);
 
-angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/positions.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
     "<h1>Create Your Value Map</h1>\n" +
@@ -2692,7 +2693,7 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "<div class=\"spacing-10\"></div>");
 }]);
 
-angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/projects.tpl.html",
     "<div class=\"spacing-10\"></div>\n" +
     "<div ng-show=\"project.parent\">\n" +
@@ -2720,7 +2721,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "			<div class=\"row\">\n" +
     "				<div class=\"col-sm-10\">\n" +
     "					<h4><a href=\"project/{{project.urlTitle}}\"><img style=\"height:24px\" src=\"{{project.avatarUrl}}\"> {{project.title}}</a></h4>\n" +
-    "					<p style=\"color:gray\">{{project.description}}</p>\n" +
+    "					<p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p></p>\n" +
     "\n" +
     "					<!--\n" +
     "					<p>{{project.memeberCount}}</p>\n" +
@@ -2742,13 +2743,13 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "</div>");
 }]);
 
-angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
     "<br>\n" +
     "<!--FILTERS AND SEARCH HERE-->\n" +
     "\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button><br><br>\n" +
-    "<md-card ng-show=\"newTaskToggleVar\">\n" +
+    "<div class=\"card\" ng-show=\"newTaskToggleVar\">\n" +
     "    <div style=\"padding:10px;\">\n" +
     "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "			<div class=\"form-group\">\n" +
@@ -2759,7 +2760,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
     "		</form>\n" +
     "	</div>\n" +
-    "</md-card>\n" +
+    "</div>\n" +
     "\n" +
     "\n" +
     "<div ng-repeat=\"task in tasks\">\n" +
@@ -2769,7 +2770,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "				<div class=\"col-sm-10\">\n" +
     "					<h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "					<p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
-    "					<p>{{task.content}}</p>\n" +
+    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "					<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
     "					<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
     "				</div>\n" +
@@ -2781,44 +2782,22 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"card-footer\">\n" +
-    "			<!--TODO: TASK VERIFICATION-->\n" +
     "			<a href=\"task/{{task.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
     "			<a href=\"task/{{task.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "			<!--<a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>-->\n" +
-    "			<!--<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{task.id}}\"><i class=\"fa fa-link grey\"></i></a>-->\n" +
+    "			<a href=\"#\" ng-click=\"reply(task)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "			<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{task.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "		</div>\n" +
+    "		<div ng-show=\"task.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "            <form role=\"form\" ng-submit=\"createPost(task)\">\n" +
+    "                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
     "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<!--\n" +
-    "<table class=\"table table-striped table-hover\">\n" +
-    "  <thead>\n" +
-    "        <tr>\n" +
-    "      		<th></th>\n" +
-    "			<th></th>\n" +
-    "			<th></th>\n" +
-    "			<th></th>\n" +
-    "			<th></th>\n" +
-    "			<th></th>\n" +
-    "        </tr>\n" +
-    "  </thead>\n" +
-    "  <tbody>\n" +
-    "		<tr ng-repeat=\"task in tasks\">\n" +
-    "			<td><h5><a href=\"task/{{task.id}}\">{{task.title}}</a></h5></td>\n" +
-    "			<td>{{task.content}}</td>\n" +
-    "            <td><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></td>\n" +
-    "			<td>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></td>\n" +
-    "			<td><span  am-time-ago=\"task.createdAt\"></span></td>\n" +
-    "			<td><a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a></td>\n" +
-    "		</tr>\n" +
-    "  </tbody>\n" +
-    "</table>\n" +
-    "-->");
+    "</div>");
 }]);
 
-angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("projects/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("projects/index.tpl.html",
     "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
@@ -2871,7 +2850,6 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "    <div class=\"card\">\n" +
     "        <form style=\"display:flex;flex-direction:row;\">\n" +
     "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "            <!--\n" +
     "            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Filters <i class=\"fa fa-angle-down\"></i></h5>\n" +
@@ -2884,7 +2862,6 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>has:</h5></a></li>\n" +
     "                </ul>\n" +
     "            </div>\n" +
-    "            -->\n" +
     "        </form>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-15\"></div>\n" +
@@ -2906,7 +2883,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "                                {{project.title}}\n" +
     "                            </a>\n" +
     "                        </h3>\n" +
-    "                        <p style=\"color:gray;font-style:italic;\">{{project.description}}</p>\n" +
+    "                        <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
     "                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->\n" +
     "                        <!--<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>-->\n" +
     "                    </div>\n" +
@@ -2922,12 +2899,12 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function ($
     "\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "<div ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
-    "    <button style=\"width:100%\" class=\"btn btn-default\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "    <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>");
 }]);
 
-angular.module("register/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("register/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("register/index.tpl.html",
     "<div class=\"page-heading\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
@@ -2979,7 +2956,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function ($
     "</div>");
 }]);
 
-angular.module("search/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("search/index.tpl.html",
     "<div ui-view=\"search\">\n" +
     "	<div class=\"page-heading\">\n" +
@@ -3087,7 +3064,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function ($te
     "<div class=\"spacing-50\"></div>");
 }]);
 
-angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("stream/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("stream/index.tpl.html",
     "<div style=\"background:black\">\n" +
     "	<div class=\"spacing-100\"></div>\n" +
@@ -3159,7 +3136,7 @@ angular.module("stream/index.tpl.html", []).run(["$templateCache", function ($te
     "");
 }]);
 
-angular.module("task/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("task/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("task/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
@@ -3171,7 +3148,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "                <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "                    <div><span style=\"display:inline\" ng-bind-html=\"renderMessage(task.content)\"></span></div>\n" +
+    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
@@ -3341,7 +3318,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function ($temp
     "");
 }]);
 
-angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
     "<div class=\"page-heading\">\n" +
     "	<div class=\"container\"> \n" +
@@ -3428,12 +3405,12 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function ($tem
     "</div>\n" +
     "<div class=\"spacing-25\"></div>\n" +
     "<div ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
-    "    <button style=\"width:100%\" class=\"btn btn-default\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "    <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>");
 }]);
 
-angular.module("transaction/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("transaction/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("transaction/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
@@ -3506,7 +3483,7 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "");
 }]);
 
-angular.module("transparency/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("transparency/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("transparency/index.tpl.html",
     "<link rel=\"stylesheet\" href=\"bower_components/angular-chart.js/dist/angular-chart.css\">\n" +
     "<!--this is gonna be infographic like-->\n" +
@@ -3569,7 +3546,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "");
 }]);
 
-angular.module("work/index.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("work/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("work/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
