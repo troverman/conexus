@@ -31,6 +31,12 @@ angular.module( 'conexus.marketPair', [
             type: 'spline',
             name: 'Exchange Price ' + $stateParams.id + ' | ' + $stateParams.id1,
             data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            id: 'ExchangeVolume',
+            type: 'column',
+            name: 'Volume ' + $stateParams.id + ' | ' + $stateParams.id1,
+            data: [7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7]
         }],
         title: {
             text: ''

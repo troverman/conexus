@@ -1037,29 +1037,35 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h1>{{stateParams.id}} MARKETS</h1>\n" +
-    "				<p>{{stateParams.id}} | 1253 markets | 53233 tokens in circulation </p>\n" +
+    "				<p style=\"color:gray\">{{stateParams.id}} | 1253 markets | 53233 tokens in circulation </p>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	        </form>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<highchart config=\"chartMap\"></highchart>\n" +
-    "			    <div class=\"spacing-5\"></div>\n" +
-    "			    <div class=\"card\">\n" +
-    "			        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "			            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "			        </form>\n" +
-    "			    </div>\n" +
-    "				<div class=\"card\" ng-repeat=\"market in markets\">\n" +
-    "				    <div style=\"padding:16px;\">\n" +
-    "				    	<a href=\"market/{{stateParams.id}}/{{market}}\"><h4>{{market}}</h4></a>\n" +
-    "				    	<p>{{stateParams.id}}/{{market}} markets</p>\n" +
-    "				    </div>\n" +
-    "			    </div>\n" +
+    "				<!--<highchart class=\"col-md-6\" config=\"chartMap\"></highchart>-->\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\" ng-repeat=\"market in markets\">\n" +
+    "		    <div style=\"padding:16px;\">\n" +
+    "		    	<a href=\"market/{{stateParams.id}}/{{market}}\"><h4>{{market}}</h4></a>\n" +
+    "		    	<p>{{stateParams.id}}/{{market}} markets</p>\n" +
+    "		    </div>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
@@ -1086,27 +1092,27 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "						</form>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "				<div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
     "			</div>\n" +
+    "		</div>\n" +
+    "		<div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1114,28 +1120,27 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Trades</h2>\n" +
-    "\n" +
-    "				<div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
     "			</div>\n" +
+    "		</div>\n" +
+    "		<div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1143,27 +1148,27 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Transactions</h2>\n" +
-    "				<div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
     "			</div>\n" +
+    "		</div>\n" +
+    "		<div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1174,8 +1179,6 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("marketPair/index.tpl.html",
-    "<div id=\"logo-container\" style=\"text-align:center;background:black\">\n" +
-    "</div>\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -1184,7 +1187,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h1><a href=\"market/{{stateParams.id}}\">{{stateParams.id}}</a> | <a href=\"market/{{stateParams.id1}}\">{{stateParams.id1}}</a></h1>\n" +
-    "				<p> {{stateParams.id}} | {{stateParams.id1}} | 47021 tokens in circulation | 452451 token trade volume</p>\n" +
+    "				<p style=\"color:gray\">47021 tokens in circulation | 452451 token trade volume</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1221,29 +1224,27 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "						</form>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "\n" +
-    "				<div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
-    "				\n" +
     "			</div>\n" +
+    "		</div>\n" +
+    "		<div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1251,28 +1252,27 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Trades</h2>\n" +
-    "\n" +
-    "				<div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "		<div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1297,33 +1297,19 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px\">\n" +
-    "				<!--TODO: FILTER / SEARCH -->\n" +
-    "			    <div class=\"card\">\n" +
-    "			        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "			            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "			        </form>\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	        </form>\n" +
+    "	    </div>\n" +
+    "	    <div ng-repeat=\"market in markets\">\n" +
+    "	    	<div class=\"card\">\n" +
+    "			    <div style=\"padding:16px;\">\n" +
+    "			    	<a href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
+    "			    	<p>{{market}} markets</p>\n" +
     "			    </div>\n" +
-    "			    <!--<div class=\"col-md-4\">\n" +
-    "					<highchart config=\"chartMap\"></highchart>\n" +
-    "				</div>\n" +
-    "				<div class=\"col-md-4\">\n" +
-    "					<highchart config=\"chartMap\"></highchart>\n" +
-    "				</div>\n" +
-    "				<div class=\"col-md-4\">\n" +
-    "					<highchart config=\"chartMap\"></highchart>\n" +
-    "				</div>-->\n" +
-    "			    <div class=\"\" ng-repeat=\"market in markets\">\n" +
-    "			    	<div class=\"card\">\n" +
-    "					    <div style=\"padding:16px;\">\n" +
-    "					    	<a href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
-    "					    	<p>{{market}} markets</p>\n" +
-    "					    </div>\n" +
-    "					</div>\n" +
-    "			    </div>\n" +
-    "	  		</div>\n" +
-    "		</div>\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
@@ -1350,29 +1336,27 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "						</form>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "\n" +
-    "			    <div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "		  	</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	    <div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1380,29 +1364,27 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<h2>Trades</h2>\n" +
-    "\n" +
-    "			    <div ng-repeat=\"order in orders\">\n" +
-    "			        <div class=\"card\">\n" +
-    "			            <div style=\"padding:16px\">\n" +
-    "		                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "								{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "								{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "							</span>\n" +
-    "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "			            </div>\n" +
-    "			            <div class=\"card-footer\">\n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "			                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "			                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "				</div>\n" +
-    "\n" +
     "			</div>\n" +
+    "		</div>\n" +
+    "	    <div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
