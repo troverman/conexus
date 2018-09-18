@@ -153,7 +153,7 @@
                         <a style="display:inline;font-weight:600" href="/task/{{post.task.id}}">{{post.task.title}}</a>
                         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
                     </div>
-                    <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+                    <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(post.content)"></span></div>
                 </div>
                 <div class="card-footer">
                     <a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -164,7 +164,7 @@
                 <!--TODO: NESTED -->
                 <div ng-show="post.showReply" class="card-footer">
                     <form role="form" ng-submit="createPost(post)">
-                        <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                        <text-angular ng-model="newPost.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
                         <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
                     </form>
                 </div>
@@ -172,6 +172,6 @@
         </div>
     </div>
     
-    <div class="spacing-10"></div>
+    <div class="spacing-50"></div>
 
 </div>

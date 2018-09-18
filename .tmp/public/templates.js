@@ -3282,7 +3282,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <div style=\"margin-left:42px\">\n" +
     "                    {{item.stream}}\n" +
     "                    <!--<p><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification(item)\">verify</button></p>-->\n" +
-    "                    <span style=\"display:inline\" ng-bind-html=\"renderMessage(work.content)\"></span>\n" +
+    "                    <span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span>\n" +
     "                    <span style=\"text-align:right;float:right\"><span style=\"color:gray;font-style:italic\">Verification Score:</span> <a style=\"font-wieght:800\" href=\"#\">{{work.verificationScore}}</a></span>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </div>\n" +
@@ -3314,7 +3314,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <a style=\"display:inline;font-weight:600\" href=\"/task/{{post.task.id}}\">{{post.task.title}}</a>\n" +
     "                        <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "                    </div>\n" +
-    "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(post.content)\"></span></div>\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
     "                    <a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
@@ -3325,7 +3325,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <!--TODO: NESTED -->\n" +
     "                <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
     "                    <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "                        <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "                    </form>\n" +
     "                </div>\n" +
@@ -3333,7 +3333,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "    \n" +
-    "    <div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "</div>\n" +
     "");
