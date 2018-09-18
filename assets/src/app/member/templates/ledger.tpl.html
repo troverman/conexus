@@ -1,27 +1,31 @@
 <div class="row">
-	<div class="col-md-6">
-		<ul style="padding:0px;" class="member-tabs">
-			<li><a href="">Assets</a></li>
-			<li><a href="member/{{member.username}}/positions">Positions</a></li>
-			<li><a href="">Transactions</a></li>
-		</ul>
-		<ul style="padding:0px;" class="member-tabs">
-			<li class="active"><a href="">Expense</a></li>
-			<li><a href="">Revenue</a></li>
-		</ul>
-	</div>
-	<div class="col-md-6" style="text-align:right">
-		<!--<h1>888,888,888 USD</h1>-->
-		<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>
-		<!--<h4>Filter</h4>
-		<form style="display:flex;flex-direction:row;">
-	    	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
-	    	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-	            <a href="#">
-	                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-	            </a>
+	<div class="card">
+		<div style="padding:16px;">
+			<div class="col-md-6">
+				<ul style="padding:0px;" class="member-tabs">
+					<li><a href="">Assets</a></li>
+					<li><a href="member/{{member.username}}/positions">Positions</a></li>
+					<li><a href="">Transactions</a></li>
+				</ul>
+				<ul style="padding:0px;" class="member-tabs">
+					<li class="active"><a href="">Expense</a></li>
+					<li><a href="">Revenue</a></li>
+				</ul>
 			</div>
-		</form>-->
+			<div class="col-md-6" style="text-align:right">
+				<!--<h1>888,888,888 USD</h1>-->
+				<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>
+				<!--<h4>Filter</h4>
+				<form style="display:flex;flex-direction:row;">
+			    	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+			    	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+			            <a href="#">
+			                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+			            </a>
+					</div>
+				</form>-->
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -33,24 +37,32 @@
 	</div>
 </div>
 
-<div class="spacing-10"></div>
-
 <div class="row">
-	<div class="col-md-6">
-		<highchart config="chart"></highchart>
-	</div>
-	<div class="col-md-6">
-		<highchart config="pie"></highchart>
+	<div class="card">
+		<div style="padding:16px;">
+			<div class="col-md-6">
+				<highchart config="chart"></highchart>
+			</div>
+			<div class="col-md-6">
+				<highchart config="pie"></highchart>
+			</div>
+		</div>
 	</div>
 </div>
 
-<div class="spacing-10"></div>
 
-<div class="">
-	<h1>Transaction History</h1>
-	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
+<div class="row">
+	<div class="card">
+		<div style="padding:16px;">
+			<h1>Transaction History</h1>
+			<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button>
+		</div>
+	</div>
+</div>
+
+<div class="row">
 	<div class="card" ng-show="newTransactionToggleVar">
-	    <div style="padding:10px;">
+	    <div style="padding:16px;">
 			<form role="form" ng-submit="createTransaction()">
 				<div class="form-group col-sm-6">
 					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">

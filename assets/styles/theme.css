@@ -12,7 +12,7 @@ body {
     margin:0;
     padding-bottom:150px;
     min-height: 100%;
-    background-color:#f1f1f1;
+    background-color:#e9ebee;
 }
 
 .h1, .h2, .h3, h1, h2, h3{margin-top:10px;margin-bottom:10px;}
@@ -126,7 +126,7 @@ a:focus{text-decoration: none}
 .member-card-info {
   padding:10px;
   height: 100px;
-  background: #FAFAFA;
+  background: white;
   text-align: right;
   padding-right:5%;
   padding-left:50%;

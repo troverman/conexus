@@ -340,7 +340,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "                                {{project.title}}\n" +
     "                            </a>\n" +
     "                        </h3>\n" +
-    "                        <p style=\"color:gray;font-style:italic;\">{{project.description}}</p>\n" +
+    "	                    <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "                        <h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
@@ -1063,7 +1063,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div class=\"card\" ng-repeat=\"market in markets\">\n" +
     "		    <div style=\"padding:16px;\">\n" +
     "		    	<a href=\"market/{{stateParams.id}}/{{market}}\"><h4>{{market}}</h4></a>\n" +
-    "		    	<p>{{stateParams.id}}/{{market}} markets</p>\n" +
+    "		    	<p style=\"color:gray\">{{stateParams.id}}/{{market}} markets</p>\n" +
     "		    </div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
@@ -1471,7 +1471,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				</ul>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<md-divider  style=\"color:gray\"></md-divider>\n" +
+    "		<md-divider style=\"color:gray\"></md-divider>\n" +
     "		<div class=\"container\">\n" +
     "			<div class=\"pull-left\" style=\"text-align:left\">\n" +
     "				<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
@@ -1487,7 +1487,6 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				<a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><span class=\"grey facebook-icon\"><i class=\"fa fa-facebook\"></i> Facebook</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><span class=\"grey twitter-icon\"><i class=\"fa fa-twitter\"></i> Twitter</span></a>\n" +
     "				<a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><span class=\"grey google-icon\"><i class=\"fa fa-google\"></i> Google</span></a>\n" +
-    "\n" +
     "			</div>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
     "		</div>\n" +
@@ -1513,10 +1512,10 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "		<div class=\"spacing-10\"></div>\n" +
     "	</div>\n" +
-    "	<div class=\"spacing-15\"></div>\n" +
     "	<md-divider style=\"color:gray\"></md-divider>\n" +
-    "	<div class=\"spacing-15\"></div>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "	<div class=\"profile-container container\">\n" +
     "		<div ui-view=\"memberActivity\"></div>\n" +
     "		<div ui-view=\"memberContent\"></div>\n" +
@@ -1754,29 +1753,33 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
     "<div class=\"row\">\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li><a href=\"\">Assets</a></li>\n" +
-    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "			<li><a href=\"\">Transactions</a></li>\n" +
-    "		</ul>\n" +
-    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li class=\"active\"><a href=\"\">Expense</a></li>\n" +
-    "			<li><a href=\"\">Revenue</a></li>\n" +
-    "		</ul>\n" +
-    "	</div>\n" +
-    "	<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "		<!--<h1>888,888,888 USD</h1>-->\n" +
-    "		<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>\n" +
-    "		<!--<h4>Filter</h4>\n" +
-    "		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "	    	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "	    	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "	            <a href=\"#\">\n" +
-    "	                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "	            </a>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "					<li><a href=\"\">Assets</a></li>\n" +
+    "					<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "					<li><a href=\"\">Transactions</a></li>\n" +
+    "				</ul>\n" +
+    "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "					<li class=\"active\"><a href=\"\">Expense</a></li>\n" +
+    "					<li><a href=\"\">Revenue</a></li>\n" +
+    "				</ul>\n" +
     "			</div>\n" +
-    "		</form>-->\n" +
+    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "				<!--<h1>888,888,888 USD</h1>-->\n" +
+    "				<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>\n" +
+    "				<!--<h4>Filter</h4>\n" +
+    "				<form style=\"display:flex;flex-direction:row;\">\n" +
+    "			    	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "			    	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "			            <a href=\"#\">\n" +
+    "			                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "			            </a>\n" +
+    "					</div>\n" +
+    "				</form>-->\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -1788,24 +1791,32 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<highchart config=\"chart\"></highchart>\n" +
-    "	</div>\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<highchart config=\"pie\"></highchart>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"pie\"></highchart>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "<div class=\"\">\n" +
-    "	<h1>Transaction History</h1>\n" +
-    "	<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<h1>Transaction History</h1>\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
     "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
-    "	    <div style=\"padding:10px;\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createTransaction()\">\n" +
     "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
@@ -1867,38 +1878,49 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-5\"></div>\n" +
-    "<h1>Create Your Value Map</h1>\n" +
-    "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
-    "<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
-    "<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<h1>Create Your Value Map</h1>\n" +
+    "			<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
+    "			<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
+    "			<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "			<div class=\"spacing-10\"></div>\n" +
+    "			<highchart config=\"chart\"></highchart>\n" +
+    "			<a href=\"/discover\">Discover</a>\n" +
+    "		</div>\n" +
+    "	</div>	\n" +
+    "</div>	\n" +
     "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "<highchart config=\"chart\"></highchart>\n" +
-    "<a href=\"/discover\">Discover</a>\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
-    "<md-card ng-show=\"newOrderToggleVar\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
-    "		<form role=\"form\" ng-submit=\"createOrder()\">\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Asset Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Asset Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
-    "		</form>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button>\n" +
+    "		</div>\n" +
+    "	</div>	\n" +
+    "</div>			\n" +
+    "	\n" +
+    "<div class=\"row\" ng-show=\"newOrderToggleVar\">	\n" +
+    "	<div class=\"card\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createOrder()\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Asset Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Asset Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
     "	</div>\n" +
-    "</md-card>\n" +
-    "<div class=\"spacing-10\"></div>\n" +
+    "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div ng-repeat=\"order in orders\">\n" +
@@ -2490,40 +2512,45 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
-    "		<li><a href=\"\">Assets</a></li>\n" +
-    "		<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
-    "		<li><a href=\"\">Transactions</a></li>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
     "\n" +
-    "		<!--<li><a href=\"\">Work</a></li>\n" +
-    "		<li><a href=\"\">Property</a></li>\n" +
-    "		<li><a href=\"\">Liscense</a></li>-->\n" +
-    "		\n" +
-    "	</ul>\n" +
+    "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "				<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
+    "				<li><a href=\"\">Assets</a></li>\n" +
+    "				<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
+    "				<li><a href=\"\">Transactions</a></li>\n" +
     "\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li><a href=\"\">Expenses</a></li>\n" +
-    "		<li><a href=\"\">Revenue</a></li>\n" +
-    "	</ul>\n" +
+    "				<!--<li><a href=\"\">Work</a></li>\n" +
+    "				<li><a href=\"\">Property</a></li>\n" +
+    "				<li><a href=\"\">Liscense</a></li>-->\n" +
+    "				\n" +
+    "			</ul>\n" +
     "\n" +
+    "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "				<li><a href=\"\">Expenses</a></li>\n" +
+    "				<li><a href=\"\">Revenue</a></li>\n" +
+    "			</ul>\n" +
+    "\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<highchart config=\"chart\"></highchart>\n" +
-    "	</div>\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<highchart config=\"pie\"></highchart>\n" +
-    "	</div>\n" +
-    "	<div class=\"col-md-12\">\n" +
-    "		<p><span ng-repeat=\"tag in sortedTransactionTags\"><a href=\"/market/{{tag.element}}\">{{tag.element}} </a></span><p>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"pie\"></highchart>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<p><span ng-repeat=\"tag in sortedTransactionTags\"><a href=\"/market/{{tag.element}}\">{{tag.element}} </a></span><p>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
@@ -2533,8 +2560,8 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"\">\n" +
-    "	<button ng-show=\"currentUser\" class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
+    "<div ng-show=\"currentUser\">\n" +
+    "	<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button><br><br>\n" +
     "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
     "	    <div style=\"padding:16px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
@@ -2611,38 +2638,50 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/positions.tpl.html",
-    "<div class=\"spacing-5\"></div>\n" +
-    "<h1>Create Your Value Map</h1>\n" +
-    "<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
-    "<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
-    "<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
-    "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "<highchart config=\"chart\"></highchart>\n" +
-    "<a href=\"/discover\">Discover</a>\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Motion to Create Order</button><br><br>\n" +
-    "<md-card ng-show=\"newOrderToggleVar\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
-    "		<form role=\"form\" ng-submit=\"createOrder()\">\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Asset Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Asset Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<div class=\"form-group col-sm-6\">\n" +
-    "				<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
-    "		</form>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<div class=\"spacing-5\"></div>\n" +
+    "			<h1>{{project.title}} | Value Map</h1>\n" +
+    "			<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
+    "			<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "			<div class=\"spacing-10\"></div>\n" +
+    "			<highchart config=\"chart\"></highchart>\n" +
+    "			<a href=\"/discover\">Discover</a>\n" +
+    "		</div>\n" +
     "	</div>\n" +
-    "</md-card>\n" +
-    "<div class=\"spacing-10\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Motion to Create Order</button>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>	\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"newOrderToggleVar\">\n" +
+    "	<div class=\"card\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createOrder()\">\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Asset Identifer Set 1\" type=\"text\" ng-model=\"newOrder.identiferSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Amount Set 1\" type=\"text\" ng-model=\"newOrder.amountSet\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Asset Identifer Set 2\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<div class=\"form-group col-sm-6\">\n" +
+    "					<input placeholder=\"Order Amount Set 2\" type=\"text\" ng-model=\"newOrder.amountSet1\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "    <div ng-repeat=\"order in orders\">\n" +
     "        <div class=\"card\">\n" +
@@ -3347,7 +3386,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div class=\"col-sm-10\">\n" +
     "						<h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "						<p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
-    "						<p>{{task.content}}</p>\n" +
+    "                    	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "						<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
     "						<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
     "					</div>\n" +

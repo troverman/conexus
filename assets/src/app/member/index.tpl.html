@@ -74,7 +74,7 @@
 				</ul>
 			</div>
 		</div>
-		<md-divider  style="color:gray"></md-divider>
+		<md-divider style="color:gray"></md-divider>
 		<div class="container">
 			<div class="pull-left" style="text-align:left">
 				<h2>{{member.firstName}} {{member.lastName}}</h2>
@@ -90,7 +90,6 @@
 				<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
 				<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
 				<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
-
 			</div>
 			<div class="spacing-10"></div>
 		</div>
@@ -116,10 +115,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="spacing-10"></div>
 	</div>
-	<div class="spacing-15"></div>
 	<md-divider style="color:gray"></md-divider>
-	<div class="spacing-15"></div>
+	<div class="spacing-10"></div>
 	<div class="profile-container container">
 		<div ui-view="memberActivity"></div>
 		<div ui-view="memberContent"></div>

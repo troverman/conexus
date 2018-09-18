@@ -1,40 +1,45 @@
 <div class="spacing-10"></div>
 
 <div class="row">
-	<ul style="padding:0px;" class="member-tabs">
-		<li class="active"><a href="">Overview</a></li>
-		<li><a href="">Assets</a></li>
-		<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
-		<li><a href="">Transactions</a></li>
+	<div class="card">
+		<div style="padding:16px;">
 
-		<!--<li><a href="">Work</a></li>
-		<li><a href="">Property</a></li>
-		<li><a href="">Liscense</a></li>-->
-		
-	</ul>
+			<ul style="padding:0px;" class="member-tabs">
+				<li class="active"><a href="">Overview</a></li>
+				<li><a href="">Assets</a></li>
+				<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
+				<li><a href="">Transactions</a></li>
 
-	<ul style="padding:0px;" class="member-tabs">
-		<li><a href="">Expenses</a></li>
-		<li><a href="">Revenue</a></li>
-	</ul>
+				<!--<li><a href="">Work</a></li>
+				<li><a href="">Property</a></li>
+				<li><a href="">Liscense</a></li>-->
+				
+			</ul>
 
+			<ul style="padding:0px;" class="member-tabs">
+				<li><a href="">Expenses</a></li>
+				<li><a href="">Revenue</a></li>
+			</ul>
+
+		</div>
+	</div>
 </div>
-
-<div class="spacing-10"></div>
 
 <div class="row">
-	<div class="col-md-6">
-		<highchart config="chart"></highchart>
-	</div>
-	<div class="col-md-6">
-		<highchart config="pie"></highchart>
-	</div>
-	<div class="col-md-12">
-		<p><span ng-repeat="tag in sortedTransactionTags"><a href="/market/{{tag.element}}">{{tag.element}} </a></span><p>
+	<div class="card">
+		<div style="padding:16px;">
+			<div class="col-md-6">
+				<highchart config="chart"></highchart>
+			</div>
+			<div class="col-md-6">
+				<highchart config="pie"></highchart>
+			</div>
+			<div class="col-md-12">
+				<p><span ng-repeat="tag in sortedTransactionTags"><a href="/market/{{tag.element}}">{{tag.element}} </a></span><p>
+			</div>
+		</div>
 	</div>
 </div>
-
-<div class="spacing-10"></div>
 
 <div class="row">
 	<div class="card">
@@ -44,8 +49,8 @@
 	</div>
 </div>
 
-<div class="">
-	<button ng-show="currentUser" class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
+<div ng-show="currentUser">
+	<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button><br><br>
 	<div class="card" ng-show="newTransactionToggleVar">
 	    <div style="padding:16px;">
 			<form role="form" ng-submit="createTransaction(newTransaction)">

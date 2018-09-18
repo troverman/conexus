@@ -43,7 +43,7 @@
 					<div class="col-sm-10">
 						<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
 						<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-						<p>{{task.content}}</p>
+                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
 						<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 						<span style="color:gray" am-time-ago="task.createdAt"></span>
 					</div>
