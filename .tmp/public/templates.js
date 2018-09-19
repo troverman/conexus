@@ -1660,8 +1660,6 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
 
 angular.module("member/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/content.tpl.html",
-    "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "<!-- POST WITH ATTACHMENT -->\n" +
     "<!-- MASTER POST MODEL FOR CONTENT -->\n" +
     "<div class=\"row\">\n" +
