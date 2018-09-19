@@ -1560,7 +1560,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                        <a ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"/market/{{item.market}}\">market {{item.market}}</a>\n" +
     "                        <a ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"/order/{{item.order}}\">order {{item.order}}</a>\n" +
     "                        <a ng-show=\"item.post\" style=\"display:inline;font-weight:600\" href=\"/post/{{item.post}}\">post {{item.post}}</a>\n" +
-    "                        <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"/member/{{item.profile}}\">profile {{item.profile}}</a>\n" +
+    "                        <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"/member/{{item.profile.username}}\"><span ng-show=\"item.profile.username\">{{item.profile.username}}</span><span ng-show=\"!item.profile.username\">profile {{item.profile}}</span></a>\n" +
     "                        <a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"/project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
     "                        <a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"/task/{{item.task}}\">task {{item.task}}</a>\n" +
     "                        <a ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"/transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
@@ -1926,22 +1926,14 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "    <div ng-repeat=\"order in orders\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
-    "                <!--<div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{order.user.avatarUrl}}\" src=\"{{order.user.avatarUrl}}\">\n" +
-    "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{order.user.username}}\">{{order.user.username}}</a>\n" +
-    "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "                </div>--> \n" +
-    "                <!--<div style=\"margin-left:42px\">-->\n" +
-    "                	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "					</span>\n" +
-    "					<span> | </span>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "					</span>\n" +
-    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "\n" +
-    "                <!--</div>-->\n" +
+    "            	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "				</span>\n" +
+    "				<span> | </span>\n" +
+    "				<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "				</span>\n" +
+    "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
     "            </div>\n" +
     "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
@@ -1949,37 +1941,17 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "            </div>\n" +
+    "            <div ng-show=\"order.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "		        <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "		            <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "		            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "		        </form>\n" +
+    "		    </div>\n" +
     "        </div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
-    "<!--<table class=\"table table-inverse table-hover\">\n" +
-    "    <thead>\n" +
-    "		<tr>\n" +
-    "			<th>Asset Set 1</th>\n" +
-    "			<th>Asset Set 2</th>\n" +
-    "			<th>Order Id</th>\n" +
-    "		</tr>\n" +
-    "    </thead>\n" +
-    "    <tbody>\n" +
-    "		<tr ng-repeat=\"order in orders\">\n" +
-    "			<td>\n" +
-    "				<span ng-repeat=\"item in order.amountSet\">\n" +
-    "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "				</span>\n" +
-    "			</td>\n" +
-    "\n" +
-    "			<td>\n" +
-    "				<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "				</span>\n" +
-    "			</td>\n" +
-    "			<td><a href=\"order/{{order.id}}\">{{order.id}}</a>\n" +
-    "		</tr>\n" +
-    "    </tbody>\n" +
-    "</table>-->\n" +
-    "<div class=\"spacing-10\"></div>\n" +
+    "<div class=\"spacing-50\"></div>\n" +
     "");
 }]);
 

@@ -57,22 +57,14 @@
     <div ng-repeat="order in orders">
         <div class="card">
             <div style="padding:16px">
-                <!--<div>
-                    <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}">
-                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{order.user.username}}">{{order.user.username}}</a>
-                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-                </div>--> 
-                <!--<div style="margin-left:42px">-->
-                	<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-					<span> | </span>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-
-                <!--</div>-->
+            	<span ng-repeat="item in order.amountSet">
+					{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+				</span>
+				<span> | </span>
+				<span ng-repeat="item in order.amountSet1">
+					{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+				</span>
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
             </div>
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.plusCount}} like </a> 
@@ -80,34 +72,14 @@
                 <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
                 <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
             </div>
+            <div ng-show="order.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+		        <form role="form" ng-submit="createPost(post)">
+		            <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+		        </form>
+		    </div>
         </div>
 	</div>
 </div>
 
-
-<!--<table class="table table-inverse table-hover">
-    <thead>
-		<tr>
-			<th>Asset Set 1</th>
-			<th>Asset Set 2</th>
-			<th>Order Id</th>
-		</tr>
-    </thead>
-    <tbody>
-		<tr ng-repeat="order in orders">
-			<td>
-				<span ng-repeat="item in order.amountSet">
-					{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-				</span>
-			</td>
-
-			<td>
-				<span ng-repeat="item in order.amountSet1">
-					{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-				</span>
-			</td>
-			<td><a href="order/{{order.id}}">{{order.id}}</a>
-		</tr>
-    </tbody>
-</table>-->
-<div class="spacing-10"></div>
+<div class="spacing-50"></div>

@@ -279,7 +279,6 @@ angular.module( 'conexus.project', [
         }
     };
 
-    //TODO: GENERALIZED ACTIVITY
     $scope.reply = function(activity){
         if ($scope.currentUser){
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(activity.id);
@@ -723,7 +722,7 @@ angular.module( 'conexus.project', [
     });
 
 }])
-.controller( 'ProjectPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
+.controller( 'ProjectPositionsCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($location, $sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.orders = orders;
@@ -734,21 +733,6 @@ angular.module( 'conexus.project', [
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
     titleService.setTitle($scope.project.title + ' | Positions | CRE8.XYZ');
-    
-    $scope.newOrderToggle = function(){
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
-    };
-
-    $scope.createOrder = function() {
-        $scope.newOrder.user = $scope.currentUser.id;
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-        OrderModel.create($scope.newOrder).then(function(model) {
-            //$scope.orders.push($scope.newOrder);
-            $scope.newOrder = {};
-        });
-    };
 
     $scope.chart = {
         chart: {polar: true},
@@ -801,6 +785,42 @@ angular.module( 'conexus.project', [
         //    shared: true,
         },
         credits:{enabled:false},
+    };
+    
+    $scope.newOrderToggle = function(){
+        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    };
+
+    $scope.createOrder = function() {
+        $scope.newOrder.user = $scope.currentUser.id;
+        //TODO: PARSE INPUT
+        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+        OrderModel.create($scope.newOrder).then(function(model) {
+            //$scope.orders.push($scope.newOrder);
+            $scope.newOrder = {};
+        });
+    };
+
+    //TODO: MODEL | CREATE REACTION | UPDATE POST
+    $scope.createReaction = function(post, type){
+        if($scope.currentUser){
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.post = post.id;
+            $scope.newReaction.type = type;
+            //TODO: MODEL | CREATE REACTION
+            //Reaction.create(newReaction);
+            var index = $scope.orders.map(function(obj){return obj.id}).indexOf(post.id);
+            if (type =='plus'){$scope.orders[index].plusCount++}
+            if (type =='minus'){$scope.orders[index].minusCount++}
+            //TODO: UPDATE POST
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.reply = function(item){
+        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
 }])

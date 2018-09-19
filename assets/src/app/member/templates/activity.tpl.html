@@ -28,7 +28,7 @@
                         <a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
                         <a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
                         <a ng-show="item.post" style="display:inline;font-weight:600" href="/post/{{item.post}}">post {{item.post}}</a>
-                        <a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile}}">profile {{item.profile}}</a>
+                        <a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile.username}}"><span ng-show="item.profile.username">{{item.profile.username}}</span><span ng-show="!item.profile.username">profile {{item.profile}}</span></a>
                         <a ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
                         <a ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
                         <a ng-show="item.transaction" style="display:inline;font-weight:600" href="/transaction/{{item.transaction}}">transaction {{item.transaction}}</a>

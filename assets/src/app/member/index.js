@@ -37,9 +37,15 @@ angular.module( 'conexus.member', [
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
             }],
+            
+            //TODO | BETTER....
             posts: ['member', 'PostModel', function(member, PostModel) {
                 return PostModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
             }],
+            profilePosts: ['member', 'PostModel', function(member, PostModel) {
+                return PostModel.getSome('profile', member.id, 50, 0, 'createdAt DESC');
+            }],
+
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.getSome('from', member.id, 50, 0, 'createdAt DESC');
             }],
@@ -205,7 +211,7 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, titleService, transactionsFrom, transactionsTo, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, titleService, transactionsFrom, transactionsTo, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
@@ -214,6 +220,8 @@ angular.module( 'conexus.member', [
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.orders = orders;
     $scope.posts = posts;
+    $scope.profilePosts = profilePosts;
+
     $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
     $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.work = work;
@@ -223,9 +231,23 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
+    $scope.posts = [].concat.apply([], [$scope.posts, $scope.profilePosts]);
     $scope.posts = $scope.posts.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
+    });
+
+    //COMBINE AND REMOVE DUPS .. REDO THIS LATER | REFACTOR .... BLEH
+    $scope.posts = $scope.posts.filter(function(obj){
+        if (obj.profile){
+            if (obj.profile.hasOwnProperty('id')){
+                console.log(obj.profile, obj.user.id)
+                if(obj.profile.id == obj.user.id){return false}
+                else{return true}
+            }
+            else{return true}
+        }
+        else{return true}
     });
 
     $scope.transactions = $scope.transactions.map(function(obj){
@@ -529,7 +551,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberPositionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController($sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
+.controller( 'MemberPositionsCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     $scope.orders = orders;
@@ -540,24 +562,6 @@ angular.module( 'conexus.member', [
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
     titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
-    
-    $scope.newOrderToggle = function(){
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
-    };
-
-    $scope.createOrder = function() {
-        if ($scope.currentUser){
-            $scope.newOrder.user = $scope.currentUser.id;
-            //TODO: PARSE INPUT
-            //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-            //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-            OrderModel.create($scope.newOrder).then(function(model) {
-                //$scope.orders.push($scope.newOrder);
-                $scope.newOrder = {};
-            });
-        }
-        else{}
-    };
 
     $scope.chart = {
         chart: {polar: true},
@@ -594,6 +598,45 @@ angular.module( 'conexus.member', [
         //    shared: true,
         },
         credits:{enabled:false},
+    };
+    
+    $scope.newOrderToggle = function(){
+        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    };
+
+    $scope.createOrder = function() {
+        if ($scope.currentUser){
+            $scope.newOrder.user = $scope.currentUser.id;
+            //TODO: PARSE INPUT
+            //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+            //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+            OrderModel.create($scope.newOrder).then(function(model) {
+                $scope.orders.push($scope.newOrder);
+                $scope.newOrder = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
+
+    //TODO: MODEL | CREATE REACTION | UPDATE POST
+    $scope.createReaction = function(post, type){
+        if($scope.currentUser){
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.post = post.id;
+            $scope.newReaction.type = type;
+            //TODO: MODEL | CREATE REACTION
+            //Reaction.create(newReaction);
+            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+            if (type =='plus'){$scope.posts[index].plusCount++}
+            if (type =='minus'){$scope.posts[index].minusCount++}
+            //TODO: UPDATE POST
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.reply = function(item){
+        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
 }]);
