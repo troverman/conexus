@@ -1516,7 +1516,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "	<md-divider style=\"color:gray\"></md-divider>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
-    "	<div class=\"profile-container container\">\n" +
+    "	<div class=\"container\">\n" +
     "		<div ui-view=\"memberActivity\"></div>\n" +
     "		<div ui-view=\"memberContent\"></div>\n" +
     "		<div ui-view=\"memberFollowers\"></div>\n" +
@@ -1661,60 +1661,97 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
 angular.module("member/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/content.tpl.html",
     "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<!-- POST WITH ATTACHMENT -->\n" +
+    "<!-- MASTER POST MODEL FOR CONTENT -->\n" +
     "<div class=\"row\">\n" +
-    "    <div class=\"col-xs-12\">\n" +
-    "    	<!-- POST WITH ATTACHMENT -->\n" +
-    "    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button><br><br>\n" +
-    "        <div ng-show=\"newContentToggleVar\">\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                        <div class=\"\">\n" +
-    "                            <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                            <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                            <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
-    "                            <input type=\"text\" placeholder= \"Tags\" ng-model=\"newContent.tags\" class=\"form-control\">\n" +
-    "                            <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                            <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
-    "                        </div>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "        				<div class=\"spacing-15\"></div>\n" +
-    "                    </form>\n" +
+    "    <div class=\"\">\n" +
+    "        <div style=\"padding:10px;\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div class=\"row\" ng-show=\"newContentToggleVar\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                <div class=\"\">\n" +
+    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
+    "                    <input type=\"text\" placeholder= \"Tags\" ng-model=\"newContent.tags\" class=\"form-control\">\n" +
+    "                    <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
     "                </div>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--POST MODEL | CONTENT TYPE -->\n" +
+    "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
+    "<div class=\"row\" ng-show=\"true\">\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"\">\n" +
+    "    	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    		<li class=\"active\"><a href=\"\">Text</a></li>\n" +
+    "    		<li class=\"active\"><a href=\"\">Image</a></li>\n" +
+    "    		<li><a href=\"\">Video</a></li>\n" +
+    "            <li><a href=\"\">Work</a></li>\n" +
+    "    	</ul>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"\" ng-repeat=\"content in posts\">\n" +
+    "        <div class=\"card\" style=\"\">\n" +
+    "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                <div ng-bind-html=\"renderContent(content.content)\"></div>\n" +
+    "                <p><a style=\"font-weight:700\"  href=\"member/{{content.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{content.user.avatarUrl}}\" src=\"{{content.user.avatarUrl}}\">\n" +
+    "                    {{content.user.username}}\n" +
+    "                </a> | <span am-time-ago=\"content.createdAt\"></span></p>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(content, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{content.plusCount}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(content, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{content.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(content)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a class=\"pull-right\" style=\"padding:0px;\" href=\"content/{{content.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "            <div ng-show=\"content.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "                    <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--REMOVE-->\n" +
+    "    <div class=\"col-md-6\" ng-repeat=\"video in videos\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div ng-bind-html=\"renderStream(video.streamUrl)\">></div>\n" +
+    "                <h3><a href=\"stream/{{video.title}}\">{{video.title}}</a></h3>\n" +
+    "                <p><a style=\"font-weight:700\"  href=\"member/{{video.user}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{video.user.avatarUrl}}\" src=\"{{video.user.avatarUrl}}\">\n" +
+    "                    {{video.user.username}}\n" +
+    "                </a> | <span am-time-ago=\"video.createdAt\"></span></p>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<div class=\"card\">\n" +
-    "    <form style=\"display:flex;flex-direction:row;\">\n" +
-    "        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "    </form>\n" +
-    "</div>\n" +
-    "<div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "<!--POST MODEL | CONTENT TYPE -->\n" +
-    "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
-    "<div ng-show=\"false\" class=\"\">\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li class=\"active\"><a href=\"\">Files</a></li>\n" +
-    "		<li class=\"active\"><a href=\"\">Posts</a></li>\n" +
-    "		<li><a href=\"\">Videos</a></li>\n" +
-    "	</ul>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"col-md-6\" ng-repeat=\"video in videos\">\n" +
-    "	<div class=\"card\">\n" +
-    "	    <div style=\"padding:16px;\">\n" +
-    "			<div ng-bind-html=\"renderContent(video.streamUrl)\">></div>\n" +
-    "			<h3><a href=\"stream/{{video.title}}\">{{video.title}}</a></h3>\n" +
-    "			<p><a style=\"font-weight:700\"  href=\"member/{{video.user}}\">\n" +
-    "				<img class=\"card-avatar\" ng-src=\"{{video.user.avatarUrl}}\" src=\"{{video.user.avatarUrl}}\">\n" +
-    "				{{video.user.username}}\n" +
-    "			</a> | <span am-time-ago=\"video.createdAt\"></span></p>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "</div>");
+    "");
 }]);
 
 angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function($templateCache) {
