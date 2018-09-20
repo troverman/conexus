@@ -22,6 +22,56 @@ angular.module( 'conexus.marketPair', [
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | CRE8.XYZ');
+
+    $scope.bidAskChart = {
+        chart: {
+            zoomType: 'x',
+        },
+        legend:{enabled:false},
+        title: {
+            text: null
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            type: 'column',
+            id: 'Bids',
+            name: 'Bids',
+            color: '#a94442',
+            data: []
+        },{
+            type: 'column',
+            id:  'Asks',
+            name: 'Asks',
+            color: '#14b794',
+            data: []
+        }],
+        credits:{enabled:false},
+    };
+
+    for(var i=-1000;i<1000;i++){
+        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);$scope.bidAskChart.series[0].data.push([i+100000,0])}
+        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);$scope.bidAskChart.series[1].data.push([i+100000,0])}
+
+        //[1000,1000000],[100,10000],[10,1000],[1,100],[200,2],[220,1],[30,1]
+        //$scope.bidAskChart.series[0].data.push([i,i*i])
+        //$scope.bidAskChart.series[1].data.push([i,i*i])
+    }
+
 	$scope.chart = {
         chart: {
             zoomType: 'x',
@@ -92,6 +142,8 @@ angular.module( 'conexus.marketPair', [
         },
         credits:{enabled:false},
     };
+
+
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
     $scope.orders = orders;

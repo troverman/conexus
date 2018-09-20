@@ -23,7 +23,15 @@
 		<div class="card">
 			<div style="padding:16px;">
 				<h2>Order Book</h2>
-				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
+				<highchart config="bidAskChart"></highchart>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button>
 				<div class="card" ng-show="newOrderToggleVar">
 				    <div style="padding:10px;">
 						<form role="form" ng-submit="createOrder(newTask)">

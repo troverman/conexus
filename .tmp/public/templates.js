@@ -589,7 +589,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
     "	            <div style=\"padding:16px;\">\n" +
     "					<div>\n" +
-    "						<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "						<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
@@ -625,7 +625,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				<div style=\"padding:16px;\">\n" +
     "	                <div class=\"row\">\n" +
     "	                    <div class=\"col-sm-1 col-xs-2\">\n" +
-    "	                        <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\"></a>\n" +
+    "	                        <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"col-sm-9 col-xs-10\">\n" +
     "	                        <h3 style=\"margin-top:0px\">\n" +
@@ -673,7 +673,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			<div class=\"card\" ng-show=\"item.model=='WORK'\">\n" +
     "	            <div style=\"padding:16px;\">\n" +
     "					<div>\n" +
-    "						<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "						<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "		                <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
@@ -820,7 +820,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
     "		            <div style=\"padding:16px;\">\n" +
     "						<div>\n" +
-    "							<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "							<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "							<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "							<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
@@ -856,7 +856,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					<div style=\"padding:16px;\">\n" +
     "		                <div class=\"row\">\n" +
     "		                    <div class=\"col-sm-1 col-xs-2\">\n" +
-    "		                        <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\"></a>\n" +
+    "		                        <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		                    </div>\n" +
     "		                    <div class=\"col-sm-9 col-xs-10\">\n" +
     "		                        <h3 style=\"margin-top:0px\">\n" +
@@ -899,7 +899,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				<div class=\"card\" ng-show=\"item.model=='WORK'\">\n" +
     "		            <div style=\"padding:16px;\">\n" +
     "						<div>\n" +
-    "							<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "							<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "							<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "							<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "			                <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
@@ -1204,7 +1204,15 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Order Book</h2>\n" +
-    "				<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button><br><br>\n" +
+    "				<highchart config=\"bidAskChart\"></highchart>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button>\n" +
     "				<div class=\"card\" ng-show=\"newOrderToggleVar\">\n" +
     "				    <div style=\"padding:10px;\">\n" +
     "						<form role=\"form\" ng-submit=\"createOrder(newTask)\">\n" +
@@ -1551,7 +1559,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "        <div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "\n" +
     "                    <!--TODO: POST PARENT TYPES-->\n" +
@@ -1589,7 +1597,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "        <div class=\"card\" ng-show=\"item.model=='ORDER'\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                </div> \n" +
@@ -1626,7 +1634,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "        <div class=\"card\" ng-show=\"item.model=='WORK'\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "                    <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
@@ -1716,7 +1724,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "                <div ng-bind-html=\"renderContent(content.content)\"></div>\n" +
     "                <p><a style=\"font-weight:700\"  href=\"member/{{content.user.username}}\">\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{content.user.avatarUrl}}\" src=\"{{content.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{content.user.avatarUrl}}\" src=\"{{content.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    {{content.user.username}}\n" +
     "                </a> | <span am-time-ago=\"content.createdAt\"></span></p>\n" +
     "            </div>\n" +
@@ -1742,7 +1750,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "                <div ng-bind-html=\"renderStream(video.streamUrl)\">></div>\n" +
     "                <h3><a href=\"stream/{{video.title}}\">{{video.title}}</a></h3>\n" +
     "                <p><a style=\"font-weight:700\"  href=\"member/{{video.user}}\">\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{video.user.avatarUrl}}\" src=\"{{video.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{video.user.avatarUrl}}\" src=\"{{video.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    {{video.user.username}}\n" +
     "                </a> | <span am-time-ago=\"video.createdAt\"></span></p>\n" +
     "            </div>\n" +
@@ -2044,7 +2052,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "        	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
     "        	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
     "        	<a href=\"member/{{order.user.username}}\">\n" +
-    "                <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "                <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                {{order.user.username}}\n" +
     "            </a>\n" +
     "        	<h4>onBooks | Filled | Date</h4>\n" +
@@ -2077,7 +2085,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "    <div class=\"card\" ng-repeat=\"post in posts\">\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div>\n" +
-    "                <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "                <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "            </div> \n" +
@@ -2270,7 +2278,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        <div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                </div>\n" +
@@ -2316,7 +2324,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        <div class=\"card\" ng-show=\"item.model=='WORK'\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "                    <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
@@ -3187,7 +3195,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <div class=\"spacing-10\"></div>\n" +
     "                <div ng-repeat=\"verification in taskVerification\">\n" +
     "                    <a href=\"member/{{verification.user.username}}\">\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
+    "                        <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                        {{verification.user.username}}\n" +
     "                    </a> | {{verification.score}}\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
@@ -3278,7 +3286,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\" ng-repeat=\"work in work\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{work.user.username}}\">{{work.user.username}}</a>\n" +
     "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "                    <a style=\"display:inline;font-weight:600\" href=\"work/{{work.id}}\">{{work.amount}}</a>\n" +
@@ -3315,7 +3323,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <div>\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "                        <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "                        <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "                        <a style=\"display:inline;font-weight:600\" href=\"/task/{{post.task.id}}\">{{post.task.title}}</a>\n" +
@@ -3585,7 +3593,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "			<div style=\"padding:16px\" class=\"col-md-12\">\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{work.user.username}}\">\n" +
-    "					<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\">\n" +
+    "					<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					{{work.user.username}}\n" +
     "				</a>\n" +
     "				<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
@@ -3603,7 +3611,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "		        <div class=\"spacing-10\"></div>\n" +
     "		   		<div ng-repeat=\"verification in workVerification\">\n" +
     "		            <a href=\"member/{{verification.user.username}}\">\n" +
-    "		                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\">\n" +
+    "		                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "		                {{verification.user.username}}\n" +
     "		            </a> | {{verification.score}}\n" +
     "					<div class=\"spacing-10\"></div>\n" +
@@ -3668,7 +3676,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	        <div class=\"card\">\n" +
     "	            <div style=\"padding:16px;\">\n" +
     "					<div>\n" +
-    "						<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
+    "						<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "						<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "					</div>\n" +
