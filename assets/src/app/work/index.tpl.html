@@ -7,7 +7,7 @@
 
 			<div style="padding:16px" class="col-md-12">
 				<a style="font-weight:700" href="member/{{work.user.username}}">
-					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
 					{{work.user.username}}
 				</a>
 				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
@@ -25,7 +25,7 @@
 		        <div class="spacing-10"></div>
 		   		<div ng-repeat="verification in workVerification">
 		            <a href="member/{{verification.user.username}}">
-		                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
+		                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
 		                {{verification.user.username}}
 		            </a> | {{verification.score}}
 					<div class="spacing-10"></div>
@@ -90,7 +90,7 @@
 	        <div class="card">
 	            <div style="padding:16px;">
 					<div>
-						<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+						<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
 						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
 						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
 					</div>

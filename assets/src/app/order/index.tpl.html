@@ -9,7 +9,7 @@
         	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
         	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
         	<a href="member/{{order.user.username}}">
-                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
                 {{order.user.username}}
             </a>
         	<h4>onBooks | Filled | Date</h4>
@@ -42,7 +42,7 @@
     <div class="card" ng-repeat="post in posts">
         <div style="padding:16px">
             <div>
-                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
                 <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{post.user.username}}">{{post.user.username}}</a>
                 <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
             </div> 

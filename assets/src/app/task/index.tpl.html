@@ -19,7 +19,7 @@
                 <div class="spacing-10"></div>
                 <div ng-repeat="verification in taskVerification">
                     <a href="member/{{verification.user.username}}">
-                        <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}">
+                        <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
                         {{verification.user.username}}
                     </a> | {{verification.score}}
                     <div class="spacing-10"></div>
@@ -110,7 +110,7 @@
         <div class="card" ng-repeat="work in work">
             <div style="padding:16px;">
                 <div>
-                    <img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+                    <img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{work.user.username}}">{{work.user.username}}</a>
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                     <a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
@@ -147,7 +147,7 @@
             <div class="card">
                 <div style="padding:16px;">
                     <div>
-                        <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                        <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                         <a style="display:inline;font-weight:600" href="/task/{{post.task.id}}">{{post.task.title}}</a>

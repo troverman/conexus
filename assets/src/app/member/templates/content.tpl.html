@@ -54,7 +54,7 @@
             <div style="padding:16px;overflow:scroll;max-height:500px">
                 <div ng-bind-html="renderContent(content.content)"></div>
                 <p><a style="font-weight:700"  href="member/{{content.user.username}}">
-                    <img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}">
+                    <img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
                     {{content.user.username}}
                 </a> | <span am-time-ago="content.createdAt"></span></p>
             </div>
@@ -80,7 +80,7 @@
                 <div ng-bind-html="renderStream(video.streamUrl)">></div>
                 <h3><a href="stream/{{video.title}}">{{video.title}}</a></h3>
                 <p><a style="font-weight:700"  href="member/{{video.user}}">
-                    <img class="card-avatar" ng-src="{{video.user.avatarUrl}}" src="{{video.user.avatarUrl}}">
+                    <img class="card-avatar" ng-src="{{video.user.avatarUrl}}" src="{{video.user.avatarUrl}}" err-src="/images/avatar.png">
                     {{video.user.username}}
                 </a> | <span am-time-ago="video.createdAt"></span></p>
             </div>
