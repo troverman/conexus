@@ -1,7 +1,6 @@
-<br>
 <button class="btn btn-default log-btn" ng-click="createMember()">join</button>
-<br><br>
-<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
+<div class="spacing-10"></div>
+	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
 	<div class="member-card">
 	    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 	        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>

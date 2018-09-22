@@ -377,7 +377,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberLedgerCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
+.controller( 'MemberLedgerCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     $scope.newTransaction = {};
@@ -548,10 +548,6 @@ angular.module( 'conexus.member', [
         });
     }
 
-    $scope.newTransactionToggle = function(){
-        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
-    };
-
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
         $scope.newTransaction.user = $scope.currentUser.id;
@@ -560,6 +556,17 @@ angular.module( 'conexus.member', [
         });
     };
 
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.newTransactionToggle = function(){
+        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
+    };
 
 }])
 

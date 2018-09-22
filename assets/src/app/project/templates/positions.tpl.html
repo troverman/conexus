@@ -1,7 +1,17 @@
 <div class="row">
+	<div class="col-md-6">
+		<ul style="padding:0px;" class="member-tabs">
+			<li class="active"><a href="project/{{project.urlTitle}}/ledger">Overview</a></li>
+			<li><a href="">Assets</a></li>
+			<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
+			<li><a href="project/{{project.urlTitle}}/ledger">Transactions</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
 	<div class="card">
 		<div style="padding:16px;">
-			<div class="spacing-5"></div>
 			<h1>{{project.title}} | Value Map</h1>
 			<span><a href="market/UniversalToken">Universal Dimension</a> | <a href="#">+ Dimension</a></span><br>
 			<span><span ng-repeat="dimension in chart.xAxis.categories"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>

@@ -1,4 +1,3 @@
-<div class="spacing-10"></div>
 <div ng-show="project.parent">
 	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
 	<div class="spacing-10"></div>
@@ -10,7 +9,7 @@
             <form class="blog-input" role="form" ng-submit="createProject()">
                 <div class="form-group">
                     <input type="text" placeholder= "Project Title" ng-model="newProject.title" class="form-control">
-                    <text-angular ng-model="newProject.description" ta-toolbar="[['']]"></text-angular>
+                    <text-angular ng-model="newProject.description" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                 </div>
                 <button type="submit" class="btn btn-default log-btn">create</button>
 				<div class="spacing-15"></div>

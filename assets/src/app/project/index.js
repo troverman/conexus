@@ -466,7 +466,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectLedgerCtrl', ['$interval', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
+.controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTransaction = {};
@@ -608,16 +608,24 @@ angular.module( 'conexus.project', [
         });
     }
 
-    $scope.newTransactionToggle = function(){
-        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
-    };
-
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
         $scope.newTransaction.user = $scope.currentUser.id;
         TransactionModel.create($scope.newTransaction).then(function(model){
             $scope.newTransaction = {};
         });
+    };
+
+    $scope.newTransactionToggle = function(){
+        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
+    };
+
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
+        }
+        else{$location.path('/login')}
     };
 
 }])

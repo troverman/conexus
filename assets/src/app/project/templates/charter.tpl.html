@@ -1,7 +1,9 @@
 <style>md-card{margin:0px; overflow:hidden;}</style>
-<br>
-<button class="btn btn-default log-btn" ng-click="newMotionToggle()">+ Motion</button><br><br>
-<md-card ng-show="newMotionToggleVar">
+
+<button class="btn btn-default log-btn" ng-click="newMotionToggle()">+ Motion</button>
+<div class="spacing-10"></div>
+
+<div class="card" ng-show="newMotionToggleVar">
     <div style="padding:10px;">
 		<form role="form" ng-submit="createTask(newTask)">
 			<div class="form-group">
@@ -16,7 +18,8 @@
 			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
 		</form>
 	</div>
-</md-card>
+</div>
+
 <table class="table table-striped table-hover">
   <thead>
         <tr>
@@ -37,4 +40,5 @@
 		</tr>
   </tbody>
 </table>
+
 <p style="text-align:right;font-style:italic"><a STYLE="color:gray" href="https://www.voetr.com">voetr API</a></p>
