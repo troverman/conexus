@@ -305,13 +305,13 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', 'videos', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService, videos) {
     $scope.currentUser = config.currentUser;
-    $scope.content = [{}];
+    $scope.content = posts;
     $scope.newContent = {};
     $scope.newContentToggleVar = false;
 
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
-    $scope.posts = posts;
-    $scope.videos = videos;
+    //$scope.posts = posts;
+    //$scope.videos = videos;
 
     $scope.newContentToggle = function() {
         $scope.newContentToggleVar = !$scope.newContentToggleVar;
@@ -329,9 +329,9 @@ angular.module( 'conexus.member', [
         }
     };
 
-    $scope.renderStream = function(stream){
-        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
-        return $sce.trustAsHtml(html);
+    $scope.reply = function(item){
+        var index = $scope.content.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.content[index].showReply = !$scope.content[index].showReply
     };
 
 }])

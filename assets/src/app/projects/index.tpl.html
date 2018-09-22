@@ -43,7 +43,6 @@
     </div>
 </div>
 
-<!--TODO: FILTER / SEARCH -->
 <div class="container">
     <div class="spacing-15"></div>
     <div class="card">
@@ -63,11 +62,9 @@
             </div>
         </form>
     </div>
-    <div class="spacing-15"></div>
 </div>
 
 <div class="container">
-    <!--TODO: FINALIZE STRUCTURE.. -->
     <div ng-repeat="project in projects">
         <div class="card">
             <div style="padding:16px;">
@@ -83,12 +80,11 @@
                             </a>
                         </h3>
                         <p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p>
-                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
-                        <!--<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>-->
                     </div>
                     <div class="col-sm-2" style="text-align:right">
                         <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
-                        <!--<h4>0 <i class="fa fa-user"></i></h4>-->
+                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
+                        <!--<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>-->
                     </div>
                 </div>
             </div>
@@ -96,8 +92,10 @@
     </div>
 </div>
 
-<div class="spacing-25"></div>
+<div class="spacing-10"></div>
+
 <div ng-click="loadMore()" class="container" style="text-align:center">
     <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
 </div>
+
 <div class="spacing-50"></div>

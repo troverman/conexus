@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-show="currentUser">
     <div class="card">
         <div style="padding:16px;">
             <h4>Create a Post in {{project.title}}</h4>
@@ -48,6 +48,7 @@
                     </div>
                     <div class="col-sm-2" style="text-align:right">
                         <h4>{{item.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
+                        <p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                     </div>
                 </div>
             </div>

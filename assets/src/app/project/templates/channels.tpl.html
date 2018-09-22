@@ -1,18 +1,20 @@
 <div class="row">
     <div class="col-md-2">
-        <md-card ng-repeat="channel in channels" class="">
-        	 <div style="padding:10px;">
-                <h4><a href="#">{{channel.title}}</a></h3>
+        <div class="card">
+            <div style="padding:16px">
+                <div class="" ng-repeat="channel in channels">
+                    <h4><a href="#">{{channel.title}}</a></h3>
+                </div>
             </div>
-        </md-card>
-        <button class="btn btn-default log-btn">+ Channel</button>
+            <button class="btn btn-default log-btn">+ Channel</button>
+        </div>
     </div>
     <div class="col-md-10">
         <div ng-repeat="post in posts">
             <div class="card">
                 <div style="padding:16px;">
                     <div>
-                        <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}">
+                        <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="images/avatar.png">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{post.user.username}}">{{post.user.username}}</a>
                         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
                     </div>
@@ -24,7 +26,6 @@
                     <a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
                     <a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
                 </div>
-                <!--TODO: NESTED -->
                 <div ng-show="post.showReply" class="card-footer">
                     <form role="form" ng-submit="createPost(post)">
                         <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
@@ -33,11 +34,16 @@
                 </div>
             </div>
         </div>
-        <div class="spacing-15"></div>
-        <form role="form" ng-submit="createPost(newMessage)">
-            <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-            <button style="width:100%" type="submit" class="btn btn-default log-btn" ng-disabled="!newPost.content">Submit</button>
-        </form>
     </div>
 </div>
 
+<div class="">
+    <div class="card">
+        <div style="padding:16px">
+            <form role="form" ng-submit="createPost(newMessage)">
+                <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                <button style="width:100%" type="submit" class="btn btn-default log-btn" ng-disabled="!newPost.content">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

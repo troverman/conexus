@@ -24,20 +24,15 @@
 				<div class="col-sm-10">
 					<h4><a href="project/{{project.urlTitle}}"><img style="height:24px" src="{{project.avatarUrl}}"> {{project.title}}</a></h4>
 					<p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p></p>
-
 					<!--
 					<p>{{project.memeberCount}}</p>
 					<p>{{project.taskCount}}</p>
 					<p>{{project.totalWork}}</p>
-
-					-->
-					<!--
 					<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 					-->
-
 				</div>
 				<div class="col-sm-2" style="text-align:right">
-					<!--<h4><a href="project/{{project.urlTitle}}">Request | Join</a></h4>-->
+					<h4><a href="project/{{project.urlTitle}}">Join</a></h4>
 				</div>
 			</div>
 		</div>

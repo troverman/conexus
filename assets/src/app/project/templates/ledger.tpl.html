@@ -1,18 +1,13 @@
 <div class="row">
-	<div class="card">
-		<div style="padding:16px;">
+	<div class="">
+		<div style="">
 			<ul style="padding:0px;" class="member-tabs">
-				<li class="active"><a href="">Overview</a></li>
 				<li><a href="">Assets</a></li>
 				<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
 				<li><a href="">Transactions</a></li>
 				<!--<li><a href="">Work</a></li>
 				<li><a href="">Property</a></li>
 				<li><a href="">Liscense</a></li>-->
-			</ul>
-			<ul style="padding:0px;" class="member-tabs">
-				<li><a href="">Expenses</a></li>
-				<li><a href="">Revenue</a></li>
 			</ul>
 		</div>
 	</div>
@@ -29,6 +24,12 @@
 <div class="row">
 	<div class="card">
 		<div style="padding:16px;">
+			<ul style="" class="member-tabs">
+				<li class="active"><a href="">Overview</a></li>
+				<li><a ng-click="selectExpense)" href="#">Expenses</a></li>
+				<li><a ng-click="selectRevnue()" href="#">Revenue</a></li>
+			</ul>
+			<!--children projects..-->
 			<div class="col-md-6">
 				<highchart config="chart"></highchart>
 			</div>

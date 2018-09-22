@@ -1,20 +1,16 @@
 <div class="row">
-	<div class="card">
-		<div style="padding:16px;">
+	<div class="">
+		<div style="">
 			<div class="col-md-6">
 				<ul style="padding:0px;" class="member-tabs">
 					<li><a href="">Assets</a></li>
 					<li><a href="member/{{member.username}}/positions">Positions</a></li>
 					<li><a href="">Transactions</a></li>
 				</ul>
-				<ul style="padding:0px;" class="member-tabs">
-					<li class="active"><a href="">Expense</a></li>
-					<li><a href="">Revenue</a></li>
-				</ul>
 			</div>
 			<div class="col-md-6" style="text-align:right">
 				<!--<h1>888,888,888 USD</h1>-->
-				<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>
+				<!--<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>-->
 				<!--<h4>Filter</h4>
 				<form style="display:flex;flex-direction:row;">
 			    	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
@@ -40,6 +36,23 @@
 <div class="row">
 	<div class="card">
 		<div style="padding:16px;">
+			<div class="col-md-6">
+				<ul style="padding:0px;" class="member-tabs">
+					<li class="active"><a href="">Expense</a></li>
+					<li><a href="">Revenue</a></li>
+				</ul>
+			</div>
+			<div class="col-md-6" style="text-align:right">
+				<form style="display:flex;flex-direction:row;">
+			    	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+			    	<div style="border:0px;width:50%" class="btn btn-default dropdown sort-dropdown noselect">
+			            <a href="#">
+			                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+			            </a>
+					</div>
+				</form>
+				<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>
+			</div>
 			<div class="col-md-6">
 				<highchart config="chart"></highchart>
 			</div>

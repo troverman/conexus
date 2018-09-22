@@ -1,67 +1,95 @@
-<div class="row">
-    <div class="col-xs-12">
-    	<!-- POST WITH ATTACHMENT -->
-    	<!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->
-        <button class="btn btn-default log-btn" ng-click="newContentToggle()">+ Content</button><br><br>
-        <div ng-show="newContentToggleVar">
-            <div class="card">
-                <div style="padding:16px">
-                    <form role="form" ng-submit="createContent()">
-                        <div class="">
-                            <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
-                            <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
-                            <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
-                            <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control"> <!-- VIDEO | FILE... ? -->
-                            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                            <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-default log-btn">create</button>
-                    </form>
-                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <form style="display:flex;flex-direction:row;">
-        <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
-    </form>
-</div>
-<div class="spacing-15"></div>
-
 <!--POST MODEL | CONTENT TYPE -->
 <!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->
-<div class="">
+<div class="row">
     <ul style="padding:0px;" class="member-tabs">
         <li class="active"><a href="">Files</a></li>
+        <li class="active"><a href="project/{{project.urlTitle}}/charter">Motions</a></li>
         <li class="active"><a href="">Posts</a></li>
         <li class="active"><a href="">Text</a></li>
         <li><a href="">Videos</a></li>
     </ul>
 </div>
 
-<div class="col-md-12" ng-repeat="item in content">
+<div class="row">
     <div class="card">
-        <div style="padding:16px;">
-            <div ng-bind-html="renderContent(item.content)">></div>
-            <p><a style="font-weight:700" href="member/{{item.user.username}}">
-                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}">
-                {{item.user.username}}
-            </a> | <span am-time-ago="item.createdAt"></span></p>
+        <form style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="">
+        <div style="padding:10px">
+           <!-- POST WITH ATTACHMENT -->
+           <!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->
+            <button class="btn btn-default log-btn" ng-click="newContentToggle()">+ Content</button>
+        </div>
+    </div>
+</div>
+ 
+<div class="row" ng-show="newContentToggleVar">
+    <div class="card">
+        <div style="padding:16px">
+            <form role="form" ng-submit="createContent()">
+                <div class="">
+                    <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
+                    <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
+                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
+                    <ul style="" class="member-tabs">
+                        <li class="active"><a href="">Image</a></li>
+                        <li class="active"><a href="">Post</a></li>
+                        <li class="active"><a href="">Link</a></li>
+                        <li class="active"><a href="">File</a></li>
+                        <li class="active"><a href="">Motion</a></li>
+                        <li class="active"><a href="">Text</a></li>
+                        <li><a href="">Video</a></li>
+                    </ul>
+                    <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control"> <!-- VIDEO | FILE... ? -->
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-default log-btn">create</button>
+            </form>
+         </div>
+    </div>
+</div>
+
+<!--
+<div class="" ng-show="content.length == 0">
+    <div style="padding:16px;color:gray">
+        There's nothing here..
+    </div>
+</div>
+-->
+
+<div class="row">
+    <div ng-repeat="item in content">
+        <div class="card">
+            <div style="padding:16px;">
+                <div ng-bind-html="renderContent(item.content)"></div>
+                <div style="">
+                    <a style="font-weight:700" href="member/{{item.user.username}}">
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png"> {{item.user.username}}
+                    </a>
+                    <span am-time-ago="item.createdAt"></span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="color:gray"> • created <span am-time-ago="item.createdAt"></span></a>
+                <a style="padding:0px" class="pull-right" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <form role="form" ng-submit="createPost(item)">
+                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="col-md-6" ng-repeat="stream in streams">
-	<div class="card">
-	    <div style="padding:16px;">
-			<div ng-bind-html="renderStream(stream.streamUrl)">></div>
-			<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
-			<p><a style="font-weight:700" href="member/{{stream.user.username}}">
-				<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">
-				{{stream.user.username}}
-			</a> | <span am-time-ago="stream.createdAt"></span></p>
-		</div>
-	</div>
-</div>
+<div class="spacing-50"></div>

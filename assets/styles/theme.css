@@ -36,6 +36,19 @@ a:focus{text-decoration: none}
   display: table;
 }
 
+.avatar {
+    position:absolute;
+    top:6.4em;
+    margin: 0 auto;
+    background: #fff;
+    max-width: 15em;
+    height: 15em;
+    padding: 0.25em;
+    border-radius: .7em;
+}
+
+.profile-header{background-color:white;}
+
 .card{
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
     overflow:hidden;
@@ -422,9 +435,7 @@ a:focus{text-decoration: none}
     min-width:100px;
 }
 
-
 /* Bootstrap nav breakpoint override */
-
 @media (max-width: 991px) {
     .navbar-header {
         float: none;
@@ -461,5 +472,3 @@ a:focus{text-decoration: none}
         display: block !important;
     }
 }
-
-/* End Bootstrap nav breakpoint override */

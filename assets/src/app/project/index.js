@@ -396,60 +396,13 @@ angular.module( 'conexus.project', [
         }
     };
 
-    //TODO: DOESNT WORK
-    $scope.renderStream = function(stream){
-        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
-        return $sce.trustAsHtml(html);
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.content.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.content[index].showReply = !$scope.content[index].showReply;
+        }
+        else{$location.path('/login')}
     };
-
-    //TODO: ALL | BROWSER BASED STREAMING OF THE SCREEN. . . ~ OBS INPUT 
-    //TODO: MOVE TO 'WORK' OR DEDICATED STREAMING AREA
-    /*
-    var cameraPreview = document.getElementById('camera-preview');
-    //testing out streaming! :D
-    function initializeRecorder(stream) {
-
-        var mediaStream = stream;
-        var recordAudio = RecordRTC(stream, {
-            onAudioProcessStarted: function() {
-                recordVideoSeparately && recordVideo.startRecording();
-                cameraPreview.src = window.URL.createObjectURL(stream);
-                cameraPreview.play();
-                cameraPreview.muted = true;
-                cameraPreview.controls = false;
-            }
-        });
-        var recordVideo = RecordRTC(stream, {
-            type: 'video'
-        });
-        recordAudio.startRecording();
-        stopRecording.disabled = false;
-
-        var audioContext = window.AudioContext;
-        var videoContext = win
-        var context = new audioContext();
-        var audioInput = context.createMediaStreamSource(stream);
-        var bufferSize = 2048;
-        // create a javascript node
-        var recorder = context.createScriptProcessor(bufferSize, 1, 1);
-        // specify the processing function
-        recorder.onaudioprocess = recorderProcess;
-        // connect stream to our recorder
-        audioInput.connect(recorder);
-        // connect our recorder to the previous destination
-        recorder.connect(context.destination);
-    };
-
-    function recorderProcess(e) {
-        var left = e.inputBuffer.getChannelData(0);
-        //console.log(left)
-    }
-    function onError(e) {console.log(e);}
-    var session = {audio: true, video: true};
-    var recordRTC = null;
-    navigator.getUserMedia(session, initializeRecorder, onError);
-    */
-
 
 }])
 

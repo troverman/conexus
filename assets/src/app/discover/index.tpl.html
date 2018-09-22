@@ -25,7 +25,6 @@
 
 <!--TODO: FILTER / SEARCH -->
 <div class="container">
-    <div class="spacing-10"></div>
     <div class="card">
         <form style="display:flex;flex-direction:row;">
             <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
@@ -43,39 +42,7 @@
             </div>
         </form>
     </div>
-    <div class="spacing-10"></div>
 </div>
-
-
-<!--<div class="container">
-	<div class="col-lg-3 col-xs-6">
-		<highchart config="chart"></highchart>
-	</div>
-	<div class="col-lg-3 col-xs-6">
-		<highchart config="chart"></highchart>
-	</div>
-	<div class="col-lg-3 col-xs-6">
-		<highchart config="chart"></highchart>
-	</div>
-	<div class="col-lg-3 col-xs-6">
-		<highchart config="chart"></highchart>
-	</div>
-</div>
-
-<div class="container">
-	<div class="col-md-6" ng-repeat="stream in streams">
-		<div class="card">
-		    <div style="padding:16px;">
-				<div ng-bind-html="renderMessage(stream.streamUrl)">></div>
-				<h3><a href="stream/{{stream.title}}">{{stream.title}}</a></h3>
-				<p><a href="member/{{stream.user.username}}">
-					<img class="card-avatar" ng-src="{{stream.user.avatarUrl}}" src="{{stream.user.avatarUrl}}">
-					{{stream.user.username}}
-				</a> | <span am-time-ago="stream.createdAt"></span></p>
-			</div>
-		</div>
-	</div>
-</div>-->
 
 <div class="container">
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
@@ -117,9 +84,7 @@
     </div>
 </div>
 
-<!--
 <div class="container">
-	<h1>Tasks</h1>
 	<div ng-repeat="task in tasks">
 		<div class="card">
 			<div style="padding:16px;">
@@ -127,7 +92,7 @@
 					<div class="col-sm-10">
 						<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
 						<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-						<p>{{task.content}}</p>
+                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
 						<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 						<span style="color:gray" am-time-ago="task.createdAt"></span>
 					</div>
@@ -144,6 +109,5 @@
 		</div>
 	</div>
 </div>
--->
 
 <div class="spacing-50"></div>

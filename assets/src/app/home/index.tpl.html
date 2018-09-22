@@ -121,31 +121,21 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="card">
-		    <div style="">
-		        <form style="display:flex;flex-direction:row;">
-		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
-		            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-		                <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-		                    <h5 style="color:black;text-align:right" class="noselect">Filters <i class="fa fa-angle-down"></i></h5>
-		                </a>
-		                <ul style="position:relative" class="dropdown-menu">
-		                    <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>tag:</h5></a></li>
-		                    <hr class="sort-hr">
-		                    <li><a href="#" class="sort-a" ng-click="selectSort('memberCount DESC')"><h5>@:</h5></a></li>
-		                    <hr class="sort-hr">
-		                    <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>has:</h5></a></li>
-		                </ul>
-		            </div>
-		        </form>
-		    </div>
-		</div>
+	<div class="row" ng-show="false">
+		<div class="card" ng-show="true">
+	        <div style="padding:16px;">
+	        	<h4>Create Post Content</h4>
+	        	<form role="form" ng-submit="createPost(newPost)">
+					<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+				</form>
+			</div>
+	    </div>
 	</div>
 
 	<div class="row">
-		<div class="card">
-		    <div style="padding:16px;">
+		<div class="">
+		    <div style=";">
 				<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
 					<li class="active"><a href="/">Activity</a></li>
 					<li><a href="/discover">Content</a></li>
@@ -159,15 +149,23 @@
 	</div>
 
 	<div class="row">
-		<div class="card" ng-show="true">
-	        <div style="padding:16px;">
-	        	<h4>Create Post Content</h4>
-	        	<form role="form" ng-submit="createPost(newPost)">
-					<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-				</form>
-			</div>
-	    </div>
+		<div class="card">
+	        <form style="display:flex;flex-direction:row;">
+	            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+	            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+	                <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	                    <h5 style="color:black;text-align:right" class="noselect">Filters <i class="fa fa-angle-down"></i></h5>
+	                </a>
+	                <ul style="position:relative" class="dropdown-menu">
+	                    <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>tag:</h5></a></li>
+	                    <hr class="sort-hr">
+	                    <li><a href="#" class="sort-a" ng-click="selectSort('memberCount DESC')"><h5>@:</h5></a></li>
+	                    <hr class="sort-hr">
+	                    <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>has:</h5></a></li>
+	                </ul>
+	            </div>
+	        </form>
+		</div>
 	</div>
 
 	<div class="row">
@@ -240,6 +238,7 @@
 						</div>
 						<div class="col-sm-2" style="text-align:right">
 							<h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
+							<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
 						</div>
 					</div>
 				</div>
@@ -302,7 +301,7 @@
 
 	<div class="spacing-50"></div>
 
-	<div class="header-area container">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
 				<h2>CRE8 MULTIDIMENSIONAL VALUE</h2>
@@ -465,6 +464,7 @@
 							</div>
 							<div class="col-sm-2" style="text-align:right">
 								<h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
+								<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
 							</div>
 						</div>
 					</div>
