@@ -1,73 +1,98 @@
 <div class="container">
 
     <div class="spacing-10"></div>
-    
-    <div class="card">
-        <div style="padding:16px">
-        	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
-            <div class="spacing-10"></div>
-        	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
-        	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
-        	<a href="member/{{order.user.username}}">
-                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
-                {{order.user.username}}
-            </a>
-        	<h4>onBooks | Filled | Date</h4>
-        </div>
-    </div>
 
-    <div class="card">
-        <div style="padding:16px">
-            <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-            <p><a href="market/createOrder">createOrder</a></p>
-            <p><a href="market/createOrder+{{order.identiferSet}}">createOrder+{{order.identiferSet}}</a></p>
-            <p><a href="market/createOrder+{{order.identiferSet1}}">createOrder+{{order.identiferSet1}}</a></p>
-            <p><a href="market/{{order.id}}">{{order.id}}</a></p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div style="padding:16px">
-        	<div class="col-md-12">
-                <h4>Create Order Post</h4>
-                <form role="form" ng-submit="createPost(newPost)">
-                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-                </form>
-                <div class="spacing-15"></div>
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px">
+            	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
+            	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
+            	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
+            	<a href="member/{{order.user.username}}">
+                    <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
+                    {{order.user.username}}
+                </a>
+                <h4>{{order.createdAt}}</h4>
+            	<h4>onBooks | Filled | Date</h4>
             </div>
         </div>
     </div>
 
-    <div class="card" ng-repeat="post in posts">
-        <div style="padding:16px">
-            <div>
-                <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
-                <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{post.user.username}}">{{post.user.username}}</a>
-                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
-            </div> 
-            <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px">
+                <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+                <p><a href="market/createOrder">createOrder</a></p>
+                <p><a href="market/createOrder+{{order.identiferSet}}">createOrder+{{order.identiferSet}}</a></p>
+                <p><a href="market/createOrder+{{order.identiferSet1}}">createOrder+{{order.identiferSet1}}</a></p>
+                <p><a href="market/{{order.id}}">{{order.id}}</a></p>
+            </div>
         </div>
-        <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-            <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-            <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+    </div>
+
+    <!--TODO: Partially Filled Orders -->
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px;">
+                <h2>Trades</h2>
+                <h4>Filled | Partially Filled</h4>
+                <!--<h5>Trades are a transaction pair. Seller to Buyer; Buyer to Seller</h5>-->
+            </div>
         </div>
-        <!--TODO: NESTED -->
-        <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-            <form role="form" ng-submit="createPost(post)">
-                <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-            </form>
+    </div>
+
+    <!--TODO: -->
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px;">
+                <h2>Transactions</h2>
+                <!--<h5>Seller to Eskrow, Buyer to Eskrow, Eskrow to Engine, Engine to Seller, Engine to Buyer</h5>-->
+                <h5>Seller to Buyer, Buyer to Seller</h5>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px">
+            	<div class="col-md-12">
+                    <h4>Create Order Post</h4>
+                    <form role="form" ng-submit="createPost(newPost)">
+                        <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                    </form>
+                    <div class="spacing-15"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card" ng-repeat="post in posts">
+            <div style="padding:16px">
+                <div>
+                    <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
+                    <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{post.user.username}}">{{post.user.username}}</a>
+                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+                </div> 
+                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+            </div>
+            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <form role="form" ng-submit="createPost(post)">
+                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <div class="spacing-10"></div>
 	
 </div>
-
-
-
-
-

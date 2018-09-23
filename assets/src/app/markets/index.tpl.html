@@ -6,7 +6,7 @@
 		<div class="card">
 			<div style="padding:16px">
 				<h1>Markets</h1>
-				<p>88674 markets | 833423 tokens in circulation </p>
+				<p style="color:gray">88674 markets | 833423 tokens in circulation </p>
 			</div>
 		</div>
 	</div>
@@ -17,42 +17,52 @@
 	            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
 	        </form>
 	    </div>
-	    <div ng-repeat="market in markets">
+	</div>
+
+	<div class="row">
+	    <div ng-repeat="market in markets" class="col-xs-4" style="padding:0px">
 	    	<div class="card">
 			    <div style="padding:16px;">
-			    	<a href="market/{{market}}"><h4>{{market}}</h4></a>
-			    	<p>{{market}} markets</p>
+			    	<a style="white-space: nowrap;" href="market/{{market}}"><h4>{{market}}</h4></a>
+			    	<p style="white-space: nowrap;color:gray">{{market}} markets</p>
 			    </div>
 			</div>
 	    </div>
 	</div>
 
+	<!--
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px">
 				<h1>Order Book</h1>
-				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button><br><br>
-				<div class="card" ng-show="newOrderToggleVar">
-				    <div style="padding:10px;">
-						<form role="form" ng-submit="createOrder()">
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-							</div>
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-							</div>
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-							</div>
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-							</div>
-							<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-						</form>
-					</div>
-				</div>
+				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button>
 			</div>
 		</div>
+	</div>
+
+	<div class="row" ng-show="newOrderToggleVar">
+		<div class="card">
+		    <div style="padding:16px;">
+				<form role="form" ng-submit="createOrder()">
+					<div class="form-group col-sm-6">
+						<input placeholder="Order Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
+					</div>
+					<div class="form-group col-sm-6">
+						<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
+					</div>
+					<div class="form-group col-sm-6">
+						<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
+					</div>
+					<div class="form-group col-sm-6">
+						<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
+					</div>
+					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
 	    <div ng-repeat="order in orders">
 	        <div class="card">
 	            <div style="padding:16px">
@@ -71,10 +81,18 @@
 	                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
 	                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
 	            </div>
+	            <div ng-show="order.showReply" class="card-footer">
+	                <form role="form" ng-submit="createPost(order)">
+	                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+	                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+	                </form>
+	            </div>
 	        </div>
 		</div>
 	</div>
+	-->
 
+	<!--
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px">
@@ -101,7 +119,7 @@
 	            </div>
 	        </div>
 		</div>
-	</div>
+	</div>-->
 
 	<div class="spacing-10"></div>
 

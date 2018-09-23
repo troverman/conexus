@@ -23,6 +23,9 @@ angular.module( 'conexus.marketPair', [
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | CRE8.XYZ');
 
+    $scope.market = $stateParams.id;
+    $scope.market1 = $stateParams.id1;
+
     $scope.bidAskChart = {
         chart: {
             zoomType: 'x',
@@ -157,6 +160,18 @@ angular.module( 'conexus.marketPair', [
     $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
     $scope.trades = {};
 
+    $scope.createContent = function(post) {
+        if($scope.currentUser){
+            $scope.newPost.post = post.id;
+            $scope.newPost.user = $scope.currentUser.id;
+            $scope.newPost.marketPair = 'CRE8/USD'; // || USD/CRE8
+            PostModel.create($scope.newPost).then(function(model) {
+                $scope.newPost = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
+
     //TODO: CREATE ORDER
     $scope.createOrder = function() {
         $scope.newOrder.identiferSet = $scope.stateParams.id;
@@ -173,8 +188,25 @@ angular.module( 'conexus.marketPair', [
         });
     };
 
+    $scope.invertMarket = function() {
+
+        //$scope.market = [$scope.market, $scope.market = $scope.market1][0];
+        var temp = $scope.newOrder.identiferSet;
+        $scope.newOrder.identiferSet = $scope.newOrder.identiferSet1;
+        $scope.newOrder.identiferSet1 = temp;
+        console.log($scope.newOrder)
+        $scope.inverted = !$scope.inverted;
+        //$scope.$apply();
+
+    };
+
     $scope.newOrderToggle = function () {
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    };
+
+    $scope.reply = function(item){
+        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
     
 }]);

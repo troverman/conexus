@@ -53,6 +53,11 @@ angular.module( 'conexus.order', [
         }
     };
 
+    $scope.reply = function(item){
+        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.posts[index].showReply = !$scope.posts[index].showReply
+    };
+
     $sailsSocket.subscribe('order', function (envelope) {
         switch(envelope.verb) {
             case 'created':

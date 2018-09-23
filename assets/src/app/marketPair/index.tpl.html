@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-				<h1><a href="market/{{stateParams.id}}">{{stateParams.id}}</a> | <a href="market/{{stateParams.id1}}">{{stateParams.id1}}</a></h1>
+				<h1><a href="market/{{market}}">{{market}}</a> | <a href="market/{{market1}}">{{market1}}</a></h1>
 				<p style="color:gray">47021 tokens in circulation | 452451 token trade volume</p>
 			</div>
 		</div>
@@ -32,27 +32,75 @@
 		<div class="card">
 			<div style="padding:16px;">
 				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button>
-				<div class="card" ng-show="newOrderToggleVar">
-				    <div style="padding:10px;">
-						<form role="form" ng-submit="createOrder(newTask)">
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-							</div>
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-							</div>
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Identifer Set 2" ng-disabled="true" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-							</div>
-							<div class="form-group col-sm-6">
-								<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-							</div>
-							<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-						</form>
-					</div>
-				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="row" ng-show="newOrderToggleVar">
+		<div class="card">
+		    <div style="padding:16px;">
+				<form role="form" ng-submit="createOrder(newTask)">
+
+					<div class="col-sm-12" style="padding:20px;">
+						<p ng-show="!inverted" style="font-weight:800;">Sell {{market}} for {{market1}} | Buy {{market1}} with {{market}}</p>
+						<p ng-show="inverted" style="font-weight:800;">Buy {{market}} with {{market1}} |  Sell {{market1}} with {{market}}</p>
+					</div>
+
+					<!--invert | buy-->
+					<!--<p style="font-weight:800;padding:20px">Buy {{stateParams.id}} with {{stateParams.id1}}</p>-->
+					<!--TODO: actual array-->
+					<!--combinatorial market string-->
+
+					<div class="col-sm-6 form-group"><input placeholder="{{market}}" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control"></div>
+					<div class="col-sm-6 form-group"><input placeholder="{{market}} Amount" type="text" ng-model="newOrder.amountSet" class="form-control"></div>
+
+					<div style="text-align:center;margin-bottom:15px" class="col-sm-12">
+						<button ng-click="invertMarket()" style="width:100px" class="btn btn-default log-btn"><i class="fa fa-refresh"></i> Invert</button>
+					</div>
+
+					<div class="col-sm-6 form-group"><input placeholder="{{market1}}" ng-disabled="true" type="text" ng-model="newOrder.identiferSet1" class="form-control"></div>
+					<div class="col-sm-6 form-group">
+						<div class="col-sm-6"><input placeholder="{{market1}} Amount" type="text" ng-model="newOrder.amountSet1" class="form-control"></div>
+						<div class="col-sm-6"><input placeholder="{{market}} / {{market1}} Price" type="text" ng-model="newOrder.amountSet1Price" class="form-control"></div>
+					</div>
+
+					<!--option tokens string inferance+time+option-->
+					<!--sell vs buys; adding liquidy to the market; onBooks;-->
+
+					<!--
+					Market Orders;@ price | fok; ioc; onbook;
+					Limit Orders; sell no lower than, buy no higher than price
+					-->
+
+					<!--array based;; so multiD stops.. a gradiation in dimesnions-->
+
+					<div class="col-sm-12" style="marking:10px">
+						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">onBooks</button></div>--><!--on books; partial fill-->
+						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">fillOrKill</button></div>--><!--all or nothing at price-->
+						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">immediateOrCancel</button></div>--><!--partial fill at price-->
+						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Limit</button></div>--><!--limit; sell no lower than, buy no higher than; up to price-->
+						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Market onBooks <i class="fa fa-question-circle"></i></button></div>
+						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Market fill Or Kill <i class="fa fa-question-circle"></i></button></div>
+						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Immediate or Cancel <i class="fa fa-question-circle"></i></button></div>
+						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Limit <i class="fa fa-question-circle"></i></button></div>
+					</div>
+
+					<!--array based; this loops-->
+					<div class="col-sm-12" style="padding:20px">
+						<p style="font-weight:800;">
+							<span>Sell {{newOrder.amountSet}} {{market}} for {{newOrder.amountSet1}} {{market1}} @ {{newOrder.amountSet1 / newOrder.amountSet}} {{market}} / {{market1}}</span>
+							<span> | </span>
+							<span>Buy {{newOrder.amountSet1}} {{market1}} for {{newOrder.amountSet}} {{market}} @ {{newOrder.amountSet / newOrder.amountSet1}} {{market1}} / {{market}}</span>
+					</div>
+
+					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
 		<div ng-repeat="order in orders">
 	        <div class="card">
 	            <div style="padding:16px">
@@ -75,12 +123,18 @@
 		</div>
 	</div>
 
+
+	<!--TODO: Partially Filled Orders -->
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-				<h2>Trades</h2>
+				<!--<h2>Completed Orders</h2>-->
+				<h2>Recent Trades</h2>
 		    </div>
 		</div>
+	</div>
+	
+	<div class="row">
 		<div ng-repeat="order in orders">
 	        <div class="card">
 	            <div style="padding:16px">
@@ -99,7 +153,61 @@
 	                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
 	                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
 	            </div>
+		        <div ng-show="order.showReply" class="card-footer">
+	                <form role="form" ng-submit="createPost(order)">
+	                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+	                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+	                </form>
+	            </div>
 	        </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Content</h2>
+		    </div>
+		</div>
+	</div>
+
+	<div class="row" ng-show="currentUser">
+	    <div class="card">
+	        <div style="padding:16px;">
+	            <div class="col-md-12">
+	                <form role="form" ng-submit="createPost(newPost)">
+	                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+	                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+	                </form>
+	                <div class="spacing-15"></div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<div class="row">
+		<div class="card" ng-repeat="post in posts">
+		    <div style="padding:16px">
+		        <div>
+		            <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
+		            <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{post.user.username}}">{{post.user.username}}</a>
+		            <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+		        </div> 
+		        <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+		    </div>
+		    <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		        <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+		        <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+		    </div>
+		    <!--TODO: NESTED -->
+		    <div ng-show="post.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+		        <form role="form" ng-submit="createPost(post)">
+		            <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+		        </form>
+		    </div>
 		</div>
 	</div>
 

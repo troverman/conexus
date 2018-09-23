@@ -133,4 +133,9 @@ angular.module( 'conexus.market', [
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
+    $scope.reply = function(item){
+        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.orders[index].showReply = !$scope.orders[index].showReply
+    };
+
 }]);

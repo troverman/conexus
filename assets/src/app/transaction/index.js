@@ -66,6 +66,11 @@ angular.module( 'conexus.transaction', [
         }
     };
 
+    $scope.reply = function(item){
+        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.posts[index].showReply = !$scope.posts[index].showReply
+    };
+
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
