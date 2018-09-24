@@ -67,14 +67,14 @@ angular.module( 'conexus.marketPair', [
         },
         series: [{
             type: 'area',
-            id: 'Bids',
-            name: 'Bids',
+            id: 'Asks',
+            name: 'asks',
             color: '#a94442',
             data: []
         },{
             type: 'area',
-            id:  'Asks',
-            name: 'Asks',
+            id:  'Bids',
+            name: 'bids',
             color: '#14b794',
             data: []
         }],
@@ -294,7 +294,8 @@ angular.module( 'conexus.marketPair', [
     for(x in mirrorOrderArray){
         $scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);
     }
-    $scope.bidAskChart.series[1].data.reverse()
+    $scope.bidAskChart.series[1].data.reverse();
+
     console.log($scope.bidAskChart.series[0].data, $scope.bidAskChart.series[1].data);
 
     $scope.createContent = function(post) {
