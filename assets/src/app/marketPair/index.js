@@ -66,13 +66,13 @@ angular.module( 'conexus.marketPair', [
             }
         },
         series: [{
-            type: 'column',
+            type: 'area',
             id: 'Bids',
             name: 'Bids',
             color: '#a94442',
             data: []
         },{
-            type: 'column',
+            type: 'area',
             id:  'Asks',
             name: 'Asks',
             color: '#14b794',
@@ -219,6 +219,7 @@ angular.module( 'conexus.marketPair', [
     $scope.trades = {};
 
     //TODO | COLOR FLIP?
+    //TODO | REFACTOR INTO orderBook {} | .bids, .asks
 
     //OrderBook ~ []
     //mapping(string => mapping(string => mapping(string => OrderMapping[]))) orderBook;
@@ -256,27 +257,45 @@ angular.module( 'conexus.marketPair', [
         }
     }
 
-    for(x in Object.keys(orderObj)){
-        var price = parseFloat(Object.keys(orderObj)[x]);
-        var amount = orderObj[Object.keys(orderObj)[x]];
-        console.log(price, amount)
-        $scope.bidAskChart.series[0].data.push([price, amount]);
+    var orderArray = [];
+    for (var item in orderObj) {
+        orderArray.push([parseFloat(item), orderObj[item]]);
     }
 
-    for(x in Object.keys(mirrorOrderObj)){
-        var price = parseFloat(Object.keys(mirrorOrderObj)[x]);
-        var amount = mirrorOrderObj[Object.keys(mirrorOrderObj)[x]];
-        console.log(price, amount)
-        $scope.bidAskChart.series[1].data.push([price, amount]);
+    var mirrorOrderArray = [];
+    for (var item in mirrorOrderObj) {
+        mirrorOrderArray.push([parseFloat(item), mirrorOrderObj[item]]);
     }
 
-    $scope.bidAskChart.series[0].data = $scope.bidAskChart.series[0].data.sort(function(a,b) {return (a[0] > b[0]) ? 1 : ((b[0] > a[0]) ? -1 : 0);} ); 
-    $scope.bidAskChart.series[1].data = $scope.bidAskChart.series[1].data.sort(function(a,b) {return (a[0] > b[0]) ? 1 : ((b[0] > a[0]) ? -1 : 0);} ); 
+    //TODO SUM RENDER
+    //TODO SORT OBJECTS
 
-    console.log(orderObj, mirrorOrderObj);
+    orderArray = orderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
+    mirrorOrderArray = mirrorOrderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
 
-    console.log($scope.bidAskChart.series[0].data);
-    console.log($scope.bidAskChart.series[1].data)
+    console.log(mirrorOrderArray)
+
+    $scope.sumOrders = [];
+    orderArray.reduce(function(a,b,i) {
+        return $scope.sumOrders[i] = parseFloat(a) + parseFloat(b[1]);
+    }, 0);
+
+    $scope.sumMirrorOrders = [];
+    mirrorOrderArray.reverse().reduce(function(a,b,i) {
+        return $scope.sumMirrorOrders[i] = parseFloat(a) + parseFloat(b[1]);
+    }, 0);
+
+    console.log(mirrorOrderArray, $scope.sumMirrorOrders)
+
+    for(x in orderArray){
+        $scope.bidAskChart.series[0].data.push([parseFloat(orderArray[x][0]), $scope.sumOrders[x]]);
+    }
+
+    for(x in mirrorOrderArray){
+        $scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);
+    }
+    $scope.bidAskChart.series[1].data.reverse()
+    console.log($scope.bidAskChart.series[0].data, $scope.bidAskChart.series[1].data);
 
     $scope.createContent = function(post) {
         if($scope.currentUser){
