@@ -67,15 +67,15 @@ angular.module( 'conexus.marketPair', [
         },
         series: [{
             type: 'area',
-            id: 'Asks',
-            name: 'asks',
-            color: '#a94442',
+            id: 'asks',
+            name: 'Asks',
+            color: '#14b794',
             data: []
         },{
             type: 'area',
-            id:  'Bids',
-            name: 'bids',
-            color: '#14b794',
+            id:  'bids',
+            name: 'Bids',
+            color: '#a94442',
             data: []
         }],
         credits:{enabled:false},
