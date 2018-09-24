@@ -4,9 +4,12 @@
 
 	<div class="row">
 		<div class="card">
-			<div style="padding:16px;">
+			<div class="col-md-10" style="padding:16px;">
 				<h1><a href="market/{{market}}">{{market}}</a> | <a href="market/{{market1}}">{{market1}}</a></h1>
-				<p style="color:gray">47021 tokens in circulation | 452451 token trade volume</p>
+				<p style="color:gray">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>
+			</div>
+			<div class="col-md-2" style="padding:16px;text-align:right">
+				<a href="market/{{market1}}/{{market}}"><i class="fa fa-refresh"></i></a>
 			</div>
 		</div>
 	</div>

@@ -45,6 +45,7 @@ contract multidimensionalMarket {
     //\\//\\//\\//\\//\\
 
     //CREATE ORDER
+    //ACTUAL CALL IS MORE DATA TO COMP FOR EVM CALC | CUSTOM MATCH BTW DATA 
     function createOrder(
         address _member,
         string _type, 
@@ -68,11 +69,13 @@ contract multidimensionalMarket {
         //THIS IS ORDERS AT EXACT VALUE.. ~ MAY WANT TO STORE LIST ID..
         //POTIENTALLY CHECK ORDER SETS BELOW PRICE THRESHOLD | MATCHING BUFFER 
         //TODO: FUNCTION --> GET ORDERS.
+
+        //VALUE SET | PRICE.. 
         OrderMapping[] storage ordersOnBook = orderBook[_idSet1][_idSet2][_valueSet1];
         
         //FULFIL ORDER FROM ORDER ON BOOK
         //TO PROCESS ORDER --> LOOK AT ORDER TYPE -- fillOrKill | ImmediateOrCancel | onBooks
-        //THEN PLACE REST ON ORDERBOOK.
+        //THEN PLACE REST ON ORDERBOOK. | LOOP GET PRICE -> STRING 
         //ORDERCREATOR BALANCE --> USERONBOOK BALANCE | USERONBOOK ESKROW --> TOKEN BALANCE
 
         //IF NO ORDERS ON BOOK | ESKROW TRANSFER | CREATE ORDER
@@ -106,6 +109,7 @@ contract multidimensionalMarket {
         else if(ordersOnBook.length > 0) {
 
             //LOOP THRU ORDERBOOK AT PRICE ASKED | THIS IS NOT CROSS DIMENSIONAL | 'MATCHING ENGINE'
+            //NEEDS TO BE RESURISVE LOOK UP 
             for (uint z = 0; z < ordersOnBook.length; z++){
                 string[] memory valueSet = split(ordersOnBook[z].valueSet);
 

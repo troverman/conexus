@@ -1250,9 +1250,12 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
+    "			<div class=\"col-md-10\" style=\"padding:16px;\">\n" +
     "				<h1><a href=\"market/{{market}}\">{{market}}</a> | <a href=\"market/{{market1}}\">{{market1}}</a></h1>\n" +
-    "				<p style=\"color:gray\">47021 tokens in circulation | 452451 token trade volume</p>\n" +
+    "				<p style=\"color:gray\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-2\" style=\"padding:16px;text-align:right\">\n" +
+    "				<a href=\"market/{{market1}}/{{market}}\"><i class=\"fa fa-refresh\"></i></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +

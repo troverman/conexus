@@ -23,9 +23,9 @@ angular.module( 'conexus.market', [
     $scope.stateParams = $stateParams;
 
     $scope.market = {
-        title:$scope.stateParams.id,
-        circulation:Math.floor(Math.random()*1000000),
-        marketCount:Math.floor(Math.random()*10000),
+        title: $scope.stateParams.id,
+        circulation: Math.floor(Math.random()*1000000),
+        marketCount: Math.floor(Math.random()*10000),
     };
 
     $scope.renderRandom = function (){
@@ -33,7 +33,6 @@ angular.module( 'conexus.market', [
         if (random>0.5){random = Math.floor(Math.random()*10)}
         else{random = -Math.floor(Math.random()*10)}
         return random;
-
     };
 
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
