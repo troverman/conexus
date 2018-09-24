@@ -3315,7 +3315,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	                                {{item.title}}\n" +
     "	                            </a>\n" +
     "	                        </h3>\n" +
-    "	                        <p style=\"color:gray;font-style:italic;\">{{item.description}}</p>\n" +
+    "                        <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "	                        <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +

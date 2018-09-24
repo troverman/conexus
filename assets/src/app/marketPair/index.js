@@ -295,6 +295,7 @@ angular.module( 'conexus.marketPair', [
         $scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);
     }
     $scope.bidAskChart.series[1].data.reverse();
+    $scope.bidAskChart.series.reverse();
 
     console.log($scope.bidAskChart.series[0].data, $scope.bidAskChart.series[1].data);
 
