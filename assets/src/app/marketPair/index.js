@@ -66,15 +66,6 @@ angular.module( 'conexus.marketPair', [
         credits:{enabled:false},
     };
 
-    for(var i=-1000;i<1000;i++){
-        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);$scope.bidAskChart.series[0].data.push([i+100000,0])}
-        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);$scope.bidAskChart.series[1].data.push([i+100000,0])}
-
-        //[1000,1000000],[100,10000],[10,1000],[1,100],[200,2],[220,1],[30,1]
-        //$scope.bidAskChart.series[0].data.push([i,i*i])
-        //$scope.bidAskChart.series[1].data.push([i,i*i])
-    }
-
 	$scope.chart = {
         chart: {
             zoomType: 'x',
@@ -83,21 +74,31 @@ angular.module( 'conexus.marketPair', [
             id: 'ExchangePrice',
             type: 'spline',
             name: 'Exchange Price ' + $stateParams.id + ' | ' + $stateParams.id1,
-            data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40]
+            data: []
         },
         {
             id: 'ExchangeVolume',
             type: 'column',
             name: 'Volume ' + $stateParams.id + ' | ' + $stateParams.id1,
-            data: [7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7, 12, 5, 3, 6, 11, 8, 10, 7]
-        }],
+            data: []
+        }/*, {
+            type: 'sma',
+            linkedTo: 'ExchangePrice',
+            params: {
+                period: 14
+            }
+        }*/],
         title: {
             text: ''
         },
         xAxis: {
-            title: {
-                text: null
-            }
+            type: 'datetime',
+            currentMin: 0,
+            currentMax: 20,
+            title: null,
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey'
         },
         yAxis: {
             title: {
@@ -106,6 +107,7 @@ angular.module( 'conexus.marketPair', [
         },
         credits:{enabled:false},
     };
+
     $scope.chartMap = {
         chart: {
             polar: true,
@@ -145,6 +147,42 @@ angular.module( 'conexus.marketPair', [
         },
         credits:{enabled:false},
     };
+
+    for(var i=-1000;i<1000;i++){
+        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);$scope.bidAskChart.series[0].data.push([i+100000,0])}
+        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);$scope.bidAskChart.series[1].data.push([i+100000,0])}
+
+        //[1000,1000000],[100,10000],[10,1000],[1,100],[200,2],[220,1],[30,1]
+        //$scope.bidAskChart.series[0].data.push([i,i*i])
+        //$scope.bidAskChart.series[1].data.push([i,i*i])
+    }
+
+    for(var i=0;i<1000;i++){
+        var date = new Date();
+        date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+        if (i == 0){
+            $scope.chart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
+            $scope.chart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
+        }
+        else{
+            var random = 1.21*Math.random();
+            var random1 = Math.random();
+            if (random > random1){
+                console.log(random);
+                $scope.chart.series[0].data.push([date.getTime(),$scope.chart.series[0].data[i-1][1]+Math.floor(3*Math.random())])
+                $scope.chart.series[1].data.push([date.getTime(),20*Math.random()])
+            }
+            else{
+                $scope.chart.series[0].data.push([date.getTime(),$scope.chart.series[0].data[i-1][1]-Math.floor(3*Math.random())])
+                $scope.chart.series[1].data.push([date.getTime(),20*Math.random()])
+            }
+        }
+    }
+
+    if ($scope.market.split(',').length > 0 || $scope.market1.split(',').length > 0){
+        //$scope.chartMap.xAxis.categories.push()
+        //$scope.chartMap.series[0].data.push()
+    }
 
 
     $scope.newOrder = {};

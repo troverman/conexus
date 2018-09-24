@@ -21,6 +21,21 @@ angular.module( 'conexus.market', [
 .controller( 'MarketCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', function MarketController( $scope, $stateParams, config, OrderModel, orders, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
+
+    $scope.market = {
+        title:$scope.stateParams.id,
+        circulation:Math.floor(Math.random()*1000000),
+        marketCount:Math.floor(Math.random()*10000),
+    };
+
+    $scope.renderRandom = function (){
+        var random = Math.random();
+        if (random>0.5){random = Math.floor(Math.random()*10)}
+        else{random = -Math.floor(Math.random()*10)}
+        return random;
+
+    };
+
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 	$scope.chart = {
         chart: {

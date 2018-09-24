@@ -5,8 +5,8 @@
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-				<h1>{{stateParams.id}} MARKETS</h1>
-				<p style="color:gray">{{stateParams.id}} | 1253 markets | 53233 tokens in circulation </p>
+				<h1>{{market.title}} MARKETS</h1>
+				<p style="color:gray">{{stateParams.id}} | {{market.marketCount}} markets | {{market.circulation}} tokens in circulation </p>
 			</div>
 		</div>
 	</div>
@@ -30,6 +30,7 @@
 			<div class="col-md-6" style="max-height:500px;overflow:scroll">
 			    <div class="card" ng-repeat="market in markets">
 			    	<div style="padding:16px;">
+						<!--<p style="float:right">{{renderRandom()}}%</p>-->
 			    		<a href="market/{{stateParams.id}}/{{market}}"><h4>{{market}}</h4></a>
 			    		<p style="color:gray">{{stateParams.id}}/{{market}} markets</p>
 					</div>

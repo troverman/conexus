@@ -1016,8 +1016,8 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<h1>{{stateParams.id}} MARKETS</h1>\n" +
-    "				<p style=\"color:gray\">{{stateParams.id}} | 1253 markets | 53233 tokens in circulation </p>\n" +
+    "				<h1>{{market.title}} MARKETS</h1>\n" +
+    "				<p style=\"color:gray\">{{stateParams.id}} | {{market.marketCount}} markets | {{market.circulation}} tokens in circulation </p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1041,6 +1041,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div class=\"col-md-6\" style=\"max-height:500px;overflow:scroll\">\n" +
     "			    <div class=\"card\" ng-repeat=\"market in markets\">\n" +
     "			    	<div style=\"padding:16px;\">\n" +
+    "						<!--<p style=\"float:right\">{{renderRandom()}}%</p>-->\n" +
     "			    		<a href=\"market/{{stateParams.id}}/{{market}}\"><h4>{{market}}</h4></a>\n" +
     "			    		<p style=\"color:gray\">{{stateParams.id}}/{{market}} markets</p>\n" +
     "					</div>\n" +
@@ -1288,7 +1289,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "					<div class=\"col-sm-12\" style=\"padding:20px;\">\n" +
     "						<p ng-show=\"!inverted\" style=\"font-weight:800;\">Sell {{market}} for {{market1}} | Buy {{market1}} with {{market}}</p>\n" +
-    "						<p ng-show=\"inverted\" style=\"font-weight:800;\">Buy {{market}} with {{market1}} |  Sell {{market1}} with {{market}}</p>\n" +
+    "						<p ng-show=\"inverted\" style=\"font-weight:800;\">Buy {{market}} with {{market1}} | Sell {{market1}} with {{market}}</p>\n" +
     "					</div>\n" +
     "\n" +
     "					<!--invert | buy-->\n" +
@@ -1310,7 +1311,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "					</div>\n" +
     "\n" +
     "					<!--option tokens string inferance+time+option-->\n" +
-    "					<!--sell vs buys; adding liquidy to the market; onBooks;-->\n" +
+    "					<!--DERIVITATIVES; ON MINT TYPE | IE UNIVERSAL TRADE ON MINT; one way-->\n" +
     "\n" +
     "					<!--\n" +
     "					Market Orders;@ price | fok; ioc; onbook;\n" +
@@ -1318,7 +1319,6 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "					-->\n" +
     "\n" +
     "					<!--array based;; so multiD stops.. a gradiation in dimesnions-->\n" +
-    "\n" +
     "					<div class=\"col-sm-12\" style=\"marking:10px\">\n" +
     "						<!--<div class=\"col-sm-3\"><button type=\"submit\" class=\"btn btn-default log-btn\">onBooks</button></div>--><!--on books; partial fill-->\n" +
     "						<!--<div class=\"col-sm-3\"><button type=\"submit\" class=\"btn btn-default log-btn\">fillOrKill</button></div>--><!--all or nothing at price-->\n" +
@@ -2389,11 +2389,11 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<div class=\"imageContainerSmall\">\n" +
     "<!--<div class=\"imageContainerSmall\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">-->\n" +
     "    <div class=\"imageContainerSmallDiv\">  \n" +
-    "        <h1 style=\"text-align:left\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/>\n" +
-    "        {{project.title}}\n" +
-    "        <span ng-show=\"project.parent\"> | \n" +
-    "            <a style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a>\n" +
-    "        </span> \n" +
+    "        <h1 style=\"text-align:left;white-space:nowrap\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/>\n" +
+    "            {{project.title}}\n" +
+    "            <span ng-show=\"project.parent\"> | \n" +
+    "                <a style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a>\n" +
+    "            </span> \n" +
     "        </h1>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -3020,52 +3020,53 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
     "<!--FILTERS AND SEARCH HERE-->\n" +
-    "\n" +
-    "<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button><br><br>\n" +
-    "<div class=\"card\" ng-show=\"newTaskToggleVar\">\n" +
-    "    <div style=\"padding:10px;\">\n" +
-    "		<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
-    "			<div class=\"form-group\">\n" +
-    "				<input placeholder=\"Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				<input placeholder=\"Tags\" type=\"text\" ng-model=\"newTask.tags\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "                <text-angular placeholder=\"Content\" ng-model=\"newTask.content\" ta-toolbar=\"''\"></text-angular>\n" +
-    "			</div>\n" +
-    "			<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
-    "		</form>\n" +
+    "<div class=\"row\">\n" +
+    "	<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button><br><br>\n" +
+    "	<div class=\"card\" ng-show=\"newTaskToggleVar\">\n" +
+    "	    <div style=\"padding:10px;\">\n" +
+    "			<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
+    "				<div class=\"form-group\">\n" +
+    "					<input placeholder=\"Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Tags\" type=\"text\" ng-model=\"newTask.tags\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "	                <text-angular placeholder=\"Content\" ng-model=\"newTask.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "				</div>\n" +
+    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
+    "			</form>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
-    "<div ng-repeat=\"task in tasks\">\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "			<div class=\"row\">\n" +
-    "				<div class=\"col-sm-10\">\n" +
-    "					<h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
-    "					<p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
-    "					<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
-    "					<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
-    "				</div>\n" +
-    "				<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
-    "					<!--<a href=\"task/{{task.id}}\"><button type=\"submit\" class=\"btn btn-default log-btn\">Start Work</button></a>-->\n" +
-    "					<h4>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></h4>\n" +
-    "					<!--<p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>-->\n" +
+    "<div class=\"row\">\n" +
+    "	<div ng-repeat=\"task in tasks\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<div class=\"row\">\n" +
+    "					<div class=\"col-sm-10\">\n" +
+    "						<h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
+    "						<p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "	                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
+    "						<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
+    "						<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
+    "					</div>\n" +
+    "					<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
+    "						<h4>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></h4>\n" +
+    "						<p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
+    "			<div class=\"card-footer\">\n" +
+    "				<a href=\"task/{{task.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "				<a href=\"task/{{task.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "				<a href=\"#\" ng-click=\"reply(task)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "				<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{task.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "			</div>\n" +
+    "			<div ng-show=\"task.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "	            <form role=\"form\" ng-submit=\"createPost(task)\">\n" +
+    "	                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "	                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "	            </form>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
-    "		<div class=\"card-footer\">\n" +
-    "			<a href=\"task/{{task.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "			<a href=\"task/{{task.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "			<a href=\"#\" ng-click=\"reply(task)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{task.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "		</div>\n" +
-    "		<div ng-show=\"task.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "            <form role=\"form\" ng-submit=\"createPost(task)\">\n" +
-    "                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "            </form>\n" +
-    "        </div>\n" +
     "	</div>\n" +
     "</div>");
 }]);
@@ -3637,9 +3638,8 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "						<h4>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></h4>\n" +
     "						<p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "						<!--TODO: DO IT FOR REAL-->\n" +
+    "						<!--TODO: DO IT FOR REAL | MARKET LOOKUP-->\n" +
     "						<!--<h4 ng-show=\"!task.completeBountySet\"><a href=\"market/{{task.id}}\">Create Liquidity</a></h4>-->\n" +
-    "						<!--<p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>-->\n" +
     "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
