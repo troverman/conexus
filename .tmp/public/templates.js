@@ -173,15 +173,32 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			    <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
     "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "			    </div>\n" +
-    "			    <div class=\"member-card-info\">\n" +
+    "\n" +
+    "			    <a href=\"#\" style=\"float:right\">\n" +
+    "					<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "						<p>Update Cover <i class=\"fa fa-upload\"></i></p>\n" +
+    "					</div>\n" +
+    "				</a>\n" +
+    "				<div style=\"clear:both\"></div>\n" +
+    "\n" +
+    "			    <div class=\"member-card-info\" style=\"height:auto\">\n" +
     "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
     "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
     "			        <p style=\"color:gray\">total reputation | {{currentUser.totalWork}}</p>\n" +
+    "\n" +
+    "			        <br><br>\n" +
+    "			        <a href=\"#\">\n" +
+    "						<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
+    "							<p>Update Avatar  <i class=\"fa fa-upload\"></i></p>\n" +
+    "						</div>\n" +
+    "					</a>\n" +
+    "\n" +
     "			    </div>\n" +
     "			    <div class=\"member-card-social\">\n" +
-    "			        <a ng-show=\"currentUser.socialAccounts.facebook.profileUrl\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
-    "			        <a ng-show=\"currentUser.socialAccounts.twitter.profileUrl\" href=\"{{currentUser.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
-    "			        <a ng-show=\"currentUser.socialAccounts.google.profileUrl\" href=\"{{currentUser.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "			        <a ng-show=\"true\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "			        <a ng-show=\"true\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-instagram\"></i></a>\n" +
+    "			        <a ng-show=\"true\" href=\"{{currentUser.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "			        <a ng-show=\"true\" href=\"{{currentUser.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
     "			    </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -189,71 +206,105 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px\">\n" +
     "\n" +
-    "					<h4>Balance Lookup</h4>\n" +
-    "		       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "		            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "		            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "			                <a href=\"#\">\n" +
-    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			                </a>\n" +
-    "						</div>\n" +
-    "		        	</form>\n" +
-    "\n" +
-    "		        	<h4>Reputation Lookup</h4>\n" +
-    "		       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "		            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "		            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "			                <a href=\"#\">\n" +
-    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			                </a>\n" +
-    "						</div>\n" +
-    "		        	</form>\n" +
-    "\n" +
-    "					<p>Tokens | Peer Contrubution</p>\n" +
-    "					<a href=\"#\">\n" +
-    "						<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "							<h5>Update Avatar</h5>\n" +
-    "						</div>\n" +
-    "					</a>\n" +
-    "					<a href=\"#\">\n" +
-    "						<div ngf-accept=\"'image/*'\" ngf-drop ngf-select=\"uploadAvatar($file)\" ng-model=\"file\" class=\"drop-box\" ngf-drag-over-class=\"dragover\" ngf-allow-dir=\"true\">\n" +
-    "							<h5>Update Cover</h5>\n" +
-    "						</div>\n" +
-    "					</a>\n" +
+    "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\"></a></span>\n" +
     "					<h4>{{currentUser.email}}</h4>\n" +
+    "					<p><a href=\"/projects\">25 Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">23 Followers</a> | <a href=\"/member/{{currentUser.username}}/followers\">22 Following</a>\n" +
     "\n" +
+    "					<div class=\"row\">\n" +
+    "						<div class=\"col-sm-6\">\n" +
+    "							<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x8f50FB12E80E788cC0141b06e84a4a02357431d0</span></h5>\n" +
+    "				       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "				            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
+    "				            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "					                <a href=\"#\">\n" +
+    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "					                </a>\n" +
+    "								</div>\n" +
+    "				        	</form>\n" +
+    "				        </div>\n" +
+    "				        <div class=\"col-sm-6\">\n" +
+    "							<h5>Reputation Lookup <span style=\"font-size:11px;color:gray\">0x90C11Cd017582766A89155B7b90f11aF67fD2A2A</span> </h5>\n" +
+    "				       		<form style=\"display:flex;flex-direction:row;\">\n" +
+    "				            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
+    "				            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "					                <a href=\"#\">\n" +
+    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
+    "					                </a>\n" +
+    "								</div>\n" +
+    "				        	</form>\n" +
+    "				        </div>\n" +
+    "					</div>\n" +
+    "\n" +
+    "					<h5>Peer Contrubution</h5>\n" +
+    "					<p style=\"font-size:11px\">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>\n" +
+    "					<p style=\"font-size:11px\">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>\n" +
+    "\n" +
+    "			\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px\">\n" +
-    "			<h3>Identification Information</h3>\n" +
-    "			<p>Human Proof ID | ON</p>\n" +
+    "    <div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h3>Information</h3>\n" +
+    "				<h4>{{currentUser.email}}</h4>\n" +
+    "				<p>Human Proof ID | ON</p>\n" +
+    "				<p>Verification | Goverment ID | Social Accounts | BioMetric Data</p>\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"editAccountToggle()\">Edit Account</button>\n" +
+    "			</div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"editAccountToggleVar\">\n" +
+    "		<div class=\"card\">\n" +
+    "		    <div style=\"padding:16px;\">\n" +
+    "				<form role=\"form\" ng-submit=\"editAccount()\">\n" +
+    "					<input placeholder=\"Email\" type=\"text\" ng-model=\"newAccountInformation.email\" class=\"form-control\">\n" +
+    "					<input placeholder=\"First Name\" type=\"text\"  ng-model=\"newAccountInformation.firstName\" class=\"form-control\">\n" +
+    "					<input placeholder=\"Last Name\" type=\"text\" ng-model=\"newAccountInformation.lastName\" class=\"form-control\">\n" +
+    "					<input placeholder=\"Address\" type=\"text\" ng-model=\"newAccountInformation.address\" class=\"form-control\">\n" +
+    "					<button type=\"submit\" class=\"btn btn-default log-btn\">Save</button>\n" +
+    "				</form>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h3>Settings</h3>\n" +
+    "				<p>GPS Tracking | ON</p>\n" +
+    "				<p>Notifications | ON</p>\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
     "    </div>\n" +
     "\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px\">\n" +
-    "			<h3>Settings</h3>\n" +
-    "			<p>GPS Tracking | ON</p>\n" +
-    "			<p>Notifications | ON</p>\n" +
-    "		</div>\n" +
+    "    <div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h3>Connected Accounts & Wallets</h3>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/twitter\">Twitter</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/facebook\">Facebook</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">Fitbit</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">Steemit</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">BTC</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">ETH</a></button>\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">LTC</a></button>\n" +
+    "				<!--TODO: tokenized apps.. connect in..-->\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
     "    </div>\n" +
     "\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px\">\n" +
-    "			<h3>Connected Accounts</h3>\n" +
-    "			<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
-    "			<button class=\"btn btn-default\"><a href=\"/auth/twitter\">Twitter</a></button>\n" +
-    "			<button class=\"btn btn-default\"><a href=\"/auth/facebook\">Facebook</a></button>\n" +
-    "			<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">Fitbit</a></button>\n" +
-    "			<!--TODO: tokenized apps.. connect in..-->\n" +
-    "		</div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "	<button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"\">Edit Account</button>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "</div>\n" +
@@ -601,7 +652,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"row\">\n" +
     "		<div ng-repeat=\"item in activity\">\n" +
     "			<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
-    "	            <div style=\"padding:16px;\">\n" +
+    "		        <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "					<div>\n" +
     "						<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
@@ -641,7 +692,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "                    	<div class=\"col-sm-1 col-xs-2\">\n" +
     "	                        <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "	                    </div>\n" +
-    "	                    <div class=\"col-sm-9 col-xs-10\">\n" +
+    "	                    <div class=\"col-sm-10 col-xs-10\">\n" +
     "	                        <h3 style=\"margin-top:0px\">\n" +
     "	                            <a href=\"project/{{item.urlTitle}}\">\n" +
     "	                                {{item.title}}\n" +
@@ -906,7 +957,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		                    <div class=\"col-sm-1 col-xs-2\">\n" +
     "		                        <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		                    </div>\n" +
-    "		                    <div class=\"col-sm-9 col-xs-10\">\n" +
+    "		                    <div class=\"col-sm-10 col-xs-10\">\n" +
     "		                        <h3 style=\"margin-top:0px\">\n" +
     "		                            <a href=\"project/{{item.urlTitle}}\">\n" +
     "		                                {{item.title}}\n" +
@@ -1773,7 +1824,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "    <div ng-repeat=\"item in activity\">\n" +
     "\n" +
     "        <div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
+    "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
@@ -2246,10 +2297,22 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
-    "        <li class=\"nav-links\" ng-show=\"currentUser\">\n" +
-    "          <a href=\"/account\">\n" +
-    "            <!--<img style=\"height:24px;width:24px;margin-left:5px;\" class=\"card-avatar\" ng-src=\"{{currentUser.avatarUrl}}\" src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\">--> {{currentUser.username}} <i class=\"fa fa-angle-down\"></i></a>\n" +
-    "          </a>\n" +
+    "        <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
+    "            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                {{currentUser.username}} <span class=\"fa fa-angle-down\"></span>\n" +
+    "            </a>\n" +
+    "            <ul class=\"dropdown-menu\">\n" +
+    "                <li>\n" +
+    "                    <a style=\"color:black!important\" href=\"/member/{{currentUser.username}}\">\n" +
+    "                        <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
+    "                    </a>\n" +
+    "                </li>\n" +
+    "                <li><a style=\"color:black!important\" href=\"/account\">account</a></li>\n" +
+    "                <li><a style=\"color:black!important\" href=\"#\">0 notifications</a></li>\n" +
+    "                <!--<li><a style=\"color:black!important\" href=\"#\">settings</a></li>-->\n" +
+    "                <li role=\"separator\" class=\"divider\"></li>\n" +
+    "                <li><a style=\"color:black!important\" href=\"/logout\">log out</a></li>\n" +
+    "            </ul>\n" +
     "        </li>\n" +
     "        <!--<li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/logout\">Logout</a></li>-->\n" +
     "        <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
@@ -2531,7 +2594,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "    <div ng-repeat=\"item in activity\">\n" +
     "\n" +
     "        <div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
+    "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +

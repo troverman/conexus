@@ -16,7 +16,19 @@ angular.module( 'conexus.account', [
 .controller( 'AccountCtrl', ['$location', '$scope', 'config', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $scope, config, titleService, Upload, UserModel ) {
 	titleService.setTitle('Account | CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
+    $scope.editAccountToggleVar = false;
+    $scope.newAccountInformation = $scope.currentUser;
 	if(!$scope.currentUser){$location.path('/')}
+
+    $scope.editAccount = function () {
+        //UserModel.update($scope.newAccountInformation).then(function(){
+            //DONE
+        //});
+    };
+
+    $scope.editAccountToggle = function () {
+        $scope.editAccountToggleVar = $scope.editAccountToggleVar ? false : true;
+    };
 		
 	$scope.uploadAvatar = function(file){
         $scope.avatarLoading = true;
@@ -45,6 +57,6 @@ angular.module( 'conexus.account', [
             avatarUrl: $scope.currentUser.avatarUrl,
         };
         return UserModel.update(model);
-    }
+    };
 
 }]);

@@ -7,15 +7,32 @@
 			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
 			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
 			    </div>
-			    <div class="member-card-info">
+
+			    <a href="#" style="float:right">
+					<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+						<p>Update Cover <i class="fa fa-upload"></i></p>
+					</div>
+				</a>
+				<div style="clear:both"></div>
+
+			    <div class="member-card-info" style="height:auto">
 			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
 			        <p style="color:gray">{{currentUser.status}} online</p>
 			        <p style="color:gray">total reputation | {{currentUser.totalWork}}</p>
+
+			        <br><br>
+			        <a href="#">
+						<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
+							<p>Update Avatar  <i class="fa fa-upload"></i></p>
+						</div>
+					</a>
+
 			    </div>
 			    <div class="member-card-social">
-			        <a ng-show="currentUser.socialAccounts.facebook.profileUrl" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
-			        <a ng-show="currentUser.socialAccounts.twitter.profileUrl" href="{{currentUser.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
-			        <a ng-show="currentUser.socialAccounts.google.profileUrl" href="{{currentUser.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
+			        <a ng-show="true" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
+			        <a ng-show="true" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-instagram"></i></a>
+			        <a ng-show="true" href="{{currentUser.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
+			        <a ng-show="true" href="{{currentUser.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
 			    </div>
 			</div>
 		</div>
@@ -23,71 +40,105 @@
 			<div class="card">
 				<div style="padding:16px">
 
-					<h4>Balance Lookup</h4>
-		       		<form style="display:flex;flex-direction:row;">
-		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
-		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-			                <a href="#">
-			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-			                </a>
-						</div>
-		        	</form>
-
-		        	<h4>Reputation Lookup</h4>
-		       		<form style="display:flex;flex-direction:row;">
-		            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
-		            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-			                <a href="#">
-			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-			                </a>
-						</div>
-		        	</form>
-
-					<p>Tokens | Peer Contrubution</p>
-					<a href="#">
-						<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-							<h5>Update Avatar</h5>
-						</div>
-					</a>
-					<a href="#">
-						<div ngf-accept="'image/*'" ngf-drop ngf-select="uploadAvatar($file)" ng-model="file" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true">
-							<h5>Update Cover</h5>
-						</div>
-					</a>
+					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}"></a></span>
 					<h4>{{currentUser.email}}</h4>
+					<p><a href="/projects">25 Projects</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
 
+					<div class="row">
+						<div class="col-sm-6">
+							<h5>Balance Lookup <span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02357431d0</span></h5>
+				       		<form style="display:flex;flex-direction:row;">
+				            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Dimension">
+				            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+					                <a href="#">
+					                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+					                </a>
+								</div>
+				        	</form>
+				        </div>
+				        <div class="col-sm-6">
+							<h5>Reputation Lookup <span style="font-size:11px;color:gray">0x90C11Cd017582766A89155B7b90f11aF67fD2A2A</span> </h5>
+				       		<form style="display:flex;flex-direction:row;">
+				            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Dimension">
+				            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+					                <a href="#">
+					                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
+					                </a>
+								</div>
+				        	</form>
+				        </div>
+					</div>
+
+					<h5>Peer Contrubution</h5>
+					<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
+					<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
+
+			
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="card">
-		<div style="padding:16px">
-			<h3>Identification Information</h3>
-			<p>Human Proof ID | ON</p>
+    <div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<h3>Information</h3>
+				<h4>{{currentUser.email}}</h4>
+				<p>Human Proof ID | ON</p>
+				<p>Verification | Goverment ID | Social Accounts | BioMetric Data</p>
+			</div>
+	    </div>
+	</div>
+
+    <div class="row">
+		<div class="card">
+			<div style="padding:16px;">
+				<button class="btn btn-default log-btn" ng-click="editAccountToggle()">Edit Account</button>
+			</div>
 		</div>
+	</div>
+
+	<div class="row" ng-show="editAccountToggleVar">
+		<div class="card">
+		    <div style="padding:16px;">
+				<form role="form" ng-submit="editAccount()">
+					<input placeholder="Email" type="text" ng-model="newAccountInformation.email" class="form-control">
+					<input placeholder="First Name" type="text"  ng-model="newAccountInformation.firstName" class="form-control">
+					<input placeholder="Last Name" type="text" ng-model="newAccountInformation.lastName" class="form-control">
+					<input placeholder="Address" type="text" ng-model="newAccountInformation.address" class="form-control">
+					<button type="submit" class="btn btn-default log-btn">Save</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+    <div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<h3>Settings</h3>
+				<p>GPS Tracking | ON</p>
+				<p>Notifications | ON</p>
+			</div>
+	    </div>
     </div>
 
-	<div class="card">
-		<div style="padding:16px">
-			<h3>Settings</h3>
-			<p>GPS Tracking | ON</p>
-			<p>Notifications | ON</p>
-		</div>
+    <div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<h3>Connected Accounts & Wallets</h3>
+				<button class="btn btn-default"><a href="/auth/google">Google</a></button>
+				<button class="btn btn-default"><a href="/auth/twitter">Twitter</a></button>
+				<button class="btn btn-default"><a href="/auth/facebook">Facebook</a></button>
+				<button class="btn btn-default"><a href="/auth/fitbit">Fitbit</a></button>
+				<button class="btn btn-default"><a href="/auth/steemit">Steemit</a></button>
+				<button class="btn btn-default"><a href="/auth/steemit">BTC</a></button>
+				<button class="btn btn-default"><a href="/auth/steemit">ETH</a></button>
+				<button class="btn btn-default"><a href="/auth/steemit">LTC</a></button>
+				<!--TODO: tokenized apps.. connect in..-->
+			</div>
+	    </div>
     </div>
 
-	<div class="card">
-		<div style="padding:16px">
-			<h3>Connected Accounts</h3>
-			<button class="btn btn-default"><a href="/auth/google">Google</a></button>
-			<button class="btn btn-default"><a href="/auth/twitter">Twitter</a></button>
-			<button class="btn btn-default"><a href="/auth/facebook">Facebook</a></button>
-			<button class="btn btn-default"><a href="/auth/fitbit">Fitbit</a></button>
-			<!--TODO: tokenized apps.. connect in..-->
-		</div>
-    </div>
-
-	<button style="width:100%;" class="btn btn-default log-btn" ng-click="">Edit Account</button>
 	<div class="spacing-10"></div>
 
 </div>
