@@ -25,8 +25,12 @@
         <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
         <li class="nav-links"><a href="/discover">Discover</a></li>
         <li class="nav-links"><a href="/market">Market</a></li>
-        <li class="nav-links" ng-show="currentUser"><a href="/account">{{currentUser.username}}</a></li>
-        <li class="nav-links" ng-show="currentUser"><a href="/logout">Logout</a></li>
+        <li class="nav-links" ng-show="currentUser">
+          <a href="/account">
+            <!--<img style="height:24px;width:24px;margin-left:5px;" class="card-avatar" ng-src="{{currentUser.avatarUrl}}" src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png">--> {{currentUser.username}} <i class="fa fa-angle-down"></i></a>
+          </a>
+        </li>
+        <!--<li class="nav-links" ng-show="currentUser"><a href="/logout">Logout</a></li>-->
         <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
         <li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>
         <li class="divider-vertical"></li>

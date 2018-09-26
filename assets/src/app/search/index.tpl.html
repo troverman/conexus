@@ -11,7 +11,7 @@
 		<div class="spacing-25"></div>
 		<form role="form" >
 			<div class="card">
-				<input type="text" class="form-control" ng-keyup="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
+				<input type="text" class="form-control" ng-click="keyPress(searchValue)" ng-model="searchValue" placeholder="{{searchQuery}}">
 			</div>
 		</form>
 		<div class="spacing-25"></div>
@@ -21,12 +21,10 @@
 		<ul style="padding:0px;" class="member-tabs">
 			<li class="active"><a href="">Activity</a></li>
 			<li><a href="/discover">Content</a></li>
-			<li><a href="/">Members</a></li>
 			<li><a href="/market">Orders</a></li>
 			<li><a href="/projects">Projects</a></li>
 			<li><a href="/tasks">Tasks</a></li>
-			<li><a href="/">Value</a></li>
-			<li><a href="/">Work</a></li>
+			<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
 		</ul>
 	</div>
 
