@@ -33,9 +33,9 @@
 				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
 				<!--TODO: DIMENSIONALITY-->
 				<span style="color:gray">Filter</span>
-				<h4>{{work.verificationScore}} | General | Verification Score </h4>
+				<h4>{{work.verificationScore}} | General | Work Verification Score </h4>
 				<!--relevant dimensions-->
-				<p ng-repeat="tag in work.task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
+				<p ng-repeat="tag in work.task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{work.task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
 		        <div class="spacing-10"></div>
 		 
 			</div>

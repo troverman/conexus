@@ -10,20 +10,30 @@
                     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
                 </div>
-            </div>
 
-            <div class="col-md-5" style="padding:16px;font-style:italic;color:gray">
-                <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>
+                <br>
+                <br>
                 <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'plus')">+</button>
                 <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'minus')">-</button>
-                <div class="spacing-10"></div>
-                <div ng-repeat="verification in taskVerification">
+
+                 <div ng-repeat="verification in taskVerification">
                     <a href="member/{{verification.user.username}}">
                         <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
                         {{verification.user.username}}
                     </a> | {{verification.score}}
                     <div class="spacing-10"></div>
                 </div>
+
+            </div>
+
+            <div class="col-md-5" style="padding:16px;font-style:italic;color:gray">
+                <span style="color:gray">Filter</span>
+                <h4>{{task.verificationScore}} | General | Task Verification Score </h4>
+                <!--relevant dimensions-->
+                <p ng-repeat="tag in task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
+
+                <div class="spacing-10"></div>
+               
             </div>
 
         </div>

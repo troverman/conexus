@@ -3762,20 +3762,30 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "                </div>\n" +
-    "            </div>\n" +
     "\n" +
-    "            <div class=\"col-md-5\" style=\"padding:16px;font-style:italic;color:gray\">\n" +
-    "                <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>\n" +
+    "                <br>\n" +
+    "                <br>\n" +
     "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'plus')\">+</button>\n" +
     "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'minus')\">-</button>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <div ng-repeat=\"verification in taskVerification\">\n" +
+    "\n" +
+    "                 <div ng-repeat=\"verification in taskVerification\">\n" +
     "                    <a href=\"member/{{verification.user.username}}\">\n" +
     "                        <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                        {{verification.user.username}}\n" +
     "                    </a> | {{verification.score}}\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"col-md-5\" style=\"padding:16px;font-style:italic;color:gray\">\n" +
+    "                <span style=\"color:gray\">Filter</span>\n" +
+    "                <h4>{{task.verificationScore}} | General | Task Verification Score </h4>\n" +
+    "                <!--relevant dimensions-->\n" +
+    "                <p ng-repeat=\"tag in task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}}</a></p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "               \n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -4181,9 +4191,9 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
     "				<!--TODO: DIMENSIONALITY-->\n" +
     "				<span style=\"color:gray\">Filter</span>\n" +
-    "				<h4>{{work.verificationScore}} | General | Verification Score </h4>\n" +
+    "				<h4>{{work.verificationScore}} | General | Work Verification Score </h4>\n" +
     "				<!--relevant dimensions-->\n" +
-    "				<p ng-repeat=\"tag in work.task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
+    "				<p ng-repeat=\"tag in work.task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{work.task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
     "		        <div class=\"spacing-10\"></div>\n" +
     "		 \n" +
     "			</div>\n" +
