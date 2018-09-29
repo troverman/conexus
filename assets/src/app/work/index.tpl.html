@@ -6,20 +6,23 @@
 		<div class="card">
 
 			<div style="padding:16px" class="col-md-12">
-				<a style="font-weight:700" href="member/{{work.user.username}}">
-					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
-					{{work.user.username}}
-				</a>
 				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
 				<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                 <p><span style="display:inline" ng-bind-html="renderMessage(work.content)"></span></p>
 				<span style="color:gray" am-time-ago="work.createdAt"></span>
+				<a style="font-weight:700" href="member/{{work.user.username}}">
+					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
+					{{work.user.username}}
+				</a>
 			</div>
 
 			<div style="padding:16px" class="col-md-12">
 				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
 				<!--TODO: DIMENSIONALITY-->
-				<h4>Dimensional Work Verification Score | {{work.verificationScore}}</h4>
+				<h5>Verification Score</h5>
+				<span style="color:gray">{{work.verificationScore}}</span>
+				<!--relevant dimensions-->
+				<!--<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>-->
 				<button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
 		        <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>
 		        <div class="spacing-10"></div>
@@ -39,7 +42,7 @@
 	<div class="row">
 		<div class="card">
 		    <div style="padding:16px;">
-				<div ng-bind-html="renderStream(work.stream)">></div>
+				<div ng-bind-html="renderStream(work.stream)"></div>
 				<h3><a href="stream/{{work.id}}">{{work.id}} Stream</a></h3>
 				<!--<p><a style="font-weight:700" href="member/{{work.user.username}}">
 					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
@@ -55,7 +58,6 @@
 				<!--TODO: TOKEN CLARITY-->
 				<!--TODO: COLLAPSE UI-->
 				<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
-				<h3>Liquidity | Market Orders | Tokens</h3>
 				<h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
 				<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
 				<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>
@@ -65,7 +67,6 @@
 			    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
 			    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
 			    <p><a href="market/general">general</a></p>
-			   	<!--<h4><a href="market/{{work.id}}">Create Liquidity</a></h4>-->
 			</div>
 		</div>
 	</div>

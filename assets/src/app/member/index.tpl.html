@@ -1,79 +1,82 @@
 <style>
-.profile-header{background-color:white;}
+	.avatar{border-radius: 10em}
+	@media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}
+	@media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}
 </style>
 
 <div ui-view="member">
-	<div class="profile-header">
-		<div style="background-image: url('{{member.coverUrl}}')">
-			<div class="spacing-100"></div>
-		</div>
-		<div class="container">
-			<div class="pull-left"><img class="avatar" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></div>
-			<div class="pull-right member-tab-container">
-				<ul class="member-tabs">
-					<li><a href="member/{{member.username}}">Activity</a></li>
-					<li><a href="member/{{member.username}}/content">Content</a></li>
-					<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
-					<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
-					<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Projects</a></li>-->
-					<li><a href="member/{{member.username}}/ledger">Ledger</a></li>
-					<!--<li><a href="member/{{member.username}}">Map</a></li>-->
-					<li><a href="member/{{member.username}}/positions">Positions</a></li>
-					<!--<li><a href="member/{{member.username}}">Time</a></li>-->
-					<li ng-show="currentUser.id != member.id">
-						<a class="btn btn-default" ng-click="follow()">Follow</a>
-						<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
-					</li>
-					<li ng-show="currentUser.id == member.id">
-						<a class="btn btn-default" href="account">Edit Profile</a>
-					</li>
-				</ul>
+	<div class="container" style="padding:0px">
+		<div class="card">
+			<div style="background-image: url('{{member.coverUrl}}')">
+				<div class="spacing-100"></div>
 			</div>
-		</div>
-		<md-divider style="color:gray"></md-divider>
-		<div class="container">
-			<div class="pull-left" style="text-align:left">
-				<h2>{{member.firstName}} {{member.lastName}}</h2>
-				<h5>@{{member.username}}</h5>
-				<p>{{member.totalWork}} | total reputation</p>
+			<div class="container">
+				<div class="pull-left"><img class="avatar" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></div>
+				<div class="pull-right member-tab-container">
+					<ul class="member-tabs">
+						<li><a href="member/{{member.username}}">Activity</a></li>
+						<li><a href="member/{{member.username}}/content">Content</a></li>
+						<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
+						<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
+						<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Projects</a></li>-->
+						<li><a href="member/{{member.username}}/ledger">Ledger</a></li>
+						<!--<li><a href="member/{{member.username}}">Map</a></li>-->
+						<li><a href="member/{{member.username}}/positions">Positions</a></li>
+						<!--<li><a href="member/{{member.username}}">Time</a></li>-->
+						<li ng-show="currentUser.id != member.id">
+							<a class="btn btn-default" ng-click="follow()">Follow</a>
+							<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
+						</li>
+						<li ng-show="currentUser.id == member.id">
+							<a class="btn btn-default" href="account">Edit Profile</a>
+						</li>
+					</ul>
+					<div class="nav-toggle"><i class="fa fa-bars"></i></div>
+				</div>
 			</div>
-			<div class="pull-right" style="margin-right:15px;margin-top:10px;">
-				<!--<h2>{{member.totalWork}} | total work</h2>-->
-				<!--<input type="text" placeholder="Reputation" ng-model="reputationLookup" class="form-control">-->
-				<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}">
-				<a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" href="#" ng-click="newTransactionToggle()">Send Tokens</a>
-				<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
-				<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
-				<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
+			<md-divider style="color:gray"></md-divider>
+			<div class="container">
+				<div class="pull-left" style="text-align:left">
+					<h2>{{member.firstName}} {{member.lastName}}</h2>
+					<h5>@{{member.username}}</h5>
+					<p>{{member.totalWork}} | total reputation</p>
+				</div>
+				<div class="pull-right" style="margin-right:15px;margin-top:10px;">
+					<!--<h2>{{member.totalWork}} | total work</h2>-->
+					<!--<input type="text" placeholder="Reputation" ng-model="reputationLookup" class="form-control">-->
+					<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}">
+					<a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" href="#" ng-click="newTransactionToggle()">Send Tokens</a>
+					<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
+					<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
+					<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
+				</div>
+				<div class="spacing-10"></div>
 			</div>
-			<div class="spacing-10"></div>
-		</div>
-		<div class="container" ng-show="newTransactionToggleVar">
-			<div class="card">
-			    <div style="padding:10px;">
-			    	<h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens</h3>
-					<form role="form" ng-submit="createTransaction(newTransaction)">
-						<div class="form-group col-md-4">
-							<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
-						</div>
-						<div class="form-group col-md-4">
-							<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
-						</div>
-						<div class="form-group col-md-4">
-							<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
-						</div>
-						<div class="form-group col-md-12">
-							<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
-						</div>
-						<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
-					</form>
+			<md-divider style="color:gray"></md-divider>
+			<div class="container" ng-show="newTransactionToggleVar">
+				<div class="card">
+				    <div style="padding:10px;">
+				    	<h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens</h3>
+						<form role="form" ng-submit="createTransaction(newTransaction)">
+							<div class="form-group col-md-4">
+								<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-md-4">
+								<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-md-4">
+								<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
+							</div>
+							<div class="form-group col-md-12">
+								<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
+							</div>
+							<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="spacing-10"></div>
 	</div>
-	<md-divider style="color:gray"></md-divider>
-	<div class="spacing-10"></div>
 	<div class="container">
 		<div ui-view="memberActivity"></div>
 		<div ui-view="memberContent"></div>

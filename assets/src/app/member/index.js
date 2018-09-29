@@ -154,20 +154,20 @@ angular.module( 'conexus.member', [
     //TODO: PART OF MEMBER
     $scope.followersCount = followersCount;
     $scope.followingCount = followingCount;
+    $scope.member = member;
+    if(!$scope.member){$location.path('/')}
     $scope.newFollower = {};
     $scope.newTransactionToggleVar = false;
     $scope.newTransaction = {};
-    $scope.member = member;
+    $scope.newTransaction.identifier = 'CRE8';
+    $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
     if($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
-        $scope.newTransaction.identifier = 'CRE8';
-        $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
     }
 
     //TODO: seoService
 
-    if(!$scope.member){$location.path('/')}
 
     $scope.createTransaction = function(){
         if($scope.currentUser){

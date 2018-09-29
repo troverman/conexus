@@ -86,6 +86,7 @@
 				<h4>{{currentUser.email}}</h4>
 				<p>Human Proof ID | ON</p>
 				<p>Verification | Goverment ID | Social Accounts | BioMetric Data</p>
+				<!--ssn is id and secret - dum-->
 			</div>
 	    </div>
 	</div>
@@ -102,10 +103,18 @@
 		<div class="card">
 		    <div style="padding:16px;">
 				<form role="form" ng-submit="editAccount()">
+					<input placeholder="Username" type="text" ng-model="newAccountInformation.username" class="form-control">
 					<input placeholder="Email" type="text" ng-model="newAccountInformation.email" class="form-control">
 					<input placeholder="First Name" type="text"  ng-model="newAccountInformation.firstName" class="form-control">
 					<input placeholder="Last Name" type="text" ng-model="newAccountInformation.lastName" class="form-control">
 					<input placeholder="Address" type="text" ng-model="newAccountInformation.address" class="form-control">
+					<input placeholder="Date of Birth" type="text" ng-model="newAccountInformation.dob" class="form-control">
+					
+					<input placeholder="Sex" type="text" ng-model="newAccountInformation.sex" class="form-control">
+					<input placeholder="Height" type="text" ng-model="newAccountInformation.height" class="form-control">
+					<input placeholder="Eye Color" type="text" ng-model="newAccountInformation.eyecolor" class="form-control">
+					<input placeholder="23&Me" type="text" ng-model="newAccountInformation.geneticsequence" class="form-control">
+
 					<button type="submit" class="btn btn-default log-btn">Save</button>
 				</form>
 			</div>
@@ -116,8 +125,9 @@
 		<div class="card">
 			<div style="padding:16px">
 				<h3>Settings</h3>
-				<p>GPS Tracking | ON</p>
-				<p>Notifications | ON</p>
+				<p>GPS Tracking | <md-switch ng-model="gpsTracking" aria-label="GPS Tracking"> {{gpsTracking}}</md-switch></p>
+				<p>Notifications | <md-switch ng-model="notifications" aria-label="Notifications"> {{notifications}}</md-switch></p>
+				<p>Browser Mining | <md-switch ng-model="browserMining" aria-label="Browser Mining"> {{browserMining}}</md-switch></p>
 			</div>
 	    </div>
     </div>

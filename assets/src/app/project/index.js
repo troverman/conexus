@@ -184,11 +184,33 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectCtrl', ['$location', '$scope', 'config', 'MemberModel', 'project', 'titleService', function ProjectController( $location, $scope, config, MemberModel, project, titleService ) {
+.controller( 'ProjectCtrl', ['$location', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $scope, config, MemberModel, project, titleService, TransactionModel ) {
     titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
+    $scope.newTransaction = {};
+    $scope.newTransaction.identifier = 'CRE8';
+    $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
+    $scope.newTransactionToggleVar = false;
     $scope.project = project;
+
+    if($scope.currentUser){
+        $scope.newTransaction.from = $scope.currentUser.id;
+    }
+
+    $scope.createTransaction = function(){
+        if($scope.currentUser){
+            $scope.newTransaction.to = $scope.project.id;
+            TransactionModel.create($scope.newTransaction).then(function(model){
+                $scope.newTransaction = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.newTransactionToggle = function() {
+        $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
+    };
 
     $scope.createMember = function(){
         if($scope.currentUser){
