@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "intro/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "post/index.tpl.html", "post/post.tpl.html", "project/index.tpl.html", "project/templates/activity.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "projects/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "stream/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "work/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "post/index.tpl.html", "post/post.tpl.html", "project/index.tpl.html", "project/templates/activity.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "projects/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "stream/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "work/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -481,7 +481,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			    </div>\n" +
     "			    <div class=\"member-card-info\">\n" +
     "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
-    "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.status}} Online</p>\n" +
     "			        <p style=\"color:gray\">{{currentUser.totalWork}}</p>\n" +
     "			    </div>\n" +
     "			</div>\n" +
@@ -645,7 +645,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	        <form style=\"display:flex;flex-direction:row;\">\n" +
     "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
     "	            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "	                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "					<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                <!--<a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Filters <i class=\"fa fa-angle-down\"></i></h5>\n" +
     "	                </a>\n" +
     "	                <ul style=\"position:relative\" class=\"dropdown-menu\">\n" +
@@ -654,7 +655,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>@:</h5></a></li>\n" +
     "	                    <hr class=\"sort-hr\">\n" +
     "	                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>has:</h5></a></li>\n" +
-    "	                </ul>\n" +
+    "	                </ul>-->\n" +
     "	            </div>\n" +
     "	        </form>\n" +
     "		</div>\n" +
@@ -680,6 +681,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "						<a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{item.work}}\">work {{item.work}}</a>\n" +
     "						<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "						<p style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "						<div style=\"clear:both\"></div>\n" +
+    "\n" +
     "					</div>\n" +
     "					<div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "				</div>\n" +
@@ -910,7 +914,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		        <form style=\"display:flex;flex-direction:row;\">\n" +
     "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
     "		            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "		                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "		            	<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "		                <!--<a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "		                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Filters <i class=\"fa fa-angle-down\"></i></h5>\n" +
     "		                </a>\n" +
     "		                <ul style=\"position:relative\" class=\"dropdown-menu\">\n" +
@@ -919,7 +924,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>@:</h5></a></li>\n" +
     "		                    <hr class=\"sort-hr\">\n" +
     "		                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>has:</h5></a></li>\n" +
-    "		                </ul>\n" +
+    "		                </ul>-->\n" +
     "		            </div>\n" +
     "		        </form>\n" +
     "			</div>\n" +
@@ -944,6 +949,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "							<a ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
     "							<a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{item.work}}\">work {{item.work}}</a>\n" +
     "							<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "							\n" +
+    "							<p style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "							<div style=\"clear:both\"></div>\n" +
     "						</div>\n" +
     "						<div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "					</div>\n" +
@@ -1089,6 +1097,19 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function($temp
     "  <!--https://vimeo.com/153676878-->\n" +
     "</div>\n" +
     "");
+}]);
+
+angular.module("item/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("item/index.tpl.html",
+    "<div class=\"container\">\n" +
+    "\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	{{item}}\n" +
+    "	\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "</div>");
 }]);
 
 angular.module("login/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -1594,6 +1615,96 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "</div>");
 }]);
 
+angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("marketPlace/index.tpl.html",
+    "<div class=\"container\">\n" +
+    "\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h1>MARKET PLACE</h1>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	        </form>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<!--FILTER BY CURRENCIES / PRICES I WANT TO PAY BASED ON MM.. RECURSIVE LIQUIDITY TRACE-->\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\" ng-repeat=\"item in items\">\n" +
+    "		    <div style=\"padding:16px;\">\n" +
+    "		    	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
+    "		    	<p style=\"color:gray\">{{item.price}} markets</p>\n" +
+    "		    </div>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"newItemToggle()\">+ Item</button>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\" ng-show=\"newItemToggleVar\">\n" +
+    "		    <div style=\"padding:16px;\">\n" +
+    "				<form role=\"form\" ng-submit=\"createItem(newItem)\">\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<input placeholder=\"Title\" type=\"text\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<input placeholder=\"Content\" type=\"text\" ng-model=\"newItem.content\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<!--Arrays as price inputs. preferred currencies-->\n" +
+    "						<input placeholder=\"Price\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "				</form>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div ng-repeat=\"item in items\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "                	{{item.title}}\n" +
+    "					{{item.content}}\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"item/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
+    "		            <form role=\"form\" ng-submit=\"createPost(item)\">\n" +
+    "		                <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "		                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "		            </form>\n" +
+    "		        </div>\n" +
+    "	        </div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<!--REACT 5 Star verified purchase-->\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "</div>");
+}]);
+
 angular.module("markets/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("markets/index.tpl.html",
     "<div class=\"container\">\n" +
@@ -1759,7 +1870,10 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "							<a class=\"btn btn-default\" href=\"account\">Edit Profile</a>\n" +
     "						</li>\n" +
     "					</ul>\n" +
-    "					<div class=\"nav-toggle\"><i class=\"fa fa-bars\"></i></div>\n" +
+    "					<div class=\"nav-toggle\">\n" +
+    "						<a href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
+    "						<!--CLICK TO EXPAND-->\n" +
+    "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			<md-divider style=\"color:gray\"></md-divider>\n" +
@@ -1781,9 +1895,9 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
     "			<md-divider style=\"color:gray\"></md-divider>\n" +
-    "			<div class=\"container\" ng-show=\"newTransactionToggleVar\">\n" +
+    "			<div class=\"\" ng-show=\"newTransactionToggleVar\">\n" +
     "				<div class=\"card\">\n" +
-    "				    <div style=\"padding:10px;\">\n" +
+    "				    <div style=\"padding:16px;\">\n" +
     "				    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens</h3>\n" +
     "						<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
     "							<div class=\"form-group col-md-4\">\n" +
@@ -2592,7 +2706,10 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                	</ul>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"nav-toggle\"><i class=\"fa fa-bars\"></i></div>\n" +
+    "            <div class=\"nav-toggle\">\n" +
+    "                <a href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
+    "                <!--CLICK TO EXPAND-->\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -3192,6 +3309,7 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/projects.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<div ng-show=\"project.parent\">\n" +
     "	<h3><a href=\"project/{{project.urlTitle}}\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"> <a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -3199,8 +3317,13 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "\n" +
     "<div class=\"row\" ng-show=\"currentUser\">\n" +
     "    <div class=\"col-xs-12\">\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ Project</button><br><br>\n" +
-    "        <div ng-show=\"newProjectToggleVar\">\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ Project</button>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"newProjectToggleVar\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
     "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
     "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
     "                <text-angular placeholder=\"Description \"ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
@@ -3211,27 +3334,30 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div ng-repeat=\"project in projects\">\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "			<div class=\"row\">\n" +
-    "				<div class=\"col-sm-10\">\n" +
-    "					<h4><a href=\"project/{{project.urlTitle}}\"><img style=\"height:24px\" src=\"{{project.avatarUrl}}\"> {{project.title}}</a></h4>\n" +
-    "					<p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p></p>\n" +
-    "					<!--\n" +
-    "					<p>{{project.memeberCount}}</p>\n" +
-    "					<p>{{project.taskCount}}</p>\n" +
-    "					<p>{{project.totalWork}}</p>\n" +
-    "					<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
-    "					-->\n" +
-    "				</div>\n" +
-    "				<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
-    "					<h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
+    "<div class=\"row\">\n" +
+    "	<div ng-repeat=\"project in projects\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<div class=\"row\">\n" +
+    "					<div class=\"col-sm-10\">\n" +
+    "						<h4><a href=\"project/{{project.urlTitle}}\"><img style=\"height:24px\" src=\"{{project.avatarUrl}}\"> {{project.title}}</a></h4>\n" +
+    "						<p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p></p>\n" +
+    "						<!--\n" +
+    "						<p>{{project.memeberCount}}</p>\n" +
+    "						<p>{{project.taskCount}}</p>\n" +
+    "						<p>{{project.totalWork}}</p>\n" +
+    "						<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
+    "						-->\n" +
+    "					</div>\n" +
+    "					<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
+    "						<h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
+    "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3630,7 +3756,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px\">\n" +
+    "            <div class=\"col-md-7\" style=\"padding:16px\">\n" +
     "                <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
@@ -3638,7 +3764,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div style=\"padding:16px;font-style:italic;color:gray\">\n" +
+    "            <div class=\"col-md-5\" style=\"padding:16px;font-style:italic;color:gray\">\n" +
     "                <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>\n" +
     "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'plus')\">+</button>\n" +
     "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'minus')\">-</button>\n" +
@@ -3661,21 +3787,24 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "                <!--TODO: COLLAPSE UI-->\n" +
     "                <!--TOKENS MINTING PER ACTION-->\n" +
-    "                <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
+    "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "                    <p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
+    "                    <div>\n" +
+    "                        <a ng-repeat=\"token in tokens\" href=\"market/{{token}}\">{{token}}, </a>\n" +
+    "                    </div>\n" +
+    "                    <!--<p><a href=\"market/{{task.id}}+onTime\">onTime+{{task.id}}</a></p>\n" +
     "                    <p><a href=\"market/{{task.id}}+onTimeStream\">onTimeStream+{{task.id}}</a></p>\n" +
     "                    <p><a href=\"market/{{task.id}}+onCompletion\">onCompletion+{{task.id}}</a></p>\n" +
     "                    <p><a href=\"market/{{task.id}}+onVerification\">onVerification+{{task.id}}</a></p>\n" +
     "                    <p><a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}} </a></p>\n" +
     "                    <p><a href=\"market/{{task.project.urlTitle}}\">{{task.project.title}} (+{{task.project.id}})</a></p>\n" +
-    "                    <p><a href=\"market/general\">general</a></p>\n" +
+    "                    <p><a href=\"market/general\">general</a></p>-->\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                </div>\n" +
     "\n" +
     "                <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->\n" +
-    "                <div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
+    "                <!--<div class=\"col-md-6\" style=\"font-style:italic;color:gray\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <h4>Token Liquidity</h4>\n" +
     "                    <p>1 <a href=\"market/onTime+{{task.id}}\">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href=\"market/{{task.timeIdentifierSet}}\">{{task.timeIdentifierSet}}</a> / <a href=\"market/onTime+{{task.id}}/{{task.timeIdentifierSet}}\">MARKET</a></p>\n" +
@@ -3683,7 +3812,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <p>1 <a href=\"market/onCompletion+{{task.id}}\">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a> / <a href=\"market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}\">MARKET</a></p>\n" +
     "                    <p>1 <a href=\"market/onVerification+{{task.id}}\">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href=\"market/{{task.verificationIdentifierSet}}\">{{task.verificationIdentifierSet}}</a> / <a href=\"market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}\">MARKET</a></p>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
-    "                </div>\n" +
+    "                </div>-->\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -4024,34 +4153,39 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "\n" +
-    "			<div style=\"padding:16px\" class=\"col-md-12\">\n" +
+    "			<div style=\"padding:16px\" class=\"col-md-6\">\n" +
     "				<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
     "				<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                <p><span style=\"display:inline\" ng-bind-html=\"renderMessage(work.content)\"></span></p>\n" +
-    "				<span style=\"color:gray\" am-time-ago=\"work.createdAt\"></span>\n" +
+    "				<p style=\"color:gray\" am-time-ago=\"work.createdAt\"></p>\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{work.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					{{work.user.username}}\n" +
     "				</a>\n" +
-    "			</div>\n" +
-    "\n" +
-    "			<div style=\"padding:16px\" class=\"col-md-12\">\n" +
-    "				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
-    "				<!--TODO: DIMENSIONALITY-->\n" +
-    "				<h5>Verification Score</h5>\n" +
-    "				<span style=\"color:gray\">{{work.verificationScore}}</span>\n" +
-    "				<!--relevant dimensions-->\n" +
-    "				<!--<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>-->\n" +
-    "				<button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
-    "		        <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
-    "		        <div class=\"spacing-10\"></div>\n" +
-    "		   		<div ng-repeat=\"verification in workVerification\">\n" +
+    "				<br>\n" +
+    "				<br>		\n" +
+    "				<button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
+    "		        <button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
+    "		        <div ng-repeat=\"verification in workVerification\">\n" +
     "		            <a href=\"member/{{verification.user.username}}\">\n" +
     "		                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "		                {{verification.user.username}}\n" +
     "		            </a> | {{verification.score}}\n" +
     "					<div class=\"spacing-10\"></div>\n" +
     "		        </div>\n" +
+    "\n" +
+    "			</div>\n" +
+    "\n" +
+    "			<div style=\"padding:16px\" class=\"col-md-4\">\n" +
+    "\n" +
+    "				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
+    "				<!--TODO: DIMENSIONALITY-->\n" +
+    "				<span style=\"color:gray\">Filter</span>\n" +
+    "				<h4>{{work.verificationScore}} | General | Verification Score </h4>\n" +
+    "				<!--relevant dimensions-->\n" +
+    "				<p ng-repeat=\"tag in work.task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
+    "		        <div class=\"spacing-10\"></div>\n" +
+    "		 \n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
@@ -4078,14 +4212,21 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "				<!--TODO: COLLAPSE UI-->\n" +
     "				<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->\n" +
     "				<h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "				<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
-    "				<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>\n" +
+    "				<div>\n" +
+    "                    <a ng-repeat=\"token in tokens\" href=\"market/{{token}}\">{{token}}, </a>\n" +
+    "				</div>\n" +
+    "\n" +
+    "\n" +
+    "				<!--<p><a href=\"market/{{work.id}}+onTime\">onTime+{{work.id}}</a></p>\n" +
+    "				<p><a href=\"market/{{work.id}}+onTimeStream\">onTimeStream+{{work.id}}</a></p>-->\n" +
     "				<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->\n" +
     "				<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->\n" +
-    "				<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
+    "				<!--<p><a href=\"market/{{work.task.id}}+onTime\">onTime+{{work.task.id}}</a></p>\n" +
     "			    <p><a href=\"market/{{work.task.id}}+onTimeStream\">onTimeStream+{{work.task.id}}</a></p>\n" +
     "			    <p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{work.task.id}} </a></p>\n" +
-    "			    <p><a href=\"market/general\">general</a></p>\n" +
+    "			    <p><a href=\"market/general\">general</a></p>-->\n" +
+    "\n" +
+    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +

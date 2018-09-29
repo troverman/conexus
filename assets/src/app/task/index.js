@@ -43,6 +43,45 @@ angular.module( 'conexus.task', [
     $scope.verification = {};
     $scope.work = work;
 
+    //TODO
+    $scope.tokens = [];
+    //$scope.tokens.push('Token');
+    //$scope.tokens.push('Task+Token');
+    //$scope.tokens.push('Task+Token+'+$scope.task.id);
+    $scope.tokens.push('Task');
+    $scope.tokens.push('Task+'+$scope.task.id);
+    if ($scope.task.tags){
+        for (x in $scope.task.tags.split(',')){
+            $scope.tokens.push($scope.task.tags.split(',')[x].trim());
+            $scope.tokens.push('Task+'+$scope.task.tags.split(',')[x].trim())
+            $scope.tokens.push('Task+'+$scope.task.id+'+'+$scope.task.tags.split(',')[x].trim())
+
+        }
+    }
+
+    for (x in $scope.tokens){
+        $scope.tokens.push($scope.tokens[x]+'+onStream');
+    }
+
+
+    /*function getCombinations(chars) {
+        var result = [];
+        var f = function(prefix, chars) {
+            for (var i = 0; i < chars.length; i++) {
+                result.push(prefix + chars[i]);
+                f(prefix + chars[i], chars.slice(i + 1));
+            }
+        }
+        f('', chars);
+        return result;
+    }*/
+
+    //$scope.tokens = getCombinations($scope.tokens)
+
+    //for (x in tokens){
+    //    $scope.tokens.push(tokens[x]+$scope.task.tag)
+    //}
+
     $scope.askQuestion = function() {
         if ($scope.currentUser){
             $scope.question = true;

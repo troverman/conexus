@@ -37,6 +37,26 @@ angular.module( 'conexus.work', [
     $scope.workVerification = [];
     $scope.work = work;
 
+    $scope.tokens = [];
+    $scope.tokens.push('Token');
+    $scope.tokens.push('WorkToken');
+    $scope.tokens.push('Work+'+$scope.work.id);
+    //for x in scope.tadk.tags.split()
+    //$scope.tokens.push('Work+'+$scope.work.id);
+
+    if ($scope.work.task.tags){
+        for (x in $scope.work.task.tags.split(',')){
+            $scope.tokens.push($scope.work.task.tags.split(',')[x].trim());
+            $scope.tokens.push('Task+'+$scope.work.task.tags.split(',')[x].trim())
+            $scope.tokens.push('Task+'+$scope.work.task.id+'+'+$scope.work.task.tags.split(',')[x].trim())
+        }
+    }
+
+    for (x in $scope.tokens){
+        $scope.tokens.push($scope.tokens[x]+'+onStream');
+        $scope.tokens.push($scope.tokens[x]+'+onValidation');
+    }
+
     $scope.createPost = function(post) {
         if ($scope.currentUser){
             $scope.newPost.post = post.id;

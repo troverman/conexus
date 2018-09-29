@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="card">
-            <div style="padding:16px">
+            <div class="col-md-7" style="padding:16px">
                 <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
                 <div style="font-style:italic;color:gray">
                     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div style="padding:16px;font-style:italic;color:gray">
+            <div class="col-md-5" style="padding:16px;font-style:italic;color:gray">
                 <h4>Dimensional Task Verification Score | {{task.verificationScore}} </h4>
                 <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'plus')">+</button>
                 <button style="width:10%;" class="btn btn-default log-btn" ng-click="verifyTask(item, 'minus')">-</button>
@@ -35,21 +35,24 @@
 
                 <!--TODO: COLLAPSE UI-->
                 <!--TOKENS MINTING PER ACTION-->
-                <div class="col-md-6" style="font-style:italic;color:gray">
+                <div style="font-style:italic;color:gray">
                     <div class="spacing-5"></div>
                     <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-                    <p><a href="market/{{task.id}}+onTime">onTime+{{task.id}}</a></p>
+                    <div>
+                        <a ng-repeat="token in tokens" href="market/{{token}}">{{token}}, </a>
+                    </div>
+                    <!--<p><a href="market/{{task.id}}+onTime">onTime+{{task.id}}</a></p>
                     <p><a href="market/{{task.id}}+onTimeStream">onTimeStream+{{task.id}}</a></p>
                     <p><a href="market/{{task.id}}+onCompletion">onCompletion+{{task.id}}</a></p>
                     <p><a href="market/{{task.id}}+onVerification">onVerification+{{task.id}}</a></p>
                     <p><a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}} </a></p>
                     <p><a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.project.id}})</a></p>
-                    <p><a href="market/general">general</a></p>
+                    <p><a href="market/general">general</a></p>-->
                     <div class="spacing-5"></div>
                 </div>
 
                 <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
-                <div class="col-md-6" style="font-style:italic;color:gray">
+                <!--<div class="col-md-6" style="font-style:italic;color:gray">
                     <div class="spacing-5"></div>
                     <h4>Token Liquidity</h4>
                     <p>1 <a href="market/onTime+{{task.id}}">onTime+{{task.id}}</a> / {{task.timeBountySet}} <a href="market/{{task.timeIdentifierSet}}">{{task.timeIdentifierSet}}</a> / <a href="market/onTime+{{task.id}}/{{task.timeIdentifierSet}}">MARKET</a></p>
@@ -57,7 +60,7 @@
                     <p>1 <a href="market/onCompletion+{{task.id}}">onCompletion+{{task.id}}</a> / {{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a> / <a href="market/{{task.id}}+onCompletion/{{task.completeIdentifierSet}}">MARKET</a></p>
                     <p>1 <a href="market/onVerification+{{task.id}}">onVerification+{{task.id}}</a> / {{task.verificationBountySet}} <a href="market/{{task.verificationIdentifierSet}}">{{task.verificationIdentifierSet}}</a> / <a href="market/onVerification+{{task.id}}/{{task.verificationIdentifierSet}}">MARKET</a></p>
                     <div class="spacing-5"></div>
-                </div>
+                </div>-->
             </div>
 
         </div>
