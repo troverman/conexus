@@ -31,7 +31,10 @@
 							<a class="btn btn-default" href="account">Edit Profile</a>
 						</li>
 					</ul>
-					<div class="nav-toggle"><i class="fa fa-bars"></i></div>
+					<div class="nav-toggle">
+						<a href="#"><i class="fa fa-bars"></i></a>
+						<!--CLICK TO EXPAND-->
+					</div>
 				</div>
 			</div>
 			<md-divider style="color:gray"></md-divider>
@@ -53,9 +56,9 @@
 				<div class="spacing-10"></div>
 			</div>
 			<md-divider style="color:gray"></md-divider>
-			<div class="container" ng-show="newTransactionToggleVar">
+			<div class="" ng-show="newTransactionToggleVar">
 				<div class="card">
-				    <div style="padding:10px;">
+				    <div style="padding:16px;">
 				    	<h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens</h3>
 						<form role="form" ng-submit="createTransaction(newTransaction)">
 							<div class="form-group col-md-4">
