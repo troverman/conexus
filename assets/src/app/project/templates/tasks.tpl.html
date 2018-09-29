@@ -1,8 +1,10 @@
 <!--FILTERS AND SEARCH HERE-->
-<div class="row">
-	<button class="btn btn-default log-btn" ng-click="newTaskToggle()">+ Task</button><br><br>
-	<div class="card" ng-show="newTaskToggleVar">
-	    <div style="padding:10px;">
+<div class="spacing-5"></div>
+<button class="btn btn-default log-btn" ng-click="newTaskToggle()">+ Task</button>
+
+<div class="row" ng-show="newTaskToggleVar">
+	<div class="card">
+	    <div style="padding:16px;">
 			<form role="form" ng-submit="createTask(newTask)">
 				<div class="form-group">
 					<input placeholder="Title" type="text" ng-model="newTask.title" class="form-control" id="taskTitle">

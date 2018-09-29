@@ -1,14 +1,14 @@
 <style>
     @media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}
     @media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}
+    .imageContainerSmallDiv h1 {font-size:2.8em;}
 </style>
 
 <div class="container" style="padding:0px">
     <div class="card">
         <div class="imageContainerSmall">
-        <!--<div class="imageContainerSmall" style="background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')">-->
             <div class="imageContainerSmallDiv">  
-                <h1 style="text-align:left;white-space:nowrap" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/>
+                <h1 style="text-align:left;" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/>
                     {{project.title}}
                     <span ng-show="project.parent"> | 
                         <a style="color:white" href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a>
@@ -82,7 +82,9 @@
         </div>
     </div>
 </div>
+
 <div class="container" ng-show="editProjectToggleVar"><p>edit project form</p></div>
+
 <div class="container">
     <div ui-view="activity"></div>
     <div ui-view="channels"></div>
@@ -94,5 +96,7 @@
     <div ui-view="projects"></div>
     <div ui-view="tasks"></div>
 </div>
+
 <div class="spacing-50"></div>
+
 <div ng-include="'footer/index.tpl.html'"></div>

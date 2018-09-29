@@ -1,7 +1,9 @@
+<div class="spacing-5"></div>
 <div ng-show="project.parent">
 	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
 	<div class="spacing-10"></div>
 </div>
+
 <div class="row" ng-show="currentUser">
     <div class="col-xs-12">
         <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ Project</button><br><br>
@@ -15,6 +17,7 @@
         </div>
     </div>
 </div>
+
 <div ng-repeat="project in projects">
 	<div class="card">
 		<div style="padding:16px;">

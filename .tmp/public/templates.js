@@ -124,6 +124,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	</div>\n" +
     "</div>\n" +
     "\n" +
+    "<!-- INSERT CALL TO ACTION HERE-->\n" +
     "<div id=\"about-section5\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -133,15 +134,15 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	            <div class=\"login-form\">\n" +
     "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "	                    <div class=\"form-group\">\n" +
-    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"email\" title=\"email\" type=\"email\"> \n" +
+    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
     "	                        <i class=\"fa fa-user\"></i>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"form-group\">\n" +
-    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"username\" title=\"username\" type=\"text\"> \n" +
+    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
     "	                        <i class=\"fa fa-user\"></i>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"form-group log-status\">\n" +
-    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"password\" title=\"password\" type=\"password\"> \n" +
+    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
     "	                        <i class=\"fa fa-lock\"></i>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"align-right\">\n" +
@@ -860,15 +861,15 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	            <div class=\"login-form\">\n" +
     "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "	                    <div class=\"form-group\">\n" +
-    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"email\" title=\"email\" type=\"email\"> \n" +
+    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
     "	                        <i class=\"fa fa-user\"></i>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"form-group\">\n" +
-    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"username\" title=\"username\" type=\"text\"> \n" +
+    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
     "	                        <i class=\"fa fa-user\"></i>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"form-group log-status\">\n" +
-    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"password\" title=\"password\" type=\"password\"> \n" +
+    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
     "	                        <i class=\"fa fa-lock\"></i>\n" +
     "	                    </div>\n" +
     "	                    <div class=\"align-right\">\n" +
@@ -1112,7 +1113,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "            <div class=\"login-form\">\n" +
     "                <form role=\"form\" method=\"post\" action=\"/auth/local\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"username\" type=\"text\"> \n" +
+    "                        <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\"> \n" +
     "                        <i class=\"fa fa-user\"></i>\n" +
     "                    </div>\n" +
     "                    <div class=\"form-group log-status\">\n" +
@@ -1948,6 +1949,8 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
 
 angular.module("member/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/content.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<!--POST MODEL | CONTENT TYPE -->\n" +
     "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
     "<div class=\"row\" ng-show=\"true\">\n" +
@@ -2028,6 +2031,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
 
 angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/followers.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
     "	<div class=\"member-card\">\n" +
     "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.follower.coverUrl}}')\">\n" +
@@ -2045,6 +2049,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
 
 angular.module("member/templates/following.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/following.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
     "	<div class=\"member-card\">\n" +
     "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.followed.coverUrl}}')\">\n" +
@@ -2061,6 +2066,8 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
 
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"\">\n" +
     "		<div style=\"\">\n" +
@@ -2193,10 +2200,12 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"col-md-6\">\n" +
     "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li class=\"active\"><a href=\"member/{{member.username}}/ledger\">Overview</a></li>\n" +
+    "			<!--<li class=\"active\"><a href=\"member/{{member.username}}/ledger\">Overview</a></li>-->\n" +
     "			<li><a href=\"\">Assets</a></li>\n" +
     "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
     "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
@@ -2540,14 +2549,14 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<style>\n" +
     "    @media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}\n" +
     "    @media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}\n" +
+    "    .imageContainerSmallDiv h1 {font-size:2.8em;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\">\n" +
     "        <div class=\"imageContainerSmall\">\n" +
-    "        <!--<div class=\"imageContainerSmall\" style=\"background-image: url('http://bg.siteorigin.com/image/generate?color=%23778a70&pattern=xv&blend=3&intensity=42.00&noise=0')\">-->\n" +
     "            <div class=\"imageContainerSmallDiv\">  \n" +
-    "                <h1 style=\"text-align:left;white-space:nowrap\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/>\n" +
+    "                <h1 style=\"text-align:left;\" class=\"container\"><img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\"/>\n" +
     "                    {{project.title}}\n" +
     "                    <span ng-show=\"project.parent\"> | \n" +
     "                        <a style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a>\n" +
@@ -2621,7 +2630,9 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"container\" ng-show=\"editProjectToggleVar\"><p>edit project form</p></div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "    <div ui-view=\"activity\"></div>\n" +
     "    <div ui-view=\"channels\"></div>\n" +
@@ -2633,7 +2644,9 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    <div ui-view=\"projects\"></div>\n" +
     "    <div ui-view=\"tasks\"></div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "<div ng-include=\"'footer/index.tpl.html'\"></div>");
 }]);
 
@@ -2738,6 +2751,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/channels.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/channels.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"col-md-2\">\n" +
     "        <div class=\"card\">\n" +
@@ -2791,8 +2805,8 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/charter.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"newMotionToggle()\">+ Motion</button>\n" +
-    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"card\" ng-show=\"newMotionToggleVar\">\n" +
@@ -2855,6 +2869,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
   $templateCache.put("project/templates/content.tpl.html",
     "<!--POST MODEL | CONTENT TYPE -->\n" +
     "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
+    "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"row\">\n" +
     "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "        <li class=\"active\"><a href=\"\">Files</a></li>\n" +
@@ -2953,8 +2968,9 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/ledger.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"\">\n" +
+    "	<div class=\"col-md-6\">\n" +
     "		<div style=\"\">\n" +
     "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "				<li><a href=\"\">Assets</a></li>\n" +
@@ -3064,9 +3080,11 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
 
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "<div class=\"spacing-10\"></div>\n" +
-    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
+    "\n" +
+    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
     "	<div class=\"member-card\">\n" +
     "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
     "	        <a href=\"member/{{member.user.username}}\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
@@ -3077,22 +3095,19 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	        <p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
     "	        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
     "	    </div>\n" +
-    "	    <!--<div class=\"member-card-social\">\n" +
-    "	        <a ng-show=\"member.user.socialAccounts.facebook.profileUrl\" href=\"{{member.user.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
-    "	        <a ng-show=\"member.user.socialAccounts.twitter.profileUrl\" href=\"{{member.user.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
-    "	        <a ng-show=\"member.user.socialAccounts.google.profileUrl\" href=\"{{member.user.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
-    "	    </div>-->\n" +
     "	</div>\n" +
     "</div>");
 }]);
 
 angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/positions.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"col-md-6\">\n" +
     "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li class=\"active\"><a href=\"project/{{project.urlTitle}}/ledger\">Overview</a></li>\n" +
-    "			<li><a href=\"\">Assets</a></li>\n" +
+    "			<!--<li class=\"active\"><a href=\"project/{{project.urlTitle}}/ledger\">Overview</a></li>-->\n" +
+    "			<li><a href=\"#\">Assets</a></li>\n" +
     "			<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
     "			<li><a href=\"project/{{project.urlTitle}}/ledger\">Transactions</a></li>\n" +
     "		</ul>\n" +
@@ -3176,10 +3191,12 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/projects.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
     "<div ng-show=\"project.parent\">\n" +
     "	<h3><a href=\"project/{{project.urlTitle}}\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"> <a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"row\" ng-show=\"currentUser\">\n" +
     "    <div class=\"col-xs-12\">\n" +
     "        <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ Project</button><br><br>\n" +
@@ -3193,6 +3210,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
     "<div ng-repeat=\"project in projects\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
@@ -3219,10 +3237,12 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
     "<!--FILTERS AND SEARCH HERE-->\n" +
-    "<div class=\"row\">\n" +
-    "	<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button><br><br>\n" +
-    "	<div class=\"card\" ng-show=\"newTaskToggleVar\">\n" +
-    "	    <div style=\"padding:10px;\">\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "<button class=\"btn btn-default log-btn\" ng-click=\"newTaskToggle()\">+ Task</button>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"newTaskToggleVar\">\n" +
+    "	<div class=\"card\">\n" +
+    "	    <div style=\"padding:16px;\">\n" +
     "			<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
     "				<div class=\"form-group\">\n" +
     "					<input placeholder=\"Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
@@ -3397,15 +3417,15 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"login-form\">\n" +
     "                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" name=\"email\" placeholder=\"email\" title=\"email\" type=\"email\"> \n" +
+    "                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
     "                        <i class=\"fa fa-user\"></i>\n" +
     "                    </div>\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" name=\"username\" placeholder=\"username\" title=\"username\" type=\"text\"> \n" +
+    "                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
     "                        <i class=\"fa fa-user\"></i>\n" +
     "                    </div>\n" +
     "                    <div class=\"form-group log-status\">\n" +
-    "                        <input class=\"form-control\" name=\"password\" placeholder=\"password\" title=\"password\" type=\"password\"> \n" +
+    "                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
     "                        <i class=\"fa fa-lock\"></i>\n" +
     "                    </div>\n" +
     "                    <div class=\"align-right\">\n" +
@@ -3420,7 +3440,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"selfClear\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>");
 }]);
 

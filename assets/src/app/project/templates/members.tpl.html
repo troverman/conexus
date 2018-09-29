@@ -1,6 +1,8 @@
+<div class="spacing-5"></div>
 <button class="btn btn-default log-btn" ng-click="createMember()">join</button>
 <div class="spacing-10"></div>
-	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
+
+<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
 	<div class="member-card">
 	    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 	        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
@@ -11,10 +13,5 @@
 	        <p style="color:gray">total reputation | {{member.user.totalWork}}</p>
 	        <p style="color:gray">{{project.title}} | 888</p>
 	    </div>
-	    <!--<div class="member-card-social">
-	        <a ng-show="member.user.socialAccounts.facebook.profileUrl" href="{{member.user.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
-	        <a ng-show="member.user.socialAccounts.twitter.profileUrl" href="{{member.user.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
-	        <a ng-show="member.user.socialAccounts.google.profileUrl" href="{{member.user.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
-	    </div>-->
 	</div>
 </div>
