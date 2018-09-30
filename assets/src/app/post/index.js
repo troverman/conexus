@@ -63,12 +63,18 @@ angular.module( 'conexus.post', [
             $scope.newReaction.user = $scope.currentUser.id;
             $scope.newReaction.post = post.id;
             $scope.newReaction.type = type;
+
             //weight?
             //TODO: MODEL | CREATE REACTION
             //Reaction.create(newReaction);
+            
+            console.log(post);
+
             if (type =='plus'){$scope.post.plusCount++}
             if (type =='minus'){$scope.post.minusCount++}
+
             //TODO: UPDATE POST
+
         }
         else{$location.path('/login')}
     };
@@ -88,8 +94,14 @@ angular.module( 'conexus.post', [
     //TODO
     $scope.reply = function(post){
         console.log(post);
-        console.log($scope.post.children)
-        $scope.post.showReply = !$scope.post.showReply
+        console.log($scope.post.children);
+        $scope.post.showReply = !$scope.post.showReply;
+    };
+
+    $scope.toggleThread = function(post){
+        console.log(post);
+        console.log($scope.post.children);
+        $scope.post.showThread = !$scope.post.showThread;
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

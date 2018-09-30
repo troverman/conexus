@@ -36,7 +36,6 @@ module.exports.routes = {
   'get /project/:path/tasks': 'HomeController.index',
   'get /search': 'HomeController.index',
   'get /search/:searchQuery': 'HomeController.index',
-  'get /stream/:id': 'HomeController.index',
   'get /tasks': 'HomeController.index',
   'get /task/:id': 'HomeController.index',
   'get /transaction/:id': 'HomeController.index',
@@ -53,14 +52,6 @@ module.exports.routes = {
   'get /auth/:provider': 'AuthController.provider',
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
-
-  /**
-   * Entry routes
-   */
-  'get /api/entry': 'EntryController.getSome',
-  'get /api/entry/:id': 'EntryController.getOne',
-  'post /api/entry': 'EntryController.create',
-  'delete /api/entry/:id': 'EntryController.destroy',
 
   /**
    * Follower routes
@@ -126,15 +117,6 @@ module.exports.routes = {
    */
   'get /api/search/:searchQuery': 'SearchController.search',
   'get /api/search': 'SearchController.searchAll',
-
-  /**
-   * Stream routes
-   */
-  'get /api/stream': 'StreamController.getSome',
-  'get /api/stream/:id': 'StreamController.getOne',
-  'post /api/stream/:id': 'StreamController.update',
-  'post /api/stream': 'StreamController.create',
-  'delete /api/stream/:id': 'StreamController.destroy',
 
   /**
    * Task routes

@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "post/index.tpl.html", "post/post.tpl.html", "project/index.tpl.html", "project/templates/activity.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "projects/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "stream/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "work/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "post/index.tpl.html", "post/post.tpl.html", "project/index.tpl.html", "project/templates/activity.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "projects/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "work/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -2710,6 +2710,17 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("post/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("post/index.tpl.html",
+    "<!--CONTENT TYPE-->\n" +
+    "\n" +
+    "<div style=\"background:black\" ng-show=\"false\">\n" +
+    "	<div class=\"spacing-100\"></div>\n" +
+    "    <div style=\"text-align:center\">\n" +
+    "		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-100\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "	<div class=\"row\">\n" +
@@ -2750,27 +2761,43 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "		    <div style=\"padding:16px\">\n" +
-    "		    	<h3>Protocols | viewToken | contentToken</h3>\n" +
-    "		        <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "		        <p><a href=\"market/createContent\">createContent</a></p>\n" +
-    "		        <p><a href=\"market/createContent+{{post.id}}\">createContent+{{post.id}} </a></p>\n" +
-    "		        <p><a href=\"market/{{post.id}}\">{{post.id}} </a></p>\n" +
+    "				<div class=\"col-md-8\">\n" +
+    "			    	<h3>Protocols [viewToken, contentToken, reactionToken]</h3>\n" +
+    "			    	<p>[viewToken, contentToken, reactionToken] manifold minting logic</p>\n" +
+    "\n" +
+    "			        <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
+    "\n" +
+    "			        <p><a href=\"market/Content+Create\">Content+Create</a></p>\n" +
+    "			      	<p><a href=\"market/{{post.id}}\">Content+[type]</a></p>\n" +
+    "			        <p><a href=\"market/{{post.id}}\">Content+Create+[type]</a></p>\n" +
+    "\n" +
+    "			        <p><a href=\"market/createContent+{{post.id}}\">Content+Create+{{post.id}}</a></p>\n" +
+    "			        <p><a href=\"market/{{post.id}}\">Content+{{post.id}}</a></p>\n" +
+    "\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">View+{{post.id}}</a></p>\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">View+{{post.user.id}}</a></p>\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">View+{{currentUser.id}}</a></p>\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">View+[types | tags]</a></p>\n" +
+    "\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">Reaction+{{currentUser.id}}</a></p>\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">Reaction+[type]</a></p>\n" +
+    "			        <p><a href=\"market/View+{{post.id}}\">Reaction+[type]+{{currentUser.id}}</a></p>\n" +
+    "		    	</div>\n" +
+    "\n" +
+    "				<div class=\"col-md-4\">\n" +
+    "			        <h3>Liquidity</h3>\n" +
+    "					<p>Filters | CRE8 | USD</p>\n" +
+    "					<p>input vectors | scale of output </p>\n" +
+    "					<p>Search for Output liquidity path</p>\n" +
+    "			    	<p>[] = []..</p>\n" +
+    "		    	</div>\n" +
+    "		    	<div style=\"clear:both\"></div>\n" +
+    "\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "\n" +
-    "		<!--CONTENT TYPE-->\n" +
-    "		<!--BLEND STREAM PAGE FOR VIDEO TYPE-->\n" +
-    "\n" +
-    "		<!--<div style=\"background:black\">\n" +
-    "			<div class=\"spacing-100\"></div>\n" +
-    "		    <div style=\"text-align:center\">\n" +
-    "				<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
-    "			</div>\n" +
-    "			<div class=\"spacing-100\"></div>\n" +
-    "		</div>-->\n" +
     "\n" +
     "		<div class=\"card\" style=\"background-color:#f9f9f9\">\n" +
     "	        <div style=\"padding:16px;background-color:white\">\n" +
@@ -2829,7 +2856,7 @@ angular.module("post/post.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "</style>\n" +
     "<!--<div style=\"height:100%;border-left:solid #002c54 4px;\"></div>-->\n" +
-    "<div class=\"card\" style=\"margin:10px;background-color:#f9f9f9\" ng-show=\"true\">\n" +
+    "<div class=\"card\" style=\"margin:10px;background-color:#f9f9f9\" ng-show=\"!post.showThread\">\n" +
     "\n" +
     "    <div ng-click=\"toggleThread(post)\" class=\"threadline\"></div>\n" +
     "\n" +
@@ -2852,7 +2879,7 @@ angular.module("post/post.tpl.html", []).run(["$templateCache", function($templa
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "        <a style=\"color:grey\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "        <a style=\"color:grey;\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "    </div>\n" +
     "    <!--TODO: NESTED -->\n" +
     "    <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
@@ -2862,6 +2889,9 @@ angular.module("post/post.tpl.html", []).run(["$templateCache", function($templa
     "        </form>\n" +
     "    </div>\n" +
     "    <div ng-include=\"'post/post.tpl.html'\" ng-repeat=\"post in post.children track by post.id\"></div>\n" +
+    "</div>\n" +
+    "<div ng-show=\"post.showThread\">\n" +
+    "    <i class=\"fa fa-plus\"></i>\n" +
     "</div>\n" +
     "\n" +
     "");
@@ -3911,78 +3941,6 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>");
-}]);
-
-angular.module("stream/index.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("stream/index.tpl.html",
-    "<div style=\"background:black\">\n" +
-    "	<div class=\"spacing-100\"></div>\n" +
-    "	<!--if streaming user-->\n" +
-    "    <!--<video id=\"camera-preview\"></video>-->\n" +
-    "    <div style=\"text-align:center\">\n" +
-    "		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
-    "	</div>\n" +
-    "	<div class=\"spacing-100\"></div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"container\">\n" +
-    "	<div class=\"spacing-15\"></div>\n" +
-    "	<h1>{{stream.title}}</h1>\n" +
-    "	<br>\n" +
-    "	<div class=\"\">\n" +
-    "		<a href=\"member/{{stream.user.username}}\"><img style=\"width:75px;border-radius:100px;float:left\"src=\"{{stream.user.avatarUrl}}\"/></a>\n" +
-    "		<div style=\"float:left;margin-left:15px;\">\n" +
-    "			<h3 style=\"margin-top:0px;margin-bottom:0px\"><a href=\"member/{{stream.user.username}}\">{{stream.user.username}}</a></h3>\n" +
-    "			<p style=\"margin-top:0px;margin-bottom:0px\"><a href=\"project/{{stream.project.title}}\">{{stream.project.title}}</a></p>\n" +
-    "			<p style=\"margin-top:0px;margin-bottom:0px\"><a href=\"task/{{stream.task.id}}\">{{stream.task.title}}</a></p>\n" +
-    "			<p style=\"margin-top:0px;margin-bottom:0px\">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</p>\n" +
-    "			<p style=\"margin-top:0px;margin-bottom:0px\">Reactions | Like: 124312 | Dislike: 123</p>\n" +
-    "\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	<div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "	<div class=\"spacing-25\"></div>\n" +
-    "	<form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
-    "	    <div class=\"form-group\">\n" +
-    "	        <input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent\">\n" +
-    "	    </div>\n" +
-    "	    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "	</form>\n" +
-    "	<div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "	<div ng-repeat=\"post in posts\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "				<div>\n" +
-    "					<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\">\n" +
-    "					<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
-    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
-    "				</div>\n" +
-    "				<div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
-    "			</div>\n" +
-    "			<div class=\"card-footer\">\n" +
-    "				<a href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "				<a href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "				<a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "				<a style=\"padding:0px\" class=\"pull-right\" href=\"post/{{post.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "			</div>\n" +
-    "			<!--TODO: NESTED -->\n" +
-    "			<div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
-    "				<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "					<div class=\"form-group\">\n" +
-    "						<input type=\"text\" ng-model=\"newPost.content\" class=\"form-control\" id=\"postContent-{{post.id}}\">\n" +
-    "					</div>\n" +
-    "					<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "				</form>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "    </div>\n" +
-    "		\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-50\"></div>\n" +
-    "");
 }]);
 
 angular.module("task/index.tpl.html", []).run(["$templateCache", function($templateCache) {

@@ -122,6 +122,32 @@ angular.module( 'conexus.work', [
 
     //TODO: GET SOME
 
+
+
+    var cameraPreview = document.getElementById('camera-preview');
+    //testing out streaming! :D
+    function initializeRecorder(stream) {
+        var mediaStream = stream;
+        console.log(stream)
+        var recordAudio = RecordRTC(stream, {
+            onAudioProcessStarted: function() {
+                recordVideo.startRecording();
+                cameraPreview.src = window.URL.createObjectURL(stream);
+                cameraPreview.play();
+                cameraPreview.muted = true;
+                cameraPreview.controls = false;
+            }
+        });
+        var recordVideo = RecordRTC(stream, {
+            type: 'video'
+        });
+        recordAudio.startRecording();
+        stopRecording.disabled = false;
+    };
+
+
+
+
     //TODO: WEBSOCKETS | WEB3
     $sailsSocket.subscribe('post', function (envelope) {
         console.log(envelope)

@@ -33,7 +33,6 @@ angular.module( 'conexus', [
     'conexus.project',
     'conexus.projects',
     'conexus.register',
-    'conexus.stream',
     'conexus.search',
     'conexus.task',
     'conexus.tasks',

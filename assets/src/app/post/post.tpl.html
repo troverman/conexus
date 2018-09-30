@@ -10,7 +10,7 @@
 
 </style>
 <!--<div style="height:100%;border-left:solid #002c54 4px;"></div>-->
-<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="true">
+<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="!post.showThread">
 
     <div ng-click="toggleThread(post)" class="threadline"></div>
 
@@ -33,7 +33,7 @@
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
         <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-        <a style="color:grey" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+        <a style="color:grey;" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
     <!--TODO: NESTED -->
     <div ng-show="post.showReply" class="card-footer">
@@ -43,5 +43,8 @@
         </form>
     </div>
     <div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+</div>
+<div ng-show="post.showThread">
+    <i class="fa fa-plus"></i>
 </div>
 

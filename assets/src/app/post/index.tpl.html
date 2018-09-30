@@ -1,3 +1,16 @@
+
+
+<!--CONTENT TYPE-->
+
+<div style="background:black" ng-show="false">
+	<div class="spacing-100"></div>
+    <div style="text-align:center">
+		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+	</div>
+	<div class="spacing-100"></div>
+</div>
+
+
 <div class="container">
 
 	<div class="row">
@@ -38,27 +51,43 @@
 	<div class="row">
 		<div class="card">
 		    <div style="padding:16px">
-		    	<h3>Protocols | viewToken | contentToken</h3>
-		        <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-		        <p><a href="market/createContent">createContent</a></p>
-		        <p><a href="market/createContent+{{post.id}}">createContent+{{post.id}} </a></p>
-		        <p><a href="market/{{post.id}}">{{post.id}} </a></p>
+				<div class="col-md-8">
+			    	<h3>Protocols [viewToken, contentToken, reactionToken]</h3>
+			    	<p>[viewToken, contentToken, reactionToken] manifold minting logic</p>
+
+			        <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+
+			        <p><a href="market/Content+Create">Content+Create</a></p>
+			      	<p><a href="market/{{post.id}}">Content+[type]</a></p>
+			        <p><a href="market/{{post.id}}">Content+Create+[type]</a></p>
+
+			        <p><a href="market/createContent+{{post.id}}">Content+Create+{{post.id}}</a></p>
+			        <p><a href="market/{{post.id}}">Content+{{post.id}}</a></p>
+
+			        <p><a href="market/View+{{post.id}}">View+{{post.id}}</a></p>
+			        <p><a href="market/View+{{post.id}}">View+{{post.user.id}}</a></p>
+			        <p><a href="market/View+{{post.id}}">View+{{currentUser.id}}</a></p>
+			        <p><a href="market/View+{{post.id}}">View+[types | tags]</a></p>
+
+			        <p><a href="market/View+{{post.id}}">Reaction+{{currentUser.id}}</a></p>
+			        <p><a href="market/View+{{post.id}}">Reaction+[type]</a></p>
+			        <p><a href="market/View+{{post.id}}">Reaction+[type]+{{currentUser.id}}</a></p>
+		    	</div>
+
+				<div class="col-md-4">
+			        <h3>Liquidity</h3>
+					<p>Filters | CRE8 | USD</p>
+					<p>input vectors | scale of output </p>
+					<p>Search for Output liquidity path</p>
+			    	<p>[] = []..</p>
+		    	</div>
+		    	<div style="clear:both"></div>
+
 		    </div>
 		</div>
 	</div>
 
 	<div class="row">
-
-		<!--CONTENT TYPE-->
-		<!--BLEND STREAM PAGE FOR VIDEO TYPE-->
-
-		<!--<div style="background:black">
-			<div class="spacing-100"></div>
-		    <div style="text-align:center">
-				<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
-			</div>
-			<div class="spacing-100"></div>
-		</div>-->
 
 		<div class="card" style="background-color:#f9f9f9">
 	        <div style="padding:16px;background-color:white">
