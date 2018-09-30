@@ -893,8 +893,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<!--STORY ABOUT VALUE MAPPING HERE!!-->\n" +
     "	<!--FILL OUT THE VALUE FORM-->\n" +
     "\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"row\" ng-show=\"true\">\n" +
+    "	<div class=\"container\" ng-show=\"false\">\n" +
+    "		<div class=\"row\">\n" +
     "			<div class=\"col-md-12\">\n" +
     "				<div class=\"card\">\n" +
     "			        <div style=\"padding:16px;\">\n" +
@@ -919,9 +919,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
@@ -1982,11 +1981,14 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				<div class=\"pull-right\" style=\"margin-right:15px;margin-top:10px;\">\n" +
     "					<!--<h2>{{member.totalWork}} | total work</h2>-->\n" +
     "					<!--<input type=\"text\" placeholder=\"Reputation\" ng-model=\"reputationLookup\" class=\"form-control\">-->\n" +
-    "					<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\">\n" +
+    "					<span style=\"color:gray;font-size:10px;float:right\">0x{{member.id}}</span>\n" +
+    "					<br>\n" +
+    "					<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\">\n" +
     "					<a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" href=\"#\" ng-click=\"newTransactionToggle()\">Send Tokens</a>\n" +
     "					<a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><span class=\"grey facebook-icon\"><i class=\"fa fa-facebook\"></i> Facebook</span></a>\n" +
     "					<a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><span class=\"grey twitter-icon\"><i class=\"fa fa-twitter\"></i> Twitter</span></a>\n" +
     "					<a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><span class=\"grey google-icon\"><i class=\"fa fa-google\"></i> Google</span></a>\n" +
+    "\n" +
     "				</div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
@@ -1994,7 +1996,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div class=\"\" ng-show=\"newTransactionToggleVar\">\n" +
     "				<div class=\"card\">\n" +
     "				    <div style=\"padding:16px;\">\n" +
-    "				    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens</h3>\n" +
+    "				    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens to 0x{{member.id}}</h3>\n" +
     "						<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
     "							<div class=\"form-group col-md-4\">\n" +
     "								<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
@@ -2509,91 +2511,99 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     ".navbar-inverse .navbar-brand:hover{color:#000}\n" +
     ".navbar-toggle{border-radius:0px;}\n" +
     "</style>\n" +
-    "\n" +
-    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
-    "        <div style=\"text-align:center\">\n" +
-    "            <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <form style=\"padding:15px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
-    "                <div class=\"form-group\">\n" +
-    "                    <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
-    "                </div>\n" +
-    "            </form>\n" +
-    "            <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/projects\">Projects</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/transparency\">Transparency</a></h2>\n" +
-    "            <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/\">Vote</a></h2>-->\n" +
-    "            <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
-    "            <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
-    "            <!--LINKS-->\n" +
-    "            <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
-    "\n" +
-    "            <!--<br>\n" +
-    "            <span>\n" +
-    "                <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-instagram\"></i></a>\n" +
-    "                <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-twitter\"></i></a>\n" +
-    "            <span>-->\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</md-sidenav>\n" +
-    "\n" +
-    "<div ng-controller=\"NavCtrl\" class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"navbar-header\">\n" +
-    "            <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
-    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "            </button>\n" +
-    "            <a class=\"navbar-brand\" href=\"/\">\n" +
-    "                <img ng-show=\"!cre8xyz\" style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
-    "                <span ng-show=\"cre8xyz\" style=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
-    "            </a>\n" +
-    "        </div>\n" +
-    "        <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
-    "            <ul class=\"nav navbar-nav\">\n" +
-    "                <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "<div ng-controller=\"NavCtrl\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
+    "            <div style=\"text-align:center\">\n" +
+    "                <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <form style=\"padding:15px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                        <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
     "                    </div>\n" +
     "                </form>\n" +
-    "            </ul>\n" +
-    "            <ul class=\"nav navbar-nav navbar-right\">\n" +
-    "                <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
-    "                <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
-    "                <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
-    "                <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
-    "                    <!--notifications on username-->\n" +
-    "                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                        {{currentUser.username}} <span class=\"fa fa-angle-down\"></span>\n" +
+    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
+    "                <h2 class=\"nav-links\" ng-show=\"currentUser\">\n" +
+    "                    <a href=\"member/{{currentUser.username}}\">\n" +
+    "                        <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
     "                    </a>\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li>\n" +
-    "                            <a style=\"color:black!important\" href=\"/member/{{currentUser.username}}\">\n" +
-    "                                <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
-    "                            </a>\n" +
-    "                        </li>\n" +
-    "                        <li><a style=\"color:black!important\" href=\"/account\">account</a></li>\n" +
-    "                        <li><a style=\"color:black!important\" href=\"#\">0 notifications</a></li>\n" +
-    "                        <li role=\"separator\" class=\"divider\"></li>\n" +
-    "                        <li><a style=\"color:black!important\" href=\"/logout\">log out</a></li>\n" +
-    "                    </ul>\n" +
-    "                </li>\n" +
-    "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
-    "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
-    "            </ul>\n" +
+    "                </h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/projects\">Projects</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
+    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/transparency\">Transparency</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/account\">Settings</a></h2>\n" +
+    "                <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/\">Vote</a></h2>-->\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/logout\">Logout</a></h2>\n" +
+    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
+    "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
+    "                <!--LINKS-->\n" +
+    "                <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
+    "\n" +
+    "                <!--<br>\n" +
+    "                <span>\n" +
+    "                    <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-instagram\"></i></a>\n" +
+    "                    <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-twitter\"></i></a>\n" +
+    "                <span>-->\n" +
+    "\n" +
+    "            </div>\n" +
     "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
+    "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"navbar-header\">\n" +
+    "                <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
+    "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                    <span class=\"icon-bar\"></span>\n" +
+    "                    <span class=\"icon-bar\"></span>\n" +
+    "                    <span class=\"icon-bar\"></span>\n" +
+    "                </button>\n" +
+    "                <a class=\"navbar-brand\" href=\"/\">\n" +
+    "                    <img ng-show=\"!cre8xyz\" style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
+    "                    <span ng-show=\"cre8xyz\" style=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "            <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
+    "                <ul class=\"nav navbar-nav\">\n" +
+    "                    <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
+    "                </ul>\n" +
+    "                <ul class=\"nav navbar-nav navbar-right\">\n" +
+    "                    <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
+    "                    <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
+    "                    <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
+    "                    <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
+    "                        <!--notifications on username-->\n" +
+    "                        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                            {{currentUser.username}} <span class=\"fa fa-angle-down\"></span>\n" +
+    "                        </a>\n" +
+    "                        <ul class=\"dropdown-menu\">\n" +
+    "                            <li>\n" +
+    "                                <a style=\"color:black!important\" href=\"/member/{{currentUser.username}}\">\n" +
+    "                                    <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
+    "                                </a>\n" +
+    "                            </li>\n" +
+    "                            <li><a style=\"color:black!important\" href=\"/account\">account</a></li>\n" +
+    "                            <li><a style=\"color:black!important\" href=\"#\">0 notifications</a></li>\n" +
+    "                            <li role=\"separator\" class=\"divider\"></li>\n" +
+    "                            <li><a style=\"color:black!important\" href=\"/logout\">log out</a></li>\n" +
+    "                        </ul>\n" +
+    "                    </li>\n" +
+    "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
+    "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
+    "                </ul>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "    </div>\n" +
-    "    <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
-    "</div>\n" +
-    "");
+    "\n" +
+    "</div>");
 }]);
 
 angular.module("order/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -2705,6 +2715,42 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "		    <div style=\"padding:16px\">\n" +
+    "		        <h3>{{post.parent}} Parent Information</h3>\n" +
+    "				<h3>\n" +
+    "					<a href=\"market/{{post.market}}\">{{post.market}}</a>\n" +
+    "					<a href=\"order/{{post.order}}\">{{post.order}}</a>\n" +
+    "					<a href=\"post/{{post.post}}\">{{post.post}}</a>\n" +
+    "					<a href=\"project/{{post.project.urlTitle}}\">{{post.project.title}}</a>\n" +
+    "					<a href=\"member/{{post.profile}}\">{{post.profile}}</a>\n" +
+    "					<a href=\"task/{{post.task}}\">{{post.task}}</a>\n" +
+    "					<a href=\"task/{{post.transaction}}\">{{post.transaction}}</a>\n" +
+    "					<a href=\"work/{{post.work}}\">{{post.work}}</a>\n" +
+    "				</h3>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "		    <div style=\"padding:16px\">\n" +
+    "		    	<h3>{{post.id}} Post Information</h3>\n" +
+    "				<a href=\"member/{{post.user.username}}\"><img style=\"width:75px;height:75px;border-radius:100vh;float:left\" src=\"{{post.user.avatarUrl}}\"/></a>\n" +
+    "				<div style=\"float:left;margin-left:15px\">\n" +
+    "					<h4 style=\"margin-top:0px;margin-bottom:0px\"><a href=\"member/{{post.user.username}}\">{{post.user.username}}</a></h4>\n" +
+    "					<h5 style=\"margin-top:0px;margin-bottom:0px\"><a href=\"project/{{post.title}}\">{{post.title}} Title</a></h5>\n" +
+    "					<h5 style=\"margin-top:0px;margin-bottom:0px\"><a href=\"#\">Tag, Tag</a></h5>\n" +
+    "					<p style=\"margin-top:0px;margin-bottom:0px\">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</p>\n" +
+    "					<p style=\"margin-top:0px;margin-bottom:0px\">Reactions | Like: 124312 | Dislike: 123</p>\n" +
+    "				</div>\n" +
+    "				<div style=\"clear:both\"></div>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "		    <div style=\"padding:16px\">\n" +
+    "		    	<h3>Protocols | viewToken | contentToken</h3>\n" +
     "		        <h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "		        <p><a href=\"market/createContent\">createContent</a></p>\n" +
     "		        <p><a href=\"market/createContent+{{post.id}}\">createContent+{{post.id}} </a></p>\n" +
@@ -2714,25 +2760,33 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "		    <div style=\"padding:16px\">\n" +
-    "		        <h3>{{post.parent}} Parent Information</h3>\n" +
-    "		    </div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"row\">\n" +
     "\n" +
     "		<!--CONTENT TYPE-->\n" +
     "		<!--BLEND STREAM PAGE FOR VIDEO TYPE-->\n" +
     "\n" +
-    "		<div class=\"card\">\n" +
-    "	        <div style=\"padding:16px;\">\n" +
+    "		<!--<div style=\"background:black\">\n" +
+    "			<div class=\"spacing-100\"></div>\n" +
+    "		    <div style=\"text-align:center\">\n" +
+    "				<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>\n" +
+    "			</div>\n" +
+    "			<div class=\"spacing-100\"></div>\n" +
+    "		</div>-->\n" +
+    "\n" +
+    "		<div class=\"card\" style=\"background-color:#f9f9f9\">\n" +
+    "	        <div style=\"padding:16px;background-color:white\">\n" +
+    "\n" +
     "				<div>\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "					<a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span class=\"\">{{post.user.username}}</span></a>\n" +
+    "					<a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span style=\"font-weight:800\">{{post.user.username}}</span></a>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "				</div>\n" +
-    "				<div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<div style=\"max-height:500px;overflow:scroll\">\n" +
+    "					<span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span>\n" +
+    "				</div>\n" +
+    "\n" +
     "			</div>\n" +
     "			<div class=\"card-footer\">\n" +
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
@@ -2763,13 +2817,36 @@ angular.module("post/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("post/post.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("post/post.tpl.html",
-    "<div class=\"card\" style=\"margin:5px\">\n" +
-    "    <div style=\"padding:16px;\">\n" +
+    "<style>\n" +
+    ".threadline{\n" +
+    "    height:100%;\n" +
+    "    border-left:solid #002c54 3px;\n" +
+    "    margin-bottom: -100000px;\n" +
+    "    padding-bottom: 100000px;\n" +
+    "    float: left;\n" +
+    "}\n" +
+    ".threadline:hover{border-left:solid #000 4px;}\n" +
+    "\n" +
+    "</style>\n" +
+    "<!--<div style=\"height:100%;border-left:solid #002c54 4px;\"></div>-->\n" +
+    "<div class=\"card\" style=\"margin:10px;background-color:#f9f9f9\" ng-show=\"true\">\n" +
+    "\n" +
+    "    <div ng-click=\"toggleThread(post)\" class=\"threadline\"></div>\n" +
+    "\n" +
+    "    <div style=\"padding:16px;background-color:white\">\n" +
+    "\n" +
     "        <div>\n" +
     "            <img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "            <a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span class=\"\">{{post.user.username}}</span></a>\n" +
+    "            <a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span style=\"font-weight:800\">{{post.user.username}}</span></a>\n" +
+    "            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "        </div>\n" +
-    "        <div><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "\n" +
+    "        <br>\n" +
+    "\n" +
+    "        <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "            <span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span>\n" +
+    "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "    <div class=\"card-footer\">\n" +
     "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
@@ -2786,9 +2863,6 @@ angular.module("post/post.tpl.html", []).run(["$templateCache", function($templa
     "    </div>\n" +
     "    <div ng-include=\"'post/post.tpl.html'\" ng-repeat=\"post in post.children track by post.id\"></div>\n" +
     "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "");
 }]);
@@ -2872,7 +2946,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<div class=\"container\" style=\"padding:0px\" ng-show=\"newTransactionToggleVar\">\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px;\">\n" +
-    "            <h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens</h3>\n" +
+    "            <h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens to 0x{{project.id}}</h3>\n" +
     "            <form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
     "                <div class=\"form-group col-md-4\">\n" +
     "                    <input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
@@ -2974,6 +3048,23 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                <a href=\"task/{{item.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
     "                <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                <a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\" ng-show=\"item.model=='TRANSACTION'\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <p style=\"font-weight:800\">From: <a href=\"member/{{item.from}}\">{{item.from}}</a> To: <a href=\"member/{{item.to}}\">{{item.to}}</a></p>\n" +
+    "                <p style=\"font-weight:800\">{{item.amount}} <a href=\"market/{{item.identifier}}\">{{item.identifier}}</a></p>\n" +
+    "                <p><a ng-repeat=\"tag in item.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                <p>{{item.content}}</p>\n" +
+    "                <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "                <a href=\"transaction/{{item.id}}\"></a>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +

@@ -75,7 +75,7 @@
 <div class="container" style="padding:0px" ng-show="newTransactionToggleVar">
     <div class="card">
         <div style="padding:16px;">
-            <h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens</h3>
+            <h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens to 0x{{project.id}}</h3>
             <form role="form" ng-submit="createTransaction(newTransaction)">
                 <div class="form-group col-md-4">
                     <input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">

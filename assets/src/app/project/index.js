@@ -37,6 +37,12 @@ angular.module( 'conexus.project', [
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
+            transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
+                return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
+            }],
+            transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
+                return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
+            }],
             work: ['project', 'WorkModel', function(project, WorkModel){
                 return WorkModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
@@ -237,7 +243,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'tasks', 'titleService', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, tasks, titleService, work ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'tasks', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, tasks, titleService, transactionsFrom, transactionsTo, work ) {
     titleService.setTitle('Activity | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
@@ -246,6 +252,11 @@ angular.module( 'conexus.project', [
     $scope.project = project;
     $scope.tasks = tasks;
     $scope.work = work;
+
+    $scope.transactionsFrom = transactionsFrom;
+    $scope.transactionsTo = transactionsTo;
+    $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+    //$scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
     //POST, WORK, TASK CREATE, VALIDATION (VOTE)
     $scope.posts = $scope.posts.map(function(obj){
@@ -256,12 +267,16 @@ angular.module( 'conexus.project', [
         obj.model = 'TASK';
         return obj;
     });
+    $scope.transactions = $scope.transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
+        return obj;
+    });
     $scope.work = $scope.work.map(function(obj){
         obj.model = 'WORK';
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.posts, $scope.tasks, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.posts, $scope.tasks, $scope.transactions, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
 

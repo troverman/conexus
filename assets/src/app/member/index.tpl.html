@@ -60,11 +60,14 @@
 				<div class="pull-right" style="margin-right:15px;margin-top:10px;">
 					<!--<h2>{{member.totalWork}} | total work</h2>-->
 					<!--<input type="text" placeholder="Reputation" ng-model="reputationLookup" class="form-control">-->
-					<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}">
+					<span style="color:gray;font-size:10px;float:right">0x{{member.id}}</span>
+					<br>
+					<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
 					<a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" href="#" ng-click="newTransactionToggle()">Send Tokens</a>
 					<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
 					<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
 					<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
+
 				</div>
 				<div class="spacing-10"></div>
 			</div>
@@ -72,7 +75,7 @@
 			<div class="" ng-show="newTransactionToggleVar">
 				<div class="card">
 				    <div style="padding:16px;">
-				    	<h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens</h3>
+				    	<h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens to 0x{{member.id}}</h3>
 						<form role="form" ng-submit="createTransaction(newTransaction)">
 							<div class="form-group col-md-4">
 								<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">

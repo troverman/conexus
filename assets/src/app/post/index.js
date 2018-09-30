@@ -87,6 +87,8 @@ angular.module( 'conexus.post', [
     
     //TODO
     $scope.reply = function(post){
+        console.log(post);
+        console.log($scope.post.children)
         $scope.post.showReply = !$scope.post.showReply
     };
 

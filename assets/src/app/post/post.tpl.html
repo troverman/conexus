@@ -1,10 +1,33 @@
-<div class="card" style="margin:5px">
-    <div style="padding:16px;">
+<style>
+.threadline{
+    height:100%;
+    border-left:solid #002c54 3px;
+    margin-bottom: -100000px;
+    padding-bottom: 100000px;
+    float: left;
+}
+.threadline:hover{border-left:solid #000 4px;}
+
+</style>
+<!--<div style="height:100%;border-left:solid #002c54 4px;"></div>-->
+<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="true">
+
+    <div ng-click="toggleThread(post)" class="threadline"></div>
+
+    <div style="padding:16px;background-color:white">
+
         <div>
             <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
-            <a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a>
+            <a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
+            <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
         </div>
-        <div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+
+        <br>
+
+        <div style="max-height:500px;overflow:scroll">
+            <span style="display:inline" ng-bind-html="renderMessage(post.content)"></span>
+        </div>
+
     </div>
     <div class="card-footer">
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -21,7 +44,4 @@
     </div>
     <div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
 </div>
-
-
-
 

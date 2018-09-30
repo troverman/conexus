@@ -3,6 +3,42 @@
 	<div class="row">
 		<div class="card">
 		    <div style="padding:16px">
+		        <h3>{{post.parent}} Parent Information</h3>
+				<h3>
+					<a href="market/{{post.market}}">{{post.market}}</a>
+					<a href="order/{{post.order}}">{{post.order}}</a>
+					<a href="post/{{post.post}}">{{post.post}}</a>
+					<a href="project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+					<a href="member/{{post.profile}}">{{post.profile}}</a>
+					<a href="task/{{post.task}}">{{post.task}}</a>
+					<a href="task/{{post.transaction}}">{{post.transaction}}</a>
+					<a href="work/{{post.work}}">{{post.work}}</a>
+				</h3>
+		    </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px">
+		    	<h3>{{post.id}} Post Information</h3>
+				<a href="member/{{post.user.username}}"><img style="width:75px;height:75px;border-radius:100vh;float:left" src="{{post.user.avatarUrl}}"/></a>
+				<div style="float:left;margin-left:15px">
+					<h4 style="margin-top:0px;margin-bottom:0px"><a href="member/{{post.user.username}}">{{post.user.username}}</a></h4>
+					<h5 style="margin-top:0px;margin-bottom:0px"><a href="project/{{post.title}}">{{post.title}} Title</a></h5>
+					<h5 style="margin-top:0px;margin-bottom:0px"><a href="#">Tag, Tag</a></h5>
+					<p style="margin-top:0px;margin-bottom:0px">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</p>
+					<p style="margin-top:0px;margin-bottom:0px">Reactions | Like: 124312 | Dislike: 123</p>
+				</div>
+				<div style="clear:both"></div>
+		    </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px">
+		    	<h3>Protocols | viewToken | contentToken</h3>
 		        <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
 		        <p><a href="market/createContent">createContent</a></p>
 		        <p><a href="market/createContent+{{post.id}}">createContent+{{post.id}} </a></p>
@@ -12,25 +48,33 @@
 	</div>
 
 	<div class="row">
-		<div class="card">
-		    <div style="padding:16px">
-		        <h3>{{post.parent}} Parent Information</h3>
-		    </div>
-		</div>
-	</div>
-
-	<div class="row">
 
 		<!--CONTENT TYPE-->
 		<!--BLEND STREAM PAGE FOR VIDEO TYPE-->
 
-		<div class="card">
-	        <div style="padding:16px;">
+		<!--<div style="background:black">
+			<div class="spacing-100"></div>
+		    <div style="text-align:center">
+				<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+			</div>
+			<div class="spacing-100"></div>
+		</div>-->
+
+		<div class="card" style="background-color:#f9f9f9">
+	        <div style="padding:16px;background-color:white">
+
 				<div>
 					<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
-					<a style="display:inline" href="/member/{{post.user.username}}"><span class="">{{post.user.username}}</span></a>
+					<a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
 				</div>
-				<div><span style="display:inline" ng-bind-html="renderMessage(post.content)"></span></div>
+
+				<br>
+
+				<div style="max-height:500px;overflow:scroll">
+					<span style="display:inline" ng-bind-html="renderMessage(post.content)"></span>
+				</div>
+
 			</div>
 			<div class="card-footer">
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
