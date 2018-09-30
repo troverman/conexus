@@ -2490,82 +2490,81 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
 angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/index.tpl.html",
     "<style>\n" +
-    ".navbar-inverse .navbar-toggle{border-color:#000;}.navbar-toggle{border-radius:0px;}\n" +
+    ".navbar-inverse .navbar-toggle{border-color:#000;}\n" +
+    ".navbar-inverse .navbar-brand:focus{color:#000}\n" +
+    ".navbar-inverse .navbar-brand:active{color:#000}\n" +
+    ".navbar-inverse .navbar-brand:hover{color:#000}\n" +
+    ".navbar-toggle{border-radius:0px;}\n" +
     "</style>\n" +
     "\n" +
-    "\n" +
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed\">\n" +
-    "  <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
-    "    \n" +
-    "    <div style=\"text-align:center\">\n" +
-    "      <div class=\"spacing-25\"></div>\n" +
-    "      <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
-    "        <div class=\"form-group\">\n" +
-    "          <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
+    "        <div style=\"text-align:center\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "                <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                </div>\n" +
+    "            </form>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
     "        </div>\n" +
-    "      </form>\n" +
-    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
-    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
-    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
-    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Login</a></h2>\n" +
-    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Register</a></h2>\n" +
     "    </div>\n" +
-    "\n" +
-    "  </div>\n" +
     "</md-sidenav>\n" +
     "\n" +
     "<div ng-controller=\"NavCtrl\" class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
-    "  <div class=\"container\">\n" +
-    "    <div class=\"navbar-header\">\n" +
-    "      <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
-    "        <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "        <span class=\"icon-bar\"></span>\n" +
-    "        <span class=\"icon-bar\"></span>\n" +
-    "        <span class=\"icon-bar\"></span>\n" +
-    "      </button>\n" +
-    "      <a class=\"navbar-brand\" href=\"/\">\n" +
-    "        <img ng-show=\"!cre8xyz\" style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
-    "        <span ng-show=\"cre8xyz\" style=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
-    "      </a>\n" +
-    "    </div>\n" +
-    "    <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
-    "      <ul class=\"nav navbar-nav\">\n" +
-    "        <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
-    "          <div class=\"form-group\">\n" +
-    "            <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
-    "          </div>\n" +
-    "        </form>\n" +
-    "      </ul>\n" +
-    "      <ul class=\"nav navbar-nav navbar-right\">\n" +
-    "        <!--notifications on username-->\n" +
-    "        <li ng-show=\"!currentUser\" ng-click=\"sideNavToggle()\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
-    "        <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
-    "        <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
-    "        <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
-    "            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                {{currentUser.username}} <span class=\"fa fa-angle-down\"></span>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"navbar-header\">\n" +
+    "            <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
+    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "            </button>\n" +
+    "            <a class=\"navbar-brand\" href=\"/\">\n" +
+    "                <img ng-show=\"!cre8xyz\" style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>\n" +
+    "                <span ng-show=\"cre8xyz\" style=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
     "            </a>\n" +
-    "            <ul class=\"dropdown-menu\">\n" +
-    "                <li>\n" +
-    "                    <a style=\"color:black!important\" href=\"/member/{{currentUser.username}}\">\n" +
-    "                        <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
-    "                    </a>\n" +
-    "                </li>\n" +
-    "                <li><a style=\"color:black!important\" href=\"/account\">account</a></li>\n" +
-    "                <li><a style=\"color:black!important\" href=\"#\">0 notifications</a></li>\n" +
-    "                <!--<li><a style=\"color:black!important\" href=\"#\">settings</a></li>-->\n" +
-    "                <li role=\"separator\" class=\"divider\"></li>\n" +
-    "                <li><a style=\"color:black!important\" href=\"/logout\">log out</a></li>\n" +
+    "        </div>\n" +
+    "        <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
+    "            <ul class=\"nav navbar-nav\">\n" +
+    "                <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
     "            </ul>\n" +
-    "        </li>\n" +
-    "        <!--<li class=\"nav-links\" ng-show=\"currentUser\"><a href=\"/logout\">Logout</a></li>-->\n" +
-    "        <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
-    "        <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
-    "        <li class=\"divider-vertical\"></li>\n" +
-    "      </ul>\n" +
+    "            <ul class=\"nav navbar-nav navbar-right\">\n" +
+    "                <li ng-show=\"!currentUser\" ng-click=\"sideNavToggle()\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
+    "                <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
+    "                <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
+    "                <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
+    "                    <!--notifications on username-->\n" +
+    "                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                        {{currentUser.username}} <span class=\"fa fa-angle-down\"></span>\n" +
+    "                    </a>\n" +
+    "                    <ul class=\"dropdown-menu\">\n" +
+    "                        <li>\n" +
+    "                            <a style=\"color:black!important\" href=\"/member/{{currentUser.username}}\">\n" +
+    "                                <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
+    "                            </a>\n" +
+    "                        </li>\n" +
+    "                        <li><a style=\"color:black!important\" href=\"/account\">account</a></li>\n" +
+    "                        <li><a style=\"color:black!important\" href=\"#\">0 notifications</a></li>\n" +
+    "                        <li role=\"separator\" class=\"divider\"></li>\n" +
+    "                        <li><a style=\"color:black!important\" href=\"/logout\">log out</a></li>\n" +
+    "                    </ul>\n" +
+    "                </li>\n" +
+    "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
+    "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
+    "                <li class=\"divider-vertical\"></li>\n" +
+    "            </ul>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "  </div>\n" +
-    "  <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
+    "    <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "</div>\n" +
     "");
 }]);

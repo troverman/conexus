@@ -1,78 +1,77 @@
 <style>
-.navbar-inverse .navbar-toggle{border-color:#000;}.navbar-toggle{border-radius:0px;}
+.navbar-inverse .navbar-toggle{border-color:#000;}
+.navbar-inverse .navbar-brand:focus{color:#000}
+.navbar-inverse .navbar-brand:active{color:#000}
+.navbar-inverse .navbar-brand:hover{color:#000}
+.navbar-toggle{border-radius:0px;}
 </style>
 
-
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right" md-is-locked-open="false" style="position:fixed">
-  <div class="md-list-item-text" layout="column" style="background-color:black;height:100%;">
-    
-    <div style="text-align:center">
-      <div class="spacing-25"></div>
-      <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
-        <div class="form-group">
-          <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">
+    <div class="md-list-item-text" layout="column" style="background-color:black;height:100%;">
+        <div style="text-align:center">
+            <div class="spacing-25"></div>
+                <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
+                <div class="form-group">
+                    <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">
+                </div>
+            </form>
+            <h2 class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
+            <h2 class="nav-links" style="padding:16px;"><a href="/discover">Discover</a></h2>
+            <h2 class="nav-links" style="padding:16px;"><a href="/market">Market</a></h2>
+            <h2 class="nav-links" style="padding:16px;"><a href="/login">Login</a></h2>
+            <h2 class="nav-links" style="padding:16px;"><a href="/register">Register</a></h2>
         </div>
-      </form>
-      <h2 class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
-      <h2 class="nav-links" style="padding:16px;"><a href="/discover">Discover</a></h2>
-      <h2 class="nav-links" style="padding:16px;"><a href="/market">Market</a></h2>
-      <h2 class="nav-links" style="padding:16px;"><a href="/market">Login</a></h2>
-      <h2 class="nav-links" style="padding:16px;"><a href="/market">Register</a></h2>
     </div>
-
-  </div>
 </md-sidenav>
 
 <div ng-controller="NavCtrl" class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" ng-click="sideNavToggle()">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">
-        <img ng-show="!cre8xyz" style="height:25px;margin-top:-3px" src="/images/conexus-white.png"/>
-        <span ng-show="cre8xyz" style="font-weight:bold;color:white">CRE8.XYZ</span>
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" style="text-align:center">
-      <ul class="nav navbar-nav">
-        <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
-          <div class="form-group">
-            <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">
-          </div>
-        </form>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <!--notifications on username-->
-        <li ng-show="!currentUser" ng-click="sideNavToggle()" class="nav-links"><a href="/about"></i>About</a></li>
-        <li class="nav-links"><a href="/discover">Discover</a></li>
-        <li class="nav-links"><a href="/market">Market</a></li>
-        <li class="dropdown nav-links" ng-show="currentUser">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                {{currentUser.username}} <span class="fa fa-angle-down"></span>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="sideNavToggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img ng-show="!cre8xyz" style="height:25px;margin-top:-3px" src="/images/conexus-white.png"/>
+                <span ng-show="cre8xyz" style="font-weight:bold;color:white">CRE8.XYZ</span>
             </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a style="color:black!important" href="/member/{{currentUser.username}}">
-                        <img style="height:32px;width:32px;border-radius:3px" src="{{currentUser.avatarUrl}}"/> {{currentUser.username}}
-                    </a>
-                </li>
-                <li><a style="color:black!important" href="/account">account</a></li>
-                <li><a style="color:black!important" href="#">0 notifications</a></li>
-                <!--<li><a style="color:black!important" href="#">settings</a></li>-->
-                <li role="separator" class="divider"></li>
-                <li><a style="color:black!important" href="/logout">log out</a></li>
+        </div>
+        <div class="collapse navbar-collapse" style="text-align:center">
+            <ul class="nav navbar-nav">
+                <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
+                    <div class="form-group">
+                        <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">
+                    </div>
+                </form>
             </ul>
-        </li>
-        <!--<li class="nav-links" ng-show="currentUser"><a href="/logout">Logout</a></li>-->
-        <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
-        <li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>
-        <li class="divider-vertical"></li>
-      </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="!currentUser" ng-click="sideNavToggle()" class="nav-links"><a href="/about"></i>About</a></li>
+                <li class="nav-links"><a href="/discover">Discover</a></li>
+                <li class="nav-links"><a href="/market">Market</a></li>
+                <li class="dropdown nav-links" ng-show="currentUser">
+                    <!--notifications on username-->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{currentUser.username}} <span class="fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a style="color:black!important" href="/member/{{currentUser.username}}">
+                                <img style="height:32px;width:32px;border-radius:3px" src="{{currentUser.avatarUrl}}"/> {{currentUser.username}}
+                            </a>
+                        </li>
+                        <li><a style="color:black!important" href="/account">account</a></li>
+                        <li><a style="color:black!important" href="#">0 notifications</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a style="color:black!important" href="/logout">log out</a></li>
+                    </ul>
+                </li>
+                <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
+                <li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>
+                <li class="divider-vertical"></li>
+            </ul>
+        </div>
     </div>
-  </div>
-  <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
+    <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
 </div>
