@@ -161,13 +161,13 @@ angular.module( 'conexus.member', [
     $scope.newTransaction = {};
     $scope.newTransaction.identifier = 'CRE8';
     $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
+    $scope.tabsToggleVar = false;
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
     if($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
     }
 
     //TODO: seoService
-
 
     $scope.createTransaction = function(){
         if($scope.currentUser){
@@ -193,8 +193,11 @@ angular.module( 'conexus.member', [
 
     $scope.newTransactionToggle = function() {
         $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
-    }
+    };
 
+    $scope.tabsToggle = function() {
+        $scope.tabsToggleVar = !$scope.tabsToggleVar;
+    };
 
     //TODO: SOCKET | WEB3
     /*

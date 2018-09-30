@@ -19,49 +19,58 @@
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
                 <div class="row">
-                	<ul style="padding:0px;" class="member-tabs">
-                		<li><a href="/project/{{project.urlTitle}}">Activity</a></li>
-                		<!--<li><a href="/project/{{project.urlTitle}}/channels">Channels</a></li>
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li><a href="project/{{project.urlTitle}}">Activity</a></li>
+                        <!--<li><a href="/project/{{project.urlTitle}}/channels">Channels</a></li>
                         <li><a href="/project/{{project.urlTitle}}/charter">Charter</a></li>-->
-                        <li><a href="/project/{{project.urlTitle}}/content">Content</a></li>
-                		<li><a href="/project/{{project.urlTitle}}/ledger">Ledger</a></li>
+                        <li><a href="project/{{project.urlTitle}}/content">Content</a></li>
+                        <li><a href="project/{{project.urlTitle}}/ledger">Ledger</a></li>
                         <!--<li><a href="/project/{{project.urlTitle}}">Map</a></li>-->
-                		<li><a href="/project/{{project.urlTitle}}/members">{{memberCount}} Members</a></li>
-                        <li><a href="/project/{{project.urlTitle}}/projects">Projects</a></li>
+                        <li><a href="project/{{project.urlTitle}}/members">{{memberCount}} Members</a></li>
+                        <li><a href="project/{{project.urlTitle}}/projects">Projects</a></li>
                         <!--<li><a href="/project/{{project.urlTitle}}/store">Store</a></li>-->
-                		<!--<li><a href="/project/{{project.urlTitle}}/streams">Streams</a></li>-->
-                        <li><a href="/project/{{project.urlTitle}}/tasks">Tasks</a></li>
+                        <li><a href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
                         <li>
                             <a class="btn btn-default" ng-click="newTransactionToggle()">Send Tokens</a>
                         </li>
 
-                		<li ng-show="true">
-                			<a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a>
-                		</li>
-                		<li ng-show="true">
-                			<a class="btn btn-default" ng-click="createMember()">Join</a>
-                		</li>
-                	</ul>
+                        <li ng-show="true">
+                            <a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a>
+                        </li>
+                        <li ng-show="true">
+                            <a class="btn btn-default" ng-click="createMember()">Join</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="nav-toggle">
-                <a href="#"><i class="fa fa-bars"></i></a>
-                <!--CLICK TO EXPAND-->
+                <a href="#" ng-click="tabsToggle()"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+        <div ng-show="tabsToggleVar" style="text-align:center">
+            <md-divider style="color:gray"></md-divider>
+            <div class="">
+                <!--SEARCH-->
+                <br>
+                <h4><a href="project/{{project.urlTitle}}">Activity</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/content">Content</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/members">{{memberCount}} Members</a></h4>
+                
+                <!--<h4><a href="project/{{project.urlTitle}}/charter">Market</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/charter">Marketplace</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>-->
+
+                <h4><a href="project/{{project.urlTitle}}/projects">Projects</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/tasks">Tasks</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
+                <br>
+                <button class="btn btn-default log-btn" ng-click="newTransactionToggle()">Send Tokens</button>
+                <br>
             </div>
         </div>
     </div>
 </div>
-
-<!--<div class="container">
-    <div class="pull-left" style="text-align:left">
-        <h5>@{{project.title}}</h5>
-        <p>{{project.description}}</p>
-    </div>
-    <div class="pull-right" style="margin-right:15px;margin-top:10px;">
-        <img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}">
-        <a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" href="#" ng-click="newTransactionToggle()">Send Tokens</a>
-    </div>
-</div>-->
 
 <div class="container" style="padding:0px" ng-show="newTransactionToggleVar">
     <div class="card">
@@ -103,3 +112,4 @@
 <div class="spacing-50"></div>
 
 <div ng-include="'footer/index.tpl.html'"></div>
+

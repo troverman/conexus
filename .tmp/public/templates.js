@@ -1954,9 +1954,22 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "						</li>\n" +
     "					</ul>\n" +
     "					<div class=\"nav-toggle\">\n" +
-    "						<a href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
-    "						<!--CLICK TO EXPAND-->\n" +
+    "						<a href=\"#\" ng-click=\"tabsToggle()\"><i class=\"fa fa-bars\"></i></a>\n" +
     "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
+    "				<md-divider style=\"color:gray\"></md-divider>\n" +
+    "				<div class=\"container\">\n" +
+    "					<!--SEARCH-->\n" +
+    "					<br>\n" +
+    "					<h4><a href=\"member/{{member.username}}\">Activity</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/content\">Content</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/ledger\">Ledger</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/positions\">Positions</a></h4>\n" +
+    "					<br>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			<md-divider style=\"color:gray\"></md-divider>\n" +
@@ -2500,17 +2513,32 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed\">\n" +
     "    <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
     "        <div style=\"text-align:center\">\n" +
+    "            <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "                <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "            <form style=\"padding:15px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "                <div class=\"form-group\">\n" +
-    "                    <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                    <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
     "                </div>\n" +
     "            </form>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
+    "            <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
     "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
     "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
-    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/projects\">Projects</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
+    "            <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/transparency\">Transparency</a></h2>\n" +
+    "            <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/\">Vote</a></h2>-->\n" +
+    "            <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
+    "            <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
+    "            <!--LINKS-->\n" +
+    "            <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
+    "\n" +
+    "            <!--<br>\n" +
+    "            <span>\n" +
+    "                <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-instagram\"></i></a>\n" +
+    "                <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-twitter\"></i></a>\n" +
+    "            <span>-->\n" +
+    "\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</md-sidenav>\n" +
@@ -2538,7 +2566,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </form>\n" +
     "            </ul>\n" +
     "            <ul class=\"nav navbar-nav navbar-right\">\n" +
-    "                <li ng-show=\"!currentUser\" ng-click=\"sideNavToggle()\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
+    "                <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "                <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
     "                <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
     "                <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
@@ -2560,7 +2588,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </li>\n" +
     "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
     "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
-    "                <li class=\"divider-vertical\"></li>\n" +
     "            </ul>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2789,49 +2816,58 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <div style=\"background-color:white\">\n" +
     "            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
     "                <div class=\"row\">\n" +
-    "                	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                		<li><a href=\"/project/{{project.urlTitle}}\">Activity</a></li>\n" +
-    "                		<!--<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
+    "                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                        <li><a href=\"project/{{project.urlTitle}}\">Activity</a></li>\n" +
+    "                        <!--<li><a href=\"/project/{{project.urlTitle}}/channels\">Channels</a></li>\n" +
     "                        <li><a href=\"/project/{{project.urlTitle}}/charter\">Charter</a></li>-->\n" +
-    "                        <li><a href=\"/project/{{project.urlTitle}}/content\">Content</a></li>\n" +
-    "                		<li><a href=\"/project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
+    "                        <li><a href=\"project/{{project.urlTitle}}/content\">Content</a></li>\n" +
+    "                        <li><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
     "                        <!--<li><a href=\"/project/{{project.urlTitle}}\">Map</a></li>-->\n" +
-    "                		<li><a href=\"/project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
-    "                        <li><a href=\"/project/{{project.urlTitle}}/projects\">Projects</a></li>\n" +
+    "                        <li><a href=\"project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></li>\n" +
+    "                        <li><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></li>\n" +
     "                        <!--<li><a href=\"/project/{{project.urlTitle}}/store\">Store</a></li>-->\n" +
-    "                		<!--<li><a href=\"/project/{{project.urlTitle}}/streams\">Streams</a></li>-->\n" +
-    "                        <li><a href=\"/project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
+    "                        <li><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "                        <li>\n" +
     "                            <a class=\"btn btn-default\" ng-click=\"newTransactionToggle()\">Send Tokens</a>\n" +
     "                        </li>\n" +
     "\n" +
-    "                		<li ng-show=\"true\">\n" +
-    "                			<a class=\"btn btn-default\" ng-show=\"isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a>\n" +
-    "                		</li>\n" +
-    "                		<li ng-show=\"true\">\n" +
-    "                			<a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a>\n" +
-    "                		</li>\n" +
-    "                	</ul>\n" +
+    "                        <li ng-show=\"true\">\n" +
+    "                            <a class=\"btn btn-default\" ng-show=\"isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a>\n" +
+    "                        </li>\n" +
+    "                        <li ng-show=\"true\">\n" +
+    "                            <a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a>\n" +
+    "                        </li>\n" +
+    "                    </ul>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"nav-toggle\">\n" +
-    "                <a href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
-    "                <!--CLICK TO EXPAND-->\n" +
+    "                <a href=\"#\" ng-click=\"tabsToggle()\"><i class=\"fa fa-bars\"></i></a>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
+    "            <md-divider style=\"color:gray\"></md-divider>\n" +
+    "            <div class=\"\">\n" +
+    "                <!--SEARCH-->\n" +
+    "                <br>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}\">Activity</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></h4>\n" +
+    "                \n" +
+    "                <!--<h4><a href=\"project/{{project.urlTitle}}/charter\">Market</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Marketplace</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>-->\n" +
+    "\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
+    "                <br>\n" +
+    "                <button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">Send Tokens</button>\n" +
+    "                <br>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
-    "<!--<div class=\"container\">\n" +
-    "    <div class=\"pull-left\" style=\"text-align:left\">\n" +
-    "        <h5>@{{project.title}}</h5>\n" +
-    "        <p>{{project.description}}</p>\n" +
-    "    </div>\n" +
-    "    <div class=\"pull-right\" style=\"margin-right:15px;margin-top:10px;\">\n" +
-    "        <img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}\">\n" +
-    "        <a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" href=\"#\" ng-click=\"newTransactionToggle()\">Send Tokens</a>\n" +
-    "    </div>\n" +
-    "</div>-->\n" +
     "\n" +
     "<div class=\"container\" style=\"padding:0px\" ng-show=\"newTransactionToggleVar\">\n" +
     "    <div class=\"card\">\n" +
@@ -2872,7 +2908,9 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "<div ng-include=\"'footer/index.tpl.html'\"></div>");
+    "<div ng-include=\"'footer/index.tpl.html'\"></div>\n" +
+    "\n" +
+    "");
 }]);
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -4208,43 +4246,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "	<div class=\"row\">\n" +
     "		<div class=\"col-md-6\">\n" +
     "			<h2><a href=\"project/conexus\">Transparency</a></h2>\n" +
-    "			<p>transparent contrubition, equatable representation</p>\n" +
-    "			<h3>open balanace sheet</h3>\n" +
-    "			<table class=\"table table-inverse table-hover\">\n" +
-    "			    <thead>\n" +
-    "					<tr>\n" +
-    "						<th>Description</th>\n" +
-    "						<th>Type</th>\n" +
-    "						<th>Identifier</th>\n" +
-    "						<th>Amount</th>\n" +
-    "						<th>Date</th>\n" +
-    "					</tr>\n" +
-    "			    </thead>\n" +
-    "			    <tbody>\n" +
-    "					<tr>\n" +
-    "						<td>DNS HOSTING</td>\n" +
-    "						<td>PAYMENT</td>\n" +
-    "						<td>CRE8</td>\n" +
-    "						<td>12.29</td>\n" +
-    "						<td>23 seconds ago</td>\n" +
-    "					</tr>\n" +
-    "					<tr>\n" +
-    "						<td>AMAZON S3</td>\n" +
-    "						<td>PAYMENT</td>\n" +
-    "						<td>CONEX</td>\n" +
-    "						<td>223.8</td>\n" +
-    "						<td>3 minutes ago</td>\n" +
-    "					</tr>\n" +
-    "					<tr>\n" +
-    "						<td>CONEX TASK</td>\n" +
-    "						<td>PAYMENT</td>\n" +
-    "						<td>CONEX</td>\n" +
-    "						<td>345</td>\n" +
-    "						<td>1 hour ago</td>\n" +
-    "					</tr>\n" +
-    "			    </tbody>\n" +
-    "			</table>\n" +
-    "			<button class=\"btn btn-default log-btn\">give to conex</button>\n" +
+    "			<p>transparent contrubition, equatable representation</p>		\n" +
     "		</div>\n" +
     "		<div class=\"col-md-6\">\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
@@ -4254,6 +4256,13 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "		<div class=\"col-md-12\">\n" +
     "			<h3>Stats</h3>\n" +
     "			<p>13 companies, 35 collaborators, $8,000,000 monthly revenue</p>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-md-12\">\n" +
+    "			<h3>Peer Network</h3>\n" +
+    "			<p>13793 Peers on the CRE8 NETWORK</p>\n" +
+    "			<p>1232 Txs a Second</p>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +

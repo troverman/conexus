@@ -193,6 +193,7 @@ angular.module( 'conexus.project', [
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
+    $scope.tabsToggleVar = false;
 
     if($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
@@ -230,8 +231,8 @@ angular.module( 'conexus.project', [
         else {return false;}
     };
 
-    $scope.sideNavToggle = function(){
-        $mdSidenav('right').toggle();
+    $scope.tabsToggle = function() {
+        $scope.tabsToggleVar = !$scope.tabsToggleVar;
     };
 
 }])

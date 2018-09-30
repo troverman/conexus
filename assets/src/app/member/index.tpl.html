@@ -32,9 +32,22 @@
 						</li>
 					</ul>
 					<div class="nav-toggle">
-						<a href="#"><i class="fa fa-bars"></i></a>
-						<!--CLICK TO EXPAND-->
+						<a href="#" ng-click="tabsToggle()"><i class="fa fa-bars"></i></a>
 					</div>
+				</div>
+			</div>
+			<div ng-show="tabsToggleVar" style="text-align:center">
+				<md-divider style="color:gray"></md-divider>
+				<div class="container">
+					<!--SEARCH-->
+					<br>
+					<h4><a href="member/{{member.username}}">Activity</a></h4>
+					<h4><a href="member/{{member.username}}/content">Content</a></h4>
+					<h4><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></h4>
+					<h4><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></h4>
+					<h4><a href="member/{{member.username}}/ledger">Ledger</a></h4>
+					<h4><a href="member/{{member.username}}/positions">Positions</a></h4>
+					<br>
 				</div>
 			</div>
 			<md-divider style="color:gray"></md-divider>

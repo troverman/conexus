@@ -5,7 +5,7 @@ angular.module( 'conexus.nav', [
     $scope.currentUser = config.currentUser;
     $rootScope.$on("$stateChangeSuccess", function() {
     	window.scrollTo(0, 0);
-        $mdSidenav('right').toggle();
+        $mdSidenav('right').close();
     });
 
     $scope.sideNavToggle = function(){
