@@ -497,6 +497,11 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("home/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/index.tpl.html",
+    "<style>\n" +
+    ".card:hover{\n" +
+    "	box-shadow: 0 1px 3px 0 rgba(0,0,0,.6), 0 1px 1px 0 rgba(0,0,0,.42), 0 2px 1px -1px rgba(0,0,0,.36)\n" +
+    "}\n" +
+    "</style>\n" +
     "<!--TEMP | LOGGED IN / DASH-->\n" +
     "<div class=\"container\" ng-show=\"currentUser\">\n" +
     "\n" +
@@ -691,7 +696,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div ng-repeat=\"item in activity\">\n" +
+    "		<div ng-repeat=\"item in activity\"> <!--ng-click=\"\"-->\n" +
     "			<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
     "		        <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "					<div>\n" +
@@ -995,8 +1000,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		</div>\n" +
     "\n" +
     "	    <div class=\"row\">\n" +
-    "			<div ng-repeat=\"item in activity\">\n" +
-    "				<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
+    "			<div ng-repeat=\"item in activity\"><!--ng-click=\"\"-->\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='CONTENT'\" >\n" +
     "		            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "						<div>\n" +
     "							<img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -1992,27 +1997,28 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				</div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
-    "			<md-divider style=\"color:gray\"></md-divider>\n" +
-    "			<div class=\"\" ng-show=\"newTransactionToggleVar\">\n" +
-    "				<div class=\"card\">\n" +
-    "				    <div style=\"padding:16px;\">\n" +
-    "				    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens to 0x{{member.id}}</h3>\n" +
-    "						<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
-    "							<div class=\"form-group col-md-4\">\n" +
-    "								<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "							</div>\n" +
-    "							<div class=\"form-group col-md-4\">\n" +
-    "								<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "							</div>\n" +
-    "							<div class=\"form-group col-md-4\">\n" +
-    "								<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "							</div>\n" +
-    "							<div class=\"form-group col-md-12\">\n" +
-    "								<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
-    "							</div>\n" +
-    "							<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "						</form>\n" +
-    "					</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"container\" ng-show=\"newTransactionToggleVar\">\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"card\">\n" +
+    "			    <div style=\"padding:16px;\">\n" +
+    "			    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens to 0x{{member.id}}</h3>\n" +
+    "					<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
+    "						<div class=\"form-group col-md-4\">\n" +
+    "							<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "						</div>\n" +
+    "						<div class=\"form-group col-md-4\">\n" +
+    "							<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "						</div>\n" +
+    "						<div class=\"form-group col-md-4\">\n" +
+    "							<input placeholder=\"Amount\" type=\"text\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "						</div>\n" +
+    "						<div class=\"form-group col-md-12\">\n" +
+    "							<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
+    "						</div>\n" +
+    "						<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
+    "					</form>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +

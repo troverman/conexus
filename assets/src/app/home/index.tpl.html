@@ -1,3 +1,8 @@
+<style>
+.card:hover{
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,.6), 0 1px 1px 0 rgba(0,0,0,.42), 0 2px 1px -1px rgba(0,0,0,.36)
+}
+</style>
 <!--TEMP | LOGGED IN / DASH-->
 <div class="container" ng-show="currentUser">
 
@@ -192,7 +197,7 @@
 	</div>
 
 	<div class="row">
-		<div ng-repeat="item in activity">
+		<div ng-repeat="item in activity"> <!--ng-click=""-->
 			<div class="card" ng-show="item.model=='CONTENT'">
 		        <div style="padding:16px;overflow:scroll;max-height:500px">
 					<div>
@@ -496,8 +501,8 @@
 		</div>
 
 	    <div class="row">
-			<div ng-repeat="item in activity">
-				<div class="card" ng-show="item.model=='CONTENT'">
+			<div ng-repeat="item in activity"><!--ng-click=""-->
+				<div class="card" ng-show="item.model=='CONTENT'" >
 		            <div style="padding:16px;overflow:scroll;max-height:500px">
 						<div>
 							<img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
