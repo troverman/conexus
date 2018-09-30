@@ -2,6 +2,7 @@ angular.module('models', [
 	'models.content',
 	'models.entry',
 	'models.follower',
+	'models.item',
 	'models.member',
 	'models.order',
 	'models.post',

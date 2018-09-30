@@ -184,7 +184,7 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectCtrl', ['$location', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $scope, config, MemberModel, project, titleService, TransactionModel ) {
+.controller( 'ProjectCtrl', ['$mdSidenav', '$location', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $mdSidenav, $location, $scope, config, MemberModel, project, titleService, TransactionModel ) {
     titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
@@ -228,6 +228,10 @@ angular.module( 'conexus.project', [
             return $scope.currentUser.id == $scope.project.user;
         }
         else {return false;}
+    };
+
+    $scope.sideNavToggle = function(){
+        $mdSidenav('right').toggle();
     };
 
 }])

@@ -21,15 +21,6 @@
 	<!--FILTER BY CURRENCIES / PRICES I WANT TO PAY BASED ON MM.. RECURSIVE LIQUIDITY TRACE-->
 
 	<div class="row">
-		<div class="card" ng-repeat="item in items">
-		    <div style="padding:16px;">
-		    	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
-		    	<p style="color:gray">{{item.price}} markets</p>
-		    </div>
-	    </div>
-	</div>
-
-	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
 				<button class="btn btn-default log-btn" ng-click="newItemToggle()">+ Item</button>
@@ -45,13 +36,21 @@
 						<input placeholder="Title" type="text" ng-model="newItem.title" class="form-control">
 					</div>
 					<div class="form-group col-sm-12">
+						<input placeholder="Tags" type="text" ng-model="newItem.tags" class="form-control">
+					</div>
+					<div class="form-group col-sm-12">
 						<input placeholder="Content" type="text" ng-model="newItem.content" class="form-control">
 					</div>
 					<div class="form-group col-sm-12">
-						<!--Arrays as price inputs. preferred currencies-->
-						<input placeholder="Price" type="text" ng-model="newItem.ArrayManifolds" class="form-control">
+						<h4>Price</h4>
+						<!--TODO: Better Form.. add [] + -->
+						<input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
+						<input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
+						<!--<input placeholder="identiferSet" type="text" ng-model="newItem.ArrayManifolds" class="form-control"> [] ill talk this or this or this and this-->
+						<!--[], [], [[],[]]-->
+
 					</div>
-					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
+					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newItem.amountSet">create</button>
 				</form>
 			</div>
 		</div>
@@ -61,8 +60,10 @@
 		<div ng-repeat="item in items">
 	        <div class="card">
 	            <div style="padding:16px">
-                	{{item.title}}
-					{{item.content}}
+                	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
+					<p>{{item.content}}</p>
+					<!--[] + [] -->
+					<h5>{{item.amountSet}} {{item.identiferSet}}</h5>
 	            </div>
 	            <div class="card-footer">
 	                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 

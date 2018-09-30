@@ -125,6 +125,35 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "</div>\n" +
     "\n" +
     "<!-- INSERT CALL TO ACTION HERE-->\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"row\" ng-show=\"true\">\n" +
+    "		<div class=\"col-md-12\">\n" +
+    "			<div class=\"card\">\n" +
+    "		        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "					<h1>Welcome to CRE8</h1>\n" +
+    "		        	<h4>Create Your Value Map</h4>\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
+    "\n" +
+    "					<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "		        	<img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
+    "\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div id=\"about-section5\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -761,6 +790,10 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		                <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "						<a style=\"display:inline;font-weight:600\" href=\"work/{{item.id}}\">{{item.amount}}</a>\n" +
     "						<p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "\n" +
+    "						<p style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "						<div style=\"clear:both\"></div>\n" +
+    "\n" +
     "					</div>\n" +
     "        			<p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
     "        			<!--liqudity lookup-->\n" +
@@ -798,6 +831,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "	<div class=\"container\">\n" +
+    "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h2>CRE8 MULTIDIMENSIONAL VALUE</h2>\n" +
@@ -853,10 +887,41 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
     "	<!--STORY ABOUT VALUE MAPPING HERE!!-->\n" +
     "	<!--FILL OUT THE VALUE FORM-->\n" +
+    "\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"row\" ng-show=\"true\">\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<div class=\"card\">\n" +
+    "			        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "						<h1>Welcome to CRE8</h1>\n" +
+    "			        	<h4>Create Your Value Map</h4>\n" +
+    "						<highchart config=\"chart\"></highchart>\n" +
+    "\n" +
+    "						<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
+    "\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
@@ -1025,6 +1090,10 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			                <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "							<a style=\"display:inline;font-weight:600\" href=\"work/{{item.id}}\">{{item.amount}}</a>\n" +
     "							<p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "\n" +
+    "							<p style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "							<div style=\"clear:both\"></div>\n" +
+    "\n" +
     "						</div>\n" +
     "		    			<p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
     "		                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
@@ -1104,9 +1173,18 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "<div class=\"container\">\n" +
     "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<h1>{{item.title}}</h1>\n" +
+    "			{{item.content}}\n" +
+    "			{{item.amountSet}} {{item.identiferSet}}\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "\n" +
-    "	{{item}}\n" +
-    "	\n" +
+    "	<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.amountSet\">Purchase</button>\n" +
+    "\n" +
+    "	<!--Delivery | Fuilfillment-->\n" +
+    "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "</div>");
@@ -1424,6 +1502,10 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Order Book</h2>\n" +
     "				<highchart config=\"bidAskChart\"></highchart>\n" +
+    "				<div class=\"row\" style=\"max-height:250px;overflow:scroll\">\n" +
+    "					<div class=\"col-sm-6\"><table class=\"\"><tr ng-repeat=\"data in bidAskChart.series[0].data.slice(0,100)\"><td>{{data[0]}} | </td><td>{{data[1]}}</td></tr></table></div>\n" +
+    "					<div class=\"col-sm-6\"><table><tr ng-repeat=\"data in bidAskChart.series[1].data.slice(0,100)\"><td>{{data[0]}} | </td><td>{{data[1]}}</td></tr></table></div>\n" +
+    "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1640,15 +1722,6 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	<!--FILTER BY CURRENCIES / PRICES I WANT TO PAY BASED ON MM.. RECURSIVE LIQUIDITY TRACE-->\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"card\" ng-repeat=\"item in items\">\n" +
-    "		    <div style=\"padding:16px;\">\n" +
-    "		    	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
-    "		    	<p style=\"color:gray\">{{item.price}} markets</p>\n" +
-    "		    </div>\n" +
-    "	    </div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<button class=\"btn btn-default log-btn\" ng-click=\"newItemToggle()\">+ Item</button>\n" +
@@ -1664,13 +1737,21 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "						<input placeholder=\"Title\" type=\"text\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
     "					</div>\n" +
     "					<div class=\"form-group col-sm-12\">\n" +
+    "						<input placeholder=\"Tags\" type=\"text\" ng-model=\"newItem.tags\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
     "						<input placeholder=\"Content\" type=\"text\" ng-model=\"newItem.content\" class=\"form-control\">\n" +
     "					</div>\n" +
     "					<div class=\"form-group col-sm-12\">\n" +
-    "						<!--Arrays as price inputs. preferred currencies-->\n" +
-    "						<input placeholder=\"Price\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\">\n" +
+    "						<h4>Price</h4>\n" +
+    "						<!--TODO: Better Form.. add [] + -->\n" +
+    "						<input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.identiferSet\" class=\"form-control\">\n" +
+    "						<input placeholder=\"Amount Set\" type=\"text\" ng-model=\"newItem.amountSet\" class=\"form-control\">\n" +
+    "						<!--<input placeholder=\"identiferSet\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\"> [] ill talk this or this or this and this-->\n" +
+    "						<!--[], [], [[],[]]-->\n" +
+    "\n" +
     "					</div>\n" +
-    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.amountSet\">create</button>\n" +
     "				</form>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -1680,8 +1761,10 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "		<div ng-repeat=\"item in items\">\n" +
     "	        <div class=\"card\">\n" +
     "	            <div style=\"padding:16px\">\n" +
-    "                	{{item.title}}\n" +
-    "					{{item.content}}\n" +
+    "                	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
+    "					<p>{{item.content}}</p>\n" +
+    "					<!--[] + [] -->\n" +
+    "					<h5>{{item.amountSet}} {{item.identiferSet}}</h5>\n" +
     "	            </div>\n" +
     "	            <div class=\"card-footer\">\n" +
     "	                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
@@ -2406,10 +2489,35 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
 
 angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/index.tpl.html",
+    "<style>\n" +
+    ".navbar-inverse .navbar-toggle{border-color:#000;}.navbar-toggle{border-radius:0px;}\n" +
+    "</style>\n" +
+    "\n" +
+    "\n" +
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed\">\n" +
+    "  <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
+    "    \n" +
+    "    <div style=\"text-align:center\">\n" +
+    "      <div class=\"spacing-25\"></div>\n" +
+    "      <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "        <div class=\"form-group\">\n" +
+    "          <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "        </div>\n" +
+    "      </form>\n" +
+    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
+    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
+    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
+    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Login</a></h2>\n" +
+    "      <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Register</a></h2>\n" +
+    "    </div>\n" +
+    "\n" +
+    "  </div>\n" +
+    "</md-sidenav>\n" +
+    "\n" +
     "<div ng-controller=\"NavCtrl\" class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "  <div class=\"container\">\n" +
     "    <div class=\"navbar-header\">\n" +
-    "      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
+    "      <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
     "        <span class=\"sr-only\">Toggle navigation</span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
@@ -2430,7 +2538,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "      </ul>\n" +
     "      <ul class=\"nav navbar-nav navbar-right\">\n" +
     "        <!--notifications on username-->\n" +
-    "        <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
+    "        <li ng-show=\"!currentUser\" ng-click=\"sideNavToggle()\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
     "        <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
     "        <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
@@ -2458,7 +2566,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    </div>\n" +
     "  </div>\n" +
     "  <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("order/index.tpl.html", []).run(["$templateCache", function($templateCache) {

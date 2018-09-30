@@ -72,6 +72,14 @@ module.exports.routes = {
   'delete /api/follower/:id': 'FollowerController.destroy',
 
   /**
+   * Item routes
+   */
+  'get /api/item': 'ItemController.getSome',
+  'get /api/item/:id': 'ItemController.getOne',
+  'post /api/item': 'ItemController.create',
+  'delete /api/item/:id': 'ItemController.destroy',
+
+  /**
    * Order routes
    */
   'get /api/order': 'OrderController.getSome',

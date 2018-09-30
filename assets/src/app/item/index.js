@@ -11,9 +11,8 @@ angular.module( 'conexus.item', [
 			}
 		},
         resolve:{
-            item: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return null;
-                //return OrderModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 100, 0, 'createdAt DESC');
+            item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
+                return ItemModel.getOne($stateParams.id);
             }]
         }
 	});

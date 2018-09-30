@@ -26,7 +26,11 @@ angular.module( 'conexus.markets', [
     for (x in $scope.markets){
         $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
         $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
-    } 
+    }
+
+    //https://api.coinmarketcap.com/v2/listings/
+    //STRING CROSS CHAIN
+    
     $scope.chartMap = {
         chart: {
             polar: true,

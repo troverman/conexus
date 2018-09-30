@@ -6,6 +6,53 @@ module.exports = {
 	//TODO: TOKENIZE LOCATION | EXERCISE
 	getData: function(req){
 
+		var newOrderArray = [];
+
+		for (var i = 0; i<10000; i++){
+			var amount = Math.floor(Math.random()*160)
+			newOrderArray.push({
+				user:'5923b9cc5aac131100cab1c1', //creator
+				amountSet:amount,
+				amountSet1:10000*amount+Math.abs(Math.sin(i)+100*i*Math.random()),
+				identiferSet:'CRE8',
+				identiferSet1:'USD',
+			});
+		} 
+
+		//console.log(newOrderArray);
+
+		//Order.create(newOrderArray).then(function(){
+		//	console.log('DONE', newOrderArray.length)
+		//});
+
+		var newOrderArray1 = [];
+
+		for (var i = 0; i<10000; i++){
+			var amount = Math.floor(Math.random()*160*10000)
+			newOrderArray1.push({
+				user:'5923b9cc5aac131100cab1c1', //creator
+				amountSet:amount,
+				amountSet1:amount/(10000*amount)+Math.abs(Math.sin(i)+100*i*Math.random()),
+				identiferSet:'USD',
+				identiferSet1:'CRE8',
+			});
+		} 
+
+		//console.log(newOrderArray1);
+
+		//Order.create(newOrderArray1).then(function(){
+		//	console.log('DONE', newOrderArray1.length)
+		//});
+
+		
+		Order.find().limit(20000).skip(0).sort('createdAt DESC').then(function(models){
+			if (models.length > 0){
+	    		var idArray = models.map(function(obj) {return obj.id});
+				Order.destroy(idArray, function(err, model) {
+					console.log(model);
+				});
+    		}
+		});
 
 		/*User.find().then(function(models){
 

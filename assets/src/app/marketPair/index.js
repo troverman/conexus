@@ -166,8 +166,8 @@ angular.module( 'conexus.marketPair', [
     //POPULATE ORDER BOOK
     if (orders.length == 0){
         for(var i=-1000;i<1000;i++){
-            if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);$scope.bidAskChart.series[0].data.push([i+100000,0])}
-            if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);$scope.bidAskChart.series[1].data.push([i+100000,0])}
+            if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}//$scope.bidAskChart.series[0].data.push([i+100000,0])}
+            if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}//$scope.bidAskChart.series[1].data.push([i+100000,0])}
 
             //[1000,1000000],[100,10000],[10,1000],[1,100],[200,2],[220,1],[30,1]
             //$scope.bidAskChart.series[0].data.push([i,i*i])
