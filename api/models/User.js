@@ -48,7 +48,7 @@ module.exports = {
         var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
         request(url, function (error, response, body) {
             var body = JSON.parse(body);
-            if (body.urls){model.coverUrl = body.urls.full;}
+            if (body.urls){model.coverUrl = body.urls.small;}
             User.update({id: model.id}, model)
             .then(function(model){
                 //emailService.sendTemplate('welcome', model.email, 'Welcome To Voetr!', {username: model.username});

@@ -1816,7 +1816,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "	    <div ng-repeat=\"market in markets\" class=\"col-xs-4\" style=\"padding:0px\">\n" +
+    "	    <div ng-repeat=\"market in markets\" style=\"padding:0px\">\n" +
     "	    	<div class=\"card\">\n" +
     "			    <div style=\"padding:16px;\">\n" +
     "			    	<a style=\"white-space: nowrap;\" href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
@@ -2518,8 +2518,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     ".navbar-toggle{border-radius:0px;}\n" +
     "</style>\n" +
     "<div ng-controller=\"NavCtrl\">\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"background-color:black;height:100%;\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"right\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div style=\"text-align:center\">\n" +
     "                <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
     "                <div class=\"spacing-25\"></div>\n" +
