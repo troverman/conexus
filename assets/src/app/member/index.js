@@ -587,19 +587,11 @@ angular.module( 'conexus.member', [
 
     $scope.chart = {
         chart: {polar: true},
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.2, 0.15, 0.15, 0.15],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        }],
+        series: [],
         title: {text: ''},
         xAxis: {
             title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security'],
+            categories: [],
             tickmarkPlacement: 'on',
             lineWidth: 0,
         },
@@ -610,18 +602,50 @@ angular.module( 'conexus.member', [
             min: 0,
         },
         legend: {
-            enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'middle',
+            layout: 'vertical'
         },
         tooltip: {
-        //    shared: true,
+            shared: true,
         },
         credits:{enabled:false},
     };
+
+    $scope.baseMarkets = ['Universal Token (onMint)', 'Universal Token (onTrade)', 'USD', 'CRE8', 'NOVO', 'LTC', 'BTC', 'ETH']
+    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     
+    for (x in $scope.baseMarkets){
+
+        var random1 = Math.floor(255*Math.random());
+        var random2 = Math.floor(255*Math.random());
+        var random3 = Math.floor(255*Math.random());
+
+        $scope.chart.series.push({
+            id: 'values'+x,
+            type: 'area',
+            name: $scope.baseMarkets[x],
+            pointPlacement: 'on',
+            data: [],
+            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
+            fillOpacity: 0.3,
+        });
+
+    }
+   
+    for (x in $scope.markets){
+        $scope.chart.xAxis.categories.push($scope.markets[x]);
+        for (y in $scope.baseMarkets){
+            $scope.chart.series[y].data.push((1+1*Math.random())/2);
+        }
+    }
+
+    $scope.addMarket = function(type){
+        //basemarket; market
+
+    };
+
     $scope.newOrderToggle = function(){
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };

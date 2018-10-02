@@ -66,19 +66,11 @@ angular.module( 'conexus.market', [
             polar: true,
             margin: [30, 30, 30, 30]
         },
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        }],
+        series: [],
         title: {text: ''},
         xAxis: {
             title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
+            categories: [],
             tickmarkPlacement: 'on',
             lineWidth: 0,
         },
@@ -89,24 +81,55 @@ angular.module( 'conexus.market', [
             min: 0,
         },
         legend: {
-            enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
         },
         tooltip: {
             shared: true,
         },
         credits:{enabled:false},
     };
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-    var length = $scope.markets.length;
+
+
+
+    $scope.baseMarkets = [$scope.stateParams.id]
+    $scope.markets = ['USD', 'ETH', 'BTC', 'CRE8', 'STEEM', 'LTC', 'Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    
+    for (x in $scope.baseMarkets){
+
+        var random1 = Math.floor(255*Math.random());
+        var random2 = Math.floor(255*Math.random());
+        var random3 = Math.floor(255*Math.random());
+
+        $scope.chartMap.series.push({
+            id: 'values'+x,
+            type: 'area',
+            name: $scope.baseMarkets[x],
+            pointPlacement: 'on',
+            data: [],
+            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
+            fillOpacity: 0.3,
+        });
+
+    }
+
     for (x in $scope.markets){
-        $scope.chartMap.xAxis.categories.push($scope.markets[x])
-        $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
-        $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
-    } 
+        var length = $scope.markets.length;
+        //$scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
+        //$scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
+    }
+   
+    for (x in $scope.markets){
+
+        $scope.chartMap.xAxis.categories.push($scope.markets[x]);
+        for (y in $scope.baseMarkets){
+            $scope.chartMap.series[y].data.push((1+1*Math.random())/2);
+        }
+    }
+
 
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
@@ -119,6 +142,16 @@ angular.module( 'conexus.market', [
     });
     $scope.newOrder.identiferSet = $scope.stateParams.id;
     $scope.trades = {};
+
+    $scope.newMarket = {};
+    $scope.addMarket = function(type, market){
+        if (type="baseMarket"){
+            $scope.baseMarkets.push($scope.newMarket.baseMarket)
+        }
+        if (type="market"){
+            $scope.markets.push($scope.newMarket.market)
+        }
+    };
 
     $scope.keyPress = function(searchValue){
         $scope.markets = $scope.markets.filter(function(obj){

@@ -16,11 +16,11 @@
 		<div style="padding:16px;">
 			<h1>Create Your Value Map</h1>
 			<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
-			<span><a href="market/UniversalToken">Universal Dimension</a> | <a href="#">+ Dimension</a></span><br>
-			<span><span ng-repeat="dimension in chart.xAxis.categories"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
+			<span><span ng-repeat="dimension in baseMarkets"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
+			<br><br>
+			<span><span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
 			<div class="spacing-10"></div>
 			<highchart config="chart"></highchart>
-			<a href="/discover">Discover</a>
 		</div>
 	</div>	
 </div>	

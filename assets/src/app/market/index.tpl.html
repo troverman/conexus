@@ -21,19 +21,75 @@
 
 	<div class="row">
 		<div class="card">
-			<div class="col-md-6">
-				<div style="padding:16px;">
-					<highchart config="chartMap"></highchart>
-					<!--EXPLORE-->
-				</div>
-			</div>
-			<div class="col-md-6" style="max-height:500px;overflow:scroll">
-			    <div class="card" ng-repeat="market in markets">
-			    	<div style="padding:16px;">
-						<!--<p style="float:right">{{renderRandom()}}%</p>-->
-			    		<a href="market/{{stateParams.id}}/{{market}}"><h4>{{market}}</h4></a>
-			    		<p style="color:gray">{{stateParams.id}}/{{market}} markets</p>
+			<div class="row">
+				<div class="col-md-8">
+					<div style="padding:16px;">
+
+						<span>
+							<span ng-repeat="dimension in baseMarkets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
+							<a href="#">+ Dimension</a>
+
+							<form style="display:flex;flex-direction:row;">
+				            	<input ng-model="newMarket.baseMarket" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter">
+				            	<div ng-click="addMarket('baseMarket')" style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+					                <a href="#">
+					                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5>
+					                </a>
+								</div>
+				        	</form>
+
+						</span>
+
+						<br>
+
+						<highchart config="chartMap"></highchart>
+
+						<br>
+
+						<span>
+							<span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
+							<a href="#">+ Dimension</a>
+
+							<form style="display:flex;flex-direction:row;">
+				            	<input ng-model="newMarket.market" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter">
+				            	<div ng-click="addMarket('market')" style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+					                <a href="#">
+					                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5>
+					                </a>
+								</div>
+				        	</form>
+
+						</span>
+
+						<br>
+						<h5>Explore</h5>
+						<span ng-repeat="market in markets"><a href="market/{{market}}">{{market}} </a></span>
+
 					</div>
+				</div>
+				<div class="col-md-4" style="max-height:750px;overflow:scroll">
+				    <div class="card" ng-repeat="market in markets">
+				    	<div style="padding:16px;">
+							<div class="row">
+					    		<div class="col-sm-6">
+					    			<a href="market/{{stateParams.id}}/{{market}}">
+										<img style="height:50px" src="images/loading.gif">
+					    				<h4>{{market}}</h4>
+					    			</a>
+					    		</div>
+								<div class="col-sm-6" style="text-align:right">
+									<p style="color:gray;font-size:10px">0.2042 {{stateParams.id}}/{{market}}</p>
+									<p style="color:gray;font-size:10px">8% 24HR Change</p>
+									<p style="color:gray;font-size:10px">2031{{stateParams.id}} 24HR Volume</p>
+									<p style="color:gray;font-size:10px">21231{{stateParams.id}} Depth</p>
+					    		</div>
+							</div>
+
+							<!--<button class="btn btn-default log-btn">+ Dimension</button>-->
+
+						</div>
+				    </div>
+					<button class="btn btn-default log-btn">More <i></i></button>
 			    </div>
 		    </div>
 		</div>

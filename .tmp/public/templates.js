@@ -45,14 +45,17 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3>A Transparent & Collaborative Network</h3>\n" +
+    "				<h3>Transparency Maximalism</h3>\n" +
+    "				<h4>Create the Next Wave</h4>\n" +
+    "				<h5>A Collaborative Network</h5>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A 24/7 continual hackathon</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and create awesome things</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
-    "				<h4>Create the Next Wave</h4>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A 24/7 continual hackathon</p>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
     "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/discover\">Discover</a>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
+    "				<h5>Content</h5>\n" +
+    "				<h5>Members</h5>\n" +
+    "				<h5>Projects</h5>\n" +
+    "				<h5>Tasks</h5>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<div class=\"card\">\n" +
@@ -71,13 +74,24 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	</div>\n" +
     "</div>\n" +
     "\n" +
+    "<div id=\"about-section1\">\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"row\">\n" +
+    "			<h2>DISCOVER AREA</h2>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"spacing-50\"></div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div id=\"about-section2\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h2>Collaborative Governance</h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Protocols | Working together toward a common goal</p>\n" +
+    "				<p style=\"font-style:italic;margin:0px\">Reputation Protocols | Working together toward a common goal</p>\n" +
+    "				<p style=\"font-style:italic;margin:0px\">Coordinating Around Shared Goals</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
@@ -88,6 +102,17 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	</div>\n" +
     "</div>\n" +
     "\n" +
+    "<div id=\"about-section1\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "			<h2>MultiDimensional Token Protocols</h2>\n" +
+    "			<h4>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization</h4>\n" +
+    "			<!--<h2>Developers</h2>-->\n" +
+    "			<!--DISCORD; GITHUB; INSTAGRAM; TWITTER; YOUTUBE; COMMUNITY!-->\n" +
+    "\n" +
+    "	</div>\n" +
+    "</div>\n" +
     "<div id=\"about-section4\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -96,10 +121,19 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<h2>MultiDimensional Token Market</h2>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Create dimensional liquidity for transparent and reputationally validated work</p> \n" +
+    "		        <span><a href=\"market/universalToken\">UniversalToken</a> | {}</span>\n" +
+    "				<highchart config=\"chartMap\"></highchart>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
     "			</div>\n" +
+    "\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<h4>Create Dimensional Liquidity - a powerful approach for xyz; depth in the market</h4>\n" +
+    "				<p>Market Order types; onMint Order; trade Order; futures; derivatives</p> \n" +
+    "			</div>\n" +
+    "\n" +
+    "\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
@@ -110,47 +144,178 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"chart\"></highchart>\n" +
+    "				<highchart config=\"create\"></highchart>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "				<h2>Information as Income</h2>\n" +
+    "				<h5>Universal Information as Universal Income</h5>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "\n" +
     "				<h3>Complete Transparency</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Systems and Task Verification</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Finance and Contribution</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "				<h3>Complete Tokenization</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto economic data structre and means of account</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<!-- INSERT CALL TO ACTION HERE-->\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "<div class=\"container\">\n" +
-    "	<div class=\"row\" ng-show=\"true\">\n" +
-    "		<div class=\"col-md-12\">\n" +
-    "			<div class=\"card\">\n" +
-    "		        <div style=\"padding:16px;\">\n" +
+    "		<div class=\"row\">\n" +
+    "			<h2>Value Mapping and Dimensional Voting</h2>\n" +
+    "			<p style=\"font-style:italic;color:gray;margin:0px\">A pluralist Means of Value</p>\n" +
+    "			<p style=\"font-style:italic;color:gray;margin:0px\">Our Civic Duty</p>\n" +
+    "			<p style=\"font-style:italic;color:gray;margin:0px\">Our Collective Responsibility</p>\n" +
+    "			<p style=\"font-style:italic;color:gray;margin:0px\">Our Intentional Value Mechanism</p>\n" +
+    "			<p style=\"font-style:italic;color:gray;margin:0px\">What do we know is valuable?</p>\n" +
     "\n" +
-    "					<h1>Welcome to CRE8</h1>\n" +
-    "		        	<h4>Create Your Value Map</h4>\n" +
-    "					<highchart config=\"chart\"></highchart>\n" +
+    "		</div>\n" +
     "\n" +
-    "					<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
-    "		        	<img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "<!-- CALL TO ACTION HERE-->\n" +
+    "<div style=\"background-color:white\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"row\" ng-show=\"true\">\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<div class=\"card\">\n" +
+    "			        <div style=\"padding:16px;\">\n" +
     "\n" +
+    "						<h1>CRE8</h1>\n" +
+    "						<h3><b>Join Our Community</b></h3>\n" +
+    "			        	<h4>Create Your Value Map</h4>\n" +
+    "			        	<p>The more complete the better, the more intentional your dimensional vote the better</p>\n" +
+    "			        	<p>*Creating orders and liquidity on the Multi Dimensional Token Market.</p>\n" +
+    "			        	<span><a href=\"market/universalToken\">UniversalToken</a></span>\n" +
+    "			        	<br>\n" +
+    "						<span>\n" +
+    "							<span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
+    "							<a href=\"#\">+ Dimension</a>\n" +
+    "							<form style=\"display:flex;flex-direction:row;\">\n" +
+    "				            	<input ng-model=\"newMarket.market\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\">\n" +
+    "				            	<div ng-click=\"addMarket('market')\" style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "					                <a href=\"#\">\n" +
+    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5>\n" +
+    "					                </a>\n" +
+    "								</div>\n" +
+    "				        	</form>\n" +
+    "						</span>\n" +
+    "\n" +
+    "						<div class=\"spacing-10\"></div>\n" +
+    "						<highchart config=\"chartMap\"></highchart>\n" +
+    "						<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "						<!--<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg\">-->\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "			        	<img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
+    "\n" +
+    "\n" +
+    "					</div>\n" +
     "				</div>\n" +
+    "\n" +
+    "				<div class=\"card\">\n" +
+    "					<div style=\"padding:16px;\">\n" +
+    "						<h3>What is Valuable to you?</h3>\n" +
+    "						<h4>I believe the following concepts and specific tasks are valuable</h4>\n" +
+    "						<div class=\"\">\n" +
+    "							<div class=\"form-group\">\n" +
+    "								<input type=\"text\" class=\"form-control\">\n" +
+    "								<button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button>\n" +
+    "							</div>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "\n" +
+    "				<div class=\"card\">\n" +
+    "					<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "						<h4>A Valuable Day</h4>\n" +
+    "						<p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">REST</span></p>\n" +
+    "						<p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">WORK</span></p>\n" +
+    "						<p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">FUN</span></p>\n" +
+    "						<p>An ideal day contains <span style=\"font-weight:800\">2</span> hours of <span style=\"font-weight:800\">Learning</span></p>\n" +
+    "						<p>An ideal day contains <span style=\"font-weight:800\">1</span> hours of <span style=\"font-weight:800\">Exercise</span></p>\n" +
+    "\n" +
+    "						<div class=\"spacing-15\"></div>\n" +
+    "						<div class=\"form-group\" style=\"width:33%\">\n" +
+    "							<div class=\"col-md-6\"><input type=\"text\" placeholder=\"Hours\" class=\"form-control\"></div>\n" +
+    "							<div class=\"col-md-6\"><input type=\"text\" placeholder=\"Activity\" class=\"form-control\"></div>\n" +
+    "							<div class=\"col-md-12\"><button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button></div>\n" +
+    "						</div>\n" +
+    "						<div style=\"clear:both\"></div>\n" +
+    "\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "\n" +
+    "				<div class=\"card\">\n" +
+    "					<div style=\"padding:16px;\">\n" +
+    "						<h2>Personal Information</h4>\n" +
+    "						<h4>Who Are You?</h4>\n" +
+    "						<div class=\"spacing-15\"></div>\n" +
+    "						<div class=\"form-group\">\n" +
+    "							<input type=\"text\" placeholder=\"First Name\" class=\"form-control\">\n" +
+    "							<input type=\"text\" placeholder=\"Last Name\" class=\"form-control\">\n" +
+    "							<input type=\"text\" placeholder=\"Date of Birth\" class=\"form-control\">\n" +
+    "							<input type=\"text\" placeholder=\"Address\" class=\"form-control\">\n" +
+    "\n" +
+    "							<!--<input type=\"text\" placeholder=\"Height\" class=\"form-control\">\n" +
+    "							<input type=\"text\" placeholder=\"Eye Color\" class=\"form-control\">\n" +
+    "							<input type=\"text\" placeholder=\"DNA UPLOAD\" class=\"form-control\">\n" +
+    "							<input type=\"text\" placeholder=\"Picture\" class=\"form-control\">-->\n" +
+    "\n" +
+    "						</div>\n" +
+    "\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "\n" +
+    "				<div class=\"card\">\n" +
+    "					<div style=\"padding:16px;\">\n" +
+    "						<h3><b>Join Our Community</b></h3><hr>\n" +
+    "						<div class=\"form-group\">\n" +
+    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
+    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
+    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
+    "	                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
+    "	                        <br><br>\n" +
+    "		                    <div class=\"social-log\">\n" +
+    "		                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
+    "		                    </div>\n" +
+    "						</div>\n" +
+    "\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section5\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	    <div class=\"row\">\n" +
+    "	    	<h5>Our Extended Community</h5>\n" +
+    "	    </div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -189,6 +354,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "\n" +
+    "\n" +
     "");
 }]);
 
@@ -833,135 +1000,108 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "	<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
     "\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "	<div class=\"container\">\n" +
-    "\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<h2>CRE8 MULTIDIMENSIONAL VALUE</h2>\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "				<p style=\"font-style:italic;margin:0px;color:gray\">Create and participate in transparent, crowdsourced, organizations</p>\n" +
-    "				<p style=\"font-style:italic;margin:0px;color:gray\">Create value through tokenized actions</p>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:center\">\n" +
-    "				<img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "\n" +
+    "	<div style=\"background-color:white\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"container\">\n" +
     "\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<div class=\"block\">\n" +
-    "					<div class=\"shape\">\n" +
-    "						<div class=\"cube outer\">\n" +
-    "							<div class=\"side left\"></div>\n" +
-    "							<div class=\"side right\"></div>\n" +
-    "							<div class=\"side top\"></div>\n" +
-    "							<div class=\"side bottom\"></div>\n" +
-    "							<div class=\"side front\"></div>\n" +
-    "							<div class=\"side back\"></div>\n" +
-    "							<div class=\"cube\">\n" +
+    "			<div class=\"row\">\n" +
+    "				<div class=\"col-md-6\">\n" +
+    "					<h2>CRE8 MULTIDIMENSIONAL VALUE</h2>\n" +
+    "					<div class=\"spacing-5\"></div>\n" +
+    "					<p style=\"font-style:italic;margin:0px;color:gray\">Create and participate in transparent, crowdsourced, organizations</p>\n" +
+    "					<p style=\"font-style:italic;margin:0px;color:gray\">Create value through tokenized actions</p>\n" +
+    "					<div class=\"spacing-15\"></div>\n" +
+    "					<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
+    "				</div>\n" +
+    "				<div class=\"col-md-6\" style=\"text-align:center\">\n" +
+    "					<img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "\n" +
+    "			<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "			<div class=\"row\">\n" +
+    "				<div class=\"col-md-6\">\n" +
+    "					<div class=\"block\">\n" +
+    "						<div class=\"shape\">\n" +
+    "							<div class=\"cube outer\">\n" +
     "								<div class=\"side left\"></div>\n" +
     "								<div class=\"side right\"></div>\n" +
     "								<div class=\"side top\"></div>\n" +
     "								<div class=\"side bottom\"></div>\n" +
     "								<div class=\"side front\"></div>\n" +
     "								<div class=\"side back\"></div>\n" +
+    "								<div class=\"cube\">\n" +
+    "									<div class=\"side left\"></div>\n" +
+    "									<div class=\"side right\"></div>\n" +
+    "									<div class=\"side top\"></div>\n" +
+    "									<div class=\"side bottom\"></div>\n" +
+    "									<div class=\"side front\"></div>\n" +
+    "									<div class=\"side back\"></div>\n" +
+    "								</div>\n" +
     "							</div>\n" +
     "						</div>\n" +
     "					</div>\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
     "				</div>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<h2>BUILD THE VALUE MATRIX</h2>\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "				<p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism</p>\n" +
-    "				<p style=\"font-style:italic;margin:0px;color:gray\">Vote and map your value respective to a complete set of tokenized potiental</p>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "				<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the market</a>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<!--STORY ABOUT VALUE MAPPING HERE!!-->\n" +
-    "	<!--FILL OUT THE VALUE FORM-->\n" +
-    "\n" +
-    "	<div class=\"container\" ng-show=\"false\">\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-12\">\n" +
-    "				<div class=\"card\">\n" +
-    "			        <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "						<h1>Welcome to CRE8</h1>\n" +
-    "			        	<h4>Create Your Value Map</h4>\n" +
-    "						<highchart config=\"chart\"></highchart>\n" +
-    "\n" +
-    "						<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
-    "\n" +
-    "					</div>\n" +
+    "				<div class=\"col-md-6\">\n" +
+    "					<h2>BUILD THE VALUE MATRIX</h2>\n" +
+    "					<div class=\"spacing-5\"></div>\n" +
+    "					<p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism</p>\n" +
+    "					<p style=\"font-style:italic;margin:0px;color:gray\">Vote and map your value respective to a complete set of tokenized potiental</p>\n" +
+    "					<div class=\"spacing-15\"></div>\n" +
+    "					<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the market</a>\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
+    "					<div class=\"spacing-50\"></div>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
+    "		<!--STORY ABOUT VALUE MAPPING HERE!!-->\n" +
+    "		<!--FILL OUT THE VALUE FORM-->\n" +
+    "\n" +
+    "		<div class=\"container\">\n" +
+    "		    <div class=\"row\">\n" +
+    "		        <div class=\"col-lg-12 col-md-12\">\n" +
+    "					<h3><b>Join Our Community</b></h3><hr>\n" +
+    "		            <div class=\"login-form\">\n" +
+    "		                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
+    "		                    <div class=\"form-group\">\n" +
+    "		                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
+    "		                        <i class=\"fa fa-user\"></i>\n" +
+    "		                    </div>\n" +
+    "		                    <div class=\"form-group\">\n" +
+    "		                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
+    "		                        <i class=\"fa fa-user\"></i>\n" +
+    "		                    </div>\n" +
+    "		                    <div class=\"form-group log-status\">\n" +
+    "		                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
+    "		                        <i class=\"fa fa-lock\"></i>\n" +
+    "		                    </div>\n" +
+    "		                    <div class=\"align-right\">\n" +
+    "		                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
+    "		                    </div>\n" +
+    "		                    <br><br>\n" +
+    "		                    <div style=\"text-align:center\">\n" +
+    "		                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
+    "		                    </div>\n" +
+    "		                </form>\n" +
+    "		            </div>\n" +
+    "		            <div class=\"selfClear\"></div>\n" +
+    "		        </div>   \n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"container\">\n" +
-    "	    <div class=\"row\">\n" +
-    "	        <div class=\"col-lg-12 col-md-12\">\n" +
-    "				<h3><b>Join Our Community</b></h3><hr>\n" +
-    "	            <div class=\"login-form\">\n" +
-    "	                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
-    "	                    <div class=\"form-group\">\n" +
-    "	                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
-    "	                        <i class=\"fa fa-user\"></i>\n" +
-    "	                    </div>\n" +
-    "	                    <div class=\"form-group\">\n" +
-    "	                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
-    "	                        <i class=\"fa fa-user\"></i>\n" +
-    "	                    </div>\n" +
-    "	                    <div class=\"form-group log-status\">\n" +
-    "	                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
-    "	                        <i class=\"fa fa-lock\"></i>\n" +
-    "	                    </div>\n" +
-    "	                    <div class=\"align-right\">\n" +
-    "	                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
-    "	                    </div>\n" +
-    "	                    <br><br>\n" +
-    "	                    <div style=\"text-align:center\">\n" +
-    "	                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
-    "	                    </div>\n" +
-    "	                </form>\n" +
-    "	            </div>\n" +
-    "	            <div class=\"selfClear\"></div>\n" +
-    "	        </div>   \n" +
-    "	    </div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "	<div class=\"container\">\n" +
+    "		\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"\">\n" +
@@ -1263,19 +1403,75 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<div style=\"padding:16px;\">\n" +
-    "					<highchart config=\"chartMap\"></highchart>\n" +
-    "					<!--EXPLORE-->\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"max-height:500px;overflow:scroll\">\n" +
-    "			    <div class=\"card\" ng-repeat=\"market in markets\">\n" +
-    "			    	<div style=\"padding:16px;\">\n" +
-    "						<!--<p style=\"float:right\">{{renderRandom()}}%</p>-->\n" +
-    "			    		<a href=\"market/{{stateParams.id}}/{{market}}\"><h4>{{market}}</h4></a>\n" +
-    "			    		<p style=\"color:gray\">{{stateParams.id}}/{{market}} markets</p>\n" +
+    "			<div class=\"row\">\n" +
+    "				<div class=\"col-md-8\">\n" +
+    "					<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "						<span>\n" +
+    "							<span ng-repeat=\"dimension in baseMarkets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
+    "							<a href=\"#\">+ Dimension</a>\n" +
+    "\n" +
+    "							<form style=\"display:flex;flex-direction:row;\">\n" +
+    "				            	<input ng-model=\"newMarket.baseMarket\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\">\n" +
+    "				            	<div ng-click=\"addMarket('baseMarket')\" style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "					                <a href=\"#\">\n" +
+    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5>\n" +
+    "					                </a>\n" +
+    "								</div>\n" +
+    "				        	</form>\n" +
+    "\n" +
+    "						</span>\n" +
+    "\n" +
+    "						<br>\n" +
+    "\n" +
+    "						<highchart config=\"chartMap\"></highchart>\n" +
+    "\n" +
+    "						<br>\n" +
+    "\n" +
+    "						<span>\n" +
+    "							<span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
+    "							<a href=\"#\">+ Dimension</a>\n" +
+    "\n" +
+    "							<form style=\"display:flex;flex-direction:row;\">\n" +
+    "				            	<input ng-model=\"newMarket.market\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\">\n" +
+    "				            	<div ng-click=\"addMarket('market')\" style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "					                <a href=\"#\">\n" +
+    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5>\n" +
+    "					                </a>\n" +
+    "								</div>\n" +
+    "				        	</form>\n" +
+    "\n" +
+    "						</span>\n" +
+    "\n" +
+    "						<br>\n" +
+    "						<h5>Explore</h5>\n" +
+    "						<span ng-repeat=\"market in markets\"><a href=\"market/{{market}}\">{{market}} </a></span>\n" +
+    "\n" +
     "					</div>\n" +
+    "				</div>\n" +
+    "				<div class=\"col-md-4\" style=\"max-height:750px;overflow:scroll\">\n" +
+    "				    <div class=\"card\" ng-repeat=\"market in markets\">\n" +
+    "				    	<div style=\"padding:16px;\">\n" +
+    "							<div class=\"row\">\n" +
+    "					    		<div class=\"col-sm-6\">\n" +
+    "					    			<a href=\"market/{{stateParams.id}}/{{market}}\">\n" +
+    "										<img style=\"height:50px\" src=\"images/loading.gif\">\n" +
+    "					    				<h4>{{market}}</h4>\n" +
+    "					    			</a>\n" +
+    "					    		</div>\n" +
+    "								<div class=\"col-sm-6\" style=\"text-align:right\">\n" +
+    "									<p style=\"color:gray;font-size:10px\">0.2042 {{stateParams.id}}/{{market}}</p>\n" +
+    "									<p style=\"color:gray;font-size:10px\">8% 24HR Change</p>\n" +
+    "									<p style=\"color:gray;font-size:10px\">2031{{stateParams.id}} 24HR Volume</p>\n" +
+    "									<p style=\"color:gray;font-size:10px\">21231{{stateParams.id}} Depth</p>\n" +
+    "					    		</div>\n" +
+    "							</div>\n" +
+    "\n" +
+    "							<!--<button class=\"btn btn-default log-btn\">+ Dimension</button>-->\n" +
+    "\n" +
+    "						</div>\n" +
+    "				    </div>\n" +
+    "					<button class=\"btn btn-default log-btn\">More <i></i></button>\n" +
     "			    </div>\n" +
     "		    </div>\n" +
     "		</div>\n" +
@@ -2436,11 +2632,11 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "		<div style=\"padding:16px;\">\n" +
     "			<h1>Create Your Value Map</h1>\n" +
     "			<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>\n" +
-    "			<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
-    "			<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "			<span><span ng-repeat=\"dimension in baseMarkets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "			<br><br>\n" +
+    "			<span><span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
-    "			<a href=\"/discover\">Discover</a>\n" +
     "		</div>\n" +
     "	</div>	\n" +
     "</div>	\n" +
@@ -3508,11 +3704,11 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "			<h1>{{project.title}} | Value Map</h1>\n" +
-    "			<span><a href=\"market/UniversalToken\">Universal Dimension</a> | <a href=\"#\">+ Dimension</a></span><br>\n" +
-    "			<span><span ng-repeat=\"dimension in chart.xAxis.categories\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "			<span><span ng-repeat=\"dimension in baseMarkets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
+    "			<br><br>\n" +
+    "			<span><span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span> <a href=\"#\">+ Dimension</a></span>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
-    "			<a href=\"/discover\">Discover</a>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
