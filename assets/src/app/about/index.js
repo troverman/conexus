@@ -9,12 +9,28 @@ angular.module( 'conexus.about', [
 				controller: 'AboutCtrl',
 				templateUrl: 'about/index.tpl.html'
 			}
-		}
+		},
+        resolve:{
+            projects: ['ProjectModel', function(ProjectModel){
+                return ProjectModel.getSome(10, 0, 'createdAt DESC');
+            }],
+            posts: ['PostModel', function(PostModel){
+                return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
+            }],
+            tasks: ['TaskModel', function(TaskModel){
+                return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
+            }],
+        }
 	});
 }])
 
-.controller( 'AboutCtrl', ['$scope', 'titleService', function AboutController( $scope, titleService ) {
+.controller( 'AboutCtrl', ['$scope', 'titleService', 'posts', 'projects', 'tasks', function AboutController( $scope, titleService, posts, projects, tasks ) {
 	titleService.setTitle('About | CRE8.XYZ');
+
+    //TODO
+    $scope.posts = posts;
+    $scope.projects = projects;
+    $scope.tasks = tasks;
 
 	$scope.chart = {
         chart: {
@@ -169,9 +185,16 @@ angular.module( 'conexus.about', [
 
 
 
-
-
-
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
+    };
 
 
 

@@ -71,7 +71,11 @@
 		        <div class="card">
 		            <div style="padding:16px">
 	                	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
-						<p>{{item.content}}</p>
+						
+	                	<div style="max-height:500px;overflow:scroll">
+							<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
+						</div>
+
 						<!--[] + [] -->
 						<h5>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h5>
 		            </div>

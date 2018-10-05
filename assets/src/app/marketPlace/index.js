@@ -18,7 +18,7 @@ angular.module( 'conexus.marketPlace', [
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $scope, $stateParams, config, ItemModel, items, titleService ) {
+.controller( 'MarketPlaceCtrl', ['$location', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.newItem = {};
     $scope.newItemToggleVar = false;
@@ -60,6 +60,18 @@ angular.module( 'conexus.marketPlace', [
 
     $scope.newItemToggle = function () {
         $scope.newItemToggleVar = $scope.newItemToggleVar ? false : true;
+    };
+
+    //YIKES
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
     };
 
 }]);

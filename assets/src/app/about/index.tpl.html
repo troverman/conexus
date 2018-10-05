@@ -22,14 +22,10 @@
 }
 </style>
 
-<!--<div id="logo-container" style="text-align:center;background:black">
-	<img style="max-height:400px" src="/images/loading.gif">
-</div>-->
 
 <div id="title-container">
 	<div class="container">
 		<div class="spacing-50"></div>
-		<!--<h1>conex.us | CRE8.XYZ</h1>-->
 		<h1>CRE8.XYZ</h1>
 		<h4>Creating the Next Wave of Public Organizations</h4>
 		<div class="spacing-50"></div>
@@ -45,13 +41,13 @@
 				<h4>Create the Next Wave</h4>
 				<h5>A Collaborative Network</h5>
 				<p style="font-style:italic;color:gray;margin:0px">A 24/7 continual hackathon</p>
-				<p style="font-style:italic;color:gray;margin:0px">Connect with new collaborators and create awesome things</p>
-				<div class="spacing-15"></div>
-				<a style="width:100%" class="btn btn-default log-btn" href="/discover">Discover</a>
-				<h5>Content</h5>
-				<h5>Members</h5>
-				<h5>Projects</h5>
-				<h5>Tasks</h5>
+				<p style="font-style:italic;color:gray;margin:0px">Connect with new collaborators and build together</p>
+				<div class="spacing-10"></div>
+
+				<h4>Share with us and Create the Future</h4>
+				<h5>Watch the World Create</h5>
+				<img style="max-height:200px" src="http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg">
+
 			</div>
 			<div class="col-md-6">
 				<div class="card">
@@ -71,10 +67,60 @@
 </div>
 
 <div id="about-section1">
-	<div class="spacing-50"></div>
 	<div class="container">
 		<div class="row">
-			<h2>DISCOVER AREA</h2>
+			<div class="col-xs-12" style="max-height:450px;overflow:scroll">
+
+				<!--TODO-->
+				<a style="width:100%" class="btn btn-default log-btn" href="/discover">Discover</a>
+
+				<div class="spacing-10"></div>
+				<div class="spacing-10"></div>
+
+				<ul style="padding:0px;" class="member-tabs">
+					<li class="active"><a href="">Content</a></li>
+					<li><a href="/discover">Members</a></li>
+					<li><a href="/market">Orders</a></li>
+					<li><a href="/Projects">Projects</a></li>
+					<li><a href="/Tasks">Tasks</a></li>
+					<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+				</ul>
+
+				<div class="card">
+			        <form style="display:flex;flex-direction:row;">
+			            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+			            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+							<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+			            </div>
+			        </form>
+				</div>
+
+				<div ng-repeat="task in tasks">
+					<div class="card">
+						<div style="padding:16px;">
+							<div class="row">
+								<div class="col-sm-10">
+									<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
+									<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+			                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
+									<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+									<span style="color:gray" am-time-ago="task.createdAt"></span>
+								</div>
+								<div class="col-sm-2" style="text-align:right">
+									<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
+									<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+							<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
 		</div>
 	</div>
 	<div class="spacing-50"></div>
@@ -102,11 +148,16 @@
 	<div class="container">
 		<div class="spacing-50"></div>
 
-			<h2>MultiDimensional Token Protocols</h2>
-			<h4>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization</h4>
-			<!--<h2>Developers</h2>-->
-			<!--DISCORD; GITHUB; INSTAGRAM; TWITTER; YOUTUBE; COMMUNITY!-->
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>MultiDimensional Token Protocols</h2>
+					<h4>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization | Transaction Tokenization</h4>
+					<h4>Developers | Documentation | Apis | Broader App Ecosystem</h4>
+					<a href="https://www.github.com/troverman/conexus"><i class="fa fa-github"></i></a>
 
+					<!--DISCORD; GITHUB; INSTAGRAM; TWITTER; YOUTUBE; COMMUNITY!-->
+				</div>
+			</div>
 	</div>
 </div>
 <div id="about-section4">
@@ -114,7 +165,7 @@
 		<div class="spacing-50"></div>
 		<div class="row">
 			<div class="col-md-6">
-				<h2>MultiDimensional Token Market</h2>
+				<h2><a href="/market">MultiDimensional Token Market</a></h2>
 				<p style="font-style:italic;color:gray;margin:0px">Turn your creative effort into dimensional tokens with market liquidity</p>
 				<p style="font-style:italic;color:gray;margin:0px">Create dimensional liquidity for transparent and reputationally validated work</p> 
 		        <span><a href="market/universalToken">UniversalToken</a> | {}</span>
@@ -125,8 +176,9 @@
 			</div>
 
 			<div class="col-md-12">
-				<h4>Create Dimensional Liquidity - a powerful approach for xyz; depth in the market</h4>
-				<p>Market Order types; onMint Order; trade Order; futures; derivatives</p> 
+				<h4>Create Value Relationships</h4>
+				<p style="font-style:italic;color:gray;margin:0px">A powerful approach for defining and stating interrelated value; create depth in the market</h4>
+				<p style="font-style:italic;color:gray;margin:0px">Market Order types; onMint Order; trade Order; futures; derivatives</p> 
 			</div>
 
 
@@ -144,7 +196,7 @@
 			</div>
 			<div class="col-md-6" style="text-align:right">
 				<h2>Information as Income</h2>
-				<h5>Universal Information as Universal Income</h5>
+				<h5 style="font-style:italic;color:gray;margin:0px">Universal Information as Universal Income</h5>
 				<div class="spacing-15"></div>
 
 				<h3>Complete Transparency</h3>
@@ -168,13 +220,20 @@
 		<div class="spacing-50"></div>
 
 		<div class="row">
-			<h2>Value Mapping and Dimensional Voting</h2>
-			<p style="font-style:italic;color:gray;margin:0px">A pluralist Means of Value</p>
-			<p style="font-style:italic;color:gray;margin:0px">Our Civic Duty</p>
-			<p style="font-style:italic;color:gray;margin:0px">Our Collective Responsibility</p>
-			<p style="font-style:italic;color:gray;margin:0px">Our Intentional Value Mechanism</p>
-			<p style="font-style:italic;color:gray;margin:0px">What do we know is valuable?</p>
+			<div class="col-xs-12">
 
+				<h2>Value Mapping and Dimensional Voting</h2>
+				<p style="font-style:italic;color:gray;margin:0px">Create A Pluralist Means of Value</p>
+				<p style="font-style:italic;color:gray;margin:0px">Continually state and update what valuable to you, dimensionally.</p>
+				<br>
+				<p style="font-style:italic;color:gray;margin:0px">It is Our Responsibility to create an awakening of depth in collective value. It starts with you.</p>
+				<p style="font-style:italic;color:gray;margin:0px">The source of our intentional value mechanism comes from simply stating what we believe is valuable. An empowering call to action.</p>
+				<p style="font-style:italic;color:gray;margin:0px">Empower youself and your collective man by clearly and distinctly defining your value map relational to a set of validated action sets</p>
+				<br>
+				<p style="font-style:italic;color:gray;margin:0px">What do we know is valuable? Let us come to consensus.</p>
+				<p style="font-style:italic;color:gray;margin:0px">Register to vote, map your value, and give dimensional value to sets of actions</p>
+
+			</div>
 		</div>
 
 		<div class="spacing-50"></div>
@@ -211,20 +270,10 @@
 						<div class="spacing-10"></div>
 						<highchart config="chartMap"></highchart>
 						<div class="spacing-10"></div>
-
-						<!--<img style="max-height:200px" src="http://68.media.tumblr.com/adb845dc962d237237b1387d4897f507/tumblr_mxk7bsHHpG1r09c0uo1_1280.jpg">
-			        	<img style="max-height:200px" src="http://78.media.tumblr.com/0ef539e26e60b888d4dcdbc0c349ae95/tumblr_o0j9i3ku5F1r1zjq4o1_1280.jpg">
-			        	<img style="max-height:200px" src="http://36.media.tumblr.com/990ab509d3d7304a8fc37e15807cd421/tumblr_myk4seJkFn1s7txf7o1_500.png">
-			        	<img style="max-height:200px" src="http://49.media.tumblr.com/9c91bdbba4be7cdf2efbb5e4ec81af3e/tumblr_nzqrn3eP7U1t1ye6to1_540.gif">
-			        	<img style="max-height:200px" src="http://66.media.tumblr.com/15d960a3d67084ca985db456ccef511b/tumblr_o56sb6nLfd1rrwdyco1_1280.jpg">
-			        	<img style="max-height:200px" src="http://78.media.tumblr.com/4a9e069a6b9e8080a38da7115f0395d9/tumblr_nunzd1Rikc1qb81nio1_1280.jpg">
-			        	<img style="max-height:200px" src="http://68.media.tumblr.com/cc357ef5aefb2041b60696faf71b19d4/tumblr_o7fuvtaJbx1rclv0wo1_500.jpg">-->
 			        	<img style="max-height:200px" src="http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg">
 			        	<img style="max-height:200px" src="http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg">
 			        	<img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
 			        	<img style="max-height:200px" src="http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif">
-
-
 					</div>
 				</div>
 
@@ -286,17 +335,18 @@
 				<div class="card">
 					<div style="padding:16px;">
 						<h3><b>Join Our Community</b></h3><hr>
-						<div class="form-group">
-	                        <input class="form-control" name="email" placeholder="Email" title="email" type="email"> 
-	                        <input class="form-control" name="username" placeholder="Username" title="username" type="text"> 
-	                        <input class="form-control" name="password" placeholder="Password" title="password" type="password"> 
-	                        <button class="btn btn-default log-btn" type="submit" value="submit">Sign up</button>
-	                        <br><br>
-		                    <div class="social-log">
-		                        <a href="/login"><h4>Already Have an Account?</h4></a>
-		                    </div>
-						</div>
-
+						<form role="form" method="post" action="/auth/local/register">
+							<div class="form-group">
+		                        <input class="form-control" name="email" placeholder="Email" title="email" type="email"> 
+		                        <input class="form-control" name="username" placeholder="Username" title="username" type="text"> 
+		                        <input class="form-control" name="password" placeholder="Password" title="password" type="password"> 
+		                        <button class="btn btn-default log-btn" type="submit" value="submit">Sign up</button>
+		                        <br><br>
+			                    <div class="social-log">
+			                        <a href="/login"><h4>Already Have an Account?</h4></a>
+			                    </div>
+							</div>
+	                	</form>
 					</div>
 				</div>
 
@@ -309,13 +359,23 @@
 	<div class="container">
 		<div class="spacing-50"></div>
 	    <div class="row">
-	    	<h5>Our Extended Community</h5>
+	    	<div class="col-xs-12" style="text-align:center">
+	    		<h5>Our Extended Community</h5>
+	    		<a href="https://www.instagram.com/cre8community"><i class="fa fa-instagram"></i></a>
+	    		<a href="https://www.twitter.com/cre8city"><i class="fa fa-twitter"></i></a>
+	    		<a href="https://www.github.com/troverman/conexus"><i class="fa fa-github"></i></a>
+	    		<a href="#"><i class="fa fa-slack"></i></a>
+	    		<a href="#"><i class="fa fa-facebook"></i></a>
+	    		<a href="#"><i class="fa fa-google"></i></a>
+	    		<a href="#"><i class="fa fa-app-store"></i></a>
+	    		<a href="#"><i class="fa fa-google-play"></i></a>
+	    	</div>
 	    </div>
 		<div class="spacing-50"></div>
 	</div>
 </div>
 
-<div id="about-section5">
+<!--<div id="about-section5">
 	<div class="container">
 		<div class="spacing-50"></div>
 	    <div class="row">
@@ -349,6 +409,6 @@
 	    </div>
 		<div class="spacing-50"></div>
 	</div>
-</div>
+</div>-->
 
 
