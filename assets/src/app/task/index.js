@@ -64,23 +64,21 @@ angular.module( 'conexus.task', [
     }
 
 
-    /*function getCombinations(chars) {
-        var result = [];
-        var f = function(prefix, chars) {
-            for (var i = 0; i < chars.length; i++) {
-                result.push(prefix + chars[i]);
-                f(prefix + chars[i], chars.slice(i + 1));
-            }
-        }
-        f('', chars);
-        return result;
-    }*/
+    function getAllSubsets(theArray) {
+      return theArray.reduce(function (subsets, value) {
+        return subsets.concat(subsets.map(function (set) {
+          return [value].concat(set);
+        }));
+      }, [[]]);
+    };
 
-    //$scope.tokens = getCombinations($scope.tokens)
+    //$scope.test = $scope.task.tags.split(',');
+    //$scope.test = [];
+    //$scope.test.push('Task');$scope.test.push($scope.task.id);$scope.test.push('onTimeStream')
+    //console.log(getAllSubsets($scope.test));
+    //$scope.tokens = getAllSubsets($scope.test);
 
-    //for (x in tokens){
-    //    $scope.tokens.push(tokens[x]+$scope.task.tag)
-    //}
+    //STORED AS A MATRIX; algabraic lattice. 
 
     $scope.askQuestion = function() {
         if ($scope.currentUser){

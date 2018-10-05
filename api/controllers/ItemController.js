@@ -36,7 +36,6 @@ module.exports = {
 			amountSet: req.param('amountSet'),
 			identiferSet: req.param('identiferSet'),
 			user: req.param('user'),
-
 		};
 		Item.create(model)
 		.exec(function(err, task) {

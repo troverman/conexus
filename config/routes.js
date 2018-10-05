@@ -16,6 +16,7 @@ module.exports.routes = {
   'get /market/:id/:id1': 'HomeController.index',
   'get /member': 'HomeController.index',
   'get /member/:path': 'HomeController.index',
+  'get /member/:path/assets': 'HomeController.index',
   'get /member/:path/content': 'HomeController.index',
   'get /member/:path/followers': 'HomeController.index',
   'get /member/:path/following': 'HomeController.index',
@@ -25,6 +26,7 @@ module.exports.routes = {
   'get /post/:id': 'HomeController.index',
   'get /projects': 'HomeController.index',
   'get /project/:path': 'HomeController.index',
+  'get /project/:path/assets': 'HomeController.index',
   'get /project/:path/edit': 'HomeController.index',
   'get /project/:path/channels': 'HomeController.index',//??
   'get /project/:path/content': 'HomeController.index',

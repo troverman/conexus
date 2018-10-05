@@ -57,6 +57,18 @@ angular.module( 'conexus.member', [
             }]
         }
     })
+    .state( 'member.assets', {
+        url: '/assets',
+        views: {
+            "memberAssets": {
+                controller: 'MemberAssetsCtrl',
+                templateUrl: 'member/templates/assets.tpl.html'
+            }
+        },
+        resolve: {
+            
+        }
+    })
     .state( 'member.content', {
         url: '/content',
         views: {
@@ -303,6 +315,12 @@ angular.module( 'conexus.member', [
                 break;
         }
     });
+
+}])
+
+.controller( 'MemberAssetsCtrl', ['$scope', 'config', 'titleService', function MemberAssetsCtrl( $scope, config, titleService ) {
+    titleService.setTitle($scope.member.username + ' | Assets | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
 
 }])
 

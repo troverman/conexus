@@ -25,6 +25,29 @@ angular.module( 'conexus.marketPlace', [
     $scope.stateParams = $stateParams;
     $scope.items = items;
 
+    $scope.tags = $scope.items.map(function(obj){
+        var returnObj = {};
+        if(obj.tags){obj.tags = obj.tags.split(',')}
+        returnObj = obj.tags;
+        return returnObj;
+    });
+
+    $scope.tags = [].concat.apply([], $scope.tags);
+    $scope.tags = $scope.tags.filter(function(e){return e}); 
+
+    function countInArray(array, value) {
+        return array.reduce(function(n, x){ return n + (x === value)}, 0);
+    }
+
+    $scope.sortedTagArray = [];
+    for (x in $scope.tags){
+        var amount = countInArray($scope.tags, $scope.tags[x]);
+        if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+            $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+        }
+    }
+    $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+
     $scope.createItem = function () {
     	if ($scope.currentUser){
     		$scope.newItem.user = $scope.currentUser.id;

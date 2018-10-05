@@ -48,6 +48,15 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    .state( 'project.assets', {
+        url: '/assets',
+        views: {
+            "assets": {
+                controller: 'ProjectAssetsCtrl',
+                templateUrl: 'project/templates/assets.tpl.html'
+            }
+        }
+    })
     //TODO: FEATURE?
     .state( 'project.channels', {
         url: '/channels',
@@ -363,6 +372,12 @@ angular.module( 'conexus.project', [
                 break;
         }
     });
+
+}])
+
+.controller( 'ProjectAssetsCtrl', ['$scope', 'config', 'project', 'titleService', function ProjectAssetsController( $scope, config, project, titleService ) {
+    titleService.setTitle(project.title + ' | conex.us');
+    $scope.currentUser = config.currentUser;
 
 }])
 
