@@ -6,7 +6,7 @@
 			<div class="col-xs-6">
 			    <div class="dropdown sort-dropdown noselect" style="float:right">
                     <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-			            <h3 style="text-align:right" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h3>
+			            <h4 style="text-align:right;margin-top:20px;" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h4>
 			        </a>
 			        <ul class="dropdown-menu">
 			            <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>Trending</h5></a></li>
@@ -27,7 +27,12 @@
 <div class="container">
     <div class="card">
         <form style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+                <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                </a>
+            </div>
         </form>
     </div>
 </div>

@@ -17,6 +17,9 @@ module.exports = {
 		identiferSet1: {
             type: 'string',
 		},
+		price: {
+            type: 'string',
+        },
 		status: {
             type: 'string',
 		},

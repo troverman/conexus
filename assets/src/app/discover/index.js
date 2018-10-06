@@ -12,16 +12,16 @@ angular.module( 'conexus.discover', [
 		},
         resolve: {
         	members: ['UserModel', function(UserModel){
-                return UserModel.getSome(100, 0, 'createdAt DESC');
+                return UserModel.getSome(18, 0, 'createdAt DESC');
             }],
         	projects: ['ProjectModel', function(ProjectModel){
-                return ProjectModel.getSome(100, 0, 'createdAt DESC');
+                return ProjectModel.getSome(20, 0, 'createdAt DESC');
             }],
             posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
 			}],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
             //TODO: ALL 
             //TODO: CONVERT TO 'CONTENT'
@@ -34,7 +34,7 @@ angular.module( 'conexus.discover', [
                 ];
             }],
             work: ['WorkModel', function(WorkModel){
-                return WorkModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return WorkModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
         }
 

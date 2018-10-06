@@ -1,19 +1,8 @@
 /**
  * grunt/pipeline.js
  *
- * The order in which your css, javascript, and template files should be
- * compiled and linked from your views and static HTML files.
- *
- * (Note that you can take advantage of Grunt-style wildcard/glob/splat expressions
- * for matching multiple files.)
  */
 
-
-
-// CSS files to inject in order
-//
-// (if you're using LESS with the built-in default config, you'll want
-//  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'bower_components/bootstrap/dist/css/bootstrap.min.css',
   'bower_components/angular-material/angular-material.css',
@@ -22,9 +11,6 @@ var cssFilesToInject = [
   'styles/**/*.css',
 ];
 
-
-// Client-side javascript files to inject in order
-// (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
   'bower_components/angular/angular.js',
   'bower_components/jquery/dist/jquery-3.1.0.min.js',
@@ -51,18 +37,18 @@ var jsFilesToInject = [
 
   'bower_components/highcharts/highstock.js',
   'bower_components/highcharts/highcharts-more.js',
-  'bower_components/highcharts-ng/dist/highcharts-ng.js',
+  'bower_components/highcharts/indicators/indicators.js',
+  
+  //'bower_components/highcharts/indicators/bollinger-bands.js',
+  //'bower_components/highcharts/indicators/stochastic.js',
 
-  //
-  // *->    you might put other dependencies like jQuery or Angular here   <-*
-  //
+  'bower_components/highcharts-ng/dist/highcharts-ng.js',
 
   // All of the rest of your app scripts
   'src/**/*.js'
 ];
 
 module.exports.jsFilesToInjectNoPathChange = jsFilesToInject;
-
 
 // Client-side HTML templates are injected using the sources below
 // The ordering of these templates shouldn't matter.
@@ -77,7 +63,6 @@ var templateFilesToInject = [
   // 'templates/**/*.html'
   'src/**/*.tpl.html'
 ];
-
 
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where

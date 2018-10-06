@@ -22,6 +22,7 @@ module.exports.routes = {
   'get /member/:path/following': 'HomeController.index',
   'get /member/:path/ledger': 'HomeController.index',
   'get /member/:path/positions': 'HomeController.index',
+  'get /members': 'HomeController.index',
   'get /order/:id': 'HomeController.index',
   'get /post/:id': 'HomeController.index',
   'get /projects': 'HomeController.index',

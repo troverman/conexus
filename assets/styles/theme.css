@@ -44,7 +44,7 @@ a:focus{text-decoration: none}
     top:6.4em;
     margin: 0 auto;
     background: #fff;
-    max-width: 15em;
+    width: 15em;
     height: 15em;
     padding: 0.25em;
     border-radius: .7em;

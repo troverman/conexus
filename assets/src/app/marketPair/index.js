@@ -29,6 +29,11 @@ angular.module( 'conexus.marketPair', [
     $scope.market = $stateParams.id;
     $scope.market1 = $stateParams.id1;
 
+    $scope.pluralistic = false;
+    if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){
+        $scope.pluralistic = true;
+    }
+
     //TODO: BETTER
     $scope.mirrorOrders = mirrorOrders;
     $scope.mirrorOrders.forEach(function(part, index) {
@@ -96,12 +101,26 @@ angular.module( 'conexus.marketPair', [
             type: 'column',
             name: 'Volume ' + $stateParams.id + ' | ' + $stateParams.id1,
             data: []
-        }/*, {
+        }, {
             type: 'sma',
+            id: 'sma1',
             linkedTo: 'ExchangePrice',
             params: {
-                period: 14
-            }
+                period: 24
+            },
+            showInLegend: true,
+        },{
+            type: 'sma',
+            id: 'sma2',
+            linkedTo: 'ExchangePrice',
+            params: {
+                period: 24*7
+            },
+            showInLegend: true,
+        }/*,{
+            type: 'bb',
+            linkedTo: 'ExchangePrice',
+            showInLegend: true,
         }*/],
         title: {
             text: ''
@@ -115,11 +134,11 @@ angular.module( 'conexus.marketPair', [
             gridLineWidth: 0.5,
             gridLineColor: 'grey'
         },
-        yAxis: {
+        yAxis: [{
             title: {
                 text: null
-            }
-        },
+            },
+        }],
         credits:{enabled:false},
     };
 

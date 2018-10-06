@@ -30,10 +30,19 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" ng-show="!pluralistic">
 		<div class="card">
 			<div style="padding:16px;">
 				<highchart config="chart"></highchart>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-show="pluralistic">
+		<div class="card">
+			<div style="padding:16px;">
+				<h2>Pluralistic Market</h2>
+				<highchart config="chartMap"></highchart>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,58 @@
+<div class="page-heading">
+    <div class="container"> 
+        <div class="spacing-25"></div>
+        <div class="row">
+            <div class="col-xs-6"><h1>Members</h1></div>
+            <div class="col-xs-6">
+                <div class="dropdown sort-dropdown noselect" style="float:right">
+                    <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <h4 style="text-align:right;margin-top:20px" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h4>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="sort-a" ng-click="selectSort('totalWork DESC')"><h5>Total Reputation</h5></a></li>
+                        <hr class="sort-hr">
+                        <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Joined</h5></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="spacing-25"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="spacing-15"></div>
+    <div class="card">
+        <form style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+                <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-lg-4 col-sm-6" ng-repeat="member in members">
+        <div class="member-card" style="margin-bottom:10px">
+            <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
+                <a href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
+            </div>
+            <div class="member-card-info">
+                <h4><a href="member/{{member.username}}">{{member.username}}</a></h4>
+                <p style="color:gray">{{member.status}} offline</p>
+                <p style="color:gray">Total Reputation | {{member.totalWork}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="spacing-10"></div>
+
+<div ng-click="loadMore()" class="container" style="text-align:center">
+    <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+</div>
+
+<div class="spacing-50"></div>
