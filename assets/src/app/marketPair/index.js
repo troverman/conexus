@@ -12,10 +12,10 @@ angular.module( 'conexus.marketPair', [
 		},
         resolve:{
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 400, 0, 'createdAt DESC');
             }],
             mirrorOrders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome('marketPair', $stateParams.id1, $stateParams.id, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome('marketPair', $stateParams.id1, $stateParams.id, 400, 0, 'createdAt DESC');
             }],
         }
 	});

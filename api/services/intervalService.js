@@ -10,14 +10,14 @@ module.exports = {
 
 		for (var i = 0; i<10000; i++){
 			var amount = Math.floor(Math.random()*160)+1;
-			var amount1 = 10000*amount+Math.abs(Math.sin(i)+100*i*Math.random());
+			var amount1 = 30*((1/10000)*10000*amount+Math.abs(Math.sin(i)+(i*Math.random())/200));
 			var price = amount1/amount;
 			newOrderArray.push({
 				user:'5923b9cc5aac131100cab1c1', //creator | CRE8
 				amountSet:amount,
 				amountSet1:amount1,
 				identiferSet:'CRE8',
-				identiferSet1:'BTC',
+				identiferSet1:'ETH',
 				price:price,
 			});
 			//console.log(price)
@@ -25,39 +25,37 @@ module.exports = {
 
 		//console.log(newOrderArray);
 
-		Order.create(newOrderArray).then(function(){
-			console.log('DONE', newOrderArray.length)
-		});
+		//Order.create(newOrderArray).then(function(){
+		//	console.log('DONE', newOrderArray.length)
+		//});
 
 		var newOrderArray1 = [];
 
 		for (var i = 0; i<10000; i++){
-			var amount = Math.floor(Math.random()*160*10000)+888;
-			var amount1 = amount/10000 + 1/10000*Math.abs(Math.sin(i)*1/100*i*Math.random());
+			var amount = 30*Math.floor(Math.random()*160)+1;
+			var amount1 = 1/30*((10000)*amount/10000 + (10000)*1/10000*Math.abs(Math.sin(i)*1/30*i*Math.random()));
 			var price = amount1/amount;
 			newOrderArray1.push({
 				user:'5923b9cc5aac131100cab1c1', //creator
 				amountSet:amount,
 				amountSet1:amount1,
-				identiferSet:'USD',
+				identiferSet:'ETH',
 				identiferSet1:'CRE8',
 				price:price,
 			});
 			//console.log(amount/10000 + 1/10000*Math.abs(Math.sin(i)*1/100*i*Math.random()));
-			//console.log(amount1)
+			console.log(price)
 			//0.001,0.0011,..0.1,1
 		} 
 
-
-
-		//console.log(newOrderArray1);
+		console.log(newOrderArray1);
 
 		//Order.create(newOrderArray1).then(function(){
 		//	console.log('DONE', newOrderArray1.length)
 		//});
 
 		
-		/*Order.find().limit(20000).skip(0).sort('createdAt DESC').then(function(models){
+		/*Order.find().limit(10000).skip(0).sort('createdAt DESC').then(function(models){
 			if (models.length > 0){
 	    		var idArray = models.map(function(obj) {return obj.id});
 				Order.destroy(idArray, function(err, model) {

@@ -17,6 +17,8 @@ body {
 
 .h1, .h2, .h3, h1, h2, h3{margin-top:10px;margin-bottom:10px;}
 
+img{max-width:100%;}
+
 md-progress-linear .md-container {
   background-color: rgba(36,36,46, 1)!important;
 }
@@ -24,6 +26,7 @@ md-progress-linear .md-container {
 md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
  background-color: #084b73!important;
 }
+
 
 //a{color:#002c53}
 a:hover{text-decoration: none}

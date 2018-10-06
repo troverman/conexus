@@ -186,7 +186,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"spacing-100\"></div>\n" +
     "				<h3>Create Value Relationships</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value; create depth in the market</h4>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; onMint Order; trade Order; futures; derivatives</p> \n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p> \n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
@@ -2306,7 +2306,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "				<div class=\"pull-left\" style=\"text-align:left\">\n" +
     "					<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
     "					<h5>@{{member.username}}</h5>\n" +
-    "					<p>{{member.totalWork}} | total reputation</p>\n" +
+    "					<p>{{member.totalWork}} | Total Reputation</p>\n" +
     "				</div>\n" +
     "				<div class=\"pull-right\" style=\"margin-right:15px;margin-top:10px;\">\n" +
     "					<!--<h2>{{member.totalWork}} | total work</h2>-->\n" +
@@ -2638,7 +2638,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
     "	        <p style=\"color:gray\">{{member.follower.status}} offline</p>\n" +
-    "	        <p style=\"color:gray\">Rotal Reputation | {{member.follower.totalWork}}</p>\n" +
+    "	        <p style=\"color:gray\">Total Reputation | {{member.follower.totalWork}}</p>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -3918,7 +3918,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
     "	        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
-    "	        <p style=\"color:gray\">Rotal Reputation | {{member.user.totalWork}}</p>\n" +
+    "	        <p style=\"color:gray\">Total Reputation | {{member.user.totalWork}}</p>\n" +
     "	        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
     "	    </div>\n" +
     "	</div>\n" +
