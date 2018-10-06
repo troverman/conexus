@@ -112,15 +112,19 @@ a:focus{text-decoration: none}
 }
 
 .member-card-image {
-  height: 125px;
+  //height: 125px;
+  height: 100px;
   background: center center no-repeat;
   background-size: cover;
 }
 
 .member-card-image img{
   position:absolute;
-  left: 10%;
-  top:14%;
+  //left: 10%;
+  //top:14%;
+  left: 7%;
+  top:13%;
+
   margin: 0 auto;
   background: #fff;
   //height: 11em;
