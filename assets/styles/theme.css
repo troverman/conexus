@@ -60,7 +60,8 @@ a:focus{text-decoration: none}
     width: 32px;
     height: 32px;
     display: inline-block;
-    border-radius: 3px;
+    //border-radius: 3px;
+    border-radius:100em;
 }
 
 .card-footer{
@@ -122,10 +123,13 @@ a:focus{text-decoration: none}
   top:14%;
   margin: 0 auto;
   background: #fff;
-  height: 11em;
+  //height: 11em;
   padding: 0.25em;
-  border-radius: .4em;
-  max-width:10em;
+  //border-radius: .4em;
+  //max-width:10em;
+  width:10em;
+  height:10em;
+  border-radius: 100em;
 }
 
 .member-card-social {

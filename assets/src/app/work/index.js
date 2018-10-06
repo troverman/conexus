@@ -123,7 +123,6 @@ angular.module( 'conexus.work', [
     //TODO: GET SOME
 
 
-
     var cameraPreview = document.getElementById('camera-preview');
     //testing out streaming! :D
     function initializeRecorder(stream) {

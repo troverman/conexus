@@ -43,20 +43,6 @@
 		</div>
 	</div>
 
-	<!--TODO: REAL STREAM-->
-	<div class="row">
-		<div class="card">
-		    <div style="padding:16px;">
-				<div ng-bind-html="renderStream(work.stream)"></div>
-				<h3><a href="stream/{{work.id}}">{{work.id}} Stream</a></h3>
-				<!--<p><a style="font-weight:700" href="member/{{work.user.username}}">
-					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
-					{{work.user.username}}
-				</a> | <span am-time-ago="work.createdAt"></span></p>-->
-			</div>
-		</div>
-	</div>
-
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px">
@@ -79,6 +65,25 @@
 			    <p><a href="market/general">general</a></p>-->
 
 
+			</div>
+		</div>
+	</div>
+
+	<!--TODO: REAL STREAM-->
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px;">
+				<div style="text-align:center;"><div ng-bind-html="renderStream(work.stream)"></div></div>
+				<p><a style="font-weight:700" href="member/{{work.user.username}}">
+					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
+					{{work.user.username}}
+				</a> | <span am-time-ago="work.createdAt"></span></p>
+			</div>
+			<div class="card-footer">
+				<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+				<a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+				<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+				<a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
 			</div>
 		</div>
 	</div>

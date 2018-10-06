@@ -90,7 +90,6 @@ angular.module( 'conexus.about', [
     };
 
     $scope.marketsChart = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8'];
-    //$scope.marketsChart = ['USD Inflow', 'ETH Inflow', 'BTC Inflow', 'STEEM Inflow', 'LTC Inflow', 'CRE8 Inflow', 'USD Outflow', 'ETH Outflow', 'BTC Outflow', 'STEEM Outflow', 'LTC Outflow', 'CRE8 Outflow'];
 
     for (x in $scope.marketsChart){
         var random1 = Math.floor(255*Math.random());
@@ -150,7 +149,7 @@ angular.module( 'conexus.about', [
             layout: 'vertical'
         },
         tooltip: {
-            shared: true,
+            enabled: false,
         },
         credits:{enabled:false},
     };
@@ -183,8 +182,6 @@ angular.module( 'conexus.about', [
         }
     }
 
-
-
     $scope.renderContent = function(content){
         if (content){
             if (!content.includes('>')){
@@ -195,8 +192,6 @@ angular.module( 'conexus.about', [
             else{return $sce.trustAsHtml(content)}
         }
     };
-
-
 
 
 

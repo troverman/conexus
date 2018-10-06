@@ -18,18 +18,18 @@
 			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
 			        <p style="color:gray">{{currentUser.status}} Online</p>
 			        <p style="color:gray">{{currentUser.totalWork}}</p>
-			    </div>
+			    </div> 
 			</div>
 		</div>
 		<div class="col-md-8 col-sm-12 col-xs-12" style="padding-left:0px;;margin-right:-5px">
 			<div class="card" style="min-width:100%;margin-top:0px">
 				<div style="padding:16px;">
-					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}"></a></span>
+					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{member.id}}</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}"></a></span>
 					<h4>{{currentUser.email}}</h4>
 					<p><a href="/projects">25 Projects</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
 					<div class="row">
 						<div class="col-sm-6">
-							<h5>Balance Lookup <span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02357431d0</span></h5>
+							<h5>Balance Lookup <span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
 				       		<form style="display:flex;flex-direction:row;">
 				            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Dimension">
 				            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
@@ -40,7 +40,7 @@
 				        	</form>
 				        </div>
 				        <div class="col-sm-6">
-							<h5>Reputation Lookup <span style="font-size:11px;color:gray">0x90C11Cd017582766A89155B7b90f11aF67fD2A2A</span> </h5>
+							<h5>Reputation Lookup <span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
 				       		<form style="display:flex;flex-direction:row;">
 				            	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Dimension">
 				            	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
@@ -332,8 +332,8 @@
 				<div class="col-md-6">
 					<h2>CRE8 MULTIDIMENSIONAL VALUE</h2>
 					<div class="spacing-5"></div>
-					<p style="font-style:italic;margin:0px;color:gray">Create and participate in transparent, crowdsourced, organizations</p>
-					<p style="font-style:italic;margin:0px;color:gray">Create value through tokenized actions</p>
+					<p style="font-style:italic;margin:0px;color:gray">Create and participate in transparent, crowdsourced, organizations.</p>
+					<p style="font-style:italic;margin:0px;color:gray">Create value through tokenized actions.</p>
 					<div class="spacing-15"></div>
 					<a style="width:100%" class="btn btn-default log-btn" href="/about">learn more</a>
 					<div class="spacing-50"></div>
@@ -375,8 +375,8 @@
 				<div class="col-md-6">
 					<h2>BUILD THE VALUE MATRIX</h2>
 					<div class="spacing-5"></div>
-					<p style="font-style:italic;margin:0px;color:gray">Manifest pluralism</p>
-					<p style="font-style:italic;margin:0px;color:gray">Vote and map your value respective to a complete set of tokenized potiental</p>
+					<p style="font-style:italic;margin:0px;color:gray">Manifest pluralism.</p>
+					<p style="font-style:italic;margin:0px;color:gray">Create your Dimensional Vote; Relationally map your value to a set of tokenized potiental.</p>
 					<div class="spacing-15"></div>
 					<a style="width:100%" class="btn btn-default log-btn" href="/market">explore the market</a>
 					<div class="spacing-50"></div>
@@ -448,16 +448,6 @@
 		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
 		            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
 		            	<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-		                <!--<a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-		                    <h5 style="color:black;text-align:right" class="noselect">Filters <i class="fa fa-angle-down"></i></h5>
-		                </a>
-		                <ul style="position:relative" class="dropdown-menu">
-		                    <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>tag:</h5></a></li>
-		                    <hr class="sort-hr">
-		                    <li><a href="#" class="sort-a" ng-click="selectSort('memberCount DESC')"><h5>@:</h5></a></li>
-		                    <hr class="sort-hr">
-		                    <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>has:</h5></a></li>
-		                </ul>-->
 		            </div>
 		        </form>
 			</div>
