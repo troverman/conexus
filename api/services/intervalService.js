@@ -17,7 +17,7 @@ module.exports = {
 				amountSet:amount,
 				amountSet1:amount1,
 				identiferSet:'CRE8',
-				identiferSet1:'USD',
+				identiferSet1:'BTC',
 				price:price,
 			});
 			//console.log(price)
@@ -25,14 +25,14 @@ module.exports = {
 
 		//console.log(newOrderArray);
 
-		//Order.create(newOrderArray).then(function(){
-		//	console.log('DONE', newOrderArray.length)
-		//});
+		Order.create(newOrderArray).then(function(){
+			console.log('DONE', newOrderArray.length)
+		});
 
 		var newOrderArray1 = [];
 
 		for (var i = 0; i<10000; i++){
-			var amount = Math.floor(Math.random()*10000)+888;
+			var amount = Math.floor(Math.random()*160*10000)+888;
 			var amount1 = amount/10000 + 1/10000*Math.abs(Math.sin(i)*1/100*i*Math.random());
 			var price = amount1/amount;
 			newOrderArray1.push({
@@ -50,7 +50,7 @@ module.exports = {
 
 
 
-		console.log(newOrderArray1);
+		//console.log(newOrderArray1);
 
 		//Order.create(newOrderArray1).then(function(){
 		//	console.log('DONE', newOrderArray1.length)
