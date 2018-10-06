@@ -253,7 +253,7 @@ angular.module( 'conexus.marketPair', [
         for (x in mirrorOrders){
             var price = mirrorOrders[x].amountSet/mirrorOrders[x].amountSet1;
             if(!mirrorOrderObj[price]){mirrorOrderObj[price]=0}
-            mirrorOrderObj[price] += parseFloat(mirrorOrders[x].amountSet[0]);
+            mirrorOrderObj[price] += parseFloat(mirrorOrders[x].amountSet[0]/price);
         }
     }
 
@@ -294,6 +294,7 @@ angular.module( 'conexus.marketPair', [
     for(x in mirrorOrderArray){
         $scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);
     }
+
     $scope.bidAskChart.series[1].data.reverse();
     $scope.bidAskChart.series.reverse();
 

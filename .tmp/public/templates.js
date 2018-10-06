@@ -697,7 +697,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		    <div class=\"member-card-info\">\n" +
     "		        <h4><a href=\"member/{{member.username}}\">{{member.username}}</a></h4>\n" +
     "		        <p style=\"color:gray\">{{member.status}} offline</p>\n" +
-    "		        <p style=\"color:gray\">total reputation | {{member.totalWork}}</p>\n" +
+    "		        <p style=\"color:gray\">Total Reputation | {{member.totalWork}}</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -2638,7 +2638,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
     "	        <p style=\"color:gray\">{{member.follower.status}} offline</p>\n" +
-    "	        <p style=\"color:gray\">total reputation | {{member.follower.totalWork}}</p>\n" +
+    "	        <p style=\"color:gray\">Rotal Reputation | {{member.follower.totalWork}}</p>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -2656,7 +2656,7 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.followed.username}}\">{{member.followed.username}}</a></h4>\n" +
     "	        <p style=\"color:gray\">{{member.followed.status}} offline</p>\n" +
-    "	        <p style=\"color:gray\">total reputation | {{member.followed.totalWork}}</p>\n" +
+    "	        <p style=\"color:gray\">Total Reputation | {{member.followed.totalWork}}</p>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "</div>");
@@ -3918,7 +3918,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	    <div class=\"member-card-info\">\n" +
     "	        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
     "	        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
-    "	        <p style=\"color:gray\">total reputation | {{member.user.totalWork}}</p>\n" +
+    "	        <p style=\"color:gray\">Rotal Reputation | {{member.user.totalWork}}</p>\n" +
     "	        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
     "	    </div>\n" +
     "	</div>\n" +
