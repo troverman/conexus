@@ -1,32 +1,32 @@
-angular.module( 'conexus.marketPlace', [
+angular.module( 'conexus.content', [
 ])
 
 .config(['$stateProvider', function config( $stateProvider ) {
-	$stateProvider.state( 'marketPlace', {
-		url: '/marketplace',
+	$stateProvider.state( 'content', {
+		url: '/content',
 		views: {
 			"main": {
-				controller: 'MarketPlaceCtrl',
-				templateUrl: 'marketPlace/index.tpl.html'
+				controller: 'ContentCtrl',
+				templateUrl: 'content/index.tpl.html'
 			}
 		},
         resolve:{
-            items: ['ItemModel', function(ItemModel) {
-                return ItemModel.getSome('', '', 100, 0, 'createdAt DESC');
+            posts: ['PostModel', function(PostModel){
+                return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
         }
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
+.controller( 'ContentCtrl', ['$sce', '$scope', 'config', 'titleService', 'PostModel', 'posts', function ContentController( $sce, $scope, config, titleService, PostModel, posts ) {
+	titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.newItem = {};
-    $scope.newItemToggleVar = false;
-    $scope.stateParams = $stateParams;
-    $scope.items = items;
+    $scope.newContent = {};
+    $scope.newContentToggleVar = false;
+    $scope.posts = posts;
 
-    //TODO: BETTER
-    $scope.tags = $scope.items.map(function(obj){
+    //TODO: BETTER | TAG STORAGE
+    $scope.tags = $scope.posts.map(function(obj){
         var returnObj = {};
         if(obj.tags){obj.tags = obj.tags.split(',')}
         returnObj = obj.tags;
@@ -34,8 +34,8 @@ angular.module( 'conexus.marketPlace', [
     });
 
     $scope.tags = [].concat.apply([], $scope.tags);
-    $scope.tags = $scope.tags.filter(function(e){return e}); 
-
+    $scope.tags = $scope.tags.filter(function(e){return e});
+     
     function countInArray(array, value) {
         return array.reduce(function(n, x){ return n + (x === value)}, 0);
     }
@@ -49,21 +49,20 @@ angular.module( 'conexus.marketPlace', [
     }
     $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
 
-    $scope.createItem = function () {
-    	if ($scope.currentUser){
-    		$scope.newItem.user = $scope.currentUser.id;
-	    	ItemModel.create($scope.newItem).then(function(){
-	    		$scope.newItem = {};
-	    	});
-	    }
-	    else{$location.path('/login')}
+
+
+    //TODO: MODEL | CREATE | NESTED?
+    $scope.createContent = function(post){
+        $scope.newContent.user = $scope.currentUser.id;
+        PostModel.create($scope.newContent).then(function(model) {
+            $scope.newContent = {};
+        });
     };
 
-    $scope.newItemToggle = function () {
-        $scope.newItemToggleVar = $scope.newItemToggleVar ? false : true;
+    $scope.newContentToggle = function() {
+        $scope.newContentToggleVar = !$scope.newContentToggleVar;
     };
 
-    //YIKES
     $scope.renderContent = function(content){
         if (content){
             if (!content.includes('>')){
@@ -73,6 +72,11 @@ angular.module( 'conexus.marketPlace', [
             }
             else{return $sce.trustAsHtml(content)}
         }
+    };
+
+    $scope.reply = function(post){
+        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+        $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
 }]);

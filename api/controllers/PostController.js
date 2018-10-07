@@ -162,11 +162,16 @@ module.exports = {
 			content: req.param('content'),
 			market: req.param('market'),
 			order: req.param('order'),
+			parent: req.param('parent'),
+			parentModel: req.param('parentModel'),
 			post: req.param('post'),
 			profile: req.param('profile'),
 			project: req.param('project'),
+			tags: req.param('tags'),
 			task: req.param('task'),
+			title: req.param('title'),
 			transaction: req.param('transaction'),
+			type: req.param('type'),
 			user: req.param('user'),
 			work: req.param('work'),
 		};
@@ -180,6 +185,23 @@ module.exports = {
 			}
 		});
 	},
+
+	//IS UPDATING REAL ONCHAIN? | NEW TYPE? NAH
+	//IT'S A NEW 'CREATE' THAT OVERLAPS. 
+	update: function(req,res){
+		var id = req.param('id');
+		var model = {
+			parent: req.param('parent'),
+			parentModel: req.param('parentModel'),
+			work: req.param('work'),
+		};
+		Post.update({id: id}, {parent:model.parent,parentModel:model.parentModel,work:model.work})
+		.then(function(model){
+			Post.publishUpdate(id, model[0]);
+			res.json(model);
+		});
+	},
+
 
 	destroy: function (req, res) {
 		var id = req.param('id');

@@ -36,7 +36,9 @@ module.exports = {
 		var model = {
 			username: req.param('username'),
 			email: req.param('email'),
-			firstName: req.param('firstName')
+			firstName: req.param('firstName'),
+			lastName: req.param('lastName'),
+			address: req.param('address'),
 		};
 		User.create(model)
 		.exec(function(err, model) {
@@ -51,9 +53,12 @@ module.exports = {
 	update: function(req,res){
 		var id = req.param('id');
 		var model = {
-			//email: req.param('email'),
+			email: req.param('email'),
 			//username : req.param('username'),
 			avatarUrl: req.param('avatarUrl'),
+			firstName: req.param('firstName'),
+			lastName: req.param('lastName'),
+			address: req.param('address'),
 		};
 		User.update({id: id}, model)
 		.then(function(model){

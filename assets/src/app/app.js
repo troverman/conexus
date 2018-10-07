@@ -16,6 +16,7 @@ angular.module( 'conexus', [
     'textAngular',
     'conexus.about',
     'conexus.account',
+    'conexus.content',
     'conexus.discover',
     'conexus.footer',
     'conexus.market',

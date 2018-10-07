@@ -1,31 +1,66 @@
 
 
 <!--CONTENT TYPE-->
-
-<div style="background:black" ng-show="false">
+<!--FACTOR-->
+<div style="background:black" ng-show="post.type=='video'">
 	<div class="spacing-100"></div>
     <div style="text-align:center">
-		<iframe width='560' height='315' src='https://www.cre8bid.io/v/597c55e56833048165c6720c' frameborder='0' allowfullscreen></iframe>
+		<span style="display:inline" ng-bind-html="renderMessage(post.content)"></span>
 	</div>
 	<div class="spacing-100"></div>
 </div>
 
+<!--<div class="container">
+	<div class="row" ng-show="post.type!='video'">
+		<div class="card">
+		    <div style="padding:16px">
+				<div style="max-height:500px;overflow:scroll">
+					<span style="display:inline" ng-bind-html="renderMessage(post.content)"></span>
+				</div>
+		    </div>
+		</div>
+	</div>
+</div>-->
 
 <div class="container">
 
 	<div class="row">
 		<div class="card">
 		    <div style="padding:16px">
+		    	<h3 ng-show="post.title">{{post.title}}</h3>
+				<a href="member/{{post.user.username}}"><img style="width:75px;height:75px;border-radius:100vh;float:left" src="{{post.user.avatarUrl}}"/></a>
+				<div style="float:left;margin-left:15px">
+
+					<h4 style="margin-top:0px;margin-bottom:0px"><a href="member/{{post.user.username}}">{{post.user.username}}</a></h4>
+					<h5 style="margin-top:0px;margin-bottom:0px"><a ng-repeat="tag in post.tags.split(',')" href="#">{{tag}}, </a></h5>
+
+					<h5 style="margin-top:0px;margin-bottom:0px">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</h5>
+					<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: 124312 | Dislike: 123</h5>
+
+				</div>
+				<div style="clear:both"></div>
+		    </div>
+		    <div class="card-footer">
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		    </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px">
 		        <h3>{{post.parent}} Parent Information</h3>
+		        <!--REFACTOR-->
 				<h3>
 					<a href="market/{{post.market}}">{{post.market}}</a>
 					<a href="order/{{post.order}}">{{post.order}}</a>
 					<a href="post/{{post.post}}">{{post.post}}</a>
 					<a href="project/{{post.project.urlTitle}}">{{post.project.title}}</a>
 					<a href="member/{{post.profile}}">{{post.profile}}</a>
-					<a href="task/{{post.task}}">{{post.task}}</a>
+					<a href="task/{{post.task}}">{{post.task.title}}</a>
 					<a href="task/{{post.transaction}}">{{post.transaction}}</a>
-					<a href="work/{{post.work}}">{{post.work}}</a>
+					<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
 				</h3>
 		    </div>
 		</div>
@@ -34,60 +69,69 @@
 	<div class="row">
 		<div class="card">
 		    <div style="padding:16px">
-		    	<h3>{{post.id}} Post Information</h3>
-				<a href="member/{{post.user.username}}"><img style="width:75px;height:75px;border-radius:100vh;float:left" src="{{post.user.avatarUrl}}"/></a>
-				<div style="float:left;margin-left:15px">
-					<h4 style="margin-top:0px;margin-bottom:0px"><a href="member/{{post.user.username}}">{{post.user.username}}</a></h4>
-					<h5 style="margin-top:0px;margin-bottom:0px"><a href="project/{{post.title}}">{{post.title}} Title</a></h5>
-					<h5 style="margin-top:0px;margin-bottom:0px"><a href="#">Tag, Tag</a></h5>
-					<p style="margin-top:0px;margin-bottom:0px">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</p>
-					<p style="margin-top:0px;margin-bottom:0px">Reactions | Like: 124312 | Dislike: 123</p>
-				</div>
-				<div style="clear:both"></div>
-		    </div>
-		</div>
-	</div>
+		    	<div class="row">
 
-	<div class="row">
-		<div class="card">
-		    <div style="padding:16px">
-				<div class="col-md-8">
-			    	<h3>Protocols [viewToken, contentToken, reactionToken]</h3>
-			    	<p>[viewToken, contentToken, reactionToken] manifold minting logic</p>
+					<div class="col-md-8">
+				    	<h4>Protocols [viewToken, contentToken, reactionToken, commentToken]</h4>
+				    	<p style="color:gray;font-style:italic;font-size:12px">[viewToken, contentToken, reactionToken, commentToken] manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>
 
-			        <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+				        <h5><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
 
-			        <p><a href="market/Content+Create">Content+Create</a></p>
-			      	<p><a href="market/{{post.id}}">Content+[type]</a></p>
-			        <p><a href="market/{{post.id}}">Content+Create+[type]</a></p>
+				        <p>
+					        <a href="market/Content+Create">Content+Create</a>
+					      	<a href="market/{{post.id}}">Content+[type]</a>
+					        <a href="market/{{post.id}}">Content+Create+[type]</a>
 
-			        <p><a href="market/createContent+{{post.id}}">Content+Create+{{post.id}}</a></p>
-			        <p><a href="market/{{post.id}}">Content+{{post.id}}</a></p>
+					        <a href="market/createContent+{{post.id}}">Content+Create+{{post.id}}</a>
+					        <a href="market/{{post.id}}">Content+{{post.id}}</a>
 
-			        <p><a href="market/View+{{post.id}}">View+{{post.id}}</a></p>
-			        <p><a href="market/View+{{post.id}}">View+{{post.user.id}}</a></p>
-			        <p><a href="market/View+{{post.id}}">View+{{currentUser.id}}</a></p>
-			        <p><a href="market/View+{{post.id}}">View+[types | tags]</a></p>
+					        <a href="market/View+{{post.id}}">View+{{post.id}}</a>
+					        <a href="market/View+{{post.id}}">View+{{post.user.id}}</a>
+					        <a href="market/View+{{post.id}}">View+{{currentUser.id}}</a>
+					        <a href="market/View+{{post.id}}">View+[types | tags]</a>
 
-			        <p><a href="market/View+{{post.id}}">Reaction+{{currentUser.id}}</a></p>
-			        <p><a href="market/View+{{post.id}}">Reaction+[type]</a></p>
-			        <p><a href="market/View+{{post.id}}">Reaction+[type]+{{currentUser.id}}</a></p>
+					        <a href="market/View+{{post.id}}">Reaction+{{currentUser.id}}</a>
+					        <a href="market/View+{{post.id}}">Reaction+[type]</a>
+					        <a href="market/View+{{post.id}}">Reaction+[type]+{{currentUser.id}}</a>
+				    	</p>
+
+			    	</div>
+
+					<div class="col-md-4">
+
+				        <h4>Liquidity | onMint</h4>
+						<h5>Filters | <span ng-repeat="input in inputVector.split(',')"><a href="market/{{input}}">{{input}}</a> | </span>
+						<h5>Input Vectors | Scale of Output</h5>
+						<p style="color:gray;font-style:italic;font-size:12px">Search for Output liquidity path | [] = []</p>
+						<input type="text" placeholder="Output Dimensions" ng-model="inputVector" class="form-control">
+						<p style="color:gray;font-style:italic;font-size:10px">CREATE ORDER [TOKENS] = [0.000312CRE8, 0.00002BTC, 0.0002ETH]</p>
+						<p style="color:gray;font-style:italic;font-size:10px">onMint sponsorship [TOKENS] = [0.000312 CRE8, 0.00021UniversalToken, ...]</p>
+
+			    	</div>
 		    	</div>
-
-				<div class="col-md-4">
-			        <h3>Liquidity</h3>
-					<p>Filters | CRE8 | USD</p>
-					<p>input vectors | scale of output </p>
-					<p>Search for Output liquidity path</p>
-			    	<p>[] = []..</p>
-		    	</div>
-		    	<div style="clear:both"></div>
 
 		    </div>
 		</div>
 	</div>
 
-	<div class="row">
+	<!--REFACTOR-->
+	<div class="row" ng-show="post.type=='video'">
+		<div class="card" style="background-color:#f9f9f9">
+	        <div style="padding:16px;background-color:white">
+	        	<h3>Comment</h3>
+	        	<form role="form" ng-submit="createPost(post)">
+					<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row" ng-show="post.type=='video'">
+		<div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+	</div>
+
+	<div class="row" ng-show="post.type!='video'">
 
 		<div class="card" style="background-color:#f9f9f9">
 	        <div style="padding:16px;background-color:white">
@@ -119,7 +163,6 @@
 			</div>
 			<div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
 		</div>
-
 
 	</div>
 

@@ -27,6 +27,9 @@ angular.module( 'conexus.post', [
     $scope.newPost = {};
     $scope.newReaction = {};
     $scope.post = post;
+    if(!$scope.post){$location.path('/')}
+
+    $scope.inputVector = 'CRE8,BTC,ETH'
 
     //TODO: FINALIZE.. WORKS ON FRONTEND
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED

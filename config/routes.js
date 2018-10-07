@@ -8,6 +8,8 @@ module.exports.routes = {
   'get /home': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /account': 'HomeController.index',
+  'get /content': 'HomeController.index',
+  'get /content/:id': 'HomeController.index',
   'get /discover': 'HomeController.index',
   'get /item/:id': 'HomeController.index',
   'get /market': 'HomeController.index',
@@ -87,6 +89,7 @@ module.exports.routes = {
   'get /api/post': 'PostController.getSome',
   'get /api/post/:id': 'PostController.getOne',
   'post /api/post': 'PostController.create',
+  'post /api/post/:id': 'PostController.update',
   'delete /api/post/:id': 'PostController.destroy',
 
   /**

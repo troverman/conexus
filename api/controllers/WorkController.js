@@ -9,6 +9,7 @@ module.exports = {
         .populate('user')
         .populate('project')
         .populate('task')
+        .populate('stream')
         .then(function (model) {
 			res.json(model);
         });

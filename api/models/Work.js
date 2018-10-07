@@ -12,7 +12,8 @@ module.exports = {
             type: 'string',
         },
         stream: {
-            type: 'string',
+            //content
+            model: 'post',
         },
         identifer: {
             type: 'string',

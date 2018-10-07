@@ -1,9 +1,6 @@
 /**
-* Content.js
+* Motion.js
 */
-
-//TODO: THE NEW POST
-//TODO: VIDEO + STREAM + ETC
 
 module.exports = {
 

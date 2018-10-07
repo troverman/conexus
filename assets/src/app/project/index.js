@@ -208,6 +208,8 @@ angular.module( 'conexus.project', [
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
+    if(!$scope.project){$location.path('/')}
+
     $scope.tabsToggleVar = false;
 
     if($scope.currentUser){

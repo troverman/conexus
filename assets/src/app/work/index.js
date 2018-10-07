@@ -17,6 +17,9 @@ angular.module( 'conexus.work', [
             posts: ['PostModel', 'work', function(PostModel, work){
                 return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
+            //stream: ['PostModel', 'work', function(PostModel, work){
+            //    return PostModel.getSome('work', work.id, 1, 0, 'createdAt DESC');
+            //}],
             workVerifications: ['PostModel', 'work', function(PostModel, work){
                 return null;
             }],
@@ -99,7 +102,7 @@ angular.module( 'conexus.work', [
     };
 
     //YIKES
-    $scope.renderMessage = function(post){
+    $scope.renderContent = function(post){
         if (post){
             if (!post.includes('>')){
                 var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
@@ -108,11 +111,6 @@ angular.module( 'conexus.work', [
             }
             else{return $sce.trustAsHtml(post)}
         }
-    };
-
-    $scope.renderStream = function(stream){
-        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
-        return $sce.trustAsHtml(html);
     };
 
     $scope.reply = function(post){

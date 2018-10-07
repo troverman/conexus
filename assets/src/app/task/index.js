@@ -33,6 +33,7 @@ angular.module( 'conexus.task', [
     $scope.question = false;
     $scope.reputationMultiplier = 1;
     $scope.streaming = false;
+    $scope.streamingId = null;
     $scope.streamUrl = 'https://www.cre8bid.io/v/597c55e56833048165c6720c';
     $scope.task = task;
     $scope.task.verificationScore = 0;
@@ -147,15 +148,46 @@ angular.module( 'conexus.task', [
         $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
 
+    //REWORK THE FLOW
     $scope.startStreaming = function() {
         if ($scope.currentUser){
-            $scope.streaming = true;
+            $scope.streaming = true;  
+            //startStream(); INIT          
         }
         else{$location.path('/login')}
     }
 
     $scope.startWork = function() {
         if ($scope.currentUser){
+
+
+
+            if ($scope.streaming){
+
+
+                //STREAMING CREATES A POST -->
+                //TODO.. INIT STREAM HERE ~~~~
+                //startStream();
+
+                $scope.newPost = {
+                    type:'video',
+                    title: $scope.task.title,
+                    content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
+                    user: $scope.currentUser.id,
+                    //parent: $scope.work..
+                };
+
+                PostModel.create($scope.newPost).then(function(postModel){
+                    console.log('create', postModel)
+                    $scope.streamingId = postModel.id;
+                });
+
+
+            }
+
+
+
+
             if($scope.working === true) return false;
             $scope.working = true;
             $scope.interval = setInterval($scope.updateCount, 1000);
@@ -163,7 +195,9 @@ angular.module( 'conexus.task', [
         else{$location.path('/login')}
     };
 
+    //REWORK THE FLOW
     $scope.submit = function() {
+        
         if($scope.working === false) return false;
         $scope.working = false; $scope.question = false; $scope.streaming = false;
         var workModel = {
@@ -173,16 +207,32 @@ angular.module( 'conexus.task', [
             project: $scope.task.project,
             task: $scope.task.id,
             user: $scope.currentUser.id,
-            stream: $scope.streamUrl,
+            //stream: $scope.streamUrl,
+            stream: $scope.streamingId,
             verificationScore: 0
         };
         WorkModel.create(workModel).then(function(model){
             console.log(model);
             $scope.work.push(model);
             $scope.workContent = '';
+
+            //UPDATE TO HAVE PARENT AS WORK MODEL
+            //REFACTOR | DOING BOTH HERE
+            var update = {};
+            update.id = $scope.streamingId;
+            update.work = model.id;
+            update.parent = model.id;
+            update.parentModel = 'work';
+            console.log(update);
+            PostModel.update(update).then(function(postModel){
+                consooe.log(postModel)
+                //$scope.streamingId = postModel.id;
+            });
+
         }); 
         $scope.taskTime=0;
         clearInterval($scope.interval);
+
     };
 
     $scope.updateCount = function() {

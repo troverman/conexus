@@ -12,6 +12,12 @@ module.exports = {
         order: {
             type: 'string'
         },
+        parent: {
+            type: 'string',
+        },
+        parentModel: {
+            type: 'string',
+        },
         profile: {
             model: 'user',
         },
@@ -24,8 +30,17 @@ module.exports = {
         task: {
             model: 'task'
         },
+        tags: {
+            type: 'string',
+        },
+        title: {
+            type: 'string',
+        },
         transaction: {
             type: 'string'
+        },
+        type: {
+            type: 'string',
         },
         work: {
             model: 'work'

@@ -29,6 +29,11 @@ angular.module('models.post', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
+    this.update = function(newModel){
+        var url = utils.prepareUrl('post/' + newModel.id);
+        return $sailsSocket.post(url, newModel).then(success, error);
+    };
+
     this.delete = function(model) {
         var url = utils.prepareUrl('post/' + model.id);
         return $sailsSocket.delete(url).then(success, error);

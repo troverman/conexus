@@ -18,9 +18,11 @@ angular.module( 'conexus.item', [
 	});
 }])
 
-.controller( 'ItemCtrl', ['$sce', '$scope', '$stateParams', 'config', 'item', 'titleService', function ItemController( $sce, $scope, $stateParams, config, item, titleService ) {
+.controller( 'ItemCtrl', ['$location', '$sce', '$scope', '$stateParams', 'config', 'item', 'titleService', function ItemController( $location, $sce, $scope, $stateParams, config, item, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.item = item;
+    if(!$scope.item){$location.path('/')}
+
     $scope.purchaseToggleVar = false;
     
     $scope.createContent = function(post) {
