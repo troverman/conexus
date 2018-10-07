@@ -82,18 +82,19 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "					<li class=\"active\"><a href=\"\">Content</a></li>\n" +
-    "					<li><a href=\"/discover\">Members</a></li>\n" +
+    "					<li class=\"active\"><a href=\"/content\">Content</a></li>\n" +
+    "					<li><a href=\"/marketplace\">Items</a></li>\n" +
+    "					<li><a href=\"/members\">Members</a></li>\n" +
     "					<li><a href=\"/market\">Orders</a></li>\n" +
-    "					<li><a href=\"/Projects\">Projects</a></li>\n" +
-    "					<li><a href=\"/Tasks\">Tasks</a></li>\n" +
+    "					<li><a href=\"/projects\">Projects</a></li>\n" +
+    "					<li><a href=\"/tasks\">Tasks</a></li>\n" +
     "					<li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "				</ul>\n" +
     "\n" +
     "				<div class=\"card\">\n" +
     "			        <form style=\"display:flex;flex-direction:row;\">\n" +
     "			            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "			            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "			            <div ng-click=\"keyPress(searchQuery)\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
     "							<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "			            </div>\n" +
     "			        </form>\n" +
@@ -423,10 +424,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	    		<a href=\"https://www.twitter.com/cre8city\"><i class=\"fa fa-twitter\"></i></a>\n" +
     "	    		<a href=\"https://www.github.com/troverman/conexus\"><i class=\"fa fa-github\"></i></a>\n" +
     "	    		<a href=\"https://cre8xyz.slack.com\"><i class=\"fa fa-slack\"></i></a>\n" +
-    "	    		<a href=\"#\"><i class=\"fa fa-facebook\"></i></a>\n" +
+    "	    		<!--<a href=\"#\"><i class=\"fa fa-facebook\"></i></a>\n" +
     "	    		<a href=\"#\"><i class=\"fa fa-google\"></i></a>\n" +
     "	    		<a href=\"#\"><i class=\"fa fa-app-store\"></i></a>\n" +
-    "	    		<a href=\"#\"><i class=\"fa fa-google-play\"></i></a>\n" +
+    "	    		<a href=\"#\"><i class=\"fa fa-google-play\"></i></a>-->\n" +
     "	    	</div>\n" +
     "	    </div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -660,10 +661,12 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "    \n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"\">\n" +
+    "        <div class=\"card\">\n" +
     "            <div style=\"padding:10px;\">\n" +
     "                <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button>\n" +
     "            </div>\n" +
@@ -686,6 +689,19 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "                    <div class=\"spacing-15\"></div>\n" +
     "                </form>\n" +
     "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <form style=\"display:flex;flex-direction:row;\">\n" +
+    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"{{searchQuery}}\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "                <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "                    <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "            </form>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -735,8 +751,13 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-50\"></div>\n" +
-    "");
+    "<div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "<div class=\"container\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "     <div class=\"row\"><div class=\"col-sm-offset-2 col-sm-10\"><button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button></div></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -768,14 +789,16 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "<!--TODO: FILTER / SEARCH -->\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"\">\n" +
-    "		<div class=\"card\">\n" +
+    "	    <div class=\"card\">\n" +
     "	        <form style=\"display:flex;flex-direction:row;\">\n" +
     "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "	            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "					<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "	                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                </a>\n" +
     "	            </div>\n" +
     "	        </form>\n" +
-    "		</div>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -1037,7 +1060,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		    <div style=\";\">\n" +
     "				<ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "					<li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
-    "					<li><a href=\"/discover\">Content</a></li>\n" +
+    "					<li><a href=\"/content\">Content</a></li>\n" +
+    "					<li><a href=\"/marketplace\">Items</a></li>\n" +
     "					<li><a href=\"/market\">Orders</a></li>\n" +
     "					<li><a href=\"/projects\">Projects</a></li>\n" +
     "					<li><a href=\"/tasks\">Tasks</a></li>\n" +
@@ -1308,7 +1332,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			    <div style=\";\">\n" +
     "					<ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "						<li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
-    "						<li><a href=\"/discover\">Content</a></li>\n" +
+    "						<li><a href=\"/content\">Content</a></li>\n" +
+    "						<li><a href=\"/marketplace\">Items</a></li>\n" +
     "						<li><a href=\"/market\">Orders</a></li>\n" +
     "						<li><a href=\"/projects\">Projects</a></li>\n" +
     "						<li><a href=\"/tasks\">Tasks</a></li>\n" +
@@ -1674,7 +1699,12 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
     "	        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "	            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "	                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                </a>\n" +
+    "	            </div>\n" +
     "	        </form>\n" +
     "	    </div>\n" +
     "	</div>\n" +
@@ -2276,7 +2306,12 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
     "	        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "	            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "	                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                </a>\n" +
+    "	            </div>\n" +
     "	        </form>\n" +
     "	    </div>\n" +
     "	</div>\n" +
@@ -2326,7 +2361,15 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	<!--REACT 5 Star verified purchase-->\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "</div>");
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "<div class=\"container\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "     <div class=\"row\"><div class=\"col-sm-offset-2 col-sm-10\"><button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button></div></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("markets/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -2360,7 +2403,12 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
     "	        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "	            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "	                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                </a>\n" +
+    "	            </div>\n" +
     "	        </form>\n" +
     "	    </div>\n" +
     "	</div>\n" +
@@ -3147,8 +3195,8 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "    <div class=\"card\">\n" +
     "        <form style=\"display:flex;flex-direction:row;\">\n" +
     "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "                </a>\n" +
     "            </div>\n" +
@@ -4521,7 +4569,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "        <form style=\"display:flex;flex-direction:row;\">\n" +
     "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
     "            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "                </a>\n" +
     "            </div>\n" +
@@ -4627,13 +4675,20 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "\n" +
     "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
-    "		<form role=\"form\" >\n" +
-    "			<div class=\"card\">\n" +
-    "				<input type=\"text\" class=\"form-control\" ng-click=\"keyPress(searchValue)\" ng-model=\"searchValue\" placeholder=\"{{searchQuery}}\">\n" +
-    "			</div>\n" +
-    "		</form>\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
+    "		<div class=\"spacing-10\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "		    <div class=\"card\">\n" +
+    "		        <form style=\"display:flex;flex-direction:row;\">\n" +
+    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"{{searchQuery}}\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "		            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "		                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "		                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "		                </a>\n" +
+    "		            </div>\n" +
+    "		        </form>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-10\"></div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"container\">\n" +

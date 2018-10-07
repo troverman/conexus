@@ -35,25 +35,25 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             orders: ['member', 'OrderModel', function(member, OrderModel){
-                return OrderModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
+                return OrderModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
 
             //TODO | BETTER....
             posts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
+                return PostModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
             profilePosts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('profile', member.id, 50, 0, 'createdAt DESC');
+                return PostModel.getSome('profile', member.id, 20, 0, 'createdAt DESC');
             }],
 
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('from', member.id, 50, 0, 'createdAt DESC');
+                return TransactionModel.getSome('from', member.id, 20, 0, 'createdAt DESC');
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('to', member.id, 50, 0, 'createdAt DESC');
+                return TransactionModel.getSome('to', member.id, 20, 0, 'createdAt DESC');
             }],
             work: ['member', 'WorkModel', function(member, WorkModel) {
-                return WorkModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
+                return WorkModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }]
         }
     })
@@ -80,7 +80,7 @@ angular.module( 'conexus.member', [
         resolve: {
             //TODO: REFACTOR
             posts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+                return PostModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
             videos: ['member', function(member) {
                 return [
@@ -135,10 +135,10 @@ angular.module( 'conexus.member', [
                 return UserModel.getByUsername($stateParams.path);
             }],
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('from', member.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome('from', member.id, 20, 0, 'createdAt DESC');
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('to', member.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome('to', member.id, 20, 0, 'createdAt DESC');
             }],
         }
     })
@@ -155,7 +155,7 @@ angular.module( 'conexus.member', [
                 return UserModel.getByUsername($stateParams.path);
             }],
             orders: ['member', 'OrderModel', function(member, OrderModel){
-                return OrderModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
         }
     })

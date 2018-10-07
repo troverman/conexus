@@ -12,18 +12,20 @@ angular.module( 'conexus.content', [
 		},
         resolve:{
             posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
         }
 	});
 }])
 
-.controller( 'ContentCtrl', ['$sce', '$scope', 'config', 'titleService', 'PostModel', 'posts', function ContentController( $sce, $scope, config, titleService, PostModel, posts ) {
+.controller( 'ContentCtrl', ['$rootScope', '$sce', '$scope', 'config', 'titleService', 'PostModel', 'posts', function ContentController( $rootScope, $sce, $scope, config, titleService, PostModel, posts ) {
 	titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newContentToggleVar = false;
     $scope.posts = posts;
+    $scope.selectedSort = 'createdAt DESC';
+    $scope.skip = 0;
 
     //TODO: BETTER | TAG STORAGE
     $scope.tags = $scope.posts.map(function(obj){
@@ -48,7 +50,7 @@ angular.module( 'conexus.content', [
         }
     }
     $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
+    //TODO: BETTER | TAG STORAGE
 
 
     //TODO: MODEL | CREATE | NESTED?
@@ -56,6 +58,15 @@ angular.module( 'conexus.content', [
         $scope.newContent.user = $scope.currentUser.id;
         PostModel.create($scope.newContent).then(function(model) {
             $scope.newContent = {};
+        });
+    };
+
+    $scope.loadMore = function() {
+        $scope.skip = $scope.skip + 20;
+        $rootScope.stateIsLoading = true;
+        PostModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(posts) {
+            $rootScope.stateIsLoading = false;
+            Array.prototype.push.apply($scope.posts, posts);
         });
     };
 

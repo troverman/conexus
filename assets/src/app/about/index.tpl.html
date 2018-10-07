@@ -78,18 +78,19 @@
 				<div class="spacing-10"></div>
 
 				<ul style="padding:0px;" class="member-tabs">
-					<li class="active"><a href="">Content</a></li>
-					<li><a href="/discover">Members</a></li>
+					<li class="active"><a href="/content">Content</a></li>
+					<li><a href="/marketplace">Items</a></li>
+					<li><a href="/members">Members</a></li>
 					<li><a href="/market">Orders</a></li>
-					<li><a href="/Projects">Projects</a></li>
-					<li><a href="/Tasks">Tasks</a></li>
+					<li><a href="/projects">Projects</a></li>
+					<li><a href="/tasks">Tasks</a></li>
 					<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
 				</ul>
 
 				<div class="card">
 			        <form style="display:flex;flex-direction:row;">
 			            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-			            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+			            <div ng-click="keyPress(searchQuery)" style="border:0px" class="btn btn-default" style="float:right">
 							<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
 			            </div>
 			        </form>
@@ -419,10 +420,10 @@
 	    		<a href="https://www.twitter.com/cre8city"><i class="fa fa-twitter"></i></a>
 	    		<a href="https://www.github.com/troverman/conexus"><i class="fa fa-github"></i></a>
 	    		<a href="https://cre8xyz.slack.com"><i class="fa fa-slack"></i></a>
-	    		<a href="#"><i class="fa fa-facebook"></i></a>
+	    		<!--<a href="#"><i class="fa fa-facebook"></i></a>
 	    		<a href="#"><i class="fa fa-google"></i></a>
 	    		<a href="#"><i class="fa fa-app-store"></i></a>
-	    		<a href="#"><i class="fa fa-google-play"></i></a>
+	    		<a href="#"><i class="fa fa-google-play"></i></a>-->
 	    	</div>
 	    </div>
 		<div class="spacing-50"></div>

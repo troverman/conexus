@@ -25,14 +25,16 @@
 <!--TODO: FILTER / SEARCH -->
 <div class="container">
 	<div class="">
-		<div class="card">
+	    <div class="card">
 	        <form style="display:flex;flex-direction:row;">
 	            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-	            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-					<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+	            <div style="border:0px" class="btn btn-default" style="float:right">
+	                <a ng-click="keyPress(searchQuery)" href="#" role="button">
+	                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+	                </a>
 	            </div>
 	        </form>
-		</div>
+	    </div>
 	</div>
 </div>
 

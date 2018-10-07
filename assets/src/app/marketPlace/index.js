@@ -18,12 +18,14 @@ angular.module( 'conexus.marketPlace', [
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
+.controller( 'MarketPlaceCtrl', ['$location', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.newItem = {};
     $scope.newItemToggleVar = false;
     $scope.stateParams = $stateParams;
     $scope.items = items;
+    $scope.selectedSort = 'createdAt DESC';
+    $scope.skip = 0;
 
     //TODO: BETTER
     $scope.tags = $scope.items.map(function(obj){
@@ -57,6 +59,15 @@ angular.module( 'conexus.marketPlace', [
 	    	});
 	    }
 	    else{$location.path('/login')}
+    };
+
+    $scope.loadMore = function() {
+        $scope.skip = $scope.skip + 20;
+        $rootScope.stateIsLoading = true;
+        ItemModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(items) {
+            $rootScope.stateIsLoading = false;
+            Array.prototype.push.apply($scope.items, items);
+        });
     };
 
     $scope.newItemToggle = function () {
