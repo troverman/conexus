@@ -76,7 +76,7 @@
 			<div class="card">
 				<div style="padding:16px;">
 					<div ng-repeat="tag in sortedTagArray">
-						<a href="" ng-click="">{{tag.element}}</a>
+                        <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
 					</div>
 				</div>
 			</div>
@@ -85,8 +85,11 @@
 			<div ng-repeat="item in items">
 		        <div class="card">
 		            <div style="padding:16px">
+		            	
 	                	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
-						
+
+						<h5 style="margin-top:0px;margin-bottom:0px"><a ng-repeat="tag in item.tags" href="#"  ng-click="filterContent(tag)">{{tag}}, </a></h5>
+
 	                	<div style="max-height:500px;overflow:scroll">
 							<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
 						</div>

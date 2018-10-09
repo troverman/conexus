@@ -10,13 +10,27 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 
-		Item.find({})
-		.limit(limit)
-		.skip(skip)
-		.sort(sort)
-		.then(function(models){
-			res.json(models)
-		})
+		if (req.query.tag){
+			var tag = req.query.tag;
+			Item.find({tags:{contains: tag}})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Item.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else{
+			Item.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models){
+				res.json(models)
+			});
+		}
 		
 	},
 

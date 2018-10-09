@@ -24,7 +24,7 @@ angular.module( 'conexus.task', [
     });
 }])
 
-.controller( 'TaskController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, task, TaskModel, titleService, work, WorkModel) {
+.controller( 'TaskController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
     titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
@@ -100,21 +100,24 @@ angular.module( 'conexus.task', [
         else{$location.path('/login')}
     };
 
-    //TODO: MODEL | CREATE REACTION | UPDATE POST
-    $scope.createReaction = function(post, type){
-        if ($scope.currentUser){
-            $scope.newReaction.user = $scope.currentUser.id;
-            $scope.newReaction.post = post.id;
+    //TODO: MODELS | ONLY POST/CONTENT
+    $scope.createReaction = function(content, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
-            //TODO: MODEL | CREATE REACTION
-            //Reaction.create(newReaction);
-            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-            if (type =='plus'){$scope.posts[index].plusCount++}
-            if (type =='minus'){$scope.posts[index].minusCount++}
-            //TODO: UPDATE POST
+            $scope.newReaction.user = $scope.currentUser.id;
+
+            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(content.id);
+
+            if (type =='plus'){$scope.contentList[index].plusCount++}
+            if (type =='minus'){$scope.contentList[index].minusCount++}
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+
         }
         else{$location.path('/login')}
-
     };
 
     $scope.createVerification = function(item) {

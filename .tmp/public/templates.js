@@ -2583,7 +2583,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "						<a href=\"\" ng-click=\"\">{{tag.element}}</a>\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
     "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -2592,8 +2592,11 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "			<div ng-repeat=\"item in items\">\n" +
     "		        <div class=\"card\">\n" +
     "		            <div style=\"padding:16px\">\n" +
+    "		            	\n" +
     "	                	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
-    "						\n" +
+    "\n" +
+    "						<h5 style=\"margin-top:0px;margin-bottom:0px\"><a ng-repeat=\"tag in item.tags\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}}, </a></h5>\n" +
+    "\n" +
     "	                	<div style=\"max-height:500px;overflow:scroll\">\n" +
     "							<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "						</div>\n" +
@@ -5758,7 +5761,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "			<div style=\"padding:16px\" class=\"col-md-6\">\n" +
     "				<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
     "				<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "                <p><span style=\"display:inline\" ng-bind-html=\"renderMessage(work.content)\"></span></p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span></p>\n" +
     "				<p style=\"color:gray\" am-time-ago=\"work.createdAt\"></p>\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{work.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +

@@ -12,6 +12,7 @@ angular.module('models.item', ['lodash', 'services', 'sails.io',])
         if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='identiferSet'){query = {params:{identiferSet:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('item');
         return $sailsSocket.get(url, query).then(success, error);

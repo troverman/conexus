@@ -23,7 +23,17 @@ angular.module( 'conexus.item', [
     $scope.item = item;
     if(!$scope.item){$location.path('/')}
 
+    //TODO
+    //REACT TO ORIGINAL POSTER PROTOCOL
+    //IF VERIFIED ORDER CAN RATE | TOOMUCH RN
+
     $scope.purchaseToggleVar = false;
+
+    //ALL ASSETS ARE COMBINITORIAL
+
+    //MARKET WALK FOR PRICES 
+
+    //MARKET VIZ
     
     $scope.createContent = function(post) {
         if($scope.currentUser){
