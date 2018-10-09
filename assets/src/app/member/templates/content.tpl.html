@@ -64,7 +64,7 @@
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
                 <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                 <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a class="pull-right" style="padding:0px;" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a class="pull-right" style="padding:0px;" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                 <form role="form" ng-submit="createPost(item)">

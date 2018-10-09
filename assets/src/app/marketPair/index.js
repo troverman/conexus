@@ -34,6 +34,14 @@ angular.module( 'conexus.marketPair', [
         $scope.pluralistic = true;
     }
 
+
+    //coordinates on the quasicrystal 
+    //100Transparency + 50education + 75universal = 0.01CRE8 + 0.05novo 
+    //100Transparency + 35education + 85universal = 0.01CRE8 + 0.05novo 
+    //[]=[]
+    //easy postion is an equation
+    //set of postions / equations 
+
     //TODO: BETTER
     $scope.mirrorOrders = mirrorOrders;
     $scope.mirrorOrders.forEach(function(part, index) {
@@ -152,17 +160,30 @@ angular.module( 'conexus.marketPair', [
             type: 'area',
             name: 'Values',
             pointPlacement: 'on',
-            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
+            data: [],
             color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values1',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [],
+            color: 'rgba(0,153,0,0.3)',
             fillOpacity: 0.3,
         }],
         title: {text: ''},
-        xAxis: {
+        xAxis: [{
             title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
+            categories: [],
             tickmarkPlacement: 'on',
             lineWidth: 0,
-        },
+        },{
+            title: {text: null},
+            categories: [],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        }],
         yAxis: {
             title: {text: null},
             gridLineInterpolation: 'polygon',
@@ -181,6 +202,28 @@ angular.module( 'conexus.marketPair', [
         },
         credits:{enabled:false},
     };
+
+    //POPULATE CHART MAP MARKET PLURALITY
+    //POPULATE MULTID SPIDER IF PAIRS ARE SETS
+    $scope.markets = $scope.market.split(',');
+    $scope.markets1 = $scope.market1.split(',');
+    console.log($scope.markets,$scope.markets1)
+    if ($scope.markets.length>1){
+        //need real market orders
+        for (x in $scope.markets){
+            $scope.chartMap.xAxis[0].categories.push($scope.markets[x]);
+            $scope.chartMap.series[0].data.push(Math.random()*1);
+        }
+
+    }
+    if ($scope.markets1.length>1){
+       for (x in $scope.markets1){
+        console.log($scope.markets1[x])
+            $scope.chartMap.xAxis[1].categories.push($scope.markets1[x]);
+            $scope.chartMap.series[1].data.push(Math.random()*1);
+        }
+    }
+    console.log($scope.chartMap)
 
     //POPULATE ORDER BOOK
     if (orders.length == 0){
@@ -218,11 +261,6 @@ angular.module( 'conexus.marketPair', [
         }
     }
 
-    //POPULATE MULTID SPIDER IF PAIRS ARE SETS
-    if ($scope.market.split(',').length > 0 || $scope.market1.split(',').length > 0){
-        //$scope.chartMap.xAxis.categories.push()
-        //$scope.chartMap.series[0].data.push()
-    }
 
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
@@ -255,7 +293,7 @@ angular.module( 'conexus.marketPair', [
             //[1a,2b,3c] = [4d,5e,6f] --> what manifolds does this create? 
             //(1a+2b+3c) = (4d+5e+6f) | a = 4d+5e+6f-2b-3c.., b = (4d+5e+6f-a-3c)/2.., c = (4d+5e+6f-a-2b)/3
             //MD IS THE MANIFORLD CREATOR.. WHY PPL SHOULD BE EXCITED ABOUT ARRAY EXCHANGE. IT IS FUNCTIONAL | MANIFOLD
-            //ITS HUGE TO STAKE YOU VALUE MAPS IN TERMS OTHERS | EQUALITY DOMINA IS VASTLY EXPONENTIATED
+            //ITS HUGE TO STAKE YOU VALUE MAPS IN TERMS OTHERS | EQUALITY DOMINA IS VASTLY EXPONENTIATED | HIGHER DIMENSIONAL POSITIONS
 
             //[a,b,c] = [d,e,f]
             //[2,2,3] = [5,5,6]

@@ -5,6 +5,8 @@ angular.module('models.reaction', ['lodash', 'services', 'sails.io',])
     this.getSome = function(type, filter, limit, skip, sort) {
         var url = utils.prepareUrl('reaction');
         var query = {};
+        if (type=='post'){query = {params:{post:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
         return $sailsSocket.get(url, query).then(success, error);
     };
 

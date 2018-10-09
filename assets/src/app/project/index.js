@@ -304,21 +304,31 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
-    //TODO: MODEL | CREATE REACTION | UPDATE POST
-    $scope.createReaction = function(post, type, model){
-        if ($scope.currentUser){
-            $scope.newReaction.user = $scope.currentUser.id;
-            $scope.newReaction.post = post.id;
+
+    //TODO: MODELS | ONLY POST/CONTENT
+    $scope.createReaction = function(content, type){
+
+        if($scope.currentUser){
+
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
-            //TODO: MODEL | CREATE REACTION
-            //Reaction.create(newReaction);
-            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-            if (type =='plus'){$scope.posts[index].plusCount++}
-            if (type =='minus'){$scope.posts[index].minusCount++}
-            //TODO: UPDATE POST
+            $scope.newReaction.user = $scope.currentUser.id;
+
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+
+            if (type =='plus'){$scope.contentList[index].plusCount++}
+            if (type =='minus'){$scope.contentList[index].minusCount++}
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+
         }
+
         else{$location.path('/login')}
     };
+
+
 
     //YIKES
     $scope.renderMessage = function(post){
@@ -585,11 +595,13 @@ angular.module( 'conexus.project', [
     }, 0);
 
     $scope.sumFrom = [];
+    $scope.sumFrom.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}); 
     $scope.transactionsFrom.reduce(function(a,b,i) {
         return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
     }, 0);
 
     $scope.sumTo = [];
+    $scope.sumTo.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}); 
     $scope.transactionsTo.reduce(function(a,b,i) {
         return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);
     }, 0);
@@ -619,6 +631,9 @@ angular.module( 'conexus.project', [
             y: $scope.sortedTransactionTags[x].amount,
         });
     }
+
+    $scope.createContent = function(){};
+    $scope.createReaction = function(content, type){};
 
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
@@ -683,6 +698,7 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.project = project;
 
+    //CONTENT
     $scope.createPost = function(post) {
         if ($scope.currentUser){
             $scope.newPost.post = post.id;
@@ -815,6 +831,8 @@ angular.module( 'conexus.project', [
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
+    $scope.createContent = function(content, type){};
+
     $scope.createOrder = function() {
         $scope.newOrder.user = $scope.currentUser.id;
         //TODO: PARSE INPUT
@@ -826,21 +844,8 @@ angular.module( 'conexus.project', [
         });
     };
 
-    //TODO: MODEL | CREATE REACTION | UPDATE POST
-    $scope.createReaction = function(post, type){
-        if($scope.currentUser){
-            $scope.newReaction.user = $scope.currentUser.id;
-            $scope.newReaction.post = post.id;
-            $scope.newReaction.type = type;
-            //TODO: MODEL | CREATE REACTION
-            //Reaction.create(newReaction);
-            var index = $scope.orders.map(function(obj){return obj.id}).indexOf(post.id);
-            if (type =='plus'){$scope.orders[index].plusCount++}
-            if (type =='minus'){$scope.orders[index].minusCount++}
-            //TODO: UPDATE POST
-        }
-        else{$location.path('/login')}
-    };
+    //TODO
+    $scope.createReaction = function(post, type){};
 
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);

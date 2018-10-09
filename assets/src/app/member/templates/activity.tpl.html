@@ -27,7 +27,7 @@
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                         <a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
                         <a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
-                        <a ng-show="item.post" style="display:inline;font-weight:600" href="/post/{{item.post}}">post {{item.post}}</a>
+                        <a ng-show="item.post" style="display:inline;font-weight:600" href="/content/{{item.post}}">post {{item.post}}</a>
                         <a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile.username}}"><span ng-show="item.profile.username">{{item.profile.username}}</span><span ng-show="!item.profile.username">profile {{item.profile}}</span></a>
                         <a ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
                         <a ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
@@ -44,7 +44,7 @@
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
                 <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                 <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="padding:0px" class="pull-right" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" class="card-footer">
                 <form role="form" ng-submit="createPost(item)">

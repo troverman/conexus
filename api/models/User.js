@@ -14,6 +14,20 @@ module.exports = {
             required: true,
             unique: true
         },
+
+        firstName: {
+            type: 'string',
+        },
+        lastName: {
+            type: 'string',
+        },
+        dateOfBirth: {
+            type: 'string',
+        },
+        address: {
+            type: 'string',
+        },
+
         loggedIn: {
             type: 'boolean',
             defaultsTo: false
@@ -27,6 +41,25 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+
+        //MAPPINGS
+        reputation: {
+            type: 'json',
+        },
+        balance: {
+            type: 'json',
+        },
+
+        //location time mapping??
+        //give dimensional tokens 
+        //mappingOfTimeStampString -> LatLng
+        //Location Token Manifold minting logic
+        //Location+lat+lng+datetime
+        //give +1 latLng Token per create 
+        locationTime: {
+            type: 'json',
+        },
+
         username: {
             type: 'string',
             required: true,

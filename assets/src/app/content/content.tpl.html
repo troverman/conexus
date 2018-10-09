@@ -25,7 +25,7 @@
         <br>
 
         <div style="max-height:500px;overflow:scroll">
-            <span style="display:inline" ng-bind-html="renderMessage(post.content)"></span>
+            <span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
         </div>
 
     </div>
@@ -33,18 +33,25 @@
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
         <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
         <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-        <a style="color:grey;" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+        <a style="color:grey;" class="pull-right" href="content/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
     <!--TODO: NESTED -->
     <div ng-show="post.showReply" class="card-footer">
         <form role="form" ng-submit="createPost(post)">
-            <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
         </form>
     </div>
-    <div ng-include="'post/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+    <div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+    <!--<button ng-click="loadMore(post)" class="btn btn-primary">LOAD MORE</button>-->
 </div>
-<div ng-show="post.showThread">
-    <i class="fa fa-plus"></i>
+
+<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="post.showThread">
+    <div style="padding:16px;">
+        <i ng-click="toggleThread(post)" class="fa fa-plus"></i>
+        <a style="display:inline;padding-left:5px" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
+        <p style="display:inline;font-size:10px;color:gray;margin-left:5px">{{post.plusCount-post.minusCount}}</p>
+        <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+    </div>
 </div>
 

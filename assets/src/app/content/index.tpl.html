@@ -1,107 +1,179 @@
-<div class="page-heading">
-    <div class="container"> 
-        <div class="spacing-25"></div>
-        <div class="row">
-            <div class="col-xs-6"><h1>Content</h1></div>
-        </div>
-        <div class="spacing-25"></div>
-    </div>
+
+
+<!--CONTENT TYPE-->
+<!--FACTOR-->
+<div style="background:black" ng-show="post.type=='video'">
+	<div class="spacing-100"></div>
+    <div style="text-align:center">
+		<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
+	</div>
+	<div class="spacing-100"></div>
 </div>
 
-<div class="spacing-10"></div>
+<!--<div class="container">
+	<div class="row" ng-show="post.type!='video'">
+		<div class="card">
+		    <div style="padding:16px">
+				<div style="max-height:500px;overflow:scroll">
+					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
+				</div>
+		    </div>
+		</div>
+	</div>
+</div>-->
 
 <div class="container">
-    
-    <div class="row">
-        <div class="card">
-            <div style="padding:10px;">
-                <button class="btn btn-default log-btn" ng-click="newContentToggle()">+ Content</button>
-            </div>
-        </div>
-    </div>
 
-    <div class="row" ng-show="newContentToggleVar">
-        <div class="card">
-            <div style="padding:16px">
-                <form role="form" ng-submit="createContent()">
-                    <div class="">
-                        <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
-                        <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
-                        <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
-                        <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn">create</button>
-                    <div class="spacing-15"></div>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px">
+		    	<h3 ng-show="post.title">{{post.title}}</h3>
+				<a href="member/{{post.user.username}}"><img style="width:75px;height:75px;border-radius:100vh;float:left" src="{{post.user.avatarUrl}}"/></a>
+				<div style="float:left;margin-left:15px">
 
-    <div class="row">
-        <div class="card">
-            <form style="display:flex;flex-direction:row;">
-                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="{{searchQuery}}" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-                <div style="border:0px" class="btn btn-default" style="float:right">
-                    <a ng-click="keyPress(searchQuery)" href="#" role="button">
-                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
+					<h4 style="margin-top:0px;margin-bottom:0px"><a href="member/{{post.user.username}}">{{post.user.username}}</a></h4>
+					<h5 style="margin-top:0px;margin-bottom:0px"><a ng-repeat="tag in post.tags.split(',')" href="#">{{tag}}, </a></h5>
 
-    <div class="row">
-        <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
-            <div class="card">
-                <div style="padding:16px;">
-                    <div ng-repeat="tag in sortedTagArray">
-                        <a href="" ng-click="">{{tag.element}}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
-            <div ng-repeat="item in posts">
-                <div class="card">
-                    <div style="padding:16px">
+					<h5 style="margin-top:0px;margin-bottom:0px">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</h5>
+					<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: 124312 | Dislike: 123</h5>
+					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
 
-                        <a href="post/{{item.id}}"><h4>{{item.title}}</h4></a>
+				</div>
+				<div style="clear:both"></div>
+		    </div>
+		    <div class="card-footer">
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		    </div>
+		</div>
+	</div>
 
-                        <p><a style="font-weight:700"  href="member/{{item.user.username}}">
-                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                            {{item.user.username}}
-                        </a> | <span am-time-ago="item.createdAt"></span></p>
-                        
-                        <div style="max-height:500px;overflow:scroll">
-                            <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
-                        </div>
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px">
+		        <h3>{{post.parent}} Parent Information</h3>
+		        <!--REFACTOR-->
+				<h3>
+					<a href="market/{{post.market}}">{{post.market}}</a>
+					<a href="order/{{post.order}}">{{post.order}}</a>
+					<a href="content/{{post.post}}">{{post.post}}</a>
+					<a href="project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+					<a href="member/{{post.profile}}">{{post.profile}}</a>
+					<a href="task/{{post.task}}">{{post.task.title}}</a>
+					<a href="task/{{post.transaction}}">{{post.transaction}}</a>
+					<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
+				</h3>
+		    </div>
+		</div>
+	</div>
 
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                        <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                        <a class="pull-right" style="padding:0px;" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
-                    </div>
-                    <div ng-show="item.showReply" class="card-footer">
-                        <form role="form" ng-submit="createPost(item)">
-                            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="card">
+		    <div style="padding:16px">
+		    	<div class="row">
 
-</div>
+					<div class="col-md-7">
+				    	<h4>Protocols [viewToken, contentToken, reactionToken]</h4>
+				    	<p style="color:gray;font-style:italic;font-size:12px">[viewToken, contentToken, reactionToken] manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>
+				        <h5><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+				        <p>
+							<a ng-repeat="token in tokens" href="market/{{token}}">{{token}} </a>,
+				    	</p>
+			    	</div>
 
-<div class="spacing-25"></div>
+					<div class="col-md-5">
 
-<div class="container" style="text-align:center" ng-click="loadMore()">
-     <div class="row"><div class="col-sm-offset-2 col-sm-10"><button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button></div></div>
+
+				        <h4>Liquidity | onMint</h4>
+						<h5>Filters | <span ng-repeat="input in outputVector.split(',')"><a href="market/{{input}}">{{input}}</a> | </span>
+						<h5>Input Vectors | Scale of Output</h5>
+						<p style="color:gray;font-style:italic;font-size:12px">Search for Output liquidity path | [] = []</p>
+						<form ng-submit="marketTraverse(tokens, outputVector)">
+							<input type="text" placeholder="Input Dimensions" ng-model="tokens" class="form-control">
+							<!--SUBMIT-->
+						</form>
+						<form ng-submit="marketTraverse(tokens, outputVector)">
+							<input type="text" placeholder="Output Dimensions" ng-model="outputVector" class="form-control">
+							<!--SUBMIT-->
+						</form>
+
+						<p style="color:gray;font-style:italic;font-size:10px">CREATE ORDER [TOKENS] = [0.000312CRE8, 0.00002BTC, 0.0002ETH]</p>
+						<p style="color:gray;font-style:italic;font-size:10px">onMint sponsorship [TOKENS] = [0.000312 CRE8, 0.00021UniversalToken, ...]</p>
+
+						<!--TRAVERSAL PARAMETERS-->
+
+						<p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
+
+							<span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
+
+							<!--COMBINITRONICS-->
+							<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
+
+						</p>
+
+
+			    	</div>
+		    	</div>
+
+		    </div>
+		</div>
+	</div>
+
+	<!--REFACTOR-->
+	<div class="row" ng-show="post.type=='video'">
+		<div class="card" style="background-color:#f9f9f9">
+	        <div style="padding:16px;background-color:white">
+	        	<h3>Comment</h3>
+	        	<form role="form" ng-submit="createPost(post)">
+					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row" ng-show="post.type=='video'">
+		<div ng-include="'content/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+	</div>
+
+	<div class="row" ng-show="post.type!='video'">
+
+		<div class="card" style="background-color:#f9f9f9">
+	        <div style="padding:16px;background-color:white">
+
+				<div>
+					<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
+					<a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+				</div>
+
+				<br>
+
+				<div style="max-height:500px;overflow:scroll">
+					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
+				</div>
+
+			</div>
+			<div class="card-footer">
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		        <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+		        <a style="color:grey" class="pull-right" href="content/{{post.id}}"><i class="fa fa-link grey"></i></a>
+		    </div>
+			<div ng-show="post.showReply" class="card-footer">
+				<form role="form" ng-submit="createPost(post)">
+					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+				</form>
+			</div>
+			<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+		</div>
+
+	</div>
+
 </div>
 
 <div class="spacing-50"></div>
+
+
+

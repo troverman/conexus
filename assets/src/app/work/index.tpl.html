@@ -1,3 +1,12 @@
+<div style="background:black" ng-show="work.stream">
+	<div class="spacing-100"></div>
+    <div style="text-align:center">
+		<span style="display:inline" ng-bind-html="renderContent(work.stream.content)"></span>
+	</div>
+	<div class="spacing-100"></div>
+</div>
+
+
 <div class="container">
 
 	<div class="spacing-10"></div>
@@ -70,7 +79,7 @@
 	</div>
 
 	<!--TODO: REAL STREAM-->
-	<div class="row" ng-show="work.stream">
+	<!--<div class="row" ng-show="work.stream">
 		<div class="card">
 		    <div style="padding:16px;">
 
@@ -86,10 +95,10 @@
 				<a href="#" ng-click="createReaction(work.stream, 'plus')"><i class="fa fa-angle-up"></i> {{work.stream.plusCount}} like </a> 
 				<a href="#" ng-click="createReaction(work.stream, 'minus')" ><i class="fa fa-angle-down"></i> {{work.stream.minusCount}} dislike </a>
 				<a href="#" ng-click="reply(work.stream)"><i class="fa fa-comment-o"></i> comment </a>
-				<a style="padding:0px" class="pull-right" href="post/{{work.stream.id}}"><i class="fa fa-link grey"></i></a>
+				<a style="padding:0px" class="pull-right" href="content/{{work.stream.id}}"><i class="fa fa-link grey"></i></a>
 			</div>
 		</div>
-	</div>
+	</div>-->
 
 	<!--TODO: REAL STREAM-->
 	<div class="row" ng-show="!work.stream">
@@ -130,7 +139,7 @@
 					<a href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
 					<a href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
 					<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-					<a style="padding:0px" class="pull-right" href="post/{{post.id}}"><i class="fa fa-link grey"></i></a>
+					<a style="padding:0px" class="pull-right" href="content/{{post.id}}"><i class="fa fa-link grey"></i></a>
 				</div>
 				<!--TODO: NESTED -->
 				<div ng-show="post.showReply" class="card-footer">

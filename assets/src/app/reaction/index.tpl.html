@@ -1,0 +1,483 @@
+<style>
+#title-container{
+	color:white;
+	background-color:black;
+}
+#about-section1{
+	background-color:white
+}
+#about-section2{
+	color:white;
+	background-color:black;
+}
+#about-section3{
+	color:white;
+	background-color:black;
+}
+#about-section4{
+	background-color:white
+}
+#about-section5{
+	background-color:white
+}
+</style>
+
+
+<div id="title-container">
+	<div class="container">
+		<div class="spacing-50"></div>
+		<h1>CRE8.XYZ</h1>
+		<h4>Creating the Next Wave of Public Organizations</h4>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<div id="about-section1">
+	<div class="container">
+		<div class="spacing-50"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Transparency Maximalism</h3>
+				<h4>Create the Next Wave</h4>
+				<h5>A Collaborative Network</h5>
+				<p style="font-style:italic;color:gray;margin:0px">A 24/7 continual hackathon</p>
+				<p style="font-style:italic;color:gray;margin:0px">Connect with new collaborators and build together</p>
+				<div class="spacing-10"></div>
+
+				<h4>Share with us and Create the Future</h4>
+				<h5>Watch the World Create</h5>
+				<img style="max-height:200px" src="http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg">
+
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+				    <div style="padding:16px;">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/jUQ_3kCcG_U" frameborder="0" allowfullscreen></iframe>
+						<h3><a href="https://www.youtube.com/embed/jUQ_3kCcG_U">open eye</a></h3>
+						<p><a href="member/troverman">
+							<img class="card-avatar" ng-src="https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg" src="https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg" err-src="images/avatar.png">
+							troverman
+						</a> | <span am-time-ago="">30 Minutes Ago</span></p>
+					</div>
+				</div>
+				<div class="spacing-50"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="about-section1">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12" style="max-height:450px;overflow:scroll">
+
+				<!--TODO-->
+				<a style="width:100%" class="btn btn-default log-btn" href="/discover">Discover</a>
+
+				<div class="spacing-10"></div>
+				<div class="spacing-10"></div>
+
+				<ul style="padding:0px;" class="member-tabs">
+					<li class="active"><a href="/content">Content</a></li>
+					<li><a href="/marketplace">Items</a></li>
+					<li><a href="/members">Members</a></li>
+					<li><a href="/market">Orders</a></li>
+					<li><a href="/projects">Projects</a></li>
+					<li><a href="/tasks">Tasks</a></li>
+					<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+				</ul>
+
+				<div class="card">
+			        <form style="display:flex;flex-direction:row;">
+			            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+			            <div ng-click="keyPress(searchQuery)" style="border:0px" class="btn btn-default" style="float:right">
+							<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+			            </div>
+			        </form>
+				</div>
+
+				<div ng-repeat="task in tasks">
+					<div class="card">
+						<div style="padding:16px;">
+							<div class="row">
+								<div class="col-sm-10">
+									<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
+									<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+			                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
+									<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+									<span style="color:gray" am-time-ago="task.createdAt"></span>
+								</div>
+								<div class="col-sm-2" style="text-align:right">
+									<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
+									<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+							<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="spacing-50"></div>
+</div>
+
+<div id="about-section2">
+	<div class="container">
+		<div class="spacing-50"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Collaborative Governance</h2>
+				<p style="font-style:italic;margin:0px">Reputation Protocols | Working together toward a common goal</p>
+				<p style="font-style:italic;margin:0px">Coordinating Around Shared Goals</p>
+			</div>
+			<div class="col-md-6">
+				<a href="/"><img style="height:88px;float:right" src="images/hyper.gif"></a>
+			</div>
+
+		</div>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<div id="about-section1">
+	<div class="container">
+		<div class="spacing-100"></div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h2>MultiDimensional Token Protocols</h2>
+				<h4>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization | Transaction Tokenization</h4>
+				<h5><a>Developers</a> | <a>Documentation</a> | <a>APIs</a> | <a>App Ecosystem</a> | <a href="https://www.github.com/troverman/conexus"><i class="fa fa-github"></i></a></h4>
+				<!--<pre>CODE</pre>-->
+			</div>
+		</div>
+
+	</div>
+</div>
+<div id="about-section4">
+	<div class="container">
+		<div class="spacing-100"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<h2><a href="/market">MultiDimensional Token Market</a></h2>
+				<p style="font-style:italic;color:gray;margin:0px">Turn your creative effort into dimensional tokens with market liquidity</p>
+				<p style="font-style:italic;color:gray;margin:0px">Create dimensional liquidity for transparent and reputationally validated work</p> 
+		        <!--<span><a href="market/universalToken">UniversalToken</a> | {}</span>-->
+
+		        <div class="spacing-50"></div>
+
+				<highchart config="chartMap"></highchart>
+			</div>
+
+			<div class="col-md-6">
+				<!--<highchart config="chart"></highchart>-->
+			</div>
+
+			<div class="col-md-12">
+				<div class="spacing-100"></div>
+				<h3>Create Value Relationships</h3>
+				<p style="font-style:italic;color:gray;margin:0px">A powerful approach for defining and stating interrelated value; create depth in the market</h4>
+				<p style="font-style:italic;color:gray;margin:0px">Market Order types; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p> 
+			</div>
+
+		</div>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<div id="about-section4">
+	<div class="container">
+		<div class="spacing-50"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<highchart config="create"></highchart>
+				<div class="spacing-50"></div>
+			</div>
+			<div class="col-md-6" style="text-align:right">
+				<h2>Information as Income</h2>
+				<h5 style="font-style:italic;color:gray;margin:0px">Universal Information as Universal Income</h5>
+				<div class="spacing-15"></div>
+
+				<h3>Complete Transparency</h3>
+				<p style="font-style:italic;color:gray;margin:0px">Transparent Contributions and Equitable Representation</p>
+				<p style="font-style:italic;color:gray;margin:0px">Reputation Systems and Task Verification</p>
+				<p style="font-style:italic;color:gray;margin:0px">Open Finance and Contribution</p>
+				<p style="font-style:italic;color:gray;margin:0px">Tokenized & Market Liquid Actions</p>
+				<div class="spacing-15"></div>
+
+				<h3>Complete Tokenization</h3>
+				<p style="font-style:italic;color:gray;margin:0px">Meta Data imbued in the tokenization layer</p>
+				<p style="font-style:italic;color:gray;margin:0px">A crypto economic data structre and means of account</p>
+			</div>
+		</div>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<div id="about-section4">
+	<div class="container">
+		<div class="spacing-50"></div>
+
+		<div class="row">
+			<div class="col-xs-12">
+
+				<h2>Value Mapping and Dimensional Voting</h2>
+				<p style="font-style:italic;color:gray;margin:0px">Create A Pluralist Means of Value</p>
+				<p style="font-style:italic;color:gray;margin:0px">Continually state and update what valuable to you, dimensionally.</p>
+				<br>
+				<p style="font-style:italic;color:gray;margin:0px">It is our responsibility to create an awakening of depth in collective value. It starts with you.</p>
+				<p style="font-style:italic;color:gray;margin:0px">The source of our intentional value mechanism comes from simply stating what we believe is valuable. An empowering call to action.</p>
+				<p style="font-style:italic;color:gray;margin:0px">Empower youself and our collective by clearly and distinctly defining your value map -- relational to a set of validated action sets.</p>
+				<br>
+				<p style="font-style:italic;color:gray;margin:0px">What do we know is valuable? Let us come to consensus; to create a 'gestalt.'</p>
+				<p style="font-style:italic;color:gray;margin:0px">Register to vote, map your value, and give dimensional value to sets of actions</p>
+				<img style="height:200px" src="https://www.voetr.com/images/voetr-about.png"/>
+
+			</div>
+		</div>
+
+		<div class="spacing-100"></div>
+	</div>
+</div>
+
+<!-- CALL TO ACTION HERE-->
+<div style="background-color:white">
+	<div class="container">
+		<div class="row" ng-show="true">
+			<div class="col-md-12">
+				<div class="card">
+			        <div style="padding:16px;">
+
+						<h1>CRE8</h1>
+						<h3><b>Join Our Community</b></h3>
+			        	<h4>Create Your Value Map</h4>
+			        	<p style="font-style:italic;color:gray;margin:0px">The more complete the better, the more intentional your dimensional vote the better.</p>
+			        	<p style="font-style:italic;color:gray;margin:0px">*Creating Orders on the Multi Dimensional Token Market.</p>
+			        	<br>
+						<span><a href="market/universalToken">UniversalToken onMint Market Postion <i class="fa fa-question-circle"></i></a></span>
+						<!--<br>
+			        	<span><a href="market/universalToken">UniversalToken</a></span>-->
+			        	<br>
+						<span>
+							<span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
+							<a href="#">+ Dimension</a>
+							<form style="display:flex;flex-direction:row;">
+				            	<input ng-model="newMarket.market" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter">
+				            	<div ng-click="addMarket('market')" style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+					                <a href="#">
+					                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5>
+					                </a>
+								</div>
+				        	</form>
+						</span>
+
+						<div class="spacing-10"></div>
+						<!--THIS WILL BUILD AS YOU CREATE-->
+						<highchart config="chartMap"></highchart>
+						<div class="spacing-10"></div>
+			        	<img style="max-height:200px" src="http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg">
+			        	<img style="max-height:200px" src="http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg">
+			        	<img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
+			        	<img style="max-height:200px" src="http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif">
+					</div>
+				</div>
+
+				<div class="card">
+					<div style="padding:16px;">
+						<h3>What is Valuable to you?</h3>
+						<h4>I believe the following concepts and specific tasks are valuable.</h4>
+
+						<div class="spacing-10"></div>
+
+						<div class="card">
+					        <form style="display:flex;flex-direction:row;">
+					            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+					            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+									<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+					            </div>
+					        </form>
+						</div>
+
+						<div class="spacing-10"></div>
+						<div style="padding:16px;"><p style="font-weight:800"><span ng-repeat="dimension in markets"><a href="#">{{dimension}}, </a></span></p></div>
+						<div class="spacing-10"></div>
+					
+						<div style="max-height:200px;overflow:scroll">
+							<div ng-repeat="task in tasks">
+								<div class="card">
+									<div style="padding:16px;">
+										<div class="row">
+											<div class="col-sm-10">
+												<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
+												<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+						                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
+												<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+												<span style="color:gray" am-time-ago="task.createdAt"></span>
+											</div>
+											<div class="col-sm-2" style="text-align:right">
+												<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
+												<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+										<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-group">
+								<input type="text" class="form-control">
+								<button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="card">
+					<div style="padding:16px;">
+
+
+						<h4>A Valuable Day</h4>
+						<p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">REST</span></p>
+						<p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">WORK</span></p>
+						<p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">FUN</span></p>
+						<p>An ideal day contains <span style="font-weight:800">2</span> hours of <span style="font-weight:800">Learning</span></p>
+						<p>An ideal day contains <span style="font-weight:800">1</span> hours of <span style="font-weight:800">Exercise</span></p>
+
+						<div class="spacing-15"></div>
+						<div class="form-group">
+							<div class="col-md-6"><input type="text" placeholder="Hours" class="form-control"></div>
+							<div class="col-md-6"><input type="text" placeholder="Activity" class="form-control"></div>
+							<div class="col-md-12"><button type="submit" style="width:100%" ng-click="createOrder()" class="btn btn-default log-btn">Add</button></div>
+						</div>
+						<div style="clear:both"></div>
+
+					</div>
+				</div>
+
+				<div class="card">
+					<div style="padding:16px;">
+						<h2>Personal Information</h4>
+						<h4>Who Are You?</h4>
+						<div class="spacing-15"></div>
+						<div class="form-group">
+							<input type="text" placeholder="First Name" class="form-control">
+							<input type="text" placeholder="Last Name" class="form-control">
+							<input type="text" placeholder="Date of Birth" class="form-control">
+							<input type="text" placeholder="Address" class="form-control">
+
+							<!--<input type="text" placeholder="Height" class="form-control">
+							<input type="text" placeholder="Eye Color" class="form-control">
+							<input type="text" placeholder="DNA UPLOAD" class="form-control">
+							<input type="text" placeholder="Picture" class="form-control">-->
+
+						</div>
+
+					</div>
+				</div>
+
+				<div class="card">
+					<div style="padding:16px;">
+						<h3><b>Join Our Community</b></h3><hr>
+						<form role="form" method="post" action="/auth/local/register">
+							<div class="form-group">
+		                        <input class="form-control" name="email" placeholder="Email" title="email" type="email"> 
+		                        <input class="form-control" name="username" placeholder="Username" title="username" type="text"> 
+		                        <input class="form-control" name="password" placeholder="Password" title="password" type="password"> 
+		                        <button class="btn btn-default log-btn" type="submit" value="submit">Sign up</button>
+		                        <br><br>
+			                    <div class="social-log">
+			                        <a href="/login"><h4>Already Have an Account?</h4></a>
+			                    </div>
+							</div>
+	                	</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="about-section5">
+	<div class="container">
+		<div class="spacing-50"></div>
+	    <div class="row">
+	    	<div class="col-xs-12" style="text-align:center;font-size:18px">
+	    		<h3>Our Extended Community</h3>
+	    		<a href="https://www.instagram.com/cre8community"><i class="fa fa-instagram"></i></a>
+	    		<a href="https://www.twitter.com/cre8city"><i class="fa fa-twitter"></i></a>
+	    		<a href="https://www.github.com/troverman/conexus"><i class="fa fa-github"></i></a>
+	    		<a href="https://cre8xyz.slack.com"><i class="fa fa-slack"></i></a>
+	    		<!--<a href="#"><i class="fa fa-facebook"></i></a>
+	    		<a href="#"><i class="fa fa-google"></i></a>
+	    		<a href="#"><i class="fa fa-app-store"></i></a>
+	    		<a href="#"><i class="fa fa-google-play"></i></a>-->
+	    	</div>
+	    </div>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<div id="about-section5">
+	<div class="container">
+	    <div class="row">
+	    	<div class="col-xs-12" style="text-align:center;font-size:18px">
+	    		<h3>Our Partners</h3>
+	    		<a href="https://www.cre8.capital"><img style="height:25px;" src="https://www.cre8.capital/images/tesseract.png"></a>
+	    		<a href="https://www.experiencenovo.io"><img style="height:25px;" src="https://www.experiencenovo.io/images/novo/tri.png"></a>
+	    		<a href="https://www.cre8bid.io"><img style="height:25px;" src="https://www.cre8bid.io/images/bidio_logo.png"></a>
+	    	</div>
+	    </div>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<!--<div id="about-section5">
+	<div class="container">
+		<div class="spacing-50"></div>
+	    <div class="row">
+	        <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+				<h3><b>Join Our Community</b></h3><hr>
+	            <div class="login-form">
+	                <form role="form" method="post" action="/auth/local/register">
+	                    <div class="form-group">
+	                        <input class="form-control" name="email" placeholder="Email" title="email" type="email"> 
+	                        <i class="fa fa-user"></i>
+	                    </div>
+	                    <div class="form-group">
+	                        <input class="form-control" name="username" placeholder="Username" title="username" type="text"> 
+	                        <i class="fa fa-user"></i>
+	                    </div>
+	                    <div class="form-group log-status">
+	                        <input class="form-control" name="password" placeholder="Password" title="password" type="password"> 
+	                        <i class="fa fa-lock"></i>
+	                    </div>
+	                    <div class="align-right">
+	                        <button class="btn btn-default log-btn" type="submit" value="submit">Sign up</button>
+	                    </div>
+	                    <br><br>
+	                    <div class="social-log">
+	                        <a href="/login"><h4>Already Have an Account?</h4></a>
+	                    </div>
+	                </form>
+	            </div>
+	            <div class="selfClear"></div>
+	        </div>
+	    </div>
+		<div class="spacing-50"></div>
+	</div>
+</div>-->
+
+

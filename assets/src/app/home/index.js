@@ -38,7 +38,7 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, orders, PostModel, posts, projects, SearchModel, tasks, titleService, transactions, UserModel, work ) {
+.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
 	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
@@ -212,15 +212,20 @@ angular.module( 'conexus.home', [
 	//TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type){
     	if($scope.currentUser){
-	    	$scope.newReaction.user = $scope.currentUser.id;
-	    	$scope.newReaction.post = post.id;
-	    	$scope.newReaction.type = type;
-	    	//TODO: MODEL | CREATE REACTION
-	    	//Reaction.create(newReaction);
+
+	    	$scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+
 	    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
 	    	if (type =='plus'){$scope.posts[index].plusCount++}
 	    	if (type =='minus'){$scope.posts[index].minusCount++}
-	    	//TODO: UPDATE POST
+
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+
 		}
     	else{$location.path('/login')}
     };

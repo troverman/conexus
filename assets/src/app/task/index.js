@@ -160,10 +160,7 @@ angular.module( 'conexus.task', [
     $scope.startWork = function() {
         if ($scope.currentUser){
 
-
-
             if ($scope.streaming){
-
 
                 //STREAMING CREATES A POST -->
                 //TODO.. INIT STREAM HERE ~~~~
@@ -172,6 +169,7 @@ angular.module( 'conexus.task', [
                 $scope.newPost = {
                     type:'video',
                     title: $scope.task.title,
+                    tags: $scope.task.title + ',stream,work,' + $scope.task.project.title,
                     content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
                     user: $scope.currentUser.id,
                     //parent: $scope.work..
@@ -182,11 +180,7 @@ angular.module( 'conexus.task', [
                     $scope.streamingId = postModel.id;
                 });
 
-
             }
-
-
-
 
             if($scope.working === true) return false;
             $scope.working = true;
@@ -218,17 +212,18 @@ angular.module( 'conexus.task', [
 
             //UPDATE TO HAVE PARENT AS WORK MODEL
             //REFACTOR | DOING BOTH HERE
-            var update = {};
-            update.id = $scope.streamingId;
-            update.work = model.id;
-            update.parent = model.id;
-            update.parentModel = 'work';
-            console.log(update);
-            PostModel.update(update).then(function(postModel){
-                consooe.log(postModel)
-                //$scope.streamingId = postModel.id;
-            });
-
+            if ($scope.streamingId){
+                var update = {};
+                update.id = $scope.streamingId;
+                update.work = model.id;
+                update.parent = model.id;
+                update.parentModel = 'work';
+                console.log(update);
+                PostModel.update(update).then(function(postModel){
+                    consooe.log(postModel)
+                    //$scope.streamingId = postModel.id;
+                });
+            }
         }); 
         $scope.taskTime=0;
         clearInterval($scope.interval);

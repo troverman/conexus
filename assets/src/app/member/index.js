@@ -159,6 +159,20 @@ angular.module( 'conexus.member', [
             }],
         }
     })
+    .state( 'member.time', {
+        url: '/time',
+        views: {
+            "memberTime": {
+                controller: 'MemberTimeCtrl',
+                templateUrl: 'member/templates/time.tpl.html'
+            }
+        },
+        resolve: {
+            work: ['member', 'WorkModel', function(member, WorkModel) {
+                return WorkModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
+            }]
+        }
+    })
 }])
 
 .controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
@@ -226,7 +240,7 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, titleService, transactionsFrom, transactionsTo, work) {
+.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'ReactionModel', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, ReactionModel, titleService, transactionsFrom, transactionsTo, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
@@ -288,6 +302,27 @@ angular.module( 'conexus.member', [
         });
     };
 
+    //TODO: MODELS | ONLY POST/CONTENT
+    $scope.createReaction = function(content, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+
+            if (type =='plus'){$scope.contentList[index].plusCount++}
+            if (type =='minus'){$scope.contentList[index].minusCount++}
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+
+        }
+        else{$location.path('/login')}
+    };
+
+
     //YIKES
     $scope.renderContent = function(content){
         if (content){
@@ -333,6 +368,29 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
     //$scope.posts = posts;
     //$scope.videos = videos;
+
+
+    $scope.createContent = function(){};
+
+    //TODO: MODELS | ONLY POST/CONTENT
+    $scope.createReaction = function(content, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+
+            if (type =='plus'){$scope.contentList[index].plusCount++}
+            if (type =='minus'){$scope.contentList[index].minusCount++}
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+
+        }
+        else{$location.path('/login')}
+    };
 
     $scope.newContentToggle = function() {
         $scope.newContentToggleVar = !$scope.newContentToggleVar;
@@ -569,6 +627,10 @@ angular.module( 'conexus.member', [
         });
     }
 
+    //TODO
+    $scope.createContent = function(content, type){};
+    $scope.createReaction = function(content, type){};
+
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
         $scope.newTransaction.user = $scope.currentUser.id;
@@ -661,12 +723,14 @@ angular.module( 'conexus.member', [
 
     $scope.addMarket = function(type){
         //basemarket; market
-
     };
 
     $scope.newOrderToggle = function(){
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
+
+    //TODO
+    $scope.createContent = function(content, type){};
 
     $scope.createOrder = function() {
         if ($scope.currentUser){
@@ -682,25 +746,49 @@ angular.module( 'conexus.member', [
         else{$location.path('/login')}
     };
 
-    //TODO: MODEL | CREATE REACTION | UPDATE POST
-    $scope.createReaction = function(post, type){
-        if($scope.currentUser){
-            $scope.newReaction.user = $scope.currentUser.id;
-            $scope.newReaction.post = post.id;
-            $scope.newReaction.type = type;
-            //TODO: MODEL | CREATE REACTION
-            //Reaction.create(newReaction);
-            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-            if (type =='plus'){$scope.posts[index].plusCount++}
-            if (type =='minus'){$scope.posts[index].minusCount++}
-            //TODO: UPDATE POST
-        }
-        else{$location.path('/login')}
-    };
+    //TODO
+    $scope.createReaction = function(content, type){};
+
 
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
+}])
+
+
+.controller( 'MemberTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', function MemberTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work) {
+
+    //based on tokens 
+    //location mapping overtime
+    //time mapping via actions ?  
+    //CAL SCHED .. PROMISE
+
+    //TODO VIEW --> CONSUMPTION
+    //VIZ ON A DAY TIME
+    //VIZ ON MONTH TIME
+
+    $scope.work = work;
+    $scope.work = work.map(function(obj){
+        var endTime = new Date(obj.createdAt)
+        obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
+        obj.endTime = new Date(obj.createdAt);
+        return obj
+    });
+
+    //TODO
+    $scope.createContent = function(content, type){};
+
+    //TODO
+    $scope.createReaction = function(content, type){};
+
+
+    $scope.reply = function(item){
+        var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.work[index].showReply = !$scope.work[index].showReply
+    };
+
 }]);
+
+

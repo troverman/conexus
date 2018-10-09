@@ -88,6 +88,19 @@ module.exports = {
 			});
 		}
 
+		else if (req.query.tag){
+			var tag = req.query.tag;
+			Post.find({tags:{contains: tag}})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
 		else if (req.query.task){
 			var task = req.query.task;
 			Post.find({task:task})

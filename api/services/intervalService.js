@@ -44,11 +44,11 @@ module.exports = {
 				price:price,
 			});
 			//console.log(amount/10000 + 1/10000*Math.abs(Math.sin(i)*1/100*i*Math.random()));
-			console.log(price)
+			//console.log(price)
 			//0.001,0.0011,..0.1,1
 		} 
 
-		console.log(newOrderArray1);
+		//console.log(newOrderArray1);
 
 		//Order.create(newOrderArray1).then(function(){
 		//	console.log('DONE', newOrderArray1.length)

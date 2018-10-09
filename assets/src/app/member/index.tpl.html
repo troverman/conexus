@@ -22,7 +22,7 @@
 						<li><a href="member/{{member.username}}/ledger">Ledger</a></li>
 						<!--<li><a href="member/{{member.username}}">Map</a></li>-->
 						<li><a href="member/{{member.username}}/positions">Positions</a></li>
-						<!--<li><a href="member/{{member.username}}">Time</a></li>-->
+						<li><a href="member/{{member.username}}/time">Time</a></li>
 						<li ng-show="currentUser.id != member.id">
 							<a class="btn btn-default" ng-click="follow()">Follow</a>
 							<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
@@ -31,8 +31,8 @@
 							<a class="btn btn-default" href="account">Edit Profile</a>
 						</li>
 					</ul>
-					<div class="nav-toggle">
-						<a href="#" ng-click="tabsToggle()"><i class="fa fa-bars"></i></a>
+					<div class="nav-toggle" ng-click="tabsToggle()">
+						<a href="#"><i class="fa fa-bars"></i></a>
 					</div>
 				</div>
 			</div>
@@ -47,6 +47,7 @@
 					<h4><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></h4>
 					<h4><a href="member/{{member.username}}/ledger">Ledger</a></h4>
 					<h4><a href="member/{{member.username}}/positions">Positions</a></h4>
+					<h4><a href="member/{{member.username}}/time">Time</a></h4>
 					<br>
 				</div>
 			</div>
@@ -105,6 +106,7 @@
 		<div ui-view="memberFollowing"></div>
 		<div ui-view="memberLedger"></div>
 		<div ui-view="memberPositions"></div>
+		<div ui-view="memberTime"></div>
 	</div>
 	<div class="spacing-50"></div>
 </div>

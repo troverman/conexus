@@ -12,21 +12,79 @@ module.exports = {
 		});
 	},
 
-	getSome: function(req, res) {},
+	getSome: function(req, res) {
+
+		//GET BY CONTENT
+		//TYPES.. ? | CONTINUOUS TIME REACTIONS
+
+		var limit = req.query.limit;
+		var skip = req.query.skip;
+		var sort = req.query.sort;
+
+		Reaction.watch(req);
+
+		if(req.query.post){
+			var post = req.query.post;
+			Reaction.find({post:post})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Reaction.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if(req.query.user){
+			var user = req.query.user;
+			Reaction.find({user:user})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Reaction.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+	},
 
 	create: function (req, res) {
-		var userId = req.param('user');
 		var model = {
-			vote: req.param('vote'),
+			amount: req.param('amount'),
 			post: req.param('post'),
-			user: userId
+			type: req.param('type'),
+			user: req.param('user'),
 		};
 		Reaction.create(model)
 		.exec(function(err, post) {
 			if (err) {return console.log(err);}
 			else {
 				Reaction.publishCreate(post);
-				res.json(post);
+				Post.find({id:model.post}).then(function(postModel){
+					//console.log(postModel);
+
+					//TODO AGNOSTIC REACTS
+					if (model.type == 'plus'){
+						var count = postModel[0].plusCount + 1;
+						Post.update({id:postModel[0].id},{plusCount:count}).then(function(postModel){
+							console.log('UPDATE');
+							res.json(post);
+						});
+					}
+					else if (model.type == 'minus'){
+						var count = postModel[0].minusCount + 1;
+						Post.update({id:postModel[0].id},{minusCount:count}).then(function(postModel){
+							console.log('UPDATE');
+							res.json(post);
+						});
+					}
+					//UPDATE JSON OBJ REPRESENTING TYPE AND AMOUNT || POST REACTION MAPPING
+					//Post.update({id:postModel[0].id},{}).then(function(postModel){console.log('UPDATE')})
+				});
+
 			}
 		});
 	},
