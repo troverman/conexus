@@ -17,7 +17,7 @@
 			<div style="padding:16px" class="col-md-6">
 				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
 				<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-                <p><span style="display:inline" ng-bind-html="renderMessage(work.content)"></span></p>
+                <p><span style="display:inline" ng-bind-html="renderContent(work.content)"></span></p>
 				<p style="color:gray" am-time-ago="work.createdAt"></p>
 				<a style="font-weight:700" href="member/{{work.user.username}}">
 					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
