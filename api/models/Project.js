@@ -1,9 +1,7 @@
 /**
 * Project.js
 */
-
 module.exports = {
-
 	attributes: {
         title: {
             type: 'string',
@@ -20,6 +18,9 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+        location: {
+            type: 'string',
+        },
         avatarUrl: {
             type: 'string',
             defaultsTo: '/images/loading.gif'
@@ -34,19 +35,14 @@ module.exports = {
             model: 'user'
         },
     },
-
     afterCreate: function (model, next) {
-        // set message.user = to appropriate user model
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
         var colorInt = Math.floor(Math.random() * (colorArray.length));
         var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.title+'&color=fff&background='+colorArray[colorInt];
         model.avatarUrl = avatarUrl;
-
         Project.update({id: model.id}, model)
         .then(function(model){
             return next(null, model);
         });
     },
-
 };
-

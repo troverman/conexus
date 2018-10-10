@@ -19,19 +19,19 @@ angular.module( 'conexus.home', [
                 return null;
 			}],
             orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome('', '', '', 15, 0, 'createdAt DESC');
+                return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
             }],
 			posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 15, 0, 'createdAt DESC');
+                return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
 			}],
 			tasks: ['TaskModel', function(TaskModel) {
-				return TaskModel.getSome('', '', 15, 0, 'createdAt DESC');
+				return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
 			}],
             transactions: ['TransactionModel', function(TransactionModel) {
-                return TransactionModel.getSome('','', 15, 0, 'createdAt DESC');
+                return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
             }],
 			work: ['WorkModel', function(WorkModel) {
-                return WorkModel.getSome('', '', 15, 0, 'createdAt DESC');
+                return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
             }]
 
 		}
@@ -42,7 +42,6 @@ angular.module( 'conexus.home', [
 	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
-	//$scope.members = members;
 	$scope.posts = posts;
 	$scope.projects = projects;
 	$scope.newReaction = {};
@@ -113,14 +112,8 @@ angular.module( 'conexus.home', [
         },
         legend: {
             enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
         },
-        tooltip: {
-        //    shared: true,
-        },
+        tooltip: {},
         credits:{enabled:false},
     };
 
@@ -133,7 +126,6 @@ angular.module( 'conexus.home', [
 
         //IF VALUE MAP | REFACTOR 
         $scope.newOrder = [];
-        $scope.orders = orders;
         $scope.newPost = {};
         $scope.transactions = transactions;
 
@@ -142,10 +134,6 @@ angular.module( 'conexus.home', [
         //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
         //$scope.orderTags = orders;
 
-        $scope.orders = $scope.orders.map(function(obj){
-            obj.model = 'ORDER';
-            return obj;
-        });
         $scope.tasks = $scope.tasks.map(function(obj){
             obj.model = 'TASK';
             return obj;
@@ -155,7 +143,7 @@ angular.module( 'conexus.home', [
             return obj;
         });
 
-        $scope.discover = [].concat.apply([], [$scope.orders, $scope.tasks, $scope.transactions]);
+        $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
 
         //TEMP | TODO: FIX
         $scope.discover = $scope.discover.map(function(obj){
@@ -209,7 +197,6 @@ angular.module( 'conexus.home', [
 
 	};
 
-	//TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type){
     	if($scope.currentUser){
 
@@ -230,7 +217,6 @@ angular.module( 'conexus.home', [
     	else{$location.path('/login')}
     };
 
-	//TODO: NESTED RENDERING N STUFF
 	$scope.keyPress = function(searchValue){
 		SearchModel.search(searchValue).then(function(models){
 			$scope.activity = models.slice(0,100);

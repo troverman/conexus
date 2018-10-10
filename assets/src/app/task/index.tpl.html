@@ -27,13 +27,16 @@
             </div>
 
             <div class="col-md-5" style="padding:16px;font-style:italic;color:gray">
-                <span style="color:gray">Filter</span>
-                <h4>{{task.verificationScore}} | General | Task Verification Score </h4>
                 <!--relevant dimensions-->
-                <p ng-repeat="tag in task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
-
+                <h4>Task Validation</h4>
+                <form ng-submit="filterValidation()">
+                    <input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
+                </form>
+                <h5>{{task.verificationScore}} | General </h5>
+                <!--relevant dimensions-->
+                <p style="font-size:10px" ng-repeat="tag in task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
                 <div class="spacing-10"></div>
-               
+
             </div>
 
         </div>

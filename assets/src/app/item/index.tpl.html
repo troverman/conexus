@@ -46,6 +46,54 @@
         </div>
     </div>
 
+    <!--MARKET | TRAVERSAL-->
+
+    <div class="row">
+        <div class="card">
+            <div style="padding:16px">
+                <div class="">
+                    <!--<div class="">
+                        <h4>Protocols [Transact]</h4>
+                        <p style="color:gray;font-style:italic;font-size:12px">[Transact] token manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>
+                    </div>-->
+                    <div class="">
+
+                        <h5>InputVector <span ng-repeat="input in inputVector.split(',')"><a href="market/{{input}}">{{input}}</a> | </span>
+
+                        <h5>Dimensional Object</h5>
+
+
+                        <!--
+                        INPUT
+                        OBJECT
+                        OUTPUT
+                        -->
+
+
+                        <h5>OutputVector <span ng-repeat="output in outputVector.split(',')"><a href="market/{{output}}">{{output}}</a> | </span>
+
+                        <p style="color:gray;font-style:italic;font-size:12px">Search for Output liquidity path | [] = []</p>
+
+                        <form ng-submit="marketTraverse(tokens, outputVector)">
+                            <input type="text" placeholder="Input Dimensions" ng-model="inputVector" class="form-control">
+                        </form>
+                        <form ng-submit="marketTraverse(tokens, outputVector)">
+                            <input type="text" placeholder="Output Dimensions" ng-model="outputVector" class="form-control">
+                        </form>
+
+                        <!--TRAVERSAL PARAMETERS-->
+                        <p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
+                            <span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
+                            <!--COMBINITRONICS-->
+                            <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<!--Delivery | Fuilfillment-->
 
 	<div class="row">

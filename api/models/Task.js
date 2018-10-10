@@ -17,6 +17,9 @@ module.exports = {
             type: 'string',
             defaultsTo:'Pending'
         },
+        location: {
+            type: 'string',
+        },
         members: {
             type: 'string',
         },
@@ -33,6 +36,12 @@ module.exports = {
             model: 'user',
             required: true
         },
+
+
+
+
+
+
 
         //TODO: ORDER
         completeBountySet: {
@@ -59,6 +68,9 @@ module.exports = {
         verificationIdentifierSet: {
             type: 'string',
         },
+
+
+
     },
 
 };

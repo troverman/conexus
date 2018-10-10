@@ -47,6 +47,9 @@ angular.module( 'conexus.work', [
     //for x in scope.tadk.tags.split()
     //$scope.tokens.push('Work+'+$scope.work.id);
 
+    //UNIFY CONTENT AND WORK??
+    //WORK AS A TYPE
+
     if ($scope.work.task.tags){
         for (x in $scope.work.task.tags.split(',')){
             $scope.tokens.push($scope.work.task.tags.split(',')[x].trim());

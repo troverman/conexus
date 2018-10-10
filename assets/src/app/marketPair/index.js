@@ -34,13 +34,13 @@ angular.module( 'conexus.marketPair', [
         $scope.pluralistic = true;
     }
 
-
     //coordinates on the quasicrystal 
     //100Transparency + 50education + 75universal = 0.01CRE8 + 0.05novo 
     //100Transparency + 35education + 85universal = 0.01CRE8 + 0.05novo 
     //[]=[]
     //easy postion is an equation
     //set of postions / equations 
+    //TRANSLATE SETS OF EQUATIONS TO DIMENSIOANL OBJ
 
     //TODO: BETTER
     $scope.mirrorOrders = mirrorOrders;

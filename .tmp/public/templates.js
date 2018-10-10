@@ -434,7 +434,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div id=\"about-section5\">\n" +
+    "<!--<div id=\"about-section5\">\n" +
     "	<div class=\"container\">\n" +
     "	    <div class=\"row\">\n" +
     "	    	<div class=\"col-xs-12\" style=\"text-align:center;font-size:18px\">\n" +
@@ -446,7 +446,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	    </div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
     "\n" +
     "<!--<div id=\"about-section5\">\n" +
     "	<div class=\"container\">\n" +
@@ -786,8 +786,8 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "		    	<div class=\"row\">\n" +
     "\n" +
     "					<div class=\"col-md-7\">\n" +
-    "				    	<h4>Protocols [viewToken, contentToken, reactionToken]</h4>\n" +
-    "				    	<p style=\"color:gray;font-style:italic;font-size:12px\">[viewToken, contentToken, reactionToken] manifold minting logic <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "				    	<h4>Protocols [View, Create, React]</h4>\n" +
+    "				    	<p style=\"color:gray;font-style:italic;font-size:12px\">[View, Create, React] Token manifold minting logic <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "				        <h5><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "				        <p>\n" +
     "							<a ng-repeat=\"token in tokens\" href=\"market/{{token}}\">{{token}} </a>,\n" +
@@ -939,7 +939,7 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "    <!--<div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <form style=\"display:flex;flex-direction:row;\">\n" +
-    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"{{searchQuery}}\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
     "                <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
     "                    <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
     "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -961,9 +961,19 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "        </div>\n" +
     "        <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
+    "            <!--<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                <li><a href=\"#\">Image</a></li>\n" +
+    "                <li><a href=\"#\">Text</a></li>\n" +
+    "                <li><a href=\"#\">Video</a></li>\n" +
+    "                <li><a href=\"#\">Work</a></li>\n" +
+    "                <li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "            </ul>\n" +
+    "\n" +
+    "            <div style=\"clear:both\"></div>-->\n" +
+    "\n" +
     "            <div class=\"card\">\n" +
     "                <form style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"{{searchQuery}}\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "                    <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
     "                    <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
     "                        <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
     "                            <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -1831,6 +1841,54 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                    </div>\n" +
     "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
     "                </form>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--MARKET | TRAVERSAL-->\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <div class=\"\">\n" +
+    "                    <!--<div class=\"\">\n" +
+    "                        <h4>Protocols [Transact]</h4>\n" +
+    "                        <p style=\"color:gray;font-style:italic;font-size:12px\">[Transact] token manifold minting logic <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                    </div>-->\n" +
+    "                    <div class=\"\">\n" +
+    "\n" +
+    "                        <h5>InputVector <span ng-repeat=\"input in inputVector.split(',')\"><a href=\"market/{{input}}\">{{input}}</a> | </span>\n" +
+    "\n" +
+    "                        <h5>Dimensional Object</h5>\n" +
+    "\n" +
+    "\n" +
+    "                        <!--\n" +
+    "                        INPUT\n" +
+    "                        OBJECT\n" +
+    "                        OUTPUT\n" +
+    "                        -->\n" +
+    "\n" +
+    "\n" +
+    "                        <h5>OutputVector <span ng-repeat=\"output in outputVector.split(',')\"><a href=\"market/{{output}}\">{{output}}</a> | </span>\n" +
+    "\n" +
+    "                        <p style=\"color:gray;font-style:italic;font-size:12px\">Search for Output liquidity path | [] = []</p>\n" +
+    "\n" +
+    "                        <form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
+    "                            <input type=\"text\" placeholder=\"Input Dimensions\" ng-model=\"inputVector\" class=\"form-control\">\n" +
+    "                        </form>\n" +
+    "                        <form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
+    "                            <input type=\"text\" placeholder=\"Output Dimensions\" ng-model=\"outputVector\" class=\"form-control\">\n" +
+    "                        </form>\n" +
+    "\n" +
+    "                        <!--TRAVERSAL PARAMETERS-->\n" +
+    "                        <p ng-repeat=\"result in marketOutput\" style=\"color:gray;font-style:italic;font-size:10px\">\n" +
+    "                            <span>[tokens] = {{result[0]}} <a href=\"market/{{result[1]}}\">{{result[1]}}</a></span>\n" +
+    "                            <!--COMBINITRONICS-->\n" +
+    "                            <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->\n" +
+    "                        </p>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -3549,6 +3607,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <img style=\"height:32px;width:32px;border-radius:3px\" src=\"{{currentUser.avatarUrl}}\"/> {{currentUser.username}}\n" +
     "                    </a>\n" +
     "                </h2>\n" +
+    "                <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/content\">Content</a></h2>-->\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
@@ -3784,14 +3843,19 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "            <md-divider style=\"color:gray\"></md-divider>\n" +
     "            <div class=\"\">\n" +
     "                <!--SEARCH-->\n" +
+    "                <!--<div class=\"card\">\n" +
+    "                    <form style=\"display:flex;flex-direction:row;\">\n" +
+    "                        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "                    </form>\n" +
+    "                </div>-->\n" +
     "                <br>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}\">Activity</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></h4>\n" +
     "                \n" +
-    "                <!--<h4><a href=\"project/{{project.urlTitle}}/charter\">Market</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Marketplace</a></h4>\n" +
+    "                <!--<h4><a href=\"project/{{project.urlTitle}}/charter\">Map</a></h4>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}\">Marketplace</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>-->\n" +
     "\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
@@ -4273,9 +4337,11 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "			<div class=\"row\">\n" +
     "\n" +
     "				<div class=\"col-md-6\">\n" +
+    "					<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
+    "\n" +
     "					<ul style=\"\" class=\"member-tabs\">\n" +
     "						<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
-    "						<li><a ng-click=\"selectExpense)\" href=\"#\">Expenses</a></li>\n" +
+    "						<li><a ng-click=\"selectExpense()\" href=\"#\">Expenses</a></li>\n" +
     "						<li><a ng-click=\"selectRevnue()\" href=\"#\">Revenue</a></li>\n" +
     "					</ul>\n" +
     "				</div>\n" +
@@ -4291,8 +4357,8 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "							</div>\n" +
     "						</form>\n" +
     "\n" +
-    "						<h3>{{sumTo[sumTo.length-1]}} USD REVENUE</h3>\n" +
-    "						<h3>{{sumFrom[sumFrom.length-1]}} USD EXPENSE</h3>\n" +
+    "						<h3>{{sumTo[sumTo.length-1][1].toFixed(2)}} USD REVENUE</h3>\n" +
+    "						<h3>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} USD EXPENSE</h3>\n" +
     "\n" +
     "					</div>\n" +
     "				</div>\n" +
@@ -5389,13 +5455,16 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            </div>\n" +
     "\n" +
     "            <div class=\"col-md-5\" style=\"padding:16px;font-style:italic;color:gray\">\n" +
-    "                <span style=\"color:gray\">Filter</span>\n" +
-    "                <h4>{{task.verificationScore}} | General | Task Verification Score </h4>\n" +
     "                <!--relevant dimensions-->\n" +
-    "                <p ng-repeat=\"tag in task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}}</a></p>\n" +
-    "\n" +
+    "                <h4>Task Validation</h4>\n" +
+    "                <form ng-submit=\"filterValidation()\">\n" +
+    "                    <input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
+    "                </form>\n" +
+    "                <h5>{{task.verificationScore}} | General </h5>\n" +
+    "                <!--relevant dimensions-->\n" +
+    "                <p style=\"font-size:10px\" ng-repeat=\"tag in task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}}</a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "               \n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -5758,17 +5827,16 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "\n" +
-    "			<div style=\"padding:16px\" class=\"col-md-6\">\n" +
+    "			<div style=\"padding:16px\" class=\"col-sm-8\">\n" +
     "				<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
-    "				<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span></p>\n" +
-    "				<p style=\"color:gray\" am-time-ago=\"work.createdAt\"></p>\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{work.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					{{work.user.username}}\n" +
     "				</a>\n" +
-    "				<br>\n" +
-    "				<br>		\n" +
+    "				<p><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span></p>\n" +
+    "				<p style=\"color:gray\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "					\n" +
     "				<button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
     "		        <button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
     "		        <div ng-repeat=\"verification in workVerification\">\n" +
@@ -5781,15 +5849,23 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "			</div>\n" +
     "\n" +
-    "			<div style=\"padding:16px\" class=\"col-md-4\">\n" +
+    "			<div style=\"padding:16px\" class=\"col-sm-4\">\n" +
     "\n" +
     "				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
     "				<!--TODO: DIMENSIONALITY-->\n" +
-    "				<span style=\"color:gray\">Filter</span>\n" +
-    "				<h4>{{work.verificationScore}} | General | Work Verification Score </h4>\n" +
-    "				<!--relevant dimensions-->\n" +
-    "				<p ng-repeat=\"tag in work.task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{work.task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
-    "		        <div class=\"spacing-10\"></div>\n" +
+    "				<div class=\"card\">\n" +
+    "					<div style=\"padding:16px\">\n" +
+    "\n" +
+    "						<h4>Work Validation</h4>\n" +
+    "						<form ng-submit=\"filterValidation()\">\n" +
+    "							<input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
+    "						</form>\n" +
+    "						<h5>{{work.verificationScore}} | General </h5>\n" +
+    "						<!--relevant dimensions-->\n" +
+    "						<p style=\"font-size:10px\" ng-repeat=\"tag in work.task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{work.task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
+    "					</div>\n" +
+    "\n" +
+    "				</div>\n" +
     "		 \n" +
     "			</div>\n" +
     "\n" +
@@ -5804,7 +5880,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "				<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->\n" +
     "				<h4><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "				<div>\n" +
-    "                    <a ng-repeat=\"token in tokens\" href=\"market/{{token}}\">{{token}}, </a>\n" +
+    "                    <a ng-repeat=\"token in tokens\" href=\"market/{{token}}\">{{work.amount}} {{token}}, </a>\n" +
     "				</div>\n" +
     "\n" +
     "\n" +

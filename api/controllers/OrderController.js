@@ -58,8 +58,9 @@ module.exports = {
 			});
 		}
 
-		else{
-			Order.find({})
+		else if(req.query.project){
+			var project = req.query.user;
+			Order.find({project:project})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -68,6 +69,19 @@ module.exports = {
 				res.json(models);
 			});
 		}
+
+		else{
+			res.json({});
+			/*Order.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				res.json(models);
+			});*/
+		}
+		
 	},
 
 	create: function (req, res) {
