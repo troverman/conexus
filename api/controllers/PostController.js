@@ -88,6 +88,26 @@ module.exports = {
 			});
 		}
 
+		else if(req.query.search){
+			var search = req.query.search;
+			console.log(search, limit,skip,sort)
+			Post.find(//{or: [
+				//{title: {contains: search}},
+				//{tags: {contains: search}},
+				{content: {contains: search}}
+			//]}
+			)
+			.limit(20)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				console.log(models)
+				Post.subscribe(req, models);
+				res.json(models);
+			});	
+		}
+
 		else if (req.query.tag){
 			var tag = req.query.tag;
 			Post.find({tags:{contains: tag}})
@@ -158,7 +178,7 @@ module.exports = {
 
 		else{
 			Post.find({})
-			.limit(limit)
+			.limit(20)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')

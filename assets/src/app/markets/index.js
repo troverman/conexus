@@ -80,18 +80,7 @@ angular.module( 'conexus.markets', [
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
     $scope.trades = {};
-
-    $scope.keyPress = function(searchValue){
-        $scope.markets = $scope.markets.filter(function(obj){
-            console.log(obj.includes(searchValue))
-            return obj.includes(searchValue);
-        });
-        //SearchModel.search(searchValue).then(function(models){
-        //    $scope.searchResults = models;
-        //});
-    };
    
-
     //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {
         $scope.newOrder.user = $scope.currentUser.id;
@@ -112,6 +101,21 @@ angular.module( 'conexus.markets', [
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.orders[index].showReply = !$scope.orders[index].showReply
+    };
+
+    $scope.search = function(){
+        $scope.markets = $scope.markets.filter(function(obj){
+            console.log(obj.includes($scope.searchQuery))
+            return obj.includes($scope.searchQuery);
+        });
+        /*$rootScope.stateIsLoading = true;
+        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = models.map(function(obj){
+                obj.model = 'CONTENT';
+                return obj;
+            });
+        });*/
     };
 
 }]);

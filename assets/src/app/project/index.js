@@ -470,6 +470,8 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
+    $scope.search = function(){};
+
 }])
 
 .controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, project, titleService ) {
@@ -482,6 +484,8 @@ angular.module( 'conexus.project', [
     $scope.newMotionToggle = function(){
         $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
     };
+
+    $scope.search = function(){};
 
 }])
 
@@ -757,6 +761,8 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
+    $scope.search = function(){};
+
     $sailsSocket.subscribe('projectmember', function (envelope) {
         console.log(envelope.verb)
         switch(envelope.verb) {
@@ -827,6 +833,8 @@ angular.module( 'conexus.project', [
         }
         else{$location.path('/login')}
     };
+
+    $scope.search = function(){};
 
     $sailsSocket.subscribe('task', function (envelope) {
         switch(envelope.verb) {
@@ -936,6 +944,8 @@ angular.module( 'conexus.project', [
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
+    $scope.search = function(){};
+
 }])
 .controller( 'ProjectProjectsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
     titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
@@ -969,5 +979,7 @@ angular.module( 'conexus.project', [
             else{return $sce.trustAsHtml(content)}
         }
     };
+
+    $scope.search = function(){};
 
 }]);

@@ -54,11 +54,5 @@ module.exports = {
 
 	searchAll: function (req, res) {
 
-		Project.find({})
-		.then(function(models) {
-			Project.subscribe(req, models);
-			res.json(models);
-		});
-
 	}
 };

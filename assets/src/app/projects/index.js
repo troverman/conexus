@@ -35,12 +35,6 @@ angular.module( 'conexus.projects', [
         });
     };
 
-    $scope.keyPress = function(searchValue){
-        SearchModel.search(searchValue).then(function(models){
-            $scope.projects = models;
-        });
-    };
-
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
@@ -63,6 +57,14 @@ angular.module( 'conexus.projects', [
             }
             else{return $sce.trustAsHtml(content)}
         }
+    };
+
+    $scope.search = function(){
+        $rootScope.stateIsLoading = true;
+        ProjectModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(projects){
+            $rootScope.stateIsLoading = false;
+            $scope.projects = projects;
+        });
     };
 
     $scope.selectSort = function(sort){

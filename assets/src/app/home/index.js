@@ -38,7 +38,7 @@ angular.module( 'conexus.home', [
 	});
 }])
 
-.controller( 'HomeCtrl', ['$location', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
+.controller( 'HomeCtrl', ['$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
 	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
@@ -126,7 +126,7 @@ angular.module( 'conexus.home', [
 
         //IF VALUE MAP | REFACTOR 
         $scope.newOrder = [];
-        $scope.newPost = {};
+        $scope.newContent = {};
         $scope.transactions = transactions;
 
         //tags
@@ -186,12 +186,12 @@ angular.module( 'conexus.home', [
         };
 
         //TODO: MODEL | CREATE | NESTED?
-        $scope.createPost = function(post){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.profile = $scope.currentUser.id;
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+        $scope.createContent = function(post){
+            $scope.newContent.post = post.id;
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.profile = $scope.currentUser.id;
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
             });
         };
 
@@ -217,17 +217,6 @@ angular.module( 'conexus.home', [
     	else{$location.path('/login')}
     };
 
-	$scope.keyPress = function(searchValue){
-		SearchModel.search(searchValue).then(function(models){
-			$scope.activity = models.slice(0,100);
-            $scope.activity = $scope.activity.map(function(obj){
-                obj.model = 'CONTENT';
-                return obj;
-            });
-            $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-		});
-	};
-
 	$scope.renderContent = function(content){
         if (content){
             if (!content.includes('>')){
@@ -245,6 +234,17 @@ angular.module( 'conexus.home', [
     		$scope.activity[index].showReply = !$scope.activity[index].showReply;
     	}
     	else{$location.path('/login')}
+    };
+
+    $scope.search = function(){
+        $rootScope.stateIsLoading = true;
+        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = models.map(function(obj){
+                obj.model = 'CONTENT';
+                return obj;
+            });
+        });
     };
 
 }]);

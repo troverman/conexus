@@ -41,6 +41,8 @@ angular.module( 'conexus.members', [
         });
     };
 
+    $scope.search = function(){};
+
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;

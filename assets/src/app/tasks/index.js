@@ -11,7 +11,6 @@ angular.module( 'conexus.tasks', [
 			}
 		},
         resolve: {
-        	//TODO: GETSOME
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
@@ -54,5 +53,16 @@ angular.module( 'conexus.tasks', [
 			$scope.tasks = tasks;
 		});
 	};
+
+    $scope.search = function(){
+        $rootScope.stateIsLoading = true;
+        TaskModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = models.map(function(obj){
+                obj.model = 'CONTENT';
+                return obj;
+            });
+        });
+    };
 
 }]);

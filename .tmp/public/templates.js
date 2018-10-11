@@ -972,10 +972,10 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            <div style=\"clear:both\"></div>-->\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <form style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "                    <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                        <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "                    <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
+    "                    <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "                        <a  href=\"#\" role=\"button\">\n" +
     "                            <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "                        </a>\n" +
     "                    </div>\n" +
@@ -1058,10 +1058,10 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "<div class=\"container\">\n" +
     "	<div class=\"\">\n" +
     "	    <div class=\"card\">\n" +
-    "	        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "	            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "	                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "	        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "	            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "	                <a href=\"#\" role=\"button\">\n" +
     "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "	                </a>\n" +
     "	            </div>\n" +
@@ -1315,9 +1315,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		<div class=\"card\" ng-show=\"true\">\n" +
     "	        <div style=\"padding:16px;\">\n" +
     "	        	<h4>Create Post Content</h4>\n" +
-    "	        	<form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
-    "					<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "					<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "	        	<form role=\"form\" ng-submit=\"createPost()\">\n" +
+    "					<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "					<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "				</form>\n" +
     "			</div>\n" +
     "	    </div>\n" +
@@ -1345,9 +1345,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
-    "	        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "	            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "	        <form  ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "	            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
     "					<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "	            </div>\n" +
     "	        </form>\n" +
@@ -1363,6 +1363,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "						<a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "						<p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
+    "\n" +
     "						<!--TODO: POST PARENT TYPES-->\n" +
     "						<a ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"market/{{item.market}}\">market {{item.market}}</a>\n" +
     "						<a ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"order/{{item.order}}\">order {{item.order}}</a>\n" +
@@ -1371,6 +1372,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "						<a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
     "						<a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task}}\">task {{item.task}}</a>\n" +
     "						<a ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
+    "						<!--TODO-->\n" +
+    "\n" +
     "\n" +
     "						<a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{item.work}}\">work {{item.work}}</a>\n" +
     "						<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
@@ -1387,9 +1390,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					<a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "				</div>\n" +
     "				<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "					<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "					<form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "						<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -1438,9 +1441,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "        			<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "				</div>\n" +
     "				<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "					<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "					<form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "						<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
     "		    </div>\n" +
@@ -1470,9 +1473,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	                <a style=\"padding:0px\" class=\"pull-right\" href=\"work/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "	            </div>\n" +
     "	            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "					<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "					<form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "						<text-angular ng-model=\"createContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!createContent.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
     "		    </div>\n" +
@@ -1613,9 +1616,9 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"card\">\n" +
-    "		        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "		            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "		        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "		            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "		            	<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "		            </div>\n" +
     "		        </form>\n" +
@@ -1656,8 +1659,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					<!--TODO: NESTED -->\n" +
     "					<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "						<form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "							<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "							<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "							<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "						</form>\n" +
     "					</div>\n" +
     "				</div>\n" +
@@ -3109,8 +3112,13 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -3151,29 +3159,33 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
   $templateCache.put("member/templates/content.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "<!--POST MODEL | CONTENT TYPE -->\n" +
-    "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
-    "<div class=\"row\" ng-show=\"true\">\n" +
-    "    <div class=\"\">\n" +
-    "    	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "    		<li class=\"active\"><a href=\"\">Text</a></li>\n" +
-    "    		<li class=\"active\"><a href=\"\">Image</a></li>\n" +
-    "    		<li><a href=\"\">Video</a></li>\n" +
-    "            <li><a href=\"\">Work</a></li>\n" +
-    "    	</ul>\n" +
-    "    </div>\n" +
+    "<div class=\"row\">\n" +
+    "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "        <li class=\"active\"><a href=\"\">Files</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Images</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Links</a></li>\n" +
+    "        <li class=\"active\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Tasks</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Text</a></li>\n" +
+    "        <li><a href=\"\">Videos</a></li>\n" +
+    "        <li><a href=\"\">Work</a></li>\n" +
+    "        <li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    </ul>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<!-- POST WITH ATTACHMENT -->\n" +
-    "<!-- MASTER POST MODEL FOR CONTENT -->\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"\">\n" +
     "        <div style=\"padding:10px;\">\n" +
@@ -3202,7 +3214,8 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "    <div class=\"\" ng-repeat=\"item in content\">\n" +
+    "    <!--<div class=\"col-md-10\">-->\n" +
+    "    <div ng-repeat=\"item in content\">\n" +
     "        <div class=\"card\" style=\"\">\n" +
     "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "                <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
@@ -3225,6 +3238,14 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <!--</div>-->\n" +
+    "    <!--<div class=\"col-md-2\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                <h3>Tags</h3>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>-->\n" +
     "</div>\n" +
     "");
 }]);
@@ -3296,11 +3317,16 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"card\">\n" +
-    "	    <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "	    </form>\n" +
-    "	</div>\n" +
+    "    <div class=\"card\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -3413,6 +3439,19 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "			<h1>Create Your Value Map</h1>\n" +
@@ -3492,12 +3531,13 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
 angular.module("member/templates/time.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/time.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "    <div ng-repeat=\"item in work\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "				<h4>{{item.startTime | date:\"h:mma | MM/dd/yyyy\"}} - {{item.endTime | date:\"h:mma | MM/dd/yyyy\"}}</h4>\n" +
-    "				<a>Working | {{item.task.title}}</a>\n" +
+    "				<a href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
     "            </div>\n" +
     "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
@@ -4046,8 +4086,13 @@ angular.module("project/templates/assets.tpl.html", []).run(["$templateCache", f
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -4202,23 +4247,30 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/content.tpl.html",
-    "<!--POST MODEL | CONTENT TYPE -->\n" +
-    "<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"row\">\n" +
     "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "        <li class=\"active\"><a href=\"\">Files</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Images</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Links</a></li>\n" +
     "        <li class=\"active\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></li>\n" +
-    "        <li class=\"active\"><a href=\"\">Posts</a></li>\n" +
+    "        <li class=\"active\"><a href=\"\">Tasks</a></li>\n" +
     "        <li class=\"active\"><a href=\"\">Text</a></li>\n" +
     "        <li><a href=\"\">Videos</a></li>\n" +
+    "        <li><a href=\"\">Work</a></li>\n" +
+    "        <li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "    </ul>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -4226,8 +4278,6 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "<div class=\"row\">\n" +
     "    <div class=\"\">\n" +
     "        <div style=\"padding:10px\">\n" +
-    "           <!-- POST WITH ATTACHMENT -->\n" +
-    "           <!-- MASTER POST MODEL FOR CONTENT? YE THINK REDDIT -->\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -4242,13 +4292,14 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                    <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
     "                    <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
     "                    <ul style=\"\" class=\"member-tabs\">\n" +
-    "                        <li class=\"active\"><a href=\"\">Image</a></li>\n" +
-    "                        <li class=\"active\"><a href=\"\">Post</a></li>\n" +
-    "                        <li class=\"active\"><a href=\"\">Link</a></li>\n" +
     "                        <li class=\"active\"><a href=\"\">File</a></li>\n" +
+    "                        <li class=\"active\"><a href=\"\">Image</a></li>\n" +
+    "                        <li class=\"active\"><a href=\"\">Link</a></li>\n" +
     "                        <li class=\"active\"><a href=\"\">Motion</a></li>\n" +
+    "                        <li class=\"active\"><a href=\"\">Task</a></li>\n" +
     "                        <li class=\"active\"><a href=\"\">Text</a></li>\n" +
     "                        <li><a href=\"\">Video</a></li>\n" +
+    "                        <li><a href=\"\">Work</a></li>\n" +
     "                    </ul>\n" +
     "                    <input type=\"text\" placeholder= \"Tags\" ng-model=\"newContent.tags\" class=\"form-control\"> <!-- VIDEO | FILE... ? -->\n" +
     "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
@@ -4323,9 +4374,14 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
-    "	    <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "	    </form>\n" +
+    "	    <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "        </form>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -4485,8 +4541,13 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -5268,16 +5329,280 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
-    "                <!--<h1>Register</h1>\n" +
-    "                <h3>Join Our Community</h3>-->\n" +
+    "            <div class=\"col-xs-12\">\n" +
     "                <h2>Join Our Community</h2>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- CALL TO ACTION HERE-->\n" +
     "<div class=\"container\">\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"showIntro\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "\n" +
+    "                <h2>Create Your Value Map</h2>\n" +
+    "                <p style=\"font-style:italic;color:gray;margin:0px\">*Creating Orders on the MultiDimensional Token Market.</p>\n" +
+    "\n" +
+    "                <p style=\"font-style:italic;color:gray;margin:0px\">The more complete the better, the more intentional your dimensional vote the better.</p>\n" +
+    "\n" +
+    "                <h3>What is a Value Map?</h3>\n" +
+    "                <p style=\"font-style:italic;color:gray;margin:0px\">A Value Map is a definition; a set of statements of relational value.</p>\n" +
+    "                <br>\n" +
+    "                <p>Trending Value Maps</p>\n" +
+    "\n" +
+    "                <span><a href=\"market/universalToken\">UniversalToken onMint Market Postion <i class=\"fa fa-question-circle\"></i></a></span>\n" +
+    "                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will sponsor UniversalToken onMint of the specified asset.</p>\n" +
+    "                <!--<br>\n" +
+    "                <span><a href=\"market/universalToken\">UniversalToken</a></span>-->\n" +
+    "                <br>\n" +
+    "                <!--<span>\n" +
+    "                    <span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
+    "                    <a href=\"#\">+ Dimension</a>\n" +
+    "                    <form style=\"display:flex;flex-direction:row;\">\n" +
+    "                        <input ng-model=\"newMarket.market\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\">\n" +
+    "                        <div ng-click=\"addMarket('market')\" style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                            <a href=\"#\">\n" +
+    "                                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5>\n" +
+    "                            </a>\n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
+    "                </span>-->\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <!--THIS WILL BUILD AS YOU CREATE-->\n" +
+    "                <!--<highchart config=\"chartMap\"></highchart>-->\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
+    "                <img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
+    "                <img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "                <img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(1)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"showValue\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "\n" +
+    "                <!--<h3>What is Valuable to you?</h3>-->\n" +
+    "                <h3>What is Your Personal Value?</h3>\n" +
+    "                <h4>I believe the following concepts and specific actions are valuable.</h4>\n" +
+    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                {{tags}}\n" +
+    "                <a ng-repeat=\"item in tags\" href=\"#\">{{item}}</a>\n" +
+    "\n" +
+    "                <div class=\"card\">\n" +
+    "                    <form style=\"display:flex;flex-direction:row;\">\n" +
+    "                        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "                        <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                            <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "            \n" +
+    "                <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "\n" +
+    "                    <div ng-repeat=\"task in tasks\">\n" +
+    "                        <div class=\"card\">\n" +
+    "\n" +
+    "\n" +
+    "                            <div style=\"padding:16px;\">\n" +
+    "                                <div class=\"row\">\n" +
+    "                                    <div class=\"col-sm-10\">\n" +
+    "                                        <h4><a ng-click=\"createPosition(task.id)\" href=\"#\">{{task.title}}</a></h4>\n" +
+    "                                        <p><a ng-click=\"createPosition(task.project.id)\" href=\"#\">{{task.project.title}}</a></p>\n" +
+    "                                        <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
+    "                                        <a ng-click=\"createPosition(tag)\" ng-repeat=\"tag in task.tags.split(',')\" href=\"#\">{{tag.trim()}} </a>\n" +
+    "                                        <span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
+    "                                        <h4>{{task.completeBountySet}} <a href=\"market/{{task.completeIdentifierSet}}\">{{task.completeIdentifierSet}}</a></h4>\n" +
+    "                                        <p><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"card-footer\">\n" +
+    "                                <a href=\"task/{{task.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
+    "                                <a href=\"task/{{task.id}}\" ng-click=\"\"><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div class=\"\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" class=\"form-control\">\n" +
+    "                        <button type=\"submit\" style=\"width:100%\" ng-model=\"keyword\" ng-click=\"createPosition(keyword)\" class=\"btn btn-default log-btn\">Add</button>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <span style=\"color:gray\" ng-repeat=\"order in newOrder\"><a href=\"#\">{{order[0]}}</a> | {{order[1]}} </span>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"showDaily\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <h3>A Valuable Day</h3>\n" +
+    "                <h4>I believe an Ideal day is structured like this.</h4>\n" +
+    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for universal adapation and reflectivity, your dimensional vote can be incompassing of all aspects of the human experience.</p>\n" +
+    "                 \n" +
+    "                <img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
+    "                <img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "\n" +
+    "                <p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">REST</span></p>\n" +
+    "                <p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">WORK</span></p>\n" +
+    "                <p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">FUN</span></p>\n" +
+    "                <p>An ideal day contains <span style=\"font-weight:800\">2</span> hours of <span style=\"font-weight:800\">Learning</span></p>\n" +
+    "                <p>An ideal day contains <span style=\"font-weight:800\">1</span> hours of <span style=\"font-weight:800\">Exercise</span></p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input ng-model=\"newActivity.amount\" type=\"text\" placeholder=\"Hours\" class=\"form-control\">\n" +
+    "                    <input ng-model=\"newActivity.identifer\" type=\"text\" placeholder=\"Activity\" class=\"form-control\">\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"createPosition()\" class=\"btn btn-default log-btn\">Add</button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <span style=\"color:gray\" ng-repeat=\"order in newOrder\"><a href=\"#\">{{order[0]}}</a> | {{order[1]}} </span>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(3)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"showPersonal\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <h3>Personal Information</h3>\n" +
+    "                <h4>Who Are You?</h4>\n" +
+    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Transparency as a principle -- Give as much information as you would like.</p>\n" +
+    "                <img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "                <img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.firstName\" placeholder=\"First Name\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.lastName\" placeholder=\"Last Name\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\">\n" +
+    "                    <!--<input type=\"text\" ng-model=\"newMember.Height\" placeholder=\"Height\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.eyeColor\" placeholder=\"Eye Color\" class=\"form-control\">-->\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.address\" placeholder=\"Address\" class=\"form-control\">\n" +
+    "                    <!--<input type=\"text\"  ng-model=\"newMember.avatar\" placeholder=\"Avatar\" class=\"form-control\">-->\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.image\" placeholder=\"Image\" class=\"form-control\">\n" +
+    "                    <!--<input type=\"text\" ng-model=\"newMember.facialRecognition\" placeholder=\"Facial Recognition\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" ng-model=\"newMember.locationMapping\" placeholder=\"Location Mapping\" class=\"form-control\">-->\n" +
+    "                    <!--<input type=\"text\"  ng-model=\"newMember.dna\" placeholder=\"DNA UPLOAD\" class=\"form-control\">-->\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(4)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"showFinal\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <!--SUMMARY OF ALL INFORMATION-->\n" +
+    "                <h3>Let's Go!</h3>\n" +
+    "                <h4>It's time to create a more eglatarian world.</h4>\n" +
+    "                <p style=\"color:gray;font-size:12px;font-style:italic\">We Are Excited to have you as a memeber</p>\n" +
+    "\n" +
+    "                 <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <h3>Information</h3>\n" +
+    "                        <img style=\"height:64px;width:64px\" class=\"card-avatar\" src=\"images/avatar.png\">\n" +
+    "                        <h4 ng-show=\"newMember.firstName\">First Name: {{newMember.firstName}}</h4>\n" +
+    "                        <h4 ng-show=\"newMember.lastName\">Last Name: {{newMember.lastName}}</h4>\n" +
+    "                        <h5 ng-show=\"newMember.address\">Address: {{newMember.address}}</h5>\n" +
+    "                        <h5 ng-show=\"newMember.dateOfBirth\">Date Of Birth: {{newMember.dateOfBirth}}</h5>\n" +
+    "                        <h5 ng-show=\"newMember.height\">Height: {{newMember.height}}</h5>\n" +
+    "                        <h5 ng-show=\"newMember.eyeColor\">Eye Color: {{newMember.eyeColor}}</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <h3>Value Map</h3>\n" +
+    "                        <p style=\"color:gray;font-size:12px;font-style:italic\">The following are your discrete positions for your [UNIVERSAL+ONMINT] map</p>\n" +
+    "                        <p style=\"color:gray\"ng-repeat=\"order in newOrder\"><a href=\"#\">{{order[0]}}</a> | {{order[1]}}</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
+    "                        <input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
+    "                        <input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
+    "                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "           \n" +
+    "\n" +
+    "<div class=\"container\" ng-show=\"!showFinal\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-10 col-md-offset-1\">\n" +

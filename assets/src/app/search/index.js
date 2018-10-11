@@ -47,12 +47,6 @@ angular.module( 'conexus.search', [
 
     titleService.setTitle($scope.searchQuery + ' | CRE8.XYZ');
 
-    $scope.keyPress = function(searchValue){
-        SearchModel.search(searchValue).then(function(models){
-            $scope.searchResults = models;
-        });
-    };
-
     //YIKES
     $scope.renderContent = function(content){
         if (content){
@@ -63,6 +57,12 @@ angular.module( 'conexus.search', [
             }
             else{return $sce.trustAsHtml(content)}
         }
+    };
+
+    $scope.search = function(){
+        SearchModel.search(searchValue).then(function(models){
+            $scope.searchResults = models;
+        });
     };
    
 }]);

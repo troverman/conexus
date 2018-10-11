@@ -148,9 +148,9 @@
 		<div class="card" ng-show="true">
 	        <div style="padding:16px;">
 	        	<h4>Create Post Content</h4>
-	        	<form role="form" ng-submit="createPost(newPost)">
-					<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+	        	<form role="form" ng-submit="createPost()">
+					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 				</form>
 			</div>
 	    </div>
@@ -178,9 +178,9 @@
 
 	<div class="row">
 		<div class="card">
-	        <form style="display:flex;flex-direction:row;">
-	            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-	            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+	        <form  ng-submit="search()" style="display:flex;flex-direction:row;">
+	            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+	            <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
 					<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
 	            </div>
 	        </form>
@@ -196,6 +196,7 @@
 						<a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
 						<p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
+
 						<!--TODO: POST PARENT TYPES-->
 						<a ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
 						<a ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
@@ -204,6 +205,8 @@
 						<a ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
 						<a ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
 						<a ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
+						<!--TODO-->
+
 
 						<a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
 						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
@@ -220,9 +223,9 @@
 					<a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
 				</div>
 				<div ng-show="item.showReply" class="card-footer">
-					<form role="form" ng-submit="createPost(item)">
-						<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+					<form role="form" ng-submit="createContent(item)">
+						<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 					</form>
 				</div>
 			</div>
@@ -271,9 +274,9 @@
         			<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 				</div>
 				<div ng-show="item.showReply" class="card-footer">
-					<form role="form" ng-submit="createPost(item)">
-						<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+					<form role="form" ng-submit="createContent(item)">
+						<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 					</form>
 				</div>
 		    </div>
@@ -303,9 +306,9 @@
 	                <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
 	            </div>
 	            <div ng-show="item.showReply" class="card-footer">
-					<form role="form" ng-submit="createPost(item)">
-						<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+					<form role="form" ng-submit="createContent(item)">
+						<text-angular ng-model="createContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!createContent.content">create</button>
 					</form>
 				</div>
 		    </div>
@@ -446,9 +449,9 @@
 
 		<div class="row">
 			<div class="card">
-		        <form style="display:flex;flex-direction:row;">
-		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-		            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+		        <form ng-submit="search()" style="display:flex;flex-direction:row;">
+		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+		            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
 		            	<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
 		            </div>
 		        </form>
@@ -489,8 +492,8 @@
 					<!--TODO: NESTED -->
 					<div ng-show="item.showReply" class="card-footer">
 						<form role="form" ng-submit="createPost(item)">
-							<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+							<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 						</form>
 					</div>
 				</div>

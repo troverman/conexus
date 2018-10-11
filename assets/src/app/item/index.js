@@ -40,7 +40,6 @@ angular.module( 'conexus.item', [
     //[  constrainA, constrainB, constrainC  ] = set[]
     //[  constrainA, constrainB, constrainC  ] = [  constrainD, constrainE, constrainF  ]
 
-
     $scope.purchaseToggleVar = false;
 
     //ALL ASSETS ARE COMBINITORIAL
@@ -100,7 +99,7 @@ angular.module( 'conexus.item', [
         else{$location.path('/login')}
     };
 
-     $scope.purchaseToggle = function() {
+    $scope.purchaseToggle = function() {
         $scope.purchaseToggleVar = !$scope.purchaseToggleVar;
     };
 
@@ -120,5 +119,7 @@ angular.module( 'conexus.item', [
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
+
+    $scope.search = function(){};
     
 }]);

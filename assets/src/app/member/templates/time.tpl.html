@@ -1,10 +1,11 @@
 <div class="spacing-5"></div>
+
 <div class="row">
     <div ng-repeat="item in work">
         <div class="card">
             <div style="padding:16px">
 				<h4>{{item.startTime | date:"h:mma | MM/dd/yyyy"}} - {{item.endTime | date:"h:mma | MM/dd/yyyy"}}</h4>
-				<a>Working | {{item.task.title}}</a>
+				<a href="task/{{item.task.id}}">{{item.task.title}}</a>
             </div>
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 

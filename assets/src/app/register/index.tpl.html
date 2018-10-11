@@ -2,16 +2,280 @@
     <div class="spacing-25"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-                <!--<h1>Register</h1>
-                <h3>Join Our Community</h3>-->
+            <div class="col-xs-12">
                 <h2>Join Our Community</h2>
             </div>
         </div>
     </div>
     <div class="spacing-25"></div>
 </div>
+
+
+
+
+<!-- CALL TO ACTION HERE-->
 <div class="container">
+
+    <div class="row" ng-show="showIntro">
+        <div class="card">
+            <div style="padding:16px;">
+
+
+                <h2>Create Your Value Map</h2>
+                <p style="font-style:italic;color:gray;margin:0px">*Creating Orders on the MultiDimensional Token Market.</p>
+
+                <p style="font-style:italic;color:gray;margin:0px">The more complete the better, the more intentional your dimensional vote the better.</p>
+
+                <h3>What is a Value Map?</h3>
+                <p style="font-style:italic;color:gray;margin:0px">A Value Map is a definition; a set of statements of relational value.</p>
+                <br>
+                <p>Trending Value Maps</p>
+
+                <span><a href="market/universalToken">UniversalToken onMint Market Postion <i class="fa fa-question-circle"></i></a></span>
+                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will sponsor UniversalToken onMint of the specified asset.</p>
+                <!--<br>
+                <span><a href="market/universalToken">UniversalToken</a></span>-->
+                <br>
+                <!--<span>
+                    <span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
+                    <a href="#">+ Dimension</a>
+                    <form style="display:flex;flex-direction:row;">
+                        <input ng-model="newMarket.market" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter">
+                        <div ng-click="addMarket('market')" style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+                            <a href="#">
+                                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5>
+                            </a>
+                        </div>
+                    </form>
+                </span>-->
+
+                <div class="spacing-10"></div>
+                <!--THIS WILL BUILD AS YOU CREATE-->
+                <!--<highchart config="chartMap"></highchart>-->
+                <div class="spacing-10"></div>
+                <img style="max-height:200px" src="http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg">
+                <img style="max-height:200px" src="http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg">
+                <img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
+                <img style="max-height:200px" src="http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif">
+                <div class="spacing-10"></div>
+
+                <button type="submit" style="width:100%" ng-click="continue(1)" class="btn btn-default log-btn">Continue</button>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="showValue">
+        <div class="card">
+            <div style="padding:16px;">
+
+
+                <!--<h3>What is Valuable to you?</h3>-->
+                <h3>What is Your Personal Value?</h3>
+                <h4>I believe the following concepts and specific actions are valuable.</h4>
+                <p style="color:gray;font-size:12px;font-style:italic">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>
+                <div class="spacing-10"></div>
+                {{tags}}
+                <a ng-repeat="item in tags" href="#">{{item}}</a>
+
+                <div class="card">
+                    <form style="display:flex;flex-direction:row;">
+                        <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+                        <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+                            <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                        </div>
+                    </form>
+                </div>
+            
+                <div style="max-height:500px;overflow:scroll">
+
+                    <div ng-repeat="task in tasks">
+                        <div class="card">
+
+
+                            <div style="padding:16px;">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h4><a ng-click="createPosition(task.id)" href="#">{{task.title}}</a></h4>
+                                        <p><a ng-click="createPosition(task.project.id)" href="#">{{task.project.title}}</a></p>
+                                        <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
+                                        <a ng-click="createPosition(tag)" ng-repeat="tag in task.tags.split(',')" href="#">{{tag.trim()}} </a>
+                                        <span style="color:gray" am-time-ago="task.createdAt"></span>
+                                    </div>
+                                    <div class="col-sm-2" style="text-align:right">
+                                        <h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
+                                        <p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                                <a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <div class="">
+                    <div class="form-group">
+                        <input type="text" class="form-control">
+                        <button type="submit" style="width:100%" ng-model="keyword" ng-click="createPosition(keyword)" class="btn btn-default log-btn">Add</button>
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+                <div class="card">
+                    <div style="padding:16px;">
+                        <span style="color:gray" ng-repeat="order in newOrder"><a href="#">{{order[0]}}</a> | {{order[1]}} </span>
+                    </div>
+                </div>
+                <div class="spacing-10"></div>
+
+                <button type="submit" style="width:100%" ng-click="continue(2)" class="btn btn-default log-btn">Continue</button>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="showDaily">
+        <div class="card">
+            <div style="padding:16px;">
+
+                <h3>A Valuable Day</h3>
+                <h4>I believe an Ideal day is structured like this.</h4>
+                <p style="color:gray;font-size:12px;font-style:italic">Striving for universal adapation and reflectivity, your dimensional vote can be incompassing of all aspects of the human experience.</p>
+                 
+                <img style="max-height:200px" src="http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg">
+                <img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
+
+                <p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">REST</span></p>
+                <p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">WORK</span></p>
+                <p>An ideal day contains <span style="font-weight:800">8</span> hours of <span style="font-weight:800">FUN</span></p>
+                <p>An ideal day contains <span style="font-weight:800">2</span> hours of <span style="font-weight:800">Learning</span></p>
+                <p>An ideal day contains <span style="font-weight:800">1</span> hours of <span style="font-weight:800">Exercise</span></p>
+
+                <div class="spacing-10"></div>
+
+                <div class="form-group">
+                    <input ng-model="newActivity.amount" type="text" placeholder="Hours" class="form-control">
+                    <input ng-model="newActivity.identifer" type="text" placeholder="Activity" class="form-control">
+                    <button type="submit" style="width:100%" ng-click="createPosition()" class="btn btn-default log-btn">Add</button>
+                </div>
+
+                <div class="spacing-10"></div>
+                <div class="card">
+                    <div style="padding:16px;">
+                        <span style="color:gray" ng-repeat="order in newOrder"><a href="#">{{order[0]}}</a> | {{order[1]}} </span>
+                    </div>
+                </div>
+                <div class="spacing-10"></div>
+
+                <button type="submit" style="width:100%" ng-click="continue(3)" class="btn btn-default log-btn">Continue</button>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="showPersonal">
+        <div class="card">
+            <div style="padding:16px;">
+
+                <h3>Personal Information</h3>
+                <h4>Who Are You?</h4>
+                <p style="color:gray;font-size:12px;font-style:italic">Transparency as a principle -- Give as much information as you would like.</p>
+                <img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
+                <img style="max-height:200px" src="http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg">
+
+                <div class="spacing-10"></div>
+                <div class="form-group">
+                    <input type="text" ng-model="newMember.firstName" placeholder="First Name" class="form-control">
+                    <input type="text" ng-model="newMember.lastName" placeholder="Last Name" class="form-control">
+                    <input type="text" ng-model="newMember.dateOfBirth" placeholder="Date of Birth" class="form-control">
+                    <!--<input type="text" ng-model="newMember.Height" placeholder="Height" class="form-control">
+                    <input type="text" ng-model="newMember.eyeColor" placeholder="Eye Color" class="form-control">-->
+                    <input type="text" ng-model="newMember.address" placeholder="Address" class="form-control">
+                    <!--<input type="text"  ng-model="newMember.avatar" placeholder="Avatar" class="form-control">-->
+                    <input type="text" ng-model="newMember.image" placeholder="Image" class="form-control">
+                    <!--<input type="text" ng-model="newMember.facialRecognition" placeholder="Facial Recognition" class="form-control">
+                    <input type="text" ng-model="newMember.locationMapping" placeholder="Location Mapping" class="form-control">-->
+                    <!--<input type="text"  ng-model="newMember.dna" placeholder="DNA UPLOAD" class="form-control">-->
+
+                </div>
+
+                <button type="submit" style="width:100%" ng-click="continue(4)" class="btn btn-default log-btn">Continue</button>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="showFinal">
+        <div class="card">
+            <div style="padding:16px;">
+
+                <!--SUMMARY OF ALL INFORMATION-->
+                <h3>Let's Go!</h3>
+                <h4>It's time to create a more eglatarian world.</h4>
+                <p style="color:gray;font-size:12px;font-style:italic">We Are Excited to have you as a memeber</p>
+
+                 <div class="card">
+                    <div style="padding:16px;">
+                        <h3>Information</h3>
+                        <img style="height:64px;width:64px" class="card-avatar" src="images/avatar.png">
+                        <h4 ng-show="newMember.firstName">First Name: {{newMember.firstName}}</h4>
+                        <h4 ng-show="newMember.lastName">Last Name: {{newMember.lastName}}</h4>
+                        <h5 ng-show="newMember.address">Address: {{newMember.address}}</h5>
+                        <h5 ng-show="newMember.dateOfBirth">Date Of Birth: {{newMember.dateOfBirth}}</h5>
+                        <h5 ng-show="newMember.height">Height: {{newMember.height}}</h5>
+                        <h5 ng-show="newMember.eyeColor">Eye Color: {{newMember.eyeColor}}</h5>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="padding:16px;">
+                        <h3>Value Map</h3>
+                        <p style="color:gray;font-size:12px;font-style:italic">The following are your discrete positions for your [UNIVERSAL+ONMINT] map</p>
+                        <p style="color:gray"ng-repeat="order in newOrder"><a href="#">{{order[0]}}</a> | {{order[1]}}</p>
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <form role="form" method="post" action="/auth/local/register">
+                    <div class="form-group">
+                        <input class="form-control" name="email" ng-model="newMember.email" placeholder="Email" title="email" type="email"> 
+                        <input class="form-control" name="username" ng-model="newMember.username" placeholder="Username" title="username" type="text"> 
+                        <input class="form-control" name="password" ng-model="newMember.password" placeholder="Password" title="password" type="password"> 
+                        <button class="btn btn-default log-btn" type="submit" value="submit">Sign up</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+           
+
+<div class="container" ng-show="!showFinal">
     <div class="spacing-25"></div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">

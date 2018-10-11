@@ -1,28 +1,32 @@
 <div class="spacing-5"></div>
 
-<!--POST MODEL | CONTENT TYPE -->
-<!--ATTACHED FILE(S) | VIDEO(S) | TEXT(S) | IMAGE(S) ... -->
-<div class="row" ng-show="true">
-    <div class="">
-    	<ul style="padding:0px;" class="member-tabs">
-    		<li class="active"><a href="">Text</a></li>
-    		<li class="active"><a href="">Image</a></li>
-    		<li><a href="">Video</a></li>
-            <li><a href="">Work</a></li>
-    	</ul>
-    </div>
+<div class="row">
+    <ul style="padding:0px;" class="member-tabs">
+        <li class="active"><a href="">Files</a></li>
+        <li class="active"><a href="">Images</a></li>
+        <li class="active"><a href="">Links</a></li>
+        <li class="active"><a href="project/{{project.urlTitle}}/charter">Motions</a></li>
+        <li class="active"><a href="">Tasks</a></li>
+        <li class="active"><a href="">Text</a></li>
+        <li><a href="">Videos</a></li>
+        <li><a href="">Work</a></li>
+        <li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+    </ul>
 </div>
 
 <div class="row">
     <div class="card">
-        <form style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+        <form ng-submit="search()" style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
+                <a href="#" role="button">
+                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                </a>
+            </div>
         </form>
     </div>
 </div>
 
-<!-- POST WITH ATTACHMENT -->
-<!-- MASTER POST MODEL FOR CONTENT -->
 <div class="row">
     <div class="">
         <div style="padding:10px;">
@@ -51,7 +55,8 @@
 </div>
 
 <div class="row">
-    <div class="" ng-repeat="item in content">
+    <!--<div class="col-md-10">-->
+    <div ng-repeat="item in content">
         <div class="card" style="">
             <div style="padding:16px;overflow:scroll;max-height:500px">
                 <div ng-bind-html="renderContent(item.content)"></div>
@@ -74,4 +79,12 @@
             </div>
         </div>
     </div>
+    <!--</div>-->
+    <!--<div class="col-md-2">
+        <div class="card">
+            <div style="padding:16px;overflow:scroll;max-height:500px">
+                <h3>Tags</h3>
+            </div>
+        </div>
+    </div>-->
 </div>

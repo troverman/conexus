@@ -213,16 +213,18 @@ angular.module( 'conexus.member', [
         });
     };
 
-    $scope.unfollow = function(member) {
-        FollowerModel.delete(member);
-    };
-
     $scope.newTransactionToggle = function() {
         $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
     };
 
+    $scope.search = function(){};
+
     $scope.tabsToggle = function() {
         $scope.tabsToggleVar = !$scope.tabsToggleVar;
+    };
+
+    $scope.unfollow = function(member) {
+        FollowerModel.delete(member);
     };
 
     //TODO: SOCKET | WEB3
@@ -340,6 +342,8 @@ angular.module( 'conexus.member', [
         $scope.activity[index].showReply = !$scope.activity[index].showReply
     };
 
+    $scope.search = function(){};
+
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -368,7 +372,6 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
     //$scope.posts = posts;
     //$scope.videos = videos;
-
 
     $scope.createContent = function(){};
 
@@ -413,12 +416,16 @@ angular.module( 'conexus.member', [
         $scope.content[index].showReply = !$scope.content[index].showReply
     };
 
+    $scope.search = function(){};
+
 }])
 
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {
     $scope.currentUser = config.currentUser;
     titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
     $scope.followers = followers;
+
+    $scope.search = function(){};
 
     /*
     $sailsSocket.subscribe('follower', function (envelope) {
@@ -439,7 +446,8 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
     $scope.following = following;
-    console.log(following)
+
+    $scope.search = function(){};
 
     /*
     $sailsSocket.subscribe('follower', function (envelope) {
@@ -749,11 +757,12 @@ angular.module( 'conexus.member', [
     //TODO
     $scope.createReaction = function(content, type){};
 
-
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
+
+    $scope.search = function(){};
 
 }])
 
@@ -783,11 +792,12 @@ angular.module( 'conexus.member', [
     //TODO
     $scope.createReaction = function(content, type){};
 
-
     $scope.reply = function(item){
         var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.work[index].showReply = !$scope.work[index].showReply
     };
+
+    $scope.search = function(){};
 
 }]);
 

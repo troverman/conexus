@@ -23,16 +23,6 @@ angular.module( 'conexus.discover', [
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
-            //TODO: ALL 
-            //TODO: CONVERT TO 'CONTENT'
-            streams: [function() {
-                return [
-                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
-                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
-                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
-                    {title:'Task 597c55e56833048165c6720c Stream 3',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()}
-                ];
-            }],
             work: ['WorkModel', function(WorkModel){
                 return WorkModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
@@ -46,9 +36,10 @@ angular.module( 'conexus.discover', [
     });
 }])
 
-.controller( 'DiscoverCtrl', ['$sce', '$scope', 'members', 'titleService', 'posts', 'projects', 'streams', 'tasks', 'uiGmapGoogleMapApi', 'work', function DiscoverController( $sce, $scope, members, titleService, posts, projects, streams, tasks, uiGmapGoogleMapApi, work ) {
-	titleService.setTitle('Discover | CRE8.XYZ');
-
+.controller( 'DiscoverCtrl', ['$sce', '$scope', 'members', 'titleService', 'posts', 'projects', 'tasks', 'uiGmapGoogleMapApi', 'work', function DiscoverController( $sce, $scope, members, titleService, posts, projects, tasks, uiGmapGoogleMapApi, work ) {
+	
+    titleService.setTitle('Discover | CRE8.XYZ');
+    
     $scope.chart = {
         chart: {
             polar: true,
@@ -93,16 +84,14 @@ angular.module( 'conexus.discover', [
 		center: {latitude: 39.443659, longitude: -83.082276 },
 		zoom: 8
 	};
+
 	$scope.members = members;
 	$scope.options = {scrollwheel: false};
 	$scope.posts = posts;
 	$scope.projects = projects;
-	$scope.streams = streams;
 	$scope.tasks = tasks;
 	$scope.windowOptions = {visible: false};
 	$scope.work = work;
-
-	//TODO: UNITY W POSTS | CONTENT | STREAMS
 
     $scope.renderContent = function(content){
         if (content){
@@ -115,11 +104,6 @@ angular.module( 'conexus.discover', [
         }
     };
 
-	//TODO: HMM
-	$scope.renderStream = function(stream){
-        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
-        return $sce.trustAsHtml(html);
-    };
-
+    $scope.search = function(){};
 
 }]);

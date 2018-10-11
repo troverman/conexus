@@ -12,8 +12,13 @@
 
 <div class="row">
     <div class="card">
-        <form style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
+        <form ng-submit="search()" style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
+                <a href="#" role="button">
+                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                </a>
+            </div>
         </form>
     </div>
 </div>

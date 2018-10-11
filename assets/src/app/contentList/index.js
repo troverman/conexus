@@ -92,7 +92,7 @@ angular.module( 'conexus.contentList', [
         PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.contentList = contentList;
-            $scope.loadTags()
+            $scope.loadTags();
         });
     };
 
@@ -100,6 +100,7 @@ angular.module( 'conexus.contentList', [
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
         PostModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(posts) {
+        //PostModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(posts) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.posts, posts);
             $scope.loadTags()
@@ -124,6 +125,14 @@ angular.module( 'conexus.contentList', [
     $scope.reply = function(content){
         var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
         $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
+    };
+
+    $scope.search = function(){
+        $rootScope.stateIsLoading = true;
+        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.contentList = models;
+        });
     };
 
 }]);
