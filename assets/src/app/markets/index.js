@@ -21,16 +21,6 @@ angular.module( 'conexus.markets', [
 .controller( 'MarketsCtrl', ['$scope', 'config', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, config, OrderModel, orders, titleService ) {
 	titleService.setTitle('Market | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-    var length = $scope.markets.length;
-    for (x in $scope.markets){
-        $scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
-        $scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
-    }
-
-    //https://api.coinmarketcap.com/v2/listings/
-    //STRING CROSS CHAIN
-    
     $scope.chartMap = {
         chart: {
             polar: true,
@@ -58,41 +48,32 @@ angular.module( 'conexus.markets', [
             lineWidth: 0,
             min: 0,
         },
-        legend: {
-            enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
-        },
-        tooltip: {
-        //    shared: true,
-        },
+        legend: {enabled: false},
+        tooltip: {},
         credits:{enabled:false},
     };
+
+    //STRING CROSS CHAIN
+    //https://api.coinmarketcap.com/v2/listings/
+
+    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
-    $scope.orders = orders;
-        $scope.orders.forEach(function(part, index) {
-        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
-        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
-        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
-        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
-    });
-    $scope.trades = {};
    
-    //TODO: CREATE ORDER | REFACTOR
     $scope.createOrder = function() {
         $scope.newOrder.user = $scope.currentUser.id;
 
         //TODO: PARSE INPUT
         //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
         //$scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+
         OrderModel.create($scope.newOrder).then(function(model) {
             $scope.orders.push($scope.newOrder);
             $scope.newOrder = {};
         });
     };
+
+    $scope.loadMore = function() {};
 
     $scope.newOrderToggle = function () {
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
@@ -104,18 +85,25 @@ angular.module( 'conexus.markets', [
     };
 
     $scope.search = function(){
+
         $scope.markets = $scope.markets.filter(function(obj){
             console.log(obj.includes($scope.searchQuery))
             return obj.includes($scope.searchQuery);
         });
-        /*$rootScope.stateIsLoading = true;
+
+        /*
+        $rootScope.stateIsLoading = true;
         PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.activity = models.map(function(obj){
                 obj.model = 'CONTENT';
                 return obj;
             });
-        });*/
+        });
+        */
+
     };
+
+    $scope.selectSort = function(sort){};
 
 }]);

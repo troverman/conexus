@@ -40,7 +40,7 @@
 					<h5>{{transactions[0].createdAt | date:"h:mma | MM/dd/yyyy"}} - {{transactions[transactions.length-1].createdAt | date:"h:mma | MM/dd/yyyy"}} </h5>
 
 					<ul style="" class="member-tabs">
-						<li class="active"><a href="">Overview</a></li>
+						<li ng-click="selectOverview()"><a href="">Overview</a></li>
 						<li><a ng-click="selectExpense()" href="#">Expenses</a></li>
 						<li><a ng-click="selectRevnue()" href="#">Revenue</a></li>
 					</ul>
@@ -76,7 +76,7 @@
 
 
 			<div class="col-md-12">
-				<p><span ng-repeat="tag in sortedTransactionTags"><a href="/market/{{tag.element}}">{{tag.element}} </a></span><p>
+				<p><span ng-repeat="tag in sortedTransactionTags"><a ng-click="selectTag(tag.element)" href="#">{{tag.element}} </a></span><p>
 			</div>
 
 

@@ -14,7 +14,7 @@ angular.module( 'conexus.register', [
                 return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -82,6 +82,6 @@ angular.module( 'conexus.register', [
     }
     $scope.loadTags();
 
-
+    $scope.search = function(model){};
 
 }]);

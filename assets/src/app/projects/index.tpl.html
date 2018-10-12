@@ -22,22 +22,25 @@
     </div>
 </div>
 
+<!--UNIFY-->
 <div class="container" ng-show="currentUser">
     <div class="spacing-15"></div>
     <div class="row">
         <div class="col-xs-12">
             <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button>
             <div ng-show="newProjectToggleVar">
+
                 <div class="spacing-10"></div>
                 <form class="blog-input" role="form" ng-submit="createProject(newProject)">
                     <div class="form-group">
                         <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
-                        <!--<input type="text" placeholder= "Tags" ng-model="newProject.tags" class="form-control">-->
+                        <input type="text" placeholder= "Tags" ng-model="newProject.tags" class="form-control">
+                        <input type="text" placeholder= "Location" ng-model="newProject.address" class="form-control">
                         <text-angular placeholder= "Description" ng-model="newProject.description" ta-toolbar="''"></text-angular>
-                        <!--<input type="text" placeholder= "Project Parent" ng-model="newProject.parent" class="form-control">-->
                     </div>
                     <button type="submit" class="btn btn-default log-btn">create</button>
                 </form>
+
             </div>
         </div>
     </div>

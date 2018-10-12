@@ -1,7 +1,7 @@
 angular.module( 'conexus.transparency', [
 ])
 
-.config(['$stateProvider', function config( $stateProvider ) {
+.config(['$stateProvider', 'uiGmapGoogleMapApiProvider', function config( $stateProvider, uiGmapGoogleMapApiProvider ) {
 	$stateProvider.state( 'transparency', {
 		url: '/transparency',
 		views: {
@@ -11,6 +11,11 @@ angular.module( 'conexus.transparency', [
 			}
 		}
 	});
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyDKPi-Krk_GCd_YfHS4ghUH3P4afPtPstA',
+        v: '3.20',
+        libraries: 'weather,geometry,visualization'
+    });
 }])
 
 .controller( 'TransparencyCtrl', ['$scope', 'titleService', function TransparencyController( $scope, titleService ) {
@@ -47,4 +52,11 @@ angular.module( 'conexus.transparency', [
         },
         credits:{enabled:false},
     };
+
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+
+
 }]);

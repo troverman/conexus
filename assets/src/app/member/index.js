@@ -135,10 +135,10 @@ angular.module( 'conexus.member', [
                 return UserModel.getByUsername($stateParams.path);
             }],
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('from', member.id, 20, 0, 'createdAt DESC');
+                return TransactionModel.getSome('from', member.id, 50, 0, 'createdAt DESC');
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome('to', member.id, 20, 0, 'createdAt DESC');
+                return TransactionModel.getSome('to', member.id, 50, 0, 'createdAt DESC');
             }],
         }
     })
@@ -465,6 +465,8 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberLedgerCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
+    
+    $scope.assetSet = 'CRE8';
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     $scope.newTransaction = {};
@@ -484,23 +486,40 @@ angular.module( 'conexus.member', [
             zoomType: 'x',
         },
         series: [{
+            id: 'Combination',
+            type: 'area',
+            name: 'Asset Balance',
+            data: [],
+        },{
             id: 'Expense',
-            type: 'spline',
+            type: 'area',
             name: 'Expense',
             data: [],
         },{
             id: 'Revenue',
-            type: 'spline',
+            type: 'area',
             name: 'Revenue',
+            data: [],
+        },{
+            id: 'Revenue',
+            type: 'area',
+            name: 'Asset Flow',
             data: [],
         }],
         title: {
             text: ''
         },
         xAxis: {
+            type: 'datetime',
+            currentMin: 0,
+            currentMax: 20,
+            title: null,
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
             title: {
                 text: null
-            }
+            },
         },
         yAxis: {
             title: {
@@ -550,6 +569,9 @@ angular.module( 'conexus.member', [
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     }
 
+
+
+    //TAGS
     function countInArray(array, value) {
         return array.reduce(function(n, x){ return n + (x === value)}, 0);
     }
@@ -560,14 +582,6 @@ angular.module( 'conexus.member', [
             return n;
         },0);
     }
-
-    /*$scope.transactionTags = $scope.transactions.map(function(obj){
-        var returnObj = {};
-        if(obj.ledger){obj.ledger = obj.ledger.split(',')}
-        returnObj = obj.ledger;
-        return returnObj;
-    });
-    $scope.transactionTags = [].concat.apply([], $scope.transactionTags);*/
 
     $scope.transactionTags = $scope.transactions.map(function(obj){
         var returnArray = [];
@@ -589,51 +603,97 @@ angular.module( 'conexus.member', [
         }
     }
     $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
-    console.log($scope.sortedTransactionTags)
-
-    /*$scope.sortedTransactionTags = [];
-    for (x in $scope.transactionTags){
-        var amount = countInArray($scope.transactionTags, $scope.transactionTags[x]);
-        if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x]) == -1){
-            $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x]})
-        }
+    //TAGS
+    //DO BY TAGS! SAME ..
+    function sumFunction(obj){
+        var sumArray = [];
+        obj.reduce(function(a,b,i) {
+            return $scope.sumArray[i] = parseFloat(a) + parseFloat(b.amount);
+        }, 0);
+        return sumArray;
     }
-    $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});*/
+    //SERIES PER TAG
+    //FOR X IN TAG -- SERIES.PUSH
+        //SERIES[x].push(data)
 
-    $scope.sumTransactions = [];
-    $scope.transactions.map(function(obj){return obj.amount}).reduce(function(a,b,i) {
-        return $scope.sumTransactions[i] = parseFloat(a)+parseFloat(b);
-    }, 0);
 
-    $scope.sumFrom = [];
-    $scope.transactionsFrom.reduce(function(a,b,i) {
-        return $scope.sumFrom[i] = parseFloat(a)+parseFloat(b.amount);
-    }, 0);
 
+    $scope.sumFlow = [];
+    $scope.sumFrom = []
     $scope.sumTo = [];
-    $scope.transactionsTo.reduce(function(a,b,i) {
-        return $scope.sumTo[i] = parseFloat(a) + parseFloat(b.amount);;
-    }, 0);
+    $scope.sumTransactions = [];
+    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
+
+    //CONCAT | sumTransactions
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.from == $scope.member.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
+        if(b.to == $scope.member.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+    },[0,0]);
+
+    //CONCAT | sumFrom
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.from == $scope.member.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        else{return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
+    },[0,0]);
+
+    //CONCAT | sumTo
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.to == $scope.member.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
+    },[0,0]);
+
+    //CONCAT | sumFlow
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.from == $scope.member.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.to == $scope.member.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+    },[0,0]);
+
+    $scope.chart.series[0].data = $scope.sumTransactions;
+    $scope.chart.series[1].data = $scope.sumFrom;
+    $scope.chart.series[2].data = $scope.sumTo;
+    //$scope.chart.series[3].data = $scope.sumFlow;
 
 
-    $scope.chart.series[0].data = $scope.sumFrom;
-    $scope.chart.series[1].data = $scope.sumTo;
 
-    /*$scope.pie.series[0].data = [{
-        name: 'Expense',
-        y: $scope.sumFrom[$scope.sumFrom.length-1],
-    }, {
-        name: 'Revenue',
-        y: $scope.sumTo[$scope.sumTo.length-1],
-    }];*/
+    $scope.selectExpense = function(){
+        //ANIMATE
+        //ADD IN TAG BASED GRAPHS WRT EXPENSE
+        $scope.pie.series[0].data = [];
+        for (x in $scope.sortedTransactionTags){
+            $scope.pie.series[0].data.push({
+                name: $scope.sortedTransactionTags[x].element,
+                y: $scope.sortedTransactionTags[x].amount,
+            });
+        }
+    };
 
-    //console.log($scope.sortedTransactionTags)
-    for (x in $scope.sortedTransactionTags){
-        $scope.pie.series[0].data.push({
-            name: $scope.sortedTransactionTags[x].element,
-            y: $scope.sortedTransactionTags[x].amount,
-        });
-    }
+    $scope.selectOverview = function(){
+        $scope.pie.series[0].data = [];
+        $scope.pie.series[0].data = [{
+            name: 'Expense',
+            y: $scope.sumFrom[$scope.sumFrom.length-1][1],
+        }, {
+            name: 'Revenue',
+            y: $scope.sumTo[$scope.sumTo.length-1][1],
+        }];
+    };
+    $scope.selectOverview();
+
+    $scope.selectRevenue = function(){
+        //ANIMATE
+        $scope.pie.series[0].data = [];
+        for (x in $scope.sortedTransactionTags){
+            $scope.pie.series[0].data.push({
+                name: $scope.sortedTransactionTags[x].element,
+                y: $scope.sortedTransactionTags[x].amount,
+            });
+        }
+    };
+
+
+
+
+
 
     //TODO
     $scope.createContent = function(content, type){};

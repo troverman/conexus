@@ -584,13 +584,7 @@ angular.module( 'conexus.project', [
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     }
 
-
-
-
-
-
-
-
+    //TAGS
     function countInArray(array, value) {
         return array.reduce(function(n, x){ return n + (x === value)}, 0);
     }
@@ -613,56 +607,7 @@ angular.module( 'conexus.project', [
         }
     }
     $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
-
-
-
-    $scope.sumFlow = [];
-    $scope.sumFrom = []
-    $scope.sumTo = [];
-    $scope.sumTransactions = [];
-    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
-
-    //CONCAT
-    $scope.transactions.reduce(function(a,b,i) {
-
-        if(b.from == $scope.project.id){
-            return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];
-        }
-
-        if(b.to == $scope.project.id){
-            return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];
-        }
-
-    },[0,0]);
-
-    //CONCAT
-    $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.project.id){
-            return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];
-        }
-        else{return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
-    },[0,0]);
-
-     //CONCAT
-    $scope.transactions.reduce(function(a,b,i) {
-        if(b.to == $scope.project.id){
-            return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];
-        }
-        else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
-    },[0,0]);
-
-    //CONCAT
-    $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.project.id){
-            return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];
-        }
-        if(b.to == $scope.project.id){
-            return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];
-        }
-    },[0,0]);
-
-    console.log($scope.sumFrom)
+    //TAGS
 
     //DO BY TAGS! SAME ..
     function sumFunction(obj){
@@ -673,18 +618,42 @@ angular.module( 'conexus.project', [
         return sumArray;
     }
 
+
+    $scope.sumFlow = [];
+    $scope.sumFrom = []
+    $scope.sumTo = [];
+    $scope.sumTransactions = [];
+    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
+
+    //CONCAT
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.from == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
+        if(b.to == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+    },[0,0]);
+
+    //CONCAT
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.from == $scope.project.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        else{return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
+    },[0,0]);
+
+     //CONCAT
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.to == $scope.project.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
+    },[0,0]);
+
+    //CONCAT
+    $scope.transactions.reduce(function(a,b,i) {
+        if(b.from == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.to == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+    },[0,0]);
+
     $scope.chart.series[0].data = $scope.sumTransactions;
     $scope.chart.series[1].data = $scope.sumFrom;
     $scope.chart.series[2].data = $scope.sumTo;
     //$scope.chart.series[3].data = $scope.sumFlow;
 
-    $scope.pie.series[0].data = [{
-        name: 'Expense',
-        y: $scope.sumFrom[$scope.sumFrom.length-1][1],
-    }, {
-        name: 'Revenue',
-        y: $scope.sumTo[$scope.sumTo.length-1][1],
-    }];
 
 
     $scope.selectExpense = function(){
@@ -697,7 +666,19 @@ angular.module( 'conexus.project', [
                 y: $scope.sortedTransactionTags[x].amount,
             });
         }
-    }
+    };
+
+    $scope.selectOverview = function(){
+        $scope.pie.series[0].data = [];
+        $scope.pie.series[0].data = [{
+            name: 'Expense',
+            y: $scope.sumFrom[$scope.sumFrom.length-1][1],
+        }, {
+            name: 'Revenue',
+            y: $scope.sumTo[$scope.sumTo.length-1][1],
+        }];
+    };
+    $scope.selectOverview();
 
     $scope.selectRevenue = function(){
         //ANIMATE
@@ -708,14 +689,7 @@ angular.module( 'conexus.project', [
                 y: $scope.sortedTransactionTags[x].amount,
             });
         }
-    }
-
-    /*for (x in $scope.sortedTransactionTags){
-        $scope.pie.series[0].data.push({
-            name: $scope.sortedTransactionTags[x].element,
-            y: $scope.sortedTransactionTags[x].amount,
-        });
-    }*/
+    };
 
 
     $scope.createContent = function(){};

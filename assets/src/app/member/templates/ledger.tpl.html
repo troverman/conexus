@@ -43,29 +43,50 @@
 <div class="row">
 	<div class="card">
 		<div style="padding:16px;">
+
+			<h5>{{transactions[0].createdAt | date:"h:mma | MM/dd/yyyy"}} - {{transactions[transactions.length-1].createdAt | date:"h:mma | MM/dd/yyyy"}} </h5>
+
 			<div class="col-md-6">
 				<ul style="padding:0px;" class="member-tabs">
-					<li class="active"><a href="">Expense</a></li>
-					<li><a href="">Revenue</a></li>
+					<li ng-click="selectOverview()"><a href="">Overview</a></li>
+					<li ng-click="selectExpense()"><a href="">Expense</a></li>
+					<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
 				</ul>
 			</div>
+
 			<div class="col-md-6" style="text-align:right">
+
+
 				<form style="display:flex;flex-direction:row;">
-			    	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Asset">
+			    	<input ng-model="assetSet" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
 			    	<div style="border:0px;width:50%" class="btn btn-default dropdown sort-dropdown noselect">
 			            <a href="#">
 			                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
 			            </a>
 					</div>
 				</form>
-				<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>
+
+				<!--<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>-->
+				<h4>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Balance</h4>
+				<h4>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Revenue</h4>
+				<h4>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Expense</h4>
+
 			</div>
+
+
 			<div class="col-md-6">
 				<highchart config="chart"></highchart>
 			</div>
 			<div class="col-md-6">
 				<highchart config="pie"></highchart>
 			</div>
+
+
+			<div class="col-md-12">
+				<p><span ng-repeat="tag in sortedTransactionTags"><a ng-click="selectTag(tag.element)" href="#">{{tag.element}} </a></span><p>
+			</div>
+
+
 		</div>
 	</div>
 </div>

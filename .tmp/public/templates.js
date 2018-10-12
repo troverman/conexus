@@ -1029,6 +1029,10 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
 
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("discover/index.tpl.html",
+    "<style type=\"text/css\">\n" +
+    "    .angular-google-map-container { height: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }\n" +
+    "</style>\n" +
+    "\n" +
     "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
@@ -1068,6 +1072,21 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	        </form>\n" +
     "	    </div>\n" +
     "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "	<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "	    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "	        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "	            <div>\n" +
+    "	                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "	            </div>\n" +
+    "	        </ui-gmap-window>\n" +
+    "	    </ui-gmap-marker>\n" +
+    "	</ui-gmap-google-map>\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "	<br>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -3332,29 +3351,50 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "			<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
+    "\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "					<li class=\"active\"><a href=\"\">Expense</a></li>\n" +
-    "					<li><a href=\"\">Revenue</a></li>\n" +
+    "					<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
+    "					<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
+    "					<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
     "				</ul>\n" +
     "			</div>\n" +
+    "\n" +
     "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "\n" +
+    "\n" +
     "				<form style=\"display:flex;flex-direction:row;\">\n" +
-    "			    	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
+    "			    	<input ng-model=\"assetSet\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
     "			    	<div style=\"border:0px;width:50%\" class=\"btn btn-default dropdown sort-dropdown noselect\">\n" +
     "			            <a href=\"#\">\n" +
     "			                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
     "			            </a>\n" +
     "					</div>\n" +
     "				</form>\n" +
-    "				<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>\n" +
+    "\n" +
+    "				<!--<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>-->\n" +
+    "				<h4>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Balance</h4>\n" +
+    "				<h4>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Revenue</h4>\n" +
+    "				<h4>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Expense</h4>\n" +
+    "\n" +
     "			</div>\n" +
+    "\n" +
+    "\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<highchart config=\"pie\"></highchart>\n" +
     "			</div>\n" +
+    "\n" +
+    "\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<p><span ng-repeat=\"tag in sortedTransactionTags\"><a ng-click=\"selectTag(tag.element)\" href=\"#\">{{tag.element}} </a></span><p>\n" +
+    "			</div>\n" +
+    "\n" +
+    "\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -4396,7 +4436,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "					<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
     "\n" +
     "					<ul style=\"\" class=\"member-tabs\">\n" +
-    "						<li class=\"active\"><a href=\"\">Overview</a></li>\n" +
+    "						<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "						<li><a ng-click=\"selectExpense()\" href=\"#\">Expenses</a></li>\n" +
     "						<li><a ng-click=\"selectRevnue()\" href=\"#\">Revenue</a></li>\n" +
     "					</ul>\n" +
@@ -4432,7 +4472,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "\n" +
     "			<div class=\"col-md-12\">\n" +
-    "				<p><span ng-repeat=\"tag in sortedTransactionTags\"><a href=\"/market/{{tag.element}}\">{{tag.element}} </a></span><p>\n" +
+    "				<p><span ng-repeat=\"tag in sortedTransactionTags\"><a ng-click=\"selectTag(tag.element)\" href=\"#\">{{tag.element}} </a></span><p>\n" +
     "			</div>\n" +
     "\n" +
     "\n" +
@@ -4763,22 +4803,25 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--UNIFY-->\n" +
     "<div class=\"container\" ng-show=\"currentUser\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\">\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
     "            <div ng-show=\"newProjectToggleVar\">\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
     "                    <div class=\"form-group\">\n" +
     "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                        <!--<input type=\"text\" placeholder= \"Tags\" ng-model=\"newProject.tags\" class=\"form-control\">-->\n" +
+    "                        <input type=\"text\" placeholder= \"Tags\" ng-model=\"newProject.tags\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder= \"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
     "                        <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
-    "                        <!--<input type=\"text\" placeholder= \"Project Parent\" ng-model=\"newProject.parent\" class=\"form-control\">-->\n" +
     "                    </div>\n" +
     "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
     "                </form>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -5482,6 +5525,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
+    "                <!--TOP RIGHT; UNIVERSAL TOKEN ON MINT-->\n" +
     "                <h3>A Valuable Day</h3>\n" +
     "                <h4>I believe an Ideal day is structured like this.</h4>\n" +
     "                <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for universal adapation and reflectivity, your dimensional vote can be incompassing of all aspects of the human experience.</p>\n" +
@@ -6102,33 +6146,67 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
 
 angular.module("transparency/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("transparency/index.tpl.html",
-    "<link rel=\"stylesheet\" href=\"bower_components/angular-chart.js/dist/angular-chart.css\">\n" +
-    "<!--this is gonna be infographic like-->\n" +
-    "<div class=\"spacing-25\"></div>\n" +
+    "<style type=\"text/css\">\n" +
+    "    .angular-google-map-container { height: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }\n" +
+    "</style>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"col-md-6\">\n" +
-    "			<h2><a href=\"project/conexus\">Transparency</a></h2>\n" +
-    "			<p>transparent contrubition, equatable representation</p>		\n" +
-    "		</div>\n" +
-    "		<div class=\"col-md-6\">\n" +
-    "			<highchart config=\"chart\"></highchart>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<div class=\"col-md-6\">\n" +
+    "					<h2><a href=\"project/conexus\">Transparency</a></h2>\n" +
+    "					<p>Transparent contrubition, Equatable representation</p>		\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
+    "				</div>\n" +
+    "				<div class=\"col-md-6\">\n" +
+    "				</div>\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"col-md-12\">\n" +
-    "			<h3>Stats</h3>\n" +
-    "			<p>13 companies, 35 collaborators, $8,000,000 monthly revenue</p>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<div class=\"col-md-12\">\n" +
+    "					<h3>Stats</h3>\n" +
+    "					<p>13 companies, 35 collaborators, $8,000,000 monthly revenue</p>\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"col-md-12\">\n" +
-    "			<h3>Peer Network</h3>\n" +
-    "			<p>13793 Peers on the CRE8 NETWORK</p>\n" +
-    "			<p>1232 Txs a Second</p>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<div class=\"col-md-12\">\n" +
+    "					\n" +
+    "					<h3>Peer Network</h3>\n" +
+    "					<p>13793 Peers on the CRE8 NETWORK</p>\n" +
+    "					<p>1232 Txs a Second</p>\n" +
+    "\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "					<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "					    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "					        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "					            <div>\n" +
+    "					                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "					            </div>\n" +
+    "					        </ui-gmap-window>\n" +
+    "					    </ui-gmap-marker>\n" +
+    "					</ui-gmap-google-map>\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "				</div>\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "");

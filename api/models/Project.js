@@ -18,8 +18,9 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+        //{address:'',lat:'',lng:''}
         location: {
-            type: 'string',
+            type: 'json',
         },
         avatarUrl: {
             type: 'string',

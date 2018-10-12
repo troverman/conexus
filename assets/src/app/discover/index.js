@@ -15,7 +15,7 @@ angular.module( 'conexus.discover', [
                 return UserModel.getSome(18, 0, 'createdAt DESC');
             }],
         	projects: ['ProjectModel', function(ProjectModel){
-                return ProjectModel.getSome(20, 0, 'createdAt DESC');
+                return ProjectModel.getSome(600, 0, 'createdAt DESC');
             }],
             posts: ['PostModel', function(PostModel){
                 return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
@@ -81,10 +81,10 @@ angular.module( 'conexus.discover', [
     };
 
 	$scope.map = {
-		center: {latitude: 39.443659, longitude: -83.082276 },
-		zoom: 8
+		center: {latitude: 35.902023, longitude: -84.1507067 },
+		zoom: 9
 	};
-
+    $scope.markers = [];
 	$scope.members = members;
 	$scope.options = {scrollwheel: false};
 	$scope.posts = posts;
@@ -92,6 +92,20 @@ angular.module( 'conexus.discover', [
 	$scope.tasks = tasks;
 	$scope.windowOptions = {visible: false};
 	$scope.work = work;
+
+    //TODO: BETTER | BETTER QUERIES
+    for (x in projects){
+        if (projects[x].location){
+            $scope.markers.push({
+                id:projects[x].id,
+                content:projects[x].title,
+                coords:{
+                    latitude:projects[x].location.lat,
+                    longitude:projects[x].location.lng
+                }
+            });
+        }
+    }
 
     $scope.renderContent = function(content){
         if (content){
