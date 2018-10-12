@@ -2,7 +2,9 @@
     @media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}
     @media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}
     .imageContainerSmallDiv h1 {font-size:2.8em;}
+    .angular-google-map-container { height: 200px;}
 </style>
+
 
 <div class="container" style="padding:0px">
     <div class="card">
@@ -15,6 +17,17 @@
                     </span> 
                 </h1>
             </div>
+        </div>
+        <div ng-show="project.location">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div>
+                            <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
         </div>
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">

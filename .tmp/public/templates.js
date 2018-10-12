@@ -3874,7 +3874,9 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    @media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}\n" +
     "    @media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}\n" +
     "    .imageContainerSmallDiv h1 {font-size:2.8em;}\n" +
+    "    .angular-google-map-container { height: 200px;}\n" +
     "</style>\n" +
+    "\n" +
     "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\">\n" +
@@ -3887,6 +3889,17 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                    </span> \n" +
     "                </h1>\n" +
     "            </div>\n" +
+    "        </div>\n" +
+    "        <div ng-show=\"project.location\">\n" +
+    "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                        <div>\n" +
+    "                            <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "                        </div>\n" +
+    "                    </ui-gmap-window>\n" +
+    "                </ui-gmap-marker>\n" +
+    "            </ui-gmap-google-map>\n" +
     "        </div>\n" +
     "        <div style=\"background-color:white\">\n" +
     "            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +

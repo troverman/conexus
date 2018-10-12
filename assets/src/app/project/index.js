@@ -205,6 +205,23 @@ angular.module( 'conexus.project', [
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
+    if ($scope.project.location){ 
+        $scope.map = {
+            center: {latitude: project.location.lat, longitude: project.location.lng },
+            zoom: 13
+        };
+        $scope.markers = [{
+            id:project.id,
+            content:project.title,
+            coords:{
+                latitude:project.location.lat,
+                longitude:project.location.lng
+            }
+        }];
+        $scope.options = {
+           disableDefaultUI: true
+        };
+    }
     if(!$scope.project){$location.path('/')}
 
     $scope.tabsToggleVar = false;

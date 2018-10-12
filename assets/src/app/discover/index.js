@@ -69,14 +69,8 @@ angular.module( 'conexus.discover', [
         },
         legend: {
             enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
         },
-        tooltip: {
-        //    shared: true,
-        },
+        tooltip: {},
         credits:{enabled:false},
     };
 
