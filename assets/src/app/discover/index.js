@@ -30,7 +30,7 @@ angular.module( 'conexus.discover', [
 
 	});
 	uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyDKPi-Krk_GCd_YfHS4ghUH3P4afPtPstA',
+        key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
         v: '3.20',
         libraries: 'weather,geometry,visualization'
     });
