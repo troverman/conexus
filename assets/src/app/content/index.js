@@ -34,7 +34,12 @@ angular.module( 'conexus.content', [
     $scope.post = post;
     if(!$scope.post){$location.path('/')}
     $scope.reactions = reactions;
+    $scope.toggleTokenVar = false;
     $scope.viewTime = 0;
+
+    $scope.toggleToken = function(){
+        $scope.toggleTokenVar =!$scope.toggleTokenVar
+    };
 
     //+Addative Manifolds --> Extra dimensional 
     $scope.tokens = [

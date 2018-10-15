@@ -1,5 +1,3 @@
-
-
 <!--CONTENT TYPE-->
 <!--FACTOR-->
 <div style="background:black" ng-show="post.type=='video'">
@@ -10,42 +8,32 @@
 	<div class="spacing-100"></div>
 </div>
 
-<!--<div class="container">
-	<div class="row" ng-show="post.type!='video'">
-		<div class="card">
-		    <div style="padding:16px">
-				<div style="max-height:500px;overflow:scroll">
-					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
-				</div>
-		    </div>
-		</div>
-	</div>
-</div>-->
-
 <div class="container">
 
 	<div class="row">
-		<div class="card">
-		    <div style="padding:16px">
-		    	<h3 ng-show="post.title">{{post.title}}</h3>
-		    	<!--<div style="max-height:500px;overflow:scroll">
-					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
-				</div>-->
-				<a href="member/{{post.user.username}}"><img style="width:75px;height:75px;border-radius:100vh;float:left" src="{{post.user.avatarUrl}}"/></a>
-				<div style="float:left;margin-left:15px">
+		<div class="card" style="background-color:#f9f9f9">
+		    <div style="padding:16px;background-color:white">
+				<div>
+					<div style="float:right;text-align:right">
+						<h5 style="text-align:right" ng-click="toggleToken()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+						<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{post.minusCount+1}}</h5>
+						<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: {{post.plusCount}} | Dislike: {{post.minusCount}}</h5>
+						<h5 style="margin-top:0px;margin-bottom:0px">
+							Tokens | {{0.04+0.00232*24*viewTime}} CRE8
+						</h5>
+						<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>
+					</div>
 
-					<h4 style="margin-top:0px;margin-bottom:0px"><a href="member/{{post.user.username}}">{{post.user.username}}</a></h4>
-					<h5 style="margin-top:0px;margin-bottom:0px"><a ng-repeat="tag in post.tags.split(',')" href="#">{{tag}}, </a></h5>
+					<h3 ng-show="post.title">{{post.title}}</h3>
+		    		<p ng-show="post.tags"><a ng-repeat="tag in post.tags.split(',')" href="#">{{tag}}, </a></p>
 
-					<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{post.minusCount+1}}</h5>
-					<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: {{post.plusCount}} | Dislike: {{post.minusCount}}</h5>
-					<h5 style="margin-top:0px;margin-bottom:0px">
-						Tokens | {{0.04+0.00232*24*viewTime}} CRE8
-					</h5>
-					<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>
+					<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
+					<a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+
 					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
-
 					<!--<h3>{{post.parent}} Parent Information</h3>-->
+
 			        <!--REFACTOR-->
 					<h3>
 						<a href="market/{{post.market}}">{{post.market}}</a>
@@ -58,17 +46,28 @@
 						<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
 					</h3>
 
+					<div style="clear:both"></div>
 				</div>
-				<div style="clear:both"></div>
+				<div style="max-height:500px;overflow:scroll" ng-show="post.type!='video'">
+					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
+				</div>
 		    </div>
 		    <div class="card-footer">
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
 		    </div>
+		    <div ng-show="post.showReply" class="card-footer">
+				<form role="form" ng-submit="createPost(post)">
+					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+				</form>
+			</div>
+			<!--<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>-->
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" ng-show="!toggleTokenVar">
 		<div class="card">
 		    <div style="padding:16px">
 		    	<div class="row">
@@ -127,24 +126,11 @@
 		</div>
 	</div>
 
-	<!--REFACTOR-->
-	<div class="row" ng-show="post.type=='video'">
-		<div class="card" style="background-color:#f9f9f9">
-	        <div style="padding:16px;background-color:white">
-	        	<h3>Comment</h3>
-	        	<form role="form" ng-submit="createPost(post)">
-					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	<div class="row" ng-show="post.type=='video'">
-		<div ng-include="'content/post.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
+	<div class="row">
+		<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
 	</div>
 
-	<div class="row" ng-show="post.type!='video'">
+	<!--<div class="row" ng-show="post.type!='video'">
 
 		<div class="card" style="background-color:#f9f9f9">
 	        <div style="padding:16px;background-color:white">
@@ -177,7 +163,7 @@
 			<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
 		</div>
 
-	</div>
+	</div>-->
 
 </div>
 

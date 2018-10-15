@@ -97,22 +97,22 @@
 		<div style="padding:16px;">		
 			<form role="form" ng-submit="createTransaction(newTransaction)">
 				<div class="form-group col-sm-6">
-					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
+					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control">
 				</div>
 				<div class="form-group col-sm-6">
-					<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
+					<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control">
 				</div>
 				<div class="form-group col-sm-6">
-					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
+					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control">
 				</div>
 				<div class="form-group col-sm-6">
-					<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
+					<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control">
 				</div>
 				<div class="form-group col-sm-12">
-					<input placeholder="Tags" type="text" ng-model="newTransaction.ledger" class="form-control" id="taskTitle">
+					<tags-input ng-model="newTransaction.ledger" placeholder="Tags">
 				</div>
 				<div class="form-group col-sm-12">
-					<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
+					<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
 				</div>
 				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
 			</form>

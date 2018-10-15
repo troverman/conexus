@@ -105,10 +105,10 @@ angular.module( 'conexus.contentList', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(posts) {
+        PostModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(contentList) {
         //PostModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(posts) {
             $rootScope.stateIsLoading = false;
-            Array.prototype.push.apply($scope.posts, posts);
+            Array.prototype.push.apply($scope.contentList, contentList);
             $scope.loadTags()
         });
     };
