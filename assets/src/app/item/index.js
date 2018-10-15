@@ -52,7 +52,10 @@ angular.module( 'conexus.item', [
     //$scope.inputVector = [];
     //$scope.outputVector = $scope.item.identiferSet;
     $scope.inputVector = $scope.item.identiferSet.split(',');
+    console.log($scope.inputVector)
     $scope.outputVector = []; //Shape by %s || sets of discritized tokens
+    //$scope.inputVector.split(',');
+    //$scope.outputVector.split(',');
 
     //99USD=DIMENSIONAL MANIFOLD
 

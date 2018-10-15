@@ -58,6 +58,22 @@
                     </div>-->
                     <div class="">
 
+                        <div ng-repeat="input in inputVector.split(',')">
+                            <div layout="">
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
+                                <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="0" max="100" aria-label="{{input}}"></md-slider>
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+                            </div>
+                        </div>
+
+                        <!--<div layout="">
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
+                            <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="0" max="100" aria-label="{{tag}}"></md-slider>
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+                        </div>-->
+
+
+
                         <h5>InputVector <span ng-repeat="input in inputVector.split(',')"><a href="market/{{input}}">{{input}}</a> | </span>
 
                         <h5>Dimensional Object</h5>

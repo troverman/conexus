@@ -539,25 +539,30 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "					<div class=\"row\">\n" +
     "						<div class=\"col-sm-6\">\n" +
     "							<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x8f50FB12E80E788cC0141b06e84a4a02357431d0</span></h5>\n" +
-    "				       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "				            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
-    "				            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "					                <a href=\"#\">\n" +
-    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "					                </a>\n" +
+    "				       		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "					        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "					        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "					                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "								</div>\n" +
-    "				        	</form>\n" +
+    "					    	</form>\n" +
+    "\n" +
+    "					    	<div ng-show=\"balanceLookupValue !== undefined\">\n" +
+    "					    		<h5><a href=\"market/{{balanceLook}}\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "					    	</div>\n" +
+    "\n" +
     "				        </div>\n" +
     "				        <div class=\"col-sm-6\">\n" +
     "							<h5>Reputation Lookup <span style=\"font-size:11px;color:gray\">0x90C11Cd017582766A89155B7b90f11aF67fD2A2A</span> </h5>\n" +
-    "				       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "				            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
-    "				            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "					                <a href=\"#\">\n" +
-    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "					                </a>\n" +
+    "				       		<form ng-click=\"lookupReputation()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "					        	<input ng-model=\"reputationLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "					        	<div ng-click=\"lookupReputation()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "					                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "								</div>\n" +
-    "				        	</form>\n" +
+    "					    	</form>\n" +
+    "\n" +
+    "					    	<div ng-show=\"reputationLookupValue !== undefined\">\n" +
+    "					    		<h5><a href=\"market/{{reputationLook}}\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
+    "					    	</div>\n" +
     "				        </div>\n" +
     "					</div>\n" +
     "\n" +
@@ -582,6 +587,13 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			</div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "	        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "	    </div>\n" +
+    "   	</div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
@@ -617,9 +629,9 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<h3>Settings</h3>\n" +
-    "				<p>GPS Tracking | <md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"> {{gpsTracking}}</md-switch></p>\n" +
-    "				<p>Notifications | <md-switch ng-model=\"notifications\" aria-label=\"Notifications\"> {{notifications}}</md-switch></p>\n" +
-    "				<p>Browser Mining | <md-switch ng-model=\"browserMining\" aria-label=\"Browser Mining\"> {{browserMining}}</md-switch></p>\n" +
+    "				<p>GPS Tracking <md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>\n" +
+    "				<p>Notifications <md-switch ng-model=\"notifications\" aria-label=\"Notifications\"></md-switch></p>\n" +
+    "				<p>Browser Mining <md-switch ng-model=\"browserMining\" aria-label=\"Browser Mining\"></md-switch></p>\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "    </div>\n" +
@@ -1221,25 +1233,29 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					<div class=\"row\">\n" +
     "						<div class=\"col-sm-6\">\n" +
     "							<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
-    "				       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "				            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
-    "				            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "					                <a href=\"#\">\n" +
-    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "					                </a>\n" +
+    "				       		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "					        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "					        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "					                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "								</div>\n" +
-    "				        	</form>\n" +
+    "					    	</form>\n" +
+    "\n" +
+    "					    	<div ng-show=\"balanceLookupValue !== undefined\">\n" +
+    "					    		<h5><a href=\"market/balanceLook\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "					    	</div>\n" +
     "				        </div>\n" +
     "				        <div class=\"col-sm-6\">\n" +
     "							<h5>Reputation Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
-    "				       		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "				            	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
-    "				            	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "					                <a href=\"#\">\n" +
-    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "					                </a>\n" +
+    "				       		<form ng-click=\"lookupReputation()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "					        	<input ng-model=\"reputationLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "					        	<div ng-click=\"lookupReputation()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "					                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "								</div>\n" +
-    "				        	</form>\n" +
+    "					    	</form>\n" +
+    "\n" +
+    "					    	<div ng-show=\"reputationLookupValue !== undefined\">\n" +
+    "					    		<h5><a href=\"market/reputationLook\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
+    "					    	</div>\n" +
     "				        </div>\n" +
     "					</div>\n" +
     "				</div>\n" +
@@ -1930,6 +1946,22 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <p style=\"color:gray;font-style:italic;font-size:12px\">[Transact] token manifold minting logic <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                    </div>-->\n" +
     "                    <div class=\"\">\n" +
+    "\n" +
+    "                        <div ng-repeat=\"input in inputVector.split(',')\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{input}}\"></md-slider>\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <!--<div layout=\"\">\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "                        </div>-->\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "                        <h5>InputVector <span ng-repeat=\"input in inputVector.split(',')\"><a href=\"market/{{input}}\">{{input}}</a> | </span>\n" +
     "\n" +
@@ -3227,30 +3259,47 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "			<div class=\"row\">\n" +
     "				<div class=\"col-sm-6\">\n" +
     "					<h5>Asset Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
-    "			   		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "			        	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
-    "			        	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "			                <a href=\"#\">\n" +
-    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			                </a>\n" +
+    "			   		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "			        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "			        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "			                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "						</div>\n" +
     "			    	</form>\n" +
+    "\n" +
+    "			    	<div ng-show=\"balanceLookupValue !== undefined\">\n" +
+    "			    		<h5><a href=\"market/balanceLook\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "			    	</div>\n" +
+    "\n" +
+    "\n" +
     "			    </div>\n" +
     "			    <div class=\"col-sm-6\">\n" +
     "					<h5>Project Reputation Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span> </h5>\n" +
-    "			   		<form style=\"display:flex;flex-direction:row;\">\n" +
-    "			        	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Dimension\">\n" +
-    "			        	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "			                <a href=\"#\">\n" +
-    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			                </a>\n" +
+    "			   		<form ng-click=\"lookupReputation()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "			        	<input ng-model=\"reputationLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "			        	<div ng-click=\"lookupReputation()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "			                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "						</div>\n" +
     "			    	</form>\n" +
+    "\n" +
+    "			    	<div ng-show=\"reputationLookupValue !== undefined\">\n" +
+    "			    		<h5><a href=\"market/reputationLook\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
+    "			    	</div>\n" +
+    "\n" +
     "			    </div>\n" +
     "			</div>\n" +
     "	   	</div>\n" +
     "	</div>\n" +
-    "</div>");
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<highchart config=\"chart\"></highchart>\n" +
+    "			<highchart config=\"balanceChart\"></highchart>\n" +
+    "		</div>\n" +
+    "	</div>	\n" +
+    "</div>	\n" +
+    "");
 }]);
 
 angular.module("member/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3652,6 +3701,13 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
 angular.module("member/templates/time.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/time.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div ng-repeat=\"item in work\">\n" +

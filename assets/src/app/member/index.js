@@ -361,6 +361,115 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Assets | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
+    console.log($scope.member);
+
+    $scope.balance = $scope.member.balance;
+    $scope.reputation = $scope.member.reputation;
+
+    var random1 = Math.floor(255*Math.random());
+    var random2 = Math.floor(255*Math.random());
+    var random3 = Math.floor(255*Math.random());
+
+    $scope.chart = {
+        chart: {polar: true},
+        series: [{
+            id: 'reputation',
+            type: 'area',
+            name: 'Reputation',
+            pointPlacement: 'on',
+            data: [],
+            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: [],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'middle',
+            layout: 'vertical'
+        },
+        tooltip: {
+            shared: true,
+        },
+        credits:{enabled:false},
+    };
+
+    //FILTERING  | LAYER IE PROJECT 
+    for (x in Object.keys($scope.reputation)){
+        if ($scope.reputation[Object.keys($scope.reputation)[x]] > 50000){
+            $scope.chart.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+            $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+        }
+    }
+
+    $scope.balanceChart = {
+        chart: {polar: true},
+        series: [{
+            id: 'balance',
+            type: 'area',
+            name: 'Balance',
+            pointPlacement: 'on',
+            data: [],
+            color: 'rgba('+random2+','+random1+','+random3+',0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: [],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'middle',
+            layout: 'vertical'
+        },
+        tooltip: {
+            shared: true,
+        },
+        credits:{enabled:false},
+    };
+    console.log($scope.balance)
+    for (x in Object.keys($scope.balance)){
+        //if ($scope.balance[Object.keys($scope.balance)[x]] < 500){
+            $scope.balanceChart.xAxis.categories.push(Object.keys($scope.balance)[x]);
+            $scope.balanceChart.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
+        //}
+    }
+
+    //TODO SERVER | CHAIN
+    $scope.lookupBalance = function(){
+        //$scope.balanceLook = $scope.balanceLook.toLowerCase();
+        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
+        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+    };
+
+    $scope.lookupReputation = function(){
+        //$scope.reputationLook = $scope.reputationLook.toLowerCase();
+        if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
+        if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
+    };
+
 }])
 
 .controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', 'videos', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService, videos) {
@@ -866,13 +975,20 @@ angular.module( 'conexus.member', [
 .controller( 'MemberTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', function MemberTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work) {
 
     //based on tokens 
-    //location mapping overtime
+    //location mapping over time
     //time mapping via actions ?  
     //CAL SCHED .. PROMISE
 
     //TODO VIEW --> CONSUMPTION
     //VIZ ON A DAY TIME
     //VIZ ON MONTH TIME
+
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
 
     $scope.work = work;
     $scope.work = work.map(function(obj){

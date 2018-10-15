@@ -34,6 +34,7 @@ angular.module( 'conexus.projects', [
     };
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
+    
     //TODO: BETTER | BETTER QUERIES
     for (x in projects){
         if (projects[x].location){

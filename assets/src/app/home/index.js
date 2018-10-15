@@ -129,6 +129,8 @@ angular.module( 'conexus.home', [
 
 		UserModel.getByUsername($scope.currentUser.username).then(function(member){
 			$scope.member = member;
+            $scope.balance = member.balance;
+            $scope.reputation = member.reputation;
 		});
 
         //IF VALUE MAP | REFACTOR 
@@ -200,6 +202,19 @@ angular.module( 'conexus.home', [
             PostModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
             });
+        };
+
+        //TODO SERVER | CHAIN
+        $scope.lookupBalance = function(){
+            //$scope.balanceLook = $scope.balanceLook.toLowerCase();
+            if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
+            if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+        };
+
+        $scope.lookupReputation = function(){
+            //$scope.reputationLook = $scope.reputationLook.toLowerCase();
+            if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
+            if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
         };
 
 	};

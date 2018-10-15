@@ -18,7 +18,26 @@ angular.module( 'conexus.account', [
 	$scope.currentUser = config.currentUser;
     $scope.editAccountToggleVar = false;
     $scope.newAccountInformation = $scope.currentUser;
+
+    $scope.gpsTracking = true; //LOCATION MAPPING
+    $scope.notifications = true;
+    $scope.browserMining = true;
+
 	if(!$scope.currentUser){$location.path('/')}
+
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+
+    //TODO: BETTER
+    UserModel.getByUsername($scope.currentUser.username).then(function(member){
+        $scope.newAccountInformation = member
+        $scope.member = member;
+        $scope.balance = member.balance;
+        $scope.reputation = member.reputation;
+    });
 
     $scope.editAccount = function () {
         //UserModel.update($scope.newAccountInformation).then(function(){
@@ -28,6 +47,19 @@ angular.module( 'conexus.account', [
 
     $scope.editAccountToggle = function () {
         $scope.editAccountToggleVar = $scope.editAccountToggleVar ? false : true;
+    };
+
+     //TODO SERVER | CHAIN
+    $scope.lookupBalance = function(){
+        //$scope.balanceLook = $scope.balanceLook.toLowerCase();
+        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
+        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+    };
+
+    $scope.lookupReputation = function(){
+        //$scope.reputationLook = $scope.reputationLook.toLowerCase();
+        if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
+        if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
     };
 		
 	$scope.uploadAvatar = function(file){
