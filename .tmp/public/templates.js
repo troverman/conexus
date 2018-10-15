@@ -740,7 +740,7 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "					</div>\n" +
     "\n" +
     "					<h3 ng-show=\"post.title\">{{post.title}}</h3>\n" +
-    "		    		<p ng-show=\"post.tags\"><a ng-repeat=\"tag in post.tags.split(',')\" href=\"#\">{{tag}}, </a></p>\n" +
+    "		    		<p ng-show=\"post.tags\"><a style=\"color:gray;\" ng-repeat=\"tag in post.tags.split(',')\" href=\"content\">{{tag}} </a></p>\n" +
     "\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{post.user.avatarUrl}}\" src=\"{{post.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					<a style=\"display:inline\" href=\"/member/{{post.user.username}}\"><span style=\"font-weight:800\">{{post.user.username}}</span></a>\n" +
@@ -990,13 +990,15 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                <div class=\"card\">\n" +
     "                    <div style=\"padding:16px\">\n" +
     "\n" +
-    "                        <div style=\"float:right;\"><a style=\"color:gray;\" href=\"#\"><i class=\"fa fa-ellipsis-v\"></i></a></div>\n" +
+    "                        <div style=\"float:right;padding-left:5px;\"><a style=\"color:gray;\" href=\"#\"><i class=\"fa fa-ellipsis-v\"></i></a></div>\n" +
+    "                        <p style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "\n" +
     "                        <p><a style=\"font-weight:700\"  href=\"member/{{item.user.username}}\">\n" +
     "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                            {{item.user.username}}\n" +
     "                        </a></p>\n" +
     "                        <span ng-show=\"item.title\">  <a href=\"content/{{item.id}}\">{{item.title}}</a></span>\n" +
-    "                        <p style=\"margin-top:0px;margin-bottom:0px;\"><a style=\"color:gray;\" ng-repeat=\"tag in item.tags\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}}, </a></p>\n" +
+    "                        <p style=\"margin-top:0px;margin-bottom:0px;\"><a style=\"color:gray;\" ng-repeat=\"tag in item.tags\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}} </a></p>\n" +
     "\n" +
     "                        <div style=\"max-height:500px;overflow:scroll\">\n" +
     "                            <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
@@ -1035,10 +1037,6 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
 
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("discover/index.tpl.html",
-    "<style type=\"text/css\">\n" +
-    "    .angular-google-map-container { height: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }\n" +
-    "</style>\n" +
-    "\n" +
     "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
@@ -1081,21 +1079,22 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "	<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "	    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "	        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "	            <div>\n" +
-    "	                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
-    "	            </div>\n" +
-    "	        </ui-gmap-window>\n" +
-    "	    </ui-gmap-marker>\n" +
-    "	</ui-gmap-google-map>\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "	<br>\n" +
+    "	<style type=\"text/css\">.angular-google-map-container{height:300px;}</style>\n" +
+    "	<div class=\"card\">\n" +
+    "		<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "		    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "		        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "		            <div>\n" +
+    "		                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "		            </div>\n" +
+    "		        </ui-gmap-window>\n" +
+    "		    </ui-gmap-marker>\n" +
+    "		</ui-gmap-google-map>\n" +
+    "	</div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
     "		<div class=\"member-card\" style=\"margin-bottom:10px\">\n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
@@ -1201,8 +1200,8 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"col-md-4 col-sm-12 col-xs-12\" style=\"\">\n" +
-    "		    <div class=\"member-card\" style=\"margin-left:-5px;margin-right:-10px\">\n" +
+    "		<div class=\"col-md-3 col-sm-12 col-xs-12\" style=\"\">\n" +
+    "		    <div class=\"member-card\" style=\"margin-left:-5px;margin-right:-10px;margin-bottom:0px\">\n" +
     "			    <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
     "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "			    </div>\n" +
@@ -1213,7 +1212,7 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			    </div> \n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div class=\"col-md-8 col-sm-12 col-xs-12\" style=\"padding-left:0px;;margin-right:-5px\">\n" +
+    "		<div class=\"col-md-6 col-sm-12 col-xs-12\" style=\"padding-left:0px;margin-right:-5px\">\n" +
     "			<div class=\"card\" style=\"min-width:100%;margin-top:0px\">\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{member.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\"></a></span>\n" +
@@ -1245,6 +1244,18 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "					</div>\n" +
     "				</div>\n" +
     "		    </div>\n" +
+    "		</div>\n" +
+    "		<div class=\"col-md-3 col-sm-12 col-xs-12\" style=\"margin-bottom:0px\">\n" +
+    "		    <div class=\"member-card\" style=\"margin-left:-5px;margin-right:-10px\">\n" +
+    "			    <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
+    "			        <a href=\"member/{{currentUser.username}}\"><img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "			    </div>\n" +
+    "			    <div class=\"member-card-info\">\n" +
+    "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.status}} Online</p>\n" +
+    "			        <p style=\"color:gray\">{{currentUser.totalWork}}</p>\n" +
+    "			    </div> \n" +
+    "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1378,6 +1389,13 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "	        </form>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "	        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "	    </div>\n" +
+    "   	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div ng-repeat=\"item in activity\"> <!--ng-click=\"\"-->\n" +
@@ -1633,7 +1651,23 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "						<li><a href=\"/market\">Orders</a></li>\n" +
     "						<li><a href=\"/projects\">Projects</a></li>\n" +
     "						<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "						<li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "\n" +
+    "						<li ng-click=\"expandSort()\" style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "						<!--<li style=\"float:right\">\n" +
+    "							<div class=\"dropdown sort-dropdown noselect\">\n" +
+    "			                    <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "			                        <h4 style=\"\" class=\"noselect\">Sort By Recent <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "			                    </a>\n" +
+    "			                    <ul class=\"dropdown-menu\">\n" +
+    "			                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "			                        <hr class=\"sort-hr\">\n" +
+    "			                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
+    "			                        <hr class=\"sort-hr\">\n" +
+    "			                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "			                    </ul>\n" +
+    "			                </div>\n" +
+    "			            </li>-->\n" +
+    "\n" +
     "					</ul>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -1649,6 +1683,13 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "		        </form>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "		    <div class=\"card\">\n" +
+    "		        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "		        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "		    </div>\n" +
+    "	   	</div>\n" +
     "\n" +
     "	    <div class=\"row\">\n" +
     "			<div ng-repeat=\"item in activity\"><!--ng-click=\"\"-->\n" +
@@ -1762,6 +1803,11 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
     "			    </div>\n" +
     "		    </div>\n" +
     "    	</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div ng-show=\"false\" class=\"spacing-10\"></div>\n" +
+    "	<div ng-show=\"false\" class=\"container\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "		<div class=\"row\"><div class=\"col-sm-12\"><button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button></div></div>\n" +
     "	</div>\n" +
     "	\n" +
     "	<div class=\"spacing-50\"></div>\n" +
@@ -4946,6 +4992,19 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "            <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                    <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "                </ui-gmap-window>\n" +
+    "            </ui-gmap-marker>\n" +
+    "        </ui-gmap-google-map>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
     "    <div ng-repeat=\"project in projects\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -5795,105 +5854,129 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
+    "	<!--MODEL FILTERS-->\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-10\"></div>\n" +
+    "		<div class=\"spacing-10\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "				<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
+    "				<li><a href=\"/content\">Content</a></li>\n" +
+    "				<li><a href=\"/marketplace\">Items</a></li>\n" +
+    "				<li><a href=\"/market\">Orders</a></li>\n" +
+    "				<li><a href=\"/projects\">Projects</a></li>\n" +
+    "				<li><a href=\"/tasks\">Tasks</a></li>\n" +
+    "				<li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "			</ul>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<!--SEARCH FILTERS-->\n" +
+    "	<div class=\"container\">\n" +
     "		<div class=\"row\">\n" +
     "		    <div class=\"card\">\n" +
-    "		        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"{{searchQuery}}\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "		            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "		                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "		        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"{{searchQuery}}\" ng-model=\"searchQuery\">\n" +
+    "		            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "		                <a href=\"#\" role=\"button\">\n" +
     "		                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "		                </a>\n" +
     "		            </div>\n" +
     "		        </form>\n" +
     "		    </div>\n" +
     "		</div>\n" +
-    "		<div class=\"spacing-10\"></div>\n" +
     "	</div>\n" +
     "\n" +
+    "	<!--LOCATION FILTERS-->\n" +
     "	<div class=\"container\">\n" +
-    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
-    "			<li><a href=\"/discover\">Content</a></li>\n" +
-    "			<li><a href=\"/marketplace\">Items</a></li>\n" +
-    "			<li><a href=\"/market\">Orders</a></li>\n" +
-    "			<li><a href=\"/projects\">Projects</a></li>\n" +
-    "			<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "			<li style=\"float:right\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "		</ul>\n" +
+    "		<div class=\"row\">\n" +
+    "		    <div class=\"card\">\n" +
+    "		        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "		        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "		    </div>\n" +
+    "	   	</div>\n" +
     "	</div>\n" +
     "\n" +
+    "	<!--TAG FILTERS-->\n" +
+    "	<!--{{tags}}-->\n" +
+    "	\n" +
+    "	<!--TOKEN FILTERS-->\n" +
+    "	<!--?-->\n" +
+    "	<!--Protocol | Context-->\n" +
+    "	<!--Market Discoverability-->\n" +
+    "	<!--Orders-->\n" +
+    "\n" +
+    "	<!--RESULTS-->\n" +
+    "	<!--SORT-->\n" +
     "	<div class=\"container\">\n" +
+    "		<div class=\"row\">\n" +
+    "			<div ng-repeat=\"item in searchResults\">\n" +
     "\n" +
-    "		<div ng-repeat=\"item in searchResults\">\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
+    "			        <div style=\"padding:16px;\">\n" +
+    "			            <div>\n" +
+    "			                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"images/avatar.png\">\n" +
+    "			                <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
+    "			                <div style=\"display:inline;\" ng-show=\"item.profile != item.user.id && item.profile != member.id\">\n" +
+    "			                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "			                    <a ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"market/{{item.market}}\">market {{item.market}}</a>\n" +
+    "			                    <a ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"order/{{item.order}}\">order {{item.order}}</a>\n" +
+    "			                    <a ng-show=\"item.post\" style=\"display:inline;font-weight:600\" href=\"content/{{item.post}}\">post {{item.post}}</a>\n" +
+    "			                    <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"member/{{item.profile}}\">profile {{item.profile}}</a>\n" +
+    "			                    <a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
+    "			                    <a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task}}\">task {{item.task}}</a>\n" +
+    "			                    <a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"work/{{item.work}}\">work {{item.work}}</a>\n" +
+    "			                </div>\n" +
+    "			                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "			            </div>\n" +
+    "			            <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
+    "			        </div>\n" +
+    "			        <div class=\"card-footer\">\n" +
+    "			            <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "			            <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "			            <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "			            <a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "			        </div>\n" +
+    "			        <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
+    "			            <form role=\"form\" ng-submit=\"createPost(item)\">\n" +
+    "							<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "			                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "			            </form>\n" +
+    "			        </div>\n" +
+    "		    	</div>\n" +
     "\n" +
-    "			<div class=\"card\" ng-show=\"item.model=='CONTENT'\">\n" +
-    "		        <div style=\"padding:16px;\">\n" +
-    "		            <div>\n" +
-    "		                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"images/avatar.png\">\n" +
-    "		                <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
-    "		                <div style=\"display:inline;\" ng-show=\"item.profile != item.user.id && item.profile != member.id\">\n" +
-    "		                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "		                    <a ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"market/{{item.market}}\">market {{item.market}}</a>\n" +
-    "		                    <a ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"order/{{item.order}}\">order {{item.order}}</a>\n" +
-    "		                    <a ng-show=\"item.post\" style=\"display:inline;font-weight:600\" href=\"content/{{item.post}}\">post {{item.post}}</a>\n" +
-    "		                    <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"member/{{item.profile}}\">profile {{item.profile}}</a>\n" +
-    "		                    <a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
-    "		                    <a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task}}\">task {{item.task}}</a>\n" +
-    "		                    <a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"work/{{item.work}}\">work {{item.work}}</a>\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='MEMBER'\"></div>\n" +
+    "\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='ORDER'\"></div>\n" +
+    "\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='PROJECT'\">\n" +
+    "		            <div style=\"padding:16px;\">\n" +
+    "		                <div class=\"row\">\n" +
+    "		                    <div class=\"col-sm-1 col-xs-2\">\n" +
+    "	                        	<a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;max-width:1000%\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "		                    </div>\n" +
+    "		                    <div class=\"col-sm-10 col-xs-10\">\n" +
+    "		                        <h3 style=\"margin-top:0px\">\n" +
+    "		                            <a href=\"/project/{{item.urlTitle}}\">\n" +
+    "		                                {{item.title}}\n" +
+    "		                            </a>\n" +
+    "		                        </h3>\n" +
+    "	                        <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
+    "		                    </div>\n" +
+    "		                    <div class=\"col-sm-1\" style=\"text-align:right\">\n" +
+    "		                        <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
+    "		                    </div>\n" +
     "		                </div>\n" +
-    "		                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "		            </div>\n" +
-    "		            <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
-    "		        </div>\n" +
-    "		        <div class=\"card-footer\">\n" +
-    "		            <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "		            <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "		            <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "		            <a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "		        </div>\n" +
-    "		        <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "		            <form role=\"form\" ng-submit=\"createPost(item)\">\n" +
-    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "		                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "		            </form>\n" +
-    "		        </div>\n" +
-    "	    	</div>\n" +
+    "				</div>\n" +
     "\n" +
-    "			<div class=\"card\" ng-show=\"item.model=='MEMBER'\"></div>\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='TASK'\"></div>\n" +
     "\n" +
-    "			<div class=\"card\" ng-show=\"item.model=='ORDER'\"></div>\n" +
-    "\n" +
-    "			<div class=\"card\" ng-show=\"item.model=='PROJECT'\">\n" +
-    "	            <div style=\"padding:16px;\">\n" +
-    "	                <div class=\"row\">\n" +
-    "	                    <div class=\"col-sm-1 col-xs-2\">\n" +
-    "	                        <a href=\"/project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;\" src=\"{{item.avatarUrl}}\"></a>\n" +
-    "	                    </div>\n" +
-    "	                    <div class=\"col-sm-9 col-xs-10\">\n" +
-    "	                        <h3 style=\"margin-top:0px\">\n" +
-    "	                            <a href=\"/project/{{item.urlTitle}}\">\n" +
-    "	                                {{item.title}}\n" +
-    "	                            </a>\n" +
-    "	                        </h3>\n" +
-    "                        <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
-    "	                    </div>\n" +
-    "	                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
-    "	                        <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
-    "	                    </div>\n" +
-    "	                </div>\n" +
-    "	            </div>\n" +
+    "				<div class=\"card\" ng-show=\"item.model=='WORK'\"></div>\n" +
     "			</div>\n" +
-    "\n" +
-    "			<div class=\"card\" ng-show=\"item.model=='TASK'\"></div>\n" +
-    "\n" +
-    "			<div class=\"card\" ng-show=\"item.model=='WORK'\"></div>\n" +
-    "\n" +
     "		</div>\n" +
-    "\n" +
-    "\n" +
     "	</div>\n" +
+    "\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>");
 }]);
@@ -5909,7 +5992,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"col-md-8\" style=\"padding:16px\">\n" +
     "                <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
-    "                    <p><a ng-repeat=\"tag in task.tags.split(',') track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                    <p><a ng-repeat=\"tag in task.tags.split(',') track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "                </div>\n" +
     "                <p style=\"color:gray\" am-time-ago=\"task.createdAt\"></p>\n" +
@@ -6182,6 +6265,11 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "		            </div>\n" +
     "		        </form>\n" +
     "	        </div>\n" +
+    "\n" +
+    "	        <div class=\"card\">\n" +
+    "	        	<style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "				<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "			</div>\n" +
     "\n" +
     "			<div ng-repeat=\"task in tasks\">\n" +
     "				<div class=\"card\">\n" +

@@ -41,11 +41,26 @@ angular.module( 'conexus.search', [
     });
 }])
 
-.controller( 'SearchController', ['$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
+.controller( 'SearchController', ['$rootScope', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $rootScope, $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
     $scope.searchResults = searchResults;
     $scope.searchQuery = $stateParams.searchQuery;
 
+    $scope.tags = [];
+    $scope.searchResults.map(function(obj){
+        if (obj.tags){
+            $scope.tags.concat(obj.tags.split(','));
+        }
+    });
+    console.log($scope.tags)
+
     titleService.setTitle($scope.searchQuery + ' | CRE8.XYZ');
+
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
 
     //YIKES
     $scope.renderContent = function(content){
@@ -60,8 +75,15 @@ angular.module( 'conexus.search', [
     };
 
     $scope.search = function(){
-        SearchModel.search(searchValue).then(function(models){
+        $rootScope.stateIsLoading = true;
+        SearchModel.search($scope.searchQuery).then(function(models){
+            $rootScope.stateIsLoading = false;
             $scope.searchResults = models;
+            $scope.searchResults.map(function(obj){
+                if (obj.tags){
+                    $scope.tags.concat(obj.tags.split(','));
+                }
+            });
         });
     };
    

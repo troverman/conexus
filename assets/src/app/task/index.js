@@ -35,7 +35,7 @@ angular.module( 'conexus.task', [
     $scope.reputationMultiplier = 1;
     $scope.streaming = false;
     $scope.streamingId = null;
-    $scope.streamUrl = 'https://www.cre8bid.io/v/597c55e56833048165c6720c';
+    $scope.streamUrl = '';
     $scope.task = task;
     $scope.task.verificationScore = 0;
     $scope.taskTime = 0;

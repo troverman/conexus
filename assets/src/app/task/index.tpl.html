@@ -7,7 +7,7 @@
             <div class="col-md-8" style="padding:16px">
                 <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
                 <div style="font-style:italic;color:gray">
-                    <p><a ng-repeat="tag in task.tags.split(',') track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                    <p><a ng-repeat="tag in task.tags.split(',') track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
                 </div>
                 <p style="color:gray" am-time-ago="task.createdAt"></p>

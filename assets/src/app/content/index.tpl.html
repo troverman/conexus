@@ -25,7 +25,7 @@
 					</div>
 
 					<h3 ng-show="post.title">{{post.title}}</h3>
-		    		<p ng-show="post.tags"><a ng-repeat="tag in post.tags.split(',')" href="#">{{tag}}, </a></p>
+		    		<p ng-show="post.tags"><a style="color:gray;" ng-repeat="tag in post.tags.split(',')" href="content">{{tag}} </a></p>
 
 					<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
 					<a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>

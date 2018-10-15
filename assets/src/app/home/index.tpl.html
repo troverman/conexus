@@ -9,8 +9,8 @@
 	<div class="spacing-10"></div>
 
 	<div class="row">
-		<div class="col-md-4 col-sm-12 col-xs-12" style="">
-		    <div class="member-card" style="margin-left:-5px;margin-right:-10px">
+		<div class="col-md-3 col-sm-12 col-xs-12" style="">
+		    <div class="member-card" style="margin-left:-5px;margin-right:-10px;margin-bottom:0px">
 			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
 			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
 			    </div>
@@ -21,7 +21,7 @@
 			    </div> 
 			</div>
 		</div>
-		<div class="col-md-8 col-sm-12 col-xs-12" style="padding-left:0px;;margin-right:-5px">
+		<div class="col-md-6 col-sm-12 col-xs-12" style="padding-left:0px;margin-right:-5px">
 			<div class="card" style="min-width:100%;margin-top:0px">
 				<div style="padding:16px;">
 					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{member.id}}</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}"></a></span>
@@ -53,6 +53,18 @@
 					</div>
 				</div>
 		    </div>
+		</div>
+		<div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom:0px">
+		    <div class="member-card" style="margin-left:-5px;margin-right:-10px">
+			    <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
+			        <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
+			    </div>
+			    <div class="member-card-info">
+			        <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
+			        <p style="color:gray">{{currentUser.status}} Online</p>
+			        <p style="color:gray">{{currentUser.totalWork}}</p>
+			    </div> 
+			</div>
 		</div>
 	</div>
 
@@ -186,6 +198,13 @@
 	        </form>
 		</div>
 	</div>
+
+	<div class="row">
+	    <div class="card">
+	        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+	        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+	    </div>
+   	</div>
 
 	<div class="row">
 		<div ng-repeat="item in activity"> <!--ng-click=""-->
@@ -441,7 +460,23 @@
 						<li><a href="/market">Orders</a></li>
 						<li><a href="/projects">Projects</a></li>
 						<li><a href="/tasks">Tasks</a></li>
-						<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+
+						<li ng-click="expandSort()" style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+						<!--<li style="float:right">
+							<div class="dropdown sort-dropdown noselect">
+			                    <a href="#" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			                        <h4 style="" class="noselect">Sort By Recent <i class="fa fa-angle-down"></i></h4>
+			                    </a>
+			                    <ul class="dropdown-menu">
+			                        <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>Trending</h5></a></li>
+			                        <hr class="sort-hr">
+			                        <li><a href="#" class="sort-a" ng-click="selectSort('memberCount DESC')"><h5>Member Count</h5></a></li>
+			                        <hr class="sort-hr">
+			                        <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Created</h5></a></li>
+			                    </ul>
+			                </div>
+			            </li>-->
+
 					</ul>
 				</div>
 			</div>
@@ -457,6 +492,13 @@
 		        </form>
 			</div>
 		</div>
+
+		<div class="row">
+		    <div class="card">
+		        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+		        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+		    </div>
+	   	</div>
 
 	    <div class="row">
 			<div ng-repeat="item in activity"><!--ng-click=""-->
@@ -570,6 +612,11 @@
 			    </div>
 		    </div>
     	</div>
+	</div>
+
+	<div ng-show="false" class="spacing-10"></div>
+	<div ng-show="false" class="container" style="text-align:center" ng-click="loadMore()">
+		<div class="row"><div class="col-sm-12"><button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button></div></div>
 	</div>
 	
 	<div class="spacing-50"></div>

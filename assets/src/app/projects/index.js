@@ -28,6 +28,26 @@ angular.module( 'conexus.projects', [
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','memberCount DESC': 'Member Count'}
     $scope.projects = projects;
 
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
+    //TODO: BETTER | BETTER QUERIES
+    for (x in projects){
+        if (projects[x].location){
+            $scope.markers.push({
+                id:projects[x].id,
+                content:projects[x].title,
+                coords:{
+                    latitude:projects[x].location.lat,
+                    longitude:projects[x].location.lng
+                }
+            });
+        }
+    }
+
     $scope.createProject = function(newProject) {
         $scope.newProject.user = $scope.currentUser.id;
         ProjectModel.create($scope.newProject).then(function(model) {

@@ -31,6 +31,13 @@ angular.module( 'conexus.tasks', [
         return obj;
     });
 
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
+
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;

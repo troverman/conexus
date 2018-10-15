@@ -61,6 +61,19 @@
 </div>
 
 <div class="container">
+    <div class="card">
+        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                    <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+                </ui-gmap-window>
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+</div>
+
+<div class="container">
     <div ng-repeat="project in projects">
         <div class="card">
             <div style="padding:16px;">
