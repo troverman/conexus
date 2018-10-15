@@ -2,21 +2,41 @@
 <button class="btn btn-default log-btn" ng-click="newMotionToggle()">+ Motion</button>
 <div class="spacing-10"></div>
 
-<div class="card" ng-show="newMotionToggleVar">
+<!--<div class="card" ng-show="newMotionToggleVar">
     <div style="padding:16px;">
 		<form role="form" ng-submit="createTask(newTask)">
 			<div class="form-group">
 				<input placeholder="Motion Title" type="text" ng-model="newBill.title" class="form-control" id="taskTitle">
 			</div>
 			<div class="form-group">
-				<input placeholder="Motion Content" type="text" ng-model="newTask.content" class="form-control" id="taskTitle">
+				<input placeholder="Motion Content" type="text" ng-model="newBill.content" class="form-control" id="taskTitle">
 			</div>
 			<div class="form-group">
-				<input placeholder="Motion Task Basket" type="text" ng-model="newTask.basket" class="form-control" id="taskBasket">
+				<input placeholder="Motion Task Basket" type="text" ng-model="newBill.basket" class="form-control" id="taskBasket">
 			</div>
 			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
 		</form>
 	</div>
+</div>-->
+<div class="row" ng-show="newMotionToggleVar">
+    <div class="card">
+        <div style="padding:16px;">
+            <form role="form" ng-submit="createMotion(newTask)">
+                <div class="form-group">
+                    <input placeholder="Title" type="text" ng-model="newMotion.title" class="form-control" id="taskTitle">
+                </div>
+                <div class="form-group">
+                    <input placeholder="Tags" type="text" ng-model="newMotion.tags" class="form-control" id="taskTitle">
+                </div>
+                <div class="form-group">
+                    <!--//TYPE | MOTION TO JOIN, MOTION TO CREATE TRANSACTION, MOTION TO CREATE POSITION, MOTION TO CREATE CONTENT-->
+                    <input placeholder="Motion Type" type="text" ng-model="newMotion.motionType" class="form-control" id="taskTitle">
+                </div>
+                <text-angular ng-model="newMotion.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                <button type="submit" class="btn btn-default log-btn" ng-disabled="!newMotion.title">create</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -31,18 +51,18 @@
 <!--history of motions.. aka charter-->
 
 <div class="row">
-    <div ng-repeat="item in bills">
+    <div ng-repeat="item in motions">
         <div class="card">
             <div style="padding:16px;">
-             	<h4><a href="https://www.voetr.com/bills">{{item.title}}</a></h4>
-             	<p>admin, engineering</p>
-             	<p><span am-time-ago="bill.createdAt"></span>30 seconds ago</p>
+             	<h4><a href="content/{{item.id}}">{{item.title}}</a></h4>
+                <div ng-bind-html="renderContent(item.content)"></div>
+             	<p><span am-time-ago="item.createdAt"></span></p>
             </div>
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
                 <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                 <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="padding:0px" class="pull-right" href="https://www.voetr.com/bills"><i class="fa fa-link grey"></i></a>
+                <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                 <form role="form" ng-submit="createPost(item)">

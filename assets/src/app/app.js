@@ -13,6 +13,7 @@ angular.module( 'conexus', [
     'ngFileUpload',
     'ngMaterial',
     'highcharts-ng',
+    'ngTagsInput',
     'textAngular',
     'conexus.about',
     'conexus.account',
@@ -34,13 +35,15 @@ angular.module( 'conexus', [
     'conexus.order',
     'conexus.project',
     'conexus.projects',
+    'conexus.reaction',
     'conexus.register',
     'conexus.search',
     'conexus.task',
     'conexus.tasks',
     'conexus.transaction',
     'conexus.transparency',
-    'conexus.work'
+    'conexus.work',
+    'conexus.view'
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')

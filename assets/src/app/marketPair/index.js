@@ -28,7 +28,8 @@ angular.module( 'conexus.marketPair', [
 
     $scope.market = $stateParams.id;
     $scope.market1 = $stateParams.id1;
-
+    $scope.newContent = {};
+    
     $scope.pluralistic = false;
     if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){
         $scope.pluralistic = true;
@@ -98,38 +99,7 @@ angular.module( 'conexus.marketPair', [
         chart: {
             zoomType: 'x',
         },
-        series: [{
-            id: 'ExchangePrice',
-            type: 'spline',
-            name: 'Exchange Price ' + $stateParams.id + ' | ' + $stateParams.id1,
-            data: []
-        },
-        {
-            id: 'ExchangeVolume',
-            type: 'column',
-            name: 'Volume ' + $stateParams.id + ' | ' + $stateParams.id1,
-            data: []
-        }, {
-            type: 'sma',
-            id: 'sma1',
-            linkedTo: 'ExchangePrice',
-            params: {
-                period: 24
-            },
-            showInLegend: true,
-        },{
-            type: 'sma',
-            id: 'sma2',
-            linkedTo: 'ExchangePrice',
-            params: {
-                period: 24*7
-            },
-            showInLegend: true,
-        }/*,{
-            type: 'bb',
-            linkedTo: 'ExchangePrice',
-            showInLegend: true,
-        }*/],
+        series: [],
         title: {
             text: ''
         },
@@ -207,7 +177,7 @@ angular.module( 'conexus.marketPair', [
     //POPULATE MULTID SPIDER IF PAIRS ARE SETS
     $scope.markets = $scope.market.split(',');
     $scope.markets1 = $scope.market1.split(',');
-    console.log($scope.markets,$scope.markets1)
+    console.log($scope.markets,$scope.markets1);
     if ($scope.markets.length>1){
         //need real market orders
         for (x in $scope.markets){
@@ -238,7 +208,35 @@ angular.module( 'conexus.marketPair', [
     }
 
     //POPULATE PRICE CHART
-    if (true){
+    if (!$scope.pluralistic){
+        $scope.chart.series = [{
+            id: 'ExchangePrice',
+            type: 'spline',
+            name: 'Exchange Price ' + $stateParams.id + ' | ' + $stateParams.id1,
+            data: []
+        },
+        {
+            id: 'ExchangeVolume',
+            type: 'column',
+            name: 'Volume ' + $stateParams.id + ' | ' + $stateParams.id1,
+            data: []
+        }, {
+            type: 'sma',
+            id: 'sma1',
+            linkedTo: 'ExchangePrice',
+            params: {
+                period: 24
+            },
+            showInLegend: true,
+        },{
+            type: 'sma',
+            id: 'sma2',
+            linkedTo: 'ExchangePrice',
+            params: {
+                period: 24*7
+            },
+            showInLegend: true,
+        }];
         for(var i=0;i<1000;i++){
             var date = new Date();
             date.setTime(date.getTime() - (60*60*1000*(1000-i)));
@@ -261,6 +259,40 @@ angular.module( 'conexus.marketPair', [
         }
     }
 
+    if ($scope.pluralistic){
+        for (x in $scope.markets1){//POWER SET NOT JUST INDIV MARKETS
+            //for (y in $scope.markets){}
+            $scope.chart.series.push({
+                id: 'ExchangePrice'+x,
+                type: 'spline',
+                name: 'Exchange Price ' + $stateParams.id + ' | ' + $scope.markets1[x],
+                data: []
+            })
+            for(var i=0;i<1000;i++){
+                var date = new Date();
+                date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+                if (i == 0){
+                    $scope.chart.series[x].data.push([date.getTime(),Math.floor(150*Math.random())])
+                }
+                else{
+                    var random = 1.21*Math.random();
+                    var random1 = Math.random();
+                    if (random > random1){
+                        $scope.chart.series[x].data.push([date.getTime(),$scope.chart.series[x].data[i-1][1]+3*Math.random()])
+                    }
+                    else{
+                        $scope.chart.series[x].data.push([date.getTime(),$scope.chart.series[x].data[i-1][1]-3*Math.random()])
+                    }
+                }
+            }
+
+        }
+        
+    }
+    if ($scope.market.split(',').length > 1 && $scope.market1.split(',').length > 1){
+        //COORDINATES
+
+    }
 
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
@@ -357,13 +389,17 @@ angular.module( 'conexus.marketPair', [
 
     console.log($scope.bidAskChart.series[0].data, $scope.bidAskChart.series[1].data);
 
-    $scope.createContent = function(post) {
+    $scope.createContent = function(content) {
         if($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.marketPair = 'CRE8/USD'; // || USD/CRE8
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+
+            //TODO
+            $scope.newContent.post = content.id;
+
+
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.marketPair = 'CRE8/USD'; // || USD/CRE8
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
             });
         }
         else{$location.path('/login')}

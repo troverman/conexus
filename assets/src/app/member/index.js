@@ -653,11 +653,26 @@ angular.module( 'conexus.member', [
     $scope.chart.series[2].data = $scope.sumTo;
     //$scope.chart.series[3].data = $scope.sumFlow;
 
-
-
     $scope.selectExpense = function(){
-        //ANIMATE
-        //ADD IN TAG BASED GRAPHS WRT EXPENSE
+        //TODO: TAGS
+        $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
+            var returnArray = [];
+            if(obj.ledger){
+                for (x in obj.ledger){
+                    returnArray.push({tag:obj.ledger[x].trim().toLowerCase(),amount:obj.amount})
+                }
+            }
+            return returnArray;
+        });
+        $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+        $scope.sortedTransactionTags = [];
+        for (x in $scope.transactionTags){
+            var amount = amountInArray($scope.transactionTags, $scope.transactionTags[x]);
+            if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x].tag) == -1){
+                $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x].tag})
+            }
+        }
+        $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
         $scope.pie.series[0].data = [];
         for (x in $scope.sortedTransactionTags){
             $scope.pie.series[0].data.push({
@@ -680,7 +695,25 @@ angular.module( 'conexus.member', [
     $scope.selectOverview();
 
     $scope.selectRevenue = function(){
-        //ANIMATE
+        //TODO: TAGS
+        $scope.transactionTags = $scope.transactionsTo.map(function(obj){
+            var returnArray = [];
+            if(obj.ledger){
+                for (x in obj.ledger){
+                    returnArray.push({tag:obj.ledger[x].trim().toLowerCase(),amount:obj.amount})
+                }
+            }
+            return returnArray;
+        });
+        $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+        $scope.sortedTransactionTags = [];
+        for (x in $scope.transactionTags){
+            var amount = amountInArray($scope.transactionTags, $scope.transactionTags[x]);
+            if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x].tag) == -1){
+                $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x].tag})
+            }
+        }
+        $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
         $scope.pie.series[0].data = [];
         for (x in $scope.sortedTransactionTags){
             $scope.pie.series[0].data.push({

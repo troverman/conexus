@@ -88,7 +88,7 @@
 		            	
 	                	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
 
-						<h5 style="margin-top:0px;margin-bottom:0px"><a ng-repeat="tag in item.tags" href="#"  ng-click="filterContent(tag)">{{tag}}, </a></h5>
+						<h5 style="margin-top:0px;margin-bottom:0px"><a style="color:gray;font-style:italic" ng-repeat="tag in item.tags" href="#"  ng-click="filterContent(tag)">{{tag}}, </a></h5>
 
 	                	<div style="max-height:500px;overflow:scroll">
 							<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>

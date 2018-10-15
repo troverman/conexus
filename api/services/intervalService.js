@@ -7,7 +7,6 @@ module.exports = {
 	getData: function(req){
 
 		var newOrderArray = [];
-
 		for (var i = 0; i<10000; i++){
 			var amount = Math.floor(Math.random()*160)+1;
 			var amount1 = 30*((1/10000)*10000*amount+Math.abs(Math.sin(i)+(i*Math.random())/200));
@@ -30,7 +29,6 @@ module.exports = {
 		//});
 
 		var newOrderArray1 = [];
-
 		for (var i = 0; i<10000; i++){
 			var amount = 30*Math.floor(Math.random()*160)+1;
 			var amount1 = 1/30*((10000)*amount/10000 + (10000)*1/10000*Math.abs(Math.sin(i)*1/30*i*Math.random()));

@@ -12,27 +12,77 @@ angular.module( 'conexus.tasks', [
 		},
         resolve: {
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
         }
 	});
 }])
 
-.controller( 'TasksCtrl', ['$rootScope', '$sailsSocket', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $rootScope, $sailsSocket, $scope, TaskModel, tasks, titleService ) {
+.controller( 'TasksCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $rootScope, $sailsSocket, $sce, $scope, TaskModel, tasks, titleService ) {
 	titleService.setTitle('Tasks | CRE8.XYZ');
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
 	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','workCount DESC': 'Total Work'}
-	$scope.tasks = tasks;
+	$scope.selectedTag = '';
+    $scope.tasks = tasks;
+
+    $scope.tasks.map(function(obj){
+        obj.tags = obj.tags.split(',');
+        return obj;
+    });
 
     $scope.loadMore = function() {
-        $scope.skip = $scope.skip + 100;
+        $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
         TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.tasks, tasks);
+            $scope.tasks = tasks.map(function(obj){
+                obj.tags = obj.tags.split(',');
+                return obj;
+            });
+            $scope.loadTags();
         });
     };
+
+     $scope.filterContent = function(filter) {
+        $rootScope.stateIsLoading = true;
+        TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
+            $rootScope.stateIsLoading = false;
+            $scope.selectedTag = filter;
+            $scope.tasks = tasks.map(function(obj){
+                obj.tags = obj.tags.split(',');
+                return obj;
+            });
+            $scope.loadTags();
+        });
+    };
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+
+        $scope.tags = $scope.tasks.map(function(obj){
+            return obj.tags;
+        });
+
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+         
+        function countInArray(array, value) {
+            return array.reduce(function(n, x){ return n + (x === value)}, 0);
+        }
+
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        
+    }
+    $scope.loadTags();
 
      $scope.renderContent = function(content){
         if (content){
@@ -50,7 +100,10 @@ angular.module( 'conexus.tasks', [
 		$rootScope.stateIsLoading = true;
         TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
 			$rootScope.stateIsLoading = false;
-			$scope.tasks = tasks;
+			$scope.tasks = tasks.map(function(obj){
+                obj.tags = obj.tags.split(',');
+                return obj;
+            });
 		});
 	};
 

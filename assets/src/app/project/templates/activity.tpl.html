@@ -2,9 +2,9 @@
     <div class="card">
         <div style="padding:16px;">
             <h4>Create a Post in {{project.title}}</h4>
-            <form role="form" ng-submit="createPost(newPost)">
-                <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+            <form role="form" ng-submit="createContent()">
+                <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
             </form>
         </div>
     </div>
@@ -20,7 +20,7 @@
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div>
-                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
             </div>
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
@@ -29,9 +29,9 @@
                 <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <form role="form" ng-submit="createPost(item)">
-                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                <form role="form" ng-submit="createContent()">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <div class="col-sm-10">
                         <h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
                         <p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-                        <p><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></p>
+                        <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                         <a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
                         <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
@@ -89,7 +89,7 @@
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div>
                 <p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
-                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
             </div>
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
@@ -98,9 +98,9 @@
                 <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <form role="form" ng-submit="createPost(item)">
-                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                <form role="form" ng-submit="createContent(item)">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
         </div>

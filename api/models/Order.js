@@ -5,6 +5,9 @@
 module.exports = {
 
 	attributes: {
+		type: {
+            type: 'string',
+		},
 		amountSet: {
             type: 'string',
 		},

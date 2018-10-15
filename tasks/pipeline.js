@@ -8,8 +8,9 @@ var cssFilesToInject = [
   'bower_components/angular-material/angular-material.css',
   'bower_components/textAngular/dist/textAngular.css',
   'bower_components/highcharts-ng/dist/highcharts-ng.css',
+  'bower_components/ng-tags-input/ng-tags-input.css',
   'styles/**/*.css',
-];
+]; 
 
 var jsFilesToInject = [
   'bower_components/angular/angular.js',
@@ -33,6 +34,7 @@ var jsFilesToInject = [
   'bower_components/textAngular/dist/textAngular-rangy.min.js',
   'bower_components/textAngular/dist/textAngular-sanitize.min.js',
   'bower_components/textAngular/dist/textAngular.min.js',
+  'bower_components/ng-tags-input/ng-tags-input.js',
   'bower_components/web3/dist/web3.min.js',
 
   'bower_components/highcharts/highstock.js',

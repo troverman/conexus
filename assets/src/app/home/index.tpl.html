@@ -148,7 +148,7 @@
 		<div class="card" ng-show="true">
 	        <div style="padding:16px;">
 	        	<h4>Create Post Content</h4>
-	        	<form role="form" ng-submit="createPost()">
+	        	<form role="form" ng-submit="createContent()">
 					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 				</form>

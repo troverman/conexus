@@ -10,6 +10,8 @@ angular.module('models.task', ['lodash', 'services', 'sails.io',])
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
         if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}
+        //MULTIPLE.. OBJ -- Project & Tag
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('task');
         return $sailsSocket.get(url, query).then(success, error);

@@ -11,10 +11,10 @@ angular.module( 'conexus.about', [
 			}
 		},
         resolve:{
-            projects: ['ProjectModel', function(ProjectModel){
+            content: ['ProjectModel', function(ProjectModel){
                 return ProjectModel.getSome(10, 0, 'createdAt DESC');
             }],
-            posts: ['PostModel', function(PostModel){
+            content: ['PostModel', function(PostModel){
                 return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
@@ -24,11 +24,11 @@ angular.module( 'conexus.about', [
 	});
 }])
 
-.controller( 'AboutCtrl', ['$scope', 'titleService', 'posts', 'projects', 'tasks', function AboutController( $scope, titleService, posts, projects, tasks ) {
+.controller( 'AboutCtrl', ['$scope', 'content', 'titleService', 'projects', 'tasks', function AboutController( $scope, content, titleService, projects, tasks ) {
 	titleService.setTitle('About | CRE8.XYZ');
 
     //TODO
-    $scope.posts = posts;
+    $scope.content = content;
     $scope.projects = projects;
     $scope.tasks = tasks;
 

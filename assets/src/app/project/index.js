@@ -109,10 +109,10 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            //TODO: ALL
-            bills: [function() {
-                return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
-            }],
+            //TYPE | MOTION TO JOIN MOTION TO CREATE TRANSACTION
+            motions: ['PostModel', 'project', function(PostModel, project){
+                return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            }], 
         }
     })
     //TODO: FEATURE | ALLOW FOR OPEN BUDGETING / INPUT OUTPUT LEGER. ALLOW FOR DONATIONS / FUND TRANSFERRANCE | MULTIPLE LEDGERS
@@ -268,12 +268,12 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'tasks', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, tasks, titleService, transactionsFrom, transactionsTo, work ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'ReactionModel', 'tasks', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, ReactionModel, tasks, titleService, transactionsFrom, transactionsTo, work ) {
     titleService.setTitle('Activity | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.newPost = {};
+    $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.posts = posts;
+    $scope.contentList = posts;
     $scope.project = project;
     $scope.tasks = tasks;
     $scope.work = work;
@@ -284,7 +284,8 @@ angular.module( 'conexus.project', [
     //$scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
     //POST, WORK, TASK CREATE, VALIDATION (VOTE)
-    $scope.posts = $scope.posts.map(function(obj){
+    //TODO
+    $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
     });
@@ -301,18 +302,26 @@ angular.module( 'conexus.project', [
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.posts, $scope.tasks, $scope.transactions, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks, $scope.transactions, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
 
-    $scope.createPost = function(post) {
+    $scope.createContent = function(content) {
         if ($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.project = $scope.project.id;
-            console.log($scope.newPost)
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+            if (content){$scope.newContent.post = content.id;}
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.project = $scope.project.id;
+            //TODO
+            $scope.newContent.model = 'CONTENT';
+            //$scope.newContent.tags = $scope.newContent.tags.map(function(obj){
+            //    return obj.text
+            //}).join(",");
+            console.log($scope.newContent);
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
+                //TODO
+                model.model = 'CONTENT';
+                $scope.activity.unshift(model);
             });
         }
         else{$location.path('/login')}
@@ -345,14 +354,14 @@ angular.module( 'conexus.project', [
 
 
     //YIKES
-    $scope.renderMessage = function(post){
-        if (post){
-            if (!post.includes('>')){
-                var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
                 var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
                 return $sce.trustAsHtml(replacedText);
             }
-            else{return $sce.trustAsHtml(post)}
+            else{return $sce.trustAsHtml(content)}
         }
     };
 
@@ -367,10 +376,10 @@ angular.module( 'conexus.project', [
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.activity.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });
@@ -378,10 +387,10 @@ angular.module( 'conexus.project', [
     $sailsSocket.subscribe('reaction', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });
@@ -391,7 +400,9 @@ angular.module( 'conexus.project', [
         switch(envelope.verb) {
             case 'created':
                 console.log(envelope.data);
-                $scope.tasks.unshift(envelope.data);
+                //TODO
+                //envelope.data.model = 'CONTENT';
+                $scope.activity.unshift(envelope.data);
                 break;
             case 'destroyed':
                 lodash.remove($scope.tasks, {id: envelope.id});
@@ -411,23 +422,24 @@ angular.module( 'conexus.project', [
     titleService.setTitle('Channels | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
-    $scope.newPost = {};
+    $scope.newContent = {};
     $scope.project = project;
     $scope.posts = posts;
 
-    $scope.createPost = function() {
+    $scope.createContent = function() {
         if ($scope.currentUser){
-            $scope.newPost.newPost.user = $scope.currentUser.id;
-            $scope.newPost.newPost.project = $scope.project.id;
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.project = $scope.project.id;
             PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+                $scope.newContent = {};
+                $scope.posts.unshift(model);
             });
         }
         else{$location.path('/login')}
     };
 
     //YIKES
-    $scope.renderMessage = function(content){
+    $scope.renderContent = function(content){
         if (content){
             if (!content.includes('>')){
                 var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
@@ -452,7 +464,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$sce', '$scope', 'content', 'project', 'streams', 'titleService', function ProjectController( $sce, $scope, content, project, streams, titleService ) {
+.controller( 'ProjectContentCtrl', ['$location', '$sce', '$scope', 'content', 'PostModel', 'project', 'streams', 'titleService', function ProjectController( $location, $sce, $scope, content, PostModel, project, streams, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
     $scope.content = content;
     $scope.newContent = {};
@@ -463,6 +475,28 @@ angular.module( 'conexus.project', [
     $scope.videoContext = {};
 
     $scope.newContent.parent = project.id;
+    //$scope.newContent.tags = project.title+','
+
+    $scope.createContent = function(content) {
+        if ($scope.currentUser){
+            if(content){$scope.newContent.post = content.id;}
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.project = $scope.project.id;
+            $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
+                return obj.text
+            }).join(",");
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
+                $scope.content.unshift(model);
+            });
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.loadTags = function(query) {
+        //return ['hi'];
+        //return $http.get('/tags?query=' + query);
+    };
 
      $scope.newContentToggle = function() {
         $scope.newContentToggleVar = !$scope.newContentToggleVar;
@@ -491,15 +525,48 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$scope', 'bills', 'config', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, bills, config, project, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'motions', 'PostModel', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, motions, PostModel, project, titleService ) {
     titleService.setTitle('Charter | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.bills = bills;  
+    $scope.newMotion = {};
+    $scope.motions = motions;  
     $scope.newMotionToggleVar = false;
     $scope.project = project;
 
+    $scope.createMotion = function(){
+        if($scope.currentUser){
+
+            $scope.newMotion.user = $scope.currentUser;
+            $scope.newMotion.project = $scope.project.id;
+            $scope.newMotion.type = 'MOTION';
+
+            //RELATIONSHIP | LIST
+            $scope.newMotion.relationshipModelAddress = $scope.project.id;
+            $scope.newMotion.relationshipModel = 'PROJECT';
+
+            PostModel.create($scope.newMotion).then(function(model){
+                $scope.newMotion = {};
+                $scope.motions.unshift(model);
+            });
+
+        }
+        else{$location.path('/login')}
+    };
+
     $scope.newMotionToggle = function(){
         $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
+    };
+
+    //YIKES
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
     };
 
     $scope.search = function(){};
@@ -676,6 +743,20 @@ angular.module( 'conexus.project', [
     $scope.selectExpense = function(){
         //ANIMATE
         //ADD IN TAG BASED GRAPHS WRT EXPENSE
+        $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
+            var returnObj = {};
+            returnObj = obj.ledger;
+            return returnObj;
+        });
+        $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+        $scope.sortedTransactionTags = [];
+        for (x in $scope.transactionTags){
+            var amount = countInArray($scope.transactionTags, $scope.transactionTags[x]);
+            if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x]) == -1){
+                $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x]})
+            }
+        }
+        $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
         $scope.pie.series[0].data = [];
         for (x in $scope.sortedTransactionTags){
             $scope.pie.series[0].data.push({
@@ -698,7 +779,21 @@ angular.module( 'conexus.project', [
     $scope.selectOverview();
 
     $scope.selectRevenue = function(){
-        //ANIMATE
+        //TODO: TAGS
+        $scope.transactionTags = $scope.transactionsTo.map(function(obj){
+            var returnObj = {};
+            returnObj = obj.ledger;
+            return returnObj;
+        });
+        $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+        $scope.sortedTransactionTags = [];
+        for (x in $scope.transactionTags){
+            var amount = countInArray($scope.transactionTags, $scope.transactionTags[x]);
+            if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x]) == -1){
+                $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x]})
+            }
+        }
+        $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
         $scope.pie.series[0].data = [];
         for (x in $scope.sortedTransactionTags){
             $scope.pie.series[0].data.push({
@@ -717,6 +812,7 @@ angular.module( 'conexus.project', [
         $scope.newTransaction.user = $scope.currentUser.id;
         TransactionModel.create($scope.newTransaction).then(function(model){
             $scope.newTransaction = {};
+            $scope.transactions.unshift(model);
         });
     };
 
@@ -747,6 +843,7 @@ angular.module( 'conexus.project', [
             $scope.newMember.project = project.id;
             MemberModel.create($scope.newMember).then(function(model) {
                 $scope.newMember = {};
+                //$scope.transactions.unshift(model);
             });
         }
         else{$location.path('/login')}
@@ -769,7 +866,7 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectTasksCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
+.controller( 'ProjectTasksCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
     titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTask = {};
@@ -777,29 +874,58 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.project = project;
 
-    //CONTENT
-    $scope.createPost = function(post) {
-        if ($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.task = $scope.task.id;
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
-            });
-        }
-        else{$location.path('/login')}
-    };
 
     $scope.createTask = function(newTask) {
         if ($scope.currentUser){
             $scope.newTask.user = $scope.currentUser.id;
             $scope.newTask.project = $scope.project.id;
+            $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
+                return obj.text
+            }).join(",");
             TaskModel.create(newTask).then(function(model) {
                 $scope.newTask = {};
+                $scope.tasks.unshift(model);
             });
         }
         else{$location.path('/login')}
     };
+
+    $scope.filterContent = function(filter) {
+        $rootScope.stateIsLoading = true;
+        TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
+            $rootScope.stateIsLoading = false;
+            $scope.tasks = tasks;
+            $scope.loadTags();
+        });
+    };
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        $scope.tags = $scope.tasks.map(function(obj){
+            console.log(obj);
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+         
+        function countInArray(array, value) {
+            return array.reduce(function(n, x){ return n + (x === value)}, 0);
+        }
+
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
 
     $scope.newTaskToggle = function () {
         $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
@@ -922,8 +1048,8 @@ angular.module( 'conexus.project', [
         //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
         //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
         OrderModel.create($scope.newOrder).then(function(model) {
-            $scope.orders.push($scope.newOrder);
             $scope.newOrder = {};
+            $scope.orders.unshift(model);
         });
     };
 
@@ -951,6 +1077,7 @@ angular.module( 'conexus.project', [
             $scope.newProject.parent = $scope.project.id
             ProjectModel.create($scope.newProject).then(function(model) {
                 $scope.newProject = {};
+                $scope.projects.unshift(model);
             });
         }
         else{$location.path('/location')}

@@ -56,13 +56,19 @@ angular.module( 'conexus.contentList', [
     }
     $scope.loadTags();
 
-
-    //TODO: MODEL | CREATE | NESTED?
-    $scope.createContent = function(post){
-        $scope.newContent.user = $scope.currentUser.id;
-        PostModel.create($scope.newContent).then(function(model) {
-            $scope.newContent = {};
-        });
+    $scope.createContent = function(content) {
+        if ($scope.currentUser){
+            if(content){$scope.newContent.post = content.id;}
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
+                return obj.text
+            }).join(",");
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
+                $scope.content.unshift(model);
+            });
+        }
+        else{$location.path('/login')}
     };
 
     $scope.createReaction = function(content, type){

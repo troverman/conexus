@@ -28,15 +28,35 @@
 		<div class="card">
 		    <div style="padding:16px">
 		    	<h3 ng-show="post.title">{{post.title}}</h3>
+		    	<!--<div style="max-height:500px;overflow:scroll">
+					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
+				</div>-->
 				<a href="member/{{post.user.username}}"><img style="width:75px;height:75px;border-radius:100vh;float:left" src="{{post.user.avatarUrl}}"/></a>
 				<div style="float:left;margin-left:15px">
 
 					<h4 style="margin-top:0px;margin-bottom:0px"><a href="member/{{post.user.username}}">{{post.user.username}}</a></h4>
 					<h5 style="margin-top:0px;margin-bottom:0px"><a ng-repeat="tag in post.tags.split(',')" href="#">{{tag}}, </a></h5>
 
-					<h5 style="margin-top:0px;margin-bottom:0px">Metrics | viewToken: 123423 | watchTime: 124312 | Live: 0</h5>
-					<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: 124312 | Dislike: 123</h5>
+					<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{post.minusCount+1}}</h5>
+					<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: {{post.plusCount}} | Dislike: {{post.minusCount}}</h5>
+					<h5 style="margin-top:0px;margin-bottom:0px">
+						Tokens | {{0.04+0.00232*24*viewTime}} CRE8
+					</h5>
+					<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>
 					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
+
+					<!--<h3>{{post.parent}} Parent Information</h3>-->
+			        <!--REFACTOR-->
+					<h3>
+						<a href="market/{{post.market}}">{{post.market}}</a>
+						<a href="order/{{post.order}}">{{post.order}}</a>
+						<a href="content/{{post.post}}">{{post.post}}</a>
+						<a href="project/{{post.project.urlTitle}}">{{post.project.title}}</a>
+						<a href="member/{{post.profile}}">{{post.profile}}</a>
+						<a href="task/{{post.task}}">{{post.task.title}}</a>
+						<a href="task/{{post.transaction}}">{{post.transaction}}</a>
+						<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
+					</h3>
 
 				</div>
 				<div style="clear:both"></div>
@@ -44,25 +64,6 @@
 		    <div class="card-footer">
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-		    </div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="card">
-		    <div style="padding:16px">
-		        <h3>{{post.parent}} Parent Information</h3>
-		        <!--REFACTOR-->
-				<h3>
-					<a href="market/{{post.market}}">{{post.market}}</a>
-					<a href="order/{{post.order}}">{{post.order}}</a>
-					<a href="content/{{post.post}}">{{post.post}}</a>
-					<a href="project/{{post.project.urlTitle}}">{{post.project.title}}</a>
-					<a href="member/{{post.profile}}">{{post.profile}}</a>
-					<a href="task/{{post.task}}">{{post.task.title}}</a>
-					<a href="task/{{post.transaction}}">{{post.transaction}}</a>
-					<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
-				</h3>
 		    </div>
 		</div>
 	</div>
@@ -79,6 +80,13 @@
 				        <p>
 							<a ng-repeat="token in tokens" href="market/{{token}}">{{token}} </a>,
 				    	</p>
+
+				    	<p>{{viewTime}} View+{{post.id}}</p>
+				    	<p>{{viewTime}} View+[Tags]</p>
+						<p>{{viewTime}} View+ID</p>
+
+
+				    	<p>{{0.00232*viewTime}} CRE8</p>
 			    	</div>
 
 					<div class="col-md-5">

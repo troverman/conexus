@@ -42,8 +42,8 @@
                 <div class="">
                     <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
                     <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
-                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control"> <!-- VIDEO | FILE... ? -->
-                    <input type="text" placeholder= "Tags" ng-model="newContent.tags" class="form-control">
+                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control">
+                    <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
                     <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                     <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
                 </div>
@@ -53,6 +53,8 @@
         </div>
     </div>
 </div>
+
+
 
 <div class="row">
     <!--<div class="col-md-10">-->

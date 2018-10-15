@@ -34,6 +34,7 @@ angular.module( 'conexus.content', [
     $scope.post = post;
     if(!$scope.post){$location.path('/')}
     $scope.reactions = reactions;
+    $scope.viewTime = 0;
 
     //+Addative Manifolds --> Extra dimensional 
     $scope.tokens = [
@@ -52,6 +53,18 @@ angular.module( 'conexus.content', [
     ]; 
  
     $scope.outputVector = 'CRE8,BTC,ETH';
+
+    $scope.updateCount = function() {
+        //plug in for validation
+        $scope.viewTime++;
+        $scope.$apply();
+    };
+    
+    //OnClick
+    setInterval($scope.updateCount, 1000);
+    //clearInterval($scope.interval);
+    //viewToken Mechanism
+
 
     //$scope.tokens | input; output | outputVector (by weights)
     //TODO RECURSIVE TRAVERSE THAT FINDS PATHS FROM ONE [] TO ANOTHER [];
@@ -116,6 +129,8 @@ angular.module( 'conexus.content', [
         }
         object[stack.shift()] = newValue;
     }
+
+
 
     //TODO
     $scope.createPost = function(content) {

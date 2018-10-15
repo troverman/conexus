@@ -34,6 +34,41 @@ module.exports = {
 			});
 		}
 
+		else if(req.query.search){
+			var search = req.query.search;
+			console.log(search, limit,skip,sort)
+			Task.find(//{or: [
+				//{title: {contains: search}},
+				//{tags: {contains: search}},
+				{content: {contains: search}}
+			//]}
+			)
+			.limit(20)
+			.skip(skip)
+			.sort(sort)
+			.populate('project')
+			.populate('user')
+			.then(function(models) {
+				console.log(models)
+				Post.subscribe(req, models);
+				res.json(models);
+			});	
+		}
+
+		else if (req.query.tag){
+			var tag = req.query.tag;
+			Task.find({tags:{contains: tag}})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('project')
+			.populate('user')
+			.then(function(models) {
+				Post.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
 		else{
 			Task.find({})
 			.limit(limit)
