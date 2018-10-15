@@ -29,6 +29,7 @@ angular.module( 'conexus.task', [
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
     $scope.newReaction = {};
+    $scope.verification = {};
     $scope.posts = posts;
     $scope.question = false;
     $scope.reputationMultiplier = 1;
@@ -43,6 +44,17 @@ angular.module( 'conexus.task', [
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.verification = {};
     $scope.work = work;
+
+
+    $scope.slider = {
+        value: 0,
+        options: {
+            floor: -1,
+            ceil: 1,
+            step: 0.00001,
+            precision: 3
+        }
+    }
 
     //TODO
     $scope.tokens = [];
@@ -63,7 +75,6 @@ angular.module( 'conexus.task', [
     for (x in $scope.tokens){
         $scope.tokens.push($scope.tokens[x]+'+onStream');
     }
-
 
     function getAllSubsets(theArray) {
       return theArray.reduce(function (subsets, value) {
@@ -100,7 +111,7 @@ angular.module( 'conexus.task', [
         else{$location.path('/login')}
     };
 
-    //TODO: MODELS | ONLY POST/CONTENT
+    //TODO: MODELS | ONLY POST/CONTENT | NEED TASK (AS CONTENT)
     $scope.createReaction = function(content, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -120,13 +131,19 @@ angular.module( 'conexus.task', [
         else{$location.path('/login')}
     };
 
-    $scope.createVerification = function(item) {
-        if ($scope.currentUser){
-            var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.work[index].verificationScore++
-            //WorkModel.update();
-        }
-        else{$location.path('/login')}
+    //TODO | MOTIONS INTERLOCK
+    $scope.createValidation = function(){
+
+        $scope.taskVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
+        $scope.task.verificationScore += parseFloat($scope.currentUser.totalWork);
+        $scope.newVerification.user = $scope.currentUser;
+
+        $scope.newVerification.score = $scope.currentUser.totalWork; // Dimensional Weight / Multiplier
+        $scope.newVerification.project = $scope.task.project.id; // Dimensional Weight / Multiplier
+        $scope.newVerification.task = $scope.task.id; // Dimensional Weight / Multiplier
+
+        console.log($scope.newValidation);
+
     };
 
     //YIKES

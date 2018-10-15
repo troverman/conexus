@@ -9,6 +9,7 @@ var cssFilesToInject = [
   'bower_components/textAngular/dist/textAngular.css',
   'bower_components/highcharts-ng/dist/highcharts-ng.css',
   'bower_components/ng-tags-input/ng-tags-input.css',
+  'bower_components/angular-slider/dist/rzslider.css',
   'styles/**/*.css',
 ]; 
 
@@ -35,6 +36,7 @@ var jsFilesToInject = [
   'bower_components/textAngular/dist/textAngular-sanitize.min.js',
   'bower_components/textAngular/dist/textAngular.min.js',
   'bower_components/ng-tags-input/ng-tags-input.js',
+  'bower_components/angular-slider/dist/rzslider.min.js',
   'bower_components/web3/dist/web3.min.js',
 
   'bower_components/highcharts/highstock.js',

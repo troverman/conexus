@@ -30,9 +30,12 @@ angular.module( 'conexus.work', [
 .controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, work, WorkModel) {
     titleService.setTitle('Work | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.newPost = {};
+    $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.reputationMultiplier = 1;
+    $scope.newVerification = {};
+
+    $scope.reputationMultiplier = 1; // {reputationWeightObj}
+
     $scope.posts = posts;
     $scope.taskTime = 0;
     $scope.working = false;
@@ -49,6 +52,16 @@ angular.module( 'conexus.work', [
 
     //UNIFY CONTENT AND WORK??
     //WORK AS A TYPE
+    $scope.validation = 0;
+    $scope.slider = {
+        value: 0,
+        options: {
+            floor: -1,
+            ceil: 1,
+            step: 0.00001,
+            precision: 3
+        }
+    }
 
     if ($scope.work.task.tags){
         for (x in $scope.work.task.tags.split(',')){
@@ -65,11 +78,11 @@ angular.module( 'conexus.work', [
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.work = $scope.work.id;
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+            $scope.newContent.post = post.id;
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.work = $scope.work.id;
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
             });
         }
         else{$location.path('/login')}
@@ -88,20 +101,27 @@ angular.module( 'conexus.work', [
         //TODO: UPDATE POST
     };
 
-    //TODO: REFACTOR
-    $scope.verifyWork = function(post, type) {
-        $scope.work.verificationScore = parseFloat($scope.work.verificationScore);
-        if ($scope.currentUser){
-            if (type == 'plus'){
-                $scope.workVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
-                $scope.work.verificationScore += parseFloat($scope.currentUser.totalWork);
-            }
-            if (type == 'minus'){
-                $scope.workVerification.push({user:$scope.currentUser, score: -$scope.currentUser.totalWork});
-                $scope.work.verificationScore -= parseFloat($scope.currentUser.totalWork);
-            }
-        }
-        else{$location.path('/login')}
+
+    $scope.createValidation = function(){
+
+        //if ($scope.currentUser){
+
+        $scope.workVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
+        $scope.work.verificationScore += parseFloat($scope.currentUser.totalWork);
+
+        $scope.newVerification.user = $scope.currentUser;
+        $scope.newVerification.score = $scope.currentUser.totalWork; // Dimensional Weight / Multiplier
+
+        console.log($scope.newValidation);
+
+        //VerificationModel.create($scope.newVerification).then(function(model){
+            //$scope.newVerification = {};
+        //});
+
+        //}
+
+        //else{$location.path('/login')}
+
     };
 
     //YIKES

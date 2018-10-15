@@ -699,8 +699,8 @@ angular.module("content/content.tpl.html", []).run(["$templateCache", function($
     "    <!--<button ng-click=\"loadMore(post)\" class=\"btn btn-primary\">LOAD MORE</button>-->\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"card\" style=\"margin:10px;background-color:#f9f9f9\" ng-show=\"post.showThread\">\n" +
-    "    <div style=\"padding:16px;\">\n" +
+    "<div class=\"card\" style=\"margin:10px;background-color:#f9f9f9;\" ng-show=\"post.showThread\">\n" +
+    "    <div style=\"padding:16px;background-color:white;\">\n" +
     "        <i ng-click=\"toggleThread(post)\" class=\"fa fa-plus\"></i>\n" +
     "        <a style=\"display:inline;padding-left:5px\" href=\"/member/{{post.user.username}}\"><span style=\"font-weight:800\">{{post.user.username}}</span></a>\n" +
     "        <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\">{{post.plusCount-post.minusCount}}</p>\n" +
@@ -4916,11 +4916,11 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            <div ng-show=\"newProjectToggleVar\">\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject(newProject)\">\n" +
+    "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
     "                    <div class=\"form-group\">\n" +
     "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                        <input type=\"text\" placeholder= \"Tags\" ng-model=\"newProject.tags\" class=\"form-control\">\n" +
-    "                        <input type=\"text\" placeholder= \"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
+    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "                        <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
     "                        <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
     "                    </div>\n" +
     "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
@@ -5906,17 +5906,33 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <div class=\"col-md-7\" style=\"padding:16px\">\n" +
+    "            <div class=\"col-md-8\" style=\"padding:16px\">\n" +
     "                <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <p><a ng-repeat=\"tag in task.tags.split(',') track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "                </div>\n" +
+    "                <p style=\"color:gray\" am-time-ago=\"task.createdAt\"></p>\n" +
     "\n" +
-    "                <br>\n" +
-    "                <br>\n" +
-    "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'plus')\">+</button>\n" +
-    "                <button style=\"width:10%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyTask(item, 'minus')\">-</button>\n" +
+    "                <div>\n" +
+    "                    <h5>Validation</h5>\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div ng-repeat=\"tag in task.tags.split(',')\">\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} <!--{{currentUser.totalWork}}--></span></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <text-angular ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                    <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                </div>\n" +
     "\n" +
     "                 <div ng-repeat=\"verification in taskVerification\">\n" +
     "                    <a href=\"member/{{verification.user.username}}\">\n" +
@@ -5928,9 +5944,12 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"col-md-5\" style=\"padding:16px;font-style:italic;color:gray\">\n" +
+    "            <div class=\"col-md-4\" style=\"padding:16px;font-style:italic;color:gray;\">\n" +
     "                <!--relevant dimensions-->\n" +
-    "                <h4>Task Validation</h4>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                <h4><a href=\"#\">Task Validation <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "                <form ng-submit=\"filterValidation()\">\n" +
     "                    <input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
     "                </form>\n" +
@@ -5938,6 +5957,8 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <!--relevant dimensions-->\n" +
     "                <p style=\"font-size:10px\" ng-repeat=\"tag in task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}}</a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "            </div>\n" +
     "\n" +
@@ -6016,6 +6037,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <div ng-bind-html=\"renderStream(streamUrl)\">></div>\n" +
     "                    </div>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <tags-input ng-model=\"workTags\" placeholder=\"Tags\"></tags-input>\n" +
     "                    <input type=\"text\" placeholder=\"Content\" ng-model=\"workContent\" class=\"form-control\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit work</button>\n" +
@@ -6038,7 +6060,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <p style=\"margin-left:42px\" ng-show=\"work.task.completeIdentifierSet\"><a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
     "                <div style=\"margin-left:42px\">\n" +
     "                    {{item.stream}}\n" +
-    "                    <!--<p><button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createVerification(item)\">verify</button></p>-->\n" +
     "                    <span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span>\n" +
     "                    <span style=\"text-align:right;float:right\"><span style=\"color:gray;font-style:italic\">Verification Score:</span> <a style=\"font-wieght:800\" href=\"#\">{{work.verificationScore}}</a></span>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
@@ -6391,9 +6412,43 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span></p>\n" +
     "				<p style=\"color:gray\" am-time-ago=\"work.createdAt\"></p>\n" +
     "					\n" +
-    "				<button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
-    "		        <button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>\n" +
-    "		        <div ng-repeat=\"verification in workVerification\">\n" +
+    "				<!--<button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'plus')\">+</button>\n" +
+    "		        <button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>-->\n" +
+    "\n" +
+    "\n" +
+    "		        <div>\n" +
+    "		        	<h5>Validation</h5>\n" +
+    "					<div layout=\"\">\n" +
+    "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
+    "	                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "	                   	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "	                </div>\n" +
+    "\n" +
+    "			        <div ng-repeat=\"tag in work.task.tags.split(',')\">\n" +
+    "\n" +
+    "	                    <!--<md-slider-container>\n" +
+    "	                        <md-slider ng-model=\"vote\" min=\"-100\" max=\"100\" aria-label=\"green\" class=\"md-accent\"></md-slider>\n" +
+    "	                        <md-input-container><input type=\"number\" ng-model=\"vote\"></md-input-container>\n" +
+    "	                    </md-slider-container>-->\n" +
+    "\n" +
+    "	                    <div layout=\"\">\n" +
+    "	                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "	                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "	                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} <!--{{currentUser.totalWork}}--></span></div>\n" +
+    "	                    </div>\n" +
+    "\n" +
+    "	                    <!--<span>{{tag}} <rzslider rz-slider-model=\"slider.value\" rz-slider-options=\"slider.options\"></rzslider></span>-->\n" +
+    "	                    \n" +
+    "	                </div>\n" +
+    "\n" +
+    "                	<text-angular ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "					<button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
+    "		    	</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "				<div ng-repeat=\"verification in workVerification\">\n" +
     "		            <a href=\"member/{{verification.user.username}}\">\n" +
     "		                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "		                {{verification.user.username}}\n" +
@@ -6401,16 +6456,17 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "					<div class=\"spacing-10\"></div>\n" +
     "		        </div>\n" +
     "\n" +
+    "\n" +
     "			</div>\n" +
     "\n" +
-    "			<div style=\"padding:16px\" class=\"col-sm-4\">\n" +
+    "			<div style=\"padding:16px;font-style:italic;color:gray;\" class=\"col-sm-4\">\n" +
     "\n" +
     "				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->\n" +
     "				<!--TODO: DIMENSIONALITY-->\n" +
     "				<div class=\"card\">\n" +
     "					<div style=\"padding:16px\">\n" +
     "\n" +
-    "						<h4>Work Validation</h4>\n" +
+    "						<h4><a href=\"#\">Work Validation <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "						<form ng-submit=\"filterValidation()\">\n" +
     "							<input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
     "						</form>\n" +
@@ -6423,6 +6479,34 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "		 \n" +
     "			</div>\n" +
     "\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"false\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "\n" +
+    "	        	<h5>Validation</h5>\n" +
+    "				<div layout=\"\">\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                   	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "		        <div ng-repeat=\"tag in work.task.tags.split(',')\">\n" +
+    "\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} <!--{{currentUser.totalWork}}--></span></div>\n" +
+    "                    </div>\n" +
+    "                    \n" +
+    "                </div>\n" +
+    "\n" +
+    "            	<text-angular ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "				<button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -6488,9 +6572,9 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "			<div style=\"padding:16px\">\n" +
     "				<div class=\"col-md-12\">\n" +
     "	                <h4>Create a Work Post</h4>\n" +
-    "			        <form role=\"form\" ng-submit=\"createPost(newPost)\">\n" +
-    "                    	<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "			            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "			        <form role=\"form\" ng-submit=\"createPost()\">\n" +
+    "                    	<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "			            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "			        </form>\n" +
     "			        <div class=\"spacing-15\"></div>\n" +
     "			    </div>\n" +
@@ -6517,9 +6601,9 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "				</div>\n" +
     "				<!--TODO: NESTED -->\n" +
     "				<div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
-    "					<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "						<text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "					<form role=\"form\" ng-submit=\"newContent(post)\">\n" +
+    "						<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
     "			</div>\n" +

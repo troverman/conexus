@@ -14,6 +14,7 @@ angular.module( 'conexus', [
     'ngMaterial',
     'highcharts-ng',
     'ngTagsInput',
+    'rzModule',
     'textAngular',
     'conexus.about',
     'conexus.account',
@@ -47,7 +48,7 @@ angular.module( 'conexus', [
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
-    $mdThemingProvider.disableTheming();
+    //$mdThemingProvider.disableTheming();
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
         var hasTrailingSlash = path[path.length-1] === '/';

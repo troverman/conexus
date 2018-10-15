@@ -46,8 +46,8 @@
     <!--<button ng-click="loadMore(post)" class="btn btn-primary">LOAD MORE</button>-->
 </div>
 
-<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="post.showThread">
-    <div style="padding:16px;">
+<div class="card" style="margin:10px;background-color:#f9f9f9;" ng-show="post.showThread">
+    <div style="padding:16px;background-color:white;">
         <i ng-click="toggleThread(post)" class="fa fa-plus"></i>
         <a style="display:inline;padding-left:5px" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
         <p style="display:inline;font-size:10px;color:gray;margin-left:5px">{{post.plusCount-post.minusCount}}</p>

@@ -24,9 +24,43 @@
                 <p><span style="display:inline" ng-bind-html="renderContent(work.content)"></span></p>
 				<p style="color:gray" am-time-ago="work.createdAt"></p>
 					
-				<button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
-		        <button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>
-		        <div ng-repeat="verification in workVerification">
+				<!--<button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
+		        <button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>-->
+
+
+		        <div>
+		        	<h5>Validation</h5>
+					<div layout="">
+	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+	                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
+	                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+	                </div>
+
+			        <div ng-repeat="tag in work.task.tags.split(',')">
+
+	                    <!--<md-slider-container>
+	                        <md-slider ng-model="vote" min="-100" max="100" aria-label="green" class="md-accent"></md-slider>
+	                        <md-input-container><input type="number" ng-model="vote"></md-input-container>
+	                    </md-slider-container>-->
+
+	                    <div layout="">
+	                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
+	                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+	                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} <!--{{currentUser.totalWork}}--></span></div>
+	                    </div>
+
+	                    <!--<span>{{tag}} <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider></span>-->
+	                    
+	                </div>
+
+                	<text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+					<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+
+		    	</div>
+
+
+
+				<div ng-repeat="verification in workVerification">
 		            <a href="member/{{verification.user.username}}">
 		                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
 		                {{verification.user.username}}
@@ -34,16 +68,17 @@
 					<div class="spacing-10"></div>
 		        </div>
 
+
 			</div>
 
-			<div style="padding:16px" class="col-sm-4">
+			<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
 
 				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
 				<!--TODO: DIMENSIONALITY-->
 				<div class="card">
 					<div style="padding:16px">
 
-						<h4>Work Validation</h4>
+						<h4><a href="#">Work Validation <i class="fa fa-question-circle"></i></a></h4>
 						<form ng-submit="filterValidation()">
 							<input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
 						</form>
@@ -56,6 +91,34 @@
 		 
 			</div>
 
+		</div>
+	</div>
+
+	<div class="row" ng-show="false">
+		<div class="card">
+			<div style="padding:16px">
+
+	        	<h5>Validation</h5>
+				<div layout="">
+                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+                </div>
+
+		        <div ng-repeat="tag in work.task.tags.split(',')">
+
+                    <div layout="">
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} <!--{{currentUser.totalWork}}--></span></div>
+                    </div>
+                    
+                </div>
+
+            	<text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+
+			</div>
 		</div>
 	</div>
 
@@ -121,9 +184,9 @@
 			<div style="padding:16px">
 				<div class="col-md-12">
 	                <h4>Create a Work Post</h4>
-			        <form role="form" ng-submit="createPost(newPost)">
-                    	<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-			            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+			        <form role="form" ng-submit="createPost()">
+                    	<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+			            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 			        </form>
 			        <div class="spacing-15"></div>
 			    </div>
@@ -150,9 +213,9 @@
 				</div>
 				<!--TODO: NESTED -->
 				<div ng-show="post.showReply" class="card-footer">
-					<form role="form" ng-submit="createPost(post)">
-						<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+					<form role="form" ng-submit="newContent(post)">
+						<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 					</form>
 				</div>
 			</div>

@@ -31,11 +31,11 @@
             <div ng-show="newProjectToggleVar">
 
                 <div class="spacing-10"></div>
-                <form class="blog-input" role="form" ng-submit="createProject(newProject)">
+                <form class="blog-input" role="form" ng-submit="createProject()">
                     <div class="form-group">
                         <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
-                        <input type="text" placeholder= "Tags" ng-model="newProject.tags" class="form-control">
-                        <input type="text" placeholder= "Location" ng-model="newProject.address" class="form-control">
+                        <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
+                        <input type="text" placeholder="Location" ng-model="newProject.address" class="form-control">
                         <text-angular placeholder= "Description" ng-model="newProject.description" ta-toolbar="''"></text-angular>
                     </div>
                     <button type="submit" class="btn btn-default log-btn">create</button>
