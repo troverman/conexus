@@ -14,9 +14,9 @@ module.exports.bootstrap = function(cb) {
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   sails.services.passport.loadStrategies();
-  intervalService.getData();
+  //intervalService.getData();
   dataService.getData();
-  dataService.traverse();
-  dataService.reputationBuild();
+  //dataService.traverse();
+  //dataService.reputationBuild();
   cb();
 };

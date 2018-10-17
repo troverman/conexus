@@ -246,7 +246,8 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
-    $scope.newPost = {};
+    $scope.newContent = {};
+    $scope.newReaction = {};
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.orders = orders;
@@ -295,10 +296,10 @@ angular.module( 'conexus.member', [
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
 
-    $scope.createPost = function(post){
-        $scope.newPost.post = post.id;
-        $scope.newPost.user = $scope.currentUser.id;
-        $scope.newPost.profile = $scope.member.id;
+    $scope.createContent = function(post){
+        $scope.newContent.post = post.id;
+        $scope.newContent.user = $scope.currentUser.id;
+        $scope.newContent.profile = $scope.member.id;
         PostModel.create($scope.newPost).then(function(model) {
             $scope.newPost = {};
         });
@@ -312,10 +313,10 @@ angular.module( 'conexus.member', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
 
-            if (type =='plus'){$scope.contentList[index].plusCount++}
-            if (type =='minus'){$scope.contentList[index].minusCount++}
+            if (type =='plus'){$scope.activity[index].plusCount++}
+            if (type =='minus'){$scope.activity[index].minusCount++}
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};
             });
@@ -370,7 +371,7 @@ angular.module( 'conexus.member', [
     var random2 = Math.floor(255*Math.random());
     var random3 = Math.floor(255*Math.random());
 
-    $scope.chart = {
+    $scope.reputationRadial = {
         chart: {polar: true},
         series: [{
             id: 'reputation',
@@ -406,15 +407,55 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
+    $scope.reputationColumn = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [{
+            id: 'Combination',
+            type: 'column',
+            name: 'Reputation Balance',
+            data: [],
+        }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {
+                text: null
+            },
+            categories: [],
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+    };
+
     //FILTERING  | LAYER IE PROJECT 
+
+    //RADIAL | REPUTATION
     for (x in Object.keys($scope.reputation)){
         if ($scope.reputation[Object.keys($scope.reputation)[x]] > 50000){
-            $scope.chart.xAxis.categories.push(Object.keys($scope.reputation)[x]);
-            $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+            $scope.reputationRadial.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+            $scope.reputationRadial.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
         }
     }
 
-    $scope.balanceChart = {
+    //COLUMN | REPUTATION
+    for (x in Object.keys($scope.reputation)){
+        if ($scope.reputation[Object.keys($scope.reputation)[x]]){
+            $scope.reputationColumn.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+            $scope.reputationColumn.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+        }
+    }
+
+    $scope.balanceRadial = {
         chart: {polar: true},
         series: [{
             id: 'balance',
@@ -449,13 +490,53 @@ angular.module( 'conexus.member', [
         },
         credits:{enabled:false},
     };
-    console.log($scope.balance)
+
+    $scope.balanceColumn = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [{
+            id: 'Combination',
+            type: 'column',
+            name: 'Asset Balance',
+            data: [],
+        }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {
+                text: null
+            },
+            categories: [],
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+    };
+
+    //RADIAL | BALANCE
     for (x in Object.keys($scope.balance)){
         //if ($scope.balance[Object.keys($scope.balance)[x]] < 500){
-            $scope.balanceChart.xAxis.categories.push(Object.keys($scope.balance)[x]);
-            $scope.balanceChart.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
+            $scope.balanceRadial.xAxis.categories.push(Object.keys($scope.balance)[x]);
+            $scope.balanceRadial.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
         //}
     }
+
+    //COLUMN | BALANCE
+    for (x in Object.keys($scope.balance)){
+        if ($scope.balance[Object.keys($scope.balance)[x]]){
+            $scope.balanceColumn.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
+            $scope.balanceColumn.xAxis.categories.push(Object.keys($scope.balance)[x]);
+        }
+    }
+
 
     //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
@@ -474,9 +555,10 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', 'videos', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService, videos) {
     $scope.currentUser = config.currentUser;
-    $scope.content = posts;
+    $scope.contentList = posts;
     $scope.newContent = {};
     $scope.newContentToggleVar = false;
+    $scope.newReaction = {};
 
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
     //$scope.posts = posts;
@@ -503,6 +585,31 @@ angular.module( 'conexus.member', [
         }
         else{$location.path('/login')}
     };
+
+    //TODO: BETTER | TAG STORAGE
+    /*$scope.loadTags = function(){
+        $scope.tags = $scope.contentList.map(function(obj){
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            return obj.tags;
+        });
+
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+         
+        function countInArray(array, value) {
+            return array.reduce(function(n, x){ return n + (x === value)}, 0);
+        }
+
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();*/
 
     $scope.newContentToggle = function() {
         $scope.newContentToggleVar = !$scope.newContentToggleVar;
@@ -843,7 +950,7 @@ angular.module( 'conexus.member', [
 
     $scope.createTransaction = function(){
         $scope.newTransaction.user = $scope.currentUser.id;
-        $scope.newTransaction.ledger = $scope.newContent.ledger.map(function(obj){
+        $scope.newTransaction.ledger = $scope.newTransaction.ledger.map(function(obj){
             return obj.text
         }).join(",");
         TransactionModel.create($scope.newTransaction).then(function(model){
@@ -1012,5 +1119,3 @@ angular.module( 'conexus.member', [
     $scope.search = function(){};
 
 }]);
-
-

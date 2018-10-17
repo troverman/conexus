@@ -27,6 +27,7 @@ angular.module( 'conexus.contentList', [
     $scope.newReaction = {};
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;
+    $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
@@ -138,6 +139,15 @@ angular.module( 'conexus.contentList', [
         PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.contentList = models;
+        });
+    };
+
+    $scope.selectSort = function(sort){
+        $scope.selectedSort = sort;
+        $rootScope.stateIsLoading = true;
+        PostModel.getSome(20, $scope.skip, $scope.selectedSort).then(function(contentList) {
+            $rootScope.stateIsLoading = false;
+            $scope.contentList = contentList;
         });
     };
 

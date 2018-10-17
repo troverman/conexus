@@ -810,7 +810,7 @@ angular.module( 'conexus.project', [
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
         $scope.newTransaction.user = $scope.currentUser.id;
-        $scope.newTransaction.ledger = $scope.newContent.ledger.map(function(obj){
+        $scope.newTransaction.ledger = $scope.newTransaction.ledger.map(function(obj){
             return obj.text
         }).join(",");
         TransactionModel.create($scope.newTransaction).then(function(model){

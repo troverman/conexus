@@ -219,7 +219,7 @@ angular.module( 'conexus.home', [
 
 	};
 
-    $scope.createReaction = function(post, type){
+    $scope.createReaction = function(content, type){
     	if($scope.currentUser){
 
 	    	$scope.newReaction.amount = 1;
@@ -227,9 +227,9 @@ angular.module( 'conexus.home', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
-	    	var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-	    	if (type =='plus'){$scope.posts[index].plusCount++}
-	    	if (type =='minus'){$scope.posts[index].minusCount++}
+	    	var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
+	    	if (type =='plus'){$scope.activity[index].plusCount++}
+	    	if (type =='minus'){$scope.activity[index].minusCount++}
 
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};

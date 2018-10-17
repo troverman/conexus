@@ -8,7 +8,8 @@ module.exports = {
 		//TO CREATE A WELL CONNECTED NETWORK
 		//SAMPLE SPACE | A-H Tokens
 		//A-H + [SAMPLE SPACE]
-		var newNetwork = "ABCDEFGH".split("");
+		//var newNetwork = "ABCDEFGH".split("");
+		var newNetwork = "ABC".split("");
 
 		//GENERATE POINT SPACE
 		var positionSet = [];
@@ -47,6 +48,16 @@ module.exports = {
 		function diff (a, b) {
 		    return a.filter(function(i) {return b.indexOf(i) < 0;});
 		};
+
+		function arraysEqual(a, b) {
+			if (a === b) return true;
+			if (a == null || b == null) return false;
+			if (a.length != b.length) return false;
+			for (var i = 0; i < a.length; ++i) {
+				if (a[i] !== b[i]) return false;
+			}
+			return true;
+		}
 
 		//RELATIONSHIPS CANCEL
 		//OPTIMIZE..
@@ -92,6 +103,15 @@ module.exports = {
 		}**/
 
 		//REMOVE MIRROR DUPLICATES
+		//SLOW ALG
+		var totalSet = [];
+		//for (x in optim){
+		//	for (y in optim){
+		//		if (!arraysEqual(optim[x], optim[y].reverse())){
+		//			console.log(optim[x]);
+		//		}
+		//	}
+		//}
 
 		function generate(model) {
 			return 100//Math.floor(Math.random() * model*100);
