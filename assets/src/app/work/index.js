@@ -27,9 +27,10 @@ angular.module( 'conexus.work', [
     });
 }])
 
-.controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, work, WorkModel) {
+.controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, work, WorkModel) {
     titleService.setTitle('Work | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.member = {};
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newVerification = {};
@@ -62,6 +63,18 @@ angular.module( 'conexus.work', [
             precision: 3
         }
     }
+
+    //BETTER
+    if($scope.currentUser){
+        UserModel.getByUsername($scope.currentUser.username).then(function(member){
+            $scope.member = member;
+            $scope.balance = member.balance;
+            $scope.reputation = member.reputation;
+            //PROJ REL
+        });
+    }
+
+
 
     if ($scope.work.task.tags){
         for (x in $scope.work.task.tags.split(',')){
@@ -103,6 +116,9 @@ angular.module( 'conexus.work', [
 
 
     $scope.createValidation = function(){
+
+        //PROJ BASED LAYER
+        //..
 
         //if ($scope.currentUser){
 

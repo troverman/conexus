@@ -32,10 +32,28 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
+        isWorking: {
+            type: 'boolean',
+            defaultsTo: false
+        },
         isLive: {
             type: 'boolean',
             defaultsTo: false
         },
+
+        followingCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        followerCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        projectCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+
         passports : { collection: 'Passport', via: 'user' },
         totalWork: {
             type: 'integer',

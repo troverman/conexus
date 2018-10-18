@@ -28,12 +28,12 @@
 		        <button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>-->
 
 
-		        <div>
+		        <div ng-show="false">
 		        	<h5>Validation</h5>
 					<div layout="">
 	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
 	                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
-	                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+	                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{member.totalWork}}</span></div>
 	                </div>
 
 			        <div ng-repeat="tag in work.task.tags.split(',')">
@@ -46,7 +46,7 @@
 	                    <div layout="">
 	                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
 	                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-	                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} <!--{{currentUser.totalWork}}--></span></div>
+	                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
 	                    </div>
 
 	                    <!--<span>{{tag}} <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider></span>-->
@@ -94,7 +94,7 @@
 		</div>
 	</div>
 
-	<div class="row" ng-show="false">
+	<div class="row" ng-show="true">
 		<div class="card">
 			<div style="padding:16px">
 
@@ -102,7 +102,7 @@
 				<div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{member.totalWork}}</span></div>
                 </div>
 
 		        <div ng-repeat="tag in work.task.tags.split(',')">
@@ -110,7 +110,7 @@
                     <div layout="">
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
                         <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} <!--{{currentUser.totalWork}}--></span></div>
+                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
                     </div>
                     
                 </div>

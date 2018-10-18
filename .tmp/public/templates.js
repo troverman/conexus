@@ -3289,7 +3289,7 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "			    </div>\n" +
     "			    <div class=\"col-sm-6\">\n" +
-    "					<h5>Project Reputation Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span> </h5>\n" +
+    "					<h5>Reputation Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span> </h5>\n" +
     "			   		<form ng-click=\"lookupReputation()\" style=\"display:flex;flex-direction:row;\">\n" +
     "			        	<input ng-model=\"reputationLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
     "			        	<div ng-click=\"lookupReputation()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
@@ -6081,19 +6081,19 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                </div>\n" +
     "                <p style=\"color:gray\" am-time-ago=\"task.createdAt\"></p>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div ng-show=\"false\">\n" +
     "                    <h5>Validation</h5>\n" +
     "                    <div layout=\"\">\n" +
     "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{currentUser.totalWork}}</span></div>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div ng-repeat=\"tag in task.tags.split(',')\">\n" +
     "                        <div layout=\"\">\n" +
     "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
     "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} <!--{{currentUser.totalWork}}--></span></div>\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{reputation[tag]}}</span></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
@@ -6114,8 +6114,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"col-md-4\" style=\"padding:16px;font-style:italic;color:gray;\">\n" +
     "                <!--relevant dimensions-->\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "                <h4><a href=\"#\">Task Validation <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
     "                <form ng-submit=\"filterValidation()\">\n" +
     "                    <input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
@@ -6125,10 +6123,34 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <p style=\"font-size:10px\" ng-repeat=\"tag in task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}}</a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "            </div>\n" +
     "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"true\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                <h5>Validation</h5>\n" +
+    "                <div layout=\"\">\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{currentUser.totalWork}}</span></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-repeat=\"tag in task.tags.split(',')\">\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{reputation[tag]}}</span></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <text-angular ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -6588,12 +6610,12 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "		        <button style=\"width:20%;\" class=\"btn btn-default log-btn\" ng-click=\"verifyWork(item, 'minus')\">-</button>-->\n" +
     "\n" +
     "\n" +
-    "		        <div>\n" +
+    "		        <div ng-show=\"false\">\n" +
     "		        	<h5>Validation</h5>\n" +
     "					<div layout=\"\">\n" +
     "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "	                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "	                   	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "	                   	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{member.totalWork}}</span></div>\n" +
     "	                </div>\n" +
     "\n" +
     "			        <div ng-repeat=\"tag in work.task.tags.split(',')\">\n" +
@@ -6606,7 +6628,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	                    <div layout=\"\">\n" +
     "	                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
     "	                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
-    "	                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} <!--{{currentUser.totalWork}}--></span></div>\n" +
+    "	                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{reputation[tag]}}</span></div>\n" +
     "	                    </div>\n" +
     "\n" +
     "	                    <!--<span>{{tag}} <rzslider rz-slider-model=\"slider.value\" rz-slider-options=\"slider.options\"></rzslider></span>-->\n" +
@@ -6654,7 +6676,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"row\" ng-show=\"false\">\n" +
+    "	<div class=\"row\" ng-show=\"true\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "\n" +
@@ -6662,7 +6684,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "				<div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                   	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
+    "                   	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{member.totalWork}}</span></div>\n" +
     "                </div>\n" +
     "\n" +
     "		        <div ng-repeat=\"tag in work.task.tags.split(',')\">\n" +
@@ -6670,7 +6692,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <div layout=\"\">\n" +
     "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
     "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
-    "                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} <!--{{currentUser.totalWork}}--></span></div>\n" +
+    "                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{reputation[tag]}}</span></div>\n" +
     "                    </div>\n" +
     "                    \n" +
     "                </div>\n" +

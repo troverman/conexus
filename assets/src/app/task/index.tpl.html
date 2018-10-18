@@ -12,19 +12,19 @@
                 </div>
                 <p style="color:gray" am-time-ago="task.createdAt"></p>
 
-                <div>
+                <div ng-show="false">
                     <h5>Validation</h5>
                     <div layout="">
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                         <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}}</span></div>
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{currentUser.totalWork}}</span></div>
                     </div>
 
                     <div ng-repeat="tag in task.tags.split(',')">
                         <div layout="">
                             <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
                             <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} <!--{{currentUser.totalWork}}--></span></div>
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
                         </div>
                     </div>
 
@@ -45,8 +45,6 @@
             <div class="col-md-4" style="padding:16px;font-style:italic;color:gray;">
                 <!--relevant dimensions-->
 
-
-
                 <h4><a href="#">Task Validation <i class="fa fa-question-circle"></i></a></h4>
                 <form ng-submit="filterValidation()">
                     <input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
@@ -56,10 +54,34 @@
                 <p style="font-size:10px" ng-repeat="tag in task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
                 <div class="spacing-10"></div>
 
-
-
             </div>
 
+        </div>
+    </div>
+
+    <div class="row" ng-show="true">
+        <div class="card">
+            <div style="padding:16px">
+
+                <h5>Validation</h5>
+                <div layout="">
+                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{currentUser.totalWork}}</span></div>
+                </div>
+
+                <div ng-repeat="tag in task.tags.split(',')">
+                    <div layout="">
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
+                    </div>
+                </div>
+
+                <text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+                <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+
+            </div>
         </div>
     </div>
 
