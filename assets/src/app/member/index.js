@@ -1127,7 +1127,7 @@ angular.module( 'conexus.member', [
         var endTime = new Date(obj.createdAt)
         obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
         obj.endTime = new Date(obj.createdAt);
-        $scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'work'+obj.id});
+        $scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'work/'+obj.id});
         return obj
     });
 
