@@ -1091,17 +1091,13 @@ angular.module( 'conexus.member', [
     //VIZ ON MONTH TIME
 
     $scope.eventSources = [];
-    //Scheduler Plugin MB
-    //IDEALLY WNAT THIS TO BE AN INFINITE SCROLL TIMELINE YPE WITH ADVANCED FEATURES RN THIS IS TWO THINGS MASHED
+    //IDEALLY WANT THIS TO BE AN INFINITE SCROLL TIMELINE YPE WITH ADVANCED FEATURES RN THIS IS TWO THINGS MASHED
     $scope.calendar = {
         height:448,
-        //aspectRatio: 2,
-        //contentHeight:250,
         editable: false,
         defaultView: "agendaWeek",
         header:{
-            left: 'month,agendaWeek,agendaDay',
-            //left: 'month,agendaWeek,agendaDay listMonth,listWeek,listDay',
+            left: 'month,agendaWeek,agendaDay listMonth,listWeek,listDay',
             center: 'title',
             right: 'today,prev,next',
         },
