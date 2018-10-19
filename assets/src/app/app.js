@@ -15,6 +15,7 @@ angular.module( 'conexus', [
     'highcharts-ng',
     'ngTagsInput',
     'rzModule',
+    'angular-fullcalendar',
     'textAngular',
     'conexus.about',
     'conexus.account',

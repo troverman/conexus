@@ -10,12 +10,13 @@ var cssFilesToInject = [
   'bower_components/highcharts-ng/dist/highcharts-ng.css',
   'bower_components/ng-tags-input/ng-tags-input.css',
   'bower_components/angular-slider/dist/rzslider.css',
+  'bower_components/fullcalendar/dist/fullcalendar.css',
   'styles/**/*.css',
-]; 
+];
 
 var jsFilesToInject = [
-  'bower_components/angular/angular.js',
   'bower_components/jquery/dist/jquery-3.1.0.min.js',
+  'bower_components/angular/angular.js',
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   'bower_components/bootstrap/dist/js/bootstrap.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.js',
@@ -23,6 +24,7 @@ var jsFilesToInject = [
   'bower_components/angularSails/dist/ngsails.io.js',
   'bower_components/lodash/lodash.js',
   'bower_components/moment/moment.js',
+  'bower_components/fullcalendar/dist/fullcalendar.min.js',
   'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
   'bower_components/angular-google-maps/dist/angular-google-maps.js',
   'bower_components/angular-moment/angular-moment.js',
@@ -37,6 +39,7 @@ var jsFilesToInject = [
   'bower_components/textAngular/dist/textAngular.min.js',
   'bower_components/ng-tags-input/ng-tags-input.js',
   'bower_components/angular-slider/dist/rzslider.min.js',
+  'bower_components/angular-fullcalendar/dist/angular-fullcalendar.min.js',
   'bower_components/web3/dist/web3.min.js',
 
   'bower_components/highcharts/highstock.js',

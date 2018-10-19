@@ -1090,6 +1090,32 @@ angular.module( 'conexus.member', [
     //VIZ ON A DAY TIME
     //VIZ ON MONTH TIME
 
+    $scope.eventSources = [];
+    //Scheduler Plugin MB
+    //IDEALLY WNAT THIS TO BE AN INFINITE SCROLL TIMELINE YPE WITH ADVANCED FEATURES RN THIS IS TWO THINGS MASHED
+    $scope.calendar = {
+        height:448,
+        //aspectRatio: 2,
+        //contentHeight:250,
+        editable: false,
+        defaultView: "agendaWeek",
+        header:{
+            left: 'month,agendaWeek,agendaDay',
+            //left: 'month,agendaWeek,agendaDay listMonth,listWeek,listDay',
+            center: 'title',
+            right: 'today,prev,next',
+        },
+        buttonText:{
+            today: 'Today',
+            month: 'Month',
+            week: 'Week',
+            day: 'Day',
+        },
+        themeSystem:'bootstrap3',
+        nowIndicator: true,
+        allDaySlot: false,
+    };
+
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -1102,6 +1128,7 @@ angular.module( 'conexus.member', [
         var endTime = new Date(obj.createdAt)
         obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
         obj.endTime = new Date(obj.createdAt);
+        $scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'work'+obj.id});
         return obj
     });
 

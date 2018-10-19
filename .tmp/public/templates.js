@@ -3726,6 +3726,13 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
     "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div fc fc-options=\"calendar\" ng-model=\"eventSources\" ></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    " </div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div ng-repeat=\"item in work\">\n" +
