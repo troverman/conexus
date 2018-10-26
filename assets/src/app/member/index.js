@@ -1110,10 +1110,14 @@ angular.module( 'conexus.member', [
             listMonth: 'List Month',
             listWeek: 'List Week',
         },
-        themeSystem:'bootstrap3',
+        //themeSystem:'bootstrap4',
+        //dayClick
+        slotDuration:'00:05:00',
         nowIndicator: true,
         allDaySlot: false,
     };
+
+    //SELECT
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },

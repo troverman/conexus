@@ -1,14 +1,18 @@
 var request = require('request');
+const tf = require('@tensorflow/tfjs');
+require('@tensorflow/tfjs-node');
+var Q = require('q');
 
 module.exports = {
 
 	getData: function(){
+		//var deferred = Q.defer();
 
 		//POPULATE A NEW NETWORK
 		//TO CREATE A WELL CONNECTED NETWORK
 		//SAMPLE SPACE | A-H Tokens
 		//A-H + [SAMPLE SPACE]
-		var newNetwork = "ABCDEFGH".split("");
+		var newNetwork = "ABCD".split("");
 
 		//GENERATE POINT SPACE
 		var positionSet = [];
@@ -140,10 +144,10 @@ module.exports = {
 		}
 
 		for (x in maximumBinaryRelationship){
-			console.log(maximumBinaryRelationship[x]);
+			//console.log(maximumBinaryRelationship[x]);
 		}
 
-		console.log(maximumBinaryRelationship.length)
+		//console.log(maximumBinaryRelationship.length)
 
 		//--> INTEGER VALUE FOR 1 -> 1 Comparison
 		var superArray = [];
@@ -211,27 +215,85 @@ module.exports = {
 		//	console.log('DONE', newOrderArray1.length)
 		//});
 
+		//deferred.resolve(maximumBinaryRelationship)
+		//return deferred.promise;
+		return maximumBinaryRelationship;
+
 	},
 
+	//TODO
 	traverse: function(){
 
-		function traverse(model){
+		//const model = tf.sequential();
+		//model.add(tf.layers.dense({units: 100, activation: 'relu', inputShape: [10]}));
+		//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
-			var test = [];
-			var uniqueMarkets = [];
+		//const identity = tf.eye(10000,10000).print();
+		//  a b c d
+		//a 1
+		//b   1
+		//c     1
+		//d       1
+		//PRESERVE LATTICE ORDER IN MM?
+		//LARGER TENSOR OBJECT HELD IN DECT MEMORY? 
+
+		const input1 = tf.input({shape: [2, 2]});
+		const input2 = tf.input({shape: [2, 2]});
+		const multiplyLayer = tf.layers.multiply();
+		const product = multiplyLayer.apply([input1, input2]);
+		//console.log(product);
+
+		//TEST | CONSEQUENCE IS MM HAS IMBEUD INTELLIGENCE? ML IS THE TRAVERE?
+
+		var dataModel = dataService.getData(); //[even more, get orders and orderbook from here]
+		//console.log(dataModel.length);
+		const valueMatrix = tf.input({shape: [dataModel.length, 2]}); //NOT REALLY TRUE
+		//console.log(valueMatrix);
+
+		const input = tf.input({shape: [5]});
+
+		const denseLayer1 = tf.layers.dense({units: 10, activation: 'relu'});
+		const denseLayer2 = tf.layers.dense({units: 4, activation: 'softmax'});
+		const output = denseLayer2.apply(denseLayer1.apply(input));
+		const model = tf.model({inputs: input, outputs: output});
+		//model.predict(tf.ones([2, 5])).print();
+
+
+		//>:'O
+		var uniqueMarkets = [];
+		var marketSetObj = []; //NEED STRUCTURE
+
+		function traverse(model, path){
+
 			Order.find({identiferSet:model})
 			.then(function(models){
 
+				//LOG TRAVERSE PATH
+				//BAD
+				path = [];
 				for (x in models){
-					uniqueMarkets.push({identiferSet1: models[x].identiferSet1, amountSet:models[x].amountSet, amountSet1:models[x].amountSet1});
-					if (uniqueMarkets.map(function(obj){return obj.identiferSet1}).indexOf(models[x].identiferSet1)==-1){//branch completion | do it symmetrically 
-						traverse(models[x].identiferSet1);
+					console.log(models[x].identiferSet1);
+
+					//branch completion | do it symmetrically 
+					if (uniqueMarkets.map(function(obj){return obj.identiferSet1}).indexOf(models[x].identiferSet1)==-1){
+						uniqueMarkets.push({identiferSet1: models[x].identiferSet1, amountSet:models[x].amountSet, amountSet1:models[x].amountSet1});
+						console.log(models[x].identiferSet1);
+						path.push(models[x].identiferSet1,' --> ');
+						console.log(path)
+						traverse(models[x].identiferSet1, path);
 					}
+					else{path = [];}
+
 				}
 
+
+				//ONCE DONE..
+
+				console.log(uniqueMarkets.length);
+				//BAD
+				if (uniqueMarkets.length == 254){
 				//SIMPLIFY FROM ORDER BOOK.. | ONE ORDER SAMPLE RN
 				for (x in uniqueMarkets){
-					console.log(uniqueMarkets[x]);
 					//set of best relations
 					//soon to be set of set (ie by price --> scalar limit to  matrix)
 					//? SET TO SET PRICE EQUIV IS FXNAL
@@ -242,19 +304,25 @@ module.exports = {
 					var marketObj = {};
 					for (y in uniqueMarkets[x].identiferSet1.split(',')){
 						//amountSet1/amountSet
-						marketObj[uniqueMarkets[x].identiferSet1.split(',')] = amountSet1[y]
+						marketObj[uniqueMarkets[x].identiferSet1.split(',')[y]] = amountSet1[y]
 					}
-					console.log(marketObj)
+					//console.log(marketObj)
+					marketSetObj.push(marketObj)
+				}
 				}
 
 			});
 
 		};
 
-		traverse('A');
-		
+		//traverse('A');
+		//dataService.getData();
+		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
+
 	},
 
+
+	//FOR THIS TO SCALE (ON MONGO) WE NEED A DATA MODEL 
 	reputationBuild:function(){
 		User.find().then(function(userModels){
 			for (x in userModels){
@@ -293,6 +361,57 @@ module.exports = {
 				})(userModels, x)
 			}
 		});
+	},
+
+
+	//TO BE REPLACED BY LATTICE OPERATIONS
+	//POWERSET LATTICE? 
+	legacyTraverse:function(inputAssets, outputAssets, outputValues){
+
+		//var inputVectorValues = []; //UNKNOWN
+		//var inputVectorAssets = ['C']; //CAN BE UNKNOWN | OR NOT
+		//var inputVectorAssetString = 'C';
+
+		var inputVectorAssets = inputAssets;
+		var inputVectorAssetString = inputVectorAssets.join('');
+
+
+		//MARKET RELATION --> PATH {}
+		//TRANSFORM TO SELF SIMILAR ALGEBRA ~ Each asset is a crystal
+
+		//var outputVectorValues = [1,2];
+		//var outputVectorAssets = ['A','B'];
+		//var outputVectorAssetString = 'A,B';
+
+		//THIS CAN BE A SET.. 
+		//OUTPUT IS A SET
+		var outputVectorValues = outputValues;
+		var outputVectorAssets = outputAssets;
+		var outputVectorAssetString = outputVectorAssets.join('');
+
+
+		//HOW MANY C == 1A, 2B
+		//GIVEN THE CRYSTALINE RELATIONSHIP BEWTWEEN A-H
+
+		//FIND SET OF PATHS FROM C->[A,B] | SOME DECOMPOSIIOTN OF DFINED SELF SIMIALR? 
+		//CRYSTALINE MARKET (GOOD COPY LEL)
+
+		//SET OF PATHS ARE SET OF ORDERS 
+
+		//MAP THE BOOK TO THE LATTICE?
+
+		//DIRECT 
+		Order.find({identiferSet:inputVectorAssetString})
+		.then(function(models){
+			//console.log(models)
+			//for (x in models){
+			//	if (models[x].identiferSet1.contains(outputAssets)){
+			//		console.log('sup')
+			//	}
+			//}
+		});
+
+
 	},
 
 

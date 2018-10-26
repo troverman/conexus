@@ -1,0 +1,41 @@
+<div class="spacing-5"></div>
+
+<div class="row">
+    <div class="card">
+        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card">
+        <div style="padding:16px">
+            <div fc fc-options="calendar" ng-model="eventSources"></div>
+        </div>
+    </div>
+ </div>
+
+<div class="row">
+    <div ng-repeat="item in work">
+        <div class="card">
+            <div style="padding:16px">
+				<h4>{{item.startTime | date:"h:mma | MM/dd/yyyy"}} - {{item.endTime | date:"h:mma | MM/dd/yyyy"}}</h4>
+				<span><a href="task/{{item.task.id}}">{{item.task.title}}</a> | <a href="member/{{item.user.username}}">{{item.user.username}}</a></span>
+            </div>
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a class="pull-right" style="padding:0px;" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+		        <form role="form" ng-submit="createPost(post)">
+		            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+		        </form>
+		    </div>
+        </div>
+	</div>
+</div>
+
+<div class="spacing-50"></div>

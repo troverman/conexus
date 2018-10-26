@@ -4,6 +4,9 @@
     
     <div class="card">
         <div style="padding:16px">
+            <div style="float:right;text-align:right">
+                <h5 style="text-align:right" ng-click="toggleToken()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+            </div>
             <h2>Transaction {{transaction.id}}</h2>
             <p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
             <p style="font-weight:800">{{transaction.amount}} <a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
@@ -11,16 +14,42 @@
             <p>{{transaction.content}}</p>
             <p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
         </div>
+        <div class="card-footer">
+            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+            <a style="padding:5px;color:grey" href="#" ng-click="reply(transaction)"><i class="fa fa-comment-o"></i> comment </a>
+        </div>
     </div>
 
-    <div class="card">
+    <div class="card" ng-show="!toggleTokenVar">
         <div style="padding:16px">
-            <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-            <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-            <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}+{{transaction.id}}">{{tag.trim()}}+{{transaction.id}} </a></p>
-            <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}+send">{{tag.trim()}}+send </a></p>
-            <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}+recieve">{{tag.trim()}}+recieve </a></p>
-            <a href="market/{{transaction.id}}">{{transaction.id}}</a>
+
+            <div>
+                <h4>Protocols <a>Create</a>, <a>React</a>, <a>Transact</a>, <a>View</a></h4>
+                <p style="color:gray;font-style:italic;font-size:12px">[Create, View, Transact, React] Token manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>          
+                <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+                <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}+{{transaction.id}}">{{tag.trim()}}+{{transaction.id}} </a></p>
+                <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}+send">{{tag.trim()}}+send </a></p>
+                <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}+recieve">{{tag.trim()}}+recieve </a></p>
+                <a href="market/{{transaction.id}}">{{transaction.id}}</a>
+                <h4><a href="#">onMint Sponsorship <i class="fa fa-question-circle"></i></a></h4>
+            </div>  
+
+            <div>
+                <h4>Market Traverse</h4>
+                <p style="color:gray;font-style:italic;font-size:12px">Search for Output liquidity path | [] = []</p>
+                <form ng-submit="marketTraverse(tokens, outputVector)">
+                    <input type="text" placeholder="Input Dimensions" ng-model="tokens" class="form-control">
+                </form>
+                <form ng-submit="marketTraverse(tokens, outputVector)">
+                    <input type="text" placeholder="Output Dimensions" ng-model="outputVector" class="form-control">
+                </form>
+                <p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
+                    <span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
+                </p>
+            </div>
+
         </div>
     </div>
     
@@ -43,7 +72,7 @@
             </div> 
             <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
         </div>
-        <div class="" class="card-footer">
+        <div class="card-footer">
             <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
             <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
             <a style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>

@@ -19,6 +19,12 @@
 				<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>
 
 			</div>
+
+            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+            </div>
+
 		</div>
     </div>
 	

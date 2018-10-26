@@ -90,19 +90,21 @@ module.exports = {
 
 		else if(req.query.search){
 			var search = req.query.search;
-			console.log(search, limit,skip,sort)
-			Post.find(//{or: [
-				//{title: {contains: search}},
-				//{tags: {contains: search}},
-				{content: {contains: search}}
-			//]}
-			)
-			.limit(20)
-			.skip(skip)
+			console.log(search, limit, skip, sort)
+			Post.find()
+			.where({
+				or: [
+					{content: {contains: search}},
+					{tags: {contains: search}},
+					{title: {contains: search}},
+					{user: {contains: search}}
+				]
+			})
+			.limit(limit)
+			.skip(limit)
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				console.log(models)
 				Post.subscribe(req, models);
 				res.json(models);
 			});	
@@ -234,7 +236,6 @@ module.exports = {
 			res.json(model);
 		});
 	},
-
 
 	destroy: function (req, res) {
 		var id = req.param('id');

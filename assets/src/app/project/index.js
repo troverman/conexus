@@ -192,8 +192,21 @@ angular.module( 'conexus.project', [
                 return ProjectModel.getChildren(project);
             }],
         }
-    });
-    
+    })
+    .state( 'project.time', {
+        url: '/time',
+        views: {
+            "time": {
+                controller: 'ProjectTimeCtrl',
+                templateUrl: 'project/templates/time.tpl.html'
+            }
+        },
+        resolve: {
+            work: ['project', 'WorkModel', function(project, WorkModel) {
+                return WorkModel.getSome('project', project.id, 50, 0, 'createdAt DESC');
+            }]
+        }
+    })
 }])
 
 .controller( 'ProjectCtrl', ['$mdSidenav', '$location', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $mdSidenav, $location, $scope, config, MemberModel, project, titleService, TransactionModel ) {
@@ -738,7 +751,8 @@ angular.module( 'conexus.project', [
     $scope.chart.series[2].data = $scope.sumTo;
     //$scope.chart.series[3].data = $scope.sumFlow;
 
-
+    //BAD
+    $scope.transactions = $scope.transactions.reverse();
 
     $scope.selectExpense = function(){
         //ANIMATE
@@ -1099,6 +1113,58 @@ angular.module( 'conexus.project', [
             }
             else{return $sce.trustAsHtml(content)}
         }
+    };
+
+    $scope.search = function(){};
+
+}])
+.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'work', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, titleService, work) {
+
+    $scope.eventSources = [];
+    $scope.calendar = {
+        height:448,
+        editable: false,
+        defaultView: "agendaWeek",
+        header:{
+            left: 'month,agendaWeek,agendaDay',
+            center: 'title',
+            right: 'today,prev,next',
+        },
+        buttonText:{
+            today: 'Today',
+            month: 'Month',
+            agendaWeek: 'Week',
+            agendaDay: 'Day',
+            listMonth: 'List Month',
+            listWeek: 'List Week',
+        },
+        slotDuration:'00:05:00',
+        nowIndicator: true,
+        allDaySlot: false,
+    };
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
+
+    $scope.work = work;
+    $scope.work = work.map(function(obj){
+        var endTime = new Date(obj.createdAt)
+        obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
+        obj.endTime = new Date(obj.createdAt);
+        if (obj.task){$scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'work/'+obj.id});}
+        return obj
+    });
+
+    $scope.createContent = function(content, type){};
+
+    $scope.createReaction = function(content, type){};
+
+    $scope.reply = function(item){
+        var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.work[index].showReply = !$scope.work[index].showReply
     };
 
     $scope.search = function(){};

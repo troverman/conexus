@@ -136,7 +136,7 @@ angular.module( 'conexus.contentList', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+        PostModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.contentList = models;
         });

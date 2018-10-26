@@ -37,20 +37,22 @@ module.exports = {
 		else if(req.query.search){
 			var search = req.query.search;
 			console.log(search, limit,skip,sort)
-			Task.find(//{or: [
-				//{title: {contains: search}},
-				//{tags: {contains: search}},
-				{content: {contains: search}}
-			//]}
-			)
-			.limit(20)
+			Task.find()
+			.where({
+				or: [
+					{content: {contains: search}},
+					{tags: {contains: search}},
+					{title: {contains: search}},
+					{user: {contains: search}}
+				]
+			})
+			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('project')
 			.populate('user')
 			.then(function(models) {
-				console.log(models)
-				Post.subscribe(req, models);
+				Task.subscribe(req, models);
 				res.json(models);
 			});	
 		}

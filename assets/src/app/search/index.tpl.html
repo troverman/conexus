@@ -98,9 +98,26 @@
 			        </div>
 		    	</div>
 
-				<div class="card" ng-show="item.model=='MEMBER'"></div>
+				<div ng-show="item.model=='MEMBER'">
+					<div class="">
+						<div class="col-xs-12">
+							<div class="member-card" style="margin-bottom:10px">
+							    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
+							        <a href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+							    </div>
+							    <div class="member-card-info">
+							        <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
+							        <p style="color:gray">{{item.status}} offline</p>
+							        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
+							    </div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-				<div class="card" ng-show="item.model=='ORDER'"></div>
+				<div class="card" ng-show="item.model=='ORDER'">
+
+				</div>
 
 				<div class="card" ng-show="item.model=='PROJECT'">
 		            <div style="padding:16px;">
@@ -123,9 +140,40 @@
 		            </div>
 				</div>
 
-				<div class="card" ng-show="item.model=='TASK'"></div>
+				<div class="card" ng-show="item.model=='TASK'">
+					<div style="padding:16px;">
+						<div class="row">
+							<div class="col-sm-10">
+								<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+								<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+								<p><span ng-bind-html="renderContent(item.content)"></span></p>
+								<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+								<span style="color:gray" am-time-ago="item.createdAt"></span>
+							</div>
+							<div class="col-sm-2" style="text-align:right">
+								<h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
+								<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+	        			<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
+					</div>
+					<div ng-show="item.showReply" class="card-footer">
+						<form role="form" ng-submit="createContent(item)">
+							<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+							<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+						</form>
+					</div>
+				</div>
 
-				<div class="card" ng-show="item.model=='WORK'"></div>
+				<div class="card" ng-show="item.model=='WORK'">
+
+				</div>
+				
 			</div>
 		</div>
 	</div>

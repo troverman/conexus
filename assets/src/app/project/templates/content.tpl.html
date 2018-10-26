@@ -1,4 +1,3 @@
-
 <div class="spacing-5"></div>
 <div class="row">
     <ul style="padding:0px;" class="member-tabs">
@@ -90,12 +89,12 @@
                 <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                 <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="color:gray"> • created <span am-time-ago="item.createdAt"></span></a>
-                <a style="padding:0px" class="pull-right" href="post/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <form role="form" ng-submit="createPost(item)">
-                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                <form role="form" ng-submit="createContent(item)">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
         </div>

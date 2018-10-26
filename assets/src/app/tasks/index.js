@@ -116,10 +116,11 @@ angular.module( 'conexus.tasks', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        TaskModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+        TaskModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(tasks){
+            console.log(tasks)
             $rootScope.stateIsLoading = false;
-            $scope.activity = models.map(function(obj){
-                obj.model = 'CONTENT';
+            $scope.tasks = tasks.map(function(obj){
+                obj.tags = obj.tags.split(',');
                 return obj;
             });
         });

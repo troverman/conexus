@@ -11,6 +11,7 @@ angular.module('models.task', ['lodash', 'services', 'sails.io',])
         var query = {};
         if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}
+        else if (type=='search'){query = {params:{search:filter, limit:limit,skip:skip,sort:sort}};}
         //MULTIPLE.. OBJ -- Project & Tag
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('task');

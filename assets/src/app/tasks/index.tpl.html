@@ -51,17 +51,17 @@
 
 	    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
-	    	<div class="card">
-		    	<form style="display:flex;flex-direction:row;">
-		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-		            <div style="border:0px;float:right" class="btn btn-default">
-		                <a href="#">
-		                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-		                </a>
-		            </div>
-		        </form>
-	        </div>
-
+            <div class="card">
+                <form ng-submit="search()" style="display:flex;flex-direction:row;">
+                    <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
+                    <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
+                        <a  href="#" role="button">
+                            <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                        </a>
+                    </div>
+                </form>
+            </div>
+            
 	        <div class="card">
 	        	<style type="text/css">.angular-google-map-container{height: 200px;}</style>
 				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>

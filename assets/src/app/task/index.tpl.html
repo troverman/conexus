@@ -4,6 +4,7 @@
 
     <div class="row">
         <div class="card">
+            
             <div class="col-md-8" style="padding:16px">
                 <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
                 <div style="font-style:italic;color:gray">
@@ -56,10 +57,15 @@
 
             </div>
 
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+            </div>
+
         </div>
     </div>
 
-    <div class="row" ng-show="true">
+    <div class="row" ng-show="currentUser">
         <div class="card">
             <div style="padding:16px">
 
@@ -93,7 +99,7 @@
                 <!--TOKENS MINTING PER ACTION-->
                 <div style="font-style:italic;color:gray">
                     <div class="spacing-5"></div>
-                    <h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
+                    <h4 ng-click="showTokens()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
                     <div>
                         <a ng-repeat="token in tokens" href="market/{{token}}">{{token}}, </a>
                     </div>

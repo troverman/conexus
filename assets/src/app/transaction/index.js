@@ -27,6 +27,7 @@ angular.module( 'conexus.transaction', [
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.contentList = posts;
+    $scope.toggleTokenVar = false;
     $scope.transaction = transaction;
 
     //PACKAGE | NESTED RENDERING
@@ -73,6 +74,10 @@ angular.module( 'conexus.transaction', [
     $scope.reply = function(item){
         var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.contentList[index].showReply = !$scope.contentList[index].showReply
+    };
+
+    $scope.toggleToken = function(){
+        $scope.toggleTokenVar =!$scope.toggleTokenVar
     };
 
     $sailsSocket.subscribe('post', function (envelope) {
