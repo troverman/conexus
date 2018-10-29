@@ -1,6 +1,6 @@
-var request = require('request');
-const tf = require('@tensorflow/tfjs');
-require('@tensorflow/tfjs-node');
+//var request = require('request');
+//const tf = require('@tensorflow/tfjs');
+//require('@tensorflow/tfjs-node');
 var Q = require('q');
 
 module.exports = {
@@ -297,22 +297,22 @@ module.exports = {
 
 		//DENSE LAYER ACTS AS COMBIN?--> NEED TO OUTPUT 
 
-		const input1 = tf.input({shape: [2, 2]});
-		const input2 = tf.input({shape: [2, 2]});
-		const multiplyLayer = tf.layers.multiply();
-		const product = multiplyLayer.apply([input1, input2]);
-		console.log(product);
+		//const input1 = tf.input({shape: [2, 2]});
+		//const input2 = tf.input({shape: [2, 2]});
+		//const multiplyLayer = tf.layers.multiply();
+		//const product = multiplyLayer.apply([input1, input2]);
+		//console.log(product);
 
 		//TEST | CONSEQUENCE IS MM HAS IMBEUD INTELLIGENCE? ML IS THE TRAVERE?
 		//COMBINITORIAL TENSORS? | REDUCE | TOTAL MARKET
-		var dataModel = dataService.getData(); //[even more, get orders and orderbook from here]
-		const valueMatrix = tf.input({shape: [dataModel.length, 8]}); //NOT REALLY TRUE
+		//var dataModel = dataService.getData(); //[even more, get orders and orderbook from here]
+		//const valueMatrix = tf.input({shape: [dataModel.length, 8]}); //NOT REALLY TRUE
 
-		const input = tf.input({shape: [5]});
-		const denseLayer1 = tf.layers.dense({units: 10, activation: 'relu'});
-		const denseLayer2 = tf.layers.dense({units: 4, activation: 'softmax'});
-		const output = denseLayer2.apply(denseLayer1.apply(input));
-		const model = tf.model({inputs: input, outputs: output});
+		//const input = tf.input({shape: [5]});
+		//const denseLayer1 = tf.layers.dense({units: 10, activation: 'relu'});
+		//const denseLayer2 = tf.layers.dense({units: 4, activation: 'softmax'});
+		//const output = denseLayer2.apply(denseLayer1.apply(input));
+		//const model = tf.model({inputs: input, outputs: output});
 		//model.predict(tf.ones([2, 5])).print();
 
 
