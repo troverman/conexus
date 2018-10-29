@@ -237,27 +237,86 @@ module.exports = {
 		//PRESERVE LATTICE ORDER IN MM?
 		//LARGER TENSOR OBJECT HELD IN DECT MEMORY? 
 
+		//ways to encode info in a tensor? 
+		//start traing path problems as the heigher dimensioanl object -- ok. got it.
+		//CRE8CAPITAL | OFCOURSE THERE IS UNITY HERE
+
+		//PREPARE FOR DIM INCREASE
+		//NEED BETTER BUT COOL TO COMBO TF
+
+
+		//NEED COMBINITORIAL AND REDUCTION RELATIONSHIPS
+
+
+		Order.find({identiferSet:'A'}).then(function(models){
+			var trainData = [];
+
+			//console.log(models.length);
+			//how deep?
+			//HOW MANY IT"S MAX EIGHT// there has the be a reduction..?? longest circuit is eight
+			//SET, COMBOS OF ASSETS, SET OF UNIQUE ASSETS
+
+			//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length, 8]});
+			//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length. orderBookdepth, market.depth]});
+			//ENCODING INFORMATION IN HIGHER DIMENSIONS :')
+
+			//HIGH DIMENSIONAL RELATIONS [] = []
+
+			const valueMatrix = tf.input({shape: [dataModel.length, 8]});
+
+			//25x8 matrix
+			var inputTest = [];
+
+			//THINK ABOUT THE POSITION OF COMBIITORIAL MARKETS IN THE TENS NET
+			for (x in models){
+
+				//console.log(models[x].identiferSet1)//, models[x].amountSet, models[x].amountSet1);
+				//console.log(models[x].amountSet1.split(',').length);
+
+				//IT"S A LATTICE NETWORK..
+				for(y in models[x].amountSet1.split(',')){
+					if (models[x].amountSet1.split(',').length == 1){
+						console.log(models[x].identiferSet1);
+
+					}
+				//	inputTest[x][y].push(models[x].amountSet1.split(',')[y]);
+				}
+
+				//ex: a->b; b->c; c->d; d->e .. 
+				//	  |		|	  |	 	|
+
+			}
+			//console.log(inputTest)
+
+			//NOW BUILD PATHS TO CREATE TENSOR WEIGHTS
+			//console.log(valueMatrix);
+			//CONVERSION IS A TENSOR OPERATION LOL
+			
+
+		});
+
+		//DENSE LAYER ACTS AS COMBIN?--> NEED TO OUTPUT 
+
 		const input1 = tf.input({shape: [2, 2]});
 		const input2 = tf.input({shape: [2, 2]});
 		const multiplyLayer = tf.layers.multiply();
 		const product = multiplyLayer.apply([input1, input2]);
-		//console.log(product);
+		console.log(product);
 
 		//TEST | CONSEQUENCE IS MM HAS IMBEUD INTELLIGENCE? ML IS THE TRAVERE?
-
+		//COMBINITORIAL TENSORS? | REDUCE | TOTAL MARKET
 		var dataModel = dataService.getData(); //[even more, get orders and orderbook from here]
-		//console.log(dataModel.length);
-		const valueMatrix = tf.input({shape: [dataModel.length, 2]}); //NOT REALLY TRUE
-		//console.log(valueMatrix);
+		const valueMatrix = tf.input({shape: [dataModel.length, 8]}); //NOT REALLY TRUE
 
 		const input = tf.input({shape: [5]});
-
 		const denseLayer1 = tf.layers.dense({units: 10, activation: 'relu'});
 		const denseLayer2 = tf.layers.dense({units: 4, activation: 'softmax'});
 		const output = denseLayer2.apply(denseLayer1.apply(input));
 		const model = tf.model({inputs: input, outputs: output});
 		//model.predict(tf.ones([2, 5])).print();
 
+
+		//POSITION IS A TENSOR? --> CREATE MARKET BY MULT? MEH
 
 		//>:'O
 		var uniqueMarkets = [];
@@ -286,9 +345,7 @@ module.exports = {
 
 				}
 
-
 				//ONCE DONE..
-
 				console.log(uniqueMarkets.length);
 				//BAD
 				if (uniqueMarkets.length == 254){
@@ -314,6 +371,12 @@ module.exports = {
 			});
 
 		};
+
+		function path(start, finish){
+
+		}
+
+		//path('A','C,D')
 
 		//traverse('A');
 		//dataService.getData();
@@ -410,7 +473,6 @@ module.exports = {
 			//	}
 			//}
 		});
-
 
 	},
 

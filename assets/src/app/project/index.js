@@ -25,7 +25,7 @@ angular.module( 'conexus.project', [
     .state( 'project.activity', {
         url: '',
         views: {
-            "activity": {
+            "projectActivity": {
                 controller: 'ProjectActivityCtrl',
                 templateUrl: 'project/templates/activity.tpl.html'
             }
@@ -51,7 +51,7 @@ angular.module( 'conexus.project', [
     .state( 'project.assets', {
         url: '/assets',
         views: {
-            "assets": {
+            "projectAssets": {
                 controller: 'ProjectAssetsCtrl',
                 templateUrl: 'project/templates/assets.tpl.html'
             }
@@ -61,7 +61,7 @@ angular.module( 'conexus.project', [
     .state( 'project.channels', {
         url: '/channels',
         views: {
-            "channels": {
+            "projectChannels": {
                 controller: 'ProjectChannelsCtrl',
                 templateUrl: 'project/templates/channels.tpl.html'
             }
@@ -79,7 +79,7 @@ angular.module( 'conexus.project', [
     .state( 'project.content', {
         url: '/content',
         views: {
-            "content": {
+            "projectContent": {
                 controller: 'ProjectContentCtrl',
                 templateUrl: 'project/templates/content.tpl.html'
             }
@@ -103,7 +103,7 @@ angular.module( 'conexus.project', [
     .state( 'project.charter', {
         url: '/charter',
         views: {
-            "charter": {
+            "projectCharter": {
                 controller: 'ProjectCharterCtrl',
                 templateUrl: 'project/templates/charter.tpl.html'
             }
@@ -119,7 +119,7 @@ angular.module( 'conexus.project', [
     .state( 'project.ledger', {
         url: '/ledger',
         views: {
-            "ledger": {
+            "projectLedger": {
                 controller: 'ProjectLedgerCtrl',
                 templateUrl: 'project/templates/ledger.tpl.html'
             }
@@ -136,10 +136,25 @@ angular.module( 'conexus.project', [
             }],
         }
     })
+    .state( 'project.marketplace', {
+        url: '/marketplace',
+        views: {
+            "projectMarketplace": {
+                controller: 'ProjectMarketplaceCtrl',
+                templateUrl: 'project/templates/marketplace.tpl.html'
+            }
+        },
+        resolve: {
+            items: ['project', 'WorkModel', function(project, WorkModel) {
+                return[];
+                //return WorkModel.getSome('project', project.id, 50, 0, 'createdAt DESC');
+            }]
+        }
+    })
     .state( 'project.members', {
         url: '/members',
         views: {
-            "members": {
+            "projectMembers": {
                 controller: 'ProjectMembersCtrl',
                 templateUrl: 'project/templates/members.tpl.html'
             }
@@ -154,7 +169,7 @@ angular.module( 'conexus.project', [
     .state( 'project.tasks', {
         url: '/tasks',
         views: {
-            "tasks": {
+            "projectTasks": {
                 controller: 'ProjectTasksCtrl',
                 templateUrl: 'project/templates/tasks.tpl.html'
             }
@@ -168,7 +183,7 @@ angular.module( 'conexus.project', [
     .state( 'project.positions', {
         url: '/positions',
         views: {
-            "positions": {
+            "projectPositions": {
                 controller: 'ProjectPositionsCtrl',
                 templateUrl: 'project/templates/positions.tpl.html'
             }
@@ -182,7 +197,7 @@ angular.module( 'conexus.project', [
     .state( 'project.projects', {
         url: '/projects',
         views: {
-            "projects": {
+            "projectProjects": {
                 controller: 'ProjectProjectsCtrl',
                 templateUrl: 'project/templates/projects.tpl.html'
             }
@@ -196,7 +211,7 @@ angular.module( 'conexus.project', [
     .state( 'project.time', {
         url: '/time',
         views: {
-            "time": {
+            "projectTime": {
                 controller: 'ProjectTimeCtrl',
                 templateUrl: 'project/templates/time.tpl.html'
             }
@@ -844,6 +859,20 @@ angular.module( 'conexus.project', [
         }
         else{$location.path('/login')}
     };
+
+}])
+
+.controller( 'ProjectMarketplaceCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+
+    $scope.items = items;
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
+
+    $scope.search = function(){};
 
 }])
 

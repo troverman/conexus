@@ -36,6 +36,7 @@ module.exports.routes = {
   'get /project/:path/content': 'HomeController.index',
   'get /project/:path/charter': 'HomeController.index',//??
   'get /project/:path/ledger': 'HomeController.index',
+  'get /project/:path/marketplace': 'HomeController.index',
   'get /project/:path/members': 'HomeController.index',
   'get /project/:path/positions': 'HomeController.index',
   'get /project/:path/projects': 'HomeController.index',

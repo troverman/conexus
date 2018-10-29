@@ -59,6 +59,8 @@ a:focus{text-decoration: none}
     background-color:white;
 }
 
+.card:hover{box-shadow: 0 1px 3px 0 rgba(0,0,0,.6), 0 1px 1px 0 rgba(0,0,0,.42), 0 2px 1px -1px rgba(0,0,0,.36)}
+
 .card-avatar{
     width: 32px;
     height: 32px;

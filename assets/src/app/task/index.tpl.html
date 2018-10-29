@@ -4,58 +4,62 @@
 
     <div class="row">
         <div class="card">
-            
-            <div class="col-md-8" style="padding:16px">
-                <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
-                <div style="font-style:italic;color:gray">
-                    <p><a ng-repeat="tag in task.tags.split(',') track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
-                    <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-                </div>
-                <p style="color:gray" am-time-ago="task.createdAt"></p>
 
-                <div ng-show="false">
-                    <h5>Validation</h5>
-                    <div layout="">
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{currentUser.totalWork}}</span></div>
+            <div class="">
+                <div class="col-md-8" style="padding:16px">
+                    <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
+                    <div style="font-style:italic;color:gray">
+                        <p><a ng-repeat="tag in task.tags.split(',') track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+                        <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
                     </div>
+                    <p style="color:gray" am-time-ago="task.createdAt"></p>
 
-                    <div ng-repeat="tag in task.tags.split(',')">
+                    <div ng-show="false">
+                        <h5>Validation</h5>
                         <div layout="">
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-                            <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+                            <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{currentUser.totalWork}}</span></div>
                         </div>
+
+                        <div ng-repeat="tag in task.tags.split(',')">
+                            <div layout="">
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
+                                <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
+                            </div>
+                        </div>
+
+                        <text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+                        <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
                     </div>
 
-                    <text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-                    <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+                     <div ng-repeat="verification in taskVerification">
+                        <a href="member/{{verification.user.username}}">
+                            <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
+                            {{verification.user.username}}
+                        </a> | {{verification.score}}
+                        <div class="spacing-10"></div>
+                    </div>
+
                 </div>
 
-                 <div ng-repeat="verification in taskVerification">
-                    <a href="member/{{verification.user.username}}">
-                        <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
-                        {{verification.user.username}}
-                    </a> | {{verification.score}}
+                <div class="col-md-4" style="padding:16px;font-style:italic;color:gray;">
+                    <!--relevant dimensions-->
+
+                    <h4><a href="#">Task Validation <i class="fa fa-question-circle"></i></a></h4>
+                    <form ng-submit="filterValidation()">
+                        <input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
+                    </form>
+                    <h5>{{task.verificationScore}} | General </h5>
+                    <!--relevant dimensions-->
+                    <p style="font-size:10px" ng-repeat="tag in task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
                     <div class="spacing-10"></div>
+
                 </div>
-
             </div>
 
-            <div class="col-md-4" style="padding:16px;font-style:italic;color:gray;">
-                <!--relevant dimensions-->
-
-                <h4><a href="#">Task Validation <i class="fa fa-question-circle"></i></a></h4>
-                <form ng-submit="filterValidation()">
-                    <input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
-                </form>
-                <h5>{{task.verificationScore}} | General </h5>
-                <!--relevant dimensions-->
-                <p style="font-size:10px" ng-repeat="tag in task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
-                <div class="spacing-10"></div>
-
-            </div>
+            <div style="clear:both"></div>
 
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -84,7 +88,8 @@
                     </div>
                 </div>
 
-                <text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+                <text-angular ng-model="newValidation.content" ta-toolbar="''" style="height:100px"></text-angular>
+
                 <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
 
             </div>
@@ -172,6 +177,7 @@
         </div>
     </div>
 
+    <!--RESTYLE-->
     <div class="row">
         <div class="card" ng-repeat="work in work">
             <div style="padding:16px;">
@@ -185,12 +191,13 @@
                 <p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
                 <p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
                 <div style="margin-left:42px">
-                    {{item.stream}}
+                    <span style="text-align:right;float:right">
+                        <a href="#">Tokens <i class="fa fa-question-circle"></i></a>
+                        <span style="color:gray;font-style:italic">Verification Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a>
+                    </span>
                     <span style="display:inline" ng-bind-html="renderContent(work.content)"></span>
-                    <span style="text-align:right;float:right"><span style="color:gray;font-style:italic">Verification Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a></span>
                     <div style="clear:both"></div>
                 </div>
-
             </div>
         </div>
     </div>
