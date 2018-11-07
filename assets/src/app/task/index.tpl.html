@@ -73,7 +73,7 @@
         <div class="card">
             <div style="padding:16px">
 
-                <h5>Validation</h5>
+                <h5>Validate <i class="fa fa-check"></i></h5>
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
@@ -187,17 +187,34 @@
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                     <a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
+
+                    <span style="text-align:right;float:right">
+                        <a href="#">Tokens <i class="fa fa-question-circle"></i></a>
+                        <br>
+                        <span style="color:gray;font-style:italic">Validation Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a>
+                    </span>
+                    
+                    <div style="clear:both"></div>
+
                 </div>
                 <p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
                 <p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
                 <div style="margin-left:42px">
-                    <span style="text-align:right;float:right">
-                        <a href="#">Tokens <i class="fa fa-question-circle"></i></a>
-                        <span style="color:gray;font-style:italic">Verification Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a>
-                    </span>
                     <span style="display:inline" ng-bind-html="renderContent(work.content)"></span>
-                    <div style="clear:both"></div>
                 </div>
+            </div>
+            <div class="card-footer">
+                <a href="#" ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(work)"><i class="fa fa-comment-o"></i> comment </a>
+                <a href="work/{{work.id}}"><i class="fa fa-check"></i> validate </a>
+                <a style="padding:0px" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <div ng-show="work.showReply" class="card-footer">
+                <form role="form" ng-submit="createContent(work)">
+                    <text-angular ng-model="newPost.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                </form>
             </div>
         </div>
     </div>

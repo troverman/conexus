@@ -81,15 +81,7 @@ angular.module( 'conexus.member', [
             //TODO: REFACTOR
             posts: ['member', 'PostModel', function(member, PostModel) {
                 return PostModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
-            }],
-            videos: ['member', function(member) {
-                return [
-                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()},
-                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()},
-                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()},
-                    {title:'Task 597c55e56833048165c6720c Stream 3',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user: member, createdAt: new Date()}
-                ];
-            }],
+            }]
         }
     })
     .state( 'member.followers', {
@@ -832,8 +824,6 @@ angular.module( 'conexus.member', [
     //FOR X IN TAG -- SERIES.PUSH
         //SERIES[x].push(data)
 
-
-
     $scope.sumFlow = [];
     $scope.sumFrom = []
     $scope.sumTo = [];
@@ -868,6 +858,9 @@ angular.module( 'conexus.member', [
     $scope.chart.series[1].data = $scope.sumFrom;
     $scope.chart.series[2].data = $scope.sumTo;
     //$scope.chart.series[3].data = $scope.sumFlow;
+
+    //REDO
+    $scope.transactions = $scope.transactions.reverse();
 
     $scope.selectExpense = function(){
         //TODO: TAGS

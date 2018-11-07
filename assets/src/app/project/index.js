@@ -218,7 +218,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             work: ['project', 'WorkModel', function(project, WorkModel) {
-                return WorkModel.getSome('project', project.id, 50, 0, 'createdAt DESC');
+                return WorkModel.getSome('project', project.id, 200, 0, 'createdAt DESC');
             }]
         }
     })

@@ -6266,7 +6266,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "\n" +
-    "                <h5>Validation</h5>\n" +
+    "                <h5>Validate <i class=\"fa fa-check\"></i></h5>\n" +
     "                <div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
@@ -6380,17 +6380,34 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "                    <a style=\"display:inline;font-weight:600\" href=\"work/{{work.id}}\">{{work.amount}}</a>\n" +
     "                    <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "\n" +
+    "                    <span style=\"text-align:right;float:right\">\n" +
+    "                        <a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a>\n" +
+    "                        <br>\n" +
+    "                        <span style=\"color:gray;font-style:italic\">Validation Score:</span> <a style=\"font-wieght:800\" href=\"#\">{{work.verificationScore}}</a>\n" +
+    "                    </span>\n" +
+    "                    \n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "\n" +
     "                </div>\n" +
     "                <p ng-show=\"work.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in work.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
     "                <p style=\"margin-left:42px\" ng-show=\"work.task.completeIdentifierSet\"><a href=\"market/{{work.task.completeIdentifierSet}}\">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>\n" +
     "                <div style=\"margin-left:42px\">\n" +
-    "                    <span style=\"text-align:right;float:right\">\n" +
-    "                        <a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                        <span style=\"color:gray;font-style:italic\">Verification Score:</span> <a style=\"font-wieght:800\" href=\"#\">{{work.verificationScore}}</a>\n" +
-    "                    </span>\n" +
     "                    <span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span>\n" +
-    "                    <div style=\"clear:both\"></div>\n" +
     "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(work, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{work.plusCount}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(work, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{work.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(work)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a href=\"work/{{work.id}}\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                <a style=\"padding:0px\" class=\"pull-right\" href=\"work/{{work.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "            <div ng-show=\"work.showReply\" class=\"card-footer\">\n" +
+    "                <form role=\"form\" ng-submit=\"createContent(work)\">\n" +
+    "                    <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                </form>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -6851,6 +6868,13 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "		 \n" +
     "			</div>\n" +
     "\n" +
+    "			<div style=\"clear:both\"></div>\n" +
+    "\n" +
+    "			<div class=\"card-footer\">\n" +
+    "				<a href=\"#\" ng-click=\"createReaction(work, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{work.plusCount}} like </a> \n" +
+    "				<a href=\"#\" ng-click=\"createReaction(work, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{work.minusCount}} dislike </a>\n" +
+    "			</div>\n" +
+    "\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -6858,7 +6882,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "\n" +
-    "	        	<h5>Validation</h5>\n" +
+    "                <h5>Validate <i class=\"fa fa-check\"></i></h5>\n" +
     "				<div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +

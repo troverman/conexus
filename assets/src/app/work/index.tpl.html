@@ -90,6 +90,13 @@
 		 
 			</div>
 
+			<div style="clear:both"></div>
+
+			<div class="card-footer">
+				<a href="#" ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
+				<a href="#" ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
+			</div>
+
 		</div>
 	</div>
 
@@ -97,7 +104,7 @@
 		<div class="card">
 			<div style="padding:16px">
 
-	        	<h5>Validation</h5>
+                <h5>Validate <i class="fa fa-check"></i></h5>
 				<div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
