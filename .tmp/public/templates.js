@@ -534,7 +534,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\"></a></span>\n" +
     "					<h4>{{currentUser.email}}</h4>\n" +
-    "					<p><a href=\"/projects\">25 Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">23 Followers</a> | <a href=\"/member/{{currentUser.username}}/followers\">22 Following</a>\n" +
+    "                    <p><a href=\"/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "\n" +
     "					<div class=\"row\">\n" +
     "						<div class=\"col-sm-6\">\n" +
@@ -1244,7 +1244,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div style=\"padding:16px;\">\n" +
     "                    <span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{member.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\"></a></span>\n" +
     "                    <h4>{{currentUser.email}}</h4>\n" +
-    "                    <p><a href=\"/projects\">25 Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">23 Followers</a> | <a href=\"/member/{{currentUser.username}}/followers\">22 Following</a>\n" +
+    "                    <p><a href=\"/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-6\">\n" +
     "                            <h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
@@ -3315,10 +3315,14 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
+    "\n" +
     "			<highchart config=\"reputationRadial\"></highchart>\n" +
     "			<highchart config=\"reputationColumn\"></highchart>\n" +
     "			<highchart config=\"balanceRadial\"></highchart>\n" +
     "			<highchart config=\"balanceColumn\"></highchart>\n" +
+    "			\n" +
+    "			<highchart config=\"balancePie\"></highchart>\n" +
+    "\n" +
     "		</div>\n" +
     "	</div>	\n" +
     "</div>	\n" +

@@ -95,6 +95,7 @@ module.exports = {
 			//RETROACTIVE | VS CREATED AT
 			startTime: req.param('startTime'),
 			//source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
+			//HOOK IN APIS --> FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
 
 		};
 

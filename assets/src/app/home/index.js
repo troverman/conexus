@@ -335,6 +335,12 @@ angular.module( 'conexus.home', [
 	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
+
+    //REORGANIZE
+    UserModel.getByUsername($scope.currentUser.username).then(function(model){
+        $scope.currentUser = model;
+        console.log(model)
+    });
     
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },

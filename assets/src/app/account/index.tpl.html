@@ -42,7 +42,7 @@
 
 					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}"></a></span>
 					<h4>{{currentUser.email}}</h4>
-					<p><a href="/projects">25 Projects</a> | <a href="/member/{{currentUser.username}}/followers">23 Followers</a> | <a href="/member/{{currentUser.username}}/followers">22 Following</a>
+                    <p><a href="/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
 
 					<div class="row">
 						<div class="col-sm-6">

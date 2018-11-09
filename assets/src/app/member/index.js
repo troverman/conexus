@@ -387,12 +387,7 @@ angular.module( 'conexus.member', [
             lineWidth: 0,
             min: 0,
         },
-        legend: {
-            enabled: true,
-            align: 'left',
-            verticalAlign: 'middle',
-            layout: 'vertical'
-        },
+        legend: {enabled: false},
         tooltip: {
             shared: true,
         },
@@ -420,6 +415,36 @@ angular.module( 'conexus.member', [
                 text: null
             },
             categories: [],
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        legend: {enabled: false},
+        credits:{enabled:false},
+    };
+
+    $scope.balancePie = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [{
+                name: 'Assets',
+                y: [],
+            }]
+        }],
+        
+        title: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
         },
         yAxis: {
             title: {
@@ -471,12 +496,7 @@ angular.module( 'conexus.member', [
             lineWidth: 0,
             min: 0,
         },
-        legend: {
-            enabled: true,
-            align: 'left',
-            verticalAlign: 'middle',
-            layout: 'vertical'
-        },
+        legend: {enabled: false},
         tooltip: {
             shared: true,
         },
@@ -510,14 +530,15 @@ angular.module( 'conexus.member', [
                 text: null
             }
         },
+        legend:{enabled: false},
         credits:{enabled:false},
     };
 
     //RADIAL | BALANCE
     for (x in Object.keys($scope.balance)){
         //if ($scope.balance[Object.keys($scope.balance)[x]] < 500){
-            $scope.balanceRadial.xAxis.categories.push(Object.keys($scope.balance)[x]);
-            $scope.balanceRadial.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
+        $scope.balanceRadial.xAxis.categories.push(Object.keys($scope.balance)[x]);
+        $scope.balanceRadial.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
         //}
     }
 
@@ -529,6 +550,27 @@ angular.module( 'conexus.member', [
         }
     }
 
+    //PIE | BALANCE
+    //BAD
+    var sortable = [];
+    for (x in $scope.balance) {
+        sortable.push([x, $scope.balance[x]]);
+    }
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+    for (x in sortable){
+        $scope.balancePie.series[0].data.push({
+            name: sortable[x][0],
+            y: sortable[x][1],
+        });
+    }
+    //for (x in Object.keys($scope.balance)){
+    //    $scope.balancePie.series[0].data.push({
+    //        name: Object.keys($scope.balance)[x],
+    //        y: $scope.balance[Object.keys($scope.balance)[x]],
+    //    });
+    //}
 
     //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
@@ -994,12 +1036,7 @@ angular.module( 'conexus.member', [
             lineWidth: 0,
             min: 0,
         },
-        legend: {
-            enabled: true,
-            align: 'left',
-            verticalAlign: 'middle',
-            layout: 'vertical'
-        },
+        legend: {enabled: false},
         tooltip: {
             shared: true,
         },

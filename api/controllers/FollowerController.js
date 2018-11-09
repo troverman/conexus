@@ -38,8 +38,20 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 				Follower.find({follower:follower.id}).then(function(follower){
+
+					//MEH
+					User.find({id:model.followed}).then(function(userModel){
+						userModel.followerCount++;
+						User.update({id:model.followed}, {followerCount:userModel.followerCount}).then(function(user){});
+					});
+					User.find({id:model.follower}).then(function(userModel){
+						userModel.followingCount++;
+						User.update({id:model.follower}, {followingCount:userModel.followingCount}).then(function(user){});
+					});
+
 					Follower.publishCreate(follower[0]);
 					res.json(follower[0]);
+
 				});
 			}
 		});

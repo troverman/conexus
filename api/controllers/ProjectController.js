@@ -53,8 +53,10 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			title: req.param('title'),
+			tags: req.param('tags'),
+			location: req.param('location'),
 			description: req.param('description'),
-			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase(),
+			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
 			user: req.param('user'),
 			parent: req.param('parent'),
 		};

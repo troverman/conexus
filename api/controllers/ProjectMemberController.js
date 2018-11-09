@@ -47,8 +47,18 @@ module.exports = {
 		.exec(function(err, member) {
 			if (err) {return console.log(err);}
 			else {
-				ProjectMember.publishCreate(member);
-				res.json(member);
+
+				//DO ++
+				ProjectMember.find({user:model.user}).then(function(projectMemberModel){
+					var projectCount = 0;
+					projectCount = projectMemberModel.length;
+					User.update({id:model.user}, {projectCount:projectCount}).then(function(user){});
+
+					ProjectMember.publishCreate(member);
+					res.json(member);
+
+				});
+
 			}
 		});
 	},
