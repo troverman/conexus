@@ -545,7 +545,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', 'videos', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService, videos) {
+.controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.contentList = posts;
     $scope.newContent = {};
