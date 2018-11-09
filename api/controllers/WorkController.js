@@ -79,16 +79,26 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		//GET SESSION --> RN FRONTEND BAD SECURITY LEL
+		//MASSIVE AUDIT NEEDED 
+
 		var model = {
 			amount: req.param('amount'),
 			content: req.param('content'),
-			identifer: req.param('identifer'),
 			task: req.param('task'),
+			tags: req.param('tags'),
 			user: req.param('user'),
-			project: req.param('project'),
+			//project: req.param('project'),
 			stream: req.param('stream'),
-			verificationScore: req.param('verificationScore')
+			verificationScore: req.param('verificationScore'),
+			//RETROACTIVE | VS CREATED AT
+			startTime: req.param('startTime'),
+			//source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
+
 		};
+
+		console.log(model)
 
 		Work.create(model)
 		.exec(function(err, work) {

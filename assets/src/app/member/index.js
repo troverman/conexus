@@ -161,7 +161,7 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             work: ['member', 'WorkModel', function(member, WorkModel) {
-                return WorkModel.getSome('user', member.id, 50, 0, 'createdAt DESC');
+                return WorkModel.getSome('user', member.id, 250, 0, 'createdAt DESC');
             }]
         }
     })
@@ -1072,7 +1072,11 @@ angular.module( 'conexus.member', [
 }])
 
 
-.controller( 'MemberTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', function MemberTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work) {
+.controller( 'MemberTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', 'WorkModel', function MemberTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work, WorkModel) {
+    
+    $scope.currentUser = config.currentUser;
+
+    //THE GROUP TESSERACT IS CONENESUS ON TIME ++ DIMENSIONAL WORK
 
     //based on tokens 
     //location mapping over time
@@ -1082,7 +1086,6 @@ angular.module( 'conexus.member', [
     //TODO VIEW --> CONSUMPTION
     //VIZ ON A DAY TIME
     //VIZ ON MONTH TIME
-
     $scope.eventSources = [];
     //IDEALLY WANT THIS TO BE AN INFINITE SCROLL TIMELINE YPE WITH ADVANCED FEATURES RN THIS IS TWO THINGS MASHED
     $scope.calendar = {
@@ -1105,12 +1108,16 @@ angular.module( 'conexus.member', [
         },
         //themeSystem:'bootstrap4',
         //dayClick
-        slotDuration:'00:05:00',
+        slotDuration:'00:15:00',
         nowIndicator: true,
         allDaySlot: false,
     };
 
-    //SELECT
+    $scope.newTimeToggleVar = false;
+    $scope.newTime = {};
+    $scope.newTime.startTime = new Date();
+    $scope.newTime.startTime.setMilliseconds(0);
+
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -1121,11 +1128,36 @@ angular.module( 'conexus.member', [
 
     $scope.work = work;
     $scope.work = work.map(function(obj){
-        var endTime = new Date(obj.createdAt)
-        obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
-        obj.endTime = new Date(obj.createdAt);
-        $scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'work/'+obj.id});
-        return obj
+
+        //HACK | CONFUSING | REMOVE CREATEDAT AS TIME --> FOCUS ON START AND END PARAMS
+        var endTime = new Date();
+        var startTime = new Date();
+
+        if (obj.startTime){
+            startTime = new Date(obj.startTime);
+            obj.startTime = new Date(obj.startTime);
+            obj.endTime = new Date(startTime.setSeconds(startTime.getSeconds() + parseInt(obj.amount)));
+        }
+
+        //DEPRECIATE
+        if(!obj.startTime){
+            endTime = new Date(obj.createdAt);
+            obj.endTime = new Date(obj.createdAt);
+            obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - parseInt(obj.amount)));
+        }
+       
+        if (obj.task){
+            $scope.eventSources.push({
+                title:obj.task.title,
+                start:obj.startTime,
+                end:obj.endTime,
+                allDay:false,
+                url:'work/'+obj.id
+            });
+        }
+
+        return obj;
+
     });
 
     //TODO
@@ -1133,6 +1165,26 @@ angular.module( 'conexus.member', [
 
     //TODO
     $scope.createReaction = function(content, type){};
+
+    $scope.createTime = function(){
+        if($scope.currentUser){
+            $scope.newTime.user = $scope.currentUser.id;
+
+            //HMM
+            $scope.newTime.createdAt = $scope.newTime.startTime;
+
+            console.log($scope.newTime);
+            WorkModel.create($scope.newTime).then(function(model){
+                $scope.newTime = {};
+            });
+
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.newTimeToggle = function() {
+        $scope.newTimeToggleVar = !$scope.newTimeToggleVar;
+    };
 
     $scope.reply = function(item){
         var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);

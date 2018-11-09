@@ -236,11 +236,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Continually state and update what valuable to you, dimensionally.</p>\n" +
     "				<br>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value. It starts with you.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our intentional value mechanism comes from simply stating what we believe is valuable. An empowering call to action.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Empower youself and our collective by clearly and distinctly defining your value map -- relational to a set of validated action sets.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our intentional value mechanism comes from stating what we believe is valuable. An empowering call to action.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Empower youself and our collective by clearly and distinctly defining your value map. State value as relational to sets of validated actions.</p>\n" +
     "				<br>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">What do we know is valuable? Let us come to consensus; to create a 'gestalt.'</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give dimensional value to sets of actions</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">What do we know is valuable? Let's come to consensus; create a 'gestalt.'</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give dimensional value to sets of actions.</p>\n" +
     "				<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
     "\n" +
     "			</div>\n" +
@@ -3731,13 +3731,40 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
     "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div fc fc-options=\"calendar\" ng-model=\"eventSources\" ></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    " </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"true\">\n" +
+    "    <div class=\"\">\n" +
+    "        <div style=\"padding:10px;\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"newTimeToggle()\">+ Time</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"newTimeToggleVar\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <form role=\"form\" ng-submit=\"createTime()\">\n" +
+    "                <div class=\"\">\n" +
+    "                    <input type=\"text\" placeholder= \"Task\" ng-model=\"newTime.task\" class=\"form-control\">\n" +
+    "                    <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder= \"Amount\" ng-model=\"newTime.amount\" class=\"form-control\">\n" +
+    "                    <tags-input ng-model=\"newTime.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "                    <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                </div>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div ng-repeat=\"item in work\">\n" +
