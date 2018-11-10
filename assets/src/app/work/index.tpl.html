@@ -44,7 +44,7 @@
 
 	                    <div layout="">
 	                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-	                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+	                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
 	                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
 	                    </div>
 
@@ -59,11 +59,11 @@
 
 
 
-				<div ng-repeat="verification in workVerification">
-		            <a href="member/{{verification.user.username}}">
-		                <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
-		                {{verification.user.username}}
-		            </a> | {{verification.score}}
+				<div ng-repeat="validation in validations">
+		            <a href="member/{{validation.user.username}}">
+		                <img class="card-avatar" ng-src="{{validation.user.avatarUrl}}" src="{{validation.user.avatarUrl}}" err-src="/images/avatar.png">
+		                {{validation.user.username}}
+		            </a> | {{validation.score}}
 					<div class="spacing-10"></div>
 		        </div>
 
@@ -81,7 +81,7 @@
 						<form ng-submit="filterValidation()">
 							<input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
 						</form>
-						<h5>{{work.verificationScore}} | General </h5>
+						<h5>{{work.validationScore}} | General </h5>
 						<!--relevant dimensions-->
 						<p style="font-size:10px" ng-repeat="tag in work.task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{work.task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
 					</div>
@@ -115,8 +115,8 @@
 
                     <div layout="">
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation[tag]}} {{reputation[tag]}}</span></div>
                     </div>
                     
                 </div>

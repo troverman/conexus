@@ -6853,7 +6853,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "	                    <div layout=\"\">\n" +
     "	                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
-    "	                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "	                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation[tag]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
     "	                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{reputation[tag]}}</span></div>\n" +
     "	                    </div>\n" +
     "\n" +
@@ -6868,11 +6868,11 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "\n" +
     "\n" +
-    "				<div ng-repeat=\"verification in workVerification\">\n" +
-    "		            <a href=\"member/{{verification.user.username}}\">\n" +
-    "		                <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "		                {{verification.user.username}}\n" +
-    "		            </a> | {{verification.score}}\n" +
+    "				<div ng-repeat=\"validation in validations\">\n" +
+    "		            <a href=\"member/{{validation.user.username}}\">\n" +
+    "		                <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "		                {{validation.user.username}}\n" +
+    "		            </a> | {{validation.score}}\n" +
     "					<div class=\"spacing-10\"></div>\n" +
     "		        </div>\n" +
     "\n" +
@@ -6890,7 +6890,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "						<form ng-submit=\"filterValidation()\">\n" +
     "							<input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
     "						</form>\n" +
-    "						<h5>{{work.verificationScore}} | General </h5>\n" +
+    "						<h5>{{work.validationScore}} | General </h5>\n" +
     "						<!--relevant dimensions-->\n" +
     "						<p style=\"font-size:10px\" ng-repeat=\"tag in work.task.tags.split(',')\">0 | <a href=\"market/{{tag.trim()}}+{{work.task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
     "					</div>\n" +
@@ -6924,8 +6924,8 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "                    <div layout=\"\">\n" +
     "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
-    "                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}} {{reputation[tag]}}</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation[tag]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "                       	<div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation[tag]}} {{reputation[tag]}}</span></div>\n" +
     "                    </div>\n" +
     "                    \n" +
     "                </div>\n" +

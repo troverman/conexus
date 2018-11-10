@@ -20,28 +20,32 @@ angular.module( 'conexus.work', [
             //stream: ['PostModel', 'work', function(PostModel, work){
             //    return PostModel.getSome('work', work.id, 1, 0, 'createdAt DESC');
             //}],
-            workVerifications: ['PostModel', 'work', function(PostModel, work){
+            validations: ['ValidationModel', 'work', function(ValidationModel, work){
+                //ValidationModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
                 return null;
             }],
         }
     });
 }])
 
-.controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, work, WorkModel) {
+.controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
     titleService.setTitle('Work | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.member = {};
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.newVerification = {};
+    $scope.newValidation = {};
 
     $scope.reputationMultiplier = 1; // {reputationWeightObj}
+
+    //HUMAN VALIDATED AI VERIFY? 
+    //VALID VS VERIFY
 
     $scope.posts = posts;
     $scope.taskTime = 0;
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
-    $scope.workVerification = [];
+    $scope.validations = [];//validations;
     $scope.work = work;
 
     $scope.tokens = [];
@@ -91,7 +95,7 @@ angular.module( 'conexus.work', [
 
     $scope.createPost = function(post) {
         if ($scope.currentUser){
-            $scope.newContent.post = post.id;
+            if (post){$scope.newContent.post = post.id}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.work = $scope.work.id;
             PostModel.create($scope.newContent).then(function(model) {
@@ -121,16 +125,15 @@ angular.module( 'conexus.work', [
         //..
 
         //if ($scope.currentUser){
+        $scope.validations.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
+        $scope.work.validationScore += parseFloat($scope.currentUser.totalWork);
 
-        $scope.workVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
-        $scope.work.verificationScore += parseFloat($scope.currentUser.totalWork);
-
-        $scope.newVerification.user = $scope.currentUser;
-        $scope.newVerification.score = $scope.currentUser.totalWork; // Dimensional Weight / Multiplier
+        $scope.newValidation.user = $scope.currentUser.id;
+        $scope.newValidation.score = $scope.currentUser.totalWork; // Dimensional Weight / Multiplier
 
         console.log($scope.newValidation);
 
-        //VerificationModel.create($scope.newVerification).then(function(model){
+        //ValidationModel.create($scope.newVerification).then(function(model){
             //$scope.newVerification = {};
         //});
 
