@@ -12,7 +12,7 @@ module.exports = {
             type: 'string',
         },
         user: {
-            type: 'string',
+            model: 'user'
         },
         validation:{
             type: 'json',

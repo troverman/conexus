@@ -85,15 +85,6 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            //TOD: ALL
-            streams: [function() {
-                return [
-                    {title:'Work Stream 597c55f43456040315c6724c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
-                    {title:'Task 597c55e56833040315c6724c Stream',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
-                    {title:'Task 425c35e56833040315c6724c Stream 2',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()},
-                    {title:'multiDimensional Stream 597c55e56833048165c6720c',streamUrl:'https://www.cre8bid.io/v/597c55e56833048165c6720c', user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}, createdAt: new Date()}
-                ];
-            }],
             content: ['PostModel', 'project', function(PostModel, project){
                 return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],            
@@ -492,18 +483,16 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$location', '$sce', '$scope', 'content', 'PostModel', 'project', 'streams', 'titleService', function ProjectController( $location, $sce, $scope, content, PostModel, project, streams, titleService ) {
+.controller( 'ProjectContentCtrl', ['$location', '$sce', '$scope', 'content', 'PostModel', 'project', 'titleService', function ProjectController( $location, $sce, $scope, content, PostModel, project, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
     $scope.content = content;
     $scope.newContent = {};
     $scope.newContentToggleVar = false;
     $scope.project = project;
-    $scope.streams = streams;
-    $scope.AudioContext = {};
-    $scope.videoContext = {};
 
     $scope.newContent.parent = project.id;
     //$scope.newContent.tags = project.title+','
+    $scope.selectedType = 'POST';
 
     $scope.createContent = function(content) {
         if ($scope.currentUser){
@@ -513,6 +502,7 @@ angular.module( 'conexus.project', [
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                 return obj.text
             }).join(",");
+            $scope.newContent.type = $scope.selectedType;
             PostModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.content.unshift(model);
@@ -522,7 +512,6 @@ angular.module( 'conexus.project', [
     };
 
     $scope.loadTags = function(query) {
-        //return ['hi'];
         //return $http.get('/tags?query=' + query);
     };
 
@@ -550,6 +539,11 @@ angular.module( 'conexus.project', [
     };
 
     $scope.search = function(){};
+
+    $scope.selectType = function(type){
+        $scope.selectedType = type;
+    };
+
 
 }])
 

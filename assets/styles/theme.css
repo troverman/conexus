@@ -39,6 +39,9 @@ a:focus{text-decoration: none}
   display: table;
 }
 
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{background-color:#002c54;}
+.contentTyle{font-weight:bold;margin-top:5px;margin-bottom:5px;}
+
 .avatar {
     position:absolute;
     top:6.4em;

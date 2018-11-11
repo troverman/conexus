@@ -331,10 +331,22 @@ angular.module( 'conexus.home', [
     };
 }])
 
-.controller( 'FeedCtrl', ['$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
 	titleService.setTitle('CRE8.XYZ');
 
 	$scope.currentUser = config.currentUser;
+
+    $scope.sideNavToggle = function(){
+        $mdSidenav('nav').toggle();
+    };
+
+    $scope.contentToggle = function(){
+        $mdSidenav('content').toggle();
+    };
+
+    $scope.transactionToggle = function(){
+        $mdSidenav('transaction').toggle();
+    };
 
     //REORGANIZE
     UserModel.getByUsername($scope.currentUser.username).then(function(model){

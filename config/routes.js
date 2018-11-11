@@ -146,7 +146,6 @@ module.exports.routes = {
   'post /api/transaction': 'TransactionController.create',
   'delete /api/transaction/:id': 'TransactionController.destroy',
 
-
   /**
    * User routes
    */
@@ -164,6 +163,13 @@ module.exports.routes = {
   'get /api/work': 'WorkController.getSome',
   'get /api/work/:id': 'WorkController.getOne',
   'post /api/work': 'WorkController.create',
+
+  /**
+   * Validation routes
+   */
+  'get /api/validation': 'ValidationController.getSome',
+  'get /api/validation/:id': 'ValidationController.getOne',
+  'post /api/validation': 'ValidationController.create',
 
   //'get /*' : 'HomeController.index'
 

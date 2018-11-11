@@ -10,6 +10,15 @@
 
 	<div class="spacing-10"></div>
 
+	<div class="row" ng-show="!work.stream">
+		<div class="card">
+		    <div style="padding:16px;">
+		    	<h4>No Stream</h4>
+			</div>
+		</div>
+	</div>
+
+	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->
 	<div class="row">
 		<div class="card">
 
@@ -19,75 +28,32 @@
 					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
 					{{work.user.username}}
 				</a>
-				<p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+				<p><a ng-repeat="tag in tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                 <p><span style="display:inline" ng-bind-html="renderContent(work.content)"></span></p>
 				<p style="color:gray" am-time-ago="work.createdAt"></p>
-					
-				<!--<button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'plus')">+</button>
-		        <button style="width:20%;" class="btn btn-default log-btn" ng-click="verifyWork(item, 'minus')">-</button>-->
-
-
-		        <div ng-show="false">
-		        	<h5>Validation</h5>
-					<div layout="">
-	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-	                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
-	                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{member.totalWork}}</span></div>
-	                </div>
-
-			        <div ng-repeat="tag in work.task.tags.split(',')">
-
-	                    <!--<md-slider-container>
-	                        <md-slider ng-model="vote" min="-100" max="100" aria-label="green" class="md-accent"></md-slider>
-	                        <md-input-container><input type="number" ng-model="vote"></md-input-container>
-	                    </md-slider-container>-->
-
-	                    <div layout="">
-	                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-	                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-	                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{reputation[tag]}}</span></div>
-	                    </div>
-
-	                    <!--<span>{{tag}} <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider></span>-->
-	                    
-	                </div>
-
-                	<text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-					<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-
-		    	</div>
-
-
 
 				<div ng-repeat="validation in validations">
 		            <a href="member/{{validation.user.username}}">
 		                <img class="card-avatar" ng-src="{{validation.user.avatarUrl}}" src="{{validation.user.avatarUrl}}" err-src="/images/avatar.png">
 		                {{validation.user.username}}
-		            </a> | {{validation.score}}
+		            </a> | {{validation.validation.general}}<!-- | {{validation.validation}} -->
 					<div class="spacing-10"></div>
 		        </div>
 
-
 			</div>
 
+			<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->
 			<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
-
-				<!--TODO: GRAULAR VERIFICATION | SCALE 0-1 (INFINITE DECIMAL)-->
-				<!--TODO: DIMENSIONALITY-->
 				<div class="card">
 					<div style="padding:16px">
-
 						<h4><a href="#">Work Validation <i class="fa fa-question-circle"></i></a></h4>
-						<form ng-submit="filterValidation()">
+						<!--<form ng-submit="filterValidation()">
 							<input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
-						</form>
+						</form>-->
 						<h5>{{work.validationScore}} | General </h5>
-						<!--relevant dimensions-->
-						<p style="font-size:10px" ng-repeat="tag in work.task.tags.split(',')">0 | <a href="market/{{tag.trim()}}+{{work.task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
+						<p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{work.task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
 					</div>
-
 				</div>
-		 
 			</div>
 
 			<div style="clear:both"></div>
@@ -100,6 +66,8 @@
 		</div>
 	</div>
 
+	<!--TODO: VALIDATION -->
+	<!--TODO: UI -->
 	<div class="row" ng-show="true">
 		<div class="card">
 			<div style="padding:16px">
@@ -107,80 +75,48 @@
                 <h5>Validate <i class="fa fa-check"></i></h5>
 				<div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validation" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{validation}} {{member.totalWork}}</span></div>
+                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{member.totalWork}}</span></div>
                 </div>
 
-		        <div ng-repeat="tag in work.task.tags.split(',')">
-
+		        <div ng-repeat="tag in tags">
                     <div layout="">
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation[tag]}} {{reputation[tag]}}</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
+                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag]}} | {{reputation[tag] || 0}}</span></div>
                     </div>
-                    
                 </div>
 
-            	<text-angular ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+            	<text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
 				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
 
 			</div>
 		</div>
 	</div>
 
+	<!--TODO: TOKEN CLARITY-->
+	<!--TODO: COLLAPSE UI-->
+	<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
+	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
+	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px">
-				<!--TODO: TOKEN CLARITY-->
-				<!--TODO: COLLAPSE UI-->
-				<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
+
 				<h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
 				<div>
                     <a ng-repeat="token in tokens" href="market/{{token}}">{{work.amount}} {{token}}, </a>
 				</div>
 
+				<div>
+					<a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a>
+					<a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a>
+					<a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a>
+				    <a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a>
+				    <a ng-repeat="tag in tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a>
+				   	<a href="market/general">general</a>
+			   </div>
 
-				<!--<p><a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a></p>
-				<p><a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a></p>-->
-				<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
-				<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-				<!--<p><a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a></p>
-			    <p><a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a></p>
-			    <p><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a></p>
-			    <p><a href="market/general">general</a></p>-->
-
-
-			</div>
-		</div>
-	</div>
-
-	<!--TODO: REAL STREAM-->
-	<!--<div class="row" ng-show="work.stream">
-		<div class="card">
-		    <div style="padding:16px;">
-
-				<div style="text-align:center;"><div ng-bind-html="renderContent(work.stream.content)"></div></div>
-				<p><a style="font-weight:700" href="member/{{work.user.username}}">
-					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}">
-					{{work.user.username}}
-				</a> | <span am-time-ago="work.stream.createdAt"></span></p>
-
-
-			</div>
-			<div class="card-footer">
-				<a href="#" ng-click="createReaction(work.stream, 'plus')"><i class="fa fa-angle-up"></i> {{work.stream.plusCount}} like </a> 
-				<a href="#" ng-click="createReaction(work.stream, 'minus')" ><i class="fa fa-angle-down"></i> {{work.stream.minusCount}} dislike </a>
-				<a href="#" ng-click="reply(work.stream)"><i class="fa fa-comment-o"></i> comment </a>
-				<a style="padding:0px" class="pull-right" href="content/{{work.stream.id}}"><i class="fa fa-link grey"></i></a>
-			</div>
-		</div>
-	</div>-->
-
-	<!--TODO: REAL STREAM-->
-	<div class="row" ng-show="!work.stream">
-		<div class="card">
-		    <div style="padding:16px;">
-		    	<h4>No Stream</h4>
 			</div>
 		</div>
 	</div>
@@ -200,6 +136,7 @@
 	    </div>
 	</div>
 
+	<!--TODO: NESTED RENDER-->
 	<div class="row">
 	    <div ng-repeat="post in posts">
 	        <div class="card">
@@ -217,7 +154,6 @@
 					<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
 					<a style="padding:0px" class="pull-right" href="content/{{post.id}}"><i class="fa fa-link grey"></i></a>
 				</div>
-				<!--TODO: NESTED -->
 				<div ng-show="post.showReply" class="card-footer">
 					<form role="form" ng-submit="newContent(post)">
 						<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>

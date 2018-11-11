@@ -1,6 +1,7 @@
 angular.module( 'conexus.work', [
 ])
 
+//TODO: CONVERT TO TIME
 .config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'work', {
         url: '/work/:id',
@@ -17,12 +18,8 @@ angular.module( 'conexus.work', [
             posts: ['PostModel', 'work', function(PostModel, work){
                 return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
-            //stream: ['PostModel', 'work', function(PostModel, work){
-            //    return PostModel.getSome('work', work.id, 1, 0, 'createdAt DESC');
-            //}],
             validations: ['ValidationModel', 'work', function(ValidationModel, work){
-                //ValidationModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
-                return null;
+                return ValidationModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
@@ -31,60 +28,52 @@ angular.module( 'conexus.work', [
 .controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
     titleService.setTitle('Work | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.work = work;
+    $scope.work.validationScore = 0;
+
     $scope.member = {};
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
-
-    $scope.reputationMultiplier = 1; // {reputationWeightObj}
-
-    //HUMAN VALIDATED AI VERIFY? 
-    //VALID VS VERIFY
-
+    $scope.newValidation.validation = {}
     $scope.posts = posts;
+    $scope.tags = $scope.work.task.tags.split(',');
     $scope.taskTime = 0;
-    $scope.working = false;
-    $scope.totalTime = (Math.random()*1000000).toFixed(0);
-    $scope.validations = [];//validations;
-    $scope.work = work;
-
     $scope.tokens = [];
     $scope.tokens.push('Token');
     $scope.tokens.push('WorkToken');
     $scope.tokens.push('Work+'+$scope.work.id);
-    //for x in scope.tadk.tags.split()
-    //$scope.tokens.push('Work+'+$scope.work.id);
+    $scope.totalTime = (Math.random()*1000000).toFixed(0);
+    $scope.validations = validations;
+
+    $scope.newValidation.validation.general = 0;
+    for (x in $scope.tags){
+        $scope.newValidation.validation[$scope.tags[x]] = 0;
+    }
+
+    //HUMAN VALIDATED AI VERIFY? 
+    //VALID VS VERIFY
 
     //UNIFY CONTENT AND WORK??
     //WORK AS A TYPE
-    $scope.validation = 0;
-    $scope.slider = {
-        value: 0,
-        options: {
-            floor: -1,
-            ceil: 1,
-            step: 0.00001,
-            precision: 3
-        }
-    }
+   
+    //for x in scope.tadk.tags.split()
+    //$scope.tokens.push('Work+'+$scope.work.id);
 
-    //BETTER
+    //TODO: BETTER
     if($scope.currentUser){
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
             $scope.member = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
-            //PROJ REL
         });
     }
-
-
 
     if ($scope.work.task.tags){
         for (x in $scope.work.task.tags.split(',')){
             $scope.tokens.push($scope.work.task.tags.split(',')[x].trim());
-            $scope.tokens.push('Task+'+$scope.work.task.tags.split(',')[x].trim())
-            $scope.tokens.push('Task+'+$scope.work.task.id+'+'+$scope.work.task.tags.split(',')[x].trim())
+            $scope.tokens.push('Task+'+$scope.work.task.tags.split(',')[x].trim());
+            $scope.tokens.push('Task+'+$scope.work.task.id+'+'+$scope.work.task.tags.split(',')[x].trim());
         }
     }
 
@@ -110,40 +99,27 @@ angular.module( 'conexus.work', [
         $scope.newReaction.user = $scope.currentUser.id;
         $scope.newReaction.post = post.id;
         $scope.newReaction.type = type;
-        //TODO: MODEL | CREATE REACTION
         //Reaction.create(newReaction);
         var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
         if (type =='plus'){$scope.posts[index].plusCount++}
         if (type =='minus'){$scope.posts[index].minusCount++}
-        //TODO: UPDATE POST
     };
 
-
+    //TODO: LAYERS | PROJ BASED LAYER
     $scope.createValidation = function(){
-
-        //PROJ BASED LAYER
-        //..
-
-        //if ($scope.currentUser){
-        $scope.validations.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
-        $scope.work.validationScore += parseFloat($scope.currentUser.totalWork);
-
-        $scope.newValidation.user = $scope.currentUser.id;
-        $scope.newValidation.score = $scope.currentUser.totalWork; // Dimensional Weight / Multiplier
-
-        console.log($scope.newValidation);
-
-        //ValidationModel.create($scope.newVerification).then(function(model){
-            //$scope.newVerification = {};
-        //});
-
-        //}
-
-        //else{$location.path('/login')}
-
+        if ($scope.currentUser){
+            $scope.newValidation.work = $scope.work.id;
+            $scope.newValidation.user = $scope.currentUser.id;
+            ValidationModel.create($scope.newValidation).then(function(model){
+                $scope.newValidation = {};
+                $scope.validations.push(model);
+                console.log(model);
+            });
+        }
+        else{$location.path('/login')}
     };
 
-    //YIKES
+    //TODO: IMPROVE
     $scope.renderContent = function(post){
         if (post){
             if (!post.includes('>')){
@@ -159,33 +135,6 @@ angular.module( 'conexus.work', [
         var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
         $scope.posts[index].showReply = !$scope.posts[index].showReply
     };
-
-    //TODO: GET SOME
-
-
-    var cameraPreview = document.getElementById('camera-preview');
-    //testing out streaming! :D
-    function initializeRecorder(stream) {
-        var mediaStream = stream;
-        console.log(stream)
-        var recordAudio = RecordRTC(stream, {
-            onAudioProcessStarted: function() {
-                recordVideo.startRecording();
-                cameraPreview.src = window.URL.createObjectURL(stream);
-                cameraPreview.play();
-                cameraPreview.muted = true;
-                cameraPreview.controls = false;
-            }
-        });
-        var recordVideo = RecordRTC(stream, {
-            type: 'video'
-        });
-        recordAudio.startRecording();
-        stopRecording.disabled = false;
-    };
-
-
-
 
     //TODO: WEBSOCKETS | WEB3
     $sailsSocket.subscribe('post', function (envelope) {

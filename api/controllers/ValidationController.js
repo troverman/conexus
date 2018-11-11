@@ -74,10 +74,12 @@ module.exports = {
 			validation: req.param('validation'),
 			work: req.param('work'),
 		};
+		console.log(model);
 		Validation.create(model)
 		.exec(function(err, validation) {
 			if (err) {return console.log(err);}
 			else {
+				console.log(validation);
 				Validation.publishCreate(validation);
 				res.json(validation);
 			}

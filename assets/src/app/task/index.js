@@ -91,12 +91,24 @@ angular.module( 'conexus.task', [
 
     //STORED AS A MATRIX; algabraic lattice. 
 
-
-
     //TEST
     $scope.showTokens = function(){
         /*
+        md-backdrop.md-opaque.md-default-theme,
+        .md-dialog-container {
+          position:fixed;
+        }
+        .md-dialog-container {
+            width: 100%;
+            height: 100%;
+            top: inherit !important;
+            bottom: 0px;
+            left: 0px;
+            position: fixed;
+        }
+        <body layout="column">
         $mdDialog.show({
+            //contentElement: '#myStaticDialog',
             controller: 'TokenModalController',
             templateUrl: 'task/tokenModal.tpl.html',
             //parent: angular.element('container'),
@@ -201,13 +213,10 @@ angular.module( 'conexus.task', [
 
     $scope.startWork = function() {
         if ($scope.currentUser){
-
             if ($scope.streaming){
-
                 //STREAMING CREATES A POST -->
                 //TODO.. INIT STREAM HERE ~~~~
                 //startStream();
-
                 $scope.newPost = {
                     type:'video',
                     title: $scope.task.title,
@@ -216,14 +225,11 @@ angular.module( 'conexus.task', [
                     user: $scope.currentUser.id,
                     //parent: $scope.work..
                 };
-
                 PostModel.create($scope.newPost).then(function(postModel){
                     console.log('create', postModel)
                     $scope.streamingId = postModel.id;
                 });
-
             }
-
             if($scope.working === true) return false;
             $scope.working = true;
             $scope.interval = setInterval($scope.updateCount, 1000);

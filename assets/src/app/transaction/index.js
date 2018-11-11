@@ -31,9 +31,9 @@ angular.module( 'conexus.transaction', [
     $scope.transaction = transaction;
 
     //PACKAGE | NESTED RENDERING
-    $scope.createContent = function(post) {
+    $scope.createContent = function(content) {
         if ($scope.currentUser){
-            $scope.newContent.post = post.id;
+            if(content){$scope.newContent.post = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.transaction = $scope.transaction.id;
             PostModel.create($scope.newContent).then(function(model) {
@@ -44,7 +44,7 @@ angular.module( 'conexus.transaction', [
     };
 
     //TODO
-    $scope.createReaction = function(post, type){
+    $scope.createReaction = function(content, type){
         $scope.newReaction.amount = 1;
         $scope.newReaction.post = content.id;
         $scope.newReaction.type = type;
