@@ -27,16 +27,19 @@ angular.module( 'conexus.task', [
 .controller( 'TaskController', ['$location', '$mdDialog', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdDialog, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
     titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.task = task;
+
     $scope.newPost = {};
     $scope.newReaction = {};
-    $scope.verification = {};
+    $scope.newValidation = {};
+    $scope.newValidation.validation = {}
     $scope.posts = posts;
     $scope.question = false;
     $scope.reputationMultiplier = 1;
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
-    $scope.task = task;
+    $scope.tags = $scope.task.tags.split(',');
     $scope.task.verificationScore = 0;
     $scope.taskTime = 0;
     $scope.taskVerification = [];
@@ -45,32 +48,26 @@ angular.module( 'conexus.task', [
     $scope.verification = {};
     $scope.work = work;
 
-    $scope.slider = {
-        value: 0,
-        options: {
-            floor: -1,
-            ceil: 1,
-            step: 0.00001,
-            precision: 3
-        }
+    $scope.newValidation.validation.general = 0;
+    for (x in $scope.tags){
+        $scope.newValidation.validation[$scope.tags[x]] = 0;
     }
 
-    //TODO
+    //TODO | TOKENS
     $scope.tokens = [];
-    //$scope.tokens.push('Token');
-    //$scope.tokens.push('Task+Token');
-    //$scope.tokens.push('Task+Token+'+$scope.task.id);
+    $scope.tokens.push('Token');
+    $scope.tokens.push('Task+Token');
+    $scope.tokens.push('Task+Token+'+$scope.task.id);
     $scope.tokens.push('Task');
     $scope.tokens.push('Task+'+$scope.task.id);
     if ($scope.task.tags){
-        for (x in $scope.task.tags.split(',')){
-            $scope.tokens.push($scope.task.tags.split(',')[x].trim());
-            $scope.tokens.push('Task+'+$scope.task.tags.split(',')[x].trim())
-            $scope.tokens.push('Task+'+$scope.task.id+'+'+$scope.task.tags.split(',')[x].trim())
+        for (x in $scope.tags){
+            $scope.tokens.push($scope.tags[x].trim());
+            $scope.tokens.push('Task+'+$scope.tags[x].trim())
+            $scope.tokens.push('Task+'+$scope.task.id+'+'+$scope.tags[x].trim())
 
         }
     }
-
     for (x in $scope.tokens){
         $scope.tokens.push($scope.tokens[x]+'+onStream');
     }
@@ -83,12 +80,10 @@ angular.module( 'conexus.task', [
       }, [[]]);
     };
 
-    //$scope.test = $scope.task.tags.split(',');
     //$scope.test = [];
     //$scope.test.push('Task');$scope.test.push($scope.task.id);$scope.test.push('onTimeStream')
     //console.log(getAllSubsets($scope.test));
     //$scope.tokens = getAllSubsets($scope.test);
-
     //STORED AS A MATRIX; algabraic lattice. 
 
     //TEST
@@ -166,6 +161,7 @@ angular.module( 'conexus.task', [
     };
 
     //TODO | MOTIONS INTERLOCK
+    //LINK INTO CONTENT MODEL ? --> ONLY MOTIONS
     $scope.createValidation = function(){
 
         $scope.taskVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});

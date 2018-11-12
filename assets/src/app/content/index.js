@@ -31,11 +31,23 @@ angular.module( 'conexus.content', [
     $scope.marketOutput = [];
     $scope.newContent = {};
     $scope.newReaction = {};
+    $scope.newValidation = {};
+    $scope.newValidation.validation = {};
+    $scope.newValidation.validation.general = 0;
     $scope.post = post;
     if(!$scope.post){$location.path('/')}
     $scope.reactions = reactions;
     $scope.toggleTokenVar = false;
     $scope.viewTime = 0;
+
+    //TODO | BETTER
+    if($scope.currentUser){
+        UserModel.getByUsername($scope.currentUser.username).then(function(member){
+            $scope.member = member;
+            $scope.balance = member.balance;
+            $scope.reputation = member.reputation;
+        });
+    }
 
     $scope.toggleToken = function(){
         $scope.toggleTokenVar =!$scope.toggleTokenVar

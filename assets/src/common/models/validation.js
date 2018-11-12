@@ -9,7 +9,8 @@ angular.module('models.validation', ['lodash', 'services', 'sails.io',])
 
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
-        if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
+        if (type=='id'){query = {params:{id:filter, limit:limit,skip:skip,sort:sort}};}
+        else if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='task'){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='work'){query = {params:{work:filter, limit:limit,skip:skip,sort:sort}};}

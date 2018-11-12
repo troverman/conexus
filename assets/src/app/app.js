@@ -45,6 +45,7 @@ angular.module( 'conexus', [
     'conexus.transaction',
     'conexus.transparency',
     'conexus.work',
+    'conexus.validation',
     'conexus.view'
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {

@@ -9,6 +9,7 @@ module.exports = {
 		var task = req.query.task;
 		var user = req.query.user;
 		var work = req.query.work;
+		var id = req.query.id;
 
 		Validation.watch(req);
 
@@ -51,6 +52,18 @@ module.exports = {
 
 		else if (req.query.work){
 			Validation.find({work:work})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Validation.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if(req.query.id){
+			Validation.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)

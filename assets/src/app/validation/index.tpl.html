@@ -1,0 +1,32 @@
+
+<div class="container">
+
+	<div class="spacing-10"></div>
+
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<a href="member/{{validation.user.username}}">
+					<img class="card-avatar" src="{{validation.user.avatarUrl}}"/>
+					{{validation.user.username}}
+				</a>
+				<!--<p ng-repeat="validation in validation.validation">{{validation}}</p>-->
+				{{validation.validation}}
+			</div>
+			<div class="card-footer">
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+		    </div>
+		    <div ng-show="post.showReply" class="card-footer">
+				<form role="form" ng-submit="createPost(post)">
+					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="spacing-50"></div>
+
+</div>

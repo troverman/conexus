@@ -51,6 +51,7 @@
 				<div style="max-height:500px;overflow:scroll" ng-show="post.type!='video'">
 					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
 				</div>
+				
 		    </div>
 		    <div class="card-footer">
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -64,6 +65,23 @@
 				</form>
 			</div>
 			<!--<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>-->
+		</div>
+	</div>
+	<!--TODO: MOTION VALIDATION-->
+	<div class="row" ng-show="post.type == 'MOTION'">
+		<div class="card">
+		    <div style="padding:16px">
+
+		    	MOTION VALIDATION
+		    	<div layout="">
+                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{member.totalWork || 0}}</span></div>
+                </div>
+                <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+
+		    </div>
 		</div>
 	</div>
 
