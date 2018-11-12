@@ -25,7 +25,7 @@ angular.module( 'conexus.content', [
     });
 }])
 
-.controller( 'ContentController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'ReactionModel', 'reactions', 'titleService', function ContentController( $location, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, ReactionModel, reactions, titleService ) {
+.controller( 'ContentController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, ReactionModel, reactions, titleService, UserModel ) {
     titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.marketOutput = [];
