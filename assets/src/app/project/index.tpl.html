@@ -40,7 +40,7 @@
                         <li><a href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
                         <li><a href="project/{{project.urlTitle}}/time">Time</a></li>
                         <li><a class="btn btn-default" ng-click="newTransactionToggle()">Send Tokens</a></li>
-                        <li ng-show="true"><a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a></li>
+                        <!--<li ng-show="true"><a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a></li>-->
                         <li ng-show="true"><a class="btn btn-default" ng-click="createMember()">Join</a></li>
                     </ul>
                 </div>
@@ -59,13 +59,14 @@
                     </form>
                 </div>-->
                 <br>
+                <h4><a href="project/{{project.urlTitle}}/about">About</a></h4>
                 <h4><a href="project/{{project.urlTitle}}">Activity</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/assets">Assets</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/channels">Channels</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/content">Content</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/members">{{memberCount}} Members</a></h4>
-                <h4><a href="project/{{project.urlTitle}}">Map</a></h4>
+                <!--<h4><a href="project/{{project.urlTitle}}">Map</a></h4>-->
                 <h4><a href="project/{{project.urlTitle}}/marketplace">Marketplace</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/projects">Projects</a></h4>
@@ -106,6 +107,7 @@
 <div class="container" ng-show="editProjectToggleVar"><p>edit project form</p></div>
 
 <div class="container">
+    <div ui-view="projectAbout"></div>
     <div ui-view="projectActivity"></div>
     <div ui-view="projectAssets"></div>
     <div ui-view="projectChannels"></div>

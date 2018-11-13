@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/tokenModal.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/tokenModal.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -532,9 +532,9 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px\">\n" +
     "\n" +
-    "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}\"></a></span>\n" +
+    "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{currentUser.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></a></span>\n" +
     "					<h4>{{currentUser.email}}</h4>\n" +
-    "                    <p><a href=\"/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
+    "                    <p><a href=\"/member/{{currentUser.username}}/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "\n" +
     "					<div class=\"row\">\n" +
     "						<div class=\"col-sm-6\">\n" +
@@ -1262,7 +1262,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div style=\"padding:16px;\">\n" +
     "                    <span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{member.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\"></a></span>\n" +
     "                    <h4>{{currentUser.email}}</h4>\n" +
-    "                    <p><a href=\"/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
+    "                    <p><a href=\"/member/{{currentUser.username}}/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-6\">\n" +
     "                            <h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
@@ -2932,12 +2932,12 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "					<ul class=\"member-tabs\">\n" +
     "						<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/content\">Content</a></li>\n" +
-    "						<li><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></li>\n" +
-    "						<li><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></li>\n" +
-    "						<!--<li><a href=\"member/{{member.username}}\">{{followersCount.length}} Projects</a></li>-->\n" +
+    "						<li><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></li>\n" +
+    "						<li><a href=\"member/{{member.username}}/following\">{{member.followingCount}} Following</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/ledger\">Ledger</a></li>\n" +
     "						<!--<li><a href=\"member/{{member.username}}\">Map</a></li>-->\n" +
     "						<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "						<!--<li><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></li>-->\n" +
     "						<li><a href=\"member/{{member.username}}/time\">Time</a></li>\n" +
     "						<li ng-show=\"currentUser.id != member.id\">\n" +
     "							<a class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
@@ -2955,14 +2955,15 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
     "				<md-divider style=\"color:gray\"></md-divider>\n" +
     "				<div class=\"container\">\n" +
-    "					<!--SEARCH-->\n" +
+    "					<!--TODO | SEARCH-->\n" +
     "					<br>\n" +
     "					<h4><a href=\"member/{{member.username}}\">Activity</a></h4>\n" +
     "					<h4><a href=\"member/{{member.username}}/content\">Content</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/followers\">{{followersCount.length}} Followers</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/following\">{{followingCount.length}} Following</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/following\">{{member.followingCount}} Following</a></h4>\n" +
     "					<h4><a href=\"member/{{member.username}}/ledger\">Ledger</a></h4>\n" +
     "					<h4><a href=\"member/{{member.username}}/positions\">Positions</a></h4>\n" +
+    "					<h4><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></h4>\n" +
     "					<h4><a href=\"member/{{member.username}}/time\">Time</a></h4>\n" +
     "					<br>\n" +
     "				</div>\n" +
@@ -2974,6 +2975,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "					<h5>@{{member.username}}</h5>\n" +
     "					<p>{{member.totalWork}} | Total Reputation</p>\n" +
     "				</div>\n" +
+    "				<!--TODO-->\n" +
     "				<div class=\"pull-right\" style=\"margin-right:15px;margin-top:10px;\">\n" +
     "					<!--<h2>{{member.totalWork}} | total work</h2>-->\n" +
     "					<!--<input type=\"text\" placeholder=\"Reputation\" ng-model=\"reputationLookup\" class=\"form-control\">-->\n" +
@@ -2984,7 +2986,6 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "					<a ng-show=\"member.socialAccounts.facebook.profileUrl\" href=\"{{member.socialAccounts.facebook.profileUrl}}\"  target=\"_blank\"><span class=\"grey facebook-icon\"><i class=\"fa fa-facebook\"></i> Facebook</span></a>\n" +
     "					<a ng-show=\"member.socialAccounts.twitter.profileUrl\" href=\"{{member.socialAccounts.twitter.profileUrl}}\"  target=\"_blank\"><span class=\"grey twitter-icon\"><i class=\"fa fa-twitter\"></i> Twitter</span></a>\n" +
     "					<a ng-show=\"member.socialAccounts.google.profileUrl\" href=\"{{member.socialAccounts.google.profileUrl}}\"  target=\"_blank\"><span class=\"grey google-icon\"><i class=\"fa fa-google\"></i> Google</span></a>\n" +
-    "\n" +
     "				</div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
@@ -3022,6 +3023,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div ui-view=\"memberFollowing\"></div>\n" +
     "		<div ui-view=\"memberLedger\"></div>\n" +
     "		<div ui-view=\"memberPositions\"></div>\n" +
+    "		<div ui-view=\"memberProjects\"></div>\n" +
     "		<div ui-view=\"memberTime\"></div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
@@ -3636,6 +3638,22 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "");
 }]);
 
+angular.module("member/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("member/templates/projects.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"project in projects\">\n" +
+    "	<div class=\"member-card\">\n" +
+    "		<div class=\"member-card-image\" style=\"background-color:black\">\n" +
+    "	        <a href=\"project/{{project.project.title}}\"><img ng-src=\"{{project.project.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "	    </div>\n" +
+    "	    <div class=\"member-card-info\">\n" +
+    "	        <h4><a href=\"project/{{project.project.title}}\">{{project.project.title}}</a></h4>\n" +
+    "	        <p style=\"color:gray\">Member | 888</p>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "</div>");
+}]);
+
 angular.module("member/templates/time.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/time.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
@@ -4078,7 +4096,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                        <li><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}/time\">Time</a></li>\n" +
     "                        <li><a class=\"btn btn-default\" ng-click=\"newTransactionToggle()\">Send Tokens</a></li>\n" +
-    "                        <li ng-show=\"true\"><a class=\"btn btn-default\" ng-show=\"isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a></li>\n" +
+    "                        <!--<li ng-show=\"true\"><a class=\"btn btn-default\" ng-show=\"isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a></li>-->\n" +
     "                        <li ng-show=\"true\"><a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
@@ -4097,13 +4115,14 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                    </form>\n" +
     "                </div>-->\n" +
     "                <br>\n" +
+    "                <h4><a href=\"project/{{project.urlTitle}}/about\">About</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}\">Activity</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/channels\">Channels</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/members\">{{memberCount}} Members</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}\">Map</a></h4>\n" +
+    "                <!--<h4><a href=\"project/{{project.urlTitle}}\">Map</a></h4>-->\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/marketplace\">Marketplace</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
@@ -4144,6 +4163,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<div class=\"container\" ng-show=\"editProjectToggleVar\"><p>edit project form</p></div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
+    "    <div ui-view=\"projectAbout\"></div>\n" +
     "    <div ui-view=\"projectActivity\"></div>\n" +
     "    <div ui-view=\"projectAssets\"></div>\n" +
     "    <div ui-view=\"projectChannels\"></div>\n" +
@@ -4161,6 +4181,20 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "<div ng-include=\"'footer/index.tpl.html'\"></div>");
+}]);
+
+angular.module("project/templates/about.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/templates/about.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "            <h1>About {{project.title}}</h1>\n" +
+    "            <p>{{project.description}}</p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {

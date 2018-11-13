@@ -34,7 +34,7 @@ angular.module( 'conexus.account', [
     //TODO: BETTER
     UserModel.getByUsername($scope.currentUser.username).then(function(member){
         $scope.newAccountInformation = member
-        $scope.member = member;
+        $scope.currentUser = member;
         $scope.balance = member.balance;
         $scope.reputation = member.reputation;
     });

@@ -23,6 +23,7 @@ module.exports.routes = {
   'get /member/:path/followers': 'HomeController.index',
   'get /member/:path/following': 'HomeController.index',
   'get /member/:path/ledger': 'HomeController.index',
+  'get /member/:path/projects': 'HomeController.index',
   'get /member/:path/positions': 'HomeController.index',
   'get /member/:path/tasks': 'HomeController.index',
   'get /member/:path/time': 'HomeController.index',
@@ -30,6 +31,7 @@ module.exports.routes = {
   'get /order/:id': 'HomeController.index',
   'get /projects': 'HomeController.index',
   'get /project/:path': 'HomeController.index',
+  'get /project/:path/about': 'HomeController.index',
   'get /project/:path/assets': 'HomeController.index',
   'get /project/:path/edit': 'HomeController.index',
   'get /project/:path/channels': 'HomeController.index',//??
@@ -119,9 +121,9 @@ module.exports.routes = {
    /**
    * ProjectMember routes
    */
-  'get /api/project/:id/member': 'ProjectMemberController.getByProject',
-  'post /api/project/member': 'ProjectMemberController.create',
-  'delete /api/project/member/:id': 'ProjectMemberController.destroy',
+  'get /api/projectmember': 'ProjectMemberController.getSome',
+  'post /api/projectmember': 'ProjectMemberController.create',
+  'delete /api/projectmember/:id': 'ProjectMemberController.destroy',
 
   /**
    * Search routes
@@ -152,7 +154,6 @@ module.exports.routes = {
   'get /api/user': 'UserController.getSome',
   'get /api/user/:id': 'UserController.getOne',
   'get /api/user/username/:path': 'UserController.getByUsername',
-  //'get /api/user/subscribe': 'UserController.subscribe',
   'post /api/user': 'UserController.create',
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',

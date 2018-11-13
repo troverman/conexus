@@ -37,7 +37,9 @@ angular.module( 'conexus.work', [
     $scope.newValidation = {};
     $scope.newValidation.validation = {}
     $scope.posts = posts;
-    $scope.tags = $scope.work.task.tags.split(',');
+    $scope.tags = [];
+    if ($scope.work.task.tags){$scope.tags = $scope.work.task.tags.split(',')}
+        
     $scope.taskTime = 0;
     $scope.tokens = [];
     $scope.tokens.push('Token');

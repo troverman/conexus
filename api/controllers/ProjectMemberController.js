@@ -10,38 +10,54 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 		var project = req.query.project;
+		var user = req.query.user;
 
 		ProjectMember.watch(req);
+		if (req.query.project){
+			ProjectMember.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				ProjectMember.subscribe(req, models);
+				res.json(models);
+			});
+		}
 
-		ProjectMember.find({project:project})
-		.limit(limit)
-		.skip(skip)
-		.sort(sort)
-		.populate('user')
-		.populate('project')
-		.then(function(models) {
-			ProjectMember.subscribe(req, models);
-			res.json(models);
-		});
+		else if(req.query.user){
+			ProjectMember.find({user:user})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				ProjectMember.subscribe(req, models);
+				res.json(models);
+			});
+		}
 
-	},
+		else{
+			ProjectMember.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.populate('project')
+			.then(function(models) {
+				ProjectMember.subscribe(req, models);
+				res.json(models);
+			});
+		}
 
-	getByProject: function(req, res) {
-		ProjectMember.find()
-		.where({project: req.param('id')})
-		.populate('user')
-		.then(function(models) {
-			ProjectMember.watch(req);
-			res.json(models);
-		});
 	},
 
 	create: function (req, res) {
-		var project = req.param('project');
-		var user = req.param('user');
 		var model = {
-			project: project,
-			user: user
+			project: req.param('project'),
+			user: req.param('user'),
 		};
 		ProjectMember.create(model)
 		.exec(function(err, member) {
@@ -66,7 +82,6 @@ module.exports = {
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		ProjectMember.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

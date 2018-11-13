@@ -2,13 +2,17 @@ angular.module('models.member', ['lodash', 'services', 'sails.io',])
 
 .service('MemberModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getByProject = function(model) {
-		var url = utils.prepareUrl('project/' + model.id + '/member');
-        return $sailsSocket.get(url).then(success, error);
+    this.getSome = function(type, filter, limit, skip, sort) {
+        var query = {};
+        if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
+        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+        var url = utils.prepareUrl('projectmember');
+        return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.create = function(newModel) {
-        var url = utils.prepareUrl('project/member');
+        var url = utils.prepareUrl('projectmember');
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 

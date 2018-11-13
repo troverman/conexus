@@ -16,12 +16,12 @@
 					<ul class="member-tabs">
 						<li><a href="member/{{member.username}}">Activity</a></li>
 						<li><a href="member/{{member.username}}/content">Content</a></li>
-						<li><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></li>
-						<li><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></li>
-						<!--<li><a href="member/{{member.username}}">{{followersCount.length}} Projects</a></li>-->
+						<li><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></li>
+						<li><a href="member/{{member.username}}/following">{{member.followingCount}} Following</a></li>
 						<li><a href="member/{{member.username}}/ledger">Ledger</a></li>
 						<!--<li><a href="member/{{member.username}}">Map</a></li>-->
 						<li><a href="member/{{member.username}}/positions">Positions</a></li>
+						<!--<li><a href="member/{{member.username}}/projects">{{member.projectCount}} Projects</a></li>-->
 						<li><a href="member/{{member.username}}/time">Time</a></li>
 						<li ng-show="currentUser.id != member.id">
 							<a class="btn btn-default" ng-click="follow()">Follow</a>
@@ -39,14 +39,15 @@
 			<div ng-show="tabsToggleVar" style="text-align:center">
 				<md-divider style="color:gray"></md-divider>
 				<div class="container">
-					<!--SEARCH-->
+					<!--TODO | SEARCH-->
 					<br>
 					<h4><a href="member/{{member.username}}">Activity</a></h4>
 					<h4><a href="member/{{member.username}}/content">Content</a></h4>
-					<h4><a href="member/{{member.username}}/followers">{{followersCount.length}} Followers</a></h4>
-					<h4><a href="member/{{member.username}}/following">{{followingCount.length}} Following</a></h4>
+					<h4><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></h4>
+					<h4><a href="member/{{member.username}}/following">{{member.followingCount}} Following</a></h4>
 					<h4><a href="member/{{member.username}}/ledger">Ledger</a></h4>
 					<h4><a href="member/{{member.username}}/positions">Positions</a></h4>
+					<h4><a href="member/{{member.username}}/projects">{{member.projectCount}} Projects</a></h4>
 					<h4><a href="member/{{member.username}}/time">Time</a></h4>
 					<br>
 				</div>
@@ -58,6 +59,7 @@
 					<h5>@{{member.username}}</h5>
 					<p>{{member.totalWork}} | Total Reputation</p>
 				</div>
+				<!--TODO-->
 				<div class="pull-right" style="margin-right:15px;margin-top:10px;">
 					<!--<h2>{{member.totalWork}} | total work</h2>-->
 					<!--<input type="text" placeholder="Reputation" ng-model="reputationLookup" class="form-control">-->
@@ -68,7 +70,6 @@
 					<a ng-show="member.socialAccounts.facebook.profileUrl" href="{{member.socialAccounts.facebook.profileUrl}}"  target="_blank"><span class="grey facebook-icon"><i class="fa fa-facebook"></i> Facebook</span></a>
 					<a ng-show="member.socialAccounts.twitter.profileUrl" href="{{member.socialAccounts.twitter.profileUrl}}"  target="_blank"><span class="grey twitter-icon"><i class="fa fa-twitter"></i> Twitter</span></a>
 					<a ng-show="member.socialAccounts.google.profileUrl" href="{{member.socialAccounts.google.profileUrl}}"  target="_blank"><span class="grey google-icon"><i class="fa fa-google"></i> Google</span></a>
-
 				</div>
 				<div class="spacing-10"></div>
 			</div>
@@ -106,6 +107,7 @@
 		<div ui-view="memberFollowing"></div>
 		<div ui-view="memberLedger"></div>
 		<div ui-view="memberPositions"></div>
+		<div ui-view="memberProjects"></div>
 		<div ui-view="memberTime"></div>
 	</div>
 	<div class="spacing-50"></div>

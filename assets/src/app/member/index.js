@@ -16,13 +16,6 @@ angular.module( 'conexus.member', [
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
             }],
-            //TODO: REFACTOR
-            followersCount: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getFollowers(member);
-            }],
-            followingCount: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getFollowing(member);
-            }]
         }
 	})
     .state( 'member.index', {
@@ -151,6 +144,20 @@ angular.module( 'conexus.member', [
             }],
         }
     })
+    .state( 'member.projects', {
+        url: '/projects',
+        views: {
+            "memberProjects": {
+                controller: 'MemberProjectsCtrl',
+                templateUrl: 'member/templates/projects.tpl.html'
+            }
+        },
+        resolve: {
+            projects: ['MemberModel', 'member', function(MemberModel, member) {
+                return  MemberModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
+            }]
+        }
+    })
     .state( 'member.time', {
         url: '/time',
         views: {
@@ -167,11 +174,8 @@ angular.module( 'conexus.member', [
     })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'followersCount', 'followingCount', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $sailsSocket, $scope, $stateParams, config, followersCount, followingCount, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
+.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
 	$scope.currentUser = config.currentUser;
-    //TODO: PART OF MEMBER
-    $scope.followersCount = followersCount;
-    $scope.followingCount = followingCount;
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
     $scope.newFollower = {};
@@ -1105,6 +1109,28 @@ angular.module( 'conexus.member', [
     };
 
     $scope.search = function(){};
+
+}])
+
+.controller( 'MemberProjectsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'projects', 'titleService', function MemberProjectsController($sailsSocket, $scope, $stateParams, config, lodash, projects, titleService) {
+    $scope.currentUser = config.currentUser;
+    titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
+    $scope.projects = projects;
+
+    $scope.search = function(){};
+
+    /*
+    $sailsSocket.subscribe('follower', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.followers.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.followers, {id: envelope.id});
+                break;
+        }
+    });
+    */
 
 }])
 

@@ -40,9 +40,9 @@
 			<div class="card">
 				<div style="padding:16px">
 
-					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02358431d0</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.username}}"></a></span>
+					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>
 					<h4>{{currentUser.email}}</h4>
-                    <p><a href="/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
+                    <p><a href="/member/{{currentUser.username}}/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
 
 					<div class="row">
 						<div class="col-sm-6">

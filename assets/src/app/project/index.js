@@ -15,11 +15,15 @@ angular.module( 'conexus.project', [
             project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
                 return ProjectModel.getByUrl($stateParams.path);
             }]
-            //TODO: COUNT IN PROJECT MODEL
-            //,
-            //memberCount: ['committee', 'CommitteeMemberModel', function(committee, CommitteeMemberModel){
-            //     return CommitteeMemberModel.getCommitteeMemberCount('committee', committee.id);
-            // }]
+        }
+    })
+    .state( 'project.about', {
+        url: '/about',
+        views: {
+            "projectAbout": {
+                controller: 'ProjectAboutCtrl',
+                templateUrl: 'project/templates/about.tpl.html'
+            }
         }
     })
     .state( 'project.activity', {
@@ -57,7 +61,7 @@ angular.module( 'conexus.project', [
             }
         }
     })
-    //TODO: FEATURE?
+    //TODO: ALL
     .state( 'project.channels', {
         url: '/channels',
         views: {
@@ -67,7 +71,6 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            //TODO: ALL
             channels: [function() {
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
@@ -91,6 +94,7 @@ angular.module( 'conexus.project', [
         }
     })
     //TODO: FEATURE | ALLOWS FOR BUDGET MANAGING PROCESS -- AKA CREATE MARKET ORDERS FOR AN ORG BASED ON REPUTATION VOTING
+    //TYPE | MOTION TO JOIN MOTION TO CREATE TRANSACTION
     .state( 'project.charter', {
         url: '/charter',
         views: {
@@ -100,7 +104,6 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            //TYPE | MOTION TO JOIN MOTION TO CREATE TRANSACTION
             motions: ['PostModel', 'project', function(PostModel, project){
                 return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }], 
@@ -138,7 +141,6 @@ angular.module( 'conexus.project', [
         resolve: {
             items: ['project', 'WorkModel', function(project, WorkModel) {
                 return[];
-                //return WorkModel.getSome('project', project.id, 50, 0, 'createdAt DESC');
             }]
         }
     })
@@ -151,9 +153,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            //TODO: GET SOME
             members: ['MemberModel', 'project', function(MemberModel, project) {
-                return  MemberModel.getByProject(project);
+                return MemberModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }]
         }
     })
@@ -284,6 +285,12 @@ angular.module( 'conexus.project', [
     $scope.tabsToggle = function() {
         $scope.tabsToggleVar = !$scope.tabsToggleVar;
     };
+
+}])
+
+.controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $scope, $stateParams, config, lodash, project, titleService) {
+
+    titleService.setTitle('About | ' + project.title + ' | CRE8.XYZ');
 
 }])
 

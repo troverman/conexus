@@ -1,0 +1,12 @@
+<div class="spacing-5"></div>
+<div class="col-lg-4 col-sm-6" ng-repeat="project in projects">
+	<div class="member-card">
+		<div class="member-card-image" style="background-color:black">
+	        <a href="project/{{project.project.title}}"><img ng-src="{{project.project.avatarUrl}}" err-src="/images/avatar.png"></a>
+	    </div>
+	    <div class="member-card-info">
+	        <h4><a href="project/{{project.project.title}}">{{project.project.title}}</a></h4>
+	        <p style="color:gray">Member | 888</p>
+	    </div>
+	</div>
+</div>
