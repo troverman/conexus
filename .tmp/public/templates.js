@@ -583,7 +583,6 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "				<h4>{{currentUser.email}}</h4>\n" +
     "				<p>Human Proof ID | ON</p>\n" +
     "				<p>Verification | Goverment ID | Social Accounts | BioMetric Data</p>\n" +
-    "				<!--ssn is id and secret - dum-->\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
@@ -636,6 +635,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "	    </div>\n" +
     "    </div>\n" +
     "\n" +
+    "	<!--TODO: tokenized apps.. connect in..-->\n" +
     "    <div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
@@ -648,7 +648,6 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">BTC</a></button>\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">ETH</a></button>\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">LTC</a></button>\n" +
-    "				<!--TODO: tokenized apps.. connect in..-->\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "    </div>\n" +
@@ -3342,16 +3341,18 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
 angular.module("member/templates/followers.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/followers.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
-    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
-    "	<div class=\"member-card\">\n" +
-    "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.follower.coverUrl}}')\">\n" +
-    "	        <a href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "	    </div>\n" +
-    "	    <div class=\"member-card-info\">\n" +
-    "	        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.follower.status}} offline</p>\n" +
-    "	        <p style=\"color:gray\">Total Reputation | {{member.follower.totalWork}}</p>\n" +
-    "	    </div>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
+    "		<div class=\"member-card\">\n" +
+    "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.follower.coverUrl}}')\">\n" +
+    "		        <a href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"member-card-info\">\n" +
+    "		        <h4><a href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
+    "		        <p style=\"color:gray\">{{member.follower.status}} offline</p>\n" +
+    "		        <p style=\"color:gray\">Total Reputation | {{member.follower.totalWork}}</p>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
@@ -3360,16 +3361,18 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
 angular.module("member/templates/following.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/following.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
-    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
-    "	<div class=\"member-card\">\n" +
-    "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.followed.coverUrl}}')\">\n" +
-    "	        <a href=\"member/{{member.followed.username}}\"><img ng-src=\"{{member.followed.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "	    </div>\n" +
-    "	    <div class=\"member-card-info\">\n" +
-    "	        <h4><a href=\"member/{{member.followed.username}}\">{{member.followed.username}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">{{member.followed.status}} offline</p>\n" +
-    "	        <p style=\"color:gray\">Total Reputation | {{member.followed.totalWork}}</p>\n" +
-    "	    </div>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
+    "		<div class=\"member-card\">\n" +
+    "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.followed.coverUrl}}')\">\n" +
+    "		        <a href=\"member/{{member.followed.username}}\"><img ng-src=\"{{member.followed.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"member-card-info\">\n" +
+    "		        <h4><a href=\"member/{{member.followed.username}}\">{{member.followed.username}}</a></h4>\n" +
+    "		        <p style=\"color:gray\">{{member.followed.status}} offline</p>\n" +
+    "		        <p style=\"color:gray\">Total Reputation | {{member.followed.totalWork}}</p>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>");
 }]);
@@ -3641,15 +3644,17 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
 angular.module("member/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/projects.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
-    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"project in projects\">\n" +
-    "	<div class=\"member-card\">\n" +
-    "		<div class=\"member-card-image\" style=\"background-color:black\">\n" +
-    "	        <a href=\"project/{{project.project.title}}\"><img ng-src=\"{{project.project.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "	    </div>\n" +
-    "	    <div class=\"member-card-info\">\n" +
-    "	        <h4><a href=\"project/{{project.project.title}}\">{{project.project.title}}</a></h4>\n" +
-    "	        <p style=\"color:gray\">Member | 888</p>\n" +
-    "	    </div>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"project in projects\">\n" +
+    "		<div class=\"member-card\">\n" +
+    "			<div class=\"member-card-image\" style=\"background-color:black\">\n" +
+    "		        <a href=\"project/{{project.project.title}}\"><img ng-src=\"{{project.project.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"member-card-info\">\n" +
+    "		        <h4><a href=\"project/{{project.project.title}}\">{{project.project.title}}</a></h4>\n" +
+    "		        <p style=\"color:gray\">Member | 888</p>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>");
 }]);
@@ -4801,17 +4806,19 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
-    "	<div class=\"member-card\">\n" +
-    "	    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
-    "	        <a href=\"member/{{member.user.username}}\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "	    </div>\n" +
-    "	    <div class=\"member-card-info\">\n" +
-    "	        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
-    "	        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
-    "	        <p style=\"color:gray\">Total Reputation | {{member.user.totalWork}}</p>\n" +
-    "	        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
-    "	    </div>\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
+    "		<div class=\"member-card\">\n" +
+    "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
+    "		        <a href=\"member/{{member.user.username}}\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"member-card-info\">\n" +
+    "		        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
+    "		        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
+    "		        <p style=\"color:gray\">Total Reputation | {{member.user.totalWork}}</p>\n" +
+    "		        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "</div>");
 }]);

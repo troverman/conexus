@@ -1,13 +1,15 @@
 <div class="spacing-5"></div>
-<div class="col-lg-4 col-sm-6" ng-repeat="member in followers">
-	<div class="member-card">
-	    <div class="member-card-image" style="background-image: url('{{member.follower.coverUrl}}')">
-	        <a href="member/{{member.follower.username}}"><img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png"></a>
-	    </div>
-	    <div class="member-card-info">
-	        <h4><a href="member/{{member.follower.username}}">{{member.follower.username}}</a></h4>
-	        <p style="color:gray">{{member.follower.status}} offline</p>
-	        <p style="color:gray">Total Reputation | {{member.follower.totalWork}}</p>
-	    </div>
+<div class="row">
+	<div class="col-lg-4 col-sm-6" ng-repeat="member in followers">
+		<div class="member-card">
+		    <div class="member-card-image" style="background-image: url('{{member.follower.coverUrl}}')">
+		        <a href="member/{{member.follower.username}}"><img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png"></a>
+		    </div>
+		    <div class="member-card-info">
+		        <h4><a href="member/{{member.follower.username}}">{{member.follower.username}}</a></h4>
+		        <p style="color:gray">{{member.follower.status}} offline</p>
+		        <p style="color:gray">Total Reputation | {{member.follower.totalWork}}</p>
+		    </div>
+		</div>
 	</div>
 </div>

@@ -2,16 +2,18 @@
 <button class="btn btn-default log-btn" ng-click="createMember()">join</button>
 <div class="spacing-10"></div>
 
-<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
-	<div class="member-card">
-	    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
-	        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
-	    </div>
-	    <div class="member-card-info">
-	        <h4><a href="member/{{member.user.username}}">{{member.user.username}}</a></h4>
-	        <!--<p style="color:gray">{{member.status}} offline</p>-->
-	        <p style="color:gray">Total Reputation | {{member.user.totalWork}}</p>
-	        <p style="color:gray">{{project.title}} | 888</p>
-	    </div>
+<div class="row">
+	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
+		<div class="member-card">
+		    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
+		        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
+		    </div>
+		    <div class="member-card-info">
+		        <h4><a href="member/{{member.user.username}}">{{member.user.username}}</a></h4>
+		        <!--<p style="color:gray">{{member.status}} offline</p>-->
+		        <p style="color:gray">Total Reputation | {{member.user.totalWork}}</p>
+		        <p style="color:gray">{{project.title}} | 888</p>
+		    </div>
+		</div>
 	</div>
 </div>
