@@ -963,14 +963,15 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                    <div class=\"\">\n" +
     "                        <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
     "                        <input type=\"text\" placeholder=\"Associations\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                        <ul class=\"nav nav-pills nav-justified\" style=\"padding-top:3px\">\n" +
-    "                            <li><a href=\"#\">File</a></li>\n" +
-    "                            <li><a href=\"#\">Image</a></li>\n" +
-    "                            <li><a href=\"#\">Link</a></li>\n" +
-    "                            <li><a href=\"#\">Motion</a></li>\n" +
-    "                            <li><a style=\"color:white;font-weight:700;background-color:#002c54\"href=\"#\">Post</a></li>\n" +
-    "                            <li><a href=\"#\">Task</a></li>\n" +
-    "                            <li><a href=\"#\">Video</a></li>\n" +
+    "                        <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                            <li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Motion</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='TASK'}\" ng-click=\"selectType('TASK')\"><a href=\"#\">Task</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='TIME'}\" ng-click=\"selectType('TIME')\"><a href=\"#\">Time</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
     "                        </ul>\n" +
     "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
     "                        <input type=\"text\" placeholder=\"Attachments\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
@@ -3287,7 +3288,16 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "                <div class=\"\">\n" +
     "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
     "                    <input type=\"text\" placeholder= \"Parent\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                    <input type=\"text\" placeholder= \"Type\" ng-model=\"newContent.type\" class=\"form-control\">\n" +
+    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                        <li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Motion</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='TASK'}\" ng-click=\"selectType('TASK')\"><a href=\"#\">Task</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='TIME'}\" ng-click=\"selectType('TIME')\"><a href=\"#\">Time</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
+    "                    </ul>\n" +
     "                    <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
     "                    <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "                    <input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
@@ -3298,7 +3308,6 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -3651,7 +3660,7 @@ angular.module("member/templates/projects.tpl.html", []).run(["$templateCache", 
     "		        <a href=\"project/{{project.project.title}}\"><img ng-src=\"{{project.project.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		    </div>\n" +
     "		    <div class=\"member-card-info\">\n" +
-    "		        <h4><a href=\"project/{{project.project.title}}\">{{project.project.title}}</a></h4>\n" +
+    "		        <h4><a href=\"project/{{project.project.urlTitle}}\">{{project.project.title}}</a></h4>\n" +
     "		        <p style=\"color:gray\">Member | 888</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
@@ -4558,7 +4567,6 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                <div class=\"\">\n" +
     "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
     "                    <input type=\"text\" placeholder=\"Associated Collections\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                    <!--<input type=\"text\" placeholder=\"Type\" ng-model=\"newContent.type\" class=\"form-control\">-->\n" +
     "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
     "                        <li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>\n" +
     "                        <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
@@ -6235,41 +6243,34 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
+    "            <div class=\"padding:16px\">\n" +
+    "                <div class=\"col-sm-12\" style=\"padding:16px\">\n" +
     "\n" +
-    "            <div class=\"\">\n" +
-    "                <div class=\"col-md-8\" style=\"padding:16px\">\n" +
+    "                    <div style=\"float:right\">\n" +
+    "                        <h5><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <h3>{{task.title}} | <a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h3>\n" +
-    "                    <div style=\"font-style:italic;color:gray\">\n" +
-    "                        <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "                        <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
-    "                    </div>\n" +
-    "                    <p style=\"color:gray\" am-time-ago=\"task.createdAt\"></p>\n" +
+    "                    <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "\n" +
-    "                    <div ng-repeat=\"verification in taskVerification\">\n" +
-    "                        <a href=\"member/{{verification.user.username}}\">\n" +
-    "                            <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                            {{verification.user.username}}\n" +
-    "                        </a> | {{verification.score}}\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "                    </div>\n" +
+    "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"task.createdAt\"></p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
+    "                <!--\n" +
     "                <div class=\"col-md-4\" style=\"padding:16px;font-style:italic;color:gray;\">\n" +
-    "\n" +
     "                    <div class=\"card\">\n" +
     "                        <div style=\"padding:16px;\">\n" +
     "                            <h4><a href=\"#\">Task Validation <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "                            <!--<form ng-submit=\"filterValidation()\">\n" +
-    "                                <input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
-    "                            </form>-->\n" +
     "                            <h5>{{task.verificationScore}} | General </h5>\n" +
     "                            <p style=\"font-size:10px\" ng-repeat=\"tag in tags\">0 | <a href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}}+{{task.id}}</a></p>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "                </div>\n" +
+    "                -->\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"clear:both\"></div>\n" +
@@ -6277,8 +6278,27 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(task, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
     "                <a href=\"#\" ng-click=\"createReaction(task, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a href=\"#\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "            </div>\n" +
     "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--TODO: VALIDATION-->\n" +
+    "    <div class=\"row\" ng-show=\"false\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                <div ng-repeat=\"verification in taskVerification\">\n" +
+    "                    <a href=\"member/{{verification.user.username}}\">\n" +
+    "                        <img class=\"card-avatar\" ng-src=\"{{verification.user.avatarUrl}}\" src=\"{{verification.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                        {{verification.user.username}}\n" +
+    "                    </a> | {{verification.score}}\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -6302,6 +6322,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
+    "                <!--NEW VALIDATION DIMENSION / TAG SUGGESTION -->\n" +
     "                <text-angular ng-model=\"newValidation.content\" ta-toolbar=\"''\" style=\"height:100px\"></text-angular>\n" +
     "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
     "\n" +
@@ -6315,7 +6336,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
-    "\n" +
     "\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
@@ -6338,11 +6358,14 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <div class=\"spacing-5\"></div>\n" +
     "                </div>\n" +
     "\n" +
+    "                <!--\n" +
     "                <div style=\"font-style:italic;color:gray\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <h4>Token Liquidity</h4>  \n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                </div>\n" +
+    "                -->\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -6788,26 +6811,73 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
+    "\n" +
+    "				<div style=\"float:right\">\n" +
+    "					<h5><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "				</div>\n" +
+    "\n" +
     "				<a href=\"member/{{validation.user.username}}\">\n" +
     "					<img class=\"card-avatar\" src=\"{{validation.user.avatarUrl}}\"/>\n" +
     "					{{validation.user.username}}\n" +
     "				</a>\n" +
-    "				<!--<p ng-repeat=\"validation in validation.validation\">{{validation}}</p>-->\n" +
-    "				{{validation.validation}}\n" +
+    "\n" +
+    "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"validation.createdAt\"></p>\n" +
+    "\n" +
+    "				<!--TODO: ABSTRACT MODEL-->\n" +
+    "				<p>work | <a href=\"work/{{validation.work}}\">{{validation.work}}</a></p>\n" +
+    "\n" +
+    "				<span ng-bind-html=\"renderContent(validation.content)\"></span>\n" +
+    "\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "				<table class=\"table table-striped table-hover\">\n" +
+    "					<thead>\n" +
+    "						<tr>\n" +
+    "							<th>Dimension</th>\n" +
+    "							<th>Validation Score</th>\n" +
+    "							<th>Reputation</th>\n" +
+    "							<th>Reputation Weighted Validation Score</th>\n" +
+    "						</tr>\n" +
+    "					<thead>\n" +
+    "					<tbody>\n" +
+    "						<tr ng-repeat=\"validation in validationList track by $index\">\n" +
+    "							<td>{{validation[0]}}</td>\n" +
+    "							<td>{{validationList[$index][1]}}</td>\n" +
+    "							<td>{{reputationList[$index][1]}}</td>\n" +
+    "							<td>{{reputationWeightedList[$index][1]}}</td>\n" +
+    "						</tr>\n" +
+    "					</tbody>\n" +
+    "				</table>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "				<highchart config=\"validationColumn\"></highchart>\n" +
+    "\n" +
     "			</div>\n" +
     "			<div class=\"card-footer\">\n" +
-    "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +
-    "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{post.minusCount}} dislike </a>\n" +
-    "		       	<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(validation, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{validation.plusCount}} like </a> \n" +
+    "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(validation, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{validation.minusCount}} dislike </a>\n" +
+    "		       	<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		       	<a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "\n" +
     "		    </div>\n" +
-    "		    <div ng-show=\"post.showReply\" class=\"card-footer\">\n" +
-    "				<form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "		    <div ng-show=\"validation.showReply\" class=\"card-footer\">\n" +
+    "				<form role=\"form\" ng-submit=\"createPost(validation)\">\n" +
     "					<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "				    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "				</form>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<!--\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h2>Token</h2>\n" +
+    "				<p>for validating and what is minted on the validation</p>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	-->\n" +
     "	\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -6860,57 +6930,92 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\" class=\"col-sm-12\">\n" +
     "\n" +
-    "			<div style=\"padding:16px\" class=\"col-sm-8\">\n" +
+    "				<div style=\"float:right\">\n" +
+    "					<h5><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "				</div>\n" +
+    "\n" +
     "				<h3><a href=\"task/{{work.task.id}}\">{{work.task.title}}</a> | {{work.amount}}</h3>\n" +
+    "                <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{work.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{work.user.avatarUrl}}\" src=\"{{work.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					{{work.user.username}}\n" +
     "				</a>\n" +
-    "				<p><a ng-repeat=\"tag in tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span></p>\n" +
-    "				<p style=\"color:gray\" am-time-ago=\"work.createdAt\"></p>\n" +
+    "				\n" +
+    "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"work.createdAt\"></p>\n" +
     "\n" +
-    "				<div ng-repeat=\"validation in validations\">\n" +
-    "		            <a href=\"member/{{validation.user.username}}\">\n" +
-    "		                <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "		                {{validation.user.username}}\n" +
-    "		            </a> | <a href=\"validation/{{validation.id}}\">{{validation.validation.general}}</a><!-- | {{validation.validation}} -->\n" +
+    "				<div>\n" +
     "					<div class=\"spacing-10\"></div>\n" +
-    "		        </div>\n" +
+    "	                <span style=\"display:inline\" ng-bind-html=\"renderContent(work.content)\"></span>\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "				</div>\n" +
     "\n" +
     "			</div>\n" +
     "\n" +
     "			<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->\n" +
-    "			<div style=\"padding:16px;font-style:italic;color:gray;\" class=\"col-sm-4\">\n" +
+    "			<!--<div style=\"padding:16px;font-style:italic;color:gray;\" class=\"col-sm-4\">\n" +
     "				<div class=\"card\">\n" +
     "					<div style=\"padding:16px\">\n" +
     "						<h4><a href=\"#\">Work Validation <i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "						<!--<form ng-submit=\"filterValidation()\">\n" +
-    "							<input type=\"text\" placeholder=\"Validation Dimension\" ng-model=\"inputDimension\" class=\"form-control\">\n" +
-    "						</form>-->\n" +
     "						<h5>{{work.validationScore}} | General </h5>\n" +
     "						<p style=\"font-size:10px\" ng-repeat=\"tag in tags\">0 | <a href=\"market/{{tag.trim()}}+{{work.task.id}}\">{{tag.trim()}}+{{work.task.id}}</a></p>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "			</div>\n" +
+    "			</div>-->\n" +
     "\n" +
     "			<div style=\"clear:both\"></div>\n" +
     "\n" +
     "			<div class=\"card-footer\">\n" +
     "				<a href=\"#\" ng-click=\"createReaction(work, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{work.plusCount}} like </a> \n" +
     "				<a href=\"#\" ng-click=\"createReaction(work, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{work.minusCount}} dislike </a>\n" +
+    "				<a href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		       	<a href=\"#\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<!--TODO: VALIDATION -->\n" +
-    "	<!--TODO: UI -->\n" +
-    "	<div class=\"row\" ng-show=\"true\">\n" +
+    "	<!--TODO IF VALIDATE | EDIT CURRENT HERE | 1 PER MEMBER PER MAINFOLD-->\n" +
+    "	<div class=\"row\" ng-show=\"validations.length > 0\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
+    "				<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->\n" +
+    "				<table class=\"table table-striped table-hover\">\n" +
+    "					<thead>\n" +
+    "						<tr>\n" +
+    "							<th>Member</th>\n" +
+    "							<th>Dimension</th>\n" +
+    "							<th>Validation Score</th>\n" +
+    "							<th>Id</th>\n" +
+    "						</tr>\n" +
+    "					<thead>\n" +
+    "					<tbody>\n" +
+    "						<tr ng-repeat=\"validation in validations\">\n" +
+    "							<td>\n" +
+    "								<a href=\"member/{{validation.user.username}}\">\n" +
+    "									<img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "									<span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
+    "								</a>\n" +
+    "							</td>\n" +
+    "							<td>General</td>\n" +
+    "							<td>{{validation.validation.general}}</td>\n" +
+    "							<td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
+    "						</tr>\n" +
+    "					</tbody>\n" +
+    "				</table>\n" +
     "\n" +
+    "				<highchart config=\"validationColumn\"></highchart>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"currentUser\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
     "                <h5>Validate <i class=\"fa fa-check\"></i></h5>\n" +
     "				<div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
@@ -6928,7 +7033,6 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "            	<text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
     "				<button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +

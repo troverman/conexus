@@ -30,7 +30,6 @@ angular.module( 'conexus.member', [
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
-
             //TODO | BETTER....
             posts: ['member', 'PostModel', function(member, PostModel) {
                 return PostModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
@@ -591,7 +590,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'titleService', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, titleService) {
+.controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'PostModel', 'titleService', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, PostModel, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.contentList = posts;
     $scope.newContent = {};
@@ -602,7 +601,24 @@ angular.module( 'conexus.member', [
     //$scope.posts = posts;
     //$scope.videos = videos;
 
-    $scope.createContent = function(){};
+    $scope.selectedType = 'POST';
+
+    $scope.createContent = function(){
+        if ($scope.currentUser){
+            if(content){$scope.newContent.post = content.id;}
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.project = $scope.project.id;
+            $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
+                return obj.text
+            }).join(",");
+            $scope.newContent.type = $scope.selectedType;
+            PostModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
+                $scope.content.unshift(model);
+            });
+        }
+        else{$location.path('/login')}
+    };
 
     //TODO: MODELS | ONLY POST/CONTENT
     $scope.createReaction = function(content, type){
@@ -671,6 +687,10 @@ angular.module( 'conexus.member', [
     };
 
     $scope.search = function(){};
+
+    $scope.selectType = function(type){
+        $scope.selectedType = type;
+    };
 
 }])
 

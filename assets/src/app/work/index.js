@@ -37,6 +37,8 @@ angular.module( 'conexus.work', [
     $scope.newValidation = {};
     $scope.newValidation.validation = {}
     $scope.posts = posts;
+    $scope.reactions = [];
+    $scope.reputationList = [];
     $scope.tags = [];
     if ($scope.work.task.tags){$scope.tags = $scope.work.task.tags.split(',')}
         
@@ -45,12 +47,75 @@ angular.module( 'conexus.work', [
     $scope.tokens.push('Token');
     $scope.tokens.push('WorkToken');
     $scope.tokens.push('Work+'+$scope.work.id);
-    $scope.totalTime = (Math.random()*1000000).toFixed(0);
+    $scope.validationList = [];
     $scope.validations = validations;
 
     $scope.newValidation.validation.general = 0;
     for (x in $scope.tags){
         $scope.newValidation.validation[$scope.tags[x]] = 0;
+    }
+
+    //EXPERIMENTAL | TODO MANIFOLD FILTER
+    $scope.validationColumn = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [{
+            id: 'validation',
+            type: 'column',
+            name: 'Average Validation',
+            data: [],
+            yAxis: 0
+        }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        yAxis: [{
+            title: {text: null}
+        },{
+            title: {text: null},
+        }],
+        legend: {enabled: true},
+        credits:{enabled:false},
+        plotOptions: {
+            column: {
+                minPointLength: 3
+            }
+        },
+    };
+
+    //EFFICENCY | STORE IN WORK MODEL
+    var sumObj = {};
+    //var sumObj.validation = {};
+    //var sumObj.reputation = {};
+    //var sumObj.reputationWeighted = {};
+
+    for (y in $scope.validations){
+        console.log($scope.validations[y].validation);
+        for (x in Object.keys($scope.validations[y].validation)){
+            if(!sumObj[Object.keys($scope.validations[y].validation)[x]]){sumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+            else{sumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+        //    $scope.validationList.push([Object.keys($scope.validations[y].validation)[x], $scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]]);
+        //    $scope.reputationList.push([Object.keys($scope.validations[y].reputation)[x], $scope.validations[y].reputation[Object.keys($scope.validations[y].reputation)[x]]]);
+        }
+
+    }
+
+    console.log(sumObj);
+
+    //STORE IN WORK MODEL
+    for (x in Object.keys(sumObj)){
+        //$scope.validationList.push([Object.keys(sumObj)[x], sumObj[Object.keys(sumObj)[x]]]);
+        $scope.validationColumn.series[0].data.push(sumObj[Object.keys(sumObj)[x]]/$scope.validations.length);
+        $scope.validationColumn.xAxis.categories.push(Object.keys(sumObj)[x]);
+
     }
 
     //HUMAN VALIDATED AI VERIFY? 
@@ -114,8 +179,9 @@ angular.module( 'conexus.work', [
             $scope.newValidation.user = $scope.currentUser.id;
             ValidationModel.create($scope.newValidation).then(function(model){
                 $scope.newValidation = {};
-                $scope.validations.push(model);
-                console.log(model);
+                for (x in $scope.tags){
+                    $scope.newValidation.validation[$scope.tags[x]] = 0;
+                }
             });
         }
         else{$location.path('/login')}
@@ -140,13 +206,34 @@ angular.module( 'conexus.work', [
 
     //TODO: WEBSOCKETS | WEB3
     $sailsSocket.subscribe('post', function (envelope) {
-        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
                 $scope.posts.unshift(envelope.data);
                 break;
             case 'destroyed':
                 lodash.remove($scope.posts, {id: envelope.id});
+                break;
+        }
+    });
+
+    $sailsSocket.subscribe('reaction', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.reactions.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.reactions, {id: envelope.id});
+                break;
+        }
+    });
+
+    $sailsSocket.subscribe('validation', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.validations.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.validations, {id: envelope.id});
                 break;
         }
     });

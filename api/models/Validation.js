@@ -5,6 +5,12 @@
 module.exports = {
 
 	attributes: {
+        content: {
+            type: 'string',
+        },
+        reputation:{
+            type: 'json',
+        },
         project: {
             type: 'string',
         },

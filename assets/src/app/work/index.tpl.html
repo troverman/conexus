@@ -21,57 +21,92 @@
 	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->
 	<div class="row">
 		<div class="card">
+			<div style="padding:16px" class="col-sm-12">
 
-			<div style="padding:16px" class="col-sm-8">
+				<div style="float:right">
+					<h5><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+				</div>
+
 				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
+                <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+
 				<a style="font-weight:700" href="member/{{work.user.username}}">
 					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
 					{{work.user.username}}
 				</a>
-				<p><a ng-repeat="tag in tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-                <p><span style="display:inline" ng-bind-html="renderContent(work.content)"></span></p>
-				<p style="color:gray" am-time-ago="work.createdAt"></p>
+				
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="work.createdAt"></p>
 
-				<div ng-repeat="validation in validations">
-		            <a href="member/{{validation.user.username}}">
-		                <img class="card-avatar" ng-src="{{validation.user.avatarUrl}}" src="{{validation.user.avatarUrl}}" err-src="/images/avatar.png">
-		                {{validation.user.username}}
-		            </a> | <a href="validation/{{validation.id}}">{{validation.validation.general}}</a><!-- | {{validation.validation}} -->
+				<div>
 					<div class="spacing-10"></div>
-		        </div>
+	                <span style="display:inline" ng-bind-html="renderContent(work.content)"></span>
+					<div class="spacing-10"></div>
+				</div>
 
 			</div>
 
 			<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->
-			<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
+			<!--<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
 				<div class="card">
 					<div style="padding:16px">
 						<h4><a href="#">Work Validation <i class="fa fa-question-circle"></i></a></h4>
-						<!--<form ng-submit="filterValidation()">
-							<input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
-						</form>-->
 						<h5>{{work.validationScore}} | General </h5>
 						<p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{work.task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 			<div style="clear:both"></div>
 
 			<div class="card-footer">
 				<a href="#" ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
 				<a href="#" ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
+				<a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+		       	<a href="#"><i class="fa fa-check"></i> validate </a>
 			</div>
 
 		</div>
 	</div>
 
-	<!--TODO: VALIDATION -->
-	<!--TODO: UI -->
-	<div class="row" ng-show="true">
+	<!--TODO IF VALIDATE | EDIT CURRENT HERE | 1 PER MEMBER PER MAINFOLD-->
+	<div class="row" ng-show="validations.length > 0">
 		<div class="card">
 			<div style="padding:16px">
+				<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Member</th>
+							<th>Dimension</th>
+							<th>Validation Score</th>
+							<th>Id</th>
+						</tr>
+					<thead>
+					<tbody>
+						<tr ng-repeat="validation in validations">
+							<td>
+								<a href="member/{{validation.user.username}}">
+									<img class="card-avatar" ng-src="{{validation.user.avatarUrl}}" src="{{validation.user.avatarUrl}}" err-src="/images/avatar.png">
+									<span style="font-weight:700">{{validation.user.username}}</span>
+								</a>
+							</td>
+							<td>General</td>
+							<td>{{validation.validation.general}}</td>
+							<td><a href="validation/{{validation.id}}">{{validation.id}}</a></td>
+						</tr>
+					</tbody>
+				</table>
 
+				<highchart config="validationColumn"></highchart>
+				<div class="spacing-10"></div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-show="currentUser">
+		<div class="card">
+			<div style="padding:16px">
                 <h5>Validate <i class="fa fa-check"></i></h5>
 				<div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
@@ -89,7 +124,6 @@
 
             	<text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
 				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-
 			</div>
 		</div>
 	</div>

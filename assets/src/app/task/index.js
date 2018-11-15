@@ -28,7 +28,6 @@ angular.module( 'conexus.task', [
     titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.task = task;
-
     $scope.newPost = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
@@ -39,7 +38,9 @@ angular.module( 'conexus.task', [
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
-    $scope.tags = $scope.task.tags.split(',');
+
+    $scope.tags = [];
+    if($scope.task.tags){$scope.tags = $scope.task.tags.split(',')}
     $scope.task.verificationScore = 0;
     $scope.taskTime = 0;
     $scope.taskVerification = [];

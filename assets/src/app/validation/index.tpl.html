@@ -6,26 +6,73 @@
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px">
+
+				<div style="float:right">
+					<h5><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+				</div>
+
 				<a href="member/{{validation.user.username}}">
 					<img class="card-avatar" src="{{validation.user.avatarUrl}}"/>
 					{{validation.user.username}}
 				</a>
-				<!--<p ng-repeat="validation in validation.validation">{{validation}}</p>-->
-				{{validation.validation}}
+
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="validation.createdAt"></p>
+
+				<!--TODO: ABSTRACT MODEL-->
+				<p>work | <a href="work/{{validation.work}}">{{validation.work}}</a></p>
+
+				<span ng-bind-html="renderContent(validation.content)"></span>
+
+				<div class="spacing-10"></div>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Dimension</th>
+							<th>Validation Score</th>
+							<th>Reputation</th>
+							<th>Reputation Weighted Validation Score</th>
+						</tr>
+					<thead>
+					<tbody>
+						<tr ng-repeat="validation in validationList track by $index">
+							<td>{{validation[0]}}</td>
+							<td>{{validationList[$index][1]}}</td>
+							<td>{{reputationList[$index][1]}}</td>
+							<td>{{reputationWeightedList[$index][1]}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="spacing-10"></div>
+
+				<highchart config="validationColumn"></highchart>
+
 			</div>
 			<div class="card-footer">
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(validation, 'plus')"><i class="fa fa-angle-up"></i> {{validation.plusCount}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(validation, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.minusCount}} dislike </a>
+		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+		       	<a style="padding:5px;color:grey" href="#"><i class="fa fa-check"></i> validate </a>
+
 		    </div>
-		    <div ng-show="post.showReply" class="card-footer">
-				<form role="form" ng-submit="createPost(post)">
+		    <div ng-show="validation.showReply" class="card-footer">
+				<form role="form" ng-submit="createPost(validation)">
 					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	<!--
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<h2>Token</h2>
+				<p>for validating and what is minted on the validation</p>
+			</div>
+		</div>
+	</div>
+	-->
 	
 	<div class="spacing-50"></div>
 

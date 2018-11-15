@@ -4,41 +4,34 @@
 
     <div class="row">
         <div class="card">
+            <div class="padding:16px">
+                <div class="col-sm-12" style="padding:16px">
 
-            <div class="">
-                <div class="col-md-8" style="padding:16px">
+                    <div style="float:right">
+                        <h5><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    </div>
+
                     <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
-                    <div style="font-style:italic;color:gray">
-                        <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
-                        <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-                    </div>
-                    <p style="color:gray" am-time-ago="task.createdAt"></p>
+                    <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
 
-                    <div ng-repeat="verification in taskVerification">
-                        <a href="member/{{verification.user.username}}">
-                            <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
-                            {{verification.user.username}}
-                        </a> | {{verification.score}}
-                        <div class="spacing-10"></div>
-                    </div>
+                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="task.createdAt"></p>
 
                 </div>
 
+                <!--
                 <div class="col-md-4" style="padding:16px;font-style:italic;color:gray;">
-
                     <div class="card">
                         <div style="padding:16px;">
                             <h4><a href="#">Task Validation <i class="fa fa-question-circle"></i></a></h4>
-                            <!--<form ng-submit="filterValidation()">
-                                <input type="text" placeholder="Validation Dimension" ng-model="inputDimension" class="form-control">
-                            </form>-->
                             <h5>{{task.verificationScore}} | General </h5>
                             <p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
                         </div>
                     </div>
                     <div class="spacing-10"></div>
-
                 </div>
+                -->
+
             </div>
 
             <div style="clear:both"></div>
@@ -46,8 +39,27 @@
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
                 <a href="#" ng-click="createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+                <a href="#"><i class="fa fa-check"></i> validate </a>
             </div>
 
+        </div>
+    </div>
+
+    <!--TODO: VALIDATION-->
+    <div class="row" ng-show="false">
+        <div class="card">
+            <div style="padding:16px">
+
+                <div ng-repeat="verification in taskVerification">
+                    <a href="member/{{verification.user.username}}">
+                        <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
+                        {{verification.user.username}}
+                    </a> | {{verification.score}}
+                    <div class="spacing-10"></div>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -71,6 +83,7 @@
                     </div>
                 </div>
 
+                <!--NEW VALIDATION DIMENSION / TAG SUGGESTION -->
                 <text-angular ng-model="newValidation.content" ta-toolbar="''" style="height:100px"></text-angular>
                 <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
 
@@ -84,7 +97,6 @@
     <div class="row">
         <div class="card">
             <div style="padding:16px">
-
 
                 <div style="font-style:italic;color:gray">
                     <div class="spacing-5"></div>
@@ -107,11 +119,14 @@
                     <div class="spacing-5"></div>
                 </div>
 
+                <!--
                 <div style="font-style:italic;color:gray">
                     <div class="spacing-5"></div>
                     <h4>Token Liquidity</h4>  
                     <div class="spacing-5"></div>
                 </div>
+                -->
+
             </div>
 
         </div>

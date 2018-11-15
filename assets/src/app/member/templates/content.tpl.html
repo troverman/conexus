@@ -42,7 +42,16 @@
                 <div class="">
                     <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
                     <input type="text" placeholder= "Parent" ng-model="newContent.parent" class="form-control">
-                    <input type="text" placeholder= "Type" ng-model="newContent.type" class="form-control">
+                    <ul class="nav nav-pills nav-justified contentTyle">
+                        <li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>
+                        <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
+                        <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
+                        <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Motion</a></li>
+                        <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
+                        <li ng-class="{active: selectedType=='TASK'}" ng-click="selectType('TASK')"><a href="#">Task</a></li>
+                        <li ng-class="{active: selectedType=='TIME'}" ng-click="selectType('TIME')"><a href="#">Time</a></li>
+                        <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
+                    </ul>
                     <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
                     <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                     <input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">
@@ -53,7 +62,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div class="row">

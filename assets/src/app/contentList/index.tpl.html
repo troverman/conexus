@@ -43,14 +43,15 @@
                     <div class="">
                         <input type="text" placeholder="Title" ng-model="newContent.title" class="form-control">
                         <input type="text" placeholder="Associations" ng-model="newContent.parent" class="form-control">
-                        <ul class="nav nav-pills nav-justified" style="padding-top:3px">
-                            <li><a href="#">File</a></li>
-                            <li><a href="#">Image</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Motion</a></li>
-                            <li><a style="color:white;font-weight:700;background-color:#002c54"href="#">Post</a></li>
-                            <li><a href="#">Task</a></li>
-                            <li><a href="#">Video</a></li>
+                        <ul class="nav nav-pills nav-justified contentTyle">
+                            <li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>
+                            <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
+                            <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
+                            <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Motion</a></li>
+                            <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
+                            <li ng-class="{active: selectedType=='TASK'}" ng-click="selectType('TASK')"><a href="#">Task</a></li>
+                            <li ng-class="{active: selectedType=='TIME'}" ng-click="selectType('TIME')"><a href="#">Time</a></li>
+                            <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
                         </ul>
                         <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
                         <input type="text" placeholder="Attachments" ng-model="newContent.attachment" class="form-control">

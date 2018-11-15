@@ -26,6 +26,7 @@ angular.module( 'conexus.contentList', [
     $scope.newContentToggleVar = false;
     $scope.newReaction = {};
     $scope.selectedSort = 'createdAt DESC';
+    $scope.selectedType = 'POST';
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
 
@@ -64,6 +65,7 @@ angular.module( 'conexus.contentList', [
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                 return obj.text
             }).join(",");
+            $scope.newContent.type = $scope.selectedType;
             PostModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.content.unshift(model);
@@ -149,6 +151,10 @@ angular.module( 'conexus.contentList', [
             $rootScope.stateIsLoading = false;
             $scope.contentList = contentList;
         });
+    };
+
+    $scope.selectType = function(type){
+        $scope.selectedType = type;
     };
 
 }]);
