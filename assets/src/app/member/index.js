@@ -173,7 +173,7 @@ angular.module( 'conexus.member', [
     })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
+.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
 	$scope.currentUser = config.currentUser;
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
@@ -184,9 +184,7 @@ angular.module( 'conexus.member', [
     $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
     $scope.tabsToggleVar = false;
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
-    if($scope.currentUser){
-        $scope.newTransaction.from = $scope.currentUser.id;
-    }
+    if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
     //TODO: seoService
 
@@ -200,12 +198,20 @@ angular.module( 'conexus.member', [
         else{$location.path('/login')}
     };
 
+    $scope.contentToggle = function(){
+        $mdSidenav('content').toggle();
+    };
+
     $scope.follow = function() {
-        $scope.newFollower.followed = $scope.member.id;
-        $scope.newFollower.follower = $scope.currentUser.id;
-        FollowerModel.create($scope.newFollower).then(function(model) {
-            $scope.newFollower = {};
-        });
+        if ($scope.currentUser){
+            $scope.newFollower.followed = $scope.member.id;
+            $scope.newFollower.follower = $scope.currentUser.id;
+            FollowerModel.create($scope.newFollower).then(function(model) {
+                $scope.newFollower = {};
+            });
+        }
+        //$mdSidebar
+        else{$location.path('/login')}
     };
 
     $scope.newTransactionToggle = function() {
@@ -218,24 +224,21 @@ angular.module( 'conexus.member', [
         $scope.tabsToggleVar = !$scope.tabsToggleVar;
     };
 
+    $scope.transactionToggle = function(){
+        $mdSidenav('transaction').toggle();
+        //$rootScope.globalModal = $scope.tokens;
+    };
+
+    //TODO: FXNS
     $scope.unfollow = function(member) {
-        FollowerModel.delete(member);
+        if ($scope.currentUser){
+            FollowerModel.delete(member);
+        }
+        else{$location.path('/login')}
     };
 
     //TODO: SOCKET | WEB3
-    /*
-    $sailsSocket.subscribe('follower', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                  $scope.followers.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.followers, {id: envelope.id});
-                break;
-        }
-    });
-    */
-
+   
 }])
 .controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'ReactionModel', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, ReactionModel, titleService, transactionsFrom, transactionsTo, work) {
     $scope.currentUser = config.currentUser;
@@ -362,8 +365,6 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Assets | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
-    console.log($scope.member);
-
     $scope.balance = $scope.member.balance;
     $scope.reputation = $scope.member.reputation;
 
@@ -463,23 +464,6 @@ angular.module( 'conexus.member', [
     };
 
     //FILTERING  | LAYER IE PROJECT 
-
-    //RADIAL | REPUTATION
-    for (x in Object.keys($scope.reputation)){
-        if ($scope.reputation[Object.keys($scope.reputation)[x]] > 50000){
-            $scope.reputationRadial.xAxis.categories.push(Object.keys($scope.reputation)[x]);
-            $scope.reputationRadial.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
-        }
-    }
-
-    //COLUMN | REPUTATION
-    for (x in Object.keys($scope.reputation)){
-        if ($scope.reputation[Object.keys($scope.reputation)[x]]){
-            $scope.reputationColumn.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
-            $scope.reputationColumn.xAxis.categories.push(Object.keys($scope.reputation)[x]);
-        }
-    }
-
     $scope.balanceRadial = {
         chart: {polar: true},
         series: [{
@@ -541,6 +525,22 @@ angular.module( 'conexus.member', [
         legend:{enabled: false},
         credits:{enabled:false},
     };
+
+    //RADIAL | REPUTATION
+    for (x in Object.keys($scope.reputation)){
+        if ($scope.reputation[Object.keys($scope.reputation)[x]] > 50000){
+            $scope.reputationRadial.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+            $scope.reputationRadial.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+        }
+    }
+
+    //COLUMN | REPUTATION
+    for (x in Object.keys($scope.reputation)){
+        if ($scope.reputation[Object.keys($scope.reputation)[x]]){
+            $scope.reputationColumn.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+            $scope.reputationColumn.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+        }
+    }
 
     //RADIAL | BALANCE
     for (x in Object.keys($scope.balance)){
@@ -645,8 +645,13 @@ angular.module( 'conexus.member', [
         else{$location.path('/login')}
     };
 
+    $scope.contentToggle = function(){
+        $mdSidenav('content').toggle();
+    };
+
     //TODO: BETTER | TAG STORAGE
-    /*$scope.loadTags = function(){
+    $scope.loadTags = function(){
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.tags = $scope.contentList.map(function(obj){
             if(obj.tags){obj.tags = obj.tags.split(',')}
             return obj.tags;
@@ -654,11 +659,6 @@ angular.module( 'conexus.member', [
 
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-         
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -668,7 +668,7 @@ angular.module( 'conexus.member', [
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
-    $scope.loadTags();*/
+    $scope.loadTags();
 
     $scope.newContentToggle = function() {
         $scope.newContentToggleVar = !$scope.newContentToggleVar;

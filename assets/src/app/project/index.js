@@ -246,9 +246,23 @@ angular.module( 'conexus.project', [
 
     $scope.tabsToggleVar = false;
 
-    if($scope.currentUser){
-        $scope.newTransaction.from = $scope.currentUser.id;
-    }
+    if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id}
+
+    $scope.contentToggle = function(){
+        $mdSidenav('content').toggle();
+        //$rootScope.globalTokens = $scope.tokens;
+    };
+
+    $scope.createMember = function(){
+        if($scope.currentUser){
+            $scope.newMember.user = config.currentUser.id;
+            $scope.newMember.project = project.id;
+            MemberModel.create($scope.newMember).then(function(model) {
+                $scope.newMember = {};
+            });
+        }
+        else{$location.path('/login')}
+    };
 
     $scope.createTransaction = function(){
         if($scope.currentUser){
@@ -262,17 +276,6 @@ angular.module( 'conexus.project', [
 
     $scope.newTransactionToggle = function() {
         $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
-    };
-
-    $scope.createMember = function(){
-        if($scope.currentUser){
-            $scope.newMember.user = config.currentUser.id;
-            $scope.newMember.project = project.id;
-            MemberModel.create($scope.newMember).then(function(model) {
-                $scope.newMember = {};
-            });
-        }
-        else{$location.path('/login')}
     };
 
     $scope.isProjectCreator = function() {
@@ -289,6 +292,11 @@ angular.module( 'conexus.project', [
     $scope.tokenToggle = function(){
         $mdSidenav('tokens').toggle();
         $rootScope.globalTokens = $scope.tokens;
+    };
+
+    $scope.transactionToggle = function(){
+        $mdSidenav('transaction').toggle();
+        //$rootScope.globalModal = $scope.tokens;
     };
 
 }])
@@ -401,11 +409,6 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
-    };
-
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -499,7 +502,7 @@ angular.module( 'conexus.project', [
 
 .controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'content', 'PostModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, content, PostModel, project, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
-    $scope.content = content;
+    $scope.contentList = content;
     $scope.newContent = {};
     $scope.newContentToggleVar = false;
     $scope.project = project;
@@ -507,6 +510,39 @@ angular.module( 'conexus.project', [
     $scope.newContent.parent = project.id;
     //$scope.newContent.tags = project.title+','
     $scope.selectedType = 'POST';
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        $scope.tags = $scope.contentList.map(function(obj){
+            console.log(obj);
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+         
+        function countInArray(array, value) {
+            return array.reduce(function(n, x){ return n + (x === value)}, 0);
+        }
+
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
+
+    $scope.contentToggle = function(){
+        $mdSidenav('content').toggle();
+        //$rootScope.globalTokens = $scope.tokens;
+    };
 
     $scope.createContent = function(content) {
         if ($scope.currentUser){
@@ -519,7 +555,7 @@ angular.module( 'conexus.project', [
             $scope.newContent.type = $scope.selectedType;
             PostModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
-                $scope.content.unshift(model);
+                $scope.contentList.unshift(model);
             });
         }
         else{$location.path('/login')}
@@ -1009,9 +1045,10 @@ angular.module( 'conexus.project', [
 
     $scope.search = function(){};
 
-    $scope.tokenToggle = function(){
+    $scope.tokenToggle = function(item){
+        console.log(item)
         $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
+        $rootScope.globalTokens = item;
     };
 
     $sailsSocket.subscribe('task', function (envelope) {

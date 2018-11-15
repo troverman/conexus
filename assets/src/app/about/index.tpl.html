@@ -66,67 +66,6 @@
 	</div>
 </div>
 
-<div id="about-section1">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12" style="max-height:450px;overflow:scroll">
-
-				<!--TODO-->
-				<a style="width:100%" class="btn btn-default log-btn" href="/discover">Discover</a>
-
-				<div class="spacing-10"></div>
-				<div class="spacing-10"></div>
-
-				<ul style="padding:0px;" class="member-tabs">
-					<li class="active"><a href="/content">Content</a></li>
-					<li><a href="/marketplace">Items</a></li>
-					<li><a href="/members">Members</a></li>
-					<li><a href="/market">Orders</a></li>
-					<li><a href="/projects">Projects</a></li>
-					<li><a href="/tasks">Tasks</a></li>
-					<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-				</ul>
-
-				<div class="card">
-			        <form style="display:flex;flex-direction:row;">
-			            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-			            <div ng-click="keyPress(searchQuery)" style="border:0px" class="btn btn-default" style="float:right">
-							<h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-			            </div>
-			        </form>
-				</div>
-
-				<div ng-repeat="task in tasks">
-					<div class="card">
-						<div style="padding:16px;">
-							<div class="row">
-								<div class="col-sm-10">
-									<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
-									<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-			                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-									<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
-									<span style="color:gray" am-time-ago="task.createdAt"></span>
-								</div>
-								<div class="col-sm-2" style="text-align:right">
-									<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
-									<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-								</div>
-							</div>
-						</div>
-						<div class="card-footer">
-							<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{task.plusCount}} like </a> 
-							<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{task.minusCount}} dislike </a>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
-	</div>
-	<div class="spacing-50"></div>
-</div>
-
 <div id="about-section2">
 	<div class="container">
 		<div class="spacing-50"></div>
@@ -193,6 +132,19 @@
 
 <div id="about-section4">
 	<div class="container">
+		<div class="spacing-100"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Projects</h3>
+				<h5>Human Validated Proof of Work</h5>
+			</div>
+		</div>
+		<div class="spacing-50"></div>
+	</div>
+</div>
+
+<div id="about-section4">
+	<div class="container">
 		<div class="spacing-50"></div>
 		<div class="row">
 			<div class="col-md-6">
@@ -251,8 +203,8 @@
 	<div class="container">
 		<div class="row" ng-show="true">
 			<div class="col-md-12">
-				<div class="card">
-			        <div style="padding:16px;">
+				<div class="">
+			        <div style="">
 
 						<h1>CRE8</h1>
 						<h3><b>Join Our Community</b></h3>
@@ -288,8 +240,8 @@
 					</div>
 				</div>
 
-				<div class="card">
-					<div style="padding:16px;">
+				<div class="">
+					<div style="">
 						<h3>What is Valuable to you?</h3>
 						<h4>I believe the following concepts and specific tasks are valuable.</h4>
 
@@ -344,8 +296,8 @@
 					</div>
 				</div>
 
-				<div class="card">
-					<div style="padding:16px;">
+				<div class="">
+					<div style="">
 
 
 						<h4>A Valuable Day</h4>
@@ -366,8 +318,8 @@
 					</div>
 				</div>
 
-				<div class="card">
-					<div style="padding:16px;">
+				<div class="">
+					<div style="">
 						<h2>Personal Information</h4>
 						<h4>Who Are You?</h4>
 						<div class="spacing-15"></div>
@@ -387,8 +339,8 @@
 					</div>
 				</div>
 
-				<div class="card">
-					<div style="padding:16px;">
+				<div class="">
+					<div style="">
 						<h3><b>Join Our Community</b></h3><hr>
 						<form role="form" method="post" action="/auth/local/register">
 							<div class="form-group">

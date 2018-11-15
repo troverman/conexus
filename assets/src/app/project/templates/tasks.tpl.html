@@ -1,9 +1,8 @@
 <!--FILTERS AND SEARCH HERE-->
-<div class="spacing-5"></div>
 
 <div class="row">
-    <div class="">
-        <div style="padding:10px">
+    <div class="card">
+        <div style="">
             <button class="btn btn-default log-btn" ng-click="newTaskToggle()">+ Task</button>
         </div>
     </div>
@@ -37,6 +36,14 @@
     </div>
 </div>-->
 
+<div class="row" ng-show="tasks.length == 0">
+    <div class="card">
+        <div style="padding:16px;">
+            <span style="color:gray">There's nothing here..</span>
+        </div>
+    </div>
+</div>
+
 <div class="row" ng-show="tasks.length > 0">
 
 	<div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
@@ -63,19 +70,14 @@
 		<div ng-repeat="task in tasks">
 			<div class="card">
 				<div style="padding:16px;">
-					<div class="row">
-						<div class="col-sm-10">
-							<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
-							<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-		                    <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-							<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
-							<span style="color:gray" am-time-ago="task.createdAt"></span>
-						</div>
-						<div class="col-sm-2" style="text-align:right">
-							<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
-							<p ng-cilck="tokenToggle(task)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-						</div>
-					</div>
+					<div style="float:right">
+                        <h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    </div>
+					<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
+					<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
+					<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+					<span style="color:gray" am-time-ago="task.createdAt"></span>
 				</div>
 				<div class="card-footer">
 					<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 

@@ -3,7 +3,6 @@
         <div class="spacing-25"></div>
         <div class="row">
             <div class="col-xs-6"><h1>Content</h1></div>
-
             <div class="col-xs-6">
                 <div class="dropdown sort-dropdown noselect" style="float:right">
                     <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -18,7 +17,6 @@
                     </ul>
                 </div>
             </div>
-
         </div>
         <div class="spacing-25"></div>
     </div>
@@ -64,23 +62,27 @@
         </div>
     </div>
 
-    <!--<div class="row">
-        <div class="card">
-            <form style="display:flex;flex-direction:row;">
-                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-                <div style="border:0px" class="btn btn-default" style="float:right">
-                    <a ng-click="keyPress(searchQuery)" href="#" role="button">
-                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>-->
-
     <div class="row">
-        <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+        <div ng-show="sortedTagArray.length > 0" class="col-sm-2" style="padding-left:0px;padding-right:0px;">
             <div class="card">
                 <div style="padding:16px;">
+                    <span><b>Tags</b></span>
+                    <div ng-repeat="tag in sortedTagArray">
+                        <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="padding:16px;">
+                    <span><b>Associations</b></span>
+                    <div ng-repeat="tag in sortedTagArray">
+                        <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="padding:16px;">
+                    <span><b>Locations</b></span>
                     <div ng-repeat="tag in sortedTagArray">
                         <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
                     </div>
@@ -88,6 +90,10 @@
             </div>
         </div>
         <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
+
+            <!--<ul style="padding:0px;" class="member-tabs">
+                <li style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+            </ul>-->
 
             <div class="card">
                 <form ng-submit="search()" style="display:flex;flex-direction:row;">
@@ -100,22 +106,12 @@
                 </form>
             </div>
 
-             <!--<ul style="padding:0px;" class="member-tabs">
-                <li><a href="#">Image</a></li>
-                <li><a href="#">Text</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Work</a></li>
-                <li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-            </ul>
-
-            <div style="clear:both"></div>-->
-
             <div ng-repeat="item in contentList">
                 <div class="card">
                     <div style="padding:16px">
 
                         <div style="float:right;padding-left:5px;"><a style="color:gray;" href="#"><i class="fa fa-ellipsis-v"></i></a></div>
-                        <p ng-cilck="tokenToggle(item)" style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                        <p ng-cilck="toggleToken(item)" style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
 
                         <p><a style="font-weight:700"  href="member/{{item.user.username}}">
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -145,15 +141,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card" ng-click="loadMore()">
+                <div style="padding:10px;">
+                    <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+                </div>
+            </div>
+
         </div>
     </div>
 
-</div>
-
-<div class="spacing-10"></div>
-
-<div class="container" style="text-align:center" ng-click="loadMore()">
-     <div class="row"><div class="col-sm-offset-2 col-sm-10"><button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button></div></div>
 </div>
 
 <div class="spacing-50"></div>

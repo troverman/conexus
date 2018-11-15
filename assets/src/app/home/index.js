@@ -23,31 +23,24 @@ angular.module( 'conexus.home', [
         resolve:{
             projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.getSome(15, 0, 'createdAt DESC');
-                //return null;
             }],
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome(10, 0, 'createdAt DESC');
-                //return null;
             }],
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             posts: ['PostModel', function(PostModel){
                 return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             transactions: ['TransactionModel', function(TransactionModel) {
                 return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             work: ['WorkModel', function(WorkModel) {
                 return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
-                //return null;
             }]
         }
     })
@@ -62,31 +55,24 @@ angular.module( 'conexus.home', [
         resolve:{
             projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.getSome(15, 0, 'createdAt DESC');
-                //return null;
             }],
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome(10, 0, 'createdAt DESC');
-                //return null;
             }],
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             posts: ['PostModel', function(PostModel){
                 return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             transactions: ['TransactionModel', function(TransactionModel) {
                 return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
-                //return null;
             }],
             work: ['WorkModel', function(WorkModel) {
                 return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
-                //return null;
             }]
         }
     })
