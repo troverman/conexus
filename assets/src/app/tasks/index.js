@@ -18,7 +18,7 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $rootScope, $sailsSocket, $sce, $scope, TaskModel, tasks, titleService ) {
+.controller( 'TasksCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, TaskModel, tasks, titleService ) {
 	titleService.setTitle('Tasks | CRE8.XYZ');
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
@@ -124,6 +124,11 @@ angular.module( 'conexus.tasks', [
                 return obj;
             });
         });
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
 }]);

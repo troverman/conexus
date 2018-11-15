@@ -18,7 +18,7 @@ angular.module( 'conexus.contentList', [
 	});
 }])
 
-.controller( 'ContentListCtrl', ['$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ReactionModel', 'titleService', 'PostModel', function ContentListController( $location, $rootScope, $sce, $scope, config, contentList, ReactionModel, titleService, PostModel ) {
+.controller( 'ContentListCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ReactionModel', 'titleService', 'PostModel', function ContentListController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ReactionModel, titleService, PostModel ) {
 	titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
@@ -155,6 +155,11 @@ angular.module( 'conexus.contentList', [
 
     $scope.selectType = function(type){
         $scope.selectedType = type;
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
 }]);

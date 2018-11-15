@@ -8,11 +8,12 @@
                 <div class="col-sm-12" style="padding:16px">
 
                     <div style="float:right">
-                        <h5><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                        <h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 
-                    <h3>{{task.title}} | <a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h3>
-                    <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+                    <h3>{{task.title}}</h3>
+                    <h4><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h4>
+                    <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
 
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="task.createdAt"></p>
@@ -94,18 +95,15 @@
     <!--TODO: COLLAPSE UI-->
     <!--TOKENS MINTING PER ACTION-->
     <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
-    <div class="row">
+    <!--<div class="row">
         <div class="card">
             <div style="padding:16px">
-
                 <div style="font-style:italic;color:gray">
                     <div class="spacing-5"></div>
                     <h4 ng-click="showTokens()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-
                     <div>
                         <a ng-repeat="token in tokens" href="market/{{token}}">{{token}}, </a>
                     </div>
-
                     <div>
                         <a href="market/{{task.id}}+onTime">onTime+{{task.id}}</a>
                         <a href="market/{{task.id}}+onTimeStream">onTimeStream+{{task.id}}</a>
@@ -115,22 +113,11 @@
                         <a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.project.id}})</a>
                         <a href="market/general">general</a>
                     </div>
-
                     <div class="spacing-5"></div>
                 </div>
-
-                <!--
-                <div style="font-style:italic;color:gray">
-                    <div class="spacing-5"></div>
-                    <h4>Token Liquidity</h4>  
-                    <div class="spacing-5"></div>
-                </div>
-                -->
-
             </div>
-
         </div>
-    </div>
+    </div>-->
 
     <!--TODO: STREAM | IFPS-->
     <div class="row">
@@ -192,16 +179,15 @@
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
 
                     <span style="text-align:right;float:right">
-                        <a href="#">Tokens <i class="fa fa-question-circle"></i></a>
+                        <a ng-click="tokenToggle(work)" href="#">Tokens <i class="fa fa-question-circle"></i></a>
                         <br>
-                        <span style="color:gray;font-style:italic">Validation Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a>
+                        <span ng-click="toggleValidation(work)" style="color:gray;font-style:italic">Validation Score:</span> <a style="font-wieght:800" href="#">{{work.verificationScore}}</a>
                     </span>
                     
                     <div style="clear:both"></div>
 
                 </div>
                 <p ng-show="work.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in work.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
-                <p style="margin-left:42px" ng-show="work.task.completeIdentifierSet"><a href="market/{{work.task.completeIdentifierSet}}">{{work.task.completeIdentifierSet}}</a> | {{work.task.completeBountySet}}</p>
                 <div style="margin-left:42px">
                     <span style="display:inline" ng-bind-html="renderContent(work.content)"></span>
                 </div>

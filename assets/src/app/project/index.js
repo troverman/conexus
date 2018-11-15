@@ -216,7 +216,7 @@ angular.module( 'conexus.project', [
     })
 }])
 
-.controller( 'ProjectCtrl', ['$mdSidenav', '$location', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $mdSidenav, $location, $scope, config, MemberModel, project, titleService, TransactionModel ) {
+.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, config, MemberModel, project, titleService, TransactionModel ) {
     titleService.setTitle(project.title + ' | conex.us');
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
@@ -286,6 +286,11 @@ angular.module( 'conexus.project', [
         $scope.tabsToggleVar = !$scope.tabsToggleVar;
     };
 
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
+
 }])
 
 .controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $scope, $stateParams, config, lodash, project, titleService) {
@@ -294,7 +299,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'ReactionModel', 'tasks', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function ProjectActivityController( $location, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, ReactionModel, tasks, titleService, transactionsFrom, transactionsTo, work ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'ReactionModel', 'tasks', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, ReactionModel, tasks, titleService, transactionsFrom, transactionsTo, work ) {
     titleService.setTitle('Activity | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
@@ -353,7 +358,6 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
-
     //TODO: MODELS | ONLY POST/CONTENT
     $scope.createReaction = function(content, type){
 
@@ -377,8 +381,6 @@ angular.module( 'conexus.project', [
         else{$location.path('/login')}
     };
 
-
-
     //YIKES
     $scope.renderContent = function(content){
         if (content){
@@ -397,6 +399,11 @@ angular.module( 'conexus.project', [
             $scope.activity[index].showReply = !$scope.activity[index].showReply;
         }
         else{$location.path('/login')}
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('post', function (envelope) {
@@ -490,7 +497,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$location', '$sce', '$scope', 'content', 'PostModel', 'project', 'titleService', function ProjectController( $location, $sce, $scope, content, PostModel, project, titleService ) {
+.controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'content', 'PostModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, content, PostModel, project, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
     $scope.content = content;
     $scope.newContent = {};
@@ -551,6 +558,10 @@ angular.module( 'conexus.project', [
         $scope.selectedType = type;
     };
 
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
 
 }])
 
@@ -833,7 +844,6 @@ angular.module( 'conexus.project', [
         }
     };
 
-
     $scope.createContent = function(){};
     $scope.createReaction = function(content, type){};
 
@@ -913,14 +923,13 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectTasksCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
+.controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
     titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTask = {};
     $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
     $scope.project = project;
-
 
     $scope.createTask = function(newTask) {
         if ($scope.currentUser){
@@ -999,6 +1008,11 @@ angular.module( 'conexus.project', [
     };
 
     $scope.search = function(){};
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
 
     $sailsSocket.subscribe('task', function (envelope) {
         switch(envelope.verb) {

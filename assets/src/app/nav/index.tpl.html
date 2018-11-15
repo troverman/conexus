@@ -48,6 +48,13 @@
         </div>
     </md-sidenav>
 
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="subNav" md-is-locked-open="false" style="position:fixed;background-color:black">
+        <div class="md-list-item-text" layout="column" style="height:100%;">
+            <div style="text-align:center">
+                <h1>subnav</h1>
+            </div>
+        </div>
+    </md-sidenav>
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="content" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
@@ -79,7 +86,6 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="transaction" md-is-locked-open="false" style="position:fixed;background-color:white;width:50%;max-width:100%">
-    <!--min-width:350px;width:50%-->
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
@@ -100,6 +106,36 @@
                     <textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
                     <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
                 </form>
+            </div>
+        </div>
+    </md-sidenav>
+
+     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="tokens" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+        <div class="md-list-item-text" layout="column" style="height:100%;">
+            <div style="padding:16px;">
+                <div class="spacing-25"></div>
+                <h3 style="">Tokens</h3>
+
+                <p>Tokens distributed on action.<p>
+                <p>Content Protocol, Data Protocol, Project Protocol, Reaction Protocol, Task Protocol, Time Protocol, Validation Protocol</p>
+                <p>Math desciprion, powerset?</p> 
+                <p>Manifold and Action Table</p>
+
+                <table>
+                    <tr ng-repeat="token in globalTokens"><td><a href="market/{{token}}">{{token}}</a></td></tr>
+                </table>
+
+                <div class="spacing-10"></div>
+
+                <h3 style="">Market Liquidity and Equality Traverse</h3>
+                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform mating operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us travering rules and computatonal effiecent conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>
+
+                <p>Input</p>
+                <tags-input ng-model="input" placeholder="Input"></tags-input>
+                <p>Desired Output</p>
+                <tags-input ng-model="output" placeholder="Output"></tags-input>
+                <button type="submit" style="width:100%" class="btn btn-default log-btn">+ Lookup</button>
+
             </div>
         </div>
     </md-sidenav>

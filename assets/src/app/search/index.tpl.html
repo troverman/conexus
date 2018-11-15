@@ -151,8 +151,7 @@
 								<span style="color:gray" am-time-ago="item.createdAt"></span>
 							</div>
 							<div class="col-sm-2" style="text-align:right">
-								<h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
-								<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+								<p ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
 							</div>
 						</div>
 					</div>

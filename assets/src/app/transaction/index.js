@@ -21,13 +21,12 @@ angular.module( 'conexus.transaction', [
     });
 }])
 
-.controller( 'TransactionController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, ReactionModel, titleService, transaction ) {
+.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, ReactionModel, titleService, transaction ) {
     titleService.setTitle('Transaction | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.contentList = posts;
-    $scope.toggleTokenVar = false;
     $scope.transaction = transaction;
 
     //PACKAGE | NESTED RENDERING
@@ -75,9 +74,10 @@ angular.module( 'conexus.transaction', [
         var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.contentList[index].showReply = !$scope.contentList[index].showReply
     };
-
-    $scope.toggleToken = function(){
-        $scope.toggleTokenVar =!$scope.toggleTokenVar
+    
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

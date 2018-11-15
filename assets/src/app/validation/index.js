@@ -18,7 +18,7 @@ angular.module( 'conexus.validation', [
     });
 }])
 
-.controller( 'ValidationController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'titleService', 'validation', function ValidationController( $location, $sailsSocket, $sce, $scope, config, titleService, validation) {
+.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'titleService', 'validation', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, titleService, validation) {
     titleService.setTitle('Validation | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
@@ -111,6 +111,10 @@ angular.module( 'conexus.validation', [
         }
     };
 
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
 
 
 }]);

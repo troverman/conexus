@@ -41,17 +41,14 @@ angular.module( 'conexus.search', [
     });
 }])
 
-.controller( 'SearchController', ['$rootScope', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $rootScope, $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
+.controller( 'SearchController', ['$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
     $scope.searchResults = searchResults;
     $scope.searchQuery = $stateParams.searchQuery;
 
     $scope.tags = [];
     $scope.searchResults.map(function(obj){
-        if (obj.tags){
-            $scope.tags.concat(obj.tags.split(','));
-        }
+        if (obj.tags){$scope.tags.concat(obj.tags.split(','));}
     });
-    console.log($scope.tags)
 
     titleService.setTitle($scope.searchQuery + ' | CRE8.XYZ');
 
@@ -85,6 +82,11 @@ angular.module( 'conexus.search', [
                 }
             });
         });
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
    
 }]);

@@ -123,7 +123,7 @@
 
                         <a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
                         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-                        <p style="display:inline;float:right"><a ng-click="sideNavToggle()" href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                        <p style="display:inline;float:right"><a ng-click="tokenToggle(item)" href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                         <div style="clear:both"></div>
 
                     </div>
@@ -176,7 +176,7 @@
                         </div>
                         <div class="col-sm-2" style="text-align:right">
                             <h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
-                            <p><a ng-click="sideNavToggle()" href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                            <p><a ng-click="tokenToggle(item)" href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                         <a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
                         <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 
-                        <p style="display:inline;float:right"><a ng-click="sideNavToggle()" href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                        <p style="display:inline;float:right"><a ng-click="tokenToggle(item)" href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                         <div style="clear:both"></div>
 
                     </div>

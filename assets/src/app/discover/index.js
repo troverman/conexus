@@ -36,7 +36,7 @@ angular.module( 'conexus.discover', [
     });
 }])
 
-.controller( 'DiscoverCtrl', ['$sce', '$scope', 'members', 'titleService', 'posts', 'projects', 'tasks', 'uiGmapGoogleMapApi', 'work', function DiscoverController( $sce, $scope, members, titleService, posts, projects, tasks, uiGmapGoogleMapApi, work ) {
+.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'members', 'titleService', 'posts', 'projects', 'tasks', 'uiGmapGoogleMapApi', 'work', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, members, titleService, posts, projects, tasks, uiGmapGoogleMapApi, work ) {
 	
     titleService.setTitle('Discover | CRE8.XYZ');
     
@@ -113,5 +113,10 @@ angular.module( 'conexus.discover', [
     };
 
     $scope.search = function(){};
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
 
 }]);

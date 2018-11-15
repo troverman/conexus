@@ -37,6 +37,8 @@
     </div>
 </div>-->
 
+<!--TODO: TOKEN OUPUT FILTERS-->
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
@@ -67,6 +69,7 @@
 				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
 			</div>
 
+			<!--TODO: MARKET LOOKUP-->
 			<div ng-repeat="task in tasks">
 				<div class="card">
 					<div style="padding:16px;">
@@ -79,17 +82,14 @@
 								<span style="color:gray" am-time-ago="task.createdAt"></span>
 							</div>
 							<div class="col-sm-2" style="text-align:right">
-								<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
-								<p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-								<!--TODO: DO IT FOR REAL | MARKET LOOKUP-->
-								<!--<h4 ng-show="!task.completeBountySet"><a href="market/{{task.id}}">Create Liquidity</a></h4>-->
+								<p ng-click="tokenToggle(task)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
 							</div>
 						</div>
 					</div>
 					<div class="card-footer">
 						<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
 						<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-						<!--<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>-->
+						<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
 						<a style="padding:0px" class="pull-right" href="task/{{task.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
 				</div>

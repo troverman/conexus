@@ -25,7 +25,7 @@ angular.module( 'conexus.content', [
     });
 }])
 
-.controller( 'ContentController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, ReactionModel, reactions, titleService, UserModel ) {
+.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, ReactionModel, reactions, titleService, UserModel ) {
     titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.marketOutput = [];
@@ -147,8 +147,6 @@ angular.module( 'conexus.content', [
         object[stack.shift()] = newValue;
     }
 
-
-
     //TODO
     $scope.createPost = function(content) {
         if($scope.currentUser){
@@ -161,7 +159,6 @@ angular.module( 'conexus.content', [
         }
         else{$location.path('/login')}
     };
-
 
     $scope.createReaction = function(content, type){
 
@@ -220,6 +217,11 @@ angular.module( 'conexus.content', [
         location[0].value.showThread = !location[0].value.showThread;
         updateObject($scope.post, location[0].value, location[0].path);
 
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

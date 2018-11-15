@@ -153,7 +153,7 @@
     </div>
 
     <div class="row">
-        <div ng-repeat="item in activity"><!--ng-click=""-->
+        <div ng-repeat="item in activity" ng-click="">
             <div class="card" ng-show="item.model=='CONTENT'" >
                 <div style="padding:16px;overflow:scroll;max-height:500px">
                     <div>
@@ -172,7 +172,7 @@
                         <a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
                         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                         
-                        <p style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                        <p ng-click="tokenToggle(item)" style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                         <div style="clear:both"></div>
                     </div>
                     <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
@@ -224,8 +224,7 @@
                             <span style="color:gray" am-time-ago="item.createdAt"></span>
                         </div>
                         <div class="col-sm-2" style="text-align:right">
-                            <h4>{{item.completeBountySet}} <a href="market/{{item.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
-                            <p><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                            <p ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                         </div>
                     </div>
                 </div>
@@ -248,7 +247,7 @@
                         <a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
                         <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 
-                        <p style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                        <p ng-click="tokenToggle(item)" style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
                         <div style="clear:both"></div>
 
                     </div>

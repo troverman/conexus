@@ -100,7 +100,7 @@ angular.module( 'conexus.home', [
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
+.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.map = {
@@ -329,6 +329,12 @@ angular.module( 'conexus.home', [
             });
         });
     };
+
+    $scope.tokenToggle = function(item){
+        $rootScope.globalTokens = item;
+        $mdSidenav('tokens').toggle();
+    };
+
 }])
 
 .controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
@@ -346,6 +352,11 @@ angular.module( 'conexus.home', [
 
     $scope.transactionToggle = function(){
         $mdSidenav('transaction').toggle();
+    };
+
+    $scope.tokenToggle = function(item){
+        $rootScope.globalTokens = item;
+        $mdSidenav('tokens').toggle();
     };
 
     //REORGANIZE

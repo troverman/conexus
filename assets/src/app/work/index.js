@@ -25,7 +25,7 @@ angular.module( 'conexus.work', [
     });
 }])
 
-.controller( 'WorkController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function WorkController( $location, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
+.controller( 'WorkController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function WorkController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
     titleService.setTitle('Work | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.work = work;
@@ -202,6 +202,12 @@ angular.module( 'conexus.work', [
     $scope.reply = function(post){
         var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
         $scope.posts[index].showReply = !$scope.posts[index].showReply
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+
     };
 
     //TODO: WEBSOCKETS | WEB3

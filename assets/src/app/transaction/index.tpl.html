@@ -5,7 +5,7 @@
     <div class="card">
         <div style="padding:16px">
             <div style="float:right;text-align:right">
-                <h5 style="text-align:right" ng-click="toggleToken()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                <h5 style="text-align:right" ng-cilck="tokenToggle()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
             </div>
             <h2>Transaction {{transaction.id}}</h2>
             <p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="card" ng-show="!toggleTokenVar">
+    <div class="card" ng-show="false">
         <div style="padding:16px">
 
             <div>

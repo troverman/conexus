@@ -21,7 +21,7 @@ angular.module( 'conexus.order', [
     });
 }])
 
-.controller( 'OrderController', ['$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'order', 'PostModel', 'posts', 'titleService', function OrderController( $sailsSocket, $sce, $scope, config, lodash, order, PostModel, posts, titleService ) {
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'order', 'PostModel', 'posts', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, order, PostModel, posts, titleService ) {
     titleService.setTitle('Order | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newPost = {};
@@ -56,6 +56,11 @@ angular.module( 'conexus.order', [
     $scope.reply = function(item){
         var index = $scope.posts.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.posts[index].showReply = !$scope.posts[index].showReply
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('order', function (envelope) {

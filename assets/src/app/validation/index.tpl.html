@@ -8,7 +8,7 @@
 			<div style="padding:16px">
 
 				<div style="float:right">
-					<h5><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+					<h5 ng-cilck="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
 				</div>
 
 				<a href="member/{{validation.user.username}}">
@@ -21,6 +21,10 @@
 				<!--TODO: ABSTRACT MODEL-->
 				<p>work | <a href="work/{{validation.work}}">{{validation.work}}</a></p>
 
+				<!--TODO: MANIFOLD-->
+				<!--MANIFOLD-->
+				<!--<p>Manifold | Project+</p>-->
+
 				<span ng-bind-html="renderContent(validation.content)"></span>
 
 				<div class="spacing-10"></div>
@@ -30,7 +34,7 @@
 							<th>Dimension</th>
 							<th>Validation Score</th>
 							<th>Reputation</th>
-							<th>Reputation Weighted Validation Score</th>
+							<th>Reputation Weighted Validation Score <a ng-click="tokenToggle()" href="#"><i class="fa fa-question-circle"></i></a></th>
 						</tr>
 					<thead>
 					<tbody>

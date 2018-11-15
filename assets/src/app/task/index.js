@@ -24,7 +24,7 @@ angular.module( 'conexus.task', [
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdDialog', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdDialog, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
+.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
     titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.task = task;
@@ -86,41 +86,6 @@ angular.module( 'conexus.task', [
     //console.log(getAllSubsets($scope.test));
     //$scope.tokens = getAllSubsets($scope.test);
     //STORED AS A MATRIX; algabraic lattice. 
-
-    //TEST
-    $scope.showTokens = function(){
-        /*
-        md-backdrop.md-opaque.md-default-theme,
-        .md-dialog-container {
-          position:fixed;
-        }
-        .md-dialog-container {
-            width: 100%;
-            height: 100%;
-            top: inherit !important;
-            bottom: 0px;
-            left: 0px;
-            position: fixed;
-        }
-        <body layout="column">
-        $mdDialog.show({
-            //contentElement: '#myStaticDialog',
-            controller: 'TokenModalController',
-            templateUrl: 'task/tokenModal.tpl.html',
-            //parent: angular.element('container'),
-            resolve: {
-                tokens: function(){
-                    return [];
-                }
-            },
-            clickOutsideToClose:true,
-            fullscreen: false
-        })
-        .then(function(result){
-            $scope.profile.pictureUrl = result;
-        });
-        */
-    };
 
     $scope.askQuestion = function() {
         if ($scope.currentUser){
@@ -275,6 +240,11 @@ angular.module( 'conexus.task', [
 
     };
 
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
+
     $scope.updateCount = function() {
         $scope.taskTime++;
         $scope.$apply();
@@ -360,20 +330,4 @@ angular.module( 'conexus.task', [
         }
     });
 
-}])
-
-.controller('TokenModalController', ['$mdDialog', '$scope', function ($mdDialog, $scope) {
-
-    $scope.photoLoading = false;
-    $scope.pp = 0;
-    $scope.profilePicUrl = null;
-
-    $scope.submit = function(){
-        $mdDialog.hide();
-    };
-
-    $scope.cancel = function(){
-        $mdDialog.cancel();
-    };
-
-}])
+}]);

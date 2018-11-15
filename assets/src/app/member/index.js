@@ -237,7 +237,7 @@ angular.module( 'conexus.member', [
     */
 
 }])
-.controller( 'MemberActivityCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'ReactionModel', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController($sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, ReactionModel, titleService, transactionsFrom, transactionsTo, work) {
+.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'ReactionModel', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, ReactionModel, titleService, transactionsFrom, transactionsTo, work) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
@@ -339,6 +339,11 @@ angular.module( 'conexus.member', [
     };
 
     $scope.search = function(){};
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
 
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
@@ -590,7 +595,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberContentCtrl', ['$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'PostModel', 'titleService', function MemberContentController($sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, PostModel, titleService) {
+.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'PostModel', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, PostModel, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.contentList = posts;
     $scope.newContent = {};
@@ -690,6 +695,11 @@ angular.module( 'conexus.member', [
 
     $scope.selectType = function(type){
         $scope.selectedType = type;
+    };
+
+    $scope.tokenToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
     };
 
 }])
@@ -997,11 +1007,6 @@ angular.module( 'conexus.member', [
             });
         }
     };
-
-
-
-
-
 
     //TODO
     $scope.createContent = function(content, type){};

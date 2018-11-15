@@ -24,11 +24,12 @@
 			<div style="padding:16px" class="col-sm-12">
 
 				<div style="float:right">
-					<h5><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+					<h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
 				</div>
 
-				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a> | {{work.amount}}</h3>
-                <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a></h3>
+				<h4>{{work.amount}}, <span style="font-size:10px;color:gray">{{(work.amount/60).toFixed(2)}} minutes, <span style="font-size:10px;color:gray">{{(work.amount/3600).toFixed(2)}} hours</span></h4>
+                <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
 
 				<a style="font-weight:700" href="member/{{work.user.username}}">
 					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -133,7 +134,7 @@
 	<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
 	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
 	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-	<div class="row">
+	<!--<div class="row">
 		<div class="card">
 			<div style="padding:16px">
 
@@ -142,18 +143,9 @@
                     <a ng-repeat="token in tokens" href="market/{{token}}">{{work.amount}} {{token}}, </a>
 				</div>
 
-				<div>
-					<a href="market/{{work.id}}+onTime">onTime+{{work.id}}</a>
-					<a href="market/{{work.id}}+onTimeStream">onTimeStream+{{work.id}}</a>
-					<a href="market/{{work.task.id}}+onTime">onTime+{{work.task.id}}</a>
-				    <a href="market/{{work.task.id}}+onTimeStream">onTimeStream+{{work.task.id}}</a>
-				    <a ng-repeat="tag in tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{work.task.id}} </a>
-				   	<a href="market/general">general</a>
-			   </div>
-
 			</div>
 		</div>
-	</div>
+	</div>-->
 
 	<div class="row">
 		<div class="card">
