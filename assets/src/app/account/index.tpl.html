@@ -74,15 +74,17 @@
 				        </div>
 					</div>
 
+					<!--TODO-->
 					<h5>Peer Contrubution</h5>
 					<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
 					<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
 
-			
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<!--TODO: ACCOUNT HISTORY | LIKE LOGINS ALL POSTS | DETAILED AUDIT OF ACCOUNT EVENTS -->
 
     <div class="row">
 		<div class="card">
@@ -104,7 +106,7 @@
 
     <div class="row">
 		<div class="card">
-			<div style="padding:16px;">
+			<div style="">
 				<button class="btn btn-default log-btn" ng-click="editAccountToggle()">Edit Account</button>
 			</div>
 		</div>
@@ -114,18 +116,26 @@
 		<div class="card">
 		    <div style="padding:16px;">
 				<form role="form" ng-submit="editAccount()">
+					<h5>Username</h5>
 					<input placeholder="Username" type="text" ng-model="newAccountInformation.username" class="form-control">
+					<h5>Email</h5>
 					<input placeholder="Email" type="text" ng-model="newAccountInformation.email" class="form-control">
+					<h5>First Name</h5>
 					<input placeholder="First Name" type="text"  ng-model="newAccountInformation.firstName" class="form-control">
+					<h5>Last Name</h5>
 					<input placeholder="Last Name" type="text" ng-model="newAccountInformation.lastName" class="form-control">
+					<h5>Address</h5>
 					<input placeholder="Address" type="text" ng-model="newAccountInformation.address" class="form-control">
-					<input placeholder="Date of Birth" type="text" ng-model="newAccountInformation.dob" class="form-control">
-					
+					<h5>Date of Birth</h5>
+					<input placeholder="Date of Birth" type="date" ng-model="newAccountInformation.dob" class="form-control">
+					<h5>Sex</h5>
 					<input placeholder="Sex" type="text" ng-model="newAccountInformation.sex" class="form-control">
+					<h5>Height</h5>
 					<input placeholder="Height" type="text" ng-model="newAccountInformation.height" class="form-control">
+					<h5>Eye Color</h5>
 					<input placeholder="Eye Color" type="text" ng-model="newAccountInformation.eyecolor" class="form-control">
+					<h5>23&Me</h5>
 					<input placeholder="23&Me" type="text" ng-model="newAccountInformation.geneticsequence" class="form-control">
-
 					<button type="submit" class="btn btn-default log-btn">Save</button>
 				</form>
 			</div>
@@ -138,7 +148,7 @@
 				<h3>Settings</h3>
 				<p>GPS Tracking <md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>
 				<p>Notifications <md-switch ng-model="notifications" aria-label="Notifications"></md-switch></p>
-				<p>Browser Mining <md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch></p>
+				<p>Continuous / Browser Mining <md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch></p>
 			</div>
 	    </div>
     </div>

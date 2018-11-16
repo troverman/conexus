@@ -28,6 +28,7 @@ angular.module( 'conexus', [
     'conexus.marketPair',
     'conexus.marketPlace',
     'conexus.members',
+    'conexus.notifications',
     'conexus.nav',
     'conexus.home',
     'conexus.intro',

@@ -28,6 +28,7 @@ module.exports.routes = {
   'get /member/:path/tasks': 'HomeController.index',
   'get /member/:path/time': 'HomeController.index',
   'get /members': 'HomeController.index',
+  'get /notifications': 'HomeController.index',
   'get /order/:id': 'HomeController.index',
   'get /projects': 'HomeController.index',
   'get /project/:path': 'HomeController.index',

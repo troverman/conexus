@@ -8,66 +8,9 @@
     </div>
 </div>
 
+<div class="spacing-10"></div>
+
 <div class="container">
-
-	<div class="spacing-10"></div>
-
-	<!--<div class="row">
-		<div class="card">
-			<div style="padding:16px;">
-				<h1>MARKET PLACE</h1>
-			</div>
-		</div>
-	</div>-->
-
-	<div class="row">
-		<div class="card">
-			<div style="padding:16px;">
-				<button class="btn btn-default log-btn" ng-click="newItemToggle()">+ Item</button>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="card" ng-show="newItemToggleVar">
-		    <div style="padding:16px;">
-				<form role="form" ng-submit="createItem(newItem)">
-					<div class="form-group col-sm-12">
-						<input placeholder="Title" type="text" ng-model="newItem.title" class="form-control">
-					</div>
-					<div class="form-group col-sm-12">
-						<input placeholder="Tags" type="text" ng-model="newItem.tags" class="form-control">
-					</div>
-					<div class="col-sm-12">
-                    	<text-angular placeholder="Content" ng-model="newItem.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-					</div>
-					<div class="form-group col-sm-12">
-						<h4>Price</h4>
-						<!--TODO: Better Form.. add [] + -->
-						<input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
-						<input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
-						<!--<input placeholder="identiferSet" type="text" ng-model="newItem.ArrayManifolds" class="form-control"> [] ill talk this or this or this and this-->
-						<!--[], [], [[],[]]-->
-
-					</div>
-					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newItem.amountSet">create</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<!--<div class="row">
-	    <div class="card">
-	        <form style="display:flex;flex-direction:row;">
-	            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-	            <div style="border:0px" class="btn btn-default" style="float:right">
-	                <a ng-click="keyPress(searchQuery)" href="#" role="button">
-	                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-	                </a>
-	            </div>
-	        </form>
-	    </div>
-	</div>-->
 
 	<!--FILTER BY CURRENCIES / PRICES I WANT TO PAY BASED ON MM.. RECURSIVE LIQUIDITY TRACE-->
 
@@ -93,6 +36,38 @@
 		            </div>
 		        </form>
 		    </div>
+
+		    <div class="card">
+				<div style="">
+					<button class="btn btn-default log-btn" ng-click="newItemToggle()">+ Item</button>
+				</div>
+			</div>
+
+			<div class="card" ng-show="newItemToggleVar">
+			    <div style="padding:16px;">
+					<form role="form" ng-submit="createItem(newItem)">
+						<div class="form-group col-sm-12">
+							<input placeholder="Title" type="text" ng-model="newItem.title" class="form-control">
+						</div>
+						<div class="form-group col-sm-12">
+							<input placeholder="Tags" type="text" ng-model="newItem.tags" class="form-control">
+						</div>
+						<div class="col-sm-12">
+	                    	<text-angular placeholder="Content" ng-model="newItem.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+						</div>
+						<div class="form-group col-sm-12">
+							<h4>Price</h4>
+							<!--TODO: Better Form.. add [] + -->
+							<input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
+							<input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
+							<!--<input placeholder="identiferSet" type="text" ng-model="newItem.ArrayManifolds" class="form-control"> [] ill talk this or this or this and this-->
+							<!--[], [], [[],[]]-->
+
+						</div>
+						<button type="submit" class="btn btn-default log-btn" ng-disabled="!newItem.amountSet">create</button>
+					</form>
+				</div>
+			</div>
 
 			<div ng-repeat="item in items">
 		        <div class="card">
@@ -123,18 +98,17 @@
 			        </div>
 		        </div>
 			</div>
+
+			<div ng-show="true" class="card" style="text-align:center" ng-click="loadMore()">
+                <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+            </div>
+
 		</div>
 	</div>
 
 	<!--REACT 5 Star verified purchase-->
 	<div class="spacing-10"></div>
 
-</div>
-
-<div class="spacing-25"></div>
-
-<div class="container" style="text-align:center" ng-click="loadMore()">
-     <div class="row"><div class="col-sm-offset-2 col-sm-10"><button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button></div></div>
 </div>
 
 <div class="spacing-50"></div>

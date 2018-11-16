@@ -19,14 +19,15 @@ body {
 
 img{max-width:100%;}
 
-md-progress-linear .md-container {
-  background-color: rgba(36,36,46, 1)!important;
-}
+md-progress-linear .md-container {background-color: rgba(36,36,46, 1)!important;}
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {background-color: #084b73!important;}
 
-md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
- background-color: #084b73!important;
-}
+md-switch .md-bar {background-color: rgba(0,44,84,0.1);}
+md-switch.md-checked .md-bar {background-color: rgba(0,44,84,0.2);}
+md-switch .md-thumb {background-color: rgba(0,44,84,0.7);}
+md-switch.md-checked .md-thumb {background-color: rgba(0,44,84,0.7);}
 
+.md-track{background-color:rgba(100,100,100,0.3) }
 
 //a{color:#002c53}
 a:hover{text-decoration: none}
@@ -114,52 +115,53 @@ a:focus{text-decoration: none}
 }
 
 .member-card{
-  margin-bottom:30px;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-  overflow:hidden
+    margin-bottom:30px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    overflow:hidden
 }
 
+.member-card:hover{box-shadow: 0 1px 3px 0 rgba(0,0,0,.6), 0 1px 1px 0 rgba(0,0,0,.42), 0 2px 1px -1px rgba(0,0,0,.36)}
+
 .member-card-image {
-  //height: 125px;
-  height: 100px;
-  background: center center no-repeat;
-  background-size: cover;
+    //height: 125px;
+    height: 100px;
+    background: center center no-repeat;
+    background-size: cover;
 }
 
 .member-card-image img{
-  position:absolute;
-  //left: 10%;
-  //top:14%;
-  left: 7%;
-  top:13%;
-
-  margin: 0 auto;
-  background: #fff;
-  //height: 11em;
-  padding: 0.25em;
-  //border-radius: .4em;
-  //max-width:10em;
-  width:10em;
-  height:10em;
-  border-radius: 100em;
+    position:absolute;
+    //left: 10%;
+    //top:14%;
+    left: 7%;
+    top:13%;
+    margin: 0 auto;
+    background: #fff;
+    //height: 11em;
+    padding: 0.25em;
+    //border-radius: .4em;
+    //max-width:10em;
+    width:10em;
+    height:10em;
+    border-radius: 100em;
 }
 
 .member-card-social {
-  height: 40px;
-  background: #DAE0DE;
-  text-align: right;
-  padding-top: 12px;
-  padding-right:20px;
+    height: 40px;
+    background: #DAE0DE;
+    text-align: right;
+    padding-top: 12px;
+    padding-right:20px;
 }
 
 .member-card-info {
-  padding:10px;
-  height: 100px;
-  background: white;
-  text-align: right;
-  padding-right:5%;
-  padding-left:50%;
-  overflow:hidden;
+    padding:10px;
+    height: 100px;
+    background: white;
+    text-align: right;
+    padding-right:5%;
+    padding-left:50%;
+    overflow:hidden;
 }
 
 .member-card-info h4{
@@ -322,13 +324,13 @@ a:focus{text-decoration: none}
 }
 
 .center {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  max-width: 100%;
-  text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
 }
 
 .footer {
@@ -365,14 +367,14 @@ a:focus{text-decoration: none}
 }
 
 .footer img{
-  height:50px;
-  float:right;
-  //padding-right:15px;
+    height:50px;
+    float:right;
+    //padding-right:15px;
 }
 
 .footer-links{
-  float:left;
-  padding-top:10px;
+    float:left;
+    padding-top:10px;
 }
 
 .main-container {
@@ -450,6 +452,13 @@ a:focus{text-decoration: none}
     padding:3px;
     min-width:100px;
 }
+
+#title-container{color:white;background-color:black;}
+#about-section1{background-color:white}
+#about-section2{color:white;background-color:black;}
+#about-section3{color:white;background-color:black;}
+#about-section4{background-color:white}
+#about-section5{background-color:white}
 
 /* Bootstrap nav breakpoint override */
 @media (max-width: 991px) {

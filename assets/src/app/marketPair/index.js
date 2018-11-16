@@ -21,7 +21,7 @@ angular.module( 'conexus.marketPair', [
 	});
 }])
 
-.controller( 'MarketPairCtrl', ['$scope', '$stateParams', 'config', 'mirrorOrders', 'OrderModel', 'orders', 'titleService', function MarketPairController( $scope, $stateParams, config, mirrorOrders, OrderModel, orders, titleService ) {
+.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'config', 'mirrorOrders', 'OrderModel', 'orders', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, config, mirrorOrders, OrderModel, orders, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | CRE8.XYZ');
@@ -34,6 +34,8 @@ angular.module( 'conexus.marketPair', [
     if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){
         $scope.pluralistic = true;
     }
+
+    $scope.selectedType = 'ONBOOKS';
 
     //coordinates on the quasicrystal 
     //100Transparency + 50education + 75universal = 0.01CRE8 + 0.05novo 
@@ -285,9 +287,7 @@ angular.module( 'conexus.marketPair', [
                     }
                 }
             }
-
         }
-        
     }
     if ($scope.market.split(',').length > 1 && $scope.market1.split(',').length > 1){
         //COORDINATES
@@ -395,7 +395,6 @@ angular.module( 'conexus.marketPair', [
             //TODO
             $scope.newContent.post = content.id;
 
-
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.marketPair = 'CRE8/USD'; // || USD/CRE8
             PostModel.create($scope.newContent).then(function(model) {
@@ -437,9 +436,18 @@ angular.module( 'conexus.marketPair', [
         $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
+    $scope.questionToggle = function(){
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = $scope.tokens;
+    };
+
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.orders[index].showReply = !$scope.orders[index].showReply
+    };
+
+    $scope.selectType = function(type){
+        $scope.selectedType = type;
     };
     
 }]);

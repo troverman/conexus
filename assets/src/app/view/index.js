@@ -19,7 +19,7 @@ angular.module( 'conexus.view', [
 }])
 
 .controller( 'ViewController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'titleService', 'view', function ViewController( $location, $sailsSocket, $sce, $scope, config, PostModel, titleService, view) {
-    titleService.setTitle('Work | CRE8.XYZ');
+    titleService.setTitle('View | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
    
 

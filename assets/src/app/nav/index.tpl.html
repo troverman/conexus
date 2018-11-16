@@ -1,10 +1,11 @@
 <style>
-.navbar-inverse .navbar-toggle{border-color:#000;}
-.navbar-inverse .navbar-brand:focus{color:#000}
-.navbar-inverse .navbar-brand:active{color:#000}
-.navbar-inverse .navbar-brand:hover{color:#000}
-.navbar-toggle{border-radius:0px;}
+    .navbar-inverse .navbar-toggle{border-color:#000;}
+    .navbar-inverse .navbar-brand:focus{color:#000}
+    .navbar-inverse .navbar-brand:active{color:#000}
+    .navbar-inverse .navbar-brand:hover{color:#000}
+    .navbar-toggle{border-radius:0px;}
 </style>
+
 <div ng-controller="NavCtrl">
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="nav" md-is-locked-open="false" style="position:fixed;background-color:black">
@@ -30,6 +31,8 @@
                 <h2 class="nav-links" style="padding:16px;"><a href="/projects">Projects</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/tasks">Tasks</a></h2>
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/transparency">Transparency</a></h2>
+
+                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/notifications">Notifications</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/account">Settings</a></h2>
                 <!--<h2 class="nav-links" style="padding:16px;"><a href="/">Vote</a></h2>-->
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/logout">Logout</a></h2>
@@ -99,7 +102,7 @@
                     <h5>Asset</h5>
                     <input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control">
                     <h5>Amount</h5>
-                    <input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control">
+                    <input placeholder="Amount" type="number" ng-model="newTransaction.amount" class="form-control">
                     <h5>Tags</h5>
                     <tags-input placeholder="Tags" ng-model="newTransaction.tags"></tags-input>
                     <h5>Description</h5>
@@ -178,7 +181,7 @@
                                 </a>
                             </li>
                             <li><a style="color:black!important" href="/account">account</a></li>
-                            <li><a style="color:black!important" href="#">0 notifications</a></li>
+                            <li><a style="color:black!important" href="/notifications">0 notifications</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a style="color:black!important" href="/logout">log out</a></li>
                         </ul>

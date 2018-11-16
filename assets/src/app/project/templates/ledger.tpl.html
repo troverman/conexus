@@ -1,4 +1,5 @@
 <div class="spacing-5"></div>
+
 <div class="row">
 	<div class="col-md-6">
 		<div style="">
@@ -6,11 +7,6 @@
 				<li><a href="project/{{project.urlTitle}}/assets">Assets</a></li>
 				<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
 				<li><a href="project/{{project.urlTitle}}/ledger">Transactions</a></li>
-				<!--
-				<li><a href="">Work</a></li>
-				<li><a href="">Property</a></li>
-				<li><a href="">Liscense</a></li>
-				-->
 			</ul>
 		</div>
 	</div>
@@ -32,20 +28,15 @@
 <div class="row">
 	<div class="card">
 		<div style="padding:16px;">
-
-
 			<div class="row">
-
 				<div class="col-md-6">
 					<h5>{{transactions[0].createdAt | date:"h:mma | MM/dd/yyyy"}} - {{transactions[transactions.length-1].createdAt | date:"h:mma | MM/dd/yyyy"}} </h5>
-
 					<ul style="" class="member-tabs">
 						<li ng-click="selectOverview()"><a href="">Overview</a></li>
 						<li><a ng-click="selectExpense()" href="#">Expenses</a></li>
 						<li><a ng-click="selectRevenue()" href="#">Revenue</a></li>
 					</ul>
 				</div>
-
 				<div class="col-md-6">
 					<div style="text-align:right">
 						<form style="display:flex;flex-direction:row;">
@@ -56,15 +47,11 @@
 					            </a>
 							</div>
 						</form>
-
 						<h3>{{sumTo[sumTo.length-1][1].toFixed(2)}} USD REVENUE</h3>
 						<h3>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} USD EXPENSE</h3>
-
 					</div>
 				</div>
-
 			</div>
-
 
 			<!--children projects..-->
 			<div class="col-md-6">
@@ -74,33 +61,29 @@
 				<highchart config="pie"></highchart>
 			</div>
 
-
 			<div class="col-md-12">
 				<p><span ng-repeat="tag in sortedTransactionTags"><a ng-click="selectTag(tag.element)" href="#">{{tag.element}} </a></span><p>
 			</div>
 
-
 		</div>
 	</div>
 </div>
 
-<div class="row" ng-show="currentUser">
+<div class="row">
 	<div class="card">
-		<div style="padding:16px;">
+		<div style="">
 			<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button>
 		</div>
 	</div>
-</div>
 
-<div class="row" ng-show="newTransactionToggleVar">
-	<div class="card">
+	<div class="card" ng-show="newTransactionToggleVar">
 		<div style="padding:16px;">		
 			<form role="form" ng-submit="createTransaction(newTransaction)">
 				<div class="form-group col-sm-6">
 					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control">
 				</div>
 				<div class="form-group col-sm-6">
-					<input placeholder="Amount" type="text" ng-model="newTransaction.amount" class="form-control">
+					<input placeholder="Amount" type="number" ng-model="newTransaction.amount" class="form-control">
 				</div>
 				<div class="form-group col-sm-6">
 					<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control">
@@ -118,9 +101,9 @@
 			</form>
 		</div>
 	</div>
-</div>
 
-<div class="row">
+	<div style="padding-top:1px"></div>
+
 	<div class="card" ng-repeat="transaction in transactions">
 		<div style="padding:16px">
 			<p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
@@ -144,4 +127,3 @@
         </div>
 	</div>
 </div>
-

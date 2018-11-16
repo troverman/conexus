@@ -1,34 +1,38 @@
-<!--<div class="page-heading">
+<div class="page-heading">
     <div class="container"> 
         <div class="spacing-25"></div>
         <div class="row">
-            <div class="col-xs-12">
-            	<h1><a href="market/{{market}}">{{market}}</a> | <a href="market/{{market1}}">{{market1}}</a></h1>
+            <div class="col-md-10">
+            	<h1><a style="color:white" href="market/{{market}}">{{market}}</a> | <a style="color:white"  href="market/{{market1}}">{{market1}}</a></h1>
 				<p style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>
 				<p style="color:white">Last Trade Price: {{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | Highest Bid {{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}} | Lowest Ask {{bidAskChart.series[1].data[0][0].toFixed(2)}}</p>
             </div>
+            <div class="col-md-2" style="padding:16px;text-align:right">
+				<a style="color:white" href="market/{{market1}}/{{market}}"><i class="fa fa-refresh"></i></a>
+			</div>
         </div>
         <div class="spacing-25"></div>
     </div>
-</div>-->
+</div>
 
 <div class="container">
 
 	<div class="spacing-10"></div>
 
+	<!--
 	<div class="row">
 		<div class="card">
 			<div class="col-md-10" style="padding:16px;">
 				<h1><a href="market/{{market}}">{{market}}</a> | <a href="market/{{market1}}">{{market1}}</a></h1>
 				<p style="color:gray">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>
 				<p style="color:gray">Last Trade Price: {{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | Highest Bid {{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}} | Lowest Ask {{bidAskChart.series[1].data[0][0].toFixed(2)}}</p>
-
 			</div>
 			<div class="col-md-2" style="padding:16px;text-align:right">
 				<a href="market/{{market1}}/{{market}}"><i class="fa fa-refresh"></i></a>
 			</div>
 		</div>
 	</div>
+	-->
 
 	<div class="row" ng-show="true">
 		<div class="card">
@@ -64,7 +68,7 @@
 
 	<div class="row">
 		<div class="card">
-			<div style="padding:16px;">
+			<div style="">
 				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button>
 			</div>
 		</div>
@@ -86,7 +90,11 @@
 					<!--combinatorial market string-->
 
 					<div class="col-sm-6 form-group"><input placeholder="{{market}}" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control"></div>
-					<div class="col-sm-6 form-group"><input placeholder="{{market}} Amount" type="text" ng-model="newOrder.amountSet" class="form-control"></div>
+					<div class="col-sm-6 form-group">
+						<div class="col-sm-6"><input placeholder="{{market}} Amount" type="number" ng-model="newOrder.amountSet" class="form-control"></div>
+						<div class="col-sm-6"><input placeholder="{{market1}} / {{market}} Price" type="text" ng-model="newOrder.amountSet1Price" class="form-control"></div>
+
+					</div>
 
 					<div style="text-align:center;margin-bottom:15px" class="col-sm-12">
 						<button ng-click="invertMarket()" style="width:100px" class="btn btn-default log-btn"><i class="fa fa-refresh"></i> Invert</button>
@@ -94,7 +102,7 @@
 
 					<div class="col-sm-6 form-group"><input placeholder="{{market1}}" ng-disabled="true" type="text" ng-model="newOrder.identiferSet1" class="form-control"></div>
 					<div class="col-sm-6 form-group">
-						<div class="col-sm-6"><input placeholder="{{market1}} Amount" type="text" ng-model="newOrder.amountSet1" class="form-control"></div>
+						<div class="col-sm-6"><input placeholder="{{market1}} Amount" type="number" ng-model="newOrder.amountSet1" class="form-control"></div>
 						<div class="col-sm-6"><input placeholder="{{market}} / {{market1}} Price" type="text" ng-model="newOrder.amountSet1Price" class="form-control"></div>
 					</div>
 
@@ -108,14 +116,16 @@
 
 					<!--array based;; so multiD stops.. a gradiation in dimesnions-->
 					<div class="col-sm-12" style="marking:10px">
-						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">onBooks</button></div>--><!--on books; partial fill-->
-						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">fillOrKill</button></div>--><!--all or nothing at price-->
-						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">immediateOrCancel</button></div>--><!--partial fill at price-->
-						<!--<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Limit</button></div>--><!--limit; sell no lower than, buy no higher than; up to price-->
-						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Market onBooks <i class="fa fa-question-circle"></i></button></div>
-						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Market fill Or Kill <i class="fa fa-question-circle"></i></button></div>
-						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Immediate or Cancel <i class="fa fa-question-circle"></i></button></div>
-						<div class="col-sm-3"><button type="submit" class="btn btn-default log-btn">Limit <i class="fa fa-question-circle"></i></button></div>
+						<!--on books; partial fill-->
+						<!--all or nothing at price-->
+						<!--partial fill at price-->
+						<!--sell no lower than, buy no higher than; up to price-->
+						<ul class="nav nav-pills nav-justified contentTyle">
+                            <li ng-class="{active: selectedType=='ONBOOKS'}" ng-click="selectType('ONBOOKS')"><a href="#">Market onBooks <i ng-click="questionToggle()" class="fa fa-question-circle"></i></a></li>
+                            <li ng-class="{active: selectedType=='FILLORKILL'}" ng-click="selectType('FILLORKILL')"><a href="#">Market Market Fill Or Kill <i ng-click="questionToggle()" class="fa fa-question-circle"></i></a></li>
+                            <li ng-class="{active: selectedType=='IMMEDIATEORCANCEL'}" ng-click="selectType('IMMEDIATEORCANCEL')"><a href="#">Immediate or Cancel <i ng-click="questionToggle()" class="fa fa-question-circle"></i></a></li>
+                            <li ng-class="{active: selectedType=='LIMIT'}" ng-click="selectType('LIMIT')"><a href="#"> Limit <i ng-click="questionToggle()" class="fa fa-question-circle"></i></a></li>
+                        </ul>
 					</div>
 
 					<!--array based; this loops-->
@@ -124,6 +134,7 @@
 							<span>Sell {{newOrder.amountSet}} {{market}} for {{newOrder.amountSet1}} {{market1}} @ {{newOrder.amountSet1 / newOrder.amountSet}} {{market}} / {{market1}}</span>
 							<span> | </span>
 							<span>Buy {{newOrder.amountSet1}} {{market1}} for {{newOrder.amountSet}} {{market}} @ {{newOrder.amountSet / newOrder.amountSet1}} {{market1}} / {{market}}</span>
+						</p>
 					</div>
 
 					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
@@ -266,6 +277,6 @@
 		</div>
 	</div>
 
-	<div class="spacing-10"></div>
-
 </div>
+
+<div class="spacing-50"></div>

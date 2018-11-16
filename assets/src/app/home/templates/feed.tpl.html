@@ -59,6 +59,7 @@
                     <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
                     <!--<button class="btn btn-default log-btn" ng-click="sideNavToggle()">+ Order</button>-->
                     <button class="btn btn-default log-btn" ng-click="transactionToggle()">Send Tokens</button>
+                    <a href="account"<button class="btn btn-default log-btn" ng-click="">Edit Account</button></a>
                 </div>
             </div>
         </div>
@@ -101,14 +102,13 @@
     </div>
 
     <div class="row">
-        <div ng-repeat="item in activity"> <!--ng-click=""-->
-            <div class="card" ng-show="item.model=='CONTENT'" ng-click="">
+        <div ng-repeat="item in activity">
+            <div class="card" ng-if="item.model=='CONTENT'" ng-click="">
                 <div style="padding:16px;overflow:scroll;max-height:500px">
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-
 
                         <!--TODO: POST PARENT TYPES-->
                         <a ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
@@ -119,7 +119,6 @@
                         <a ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
                         <a ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
                         <!--TODO-->
-
 
                         <a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
                         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
@@ -143,7 +142,7 @@
                 </div>
             </div>
             <!--TODO: FINALIZE-->
-            <div class="card" ng-show="item.model=='PROJECT'" ng-click="">
+            <div class="card" ng-if="item.model=='PROJECT'" ng-click="">
                 <div style="padding:16px;">
                     <div class="row">
                         <div class="col-sm-1 col-xs-2">
@@ -164,7 +163,7 @@
                 </div>
             </div>
             <!--TODO: FINALIZE-->
-            <div class="card" ng-show="item.model=='TASK'" ng-click="">
+            <div class="card" ng-if="item.model=='TASK'" ng-click="">
                 <div style="padding:16px;">
                     <div class="row">
                         <div class="col-sm-10">
@@ -193,7 +192,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card" ng-show="item.model=='WORK'" ng-click="">
+            <div class="card" ng-if="item.model=='WORK'" ng-click="">
                 <div style="padding:16px;">
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">

@@ -75,7 +75,7 @@
 
 <div class="container">
     <div ng-repeat="project in projects">
-        <div class="card">
+        <div class="card" ng-click="">
             <div style="padding:16px;">
                 <div class="row">
                     <div class="col-sm-1 col-xs-2">
@@ -92,19 +92,14 @@
                     </div>
                     <div class="col-sm-2" style="text-align:right">
                         <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
-                        <!--{{project.memberCount}} | {{project.taskCount}} | {{project.workTime}}-->
-                        <!--<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="spacing-10"></div>
-
-<div ng-click="loadMore()" class="container" style="text-align:center">
-    <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+    <div ng-click="loadMore()" class="card">
+        <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+    </div>
 </div>
 
 <div class="spacing-50"></div>

@@ -24,19 +24,6 @@
 
 <div class="spacing-10"></div>
 
-<!--<div class="container">
-    <div class="card">
-        <form style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-                <a href="#">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>-->
-
 <!--TODO: TOKEN OUPUT FILTERS-->
 
 <div class="container">
@@ -71,7 +58,7 @@
 
 			<!--TODO: MARKET LOOKUP-->
 			<div ng-repeat="task in tasks">
-				<div class="card">
+				<div class="card" ng-click="">
 					<div style="padding:16px;">
 						<div class="row">
 							<div class="col-sm-10">
@@ -94,14 +81,13 @@
 					</div>
 				</div>
 			</div>
+
+			<div ng-show="true" class="card" style="text-align:center" ng-click="loadMore()">
+                <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+            </div>
+
 		</div>
 	</div>
-</div>
-
-<div class="spacing-10"></div>
-
-<div class="container" style="text-align:center" ng-click="loadMore()">
-    <div class="row"><div class="col-sm-offset-2 col-sm-10"><button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button></div></div>
 </div>
 
 <div class="spacing-50"></div>

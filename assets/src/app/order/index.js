@@ -28,6 +28,15 @@ angular.module( 'conexus.order', [
     $scope.order = order;
     $scope.posts = posts;
 
+    //TODO: PROTOCOL
+    $scope.tokens = [
+        'CREATE+ORDER',
+        'CREATE+ORDER+'+$scope.order.identiferSet, 
+        'CREATE+ORDER+'+$scope.order.identiferSet1, 
+        'CREATE+ORDER+'+$scope.order.identiferSet+'-'+$scope.order.identiferSet1, 
+        $scope.order.id
+    ];
+
     //TODO
     $scope.createPost = function(post) {
         if($scope.currentUser){

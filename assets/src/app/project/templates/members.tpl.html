@@ -1,6 +1,6 @@
 <div class="row">
     <div class="card">
-        <div style="padding:10px">
+        <div style="">
 			<button class="btn btn-default log-btn" ng-click="createMember()">join</button>
         </div>
     </div>
@@ -10,7 +10,7 @@
 
 <div class="row">
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
-		<div class="member-card">
+		<div class="member-card" ng-click="">
 		    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 		        <a href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>

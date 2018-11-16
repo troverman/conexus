@@ -5,6 +5,9 @@
     <div class="row">
         <div class="card">
             <div style="padding:16px">
+                <div style="float:right">
+                    <h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
             	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
             	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
             	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
@@ -14,18 +17,6 @@
                 </a>
                 <h4>{{order.createdAt}}</h4>
             	<h4>onBooks | Filled | Date</h4>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="card">
-            <div style="padding:16px">
-                <h4 ng-cilck="tokenToggle()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-                <p><a href="market/createOrder">createOrder</a></p>
-                <p><a href="market/createOrder+{{order.identiferSet}}">createOrder+{{order.identiferSet}}</a></p>
-                <p><a href="market/createOrder+{{order.identiferSet1}}">createOrder+{{order.identiferSet1}}</a></p>
-                <p><a href="market/{{order.id}}">{{order.id}}</a></p>
             </div>
         </div>
     </div>
@@ -51,7 +42,6 @@
             </div>
         </div>
     </div>
-    
 
     <div class="row">
         <div class="card">

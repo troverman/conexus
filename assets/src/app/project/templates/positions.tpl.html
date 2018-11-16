@@ -35,17 +35,15 @@
 		</div>
 	</div>
 </div>
-
+	
 <div class="row">
 	<div class="card">
-		<div style="padding:16px;">
+		<div style="">
 			<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Motion to Create Order</button>
 		</div>
 	</div>
-</div>	
 
-<div class="row" ng-show="newOrderToggleVar">
-	<div class="card">
+	<div class="card" ng-show="newOrderToggleVar">
 	    <div style="padding:16px;">
 			<form role="form" ng-submit="createOrder()">
 				<div class="form-group col-sm-6">
@@ -64,9 +62,7 @@
 			</form>
 		</div>
 	</div>
-</div>
 
-<div class="row">
     <div ng-repeat="order in orders">
         <div class="card">
             <div style="padding:16px">
@@ -95,4 +91,3 @@
         </div>
 	</div>
 </div>
-<div class="spacing-10"></div>

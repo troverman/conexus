@@ -170,101 +170,6 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-    //TODO: REFACTOR
-    if ($scope.currentUser){
-
-        UserModel.getByUsername($scope.currentUser.username).then(function(member){
-            $scope.member = member;
-            $scope.balance = member.balance;
-            $scope.reputation = member.reputation;
-        });
-
-        //IF VALUE MAP | REFACTOR 
-        $scope.newOrder = [];
-        $scope.newContent = {};
-        $scope.transactions = transactions;
-
-        //tags
-        //orders, tasks, transactions
-        //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
-        //$scope.orderTags = orders;
-
-        $scope.tasks = $scope.tasks.map(function(obj){
-            obj.model = 'TASK';
-            return obj;
-        });
-        $scope.transactions = $scope.transactions.map(function(obj){
-            obj.model = 'TRANSACTION';
-            return obj;
-        });
-
-        $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
-
-        //TEMP | TODO: FIX
-        $scope.discover = $scope.discover.map(function(obj){
-            var returnObj = {};
-            console.log(obj.model)
-            if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
-            if (obj.model == 'TASK'){
-                if(obj.tags){obj.tags = obj.tags.split(',')}
-                returnObj = obj.tags;
-            }
-            if (obj.model == 'TRANSACTION'){
-                if(obj.ledger){obj.ledger = obj.ledger.split(',')}
-                returnObj = obj.ledger;
-            }
-            return returnObj;
-        });
-
-        $scope.discover = [].concat.apply([], $scope.discover);
-        $scope.discover = $scope.discover.filter(function(e){return e}); 
-
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
-        $scope.finalArray = [];
-        for (x in $scope.discover){
-            var amount = countInArray($scope.discover, $scope.discover[x]);
-            if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
-                $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
-            }
-        }
-        $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
-        $scope.addToOrder = function(model){
-            $scope.newOrder.push([model,'0.1 UNIVERSAL TOKEN']);
-        };
-
-        $scope.createOrder = function(post){
-            $scope.newOrder = [];
-        };
-
-        //TODO: MODEL | CREATE | NESTED?
-        $scope.createContent = function(post){
-            $scope.newContent.post = post.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.profile = $scope.currentUser.id;
-            PostModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
-        };
-
-        //TODO SERVER | CHAIN
-        $scope.lookupBalance = function(){
-            //$scope.balanceLook = $scope.balanceLook.toLowerCase();
-            if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
-            if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
-        };
-
-        $scope.lookupReputation = function(){
-            //$scope.reputationLook = $scope.reputationLook.toLowerCase();
-            if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
-            if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
-        };
-
-    };
-
     $scope.createReaction = function(content, type){
         if($scope.currentUser){
 
@@ -432,100 +337,97 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-	//TODO: REFACTOR
-	if ($scope.currentUser){
 
-		UserModel.getByUsername($scope.currentUser.username).then(function(member){
-			$scope.member = member;
-            $scope.balance = member.balance;
-            $scope.reputation = member.reputation;
-		});
+	UserModel.getByUsername($scope.currentUser.username).then(function(member){
+		$scope.member = member;
+        $scope.balance = member.balance;
+        $scope.reputation = member.reputation;
+	});
 
-        //IF VALUE MAP | REFACTOR 
+    //IF VALUE MAP | REFACTOR 
+    $scope.newOrder = [];
+    $scope.newContent = {};
+    $scope.transactions = transactions;
+
+    //tags
+    //orders, tasks, transactions
+    //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
+    //$scope.orderTags = orders;
+
+    $scope.tasks = $scope.tasks.map(function(obj){
+        obj.model = 'TASK';
+        return obj;
+    });
+    $scope.transactions = $scope.transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
+        return obj;
+    });
+
+    $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
+
+    //TEMP | TODO: FIX
+    $scope.discover = $scope.discover.map(function(obj){
+        var returnObj = {};
+        console.log(obj.model)
+        if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
+        if (obj.model == 'TASK'){
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+        }
+        if (obj.model == 'TRANSACTION'){
+            if(obj.ledger){obj.ledger = obj.ledger.split(',')}
+            returnObj = obj.ledger;
+        }
+        return returnObj;
+    });
+
+    $scope.discover = [].concat.apply([], $scope.discover);
+    $scope.discover = $scope.discover.filter(function(e){return e}); 
+
+    function countInArray(array, value) {
+        return array.reduce(function(n, x){ return n + (x === value)}, 0);
+    }
+
+    $scope.finalArray = [];
+    for (x in $scope.discover){
+        var amount = countInArray($scope.discover, $scope.discover[x]);
+        if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
+            $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
+        }
+    }
+    $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+
+    $scope.addToOrder = function(model){
+        $scope.newOrder.push([model,'0.1 UNIVERSAL TOKEN']);
+    };
+
+    $scope.createOrder = function(post){
         $scope.newOrder = [];
-        $scope.newContent = {};
-        $scope.transactions = transactions;
+    };
 
-        //tags
-        //orders, tasks, transactions
-        //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
-        //$scope.orderTags = orders;
-
-        $scope.tasks = $scope.tasks.map(function(obj){
-            obj.model = 'TASK';
-            return obj;
+    //TODO: MODEL | CREATE | NESTED?
+    $scope.createContent = function(post){
+        $scope.newContent.post = post.id;
+        $scope.newContent.user = $scope.currentUser.id;
+        $scope.newContent.profile = $scope.currentUser.id;
+        PostModel.create($scope.newContent).then(function(model) {
+            $scope.newContent = {};
         });
-        $scope.transactions = $scope.transactions.map(function(obj){
-            obj.model = 'TRANSACTION';
-            return obj;
-        });
+    };
 
-        $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
+    //TODO SERVER | CHAIN
+    $scope.lookupBalance = function(){
+        //$scope.balanceLook = $scope.balanceLook.toLowerCase();
+        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
+        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+    };
 
-        //TEMP | TODO: FIX
-        $scope.discover = $scope.discover.map(function(obj){
-            var returnObj = {};
-            console.log(obj.model)
-            if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
-            if (obj.model == 'TASK'){
-                if(obj.tags){obj.tags = obj.tags.split(',')}
-                returnObj = obj.tags;
-            }
-            if (obj.model == 'TRANSACTION'){
-                if(obj.ledger){obj.ledger = obj.ledger.split(',')}
-                returnObj = obj.ledger;
-            }
-            return returnObj;
-        });
+    $scope.lookupReputation = function(){
+        //$scope.reputationLook = $scope.reputationLook.toLowerCase();
+        if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
+        if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
+    };
 
-        $scope.discover = [].concat.apply([], $scope.discover);
-        $scope.discover = $scope.discover.filter(function(e){return e}); 
-
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
-        $scope.finalArray = [];
-        for (x in $scope.discover){
-            var amount = countInArray($scope.discover, $scope.discover[x]);
-            if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
-                $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
-            }
-        }
-        $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
-        $scope.addToOrder = function(model){
-            $scope.newOrder.push([model,'0.1 UNIVERSAL TOKEN']);
-        };
-
-        $scope.createOrder = function(post){
-            $scope.newOrder = [];
-        };
-
-        //TODO: MODEL | CREATE | NESTED?
-        $scope.createContent = function(post){
-            $scope.newContent.post = post.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.profile = $scope.currentUser.id;
-            PostModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
-        };
-
-        //TODO SERVER | CHAIN
-        $scope.lookupBalance = function(){
-            //$scope.balanceLook = $scope.balanceLook.toLowerCase();
-            if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
-            if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
-        };
-
-        $scope.lookupReputation = function(){
-            //$scope.reputationLook = $scope.reputationLook.toLowerCase();
-            if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
-            if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
-        };
-
-	};
 
     $scope.createReaction = function(content, type){
     	if($scope.currentUser){

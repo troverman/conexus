@@ -2,13 +2,13 @@
 	<div class="page-heading">
 		<div class="container"> 
 			<div class="spacing-25"></div>
-			<h1><b>{{searchQuery}}</b></h1>
+			<h1><b>{{searchQuery.search}}</b></h1>
 			<div class="spacing-25"></div>
 		</div>
 	</div>
 
 	<!--MODEL FILTERS-->
-	<div class="container">
+	<div ng-if="searchResults.length > 0" class="container">
 		<div class="spacing-10"></div>
 		<div class="spacing-10"></div>
 		<div class="row">
@@ -16,20 +16,36 @@
 				<li class="active"><a href="">Activity</a></li>
 				<li><a href="/content">Content</a></li>
 				<li><a href="/marketplace">Items</a></li>
+				<li><a href="/members">Members</a></li>
 				<li><a href="/market">Orders</a></li>
 				<li><a href="/projects">Projects</a></li>
 				<li><a href="/tasks">Tasks</a></li>
-				<li style="float:right"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+				<li style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
 			</ul>
 		</div>
 	</div>
 
+	<!--LOCATION FILTERS-->
 	<!--SEARCH FILTERS-->
+
+	<!--TAG FILTERS-->
+	<!--{{tags}}-->
+	
+	<!--TOKEN FILTERS-->
+	<!--Protocol | Context-->
+	<!--Market Discoverability-->
+	<!--Orders-->
+
+	<!--RESULTS-->
+	<!--SORT-->
+
 	<div class="container">
+
 		<div class="row">
-		    <div class="card">
+
+			<div class="card">
 		        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="{{searchQuery}}" ng-model="searchQuery">
+		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery.search">
 		            <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
 		                <a href="#" role="button">
 		                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
@@ -37,35 +53,21 @@
 		            </div>
 		        </form>
 		    </div>
-		</div>
-	</div>
 
-	<!--LOCATION FILTERS-->
-	<div class="container">
-		<div class="row">
-		    <div class="card">
+			<div ng-if="searchResults.length > 0" class="card">
 		        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
 		        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
 		    </div>
-	   	</div>
-	</div>
 
-	<!--TAG FILTERS-->
-	<!--{{tags}}-->
-	
-	<!--TOKEN FILTERS-->
-	<!--?-->
-	<!--Protocol | Context-->
-	<!--Market Discoverability-->
-	<!--Orders-->
+			<div ng-if="searchResults.length == 0" class="card">
+		        <div style="padding:16px;">
+		            <span style="color:gray">There's nothing here..</span>
+		        </div>
+		    </div>
 
-	<!--RESULTS-->
-	<!--SORT-->
-	<div class="container">
-		<div class="row">
-			<div ng-repeat="item in searchResults">
+			<div ng-if="searchResults.length > 0" ng-repeat="item in searchResults">
 
-				<div class="card" ng-show="item.model=='CONTENT'">
+				<div ng-if="item.model=='CONTENT'" class="card">
 			        <div style="padding:16px;">
 			            <div>
 			                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
@@ -98,10 +100,10 @@
 			        </div>
 		    	</div>
 
-				<div ng-show="item.model=='MEMBER'">
-					<div class="">
-						<div class="col-xs-12">
-							<div class="member-card" style="margin-bottom:10px">
+				<div ng-if="item.model=='MEMBER'">
+					<div class="row" style="margin:0px">
+						<div class="col-xs-12" style="padding:0px">
+							<div class="member-card card" style="margin-bottom:0px">
 							    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
 							        <a href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
 							    </div>
@@ -115,11 +117,9 @@
 					</div>
 				</div>
 
-				<div class="card" ng-show="item.model=='ORDER'">
+				<div ng-if="item.model=='ORDER'" class="card"></div>
 
-				</div>
-
-				<div class="card" ng-show="item.model=='PROJECT'">
+				<div ng-if="item.model=='PROJECT'" class="card">
 		            <div style="padding:16px;">
 		                <div class="row">
 		                    <div class="col-sm-1 col-xs-2">
@@ -140,7 +140,7 @@
 		            </div>
 				</div>
 
-				<div class="card" ng-show="item.model=='TASK'">
+				<div ng-if="item.model=='TASK'" class="card">
 					<div style="padding:16px;">
 						<div class="row">
 							<div class="col-sm-10">
@@ -169,13 +169,16 @@
 					</div>
 				</div>
 
-				<div class="card" ng-show="item.model=='WORK'">
+				<div ng-if="item.model=='WORK'" class="card"></div>
 
-				</div>
-				
 			</div>
+
+			<div ng-if="searchResults.length > 0" class="card" style="text-align:center" ng-click="loadMore()">
+                <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+            </div>
+
 		</div>
 	</div>
 
+	<div class="spacing-50"></div>
 </div>
-<div class="spacing-50"></div>

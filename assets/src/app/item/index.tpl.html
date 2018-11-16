@@ -5,24 +5,20 @@
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-
 				<h1>{{item.title}}</h1>
-
 				<div class="spacing-10"></div>
-
 		        <div style="max-height:500px;overflow:scroll">
 					<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
 				</div>
-
 				<div class="spacing-10"></div>
-
 				<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>
-
 			</div>
 
-            <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+            <div class="card-footer" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+
             </div>
 
 		</div>
@@ -30,7 +26,7 @@
 	
 	<div class="row">
         <div class="card">
-            <div style="padding:16px">
+            <div style="">
 				<button type="submit" class="btn btn-default log-btn" ng-click="purchaseToggle()">Purchase</button>
             </div>
         </div>
@@ -58,10 +54,10 @@
         <div class="card">
             <div style="padding:16px">
                 <div class="">
-                    <!--<div class="">
+                    <div class="">
                         <h4>Protocols [Transact]</h4>
                         <p style="color:gray;font-style:italic;font-size:12px">[Transact] token manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>
-                    </div>-->
+                    </div>
                     <div class="">
 
                         <div ng-repeat="input in inputVector.split(',')">
