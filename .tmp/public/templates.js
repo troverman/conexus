@@ -3628,8 +3628,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/marketplace\">Marketplace</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
-    "\n" +
-    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/settings\">Settings</a></h4>-->\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/settings\">Settings</a></h4>\n" +
     "\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
