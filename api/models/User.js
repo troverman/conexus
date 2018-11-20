@@ -49,6 +49,10 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+        notificationCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
         projectCount: {
             type: 'integer',
             defaultsTo: 0

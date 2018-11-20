@@ -476,7 +476,7 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    //FILTERING  | LAYER IE PROJECT 
+    //FILTERING | LAYER IE PROJECT | MANIFOLD
     $scope.balanceRadial = {
         chart: {polar: true},
         series: [{

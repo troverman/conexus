@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -2935,12 +2935,17 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "\n" +
-    "			<highchart config=\"reputationRadial\"></highchart>\n" +
-    "			<highchart config=\"reputationColumn\"></highchart>\n" +
-    "			<highchart config=\"balanceRadial\"></highchart>\n" +
-    "			<highchart config=\"balanceColumn\"></highchart>\n" +
-    "			\n" +
-    "			<highchart config=\"balancePie\"></highchart>\n" +
+    "			<div>\n" +
+    "				<h3>Reputation</h3>\n" +
+    "				<!--<highchart config=\"reputationRadial\"></highchart>-->\n" +
+    "				<highchart config=\"reputationColumn\"></highchart>\n" +
+    "			</div>\n" +
+    "			<div>\n" +
+    "				<h3>Balance</h3>\n" +
+    "				<!--<highchart config=\"balanceRadial\"></highchart>-->\n" +
+    "				<highchart config=\"balanceColumn\"></highchart>\n" +
+    "				<highchart config=\"balancePie\"></highchart>\n" +
+    "			</div>\n" +
     "\n" +
     "		</div>\n" +
     "	</div>	\n" +
@@ -3691,7 +3696,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h5>Asset</h5>\n" +
     "                    <input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\">\n" +
     "                    <h5>Amount</h5>\n" +
-    "                    <input placeholder=\"Amount\" type=\"number\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
+    "                    <input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
     "                    <h5>Tags</h5>\n" +
     "                    <tags-input placeholder=\"Tags\" ng-model=\"newTransaction.tags\"></tags-input>\n" +
     "                    <h5>Description</h5>\n" +
@@ -4811,6 +4816,20 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "</div>");
+}]);
+
+angular.module("project/templates/settings.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("project/templates/settings.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "            <h1>About {{project.title}}</h1>\n" +
+    "            <p>{{project.description}}</p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>");
 }]);
 

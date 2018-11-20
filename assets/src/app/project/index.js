@@ -158,20 +158,6 @@ angular.module( 'conexus.project', [
             }]
         }
     })
-    .state( 'project.tasks', {
-        url: '/tasks',
-        views: {
-            "projectTasks": {
-                controller: 'ProjectTasksCtrl',
-                templateUrl: 'project/templates/tasks.tpl.html'
-            }
-        },
-        resolve: {
-            tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
-            }],
-        }
-    })
     .state( 'project.positions', {
         url: '/positions',
         views: {
@@ -197,6 +183,29 @@ angular.module( 'conexus.project', [
         resolve: {
             projects: ['project', 'ProjectModel', function(project, ProjectModel){
                 return ProjectModel.getChildren(project);
+            }],
+        }
+    })
+    .state( 'project.settings', {
+        url: '/settings',
+        views: {
+            "projectSettings": {
+                controller: 'ProjectSettingsCtrl',
+                templateUrl: 'project/templates/settings.tpl.html'
+            }
+        }
+    })
+    .state( 'project.tasks', {
+        url: '/tasks',
+        views: {
+            "projectTasks": {
+                controller: 'ProjectTasksCtrl',
+                templateUrl: 'project/templates/tasks.tpl.html'
+            }
+        },
+        resolve: {
+            tasks: ['project', 'TaskModel', function(project, TaskModel){
+                return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
         }
     })
@@ -974,110 +983,6 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
-    titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
-    $scope.newTask = {};
-    $scope.newTaskToggleVar = false;
-    $scope.tasks = tasks;
-    $scope.project = project;
-
-    $scope.createTask = function(newTask) {
-        if ($scope.currentUser){
-            $scope.newTask.user = $scope.currentUser.id;
-            $scope.newTask.project = $scope.project.id;
-            $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
-                return obj.text
-            }).join(",");
-            TaskModel.create(newTask).then(function(model) {
-                $scope.newTask = {};
-                $scope.tasks.unshift(model);
-            });
-        }
-        else{$location.path('/login')}
-    };
-
-    $scope.filterContent = function(filter) {
-        $rootScope.stateIsLoading = true;
-        TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
-            $rootScope.stateIsLoading = false;
-            $scope.tasks = tasks;
-            $scope.loadTags();
-        });
-    };
-
-    //TODO: BETTER | TAG STORAGE
-    $scope.loadTags = function(){
-        $scope.tags = $scope.tasks.map(function(obj){
-            console.log(obj);
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-         
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadTags();
-
-    $scope.newTaskToggle = function () {
-        $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
-    };
-
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
-    };
-
-    $scope.reply = function(activity){
-        if ($scope.currentUser){
-            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
-            $scope.tasks[index].showReply = !$scope.tasks[index].showReply;
-        }
-        else{$location.path('/login')}
-    };
-
-    $scope.search = function(){};
-
-    $scope.tokenToggle = function(item){
-        console.log(item)
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = item;
-    };
-
-    $sailsSocket.subscribe('task', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.tasks.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.tasks, {id: envelope.id});
-                break;
-        }
-    });
-
-}])
 .controller( 'ProjectPositionsCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($location, $sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.project = project;
@@ -1214,6 +1119,117 @@ angular.module( 'conexus.project', [
     $scope.search = function(){};
 
 }])
+
+.controller( 'ProjectSettingsCtrl', ['$scope', 'config', 'project', 'titleService', function ProjectSettingsController( $scope, config, project, titleService ) {
+    titleService.setTitle('Settings | ' + project.title + ' | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
+}])
+
+.controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
+    titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
+    $scope.newTask = {};
+    $scope.newTaskToggleVar = false;
+    $scope.tasks = tasks;
+    $scope.project = project;
+
+    $scope.createTask = function(newTask) {
+        if ($scope.currentUser){
+            $scope.newTask.user = $scope.currentUser.id;
+            $scope.newTask.project = $scope.project.id;
+            $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
+                return obj.text
+            }).join(",");
+            TaskModel.create(newTask).then(function(model) {
+                $scope.newTask = {};
+                $scope.tasks.unshift(model);
+            });
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.filterContent = function(filter) {
+        $rootScope.stateIsLoading = true;
+        TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
+            $rootScope.stateIsLoading = false;
+            $scope.tasks = tasks;
+            $scope.loadTags();
+        });
+    };
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        $scope.tags = $scope.tasks.map(function(obj){
+            console.log(obj);
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+         
+        function countInArray(array, value) {
+            return array.reduce(function(n, x){ return n + (x === value)}, 0);
+        }
+
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
+
+    $scope.newTaskToggle = function () {
+        $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
+    };
+
+    //YIKES
+    $scope.renderContent = function(content){
+        if (content){
+            if (!content.includes('>')){
+                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(content)}
+        }
+    };
+
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.tasks[index].showReply = !$scope.tasks[index].showReply;
+        }
+        else{$location.path('/login')}
+    };
+
+    $scope.search = function(){};
+
+    $scope.tokenToggle = function(item){
+        console.log(item)
+        $mdSidenav('tokens').toggle();
+        $rootScope.globalTokens = item;
+    };
+
+    $sailsSocket.subscribe('task', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.tasks.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.tasks, {id: envelope.id});
+                break;
+        }
+    });
+
+}])
+
 .controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'work', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, titleService, work) {
 
     $scope.eventSources = [];
