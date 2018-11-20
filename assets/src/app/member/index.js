@@ -186,6 +186,12 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
+    $rootScope.to = $scope.member.id;
+    $rootScope.associatedModel = {
+        address: $scope.member.id,
+        type: 'PROFILE',
+    };
+
     //TODO: seoService
 
     $scope.createTransaction = function(){
@@ -210,7 +216,7 @@ angular.module( 'conexus.member', [
                 $scope.newFollower = {};
             });
         }
-        //$mdSidebar
+        //$mdSidebar --> confirmation
         else{$location.path('/login')}
     };
 
@@ -249,23 +255,22 @@ angular.module( 'conexus.member', [
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.orders = orders;
-    $scope.posts = posts;
-    $scope.profilePosts = profilePosts;
-
-    $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
-    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.work = work;
-
     $scope.orders = $scope.orders.map(function(obj){
         obj.model = 'ORDER';
         return obj;
     });
 
+    $scope.posts = posts;
+    $scope.profilePosts = profilePosts;
     $scope.posts = [].concat.apply([], [$scope.posts, $scope.profilePosts]);
     $scope.posts = $scope.posts.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
     });
+
+    $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
+    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+    $scope.work = work
 
     //COMBINE AND REMOVE DUPS .. REDO THIS LATER | REFACTOR .... BLEH
     $scope.posts = $scope.posts.filter(function(obj){

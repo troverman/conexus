@@ -36,7 +36,8 @@ module.exports = {
 
 		else if(req.query.identiferSet && !req.query.identiferSet1){
 			var identiferSet = req.query.identiferSet;
-			Order.find({identiferSet:{contains: identiferSet}})
+			//Order.find({identiferSet:{contains: identiferSet}})
+			Order.find({identiferSet:identiferSet})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)

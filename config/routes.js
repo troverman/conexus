@@ -170,7 +170,6 @@ module.exports.routes = {
    * Validation routes
    */
   'get /api/validation': 'ValidationController.getSome',
-  'get /api/validation/:id': 'ValidationController.getOne',
   'post /api/validation': 'ValidationController.create',
 
   //'get /*' : 'HomeController.index'

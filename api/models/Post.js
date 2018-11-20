@@ -1,22 +1,50 @@
 //TODO: CONTENT
+//TODO: DEPRECIATE
+
 module.exports = {
     attributes: {
+
+        title: {
+            type: 'string',
+        },
+        tags: {
+            type: 'string',
+        },
+        type: {
+            type: 'string',
+        },
         content: {
             type: 'string',
+        },
+        user: {
+            model: 'user',
             required: true
         },
-        //TODO; TYPE.. vs MODEL BASED | REFACTOR
+
+        associatedModels: {
+            type: 'json',
+        },
+
+        plusCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        minusCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        viewCount: {
+            type: 'integer',
+            defaultsTo: 0,
+        },
+
+        //TODO: DEPRECIATE
+        //TODO: MANY TO MANY
         market: {
             type: 'string'
         },
         order: {
             type: 'string'
-        },
-        parent: {
-            type: 'string',
-        },
-        parentModel: {
-            type: 'string',
         },
         profile: {
             model: 'user',
@@ -30,37 +58,13 @@ module.exports = {
         task: {
             model: 'task'
         },
-        tags: {
-            type: 'string',
-        },
-        title: {
-            type: 'string',
-        },
         transaction: {
             type: 'string'
-        },
-        type: {
-            type: 'string',
         },
         work: {
             model: 'work'
         },
-        plusCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        minusCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        views: {
-            type: 'integer',
-            defaultsTo: 0,
-        },
-        user: {
-            model: 'user',
-            required: true
-        }
+
     },
     
 };

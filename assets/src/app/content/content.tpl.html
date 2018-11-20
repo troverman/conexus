@@ -16,6 +16,8 @@
 
     <div style="padding:16px;background-color:white">
 
+        <h5 style="text-align:right" ng-click="tokenToggle(post)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+
         <div>
             <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
             <a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>

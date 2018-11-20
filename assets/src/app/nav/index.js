@@ -11,14 +11,36 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction.from = $scope.currentUser.id
     }
 
+    $scope.$watch('$root.to', function() {
+        $scope.newTransaction.to = $rootScope.to;
+    });
+
+    //TODO: CHANGE PARENT TO ASSOCIATED MODELS
+    $scope.$watch('$root.associatedModel', function() {
+        $scope.newContent.associatedModels = $rootScope.associatedModel.address;
+        $scope.newContent.type = $rootScope.associatedModel.type;
+
+        //CHANGE
+        if ($rootScope.associatedModel.type == 'PROFILE'){
+            $scope.newContent.profile = $rootScope.associatedModel.address;
+        }
+        if ($rootScope.associatedModel.type == 'PROJECT'){
+            $scope.newContent.project = $rootScope.associatedModel.address;
+        }
+    });
+
+    $rootScope.$on("$stateChangeStart", function() {
+        $rootScope.to = null;
+        $rootScope.associatedModel = null;
+    });
     $rootScope.$on("$stateChangeSuccess", function() {
     	window.scrollTo(0, 0);
         $mdSidenav('nav').close();
     });
 
+    //TODO: ASSOCIATED MODELS
     $scope.createContent = function() {
         if ($scope.currentUser){
-            if(!$scope.newContent.parent){$scope.newContent.profile = $scope.currentUser.id}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                 return obj.text

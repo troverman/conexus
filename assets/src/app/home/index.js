@@ -230,8 +230,12 @@ angular.module( 'conexus.home', [
 
 .controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
 	titleService.setTitle('CRE8.XYZ');
-
 	$scope.currentUser = config.currentUser;
+
+    $rootScope.associatedModel = {
+        address: $scope.currentUser.id,
+        type: 'PROFILE',
+    };
 
     $scope.sideNavToggle = function(){
         $mdSidenav('nav').toggle();

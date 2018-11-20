@@ -225,6 +225,13 @@ angular.module( 'conexus.project', [
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
+
+    $rootScope.to = $scope.project.id;
+    $rootScope.associatedModel = {
+        address: $scope.project.id,
+        type: 'PROJECT',
+    };
+
     if ($scope.project.location){ 
         $scope.map = {
             center: {latitude: project.location.lat, longitude: project.location.lng },

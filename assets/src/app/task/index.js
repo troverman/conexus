@@ -25,9 +25,10 @@ angular.module( 'conexus.task', [
 }])
 
 .controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
-    titleService.setTitle('Task | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.task = task;
+    titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
+
     $scope.newPost = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
@@ -211,10 +212,16 @@ angular.module( 'conexus.task', [
             project: $scope.task.project,
             task: $scope.task.id,
             user: $scope.currentUser.id,
-            //stream: $scope.streamUrl,
             stream: $scope.streamingId,
             verificationScore: 0
         };
+
+        if ($scope.workTags){
+            workModel.tags = $scope.workTags.tags.map(function(obj){
+                return obj.text
+            }).join(",");
+        }
+
         WorkModel.create(workModel).then(function(model){
             console.log(model);
             $scope.work.push(model);
@@ -222,6 +229,9 @@ angular.module( 'conexus.task', [
 
             //UPDATE TO HAVE PARENT AS WORK MODEL
             //REFACTOR | DOING BOTH HERE
+            //TODO: ASSOCIATED MODELS --> TIME TO TASKS ONE TO MANY
+            //TODO: TIME TYPE.. TIMER INPUT
+
             if ($scope.streamingId){
                 var update = {};
                 update.id = $scope.streamingId;
@@ -231,10 +241,10 @@ angular.module( 'conexus.task', [
                 console.log(update);
                 PostModel.update(update).then(function(postModel){
                     consooe.log(postModel)
-                    //$scope.streamingId = postModel.id;
                 });
             }
         }); 
+        
         $scope.taskTime=0;
         clearInterval($scope.interval);
 

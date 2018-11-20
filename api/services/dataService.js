@@ -1,30 +1,18 @@
-//var request = require('request');
-//const tf = require('@tensorflow/tfjs');
-//require('@tensorflow/tfjs-node');
+
+const tf = require('@tensorflow/tfjs');
+require('@tensorflow/tfjs-node');
 var Q = require('q');
 
 module.exports = {
 
 	getData: function(){
-		//var deferred = Q.defer();
-
 		//POPULATE A NEW NETWORK
 		//TO CREATE A WELL CONNECTED NETWORK
 		//SAMPLE SPACE | A-H Tokens
 		//A-H + [SAMPLE SPACE]
 		var newNetwork = "ABCD".split("");
 
-		//GENERATE POINT SPACE
 		var positionSet = [];
-		/*for(x in newNetwork){
-			for(y in newNetwork){
-				for(z in newNetwork){
-					for(a in newNetwork){
-						positionSet.push([newNetwork[x], newNetwork[y], newNetwork[z], newNetwork[a]]);
-					}
-				}
-			}
-		}*/
 
 		//POWER SET
 		function getAllSubsets(theArray) {
@@ -43,17 +31,6 @@ module.exports = {
 				positionSet.push([powerSet[x], powerSet[y]]);
 			}
 		}
-
-		//LEGACY
-		//BINARY REDUCTION
-		/*var relatinshipSet = [];
-		for (x in powerSet){
-			for (y in powerSet[x]){
-				for (z in powerSet[x]){
-					relatinshipSet.push([powerSet[x][y], powerSet[x][z]]);
-				}
-			}
-		}*/
 
 		function intersect(a, b) {
 		  return a.filter(Set.prototype.has, new Set(b));
@@ -100,7 +77,7 @@ module.exports = {
 		}
 
 		//RELATIONSHIPS CANCEL
-		//OPTIMIZE..
+		//TODO: OPTIMIZE
 		var optimize = [];
 		for (x in positionSet){
 			var intersection = intersect(positionSet[x][0], positionSet[x][1]);
@@ -114,7 +91,6 @@ module.exports = {
 		//var mirror = optimize.map(function(obj){
 		//	return [obj[1],obj[0]];
 		//});
-
 		//REMOVE DUPLICATES
 		var optim = Array.from(new Set(optimize.map(JSON.stringify)), JSON.parse);
 		//var mirrorOptim = Array.from(new Set(mirror.map(JSON.stringify)), JSON.parse);
@@ -130,10 +106,7 @@ module.exports = {
 		//});
 
 	   	//STORED AS A MATRIX; algabraic lattice. 
-	   	//HMM
-
 		var maximumBinaryRelationship = removeMirrorDuplicates(optim);
-
 		var newOrderArray = [];
 		for (x in maximumBinaryRelationship){
 			newOrderArray.push({
@@ -142,12 +115,6 @@ module.exports = {
 				identiferSet1: maximumBinaryRelationship[x][1],
 			});
 		}
-
-		for (x in maximumBinaryRelationship){
-			//console.log(maximumBinaryRelationship[x]);
-		}
-
-		//console.log(maximumBinaryRelationship.length)
 
 		//--> INTEGER VALUE FOR 1 -> 1 Comparison
 		var superArray = [];
@@ -169,8 +136,6 @@ module.exports = {
 			//}
 		}
 
-		//console.log(superArray.length);
-
 		//FLATTEN TO STRING
 		for (x in superArray){
 			superArray[x].identiferSet = superArray[x].identiferSet.join(',');
@@ -179,21 +144,23 @@ module.exports = {
 			superArray[x].amountSet1 = superArray[x].amountSet1.join(',');
 		}
 
-		//console.log(superArray)
-
 		//6050
+		//CREATE
 		//Order.create(superArray).then(function(){
 		//	console.log('DONE', superArray.length)
 		//});
 
-		/*Order.find().limit(6050).skip(0).sort('createdAt DESC').then(function(models){
+		//DELETE
+		/*
+		Order.find().limit(6050).skip(0).sort('createdAt DESC').then(function(models){
 			if (models.length > 0){
 	    		var idArray = models.map(function(obj) {return obj.id});
 				Order.destroy(idArray, function(err, model) {
 					console.log(model);
 				});
     		}
-		});*/
+		});
+		*/
 		
 		//BTC | ETH | ETC
 		/*
@@ -210,23 +177,19 @@ module.exports = {
 				identiferSet1:'CRE8',
 				price:price,
 			});
-		}*/
+		}
+		*/
+
+		//CREATE
 		//Order.create(newOrderArray1).then(function(){
 		//	console.log('DONE', newOrderArray1.length)
 		//});
 
-		//deferred.resolve(maximumBinaryRelationship)
-		//return deferred.promise;
 		return maximumBinaryRelationship;
-
 	},
 
 	//TODO
 	traverse: function(){
-
-		//const model = tf.sequential();
-		//model.add(tf.layers.dense({units: 100, activation: 'relu', inputShape: [10]}));
-		//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
 		//const identity = tf.eye(10000,10000).print();
 		//  a b c d
@@ -241,61 +204,7 @@ module.exports = {
 		//start traing path problems as the heigher dimensioanl object -- ok. got it.
 		//CRE8CAPITAL | OFCOURSE THERE IS UNITY HERE
 
-		//PREPARE FOR DIM INCREASE
-		//NEED BETTER BUT COOL TO COMBO TF
-
-
 		//NEED COMBINITORIAL AND REDUCTION RELATIONSHIPS
-
-
-		Order.find({identiferSet:'A'}).then(function(models){
-			var trainData = [];
-
-			//console.log(models.length);
-			//how deep?
-			//HOW MANY IT"S MAX EIGHT// there has the be a reduction..?? longest circuit is eight
-			//SET, COMBOS OF ASSETS, SET OF UNIQUE ASSETS
-
-			//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length, 8]});
-			//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length. orderBookdepth, market.depth]});
-			//ENCODING INFORMATION IN HIGHER DIMENSIONS :')
-
-			//HIGH DIMENSIONAL RELATIONS [] = []
-
-			const valueMatrix = tf.input({shape: [dataModel.length, 8]});
-
-			//25x8 matrix
-			var inputTest = [];
-
-			//THINK ABOUT THE POSITION OF COMBIITORIAL MARKETS IN THE TENS NET
-			for (x in models){
-
-				//console.log(models[x].identiferSet1)//, models[x].amountSet, models[x].amountSet1);
-				//console.log(models[x].amountSet1.split(',').length);
-
-				//IT"S A LATTICE NETWORK..
-				for(y in models[x].amountSet1.split(',')){
-					if (models[x].amountSet1.split(',').length == 1){
-						console.log(models[x].identiferSet1);
-
-					}
-				//	inputTest[x][y].push(models[x].amountSet1.split(',')[y]);
-				}
-
-				//ex: a->b; b->c; c->d; d->e .. 
-				//	  |		|	  |	 	|
-
-			}
-			//console.log(inputTest)
-
-			//NOW BUILD PATHS TO CREATE TENSOR WEIGHTS
-			//console.log(valueMatrix);
-			//CONVERSION IS A TENSOR OPERATION LOL
-			
-
-		});
-
-		//DENSE LAYER ACTS AS COMBIN?--> NEED TO OUTPUT 
 
 		//const input1 = tf.input({shape: [2, 2]});
 		//const input2 = tf.input({shape: [2, 2]});
@@ -315,12 +224,174 @@ module.exports = {
 		//const model = tf.model({inputs: input, outputs: output});
 		//model.predict(tf.ones([2, 5])).print();
 
+		//POSITION IS A TENSOR? --> CREATE MARKET BY MULT? YES!
 
-		//POSITION IS A TENSOR? --> CREATE MARKET BY MULT? MEH
-
-		//>:'O
 		var uniqueMarkets = [];
 		var marketSetObj = []; //NEED STRUCTURE
+
+		function getAllSubsets(theArray) {
+			return theArray.reduce(function (subsets, value) {
+				return subsets.concat(subsets.map(function (set) {
+					return [value].concat(set);
+				}));
+			}, [[]]);
+	    };
+
+	    function diff (a, b) {
+		    return a.filter(function(i) {return b.indexOf(i) < 0;});
+		};
+
+		function powersetDecompose(theArray, obj){
+			//console.log(theArray);
+			//RESTRUCT TO name.. and object list  
+			//var obj = {};
+			if (obj == {}){
+				obj[theArray] = {data:[]}
+			};
+			for (x in theArray){
+				if (theArray[x].length > 1){
+
+					var powerSet = getAllSubsets(theArray[x]);
+					powerSet.pop();
+					powerSet.shift();
+					
+					//INTELLIGENCE HERE
+					//TAKE A WALK :')
+					//obj[theArray].data.push({name:theArray[x].join(','), data:[]})
+
+					for (y in powerSet){
+						var powObj = {};
+						powObj[powerSet[y]] = {data: []}
+						//TAKE A WALK
+						obj[theArray[x].join(',')].data.push(powObj);
+					}
+
+					//console.log(theArray[x], powerSet, obj);
+					//powersetDecompose(powerSet, obj);
+				}
+				else{
+					//obj[theArray[x]] = 1
+				}
+			}
+		};
+
+		//TODO: WITH powersetDecompose
+		function identityWalk(identiferSet, num, iterator){
+			
+			num++
+			var dimObj = {name:identiferSet, data:[]};
+
+			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+
+				for (x in orderModels){
+
+					if (orderModels[x].amountSet1.split(',').length > 1){
+						var obj = {
+							name:orderModels[x].identiferSet1,
+							data: [],
+						};
+
+						var powerSet = getAllSubsets(orderModels[x].identiferSet1.split(','));
+	    				powerSet.shift();
+
+						//for(y in orderModels[x].identiferSet1.split(',')){
+						//	obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
+						//}
+
+						for(y in powerSet){
+
+							obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
+
+						}
+
+						dimObj.data.push(obj);
+					}
+					else{
+						dimObj.data.push({name:orderModels[x].identiferSet1, data:1});
+					}
+
+				}
+
+				//ex: a->b; b->c; c->d; d->e 
+				//	  |		|	  |	 	|
+				if (num < iterator){
+					console.log(num);
+					for (x in orderModels){
+						train(orderModels[x].identiferSet1, num, iterator);
+					}
+				}
+
+				console.log(dimObj)
+
+			});
+		};
+
+		//recursive train
+		//relations are tensors
+		//[a]-->[b] == amount ; a tensor | a-b tensor | b tensor | both 
+		//[a]-->[b,c] == [amount, amount] | b,c tensor
+		function train(identiferSet, num, iterator){
+
+			num++
+			//RENAME TO APLPHA AND BETA IDSETS
+			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+
+				//how deep?
+				//HOW MANY IT"S MAX EIGHT// there has the be a reduction..?? longest circuit is eight
+				//SET, COMBOS OF ASSETS, SET OF UNIQUE ASSETS
+				//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length, 8]});
+				//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length. orderBookdepth, market.depth]});
+				//ENCODING INFORMATION IN HIGHER DIMENSIONS :')
+				//HIGH DIMENSIONAL RELATIONS [] = []
+
+				//ONE VALUE MATRIX PER identiferSet
+				const valueMatrix = tf.input({shape: [orderModels.length, 8]});
+
+				var dimObj = {name:identiferSet, data:[]};
+
+				//THINK ABOUT THE POSITION OF COMBIITORIAL MARKETS IN THE TENS NET
+				//UP CONVERT EVERYTHING TO EIGHT DIMENSIONS 
+				for (x in orderModels){
+
+					if (orderModels[x].identiferSet1.split(',').length > 1){
+						var obj = {
+							name:orderModels[x].identiferSet1,
+							data: [],
+						};
+						//POWERSET --> IS ACTUAL. I WOULD LIKE TO INITIALIZE AN IDENTITY SET OR PROBABILITY SPACE
+						//WE ARE LOOKING AT THE MANIFEST ORDER | VALUE MAP --> WHICH ITSELF IS A GRADIENT 
+						for(y in orderModels[x].identiferSet1.split(',')){
+							obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
+						}
+						dimObj.data.push(obj);
+					}
+					else{
+						dimObj.data.push({name:orderModels[x].identiferSet1, data:orderModels[x].amountSet1});
+					}
+
+				}
+
+				//ex: a->b; b->c; c->d; d->e .. 
+				//	  |		|	  |	 	|
+
+				if (num < iterator){
+					console.log(num);
+					for (x in orderModels){
+						//train(orderModels[x].identiferSet1, num, iterator);
+					}
+				}
+
+				console.log(dimObj);
+				uniqueMarkets.push(dimObj);
+				//uniqueMarkets.map(function(obj){return obj.name}).indexOf(models[x].identiferSet1);
+				//console.log(uniqueMarkets);
+
+				//NOW BUILD PATHS TO CREATE TENSOR WEIGHTS
+				//console.log(valueMatrix);
+				//CONVERSION IS A TENSOR OPERATION LOL
+
+			});
+		};
 
 		function traverse(model, path){
 
@@ -332,7 +403,6 @@ module.exports = {
 				path = [];
 				for (x in models){
 					console.log(models[x].identiferSet1);
-
 					//branch completion | do it symmetrically 
 					if (uniqueMarkets.map(function(obj){return obj.identiferSet1}).indexOf(models[x].identiferSet1)==-1){
 						uniqueMarkets.push({identiferSet1: models[x].identiferSet1, amountSet:models[x].amountSet, amountSet1:models[x].amountSet1});
@@ -342,7 +412,6 @@ module.exports = {
 						traverse(models[x].identiferSet1, path);
 					}
 					else{path = [];}
-
 				}
 
 				//ONCE DONE..
@@ -369,99 +438,76 @@ module.exports = {
 				}
 
 			});
-
 		};
 
 		function path(start, finish){
+		};
 
-		}
+		//train('A', 0, 8);
+		train('A', 0, 3);
+		//powersetDecompose(['A','B','C', ['A','B'], ['B','C'], ['A','C'], ['A','B','C']], {});
+		//identityWalk('A', 0, 3);
 
-		//path('A','C,D')
-
+		//path('A','C,D');
 		//traverse('A');
+
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
-
+		
 	},
 
-
+	//TODO: RESHAPE | BUILD
 	//FOR THIS TO SCALE (ON MONGO) WE NEED A DATA MODEL 
 	reputationBuild:function(){
 		User.find().then(function(userModels){
 			for (x in userModels){
 				(function(userModels, x){
-
 					Work.find({user:userModels[x].id}).populate('task').then(function(workModels){
 						var workSum = {};
-
 						//TOKENS ARE .. 
 						for (y in workModels){
 							if (!workSum[workModels[y].id]){workSum[workModels[y].id] = parseFloat(workModels[y].amount)}
 							workSum[workModels[y].id] += parseFloat(workModels[y].amount);
-
 							if (workModels[y].task && workModels[y].task.tags){
 								for (z in workModels[y].task.tags.split(',')){
-
 									//if (!workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id]){workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id] = parseFloat(workModels[y].amount)}
 									//workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id] += parseFloat(workModels[y].amount);
-
 									if (!workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()]){workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()] = parseFloat(workModels[y].amount)}
 									workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()] += parseFloat(workModels[y].amount);
-
 								}
 							}
-
 						}
-
 						var balance = workSum;
-						balance['cre8'] = 8;
+						if (balance['cre8']!=0){balance['cre8'] = 8};
 						console.log(workSum);
 						console.log(userModels[x].id);
 						User.update({id:userModels[x].id}, {reputation:workSum, balance:balance}).then(function(userModels){console.log('UPDATE')})
-
 					});
-
-				})(userModels, x)
+				})(userModels, x);
 			}
 		});
 	},
-
 
 	//TO BE REPLACED BY LATTICE OPERATIONS
 	//POWERSET LATTICE? 
 	legacyTraverse:function(inputAssets, outputAssets, outputValues){
 
 		//var inputVectorValues = []; //UNKNOWN
-		//var inputVectorAssets = ['C']; //CAN BE UNKNOWN | OR NOT
-		//var inputVectorAssetString = 'C';
-
-		var inputVectorAssets = inputAssets;
+		var inputVectorAssets = inputAssets; //CAN BE UNKNOWN | OR NOT
 		var inputVectorAssetString = inputVectorAssets.join('');
 
-
-		//MARKET RELATION --> PATH {}
-		//TRANSFORM TO SELF SIMILAR ALGEBRA ~ Each asset is a crystal
-
-		//var outputVectorValues = [1,2];
-		//var outputVectorAssets = ['A','B'];
-		//var outputVectorAssetString = 'A,B';
-
-		//THIS CAN BE A SET.. 
-		//OUTPUT IS A SET
+		//OUTPUT IS A SET | && || OPERATIONS
 		var outputVectorValues = outputValues;
 		var outputVectorAssets = outputAssets;
 		var outputVectorAssetString = outputVectorAssets.join('');
 
-
-		//HOW MANY C == 1A, 2B
+		//MARKET RELATION --> PATH {}
+		//TRANSFORM TO SELF SIMILAR ALGEBRA ~ Each asset is a crystal
 		//GIVEN THE CRYSTALINE RELATIONSHIP BEWTWEEN A-H
-
-		//FIND SET OF PATHS FROM C->[A,B] | SOME DECOMPOSIIOTN OF DFINED SELF SIMIALR? 
 		//CRYSTALINE MARKET (GOOD COPY LEL)
-
 		//SET OF PATHS ARE SET OF ORDERS 
-
 		//MAP THE BOOK TO THE LATTICE?
+		//FIND SET OF PATHS FROM [N]->[M] | SOME DECOMPOSIIOTN OF DFINED SELF SIMIALR? 
 
 		//DIRECT 
 		Order.find({identiferSet:inputVectorAssetString})
@@ -473,8 +519,6 @@ module.exports = {
 			//	}
 			//}
 		});
-
 	},
-
 
 };

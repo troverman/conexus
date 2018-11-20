@@ -194,7 +194,16 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
+
+			title: req.param('title'),
+			tags: req.param('tags'),
+			type: req.param('type'),
 			content: req.param('content'),
+			user: req.param('user'),
+
+			associatedModels: req.param('associatedModels'),
+
+			//DEPRECIATE
 			market: req.param('market'),
 			order: req.param('order'),
 			parent: req.param('parent'),
@@ -202,13 +211,10 @@ module.exports = {
 			post: req.param('post'),
 			profile: req.param('profile'),
 			project: req.param('project'),
-			tags: req.param('tags'),
 			task: req.param('task'),
-			title: req.param('title'),
 			transaction: req.param('transaction'),
-			type: req.param('type'),
-			user: req.param('user'),
 			work: req.param('work'),
+
 		};
 		Post.create(model)
 		.exec(function(err, model) {
@@ -240,7 +246,6 @@ module.exports = {
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Post.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

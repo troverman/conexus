@@ -12,10 +12,15 @@ module.exports = {
             type: 'string',
         },
         stream: {
-            //content
             model: 'post',
         },
         identifer: {
+            type: 'string',
+        },
+        startTime: {
+            type: 'string',
+        },
+        tags: {
             type: 'string',
         },
         task: {

@@ -26,7 +26,6 @@ angular.module( 'conexus.content', [
 }])
 
 .controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, ReactionModel, reactions, titleService, UserModel ) {
-    titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.marketOutput = [];
     $scope.newContent = {};
@@ -35,6 +34,10 @@ angular.module( 'conexus.content', [
     $scope.newValidation.validation = {};
     $scope.newValidation.validation.general = 0;
     $scope.post = post;
+    
+    if ($scope.post.title){titleService.setTitle($scope.post.title + ' | Content | CRE8.XYZ')}
+    else{titleService.setTitle('Content | CRE8.XYZ')}
+
     if(!$scope.post){$location.path('/')}
     $scope.reactions = reactions;
     $scope.toggleTokenVar = false;
@@ -48,10 +51,6 @@ angular.module( 'conexus.content', [
             $scope.reputation = member.reputation;
         });
     }
-
-    $scope.toggleToken = function(){
-        $scope.toggleTokenVar =!$scope.toggleTokenVar
-    };
 
     //+Addative Manifolds --> Extra dimensional 
     $scope.tokens = [
@@ -219,9 +218,13 @@ angular.module( 'conexus.content', [
 
     };
 
-    $scope.tokenToggle = function(){
+    $scope.toggleToken = function(){
+        $scope.toggleTokenVar =!$scope.toggleTokenVar
+    };
+
+    $scope.tokenToggle = function(content){
         $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
+        $rootScope.globalTokens = content;
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

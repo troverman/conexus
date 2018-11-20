@@ -76,11 +76,9 @@ module.exports = {
 			        });
 		    	})(models, x)
 		    }
-
 		});*/
 
 		/*User.find().then(function(models){
-
 			for (x in models){
 				if(!models[x].coverUrl){
 					var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";

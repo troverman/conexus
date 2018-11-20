@@ -13,9 +13,10 @@
 	<div class="row">
 		<div class="card" style="background-color:#f9f9f9">
 		    <div style="padding:16px;background-color:white">
+
 				<div>
 					<div style="float:right;text-align:right">
-						<h5 style="text-align:right" ng-click="toggleToken()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+						<h5 style="text-align:right" ng-click="tokenToggle(post)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
 						<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{post.minusCount+1}}</h5>
 						<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: {{post.plusCount}} | Dislike: {{post.minusCount}}</h5>
 						<h5 style="margin-top:0px;margin-bottom:0px">
@@ -25,29 +26,35 @@
 					</div>
 
 					<h3 ng-show="post.title">{{post.title}}</h3>
-		    		<p ng-show="post.tags"><a style="color:gray;" ng-repeat="tag in post.tags.split(',')" href="content">{{tag}} </a></p>
 
-					<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
-					<a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
-
-					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
-					<!--<h3>{{post.parent}} Parent Information</h3>-->
-
-			        <!--REFACTOR-->
+					<!--REFACTOR-->
 					<h3>
 						<a href="market/{{post.market}}">{{post.market}}</a>
 						<a href="order/{{post.order}}">{{post.order}}</a>
 						<a href="content/{{post.post}}">{{post.post}}</a>
 						<a href="project/{{post.project.urlTitle}}">{{post.project.title}}</a>
-						<a href="member/{{post.profile}}">{{post.profile}}</a>
+						<a href="member/{{post.profile}}">{{post.profile.username}}</a>
 						<a href="task/{{post.task}}">{{post.task.title}}</a>
 						<a href="task/{{post.transaction}}">{{post.transaction}}</a>
 						<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
 					</h3>
 
+		    		<p ng-show="post.tags"><a style="color:gray;" ng-repeat="tag in post.tags.split(',')" href="content">{{tag}} </a></p>
+
+		    		<div>
+						<img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
+						<a style="display:inline" href="member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
+					</div>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
+
+					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
+					<!--<h3>{{post.parent}} Parent Information</h3>-->
+
 					<div style="clear:both"></div>
 				</div>
+
+				<div class="spacing-10"></div>
+
 				<div style="max-height:500px;overflow:scroll" ng-show="post.type!='video'">
 					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
 				</div>
@@ -60,6 +67,7 @@
 		    </div>
 		    <div ng-show="post.showReply" class="card-footer">
 				<form role="form" ng-submit="createPost(post)">
+					<!--TODO: TAGS-->
 					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 				</form>
@@ -67,6 +75,7 @@
 			<!--<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>-->
 		</div>
 	</div>
+
 	<!--TODO: MOTION VALIDATION-->
 	<div class="row" ng-show="post.type == 'MOTION'">
 		<div class="card">
@@ -85,58 +94,41 @@
 		</div>
 	</div>
 
-	<div class="row" ng-show="!toggleTokenVar">
+	<!--TRAVERSAL PARAMETERS-->
+	<!--COMBINITRONICS-->
+	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
+	<div class="row" ng-show="false">
 		<div class="card">
 		    <div style="padding:16px">
 		    	<div class="row">
-
 					<div class="col-md-7">
 				    	<h4>Protocols [View, Create, React]</h4>
 				    	<p style="color:gray;font-style:italic;font-size:12px">[View, Create, React] Token manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>
 				        <h5><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
-				        <p>
-							<a ng-repeat="token in tokens" href="market/{{token}}">{{token}} </a>,
-				    	</p>
-
+				        <p><a ng-repeat="token in tokens" href="market/{{token}}">{{token}} </a>,</p>
 				    	<p>{{viewTime}} View+{{post.id}}</p>
 				    	<p>{{viewTime}} View+[Tags]</p>
 						<p>{{viewTime}} View+ID</p>
-
 				    	<p>{{0.00232*viewTime}} CRE8</p>
 			    	</div>
-
 					<div class="col-md-5">
-
 				        <h4>Liquidity | onMint</h4>
 						<h5>Filters | <span ng-repeat="input in outputVector.split(',')"><a href="market/{{input}}">{{input}}</a> | </span>
 						<h5>Input Vectors | Scale of Output</h5>
 						<p style="color:gray;font-style:italic;font-size:12px">Search for Output liquidity path | [] = []</p>
 						<form ng-submit="marketTraverse(tokens, outputVector)">
 							<input type="text" placeholder="Input Dimensions" ng-model="tokens" class="form-control">
-							<!--SUBMIT-->
 						</form>
 						<form ng-submit="marketTraverse(tokens, outputVector)">
 							<input type="text" placeholder="Output Dimensions" ng-model="outputVector" class="form-control">
-							<!--SUBMIT-->
 						</form>
-
 						<p style="color:gray;font-style:italic;font-size:10px">CREATE ORDER [TOKENS] = [0.000312CRE8, 0.00002BTC, 0.0002ETH]</p>
 						<p style="color:gray;font-style:italic;font-size:10px">onMint sponsorship [TOKENS] = [0.000312 CRE8, 0.00021UniversalToken, ...]</p>
-
-						<!--TRAVERSAL PARAMETERS-->
-
 						<p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
-
 							<span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
-
-							<!--COMBINITRONICS-->
-							<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
-
 						</p>
-
 			    	</div>
 		    	</div>
-
 		    </div>
 		</div>
 	</div>
@@ -144,9 +136,8 @@
 	<div class="row">
 		<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
 	</div>
-
-	<!--<div class="row" ng-show="post.type!='video'">
-
+	<!--
+	<div class="row" ng-show="post.type!='video'">
 		<div class="card" style="background-color:#f9f9f9">
 	        <div style="padding:16px;background-color:white">
 
@@ -155,13 +146,10 @@
 					<a style="display:inline" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
 					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
 				</div>
-
 				<br>
-
 				<div style="max-height:500px;overflow:scroll">
 					<span style="display:inline" ng-bind-html="renderContent(post.content)"></span>
 				</div>
-
 			</div>
 			<div class="card-footer">
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
@@ -177,12 +165,7 @@
 			</div>
 			<div ng-include="'content/content.tpl.html'" ng-repeat="post in post.children track by post.id"></div>
 		</div>
-
-	</div>-->
-
+	</div>
+	-->
 </div>
-
 <div class="spacing-50"></div>
-
-
-

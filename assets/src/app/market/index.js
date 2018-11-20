@@ -21,21 +21,26 @@ angular.module( 'conexus.market', [
 .controller( 'MarketCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', function MarketController( $scope, $stateParams, config, OrderModel, orders, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
+    titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 
     $scope.market = {
         title: $scope.stateParams.id,
         circulation: Math.floor(Math.random()*1000000),
         marketCount: Math.floor(Math.random()*10000),
     };
+    $scope.newMarket = {};
+    $scope.newOrder = {};
+    $scope.newOrder.identiferSet = $scope.stateParams.id;
+    $scope.newOrderToggleVar = false;
+    $scope.orders = orders;
+    $scope.orders.forEach(function(part, index) {
+        //if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
+        //if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
+        //if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
+        //if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
+    });
+    $scope.trades = {};
 
-    $scope.renderRandom = function (){
-        var random = Math.random();
-        if (random>0.5){random = Math.floor(Math.random()*10)}
-        else{random = -Math.floor(Math.random()*10)}
-        return random;
-    };
-
-    titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 	$scope.chart = {
         chart: {
             zoomType: 'x',
@@ -61,6 +66,7 @@ angular.module( 'conexus.market', [
         },
         credits:{enabled:false},
     };
+
     $scope.chartMap = {
         chart: {
             polar: true,
@@ -93,8 +99,6 @@ angular.module( 'conexus.market', [
         credits:{enabled:false},
     };
 
-
-
     $scope.baseMarkets = [$scope.stateParams.id]
     $scope.markets = ['USD', 'ETH', 'BTC', 'CRE8', 'STEEM', 'LTC', 'Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     
@@ -113,7 +117,6 @@ angular.module( 'conexus.market', [
             color: 'rgba('+random1+','+random2+','+random3+',0.3)',
             fillOpacity: 0.3,
         });
-
     }
 
     for (x in $scope.markets){
@@ -129,21 +132,7 @@ angular.module( 'conexus.market', [
             $scope.chartMap.series[y].data.push((1+1*Math.random())/2);
         }
     }
-
-
-    $scope.newOrder = {};
-    $scope.newOrderToggleVar = false;
-    $scope.orders = orders;
-    $scope.orders.forEach(function(part, index) {
-        if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
-        if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
-        if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
-        if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
-    });
-    $scope.newOrder.identiferSet = $scope.stateParams.id;
-    $scope.trades = {};
-
-    $scope.newMarket = {};
+    
     $scope.addMarket = function(type, market){
         if (type="baseMarket"){
             $scope.baseMarkets.push($scope.newMarket.baseMarket)
@@ -151,16 +140,6 @@ angular.module( 'conexus.market', [
         if (type="market"){
             $scope.markets.push($scope.newMarket.market)
         }
-    };
-
-    $scope.keyPress = function(searchValue){
-        $scope.markets = $scope.markets.filter(function(obj){
-            console.log(obj.includes(searchValue))
-            return obj.includes(searchValue);
-        });
-        //SearchModel.search(searchValue).then(function(models){
-        //    $scope.searchResults = models;
-        //});
     };
 
     $scope.createOrder = function() {

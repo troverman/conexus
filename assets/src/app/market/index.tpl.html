@@ -15,15 +15,6 @@
 
 	<div class="spacing-10"></div>
 
-	<!--<div class="row">
-		<div class="card">
-			<div style="padding:16px;">
-				<h1>{{market.title}} MARKETS</h1>
-				<p style="color:gray">{{stateParams.id}} | {{market.marketCount}} markets | {{market.circulation}} tokens in circulation </p>
-			</div>
-		</div>
-	</div>-->
-
 	<div class="row">
 	    <div class="card">
 	        <form style="display:flex;flex-direction:row;">
@@ -37,7 +28,7 @@
 	    </div>
 	</div>
 
-	<div class="row">
+	<!--<div class="row">
 		<div class="card">
 			<div class="row">
 				<div class="col-md-8">
@@ -82,7 +73,6 @@
 						<br>
 						<h5>Explore</h5>
 						<span ng-repeat="market in markets"><a href="market/{{market}}">{{market}} </a></span>
-
 					</div>
 				</div>
 				<div class="col-md-4" style="max-height:750px;overflow:scroll">
@@ -102,57 +92,49 @@
 									<p style="color:gray;font-size:10px">21231{{stateParams.id}} Depth</p>
 					    		</div>
 							</div>
-
-							<!--<button class="btn btn-default log-btn">+ Dimension</button>-->
-
 						</div>
 				    </div>
 					<button class="btn btn-default log-btn">More <i></i></button>
 			    </div>
 		    </div>
 		</div>
-	</div>
+	</div>-->
 
 	<!--<div class="row">
+		<div class="card">
+		    <div style="padding:16px;">
+				<highchart config="chartMap"></highchart>
+		    </div>
+	    </div>
+	</div>-->
+
+	<div class="row">
+		<div class="card" ng-repeat="order in orders" ng-click="">
+		    <div style="padding:16px;">
+		    	<div style="float:right;text-align:right">
+					<p style="color:gray;font-size:10px">0.2042 {{stateParams.id}}/{{order.identiferSet1}}</p>
+					<p style="color:gray;font-size:10px">0.2042 {{stateParams.id}}/{{order.identiferSet1}}</p>
+	    		</div>
+	    		<div>
+			    	<a href="market/{{stateParams.id}}/{{order.identiferSet1}}"><h4>{{order.identiferSet1}}</h4></a>
+			    	<p style="color:gray">{{stateParams.id}}/{{order.identiferSet1}} market</p>
+			    </div>
+		    </div>
+	    </div>
+	</div>
+
+	<!--
+	<div class="row">
 		<div class="card" ng-repeat="market in markets">
 		    <div style="padding:16px;">
 		    	<a href="market/{{stateParams.id}}/{{market}}"><h4>{{market}}</h4></a>
 		    	<p style="color:gray">{{stateParams.id}}/{{market}} markets</p>
 		    </div>
 	    </div>
-	</div>-->
-
-	<!--<div class="row">
-		<div class="card">
-			<div style="padding:16px;">
-				<h2>Order Book</h2>
-				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button>
-			</div>
-		</div>
 	</div>
+	-->
 
-	<div class="row">
-		<div class="card" ng-show="newOrderToggleVar">
-		    <div style="padding:16px;">
-				<form role="form" ng-submit="createOrder(newTask)">
-					<div class="form-group col-sm-6">
-						<input placeholder="Order Identifer Set 1" type="text" ng-disabled="true" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-6">
-						<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-6">
-						<input placeholder="Order Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-6">
-						<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-					</div>
-					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
+	<!--
 	<div class="row">
 		<div ng-repeat="order in orders">
 	        <div class="card">
@@ -180,7 +162,8 @@
 		        </div>
 	        </div>
 		</div>
-	</div>-->
+	</div>
+	-->
 
 	<!--
 	<div class="row">
