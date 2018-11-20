@@ -51,10 +51,43 @@
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="subNav" md-is-locked-open="false" style="position:fixed;background-color:black">
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="subNav" md-is-locked-open="false" style="position:fixed;background-color:black">
         <div class="md-list-item-text" layout="column" style="height:100%;">
-            <div style="text-align:center">
-                <h1>subnav</h1>
+            <div style="text-align:center;">
+                <div class="spacing-50"></div>
+
+                <div ng-if="project">
+                    <h1 class="nav-links"><a href="project/{{project.urlTitle}}">{{project.title}}</a></h1>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/about">About</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/assets">Assets</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/channels">Channels</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/content">Content</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/members">{{project.memberCount}} Members</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/marketplace">Marketplace</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/projects">Projects</a></h4>
+
+                    <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}/settings">Settings</a></h4>-->
+
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/tasks">Tasks</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/time">Time</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
+                </div>
+
+                <div ng-if="member">
+                    <h1 class="nav-links"><a href="member/{{member.username}}">{{member.username}}</a></h1>
+                    <h4 class="nav-links"><a href="member/{{member.username}}">About</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/assets">Assets</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/content">Content</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/following">{{member.followingCount}} Following</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/ledger">Ledger</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/positions">Positions</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/projects">{{member.projectCount}} Projects</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/time">Time</a></h4>
+                </div>
+
             </div>
         </div>
     </md-sidenav>

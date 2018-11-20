@@ -7,8 +7,13 @@
 <div class="row">
     <div ng-repeat="item in activity">
 
-        <div class="card" ng-if="item.model=='CONTENT'">
+        <div class="card" ng-if="item.model=='CONTENT'" ng-click="">
             <div style="padding:16px;overflow:scroll;max-height:500px">
+
+                <div style="float:right">
+                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
+
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
@@ -30,21 +35,19 @@
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='TASK'">
+        <div class="card" ng-if="item.model=='TASK'" ng-click="">
             <div style="padding:16px;">
-                <div class="row">
-                    <div class="col-sm-10">
-                        <h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
-                        <p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-                        <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
-                        <a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
-                        <span style="color:gray" am-time-ago="item.createdAt"></span>
-                    </div>
-                    <div class="col-sm-2" style="text-align:right">
-                        <h4>{{item.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{item.completeIdentifierSet}}</a></h4>
-                        <p ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-                    </div>
+
+                <div style="float:right">
+                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
+               
+                <h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+                <p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+                <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+                <a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+                <span style="color:gray" am-time-ago="item.createdAt"></span>
+                    
             </div>
             <div class="card-footer">
                 <a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
@@ -54,8 +57,13 @@
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='TRANSACTION'">
+        <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="">
             <div style="padding:16px">
+
+                <div style="float:right">
+                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
+
                 <p style="font-weight:800">From: <a href="member/{{item.from}}">{{item.from}}</a> To: <a href="member/{{item.to}}">{{item.to}}</a></p>
                 <p style="font-weight:800">{{item.amount}} <a href="market/{{item.identifier}}">{{item.identifier}}</a></p>
                 <p><a ng-repeat="tag in item.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
@@ -71,8 +79,13 @@
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='WORK'">
+        <div class="card" ng-if="item.model=='WORK'" ng-click="">
             <div style="padding:16px;">
+
+                <div style="float:right">
+                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
+                
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>

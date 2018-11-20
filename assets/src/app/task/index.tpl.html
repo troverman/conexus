@@ -159,7 +159,8 @@
                     </div>
                     <div class="spacing-5"></div>
                     <tags-input ng-model="workTags" placeholder="Tags"></tags-input>
-                    <input type="text" placeholder="Content" ng-model="workContent" class="form-control">
+                    <!--<input type="text" placeholder="Content" ng-model="workContent" class="form-control">-->
+                    <text-angular ng-model="workContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
                     <div class="spacing-5"></div>
                     <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
                 </div>

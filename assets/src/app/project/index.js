@@ -232,6 +232,10 @@ angular.module( 'conexus.project', [
         type: 'PROJECT',
     };
 
+    //TODO: BETTER?
+    $rootScope.project = $scope.project;
+    $rootScope.member = null;
+
     if ($scope.project.location){ 
         $scope.map = {
             center: {latitude: project.location.lat, longitude: project.location.lng },
@@ -290,6 +294,10 @@ angular.module( 'conexus.project', [
             return $scope.currentUser.id == $scope.project.user;
         }
         else {return false;}
+    };
+
+    $scope.subNavToggle = function(){
+        $mdSidenav('subNav').toggle();
     };
 
     $scope.tabsToggle = function() {

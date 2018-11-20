@@ -29,13 +29,20 @@ angular.module( 'conexus.nav', [
         }
     });
 
+    //LOADING HERE
     $rootScope.$on("$stateChangeStart", function() {
         $rootScope.to = null;
         $rootScope.associatedModel = null;
+        $mdSidenav('nav').close();
+        $mdSidenav('subNav').close();
+        $mdSidenav('content').close();
+        $mdSidenav('tokens').close();
+        $mdSidenav('transaction').close();
+        //$rootScope.memberUsername = null;
+        //$rootScope.projectTitle = null;
     });
     $rootScope.$on("$stateChangeSuccess", function() {
     	window.scrollTo(0, 0);
-        $mdSidenav('nav').close();
     });
 
     //TODO: ASSOCIATED MODELS

@@ -192,6 +192,10 @@ angular.module( 'conexus.member', [
         type: 'PROFILE',
     };
 
+    //TODO: BETTER?
+    $rootScope.member = $scope.member;
+    $rootScope.project = null;
+
     //TODO: seoService
 
     $scope.createTransaction = function(){
@@ -225,6 +229,10 @@ angular.module( 'conexus.member', [
     };
 
     $scope.search = function(){};
+
+    $scope.subNavToggle = function(){
+        $mdSidenav('subNav').toggle();
+    };
 
     $scope.tabsToggle = function() {
         $scope.tabsToggleVar = !$scope.tabsToggleVar;

@@ -35,7 +35,7 @@
                         <li><a href="project/{{project.urlTitle}}">Activity</a></li>
                         <li><a href="project/{{project.urlTitle}}/content">Content</a></li>
                         <li><a href="project/{{project.urlTitle}}/ledger">Ledger</a></li>
-                        <li><a href="project/{{project.urlTitle}}/members">{{memberCount}} Members</a></li>
+                        <li><a href="project/{{project.urlTitle}}/members">Members</a></li>
                         <li><a href="project/{{project.urlTitle}}/projects">Projects</a></li>
                         <li><a href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
                         <li><a href="project/{{project.urlTitle}}/time">Time</a></li>
@@ -45,8 +45,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="nav-toggle">
-                <a href="#" ng-click="tabsToggle()"><i class="fa fa-bars"></i></a>
+            <div class="nav-toggle" ng-click="subNavToggle()">
+                <a style="color:black" href="#"><i class="fa fa-bars"></i></a>
             </div>
         </div>
         <div ng-show="tabsToggleVar" style="text-align:center">
@@ -65,7 +65,7 @@
                 <h4><a href="project/{{project.urlTitle}}/channels">Channels</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/content">Content</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/members">{{memberCount}} Members</a></h4>
+                <h4><a href="project/{{project.urlTitle}}/members">{{project.memberCount}} Members</a></h4>
                 <!--<h4><a href="project/{{project.urlTitle}}">Map</a></h4>-->
                 <h4><a href="project/{{project.urlTitle}}/marketplace">Marketplace</a></h4>
                 <h4><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>

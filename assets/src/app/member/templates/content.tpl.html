@@ -95,11 +95,18 @@
         <div ng-repeat="item in contentList">
             <div class="card" style="">
                 <div style="padding:16px;overflow:scroll;max-height:500px">
-                    <div ng-bind-html="renderContent(item.content)"></div>
+
+                    <div style="float:right">
+                        <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    </div>
+
                     <p><a style="font-weight:700"  href="member/{{item.user.username}}">
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                         {{item.user.username}}
                     </a> | <span am-time-ago="item.createdAt"></span></p>
+                    
+                    <div ng-bind-html="renderContent(item.content)"></div>
+
                 </div>
                 <div class="card-footer">
                     <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 

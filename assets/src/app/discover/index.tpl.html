@@ -56,38 +56,38 @@
 
 <div class="container">
 	<div class="spacing-10"></div>
-	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
-		<div class="member-card" style="margin-bottom:10px">
-		    <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
-		        <a href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
+	<div class="col-lg-4 col-sm-6" ng-repeat="item in members">
+		<div class="member-card" style="margin-bottom:10px" ng-click="">
+		    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
+		        <a href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
 		    <div class="member-card-info">
-		        <h4><a href="member/{{member.username}}">{{member.username}}</a></h4>
-		        <p style="color:gray">{{member.status}} offline</p>
-		        <p style="color:gray">Total Reputation | {{member.totalWork}}</p>
+		        <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
+		        <p style="color:gray">{{item.status}} offline</p>
+		        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
 		    </div>
 		</div>
 	</div>
 </div>
 
 <div class="container">
-	<div ng-repeat="project in projects.slice(0,10)">
+	<div ng-repeat="item in projects.slice(0,10)">
         <div class="card">
             <div style="padding:16px;">
                 <div class="row">
                     <div class="col-sm-1 col-xs-2">
-                        <a href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a>
+                        <a href="/project/{{item.urlTitle}}"><img style="width:100%;height:100%" src="{{item.avatarUrl}}"></a>
                     </div>
                     <div class="col-sm-9 col-xs-10">
                         <h3 style="margin-top:0px">
-                            <a href="/project/{{project.urlTitle}}">
-                                {{project.title}}
+                            <a href="/project/{{item.urlTitle}}">
+                                {{item.title}}
                             </a>
                         </h3>
-	                    <p style="color:gray;font-style:italic;"><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
+	                    <p style="color:gray;font-style:italic;"><span style="display:inline" ng-bind-html="renderContent(item.description)"></span></p>
                     </div>
                     <div class="col-sm-2" style="text-align:right">
-                        <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
+                        <h4><a href="project/{{item.urlTitle}}">Join</a></h4>
                     </div>
                 </div>
             </div>
@@ -96,26 +96,26 @@
 </div>
 
 <div class="container">
-	<div ng-repeat="task in tasks">
+	<div ng-repeat="item in tasks">
 		<div class="card">
 			<div style="padding:16px;">
-				<div class="row">
-					<div class="col-sm-10">
-						<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
-						<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-						<a ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
-						<span style="color:gray" am-time-ago="task.createdAt"></span>
-					</div>
-					<div class="col-sm-2" style="text-align:right">
-						<h4>{{task.completeBountySet}} <a href="market/{{task.completeIdentifierSet}}">{{task.completeIdentifierSet}}</a></h4>
-						<p ng-click="tokenToggle(task)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-					</div>
-				</div>
+
+				<div style="float:right">
+                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
+				
+				<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+				<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+            	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+				<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
+				<span style="color:gray" am-time-ago="item.createdAt"></span>
+					
 			</div>
 			<div class="card-footer">
-				<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-				<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+				<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+				<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+				<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+				<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 			</div>
 		</div>
 	</div>

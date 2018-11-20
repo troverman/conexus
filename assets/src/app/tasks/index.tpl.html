@@ -25,14 +25,33 @@
 <div class="spacing-10"></div>
 
 <!--TODO: TOKEN OUPUT FILTERS-->
-
 <div class="container">
 	<div class="row">
 		<div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+			<!--TODO: MOBILE-->
+			<!--TODO: URL-->
+			<!--TODO: FILTER RENDER-->
 	        <div class="card">
 	            <div style="padding:16px;">
+					<span><b>Tags</b></span>
 	                <div ng-repeat="tag in sortedTagArray">
 	                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+	                </div>
+	            </div>
+	        </div>
+		    <div class="card">
+	            <div style="padding:16px;">
+	                <span><b>Associations</b></span>
+	                <div ng-repeat="association in sortedAssociationArray">
+	                    <a href="#" ng-click="filterContent(tag.element)">{{association.element}}</a>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="card">
+	            <div style="padding:16px;">
+	                <span><b>Locations</b></span>
+	                <div ng-repeat="location in locations">
+	                    <a href="#" ng-click="filterContent(tag.element)">{{location}}</a>
 	                </div>
 	            </div>
 	        </div>
@@ -57,27 +76,29 @@
 			</div>
 
 			<!--TODO: MARKET LOOKUP-->
-			<div ng-repeat="task in tasks">
+			<!--TODO: ASSOCIATIONS-->
+			<!--TODO COMMENT-->
+			<div ng-repeat="item in tasks">
 				<div class="card" ng-click="">
 					<div style="padding:16px;">
-						<div class="row">
-							<div class="col-sm-10">
-								<h4><a href="task/{{task.id}}">{{task.title}}</a></h4>
-								<p><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
-		                    	<p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-								<a ng-repeat="tag in task.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
-								<span style="color:gray" am-time-ago="task.createdAt"></span>
-							</div>
-							<div class="col-sm-2" style="text-align:right">
-								<p ng-click="tokenToggle(task)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-							</div>
-						</div>
+
+						<div style="float:right">
+		                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+		                </div>
+
+						<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+						<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+						<p><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                    	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+						<span style="color:gray" am-time-ago="item.createdAt"></span>
+							
 					</div>
 					<div class="card-footer">
-						<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-						<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-						<a href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
-						<a style="padding:0px" class="pull-right" href="task/{{task.id}}"><i class="fa fa-link grey"></i></a>
+						<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a href="task/{{item.id}}" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+						<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
+						<!--<a class="pull-right" href="task/{{item.id}}" am-time-ago="item.createdAt"></a>-->
 					</div>
 				</div>
 			</div>
