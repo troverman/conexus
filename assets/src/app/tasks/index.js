@@ -65,7 +65,9 @@ angular.module( 'conexus.tasks', [
                 obj.tags = obj.tags.split(',');
                 return obj;
             });
+            $scope.loadAssociations();
             $scope.loadTags();
+
         });
     };
 
