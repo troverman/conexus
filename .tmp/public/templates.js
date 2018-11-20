@@ -3629,7 +3629,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/settings\">Settings</a></h4>\n" +
-    "\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
@@ -4024,6 +4023,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "    <div ui-view=\"projectMembers\"></div>\n" +
     "    <div ui-view=\"projectPositions\"></div>\n" +
     "    <div ui-view=\"projectProjects\"></div>\n" +
+    "    <div ui-view=\"projectSettings\"></div>\n" +
     "    <div ui-view=\"projectTasks\"></div>\n" +
     "    <div ui-view=\"projectTime\"></div>\n" +
     "</div>\n" +
@@ -4825,8 +4825,7 @@ angular.module("project/templates/settings.tpl.html", []).run(["$templateCache",
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "            <h1>About {{project.title}}</h1>\n" +
-    "            <p>{{project.description}}</p>\n" +
+    "            <h1>{{project.title}} Settings</h1>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>");
