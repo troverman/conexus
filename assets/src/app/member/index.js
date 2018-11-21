@@ -336,7 +336,6 @@ angular.module( 'conexus.member', [
         else{$location.path('/login')}
     };
 
-
     //YIKES
     $scope.renderContent = function(content){
         if (content){

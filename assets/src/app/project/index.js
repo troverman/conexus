@@ -109,7 +109,6 @@ angular.module( 'conexus.project', [
             }], 
         }
     })
-    //TODO: FEATURE | ALLOW FOR OPEN BUDGETING / INPUT OUTPUT LEGER. ALLOW FOR DONATIONS / FUND TRANSFERRANCE | MULTIPLE LEDGERS
     .state( 'project.ledger', {
         url: '/ledger',
         views: {

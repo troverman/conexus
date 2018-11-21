@@ -1106,7 +1106,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                    <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "                                </div>\n" +
     "                            </form>\n" +
-    "\n" +
     "                            <div ng-show=\"reputationLookupValue !== undefined\">\n" +
     "                                <h5><a href=\"market/reputationLook\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
     "                            </div>\n" +
@@ -1128,10 +1127,44 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
+    "    <!--\n" +
     "    <div class=\"spacing-15\"></div>\n" +
+    "    -->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"\">\n" +
+    "\n" +
+    "        <!--\n" +
+    "        <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span><b>Tags</b></span>\n" +
+    "                    <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span><b>Associations</b></span>\n" +
+    "                    <div ng-repeat=\"association in sortedAssociationArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{association.element}}</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span><b>Locations</b></span>\n" +
+    "                    <div ng-repeat=\"location in locations\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{location}}</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        -->\n" +
+    "\n" +
+    "        <!--\n" +
+    "        <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        -->\n" +
     "            <div style=\"\">\n" +
     "                <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "                    <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
@@ -1142,156 +1175,170 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    <li><a href=\"/tasks\">Tasks</a></li>\n" +
     "                    <li style=\"float:right;font-size:14px;\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                </ul>\n" +
+    "                <div style=\"clear:both\"></div>\n" +
     "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <form  ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
-    "                <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </div>\n" +
-    "            </form>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-repeat=\"item in activity\">\n" +
-    "            <div class=\"card\" ng-if=\"item.model=='CONTENT'\" ng-click=\"\">\n" +
-    "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
-    "                    <div>\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
-    "                        <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "\n" +
-    "                        <!--TODO: POST PARENT TYPES-->\n" +
-    "                        <a ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"market/{{item.market}}\">market {{item.market}}</a>\n" +
-    "                        <a ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"order/{{item.order}}\">order {{item.order}}</a>\n" +
-    "                        <a ng-show=\"item.post\" style=\"display:inline;font-weight:600\" href=\"content/{{item.post}}\">content {{item.post}}</a>\n" +
-    "                        <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"member/{{item.profile}}\">profile {{item.profile}}</a>\n" +
-    "                        <a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
-    "                        <a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task}}\">task {{item.task}}</a>\n" +
-    "                        <a ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
-    "                        <!--TODO-->\n" +
-    "\n" +
-    "                        <a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{item.work}}\">work {{item.work}}</a>\n" +
-    "                        <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "                        <p style=\"display:inline;float:right\"><a ng-click=\"tokenToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                        <div style=\"clear:both\"></div>\n" +
-    "\n" +
+    "            <div class=\"card\">\n" +
+    "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "                    <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "                    <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "                    </div>\n" +
-    "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"card\">\n" +
+    "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button></div>-->\n" +
+    "\n" +
+    "            <div ng-repeat=\"item in activity\">\n" +
+    "                <div class=\"card\" ng-if=\"item.model=='CONTENT'\" ng-click=\"\">\n" +
+    "                    <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                        <div>\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
+    "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "\n" +
+    "                            <!--TODO: POST PARENT TYPES-->\n" +
+    "                            <a ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"market/{{item.market}}\">market {{item.market}}</a>\n" +
+    "                            <a ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"order/{{item.order}}\">order {{item.order}}</a>\n" +
+    "                            <a ng-show=\"item.post\" style=\"display:inline;font-weight:600\" href=\"content/{{item.post}}\">content {{item.post}}</a>\n" +
+    "                            <a ng-show=\"item.profile\" style=\"display:inline;font-weight:600\" href=\"member/{{item.profile}}\">profile {{item.profile}}</a>\n" +
+    "                            <a ng-show=\"item.project\" style=\"display:inline;font-weight:600\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a>\n" +
+    "                            <a ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task}}\">task {{item.task}}</a>\n" +
+    "                            <a ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
+    "                            <!--TODO-->\n" +
+    "\n" +
+    "                            <a ng-show=\"item.work\" style=\"display:inline;font-weight:600\" href=\"/work/{{item.work}}\">work {{item.work}}</a>\n" +
+    "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "                            <p style=\"display:inline;float:right\"><a ng-click=\"tokenToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <div style=\"clear:both\"></div>\n" +
+    "\n" +
+    "                        </div>\n" +
+    "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"card-footer\">\n" +
+    "                        <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                        <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                        <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                        <a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
+    "                        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "                            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "                    <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                <!--TODO: FINALIZE-->\n" +
+    "                <div class=\"card\" ng-if=\"item.model=='PROJECT'\" ng-click=\"\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <div class=\"col-sm-1 col-xs-2\">\n" +
+    "                                <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;max-width:1000%\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-10 col-xs-10\">\n" +
+    "                                <h3 style=\"margin-top:0px\">\n" +
+    "                                    <a href=\"project/{{item.urlTitle}}\">\n" +
+    "                                        {{item.title}}\n" +
+    "                                    </a>\n" +
+    "                                </h3>\n" +
+    "                                <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-1\" style=\"text-align:right\">\n" +
+    "                                <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
-    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                    </form>\n" +
+    "                <!--TODO: FINALIZE-->\n" +
+    "                <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <div class=\"col-sm-10\">\n" +
+    "                                <h4><a href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "                                <p><a href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
+    "                                <p><span ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
+    "                                <a ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
+    "                                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
+    "                                <h4>{{item.completeBountySet}} <a href=\"market/{{item.completeIdentifierSet}}\">{{item.completeIdentifierSet}}</a></h4>\n" +
+    "                                <p><a ng-click=\"tokenToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"card-footer\">\n" +
+    "                        <a href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                        <a href=\"task/{{item.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                        <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                        <a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
+    "                        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "                            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"card\" ng-if=\"item.model=='WORK'\" ng-click=\"\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <div>\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
+    "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                            <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
+    "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
+    "                            <a style=\"display:inline;font-weight:600\" href=\"work/{{item.id}}\">{{item.amount}}</a>\n" +
+    "                            <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "\n" +
+    "                            <p style=\"display:inline;float:right\"><a ng-click=\"tokenToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <div style=\"clear:both\"></div>\n" +
+    "\n" +
+    "                        </div>\n" +
+    "                        <p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
+    "                        <!--liqudity lookup-->\n" +
+    "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"card-footer\">\n" +
+    "                        <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                        <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                        <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                        <a style=\"padding:0px\" class=\"pull-right\" href=\"work/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
+    "                        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "                            <text-angular ng-model=\"createContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!createContent.content\">create</button>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <!--TODO: FINALIZE-->\n" +
-    "            <div class=\"card\" ng-if=\"item.model=='PROJECT'\" ng-click=\"\">\n" +
+    "\n" +
+    "            <div class=\"card\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
+    "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        <!--\n" +
+    "        </div>\n" +
+    "        -->\n" +
+    "\n" +
+    "        <!--\n" +
+    "        <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-sm-1 col-xs-2\">\n" +
-    "                            <a href=\"project/{{item.urlTitle}}\"><img style=\"width:50px;height:50px;max-width:1000%\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-10 col-xs-10\">\n" +
-    "                            <h3 style=\"margin-top:0px\">\n" +
-    "                                <a href=\"project/{{item.urlTitle}}\">\n" +
-    "                                    {{item.title}}\n" +
-    "                                </a>\n" +
-    "                            </h3>\n" +
-    "                            <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-1\" style=\"text-align:right\">\n" +
-    "                            <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
-    "                        </div>\n" +
+    "                    <span><b>Tags</b></span>\n" +
+    "                    <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
     "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <!--TODO: FINALIZE-->\n" +
-    "            <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-sm-10\">\n" +
-    "                            <h4><a href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
-    "                            <p><a href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
-    "                            <p><span ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
-    "                            <a ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
-    "                            <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
-    "                            <h4>{{item.completeBountySet}} <a href=\"market/{{item.completeIdentifierSet}}\">{{item.completeIdentifierSet}}</a></h4>\n" +
-    "                            <p><a ng-click=\"tokenToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a href=\"task/{{item.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "                    <a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "                </div>\n" +
-    "                <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
-    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"card\" ng-if=\"item.model=='WORK'\" ng-click=\"\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div>\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
-    "                        <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "                        <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
-    "                        <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "                        <a style=\"display:inline;font-weight:600\" href=\"work/{{item.id}}\">{{item.amount}}</a>\n" +
-    "                        <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "\n" +
-    "                        <p style=\"display:inline;float:right\"><a ng-click=\"tokenToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                        <div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "                    <p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
-    "                    <!--liqudity lookup-->\n" +
-    "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
-    "                </div>\n" +
-    "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "                    <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"work/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "                </div>\n" +
-    "                <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
-    "                        <text-angular ng-model=\"createContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!createContent.content\">create</button>\n" +
-    "                    </form>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-10\"></div>\n" +
-    "        <div ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
-    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
-    "        </div>\n" +
+    "        -->\n" +
+    "\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -1365,9 +1412,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
+    "    <!--TODO:-->\n" +
     "    <!--STORY ABOUT VALUE MAPPING HERE!!-->\n" +
     "    <!--FILL OUT THE VALUE FORM-->\n" +
-    "\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-lg-12 col-md-12\">\n" +
@@ -1882,11 +1929,9 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div class=\"row\">\n" +
     "				<div class=\"col-md-8\">\n" +
     "					<div style=\"padding:16px;\">\n" +
-    "\n" +
     "						<span>\n" +
     "							<span ng-repeat=\"dimension in baseMarkets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
     "							<a href=\"#\">+ Dimension</a>\n" +
-    "\n" +
     "							<form style=\"display:flex;flex-direction:row;\">\n" +
     "				            	<input ng-model=\"newMarket.baseMarket\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\">\n" +
     "				            	<div ng-click=\"addMarket('baseMarket')\" style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
@@ -1895,15 +1940,10 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "					                </a>\n" +
     "								</div>\n" +
     "				        	</form>\n" +
-    "\n" +
     "						</span>\n" +
-    "\n" +
     "						<br>\n" +
-    "\n" +
     "						<highchart config=\"chartMap\"></highchart>\n" +
-    "\n" +
     "						<br>\n" +
-    "\n" +
     "						<span>\n" +
     "							<span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
     "							<a href=\"#\">+ Dimension</a>\n" +
@@ -1916,9 +1956,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "					                </a>\n" +
     "								</div>\n" +
     "				        	</form>\n" +
-    "\n" +
     "						</span>\n" +
-    "\n" +
     "						<br>\n" +
     "						<h5>Explore</h5>\n" +
     "						<span ng-repeat=\"market in markets\"><a href=\"market/{{market}}\">{{market}} </a></span>\n" +
@@ -3265,7 +3303,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Amount\" type=\"number\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					<input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group col-sm-12\">\n" +
     "					<tags-input ng-model=\"newTransaction.ledger\" placeholder=\"Tags\">\n" +
@@ -3658,6 +3696,31 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <!--TODO-->\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"confirm\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <h1>Success!</h1>\n" +
+    "                <div ng-if=\"confirm.modelType == 'CONTENT'\">\n" +
+    "                    <p>{{confirm.title}}</p>\n" +
+    "                    <p>{{confirm.associatedModels}}</p>\n" +
+    "                    <p>{{confirm.tags}}</p>\n" +
+    "                    <p>{{confirm.type}}</p>\n" +
+    "                    <p>{{confirm.content}}</p>\n" +
+    "                    <p>{{confirm.user}}</p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'ITEM'\"></div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'ORDER'\"></div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'PROJECT'\"></div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'TRANSACTION'\">\n" +
+    "                    <p>{{confirm.to}}</p>\n" +
+    "                    <p>{{confirm.from}}</p>\n" +
+    "                    <p>{{confirm.identifier}}</p>\n" +
+    "                    <p>{{confirm.amount}}</p>\n" +
+    "                    <p>{{confirm.tags}}</p>\n" +
+    "                    <p>{{confirm.content}}</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
@@ -3691,7 +3754,49 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    </md-sidenav>\n" +
     "\n" +
     "    <!--TODO-->\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"information\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <p>{{information}}</p>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"login\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div class=\"page-heading\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <div class=\"container\">\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-10 col-md-offset-1\">\n" +
+    "                            <h2>Login | Welcome back!</h2>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-md-10 col-md-offset-1\">\n" +
+    "                    <div class=\"login-form\">\n" +
+    "                        <form role=\"form\" method=\"post\" action=\"/auth/local\">\n" +
+    "                            <div class=\"form-group\">\n" +
+    "                                <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\"> \n" +
+    "                                <i class=\"fa fa-user\"></i>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"form-group log-status\">\n" +
+    "                                <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\"> \n" +
+    "                                <i class=\"fa fa-lock\"></i>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"align-right\">\n" +
+    "                                <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign in</button>\n" +
+    "                            </div>\n" +
+    "                            <br><br>\n" +
+    "                            <div class=\"social-log\">\n" +
+    "                                <a style=\"text-align:center\" href=\"/register\"><h4>Need an Account?</h4></a>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
@@ -3794,7 +3899,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        </ul>\n" +
     "                    </li>\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
-    "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>\n" +
+    "                    <!--<li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>-->\n" +
+    "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
     "                </ul>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -4587,7 +4693,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Amount\" type=\"number\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
+    "					<input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
     "				</div>\n" +
     "				<div class=\"form-group col-sm-6\">\n" +
     "					<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\">\n" +

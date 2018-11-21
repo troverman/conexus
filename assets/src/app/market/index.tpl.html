@@ -33,11 +33,9 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div style="padding:16px;">
-
 						<span>
 							<span ng-repeat="dimension in baseMarkets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
 							<a href="#">+ Dimension</a>
-
 							<form style="display:flex;flex-direction:row;">
 				            	<input ng-model="newMarket.baseMarket" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter">
 				            	<div ng-click="addMarket('baseMarket')" style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
@@ -46,15 +44,10 @@
 					                </a>
 								</div>
 				        	</form>
-
 						</span>
-
 						<br>
-
 						<highchart config="chartMap"></highchart>
-
 						<br>
-
 						<span>
 							<span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
 							<a href="#">+ Dimension</a>
@@ -67,9 +60,7 @@
 					                </a>
 								</div>
 				        	</form>
-
 						</span>
-
 						<br>
 						<h5>Explore</h5>
 						<span ng-repeat="market in markets"><a href="market/{{market}}">{{market}} </a></span>

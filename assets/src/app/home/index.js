@@ -95,14 +95,14 @@ angular.module( 'conexus.home', [
     };
     $scope.markers = [];
 
-    $scope.posts = posts;
+    $scope.contentList = posts;
     $scope.projects = projects;
     $scope.newReaction = {};
     $scope.searchResults = [];
     $scope.tasks = tasks;
     $scope.work = work;
 
-    $scope.posts = $scope.posts.map(function(obj){
+    $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
     });
@@ -119,7 +119,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.posts, $scope.projects, $scope.tasks, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
     
@@ -172,26 +172,36 @@ angular.module( 'conexus.home', [
 
     $scope.createReaction = function(content, type){
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
             if (type =='plus'){$scope.activity[index].plusCount++}
             if (type =='minus'){$scope.activity[index].minusCount++}
-
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};
             });
-
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
+    //TODO: BETTER
+    $scope.filterContent = function(filter) {
+        $rootScope.stateIsLoading = true;
+        PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = contentList;
+            $scope.loadTags();
+        });
+    };
+
+    $scope.loginToggle = function(){
+        $mdSidenav('login').toggle();
+    };
+
+    //TODO: BETTER
     $scope.renderContent = function(content){
-        //return null;
         if (content){
             if (!content.includes('>')){
                 var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
@@ -207,7 +217,7 @@ angular.module( 'conexus.home', [
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].showReply = !$scope.activity[index].showReply;
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.search = function(){
@@ -237,23 +247,6 @@ angular.module( 'conexus.home', [
         type: 'PROFILE',
     };
 
-    $scope.sideNavToggle = function(){
-        $mdSidenav('nav').toggle();
-    };
-
-    $scope.contentToggle = function(){
-        $mdSidenav('content').toggle();
-    };
-
-    $scope.transactionToggle = function(){
-        $mdSidenav('transaction').toggle();
-    };
-
-    $scope.tokenToggle = function(item){
-        $rootScope.globalTokens = item;
-        $mdSidenav('tokens').toggle();
-    };
-
     //REORGANIZE
     UserModel.getByUsername($scope.currentUser.username).then(function(model){
         $scope.currentUser = model;
@@ -266,14 +259,14 @@ angular.module( 'conexus.home', [
     };
     $scope.markers = [];
 
-	$scope.posts = posts;
+	$scope.contentList = posts;
 	$scope.projects = projects;
 	$scope.newReaction = {};
 	$scope.searchResults = [];
     $scope.tasks = tasks;
 	$scope.work = work;
 
-    $scope.posts = $scope.posts.map(function(obj){
+    $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
     });
@@ -290,7 +283,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.posts, $scope.projects, $scope.tasks, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.work]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
     
@@ -341,23 +334,20 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-
 	UserModel.getByUsername($scope.currentUser.username).then(function(member){
 		$scope.member = member;
         $scope.balance = member.balance;
         $scope.reputation = member.reputation;
 	});
 
+
     //IF VALUE MAP | REFACTOR 
     $scope.newOrder = [];
     $scope.newContent = {};
     $scope.transactions = transactions;
-
     //tags
     //orders, tasks, transactions
-    //$scope.discoverTags = $scope.tasks.filter(function(obj){return obj.tags}).map(function(obj){return obj.tags});
     //$scope.orderTags = orders;
-
     $scope.tasks = $scope.tasks.map(function(obj){
         obj.model = 'TASK';
         return obj;
@@ -366,8 +356,9 @@ angular.module( 'conexus.home', [
         obj.model = 'TRANSACTION';
         return obj;
     });
-
     $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
+    //VALUE MAP ^^
+
 
     //TEMP | TODO: FIX
     $scope.discover = $scope.discover.map(function(obj){
@@ -405,6 +396,10 @@ angular.module( 'conexus.home', [
         $scope.newOrder.push([model,'0.1 UNIVERSAL TOKEN']);
     };
 
+    $scope.contentToggle = function(){
+        $mdSidenav('content').toggle();
+    };
+
     $scope.createOrder = function(post){
         $scope.newOrder = [];
     };
@@ -417,6 +412,43 @@ angular.module( 'conexus.home', [
         PostModel.create($scope.newContent).then(function(model) {
             $scope.newContent = {};
         });
+    };
+
+    //TODO: BETTER
+    $scope.filterContent = function(filter) {
+        $rootScope.stateIsLoading = true;
+        PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = contentList;
+            $scope.loadTags();
+        });
+    };
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        $scope.tags = $scope.contentList.map(function(obj){
+            console.log(obj);
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
+
+    $scope.loginToggle = function(){
+        $mdSidenav('login').toggle();
     };
 
     //TODO SERVER | CHAIN
@@ -432,29 +464,23 @@ angular.module( 'conexus.home', [
         if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
     };
 
-
     $scope.createReaction = function(content, type){
     	if($scope.currentUser){
-
 	    	$scope.newReaction.amount = 1;
             $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
 	    	var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
 	    	if (type =='plus'){$scope.activity[index].plusCount++}
 	    	if (type =='minus'){$scope.activity[index].minusCount++}
-
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};
             });
-
 		}
     	else{$location.path('/login')}
     };
 
 	$scope.renderContent = function(content){
-        //return null;
         if (content){
             if (!content.includes('>')){
                 var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
@@ -482,6 +508,19 @@ angular.module( 'conexus.home', [
                 return obj;
             });
         });
+    };
+
+    $scope.sideNavToggle = function(){
+        $mdSidenav('nav').toggle();
+    };
+
+    $scope.transactionToggle = function(){
+        $mdSidenav('transaction').toggle();
+    };
+
+    $scope.tokenToggle = function(item){
+        $rootScope.globalTokens = item;
+        $mdSidenav('tokens').toggle();
     };
 
 }]);

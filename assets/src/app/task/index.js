@@ -225,7 +225,6 @@ angular.module( 'conexus.task', [
         WorkModel.create(workModel).then(function(model){
 
             $scope.work.unshift(model);
-
             $scope.workContent = '';
 
             //UPDATE TO HAVE PARENT AS WORK MODEL

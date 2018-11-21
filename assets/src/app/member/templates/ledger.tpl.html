@@ -105,7 +105,7 @@
 					<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group col-sm-6">
-					<input placeholder="Amount" type="number" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
+					<input placeholder="Amount" type="number" step="any" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
 				</div>
 				<div class="form-group col-sm-12">
 					<tags-input ng-model="newTransaction.ledger" placeholder="Tags">

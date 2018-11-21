@@ -443,8 +443,43 @@ module.exports = {
 		function path(start, finish){
 		};
 
+		//VECTOR
+		function valueMatrix(identiferSet){
+
+			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+
+				const valueMatrixTensor = tf.input({shape: [orderModels.length, 8]});
+
+				var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
+
+				for (x in orderModels){
+					if (orderModels[x].identiferSet1.split(',').length==1){
+
+						for(var i=0; i<=dimObj.rank;i++){
+
+							dimObj.data.push({
+								identiferSet:orderModels[x].identiferSet1, 
+								amountSet:orderModels[x].amountSet1
+							});
+
+						}
+
+					}
+				}
+
+				console.log(dimObj);
+
+			});
+
+		};
+
 		//train('A', 0, 8);
-		train('A', 0, 3);
+		//train('A', 0, 3);
+
+		//VALUE MATRIX | 2ND ORDER
+		valueMatrix('B,A');
+
+
 		//powersetDecompose(['A','B','C', ['A','B'], ['B','C'], ['A','C'], ['A','B','C']], {});
 		//identityWalk('A', 0, 3);
 
