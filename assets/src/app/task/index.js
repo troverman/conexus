@@ -217,14 +217,15 @@ angular.module( 'conexus.task', [
         };
 
         if ($scope.workTags){
-            workModel.tags = $scope.workTags.tags.map(function(obj){
+            workModel.tags = $scope.workTags.map(function(obj){
                 return obj.text
             }).join(",");
         }
 
         WorkModel.create(workModel).then(function(model){
-            console.log(model);
-            $scope.work.push(model);
+
+            $scope.work.unshift(model);
+
             $scope.workContent = '';
 
             //UPDATE TO HAVE PARENT AS WORK MODEL

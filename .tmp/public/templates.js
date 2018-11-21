@@ -3599,9 +3599,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/logout\">Logout</a></h2>\n" +
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
     "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
-    "                <!--LINKS-->\n" +
     "                <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
     "\n" +
+    "                <!--LINKS-->\n" +
     "                <!--<br>\n" +
     "                <span>\n" +
     "                    <a style=\"color:white\" href=\"https://www.instagram.com/conex.us\"><i class=\"fa fa-instagram\"></i></a>\n" +
@@ -3628,6 +3628,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
     "                        <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></h4>\n" +
     "                    --> \n" +
+    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}\">Map</a></h4>-->\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/members\">{{project.memberCount}} Members</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/marketplace\">Marketplace</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
@@ -3654,6 +3655,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
+    "\n" +
+    "    <!--TODO-->\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"confirm\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -3684,32 +3690,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"transaction\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:50%;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <h3 style=\"\">Create Transaction</h3>\n" +
-    "                <p style=\"color:gray\">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <form role=\"form\" ng-submit=\"createTransaction()\">\n" +
-    "                    <h5>Address From</h5>\n" +
-    "                    <input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\">\n" +
-    "                    <h5>Address To</h5>\n" +
-    "                    <input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\">\n" +
-    "                    <h5>Asset</h5>\n" +
-    "                    <input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\">\n" +
-    "                    <h5>Amount</h5>\n" +
-    "                    <input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
-    "                    <h5>Tags</h5>\n" +
-    "                    <tags-input placeholder=\"Tags\" ng-model=\"newTransaction.tags\"></tags-input>\n" +
-    "                    <h5>Description</h5>\n" +
-    "                    <textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "    <!--TODO-->\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"login\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "     <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -3739,6 +3724,32 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"transaction\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:50%;max-width:100%\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <h3 style=\"\">Create Transaction</h3>\n" +
+    "                <p style=\"color:gray\">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <form role=\"form\" ng-submit=\"createTransaction()\">\n" +
+    "                    <h5>Address From</h5>\n" +
+    "                    <input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\">\n" +
+    "                    <h5>Address To</h5>\n" +
+    "                    <input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\">\n" +
+    "                    <h5>Asset</h5>\n" +
+    "                    <input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\">\n" +
+    "                    <h5>Amount</h5>\n" +
+    "                    <input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
+    "                    <h5>Tags</h5>\n" +
+    "                    <tags-input placeholder=\"Tags\" ng-model=\"newTransaction.tags\"></tags-input>\n" +
+    "                    <h5>Description</h5>\n" +
+    "                    <textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
+    "    <!--TODO: DEPRECIATE-->\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"navbar-header\">\n" +
@@ -3957,16 +3968,18 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "            <div class=\"nav-toggle\" ng-click=\"subNavToggle()\">\n" +
     "                <a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
     "            </div>\n" +
+    "            <!--<li><a class=\"btn btn-default\" ng-click=\"transactionToggle()\">Send Tokens</a></li>-->\n" +
+    "            <!--SEARCH-->\n" +
+    "            <!--<div class=\"card\">\n" +
+    "                <form style=\"display:flex;flex-direction:row;\">\n" +
+    "                    <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
+    "                </form>\n" +
+    "            </div>-->\n" +
     "        </div>\n" +
-    "        <div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
+    "\n" +
+    "        <!--<div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
     "            <md-divider style=\"color:gray\"></md-divider>\n" +
     "            <div class=\"\">\n" +
-    "                <!--SEARCH-->\n" +
-    "                <!--<div class=\"card\">\n" +
-    "                    <form style=\"display:flex;flex-direction:row;\">\n" +
-    "                        <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-keyup=\"keyPress(searchQuery)\">\n" +
-    "                    </form>\n" +
-    "                </div>-->\n" +
     "                <br>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/about\">About</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}\">Activity</a></h4>\n" +
@@ -3975,7 +3988,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                <h4><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/members\">{{project.memberCount}} Members</a></h4>\n" +
-    "                <!--<h4><a href=\"project/{{project.urlTitle}}\">Map</a></h4>-->\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/marketplace\">Marketplace</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                <h4><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
@@ -3986,7 +3998,8 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                <button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">Send Tokens</button>\n" +
     "                <br>\n" +
     "            </div>\n" +
-    "        </div>\n" +
+    "        </div>-->\n" +
+    "\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +

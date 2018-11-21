@@ -38,9 +38,9 @@
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/logout">Logout</a></h2>
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/login">Login</a></h2>
                 <h2 ng-show="!currentUser"class="nav-links" style="padding:16px;"><a href="/register">Register</a></h2>
-                <!--LINKS-->
                 <a href="/"><img style="width:200px" src="images/hyper.gif"></a>
 
+                <!--LINKS-->
                 <!--<br>
                 <span>
                     <a style="color:white" href="https://www.instagram.com/conex.us"><i class="fa fa-instagram"></i></a>
@@ -67,6 +67,7 @@
                         <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
                         <h4 class="nav-links"><a href="project/{{project.urlTitle}}/assets">Assets</a></h4>
                     --> 
+                    <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}">Map</a></h4>-->
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/members">{{project.memberCount}} Members</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/marketplace">Marketplace</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
@@ -93,6 +94,11 @@
             </div>
         </div>
     </md-sidenav>
+
+    <!--TODO-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="confirm" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+    </md-sidenav>
+
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="content" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
@@ -123,32 +129,11 @@
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="transaction" md-is-locked-open="false" style="position:fixed;background-color:white;width:50%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
-            <div style="padding:16px;">
-                <div class="spacing-25"></div>
-                <h3 style="">Create Transaction</h3>
-                <p style="color:gray">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a href="#"><i class="fa fa-question-circle"></i></a></p>
-                <form role="form" ng-submit="createTransaction()">
-                    <h5>Address From</h5>
-                    <input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control">
-                    <h5>Address To</h5>
-                    <input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control">
-                    <h5>Asset</h5>
-                    <input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control">
-                    <h5>Amount</h5>
-                    <input placeholder="Amount" type="number" step="any" ng-model="newTransaction.amount" class="form-control">
-                    <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newTransaction.tags"></tags-input>
-                    <h5>Description</h5>
-                    <textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
-                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
-                </form>
-            </div>
-        </div>
+    <!--TODO-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="login" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
     </md-sidenav>
 
-     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="tokens" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="tokens" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
@@ -178,6 +163,32 @@
         </div>
     </md-sidenav>
 
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="transaction" md-is-locked-open="false" style="position:fixed;background-color:white;width:50%;max-width:100%">
+        <div class="md-list-item-text" layout="column" style="height:100%;">
+            <div style="padding:16px;">
+                <div class="spacing-25"></div>
+                <h3 style="">Create Transaction</h3>
+                <p style="color:gray">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a href="#"><i class="fa fa-question-circle"></i></a></p>
+                <form role="form" ng-submit="createTransaction()">
+                    <h5>Address From</h5>
+                    <input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control">
+                    <h5>Address To</h5>
+                    <input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control">
+                    <h5>Asset</h5>
+                    <input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control">
+                    <h5>Amount</h5>
+                    <input placeholder="Amount" type="number" step="any" ng-model="newTransaction.amount" class="form-control">
+                    <h5>Tags</h5>
+                    <tags-input placeholder="Tags" ng-model="newTransaction.tags"></tags-input>
+                    <h5>Description</h5>
+                    <textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
+                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
+                </form>
+            </div>
+        </div>
+    </md-sidenav>
+
+    <!--TODO: DEPRECIATE-->
     <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
         <div class="container">
             <div class="navbar-header">
