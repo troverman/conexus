@@ -1,9 +1,22 @@
 <style>
+
     .navbar-inverse .navbar-toggle{border-color:#000;}
     .navbar-inverse .navbar-brand:focus{color:#000}
     .navbar-inverse .navbar-brand:active{color:#000}
     .navbar-inverse .navbar-brand:hover{color:#000}
     .navbar-toggle{border-radius:0px;}
+
+    @media (max-width: 991px){
+        h2{font-size:20px;}
+        h3{font-size:20px;}
+        .mobileHide{display:none;}
+    }
+
+    @media (min-width: 991px){
+        h2{font-size:30px}
+        .mobileHide{display:block;}
+    }   
+
 </style>
 
 <div ng-controller="NavCtrl">
@@ -166,7 +179,7 @@
                 <div class="spacing-25"></div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
+                        <div class="col-xs-10 col-xs-offset-1">
                             <h2>Login | Welcome back!</h2>
                         </div>
                     </div>
@@ -175,7 +188,7 @@
             </div>
             <div class="spacing-25"></div>
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-xs-10 col-xs-offset-1">
                     <div class="login-form">
                         <form role="form" method="post" action="/auth/local">
                             <div class="form-group">

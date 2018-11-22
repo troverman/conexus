@@ -105,8 +105,23 @@ angular.module( 'conexus.nav', [
         else{$location.path('/login')}
     };
 
-    $scope.loginToggle = function(){$mdSidenav('login').toggle();};
-    $scope.sideNavToggle = function(){$mdSidenav('nav').toggle();};
+    //MEH
+    $scope.loginToggle = function(){
+        $mdSidenav('nav').close();
+        $mdSidenav('subNav').close();
+        $mdSidenav('content').close();
+        $mdSidenav('tokens').close();
+        $mdSidenav('transaction').close();
+        $mdSidenav('login').toggle();
+    };
+    $scope.sideNavToggle = function(){
+        $mdSidenav('subNav').close();
+        $mdSidenav('content').close();
+        $mdSidenav('login').close();
+        $mdSidenav('tokens').close();
+        $mdSidenav('transaction').close();
+        $mdSidenav('nav').toggle();
+    };
     $scope.selectType = function(type){$scope.selectedType = type;};
 
 }]);

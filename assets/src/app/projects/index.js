@@ -18,7 +18,7 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $sailsSocket, $sce, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
+.controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
 	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newProject = {};
@@ -50,10 +50,13 @@ angular.module( 'conexus.projects', [
     }
 
     $scope.createProject = function(newProject) {
-        $scope.newProject.user = $scope.currentUser.id;
-        ProjectModel.create($scope.newProject).then(function(model) {
-            $scope.newProject = {};
-        });
+        if ($scope.currentUser){
+            $scope.newProject.user = $scope.currentUser.id;
+            ProjectModel.create($scope.newProject).then(function(model) {
+                $scope.newProject = {};
+            });
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.loadMore = function() {
@@ -66,7 +69,10 @@ angular.module( 'conexus.projects', [
     };
 
     $scope.newProjectToggle = function () {
-        $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+        if ($scope.currentUser){
+            $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.renderContent = function(content){

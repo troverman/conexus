@@ -156,7 +156,7 @@ angular.module( 'conexus.content', [
                 //ADD TO LIST
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.createReaction = function(content, type){
@@ -186,8 +186,7 @@ angular.module( 'conexus.content', [
             });
 
         }
-
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //YIKES

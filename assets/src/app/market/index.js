@@ -22,7 +22,6 @@ angular.module( 'conexus.market', [
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
-
     $scope.market = {
         title: $scope.stateParams.id,
         circulation: Math.floor(Math.random()*1000000),

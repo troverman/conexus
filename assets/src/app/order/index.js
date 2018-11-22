@@ -34,7 +34,7 @@ angular.module( 'conexus.order', [
         'CREATE+ORDER+'+$scope.order.identiferSet, 
         'CREATE+ORDER+'+$scope.order.identiferSet1, 
         'CREATE+ORDER+'+$scope.order.identiferSet+'-'+$scope.order.identiferSet1, 
-        $scope.order.id
+        $scope.order.id,
     ];
 
     //TODO
@@ -47,7 +47,7 @@ angular.module( 'conexus.order', [
                 $scope.newPost = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
    //YIKES

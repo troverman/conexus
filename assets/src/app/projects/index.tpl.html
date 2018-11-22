@@ -22,84 +22,84 @@
     </div>
 </div>
 
-<!--UNIFY-->
-<div class="container" ng-show="currentUser">
-    <div class="spacing-15"></div>
+<div class="container">
+
+    <div class="spacing-10"></div>
+
     <div class="row">
-        <div class="col-xs-12">
+
+        <div class="card">
             <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button>
-            <div ng-show="newProjectToggleVar">
-
-                <div class="spacing-10"></div>
-                <form class="blog-input" role="form" ng-submit="createProject()">
-                    <div class="form-group">
-                        <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
-                        <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
-                        <input type="text" placeholder="Location" ng-model="newProject.address" class="form-control">
-                        <text-angular placeholder= "Description" ng-model="newProject.description" ta-toolbar="''"></text-angular>
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn">create</button>
-                </form>
-
-            </div>
         </div>
-    </div>
-</div>
 
-<div class="container">
-    <div class="spacing-15"></div>
-    <div class="card">
-        <form style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
-            <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-                <a ng-click="keyPress(searchQuery)" href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
+        <div class="card">
+            <form style="display:flex;flex-direction:row;">
+                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+                <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
+                    <a ng-click="keyPress(searchQuery)" href="#" role="button">
+                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                    </a>
+                </div>
+            </form>
+        </div>
 
-<div class="container">
-    <div class="card">
-        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
-        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-                <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-                    <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
-                </ui-gmap-window>
-            </ui-gmap-marker>
-        </ui-gmap-google-map>
-    </div>
-</div>
+        <div class="card">
+            <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
 
-<div class="container">
-    <div ng-repeat="project in projects">
-        <div class="card" ng-click="">
-            <div style="padding:16px;">
-                <div class="row">
-                    <div class="col-sm-1 col-xs-2">
-                        <a href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a>
-                    </div>
-                    <div class="col-sm-9 col-xs-10">
-                        <h3 style="margin-top:0px">
-                            <a href="/project/{{project.urlTitle}}">
-                                <!--<img style="width:50px;height:50px;margin-right:5px" src="{{project.avatarUrl}}">-->
-                                {{project.title}}
-                            </a>
-                        </h3>
-                        <p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p>
-                    </div>
-                    <div class="col-sm-2" style="text-align:right">
-                        <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
+        <!--UNIFY-->
+        <!--<div class="card">
+            <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button>
+        </div>-->
+
+        <div ng-show="newProjectToggleVar">
+            <form class="blog-input" role="form" ng-submit="createProject()">
+                <div class="form-group">
+                    <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
+                    <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
+                    <input type="text" placeholder="Location" ng-model="newProject.address" class="form-control">
+                    <text-angular placeholder= "Description" ng-model="newProject.description" ta-toolbar="''"></text-angular>
+                </div>
+                <button type="submit" class="btn btn-default log-btn">create</button>
+            </form>
+        </div>
+
+        <div ng-repeat="project in projects">
+            <div class="card" ng-click="">
+                <div style="padding:16px;">
+                    <div class="row">
+                        <div class="col-sm-1 col-xs-2">
+                            <a href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a>
+                        </div>
+                        <div class="col-sm-9 col-xs-10">
+                            <h3 style="margin-top:0px">
+                                <a href="/project/{{project.urlTitle}}">
+                                    <!--<img style="width:50px;height:50px;margin-right:5px" src="{{project.avatarUrl}}">-->
+                                    {{project.title}}
+                                </a>
+                            </h3>
+                            <p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p>
+                        </div>
+                        <div class="col-sm-2" style="text-align:right">
+                            <h4><a href="project/{{project.urlTitle}}">Join</a></h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div ng-click="loadMore()" class="card">
+            <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+        </div>
+
     </div>
-    <div ng-click="loadMore()" class="card">
-        <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
-    </div>
+
 </div>
 
 <div class="spacing-50"></div>

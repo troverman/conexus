@@ -205,7 +205,7 @@ angular.module( 'conexus.member', [
                 $scope.newTransaction = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.contentToggle = function(){
@@ -218,10 +218,14 @@ angular.module( 'conexus.member', [
             $scope.newFollower.follower = $scope.currentUser.id;
             FollowerModel.create($scope.newFollower).then(function(model) {
                 $scope.newFollower = {};
+                $mdSidenav('confirm').open();
+                setTimeout(function () {
+                    $mdSidenav('confirm').close();
+                }, 5000);
             });
+
         }
-        //$mdSidebar --> confirmation
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.newTransactionToggle = function() {
@@ -248,7 +252,7 @@ angular.module( 'conexus.member', [
         if ($scope.currentUser){
             FollowerModel.delete(member);
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: SOCKET | WEB3
@@ -333,7 +337,7 @@ angular.module( 'conexus.member', [
             });
 
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //YIKES
@@ -634,7 +638,7 @@ angular.module( 'conexus.member', [
                 $scope.content.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: MODELS | ONLY POST/CONTENT
@@ -654,7 +658,7 @@ angular.module( 'conexus.member', [
             });
 
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.contentToggle = function(){
@@ -760,7 +764,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberLedgerCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
+.controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
     
     $scope.assetSet = 'CRE8';
     $scope.currentUser = config.currentUser;
@@ -1040,7 +1044,7 @@ angular.module( 'conexus.member', [
             var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
         }
-        else{$location.path('/login')}
+        //else{$mdSidenav('login').toggle()}
     };
 
     $scope.newTransactionToggle = function(){
@@ -1049,7 +1053,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberPositionsCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
+.controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     $scope.orders = orders;
@@ -1134,7 +1138,7 @@ angular.module( 'conexus.member', [
                 $scope.newOrder = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO
@@ -1157,7 +1161,7 @@ angular.module( 'conexus.member', [
     $scope.search = function(){};
 
     /*
-    $sailsSocket.subscribe('follower', function (envelope) {
+    $sailsSocket.subscribe('projectMember', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.followers.unshift(envelope.data);
@@ -1172,7 +1176,7 @@ angular.module( 'conexus.member', [
 }])
 
 
-.controller( 'MemberTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', 'WorkModel', function MemberTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work, WorkModel) {
+.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', 'WorkModel', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work, WorkModel) {
     
     $scope.currentUser = config.currentUser;
 
@@ -1279,7 +1283,7 @@ angular.module( 'conexus.member', [
             });
 
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.newTimeToggle = function() {

@@ -448,21 +448,21 @@ module.exports = {
 
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
 
-				const valueMatrixTensor = tf.input({shape: [orderModels.length, 8]});
+				const valueMatrixTensor = tf.input({shape: [orderModels.length, identiferSet.split(',').length]});
 
 				var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
 
 				for (x in orderModels){
 					if (orderModels[x].identiferSet1.split(',').length==1){
 
-						for(var i=0; i<=dimObj.rank;i++){
+						//for(var i=0; i<dimObj.rank;i++){
 
 							dimObj.data.push({
 								identiferSet:orderModels[x].identiferSet1, 
 								amountSet:orderModels[x].amountSet1
 							});
 
-						}
+						//}
 
 					}
 				}
@@ -478,6 +478,9 @@ module.exports = {
 
 		//VALUE MATRIX | 2ND ORDER
 		valueMatrix('B,A');
+
+		//PUZZLE
+		//[a,b]->[c,d]
 
 
 		//powersetDecompose(['A','B','C', ['A','B'], ['B','C'], ['A','C'], ['A','B','C']], {});

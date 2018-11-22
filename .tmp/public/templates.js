@@ -772,9 +772,7 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "    \n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <div style=\"padding:10px;\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button>\n" +
-    "            </div>\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -1365,13 +1363,13 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"spacing-50\"></div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
-    "            <div class=\"col-md-6\" style=\"text-align:center\">\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -1924,6 +1922,14 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	    </div>\n" +
     "	</div>\n" +
     "\n" +
+    "	<!--MANIFOLD SORTING-->\n" +
+    "	<!--POPULAT MANIFOLDS-->\n" +
+    "	<!--PROTOCOLPLUGINS-->\n" +
+    "	<!--FUTURES, OPTIONS, PROJECT, WORK, CONTENT, ETC-->\n" +
+    "	<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->\n" +
+    "	<!--+FUTURE+TIME-->\n" +
+    "	<!--+OPTION+TIME-->\n" +
+    "\n" +
     "	<!--<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div class=\"row\">\n" +
@@ -2124,6 +2130,15 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "	-->\n" +
     "\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<h2>Trade Positions</h2>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
@@ -2138,6 +2153,12 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "				<h2>Content</h2>\n" +
     "		    </div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Post</button>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\" ng-show=\"currentUser\">\n" +
@@ -2189,12 +2210,12 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-10\">\n" +
+    "            <div class=\"col-xs-10\">\n" +
     "            	<h1><a style=\"color:white\" href=\"market/{{market}}\">{{market}}</a> | <a style=\"color:white\"  href=\"market/{{market1}}\">{{market1}}</a></h1>\n" +
     "				<p style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>\n" +
     "				<p style=\"color:white\">Last Trade Price: {{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | Highest Bid {{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}} | Lowest Ask {{bidAskChart.series[1].data[0][0].toFixed(2)}}</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-md-2\" style=\"padding:16px;text-align:right\">\n" +
+    "            <div class=\"col-xs-2\" style=\"padding:16px;text-align:right\">\n" +
     "				<a style=\"color:white\" href=\"market/{{market1}}/{{market}}\"><i class=\"fa fa-refresh\"></i></a>\n" +
     "			</div>\n" +
     "        </div>\n" +
@@ -2280,9 +2301,9 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "					<div class=\"col-sm-6 form-group\">\n" +
     "						<div class=\"col-sm-6\"><input placeholder=\"{{market}} Amount\" type=\"number\" ng-model=\"newOrder.amountSet\" class=\"form-control\"></div>\n" +
     "						<div class=\"col-sm-6\"><input placeholder=\"{{market1}} / {{market}} Price\" type=\"text\" ng-model=\"newOrder.amountSet1Price\" class=\"form-control\"></div>\n" +
-    "\n" +
     "					</div>\n" +
     "\n" +
+    "					<!--THIS SUBMITES FORM?-->\n" +
     "					<div style=\"text-align:center;margin-bottom:15px\" class=\"col-sm-12\">\n" +
     "						<button ng-click=\"invertMarket()\" style=\"width:100px\" class=\"btn btn-default log-btn\"><i class=\"fa fa-refresh\"></i> Invert</button>\n" +
     "					</div>\n" +
@@ -2408,13 +2429,13 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "	</div>\n" +
     "	-->\n" +
     "\n" +
-    "	<!--<div class=\"row\">\n" +
+    "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>onMint Dimensions</h2>\n" +
     "		    </div>\n" +
     "		</div>\n" +
-    "	</div>-->\n" +
+    "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
@@ -2422,6 +2443,12 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "				<h2>Content</h2>\n" +
     "		    </div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Pair Post | {{market}} | {{market1}}</button>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\" ng-show=\"currentUser\">\n" +
@@ -3598,11 +3625,24 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
 angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/index.tpl.html",
     "<style>\n" +
+    "\n" +
     "    .navbar-inverse .navbar-toggle{border-color:#000;}\n" +
     "    .navbar-inverse .navbar-brand:focus{color:#000}\n" +
     "    .navbar-inverse .navbar-brand:active{color:#000}\n" +
     "    .navbar-inverse .navbar-brand:hover{color:#000}\n" +
     "    .navbar-toggle{border-radius:0px;}\n" +
+    "\n" +
+    "    @media (max-width: 991px){\n" +
+    "        h2{font-size:20px;}\n" +
+    "        h3{font-size:20px;}\n" +
+    "        .mobileHide{display:none;}\n" +
+    "    }\n" +
+    "\n" +
+    "    @media (min-width: 991px){\n" +
+    "        h2{font-size:30px}\n" +
+    "        .mobileHide{display:block;}\n" +
+    "    }   \n" +
+    "\n" +
     "</style>\n" +
     "\n" +
     "<div ng-controller=\"NavCtrl\">\n" +
@@ -3765,7 +3805,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-25\"></div>\n" +
     "                <div class=\"container\">\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-md-10 col-md-offset-1\">\n" +
+    "                        <div class=\"col-xs-10 col-xs-offset-1\">\n" +
     "                            <h2>Login | Welcome back!</h2>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -3774,7 +3814,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"row\">\n" +
-    "                <div class=\"col-md-10 col-md-offset-1\">\n" +
+    "                <div class=\"col-xs-10 col-xs-offset-1\">\n" +
     "                    <div class=\"login-form\">\n" +
     "                        <form role=\"form\" method=\"post\" action=\"/auth/local\">\n" +
     "                            <div class=\"form-group\">\n" +
@@ -4914,6 +4954,8 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "		<div style=\"padding:16px;\">\n" +
     "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
     "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "                <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
     "                <text-angular placeholder=\"Description \"ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
     "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
@@ -5126,84 +5168,84 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<!--UNIFY-->\n" +
-    "<div class=\"container\" ng-show=\"currentUser\">\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
+    "<div class=\"container\">\n" +
+    "\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\">\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
-    "            <div ng-show=\"newProjectToggleVar\">\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
-    "                    <div class=\"form-group\">\n" +
-    "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
-    "                        <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
-    "                        <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
-    "                    </div>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "                </form>\n" +
-    "\n" +
-    "            </div>\n" +
     "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"container\">\n" +
-    "    <div class=\"spacing-15\"></div>\n" +
-    "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <form style=\"display:flex;flex-direction:row;\">\n" +
+    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "                <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                    <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
     "\n" +
-    "<div class=\"container\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "            <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "                <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "                    <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
-    "                </ui-gmap-window>\n" +
-    "            </ui-gmap-marker>\n" +
-    "        </ui-gmap-google-map>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                        <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "                    </ui-gmap-window>\n" +
+    "                </ui-gmap-marker>\n" +
+    "            </ui-gmap-google-map>\n" +
+    "        </div>\n" +
     "\n" +
-    "<div class=\"container\">\n" +
-    "    <div ng-repeat=\"project in projects\">\n" +
-    "        <div class=\"card\" ng-click=\"\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-sm-1 col-xs-2\">\n" +
-    "                        <a href=\"/project/{{project.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{project.avatarUrl}}\"></a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-sm-9 col-xs-10\">\n" +
-    "                        <h3 style=\"margin-top:0px\">\n" +
-    "                            <a href=\"/project/{{project.urlTitle}}\">\n" +
-    "                                <!--<img style=\"width:50px;height:50px;margin-right:5px\" src=\"{{project.avatarUrl}}\">-->\n" +
-    "                                {{project.title}}\n" +
-    "                            </a>\n" +
-    "                        </h3>\n" +
-    "                        <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
-    "                        <h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
+    "        <!--UNIFY-->\n" +
+    "        <!--<div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
+    "        </div>-->\n" +
+    "\n" +
+    "        <div ng-show=\"newProjectToggleVar\">\n" +
+    "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                    <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "                    <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
+    "                    <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                </div>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-repeat=\"project in projects\">\n" +
+    "            <div class=\"card\" ng-click=\"\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-sm-1 col-xs-2\">\n" +
+    "                            <a href=\"/project/{{project.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{project.avatarUrl}}\"></a>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-sm-9 col-xs-10\">\n" +
+    "                            <h3 style=\"margin-top:0px\">\n" +
+    "                                <a href=\"/project/{{project.urlTitle}}\">\n" +
+    "                                    <!--<img style=\"width:50px;height:50px;margin-right:5px\" src=\"{{project.avatarUrl}}\">-->\n" +
+    "                                    {{project.title}}\n" +
+    "                                </a>\n" +
+    "                            </h3>\n" +
+    "                            <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
+    "                            <h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "        <div ng-click=\"loadMore()\" class=\"card\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "        </div>\n" +
+    "\n" +
     "    </div>\n" +
-    "    <div ng-click=\"loadMore()\" class=\"card\">\n" +
-    "        <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
-    "    </div>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>");

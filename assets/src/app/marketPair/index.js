@@ -391,7 +391,6 @@ angular.module( 'conexus.marketPair', [
 
     $scope.createContent = function(content) {
         if($scope.currentUser){
-
             //TODO
             $scope.newContent.post = content.id;
 
@@ -401,23 +400,26 @@ angular.module( 'conexus.marketPair', [
                 $scope.newContent = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: CREATE ORDER
     $scope.createOrder = function() {
-        $scope.newOrder.identiferSet = $scope.stateParams.id;
-        $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
-        $scope.newOrder.user = $scope.currentUser.id;
+        if($scope.currentUser){
+            $scope.newOrder.identiferSet = $scope.stateParams.id;
+            $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
+            $scope.newOrder.user = $scope.currentUser.id;
 
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
+            //TODO: PARSE INPUT
+            //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
+            //$scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
 
-        OrderModel.create($scope.newOrder).then(function(model) {
-            $scope.orders.push($scope.newOrder);
-            $scope.newOrder = {};
-        });
+            OrderModel.create($scope.newOrder).then(function(model) {
+                $scope.orders.push($scope.newOrder);
+                $scope.newOrder = {};
+            });
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.invertMarket = function() {

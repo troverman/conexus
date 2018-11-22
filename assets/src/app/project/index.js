@@ -267,9 +267,10 @@ angular.module( 'conexus.project', [
 
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id}
 
+    //DEPRECIATE?
     $scope.contentToggle = function(){
-        $mdSidenav('content').toggle();
-        //$rootScope.globalTokens = $scope.tokens;
+        if($scope.currentUser){$mdSidenav('content').toggle()}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.createMember = function(){
@@ -280,9 +281,10 @@ angular.module( 'conexus.project', [
                 $scope.newMember = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
+    //DEPRECIATE
     $scope.createTransaction = function(){
         if($scope.currentUser){
             $scope.newTransaction.to = $scope.project.id;
@@ -290,7 +292,7 @@ angular.module( 'conexus.project', [
                 $scope.newTransaction = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.newTransactionToggle = function() {
@@ -386,30 +388,24 @@ angular.module( 'conexus.project', [
                 $scope.activity.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: MODELS | ONLY POST/CONTENT
     $scope.createReaction = function(content, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-
             if (type =='plus'){$scope.contentList[index].plusCount++}
             if (type =='minus'){$scope.contentList[index].minusCount++}
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};
             });
-
         }
-
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //YIKES
@@ -429,7 +425,7 @@ angular.module( 'conexus.project', [
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.activity[index].showReply = !$scope.activity[index].showReply;
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $sailsSocket.subscribe('post', function (envelope) {
@@ -477,7 +473,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, channels, config, posts, project, titleService ) {
+.controller( 'ProjectChannelsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, channels, config, posts, project, titleService ) {
     titleService.setTitle('Channels | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
@@ -494,7 +490,7 @@ angular.module( 'conexus.project', [
                 $scope.posts.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //YIKES
@@ -562,11 +558,7 @@ angular.module( 'conexus.project', [
     }
     $scope.loadTags();
 
-    $scope.contentToggle = function(){
-        $mdSidenav('content').toggle();
-        //$rootScope.globalTokens = $scope.tokens;
-    };
-
+    //DEPRECIATE
     $scope.createContent = function(content) {
         if ($scope.currentUser){
             if(content){$scope.newContent.post = content.id;}
@@ -581,14 +573,15 @@ angular.module( 'conexus.project', [
                 $scope.contentList.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.loadTags = function(query) {
         //return $http.get('/tags?query=' + query);
     };
 
-     $scope.newContentToggle = function() {
+    //DEPRECIATE
+    $scope.newContentToggle = function() {
         $scope.newContentToggleVar = !$scope.newContentToggleVar;
     };
 
@@ -608,7 +601,7 @@ angular.module( 'conexus.project', [
             var index = $scope.content.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.content[index].showReply = !$scope.content[index].showReply;
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.search = function(){};
@@ -624,7 +617,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectCharterCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'motions', 'PostModel', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, motions, PostModel, project, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'motions', 'PostModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, motions, PostModel, project, titleService ) {
     titleService.setTitle('Charter | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMotion = {};
@@ -634,22 +627,19 @@ angular.module( 'conexus.project', [
 
     $scope.createMotion = function(){
         if($scope.currentUser){
-
             $scope.newMotion.user = $scope.currentUser;
             $scope.newMotion.project = $scope.project.id;
             $scope.newMotion.type = 'MOTION';
-
             //RELATIONSHIP | LIST
             $scope.newMotion.relationshipModelAddress = $scope.project.id;
             $scope.newMotion.relationshipModel = 'PROJECT';
-
             PostModel.create($scope.newMotion).then(function(model){
                 $scope.newMotion = {};
                 $scope.motions.unshift(model);
             });
 
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.newMotionToggle = function(){
@@ -672,7 +662,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
+.controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$mdSidenav', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $mdSidenav, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newTransaction = {};
@@ -927,12 +917,12 @@ angular.module( 'conexus.project', [
             var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
 }])
 
-.controller( 'ProjectMarketplaceCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+.controller( 'ProjectMarketplaceCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
 
     $scope.items = items;
     $scope.map = {
@@ -946,7 +936,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMembersCtrl', ['$location', '$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
+.controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
     titleService.setTitle('Members | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.members = members;
@@ -962,7 +952,7 @@ angular.module( 'conexus.project', [
                 //$scope.transactions.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.search = function(){};
@@ -1081,7 +1071,7 @@ angular.module( 'conexus.project', [
     $scope.search = function(){};
 
 }])
-.controller( 'ProjectProjectsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
+.controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
     titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newProjectToggleVar = false;
@@ -1097,7 +1087,7 @@ angular.module( 'conexus.project', [
                 $scope.projects.unshift(model);
             });
         }
-        else{$location.path('/location')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.newProjectToggle = function () {
@@ -1144,7 +1134,7 @@ angular.module( 'conexus.project', [
                 $scope.tasks.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.filterContent = function(filter) {
@@ -1205,7 +1195,7 @@ angular.module( 'conexus.project', [
             var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.tasks[index].showReply = !$scope.tasks[index].showReply;
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.search = function(){};
