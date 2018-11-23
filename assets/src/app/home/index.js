@@ -231,9 +231,57 @@ angular.module( 'conexus.home', [
         });
     };
 
+    //TODO: STORE IN DATA? 
+    //TODO: BUILD PROTOCOL
+    //TODO: AMOUNT
     $scope.tokenToggle = function(item){
-        $rootScope.globalTokens = item;
+
+        var tokens = [item.id];
+
+        if (item.model == 'CONTENT'){
+
+            tokens.push('CONTENT');
+            tokens.push(item.type.toUpperCase());
+            tokens.push('CONTENT+'+item.type.toUpperCase());
+
+            if (item.tags){
+                for (x in item.tags.split(',')){
+                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                }
+            }
+
+        }
+
+        if (item.model == 'TASK'){
+
+            tokens.push('TASK');
+
+            if (item.tags){
+                for (x in item.tags.split(',')){
+                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                }
+            }
+        }
+
+        if (item.model == 'WORK'){
+
+            //TODO: AMOUNT
+            //item.amount
+            tokens.push('WORK');
+
+            if (item.tags){
+                for (x in item.tags.split(',')){
+                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                }
+            }
+        }
+
+        $rootScope.globalTokens = tokens;
         $mdSidenav('tokens').toggle();
+
     };
 
 }])
@@ -339,7 +387,6 @@ angular.module( 'conexus.home', [
         $scope.balance = member.balance;
         $scope.reputation = member.reputation;
 	});
-
 
     //IF VALUE MAP | REFACTOR 
     $scope.newOrder = [];
@@ -477,7 +524,7 @@ angular.module( 'conexus.home', [
                 $scope.newReaction = {};
             });
 		}
-    	else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
 	$scope.renderContent = function(content){
@@ -496,7 +543,7 @@ angular.module( 'conexus.home', [
     		var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
     		$scope.activity[index].showReply = !$scope.activity[index].showReply;
     	}
-    	else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.search = function(){

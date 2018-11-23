@@ -3626,11 +3626,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
   $templateCache.put("nav/index.tpl.html",
     "<style>\n" +
     "\n" +
-    "    .navbar-inverse .navbar-toggle{border-color:#000;}\n" +
-    "    .navbar-inverse .navbar-brand:focus{color:#000}\n" +
-    "    .navbar-inverse .navbar-brand:active{color:#000}\n" +
-    "    .navbar-inverse .navbar-brand:hover{color:#000}\n" +
+    "    .navbar-inverse .navbar-toggle,\n" +
+    "    .navbar-inverse .navbar-toggle:hover,\n" +
+    "    .navbar-inverse .navbar-toggle:focus {\n" +
+    "        background-color: #000;\n" +
+    "    }\n" +
     "    .navbar-toggle{border-radius:0px;}\n" +
+    "    .navbar-inverse .navbar-toggle{border-color:#000;}\n" +
     "\n" +
     "    @media (max-width: 991px){\n" +
     "        h2{font-size:20px;}\n" +
@@ -3848,22 +3850,45 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <p>Tokens distributed on action.<p>\n" +
     "                <p>Content Protocol, Data Protocol, Project Protocol, Reaction Protocol, Task Protocol, Time Protocol, Validation Protocol</p>\n" +
     "                <p>Math desciprion, powerset?</p> \n" +
-    "                <p>Manifold and Action Table</p>\n" +
     "\n" +
-    "                <table>\n" +
-    "                    <tr ng-repeat=\"token in globalTokens\"><td><a href=\"market/{{token}}\">{{token}}</a></td></tr>\n" +
+    "                <table class=\"table table-striped table-hover\">\n" +
+    "                    <thead>\n" +
+    "                        <tr><th>Manifold and Action Table</th></tr>\n" +
+    "                    </thead>\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"token in globalTokens\">\n" +
+    "                            <td><a href=\"market/{{token}}\">{{token}}</a></td>\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
     "                </table>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h3 style=\"\">Market Liquidity and Equality Traverse</h3>\n" +
-    "                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform mating operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us travering rules and computatonal effiecent conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>\n" +
+    "                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us travering rules and computatonal effiecent conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>\n" +
     "\n" +
     "                <p>Input</p>\n" +
-    "                <tags-input ng-model=\"input\" placeholder=\"Input\"></tags-input>\n" +
+    "                <tags-input ng-model=\"inputVector\" placeholder=\"Input\"></tags-input>\n" +
     "                <p>Desired Output</p>\n" +
-    "                <tags-input ng-model=\"output\" placeholder=\"Output\"></tags-input>\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ Lookup</button>\n" +
+    "                <!--TODO: COMPOUND AND PLURALISTIC-->\n" +
+    "                <!--TODO: PERCENTAGE | FIXED AMOUNT -->\n" +
+    "                <tags-input ng-model=\"outputVector\" placeholder=\"Output\"></tags-input>\n" +
+    "                <button ng-click=\"marketTraverse();\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ Lookup</button>\n" +
+    "\n" +
+    "                <table ng-show=\"outputMatix.length > 0\" class=\"table table-striped table-hover\">\n" +
+    "                    <thead>\n" +
+    "                        <tr>\n" +
+    "                            <th>Identifer</th>\n" +
+    "                            <th>Value</th>\n" +
+    "                        </tr>\n" +
+    "                    </thead>\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"assetVector in outputMatix track by $index\">\n" +
+    "                            <td><a href=\"market/{{assetVector.identifer}}\">{{assetVector.identifer}}</a></td>\n" +
+    "                            <td>{{assetVector.value}}</td>\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
+    "                </table>\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -6345,7 +6370,7 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "							<th>Reputation</th>\n" +
     "							<th>Reputation Weighted Validation Score <a ng-click=\"tokenToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
     "						</tr>\n" +
-    "					<thead>\n" +
+    "					</thead>\n" +
     "					<tbody>\n" +
     "						<tr ng-repeat=\"validation in validationList track by $index\">\n" +
     "							<td>{{validation[0]}}</td>\n" +

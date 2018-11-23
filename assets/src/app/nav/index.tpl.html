@@ -1,10 +1,12 @@
 <style>
 
-    .navbar-inverse .navbar-toggle{border-color:#000;}
-    .navbar-inverse .navbar-brand:focus{color:#000}
-    .navbar-inverse .navbar-brand:active{color:#000}
-    .navbar-inverse .navbar-brand:hover{color:#000}
+    .navbar-inverse .navbar-toggle,
+    .navbar-inverse .navbar-toggle:hover,
+    .navbar-inverse .navbar-toggle:focus {
+        background-color: #000;
+    }
     .navbar-toggle{border-radius:0px;}
+    .navbar-inverse .navbar-toggle{border-color:#000;}
 
     @media (max-width: 991px){
         h2{font-size:20px;}
@@ -222,22 +224,45 @@
                 <p>Tokens distributed on action.<p>
                 <p>Content Protocol, Data Protocol, Project Protocol, Reaction Protocol, Task Protocol, Time Protocol, Validation Protocol</p>
                 <p>Math desciprion, powerset?</p> 
-                <p>Manifold and Action Table</p>
 
-                <table>
-                    <tr ng-repeat="token in globalTokens"><td><a href="market/{{token}}">{{token}}</a></td></tr>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr><th>Manifold and Action Table</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="token in globalTokens">
+                            <td><a href="market/{{token}}">{{token}}</a></td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <div class="spacing-10"></div>
 
                 <h3 style="">Market Liquidity and Equality Traverse</h3>
-                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform mating operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us travering rules and computatonal effiecent conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>
+                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us travering rules and computatonal effiecent conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>
 
                 <p>Input</p>
-                <tags-input ng-model="input" placeholder="Input"></tags-input>
+                <tags-input ng-model="inputVector" placeholder="Input"></tags-input>
                 <p>Desired Output</p>
-                <tags-input ng-model="output" placeholder="Output"></tags-input>
-                <button type="submit" style="width:100%" class="btn btn-default log-btn">+ Lookup</button>
+                <!--TODO: COMPOUND AND PLURALISTIC-->
+                <!--TODO: PERCENTAGE | FIXED AMOUNT -->
+                <tags-input ng-model="outputVector" placeholder="Output"></tags-input>
+                <button ng-click="marketTraverse();" type="submit" style="width:100%" class="btn btn-default log-btn">+ Lookup</button>
+
+                <table ng-show="outputMatix.length > 0" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Identifer</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="assetVector in outputMatix track by $index">
+                            <td><a href="market/{{assetVector.identifer}}">{{assetVector.identifer}}</a></td>
+                            <td>{{assetVector.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </div>
         </div>

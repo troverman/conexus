@@ -159,18 +159,21 @@ angular.module( 'conexus.work', [
                 $scope.newContent = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: MODEL | CREATE REACTION | UPDATE POST
     $scope.createReaction = function(post, type){
-        $scope.newReaction.user = $scope.currentUser.id;
-        $scope.newReaction.post = post.id;
-        $scope.newReaction.type = type;
-        //Reaction.create(newReaction);
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        if (type =='plus'){$scope.posts[index].plusCount++}
-        if (type =='minus'){$scope.posts[index].minusCount++}
+        if ($scope.currentUser){
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.post = post.id;
+            $scope.newReaction.type = type;
+            //Reaction.create(newReaction);
+            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+            if (type =='plus'){$scope.posts[index].plusCount++}
+            if (type =='minus'){$scope.posts[index].minusCount++}
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: LAYERS | PROJ BASED LAYER
@@ -185,7 +188,7 @@ angular.module( 'conexus.work', [
                 }
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: IMPROVE
@@ -201,14 +204,16 @@ angular.module( 'conexus.work', [
     };
 
     $scope.reply = function(post){
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        $scope.posts[index].showReply = !$scope.posts[index].showReply
+        if ($scope.currentUser){
+            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
+            $scope.posts[index].showReply = !$scope.posts[index].showReply;
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.tokenToggle = function(){
         $mdSidenav('tokens').toggle();
         $rootScope.globalTokens = $scope.tokens;
-
     };
 
     //TODO: WEBSOCKETS | WEB3

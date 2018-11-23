@@ -4,8 +4,12 @@ angular.module( 'conexus.nav', [
 .controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', function NavController( $location, $mdSidenav, $rootScope, $scope, $state, config, PostModel, TransactionModel ) {
     $scope.currentUser = config.currentUser;
     $scope.confirm = {};
+    $scope.inputVector = [];
     $scope.newContent = {};
     $scope.newTransaction = {};
+    $scope.outputMatix = [];
+    $scope.outputVector = [];
+
     $scope.selectedType = 'POST';
 
     if ($scope.currentUser){
@@ -16,10 +20,19 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction.to = $rootScope.to;
     });
 
+    //TODO: BETTER
+    $scope.$watch('$root.globalTokens', function() {
+        $scope.inputVector = $rootScope.globalTokens;
+        $scope.outputMatix = [];
+        $scope.outputVector = [];
+    });
+
     //TODO: CHANGE PARENT TO ASSOCIATED MODELS
     //TODO: FIX
     $scope.$watch('$root.associatedModel', function() {
-        $scope.newContent.associatedModels = $rootScope.associatedModel.address;
+        if ($scope.associatedModel.address){
+            $scope.newContent.associatedModels = $rootScope.associatedModel.address;
+        }
         $scope.newContent.type = $rootScope.associatedModel.type;
 
         //CHANGE
@@ -47,6 +60,9 @@ angular.module( 'conexus.nav', [
     $rootScope.$on("$stateChangeSuccess", function() {
     	window.scrollTo(0, 0);
     });
+
+    //TODO: GLOBAL FUNCTIONS
+    //$rootScope.createContent = function(){};
 
     //TODO: ASSOCIATED MODELS
     $scope.createContent = function() {
@@ -114,6 +130,8 @@ angular.module( 'conexus.nav', [
         $mdSidenav('transaction').close();
         $mdSidenav('login').toggle();
     };
+
+    //MEH
     $scope.sideNavToggle = function(){
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
@@ -122,6 +140,21 @@ angular.module( 'conexus.nav', [
         $mdSidenav('transaction').close();
         $mdSidenav('nav').toggle();
     };
+
+    $scope.marketTraverse = function(){
+        $scope.outputMatix = [];
+        if ($scope.outputVector.length > 0){
+            //MarketModel.traverse($scope.inputVector, $scope.outputVector).then(function(){
+            for(x in $scope.outputVector){
+                $scope.outputMatix.push({
+                    identifer: $scope.outputVector[x].text,
+                    value: 10*Math.random(),
+                });
+            }
+            //});
+        }
+    };
+
     $scope.selectType = function(type){$scope.selectedType = type;};
 
 }]);
