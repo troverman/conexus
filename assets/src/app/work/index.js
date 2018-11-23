@@ -28,6 +28,8 @@ angular.module( 'conexus.work', [
 .controller( 'WorkController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function WorkController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
     $scope.currentUser = config.currentUser;
     $scope.work = work;
+    if(!$scope.work){$location.path('/')}
+
     titleService.setTitle($scope.work.amount + ' | Work | CRE8.XYZ');
 
     $scope.work.validationScore = 0;

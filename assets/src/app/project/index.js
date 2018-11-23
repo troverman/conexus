@@ -229,10 +229,17 @@ angular.module( 'conexus.project', [
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
     $scope.newTransaction = {};
+
+    //TODO
+    //$ROOTSCOPE --> PASS TO NAV
     $scope.newTransaction.identifier = 'CRE8';
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
+
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
+
+    //TODO: MEH
+    if(!$scope.project){$location.path('/')}
 
     $rootScope.to = $scope.project.id;
     $rootScope.associatedModel = {
@@ -261,7 +268,6 @@ angular.module( 'conexus.project', [
            disableDefaultUI: true
         };
     }
-    if(!$scope.project){$location.path('/')}
 
     $scope.tabsToggleVar = false;
 
@@ -300,9 +306,7 @@ angular.module( 'conexus.project', [
     };
 
     $scope.isProjectCreator = function() {
-        if($scope.currentUser){
-            return $scope.currentUser.id == $scope.project.user;
-        }
+        if($scope.currentUser){return $scope.currentUser.id == $scope.project.user;}
         else {return false;}
     };
 
@@ -314,14 +318,15 @@ angular.module( 'conexus.project', [
         $scope.tabsToggleVar = !$scope.tabsToggleVar;
     };
 
-    $scope.tokenToggle = function(){
+    $scope.tokenToggle = function(item){
         $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
+        $rootScope.globalTokens = item;
     };
 
     $scope.transactionToggle = function(){
-        $mdSidenav('transaction').toggle();
-        //$rootScope.globalModal = $scope.tokens;
+        $mdSidenav('transaction').toggle()
+        //if($scope.currentUser){$mdSidenav('transaction').toggle();}
+        //else{$mdSidenav('login').toggle()}
     };
 
 }])
@@ -608,11 +613,6 @@ angular.module( 'conexus.project', [
 
     $scope.selectType = function(type){
         $scope.selectedType = type;
-    };
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
     };
 
 }])
@@ -1155,14 +1155,9 @@ angular.module( 'conexus.project', [
             returnObj = obj.tags;
             return returnObj;
         });
-
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-         
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -1199,12 +1194,6 @@ angular.module( 'conexus.project', [
     };
 
     $scope.search = function(){};
-
-    $scope.tokenToggle = function(item){
-        console.log(item)
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = item;
-    };
 
     $sailsSocket.subscribe('task', function (envelope) {
         switch(envelope.verb) {

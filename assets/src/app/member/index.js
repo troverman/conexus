@@ -243,8 +243,9 @@ angular.module( 'conexus.member', [
     };
 
     $scope.transactionToggle = function(){
-        $mdSidenav('transaction').toggle();
-        //$rootScope.globalModal = $scope.tokens;
+        $mdSidenav('transaction').toggle()
+        //if($scope.currentUser){$mdSidenav('transaction').toggle();}
+        //else{$mdSidenav('login').toggle()}
     };
 
     //TODO: FXNS

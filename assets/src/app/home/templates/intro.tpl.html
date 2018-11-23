@@ -216,19 +216,15 @@
                 </div>
 
                 <div class="card" ng-if="item.model=='TASK'">
-                    <div style="padding:16px;">
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
-                                <p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-                                <p><span ng-bind-html="renderContent(item.content)"></span></p>
-                                <a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
-                                <span style="color:gray" am-time-ago="item.createdAt"></span>
-                            </div>
-                            <div class="col-sm-2" style="text-align:right">
-                                <p ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
-                            </div>
+                    <div style="padding:16px;">                            
+                        <div style="float:right">
+                            <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
                         </div>
+                        <h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
+                        <p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+                        <p><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                        <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+                        <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
                     <div class="card-footer">
                         <a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 

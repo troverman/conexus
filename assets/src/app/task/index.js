@@ -27,6 +27,11 @@ angular.module( 'conexus.task', [
 .controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
     $scope.currentUser = config.currentUser;
     $scope.task = task;
+    console.log(task);
+    
+    //TODO: FIX
+    if(!$scope.task){$location.path('/')}
+
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
 
     $scope.newPost = {};

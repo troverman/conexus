@@ -111,6 +111,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
+        obj.tags = obj.tags.split(',');
         obj.model = 'TASK';
         return obj;
     });
@@ -323,6 +324,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
+        obj.tags = obj.tags.split(',');
         obj.model = 'TASK';
         return obj;
     });

@@ -30,17 +30,19 @@ angular.module( 'conexus.nav', [
     //TODO: CHANGE PARENT TO ASSOCIATED MODELS
     //TODO: FIX
     $scope.$watch('$root.associatedModel', function() {
-        if ($scope.associatedModel.address){
-            $scope.newContent.associatedModels = $rootScope.associatedModel.address;
-        }
-        $scope.newContent.type = $rootScope.associatedModel.type;
+        if ($rootScope.associatedModel){
 
-        //CHANGE
-        if ($rootScope.associatedModel.type == 'PROFILE'){
-            $scope.newContent.profile = $rootScope.associatedModel.address;
-        }
-        if ($rootScope.associatedModel.type == 'PROJECT'){
-            $scope.newContent.project = $rootScope.associatedModel.address;
+            $scope.newContent.associatedModels = $rootScope.associatedModel.address;
+            $scope.newContent.type = $rootScope.associatedModel.type;
+
+            //CHANGE
+            if ($rootScope.associatedModel.type == 'PROFILE'){
+                $scope.newContent.profile = $rootScope.associatedModel.address;
+            }
+            if ($rootScope.associatedModel.type == 'PROJECT'){
+                $scope.newContent.project = $rootScope.associatedModel.address;
+            }
+
         }
     });
 
@@ -90,7 +92,7 @@ angular.module( 'conexus.nav', [
 
             });
         }
-        else{$location.path('/login')}
+        else{ $mdSidenav('content').close();$mdSidenav('login').toggle()}
     };
 
     //$scope.createItem = function() {};
@@ -118,7 +120,7 @@ angular.module( 'conexus.nav', [
 
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
 
     //MEH

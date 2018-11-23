@@ -221,9 +221,9 @@ angular.module( 'conexus.content', [
         $scope.toggleTokenVar =!$scope.toggleTokenVar
     };
 
-    $scope.tokenToggle = function(content){
+    $scope.tokenToggle = function(item){
         $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = content;
+        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('post', function (envelope) {

@@ -1,3 +1,5 @@
+<style type="text/css">.angular-google-map-container{height:300px;}</style>
+
 <div class="page-heading">
     <div class="container"> 
         <div class="spacing-25"></div>
@@ -40,7 +42,6 @@
 </div>
 
 <div class="container">
-	<style type="text/css">.angular-google-map-container{height:300px;}</style>
 	<div class="card">
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
 		    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
@@ -99,21 +100,18 @@
 	<div ng-repeat="item in tasks">
 		<div class="card">
 			<div style="padding:16px;">
-
 				<div style="float:right">
                     <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
-				
 				<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
 				<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
             	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 				<a ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 				<span style="color:gray" am-time-ago="item.createdAt"></span>
-					
 			</div>
 			<div class="card-footer">
-				<a href="task/{{task.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-				<a href="task/{{task.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+				<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+				<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
 				<a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 				<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 			</div>

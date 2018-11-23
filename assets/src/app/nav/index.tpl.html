@@ -12,16 +12,22 @@
         h2{font-size:20px;}
         h3{font-size:20px;}
         .mobileHide{display:none;}
+        .member-tabs li{font-size:14px;}
+        .member-tabs > li > a{padding:5px 10px;}
     }
 
     @media (min-width: 991px){
         h2{font-size:30px}
         .mobileHide{display:block;}
+        .member-tabs li{font-size:20px;}
+        .member-tabs > li > a{padding:10px 15px;}
     }   
 
 </style>
 
 <div ng-controller="NavCtrl">
+
+    <!--TODO: PERFORMANCE.. NG-IF?-->
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="nav" md-is-locked-open="false" style="position:fixed;background-color:black">
         <div class="md-list-item-text" layout="column" style="height:100%;">
@@ -95,7 +101,6 @@
 
                 <div ng-if="member">
                     <h1 class="nav-links"><a href="member/{{member.username}}">{{member.username}}</a></h1>
-                    <h4 class="nav-links"><a href="member/{{member.username}}">About</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/assets">Assets</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/content">Content</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></h4>
@@ -153,7 +158,8 @@
                     <h5>Tags</h5>
                     <tags-input placeholder="Tags" ng-model="newContent.tags"></tags-input>
                     <ul class="nav nav-pills nav-justified contentTyle">
-                        <li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>
+                        <li ng-class="{active: selectedType=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Audio</a></li>
+                        <!--<li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>-->
                         <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
                         <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
                         <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Motion</a></li>
