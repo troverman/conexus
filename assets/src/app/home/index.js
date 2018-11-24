@@ -111,7 +111,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
-        obj.tags = obj.tags.split(',');
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         obj.model = 'TASK';
         return obj;
     });
@@ -324,7 +324,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
-        obj.tags = obj.tags.split(',');
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         obj.model = 'TASK';
         return obj;
     });
@@ -415,7 +415,6 @@ angular.module( 'conexus.home', [
         console.log(obj.model)
         if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
         if (obj.model == 'TASK'){
-            if(obj.tags){obj.tags = obj.tags.split(',')}
             returnObj = obj.tags;
         }
         if (obj.model == 'TRANSACTION'){
@@ -567,8 +566,43 @@ angular.module( 'conexus.home', [
         $mdSidenav('transaction').toggle();
     };
 
+    //TODO: STORE IN DATA? 
+    //TODO: BUILD PROTOCOL
+    //TODO: AMOUNT
     $scope.tokenToggle = function(item){
-        $rootScope.globalTokens = item;
+        var tokens = [item.id];
+        if (item.model == 'CONTENT'){
+            tokens.push('CONTENT');
+            tokens.push(item.type.toUpperCase());
+            tokens.push('CONTENT+'+item.type.toUpperCase());
+            if (item.tags){
+                for (x in item.tags.split(',')){
+                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                }
+            }
+        }
+        if (item.model == 'TASK'){
+            tokens.push('TASK');
+            if (item.tags){
+                for (x in item.tags.split(',')){
+                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                }
+            }
+        }
+        if (item.model == 'WORK'){
+            //TODO: AMOUNT
+            //item.amount
+            tokens.push('WORK');
+            if (item.tags){
+                for (x in item.tags.split(',')){
+                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                }
+            }
+        }
+        $rootScope.globalTokens = tokens;
         $mdSidenav('tokens').toggle();
     };
 

@@ -1122,10 +1122,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <!--\n" +
+    "    \n" +
     "    <div class=\"spacing-15\"></div>\n" +
-    "    -->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
@@ -2187,9 +2185,8 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "</div>");
+    "</div>\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -2649,8 +2646,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-50\"></div>\n" +
-    "");
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("member/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3637,6 +3633,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        .member-tabs > li > a{padding:10px 15px;}\n" +
     "    }   \n" +
     "\n" +
+    "    .navbar-toggle{\n" +
+    "        margin-right:0px;\n" +
+    "        padding:9px 0px;\n" +
+    "        //margin-right:-5px;\n" +
+    "    }\n" +
+    "\n" +
+    "\n" +
     "</style>\n" +
     "\n" +
     "<div ng-controller=\"NavCtrl\">\n" +
@@ -3913,21 +3916,26 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <!--TODO: DEPRECIATE-->\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"navbar-header\">\n" +
+    "\n" +
+    "                <!--TODO: NOTIFICATIONS-->\n" +
     "                <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
     "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
     "                    <span class=\"icon-bar\"></span>\n" +
     "                    <span class=\"icon-bar\"></span>\n" +
     "                    <span class=\"icon-bar\"></span>\n" +
     "                </button>\n" +
-    "                <a class=\"navbar-brand\" href=\"/\">\n" +
-    "                    <!--<img ng-show=\"!cre8xyz\" style=\"height:25px;margin-top:-3px\" src=\"/images/conexus-white.png\"/>-->\n" +
-    "                    <span style=\"font-weight:bold;color:white\">CRE8.XYZ</span>\n" +
-    "                </a>\n" +
+    "\n" +
+    "                <!--TODO: SEARCH-->\n" +
+    "                <!--<button type=\"button\" style=\"color:white;margin-top:5px;margin-bottom:0px\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\"><i class=\"fa fa-search\"></i></button>-->\n" +
+    "                <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
+    "\n" +
     "            </div>\n" +
+    "\n" +
+    "\n" +
+    "            <!--TODO: DEPRECIATE-->\n" +
     "            <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
     "                <ul class=\"nav navbar-nav\">\n" +
     "                    <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link1').value; return false;\">\n" +
@@ -3958,10 +3966,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        </ul>\n" +
     "                    </li>\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
-    "                    <!--<li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/login\">Login</a></li>-->\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
     "                </ul>\n" +
     "            </div>\n" +
+    "\n" +
+    "\n" +
     "        </div>\n" +
     "        <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "    </div>\n" +

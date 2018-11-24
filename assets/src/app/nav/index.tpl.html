@@ -23,6 +23,13 @@
         .member-tabs > li > a{padding:10px 15px;}
     }   
 
+    .navbar-toggle{
+        margin-right:0px;
+        padding:9px 0px;
+        //margin-right:-5px;
+    }
+
+
 </style>
 
 <div ng-controller="NavCtrl">
@@ -299,21 +306,26 @@
         </div>
     </md-sidenav>
 
-    <!--TODO: DEPRECIATE-->
     <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
         <div class="container">
             <div class="navbar-header">
+
+                <!--TODO: NOTIFICATIONS-->
                 <button type="button" class="navbar-toggle" ng-click="sideNavToggle()">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
-                    <!--<img ng-show="!cre8xyz" style="height:25px;margin-top:-3px" src="/images/conexus-white.png"/>-->
-                    <span style="font-weight:bold;color:white">CRE8.XYZ</span>
-                </a>
+
+                <!--TODO: SEARCH-->
+                <!--<button type="button" style="color:white;margin-top:5px;margin-bottom:0px" class="navbar-toggle" ng-click="sideNavToggle()"><i class="fa fa-search"></i></button>-->
+                <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
+
             </div>
+
+
+            <!--TODO: DEPRECIATE-->
             <div class="collapse navbar-collapse" style="text-align:center">
                 <ul class="nav navbar-nav">
                     <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link1').value; return false;">
@@ -344,10 +356,11 @@
                         </ul>
                     </li>
                     <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
-                    <!--<li class="nav-links" ng-show="!currentUser"><a href="/login">Login</a></li>-->
                     <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
                 </ul>
             </div>
+
+
         </div>
         <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
     </div>
