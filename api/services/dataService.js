@@ -326,6 +326,46 @@ module.exports = {
 			});
 		};
 
+		function tensorTesting(identiferSet){
+
+			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+
+				var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
+				var matrix = [];
+
+				for (x in orderModels){
+					//if (orderModels[x].identiferSet1.split(',').length==1){
+						matrix.push([]);
+						//for(var i=0; i<dimObj.rank;i++){
+						for(var i=0; i<8;i++){
+							matrix[x].push([]);
+							if (orderModels[x].amountSet1.split(',')[i]){
+								matrix[x][i].push(orderModels[x].amountSet1.split(',')[i]);
+							}
+							else{matrix[x][i].push(0);}
+							//dimObj.data.push({
+							//	identiferSet:orderModels[x].identiferSet1, 
+							//	amountSet:orderModels[x].amountSet1
+							//});
+						}
+					//}
+				}
+
+				console.log(matrix);
+				//console.log(dimObj);
+				const valueMatrixTensor = tf.tensor(matrix);
+				valueMatrixTensor.print();
+
+				//const input1 = tf.input({shape: [2, 2]});
+				//const input2 = tf.input({shape: [2, 2]});
+				//const input3 = tf.input({shape: [2, 2]});
+				//const multiplyLayer = tf.layers.multiply();
+				//const product = multiplyLayer.apply([input1, input2, input3]);
+
+			});
+
+		};
+
 		//recursive train
 		//relations are tensors
 		//[a]-->[b] == amount ; a tensor | a-b tensor | b tensor | both 
@@ -444,30 +484,37 @@ module.exports = {
 		};
 
 		//VECTOR
-		function valueMatrix(identiferSet){
+		function valueMatrix(amount, identiferSet){
 
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
 
-				const valueMatrixTensor = tf.input({shape: [orderModels.length, identiferSet.split(',').length]});
-
-				var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
+				var dimObj = {identiferSet:identiferSet, amountSet:amount, rank:identiferSet.split(',').length, data:[]};
+				var matrix = amount;
 
 				for (x in orderModels){
 					if (orderModels[x].identiferSet1.split(',').length==1){
-
-						//for(var i=0; i<dimObj.rank;i++){
-
+						//var data = [];
+						for(var i=0; i<dimObj.rank;i++){
 							dimObj.data.push({
-								identiferSet:orderModels[x].identiferSet1, 
-								amountSet:orderModels[x].amountSet1
+							//data.push({
+								identiferSet:orderModels[x].identiferSet.split(',')[i], 
+								identiferSet1:orderModels[x].identiferSet1, 
+								amountSet:orderModels[x].amountSet.split(',')[i],
+								amountSet1:orderModels[x].amountSet1,
+								rate:orderModels[x].amountSet.split(',')[i]/orderModels[x].amountSet1,
 							});
-
-						//}
-
+						}
+						//dimObj.data.push(data);
 					}
 				}
 
 				console.log(dimObj);
+
+				//TODO: ENCODE ORDER BOOK GRADIENT | AMOUNT --> THE VECTOR IS FUNCTIONAL --> DISCRITIZED FXN
+				//matrix = matrix.concat(dimObj.data.map(function(obj){return obj.rate}));
+				//console.log(matrix);
+				//const valueMatrixTensor = tf.tensor(matrix);
+				//valueMatrixTensor.print();
 
 			});
 
@@ -477,7 +524,10 @@ module.exports = {
 		//train('A', 0, 3);
 
 		//VALUE MATRIX | 2ND ORDER
-		valueMatrix('B,A');
+		valueMatrix([1], 'A');
+		//valueMatrix([1,1], 'B,A');
+
+		//tensorTesting('B,A');
 
 		//PUZZLE
 		//[a,b]->[c,d]

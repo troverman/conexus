@@ -943,6 +943,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	</div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"card\">\n" +
     "		<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
@@ -956,6 +957,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		</ui-gmap-google-map>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "-->\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -1181,10 +1183,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </form>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"card\">\n" +
+    "            <!--<div class=\"card\">\n" +
     "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "            </div>\n" +
+    "            </div>-->\n" +
     "\n" +
     "            <!--<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button></div>-->\n" +
     "\n" +
@@ -1488,10 +1490,10 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                </form>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"card\">\n" +
+    "            <!--<div class=\"card\">\n" +
     "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "            </div>\n" +
+    "            </div>-->\n" +
     "\n" +
     "            <div ng-repeat=\"item in activity\" ng-click=\"\">\n" +
     "                <div class=\"card\" ng-if=\"item.model=='CONTENT'\" >\n" +
@@ -3476,12 +3478,12 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
   $templateCache.put("member/templates/time.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "<div class=\"row\">\n" +
+    "<!--<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "    </div>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
@@ -5126,12 +5128,12 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
 
 angular.module("project/templates/time.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/time.tpl.html",
-    "<div class=\"row\">\n" +
+    "<!--<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "    </div>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
@@ -5215,7 +5217,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            </form>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\">\n" +
+    "        <!--<div class=\"card\">\n" +
     "            <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
@@ -5224,7 +5226,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                    </ui-gmap-window>\n" +
     "                </ui-gmap-marker>\n" +
     "            </ui-gmap-google-map>\n" +
-    "        </div>\n" +
+    "        </div>-->\n" +
     "\n" +
     "        <!--UNIFY-->\n" +
     "        <!--<div class=\"card\">\n" +
