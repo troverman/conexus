@@ -12,6 +12,11 @@ module.exports = {
         },
         type: {
             type: 'string',
+            defaultsTo: 'POST',
+        },
+        model: {
+            type: 'string',
+            defaultsTo: 'CONTENT',
         },
         content: {
             type: 'string',

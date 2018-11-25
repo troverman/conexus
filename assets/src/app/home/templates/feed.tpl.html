@@ -20,7 +20,7 @@
                 <div style="padding:16px;">
                     <span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{member.id}}</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}"></a></span>
                     <h4>{{currentUser.email}}</h4>
-                    <p><a href="/member/{{currentUser.username}}/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
+                    <p style="font-size:13px;"><a href="/member/{{currentUser.username}}/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
                     <div class="row">
                         <div class="col-sm-6">
                             <h5>Balance Lookup <span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
@@ -181,7 +181,9 @@
                                         {{item.title}}
                                     </a>
                                 </h3>
-                                <p style="color:gray;font-style:italic;"><span style="display:inline" ng-bind-html="renderContent(item.description)"></span></p>
+                                <div style="max-height:500px;overflow:scroll">
+                                    <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
+                                </div>
                             </div>
                             <div class="col-sm-1" style="text-align:right">
                                 <h4><a href="project/{{item.urlTitle}}">Join</a></h4>

@@ -382,6 +382,7 @@ angular.module( 'conexus.project', [
             $scope.newContent.project = $scope.project.id;
             //TODO
             $scope.newContent.model = 'CONTENT';
+            $scope.newContent.type = 'POST';
             //$scope.newContent.tags = $scope.newContent.tags.map(function(obj){
             //    return obj.text
             //}).join(",");

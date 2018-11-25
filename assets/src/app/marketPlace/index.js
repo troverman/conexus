@@ -18,13 +18,14 @@ angular.module( 'conexus.marketPlace', [
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
+.controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.newItem = {};
     $scope.newItemToggleVar = false;
     $scope.stateParams = $stateParams;
     $scope.items = items;
     $scope.selectedSort = 'createdAt DESC';
+    $scope.selectedTag = '';
     $scope.skip = 0;
 
     //MERGE CONTENT AND ITEMS? | A 'MARKETPLACE' CONTENT TYPE? DUNNO
@@ -38,14 +39,9 @@ angular.module( 'conexus.marketPlace', [
             returnObj = obj.tags;
             return returnObj;
         });
-
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e}); 
-
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -64,10 +60,11 @@ angular.module( 'conexus.marketPlace', [
 	    		$scope.newItem = {};
 	    	});
 	    }
-	    else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
-    /*$scope.createReaction = function(content, type){
+    //TODO: FIVE STAR ETC
+    $scope.createReaction = function(content, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.post = content.id;
@@ -80,13 +77,14 @@ angular.module( 'conexus.marketPlace', [
                 $scope.newReaction = {};
             });
         }
-        else{$location.path('/login')}
-    };*/
+        else{$mdSidenav('login').toggle()}
+    };
 
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
         ItemModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(items){
             $rootScope.stateIsLoading = false;
+            $scope.selectedTag = filter;
             $scope.items = items;
             $scope.loadTags()
         });
@@ -103,7 +101,11 @@ angular.module( 'conexus.marketPlace', [
     };
 
     $scope.newItemToggle = function () {
-        $scope.newItemToggleVar = $scope.newItemToggleVar ? false : true;
+        if ($scope.currentUser){
+            $scope.newItemToggleVar = $scope.newItemToggleVar ? false : true;
+            //$mdSidenav('item').toggle();
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     //YIKES
@@ -116,6 +118,14 @@ angular.module( 'conexus.marketPlace', [
             }
             else{return $sce.trustAsHtml(content)}
         }
+    };
+
+    $scope.reply = function(content){
+        if($scope.currentUser){
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+            $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
 }]);

@@ -206,7 +206,9 @@
                                         {{item.title}}
                                     </a>
                                 </h3>
-                                <p style="color:gray;font-style:italic;"><span style="display:inline" ng-bind-html="renderContent(item.description)"></span></p>
+                                <div style="max-height:500px;overflow:scroll">
+                                    <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
+                                </div>
                             </div>
                             <div class="col-sm-1" style="text-align:right">
                                 <h4><a href="project/{{item.urlTitle}}">Join</a></h4>

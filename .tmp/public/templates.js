@@ -746,7 +746,7 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Content</h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h1>Content <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
     "            <div class=\"col-xs-6\">\n" +
     "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
@@ -989,7 +989,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "                                {{item.title}}\n" +
     "                            </a>\n" +
     "                        </h3>\n" +
-    "	                    <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
+    "                        <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "	                    	<span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
+    "	                    </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "                        <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
@@ -1081,7 +1083,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div style=\"padding:16px;\">\n" +
     "                    <span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{member.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\"></a></span>\n" +
     "                    <h4>{{currentUser.email}}</h4>\n" +
-    "                    <p><a href=\"/member/{{currentUser.username}}/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
+    "                    <p style=\"font-size:13px;\"><a href=\"/member/{{currentUser.username}}/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-6\">\n" +
     "                            <h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
@@ -1242,7 +1244,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                        {{item.title}}\n" +
     "                                    </a>\n" +
     "                                </h3>\n" +
-    "                                <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
+    "                                <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                                    <span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
+    "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"col-sm-1\" style=\"text-align:right\">\n" +
     "                                <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
@@ -1546,7 +1550,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                                        {{item.title}}\n" +
     "                                    </a>\n" +
     "                                </h3>\n" +
-    "                                <p style=\"color:gray;font-style:italic;\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
+    "                                <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                                    <span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
+    "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"col-sm-1\" style=\"text-align:right\">\n" +
     "                                <h4><a href=\"project/{{item.urlTitle}}\">Join</a></h4>\n" +
@@ -2489,7 +2495,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Marketplace</h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h1>Marketplace <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
@@ -2503,14 +2509,34 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "			<div class=\"card\">\n" +
-    "				<div style=\"padding:16px;\">\n" +
-    "					<div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
+    "			\n" +
+    "			 <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px;\">\n" +
+    "					<span><b>Tags</b></span>\n" +
+    "	                <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "	                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "		    <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px;\">\n" +
+    "	                <span><b>Associations</b></span>\n" +
+    "	                <div ng-repeat=\"association in sortedAssociationArray\">\n" +
+    "	                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{association.element}}</a>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px;\">\n" +
+    "	                <span><b>Locations</b></span>\n" +
+    "	                <div ng-repeat=\"location in locations\">\n" +
+    "	                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{location}}</a>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "\n" +
     "		</div>\n" +
+    "\n" +
     "		<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "		    <div class=\"card\">\n" +
@@ -2533,24 +2559,16 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "			<div class=\"card\" ng-show=\"newItemToggleVar\">\n" +
     "			    <div style=\"padding:16px;\">\n" +
     "					<form role=\"form\" ng-submit=\"createItem(newItem)\">\n" +
-    "						<div class=\"form-group col-sm-12\">\n" +
-    "							<input placeholder=\"Title\" type=\"text\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
-    "						</div>\n" +
-    "						<div class=\"form-group col-sm-12\">\n" +
-    "							<input placeholder=\"Tags\" type=\"text\" ng-model=\"newItem.tags\" class=\"form-control\">\n" +
-    "						</div>\n" +
-    "						<div class=\"col-sm-12\">\n" +
-    "	                    	<text-angular placeholder=\"Content\" ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "						</div>\n" +
-    "						<div class=\"form-group col-sm-12\">\n" +
-    "							<h4>Price</h4>\n" +
-    "							<!--TODO: Better Form.. add [] + -->\n" +
-    "							<input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.identiferSet\" class=\"form-control\">\n" +
-    "							<input placeholder=\"Amount Set\" type=\"text\" ng-model=\"newItem.amountSet\" class=\"form-control\">\n" +
-    "							<!--<input placeholder=\"identiferSet\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\"> [] ill talk this or this or this and this-->\n" +
-    "							<!--[], [], [[],[]]-->\n" +
-    "\n" +
-    "						</div>\n" +
+    "						<input placeholder=\"Title\" type=\"text\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
+    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "	                    <text-angular placeholder=\"Content\" ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "						<input placeholder=\"Associated Models\" type=\"text\" ng-model=\"newItem.associatedModels\" class=\"form-control\">\n" +
+    "						<h4>Price</h4>\n" +
+    "						<!--TODO: Better Form.. add [] + -->\n" +
+    "						<input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.identiferSet\" class=\"form-control\">\n" +
+    "						<input placeholder=\"Amount Set\" type=\"text\" ng-model=\"newItem.amountSet\" class=\"form-control\">\n" +
+    "						<!--<input placeholder=\"identiferSet\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\"> [] ill talk this or this or this and this-->\n" +
+    "						<!--[], [], [[],[]]-->\n" +
     "						<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.amountSet\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
@@ -2562,7 +2580,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "		            	\n" +
     "	                	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
     "\n" +
-    "						<h5 style=\"margin-top:0px;margin-bottom:0px\"><a style=\"color:gray;font-style:italic\" ng-repeat=\"tag in item.tags\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}}, </a></h5>\n" +
+    "						<p><a ng-repeat=\"tag in item.tags track by $index\" href=\"#\" ng-click=\"filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
     "\n" +
     "	                	<div style=\"max-height:500px;overflow:scroll\">\n" +
     "							<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
@@ -3918,6 +3936,34 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"validation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h5>Validate <i class=\"fa fa-check\"></i></h5>\n" +
+    "                <!--\n" +
+    "                <div layout=\"\">\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{member.totalWork}}</span></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-repeat=\"tag in tags\">\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag]}} | {{reputation[tag] || 0}}</span></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"navbar-header\">\n" +
@@ -5217,7 +5263,8 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            </form>\n" +
     "        </div>\n" +
     "\n" +
-    "        <!--<div class=\"card\">\n" +
+    "        <!--\n" +
+    "        <div class=\"card\">\n" +
     "            <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
@@ -5226,23 +5273,21 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                    </ui-gmap-window>\n" +
     "                </ui-gmap-marker>\n" +
     "            </ui-gmap-google-map>\n" +
-    "        </div>-->\n" +
+    "        </div>\n" +
+    "        -->\n" +
     "\n" +
-    "        <!--UNIFY-->\n" +
-    "        <!--<div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"newProjectToggle()\">+ project</button>\n" +
-    "        </div>-->\n" +
-    "\n" +
-    "        <div ng-show=\"newProjectToggleVar\">\n" +
-    "            <form class=\"blog-input\" role=\"form\" ng-submit=\"createProject()\">\n" +
-    "                <div class=\"form-group\">\n" +
-    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                    <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
-    "                    <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
-    "                    <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
-    "                </div>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "            </form>\n" +
+    "        <div ng-show=\"newProjectToggleVar\" class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <form role=\"form\" ng-submit=\"createProject()\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "                        <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.address\" class=\"form-control\">\n" +
+    "                        <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div ng-repeat=\"project in projects\">\n" +
@@ -5259,7 +5304,9 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                                    {{project.title}}\n" +
     "                                </a>\n" +
     "                            </h3>\n" +
-    "                            <p style=\"color:gray;font-style:italic;\"><span ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
+    "                            <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                                <span ng-bind-html=\"renderContent(project.description)\"></span>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-2\" style=\"text-align:right\">\n" +
     "                            <h4><a href=\"project/{{project.urlTitle}}\">Join</a></h4>\n" +
@@ -5268,6 +5315,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
     "        <div ng-click=\"loadMore()\" class=\"card\">\n" +
     "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "        </div>\n" +
@@ -6052,7 +6100,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\"><h1>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</h1></div>\n" +
+    "			<div class=\"col-xs-6\"><h1>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
     "			<div class=\"col-xs-6\">\n" +
     "			    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
@@ -6464,6 +6512,7 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	</div>\n" +
     "\n" +
     "	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\" class=\"col-sm-12\">\n" +
@@ -6551,8 +6600,8 @@ angular.module("work/index.tpl.html", []).run(["$templateCache", function($templ
     "	</div>\n" +
     "\n" +
     "	<!--COLLAPSE-->\n" +
-    "	<!--NAV?-->\n" +
-    "	<!--NAV.-->\n" +
+    "	<!--NAV-->\n" +
+    "	<!--TODO: TOGGLE-->\n" +
     "	<div class=\"row\" ng-show=\"currentUser\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +

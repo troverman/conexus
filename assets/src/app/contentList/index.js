@@ -26,6 +26,7 @@ angular.module( 'conexus.contentList', [
     $scope.newContentToggleVar = false;
     $scope.newReaction = {};
     $scope.selectedSort = 'createdAt DESC';
+    $scope.selectedTag = '';
     $scope.selectedType = 'POST';
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
@@ -71,35 +72,30 @@ angular.module( 'conexus.contentList', [
                 $scope.content.unshift(model);
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.createReaction = function(content, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-
             if (type =='plus'){$scope.contentList[index].plusCount++}
             if (type =='minus'){$scope.contentList[index].minusCount++}
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};
             });
-
         }
-
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
         PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
             $rootScope.stateIsLoading = false;
+            $scope.selectedTag = filter;
             $scope.contentList = contentList;
             $scope.loadTags();
         });
