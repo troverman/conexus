@@ -1016,12 +1016,18 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "			</div>\n" +
     "			<div class=\"card-footer\">\n" +
-    "				<a href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "				<a href=\"task/{{item.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "				<a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "				<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "				<a href=\"#\" ng-click=\"createReaction(item, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "				<a href=\"task/{{item.id}}\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "				<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "	    <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -1348,6 +1354,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "\n" +
+    "        <!--INTO-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <h3>CRE8 MULTIDIMENSIONAL VALUE</h3>\n" +
@@ -1367,6 +1374,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
+    "        <!--MULTI MARKET-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <div class=\"block\">\n" +
@@ -1404,7 +1412,46 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
+    "        <!--TASKS-->\n" +
+    "        <!--COOORDINATE INTENTIONALLY-->\n" +
+    "        <!--<div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>TASKS</h3>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "            </div>\n" +
+    "        </div>-->\n" +
+    "\n" +
+    "        <!--PROJECTS-->\n" +
+    "        <!--<div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>PROJECTS</h3>\n" +
+    "            </div>\n" +
+    "        </div>-->\n" +
+    "\n" +
+    "        <!--TRANSPARENCY ETHOS-->\n" +
+    "        <!--<div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>TRANSPARENCY ETHOS</h3>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "            </div>\n" +
+    "        </div>-->\n" +
+    "\n" +
+    "        <!--AI | API | DATA INTELOCK-->\n" +
+    "        <!--<div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>AI</h3>\n" +
+    "            </div>\n" +
+    "        </div>-->\n" +
+    "\n" +
     "    </div>\n" +
+    "\n" +
     "\n" +
     "    <!--TODO:-->\n" +
     "    <!--STORY ABOUT VALUE MAPPING HERE!!-->\n" +
@@ -1442,6 +1489,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-50\"></div>\n" +
+    "    \n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -3654,8 +3702,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    }   \n" +
     "\n" +
     "    .navbar-toggle{\n" +
-    "        margin-right:0px;\n" +
-    "        padding:9px 0px;\n" +
+    "        //margin-right:0px;\n" +
+    "        //padding:9px 0px;\n" +
     "        //margin-right:-5px;\n" +
     "    }\n" +
     "\n" +
@@ -5806,9 +5854,9 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "						</div>\n" +
     "					</div>\n" +
     "					<div class=\"card-footer\">\n" +
-    "						<a href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "						<a href=\"task/{{item.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "						<a href=\"#\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "						<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "						<a href=\"#\" ng-click=\"createReaction(item, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "						<a href=\"task/{{item.id}}\" ng-click=\"reply(post)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "	        			<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "					</div>\n" +
     "					<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
@@ -5819,6 +5867,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "					</div>\n" +
     "				</div>\n" +
     "\n" +
+    "				<!--TODO-->\n" +
     "				<div ng-if=\"item.model=='WORK'\" class=\"card\"></div>\n" +
     "\n" +
     "			</div>\n" +
@@ -6192,8 +6241,8 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "							\n" +
     "					</div>\n" +
     "					<div class=\"card-footer\">\n" +
-    "						<a href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "						<a href=\"task/{{item.id}}\" ng-click=\"\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "						<a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "						<a href=\"#\" ng-click=\"createReaction(item, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
     "						<a href=\"task/{{item.id}}\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "						<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "						<!--<a class=\"pull-right\" href=\"task/{{item.id}}\" am-time-ago=\"item.createdAt\"></a>-->\n" +

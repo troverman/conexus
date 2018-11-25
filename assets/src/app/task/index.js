@@ -97,7 +97,7 @@ angular.module( 'conexus.task', [
         if ($scope.currentUser){
             $scope.question = true;
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle();}
     };
 
     $scope.createPost = function(post) {
@@ -109,7 +109,7 @@ angular.module( 'conexus.task', [
                 $scope.newPost = {};
             });
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle();}
     };
 
     //TODO: MODELS | ONLY POST/CONTENT | NEED TASK (AS CONTENT)
@@ -129,7 +129,7 @@ angular.module( 'conexus.task', [
             });
 
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle();}
     };
 
     //TODO | MOTIONS INTERLOCK
@@ -176,7 +176,7 @@ angular.module( 'conexus.task', [
             $scope.streaming = true;  
             //startStream(); INIT          
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle();}
     }
 
     $scope.startWork = function() {
@@ -202,7 +202,7 @@ angular.module( 'conexus.task', [
             $scope.working = true;
             $scope.interval = setInterval($scope.updateCount, 1000);
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle();}
     };
 
     //REWORK THE FLOW
@@ -276,7 +276,7 @@ angular.module( 'conexus.task', [
                 $scope.task.verificationScore -= parseFloat($scope.currentUser.totalWork);
             }
         }
-        else{$location.path('/login')}
+        else{$mdSidenav('login').toggle();}
     };
 
     //TODO: STREAM??

@@ -41,6 +41,22 @@ angular.module( 'conexus.tasks', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
+    $scope.createReaction = function(content, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+            if (type =='plus'){$scope.contentList[index].plusCount++}
+            if (type =='minus'){$scope.contentList[index].minusCount++}
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
@@ -78,7 +94,6 @@ angular.module( 'conexus.tasks', [
     //    return obj.project.title;
     //});
     $scope.loadAssociations = function(){
-
         $scope.associations = $scope.tasks.map(function(obj){
             return obj.project.title;
         });
@@ -96,7 +111,6 @@ angular.module( 'conexus.tasks', [
             }
         }
         $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        
     }
     $scope.loadAssociations();
 

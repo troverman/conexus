@@ -242,12 +242,15 @@ angular.module( 'conexus.home', [
         if (item.model == 'CONTENT'){
 
             tokens.push('CONTENT');
-            tokens.push(item.type.toUpperCase());
-            tokens.push('CONTENT+'+item.type.toUpperCase());
+
+            if (item.type){
+                tokens.push(item.type.toUpperCase());
+                tokens.push('CONTENT+'+item.type.toUpperCase());
+            }
 
             if (item.tags){
                 for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.tags.split(',')[x].toUpperCase());
                     tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
                 }
             }
@@ -259,9 +262,9 @@ angular.module( 'conexus.home', [
             tokens.push('TASK');
 
             if (item.tags){
-                for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x]);
-                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                for (x in item.tags){
+                    tokens.push(item.tags[x].toUpperCase());
+                    tokens.push(item.id+'+'+item.tags[x].toUpperCase());
                 }
             }
         }
@@ -274,7 +277,7 @@ angular.module( 'conexus.home', [
 
             if (item.tags){
                 for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.tags.split(',')[x].toUpperCase());
                     tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
                 }
             }
@@ -573,11 +576,13 @@ angular.module( 'conexus.home', [
         var tokens = [item.id];
         if (item.model == 'CONTENT'){
             tokens.push('CONTENT');
-            tokens.push(item.type.toUpperCase());
-            tokens.push('CONTENT+'+item.type.toUpperCase());
+            if (item.type){
+                tokens.push(item.type.toUpperCase());
+                tokens.push('CONTENT+'+item.type.toUpperCase());
+            }
             if (item.tags){
                 for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.tags.split(',')[x].toUpperCase());
                     tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
                 }
             }
@@ -585,9 +590,9 @@ angular.module( 'conexus.home', [
         if (item.model == 'TASK'){
             tokens.push('TASK');
             if (item.tags){
-                for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x]);
-                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
+                for (x in item.tags){
+                    tokens.push(item.tags[x].toUpperCase());
+                    tokens.push(item.id+'+'+item.tags[x].toUpperCase());
                 }
             }
         }
@@ -597,7 +602,7 @@ angular.module( 'conexus.home', [
             tokens.push('WORK');
             if (item.tags){
                 for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x]);
+                    tokens.push(item.tags.split(',')[x].toUpperCase());
                     tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
                 }
             }

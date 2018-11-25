@@ -94,8 +94,8 @@
 							
 					</div>
 					<div class="card-footer">
-						<a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-						<a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a href="#" ng-click="createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
 						<a href="task/{{item.id}}" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 						<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 						<!--<a class="pull-right" href="task/{{item.id}}" am-time-ago="item.createdAt"></a>-->

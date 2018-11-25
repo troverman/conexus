@@ -60,6 +60,22 @@ angular.module( 'conexus.search', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
+    $scope.createReaction = function(content, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.post = content.id;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+            if (type =='plus'){$scope.contentList[index].plusCount++}
+            if (type =='minus'){$scope.contentList[index].minusCount++}
+            ReactionModel.create($scope.newReaction).then(function(model){
+                $scope.newReaction = {};
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
     //YIKES
     $scope.renderContent = function(content){
         if (content){
