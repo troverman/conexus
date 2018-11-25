@@ -3,6 +3,9 @@
 */
 module.exports = {
 	attributes: {
+        tags: {
+            type: 'string',
+        },
         title: {
             type: 'string',
         },
@@ -14,11 +17,14 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+        timeCount: {
+            type: 'integer',
+            defaultsTo: 0
+        },
         liveCount: {
             type: 'integer',
             defaultsTo: 0
         },
-        //{address:'',lat:'',lng:''}
         location: {
             type: 'json',
         },
@@ -29,9 +35,19 @@ module.exports = {
         urlTitle: {
             type: 'string',
         },
+
+
+
+        associatedModels: {
+            type: 'string'
+        },
+
         parent: {
             type: 'string'
         },
+
+
+
         user: {
             model: 'user'
         },

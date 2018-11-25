@@ -60,6 +60,9 @@ module.exports = {
 			user: req.param('user'),
 			parent: req.param('parent'),
 		};
+
+		//TODO: GEOCODE
+
 		Project.create(model)
 		.exec(function(err, project) {
 			if (err) {

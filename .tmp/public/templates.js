@@ -906,7 +906,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Discover</h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h2>Discover</h2></div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
@@ -2495,7 +2495,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Marketplace <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h2>Marketplace <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h2></div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
@@ -3570,7 +3570,7 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h2>Members</h2></div>\n" +
     "            <div class=\"col-xs-6\">\n" +
     "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
@@ -5222,7 +5222,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Projects</h1></div>\n" +
+    "            <div class=\"col-xs-6\"><h2>Projects</h2></div>\n" +
     "            <div class=\"col-xs-6\">\n" +
     "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
@@ -6100,7 +6100,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\"><h1>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
+    "			<div class=\"col-xs-6\"><h2>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h2></div>\n" +
     "			<div class=\"col-xs-6\">\n" +
     "			    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
