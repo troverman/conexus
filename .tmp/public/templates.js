@@ -906,7 +906,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h2>Discover</h2></div>\n" +
+    "            <div class=\"col-xs-6\"><h1>Discover</h1></div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
@@ -1847,9 +1847,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
-    "                <!--<h1>Login</h1>   \n" +
-    "                <h3>Welcome back!</h3>--> \n" +
-    "                <h2>Login | Welcome back!</h2>\n" +
+    "                <h1>Login | Welcome back!</h1>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2495,7 +2493,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h2>Marketplace <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h2></div>\n" +
+    "            <div class=\"col-xs-6\"><h1>Marketplace <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
@@ -3570,7 +3568,7 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h2>Members</h2></div>\n" +
+    "            <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
     "            <div class=\"col-xs-6\">\n" +
     "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
@@ -3639,6 +3637,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    .navbar-inverse .navbar-toggle{border-color:#000;}\n" +
     "\n" +
     "    @media (max-width: 991px){\n" +
+    "        h1{font-size:20px;}\n" +
     "        h2{font-size:20px;}\n" +
     "        h3{font-size:20px;}\n" +
     "        .mobileHide{display:none;}\n" +
@@ -3647,6 +3646,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    }\n" +
     "\n" +
     "    @media (min-width: 991px){\n" +
+    "        h1{font-size:30px;}\n" +
     "        h2{font-size:30px}\n" +
     "        .mobileHide{display:block;}\n" +
     "        .member-tabs li{font-size:20px;}\n" +
@@ -3825,7 +3825,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"container\">\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-xs-10 col-xs-offset-1\">\n" +
-    "                            <h2>Login | Welcome back!</h2>\n" +
+    "                            <h1>Login | Welcome back!</h1>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -5339,7 +5339,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-xs-12\">\n" +
-    "                <h2>Join Our Community</h2>\n" +
+    "                <h1>Join Our Community</h1>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -5652,7 +5652,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	<div class=\"page-heading\">\n" +
     "		<div class=\"container\"> \n" +
     "			<div class=\"spacing-25\"></div>\n" +
-    "			<h1><b>{{searchQuery.search}}</b></h1>\n" +
+    "			<h1>{{searchQuery.search}}</h1>\n" +
     "			<div class=\"spacing-25\"></div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -6100,7 +6100,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\"><h2>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h2></div>\n" +
+    "			<div class=\"col-xs-6\"><h1>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
     "			<div class=\"col-xs-6\">\n" +
     "			    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
