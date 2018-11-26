@@ -1,22 +1,21 @@
 # Token Language
 
 # String Tokens
-## Infinite set of tokens
-## Encoded Infomation
-
-```
-mapping (address => mapping (string => uint)) balances;
-```
+	Infinite set of tokens
+	Encoded Infomation
+	```
+	mapping (address => mapping (string => uint)) balances;
+	```
 
 # Token Manifolds
-## Sets of infinifty
+	Sets of infinifty
 
 # Additive Manifolds
-## Protocol Interpretation
+	Protocol Interpretation
 
 # Orginization Principles
-## Validation 
-## Reputation
+	Validation 
+	Reputation
 
 # Token language interpolation and token operators [+,’,’]
 

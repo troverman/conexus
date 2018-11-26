@@ -4,5 +4,5 @@
 # Token Language
 
 ```
-mapping ( string => mapping (address => mapping (string => uint))) balances;
+mapping (string => mapping (address => mapping (string => uint))) value;
 ```
