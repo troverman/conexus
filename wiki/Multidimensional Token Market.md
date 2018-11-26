@@ -36,11 +36,11 @@ a->c…
 ## vector asset in n space
 ## Value Vector
 
-|   	|   	|
+| ---  	| ---  	|
 | A 	|   	|
 | B 	|   	|
 | C 	|   	|
-| D 	|   	|
+| D 	|   	|   
 | E 	|   	|
 | F 	|   	|
 | G 	|   	|
