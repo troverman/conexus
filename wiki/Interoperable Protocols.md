@@ -18,7 +18,7 @@ the manifold defined 'orginization+'
 	'orginization+'
 
 ## Member Protocol
-## 'Address+'
+	'Address+'
 
 ## Content Protocol
 	CONTENT
