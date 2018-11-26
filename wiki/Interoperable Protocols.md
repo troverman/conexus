@@ -1,4 +1,4 @@
-## Protocol
+# Interoperable Protocol Architecture
 
 ```
 contract Protocol {
