@@ -25,12 +25,19 @@ the set of logic is diven to the orginization
 ### {id} | NFT
 
 ## Reaction Protocol
+### REACTION
+### {id} | NFT
+### REACTION+[TYPE]
+### REACTION+[TYPE]+{modelAddress}
 
 ## Relationship Protocol
 ### {+[tag]+}
 ### {+Related Model+}
 
 ## Task Protocol
+Nested in relationship between Project & Time
+### {id} | NFT
+
 
 ## Time Protocol
 ### TIME
@@ -44,7 +51,6 @@ the set of logic is diven to the orginization
 tertiarty language space
 '+VALIDATION'
 
-
 # Organizational Pattern
-## Project -> task -> time
+## Project -> Task -> Time
 
