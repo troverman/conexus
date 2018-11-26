@@ -6,50 +6,50 @@ contract Protocol {
 }
 ```
 
-Protocols define logic and create 'logic manifolds' nested withing a token strucutre. 
+Protocols define logic and create 'logic manifolds' nested within a token strucutre. 
 
 # Layered Adaptability
 
 # Core protocols
 
 ## Project Protocol
-### 'orginization+'
+the set of logic is driven by the orginization
 the manifold defined 'orginization+' 
-the set of logic is diven to the orginization
+	'orginization+'
 
 ## Member Protocol
 ## 'Address+'
 
 ## Content Protocol
-### CONTENT
-### {id} | NFT
+	CONTENT
+	{id} | NFT
 
 ## Reaction Protocol
-### REACTION
-### {id} | NFT
-### REACTION+[TYPE]
-### REACTION+[TYPE]+{modelAddress}
+	REACTION
+	{id} | NFT
+	REACTION+[TYPE]
+	REACTION+[TYPE]+{modelAddress}
 
 ## Relationship Protocol
-### {+[tag]+}
-### {+Related Model+}
+	{+[tag]+}
+	{+Related Model+}
 
 ## Task Protocol
 Nested in relationship between Project & Time
-### {id} | NFT
+	{id} | NFT
 
 
 ## Time Protocol
-### TIME
-### {id} | NFT
-### {}
+	TIME
+	{id} | NFT
+	{}
 
 ## View Protocol
-### 'Address+VIEW+'
+	'Address+VIEW+'
 
 ## Validation Protocol
-tertiarty language space
-'+VALIDATION'
+Tertiarty language space
+	'+VALIDATION'
 
 # Organizational Pattern
 ## Project -> Task -> Time
