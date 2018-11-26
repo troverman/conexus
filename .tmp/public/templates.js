@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -2719,8 +2719,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
   $templateCache.put("member/index.tpl.html",
     "<style>\n" +
     "	.avatar{border-radius: 10em}\n" +
-    "	@media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}\n" +
-    "	@media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}\n" +
+    "	@media (max-width: 991px) {.member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}}\n" +
+    "	@media (min-width: 991px) {.member-tabs.subNav{display:block;}.nav-toggle{display:none;}}\n" +
     "</style>\n" +
     "\n" +
     "<div ui-view=\"member\">\n" +
@@ -2732,7 +2732,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div class=\"container\">\n" +
     "				<div class=\"pull-left\"><img class=\"avatar\" err-src=\"/images/avatar.png\" ng-src=\"{{member.avatarUrl}}\"/></div>\n" +
     "				<div class=\"pull-right member-tab-container\">\n" +
-    "					<ul class=\"member-tabs\">\n" +
+    "					<ul class=\"member-tabs subNav\">\n" +
     "						<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/content\">Content</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></li>\n" +
@@ -2822,6 +2822,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"container\">\n" +
+    "		<div ui-view=\"memberAbout\"></div>\n" +
     "		<div ui-view=\"memberActivity\"></div>\n" +
     "		<div ui-view=\"memberAssets\"></div>\n" +
     "		<div ui-view=\"memberContent\"></div>\n" +
@@ -2834,6 +2835,22 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "</div>");
+}]);
+
+angular.module("member/templates/about.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("member/templates/about.tpl.html",
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <h1>About</h1>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-50\"></div>\n" +
+    "");
 }]);
 
 angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3691,6 +3708,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        .mobileHide{display:none;}\n" +
     "        .member-tabs li{font-size:14px;}\n" +
     "        .member-tabs > li > a{padding:5px 10px;}\n" +
+    "        .imageContainerSmallDiv h1 {\n" +
+    "            font-size: 1.5em;\n" +
+    "        }\n" +
+    "        .member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}\n" +
     "    }\n" +
     "\n" +
     "    @media (min-width: 991px){\n" +
@@ -3699,14 +3720,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        .mobileHide{display:block;}\n" +
     "        .member-tabs li{font-size:20px;}\n" +
     "        .member-tabs > li > a{padding:10px 15px;}\n" +
+    "        .imageContainerSmallDiv h1 {\n" +
+    "            font-size: 2.8em;\n" +
+    "        }\n" +
+    "        .member-tabs.subNav{display:block;}.nav-toggle{display:none;}\n" +
     "    }   \n" +
-    "\n" +
-    "    .navbar-toggle{\n" +
-    "        //margin-right:0px;\n" +
-    "        //padding:9px 0px;\n" +
-    "        //margin-right:-5px;\n" +
-    "    }\n" +
-    "\n" +
     "\n" +
     "</style>\n" +
     "\n" +
@@ -3736,8 +3754,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/projects\">Projects</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
-    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/transparency\">Transparency</a></h2>\n" +
-    "\n" +
+    "                <!--<h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/transparency\">Transparency</a></h2>-->\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/notifications\">Notifications</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/account\">Settings</a></h2>\n" +
     "                <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/\">Vote</a></h2>-->\n" +
@@ -3786,6 +3803,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-if=\"member\">\n" +
     "                    <h1 class=\"nav-links\"><a href=\"member/{{member.username}}\">{{member.username}}</a></h1>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/about\">About</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/assets\">Assets</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/content\">Content</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></h4>\n" +
@@ -4189,9 +4207,6 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
     "<style>\n" +
-    "    @media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}\n" +
-    "    @media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}\n" +
-    "    .imageContainerSmallDiv h1 {font-size:2.8em;}\n" +
     "    .angular-google-map-container { height: 200px;}\n" +
     "</style>\n" +
     "\n" +
@@ -4221,7 +4236,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        <div style=\"background-color:white\">\n" +
     "            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
     "                <div class=\"row\">\n" +
-    "                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                    <ul style=\"padding:0px;\" class=\"member-tabs subNav\">\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}\">Activity</a></li>\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}/content\">Content</a></li>\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></li>\n" +
@@ -4327,8 +4342,11 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "            <h1>About {{project.title}}</h1>\n" +
-    "            <p>{{project.description}}</p>\n" +
+    "\n" +
+    "            <!--<p>Members: {{project.memberCount}} | Tasks: {{project.taskCount}} | Time: {{project.timeCount}}</p>-->\n" +
+    "\n" +
+    "            <p><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
+    "\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>");

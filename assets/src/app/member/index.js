@@ -49,6 +49,16 @@ angular.module( 'conexus.member', [
             }]
         }
     })
+    .state( 'member.about', {
+        url: '/about',
+        views: {
+            "memberAbout": {
+                controller: 'MemberAboutCtrl',
+                templateUrl: 'member/templates/about.tpl.html'
+            }
+        },
+        resolve: {}
+    })
     .state( 'member.assets', {
         url: '/assets',
         views: {
@@ -57,9 +67,7 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/assets.tpl.html'
             }
         },
-        resolve: {
-            
-        }
+        resolve: {}
     })
     .state( 'member.content', {
         url: '/content',
@@ -376,6 +384,11 @@ angular.module( 'conexus.member', [
         }
     });
 
+}])
+
+.controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberAboutController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
+    $scope.currentUser = config.currentUser;
+    titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
 }])
 
 .controller( 'MemberAssetsCtrl', ['$scope', 'config', 'titleService', function MemberAssetsCtrl( $scope, config, titleService ) {

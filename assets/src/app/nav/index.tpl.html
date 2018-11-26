@@ -15,6 +15,10 @@
         .mobileHide{display:none;}
         .member-tabs li{font-size:14px;}
         .member-tabs > li > a{padding:5px 10px;}
+        .imageContainerSmallDiv h1 {
+            font-size: 1.5em;
+        }
+        .member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}
     }
 
     @media (min-width: 991px){
@@ -23,14 +27,11 @@
         .mobileHide{display:block;}
         .member-tabs li{font-size:20px;}
         .member-tabs > li > a{padding:10px 15px;}
+        .imageContainerSmallDiv h1 {
+            font-size: 2.8em;
+        }
+        .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
     }   
-
-    .navbar-toggle{
-        //margin-right:0px;
-        //padding:9px 0px;
-        //margin-right:-5px;
-    }
-
 
 </style>
 
@@ -60,8 +61,7 @@
                 <h2 class="nav-links" style="padding:16px;"><a href="/marketplace">Marketplace</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/projects">Projects</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/tasks">Tasks</a></h2>
-                <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/transparency">Transparency</a></h2>
-
+                <!--<h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/transparency">Transparency</a></h2>-->
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/notifications">Notifications</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/account">Settings</a></h2>
                 <!--<h2 class="nav-links" style="padding:16px;"><a href="/">Vote</a></h2>-->
@@ -110,6 +110,7 @@
 
                 <div ng-if="member">
                     <h1 class="nav-links"><a href="member/{{member.username}}">{{member.username}}</a></h1>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/about">About</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/assets">Assets</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/content">Content</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></h4>

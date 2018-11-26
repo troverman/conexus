@@ -1,7 +1,7 @@
 <style>
 	.avatar{border-radius: 10em}
-	@media (max-width: 991px) {.member-tabs{display:none;}.nav-toggle{display:block;padding:20px;}}
-	@media (min-width: 991px) {.member-tabs{display:block;}.nav-toggle{display:none;}}
+	@media (max-width: 991px) {.member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}}
+	@media (min-width: 991px) {.member-tabs.subNav{display:block;}.nav-toggle{display:none;}}
 </style>
 
 <div ui-view="member">
@@ -13,7 +13,7 @@
 			<div class="container">
 				<div class="pull-left"><img class="avatar" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></div>
 				<div class="pull-right member-tab-container">
-					<ul class="member-tabs">
+					<ul class="member-tabs subNav">
 						<li><a href="member/{{member.username}}">Activity</a></li>
 						<li><a href="member/{{member.username}}/content">Content</a></li>
 						<li><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></li>
@@ -103,6 +103,7 @@
 		</div>
 	</div>
 	<div class="container">
+		<div ui-view="memberAbout"></div>
 		<div ui-view="memberActivity"></div>
 		<div ui-view="memberAssets"></div>
 		<div ui-view="memberContent"></div>
