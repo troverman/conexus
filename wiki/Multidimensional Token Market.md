@@ -15,15 +15,20 @@ contract MultidimensionalTokenMarket {
 
 ### A, b, c, d,
     → relationships
+
 ### pluralistic assets
 [a,b]
     → relationships
 
 #### market circuits
     eight dimensional depth
+
 a → eight d tensor walk
+
 a ->b ->c->d->e->f->h
+
 a->c->a->b->d->e->f
+
 a->c…
 
 ##### higher dimensional combinatorials require at least n-dim base state
@@ -31,19 +36,17 @@ a->c…
 ## vector asset in n space
 ## Value Vector
 
-|   	|
-|---	|
-| A 	|
-| B 	|
-| C 	|
-| D 	|
-| E 	|
-| F 	|
-| G 	|
-| H 	|
+|   	|   	|
+| A 	|   	|
+| B 	|   	|
+| C 	|   	|
+| D 	|   	|
+| E 	|   	|
+| F 	|   	|
+| G 	|   	|
+| H 	|   	|
 
 ## Value Matrix
-
 
 |   	| A 	| B 	| C 	| D 	| E 	| F 	| G 	| H 	|
 |---	|---	|---	|---	|---	|---	|---	|---	|---	|
