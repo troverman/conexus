@@ -1,11 +1,13 @@
 # Token Language
 
-# String Tokens
+# Token Definition
+```
+mapping (address => mapping (string => uint)) balances;
+```
+
 	Infinite set of tokens
 	Encoded Infomation
-	```
-	mapping (address => mapping (string => uint)) balances;
-	```
+
 
 # Token Manifolds
 	Sets of infinifty
