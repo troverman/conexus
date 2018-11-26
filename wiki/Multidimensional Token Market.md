@@ -1,4 +1,4 @@
-#Multimarket
+# Multimarket
 
 ```
 contract MultidimensionalTokenMarket {
@@ -61,16 +61,20 @@ a->c…
 
 
 ## [comb asset A,B is a value matrix]
-    A,B
-A
-B
-C
-A,B
-C,D 
+|   	| A 	| B 	|
+|---	|---	|---	|
+| A 	|   	|   	|
+| B 	|   	|   	|
+| C 	|   	|   	|
+| A, B 	|   	|   	|
+| C, D 	|   	|   	|
 
 the market space is
-→ ratio of asset and amount of asset
+	→ ratio of asset and amount of asset
     (angle and length) 
+
 (any other rules) 
+
 we create our own algebra here. 
+
 
