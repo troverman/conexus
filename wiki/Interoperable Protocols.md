@@ -67,3 +67,8 @@ Nested in relationship between Project & Time
 # Organizational Pattern
 ## Project -> Task -> Time
 
+# '3rd Layer of Compilation'
+	Nested Chain Interaction
+	Encoding of hashed information into token balance layer begetes emergent value data congruence
+
+

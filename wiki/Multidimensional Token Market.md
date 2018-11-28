@@ -1,5 +1,9 @@
 # Multidimensional Token Market
 
+![MultidimensionalTokenMarket](https://i.gifer.com/3IrO.gif "MultidimensionalTokenMarket")
+![MultidimensionalTokenMarket](https://s13.favim.com/orig/170404/Favim.com-5147503.gif "MultidimensionalTokenMarket")
+
+
 ```
 contract MultidimensionalTokenMarket {
  
@@ -39,6 +43,9 @@ contract MultidimensionalTokenMarket {
 	a → c …
 
 	...
+
+	[a-h] → [a-h] → [a-h] → [a-h] → [a-h] → [a-h] → [a-h]
+
 
 ##### Higher Dimensional Combinatorials require at least n-dim base state
 
