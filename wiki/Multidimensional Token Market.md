@@ -83,7 +83,7 @@ contract MultidimensionalTokenMarket {
 
 x [scalar]
 
-## [comb asset A,B to singular is a value matrix], [A||B is a pluralistic asset]
+## [comb asset A,B to singular is a value matrix]
 |   	| A 	| B 	|
 |---	|---	|---	|
 | A 	|   	|   	|
