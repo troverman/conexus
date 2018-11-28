@@ -9,7 +9,7 @@ contract MultidimensionalTokenMarket {
 }
 ```
 
-## Postion Types
+## Position Types
 
 ### Trade Postion
 ### On Mint Postion
