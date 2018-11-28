@@ -31,6 +31,7 @@ contract MultidimensionalTokenMarket {
 
 # Building Blocks
 ## A Tensor Network
+![TensorNetwork](https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/446c6785a9412f19830ee9cdf4fd75ee9105f06f/8-Figure4-1.png "TensorNetwork")
 
 #### A, B, C, D
     → relationships
