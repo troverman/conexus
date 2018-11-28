@@ -4,3 +4,4 @@
 
 	A Generalized Dimensional Vote is definied as a member's total 'UniversalToken' onMint Position relative to the overall token domain.
 
+	(Universal Token as CRE8 ?)
