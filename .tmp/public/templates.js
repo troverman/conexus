@@ -817,16 +817,16 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <span><b>Associations</b></span>\n" +
-    "                    <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                    <div ng-repeat=\"association in sortedAssociationArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{association.element}}</a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <span><b>Locations</b></span>\n" +
-    "                    <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                    <div ng-repeat=\"location in sortedLocationArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{location}}</a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -885,9 +885,7 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            </div>\n" +
     "\n" +
     "            <div class=\"card\" ng-click=\"loadMore()\">\n" +
-    "                <div style=\"padding:10px;\">\n" +
-    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
-    "                </div>\n" +
+    "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -2697,7 +2695,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	    </div>\n" +
     "\n" +
     "	    <div ng-repeat=\"market in markets\" style=\"padding:0px\">\n" +
-    "	    	<div class=\"card\">\n" +
+    "	    	<div class=\"card\" ng-click=\"\">\n" +
     "			    <div style=\"padding:16px;\">\n" +
     "			    	<a style=\"white-space: nowrap;\" href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
     "			    	<p style=\"white-space: nowrap;color:gray\">{{market}} markets</p>\n" +
@@ -2719,8 +2717,6 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
   $templateCache.put("member/index.tpl.html",
     "<style>\n" +
     "	.avatar{border-radius: 10em}\n" +
-    "	@media (max-width: 991px) {.member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}}\n" +
-    "	@media (min-width: 991px) {.member-tabs.subNav{display:block;}.nav-toggle{display:none;}}\n" +
     "</style>\n" +
     "\n" +
     "<div ui-view=\"member\">\n" +

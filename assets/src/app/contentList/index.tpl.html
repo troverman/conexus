@@ -73,16 +73,16 @@
             <div class="card">
                 <div style="padding:16px;">
                     <span><b>Associations</b></span>
-                    <div ng-repeat="tag in sortedTagArray">
-                        <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+                    <div ng-repeat="association in sortedAssociationArray">
+                        <a href="#" ng-click="filterContent(tag.element)">{{association.element}}</a>
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div style="padding:16px;">
                     <span><b>Locations</b></span>
-                    <div ng-repeat="tag in sortedTagArray">
-                        <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+                    <div ng-repeat="location in sortedLocationArray">
+                        <a href="#" ng-click="filterContent(tag.element)">{{location}}</a>
                     </div>
                 </div>
             </div>
@@ -141,9 +141,7 @@
             </div>
 
             <div class="card" ng-click="loadMore()">
-                <div style="padding:10px;">
-                    <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
-                </div>
+                <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
             </div>
 
         </div>

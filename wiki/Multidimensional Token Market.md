@@ -1,4 +1,4 @@
-# Multimarket
+# Multidimensional Token Market
 
 ```
 contract MultidimensionalTokenMarket {
@@ -6,34 +6,44 @@ contract MultidimensionalTokenMarket {
 }
 ```
 
+## Postion Types
+
+### Trade Postion
+### On Mint Postion
+
+## Order Books
+
+## Traversals
+
 ## Crystalline structure begets self-similar assets
-### pluralistic assets
-    →create powerful linkages
+### Pluralistic Assets & Positions
+    → create powerful linkages
+    [a,b]
+    	→ relationships
 
 # Building Blocks
-## A Tensor network
+## A Tensor Network
 
-### A, b, c, d,
+#### A, B, C, D,
     → relationships
 
-### pluralistic assets
-[a,b]
-    → relationships
-
-#### market circuits
+#### Market Circuits
     eight dimensional depth
 
-a → eight d tensor walk
+	a → eight d tensor walk
 
-a ->b ->c->d->e->f->h
+	a → b → c → d → e → f → h
 
-a->c->a->b->d->e->f
+	a → c → a → b → d → e → f
 
-a->c…
+	a → c …
 
-##### higher dimensional combinatorials require at least n-dim base state
+	...
 
-## vector asset in n space
+##### Higher Dimensional Combinatorials require at least n-dim base state
+
+## Vector Assets in n-space
+
 ## Value Vector
 
 | A 	|   	|
@@ -46,18 +56,20 @@ a->c…
 | G 	|   	|
 | H 	|   	|
 
+## Matrix Assets in n-space-field
+
 ## Value Matrix
 
 |   	| A 	| B 	| C 	| D 	| E 	| F 	| G 	| H 	|
 |---	|---	|---	|---	|---	|---	|---	|---	|---	|
-| A 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| B 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| C 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| D 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| E 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| F 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| G 	|   	|   	|   	|   	|   	|   	|   	|   	|
-| H 	|   	|   	|   	|   	|   	|   	|   	|   	|
+| A 	| 1  	|   	|   	|   	|   	|   	|   	|   	|
+| B 	|   	| 1  	|   	|   	|   	|   	|   	|   	|
+| C 	|   	|   	| 1  	|   	|   	|   	|   	|   	|
+| D 	|   	|   	|   	| 1  	|   	|   	|   	|   	|
+| E 	|   	|   	|   	|   	| 1  	|   	|   	|   	|
+| F 	|   	|   	|   	|   	|   	| 1  	|   	|   	|
+| G 	|   	|   	|   	|   	|   	|   	| 1  	|   	|
+| H 	|   	|   	|   	|   	|   	|   	|   	|  1 	|
 
 
 ## [comb asset A,B is a value matrix]
@@ -69,12 +81,11 @@ a->c…
 | A, B 	|   	|   	|
 | C, D 	|   	|   	|
 
-the market space is
-	→ ratio of asset and amount of asset
-    (angle and length) 
 
-(any other rules) 
+## Algebraic Realtions
+	The market space is depent on a ratio of asset exchange and amount of asset
 
-we create our own algebra here. 
+
+
 
 

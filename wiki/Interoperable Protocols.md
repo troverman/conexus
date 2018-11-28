@@ -12,23 +12,31 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 # Core protocols
 
+##Data Protocol	
+
 ## Project Protocol
-the set of logic is driven by the orginization
-the manifold defined 'orginization+' 
-	'orginization+'
+the set of logic is driven by the organization
+the manifold defined 'organization+' 
+	'organization+'
 
 ## Member Protocol
 	'Address+'
 
 ## Content Protocol
 	CONTENT
-	{id} | NFT
+	{id}
+
+## ORDER Protocol
+	ORDER
+	{id}
+	{}
 
 ## Reaction Protocol
 	REACTION
-	{id} | NFT
+	{id}
 	REACTION+[TYPE]
 	REACTION+[TYPE]+{modelAddress}
+	Linkage with Model (work out rotational equalities via language interperlation & algebra(s) | a+b+c is congruent to c+b+a is congruent to b+c+a)
 
 ## Relationship Protocol
 	{+[tag]+}
@@ -36,19 +44,24 @@ the manifold defined 'orginization+'
 
 ## Task Protocol
 Nested in relationship between Project & Time
-	{id} | NFT
+	{id}
 
 
 ## Time Protocol
 	TIME
-	{id} | NFT
+	{id}
+	{}
+
+## Transaction Protocol
+	TRANSACTION
+	{id}
 	{}
 
 ## View Protocol
 	'Address+VIEW+'
 
 ## Validation Protocol
-Tertiarty language space
+Tertiary language space
 	'+VALIDATION'
 
 # Organizational Pattern

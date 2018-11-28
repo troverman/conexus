@@ -31,6 +31,37 @@ angular.module( 'conexus.contentList', [
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
 
+    $scope.sortedLocationArray = ['Knoxville', 'Chapel Hill', 'New York City']
+    //TODO: BETTER
+    //TODO: MANY TO MANY
+    //TODO: SET | FACTOR
+    //$scope.associations = $scope.tasks.map(function(obj){
+    //    return obj.project.title;
+    //});
+    //TODO: PROPER ASSOCIATIONS
+    $scope.loadAssociations = function(){
+        $scope.associations = $scope.contentList.map(function(obj){
+            if (obj.project){
+                return obj.project.title;
+            }
+        });
+
+        $scope.associations = [].concat.apply([], $scope.associations);
+        $scope.associations = $scope.associations.filter(function(e){return e});
+         
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadAssociations();
+
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
@@ -97,6 +128,7 @@ angular.module( 'conexus.contentList', [
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.contentList = contentList;
+            $scope.loadAssociations();
             $scope.loadTags();
         });
     };
@@ -108,12 +140,17 @@ angular.module( 'conexus.contentList', [
         //PostModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(posts) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.contentList, contentList);
-            $scope.loadTags()
+            $scope.loadAssociations();
+            $scope.loadTags();
         });
     };
 
     $scope.newContentToggle = function() {
-        $scope.newContentToggleVar = !$scope.newContentToggleVar;
+        if($scope.currentUser){
+            $mdSidenav('content').toggle()
+            //$scope.newContentToggleVar = !$scope.newContentToggleVar;}
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.renderContent = function(content){

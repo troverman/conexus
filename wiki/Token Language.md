@@ -10,7 +10,7 @@ mapping (address => mapping (string => uint)) balances;
 
 
 # Token Manifolds
-	Sets of infinifty
+	Sets of Infinifty
 
 # Additive Manifolds
 	Protocol Interpretation
