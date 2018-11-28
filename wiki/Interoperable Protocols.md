@@ -12,11 +12,11 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 # Core protocols
 
-##Data Protocol	
+## Data Protocol	
 
 ## Project Protocol
-the set of logic is driven by the organization
-the manifold defined 'organization+' 
+The set of logic is driven by the organization
+	the manifold defined 'organization+' 
 	'organization+'
 
 ## Member Protocol
@@ -61,7 +61,7 @@ Nested in relationship between Project & Time
 	'Address+VIEW+'
 
 ## Validation Protocol
-Tertiary language space
+	Tertiary language space
 	'+VALIDATION'
 
 # Organizational Pattern
