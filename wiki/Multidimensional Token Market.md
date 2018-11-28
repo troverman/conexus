@@ -26,6 +26,9 @@ contract MultidimensionalTokenMarket {
     [a,b]
     → relationships
 
+    [a||b]
+    → relationships
+
 # Building Blocks
 ## A Tensor Network
 
@@ -102,12 +105,12 @@ x [scalar]
 		Maximum depth needed (?) | intuition 
 
 
-## Algebraic Realtions
+## Algebraic Relations
 	
 	LANGUAGE INTERPEROLATION (',','||','+') algebras
 
-	(||) OR Set Operations --> for traversal
 	(,) AND Set Operations --> for traversal
+	(||) OR Set Operations --> for traversal
 
 
 
