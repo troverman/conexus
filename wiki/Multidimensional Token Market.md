@@ -29,10 +29,12 @@ contract MultidimensionalTokenMarket {
 # Building Blocks
 ## A Tensor Network
 
-#### A, B, C, D,
+#### A, B, C, D
     → relationships
 
 #### Market Circuits
+	Tensor Population
+
     eight dimensional depth
 
 	a → eight d tensor walk
@@ -81,14 +83,17 @@ contract MultidimensionalTokenMarket {
 
 x [scalar]
 
-## [comb asset A,B is a value matrix]
+## [comb asset A,B to singular is a value matrix], [A||B is a pluralistic asset]
 |   	| A 	| B 	|
 |---	|---	|---	|
 | A 	|   	|   	|
 | B 	|   	|   	|
 | C 	|   	|   	|
-| A, B 	|   	|   	|
-| C, D 	|   	|   	|
+| D 	|   	|   	|
+| E 	|   	|   	|
+| E,F 	|   	|   	|
+
+(Last Element requires a tensor)
 
 ## Tensor Assets in a Tensor-field
 
@@ -98,9 +103,11 @@ x [scalar]
 
 
 ## Algebraic Realtions
-	The market space is depent on a ratio of asset exchange and amount of asset
+	
+	LANGUAGE INTERPEROLATION (',','||','+') algebras
 
-
+	(||) OR Set Operations --> for traversal
+	(,) AND Set Operations --> for traversal
 
 
 
