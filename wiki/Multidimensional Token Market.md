@@ -9,10 +9,11 @@ contract MultidimensionalTokenMarket {
 }
 ```
 
-## Position Types
+## Position (Relationship) Types
 
-	### Trade Postions
-	### onMint Postions
+### Trade Postions
+
+### onMint Postions
 
 ## Order Books
 
@@ -21,8 +22,9 @@ contract MultidimensionalTokenMarket {
 ## Crystalline structure begets self-similar assets
 ### Pluralistic Assets & Positions
     → create powerful linkages
+
     [a,b]
-    	→ relationships
+    → relationships
 
 # Building Blocks
 ## A Tensor Network
@@ -90,7 +92,7 @@ x [scalar]
 
 ## Tensor Assets in a Tensor-field
 
-##Value Tensor
+## Value Tensor
 	Eight dimensional depth
 		Maximum depth needed (?) | intuition 
 
