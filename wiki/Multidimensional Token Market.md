@@ -11,8 +11,8 @@ contract MultidimensionalTokenMarket {
 
 ## Position Types
 
-### Trade Postion
-### On Mint Postion
+	### Trade Postions
+	### onMint Postions
 
 ## Order Books
 
@@ -48,7 +48,7 @@ contract MultidimensionalTokenMarket {
 
 ##### Higher Dimensional Combinatorials require at least n-dim base state
 
-## Vector Assets in n-space
+## Vector Assets in N-space
 
 ## Value Vector
 
@@ -62,7 +62,7 @@ contract MultidimensionalTokenMarket {
 | G 	|   	|
 | H 	|   	|
 
-## Matrix Assets in n-space-field
+## Matrix Assets in a Matrix-field
 
 ## Value Matrix
 
@@ -77,6 +77,7 @@ contract MultidimensionalTokenMarket {
 | G 	|   	|   	|   	|   	|   	|   	| 1  	|   	|
 | H 	|   	|   	|   	|   	|   	|   	|   	|  1 	|
 
+x [scalar]
 
 ## [comb asset A,B is a value matrix]
 |   	| A 	| B 	|
@@ -86,6 +87,12 @@ contract MultidimensionalTokenMarket {
 | C 	|   	|   	|
 | A, B 	|   	|   	|
 | C, D 	|   	|   	|
+
+## Tensor Assets in a Tensor-field
+
+##Value Tensor
+	Eight dimensional depth
+		Maximum depth needed (?) | intuition 
 
 
 ## Algebraic Realtions
