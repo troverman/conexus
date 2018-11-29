@@ -4,6 +4,10 @@
 
 module.exports = {
 
+
+    //TODO: MERGE WITH CONTENT
+    //TODO: DEPRECIATE ? 
+
 	attributes: {
         parent:{
             type: 'string',

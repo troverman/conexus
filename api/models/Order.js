@@ -4,6 +4,8 @@
 
 module.exports = {
 
+	//TODO: BETTER
+
 	attributes: {
 		type: {
             type: 'string',

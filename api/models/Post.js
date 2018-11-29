@@ -26,10 +26,6 @@ module.exports = {
             required: true
         },
 
-        associatedModels: {
-            type: 'json',
-        },
-
         plusCount: {
             type: 'integer',
             defaultsTo: 0
@@ -42,6 +38,21 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0,
         },
+        
+
+        //TODO: RELATIONSHIPS | ASSOCIATIONS
+        //TAGS; ASSOCIATIONS; LOCATIONS
+        relationships: {
+            type: 'json',
+        },
+
+        associatedModels: {
+            type: 'json',
+        },
+
+        //TODO: LOCATION
+
+
 
         //TODO: DEPRECIATE
         //TODO: MANY TO MANY
@@ -69,6 +80,8 @@ module.exports = {
         work: {
             model: 'work'
         },
+
+
 
     },
     

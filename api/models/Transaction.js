@@ -23,12 +23,19 @@ module.exports = {
         tags: {
             type: 'string',
         },
+
+        //TODO:DEPRECIATE
         project: {
             model: 'project',
         },
+
+        //TODO:DEPRECIATE
         user: {
             model: 'user',
         },
+
+        //TODO: CREATOR
+
     },
 
 };

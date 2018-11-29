@@ -3,9 +3,11 @@
 */
 module.exports = {
 	attributes: {
+
         tags: {
             type: 'string',
         },
+
         title: {
             type: 'string',
         },
@@ -25,18 +27,29 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+
         location: {
             type: 'json',
         },
+
         avatarUrl: {
             type: 'string',
             defaultsTo: '/images/loading.gif'
         },
+
+        //TODO: DEPRECIATE?
         urlTitle: {
             type: 'string',
         },
 
+        //TODO: SETTTINGS
+        //TODO: ASSOCAITED STRING MANIFOLD
 
+
+        //TODO: RELATIONSHIPS | ASSOCIATIONS
+        relationships: {
+            type: 'json',
+        },
 
         associatedModels: {
             type: 'string'
@@ -47,10 +60,11 @@ module.exports = {
         },
 
 
-
         user: {
             model: 'user'
         },
+
+
     },
     afterCreate: function (model, next) {
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];

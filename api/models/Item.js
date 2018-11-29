@@ -20,6 +20,17 @@ module.exports = {
         amountSet: {
             type: 'string',
         },
+
+
+        //TODO: RELATIONSHIPS | ASSOCIATIONS
+        //TAGS; ASSOCIATIONS; LOCATIONS
+        relationships: {
+            type: 'json',
+        },
+
+        //TODO: LOCATION
+
+
     },
 
 };

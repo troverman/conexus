@@ -1,4 +1,8 @@
 module.exports = {
+
+    //DB OF LOCATIONS
+    //MAPPING OF LOCATIONS --> LAT LNG ? 
+
     attributes: {
         lat: {
             type: 'string',

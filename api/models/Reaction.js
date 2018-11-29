@@ -8,13 +8,22 @@ module.exports = {
         amount: {
             type: 'string',
         },
+
+        //TODO: DEPRECIATE
         post: {
             model: 'post'
         },
+
+        //TODO: associatedModel
+        associatedModel: {
+            type: 'string',
+        },
+
         type: {
             type: 'string',
             required: true
         },
+
         user: {
             model: 'user'
         },

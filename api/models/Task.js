@@ -37,39 +37,10 @@ module.exports = {
             required: true
         },
 
-
-
-
-
-
-
-        //TODO: ORDER
-        completeBountySet: {
-            type: 'string',
+        //TODO: RELATIONSHIPS
+        relationships: {
+            type: 'json',
         },
-        completeIdentifierSet: {
-            type: 'string',
-        },
-        timeBountySet: {
-            type: 'string',
-        },
-        timeIdentifierSet: {
-            type: 'string',
-        },
-        timeStreamBountySet: {
-            type: 'string',
-        },
-        timeStreamIdentifierSet: {
-            type: 'string',
-        },
-        verificationBountySet: {
-            type: 'string',
-        },
-        verificationIdentifierSet: {
-            type: 'string',
-        },
-
-
 
     },
 

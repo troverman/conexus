@@ -104,6 +104,7 @@ x [scalar]
 ## Value Tensor
 	Eight dimensional depth
 		Maximum depth needed (?) | intuition 
+			(Relational to information encoded in E8 Lie Group | 248 dimensional... )
 
 
 ## Algebraic Relations
