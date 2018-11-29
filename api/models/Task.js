@@ -2,45 +2,43 @@
 * Task.js
 */
 
+//TODO: UNIFY WITH CONTENT? | SPECIFICY WITH TYPE
+//CONTENT BASE MODEL
+
 module.exports = {
 
     attributes: {
+
         title: {
             type: 'string',
             required: true,
             unique: true
         },
-        content: {
-            type: 'string',
-        },
+
+        content: {type: 'string'},
+
         status: {
             type: 'string',
-            defaultsTo:'Pending'
+            defaultsTo: 'Pending'
         },
-        location: {
-            type: 'string',
-        },
-        members: {
-            type: 'string',
-        },
-        parent: {
-            model: 'task',
-        },
-        tags:{
-            type: 'string',
-        },
-        project: {
-            model: 'project',
-        },
+
+        location: {type: 'json'},
+
+        //TODO: TAGS AS DATA MODEL && || String
+        tags: {type: 'string'},
+
         user: {
             model: 'user',
             required: true
         },
 
         //TODO: RELATIONSHIPS
-        relationships: {
-            type: 'json',
-        },
+        //MODLULAR.. PROJECT; MEMBER
+        relationships: {type: 'json'},
+
+        //TODO:  DEPRECIATE
+        project: {model: 'project'},
+        parent: {type: 'string'},
 
     },
 
