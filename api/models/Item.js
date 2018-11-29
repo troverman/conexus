@@ -5,31 +5,22 @@
 module.exports = {
 
 	attributes: {
-        title: {
-            type: 'string',
-        },
-        tags: {
-            type: 'string',
-        },
-        content: {
-            type: 'string',
-        },
-        identifierSet: {
-            type: 'string',
-        },
-        amountSet: {
-            type: 'string',
-        },
 
+        title: {type: 'string'},
+        content: {type: 'string'},
+
+        tags: {type: 'string'},
 
         //TODO: RELATIONSHIPS | ASSOCIATIONS
         //TAGS; ASSOCIATIONS; LOCATIONS
-        relationships: {
-            type: 'json',
-        },
+        relationships: {type: 'json'},
 
         //TODO: LOCATION
+        location: {type: 'json'},
 
+        //PRICE
+        identifierSet: {type: 'string'},
+        amountSet: {type: 'string'},
 
     },
 

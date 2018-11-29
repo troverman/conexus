@@ -9,24 +9,14 @@ module.exports = {
     //TODO: DEPRECIATE ? 
 
 	attributes: {
-        parent:{
-            type: 'string',
-        },
-        tags: {
-            type: 'string',
-        },
-        title: {
-            type: 'string',
-        },
-        type:{
-            type: 'string',
-        },
-        content:{
-            type: 'string',
-        },
-        creator:{
-            type: 'string',
-        }
+
+        parent: {type: 'string'},
+        tags: {type: 'string'},
+        title: {type: 'string'},
+        type: {type: 'string'},
+        content: {type: 'string'},
+        creator: {type: 'string'}
+        
     },
 
 };

@@ -2,32 +2,31 @@ var request = require('request');
 
 module.exports = {
     attributes: {
+
+        //BASIC
         avatarUrl: {
             type: 'string',
             defaultsTo: 'images/avatar.png'
         },
-        coverUrl: {
-            type: 'string',
-        },
+        coverUrl: {type: 'string'},
         email: {
             type: 'email',
             required: true,
             unique: true
         },
-
-        firstName: {
+        username: {
             type: 'string',
-        },
-        lastName: {
-            type: 'string',
-        },
-        dateOfBirth: {
-            type: 'string',
-        },
-        address: {
-            type: 'string',
+            required: true,
+            unique: true
         },
 
+        //INFO
+        firstName: {type: 'string'},
+        lastName: {type: 'string'},
+        dateOfBirth: {type: 'string'},
+        address: {type: 'string'},
+
+        //STATUS
         loggedIn: {
             type: 'boolean',
             defaultsTo: false
@@ -41,6 +40,7 @@ module.exports = {
             defaultsTo: false
         },
 
+        //COUNTS
         followingCount: {
             type: 'integer',
             defaultsTo: 0
@@ -57,20 +57,14 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
-
-        passports : { collection: 'Passport', via: 'user' },
         totalWork: {
             type: 'integer',
             defaultsTo: 0
         },
 
         //MAPPINGS
-        reputation: {
-            type: 'json',
-        },
-        balance: {
-            type: 'json',
-        },
+        reputation: {type: 'json'},
+        balance: {type: 'json'},
 
         //location time mapping??
         //give dimensional tokens 
@@ -78,15 +72,11 @@ module.exports = {
         //Location Token Manifold minting logic
         //Location+lat+lng+datetime
         //give +1 latLng Token per create 
-        locationTime: {
-            type: 'json',
-        },
+        locationTime: {type: 'json'},
 
-        username: {
-            type: 'string',
-            required: true,
-            unique: true
-        },
+        //PASSPORT
+        passports: { collection: 'Passport', via: 'user' },
+
     },
 
     afterCreate: function(model, next){

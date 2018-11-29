@@ -5,6 +5,7 @@
 module.exports = {
 
 	attributes: {
+
         followed: {
             model: 'user',
             required: true
@@ -13,6 +14,7 @@ module.exports = {
             model: 'user',
             required: true
         }
+        
     },
 
     beforeCreate: function(model, next) {

@@ -5,36 +5,23 @@
 module.exports = {
 
 	attributes: {
-        amount: {
-            type: 'string',
-        },
-        content: {
-            type: 'string',
-        },
-        identifier: {
-            type: 'string',
-        },
-        to: {
-            type: 'string',
-        },
-        from: {
-            type: 'string',
-        },
-        tags: {
-            type: 'string',
-        },
 
-        //TODO:DEPRECIATE
-        project: {
-            model: 'project',
-        },
+        //BASIC
+        amount: {type: 'string'},
+        identifier: {type: 'string'},
+        to: {type: 'string'},
+        from: {type: 'string'},
 
-        //TODO:DEPRECIATE
-        user: {
-            model: 'user',
-        },
+        //EXTRA
+        content: {type: 'string'},
+        tags: {type: 'string'},
 
         //TODO: CREATOR
+
+        //TODO:DEPRECIATE
+        project: {model: 'project'},
+        user: {model: 'user'},
+
 
     },
 

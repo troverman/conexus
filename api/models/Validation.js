@@ -6,44 +6,18 @@ module.exports = {
 
 	attributes: {
         
-
-        content: {
-            type: 'string',
-        },
-
-        reputation:{
-            type: 'json',
-        },
-
-        user: {
-            model: 'user'
-        },
-
-        validation:{
-            type: 'json',
-        },
+        content: {type: 'string'},
+        reputation: {type: 'json'},
+        user: {model: 'user'},
+        validation: {type: 'json'},
         
-
-
         //TODO: RELATIONSHIPS | ASSOCIATIONS
-        relationships: {
-            type: 'json',
-        },
-
-
+        relationships: {type: 'json'},
 
         //TODO: DEPRECIATE
-        project: {
-            type: 'string',
-        },
-        task: {
-            type: 'string',
-        },
-        work: {
-            type: 'string',
-        },
-
-
+        project: {type: 'string'},
+        task: {type: 'string'},
+        work: {type: 'string'},
 
     },
     

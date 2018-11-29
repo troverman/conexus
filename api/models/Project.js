@@ -4,13 +4,34 @@
 module.exports = {
 	attributes: {
 
-        tags: {
-            type: 'string',
-        },
 
-        title: {
+        //BASIC
+        title: {type: 'string'},
+        description: {type: 'string'},
+        avatarUrl: {
             type: 'string',
+            defaultsTo: '/images/loading.gif'
         },
+        //TODO: DEPRECIATE?
+        urlTitle: {type: 'string'},
+
+        //INFO
+        tags: {type: 'string'},
+        location: {type: 'json'},
+
+        //TODO: RELATIONSHIPS | ASSOCIATIONS
+        relationships: {type: 'json'},
+        associatedModels: {type: 'string'},
+        parent: {type: 'string'},
+
+        //TODO: SETTTINGS
+        //TODO: ASSOCAITED STRING MANIFOLD
+
+        //TODO: CREATOR 
+        //TODO: MORE
+        user: {model: 'user'},
+
+        //COUNTS
         memberCount: {
             type: 'integer',
             defaultsTo: 0
@@ -26,42 +47,6 @@ module.exports = {
         liveCount: {
             type: 'integer',
             defaultsTo: 0
-        },
-
-        location: {
-            type: 'json',
-        },
-
-        avatarUrl: {
-            type: 'string',
-            defaultsTo: '/images/loading.gif'
-        },
-
-        //TODO: DEPRECIATE?
-        urlTitle: {
-            type: 'string',
-        },
-
-        //TODO: SETTTINGS
-        //TODO: ASSOCAITED STRING MANIFOLD
-
-
-        //TODO: RELATIONSHIPS | ASSOCIATIONS
-        relationships: {
-            type: 'json',
-        },
-
-        associatedModels: {
-            type: 'string'
-        },
-
-        parent: {
-            type: 'string'
-        },
-
-
-        user: {
-            model: 'user'
         },
 
 

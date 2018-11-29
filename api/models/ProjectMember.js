@@ -5,12 +5,10 @@
 module.exports = {
 
 	attributes: {
-        user: {
-            model: 'user',
-        },
-        project: {
-            model: 'project',
-        }
+
+        project: {model: 'project'},
+        user: {model: 'user'},
+
     },
 
     beforeCreate: function(model, next) {

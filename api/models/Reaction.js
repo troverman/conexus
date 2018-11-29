@@ -5,28 +5,22 @@
 module.exports = {
 
 	attributes: {
-        amount: {
-            type: 'string',
-        },
+
+        amount: {type: 'string'},
 
         //TODO: DEPRECIATE
-        post: {
-            model: 'post'
-        },
+        post: {model: 'post'},
 
         //TODO: associatedModel
-        associatedModel: {
-            type: 'string',
-        },
+        associatedModel: {type: 'string'},
 
         type: {
             type: 'string',
             required: true
         },
 
-        user: {
-            model: 'user'
-        },
+        user: {model: 'user'},
+        
     },
 
     beforeCreate: function(model, next) {

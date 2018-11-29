@@ -4,6 +4,7 @@ module.exports = {
     //MAPPING OF LOCATIONS --> LAT LNG ? 
 
     attributes: {
+
         lat: {
             type: 'string',
             required: true
@@ -16,5 +17,6 @@ module.exports = {
             model: 'user',
             required: true
         }
+        
     },
 };
