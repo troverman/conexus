@@ -1,6 +1,5 @@
-
-const tf = require('@tensorflow/tfjs');
-require('@tensorflow/tfjs-node');
+//const tf = require('@tensorflow/tfjs');
+//require('@tensorflow/tfjs-node');
 var Q = require('q');
 
 module.exports = {
@@ -353,8 +352,8 @@ module.exports = {
 
 				console.log(matrix);
 				//console.log(dimObj);
-				const valueMatrixTensor = tf.tensor(matrix);
-				valueMatrixTensor.print();
+				//const valueMatrixTensor = tf.tensor(matrix);
+				//valueMatrixTensor.print();
 
 				//const input1 = tf.input({shape: [2, 2]});
 				//const input2 = tf.input({shape: [2, 2]});
@@ -385,7 +384,7 @@ module.exports = {
 				//HIGH DIMENSIONAL RELATIONS [] = []
 
 				//ONE VALUE MATRIX PER identiferSet
-				const valueMatrix = tf.input({shape: [orderModels.length, 8]});
+				//const valueMatrix = tf.input({shape: [orderModels.length, 8]});
 
 				var dimObj = {name:identiferSet, data:[]};
 
@@ -524,7 +523,7 @@ module.exports = {
 		//train('A', 0, 3);
 
 		//VALUE MATRIX | 2ND ORDER
-		valueMatrix([1], 'A');
+		//valueMatrix([1], 'A');
 		//valueMatrix([1,1], 'B,A');
 
 		//tensorTesting('B,A');
