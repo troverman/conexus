@@ -2,31 +2,70 @@ angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<div id=\"title-container\">\n" +
+    "<div class=\"intro\" style=\"max-height:270px\">\n" +
+    "    <div class=\"intro-container\">\n" +
+    "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "            <symbol id=\"intro-desktop-text\">\n" +
+    "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
+    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING THE NEXT WAVE OF PUBLIC ORGANIZATIONS\n" +
+    "            </symbol>  \n" +
+    "            <div class=\"intro-shade\"></div>  \n" +
+    "        </svg> \n" +
+    "        <div class=\"box-with-text\">\n" +
+    "            <div class=\"text-fill\">\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "            </div>\n" +
+    "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-novo\" class=\"text--transparent\"></use>\n" +
+    "            </svg> \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"intro-mobile\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--<div id=\"title-container\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<h1>CRE8.XYZ</h1>\n" +
     "		<h4>Creating the Next Wave of Public Organizations</h4>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
-    "</div>\n" +
+    "</div>-->\n" +
+    "\n" +
+    "<!--<h3>Transparency Maximalism</h3>-->\n" +
+    "<!--<h4>Share with us and Create the Future</h4>-->\n" +
     "\n" +
     "<div id=\"about-section1\">\n" +
     "	<div class=\"container\">\n" +
+    "\n" +
     "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<h3>Transparency Maximalism</h3>\n" +
-    "				<h4>Create the Next Wave</h4>\n" +
-    "				<h5>A Collaborative Network</h5>\n" +
+    "			<div class=\"col-sm-6\">\n" +
+    "				<h3>CREATE THE NEXT WAVE</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">A 24/7 continual hackathon</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and build together</p>\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
-    "				<h4>Share with us and Create the Future</h4>\n" +
-    "				<h5>Watch the World Create</h5>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-sm-6\"></div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-sm-6\"></div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h3>Create and Build a Shared Future</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create</p>\n" +
     "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
     "			</div>\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\">\n" +
     "				<div class=\"card\">\n" +
     "				    <div style=\"padding:16px;\">\n" +
     "						<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
@@ -37,15 +76,19 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						</a> | <span am-time-ago=\"\">30 Minutes Ago</span></p>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
     "<div id=\"about-section2\">\n" +
     "	<div class=\"container\">\n" +
+    "\n" +
     "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h2>Collaborative Governance</h2>\n" +
@@ -56,7 +99,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -172,8 +217,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"row\" ng-show=\"true\">\n" +
     "			<div class=\"col-md-12\">\n" +
+    "\n" +
     "				<div class=\"\">\n" +
     "			        <div style=\"\">\n" +
+    "			        	\n" +
     "						<h1>CRE8</h1>\n" +
     "						<h3><b>Join Our Community</b></h3>\n" +
     "			        	<h4>Create Your Value Map</h4>\n" +
@@ -197,12 +244,12 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						<div class=\"spacing-10\"></div>\n" +
     "						<highchart config=\"chartMap\"></highchart>\n" +
     "						<div class=\"spacing-10\"></div>\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://66.media.tumblr.com/b4ac17c890389077048cd05f00b8b397/tumblr_o5xdhaZpCK1v05rsfo1_1280.jpg\">\n" +
-    "			        	<img style=\"max-height:200px\" src=\"http://33.media.tumblr.com/9d90debeda613c297cd7642c14e00d03/tumblr_mf45zsouyw1qatka3o1_500.gif\">\n" +
+    "\n" +
+    "\n" +
     "					</div>\n" +
     "				</div>\n" +
+    "\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "				<div class=\"\">\n" +
     "					<div style=\"\">\n" +
@@ -243,6 +290,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					</div>\n" +
     "				</div>\n" +
     "\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "				<div class=\"\">\n" +
     "					<div style=\"\">\n" +
     "						<h4>A Valuable Day</h4>\n" +
@@ -261,6 +310,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					</div>\n" +
     "				</div>\n" +
     "\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "				<div class=\"\">\n" +
     "					<div style=\"\">\n" +
     "						<h2>Personal Information</h4>\n" +
@@ -274,6 +325,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						</div>\n" +
     "					</div>\n" +
     "				</div>\n" +
+    "\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "				<div class=\"\">\n" +
     "					<div style=\"\">\n" +
@@ -292,6 +345,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	                	</form>\n" +
     "					</div>\n" +
     "				</div>\n" +
+    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1119,11 +1173,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"col-md-3 col-sm-12 col-xs-12\" style=\"margin-bottom:0px\">\n" +
-    "            <div class=\"card\">\n" +
+    "            <div class=\"card\" style=\"margin-top:0px\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <!--<button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>-->\n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
-    "                    <!--<button class=\"btn btn-default log-btn\" ng-click=\"sideNavToggle()\">+ Order</button>-->\n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">Send Tokens</button>\n" +
     "                    <a href=\"account\"<button class=\"btn btn-default log-btn\" ng-click=\"\">Edit Account</button></a>\n" +
     "                </div>\n" +
@@ -1679,7 +1732,7 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:32px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CRE8 MULTIDIMENSIONAL VALUE</text> \n" +
+    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CRE8 MULTIDIMENSIONAL VALUE</text> \n" +
     "            </symbol>  \n" +
     "\n" +
     "            <div class=\"intro-shade\"></div>  \n" +
@@ -3301,8 +3354,125 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-50\"></div>\n" +
-    "");
+    "<div class=\"row\" ng-show=\"contentList.length > 0\">\n" +
+    "\n" +
+    "    <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span><b>Tags</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span><b>Associations</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span><b>Locations</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "                <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                    <a href=\"#\" role=\"button\">\n" +
+    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"\">\n" +
+    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\" ng-show=\"newContentToggleVar\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                    <div class=\"\">\n" +
+    "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                        <input type=\"text\" placeholder= \"Associations\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
+    "                        <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                            <li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Motion</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='TASK'}\" ng-click=\"selectType('TASK')\"><a href=\"#\">Task</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='TIME'}\" ng-click=\"selectType('TIME')\"><a href=\"#\">Time</a></li>\n" +
+    "                            <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
+    "                        </ul>\n" +
+    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
+    "                        <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <!--<input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">-->\n" +
+    "                    </div>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "                    <div class=\"spacing-15\"></div>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-repeat=\"item in contentList\">\n" +
+    "            <div class=\"card\" style=\"\">\n" +
+    "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "\n" +
+    "                    <div style=\"float:right\">\n" +
+    "                        <h5 style=\"text-align:right\" ng-click=\"tokenToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <p><a style=\"font-weight:700\"  href=\"member/{{item.user.username}}\">\n" +
+    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                        {{item.user.username}}\n" +
+    "                    </a> | <span am-time-ago=\"item.createdAt\"></span></p>\n" +
+    "                    \n" +
+    "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "                <div class=\"card-footer\">\n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                    <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a class=\"pull-right\" style=\"padding:0px;\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                </div>\n" +
+    "                <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                    <form role=\"form\" ng-submit=\"createPost(item)\">\n" +
+    "                        <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\" ng-click=\"loadMore()\">\n" +
+    "            <div style=\"\">\n" +
+    "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "</div>");
 }]);
 
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3717,7 +3887,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            font-size: 2.8em;\n" +
     "        }\n" +
     "        .member-tabs.subNav{display:block;}.nav-toggle{display:none;}\n" +
-    "    }   \n" +
+    "    }\n" +
     "\n" +
     "</style>\n" +
     "\n" +
@@ -4026,25 +4196,22 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
-    "            <div class=\"navbar-header\">\n" +
     "\n" +
-    "                <!--TODO: NOTIFICATIONS-->\n" +
-    "                <button type=\"button\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\">\n" +
-    "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                </button>\n" +
+    "            <!--TODO: NOTIFICATIONS-->\n" +
+    "            <button class=\"navbar-toggle\" type=\"button\" ng-click=\"sideNavToggle()\">\n" +
+    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "            </button>\n" +
     "\n" +
-    "                <!--TODO: SEARCH-->\n" +
-    "                <!--<button type=\"button\" style=\"color:white;margin-top:5px;margin-bottom:0px\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\"><i class=\"fa fa-search\"></i></button>-->\n" +
-    "                <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
+    "            <!--<button type=\"button\" style=\"color:white;margin-top:5px;margin-bottom:0px\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\"><i class=\"fa fa-search\"></i></button>-->\n" +
     "\n" +
-    "            </div>\n" +
-    "\n" +
+    "            <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
     "\n" +
     "            <!--TODO: DEPRECIATE-->\n" +
     "            <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
+    "\n" +
     "                <ul class=\"nav navbar-nav\">\n" +
     "                    <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link1').value; return false;\">\n" +
     "                        <div class=\"form-group\">\n" +
@@ -4052,12 +4219,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        </div>\n" +
     "                    </form>\n" +
     "                </ul>\n" +
+    "\n" +
     "                <ul class=\"nav navbar-nav navbar-right\">\n" +
+    "\n" +
+    "                    <!--\n" +
     "                    <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
     "                    <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
     "                    <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
+    "                    -->\n" +
+    "\n" +
     "                    <li class=\"dropdown nav-links\" ng-show=\"currentUser\">\n" +
-    "                        <!--notifications on username-->\n" +
+    "\n" +
+    "                        <!--TODO: NOTIFICATIONS-->\n" +
     "                        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "                            {{currentUser.username}} <span class=\"fa fa-angle-down\"></span>\n" +
     "                        </a>\n" +
@@ -4072,12 +4245,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                            <li role=\"separator\" class=\"divider\"></li>\n" +
     "                            <li><a style=\"color:black!important\" href=\"/logout\">log out</a></li>\n" +
     "                        </ul>\n" +
+    "\n" +
     "                    </li>\n" +
+    "\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
-    "                </ul>\n" +
-    "            </div>\n" +
     "\n" +
+    "                </ul>\n" +
+    "    \n" +
+    "            </div>\n" +
     "\n" +
     "        </div>\n" +
     "        <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +

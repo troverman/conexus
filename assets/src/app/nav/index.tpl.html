@@ -31,7 +31,7 @@
             font-size: 2.8em;
         }
         .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
-    }   
+    }
 
 </style>
 
@@ -340,25 +340,22 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
         <div class="container">
-            <div class="navbar-header">
 
-                <!--TODO: NOTIFICATIONS-->
-                <button type="button" class="navbar-toggle" ng-click="sideNavToggle()">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <!--TODO: NOTIFICATIONS-->
+            <button class="navbar-toggle" type="button" ng-click="sideNavToggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-                <!--TODO: SEARCH-->
-                <!--<button type="button" style="color:white;margin-top:5px;margin-bottom:0px" class="navbar-toggle" ng-click="sideNavToggle()"><i class="fa fa-search"></i></button>-->
-                <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
+            <!--<button type="button" style="color:white;margin-top:5px;margin-bottom:0px" class="navbar-toggle" ng-click="sideNavToggle()"><i class="fa fa-search"></i></button>-->
 
-            </div>
-
+            <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
 
             <!--TODO: DEPRECIATE-->
             <div class="collapse navbar-collapse" style="text-align:center">
+
                 <ul class="nav navbar-nav">
                     <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link1').value; return false;">
                         <div class="form-group">
@@ -366,12 +363,18 @@
                         </div>
                     </form>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
+
+                    <!--
                     <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
                     <li class="nav-links"><a href="/discover">Discover</a></li>
                     <li class="nav-links"><a href="/market">Market</a></li>
+                    -->
+
                     <li class="dropdown nav-links" ng-show="currentUser">
-                        <!--notifications on username-->
+
+                        <!--TODO: NOTIFICATIONS-->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{currentUser.username}} <span class="fa fa-angle-down"></span>
                         </a>
@@ -386,12 +389,15 @@
                             <li role="separator" class="divider"></li>
                             <li><a style="color:black!important" href="/logout">log out</a></li>
                         </ul>
+
                     </li>
+
                     <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
                     <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
-                </ul>
-            </div>
 
+                </ul>
+    
+            </div>
 
         </div>
         <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
