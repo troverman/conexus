@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/ledger.tpl.html", "project/templates/marketplace.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html", "work/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -1672,53 +1672,38 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
 angular.module("intro/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("intro/index.tpl.html",
     "<div class=\"intro\" style=\"max-height:500px\">\n" +
+    "\n" +
     "    <div class=\"intro-container\">\n" +
-    "      <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-    "        <symbol id=\"intro-desktop-text\">\n" +
-    "          <text style=\"font-size:32px;\" text-anchor=\"middle\"\n" +
-    "                x=\"960\"  \n" +
-    "                y=\"488\"\n" +
-    "                dy=\".35em\"\n" +
-    "                class=\"medium-text\"\n" +
-    "                >\n" +
-    "            CRE8.XYZ\n" +
-    "          </text> \n" +
-    "          <text style=\"font-size:32px;\" text-anchor=\"middle\"\n" +
-    "                x=\"960\"  \n" +
-    "                y=\"570\"\n" +
-    "                dy=\".35em\"\n" +
-    "                class=\"medium-text\"\n" +
-    "                >\n" +
-    "            CRE8 MULTIDIMENSIONAL VALUE\n" +
-    "          </text> \n" +
-    "        </symbol>       \n" +
-    "        <div class=\"intro-shade\"></div>  \n" +
-    "      </svg> \n" +
-    "      <div class=\"box-with-text\">\n" +
-    "        <div class=\"text-fill\">\n" +
-    "          <video itemscope itemtype=\"VideoObject\"\n" +
-    "              class=\"video\" \n" +
-    "              src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\"\n" +
-    "              preload=\"auto\" \n" +
-    "              autoplay=\"autoplay\" \n" +
-    "              loop=\"loop\" \n" +
-    "              muted=\"muted\">\n" +
-    "          </video>\n" +
-    "        </div>\n" +
-    "        <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" \n" +
-    "             preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-    "          <rect\n" +
-    "            width=\"100%\"\n" +
-    "            height=\"100%\"\n" +
-    "            mask=\"url(#intro-desktop-mask)\"\n" +
-    "            class=\"shape--fill\"/>\n" +
-    "          <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
-    "          <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-novo\" class=\"text--transparent\"></use>\n" +
+    "\n" +
+    "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "\n" +
+    "            <symbol id=\"intro-desktop-text\">\n" +
+    "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
+    "                <text style=\"font-size:32px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CRE8 MULTIDIMENSIONAL VALUE</text> \n" +
+    "            </symbol>  \n" +
+    "\n" +
+    "            <div class=\"intro-shade\"></div>  \n" +
+    "\n" +
     "        </svg> \n" +
-    "      </div>\n" +
+    "\n" +
+    "        <div class=\"box-with-text\">\n" +
+    "\n" +
+    "            <div class=\"text-fill\">\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-novo\" class=\"text--transparent\"></use>\n" +
+    "            </svg> \n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
     "    </div>\n" +
-    "  <div class=\"intro-mobile\"></div>\n" +
-    "  <!--https://vimeo.com/153676878-->\n" +
+    "\n" +
+    "    <div class=\"intro-mobile\"></div>\n" +
+    "\n" +
     "</div>\n" +
     "");
 }]);
@@ -2822,6 +2807,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div ui-view=\"memberActivity\"></div>\n" +
     "		<div ui-view=\"memberAssets\"></div>\n" +
     "		<div ui-view=\"memberContent\"></div>\n" +
+    "		<div ui-view=\"memberItems\"></div>\n" +
     "		<div ui-view=\"memberFollowers\"></div>\n" +
     "		<div ui-view=\"memberFollowing\"></div>\n" +
     "		<div ui-view=\"memberLedger\"></div>\n" +
@@ -3284,34 +3270,52 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "</div>");
 }]);
 
+angular.module("member/templates/items.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("member/templates/items.tpl.html",
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                <a href=\"#\" role=\"button\">\n" +
+    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <h1>Items</h1>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"items.length == 0\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-50\"></div>\n" +
+    "");
+}]);
+
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"\">\n" +
-    "		<div style=\"\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "					<li><a href=\"member/{{member.username}}/assets\">Assets</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "					<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
-    "				</ul>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "				<!--<h1>888,888,888 USD</h1>-->\n" +
-    "				<!--<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>-->\n" +
-    "				<!--<h4>Filter</h4>\n" +
-    "				<form style=\"display:flex;flex-direction:row;\">\n" +
-    "			    	<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Asset\">\n" +
-    "			    	<div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "			            <a href=\"#\">\n" +
-    "			                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			            </a>\n" +
-    "					</div>\n" +
-    "				</form>-->\n" +
-    "			</div>\n" +
-    "		</div>\n" +
+    "	<div class=\"col-md-6\">\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li><a href=\"member/{{member.username}}/assets\">Assets</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
+    "		</ul>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -3332,9 +3336,10 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "\n" +
-    "			<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
-    "\n" +
     "			<div class=\"col-md-6\">\n" +
+    "\n" +
+    "				<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
+    "\n" +
     "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "					<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "					<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
@@ -3343,14 +3348,6 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "			</div>\n" +
     "\n" +
     "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "				<form style=\"display:flex;flex-direction:row;\">\n" +
-    "			    	<input ng-model=\"assetSet\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
-    "			    	<div style=\"border:0px;width:50%\" class=\"btn btn-default dropdown sort-dropdown noselect\">\n" +
-    "			            <a href=\"#\">\n" +
-    "			                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "			            </a>\n" +
-    "					</div>\n" +
-    "				</form>\n" +
     "				<!--<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>-->\n" +
     "				<h4>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Balance</h4>\n" +
     "				<h4>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Revenue</h4>\n" +
@@ -3804,6 +3801,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/content\">Content</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/following\">{{member.followingCount}} Following</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/items\">Items</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/ledger\">Ledger</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/positions\">Positions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></h4>\n" +
@@ -4100,6 +4098,14 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "				<h1>Notifications</h1>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"notifications.length == 0\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <div style=\"padding:16px;\">\n" +
+    "	            <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
     "	\n" +
     "	<div class=\"spacing-50\"></div>\n" +
@@ -4788,13 +4794,11 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"col-md-6\">\n" +
-    "		<div style=\"\">\n" +
-    "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "				<li><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></li>\n" +
-    "				<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
-    "				<li><a href=\"project/{{project.urlTitle}}/ledger\">Transactions</a></li>\n" +
-    "			</ul>\n" +
-    "		</div>\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></li>\n" +
+    "			<li><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></li>\n" +
+    "			<li><a href=\"project/{{project.urlTitle}}/ledger\">Transactions</a></li>\n" +
+    "		</ul>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -4815,28 +4819,25 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "			<div class=\"row\">\n" +
+    "\n" +
     "				<div class=\"col-md-6\">\n" +
+    "\n" +
     "					<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
+    "\n" +
     "					<ul style=\"\" class=\"member-tabs\">\n" +
     "						<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "						<li><a ng-click=\"selectExpense()\" href=\"#\">Expenses</a></li>\n" +
     "						<li><a ng-click=\"selectRevenue()\" href=\"#\">Revenue</a></li>\n" +
     "					</ul>\n" +
     "				</div>\n" +
+    "\n" +
     "				<div class=\"col-md-6\">\n" +
     "					<div style=\"text-align:right\">\n" +
-    "						<form style=\"display:flex;flex-direction:row;\">\n" +
-    "					    	<input ng-mode=\"assetFilter\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
-    "					    	<div style=\"border:0px;width:50%\" class=\"btn btn-default dropdown sort-dropdown noselect\">\n" +
-    "					            <a href=\"#\">\n" +
-    "					                <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i> Search</h5>\n" +
-    "					            </a>\n" +
-    "							</div>\n" +
-    "						</form>\n" +
     "						<h3>{{sumTo[sumTo.length-1][1].toFixed(2)}} USD REVENUE</h3>\n" +
     "						<h3>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} USD EXPENSE</h3>\n" +
     "					</div>\n" +
     "				</div>\n" +
+    "				\n" +
     "			</div>\n" +
     "\n" +
     "			<!--children projects..-->\n" +

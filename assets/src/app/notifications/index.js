@@ -11,7 +11,7 @@ angular.module( 'conexus.notifications', [
             }
         },
         resolve: {
-            view: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
+            notifications: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
                 //return WorkModel.getOne($stateParams.id);
                 return null
             }],
@@ -19,7 +19,8 @@ angular.module( 'conexus.notifications', [
     });
 }])
 
-.controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'titleService', 'view', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, PostModel, titleService, view) {
+.controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'notifications', 'PostModel', 'titleService', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, notifications, PostModel, titleService) {
     titleService.setTitle('View | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.notifications = [];
 }]);

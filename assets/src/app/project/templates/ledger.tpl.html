@@ -2,13 +2,11 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<div style="">
-			<ul style="padding:0px;" class="member-tabs">
-				<li><a href="project/{{project.urlTitle}}/assets">Assets</a></li>
-				<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
-				<li><a href="project/{{project.urlTitle}}/ledger">Transactions</a></li>
-			</ul>
-		</div>
+		<ul style="padding:0px;" class="member-tabs">
+			<li><a href="project/{{project.urlTitle}}/assets">Assets</a></li>
+			<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
+			<li><a href="project/{{project.urlTitle}}/ledger">Transactions</a></li>
+		</ul>
 	</div>
 </div>
 
@@ -29,28 +27,25 @@
 	<div class="card">
 		<div style="padding:16px;">
 			<div class="row">
+
 				<div class="col-md-6">
+
 					<h5>{{transactions[0].createdAt | date:"h:mma | MM/dd/yyyy"}} - {{transactions[transactions.length-1].createdAt | date:"h:mma | MM/dd/yyyy"}} </h5>
+
 					<ul style="" class="member-tabs">
 						<li ng-click="selectOverview()"><a href="">Overview</a></li>
 						<li><a ng-click="selectExpense()" href="#">Expenses</a></li>
 						<li><a ng-click="selectRevenue()" href="#">Revenue</a></li>
 					</ul>
 				</div>
+
 				<div class="col-md-6">
 					<div style="text-align:right">
-						<form style="display:flex;flex-direction:row;">
-					    	<input ng-mode="assetFilter" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
-					    	<div style="border:0px;width:50%" class="btn btn-default dropdown sort-dropdown noselect">
-					            <a href="#">
-					                <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-					            </a>
-							</div>
-						</form>
 						<h3>{{sumTo[sumTo.length-1][1].toFixed(2)}} USD REVENUE</h3>
 						<h3>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} USD EXPENSE</h3>
 					</div>
 				</div>
+				
 			</div>
 
 			<!--children projects..-->

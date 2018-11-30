@@ -114,6 +114,20 @@ angular.module( 'conexus.member', [
             }],
         }
     })
+    .state( 'member.items', {
+        url: '/items',
+        views: {
+            "memberItems": {
+                controller: 'MemberItemsCtrl',
+                templateUrl: 'member/templates/items.tpl.html'
+            }
+        },
+        resolve: {
+            items: ['member', 'ItemModel', function(member, ItemModel) {
+                return ItemModel.getSome(member.id);
+            }],
+        }
+    })
     .state( 'member.ledger', {
         url: '/ledger',
         views: {
@@ -778,6 +792,12 @@ angular.module( 'conexus.member', [
 
 }])
 
+.controller( 'MemberItemsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function MemberItemsController($sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+    $scope.currentUser = config.currentUser;
+    $scope.items = items;
+    titleService.setTitle($scope.member.username + ' | Items | CRE8.XYZ');
+}])
+
 .controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
     
     $scope.assetSet = 'CRE8';
@@ -917,6 +937,7 @@ angular.module( 'conexus.member', [
         }
     }
     $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
+    
     //TAGS
     //DO BY TAGS! SAME ..
     function sumFunction(obj){
@@ -997,6 +1018,8 @@ angular.module( 'conexus.member', [
         }
     };
 
+    $scope.selectIdentifier = function(identifier){};
+
     $scope.selectOverview = function(){
         $scope.pie.series[0].data = [];
         $scope.pie.series[0].data = [{
@@ -1036,6 +1059,10 @@ angular.module( 'conexus.member', [
                 y: $scope.sortedTransactionTags[x].amount,
             });
         }
+    };
+
+    $scope.selectTag = function(tag){
+        $scope.searchQuery = tag
     };
 
     //TODO
