@@ -65,15 +65,18 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-xs-12\" style=\"width:641px\">\n" +
     "				<div class=\"card\">\n" +
     "				    <div style=\"padding:16px;\">\n" +
     "						<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "						<h3><a href=\"https://www.youtube.com/embed/jUQ_3kCcG_U\">open eye</a></h3>\n" +
-    "						<p><a href=\"member/troverman\">\n" +
-    "							<img class=\"card-avatar\" ng-src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" err-src=\"images/avatar.png\">\n" +
-    "							troverman\n" +
-    "						</a> | <span am-time-ago=\"\">30 Minutes Ago</span></p>\n" +
+    "						<p>\n" +
+    "							<a href=\"member/troverman\">\n" +
+    "								<img class=\"card-avatar\" ng-src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" err-src=\"images/avatar.png\">\n" +
+    "								troverman\n" +
+    "							</a>\n" +
+    "							<span am-time-ago=\"\" style=\"color:gray\"> • 30 Minutes Ago</span>\n" +
+    "						</p>\n" +
     "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -112,8 +115,12 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-xs-12\">\n" +
     "				<h2>MultiDimensional Token Protocols</h2>\n" +
     "				<h4>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization | Transaction Tokenization</h4>\n" +
-    "				<h5><a>Developers</a> | <a>Documentation</a> | <a>APIs</a> | <a>App Ecosystem</a> | <a href=\"https://www.github.com/troverman/conexus\"><i class=\"fa fa-github\"></i></a></h4>\n" +
-    "				<!--<pre>CODE</pre>-->\n" +
+    "				<h5>\n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">Developers</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">Documentation</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">APIs</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">App Ecosystem</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\"><i class=\"fa fa-github\"></i></a></h4>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
