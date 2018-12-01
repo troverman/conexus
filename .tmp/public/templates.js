@@ -1090,22 +1090,17 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
   $templateCache.put("footer/index.tpl.html",
     "<div class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	<div class=\"container\">\n" +
-    "		<div class=\"footer-links\">\n" +
-    "			<a>{{date | date:'yyyy'}}</a>\n" +
-    "			<!--<a href=\"/\">conex.us</a>-->\n" +
-    "			<a href=\"/\">CRE8.XYZ</a>\n" +
-    "			<!--<a href=\"/about\">about</a>-->\n" +
+    "		<div class=\"footer-links\" style=\"padding:3px;\">\n" +
+    "			<a style=\"font-weight:bold;font-size:15px;\" href=\"/\">CRE8.XYZ</a>\n" +
+    "			<br>\n" +
+    "			<a href=\"/about\">about</a>\n" +
     "			<a href=\"/discover\">discover</a>\n" +
     "			<a href=\"/market\">market</a>\n" +
     "			<a href=\"/projects\">projects</a>\n" +
     "			<a href=\"/tasks\">tasks</a>\n" +
-    "			<!--<a href=\"/transparency\">transparency</a>-->\n" +
-    "			<!--<a href=\"/project/conexus/ledger\">transparency</a>-->\n" +
+    "			<a href=\"/transparency\">transparency</a>\n" +
     "		</div>\n" +
-    "		<div>\n" +
-    "			<a href=\"/\"><img src=\"images/hyper.gif\"></a>\n" +
-    "			<!--<a href=\"/\"><img src=\"images/conexus-white.png\"></a>-->\n" +
-    "		</div>\n" +
+    "		<div><a href=\"/\"><img src=\"images/hyper.gif\"></a></div>\n" +
     "	</div>	\n" +
     "</div>");
 }]);
@@ -4197,17 +4192,21 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
     "\n" +
-    "            <!--TODO: NOTIFICATIONS-->\n" +
-    "            <button class=\"navbar-toggle\" type=\"button\" ng-click=\"sideNavToggle()\">\n" +
-    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "            </button>\n" +
+    "            <div class=\"navbar-header\">\n" +
     "\n" +
-    "            <!--<button type=\"button\" style=\"color:white;margin-top:5px;margin-bottom:0px\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\"><i class=\"fa fa-search\"></i></button>-->\n" +
+    "                <!--TODO: NOTIFICATIONS-->\n" +
+    "                <button class=\"navbar-toggle\" type=\"button\" ng-click=\"sideNavToggle()\">\n" +
+    "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                    <span class=\"icon-bar\"></span>\n" +
+    "                    <span class=\"icon-bar\"></span>\n" +
+    "                    <span class=\"icon-bar\"></span>\n" +
+    "                </button>\n" +
     "\n" +
-    "            <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
+    "                <!--<button type=\"button\" style=\"color:white;margin-top:5px;margin-bottom:0px\" class=\"navbar-toggle\" ng-click=\"sideNavToggle()\"><i class=\"fa fa-search\"></i></button>-->\n" +
+    "\n" +
+    "                <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
+    "                \n" +
+    "            </div>\n" +
     "\n" +
     "            <!--TODO: DEPRECIATE-->\n" +
     "            <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +

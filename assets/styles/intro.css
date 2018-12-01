@@ -1,5 +1,46 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700);
 
+svg {
+	max-width:100%;
+	max-height:100%;
+	min-width:100%;
+	min-height:100%
+}
+
+@keyframes draw {
+	0% {
+		stroke-dasharray:180 540;
+		stroke-dashoffset:-454;
+		stroke-width:6px;
+		stroke:#14B795
+	}
+
+	100% {
+		stroke-dasharray:760;
+		stroke-dashoffset:0;
+		stroke-width:2px;
+		stroke:#14B795
+	}
+}
+
+#novo-svg {fill:#fff;}
+
+.box-with-text {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	margin:0 auto
+}
+
+.continue-wrap {
+	position:absolute;
+	top:75%;
+	width:100%;
+	margin:0 auto
+}
+
 .intro {
 	position:relative;
 	top:0;
@@ -32,18 +73,38 @@
 	background-size:cover
 }
 
-svg {
-	max-width:100%;
-	max-height:100%;
-	min-width:100%;
-	min-height:100%
+.intro-shade {
+	background: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    z-index: -1;
 }
 
-.continue-wrap {
-	position:absolute;
-	top:75%;
-	width:100%;
-	margin:0 auto
+.mask__shape {fill:#fff}
+
+.shape {
+	fill:transparent;
+	stroke-dasharray:180 540;
+	stroke-dashoffset:-454;
+	stroke-width:6px;
+	stroke:#fff
+}
+
+.shape--fill {fill:rgba(0,0,0,0.25);}
+
+.svg-defs {
+	width:0;
+	height:0;
+}
+
+.svg-inverted-mask {
+	margin:0 auto;
+	overflow:auto!important;
+	z-index:2
 }
 
 .svg-wrapper {
@@ -51,6 +112,13 @@ svg {
 	margin:0 auto;
 	width:320px;
 	cursor: pointer;
+}
+
+.svg-wrapper:hover .text {color: #fff;}
+
+.svg-wrapper:hover .shape {
+	-webkit-animation:.5s draw linear forwards;
+	animation:.5s draw linear forwards
 }
 
 .text {
@@ -63,62 +131,17 @@ svg {
 	top:-48px
 }
 
-#novo-svg {
-	fill:#fff;
-}
-
-.shape {
-	fill:transparent;
-	stroke-dasharray:180 540;
-	stroke-dashoffset:-454;
-	stroke-width:6px;
-	stroke:#fff
-}
-
-@keyframes draw {
-0% {
-	stroke-dasharray:180 540;
-	stroke-dashoffset:-454;
-	stroke-width:6px;
-	stroke:#14B795
-}
-
-100% {
-	stroke-dasharray:760;
-	stroke-dashoffset:0;
-	stroke-width:2px;
-	stroke:#14B795
-}
-}
-
-.svg-wrapper:hover .shape {
-	-webkit-animation:.5s draw linear forwards;
-	animation:.5s draw linear forwards
-}
-
-.svg-wrapper:hover .text {
-	color: #fff;
-}
-
-.box-with-text {
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	margin:0 auto
-}
-
-.svg-inverted-mask {
-	margin:0 auto;
-	overflow:auto!important;
-	z-index:2
-}
-
 .text-fill {
 	z-index:-5;
 	margin:auto;
 	overflow:hidden
+}
+
+.text--transparent {
+	fill:rgba(255,255,255,0.75);
+	font-family: 'Titillium Web', sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .video {
@@ -132,123 +155,56 @@ svg {
 	z-index:-5
 }
 
-.mask__shape {
-	fill:#fff
-}
-
-.shape--fill {
-	fill:rgba(0,0,0,0.25);
-}
-
-.text--transparent {
-	fill:rgba(255,255,255,0.75);
-	font-family: 'Titillium Web', sans-serif;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.intro-shade {
-	background: rgba(0,0,0,0.5);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    z-index: -1;
-}
-
-.svg-defs {
-	width:0;
-	height:0;
-}
-
-
 /* media queries */
 @media only screen and (max-width: 1024px) {
-	video {
-		display:none
-	}
-
-	.intro-mobile {
-		visibility:visible;
-		height:100%
-	}
-
-	.port-mobile {
-		visibility:visible
-	}
-
-	.port-box a #fill-hover {
-		fill:rgba(255,255,255,0.1);
-		transition:fill .2s
-	}
-
+	video {display:none}
 	.contact-mobile {
 		visibility:visible;
 		height:100%
 	}
+	.intro-mobile {
+		visibility:visible;
+		height:100%
+	}
+	.port-mobile {visibility:visible}
+	.port-box a #fill-hover {
+		fill:rgba(255,255,255,0.1);
+		transition:fill .2s
+	}
 }
 
 @media only screen and (max-width: 920px) {
-	.intro-container {
-		zoom: 0.8;
-	}
-	.continue-wrap {
-		display: none;
-	}
+	.intro-container {zoom: 0.8}
+	.continue-wrap {display: none}
 }
 @media only screen and (max-width: 850px) {
-	.intro-container {
-		zoom: 0.7;
-	}
+	.intro-container {zoom: 0.7}
 }
 @media only screen and (max-width: 740px) {
-	.intro-container {
-		zoom: 0.6;
-	}
+	.intro-container {zoom: 0.6}
 }
 @media only screen and (max-width: 640px) {
-	.intro-container {
-		zoom: 0.55;
-	}
+	.intro-container {zoom: 0.55}
 }
 @media only screen and (max-width: 600px) {
-	.intro-container {
-		zoom: 0.5;
-	}
+	.intro-container {zoom: 0.5}
 }
 @media only screen and (max-width: 555px) {
-	.intro-container {
-		zoom: 0.45;
-	}
+	.intro-container {zoom: 0.45}
 }
 @media only screen and (max-width: 510px) {
-	.intro-container {
-		zoom: 0.4;
-	}
+	.intro-container {zoom: 0.4}
 }
 @media only screen and (max-width: 460px) {
-	.intro-container {
-		zoom: 0.35;
-	}
+	.intro-container {zoom: 0.35}
 }
 @media only screen and (max-width: 410px) {
-	.intro-container {
-		zoom: 0.325;
-	}
+	.intro-container {zoom: 0.325}
 }
 @media only screen and (max-width: 788px) {
-	.desktop {
-		visibility:hidden
-	}
-
-	.mobile {
-		visibility:visible
-	}
+	.desktop {visibility:hidden}
+	.mobile {visibility:visible}
 }
 @media only screen and (max-width: 500px) {
-	.shape--fill {
-	    fill: rgba(0,0,0,0.8);
-	}
+	.shape--fill {fill: rgba(0,0,0,0.8)}
 }
