@@ -12,7 +12,7 @@ mapping (address => mapping (string => uint)) balances;
 # Token Manifolds
 
 	Sets of Infinifty
-	Discritized Sets of Infinity contained in a mapping
+	Discretized Sets of Infinity contained in a mapping
 
 # Additive Manifolds
 
@@ -25,7 +25,7 @@ mapping (address => mapping (string => uint)) balances;
 
 # Token language interpolation and token operators ['+',’,’]
 
-	Vital to navigation of the token domain are language protocols and operators that define logic and interperation
+	Vital to navigation of the token domain are language protocols and operators that define logic and interpretation
 
 	'CRE8+'
 		→ CRE8 Manifold;

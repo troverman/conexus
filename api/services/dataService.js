@@ -519,12 +519,153 @@ module.exports = {
 
 		};
 
+		//TENSOR CONNECTIONS --> SHIFT IN DIMENSIONALITY --> NOT GOING TO DO CONVERSIONS --> USED FOR RESHAPING (IE TENSOR PRODUCT)
+
+		//COMMUNICATIVE TENSORS REQURE SAME BASE DIMENSIONS
+
+		function searchObject(object, matchCallback, currentPath, result, searched) {
+	        currentPath = currentPath || '';
+	        result = result || [];
+	        searched = searched || [];
+	        if (searched.indexOf(object) !== -1 && object === Object(object)) {return;}
+	        searched.push(object);
+	        if (matchCallback(object)) {result.push({path: currentPath, value: object});}
+	        try {
+	            if (object === Object(object)) {
+	                for (var property in object) {
+	                    if (property.indexOf("$") !== 0) {
+	                        searchObject(object[property], matchCallback, currentPath + "." + property, result, searched);
+	                    }
+	                }
+	            }
+	        }
+	        catch (e) {
+	            console.log(object);
+	            throw e;
+	        }
+	        return result;
+	    };
+
+	    function updateObject(object, newValue, path){
+	        var stack = path.split('.');
+	        stack.shift();
+	        while(stack.length>1){object = object[stack.shift()];}
+	        object[stack.shift()] = newValue;
+	    };
+
+		const totalDimObj = [];
+		//OKAY MB DONT DO THE CIRCLE .. DO THE CIRCUT WALK.. 
+		//minimial no self similar
+		function valueTensor(identiferSet, dimObj, recursion, depth, index){
+
+			recursion++;
+
+			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+				
+				var foundObj = searchObject(totalDimObj, function (value) {return value != null && value != undefined && value.name == identiferSet;});
+				
+				if (foundObj.length != 0){
+
+					//ONLY KEEP THE LONGEST CHAIN?
+					//dimObj = foundObj[0].value;
+					//dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
+
+					//console.log(foundObj);
+
+					//if notcircular
+					//self similarity is 0;inf;1
+					console.log(foundObj);
+
+					if (dimObj.length != 0){
+						for (x in foundObj){
+							if (x > 0){
+								updateObject(totalDimObj, dimObj, foundObj[x].path);
+							}
+						}
+					}
+
+				}
+
+				else{
+					//console.log('rank',orderModels.length)
+					dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
+
+					for (x in orderModels){
+
+						if (dimObj.data){
+							//PUSH ORDER BOOK
+
+							dimObj.data.push({
+								name: orderModels[x].identiferSet1,
+								data: [],
+							});
+
+						}
+
+						//else{console.log(dimObj.data)}
+
+						for (i in orderModels[x].identiferSet1.split(',')){
+							dimObj.data[x].data.push({
+								identiferSet1:orderModels[x].identiferSet1, 
+								amountSet1:orderModels[x].amountSet1,
+							});
+						}
+
+						if (recursion < depth){
+							valueTensor(orderModels[x].identiferSet1, totalDimObj, recursion, depth, x);
+						}
+
+					}
+
+				}
+
+				totalDimObj.push(dimObj);
+
+				console.log(totalDimObj)
+				//console.log(dimObj, totalDimObj);
+
+
+			});
+
+		};
+
+		function valueTensorTotal(identiferSet, dimObj, recursion, depth, index){
+
+			recursion++;
+
+			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+				
+				dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
+
+				for (x in orderModels){
+
+					if (dimObj.data){
+						//PUSH ORDER BOOK
+
+						dimObj.data.push({
+							name: orderModels[x].identiferSet1,
+							data: [],
+						});
+
+					}
+
+				}
+
+				console.log(dimObj);
+
+			});
+
+		};
+
 		//train('A', 0, 8);
 		//train('A', 0, 3);
 
 		//VALUE MATRIX | 2ND ORDER
 		//valueMatrix([1], 'A');
 		//valueMatrix([1,1], 'B,A');
+
+		//YES
+		valueTensor('A', [], 0, 2)
 
 		//tensorTesting('B,A');
 

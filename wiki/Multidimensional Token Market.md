@@ -56,7 +56,7 @@ contract MultidimensionalTokenMarket {
 
 ##### Higher Dimensional Combinatorials require at least n-dim base state
 
-## Vector Assets in N-space
+## Vector Assets in a N-dimensional Vector Field
 
 ## Value Vector
 
@@ -70,7 +70,7 @@ contract MultidimensionalTokenMarket {
 | G 	|   	|
 | H 	|   	|
 
-## Matrix Assets in a Matrix-field
+## Matrix Assets in a Matrix Field
 
 ## Value Matrix
 
@@ -99,7 +99,7 @@ x [scalar]
 
 (Last Element requires a tensor)
 
-## Tensor Assets in a Tensor-field
+## Tensor Assets in a Tensor Field
 
 ## Value Tensor
 	Eight dimensional depth

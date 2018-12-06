@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', function NavController( $location, $mdSidenav, $rootScope, $scope, $state, config, PostModel, TransactionModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, PostModel, TransactionModel ) {
     $scope.currentUser = config.currentUser;
     $scope.confirm = {};
     $scope.inputVector = [];
@@ -9,12 +9,34 @@ angular.module( 'conexus.nav', [
     $scope.newTransaction = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
+    $scope.item = {};
 
     $scope.selectedType = 'POST';
 
     if ($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id
     }
+
+    $rootScope.contentToggle = function(item){
+        $mdSidenav('content').toggle();
+    };
+
+    $rootScope.renderToggle = function(item){
+        $scope.item = item;
+        $mdSidenav('render').toggle();
+    };
+
+    //YIKES
+    $rootScope.renderContent = function(item){
+        if (item){
+            if (!item.includes('>')){
+                var replacedText = item.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(item)}
+        }
+    };
 
     $scope.$watch('$root.to', function() {
         $scope.newTransaction.to = $rootScope.to;
@@ -54,11 +76,13 @@ angular.module( 'conexus.nav', [
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
         $mdSidenav('login').close();
+        $mdSidenav('render').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
         //$rootScope.memberUsername = null;
         //$rootScope.projectTitle = null;
     });
+    
     $rootScope.$on("$stateChangeSuccess", function() {
     	window.scrollTo(0, 0);
     });
@@ -123,21 +147,21 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
 
-    //MEH
     $scope.loginToggle = function(){
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
+        $mdSidenav('render').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
         $mdSidenav('login').toggle();
     };
 
-    //MEH
     $scope.sideNavToggle = function(){
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
         $mdSidenav('login').close();
+        $mdSidenav('render').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
         $mdSidenav('nav').toggle();

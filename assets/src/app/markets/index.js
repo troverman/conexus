@@ -14,11 +14,17 @@ angular.module( 'conexus.markets', [
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 100, 0, 'createdAt DESC');
             }],
+            projects: ['ProjectModel', function(ProjectModel) {
+                return ProjectModel.getSome(100, 0, 'createdAt DESC');
+            }],
+            tasks: ['TaskModel', function(TaskModel) {
+                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
+            }]
         }
 	});
 }])
 
-.controller( 'MarketsCtrl', ['$scope', 'config', 'OrderModel', 'orders', 'titleService', function MarketsController( $scope, config, OrderModel, orders, titleService ) {
+.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'config', 'OrderModel', 'orders', 'titleService', 'projects', 'tasks', 'ProjectModel', 'TaskModel', function MarketsController( $rootScope, $scope, config, OrderModel, orders, titleService, projects, tasks, ProjectModel, TaskModel ) {
 	titleService.setTitle('Market | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.chartMap = {
@@ -52,15 +58,34 @@ angular.module( 'conexus.markets', [
         tooltip: {},
         credits:{enabled:false},
     };
+    
+    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    $scope.projects = [];
 
     //STRING CROSS CHAIN
     //https://api.coinmarketcap.com/v2/listings/
 
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    for (x in projects){
+        $scope.markets.push(projects[x].id);
+        $scope.markets.push(projects[x].title+'+'+'Validation');
+        $scope.markets.push(projects[x].title+'+'+'Time');
+        $scope.markets.push(projects[x].title+'+'+'Content');
+    }
+
+    for (x in tasks){
+        $scope.markets.push(tasks[x].id);
+        $scope.markets.push(tasks[x].title+'+'+'Validation');
+        $scope.markets.push(tasks[x].title+'+'+'Time');
+        $scope.markets.push(tasks[x].title+'+'+'Content');
+    }
+
+    $scope.markets = _.shuffle($scope.markets);
+
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;
    
     $scope.createOrder = function() {
+
         $scope.newOrder.user = $scope.currentUser.id;
 
         //TODO: PARSE INPUT
@@ -71,6 +96,7 @@ angular.module( 'conexus.markets', [
             $scope.orders.push($scope.newOrder);
             $scope.newOrder = {};
         });
+
     };
 
     $scope.loadMore = function() {};
@@ -86,21 +112,14 @@ angular.module( 'conexus.markets', [
 
     $scope.search = function(){
 
-        $scope.markets = $scope.markets.filter(function(obj){
-            console.log(obj.includes($scope.searchQuery))
-            return obj.includes($scope.searchQuery);
-        });
-
-        /*
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+        OrderModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.activity = models.map(function(obj){
                 obj.model = 'CONTENT';
                 return obj;
             });
         });
-        */
 
     };
 

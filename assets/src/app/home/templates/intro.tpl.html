@@ -197,38 +197,39 @@
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
             </div>-->
 
-            <div ng-repeat="item in activity" ng-click="">
-                <div class="card" ng-if="item.model=='CONTENT'" >
+            <div ng-repeat="item in activity">
+
+                <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
                     <div style="padding:16px;overflow:scroll;max-height:500px">
                         <div>
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                            <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
                             <!--TODO: POST PARENT TYPES-->
-                            <a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
-                            <a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
-                            <a ng-show="item.post" style="display:inline;font-weight:600" href="/content/{{item.post}}">post {{item.post}}</a>
-                            <a ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile}}">profile {{item.profile}}</a>
-                            <a ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
-                            <a ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
-                            <a ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
-                            <a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.post" style="display:inline;font-weight:600" href="/content/{{item.post}}">post {{item.post}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.profile" style="display:inline;font-weight:600" href="/member/{{item.profile}}">profile {{item.profile}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.project" style="display:inline;font-weight:600" href="/project/{{item.project.urlTitle}}">{{item.project.title}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.task" style="display:inline;font-weight:600" href="/task/{{item.task}}">task {{item.task}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}">work {{item.work}}</a>
                             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                             
-                            <p ng-click="tokenToggle(item)" style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                            <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
                             <div style="clear:both"></div>
                         </div>
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
                     </div>
                     <div class="card-footer">
-                        <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                        <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                        <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                        <a ng-click="createReaction(item, 'plus');$event.stopPropagation()"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                        <a ng-click="createReaction(item, 'minus');$event.stopPropagation()" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="reply(item);$event.stopPropagation()"><i class="fa fa-comment-o"></i> comment </a>
+                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                     <!--TODO: NESTED -->
-                    <div ng-show="item.showReply" class="card-footer">
+                    <div ng-show="item.showReply" class="card-footer" ng-click="$event.stopPropagation()">
                         <form role="form" ng-submit="createPost(item)">
                             <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                             <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
@@ -236,13 +237,13 @@
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='PROJECT'">
+                <div class="card" ng-if="item.model=='PROJECT'" ng-click="">
                     <div style="padding:16px;">
                         <div class="row">
                             <div class="col-sm-1 col-xs-2">
                                 <a href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
-                            <div class="col-sm-10 col-xs-10">
+                            <div class="col-sm-11 col-xs-10">
                                 <h3 style="margin-top:0px">
                                     <a href="project/{{item.urlTitle}}">
                                         {{item.title}}
@@ -252,57 +253,58 @@
                                     <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
                                 </div>
                             </div>
-                            <div class="col-sm-1" style="text-align:right">
-                                <h4><a href="project/{{item.urlTitle}}">Join</a></h4>
-                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='TASK'">
+                <div class="card" ng-if="item.model=='TASK'" ng-click="renderToggle(item)">
                     <div style="padding:16px;">                            
                         <div style="float:right">
-                            <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                            <h5 style="text-align:right" ng-click="tokenToggle(item);$event.stopPropagation()"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                         </div>
-                        <h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
-                        <p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-                        <p><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-                        <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+                        <h4 ng-click="$event.stopPropagation()"><a href="task/{{item.id}}">{{item.title}}</a></h4>
+                        <p ng-click="$event.stopPropagation()"><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+                        <p ng-click="$event.stopPropagation()"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                        <p ng-click="$event.stopPropagation()"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                         <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
-                    <div class="card-footer">
-                        <a href="task/{{item.id}}" ng-click=""><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a href="task/{{item.id}}" ng-click="" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                        <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                    <div class="card-footer" ng-click="$event.stopPropagation()">
+                        <a href="task/{{item.id}}"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                        <a href="task/{{item.id}}"><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='WORK'">
+                <div class="card" ng-if="item.model=='WORK'" ng-click="renderToggle(item)">
                     <div style="padding:16px;">
                         <div>
+
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                            <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
                             <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 
-                            <p ng-click="tokenToggle(item)" style="display:inline;float:right"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></p>
+                            <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
                             <div style="clear:both"></div>
 
                         </div>
-                        <p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+
+                        <p ng-click="$event.stopPropagation()" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+
                     </div>
-                    <div class="card-footer">
-                        <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                        <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                    <div class="card-footer" ng-click="$event.stopPropagation()">
+                        <a ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                        <a ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                 </div>
+                
             </div>
 
             <div ng-show="true" class="card" style="text-align:center" ng-click="loadMore()">
