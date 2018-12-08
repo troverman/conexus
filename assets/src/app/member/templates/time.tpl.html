@@ -50,7 +50,7 @@
                 <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
                 <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
 		        <form style="cursor:text;" role="form" ng-submit="createPost(post)">

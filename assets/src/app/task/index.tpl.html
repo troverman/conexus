@@ -176,7 +176,7 @@
                     <img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{work.user.username}}">{{work.user.username}}</a>
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                    <a style="display:inline;font-weight:600" href="work/{{work.id}}">{{work.amount}}</a>
+                    <a style="display:inline;font-weight:600" href="time/{{work.id}}">{{work.amount}}</a>
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="work.createdAt"></p>
 
                     <span style="text-align:right;float:right">
@@ -194,11 +194,11 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(work)"><i class="fa fa-comment-o"></i> comment </a>
-                <a href="work/{{work.id}}"><i class="fa fa-check"></i> validate </a>
-                <a style="padding:0px" class="pull-right" href="work/{{work.id}}"><i class="fa fa-link grey"></i></a>
+                <a ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
+                <a ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
+                <a ng-click="reply(work)"><i class="fa fa-comment-o"></i> comment </a>
+                <a href="time/{{work.id}}"><i class="fa fa-check"></i> validate </a>
+                <a style="padding:0px" class="pull-right" href="time/{{work.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="work.showReply" class="card-footer">
                 <form role="form" ng-submit="createContent(work)">

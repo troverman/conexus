@@ -38,7 +38,7 @@
 						<a href="member/{{post.profile}}">{{post.profile.username}}</a>
 						<a href="task/{{post.task}}">{{post.task.title}}</a>
 						<a href="task/{{post.transaction}}">{{post.transaction}}</a>
-						<a href="work/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
+						<a href="time/{{post.work.id}}">{{post.work.amount}} {{post.work.content}}</a>
 					</h3>
 
 		    		<p ng-show="post.tags"><a style="color:gray;" ng-repeat="tag in post.tags.split(',')" href="content">{{tag}} </a></p>

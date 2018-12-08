@@ -1,9 +1,7 @@
-<div class="spacing-5"></div>
-
-<div class="row">
+<div class="row" ng-if="member.description">
     <div class="card">
         <div style="padding:16px">
-            <h1>About</h1>
+			<div ng-bind-html="renderContent(member.description)"></div>
         </div>
     </div>
 </div>

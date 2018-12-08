@@ -1,14 +1,14 @@
-angular.module( 'conexus.work', [
+angular.module( 'conexus.time', [
 ])
 
 //TODO: CONVERT TO TIME
 .config(['$stateProvider', function config( $stateProvider ) {
-    $stateProvider.state( 'work', {
-        url: '/work/:id',
+    $stateProvider.state( 'time', {
+        url: '/time/:id',
         views: {
             "main": {
-                controller: 'WorkController',
-                templateUrl: 'work/index.tpl.html'
+                controller: 'TimeController',
+                templateUrl: 'time/index.tpl.html'
             }
         },
         resolve: {
@@ -25,7 +25,7 @@ angular.module( 'conexus.work', [
     });
 }])
 
-.controller( 'WorkController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function WorkController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
+.controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
     $scope.currentUser = config.currentUser;
     $scope.work = work;
     if(!$scope.work){$location.path('/')}

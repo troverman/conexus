@@ -1,39 +1,89 @@
-<!--<div class="row">
-    <div class="card">
-        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
-        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-    </div>
-</div>-->
-
 <div class="row">
     <div class="card">
-        <div style="padding:16px">
-            <div fc fc-options="calendar" ng-model="eventSources"></div>
+        <div style="">
+            <button class="btn btn-default log-btn" ng-click="timeToggle()">+ Time</button>
         </div>
     </div>
- </div>
+</div>
 
 <div class="row">
-    <div ng-repeat="item in work">
+    <div class="card">
+        <form ng-submit="search()" style="display:flex;flex-direction:row;">
+            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
+                <a href="#" role="button">
+                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+        <div class="card">
+            <div style="padding:16px;">
+                <span><b>Tags</b></span>
+                <div ng-repeat="tag in sortedTagArray">
+                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div style="padding:16px;">
+                <span><b>Associations</b></span>
+                <div ng-repeat="tag in sortedTagArray">
+                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
+
         <div class="card">
             <div style="padding:16px">
-				<h4>{{item.startTime | date:"h:mma | MM/dd/yyyy"}} - {{item.endTime | date:"h:mma | MM/dd/yyyy"}}</h4>
-				<span><a href="task/{{item.task.id}}">{{item.task.title}}</a> | <a href="member/{{item.user.username}}">{{item.user.username}}</a></span>
+                <div fc fc-options="calendar" ng-model="eventSources"></div>
             </div>
-            <div class="card-footer">
-                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a class="pull-right" style="padding:0px;" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
-            </div>
-            <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-		        <form role="form" ng-submit="createPost(post)">
-		            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-		        </form>
-		    </div>
         </div>
-	</div>
+
+        <!--
+        <div class="row">
+            <div class="card">
+                <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+            </div>
+        </div>
+        -->
+
+        <div ng-repeat="item in work">
+            <div class="card" ng-click="renderToggle(item)">
+                <div style="padding:16px">
+                    <div style="float:right">
+                        <h5 ng-click="$event.stopPropagation();tokenToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    </div>
+    				<h4>{{item.startTime | date:"h:mma | MM/dd/yyyy"}} - {{item.endTime | date:"h:mma | MM/dd/yyyy"}}</h4>
+    				<span><a ng-click="$event.stopPropagation()" href="task/{{item.task.id}}">{{item.task.title}}</a> | <a ng-click="$event.stopPropagation()" href="member/{{item.user.username}}">{{item.user.username}}</a></span>
+                </div>
+                <div class="card-footer">
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                    <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                    <a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                </div>
+                <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
+    		        <form role="form" ng-submit="createPost(post)">
+    		            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+    		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+    		        </form>
+    		    </div>
+            </div>
+    	</div>
+
+
+    </div>
+
 </div>
 
 <div class="spacing-50"></div>

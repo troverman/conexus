@@ -87,7 +87,7 @@
 		            	
 	                	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
 
-						<p><a ng-repeat="tag in item.tags track by $index" href="#" ng-click="filterContent(tag)">{{tag.trim()}} </a></p>
+						<p><a ng-repeat="tag in item.tags track by $index" ng-click="filterContent(tag)">{{tag.trim()}} </a></p>
 
 	                	<div style="max-height:500px;overflow:scroll">
 							<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
@@ -97,9 +97,9 @@
 						<h5>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h5>
 		            </div>
 		            <div class="card-footer">
-		                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-		                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-		                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+		                <a ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+		                <a ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+		                <a ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 		                <a class="pull-right" style="padding:0px;" href="item/{{item.id}}"><i class="fa fa-link grey"></i></a>
 		            </div>
 		            <div ng-show="item.showReply" class="card-footer">

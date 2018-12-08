@@ -134,7 +134,7 @@
                     <div style="padding:16px;overflow:scroll;max-height:500px">
                         <div>
                             <img ng-click="$event.stopPropagation()" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
                             <!--TODO: POST PARENT TYPES-->
@@ -147,7 +147,7 @@
                             <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
                             <!--TODO-->
 
-                            <a ng-show="item.work" style="display:inline;font-weight:600" href="/work/{{item.work}}" ng-click="$event.stopPropagation()" >work {{item.work}}</a>
+                            <a ng-show="item.work" style="display:inline;font-weight:600" href="time/{{item.work}}" ng-click="$event.stopPropagation()" >work {{item.work}}</a>
                             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                             <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
                             <div style="clear:both"></div>
@@ -225,7 +225,7 @@
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                             <a style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
+                            <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                             <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 
                             <p style="display:inline;float:right"><a ng-click="tokenToggle(item)">Tokens <i class="fa fa-question-circle"></i></a></p>
@@ -244,7 +244,7 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                     <div ng-show="item.showReply" class="card-footer">
                         <form role="form" ng-submit="createContent(item)">

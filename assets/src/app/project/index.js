@@ -309,7 +309,7 @@ angular.module( 'conexus.project', [
 
     $scope.tokenToggle = function(item){
         $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = item;
+        //$rootScope.globalTokens = item;
     };
 
     $scope.transactionToggle = function(){
@@ -1030,8 +1030,9 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.newProjectToggle = function () {
-        $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
+    $scope.projectToggle = function () {
+        if ($scope.currentUser){$scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.renderContent = function(content){

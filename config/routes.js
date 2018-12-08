@@ -54,10 +54,10 @@ module.exports.routes = {
   'get /search/:searchQuery': 'HomeController.index',
   'get /tasks': 'HomeController.index',
   'get /task/:id': 'HomeController.index',
+  'get /time/:id': 'HomeController.index',
   'get /transaction/:id': 'HomeController.index',
   'get /transparency': 'HomeController.index',
   'get /validation/:id': 'HomeController.index',
-  'get /work/:id': 'HomeController.index',
 
   'get /login': 'HomeController.index',
   'get /register': 'HomeController.index',

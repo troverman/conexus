@@ -16,7 +16,7 @@
 
     <div style="padding:16px;background-color:white">
 
-        <h5 style="text-align:right;float:right" ng-click="tokenToggle(post)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+        <h5 style="text-align:right;float:right" ng-click="tokenToggle(post)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
 
         <div>
             <img class="card-avatar" ng-src="{{post.user.avatarUrl}}" src="{{post.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -32,9 +32,9 @@
 
     </div>
     <div class="card-footer">
-        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-        <a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
+        <a style="padding:5px;color:grey" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+        <a style="padding:5px;color:grey" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+        <a style="padding:5px;color:grey" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
         <a style="color:grey;" class="pull-right" href="content/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
     <!--TODO: NESTED -->
