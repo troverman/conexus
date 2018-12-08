@@ -193,7 +193,7 @@
                 <div class="card" ng-if="item.model=='TASK'" ng-click="renderToggle(item)">
                     <div style="padding:16px;">
                         <div style="float:right">
-                            <h5 style="text-align:right" ng-click="tokenToggle(item);$event.stopPropagation()"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                            <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                         </div>
                         <h4><a ng-click="$event.stopPropagation()" href="task/{{item.id}}">{{item.title}}</a></h4>
                         <p><a ng-click="$event.stopPropagation()" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
@@ -202,9 +202,9 @@
                         <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
                     <div class="card-footer">
-                        <a ng-click="$event.stopPropagation()" href="task/{{item.id}}"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a ng-click="$event.stopPropagation()" href="task/{{item.id}}"><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                        <a ng-click="reply(post);$event.stopPropagation()"><i class="fa fa-comment-o"></i> comment </a>
+                        <a ng-click="$event.stopPropagation()"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                        <a ng-click="$event.stopPropagation()"><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="$event.stopPropagation();reply(post)"><i class="fa fa-comment-o"></i> comment </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                     <div ng-show="item.showReply" class="card-footer">
