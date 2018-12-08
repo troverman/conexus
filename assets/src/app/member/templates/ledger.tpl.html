@@ -62,10 +62,9 @@
 </div>
 
 <div class="row">
+
 	<div class="card">
-		<div style="">
-			<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button>
-		</div>
+		<button class="btn btn-default log-btn" ng-click="newTransactionToggle()">+ Transaction</button>
 	</div>
 
 	<div class="card" ng-show="newTransactionToggleVar">
@@ -94,9 +93,11 @@
 		</div>
 	</div>
 
-	<div style="padding-top:1px"></div>
+</div>
 
-	<div class="card" ng-repeat="transaction in transactions">
+<div class="row">
+
+	<div class="card" ng-repeat="transaction in transactions" ng-click="">
 		<div style="padding:16px">
 			<p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
 			<p style="font-weight:800">{{transaction.amount}} <a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
@@ -106,18 +107,19 @@
 			<a href="transaction/{{transaction.id}}"></a>
 		</div>
 		<div class="card-footer">
-			<a href="#" ng-click="createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{transaction.plusCount}} like </a> 
-			<a href="#" ng-click="createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{transaction.minusCount}} dislike </a>
-			<a href="#" ng-click="reply(transaction)"><i class="fa fa-comment-o"></i> comment </a>
+			<a ng-click="createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{transaction.plusCount}} like </a> 
+			<a ng-click="createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{transaction.minusCount}} dislike </a>
+			<a ng-click="reply(transaction)"><i class="fa fa-comment-o"></i> comment </a>
 			<a class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}"><i class="fa fa-link grey"></i></a>
 		</div>
-		<div ng-show="transaction.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+		<div ng-show="transaction.showReply" class="card-footer">
             <form role="form" ng-submit="createPost(transaction)">
                 <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                 <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
             </form>
         </div>
 	</div>
+
 </div>
 
 <div class="spacing-10"></div>

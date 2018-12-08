@@ -7,19 +7,20 @@
 <div class="row">
     <div ng-repeat="item in activity">
 
-        <div class="card" ng-if="item.model=='CONTENT'">
+        <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
             <div style="padding:16px;overflow:scroll;max-height:500px">
 
                 <div style="float:right">
-                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
 
-                <div>
+                <div ng-click="$event.stopPropagation()">
+
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
 
                     <!--TODO: POST PARENT TYPES-->
-                    <div style="display:inline;" ng-show="item.profile != item.user.id && item.profile != member.id">
+                    <div ng-click="$event.stopPropagation()" style="display:inline;" ng-show="item.profile != item.user.id && item.profile != member.id">
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                         <a ng-show="item.market" style="display:inline;font-weight:600" href="/market/{{item.market}}">market {{item.market}}</a>
                         <a ng-show="item.order" style="display:inline;font-weight:600" href="/order/{{item.order}}">order {{item.order}}</a>
@@ -32,18 +33,19 @@
                     </div>
 
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
+                    
                 </div>
 
                 <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 
             </div>
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
-            <div ng-show="item.showReply" class="card-footer">
+            <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
                 <form role="form" ng-submit="newContent(item)">
                     <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
@@ -51,37 +53,38 @@
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='ORDER'">
+        <div class="card" ng-if="item.model=='ORDER'" ng-click="renderToggle(item)">
             <div style="padding:16px">
 
                 <div style="float:right">
-                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
 
-                <div>
+                <div ng-click="$event.stopPropagation()">
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div> 
+
                 <div style="margin-left:42px">
-                    <p>{{item.amountSet}} <a href="#">{{item.identiferSet}}</a></p>
-                    <p>{{item.amountSet1}} <a href="#">{{item.identiferSet1}}</a></p>
+                    <p>{{item.amountSet}} <a>{{item.identiferSet}}</a></p>
+                    <p>{{item.amountSet1}} <a>{{item.identiferSet1}}</a></p>
                 </div>
 
             </div>
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='TRANSACTION'">
+        <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="renderToggle(item)">
             <div style="padding:16px">
 
                 <div style="float:right">
-                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
 
                 <p style="font-weight:800">From: <a href="member/{{item.from}}">{{item.from}}</a> To: <a href="member/{{item.to}}">{{item.to}}</a></p>
@@ -93,21 +96,21 @@
 
             </div>
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='WORK'">
+        <div class="card" ng-if="item.model=='WORK'" ng-click="renderToggle(item)">
             <div style="padding:16px;">
 
                 <div style="float:right">
-                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
 
-                <div>
+                <div ng-click="$event.stopPropagation()">
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
@@ -116,17 +119,21 @@
                     <a style="display:inline;font-weight:600" href="work/{{item.id}}">{{item.amount}}</a>
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div>
-                <p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+
+                <p ng-click="$event.stopPropagation()" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+
                 <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
                 
             </div>
+
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:0px" class="pull-right" href="work/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
-            <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+
+            <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
                 <form role="form" ng-submit="newContent(post)">
                     <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>

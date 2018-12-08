@@ -84,6 +84,10 @@ angular.module( 'conexus.discover', [
 	$scope.posts = posts;
 	$scope.projects = projects;
 	$scope.tasks = tasks;
+    $scope.tasks.map(function(obj){
+        obj.tags = obj.tags.split(',');
+        return obj;
+    });
 	$scope.windowOptions = {visible: false};
 	$scope.work = work;
 
