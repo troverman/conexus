@@ -18,7 +18,8 @@ angular.module( 'conexus.nav', [
     }
 
     $rootScope.contentToggle = function(item){
-        $mdSidenav('content').toggle();
+        if($scope.currentUser){$mdSidenav('content').toggle();}
+        else{$mdSidenav('login').toggle();}
     };
 
     $rootScope.renderToggle = function(item){
@@ -116,7 +117,7 @@ angular.module( 'conexus.nav', [
 
             });
         }
-        else{ $mdSidenav('content').close();$mdSidenav('login').toggle()}
+        else{$mdSidenav('content').close();$mdSidenav('login').toggle()}
     };
 
     //$scope.createItem = function() {};

@@ -764,7 +764,11 @@ angular.module( 'conexus.project', [
     //$scope.chart.series[3].data = $scope.sumFlow;
 
     //BAD
+    $scope.startDate = new Date($scope.transactions[0].createdAt);
+    $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
+
     $scope.transactions = $scope.transactions.reverse();
+
 
     $scope.selectExpense = function(){
         //ANIMATE

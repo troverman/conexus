@@ -3310,106 +3310,132 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
     "\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "\n" +
-    "				<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
-    "\n" +
-    "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "					<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
-    "					<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
-    "					<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "				</ul>\n" +
+    "	<div class=\"col-xs-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Tags</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
     "			</div>\n" +
-    "\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "				<!--<h3>{{sumTo[sumTo.length-1]}} CRE8</h3>-->\n" +
-    "				<h4>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Balance</h4>\n" +
-    "				<h4>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Revenue</h4>\n" +
-    "				<h4>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Expense</h4>\n" +
-    "			</div>\n" +
-    "\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"chart\"></highchart>\n" +
-    "			</div>\n" +
-    "\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"pie\"></highchart>\n" +
-    "			</div>\n" +
-    "\n" +
-    "			<div class=\"col-md-12\">\n" +
-    "				<p><span ng-repeat=\"tag in sortedTransactionTags\"><a ng-click=\"selectTag(tag.element)\" href=\"#\">{{tag.element}} </a></span><p>\n" +
-    "			</div>\n" +
-    "\n" +
     "		</div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Identifiers</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Associations</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "\n" +
-    "<div class=\"row\">\n" +
     "\n" +
-    "	<div class=\"card\">\n" +
-    "		<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">+ Transaction</button>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
-    "	    <div style=\"padding:16px;\">\n" +
-    "			<form role=\"form\" ng-submit=\"createTransaction()\">\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "\n" +
+    "	<div class=\"col-xs-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "		<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
+    "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
+    "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
+    "		</ul>\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				\n" +
+    "				<div class=\"row\">\n" +
+    "					<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-xs-6\">\n" +
+    "\n" +
+    "						<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-sm-6\"><md-datepicker style=\"display:inline\" ng-model=\"startDate\" md-placeholder=\"Start date\"></md-datepicker></div>\n" +
+    "	      				<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-sm-6\"><md-datepicker ng-model=\"endDate\" md-placeholder=\"End date\"></md-datepicker></div>\n" +
+    "\n" +
+    "					</div>\n" +
+    "\n" +
+    "					<div style=\"text-align:right;padding-left:0px;padding-right:0px;\" class=\"col-xs-6\">\n" +
+    "						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Balance</h5>\n" +
+    "						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Revenue</h5>\n" +
+    "						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet}}</a> Expense</h5>\n" +
+    "					</div>\n" +
     "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "\n" +
+    "				<div class=\"col-xs-12\">\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
     "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "\n" +
+    "				<div class=\"col-xs-12\">\n" +
+    "					<highchart config=\"pie\"></highchart>\n" +
     "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-12\">\n" +
-    "					<tags-input ng-model=\"newTransaction.ledger\" placeholder=\"Tags\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-12\">\n" +
-    "					<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
-    "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "			</form>\n" +
+    "\n" +
+    "			</div>\n" +
     "		</div>\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">+ Transaction</button>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
+    "		    <div style=\"padding:16px;\">\n" +
+    "				<form role=\"form\" ng-submit=\"createTransaction()\">\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<tags-input ng-model=\"newTransaction.ledger\" placeholder=\"Tags\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
+    "					</div>\n" +
+    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
+    "				</form>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
+    "				<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
+    "				<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "				<p>{{transaction.content}}</p>\n" +
+    "				<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "				<a href=\"transaction/{{transaction.id}}\"></a>\n" +
+    "			</div>\n" +
+    "			<div class=\"card-footer\">\n" +
+    "				<a ng-click=\"createReaction(transaction, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{transaction.plusCount}} like </a> \n" +
+    "				<a ng-click=\"createReaction(transaction, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{transaction.minusCount}} dislike </a>\n" +
+    "				<a ng-click=\"reply(transaction)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "				<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "			</div>\n" +
+    "			<div ng-show=\"transaction.showReply\" class=\"card-footer\">\n" +
+    "	            <form role=\"form\" ng-submit=\"createPost(transaction)\">\n" +
+    "	                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "	                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "	            </form>\n" +
+    "	        </div>\n" +
+    "		</div>\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "\n" +
-    "	<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"\">\n" +
-    "		<div style=\"padding:16px\">\n" +
-    "			<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
-    "			<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
-    "			<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "			<p>{{transaction.content}}</p>\n" +
-    "			<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
-    "			<a href=\"transaction/{{transaction.id}}\"></a>\n" +
-    "		</div>\n" +
-    "		<div class=\"card-footer\">\n" +
-    "			<a ng-click=\"createReaction(transaction, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{transaction.plusCount}} like </a> \n" +
-    "			<a ng-click=\"createReaction(transaction, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{transaction.minusCount}} dislike </a>\n" +
-    "			<a ng-click=\"reply(transaction)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "		</div>\n" +
-    "		<div ng-show=\"transaction.showReply\" class=\"card-footer\">\n" +
-    "            <form role=\"form\" ng-submit=\"createPost(transaction)\">\n" +
-    "                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "            </form>\n" +
-    "        </div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -4792,103 +4818,125 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "			<div class=\"row\">\n" +
     "\n" +
-    "				<div class=\"col-md-6\">\n" +
+    "	<div class=\"col-xs-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Tags</b></span>\n" +
+    "	            <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
+    "	                <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "	            </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Identifiers</b></span>\n" +
+    "	            <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
+    "	                <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "	            </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "\n" +
-    "					<h5>{{transactions[0].createdAt | date:\"h:mma | MM/dd/yyyy\"}} - {{transactions[transactions.length-1].createdAt | date:\"h:mma | MM/dd/yyyy\"}} </h5>\n" +
+    "	<div class=\"col-xs-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
-    "					<ul style=\"\" class=\"member-tabs\">\n" +
-    "						<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
-    "						<li><a ng-click=\"selectExpense()\" href=\"#\">Expenses</a></li>\n" +
-    "						<li><a ng-click=\"selectRevenue()\" href=\"#\">Revenue</a></li>\n" +
-    "					</ul>\n" +
-    "				</div>\n" +
+    "		<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "				<div class=\"col-md-6\">\n" +
-    "					<div style=\"text-align:right\">\n" +
-    "						<h3>{{sumTo[sumTo.length-1][1].toFixed(2)}} USD REVENUE</h3>\n" +
-    "						<h3>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} USD EXPENSE</h3>\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
+    "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
+    "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
+    "		</ul>\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "				<div class=\"row\">\n" +
+    "					<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-xs-6\">\n" +
+    "\n" +
+    "						<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-sm-6\"><md-datepicker style=\"display:inline\" ng-model=\"startDate\" md-placeholder=\"Start date\"></md-datepicker></div>\n" +
+    "	      				<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-sm-6\"><md-datepicker ng-model=\"endDate\" md-placeholder=\"End date\"></md-datepicker></div>\n" +
+    "\n" +
+    "					</div>\n" +
+    "\n" +
+    "					<div style=\"text-align:right;\" class=\"col-xs-6\">\n" +
+    "						<div style=\"text-align:right\">\n" +
+    "							<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href=\"market/USD\">USD</a> REVENUE</h5>\n" +
+    "							<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href=\"market/USD\">USD</a> EXPENSE</h5>\n" +
+    "						</div>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "				\n" +
+    "\n" +
+    "				<!--children projects..-->\n" +
+    "\n" +
+    "				<div class=\"col-xs-12\">\n" +
+    "					<highchart config=\"chart\"></highchart>\n" +
+    "				</div>\n" +
+    "\n" +
+    "				<div class=\"col-xs-12\">\n" +
+    "					<highchart config=\"pie\"></highchart>\n" +
+    "				</div>\n" +
+    "\n" +
     "			</div>\n" +
+    "		</div>\n" +
     "\n" +
-    "			<!--children projects..-->\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"chart\"></highchart>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"\">\n" +
+    "				<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button>\n" +
     "			</div>\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"pie\"></highchart>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
+    "			<div style=\"padding:16px;\">		\n" +
+    "				<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-6\">\n" +
+    "						<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<tags-input ng-model=\"newTransaction.ledger\" placeholder=\"Tags\">\n" +
+    "					</div>\n" +
+    "					<div class=\"form-group col-sm-12\">\n" +
+    "						<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
+    "					</div>\n" +
+    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
+    "				</form>\n" +
     "			</div>\n" +
+    "		</div>\n" +
     "\n" +
-    "			<div class=\"col-md-12\">\n" +
-    "				<p><span ng-repeat=\"tag in sortedTransactionTags\"><a ng-click=\"selectTag(tag.element)\" href=\"#\">{{tag.element}} </a></span><p>\n" +
+    "		<div class=\"card\" ng-repeat=\"transaction in transactions\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
+    "				<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
+    "				<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "				<p>{{transaction.content}}</p>\n" +
+    "				<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "				<a href=\"transaction/{{transaction.id}}\"></a>\n" +
     "			</div>\n" +
-    "\n" +
+    "			<div class=\"card-footer\">\n" +
+    "				<a href=\"#\" ng-click=\"createReaction(transaction, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{transaction.plusCount}} like </a> \n" +
+    "				<a href=\"#\" ng-click=\"createReaction(transaction, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{transaction.minusCount}} dislike </a>\n" +
+    "				<a href=\"#\" ng-click=\"reply(transaction)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "				<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "			</div>\n" +
+    "			<div ng-show=\"transaction.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "	            <form role=\"form\" ng-submit=\"createPost(transaction)\">\n" +
+    "	                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "	                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "	            </form>\n" +
+    "	        </div>\n" +
     "		</div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"row\">\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"\">\n" +
-    "			<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
-    "		<div style=\"padding:16px;\">		\n" +
-    "			<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amount\" class=\"form-control\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-6\">\n" +
-    "					<input placeholder=\"To\" type=\"text\" ng-model=\"newTransaction.to\" class=\"form-control\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-12\">\n" +
-    "					<tags-input ng-model=\"newTransaction.ledger\" placeholder=\"Tags\">\n" +
-    "				</div>\n" +
-    "				<div class=\"form-group col-sm-12\">\n" +
-    "					<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
-    "				</div>\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "			</form>\n" +
-    "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div style=\"padding-top:1px\"></div>\n" +
-    "\n" +
-    "	<div class=\"card\" ng-repeat=\"transaction in transactions\">\n" +
-    "		<div style=\"padding:16px\">\n" +
-    "			<p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
-    "			<p style=\"font-weight:800\">{{transaction.amount}} <a href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
-    "			<p><a ng-repeat=\"tag in transaction.ledger\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "			<p>{{transaction.content}}</p>\n" +
-    "			<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
-    "			<a href=\"transaction/{{transaction.id}}\"></a>\n" +
-    "		</div>\n" +
-    "		<div class=\"card-footer\">\n" +
-    "			<a href=\"#\" ng-click=\"createReaction(transaction, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{transaction.plusCount}} like </a> \n" +
-    "			<a href=\"#\" ng-click=\"createReaction(transaction, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{transaction.minusCount}} dislike </a>\n" +
-    "			<a href=\"#\" ng-click=\"reply(transaction)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "			<a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{transaction.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "		</div>\n" +
-    "		<div ng-show=\"transaction.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "            <form role=\"form\" ng-submit=\"createPost(transaction)\">\n" +
-    "                <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "            </form>\n" +
-    "        </div>\n" +
-    "	</div>\n" +
     "</div>");
 }]);
 

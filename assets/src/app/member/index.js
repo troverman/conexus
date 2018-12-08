@@ -994,8 +994,12 @@ angular.module( 'conexus.member', [
     //$scope.chart.series[3].data = $scope.sumFlow;
 
     //REDO
+    $scope.startDate = new Date($scope.transactions[0].createdAt);
+    $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
+
     $scope.transactions = $scope.transactions.reverse();
 
+    
     $scope.selectExpense = function(){
         //TODO: TAGS
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
@@ -1025,7 +1029,9 @@ angular.module( 'conexus.member', [
         }
     };
 
-    $scope.selectIdentifier = function(identifier){};
+    $scope.selectIdentifier = function(identifier){
+
+    };
 
     $scope.selectOverview = function(){
         $scope.pie.series[0].data = [];
@@ -1069,7 +1075,14 @@ angular.module( 'conexus.member', [
     };
 
     $scope.selectTag = function(tag){
-        $scope.searchQuery = tag
+        $scope.searchQuery = tag;
+        //COMPOUND QUERY
+        //FROM, TO, BOTH, Tag, Identifer
+        var query = {member:$scope.member.id, tag:tag, from:$scope.member.id, to:$scope.member.id, identifer:$scope.identifer};
+        TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
+            $scope.transactions = transactions;
+        });
+
     };
 
     //TODO
