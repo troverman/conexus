@@ -1,24 +1,3 @@
-<div class="row">
-    <div class="card">
-        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
-            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                <a href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="row">
-    <div class="card">
-        <div style="padding:16px">
-            <h1>Items</h1>
-        </div>
-    </div>
-</div>
-
 <div class="row" ng-show="items.length == 0">
     <div class="card">
         <div style="padding:16px;">
@@ -27,7 +6,7 @@
     </div>
 </div>
 
-<div class="row" ng-show="contentList.length > 0">
+<div class="row" ng-show="items.length > 0">
 
     <div ng-show="sortedTagArray.length > 0" class="col-sm-2" style="padding-left:0px;padding-right:0px;">
         <div class="card">
@@ -74,44 +53,18 @@
             </form>
         </div>
 
-        <div class="card">
+        <div class="card" ng-show="currentUser.id == member.id">
             <div style="">
-                <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
+                <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Item</button>
             </div>
         </div>
 
-        <div class="card" ng-show="newContentToggleVar">
-            <div style="padding:16px">
-                <form role="form" ng-submit="createContent()">
-                    <div class="">
-                        <input type="text" placeholder= "Title" ng-model="newContent.title" class="form-control">
-                        <input type="text" placeholder= "Associations" ng-model="newContent.parent" class="form-control">
-                        <ul class="nav nav-pills nav-justified contentTyle">
-                            <li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>
-                            <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
-                            <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
-                            <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Motion</a></li>
-                            <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
-                            <li ng-class="{active: selectedType=='TASK'}" ng-click="selectType('TASK')"><a href="#">Task</a></li>
-                            <li ng-class="{active: selectedType=='TIME'}" ng-click="selectType('TIME')"><a href="#">Time</a></li>
-                            <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
-                        </ul>
-                        <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
-                        <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <!--<input type="text" placeholder= "Attachment" ng-model="newContent.attachment" class="form-control">-->
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn">create</button>
-                    <div class="spacing-15"></div>
-                </form>
-            </div>
-        </div>
-
-        <div ng-repeat="item in contentList">
+        <div ng-repeat="item in items">
             <div class="card" style="">
                 <div style="padding:16px;overflow:scroll;max-height:500px">
 
                     <div style="float:right">
-                        <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                        <h5 style="text-align:right" ng-click="tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 
                     <p><a style="font-weight:700"  href="member/{{item.user.username}}">
@@ -123,10 +76,10 @@
 
                 </div>
                 <div class="card-footer">
-                    <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                    <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                    <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a class="pull-right" style="padding:0px;" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+                    <a ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                    <a ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                    <a class="pull-right" style="padding:0px;" href="item/{{item.id}}"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                     <form role="form" ng-submit="createPost(item)">

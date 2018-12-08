@@ -235,7 +235,6 @@ angular.module( 'conexus.project', [
     $scope.newTransaction.identifier = 'CRE8';
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
 
-    $scope.newTransactionToggleVar = false;
     $scope.project = project;
 
     //TODO: MEH
@@ -269,11 +268,8 @@ angular.module( 'conexus.project', [
         };
     }
 
-    $scope.tabsToggleVar = false;
-
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id}
 
-    //DEPRECIATE?
     $scope.contentToggle = function(){
         if($scope.currentUser){$mdSidenav('content').toggle()}
         else{$mdSidenav('login').toggle()}
@@ -285,6 +281,7 @@ angular.module( 'conexus.project', [
             $scope.newMember.project = project.id;
             MemberModel.create($scope.newMember).then(function(model) {
                 $scope.newMember = {};
+                $mdSidenav('information').toggle()
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -301,10 +298,6 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.newTransactionToggle = function() {
-        $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
-    };
-
     $scope.isProjectCreator = function() {
         if($scope.currentUser){return $scope.currentUser.id == $scope.project.user;}
         else {return false;}
@@ -314,19 +307,14 @@ angular.module( 'conexus.project', [
         $mdSidenav('subNav').toggle();
     };
 
-    $scope.tabsToggle = function() {
-        $scope.tabsToggleVar = !$scope.tabsToggleVar;
-    };
-
     $scope.tokenToggle = function(item){
         $mdSidenav('tokens').toggle();
         $rootScope.globalTokens = item;
     };
 
     $scope.transactionToggle = function(){
-        $mdSidenav('transaction').toggle()
-        //if($scope.currentUser){$mdSidenav('transaction').toggle();}
-        //else{$mdSidenav('login').toggle()}
+        if($scope.currentUser){$mdSidenav('transaction').toggle();}
+        else{$mdSidenav('login').toggle()}
     };
 
 }])
@@ -334,18 +322,6 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $sce, $scope, $stateParams, config, lodash, project, titleService) {
 
     titleService.setTitle('About | ' + project.title + ' | CRE8.XYZ');
-
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
-    };
 
 }])
 
@@ -426,18 +402,6 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
-    };
-
     $scope.reply = function(activity){
         if ($scope.currentUser){
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(activity.id);
@@ -511,18 +475,6 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
-    };
-
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -541,7 +493,6 @@ angular.module( 'conexus.project', [
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
     $scope.contentList = content;
     $scope.newContent = {};
-    $scope.newContentToggleVar = false;
     $scope.project = project;
 
     $scope.newContent.parent = project.id;
@@ -598,22 +549,6 @@ angular.module( 'conexus.project', [
         //return $http.get('/tags?query=' + query);
     };
 
-    //DEPRECIATE
-    $scope.newContentToggle = function() {
-        $scope.newContentToggleVar = !$scope.newContentToggleVar;
-    };
-
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
-    };
-
     $scope.reply = function(activity){
         if ($scope.currentUser){
             var index = $scope.content.map(function(obj){return obj.id}).indexOf(activity.id);
@@ -657,18 +592,6 @@ angular.module( 'conexus.project', [
 
     $scope.newMotionToggle = function(){
         $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
-    };
-
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
     };
 
     $scope.search = function(){};
@@ -1184,18 +1107,6 @@ angular.module( 'conexus.project', [
 
     $scope.newTaskToggle = function () {
         $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
-    };
-
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
     };
 
     $scope.reply = function(activity){

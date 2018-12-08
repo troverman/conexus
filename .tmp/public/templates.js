@@ -2648,44 +2648,25 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "			</div>\n" +
     "			<div class=\"container\">\n" +
     "				<div class=\"pull-left\"><img class=\"avatar\" err-src=\"/images/avatar.png\" ng-src=\"{{member.avatarUrl}}\"/></div>\n" +
-    "				<div class=\"pull-right member-tab-container\">\n" +
+    "				<div style=\"text-align:right\" class=\"member-tab-container\">\n" +
     "					<ul class=\"member-tabs subNav\">\n" +
-    "						<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
+    "						<!--<li><a href=\"member/{{member.username}}\">Activity</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/content\">Content</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/following\">{{member.followingCount}} Following</a></li>\n" +
     "						<li><a href=\"member/{{member.username}}/ledger\">Ledger</a></li>\n" +
-    "						<!--<li><a href=\"member/{{member.username}}\">Map</a></li>-->\n" +
     "						<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "						<!--<li><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></li>-->\n" +
-    "						<li><a href=\"member/{{member.username}}/time\">Time</a></li>\n" +
+    "						<li><a href=\"member/{{member.username}}/time\">Time</a></li>-->\n" +
     "						<li ng-show=\"currentUser.id != member.id\">\n" +
-    "							<a class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
+    "							<a ng-show=\"!isFollowing\" class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
     "							<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"unfollow()\">UnFollow</a>\n" +
     "						</li>\n" +
-    "						<li ng-show=\"currentUser.id == member.id\">\n" +
-    "							<a class=\"btn btn-default\" href=\"account\">Edit Profile</a>\n" +
-    "						</li>\n" +
+    "						<li ng-show=\"currentUser.id == member.id\"><a class=\"btn btn-default\" href=\"account\">Edit Profile</a></li>\n" +
+    "						<li ng-click=\"subNavToggle()\"><a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "					</ul>\n" +
     "					<div class=\"nav-toggle\" ng-click=\"subNavToggle()\">\n" +
     "						<a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
     "					</div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "			<div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
-    "				<md-divider style=\"color:gray\"></md-divider>\n" +
-    "				<div class=\"container\">\n" +
-    "					<!--TODO | SEARCH-->\n" +
-    "					<br>\n" +
-    "					<h4><a href=\"member/{{member.username}}\">Activity</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/content\">Content</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/following\">{{member.followingCount}} Following</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/ledger\">Ledger</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/positions\">Positions</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></h4>\n" +
-    "					<h4><a href=\"member/{{member.username}}/time\">Time</a></h4>\n" +
-    "					<br>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			<md-divider style=\"color:gray\"></md-divider>\n" +
@@ -2698,43 +2679,19 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "						<p>{{member.totalWork}} | Total Reputation</p>\n" +
     "						\n" +
     "					</div>\n" +
+    "\n" +
     "					<!--TODO-->\n" +
     "					<div class=\"pull-right\" style=\"margin-right:15px;margin-top:10px;\">\n" +
-    "\n" +
     "						<!--<h2>{{member.totalWork}} | total work</h2>-->\n" +
     "						<!--<input type=\"text\" placeholder=\"Reputation\" ng-model=\"reputationLookup\" class=\"form-control\">-->\n" +
     "						<span style=\"color:gray;font-size:10px;float:right\">0x{{member.id}}</span>\n" +
     "						<br>\n" +
     "						<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\">\n" +
     "						<a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" href=\"#\" ng-click=\"transactionToggle()\">Send Tokens</a>\n" +
-    "						\n" +
     "					</div>\n" +
+    "					\n" +
     "				</div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	<div class=\"container\" ng-show=\"newTransactionToggleVar\">\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"card\">\n" +
-    "			    <div style=\"padding:16px;\">\n" +
-    "			    	<h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens to 0x{{member.id}}</h3>\n" +
-    "					<form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
-    "						<div class=\"form-group col-md-4\">\n" +
-    "							<input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "						</div>\n" +
-    "						<div class=\"form-group col-md-4\">\n" +
-    "							<input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "						</div>\n" +
-    "						<div class=\"form-group col-md-4\">\n" +
-    "							<input placeholder=\"Amount\" type=\"number\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "						</div>\n" +
-    "						<div class=\"form-group col-md-12\">\n" +
-    "							<textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
-    "						</div>\n" +
-    "						<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "					</form>\n" +
-    "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -3222,27 +3179,6 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
 
 angular.module("member/templates/items.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/items.tpl.html",
-    "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
-    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                <a href=\"#\" role=\"button\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <div style=\"padding:16px\">\n" +
-    "            <h1>Items</h1>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
     "<div class=\"row\" ng-show=\"items.length == 0\">\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px;\">\n" +
@@ -3251,7 +3187,7 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"row\" ng-show=\"contentList.length > 0\">\n" +
+    "<div class=\"row\" ng-show=\"items.length > 0\">\n" +
     "\n" +
     "    <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
@@ -3298,44 +3234,18 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "            </form>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\">\n" +
+    "        <div class=\"card\" ng-show=\"currentUser.id == member.id\">\n" +
     "            <div style=\"\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
+    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item</button>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\" ng-show=\"newContentToggleVar\">\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                    <div class=\"\">\n" +
-    "                        <input type=\"text\" placeholder= \"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                        <input type=\"text\" placeholder= \"Associations\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                        <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                            <li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Motion</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='TASK'}\" ng-click=\"selectType('TASK')\"><a href=\"#\">Task</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='TIME'}\" ng-click=\"selectType('TIME')\"><a href=\"#\">Time</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
-    "                        </ul>\n" +
-    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
-    "                        <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <!--<input type=\"text\" placeholder= \"Attachment\" ng-model=\"newContent.attachment\" class=\"form-control\">-->\n" +
-    "                    </div>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div ng-repeat=\"item in contentList\">\n" +
+    "        <div ng-repeat=\"item in items\">\n" +
     "            <div class=\"card\" style=\"\">\n" +
     "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
     "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"tokenToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <h5 style=\"text-align:right\" ng-click=\"tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <p><a style=\"font-weight:700\"  href=\"member/{{item.user.username}}\">\n" +
@@ -3347,10 +3257,10 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
-    "                    <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a class=\"pull-right\" style=\"padding:0px;\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                    <a ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
+    "                    <a ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                    <a ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a class=\"pull-right\" style=\"padding:0px;\" href=\"item/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                </div>\n" +
     "                <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "                    <form role=\"form\" ng-submit=\"createPost(item)\">\n" +
@@ -3440,7 +3350,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "<div class=\"row\">\n" +
     "\n" +
     "	<div class=\"card\">\n" +
-    "		<button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">+ Transaction</button>\n" +
+    "		<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">+ Transaction</button>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"card\" ng-show=\"newTransactionToggleVar\">\n" +
@@ -3546,7 +3456,7 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"\">\n" +
-    "			<button class=\"btn btn-default log-btn\" ng-click=\"newOrderToggle()\">+ Order</button>\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
@@ -3610,7 +3520,7 @@ angular.module("member/templates/projects.tpl.html", []).run(["$templateCache", 
     "		    </div>\n" +
     "		    <div class=\"member-card-info\">\n" +
     "		        <h4><a href=\"project/{{project.project.urlTitle}}\">{{project.project.title}}</a></h4>\n" +
-    "		        <p style=\"color:gray\">Member | 888</p>\n" +
+    "		        <p style=\"color:gray\">Member | {{project.user.reputation[project.project.title] || 0}}</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -4324,9 +4234,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<style>\n" +
-    "    .angular-google-map-container { height: 200px;}\n" +
-    "</style>\n" +
+    "<style>.angular-google-map-container { height: 200px;}</style>\n" +
     "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\">\n" +
@@ -4353,7 +4261,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "        </div>\n" +
     "        <div style=\"background-color:white\">\n" +
     "            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div style=\"text-align:left\">\n" +
     "                    <ul style=\"padding:0px;\" class=\"member-tabs subNav\">\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}\">Activity</a></li>\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}/content\">Content</a></li>\n" +
@@ -4362,9 +4270,10 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                        <li><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></li>\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "                        <li><a href=\"project/{{project.urlTitle}}/time\">Time</a></li>\n" +
-    "                        <li><a class=\"btn btn-default\" ng-click=\"transactionToggle()\">Send Tokens</a></li>\n" +
-    "                        <!--<li ng-show=\"true\"><a class=\"btn btn-default\" ng-show=\"isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a></li>-->\n" +
-    "                        <li ng-show=\"true\"><a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a></li>\n" +
+    "                        <li style=\"\"><a class=\"btn btn-default\" ng-click=\"transactionToggle()\">Send Tokens</a></li>\n" +
+    "                        <li style=\"\"><a class=\"btn btn-default\" ng-show=\"isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a></li>\n" +
+    "                        <li style=\"\"><a class=\"btn btn-default\" ng-click=\"createMember()\">Join</a></li>\n" +
+    "                        <li ng-click=\"subNavToggle()\"><a style=\"color:black\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -4379,57 +4288,8 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                </form>\n" +
     "            </div>-->\n" +
     "        </div>\n" +
-    "\n" +
-    "        <!--<div ng-show=\"tabsToggleVar\" style=\"text-align:center\">\n" +
-    "            <md-divider style=\"color:gray\"></md-divider>\n" +
-    "            <div class=\"\">\n" +
-    "                <br>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/about\">About</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}\">Activity</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/channels\">Channels</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/members\">{{project.memberCount}} Members</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/marketplace\">Marketplace</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
-    "                <h4><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
-    "                <br>\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"newTransactionToggle()\">Send Tokens</button>\n" +
-    "                <br>\n" +
-    "            </div>\n" +
-    "        </div>-->\n" +
-    "\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
-    "<div class=\"container\" style=\"padding:0px\" ng-show=\"newTransactionToggleVar\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Send Tokens to 0x{{project.id}}</h3>\n" +
-    "            <form role=\"form\" ng-submit=\"createTransaction(newTransaction)\">\n" +
-    "                <div class=\"form-group col-md-4\">\n" +
-    "                    <input placeholder=\"From\" type=\"text\" ng-model=\"newTransaction.from\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "                </div>\n" +
-    "                <div class=\"form-group col-md-4\">\n" +
-    "                    <input placeholder=\"Asset Identifier\" type=\"text\" ng-model=\"newTransaction.identifier\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "                </div>\n" +
-    "                <div class=\"form-group col-md-4\">\n" +
-    "                    <input placeholder=\"Amount\" type=\"number\" ng-model=\"newTransaction.amount\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "                </div>\n" +
-    "                <div class=\"form-group col-md-12\">\n" +
-    "                    <textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\" id=\"taskTitle\"></textarea>\n" +
-    "                </div>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.identifier\">create</button>\n" +
-    "            </form>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"container\" ng-show=\"editProjectToggleVar\"><p>edit project form</p></div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "    <div ui-view=\"projectAbout\"></div>\n" +
@@ -5082,7 +4942,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "		        <h4><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
     "		        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
     "		        <p style=\"color:gray\">Total Reputation | {{member.user.totalWork}}</p>\n" +
-    "		        <p style=\"color:gray\">{{project.title}} | 888</p>\n" +
+    "		        <p style=\"color:gray\">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +

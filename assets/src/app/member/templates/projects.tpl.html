@@ -7,7 +7,7 @@
 		    </div>
 		    <div class="member-card-info">
 		        <h4><a href="project/{{project.project.urlTitle}}">{{project.project.title}}</a></h4>
-		        <p style="color:gray">Member | 888</p>
+		        <p style="color:gray">Member | {{project.user.reputation[project.project.title] || 0}}</p>
 		    </div>
 		</div>
 	</div>

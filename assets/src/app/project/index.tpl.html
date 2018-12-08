@@ -1,6 +1,4 @@
-<style>
-    .angular-google-map-container { height: 200px;}
-</style>
+<style>.angular-google-map-container { height: 200px;}</style>
 
 <div class="container" style="padding:0px">
     <div class="card">
@@ -27,7 +25,7 @@
         </div>
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div class="row">
+                <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs subNav">
                         <li><a href="project/{{project.urlTitle}}">Activity</a></li>
                         <li><a href="project/{{project.urlTitle}}/content">Content</a></li>
@@ -36,9 +34,10 @@
                         <li><a href="project/{{project.urlTitle}}/projects">Projects</a></li>
                         <li><a href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
                         <li><a href="project/{{project.urlTitle}}/time">Time</a></li>
-                        <li><a class="btn btn-default" ng-click="transactionToggle()">Send Tokens</a></li>
-                        <!--<li ng-show="true"><a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a></li>-->
-                        <li ng-show="true"><a class="btn btn-default" ng-click="createMember()">Join</a></li>
+                        <li style=""><a class="btn btn-default" ng-click="transactionToggle()">Send Tokens</a></li>
+                        <li style=""><a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a></li>
+                        <li style=""><a class="btn btn-default" ng-click="createMember()">Join</a></li>
+                        <li ng-click="subNavToggle()"><a style="color:black"><i class="fa fa-bars"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -53,57 +52,8 @@
                 </form>
             </div>-->
         </div>
-
-        <!--<div ng-show="tabsToggleVar" style="text-align:center">
-            <md-divider style="color:gray"></md-divider>
-            <div class="">
-                <br>
-                <h4><a href="project/{{project.urlTitle}}/about">About</a></h4>
-                <h4><a href="project/{{project.urlTitle}}">Activity</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/assets">Assets</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/channels">Channels</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/content">Content</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/members">{{project.memberCount}} Members</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/marketplace">Marketplace</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/projects">Projects</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/tasks">Tasks</a></h4>
-                <h4><a href="project/{{project.urlTitle}}/time">Time</a></h4>
-                <br>
-                <button class="btn btn-default log-btn" ng-click="newTransactionToggle()">Send Tokens</button>
-                <br>
-            </div>
-        </div>-->
-
     </div>
 </div>
-
-<div class="container" style="padding:0px" ng-show="newTransactionToggleVar">
-    <div class="card">
-        <div style="padding:16px;">
-            <h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Send Tokens to 0x{{project.id}}</h3>
-            <form role="form" ng-submit="createTransaction(newTransaction)">
-                <div class="form-group col-md-4">
-                    <input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
-                </div>
-                <div class="form-group col-md-4">
-                    <input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
-                </div>
-                <div class="form-group col-md-4">
-                    <input placeholder="Amount" type="number" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
-                </div>
-                <div class="form-group col-md-12">
-                    <textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control" id="taskTitle"></textarea>
-                </div>
-                <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="container" ng-show="editProjectToggleVar"><p>edit project form</p></div>
 
 <div class="container">
     <div ui-view="projectAbout"></div>

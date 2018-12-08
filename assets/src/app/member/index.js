@@ -124,7 +124,7 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             items: ['member', 'ItemModel', function(member, ItemModel) {
-                return ItemModel.getSome(member.id);
+                return ItemModel.getSome(member.id, 100, 0, 'createdAt DESC');
             }],
         }
     })
@@ -200,11 +200,9 @@ angular.module( 'conexus.member', [
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
     $scope.newFollower = {};
-    $scope.newTransactionToggleVar = false;
     $scope.newTransaction = {};
     $scope.newTransaction.identifier = 'CRE8';
     $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
-    $scope.tabsToggleVar = false;
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
@@ -231,7 +229,8 @@ angular.module( 'conexus.member', [
     };
 
     $scope.contentToggle = function(){
-        $mdSidenav('content').toggle();
+        if($scope.currentUser){$mdSidenav('content').toggle();}
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.follow = function() {
@@ -250,24 +249,15 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.newTransactionToggle = function() {
-        $scope.newTransactionToggleVar = !$scope.newTransactionToggleVar;
-    };
-
     $scope.search = function(){};
 
     $scope.subNavToggle = function(){
         $mdSidenav('subNav').toggle();
     };
 
-    $scope.tabsToggle = function() {
-        $scope.tabsToggleVar = !$scope.tabsToggleVar;
-    };
-
     $scope.transactionToggle = function(){
-        $mdSidenav('transaction').toggle()
-        //if($scope.currentUser){$mdSidenav('transaction').toggle();}
-        //else{$mdSidenav('login').toggle()}
+        if($scope.currentUser){$mdSidenav('transaction').toggle();}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: FXNS
@@ -643,7 +633,6 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     $scope.contentList = posts;
     $scope.newContent = {};
-    $scope.newContentToggleVar = false;
     $scope.newReaction = {};
 
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
@@ -690,7 +679,8 @@ angular.module( 'conexus.member', [
     };
 
     $scope.contentToggle = function(){
-        $mdSidenav('content').toggle();
+        if($scope.currentUser){$mdSidenav('content').toggle();}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: BETTER | TAG STORAGE
@@ -713,10 +703,6 @@ angular.module( 'conexus.member', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
-    $scope.newContentToggle = function() {
-        $scope.newContentToggleVar = !$scope.newContentToggleVar;
-    };
 
     //YIKES
     $scope.renderContent = function(content){
@@ -796,6 +782,27 @@ angular.module( 'conexus.member', [
     $scope.currentUser = config.currentUser;
     $scope.items = items;
     titleService.setTitle($scope.member.username + ' | Items | CRE8.XYZ');
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.tags = $scope.items.map(function(obj){
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            return obj.tags;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
+
 }])
 
 .controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
@@ -1088,10 +1095,6 @@ angular.module( 'conexus.member', [
         //else{$mdSidenav('login').toggle()}
     };
 
-    $scope.newTransactionToggle = function(){
-        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
-    };
-
 }])
 
 .controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
@@ -1161,8 +1164,9 @@ angular.module( 'conexus.member', [
         //basemarket; market
     };
 
-    $scope.newOrderToggle = function(){
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+    $scope.orderToggle = function(){
+        if ($scope.currentUser){$scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;}
+        else{$mdSidenav('login').toggle()}
     };
 
     //TODO
