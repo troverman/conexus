@@ -10,7 +10,7 @@
 
 <div class="row">
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members">
-		<div class="member-card" ng-click="renderToggle(member)">
+		<div class="member-card" ng-click="renderReputationToggle(member)">
 		    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 		        <a ng-click="$event.stopPropagation()" href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>

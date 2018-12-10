@@ -438,32 +438,22 @@ angular.module( 'conexus.member', [
     };
 
     $scope.reputationColumn = {
-        chart: {
-            zoomType: 'x',
-        },
+        chart: {zoomType: 'x',},
         series: [{
             id: 'Combination',
             type: 'column',
             name: 'Reputation Balance',
             data: [],
         }],
-        title: {
-            text: ''
-        },
+        title: {text: ''},
         xAxis: {
             crosshair: true,
             gridLineWidth: 0.5,
             gridLineColor: 'grey',
-            title: {
-                text: null
-            },
+            title: {text: null},
             categories: [],
         },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        yAxis: {title: {text: null}},
         legend: {enabled: false},
         credits:{enabled:false},
     };

@@ -3,6 +3,7 @@ angular.module( 'conexus.nav', [
 
 .controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, PostModel, TransactionModel ) {
     $scope.currentUser = config.currentUser;
+    $scope.chart = {};
     $scope.confirm = {};
     $scope.inputVector = [];
     $scope.newContent = {};
@@ -25,6 +26,40 @@ angular.module( 'conexus.nav', [
     $rootScope.renderToggle = function(item){
         $scope.item = item;
         $mdSidenav('render').toggle();
+    };
+
+     $rootScope.renderReputationToggle = function(item){
+
+        $scope.item = item;
+
+        $scope.chart = {
+            chart: {zoomType: 'x'},
+            series: [{
+                id: 'Reputation',
+                type: 'bar',
+                name: 'Reputation',
+                data: []
+            }],
+            title: {text: ''},
+            xAxis: {
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey',
+                title: {text: null},
+                categories: [],
+            },
+            legend: {enabled: false},
+            yAxis: {title: {text: null}},
+            credits:{enabled:false},
+        };
+        for (x in Object.keys($scope.item.user.reputation)){
+            if ($scope.item.user.reputation[Object.keys($scope.item.user.reputation)[x]]){
+                $scope.chart.series[0].data.push($scope.item.user.reputation[Object.keys($scope.item.user.reputation)[x]]);
+                $scope.chart.xAxis.categories.push(Object.keys($scope.item.user.reputation)[x]);
+            }
+        }
+        $mdSidenav('renderReputation').toggle();
+
     };
 
     //YIKES

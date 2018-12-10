@@ -230,7 +230,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="render" md-is-locked-open="false" style="position:fixed;background-color:white;width:90%;max-width:100%">
-         <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
                 <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
@@ -266,6 +266,19 @@
                     <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
                 </form>
+            </div>
+        </div>
+    </md-sidenav>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="renderReputation" md-is-locked-open="false" style="position:fixed;background-color:white;width:90%;max-width:100%">
+        <div class="md-list-item-text" layout="column" style="height:100%;">
+            <div style="padding:16px;">
+                <div class="spacing-25"></div>
+                <!--MANIFOLD-->
+                <h3>{{item.project.title}}</h3>
+                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                <highchart config="chart"></highchart>
             </div>
         </div>
     </md-sidenav>

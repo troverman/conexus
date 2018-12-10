@@ -279,6 +279,17 @@ md-switch.md-checked .md-thumb {background-color: rgba(0,44,84,0.7);}
     overflow-x: hidden;
 }
 
+.member-cover{
+    height:17em;
+    width: 100%;
+    overflow: hidden;
+}
+
+.member-cover img{
+    width: 100%;
+    margin-top: -10%
+}
+
 .md-datepicker-calendar{background:rgb(255,255,255)}
 
 .md-track{background-color:rgba(100,100,100,0.3)}
@@ -297,17 +308,6 @@ md-switch.md-checked .md-thumb {background-color: rgba(0,44,84,0.7);}
 .member-tabs > li > a:hover{
     background-color: #eee;
     border-radius:3px;
-}
-
-.member-cover{
-    height:17em;
-    width: 100%;
-    overflow: hidden;
-}
-
-.member-cover img{
-    width: 100%;
-    margin-top: -10%
 }
 
 .member-tab-container ul{
