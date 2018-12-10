@@ -1088,7 +1088,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("footer/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("footer/index.tpl.html",
-    "<div class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
+    "<div style=\"padding-left:0px;padding-right:0px;\" class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"footer-links\" style=\"padding:3px;\">\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\">CRE8.XYZ</a>\n" +
@@ -4251,7 +4251,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{post.user.username}}\">{{post.user.username}}</a>\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"post.createdAt\"></p>\n" +
     "                </div> \n" +
-    "                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(post.content)\"></span></div>\n" +
+    "                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(post.content)\"></span></div>\n" +
     "            </div>\n" +
     "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(post, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.plusCount}} like </a> \n" +

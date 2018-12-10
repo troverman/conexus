@@ -76,18 +76,6 @@ angular.module( 'conexus.search', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //YIKES
-    $scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
-        }
-    };
-
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         SearchModel.search($scope.searchQuery.search).then(function(models){

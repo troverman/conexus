@@ -125,7 +125,6 @@ angular.module( 'conexus.market', [
     }
    
     for (x in $scope.markets){
-
         $scope.chartMap.xAxis.categories.push($scope.markets[x]);
         for (y in $scope.baseMarkets){
             $scope.chartMap.series[y].data.push((1+1*Math.random())/2);

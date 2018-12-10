@@ -15,11 +15,86 @@ angular.module( 'conexus.nav', [
     $scope.selectedType = 'POST';
 
     if ($scope.currentUser){
-        $scope.newTransaction.from = $scope.currentUser.id
+        $scope.newTransaction.from = $scope.currentUser.id;
     }
 
+    //TODO: FACTOR LOADING HERE
+    $rootScope.$on("$stateChangeStart", function() {
+        $rootScope.to = null;
+        $rootScope.associatedModel = null;
+        $mdSidenav('nav').close();
+        $mdSidenav('subNav').close();
+        $mdSidenav('content').close();
+        $mdSidenav('login').close();
+        $mdSidenav('render').close();
+        $mdSidenav('tokens').close();
+        $mdSidenav('transaction').close();
+        //$rootScope.memberUsername = null;
+        //$rootScope.projectTitle = null;
+    });
+    
+    $rootScope.$on("$stateChangeSuccess", function() {
+        window.scrollTo(0, 0)
+    });
+
+    $scope.$watch('$root.to', function() {
+        $scope.newTransaction.to = $rootScope.to;
+    });
+
+    //TODO: BETTER
+    $scope.$watch('$root.globalTokens', function() {
+        $scope.inputVector = $rootScope.globalTokens;
+        $scope.outputMatix = [];
+        $scope.outputVector = [];
+    });
+
+    //TODO: CHANGE PARENT TO ASSOCIATED MODELS
+    //TODO: FIX
+    $scope.$watch('$root.associatedModel', function() {
+        if ($rootScope.associatedModel){
+            $scope.newContent.associatedModels = $rootScope.associatedModel.address;
+            $scope.newContent.type = $rootScope.associatedModel.type;
+
+            //CHANGE
+            if ($rootScope.associatedModel.type == 'PROFILE'){
+                $scope.newContent.profile = $rootScope.associatedModel.address;
+            }
+            if ($rootScope.associatedModel.type == 'PROJECT'){
+                $scope.newContent.project = $rootScope.associatedModel.address;
+            }
+
+            //ASSOCIATION (MOTION) // SET OF VOTES []; LINKAGE SCORES | ASSOCIATION | 'DISCRITIZEATION' PROTOCOL
+
+            //CONTENT
+            //ITEM
+            //MARKET
+            //MARKETPAIR
+            //MEMBER (PROFILE), 
+            //ORDER
+            //PROJECT
+            //REACTION
+            //TASK
+            //TIME
+            //TRANSACTION
+            //VALIDATION
+            //VIEW
+
+        }
+    });
+
+    //OVERKILL
     $rootScope.contentToggle = function(item){
         if($scope.currentUser){$mdSidenav('content').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.orderToggle = function(item){
+        if($scope.currentUser){$mdSidenav('order').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.projectToggle = function(item){
+        if($scope.currentUser){$mdSidenav('project').toggle();}
         else{$mdSidenav('login').toggle();}
     };
 
@@ -28,10 +103,8 @@ angular.module( 'conexus.nav', [
         $mdSidenav('render').toggle();
     };
 
-     $rootScope.renderReputationToggle = function(item){
-
+    $rootScope.renderReputationToggle = function(item){
         $scope.item = item;
-
         $scope.chart = {
             chart: {zoomType: 'x'},
             series: [{
@@ -59,10 +132,55 @@ angular.module( 'conexus.nav', [
             }
         }
         $mdSidenav('renderReputation').toggle();
+    };
+
+    $rootScope.taskToggle = function(item){
+        if($scope.currentUser){$mdSidenav('task').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.timeToggle = function(item){
+        if($scope.currentUser){$mdSidenav('time').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.tokensToggle = function(item){
+
+        $scope.tokens = item;
+
+        //$rootScope.globalTokens;
+        //TRAVERSAL FOR TOKENS AND TOKENS ASSOCIATIONS -- COMPLETE PIC
+
+        $mdSidenav('tokens').toggle();
 
     };
 
-    //YIKES
+    $rootScope.transactionToggle = function(item){
+        if($scope.currentUser){$mdSidenav('transaction').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.validateToggle = function(item){
+        if($scope.currentUser){$mdSidenav('validate').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    //CONFIRM, INFORMATION
+    //RENDER, RENDER REPUTATION, INFORMATION
+
+    //TODO: GLOBAL FUNCTIONS
+    //$rootScope.createContent = function(){};
+    //$rootScope.createItem = function(){};
+    //$rootScope.createOrder = function(){};
+    //$rootScope.createProject = function(){};
+    ////$rootScope.createProjectMember = function(){};
+    //$rootScope.createReaction = function(){};
+    //$rootScope.createTask = function(){};
+    //$rootScope.createTime = function(){};
+    //$rootScope.createTransaction = function(){};
+    //$rootScope.createValidation = function(){};
+    //$rootScope.createView = function(){};
+
     $rootScope.renderContent = function(item){
         if (item){
             if (!item.includes('>')){
@@ -73,58 +191,6 @@ angular.module( 'conexus.nav', [
             else{return $sce.trustAsHtml(item)}
         }
     };
-
-    $scope.$watch('$root.to', function() {
-        $scope.newTransaction.to = $rootScope.to;
-    });
-
-    //TODO: BETTER
-    $scope.$watch('$root.globalTokens', function() {
-        $scope.inputVector = $rootScope.globalTokens;
-        $scope.outputMatix = [];
-        $scope.outputVector = [];
-    });
-
-    //TODO: CHANGE PARENT TO ASSOCIATED MODELS
-    //TODO: FIX
-    $scope.$watch('$root.associatedModel', function() {
-        if ($rootScope.associatedModel){
-
-            $scope.newContent.associatedModels = $rootScope.associatedModel.address;
-            $scope.newContent.type = $rootScope.associatedModel.type;
-
-            //CHANGE
-            if ($rootScope.associatedModel.type == 'PROFILE'){
-                $scope.newContent.profile = $rootScope.associatedModel.address;
-            }
-            if ($rootScope.associatedModel.type == 'PROJECT'){
-                $scope.newContent.project = $rootScope.associatedModel.address;
-            }
-
-        }
-    });
-
-    //TODO: FACTOR LOADING HERE
-    $rootScope.$on("$stateChangeStart", function() {
-        $rootScope.to = null;
-        $rootScope.associatedModel = null;
-        $mdSidenav('nav').close();
-        $mdSidenav('subNav').close();
-        $mdSidenav('content').close();
-        $mdSidenav('login').close();
-        $mdSidenav('render').close();
-        $mdSidenav('tokens').close();
-        $mdSidenav('transaction').close();
-        //$rootScope.memberUsername = null;
-        //$rootScope.projectTitle = null;
-    });
-    
-    $rootScope.$on("$stateChangeSuccess", function() {
-    	window.scrollTo(0, 0);
-    });
-
-    //TODO: GLOBAL FUNCTIONS
-    //$rootScope.createContent = function(){};
 
     //TODO: ASSOCIATED MODELS
     $scope.createContent = function() {

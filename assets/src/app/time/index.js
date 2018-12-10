@@ -193,18 +193,6 @@ angular.module( 'conexus.time', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: IMPROVE
-    $scope.renderContent = function(post){
-        if (post){
-            if (!post.includes('>')){
-                var replacedText = post.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(post)}
-        }
-    };
-
     $scope.reply = function(post){
         if ($scope.currentUser){
             var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
