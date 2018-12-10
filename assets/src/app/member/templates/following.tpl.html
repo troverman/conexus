@@ -1,12 +1,12 @@
 <div class="spacing-5"></div>
 <div class="row">
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in following">
-		<div class="member-card" ng-click="">
+		<div class="member-card" ng-click="renderReputationToggle(member)">
 		    <div class="member-card-image" style="background-image: url('{{member.followed.coverUrl}}')">
-		        <a href="member/{{member.followed.username}}"><img ng-src="{{member.followed.avatarUrl}}" err-src="/images/avatar.png"></a>
+		        <a ng-click="$event.stopPropagation();" href="member/{{member.followed.username}}"><img ng-src="{{member.followed.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
 		    <div class="member-card-info">
-		        <h4><a href="member/{{member.followed.username}}">{{member.followed.username}}</a></h4>
+		        <h4><a ng-click="$event.stopPropagation();" href="member/{{member.followed.username}}">{{member.followed.username}}</a></h4>
 		        <p style="color:gray">{{member.followed.status}} offline</p>
 		        <p style="color:gray">Total Reputation | {{member.followed.totalWork}}</p>
 		    </div>

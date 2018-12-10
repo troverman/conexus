@@ -16,6 +16,28 @@
     .navbar-toggle{border-radius:0px;}
     .navbar-inverse .navbar-toggle{border-color:#000;}
 
+    .navIcon{
+        position: relative;
+        float: right;
+        padding: 9px 10px;
+        margin-top: 8px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .navIcon .icon-bar{
+        background-color: white;
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        margin-top: 4px;
+    }
+
     @media (max-width: 991px){
         h1{font-size:20px;}
         h2{font-size:20px;}
@@ -87,8 +109,8 @@
                     <h1 class="nav-links"><a href="project/{{project.urlTitle}}">{{project.title}}</a></h1>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/about">About</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/assets">Assets</a></h4>
-                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/channels">Channels</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/content">Content</a></h4>
+                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/marketplace">Items</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
                     <!--
                         <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
@@ -96,7 +118,6 @@
                     --> 
                     <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}">Map</a></h4>-->
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/members">{{project.memberCount}} Members</a></h4>
-                    <h4 class="nav-links"><a href="project/{{project.urlTitle}}/marketplace">Marketplace</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/projects">Projects</a></h4>
@@ -273,12 +294,14 @@
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="renderReputation" md-is-locked-open="false" style="position:fixed;background-color:white;width:90%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
+
                 <div class="spacing-25"></div>
                 <!--MANIFOLD-->
                 <h3>{{item.project.title}}</h3>
                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                 <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                 <highchart config="chart"></highchart>
+                
             </div>
         </div>
     </md-sidenav>
@@ -451,6 +474,14 @@
 
                     <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
                     <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
+                    <li ng-click="sideNavToggle()">
+                        <button class="navIcon" type="button" style="margin-top:4px;">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </li>
 
                 </ul>
     

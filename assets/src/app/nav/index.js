@@ -27,6 +27,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('content').close();
         $mdSidenav('login').close();
         $mdSidenav('render').close();
+        $mdSidenav('renderReputation').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
         //$rootScope.memberUsername = null;
@@ -104,7 +105,13 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.renderReputationToggle = function(item){
+
         $scope.item = item;
+        if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
+        if (item.user){$scope.reputation = item.user.reputation}
+        if (item.follower){$scope.reputation = item.follower}
+        if (item.following){$scope.reputation = item.user.following}
+
         $scope.chart = {
             chart: {zoomType: 'x'},
             series: [{
@@ -125,10 +132,10 @@ angular.module( 'conexus.nav', [
             yAxis: {title: {text: null}},
             credits:{enabled:false},
         };
-        for (x in Object.keys($scope.item.user.reputation)){
-            if ($scope.item.user.reputation[Object.keys($scope.item.user.reputation)[x]]){
-                $scope.chart.series[0].data.push($scope.item.user.reputation[Object.keys($scope.item.user.reputation)[x]]);
-                $scope.chart.xAxis.categories.push(Object.keys($scope.item.user.reputation)[x]);
+        for (x in Object.keys($scope.reputation)){
+            if ($scope.reputation[Object.keys($scope.reputation)[x]]){
+                $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+                $scope.chart.xAxis.categories.push(Object.keys($scope.reputation)[x]);
             }
         }
         $mdSidenav('renderReputation').toggle();
