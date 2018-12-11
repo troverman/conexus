@@ -40,7 +40,7 @@ angular.module( 'conexus.task', [
     $scope.newValidation.validation = {}
     $scope.posts = posts;
     $scope.question = false;
-    $scope.reputationMultiplier = 1;
+
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
@@ -94,9 +94,7 @@ angular.module( 'conexus.task', [
     //STORED AS A MATRIX; algabraic lattice. 
 
     $scope.askQuestion = function() {
-        if ($scope.currentUser){
-            $scope.question = true;
-        }
+        if ($scope.currentUser){$scope.question = true;}
         else{$mdSidenav('login').toggle();}
     };
 

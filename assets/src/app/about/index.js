@@ -182,4 +182,39 @@ angular.module( 'conexus.about', [
         }
     }
 
+    //VALUE MAP CTA
+    $scope.newMember = {};
+    $scope.newOrder = [];
+    $scope.showIntro = true;
+    $scope.showValue = false;
+    $scope.showDaily = false;
+    $scope.showPersonal = false;
+    $scope.showFinal = false;
+    $scope.tasks = tasks;
+
+    $scope.continue = function(page){
+        console.log(page)
+        if (page === 1){
+            $scope.showIntro = !$scope.showIntro;
+            $scope.showValue = !$scope.showValue;
+        }
+        if (page === 2){
+            $scope.showValue = !$scope.showValue;
+            $scope.showDaily = !$scope.showDaily;
+        }
+        if (page === 3){
+            $scope.showDaily = !$scope.showDaily;
+            $scope.showPersonal = !$scope.showPersonal;
+        }
+        if (page === 4){
+            $scope.showPersonal = !$scope.showPersonal;
+            $scope.showFinal = !$scope.showFinal;
+        }
+
+    };
+
+    $scope.createPosition = function(model){
+        $scope.newOrder.push([model,'1 UNIVERSALTOKEN+ONMINT']);
+    };
+
 }]);

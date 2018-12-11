@@ -3,7 +3,7 @@
     <div class="spacing-10"></div>
 
     <div class="row">
-        <div class="card">
+        <div class="card" ng-click="">
             <div class="padding:16px">
                 <div class="col-sm-12" style="padding:16px">
 
@@ -38,10 +38,10 @@
             <div style="clear:both"></div>
 
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
-                <a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-                <a href="#"><i class="fa fa-check"></i> validate </a>
+                <a ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
+                <a ng-click="createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+                <a ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="validateToggle(task)"><i class="fa fa-check"></i> validate </a>
             </div>
 
         </div>

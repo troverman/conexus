@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, PostModel, TransactionModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', 'UserModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, PostModel, TransactionModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
@@ -16,6 +16,14 @@ angular.module( 'conexus.nav', [
 
     if ($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
+
+        //TODO: BETTER
+        UserModel.getByUsername($scope.currentUser.username).then(function(member){
+            $scope.member = member;
+            $scope.balance = member.balance;
+            $scope.reputation = member.reputation;
+        });
+
     }
 
     //TODO: FACTOR LOADING HERE
@@ -109,8 +117,11 @@ angular.module( 'conexus.nav', [
         $scope.item = item;
         if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
         if (item.user){$scope.reputation = item.user.reputation}
-        if (item.follower){$scope.reputation = item.follower}
-        if (item.following){$scope.reputation = item.user.following}
+
+        //BUG
+        console.log(item);
+        if (item.follower){$scope.reputation = item.follower.reputation;$scope.item.user = item.follower}
+        if (item.followed){$scope.reputation = item.followed.reputation;$scope.item.user = item.followed}
 
         $scope.chart = {
             chart: {zoomType: 'x'},
@@ -168,7 +179,30 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.validateToggle = function(item){
-        if($scope.currentUser){$mdSidenav('validate').toggle();}
+        if($scope.currentUser){
+
+            $scope.item = item;
+            $scope.newValidation = {};
+            $scope.newValidation.validation = {};
+            $scope.tags = [];
+
+            if(item.tags){
+                $scope.tags = item.tags.split(',');
+                $scope.newValidation.validation.general = 0;
+                for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+            }
+
+            //TEMP | TODO: ASSOCIATIONS
+
+            //BASED ON THE ASSOCIATION.
+            if(item.task.tags){
+                $scope.tags = item.task.tags.split(',');
+                $scope.newValidation.validation.general = 0;
+                for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+            }
+
+            $mdSidenav('validate').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 

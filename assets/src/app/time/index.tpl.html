@@ -21,7 +21,7 @@
 	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->
 
 	<div class="row">
-		<div class="card">
+        <div class="card" ng-click="">
 			<div style="padding:16px" class="col-sm-12">
 
 				<div style="float:right">
@@ -61,10 +61,10 @@
 			<div style="clear:both"></div>
 
 			<div class="card-footer">
-				<a href="#" ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
-				<a href="#" ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
-				<a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-		       	<a href="#"><i class="fa fa-check"></i> validate </a>
+				<a ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.plusCount}} like </a> 
+				<a ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.minusCount}} dislike </a>
+				<a ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+		       	<a ng-click="validateToggle(work)"><i class="fa fa-check"></i> validate </a>
 			</div>
 
 		</div>

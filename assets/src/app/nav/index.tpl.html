@@ -386,13 +386,14 @@
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validation" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validate" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px">
                 <div class="spacing-25"></div>
 
-                <h5>Validate <i class="fa fa-check"></i></h5>
-                <!--
+                <h5 ng-if="item.project">Validate {{item.title}} in {{item.project.title}} <i class="fa fa-check"></i></h5>
+                <h5 ng-if="item.task">Validate {{item.amount}} Time for {{item.task.title}} <i class="fa fa-check"></i></h5>
+
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
@@ -406,7 +407,6 @@
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag]}} | {{reputation[tag] || 0}}</span></div>
                     </div>
                 </div>
-                -->
 
                 <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
                 <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
@@ -416,9 +416,7 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
         <div class="container">
-
             <div class="navbar-header">
-
                 <!--TODO: NOTIFICATIONS-->
                 <button class="navbar-toggle" type="button" ng-click="sideNavToggle()">
                     <span class="sr-only">Toggle navigation</span>
@@ -426,16 +424,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                <!--<button type="button" style="color:white;margin-top:5px;margin-bottom:0px" class="navbar-toggle" ng-click="sideNavToggle()"><i class="fa fa-search"></i></button>-->
-
                 <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
-                
             </div>
-
             <!--TODO: DEPRECIATE-->
             <div class="collapse navbar-collapse" style="text-align:center">
-
                 <ul class="nav navbar-nav">
                     <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link1').value; return false;">
                         <div class="form-group">
@@ -443,38 +435,16 @@
                         </div>
                     </form>
                 </ul>
-
                 <ul class="nav navbar-nav navbar-right">
-
                     <!--
                     <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
                     <li class="nav-links"><a href="/discover">Discover</a></li>
                     <li class="nav-links"><a href="/market">Market</a></li>
                     -->
-
-                    <li class="dropdown nav-links" ng-show="currentUser">
-
-                        <!--TODO: NOTIFICATIONS-->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            {{currentUser.username}} <span class="fa fa-angle-down"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a style="color:black!important" href="/member/{{currentUser.username}}">
-                                    <img style="height:32px;width:32px;border-radius:3px" src="{{currentUser.avatarUrl}}"/> {{currentUser.username}}
-                                </a>
-                            </li>
-                            <li><a style="color:black!important" href="/account">account</a></li>
-                            <li><a style="color:black!important" href="/notifications">0 notifications</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a style="color:black!important" href="/logout">log out</a></li>
-                        </ul>
-
-                    </li>
-
                     <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
                     <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
                     <li ng-click="sideNavToggle()">
+                        <!--TODO: NOTIFICATIONS-->
                         <button class="navIcon" type="button" style="margin-top:4px;">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -482,11 +452,8 @@
                             <span class="icon-bar"></span>
                         </button>
                     </li>
-
                 </ul>
-    
             </div>
-
         </div>
         <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
     </div>

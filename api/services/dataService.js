@@ -657,6 +657,93 @@ module.exports = {
 
 		};
 
+		function generateStringSpace(){
+
+			console.log('GENERATE STRING SPACE!');
+
+			//WALK THE THE ASSOCIATIONS :) 
+			//LET'S START! 
+
+			var promises = [];
+			promises.push(Item.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(Order.find().limit(1000).skip(0).sort('createdAt DESC'))
+			promises.push(Reaction.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(Project.find().limit(100000).skip(0).sort('createdAt DESC'))
+			//promises.push(ProjectMember.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(Task.find().limit(100000).skip(0).sort('createdAt DESC').populate('project'))
+			promises.push(Transaction.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(Post.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(View.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(Validation.find().limit(100000).skip(0).sort('createdAt DESC'))
+			promises.push(Work.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'))
+
+			Q.all(promises)
+			.then(function(data){
+
+				var type = [
+					'ITEM',
+					'ORDER',
+					'REACTION',
+					'PROJECT',
+					//'PROJECTMEMBER',
+					'TASK',
+					'TRANSACTION',
+					'POST',
+					'VIEW',
+					'VALIDATION',
+					'WORK'
+				];
+
+				for (x in data){
+					for (y in data[x]){
+
+						//if (type[x] == 'ITEM'){}
+						if (type[x] == 'PROJECT'){
+							//data[x][y].project
+							//console.log(data[x][y]);
+						}
+						if (type[x] == 'TASK'){
+							//data[x][y].project
+							//console.log(data[x][y]);
+							//P+T+W
+						}
+						if (type[x] == 'WORK'){
+							//data[x][y].task
+							//console.log(data[x][y]);
+						}
+
+						//ID NFT
+						//console.log(data[x][y].id);
+
+						//TAGS
+						if (data[x][y].tags){
+
+							for (z in data[x][y].tags.split(',')){
+
+								var tag = data[x][y].tags.split(',')[z].trim().toUpperCase();
+
+								//console.log(tag);
+								//console.log(data[x][y].id+'+'+tag);
+
+							}
+
+						}
+
+						//if (association){
+							//recursive and not circular
+						//}
+
+					}
+				}
+
+				//console.log(data)
+
+			});
+
+		};
+
+		generateStringSpace();
+
 		//train('A', 0, 8);
 		//train('A', 0, 3);
 
@@ -665,7 +752,7 @@ module.exports = {
 		//valueMatrix([1,1], 'B,A');
 
 		//YES
-		valueTensor('A', [], 0, 2)
+		//valueTensor('A', [], 0, 2)
 
 		//tensorTesting('B,A');
 

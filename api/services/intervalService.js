@@ -97,7 +97,7 @@ module.exports = {
 
 		});*/
 
-		/*
+		
 		User.findOne(req.id)
 		.then(function(model) {
 
@@ -122,7 +122,7 @@ module.exports = {
 			});
 
 		})
-		*/
+		
 	
 	}
 

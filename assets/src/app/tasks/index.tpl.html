@@ -80,24 +80,24 @@
 			<!--TODO: ASSOCIATIONS-->
 			<!--TODO COMMENT-->
 			<div ng-repeat="item in tasks">
-				<div class="card" ng-click="">
+				<div class="card" ng-click="renderToggle(item)">
 					<div style="padding:16px;">
 
 						<div style="float:right">
-		                    <h5 style="text-align:right" ng-click="tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+		                    <h5 style="text-align:right" ng-click="$event.stopPropagation()tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
 		                </div>
 
-						<h4><a href="task/{{item.id}}">{{item.title}}</a></h4>
-						<p><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-						<p><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+						<h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>
+						<p><a ng-click="$event.stopPropagation();" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
+						<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 						<span style="color:gray" am-time-ago="item.createdAt"></span>
 							
 					</div>
 					<div class="card-footer">
-						<a ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-						<a ng-click="createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-						<a href="task/{{item.id}}" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+						<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
+						<a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+						<a ng-click="$event.stopPropagation();reply(item)" href="task/{{item.id}}"><i class="fa fa-comment-o"></i> comment </a>
 						<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
 				</div>
