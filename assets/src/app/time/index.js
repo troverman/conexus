@@ -15,7 +15,7 @@ angular.module( 'conexus.time', [
             work: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
                 return WorkModel.getOne($stateParams.id);
             }],
-            posts: ['PostModel', 'work', function(PostModel, work){
+            contentList: ['PostModel', 'work', function(PostModel, work){
                 return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
             }],
             validations: ['ValidationModel', 'work', function(ValidationModel, work){
@@ -25,8 +25,9 @@ angular.module( 'conexus.time', [
     });
 }])
 
-.controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
+.controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'PostModel', 'ReactionModel', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, PostModel, ReactionModel, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
     $scope.currentUser = config.currentUser;
+
     $scope.work = work;
     if(!$scope.work){$location.path('/')}
 
@@ -34,12 +35,13 @@ angular.module( 'conexus.time', [
 
     $scope.work.validationScore = 0;
 
+    $scope.contentList = contentList;
+
     $scope.member = {};
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
     $scope.newValidation.validation = {}
-    $scope.posts = posts;
     $scope.reactions = [];
     $scope.reputationList = [];
     $scope.tags = [];
@@ -164,19 +166,34 @@ angular.module( 'conexus.time', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: MODEL | CREATE REACTION | UPDATE POST
-    $scope.createReaction = function(post, type){
+
+    $scope.createReaction = function(item, type){
+
         if ($scope.currentUser){
-            $scope.newReaction.user = $scope.currentUser.id;
-            $scope.newReaction.post = post.id;
+
+            //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
+
+            $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            //Reaction.create(newReaction);
-            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-            if (type =='plus'){$scope.posts[index].plusCount++}
-            if (type =='minus'){$scope.posts[index].minusCount++}
+            $scope.newReaction.user = $scope.currentUser.id;
+
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (index != -1){
+                $scope.newReaction.associations = [{type:'CONTENT', id:item.id}];
+                $scope.contentList[index].reactions[type]++;
+            }
+            else{
+                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.work.reactions[type]++;
+            }
+            ReactionModel.create($scope.newReaction);
         }
+
         else{$mdSidenav('login').toggle()}
+
     };
+
+
 
     //TODO: LAYERS | PROJ BASED LAYER
     $scope.createValidation = function(){
@@ -195,8 +212,8 @@ angular.module( 'conexus.time', [
 
     $scope.reply = function(post){
         if ($scope.currentUser){
-            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-            $scope.posts[index].showReply = !$scope.posts[index].showReply;
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(post.id);
+            $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -210,10 +227,10 @@ angular.module( 'conexus.time', [
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });

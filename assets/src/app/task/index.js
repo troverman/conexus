@@ -14,7 +14,7 @@ angular.module( 'conexus.task', [
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
                 return TaskModel.getOne($stateParams.path);
             }],
-            posts: ['PostModel', 'task', function(PostModel, task){
+            contentList: ['PostModel', 'task', function(PostModel, task){
                 return PostModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
             }],
             work: ['WorkModel', 'task', function(WorkModel, task){
@@ -24,7 +24,7 @@ angular.module( 'conexus.task', [
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'posts', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, PostModel, posts, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
+.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'PostModel', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, PostModel, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
     $scope.currentUser = config.currentUser;
     $scope.task = task;
     console.log(task);
@@ -34,11 +34,12 @@ angular.module( 'conexus.task', [
 
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
 
+    $scope.contentList = contentList;
+
     $scope.newPost = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
     $scope.newValidation.validation = {}
-    $scope.posts = posts;
     $scope.question = false;
 
     $scope.streaming = false;
@@ -110,24 +111,38 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: MODELS | ONLY POST/CONTENT | NEED TASK (AS CONTENT)
-    $scope.createReaction = function(content, type){
-        if($scope.currentUser){
+    $scope.createReaction = function(item, type){
+
+        if ($scope.currentUser){
+
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
-            var index = $scope.posts.map(function(obj){return obj.id}).indexOf(content.id);
+            //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){
+                $scope.newReaction.associations = [{type:'CONTENT', id:item.id}];
+                $scope.contentList[contentIndex].reactions[type]++;
+            }
 
-            if (type =='plus'){$scope.contentList[index].plusCount++}
-            if (type =='minus'){$scope.contentList[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+            var timeIndex = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
+            if (timeIndex != -1){
+                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.work[timeIndex].reactions[type]++;
+            }
+
+            else{
+                $scope.newReaction.associations = [{type:'TASK', id:item.id}];
+                $scope.task.reactions[type]++;
+            }
+
+            ReactionModel.create($scope.newReaction);
 
         }
+
         else{$mdSidenav('login').toggle();}
+
     };
 
     //TODO | MOTIONS INTERLOCK

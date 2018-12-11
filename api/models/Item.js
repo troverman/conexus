@@ -22,6 +22,9 @@ module.exports = {
         identifierSet: {type: 'string'},
         amountSet: {type: 'string'},
 
+        //REACTIONS
+        reactions: {type: 'json'},
+
     },
 
 };

@@ -116,7 +116,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.work = $scope.work.map(function(obj){
-        obj.model = 'WORK';
+        obj.model = 'TIME';
         return obj;
     });
     
@@ -171,20 +171,24 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-    $scope.createReaction = function(content, type){
+    $scope.createReaction = function(item, type){
+
         if($scope.currentUser){
+
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
+            $scope.newReaction.associations = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
-            if (type =='plus'){$scope.activity[index].plusCount++}
-            if (type =='minus'){$scope.activity[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.activity[index].reactions[type]++;
+
+            ReactionModel.create($scope.newReaction);
+
         }
+
         else{$mdSidenav('login').toggle()}
+
     };
 
     //TODO: BETTER
@@ -276,6 +280,41 @@ angular.module( 'conexus.home', [
 
     };
 
+     //VALUE MAP CTA
+    $scope.newMember = {};
+    $scope.newOrder = [];
+    $scope.showIntro = true;
+    $scope.showValue = false;
+    $scope.showDaily = false;
+    $scope.showPersonal = false;
+    $scope.showFinal = false;
+    $scope.tasks = tasks;
+
+    $scope.continue = function(page){
+        console.log(page)
+        if (page === 1){
+            $scope.showIntro = !$scope.showIntro;
+            $scope.showValue = !$scope.showValue;
+        }
+        if (page === 2){
+            $scope.showValue = !$scope.showValue;
+            $scope.showDaily = !$scope.showDaily;
+        }
+        if (page === 3){
+            $scope.showDaily = !$scope.showDaily;
+            $scope.showPersonal = !$scope.showPersonal;
+        }
+        if (page === 4){
+            $scope.showPersonal = !$scope.showPersonal;
+            $scope.showFinal = !$scope.showFinal;
+        }
+
+    };
+
+    $scope.createPosition = function(model){
+        $scope.newOrder.push([model,'1 UNIVERSALTOKEN+ONMINT']);
+    };
+
 }])
 
 .controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
@@ -320,7 +359,7 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.work = $scope.work.map(function(obj){
-        obj.model = 'WORK';
+        obj.model = 'TIME';
         return obj;
     });
     
@@ -503,31 +542,24 @@ angular.module( 'conexus.home', [
         if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
     };
 
-    $scope.createReaction = function(content, type){
-    	if($scope.currentUser){
-	    	$scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
+    $scope.createReaction = function(item, type){
+
+        if($scope.currentUser){
+
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.associations = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-	    	var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
-	    	if (type =='plus'){$scope.activity[index].plusCount++}
-	    	if (type =='minus'){$scope.activity[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
-		}
-        else{$mdSidenav('login').toggle()}
-    };
 
-	$scope.renderContent = function(content){
-        if (content){
-            if (!content.includes('>')){
-                var replacedText = content.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(content)}
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.activity[index].reactions[type]++;
+
+            ReactionModel.create($scope.newReaction);
+
         }
+
+        else{$mdSidenav('login').toggle()}
+            
     };
 
     $scope.reply = function(item){

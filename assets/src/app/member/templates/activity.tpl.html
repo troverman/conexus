@@ -40,8 +40,8 @@
 
             </div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
@@ -73,37 +73,14 @@
 
             </div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
         </div>
 
-        <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="renderToggle(item)">
-            <div style="padding:16px">
-
-                <div style="float:right">
-                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                </div>
-
-                <p style="font-weight:800">From: <a href="member/{{item.from}}">{{item.from}}</a> To: <a href="member/{{item.to}}">{{item.to}}</a></p>
-                <p style="font-weight:800">{{item.amount}} <a href="market/{{item.identifier}}">{{item.identifier}}</a></p>
-                <p><a ng-repeat="tag in item.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-                <p>{{item.content}}</p>
-                <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-                <a href="transaction/{{item.id}}"></a>
-
-            </div>
-            <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
-            </div>
-        </div>
-
-        <div class="card" ng-if="item.model=='WORK'" ng-click="renderToggle(item)">
+        <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
             <div style="padding:16px;">
 
                 <div style="float:right">
@@ -127,8 +104,8 @@
             </div>
 
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
@@ -138,6 +115,29 @@
                     <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
+            </div>
+        </div>
+
+        <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="renderToggle(item)">
+            <div style="padding:16px">
+
+                <div style="float:right">
+                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
+
+                <p style="font-weight:800">From: <a href="member/{{item.from}}">{{item.from}}</a> To: <a href="member/{{item.to}}">{{item.to}}</a></p>
+                <p style="font-weight:800">{{item.amount}} <a href="market/{{item.identifier}}">{{item.identifier}}</a></p>
+                <p><a ng-repeat="tag in item.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                <p>{{item.content}}</p>
+                <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+                <a href="transaction/{{item.id}}"></a>
+
+            </div>
+            <div class="card-footer">
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
         </div>
         

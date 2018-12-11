@@ -333,24 +333,24 @@ angular.module( 'conexus.member', [
         });
     };
 
-    //TODO: MODELS | ONLY POST/CONTENT
-    $scope.createReaction = function(content, type){
+    $scope.createReaction = function(item, type){
+
         if($scope.currentUser){
+
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
+            $scope.newReaction.associations = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(content.id);
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.activity[index].reactions[type]++;
 
-            if (type =='plus'){$scope.activity[index].plusCount++}
-            if (type =='minus'){$scope.activity[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+            ReactionModel.create($scope.newReaction);
 
         }
+
         else{$mdSidenav('login').toggle()}
+            
     };
 
     $scope.reply = function(item){

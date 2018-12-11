@@ -102,10 +102,7 @@
 
     </div>
 
-
-    <!--TODO:-->
-    <!--STORY ABOUT VALUE MAPPING HERE!!-->
-    <!--FILL OUT THE VALUE FORM-->
+    <!--
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12">
@@ -137,10 +134,13 @@
             </div>   
         </div>
     </div>
+    -->
 
     <div class="spacing-50"></div>
     
 </div>
+
+ <div ng-include="'register/index.tpl.html'"></div>
 
 <div class="container">
     
@@ -223,8 +223,8 @@
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
                     </div>
                     <div class="card-footer">
-                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
@@ -269,14 +269,14 @@
                         <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
                     <div class="card-footer">
-                        <a ng-click="$event.stopPropagation()"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a ng-click="$event.stopPropagation()"><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='WORK'" ng-click="renderToggle(item)">
+                <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
                     <div style="padding:16px;">
                         <div>
 
@@ -298,8 +298,8 @@
 
                     </div>
                     <div class="card-footer">
-                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>

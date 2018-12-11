@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "@tensorflow/tfjs-node": "^0.1.19",
+    "async": "^2.6.1",
     "balanced-match": "^1.0.0",
     "bcryptjs": "~2.1.0",
     "ejs": "~2.5.5",

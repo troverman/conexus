@@ -52,8 +52,8 @@
 
 			</div>
 			<div class="card-footer">
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(validation, 'plus')"><i class="fa fa-angle-up"></i> {{validation.plusCount}} like </a> 
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(validation, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.minusCount}} dislike </a>
+				<a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{validation.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.reactions.minus}} dislike </a>
 		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
 		       	<a style="padding:5px;color:grey" href="#"><i class="fa fa-check"></i> validate </a>
 

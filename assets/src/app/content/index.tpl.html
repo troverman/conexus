@@ -18,7 +18,7 @@
 					<div style="float:right;text-align:right">
 
 						<h5 style="text-align:right;float:right" ng-click="tokenToggle(post)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
-
+						<br><br>
 						<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{post.minusCount+1}}</h5>
 						<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: {{post.plusCount}} | Dislike: {{post.minusCount}}</h5>
 						<h5 style="margin-top:0px;margin-bottom:0px">
@@ -63,8 +63,8 @@
 				
 		    </div>
 		    <div class="card-footer">
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.reactions.plus}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.reactions.minus}} dislike </a>
 		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
 		    </div>
 		    <div ng-show="post.showReply" class="card-footer">

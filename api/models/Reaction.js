@@ -6,20 +6,16 @@ module.exports = {
 
 	attributes: {
 
+        //REACTION DATA
         amount: {type: 'string'},
-
-        //TODO: DEPRECIATE
-        post: {model: 'post'},
-
-        //TODO: associatedModel
-        associatedModel: {type: 'string'},
-
-        type: {
-            type: 'string',
-            required: true
-        },
-
+        type: {type: 'string', required: true},
         user: {model: 'user'},
+
+        //ASSOICATIONS
+        associations: {type: 'json'},
+
+        //REACTIONS
+        reactions: {type: 'json'},
         
     },
 

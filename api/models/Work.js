@@ -18,12 +18,16 @@ module.exports = {
 
         //TODO: RELATIONSHIPS | ASSOCIATIONS
         relationships: {type: 'json'},
+        associations: {type: 'json'},
 
         //TODO: STREAM RELATIONSHIP?
         //TODO: LOCATION ?
 
         //TODO: TYPE
         //RETROACTIVE | TRACKED | STREAM | APP
+
+        //REACTIONS
+        reactions: {type: 'json'},
 
         //TODO: DEPRECIATE
         task: {model: 'task'},

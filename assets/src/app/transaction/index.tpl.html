@@ -15,8 +15,8 @@
             <p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
         </div>
         <div class="card-footer">
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+            <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{validation.item.plus}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.item.minus}} dislike </a>
             <a style="padding:5px;color:grey" href="#" ng-click="reply(transaction)"><i class="fa fa-comment-o"></i> comment </a>
         </div>
     </div>
@@ -73,8 +73,8 @@
             <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
         </div>
         <div class="card-footer">
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-            <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+            <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{validation.item.plus}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.item.minus}} dislike </a>
             <a style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
             <a style="color:grey" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
         </div>

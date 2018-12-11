@@ -24,8 +24,8 @@
 
             </div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
@@ -58,10 +58,47 @@
                     
             </div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
+                <form role="form" ng-submit="createContent(item)">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
+            <div style="padding:16px;">
+
+                <div style="float:right">
+                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                </div>
+                
+                <div>
+                    <img ng-click="$event.stopPropagation();" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                    <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+                    <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
+                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+                    <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
+                    <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
+                </div>
+
+                <p ng-click="$event.stopPropagation();" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px">
+                    <a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a>
+                </p>
+                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+
+            </div>
+            <div class="card-footer">
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
                 <form role="form" ng-submit="createContent(item)">
@@ -90,44 +127,6 @@
                 <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
                 <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                 <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
-            </div>
-            <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
-                <form role="form" ng-submit="createContent(item)">
-                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                </form>
-            </div>
-        </div>
-
-
-        <div class="card" ng-if="item.model=='WORK'" ng-click="renderToggle(item)">
-            <div style="padding:16px;">
-
-                <div style="float:right">
-                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                </div>
-                
-                <div>
-                    <img ng-click="$event.stopPropagation();" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
-                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                    <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
-                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                    <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
-                    <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
-                </div>
-
-                <p ng-click="$event.stopPropagation();" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px">
-                    <a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a>
-                </p>
-                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
-
-            </div>
-            <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
-                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
                 <form role="form" ng-submit="createContent(item)">

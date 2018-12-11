@@ -18,8 +18,11 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'TaskModel', 'tasks', 'titleService', function TasksController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, TaskModel, tasks, titleService ) {
-	titleService.setTitle('Tasks | CRE8.XYZ');
+.controller( 'TasksCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function TasksController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ReactionModel, TaskModel, tasks, titleService ) {
+	$scope.currentUser = config.currentUser;
+    titleService.setTitle('Tasks | CRE8.XYZ');
+    $scope.newReaction = {};
+
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
 	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','workCount DESC': 'Total Work'}
@@ -41,20 +44,23 @@ angular.module( 'conexus.tasks', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    $scope.createReaction = function(content, type){
-        if($scope.currentUser){
+     $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-            if (type =='plus'){$scope.contentList[index].plusCount++}
-            if (type =='minus'){$scope.contentList[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+
+            //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
+            var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
+            if (taskIndex != -1){
+                $scope.newReaction.associations = [{type:'TASK', id:item.id}];
+                $scope.tasks[taskIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }        
+            
         }
-        else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle();}
     };
 
     $scope.loadMore = function() {

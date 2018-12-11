@@ -14,6 +14,9 @@ angular.module( 'conexus.nav', [
 
     $scope.selectedType = 'POST';
 
+
+    //$rootScope.currentUser = config.currentUser;
+
     if ($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
 

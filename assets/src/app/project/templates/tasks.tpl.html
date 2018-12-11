@@ -68,8 +68,8 @@
 					<span style="color:gray" am-time-ago="task.createdAt"></span>
 				</div>
 				<div class="card-footer">
-					<a ng-click="$event.stopPropagation()"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-					<a ng-click="$event.stopPropagation()"><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+					<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+					<a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
 					<a ng-click="$event.stopPropagation();reply(task)"><i class="fa fa-comment-o"></i> comment </a>
 					<a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="task/{{task.id}}"><i class="fa fa-link grey"></i></a>
 				</div>

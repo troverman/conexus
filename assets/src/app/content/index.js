@@ -164,26 +164,19 @@ angular.module( 'conexus.content', [
         if($scope.currentUser){
 
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
+            $scope.newReaction.associations = [{type:'CONTENT', id:content.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
             var location = searchObject($scope.post, function (value) { return value != null && value != undefined && value.id == content.id; });
             
             console.log(location[0]);
+  
+            location[0].value.reactions[type]++;
+            
+            ReactionModel.create($scope.newReaction);
 
-            if (type =='plus'){
-                location[0].value.plusCount++;
-            }
-            if (type =='minus'){
-                location[0].value.minusCount++;
-            }
-
-            updateObject($scope.post, location[0].value, location[0].path)
-
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+            //updateObject($scope.post, location[0].value, location[0].path);
 
         }
         else{$mdSidenav('login').toggle()}

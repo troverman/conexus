@@ -31,21 +31,8 @@ module.exports = {
             required: true
         },
 
-        //COUNTS
-        //TODO: JSON INFO OBJ
-        plusCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        minusCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        viewCount: {
-            type: 'integer',
-            defaultsTo: 0,
-        },
-    
+        //REACTIONS
+        reactions: {type: 'json'},
 
         //TODO: DEPRECIATE
         market: {type: 'string'},

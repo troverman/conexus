@@ -10,7 +10,7 @@
 
 </style>
 <!--<div style="height:100%;border-left:solid #002c54 4px;"></div>-->
-<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="!post.showThread">
+<div class="card" style="margin:10px;background-color:#f9f9f9" ng-show="!post.showThread" ng-click="">
 
     <div ng-click="toggleThread(post)" class="threadline"></div>
 
@@ -32,8 +32,8 @@
 
     </div>
     <div class="card-footer">
-        <a style="padding:5px;color:grey" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.plusCount}} like </a> 
-        <a style="padding:5px;color:grey" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.minusCount}} dislike </a>
+        <a style="padding:5px;color:grey" ng-click="createReaction(post, 'plus')"><i class="fa fa-angle-up"></i> {{post.reactions.plus}} like </a> 
+        <a style="padding:5px;color:grey" ng-click="createReaction(post, 'minus')" ><i class="fa fa-angle-down"></i> {{post.reactions.minus}} dislike </a>
         <a style="padding:5px;color:grey" ng-click="reply(post)"><i class="fa fa-comment-o"></i> comment </a>
         <a style="color:grey;" class="pull-right" href="content/{{post.id}}"><i class="fa fa-link grey"></i></a>
     </div>
@@ -52,7 +52,7 @@
     <div style="padding:16px;background-color:white;">
         <i ng-click="toggleThread(post)" class="fa fa-plus"></i>
         <a style="display:inline;padding-left:5px" href="/member/{{post.user.username}}"><span style="font-weight:800">{{post.user.username}}</span></a>
-        <p style="display:inline;font-size:10px;color:gray;margin-left:5px">{{post.plusCount-post.minusCount}}</p>
+        <p style="display:inline;font-size:10px;color:gray;margin-left:5px">{{post.reactions.plus-post.reactions.minus}}</p>
         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="post.createdAt"></p>
     </div>
 </div>

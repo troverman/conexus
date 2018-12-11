@@ -18,6 +18,9 @@ module.exports = {
 
         //TODO: CREATOR
 
+        //REACTIONS
+        reactions: {type: 'json'},
+
         //TODO:DEPRECIATE
         project: {model: 'project'},
         user: {model: 'user'},

@@ -742,7 +742,7 @@ module.exports = {
 
 		};
 
-		generateStringSpace();
+		//generateStringSpace();
 
 		//train('A', 0, 8);
 		//train('A', 0, 3);
@@ -768,6 +768,19 @@ module.exports = {
 
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
+
+		//Validation.find().limit(10000).then(function(postModels){
+		//	for (x in postModels){
+		//		var reactions = {plus:0,minus:0};
+		//		if(postModels[x].reactions){
+		//			reactions = postModels[x].reactions;
+		//		} 
+		//		console.log(reactions)
+		//		Validation.update({id:postModels[x].id}, {reactions:reactions}).then(function(){
+		//			console.log('update')
+		//		});
+		//	}
+		//});
 		
 	},
 

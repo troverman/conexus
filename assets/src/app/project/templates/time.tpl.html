@@ -67,8 +67,8 @@
     				<span><a ng-click="$event.stopPropagation()" href="task/{{item.task.id}}">{{item.task.title}}</a> | <a ng-click="$event.stopPropagation()" href="member/{{item.user.username}}">{{item.user.username}}</a></span>
                 </div>
                 <div class="card-footer">
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                     <a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
                 </div>

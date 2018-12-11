@@ -32,9 +32,14 @@ module.exports = {
             required: true
         },
 
+        relationships: {type: 'json'},
+
         //TODO: RELATIONSHIPS
         //MODLULAR.. PROJECT; MEMBER
-        relationships: {type: 'json'},
+        associations: {type: 'json'},
+
+        //REACTIONS
+        reactions: {type: 'json'},
 
         //TODO:  DEPRECIATE
         project: {model: 'project'},
