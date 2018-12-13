@@ -217,7 +217,7 @@ module.exports = {
 
 		};
 		//PATCH
-		model.reaction = {plus:0,minus:0};
+		model.reactions = {plus:0,minus:0};
 		Post.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}

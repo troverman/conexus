@@ -94,7 +94,7 @@ module.exports = {
 			user: req.param('user'), //TODO: CHANGE TO CREATOR | ADDRESS | IE ORGS MAKING ORDERS
 		};
 		//PATCH
-		model.reaction = {plus:0,minus:0};
+		model.reactions = {plus:0,minus:0};
 		Order.create(model)
 		.exec(function(err, order) {
 			if (err) {return console.log(err);}

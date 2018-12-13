@@ -13,7 +13,7 @@ module.exports = {
         location: {type: 'json'},
 
         //ASSOICATIONS
-        associations: {type: 'json'},
+        associatedModels: {type: 'json'},
             
         //REACTIONS
         reactions: {type: 'json'},

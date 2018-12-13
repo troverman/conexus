@@ -108,7 +108,7 @@ module.exports = {
 			user: req.param('user'),
 		};
 		//PATCH
-		model.reaction = {plus:0,minus:0};
+		model.reactions = {plus:0,minus:0};
 		Task.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}

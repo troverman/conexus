@@ -12,7 +12,8 @@ module.exports = {
         user: {model: 'user'},
 
         //ASSOICATIONS
-        associations: {type: 'json'},
+        //ASSOCIATEDMODELS
+        associatedModels: {type: 'json'},
 
         //REACTIONS
         reactions: {type: 'json'},

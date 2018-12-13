@@ -74,6 +74,9 @@ module.exports = {
 
 		//console.log(model)
 		//association perm check? 
+		
+		//PATCH
+		model.reactions = {plus:0,minus:0};
 
 		Reaction.create(model)
 		.exec(function(err, reaction) {

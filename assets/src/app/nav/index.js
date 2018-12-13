@@ -20,7 +20,7 @@ angular.module( 'conexus.nav', [
     if ($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
 
-        $scope.newContent.associations = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
+        $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
 
         //TODO: BETTER
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
@@ -272,8 +272,8 @@ angular.module( 'conexus.nav', [
     //TODO: ASSOCIATED MODELS
     $scope.createContent = function(content) {
         if ($scope.currentUser){
-            //if(content){$scope.newContent.associations = [{type:'CONTENT', id:content.id}];}
-            //if!($scope.newContent.associations = [];)
+            //if(content){$scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];}
+            //if!($scope.newContent.associatedModels = [];)
 
             $scope.newContent.type = $scope.selectedType;
             $scope.newContent.user = $scope.currentUser.id;
@@ -285,8 +285,8 @@ angular.module( 'conexus.nav', [
             }
 
             //TODO: DROPDOWN
-            if ($scope.newContent.associations){
-                $scope.newContent.associations = $scope.newContent.associations.map(function(obj){
+            if ($scope.newContent.associatedModels){
+                $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
                     return {id:obj.text};
                 });
             }
