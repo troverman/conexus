@@ -6,17 +6,22 @@ module.exports = {
 
 	attributes: {
 
+        //MAIN
         title: {type: 'string'},
         content: {type: 'string'},
 
+        //TAGS
         tags: {type: 'string'},
 
-        //TODO: RELATIONSHIPS | ASSOCIATIONS
-        //TAGS; ASSOCIATIONS; LOCATIONS
-        relationships: {type: 'json'},
+        //ASSOCIATIONS
+        associations: {type: 'json'},
 
-        //TODO: LOCATION
+        //LOCATION
         location: {type: 'json'},
+
+        //INFO
+        //FORSALE, TYPE?
+        info: {type: 'json'},
 
         //PRICE
         identifierSet: {type: 'string'},

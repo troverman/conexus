@@ -1503,7 +1503,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--\n" +
+    "    \n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-lg-12 col-md-12\">\n" +
@@ -1535,13 +1535,12 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>   \n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    -->\n" +
-    "\n" +
+    "    \n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "    \n" +
     "</div>\n" +
     "\n" +
-    " <div ng-include=\"'register/index.tpl.html'\"></div>\n" +
+    "<!--<div ng-include=\"'register/index.tpl.html'\"></div>-->\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "    \n" +
@@ -3692,6 +3691,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        -webkit-transition: all .25s cubic-bezier(0.25, .8, .25, 1) !important;\n" +
     "        transition: all .25s cubic-bezier(0.25, .8, .25, 1) !important;\n" +
     "    }\n" +
+    "\n" +
+    "    tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}\n" +
     "    \n" +
     "    .md-sidenav-backdrop {opacity: 0 !important;}\n" +
     "\n" +
@@ -3865,14 +3866,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "                <h3 style=\"\">Create Content</h3>\n" +
-    "                <p style=\"color:gray\">Create content. Well developed content earns more tokens. <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <p style=\"color:gray\">Create content. Well developed content earns more tokens. <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
     "                    <h5>Title</h5>\n" +
     "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
     "                    <h5>Tags</h5>\n" +
-    "                    <tags-input placeholder=\"Tags\" ng-model=\"newContent.tags\"></tags-input>\n" +
-    "                    <h5>Associations</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Associated Models\" ng-model=\"newContent.associatedModels\" class=\"form-control\">\n" +
+    "                    <tags-input placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
+    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <h5>Associations <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <tags-input type=\"text\" placeholder=\"Associations\" ng-model=\"newContent.associations\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
     "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
     "                        <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
     "                        <!--<li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>-->\n" +
@@ -3892,8 +3897,25 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    </md-sidenav>\n" +
     "\n" +
     "    <!--TODO-->\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"information\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <p>{{information}}</p>\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"information\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%\">\n" +
+    "         <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <h3>Information</h3>\n" +
+    "                <p>Information about this Information about this Information about this Information about this </p>\n" +
+    "\n" +
+    "                <p>Associations</p>\n" +
+    "                <p>Content</p>\n" +
+    "                <p>Order</p>\n" +
+    "                <p>Profile</p>\n" +
+    "                <p>Project</p>\n" +
+    "                <p>Task</p>\n" +
+    "                <p>Transaction</p>\n" +
+    "                <p>Time</p>\n" +
+    "                <p>{{information}}</p>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"login\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
@@ -3975,6 +3997,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +
+    "\n" +
+    "            <!--RENDER ASSOCIATED CONTENT-->\n" +
+    "            <!--<div ng-include=\"'content/index.tpl.html'\"></div>-->\n" +
+    "\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +

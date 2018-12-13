@@ -8,10 +8,8 @@ module.exports = {
         //BASIC
         title: {type: 'string'},
         description: {type: 'string'},
-        avatarUrl: {
-            type: 'string',
-            defaultsTo: '/images/loading.gif'
-        },
+        avatarUrl: {type: 'string', defaultsTo: '/images/loading.gif'},
+
         //TODO: DEPRECIATE?
         urlTitle: {type: 'string'},
 
@@ -24,6 +22,9 @@ module.exports = {
         associatedModels: {type: 'string'},
         parent: {type: 'string'},
 
+        //ASSOCIATIONS
+        associations: {type: 'json'},
+
         //TODO: SETTTINGS
         //TODO: ASSOCAITED STRING MANIFOLD
 
@@ -31,6 +32,7 @@ module.exports = {
         //TODO: MORE
         user: {model: 'user'},
 
+        //TODO: INFO
         //COUNTS
         memberCount: {
             type: 'integer',

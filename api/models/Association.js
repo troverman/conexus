@@ -2,6 +2,8 @@
 * Association.js
 */
 
+
+//CREATEA ASSOCIATION; CREATE MOTION TO 
 module.exports = {
 
 	//TODO: ALL
@@ -10,6 +12,8 @@ module.exports = {
 		addressSet:'',
 		model:'',
 		type:'', //parent,sibling,
+		creator:'',
+		//1 to 2? 
     },
 
 };

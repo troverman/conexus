@@ -20,6 +20,8 @@ angular.module( 'conexus.nav', [
     if ($scope.currentUser){
         $scope.newTransaction.from = $scope.currentUser.id;
 
+        $scope.newContent.associations = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
+
         //TODO: BETTER
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
             $scope.member = member;
@@ -94,9 +96,40 @@ angular.module( 'conexus.nav', [
         }
     });
 
+    $scope.loadAssociations = function(query){
+
+        return [
+            {text:'troverman', id:11, type:'PROFILE'},
+            {text:'NOVO', id:112, type:'PROJECT'},
+            {text:'conexus', id:1122, type:'PROJECT'},
+        ];
+
+    };
+
+    $scope.loadTags = function(query){
+
+        return [
+            {text:'create'},
+            {text:'love'},
+            {text:'joy'},
+        ];
+
+    };
+
     //OVERKILL
     $rootScope.contentToggle = function(item){
-        if($scope.currentUser){$mdSidenav('content').toggle();}
+
+        if($scope.currentUser){
+
+            $mdSidenav('content').toggle();
+
+        }
+        else{$mdSidenav('login').toggle();}
+
+    };
+
+    $rootScope.informationToggle = function(item){
+        if($scope.currentUser){$mdSidenav('information').toggle();}
         else{$mdSidenav('login').toggle();}
     };
 
@@ -237,15 +270,29 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: ASSOCIATED MODELS
-    $scope.createContent = function() {
+    $scope.createContent = function(content) {
         if ($scope.currentUser){
+            //if(content){$scope.newContent.associations = [{type:'CONTENT', id:content.id}];}
+            //if!($scope.newContent.associations = [];)
+
+            $scope.newContent.type = $scope.selectedType;
             $scope.newContent.user = $scope.currentUser.id;
+
             if ($scope.newContent.tags){
                 $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
-                    return obj.text
+                    return obj.text;
                 }).join(",");
             }
-            $scope.newContent.type = $scope.selectedType;
+
+            //TODO: DROPDOWN
+            if ($scope.newContent.associations){
+                $scope.newContent.associations = $scope.newContent.associations.map(function(obj){
+                    return {id:obj.text};
+                });
+            }
+
+            //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
+
             PostModel.create($scope.newContent).then(function(model) {
 
                 $scope.confirm.modelType = 'CONTENT';
@@ -253,6 +300,7 @@ angular.module( 'conexus.nav', [
                 $scope.newContent = {};
 
                 $mdSidenav('content').close();
+
                 //setTimeout(function () {
                 //    $mdSidenav('confirm').open();
                 //}, 500);
@@ -261,9 +309,12 @@ angular.module( 'conexus.nav', [
                 //}, 5000);
 
             });
+
         }
-        else{$mdSidenav('content').close();$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle()}
     };
+
+
 
     //$scope.createItem = function() {};
     //$scope.createOrder = function() {};

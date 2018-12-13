@@ -18,6 +18,8 @@ module.exports = {
 
         //TODO: RELATIONSHIPS | ASSOCIATIONS
         relationships: {type: 'json'},
+
+        //ASSOCIATIONS
         associations: {type: 'json'},
 
         //TODO: STREAM RELATIONSHIP?

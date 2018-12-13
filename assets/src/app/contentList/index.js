@@ -90,36 +90,45 @@ angular.module( 'conexus.contentList', [
     }
     $scope.loadTags();
 
+    //DEPCRECIATE TO GLOBAL
     $scope.createContent = function(content) {
+
         if ($scope.currentUser){
             if(content){$scope.newContent.post = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
-                return obj.text
+                return obj.text;
             }).join(",");
             $scope.newContent.type = $scope.selectedType;
+
+            $scope.newContent.associations = [];
+
+            //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
+
             PostModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.content.unshift(model);
             });
+
         }
+
         else{$mdSidenav('login').toggle()}
+
     };
 
-    $scope.createReaction = function(content, type){
-        if($scope.currentUser){
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-            if (type =='plus'){$scope.contentList[index].plusCount++}
-            if (type =='minus'){$scope.contentList[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){
+                $scope.newReaction.associations = [{type:'CONTENT', id:item.id}];
+                $scope.contentList[contentIndex].reactions[type]++;
+            }
+            ReactionModel.create($scope.newReaction);
         }
-        else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle();}
     };
 
     $scope.filterContent = function(filter) {
