@@ -35,20 +35,20 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            posts: ['PostModel', 'project', function(PostModel, project){
-                return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'project', function(ContentModel, project){
+                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
             tasks: ['project', 'TaskModel', function(project, TaskModel){
                 return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            }],
+            time: ['project', 'TimeModel', function(project, TimeModel){
+                return TimeModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
             }],
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
-            }],
-            work: ['project', 'WorkModel', function(project, WorkModel){
-                return WorkModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
         }
     })
@@ -74,8 +74,8 @@ angular.module( 'conexus.project', [
             channels: [function() {
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
-            posts: ['PostModel', 'project', function(PostModel, project){
-                return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'project', function(ContentModel, project){
+                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],
         }
     })
@@ -88,8 +88,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            content: ['PostModel', 'project', function(PostModel, project){
-                return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'project', function(ContentModel, project){
+                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }],            
         }
     })
@@ -104,8 +104,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            motions: ['PostModel', 'project', function(PostModel, project){
-                return PostModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+            motions: ['ContentModel', 'project', function(ContentModel, project){
+                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
             }], 
         }
     })
@@ -138,7 +138,7 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            items: ['project', 'WorkModel', function(project, WorkModel) {
+            items: ['project', 'ItemModel', function(project, ItemModel) {
                 return[];
             }]
         }
@@ -217,8 +217,8 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            work: ['project', 'WorkModel', function(project, WorkModel) {
-                return WorkModel.getSome('project', project.id, 200, 0, 'createdAt DESC');
+            time: ['project', 'TimeModel', function(project, TimeModel) {
+                return TimeModel.getSome('project', project.id, 200, 0, 'createdAt DESC');
             }]
         }
     })
@@ -325,22 +325,22 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'project', 'ReactionModel', 'tasks', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, project, ReactionModel, tasks, titleService, transactionsFrom, transactionsTo, work ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'project', 'ReactionModel', 'tasks', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, project, ReactionModel, tasks, time, titleService, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Activity | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.contentList = posts;
+    $scope.contentList = contentList;
     $scope.project = project;
     $scope.tasks = tasks;
-    $scope.work = work;
+    $scope.time = time;
 
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     //$scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
-    //POST, WORK, TASK CREATE, VALIDATION (VOTE)
+    //CONTENT, TIME, TASK CREATE, VALIDATION (VOTE)
     //TODO
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
@@ -350,16 +350,16 @@ angular.module( 'conexus.project', [
         obj.model = 'TASK';
         return obj;
     });
+    $scope.time = $scope.time.map(function(obj){
+        obj.model = 'TIME';
+        return obj;
+    });
     $scope.transactions = $scope.transactions.map(function(obj){
         obj.model = 'TRANSACTION';
         return obj;
     });
-    $scope.work = $scope.work.map(function(obj){
-        obj.model = 'WORK';
-        return obj;
-    });
     
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks, $scope.transactions, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks, $scope.time, $scope.transactions]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
 
@@ -375,7 +375,7 @@ angular.module( 'conexus.project', [
             //    return obj.text
             //}).join(",");
             console.log($scope.newContent);
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 //TODO
                 model.model = 'CONTENT';
@@ -419,7 +419,7 @@ angular.module( 'conexus.project', [
                 $scope.activity.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.contentList, {id: envelope.id});
+                lodash.remove($scope.activity, {id: envelope.id});
                 break;
         }
     });
@@ -458,21 +458,21 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectChannelsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'posts', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, channels, config, posts, project, titleService ) {
+.controller( 'ProjectChannelsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'contentList', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, channels, config, contentList, project, titleService ) {
     titleService.setTitle('Channels | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
     $scope.newContent = {};
     $scope.project = project;
-    $scope.posts = posts;
+    $scope.contentList = contentList;
 
     $scope.createContent = function() {
         if ($scope.currentUser){
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.project = $scope.project.id;
-            PostModel.create($scope.newPost).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
-                $scope.posts.unshift(model);
+                $scope.contentList.unshift(model);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -482,19 +482,19 @@ angular.module( 'conexus.project', [
         switch(envelope.verb) {
             case 'created':
                 console.log(envelope.data);
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'content', 'PostModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, content, PostModel, project, titleService ) {
+.controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, project, titleService ) {
     titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
-    $scope.contentList = content;
+    $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.project = project;
 
@@ -540,7 +540,7 @@ angular.module( 'conexus.project', [
                 return obj.text
             }).join(",");
             $scope.newContent.type = $scope.selectedType;
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.contentList.unshift(model);
             });
@@ -568,7 +568,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'motions', 'PostModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, motions, PostModel, project, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'motions', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, ContentModel, motions, project, titleService ) {
     titleService.setTitle('Charter | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMotion = {};
@@ -584,7 +584,7 @@ angular.module( 'conexus.project', [
             //RELATIONSHIP | LIST
             $scope.newMotion.relationshipModelAddress = $scope.project.id;
             $scope.newMotion.relationshipModel = 'PROJECT';
-            PostModel.create($scope.newMotion).then(function(model){
+            ContentModel.create($scope.newMotion).then(function(model){
                 $scope.newMotion = {};
                 $scope.motions.unshift(model);
             });
@@ -1140,7 +1140,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'work', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, titleService, work) {
+.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'time', 'titleService', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, time, titleService) {
 
     $scope.eventSources = [];
     $scope.calendar = {
@@ -1171,12 +1171,12 @@ angular.module( 'conexus.project', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    $scope.work = work;
-    $scope.work = work.map(function(obj){
+    $scope.time = time;
+    $scope.time = time.map(function(obj){
         var endTime = new Date(obj.createdAt)
         obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
         obj.endTime = new Date(obj.createdAt);
-        if (obj.task){$scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'work/'+obj.id});}
+        if (obj.task){$scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'time/'+obj.id});}
         return obj
     });
 
@@ -1185,8 +1185,8 @@ angular.module( 'conexus.project', [
     $scope.createReaction = function(content, type){};
 
     $scope.reply = function(item){
-        var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.work[index].showReply = !$scope.work[index].showReply
+        var index = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.time[index].showReply = !$scope.time[index].showReply
     };
 
     $scope.search = function(){};

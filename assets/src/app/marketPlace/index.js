@@ -64,15 +64,18 @@ angular.module( 'conexus.marketPlace', [
     };
 
     //TODO: FIVE STAR ETC
-    $scope.createReaction = function(content, type){
+    $scope.createReaction = function(item, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
+
+            //NO
+            $scope.newReaction.item = item.id;
+
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-            if (type =='plus'){$scope.contentList[index].plusCount++}
-            if (type =='minus'){$scope.contentList[index].minusCount++}
+            var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
+            if (type =='plus'){$scope.items[index].plusCount++}
+            if (type =='minus'){$scope.items[index].minusCount++}
             ReactionModel.create($scope.newReaction).then(function(model){
                 $scope.newReaction = {};
             });
@@ -108,10 +111,10 @@ angular.module( 'conexus.marketPlace', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.reply = function(content){
+    $scope.reply = function(item){
         if($scope.currentUser){
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-            $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
+            var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.items[index].showReply = !$scope.items[index].showReply;
         }
         else{$mdSidenav('login').toggle()}
     };

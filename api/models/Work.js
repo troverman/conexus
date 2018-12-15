@@ -1,5 +1,5 @@
 /**
-* Work.js
+* Time.js
 */
 
 //TODO: TIME
@@ -20,7 +20,7 @@ module.exports = {
         relationships: {type: 'json'},
 
         //ASSOCIATIONS
-        associations: {type: 'json'},
+        associatedModels: {type: 'json'},
 
         //TODO: STREAM RELATIONSHIP?
         //TODO: LOCATION ?

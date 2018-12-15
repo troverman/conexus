@@ -11,16 +11,14 @@ angular.module( 'conexus.view', [
             }
         },
         resolve: {
-            view: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
-                return WorkModel.getOne($stateParams.id);
+            view: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
+                return TimeModel.getOne($stateParams.id);
             }],
         }
     });
 }])
 
-.controller( 'ViewController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'PostModel', 'titleService', 'view', function ViewController( $location, $sailsSocket, $sce, $scope, config, PostModel, titleService, view) {
+.controller( 'ViewController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'titleService', 'view', function ViewController( $location, $sailsSocket, $sce, $scope, config, titleService, view) {
     titleService.setTitle('View | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-   
-
 }]);

@@ -396,7 +396,7 @@ angular.module( 'conexus.marketPair', [
 
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.marketPair = 'CRE8/USD'; // || USD/CRE8
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
             });
         }

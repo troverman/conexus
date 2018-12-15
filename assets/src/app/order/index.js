@@ -14,19 +14,19 @@ angular.module( 'conexus.order', [
             order: ['$stateParams', 'OrderModel', function($stateParams, OrderModel){
                 return OrderModel.getOne($stateParams.id);
             }],
-            posts: ['$stateParams', 'PostModel', function($stateParams, PostModel){
-                return PostModel.getSome('order', $stateParams.id, 100, 0, 'createdAt DESC');
+            contentList: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
+                return ContentModel.getSome('order', $stateParams.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
-.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'order', 'PostModel', 'posts', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, order, PostModel, posts, titleService ) {
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'order', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, order, titleService ) {
     titleService.setTitle('Order | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.newPost = {};
+    $scope.newContent = {};
     $scope.order = order;
-    $scope.posts = posts;
+    $scope.contentList = contentList;
 
     //TODO: PROTOCOL
     $scope.tokens = [
@@ -38,21 +38,21 @@ angular.module( 'conexus.order', [
     ];
 
     //TODO
-    $scope.createPost = function(post) {
+    $scope.createContent = function(content) {
         if($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.order = order.id;
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+            $scope.newContent.post = content.id;
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.order = order.id;
+            ContentModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
             });
         }
         else{$mdSidenav('login').toggle()}
     };
 
     $scope.reply = function(item){
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.posts[index].showReply = !$scope.posts[index].showReply
+        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.contentList[index].showReply = !$scope.contentList[index].showReply
     };
 
     $scope.tokenToggle = function(){
@@ -60,24 +60,13 @@ angular.module( 'conexus.order', [
         $rootScope.globalTokens = $scope.tokens;
     };
 
-    $sailsSocket.subscribe('order', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.posts.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
-                break;
-        }
-    });
-
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });

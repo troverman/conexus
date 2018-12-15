@@ -14,6 +14,9 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
         else if (type=='post'){query = {params:{post:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='profile'){query = {params:{profile:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
+        else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}
+        //MULTIPLE
+        else if (type=='search'){query = {params:{search:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='task'){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='transaction'){query = {params:{transaction:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
@@ -26,6 +29,11 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
     this.create = function(newModel) {
         var url = utils.prepareUrl('post');
         console.log(newModel)
+        return $sailsSocket.post(url, newModel).then(success, error);
+    };
+
+    this.update = function(newModel){
+        var url = utils.prepareUrl('post/' + newModel.id);
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 

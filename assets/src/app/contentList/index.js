@@ -11,14 +11,14 @@ angular.module( 'conexus.contentList', [
 			}
 		},
         resolve:{
-            contentList: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
+            contentList: ['ContentModel', function(ContentModel){
+                return ContentModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
         }
 	});
 }])
 
-.controller( 'ContentListCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ReactionModel', 'titleService', 'PostModel', function ContentListController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ReactionModel, titleService, PostModel ) {
+.controller( 'ContentListCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'titleService', function ContentListController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, ReactionModel, titleService ) {
 	titleService.setTitle('Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
@@ -105,7 +105,7 @@ angular.module( 'conexus.contentList', [
 
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
 
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.content.unshift(model);
             });
@@ -133,7 +133,7 @@ angular.module( 'conexus.contentList', [
 
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+        ContentModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.contentList = contentList;
@@ -145,8 +145,8 @@ angular.module( 'conexus.contentList', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(contentList) {
-        //PostModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(posts) {
+        ContentModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(contentList) {
+        //ContentModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(posts) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.contentList, contentList);
             $scope.loadAssociations();
@@ -169,7 +169,7 @@ angular.module( 'conexus.contentList', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(models){
+        ContentModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.contentList = models;
         });
@@ -178,7 +178,7 @@ angular.module( 'conexus.contentList', [
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
-        PostModel.getSome(20, $scope.skip, $scope.selectedSort).then(function(contentList) {
+        ContentModel.getSome(20, $scope.skip, $scope.selectedSort).then(function(contentList) {
             $rootScope.stateIsLoading = false;
             $scope.contentList = contentList;
         });

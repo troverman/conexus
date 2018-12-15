@@ -11,11 +11,17 @@ module.exports = {
         user: {model: 'user'},
         validation: {type: 'json'},
         
-        //TODO: RELATIONSHIPS | ASSOCIATIONS
-        relationships: {type: 'json'},
-
         //ASSOCIATIONS
-        associations: {type: 'json'},
+        associatedModels: {type: 'json'},
+
+        //[{type: 'PROJECT', id: 1}, {type:'CONTENT', id:1}]
+        //[{type: 'PROJECT', id: 1}, {type:'MEMBER', id:1}]
+        //[{type: 'PROJECT', id: 1}, {type:'TASK', id:1}]
+        //[{type: 'TASK', id: 1}, {type:'TIME', id:1}]
+        //[{type: 'TIME', id: 1}, {type:'VALIDATION', id:1}]
+        //[{type: 'VALIDATION', id: 1}, {type:'VALIDATION', id:1}] // it chains.? 
+
+        //the validation is the connection btw associated models 
 
         //TODO: DEPRECIATE
         project: {type: 'string'},

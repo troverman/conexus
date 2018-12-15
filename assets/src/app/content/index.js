@@ -11,21 +11,22 @@ angular.module( 'conexus.content', [
             }
         },
         resolve: {
-            post: ['$stateParams', 'PostModel', function($stateParams, PostModel){
-                return PostModel.getOne($stateParams.id);
+            content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
+                return ContentModel.getOne($stateParams.id);
             }],
-            posts:['post', 'PostModel', function(post, PostModel) {
-                return PostModel.getSome('post', post.id, 100, 0, 'createdAt DESC');
+            contentList:['content', 'ContentModel', function(content, ContentModel) {
+                return ContentModel.getSome('post', content.id, 100, 0, 'createdAt DESC');
             }],
             //MAPPING LOOKUPS
-            reactions: ['post', 'ReactionModel', function(post, ReactionModel){
-                return ReactionModel.getSome('post', post.id, 100, 0, 'createdAt DESC');
+            reactions: ['content', 'ReactionModel', function(content, ReactionModel){
+                //return ReactionModel.getSome('post', content.id, 100, 0, 'createdAt DESC');
+                return null;
             }],
         }
     });
 }])
 
-.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'post', 'PostModel', 'posts', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, post, PostModel, posts, ReactionModel, reactions, titleService, UserModel ) {
+.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'content', 'contentList', 'ContentModel', 'lodash', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, content, contentList, ContentModel, lodash, ReactionModel, reactions, titleService, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.marketOutput = [];
     $scope.newContent = {};
@@ -33,12 +34,12 @@ angular.module( 'conexus.content', [
     $scope.newValidation = {};
     $scope.newValidation.validation = {};
     $scope.newValidation.validation.general = 0;
-    $scope.post = post;
+    $scope.content = content;
     
-    if ($scope.post.title){titleService.setTitle($scope.post.title + ' | Content | CRE8.XYZ')}
+    if ($scope.content.title){titleService.setTitle($scope.content.title + ' | Content | CRE8.XYZ')}
     else{titleService.setTitle('Content | CRE8.XYZ')}
 
-    if(!$scope.post){$location.path('/')}
+    if(!$scope.content){$location.path('/')}
     $scope.reactions = reactions;
     $scope.toggleTokenVar = false;
     $scope.viewTime = 0;
@@ -57,10 +58,10 @@ angular.module( 'conexus.content', [
         'Content+Create',
         'Content+[type]',
         'Content+Create+[type]',
-        'createContent+'+$scope.post.id,
-        'Content+'+$scope.post.id,
-        'View+'+$scope.post.id,
-        'View+'+$scope.post.user.id,
+        'createContent+'+$scope.content.id,
+        'Content+'+$scope.content.id,
+        'View+'+$scope.content.id,
+        'View+'+$scope.content.user.id,
         'View+userId',
         'View+[types | tags]',
         'Reaction+userId',
@@ -99,20 +100,20 @@ angular.module( 'conexus.content', [
 
     //TODO: FINALIZE.. WORKS ON FRONTEND
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED
-    function populateChildren(posts, depth, limit){
-        posts.forEach(function(post) {
-            PostModel.getSome('post', post.id, 100, 0, 'createdAt DESC').then(function(posts){
-                if (posts.length > 0){
+    function populateChildren(contentList, depth, limit){
+        contentList.forEach(function(content) {
+            ContentModel.getSome('post', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
+                if (contentList.length > 0){
                     depth++ 
-                    post.children = posts;
-                    $scope.post.children.push(post);
-                    if (depth < limit){populateChildren(posts, depth, limit)}
+                    content.children = contentList;
+                    $scope.content.children.push(content);
+                    if (depth < limit){populateChildren(contentList, depth, limit)}
                 }
             });
         });
     }
-    populateChildren(posts, 0, 5);
-    $scope.post.children = posts;
+    populateChildren(contentList, 0, 5);
+    $scope.content.children = contentList;
 
     function searchObject(object, matchCallback, currentPath, result, searched) {
         currentPath = currentPath || '';
@@ -147,11 +148,11 @@ angular.module( 'conexus.content', [
     }
 
     //TODO
-    $scope.createPost = function(content) {
+    $scope.createContent = function(content) {
         if($scope.currentUser){
             $scope.newContent.post = content.id;
             $scope.newContent.user = $scope.currentUser.id;
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 //ADD TO LIST
             });
@@ -168,7 +169,7 @@ angular.module( 'conexus.content', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
-            var location = searchObject($scope.post, function (value) { return value != null && value != undefined && value.id == content.id; });
+            var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
             
             console.log(location[0]);
   
@@ -176,7 +177,7 @@ angular.module( 'conexus.content', [
             
             ReactionModel.create($scope.newReaction);
 
-            //updateObject($scope.post, location[0].value, location[0].path);
+            //updateObject($scope.content, location[0].value, location[0].path);
 
         }
         else{$mdSidenav('login').toggle()}
@@ -184,17 +185,17 @@ angular.module( 'conexus.content', [
  
     $scope.reply = function(content){
 
-        var location = searchObject($scope.post, function (value) { return value != null && value != undefined && value.id == content.id; });
+        var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
         location[0].value.showReply = !location[0].value.showReply;
-        updateObject($scope.post, location[0].value, location[0].path);
+        updateObject($scope.content, location[0].value, location[0].path);
 
     };
 
     $scope.toggleThread = function(content){
 
-        var location = searchObject($scope.post, function (value) { return value != null && value != undefined && value.id == content.id; });
+        var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
         location[0].value.showThread = !location[0].value.showThread;
-        updateObject($scope.post, location[0].value, location[0].path);
+        updateObject($scope.content, location[0].value, location[0].path);
 
     };
 
@@ -210,10 +211,10 @@ angular.module( 'conexus.content', [
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });

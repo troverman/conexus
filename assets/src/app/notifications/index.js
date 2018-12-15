@@ -11,15 +11,15 @@ angular.module( 'conexus.notifications', [
             }
         },
         resolve: {
-            notifications: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
-                //return WorkModel.getOne($stateParams.id);
+            notifications: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
+                //return TimeModel.getOne($stateParams.id);
                 return null
             }],
         }
     });
 }])
 
-.controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'notifications', 'PostModel', 'titleService', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, notifications, PostModel, titleService) {
+.controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'notifications', 'titleService', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, notifications, titleService) {
     titleService.setTitle('View | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.notifications = [];

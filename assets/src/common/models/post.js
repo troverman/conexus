@@ -1,6 +1,6 @@
-angular.module('models.post', ['lodash', 'services', 'sails.io',])
+angular.module('models.content', ['lodash', 'services', 'sails.io',])
 
-.service('PostModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+.service('ContentModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
     this.getOne = function(model) {
         var url = utils.prepareUrl('post/' + model);

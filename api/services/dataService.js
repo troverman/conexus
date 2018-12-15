@@ -769,6 +769,31 @@ module.exports = {
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
 
+		function projectAssociations(id, path){
+			var deferred = Q.defer();
+			Project.find({id:id}).limit(10000).then(function(models){
+				if (models.length == 1){
+					if (models[0].parent){
+						path = path +'+'+ models[0].parent;
+						console.log(path)
+						projectAssociations(models[0].parent, path).then(function(projectModel){
+							if (models.length == 0){deferred.resolve(path);}
+						});
+					}
+					else{deferred.resolve(path);}
+				}
+			});
+			return deferred.promise;
+		};
+		//Project.find().limit(10000).then(function(models){
+		//	for (x in models){
+		//		projectAssociations(models[x].parent, '').then(function(projectModel){
+		//			//console.log(1, projectModel)
+		//		});
+		//		//console.log(models[x].parent, models[x].id);
+		//	}
+		//});
+
 		//Validation.find().limit(10000).then(function(postModels){
 		//	for (x in postModels){
 		//		var reactions = {plus:0,minus:0};

@@ -1,7 +1,7 @@
-<div style="background:black" ng-show="work.stream">
+<div style="background:black" ng-show="time.stream">
 	<div class="spacing-100"></div>
     <div style="text-align:center">
-		<span style="display:inline" ng-bind-html="renderContent(work.stream.content)"></span>
+		<span style="display:inline" ng-bind-html="renderContent(time.stream.content)"></span>
 	</div>
 	<div class="spacing-100"></div>
 </div>
@@ -10,7 +10,7 @@
 
 	<div class="spacing-10"></div>
 
-	<div class="row" ng-show="!work.stream">
+	<div class="row" ng-show="!time.stream">
 		<div class="card">
 		    <div style="padding:16px;">
 		    	<h4>No Stream</h4>
@@ -28,20 +28,20 @@
 					<h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
 				</div>
 
-				<h3><a href="task/{{work.task.id}}">{{work.task.title}}</a></h3>
-				<h4>{{work.amount}}, <span style="font-size:10px;color:gray">{{(work.amount/60).toFixed(2)}} minutes, <span style="font-size:10px;color:gray">{{(work.amount/3600).toFixed(2)}} hours</span></h4>
+				<h3><a href="task/{{time.task.id}}">{{time.task.title}}</a></h3>
+				<h4>{{time.amount}}, <span style="font-size:10px;color:gray">{{(time.amount/60).toFixed(2)}} minutes, <span style="font-size:10px;color:gray">{{(time.amount/3600).toFixed(2)}} hours</span></h4>
                 <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
 
-				<a style="font-weight:700" href="member/{{work.user.username}}">
-					<img class="card-avatar" ng-src="{{work.user.avatarUrl}}" src="{{work.user.avatarUrl}}" err-src="/images/avatar.png">
-					{{work.user.username}}
+				<a style="font-weight:700" href="member/{{time.user.username}}">
+					<img class="card-avatar" ng-src="{{time.user.avatarUrl}}" src="{{time.user.avatarUrl}}" err-src="/images/avatar.png">
+					{{time.user.username}}
 				</a>
 				
-				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="work.createdAt"></p>
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="time.createdAt"></p>
 
 				<div>
 					<div class="spacing-10"></div>
-	                <span style="display:inline" ng-bind-html="renderContent(work.content)"></span>
+	                <span style="display:inline" ng-bind-html="renderContent(time.content)"></span>
 					<div class="spacing-10"></div>
 				</div>
 
@@ -51,9 +51,9 @@
 			<!--<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
 				<div class="card">
 					<div style="padding:16px">
-						<h4><a href="#">Work Validation <i class="fa fa-question-circle"></i></a></h4>
-						<h5>{{work.validationScore}} | General </h5>
-						<p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{work.task.id}}">{{tag.trim()}}+{{work.task.id}}</a></p>
+						<h4><a href="#">Time Validation <i class="fa fa-question-circle"></i></a></h4>
+						<h5>{{time.validationScore}} | General </h5>
+						<p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{time.task.id}}">{{tag.trim()}}+{{time.task.id}}</a></p>
 					</div>
 				</div>
 			</div>-->
@@ -61,10 +61,10 @@
 			<div style="clear:both"></div>
 
 			<div class="card-footer">
-				<a ng-click="createReaction(work, 'plus')"><i class="fa fa-angle-up"></i> {{work.reactions.plus}} like </a> 
-				<a ng-click="createReaction(work, 'minus')" ><i class="fa fa-angle-down"></i> {{work.reactions.minus}} dislike </a>
+				<a ng-click="createReaction(time, 'plus')"><i class="fa fa-angle-up"></i> {{time.reactions.plus}} like </a> 
+				<a ng-click="createReaction(time, 'minus')" ><i class="fa fa-angle-down"></i> {{time.reactions.minus}} dislike </a>
 				<a ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-		       	<a ng-click="validateToggle(work)"><i class="fa fa-check"></i> validate </a>
+		       	<a ng-click="validateToggle(time)"><i class="fa fa-check"></i> validate </a>
 			</div>
 
 		</div>
@@ -144,7 +144,7 @@
 
 				<h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
 				<div>
-                    <a ng-repeat="token in tokens" href="market/{{token}}">{{work.amount}} {{token}}, </a>
+                    <a ng-repeat="token in tokens" href="market/{{token}}">{{time.amount}} {{token}}, </a>
 				</div>
 
 			</div>
@@ -156,8 +156,8 @@
 		<div class="card">
 			<div style="padding:16px">
 				<div class="col-md-12">
-	                <h4>Create a Work Post</h4>
-			        <form role="form" ng-submit="createPost()">
+	                <h4>Create a Time Post</h4>
+			        <form role="form" ng-submit="createContent()">
                     	<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 			            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 			        </form>

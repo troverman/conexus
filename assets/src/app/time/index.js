@@ -12,28 +12,28 @@ angular.module( 'conexus.time', [
             }
         },
         resolve: {
-            work: ['$stateParams', 'WorkModel', function($stateParams, WorkModel){
-                return WorkModel.getOne($stateParams.id);
+            time: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
+                return TimeModel.getOne($stateParams.id);
             }],
-            contentList: ['PostModel', 'work', function(PostModel, work){
-                return PostModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'time', function(ContentModel, time){
+                return ContentModel.getSome('work', time.id, 100, 0, 'createdAt DESC');
             }],
-            validations: ['ValidationModel', 'work', function(ValidationModel, work){
-                return ValidationModel.getSome('work', work.id, 100, 0, 'createdAt DESC');
+            validations: ['ValidationModel', 'time', function(ValidationModel, time){
+                return ValidationModel.getSome('work', time.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
-.controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'PostModel', 'ReactionModel', 'titleService', 'UserModel', 'ValidationModel', 'validations', 'work', 'WorkModel', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, PostModel, ReactionModel, titleService, UserModel, ValidationModel, validations, work, WorkModel) {
+.controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'time', 'TimeModel', 'titleService', 'UserModel', 'ValidationModel', 'validations', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, time, TimeModel, titleService, UserModel, ValidationModel, validations) {
     $scope.currentUser = config.currentUser;
 
-    $scope.work = work;
-    if(!$scope.work){$location.path('/')}
+    $scope.time = time;
+    if(!$scope.time){$location.path('/')}
 
-    titleService.setTitle($scope.work.amount + ' | Work | CRE8.XYZ');
+    titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
 
-    $scope.work.validationScore = 0;
+    $scope.time.validationScore = 0;
 
     $scope.contentList = contentList;
 
@@ -45,13 +45,13 @@ angular.module( 'conexus.time', [
     $scope.reactions = [];
     $scope.reputationList = [];
     $scope.tags = [];
-    if ($scope.work.task.tags){$scope.tags = $scope.work.task.tags.split(',')}
+    if ($scope.time.task.tags){$scope.tags = $scope.time.task.tags.split(',')}
         
     $scope.taskTime = 0;
     $scope.tokens = [];
     $scope.tokens.push('Token');
-    $scope.tokens.push('WorkToken');
-    $scope.tokens.push('Work+'+$scope.work.id);
+    $scope.tokens.push('TimeToken');
+    $scope.tokens.push('Time+'+$scope.time.id);
     $scope.validationList = [];
     $scope.validations = validations;
 
@@ -96,7 +96,7 @@ angular.module( 'conexus.time', [
         },
     };
 
-    //EFFICENCY | STORE IN WORK MODEL
+    //EFFICENCY | STORE IN TIME MODEL
     var sumObj = {};
     //var sumObj.validation = {};
     //var sumObj.reputation = {};
@@ -115,7 +115,7 @@ angular.module( 'conexus.time', [
 
     console.log(sumObj);
 
-    //STORE IN WORK MODEL
+    //STORE IN TIME MODEL
     for (x in Object.keys(sumObj)){
         //$scope.validationList.push([Object.keys(sumObj)[x], sumObj[Object.keys(sumObj)[x]]]);
         $scope.validationColumn.series[0].data.push(sumObj[Object.keys(sumObj)[x]]/$scope.validations.length);
@@ -126,11 +126,11 @@ angular.module( 'conexus.time', [
     //HUMAN VALIDATED AI VERIFY? 
     //VALID VS VERIFY
 
-    //UNIFY CONTENT AND WORK??
-    //WORK AS A TYPE
+    //UNIFY CONTENT AND TIME??
+    //TIME AS A TYPE
    
     //for x in scope.tadk.tags.split()
-    //$scope.tokens.push('Work+'+$scope.work.id);
+    //$scope.tokens.push('Time+'+$scope.time.id);
 
     //TODO: BETTER
     if($scope.currentUser){
@@ -141,11 +141,11 @@ angular.module( 'conexus.time', [
         });
     }
 
-    if ($scope.work.task.tags){
-        for (x in $scope.work.task.tags.split(',')){
-            $scope.tokens.push($scope.work.task.tags.split(',')[x].trim());
-            $scope.tokens.push('Task+'+$scope.work.task.tags.split(',')[x].trim());
-            $scope.tokens.push('Task+'+$scope.work.task.id+'+'+$scope.work.task.tags.split(',')[x].trim());
+    if ($scope.time.task.tags){
+        for (x in $scope.time.task.tags.split(',')){
+            $scope.tokens.push($scope.time.task.tags.split(',')[x].trim());
+            $scope.tokens.push('Task+'+$scope.time.task.tags.split(',')[x].trim());
+            $scope.tokens.push('Task+'+$scope.time.task.id+'+'+$scope.time.task.tags.split(',')[x].trim());
         }
     }
 
@@ -154,12 +154,12 @@ angular.module( 'conexus.time', [
         $scope.tokens.push($scope.tokens[x]+'+onValidation');
     }
 
-    $scope.createPost = function(post) {
+    $scope.createContent = function(content) {
         if ($scope.currentUser){
-            if (post){$scope.newContent.post = post.id}
+            if (content){$scope.newContent.post = content.id}
             $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.work = $scope.work.id;
-            PostModel.create($scope.newContent).then(function(model) {
+            $scope.newContent.time = $scope.time.id;
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
             });
         }
@@ -184,7 +184,7 @@ angular.module( 'conexus.time', [
             }
             else{
                 $scope.newReaction.associations = [{type:'TIME', id:item.id}];
-                $scope.work.reactions[type]++;
+                $scope.time.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
         }
@@ -198,7 +198,7 @@ angular.module( 'conexus.time', [
     //TODO: LAYERS | PROJ BASED LAYER
     $scope.createValidation = function(){
         if ($scope.currentUser){
-            $scope.newValidation.work = $scope.work.id;
+            $scope.newValidation.work = $scope.time.id;
             $scope.newValidation.user = $scope.currentUser.id;
             ValidationModel.create($scope.newValidation).then(function(model){
                 $scope.newValidation = {};
@@ -210,9 +210,9 @@ angular.module( 'conexus.time', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.reply = function(post){
+    $scope.reply = function(content){
         if ($scope.currentUser){
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(post.id);
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
             $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
         }
         else{$mdSidenav('login').toggle()}

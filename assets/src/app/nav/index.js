@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'PostModel', 'TransactionModel', 'UserModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, PostModel, TransactionModel, UserModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'TransactionModel', 'UserModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, ContentModel, TransactionModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
@@ -251,7 +251,27 @@ angular.module( 'conexus.nav', [
     //$rootScope.createOrder = function(){};
     //$rootScope.createProject = function(){};
     ////$rootScope.createProjectMember = function(){};
-    //$rootScope.createReaction = function(){};
+
+
+    //WORK MORE ON RENDER
+    $scope.createReaction = function(){
+        if($scope.currentUser){
+
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+
+            $scope.item.reactions[type]++;
+
+            ReactionModel.create($scope.newReaction);
+
+        }
+        else{$mdSidenav('login').toggle()}
+
+    };
+
+
     //$rootScope.createTask = function(){};
     //$rootScope.createTime = function(){};
     //$rootScope.createTransaction = function(){};
@@ -293,7 +313,7 @@ angular.module( 'conexus.nav', [
 
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
 
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
 
                 $scope.confirm.modelType = 'CONTENT';
                 $scope.confirm = $scope.newContent;

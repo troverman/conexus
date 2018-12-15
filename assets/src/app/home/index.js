@@ -21,8 +21,8 @@ angular.module( 'conexus.home', [
             }
         },
         resolve:{
-            projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome(15, 0, 'createdAt DESC');
+            contentList: ['ContentModel', function(ContentModel){
+                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome(10, 0, 'createdAt DESC');
@@ -30,18 +30,18 @@ angular.module( 'conexus.home', [
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
             }],
-            posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
-            }],
+            projects: ['ProjectModel', function(ProjectModel) {
+                return ProjectModel.getSome(15, 0, 'createdAt DESC');
+            }], 
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
+            }],
+            time: ['TimeModel', function(TimeModel) {
+                return TimeModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             transactions: ['TransactionModel', function(TransactionModel) {
                 return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
             }],
-            work: ['WorkModel', function(WorkModel) {
-                return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
-            }]
         }
     })
     .state( 'home.feed', {
@@ -53,8 +53,8 @@ angular.module( 'conexus.home', [
             }
         },
         resolve:{
-            projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome(15, 0, 'createdAt DESC');
+            contentList: ['ContentModel', function(ContentModel){
+                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome(10, 0, 'createdAt DESC');
@@ -62,18 +62,18 @@ angular.module( 'conexus.home', [
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
             }],
-            posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
+            projects: ['ProjectModel', function(ProjectModel) {
+                return ProjectModel.getSome(15, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
+            time: ['TimeModel', function(TimeModel) {
+                return TimeModel.getSome('', '', 10, 0, 'createdAt DESC');
+            }],
             transactions: ['TransactionModel', function(TransactionModel) {
                 return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
             }],
-            work: ['WorkModel', function(WorkModel) {
-                return WorkModel.getSome('', '', 10, 0, 'createdAt DESC');
-            }]
         }
     })
 
@@ -86,7 +86,7 @@ angular.module( 'conexus.home', [
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
+.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.map = {
@@ -95,12 +95,12 @@ angular.module( 'conexus.home', [
     };
     $scope.markers = [];
 
-    $scope.contentList = posts;
+    $scope.contentList = contentList;
     $scope.projects = projects;
     $scope.newReaction = {};
     $scope.searchResults = [];
     $scope.tasks = tasks;
-    $scope.work = work;
+    $scope.time = time;
 
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
@@ -115,12 +115,12 @@ angular.module( 'conexus.home', [
         obj.model = 'TASK';
         return obj;
     });
-    $scope.work = $scope.work.map(function(obj){
+    $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
     
@@ -194,7 +194,7 @@ angular.module( 'conexus.home', [
     //TODO: BETTER
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+        ContentModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.activity = contentList;
             $scope.loadTags();
@@ -215,7 +215,7 @@ angular.module( 'conexus.home', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+        ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.activity = models.map(function(obj){
                 obj.model = 'CONTENT';
@@ -261,11 +261,11 @@ angular.module( 'conexus.home', [
             }
         }
 
-        if (item.model == 'WORK'){
+        if (item.model == 'TIME'){
 
             //TODO: AMOUNT
             //item.amount
-            tokens.push('WORK');
+            tokens.push('TIME');
 
             if (item.tags){
                 for (x in item.tags.split(',')){
@@ -317,7 +317,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'members', 'orders', 'PostModel', 'posts', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'titleService', 'transactions', 'UserModel', 'work', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, members, orders, PostModel, posts, projects, ReactionModel, SearchModel, tasks, titleService, transactions, UserModel, work ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
 	titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
 
@@ -338,12 +338,12 @@ angular.module( 'conexus.home', [
     };
     $scope.markers = [];
 
-	$scope.contentList = posts;
+	$scope.contentList = contentList;
 	$scope.projects = projects;
 	$scope.newReaction = {};
 	$scope.searchResults = [];
     $scope.tasks = tasks;
-	$scope.work = work;
+	$scope.time = time;
 
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
@@ -358,12 +358,12 @@ angular.module( 'conexus.home', [
         obj.model = 'TASK';
         return obj;
     });
-    $scope.work = $scope.work.map(function(obj){
+    $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
     
@@ -487,7 +487,7 @@ angular.module( 'conexus.home', [
         $scope.newContent.post = post.id;
         $scope.newContent.user = $scope.currentUser.id;
         $scope.newContent.profile = $scope.currentUser.id;
-        PostModel.create($scope.newContent).then(function(model) {
+        ContentModel.create($scope.newContent).then(function(model) {
             $scope.newContent = {};
         });
     };
@@ -495,7 +495,7 @@ angular.module( 'conexus.home', [
     //TODO: BETTER
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+        ContentModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.activity = contentList;
             $scope.loadTags();
@@ -572,7 +572,7 @@ angular.module( 'conexus.home', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        PostModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+        ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.activity = models.map(function(obj){
                 obj.model = 'CONTENT';
@@ -616,10 +616,10 @@ angular.module( 'conexus.home', [
                 }
             }
         }
-        if (item.model == 'WORK'){
+        if (item.model == 'TIME'){
             //TODO: AMOUNT
             //item.amount
-            tokens.push('WORK');
+            tokens.push('TIME');
             if (item.tags){
                 for (x in item.tags.split(',')){
                     tokens.push(item.tags.split(',')[x].toUpperCase());

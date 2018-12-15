@@ -10,8 +10,8 @@ angular.module( 'conexus.register', [
 			}
 		},
         resolve:{
-            contentList: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
+            contentList: ['ContentModel', function(ContentModel){
+                return ContentModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');

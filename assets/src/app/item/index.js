@@ -90,13 +90,14 @@ angular.module( 'conexus.item', [
 
     getOrderTraverse($scope.item.identiferSet)
     
+    //TODO
     $scope.createContent = function(post) {
         if($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.item = item.id;
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+            $scope.newContent.post = post.id;
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.item = item.id;
+            ContentModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
             });
         }
         else{$location.path('/login')}

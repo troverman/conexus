@@ -14,19 +14,19 @@ angular.module( 'conexus.transaction', [
             transaction: ['$stateParams', 'TransactionModel', function($stateParams, TransactionModel){
                 return TransactionModel.getOne($stateParams.id);
             }],
-            posts: ['PostModel', 'transaction', function(PostModel, transaction){
-                return PostModel.getSome('transaction', transaction.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'transaction', function(ContentModel, transaction){
+                return ContentModel.getSome('transaction', transaction.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
-.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'PostModel', 'posts', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, lodash, PostModel, posts, ReactionModel, titleService, transaction ) {
+.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, ReactionModel, titleService, transaction ) {
     titleService.setTitle('Transaction | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.contentList = posts;
+    $scope.contentList = contentList;
     $scope.transaction = transaction;
 
     //PACKAGE | NESTED RENDERING
@@ -35,7 +35,7 @@ angular.module( 'conexus.transaction', [
             if(content){$scope.newContent.post = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.transaction = $scope.transaction.id;
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
             });
         }

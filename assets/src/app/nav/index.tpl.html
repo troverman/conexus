@@ -303,7 +303,7 @@
                 <a ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                 <a ng-click="createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-                <a ng-click=""><i class="fa fa-check"></i> validate </a>
+                <a href="task/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
             </div>
             <div class="card-footer">
                 <form role="form" ng-submit="createPost(newPost)">

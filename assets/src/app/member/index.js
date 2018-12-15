@@ -30,12 +30,13 @@ angular.module( 'conexus.member', [
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
+
             //TODO | BETTER....
-            posts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'member', function(ContentModel, member) {
+                return ContentModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
-            profilePosts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('profile', member.id, 20, 0, 'createdAt DESC');
+            profileContent: ['ContentModel', 'member', function(ContentModel, member) {
+                return ContentModel.getSome('profile', member.id, 20, 0, 'createdAt DESC');
             }],
 
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
@@ -44,8 +45,8 @@ angular.module( 'conexus.member', [
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.getSome('to', member.id, 20, 0, 'createdAt DESC');
             }],
-            work: ['member', 'WorkModel', function(member, WorkModel) {
-                return WorkModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
+            time: ['member', 'TimeModel', function(member, TimeModel) {
+                return TimeModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }]
         }
     })
@@ -79,8 +80,8 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             //TODO: REFACTOR
-            posts: ['member', 'PostModel', function(member, PostModel) {
-                return PostModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'member', function(ContentModel, member) {
+                return ContentModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }]
         }
     })
@@ -188,8 +189,8 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            work: ['member', 'WorkModel', function(member, WorkModel) {
-                return WorkModel.getSome('user', member.id, 250, 0, 'createdAt DESC');
+            time: ['member', 'TimeModel', function(member, TimeModel) {
+                return TimeModel.getSome('user', member.id, 250, 0, 'createdAt DESC');
             }]
         }
     })
@@ -271,7 +272,7 @@ angular.module( 'conexus.member', [
     //TODO: SOCKET | WEB3
    
 }])
-.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'orders', 'PostModel', 'posts', 'profilePosts', 'ReactionModel', 'titleService', 'transactionsFrom', 'transactionsTo', 'work', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, FollowerModel, lodash, member, orders, PostModel, posts, profilePosts, ReactionModel, titleService, transactionsFrom, transactionsTo, work) {
+.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'lodash', 'member', 'orders', 'profileContent', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, FollowerModel, lodash, member, orders, profileContent, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
@@ -285,20 +286,21 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    $scope.posts = posts;
-    $scope.profilePosts = profilePosts;
-    $scope.posts = [].concat.apply([], [$scope.posts, $scope.profilePosts]);
-    $scope.posts = $scope.posts.map(function(obj){
+    $scope.contentList = contentList;
+    $scope.profileContent = profileContent;
+    $scope.contentList = [].concat.apply([], [$scope.contentList, $scope.profileContent]);
+    $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
         return obj;
     });
 
+    $scope.time = time;
+
     $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
     $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.work = work
 
     //COMBINE AND REMOVE DUPS .. REDO THIS LATER | REFACTOR .... BLEH
-    $scope.posts = $scope.posts.filter(function(obj){
+    $scope.contentList = $scope.contentList.filter(function(obj){
         if (obj.profile){
             if (obj.profile.hasOwnProperty('id')){
                 console.log(obj.profile, obj.user.id)
@@ -315,12 +317,12 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    $scope.work = $scope.work.map(function(obj){
-        obj.model = 'WORK';
+    $scope.time = $scope.time.map(function(obj){
+        obj.model = 'TIME';
         return obj;
     });
     
-    $scope.activity = [].concat.apply([], [$scope.orders, $scope.posts, $scope.transactions, $scope.work]);
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.orders, $scope.time, $scope.transactions]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
 
@@ -328,7 +330,7 @@ angular.module( 'conexus.member', [
         $scope.newContent.post = post.id;
         $scope.newContent.user = $scope.currentUser.id;
         $scope.newContent.profile = $scope.member.id;
-        PostModel.create($scope.newPost).then(function(model) {
+        ContentModel.create($scope.newPost).then(function(model) {
             $scope.newPost = {};
         });
     };
@@ -368,10 +370,10 @@ angular.module( 'conexus.member', [
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
             case 'destroyed':
-                lodash.remove($scope.posts, {id: envelope.id});
+                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });
@@ -607,15 +609,13 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'posts', 'lodash', 'PostModel', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, posts, lodash, PostModel, titleService) {
+.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'lodash', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, lodash, titleService) {
     $scope.currentUser = config.currentUser;
-    $scope.contentList = posts;
+    $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.newReaction = {};
 
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
-    //$scope.posts = posts;
-    //$scope.videos = videos;
 
     $scope.selectedType = 'POST';
 
@@ -628,7 +628,7 @@ angular.module( 'conexus.member', [
                 return obj.text
             }).join(",");
             $scope.newContent.type = $scope.selectedType;
-            PostModel.create($scope.newContent).then(function(model) {
+            ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.content.unshift(model);
             });
@@ -1200,7 +1200,7 @@ angular.module( 'conexus.member', [
 }])
 
 
-.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'work', 'WorkModel', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, work, WorkModel) {
+.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, time, TimeModel, titleService) {
     
     $scope.currentUser = config.currentUser;
 
@@ -1254,8 +1254,8 @@ angular.module( 'conexus.member', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    $scope.work = work;
-    $scope.work = work.map(function(obj){
+    $scope.time = time;
+    $scope.time = time.map(function(obj){
 
         //HACK | CONFUSING | REMOVE CREATEDAT AS TIME --> FOCUS ON START AND END PARAMS
         var endTime = new Date();
@@ -1280,7 +1280,7 @@ angular.module( 'conexus.member', [
                 start:obj.startTime,
                 end:obj.endTime,
                 allDay:false,
-                url:'work/'+obj.id
+                url:'time/'+obj.id
             });
         }
 
@@ -1301,8 +1301,12 @@ angular.module( 'conexus.member', [
             //HMM
             $scope.newTime.createdAt = $scope.newTime.startTime;
 
+            $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
+                return obj.text
+            }).join(",");
+
             console.log($scope.newTime);
-            WorkModel.create($scope.newTime).then(function(model){
+            TimeModel.create($scope.newTime).then(function(model){
                 $scope.newTime = {};
             });
 
@@ -1315,8 +1319,8 @@ angular.module( 'conexus.member', [
     };
 
     $scope.reply = function(item){
-        var index = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.work[index].showReply = !$scope.work[index].showReply
+        var index = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.time[index].showReply = !$scope.time[index].showReply
     };
 
     $scope.search = function(){};

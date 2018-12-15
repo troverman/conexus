@@ -1,6 +1,6 @@
-angular.module('models.work', ['lodash', 'services', 'sails.io',])
+angular.module('models.time', ['lodash', 'services', 'sails.io',])
 
-.service('WorkModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
+.service('TimeModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
 
     this.getOne = function(model) {
         var url = utils.prepareUrl('work/' + model);

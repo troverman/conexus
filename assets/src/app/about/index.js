@@ -11,8 +11,8 @@ angular.module( 'conexus.about', [
 			}
 		},
         resolve:{
-            contentList: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 10, 0, 'createdAt DESC');
+            contentList: ['ContentModel', function(ContentModel){
+                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             projects: ['ProjectModel', function(ProjectModel){
                 return ProjectModel.getSome(10, 0, 'createdAt DESC');

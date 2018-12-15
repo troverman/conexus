@@ -17,13 +17,17 @@ module.exports = {
         tags: {type: 'string'},
         location: {type: 'json'},
 
-        //TODO: RELATIONSHIPS | ASSOCIATIONS
-        relationships: {type: 'json'},
-        associatedModels: {type: 'string'},
-        parent: {type: 'string'},
-
         //ASSOCIATIONS
-        associations: {type: 'json'},
+        associatedModels: {type: 'json'},
+
+        //CODIFY
+        //[{type:'PROJECT', relationship:'parent', id:1}]
+        //[{type:'PROJECT', relationship:'parent', id:2}]
+        //[{type:'PROJECT', relationship:'child', id:3}]
+        //[{type:'PROJECT', relationship:'child', id:4}]
+        //[{type:'PROJECT', relationship:'sibling', id:4}]
+
+        parent: {type: 'string'},
 
         //TODO: SETTTINGS
         //TODO: ASSOCAITED STRING MANIFOLD
@@ -34,6 +38,14 @@ module.exports = {
 
         //TODO: INFO
         //COUNTS
+        info: {type: 'json'},
+
+        //contentCount
+        //memberCount
+        //taskCount
+        //timeCount
+        //liveCount
+
         memberCount: {
             type: 'integer',
             defaultsTo: 0

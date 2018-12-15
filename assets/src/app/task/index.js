@@ -14,17 +14,17 @@ angular.module( 'conexus.task', [
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
                 return TaskModel.getOne($stateParams.path);
             }],
-            contentList: ['PostModel', 'task', function(PostModel, task){
-                return PostModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'task', function(ContentModel, task){
+                return ContentModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
             }],
-            work: ['WorkModel', 'task', function(WorkModel, task){
-                return WorkModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
+            time: ['TimeModel', 'task', function(TimeModel, task){
+                return TimeModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'PostModel', 'ReactionModel', 'task', 'TaskModel', 'titleService', 'work', 'WorkModel', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, PostModel, ReactionModel, task, TaskModel, titleService, work, WorkModel) {
+.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.task = task;
     console.log(task);
@@ -36,7 +36,7 @@ angular.module( 'conexus.task', [
 
     $scope.contentList = contentList;
 
-    $scope.newPost = {};
+    $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
     $scope.newValidation.validation = {}
@@ -54,7 +54,7 @@ angular.module( 'conexus.task', [
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.verification = {};
-    $scope.work = work;
+    $scope.time = time;
 
     $scope.newValidation.validation.general = 0;
     for (x in $scope.tags){
@@ -99,13 +99,13 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $scope.createPost = function(post) {
+    $scope.createContent = function(content) {
         if ($scope.currentUser){
-            $scope.newPost.post = post.id;
-            $scope.newPost.user = $scope.currentUser.id;
-            $scope.newPost.task = $scope.task.id;
-            PostModel.create($scope.newPost).then(function(model) {
-                $scope.newPost = {};
+            $scope.newContent.post = content.id;
+            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.task = $scope.task.id;
+            ContentModel.create($scope.newContent).then(function(model) {
+                $scope.newContent = {};
             });
         }
         else{$mdSidenav('login').toggle();}
@@ -126,10 +126,10 @@ angular.module( 'conexus.task', [
                 $scope.contentList[contentIndex].reactions[type]++;
             }
 
-            var timeIndex = $scope.work.map(function(obj){return obj.id}).indexOf(item.id);
+            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associations = [{type:'TIME', id:item.id}];
-                $scope.work[timeIndex].reactions[type]++;
+                $scope.time[timeIndex].reactions[type]++;
             }
 
             else{
@@ -166,9 +166,9 @@ angular.module( 'conexus.task', [
         return $sce.trustAsHtml(html);
     };
 
-    $scope.reply = function(post){
-        var index = $scope.posts.map(function(obj){return obj.id}).indexOf(post.id);
-        $scope.posts[index].showReply = !$scope.posts[index].showReply
+    $scope.reply = function(content){
+        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+        $scope.contentList[index].showReply = !$scope.contentList[index].showReply
     };
 
     //REWORK THE FLOW
@@ -186,7 +186,7 @@ angular.module( 'conexus.task', [
                 //STREAMING CREATES A POST -->
                 //TODO.. INIT STREAM HERE ~~~~
                 //startStream();
-                $scope.newPost = {
+                $scope.newContent = {
                     type:'video',
                     title: $scope.task.title,
                     tags: $scope.task.title + ',stream,work,' + $scope.task.project.title,
@@ -194,9 +194,9 @@ angular.module( 'conexus.task', [
                     user: $scope.currentUser.id,
                     //parent: $scope.work..
                 };
-                PostModel.create($scope.newPost).then(function(postModel){
-                    console.log('create', postModel)
-                    $scope.streamingId = postModel.id;
+                ContentModel.create($scope.newContent).then(function(contentModel){
+                    console.log('create', contentModel)
+                    $scope.streamingId = contentModel.id;
                 });
             }
             if($scope.working === true) return false;
@@ -211,9 +211,9 @@ angular.module( 'conexus.task', [
         
         if($scope.working === false) return false;
         $scope.working = false; $scope.question = false; $scope.streaming = false;
-        var workModel = {
+        var timeModel = {
             amount: $scope.taskTime,
-            content: $scope.workContent,
+            content: $scope.timeContent,
             identifier: $scope.timeIdentifier,
             project: $scope.task.project,
             task: $scope.task.id,
@@ -222,16 +222,16 @@ angular.module( 'conexus.task', [
             verificationScore: 0
         };
 
-        if ($scope.workTags){
-            workModel.tags = $scope.workTags.map(function(obj){
+        if ($scope.timeTags){
+            timeModel.tags = $scope.timeTags.map(function(obj){
                 return obj.text
             }).join(",");
         }
 
-        WorkModel.create(workModel).then(function(model){
+        TimeModel.create(timeModel).then(function(model){
 
-            $scope.work.unshift(model);
-            $scope.workContent = '';
+            $scope.time.unshift(model);
+            $scope.timeContent = '';
 
             //UPDATE TO HAVE PARENT AS WORK MODEL
             //REFACTOR | DOING BOTH HERE
@@ -245,8 +245,8 @@ angular.module( 'conexus.task', [
                 update.parent = model.id;
                 update.parentModel = 'work';
                 console.log(update);
-                PostModel.update(update).then(function(postModel){
-                    consooe.log(postModel)
+                ContentModel.update(update).then(function(contentModel){
+                    consooe.log(contentModel)
                 });
             }
         }); 
@@ -333,7 +333,7 @@ angular.module( 'conexus.task', [
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.posts.unshift(envelope.data);
+                $scope.contentList.unshift(envelope.data);
                 break;
         }
     });
@@ -341,7 +341,7 @@ angular.module( 'conexus.task', [
     $sailsSocket.subscribe('work', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.work.unshift(envelope.data);
+                $scope.time.unshift(envelope.data);
                 break;
         }
     });

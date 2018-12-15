@@ -11,20 +11,20 @@ angular.module( 'conexus.discover', [
 			}
 		},
         resolve: {
+            contentList: ['ContentModel', function(ContentModel){
+                return ContentModel.getSome('', '', 20, 0, 'createdAt DESC');
+            }],
         	members: ['UserModel', function(UserModel){
                 return UserModel.getSome(18, 0, 'createdAt DESC');
             }],
         	projects: ['ProjectModel', function(ProjectModel){
                 return ProjectModel.getSome(20, 0, 'createdAt DESC');
             }],
-            posts: ['PostModel', function(PostModel){
-                return PostModel.getSome('', '', 20, 0, 'createdAt DESC');
-			}],
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
-            work: ['WorkModel', function(WorkModel){
-                return WorkModel.getSome('', '', 20, 0, 'createdAt DESC');
+            time: ['TimeModel', function(TimeModel){
+                return TimeModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
         }
 
@@ -36,10 +36,10 @@ angular.module( 'conexus.discover', [
     });
 }])
 
-.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'members', 'titleService', 'posts', 'projects', 'tasks', 'uiGmapGoogleMapApi', 'work', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, members, titleService, posts, projects, tasks, uiGmapGoogleMapApi, work ) {
+.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'members', 'tasks', 'time', 'titleService', 'projects', 'uiGmapGoogleMapApi', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, contentList, members, tasks, time, titleService, projects, uiGmapGoogleMapApi ) {
 	
     titleService.setTitle('Discover | CRE8.XYZ');
-    
+    $scope.contentList = contentList;
     $scope.chart = {
         chart: {
             polar: true,
@@ -81,15 +81,14 @@ angular.module( 'conexus.discover', [
     $scope.markers = [];
 	$scope.members = members;
 	$scope.options = {scrollwheel: false};
-	$scope.posts = posts;
 	$scope.projects = projects;
 	$scope.tasks = tasks;
     $scope.tasks.map(function(obj){
         obj.tags = obj.tags.split(',');
         return obj;
     });
+    $scope.time = time;
 	$scope.windowOptions = {visible: false};
-	$scope.work = work;
 
     //TODO: BETTER | BETTER QUERIES
     for (x in projects){
