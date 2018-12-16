@@ -216,8 +216,17 @@
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
                 <h3>Information</h3>
-                <p>Information about this Information about this Information about this Information about this </p>
 
+                <!--TOKEN-->
+                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>
+                <p>PROTOCOL SPECIFICATION</p>
+                <p>Each Memeber is given 1 Universal Token per second</p>
+
+                <!--
+                <p>Value Map Controls</p>
+                <input type="text" placeholder="Identifier" ng-model="" class="form-control">
+                <button type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+    
                 <p>Associations</p>
                 <p>Content</p>
                 <p>Order</p>
@@ -227,6 +236,7 @@
                 <p>Transaction</p>
                 <p>Time</p>
                 <p>{{information}}</p>
+                -->
 
             </div>
         </div>
@@ -295,7 +305,7 @@
                 <p><a>{{item.location}}</a></p>
                 <div class="spacing-10"></div>
                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
                 <div class="spacing-10"></div>
                 <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
             </div>
@@ -326,7 +336,7 @@
                 <!--MANIFOLD-->
                 <h3>{{item.project.title}}</h3>
                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
                 <highchart config="chart"></highchart>
                 
             </div>
@@ -424,7 +434,7 @@
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{member.totalWork}}</span></div>
+                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
                 </div>
 
                 <div ng-repeat="tag in tags">

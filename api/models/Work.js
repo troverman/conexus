@@ -14,7 +14,7 @@ module.exports = {
         startTime: {type: 'string'},
         tags: {type: 'string'},
         user: {model: 'user'},
-        verificationScore: {type: 'string'},
+        verificationScore: {type: 'json'},
 
         //TODO: RELATIONSHIPS | ASSOCIATIONS
         relationships: {type: 'json'},

@@ -86,20 +86,28 @@ module.exports = {
 		var model = {
 			amount: req.param('amount'),
 			content: req.param('content'),
-			task: req.param('task'),
 			tags: req.param('tags'),
 			user: req.param('user'),
-			//project: req.param('project'),
+
 			stream: req.param('stream'),
 			verificationScore: req.param('verificationScore'),
+
 			//RETROACTIVE | VS CREATED AT
 			startTime: req.param('startTime'),
 			//source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
 			//HOOK IN APIS --> FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
 
-		};
+			//TODO
+			associatedModels: req.param('associatedModels'),
 
-		console.log(model)
+			//PATCH
+			reactions: {plus:0,minus:0};}
+			
+			//DEPRECIATE
+			project: req.param('project'),
+			task: req.param('task'),
+
+		};
 
 		Work.create(model)
 		.exec(function(err, work) {

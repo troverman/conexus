@@ -262,7 +262,9 @@ angular.module( 'conexus.marketPair', [
     }
 
     if ($scope.pluralistic){
-        for (x in $scope.markets1){//POWER SET NOT JUST INDIV MARKETS
+        for (x in $scope.markets1){
+
+            //POWER SET NOT JUST INDIV MARKETS
             //for (y in $scope.markets){}
             $scope.chart.series.push({
                 id: 'ExchangePrice'+x,
@@ -287,6 +289,7 @@ angular.module( 'conexus.marketPair', [
                     }
                 }
             }
+            
         }
     }
     if ($scope.market.split(',').length > 1 && $scope.market1.split(',').length > 1){

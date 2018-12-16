@@ -128,8 +128,8 @@
 				<a ng-click="$event.stopPropagation()" href="transaction/{{transaction.id}}"></a>
 			</div>
 			<div class="card-footer">
-				<a ng-click="$event.stopPropagation()'createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{transaction.plusCount}} like </a> 
-				<a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{transaction.minusCount}} dislike </a>
+				<a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{transaction.reactions.plus}} like </a> 
+				<a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{transaction.reactions.minus}} dislike </a>
 				<a ng-click="$event.stopPropagation();reply(transaction)"><i class="fa fa-comment-o"></i> comment </a>
 				<a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}"><i class="fa fa-link grey"></i></a>
 			</div>

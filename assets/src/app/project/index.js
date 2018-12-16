@@ -241,10 +241,10 @@ angular.module( 'conexus.project', [
     if(!$scope.project){$location.path('/')}
 
     $rootScope.to = $scope.project.id;
-    $rootScope.associatedModel = {
+    $rootScope.associatedModels = [{
         address: $scope.project.id,
         type: 'PROJECT',
-    };
+    }];
 
     //TODO: BETTER?
     $rootScope.project = $scope.project;
@@ -386,23 +386,16 @@ angular.module( 'conexus.project', [
     };
 
     $scope.createReaction = function(item, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.associations = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].reactions[type]++;
-
             ReactionModel.create($scope.newReaction);
-
         }
-
-        else{$mdSidenav('login').toggle()}
-            
+        else{$mdSidenav('login').toggle()}   
     };
 
     $scope.reply = function(activity){
@@ -604,6 +597,8 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$mdSidenav', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $mdSidenav, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.newContent = {};
+    $scope.newReaction = {};
     $scope.newTransaction = {};
     $scope.newTransactionToggleVar = false;
     $scope.project = project;
@@ -639,9 +634,7 @@ angular.module( 'conexus.project', [
             name: 'Asset Flow',
             data: [],
         }],
-        title: {
-            text: ''
-        },
+        title: {text: ''},
         xAxis: {
             type: 'datetime',
             currentMin: 0,
@@ -650,15 +643,9 @@ angular.module( 'conexus.project', [
             crosshair: true,
             gridLineWidth: 0.5,
             gridLineColor: 'grey',
-            title: {
-                text: null
-            },
+            title: {text: null},
         },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -671,20 +658,9 @@ angular.module( 'conexus.project', [
             colorByPoint: true,
             data: [],
         }],
-        
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -837,7 +813,21 @@ angular.module( 'conexus.project', [
     };
 
     $scope.createContent = function(){};
-    $scope.createReaction = function(content, type){};
+    
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            if (timeIndex != -1){
+                $scope.newReaction.associations = [{type:'TRANSACTION', id:item.id}];
+                $scope.transactions[transactionIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }
+        }
+        else{$mdSidenav('login').toggle();}
+    };
 
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
@@ -1061,19 +1051,26 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
     titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.newContent = {};
+    $scope.newReaction = {};
     $scope.newTask = {};
     $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
     $scope.project = project;
 
-    $scope.createTask = function(newTask) {
+    $scope.createContent = function() {};
+
+    //CONTEXT?
+    $scope.createReaction = function() {};
+
+    $scope.createTask = function() {
         if ($scope.currentUser){
             $scope.newTask.user = $scope.currentUser.id;
             $scope.newTask.project = $scope.project.id;
             $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
-                return obj.text
+                return obj.text;
             }).join(",");
-            TaskModel.create(newTask).then(function(model) {
+            TaskModel.create($scope.newTask).then(function(model) {
                 $scope.newTask = {};
                 $scope.tasks.unshift(model);
             });
@@ -1113,9 +1110,7 @@ angular.module( 'conexus.project', [
     }
     $scope.loadTags();
 
-    $scope.newTaskToggle = function () {
-        $scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;
-    };
+    $scope.newTaskToggle = function () {$scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;};
 
     $scope.reply = function(activity){
         if ($scope.currentUser){
@@ -1140,7 +1135,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'time', 'titleService', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, time, titleService) {
+.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'ReactionModel', 'time', 'titleService', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, ReactionModel, time, titleService) {
 
     $scope.eventSources = [];
     $scope.calendar = {
@@ -1169,8 +1164,8 @@ angular.module( 'conexus.project', [
         zoom: 9
     };
     $scope.markers = [];
+    $scope.newReaction = {};
     $scope.options = {scrollwheel: false};
-
     $scope.time = time;
     $scope.time = time.map(function(obj){
         var endTime = new Date(obj.createdAt)
@@ -1182,7 +1177,20 @@ angular.module( 'conexus.project', [
 
     $scope.createContent = function(content, type){};
 
-    $scope.createReaction = function(content, type){};
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            if (timeIndex != -1){
+                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.time[timeIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }
+        }
+        else{$mdSidenav('login').toggle();}
+    };
 
     $scope.reply = function(item){
         var index = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);

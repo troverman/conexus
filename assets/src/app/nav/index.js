@@ -14,17 +14,18 @@ angular.module( 'conexus.nav', [
 
     $scope.selectedType = 'POST';
 
-
     //$rootScope.currentUser = config.currentUser;
 
     if ($scope.currentUser){
-        $scope.newTransaction.from = $scope.currentUser.id;
 
+        $scope.newTransaction.from = $scope.currentUser.id;
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
+        $scope.notificationCount = 0;
+        //$scope.notifications = 0;
 
         //TODO: BETTER
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
-            $scope.member = member;
+            $scope.memberValidate = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
         });
@@ -47,13 +48,9 @@ angular.module( 'conexus.nav', [
         //$rootScope.projectTitle = null;
     });
     
-    $rootScope.$on("$stateChangeSuccess", function() {
-        window.scrollTo(0, 0)
-    });
-
-    $scope.$watch('$root.to', function() {
-        $scope.newTransaction.to = $rootScope.to;
-    });
+    $rootScope.$on("$stateChangeSuccess", function() {window.scrollTo(0, 0)});
+    
+    $scope.$watch('$root.to', function() {$scope.newTransaction.to = $rootScope.to;});
 
     //TODO: BETTER
     $scope.$watch('$root.globalTokens', function() {
@@ -66,6 +63,7 @@ angular.module( 'conexus.nav', [
     //TODO: FIX
     $scope.$watch('$root.associatedModel', function() {
         if ($rootScope.associatedModel){
+            
             $scope.newContent.associatedModels = $rootScope.associatedModel.address;
             $scope.newContent.type = $rootScope.associatedModel.type;
 
@@ -120,18 +118,13 @@ angular.module( 'conexus.nav', [
     $rootScope.contentToggle = function(item){
 
         if($scope.currentUser){
-
             $mdSidenav('content').toggle();
-
         }
         else{$mdSidenav('login').toggle();}
 
     };
 
-    $rootScope.informationToggle = function(item){
-        if($scope.currentUser){$mdSidenav('information').toggle();}
-        else{$mdSidenav('login').toggle();}
-    };
+    $rootScope.informationToggle = function(item){$mdSidenav('information').toggle()};
 
     $rootScope.orderToggle = function(item){
         if($scope.currentUser){$mdSidenav('order').toggle();}

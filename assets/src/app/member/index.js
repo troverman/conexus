@@ -39,15 +39,15 @@ angular.module( 'conexus.member', [
                 return ContentModel.getSome('profile', member.id, 20, 0, 'createdAt DESC');
             }],
 
+            time: ['member', 'TimeModel', function(member, TimeModel) {
+                return TimeModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
+            }],
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.getSome('from', member.id, 20, 0, 'createdAt DESC');
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.getSome('to', member.id, 20, 0, 'createdAt DESC');
             }],
-            time: ['member', 'TimeModel', function(member, TimeModel) {
-                return TimeModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
-            }]
         }
     })
     .state( 'member.about', {
@@ -180,6 +180,20 @@ angular.module( 'conexus.member', [
             }]
         }
     })
+    .state( 'member.tasks', {
+        url: '/tasks',
+        views: {
+            "memberTasks": {
+                controller: 'MemberTaskCtrl',
+                templateUrl: 'member/templates/tasks.tpl.html'
+            }
+        },
+        resolve: {
+            tasks: ['member', 'TaskModel', function(member, TaskModel) {
+                return TaskModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
+            }]
+        }
+    })
     .state( 'member.time', {
         url: '/time',
         views: {
@@ -208,10 +222,10 @@ angular.module( 'conexus.member', [
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
     $rootScope.to = $scope.member.id;
-    $rootScope.associatedModel = {
+    $rootScope.associatedModels = [{
         address: $scope.member.id,
         type: 'PROFILE',
-    };
+    }];
 
     //TODO: BETTER?
     $rootScope.member = $scope.member;
@@ -272,6 +286,12 @@ angular.module( 'conexus.member', [
     //TODO: SOCKET | WEB3
    
 }])
+
+.controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberAboutController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
+    $scope.currentUser = config.currentUser;
+    titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
+}])
+
 .controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'lodash', 'member', 'orders', 'profileContent', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, FollowerModel, lodash, member, orders, profileContent, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
@@ -294,11 +314,6 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    $scope.time = time;
-
-    $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
-    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-
     //COMBINE AND REMOVE DUPS .. REDO THIS LATER | REFACTOR .... BLEH
     $scope.contentList = $scope.contentList.filter(function(obj){
         if (obj.profile){
@@ -312,19 +327,23 @@ angular.module( 'conexus.member', [
         else{return true}
     });
 
-    $scope.transactions = $scope.transactions.map(function(obj){
-        obj.model = 'TRANSACTION';
+    $scope.time = time;
+    $scope.time = $scope.time.map(function(obj){
+        obj.model = 'TIME';
         return obj;
     });
 
-    $scope.time = $scope.time.map(function(obj){
-        obj.model = 'TIME';
+    $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
+    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+
+    $scope.transactions = $scope.transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
         return obj;
     });
     
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.orders, $scope.time, $scope.transactions]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = $scope.activity.slice(0,100);
+    $scope.activity = $scope.activity.slice(0,300);
 
     $scope.createContent = function(post){
         $scope.newContent.post = post.id;
@@ -378,11 +397,6 @@ angular.module( 'conexus.member', [
         }
     });
 
-}])
-
-.controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberAboutController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
-    $scope.currentUser = config.currentUser;
-    titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
 }])
 
 .controller( 'MemberAssetsCtrl', ['$scope', 'config', 'titleService', function MemberAssetsCtrl( $scope, config, titleService ) {
@@ -776,6 +790,7 @@ angular.module( 'conexus.member', [
     $scope.assetSet = 'CRE8';
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    $scope.newReaction = {};
     $scope.newTransaction = {};
     titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
@@ -1053,7 +1068,21 @@ angular.module( 'conexus.member', [
 
     //TODO
     $scope.createContent = function(content, type){};
-    $scope.createReaction = function(content, type){};
+
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            if (timeIndex != -1){
+                $scope.newReaction.associations = [{type:'TRANSACTION', id:item.id}];
+                $scope.transactions[transactionIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }
+        }
+        else{$mdSidenav('login').toggle();}
+    };
 
     $scope.createTransaction = function(){
         $scope.newTransaction.user = $scope.currentUser.id;
@@ -1199,13 +1228,67 @@ angular.module( 'conexus.member', [
 
 }])
 
+.controller( 'MemberTaskCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'tasks', 'TaskModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, tasks, TaskModel, titleService) {
+    $scope.currentUser = config.currentUser;
+    $scope.tasks = tasks;
+    $scope.newContent = {};
+    $scope.newReaction = {};
+    $scope.newTask = {};
 
-.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, time, TimeModel, titleService) {
+    $scope.createContent = function() {};
+    $scope.createReaction = function() {};
+    $scope.createTask = function() {};
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        $scope.tags = $scope.tasks.map(function(obj){
+            console.log(obj);
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
+
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.tasks[index].showReply = !$scope.tasks[index].showReply;
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    $scope.search = function(){};
+
+    $sailsSocket.subscribe('task', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.tasks.unshift(envelope.data);
+                break;
+            case 'destroyed':
+                lodash.remove($scope.tasks, {id: envelope.id});
+                break;
+        }
+    });
+
+}])
+
+.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, time, TimeModel, titleService) {
     
     $scope.currentUser = config.currentUser;
-
     //THE GROUP TESSERACT IS CONENESUS ON TIME ++ DIMENSIONAL WORK
-
     //based on tokens 
     //location mapping over time
     //time mapping via actions ?  
@@ -1214,6 +1297,7 @@ angular.module( 'conexus.member', [
     //TODO VIEW --> CONSUMPTION
     //VIZ ON A DAY TIME
     //VIZ ON MONTH TIME
+    
     $scope.eventSources = [];
     //IDEALLY WANT THIS TO BE AN INFINITE SCROLL TIMELINE YPE WITH ADVANCED FEATURES RN THIS IS TWO THINGS MASHED
     $scope.calendar = {
@@ -1240,13 +1324,11 @@ angular.module( 'conexus.member', [
         nowIndicator: true,
         allDaySlot: false,
     };
-
+    $scope.newReaction = {};
     $scope.newTimeToggleVar = false;
     $scope.newTime = {};
     $scope.newTime.startTime = new Date();
     $scope.newTime.startTime.setMilliseconds(0);
-
-
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -1256,24 +1338,20 @@ angular.module( 'conexus.member', [
 
     $scope.time = time;
     $scope.time = time.map(function(obj){
-
         //HACK | CONFUSING | REMOVE CREATEDAT AS TIME --> FOCUS ON START AND END PARAMS
         var endTime = new Date();
         var startTime = new Date();
-
         if (obj.startTime){
             startTime = new Date(obj.startTime);
             obj.startTime = new Date(obj.startTime);
             obj.endTime = new Date(startTime.setSeconds(startTime.getSeconds() + parseInt(obj.amount)));
         }
-
         //DEPRECIATE
         if(!obj.startTime){
             endTime = new Date(obj.createdAt);
             obj.endTime = new Date(obj.createdAt);
             obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - parseInt(obj.amount)));
         }
-       
         if (obj.task){
             $scope.eventSources.push({
                 title:obj.task.title,
@@ -1283,33 +1361,39 @@ angular.module( 'conexus.member', [
                 url:'time/'+obj.id
             });
         }
-
         return obj;
-
     });
 
     //TODO
     $scope.createContent = function(content, type){};
 
-    //TODO
-    $scope.createReaction = function(content, type){};
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            if (timeIndex != -1){
+                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.time[timeIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }
+        }
+        else{$mdSidenav('login').toggle();}
+    };
 
     $scope.createTime = function(){
         if($scope.currentUser){
             $scope.newTime.user = $scope.currentUser.id;
-
             //HMM
             $scope.newTime.createdAt = $scope.newTime.startTime;
-
             $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
-                return obj.text
+                return obj.text;
             }).join(",");
-
             console.log($scope.newTime);
             TimeModel.create($scope.newTime).then(function(model){
                 $scope.newTime = {};
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };

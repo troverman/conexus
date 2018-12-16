@@ -14,7 +14,7 @@ angular.module( 'conexus.register', [
                 return ContentModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return TaskModel.getSome('', '', 50, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -55,7 +55,7 @@ angular.module( 'conexus.register', [
 	};
 
 	$scope.createPosition = function(model){
-    	$scope.newOrder.push([model,'1 UNIVERSALTOKEN+ONMINT']);
+    	$scope.newOrder.push([{amount:1, identifier:'UNIVERSALTOKEN'}, {amount:null, identifier:model+'+ONMINT'}]);
     };
 
 	//TODO: BETTER | TAG STORAGE
@@ -68,9 +68,7 @@ angular.module( 'conexus.register', [
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
