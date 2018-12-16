@@ -101,7 +101,7 @@ module.exports = {
 			associatedModels: req.param('associatedModels'),
 
 			//PATCH
-			reactions: {plus:0,minus:0};}
+			reactions: {plus:0,minus:0},
 			
 			//DEPRECIATE
 			project: req.param('project'),
