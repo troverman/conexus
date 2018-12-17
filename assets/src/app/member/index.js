@@ -885,18 +885,14 @@ angular.module( 'conexus.member', [
 
     if ($scope.transactions.length == 0){
         for (var i=0, t=88; i<t; i++) {
-            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE, SEED, EXAMPLE'})
-            $scope.transactionsTo.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE, SEED, EXAMPLE'})
+            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), tags:'EXPENSE, SEED, EXAMPLE'})
+            $scope.transactionsTo.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), tags:'REVENUE, SEED, EXAMPLE'})
         }
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     }
 
-
-
     //TAGS
-    function countInArray(array, value) {
-        return array.reduce(function(n, x){ return n + (x === value)}, 0);
-    }
+    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
 
     function amountInArray(array, value) {
         return array.reduce(function(n, x){
@@ -907,10 +903,10 @@ angular.module( 'conexus.member', [
 
     $scope.transactionTags = $scope.transactions.map(function(obj){
         var returnArray = [];
-        if(obj.ledger){
-            obj.ledger = obj.ledger.split(',');
-            for (x in obj.ledger){
-                returnArray.push({tag:obj.ledger[x].trim().toLowerCase(),amount:obj.amount})
+        if(obj.tags){
+            obj.tags = obj.tags.split(',');
+            for (x in obj.tags){
+                returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})
             }
         }
         return returnArray;
@@ -985,9 +981,9 @@ angular.module( 'conexus.member', [
         //TODO: TAGS
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
             var returnArray = [];
-            if(obj.ledger){
-                for (x in obj.ledger){
-                    returnArray.push({tag:obj.ledger[x].trim().toLowerCase(),amount:obj.amount})
+            if(obj.tags){
+                for (x in obj.tags){
+                    returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})
                 }
             }
             return returnArray;
@@ -1027,12 +1023,11 @@ angular.module( 'conexus.member', [
     $scope.selectOverview();
 
     $scope.selectRevenue = function(){
-        //TODO: TAGS
         $scope.transactionTags = $scope.transactionsTo.map(function(obj){
             var returnArray = [];
-            if(obj.ledger){
-                for (x in obj.ledger){
-                    returnArray.push({tag:obj.ledger[x].trim().toLowerCase(),amount:obj.amount})
+            if(obj.tags){
+                for (x in obj.tags){
+                    returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})
                 }
             }
             return returnArray;
@@ -1086,7 +1081,7 @@ angular.module( 'conexus.member', [
 
     $scope.createTransaction = function(){
         $scope.newTransaction.user = $scope.currentUser.id;
-        $scope.newTransaction.ledger = $scope.newTransaction.ledger.map(function(obj){
+        $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
             return obj.text
         }).join(",");
         TransactionModel.create($scope.newTransaction).then(function(model){
@@ -1100,7 +1095,7 @@ angular.module( 'conexus.member', [
             var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
         }
-        //else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle()}
     };
 
 }])
@@ -1140,9 +1135,11 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    $scope.baseMarkets = ['Universal Token (onMint)', 'Universal Token (onTrade)', 'USD', 'CRE8', 'NOVO', 'LTC', 'BTC', 'ETH']
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    $scope.baseMarkets = ['UniversalToken', 'USD', 'CRE8', 'NOVO', 'LTC', 'BTC', 'ETH']
+    $scope.markets = ['Education+onMint', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     
+    $scope.searchQuery = $scope.baseMarkets;
+
     for (x in $scope.baseMarkets){
 
         var random1 = Math.floor(255*Math.random());
@@ -1170,11 +1167,6 @@ angular.module( 'conexus.member', [
 
     $scope.addMarket = function(type){
         //basemarket; market
-    };
-
-    $scope.orderToggle = function(){
-        if ($scope.currentUser){$scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;}
-        else{$mdSidenav('login').toggle()}
     };
 
     //TODO
@@ -1325,7 +1317,7 @@ angular.module( 'conexus.member', [
         allDaySlot: false,
     };
     $scope.newReaction = {};
-    $scope.newTimeToggleVar = false;
+
     $scope.newTime = {};
     $scope.newTime.startTime = new Date();
     $scope.newTime.startTime.setMilliseconds(0);
@@ -1396,10 +1388,6 @@ angular.module( 'conexus.member', [
             });
         }
         else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.newTimeToggle = function() {
-        $scope.newTimeToggleVar = !$scope.newTimeToggleVar;
     };
 
     $scope.reply = function(item){

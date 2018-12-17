@@ -41,8 +41,8 @@ module.exports.routes = {
   'get /project/:path/channels': 'HomeController.index',
   'get /project/:path/content': 'HomeController.index',
   'get /project/:path/charter': 'HomeController.index',
+  'get /project/:path/items': 'HomeController.index',
   'get /project/:path/ledger': 'HomeController.index',
-  'get /project/:path/marketplace': 'HomeController.index',
   'get /project/:path/members': 'HomeController.index',
   'get /project/:path/positions': 'HomeController.index',
   'get /project/:path/projects': 'HomeController.index',
@@ -71,7 +71,16 @@ module.exports.routes = {
   'get /auth/:provider/:action': 'AuthController.callback',
 
   /**
-   * Follower routes
+   * Content routes
+   */
+  'get /api/content': 'PostController.getSome',
+  'get /api/content/:id': 'PostController.getOne',
+  'post /api/content': 'PostController.create',
+  'post /api/content/:id': 'PostController.update',
+  'delete /api/content/:id': 'PostController.destroy',
+
+  /**
+   * Follower routes | MB RELATIONSHIP
    */
   'get /api/follower': 'FollowerController.getSome',
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
@@ -96,15 +105,6 @@ module.exports.routes = {
   'delete /api/post/:id': 'OrderController.destroy',
 
   /**
-   * Post routes
-   */
-  'get /api/post': 'PostController.getSome',
-  'get /api/post/:id': 'PostController.getOne',
-  'post /api/post': 'PostController.create',
-  'post /api/post/:id': 'PostController.update',
-  'delete /api/post/:id': 'PostController.destroy',
-
-  /**
    * Reaction routes
    */
   'get /api/reaction': 'ReactionController.getSome',
@@ -120,7 +120,7 @@ module.exports.routes = {
   'get /api/project/children/:id': 'ProjectController.getChildren',
   'get /api/project/url/:path': 'ProjectController.getByUrl',
   'post /api/project': 'ProjectController.create',
-  'post /api/stream/:id': 'ProjectController.update',
+  'post /api/project/:id': 'ProjectController.update',
   'delete /api/project/:id': 'ProjectController.destroy',
 
    /**
@@ -146,6 +146,13 @@ module.exports.routes = {
   'delete /api/task/:id': 'TaskController.destroy',
 
   /**
+   * Time routes
+   */
+  'get /api/time': 'WorkController.getSome',
+  'get /api/time/:id': 'WorkController.getOne',
+  'post /api/time': 'WorkController.create',
+
+  /**
    * Transaction routes
    */
   'get /api/transaction': 'TransactionController.getSome',
@@ -162,13 +169,6 @@ module.exports.routes = {
   'post /api/user': 'UserController.create',
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
-
-  /**
-   * Work routes
-   */
-  'get /api/work': 'WorkController.getSome',
-  'get /api/work/:id': 'WorkController.getOne',
-  'post /api/work': 'WorkController.create',
 
   /**
    * Validation routes

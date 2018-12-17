@@ -48,7 +48,8 @@
 			</div>
 
 			<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->
-			<!--<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
+			<!--
+			<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
 				<div class="card">
 					<div style="padding:16px">
 						<h4><a href="#">Time Validation <i class="fa fa-question-circle"></i></a></h4>
@@ -56,7 +57,8 @@
 						<p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{time.task.id}}">{{tag.trim()}}+{{time.task.id}}</a></p>
 					</div>
 				</div>
-			</div>-->
+			</div>
+			-->
 
 			<div style="clear:both"></div>
 
@@ -138,34 +140,12 @@
 	<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
 	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
 	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
-	<!--<div class="row">
-		<div class="card">
-			<div style="padding:16px">
-
-				<h4><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-				<div>
-                    <a ng-repeat="token in tokens" href="market/{{token}}">{{time.amount}} {{token}}, </a>
-				</div>
-
-			</div>
-		</div>
-	</div>-->
-
 
 	<div class="row">
-		<div class="card">
-			<div style="padding:16px">
-				<div class="col-md-12">
-	                <h4>Create a Time Post</h4>
-			        <form role="form" ng-submit="createContent()">
-                    	<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-			            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-			        </form>
-			        <div class="spacing-15"></div>
-			    </div>
-	    	</div>
-	    </div>
-	</div>
+        <div class="card">
+            <button style="width:100%;" class="btn btn-default log-btn" ng-click="contentToggle()">+ Time Content</button>
+        </div>
+    </div>
 
 	<!--TODO: NESTED RENDER-->
 	<div class="row">

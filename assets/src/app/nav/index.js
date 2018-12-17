@@ -1,17 +1,19 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'TransactionModel', 'UserModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, ContentModel, TransactionModel, UserModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'ProjectModel', 'ReactionModel', 'TaskModel', 'TimeModel', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, ContentModel, ItemModel, ProjectModel, ReactionModel, TaskModel, TimeModel, TransactionModel, ValidationModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
     $scope.inputVector = [];
     $scope.newContent = {};
+    $scope.newOrder = {};
     $scope.newTransaction = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
     $scope.item = {};
-
+    
+    $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedType = 'POST';
 
     //$rootScope.currentUser = config.currentUser;
@@ -34,8 +36,12 @@ angular.module( 'conexus.nav', [
 
     //TODO: FACTOR LOADING HERE
     $rootScope.$on("$stateChangeStart", function() {
+
         $rootScope.to = null;
         $rootScope.associatedModel = null;
+        $rootScope.market = null;
+        $rootScope.market1 = null;
+    
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
@@ -94,6 +100,17 @@ angular.module( 'conexus.nav', [
         }
     });
 
+    $scope.inverted = false
+    $scope.invertMarket = function() {
+        //$scope.market = [$scope.market, $scope.market = $scope.market1][0];
+        var temp = $scope.newOrder.identiferSet;
+        $scope.newOrder.identiferSet = $scope.newOrder.identiferSet1;
+        $scope.newOrder.identiferSet1 = temp;
+        console.log($scope.newOrder)
+        $scope.inverted = !$scope.inverted;
+        //$scope.$apply();
+    };
+
     $scope.loadAssociations = function(query){
 
         return [
@@ -115,24 +132,46 @@ angular.module( 'conexus.nav', [
     };
 
     //OVERKILL
-    $rootScope.contentToggle = function(item){
+    $rootScope.contentToggle = function(){
 
         if($scope.currentUser){
+            $scope.newContent = {};
+            $scope.newContent.associatedModels = $rootScope.associatedModels;
             $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
 
     };
 
-    $rootScope.informationToggle = function(item){$mdSidenav('information').toggle()};
+    $rootScope.filterToggle = function(item){
+        $mdSidenav('filter').toggle();
+    };
 
-    $rootScope.orderToggle = function(item){
-        if($scope.currentUser){$mdSidenav('order').toggle();}
+    $rootScope.itemToggle = function(){
+        if($scope.currentUser){
+            $scope.newItem = {};
+            $mdSidenav('item').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.projectToggle = function(item){
-        if($scope.currentUser){$mdSidenav('project').toggle();}
+    $rootScope.informationToggle = function(item){$mdSidenav('information').toggle()};
+
+    $rootScope.orderToggle = function(){
+        if($scope.currentUser){
+            $scope.newOrder = {};
+            $mdSidenav('order').toggle();
+        }
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.projectToggle = function(){
+        if($scope.currentUser){
+            $scope.newProject = {};
+            $scope.newProject.associatedModels = $rootScope.associatedModels;
+            console.log('yo',$scope.newProject)
+            $mdSidenav('project').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 
@@ -181,25 +220,31 @@ angular.module( 'conexus.nav', [
         $mdSidenav('renderReputation').toggle();
     };
 
-    $rootScope.taskToggle = function(item){
-        if($scope.currentUser){$mdSidenav('task').toggle();}
+    $rootScope.taskToggle = function(){
+        if($scope.currentUser){
+            $scope.newTask = {};
+            $scope.newTask.associatedModels = $rootScope.associatedModels;
+            $mdSidenav('task').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.timeToggle = function(item){
-        if($scope.currentUser){$mdSidenav('time').toggle();}
+    $rootScope.timeToggle = function(){
+        if($scope.currentUser){
+            $scope.newTime = {};
+            $scope.newTime.startTime = new Date();
+            $scope.newTime.startTime.setMilliseconds(0);
+            $scope.newTime.associatedModels = $rootScope.associatedModels;
+            $mdSidenav('time').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 
     $rootScope.tokensToggle = function(item){
-
         $scope.tokens = item;
-
         //$rootScope.globalTokens;
         //TRAVERSAL FOR TOKENS AND TOKENS ASSOCIATIONS -- COMPLETE PIC
-
         $mdSidenav('tokens').toggle();
-
     };
 
     $rootScope.transactionToggle = function(item){
@@ -209,7 +254,7 @@ angular.module( 'conexus.nav', [
 
     $rootScope.validateToggle = function(item){
         if($scope.currentUser){
-
+            console.log(item);
             $scope.item = item;
             $scope.newValidation = {};
             $scope.newValidation.validation = {};
@@ -224,10 +269,12 @@ angular.module( 'conexus.nav', [
             //TEMP | TODO: ASSOCIATIONS
 
             //BASED ON THE ASSOCIATION.
-            if(item.task.tags){
-                $scope.tags = item.task.tags.split(',');
-                $scope.newValidation.validation.general = 0;
-                for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+            if (item.task){
+                if(item.task.tags){
+                    $scope.tags = item.task.tags.split(',');
+                    $scope.newValidation.validation.general = 0;
+                    for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                }
             }
 
             $mdSidenav('validate').toggle();
@@ -243,8 +290,12 @@ angular.module( 'conexus.nav', [
     //$rootScope.createItem = function(){};
     //$rootScope.createOrder = function(){};
     //$rootScope.createProject = function(){};
-    ////$rootScope.createProjectMember = function(){};
-
+    //$rootScope.createProjectMember = function(){};
+    //$rootScope.createTask = function(){};
+    //$rootScope.createTime = function(){};
+    //$rootScope.createTransaction = function(){};
+    //$rootScope.createValidation = function(){};
+    //$rootScope.createView = function(){};
 
     //WORK MORE ON RENDER
     $scope.createReaction = function(){
@@ -264,12 +315,6 @@ angular.module( 'conexus.nav', [
 
     };
 
-
-    //$rootScope.createTask = function(){};
-    //$rootScope.createTime = function(){};
-    //$rootScope.createTransaction = function(){};
-    //$rootScope.createValidation = function(){};
-    //$rootScope.createView = function(){};
 
     $rootScope.renderContent = function(item){
         if (item){
@@ -327,17 +372,71 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
+    $scope.createItem = function(content) {
+        if ($scope.currentUser){
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+    
+    $scope.createOrder = function(content) {
+        if ($scope.currentUser){
 
+            $scope.newOrder.user = $scope.currentUser.id;
+            $scope.newOrder.type = $scope.selectedOrderType;
 
-    //$scope.createItem = function() {};
-    //$scope.createOrder = function() {};
-    //$scope.createTask = function() {};
+            console.log($scope.newOrder);
+
+            //OrderModel.create($scope.newOrder).then(function(model) {
+            //    $scope.orders.push($scope.newOrder);
+            //    $scope.newOrder = {};
+            //});
+
+            $mdSidenav('order').close();
+            setTimeout(function () {
+                $mdSidenav('confirm').open();
+            }, 500);
+            setTimeout(function () {
+                $mdSidenav('confirm').close();
+            }, 5000);
+
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    $scope.createProject = function(content) {
+        if ($scope.currentUser){
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    $scope.createTask = function(content) {
+        if ($scope.currentUser){
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    $scope.createTime = function(){
+        if($scope.currentUser){
+            $scope.newTime.user = $scope.currentUser.id;
+            //HMM
+            $scope.newTime.createdAt = $scope.newTime.startTime;
+            $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
+                return obj.text;
+            }).join(",");
+            console.log($scope.newTime);
+            TimeModel.create($scope.newTime).then(function(model){
+                $scope.newTime = {};
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
 
     $scope.createTransaction = function(){
         if ($scope.currentUser){
             $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
                 return obj.text
             }).join(",");
+            console.log($scope.newTransaction)
             TransactionModel.create($scope.newTransaction).then(function(model){
 
                 $scope.confirm.modelType = 'TRANSACTION';
@@ -356,6 +455,13 @@ angular.module( 'conexus.nav', [
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
+
+    $scope.createValidation = function(){
+        if ($scope.currentUser){
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
 
     $scope.loginToggle = function(){
         $mdSidenav('nav').close();
@@ -391,6 +497,7 @@ angular.module( 'conexus.nav', [
         }
     };
 
+    $scope.selectOrderType = function(type){$scope.selectedOrderType = type;};
     $scope.selectType = function(type){$scope.selectedType = type;};
 
 }]);

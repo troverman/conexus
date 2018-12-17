@@ -3,7 +3,7 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
 .service('ContentModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
     this.getOne = function(model) {
-        var url = utils.prepareUrl('post/' + model);
+        var url = utils.prepareUrl('content/' + model);
         return $sailsSocket.get(url).then(success, error);
     };
 
@@ -22,23 +22,23 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='work'){query = {params:{work:filter, limit:limit,skip:skip,sort:sort}};}
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
-        var url = utils.prepareUrl('post');
+        var url = utils.prepareUrl('content');
         return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.create = function(newModel) {
-        var url = utils.prepareUrl('post');
+        var url = utils.prepareUrl('content');
         console.log(newModel)
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
     this.update = function(newModel){
-        var url = utils.prepareUrl('post/' + newModel.id);
+        var url = utils.prepareUrl('content/' + newModel.id);
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
     this.delete = function(model) {
-        var url = utils.prepareUrl('post/' + model.id);
+        var url = utils.prepareUrl('content/' + model.id);
         return $sailsSocket.delete(url).then(success, error);
     };
 

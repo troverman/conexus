@@ -29,7 +29,7 @@
     <div class="row">
 
         <div class="card">
-            <button class="btn btn-default log-btn" ng-click="newProjectToggle()">+ project</button>
+            <button class="btn btn-default log-btn" ng-click="projectToggle()">+ project</button>
         </div>
 
         <div class="card">
@@ -55,20 +55,6 @@
             </ui-gmap-google-map>
         </div>
         -->
-
-        <div ng-show="newProjectToggleVar" class="card">
-            <div style="padding:16px;">
-                <form role="form" ng-submit="createProject()">
-                    <div class="form-group">
-                        <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
-                        <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
-                        <input type="text" placeholder="Location" ng-model="newProject.address" class="form-control">
-                        <text-angular placeholder= "Description" ng-model="newProject.description" ta-toolbar="''"></text-angular>
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn">create</button>
-                </form>
-            </div>
-        </div>
 
         <div ng-repeat="project in projects">
             <div class="card" ng-click="">

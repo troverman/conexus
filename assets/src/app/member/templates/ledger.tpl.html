@@ -60,6 +60,7 @@
 			<li ng-click="selectOverview()"><a href="">Overview</a></li>
 			<li ng-click="selectExpense()"><a href="">Expense</a></li>
 			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
+			<li style="float:right"><a ng-click="informationToggle()" href="#">{{assetSet}} <i class="fa fa-question-circle"></i></a></li>
 		</ul>
 
 		<div class="card">
@@ -92,37 +93,11 @@
 			<button class="btn btn-default log-btn" ng-click="transactionToggle()">+ Transaction</button>
 		</div>
 
-		<div class="card" ng-show="newTransactionToggleVar">
-		    <div style="padding:16px;">
-				<form role="form" ng-submit="createTransaction()">
-					<div class="form-group col-sm-6">
-						<input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-6">
-						<input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-6">
-						<input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-6">
-						<input placeholder="Amount" type="number" step="any" ng-model="newTransaction.amount" class="form-control" id="taskTitle">
-					</div>
-					<div class="form-group col-sm-12">
-						<tags-input ng-model="newTransaction.ledger" placeholder="Tags">
-					</div>
-					<div class="form-group col-sm-12">
-						<textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
-					</div>
-					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
-				</form>
-			</div>
-		</div>
-
 		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(transaction)">
 			<div style="padding:16px">
 				<p style="font-weight:800">From: <a ng-click="$event.stopPropagation()" href="">{{transaction.from}}</a> To: <a ng-click="$event.stopPropagation()" href="">{{transaction.to}}</a></p>
 				<p style="font-weight:800">{{transaction.amount}} <a ng-click="$event.stopPropagation()" href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
-				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in transaction.ledger" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 				<p>{{transaction.content}}</p>
 				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
 				<a ng-click="$event.stopPropagation()" href="transaction/{{transaction.id}}"></a>

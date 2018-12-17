@@ -3,7 +3,7 @@ angular.module('models.time', ['lodash', 'services', 'sails.io',])
 .service('TimeModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
 
     this.getOne = function(model) {
-        var url = utils.prepareUrl('work/' + model);
+        var url = utils.prepareUrl('time/' + model);
         return $sailsSocket.get(url).then(success, error);    
     };
     
@@ -14,12 +14,12 @@ angular.module('models.time', ['lodash', 'services', 'sails.io',])
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='work'){query = {params:{work:filter, limit:limit,skip:skip,sort:sort}};}
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
-        var url = utils.prepareUrl('work');
+        var url = utils.prepareUrl('time');
         return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.create = function(newModel) {
-        var url = utils.prepareUrl('work');
+        var url = utils.prepareUrl('time');
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 

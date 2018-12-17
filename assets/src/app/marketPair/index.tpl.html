@@ -60,7 +60,7 @@
 	<div class="row">
 		<div class="card">
 			<div style="">
-				<button class="btn btn-default log-btn" ng-click="newOrderToggle()">+ Order</button>
+				<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
 			</div>
 		</div>
 	</div>
@@ -68,7 +68,7 @@
 	<div class="row" ng-show="newOrderToggleVar">
 		<div class="card">
 		    <div style="padding:16px;">
-				<form role="form" ng-submit="createOrder(newTask)">
+				<form role="form" ng-submit="createOrder()">
 
 					<div class="col-sm-12" style="padding:20px;">
 						<p ng-show="!inverted" style="font-weight:800;">Sell {{market}} for {{market1}} | Buy {{market1}} with {{market}}</p>

@@ -24,24 +24,31 @@
 </div>
 
 <div class="row">
+
+	<!--<ul style="padding:0px;" class="member-tabs">
+		<li style="float:right"><a ng-click="informationToggle()" href="#">CRE8 <i class="fa fa-question-circle"></i></a></li>
+		<div style="clear:both"></div>
+	</ul>-->
+
 	<div class="card">
 		<div style="padding:16px;">
-			<h1>Create Your Value Map</h1>
-			<h4>Our Social Responsibility | Dimensional Vote | Manifest Pluralism</h1>
-			<span><span ng-repeat="dimension in baseMarkets"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
-			<br><br>
-			<span><span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
+			<!--<div style="float:right"><a ng-click="filterToggle()" href="#">CRE8 <i class="fa fa-question-circle"></i></a></div>-->
+			<div style="float:right"><a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in baseMarkets">{{dimension}}, </span><i class="fa fa-question-circle"></i></a></div>
+			<h1>{{member.username}} | Value Map</h1>
+			<h4>Dimensional Vote</h4>
+			<h4>Our Social Responsibility</h4>
 			<div class="spacing-10"></div>
 			<highchart config="chart"></highchart>
+			<div class="spacing-10"></div>
+			<div style=""><a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in markets">{{dimension}}, </span><i class="fa fa-question-circle"></i></a></div>
 		</div>
 	</div>	
 </div>	
 
 <div class="row">
+
 	<div class="card">
-		<div style="">
-			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
-		</div>
+		<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
 	</div>
 
 	<div class="card" ng-show="newOrderToggleVar">

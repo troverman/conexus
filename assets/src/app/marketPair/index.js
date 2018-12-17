@@ -28,6 +28,10 @@ angular.module( 'conexus.marketPair', [
 
     $scope.market = $stateParams.id;
     $scope.market1 = $stateParams.id1;
+
+    $rootScope.market = $stateParams.id;
+    $rootScope.market1 = $stateParams.id1;
+    
     $scope.newContent = {};
     
     $scope.pluralistic = false;

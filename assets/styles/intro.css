@@ -1,21 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700);
 
-@keyframes draw {
-	0% {
-		stroke-dasharray:180 540;
-		stroke-dashoffset:-454;
-		stroke-width:6px;
-		stroke:#14B795
-	}
-
-	100% {
-		stroke-dasharray:760;
-		stroke-dashoffset:0;
-		stroke-width:2px;
-		stroke:#14B795
-	}
-}
-
 svg {
 	max-width:100%;
 	max-height:100%;
@@ -23,21 +7,12 @@ svg {
 	min-height:100%
 }
 
-#novo-svg {fill:#fff;}
-
 .box-with-text {
 	position:absolute;
 	top:0;
 	left:0;
 	width:100%;
 	height:100%;
-	margin:0 auto
-}
-
-.continue-wrap {
-	position:absolute;
-	top:75%;
-	width:100%;
 	margin:0 auto
 }
 
@@ -84,16 +59,6 @@ svg {
     z-index: -1;
 }
 
-.mask__shape {fill:#fff}
-
-.shape {
-	fill:transparent;
-	stroke-dasharray:180 540;
-	stroke-dashoffset:-454;
-	stroke-width:6px;
-	stroke:#fff
-}
-
 .shape--fill {fill:rgba(0,0,0,0.25);}
 
 .svg-defs {
@@ -105,30 +70,6 @@ svg {
 	margin:0 auto;
 	overflow:auto!important;
 	z-index:2
-}
-
-.svg-wrapper {
-	height:60px;
-	margin:0 auto;
-	width:320px;
-	cursor: pointer;
-}
-
-.svg-wrapper:hover .text {color: #fff;}
-
-.svg-wrapper:hover .shape {
-	-webkit-animation:.5s draw linear forwards;
-	animation:.5s draw linear forwards
-}
-
-.text {
-	color:#fff;
-	font-family:'Play',sans-serif;
-	font-size:22px;
-	letter-spacing:8px;
-	line-height:32px;
-	position:relative;
-	top:-48px
 }
 
 .text-fill {
@@ -158,53 +99,50 @@ svg {
 /* media queries */
 @media only screen and (max-width: 1024px) {
 	video {display:none}
-	.contact-mobile {
-		visibility:visible;
-		height:100%
-	}
 	.intro-mobile {
 		visibility:visible;
 		height:100%
 	}
-	.port-mobile {visibility:visible}
-	.port-box a #fill-hover {
-		fill:rgba(255,255,255,0.1);
-		transition:fill .2s
-	}
 }
 
 @media only screen and (max-width: 920px) {
-	.intro-container {zoom: 0.8}
-	.continue-wrap {display: none}
+	//.intro-container {zoom: 0.8}
 }
 @media only screen and (max-width: 850px) {
-	.intro-container {zoom: 0.7}
+	//.intro-container {zoom: 0.7}
+	//body{zoom: 1}
 }
 @media only screen and (max-width: 740px) {
-	.intro-container {zoom: 0.6}
+	//.intro-container {zoom: 0.6}
+	//body{zoom: 1}
 }
 @media only screen and (max-width: 640px) {
-	.intro-container {zoom: 0.55}
+	//.intro-container {zoom: 0.55}
+	//body{zoom: 1}
 }
 @media only screen and (max-width: 600px) {
-	.intro-container {zoom: 0.5}
+	//.intro-container {zoom: 0.5}
+	//body{zoom: 0.97}
 }
 @media only screen and (max-width: 555px) {
-	.intro-container {zoom: 0.45}
+	//.intro-container {zoom: 0.45}
+	//body{zoom: 0.94}
 }
 @media only screen and (max-width: 510px) {
-	.intro-container {zoom: 0.4}
+	//.intro-container {zoom: 0.4}
+	//body{zoom: 0.91}
 }
 @media only screen and (max-width: 460px) {
-	.intro-container {zoom: 0.35}
+	//.intro-container {zoom: 0.35}
+	//body{zoom: 0.88}
 }
 @media only screen and (max-width: 410px) {
-	.intro-container {zoom: 0.325}
+	//.intro-container {zoom: 0.325}
+	//.intro-container {zoom: 0.55}
+	//body{zoom: 0.85}
+	.container{zoom:0.75;}
 }
 @media only screen and (max-width: 788px) {
 	.desktop {visibility:hidden}
 	.mobile {visibility:visible}
-}
-@media only screen and (max-width: 500px) {
-	.shape--fill {fill: rgba(0,0,0,0.8)}
 }

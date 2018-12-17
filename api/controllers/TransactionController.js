@@ -93,12 +93,14 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			amount: req.param('amount'),
-			content: req.param('content'),
 			identifier: req.param('identifier'),
 			to: req.param('to'),
 			from: req.param('from'),
-			ledger: req.param('ledger'),
+			tags: req.param('tags'),
+			content: req.param('content'),
 			user: req.param('user'),
+			//PATCH
+			reactions:{plus:0,minus:0},
 		};
 		Transaction.create(model)
 		.exec(function(err, task) {
@@ -108,8 +110,6 @@ module.exports = {
 				res.json(task);
 			}
 		});
-		//PATCH
-		model.reaction = {plus:0,minus:0};
 	},
 
 	update: function (req, res) {},

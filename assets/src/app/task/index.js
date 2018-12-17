@@ -166,9 +166,12 @@ angular.module( 'conexus.task', [
         return $sce.trustAsHtml(html);
     };
 
-    $scope.reply = function(content){
-        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-        $scope.contentList[index].showReply = !$scope.contentList[index].showReply
+    $scope.reply = function(item){
+        var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+        var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+        if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
+        else if (timeIndex != -1){$scope.time[timeIndex].showReply = !$scope.time[timeIndex].showReply;}
+        else{$scope.task.showReply = !$scope.task.showReply;}
     };
 
     //REWORK THE FLOW

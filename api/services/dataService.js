@@ -794,6 +794,23 @@ module.exports = {
 		//	}
 		//});
 
+		Work.find().limit(10000).then(function(models){
+			for (x in models){
+				//if (models[x].ledger){
+				//	models[x].tags = models[x].ledger;
+				//	models[x].ledger = '';
+				//	console.log(models[x])
+				//}
+				if (!models[x].reactions){
+					models[x].reactions = {plus:0,minus:0};
+					Work.update({id:models[x].id}, {reactions:models[x].reactions}).then(function(){
+						console.log('update')
+					});
+				}
+				
+			}
+		});
+
 		//Validation.find().limit(10000).then(function(postModels){
 		//	for (x in postModels){
 		//		var reactions = {plus:0,minus:0};

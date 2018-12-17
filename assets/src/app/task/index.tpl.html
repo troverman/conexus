@@ -45,9 +45,16 @@
 
             <div class="card-footer">
                 <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{task.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(task, 'plus')" ><i class="fa fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
                 <a ng-click="reply(task)"><i class="fa fa-comment-o"></i> comment </a>
                 <a ng-click="validateToggle(task)"><i class="fa fa-check"></i> validate </a>
+            </div>
+
+            <div ng-show="task.showReply" class="card-footer">
+                <form role="form" ng-submit="createContent(task)">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+                </form>
             </div>
 
         </div>

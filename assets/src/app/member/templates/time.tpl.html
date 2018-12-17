@@ -17,25 +17,7 @@
 
 <div class="row" ng-show="true">
     <div class="card">
-        <button class="btn btn-default log-btn" ng-click="newTimeToggle()">+ Time</button>
-    </div>
-</div>
-
-<div class="row" ng-show="newTimeToggleVar">
-    <div class="card">
-        <div style="padding:16px">
-            <form role="form" ng-submit="createTime()">
-                <div class="">
-                    <input type="text" placeholder= "Task" ng-model="newTime.task" class="form-control">
-                    <input type="datetime-local" step="1" placeholder="Start Time" ng-model="newTime.startTime" class="form-control">
-                    <input type="text" placeholder= "Amount" ng-model="newTime.amount" class="form-control">
-                    <tags-input ng-model="newTime.tags" placeholder="Tags"></tags-input>
-                    <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                </div>
-                <button type="submit" class="btn btn-default log-btn">create</button>
-                <div class="spacing-15"></div>
-            </form>
-        </div>
+        <button class="btn btn-default log-btn" ng-click="timeToggle()">+ Time</button>
     </div>
 </div>
 

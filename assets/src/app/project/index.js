@@ -129,12 +129,12 @@ angular.module( 'conexus.project', [
             }],
         }
     })
-    .state( 'project.marketplace', {
-        url: '/marketplace',
+    .state( 'project.items', {
+        url: '/items',
         views: {
-            "projectMarketplace": {
-                controller: 'ProjectMarketplaceCtrl',
-                templateUrl: 'project/templates/marketplace.tpl.html'
+            "projectItems": {
+                controller: 'ProjectItemsCtrl',
+                templateUrl: 'project/templates/items.tpl.html'
             }
         },
         resolve: {
@@ -270,11 +270,6 @@ angular.module( 'conexus.project', [
 
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id}
 
-    $scope.contentToggle = function(){
-        if($scope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle()}
-    };
-
     $scope.createMember = function(){
         if($scope.currentUser){
             $scope.newMember.user = config.currentUser.id;
@@ -310,11 +305,6 @@ angular.module( 'conexus.project', [
     $scope.tokenToggle = function(item){
         $mdSidenav('tokens').toggle();
         //$rootScope.globalTokens = item;
-    };
-
-    $scope.transactionToggle = function(){
-        if($scope.currentUser){$mdSidenav('transaction').toggle();}
-        else{$mdSidenav('login').toggle()}
     };
 
 }])
@@ -566,7 +556,6 @@ angular.module( 'conexus.project', [
     $scope.currentUser = config.currentUser;
     $scope.newMotion = {};
     $scope.motions = motions;  
-    $scope.newMotionToggleVar = false;
     $scope.project = project;
 
     $scope.createMotion = function(){
@@ -586,21 +575,17 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.newMotionToggle = function(){
-        $scope.newMotionToggleVar = $scope.newMotionToggleVar ? false : true;
-    };
-
     $scope.search = function(){};
 
 }])
 
 .controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$mdSidenav', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $mdSidenav, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
+    $scope.assetSet = 'USD';
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newTransaction = {};
-    $scope.newTransactionToggleVar = false;
     $scope.project = project;
     $scope.newTransaction.to = $scope.project.id;
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
@@ -666,8 +651,8 @@ angular.module( 'conexus.project', [
 
     if ($scope.transactions.length == 0){
         for (var i=0, t=88; i<t; i++) {
-            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), ledger:'EXPENSE, SEED, EXAMPLE'})
-            $scope.transactionsTo.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), ledger:'REVENUE, SEED, EXAMPLE'})
+            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), tags:'EXPENSE, SEED, EXAMPLE'})
+            $scope.transactionsTo.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), tags:'REVENUE, SEED, EXAMPLE'})
         }
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     }
@@ -679,10 +664,10 @@ angular.module( 'conexus.project', [
 
     $scope.transactionTags = $scope.transactions.map(function(obj){
         var returnObj = {};
-        if(obj.ledger){
-            obj.ledger = obj.ledger.split(',');
+        if(obj.tags){
+            obj.tags = obj.tags.split(',');
         }
-        returnObj = obj.ledger;
+        returnObj = obj.tags;
         return returnObj;
     });
     $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
@@ -705,7 +690,6 @@ angular.module( 'conexus.project', [
         }, 0);
         return sumArray;
     }
-
 
     $scope.sumFlow = [];
     $scope.sumFrom = []
@@ -754,7 +738,7 @@ angular.module( 'conexus.project', [
         //ADD IN TAG BASED GRAPHS WRT EXPENSE
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
             var returnObj = {};
-            returnObj = obj.ledger;
+            returnObj = obj.tags;
             return returnObj;
         });
         $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
@@ -787,11 +771,22 @@ angular.module( 'conexus.project', [
     };
     $scope.selectOverview();
 
+    $scope.selectTag = function(tag){
+        $scope.searchQuery = tag;
+        //COMPOUND QUERY
+        //FROM, TO, BOTH, Tag, Identifer
+        var query = {member:$scope.member.id, tag:tag, from:$scope.member.id, to:$scope.member.id, identifer:$scope.identifer};
+        TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
+            $scope.transactions = transactions;
+        });
+
+    };
+
     $scope.selectRevenue = function(){
         //TODO: TAGS
         $scope.transactionTags = $scope.transactionsTo.map(function(obj){
             var returnObj = {};
-            returnObj = obj.ledger;
+            returnObj = obj.tags;
             return returnObj;
         });
         $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
@@ -832,17 +827,13 @@ angular.module( 'conexus.project', [
     $scope.createTransaction = function(){
         $scope.newTransaction.project = $scope.project.id;
         $scope.newTransaction.user = $scope.currentUser.id;
-        $scope.newTransaction.ledger = $scope.newTransaction.ledger.map(function(obj){
+        $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
             return obj.text
         }).join(",");
         TransactionModel.create($scope.newTransaction).then(function(model){
             $scope.newTransaction = {};
             $scope.transactions.unshift(model);
         });
-    };
-
-    $scope.newTransactionToggle = function(){
-        $scope.newTransactionToggleVar = $scope.newTransactionToggleVar ? false : true;
     };
 
     $scope.reply = function(activity){
@@ -855,7 +846,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMarketplaceCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+.controller( 'ProjectItemsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
 
     $scope.items = items;
     $scope.map = {
@@ -976,10 +967,6 @@ angular.module( 'conexus.project', [
         }
     }
     
-    $scope.newOrderToggle = function(){
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
-    };
-
     $scope.createContent = function(content, type){};
 
     $scope.createOrder = function() {
@@ -1007,7 +994,6 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
     titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.newProjectToggleVar = false;
     $scope.project = project;
     $scope.projects = projects;
 
@@ -1020,11 +1006,6 @@ angular.module( 'conexus.project', [
                 $scope.projects.unshift(model);
             });
         }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.projectToggle = function () {
-        if ($scope.currentUser){$scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;}
         else{$mdSidenav('login').toggle()}
     };
 
@@ -1054,7 +1035,6 @@ angular.module( 'conexus.project', [
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newTask = {};
-    $scope.newTaskToggleVar = false;
     $scope.tasks = tasks;
     $scope.project = project;
 
@@ -1109,8 +1089,6 @@ angular.module( 'conexus.project', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
-    $scope.newTaskToggle = function () {$scope.newTaskToggleVar = $scope.newTaskToggleVar ? false : true;};
 
     $scope.reply = function(activity){
         if ($scope.currentUser){
