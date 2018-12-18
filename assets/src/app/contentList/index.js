@@ -23,7 +23,6 @@ angular.module( 'conexus.contentList', [
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
     $scope.newContent = {};
-    $scope.newContentToggleVar = false;
     $scope.newReaction = {};
     $scope.selectedSort = 'createdAt DESC';
     $scope.selectedTag = '';
@@ -153,15 +152,7 @@ angular.module( 'conexus.contentList', [
             $scope.loadTags();
         });
     };
-
-    $scope.newContentToggle = function() {
-        if($scope.currentUser){
-            $mdSidenav('content').toggle()
-            //$scope.newContentToggleVar = !$scope.newContentToggleVar;}
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
+    
     $scope.reply = function(content){
         var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
         $scope.contentList[index].showReply = !$scope.contentList[index].showReply;

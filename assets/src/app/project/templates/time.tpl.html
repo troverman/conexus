@@ -23,6 +23,10 @@
     <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
         <div class="card">
+            <button class="btn btn-default log-btn" ng-click="timeToggle()">+ Time</button>
+        </div>
+        
+        <div class="card">
             <form ng-submit="search()" style="display:flex;flex-direction:row;">
                 <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
                 <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
@@ -39,10 +43,6 @@
             </div>
         </div>
 
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="timeToggle()">+ Time</button>
-        </div>
-        
         <!--
         <div class="row">
             <div class="card">

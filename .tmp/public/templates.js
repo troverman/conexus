@@ -830,40 +830,6 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "<div class=\"container\">\n" +
     "    \n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"newContentToggle()\">+ Content</button>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"row\" ng-show=\"newContentToggleVar\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                    <div class=\"\">\n" +
-    "                        <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                        <input type=\"text\" placeholder=\"Associations\" ng-model=\"newContent.parent\" class=\"form-control\">\n" +
-    "                        <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                            <li ng-class=\"{active: selectedType=='FILE'}\" ng-click=\"selectType('FILE')\"><a href=\"#\">File</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Motion</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='TASK'}\" ng-click=\"selectType('TASK')\"><a href=\"#\">Task</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='TIME'}\" ng-click=\"selectType('TIME')\"><a href=\"#\">Time</a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
-    "                        </ul>\n" +
-    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
-    "                        <input type=\"text\" placeholder=\"Attachments\" ng-model=\"newContent.attachment\" class=\"form-control\">\n" +
-    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                    </div>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
     "        <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
@@ -895,6 +861,10 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            <!--<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            </ul>-->\n" +
+    "\n" +
+    "            <div class=\"card\">\n" +
+    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
+    "            </div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -3043,9 +3013,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\">\n" +
-    "            <div style=\"\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
-    "            </div>\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\" ng-show=\"newContentToggleVar\">\n" +
@@ -3359,7 +3327,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
     "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "			<li style=\"float:right\"><a ng-click=\"informationToggle()\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "			<li style=\"float:right\"><a ng-click=\"filterToggle()\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
     "		</ul>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
@@ -3635,30 +3603,25 @@ angular.module("member/templates/tasks.tpl.html", []).run(["$templateCache", fun
 
 angular.module("member/templates/time.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/time.tpl.html",
-    "<!--\n" +
     "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "-->\n" +
     "\n" +
-    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
+    "    </div>\n" +
+    "\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div fc fc-options=\"calendar\" ng-model=\"eventSources\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"row\" ng-show=\"true\">\n" +
+    "    <!--\n" +
     "    <div class=\"card\">\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
+    "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "    </div>\n" +
-    "</div>\n" +
+    "    -->\n" +
     "\n" +
-    "<div class=\"row\">\n" +
     "    <div ng-repeat=\"item in time\">\n" +
     "        <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "            <div style=\"padding:16px\">\n" +
@@ -3679,6 +3642,7 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
     "		    </div>\n" +
     "        </div>\n" +
     "	</div>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>");
@@ -4396,28 +4360,87 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"confirm\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div class=\"page-heading\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1>Success!</h1>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "            </div>\n" +
+    "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <h1>Success!</h1>\n" +
     "                <div ng-if=\"confirm.modelType == 'CONTENT'\">\n" +
-    "                    <p>{{confirm.title}}</p>\n" +
-    "                    <p>{{confirm.associatedModels}}</p>\n" +
-    "                    <p>{{confirm.tags}}</p>\n" +
-    "                    <p>{{confirm.type}}</p>\n" +
-    "                    <p>{{confirm.content}}</p>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
+    "                    <h3>Title: {{confirm.title}}</h3>\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Tags: {{confirm.tags}}</p>\n" +
+    "                    <p>Associations: {{confirm.associatedModels}}</p>\n" +
+    "                    <p>Type: {{confirm.type}}</p>\n" +
+    "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'ITEM'\"></div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'ORDER'\"></div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'PROJECT'\"></div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'FOLLOW'\">\n" +
+    "                    <p>Follower: {{confirm.follower}}</p>\n" +
+    "                    <p>Following: {{confirm.following}}</p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'ITEM'\">\n" +
+    "                    <h3>Title: {{confirm.title}}</h3>\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Tags: {{confirm.tags}}</p>\n" +
+    "                    <p>Associations: {{confirm.associatedModels}}</p>\n" +
+    "                    <p>Location: {{confirm.location}}</p>\n" +
+    "                    <p>Amount Set: {{confirm.amountSet}}</p>\n" +
+    "                    <p>Identifier Set: {{confirm.identifierSet}}</p>\n" +
+    "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'ORDER'\">\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Amount Set: {{confirm.amountSet}}</p>\n" +
+    "                    <p>Identifier Set: {{confirm.identifierSet}}</p>\n" +
+    "                    <p>Amount Set1: {{confirm.amountSet1}}</p>\n" +
+    "                    <p>Identifier Set1: {{confirm.identifierSet1}}</p>\n" +
+    "                    <p>Type: {{confirm.tags}}</p>\n" +
+    "                    <p>Status: {{confirm.status}}</p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'PROJECT'\">\n" +
+    "                    <h3>Title: {{confirm.title}}</h3>\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Tags: {{confirm.tags}}</p>\n" +
+    "                    <p>Associations: {{confirm.associatedModels}}</p>\n" +
+    "                    <p>Location: {{confirm.location}}</p>\n" +
+    "                    <p>Description: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.description)\"></span></p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'PROJECTMEMBER'\">\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Project: {{confirm.project}}</p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'TASK'\">\n" +
+    "                    <h3>Title: {{confirm.title}}</h3>\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Tags: {{confirm.tags}}</p>\n" +
+    "                    <p>Associations: {{confirm.associatedModels}}</p>\n" +
+    "                    <p>Location: {{confirm.location}}</p>\n" +
+    "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "                </div>\n" +
+    "                <div ng-if=\"confirm.modelType == 'TIME'\">\n" +
+    "                    <p>Amount: {{confirm.amount}}</p>\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>Tags: {{confirm.tags}}</p>\n" +
+    "                    <p>Type: {{confirm.tags}}</p>\n" +
+    "                    <p>Associations: {{confirm.associatedModels}}</p>\n" +
+    "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "                </div>\n" +
     "                <div ng-if=\"confirm.modelType == 'TRANSACTION'\">\n" +
-    "                    <p>{{confirm.to}}</p>\n" +
-    "                    <p>{{confirm.from}}</p>\n" +
-    "                    <p>{{confirm.identifier}}</p>\n" +
-    "                    <p>{{confirm.amount}}</p>\n" +
-    "                    <p>{{confirm.tags}}</p>\n" +
-    "                    <p>{{confirm.content}}</p>\n" +
+    "                    <p>User: {{confirm.user}}</p>\n" +
+    "                    <p>To: {{confirm.to}}</p>\n" +
+    "                    <p>From: {{confirm.from}}</p>\n" +
+    "                    <p>Identifier: {{confirm.identifier}}</p>\n" +
+    "                    <p>Amount: {{confirm.amount}}</p>\n" +
+    "                    <p>Tags: {{confirm.tags}}</p>\n" +
+    "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
@@ -5093,10 +5116,6 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "        </ul>\n" +
     "\n" +
     "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"card\">\n" +
     "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
     "                <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
@@ -5105,6 +5124,10 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                    </a>\n" +
     "                </div>\n" +
     "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\" ng-show=\"newContentToggleVar\">\n" +
@@ -5262,7 +5285,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
     "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "			<li style=\"float:right\"><a ng-click=\"informationToggle()\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "			<li style=\"float:right\"><a ng-click=\"filterToggle()\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
     "		</ul>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
@@ -5628,6 +5651,10 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "        <div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
+    "        </div>\n" +
+    "        \n" +
+    "        <div class=\"card\">\n" +
     "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
     "                <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
@@ -5644,10 +5671,6 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
-    "        </div>\n" +
-    "        \n" +
     "        <!--\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"card\">\n" +

@@ -1,27 +1,22 @@
-<!--
 <div class="row">
-    <div class="card">
-        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
-        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-    </div>
-</div>
--->
 
-<div class="row">
+    <div class="card">
+        <button class="btn btn-default log-btn" ng-click="timeToggle()">+ Time</button>
+    </div>
+
     <div class="card">
         <div style="padding:16px">
             <div fc fc-options="calendar" ng-model="eventSources"></div>
         </div>
     </div>
-</div>
 
-<div class="row" ng-show="true">
+    <!--
     <div class="card">
-        <button class="btn btn-default log-btn" ng-click="timeToggle()">+ Time</button>
+        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
     </div>
-</div>
+    -->
 
-<div class="row">
     <div ng-repeat="item in time">
         <div class="card" ng-click="renderToggle(item)">
             <div style="padding:16px">
@@ -42,6 +37,7 @@
 		    </div>
         </div>
 	</div>
+
 </div>
 
 <div class="spacing-50"></div>

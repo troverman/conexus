@@ -88,27 +88,29 @@ module.exports = {
 	//TODO
 	create: function (req, res) {
 		var model = {
+
 			title: req.param('title'),
-			project: req.param('project'),
 			content: req.param('content'),
 			tags: req.param('tags'),
+			location: req.param('location'),
+			associatedModels: req.param('associatedModels'),
+			user: req.param('user'),
 
+			//DEPRECIATE
 			completeIdentifierSet: req.param('completeIdentifierSet'),
 			completeBountySet: req.param('completeBountySet'),
-
-
 			timeIdentifierSet: req.param('timeIdentifierSet'),
 			timeBountySet: req.param('timeBountySet'),
-
 			verificationIdentifierSet: req.param('verificationIdentifierSet'),
 			verificationBountySet: req.param('verificationBountySet'),
-			
+			project: req.param('project'),
 			members: req.param('members'),
 			parent: req.param('parent'),
-			user: req.param('user'),
+
+			//PATCH
+			reactions: {plus:0,minus:0},
+
 		};
-		//PATCH
-		model.reactions = {plus:0,minus:0};
 		Task.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}

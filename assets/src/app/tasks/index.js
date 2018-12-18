@@ -101,7 +101,7 @@ angular.module( 'conexus.tasks', [
     //});
     $scope.loadAssociations = function(){
         $scope.associations = $scope.tasks.map(function(obj){
-            return obj.project.title;
+            if (obj.project){return obj.project.title;}
         });
 
         $scope.associations = [].concat.apply([], $scope.associations);
@@ -174,5 +174,20 @@ angular.module( 'conexus.tasks', [
         $mdSidenav('tokens').toggle();
         $rootScope.globalTokens = $scope.tokens;
     };
+
+    $sailsSocket.subscribe('task', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.tasks.unshift(envelope.data);
+                $scope.tasks.map(function(obj){
+                    obj.tags = obj.tags.split(',');
+                    return obj;
+                });
+                break;
+            case 'destroyed':
+                lodash.remove($scope.tasks, {id: envelope.id});
+                break;
+        }
+    });
 
 }]);

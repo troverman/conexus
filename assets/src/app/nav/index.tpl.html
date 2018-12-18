@@ -646,28 +646,87 @@
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="confirm" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
+
+            <div class="spacing-25"></div>
+            <div class="page-heading">
+                <div class="spacing-25"></div>
+                <div class="container">
+                    <h1>Success!</h1>
+                </div>
+                <div class="spacing-25"></div>
+            </div>
+
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
-                <h1>Success!</h1>
                 <div ng-if="confirm.modelType == 'CONTENT'">
-                    <p>{{confirm.title}}</p>
-                    <p>{{confirm.associatedModels}}</p>
-                    <p>{{confirm.tags}}</p>
-                    <p>{{confirm.type}}</p>
-                    <p>{{confirm.content}}</p>
-                    <p>{{confirm.user}}</p>
+                    <h3>Title: {{confirm.title}}</h3>
+                    <p>User: {{confirm.user}}</p>
+                    <p>Tags: {{confirm.tags}}</p>
+                    <p>Associations: {{confirm.associatedModels}}</p>
+                    <p>Type: {{confirm.type}}</p>
+                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
-                <div ng-if="confirm.modelType == 'ITEM'"></div>
-                <div ng-if="confirm.modelType == 'ORDER'"></div>
-                <div ng-if="confirm.modelType == 'PROJECT'"></div>
+                <div ng-if="confirm.modelType == 'FOLLOW'">
+                    <p>Follower: {{confirm.follower}}</p>
+                    <p>Following: {{confirm.following}}</p>
+                </div>
+                <div ng-if="confirm.modelType == 'ITEM'">
+                    <h3>Title: {{confirm.title}}</h3>
+                    <p>User: {{confirm.user}}</p>
+                    <p>Tags: {{confirm.tags}}</p>
+                    <p>Associations: {{confirm.associatedModels}}</p>
+                    <p>Location: {{confirm.location}}</p>
+                    <p>Amount Set: {{confirm.amountSet}}</p>
+                    <p>Identifier Set: {{confirm.identifierSet}}</p>
+                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                </div>
+                <div ng-if="confirm.modelType == 'ORDER'">
+                    <p>User: {{confirm.user}}</p>
+                    <p>Amount Set: {{confirm.amountSet}}</p>
+                    <p>Identifier Set: {{confirm.identifierSet}}</p>
+                    <p>Amount Set1: {{confirm.amountSet1}}</p>
+                    <p>Identifier Set1: {{confirm.identifierSet1}}</p>
+                    <p>Type: {{confirm.tags}}</p>
+                    <p>Status: {{confirm.status}}</p>
+                </div>
+                <div ng-if="confirm.modelType == 'PROJECT'">
+                    <h3>Title: {{confirm.title}}</h3>
+                    <p>User: {{confirm.user}}</p>
+                    <p>Tags: {{confirm.tags}}</p>
+                    <p>Associations: {{confirm.associatedModels}}</p>
+                    <p>Location: {{confirm.location}}</p>
+                    <p>Description: <span style="display:inline" ng-bind-html="renderContent(confirm.description)"></span></p>
+                </div>
+                <div ng-if="confirm.modelType == 'PROJECTMEMBER'">
+                    <p>User: {{confirm.user}}</p>
+                    <p>Project: {{confirm.project}}</p>
+                </div>
+                <div ng-if="confirm.modelType == 'TASK'">
+                    <h3>Title: {{confirm.title}}</h3>
+                    <p>User: {{confirm.user}}</p>
+                    <p>Tags: {{confirm.tags}}</p>
+                    <p>Associations: {{confirm.associatedModels}}</p>
+                    <p>Location: {{confirm.location}}</p>
+                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                </div>
+                <div ng-if="confirm.modelType == 'TIME'">
+                    <p>Amount: {{confirm.amount}}</p>
+                    <p>User: {{confirm.user}}</p>
+                    <p>Tags: {{confirm.tags}}</p>
+                    <p>Type: {{confirm.tags}}</p>
+                    <p>Associations: {{confirm.associatedModels}}</p>
+                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                </div>
                 <div ng-if="confirm.modelType == 'TRANSACTION'">
-                    <p>{{confirm.to}}</p>
-                    <p>{{confirm.from}}</p>
-                    <p>{{confirm.identifier}}</p>
-                    <p>{{confirm.amount}}</p>
-                    <p>{{confirm.tags}}</p>
-                    <p>{{confirm.content}}</p>
+                    <p>User: {{confirm.user}}</p>
+                    <p>To: {{confirm.to}}</p>
+                    <p>From: {{confirm.from}}</p>
+                    <p>Identifier: {{confirm.identifier}}</p>
+                    <p>Amount: {{confirm.amount}}</p>
+                    <p>Tags: {{confirm.tags}}</p>
+                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
+
             </div>
         </div>
     </md-sidenav>

@@ -203,7 +203,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 }
 
 .imageContainerSmall {
-    background:#33312d;
+    background:#252525;
     overflow:hidden;
     min-height: 200px;
     font-family: 'Titillium Web',sans-serif;

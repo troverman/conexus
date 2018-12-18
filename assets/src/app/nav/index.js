@@ -7,11 +7,13 @@ angular.module( 'conexus.nav', [
     $scope.confirm = {};
     $scope.inputVector = [];
     $scope.newContent = {};
+    $scope.newItem = {};
     $scope.newOrder = {};
     $scope.newTransaction = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
     $scope.item = {};
+    $scope.inverted = false;
     
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedType = 'POST';
@@ -52,6 +54,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('transaction').close();
         //$rootScope.memberUsername = null;
         //$rootScope.projectTitle = null;
+
     });
     
     $rootScope.$on("$stateChangeSuccess", function() {window.scrollTo(0, 0)});
@@ -100,17 +103,15 @@ angular.module( 'conexus.nav', [
         }
     });
 
-    $scope.inverted = false
+    //TODO: TEST
     $scope.invertMarket = function() {
-        //$scope.market = [$scope.market, $scope.market = $scope.market1][0];
         var temp = $scope.newOrder.identiferSet;
         $scope.newOrder.identiferSet = $scope.newOrder.identiferSet1;
         $scope.newOrder.identiferSet1 = temp;
-        console.log($scope.newOrder)
         $scope.inverted = !$scope.inverted;
-        //$scope.$apply();
     };
 
+    //TODO! IMPORTANT
     $scope.loadAssociations = function(query){
 
         return [
@@ -121,6 +122,7 @@ angular.module( 'conexus.nav', [
 
     };
 
+    //TODO! IMPORTANT
     $scope.loadTags = function(query){
 
         return [
@@ -133,19 +135,18 @@ angular.module( 'conexus.nav', [
 
     //OVERKILL
     $rootScope.contentToggle = function(){
-
         if($scope.currentUser){
+
+            //HM!
             $scope.newContent = {};
             $scope.newContent.associatedModels = $rootScope.associatedModels;
+
             $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
-
     };
 
-    $rootScope.filterToggle = function(item){
-        $mdSidenav('filter').toggle();
-    };
+    $rootScope.filterToggle = function(item){$mdSidenav('filter').toggle()};
 
     $rootScope.itemToggle = function(){
         if($scope.currentUser){
@@ -169,7 +170,6 @@ angular.module( 'conexus.nav', [
         if($scope.currentUser){
             $scope.newProject = {};
             $scope.newProject.associatedModels = $rootScope.associatedModels;
-            console.log('yo',$scope.newProject)
             $mdSidenav('project').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -284,35 +284,21 @@ angular.module( 'conexus.nav', [
 
     //CONFIRM, INFORMATION
     //RENDER, RENDER REPUTATION, INFORMATION
-
     //TODO: GLOBAL FUNCTIONS
-    //$rootScope.createContent = function(){};
-    //$rootScope.createItem = function(){};
-    //$rootScope.createOrder = function(){};
-    //$rootScope.createProject = function(){};
     //$rootScope.createProjectMember = function(){};
-    //$rootScope.createTask = function(){};
-    //$rootScope.createTime = function(){};
-    //$rootScope.createTransaction = function(){};
-    //$rootScope.createValidation = function(){};
     //$rootScope.createView = function(){};
 
     //WORK MORE ON RENDER
     $scope.createReaction = function(){
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             $scope.item.reactions[type]++;
-
             ReactionModel.create($scope.newReaction);
-
         }
         else{$mdSidenav('login').toggle()}
-
     };
 
 
@@ -328,8 +314,11 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: ASSOCIATED MODELS
+    //TODO: PARESE INPUT | TEST CREATE
     $scope.createContent = function(content) {
         if ($scope.currentUser){
+
+            //RENDER?
             //if(content){$scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];}
             //if!($scope.newContent.associatedModels = [];)
 
@@ -349,23 +338,25 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
+            //PATCH!!!
+            if ($scope.newContent.associatedModels){
+                for (x in $scope.newContent.associatedModels){
+                    $scope.newContent[$scope.newContent.associatedModels[x].type.toLowerCase()] = $scope.newContent.associatedModels[x].address
+                }
+            }
 
+
+            //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
+            console.log($scope.newContent);
             ContentModel.create($scope.newContent).then(function(model) {
 
-                $scope.confirm.modelType = 'CONTENT';
                 $scope.confirm = $scope.newContent;
+                $scope.confirm.modelType = 'CONTENT';
+
                 $scope.newContent = {};
-
                 $mdSidenav('content').close();
-
-                //setTimeout(function () {
-                //    $mdSidenav('confirm').open();
-                //}, 500);
-                //setTimeout(function () {
-                //    $mdSidenav('confirm').close();
-                //}, 5000);
-
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
 
         }
@@ -374,10 +365,38 @@ angular.module( 'conexus.nav', [
 
     $scope.createItem = function(content) {
         if ($scope.currentUser){
+
+            $scope.newItem.user = $scope.currentUser.id;
+
+            if ($scope.newItem.tags){
+                $scope.newItem.tags = $scope.newItem.tags.map(function(obj){
+                    return obj.text;
+                }).join(",");
+            }
+
+            //PATCH!!!
+            if ($scope.newItem.associatedModels){
+                for (x in $scope.newItem.associatedModels){
+                    $scope.newItem[$scope.newItem.associatedModels[x].type.toLowerCase()] = $scope.newItem.associatedModels[x].address
+                }
+            }
+
+            ItemModel.create($scope.newItem).then(function(model) {
+
+                $scope.confirm = $scope.newItem;
+                $scope.confirm.modelType = 'ITEM';
+
+                $scope.newItem = {};
+                $mdSidenav('item').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            });
+
         }
         else{$mdSidenav('login').toggle()}
     };
     
+    //TODO: PARESE INPUT | TEST CREATE
     $scope.createOrder = function(content) {
         if ($scope.currentUser){
 
@@ -386,90 +405,189 @@ angular.module( 'conexus.nav', [
 
             console.log($scope.newOrder);
 
-            //OrderModel.create($scope.newOrder).then(function(model) {
-            //    $scope.orders.push($scope.newOrder);
-            //    $scope.newOrder = {};
-            //});
+            OrderModel.create($scope.newOrder).then(function(model) {
 
-            $mdSidenav('order').close();
-            setTimeout(function () {
-                $mdSidenav('confirm').open();
-            }, 500);
-            setTimeout(function () {
-                $mdSidenav('confirm').close();
-            }, 5000);
+                $scope.confirm = $scope.newOrder;
+                $scope.confirm.modelType = 'ORDER';
 
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.createProject = function(content) {
-        if ($scope.currentUser){
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.createTask = function(content) {
-        if ($scope.currentUser){
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.createTime = function(){
-        if($scope.currentUser){
-            $scope.newTime.user = $scope.currentUser.id;
-            //HMM
-            $scope.newTime.createdAt = $scope.newTime.startTime;
-            $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
-                return obj.text;
-            }).join(",");
-            console.log($scope.newTime);
-            TimeModel.create($scope.newTime).then(function(model){
-                $scope.newTime = {};
+                $scope.newOrder = {};
+                $mdSidenav('order').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
         }
         else{$mdSidenav('login').toggle()}
     };
 
+    //TODO: MOVE TO ASSOCIATED MODELS
+    $scope.createProject = function(content) {
+        if ($scope.currentUser){
+
+            if ($scope.newProject.tags){
+                $scope.newProject.tags = $scope.newProject.tags.map(function(obj){
+                    return obj.text;
+                }).join(",");
+            }
+
+            //NOT ON FRONTEND
+            $scope.newProject.user = $scope.currentUser.id;
+
+            //PATCH!!!
+            if ($scope.newProject.associatedModels){
+                if ($scope.newProject.associatedModels[0].type == 'PROJECT'){
+                    $scope.newProject.parent = $scope.newProject.associatedModels[0].address
+                }
+            }
+
+            console.log($scope.newProject);
+
+            ProjectModel.create($scope.newProject).then(function(model) {
+
+                $scope.confirm = $scope.newProject;
+                $scope.confirm.modelType = 'PROJECT';
+
+                $scope.newProject = {};
+                $mdSidenav('project').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            });
+
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    //TODO: PARESE INPUT | TEST CREATE
+    $scope.createTask = function(content) {
+        if ($scope.currentUser){
+
+            $scope.newTask.user = $scope.currentUser.id;
+            if ($scope.newTask.tags){
+                $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
+                    return obj.text;
+                }).join(",");
+            }
+
+            //PATCH!!!
+            if ($scope.newTask.associatedModels){
+                for (x in $scope.newTask.associatedModels){
+                    $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].address
+                }
+            }
+
+            console.log($scope.newTask);
+
+            TaskModel.create($scope.newTask).then(function(model) {
+
+                $scope.confirm = $scope.newTask;
+                $scope.confirm.modelType = 'TASK';
+
+                $scope.newTask = {};
+                $mdSidenav('task').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    //TODO: PARESE INPUT | TEST CREATE
+    $scope.createTime = function(){
+        if($scope.currentUser){
+
+            $scope.newTime.user = $scope.currentUser.id;
+            $scope.newTime.createdAt = $scope.newTime.startTime;
+            $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
+                return obj.text;
+            }).join(",");
+
+            //PATCH!!!
+            if ($scope.newTime.associatedModels){
+                for (x in $scope.newTime.associatedModels){
+                    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address
+                }
+            }
+
+            console.log($scope.newTime);
+
+            TimeModel.create($scope.newTime).then(function(model){
+
+                $scope.confirm = $scope.newTime;
+                $scope.confirm.modelType = 'TIME';
+
+                $scope.newTime = {};
+                $mdSidenav('time').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    //TODO: PARESE INPUT | TEST CREATE
     $scope.createTransaction = function(){
         if ($scope.currentUser){
+
             $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
                 return obj.text
             }).join(",");
-            console.log($scope.newTransaction)
+
+            console.log($scope.newTransaction);
+
             TransactionModel.create($scope.newTransaction).then(function(model){
 
-                $scope.confirm.modelType = 'TRANSACTION';
                 $scope.confirm = $scope.newTransaction;
+                $scope.confirm.modelType = 'TRANSACTION';
+
                 $scope.newTransaction = {};
-
                 $mdSidenav('transaction').close();
-                //setTimeout(function () {
-                //    $mdSidenav('confirm').open();
-                //}, 500);
-                //setTimeout(function () {
-                //    $mdSidenav('confirm').close();
-                //}, 2000);
-
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
 
+    //TODO: PARESE INPUT | TEST CREATE
     $scope.createValidation = function(){
         if ($scope.currentUser){
+
+            //TODO
+            $scope.newValidation.user = $scope.currentUser.id;
+
+            //PATCH!!!
+            if ($scope.newValidation.associatedModels){
+                for (x in $scope.newValidation.associatedModels){
+                    $scope.newValidation[$scope.newValidation.associatedModels[x].type.toLowerCase()] = $scope.newValidation.associatedModels[x].address
+                }
+            }
+
+            console.log($scope.newValidation);
+
+            ValidationModel.create($scope.newValidation).then(function(model) {
+
+                $scope.confirm = $scope.newValidation;
+                $scope.confirm.modelType = 'VALIDATION';
+
+                $scope.newValidation = {};
+                $mdSidenav('validation').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            });
         }
         else{$mdSidenav('login').toggle()}
     };
-
 
     $scope.loginToggle = function(){
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
+        $mdSidenav('project').close();
         $mdSidenav('render').close();
         $mdSidenav('tokens').close();
+        $mdSidenav('task').close();
+        $mdSidenav('time').close();
         $mdSidenav('transaction').close();
+        $mdSidenav('validation').close();
         $mdSidenav('login').toggle();
     };
 
@@ -477,9 +595,13 @@ angular.module( 'conexus.nav', [
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();
         $mdSidenav('login').close();
+        $mdSidenav('project').close();
         $mdSidenav('render').close();
         $mdSidenav('tokens').close();
+        $mdSidenav('task').close();
+        $mdSidenav('time').close();
         $mdSidenav('transaction').close();
+        $mdSidenav('validation').close();
         $mdSidenav('nav').toggle();
     };
 

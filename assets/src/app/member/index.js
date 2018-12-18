@@ -253,11 +253,13 @@ angular.module( 'conexus.member', [
             $scope.newFollower.followed = $scope.member.id;
             $scope.newFollower.follower = $scope.currentUser.id;
             FollowerModel.create($scope.newFollower).then(function(model) {
+
+                $rootScope.confirm = $scope.newFollower;
+                $rootScope.confirm.modelType = 'FOLLOW';
+
                 $scope.newFollower = {};
-                $mdSidenav('confirm').open();
-                setTimeout(function () {
-                    $mdSidenav('confirm').close();
-                }, 5000);
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
 
         }

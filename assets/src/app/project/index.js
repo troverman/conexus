@@ -275,8 +275,13 @@ angular.module( 'conexus.project', [
             $scope.newMember.user = config.currentUser.id;
             $scope.newMember.project = project.id;
             MemberModel.create($scope.newMember).then(function(model) {
+
+                $rootScope.confirm = $scope.newMember;
+                $rootScope.confirm.modelType = 'PROJECTMEMBER';
+
                 $scope.newMember = {};
-                $mdSidenav('information').toggle()
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
         }
         else{$mdSidenav('login').toggle()}
