@@ -11,8 +11,7 @@ module.exports = {
         type: {type: 'string', required: true},
         user: {model: 'user'},
 
-        //ASSOICATIONS
-        //ASSOCIATEDMODELS
+        //ASSOCIATED MODELS
         associatedModels: {type: 'json'},
 
         //REACTIONS
@@ -23,7 +22,7 @@ module.exports = {
     beforeCreate: function(model, next) {
         next();
         if (false){
-            Reaction.find({user:model.user, post:model.post}).then(function(reactionModel){
+            Reaction.find({user:model.user, associatedModels:model.associatedModels}).then(function(reactionModel){
                 if (reactionModel.length == 0){next()}
             });
         }

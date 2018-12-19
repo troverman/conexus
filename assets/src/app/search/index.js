@@ -63,7 +63,7 @@ angular.module( 'conexus.search', [
     $scope.createReaction = function(item, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associations = [{type:item.model, id:item.id}];
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
             var index = $scope.searchResults.map(function(obj){return obj.id}).indexOf(item.id);

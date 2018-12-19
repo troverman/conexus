@@ -17,6 +17,13 @@ module.exports = {
 		amountSet1: {type: 'string'},
 		identiferSet1: {type: 'string'},
 
+		//APPRECIATE THIS DATA STRUCT
+		amountSetAlpha: {type: 'json'},
+		amountSetBeta: {type: 'json'},
+
+		//INFO
+        model: {type: 'string', defaultsTo: 'ORDER'},
+
 		//price: {type: 'string'},
 		status: {type: 'string'},
 

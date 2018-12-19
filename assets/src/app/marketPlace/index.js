@@ -63,22 +63,16 @@ angular.module( 'conexus.marketPlace', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: FIVE STAR ETC
     $scope.createReaction = function(item, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
-
-            //NO
-            $scope.newReaction.item = item.id;
-
+            $scope.newReaction.associatedModels = [{type:'ITEM', id:item.id}];
+            //TODO: FIVE STAR ETC
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
             var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
-            if (type =='plus'){$scope.items[index].plusCount++}
-            if (type =='minus'){$scope.items[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
+            if (index != -1){$scope.items[index].reactions[type]++;}
+            ReactionModel.create($scope.newReaction);
         }
         else{$mdSidenav('login').toggle()}
     };

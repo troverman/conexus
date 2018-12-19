@@ -32,7 +32,7 @@ angular.module( 'conexus.transaction', [
     //PACKAGE | NESTED RENDERING
     $scope.createContent = function(content) {
         if ($scope.currentUser){
-            if(content){$scope.newContent.post = content.id;}
+            if(content){$scope.newContent.contentModel = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.transaction = $scope.transaction.id;
             ContentModel.create($scope.newContent).then(function(model) {
@@ -43,19 +43,18 @@ angular.module( 'conexus.transaction', [
     };
 
     //TODO
-    $scope.createReaction = function(content, type){
-        $scope.newReaction.amount = 1;
-        $scope.newReaction.post = content.id;
-        $scope.newReaction.type = type;
-        $scope.newReaction.user = $scope.currentUser.id;
-
-        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-
-        if (type =='plus'){$scope.contentList[index].plusCount++}
-        if (type =='minus'){$scope.contentList[index].minusCount++}
-        ReactionModel.create($scope.newReaction).then(function(model){
-            $scope.newReaction = {};
-        });
+    $scope.createReaction = function(item, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){$scope.contentList[index].reactions[type]++;}
+            else{$scope.transaction.reactions[type]++;}
+            ReactionModel.create($scope.newReaction);
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
     $scope.reply = function(item){

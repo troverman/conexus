@@ -107,7 +107,7 @@ angular.module( 'conexus.task', [
 
     $scope.createContent = function(content) {
         if ($scope.currentUser){
-            $scope.newContent.post = content.id;
+            $scope.newContent.contentModel = content.id;
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.task = $scope.task.id;
             ContentModel.create($scope.newContent).then(function(model) {
@@ -128,18 +128,18 @@ angular.module( 'conexus.task', [
             //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
-                $scope.newReaction.associations = [{type:'CONTENT', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
                 $scope.contentList[contentIndex].reactions[type]++;
             }
 
             var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
-                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
                 $scope.time[timeIndex].reactions[type]++;
             }
 
             else{
-                $scope.newReaction.associations = [{type:'TASK', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
                 $scope.task.reactions[type]++;
             }
 
@@ -153,6 +153,7 @@ angular.module( 'conexus.task', [
 
     //TODO | MOTIONS INTERLOCK
     //LINK INTO CONTENT MODEL ? --> ONLY MOTIONS
+    //DEPRECIATE 'TOTAL WORK'
     $scope.createValidation = function(){
 
         $scope.taskVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
@@ -195,7 +196,7 @@ angular.module( 'conexus.task', [
     $scope.startWork = function() {
         if ($scope.currentUser){
             if ($scope.streaming){
-                //STREAMING CREATES A POST -->
+                //STREAMING CREATES CONTENT -->
                 //TODO.. INIT STREAM HERE ~~~~
                 //startStream();
                 $scope.newContent = {
@@ -218,7 +219,10 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //REWORK THE FLOW
+
+    //!!!!TODO: REVIST THIS !!!
+    //ASSOICATIONS .. TIME --> STREAM --> CONTENT
+    //TYPE.. TIMER ETC
     $scope.submit = function() {
         
         if($scope.working === false) return false;
@@ -245,7 +249,7 @@ angular.module( 'conexus.task', [
             $scope.time.unshift(model);
             $scope.timeContent = '';
 
-            //UPDATE TO HAVE PARENT AS WORK MODEL
+            //UPDATE TO HAVE PARENT AS TIME MODEL
             //REFACTOR | DOING BOTH HERE
             //TODO: ASSOCIATED MODELS --> TIME TO TASKS ONE TO MANY
             //TODO: TIME TYPE.. TIMER INPUT
@@ -253,9 +257,15 @@ angular.module( 'conexus.task', [
             if ($scope.streamingId){
                 var update = {};
                 update.id = $scope.streamingId;
-                update.work = model.id;
+                update.time = model.id;
+
+
+                //CHANGE TO ASSOCIATIONS
+                //TODO
                 update.parent = model.id;
-                update.parentModel = 'work';
+                update.parentModel = 'time';
+
+
                 console.log(update);
                 ContentModel.update(update).then(function(contentModel){
                     consooe.log(contentModel)
@@ -278,6 +288,7 @@ angular.module( 'conexus.task', [
         $scope.$apply();
     };
 
+    //TODO: DEPRECIATE TOTAL 'WORK'
     $scope.verifyTask = function(item, type) {
         if ($scope.currentUser){
             if (type == 'plus'){
@@ -342,7 +353,7 @@ angular.module( 'conexus.task', [
     };
 
     //TODO: WEBSOCKETS | WEB3
-    $sailsSocket.subscribe('post', function (envelope) {
+    $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);
@@ -350,7 +361,7 @@ angular.module( 'conexus.task', [
         }
     });
 
-    $sailsSocket.subscribe('work', function (envelope) {
+    $sailsSocket.subscribe('time', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.time.unshift(envelope.data);

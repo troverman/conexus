@@ -1,6 +1,5 @@
 /**
  * ProjectController
- *
  */
 
 module.exports = {
@@ -56,6 +55,7 @@ module.exports = {
 			tags: req.param('tags'),
 			location: req.param('location'),
 			description: req.param('description'),
+			//DEPRECIATE
 			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
 			user: req.param('user'),
 			parent: req.param('parent'),

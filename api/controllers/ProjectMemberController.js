@@ -58,13 +58,17 @@ module.exports = {
 		var model = {
 			project: req.param('project'),
 			user: req.param('user'),
+			//validation: 0
 		};
 		ProjectMember.create(model)
 		.exec(function(err, member) {
 			if (err) {return console.log(err);}
 			else {
 
+
 				//DO ++
+				//CREATE MOTION.. VALIDATE?????????
+
 				ProjectMember.find({user:model.user}).then(function(projectMemberModel){
 					var projectCount = 0;
 					projectCount = projectMemberModel.length;

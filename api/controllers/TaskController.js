@@ -66,7 +66,7 @@ module.exports = {
 			.populate('project')
 			.populate('user')
 			.then(function(models) {
-				Post.subscribe(req, models);
+				Task.subscribe(req, models);
 				res.json(models);
 			});
 		}

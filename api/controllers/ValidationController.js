@@ -8,7 +8,7 @@ module.exports = {
 		var project = req.query.project;
 		var task = req.query.task;
 		var user = req.query.user;
-		var work = req.query.work;
+		var time = req.query.time;
 		var id = req.query.id;
 
 		Validation.watch(req);
@@ -51,8 +51,8 @@ module.exports = {
 			});
 		}
 
-		else if (req.query.work){
-			Validation.find({work:work})
+		else if (req.query.time){
+			Validation.find({time:time})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -69,7 +69,6 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			//.populate('work')
 			.then(function(models) {
 				Validation.subscribe(req, models);
 				res.json(models);
@@ -83,24 +82,32 @@ module.exports = {
 	//TODO | SECURITY
 	create: function (req, res) {
 		var model = {
-			content: req.param('content'),
-			project: req.param('project'),
-			reputation: req.param('reputation'),
-			task: req.param('task'),
-			user: req.param('user'),
-			validation: req.param('validation'),
-			work: req.param('work'),
-		};
 
-		//PATCH
-		model.reactions = {plus:0,minus:0};
+			content: req.param('content'),
+			reputation: req.param('reputation'), //SAVED USER REP
+			user: req.param('user'),
+			validation: req.param('validation'), //ACTUAL 'VOTE'
+
+			//ASSOICATED MODEL {BINARY -- }
+
+			//DEPRECIATE
+			task: req.param('task'),
+			project: req.param('project'),
+			time: req.param('time'),
+			//validation: req.param('validation'),
+
+			//PATCH
+			reactions: {plus:0,minus:0},
+
+
+		};
 
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
 		User.find({id:model.user}).then(function(userModel){
 
 			var reputation = {};
 
-			//WORK.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
+			//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
 			//FIND DIMENSIONS .. MATCH WITH FRONTEND INPUT
 
 			for (x in Object.keys(model.validation)){

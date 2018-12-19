@@ -26,7 +26,7 @@ module.exports = {
         //TODO: DEPRECIATE
         project: {type: 'string'},
         task: {type: 'string'},
-        work: {type: 'string'},
+        time: {type: 'string'},
 
     },
     

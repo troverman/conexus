@@ -9,7 +9,7 @@ module.exports = {
 		var searchQuery = req.param('searchQuery');
 		console.log(searchQuery);
 
-		//PROJECT | POST | TASK | USER
+		//PROJECT | CONTENT | TASK | USER
 		Project.find()
 		.where({
 			or: [
@@ -25,7 +25,7 @@ module.exports = {
 			Project.watch(req);
 			Project.subscribe(req, models);
 			//TODO UNIFY CONTENT MODEL
-			Post.find()
+			Content.find()
 			.where({
 				or: [
 					{content: {contains: searchQuery}},
@@ -40,8 +40,8 @@ module.exports = {
 			    });
 				var combinedModels = [].concat.apply([], [projectModels, contentModels]);
     			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-				Post.watch(req);
-				Post.subscribe(req, models);
+				Content.watch(req);
+				Content.subscribe(req, models);
 
 				//TODO UNIFY CONTENT MODEL
 				Task.find()

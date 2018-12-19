@@ -3,6 +3,11 @@ module.exports = {
 	
 	getOne: function(req, res) {
 		Content.findOne(req.param('id'))
+        .populate('user')
+        .populate('project')
+        .populate('profile')
+        .populate('task')
+        .populate('time')
         .then(function (model) {
 			res.json(model);
         });
@@ -42,9 +47,9 @@ module.exports = {
 			});
 		}
 
-		else if (req.query.post){
-			var post = req.query.post;
-			Content.find({post:post})
+		else if (req.query.contentModel){
+			var contentModel = req.query.contentModel;
+			Content.find({contentModel:contentModel})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -83,6 +88,40 @@ module.exports = {
 			});
 		}
 
+		else if(req.query.search){
+			var search = req.query.search;
+			Content.find()
+			.where({
+				or: [
+					{content: {contains: search}},
+					{tags: {contains: search}},
+					{title: {contains: search}},
+					{user: {contains: search}}
+				]
+			})
+			.limit(limit)
+			.skip(limit)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Content.subscribe(req, models);
+				res.json(models);
+			});	
+		}
+
+		else if (req.query.tag){
+			var tag = req.query.tag;
+			Content.find({tags:{contains: tag}})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Content.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
 		else if (req.query.task){
 			var task = req.query.task;
 			Content.find({task:task})
@@ -110,13 +149,13 @@ module.exports = {
 			});
 		}
 
-		else if(req.query.work){
-			var work = req.query.work;
-			Content.find({work:work})
+		else if(req.query.time){
+			var time = req.query.time;
+			Content.find({time:time})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('work')
+			.populate('time')
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
@@ -140,7 +179,7 @@ module.exports = {
 
 		else{
 			Content.find({})
-			.limit(limit)
+			.limit(20)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
@@ -154,17 +193,32 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
+
+			title: req.param('title'),
+			tags: req.param('tags'),
+			type: req.param('type'),
 			content: req.param('content'),
+			user: req.param('user'),
+
+			associatedModels: req.param('associatedModels'),
+
+			//DEPRECIATE
 			market: req.param('market'),
 			order: req.param('order'),
-			post: req.param('post'),
+			parent: req.param('parent'),
+			parentModel: req.param('parentModel'),
+			contentModel: req.param('contentModel'),
 			profile: req.param('profile'),
 			project: req.param('project'),
 			task: req.param('task'),
 			transaction: req.param('transaction'),
-			user: req.param('user'),
-			work: req.param('work'),
+			time: req.param('time'),
+
+			//PATCH
+			reactions: {plus:0, minus:0},
+
 		};
+
 		Content.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
@@ -176,10 +230,25 @@ module.exports = {
 		});
 	},
 
+	//IS UPDATING REAL ONCHAIN? | NEW TYPE? NAH
+	//IT'S A NEW 'CREATE' THAT OVERLAPS. 
+	update: function(req,res){
+		var id = req.param('id');
+		var model = {
+			parent: req.param('parent'),
+			parentModel: req.param('parentModel'),
+			time: req.param('time'),
+		};
+		Content.update({id: id}, {parent:model.parent,parentModel:model.parentModel,time:model.time})
+		.then(function(model){
+			Content.publishUpdate(id, model[0]);
+			res.json(model);
+		});
+	},
+
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Content.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

@@ -672,9 +672,14 @@ module.exports = {
 			//promises.push(ProjectMember.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Task.find().limit(100000).skip(0).sort('createdAt DESC').populate('project'))
 			promises.push(Transaction.find().limit(100000).skip(0).sort('createdAt DESC'))
+
+			//CONTENT
 			promises.push(Post.find().limit(100000).skip(0).sort('createdAt DESC'))
+
 			promises.push(View.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Validation.find().limit(100000).skip(0).sort('createdAt DESC'))
+
+			//TIME
 			promises.push(Work.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'))
 
 			Q.all(promises)
@@ -785,6 +790,7 @@ module.exports = {
 			});
 			return deferred.promise;
 		};
+		
 		//Project.find().limit(10000).then(function(models){
 		//	for (x in models){
 		//		projectAssociations(models[x].parent, '').then(function(projectModel){
@@ -794,22 +800,21 @@ module.exports = {
 		//	}
 		//});
 
-		Work.find().limit(10000).then(function(models){
-			for (x in models){
+		//Time.find().limit(10000).then(function(models){
+			//for (x in models){
 				//if (models[x].ledger){
 				//	models[x].tags = models[x].ledger;
 				//	models[x].ledger = '';
 				//	console.log(models[x])
 				//}
-				if (!models[x].reactions){
-					models[x].reactions = {plus:0,minus:0};
-					Work.update({id:models[x].id}, {reactions:models[x].reactions}).then(function(){
-						console.log('update')
-					});
-				}
-				
-			}
-		});
+				//if (!models[x].reactions){
+					//models[x].reactions = {plus:0,minus:0};
+					//Time.update({id:models[x].id}, {reactions:models[x].reactions}).then(function(){
+						//console.log('update')
+					//});
+				//}	
+			//}
+		//});
 
 		//Validation.find().limit(10000).then(function(postModels){
 		//	for (x in postModels){
@@ -819,6 +824,29 @@ module.exports = {
 		//		} 
 		//		console.log(reactions)
 		//		Validation.update({id:postModels[x].id}, {reactions:reactions}).then(function(){
+		//			console.log('update')
+		//		});
+		//	}
+		//});
+
+		//Post.find().limit(700).skip(0).then(function(postModels){
+		///	for (x in postModels){
+		//		if (postModels[x].work){postModels[x].time = postModels[x].work }
+		//		if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
+		//		if (!postModels[x].associatedModels){
+		//			postModels[x].associatedModels = [];
+		//			if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
+		//			if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
+		//			if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
+		//			if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
+		//			if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
+		//			if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
+		//			if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
+		//			if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
+		//		}
+		//		Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
+		//		console.log(x, postModels[x]);
+		//		Post.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel}).then(function(model){
 		//			console.log('update')
 		//		});
 		//	}

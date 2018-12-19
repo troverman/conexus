@@ -10,6 +10,7 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 		Transaction.watch(req);
+
 		if(req.query.project){
 			var project = req.query.project;
 			Transaction.find({project:project})
@@ -43,17 +44,10 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-
-
 				//Project.find({id:to})
-
 				//User.find({id:to})
-
 				//Project.find({id:from})
-
 				//User.find({id:from})
-
-
 				res.json(models)
 			});
 		}

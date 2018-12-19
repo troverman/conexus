@@ -25,7 +25,7 @@ angular.module( 'conexus.home', [
                 return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome(10, 0, 'createdAt DESC');
+                return UserModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
@@ -172,23 +172,16 @@ angular.module( 'conexus.home', [
     };
 
     $scope.createReaction = function(item, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associations = [{type:item.model, id:item.id}];
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].reactions[type]++;
-
             ReactionModel.create($scope.newReaction);
-
         }
-
         else{$mdSidenav('login').toggle()}
-
     };
 
     //TODO: BETTER
@@ -476,13 +469,13 @@ angular.module( 'conexus.home', [
         $mdSidenav('content').toggle();
     };
 
-    $scope.createOrder = function(post){
+    $scope.createOrder = function(){
         $scope.newOrder = [];
     };
 
     //TODO: MODEL | CREATE | NESTED?
-    $scope.createContent = function(post){
-        $scope.newContent.post = post.id;
+    $scope.createContent = function(content){
+        $scope.newContent.contentModel = content.id;
         $scope.newContent.user = $scope.currentUser.id;
         $scope.newContent.profile = $scope.currentUser.id;
         ContentModel.create($scope.newContent).then(function(model) {
@@ -544,7 +537,7 @@ angular.module( 'conexus.home', [
         if($scope.currentUser){
 
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associations = [{type:item.model, id:item.id}];
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 

@@ -40,7 +40,7 @@ angular.module( 'conexus.order', [
     //TODO
     $scope.createContent = function(content) {
         if($scope.currentUser){
-            $scope.newContent.post = content.id;
+            $scope.newContent.contentModel = content.id;
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.order = order.id;
             ContentModel.create($scope.newContent).then(function(model) {
@@ -60,7 +60,7 @@ angular.module( 'conexus.order', [
         $rootScope.globalTokens = $scope.tokens;
     };
 
-    $sailsSocket.subscribe('post', function (envelope) {
+    $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);

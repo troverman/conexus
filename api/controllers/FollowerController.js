@@ -2,6 +2,8 @@
  * FollowerController
  */
 
+
+//TODO: RELATIONSHIP?
 module.exports = {
 
 	getSome: function(req, res) {},
@@ -60,7 +62,6 @@ module.exports = {
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Follower.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

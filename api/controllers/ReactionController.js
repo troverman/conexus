@@ -21,9 +21,9 @@ module.exports = {
 		Reaction.watch(req);
 
 		//TODO
-		if(req.query.post){
-			var post = req.query.post;
-			Reaction.find({post:post})
+		if(req.query.contentModel){
+			var contentModel = req.query.contentModel;
+			Reaction.find({contentModel:contentModel})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -34,10 +34,11 @@ module.exports = {
 			});
 		}
 
-		if(req.query.associations){
+		//TODO 
+		if(req.query.associatedModels){
 			//&& type
 			//MEH!
-			Reaction.find({associations: {contains: req.query.associations}})
+			Reaction.find({associatedModels: {contains: req.query.associatedModels}})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -66,18 +67,18 @@ module.exports = {
 	create: function (req, res) {
 
 		var model = {
-			associations: req.param('associations'),
+			associatedModels: req.param('associatedModels'),
 			amount: req.param('amount'),
 			type: req.param('type'),
 			user: req.param('user'),
+
+			//PATCH
+			reactions: {plus:0,minus:0},
 		};
 
 		//console.log(model)
 		//association perm check? 
 		
-		//PATCH
-		model.reactions = {plus:0,minus:0};
-
 		Reaction.create(model)
 		.exec(function(err, reaction) {
 			if (err) {return console.log(err);}
@@ -87,21 +88,21 @@ module.exports = {
 				
 				Reaction.publishCreate(reaction);
 
-				for (x in model.associations){
-					if (model.associations[x].type == 'CONTENT'){
-						Post.find({id:model.associations[x].id}).then(function(postModel){
-							if (!postModel[0].reactions){postModel[0].reactions = {};}
-							if (!postModel[0].reactions[model.type]){postModel[0].reactions[model.type] = model.amount;}
-							else if (postModel[0].reactions[model.type]){postModel[0].reactions[model.type] = postModel[0].reactions[model.type] + model.amount;}
-							console.log(postModel[0]);
-							Post.update({id:postModel[0].id},{reactions:postModel[0].reactions}).then(function(postModel){
+				for (x in model.associatedModels){
+					if (model.associatedModels[x].type == 'CONTENT'){
+						Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
+							if (!contentModel[0].reactions){contentModel[0].reactions = {};}
+							if (!contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = model.amount;}
+							else if (contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = contentModel[0].reactions[model.type] + model.amount;}
+							console.log(contentModel[0]);
+							Content.update({id:contentModel[0].id},{reactions:contentModel[0].reactions}).then(function(contentModel){
 								console.log('UPDATE');
 								res.json(reaction);
 							});
 						});
 					}
-					if (model.associations[x].type == 'TASK'){
-						Task.find({id:model.associations[x].id}).then(function(taskModel){
+					if (model.associatedModels[x].type == 'TASK'){
+						Task.find({id:model.associatedModels[x].id}).then(function(taskModel){
 							if (!taskModel[0].reactions){taskModel[0].reactions = {};}
 							if (!taskModel[0].reactions[model.type]){taskModel[0].reactions[model.type] = model.amount;}
 							else if (taskModel[0].reactions[model.type]){taskModel[0].reactions[model.type] = taskModel[0].reactions[model.type] + model.amount;}
@@ -112,13 +113,13 @@ module.exports = {
 							});
 						});
 					}
-					if (model.associations[x].type == 'TIME'){
-						Work.find({id:model.associations[x].id}).then(function(timeModel){
+					if (model.associatedModels[x].type == 'TIME'){
+						Time.find({id:model.associatedModels[x].id}).then(function(timeModel){
 							if (!timeModel[0].reactions){timeModel[0].reactions = {};}
 							if (!timeModel[0].reactions[model.type]){timeModel[0].reactions[model.type] = model.amount;}
 							else if (timeModel[0].reactions[model.type]){timeModel[0].reactions[model.type] = timeModel[0].reactions[model.type] + model.amount;}
 							console.log(timeModel[0]);
-							Work.update({id:timeModel[0].id},{reactions:timeModel[0].reactions}).then(function(timeModel){
+							Time.update({id:timeModel[0].id},{reactions:timeModel[0].reactions}).then(function(timeModel){
 								console.log('UPDATE');
 								res.json(reaction);
 							});

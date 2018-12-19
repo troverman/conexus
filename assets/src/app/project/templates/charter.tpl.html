@@ -1,43 +1,6 @@
 <div class="spacing-5"></div>
-<button class="btn btn-default log-btn" ng-click="newMotionToggle()">+ Motion</button>
+<button class="btn btn-default log-btn" ng-click="motionToggle()">+ Motion</button>
 <div class="spacing-10"></div>
-
-<!--<div class="card" ng-show="newMotionToggleVar">
-    <div style="padding:16px;">
-		<form role="form" ng-submit="createTask(newTask)">
-			<div class="form-group">
-				<input placeholder="Motion Title" type="text" ng-model="newBill.title" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="Motion Content" type="text" ng-model="newBill.content" class="form-control" id="taskTitle">
-			</div>
-			<div class="form-group">
-				<input placeholder="Motion Task Basket" type="text" ng-model="newBill.basket" class="form-control" id="taskBasket">
-			</div>
-			<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
-		</form>
-	</div>
-</div>-->
-<div class="row" ng-show="newMotionToggleVar">
-    <div class="card">
-        <div style="padding:16px;">
-            <form role="form" ng-submit="createMotion(newTask)">
-                <div class="form-group">
-                    <input placeholder="Title" type="text" ng-model="newMotion.title" class="form-control" id="taskTitle">
-                </div>
-                <div class="form-group">
-                    <input placeholder="Tags" type="text" ng-model="newMotion.tags" class="form-control" id="taskTitle">
-                </div>
-                <div class="form-group">
-                    <!--//TYPE | MOTION TO JOIN, MOTION TO CREATE TRANSACTION, MOTION TO CREATE POSITION, MOTION TO CREATE CONTENT-->
-                    <input placeholder="Motion Type" type="text" ng-model="newMotion.motionType" class="form-control" id="taskTitle">
-                </div>
-                <text-angular ng-model="newMotion.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                <button type="submit" class="btn btn-default log-btn" ng-disabled="!newMotion.title">create</button>
-            </form>
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="card">
@@ -47,6 +10,7 @@
     </div>
 </div>
 
+<!--VALIDATIONS.. AND ABSTRACT VALIDATION .. IE NOT A LINKAGE.. FOR SOME CHARTER -->
 <!--motion to create order; motion to accept join; motion to 'enact bill' motion 'to vote on bill' | create 'enect bill motion' -->
 <!--history of motions.. aka charter-->
 

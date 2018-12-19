@@ -12,13 +12,6 @@
 				<div class="pull-left"><img class="avatar" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></div>
 				<div style="text-align:right" class="member-tab-container">
 					<ul class="member-tabs subNav">
-						<!--<li><a href="member/{{member.username}}">Activity</a></li>
-						<li><a href="member/{{member.username}}/content">Content</a></li>
-						<li><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></li>
-						<li><a href="member/{{member.username}}/following">{{member.followingCount}} Following</a></li>
-						<li><a href="member/{{member.username}}/ledger">Ledger</a></li>
-						<li><a href="member/{{member.username}}/positions">Positions</a></li>
-						<li><a href="member/{{member.username}}/time">Time</a></li>-->
 						<li ng-show="currentUser.id != member.id">
 							<a ng-show="!isFollowing" class="btn btn-default" ng-click="follow()">Follow</a>
 							<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
@@ -44,8 +37,6 @@
 
 					<!--TODO-->
 					<div class="pull-right" style="margin-right:15px;margin-top:10px;">
-						<!--<h2>{{member.totalWork}} | total work</h2>-->
-						<!--<input type="text" placeholder="Reputation" ng-model="reputationLookup" class="form-control">-->
 						<span style="color:gray;font-size:10px;float:right">0x{{member.id}}</span>
 						<br>
 						<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">

@@ -93,14 +93,14 @@ angular.module( 'conexus.contentList', [
     $scope.createContent = function(content) {
 
         if ($scope.currentUser){
-            if(content){$scope.newContent.post = content.id;}
+            if(content){$scope.newContent.contentModel = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                 return obj.text;
             }).join(",");
             $scope.newContent.type = $scope.selectedType;
 
-            $scope.newContent.associations = [];
+            $scope.newContent.associatedModels = [];
 
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
 
@@ -122,7 +122,7 @@ angular.module( 'conexus.contentList', [
             $scope.newReaction.user = $scope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
-                $scope.newReaction.associations = [{type:'CONTENT', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
                 $scope.contentList[contentIndex].reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);

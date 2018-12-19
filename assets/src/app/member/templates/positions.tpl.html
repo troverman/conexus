@@ -25,10 +25,12 @@
 
 <div class="row">
 
-	<!--<ul style="padding:0px;" class="member-tabs">
+	<!--
+	<ul style="padding:0px;" class="member-tabs">
 		<li style="float:right"><a ng-click="informationToggle()" href="#">CRE8 <i class="fa fa-question-circle"></i></a></li>
 		<div style="clear:both"></div>
-	</ul>-->
+	</ul>
+	-->
 
 	<div class="card">
 		<div style="padding:16px;">
@@ -49,26 +51,6 @@
 
 	<div class="card">
 		<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
-	</div>
-
-	<div class="card" ng-show="newOrderToggleVar">
-	    <div style="padding:16px;">
-			<form role="form" ng-submit="createOrder()">
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Asset Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Asset Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-				</div>
-				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-			</form>
-		</div>
 	</div>
 
     <div ng-repeat="order in orders">

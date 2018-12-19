@@ -302,7 +302,6 @@ angular.module( 'conexus.marketPair', [
     }
 
     $scope.newOrder = {};
-    $scope.newOrderToggleVar = false;
     $scope.orders = orders;
     $scope.orders.forEach(function(part, index) {
         if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
@@ -399,10 +398,11 @@ angular.module( 'conexus.marketPair', [
     $scope.createContent = function(content) {
         if($scope.currentUser){
             //TODO
-            $scope.newContent.post = content.id;
+            $scope.newContent.contentModel = content.id;
 
             $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.marketPair = 'CRE8/USD'; // || USD/CRE8
+            $scope.newContent.marketPair = 'CRE8/USD';
+
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
             });
@@ -439,15 +439,6 @@ angular.module( 'conexus.marketPair', [
         $scope.inverted = !$scope.inverted;
         //$scope.$apply();
 
-    };
-
-    $scope.newOrderToggle = function () {
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
-    };
-
-    $scope.questionToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
     };
 
     $scope.reply = function(item){

@@ -44,15 +44,24 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
+
 			title: req.param('title'),
 			tags: req.param('tags'),
 			content: req.param('content'),
+			location: req.param('location'),
+
 			amountSet: req.param('amountSet'),
 			identiferSet: req.param('identiferSet'),
 			user: req.param('user'),
+
+			//TODO INFO, FORSALE.. 
+
+			associatedModels: req.param('associatedModels'),
+
+			//PATCH
+			reactions: {plus:0,minus:0},
+
 		};
-		//PATCH
-		model.reaction = {plus:0,minus:0};
 		Item.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
@@ -65,10 +74,10 @@ module.exports = {
 
 	update: function (req, res) {},
 
+	//NO DELETE.. ONLY UPDATE.. --> OVERWRITE
 	destroy: function (req, res) {
 		var id = req.param('id');
 		if (!id) {return res.badRequest('No id provided.');}
-		// Otherwise, find and destroy the model in question
 		Item.findOne(id).exec(function(err, model) {
 			if (err) {return res.serverError(err);}
 			if (!model) {return res.notFound();}

@@ -30,7 +30,6 @@ angular.module( 'conexus.market', [
     $scope.newMarket = {};
     $scope.newOrder = {};
     $scope.newOrder.identiferSet = $scope.stateParams.id;
-    $scope.newOrderToggleVar = false;
     $scope.orders = orders;
     $scope.orders.forEach(function(part, index) {
         //if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
@@ -131,30 +130,10 @@ angular.module( 'conexus.market', [
         }
     }
     
+    //TODO: FILTER NAV
     $scope.addMarket = function(type, market){
-        if (type="baseMarket"){
-            $scope.baseMarkets.push($scope.newMarket.baseMarket)
-        }
-        if (type="market"){
-            $scope.markets.push($scope.newMarket.market)
-        }
-    };
-
-    $scope.createOrder = function() {
-        $scope.newOrder.identiferSet = $scope.stateParams.id;
-        $scope.newOrder.user = $scope.currentUser.id;
-
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-        OrderModel.create($scope.newOrder).then(function(model) {
-            $scope.orders.push($scope.newOrder);
-            $scope.newOrder = {};
-        });
-    };
-
-    $scope.newOrderToggle = function () {
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
+        if (type="baseMarket"){$scope.baseMarkets.push($scope.newMarket.baseMarket)}
+        if (type="market"){$scope.markets.push($scope.newMarket.market)}
     };
 
     $scope.reply = function(item){

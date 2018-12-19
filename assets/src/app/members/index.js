@@ -24,6 +24,8 @@ angular.module( 'conexus.members', [
     $scope.members = members;
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;
+    
+    //DEPRECIATE 'TOTAL WORK'
     $scope.sortText = {'totalWork DESC':'Total Reputation','createdAt DESC':'Date Joined'}
 
     $scope.keyPress = function(searchValue){
@@ -51,16 +53,5 @@ angular.module( 'conexus.members', [
             $scope.members = members;
         });
     };
-
-    $sailsSocket.subscribe('project', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.projects.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.projects, {id: envelope.id});
-                break;
-        }
-    });
 
 }]);

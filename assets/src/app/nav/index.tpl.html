@@ -22,11 +22,11 @@
                     <h5>Title</h5>
                     <input type="text" placeholder="Title" ng-model="newContent.title" class="form-control">
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newContent.tags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newContent.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newContent.associatedModels">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newContent.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <ul class="nav nav-pills nav-justified contentTyle">
@@ -57,7 +57,7 @@
             </div>
             <div style="padding:16px;">
             
-                <tags-input placeholder="Tags" ng-model="newContent.tags">
+                <tags-input min-length="1" placeholder="Tags" ng-model="newContent.tags">
                     <auto-complete source="loadTags($query)"></auto-complete>
                 </tags-input>
 
@@ -85,11 +85,11 @@
                     <h5>Title</h5>
                     <input type="text" placeholder="Title" ng-model="newItem.title" class="form-control">
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newItem.tags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newItem.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newItem.associatedModels">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <h5>Location</h5>
@@ -209,7 +209,7 @@
                                 <span ng-repeat="market in identiferSet">{{market.text}} </span> 
                                 <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
-                            <tags-input placeholder="Asset Identifer Set α" ng-model="identiferSet">
+                            <tags-input min-length="1" placeholder="Asset Identifer Set α" ng-model="identiferSet">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
                         </div>
@@ -235,7 +235,7 @@
                                 <span ng-repeat="market in identiferSet1">{{market.text}} </span> 
                                 <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
-                            <tags-input placeholder="Asset Identifer Set β" ng-model="identiferSet1">
+                            <tags-input min-length="1" placeholder="Asset Identifer Set β" ng-model="identiferSet1">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
                         </div>
@@ -326,11 +326,11 @@
                     <h5>Title</h5>
                     <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newProject.tags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newProject.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newProject.associatedModels">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newProject.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <h5>Location</h5>
@@ -377,9 +377,9 @@
                 <a href="task/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
             </div>
             <div class="card-footer">
-                <form role="form" ng-submit="createPost(newPost)">
-                    <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+                <form role="form" ng-submit="createContent()">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
 
@@ -500,11 +500,11 @@
                     <h5>Title</h5>
                     <input type="text" placeholder="Title" ng-model="newTask.title" class="form-control">
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newTask.tags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newTask.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newTask.associatedModels">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newTask.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <text-angular ng-model="newTask.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
@@ -538,11 +538,11 @@
                     <h5>Start Time</h5>
                     <input type="datetime-local" step="1" placeholder="Start Time" ng-model="newTime.startTime" class="form-control">
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newTime.tags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations (Task) <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newTime.associatedModels">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
@@ -583,11 +583,11 @@
                 <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>
 
                 <p>Input</p>
-                <tags-input ng-model="inputVector" placeholder="Input"></tags-input>
+                <tags-input min-length="1" ng-model="inputVector" placeholder="Input"></tags-input>
                 <p>Desired Output</p>
                 <!--TODO: COMPOUND AND PLURALISTIC-->
                 <!--TODO: PERCENTAGE | FIXED AMOUNT -->
-                <tags-input ng-model="outputVector" placeholder="Output"></tags-input>
+                <tags-input min-length="1" ng-model="outputVector" placeholder="Output"></tags-input>
                 <button ng-click="marketTraverse();" type="submit" style="width:100%" class="btn btn-default log-btn">+ Lookup</button>
 
                 <table ng-show="outputMatix.length > 0" class="table table-striped table-hover">
@@ -628,17 +628,17 @@
                 <form role="form" ng-submit="createTransaction()">
 
                     <h5>Address From</h5>
-                    <tags-input max-tags="1" placeholder="From" ng-model="newTransaction.from">
+                    <tags-input min-length="1" max-tags="1" placeholder="From" ng-model="newTransaction.from">
                         <auto-complete source="loadAddress($query)"></auto-complete>
                     </tags-input>
 
                     <h5>Address To</h5>
-                    <tags-input max-tags="1" placeholder="To" ng-model="newTransaction.to">
+                    <tags-input min-length="1" max-tags="1" placeholder="To" ng-model="newTransaction.to">
                         <auto-complete source="loadAddress($query)"></auto-complete>
                     </tags-input>
 
                     <h5>Asset</h5>
-                    <tags-input placeholder="Asset Identifier" ng-model="newTransaction.identifierSet">
+                    <tags-input min-length="1" placeholder="Asset Identifier" ng-model="newTransaction.identifierSet">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
 
@@ -651,7 +651,7 @@
                     </div>
 
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newTransaction.tags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newTransaction.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
 

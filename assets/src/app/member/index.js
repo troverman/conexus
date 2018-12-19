@@ -347,31 +347,28 @@ angular.module( 'conexus.member', [
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,300);
 
-    $scope.createContent = function(post){
-        $scope.newContent.post = post.id;
+    //TODO ASSOCIATION
+    $scope.createContent = function(content){
+
+        $scope.newContent.contentModel = content.id;
+
         $scope.newContent.user = $scope.currentUser.id;
         $scope.newContent.profile = $scope.member.id;
-        ContentModel.create($scope.newPost).then(function(model) {
-            $scope.newPost = {};
+        ContentModel.create($scope.newContent).then(function(model) {
+            $scope.newContent = {};
         });
     };
 
     $scope.createReaction = function(item, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associations = [{type:item.model, id:item.id}];
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].reactions[type]++;
-
             ReactionModel.create($scope.newReaction);
-
         }
-
         else{$mdSidenav('login').toggle()}
             
     };
@@ -388,7 +385,7 @@ angular.module( 'conexus.member', [
         $rootScope.globalTokens = $scope.tokens;
     };
 
-    $sailsSocket.subscribe('post', function (envelope) {
+    $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);
@@ -637,7 +634,7 @@ angular.module( 'conexus.member', [
 
     $scope.createContent = function(){
         if ($scope.currentUser){
-            if(content){$scope.newContent.post = content.id;}
+            if(content){$scope.newContent.contentModel = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.project = $scope.project.id;
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
@@ -652,11 +649,11 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: MODELS | ONLY POST/CONTENT
+    //TODO: MODELS | ONLY CONTENT
     $scope.createReaction = function(content, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
-            $scope.newReaction.post = content.id;
+            $scope.newReaction.contentModel = content.id;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
@@ -1073,7 +1070,7 @@ angular.module( 'conexus.member', [
             $scope.newReaction.user = $scope.currentUser.id;
             var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
-                $scope.newReaction.associations = [{type:'TRANSACTION', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
                 $scope.transactions[transactionIndex].reactions[type]++;
                 ReactionModel.create($scope.newReaction);
             }
@@ -1368,7 +1365,7 @@ angular.module( 'conexus.member', [
             $scope.newReaction.user = $scope.currentUser.id;
             var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
-                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
                 $scope.time[timeIndex].reactions[type]++;
                 ReactionModel.create($scope.newReaction);
             }

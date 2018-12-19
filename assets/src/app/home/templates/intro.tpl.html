@@ -215,12 +215,12 @@
                             <!--TODO: POST PARENT TYPES-->
                             <a ng-click="$event.stopPropagation()" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.post" style="display:inline;font-weight:600" href="content/{{item.post}}">post {{item.post}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.contentModel" style="display:inline;font-weight:600" href="content/{{item.contentModel}}">content {{item.contentModel}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile}}">profile {{item.profile}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
+                            <a ng-click="$event.stopPropagation()" ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.work" style="display:inline;font-weight:600" href="time/{{item.work}}">work {{item.work}}</a>
                             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                             
                             <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
@@ -236,7 +236,7 @@
                     </div>
                     <!--TODO: NESTED -->
                     <div ng-show="item.showReply" class="card-footer" ng-click="$event.stopPropagation()">
-                        <form role="form" ng-submit="createPost(item)">
+                        <form role="form" ng-submit="createContent(item)">
                             <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
                             <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                         </form>

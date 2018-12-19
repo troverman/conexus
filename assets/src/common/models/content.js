@@ -9,21 +9,27 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
 
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
-        if (type=='market'){query = {params:{market:filter,limit:limit,skip:skip,sort:sort}};}
+
+        //TODO COMPOUND
+
+        if (type=='contentModel'){query = {params:{contentModel:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='market'){query = {params:{market:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='order'){query = {params:{order:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='post'){query = {params:{post:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='profile'){query = {params:{profile:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}
         //MULTIPLE
         else if (type=='search'){query = {params:{search:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='task'){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
+        else if (type=='time'){query = {params:{time:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='transaction'){query = {params:{transaction:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='work'){query = {params:{work:filter, limit:limit,skip:skip,sort:sort}};}
+
+
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('content');
         return $sailsSocket.get(url, query).then(success, error);
+        
     };
 
     this.create = function(newModel) {

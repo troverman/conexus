@@ -160,7 +160,7 @@ angular.module( 'conexus.time', [
     
     $scope.createContent = function(content) {
         if ($scope.currentUser){
-            if (content){$scope.newContent.post = content.id}
+            if (content){$scope.newContent.contentModel = content.id}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.time = $scope.time.id;
             ContentModel.create($scope.newContent).then(function(model) {
@@ -182,11 +182,11 @@ angular.module( 'conexus.time', [
 
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (index != -1){
-                $scope.newReaction.associations = [{type:'CONTENT', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
                 $scope.contentList[index].reactions[type]++;
             }
             else{
-                $scope.newReaction.associations = [{type:'TIME', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
                 $scope.time.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
@@ -221,7 +221,7 @@ angular.module( 'conexus.time', [
     };
 
     //TODO: WEBSOCKETS | WEB3
-    $sailsSocket.subscribe('post', function (envelope) {
+    $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);

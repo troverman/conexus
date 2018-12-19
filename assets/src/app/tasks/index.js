@@ -25,7 +25,7 @@ angular.module( 'conexus.tasks', [
 
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
-	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','workCount DESC': 'Total Work'}
+	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','timeCount DESC': 'Total Time'}
 	$scope.selectedTag = '';
     $scope.tasks = tasks;
 
@@ -54,7 +54,7 @@ angular.module( 'conexus.tasks', [
             //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
             var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
             if (taskIndex != -1){
-                $scope.newReaction.associations = [{type:'TASK', id:item.id}];
+                $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
                 $scope.tasks[taskIndex].reactions[type]++;
                 ReactionModel.create($scope.newReaction);
             }        

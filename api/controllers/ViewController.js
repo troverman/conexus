@@ -1,5 +1,5 @@
 /**
- * ViewController
+ * ViewController | TIME? --> TYPE AND DATA SOURCE. 
  */
 
 module.exports = {
@@ -39,9 +39,7 @@ module.exports = {
 		//AND CREATE VERIFICATION..
 		var model = {verificationScore: 100};
 		View.update({id: id}, model).exec(function afterwards(err, updated){
-		  if (err) {
-		    return;
-		  }
+		  if (err) {return;}
 		});
 	},
 	

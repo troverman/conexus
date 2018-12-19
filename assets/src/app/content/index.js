@@ -15,11 +15,11 @@ angular.module( 'conexus.content', [
                 return ContentModel.getOne($stateParams.id);
             }],
             contentList:['content', 'ContentModel', function(content, ContentModel) {
-                return ContentModel.getSome('post', content.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC');
             }],
             //MAPPING LOOKUPS
             reactions: ['content', 'ReactionModel', function(content, ReactionModel){
-                //return ReactionModel.getSome('post', content.id, 100, 0, 'createdAt DESC');
+                //return ReactionModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC');
                 return null;
             }],
         }
@@ -100,9 +100,11 @@ angular.module( 'conexus.content', [
 
     //TODO: FINALIZE.. WORKS ON FRONTEND
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED
+    //TODO??? ASSOCIATED TYPE.. CHILD?? DETAILS.. 
+
     function populateChildren(contentList, depth, limit){
         contentList.forEach(function(content) {
-            ContentModel.getSome('post', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
+            ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
                 if (contentList.length > 0){
                     depth++ 
                     content.children = contentList;
@@ -150,7 +152,7 @@ angular.module( 'conexus.content', [
     //TODO
     $scope.createContent = function(content) {
         if($scope.currentUser){
-            $scope.newContent.post = content.id;
+            $scope.newContent.contentModel = content.id;
             $scope.newContent.user = $scope.currentUser.id;
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
@@ -165,7 +167,7 @@ angular.module( 'conexus.content', [
         if($scope.currentUser){
 
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associations = [{type:'CONTENT', id:content.id}];
+            $scope.newReaction.associatedModels = [{type:'CONTENT', id:content.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
 
@@ -208,7 +210,7 @@ angular.module( 'conexus.content', [
         $rootScope.globalTokens = $scope.tokens;
     };
 
-    $sailsSocket.subscribe('post', function (envelope) {
+    $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);

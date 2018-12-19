@@ -73,11 +73,11 @@ module.exports.routes = {
   /**
    * Content routes
    */
-  'get /api/content': 'PostController.getSome',
-  'get /api/content/:id': 'PostController.getOne',
-  'post /api/content': 'PostController.create',
-  'post /api/content/:id': 'PostController.update',
-  'delete /api/content/:id': 'PostController.destroy',
+  'get /api/content': 'ContentController.getSome',
+  'get /api/content/:id': 'ContentController.getOne',
+  'post /api/content': 'ContentController.create',
+  'post /api/content/:id': 'ContentController.update',
+  'delete /api/content/:id': 'ContentController.destroy',
 
   /**
    * Follower routes | MB RELATIONSHIP
@@ -148,9 +148,9 @@ module.exports.routes = {
   /**
    * Time routes
    */
-  'get /api/time': 'WorkController.getSome',
-  'get /api/time/:id': 'WorkController.getOne',
-  'post /api/time': 'WorkController.create',
+  'get /api/time': 'TimeController.getSome',
+  'get /api/time/:id': 'TimeController.getOne',
+  'post /api/time': 'TimeController.create',
 
   /**
    * Transaction routes

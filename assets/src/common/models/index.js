@@ -1,6 +1,5 @@
 angular.module('models', [
 	'models.content',
-	'models.entry',
 	'models.follower',
 	'models.item',
 	'models.member',
@@ -8,7 +7,6 @@ angular.module('models', [
 	'models.project',
 	'models.reaction',
 	'models.search',
-	'models.stream',
 	'models.task',
 	'models.time',
 	'models.transaction',

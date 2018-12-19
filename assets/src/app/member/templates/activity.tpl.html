@@ -19,17 +19,18 @@
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
 
-                    <!--TODO: POST PARENT TYPES-->
+                    <!--TODO: PARENT TYPES-->
+                    <!--DEPRECIATE-->
                     <div ng-click="$event.stopPropagation()" style="display:inline;" ng-show="item.profile != item.user.id && item.profile != member.id">
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                         <a ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
                         <a ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
-                        <a ng-show="item.post" style="display:inline;font-weight:600" href="content/{{item.post}}">post {{item.post}}</a>
+                        <a ng-show="item.contentModel" style="display:inline;font-weight:600" href="content/{{item.contentModel}}">content {{item.contentModel}}</a>
                         <a ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile.username}}"><span ng-show="item.profile.username">{{item.profile.username}}</span><span ng-show="!item.profile.username">profile {{item.profile}}</span></a>
                         <a ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
                         <a ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
                         <a ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
-                        <a ng-show="item.work" style="display:inline;font-weight:600" href="time/{{item.work}}">work {{item.work}}</a>
+                        <a ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
                     </div>
 
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>

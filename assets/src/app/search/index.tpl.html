@@ -76,11 +76,11 @@
 			                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 			                    <a ng-click="$event.stopPropagation();" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
 			                    <a ng-click="$event.stopPropagation();" ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
-			                    <a ng-click="$event.stopPropagation();" ng-show="item.post" style="display:inline;font-weight:600" href="content/{{item.post}}">post {{item.post}}</a>
+			                    <a ng-click="$event.stopPropagation();" ng-show="item.contentModel" style="display:inline;font-weight:600" href="content/{{item.contentModel}}">content {{item.contentModel}}</a>
 			                    <a ng-click="$event.stopPropagation();" ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile}}">profile {{item.profile}}</a>
 			                    <a ng-click="$event.stopPropagation();" ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
 			                    <a ng-click="$event.stopPropagation();" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
-			                    <a ng-click="$event.stopPropagation();" ng-show="item.work" style="display:inline;font-weight:600" href="time/{{item.work}}">work {{item.work}}</a>
+			                    <a ng-click="$event.stopPropagation();" ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
 			                </div>
 			                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 							
@@ -96,9 +96,9 @@
 			            <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
 			        </div>
 			        <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
-			            <form role="form" ng-submit="createPost(item)">
-							<text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-			                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
+			            <form role="form" ng-submit="createContent(item)">
+							<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+			                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 			            </form>
 			        </div>
 		    	</div>
@@ -159,7 +159,7 @@
 					<div class="card-footer">
 						<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
 						<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-						<a ng-click="$event.stopPropagation();reply(post)" href="task/{{item.id}}"><i class="fa fa-comment-o"></i> comment </a>
+						<a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 	        			<a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
 					<div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
@@ -171,7 +171,7 @@
 				</div>
 
 				<!--TODO-->
-				<div ng-if="item.model=='WORK'" class="card"></div>
+				<div ng-if="item.model=='TIME'" class="card"></div>
 
 			</div>
 

@@ -213,7 +213,7 @@ angular.module( 'conexus.nav', [
         //type.. -->? 
         //item is task, time , .. content, validation 
 
-        ValidationModel.getSome('work', item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
+        ValidationModel.getSome('time', item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
 
             $scope.validations = validationModels;
             var sumObj = {};
@@ -320,7 +320,7 @@ angular.module( 'conexus.nav', [
             $scope.newValidation.validation = {};
 
             //PATCH!
-            $scope.newValidation.associatedModels = [{type:'WORK',address:item.id}]
+            $scope.newValidation.associatedModels = [{type:'TIME',address:item.id}]
             //$scope.newValidation.associatedModels) = [{type:'TASK',address:item.id}]
 
             $scope.tags = [];
@@ -353,7 +353,7 @@ angular.module( 'conexus.nav', [
     //$rootScope.createProjectMember = function(){};
     //$rootScope.createView = function(){};
 
-    //WORK MORE ON RENDER
+    //MORE ON RENDER
     $scope.createReaction = function(){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -520,6 +520,7 @@ angular.module( 'conexus.nav', [
         if ($scope.currentUser){
 
             $scope.newTask.user = $scope.currentUser.id;
+            
             if ($scope.newTask.tags){
                 $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
                     return obj.text;
@@ -555,9 +556,12 @@ angular.module( 'conexus.nav', [
 
             $scope.newTime.user = $scope.currentUser.id;
             $scope.newTime.createdAt = $scope.newTime.startTime;
-            $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
-                return obj.text;
-            }).join(",");
+
+            if ($scope.newTime.tags){
+                $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
+                    return obj.text;
+                }).join(",");
+            }
 
             //PATCH!!!
             if ($scope.newTime.associatedModels){
@@ -588,9 +592,11 @@ angular.module( 'conexus.nav', [
 
             $scope.newTransaction.user = $scope.currentUser.id
 
-            $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
-                return obj.text
-            }).join(",");
+            if ($scope.newTransaction.tags){
+                $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
+                    return obj.text
+                }).join(",");
+            }
 
             console.log($scope.newTransaction);
 
