@@ -29,6 +29,8 @@ angular.module( 'conexus.tasks', [
 	$scope.selectedTag = '';
     $scope.tasks = tasks;
 
+    $scope.searchQuery = [];
+
     $scope.tasks.map(function(obj){
         obj.tags = obj.tags.split(',');
         return obj;
@@ -79,6 +81,11 @@ angular.module( 'conexus.tasks', [
     };
 
      $scope.filterContent = function(filter) {
+
+        //TODO: COMPLEX QUERY
+
+        $scope.searchQuery.push({text:filter})
+
         $rootScope.stateIsLoading = true;
         TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
             $rootScope.stateIsLoading = false;
@@ -168,7 +175,14 @@ angular.module( 'conexus.tasks', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        TaskModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(tasks){
+
+        //TODO: COMPLEX QUERY.. 
+        var search = $scope.searchQuery.map(function(obj){
+            return obj.text;
+        })[0];
+
+
+        TaskModel.getSome('search', search, 20, 0, 'createdAt DESC').then(function(tasks){
             console.log(tasks)
             $rootScope.stateIsLoading = false;
             $scope.tasks = tasks.map(function(obj){

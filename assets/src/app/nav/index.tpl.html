@@ -610,7 +610,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="transaction" md-is-locked-open="false" style="position:fixed;background-color:white;width:50%;max-width:100%">
-        <div ng-if="newTransaction"  class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newTransaction" class="md-list-item-text" layout="column" style="height:100%;">
             
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -629,17 +629,17 @@
 
                     <h5>Address From</h5>
                     <tags-input min-length="1" max-tags="1" placeholder="From" ng-model="newTransaction.from">
-                        <auto-complete source="loadAddress($query)"></auto-complete>
+                        <auto-complete min-length="2" source="loadAddress($query)"></auto-complete>
                     </tags-input>
 
                     <h5>Address To</h5>
                     <tags-input min-length="1" max-tags="1" placeholder="To" ng-model="newTransaction.to">
-                        <auto-complete source="loadAddress($query)"></auto-complete>
+                        <auto-complete min-length="2" source="loadAddress($query)"></auto-complete>
                     </tags-input>
 
                     <h5>Asset</h5>
                     <tags-input min-length="1" placeholder="Asset Identifier" ng-model="newTransaction.identifierSet">
-                        <auto-complete source="loadAsset($query)"></auto-complete>
+                        <auto-complete min-length="1" source="loadAsset($query)"></auto-complete>
                     </tags-input>
 
                     <div class="">
@@ -652,7 +652,7 @@
 
                     <h5>Tags</h5>
                     <tags-input min-length="1" placeholder="Tags" ng-model="newTransaction.tags">
-                        <auto-complete source="loadTags($query)"></auto-complete>
+                        <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                     </tags-input>
 
                     <h5>Description</h5>
@@ -765,7 +765,7 @@
                     <p>Amount: {{confirm.amount}}</p>
                     <p>User: {{confirm.user}}</p>
                     <p>Tags: {{confirm.tags}}</p>
-                    <p>Type: {{confirm.tags}}</p>
+                    <p>Type: {{confirm.type}}</p>
                     <p>Associations: {{confirm.associatedModels}}</p>
                     <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
@@ -783,7 +783,7 @@
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="information" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="information" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
                 <div class="spacing-25"></div>

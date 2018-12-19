@@ -58,15 +58,11 @@ angular.module( 'conexus.transaction', [
     };
 
     $scope.reply = function(item){
-        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.contentList[index].showReply = !$scope.contentList[index].showReply
+        var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+        if (contentIndex!=-1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply}
+        else{$scope.transaction.showReply = !$scope.transaction.showReply}
     };
     
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
-    };
-
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':

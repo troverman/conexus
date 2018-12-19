@@ -28,7 +28,7 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction = {};
         $scope.newValidation = {};
 
-        $scope.newTransaction.from = [{text:$scope.currentUser.username, address:$scope.currentUser.id}];
+        $scope.newTransaction.from = [{text:$scope.currentUser.username, id:$scope.currentUser.id}];
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
 
         $scope.notificationCount = 0;
@@ -45,6 +45,7 @@ angular.module( 'conexus.nav', [
     //TODO: FACTOR LOADING HERE
     $rootScope.$on("$stateChangeStart", function() {
 
+        //DEPRECIATE
         $rootScope.to = null;
         $rootScope.associatedModel = null;
 
@@ -69,7 +70,9 @@ angular.module( 'conexus.nav', [
     
     $rootScope.$on("$stateChangeSuccess", function() {window.scrollTo(0, 0)});
     
-    $scope.$watch('$root.to', function() {$scope.newTransaction.to = $rootScope.to;});
+    $scope.$watch('$root.to', function() {
+        $scope.newTransaction.to = [{text:$rootScope.to, id:$rootScope.to}];
+    });
 
     //TODO: BETTER
     $scope.$watch('$root.globalTokens', function() {
@@ -112,6 +115,7 @@ angular.module( 'conexus.nav', [
             {text:'BCH'},
             {text:'ETH'},
             {text:'LTC'},
+            {text:'USD'}, // STRIPE??--> TALK ABOUT HIS
             {text:'STEEM'},
             {text:'NOVO'},
             {text:'TIME'},
@@ -129,13 +133,14 @@ angular.module( 'conexus.nav', [
     $scope.loadAssociations = function(query){
         console.log(query);
         var deferred = $q.defer();
-        SearchModel.search(query).then(function(searchModels){
+        //SearchModel.search(query).then(function(searchModels){
+        UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(searchModels){
             console.log(searchModels);
             searchModels.map(function(obj){
                 obj.title = obj.text;
                 return obj.text;
             });
-            deferred.resolve(userModels);
+            deferred.resolve(searchModels);
         });
         return deferred.promise;
     };
@@ -144,13 +149,14 @@ angular.module( 'conexus.nav', [
    $scope.loadTags = function(query){
         console.log(query);
         var deferred = $q.defer();
-        SearchModel.search(query).then(function(searchModels){
+        //SearchModel.search(query).then(function(searchModels){
+        UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(searchModels){
             console.log(searchModels);
             searchModels.map(function(obj){
                 obj.title = obj.text;
                 return obj.text;
             });
-            deferred.resolve(userModels);
+            deferred.resolve(searchModels);
         });
         return deferred.promise;
     };
@@ -158,14 +164,22 @@ angular.module( 'conexus.nav', [
     //OVERKILL
     $rootScope.contentToggle = function(){
         if($scope.currentUser){
+
             //HM!
             $scope.newContent = {};
             $scope.newContent.associatedModels = $rootScope.associatedModels;
+            console.log($scope.newContent);
+
+            if ($scope.newContent.associatedModels){$scope.newContent.associatedModels.push({text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id});}
+            else{$scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id}];}
+
             $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
                 obj.text = obj.type+' | '+obj.address;
                 return obj;
             });
+
             console.log($scope.newContent.associatedModels);
+
             $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -181,7 +195,11 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.informationToggle = function(item){$mdSidenav('information').toggle()};
+    $scope.isInformation = false;
+    $rootScope.informationToggle = function(item){
+        $mdSidenav('information').toggle();
+        $scope.isInformation = true;
+    };
 
     $rootScope.orderToggle = function(){
         if($scope.currentUser){

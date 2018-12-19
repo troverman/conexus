@@ -612,7 +612,7 @@ angular.module( 'conexus.project', [
     $scope.project = project;
     $scope.newTransaction.to = $scope.project.id;
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
-
+    $scope.searchQuery = [];
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
@@ -795,9 +795,12 @@ angular.module( 'conexus.project', [
     $scope.selectOverview();
 
     $scope.selectTag = function(tag){
-        $scope.searchQuery = tag;
+        //$scope.searchQuery = tag;
         //COMPOUND QUERY
         //FROM, TO, BOTH, Tag, Identifer
+
+        $scope.searchQuery.push({text:tag, type:'TAG'})
+
         var query = {member:$scope.member.id, tag:tag, from:$scope.member.id, to:$scope.member.id, identifer:$scope.identifer};
         TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
             $scope.transactions = transactions;

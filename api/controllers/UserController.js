@@ -52,8 +52,14 @@ module.exports = {
 
 	},
 
+	//KINDA HACKY
 	getByUsername: function(req, res) {
-		User.find({username: req.param('path')})
+		User.find()
+		.where({
+		  or: [
+		    {username: req.param('path')},
+		    {id: req.param('path')}
+		]})
 		.spread(function(model) {
 			User.subscribe(req, model);
 			res.json(model);

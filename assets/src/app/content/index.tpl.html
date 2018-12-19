@@ -29,19 +29,29 @@
 
 					<h3 ng-show="content.title">{{content.title}}</h3>
 
+					<h4>Associations</h4>
+
+					<!--
+					<span ng-repeat="association in content.associatedModels">
+						<a href="{{association.address}}">{{association.address}}</a>
+					</span>
+					-->
+
 					<!--DEPRECIATE-->
-					<h3>
+					<h4>
 						<a href="market/{{content.market}}">{{content.market}}</a>
 						<a href="order/{{content.order}}">{{content.order}}</a>
 						<a href="content/{{content.contentModel}}">{{content.contentModel}}</a>
 						<a href="project/{{content.project.urlTitle}}">{{content.project.title}}</a>
-						<a href="member/{{content.profile}}">{{content.profile.username}}</a>
-						<a href="task/{{content.task}}">{{content.task.title}}</a>
-						<a href="task/{{content.transaction}}">{{content.transaction}}</a>
-						<a href="time/{{content.time.id}}">{{content.time.amount}} {{content.time.content}}</a>
-					</h3>
+						<a href="member/{{content.profile.username}}">{{content.profile.username}}</a>
+						<a href="task/{{content.task.id}}">{{content.task.title}}</a>
+						<a href="transaction/{{content.transaction}}">{{content.transaction}}</a>
+						<a href="time/{{content.time.id}}">{{content.time.amount}}</a>
+					</h4>
 
 		    		<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
+
+		    		<br>
 
 		    		<div>
 						<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">

@@ -12,7 +12,7 @@ angular.module( 'conexus.member', [
 			}
 		},
 		resolve: {
-            //TODO: REFACTOR
+            //TODO: REFACTOR // TODO ALLOW FOR ADDRESS LOOKUP
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 return UserModel.getByUsername($stateParams.path);
             }],
@@ -793,6 +793,7 @@ angular.module( 'conexus.member', [
     $scope.newTransaction = {};
     titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
+    $scope.searchQuery = [];
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
@@ -1049,10 +1050,16 @@ angular.module( 'conexus.member', [
         }
     };
 
+    //TODO" COMPLEX QUERY
     $scope.selectTag = function(tag){
-        $scope.searchQuery = tag;
+        //$scope.searchQuery = tag;
+
+
         //COMPOUND QUERY
         //FROM, TO, BOTH, Tag, Identifer
+        $scope.searchQuery.push({text:tag, type:'TAG'})
+
+
         var query = {member:$scope.member.id, tag:tag, from:$scope.member.id, to:$scope.member.id, identifer:$scope.identifer};
         TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
             $scope.transactions = transactions;

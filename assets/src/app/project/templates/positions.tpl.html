@@ -32,12 +32,12 @@
 
 	<div class="card">
 		<div style="padding:16px;">
-			<h1>{{project.title}} | Value Map</h1>
-			<span><span ng-repeat="dimension in baseMarkets"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
-			<br><br>
-			<span><span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span> <a href="#">+ Dimension</a></span>
+			<div style="float:right"><a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in baseMarkets">{{dimension}}, </span><i class="fa fa-question-circle"></i></a></div>
+			<h3>Value Map</h3>
 			<div class="spacing-10"></div>
 			<highchart config="chart"></highchart>
+			<div class="spacing-10"></div>
+			<div style=""><a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in markets">{{dimension}}, </span><i class="fa fa-question-circle"></i></a></div>
 		</div>
 	</div>
 </div>
@@ -49,48 +49,21 @@
 		</div>
 	</div>
 
-	<div class="card" ng-show="newOrderToggleVar">
-	    <div style="padding:16px;">
-			<form role="form" ng-submit="createOrder()">
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Asset Identifer Set 1" type="text" ng-model="newOrder.identiferSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 1" type="text" ng-model="newOrder.amountSet" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Asset Identifer Set 2" type="text" ng-model="newOrder.identiferSet1" class="form-control" id="taskTitle">
-				</div>
-				<div class="form-group col-sm-6">
-					<input placeholder="Order Amount Set 2" type="text" ng-model="newOrder.amountSet1" class="form-control" id="taskTitle">
-				</div>
-				<button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
-			</form>
-		</div>
-	</div>
-
     <div ng-repeat="order in orders">
         <div class="card">
             <div style="padding:16px">
-                <!--<div>
-                    <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}">
-                    <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{order.user.username}}">{{order.user.username}}</a>
-                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-                </div>--> 
-                <!--<div style="margin-left:42px">-->
-                	<span ng-repeat="item in order.amountSet">
-						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-					</span>
-					<span> | </span>
-					<span ng-repeat="item in order.amountSet1">
-						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-					</span>
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-                <!--</div>-->
+            	<span ng-repeat="item in order.amountSet">
+					{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+				</span>
+				<span> | </span>
+				<span ng-repeat="item in order.amountSet1">
+					{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+				</span>
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
             </div>
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.plusCount}} like </a> 
-                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.minusCount}} dislike </a>
+                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
                 <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
                 <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
             </div>

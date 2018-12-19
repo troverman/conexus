@@ -665,83 +665,170 @@ module.exports = {
 			//LET'S START! 
 
 			var promises = [];
+			promises.push(Content.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Item.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Order.find().limit(1000).skip(0).sort('createdAt DESC'))
 			promises.push(Reaction.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Project.find().limit(100000).skip(0).sort('createdAt DESC'))
-			//promises.push(ProjectMember.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Task.find().limit(100000).skip(0).sort('createdAt DESC').populate('project'))
+			promises.push(Time.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'))
 			promises.push(Transaction.find().limit(100000).skip(0).sort('createdAt DESC'))
-
-			//CONTENT
-			promises.push(Post.find().limit(100000).skip(0).sort('createdAt DESC'))
-
-			promises.push(View.find().limit(100000).skip(0).sort('createdAt DESC'))
 			promises.push(Validation.find().limit(100000).skip(0).sort('createdAt DESC'))
 
-			//TIME
-			promises.push(Work.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'))
+			//PROJECTMEMBER, VIEW
 
 			Q.all(promises)
 			.then(function(data){
 
+				console.log('LOAD!');
+
 				var type = [
+					'CONTENT',
 					'ITEM',
 					'ORDER',
-					'REACTION',
 					'PROJECT',
-					//'PROJECTMEMBER',
+					'REACTION',
 					'TASK',
+					'TIME',
 					'TRANSACTION',
-					'POST',
-					'VIEW',
 					'VALIDATION',
-					'WORK'
 				];
+
+				var tokenSet = type;
 
 				for (x in data){
 					for (y in data[x]){
 
-						//if (type[x] == 'ITEM'){}
-						if (type[x] == 'PROJECT'){
-							//data[x][y].project
-							//console.log(data[x][y]);
-						}
-						if (type[x] == 'TASK'){
-							//data[x][y].project
-							//console.log(data[x][y]);
-							//P+T+W
-						}
-						if (type[x] == 'WORK'){
-							//data[x][y].task
-							//console.log(data[x][y]);
-						}
+						//LOL BETTER
+						if (type[x] == 'CONTENT'){
 
-						//ID NFT
-						//console.log(data[x][y].id);
-
-						//TAGS
-						if (data[x][y].tags){
-
-							for (z in data[x][y].tags.split(',')){
-
-								var tag = data[x][y].tags.split(',')[z].trim().toUpperCase();
-
-								//console.log(tag);
-								//console.log(data[x][y].id+'+'+tag);
-
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('CONTENT');
+							tokenSet.push('CONTENT+'+data[x][y].id);
+							if (data[x][y].type){
+								tokenSet.push('CONTENT+'+data[x][y].type.toUpperCase());
+								tokenSet.push('CONTENT+'+data[x][y].type.toUpperCase()+'+'+data[x][y].id);
 							}
 
 						}
 
-						//if (association){
-							//recursive and not circular
+						if (type[x] == 'ITEM'){
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('ITEM');
+							tokenSet.push('ITEM+'+data[x][y].id);
+						}
+
+						if (type[x] == 'ORDER'){
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('ORDER');
+							tokenSet.push('ORDER+'+data[x][y].id);
+						}
+
+						//ASSOCIATIONS
+						//PROJET --> TASK --> TIME LINKAGE
+						//PROJECT --> PROJECT LINKAGE
+						if (type[x] == 'PROJECT'){
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('PROJECT');
+							tokenSet.push('PROJECT+'+data[x][y].id);
+						}
+
+						if (type[x] == 'REACTION'){
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('REACTION');
+							//ASSOCIATIONS --> MANIFOLD
+							tokenSet.push('REACTION+'+data[x][y].id);
+						}
+
+						if (type[x] == 'TASK'){
+							//data[x][y].project
+							//console.log(data[x][y]);
+							//Project+task+time
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('TASK');
+							tokenSet.push('TASK+'+data[x][y].id);
+						}
+
+						if (type[x] == 'TIME'){
+							//TYPE.. VIEW
+							//TYPE.. DATA APIS.. TIME.. STREAM.. ETC
+							//data[x][y].task
+							//console.log(data[x][y]);
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('TIME');
+							tokenSet.push('TIME+'+data[x][y].id);
+						}
+
+						if (type[x] == 'TRANSACTION'){
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('TRANSACTION');
+							tokenSet.push('TRANSACTION+'+data[x][y].id);
+						}
+
+						if (type[x] == 'VALIDATION'){
+							tokenSet.push(data[x][y].id);
+							tokenSet.push('VALIDATION');
+							tokenSet.push('VALIDATION+'+data[x][y].id);
+							//ASSOCIATIONS
+						}
+
+						//ID NFT
+						console.log(x, y, data[x][y].id);
+
+						//TAGS
+						//if (data[x][y].tags){
+						//	for (z in data[x][y].tags.split(',')){
+						//		var tag = data[x][y].tags.split(',')[z].trim().toUpperCase();
+								//console.log(tag);
+								//console.log(data[x][y].id+'+'+tag);
+						//	}
 						//}
+
+						//ASSOCIATIONS
+						if (data[x][y].associatedModels){
+							//if recursive and not circular
+							//console.log(data[x][y].associatedModels)
+						}
 
 					}
 				}
 
-				//console.log(data)
+				//REPUTATION MANIFOLD
+
+				for (x in tokenSet){
+					//console.log(tokenSet[x]);
+
+					//MAPPINGS
+					var tokenModel = {
+						string:tokenSet[x],
+						information:{
+							volume:100,
+							inCirculation:12123,
+						},
+						protocols:[
+							'CONTENT'
+						],
+						logic:{
+							mint:'address == member; onTime',
+							transferrable: true
+						},
+					};
+
+					console.log(tokenModel);
+
+					(function(tokenModel) {
+						Token.find({string:tokenModel.string}).then(function(aTokenModel){
+							if (aTokenModel.length == 0){
+								Token.create(tokenModel).then(function(tokenModel){
+									console.log('TOKEN!')
+								});
+							}
+						});
+					})(tokenModel);	
+				}
+				console.log(tokenSet.length);
+
+
 
 			});
 

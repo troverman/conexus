@@ -18,7 +18,7 @@ angular.module( 'conexus.discover', [
                 return UserModel.getSome(18, 0, 'createdAt DESC');
             }],
         	projects: ['ProjectModel', function(ProjectModel){
-                return ProjectModel.getSome(20, 0, 'createdAt DESC');
+                return ProjectModel.getSome('', '', 20, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');

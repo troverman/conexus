@@ -31,7 +31,7 @@ angular.module( 'conexus.home', [
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
             }],
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome(15, 0, 'createdAt DESC');
+                return ProjectModel.getSome('', '', 15, 0, 'createdAt DESC');
             }], 
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
@@ -63,7 +63,7 @@ angular.module( 'conexus.home', [
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
             }],
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome(15, 0, 'createdAt DESC');
+                return ProjectModel.getSome('', '', 15, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');

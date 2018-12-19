@@ -17,20 +17,47 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 		Project.watch(req);
-		Project.find({})
-		.limit(limit)
-		.skip(skip)
-		.sort(sort)
-		.populate('user')
-		.then(function(models) {
-			Project.subscribe(req, models);
-			res.json(models);
-		});
+
+		console.log(req.query)
+		//WEIRD BUG 
+		if(req.query.query){
+			var query = req.query.query;
+			Project.find()
+			.where({
+				or: [
+					{title: {contains: query}},
+					{urlTitle: {contains: query}},
+					{description: {contains: query}},
+				]
+			})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Project.subscribe(req, models);
+				res.json(models);
+			});	
+		}
+		else{
+			Project.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Project.subscribe(req, models);
+				res.json(models);
+			});
+		}
 	},
 
+	//KINDA HACKY
 	getByUrl: function(req, res) {
 		Project.find()
-		.where({urlTitle: req.param('path')})
+		.where({
+		  or: [
+		    {urlTitle: req.param('path')},
+		    {id: req.param('path')}
+		]})
 		.then(function(model) {
 			//for x in // multiple parents
 			Project.find({id:model[0].parent}).then(function(parentModel){

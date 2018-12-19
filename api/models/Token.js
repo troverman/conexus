@@ -14,16 +14,16 @@ module.exports = {
 
 	attributes: {
 
-		title: {type: 'string'},
+		string: {type: 'string'},
 
 		//MANIFOLD LOGIC; ALGEBRAS; etc
-		information:{type:'json'},
+		protocols:{type:'json'},
 
-		//TRANSFERRABLE?
+		//TRANSFERRABLE ETC
+		logic:{type:'json'},
 
 		//VOLUME, DESCRIPTION
-
-		protocols:{type:'json'},
+		information:{type:'json'},
 		
     },
 

@@ -125,6 +125,18 @@ module.exports = {
 							});
 						});
 					}
+					if (model.associatedModels[x].type == 'TRANSACTION'){
+						Transaction.find({id:model.associatedModels[x].id}).then(function(transactionModel){
+							if (!transactionModel[0].reactions){transactionModel[0].reactions = {};}
+							if (!transactionModel[0].reactions[model.type]){transactionModel[0].reactions[model.type] = model.amount;}
+							else if (transactionModel[0].reactions[model.type]){transactionModel[0].reactions[model.type] = transactionModel[0].reactions[model.type] + model.amount;}
+							console.log(transactionModel[0]);
+							Transaction.update({id:transactionModel[0].id},{reactions:transactionModel[0].reactions}).then(function(transactionModel){
+								console.log('UPDATE');
+								res.json(reaction);
+							});
+						});
+					}
 				}
 
 			}

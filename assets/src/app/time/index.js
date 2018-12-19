@@ -16,7 +16,7 @@ angular.module( 'conexus.time', [
                 return TimeModel.getOne($stateParams.id);
             }],
             contentList: ['ContentModel', 'time', function(ContentModel, time){
-                return ContentModel.getSome('work', time.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
             }],
             validations: ['ValidationModel', 'time', function(ValidationModel, time){
                 return ValidationModel.getSome('work', time.id, 100, 0, 'createdAt DESC');
