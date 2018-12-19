@@ -57,7 +57,7 @@ angular.module( 'conexus.home', [
                 return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome(10, 0, 'createdAt DESC');
+                return UserModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
@@ -329,7 +329,6 @@ angular.module( 'conexus.home', [
     //REORGANIZE
     UserModel.getByUsername($scope.currentUser.username).then(function(model){
         $scope.currentUser = model;
-        console.log(model)
     });
     
     $scope.map = {
@@ -442,7 +441,6 @@ angular.module( 'conexus.home', [
     //TEMP | TODO: FIX
     $scope.discover = $scope.discover.map(function(obj){
         var returnObj = {};
-        console.log(obj.model)
         if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
         if (obj.model == 'TASK'){
             returnObj = obj.tags;
@@ -505,7 +503,6 @@ angular.module( 'conexus.home', [
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
-            console.log(obj);
             var returnObj = {};
             if(obj.tags){obj.tags = obj.tags.split(',')}
             returnObj = obj.tags;

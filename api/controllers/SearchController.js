@@ -84,7 +84,12 @@ module.exports = {
 		});
 	},
 
-	searchAll: function (req, res) {
+	searchAll: function (req, res) {},
 
-	}
+	//MM
+	searchMarketsAndProjects: function (req, res) {},
+
+	//MM
+	searchTags: function (req, res) {},
+	
 };

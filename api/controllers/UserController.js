@@ -10,18 +10,46 @@ module.exports = {
 	},
 
 	getSome: function(req, res) {
-		var limit = req.query.limit;
+
+		var limit = req.query.limit || 0;
 		var skip = req.query.skip;
-		var sort = req.query.sort;
+		var sort = req.query.sort || 'createdAt DESC';
+
 		User.watch(req);
-		User.find({})
-		.limit(limit)
-		.skip(skip)
-		.sort(sort)
-		.then(function(models) {
-			User.subscribe(req, models);
-			res.json(models);
-		});
+
+		console.log(req.query);
+
+		//SEARCH
+		if (req.query.query){
+			User.find()
+			.where({
+				or: [
+					{firstName: {contains: req.query.query}},
+					{lastName: {contains: req.query.query}},
+					{username: {contains: req.query.query}},
+				]
+			})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				console.log(models)
+				User.subscribe(req, models);
+				res.json(models);
+			});
+		}
+		//FIND BY.. USERNAME
+		else{
+			User.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				User.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
 	},
 
 	getByUsername: function(req, res) {

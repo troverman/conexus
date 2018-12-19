@@ -7,9 +7,11 @@ angular.module('models.user', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.get(url).then(success, error);
     };
 
-    this.getSome = function(limit, skip, sort) {
+    this.getSome = function(type, filter, limit, skip, sort) {
         var url = utils.prepareUrl('user');
         var query = {params:{limit:limit,skip:skip,sort:sort}};
+        if (type=='search'){query = {params:{query:filter,limit:limit,skip:skip,sort:sort}};}
+        console.log(query)
         return $sailsSocket.get(url, query).then(success, error);
     };
 

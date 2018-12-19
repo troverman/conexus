@@ -92,15 +92,22 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
-			amount: req.param('amount'),
-			identifier: req.param('identifier'),
+
+			amountSet: req.param('amountSet'),
+
 			to: req.param('to'),
 			from: req.param('from'),
 			tags: req.param('tags'),
 			content: req.param('content'),
 			user: req.param('user'),
+
+			//DEPRECIATE
+			amount: req.param('amount'),
+			identifier: req.param('identifier'),
+
 			//PATCH
 			reactions:{plus:0,minus:0},
+			
 		};
 		Transaction.create(model)
 		.exec(function(err, task) {

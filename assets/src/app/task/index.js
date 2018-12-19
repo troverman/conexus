@@ -34,6 +34,12 @@ angular.module( 'conexus.task', [
 
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
 
+    //PATCH!!!
+    $rootScope.associatedModels = [{
+        address: $scope.task.id,
+        type: 'TASK',
+    }];
+
     $scope.contentList = contentList;
 
     $scope.newContent = {};
@@ -167,11 +173,14 @@ angular.module( 'conexus.task', [
     };
 
     $scope.reply = function(item){
-        var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-        var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-        if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
-        else if (timeIndex != -1){$scope.time[timeIndex].showReply = !$scope.time[timeIndex].showReply;}
-        else{$scope.task.showReply = !$scope.task.showReply;}
+        if ($scope.currentUser){
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
+            else if (timeIndex != -1){$scope.time[timeIndex].showReply = !$scope.time[timeIndex].showReply;}
+            else{$scope.task.showReply = !$scope.task.showReply;}
+        }
+        else{$mdSidenav('login').toggle();}
     };
 
     //REWORK THE FLOW

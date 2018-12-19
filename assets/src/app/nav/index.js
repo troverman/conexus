@@ -1,15 +1,11 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'ProjectModel', 'ReactionModel', 'TaskModel', 'TimeModel', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $rootScope, $sce, $scope, $state, config, ContentModel, ItemModel, ProjectModel, ReactionModel, TaskModel, TimeModel, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'ProjectModel', 'ReactionModel','SearchModel', 'TaskModel', 'TimeModel', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sce, $scope, $state, config, ContentModel, ItemModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, TransactionModel, ValidationModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
     $scope.inputVector = [];
-    $scope.newContent = {};
-    $scope.newItem = {};
-    $scope.newOrder = {};
-    $scope.newTransaction = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
     $scope.item = {};
@@ -22,8 +18,19 @@ angular.module( 'conexus.nav', [
 
     if ($scope.currentUser){
 
-        $scope.newTransaction.from = $scope.currentUser.id;
+        $scope.newContent = {};
+        $scope.newItem = {};
+        $scope.newOrder = {};
+        $scope.newProject = {};
+        $scope.newTask = {};
+        $scope.newTime = {};
+        $scope.newTransaction = {};
+        $scope.newTransaction = {};
+        $scope.newValidation = {};
+
+        $scope.newTransaction.from = [{text:$scope.currentUser.username, address:$scope.currentUser.id}];
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
+
         $scope.notificationCount = 0;
         //$scope.notifications = 0;
 
@@ -33,7 +40,6 @@ angular.module( 'conexus.nav', [
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
         });
-
     }
 
     //TODO: FACTOR LOADING HERE
@@ -41,6 +47,8 @@ angular.module( 'conexus.nav', [
 
         $rootScope.to = null;
         $rootScope.associatedModel = null;
+
+        //DEPRECIATE
         $rootScope.market = null;
         $rootScope.market1 = null;
     
@@ -52,6 +60,8 @@ angular.module( 'conexus.nav', [
         $mdSidenav('renderReputation').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
+        $mdSidenav('validation').close();
+
         //$rootScope.memberUsername = null;
         //$rootScope.projectTitle = null;
 
@@ -69,40 +79,8 @@ angular.module( 'conexus.nav', [
     });
 
     //TODO: CHANGE PARENT TO ASSOCIATED MODELS
-    //TODO: FIX
-    $scope.$watch('$root.associatedModel', function() {
-        if ($rootScope.associatedModel){
-            
-            $scope.newContent.associatedModels = $rootScope.associatedModel.address;
-            $scope.newContent.type = $rootScope.associatedModel.type;
-
-            //CHANGE
-            if ($rootScope.associatedModel.type == 'PROFILE'){
-                $scope.newContent.profile = $rootScope.associatedModel.address;
-            }
-            if ($rootScope.associatedModel.type == 'PROJECT'){
-                $scope.newContent.project = $rootScope.associatedModel.address;
-            }
-
-            //ASSOCIATION (MOTION) // SET OF VOTES []; LINKAGE SCORES | ASSOCIATION | 'DISCRITIZEATION' PROTOCOL
-
-            //CONTENT
-            //ITEM
-            //MARKET
-            //MARKETPAIR
-            //MEMBER (PROFILE), 
-            //ORDER
-            //PROJECT
-            //REACTION
-            //TASK
-            //TIME
-            //TRANSACTION
-            //VALIDATION
-            //VIEW
-
-        }
-    });
-
+    //ASSOCIATION (MOTION) // SET OF VOTES []; LINKAGE SCORES | ASSOCIATION | 'DISCRITIZEATION' PROTOCOL
+   
     //TODO: TEST
     $scope.invertMarket = function() {
         var temp = $scope.newOrder.identiferSet;
@@ -112,35 +90,82 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO! IMPORTANT
-    $scope.loadAssociations = function(query){
-
-        return [
-            {text:'troverman', id:11, type:'PROFILE'},
-            {text:'NOVO', id:112, type:'PROJECT'},
-            {text:'conexus', id:1122, type:'PROJECT'},
-        ];
-
+    $scope.loadAddress = function(query){
+        var deferred = $q.defer();
+        //TODO: PROJECT AND MEMBER .. 
+        UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(userModels){
+            console.log(userModels);
+            userModels.map(function(obj){
+                obj.text = obj.username;
+                return obj;
+            });
+            deferred.resolve(userModels);
+        });
+        return deferred.promise;
     };
 
     //TODO! IMPORTANT
-    $scope.loadTags = function(query){
-
+    $scope.loadAsset = function(query){
         return [
-            {text:'create'},
-            {text:'love'},
-            {text:'joy'},
+            {text:'CRE8'},
+            {text:'BTC'},
+            {text:'BCH'},
+            {text:'ETH'},
+            {text:'LTC'},
+            {text:'STEEM'},
+            {text:'NOVO'},
+            {text:'TIME'},
+            {text:'TIME+ATTENTION'},
+            {text:'CONTENT'},
+            {text:'CONSUMPTION'},
+            {text:'REST'},
+            {text:'MARKETING'},
+            {text:'SHELTER'},
+            {text:'UNIVERSAL'},
         ];
+    };
 
+    //TODO! IMPORTANT
+    $scope.loadAssociations = function(query){
+        console.log(query);
+        var deferred = $q.defer();
+        SearchModel.search(query).then(function(searchModels){
+            console.log(searchModels);
+            searchModels.map(function(obj){
+                obj.title = obj.text;
+                return obj.text;
+            });
+            deferred.resolve(userModels);
+        });
+        return deferred.promise;
+    };
+
+    //TODO! IMPORTANT
+   $scope.loadTags = function(query){
+        console.log(query);
+        var deferred = $q.defer();
+        SearchModel.search(query).then(function(searchModels){
+            console.log(searchModels);
+            searchModels.map(function(obj){
+                obj.title = obj.text;
+                return obj.text;
+            });
+            deferred.resolve(userModels);
+        });
+        return deferred.promise;
     };
 
     //OVERKILL
     $rootScope.contentToggle = function(){
         if($scope.currentUser){
-
             //HM!
             $scope.newContent = {};
             $scope.newContent.associatedModels = $rootScope.associatedModels;
-
+            $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
+                obj.text = obj.type+' | '+obj.address;
+                return obj;
+            });
+            console.log($scope.newContent.associatedModels);
             $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -178,6 +203,41 @@ angular.module( 'conexus.nav', [
     $rootScope.renderToggle = function(item){
         $scope.item = item;
         $mdSidenav('render').toggle();
+    };
+    
+
+    $rootScope.renderValidationToggle = function(item){
+
+        $scope.item = item;
+
+        //type.. -->? 
+        //item is task, time , .. content, validation 
+
+        ValidationModel.getSome('work', item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
+
+            $scope.validations = validationModels;
+            var sumObj = {};
+            //TODO: SEEMS INNEFFECTIVE
+            if ($scope.validations.length > 0){
+                for (y in $scope.validations){
+                    console.log($scope.validations[y].validation);
+                    for (x in Object.keys($scope.validations[y].validation)){
+                        if(!sumObj[Object.keys($scope.validations[y].validation)[x]]){sumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+                        else{sumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+                    }
+
+                }
+                console.log(sumObj);
+                for (x in Object.keys(sumObj)){
+                    $scope.validationColumn.series[0].data.push(sumObj[Object.keys(sumObj)[x]]/$scope.validations.length);
+                    $scope.validationColumn.xAxis.categories.push(Object.keys(sumObj)[x]);
+                }
+            }
+
+        });
+    
+        $mdSidenav('renderValidation').toggle();
+
     };
 
     $rootScope.renderReputationToggle = function(item){
@@ -252,12 +312,17 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.validateToggle = function(item){
+    $rootScope.validationToggle = function(item){
         if($scope.currentUser){
             console.log(item);
             $scope.item = item;
             $scope.newValidation = {};
             $scope.newValidation.validation = {};
+
+            //PATCH!
+            $scope.newValidation.associatedModels = [{type:'WORK',address:item.id}]
+            //$scope.newValidation.associatedModels) = [{type:'TASK',address:item.id}]
+
             $scope.tags = [];
 
             if(item.tags){
@@ -277,7 +342,7 @@ angular.module( 'conexus.nav', [
                 }
             }
 
-            $mdSidenav('validate').toggle();
+            $mdSidenav('validationToggle').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };
@@ -331,13 +396,6 @@ angular.module( 'conexus.nav', [
                 }).join(",");
             }
 
-            //TODO: DROPDOWN
-            if ($scope.newContent.associatedModels){
-                $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
-                    return {id:obj.text};
-                });
-            }
-
             //PATCH!!!
             if ($scope.newContent.associatedModels){
                 for (x in $scope.newContent.associatedModels){
@@ -345,9 +403,10 @@ angular.module( 'conexus.nav', [
                 }
             }
 
-
+    
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
             console.log($scope.newContent);
+
             ContentModel.create($scope.newContent).then(function(model) {
 
                 $scope.confirm = $scope.newContent;
@@ -527,11 +586,20 @@ angular.module( 'conexus.nav', [
     $scope.createTransaction = function(){
         if ($scope.currentUser){
 
+            $scope.newTransaction.user = $scope.currentUser.id
+
             $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
                 return obj.text
             }).join(",");
 
             console.log($scope.newTransaction);
+
+            $scope.newTransaction.from = $scope.newTransaction.from[0].id;
+            $scope.newTransaction.to = $scope.newTransaction.to[0].id;
+
+            console.log($scope.newTransaction);
+
+            //information in amountset
 
             TransactionModel.create($scope.newTransaction).then(function(model){
 
@@ -542,6 +610,7 @@ angular.module( 'conexus.nav', [
                 $mdSidenav('transaction').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+
             });
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
@@ -557,7 +626,7 @@ angular.module( 'conexus.nav', [
             //PATCH!!!
             if ($scope.newValidation.associatedModels){
                 for (x in $scope.newValidation.associatedModels){
-                    $scope.newValidation[$scope.newValidation.associatedModels[x].type.toLowerCase()] = $scope.newValidation.associatedModels[x].address
+                   $scope.newValidation[$scope.newValidation.associatedModels[x].type.toLowerCase()] = $scope.newValidation.associatedModels[x].address;
                 }
             }
 

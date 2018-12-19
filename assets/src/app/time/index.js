@@ -33,7 +33,11 @@ angular.module( 'conexus.time', [
 
     titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
 
-    $scope.time.validationScore = 0;
+    //PATCH!!!
+    $rootScope.associatedModels = [{
+        address: $scope.time.id,
+        type: 'TIME',
+    }];
 
     $scope.contentList = contentList;
 
@@ -153,7 +157,7 @@ angular.module( 'conexus.time', [
         $scope.tokens.push($scope.tokens[x]+'+onStream');
         $scope.tokens.push($scope.tokens[x]+'+onValidation');
     }
-
+    
     $scope.createContent = function(content) {
         if ($scope.currentUser){
             if (content){$scope.newContent.post = content.id}
@@ -165,7 +169,6 @@ angular.module( 'conexus.time', [
         }
         else{$mdSidenav('login').toggle()}
     };
-
 
     $scope.createReaction = function(item, type){
 
@@ -193,8 +196,6 @@ angular.module( 'conexus.time', [
 
     };
 
-
-
     //TODO: LAYERS | PROJ BASED LAYER
     $scope.createValidation = function(){
         if ($scope.currentUser){
@@ -210,17 +211,13 @@ angular.module( 'conexus.time', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.reply = function(content){
+    $scope.reply = function(item){
         if ($scope.currentUser){
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-            $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
+            else{$scope.time.showReply = !$scope.time.showReply;}
         }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
+        else{$mdSidenav('login').toggle();}
     };
 
     //TODO: WEBSOCKETS | WEB3

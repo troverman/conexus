@@ -1,9 +1,9 @@
 <div ng-controller="NavCtrl">
 
-    <!--TODO: PERFORMANCE.. NG-IF?-->
+    <!--TODO: NG-IF-->
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="content" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newContent" class="md-list-item-text" layout="column" style="height:100%;">
 
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -26,12 +26,11 @@
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newContent.associations">
+                    <tags-input type="text" placeholder="Associations" ng-model="newContent.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <ul class="nav nav-pills nav-justified contentTyle">
                         <li ng-class="{active: selectedType=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Audio</a></li>
-                        <!--<li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>-->
                         <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
                         <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
                         <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Motion</a></li>
@@ -67,7 +66,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="item" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newItem" class="md-list-item-text" layout="column" style="height:100%;">
 
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -90,7 +89,7 @@
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
                     <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input type="text" placeholder="Associations" ng-model="newItem.associations">
+                    <tags-input type="text" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <h5>Location</h5>
@@ -111,7 +110,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="login" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="!currentUser" class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
             <div class="page-heading">
                 <div class="spacing-25"></div>
@@ -183,7 +182,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="order" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newOrder" class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
             <div class="page-heading">
                 <div class="spacing-25"></div>
@@ -308,7 +307,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="project" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newProject" class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
             <div class="page-heading">
                 <div class="spacing-25"></div>
@@ -405,6 +404,38 @@
         </div>
     </md-sidenav>
 
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="renderValidation" md-is-locked-open="false" style="position:fixed;background-color:white;width:90%;max-width:100%">
+        <div class="md-list-item-text" layout="column" style="height:100%;">
+            <div class="spacing-25"></div>
+            <div class="page-heading">
+                <div class="spacing-25"></div>
+                <div class="container">
+                    <h1>Validation</h1>
+                </div>
+                <div class="spacing-25"></div>
+            </div>
+            <div style="padding:16px;">
+
+                <h2>TYPE</h2>
+
+                <h3>PROJECT --> PROJECT</h3>
+
+                <h3>CONTENT --> PROJECT</h3>
+                <h3>MEMBER --> PROJECT</h3>
+                <h3>ORDER --> PROJECT</h3>
+                <h3>TRANSACTION --> PROJECT</h3>
+
+                <h3>TASK --> PROJECT</h3>
+                <h3>TIME --> TASK ( --> PROJECT )</h3>
+
+                <h3>VALIDATION --> VALIDATION</h3>
+
+                <p>{{item}}</p>
+
+            </div>
+        </div>
+    </md-sidenav>
+
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="subNav" md-is-locked-open="false" style="position:fixed;background-color:black">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="text-align:center;">
@@ -450,7 +481,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="task" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newTask" class="md-list-item-text" layout="column" style="height:100%;">
 
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -485,7 +516,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="time" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newTime" class="md-list-item-text" layout="column" style="height:100%;">
            
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -579,7 +610,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="transaction" md-is-locked-open="false" style="position:fixed;background-color:white;width:50%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div ng-if="newTransaction"  class="md-list-item-text" layout="column" style="height:100%;">
             
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -595,26 +626,47 @@
                 <p style="color:gray;font-style:italic">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createTransaction()">
+
                     <h5>Address From</h5>
-                    <input placeholder="From" type="text" ng-model="newTransaction.from" class="form-control">
+                    <tags-input max-tags="1" placeholder="From" ng-model="newTransaction.from">
+                        <auto-complete source="loadAddress($query)"></auto-complete>
+                    </tags-input>
+
                     <h5>Address To</h5>
-                    <input placeholder="To" type="text" ng-model="newTransaction.to" class="form-control">
+                    <tags-input max-tags="1" placeholder="To" ng-model="newTransaction.to">
+                        <auto-complete source="loadAddress($query)"></auto-complete>
+                    </tags-input>
+
                     <h5>Asset</h5>
-                    <input placeholder="Asset Identifier" type="text" ng-model="newTransaction.identifier" class="form-control">
-                    <h5>Amount</h5>
-                    <input placeholder="Amount" type="number" step="any" ng-model="newTransaction.amount" class="form-control">
+                    <tags-input placeholder="Asset Identifier" ng-model="newTransaction.identifierSet">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+
+                    <div class="">
+                        <div class="col-sm-12" ng-repeat="asset in newTransaction.identifierSet">
+                            <h5>{{asset.text}} Amount | Available {{balance[asset.text] || 0}} <span style="text-align:right;float:right"><a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></span></h5>
+                            <input placeholder="{{asset.text}} Amount" type="number" step="any" ng-model="newTransaction.amountSet[asset.text]" class="form-control">
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
                     <h5>Tags</h5>
-                    <tags-input placeholder="Tags" ng-model="newTransaction.tags"></tags-input>
+                    <tags-input placeholder="Tags" ng-model="newTransaction.tags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+
                     <h5>Description</h5>
                     <textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
-                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.identifier">create</button>
+
+                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTransaction.amountSet">create</button>
+
                 </form>
             </div>
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validate" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validation" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+        <div ng-if="newValidation" class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px">
                 <div class="spacing-25"></div>
 
@@ -645,7 +697,7 @@
     </md-sidenav>
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="confirm" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div class="md-list-item-text" layout="column" style="height:100%;">
+        <div mg-if="confirm" class="md-list-item-text" layout="column" style="height:100%;">
 
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -721,8 +773,8 @@
                     <p>User: {{confirm.user}}</p>
                     <p>To: {{confirm.to}}</p>
                     <p>From: {{confirm.from}}</p>
-                    <p>Identifier: {{confirm.identifier}}</p>
-                    <p>Amount: {{confirm.amount}}</p>
+                    <p>Identifier: {{confirm.identifierSet}}</p>
+                    <p>Amount: {{confirm.amountSet}}</p>
                     <p>Tags: {{confirm.tags}}</p>
                     <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>

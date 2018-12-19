@@ -12,7 +12,7 @@ angular.module( 'conexus.members', [
 		},
 		resolve: {
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome(100, 0, 'createdAt DESC');
+                return UserModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
         }
 	});

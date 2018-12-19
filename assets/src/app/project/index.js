@@ -240,6 +240,7 @@ angular.module( 'conexus.project', [
     //TODO: MEH
     if(!$scope.project){$location.path('/')}
 
+    //PATCH!!!
     $rootScope.to = $scope.project.id;
     $rootScope.associatedModels = [{
         address: $scope.project.id,

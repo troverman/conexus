@@ -82,13 +82,13 @@
 
 			<!--TODO: MARKET LOOKUP-->
 			<!--TODO: ASSOCIATIONS-->
-			<!--TODO COMMENT-->
+			<!--TODO: COMMENT-->
 			<div ng-repeat="item in tasks">
 				<div class="card" ng-click="renderToggle(item)">
 					<div style="padding:16px;">
 
 						<div style="float:right">
-		                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+		                    <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
 		                </div>
 
 						<h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>
@@ -101,9 +101,15 @@
 					<div class="card-footer">
 						<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
 						<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-						<a ng-click="$event.stopPropagation();reply(item)" href="task/{{item.id}}"><i class="fa fa-comment-o"></i> comment </a>
+						<a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 						<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
 					</div>
+					<div ng-show="task.showReply" class="card-footer">
+		                <form role="form" ng-submit="createContent(task)">
+		                    <text-angular ng-model="newContent.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+		                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+		                </form>
+		            </div>
 				</div>
 			</div>
 

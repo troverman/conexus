@@ -8,6 +8,11 @@
 
 <div class="container">
 
+	<!--TODO: TOKEN CLARITY-->
+	<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
+	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
+	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
+
 	<div class="spacing-10"></div>
 
 	<div class="row" ng-show="!time.stream">
@@ -19,64 +24,62 @@
 	</div>
 
 	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->
+	<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->
+	<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->
+	<!--TODO: NESTED RENDER-->
 
 	<div class="row">
         <div class="card" ng-click="">
 			<div style="padding:16px" class="col-sm-12">
-
-				<div style="float:right">
-					<h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+				<div style="float:right;text-align:right">
+					<h5 ng-click="tokensToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+					<h5 ng-click="renderValidationToggle(time)"><a href="#">Validations & Associations <i class="fa fa-question-circle"></i></a></h5>
 				</div>
-
 				<h3><a href="task/{{time.task.id}}">{{time.task.title}}</a></h3>
 				<h4>{{time.amount}}, <span style="font-size:10px;color:gray">{{(time.amount/60).toFixed(2)}} minutes, <span style="font-size:10px;color:gray">{{(time.amount/3600).toFixed(2)}} hours</span></h4>
                 <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
-
 				<a style="font-weight:700" href="member/{{time.user.username}}">
 					<img class="card-avatar" ng-src="{{time.user.avatarUrl}}" src="{{time.user.avatarUrl}}" err-src="/images/avatar.png">
 					{{time.user.username}}
 				</a>
-				
 				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="time.createdAt"></p>
-
 				<div>
 					<div class="spacing-10"></div>
 	                <span style="display:inline" ng-bind-html="renderContent(time.content)"></span>
 					<div class="spacing-10"></div>
 				</div>
-
 			</div>
-
-			<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->
-			<!--
-			<div style="padding:16px;font-style:italic;color:gray;" class="col-sm-4">
-				<div class="card">
-					<div style="padding:16px">
-						<h4><a href="#">Time Validation <i class="fa fa-question-circle"></i></a></h4>
-						<h5>{{time.validationScore}} | General </h5>
-						<p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{time.task.id}}">{{tag.trim()}}+{{time.task.id}}</a></p>
-					</div>
-				</div>
-			</div>
-			-->
-
 			<div style="clear:both"></div>
-
 			<div class="card-footer">
 				<a ng-click="createReaction(time, 'plus')"><i class="fa fa-angle-up"></i> {{time.reactions.plus}} like </a> 
 				<a ng-click="createReaction(time, 'minus')" ><i class="fa fa-angle-down"></i> {{time.reactions.minus}} dislike </a>
-				<a ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-		       	<a ng-click="validateToggle(time)"><i class="fa fa-check"></i> validate </a>
+				<a ng-click="reply(time)"><i class="fa fa-comment-o"></i> comment </a>
+		       	<a ng-click="validationToggle(time)"><i class="fa fa-check"></i> validate </a>
 			</div>
-
+			<div ng-show="time.showReply" class="card-footer">
+				<form role="form" ng-submit="newContent(item)">
+					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+				</form>
+			</div>
 		</div>
 	</div>
 
-	<!--TODO IF VALIDATE | EDIT CURRENT HERE | 1 PER MEMBER PER MAINFOLD-->
+    <div class="spacing-5"></div>
+
+	<div style="row">
+        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+            <li class="active"><a href="#">Activity</a></li>
+            <li><a href="#">Content</a></li>
+            <li><a href="#">Validations</a></li>
+        </ul>
+    </div>
+
+	<!--TODO: IF VALIDATE | EDIT CURRENT VALIDATION HERE | 1 PER MEMBER PER MAINFOLD-->
+	<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->
 	<div class="row" ng-show="validations.length > 0">
 		<div class="card">
 			<div style="padding:16px">
-				<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -100,46 +103,11 @@
 						</tr>
 					</tbody>
 				</table>
-
 				<highchart config="validationColumn"></highchart>
 				<div class="spacing-10"></div>
-
 			</div>
 		</div>
 	</div>
-
-	<!--COLLAPSE-->
-	<!--NAV-->
-	<!--TODO: TOGGLE-->
-	<div class="row" ng-show="currentUser">
-		<div class="card">
-			<div style="padding:16px">
-                <h5>Validate <i class="fa fa-check"></i></h5>
-				<div layout="">
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{member.totalWork}}</span></div>
-                </div>
-
-		        <div ng-repeat="tag in tags">
-                    <div layout="">
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                       	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag]}} | {{reputation[tag] || 0}}</span></div>
-                    </div>
-                </div>
-
-            	<text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-			</div>
-		</div>
-	</div>
-
-	<!--TODO: TOKEN CLARITY-->
-	<!--TODO: COLLAPSE UI-->
-	<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
-	<!--work.id tokens are given 'bridge' liquidity to work.task.id tokens as verification | you get work.task.id tokens on verification | minting is based on verification protocol-->
-	<!--does verification give liquidity to work.id tokens?--> <!--verification as staking?-->
 
 	<div class="row">
         <div class="card">

@@ -146,6 +146,14 @@ angular.module( 'conexus.tasks', [
     }
     $scope.loadTags();
 
+    $scope.reply = function(item){
+        if ($scope.currentUser){
+            var taskIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){$scope.tasks[taskIndex].showReply = !$scope.tasks[taskIndex].showReply;}
+        }
+        else{$mdSidenav('login').toggle();}
+    };
+
     $scope.selectSort = function(sort){
 		$scope.selectedSort = sort;
 		$rootScope.stateIsLoading = true;

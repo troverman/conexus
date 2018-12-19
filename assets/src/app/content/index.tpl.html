@@ -15,8 +15,8 @@
 		    <div style="padding:16px;background-color:white">
 
 				<div>
+					<!--TODO!-->
 					<div style="float:right;text-align:right">
-
 						<h5 style="text-align:right;float:right" ng-click="tokenToggle(content)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
 						<br><br>
 						<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{content.minusCount+1}}</h5>
@@ -29,7 +29,7 @@
 
 					<h3 ng-show="content.title">{{content.title}}</h3>
 
-					<!--REFACTOR-->
+					<!--DEPRECIATE-->
 					<h3>
 						<a href="market/{{content.market}}">{{content.market}}</a>
 						<a href="order/{{content.order}}">{{content.order}}</a>
@@ -50,7 +50,6 @@
 					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
 
 					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
-					<!--<h3>{{content.parent}} Parent Information</h3>-->
 
 					<div style="clear:both"></div>
 				</div>

@@ -2,43 +2,34 @@
 
     <div class="spacing-10"></div>
 
+    <!--TODO: ASSOCIATION-->
+    <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->
+
+    <!--TODO: STREAM | IFPS-->
+    <!--TODO: VALIDATION RENDER-->
+    <!--TODO: NESTED RENDER -->
+
+    <!--TOKENS MINTING PER ACTION-->
+    <!--TOKENS MINTED TOTAL-->
+
     <div class="row">
 
         <div class="card" ng-click="">
             <div class="padding:16px">
                 <div class="col-sm-12" style="padding:16px">
-
-                    <div style="float:right">
+                    <div style="float:right;text-align:right">
                         <h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                        <h5 ng-click="renderValidationToggle(task)"><a href="#">Validations & Associations <i class="fa fa-question-circle"></i></a></h5>
                     </div>
-
                     <h3>{{task.title}}</h3>
-
                     <!--ASSOCIATION && VALIDATION-->
                     <h4><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h4>
-
                     <!--TAGS & SHARED ASSOCIATION TAGS-->
                     <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
-
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="task.createdAt"></p>
 
                 </div>
-
-                <!--
-                <div class="col-md-4" style="padding:16px;font-style:italic;color:gray;">
-                    <div class="card">
-                        <div style="padding:16px;">
-                            <h4><a href="#">Task Validation <i class="fa fa-question-circle"></i></a></h4>
-                            <h5>{{task.verificationScore}} | General </h5>
-                            <p style="font-size:10px" ng-repeat="tag in tags">0 | <a href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}}</a></p>
-                        </div>
-                    </div>
-                    <div class="spacing-10"></div>
-                </div>
-                -->
-
             </div>
 
             <div style="clear:both"></div>
@@ -47,7 +38,7 @@
                 <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{task.reactions.plus}} like </a> 
                 <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
                 <a ng-click="reply(task)"><i class="fa fa-comment-o"></i> comment </a>
-                <a ng-click="validateToggle(task)"><i class="fa fa-check"></i> validate </a>
+                <a ng-click="validationToggle(task)"><i class="fa fa-check"></i> validate </a>
             </div>
 
             <div ng-show="task.showReply" class="card-footer">
@@ -60,77 +51,7 @@
         </div>
     </div>
 
-    <!--TODO: VALIDATION-->
-    <div class="row" ng-show="false">
-        <div class="card">
-            <div style="padding:16px">
-
-                <div ng-repeat="verification in taskVerification">
-                    <a href="member/{{verification.user.username}}">
-                        <img class="card-avatar" ng-src="{{verification.user.avatarUrl}}" src="{{verification.user.avatarUrl}}" err-src="/images/avatar.png">
-                        {{verification.user.username}}
-                    </a> | {{verification.score}}
-                    <div class="spacing-10"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!--TODO: REPLATIONSHIPS-->
-    <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->
-    <!--<div class="row" ng-show="currentUser">
-        <div class="card">
-            <div style="padding:16px">
-
-                <h5>Validate {{task.title}} in {{task.project.title}} <i class="fa fa-check"></i></h5>
-                <div layout="">
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} {{currentUser.totalWork}}</span></div>
-                </div>
-
-                <div ng-repeat="tag in tags">
-                    <div layout="">
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag]}} {{reputation[tag]}}</span></div>
-                    </div>
-                </div>
-
-                <text-angular ng-model="newValidation.content" ta-toolbar="''" style="height:100px"></text-angular>
-                <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-
-            </div>
-        </div>
-    </div>-->
-
-    <!--TODO: COLLAPSE UI-->
-    <!--TOKENS MINTING PER ACTION-->
-    <!--MARKET LINKS TO TOKEN LIQUIDITY RE ORDER ON BOOK FOR TASK TOKENS-->
-    <!--<div class="row">
-        <div class="card">
-            <div style="padding:16px">
-                <div style="font-style:italic;color:gray">
-                    <div class="spacing-5"></div>
-                    <h4 ng-click="showTokens()"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h4>
-                    <div>
-                        <a ng-repeat="token in tokens" href="market/{{token}}">{{token}}, </a>
-                    </div>
-                    <div>
-                        <a href="market/{{task.id}}+onTime">onTime+{{task.id}}</a>
-                        <a href="market/{{task.id}}+onTimeStream">onTimeStream+{{task.id}}</a>
-                        <a href="market/{{task.id}}+onCompletion">onCompletion+{{task.id}}</a>
-                        <a href="market/{{task.id}}+onVerification">onVerification+{{task.id}}</a>
-                        <a ng-repeat="tag in tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}}+{{task.id}} </a>
-                        <a href="market/{{task.project.urlTitle}}">{{task.project.title}} (+{{task.project.id}})</a>
-                        <a href="market/general">general</a>
-                    </div>
-                    <div class="spacing-5"></div>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    <!--TODO: VALIDATION RENDER-->
 
     <!--TODO: STREAM | IFPS-->
     <div class="row">
@@ -138,14 +59,12 @@
             <div style="padding:16px">
                 <div ng-show="!working">
                     <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Start Work</button>
-
                     <div ng-show="question && !streaming">
                         <h3>Streaming?</h3>
                         <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
                         <div class="spacing-5"></div>
                         <button type="submit" class="btn btn-default log-btn" ng-click="startWork()">No</button>
                     </div>
-
                     <div ng-show="streaming">
                         <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
                         <!--
@@ -154,9 +73,7 @@
                         -->
                         <button style="width:100%;" class="btn btn-default log-btn" ng-click="startWork()">Start Stream</button>
                     </div>
-
                 </div>
-
                 <div ng-show="working">
                     <h3>{{taskTime}}</h3>
                     <div ng-show="!streaming">
@@ -167,12 +84,9 @@
                         <button style="width:100%;" class="btn btn-default log-btn" ng-click="startStream()">Start Stream</button>
                         -->
                     </div>
-                    <div ng-show="streaming"> 
-                        <div ng-bind-html="renderStream(streamUrl)">></div>
-                    </div>
+                    <div ng-show="streaming"> <div ng-bind-html="renderStream(streamUrl)">></div></div>
                     <div class="spacing-5"></div>
                     <tags-input ng-model="timeTags" placeholder="Tags"></tags-input>
-                    <!--<input type="text" placeholder="Content" ng-model="timeContent" class="form-control">-->
                     <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
                     <div class="spacing-5"></div>
                     <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
@@ -188,6 +102,7 @@
             <li class="active"><a href="#">Activity</a></li>
             <li><a href="#">Content</a></li>
             <li><a href="#">Time</a></li>
+            <li><a href="#">Validations</a></li>
         </ul>
     </div>
 
@@ -201,15 +116,12 @@
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                     <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
-
                     <span style="text-align:right;float:right">
-                        <a ng-click="tokenToggle(item)" href="#">Tokens <i class="fa fa-question-circle"></i></a>
+                        <a ng-click="tokensToggle(item)" href="#">Tokens <i class="fa fa-question-circle"></i></a>
                         <br>
-                        <span ng-click="toggleValidation(item)" style="color:gray;font-style:italic">Validation Score:</span> <a style="font-wieght:800" href="#">{{item.verificationScore}}</a>
+                        <a ng-click="renderValidationToggle(item)" href="#">Validation <i class="fa fa-question-circle"></i></a>
                     </span>
-                    
                     <div style="clear:both"></div>
-
                 </div>
                 <p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
                 <div style="margin-left:42px">
@@ -220,8 +132,7 @@
                 <a ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                 <a ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a href="time/{{item.id}}"><i class="fa fa-check"></i> validate </a>
-                <!--<a ng-click="validateToggle(item)"><i class="fa fa-check"></i> validate </a>-->
+                <a  ng-click="validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                 <a style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" class="card-footer">
@@ -239,7 +150,7 @@
         </div>
     </div>
 
-    <!--TODO: NESTED -->
+    <!--TODO: NESTED RENDER -->
     <div class="row">
         <div ng-repeat="item in contentList"  ng-click="">
             <div class="card">
