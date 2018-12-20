@@ -75,7 +75,7 @@ var contentModel = {
     title: string,
     content: string,
     tags: string,
-    type: string, //AUDIO LINK, IMAGE, POST, VIDEO
+    type: string, //AUDIO, LINK, IMAGE, POST, VIDEO
     location: locationObj,
     associatedModels: associationObj,
     reactions: reactionObj,
