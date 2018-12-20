@@ -237,7 +237,10 @@ var timeModel = {
 > This is the Token Model
 ```javascript
 var tokenModel = {
-
+    string: string,
+    protocols: obj,
+    logic: obj,
+    information: obj
 };
 ```
 ##### get /api/token
