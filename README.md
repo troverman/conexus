@@ -132,6 +132,15 @@ var memberModel = {
 ##### get /api/member
 ##### post /api/member
 
+#### Motion
+> This is the Motion Model
+```javascript
+var memberModel = {
+};
+```
+##### get /api/motion
+##### post /api/motion
+
 #### Notification
 > This is the Notification Model
 ```javascript
