@@ -4,6 +4,8 @@
 ## Create A Transparent Network | Connect Collab Create
 ## CRE8coin
 ### Peer Setup Procedure
+> Future in app mining scheduled. 
+
 ```
 // in "/path/to/folder" copy https://pastebin.com/JfQtY8hw as geneis.json 
 geth --datadir="/path/to/folder" init genesis.json
