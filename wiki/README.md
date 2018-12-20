@@ -1,6 +1,6 @@
 # [Multidimensional Tokens](Multidimensional Tokens.md)
 # [Multidimensional Token Market](Multidimensional Token Market.md)
-# [Interoperable Protocols](Interoperable Protocols.md)
+# [Interoperable Protocols](Interoperable%20Protocols.md)
 # [Token Language](Token Language.md)
 
 
