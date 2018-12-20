@@ -146,7 +146,7 @@ var memberModel = {
 var notificationModel = {
     id: idObj,
     content:string,
-    user: userObj,
+    user: userObj
 };
 ```
 ##### get /api/notification
@@ -174,7 +174,7 @@ var passportModel = {
     provider: alphanumericdashed,
     identifier: string
     tokens: obj,
-    user: userObj,
+    user: userObj
 };
 ```
 ##### get /api/passport
@@ -227,7 +227,7 @@ var timeModel = {
     task: taskObj,
     id: idObj,
     time: integer,
-    user: userObj,
+    user: userObj
 };
 ```
 ##### get /api/time
@@ -264,7 +264,7 @@ var userModel = {
     passports: [passpostObj]
     title: string,
     username: string,
-    walletAddress: string,
+    walletAddress: string
 };
 ```
 ##### get /api/user
@@ -277,7 +277,7 @@ var validationModel = {
     content: string,
     reputation: obj,
     validation: obj,
-    associatedModels: {type: 'json'},
+    associatedModels: obj,
     user: userObj
 };
 ```
