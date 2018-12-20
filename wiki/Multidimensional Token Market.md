@@ -102,6 +102,9 @@ x [scalar]
 ## Tensor Assets in a Tensor Field
 
 ## Value Tensor
+
+	Connection to Order Books in algebraic walking operations 
+
 	Eight dimensional depth
 		Maximum depth needed (?) | intuition 
 			(Relational to information encoded in E8 Lie Group | 248 dimensional... )

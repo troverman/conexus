@@ -48,6 +48,8 @@ contract Governance {
 }
 ```
 
+## [Wiki](wiki)
+
 ## API
 ### Filters
 > Every endpoint can be filtered by each model param: {DESC, ASC}
