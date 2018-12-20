@@ -1,6 +1,6 @@
 ![conexus](https://www.conex.us/images/conexus-black.png "conex.us")
 # Conexus
-## Create a transparent network
+## Create A Transparent Network
 ## Connect Collab Create
 ## CRE8coin
 ### Peer Setup Procedure
