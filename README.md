@@ -40,16 +40,6 @@ contract MultidimensionalToken {
 }
 ```
 
-## Governance Protocol
-[gist](https://gist.github.com/troverman/809dba32d8510e7713aaa5c869e607ae)
-> Governance Protocol
-
-```
-contract Governance {
-    
-}
-```
-
 ## API
 ### Filters
 > Every endpoint can be filtered by each model param: {DESC, ASC}
