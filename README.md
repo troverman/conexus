@@ -115,23 +115,6 @@ var location = {
 ##### get /api/location
 ##### post /api/location
 
-#### Member
-> This is the Member Model
-```javascript
-var memberModel = {
-    avatarUrl: string,
-    createdAt: dateObj,
-    email: string,
-    id: idObj,
-    passports: [passpostObj]
-    title: string,
-    username: string,
-    walletAddress: string,
-};
-```
-##### get /api/member
-##### post /api/member
-
 #### Motion
 > This is the Motion Model
 ```javascript
@@ -242,6 +225,23 @@ var transactionModel = {
 ```
 ##### get /api/transaction
 ##### post /api/transaction
+
+#### User
+> This is the User Model
+```javascript
+var userModel = {
+    avatarUrl: string,
+    createdAt: dateObj,
+    email: string,
+    id: idObj,
+    passports: [passpostObj]
+    title: string,
+    username: string,
+    walletAddress: string,
+};
+```
+##### get /api/user
+##### post /api/user
 
 #### Validation
 > This is the Validation Model
