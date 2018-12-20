@@ -1,9 +1,9 @@
 ![conexus](https://www.conex.us/images/conexus-black.png "conex.us")
-# conexus
-## create a transparent network
-## connect collab create
-## cre8coin
-### peer setup procedure
+# Conexus
+## Create a transparent network
+## Connect Collab Create
+## CRE8coin
+### Peer Setup Procedure
 ```
 // in "/path/to/folder" copy https://pastebin.com/JfQtY8hw as geneis.json 
 geth --datadir="/path/to/folder" init genesis.json
