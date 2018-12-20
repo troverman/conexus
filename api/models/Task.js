@@ -36,7 +36,7 @@ module.exports = {
 
         //TODO: RELATIONSHIPS
         //MODLULAR.. PROJECT; MEMBER
-        associations: {type: 'json'},
+        associatedModels: {type: 'json'},
 
         //REACTIONS
         reactions: {type: 'json'},

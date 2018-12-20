@@ -14,7 +14,7 @@ module.exports = {
         tags: {type: 'string'},
 
         //ASSOCIATIONS
-        associations: {type: 'json'},
+        associatedModels: {type: 'json'},
 
         //LOCATION
         location: {type: 'json'},

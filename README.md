@@ -71,7 +71,15 @@ var associationModel = {
 > This is the Content Model
 ```javascript
 var contentModel = {
-
+    id: idObj,
+    title: string,
+    content: string,
+    tags: string,
+    type: string, //AUDIO LINK, IMAGE, POST, VIDEO
+    location: locationObj,
+    associatedModels: associationObj,
+    reactions: reactionObj,
+    user: userObj
 };
 ```
 ##### get /api/content
@@ -81,7 +89,9 @@ var contentModel = {
 > This is the Follower Model
 ```javascript
 var followerModel = {
-
+    id: idObj,
+    followed: userObj,
+    follower: userObj
 };
 ```
 ##### get /api/follower
@@ -91,7 +101,17 @@ var followerModel = {
 > This is the Item Model
 ```javascript
 var itemModel = {
-
+    id: idObj,
+    title: string,
+    content: string,
+    tags: string,
+    associatedModels: associationObj,
+    location: locationObj,
+    info:infoObj, //FORSALE, DELIVERY PROTOCOLS
+    identifierSet: string,
+    amountSet: string,
+    reactions: reactionObj,
+    user: userObj
 };
 ```
 ##### get /api/item
@@ -101,7 +121,10 @@ var itemModel = {
 > This is the Location Model
 ```javascript
 var location = {
-
+    id: idObj,
+    address: string,
+    lat: string,
+    lng: string
 };
 ```
 ##### get /api/location
@@ -111,6 +134,7 @@ var location = {
 > This is the Motion Model
 ```javascript
 var memberModel = {
+
 };
 ```
 ##### get /api/motion
@@ -120,7 +144,9 @@ var memberModel = {
 > This is the Notification Model
 ```javascript
 var notificationModel = {
-
+    id: idObj,
+    content:string,
+    user: userObj,
 };
 ```
 ##### get /api/notification
@@ -129,7 +155,12 @@ var notificationModel = {
 > This is the Order Model
 ```javascript
 var orderModel = {
-
+    type: string,
+    amountSetAlpha: obj,
+    amountSetBeta: obj,
+    status: string,
+    reactions: reactionObj,
+    user: userObj
 };
 ```
 ##### get /api/order
@@ -139,7 +170,11 @@ var orderModel = {
 > This is the Passport Model
 ```javascript
 var passportModel = {
-
+    protocol: alphanumeric,
+    provider: alphanumericdashed,
+    identifier: string
+    tokens: obj,
+    user: userObj,
 };
 ```
 ##### get /api/passport
@@ -239,7 +274,11 @@ var userModel = {
 > This is the Validation Model
 ```javascript
 var validationModel = {
-
+    content: string,
+    reputation: obj,
+    validation: obj,
+    associatedModels: {type: 'json'},
+    user: userObj
 };
 ```
 ##### get /api/validation
