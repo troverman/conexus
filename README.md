@@ -1,7 +1,7 @@
 ![conexus](https://www.conex.us/images/conexus-black.png "conex.us")
 # Conexus
-## Create A Transparent Network
-## Connect Collab Create
+## [Wiki](wiki)
+## Create A Transparent Network | Connect Collab Create
 ## CRE8coin
 ### Peer Setup Procedure
 ```
@@ -47,8 +47,6 @@ contract Governance {
     
 }
 ```
-
-## [Wiki](wiki)
 
 ## API
 ### Filters
