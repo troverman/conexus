@@ -132,7 +132,7 @@ var memberModel = {
 ##### get /api/member
 ##### post /api/member
 
-#### Item
+#### Notification
 > This is the Notification Model
 ```javascript
 var notificationModel = {
@@ -243,13 +243,3 @@ var validationModel = {
 ```
 ##### get /api/validation
 ##### post /api/validation
-
-#### View
-> This is the View Model -- DEPRECIATE -- TIME
-```javascript
-var viewModel = {
-
-};
-```
-##### get /api/view
-##### post /api/view
