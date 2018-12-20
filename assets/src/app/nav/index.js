@@ -22,6 +22,7 @@ angular.module( 'conexus.nav', [
         $scope.newItem = {};
         $scope.newOrder = {};
         $scope.newProject = {};
+        $scope.newReaction = {};
         $scope.newTask = {};
         $scope.newTime = {};
         $scope.newTransaction = {};
@@ -219,10 +220,64 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.renderToggle = function(item){
+
+        console.log(item);
         $scope.item = item;
+        $scope.content = item;
+
+        //PATCH
+        if ($scope.item.tags){
+            if (!Array.isArray($scope.item.tags)){
+                $scope.item.tags = $scope.item.tags.split(',');
+            }
+        }
+
+        //PATCH
+        if ($scope.item.task){
+            if ($scope.item.task.tags){
+                if (!Array.isArray($scope.item.task.tags)){
+                     $scope.item.task.tags = $scope.item.task.tags.split(',');
+                }
+            }
+        }
+
+        //GET CHILDREN && || TIME... ASSOCIATIONS.. NEED TO FINISH ASSOCIATED SO I DONT KEEP REWRITING.. 
+
+        function populateChildren(contentList, depth, limit){
+            contentList.forEach(function(content) {
+                ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
+                    console.log(contentList)
+                    if (contentList.length > 0){
+                        depth++ 
+                        content.children = contentList;
+                        $scope.content.children.push(content);
+                        if (depth < limit){populateChildren(contentList, depth, limit)}
+                    }
+                });
+            });
+        }
+
+        //TODO TYPE.. 
+        ContentModel.getSome('contentModel', item.id, 100, 0, 'createdAt DESC').then(function(contentList){
+            console.log(contentList)
+            populateChildren(contentList, 0, 5);
+
+        })
+     
         $mdSidenav('render').toggle();
+
     };
     
+    $rootScope.renderContent = function(item){
+        if (item){
+            if (!item.includes('>')){
+                var replacedText = item.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
+                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
+                return $sce.trustAsHtml(replacedText);
+            }
+            else{return $sce.trustAsHtml(item)}
+        }
+    };
 
     $rootScope.renderValidationToggle = function(item){
 
@@ -371,39 +426,16 @@ angular.module( 'conexus.nav', [
     //$rootScope.createProjectMember = function(){};
     //$rootScope.createView = function(){};
 
-    //MORE ON RENDER
-    $scope.createReaction = function(){
-        if($scope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
-            $scope.item.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-
-    $rootScope.renderContent = function(item){
-        if (item){
-            if (!item.includes('>')){
-                var replacedText = item.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim, '<a href="$1" target="_blank">$1</a>');
-                var replacedText = replacedText.replace(/(^|[^\/])(www\.[\S]+(\b|$))/gim, '$1<a href="http://$2" target="_blank">$2</a>');
-                return $sce.trustAsHtml(replacedText);
-            }
-            else{return $sce.trustAsHtml(item)}
-        }
-    };
-
     //TODO: ASSOCIATED MODELS
     //TODO: PARESE INPUT | TEST CREATE
-    $scope.createContent = function(content) {
+    $scope.createContent = function(item) {
         if ($scope.currentUser){
 
-            //RENDER?
-            //if(content){$scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];}
-            //if!($scope.newContent.associatedModels = [];)
+            //RENDER | nested Reply
+            if(item){
+                console.log('sup');
+                $scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];
+            }
 
             $scope.newContent.type = $scope.selectedType;
             $scope.newContent.user = $scope.currentUser.id;
@@ -421,7 +453,6 @@ angular.module( 'conexus.nav', [
                 }
             }
 
-    
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
             console.log($scope.newContent);
 
@@ -529,6 +560,19 @@ angular.module( 'conexus.nav', [
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
 
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    //MORE ON RENDER
+    $scope.createReaction = function(item, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.item.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -684,20 +728,6 @@ angular.module( 'conexus.nav', [
         $mdSidenav('login').toggle();
     };
 
-    $scope.sideNavToggle = function(){
-        $mdSidenav('subNav').close();
-        $mdSidenav('content').close();
-        $mdSidenav('login').close();
-        $mdSidenav('project').close();
-        $mdSidenav('render').close();
-        $mdSidenav('tokens').close();
-        $mdSidenav('task').close();
-        $mdSidenav('time').close();
-        $mdSidenav('transaction').close();
-        $mdSidenav('validation').close();
-        $mdSidenav('nav').toggle();
-    };
-
     $scope.marketTraverse = function(){
         $scope.outputMatix = [];
         if ($scope.outputVector.length > 0){
@@ -710,6 +740,30 @@ angular.module( 'conexus.nav', [
             }
             //});
         }
+    };
+
+    $scope.reply = function(item){
+
+        //var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
+        //location[0].value.showReply = !location[0].value.showReply;
+        //updateObject($scope.content, location[0].value, location[0].path);
+        $scope.item.showReply = !$scope.item.showReply;
+
+    };
+
+
+    $scope.sideNavToggle = function(){
+        $mdSidenav('subNav').close();
+        $mdSidenav('content').close();
+        $mdSidenav('login').close();
+        $mdSidenav('project').close();
+        $mdSidenav('render').close();
+        $mdSidenav('tokens').close();
+        $mdSidenav('task').close();
+        $mdSidenav('time').close();
+        $mdSidenav('transaction').close();
+        $mdSidenav('validation').close();
+        $mdSidenav('nav').toggle();
     };
 
     $scope.selectOrderType = function(type){$scope.selectedOrderType = type;};

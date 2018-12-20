@@ -795,47 +795,44 @@ module.exports = {
 
 				//REPUTATION MANIFOLD
 
-				//LOL ASYNC FORSURE. IN A BIT || SEE YA!
-				for (x in tokenSet){
-					//console.log(tokenSet[x]);
+				var async = require('async');
+				async.eachSeries(tokenSet, function (token, nextIteration){ 
 
 					//MAPPINGS
-				
-					(function(tokenSet, x) {
-						console.log(x)
-						var tokenModel = {
-							string:tokenSet[x],
-							information:{
-								volume:100,
-								inCirculation:12123,
-							},
-							protocols:[
-								'CONTENT'
-							],
-							logic:{
-								mint:'address == member; onTime',
-								transferrable: true
-							},
-						};
+					var tokenModel = {
+						string:token,
+						information:{
+							volume:100,
+							inCirculation:12123,
+						},
+						protocols:[
+							'CONTENT'
+						],
+						logic:{
+							mint:'address == member; onTime',
+							transferrable: true
+						},
+					};
 
-						Token.find({string:tokenModel.string}).then(function(aTokenModel){
-							if (aTokenModel.length == 0){
-								Token.create(tokenModel).then(function(tokenModel){
-									console.log('TOKEN!')
-								});
-							}
-						});
-					})(tokenSet, x);	
-				}
+					Token.find({string:tokenModel.string}).then(function(aTokenModel){
+						if (aTokenModel.length == 0){
+							Token.create(tokenModel).then(function(){
+								console.log(tokenModel)
+								process.nextTick(nextIteration);
+							});
+						}
+						else{process.nextTick(nextIteration);}
+					});
+
+				});	
+
 				console.log(tokenSet.length);
-
-
 
 			});
 
 		};
 
-		//generateStringSpace();
+		generateStringSpace();
 
 		//train('A', 0, 8);
 		//train('A', 0, 3);

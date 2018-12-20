@@ -75,7 +75,7 @@ module.exports = {
 			});
 		}
 
-		else{res.json(models);}
+		else{res.json();}
 
 	},
 

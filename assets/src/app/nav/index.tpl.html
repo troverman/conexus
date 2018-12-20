@@ -348,43 +348,75 @@
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
+
+                <!--CONTENT, TASK, TIME, TRANSACTION ORDER -->
+
                 <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
 
-                <!--TYPE-->
-                <!--TIME-->
-                <h2><a href="work/{{item.id}}">{{item.amount}}</a></h2>
-
                 <!--TITLE-->
-                <h2><a href="task/{{item.task.id}}">{{item.task.title}}</a></h2>
-                <h2><a href="task/{{item.id}}">{{item.title}}</a></h2>
+                <div ng-if="item.model == 'CONTENT'">
+                    <h2><a href="content/{{item.id}}">{{item.title}}</a></h2>
+                </div>
 
-                <!--ASSOCIATIONS-->
+                <div ng-if="item.model == 'ORDER'">
+                    <h1>ORDER</h1>
+                </div>
+
+                <div ng-if="item.model == 'TASK'">
+                    <h2><a href="task/{{item.id}}">{{item.title}}</a></h2>
+                </div>
+
+                <div ng-if="item.model == 'TIME'">
+                    <h2><a href="time/{{item.id}}">{{item.amount}}</a></h2>
+                </div>
+
+                <div ng-if="item.model == 'TRANSACTION'">
+                    <h1>TRANSACTION</h1>
+                </div>
+
+
+                <h4>Associations</h5>
+                <h4 ng-if="item.task.title"><a href="task/{{item.task.id}}">{{item.task.title}}</a></h4>
+
                 <!--TAGS-->
-                <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+                <p ng-if="item.task.tags"><a ng-repeat="tag in item.task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+                <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
 
                 <!--LOCATION-->
-                <p><a>{{item.location}}</a></p>
+                <p ng-if="item.location"><a>{{item.location}}</a></p>
+
                 <div class="spacing-10"></div>
-                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+
+                <img ng-if="item.user" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                 <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
+
                 <div class="spacing-10"></div>
-                <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
-            </div>
-            <div class="card-footer">
-                <a ng-click="createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a ng-click="createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                <a ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-                <a href="task/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
-            </div>
-            <div class="card-footer">
-                <form role="form" ng-submit="createContent()">
-                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                </form>
+
+                <span ng-if="item.content" style="display:inline" ng-bind-html="renderContent(item.content)"></span>
+
             </div>
 
-            <!--RENDER ASSOCIATED CONTENT-->
-            <!--<div ng-include="'content/index.tpl.html'"></div>-->
+            <div style="background-color:#f9f9f9;min-height:100%">
+                <div class="card-footer">
+                    <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                    <a href="#" ng-click="createReaction(item, 'minus')"><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                    <a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+                    <a ng-if="item.model == 'TASK'" href="#" href="task/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
+                    <a ng-if="item.model == 'TIME'" href="#" href="time/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
+                </div>
+
+                <div class="card-footer" ng-show="item.showReply">
+                    <form role="form" ng-submit="createContent()">
+                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+                    </form>
+                </div>
+
+                <!--RENDER ASSOCIATED TIME-->
+                <!--RENDER ASSOCIATED CONTENT-->
+                <div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
+
+            </div>
 
         </div>
     </md-sidenav>

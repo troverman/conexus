@@ -733,45 +733,11 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "	<!--TRAVERSAL PARAMETERS-->\n" +
     "	<!--COMBINITRONICS-->\n" +
     "	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->\n" +
-    "	<div class=\"row\" ng-show=\"false\">\n" +
-    "		<div class=\"card\">\n" +
-    "		    <div style=\"padding:16px\">\n" +
-    "		    	<div class=\"row\">\n" +
-    "					<div class=\"col-md-7\">\n" +
-    "				    	<h4>Protocols [View, Create, React]</h4>\n" +
-    "				    	<p style=\"color:gray;font-style:italic;font-size:12px\">[View, Create, React] Token manifold minting logic <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "				        <h5><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "				        <p><a ng-repeat=\"token in tokens\" href=\"market/{{token}}\">{{token}} </a>,</p>\n" +
-    "				    	<p>{{viewTime}} View+{{content.id}}</p>\n" +
-    "				    	<p>{{viewTime}} View+[Tags]</p>\n" +
-    "						<p>{{viewTime}} View+ID</p>\n" +
-    "				    	<p>{{0.00232*viewTime}} CRE8</p>\n" +
-    "			    	</div>\n" +
-    "					<div class=\"col-md-5\">\n" +
-    "				        <h4>Liquidity | onMint</h4>\n" +
-    "						<h5>Filters | <span ng-repeat=\"input in outputVector.split(',')\"><a href=\"market/{{input}}\">{{input}}</a> | </span>\n" +
-    "						<h5>Input Vectors | Scale of Output</h5>\n" +
-    "						<p style=\"color:gray;font-style:italic;font-size:12px\">Search for Output liquidity path | [] = []</p>\n" +
-    "						<form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
-    "							<input type=\"text\" placeholder=\"Input Dimensions\" ng-model=\"tokens\" class=\"form-control\">\n" +
-    "						</form>\n" +
-    "						<form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
-    "							<input type=\"text\" placeholder=\"Output Dimensions\" ng-model=\"outputVector\" class=\"form-control\">\n" +
-    "						</form>\n" +
-    "						<p style=\"color:gray;font-style:italic;font-size:10px\">CREATE ORDER [TOKENS] = [0.000312CRE8, 0.00002BTC, 0.0002ETH]</p>\n" +
-    "						<p style=\"color:gray;font-style:italic;font-size:10px\">onMint sponsorship [TOKENS] = [0.000312 CRE8, 0.00021UniversalToken, ...]</p>\n" +
-    "						<p ng-repeat=\"result in marketOutput\" style=\"color:gray;font-style:italic;font-size:10px\">\n" +
-    "							<span>[tokens] = {{result[0]}} <a href=\"market/{{result[1]}}\">{{result[1]}}</a></span>\n" +
-    "						</p>\n" +
-    "			    	</div>\n" +
-    "		    	</div>\n" +
-    "		    </div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
+    "	\n" +
     "	<div class=\"row\">\n" +
     "		<div ng-include=\"'content/content.tpl.html'\" ng-repeat=\"content in content.children track by content.id\"></div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<!--\n" +
     "	<div class=\"row\" ng-show=\"content.type!='video'\">\n" +
     "		<div class=\"card\" style=\"background-color:#f9f9f9\">\n" +
@@ -803,6 +769,7 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "		</div>\n" +
     "	</div>\n" +
     "	-->\n" +
+    "	\n" +
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "");
@@ -4062,43 +4029,75 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <!--CONTENT, TASK, TIME, TRANSACTION ORDER -->\n" +
+    "\n" +
     "                <p ng-click=\"tokenToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "\n" +
-    "                <!--TYPE-->\n" +
-    "                <!--TIME-->\n" +
-    "                <h2><a href=\"work/{{item.id}}\">{{item.amount}}</a></h2>\n" +
-    "\n" +
     "                <!--TITLE-->\n" +
-    "                <h2><a href=\"task/{{item.task.id}}\">{{item.task.title}}</a></h2>\n" +
-    "                <h2><a href=\"task/{{item.id}}\">{{item.title}}</a></h2>\n" +
+    "                <div ng-if=\"item.model == 'CONTENT'\">\n" +
+    "                    <h2><a href=\"content/{{item.id}}\">{{item.title}}</a></h2>\n" +
+    "                </div>\n" +
     "\n" +
-    "                <!--ASSOCIATIONS-->\n" +
+    "                <div ng-if=\"item.model == 'ORDER'\">\n" +
+    "                    <h1>ORDER</h1>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"item.model == 'TASK'\">\n" +
+    "                    <h2><a href=\"task/{{item.id}}\">{{item.title}}</a></h2>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"item.model == 'TIME'\">\n" +
+    "                    <h2><a href=\"time/{{item.id}}\">{{item.amount}}</a></h2>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"item.model == 'TRANSACTION'\">\n" +
+    "                    <h1>TRANSACTION</h1>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "                <h4>Associations</h5>\n" +
+    "                <h4 ng-if=\"item.task.title\"><a href=\"task/{{item.task.id}}\">{{item.task.title}}</a></h4>\n" +
+    "\n" +
     "                <!--TAGS-->\n" +
-    "                <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "                <p ng-if=\"item.task.tags\"><a ng-repeat=\"tag in item.task.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "                <p ng-if=\"item.tags\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
     "\n" +
     "                <!--LOCATION-->\n" +
-    "                <p><a>{{item.location}}</a></p>\n" +
+    "                <p ng-if=\"item.location\"><a>{{item.location}}</a></p>\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "\n" +
+    "                <img ng-if=\"item.user\" class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "                <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
-    "            </div>\n" +
-    "            <div class=\"card-footer\">\n" +
-    "                <a ng-click=\"createReaction(task, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "                <a ng-click=\"createReaction(task, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "                <a ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                <a href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "            </div>\n" +
-    "            <div class=\"card-footer\">\n" +
-    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                </form>\n" +
+    "\n" +
+    "                <span ng-if=\"item.content\" style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--RENDER ASSOCIATED CONTENT-->\n" +
-    "            <!--<div ng-include=\"'content/index.tpl.html'\"></div>-->\n" +
+    "            <div style=\"background-color:#f9f9f9;min-height:100%\">\n" +
+    "                <div class=\"card-footer\">\n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\"><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                    <a href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a ng-if=\"item.model == 'TASK'\" href=\"#\" href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                    <a ng-if=\"item.model == 'TIME'\" href=\"#\" href=\"time/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"card-footer\" ng-show=\"item.showReply\">\n" +
+    "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--RENDER ASSOCIATED TIME-->\n" +
+    "                <!--RENDER ASSOCIATED CONTENT-->\n" +
+    "                <div ng-include=\"'content/content.tpl.html'\" ng-repeat=\"content in content.children track by content.id\"></div>\n" +
+    "\n" +
+    "            </div>\n" +
     "\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +

@@ -108,45 +108,11 @@
 	<!--TRAVERSAL PARAMETERS-->
 	<!--COMBINITRONICS-->
 	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
-	<div class="row" ng-show="false">
-		<div class="card">
-		    <div style="padding:16px">
-		    	<div class="row">
-					<div class="col-md-7">
-				    	<h4>Protocols [View, Create, React]</h4>
-				    	<p style="color:gray;font-style:italic;font-size:12px">[View, Create, React] Token manifold minting logic <a href="#"><i class="fa fa-question-circle"></i></a></p>
-				        <h5><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
-				        <p><a ng-repeat="token in tokens" href="market/{{token}}">{{token}} </a>,</p>
-				    	<p>{{viewTime}} View+{{content.id}}</p>
-				    	<p>{{viewTime}} View+[Tags]</p>
-						<p>{{viewTime}} View+ID</p>
-				    	<p>{{0.00232*viewTime}} CRE8</p>
-			    	</div>
-					<div class="col-md-5">
-				        <h4>Liquidity | onMint</h4>
-						<h5>Filters | <span ng-repeat="input in outputVector.split(',')"><a href="market/{{input}}">{{input}}</a> | </span>
-						<h5>Input Vectors | Scale of Output</h5>
-						<p style="color:gray;font-style:italic;font-size:12px">Search for Output liquidity path | [] = []</p>
-						<form ng-submit="marketTraverse(tokens, outputVector)">
-							<input type="text" placeholder="Input Dimensions" ng-model="tokens" class="form-control">
-						</form>
-						<form ng-submit="marketTraverse(tokens, outputVector)">
-							<input type="text" placeholder="Output Dimensions" ng-model="outputVector" class="form-control">
-						</form>
-						<p style="color:gray;font-style:italic;font-size:10px">CREATE ORDER [TOKENS] = [0.000312CRE8, 0.00002BTC, 0.0002ETH]</p>
-						<p style="color:gray;font-style:italic;font-size:10px">onMint sponsorship [TOKENS] = [0.000312 CRE8, 0.00021UniversalToken, ...]</p>
-						<p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
-							<span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
-						</p>
-			    	</div>
-		    	</div>
-		    </div>
-		</div>
-	</div>
-
+	
 	<div class="row">
 		<div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
 	</div>
+
 	<!--
 	<div class="row" ng-show="content.type!='video'">
 		<div class="card" style="background-color:#f9f9f9">
@@ -178,5 +144,6 @@
 		</div>
 	</div>
 	-->
+	
 </div>
 <div class="spacing-50"></div>
