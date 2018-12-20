@@ -191,7 +191,7 @@ var projectModel = {
     location: locationObj,
     associatedModels: obj,
     //parent: projectObj,
-    info: infoObj
+    info: infoObj,
     user: userObj
 };
 ```
@@ -202,7 +202,8 @@ var projectModel = {
 > This is the ProjectMember Model
 ```javascript
 var projectMemberModel = {
-
+    project: projectObj,
+    user: userObj
 };
 ```
 ##### get /api/projectmember
@@ -212,7 +213,11 @@ var projectMemberModel = {
 > This is the Reaction Model
 ```javascript
 var reactionModel = {
-
+    amount: string,
+    type: string,
+    associatedModels: obj,
+    reactions: reactionObj,
+    user: userObj
 };
 ```
 ##### get /api/reaction
@@ -222,7 +227,13 @@ var reactionModel = {
 > This is the Task Model
 ```javascript
 var taskModel = {
-
+    title: string,
+    content: string,
+    location: locationObj,
+    tags: string,
+    associatedModels: obj,
+    reactions: reactionObj,
+    user: userObj //CREATOR
 };
 ```
 ##### get /api/task
@@ -258,7 +269,13 @@ var tokenModel = {
 > This is the Transaction Model
 ```javascript
 var transactionModel = {
-
+    amountSet: obj, //{assetIdentifer, amount}
+    to: string,
+    from: string,
+    content: string,
+    tags: string,
+    reactions: reactionObj,
+    user: userObj //CREATOR
 };
 ```
 ##### get /api/transaction
