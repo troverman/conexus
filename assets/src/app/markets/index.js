@@ -15,16 +15,19 @@ angular.module( 'conexus.markets', [
                 return OrderModel.getSome('', '', '', 100, 0, 'createdAt DESC');
             }],
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome(100, 0, 'createdAt DESC');
+                return ProjectModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel) {
                 return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
-            }]
+            }],
+            tokens: ['TokenModel', function(TokenModel) {
+                return TokenModel.getSome('', '', 1000, 0, 'createdAt DESC');
+            }],
         }
 	});
 }])
 
-.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'config', 'OrderModel', 'orders', 'titleService', 'projects', 'tasks', 'ProjectModel', 'TaskModel', function MarketsController( $rootScope, $scope, config, OrderModel, orders, titleService, projects, tasks, ProjectModel, TaskModel ) {
+.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'config', 'OrderModel', 'orders', 'titleService', 'projects', 'ProjectModel', 'TaskModel', 'tasks', 'tokens', function MarketsController( $rootScope, $scope, config, OrderModel, orders, titleService, projects, ProjectModel, TaskModel, tasks, tokens ) {
 	titleService.setTitle('Market | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.chartMap = {
@@ -62,6 +65,8 @@ angular.module( 'conexus.markets', [
     $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     $scope.projects = [];
 
+    //console.log(tokens)
+
     //STRING CROSS CHAIN
     //https://api.coinmarketcap.com/v2/listings/
 
@@ -80,6 +85,8 @@ angular.module( 'conexus.markets', [
     }
 
     $scope.markets = _.shuffle($scope.markets);
+
+    //$scope.tokens = $scope.markets;
 
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;

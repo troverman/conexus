@@ -2595,22 +2595,29 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "<div class=\"container\">\n" +
     "	<div class=\"row\">\n" +
     "\n" +
-    "		<div class=\"card\">\n" +
-    "	        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "	            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "	                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
+    "	            <!--<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>-->\n" +
+    "	            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "	                <a  href=\"#\" role=\"button\">\n" +
     "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "	                </a>\n" +
     "	            </div>\n" +
     "	        </form>\n" +
     "	    </div>\n" +
     "\n" +
-    "	    <div ng-repeat=\"market in markets\" style=\"padding:0px\">\n" +
+    "	    <div ng-repeat=\"market in markets track by $index\" style=\"padding:0px\">\n" +
     "	    	<div class=\"card\" ng-click=\"\">\n" +
     "			    <div style=\"padding:16px;\">\n" +
     "			    	<a style=\"white-space: nowrap;\" href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
     "			    	<p style=\"white-space: nowrap;color:gray\">{{market}} markets</p>\n" +
+    "\n" +
+    "			    	<!--\n" +
+    "			    	<a style=\"white-space: nowrap;\" href=\"market/{{market.string}}\"><h4>{{market.string}}</h4></a>\n" +
+    "			    	<p style=\"white-space: nowrap;color:gray\">{{market.string}} markets</p>\n" +
+    "			    	-->\n" +
+    "\n" +
     "			    </div>\n" +
     "			</div>\n" +
     "	    </div>\n" +
@@ -3667,10 +3674,11 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "    <div class=\"card\">\n" +
-    "        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
+    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <!--<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>-->\n" +
+    "            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "                <a  href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "                </a>\n" +
     "            </div>\n" +

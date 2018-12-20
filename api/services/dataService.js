@@ -795,28 +795,29 @@ module.exports = {
 
 				//REPUTATION MANIFOLD
 
+				//LOL ASYNC FORSURE. IN A BIT || SEE YA!
 				for (x in tokenSet){
 					//console.log(tokenSet[x]);
 
 					//MAPPINGS
-					var tokenModel = {
-						string:tokenSet[x],
-						information:{
-							volume:100,
-							inCirculation:12123,
-						},
-						protocols:[
-							'CONTENT'
-						],
-						logic:{
-							mint:'address == member; onTime',
-							transferrable: true
-						},
-					};
+				
+					(function(tokenSet, x) {
+						console.log(x)
+						var tokenModel = {
+							string:tokenSet[x],
+							information:{
+								volume:100,
+								inCirculation:12123,
+							},
+							protocols:[
+								'CONTENT'
+							],
+							logic:{
+								mint:'address == member; onTime',
+								transferrable: true
+							},
+						};
 
-					console.log(tokenModel);
-
-					(function(tokenModel) {
 						Token.find({string:tokenModel.string}).then(function(aTokenModel){
 							if (aTokenModel.length == 0){
 								Token.create(tokenModel).then(function(tokenModel){
@@ -824,7 +825,7 @@ module.exports = {
 								});
 							}
 						});
-					})(tokenModel);	
+					})(tokenSet, x);	
 				}
 				console.log(tokenSet.length);
 

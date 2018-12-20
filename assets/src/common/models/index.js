@@ -9,6 +9,7 @@ angular.module('models', [
 	'models.search',
 	'models.task',
 	'models.time',
+	'models.token',
 	'models.transaction',
 	'models.user',
 	'models.validation',

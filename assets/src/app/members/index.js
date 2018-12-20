@@ -28,12 +28,6 @@ angular.module( 'conexus.members', [
     //DEPRECIATE 'TOTAL WORK'
     $scope.sortText = {'totalWork DESC':'Total Reputation','createdAt DESC':'Date Joined'}
 
-    $scope.keyPress = function(searchValue){
-        SearchModel.search(searchValue).then(function(models){
-            $scope.members = models;
-        });
-    };
-
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
@@ -43,7 +37,11 @@ angular.module( 'conexus.members', [
         });
     };
 
-    $scope.search = function(){};
+    $scope.search = function(){
+        UserModel.getSome('search', $scope.searchQuery, 100, 0, 'createdAt DESC').then(function(models){
+            $scope.members = models;
+        });
+    };
 
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;

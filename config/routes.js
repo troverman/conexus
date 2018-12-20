@@ -153,6 +153,11 @@ module.exports.routes = {
   'post /api/time': 'TimeController.create',
 
   /**
+   * Token routes
+   */
+  'get /api/token': 'TokenController.getSome',
+
+  /**
    * Transaction routes
    */
   'get /api/transaction': 'TransactionController.getSome',
