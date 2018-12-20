@@ -85,6 +85,26 @@ var contentModel = {
 ##### get /api/content
 ##### post /api/content
 
+#### Follower
+> This is the Follower Model
+```javascript
+var followerModel = {
+
+};
+```
+##### get /api/follower
+##### post /api/follower
+
+#### Item
+> This is the Item Model
+```javascript
+var itemModel = {
+
+};
+```
+##### get /api/item
+##### post /api/item
+
 #### Location
 > This is the Location Model
 ```javascript
@@ -111,6 +131,33 @@ var memberModel = {
 ```
 ##### get /api/member
 ##### post /api/member
+
+#### Item
+> This is the Notification Model
+```javascript
+var notificationModel = {
+
+};
+```
+##### get /api/notification
+
+#### Order
+> This is the Order Model
+```javascript
+var timeModel = {
+};
+```
+##### get /api/order
+##### post /api/order
+
+#### Passport
+> This is the Passport Model
+```javascript
+var memberModel = {
+};
+```
+##### get /api/passport
+##### post /api/passport
 
 #### Project
 > This is the Project Model
@@ -149,16 +196,6 @@ var taskModel = {
 ##### get /api/task
 ##### post /api/task
 
-#### Token
-> This is the Token Model
-```javascript
-var tokenModel = {
-
-};
-```
-##### get /api/assoication
-##### post /api/assoication
-
 #### Time
 > This is the Time Model
 ```javascript
@@ -172,6 +209,16 @@ var timeModel = {
 ##### get /api/time
 ##### post /api/time
 
+#### Token
+> This is the Token Model
+```javascript
+var tokenModel = {
+
+};
+```
+##### get /api/token
+##### post /api/token
+
 #### Transaction
 > This is the Transaction Model
 ```javascript
@@ -181,3 +228,23 @@ var transactionModel = {
 ```
 ##### get /api/transaction
 ##### post /api/transaction
+
+#### Validation
+> This is the Validation Model
+```javascript
+var validationModel = {
+
+};
+```
+##### get /api/validation
+##### post /api/validation
+
+#### View
+> This is the View Model -- DEPRECIATE -- TIME
+```javascript
+var viewModel = {
+
+};
+```
+##### get /api/view
+##### post /api/view
