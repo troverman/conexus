@@ -144,7 +144,8 @@ var notificationModel = {
 #### Order
 > This is the Order Model
 ```javascript
-var timeModel = {
+var orderModel = {
+
 };
 ```
 ##### get /api/order
@@ -153,7 +154,8 @@ var timeModel = {
 #### Passport
 > This is the Passport Model
 ```javascript
-var memberModel = {
+var passportModel = {
+
 };
 ```
 ##### get /api/passport
@@ -173,6 +175,7 @@ var projectModel = {
 > This is the ProjectMember Model
 ```javascript
 var projectMemberModel = {
+
 };
 ```
 ##### get /api/projectmember
@@ -182,15 +185,17 @@ var projectMemberModel = {
 > This is the Reaction Model
 ```javascript
 var reactionModel = {
+
 };
 ```
 ##### get /api/reaction
 ##### post /api/reaction
 
 #### Task
-> This is the Order Model
+> This is the Task Model
 ```javascript
 var taskModel = {
+
 };
 ```
 ##### get /api/task
