@@ -133,7 +133,7 @@ var location = {
 #### Motion
 > This is the Motion Model
 ```javascript
-var memberModel = {
+var motionModel = {
 
 };
 ```
@@ -240,7 +240,7 @@ var tokenModel = {
     string: string,
     protocols: obj,
     logic: obj,
-    information: obj
+    info: infoObj
 };
 ```
 ##### get /api/token
