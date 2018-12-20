@@ -172,7 +172,7 @@ var orderModel = {
 var passportModel = {
     protocol: alphanumeric,
     provider: alphanumericdashed,
-    identifier: string
+    identifier: string,
     tokens: obj,
     user: userObj
 };
@@ -184,7 +184,15 @@ var passportModel = {
 > This is the Project Model
 ```javascript
 var projectModel = {
-
+    title: string,
+    description: string,
+    avatarUrl: string,
+    tags: string,
+    location: locationObj,
+    associatedModels: obj,
+    //parent: projectObj,
+    info: infoObj
+    user: userObj
 };
 ```
 ##### get /api/project
