@@ -3311,7 +3311,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
     "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "			<li style=\"float:right\"><a ng-click=\"filterToggle()\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "			<li style=\"float:right\"><a ng-click=\"filterToggle('LEDGER')\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
     "		</ul>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
@@ -3418,7 +3418,7 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "		<div style=\"padding:16px;\">\n" +
     "\n" +
     "			<div style=\"float:right\">\n" +
-    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "				<a href=\"#\" ng-click=\"filterToggle('POSITIONS')\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
     "			</div>\n" +
     "\n" +
     "			<h3>Value Map</h3>\n" +
@@ -3428,7 +3428,7 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "			<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "			<div style=\"\">\n" +
-    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "				<a href=\"#\" ng-click=\"filterToggle('POSITIONS')\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
@@ -3750,11 +3750,16 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "            \n" +
-    "                <!--POSTIONS | MAP-->\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Base Markets\" ng-model=\"baseMarkets\"></tags-input>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Markets\" ng-model=\"markets\"></tags-input>\n" +
-    "\n" +
     "                <!--LEDGER-->\n" +
+    "                 <div ng-if=\"type=='LEDGER'\">\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Asset Set\" ng-model=\"assetSet\"></tags-input>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--POSTIONS | MAP-->\n" +
+    "                <div ng-if=\"type=='POSITIONS'\">\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\"></tags-input>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\"></tags-input>\n" +
+    "                </div>\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -5308,7 +5313,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
     "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "			<li style=\"float:right\"><a ng-click=\"filterToggle()\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "			<li style=\"float:right\"><a ng-click=\"filterToggle('LEDGER')\" href=\"#\">{{assetSet}} <i class=\"fa fa-question-circle\"></i></a></li>\n" +
     "		</ul>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
@@ -5445,7 +5450,7 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "			<div style=\"padding:16px;\">\n" +
     "				<span><b>Base Assets</b></span>\n" +
     "	            <div ng-repeat=\"market in baseMarkets\">\n" +
-    "	                <a href=\"#\" ng-click=\"filterToggle()\">{{market.text}}</a>\n" +
+    "	                <a href=\"#\" ng-click=\"filterToggle('POSITIONS')\">{{market.text}}</a>\n" +
     "	            </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -5453,7 +5458,7 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "			<div style=\"padding:16px;\">\n" +
     "				<span><b>Assets</b></span>\n" +
     "	            <div ng-repeat=\"market in markets\">\n" +
-    "	                <a href=\"#\" ng-click=\"filterToggle()\">{{market.text}}</a>\n" +
+    "	                <a href=\"#\" ng-click=\"filterToggle('POSITIONS')\">{{market.text}}</a>\n" +
     "	            </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -5485,33 +5490,33 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Motion to Create Order</button>\n" +
     "		</div>\n" +
     "\n" +
+    "		<!--ACTUAL ORDERS && MOTIONS-->\n" +
+    "\n" +
+    "		<div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "	            	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "						{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "		</div>\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
     "</div>\n" +
-    "	\n" +
-    "<div class=\"row\">\n" +
-    "\n" +
-    "    <div ng-repeat=\"order in orders\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "            	<span ng-repeat=\"item in order.amountSet\">\n" +
-    "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "				</span>\n" +
-    "				<span> | </span>\n" +
-    "				<span ng-repeat=\"item in order.amountSet1\">\n" +
-    "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "				</span>\n" +
-    "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "            </div>\n" +
-    "            <div class=\"card-footer\">\n" +
-    "                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
-    "                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
-    "                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "	</div>\n" +
-    "</div>");
+    "	");
 }]);
 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {

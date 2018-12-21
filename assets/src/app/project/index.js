@@ -604,7 +604,7 @@ angular.module( 'conexus.project', [
 
 .controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$mdSidenav', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $mdSidenav, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
-    $scope.assetSet = 'USD';
+    $scope.assetSet = 'CRE8'; // TODO MOST COMMON ASSET? 
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -673,9 +673,10 @@ angular.module( 'conexus.project', [
     };
 
     if ($scope.transactions.length == 0){
+        var timeObject = new Date(); 
         for (var i=0, t=88; i<t; i++) {
-            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.title.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), tags:'EXPENSE, SEED, EXAMPLE'})
-            $scope.transactionsTo.push({to:project.title.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), tags:'REVENUE, SEED, EXAMPLE'})
+            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:project.id, identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(timeObject.getTime() + 10000 * i), amount:10*Math.round(0.5*Math.random() * t), tags:'EXPENSE, SEED, EXAMPLE', reactions:{plus:0, minus:0}})
+            $scope.transactionsTo.push({to:project.id, from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(timeObject.getTime() + 10000 * i),  amount:10*Math.round(Math.random() * t), tags:'REVENUE, SEED, EXAMPLE', reactions:{plus:0, minus:0}})
         }
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     }
@@ -757,6 +758,8 @@ angular.module( 'conexus.project', [
 
 
     $scope.selectExpense = function(){
+
+
         //ANIMATE
         //ADD IN TAG BASED GRAPHS WRT EXPENSE
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
@@ -780,6 +783,8 @@ angular.module( 'conexus.project', [
                 y: $scope.sortedTransactionTags[x].amount,
             });
         }
+
+
     };
 
     $scope.selectOverview = function(){
@@ -805,7 +810,6 @@ angular.module( 'conexus.project', [
         TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
             $scope.transactions = transactions;
         });
-
     };
 
     $scope.selectRevenue = function(){

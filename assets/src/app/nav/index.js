@@ -186,10 +186,11 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.filterToggle = function(){
+    $rootScope.filterToggle = function(type){
 
         //POSTIONS / MARKETS
         //LEDGER
+        $scope.type = type;
         console.log($rootScope.baseMarkets);
         $mdSidenav('filter').toggle()
 

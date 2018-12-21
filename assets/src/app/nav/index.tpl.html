@@ -57,11 +57,16 @@
             </div>
             <div style="padding:16px;">
             
-                <!--POSTIONS | MAP-->
-                <tags-input min-length="1" placeholder="Base Markets" ng-model="baseMarkets"></tags-input>
-                <tags-input min-length="1" placeholder="Markets" ng-model="markets"></tags-input>
-
                 <!--LEDGER-->
+                 <div ng-if="type=='LEDGER'">
+                    <tags-input min-length="1" placeholder="Asset Set" ng-model="assetSet"></tags-input>
+                </div>
+
+                <!--POSTIONS | MAP-->
+                <div ng-if="type=='POSITIONS'">
+                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets"></tags-input>
+                    <tags-input min-length="1" placeholder="Asset" ng-model="markets"></tags-input>
+                </div>
 
             </div>
         </div>

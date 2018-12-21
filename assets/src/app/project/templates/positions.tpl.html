@@ -35,7 +35,7 @@
 			<div style="padding:16px;">
 				<span><b>Base Assets</b></span>
 	            <div ng-repeat="market in baseMarkets">
-	                <a href="#" ng-click="filterToggle()">{{market.text}}</a>
+	                <a href="#" ng-click="filterToggle('POSITIONS')">{{market.text}}</a>
 	            </div>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 			<div style="padding:16px;">
 				<span><b>Assets</b></span>
 	            <div ng-repeat="market in markets">
-	                <a href="#" ng-click="filterToggle()">{{market.text}}</a>
+	                <a href="#" ng-click="filterToggle('POSITIONS')">{{market.text}}</a>
 	            </div>
 			</div>
 		</div>
@@ -75,30 +75,30 @@
 			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Motion to Create Order</button>
 		</div>
 
+		<!--ACTUAL ORDERS && MOTIONS-->
+
+		<div ng-repeat="order in orders">
+	        <div class="card">
+	            <div style="padding:16px">
+	            	<span ng-repeat="item in order.amountSet">
+						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
+					</span>
+					<span> | </span>
+					<span ng-repeat="item in order.amountSet1">
+						{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
+					</span>
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
+	            </div>
+	            <div class="card-footer">
+	                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+	                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
+	                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+	                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
+	            </div>
+	        </div>
+		</div>
+
 	</div>
 
 </div>
 	
-<div class="row">
-
-    <div ng-repeat="order in orders">
-        <div class="card">
-            <div style="padding:16px">
-            	<span ng-repeat="item in order.amountSet">
-					{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
-				</span>
-				<span> | </span>
-				<span ng-repeat="item in order.amountSet1">
-					{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
-				</span>
-				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-            </div>
-            <div class="card-footer">
-                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
-                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
-                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
-                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
-            </div>
-        </div>
-	</div>
-</div>
