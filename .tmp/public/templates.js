@@ -3374,6 +3374,11 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
+    "<style type=\"text/css\">\n" +
+    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	tags-input .host{margin:0px;border:0px;}\n" +
+    "</style>\n" +
+    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -3389,7 +3394,8 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "        	<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "            <!--<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">-->\n" +
     "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                <a href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -3410,15 +3416,21 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "			<!--<div style=\"float:right\"><a ng-click=\"filterToggle()\" href=\"#\">CRE8 <i class=\"fa fa-question-circle\"></i></a></div>-->\n" +
-    "			<div style=\"float:right\"><a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension}}, </span><i class=\"fa fa-question-circle\"></i></a></div>\n" +
-    "			<h1>{{member.username}} | Value Map</h1>\n" +
-    "			<h4>Dimensional Vote</h4>\n" +
-    "			<h4>Our Social Responsibility</h4>\n" +
+    "\n" +
+    "			<div style=\"float:right\">\n" +
+    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "			</div>\n" +
+    "\n" +
+    "			<h3>Value Map</h3>\n" +
+    "			\n" +
     "			<div class=\"spacing-10\"></div>\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
-    "			<div style=\"\"><a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension}}, </span><i class=\"fa fa-question-circle\"></i></a></div>\n" +
+    "\n" +
+    "			<div style=\"\">\n" +
+    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "			</div>\n" +
+    "\n" +
     "		</div>\n" +
     "	</div>	\n" +
     "</div>	\n" +
@@ -3432,11 +3444,11 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "    <div ng-repeat=\"order in orders\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
-    "            	<span ng-repeat=\"item in order.amountSet\">\n" +
+    "            	<span ng-repeat=\"item in order.amountSet track by $index\">\n" +
     "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
     "				</span>\n" +
     "				<span> | </span>\n" +
-    "				<span ng-repeat=\"item in order.amountSet1\">\n" +
+    "				<span ng-repeat=\"item in order.amountSet1 track by $index\">\n" +
     "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
     "				</span>\n" +
     "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
@@ -3738,9 +3750,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "            \n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
-    "                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
+    "                <!--POSTIONS | MAP-->\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Base Markets\" ng-model=\"baseMarkets\"></tags-input>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Markets\" ng-model=\"markets\"></tags-input>\n" +
+    "\n" +
+    "                <!--LEDGER-->\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -4161,11 +4175,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/items\">Items</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
-    "                    <!--\n" +
-    "                        <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
-    "                        <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></h4>\n" +
-    "                    --> \n" +
-    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}\">Map</a></h4>-->\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/members\">{{project.memberCount}} Members</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
@@ -4186,6 +4195,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/ledger\">Ledger</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/positions\">Positions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></h4>\n" +
+    "                    <!--<h4 class=\"nav-links\"><a href=\"member/{{member.username}}/time\">Tasks</a></h4>-->\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/time\">Time</a></h4>\n" +
     "                </div>\n" +
     "\n" +
@@ -5398,6 +5408,11 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/positions.tpl.html",
+    "<style type=\"text/css\">\n" +
+    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	tags-input .host{margin:0px;border:0px;}\n" +
+    "</style>\n" +
+    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -5413,7 +5428,8 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "            <!--<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">-->\n" +
     "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                <a href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -5432,12 +5448,21 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "			<div style=\"float:right\"><a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension}}, </span><i class=\"fa fa-question-circle\"></i></a></div>\n" +
+    "\n" +
+    "			<div style=\"float:right\">\n" +
+    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "			</div>\n" +
+    "\n" +
     "			<h3>Value Map</h3>\n" +
+    "\n" +
     "			<div class=\"spacing-10\"></div>\n" +
     "			<highchart config=\"chart\"></highchart>\n" +
     "			<div class=\"spacing-10\"></div>\n" +
-    "			<div style=\"\"><a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension}}, </span><i class=\"fa fa-question-circle\"></i></a></div>\n" +
+    "\n" +
+    "			<div style=\"\">\n" +
+    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "			</div>\n" +
+    "\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +

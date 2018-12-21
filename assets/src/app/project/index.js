@@ -922,7 +922,7 @@ angular.module( 'conexus.project', [
     
 }])
 
-.controller( 'ProjectPositionsCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($location, $sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
+.controller( 'ProjectPositionsCtrl', ['$location', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($location, $rootScope, $sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.orders = orders;
@@ -965,49 +965,94 @@ angular.module( 'conexus.project', [
         credits:{enabled:false},
     };
 
-    $scope.baseMarkets = ['Universal Token (onMint)', 'Universal Token (onTrade)', 'USD', 'CRE8', 'NOVO', 'LTC', 'BTC', 'ETH']
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-    
-    for (x in $scope.baseMarkets){
-
-        var random1 = Math.floor(255*Math.random());
-        var random2 = Math.floor(255*Math.random());
-        var random3 = Math.floor(255*Math.random());
-
-        $scope.chart.series.push({
-            id: 'values'+x,
-            type: 'area',
-            name: $scope.baseMarkets[x],
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
-            fillOpacity: 0.3,
-        });
-
-    }
    
-    for (x in $scope.markets){
-        $scope.chart.xAxis.categories.push($scope.markets[x]);
-        for (y in $scope.baseMarkets){
-            $scope.chart.series[y].data.push((1+1*Math.random())/2);
+    $rootScope.baseMarkets = [
+        {text:'UniversalToken'},
+        {text:'CRE8'},
+        {text:'ETH'},
+        {text:'BTC'},
+        {text:'USD'},
+        {text:'NOVO'},
+        {text:'LTC'},
+        {text:'SHELTER'},
+        {text:'FOOD'},
+        {text:'REST'},
+        {text:'REST,FOOD'},
+    ];
+
+    $rootScope.markets = [
+        {text:'EDUCATION+onMint'},
+        {text:'SHELTER'},
+        {text:'FOOD'},
+        {text:'REST'},
+        {text:'USD'},
+        {text:'ETH'},
+        {text:'BTC'},
+        {text:'STEEM'},
+        {text:'CRE8'},
+        {text:'Create'},
+        {text:'Time'},
+        {text:'TimeStream'},
+        {text:'React'},
+        {text:'Content'},
+        {text:'Order'},
+        {text:'View'},
+        {text:'Validate'},
+        {text:'Mine'},
+        {text:'Durham'},
+        {text:'Chapel Hill'},
+        {text:'Knoxville'},
+        {text:'Maryville'},
+    ];
+    
+    $scope.searchQuery = $rootScope.baseMarkets;
+    $scope.populateBaseMarkets = function(){
+        $scope.chart.series = [];
+        for (x in $rootScope.baseMarkets){
+            var random1 = Math.floor(255*Math.random());
+            var random2 = Math.floor(255*Math.random());
+            var random3 = Math.floor(255*Math.random());
+            $scope.chart.series.push({
+                id: 'values'+x,
+                type: 'area',
+                name: $rootScope.baseMarkets[x].text,
+                pointPlacement: 'on',
+                data: [],
+                color: 'rgba('+random1+','+random2+','+random3+',0.3)',
+                fillOpacity: 0.3,
+            });
         }
     }
-    
-    $scope.createContent = function(content, type){};
 
-    $scope.createOrder = function() {
-        $scope.newOrder.user = $scope.currentUser.id;
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet = $scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-        OrderModel.create($scope.newOrder).then(function(model) {
-            $scope.newOrder = {};
-            $scope.orders.unshift(model);
-        });
+    $rootScope.$watch('baseMarkets' ,function(){
+        $scope.populateBaseMarkets();
+        $scope.populateMarkets();
+    },true);
+   
+    $scope.populateMarkets = function(){
+        $scope.chart.xAxis.categories = [];
+        for (y in $rootScope.baseMarkets){$scope.chart.series[y].data = [];}
+        for (x in $rootScope.markets){
+            $scope.chart.xAxis.categories.push($rootScope.markets[x].text);
+            for (y in $rootScope.baseMarkets){
+                $scope.chart.series[y].data.push((1+1*Math.random())/2);
+            }
+        }
+    }
+
+    $rootScope.$watch('markets' ,function(){
+        $scope.populateMarkets();
+    },true);
+
+    
+    $scope.createContent = function(content, type){
+
     };
 
     //TODO
-    $scope.createReaction = function(item, type){};
+    $scope.createReaction = function(item, type){
+
+    };
 
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);

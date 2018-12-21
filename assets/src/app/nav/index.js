@@ -186,7 +186,14 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.filterToggle = function(item){$mdSidenav('filter').toggle()};
+    $rootScope.filterToggle = function(){
+
+        //POSTIONS / MARKETS
+        //LEDGER
+        console.log($rootScope.baseMarkets);
+        $mdSidenav('filter').toggle()
+
+    };
 
     $rootScope.itemToggle = function(){
         if($scope.currentUser){
@@ -219,6 +226,7 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //TODO
     $rootScope.renderToggle = function(item){
 
         console.log(item);
@@ -290,6 +298,7 @@ angular.module( 'conexus.nav', [
 
             $scope.validations = validationModels;
             var sumObj = {};
+
             //TODO: SEEMS INNEFFECTIVE
             if ($scope.validations.length > 0){
                 for (y in $scope.validations){

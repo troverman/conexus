@@ -57,9 +57,11 @@
             </div>
             <div style="padding:16px;">
             
-                <tags-input min-length="1" placeholder="Tags" ng-model="newContent.tags">
-                    <auto-complete source="loadTags($query)"></auto-complete>
-                </tags-input>
+                <!--POSTIONS | MAP-->
+                <tags-input min-length="1" placeholder="Base Markets" ng-model="baseMarkets"></tags-input>
+                <tags-input min-length="1" placeholder="Markets" ng-model="markets"></tags-input>
+
+                <!--LEDGER-->
 
             </div>
         </div>
@@ -480,11 +482,6 @@
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/content">Content</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/items">Items</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/ledger">Ledger</a></h4>
-                    <!--
-                        <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
-                        <h4 class="nav-links"><a href="project/{{project.urlTitle}}/assets">Assets</a></h4>
-                    --> 
-                    <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}">Map</a></h4>-->
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/members">{{project.memberCount}} Members</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
@@ -505,6 +502,7 @@
                     <h4 class="nav-links"><a href="member/{{member.username}}/ledger">Ledger</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/positions">Positions</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/projects">{{member.projectCount}} Projects</a></h4>
+                    <!--<h4 class="nav-links"><a href="member/{{member.username}}/time">Tasks</a></h4>-->
                     <h4 class="nav-links"><a href="member/{{member.username}}/time">Time</a></h4>
                 </div>
 

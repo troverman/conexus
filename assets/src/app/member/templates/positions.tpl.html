@@ -1,3 +1,8 @@
+<style type="text/css">
+	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}
+	tags-input .host{margin:0px;border:0px;}
+</style>
+
 <div class="spacing-5"></div>
 
 <div class="row">
@@ -13,7 +18,8 @@
 <div class="row">
     <div class="card">
         <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+        	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+            <!--<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">-->
             <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
                 <a href="#" role="button">
                     <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
@@ -34,15 +40,21 @@
 
 	<div class="card">
 		<div style="padding:16px;">
-			<!--<div style="float:right"><a ng-click="filterToggle()" href="#">CRE8 <i class="fa fa-question-circle"></i></a></div>-->
-			<div style="float:right"><a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in baseMarkets">{{dimension}}, </span><i class="fa fa-question-circle"></i></a></div>
-			<h1>{{member.username}} | Value Map</h1>
-			<h4>Dimensional Vote</h4>
-			<h4>Our Social Responsibility</h4>
+
+			<div style="float:right">
+				<a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in baseMarkets">{{dimension.text}}, </span><i class="fa fa-question-circle"></i></a>
+			</div>
+
+			<h3>Value Map</h3>
+			
 			<div class="spacing-10"></div>
 			<highchart config="chart"></highchart>
 			<div class="spacing-10"></div>
-			<div style=""><a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in markets">{{dimension}}, </span><i class="fa fa-question-circle"></i></a></div>
+
+			<div style="">
+				<a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in markets">{{dimension.text}}, </span><i class="fa fa-question-circle"></i></a>
+			</div>
+
 		</div>
 	</div>	
 </div>	
@@ -56,11 +68,11 @@
     <div ng-repeat="order in orders">
         <div class="card">
             <div style="padding:16px">
-            	<span ng-repeat="item in order.amountSet">
+            	<span ng-repeat="item in order.amountSet track by $index">
 					{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
 				</span>
 				<span> | </span>
-				<span ng-repeat="item in order.amountSet1">
+				<span ng-repeat="item in order.amountSet1 track by $index">
 					{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a> 
 				</span>
 				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
