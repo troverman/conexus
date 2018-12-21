@@ -19,7 +19,6 @@
     <div class="card">
         <form ng-submit="search()" style="display:flex;flex-direction:row;">
             <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
-            <!--<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">-->
             <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
                 <a href="#" role="button">
                     <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
@@ -31,38 +30,56 @@
 
 <div class="row">
 
-	<!--<ul style="padding:0px;" class="member-tabs">
-		<li style="float:right"><a ng-click="informationToggle()" href="#">CRE8 <i class="fa fa-question-circle"></i></a></li>
-		<div style="clear:both"></div>
-	</ul>-->
-
-	<div class="card">
-		<div style="padding:16px;">
-
-			<div style="float:right">
-				<a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in baseMarkets">{{dimension.text}}, </span><i class="fa fa-question-circle"></i></a>
+	<div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
+		<div class="card">
+			<div style="padding:16px;">
+				<span><b>Base Assets</b></span>
+	            <div ng-repeat="market in baseMarkets">
+	                <a href="#" ng-click="filterToggle()">{{market.text}}</a>
+	            </div>
 			</div>
-
-			<h3>Value Map</h3>
-
-			<div class="spacing-10"></div>
-			<highchart config="chart"></highchart>
-			<div class="spacing-10"></div>
-
-			<div style="">
-				<a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in markets">{{dimension.text}}, </span><i class="fa fa-question-circle"></i></a>
+		</div>
+		<div class="card">
+			<div style="padding:16px;">
+				<span><b>Assets</b></span>
+	            <div ng-repeat="market in markets">
+	                <a href="#" ng-click="filterToggle()">{{market.text}}</a>
+	            </div>
 			</div>
-
 		</div>
 	</div>
+
+	<div class="col-xs-10" style="padding-left:0px;padding-right:0px;">
+
+		<div class="card">
+			<div style="padding:16px;">
+
+				<!--<div style="float:right">
+					<a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in baseMarkets">{{dimension.text}}, </span><i class="fa fa-question-circle"></i></a>
+				</div>-->
+
+				<h3>Value Map</h3>
+
+				<div class="spacing-10"></div>
+				<highchart config="chart"></highchart>
+				<div class="spacing-10"></div>
+
+				<!--<div style="">
+					<a href="#" ng-click="filterToggle()"><span ng-repeat="dimension in markets">{{dimension.text}}, </span><i class="fa fa-question-circle"></i></a>
+				</div>-->
+
+			</div>
+		</div>
+
+		<div class="card">
+			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Motion to Create Order</button>
+		</div>
+
+	</div>
+
 </div>
 	
 <div class="row">
-	<div class="card">
-		<div style="">
-			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Motion to Create Order</button>
-		</div>
-	</div>
 
     <div ng-repeat="order in orders">
         <div class="card">

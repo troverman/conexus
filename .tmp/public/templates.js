@@ -5429,7 +5429,6 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "    <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "            <!--<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">-->\n" +
     "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                <a href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -5441,38 +5440,56 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "\n" +
     "<div class=\"row\">\n" +
     "\n" +
-    "	<!--<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li style=\"float:right\"><a ng-click=\"informationToggle()\" href=\"#\">CRE8 <i class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "		<div style=\"clear:both\"></div>\n" +
-    "	</ul>-->\n" +
-    "\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "\n" +
-    "			<div style=\"float:right\">\n" +
-    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "	<div class=\"col-xs-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Base Assets</b></span>\n" +
+    "	            <div ng-repeat=\"market in baseMarkets\">\n" +
+    "	                <a href=\"#\" ng-click=\"filterToggle()\">{{market.text}}</a>\n" +
+    "	            </div>\n" +
     "			</div>\n" +
-    "\n" +
-    "			<h3>Value Map</h3>\n" +
-    "\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "			<highchart config=\"chart\"></highchart>\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "			<div style=\"\">\n" +
-    "				<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "		</div>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Assets</b></span>\n" +
+    "	            <div ng-repeat=\"market in markets\">\n" +
+    "	                <a href=\"#\" ng-click=\"filterToggle()\">{{market.text}}</a>\n" +
+    "	            </div>\n" +
     "			</div>\n" +
-    "\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<div class=\"col-xs-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "				<!--<div style=\"float:right\">\n" +
+    "					<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "				</div>-->\n" +
+    "\n" +
+    "				<h3>Value Map</h3>\n" +
+    "\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "				<!--<div style=\"\">\n" +
+    "					<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "				</div>-->\n" +
+    "\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Motion to Create Order</button>\n" +
+    "		</div>\n" +
+    "\n" +
+    "	</div>\n" +
+    "\n" +
     "</div>\n" +
     "	\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"\">\n" +
-    "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Motion to Create Order</button>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
     "\n" +
     "    <div ng-repeat=\"order in orders\">\n" +
     "        <div class=\"card\">\n" +
