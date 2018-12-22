@@ -28,11 +28,11 @@
 	        </form>
 	    </div>
 
-	    <div ng-repeat="market in markets track by $index" style="padding:0px">
+	    <div ng-repeat="token in tokens track by $index" style="padding:0px">
 	    	<div class="card" ng-click="">
 			    <div style="padding:16px;">
-			    	<a style="white-space: nowrap;" href="market/{{market}}"><h4>{{market}}</h4></a>
-			    	<p style="white-space: nowrap;color:gray">{{market}} markets</p>
+			    	<a style="white-space: nowrap;" href="market/{{token.string}}"><h4>{{token.string}}</h4></a>
+			    	<p style="white-space: nowrap;color:gray">{{token.string}} markets</p>
 
 			    	<!--
 			    	<a style="white-space: nowrap;" href="market/{{market.string}}"><h4>{{market.string}}</h4></a>

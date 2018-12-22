@@ -16,14 +16,28 @@ module.exports = {
 
 		//+SEARCHED
 
-		Token.find({})
-		.limit(limit)
-		.skip(skip)
-		.sort(sort)
-		.then(function(models) {
-			Token.subscribe(req, models);
-			res.json(models);
-		});
+		if (req.query.string){
+			Token.find({string:req.query.string})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Token.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else{
+			Token.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Token.subscribe(req, models);
+				res.json(models);
+			});
+		}
+		
 	},
 
 };

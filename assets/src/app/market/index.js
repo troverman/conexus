@@ -14,11 +14,14 @@ angular.module( 'conexus.market', [
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
                 return OrderModel.getSome('market', $stateParams.id, '', 100, 0, 'createdAt DESC');
             }],
+            token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
+                return TokenModel.getSome('string', $stateParams.id, 1, 0, 'createdAt DESC');
+            }],
         }
 	});
 }])
 
-.controller( 'MarketCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', function MarketController( $scope, $stateParams, config, OrderModel, orders, titleService ) {
+.controller( 'MarketCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $scope, $stateParams, config, OrderModel, orders, titleService, token ) {
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
@@ -37,8 +40,9 @@ angular.module( 'conexus.market', [
         //if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
         //if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
+    $scope.token = token[0];
     $scope.trades = {};
-
+    console.log(token)
 	$scope.chart = {
         chart: {
             zoomType: 'x',

@@ -86,7 +86,7 @@ angular.module( 'conexus.markets', [
 
     $scope.markets = _.shuffle($scope.markets);
 
-    //$scope.tokens = $scope.markets;
+    $scope.tokens = tokens;
 
     $scope.newOrder = {};
     $scope.newOrderToggleVar = false;

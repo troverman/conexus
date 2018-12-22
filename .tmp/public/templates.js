@@ -1950,6 +1950,17 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "        </ul>\n" +
     "    </div>\n" +
     "\n" +
+    "    <div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "	    		<p>String: {{token.string}}</p>\n" +
+    "				<p>Information: In Circulation: {{token.information.inCirculation}}</p>\n" +
+    "	    		<p>Protocols: {{token.protocols}}</p>\n" +
+    "	    		<p>Logic: Transferrable: {{token.logic.transferrable}} Mint: {{token.logic.mint}}</p>\n" +
+    "    		</div>\n" +
+    "    	</div>\n" +
+    "    </div>\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
     "	        <form style=\"display:flex;flex-direction:row;\">\n" +
@@ -2574,11 +2585,11 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	        </form>\n" +
     "	    </div>\n" +
     "\n" +
-    "	    <div ng-repeat=\"market in markets track by $index\" style=\"padding:0px\">\n" +
+    "	    <div ng-repeat=\"token in tokens track by $index\" style=\"padding:0px\">\n" +
     "	    	<div class=\"card\" ng-click=\"\">\n" +
     "			    <div style=\"padding:16px;\">\n" +
-    "			    	<a style=\"white-space: nowrap;\" href=\"market/{{market}}\"><h4>{{market}}</h4></a>\n" +
-    "			    	<p style=\"white-space: nowrap;color:gray\">{{market}} markets</p>\n" +
+    "			    	<a style=\"white-space: nowrap;\" href=\"market/{{token.string}}\"><h4>{{token.string}}</h4></a>\n" +
+    "			    	<p style=\"white-space: nowrap;color:gray\">{{token.string}} markets</p>\n" +
     "\n" +
     "			    	<!--\n" +
     "			    	<a style=\"white-space: nowrap;\" href=\"market/{{market.string}}\"><h4>{{market.string}}</h4></a>\n" +
@@ -5118,7 +5129,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "</div>\n" +
     "\n" +
     "<div class=\"row\" ng-show=\"contentList.length > 0\">\n" +
-    "    <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
@@ -5252,10 +5263,8 @@ angular.module("project/templates/items.tpl.html", []).run(["$templateCache", fu
 angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/ledger.tpl.html",
     "<style type=\"text/css\">\n" +
-    "\n" +
     "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
     "	tags-input .host{margin:0px;border:0px;}\n" +
-    "\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"spacing-5\"></div>\n" +
