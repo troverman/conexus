@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -1928,8 +1928,8 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-xs-12\">\n" +
-    "				<h1>{{market.title}} Markets</h1>\n" +
-    "				<p style=\"color:white\">{{stateParams.id}} | {{market.marketCount}} markets | {{market.circulation}} tokens in circulation </p>\n" +
+    "				<h1>{{token.string}}</h1>\n" +
+    "				<p style=\"color:white\">{{token.string}} | {{token.information.markets}} markets | {{token.information.inCirculation}} tokens in circulation </p>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
@@ -6074,7 +6074,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>Value Map</h3>\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">The following are your discrete positions for your [UNIVERSAL+ONMINT] map</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">The following are your discrete positions for your <a href=\"market/UNIVERSAL\">UNIVERSAL</a> Valie map</p>\n" +
     "                    <div class=\"\" ng-repeat=\"order in newOrder\">\n" +
     "                        <span style=\"color:gray\">{{order[0].amount}} <a href=\"/market/{{order[0].identifier}}\">{{order[0].identifier}}</a> | <a href=\"/market/{{order[1].identifier}}\">{{order[1].identifier}}</a> | <a href=\"/market/{{order[0].identifier}}/{{order[1].identifier}}\">MarketPair</a></span>\n" +
     "                    </div>\n" +
@@ -6811,6 +6811,50 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "</div>");
+}]);
+
+angular.module("token/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("token/index.tpl.html",
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"container\"> \n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "				<h1>{{token.string}}</h1>\n" +
+    "				<p style=\"color:white\">{{token.string}} | {{token.information.markets}} markets | {{token.information.inCirculation}} tokens in circulation </p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "	<div style=\"row\">\n" +
+    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "            <li class=\"active\"><a href=\"#\">Activity</a></li>\n" +
+    "            <li><a href=\"#\">Trade Postions</a></li>\n" +
+    "            <li><a href=\"#\">onMint Actions</a></li>\n" +
+    "            <li><a href=\"#\">Information</a></li>\n" +
+    "            <li><a href=\"#\">Content</a></li>\n" +
+    "        </ul>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "	    		<p>String: {{token.string}}</p>\n" +
+    "				<p>Information: In Circulation: {{token.information.inCirculation}}</p>\n" +
+    "	    		<p>Protocols: {{token.protocols}}</p>\n" +
+    "	    		<p>Logic: Transferrable: {{token.logic.transferrable}} Mint: {{token.logic.mint}}</p>\n" +
+    "    		</div>\n" +
+    "    	</div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "</div>\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("transaction/index.tpl.html", []).run(["$templateCache", function($templateCache) {

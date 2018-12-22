@@ -43,6 +43,7 @@ angular.module( 'conexus', [
     'conexus.search',
     'conexus.task',
     'conexus.tasks',
+    'conexus.token',
     'conexus.time',
     'conexus.transaction',
     'conexus.transparency',

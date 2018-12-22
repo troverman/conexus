@@ -41,10 +41,43 @@ angular.module( 'conexus.nav', [
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
         });
+
     }
+
 
     //TODO: FACTOR LOADING HERE
     $rootScope.$on("$stateChangeStart", function() {
+
+        //VIEW GENERATION | LOL
+        //if ($scope.currentUser){
+            //VIEW AS TIME
+            //TODO: BACKEND TIMER.. ? 
+            //TODO: BETTER SECURITY..
+            //AKA CONNECT TO CHAIN WHEN START AND WHEN END NOT FRONTEND TIMER 
+            //-- MAKE TWO CALLS WITH TIME STAMP. 
+            //$scope.timer = {};
+            //$scope.timeModel = {
+            //    type: 'VIEW',
+            //    user: $scope.currentUser.id,
+            //    associatedModels: [{type: 'URL', id:window.location.href}],
+            //    amount: 0
+            //};
+            //$scope.timerFunction = function(time){
+            //    $scope.timeModel.amount = $scope.timeModel.amount + time;
+            //    console.log($scope.timeModel.amount)
+            //}
+            //$scope.timer = setInterval(function(){$scope.timerFunction(1)}, 1000);
+
+            //if ($scope.timeModel.amount != 0){
+                //clearInterval($scope.timer);
+                //$scope.timeModel.amount = $scope.timeModel.amount/1000
+                //console.log($scope.timeModel.amount)
+                //TimeModel.create($scope.timeModel).then(function(){
+                //    $scope.timeModel = {};
+                //    console.log('SURE')
+                //});
+            //}
+        //}
 
         //DEPRECIATE
         $rootScope.to = null;

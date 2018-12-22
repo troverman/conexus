@@ -11,15 +11,6 @@ angular.module( 'conexus.markets', [
 			}
 		},
         resolve:{
-            orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome('', '', '', 100, 0, 'createdAt DESC');
-            }],
-            projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome('', '', 100, 0, 'createdAt DESC');
-            }],
-            tasks: ['TaskModel', function(TaskModel) {
-                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
-            }],
             tokens: ['TokenModel', function(TokenModel) {
                 return TokenModel.getSome('', '', 1000, 0, 'createdAt DESC');
             }],
@@ -27,9 +18,12 @@ angular.module( 'conexus.markets', [
 	});
 }])
 
-.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'config', 'OrderModel', 'orders', 'titleService', 'projects', 'ProjectModel', 'TaskModel', 'tasks', 'tokens', function MarketsController( $rootScope, $scope, config, OrderModel, orders, titleService, projects, ProjectModel, TaskModel, tasks, tokens ) {
+.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'config', 'titleService', 'TokenModel', 'tokens', function MarketsController( $rootScope, $scope, config, titleService, TokenModel, tokens ) {
 	titleService.setTitle('Market | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    $scope.skip = 0;
+    $scope.selectedSort = 'createdAt DESC';
+
     $scope.chartMap = {
         chart: {
             polar: true,
@@ -62,54 +56,18 @@ angular.module( 'conexus.markets', [
         credits:{enabled:false},
     };
     
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-    $scope.projects = [];
-
-    //console.log(tokens)
-
     //STRING CROSS CHAIN
     //https://api.coinmarketcap.com/v2/listings/
 
-    for (x in projects){
-        $scope.markets.push(projects[x].id);
-        $scope.markets.push(projects[x].title+'+'+'Validation');
-        $scope.markets.push(projects[x].title+'+'+'Time');
-        $scope.markets.push(projects[x].title+'+'+'Content');
-    }
-
-    for (x in tasks){
-        $scope.markets.push(tasks[x].id);
-        $scope.markets.push(tasks[x].title+'+'+'Validation');
-        $scope.markets.push(tasks[x].title+'+'+'Time');
-        $scope.markets.push(tasks[x].title+'+'+'Content');
-    }
-
-    $scope.markets = _.shuffle($scope.markets);
-
     $scope.tokens = tokens;
 
-    $scope.newOrder = {};
-    $scope.newOrderToggleVar = false;
-   
-    $scope.createOrder = function() {
-
-        $scope.newOrder.user = $scope.currentUser.id;
-
-        //TODO: PARSE INPUT
-        //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-        //$scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-
-        OrderModel.create($scope.newOrder).then(function(model) {
-            $scope.orders.push($scope.newOrder);
-            $scope.newOrder = {};
+    $scope.loadMore = function() {
+        $scope.skip = $scope.skip + 20;
+        $rootScope.stateIsLoading = true;
+        TokenModel.getSome('search', $scope.searchQuery, 20, $scope.skip, 'createdAt DESC').then(function(tokens){
+            $rootScope.stateIsLoading = false;
+            Array.prototype.push.apply($scope.tokens, tokens);
         });
-
-    };
-
-    $scope.loadMore = function() {};
-
-    $scope.newOrderToggle = function () {
-        $scope.newOrderToggleVar = $scope.newOrderToggleVar ? false : true;
     };
 
     $scope.reply = function(item){
@@ -118,18 +76,16 @@ angular.module( 'conexus.markets', [
     };
 
     $scope.search = function(){
-
         $rootScope.stateIsLoading = true;
-        OrderModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+        TokenModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(tokens){
             $rootScope.stateIsLoading = false;
-            $scope.activity = models.map(function(obj){
-                obj.model = 'CONTENT';
-                return obj;
-            });
+            $scope.tokens = tokens;
         });
-
     };
 
-    $scope.selectSort = function(sort){};
+    $scope.selectSort = function(sort){
+
+
+    };
 
 }]);

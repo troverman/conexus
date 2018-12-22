@@ -10,7 +10,7 @@ angular.module('models.token', ['lodash', 'services', 'sails.io',])
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
         if (type=='search'){query = {params:{query:filter, limit:limit,skip:skip,sort:sort}};}
-        if (type=='string'){query = {params:{string:filter, limit:limit,skip:skip,sort:sort}};}
+        else if (type=='string'){query = {params:{string:filter, limit:limit,skip:skip,sort:sort}};}
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('token');
         return $sailsSocket.get(url, query).then(success, error);

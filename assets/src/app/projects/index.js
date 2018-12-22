@@ -78,7 +78,7 @@ angular.module( 'conexus.projects', [
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         console.log($scope.searchQuery)
-        ProjectModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(projects){
+        ProjectModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(projects){
             $rootScope.stateIsLoading = false;
             $scope.projects = projects;
         });
@@ -87,7 +87,7 @@ angular.module( 'conexus.projects', [
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
-        ProjectModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(projects) {
+        ProjectModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(projects){
             $rootScope.stateIsLoading = false;
             $scope.projects = projects;
         });

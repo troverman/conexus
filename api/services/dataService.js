@@ -685,6 +685,7 @@ module.exports = {
 		//STRING DATA ENCODING.. HOPEFULLY HUMAN READABLE --> PROMULAGATING EFFECTS OF EXCHANGE 
 
 		//STRINGS CANT HAVE SPACES ( SO SAYS I THE CREATOR )
+
 		function generateStringSpace(){
 
 			console.log('GENERATE STRING SPACE!');
@@ -722,7 +723,7 @@ module.exports = {
 					'VALIDATION',
 				];
 
-				var tokenSet = type;
+				var tokenSet = [];
 
 				for (x in data){
 					for (y in data[x]){
@@ -741,25 +742,49 @@ module.exports = {
 							//CONTENT
 							var contentBaseModel = {
 								string: 'CONTENT',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATECONTENT'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATECONTENT'
+								}
 							};
 
 							//DEPRECIATE?
 							var contentNFTModel = {
 								string: data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATECONTENT'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATECONTENT'
+								}
 							};
 
 							//DEPRECIATE?
 							var humanReadableContentNFTModel = {
 								string: 'CONTENT+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATECONTENT'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATECONTENT'
+								}
 							};
 
 							tokenSet.push(contentBaseModel);
@@ -771,19 +796,36 @@ module.exports = {
 								//CONTENT TYPE
 								//CONTENT+TYPE
 								var contentTypeModel = {
-									string: 'CONTENT'+data[x][y].type.toUpperCase(),
-									information:{inCirculation:1000*Math.random()},
-									protocols:['BASE', 'CONTENT'],
-									logic:{transferrable:true, mint:'ONCREATE'+data[x][y].type.toUpperCase()}
+									string: 'CONTENT+'+data[x][y].type.toUpperCase(),
+									information:{
+										inCirculation:Math.floor(1000*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE', 
+										'CONTENT'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATE'+data[x][y].type.toUpperCase()
+									}
 								};
 
 								//DEPRECIATE?
 								//CONTENT+TYPE+ID
 								var humanReadableContentTypeNFTModel = {
 									string: 'CONTENT+'+data[x][y].type.toUpperCase()+'+'+data[x][y].id,
-									information:{inCirculation:1},
-									protocols:['BASE'],
-									logic:{transferrable:true, mint:'ONCREATECONTENT'}
+									information:{
+										inCirculation:1,
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true,
+										mint:'ONCREATECONTENT'
+									}
 								};
 
 								tokenSet.push(contentTypeModel);
@@ -801,17 +843,33 @@ module.exports = {
 							//ITEM
 							var itemBaseModel = {
 								string: 'ITEM',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEITEM'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEITEM'
+								}
 							};
 
-							//DEPRECIATE?
+							//DEPRECIATE? || IE TITLE.ID --> FOR READABLE
 							var humanReadableItemNFTModel = {
 								string: 'ITEM+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATECONTENT'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATECONTENT'
+								}
 							};
 
 							tokenSet.push(itemBaseModel);
@@ -826,17 +884,33 @@ module.exports = {
 							//ORDER
 							var orderBaseModel = {
 								string: 'ORDER',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEORDER'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEORDER'
+								}
 							};
 
 							//ORDER NFT
 							var humanReadableOrderNFTModel = {
 								string: 'ORDER+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEORDER'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEORDER'
+								}
 							};
 
 							//TODO PAIR ENCODING. 
@@ -854,25 +928,49 @@ module.exports = {
 
 							var projectBaseModel = {
 								string: 'PROJECT',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEPROJECT'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEPROJECT'
+								}
 							};
 
 							//GOES TO PROJECT
 							var projectTitleModel = {
-								string: 'PROJECT+'+data[x][y].title,
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEPROJECT, PROJECTMEMBER PERMISSIONS'}
+								string: 'PROJECT+'+data[x][y].title.replace(' ','').toUpperCase(),
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEPROJECT, PROJECTMEMBER PERMISSIONS'
+								}
 							};
 
 							//DEPRECIATE -- SAMPLE
 							var projectPrelimModel = {
-								string: 'PROJECT+'+data[x][y].title+'+CONTENT',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEPROJECTCONTENT -- VALIDATION APPROVAL'}
+								string: 'PROJECT+'+data[x][y].title.replace(' ','').toUpperCase()+'+CONTENT',
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEPROJECTCONTENT -- VALIDATION APPROVAL'
+								}
 							};
 
 							tokenSet.push(projectBaseModel);
@@ -899,25 +997,49 @@ module.exports = {
 							//REACTION
 							var reactionBaseModel = {
 								string: 'REACTION',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEREACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
 							};
 
 							//REACTION NFT
 							var humanReadableReactionNFTModel = {
 								string: 'REACTION+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEREACTION'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
 							};
 
 							//REACTION+LIKE
 							var reactionTypeBaseModel = {
-								string: 'REACTION+'+data[x][y].type,
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEREACTION'}
+								string: 'REACTION+'+data[x][y].type.toUpperCase(),
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
 							};
 
 							tokenSet.push(reactionBaseModel);
@@ -935,54 +1057,102 @@ module.exports = {
 									//REACTION+CONTENT
 									var reactionAssociationTypeModel = {
 										string: 'REACTION+'+data[x][y].associatedModels[z].type,
-										information:{inCirculation:100*Math.random()},
-										protocols:['BASE'],
-										logic:{transferrable:true, mint:'ONCREATEREACTION'}
+										information:{
+											inCirculation:Math.floor(100*Math.random()),
+											markets: 0,
+										},
+										protocols:[
+											'BASE'
+										],
+										logic:{
+											transferrable:true, 
+											mint:'ONCREATEREACTION'
+										}
 									};
 
 									//REACTION ADDRESS
 									//REACTION+ADDRESS
 									var reactionAssociationAddressModel = {
 										string: 'REACTION+'+data[x][y].associatedModels[z].id,
-										information:{inCirculation:100*Math.random()},
-										protocols:['BASE'],
-										logic:{transferrable:true, mint:'ONCREATEREACTION'}
+										information:{
+											inCirculation:Math.floor(100*Math.random()),
+											markets: 0,
+										},
+										protocols:[
+											'BASE'
+										],
+										logic:{
+											transferrable:true, 
+											mint:'ONCREATEREACTION'
+										}
 									};
 
 									//REACTION TYPE ADDRESS
 									//REACTION+CONTENT+ADDRESS
 									var reactionAssociationTypeAddressModel = {
 										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].associatedModels[z].id,
-										information:{inCirculation:100*Math.random()},
-										protocols:['BASE'],
-										logic:{transferrable:true, mint:'ONCREATEREACTION'}
+										information:{
+											inCirculation:Math.floor(100*Math.random()),
+											markets: 0,
+										},
+										protocols:[
+											'BASE'
+										],
+										logic:{
+											transferrable:true, 
+											mint:'ONCREATEREACTION'
+										}
 									};
 
 									//REACTION TYPE ADDRESS
 									//REACTION+LIKE+ADDRESS
 									var reactionAssociationType1AddressModel = {
 										string: 'REACTION+'+data[x][y].type+'+'+data[x][y].associatedModels[z].id,
-										information:{inCirculation:100*Math.random()},
-										protocols:['BASE'],
-										logic:{transferrable:true, mint:'ONCREATEREACTION'}
+										information:{
+											inCirculation:Math.floor(100*Math.random()),
+											markets: 0,
+										},
+										protocols:[
+											'BASE'
+										],
+										logic:{
+											transferrable:true, 
+											mint:'ONCREATEREACTION'
+										}
 									};
 
 									//REACTION TYPE TYPE
 									//REACTION+CONTENT+LIKE
 									var reactionAssociationTypeTypeModel = {
 										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type,
-										information:{inCirculation:100*Math.random()},
-										protocols:['BASE'],
-										logic:{transferrable:true, mint:'ONCREATEREACTION'}
+										information:{
+											inCirculation:Math.floor(100*Math.random()),
+											markets: 0,
+										},
+										protocols:[
+											'BASE'
+										],
+										logic:{
+											transferrable:true, 
+											mint:'ONCREATEREACTION'
+										}
 									};
 
 									//REACTION ASSOICATION
 									//REACTION+CONTENT+LIKE+ADDRESS
 									var reactionAssociationTypeTypeAddressModel = {
 										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type+'+'+data[x][y].associatedModels[z].type+'+'+data[x][y].associatedModels[z].id,
-										information:{inCirculation:100*Math.random()},
-										protocols:['BASE'],
-										logic:{transferrable:true, mint:'ONCREATEREACTION'}
+										information:{
+											inCirculation:Math.floor(100*Math.random()),
+											markets: 0,
+										},
+										protocols:[
+											'BASE'
+										],
+										logic:{
+											transferrable:true, 
+											mint:'ONCREATEREACTION'
+										}
 									};
 									
 									tokenSet.push(reactionAssociationTypeModel);
@@ -1001,17 +1171,33 @@ module.exports = {
 							//TASK
 							var taskBaseModel = {
 								string: 'TASK',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETASK'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETASK'
+								}
 							};
 
 							//REACTION NFT
 							var humanReadableReactionNFTModel = {
 								string: 'TASK+'+data[x][y].id,
-								information:{inCirculation:1*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETASK'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETASK'
+								}
 							};
 
 							tokenSet.push(taskBaseModel);
@@ -1028,17 +1214,33 @@ module.exports = {
 							//TIME
 							var timeBaseModel = {
 								string: 'TIME',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETIME'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETIME'
+								}
 							};
 
 							//TIME NFT
 							var humanReadableTimeNFTModel = {
 								string: 'TIME+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETIME'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETIME'
+								}
 							};
 
 							//TODO: ASSOCIATIONS
@@ -1055,57 +1257,113 @@ module.exports = {
 							//TRANSACTION
 							var transactionBaseModel = {
 								string: 'TRANSACTION',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+									],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 							//TEST
 							var transactionBaseModelSend = {
 								string: 'TRANSACTION+SEND',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random())	,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 							//TEST
 							var transactionBaseModelRecieve = {
 								string: 'TRANSACTION+RECIEVE',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 							//ASSET - DEPRECIATE
 							var transactionBaseModelAsset = {
 								string: 'TRANSACTION+'+data[x][y].asset,
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 							//ASSET - DEPRECIATE
 							var transactionBaseModelAssetSend = {
 								string: 'TRANSACTION+SEND+'+data[x][y].asset,
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 
 							//ASSET - DEPRECIATE
 							var transactionBaseModelAssetRecieve = {
 								string: 'TRANSACTION+RECIEVE+'+data[x][y].asset,
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 							var humanReadableTransactionNFTModel = {
 								string: 'TRANSACTION+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATETRANSACTION'}
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
 							};
 
 
@@ -1134,17 +1392,33 @@ module.exports = {
 							//VALIDATION
 							var validationBaseModel = {
 								string: 'VALIDATION',
-								information:{inCirculation:10000*Math.random()},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEVALIDATION'}
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets:0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEVALIDATION'
+								}
 							};
 
 							//VALIDATION NFT
 							var humanReadableValidationNFTModel = {
 								string: 'VALIDATION+'+data[x][y].id,
-								information:{inCirculation:1},
-								protocols:['BASE'],
-								logic:{transferrable:true, mint:'ONCREATEVALIDATION'}
+								information:{
+									inCirculation:1,
+									markets:0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEVALIDATION'
+								}
 							};
 
 							tokenSet.push(validationBaseModel);
@@ -1166,11 +1440,54 @@ module.exports = {
 					}
 				}
 
+				//MB DONT HAVE TO SAVE.. JUST IMPLIED  -- IE
+				//MB DONT NEED THIS REP AREA
+				//var repList = JSON.parse(JSON.stringify(tokenSet));
+				//for (n in repList){
+				//	repList[n].string = 'REPUTATION+'+repList[n].string;
+				//	repList[n].logic.transferrable = false;
+				//}
+
+
+				//SPECIAL CASE.. LOAD IN EXTRA PROTOCOLS
+
+				//..MARKETS CAN BE COMBINITORIAL.. :|
+				//IE TOKEN VS MARKET --> RE VISIT 
+
+				//CREATE COIN AND UT UNITY
+				var universalTokenModel = {
+					string: 'UNIVERSALTOKEN',
+					information:{
+						inCirculation:Math.floor(10000000*Math.random()),
+						markets: 0,
+					},
+					protocols:[
+						'UNIVERSALTOKEN'
+					],
+					logic:{
+						transferrable:true, 
+						mint:'DAILY'
+					}
+				};
+				tokenSet.push(universalTokenModel)
+
+
+
+				var onMintList = JSON.parse(JSON.stringify(tokenSet));
+				for (n in onMintList){
+					onMintList[n].string = onMintList[n].string+'+ONMINT';
+				}
+				var superSet = [].concat.apply([], [tokenSet, onMintList])//, repList])
+
+				//remove dups
+				var _ = require('lodash');
+				var tokenSet_uniq = _.uniq(superSet, 'string'); 
+
 				//REPUTATION MANIFOLD
-				console.log(tokenSet.length);
+				console.log(tokenSet_uniq.length);
 				
 				var async = require('async');
-				async.eachSeries(tokenSet, function (token, nextIteration){ 
+				async.eachSeries(tokenSet_uniq, function (token, nextIteration){ 
 					Token.find({string:token.string}).then(function(aTokenModel){
 						if (aTokenModel.length == 0){
 							Token.create(token).then(function(){
@@ -1178,7 +1495,12 @@ module.exports = {
 								process.nextTick(nextIteration);
 							});
 						}
-						else{process.nextTick(nextIteration);}
+						else{
+							Token.update({id:aTokenModel[0].id}, token).then(function(){
+								console.log('UPDATE', token)
+								process.nextTick(nextIteration);
+							});
+						}
 					});
 				});	
 				

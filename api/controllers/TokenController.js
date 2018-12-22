@@ -12,12 +12,21 @@ module.exports = {
 
 		Token.watch(req);
 
-		//TODO MANIFOLD FILTERS
-
-		//+SEARCHED
-
 		if (req.query.string){
 			Token.find({string:req.query.string})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Token.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		else if (req.query.query){
+			console.log(req.query)
+			Token.find()
+			.where({string: {contains: req.query.query}})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -37,7 +46,7 @@ module.exports = {
 				res.json(models);
 			});
 		}
-		
+
 	},
 
 };
