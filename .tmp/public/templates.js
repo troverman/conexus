@@ -2561,7 +2561,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "        <div class=\"row\">\n" +
     "            <div class=\"col-xs-12\">\n" +
     "            	<h1>Markets</h1>\n" +
-    "				<p style=\"color:white\">88674 markets | 833423 tokens in circulation </p>\n" +
+    "				<p style=\"color:white\">833423 tokens in circulation </p>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
@@ -4809,8 +4809,9 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "\n" +
-    "            <!--<p>Members: {{project.memberCount}} | Tasks: {{project.taskCount}} | Time: {{project.timeCount}}</p>-->\n" +
     "            <p><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
+    "            <!--EDIT-->\n" +
+    "            <p>Members: {{project.memberCount}} | Tasks: {{project.taskCount}} | Time: {{project.timeCount}}</p>\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -5566,7 +5567,9 @@ angular.module("project/templates/settings.tpl.html", []).run(["$templateCache",
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "            <h1>{{project.title}} Settings</h1>\n" +
+    "            <h1>Settings</h1>\n" +
+    "            <p>Token Manifolds: '{{project.title}}+'</p>\n" +
+    "            <!--Create new Manifold-->\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>");

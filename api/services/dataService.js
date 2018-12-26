@@ -943,7 +943,7 @@ module.exports = {
 
 							//GOES TO PROJECT
 							var projectTitleModel = {
-								string: 'PROJECT+'+data[x][y].title.replace(' ','').toUpperCase(),
+								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'').toUpperCase(),
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -959,7 +959,7 @@ module.exports = {
 
 							//DEPRECIATE -- SAMPLE
 							var projectPrelimModel = {
-								string: 'PROJECT+'+data[x][y].title.replace(' ','').toUpperCase()+'+CONTENT',
+								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'').toUpperCase()+'+CONTENT',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -983,9 +983,40 @@ module.exports = {
 							//console.log('PARENT', data[x][y].parent);
 							//console.log(data[x][y].associatedModels);
 
-							//projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
-							//	console.log(projectModel);
-							//});
+							//STRUCURE INTO PROMISE TO RETURN
+							projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
+								//console.log(projectModel);
+								var projectAssociationModel = {
+									string: 'PROJECT+'+projectModel.toUpperCase(),
+									information:{
+										inCirculation:Math.floor(10000*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE',
+										'ASSOCIATION'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEPROJECT'
+									}
+								};
+
+
+								//DO BETTER
+								Token.find({string:projectAssociationModel.string}).then(function(aTokenModel){
+									if (aTokenModel.length == 0){
+										Token.create(projectAssociationModel).then(function(){
+											console.log(projectAssociationModel)
+										});
+									}
+									else{
+										Token.update({id:aTokenModel[0].id}, projectAssociationModel).then(function(){
+											console.log('UPDATE', projectAssociationModel)
+										});
+									}
+								});
+							});
 
 						}
 
@@ -1056,7 +1087,7 @@ module.exports = {
 									//REACTION TYPE
 									//REACTION+CONTENT
 									var reactionAssociationTypeModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type,
+										string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase(),
 										information:{
 											inCirculation:Math.floor(100*Math.random()),
 											markets: 0,
@@ -1090,7 +1121,7 @@ module.exports = {
 									//REACTION TYPE ADDRESS
 									//REACTION+CONTENT+ADDRESS
 									var reactionAssociationTypeAddressModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].associatedModels[z].id,
+										string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
 										information:{
 											inCirculation:Math.floor(100*Math.random()),
 											markets: 0,
@@ -1107,7 +1138,7 @@ module.exports = {
 									//REACTION TYPE ADDRESS
 									//REACTION+LIKE+ADDRESS
 									var reactionAssociationType1AddressModel = {
-										string: 'REACTION+'+data[x][y].type+'+'+data[x][y].associatedModels[z].id,
+										string: 'REACTION+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
 										information:{
 											inCirculation:Math.floor(100*Math.random()),
 											markets: 0,
@@ -1124,7 +1155,7 @@ module.exports = {
 									//REACTION TYPE TYPE
 									//REACTION+CONTENT+LIKE
 									var reactionAssociationTypeTypeModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type,
+										string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].type,
 										information:{
 											inCirculation:Math.floor(100*Math.random()),
 											markets: 0,
@@ -1141,7 +1172,7 @@ module.exports = {
 									//REACTION ASSOICATION
 									//REACTION+CONTENT+LIKE+ADDRESS
 									var reactionAssociationTypeTypeAddressModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type+'+'+data[x][y].associatedModels[z].type+'+'+data[x][y].associatedModels[z].id,
+										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].type+'+'+data[x][y].associatedModels[z].id,
 										information:{
 											inCirculation:Math.floor(100*Math.random()),
 											markets: 0,
@@ -1471,6 +1502,16 @@ module.exports = {
 				};
 				tokenSet.push(universalTokenModel)
 
+				//PROTOCOLS
+				//BASE, CONTENT, TIME, PROJECT, MEMBER
+				//MEMBER
+					//Address+
+					//on create of token string --> look up appropiate protocol;
+					//simple search pattern match 
+					//mint operations for address & address+ 
+						//address == creator, transferrable, true
+
+				//ASSOCIATIONS ARE THE CHALLANGE
 
 
 				var onMintList = JSON.parse(JSON.stringify(tokenSet));
