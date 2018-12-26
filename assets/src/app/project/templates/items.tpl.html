@@ -1,11 +1,19 @@
-<div class="spacing-5"></div>
-<h1>Marketplace</h1>
-
-<div class="card">
-    <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Item</button>
+<div class="row">
+    <div class="card">
+        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Item</button>
+    </div>
 </div>
 
-<div class="row">
+<div class="row" ng-show="items.length == 0">
+    <div class="card">
+        <div style="padding:16px;">
+            <span style="color:gray">There's nothing here..</span>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="items.length > 0">
+
     <div class="card">
         <form ng-submit="search()" style="display:flex;flex-direction:row;">
             <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
@@ -16,13 +24,12 @@
             </div>
         </form>
     </div>
-</div>
 
-<div class="row">
     <div class="card">
         <style type="text/css">.angular-google-map-container{height: 200px;}</style>
         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
     </div>
+
 </div>
 
 <div class="spacing-50"></div>

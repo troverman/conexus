@@ -32,7 +32,7 @@ angular.module( 'conexus.tasks', [
     $scope.searchQuery = [];
 
     $scope.tasks.map(function(obj){
-        obj.tags = obj.tags.split(',');
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
 
@@ -72,7 +72,7 @@ angular.module( 'conexus.tasks', [
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.tasks, tasks);
             $scope.tasks = tasks.map(function(obj){
-                obj.tags = obj.tags.split(',');
+                if (obj.tags){obj.tags = obj.tags.split(',')}
                 return obj;
             });
             $scope.loadAssociations();
@@ -91,7 +91,7 @@ angular.module( 'conexus.tasks', [
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.tasks = tasks.map(function(obj){
-                obj.tags = obj.tags.split(',');
+                if (obj.tags){obj.tags = obj.tags.split(',')}
                 return obj;
             });
             $scope.loadAssociations();
@@ -167,7 +167,7 @@ angular.module( 'conexus.tasks', [
         TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
 			$rootScope.stateIsLoading = false;
 			$scope.tasks = tasks.map(function(obj){
-                obj.tags = obj.tags.split(',');
+                if (obj.tags){obj.tags = obj.tags.split(',')}
                 return obj;
             });
 		});
@@ -186,7 +186,7 @@ angular.module( 'conexus.tasks', [
             console.log(tasks)
             $rootScope.stateIsLoading = false;
             $scope.tasks = tasks.map(function(obj){
-                obj.tags = obj.tags.split(',');
+                if (obj.tags){obj.tags = obj.tags.split(',')}
                 return obj;
             });
         });
@@ -202,7 +202,7 @@ angular.module( 'conexus.tasks', [
             case 'created':
                 $scope.tasks.unshift(envelope.data);
                 $scope.tasks.map(function(obj){
-                    obj.tags = obj.tags.split(',');
+                    if (obj.tags){obj.tags = obj.tags.split(',')}
                     return obj;
                 });
                 break;

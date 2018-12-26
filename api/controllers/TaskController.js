@@ -97,15 +97,7 @@ module.exports = {
 			user: req.param('user'),
 
 			//DEPRECIATE
-			completeIdentifierSet: req.param('completeIdentifierSet'),
-			completeBountySet: req.param('completeBountySet'),
-			timeIdentifierSet: req.param('timeIdentifierSet'),
-			timeBountySet: req.param('timeBountySet'),
-			verificationIdentifierSet: req.param('verificationIdentifierSet'),
-			verificationBountySet: req.param('verificationBountySet'),
 			project: req.param('project'),
-			members: req.param('members'),
-			parent: req.param('parent'),
 
 			//PATCH
 			reactions: {plus:0,minus:0},

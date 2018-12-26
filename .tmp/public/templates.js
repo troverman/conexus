@@ -1956,7 +1956,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	    		<p>String: {{token.string}}</p>\n" +
     "				<p>Information: In Circulation: {{token.information.inCirculation}}</p>\n" +
     "	    		<p>Protocols: {{token.protocols}}</p>\n" +
-    "	    		<p>Logic: Transferrable: {{token.logic.transferrable}} Mint: {{token.logic.mint}}</p>\n" +
+    "	    		<p>Logic: Transferrable: {{token.logic.transferrable}}, Mint: {{token.logic.mint}}</p>\n" +
     "    		</div>\n" +
     "    	</div>\n" +
     "    </div>\n" +
@@ -4675,20 +4675,10 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "            	<div class=\"col-md-12\">\n" +
-    "                    <h4>Create Order Post</h4>\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                    </form>\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "    <div class=\"card\">\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Order Post</button>\n" +
     "    </div>\n" +
+    "\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
@@ -4715,7 +4705,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "	\n" +
     "</div>");
 }]);
@@ -5230,14 +5220,22 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/items.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/items.tpl.html",
-    "<div class=\"spacing-5\"></div>\n" +
-    "<h1>Marketplace</h1>\n" +
-    "\n" +
-    "<div class=\"card\">\n" +
-    "    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item</button>\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item</button>\n" +
+    "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"row\">\n" +
+    "<div class=\"row\" ng-show=\"items.length == 0\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"row\" ng-show=\"items.length > 0\">\n" +
+    "\n" +
     "    <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
@@ -5248,13 +5246,12 @@ angular.module("project/templates/items.tpl.html", []).run(["$templateCache", fu
     "            </div>\n" +
     "        </form>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "    </div>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>\n" +
@@ -5396,9 +5393,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
   $templateCache.put("project/templates/members.tpl.html",
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <div style=\"\">\n" +
-    "			<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
-    "        </div>\n" +
+    "		<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">join</button>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -5986,8 +5981,13 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/221f8271cd0f9973074103f618127f79/tumblr_mftaidOEfI1qzafdao1_500.jpg\">\n" +
-    "                    <img style=\"max-height:200px\" src=\"http://67.media.tumblr.com/tumblr_m4y2nef37x1r9e0f2o1_500.png\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1523837157348-ffbdaccfc7de?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1501366062246-723b4d3e4eb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1501139083538-0139583c060f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1531502774286-5e4e8e94879f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
+    "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1504246979673-176ed6740840?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
     "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/9ed1b73eba1c79e07cbafc1ed63c2d61/tumblr_nf8oddwUYL1tf8mq6o1_400.gif\">\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6056,7 +6056,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>Let's Go!</h3>\n" +
-    "                    <h4>It's time to create a more eglatarian world.</h4>\n" +
+    "                    <h4>It's time to create a more egalitarian world.</h4>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">We Are Excited to have you as a memeber</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6897,9 +6897,9 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "        </div>\n" +
     "    </div>\n" +
     " \n" +
-    "    <!--<div class=\"card\">\n" +
+    "    <div class=\"card\">\n" +
     "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Transaction Post</button>\n" +
-    "    </div>-->\n" +
+    "    </div>\n" +
     "\n" +
     "    <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
     "        <div style=\"padding:16px\" ng-click=\"\">\n" +
@@ -6925,7 +6925,7 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "	\n" +
     "</div>\n" +
     "\n" +

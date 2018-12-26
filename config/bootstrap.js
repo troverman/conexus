@@ -6,6 +6,15 @@ module.exports.bootstrap = function(cb) {
   //dataService.getData();
   dataService.traverse();
   //dataService.reputationBuild();
+
+
+
+
+  //DEF PRE ALPHA. 
+  setInterval(intervalService.universalTokenProtocolPreAlpha, 86400)
+
+
+
   cb();
   
 };

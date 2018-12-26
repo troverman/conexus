@@ -1489,7 +1489,7 @@ module.exports = {
 				var universalTokenModel = {
 					string: 'UNIVERSALTOKEN',
 					information:{
-						inCirculation:Math.floor(10000000*Math.random()),
+						//inCirculation:0,
 						markets: 0,
 					},
 					protocols:[

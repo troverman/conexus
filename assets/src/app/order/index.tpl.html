@@ -43,20 +43,10 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="card">
-            <div style="padding:16px">
-            	<div class="col-md-12">
-                    <h4>Create Order Post</h4>
-                    <form role="form" ng-submit="createContent()">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                    </form>
-                    <div class="spacing-15"></div>
-                </div>
-            </div>
-        </div>
+    <div class="card">
+        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Order Post</button>
     </div>
+
 
     <div class="row">
         <div class="card" ng-repeat="item in contentList">
@@ -83,6 +73,6 @@
         </div>
     </div>
 
-    <div class="spacing-10"></div>
+    <div class="spacing-50"></div>
 	
 </div>
