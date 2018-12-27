@@ -32,7 +32,6 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
 			.then(function(models) {
 				Validation.subscribe(req, models);
 				res.json(models);

@@ -20,11 +20,14 @@ angular.module( 'conexus.task', [
             time: ['TimeModel', 'task', function(TimeModel, task){
                 return TimeModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
             }],
+            validations: ['ValidationModel', 'task', function(ValidationModel, task){
+                return ValidationModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
+            }],
         }
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService) {
+.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, validations) {
     $scope.currentUser = config.currentUser;
     $scope.task = task;
     console.log(task);
@@ -59,6 +62,8 @@ angular.module( 'conexus.task', [
     $scope.taskVerification = [];
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
+    $scope.validations = validations;
+    console.log(validations)
     $scope.verification = {};
     $scope.time = time;
 

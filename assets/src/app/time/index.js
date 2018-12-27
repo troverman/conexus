@@ -19,7 +19,7 @@ angular.module( 'conexus.time', [
                 return ContentModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
             }],
             validations: ['ValidationModel', 'time', function(ValidationModel, time){
-                return ValidationModel.getSome('work', time.id, 100, 0, 'createdAt DESC');
+                return ValidationModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
             }],
         }
     });

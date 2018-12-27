@@ -14,6 +14,8 @@ angular.module( 'conexus.nav', [
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedType = 'POST';
 
+    $scope.validationColumnRender = {};
+
     //$rootScope.currentUser = config.currentUser;
 
     if ($scope.currentUser){
@@ -325,29 +327,66 @@ angular.module( 'conexus.nav', [
 
         $scope.item = item;
 
+        console.log(item)
+
         //type.. -->? 
         //item is task, time , .. content, validation 
 
         ValidationModel.getSome('time', item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
 
+            $scope.validationColumnRender = {
+                chart: {zoomType: 'x'},
+                series: [{
+                    id: 'validation',
+                    type: 'column',
+                    name: 'Validation',
+                    data: [],
+                    yAxis: 0
+                }],
+                title: {text: ''},
+                xAxis: {
+                    crosshair: true,
+                    gridLineWidth: 0.5,
+                    gridLineColor: 'grey',
+                    title: {text: null},
+                    categories: [],
+                },
+                yAxis: [
+                    {title: {text: null}},
+                    {title: {text: null}},
+                    {title: {text: null}}
+                ],
+                legend: {enabled: true},
+                credits:{enabled:false},
+                plotOptions: {column: {minPointLength: 3}},
+            };
+
             $scope.validations = validationModels;
-            var sumObj = {};
 
             //TODO: SEEMS INNEFFECTIVE
+
+            //PROB SHOULD STORE COUNT AT SCALE.. AKA 1000 VALIDAIONS WILL CRASH
+            $scope.validationSumObj = {};
+
+
             if ($scope.validations.length > 0){
+
                 for (y in $scope.validations){
                     console.log($scope.validations[y].validation);
                     for (x in Object.keys($scope.validations[y].validation)){
-                        if(!sumObj[Object.keys($scope.validations[y].validation)[x]]){sumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-                        else{sumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+                        if(!$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]){$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+                        else{$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
                     }
 
                 }
-                console.log(sumObj);
-                for (x in Object.keys(sumObj)){
-                    $scope.validationColumn.series[0].data.push(sumObj[Object.keys(sumObj)[x]]/$scope.validations.length);
-                    $scope.validationColumn.xAxis.categories.push(Object.keys(sumObj)[x]);
+
+                console.log($scope.validationSumObj);
+
+                for (x in Object.keys($scope.validationSumObj)){
+                    $scope.validationColumnRender.series[0].data.push($scope.validationSumObj[Object.keys($scope.validationSumObj)[x]]/$scope.validations.length);
+                    $scope.validationColumnRender.xAxis.categories.push(Object.keys($scope.validationSumObj)[x]);
                 }
+
             }
 
         });
@@ -430,6 +469,7 @@ angular.module( 'conexus.nav', [
 
     $rootScope.validationToggle = function(item){
         if($scope.currentUser){
+
             console.log(item);
             $scope.item = item;
             $scope.newValidation = {};
@@ -458,7 +498,7 @@ angular.module( 'conexus.nav', [
                 }
             }
 
-            $mdSidenav('validationToggle').toggle();
+            $mdSidenav('validation').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };

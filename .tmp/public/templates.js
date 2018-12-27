@@ -1091,7 +1091,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            </form>\n" +
     "\n" +
     "                            <div ng-show=\"balanceLookupValue !== undefined\">\n" +
-    "                                <h5><a href=\"market/balanceLook\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "                                <h5><a href=\"market/{{balanceLook}}\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-6\">\n" +
@@ -1103,7 +1103,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                </div>\n" +
     "                            </form>\n" +
     "                            <div ng-show=\"reputationLookupValue !== undefined\">\n" +
-    "                                <h5><a href=\"market/reputationLook\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
+    "                                <h5><a href=\"reputation/{{reputationLook}}\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -4147,7 +4147,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:90%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
@@ -4159,21 +4159,77 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <h2>TYPE</h2>\n" +
     "\n" +
-    "                <h3>PROJECT --> PROJECT</h3>\n" +
+    "                <!--IF TYPE == 'TIME'-->\n" +
+    "                <div>\n" +
+    "                    <p>{{item.associatedModels}}</p>\n" +
     "\n" +
-    "                <h3>CONTENT --> PROJECT</h3>\n" +
-    "                <h3>MEMBER --> PROJECT</h3>\n" +
-    "                <h3>ORDER --> PROJECT</h3>\n" +
-    "                <h3>TRANSACTION --> PROJECT</h3>\n" +
+    "                    <!--<p>{{item.amount}}xTIME</p>-->\n" +
+    "                    <!--<span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>-->\n" +
     "\n" +
-    "                <h3>TASK --> PROJECT</h3>\n" +
-    "                <h3>TIME --> TASK ( --> PROJECT )</h3>\n" +
+    "                    <!--<h2>TYPE</h2>-->\n" +
+    "                    <!--<h3>TIME -> TASK ( -> PROJECT )</h3>-->\n" +
     "\n" +
-    "                <h3>VALIDATION --> VALIDATION</h3>\n" +
+    "                    <h4>\n" +
+    "                        {{item.amount}}\n" +
+    "                        <i class=\"fa fa-angle-double-left\"></i>\n" +
+    "                        {{validationSumObj.general/validations.length}}\n" +
+    "                        <i class=\"fa fa-angle-double-right\"></i>\n" +
+    "                        {{item.task.title.toUpperCase()}}\n" +
+    "                    </h4>\n" +
     "\n" +
-    "                <p>{{item}}</p>\n" +
+    "                    <!--\n" +
+    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">\n" +
+    "                        <h4>\n" +
+    "                            {{item.amount}}\n" +
+    "                            <i class=\"fa fa-angle-double-left\"></i>\n" +
+    "                            {{validationSumObj[tag]/validations.length}}\n" +
+    "                            <i class=\"fa fa-angle-double-right\"></i>\n" +
+    "                            {{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}\n" +
+    "                        </h4>\n" +
+    "                    </span>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <!--<p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>-->\n" +
+    "                    <!--<span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--IF TYPE == 'TIME' || TYPE == 'TASK'-->\n" +
+    "                <div>\n" +
+    "                    <!--<h3>TASK -> PROJECT</h3>-->\n" +
+    "                    <h4>{{item.task.title.toUpperCase()}} <i class=\"fa fa-arrows-h\"></i> {{item.project.title.toUpperCase()}}</h4>\n" +
+    "                    <!--<h3>TIME -> PROJECT</h3>-->\n" +
+    "                    <!--<p>{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}</p>-->\n" +
+    "\n" +
+    "                    <h4>{{item.amount}} <i class=\"fa fa-arrows-h\"></i> {{item.project.title}}</h4> \n" +
+    "                    <!--<p>{{item.amount}}x{{item.project.title.toUpperCase()}}+TIME, {{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}, {{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+TIME</p>-->\n" +
+    "\n" +
+    "                    <!--PROJECT CONTENT SPECIFIC TAGS? .. .. BASED ON VALIDATION SO YEAH. -->\n" +
+    "                    <!--<span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>\n" +
+    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--x nested validation-->\n" +
+    "\n" +
+    "                <!--IF TYPE == 'PROJECTPROJECT' -->\n" +
+    "                <!--IF TYPE == 'CONTENTPROJECT' -->\n" +
+    "                <!--...-->\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <h3>PROJECT -> PROJECT</h3>\n" +
+    "                <h3>CONTENT -> PROJECT</h3>\n" +
+    "                <h3>MEMBER -> PROJECT</h3>\n" +
+    "                <h3>ORDER -> PROJECT</h3>\n" +
+    "                <h3>TRANSACTION -> PROJECT</h3>\n" +
+    "                <h3>VALIDATION -> VALIDATION (-> ALL)</h3>\n" +
+    "                -->\n" +
+    "\n" +
+    "\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
+    "\n" +
+    "                <highchart config=\"validationColumnRender\"></highchart>\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -6355,6 +6411,8 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "    <!--TOKENS MINTING PER ACTION-->\n" +
     "    <!--TOKENS MINTED TOTAL-->\n" +
     "\n" +
+    "    <!--ASSOCIATION SORTED BY MOST VALIDATIONS.. AKA CANT SCALE BY LISTING THEM ALL-->\n" +
+    "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
     "        <div class=\"card\" ng-click=\"\">\n" +
@@ -7011,11 +7069,11 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
+    "		<div class=\"card\" ng-click=\"\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "\n" +
     "				<div style=\"float:right\">\n" +
-    "					<h5 style=\"text-align:right\" ng-click=\"tokenToggle(validation)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "					<h5 style=\"text-align:right\" ng-click=\"tokensToggle(validation)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "				</div>\n" +
     "\n" +
     "				<a href=\"member/{{validation.user.username}}\">\n" +
@@ -7027,6 +7085,9 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "				<!--TODO: ABSTRACT MODEL-->\n" +
     "				<p>time | <a href=\"time/{{validation.time}}\">{{validation.time}}</a></p>\n" +
+    "\n" +
+    "\n" +
+    "				<!--ASSOCIATION.. -->\n" +
     "\n" +
     "				<!--TODO: MANIFOLD-->\n" +
     "				<!--MANIFOLD-->\n" +
@@ -7059,11 +7120,10 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "			</div>\n" +
     "			<div class=\"card-footer\">\n" +
-    "				<a ng-click=\"$event.stopPropagation();createReaction(task, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{validation.reactions.plus}} like </a> \n" +
-    "                <a ng-click=\"$event.stopPropagation();createReaction(task, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{validation.reactions.minus}} dislike </a>\n" +
-    "		       	<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "		       	<a style=\"padding:5px;color:grey\" href=\"#\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "\n" +
+    "				<a ng-click=\"createReaction(validation, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{validation.reactions.plus}} like </a> \n" +
+    "                <a ng-click=\"createReaction(validation, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{validation.reactions.minus}} dislike </a>\n" +
+    "		       	<a style=\"padding:5px;color:grey\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		       	<a style=\"padding:5px;color:grey\" ng-click=\"validationToggle(validation)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "		    </div>\n" +
     "		    <div ng-show=\"validation.showReply\" class=\"card-footer\">\n" +
     "				<form role=\"form\" ng-submit=\"createContent(validation)\">\n" +
@@ -7072,6 +7132,11 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "				</form>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Validation Content</button>\n" +
+    "        </div>\n" +
+    "\n" +
     "	</div>\n" +
     "		\n" +
     "	<div class=\"spacing-50\"></div>\n" +

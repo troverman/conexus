@@ -443,7 +443,7 @@
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="renderValidation" md-is-locked-open="false" style="position:fixed;background-color:white;width:90%;max-width:100%">
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="renderValidation" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -455,21 +455,77 @@
             </div>
             <div style="padding:16px;">
 
-                <h2>TYPE</h2>
 
-                <h3>PROJECT --> PROJECT</h3>
+                <!--IF TYPE == 'TIME'-->
+                <div>
+                    <p>{{item.associatedModels}}</p>
 
-                <h3>CONTENT --> PROJECT</h3>
-                <h3>MEMBER --> PROJECT</h3>
-                <h3>ORDER --> PROJECT</h3>
-                <h3>TRANSACTION --> PROJECT</h3>
+                    <!--<p>{{item.amount}}xTIME</p>-->
+                    <!--<span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>-->
 
-                <h3>TASK --> PROJECT</h3>
-                <h3>TIME --> TASK ( --> PROJECT )</h3>
+                    <!--<h2>TYPE</h2>-->
+                    <!--<h3>TIME -> TASK ( -> PROJECT )</h3>-->
 
-                <h3>VALIDATION --> VALIDATION</h3>
+                    <h4>
+                        {{item.amount}}
+                        <i class="fa fa-angle-double-left"></i>
+                        {{validationSumObj.general/validations.length}}
+                        <i class="fa fa-angle-double-right"></i>
+                        {{item.task.title.toUpperCase()}}
+                    </h4>
 
-                <p>{{item}}</p>
+                    <!--
+                    <span ng-repeat="tag in item.task.tags.split(',')">
+                        <h4>
+                            {{item.amount}}
+                            <i class="fa fa-angle-double-left"></i>
+                            {{validationSumObj[tag]/validations.length}}
+                            <i class="fa fa-angle-double-right"></i>
+                            {{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}
+                        </h4>
+                    </span>
+                    -->
+
+                    <!--<p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>-->
+                    <!--<span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->
+
+                </div>
+
+                <!--IF TYPE == 'TIME' || TYPE == 'TASK'-->
+                <div>
+                    <!--<h3>TASK -> PROJECT</h3>-->
+                    <h4>{{item.task.title.toUpperCase()}} <i class="fa fa-arrows-h"></i> {{item.project.title.toUpperCase()}}</h4>
+                    <!--<h3>TIME -> PROJECT</h3>-->
+                    <!--<p>{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}</p>-->
+
+                    <h4>{{item.amount}} <i class="fa fa-arrows-h"></i> {{item.project.title}}</h4> 
+                    <!--<p>{{item.amount}}x{{item.project.title.toUpperCase()}}+TIME, {{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}, {{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+TIME</p>-->
+
+                    <!--PROJECT CONTENT SPECIFIC TAGS? .. .. BASED ON VALIDATION SO YEAH. -->
+                    <!--<span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
+                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->
+
+                </div>
+
+                <!--x nested validation-->
+
+                <!--IF TYPE == 'PROJECTPROJECT' -->
+                <!--IF TYPE == 'CONTENTPROJECT' -->
+                <!--...-->
+
+                <!--
+                <h3>PROJECT -> PROJECT</h3>
+                <h3>CONTENT -> PROJECT</h3>
+                <h3>MEMBER -> PROJECT</h3>
+                <h3>ORDER -> PROJECT</h3>
+                <h3>TRANSACTION -> PROJECT</h3>
+                <h3>VALIDATION -> VALIDATION (-> ALL)</h3>
+                -->
+
+
+                <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+
+                <highchart config="validationColumnRender"></highchart>
 
             </div>
         </div>

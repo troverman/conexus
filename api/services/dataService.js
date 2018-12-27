@@ -662,7 +662,7 @@ module.exports = {
 			var deferred = Q.defer();
 			Project.find({id:id}).then(function(models){
 				if (models.length == 1){
-					path = path +'+'+ models[0].title;
+					path = path.toUpperCase().replace(/ /g,'_') + '+' + models[0].title.toUpperCase().replace(/ /g,'_');
 					if (models[0].parent){
 						projectAssociations(models[0].parent, path).then(function(path){deferred.resolve(path)});
 					}
@@ -685,6 +685,13 @@ module.exports = {
 		//STRING DATA ENCODING.. HOPEFULLY HUMAN READABLE --> PROMULAGATING EFFECTS OF EXCHANGE 
 
 		//STRINGS CANT HAVE SPACES ( SO SAYS I THE CREATOR )
+
+
+
+		//VALIDATIONS...
+		//CREATE PROJECT --> TIME
+			//TIME --> TASK
+			//TASK --> PROJ LINKAGES
 
 		function generateStringSpace(){
 
@@ -943,7 +950,7 @@ module.exports = {
 
 							//GOES TO PROJECT
 							var projectTitleModel = {
-								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'').toUpperCase(),
+								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase(),
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -959,7 +966,7 @@ module.exports = {
 
 							//DEPRECIATE -- SAMPLE
 							var projectPrelimModel = {
-								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'').toUpperCase()+'+CONTENT',
+								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase()+'+CONTENT',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,

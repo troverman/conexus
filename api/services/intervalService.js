@@ -132,7 +132,9 @@ module.exports = {
 		User.find().then(function(userModels){
 
 			for (x in userModels){
-				if (!userModels[x].balance['UNIVERSALTOKEN']){userModels[x].balance['UNIVERSALTOKEN'] == 0}
+				console.log(userModels[x].balance)
+				if(!userModels[x].balance){userModels[x].balance = {}}
+				if(!userModels[x].balance['UNIVERSALTOKEN']){userModels[x].balance['UNIVERSALTOKEN'] = 0}
 				userModels[x].balance['UNIVERSALTOKEN'] = userModels[x].balance['UNIVERSALTOKEN'] + 1;
 				User.update({id:userModels[x].id}, {balance: userModels[x].balance}).then(function(){
 					console.log('updated')
@@ -140,7 +142,7 @@ module.exports = {
 			}
 
 			Token.find({string:'UNIVERSALTOKEN'}).then(function(tokenModels){
-				tokenModels.information.inCirculation = parseInt(tokenModels.information.inCirculation) + parseInt(userModels.length);
+				tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(userModels.length);
 				Token.update({id:tokenModels[0].id}, tokenModels[0]).then(function(){
 					console.log('updated')
 				});

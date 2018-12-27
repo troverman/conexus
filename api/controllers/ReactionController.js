@@ -88,6 +88,8 @@ module.exports = {
 				
 				Reaction.publishCreate(reaction);
 
+				//REACT TO ACTIVITY.. IE FOLLOW AND PROJECTMEMBER :P
+
 				for (x in model.associatedModels){
 					if (model.associatedModels[x].type == 'CONTENT'){
 						Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
@@ -96,6 +98,42 @@ module.exports = {
 							else if (contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = contentModel[0].reactions[model.type] + model.amount;}
 							console.log(contentModel[0]);
 							Content.update({id:contentModel[0].id},{reactions:contentModel[0].reactions}).then(function(contentModel){
+								console.log('UPDATE');
+								res.json(reaction);
+							});
+						});
+					}
+					if (model.associatedModels[x].type == 'ITEM'){
+						Item.find({id:model.associatedModels[x].id}).then(function(itemModel){
+							if (!itemModel[0].reactions){itemModel[0].reactions = {};}
+							if (!itemModel[0].reactions[model.type]){itemModel[0].reactions[model.type] = model.amount;}
+							else if (itemModel[0].reactions[model.type]){itemModel[0].reactions[model.type] = itemModel[0].reactions[model.type] + model.amount;}
+							console.log(itemModel[0]);
+							Item.update({id:itemModel[0].id},{reactions:itemModel[0].reactions}).then(function(itemModel){
+								console.log('UPDATE');
+								res.json(reaction);
+							});
+						});
+					}
+					if (model.associatedModels[x].type == 'ORDER'){
+						Order.find({id:model.associatedModels[x].id}).then(function(orderModel){
+							if (!orderModel[0].reactions){orderModel[0].reactions = {};}
+							if (!orderModel[0].reactions[model.type]){orderModel[0].reactions[model.type] = model.amount;}
+							else if (orderModel[0].reactions[model.type]){orderModel[0].reactions[model.type] = orderModel[0].reactions[model.type] + model.amount;}
+							console.log(orderModel[0]);
+							Order.update({id:orderModel[0].id},{reactions:orderModel[0].reactions}).then(function(orderModel){
+								console.log('UPDATE');
+								res.json(reaction);
+							});
+						});
+					}
+					if (model.associatedModels[x].type == 'REACTION'){
+						Reaction.find({id:model.associatedModels[x].id}).then(function(reactionModel){
+							if (!reactionModel[0].reactions){reactionModel[0].reactions = {};}
+							if (!reactionModel[0].reactions[model.type]){reactionModel[0].reactions[model.type] = model.amount;}
+							else if (reactionModel[0].reactions[model.type]){reactionModel[0].reactions[model.type] = reactionModel[0].reactions[model.type] + model.amount;}
+							console.log(reactionModel[0]);
+							Reaction.update({id:reactionModel[0].id},{reactions:reactionModel[0].reactions}).then(function(reactionModel){
 								console.log('UPDATE');
 								res.json(reaction);
 							});
@@ -132,6 +170,18 @@ module.exports = {
 							else if (transactionModel[0].reactions[model.type]){transactionModel[0].reactions[model.type] = transactionModel[0].reactions[model.type] + model.amount;}
 							console.log(transactionModel[0]);
 							Transaction.update({id:transactionModel[0].id},{reactions:transactionModel[0].reactions}).then(function(transactionModel){
+								console.log('UPDATE');
+								res.json(reaction);
+							});
+						});
+					}
+					if (model.associatedModels[x].type == 'VALIDATION'){
+						Validation.find({id:model.associatedModels[x].id}).then(function(validationModel){
+							if (!validationModel[0].reactions){validationModel[0].reactions = {};}
+							if (!validationModel[0].reactions[model.type]){validationModel[0].reactions[model.type] = model.amount;}
+							else if (validationModel[0].reactions[model.type]){validationModel[0].reactions[model.type] = validationModel[0].reactions[model.type] + model.amount;}
+							console.log(validationModel[0]);
+							Validation.update({id:validationModel[0].id},{reactions:validationModel[0].reactions}).then(function(validationModel){
 								console.log('UPDATE');
 								res.json(reaction);
 							});

@@ -4,11 +4,11 @@
 	<div class="spacing-10"></div>
 
 	<div class="row">
-		<div class="card">
+		<div class="card" ng-click="">
 			<div style="padding:16px">
 
 				<div style="float:right">
-					<h5 style="text-align:right" ng-click="tokenToggle(validation)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+					<h5 style="text-align:right" ng-click="tokensToggle(validation)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
 				</div>
 
 				<a href="member/{{validation.user.username}}">
@@ -20,6 +20,9 @@
 
 				<!--TODO: ABSTRACT MODEL-->
 				<p>time | <a href="time/{{validation.time}}">{{validation.time}}</a></p>
+
+
+				<!--ASSOCIATION.. -->
 
 				<!--TODO: MANIFOLD-->
 				<!--MANIFOLD-->
@@ -52,11 +55,10 @@
 
 			</div>
 			<div class="card-footer">
-				<a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{validation.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.reactions.minus}} dislike </a>
-		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-		       	<a style="padding:5px;color:grey" href="#"><i class="fa fa-check"></i> validate </a>
-
+				<a ng-click="createReaction(validation, 'plus')"><i class="fa fa-angle-up"></i> {{validation.reactions.plus}} like </a> 
+                <a ng-click="createReaction(validation, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.reactions.minus}} dislike </a>
+		       	<a style="padding:5px;color:grey" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
+		       	<a style="padding:5px;color:grey" ng-click="validationToggle(validation)"><i class="fa fa-check"></i> validate </a>
 		    </div>
 		    <div ng-show="validation.showReply" class="card-footer">
 				<form role="form" ng-submit="createContent(validation)">
@@ -65,6 +67,11 @@
 				</form>
 			</div>
 		</div>
+
+        <div class="card">
+            <button style="width:100%;" class="btn btn-default log-btn" ng-click="contentToggle()">+ Validation Content</button>
+        </div>
+
 	</div>
 		
 	<div class="spacing-50"></div>
