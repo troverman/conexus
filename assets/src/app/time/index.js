@@ -1,7 +1,6 @@
 angular.module( 'conexus.time', [
 ])
 
-//TODO: CONVERT TO TIME
 .config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'time', {
         url: '/time/:id',
@@ -27,8 +26,9 @@ angular.module( 'conexus.time', [
 
 .controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'time', 'TimeModel', 'titleService', 'UserModel', 'ValidationModel', 'validations', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, time, TimeModel, titleService, UserModel, ValidationModel, validations) {
     $scope.currentUser = config.currentUser;
-
     $scope.time = time;
+    if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
+   
     if(!$scope.time){$location.path('/')}
 
     titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
@@ -171,11 +171,8 @@ angular.module( 'conexus.time', [
     };
 
     $scope.createReaction = function(item, type){
-
         if ($scope.currentUser){
-
             //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
@@ -191,9 +188,7 @@ angular.module( 'conexus.time', [
             }
             ReactionModel.create($scope.newReaction);
         }
-
         else{$mdSidenav('login').toggle()}
-
     };
 
     //TODO: LAYERS | PROJ BASED LAYER
@@ -201,6 +196,9 @@ angular.module( 'conexus.time', [
         if ($scope.currentUser){
             $scope.newValidation.work = $scope.time.id;
             $scope.newValidation.user = $scope.currentUser.id;
+
+            //ASSOCIATEDMODELS
+
             ValidationModel.create($scope.newValidation).then(function(model){
                 $scope.newValidation = {};
                 for (x in $scope.tags){

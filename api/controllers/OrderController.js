@@ -87,11 +87,20 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
+
+			setAlpha: req.param('setAlpha'),
+			setBeta: req.param('setBeta'),
+
 			amountSet: req.param('amountSet'),
 			identiferSet: req.param('identiferSet'),
 			amountSet1: req.param('amountSet1'),
 			identiferSet1: req.param('identiferSet1'),
+
+			type: req.param('type'),
+
+			creator: req.param('creator'), //TODO: CHANGE TO CREATOR | ADDRESS | IE ORGS MAKING ORDERS
 			user: req.param('user'), //TODO: CHANGE TO CREATOR | ADDRESS | IE ORGS MAKING ORDERS
+
 		};
 		//PATCH
 		model.reactions = {plus:0,minus:0};

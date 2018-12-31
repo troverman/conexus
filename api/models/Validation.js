@@ -14,7 +14,6 @@ module.exports = {
         //ASSOCIATIONS
         associatedModels: {type: 'json'},
 
-
         //TOO MUCH RE: VERBS --> GET INTO IT TMO
 
         //CREATE VERB
@@ -30,7 +29,6 @@ module.exports = {
         //MODIFY VERB
         //[{type: 'PROJECT', id: 1}]
         //[{type: 'PROJECT', id: 1}, {type:'MEMBER', id:1}]
-
 
         //the validation is the connection btw associated models 
 

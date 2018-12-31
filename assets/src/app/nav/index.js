@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'ProjectModel', 'ReactionModel','SearchModel', 'TaskModel', 'TimeModel', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sce, $scope, $state, config, ContentModel, ItemModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sce, $scope, $state, config, ContentModel, ItemModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, TransactionModel, ValidationModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
@@ -122,9 +122,9 @@ angular.module( 'conexus.nav', [
    
     //TODO: TEST
     $scope.invertMarket = function() {
-        var temp = $scope.newOrder.identiferSet;
-        $scope.newOrder.identiferSet = $scope.newOrder.identiferSet1;
-        $scope.newOrder.identiferSet1 = temp;
+        var temp = $scope.newOrder.identiferSetAlpha;
+        $scope.newOrder.identiferSetAlpha = $scope.newOrder.identiferSetBeta;
+        $scope.newOrder.identiferSetBeta = temp;
         $scope.inverted = !$scope.inverted;
     };
 
@@ -594,15 +594,34 @@ angular.module( 'conexus.nav', [
             $scope.newOrder.user = $scope.currentUser.id;
             $scope.newOrder.type = $scope.selectedOrderType;
 
+            //ill do both
+            //PATCH
+            $scope.newOrder.identiferSet = [];
+            $scope.newOrder.identiferSet1 = [];
+            $scope.newOrder.amountSet = [];
+            $scope.newOrder.amountSet1 = [];
+
+            for (x in Object.keys($scope.newOrder.setAlpha)){
+                $scope.newOrder.identiferSet.push(Object.keys($scope.newOrder.setAlpha)[x]);
+                $scope.newOrder.amountSet.push($scope.newOrder.setAlpha[Object.keys($scope.newOrder.setAlpha)[x]]);
+            }
+            for (x in Object.keys($scope.newOrder.setBeta)){
+                $scope.newOrder.identiferSet1.push(Object.keys($scope.newOrder.setBeta)[x]);
+                $scope.newOrder.amountSet1.push($scope.newOrder.setBeta[Object.keys($scope.newOrder.setBeta)[x]]);
+            }
+
+            $scope.newOrder.identiferSet = $scope.newOrder.identiferSet.join(",");
+            $scope.newOrder.identiferSet1 = $scope.newOrder.identiferSet1.join(",");
+            $scope.newOrder.amountSet = $scope.newOrder.amountSet.join(",");
+            $scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.join(",");
+
             console.log($scope.newOrder);
 
             OrderModel.create($scope.newOrder).then(function(model) {
-
                 $scope.confirm = $scope.newOrder;
                 $scope.confirm.modelType = 'ORDER';
-
-                $scope.newOrder = {};
                 $mdSidenav('order').close();
+                $scope.newOrder = {};
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });

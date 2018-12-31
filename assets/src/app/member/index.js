@@ -370,7 +370,6 @@ angular.module( 'conexus.member', [
             ReactionModel.create($scope.newReaction);
         }
         else{$mdSidenav('login').toggle()}
-            
     };
 
     $scope.reply = function(item){
@@ -827,10 +826,9 @@ angular.module( 'conexus.member', [
             type: 'area',
             name: 'Asset Flow',
             data: [],
+            visible: false
         }],
-        title: {
-            text: ''
-        },
+        title: {text: ''},
         xAxis: {
             type: 'datetime',
             currentMin: 0,
@@ -839,15 +837,9 @@ angular.module( 'conexus.member', [
             crosshair: true,
             gridLineWidth: 0.5,
             gridLineColor: 'grey',
-            title: {
-                text: null
-            },
+            title: {text: null},
         },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -865,21 +857,10 @@ angular.module( 'conexus.member', [
                 name: 'Revenue',
                 y: [],
             }]
-        }],
-        
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        }],     
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -901,27 +882,46 @@ angular.module( 'conexus.member', [
         },0);
     }
 
-    $scope.transactionTags = $scope.transactions.map(function(obj){
-        var returnArray = [];
-        if(obj.tags){
-            obj.tags = obj.tags.split(',');
-            for (x in obj.tags){
-                returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})
+    $scope.loadAssets = function(){
+        $scope.transactionAssets = $scope.transactions.map(function(obj){            
+            return obj.identifier;
+        });
+        $scope.transactionAssets = [].concat.apply([], $scope.transactionAssets);
+        $scope.sortedTransactionAssets = [];
+        for (x in $scope.transactionAssets){
+            var amount = countInArray($scope.transactionAssets, $scope.transactionAssets[x]);
+            if ($scope.sortedTransactionAssets.map(function(obj){return obj.element}).indexOf($scope.transactionAssets[x]) == -1){
+                $scope.sortedTransactionAssets.push({amount:amount, element:$scope.transactionAssets[x]})
             }
         }
-        return returnArray;
-    });
-    $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
-
-    $scope.sortedTransactionTags = [];
-    for (x in $scope.transactionTags){
-        var amount = amountInArray($scope.transactionTags, $scope.transactionTags[x]);
-        if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x].tag) == -1){
-            $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x].tag})
-        }
+        $scope.sortedTransactionAssets.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
-    $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
-    
+    $scope.loadAssets();
+
+    //TODO: BETTER
+    $scope.loadTags = function(){
+        $scope.transactionTags = $scope.transactions.map(function(obj){
+            var returnArray = [];
+            if(obj.tags){
+                obj.tags = obj.tags.split(',');
+                for (x in obj.tags){
+                    returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})
+                }
+            }
+            return returnArray;
+        });
+        $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
+        $scope.sortedTransactionTags = [];
+        for (x in $scope.transactionTags){
+            var amount = amountInArray($scope.transactionTags, $scope.transactionTags[x]);
+            if ($scope.sortedTransactionTags.map(function(obj){return obj.element}).indexOf($scope.transactionTags[x].tag) == -1){
+                $scope.sortedTransactionTags.push({amount:amount, element:$scope.transactionTags[x].tag})
+            }
+        }
+        $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
+    };
+    $scope.loadTags();
+
     //TAGS
     //DO BY TAGS! SAME ..
     function sumFunction(obj){
@@ -931,6 +931,7 @@ angular.module( 'conexus.member', [
         }, 0);
         return sumArray;
     }
+
     //SERIES PER TAG
     //FOR X IN TAG -- SERIES.PUSH
         //SERIES[x].push(data)
@@ -968,7 +969,7 @@ angular.module( 'conexus.member', [
     $scope.chart.series[0].data = $scope.sumTransactions;
     $scope.chart.series[1].data = $scope.sumFrom;
     $scope.chart.series[2].data = $scope.sumTo;
-    //$scope.chart.series[3].data = $scope.sumFlow;
+    $scope.chart.series[3].data = $scope.sumFlow;
 
     //REDO
     $scope.startDate = new Date($scope.transactions[0].createdAt);
@@ -977,15 +978,11 @@ angular.module( 'conexus.member', [
     $scope.transactions = $scope.transactions.reverse();
 
     
+    //TODO: TAGS
     $scope.selectExpense = function(){
-        //TODO: TAGS
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
             var returnArray = [];
-            if(obj.tags){
-                for (x in obj.tags){
-                    returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})
-                }
-            }
+            if(obj.tags){for (x in obj.tags){returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})}}
             return returnArray;
         });
         $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
@@ -1106,9 +1103,10 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, titleService) {
+.controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, ReactionModel, titleService) {
     $scope.currentUser = config.currentUser;
     $scope.member = member;
+    $scope.newReaction = {};
     $scope.orders = orders;
     $scope.orders.forEach(function(part, index) {
         if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
@@ -1142,7 +1140,7 @@ angular.module( 'conexus.member', [
     };
 
     $rootScope.baseMarkets = [
-        {text:'UniversalToken'},
+        {text:'UNIVERSAL'},
         {text:'CRE8'},
         {text:'ETH'},
         {text:'BTC'},
@@ -1155,32 +1153,34 @@ angular.module( 'conexus.member', [
         {text:'REST,FOOD'},
     ];
 
+    //IS . a better language w.e? vs + --> Could be. 
+    //LOOKS COOLER TO ME HAHA!!
+
     $rootScope.markets = [
-        {text:'EDUCATION+onMint'},
+        {text:'EDUCATION+ONMINT'},
         {text:'SHELTER'},
+        {text:'HEALTH'},
         {text:'FOOD'},
         {text:'REST'},
+        {text:'CRE8'},
         {text:'USD'},
         {text:'ETH'},
         {text:'BTC'},
-        {text:'STEEM'},
-        {text:'CRE8'},
-        {text:'Create'},
-        {text:'Time'},
-        {text:'TimeStream'},
-        {text:'React'},
-        {text:'Content'},
-        {text:'Order'},
-        {text:'View'},
-        {text:'Validate'},
-        {text:'Mine'},
-        {text:'Durham'},
-        {text:'Chapel Hill'},
-        {text:'Knoxville'},
-        {text:'Maryville'},
+        {text:'CREATE'},
+        {text:'TIME'},
+        {text:'TIME+VIEW'},
+        {text:'TIME+WORK'},
+        {text:'STREAM'},
+        {text:'REACT'},
+        {text:'CONTENT'},
+        {text:'ORDER'},
+        {text:'TRANSACTION'},
+        {text:'VIEW'},
+        {text:'VALIDATE'},
     ];
-    
+
     $scope.searchQuery = $rootScope.baseMarkets;
+
     $scope.populateBaseMarkets = function(){
         $scope.chart.series = [];
         for (x in $rootScope.baseMarkets){
@@ -1223,11 +1223,19 @@ angular.module( 'conexus.member', [
         //basemarket; market
     };
 
-    //TODO
-    $scope.createReaction = function(content, type){
-
-
+    $scope.createReaction = function(item, type){
+        if($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.associatedModels = [{type:'ORDER', id:item.id}];
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.orders[index].reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+        }
+        else{$mdSidenav('login').toggle()}
     };
+
 
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);

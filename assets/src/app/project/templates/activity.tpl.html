@@ -117,7 +117,7 @@
 
                 <p style="font-weight:800">From: <a ng-click="$event.stopPropagation();" href="">{{item.from}}</a> To: <a href="">{{item.to}}</a></p>
                 <p style="font-weight:800">{{item.amount}} <a ng-click="$event.stopPropagation();" href="market/{{item.identifier}}">{{item.identifier}}</a></p>
-                <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                 <p>{{item.content}}</p>
                 <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
                 <a ng-click="$event.stopPropagation();" href="transaction/{{item.id}}"></a>

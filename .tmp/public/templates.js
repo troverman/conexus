@@ -3234,10 +3234,8 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
     "<style type=\"text/css\">\n" +
-    "\n" +
-    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	tags-input .host{margin:0px;border:0px;}\n" +
-    "\n" +
+    "	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	.card tags-input .host{margin:0px;border:0px;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"spacing-5\"></div>\n" +
@@ -3280,8 +3278,8 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<span><b>Identifiers</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
-    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "	            <div ng-repeat=\"asset in sortedTransactionAssets\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectAsset(asset.element)\">{{asset.element}}</a>\n" +
     "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -3289,7 +3287,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "			<div style=\"padding:16px;\">\n" +
     "				<span><b>Associations</b></span>\n" +
     "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
-    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "                    <a href=\"#\" ng-click=\"selectAssociation(tag.element)\">{{tag.element}}</a>\n" +
     "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -3367,8 +3365,8 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
     "<style type=\"text/css\">\n" +
-    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	tags-input .host{margin:0px;border:0px;}\n" +
+    "	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	.card tags-input .host{margin:0px;border:0px;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"spacing-5\"></div>\n" +
@@ -3387,7 +3385,6 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "    <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "        	<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "            <!--<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">-->\n" +
     "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                <a href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -3399,67 +3396,78 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "\n" +
     "<div class=\"row\">\n" +
     "\n" +
-    "	<!--\n" +
-    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		<li style=\"float:right\"><a ng-click=\"informationToggle()\" href=\"#\">CRE8 <i class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "		<div style=\"clear:both\"></div>\n" +
-    "	</ul>\n" +
-    "	-->\n" +
-    "\n" +
-    "	<div class=\"card\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "\n" +
-    "			<div style=\"float:right\">\n" +
-    "				<a href=\"#\" ng-click=\"filterToggle('POSITIONS')\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "	<div class=\"col-xs-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Base Markets</b></span>\n" +
+    "	            <div ng-repeat=\"market in baseMarkets\">\n" +
+    "	                <a href=\"#\" ng-click=\"filterToggle('POSITIONS')\">{{market.text}}</a>\n" +
+    "	            </div>\n" +
     "			</div>\n" +
-    "\n" +
-    "			<h3>Value Map</h3>\n" +
-    "			\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "			<highchart config=\"chart\"></highchart>\n" +
-    "			<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "			<div style=\"\">\n" +
-    "				<a href=\"#\" ng-click=\"filterToggle('POSITIONS')\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "			</div>\n" +
-    "\n" +
     "		</div>\n" +
-    "	</div>	\n" +
-    "</div>	\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "\n" +
-    "	<div class=\"card\">\n" +
-    "		<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Markets</b></span>\n" +
+    "	            <div ng-repeat=\"market in markets\">\n" +
+    "	                <a href=\"#\" ng-click=\"filterToggle('POSITIONS')\">{{market.text}}</a>\n" +
+    "	            </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "    <div ng-repeat=\"order in orders\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "            	<span ng-repeat=\"item in order.amountSet track by $index\">\n" +
-    "					{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
-    "				</span>\n" +
-    "				<span> | </span>\n" +
-    "				<span ng-repeat=\"item in order.amountSet1 track by $index\">\n" +
-    "					{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
-    "				</span>\n" +
-    "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "            </div>\n" +
-    "            <div class=\"card-footer\">\n" +
-    "                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
-    "                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "            </div>\n" +
-    "            <div ng-show=\"order.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "		        <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
-    "		            <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "		            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
-    "		        </form>\n" +
-    "		    </div>\n" +
-    "        </div>\n" +
+    "	<div class=\"col-xs-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "				<h3>Value Map</h3>\n" +
+    "				\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "			</div>\n" +
+    "		</div>	\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
+    "		</div>\n" +
+    "\n" +
+    "	    <div ng-repeat=\"order in orders\">\n" +
+    "	        <div class=\"card\" ng-click=\"renderToggle(order)\">\n" +
+    "	        	\n" +
+    "	            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "	            	<span ng-repeat=\"item in order.amountSet track by $index\">\n" +
+    "						{{order.amountSet[$index]}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "					</span>\n" +
+    "					<span> | </span>\n" +
+    "					<span ng-repeat=\"item in order.amountSet1 track by $index\">\n" +
+    "						{{order.amountSet1[$index]}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					</span>\n" +
+    "\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "	            </div>\n" +
+    "	            <div class=\"card-footer\">\n" +
+    "	                <a ng-click=\"$event.stopPropagation();createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
+    "	                <a ng-click=\"$event.stopPropagation();createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
+    "	                <a ng-click=\"$event.stopPropagation();reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	            </div>\n" +
+    "\n" +
+    "	            <div ng-click=\"$event.stopPropagation()\" ng-show=\"order.showReply\" class=\"card-footer\">\n" +
+    "			        <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
+    "			            <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "			            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "			        </form>\n" +
+    "			    </div>\n" +
+    "\n" +
+    "	        </div>\n" +
+    "		</div>\n" +
+    "\n" +
     "	</div>\n" +
-    "</div>");
+    "\n" +
+    "</div>	");
 }]);
 
 angular.module("member/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3897,22 +3905,21 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                        <div class=\"col-sm-6 form-group\">\n" +
     "                            <h5>\n" +
-    "                                <span ng-show=\"!identiferSet\">Asset Identifer Set α</span>\n" +
-    "                                <span ng-repeat=\"market in identiferSet\">{{market.text}} </span> \n" +
+    "                                <span ng-show=\"!identiferSetAlpha\">Asset Identifer Set α</span>\n" +
+    "                                <span ng-repeat=\"market in identiferSetAlpha\">{{market.text}} </span> \n" +
     "                                <a ng-click=\"informationToggle('yo')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
     "                            </h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set α\" ng-model=\"identiferSet\">\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set α\" ng-model=\"identiferSetAlpha\">\n" +
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-6 form-group\">\n" +
-    "                            <div ng-repeat=\"market in identiferSet\">\n" +
+    "                            <div ng-repeat=\"market in identiferSetAlpha\">\n" +
     "\n" +
     "                                <div class=\"col-sm-12\">\n" +
     "                                    <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>\n" +
-    "                                    <input placeholder=\"{{market.text}} Amount\" type=\"number\" ng-model=\"newOrder.amountSet[market.text]\" class=\"form-control\">\n" +
+    "                                    <input placeholder=\"{{market.text}} Amount\" type=\"number\" ng-model=\"newOrder.setAlpha[market.text]\" class=\"form-control\">\n" +
     "                                </div>\n" +
-    "                                <!--<div class=\"col-sm-6\"><input placeholder=\"{{newOrder.identiferSet1}} / {{newOrder.identiferSet}} Price\" type=\"text\" ng-model=\"newOrder.amountSet1Price\" class=\"form-control\"></div>-->\n" +
     "\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -3923,35 +3930,34 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                        <div class=\"col-sm-6 form-group\">\n" +
     "                            <h5>\n" +
-    "                                <span ng-show=\"!identiferSet1\">Asset Identifer Set β</span>\n" +
-    "                                <span ng-repeat=\"market in identiferSet1\">{{market.text}} </span> \n" +
+    "                                <span ng-show=\"!identiferSetBeta\">Asset Identifer Set β</span>\n" +
+    "                                <span ng-repeat=\"market in identiferSetBeta\">{{market.text}} </span> \n" +
     "                                <a ng-click=\"informationToggle('yo')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
     "                            </h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set β\" ng-model=\"identiferSet1\">\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set β\" ng-model=\"identiferSetBeta\">\n" +
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-6 form-group\">\n" +
-    "                            <div ng-repeat=\"market in identiferSet1\">\n" +
+    "                            <div ng-repeat=\"market in identiferSetBeta\">\n" +
     "\n" +
-    "                                <div class=\"col-sm-12\"><h5>{{market.text}} Amount</h5><input placeholder=\"{{market.text}} Amount\" type=\"number\" ng-model=\"newOrder.amountSet1[[market.text]]\" class=\"form-control\"></div>\n" +
-    "                                <!--<div class=\"col-sm-6\"><input placeholder=\"{{newOrder.identiferSet1}} / {{newOrder.identiferSet}} Price\" type=\"text\" ng-model=\"newOrder.amountSet1Price\" class=\"form-control\"></div>-->\n" +
+    "                                <div class=\"col-sm-12\"><h5>{{market.text}} Amount</h5><input placeholder=\"{{market.text}} Amount\" type=\"number\" ng-model=\"newOrder.setBeta[[market.text]]\" class=\"form-control\"></div>\n" +
     "\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "\n" +
     "                        <div class=\"col-sm-12\" style=\"padding:20px;\">\n" +
     "                            <p ng-show=\"!inverted\" style=\"font-weight:800;\">\n" +
-    "                                Sell <span ng-repeat=\"market in identiferSet\">{{newOrder.amountSet[market.text]}} {{market.text}} </span> \n" +
-    "                                for <span ng-repeat=\"market in identiferSet1\">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> | \n" +
-    "                                Buy <span ng-repeat=\"market in identiferSet1\">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> \n" +
-    "                                with <span ng-repeat=\"market in identiferSet\">{{newOrder.amountSet[market.text]}} {{market.text}} </span>\n" +
+    "                                Sell <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
+    "                                for <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | \n" +
+    "                                Buy <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> \n" +
+    "                                with <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
     "                            </p>\n" +
     "                            <p ng-show=\"inverted\" style=\"font-weight:800;\">\n" +
-    "                                Buy <span ng-repeat=\"market in identiferSet\">{{newOrder.amountSet[market.text]}} {{market.text}} </span> \n" +
-    "                                with <span ng-repeat=\"market in identiferSet1\">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> | \n" +
-    "                                Sell <span ng-repeat=\"market in identiferSet1\">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> \n" +
-    "                                for <span ng-repeat=\"market in identiferSet\">{{newOrder.amountSet[market.text]}} {{market.text}} </span>\n" +
+    "                                Buy <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
+    "                                with <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | \n" +
+    "                                Sell <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> \n" +
+    "                                for <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
     "                            </p>\n" +
     "                        </div>\n" +
     "\n" +
@@ -3963,32 +3969,36 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                <li ng-class=\"{active: selectedOrderType=='LIMIT'}\" ng-click=\"selectOrderType('LIMIT')\"><a href=\"#\"> Limit <i ng-click=\"informationToggle()\" class=\"fa fa-question-circle\"></i></a></li>\n" +
     "                            </ul>\n" +
     "                        </div>\n" +
+    "\n" +
+    "\n" +
     "                        <!--\n" +
     "                        <div class=\"col-sm-12\" style=\"padding:20px\">\n" +
     "                            <p style=\"font-weight:800;\">\n" +
     "                                <span>\n" +
     "                                    Sell <span ng-repeat=\"market in identiferSet\">{{newOrder.amountSet[market.text]}} {{market.text}}, </span> \n" +
-    "                                    for <span ng-repeat=\"market in identiferSet1\"> {{newOrder.amountSet1[market.text]}} {{market.text}}, </span> \n" +
+    "                                    for <span ng-repeat=\"market in identiferSet1\"> {{newOrder.amountSetBeta[market.text]}} {{market.text}}, </span> \n" +
     "\n" +
     "                                    Create a matrix\n" +
-    "                                    @ {{newOrder.amountSet1 / newOrder.amountSet}} <span ng-repeat=\"market in identiferSet\">{{market.text}}, </span>  / <span ng-repeat=\"market in identiferSet1\">{{market.text}}</span>\n" +
+    "                                    @ {{newOrder.amountSetBeta / newOrder.amountSet}} <span ng-repeat=\"market in identiferSet\">{{market.text}}, </span>  / <span ng-repeat=\"market in identiferSet1\">{{market.text}}</span>\n" +
     "\n" +
     "                                </span>\n" +
     "                                <span> | </span>\n" +
     "                                <span>\n" +
-    "                                    Buy <span ng-repeat=\"market in identiferSet1\">{{newOrder.amountSet1[market.text]}} {{market.text}}, </span> \n" +
+    "                                    Buy <span ng-repeat=\"market in identiferSet1\">{{newOrder.amountSetBeta[market.text]}} {{market.text}}, </span> \n" +
     "                                    with <span ng-repeat=\"market in identiferSet\">{{newOrder.amountSet[market.text]}} {{market.text}}, </span> \n" +
     "\n" +
     "                                    Create a matrix\n" +
-    "                                    @ {{newOrder.amountSet / newOrder.amountSet1}} <span ng-repeat=\"market in identiferSet1\">{{market.text}}</span> / <span ng-repeat=\"market in identiferSet\">{{market.text}}</span>\n" +
+    "                                    @ {{newOrder.amountSet / newOrder.amountSetBeta}} <span ng-repeat=\"market in identiferSet1\">{{market.text}}</span> / <span ng-repeat=\"market in identiferSet\">{{market.text}}</span>\n" +
     "\n" +
     "                                </span>\n" +
     "                            </p>\n" +
     "                        </div>\n" +
     "                        -->\n" +
+    "\n" +
+    "\n" +
     "                        <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.setAlpha\">create</button>\n" +
     "                        \n" +
     "                    </div>\n" +
     "\n" +
@@ -4519,10 +4529,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </div>\n" +
     "                <div ng-if=\"confirm.modelType == 'ORDER'\">\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
-    "                    <p>Amount Set: {{confirm.amountSet}}</p>\n" +
-    "                    <p>Identifier Set: {{confirm.identifierSet}}</p>\n" +
-    "                    <p>Amount Set1: {{confirm.amountSet1}}</p>\n" +
-    "                    <p>Identifier Set1: {{confirm.identifierSet1}}</p>\n" +
+    "                    <p>Amount Set Alpha: {{confirm.amountSetAlpha}}</p>\n" +
+    "                    <p>Identifier Set Alpha: {{confirm.identifierSetAlpha}}</p>\n" +
+    "                    <p>Amount Set Beta: {{confirm.amountSetBeta}}</p>\n" +
+    "                    <p>Identifier Set Beta: {{confirm.identifierSetBeta}}</p>\n" +
     "                    <p>Type: {{confirm.tags}}</p>\n" +
     "                    <p>Status: {{confirm.status}}</p>\n" +
     "                </div>\n" +
@@ -4975,7 +4985,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "\n" +
     "                <p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{item.from}}</a> To: <a href=\"\">{{item.to}}</a></p>\n" +
     "                <p style=\"font-weight:800\">{{item.amount}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{item.identifier}}\">{{item.identifier}}</a></p>\n" +
-    "                <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                <p>{{item.content}}</p>\n" +
     "                <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
     "                <a ng-click=\"$event.stopPropagation();\" href=\"transaction/{{item.id}}\"></a>\n" +
@@ -5307,8 +5317,8 @@ angular.module("project/templates/items.tpl.html", []).run(["$templateCache", fu
 angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/ledger.tpl.html",
     "<style type=\"text/css\">\n" +
-    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	tags-input .host{margin:0px;border:0px;}\n" +
+    "	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	.card tags-input .host{margin:0px;border:0px;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"spacing-5\"></div>\n" +
@@ -5351,8 +5361,8 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<span><b>Identifiers</b></span>\n" +
-    "	            <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
-    "	                <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
+    "	            <div ng-repeat=\"asset in sortedTransactionAssets\">\n" +
+    "	                <a href=\"#\" ng-click=\"selectAsset(asset.element)\">{{asset.element}}</a>\n" +
     "	            </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -5916,7 +5926,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div ng-show=\"!showFinal\" style=\"float:right\">\n" +
     "            <br>\n" +
-    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>UniversalToken <i class=\"fa fa-question-circle\"></i></a></span>\n" +
+    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>Universal<i class=\"fa fa-question-circle\"></i></a></span>\n" +
     "            <!--<span ng-click=\"informationToggle('The CRE8 onMint Market Postion Signifies that the creator of the instrument will sponsor CRE8 onMint of the specified asset.')\"><a>CRE8 onMint <i class=\"fa fa-question-circle\"></i></a></span>-->\n" +
     "            <br>\n" +
     "        </div>\n" +
@@ -6751,7 +6761,12 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "				</div>\n" +
     "				<h3><a href=\"task/{{time.task.id}}\">{{time.task.title}}</a></h3>\n" +
     "				<h4>{{time.amount}}, <span style=\"font-size:10px;color:gray\">{{(time.amount/60).toFixed(2)}} minutes, <span style=\"font-size:10px;color:gray\">{{(time.amount/3600).toFixed(2)}} hours</span></h4>\n" +
+    "                \n" +
+    "\n" +
     "                <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
+    "				<p><a ng-repeat=\"tag in time.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
+    "\n" +
+    "\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{time.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{time.user.avatarUrl}}\" src=\"{{time.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					{{time.user.username}}\n" +

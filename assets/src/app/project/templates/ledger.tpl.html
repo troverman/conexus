@@ -1,6 +1,6 @@
 <style type="text/css">
-	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}
-	tags-input .host{margin:0px;border:0px;}
+	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}
+	.card tags-input .host{margin:0px;border:0px;}
 </style>
 
 <div class="spacing-5"></div>
@@ -43,8 +43,8 @@
 		<div class="card">
 			<div style="padding:16px;">
 				<span><b>Identifiers</b></span>
-	            <div ng-repeat="tag in sortedTransactionTags">
-	                <a href="#" ng-click="selectTag(tag.element)">{{tag.element}}</a>
+	            <div ng-repeat="asset in sortedTransactionAssets">
+	                <a href="#" ng-click="selectAsset(asset.element)">{{asset.element}}</a>
 	            </div>
 			</div>
 		</div>

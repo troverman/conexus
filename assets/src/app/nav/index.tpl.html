@@ -212,22 +212,21 @@
 
                         <div class="col-sm-6 form-group">
                             <h5>
-                                <span ng-show="!identiferSet">Asset Identifer Set α</span>
-                                <span ng-repeat="market in identiferSet">{{market.text}} </span> 
+                                <span ng-show="!identiferSetAlpha">Asset Identifer Set α</span>
+                                <span ng-repeat="market in identiferSetAlpha">{{market.text}} </span> 
                                 <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
-                            <tags-input min-length="1" placeholder="Asset Identifer Set α" ng-model="identiferSet">
+                            <tags-input min-length="1" placeholder="Asset Identifer Set α" ng-model="identiferSetAlpha">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <div ng-repeat="market in identiferSet">
+                            <div ng-repeat="market in identiferSetAlpha">
 
                                 <div class="col-sm-12">
                                     <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>
-                                    <input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.amountSet[market.text]" class="form-control">
+                                    <input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.setAlpha[market.text]" class="form-control">
                                 </div>
-                                <!--<div class="col-sm-6"><input placeholder="{{newOrder.identiferSet1}} / {{newOrder.identiferSet}} Price" type="text" ng-model="newOrder.amountSet1Price" class="form-control"></div>-->
 
                             </div>
                         </div>
@@ -238,35 +237,34 @@
 
                         <div class="col-sm-6 form-group">
                             <h5>
-                                <span ng-show="!identiferSet1">Asset Identifer Set β</span>
-                                <span ng-repeat="market in identiferSet1">{{market.text}} </span> 
+                                <span ng-show="!identiferSetBeta">Asset Identifer Set β</span>
+                                <span ng-repeat="market in identiferSetBeta">{{market.text}} </span> 
                                 <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
-                            <tags-input min-length="1" placeholder="Asset Identifer Set β" ng-model="identiferSet1">
+                            <tags-input min-length="1" placeholder="Asset Identifer Set β" ng-model="identiferSetBeta">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <div ng-repeat="market in identiferSet1">
+                            <div ng-repeat="market in identiferSetBeta">
 
-                                <div class="col-sm-12"><h5>{{market.text}} Amount</h5><input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.amountSet1[[market.text]]" class="form-control"></div>
-                                <!--<div class="col-sm-6"><input placeholder="{{newOrder.identiferSet1}} / {{newOrder.identiferSet}} Price" type="text" ng-model="newOrder.amountSet1Price" class="form-control"></div>-->
+                                <div class="col-sm-12"><h5>{{market.text}} Amount</h5><input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.setBeta[[market.text]]" class="form-control"></div>
 
                             </div>
                         </div>
 
                         <div class="col-sm-12" style="padding:20px;">
                             <p ng-show="!inverted" style="font-weight:800;">
-                                Sell <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}} </span> 
-                                for <span ng-repeat="market in identiferSet1">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> | 
-                                Buy <span ng-repeat="market in identiferSet1">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> 
-                                with <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}} </span>
+                                Sell <span ng-repeat="market in identiferSetAlpha">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> 
+                                for <span ng-repeat="market in identiferSetBeta">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | 
+                                Buy <span ng-repeat="market in identiferSetBeta">{{newOrder.setBeta[market.text]}} {{market.text}} </span> 
+                                with <span ng-repeat="market in identiferSetAlpha">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>
                             </p>
                             <p ng-show="inverted" style="font-weight:800;">
-                                Buy <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}} </span> 
-                                with <span ng-repeat="market in identiferSet1">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> | 
-                                Sell <span ng-repeat="market in identiferSet1">{{newOrder.amountSet1[market.text]}} {{market.text}} </span> 
-                                for <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}} </span>
+                                Buy <span ng-repeat="market in identiferSetAlpha">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> 
+                                with <span ng-repeat="market in identiferSetBeta">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | 
+                                Sell <span ng-repeat="market in identiferSetBeta">{{newOrder.setBeta[market.text]}} {{market.text}} </span> 
+                                for <span ng-repeat="market in identiferSetAlpha">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>
                             </p>
                         </div>
 
@@ -278,32 +276,36 @@
                                 <li ng-class="{active: selectedOrderType=='LIMIT'}" ng-click="selectOrderType('LIMIT')"><a href="#"> Limit <i ng-click="informationToggle()" class="fa fa-question-circle"></i></a></li>
                             </ul>
                         </div>
+
+
                         <!--
                         <div class="col-sm-12" style="padding:20px">
                             <p style="font-weight:800;">
                                 <span>
                                     Sell <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}}, </span> 
-                                    for <span ng-repeat="market in identiferSet1"> {{newOrder.amountSet1[market.text]}} {{market.text}}, </span> 
+                                    for <span ng-repeat="market in identiferSet1"> {{newOrder.amountSetBeta[market.text]}} {{market.text}}, </span> 
 
                                     Create a matrix
-                                    @ {{newOrder.amountSet1 / newOrder.amountSet}} <span ng-repeat="market in identiferSet">{{market.text}}, </span>  / <span ng-repeat="market in identiferSet1">{{market.text}}</span>
+                                    @ {{newOrder.amountSetBeta / newOrder.amountSet}} <span ng-repeat="market in identiferSet">{{market.text}}, </span>  / <span ng-repeat="market in identiferSet1">{{market.text}}</span>
 
                                 </span>
                                 <span> | </span>
                                 <span>
-                                    Buy <span ng-repeat="market in identiferSet1">{{newOrder.amountSet1[market.text]}} {{market.text}}, </span> 
+                                    Buy <span ng-repeat="market in identiferSet1">{{newOrder.amountSetBeta[market.text]}} {{market.text}}, </span> 
                                     with <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}}, </span> 
 
                                     Create a matrix
-                                    @ {{newOrder.amountSet / newOrder.amountSet1}} <span ng-repeat="market in identiferSet1">{{market.text}}</span> / <span ng-repeat="market in identiferSet">{{market.text}}</span>
+                                    @ {{newOrder.amountSet / newOrder.amountSetBeta}} <span ng-repeat="market in identiferSet1">{{market.text}}</span> / <span ng-repeat="market in identiferSet">{{market.text}}</span>
 
                                 </span>
                             </p>
                         </div>
                         -->
+
+
                         <div class="spacing-10"></div>
 
-                        <button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.amountSet">create</button>
+                        <button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.setAlpha">create</button>
                         
                     </div>
 
@@ -834,10 +836,10 @@
                 </div>
                 <div ng-if="confirm.modelType == 'ORDER'">
                     <p>User: {{confirm.user}}</p>
-                    <p>Amount Set: {{confirm.amountSet}}</p>
-                    <p>Identifier Set: {{confirm.identifierSet}}</p>
-                    <p>Amount Set1: {{confirm.amountSet1}}</p>
-                    <p>Identifier Set1: {{confirm.identifierSet1}}</p>
+                    <p>Amount Set Alpha: {{confirm.amountSetAlpha}}</p>
+                    <p>Identifier Set Alpha: {{confirm.identifierSetAlpha}}</p>
+                    <p>Amount Set Beta: {{confirm.amountSetBeta}}</p>
+                    <p>Identifier Set Beta: {{confirm.identifierSetBeta}}</p>
                     <p>Type: {{confirm.tags}}</p>
                     <p>Status: {{confirm.status}}</p>
                 </div>

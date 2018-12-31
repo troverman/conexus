@@ -102,13 +102,11 @@ angular.module( 'conexus.item', [
             //getOrderTraverse(orders[0].identiferSet);
 
         });
-    }
+    };
+
     getOrderTraverse($scope.item.identiferSet);
     
-   
-    $scope.purchaseToggle = function() {
-        $scope.purchaseToggleVar = !$scope.purchaseToggleVar;
-    };
+    $scope.purchaseToggle = function() {$scope.purchaseToggleVar = !$scope.purchaseToggleVar};
 
     $scope.reply = function(item){
         if ($scope.currentUser){

@@ -5,13 +5,8 @@ var Q = require('q');
 module.exports = {
 
 	getData: function(){
-		//POPULATE A NEW NETWORK
-		//TO CREATE A WELL CONNECTED NETWORK
-		//SAMPLE SPACE | A-H Tokens
-		//A-H + [SAMPLE SPACE]
-		var newNetwork = "ABCD".split("");
-
-		var positionSet = [];
+		
+		//HELPER FXNS
 
 		//POWER SET
 		function getAllSubsets(theArray) {
@@ -21,23 +16,9 @@ module.exports = {
 	        }));
 	      }, [[]]);
 	    };
-	    var powerSet = getAllSubsets(newNetwork);
-	    powerSet.shift();
 
-		//CREATE RELATIONSHIPS
-	    for(x in powerSet){
-			for(y in powerSet){
-				positionSet.push([powerSet[x], powerSet[y]]);
-			}
-		}
-
-		function intersect(a, b) {
-		  return a.filter(Set.prototype.has, new Set(b));
-		};
-
-		function diff (a, b) {
-		    return a.filter(function(i) {return b.indexOf(i) < 0;});
-		};
+		function intersect(a, b) {return a.filter(Set.prototype.has, new Set(b));};
+		function diff (a, b) {return a.filter(function(i) {return b.indexOf(i) < 0;});};
 
 		function arraysEqual(a, b) {
 			if (a === b) return true;
@@ -50,9 +31,7 @@ module.exports = {
 		};
 
 		function isInArray(array, item) {
-		    for (var i=0;i<array.length;i++) {
-		        if(JSON.stringify(array[i]) == JSON.stringify(item)){return true;}
-		    }
+		    for (var i=0;i<array.length;i++) {if(JSON.stringify(array[i]) == JSON.stringify(item)){return true;}}
 		    return false;
 		};
 
@@ -73,6 +52,22 @@ module.exports = {
 
 		function generate(model) {
 			return 100//Math.floor(Math.random() * model*100);
+		};
+
+		//POPULATE A NEW NETWORK
+		//TO CREATE A WELL CONNECTED NETWORK
+		//SAMPLE SPACE | A-H Tokens
+		//A-H + [SAMPLE SPACE]
+		var newNetwork = "ABCD".split("");
+		var positionSet = [];
+	    var powerSet = getAllSubsets(newNetwork);
+	    powerSet.shift();
+
+		//CREATE RELATIONSHIPS
+	    for(x in powerSet){
+			for(y in powerSet){
+				positionSet.push([powerSet[x], powerSet[y]]);
+			}
 		}
 
 		//RELATIONSHIPS CANCEL
@@ -1559,6 +1554,139 @@ module.exports = {
 
 		};
 
+		//WERKIN
+		function associationModification(){
+
+			//Project.find().limit(10000).then(function(models){
+			//	for (x in models){
+			//		projectAssociations(models[x].parent, models[x].title).then(function(projectModel){
+			//			console.log(projectModel)
+			//		});
+			//	}
+			//});
+
+			//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
+			Time.find().limit(10000).then(function(models){
+				for (x in models){
+
+					//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
+					//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
+					//console.log('associatedModels', models[x].associatedModels);
+
+					//console.log('PROJECT', models[x].project);
+					//console.log('TASK', dmodels[x].task);
+					//console.log('STREAM', models[x].stream);
+
+					models[x].associatedModels = [];
+
+					if (models[x].project){
+						models[x].associatedModels.push({
+							type:'PROJECT', 
+							address:models[x].project, 
+							validation:{
+
+							}, 
+							//VALIDATION NEST VS POPULATION
+							associatedModels:[],
+							assoiatedValidations:[],
+						});
+					}
+					
+					if (models[x].task){
+						models[x].associatedModels.push({
+							type:'TASK', 
+							address:models[x].task, 
+							validation:{
+
+							}, 
+							//VALIDATION NEST VS POPULATION
+							associatedModels:[{
+								type:'PROJECT', 
+								address:models[x].project, 
+								validation:{
+
+								}, 
+								//VALIDATION NEST VS POPULATION
+								associatedModels:[],
+								assoiatedValidations:[],
+							}],
+							assoiatedValidations:[],
+						});
+					}
+
+					if (models[x].stream){
+						models[x].associatedModels.push({
+							type:'STREAM', 
+							address:models[x].stream, 
+							validation:{
+
+							}, 
+							//VALIDATION NEST VS POPULATION
+							associatedModels:[],
+							assoiatedValidations:[],
+						});
+					}
+
+					if (models[x].startTime){
+						models[x].type = 'RETROACTIVE';
+					}
+
+					else{
+						models[x].type = 'TIMER';
+					}
+
+					//REMOVE NULL AND VERIFICATION SCORE
+					//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
+
+					console.log(models[x]);
+
+					//Time.update({id:models[x].id}, models[x]).then(function(){
+					//	console.log('update')
+					//});
+
+				}
+			});
+
+			//Validation.find().limit(10000).then(function(postModels){
+			//	for (x in postModels){
+			//		var reactions = {plus:0,minus:0};
+			//		if(postModels[x].reactions){
+			//			reactions = postModels[x].reactions;
+			//		} 
+			//		console.log(reactions)
+			//		Validation.update({id:postModels[x].id}, {reactions:reactions}).then(function(){
+			//			console.log('update')
+			//		});
+			//	}
+			//});
+
+			//Post.find().limit(700).skip(0).then(function(postModels){
+			///	for (x in postModels){
+			//		if (postModels[x].work){postModels[x].time = postModels[x].work }
+			//		if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
+			//		if (!postModels[x].associatedModels){
+			//			postModels[x].associatedModels = [];
+			//			if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
+			//			if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
+			//			if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
+			//			if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
+			//			if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
+			//			if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
+			//			if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
+			//			if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
+			//		}
+			//		Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
+			//		console.log(x, postModels[x]);
+			//		Post.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel}).then(function(model){
+			//			console.log('update')
+			//		});
+			//	}
+			//});
+
+		};
+
+		//associationModification();
+
 		//generateStringSpace();
 
 		//train('A', 0, 8);
@@ -1585,134 +1713,6 @@ module.exports = {
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
 
-		//Project.find().limit(10000).then(function(models){
-		//	for (x in models){
-		//		projectAssociations(models[x].parent, models[x].title).then(function(projectModel){
-		//			console.log(projectModel)
-		//		});
-		//	}
-		//});
-		
-		//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
-		Time.find().limit(10000).then(function(models){
-
-			for (x in models){
-
-				//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
-				//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
-				//console.log('associatedModels', models[x].associatedModels);
-
-				//console.log('PROJECT', models[x].project);
-				//console.log('TASK', dmodels[x].task);
-				//console.log('STREAM', models[x].stream);
-
-				models[x].associatedModels = [];
-
-				if (models[x].project){
-					models[x].associatedModels.push({
-						type:'PROJECT', 
-						address:models[x].project, 
-						validation:{
-
-						}, 
-						//VALIDATION NEST VS POPULATION
-						associatedModels:[],
-						assoiatedValidations:[],
-					});
-				}
-				
-				if (models[x].task){
-					models[x].associatedModels.push({
-						type:'TASK', 
-						address:models[x].task, 
-						validation:{
-
-						}, 
-						//VALIDATION NEST VS POPULATION
-						associatedModels:[{
-							type:'PROJECT', 
-							address:models[x].project, 
-							validation:{
-
-							}, 
-							//VALIDATION NEST VS POPULATION
-							associatedModels:[],
-							assoiatedValidations:[],
-						}],
-						assoiatedValidations:[],
-					});
-				}
-
-				if (models[x].stream){
-					models[x].associatedModels.push({
-						type:'STREAM', 
-						address:models[x].stream, 
-						validation:{
-
-						}, 
-						//VALIDATION NEST VS POPULATION
-						associatedModels:[],
-						assoiatedValidations:[],
-					});
-				}
-
-				if (models[x].startTime){
-					models[x].type = 'RETROACTIVE';
-				}
-
-				else{
-					models[x].type = 'TIMER';
-				}
-
-				//REMOVE NULL AND VERIFICATION SCORE
-				//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
-
-				console.log(models[x]);
-
-				//Time.update({id:models[x].id}, models[x]).then(function(){
-				//	console.log('update')
-				//});
-
-			}
-
-		});
-
-		//Validation.find().limit(10000).then(function(postModels){
-		//	for (x in postModels){
-		//		var reactions = {plus:0,minus:0};
-		//		if(postModels[x].reactions){
-		//			reactions = postModels[x].reactions;
-		//		} 
-		//		console.log(reactions)
-		//		Validation.update({id:postModels[x].id}, {reactions:reactions}).then(function(){
-		//			console.log('update')
-		//		});
-		//	}
-		//});
-
-		//Post.find().limit(700).skip(0).then(function(postModels){
-		///	for (x in postModels){
-		//		if (postModels[x].work){postModels[x].time = postModels[x].work }
-		//		if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
-		//		if (!postModels[x].associatedModels){
-		//			postModels[x].associatedModels = [];
-		//			if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
-		//			if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
-		//			if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
-		//			if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
-		//			if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
-		//			if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
-		//			if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
-		//			if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
-		//		}
-		//		Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
-		//		console.log(x, postModels[x]);
-		//		Post.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel}).then(function(model){
-		//			console.log('update')
-		//		});
-		//	}
-		//});
-		
 	},
 
 	//TODO: RESHAPE | BUILD
@@ -1721,7 +1721,7 @@ module.exports = {
 		User.find().then(function(userModels){
 			for (x in userModels){
 				(function(userModels, x){
-					Work.find({user:userModels[x].id}).populate('task').then(function(workModels){
+					Time.find({user:userModels[x].id}).populate('task').then(function(workModels){
 						var workSum = {};
 						//TOKENS ARE .. 
 						for (y in workModels){

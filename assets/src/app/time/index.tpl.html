@@ -37,7 +37,12 @@
 				</div>
 				<h3><a href="task/{{time.task.id}}">{{time.task.title}}</a></h3>
 				<h4>{{time.amount}}, <span style="font-size:10px;color:gray">{{(time.amount/60).toFixed(2)}} minutes, <span style="font-size:10px;color:gray">{{(time.amount/3600).toFixed(2)}} hours</span></h4>
+                
+
                 <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
+				<p><a ng-repeat="tag in time.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
+
+
 				<a style="font-weight:700" href="member/{{time.user.username}}">
 					<img class="card-avatar" ng-src="{{time.user.avatarUrl}}" src="{{time.user.avatarUrl}}" err-src="/images/avatar.png">
 					{{time.user.username}}
