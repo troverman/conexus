@@ -1328,6 +1328,7 @@ angular.module( 'conexus.member', [
 .controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, time, TimeModel, titleService) {
     
     $scope.currentUser = config.currentUser;
+    
     //THE GROUP TESSERACT IS CONENESUS ON TIME ++ DIMENSIONAL WORK
     //based on tokens 
     //location mapping over time
