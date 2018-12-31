@@ -205,23 +205,10 @@ module.exports = {
 
 		//NEED COMBINITORIAL AND REDUCTION RELATIONSHIPS
 
-		//const input1 = tf.input({shape: [2, 2]});
-		//const input2 = tf.input({shape: [2, 2]});
-		//const multiplyLayer = tf.layers.multiply();
-		//const product = multiplyLayer.apply([input1, input2]);
-		//console.log(product);
-
 		//TEST | CONSEQUENCE IS MM HAS IMBEUD INTELLIGENCE? ML IS THE TRAVERE?
 		//COMBINITORIAL TENSORS? | REDUCE | TOTAL MARKET
 		//var dataModel = dataService.getData(); //[even more, get orders and orderbook from here]
 		//const valueMatrix = tf.input({shape: [dataModel.length, 8]}); //NOT REALLY TRUE
-
-		//const input = tf.input({shape: [5]});
-		//const denseLayer1 = tf.layers.dense({units: 10, activation: 'relu'});
-		//const denseLayer2 = tf.layers.dense({units: 4, activation: 'softmax'});
-		//const output = denseLayer2.apply(denseLayer1.apply(input));
-		//const model = tf.model({inputs: input, outputs: output});
-		//model.predict(tf.ones([2, 5])).print();
 
 		//POSITION IS A TENSOR? --> CREATE MARKET BY MULT? YES!
 
@@ -1179,7 +1166,7 @@ module.exports = {
 									//REACTION ASSOICATION
 									//REACTION+CONTENT+LIKE+ADDRESS
 									var reactionAssociationTypeTypeAddressModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].type+'+'+data[x][y].associatedModels[z].id,
+										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
 										information:{
 											inCirculation:Math.floor(100*Math.random()),
 											markets: 0,
@@ -1496,7 +1483,7 @@ module.exports = {
 				var universalTokenModel = {
 					string: 'UNIVERSALTOKEN',
 					information:{
-						//inCirculation:0,
+						inCirculation:0,
 						markets: 0,
 					},
 					protocols:[
@@ -1507,7 +1494,7 @@ module.exports = {
 						mint:'DAILY'
 					}
 				};
-				tokenSet.push(universalTokenModel)
+				//tokenSet.push(universalTokenModel)
 
 				//PROTOCOLS
 				//BASE, CONTENT, TIME, PROJECT, MEMBER

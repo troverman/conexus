@@ -4162,6 +4162,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <!--IF TYPE == 'TIME'-->\n" +
     "                <div>\n" +
+    "\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"validationFilter\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    \n" +
     "                    <p>{{item.associatedModels}}</p>\n" +
     "\n" +
     "                    <!--<p>{{item.amount}}xTIME</p>-->\n" +
@@ -4470,6 +4475,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <h5 ng-if=\"item.project\">Validate {{item.title}} in {{item.project.title}} <i class=\"fa fa-check\"></i></h5>\n" +
     "                <h5 ng-if=\"item.task\">Validate {{item.amount}} Time for {{item.task.title}} <i class=\"fa fa-check\"></i></h5>\n" +
+    "\n" +
+    "                 <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
     "\n" +
     "                <div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
@@ -5926,7 +5935,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div ng-show=\"!showFinal\" style=\"float:right\">\n" +
     "            <br>\n" +
-    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>UniversalToken onMint <i class=\"fa fa-question-circle\"></i></a></span>\n" +
+    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>UniversalToken <i class=\"fa fa-question-circle\"></i></a></span>\n" +
     "            <!--<span ng-click=\"informationToggle('The CRE8 onMint Market Postion Signifies that the creator of the instrument will sponsor CRE8 onMint of the specified asset.')\"><a>CRE8 onMint <i class=\"fa fa-question-circle\"></i></a></span>-->\n" +
     "            <br>\n" +
     "        </div>\n" +
@@ -6133,7 +6142,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>Value Map</h3>\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">The following are your discrete positions for your <a href=\"market/UNIVERSAL\">UNIVERSAL</a> Valie map</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">The following are your discrete positions for your <a href=\"market/UNIVERSAL\">UNIVERSAL</a> Value map</p>\n" +
     "                    <div class=\"\" ng-repeat=\"order in newOrder\">\n" +
     "                        <span style=\"color:gray\">{{order[0].amount}} <a href=\"/market/{{order[0].identifier}}\">{{order[0].identifier}}</a> | <a href=\"/market/{{order[1].identifier}}\">{{order[1].identifier}}</a> | <a href=\"/market/{{order[0].identifier}}/{{order[1].identifier}}\">MarketPair</a></span>\n" +
     "                    </div>\n" +
@@ -7086,9 +7095,7 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "				<!--TODO: ABSTRACT MODEL-->\n" +
     "				<p>time | <a href=\"time/{{validation.time}}\">{{validation.time}}</a></p>\n" +
     "\n" +
-    "\n" +
     "				<!--ASSOCIATION.. -->\n" +
-    "\n" +
     "				<!--TODO: MANIFOLD-->\n" +
     "				<!--MANIFOLD-->\n" +
     "				<!--<p>Manifold | Project+</p>-->\n" +

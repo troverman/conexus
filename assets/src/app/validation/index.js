@@ -98,7 +98,6 @@ angular.module( 'conexus.validation', [
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (index != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];

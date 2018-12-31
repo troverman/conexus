@@ -1,20 +1,20 @@
 
 module.exports.bootstrap = function(cb) {
 
-  sails.services.passport.loadStrategies();
+	sails.services.passport.loadStrategies();
 
-  //intervalService.getData();
-  //dataService.getData();
+	//intervalService.getData();
+	//dataService.getData();
 
-  //dataService.reputationBuild();
+	//dataService.reputationBuild();
 
-  dataService.traverse();
+	//dataService.traverse();
 
-  //DEF PRE ALPHA. 
-  setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
+	//DEF PRE ALPHA. 
+	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
+	intervalService.universalTokenProtocolPreAlpha();
+	setInterval(dataService.reputationBuild, 8640000);
 
-  setInterval(dataService.reputationBuild, 8640000);
-
-  cb();
+	cb();
   
 };
