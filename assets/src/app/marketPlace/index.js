@@ -18,18 +18,37 @@ angular.module( 'conexus.marketPlace', [
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'titleService', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, titleService ) {
+.controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'ReactionModel', 'titleService', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, ReactionModel, titleService ) {
     $scope.currentUser = config.currentUser;
     $scope.newItem = {};
-    $scope.newItemToggleVar = false;
+    $scope.newReaction = {};
     $scope.stateParams = $stateParams;
     $scope.items = items;
+    $scope.searchQuery = [];
     $scope.selectedSort = 'createdAt DESC';
     $scope.selectedTag = '';
     $scope.skip = 0;
 
-    //MERGE CONTENT AND ITEMS? | A 'MARKETPLACE' CONTENT TYPE? DUNNO
-    //USE MARKETPLACE FOR MARKET [] TRAVERSE
+    //TODO: BETTER
+    $scope.loadAssets = function(){
+        $scope.assets = $scope.items.map(function(obj){
+            if(obj.identiferSet){obj.identiferSet = obj.identiferSet.split(',');}
+            returnObj = obj.identiferSet;
+            return returnObj;
+        });
+        $scope.assets = [].concat.apply([], $scope.assets);
+        $scope.assets = $scope.assets.filter(function(e){return e}); 
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedAssetArray = [];
+        for (x in $scope.assets){
+            var amount = countInArray($scope.assets, $scope.assets[x]);
+            if ($scope.sortedAssetArray.map(function(obj){return obj.element}).indexOf($scope.assets[x]) == -1){
+                $scope.sortedAssetArray.push({amount:amount, element:$scope.assets[x]})
+            }
+        }
+        $scope.sortedAssetArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadAssets();
 
     //TODO: BETTER
     $scope.loadTags = function(){
@@ -50,7 +69,7 @@ angular.module( 'conexus.marketPlace', [
             }
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
+    };
     $scope.loadTags();
 
     $scope.createItem = function () {
@@ -78,6 +97,9 @@ angular.module( 'conexus.marketPlace', [
     };
 
     $scope.filterContent = function(filter) {
+
+        $scope.searchQuery.push({text:filter})
+
         $rootScope.stateIsLoading = true;
         ItemModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(items){
             $rootScope.stateIsLoading = false;
@@ -95,14 +117,6 @@ angular.module( 'conexus.marketPlace', [
             Array.prototype.push.apply($scope.items, items);
             $scope.loadTags();
         });
-    };
-
-    $scope.newItemToggle = function () {
-        if ($scope.currentUser){
-            $scope.newItemToggleVar = $scope.newItemToggleVar ? false : true;
-            //$mdSidenav('item').toggle();
-        }
-        else{$mdSidenav('login').toggle()}
     };
 
     $scope.reply = function(item){

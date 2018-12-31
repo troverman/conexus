@@ -13,15 +13,25 @@ angular.module( 'conexus.item', [
         resolve:{
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
                 return ItemModel.getOne($stateParams.id);
-            }]
+            }],
+            contentList: ['ContentModel', 'item', function(ContentModel, item) {
+                return ContentModel.getSome('item', item.id, 20, 0, 'createdAt DESC');
+            }],
         }
 	});
 }])
 
-.controller( 'ItemCtrl', ['$location', '$sce', '$scope', '$stateParams', 'config', 'item', 'OrderModel', 'titleService', function ItemController( $location, $sce, $scope, $stateParams, config, item, OrderModel, titleService ) {
+.controller( 'ItemCtrl', ['$location', '$mdSidenav', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $location, $mdSidenav, $sce, $scope, $stateParams, config, contentList, item, OrderModel, ReactionModel, titleService ) {
     $scope.currentUser = config.currentUser;
+    $scope.contentList = contentList;
     $scope.item = item;
+    $scope.inputVector = []; 
+    //$scope.inputVectorWeight = [];
     if(!$scope.item){$location.path('/')}
+    $scope.newReaction = {};
+    $scope.outputVector = $scope.item.identiferSet.split(',');
+
+    $scope.purchaseToggleVar = false;
 
     //TODO
     //REACT TO ORIGINAL POSTER PROTOCOL
@@ -40,36 +50,41 @@ angular.module( 'conexus.item', [
     //[  constrainA, constrainB, constrainC  ] = set[]
     //[  constrainA, constrainB, constrainC  ] = [  constrainD, constrainE, constrainF  ]
 
-    $scope.purchaseToggleVar = false;
-
-    //ALL ASSETS ARE COMBINITORIAL
-
     //MARKET WALK FOR PRICES 
-
-    //MARKET VIZ
-
+    console.log($scope.outputVector);
     //$scope.inputVector = [$scope.item.amountSet.split(','), $scope.item.identiferSet.split(',')];
-    //$scope.inputVector = [];
-    //$scope.outputVector = $scope.item.identiferSet;
-    $scope.inputVector = $scope.item.identiferSet.split(',');
-    console.log($scope.inputVector)
-    $scope.outputVector = []; //Shape by %s || sets of discritized tokens
-    //$scope.inputVector.split(',');
-    //$scope.outputVector.split(',');
 
-    //99USD=DIMENSIONAL MANIFOLD
+    //for (x in $scope.inputVector){$scope.inputVectorWeight[x] = 1 / x}
+
+    //Shape by %s || sets of discritized tokens
+
+     $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){
+                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
+                $scope.contentList[contentIndex].reactions[type]++;
+            }
+            else{
+                $scope.newReaction.associatedModels = [{type:'ITEM', id:item.id}];
+                $scope.item.reactions[type]++;
+            }
+            ReactionModel.create($scope.newReaction);
+        }
+        else{$mdSidenav('login').toggle();}
+    };
 
     //SETS OF UNIQUE IDENTIFIERS
     function getOrderTraverse(identifer){
         OrderModel.getSome('market',identifer,0,100,'price DESC').then(function(orders){
-
             //GET SET OF SETS AT PRICE --> GRADIENT POTINETAL --> ORDER BOOK 
             //SORT TO BEST PRICE CONTAINED WITHIN ABSOLUTE CONSTRINT (% IS FUNCTIONAL RESULT.. | ABSOLUTE CONSTRAINT NOW)
-            //(highestBid, lowestAsk)
-
-            //DOES THE SORER SUM CONTAIN THE AMOUNT AND DO THE ORDER TYPES CHECK OUT? 
-
+            //DOES THE ORER SUM CONTAIN THE AMOUNT AND DO THE ORDER TYPES CHECK OUT? 
             console.log(orders);
+
             //RETURN PATH (Order 84USD @ 0.00002 CRE8, ORDER 15USD @ 0.00003, [[Order 99USD @ 0.000041NOVO],..])
             //IF SOMETHING
             //if(market.amountSet * price < inputVector || currentIdentifier!=previousIdentifer){
@@ -82,36 +97,26 @@ angular.module( 'conexus.item', [
                 }
             }
             //}
+
             //WALK THE ID SET
             //getOrderTraverse(orders[0].identiferSet);
 
         });
     }
-
-    getOrderTraverse($scope.item.identiferSet)
+    getOrderTraverse($scope.item.identiferSet);
     
-    //TODO
-    $scope.createContent = function(content) {
-        if($scope.currentUser){
-            $scope.newContent.contentModel = content.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.item = item.id;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
-        }
-        else{$location.path('/login')}
-    };
-
+   
     $scope.purchaseToggle = function() {
         $scope.purchaseToggleVar = !$scope.purchaseToggleVar;
     };
 
     $scope.reply = function(item){
-        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.orders[index].showReply = !$scope.orders[index].showReply
+        if ($scope.currentUser){
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
+            else{$scope.item.showReply = !$scope.item.showReply;}
+        }
+        else{$mdSidenav('login').toggle();}
     };
-
-    $scope.search = function(){};
     
 }]);

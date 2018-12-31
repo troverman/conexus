@@ -227,31 +227,52 @@ module.exports = {
 		    return a.filter(function(i) {return b.indexOf(i) < 0;});
 		};
 
+		function searchObject(object, matchCallback, currentPath, result, searched) {
+	        currentPath = currentPath || '';
+	        result = result || [];
+	        searched = searched || [];
+	        if (searched.indexOf(object) !== -1 && object === Object(object)) {return;}
+	        searched.push(object);
+	        if (matchCallback(object)) {result.push({path: currentPath, value: object});}
+	        try {
+	            if (object === Object(object)) {
+	                for (var property in object) {
+	                    if (property.indexOf("$") !== 0) {
+	                        searchObject(object[property], matchCallback, currentPath + "." + property, result, searched);
+	                    }
+	                }
+	            }
+	        }
+	        catch (e) {console.log(object); throw e;}
+	        return result;
+	    };
+
+	    function updateObject(object, newValue, path){
+	        var stack = path.split('.');
+	        stack.shift();
+	        while(stack.length>1){object = object[stack.shift()];}
+	        object[stack.shift()] = newValue;
+	    };
+
 		function powersetDecompose(theArray, obj){
 			//console.log(theArray);
 			//RESTRUCT TO name.. and object list  
 			//var obj = {};
-			if (obj == {}){
-				obj[theArray] = {data:[]}
-			};
+			if (obj == {}){obj[theArray] = {data:[]}};
 			for (x in theArray){
 				if (theArray[x].length > 1){
-
 					var powerSet = getAllSubsets(theArray[x]);
 					powerSet.pop();
 					powerSet.shift();
-					
 					//INTELLIGENCE HERE
 					//TAKE A WALK :')
 					//obj[theArray].data.push({name:theArray[x].join(','), data:[]})
-
 					for (y in powerSet){
 						var powObj = {};
 						powObj[powerSet[y]] = {data: []}
 						//TAKE A WALK
 						obj[theArray[x].join(',')].data.push(powObj);
 					}
-
 					//console.log(theArray[x], powerSet, obj);
 					//powersetDecompose(powerSet, obj);
 				}
@@ -263,41 +284,29 @@ module.exports = {
 
 		//TODO: WITH powersetDecompose
 		function identityWalk(identiferSet, num, iterator){
-			
 			num++
 			var dimObj = {name:identiferSet, data:[]};
-
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-
 				for (x in orderModels){
-
 					if (orderModels[x].amountSet1.split(',').length > 1){
 						var obj = {
 							name:orderModels[x].identiferSet1,
 							data: [],
 						};
-
 						var powerSet = getAllSubsets(orderModels[x].identiferSet1.split(','));
 	    				powerSet.shift();
-
 						//for(y in orderModels[x].identiferSet1.split(',')){
 						//	obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
 						//}
-
 						for(y in powerSet){
-
 							obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
-
 						}
-
 						dimObj.data.push(obj);
 					}
 					else{
 						dimObj.data.push({name:orderModels[x].identiferSet1, data:1});
 					}
-
 				}
-
 				//ex: a->b; b->c; c->d; d->e 
 				//	  |		|	  |	 	|
 				if (num < iterator){
@@ -306,19 +315,14 @@ module.exports = {
 						train(orderModels[x].identiferSet1, num, iterator);
 					}
 				}
-
 				console.log(dimObj)
-
 			});
 		};
 
 		function tensorTesting(identiferSet){
-
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-
 				var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
 				var matrix = [];
-
 				for (x in orderModels){
 					//if (orderModels[x].identiferSet1.split(',').length==1){
 						matrix.push([]);
@@ -336,26 +340,25 @@ module.exports = {
 						}
 					//}
 				}
-
 				console.log(matrix);
 				//console.log(dimObj);
 				//const valueMatrixTensor = tf.tensor(matrix);
 				//valueMatrixTensor.print();
-
 				//const input1 = tf.input({shape: [2, 2]});
 				//const input2 = tf.input({shape: [2, 2]});
 				//const input3 = tf.input({shape: [2, 2]});
 				//const multiplyLayer = tf.layers.multiply();
 				//const product = multiplyLayer.apply([input1, input2, input3]);
-
 			});
-
 		};
 
 		//recursive train
 		//relations are tensors
 		//[a]-->[b] == amount ; a tensor | a-b tensor | b tensor | both 
 		//[a]-->[b,c] == [amount, amount] | b,c tensor
+
+
+		//TODO: WITH powersetDecompose
 		function train(identiferSet, num, iterator){
 
 			num++
@@ -384,6 +387,12 @@ module.exports = {
 							name:orderModels[x].identiferSet1,
 							data: [],
 						};
+
+						//TODO
+
+						//THIS IS THE PLACE! 
+
+
 						//POWERSET --> IS ACTUAL. I WOULD LIKE TO INITIALIZE AN IDENTITY SET OR PROBABILITY SPACE
 						//WE ARE LOOKING AT THE MANIFEST ORDER | VALUE MAP --> WHICH ITSELF IS A GRADIENT 
 						for(y in orderModels[x].identiferSet1.split(',')){
@@ -423,7 +432,6 @@ module.exports = {
 
 			Order.find({identiferSet:model})
 			.then(function(models){
-
 				//LOG TRAVERSE PATH
 				//BAD
 				path = [];
@@ -442,31 +450,33 @@ module.exports = {
 
 				//ONCE DONE..
 				console.log(uniqueMarkets.length);
+
 				//BAD
 				if (uniqueMarkets.length == 254){
-				//SIMPLIFY FROM ORDER BOOK.. | ONE ORDER SAMPLE RN
-				for (x in uniqueMarkets){
-					//set of best relations
-					//soon to be set of set (ie by price --> scalar limit to  matrix)
-					//? SET TO SET PRICE EQUIV IS FXNAL
+					//SIMPLIFY FROM ORDER BOOK.. | ONE ORDER SAMPLE RN
+					for (x in uniqueMarkets){
+						//set of best relations
+						//soon to be set of set (ie by price --> scalar limit to  matrix)
+						//? SET TO SET PRICE EQUIV IS FXNAL
 
-					//REMEBER THE ORDER IS THE SUM.. TO QUANTIZE 
-					var amountSet = uniqueMarkets[x].amountSet.split(',');
-					var amountSet1 = uniqueMarkets[x].amountSet1.split(',');
-					var marketObj = {};
-					for (y in uniqueMarkets[x].identiferSet1.split(',')){
-						//amountSet1/amountSet
-						marketObj[uniqueMarkets[x].identiferSet1.split(',')[y]] = amountSet1[y]
+						//REMEBER THE ORDER IS THE SUM.. TO QUANTIZE 
+						var amountSet = uniqueMarkets[x].amountSet.split(',');
+						var amountSet1 = uniqueMarkets[x].amountSet1.split(',');
+						var marketObj = {};
+						for (y in uniqueMarkets[x].identiferSet1.split(',')){
+							//amountSet1/amountSet
+							marketObj[uniqueMarkets[x].identiferSet1.split(',')[y]] = amountSet1[y]
+						}
+						//console.log(marketObj)
+						marketSetObj.push(marketObj)
 					}
-					//console.log(marketObj)
-					marketSetObj.push(marketObj)
-				}
 				}
 
 			});
 		};
 
 		function path(start, finish){
+
 		};
 
 		//VECTOR
@@ -507,50 +517,16 @@ module.exports = {
 		};
 
 		//TENSOR CONNECTIONS --> SHIFT IN DIMENSIONALITY --> NOT GOING TO DO CONVERSIONS --> USED FOR RESHAPING (IE TENSOR PRODUCT)
-
 		//COMMUNICATIVE TENSORS REQURE SAME BASE DIMENSIONS
-
-		function searchObject(object, matchCallback, currentPath, result, searched) {
-	        currentPath = currentPath || '';
-	        result = result || [];
-	        searched = searched || [];
-	        if (searched.indexOf(object) !== -1 && object === Object(object)) {return;}
-	        searched.push(object);
-	        if (matchCallback(object)) {result.push({path: currentPath, value: object});}
-	        try {
-	            if (object === Object(object)) {
-	                for (var property in object) {
-	                    if (property.indexOf("$") !== 0) {
-	                        searchObject(object[property], matchCallback, currentPath + "." + property, result, searched);
-	                    }
-	                }
-	            }
-	        }
-	        catch (e) {
-	            console.log(object);
-	            throw e;
-	        }
-	        return result;
-	    };
-
-	    function updateObject(object, newValue, path){
-	        var stack = path.split('.');
-	        stack.shift();
-	        while(stack.length>1){object = object[stack.shift()];}
-	        object[stack.shift()] = newValue;
-	    };
 
 		const totalDimObj = [];
 		//OKAY MB DONT DO THE CIRCLE .. DO THE CIRCUT WALK.. 
 		//minimial no self similar
 		function valueTensor(identiferSet, dimObj, recursion, depth, index){
-
 			recursion++;
-
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
 				
 				var foundObj = searchObject(totalDimObj, function (value) {return value != null && value != undefined && value.name == identiferSet;});
-				
 				if (foundObj.length != 0){
 
 					//ONLY KEEP THE LONGEST CHAIN?
@@ -558,7 +534,6 @@ module.exports = {
 					//dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
 
 					//console.log(foundObj);
-
 					//if notcircular
 					//self similarity is 0;inf;1
 					console.log(foundObj);
@@ -570,7 +545,6 @@ module.exports = {
 							}
 						}
 					}
-
 				}
 
 				else{
@@ -578,15 +552,12 @@ module.exports = {
 					dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
 
 					for (x in orderModels){
-
 						if (dimObj.data){
 							//PUSH ORDER BOOK
-
 							dimObj.data.push({
 								name: orderModels[x].identiferSet1,
 								data: [],
 							});
-
 						}
 
 						//else{console.log(dimObj.data)}
@@ -607,41 +578,27 @@ module.exports = {
 				}
 
 				totalDimObj.push(dimObj);
-
 				console.log(totalDimObj)
 				//console.log(dimObj, totalDimObj);
 
-
 			});
-
 		};
 
 		function valueTensorTotal(identiferSet, dimObj, recursion, depth, index){
-
 			recursion++;
-
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-				
 				dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
-
 				for (x in orderModels){
-
 					if (dimObj.data){
 						//PUSH ORDER BOOK
-
 						dimObj.data.push({
 							name: orderModels[x].identiferSet1,
 							data: [],
 						});
-
 					}
-
 				}
-
 				console.log(dimObj);
-
 			});
-
 		};
 
 		//TODO ASSOCIATION WALK VS PARENT
@@ -660,21 +617,8 @@ module.exports = {
 			return deferred.promise;
 		};
 		
-		//Project.find().limit(10000).then(function(models){
-		//	for (x in models){
-		//		projectAssociations(models[x].parent, models[x].title).then(function(projectModel){
-		//			console.log(projectModel)
-		//		});
-		//	}
-		//});
-
 		//UNIFICATION OF INFORMATION AND VALUE -- IMBUED TOKENIZED INFORMATION -- CHECK THIS UNIVERSAL MAPPING 
 		//STRING DATA ENCODING.. HOPEFULLY HUMAN READABLE --> PROMULAGATING EFFECTS OF EXCHANGE 
-
-		//STRINGS CANT HAVE SPACES ( SO SAYS I THE CREATOR )
-
-
-
 		//VALIDATIONS...
 		//CREATE PROJECT --> TIME
 			//TIME --> TASK
@@ -996,7 +940,6 @@ module.exports = {
 									}
 								};
 
-
 								//DO BETTER
 								Token.find({string:projectAssociationModel.string}).then(function(aTokenModel){
 									if (aTokenModel.length == 0){
@@ -1035,11 +978,25 @@ module.exports = {
 								}
 							};
 
-							//REACTION NFT
-							var humanReadableReactionNFTModel = {
-								string: 'REACTION+'+data[x][y].id,
+							var reactionCreateModel = {
+								string: 'REACTION+CREATE',
 								information:{
-									inCirculation:1,
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
+							};
+
+							var reactionReceiveModel = {
+								string: 'REACTION+RECEIVE',
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
 								},
 								protocols:[
@@ -1067,12 +1024,64 @@ module.exports = {
 								}
 							};
 
+							//REACTION+CREATE+LIKE
+							var reactionTypeCreateModel = {
+								string: 'REACTION+CREATE+'+data[x][y].type.toUpperCase(),
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
+							};
+
+							//REACTION+RECEIVE+LIKE
+							var reactionTypeReceiveModel = {
+								string: 'REACTION+RECEIVE+'+data[x][y].type.toUpperCase(),
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
+							};
+
+							//REACTION NFT
+							var humanReadableReactionNFTModel = {
+								string: 'REACTION+'+data[x][y].id,
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEREACTION'
+								}
+							};
+
 							tokenSet.push(reactionBaseModel);
-							tokenSet.push(humanReadableReactionNFTModel);
+							tokenSet.push(reactionReceiveModel);
+							tokenSet.push(reactionRevieveModel);
 							tokenSet.push(reactionTypeBaseModel);
+							tokenSet.push(reactionTypeCreateModel);
+							tokenSet.push(reactionTypeReceiveModel);
+
+							tokenSet.push(humanReadableReactionNFTModel);
 
 							//CAN WE SIMPLIFY? NOT REALLY
-							//RECIEVE REACTION -- ONE MORE LAYER -- > IMPORTANT! | LATA :) | IE PROTOCOLS LOL
 							if (data[x][y].associatedModels){
 								for (z in data[x][y].associatedModels){
 
@@ -1179,7 +1188,14 @@ module.exports = {
 											mint:'ONCREATEREACTION'
 										}
 									};
-									
+
+									//for (n in ['CREATE','RECEIVE']){
+
+									//}
+									//TODO: CREATOR AND RECIEVER OF THE REACTION..
+									//REACTION+CREATE
+									//REACTION+RECIEVE
+
 									tokenSet.push(reactionAssociationTypeModel);
 									tokenSet.push(reactionAssociationAddressModel);
 									tokenSet.push(reactionAssociationTypeAddressModel);
@@ -1543,7 +1559,7 @@ module.exports = {
 
 		};
 
-		generateStringSpace();
+		//generateStringSpace();
 
 		//train('A', 0, 8);
 		//train('A', 0, 3);
@@ -1560,7 +1576,6 @@ module.exports = {
 		//PUZZLE
 		//[a,b]->[c,d]
 
-
 		//powersetDecompose(['A','B','C', ['A','B'], ['B','C'], ['A','C'], ['A','B','C']], {});
 		//identityWalk('A', 0, 3);
 
@@ -1569,22 +1584,98 @@ module.exports = {
 
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
-		
-		//Time.find().limit(10000).then(function(models){
-			//for (x in models){
-				//if (models[x].ledger){
-				//	models[x].tags = models[x].ledger;
-				//	models[x].ledger = '';
-				//	console.log(models[x])
-				//}
-				//if (!models[x].reactions){
-					//models[x].reactions = {plus:0,minus:0};
-					//Time.update({id:models[x].id}, {reactions:models[x].reactions}).then(function(){
-						//console.log('update')
-					//});
-				//}	
-			//}
+
+		//Project.find().limit(10000).then(function(models){
+		//	for (x in models){
+		//		projectAssociations(models[x].parent, models[x].title).then(function(projectModel){
+		//			console.log(projectModel)
+		//		});
+		//	}
 		//});
+		
+		//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
+		Time.find().limit(10000).then(function(models){
+
+			for (x in models){
+
+				//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
+				//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
+				//console.log('associatedModels', models[x].associatedModels);
+
+				//console.log('PROJECT', models[x].project);
+				//console.log('TASK', dmodels[x].task);
+				//console.log('STREAM', models[x].stream);
+
+				models[x].associatedModels = [];
+
+				if (models[x].project){
+					models[x].associatedModels.push({
+						type:'PROJECT', 
+						address:models[x].project, 
+						validation:{
+
+						}, 
+						//VALIDATION NEST VS POPULATION
+						associatedModels:[],
+						assoiatedValidations:[],
+					});
+				}
+				
+				if (models[x].task){
+					models[x].associatedModels.push({
+						type:'TASK', 
+						address:models[x].task, 
+						validation:{
+
+						}, 
+						//VALIDATION NEST VS POPULATION
+						associatedModels:[{
+							type:'PROJECT', 
+							address:models[x].project, 
+							validation:{
+
+							}, 
+							//VALIDATION NEST VS POPULATION
+							associatedModels:[],
+							assoiatedValidations:[],
+						}],
+						assoiatedValidations:[],
+					});
+				}
+
+				if (models[x].stream){
+					models[x].associatedModels.push({
+						type:'STREAM', 
+						address:models[x].stream, 
+						validation:{
+
+						}, 
+						//VALIDATION NEST VS POPULATION
+						associatedModels:[],
+						assoiatedValidations:[],
+					});
+				}
+
+				if (models[x].startTime){
+					models[x].type = 'RETROACTIVE';
+				}
+
+				else{
+					models[x].type = 'TIMER';
+				}
+
+				//REMOVE NULL AND VERIFICATION SCORE
+				//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
+
+				console.log(models[x]);
+
+				//Time.update({id:models[x].id}, models[x]).then(function(){
+				//	console.log('update')
+				//});
+
+			}
+
+		});
 
 		//Validation.find().limit(10000).then(function(postModels){
 		//	for (x in postModels){
@@ -1677,7 +1768,6 @@ module.exports = {
 		//MAP THE BOOK TO THE LATTICE?
 		//FIND SET OF PATHS FROM [N]->[M] | SOME DECOMPOSIIOTN OF DFINED SELF SIMIALR? 
 
-		//DIRECT 
 		Order.find({identiferSet:inputVectorAssetString})
 		.then(function(models){
 			//console.log(models)

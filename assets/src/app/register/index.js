@@ -51,7 +51,6 @@ angular.module( 'conexus.register', [
 			$scope.showPersonal = !$scope.showPersonal;
 			$scope.showFinal = !$scope.showFinal;
 		}
-
 	};
 
 	$scope.createPosition = function(model){

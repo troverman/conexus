@@ -1735,19 +1735,34 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "			</div>\n" +
     "\n" +
     "            <div class=\"card-footer\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "            </div>\n" +
     "\n" +
+    "            <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
+    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                </form>\n" +
     "            </div>\n" +
     "\n" +
     "		</div>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
     "	\n" +
-    "	<div class=\"row\">\n" +
+    "    <div style=\"row\">\n" +
+    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "            <li><a href=\"#\">Content</a></li>\n" +
+    "            <li><a href=\"#\">Reactions</a></li>\n" +
+    "        </ul>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"\">\n" +
-    "				<button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"purchaseToggle()\">Purchase</button>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"purchaseToggle()\">Purchase</button>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -1774,59 +1789,32 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"\">\n" +
-    "                    <div class=\"\">\n" +
-    "                        <h4>Protocols [Transact]</h4>\n" +
-    "                        <p style=\"color:gray;font-style:italic;font-size:12px\">[Transact] token manifold minting logic <a href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"\">\n" +
-    "\n" +
-    "                        <div ng-repeat=\"input in inputVector.split(',')\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{input}}\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
-    "                            </div>\n" +
+    "                \n" +
+    "                    <div ng-repeat=\"input in inputVector\">\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{input.text}}</span></div>\n" +
+    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"inputVectorWeight[$index]\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{input}}\"></md-slider>\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{inputVectorWeight}}</span></div>\n" +
     "                        </div>\n" +
-    "\n" +
-    "                        <!--<div layout=\"\">\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
-    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validation\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{validation}}</span></div>\n" +
-    "                        </div>-->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                        <h5>InputVector <span ng-repeat=\"input in inputVector.split(',')\"><a href=\"market/{{input}}\">{{input}}</a> | </span>\n" +
-    "\n" +
-    "                        <h5>Dimensional Object</h5>\n" +
-    "\n" +
-    "\n" +
-    "                        <!--\n" +
-    "                        INPUT\n" +
-    "                        OBJECT\n" +
-    "                        OUTPUT\n" +
-    "                        -->\n" +
-    "\n" +
-    "\n" +
-    "                        <h5>OutputVector <span ng-repeat=\"output in outputVector.split(',')\"><a href=\"market/{{output}}\">{{output}}</a> | </span>\n" +
-    "\n" +
-    "                        <p style=\"color:gray;font-style:italic;font-size:12px\">Search for Output liquidity path | [] = []</p>\n" +
-    "\n" +
-    "                        <form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
-    "                            <input type=\"text\" placeholder=\"Input Dimensions\" ng-model=\"inputVector\" class=\"form-control\">\n" +
-    "                        </form>\n" +
-    "                        <form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
-    "                            <input type=\"text\" placeholder=\"Output Dimensions\" ng-model=\"outputVector\" class=\"form-control\">\n" +
-    "                        </form>\n" +
-    "\n" +
-    "                        <!--TRAVERSAL PARAMETERS-->\n" +
-    "                        <p ng-repeat=\"result in marketOutput\" style=\"color:gray;font-style:italic;font-size:10px\">\n" +
-    "                            <span>[tokens] = {{result[0]}} <a href=\"market/{{result[1]}}\">{{result[1]}}</a></span>\n" +
-    "                            <!--COMBINITRONICS-->\n" +
-    "                            <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->\n" +
-    "                        </p>\n" +
-    "\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <h5>InputVector: <span ng-repeat=\"input in inputVector\"><a href=\"market/{{input}}\">{{input.text}}</a> </span>\n" +
+    "                    <h5>Dimensional Object</h5>\n" +
+    "                    <h5>OutputVector: {{item.amountSet}} <span ng-repeat=\"output in outputVector\"><a href=\"market/{{output}}\">{{output.text}}</a> </span>\n" +
+    "\n" +
+    "                    <form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
+    "                        \n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Input Vector\" ng-model=\"inputVector\"></tags-input>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Output Vector\" ng-model=\"outputVector\"></tags-input>\n" +
+    "\n" +
+    "                    </form>\n" +
+    "\n" +
+    "                    <!--TRAVERSAL PARAMETERS-->\n" +
+    "                    <p ng-repeat=\"result in marketOutput\" style=\"color:gray;font-style:italic;font-size:10px\">\n" +
+    "                        <span>[tokens] = {{result[0]}} <a href=\"market/{{result[1]}}\">{{result[1]}}</a></span>\n" +
+    "                        <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->\n" +
+    "                    </p>\n" +
+    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1836,18 +1824,11 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "	<div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "            	<div class=\"col-md-12\">\n" +
-    "                    <h4>Create Item Post</h4>\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
-    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                    </form>\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item Content</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <!--LIST REACTIONS-->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
@@ -1857,7 +1838,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                </div> \n" +
-    "                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(item.content)\"></span></div>\n" +
+    "                <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "            </div>\n" +
     "            <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
     "                <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -1976,7 +1957,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
-    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Post</button>\n" +
+    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Content</button>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "\n" +
@@ -2427,6 +2408,15 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
 
 angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("marketPlace/index.tpl.html",
+    "<style type=\"text/css\">\n" +
+    "\n" +
+    "	.angular-google-map-container{height: 200px;}\n" +
+    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	tags-input .host{margin:0px;border:0px;}\n" +
+    "\n" +
+    "</style>\n" +
+    "\n" +
+    "\n" +
     "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
@@ -2458,7 +2448,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	            <div style=\"padding:16px;\">\n" +
     "	                <span><b>Associations</b></span>\n" +
     "	                <div ng-repeat=\"association in sortedAssociationArray\">\n" +
-    "	                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{association.element}}</a>\n" +
+    "	                    <a href=\"#\" ng-click=\"filterContent(association.element)\">{{association.element}}</a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
@@ -2466,7 +2456,15 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	            <div style=\"padding:16px;\">\n" +
     "	                <span><b>Locations</b></span>\n" +
     "	                <div ng-repeat=\"location in locations\">\n" +
-    "	                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{location}}</a>\n" +
+    "	                    <a href=\"#\" ng-click=\"filterContent(location)\">{{location}}</a>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "	        <div class=\"card\">\n" +
+    "	            <div style=\"padding:16px;\">\n" +
+    "	                <span><b>Assets</b></span>\n" +
+    "	                <div ng-repeat=\"asset in sortedAssetArray\">\n" +
+    "	                    <a href=\"#\" ng-click=\"filterContent(asset.element)\">{{asset.element}}</a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
@@ -2474,14 +2472,20 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "		</div>\n" +
     "\n" +
     "		<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "			\n" +
+    "\n" +
+    "			<!--\n" +
+    "			TODO: Better Form.. add [] + \n" +
+    "			<input placeholder=\"identiferSet\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\"> [] ill talk this or this or this and this\n" +
+    "			[], [], [[],[]]\n" +
+    "			-->\n" +
+    "\n" +
     "			<div class=\"card\">\n" +
     "				<button class=\"btn btn-default log-btn\" ng-click=\"itemToggle()\">+ Item</button>\n" +
     "			</div>\n" +
     "\n" +
     "		    <div class=\"card\">\n" +
     "		        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
+    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "		            <div style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
     "		                <a ng-click=\"keyPress(searchQuery)\" href=\"#\" role=\"button\">\n" +
     "		                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -2490,43 +2494,20 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "		        </form>\n" +
     "		    </div>\n" +
     "\n" +
-    "			<div class=\"card\" ng-show=\"newItemToggleVar\">\n" +
-    "			    <div style=\"padding:16px;\">\n" +
-    "					<form role=\"form\" ng-submit=\"createItem(newItem)\">\n" +
-    "						<input placeholder=\"Title\" type=\"text\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
-    "                        <tags-input ng-model=\"newContent.tags\" placeholder=\"Tags\"></tags-input>\n" +
-    "	                    <text-angular placeholder=\"Content\" ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "						<input placeholder=\"Associated Models\" type=\"text\" ng-model=\"newItem.associatedModels\" class=\"form-control\">\n" +
-    "						<h4>Price</h4>\n" +
-    "						<!--TODO: Better Form.. add [] + -->\n" +
-    "						<input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.identiferSet\" class=\"form-control\">\n" +
-    "						<input placeholder=\"Amount Set\" type=\"text\" ng-model=\"newItem.amountSet\" class=\"form-control\">\n" +
-    "						<!--<input placeholder=\"identiferSet\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\"> [] ill talk this or this or this and this-->\n" +
-    "						<!--[], [], [[],[]]-->\n" +
-    "						<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.amountSet\">create</button>\n" +
-    "					</form>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "\n" +
     "			<div ng-repeat=\"item in items\">\n" +
-    "		        <div class=\"card\">\n" +
+    "		        <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "		            <div style=\"padding:16px\">\n" +
-    "		            	\n" +
     "	                	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
-    "\n" +
-    "						<p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
-    "\n" +
+    "						<p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
     "	                	<div style=\"max-height:500px;overflow:scroll\">\n" +
     "							<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "						</div>\n" +
-    "\n" +
-    "						<!--[] + [] -->\n" +
-    "						<h5>{{item.amountSet}} <a href=\"market/{{item.identiferSet}}\">{{item.identiferSet}}</a></h5>\n" +
+    "                    	<h5>{{item.amountSet}} <span ng-repeat=\"asset in item.identiferSet\"><a ng-click=\"$event.stopPropagation();\" href=\"market/{{asset}}\">{{asset}}</a></h5>\n" +
     "		            </div>\n" +
     "		            <div class=\"card-footer\">\n" +
-    "		                <a ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "		                <a ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "		                <a ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		                <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "		                <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "		                <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "		                <a class=\"pull-right\" style=\"padding:0px;\" href=\"item/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "		            </div>\n" +
     "		            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
@@ -3225,8 +3206,8 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
-    "                    <a ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                    <a ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                    <a class=\"pull-right\" style=\"padding:0px;\" href=\"item/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                </div>\n" +
@@ -6672,8 +6653,6 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "\n" +
-    "                    <!--<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">-->\n" +
     "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "                    <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
     "                        <a  href=\"#\" role=\"button\">\n" +

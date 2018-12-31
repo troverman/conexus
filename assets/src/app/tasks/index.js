@@ -181,7 +181,6 @@ angular.module( 'conexus.tasks', [
             return obj.text;
         })[0];
 
-
         TaskModel.getSome('search', search, 20, 0, 'createdAt DESC').then(function(tasks){
             console.log(tasks)
             $rootScope.stateIsLoading = false;

@@ -13,6 +13,7 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
         //TODO COMPOUND
 
         if (type=='contentModel'){query = {params:{contentModel:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='item'){query = {params:{item:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='market'){query = {params:{market:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='order'){query = {params:{order:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='profile'){query = {params:{profile:filter,limit:limit,skip:skip,sort:sort}};}

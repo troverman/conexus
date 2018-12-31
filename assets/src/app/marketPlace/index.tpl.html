@@ -1,3 +1,12 @@
+<style type="text/css">
+
+	.angular-google-map-container{height: 200px;}
+	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}
+	tags-input .host{margin:0px;border:0px;}
+
+</style>
+
+
 <div class="page-heading">
     <div class="container"> 
         <div class="spacing-25"></div>
@@ -29,7 +38,7 @@
 	            <div style="padding:16px;">
 	                <span><b>Associations</b></span>
 	                <div ng-repeat="association in sortedAssociationArray">
-	                    <a href="#" ng-click="filterContent(tag.element)">{{association.element}}</a>
+	                    <a href="#" ng-click="filterContent(association.element)">{{association.element}}</a>
 	                </div>
 	            </div>
 	        </div>
@@ -37,7 +46,15 @@
 	            <div style="padding:16px;">
 	                <span><b>Locations</b></span>
 	                <div ng-repeat="location in locations">
-	                    <a href="#" ng-click="filterContent(tag.element)">{{location}}</a>
+	                    <a href="#" ng-click="filterContent(location)">{{location}}</a>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="card">
+	            <div style="padding:16px;">
+	                <span><b>Assets</b></span>
+	                <div ng-repeat="asset in sortedAssetArray">
+	                    <a href="#" ng-click="filterContent(asset.element)">{{asset.element}}</a>
 	                </div>
 	            </div>
 	        </div>
@@ -45,14 +62,20 @@
 		</div>
 
 		<div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
-			
+
+			<!--
+			TODO: Better Form.. add [] + 
+			<input placeholder="identiferSet" type="text" ng-model="newItem.ArrayManifolds" class="form-control"> [] ill talk this or this or this and this
+			[], [], [[],[]]
+			-->
+
 			<div class="card">
 				<button class="btn btn-default log-btn" ng-click="itemToggle()">+ Item</button>
 			</div>
 
 		    <div class="card">
 		        <form style="display:flex;flex-direction:row;">
-		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-submit="keyPress(searchQuery)">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
 		            <div style="border:0px" class="btn btn-default" style="float:right">
 		                <a ng-click="keyPress(searchQuery)" href="#" role="button">
 		                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
@@ -61,43 +84,20 @@
 		        </form>
 		    </div>
 
-			<div class="card" ng-show="newItemToggleVar">
-			    <div style="padding:16px;">
-					<form role="form" ng-submit="createItem(newItem)">
-						<input placeholder="Title" type="text" ng-model="newItem.title" class="form-control">
-                        <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
-	                    <text-angular placeholder="Content" ng-model="newItem.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-						<input placeholder="Associated Models" type="text" ng-model="newItem.associatedModels" class="form-control">
-						<h4>Price</h4>
-						<!--TODO: Better Form.. add [] + -->
-						<input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
-						<input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
-						<!--<input placeholder="identiferSet" type="text" ng-model="newItem.ArrayManifolds" class="form-control"> [] ill talk this or this or this and this-->
-						<!--[], [], [[],[]]-->
-						<button type="submit" class="btn btn-default log-btn" ng-disabled="!newItem.amountSet">create</button>
-					</form>
-				</div>
-			</div>
-
 			<div ng-repeat="item in items">
-		        <div class="card">
+		        <div class="card" ng-click="renderToggle(item)">
 		            <div style="padding:16px">
-		            	
 	                	<a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
-
-						<p><a ng-repeat="tag in item.tags track by $index" ng-click="filterContent(tag)">{{tag.trim()}} </a></p>
-
+						<p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
 	                	<div style="max-height:500px;overflow:scroll">
 							<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
 						</div>
-
-						<!--[] + [] -->
-						<h5>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h5>
+                    	<h5>{{item.amountSet}} <span ng-repeat="asset in item.identiferSet"><a ng-click="$event.stopPropagation();" href="market/{{asset}}">{{asset}}</a></h5>
 		            </div>
 		            <div class="card-footer">
-		                <a ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-		                <a ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-		                <a ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+		                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+		                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+		                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 		                <a class="pull-right" style="padding:0px;" href="item/{{item.id}}"><i class="fa fa-link grey"></i></a>
 		            </div>
 		            <div ng-show="item.showReply" class="card-footer">

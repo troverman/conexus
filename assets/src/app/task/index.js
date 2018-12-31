@@ -224,7 +224,6 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
-
     //!!!!TODO: REVIST THIS !!!
     //ASSOICATIONS .. TIME --> STREAM --> CONTENT
     //TYPE.. TIMER ETC

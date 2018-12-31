@@ -21,9 +21,7 @@ module.exports = {
 			});
 			//console.log(price)
 		};
-
 		//console.log(newOrderArray);
-
 		//Order.create(newOrderArray).then(function(){
 		//	console.log('DONE', newOrderArray.length)
 		//});
@@ -45,14 +43,11 @@ module.exports = {
 			//console.log(price)
 			//0.001,0.0011,..0.1,1
 		} 
-
 		//console.log(newOrderArray1);
-
 		//Order.create(newOrderArray1).then(function(){
 		//	console.log('DONE', newOrderArray1.length)
 		//});
 
-		
 		/*Order.find().limit(10000).skip(0).sort('createdAt DESC').then(function(models){
 			if (models.length > 0){
 	    		var idArray = models.map(function(obj) {return obj.id});
@@ -63,7 +58,6 @@ module.exports = {
 		});*/
 
 		/*User.find().then(function(models){
-
 			for (x in models){
 		       	(function(models, x){
 					var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
@@ -94,9 +88,7 @@ module.exports = {
 			    	})(models, x);
 				}
 			}
-
 		});*/
-
 		
 		User.findOne(req.id)
 		.then(function(model) {
@@ -128,11 +120,8 @@ module.exports = {
 
 	//DAILY RUN
 	universalTokenProtocolPreAlpha:function(){
-
 		User.find().then(function(userModels){
-
 			for (x in userModels){
-				//console.log(userModels[x].balance)
 				if(!userModels[x].balance){userModels[x].balance = {}}
 				if(!userModels[x].balance['UNIVERSALTOKEN']){userModels[x].balance['UNIVERSALTOKEN'] = 0}
 				userModels[x].balance['UNIVERSALTOKEN'] = userModels[x].balance['UNIVERSALTOKEN'] + 1;
@@ -140,18 +129,14 @@ module.exports = {
 					//console.log('updated')
 				});	
 			}
-
 			Token.find({string:'UNIVERSALTOKEN'}).then(function(tokenModels){
 				if (!tokenModels[0].information.inCirculation){tokenModels[0].information.inCirculation = 0;}
 				tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(userModels.length);
-				//tokenModels[0].information.inCirculation = 1000;
 				Token.update({id:tokenModels[0].id}, tokenModels[0]).then(function(tokenModel){
 					console.log('updated', tokenModel)
 				});
 			});
-
 		});
-
 	},
 
 };

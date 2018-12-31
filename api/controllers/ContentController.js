@@ -21,6 +21,19 @@ module.exports = {
 
 		Content.watch(req);
 
+		if(req.query.item){
+			var item = req.query.item;
+			Content.find({item:item})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Content.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
 		if(req.query.market){
 			var market = req.query.market;
 			Content.find({market:market})

@@ -625,8 +625,10 @@ angular.module( 'conexus.nav', [
 
             //PATCH!!!
             if ($scope.newProject.associatedModels){
-                if ($scope.newProject.associatedModels[0].type == 'PROJECT'){
-                    $scope.newProject.parent = $scope.newProject.associatedModels[0].address
+                if ($scope.newProject.associatedModels[0]){
+                    if ($scope.newProject.associatedModels[0].type == 'PROJECT'){
+                        $scope.newProject.parent = $scope.newProject.associatedModels[0].address;
+                    }
                 }
             }
 
