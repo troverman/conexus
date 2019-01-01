@@ -5360,7 +5360,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		</div>\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<span><b>Identifiers</b></span>\n" +
+    "				<span><b>Assets</b></span>\n" +
     "	            <div ng-repeat=\"asset in sortedTransactionAssets\">\n" +
     "	                <a href=\"#\" ng-click=\"selectAsset(asset.element)\">{{asset.element}}</a>\n" +
     "	            </div>\n" +
@@ -7003,6 +7003,18 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "    .angular-google-map-container { height: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }\n" +
     "</style>\n" +
     "\n" +
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <h1>THE CRE8 NETWORK</h1>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -7010,12 +7022,41 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<div class=\"col-md-6\">\n" +
-    "					<h2><a href=\"project/conexus\">Transparency</a></h2>\n" +
-    "					<p>Transparent contrubition, Equatable representation</p>		\n" +
-    "					<highchart config=\"chart\"></highchart>\n" +
-    "				</div>\n" +
-    "				<div class=\"col-md-6\">\n" +
+    "				<div class=\"col-md-12\">\n" +
+    "					\n" +
+    "					<h3>Peer Network</h3>\n" +
+    "					<p style=\"color:gray;font-style:italic;\">{{peers.length}} Peers</p>\n" +
+    "					<p style=\"color:gray;font-style:italic;\">{{transactionVelocity}} Txs per second</p>\n" +
+    "\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "					<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "					    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "					        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "					            <div><div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div></div>\n" +
+    "					        </ui-gmap-window>\n" +
+    "					    </ui-gmap-marker>\n" +
+    "					</ui-gmap-google-map>\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "					<table class=\"table table-striped table-hover\">\n" +
+    "		                <thead>\n" +
+    "		                    <tr>\n" +
+    "		                    	<th>Peer</th>\n" +
+    "								<th>Location</th>\n" +
+    "								<th>Device</th>\n" +
+    "								<th>PoET</th>\n" +
+    "							</tr>\n" +
+    "		                </thead>\n" +
+    "		                <tbody>\n" +
+    "		                    <tr ng-repeat=\"peer in peers\">\n" +
+    "		                        <td><a href=\"member/{{peer.user.username}}\">{{peer.title}} <!--| {{peer.user.username}}--></a></td>\n" +
+    "								<td><b>lat:</b> {{peer.location.lat}}, <b>lng:</b> {{peer.location.lng}}</td>\n" +
+    "								<td>{{peer.device.title}}, {{peer.device.processor}}</td>\n" +
+    "								<td>{{peer.poet}}</td>\n" +
+    "		                    </tr>\n" +
+    "		                </tbody>\n" +
+    "		            </table>\n" +
+    "\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -7026,7 +7067,12 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "			<div style=\"padding:16px;\">\n" +
     "				<div class=\"col-md-12\">\n" +
     "					<h3>Stats</h3>\n" +
-    "					<p>13 companies, 35 collaborators, $8,000,000 monthly revenue</p>\n" +
+    "					<p style=\"color:gray;font-style:italic;\">\n" +
+    "						{{chart.series[0].data[chart.series[0].data.length-1][1]}} Projects, \n" +
+    "						{{chart.series[1].data[chart.series[1].data.length-1][1]}} Members, \n" +
+    "						{{chart.series[3].data[chart.series[3].data.length-1][1]}} Daily Transactions, \n" +
+    "						{{chart.series[4].data[chart.series[4].data.length-1][1]}} Assets\n" +
+    "					</p>\n" +
     "					<highchart config=\"chart\"></highchart>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -7036,28 +7082,11 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<div class=\"col-md-12\">\n" +
-    "					\n" +
-    "					<h3>Peer Network</h3>\n" +
-    "					<p>13793 Peers on the CRE8 NETWORK</p>\n" +
-    "					<p>1232 Txs a Second</p>\n" +
-    "\n" +
-    "					<div class=\"spacing-10\"></div>\n" +
-    "					<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "					    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "					        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "					            <div>\n" +
-    "					                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
-    "					            </div>\n" +
-    "					        </ui-gmap-window>\n" +
-    "					    </ui-gmap-marker>\n" +
-    "					</ui-gmap-google-map>\n" +
-    "					<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "				</div>\n" +
+    "				<h2><a href=\"project/conexus\">Meta</a></h2>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>\n" +

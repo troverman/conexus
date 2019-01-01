@@ -2,6 +2,18 @@
     .angular-google-map-container { height: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
 </style>
 
+<div class="page-heading">
+    <div class="spacing-25"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>THE CRE8 NETWORK</h1>
+            </div>
+        </div>
+    </div>
+    <div class="spacing-25"></div>
+</div>
+
 <div class="spacing-10"></div>
 
 <div class="container">
@@ -9,12 +21,41 @@
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-				<div class="col-md-6">
-					<h2><a href="project/conexus">Transparency</a></h2>
-					<p>Transparent contrubition, Equatable representation</p>		
-					<highchart config="chart"></highchart>
-				</div>
-				<div class="col-md-6">
+				<div class="col-md-12">
+					
+					<h3>Peer Network</h3>
+					<p style="color:gray;font-style:italic;">{{peers.length}} Peers</p>
+					<p style="color:gray;font-style:italic;">{{transactionVelocity}} Txs per second</p>
+
+					<div class="spacing-10"></div>
+					<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+					    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+					        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+					            <div><div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div></div>
+					        </ui-gmap-window>
+					    </ui-gmap-marker>
+					</ui-gmap-google-map>
+					<div class="spacing-10"></div>
+
+					<table class="table table-striped table-hover">
+		                <thead>
+		                    <tr>
+		                    	<th>Peer</th>
+								<th>Location</th>
+								<th>Device</th>
+								<th>PoET</th>
+							</tr>
+		                </thead>
+		                <tbody>
+		                    <tr ng-repeat="peer in peers">
+		                        <td><a href="member/{{peer.user.username}}">{{peer.title}} <!--| {{peer.user.username}}--></a></td>
+								<td><b>lat:</b> {{peer.location.lat}}, <b>lng:</b> {{peer.location.lng}}</td>
+								<td>{{peer.device.title}}, {{peer.device.processor}}</td>
+								<td>{{peer.poet}}</td>
+		                    </tr>
+		                </tbody>
+		            </table>
+
 				</div>
 			</div>
 		</div>
@@ -25,7 +66,12 @@
 			<div style="padding:16px;">
 				<div class="col-md-12">
 					<h3>Stats</h3>
-					<p>13 companies, 35 collaborators, $8,000,000 monthly revenue</p>
+					<p style="color:gray;font-style:italic;">
+						{{chart.series[0].data[chart.series[0].data.length-1][1]}} Projects, 
+						{{chart.series[1].data[chart.series[1].data.length-1][1]}} Members, 
+						{{chart.series[3].data[chart.series[3].data.length-1][1]}} Daily Transactions, 
+						{{chart.series[4].data[chart.series[4].data.length-1][1]}} Assets
+					</p>
 					<highchart config="chart"></highchart>
 				</div>
 			</div>
@@ -35,28 +81,11 @@
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-				<div class="col-md-12">
-					
-					<h3>Peer Network</h3>
-					<p>13793 Peers on the CRE8 NETWORK</p>
-					<p>1232 Txs a Second</p>
-
-					<div class="spacing-10"></div>
-					<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-					    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-					        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-					            <div>
-					                <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
-					            </div>
-					        </ui-gmap-window>
-					    </ui-gmap-marker>
-					</ui-gmap-google-map>
-					<div class="spacing-10"></div>
-
-				</div>
+				<h2><a href="project/conexus">Meta</a></h2>
 			</div>
 		</div>
 	</div>
+
 </div>
 
 <div class="spacing-50"></div>

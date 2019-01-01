@@ -66,19 +66,10 @@ angular.module( 'conexus.marketPair', [
             zoomType: 'x',
         },
         legend:{enabled:true},
-        title: {
-            text: null
+        title: {text: null},
+        xAxis: {title: {text: null}
         },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        yAxis: {title: {text: null}},
         plotOptions: {
             column: {
                 pointPadding: 0.2,
@@ -106,9 +97,7 @@ angular.module( 'conexus.marketPair', [
             zoomType: 'x',
         },
         series: [],
-        title: {
-            text: ''
-        },
+        title: {text: ''},
         xAxis: {
             type: 'datetime',
             currentMin: 0,
@@ -119,9 +108,7 @@ angular.module( 'conexus.marketPair', [
             gridLineColor: 'grey'
         },
         yAxis: [{
-            title: {
-                text: null
-            },
+            title: {text: null},
         }],
         credits:{enabled:false},
     };
