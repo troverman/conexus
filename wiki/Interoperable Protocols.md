@@ -1,6 +1,6 @@
 # Interoperable Protocol Architecture
 ## Information mapping to a balance
-## Token are meta data ‘imbued’ as economic tradable assets
+## Tokens are meta data ‘imbued’ as tradable assets
 
 ```
 contract Protocol {
@@ -8,16 +8,35 @@ contract Protocol {
 }
 ```
 
+Work In Progress Token Structure
+```
+var humanReadableValidationNFTModel = {
+	string: 'VALIDATION+'+data[x][y].id,
+	information:{
+		inCirculation:1,
+		markets:0,
+	},
+	protocols:[
+		'BASE'
+	],
+	logic:{
+		transferrable:true, 
+		mint:'ONCREATEVALIDATION'
+	}
+};
+```
+
 Protocols define logic and create 'logic manifolds' nested within a token strucutre. 
 
 # Layered Adaptability
 
 # Core protocols
+	Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
 
 ## Data Protocol	
 
 ## Project Protocol
-The set of logic is driven by the organization
+	The set of logic is driven by the organization
 	the manifold defined 'organization+' 
 	'organization+'
 
@@ -35,10 +54,36 @@ The set of logic is driven by the organization
 	{}
 
 ## Reaction Protocol
-	REACTION
-	{id}
+
+	Reaction string token domain | all multiplicative combinations of data as tokens
+
+	//DEFINE LOGIC
+
+	//[ACTION] == CREATE, RECEIVE
+	//[MODEL] == CONTENT, TIME, ...
+	//[TYPE] == LIKE, DISLIKE, ...
+
+	REACTION – Creator and Recipient get 1 REACTION token
+	REACTION+CREATE
+	REACTION+RECEIVE
 	REACTION+[TYPE]
-	REACTION+[TYPE]+{modelAddress}
+	REACTION+CREATE+[TYPE]
+	REACTION+RECEIVE+[TYPE]
+
+	REACTION+{ID}
+
+	REACTION+[MODEL]
+	REACTION+[MODEL]+[TYPE]
+
+	REACTION+[MODEL]+{ID}
+	REACTION+[MODEL]+[TYPE]+{ID}
+
+	REACTION+[ACTION]+[MODEL]
+	REACTION+[ACTION]+[MODEL]+[TYPE]
+
+	REACTION+[ACTION]+[MODEL]+{ID}
+	REACTION+[ACTION]+[MODEL]+[TYPE]+{ID}
+
 	Linkage with Model (work out rotational equalities via language interperlation & algebra(s) | a+b+c is congruent to c+b+a is congruent to b+c+a)
 
 ## Relationship Protocol
@@ -46,7 +91,8 @@ The set of logic is driven by the organization
 	{+Related Model+}
 
 ## Task Protocol
-Nested in relationship between Project & Time
+	TASK
+	Nested in relationship between Project & Time
 	{id}
 
 ## Time Protocol
@@ -56,9 +102,9 @@ Nested in relationship between Project & Time
 
 ## Transaction Protocol
 
-	Transaction action token domain | all multiplicative combinations of data as tokens
+	Transaction string token domain | all multiplicative combinations of data as tokens
 
-	Transaction – creator and recipient get 1 Transaction token
+	TRANSACTION – creator and recipient get 1 Transaction token
 	Transaction+creator - creator gets 1 Transaction+creator token
 	Transaction+recipient - recipient gets 1 Transaction+recipient token
 	 
@@ -97,16 +143,17 @@ Nested in relationship between Project & Time
 	{}
 
 
-
-
 ## View Protocol
 	'Address+VIEW+'
 
 ## Validation Protocol
 	'+VALIDATION'
 
+## Validated Association String Extensions
+	PROJECTA+PROJECTB+PROJECTC
+
 # Organizational Pattern
-## Project -> Task -> Time
+	Project -> Task -> Time
 
 # '3rd Layer of Compilation'
 	Nested Chain Interaction
@@ -148,12 +195,4 @@ Nested in relationship between Project & Time
 	 
 	I need a reputation specific amount of usageToken to key in.
 
-	Life Time reputations with usage + helper task dimensions 
-	 
-	//(edge case where user sells bgTime and usageToken on open market
-	negative assets as a concept.. )
-	//inverse market equiv – selling price (pay someone to take bgTime)
- 
-
-
-
+	Life Time reputations with usage + helper task dimensions
