@@ -2,12 +2,12 @@ angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<div class=\"intro\" style=\"max-height:270px\">\n" +
+    "<div class=\"intro\" style=\"max-height:720px\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING THE NEXT WAVE OF PUBLIC ORGANIZATIONS\n" +
+    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING THE NEXT WAVE OF PUBLIC INCLUSIVITY\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
     "        </svg> \n" +
@@ -25,9 +25,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "    <div class=\"intro-mobile\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<!--<h3>Transparency Maximalism</h3>-->\n" +
-    "<!--<h4>Share with us and Create the Future</h4>-->\n" +
-    "\n" +
     "<div id=\"about-section1\">\n" +
     "	<div class=\"container\">\n" +
     "\n" +
@@ -36,8 +33,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
     "				<h3>CREATE THE NEXT WAVE</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A 24/7 continual hackathon</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and build together</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Our Culture Begets a 24/7 continual hackathon.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and build together.</p>\n" +
+    "\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\"></div>\n" +
     "		</div>\n" +
@@ -47,8 +46,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\"></div>\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3>Create and Build a Shared Future</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create</p>\n" +
+    "				<h3>CREATE A SHARED WORLD</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create.</p>\n" +
     "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -59,6 +58,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-xs-12\" style=\"width:641px\">\n" +
     "				<div class=\"card\">\n" +
     "				    <div style=\"padding:16px;\">\n" +
+    "						<h3>TRANSPARENCY MAXIMALISM</h3>\n" +
+    "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming and Complete Inclusivity create more connected paradigms.</p>\n" +
+    "						<p style=\"font-style:italic;color:gray;margin:0px\">Sharing Creates Abundance.</p>\n" +
+    "\n" +
     "						<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "						<h3><a href=\"https://www.youtube.com/embed/jUQ_3kCcG_U\">open eye</a></h3>\n" +
     "						<p>\n" +
@@ -84,12 +87,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "			<div class=\"col-md-8\">\n" +
     "				<h2>Collaborative Governance</h2>\n" +
-    "				<p style=\"font-style:italic;margin:0px\">Reputation Protocols | Working together toward a common goal</p>\n" +
-    "				<p style=\"font-style:italic;margin:0px\">Coordinating Around Shared Goals</p>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;margin:0px\">Context Specific Reputation Protocols give us a fair shot at accountable representation.</p>\n" +
     "			</div>\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "			<div class=\"col-md-4\">\n" +
     "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -104,7 +106,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-xs-12\">\n" +
-    "				<h2>MultiDimensional Token Protocols</h2>\n" +
+    "				<h2>MultiDimensional Tokenization</h2>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
     "				<h5>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization | Transaction Tokenization</h5>\n" +
     "				<h5>\n" +
     "					<a href=\"https://www.github.com/troverman/conexus\">Developers</a> | \n" +
@@ -122,24 +125,27 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "\n" +
+    "			<div class=\"col-md-12\">\n" +
     "				<h2><a href=\"/market\">MultiDimensional Token Market</a></h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create dimensional liquidity for transparent and reputationally validated work</p> \n" +
-    "		        <!--<span><a href=\"market/universalToken\">UniversalToken</a> | {}</span>-->\n" +
-    "		        <div class=\"spacing-50\"></div>\n" +
-    "				<highchart config=\"chartMap\"></highchart>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "\n" +
+    "\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<!--<highchart config=\"chart\"></highchart>-->\n" +
+    "				<highchart config=\"chartMap\"></highchart>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "				<h3>Your Dimensional Vote</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create dimensional liquidity for transparent and reputationally validated work.</p> \n" +
     "			</div>\n" +
     "\n" +
     "			<div class=\"col-md-12\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<h3>Create Value Relationships</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value; create depth in the market</h4>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p> \n" +
+    "				<!--<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p> -->\n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
@@ -151,10 +157,25 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<h3>Projects</h3>\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<h3>What We're Building</h3>\n" +
+    "\n" +
+    "				<!--SELECT PROJECTS-->\n" +
+    "				<!--\n" +
+    "				<div class=\"row\">\n" +
+    "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
+    "						<div class=\"padding:16px\">\n" +
+    "							<h3><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				-->\n" +
+    "\n" +
     "				<h5>Human Validated Proof of Work</h5>\n" +
+    "				<!--VALIDATION MECHANISM-->\n" +
+    "\n" +
     "				<p>Our Value Infrastructure</p>\n" +
+    "				<h5><a href=\"/transparency\">The Peer Network</a></h5>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -183,7 +204,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "				<h3>Complete Tokenization</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto economic data structre and means of account</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto-economic data structre and means of account.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
+    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -195,184 +218,27 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-xs-12\">\n" +
+    "\n" +
     "				<h2>Value Mapping and Dimensional Voting</h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create A Pluralist Means of Value</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Continually state and update what valuable to you, dimensionally.</p>\n" +
-    "				<br>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value. It starts with you.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our intentional value mechanism comes from stating what we believe is valuable. An empowering call to action.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Empower youself and our collective by clearly and distinctly defining your value map. State value as relational to sets of validated actions.</p>\n" +
     "				<br>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">What do we know is valuable? Let's come to consensus; create a 'gestalt.'</p>\n" +
+    "\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create Empowerment by clearly and distinctly elucidating your value map.</p>\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Everything has Value. Let's come to consensus and create an emergent gestalt.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give dimensional value to sets of actions.</p>\n" +
     "				<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
+    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
-    "\n" +
     "\n" +
     "<div ng-include=\"'register/index.tpl.html'\"></div>\n" +
-    "\n" +
-    "<!-- CALL TO ACTION HERE-->\n" +
-    "<!--\n" +
-    "<div style=\"background-color:white\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"row\" ng-show=\"true\">\n" +
-    "			<div class=\"col-md-12\">\n" +
-    "\n" +
-    "				<div class=\"\">\n" +
-    "			        <div style=\"\">\n" +
-    "			        	\n" +
-    "						<h1>CRE8</h1>\n" +
-    "						<h3><b>Join Our Community</b></h3>\n" +
-    "			        	<h4>Create Your Value Map</h4>\n" +
-    "			        	<p style=\"font-style:italic;color:gray;margin:0px\">The more complete the better, the more intentional your dimensional vote the better.</p>\n" +
-    "			        	<p style=\"font-style:italic;color:gray;margin:0px\">*Creating Orders on the Multi Dimensional Token Market.</p>\n" +
-    "			        	<br>\n" +
-    "						<span><a href=\"market/universalToken\">UniversalToken onMint Market Postion <i class=\"fa fa-question-circle\"></i></a></span>\n" +
-    "			        	<br>\n" +
-    "						<span>\n" +
-    "							<span ng-repeat=\"dimension in markets\"><a href=\"market/{{dimension}}\">{{dimension}}</a> | </span>\n" +
-    "							<a href=\"#\">+ Dimension</a>\n" +
-    "							<form style=\"display:flex;flex-direction:row;\">\n" +
-    "				            	<input ng-model=\"newMarket.market\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\">\n" +
-    "				            	<div ng-click=\"addMarket('market')\" style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "					                <a href=\"#\">\n" +
-    "					                    <h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5>\n" +
-    "					                </a>\n" +
-    "								</div>\n" +
-    "				        	</form>\n" +
-    "						</span>\n" +
-    "						<div class=\"spacing-10\"></div>\n" +
-    "						<highchart config=\"chartMap\"></highchart>\n" +
-    "						<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "				<div class=\"\">\n" +
-    "					<div style=\"\">\n" +
-    "						<h3>What is Valuable to you?</h3>\n" +
-    "						<h4>I believe the following concepts and specific tasks are valuable.</h4>\n" +
-    "						<div class=\"spacing-10\"></div>\n" +
-    "						<div class=\"card\">\n" +
-    "					        <form style=\"display:flex;flex-direction:row;\">\n" +
-    "					            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\" ng-submit=\"keyPress(searchQuery)\">\n" +
-    "					            <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "									<h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "					            </div>\n" +
-    "					        </form>\n" +
-    "						</div>\n" +
-    "						<div class=\"spacing-10\"></div>\n" +
-    "						<div style=\"padding:16px;\"><p style=\"font-weight:800\"><span ng-repeat=\"dimension in markets\"><a href=\"#\">{{dimension}}, </a></span></p></div>\n" +
-    "						<div class=\"spacing-10\"></div>\n" +
-    "						<div style=\"max-height:400px;overflow:scroll\">\n" +
-    "							<div ng-repeat=\"task in tasks\">\n" +
-    "								<div class=\"card\">\n" +
-    "									<div style=\"padding:16px;\">\n" +
-    "										<h4><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
-    "										<p><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
-    "				                    	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
-    "										<a ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
-    "										<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
-    "									</div>\n" +
-    "								</div>\n" +
-    "							</div>\n" +
-    "						</div>\n" +
-    "						<div class=\"spacing-10\"></div>\n" +
-    "						<div class=\"\">\n" +
-    "							<div class=\"form-group\">\n" +
-    "								<input type=\"text\" class=\"form-control\">\n" +
-    "								<button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button>\n" +
-    "							</div>\n" +
-    "						</div>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "				<div class=\"\">\n" +
-    "					<div style=\"\">\n" +
-    "						<h4>A Valuable Day</h4>\n" +
-    "						<p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">REST</span></p>\n" +
-    "						<p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">WORK</span></p>\n" +
-    "						<p>An ideal day contains <span style=\"font-weight:800\">8</span> hours of <span style=\"font-weight:800\">FUN</span></p>\n" +
-    "						<p>An ideal day contains <span style=\"font-weight:800\">2</span> hours of <span style=\"font-weight:800\">Learning</span></p>\n" +
-    "						<p>An ideal day contains <span style=\"font-weight:800\">1</span> hours of <span style=\"font-weight:800\">Exercise</span></p>\n" +
-    "						<div class=\"spacing-15\"></div>\n" +
-    "						<div class=\"form-group\">\n" +
-    "							<div class=\"col-md-6\"><input type=\"text\" placeholder=\"Hours\" class=\"form-control\"></div>\n" +
-    "							<div class=\"col-md-6\"><input type=\"text\" placeholder=\"Activity\" class=\"form-control\"></div>\n" +
-    "							<div class=\"col-md-12\"><button type=\"submit\" style=\"width:100%\" ng-click=\"createOrder()\" class=\"btn btn-default log-btn\">Add</button></div>\n" +
-    "						</div>\n" +
-    "						<div style=\"clear:both\"></div>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "				<div class=\"\">\n" +
-    "					<div style=\"\">\n" +
-    "						<h2>Personal Information</h4>\n" +
-    "						<h4>Who Are You?</h4>\n" +
-    "						<div class=\"spacing-15\"></div>\n" +
-    "						<div class=\"form-group\">\n" +
-    "							<input type=\"text\" placeholder=\"First Name\" class=\"form-control\">\n" +
-    "							<input type=\"text\" placeholder=\"Last Name\" class=\"form-control\">\n" +
-    "							<input type=\"text\" placeholder=\"Date of Birth\" class=\"form-control\">\n" +
-    "							<input type=\"text\" placeholder=\"Address\" class=\"form-control\">\n" +
-    "						</div>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "				<div class=\"\">\n" +
-    "					<div style=\"\">\n" +
-    "						<h3><b>Join Our Community</b></h3><hr>\n" +
-    "						<form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
-    "							<div class=\"form-group\">\n" +
-    "		                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
-    "		                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
-    "		                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
-    "		                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
-    "		                        <br><br>\n" +
-    "			                    <div class=\"social-log\">\n" +
-    "			                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
-    "			                    </div>\n" +
-    "							</div>\n" +
-    "	                	</form>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "-->\n" +
-    "\n" +
-    "<!--\n" +
-    "<div id=\"about-section5\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "	    <div class=\"row\">\n" +
-    "	    	<div class=\"col-xs-12\" style=\"text-align:center;font-size:18px\">\n" +
-    "	    		<h3>Our Extended Community</h3>\n" +
-    "	    		<a href=\"https://www.instagram.com/cre8community\"><i class=\"fa fa-instagram\"></i></a>\n" +
-    "	    		<a href=\"https://www.twitter.com/cre8city\"><i class=\"fa fa-twitter\"></i></a>\n" +
-    "	    		<a href=\"https://www.github.com/troverman/conexus\"><i class=\"fa fa-github\"></i></a>\n" +
-    "	    		<a href=\"https://cre8xyz.slack.com\"><i class=\"fa fa-slack\"></i></a>\n" +
-    "	    	</div>\n" +
-    "	    </div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "-->");
+    "");
 }]);
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -3238,11 +3104,6 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
 
 angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/ledger.tpl.html",
-    "<style type=\"text/css\">\n" +
-    "	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	.card tags-input .host{margin:0px;border:0px;}\n" +
-    "</style>\n" +
-    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +

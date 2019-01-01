@@ -1,6 +1,8 @@
 # Token Language
 
 # Token Definition
+### Information mapping to a balance
+
 ```
 mapping (address => mapping (string => uint)) balances;
 ```

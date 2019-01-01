@@ -139,7 +139,6 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 	VERBS ; CREATOR VS SEND
 
-
 ## View Protocol
 	'Address+VIEW+'
 

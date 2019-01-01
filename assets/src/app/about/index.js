@@ -15,7 +15,7 @@ angular.module( 'conexus.about', [
                 return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             projects: ['ProjectModel', function(ProjectModel){
-                return ProjectModel.getSome(10, 0, 'createdAt DESC');
+                return ProjectModel.getSome('','', 10, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
@@ -33,9 +33,7 @@ angular.module( 'conexus.about', [
     $scope.tasks = tasks;
 
 	$scope.chart = {
-        chart: {
-            zoomType: 'x',
-        },
+        chart: {zoomType: 'x',},
         series: [{
             id: 'Expenses',
             type: 'column',
@@ -47,19 +45,9 @@ angular.module( 'conexus.about', [
             name: 'Revenue USD',
             data: []
         }],
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -69,27 +57,15 @@ angular.module( 'conexus.about', [
     }
 
     $scope.create = {
-        chart: {
-            zoomType: 'x',
-        },
+        chart: {zoomType: 'x',},
         series: [],
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
-    $scope.marketsChart = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8'];
+    $scope.marketsChart = ['USD', 'ETH', 'BTC', 'UNIVERSAL', 'CRE8'];
 
     for (x in $scope.marketsChart){
         var random1 = Math.floor(255*Math.random());
@@ -148,15 +124,45 @@ angular.module( 'conexus.about', [
             y: 70,
             layout: 'vertical'
         },
-        tooltip: {
-            enabled: false,
-        },
+        tooltip: {enabled: true},
         credits:{enabled:false},
     };
+   
+    $scope.baseMarkets = [
+        {text:'UNIVERSAL'},
+        {text:'CRE8'},
+        {text:'ETH'},
+        {text:'BTC'},
+        {text:'USD'},
+        {text:'SHELTER'},
+        {text:'FOOD'},
+        {text:'REST'},
+    ];
 
-    $scope.baseMarkets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-    $scope.markets = ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-    
+    $scope.markets = [
+        {text:'EDUCATION+ONMINT'},
+        {text:'SHELTER'},
+        {text:'HEALTH'},
+        {text:'FOOD'},
+        {text:'REST'},
+        {text:'CRE8'},
+        {text:'USD'},
+        {text:'ETH'},
+        {text:'BTC'},
+        {text:'CREATE'},
+        {text:'TIME'},
+        {text:'TIME+VIEW'},
+        {text:'TIME+WORK'},
+        {text:'STREAM'},
+        {text:'REACT'},
+        {text:'CONTENT'},
+        {text:'ORDER'},
+        {text:'TRANSACTION'},
+        {text:'VIEW'},
+        {text:'VALIDATE'},
+    ];
+
+
     for (x in $scope.baseMarkets){
 
         var random1 = Math.floor(255*Math.random());
@@ -166,7 +172,7 @@ angular.module( 'conexus.about', [
         $scope.chartMap.series.push({
             id: 'values'+x,
             type: 'area',
-            name: $scope.baseMarkets[x],
+            name: $scope.baseMarkets[x].text,
             pointPlacement: 'on',
             data: [],
             color: 'rgba('+random1+','+random2+','+random3+',0.3)',
@@ -176,7 +182,7 @@ angular.module( 'conexus.about', [
     }
 
     for (x in $scope.markets){
-        $scope.chartMap.xAxis.categories.push($scope.markets[x]);
+        $scope.chartMap.xAxis.categories.push($scope.markets[x].text);
         for (y in $scope.baseMarkets){
             $scope.chartMap.series[y].data.push((1+1*Math.random())/2);
         }
@@ -193,7 +199,6 @@ angular.module( 'conexus.about', [
     $scope.tasks = tasks;
 
     $scope.continue = function(page){
-        console.log(page)
         if (page === 1){
             $scope.showIntro = !$scope.showIntro;
             $scope.showValue = !$scope.showValue;
@@ -210,11 +215,10 @@ angular.module( 'conexus.about', [
             $scope.showPersonal = !$scope.showPersonal;
             $scope.showFinal = !$scope.showFinal;
         }
-
     };
 
     $scope.createPosition = function(model){
-        $scope.newOrder.push([model,'1 UNIVERSALTOKEN+ONMINT']);
+        $scope.newOrder.push([model,'1 UNIVERSAL']);
     };
 
 }]);

@@ -72,6 +72,9 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     background-color:white;
 }
 
+.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}
+.card tags-input .host{margin:0px;border:0px;}
+
 .card:hover{box-shadow: 0 1px 3px 0 rgba(0,0,0,.6), 0 1px 1px 0 rgba(0,0,0,.42), 0 2px 1px -1px rgba(0,0,0,.36)}
 
 .card-avatar{
