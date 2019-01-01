@@ -32,19 +32,18 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 # Core protocols
 	Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
-
 	//Market Bets.. +FUTURE+[TIME]
 
 ## Data Protocol	
 
 ## Project Protocol
 	The set of logic is driven by the organization
-	the manifold defined 'PROJECT+' 
-	'PROJECT+' || CUSTOM STRING SPACE IE NOVO; 
+	the manifold defined 'PROJECT+{ID}' 
+	PROJECT+{ID} || CUSTOM STRING SPACE IE NOVO; 
 
 ## Member Protocol
-	Personal manifolds Address+{}
-	'Address+'
+	MEMBER+{ID} || CUSTOM STRING SPACE IE TROVERMAN; 
+	Personal Manifolds
 
 ## Content Protocol
 	CONTENT
@@ -97,12 +96,10 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 ## Task Protocol
 	TASK
 	Nested in relationship between Project & Time
-	{id}
 
 ## Time Protocol
 	TIME
-	{id}
-	{}
+	TIME+{ID}
 
 ## Transaction Protocol
 
