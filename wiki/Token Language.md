@@ -25,6 +25,8 @@ mapping (address => mapping (string => uint)) balances;
 
 # Token language interpolation and token operators ['+',’,’]
 
+	//+ VS .
+
 	Vital to navigation of the token domain are language protocols and operators that define logic and interpretation
 
 	'CRE8+'

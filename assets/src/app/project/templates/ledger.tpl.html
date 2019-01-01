@@ -102,7 +102,12 @@
 		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(item)">
 			<div style="padding:16px">
 				<p style="font-weight:800">From: <a ng-click="$event.stopPropagation();" href="">{{transaction.from}}</a> To: <a ng-click="$event.stopPropagation();" href="">{{transaction.to}}</a></p>
+
+
+				<span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p></span>
 				<p style="font-weight:800">{{transaction.amount}} <a ng-click="$event.stopPropagation();" href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
+
+
 				<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 				<p>{{transaction.content}}</p>
 				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>

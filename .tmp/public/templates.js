@@ -2811,9 +2811,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                <div style=\"float:right\">\n" +
     "                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                </div>\n" +
-    "\n" +
-    "                <p style=\"font-weight:800\">From: <a href=\"member/{{item.from}}\">{{item.from}}</a> To: <a href=\"member/{{item.to}}\">{{item.to}}</a></p>\n" +
-    "                <p style=\"font-weight:800\">{{item.amount}} <a href=\"market/{{item.identifier}}\">{{item.identifier}}</a></p>\n" +
+    "                <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                <p><a ng-repeat=\"tag in item.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                <p>{{item.content}}</p>\n" +
     "                <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
@@ -3260,7 +3258,6 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "			<!--<input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">-->\n" +
     "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                <a href=\"#\" role=\"button\">\n" +
@@ -3344,7 +3341,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"renderToggle(transaction)\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{transaction.from}}</a> To: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{transaction.to}}</a></p>\n" +
-    "				<p style=\"font-weight:800\">{{transaction.amount}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
+    "				<span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation()\"  href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "				<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in transaction.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "				<p>{{transaction.content}}</p>\n" +
     "				<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
@@ -4875,7 +4872,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
   $templateCache.put("project/templates/activity.tpl.html",
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Project Post</button>\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Project Content</button>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -4991,7 +4988,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                </div>\n" +
     "\n" +
     "                <p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{item.from}}</a> To: <a href=\"\">{{item.to}}</a></p>\n" +
-    "                <p style=\"font-weight:800\">{{item.amount}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{item.identifier}}\">{{item.identifier}}</a></p>\n" +
+    "                <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                <p>{{item.content}}</p>\n" +
     "                <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
@@ -5427,7 +5424,12 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"renderToggle(item)\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{transaction.from}}</a> To: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{transaction.to}}</a></p>\n" +
+    "\n" +
+    "\n" +
+    "				<span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "				<p style=\"font-weight:800\">{{transaction.amount}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
+    "\n" +
+    "\n" +
     "				<p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in transaction.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "				<p>{{transaction.content}}</p>\n" +
     "				<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
