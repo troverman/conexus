@@ -31,23 +31,27 @@ angular.module( 'conexus.contentList', [
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
 
     $scope.sortedLocationArray = ['Knoxville', 'Chapel Hill', 'New York City']
+    
     //TODO: BETTER
     //TODO: MANY TO MANY
     //TODO: SET | FACTOR
     //$scope.associations = $scope.tasks.map(function(obj){
     //    return obj.project.title;
     //});
+
     //TODO: PROPER ASSOCIATIONS
     $scope.loadAssociations = function(){
+
         $scope.associations = $scope.contentList.map(function(obj){
-            if (obj.project){
-                return obj.project.title;
-            }
+            console.log(obj)
+            if (obj.project){return obj.project.title;}
+            if (obj.task){return obj.task.title;}
         });
 
         $scope.associations = [].concat.apply([], $scope.associations);
         $scope.associations = $scope.associations.filter(function(e){return e});
-         
+        console.log($scope.associations)
+
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
 
         $scope.sortedAssociationArray = [];
@@ -64,7 +68,6 @@ angular.module( 'conexus.contentList', [
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
-            console.log(obj);
             var returnObj = {};
             if(obj.tags){obj.tags = obj.tags.split(',')}
             returnObj = obj.tags;
@@ -177,11 +180,6 @@ angular.module( 'conexus.contentList', [
 
     $scope.selectType = function(type){
         $scope.selectedType = type;
-    };
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
     };
 
 }]);

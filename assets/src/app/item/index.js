@@ -22,9 +22,13 @@ angular.module( 'conexus.item', [
 }])
 
 .controller( 'ItemCtrl', ['$location', '$mdSidenav', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $location, $mdSidenav, $sce, $scope, $stateParams, config, contentList, item, OrderModel, ReactionModel, titleService ) {
+   
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
     $scope.item = item;
+
+    titleService.setTitle('Marketplace | '+$scope.item.title+' | CRE8.XYZ');
+
     $scope.inputVector = []; 
     //$scope.inputVectorWeight = [];
     if(!$scope.item){$location.path('/')}

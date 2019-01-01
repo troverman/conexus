@@ -854,27 +854,36 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            </div>\n" +
     "\n" +
     "            <div ng-repeat=\"item in contentList\">\n" +
-    "                <div class=\"card\">\n" +
+    "                <div class=\"card\" ng-click=\"\">\n" +
     "                    <div style=\"padding:16px\">\n" +
     "\n" +
     "                        <div style=\"float:right;padding-left:5px;\"><a style=\"color:gray;\" href=\"#\"><i class=\"fa fa-ellipsis-v\"></i></a></div>\n" +
-    "                        <p ng-click=\"tokenToggle(item)\" style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                        <p ng-click=\"tokensToggle(item)\" style=\"display:inline;float:right\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "\n" +
-    "                        <p><a style=\"font-weight:700\"  href=\"member/{{item.user.username}}\">\n" +
-    "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                            {{item.user.username}}\n" +
-    "                        </a></p>\n" +
-    "                        <span ng-show=\"item.title\">  <a href=\"content/{{item.id}}\">{{item.title}}</a></span>\n" +
+    "                        <!--<div style=\"float:right\">\n" +
+    "                            <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        </div>-->\n" +
+    "\n" +
+    "                        <p>\n" +
+    "                            <a style=\"font-weight:700\"  href=\"member/{{item.user.username}}\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{item.user.username}}\n" +
+    "                            </a>\n" +
+    "                        </p>\n" +
+    "\n" +
+    "                        <span ng-show=\"item.title\"><a href=\"content/{{item.id}}\">{{item.title}}</a></span>\n" +
     "                        <p style=\"margin-top:0px;margin-bottom:0px;\"><a style=\"color:gray;\" ng-repeat=\"tag in item.tags\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}} </a></p>\n" +
     "\n" +
     "                        <div style=\"max-height:500px;overflow:scroll\">\n" +
     "                            <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "                        </div>\n" +
     "\n" +
-    "                        <div style=\"float:right;color:gray\"><span am-time-ago=\"item.createdAt\"></span></div>\n" +
+    "                        <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
+    "\n" +
     "                        <div style=\"clear:both\"></div>\n" +
     "\n" +
     "                    </div>\n" +
+    "\n" +
     "                    <div class=\"card-footer\">\n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
@@ -887,6 +896,7 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                        </form>\n" +
     "                    </div>\n" +
+    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
@@ -2409,13 +2419,10 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
 angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("marketPlace/index.tpl.html",
     "<style type=\"text/css\">\n" +
-    "\n" +
     "	.angular-google-map-container{height: 200px;}\n" +
-    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	tags-input .host{margin:0px;border:0px;}\n" +
-    "\n" +
+    "	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
+    "	.card tags-input .host{margin:0px;border:0px;}\n" +
     "</style>\n" +
-    "\n" +
     "\n" +
     "<div class=\"page-heading\">\n" +
     "    <div class=\"container\"> \n" +
@@ -2679,7 +2686,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
   $templateCache.put("member/templates/activity.tpl.html",
     "<div class=\"row\">\n" +
     "    <div class=\"card\">\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Profile Post</button>\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Profile Content</button>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -2690,7 +2697,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
     "                <div style=\"float:right\">\n" +
-    "                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                </div>\n" +
     "\n" +
     "                <div>\n" +
@@ -3030,8 +3037,8 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
-    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation()\" class=\"pull-right\" style=\"padding:0px;\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                </div>\n" +
@@ -3701,7 +3708,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Content</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -3743,7 +3750,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>Filter</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -3771,7 +3778,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Item</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -3814,7 +3821,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-xs-10 col-xs-offset-1\">\n" +
     "                            <h1>Login | Welcome back!</h1>\n" +
@@ -3886,7 +3893,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Order</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -4013,7 +4020,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Project</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -4143,7 +4150,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>Validation</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -4277,7 +4284,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Task</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -4312,7 +4319,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Time</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -4406,7 +4413,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
+    "                <div style=\"padding:16px\">\n" +
     "                    <h1>+ Transaction</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -5926,7 +5933,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div ng-show=\"!showFinal\" style=\"float:right\">\n" +
     "            <br>\n" +
-    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>Universal<i class=\"fa fa-question-circle\"></i></a></span>\n" +
+    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>UNIVERSAL <i class=\"fa fa-question-circle\"></i></a></span>\n" +
     "            <!--<span ng-click=\"informationToggle('The CRE8 onMint Market Postion Signifies that the creator of the instrument will sponsor CRE8 onMint of the specified asset.')\"><a>CRE8 onMint <i class=\"fa fa-question-circle\"></i></a></span>-->\n" +
     "            <br>\n" +
     "        </div>\n" +

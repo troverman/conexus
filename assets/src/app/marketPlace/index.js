@@ -19,6 +19,7 @@ angular.module( 'conexus.marketPlace', [
 }])
 
 .controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'ReactionModel', 'titleService', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, ReactionModel, titleService ) {
+    titleService.setTitle('Marketplace | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newItem = {};
     $scope.newReaction = {};
