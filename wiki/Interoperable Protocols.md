@@ -9,7 +9,7 @@ contract Protocol {
 ```
 
 Work In Progress Token Structure
-```
+```javascript
 var humanReadableValidationNFTModel = {
 	string: 'VALIDATION+'+data[x][y].id,
 	information:{
