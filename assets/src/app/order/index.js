@@ -21,15 +21,16 @@ angular.module( 'conexus.order', [
     });
 }])
 
-.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'order', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, order, titleService ) {
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'order', 'ReactionModel', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, order, ReactionModel, titleService ) {
     titleService.setTitle('Order | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
+    $scope.newReaction = {};
     $scope.order = order;
     $scope.contentList = contentList;
 
     //TODO: PROTOCOL
-    $scope.tokens = [
+    $scope.order.tokens = [
         'CREATE+ORDER',
         'CREATE+ORDER+'+$scope.order.identiferSet, 
         'CREATE+ORDER+'+$scope.order.identiferSet1, 
@@ -37,27 +38,28 @@ angular.module( 'conexus.order', [
         $scope.order.id,
     ];
 
-    //TODO
-    $scope.createContent = function(content) {
-        if($scope.currentUser){
-            $scope.newContent.contentModel = content.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.order = order.id;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){
+                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
+                $scope.contentList[contentIndex].reactions[type]++;
+            }  
+            else{
+                $scope.newReaction.associatedModels = [{type:'ORDER', id:item.id}];
+                $scope.order.reactions[type]++;
+            }
+            ReactionModel.create($scope.newReaction);       
         }
-        else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle();}
     };
 
     $scope.reply = function(item){
         var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.contentList[index].showReply = !$scope.contentList[index].showReply
-    };
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('content', function (envelope) {

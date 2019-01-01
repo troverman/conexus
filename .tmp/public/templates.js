@@ -839,6 +839,8 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "</div>\n" +
     "-->\n" +
     "\n" +
+    "<!--DISCOVER BLOCK-->\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"item in members\">\n" +
@@ -989,10 +991,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <div class=\"col-md-3 col-sm-12 col-xs-12\" style=\"margin-bottom:0px\">\n" +
     "            <div class=\"card\" style=\"margin-top:0px\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
-    "                    <button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">Send Tokens</button>\n" +
-    "                    <a href=\"notifications\"><button class=\"btn btn-default log-btn\" ng-click=\"\">Notifications</button>\n" +
-    "                    <a href=\"account\"><button class=\"btn btn-default log-btn\" ng-click=\"\">Edit Account</button></a>\n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ CONTENT</button>\n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">SENT TOKENS</button>\n" +
+    "                    <a href=\"notifications\"><button class=\"btn btn-default log-btn\" ng-click=\"\">NOTIFICATIONS</button>\n" +
+    "                    <a href=\"account\"><button class=\"btn btn-default log-btn\" ng-click=\"\">SETTINGS</button></a>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1164,7 +1166,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <a style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
     "                            <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "\n" +
-    "                            <p style=\"display:inline;float:right\"><a ng-click=\"tokenToggle(item)\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p style=\"display:inline;float:right\"><a ng-click=\"$event.stopPropagation();tokenToggle(item)\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "                        </div>\n" +
@@ -2247,7 +2249,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
-    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Pair Post | {{market}} | {{market1}}</button>\n" +
+    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Pair Content | {{market}} | {{market1}}</button>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "	\n" +
@@ -2740,7 +2742,7 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "			    	</form>\n" +
     "\n" +
     "			    	<div ng-show=\"balanceLookupValue !== undefined\">\n" +
-    "			    		<h5><a href=\"market/balanceLook\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "			    		<h5><a href=\"market/{{balanceLook}}\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
     "			    	</div>\n" +
     "\n" +
     "\n" +
@@ -2755,7 +2757,7 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "			    	</form>\n" +
     "\n" +
     "			    	<div ng-show=\"reputationLookupValue !== undefined\">\n" +
-    "			    		<h5><a href=\"market/reputationLook\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
+    "			    		<h5><a href=\"market/{{reputationLook}}\">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>\n" +
     "			    	</div>\n" +
     "\n" +
     "			    </div>\n" +
@@ -3229,11 +3231,6 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
-    "<style type=\"text/css\">\n" +
-    "	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	.card tags-input .host{margin:0px;border:0px;}\n" +
-    "</style>\n" +
-    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -4556,50 +4553,88 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
+    "        <div class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"padding:16px\">\n" +
+    "\n" +
     "                <div style=\"float:right\">\n" +
-    "                    <h5 ng-click=\"tokenToggle()\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5 ng-click=\"tokensToggle()\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                </div>\n" +
+    "\n" +
     "            	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
+    "\n" +
     "            	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
     "            	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
+    "\n" +
+    "                <p>{{order.setAlpha}}, {{order.setBeta}}</p>\n" +
+    "\n" +
     "            	<a href=\"member/{{order.user.username}}\">\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{order.user.avatarUrl}}\" src=\"{{order.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    {{order.user.username}}\n" +
     "                </a>\n" +
+    "\n" +
     "                <h4>{{order.createdAt}}</h4>\n" +
-    "            	<h4>onBooks | Filled | Date</h4>\n" +
+    "                <h4>{{order.type}}</h4>\n" +
+    "                <!--<h4>Filled | Partially Filled | Date</h4>-->\n" +
     "            </div>\n" +
+    "\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
+    "                <a ng-click=\"createReaction(order, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
+    "                <a ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "            </div>\n" +
+    "            <div ng-click=\"$event.stopPropagation();\" ng-show=\"order.showReply\" class=\"card-footer\">\n" +
+    "                <form role=\"form\" ng-submit=\"createContent(order)\">\n" +
+    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "\n" +
     "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li><a href=\"#\">Content</a></li>\n" +
+    "            <li><a href=\"#\">Trades</a></li>\n" +
+    "            <li><a href=\"#\">Transactions</a></li>\n" +
+    "            <!--\n" +
+    "            <h5>Seller to Eskrow, Buyer to Eskrow, Eskrow to Engine, Engine to Seller, Engine to Buyer</h5>\n" +
+    "            <h5>Seller to Buyer, Buyer to Seller</h5>\n" +
+    "            -->\n" +
+    "        </ul>\n" +
     "    </div>\n" +
     "\n" +
     "    <!--TODO: Partially Filled Orders -->\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
+    "\n" +
+    "        <!--JUST A TEST-->\n" +
+    "        <!--ORDER->ORDER ASSOCIATION; IE SUB ORDER; IE TAKER TRADE-->\n" +
+    "        <div class=\"card\" ng-repeat=\"item in order.tokens\">\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "                <h2>Trades</h2>\n" +
-    "                <h4>Filled | Partially Filled</h4>\n" +
-    "                <!--<h5>Trades are a transaction pair. Seller to Buyer; Buyer to Seller</h5>-->\n" +
+    "                <h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
+    "                <h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
+    "                <a href=\"member/{{order.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{order.user.avatarUrl}}\" src=\"{{order.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    {{order.user.username}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
+    "                <a ng-click=\"createReaction(order, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
+    "                <a ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a style=\"color:grey\" class=\"pull-right\" href=\"order/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--TODO: -->\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <h2>Transactions</h2>\n" +
-    "                <!--<h5>Seller to Eskrow, Buyer to Eskrow, Eskrow to Engine, Engine to Seller, Engine to Buyer</h5>-->\n" +
-    "                <h5>Seller to Buyer, Buyer to Seller</h5>\n" +
-    "            </div>\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Order Content</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <div class=\"card\">\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Order Post</button>\n" +
-    "    </div>\n" +
-    "\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
@@ -6829,7 +6864,7 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "    </div>\n" +
     " \n" +
     "    <div class=\"card\">\n" +
-    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Transaction Post</button>\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Transaction Content</button>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"card\" ng-repeat=\"item in contentList\">\n" +

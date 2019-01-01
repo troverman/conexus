@@ -46,7 +46,7 @@ angular.module( 'conexus.tasks', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-     $scope.createReaction = function(item, type){
+    $scope.createReaction = function(item, type){
         if ($scope.currentUser){
 
             $scope.newReaction.amount = 1;

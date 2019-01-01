@@ -456,8 +456,14 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.tokensToggle = function(item){
-        $scope.tokens = item;
-        //$rootScope.globalTokens;
+
+        //ENCODE PROTOCOLS.. 
+        //UNIFY THIS.. REMOVE GLOBAL TOKENS
+        //$scope.tokens = item;
+        if (item.tokens){
+            $rootScope.globalTokens = item.tokens
+        }
+
         //TRAVERSAL FOR TOKENS AND TOKENS ASSOCIATIONS -- COMPLETE PIC
         $mdSidenav('tokens').toggle();
     };

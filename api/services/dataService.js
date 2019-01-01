@@ -1722,6 +1722,8 @@ module.exports = {
 			for (x in userModels){
 				(function(userModels, x){
 					Time.find({user:userModels[x].id}).populate('task').then(function(workModels){
+
+
 						var workSum = {};
 						//TOKENS ARE .. 
 						for (y in workModels){
@@ -1736,11 +1738,16 @@ module.exports = {
 								}
 							}
 						}
+
 						var balance = workSum;
 						if (balance['cre8']!=0){balance['cre8'] = 8};
+
 						console.log(workSum);
 						console.log(userModels[x].id);
+						
 						User.update({id:userModels[x].id}, {reputation:workSum, balance:balance}).then(function(userModels){console.log('UPDATE')})
+
+
 					});
 				})(userModels, x);
 			}

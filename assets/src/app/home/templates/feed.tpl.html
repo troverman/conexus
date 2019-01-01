@@ -54,10 +54,10 @@
         <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom:0px">
             <div class="card" style="margin-top:0px">
                 <div style="padding:16px;">
-                    <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
-                    <button class="btn btn-default log-btn" ng-click="transactionToggle()">Send Tokens</button>
-                    <a href="notifications"><button class="btn btn-default log-btn" ng-click="">Notifications</button>
-                    <a href="account"><button class="btn btn-default log-btn" ng-click="">Edit Account</button></a>
+                    <button class="btn btn-default log-btn" ng-click="contentToggle()">+ CONTENT</button>
+                    <button class="btn btn-default log-btn" ng-click="transactionToggle()">SENT TOKENS</button>
+                    <a href="notifications"><button class="btn btn-default log-btn" ng-click="">NOTIFICATIONS</button>
+                    <a href="account"><button class="btn btn-default log-btn" ng-click="">SETTINGS</button></a>
                 </div>
             </div>
         </div>
@@ -229,7 +229,7 @@
                             <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                             <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 
-                            <p style="display:inline;float:right"><a ng-click="tokenToggle(item)">Tokens <i class="fa fa-question-circle"></i></a></p>
+                            <p style="display:inline;float:right"><a ng-click="$event.stopPropagation();tokenToggle(item)">Tokens <i class="fa fa-question-circle"></i></a></p>
                             <div style="clear:both"></div>
 
                         </div>

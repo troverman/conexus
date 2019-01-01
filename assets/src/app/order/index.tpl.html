@@ -3,50 +3,88 @@
     <div class="spacing-10"></div>
 
     <div class="row">
-        <div class="card">
+        <div class="card" ng-click="">
             <div style="padding:16px">
+
                 <div style="float:right">
-                    <h5 ng-click="tokenToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <h5 ng-click="tokensToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
+
             	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
+
             	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
             	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
+
+                <p>{{order.setAlpha}}, {{order.setBeta}}</p>
+
             	<a href="member/{{order.user.username}}">
                     <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
                     {{order.user.username}}
                 </a>
+
                 <h4>{{order.createdAt}}</h4>
-            	<h4>onBooks | Filled | Date</h4>
+                <h4>{{order.type}}</h4>
+                <!--<h4>Filled | Partially Filled | Date</h4>-->
             </div>
+
+            <div class="card-footer">
+                <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+                <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
+                <a ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+            </div>
+            <div ng-click="$event.stopPropagation();" ng-show="order.showReply" class="card-footer">
+                <form role="form" ng-submit="createContent(order)">
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+                </form>
+            </div>
+
         </div>
+    </div>
+
+    <div class="spacing-5"></div>
+
+    <div class="row">
+        <ul style="padding:0px;" class="member-tabs">
+            <li><a href="#">Content</a></li>
+            <li><a href="#">Trades</a></li>
+            <li><a href="#">Transactions</a></li>
+            <!--
+            <h5>Seller to Eskrow, Buyer to Eskrow, Eskrow to Engine, Engine to Seller, Engine to Buyer</h5>
+            <h5>Seller to Buyer, Buyer to Seller</h5>
+            -->
+        </ul>
     </div>
 
     <!--TODO: Partially Filled Orders -->
     <div class="row">
-        <div class="card">
+
+        <!--JUST A TEST-->
+        <!--ORDER->ORDER ASSOCIATION; IE SUB ORDER; IE TAKER TRADE-->
+        <div class="card" ng-repeat="item in order.tokens">
             <div style="padding:16px;">
-                <h2>Trades</h2>
-                <h4>Filled | Partially Filled</h4>
-                <!--<h5>Trades are a transaction pair. Seller to Buyer; Buyer to Seller</h5>-->
+                <h4>{{order.amountSet}} {{order.identiferSet}}</h4>
+                <h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
+                <a href="member/{{order.user.username}}">
+                    <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
+                    {{order.user.username}}
+                </a>
+            </div>
+            <div class="card-footer">
+                <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+                <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
+                <a ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="color:grey" class="pull-right" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
         </div>
+
     </div>
 
-    <!--TODO: -->
     <div class="row">
         <div class="card">
-            <div style="padding:16px;">
-                <h2>Transactions</h2>
-                <!--<h5>Seller to Eskrow, Buyer to Eskrow, Eskrow to Engine, Engine to Seller, Engine to Buyer</h5>-->
-                <h5>Seller to Buyer, Buyer to Seller</h5>
-            </div>
+            <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Order Content</button>
         </div>
     </div>
-
-    <div class="card">
-        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Order Post</button>
-    </div>
-
 
     <div class="row">
         <div class="card" ng-repeat="item in contentList">
