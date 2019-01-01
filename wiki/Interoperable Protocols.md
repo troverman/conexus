@@ -17,7 +17,7 @@ var humanReadableValidationNFTModel = {
 		markets:0,
 	},
 	protocols:[
-		'BASE'
+		'BASE',
 	],
 	logic:{
 		transferrable:true, 
@@ -64,13 +64,17 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 	//[TYPE] == LIKE, DISLIKE, ...
 
 	REACTION – Creator and Recipient get 1 REACTION token
-	REACTION+CREATE
-	REACTION+RECEIVE
-	REACTION+[TYPE]
-	REACTION+CREATE+[TYPE]
-	REACTION+RECEIVE+[TYPE]
+	REACTION+{ID} - Creator and Recipient get 1 REACTION+{ID} token
 
-	REACTION+{ID}
+	REACTION+[ACTION] - Creator and Recipient get 1 REACTION+[ACTION] token respectively
+
+	REACTION+[ACTION]+{ID}
+
+	REACTION+[TYPE]
+	REACTION+[TYPE]+{ID}
+
+	REACTION+[ACTION]+[TYPE]
+	REACTION+[ACTION]+[TYPE]+{ID}
 
 	REACTION+[MODEL]
 	REACTION+[MODEL]+[TYPE]
@@ -104,35 +108,35 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 	Transaction string token domain | all multiplicative combinations of data as tokens
 
-	TRANSACTION – creator and recipient get 1 Transaction token
-	Transaction+creator - creator gets 1 Transaction+creator token
-	Transaction+recipient - recipient gets 1 Transaction+recipient token
+	TRANSACTION – creator and recipient get 1 TRANSACTION token
+	TRANSACTION+creator - creator gets 1 TRANSACTION+creator token
+	TRANSACTION+recipient - recipient gets 1 TRANSACTION+recipient token
 	 
-	//Transaction+descriptionString - recipient gets 1 Transaction+descriptionString token
+	//Transaction+descriptionString - recipient gets 1 TRANSACTION+descriptionString token
 	 
-	Transaction+asset - creator and recipient get 1 Transaction+asset token
-	Transaction+asset+creator - creator gets 1 Transaction+asset+creator token
-	Transaction+asset+recipient - recipient gets 1 Transaction+asset+recipient token
+	TRANSACTION+asset - creator and recipient get 1 TRANSACTION+asset token
+	TRANSACTION+asset+creator - creator gets 1 TRANSACTION+asset+creator token
+	TRANSACTION+asset+recipient - recipient gets 1 TRANSACTION+asset+recipient token
 	 
-	Transaction+tag - creator and recipient get 1 Transaction+tag token
-	Transaction+tag+creator - creator gets 1 Transaction+tag+creator token
-	Transaction+tag+recipient - recipient gets 1 Transaction+tag+recipient token
+	TRANSACTION+tag - creator and recipient get 1 TRANSACTION+tag token
+	TRANSACTION+tag+creator - creator gets 1 TRANSACTION+tag+creator token
+	TRANSACTION+tag+recipient - recipient gets 1 TRANSACTION+tag+recipient token
 	 
-	Transaction+id – creator and recipient get 1 Transaction+id token
-	Transaction+id+creator - creator gets 1 Transaction+id+creator token
-	Transaction+id+recipient - recipient gets 1 Transaction+id+recipient token
+	TRANSACTION+id – creator and recipient get 1 TRANSACTION+id token
+	TRANSACTION+id+creator - creator gets 1 TRANSACTION+id+creator token
+	TRANSACTION+id+recipient - recipient gets 1 TRANSACTION+id+recipient token
 	 
-	Transaction+asset+tag – creator and recipient get 1 Transaction+asset+tag token
-	Transaction+asset+tag+creator - creator gets 1 Transaction+asset+tag+creator token
-	Transaction+asset+tag+recipient - recipient gets 1 Transaction+asset+tag+ recipient token
+	TRANSACTION+asset+tag – creator and recipient get 1 TRANSACTION+asset+tag token
+	TRANSACTION+asset+tag+creator - creator gets 1 TRANSACTION+asset+tag+creator token
+	TRANSACTION+asset+tag+recipient - recipient gets 1 TRANSACTION+asset+tag+ recipient token
 	 
-	Transaction+asset+id+tag – creator and recipient get 1 Transaction+asset+id+tag token
-	Transaction+asset+id+tag+creator - creator gets 1 Transaction+asset+id+tag+creator token
-	Transaction+asset+id+tag+recipient - creator gets 1 Transaction+asset+id+tag+recipient token
+	TRANSACTION+asset+id+tag – creator and recipient get 1 TRANSACTION+asset+id+tag token
+	TRANSACTION+asset+id+tag+creator - creator gets 1 TRANSACTION+asset+id+tag+creator token
+	TRANSACTION+asset+id+tag+recipient - creator gets 1 TRANSACTION+asset+id+tag+recipient token
 
-	Transaction+asset+tag ≅ Transaction+tag+asset ≅ tag+Transaction+asset ≅ tag+asset+Transaction ≅ ....
+	TRANSACTION+asset+tag ≅ TRANSACTION+tag+asset ≅ tag+TRANSACTION+asset ≅ tag+asset+TRANSACTION ≅ ....
 
-	Transaction+asset
+	TRANSACTION+asset
 
 	USD.SEND VS TRANSACTION+USD+SEND
 
