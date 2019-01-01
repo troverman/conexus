@@ -158,9 +158,10 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 # '3rd Layer of Compilation'
 	Nested Chain Interaction
 	Encoding of hashed information into token balance layer begetes emergent value data congruence
-	```javascript
-	hash = sha256.getHash("abc"); --> 'ba7816bf­8f01cfea­414140de­5dae2223­b00361a3­96177a9c­b410ff61­f20015ad'
-	```
+	
+```javascript
+hash = sha256.getHash("abc"); --> 'ba7816bf­8f01cfea­414140de­5dae2223­b00361a3­96177a9c­b410ff61­f20015ad'
+```
 
 ## EXAMPLE
 
