@@ -33,12 +33,14 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 # Core protocols
 	Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
 
+	//Market Bets.. +FUTURE+[TIME]
+
 ## Data Protocol	
 
 ## Project Protocol
 	The set of logic is driven by the organization
-	the manifold defined 'organization+' 
-	'organization+'
+	the manifold defined 'PROJECT+' 
+	'PROJECT+' || CUSTOM STRING SPACE IE NOVO; 
 
 ## Member Protocol
 	Personal manifolds Address+{}
@@ -46,12 +48,11 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 ## Content Protocol
 	CONTENT
-	{id}
+	CONTENT+{ID}
 
 ## ORDER Protocol
 	ORDER
-	{id}
-	{}
+	ORDER+{ID}
 
 ## Reaction Protocol
 
@@ -67,7 +68,6 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 	REACTION+{ID} - Creator and Recipient get 1 REACTION+{ID} token
 
 	REACTION+[ACTION] - Creator and Recipient get 1 REACTION+[ACTION] token respectively
-
 	REACTION+[ACTION]+{ID}
 
 	REACTION+[TYPE]
@@ -142,10 +142,6 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 
 	VERBS ; CREATOR VS SEND
 
-	TRANSACTION
-	{id}
-	{}
-
 
 ## View Protocol
 	'Address+VIEW+'
@@ -157,16 +153,14 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 	PROJECTA+PROJECTB+PROJECTC
 
 # Organizational Pattern
-	Project -> Task -> Time
+	Project <-> Task <-> Time
 
 # '3rd Layer of Compilation'
 	Nested Chain Interaction
 	Encoding of hashed information into token balance layer begetes emergent value data congruence
-
-
-
-
-
+	```javascript
+	hash = sha256.getHash("abc"); --> 'ba7816bf­8f01cfea­414140de­5dae2223­b00361a3­96177a9c­b410ff61­f20015ad'
+	```
 
 ## EXAMPLE
 
