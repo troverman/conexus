@@ -1,6 +1,6 @@
 # Interoperable Protocol Architecture
-##Information mapping to a balance
-##Token are meta data ‘imbued’ as economic tradable assets
+## Information mapping to a balance
+## Token are meta data ‘imbued’ as economic tradable assets
 
 ```
 contract Protocol {
@@ -119,40 +119,40 @@ Nested in relationship between Project & Time
 
 ## EXAMPLE
 
-TENANT CLOCKIN TOKEN | BUSHWICK GENERATOR
-bgTime | minted by member on action / KEYIN ~(TIME+ADDRESS)
-usageToken (stu+{context}) | minted by bg ~(BrandedUsageTokenString)
- 
-Liquidity & Sponsorship
-1. Sponsor creates an onMint bgTime liquidity bridge
-      onMint bgTime, receive sponsorship token + bgTime token on action
+	TENANT CLOCKIN TOKEN | BUSHWICK GENERATOR
+	bgTime | minted by member on action / KEYIN ~(TIME+ADDRESS)
+	usageToken (stu+{context}) | minted by bg ~(BrandedUsageTokenString)
+	 
+	Liquidity & Sponsorship
+	1. Sponsor creates an onMint bgTime liquidity bridge
+	      onMint bgTime, receive sponsorship token + bgTime token on action
 
-2. Sponsor creates a traditional bgTime liquidity bridge
-      Trade bgTime for CRE8; a token; eth; usd | classic
- 
-Reputation comparisons between usageToken and bgTime
-Total usageToken created vs bgTime earned
-  
-Time spent (bgTime) vs Time Credit (usageToken)
- 
-Dimensional onMint usageToken position from bg
-	ie perform task (sweep) and receive timeCredit;
-    account for timeCredit and timeSpent
- 
-PURCHASE TIME CREDIT VIA TOKENS
-bg creates trade positionsl sell 1 usageToken @ $0.001388 ($40/8 hours)
- 
-Smart keycard start the clock and checks time space reputation
-	Specifically (timeCredit (usageToken)) – (timeSpent(bgTime)) > 0
-    If low  tell em purchase or do chores.
- 
-I need a reputation specific amount of usageToken to key in.
+	2. Sponsor creates a traditional bgTime liquidity bridge
+	      Trade bgTime for CRE8; a token; eth; usd | classic
+	 
+	Reputation comparisons between usageToken and bgTime
+	Total usageToken created vs bgTime earned
+	  
+	Time spent (bgTime) vs Time Credit (usageToken)
+	 
+	Dimensional onMint usageToken position from bg
+		ie perform task (sweep) and receive timeCredit;
+	    account for timeCredit and timeSpent
+	 
+	PURCHASE TIME CREDIT VIA TOKENS
+	bg creates trade positionsl sell 1 usageToken @ $0.001388 ($40/8 hours)
+	 
+	Smart keycard start the clock and checks time space reputation
+		Specifically (timeCredit (usageToken)) – (timeSpent(bgTime)) > 0
+	    If low  tell em purchase or do chores.
+	 
+	I need a reputation specific amount of usageToken to key in.
 
-Life Time reputations with usage + helper task dimensions 
- 
-//(edge case where user sells bgTime and usageToken on open market
-negative assets as a concept.. )
-//inverse market equiv – selling price (pay someone to take bgTime)
+	Life Time reputations with usage + helper task dimensions 
+	 
+	//(edge case where user sells bgTime and usageToken on open market
+	negative assets as a concept.. )
+	//inverse market equiv – selling price (pay someone to take bgTime)
  
 
 
