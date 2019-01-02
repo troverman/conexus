@@ -8,12 +8,14 @@ module.exports.bootstrap = function(cb) {
 	//dataService.getData();
 	//dataService.reputationBuild();
 
-	dataService.traverse();
+	//dataService.traverse();
 
 	//DEF PRE ALPHA. 
 	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
-	
-	setInterval(dataService.reputationBuild, 8640000);
+	//intervalService.universalTokenProtocolPreAlpha();
+
+	setInterval(intervalService.reputationBuild, 8640000);
+	//intervalService.reputationBuild();
 
 	cb();
   

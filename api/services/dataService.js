@@ -1715,45 +1715,6 @@ module.exports = {
 
 	},
 
-	//TODO: RESHAPE | BUILD
-	//FOR THIS TO SCALE (ON MONGO) WE NEED A DATA MODEL 
-	reputationBuild:function(){
-		User.find().then(function(userModels){
-			for (x in userModels){
-				(function(userModels, x){
-					Time.find({user:userModels[x].id}).populate('task').then(function(workModels){
-
-
-						var workSum = {};
-						//TOKENS ARE .. 
-						for (y in workModels){
-							if (!workSum[workModels[y].id]){workSum[workModels[y].id] = parseFloat(workModels[y].amount)}
-							workSum[workModels[y].id] += parseFloat(workModels[y].amount);
-							if (workModels[y].task && workModels[y].task.tags){
-								for (z in workModels[y].task.tags.split(',')){
-									//if (!workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id]){workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id] = parseFloat(workModels[y].amount)}
-									//workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id] += parseFloat(workModels[y].amount);
-									if (!workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()]){workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()] = parseFloat(workModels[y].amount)}
-									workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()] += parseFloat(workModels[y].amount);
-								}
-							}
-						}
-
-						var balance = workSum;
-						if (balance['cre8']!=0){balance['cre8'] = 8};
-
-						console.log(workSum);
-						console.log(userModels[x].id);
-						
-						User.update({id:userModels[x].id}, {reputation:workSum, balance:balance}).then(function(userModels){console.log('UPDATE')})
-
-
-					});
-				})(userModels, x);
-			}
-		});
-	},
-
 	//TO BE REPLACED BY LATTICE OPERATIONS
 	//POWERSET LATTICE? 
 	legacyTraverse:function(inputAssets, outputAssets, outputValues){

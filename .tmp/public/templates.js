@@ -992,7 +992,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div class=\"card\" style=\"margin-top:0px\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ CONTENT</button>\n" +
-    "                    <button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">SENT TOKENS</button>\n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">SEND TOKENS</button>\n" +
     "                    <a href=\"notifications\"><button class=\"btn btn-default log-btn\" ng-click=\"\">NOTIFICATIONS</button>\n" +
     "                    <a href=\"account\"><button class=\"btn btn-default log-btn\" ng-click=\"\">SETTINGS</button></a>\n" +
     "                </div>\n" +
@@ -1160,7 +1160,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <a style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
     "                            <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "\n" +
-    "                            <p style=\"display:inline;float:right\"><a ng-click=\"$event.stopPropagation();tokenToggle(item)\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p style=\"display:inline;float:right\"><a ng-click=\"$event.stopPropagation();tokensToggle(item)\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "                        </div>\n" +
@@ -1193,19 +1193,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
-    "\n" +
-    "        <!--\n" +
-    "        <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <span><b>Tags</b></span>\n" +
-    "                    <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        -->\n" +
     "\n" +
     "    </div>\n" +
     "\n" +
@@ -1371,41 +1358,64 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "    <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"\">\n" +
-    "            <div style=\"\">\n" +
-    "                <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                    <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
-    "                    <li><a href=\"/content\">Content</a></li>\n" +
-    "                    <li><a href=\"/marketplace\">Items</a></li>\n" +
-    "                    <li><a href=\"/market\">Orders</a></li>\n" +
-    "                    <li><a href=\"/projects\">Projects</a></li>\n" +
-    "                    <li><a href=\"/tasks\">Tasks</a></li>\n" +
     "\n" +
-    "                    <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "                    <!--<li style=\"float:right\">\n" +
-    "                        <div class=\"dropdown sort-dropdown noselect\">\n" +
-    "                            <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                                <h4 style=\"\" class=\"noselect\">Sort By Recent <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                            </a>\n" +
-    "                            <ul class=\"dropdown-menu\">\n" +
-    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "                                <hr class=\"sort-hr\">\n" +
-    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
-    "                                <hr class=\"sort-hr\">\n" +
-    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
-    "                            </ul>\n" +
-    "                        </div>\n" +
-    "                    </li>-->\n" +
-    "                </ul>\n" +
+    "        <div ng-show=\"false\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span><b>Tags</b></span>\n" +
+    "                    <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span><b>Associations</b></span>\n" +
+    "                    <div ng-repeat=\"association in sortedAssociationArray\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{association.element}}</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span><b>Locations</b></span>\n" +
+    "                    <div ng-repeat=\"location in locations\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{location}}</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "    </div>\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
+    "        <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
-    "        <div class=\"\"></div>\n" +
+    "            <div class=\"\">\n" +
+    "                <div style=\"\">\n" +
+    "                    <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "                        <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
+    "                        <li><a href=\"/content\">Content</a></li>\n" +
+    "                        <li><a href=\"/marketplace\">Items</a></li>\n" +
+    "                        <li><a href=\"/market\">Orders</a></li>\n" +
+    "                        <li><a href=\"/projects\">Projects</a></li>\n" +
+    "                        <li><a href=\"/tasks\">Tasks</a></li>\n" +
     "\n" +
-    "        <div class=\"\">\n" +
+    "                        <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "                        <!--<li style=\"float:right\">\n" +
+    "                            <div class=\"dropdown sort-dropdown noselect\">\n" +
+    "                                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                                    <h4 style=\"\" class=\"noselect\">Sort By Recent <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                                </a>\n" +
+    "                                <ul class=\"dropdown-menu\">\n" +
+    "                                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "                                    <hr class=\"sort-hr\">\n" +
+    "                                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
+    "                                    <hr class=\"sort-hr\">\n" +
+    "                                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "                                </ul>\n" +
+    "                            </div>\n" +
+    "                        </li>-->\n" +
+    "                    </ul>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -1536,8 +1546,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
-    "\n" +
-    "        <div class=\"\"></div>\n" +
     "\n" +
     "    </div>\n" +
     "</div>\n" +
