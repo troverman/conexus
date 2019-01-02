@@ -14,6 +14,9 @@ angular.module( 'conexus.order', [
             order: ['$stateParams', 'OrderModel', function($stateParams, OrderModel){
                 return OrderModel.getOne($stateParams.id);
             }],
+            orders:['order', 'OrderModel', function(order, OrderModel){
+                return OrderModel.getSome('order', order, 100, 0, 'createdAt DESC');
+            }],
             contentList: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
                 return ContentModel.getSome('order', $stateParams.id, 100, 0, 'createdAt DESC');
             }],
@@ -21,12 +24,13 @@ angular.module( 'conexus.order', [
     });
 }])
 
-.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'order', 'ReactionModel', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, order, ReactionModel, titleService ) {
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'order', 'orders', 'ReactionModel', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, order, orders, ReactionModel, titleService ) {
     titleService.setTitle('Order | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.order = order;
+    $scope.orders = orders;
     $scope.contentList = contentList;
 
     //TODO: PROTOCOL
@@ -37,6 +41,9 @@ angular.module( 'conexus.order', [
         'CREATE+ORDER+'+$scope.order.identiferSet+'-'+$scope.order.identiferSet1, 
         $scope.order.id,
     ];
+
+    //FIX?
+    $rootScope.associatedModels = [{type:'ORDER', address:order.id}];
 
     $scope.createReaction = function(item, type){
         if ($scope.currentUser){

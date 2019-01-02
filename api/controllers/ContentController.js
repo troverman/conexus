@@ -48,7 +48,28 @@ module.exports = {
 		}
 
 		else if(req.query.order){
+
 			var order = req.query.order;
+			console.log(order)
+
+			//MB BAD 
+			/*
+			Content.native(function(err, content) {
+				//{limit:limit, skip:skip, sort:sort}
+				content.find({"associatedModels.address":{$in :[order]}}).toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+					//ZZZ
+					console.log(models)
+					Content.subscribe(req, models);
+					res.json(models);
+				});
+
+			});
+			*/
+
 			Content.find({order:order})
 			.limit(limit)
 			.skip(skip)
@@ -58,6 +79,7 @@ module.exports = {
 				Content.subscribe(req, models);
 				res.json(models);
 			});
+
 		}
 
 		else if (req.query.contentModel){

@@ -2227,8 +2227,8 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "	            </div>\n" +
     "	            <div class=\"card-footer\">\n" +
-    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.plusCount}} like </a> \n" +
-    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.minusCount}} dislike </a>\n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
+    "	                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
     "	                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "	            </div>\n" +
@@ -2249,7 +2249,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "	<div class=\"row\">\n" +
     "	    <div class=\"card\">\n" +
-    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Pair Content | {{market}} | {{market1}}</button>\n" +
+    "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ {{market}} | {{market1}} Content</button>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "	\n" +
@@ -2261,16 +2261,16 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		            <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "		            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "		        </div> \n" +
-    "		        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderMessage(item.content)\"></span></div>\n" +
+    "		        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "		    </div>\n" +
-    "		    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{post.reactions.plus}} like </a> \n" +
+    "		    <div class=\"card-footer\">\n" +
+    "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "		        <a style=\"color:grey\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "		    </div>\n" +
     "		    <!--TODO: NESTED -->\n" +
-    "		    <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "		    <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "		        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
     "		            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "		            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
@@ -4560,12 +4560,30 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "                    <h5 ng-click=\"tokensToggle()\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                </div>\n" +
     "\n" +
-    "            	<h2><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>\n" +
+    "            	<h4><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h4>\n" +
     "\n" +
-    "            	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
+    "            	<!--\n" +
+    "                <h4>{{order.amountSet}} {{order.identiferSet}}</h4>\n" +
     "            	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>\n" +
+    "                -->\n" +
     "\n" +
-    "                <p>{{order.setAlpha}}, {{order.setBeta}}</p>\n" +
+    "                <div class=\"row\">\n" +
+    "\n" +
+    "                    <div class=\"col-xs-2\">\n" +
+    "                        <span ng-repeat=\"(key, value) in order.setAlpha\">\n" +
+    "                            <p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p>\n" +
+    "                        </span>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"col-xs-1\"><i class=\"fa fa-exchange\"></i></div>\n" +
+    "\n" +
+    "                    <div class=\"col-xs-2\">\n" +
+    "                        <span ng-repeat=\"(key, value) in order.setBeta\">\n" +
+    "                            <p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p>\n" +
+    "                        </span>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </div>\n" +
     "\n" +
     "            	<a href=\"member/{{order.user.username}}\">\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{order.user.avatarUrl}}\" src=\"{{order.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -4574,7 +4592,9 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "                <h4>{{order.createdAt}}</h4>\n" +
     "                <h4>{{order.type}}</h4>\n" +
+    "\n" +
     "                <!--<h4>Filled | Partially Filled | Date</h4>-->\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"card-footer\">\n" +

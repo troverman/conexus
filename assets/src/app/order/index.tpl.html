@@ -10,12 +10,30 @@
                     <h5 ng-click="tokensToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
 
-            	<h2><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h2>
+            	<h4><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h4>
 
-            	<h4>{{order.amountSet}} {{order.identiferSet}}</h4>
+            	<!--
+                <h4>{{order.amountSet}} {{order.identiferSet}}</h4>
             	<h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
+                -->
 
-                <p>{{order.setAlpha}}, {{order.setBeta}}</p>
+                <div class="row">
+
+                    <div class="col-xs-2">
+                        <span ng-repeat="(key, value) in order.setAlpha">
+                            <p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                        </span>
+                    </div>
+
+                    <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
+
+                    <div class="col-xs-2">
+                        <span ng-repeat="(key, value) in order.setBeta">
+                            <p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                        </span>
+                    </div>
+
+                </div>
 
             	<a href="member/{{order.user.username}}">
                     <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -24,7 +42,9 @@
 
                 <h4>{{order.createdAt}}</h4>
                 <h4>{{order.type}}</h4>
+
                 <!--<h4>Filled | Partially Filled | Date</h4>-->
+
             </div>
 
             <div class="card-footer">

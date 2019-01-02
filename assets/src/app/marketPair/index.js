@@ -17,14 +17,20 @@ angular.module( 'conexus.marketPair', [
             mirrorOrders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
                 return OrderModel.getSome('marketPair', $stateParams.id1, $stateParams.id, 400, 0, 'createdAt DESC');
             }],
+            contentList: ['$stateParams', 'ContentModel', function($stateParams, ContentModel) {
+                return ContentModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 400, 0, 'createdAt DESC');
+            }],
         }
 	});
 }])
 
-.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'config', 'mirrorOrders', 'OrderModel', 'orders', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, config, mirrorOrders, OrderModel, orders, titleService ) {
+.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'config', 'contentList', 'mirrorOrders', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, config, contentList, mirrorOrders, OrderModel, orders, ReactionModel, titleService ) {
+    
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | CRE8.XYZ');
+
+    $scope.contentList = contentList;
 
     $scope.market = $stateParams.id;
     $scope.market1 = $stateParams.id1;
@@ -33,13 +39,17 @@ angular.module( 'conexus.marketPair', [
     $rootScope.market1 = $stateParams.id1;
     
     $scope.newContent = {};
-    
+    $scope.newReaction = {};
+
     $scope.pluralistic = false;
     if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){
         $scope.pluralistic = true;
     }
 
     $scope.selectedType = 'ONBOOKS';
+
+    //HMM
+    $rootScope.associatedModels = [{type:'MARKETPAIR',address:$stateParams.id+' | '+$stateParams.id1}]
 
     //coordinates on the quasicrystal 
     //100Transparency + 50education + 75universal = 0.01CRE8 + 0.05novo 
@@ -386,10 +396,8 @@ angular.module( 'conexus.marketPair', [
         if($scope.currentUser){
             //TODO
             $scope.newContent.contentModel = content.id;
-
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.marketPair = 'CRE8/USD';
-
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
             });
@@ -397,27 +405,27 @@ angular.module( 'conexus.marketPair', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: CREATE ORDER
-    $scope.createOrder = function() {
-        if($scope.currentUser){
-            $scope.newOrder.identiferSet = $scope.stateParams.id;
-            $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
-            $scope.newOrder.user = $scope.currentUser.id;
-
-            //TODO: PARSE INPUT
-            //$scope.newOrder.amountSet.replace(/^(\d+(,\d+)*)?$/gm);
-            //$scope.newOrder.amountSet1.replace(/^(\d+(,\d+)*)?$/gm);
-
-            OrderModel.create($scope.newOrder).then(function(model) {
-                $scope.orders.push($scope.newOrder);
-                $scope.newOrder = {};
-            });
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            if (contentIndex != -1){
+                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
+                $scope.contentList[contentIndex].reactions[type]++;
+            }
+            var orderIndex = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+            if (orderIndex != -1){
+                $scope.newReaction.associatedModels = [{type:'ORDER', id:item.id}];
+                $scope.orders[orderIndex].reactions[type]++;
+            }
+            ReactionModel.create($scope.newReaction);
         }
-        else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle();}
     };
-
+   
     $scope.invertMarket = function() {
-
         //$scope.market = [$scope.market, $scope.market = $scope.market1][0];
         var temp = $scope.newOrder.identiferSet;
         $scope.newOrder.identiferSet = $scope.newOrder.identiferSet1;
@@ -425,7 +433,6 @@ angular.module( 'conexus.marketPair', [
         console.log($scope.newOrder)
         $scope.inverted = !$scope.inverted;
         //$scope.$apply();
-
     };
 
     $scope.reply = function(item){

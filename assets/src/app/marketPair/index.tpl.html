@@ -163,8 +163,8 @@
 
 	            </div>
 	            <div class="card-footer">
-	                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.plusCount}} like </a> 
-	                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.minusCount}} dislike </a>
+	                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+	                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
 	                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
 	                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
 	            </div>
@@ -185,7 +185,7 @@
 
 	<div class="row">
 	    <div class="card">
-	        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Market Pair Content | {{market}} | {{market1}}</button>
+	        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ {{market}} | {{market1}} Content</button>
 	    </div>
 	</div>
 	
@@ -197,16 +197,16 @@
 		            <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
 		            <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 		        </div> 
-		        <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
+		        <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 		    </div>
-		    <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{post.reactions.plus}} like </a> 
+		    <div class="card-footer">
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
 		        <a style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 		        <a style="color:grey" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
 		    </div>
 		    <!--TODO: NESTED -->
-		    <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
+		    <div ng-show="item.showReply" class="card-footer">
 		        <form role="form" ng-submit="createContent(item)">
 		            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>

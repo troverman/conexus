@@ -201,13 +201,19 @@ angular.module( 'conexus.nav', [
     $rootScope.contentToggle = function(){
         if($scope.currentUser){
 
+
+
+
+            //TODO: ASSOCIATED 
+
+
             //HM!
             $scope.newContent = {};
             $scope.newContent.associatedModels = $rootScope.associatedModels;
             console.log($scope.newContent);
 
-            if ($scope.newContent.associatedModels){$scope.newContent.associatedModels.push({text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id});}
-            else{$scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id}];}
+            //if ($scope.newContent.associatedModels){$scope.newContent.associatedModels.push({text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id});}
+            //else{$scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id}];}
 
             $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
                 obj.text = obj.type+' | '+obj.address;
@@ -215,6 +221,10 @@ angular.module( 'conexus.nav', [
             });
 
             console.log($scope.newContent.associatedModels);
+
+
+
+
 
             $mdSidenav('content').toggle();
         }
