@@ -125,6 +125,9 @@
                 <div style="float:right">
                     <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                 </div>
+                
+                <p style="font-weight:800">From: <a ng-click="$event.stopPropagation()" href="">{{item.from}}</a> To: <a ng-click="$event.stopPropagation()" href="">{{item.to}}</a></p>
+
                 <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                 <p><a ng-repeat="tag in item.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                 <p>{{item.content}}</p>

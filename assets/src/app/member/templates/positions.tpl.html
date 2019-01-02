@@ -81,7 +81,7 @@
 	                <a ng-click="$event.stopPropagation();createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
 	                <a ng-click="$event.stopPropagation();createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
 	                <a ng-click="$event.stopPropagation();reply(order)"><i class="fa fa-comment-o"></i> comment </a>
-	                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
+	                <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
 	            </div>
 
 	            <div ng-click="$event.stopPropagation()" ng-show="order.showReply" class="card-footer">

@@ -483,6 +483,14 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     min-width:100px;
 }
 
+@media (max-width: 768px) {
+    .mobileFix{display:none;}
+}
+
+@media (min-width: 768px){
+    .mobileFix{display:block;}
+}
+
 @media (max-width: 991px) {
     h1{font-size:20px;}
     h2{font-size:20px;}

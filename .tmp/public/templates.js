@@ -988,7 +988,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-md-3 col-sm-12 col-xs-12\" style=\"margin-bottom:0px\">\n" +
+    "        <div class=\"col-md-3 col-sm-12 col-xs-12\" style=\"margin-bottom:0px;padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\" style=\"margin-top:0px\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ CONTENT</button>\n" +
@@ -1002,10 +1002,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "    \n" +
     "    <div class=\"spacing-15\"></div>\n" +
     "\n" +
+    "    <!--TODO: MOBILE FILTER-->\n" +
     "    <div class=\"row\">\n" +
-    "\n" +
-    "        <!--\n" +
-    "        <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <span><b>Tags</b></span>\n" +
@@ -1031,11 +1030,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        -->\n" +
     "\n" +
-    "        <!--\n" +
     "        <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "        -->\n" +
     "            <div style=\"\">\n" +
     "                <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "                    <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
@@ -1062,8 +1058,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "            </div>-->\n" +
-    "\n" +
-    "            <!--<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button></div>-->\n" +
     "\n" +
     "            <div ng-repeat=\"item in activity\">\n" +
     "\n" +
@@ -1198,9 +1192,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
-    "        <!--\n" +
     "        </div>\n" +
-    "        -->\n" +
     "\n" +
     "        <!--\n" +
     "        <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
@@ -2679,6 +2671,9 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                <div style=\"float:right\">\n" +
     "                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                </div>\n" +
+    "                \n" +
+    "                <p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{item.from}}</a> To: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{item.to}}</a></p>\n" +
+    "\n" +
     "                <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                <p><a ng-repeat=\"tag in item.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                <p>{{item.content}}</p>\n" +
@@ -3314,7 +3309,7 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "	                <a ng-click=\"$event.stopPropagation();createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
     "	                <a ng-click=\"$event.stopPropagation();createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
     "	                <a ng-click=\"$event.stopPropagation();reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	                <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "	            </div>\n" +
     "\n" +
     "	            <div ng-click=\"$event.stopPropagation()\" ng-show=\"order.showReply\" class=\"card-footer\">\n" +
@@ -3908,7 +3903,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:90%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +

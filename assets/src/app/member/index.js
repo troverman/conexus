@@ -1108,12 +1108,16 @@ angular.module( 'conexus.member', [
     $scope.member = member;
     $scope.newReaction = {};
     $scope.orders = orders;
+
+    //DEPRECIATE
     $scope.orders.forEach(function(part, index) {
         if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
         if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
         if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
+
+
     titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
 
     $scope.chart = {
@@ -1133,51 +1137,82 @@ angular.module( 'conexus.member', [
             min: 0,
         },
         legend: {enabled: false},
-        tooltip: {
-            shared: true,
-        },
+        tooltip: {shared: true,},
         credits:{enabled:false},
     };
 
-    $rootScope.baseMarkets = [
-        {text:'UNIVERSAL'},
-        {text:'CRE8'},
-        {text:'ETH'},
-        {text:'BTC'},
-        {text:'USD'},
-        {text:'NOVO'},
-        {text:'LTC'},
-        {text:'SHELTER'},
-        {text:'FOOD'},
-        {text:'REST'},
-        {text:'REST,FOOD'},
-    ];
+    //PLURALISM
+    if ($scope.orders.length != 0){
+        $rootScope.baseMarkets = [];
+        $rootScope.markets = [];
 
-    //IS . a better language w.e? vs + --> Could be. 
-    //LOOKS COOLER TO ME HAHA!!
+        for (x in $scope.orders){
+            //console.log($scope.orders[x]);
+            if ($scope.orders[x].setAlpha && $scope.orders[x].setBeta){
+                for (y in Object.keys($scope.orders[x].setAlpha)){
+                    //AMOUNT!
+                    //$scope.orders[x].setAlpha[Object.keys($scope.orders[x].setAlpha)[y]]
+                    $rootScope.baseMarkets.push(Object.keys($scope.orders[x].setAlpha)[y])
+                }
+                for (y in Object.keys($scope.orders[x].setBeta)){
+                    //AMOUNT!
+                    //$scope.orders[x].setBeta[Object.keys($scope.orders[x].setBeta)[y]]
+                    $rootScope.markets.push(Object.keys($scope.orders[x].setBeta)[y])
+                }
+            }
+        }
 
-    $rootScope.markets = [
-        {text:'EDUCATION+ONMINT'},
-        {text:'SHELTER'},
-        {text:'HEALTH'},
-        {text:'FOOD'},
-        {text:'REST'},
-        {text:'CRE8'},
-        {text:'USD'},
-        {text:'ETH'},
-        {text:'BTC'},
-        {text:'CREATE'},
-        {text:'TIME'},
-        {text:'TIME+VIEW'},
-        {text:'TIME+WORK'},
-        {text:'STREAM'},
-        {text:'REACT'},
-        {text:'CONTENT'},
-        {text:'ORDER'},
-        {text:'TRANSACTION'},
-        {text:'VIEW'},
-        {text:'VALIDATE'},
-    ];
+        //REMOVE DUPS
+        $rootScope.baseMarkets = Array.from(new Set($rootScope.baseMarkets));
+        $rootScope.markets = Array.from(new Set($rootScope.markets));
+
+        $rootScope.baseMarkets = $rootScope.baseMarkets.map(function(obj){
+            return {text:obj};
+        });
+
+        $rootScope.markets = $rootScope.markets.map(function(obj){
+            return {text:obj};
+        });
+
+    }
+
+    else{
+        $rootScope.baseMarkets = [
+            {text:'UNIVERSAL'},
+            {text:'CRE8'},
+            {text:'ETH'},
+            {text:'BTC'},
+            {text:'USD'},
+            {text:'NOVO'},
+            {text:'LTC'},
+            {text:'SHELTER'},
+            {text:'FOOD'},
+            {text:'REST'},
+            {text:'REST,FOOD'},
+        ];
+        $rootScope.markets = [
+            {text:'EDUCATION+ONMINT'},
+            {text:'SHELTER'},
+            {text:'HEALTH'},
+            {text:'FOOD'},
+            {text:'REST'},
+            {text:'CRE8'},
+            {text:'USD'},
+            {text:'ETH'},
+            {text:'BTC'},
+            {text:'CREATE'},
+            {text:'TIME'},
+            {text:'TIME+VIEW'},
+            {text:'TIME+WORK'},
+            {text:'STREAM'},
+            {text:'REACT'},
+            {text:'CONTENT'},
+            {text:'ORDER'},
+            {text:'TRANSACTION'},
+            {text:'VIEW'},
+            {text:'VALIDATE'},
+        ];
+    }
 
     $scope.searchQuery = $rootScope.baseMarkets;
 

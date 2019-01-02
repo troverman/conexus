@@ -493,6 +493,31 @@ angular.module( 'conexus.home', [
         });
     };
 
+    //TODO
+    $scope.locations = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadAssociations = function(){
+        $scope.associations = $scope.contentList.map(function(obj){
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+        $scope.associations = [].concat.apply([], $scope.associations);
+        $scope.associations = $scope.associations.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    //$scope.loadAssociations();
+
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
@@ -514,6 +539,7 @@ angular.module( 'conexus.home', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
+    $scope.sortedAssociationArray = $scope.sortedTagArray;
 
     $scope.loginToggle = function(){
         $mdSidenav('login').toggle();
