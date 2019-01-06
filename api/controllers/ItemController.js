@@ -22,6 +22,18 @@ module.exports = {
 			});
 		}
 
+		if (req.query.creator){
+			var creator = req.query.creator;
+			Item.find({creator:creator})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Item.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
 		else{
 			Item.find({})
 			.limit(limit)

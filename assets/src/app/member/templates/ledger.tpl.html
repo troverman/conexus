@@ -60,7 +60,20 @@
 			<li ng-click="selectOverview()"><a href="">Overview</a></li>
 			<li ng-click="selectExpense()"><a href="">Expense</a></li>
 			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
-			<li style="float:right"><a ng-click="filterToggle('LEDGER')" href="#">{{assetSet}} <i class="fa fa-question-circle"></i></a></li>
+
+
+
+			<!--TODO-->
+			<li style="float:right">
+				<a ng-click="filterToggle('LEDGER')" href="#">
+					{{assetSet[0].element}}
+					<!--<span ng-repeat="asset in assetSet">{{asset.element}}</span>-->
+					<i class="fa fa-question-circle"></i>
+				</a>
+			</li>
+
+
+
 		</ul>
 
 		<div class="card">
@@ -71,11 +84,20 @@
 						<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker style="display:inline" ng-model="startDate" md-placeholder="Start date"></md-datepicker></div>
 	      				<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker ng-model="endDate" md-placeholder="End date"></md-datepicker></div>
 					</div>
+
+
+
+					<!--TODO-->
 					<div style="text-align:right;" class="col-xs-6">
-						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Balance</h5>
-						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Revenue</h5>
-						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Expense</h5>
+						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
+						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
+						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
 					</div>
+
+
+
+
+
 				</div>
 
 				<div class="col-xs-12">
@@ -85,6 +107,19 @@
 				<div class="col-xs-12">
 					<highchart config="pie"></highchart>
 				</div>
+
+
+				<!--TODO-->
+				<!--
+				<div class="col-xs-12">
+					<div style="text-align:right;" class="col-xs-6">
+						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
+						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
+						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
+					</div>
+				</div>
+				-->
+
 
 			</div>
 		</div>

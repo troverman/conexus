@@ -225,7 +225,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, config, MemberModel, project, titleService, TransactionModel ) {
-    titleService.setTitle(project.title + ' | conex.us');
+    titleService.setTitle(project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
     $scope.newTransaction = {};
@@ -312,17 +312,14 @@ angular.module( 'conexus.project', [
         $mdSidenav('tokens').toggle();
         //$rootScope.globalTokens = item;
     };
-
 }])
 
 .controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $sce, $scope, $stateParams, config, lodash, project, titleService) {
-
-    titleService.setTitle('About | ' + project.title + ' | CRE8.XYZ');
-
+    titleService.setTitle(project.title + ' | About | CRE8.XYZ');
 }])
 
 .controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'project', 'ReactionModel', 'tasks', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, project, ReactionModel, tasks, time, titleService, transactionsFrom, transactionsTo ) {
-    titleService.setTitle('Activity | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Activity | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -459,13 +456,13 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectAssetsCtrl', ['$scope', 'config', 'project', 'titleService', function ProjectAssetsController( $scope, config, project, titleService ) {
-    titleService.setTitle(project.title + ' | conex.us');
+    titleService.setTitle(project.title + ' | Assets | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
 }])
 
 .controller( 'ProjectChannelsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'channels', 'config', 'contentList', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, channels, config, contentList, project, titleService ) {
-    titleService.setTitle('Channels | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Channels | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.channels = channels;
     $scope.newContent = {};
@@ -499,7 +496,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, project, titleService ) {
-    titleService.setTitle('Content | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Content | CRE8.XYZ');
     $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.project = project;
@@ -575,7 +572,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'motions', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, ContentModel, motions, project, titleService ) {
-    titleService.setTitle('Charter | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMotion = {};
     $scope.motions = motions;  
@@ -603,8 +600,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$mdSidenav', '$scope', 'config', 'lodash', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $mdSidenav, $scope, config, lodash, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
-    titleService.setTitle('Ledger | ' + project.title + ' | CRE8.XYZ');
-    $scope.assetSet = 'CRE8'; // TODO MOST COMMON ASSET? 
+    titleService.setTitle(project.title + ' | Ledger | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -618,7 +614,6 @@ angular.module( 'conexus.project', [
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
 
     console.log($scope.transactions);
-
 
     $scope.chart = {
         chart: {
@@ -728,6 +723,16 @@ angular.module( 'conexus.project', [
             })
         }
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+
+    }
+
+    //PATCH TIL FORM COMPELTE OBJECT
+    else{
+        $scope.transactions.map(function(obj){
+            obj.to = {id:obj.to};
+            obj.from = {id:obj.from};
+            return obj;
+        });
     }
 
     //MD VS ABSOLUTE USAGE..
@@ -743,7 +748,7 @@ angular.module( 'conexus.project', [
 
     $scope.loadAssets = function(){
         $scope.transactionAssets = $scope.transactions.map(function(obj){            
-            return obj.identifier;
+            return Object.keys(obj.amountSet);
         });
         $scope.transactionAssets = [].concat.apply([], $scope.transactionAssets);
         $scope.sortedTransactionAssets = [];
@@ -756,6 +761,8 @@ angular.module( 'conexus.project', [
         $scope.sortedTransactionAssets.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadAssets();
+
+    $scope.assetSet = $scope.sortedTransactionAssets;
 
     //TAGS
     $scope.loadTags = function(){
@@ -777,8 +784,6 @@ angular.module( 'conexus.project', [
             }
         }
         $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
-
     };
     $scope.loadTags();
 
@@ -791,6 +796,15 @@ angular.module( 'conexus.project', [
         return sumArray;
     }
 
+
+
+
+
+
+
+
+
+
     $scope.sumFlow = [];
     $scope.sumFrom = []
     $scope.sumTo = [];
@@ -799,26 +813,26 @@ angular.module( 'conexus.project', [
 
     //CONCAT
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
-        if(b.to == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
+        if(b.to.id == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
     },[0,0]);
 
     //CONCAT
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.project.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.project.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
         else{return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
     },[0,0]);
 
      //CONCAT
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.to == $scope.project.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.to.id == $scope.project.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
         else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
     },[0,0]);
 
     //CONCAT
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
-        if(b.to == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.to.id == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
     },[0,0]);
 
     $scope.chart.series[0].data = $scope.sumTransactions;
@@ -831,6 +845,17 @@ angular.module( 'conexus.project', [
     $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
 
     $scope.transactions = $scope.transactions.reverse();
+
+
+
+
+
+
+
+
+
+
+
 
     //ANIMATE
     //ADD IN TAG BASED GRAPHS WRT EXPENSE
@@ -922,18 +947,6 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $scope.createTransaction = function(){
-        $scope.newTransaction.project = $scope.project.id;
-        $scope.newTransaction.user = $scope.currentUser.id;
-        $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
-            return obj.text
-        }).join(",");
-        TransactionModel.create($scope.newTransaction).then(function(model){
-            $scope.newTransaction = {};
-            $scope.transactions.unshift(model);
-        });
-    };
-
     $scope.reply = function(activity){
         if ($scope.currentUser){
             var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
@@ -945,6 +958,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectItemsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+    titleService.setTitle(project.title + ' | Items | CRE8.XYZ');
 
     $scope.items = items;
     $scope.map = {
@@ -959,7 +973,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {
-    titleService.setTitle('Members | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.members = members;
     $scope.newMember = {};
@@ -995,6 +1009,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectPositionsCtrl', ['$location', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'OrderModel', 'orders', 'project', 'titleService', function MemberPositionsController($location, $rootScope, $sailsSocket, $scope, $stateParams, config, lodash, OrderModel, orders, project, titleService) {
+    titleService.setTitle(project.title + ' | Positions | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.orders = orders;
@@ -1129,8 +1144,9 @@ angular.module( 'conexus.project', [
     $scope.search = function(){};
 
 }])
+
 .controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
-    titleService.setTitle('Projects | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
     $scope.projects = projects;
@@ -1163,12 +1179,12 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectSettingsCtrl', ['$scope', 'config', 'project', 'titleService', function ProjectSettingsController( $scope, config, project, titleService ) {
-    titleService.setTitle('Settings | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Settings | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 }])
 
 .controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
-    titleService.setTitle('Tasks | ' + project.title + ' | CRE8.XYZ');
+    titleService.setTitle(project.title + ' | Tasks | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -1252,6 +1268,7 @@ angular.module( 'conexus.project', [
 }])
 
 .controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'ReactionModel', 'time', 'titleService', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, ReactionModel, time, titleService) {
+    titleService.setTitle(project.title + ' | Time | CRE8.XYZ');
 
     $scope.eventSources = [];
     $scope.calendar = {

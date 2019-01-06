@@ -70,6 +70,16 @@ angular.module( 'conexus.member', [
         },
         resolve: {}
     })
+    .state( 'member.consumption', {
+        url: '/consumption',
+        views: {
+            "memberConsumption": {
+                controller: 'MemberConsumptionCtrl',
+                templateUrl: 'member/templates/consumption.tpl.html'
+            }
+        },
+        resolve: {}
+    })
     .state( 'member.content', {
         url: '/content',
         views: {
@@ -184,7 +194,7 @@ angular.module( 'conexus.member', [
         url: '/tasks',
         views: {
             "memberTasks": {
-                controller: 'MemberTaskCtrl',
+                controller: 'MemberTasksCtrl',
                 templateUrl: 'member/templates/tasks.tpl.html'
             }
         },
@@ -290,14 +300,14 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberAboutController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
-    $scope.currentUser = config.currentUser;
     titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
+
 }])
 
 .controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'lodash', 'member', 'orders', 'profileContent', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, FollowerModel, lodash, member, orders, profileContent, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
-    $scope.currentUser = config.currentUser;
-    $scope.member = member;
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
 
@@ -372,17 +382,32 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle()}
     };
 
+    //TODO: BETTER | TAG STORAGE
+    $scope.loadTags = function(){
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.tags = $scope.activity.map(function(obj){
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            return obj.tags;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
+
     $scope.reply = function(item){
         var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.activity[index].showReply = !$scope.activity[index].showReply
     };
 
     $scope.search = function(){};
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
-    };
 
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
@@ -621,13 +646,18 @@ angular.module( 'conexus.member', [
 
 }])
 
+.controller( 'MemberConsumptionCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberConsumptionController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
+    titleService.setTitle($scope.member.username + ' | Consumption | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
+
+}])
+
 .controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'lodash', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, lodash, titleService) {
+    titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.newReaction = {};
-
-    titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
 
     $scope.selectedType = 'POST';
 
@@ -713,8 +743,8 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {
-    $scope.currentUser = config.currentUser;
     titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
     $scope.followers = followers;
 
     $scope.search = function(){};
@@ -735,8 +765,8 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'following', 'FollowerModel', 'lodash', 'titleService', function MemberFollowingController($sailsSocket, $scope, $stateParams, config, following, FollowerModel, lodash, titleService) {
-    $scope.currentUser = config.currentUser;
     titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
     $scope.following = following;
 
     $scope.search = function(){};
@@ -757,9 +787,9 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberItemsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function MemberItemsController($sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+    titleService.setTitle($scope.member.username + ' | Items | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.items = items;
-    titleService.setTitle($scope.member.username + ' | Items | CRE8.XYZ');
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
@@ -784,13 +814,11 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
-    
-    $scope.assetSet = 'CRE8';
+    titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.member = member;
     $scope.newReaction = {};
     $scope.newTransaction = {};
-    titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
     $scope.searchQuery = [];
     $scope.transactionsFrom = transactionsFrom;
@@ -864,12 +892,68 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
+    //DEPRECIATE IDENTIFIER AND AMOUNT
     if ($scope.transactions.length == 0){
+
+        var timeObject = new Date(); 
+
+        var exampleSetExpense = [
+            {to:'Trevor Overman', tags:'PAYROLL,HUMAN', content:'PAY TREVOR', amountSet:{'USD':500,'CRE8':1}},
+            {to:'Hot Shot Programmer', content:'PAY PROGRAMMER', tags:'PAYROLL,HUMAN'},
+            {to:'Sarah Human', content:'PAY SARAH',  tags:'PAYROLL,HUMAN'},
+            {to:'David Create', content:'PAY DAVID',  tags:'PAYROLL,HUMAN'},
+            {to:'OFFICE SUPPLIES INC', content:'PURCHASE SUPPLIES', tags:'SUPPLIES,HARDWARE,BUSINESS,INFRASTRUCTURE'},
+            {to:'COMPUTER SERVICES INC', content:'PURCHASE TECHNOLOGY', tags:'SERVER,COMPUTER,CLOUD,SERVICES'}
+        ];
+
+        var exampleSetRevenue = [
+            {from:'CUSTOMER', content:'PAYMENT FOR PRODUCTS', tags:'CUSTOMER,EXAMPLE'},
+            {from:'CLIENT', content:'PAYMENT FOR SERVICES',  tags:'CLIENT,SEVICES,DELIVERABLE'},
+        ];
+
         for (var i=0, t=88; i<t; i++) {
-            $scope.transactionsFrom.push({to:'EXAMPLE ORGANIZATION', from:member.username.toUpperCase(), identifier:'CRE8', content:'SEED EXPENSE', createdAt:new Date(), amount:Math.round(0.5*Math.random() * t), tags:'EXPENSE, SEED, EXAMPLE'})
-            $scope.transactionsTo.push({to:member.username.toUpperCase(), from:'EXAMPLE ORGANIZATION', identifier:'CRE8', content:'SEED REVENUE', createdAt:new Date(), amount:Math.round(Math.random() * t), tags:'REVENUE, SEED, EXAMPLE'})
+
+            var randomIndexExpense = Math.floor(Math.random()*exampleSetExpense.length)
+            var randomIndexRevenue = Math.floor(Math.random()*exampleSetRevenue.length)
+
+            $scope.transactionsFrom.push({
+                to: exampleSetExpense[randomIndexExpense].to, 
+                from: {id:$scope.member.id, title:$scope.member.username}, 
+                identifier:'CRE8', 
+                amountSet:{
+                    CRE8: 10*Math.round(0.5*Math.random() * t)
+                }, 
+                content:'SEED EXPENSE', 
+                createdAt:new Date(timeObject.getTime() + 10000 * i), 
+                amount:10*Math.round(0.5*Math.random() * t), 
+                tags:exampleSetExpense[randomIndexExpense].tags, 
+                reactions:{plus:Math.round(Math.random()*10), minus:Math.round(Math.random()*2)}
+            });
+            $scope.transactionsTo.push({
+                to: {id:$scope.member.id, title:$scope.member.username}, 
+                from: exampleSetRevenue[randomIndexRevenue].from, 
+                identifier:'CRE8', 
+                amountSet:{
+                    CRE8: 10*Math.round(0.5*Math.random() * t)
+                },
+                content:'SEED REVENUE', 
+                createdAt:new Date(timeObject.getTime() + 10000 * i),
+                amount:10*Math.round(Math.random() * t),
+                tags: exampleSetRevenue[randomIndexRevenue].tags, 
+                reactions:{plus:Math.round(Math.random()*10), minus:Math.round(Math.random()*2)}
+            });
         }
         $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
+        
+    }
+
+    //PATCH TIL FORM COMPELTE OBJECT
+    else{
+        $scope.transactions.map(function(obj){
+            obj.to = {id:obj.to};
+            obj.from = {id:obj.from};
+            return obj;
+        });
     }
 
     //TAGS
@@ -884,7 +968,7 @@ angular.module( 'conexus.member', [
 
     $scope.loadAssets = function(){
         $scope.transactionAssets = $scope.transactions.map(function(obj){            
-            return obj.identifier;
+            return Object.keys(obj.amountSet);
         });
         $scope.transactionAssets = [].concat.apply([], $scope.transactionAssets);
         $scope.sortedTransactionAssets = [];
@@ -897,6 +981,8 @@ angular.module( 'conexus.member', [
         $scope.sortedTransactionAssets.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadAssets();
+
+    $scope.assetSet = $scope.sortedTransactionAssets;
 
     //TODO: BETTER
     $scope.loadTags = function(){
@@ -942,28 +1028,53 @@ angular.module( 'conexus.member', [
     $scope.sumTransactions = [];
     $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
 
+
+    //NEED TO REDO ALL THIS. 
+    //RN? --> OR LATER | LATER.. 
+    //MULTID 
+    //$scope.transactions
+
+    //FXN TO CHANGE ASSETS --> ||| DEFAUT ASSET SERIES ARE BASED ON RECENT HISTORY... SORTED BY AMOUNT, MAGNITUDE IS RELATIVE
+
+    console.log( $scope.sortedTransactionAssets)
+
+    //SERIES FOR EACH ASSET
+    //$scope.transactions.reduce(function(a,b,i) {
+    //    for (x in Object.keys(b.amountSet)){
+    //       Object.keys(b.amountSet)[x];
+    //    }
+    //},[0,0]);
+
+
     //CONCAT | sumTransactions
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.member.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
-        if(b.to == $scope.member.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.member.id){
+            return $scope.sumTransactions[i] = [
+                new Date(b.createdAt).getTime(), 
+                parseFloat(a[1])-parseFloat(b.amount)
+            ];
+        }
+        if(b.to.id == $scope.member.id){
+            return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];
+        }
     },[0,0]);
 
     //CONCAT | sumFrom
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.member.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.member.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
         else{return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
     },[0,0]);
 
     //CONCAT | sumTo
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.to == $scope.member.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.to.id == $scope.member.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
         else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
     },[0,0]);
 
     //CONCAT | sumFlow
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from == $scope.member.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
-        if(b.to == $scope.member.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.member.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.to.id == $scope.member.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
     },[0,0]);
 
     $scope.chart.series[0].data = $scope.sumTransactions;
@@ -978,6 +1089,7 @@ angular.module( 'conexus.member', [
     $scope.transactions = $scope.transactions.reverse();
 
     
+    //BROKEN
     //TODO: TAGS
     $scope.selectExpense = function(){
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
@@ -1003,9 +1115,7 @@ angular.module( 'conexus.member', [
         }
     };
 
-    $scope.selectIdentifier = function(identifier){
-
-    };
+    $scope.selectIdentifier = function(identifier){};
 
     $scope.selectOverview = function(){
         $scope.pie.series[0].data = [];
@@ -1051,17 +1161,13 @@ angular.module( 'conexus.member', [
     $scope.selectTag = function(tag){
         //$scope.searchQuery = tag;
 
-
         //COMPOUND QUERY
         //FROM, TO, BOTH, Tag, Identifer
         $scope.searchQuery.push({text:tag, type:'TAG'})
-
-
         var query = {member:$scope.member.id, tag:tag, from:$scope.member.id, to:$scope.member.id, identifer:$scope.identifer};
         TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
             $scope.transactions = transactions;
         });
-
     };
 
     //TODO
@@ -1082,17 +1188,6 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $scope.createTransaction = function(){
-        $scope.newTransaction.user = $scope.currentUser.id;
-        $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
-            return obj.text
-        }).join(",");
-        TransactionModel.create($scope.newTransaction).then(function(model){
-            $scope.newTransaction = {};
-            $scope.transactions.unshift(model);
-        });
-    };
-
     $scope.reply = function(activity){
         if ($scope.currentUser){
             var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
@@ -1104,8 +1199,9 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, ReactionModel, titleService) {
+    titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
+
     $scope.currentUser = config.currentUser;
-    $scope.member = member;
     $scope.newReaction = {};
     $scope.orders = orders;
 
@@ -1116,9 +1212,6 @@ angular.module( 'conexus.member', [
         if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
-
-
-    titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
 
     $scope.chart = {
         chart: {polar: true},
@@ -1282,8 +1375,8 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberProjectsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'projects', 'titleService', function MemberProjectsController($sailsSocket, $scope, $stateParams, config, lodash, projects, titleService) {
+    titleService.setTitle($scope.member.username + ' | Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
     $scope.projects = projects;
 
     $scope.search = function(){};
@@ -1303,7 +1396,8 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberTaskCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'tasks', 'TaskModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, tasks, TaskModel, titleService) {
+.controller( 'MemberTasksCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'tasks', 'TaskModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, tasks, TaskModel, titleService) {
+    titleService.setTitle($scope.member.username + ' | Tasks | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.tasks = tasks;
     $scope.newContent = {};
@@ -1361,7 +1455,7 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, time, TimeModel, titleService) {
-    
+    titleService.setTitle($scope.member.username + ' | Time | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     
     //THE GROUP TESSERACT IS CONENESUS ON TIME ++ DIMENSIONAL WORK

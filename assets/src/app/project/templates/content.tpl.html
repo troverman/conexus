@@ -8,7 +8,7 @@
 </div>
 
 <div class="row" ng-show="contentList.length > 0">
-    <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+    <div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
         <div class="card">
             <div style="padding:16px;">
                 <span><b>Tags</b></span>
@@ -38,31 +38,6 @@
 
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
-        </div>
-
-        <div class="card" ng-show="newContentToggleVar">
-            <div style="padding:16px">
-                <form role="form" ng-submit="createContent()">
-                    <div class="">
-                        <input type="text" placeholder="Title" ng-model="newContent.title" class="form-control">
-                        <input type="text" placeholder="Associateds" ng-model="newContent.parent" class="form-control">
-                        <ul class="nav nav-pills nav-justified contentTyle">
-                            <li ng-class="{active: selectedType=='FILE'}" ng-click="selectType('FILE')"><a href="#">File</a></li>
-                            <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
-                            <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
-                            <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Motion</a></li>
-                            <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
-                            <li ng-class="{active: selectedType=='TASK'}" ng-click="selectType('TASK')"><a href="#">Task</a></li>
-                            <li ng-class="{active: selectedType=='TIME'}" ng-click="selectType('TIME')"><a href="#">Time</a></li>
-                            <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
-                        </ul>
-                        <tags-input ng-model="newContent.tags" placeholder="Tags"></tags-input>
-                        <input type="text" placeholder="Attachment" ng-model="newContent.attachment" class="form-control">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn">create</button>
-                </form>
-            </div>
         </div>
 
         <div ng-repeat="item in contentList">

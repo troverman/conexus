@@ -34,6 +34,21 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 	Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
 	//Market Bets.. +FUTURE+[TIME]
 
+	+[] SPACE
+
+	+ONMINT SPACE
+
+	+CREDIT+[INTEREST] SPACE
+		+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE
+
+
+	+FUTURE+[DATE] SPACE
+		//PUT IN ESKROW?
+
+	+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE
+		//STRIKE DELTA, OR STRIKE DATE.
+		//PUT, CALL TYPE
+
 ## Data Protocol	
 
 ## Project Protocol

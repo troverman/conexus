@@ -1,59 +1,60 @@
-//const tf = require('@tensorflow/tfjs');
-//require('@tensorflow/tfjs-node');
+const tf = require('@tensorflow/tfjs');
+require('@tensorflow/tfjs-node');
 var Q = require('q');
+
+//HELPER FXNS
+
+//POWER SET
+function getAllSubsets(theArray) {
+  return theArray.reduce(function (subsets, value) {
+    return subsets.concat(subsets.map(function (set) {
+      return [value].concat(set);
+    }));
+  }, [[]]);
+};
+
+function intersect(a, b) {return a.filter(Set.prototype.has, new Set(b));};
+function diff (a, b) {return a.filter(function(i) {return b.indexOf(i) < 0;});};
+
+function arraysEqual(a, b) {
+	if (a === b) return true;
+	if (a == null || b == null) return false;
+	if (a.length != b.length) return false;
+	for (var i = 0; i < a.length; ++i) {
+		if (a[i] !== b[i]) return false;
+	}
+	return true;
+};
+
+function isInArray(array, item) {
+    for (var i=0;i<array.length;i++) {if(JSON.stringify(array[i]) == JSON.stringify(item)){return true;}}
+    return false;
+};
+
+function removeMirrorDuplicates(array){
+	var array1 = [];
+	var array2 = [];
+	var mirrorArray = array.map(function(obj){
+		return [obj[1],obj[0]];
+	});
+	for (x in array){
+		array1.push(array[x]);
+		if (!isInArray(array1, mirrorArray[x])){
+			array2.push(array[x]);
+		}
+	}
+	return array2;
+};
+
+function generate(model) {
+	return 100//Math.floor(Math.random() * model*100);
+};
+
 
 module.exports = {
 
 	getData: function(){
 		
-		//HELPER FXNS
-
-		//POWER SET
-		function getAllSubsets(theArray) {
-	      return theArray.reduce(function (subsets, value) {
-	        return subsets.concat(subsets.map(function (set) {
-	          return [value].concat(set);
-	        }));
-	      }, [[]]);
-	    };
-
-		function intersect(a, b) {return a.filter(Set.prototype.has, new Set(b));};
-		function diff (a, b) {return a.filter(function(i) {return b.indexOf(i) < 0;});};
-
-		function arraysEqual(a, b) {
-			if (a === b) return true;
-			if (a == null || b == null) return false;
-			if (a.length != b.length) return false;
-			for (var i = 0; i < a.length; ++i) {
-				if (a[i] !== b[i]) return false;
-			}
-			return true;
-		};
-
-		function isInArray(array, item) {
-		    for (var i=0;i<array.length;i++) {if(JSON.stringify(array[i]) == JSON.stringify(item)){return true;}}
-		    return false;
-		};
-
-		function removeMirrorDuplicates(array){
-			var array1 = [];
-			var array2 = [];
-			var mirrorArray = array.map(function(obj){
-				return [obj[1],obj[0]];
-			});
-			for (x in array){
-				array1.push(array[x]);
-				if (!isInArray(array1, mirrorArray[x])){
-					array2.push(array[x]);
-				}
-			}
-			return array2;
-		};
-
-		function generate(model) {
-			return 100//Math.floor(Math.random() * model*100);
-		};
-
 		//POPULATE A NEW NETWORK
 		//TO CREATE A WELL CONNECTED NETWORK
 		//SAMPLE SPACE | A-H Tokens
@@ -386,7 +387,6 @@ module.exports = {
 						//TODO
 
 						//THIS IS THE PLACE! 
-
 
 						//POWERSET --> IS ACTUAL. I WOULD LIKE TO INITIALIZE AN IDENTITY SET OR PROBABILITY SPACE
 						//WE ARE LOOKING AT THE MANIFEST ORDER | VALUE MAP --> WHICH ITSELF IS A GRADIENT 
@@ -1564,8 +1564,31 @@ module.exports = {
 			//		});
 			//	}
 			//});
-
+			/*
+			Transaction.find().limit(10000).then(function(models){
+				for (x in models){
+					if(!models[x].amountSet){
+						models[x].amountSet = {};
+						models[x].amountSet[models[x].identifier.toUpperCase()] = parseFloat(models[x].amount);
+					}
+					if(!models[x].user){models[x].user = models[x].from;}
+					//SOON | ONCE FRONTEND UPDATES
+					//UPDATE ALL ASSETS TO UPPERCASE.. ie. USd, usd
+					//Object.keys(models[x]).forEach((key) => (models[x][key] == '') && delete models[x][key]);
+					//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
+					//delete models[x]['ledger'];
+					//delete models[x]['amount'];
+					//delete models[x]['identifier'];
+					//console.log(models[x])
+					//Transaction.update({id:models[x].id}, models[x]).then(function(){
+					//	console.log('update')
+					//});
+				}
+			});
+			*/
 			//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
+
+			/*
 			Time.find().limit(10000).then(function(models){
 				for (x in models){
 
@@ -1646,6 +1669,7 @@ module.exports = {
 
 				}
 			});
+			*/
 
 			//Validation.find().limit(10000).then(function(postModels){
 			//	for (x in postModels){
@@ -1712,6 +1736,131 @@ module.exports = {
 
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
+
+	},
+
+	//MAX 5 COMB ASSETS
+	tensorBuild: function(){
+
+		const marketTensor = [];
+
+		//DUDE THIS IS GONNA BE MASSIVE..
+		//MULTIEXCHANGE.. ? KEEP IT SIMPLE RN 
+
+		//(A_m-->[A_m-n]--x7-->[A_m-n])
+
+		Order.find({identiferSet:'A'}).limit(100).then((orderModels)=>{
+			for (x in orderModels){
+				//console.log(orderModels[x]);
+
+			}
+
+		});
+
+		Token.find().limit(10).then((tokenModels)=>{
+			//console.log(tokenModels)
+
+			//SORT BY ACTIVITY..?
+			//NEED COMB LOGIC.. IE POWERSET IS NOT COMP REAL
+			//SOMEHOW LINK 5 ASSETS SO THERE IS A LATTICE IN THE CONNECTIONS OF COMP ASSETS IE A,B,C,D,E 
+
+			for (x in tokenModels){
+				marketTensor.push({name:tokenModels[x].string, data:[]})
+				for (y in tokenModels){
+					//marketTensor[x].data.push({name:tokenModels[y].string, data:[]});
+					marketTensor[x].data.push({name:tokenModels[y].string, bids:[], asks:[]})
+				}
+			}
+
+			//TENSOR
+			//ASSETS x ASSETS
+			//2, BIDS, ASKS
+			//ORDERBOOK DIM -> 5
+			//ORDERBOOK DEPTH --> 100? 
+			//WHAT ABOUT INDIV ORDERS
+			//EASY MARKET..
+			//a,b,c,d
+			var tensor = [];
+			for (x in ['a','b','c','d']){
+				for (y in ['a','b','c','d']){
+					if ( x == y ) {
+						tensor.push([[[1,1],[1,1],[1,1]],[[1,1],[1,1],[1,1]]])
+					}
+					else{
+						tensor.push(
+							[[[100,1],[200,2],[300,3]],
+							[[100,1],[200,0.5],[300,0.1]]]
+						);
+					}
+				}
+			}
+			//const simpleMarket = tf.tensor(tensor);
+			//console.log(simpleMarket)
+			//simpleMarket.print();
+
+			//MM TENSOR.. EASY PLZ
+			//[a,b,c,d]
+			//DIM 4 BOOK
+			//IT's THICK
+
+			//USE REFLECTIONS? --> THERE ARE A SET OF THESE 'MIN MESH(s)' --> RERHAPS LIEING WITHIN E7+1 -- albeit this is a complete guess
+			//HARD PART -- CREATE A MESH OF PLUR ASSETS WITH A FIELD OF RANK 5 TENSORS SUCH THAT TRAVERSAL ORDER IS MINIMIZED ACROSS THE 'RING?' / market
+			//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS
+
+			var maximumBinaryRelationship = dataService.getData();
+			var relationShipTensor = [];
+			//OBtensor
+
+			//SHAPE [ assets, 2, 5, 5, 2, n ],
+			//TRAIN NN TO.. -->REDUCE.
+
+			for (x in maximumBinaryRelationship){
+				var bids = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
+				var asks = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
+				//var bids = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+				//var asks = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+				//var bids = [0,0,0,0];
+				//var asks = [0,0,0,0];
+
+				//ONE MORE DIM IN -- MM OB
+				//THIS mm.. just so we can understand the struct
+				//[amount,price]1,[amount,price]2,...[]n --> if asset in quasi. else 0
+
+				for (y in maximumBinaryRelationship[x][0]){
+					if (maximumBinaryRelationship[x][0] == 'A'){bids[0][0]=[1,1]}//[[[1,1],[1,2],[1,1],[2,1]],[[1,1],[1,2],[1,1],[2,1]]]}
+					if (maximumBinaryRelationship[x][0] == 'B'){bids[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+					if (maximumBinaryRelationship[x][0] == 'C'){bids[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+					if (maximumBinaryRelationship[x][0] == 'D'){bids[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				}
+
+				for (y in maximumBinaryRelationship[x][1]){
+					if (maximumBinaryRelationship[x][1] == 'A'){asks[0][0]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+					if (maximumBinaryRelationship[x][1] == 'B'){asks[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+					if (maximumBinaryRelationship[x][1] == 'C'){asks[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+					if (maximumBinaryRelationship[x][1] == 'D'){asks[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				}
+
+				relationShipTensor.push([bids,asks]);
+
+			}
+			//console.log(relationShipTensor)
+			const multiMarketRelationship = tf.tensor(relationShipTensor);
+			console.log(multiMarketRelationship)
+			multiMarketRelationship.print();
+
+			//const lattice =  tf.ones([8,8,8,8,8,8,8,8]);
+			//console.log(lattice)
+			//lattice.print();
+			const lattice =  tf.ones([4,4,4,4]);
+			console.log(lattice)
+			lattice.print();
+
+
+			//GET ORDER BOOKS..
+			//BUILD 1st ORDER 1st 
+			//STRUCTURE AS RECURSIVE.
+
+		})
 
 	},
 

@@ -278,6 +278,16 @@ var transactionModel = {
     user: userObj //CREATOR
 };
 ```
+
+```javascript
+amountSet = {
+    'ASSETALPHA': AMOUNTALPHA,
+    'ASSETBETA': AMOUNTBETA,
+    'ASSETGAMMA': AMOUNTGAMMA,
+    ...
+}
+```
+
 ##### get /api/transaction
 ##### post /api/transaction
 

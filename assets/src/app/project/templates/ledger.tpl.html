@@ -1,8 +1,3 @@
-<style type="text/css">
-	.card tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}
-	.card tags-input .host{margin:0px;border:0px;}
-</style>
-
 <div class="spacing-5"></div>
 
 <div class="row">
@@ -18,7 +13,6 @@
 <div class="row">
 	<div class="card">
 	    <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <!--<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">-->
             <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
             <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
                 <a href="#" role="button">
@@ -58,7 +52,19 @@
 			<li ng-click="selectOverview()"><a href="">Overview</a></li>
 			<li ng-click="selectExpense()"><a href="">Expense</a></li>
 			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
-			<li style="float:right"><a ng-click="filterToggle('LEDGER')" href="#">{{assetSet}} <i class="fa fa-question-circle"></i></a></li>
+
+
+
+			<!--TODO-->
+			<li style="float:right">
+				<a ng-click="filterToggle('LEDGER')" href="#">
+					{{assetSet[0].element}}
+					<!--<span ng-repeat="asset in assetSet">{{asset.element}}</span>-->
+					<i class="fa fa-question-circle"></i>
+				</a>
+			</li>
+
+
 		</ul>
 
 		<div class="card">
@@ -72,14 +78,17 @@
 
 					</div>
 
+					
+
+					<!--TODO-->
 					<div style="text-align:right;" class="col-xs-6">
-						<div style="text-align:right">
-							<!--<h5><a ng-click="informationToggle()" href="#">USD <i class="fa fa-question-circle"></i></a></h5>-->
-							<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Balance</h5>
-							<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Revenue</h5>
-							<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet}}</a> Expense</h5>
-						</div>
+						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
+						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
+						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
 					</div>
+
+
+
 				</div>
 
 				<!--children projects..-->
@@ -91,6 +100,17 @@
 				<div class="col-xs-12">
 					<highchart config="pie"></highchart>
 				</div>
+
+				<!--TODO TABLE-->
+				<!--
+				<div class="col-xs-12">
+					<div style="text-align:right;" class="col-xs-6">
+						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
+						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
+						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
+					</div>
+				</div>
+				-->
 
 			</div>
 		</div>
