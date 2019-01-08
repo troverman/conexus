@@ -1,5 +1,5 @@
-const tf = require('@tensorflow/tfjs');
-require('@tensorflow/tfjs-node');
+//const tf = require('@tensorflow/tfjs');
+//require('@tensorflow/tfjs-node');
 var Q = require('q');
 
 //HELPER FXNS
@@ -1805,7 +1805,8 @@ module.exports = {
 
 			//USE REFLECTIONS? --> THERE ARE A SET OF THESE 'MIN MESH(s)' --> RERHAPS LIEING WITHIN E7+1 -- albeit this is a complete guess
 			//HARD PART -- CREATE A MESH OF PLUR ASSETS WITH A FIELD OF RANK 5 TENSORS SUCH THAT TRAVERSAL ORDER IS MINIMIZED ACROSS THE 'RING?' / market
-			//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS
+			//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS | BRAID
+			//this is getting hyper complex. break lel.. let's go back to create.capital . . --> perform operations with one exchange.. tensor
 
 			var maximumBinaryRelationship = dataService.getData();
 			var relationShipTensor = [];

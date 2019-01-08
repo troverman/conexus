@@ -24,10 +24,15 @@
                         <h5 ng-click="renderValidationToggle(task)"><a href="#">Validations & Associations <i class="fa fa-question-circle"></i></a></h5>
                     </div>
                     <h3>{{task.title}}</h3>
+
+
                     <!--ASSOCIATION && VALIDATION-->
                     <h4><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></h4>
-                    <!--TAGS & SHARED ASSOCIATION TAGS-->
-                    <p><a ng-repeat="tag in tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+                    <!--TAGS & SHARED ASSOCIATION CONTEXT-->
+
+                    <p><a ng-repeat="tag in task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+
+
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="task.createdAt"></p>
 

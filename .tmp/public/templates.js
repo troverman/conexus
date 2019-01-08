@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/consumption.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "association/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/consumption.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -420,6 +420,247 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "</div>\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "\n" +
+    "");
+}]);
+
+angular.module("association/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("association/index.tpl.html",
+    "<div class=\"intro\" style=\"max-height:720px\">\n" +
+    "    <div class=\"intro-container\">\n" +
+    "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "            <symbol id=\"intro-desktop-text\">\n" +
+    "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
+    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING THE NEXT WAVE OF PUBLIC INCLUSIVITY\n" +
+    "            </symbol>  \n" +
+    "            <div class=\"intro-shade\"></div>  \n" +
+    "        </svg> \n" +
+    "        <div class=\"box-with-text\">\n" +
+    "            <div class=\"text-fill\">\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "            </div>\n" +
+    "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-novo\" class=\"text--transparent\"></use>\n" +
+    "            </svg> \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"intro-mobile\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "	<div class=\"container\">\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
+    "				<h3>CREATE THE NEXT WAVE</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Our Culture Begets a 24/7 continual hackathon.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and build together.</p>\n" +
+    "\n" +
+    "			</div>\n" +
+    "			<div class=\"col-sm-6\"></div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-sm-6\"></div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h3>CREATE A SHARED WORLD</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create.</p>\n" +
+    "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-12\" style=\"width:641px\">\n" +
+    "				<div class=\"card\">\n" +
+    "				    <div style=\"padding:16px;\">\n" +
+    "						<h3>TRANSPARENCY MAXIMALISM</h3>\n" +
+    "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming and Complete Inclusivity create more connected paradigms.</p>\n" +
+    "						<p style=\"font-style:italic;color:gray;margin:0px\">Sharing Creates Abundance.</p>\n" +
+    "\n" +
+    "						<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "						<h3><a href=\"https://www.youtube.com/embed/jUQ_3kCcG_U\">open eye</a></h3>\n" +
+    "						<p>\n" +
+    "							<a href=\"member/troverman\">\n" +
+    "								<img class=\"card-avatar\" ng-src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" err-src=\"images/avatar.png\">\n" +
+    "								troverman\n" +
+    "							</a>\n" +
+    "							<span am-time-ago=\"\" style=\"color:gray\"> • 30 Minutes Ago</span>\n" +
+    "						</p>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section2\">\n" +
+    "	<div class=\"container\">\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-8\">\n" +
+    "				<h2>Collaborative Governance</h2>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;margin:0px\">Context Specific Reputation Protocols give us a fair shot at accountable representation.</p>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-4\">\n" +
+    "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-12\">\n" +
+    "				<h2>MultiDimensional Tokenization</h2>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
+    "				<h5>Content Tokenization | Time Tokenization | Reaction Tokenization | Order Tokenization | Transaction Tokenization</h5>\n" +
+    "				<h5>\n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">Developers</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">Documentation</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">APIs</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\">App Ecosystem</a> | \n" +
+    "					<a href=\"https://www.github.com/troverman/conexus\"><i class=\"fa fa-github\"></i></a>\n" +
+    "				</h5>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<h2><a href=\"/market\">MultiDimensional Token Market</a></h2>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "			</div>\n" +
+    "\n" +
+    "\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"chartMap\"></highchart>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "				<h3>Your Dimensional Vote</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create dimensional liquidity for transparent and reputationally validated work.</p> \n" +
+    "			</div>\n" +
+    "\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "				<h3>Create Value Relationships</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value; create depth in the market</h4>\n" +
+    "				<!--<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p> -->\n" +
+    "			</div>\n" +
+    "\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<h3>What We're Building</h3>\n" +
+    "\n" +
+    "				<!--SELECT PROJECTS-->\n" +
+    "				<!--\n" +
+    "				<div class=\"row\">\n" +
+    "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
+    "						<div class=\"padding:16px\">\n" +
+    "							<h3><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				-->\n" +
+    "\n" +
+    "				<h5>Human Validated Proof of Work</h5>\n" +
+    "				<!--VALIDATION MECHANISM-->\n" +
+    "\n" +
+    "				<p>Our Value Infrastructure</p>\n" +
+    "				<h5><a href=\"/transparency\">The Peer Network</a></h5>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"create\"></highchart>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "				<h2>Information as Income</h2>\n" +
+    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information as Universal Income</h5>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "				<h3>Complete Transparency</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Systems and Task Verification</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Finance and Contribution</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "				<h3>Complete Tokenization</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto-economic data structre and means of account.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
+    "\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-12\">\n" +
+    "\n" +
+    "				<h2>Value Mapping and Dimensional Voting</h2>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value. It starts with you.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our intentional value mechanism comes from stating what we believe is valuable. An empowering call to action.</p>\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create Empowerment by clearly and distinctly elucidating your value map.</p>\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Everything has Value. Let's come to consensus and create an emergent gestalt.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give dimensional value to sets of actions.</p>\n" +
+    "				<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
+    "\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div ng-include=\"'register/index.tpl.html'\"></div>\n" +
     "");
 }]);
 
@@ -1155,9 +1396,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "                            <a style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
     "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "                            <a style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
     "                            <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "\n" +
     "                            <p style=\"display:inline;float:right\"><a ng-click=\"$event.stopPropagation();tokensToggle(item)\">Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
@@ -4160,35 +4401,64 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "                <div style=\"padding:16px\">\n" +
-    "                    <h1>Validation</h1>\n" +
+    "                    <h1>Validations & Associations</h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "\n" +
-    "                <!--IF TYPE == 'TIME'-->\n" +
     "                <div>\n" +
+    "                        \n" +
+    "                    <h3 ng-if=\"item.model=='TIME'\">{{item.amount}}</h3>\n" +
+    "                    <h3 ng-if=\"item.model=='TASK'\">{{item.title}}</h3>\n" +
     "\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"validationFilter\">\n" +
+    "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
+    "\n" +
+    "                    <!--DROPDOWN?-->\n" +
+    "                    <!--<p ng-repeat=\"model in associatedModels\">{{model}}</p>-->\n" +
     "                    \n" +
-    "                    <p>{{item.associatedModels}}</p>\n" +
+    "                    <br><br>\n" +
     "\n" +
-    "                    <!--<p>{{item.amount}}xTIME</p>-->\n" +
-    "                    <!--<span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>-->\n" +
+    "                    <div ng-if=\"item.model=='TIME'\">\n" +
+    "                        <h4>\n" +
+    "                            {{item.amount}}\n" +
+    "                            <i class=\"fa fa-angle-double-left\"></i>\n" +
+    "                            {{validationSumObj.general/validations.length}}\n" +
+    "                            <i class=\"fa fa-angle-double-right\"></i>\n" +
+    "                            {{item.task.title.toUpperCase()}}\n" +
+    "                        </h4>\n" +
     "\n" +
-    "                    <!--<h2>TYPE</h2>-->\n" +
-    "                    <!--<h3>TIME -> TASK ( -> PROJECT )</h3>-->\n" +
+    "                        <h4>\n" +
+    "                            {{item.task.title.toUpperCase()}} \n" +
+    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                            {{item.project.title.toUpperCase()}}\n" +
+    "                        </h4>\n" +
     "\n" +
-    "                    <h4>\n" +
-    "                        {{item.amount}}\n" +
-    "                        <i class=\"fa fa-angle-double-left\"></i>\n" +
-    "                        {{validationSumObj.general/validations.length}}\n" +
-    "                        <i class=\"fa fa-angle-double-right\"></i>\n" +
-    "                        {{item.task.title.toUpperCase()}}\n" +
-    "                    </h4>\n" +
+    "                        <h4>\n" +
+    "                            {{item.amount}} \n" +
+    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                            {{item.project.title}}\n" +
+    "                        </h4> \n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div ng-if=\"item.model=='TASK'\">\n" +
+    "                        <h4>\n" +
+    "                            {{item.title.toUpperCase()}} \n" +
+    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                            {{item.project.title.toUpperCase()}}\n" +
+    "                        </h4>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "\n" +
+    "                    <br><br>\n" +
+    "\n" +
+    "                    <!--WIP TOKENS ? JUST DELET-->\n" +
+    "                    <!--\n" +
+    "                    <p>{{item.amount}}xTIME</p>\n" +
+    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>\n" +
+    "                    -->\n" +
     "\n" +
     "                    <!--\n" +
     "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">\n" +
@@ -4200,46 +4470,20 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                            {{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}\n" +
     "                        </h4>\n" +
     "                    </span>\n" +
+    "                    <p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>\n" +
+    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>\n" +
     "                    -->\n" +
     "\n" +
-    "                    <!--<p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>-->\n" +
-    "                    <!--<span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <!--IF TYPE == 'TIME' || TYPE == 'TASK'-->\n" +
-    "                <div>\n" +
-    "                    <!--<h3>TASK -> PROJECT</h3>-->\n" +
-    "                    <h4>{{item.task.title.toUpperCase()}} <i class=\"fa fa-arrows-h\"></i> {{item.project.title.toUpperCase()}}</h4>\n" +
-    "                    <!--<h3>TIME -> PROJECT</h3>-->\n" +
-    "                    <!--<p>{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}</p>-->\n" +
-    "\n" +
-    "                    <h4>{{item.amount}} <i class=\"fa fa-arrows-h\"></i> {{item.project.title}}</h4> \n" +
     "                    <!--<p>{{item.amount}}x{{item.project.title.toUpperCase()}}+TIME, {{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}, {{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+TIME</p>-->\n" +
     "\n" +
     "                    <!--PROJECT CONTENT SPECIFIC TAGS? .. .. BASED ON VALIDATION SO YEAH. -->\n" +
-    "                    <!--<span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>\n" +
-    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->\n" +
+    "                    <!--\n" +
+    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>\n" +
+    "                    <span ng-repeat=\"tag in item.task.tags.split(',')\">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>\n" +
+    "                    -->\n" +
+    "                \n" +
     "\n" +
     "                </div>\n" +
-    "\n" +
-    "                <!--x nested validation-->\n" +
-    "\n" +
-    "                <!--IF TYPE == 'PROJECTPROJECT' -->\n" +
-    "                <!--IF TYPE == 'CONTENTPROJECT' -->\n" +
-    "                <!--...-->\n" +
-    "\n" +
-    "                <!--\n" +
-    "                <h3>PROJECT -> PROJECT</h3>\n" +
-    "                <h3>CONTENT -> PROJECT</h3>\n" +
-    "                <h3>MEMBER -> PROJECT</h3>\n" +
-    "                <h3>ORDER -> PROJECT</h3>\n" +
-    "                <h3>TRANSACTION -> PROJECT</h3>\n" +
-    "                <h3>VALIDATION -> VALIDATION (-> ALL)</h3>\n" +
-    "                -->\n" +
-    "\n" +
-    "\n" +
-    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "\n" +
     "                <highchart config=\"validationColumnRender\"></highchart>\n" +
     "\n" +
@@ -4478,13 +4722,35 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <!-- PROJECT -> TASK | TASK -> TIME -->\n" +
-    "                <!-- PROJECT -> TIME -->\n" +
+    "                <!--\n" +
+    "                {{item}}\n" +
+    "                <i class=\"fa fa-arrows-h\"></i>\n" +
+    "                -->\n" +
+    "                <div ng-if=\"item.model == 'TASK'\">\n" +
+    "                    <h5>\n" +
+    "                        <i class=\"fa fa-check\"></i> Validate {{item.title}} \n" +
+    "                        <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                        {{newValidation.associatedModel[0].model.title}}\n" +
+    "                    </h5>\n" +
+    "                </div>\n" +
     "\n" +
-    "                <h5 ng-if=\"item.project\">Validate {{item.title}} in {{item.project.title}} <i class=\"fa fa-check\"></i></h5>\n" +
-    "                <h5 ng-if=\"item.task\">Validate {{item.amount}} Time for {{item.task.title}} <i class=\"fa fa-check\"></i></h5>\n" +
+    "                <div ng-if=\"item.model == 'TIME'\">\n" +
+    "                    <h5>\n" +
+    "                        <i class=\"fa fa-check\"></i> Validate {{item.amount}} Time \n" +
+    "                        <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                        {{newValidation.associatedModel[0].model.title}}\n" +
+    "                        <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                        PROJECT(S)\n" +
+    "                    </h5>\n" +
+    "                </div>\n" +
     "\n" +
-    "                 <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModels\">\n" +
+    "                <div ng-if=\"item.model == 'VALIDATION'\">\n" +
+    "                    <h5>\n" +
+    "                        Validate Validation <i class=\"fa fa-check\"></i>\n" +
+    "                    </h5>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModel\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
@@ -4496,14 +4762,20 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-repeat=\"tag in tags\">\n" +
     "                    <div layout=\"\">\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag}}</span></div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag}}\"></md-slider>\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag]}} | {{reputation[tag] || 0}}</span></div>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
+    "                <!--ADD CONTEXT TO VALIDATION-->\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"tags\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
     "                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
     "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
@@ -5808,8 +6080,8 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "                    </div>\n" +
     "					<h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "					<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "					<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in task.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
-    "					<a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in task.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a>\n" +
     "					<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
     "				</div>\n" +
     "				<div class=\"card-footer\">\n" +
@@ -6536,10 +6808,15 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <h5 ng-click=\"renderValidationToggle(task)\"><a href=\"#\">Validations & Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "                    <h3>{{task.title}}</h3>\n" +
+    "\n" +
+    "\n" +
     "                    <!--ASSOCIATION && VALIDATION-->\n" +
     "                    <h4><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></h4>\n" +
-    "                    <!--TAGS & SHARED ASSOCIATION TAGS-->\n" +
-    "                    <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "                    <!--TAGS & SHARED ASSOCIATION CONTEXT-->\n" +
+    "\n" +
+    "                    <p><a ng-repeat=\"tag in task.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "\n" +
+    "\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"task.createdAt\"></p>\n" +
     "\n" +
@@ -6702,11 +6979,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
 angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
     "<style type=\"text/css\">\n" +
-    "\n" +
     "	.angular-google-map-container{height: 200px;}\n" +
-    "	tags-input .tags.focused{box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);-webkit-box-shadow:0 0 0px 0px rgba(255, 255, 255, 0);}\n" +
-    "	tags-input .host{margin:0px;border:0px;}\n" +
-    "\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"page-heading\">\n" +
@@ -6876,9 +7149,9 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "				<h4>{{time.amount}}, <span style=\"font-size:10px;color:gray\">{{(time.amount/60).toFixed(2)}} minutes, <span style=\"font-size:10px;color:gray\">{{(time.amount/3600).toFixed(2)}} hours</span></h4>\n" +
     "                \n" +
     "\n" +
-    "                <p><a ng-repeat=\"tag in tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
-    "				<p><a ng-repeat=\"tag in time.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
+    "                <p><a ng-repeat=\"tag in time.task.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
     "\n" +
+    "				<p><a ng-repeat=\"tag in time.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
     "\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{time.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{time.user.avatarUrl}}\" src=\"{{time.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +

@@ -88,12 +88,13 @@ module.exports = {
 			validation: req.param('validation'), //ACTUAL 'VOTE'
 
 			//ASSOICATED MODEL {BINARY -- }
+			associatedModels: req.param('associatedModels'),
 
 			//DEPRECIATE
 			task: req.param('task'),
 			project: req.param('project'),
 			time: req.param('time'),
-			//validation: req.param('validation'),
+			validation: req.param('validation'),
 
 			//PATCH
 			reactions: {plus:0,minus:0},

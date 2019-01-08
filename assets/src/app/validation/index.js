@@ -33,11 +33,21 @@ angular.module( 'conexus.validation', [
     $scope.reputationList = [];
     $scope.reputationWeightedList = []
     $scope.validation = validation[0];
+
+    //TODO: STORE IN DATA
+    $scope.validation.model = 'VALIDATION';
+   
+    //nested context.. ie content.. think --> profile = member; association always 100;
+
+    //FIX?
+    $rootScope.associatedModels = [{type:'VALIDATION', address:$scope.validation.id}];
+
     $scope.validationList = [];
 
     for (x in Object.keys($scope.validation.validation)){
         $scope.validationList.push([Object.keys($scope.validation.validation)[x], $scope.validation.validation[Object.keys($scope.validation.validation)[x]]]);
         $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);
+       
         //SOME WEIGHING PROTOCL HERE -- CAN BE FUNCTIONAL.. SIMPLE MULTIPLICATION NOW
         $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.validation[Object.keys($scope.validation.validation)[x]]]);
     }

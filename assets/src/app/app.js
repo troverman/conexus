@@ -19,6 +19,7 @@ angular.module( 'conexus', [
     'textAngular',
     'conexus.about',
     'conexus.account',
+    //'conexus.association',
     'conexus.content',
     'conexus.contentList',
     'conexus.discover',

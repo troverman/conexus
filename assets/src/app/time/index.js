@@ -17,6 +17,7 @@ angular.module( 'conexus.time', [
             contentList: ['ContentModel', 'time', function(ContentModel, time){
                 return ContentModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
             }],
+            //association is sum of validation
             validations: ['ValidationModel', 'time', function(ValidationModel, time){
                 return ValidationModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
             }],
@@ -27,6 +28,10 @@ angular.module( 'conexus.time', [
 .controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'time', 'TimeModel', 'titleService', 'UserModel', 'ValidationModel', 'validations', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, time, TimeModel, titleService, UserModel, ValidationModel, validations) {
     $scope.currentUser = config.currentUser;
     $scope.time = time;
+
+    //TODO: STORE IN DATA
+    $scope.time.model = 'TIME';
+
     if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
    
     if(!$scope.time){$location.path('/')}
@@ -48,20 +53,24 @@ angular.module( 'conexus.time', [
     $scope.newValidation.validation = {}
     $scope.reactions = [];
     $scope.reputationList = [];
-    $scope.tags = [];
-    if ($scope.time.task.tags){$scope.tags = $scope.time.task.tags.split(',')}
+
+    if ($scope.time.task.tags){$scope.time.task.tags = $scope.time.task.tags.split(',')}
         
     $scope.taskTime = 0;
+
+    //DEPRECIATE
     $scope.tokens = [];
     $scope.tokens.push('Token');
     $scope.tokens.push('TimeToken');
     $scope.tokens.push('Time+'+$scope.time.id);
+
+
     $scope.validationList = [];
     $scope.validations = validations;
 
-    $scope.newValidation.validation.general = 0;
-    for (x in $scope.tags){
-        $scope.newValidation.validation[$scope.tags[x]] = 0;
+    //$scope.newValidation.validation.general = 0;
+    for (x in $scope.time.task.tags){
+        $scope.newValidation.validation[$scope.time.task.tags[x]] = 0;
     }
 
     //EXPERIMENTAL | TODO MANIFOLD FILTER
@@ -133,9 +142,6 @@ angular.module( 'conexus.time', [
     //UNIFY CONTENT AND TIME??
     //TIME AS A TYPE
    
-    //for x in scope.tadk.tags.split()
-    //$scope.tokens.push('Time+'+$scope.time.id);
-
     //TODO: BETTER
     if($scope.currentUser){
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
@@ -145,11 +151,13 @@ angular.module( 'conexus.time', [
         });
     }
 
+
+    //DEPRECIATE
     if ($scope.time.task.tags){
-        for (x in $scope.time.task.tags.split(',')){
-            $scope.tokens.push($scope.time.task.tags.split(',')[x].trim());
-            $scope.tokens.push('Task+'+$scope.time.task.tags.split(',')[x].trim());
-            $scope.tokens.push('Task+'+$scope.time.task.id+'+'+$scope.time.task.tags.split(',')[x].trim());
+        for (x in $scope.time.task.tags){
+            $scope.tokens.push($scope.time.task.tags[x].trim());
+            $scope.tokens.push('Task+'+$scope.time.task.tags[x].trim());
+            $scope.tokens.push('Task+'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim());
         }
     }
 
@@ -157,7 +165,9 @@ angular.module( 'conexus.time', [
         $scope.tokens.push($scope.tokens[x]+'+onStream');
         $scope.tokens.push($scope.tokens[x]+'+onValidation');
     }
-    
+
+
+    //DEPRECIATE
     $scope.createContent = function(content) {
         if ($scope.currentUser){
             if (content){$scope.newContent.contentModel = content.id}
@@ -192,6 +202,7 @@ angular.module( 'conexus.time', [
     };
 
     //TODO: LAYERS | PROJ BASED LAYER
+    //DEPRECIATE
     $scope.createValidation = function(){
         if ($scope.currentUser){
             $scope.newValidation.work = $scope.time.id;
@@ -201,8 +212,8 @@ angular.module( 'conexus.time', [
 
             ValidationModel.create($scope.newValidation).then(function(model){
                 $scope.newValidation = {};
-                for (x in $scope.tags){
-                    $scope.newValidation.validation[$scope.tags[x]] = 0;
+                for (x in $scope.time.task.tags){
+                    $scope.newValidation.validation[$scope.time.task.tags[x]] = 0;
                 }
             });
         }

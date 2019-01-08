@@ -30,7 +30,10 @@ angular.module( 'conexus.task', [
 .controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, validations) {
     $scope.currentUser = config.currentUser;
     $scope.task = task;
-    console.log(task);
+
+    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',')}
+    //TODO: STORE IN DATA
+    $scope.task.model = 'TASK';
     
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
@@ -47,30 +50,31 @@ angular.module( 'conexus.task', [
 
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.newValidation = {};
-    $scope.newValidation.validation = {}
     $scope.question = false;
 
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
 
-    $scope.tags = [];
-    if($scope.task.tags){$scope.tags = $scope.task.tags.split(',')}
     $scope.task.verificationScore = 0;
     $scope.taskTime = 0;
     $scope.taskVerification = [];
     $scope.working = false;
     $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.validations = validations;
-    console.log(validations)
+
+    console.log(validations);
+    
     $scope.verification = {};
     $scope.time = time;
 
-    $scope.newValidation.validation.general = 0;
-    for (x in $scope.tags){
-        $scope.newValidation.validation[$scope.tags[x]] = 0;
-    }
+    //TODO: STORE IN DATA
+    $scope.time.map(function(obj){
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}
+        obj.model = 'TIME';
+        return obj
+    });
 
     //TODO | TOKENS
     $scope.tokens = [];
@@ -80,10 +84,10 @@ angular.module( 'conexus.task', [
     $scope.tokens.push('Task');
     $scope.tokens.push('Task+'+$scope.task.id);
     if ($scope.task.tags){
-        for (x in $scope.tags){
-            $scope.tokens.push($scope.tags[x].trim());
-            $scope.tokens.push('Task+'+$scope.tags[x].trim())
-            $scope.tokens.push('Task+'+$scope.task.id+'+'+$scope.tags[x].trim())
+        for (x in $scope.task.tags){
+            $scope.tokens.push($scope.task.tags[x].trim());
+            $scope.tokens.push('Task+'+$scope.task.tags[x].trim())
+            $scope.tokens.push('Task+'+$scope.task.id+'+'+$scope.task.tags[x].trim())
 
         }
     }
@@ -153,23 +157,6 @@ angular.module( 'conexus.task', [
         }
 
         else{$mdSidenav('login').toggle();}
-
-    };
-
-    //TODO | MOTIONS INTERLOCK
-    //LINK INTO CONTENT MODEL ? --> ONLY MOTIONS
-    //DEPRECIATE 'TOTAL WORK'
-    $scope.createValidation = function(){
-
-        $scope.taskVerification.push({user:$scope.currentUser, score: $scope.currentUser.totalWork});
-        $scope.task.verificationScore += parseFloat($scope.currentUser.totalWork);
-        $scope.newVerification.user = $scope.currentUser;
-
-        $scope.newVerification.score = $scope.currentUser.totalWork; // Dimensional Weight / Multiplier
-        $scope.newVerification.project = $scope.task.project.id; // Dimensional Weight / Multiplier
-        $scope.newVerification.task = $scope.task.id; // Dimensional Weight / Multiplier
-
-        console.log($scope.newValidation);
 
     };
 

@@ -337,11 +337,16 @@ angular.module( 'conexus.nav', [
 
         $scope.item = item;
 
-        console.log(item)
+        console.log(item);
 
-        //type.. -->? 
-        //item is task, time , .. content, validation 
+        if (item.model == 'TASK'){
+            $scope.assoicationFilter = [{text:'PROJECT | '+$scope.item.project.title}];
+        }
+        if (item.model == 'TIME'){
+            $scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
+        }
 
+        //TODO: ASSOCIATION MODEL
         ValidationModel.getSome('time', item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
 
             $scope.validationColumnRender = {
@@ -373,14 +378,10 @@ angular.module( 'conexus.nav', [
 
             $scope.validations = validationModels;
 
-            //TODO: SEEMS INNEFFECTIVE
-
-            //PROB SHOULD STORE COUNT AT SCALE.. AKA 1000 VALIDAIONS WILL CRASH
+            //TODO: SHOULD STORE COUNT AT SCALE.. AKA 1000 VALIDAIONS WILL CRASH --> SORED IN ASSOCIATION
             $scope.validationSumObj = {};
 
-
             if ($scope.validations.length > 0){
-
                 for (y in $scope.validations){
                     console.log($scope.validations[y].validation);
                     for (x in Object.keys($scope.validations[y].validation)){
@@ -389,14 +390,11 @@ angular.module( 'conexus.nav', [
                     }
 
                 }
-
                 console.log($scope.validationSumObj);
-
                 for (x in Object.keys($scope.validationSumObj)){
                     $scope.validationColumnRender.series[0].data.push($scope.validationSumObj[Object.keys($scope.validationSumObj)[x]]/$scope.validations.length);
                     $scope.validationColumnRender.xAxis.categories.push(Object.keys($scope.validationSumObj)[x]);
                 }
-
             }
 
         });
@@ -483,36 +481,82 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //TODO: CHANGE FROM ADDRESS TO ID
+
     $rootScope.validationToggle = function(item){
+
+        //VALIDATIONS ARE BINARY!
+
         if($scope.currentUser){
 
-            console.log(item);
             $scope.item = item;
+
+            console.log($scope.item);
+
+            //DOESNT REALLY WORK.. 
             $scope.newValidation = {};
             $scope.newValidation.validation = {};
+            $scope.newValidation.validation.general = 0;
+            console.log($scope.newValidation);
 
-            //PATCH!
-            $scope.newValidation.associatedModels = [{type:'TIME',address:item.id}]
-            //$scope.newValidation.associatedModels) = [{type:'TASK',address:item.id}]
+            //SELF CREATED VALIDATION ON CREATE --> COOL
+            //TODO, TIME <--> TASK FROM ON TIME CREATE
 
-            $scope.tags = [];
-
-            if(item.tags){
-                $scope.tags = item.tags.split(',');
-                $scope.newValidation.validation.general = 0;
-                for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+            if ($scope.item.model == 'TASK'){
+                //PATCH --> WE WILL CHANGE
+                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TASK
+                if ($scope.item.project){
+                    $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, type:'PROJECT',address:$scope.item.project.id, model:$scope.item.project}];
+                }
+                $scope.newValidation.associatedModels = [{type:'TASK',address:item.id}];
             }
 
-            //TEMP | TODO: ASSOCIATIONS
+            if ($scope.item.model == 'TIME'){
+                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TIME
+                if ($scope.item.task){
+                    $scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, type:'TASK',address:$scope.item.task.id, model:$scope.item.task}];
+                }
+                $scope.newValidation.associatedModels = [{type:'TIME',address:item.id}];
+            }
 
-            //BASED ON THE ASSOCIATION.
-            if (item.task){
-                if(item.task.tags){
-                    $scope.tags = item.task.tags.split(',');
-                    $scope.newValidation.validation.general = 0;
+            //PREVIOUS VALIDATION CONTEXT.. 
+            if ($scope.item.model == 'VALIDATION'){
+                $scope.newValidation.associatedModel = [{text:'VALIDATION | '+$scope.item.id, type:'VALIDATION',address:$scope.item.id}];
+                $scope.newValidation.associatedModels = [{type:'VALIDATION',address:item.id}];
+            }
+
+            $scope.newValidation.associatedModels.concat($scope.newValidation.associatedModel);
+     
+            if ($scope.item.model == 'CONTENT'){} //--> PROJ
+            if ($scope.item.model == 'ITEM'){} //--> PROJ
+            if ($scope.item.model == 'MEMBER'){} //--> PROJ
+            if ($scope.item.model == 'ORDER'){} //--> PROJ
+            if ($scope.item.model == 'PROJECT'){} //--> PROJ
+            if ($scope.item.model == 'TRANSACTION'){} //--> PROJ
+        
+            //TODO: SPLIT OPERATIONS CONTAINED IN CTRL
+            $scope.tags = [];
+            if ($scope.item.model == 'TASK'){
+                $scope.tags = item.tags;
+                for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+            }
+            //TODO: WATCH TAGS
+
+            //TEMP | TODO: ASSOCIATIONS | BASED ON THE ASSOCIATION
+            if ($scope.item.model == 'TIME'){
+                if($scope.item.task.tags){
+                    $scope.tags = item.task.tags;
+                    for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                }
+                //SELF DEFINED CONTEXT IN TIME
+                //BRIDGE BTW TASK CONTEXT (SELF EFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
+                    //IF NOT CONTEXT VALIDATED IN TASK <-> PROJ IT IS 0. 
+                if($scope.item.tags){
+                    $scope.tags = Array.from(new Set($scope.tags.concat(item.tags)));
                     for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
                 }
             }
+
 
             $mdSidenav('validation').toggle();
         }
@@ -807,19 +851,15 @@ angular.module( 'conexus.nav', [
     //TODO: PARESE INPUT | TEST CREATE
     $scope.createValidation = function(){
         if ($scope.currentUser){
-
-            //TODO
+            //TODO 
             $scope.newValidation.user = $scope.currentUser.id;
-
-            //PATCH!!!
+            //PATCH!!! DEPREC
             if ($scope.newValidation.associatedModels){
                 for (x in $scope.newValidation.associatedModels){
                    $scope.newValidation[$scope.newValidation.associatedModels[x].type.toLowerCase()] = $scope.newValidation.associatedModels[x].address;
                 }
             }
-
             console.log($scope.newValidation);
-
             ValidationModel.create($scope.newValidation).then(function(model) {
 
                 $scope.confirm = $scope.newValidation;
@@ -830,6 +870,7 @@ angular.module( 'conexus.nav', [
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
+
         }
         else{$mdSidenav('login').toggle()}
     };

@@ -28,6 +28,8 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
+			.populate('task')
+			.populate('project')
 			.then(function(models) {
 				res.json(models);
 			});

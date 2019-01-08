@@ -218,9 +218,9 @@
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                             <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
 
                             <p style="display:inline;float:right"><a ng-click="$event.stopPropagation();tokensToggle(item)">Tokens <i class="fa fa-question-circle"></i></a></p>

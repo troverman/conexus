@@ -65,8 +65,8 @@
                     </div>
 					<h4 ng-click="$event.stopPropagation()"><a href="task/{{task.id}}">{{task.title}}</a></h4>
 					<p ng-click="$event.stopPropagation()"><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+					<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in task.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
-					<a ng-click="$event.stopPropagation()" ng-repeat="tag in task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a>
 					<span style="color:gray" am-time-ago="task.createdAt"></span>
 				</div>
 				<div class="card-footer">

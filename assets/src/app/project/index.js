@@ -1183,7 +1183,7 @@ angular.module( 'conexus.project', [
     $scope.currentUser = config.currentUser;
 }])
 
-.controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, TaskModel, tasks, titleService ) {
+.controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, ReactionModel, TaskModel, tasks, titleService ) {
     titleService.setTitle(project.title + ' | Tasks | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newContent = {};
@@ -1192,24 +1192,19 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.project = project;
 
-    $scope.createContent = function() {};
-
-    //CONTEXT?
-    $scope.createReaction = function() {};
-
-    $scope.createTask = function() {
+    $scope.createReaction = function(item, type){
         if ($scope.currentUser){
-            $scope.newTask.user = $scope.currentUser.id;
-            $scope.newTask.project = $scope.project.id;
-            $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
-                return obj.text;
-            }).join(",");
-            TaskModel.create($scope.newTask).then(function(model) {
-                $scope.newTask = {};
-                $scope.tasks.unshift(model);
-            });
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
+            if (taskIndex != -1){
+                $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
+                $scope.tasks[taskIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }
         }
-        else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle();}
     };
 
     $scope.filterContent = function(filter) {
@@ -1224,7 +1219,6 @@ angular.module( 'conexus.project', [
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.tasks.map(function(obj){
-            console.log(obj);
             var returnObj = {};
             if(obj.tags){obj.tags = obj.tags.split(',')}
             returnObj = obj.tags;

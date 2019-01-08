@@ -451,35 +451,64 @@
             <div class="page-heading">
                 <div class="spacing-25"></div>
                 <div style="padding:16px">
-                    <h1>Validation</h1>
+                    <h1>Validations & Associations</h1>
                 </div>
                 <div class="spacing-25"></div>
             </div>
             <div style="padding:16px;">
 
-
-                <!--IF TYPE == 'TIME'-->
                 <div>
+                        
+                    <h3 ng-if="item.model=='TIME'">{{item.amount}}</h3>
+                    <h3 ng-if="item.model=='TASK'">{{item.title}}</h3>
 
-                    <tags-input min-length="1" placeholder="Associations" ng-model="validationFilter">
+                    <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
+
+                    <!--DROPDOWN?-->
+                    <!--<p ng-repeat="model in associatedModels">{{model}}</p>-->
                     
-                    <p>{{item.associatedModels}}</p>
+                    <br><br>
 
-                    <!--<p>{{item.amount}}xTIME</p>-->
-                    <!--<span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>-->
+                    <div ng-if="item.model=='TIME'">
+                        <h4>
+                            {{item.amount}}
+                            <i class="fa fa-angle-double-left"></i>
+                            {{validationSumObj.general/validations.length}}
+                            <i class="fa fa-angle-double-right"></i>
+                            {{item.task.title.toUpperCase()}}
+                        </h4>
 
-                    <!--<h2>TYPE</h2>-->
-                    <!--<h3>TIME -> TASK ( -> PROJECT )</h3>-->
+                        <h4>
+                            {{item.task.title.toUpperCase()}} 
+                            <i class="fa fa-arrows-h"></i> 
+                            {{item.project.title.toUpperCase()}}
+                        </h4>
 
-                    <h4>
-                        {{item.amount}}
-                        <i class="fa fa-angle-double-left"></i>
-                        {{validationSumObj.general/validations.length}}
-                        <i class="fa fa-angle-double-right"></i>
-                        {{item.task.title.toUpperCase()}}
-                    </h4>
+                        <h4>
+                            {{item.amount}} 
+                            <i class="fa fa-arrows-h"></i> 
+                            {{item.project.title}}
+                        </h4> 
+                    </div>
+
+                    <div ng-if="item.model=='TASK'">
+                        <h4>
+                            {{item.title.toUpperCase()}} 
+                            <i class="fa fa-arrows-h"></i> 
+                            {{item.project.title.toUpperCase()}}
+                        </h4>
+                    </div>
+
+
+                    <br><br>
+
+                    <!--WIP TOKENS ? JUST DELET-->
+                    <!--
+                    <p>{{item.amount}}xTIME</p>
+                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>
+                    -->
 
                     <!--
                     <span ng-repeat="tag in item.task.tags.split(',')">
@@ -491,46 +520,20 @@
                             {{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}
                         </h4>
                     </span>
+                    <p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>
+                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
                     -->
 
-                    <!--<p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>-->
-                    <!--<span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->
-
-                </div>
-
-                <!--IF TYPE == 'TIME' || TYPE == 'TASK'-->
-                <div>
-                    <!--<h3>TASK -> PROJECT</h3>-->
-                    <h4>{{item.task.title.toUpperCase()}} <i class="fa fa-arrows-h"></i> {{item.project.title.toUpperCase()}}</h4>
-                    <!--<h3>TIME -> PROJECT</h3>-->
-                    <!--<p>{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}</p>-->
-
-                    <h4>{{item.amount}} <i class="fa fa-arrows-h"></i> {{item.project.title}}</h4> 
                     <!--<p>{{item.amount}}x{{item.project.title.toUpperCase()}}+TIME, {{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}, {{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+TIME</p>-->
 
                     <!--PROJECT CONTENT SPECIFIC TAGS? .. .. BASED ON VALIDATION SO YEAH. -->
-                    <!--<span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
-                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>-->
+                    <!--
+                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
+                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
+                    -->
+                
 
                 </div>
-
-                <!--x nested validation-->
-
-                <!--IF TYPE == 'PROJECTPROJECT' -->
-                <!--IF TYPE == 'CONTENTPROJECT' -->
-                <!--...-->
-
-                <!--
-                <h3>PROJECT -> PROJECT</h3>
-                <h3>CONTENT -> PROJECT</h3>
-                <h3>MEMBER -> PROJECT</h3>
-                <h3>ORDER -> PROJECT</h3>
-                <h3>TRANSACTION -> PROJECT</h3>
-                <h3>VALIDATION -> VALIDATION (-> ALL)</h3>
-                -->
-
-
-                <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 
                 <highchart config="validationColumnRender"></highchart>
 
@@ -769,13 +772,35 @@
             <div style="padding:16px">
                 <div class="spacing-25"></div>
 
-                <!-- PROJECT -> TASK | TASK -> TIME -->
-                <!-- PROJECT -> TIME -->
+                <!--
+                {{item}}
+                <i class="fa fa-arrows-h"></i>
+                -->
+                <div ng-if="item.model == 'TASK'">
+                    <h5>
+                        <i class="fa fa-check"></i> Validate {{item.title}} 
+                        <i class="fa fa-arrows-h"></i> 
+                        {{newValidation.associatedModel[0].model.title}}
+                    </h5>
+                </div>
 
-                <h5 ng-if="item.project">Validate {{item.title}} in {{item.project.title}} <i class="fa fa-check"></i></h5>
-                <h5 ng-if="item.task">Validate {{item.amount}} Time for {{item.task.title}} <i class="fa fa-check"></i></h5>
+                <div ng-if="item.model == 'TIME'">
+                    <h5>
+                        <i class="fa fa-check"></i> Validate {{item.amount}} Time 
+                        <i class="fa fa-arrows-h"></i> 
+                        {{newValidation.associatedModel[0].model.title}}
+                        <i class="fa fa-arrows-h"></i> 
+                        PROJECT(S)
+                    </h5>
+                </div>
 
-                 <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModels">
+                <div ng-if="item.model == 'VALIDATION'">
+                    <h5>
+                        Validate Validation <i class="fa fa-check"></i>
+                    </h5>
+                </div>
+
+                <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModel">
                     <auto-complete source="loadAssociations($query)"></auto-complete>
                 </tags-input>
 
@@ -787,14 +812,20 @@
 
                 <div ng-repeat="tag in tags">
                     <div layout="">
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag}}</span></div>
-                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag]" step="1" min="-100" max="100" aria-label="{{tag}}"></md-slider>
-                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag]}} | {{reputation[tag] || 0}}</span></div>
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
                     </div>
                 </div>
 
+                <!--ADD CONTEXT TO VALIDATION-->
+                <tags-input min-length="1" placeholder="Context" ng-model="tags">
+                    <auto-complete source="loadAssociations($query)"></auto-complete>
+                </tags-input>
+
                 <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
                 <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+
             </div>
         </div>
     </md-sidenav>
