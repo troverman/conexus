@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "association/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/consumption.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "association/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/consumption.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/activity.tpl.html", "task/templates/content.tpl.html", "task/templates/time.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -55,19 +55,20 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-12\" style=\"width:641px\">\n" +
+    "			<div class=\"col-md-6 col-xs-12\">\n" +
     "				<div class=\"card\">\n" +
     "				    <div style=\"padding:16px;\">\n" +
     "						<h3>TRANSPARENCY MAXIMALISM</h3>\n" +
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming and Complete Inclusivity create more connected paradigms.</p>\n" +
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Sharing Creates Abundance.</p>\n" +
-    "\n" +
-    "						<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "					</div>\n" +
+    "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "					<div style=\"padding:16px;\">\n" +
     "						<h3><a href=\"https://www.youtube.com/embed/jUQ_3kCcG_U\">open eye</a></h3>\n" +
     "						<p>\n" +
     "							<a href=\"member/troverman\">\n" +
     "								<img class=\"card-avatar\" ng-src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" err-src=\"images/avatar.png\">\n" +
-    "								troverman\n" +
+    "								<b>troverman</b>\n" +
     "							</a>\n" +
     "							<span am-time-ago=\"\" style=\"color:gray\"> • 30 Minutes Ago</span>\n" +
     "						</p>\n" +
@@ -4485,7 +4486,32 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <highchart config=\"validationColumnRender\"></highchart>\n" +
+    "                <div>\n" +
+    "                    <table class=\"table table-striped table-hover\">\n" +
+    "                        <thead>\n" +
+    "                            <tr>\n" +
+    "                                <th>Member</th>\n" +
+    "                                <th>Dimension</th>\n" +
+    "                                <th>Validation Score</th>\n" +
+    "                                <th>Id</th>\n" +
+    "                            </tr>\n" +
+    "                        <thead>\n" +
+    "                        <tbody>\n" +
+    "                            <tr ng-repeat=\"validation in validations\">\n" +
+    "                                <td>\n" +
+    "                                    <a href=\"member/{{validation.user.username}}\">\n" +
+    "                                        <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                        <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
+    "                                    </a>\n" +
+    "                                </td>\n" +
+    "                                <td>General</td>\n" +
+    "                                <td>{{validation.validation.general}}</td>\n" +
+    "                                <td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
+    "                            </tr>\n" +
+    "                        </tbody>\n" +
+    "                    </table>\n" +
+    "                    <highchart config=\"validationColumnRender\"></highchart>\n" +
+    "                </div>\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -5215,7 +5241,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
   $templateCache.put("project/templates/activity.tpl.html",
     "<div class=\"row\">\n" +
     "\n" +
-    "     <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "     <div ng-show=\"activity.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
@@ -6976,6 +7002,21 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "</div>");
 }]);
 
+angular.module("task/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("task/templates/activity.tpl.html",
+    "");
+}]);
+
+angular.module("task/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("task/templates/content.tpl.html",
+    "");
+}]);
+
+angular.module("task/templates/time.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("task/templates/time.tpl.html",
+    "");
+}]);
+
 angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
     "<style type=\"text/css\">\n" +
@@ -7142,7 +7183,7 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\" ng-click=\"\">\n" +
     "			<div style=\"padding:16px\" class=\"col-sm-12\">\n" +
     "				<div style=\"float:right;text-align:right\">\n" +
-    "					<h5 ng-click=\"tokensToggle()\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "					<h5 ng-click=\"tokensToggle(time)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "					<h5 ng-click=\"renderValidationToggle(time)\"><a href=\"#\">Validations & Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "				</div>\n" +
     "				<h3><a href=\"task/{{time.task.id}}\">{{time.task.title}}</a></h3>\n" +
@@ -7180,55 +7221,14 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
+    "    <!--\n" +
     "    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "	<div style=\"row\">\n" +
-    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "            <li class=\"active\"><a href=\"#\">Activity</a></li>\n" +
-    "            <li><a href=\"#\">Content</a></li>\n" +
-    "            <li><a href=\"#\">Validations</a></li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
-    "\n" +
-    "	<!--TODO: IF VALIDATE | EDIT CURRENT VALIDATION HERE | 1 PER MEMBER PER MAINFOLD-->\n" +
-    "	<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->\n" +
-    "	<div class=\"row\" ng-show=\"validations.length > 0\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px\">\n" +
-    "				<table class=\"table table-striped table-hover\">\n" +
-    "					<thead>\n" +
-    "						<tr>\n" +
-    "							<th>Member</th>\n" +
-    "							<th>Dimension</th>\n" +
-    "							<th>Validation Score</th>\n" +
-    "							<th>Id</th>\n" +
-    "						</tr>\n" +
-    "					<thead>\n" +
-    "					<tbody>\n" +
-    "						<tr ng-repeat=\"validation in validations\">\n" +
-    "							<td>\n" +
-    "								<a href=\"member/{{validation.user.username}}\">\n" +
-    "									<img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "									<span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
-    "								</a>\n" +
-    "							</td>\n" +
-    "							<td>General</td>\n" +
-    "							<td>{{validation.validation.general}}</td>\n" +
-    "							<td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
-    "						</tr>\n" +
-    "					</tbody>\n" +
-    "				</table>\n" +
-    "				<highchart config=\"validationColumn\"></highchart>\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Time Content</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "	-->\n" +
     "\n" +
     "	<!--TODO: NESTED RENDER-->\n" +
     "	<div class=\"row\">\n" +
@@ -7494,6 +7494,8 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "					<h5 style=\"text-align:right\" ng-click=\"tokensToggle(validation)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "				</div>\n" +
     "\n" +
+    "				<h3> MODEL A <i class=\"fa fa-arrows-h\"></i> MODEL B</h3>\n" +
+    "\n" +
     "				<a href=\"member/{{validation.user.username}}\">\n" +
     "					<img class=\"card-avatar\" src=\"{{validation.user.avatarUrl}}\"/>\n" +
     "					{{validation.user.username}}\n" +
@@ -7501,8 +7503,25 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"validation.createdAt\"></p>\n" +
     "\n" +
-    "				<!--TODO: ABSTRACT MODEL-->\n" +
+    "				<!--TODO: ABSTRACT MODEL | POPULATE VALIDATIONS-->\n" +
+    "				<!--ERR-->\n" +
+    "				<p ng-repeat=\"model in validation.associatedModels\">\n" +
+    "					<a href=\"{{model.type.toLowerCase()}}/{{model.address}}\">{{model.type}} | {{model.address}}</a>\n" +
+    "				</p>\n" +
+    "				\n" +
+    "				<!--TAGS ARE ASSOCIATIONS. . -->\n" +
+    "				<!--\n" +
     "				<p>time | <a href=\"time/{{validation.time}}\">{{validation.time}}</a></p>\n" +
+    "				<p>task | <a href=\"time/{{validation.task}}\">{{validation.task}}</a></p>\n" +
+    "				<p>project |</p>\n" +
+    "				<p>member | </p>\n" +
+    "				<p>item | </p>\n" +
+    "				<p>order | </p>\n" +
+    "				<p>transaction | </p>\n" +
+    "				<p>content | </p>\n" +
+    "				<p>validation | </p>\n" +
+    "				<p>validation (recursion) </p>\n" +
+    "				-->\n" +
     "\n" +
     "				<!--ASSOCIATION.. -->\n" +
     "				<!--TODO: MANIFOLD-->\n" +

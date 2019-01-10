@@ -535,7 +535,32 @@
 
                 </div>
 
-                <highchart config="validationColumnRender"></highchart>
+                <div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Member</th>
+                                <th>Dimension</th>
+                                <th>Validation Score</th>
+                                <th>Id</th>
+                            </tr>
+                        <thead>
+                        <tbody>
+                            <tr ng-repeat="validation in validations">
+                                <td>
+                                    <a href="member/{{validation.user.username}}">
+                                        <img class="card-avatar" ng-src="{{validation.user.avatarUrl}}" src="{{validation.user.avatarUrl}}" err-src="/images/avatar.png">
+                                        <span style="font-weight:700">{{validation.user.username}}</span>
+                                    </a>
+                                </td>
+                                <td>General</td>
+                                <td>{{validation.validation.general}}</td>
+                                <td><a href="validation/{{validation.id}}">{{validation.id}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <highchart config="validationColumnRender"></highchart>
+                </div>
 
             </div>
         </div>

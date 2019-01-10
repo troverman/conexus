@@ -28,121 +28,13 @@ angular.module( 'conexus.time', [
 .controller( 'TimeController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'time', 'TimeModel', 'titleService', 'UserModel', 'ValidationModel', 'validations', function TimeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, time, TimeModel, titleService, UserModel, ValidationModel, validations) {
     $scope.currentUser = config.currentUser;
     $scope.time = time;
-
+    if(!$scope.time){$location.path('/')}
+    titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
     //TODO: STORE IN DATA
     $scope.time.model = 'TIME';
 
-    if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
-   
-    if(!$scope.time){$location.path('/')}
-
-    titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
-
-    //PATCH!!!
-    $rootScope.associatedModels = [{
-        address: $scope.time.id,
-        type: 'TIME',
-    }];
-
-    $scope.contentList = contentList;
-
-    $scope.member = {};
-    $scope.newContent = {};
-    $scope.newReaction = {};
-    $scope.newValidation = {};
-    $scope.newValidation.validation = {}
-    $scope.reactions = [];
-    $scope.reputationList = [];
-
-    if ($scope.time.task.tags){$scope.time.task.tags = $scope.time.task.tags.split(',')}
-        
-    $scope.taskTime = 0;
-
-    //DEPRECIATE
-    $scope.tokens = [];
-    $scope.tokens.push('Token');
-    $scope.tokens.push('TimeToken');
-    $scope.tokens.push('Time+'+$scope.time.id);
-
-
-    $scope.validationList = [];
-    $scope.validations = validations;
-
-    //$scope.newValidation.validation.general = 0;
-    for (x in $scope.time.task.tags){
-        $scope.newValidation.validation[$scope.time.task.tags[x]] = 0;
-    }
-
-    //EXPERIMENTAL | TODO MANIFOLD FILTER
-    $scope.validationColumn = {
-        chart: {
-            zoomType: 'x',
-        },
-        series: [{
-            id: 'validation',
-            type: 'column',
-            name: 'Average Validation',
-            data: [],
-            yAxis: 0
-        }],
-        title: {
-            text: ''
-        },
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
-        yAxis: [{
-            title: {text: null}
-        },{
-            title: {text: null},
-        }],
-        legend: {enabled: true},
-        credits:{enabled:false},
-        plotOptions: {
-            column: {
-                minPointLength: 3
-            }
-        },
-    };
-
-    //EFFICENCY | STORE IN TIME MODEL
-    var sumObj = {};
-    //var sumObj.validation = {};
-    //var sumObj.reputation = {};
-    //var sumObj.reputationWeighted = {};
-
-    for (y in $scope.validations){
-        console.log($scope.validations[y].validation);
-        for (x in Object.keys($scope.validations[y].validation)){
-            if(!sumObj[Object.keys($scope.validations[y].validation)[x]]){sumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-            else{sumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-        //    $scope.validationList.push([Object.keys($scope.validations[y].validation)[x], $scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]]);
-        //    $scope.reputationList.push([Object.keys($scope.validations[y].reputation)[x], $scope.validations[y].reputation[Object.keys($scope.validations[y].reputation)[x]]]);
-        }
-
-    }
-
-    console.log(sumObj);
-
-    //STORE IN TIME MODEL
-    for (x in Object.keys(sumObj)){
-        //$scope.validationList.push([Object.keys(sumObj)[x], sumObj[Object.keys(sumObj)[x]]]);
-        $scope.validationColumn.series[0].data.push(sumObj[Object.keys(sumObj)[x]]/$scope.validations.length);
-        $scope.validationColumn.xAxis.categories.push(Object.keys(sumObj)[x]);
-
-    }
-
-    //HUMAN VALIDATED AI VERIFY? 
-    //VALID VS VERIFY
-
-    //UNIFY CONTENT AND TIME??
-    //TIME AS A TYPE
-   
     //TODO: BETTER
+    $scope.member = {};
     if($scope.currentUser){
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
             $scope.member = member;
@@ -150,23 +42,46 @@ angular.module( 'conexus.time', [
             $scope.reputation = member.reputation;
         });
     }
+    //PATCH!!!
+    $rootScope.associatedModels = [{
+        address: $scope.time.id,
+        type: 'TIME',
+    }];
+
+    //AS ASSOCIATIONS!
+    if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
+    if ($scope.time.task.tags){$scope.time.task.tags = $scope.time.task.tags.split(',')}
 
 
+    $scope.contentList = contentList;
+
+    $scope.newContent = {};
+    $scope.newReaction = {};
+    $scope.newValidation = {};
+    $scope.newValidation.validation = {}
+    $scope.validations = validations;
+
+    //HUMAN VALIDATED AI VERIFY? 
+    //VALID VS VERIFY
+
+    //UNIFY CONTENT AND TIME??
+    //TIME AS A TYPE
+   
     //DEPRECIATE
+    $scope.time.tokens = [];
+    $scope.time.tokens.push('TOKEN');
+
+    $scope.time.tokens.push('TIME');
+    $scope.time.tokens.push('TIME+'+$scope.time.id);
     if ($scope.time.task.tags){
         for (x in $scope.time.task.tags){
-            $scope.tokens.push($scope.time.task.tags[x].trim());
-            $scope.tokens.push('Task+'+$scope.time.task.tags[x].trim());
-            $scope.tokens.push('Task+'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim());
+            $scope.time.tokens.push($scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('TIME+'+$scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('TASK+'+$scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('TASK+'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
         }
     }
-
-    for (x in $scope.tokens){
-        $scope.tokens.push($scope.tokens[x]+'+onStream');
-        $scope.tokens.push($scope.tokens[x]+'+onValidation');
-    }
-
-
+   
     //DEPRECIATE
     $scope.createContent = function(content) {
         if ($scope.currentUser){
@@ -186,7 +101,6 @@ angular.module( 'conexus.time', [
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (index != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
@@ -197,25 +111,6 @@ angular.module( 'conexus.time', [
                 $scope.time.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    //TODO: LAYERS | PROJ BASED LAYER
-    //DEPRECIATE
-    $scope.createValidation = function(){
-        if ($scope.currentUser){
-            $scope.newValidation.work = $scope.time.id;
-            $scope.newValidation.user = $scope.currentUser.id;
-
-            //ASSOCIATEDMODELS
-
-            ValidationModel.create($scope.newValidation).then(function(model){
-                $scope.newValidation = {};
-                for (x in $scope.time.task.tags){
-                    $scope.newValidation.validation[$scope.time.task.tags[x]] = 0;
-                }
-            });
         }
         else{$mdSidenav('login').toggle()}
     };

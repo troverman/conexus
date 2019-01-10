@@ -11,6 +11,8 @@
 					<h5 style="text-align:right" ng-click="tokensToggle(validation)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
 				</div>
 
+				<h3> MODEL A <i class="fa fa-arrows-h"></i> MODEL B</h3>
+
 				<a href="member/{{validation.user.username}}">
 					<img class="card-avatar" src="{{validation.user.avatarUrl}}"/>
 					{{validation.user.username}}
@@ -18,8 +20,25 @@
 
 				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="validation.createdAt"></p>
 
-				<!--TODO: ABSTRACT MODEL-->
+				<!--TODO: ABSTRACT MODEL | POPULATE VALIDATIONS-->
+				<!--ERR-->
+				<p ng-repeat="model in validation.associatedModels">
+					<a href="{{model.type.toLowerCase()}}/{{model.address}}">{{model.type}} | {{model.address}}</a>
+				</p>
+				
+				<!--TAGS ARE ASSOCIATIONS. . -->
+				<!--
 				<p>time | <a href="time/{{validation.time}}">{{validation.time}}</a></p>
+				<p>task | <a href="time/{{validation.task}}">{{validation.task}}</a></p>
+				<p>project |</p>
+				<p>member | </p>
+				<p>item | </p>
+				<p>order | </p>
+				<p>transaction | </p>
+				<p>content | </p>
+				<p>validation | </p>
+				<p>validation (recursion) </p>
+				-->
 
 				<!--ASSOCIATION.. -->
 				<!--TODO: MANIFOLD-->

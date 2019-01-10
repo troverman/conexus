@@ -23,6 +23,7 @@ angular.module( 'conexus.task', [
             validations: ['ValidationModel', 'task', function(ValidationModel, task){
                 return ValidationModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
             }],
+            //associations
         }
     });
 }])

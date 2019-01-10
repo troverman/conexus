@@ -337,8 +337,6 @@ angular.module( 'conexus.nav', [
 
         $scope.item = item;
 
-        console.log(item);
-
         if (item.model == 'TASK'){
             $scope.assoicationFilter = [{text:'PROJECT | '+$scope.item.project.title}];
         }
@@ -347,7 +345,8 @@ angular.module( 'conexus.nav', [
         }
 
         //TODO: ASSOCIATION MODEL
-        ValidationModel.getSome('time', item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
+
+        ValidationModel.getSome(item.model.toLowerCase(), item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
 
             $scope.validationColumnRender = {
                 chart: {zoomType: 'x'},
@@ -485,6 +484,17 @@ angular.module( 'conexus.nav', [
 
     $rootScope.validationToggle = function(item){
 
+        //association anatomy . . 
+
+        //[{
+        //    type:'TASK',
+        //    address:item.id, 
+        //    context:{}
+        //}];
+
+
+        //TIME TO FINALLY DEPRECIATE ALL THE ISH! >:)
+
         //VALIDATIONS ARE BINARY!
 
         if($scope.currentUser){
@@ -508,7 +518,7 @@ angular.module( 'conexus.nav', [
                 if ($scope.item.project){
                     $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, type:'PROJECT',address:$scope.item.project.id, model:$scope.item.project}];
                 }
-                $scope.newValidation.associatedModels = [{type:'TASK',address:item.id}];
+                $scope.newValidation.associatedModels = [{type:'TASK',address:item.id, connections:{}}];
             }
 
             if ($scope.item.model == 'TIME'){
