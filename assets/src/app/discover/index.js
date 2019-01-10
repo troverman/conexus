@@ -119,9 +119,4 @@ angular.module( 'conexus.discover', [
 
     $scope.search = function(){};
 
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
-    };
-
 }]);

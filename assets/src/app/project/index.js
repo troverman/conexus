@@ -308,10 +308,6 @@ angular.module( 'conexus.project', [
         $mdSidenav('subNav').toggle();
     };
 
-    $scope.tokenToggle = function(item){
-        $mdSidenav('tokens').toggle();
-        //$rootScope.globalTokens = item;
-    };
 }])
 
 .controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $sce, $scope, $stateParams, config, lodash, project, titleService) {
@@ -1192,6 +1188,33 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.project = project;
 
+    $scope.tasks.map(function(obj){
+
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        //ONLY TIME PROTOCOL.. 
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TIME');
+        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
+        obj.tokens.push('CRE8+TIME+'+$scope.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.project.id);
+
+        if (obj.tags){
+            obj.tags = obj.tags.split(',');
+            for (x in obj.tags){
+                console.log(obj.tags[x])
+                obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
+                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
+                obj.tokens.push('CRE8+TIME+'+$scope.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.project.id+'+'+obj.tags[x].trim().toUpperCase());
+            }
+        }
+
+        //CREATE PROTOCOL .. VALIDATE PROTOCOL .. REACT PROTOCOL .. 
+
+        return obj;
+
+    });
+
+
     $scope.createReaction = function(item, type){
         if ($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -1219,10 +1242,7 @@ angular.module( 'conexus.project', [
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.tasks.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
+            return obj.tags;;
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
@@ -1261,7 +1281,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'ReactionModel', 'time', 'titleService', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, ReactionModel, time, titleService) {
+.controller( 'ProjectTimeCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'project', 'ReactionModel', 'time', 'titleService', function ProjectTimeController( $location, $sailsSocket, $scope, $stateParams, config, lodash, project, ReactionModel, time, titleService) {
     titleService.setTitle(project.title + ' | Time | CRE8.XYZ');
 
     $scope.eventSources = [];
@@ -1294,6 +1314,7 @@ angular.module( 'conexus.project', [
     $scope.newReaction = {};
     $scope.options = {scrollwheel: false};
     $scope.time = time;
+
     $scope.time = time.map(function(obj){
         var endTime = new Date(obj.createdAt)
         obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));

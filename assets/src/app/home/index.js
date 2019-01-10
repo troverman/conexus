@@ -102,8 +102,16 @@ angular.module( 'conexus.home', [
     $scope.tasks = tasks;
     $scope.time = time;
 
+    //TAGS TO ASSOCIATION | VALIDATION CONTEXT
+
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+CONTENT');
+        obj.tokens.push('CRE8+CONTENT+'+obj.id);
+        obj.tokens.push('CRE8+CONTENT+'+obj.type.toUpperCase());
         return obj;
     });
     $scope.projects = $scope.projects.map(function(obj){
@@ -111,12 +119,29 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',')}
         obj.model = 'TASK';
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TASK');
+        obj.tokens.push('CRE8+TASK+'+obj.id);
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TIME');
+        obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
+        if (obj.task.tags){
+            obj.task.tags = obj.task.tags.split(',');
+            for (x in obj.task.tags){
+                obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
+                obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+            }
+        }
         return obj;
     });
     
@@ -172,16 +197,7 @@ angular.module( 'conexus.home', [
     };
 
     $scope.createReaction = function(item, type){
-        if($scope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-        }
-        else{$mdSidenav('login').toggle()}
+        $mdSidenav('login').toggle();
     };
 
     //TODO: BETTER
@@ -192,10 +208,6 @@ angular.module( 'conexus.home', [
             $scope.activity = contentList;
             $scope.loadTags();
         });
-    };
-
-    $scope.loginToggle = function(){
-        $mdSidenav('login').toggle();
     };
 
     $scope.reply = function(item){
@@ -217,63 +229,7 @@ angular.module( 'conexus.home', [
         });
     };
 
-    //TODO: STORE IN DATA? 
-    //TODO: BUILD PROTOCOL
-    //TODO: AMOUNT
-    $scope.tokenToggle = function(item){
-
-        var tokens = [item.id];
-
-        if (item.model == 'CONTENT'){
-
-            tokens.push('CONTENT');
-
-            if (item.type){
-                tokens.push(item.type.toUpperCase());
-                tokens.push('CONTENT+'+item.type.toUpperCase());
-            }
-
-            if (item.tags){
-                for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x].toUpperCase());
-                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
-                }
-            }
-
-        }
-
-        if (item.model == 'TASK'){
-
-            tokens.push('TASK');
-
-            if (item.tags){
-                for (x in item.tags){
-                    tokens.push(item.tags[x].toUpperCase());
-                    tokens.push(item.id+'+'+item.tags[x].toUpperCase());
-                }
-            }
-        }
-
-        if (item.model == 'TIME'){
-
-            //TODO: AMOUNT
-            //item.amount
-            tokens.push('TIME');
-
-            if (item.tags){
-                for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x].toUpperCase());
-                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
-                }
-            }
-        }
-
-        $rootScope.globalTokens = tokens;
-        $mdSidenav('tokens').toggle();
-
-    };
-
-     //VALUE MAP CTA
+    //VALUE MAP CTA
     $scope.newMember = {};
     $scope.newOrder = [];
     $scope.showIntro = true;
@@ -339,6 +295,12 @@ angular.module( 'conexus.home', [
 
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+CONTENT');
+        obj.tokens.push('CRE8+CONTENT+'+obj.id);
+        obj.tokens.push('CRE8+CONTENT+'+obj.type.toUpperCase());
         return obj;
     });
     $scope.projects = $scope.projects.map(function(obj){
@@ -346,12 +308,29 @@ angular.module( 'conexus.home', [
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',')}
         obj.model = 'TASK';
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TASK');
+        obj.tokens.push('CRE8+TASK+'+obj.id);
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TIME');
+        obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
+        if (obj.task.tags){
+            obj.task.tags = obj.task.tags.split(',');
+            for (x in obj.task.tags){
+                obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
+                obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+            }
+        }
         return obj;
     });
     
@@ -559,23 +538,16 @@ angular.module( 'conexus.home', [
     };
 
     $scope.createReaction = function(item, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].reactions[type]++;
-
             ReactionModel.create($scope.newReaction);
-
         }
-
-        else{$mdSidenav('login').toggle()}
-            
+        else{$mdSidenav('login').toggle()}   
     };
 
     $scope.reply = function(item){
@@ -603,48 +575,6 @@ angular.module( 'conexus.home', [
 
     $scope.transactionToggle = function(){
         $mdSidenav('transaction').toggle();
-    };
-
-    //TODO: STORE IN DATA? 
-    //TODO: BUILD PROTOCOL
-    //TODO: AMOUNT
-    $scope.tokenToggle = function(item){
-        var tokens = [item.id];
-        if (item.model == 'CONTENT'){
-            tokens.push('CONTENT');
-            if (item.type){
-                tokens.push(item.type.toUpperCase());
-                tokens.push('CONTENT+'+item.type.toUpperCase());
-            }
-            if (item.tags){
-                for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x].toUpperCase());
-                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
-                }
-            }
-        }
-        if (item.model == 'TASK'){
-            tokens.push('TASK');
-            if (item.tags){
-                for (x in item.tags){
-                    tokens.push(item.tags[x].toUpperCase());
-                    tokens.push(item.id+'+'+item.tags[x].toUpperCase());
-                }
-            }
-        }
-        if (item.model == 'TIME'){
-            //TODO: AMOUNT
-            //item.amount
-            tokens.push('TIME');
-            if (item.tags){
-                for (x in item.tags.split(',')){
-                    tokens.push(item.tags.split(',')[x].toUpperCase());
-                    tokens.push(item.id+'+'+item.tags.split(',')[x].toUpperCase());
-                }
-            }
-        }
-        $rootScope.globalTokens = tokens;
-        $mdSidenav('tokens').toggle();
     };
 
 }]);

@@ -32,35 +32,46 @@ angular.module( 'conexus.tasks', [
     $scope.searchQuery = [];
 
     $scope.tasks.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',')}
+
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TIME');
+        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
+
+        if (obj.tags){
+            obj.tags = obj.tags.split(',');
+            for (x in obj.tags){
+                console.log(obj.tags[x])
+                obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
+                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
+            }
+        }
         return obj;
+
     });
+
+    console.log($scope.tasks)
 
     //TODO: ALL
     $scope.locations = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
 
-    $scope.map = {
-        center: {latitude: 35.902023, longitude: -84.1507067 },
-        zoom: 9
-    };
+    $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
     $scope.createReaction = function(item, type){
         if ($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
             var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
             if (taskIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
                 $scope.tasks[taskIndex].reactions[type]++;
                 ReactionModel.create($scope.newReaction);
-            }        
-            
+            }         
         }
         else{$mdSidenav('login').toggle();}
     };
@@ -80,12 +91,9 @@ angular.module( 'conexus.tasks', [
         });
     };
 
-     $scope.filterContent = function(filter) {
-
+    $scope.filterContent = function(filter) {
         //TODO: COMPLEX QUERY
-
         $scope.searchQuery.push({text:filter})
-
         $rootScope.stateIsLoading = true;
         TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
             $rootScope.stateIsLoading = false;
@@ -96,7 +104,6 @@ angular.module( 'conexus.tasks', [
             });
             $scope.loadAssociations();
             $scope.loadTags();
-
         });
     };
 
@@ -106,6 +113,7 @@ angular.module( 'conexus.tasks', [
     //$scope.associations = $scope.tasks.map(function(obj){
     //    return obj.project.title;
     //});
+
     $scope.loadAssociations = function(){
         $scope.associations = $scope.tasks.map(function(obj){
             if (obj.project){return obj.project.title;}
@@ -124,23 +132,17 @@ angular.module( 'conexus.tasks', [
             }
         }
         $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
+    };
     $scope.loadAssociations();
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
-
         $scope.tags = $scope.tasks.map(function(obj){
             return obj.tags;
         });
-
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-         
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -175,12 +177,10 @@ angular.module( 'conexus.tasks', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-
         //TODO: COMPLEX QUERY.. 
         var search = $scope.searchQuery.map(function(obj){
             return obj.text;
         })[0];
-
         TaskModel.getSome('search', search, 20, 0, 'createdAt DESC').then(function(tasks){
             console.log(tasks)
             $rootScope.stateIsLoading = false;
@@ -189,11 +189,6 @@ angular.module( 'conexus.tasks', [
                 return obj;
             });
         });
-    };
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('task', function (envelope) {

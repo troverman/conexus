@@ -52,9 +52,7 @@ angular.module( 'conexus.time', [
     if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
     if ($scope.time.task.tags){$scope.time.task.tags = $scope.time.task.tags.split(',')}
 
-
     $scope.contentList = contentList;
-
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newValidation = {};
@@ -63,22 +61,24 @@ angular.module( 'conexus.time', [
 
     //HUMAN VALIDATED AI VERIFY? 
     //VALID VS VERIFY
-
     //UNIFY CONTENT AND TIME??
     //TIME AS A TYPE
    
-    //DEPRECIATE
+    //TEMP HARDOCDE -- MOVE TO PROTOCOL
     $scope.time.tokens = [];
-    $scope.time.tokens.push('TOKEN');
+    $scope.time.tokens.push('CRE8');
+    $scope.time.tokens.push('CRE8+TIME');
+    $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id);
 
-    $scope.time.tokens.push('TIME');
-    $scope.time.tokens.push('TIME+'+$scope.time.id);
+    //VALIDATION IS THE CORE.. 
+    $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id);
+    $scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id);
     if ($scope.time.task.tags){
         for (x in $scope.time.task.tags){
-            $scope.time.tokens.push($scope.time.task.tags[x].trim().toUpperCase());
-            $scope.time.tokens.push('TIME+'+$scope.time.task.tags[x].trim().toUpperCase());
-            $scope.time.tokens.push('TASK+'+$scope.time.task.tags[x].trim().toUpperCase());
-            $scope.time.tokens.push('TASK+'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
+            $scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
         }
     }
    

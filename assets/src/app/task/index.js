@@ -32,12 +32,10 @@ angular.module( 'conexus.task', [
     $scope.currentUser = config.currentUser;
     $scope.task = task;
 
-    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',')}
-    //TODO: STORE IN DATA
-    $scope.task.model = 'TASK';
-    
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
+
+    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',')}
 
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
 
@@ -46,69 +44,55 @@ angular.module( 'conexus.task', [
         address: $scope.task.id,
         type: 'TASK',
     }];
+   
+    //TODO: STORE IN DATA
+    $scope.task.model = 'TASK';
+
+    //TEMP HARDCODE -- MOVE TO PROTOCOL
+    $scope.task.tokens = [];
+    $scope.task.tokens.push('CRE8');
+    $scope.task.tokens.push('CRE8+TASK');
+    $scope.task.tokens.push('CRE8+TASK+'+$scope.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.task.id);
+    if ($scope.task.tags){
+        for (x in $scope.task.tags){
+            $scope.task.tokens.push('CRE8+TASK+'+$scope.task.tags[x].trim().toUpperCase())
+            $scope.task.tokens.push('CRE8+TASK+'+$scope.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.task.id+'+'+$scope.task.tags[x].trim().toUpperCase())
+        }
+    }
 
     $scope.contentList = contentList;
-
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.question = false;
-
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
-
-    $scope.task.verificationScore = 0;
-    $scope.taskTime = 0;
     $scope.taskVerification = [];
     $scope.working = false;
-    $scope.totalTime = (Math.random()*1000000).toFixed(0);
     $scope.validations = validations;
-
-    console.log(validations);
-    
     $scope.verification = {};
+    $scope.taskTime = 0;
     $scope.time = time;
 
     //TODO: STORE IN DATA
     $scope.time.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}
         obj.model = 'TIME';
-        return obj
-    });
-
-    //TODO | TOKENS
-    $scope.tokens = [];
-    $scope.tokens.push('Token');
-    $scope.tokens.push('Task+Token');
-    $scope.tokens.push('Task+Token+'+$scope.task.id);
-    $scope.tokens.push('Task');
-    $scope.tokens.push('Task+'+$scope.task.id);
-    if ($scope.task.tags){
-        for (x in $scope.task.tags){
-            $scope.tokens.push($scope.task.tags[x].trim());
-            $scope.tokens.push('Task+'+$scope.task.tags[x].trim())
-            $scope.tokens.push('Task+'+$scope.task.id+'+'+$scope.task.tags[x].trim())
-
+        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        obj.tokens = [];
+        obj.tokens.push('CRE8');
+        obj.tokens.push('CRE8+TIME');
+        obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
+        //CONTEXT!
+        if (obj.task.tags){
+            obj.task.tags = obj.task.tags.split(',');
+            for (x in obj.task.tags){
+                obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
+                obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+            }
         }
-    }
-    for (x in $scope.tokens){
-        $scope.tokens.push($scope.tokens[x]+'+onStream');
-    }
-
-    function getAllSubsets(theArray) {
-      return theArray.reduce(function (subsets, value) {
-        return subsets.concat(subsets.map(function (set) {
-          return [value].concat(set);
-        }));
-      }, [[]]);
-    };
-
-    //$scope.test = [];
-    //$scope.test.push('Task');$scope.test.push($scope.task.id);$scope.test.push('onTimeStream')
-    //console.log(getAllSubsets($scope.test));
-    //$scope.tokens = getAllSubsets($scope.test);
-    //STORED AS A MATRIX; algabraic lattice. 
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
 
     $scope.askQuestion = function() {
         if ($scope.currentUser){$scope.question = true;}
@@ -128,37 +112,28 @@ angular.module( 'conexus.task', [
     };
 
     $scope.createReaction = function(item, type){
-
         if ($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
                 $scope.contentList[contentIndex].reactions[type]++;
             }
-
             var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
                 $scope.time[timeIndex].reactions[type]++;
             }
-
             else{
                 $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
                 $scope.task.reactions[type]++;
             }
-
             ReactionModel.create($scope.newReaction);
-
         }
-
         else{$mdSidenav('login').toggle();}
-
     };
 
     $scope.renderStream = function(stream){
@@ -216,7 +191,6 @@ angular.module( 'conexus.task', [
     //ASSOICATIONS .. TIME --> STREAM --> CONTENT
     //TYPE.. TIMER ETC
     $scope.submit = function() {
-        
         if($scope.working === false) return false;
         $scope.working = false; $scope.question = false; $scope.streaming = false;
         var timeModel = {
@@ -251,12 +225,10 @@ angular.module( 'conexus.task', [
                 update.id = $scope.streamingId;
                 update.time = model.id;
 
-
                 //CHANGE TO ASSOCIATIONS
                 //TODO
                 update.parent = model.id;
                 update.parentModel = 'time';
-
 
                 console.log(update);
                 ContentModel.update(update).then(function(contentModel){
@@ -267,32 +239,12 @@ angular.module( 'conexus.task', [
         
         $scope.taskTime=0;
         clearInterval($scope.interval);
-
     };
 
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
-    };
-
+    //TODO: BACKEND COUNTER..... 
     $scope.updateCount = function() {
         $scope.taskTime++;
         $scope.$apply();
-    };
-
-    //TODO: DEPRECIATE TOTAL 'WORK'
-    $scope.verifyTask = function(item, type) {
-        if ($scope.currentUser){
-            if (type == 'plus'){
-                $scope.taskVerification.push({user:$scope.currentUser, score:$scope.currentUser.totalWork});
-                $scope.task.verificationScore += parseFloat($scope.currentUser.totalWork);
-            }
-            if (type == 'minus'){
-                $scope.taskVerification.push({user:$scope.currentUser, score:-$scope.currentUser.totalWork});
-                $scope.task.verificationScore -= parseFloat($scope.currentUser.totalWork);
-            }
-        }
-        else{$mdSidenav('login').toggle();}
     };
 
     //TODO: STREAM??
@@ -341,7 +293,6 @@ angular.module( 'conexus.task', [
         var session = {audio: true, video: true};
         var recordRTC = null;
         navigator.getUserMedia(session, initializeRecorder, onError);
-
     };
 
     //TODO: WEBSOCKETS | WEB3

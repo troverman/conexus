@@ -1,14 +1,17 @@
-<div class="row" ng-show="tasks.length == 0">
-    <div class="card">
-        <div style="padding:16px;">
-            <span style="color:gray">There's nothing here..</span>
-        </div>
+<div class="row">
+
+	<div ng-show="tasks.length == 0">
+       <div class="card">
+		    <button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button>
+		</div>
+	    <div class="card">
+	        <div style="padding:16px;">
+	            <span style="color:gray">There's nothing here..</span>
+	        </div>
+	    </div>
     </div>
-</div>
 
-<div class="row" ng-show="tasks.length > 0">
-
-	<div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+	<div ng-show="tasks.length > 0" class="col-sm-2" style="padding-left:0px;padding-right:0px;">
         <div class="card">
             <div style="padding:16px;">
 				<span><b>Tags</b></span>
@@ -27,7 +30,7 @@
         </div>
     </div>
 
-    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
+    <div ng-show="tasks.length > 0" class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
     	<div class="card">
 	        <button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button>
@@ -61,7 +64,7 @@
 			<div class="card" ng-click="renderToggle(task)">
 				<div style="padding:16px;">
 					<div style="float:right">
-                        <h5 ng-click="$event.stopPropagation();tokenToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                        <h5 ng-click="$event.stopPropagation();tokensToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 					<h4 ng-click="$event.stopPropagation()"><a href="task/{{task.id}}">{{task.title}}</a></h4>
 					<p ng-click="$event.stopPropagation()"><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>

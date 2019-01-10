@@ -1,6 +1,17 @@
 
 <div class="row">
 
+    <div ng-show="activity.length == 0">
+        <div class="card">
+            <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Project Content</button>
+        </div>
+        <div class="card">
+            <div style="padding:16px;">
+                <span style="color:gray">There's nothing here..</span>
+            </div>
+        </div>
+    </div>
+
      <div ng-show="activity.length > 0" class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
         <div class="card">
             <div style="padding:16px;">
@@ -20,7 +31,7 @@
         </div>
     </div>
 
-    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
+    <div ng-show="activity.length > 0" class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Project Content</button>

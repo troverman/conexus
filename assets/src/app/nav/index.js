@@ -10,16 +10,13 @@ angular.module( 'conexus.nav', [
     $scope.outputVector = [];
     $scope.item = {};
     $scope.inverted = false;
-    
+    $scope.isInformation = false;
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedType = 'POST';
-
     $scope.validationColumnRender = {};
-
     //$rootScope.currentUser = config.currentUser;
 
     if ($scope.currentUser){
-
         $scope.newContent = {};
         $scope.newItem = {};
         $scope.newOrder = {};
@@ -30,22 +27,17 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction = {};
         $scope.newTransaction = {};
         $scope.newValidation = {};
-
         $scope.newTransaction.from = [{text:$scope.currentUser.username, id:$scope.currentUser.id}];
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
-
         $scope.notificationCount = 0;
         //$scope.notifications = 0;
-
         //TODO: BETTER
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
             $scope.memberValidate = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
         });
-
     }
-
 
     //TODO: FACTOR LOADING HERE
     $rootScope.$on("$stateChangeStart", function() {
@@ -101,7 +93,6 @@ angular.module( 'conexus.nav', [
 
         //$rootScope.memberUsername = null;
         //$rootScope.projectTitle = null;
-
     });
     
     $rootScope.$on("$stateChangeSuccess", function() {window.scrollTo(0, 0)});
@@ -182,7 +173,7 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO! IMPORTANT
-   $scope.loadTags = function(query){
+    $scope.loadTags = function(query){
         console.log(query);
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
@@ -200,39 +191,24 @@ angular.module( 'conexus.nav', [
     //OVERKILL
     $rootScope.contentToggle = function(){
         if($scope.currentUser){
-
-
-
-
             //TODO: ASSOCIATED 
-
-
             //HM!
             $scope.newContent = {};
             $scope.newContent.associatedModels = $rootScope.associatedModels;
             console.log($scope.newContent);
-
             //if ($scope.newContent.associatedModels){$scope.newContent.associatedModels.push({text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id});}
             //else{$scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id}];}
-
             $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
                 obj.text = obj.type+' | '+obj.address;
                 return obj;
             });
-
             console.log($scope.newContent.associatedModels);
-
-
-
-
-
             $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };
 
     $rootScope.filterToggle = function(type){
-
         //POSTIONS / MARKETS
         //LEDGER
         $scope.type = type;
@@ -249,7 +225,6 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $scope.isInformation = false;
     $rootScope.informationToggle = function(item){
         $mdSidenav('information').toggle();
         $scope.isInformation = true;
@@ -274,18 +249,15 @@ angular.module( 'conexus.nav', [
 
     //TODO
     $rootScope.renderToggle = function(item){
-
         console.log(item);
         $scope.item = item;
         $scope.content = item;
-
         //PATCH
         if ($scope.item.tags){
             if (!Array.isArray($scope.item.tags)){
                 $scope.item.tags = $scope.item.tags.split(',');
             }
         }
-
         //PATCH
         if ($scope.item.task){
             if ($scope.item.task.tags){
@@ -294,9 +266,7 @@ angular.module( 'conexus.nav', [
                 }
             }
         }
-
         //GET CHILDREN && || TIME... ASSOCIATIONS.. NEED TO FINISH ASSOCIATED SO I DONT KEEP REWRITING.. 
-
         function populateChildren(contentList, depth, limit){
             contentList.forEach(function(content) {
                 ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
@@ -310,16 +280,12 @@ angular.module( 'conexus.nav', [
                 });
             });
         }
-
         //TODO TYPE.. 
         ContentModel.getSome('contentModel', item.id, 100, 0, 'createdAt DESC').then(function(contentList){
             console.log(contentList)
             populateChildren(contentList, 0, 5);
-
-        })
-     
+        });
         $mdSidenav('render').toggle();
-
     };
     
     $rootScope.renderContent = function(item){
@@ -345,7 +311,6 @@ angular.module( 'conexus.nav', [
         }
 
         //TODO: ASSOCIATION MODEL
-
         ValidationModel.getSome(item.model.toLowerCase(), item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
 
             $scope.validationColumnRender = {
@@ -403,16 +368,13 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.renderReputationToggle = function(item){
-
         $scope.item = item;
         if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
         if (item.user){$scope.reputation = item.user.reputation}
-
         //BUG
         console.log(item);
         if (item.follower){$scope.reputation = item.follower.reputation;$scope.item.user = item.follower}
         if (item.followed){$scope.reputation = item.followed.reputation;$scope.item.user = item.followed}
-
         $scope.chart = {
             chart: {zoomType: 'x'},
             series: [{
@@ -463,15 +425,8 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.tokensToggle = function(item){
-
-        //ENCODE PROTOCOLS.. 
-        //UNIFY THIS.. REMOVE GLOBAL TOKENS
-        //$scope.tokens = item;
-        if (item.tokens){
-            $rootScope.globalTokens = item.tokens
-        }
-
-        //TRAVERSAL FOR TOKENS AND TOKENS ASSOCIATIONS -- COMPLETE PIC
+        $scope.tokens = []
+        if (item.tokens){$scope.tokens = item.tokens;}
         $mdSidenav('tokens').toggle();
     };
 
@@ -481,26 +436,18 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: CHANGE FROM ADDRESS TO ID
-
     $rootScope.validationToggle = function(item){
-
         //association anatomy . . 
-
         //[{
         //    type:'TASK',
         //    address:item.id, 
         //    context:{}
         //}];
-
-
         //TIME TO FINALLY DEPRECIATE ALL THE ISH! >:)
-
         //VALIDATIONS ARE BINARY!
-
         if($scope.currentUser){
 
             $scope.item = item;
-
             console.log($scope.item);
 
             //DOESNT REALLY WORK.. 
@@ -580,84 +527,63 @@ angular.module( 'conexus.nav', [
     //$rootScope.createView = function(){};
 
     //TODO: ASSOCIATED MODELS
-    //TODO: PARESE INPUT | TEST CREATE
     $scope.createContent = function(item) {
         if ($scope.currentUser){
-
             //RENDER | nested Reply
-            if(item){
-                console.log('sup');
-                $scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];
-            }
-
+            if(item){$scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];}
             $scope.newContent.type = $scope.selectedType;
             $scope.newContent.user = $scope.currentUser.id;
-
             if ($scope.newContent.tags){
                 $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-
             //PATCH!!!
             if ($scope.newContent.associatedModels){
                 for (x in $scope.newContent.associatedModels){
                     $scope.newContent[$scope.newContent.associatedModels[x].type.toLowerCase()] = $scope.newContent.associatedModels[x].address
                 }
             }
-
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
             console.log($scope.newContent);
-
             ContentModel.create($scope.newContent).then(function(model) {
-
                 $scope.confirm = $scope.newContent;
                 $scope.confirm.modelType = 'CONTENT';
-
                 $scope.newContent = {};
                 $mdSidenav('content').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
 
     $scope.createItem = function(content) {
         if ($scope.currentUser){
-
             $scope.newItem.user = $scope.currentUser.id;
-
             if ($scope.newItem.tags){
                 $scope.newItem.tags = $scope.newItem.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-
             //PATCH!!!
             if ($scope.newItem.associatedModels){
                 for (x in $scope.newItem.associatedModels){
                     $scope.newItem[$scope.newItem.associatedModels[x].type.toLowerCase()] = $scope.newItem.associatedModels[x].address
                 }
             }
-
             ItemModel.create($scope.newItem).then(function(model) {
-
                 $scope.confirm = $scope.newItem;
                 $scope.confirm.modelType = 'ITEM';
-
                 $scope.newItem = {};
                 $mdSidenav('item').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
     
-    //TODO: PARESE INPUT | TEST CREATE
     $scope.createOrder = function(content) {
         if ($scope.currentUser){
 
@@ -702,16 +628,13 @@ angular.module( 'conexus.nav', [
     //TODO: MOVE TO ASSOCIATED MODELS
     $scope.createProject = function(content) {
         if ($scope.currentUser){
-
             if ($scope.newProject.tags){
                 $scope.newProject.tags = $scope.newProject.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-
             //NOT ON FRONTEND
             $scope.newProject.user = $scope.currentUser.id;
-
             //PATCH!!!
             if ($scope.newProject.associatedModels){
                 if ($scope.newProject.associatedModels[0]){
@@ -720,14 +643,10 @@ angular.module( 'conexus.nav', [
                     }
                 }
             }
-
             console.log($scope.newProject);
-
             ProjectModel.create($scope.newProject).then(function(model) {
-
                 $scope.confirm = $scope.newProject;
                 $scope.confirm.modelType = 'PROJECT';
-
                 $scope.newProject = {};
                 $mdSidenav('project').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
@@ -738,7 +657,7 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //MORE ON RENDER
+    //TODO: MORE ON RENDER
     $scope.createReaction = function(item, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -751,32 +670,24 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: PARESE INPUT | TEST CREATE
     $scope.createTask = function(content) {
         if ($scope.currentUser){
-
             $scope.newTask.user = $scope.currentUser.id;
-            
             if ($scope.newTask.tags){
                 $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-
             //PATCH!!!
             if ($scope.newTask.associatedModels){
                 for (x in $scope.newTask.associatedModels){
                     $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].address
                 }
             }
-
             console.log($scope.newTask);
-
             TaskModel.create($scope.newTask).then(function(model) {
-
                 $scope.confirm = $scope.newTask;
                 $scope.confirm.modelType = 'TASK';
-
                 $scope.newTask = {};
                 $mdSidenav('task').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
@@ -786,33 +697,25 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: PARESE INPUT | TEST CREATE
     $scope.createTime = function(){
         if($scope.currentUser){
-
             $scope.newTime.user = $scope.currentUser.id;
             $scope.newTime.createdAt = $scope.newTime.startTime;
-
             if ($scope.newTime.tags){
                 $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-
             //PATCH!!!
             if ($scope.newTime.associatedModels){
                 for (x in $scope.newTime.associatedModels){
                     $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address
                 }
             }
-
             console.log($scope.newTime);
-
             TimeModel.create($scope.newTime).then(function(model){
-
                 $scope.confirm = $scope.newTime;
                 $scope.confirm.modelType = 'TIME';
-
                 $scope.newTime = {};
                 $mdSidenav('time').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
@@ -822,43 +725,30 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: PARESE INPUT | TEST CREATE
     $scope.createTransaction = function(){
         if ($scope.currentUser){
-
             $scope.newTransaction.user = $scope.currentUser.id
-
             if ($scope.newTransaction.tags){
                 $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
                     return obj.text
                 }).join(",");
             }
-
-            console.log($scope.newTransaction);
-
             $scope.newTransaction.from = $scope.newTransaction.from[0].id;
             $scope.newTransaction.to = $scope.newTransaction.to[0].id;
-
             console.log($scope.newTransaction);
-
             //information in amountset
-
             TransactionModel.create($scope.newTransaction).then(function(model){
-
                 $scope.confirm = $scope.newTransaction;
                 $scope.confirm.modelType = 'TRANSACTION';
-
                 $scope.newTransaction = {};
                 $mdSidenav('transaction').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
-
             });
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
 
-    //TODO: PARESE INPUT | TEST CREATE
     $scope.createValidation = function(){
         if ($scope.currentUser){
             //TODO 
@@ -871,16 +761,13 @@ angular.module( 'conexus.nav', [
             }
             console.log($scope.newValidation);
             ValidationModel.create($scope.newValidation).then(function(model) {
-
                 $scope.confirm = $scope.newValidation;
                 $scope.confirm.modelType = 'VALIDATION';
-
                 $scope.newValidation = {};
                 $mdSidenav('validation').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -899,6 +786,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('login').toggle();
     };
 
+    //TODO
     $scope.marketTraverse = function(){
         $scope.outputMatix = [];
         if ($scope.outputVector.length > 0){
@@ -913,15 +801,13 @@ angular.module( 'conexus.nav', [
         }
     };
 
+    //TODO
     $scope.reply = function(item){
-
         //var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
         //location[0].value.showReply = !location[0].value.showReply;
         //updateObject($scope.content, location[0].value, location[0].path);
         $scope.item.showReply = !$scope.item.showReply;
-
     };
-
 
     $scope.sideNavToggle = function(){
         $mdSidenav('subNav').close();

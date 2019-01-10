@@ -1120,7 +1120,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<div style=\"float:right\">\n" +
-    "                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                </div>\n" +
     "\n" +
     "				<h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
@@ -1323,7 +1323,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                            <a ng-show=\"item.time\" style=\"display:inline;font-weight:600\" href=\"time/{{item.time}}\" ng-click=\"$event.stopPropagation()\" >time {{item.time}}</a>\n" +
     "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "                            <p ng-click=\"tokenToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "                        </div>\n" +
@@ -1367,7 +1367,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"renderToggle(item)\">\n" +
     "                    <div style=\"padding:16px;\">\n" +
     "                        <div style=\"float:right\">\n" +
-    "                            <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                        </div>\n" +
     "                        <h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                        <p><a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
@@ -1407,9 +1407,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                        </div>\n" +
     "\n" +
-    "                        <p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\">\n" +
-    "                            <a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a>\n" +
-    "\n" +
+    "                        <p ng-show=\"item.task.tags > 0\" style=\"margin-left:42px\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.task.tags\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a>\n" +
     "                        </p>\n" +
     "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "\n" +
@@ -1693,7 +1692,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
     "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                            \n" +
-    "                            <p ng-click=\"tokenToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "                        </div>\n" +
     "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
@@ -1736,7 +1735,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"renderToggle(item)\">\n" +
     "                    <div style=\"padding:16px;\">                            \n" +
     "                        <div style=\"float:right\">\n" +
-    "                            <h5 style=\"text-align:right\" ng-click=\"tokenToggle(item);$event.stopPropagation()\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <h5 style=\"text-align:right\" ng-click=\"tokensToggle(item);$event.stopPropagation()\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                        </div>\n" +
     "                        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                        <p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
@@ -1764,12 +1763,12 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
     "                            <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "\n" +
-    "                            <p ng-click=\"$event.stopPropagation();tokenToggle(item)\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p ng-click=\"$event.stopPropagation();tokensToggle(item)\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "                        </div>\n" +
     "\n" +
-    "                        <p ng-click=\"$event.stopPropagation()\" ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
+    "                        <p ng-click=\"$event.stopPropagation()\" ng-show=\"item.task.tags > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
     "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "\n" +
     "                    </div>\n" +
@@ -4634,22 +4633,40 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <h3 style=\"\">Tokens</h3>\n" +
-    "                <p>Tokens distributed on action.<p>\n" +
+    "                <div style=\"padding:16px\">\n" +
+    "                    <h1>Tokens</h1>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "            </div>\n" +
     "\n" +
-    "                <h4 style=\"\">Protocols</h4>\n" +
-    "                <p>Content Protocol, Data Protocol, Project Protocol, Reaction Protocol, Task Protocol, Time Protocol, Validation Protocol</p>\n" +
+    "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "                <h4 style=\"\">Protocols <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h4>\n" +
+    "\n" +
+    "                <p>\n" +
+    "                    <a>Content Protocol</a>, \n" +
+    "                    <a>Data Protocol</a>,\n" +
+    "                    <a>Project Protocol</a>, \n" +
+    "                    <a>Reaction Protocol</a>,\n" +
+    "                    <a>Task Protocol</a>, \n" +
+    "                    <a>Time Protocol</a>, \n" +
+    "                    <a>Validation Protocol</a>\n" +
+    "                </p>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "                <table class=\"table table-striped table-hover\">\n" +
     "                    <thead>\n" +
     "                        <tr><th>Manifold and Action Table</th></tr>\n" +
     "                    </thead>\n" +
     "                    <tbody>\n" +
-    "                        <tr ng-repeat=\"token in globalTokens\">\n" +
+    "                        <tr ng-repeat=\"token in tokens\">\n" +
     "                            <td><a href=\"market/{{token}}\">{{token}}</a></td>\n" +
     "                        </tr>\n" +
     "                    </tbody>\n" +
@@ -5241,6 +5258,17 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
   $templateCache.put("project/templates/activity.tpl.html",
     "<div class=\"row\">\n" +
     "\n" +
+    "    <div ng-show=\"activity.length == 0\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Project Content</button>\n" +
+    "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
     "     <div ng-show=\"activity.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -5260,7 +5288,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-show=\"activity.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "        <div class=\"card\">\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Project Content</button>\n" +
@@ -5583,16 +5611,20 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
 
 angular.module("project/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/content.tpl.html",
-    "<div class=\"row\" ng-show=\"contentList.length == 0\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "<div class=\"row\">\n" +
+    "\n" +
+    "    <div ng-show=\"contentList.length == 0\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
+    "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"row\" ng-show=\"contentList.length > 0\">\n" +
-    "    <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-show=\"contentList.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
@@ -5602,7 +5634,8 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "    <div ng-show=\"contentList.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
@@ -6039,17 +6072,20 @@ angular.module("project/templates/settings.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
-    "<div class=\"row\" ng-show=\"tasks.length == 0\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <span style=\"color:gray\">There's nothing here..</span>\n" +
-    "        </div>\n" +
+    "<div class=\"row\">\n" +
+    "\n" +
+    "	<div ng-show=\"tasks.length == 0\">\n" +
+    "       <div class=\"card\">\n" +
+    "		    <button class=\"btn btn-default log-btn\" ng-click=\"taskToggle()\">+ Task</button>\n" +
+    "		</div>\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <div style=\"padding:16px;\">\n" +
+    "	            <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"row\" ng-show=\"tasks.length > 0\">\n" +
-    "\n" +
-    "	<div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "	<div ng-show=\"tasks.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "				<span><b>Tags</b></span>\n" +
@@ -6068,7 +6104,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-show=\"tasks.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "    	<div class=\"card\">\n" +
     "	        <button class=\"btn btn-default log-btn\" ng-click=\"taskToggle()\">+ Task</button>\n" +
@@ -6102,7 +6138,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "			<div class=\"card\" ng-click=\"renderToggle(task)\">\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<div style=\"float:right\">\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();tokenToggle(task)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(task)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "					<h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "					<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
@@ -6134,7 +6170,15 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
   $templateCache.put("project/templates/time.tpl.html",
     "<div class=\"row\">\n" +
     "\n" +
-    "    <div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-show=\"time.length == 0\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span style=\"color:gray\">There's nothing here..</span>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-show=\"time.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
@@ -6153,7 +6197,7 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-show=\"time.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "        <div class=\"card\">\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
@@ -6208,7 +6252,6 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "    		    </div>\n" +
     "            </div>\n" +
     "    	</div>\n" +
-    "\n" +
     "\n" +
     "    </div>\n" +
     "\n" +
@@ -6830,7 +6873,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"padding:16px\">\n" +
     "                <div class=\"col-sm-12\" style=\"padding:16px\">\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
-    "                        <h5 ng-click=\"tokenToggle()\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <h5 ng-click=\"tokensToggle(task)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                        <h5 ng-click=\"renderValidationToggle(task)\"><a href=\"#\">Validations & Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "                    <h3>{{task.title}}</h3>\n" +
@@ -7111,7 +7154,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div style=\"padding:16px;\">\n" +
     "\n" +
     "						<div style=\"float:right\">\n" +
-    "		                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "		                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "		                </div>\n" +
     "\n" +
     "						<h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
