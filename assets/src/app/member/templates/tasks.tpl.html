@@ -59,7 +59,7 @@
 			<div class="card" ng-click="renderToggle(task)">
 				<div style="padding:16px;">
 					<div style="float:right">
-                        <h5 ng-click="$event.stopPropagation();tokenToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                        <h5 ng-click="$event.stopPropagation();tokensToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 					<h4 ng-click="$event.stopPropagation()"><a href="task/{{task.id}}">{{task.title}}</a></h4>
 					<p ng-click="$event.stopPropagation()"><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>

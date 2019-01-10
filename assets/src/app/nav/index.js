@@ -101,9 +101,8 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction.to = [{text:$rootScope.to, id:$rootScope.to}];
     });
 
-    //TODO: BETTER
-    $scope.$watch('$root.globalTokens', function() {
-        $scope.inputVector = $rootScope.globalTokens;
+    $scope.$watch('tokens', function() {
+        $scope.inputVector = $scope.tokens;
         $scope.outputMatix = [];
         $scope.outputVector = [];
     });
@@ -227,6 +226,7 @@ angular.module( 'conexus.nav', [
 
     $rootScope.informationToggle = function(item){
         $mdSidenav('information').toggle();
+        $scope.informationType = item;
         $scope.isInformation = true;
     };
 

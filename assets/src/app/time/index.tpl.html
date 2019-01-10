@@ -8,11 +8,6 @@
 
 <div class="container">
 
-	<!--TODO: TOKEN CLARITY-->
-	<!--VERIFICATION BASED TOKEN LIQUIDITY | TAGS, DIMENSIONAL VERIFICATION-->
-	<!--time.id tokens are given 'bridge' liquidity to time.task.id tokens as verification | you get time.task.id tokens on verification | minting is based on verification protocol-->
-	<!--does verification give liquidity to time.id tokens?--> <!--verification as staking?-->
-
 	<div class="spacing-10"></div>
 
 	<div class="row" ng-show="!time.stream">
@@ -35,10 +30,12 @@
 					<h5 ng-click="tokensToggle(time)"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
 					<h5 ng-click="renderValidationToggle(time)"><a href="#">Validations & Associations <i class="fa fa-question-circle"></i></a></h5>
 				</div>
-				<h3><a href="task/{{time.task.id}}">{{time.task.title}}</a></h3>
+
+				<!--<h3>Associations</h3>
+				<h3><a href="task/{{time.task.id}}">{{time.task.title}}</a></h3>-->
+
 				<h4>{{time.amount}}, <span style="font-size:10px;color:gray">{{(time.amount/60).toFixed(2)}} minutes, <span style="font-size:10px;color:gray">{{(time.amount/3600).toFixed(2)}} hours</span></h4>
                 
-
                 <p><a ng-repeat="tag in time.task.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
 
 				<p><a ng-repeat="tag in time.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>

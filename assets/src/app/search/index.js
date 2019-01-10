@@ -69,7 +69,6 @@ angular.module( 'conexus.search', [
             var index = $scope.searchResults.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.searchResults[index].reactions[type]++;
             ReactionModel.create($scope.newReaction);
-
         }
         else{$mdSidenav('login').toggle()}   
     };
@@ -85,10 +84,5 @@ angular.module( 'conexus.search', [
             $location.path('search/'+$scope.searchQuery.search, false);
         });
     };
-
-    $scope.tokenToggle = function(){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
-    };
-   
+ 
 }]);

@@ -16,7 +16,7 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Create content. Well developed content earns more tokens. <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Create content. Well developed content earns more tokens. <a ng-click="informationToggle('CREATECONTENT')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createContent()">
                     <h5>Title</h5>
@@ -25,7 +25,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="newContent.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
-                    <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Associations <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newContent.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
@@ -86,7 +86,7 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Items connect with Token Protocols and 2nd Stage delivery applications. <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Items connect with Token Protocols and 2nd Stage delivery applications. <a ng-click="informationToggle('CREATEITEM')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createItem()">
                     <h5>Title</h5>
@@ -95,7 +95,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="newItem.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
-                    <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Associations <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
@@ -103,11 +103,11 @@
                     <input placeholder="IdentiferSet" type="text" ng-model="newItem.location" class="form-control">
                     <h5>Tradable</h5>
                     <md-switch ng-model="tradable" aria-label="GPS Tracking"></md-switch>
-                    <h5>Identifer Set <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Identifer Set <a ng-click="informationToggle('IDENTIFERSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
-                    <h5>Amount Set <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Amount Set <a ng-click="informationToggle('AMOUNTSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
-                    <h5>Delivery Protocol <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Delivery Protocol <a ng-click="informationToggle('DELIVERYPROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <text-angular ng-model="newItem.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
@@ -201,7 +201,7 @@
             <div style="padding:16px">
 
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click="informationToggle('CREATEORDER')" href="#"><i class="fa fa-question-circle"></i></a></p>
 
                 <div class="spacing-10"></div>
                
@@ -214,7 +214,7 @@
                             <h5>
                                 <span ng-show="!identiferSetAlpha">Asset Identifer Set α</span>
                                 <span ng-repeat="market in identiferSetAlpha">{{market.text}} </span> 
-                                <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a>
+                                <a ng-click="informationToggle('IDENTIFERSETALPHA')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
                             <tags-input min-length="1" placeholder="Asset Identifer Set α" ng-model="identiferSetAlpha">
                                 <auto-complete source="loadTags($query)"></auto-complete>
@@ -239,7 +239,7 @@
                             <h5>
                                 <span ng-show="!identiferSetBeta">Asset Identifer Set β</span>
                                 <span ng-repeat="market in identiferSetBeta">{{market.text}} </span> 
-                                <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a>
+                                <a ng-click="informationToggle('IDENTIFERSETBETA')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
                             <tags-input min-length="1" placeholder="Asset Identifer Set β" ng-model="identiferSetBeta">
                                 <auto-complete source="loadTags($query)"></auto-complete>
@@ -270,10 +270,10 @@
 
                         <div class="col-sm-12" style="marking:10px">
                             <ul class="nav nav-pills nav-justified contentTyle">
-                                <li ng-class="{active: selectedOrderType=='ONBOOKS'}" ng-click="selectOrderType('ONBOOKS')"><a href="#">Market onBooks <i ng-click="informationToggle()" class="fa fa-question-circle"></i></a></li>
-                                <li ng-class="{active: selectedOrderType=='FILLORKILL'}" ng-click="selectOrderType('FILLORKILL')"><a href="#">Market Fill Or Kill <i ng-click="informationToggle()" class="fa fa-question-circle"></i></a></li>
-                                <li ng-class="{active: selectedOrderType=='IMMEDIATEORCANCEL'}" ng-click="selectOrderType('IMMEDIATEORCANCEL')"><a href="#">Immediate or Cancel <i ng-click="informationToggle()" class="fa fa-question-circle"></i></a></li>
-                                <li ng-class="{active: selectedOrderType=='LIMIT'}" ng-click="selectOrderType('LIMIT')"><a href="#"> Limit <i ng-click="informationToggle()" class="fa fa-question-circle"></i></a></li>
+                                <li ng-class="{active: selectedOrderType=='ONBOOKS'}" ng-click="selectOrderType('ONBOOKS')"><a href="#">Market onBooks <i ng-click="informationToggle('ONBOOKSORDER')" class="fa fa-question-circle"></i></a></li>
+                                <li ng-class="{active: selectedOrderType=='FILLORKILL'}" ng-click="selectOrderType('FILLORKILL')"><a href="#">Market Fill Or Kill <i ng-click="informationToggle('FILLORKILL')" class="fa fa-question-circle"></i></a></li>
+                                <li ng-class="{active: selectedOrderType=='IMMEDIATEORCANCEL'}" ng-click="selectOrderType('IMMEDIATEORCANCEL')"><a href="#">Immediate or Cancel <i ng-click="informationToggle('IMMEDIATEORCANCEL')" class="fa fa-question-circle"></i></a></li>
+                                <li ng-class="{active: selectedOrderType=='LIMIT'}" ng-click="selectOrderType('LIMIT')"><a href="#"> Limit <i ng-click="informationToggle('LIMIT')" class="fa fa-question-circle"></i></a></li>
                             </ul>
                         </div>
 
@@ -328,7 +328,7 @@
             <div style="padding:16px">
 
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">A Project is a Self-Governing collective of individuals. <a ng-click="informationToggle('yo')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">A Project is a Self-Governing collective of individuals. <a ng-click="informationToggle('CREATEPROJECT')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
 
                 <form role="form" ng-submit="createProject()">
@@ -338,7 +338,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="newProject.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
-                    <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Associations <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newProject.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
@@ -451,7 +451,7 @@
             <div class="page-heading">
                 <div class="spacing-25"></div>
                 <div style="padding:16px">
-                    <h1>Validations & Associations</h1>
+                    <h1>Associations & Validations</h1>
                 </div>
                 <div class="spacing-25"></div>
             </div>
@@ -459,19 +459,12 @@
 
                 <div>
                         
-                    <h3 ng-if="item.model=='TIME'">{{item.amount}}</h3>
-                    <h3 ng-if="item.model=='TASK'">{{item.title}}</h3>
-
-                    <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
-                        <auto-complete source="loadAssociations($query)"></auto-complete>
-                    </tags-input>
-
-                    <!--DROPDOWN?-->
-                    <!--<p ng-repeat="model in associatedModels">{{model}}</p>-->
-                    
-                    <br><br>
-
                     <div ng-if="item.model=='TIME'">
+                        <h3>{{item.amount}} <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></h3>
+                        <h3><a href="task/{{item.task.id}}">{{item.task.title}}</a></h3>
+
+
+                        <!--WIP-->
                         <h4>
                             {{item.amount}}
                             <i class="fa fa-angle-double-left"></i>
@@ -490,48 +483,34 @@
                             {{item.amount}} 
                             <i class="fa fa-arrows-h"></i> 
                             {{item.project.title}}
-                        </h4> 
-                    </div>
+                        </h4>
 
+
+                    </div>
                     <div ng-if="item.model=='TASK'">
+                        <h3>{{item.title}} <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></h3>
+                        <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>
+
                         <h4>
                             {{item.title.toUpperCase()}} 
                             <i class="fa fa-arrows-h"></i> 
                             {{item.project.title.toUpperCase()}}
                         </h4>
+
                     </div>
 
+                    <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
+
+                    <!--DROPDOWN?-->
+                    <!--<p ng-repeat="model in associatedModels">{{model}}</p>-->
+
+                    <div class="spacing-15"></div>
+                    <div style="text-align:center"><img src="https://i.stack.imgur.com/PnXIo.png"/></div>
+                    <div class="spacing-15"></div>
 
                     <br><br>
-
-                    <!--WIP TOKENS ? JUST DELET-->
-                    <!--
-                    <p>{{item.amount}}xTIME</p>
-                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{tag.trim().toUpperCase()}}+TIME, </span>
-                    -->
-
-                    <!--
-                    <span ng-repeat="tag in item.task.tags.split(',')">
-                        <h4>
-                            {{item.amount}}
-                            <i class="fa fa-angle-double-left"></i>
-                            {{validationSumObj[tag]/validations.length}}
-                            <i class="fa fa-angle-double-right"></i>
-                            {{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}
-                        </h4>
-                    </span>
-                    <p>{{item.amount}}x{{item.task.title.toUpperCase()}}+TIME</p>
-                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
-                    -->
-
-                    <!--<p>{{item.amount}}x{{item.project.title.toUpperCase()}}+TIME, {{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}, {{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+TIME</p>-->
-
-                    <!--PROJECT CONTENT SPECIFIC TAGS? .. .. BASED ON VALIDATION SO YEAH. -->
-                    <!--
-                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
-                    <span ng-repeat="tag in item.task.tags.split(',')">{{item.amount}}x{{item.project.title.toUpperCase()}}+{{item.task.title.toUpperCase()}}+{{tag.trim().toUpperCase()}}+TIME, </span>
-                    -->
-                
 
                 </div>
 
@@ -621,7 +600,7 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Tasks create linkages with Time & Token Protocols. <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Tasks create linkages with Time & Token Protocols. <a ng-click="informationToggle('CREATETASK')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createTask()">
                     <h5>Title</h5>
@@ -630,7 +609,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="newTask.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
-                    <h5>Associations <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Associations <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTask.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
@@ -656,7 +635,7 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click="informationToggle('CREATETIME')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createTime()">
 
@@ -668,7 +647,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
-                    <h5>Associations (Task) <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Associations (Task) <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
@@ -697,24 +676,35 @@
 
                 <div class="spacing-15"></div>
 
-                <h4 style="">Protocols <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></h4>
+                <h4 style="">Protocols <a ng-click="informationToggle('PROTOCOLS', 'GENERAL', item)" href="#"><i class="fa fa-question-circle"></i></a></h4>
 
+                <!--REPEAT IN item.protocols-->
                 <p>
-                    <a>Content Protocol</a>, 
-                    <a>Data Protocol</a>,
-                    <a>Project Protocol</a>, 
-                    <a>Reaction Protocol</a>,
-                    <a>Task Protocol</a>, 
-                    <a>Time Protocol</a>, 
-                    <a>Validation Protocol</a>
+                    <!--<a ng-repeat="protocol in item.protocols" href="#"></a>-->
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Content Protocol</a>, 
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Data Protocol</a>,
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Project Protocol</a>, 
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Reaction Protocol</a>,
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Task Protocol</a>, 
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Time Protocol</a>, 
+                    <a ng-click="informationToggle('PROTOCOLS')" href="#">Validation Protocol</a>
                 </p>
 
-                <div class="spacing-15"></div>
+                <div class="spacing-5"></div>
+
+                <!--<ul class="nav nav-pills nav-justified contentTyle">
+                    <li ng-class="{active: selectedType=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Content</a></li>
+                    <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Task</a></li>
+                    <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Time</a></li>
+                    <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Validation</a></li>
+                </ul>-->
+
+                <tags-input min-length="1" ng-model="tokenFilter" placeholder="Token Manifold"></tags-input>
 
                 <table class="table table-striped table-hover">
-                    <thead>
+                    <!--<thead>
                         <tr><th>Manifold and Action Table</th></tr>
-                    </thead>
+                    </thead>-->
                     <tbody>
                         <tr ng-repeat="token in tokens">
                             <td><a href="market/{{token}}">{{token}}</a></td>
@@ -725,30 +715,60 @@
                 <div class="spacing-10"></div>
 
                 <h3 style="">Market Liquidity and Equality Traverse</h3>
-                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based netral networks we create a n-dimensional hyper-vector perspective formed though the aggregate of our value maps. </p>
+                <p>Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps. </p>
 
-                <p>Input</p>
+                <div class="spacing-15"></div>
+
+                <!--TODO: WEIGHT THE INPUT (SLIDER) ; absolute || % -->
+
+                <h4>Asset Input</h4>
                 <tags-input min-length="1" ng-model="inputVector" placeholder="Input"></tags-input>
-                <p>Desired Output</p>
-                <!--TODO: COMPOUND AND PLURALISTIC-->
-                <!--TODO: PERCENTAGE | FIXED AMOUNT -->
-                <tags-input min-length="1" ng-model="outputVector" placeholder="Output"></tags-input>
-                <button ng-click="marketTraverse();" type="submit" style="width:100%" class="btn btn-default log-btn">+ Lookup</button>
+               
+                <div class="spacing-15"></div>
 
-                <table ng-show="outputMatix.length > 0" class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Identifer</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="assetVector in outputMatix track by $index">
-                            <td><a href="market/{{assetVector.identifer}}">{{assetVector.identifer}}</a></td>
-                            <td>{{assetVector.value}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h4>Desired Output</h4>
+                <tags-input min-length="1" ng-model="outputVector" placeholder="Output"></tags-input>
+                
+                <div class="spacing-15"></div>
+
+                <button ng-click="marketTraverse();" type="submit" style="width:100%" class="btn btn-default log-btn">+ Lookup</button>
+                
+                <div class="spacing-15"></div>
+
+                <div ng-show="outputMatix.length > 0" >
+
+
+                    <!--TRAVERSAL GRAPH?-->
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                            <tr ng-repeat="token in inputVector">
+                                <td><a href="market/{{token.text}}">{{token.text}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="spacing-15"></div>
+
+                    <div style="text-align:center"><img src="https://i.stack.imgur.com/PnXIo.png"/></div>
+
+                    <div class="spacing-15"></div>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Identifer</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="assetVector in outputMatix track by $index">
+                                <td><a href="market/{{assetVector.identifer}}">{{assetVector.identifer}}</a></td>
+                                <td>{{assetVector.value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="spacing-15"></div>
+                </div>
 
             </div>
         </div>
@@ -768,7 +788,7 @@
 
             <div style="padding:16px;">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a ng-click="informationToggle('CREATETRANSACTION')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createTransaction()">
 
@@ -789,7 +809,7 @@
 
                     <div class="">
                         <div class="col-sm-12" ng-repeat="asset in newTransaction.identifierSet">
-                            <h5>{{asset.text}} Amount | Available {{balance[asset.text] || 0}} <span style="text-align:right;float:right"><a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a></span></h5>
+                            <h5>{{asset.text}} Amount | Available {{balance[asset.text] || 0}} <span style="text-align:right;float:right"><a ng-click="informationToggle('IDENTIFERSET')" href="#"><i class="fa fa-question-circle"></i></a></span></h5>
                             <input placeholder="{{asset.text}} Amount" type="number" step="any" ng-model="newTransaction.amountSet[asset.text]" class="form-control">
                         </div>
                         <div style="clear:both"></div>
@@ -812,13 +832,19 @@
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validation" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div ng-if="newValidation" class="md-list-item-text" layout="column" style="height:100%;">
-            <div style="padding:16px">
-                <div class="spacing-25"></div>
 
-                <!--
-                {{item}}
-                <i class="fa fa-arrows-h"></i>
-                -->
+            <div class="spacing-25"></div>
+            <div class="page-heading">
+                <div class="spacing-25"></div>
+                <div style="padding:16px">
+                    <h1>+ Validation</h1>
+                </div>
+                <div class="spacing-25"></div>
+            </div>
+
+            <div style="padding:16px">
+                <div class="spacing-15"></div>
+
                 <div ng-if="item.model == 'TASK'">
                     <h5>
                         <i class="fa fa-check"></i> Validate {{item.title}} 
@@ -832,8 +858,6 @@
                         <i class="fa fa-check"></i> Validate {{item.amount}} Time 
                         <i class="fa fa-arrows-h"></i> 
                         {{newValidation.associatedModel[0].model.title}}
-                        <i class="fa fa-arrows-h"></i> 
-                        PROJECT(S)
                     </h5>
                 </div>
 
@@ -846,6 +870,10 @@
                 <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModel">
                     <auto-complete source="loadAssociations($query)"></auto-complete>
                 </tags-input>
+
+                <div class="spacing-15"></div>
+                <div style="text-align:center"><img src="https://i.stack.imgur.com/PnXIo.png"/></div>
+                <div class="spacing-15"></div>
 
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
@@ -956,36 +984,89 @@
                     <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
 
+                <div ng-if="confirm.modelType == 'VALIDATION'">
+                    <p>User: {{confirm.user}}</p>
+                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                </div>
+
             </div>
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="information" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%">
+    <!--TODO: PROPER COLLAPSE ORDER-->
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="information" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%;">
         <div class="md-list-item-text" layout="column" style="height:100%;">
+
+            <div class="spacing-25"></div>
+            <div class="page-heading">
+                <div class="spacing-25"></div>
+                <div class="container">
+                    <h1>Information</h1>
+                </div>
+                <div class="spacing-25"></div>
+            </div>
+
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
-                <h3>Information</h3>
 
-                <!--TOKEN-->
-                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>
-                <p>PROTOCOL SPECIFICATION</p>
-                <p>Each Memeber is given 1 Universal Token per second</p>
+                <div ng-if="informationType == 'CREATECONTENT'">
+                    CREATE CONTENT
+                </div>
+                <div ng-if="informationType == 'CREATEITEM'">
+                    CREATE ITEM
+                </div>
+                <div ng-if="informationType == 'CREATEORDER'">
+                    CREATE ORDER
+                </div>
+                <div ng-if="informationType == 'CREATEPROJECT'">
+                    CREATE PROJECT
+                </div>
+                <div ng-if="informationType == 'CREATETASK'">
+                    CREATE TASK
+                </div>
+                <div ng-if="informationType == 'CREATETIME'">
+                    CREATE TIME
+                </div>
+                <div ng-if="informationType == 'CREATETRANSACTION'">
+                    CREATE TRANSACTION
+                </div>
+                <div ng-if="informationType == 'CREATEVALIDATION'">
+                    CREATE VALIDATION
+                </div>
 
-                <!--
-                <p>Value Map Controls</p>
-                <input type="text" placeholder="Identifier" ng-model="" class="form-control">
-                <button type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-    
-                <p>Associations</p>
-                <p>Content</p>
-                <p>Order</p>
-                <p>Profile</p>
-                <p>Project</p>
-                <p>Task</p>
-                <p>Transaction</p>
-                <p>Time</p>
-                <p>{{information}}</p>
-                -->
+                <div ng-if="informationType == 'TOKEN'">
+                    <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>
+                    <p>PROTOCOL SPECIFICATION</p>
+                    <p>Each Memeber is given 1 Universal Token per second</p>
+                </div>  
+
+                <div ng-if="informationType == 'IDENTIFERSET'">
+                    IDENTIFER SET
+                </div>
+
+                <!--DEP-->
+                <div ng-if="informationType == 'IDENTIFERALPHA'">
+                    IDENTIFER SET ALPHA
+                </div>
+                <div ng-if="informationType == 'IDENTIFERSETBETA'">
+                    IDENTIFER SET BETA
+                </div>
+
+                <div ng-if="informationType == 'ASSOCIATIONS'">
+                    ASSOCIATIONS
+                </div>
+
+                <div ng-if="informationType == 'PROTOCOLS'">
+                    PROTOCOL
+                </div>
+
+                <div ng-if="informationType == 'VALUEMAP'">
+                    <p>Value Map Controls</p>
+                </div>
+
+                <div ng-if="informationType == 'VALIDATION'">
+                    VALIDATION
+                </div>
 
             </div>
         </div>

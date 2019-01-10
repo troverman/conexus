@@ -70,6 +70,8 @@ angular.module( 'conexus.time', [
     $scope.time.tokens.push('CRE8+TIME');
     $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id);
 
+    //NAKED TAGS? --> REP?
+
     //VALIDATION IS THE CORE.. 
     $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id);
     $scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id);
