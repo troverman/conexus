@@ -135,7 +135,7 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             items: ['member', 'ItemModel', function(member, ItemModel) {
-                return ItemModel.getSome(member.id, 100, 0, 'createdAt DESC');
+                return ItemModel.getSome('user', member.id, 100, 0, 'createdAt DESC');
             }],
         }
     })

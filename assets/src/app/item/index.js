@@ -25,15 +25,18 @@ angular.module( 'conexus.item', [
    
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
-    $scope.item = item;
 
-    titleService.setTitle('Marketplace | '+$scope.item.title+' | CRE8.XYZ');
+    $scope.item = item;
+    $scope.item.model = 'ITEM';
+    if ($scope.item.tags){$scope.item.tags = item.tags.split(',')}
+
+    titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');
 
     $scope.inputVector = []; 
     //$scope.inputVectorWeight = [];
     if(!$scope.item){$location.path('/')}
     $scope.newReaction = {};
-    $scope.outputVector = $scope.item.identiferSet.split(',');
+    //$scope.outputVector = $scope.item.identiferSet.split(',');
 
     $scope.purchaseToggleVar = false;
 

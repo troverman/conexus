@@ -1837,6 +1837,18 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("item/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("item/index.tpl.html",
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <h1>{{item.title}}</h1>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -1844,22 +1856,40 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<h1>{{item.title}}</h1>\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div style=\"float:right;text-align:right\">\n" +
+    "                    <h5 ng-click=\"tokensToggle(item)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5 ng-click=\"renderValidationToggle(item)\"><a href=\"#\">Associations & Validations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <h1>{{item.title}}</h1>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    <a style=\"display:inline\" href=\"member/{{item.user.username}}\"><span style=\"font-weight:800\">{{item.user.username}}</span></a>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "		        <div style=\"max-height:500px;overflow:scroll\">\n" +
     "					<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "				</div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h4>{{item.amountSet}} <a href=\"market/{{item.identiferSet}}\">{{item.identiferSet}}</a></h4>\n" +
+    "\n" +
     "			</div>\n" +
     "\n" +
-    "            <div class=\"card-footer\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "                <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
     "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
@@ -1878,7 +1908,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        </ul>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-if=\"item.identiferSet\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"\">\n" +
     "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"purchaseToggle()\">Purchase</button>\n" +
@@ -1903,8 +1933,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "    </div>\n" +
     "\n" +
     "    <!--MARKET | TRAVERSAL-->\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-if=\"item.identiferSet\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"\">\n" +
@@ -4054,7 +4083,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <input placeholder=\"Amount Set\" type=\"text\" ng-model=\"newItem.amountSet\" class=\"form-control\">\n" +
     "                    <h5>Delivery Protocol <a ng-click=\"informationToggle('DELIVERYPROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <text-angular ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.title\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +
     "\n" +

@@ -31,6 +31,11 @@ module.exports = {
         //REACTIONS
         reactions: {type: 'json'},
 
+        //DEPRECIATE
+        user: {model: 'user'},
+
+        owner: {type: 'json'},
+
     },
 
 };

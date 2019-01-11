@@ -16,18 +16,22 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
+			.populate('user') //TODO: OWNER
 			.then(function(models) {
 				Item.subscribe(req, models);
 				res.json(models);
 			});
 		}
 
-		if (req.query.creator){
-			var creator = req.query.creator;
-			Item.find({creator:creator})
+		//TODO: OWNER
+		if (req.query.user){
+			var user = req.query.user;
+			console.log(req.query)
+			Item.find({user:user}) //TODO: OWNER
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
+			.populate('user')  //TODO: OWNER
 			.then(function(models) {
 				Item.subscribe(req, models);
 				res.json(models);
@@ -39,6 +43,7 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
+			.populate('user')
 			.then(function(models){
 				res.json(models)
 			});
@@ -46,9 +51,12 @@ module.exports = {
 		
 	},
 
+	//DEPRECIATE
 	getOne: function(req, res) {
 		Item.find({id:req.param('id')})
+		.populate('user')
 		.then(function(model) {
+			console.log(model[0])
 			Item.subscribe(req, model[0]);
 			res.json(model[0]);
 		});
