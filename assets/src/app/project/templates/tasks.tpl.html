@@ -47,27 +47,15 @@
 	        </form>
 	    </div>
 	
-		<div class="card" ng-show="newTaskToggleVar">
-		    <div style="padding:16px;">
-				<form role="form" ng-submit="createTask(newTask)">
-					<div class="form-group">
-						<input placeholder="Title" type="text" ng-model="newTask.title" class="form-control" id="taskTitle">
-						<tags-input placeholder="Tags" ng-model="newTask.tags"></tags-input>
-		                <text-angular placeholder="Content" ng-model="newTask.content" ta-toolbar="''"></text-angular>
-					</div>
-					<button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
-				</form>
-			</div>
-		</div>
-
 		<div ng-repeat="task in tasks">
 			<div class="card" ng-click="renderToggle(task)">
 				<div style="padding:16px;">
-					<div style="float:right">
+					<div style="float:right;text-align:right">
                         <h5 ng-click="$event.stopPropagation();tokensToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+						<h5 ng-click="$event.stopPropagation();renderValidationToggle(task)"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 					<h4 ng-click="$event.stopPropagation()"><a href="task/{{task.id}}">{{task.title}}</a></h4>
-					<p ng-click="$event.stopPropagation()"><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>
+					<!--<p ng-click="$event.stopPropagation()"><a href="project/{{task.project.urlTitle}}">{{task.project.title}}</a></p>-->
 					<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in task.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
 					<span style="color:gray" am-time-ago="task.createdAt"></span>
@@ -76,6 +64,7 @@
 					<a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{task.reactions.plus}} like </a> 
 					<a ng-click="$event.stopPropagation();createReaction(task, 'plus')" ><i class="fa fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
 					<a ng-click="$event.stopPropagation();reply(task)"><i class="fa fa-comment-o"></i> comment </a>
+					<a ng-click="$event.stopPropagation();validationToggle(task)"><i class="fa fa-check"></i> validate </a>
 					<a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="task/{{task.id}}"><i class="fa fa-link grey"></i></a>
 				</div>
 				<div ng-click="$event.stopPropagation();" ng-show="task.showReply" class="card-footer">

@@ -93,8 +93,6 @@ angular.module( 'conexus.project', [
             }],            
         }
     })
-    //TODO: FEATURE | ALLOWS FOR BUDGET MANAGING PROCESS -- AKA CREATE MARKET ORDERS FOR AN ORG BASED ON REPUTATION VOTING
-    //TYPE | MOTION TO JOIN MOTION TO CREATE TRANSACTION
     .state( 'project.charter', {
         url: '/charter',
         views: {
@@ -571,25 +569,59 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMotion = {};
-    $scope.motions = motions;  
-    $scope.project = project;
+    //$scope.motions = motions;  
 
-    $scope.createMotion = function(){
-        if($scope.currentUser){
-            $scope.newMotion.user = $scope.currentUser;
-            $scope.newMotion.project = $scope.project.id;
-            $scope.newMotion.type = 'MOTION';
-            //RELATIONSHIP | LIST
-            $scope.newMotion.relationshipModelAddress = $scope.project.id;
-            $scope.newMotion.relationshipModel = 'PROJECT';
-            ContentModel.create($scope.newMotion).then(function(model){
-                $scope.newMotion = {};
-                $scope.motions.unshift(model);
-            });
+    //ORG EARS TOKNS WHEN WE USE IT
 
-        }
-        else{$mdSidenav('login').toggle()}
-    };
+    //FIRE IS MOTION FOR EACH FILE .. --> LIKE THE CODE
+    //SETTINGS?
+    //MANIFOLDS
+    //ALL WIP
+    $scope.enactedMotions = [
+
+        {title:'Member Creation Protocol', type:'PROTOCOL', content:'Simple Majority of active participants', reactions:{plus:0, minus:0}, id:1},
+        {title:'Task Validation Protocol', type:'PROTOCOL', content:'Governs the topology of reputation in governance with repect to the validation of task associations.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Time Validation Protocol', type:'PROTOCOL', content:'Governs the topology of reputation in governance with repect to the validation of time worked.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Project Validation Protocol', type:'PROTOCOL', content:'Governs the topology of reputation in governance with repect to the association of projects.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Content Validation Protocol', type:'PROTOCOL', content:'How can content be linked to a project.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Active Reputation Protocol', type:'PROTOCOL', content:'Governs the reputation decay function.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Manifold Protocol(s)', type:'PROTOCOL', content:'Governs the reputation decay function.', reactions:{plus:0, minus:0}, id:1},
+
+        //{title:'Motion Validation Protocol', content:'Simple Majority ', id:1},
+        {title:'app.js', type:'FILE', content:'function(model){var create = true}', reactions:{plus:0, minus:0}, id:1},
+
+    ];  
+
+    //LINK MOTIONS TO UNVALIDATED 'PROPOSALS' | VEHICE TO SEND 
+    $scope.motions = [
+
+        {title:'Motion to Create Member -- Troverman', type:'CREATE MEMBER', content:'Resolution to the Question: Should Troverman Be afforded membership.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Create Order', type:'CREATE ORDER', content:'Resolution to the Question: Should NOVO Create a Position in the Market', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Associate Project', type:'CREATE PROJECT ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Create Transaction',  type:'CREATE TRANSACTION', content:'Resolution to the Question: Should NOVO Send 1 CRE8 to PROJECT', reactions:{plus:0, minus:0}, id:1},
+
+        //SPACE TO VALIDATE TASKS AND TIME? --> DONT NEED THE VEHICLE REALLY
+        {title:'Motion to Associate Task', type:'CREATE TASK ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
+
+        //{title:'Motion to Create Item', type:'ITEM', content:'CREATE' id:1},
+        {title:'Motion to Update File',  type:'UPDATE FILES | COMMIT | PULL REQUEST', content:'{git commit message} // ++ function(model){var creation = true}', reactions:{plus:0, minus:0}, id:1},
+
+    ];  
+
+    $scope.status = [
+        'Enacted',
+        'Pending'
+    ];
+
+    $scope.types = [
+        'PROTOCOL',
+        'CREATE MEMBER',
+        'CREATE ORDER',
+        'CREATE TRANSACTION',
+        'CREATE PROJECT ASSOCIATION',
+        'CREATE TASK ASSOCIATION',
+        'UPDATE FILES',
+    ];
 
     $scope.search = function(){};
 
@@ -1189,6 +1221,8 @@ angular.module( 'conexus.project', [
     $scope.project = project;
 
     $scope.tasks.map(function(obj){
+
+        obj.model = 'TASK';
 
         //TEMP HARDCODE -- MOVE TO PROTOCOL
         //ONLY TIME PROTOCOL.. 

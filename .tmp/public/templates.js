@@ -4962,15 +4962,21 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </div>\n" +
     "                <div ng-if=\"informationType == 'CREATEORDER'\">\n" +
     "                    CREATE ORDER\n" +
+    "                    Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.\n" +
     "                </div>\n" +
     "                <div ng-if=\"informationType == 'CREATEPROJECT'\">\n" +
     "                    CREATE PROJECT\n" +
+    "\n" +
+    "                    Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.\n" +
+    "\n" +
     "                </div>\n" +
     "                <div ng-if=\"informationType == 'CREATETASK'\">\n" +
     "                    CREATE TASK\n" +
+    "                    Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility. \n" +
     "                </div>\n" +
     "                <div ng-if=\"informationType == 'CREATETIME'\">\n" +
     "                    CREATE TIME\n" +
+    "                    Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.\n" +
     "                </div>\n" +
     "                <div ng-if=\"informationType == 'CREATETRANSACTION'\">\n" +
     "                    CREATE TRANSACTION\n" +
@@ -5621,18 +5627,30 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
 
 angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/charter.tpl.html",
-    "<!--VALIDATIONS.. AND ABSTRACT VALIDATION .. IE NOT A LINKAGE.. FOR SOME CHARTER -->\n" +
-    "<!--motion to create order; motion to accept join; motion to 'enact bill' motion 'to vote on bill' | create 'enect bill motion' -->\n" +
-    "<!--history of motions.. aka charter-->\n" +
-    "\n" +
     "<div class=\"row\">\n" +
     "\n" +
     "    <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "         <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span><b>Status</b></span>\n" +
+    "                <div ng-repeat=\"status in status\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{status}}</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span><b>Types</b></span>\n" +
+    "                <div ng-repeat=\"type in types\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{type}}</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                <div ng-repeat=\"type in types\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{type}}</a>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -5652,20 +5670,22 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"motionToggle()\">+ Motion</button>\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Motion</button>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-repeat=\"item in motions\">\n" +
-    "            <div class=\"card\">\n" +
+    "        <div ng-repeat=\"item in enactedMotions\">\n" +
+    "            <div class=\"card\" ng-click=\"\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                 	<h4><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "                    <h4><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "                    <p><a>{{item.type}}</a></p>\n" +
     "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
-    "                 	<p><span am-time-ago=\"item.createdAt\"></span></p>\n" +
+    "                    <p><span am-time-ago=\"item.createdAt\"></span></p>\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a href=\"#\" ng-click=\"validationToggle(time)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                </div>\n" +
     "                <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
@@ -5676,12 +5696,34 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
+    "        <div ng-repeat=\"item in motions\">\n" +
+    "            <div class=\"card\" ng-click=\"\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                 	<h4><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "                    <p><a>{{item.type}}</a></p>\n" +
+    "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
+    "                 	<p><span am-time-ago=\"item.createdAt\"></span></p>\n" +
+    "                </div>\n" +
+    "                <div class=\"card-footer\">\n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                    <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a href=\"#\" ng-click=\"validationToggle(time)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                    <a style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                </div>\n" +
+    "                <div ng-show=\"item.showReply\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
+    "                    <form role=\"form\" ng-submit=\"createPost(item)\">\n" +
+    "                        <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "\n" +
     "</div>\n" +
     "\n" +
-    "<p style=\"text-align:right;font-style:italic\"><a STYLE=\"color:gray\" href=\"https://www.voetr.com\">voetr API</a></p>\n" +
+    "<p style=\"text-align:right;font-style:italic\"><a style=\"color:gray\" href=\"https://www.voetr.com\">voetr API</a></p>\n" +
     "");
 }]);
 
@@ -6197,27 +6239,15 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "	        </form>\n" +
     "	    </div>\n" +
     "	\n" +
-    "		<div class=\"card\" ng-show=\"newTaskToggleVar\">\n" +
-    "		    <div style=\"padding:16px;\">\n" +
-    "				<form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
-    "					<div class=\"form-group\">\n" +
-    "						<input placeholder=\"Title\" type=\"text\" ng-model=\"newTask.title\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "						<tags-input placeholder=\"Tags\" ng-model=\"newTask.tags\"></tags-input>\n" +
-    "		                <text-angular placeholder=\"Content\" ng-model=\"newTask.content\" ta-toolbar=\"''\"></text-angular>\n" +
-    "					</div>\n" +
-    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
-    "				</form>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "\n" +
     "		<div ng-repeat=\"task in tasks\">\n" +
     "			<div class=\"card\" ng-click=\"renderToggle(task)\">\n" +
     "				<div style=\"padding:16px;\">\n" +
-    "					<div style=\"float:right\">\n" +
+    "					<div style=\"float:right;text-align:right\">\n" +
     "                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(task)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "						<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(task)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "					<h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
-    "					<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
+    "					<!--<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>-->\n" +
     "					<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in task.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "					<span style=\"color:gray\" am-time-ago=\"task.createdAt\"></span>\n" +
@@ -6226,6 +6256,7 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "					<a ng-click=\"$event.stopPropagation();createReaction(task, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{task.reactions.plus}} like </a> \n" +
     "					<a ng-click=\"$event.stopPropagation();createReaction(task, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{task.reactions.minus}} dislike </a>\n" +
     "					<a ng-click=\"$event.stopPropagation();reply(task)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "					<a ng-click=\"$event.stopPropagation();validationToggle(task)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "					<a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"task/{{task.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "				</div>\n" +
     "				<div ng-click=\"$event.stopPropagation();\" ng-show=\"task.showReply\" class=\"card-footer\">\n" +
@@ -6432,6 +6463,25 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("reaction/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("reaction/index.tpl.html",
+    "<div class=\"container\">\n" +
+    "\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\" ng-click=\"\">\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                <div style=\"float:right\">\n" +
+    "                    <h5 ng-click=\"tokensToggle(reaction)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                {{reaction}}\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "</div>\n" +
     "");
 }]);
 
@@ -7225,12 +7275,15 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "					<div style=\"padding:16px;\">\n" +
     "\n" +
-    "						<div style=\"float:right\">\n" +
-    "		                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "						<div style=\"float:right;text-align:right\">\n" +
+    "		                    <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "							<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "		                </div>\n" +
     "\n" +
     "						<h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
-    "						<p><a ng-click=\"$event.stopPropagation();\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
+    "\n" +
+    "						<!--<p><a ng-click=\"$event.stopPropagation();\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>-->\n" +
+    "						\n" +
     "						<p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "						<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +

@@ -32,23 +32,20 @@ angular.module( 'conexus.tasks', [
     $scope.searchQuery = [];
 
     $scope.tasks.map(function(obj){
-
+        obj.model = 'TASK';
         //TEMP HARDCODE -- MOVE TO PROTOCOL
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TIME');
         obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
-
         if (obj.tags){
             obj.tags = obj.tags.split(',');
             for (x in obj.tags){
-                console.log(obj.tags[x])
                 obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
                 obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
             }
         }
         return obj;
-
     });
 
     console.log($scope.tasks)
@@ -81,11 +78,23 @@ angular.module( 'conexus.tasks', [
         $rootScope.stateIsLoading = true;
         TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
             $rootScope.stateIsLoading = false;
-            Array.prototype.push.apply($scope.tasks, tasks);
-            $scope.tasks = tasks.map(function(obj){
-                if (obj.tags){obj.tags = obj.tags.split(',')}
+            tasks.map(function(obj){
+                obj.model = 'TASK';
+                //TEMP HARDCODE -- MOVE TO PROTOCOL
+                obj.tokens = [];
+                obj.tokens.push('CRE8');
+                obj.tokens.push('CRE8+TIME');
+                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
+                if (obj.tags){
+                    obj.tags = obj.tags.split(',');
+                    for (x in obj.tags){
+                        obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
+                        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
+                    }
+                }
                 return obj;
             });
+            Array.prototype.push.apply($scope.tasks, tasks);
             $scope.loadAssociations();
             $scope.loadTags();
         });
@@ -98,10 +107,23 @@ angular.module( 'conexus.tasks', [
         TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
-            $scope.tasks = tasks.map(function(obj){
-                if (obj.tags){obj.tags = obj.tags.split(',')}
+            tasks.map(function(obj){
+                obj.model = 'TASK';
+                //TEMP HARDCODE -- MOVE TO PROTOCOL
+                obj.tokens = [];
+                obj.tokens.push('CRE8');
+                obj.tokens.push('CRE8+TIME');
+                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
+                if (obj.tags){
+                    obj.tags = obj.tags.split(',');
+                    for (x in obj.tags){
+                        obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
+                        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
+                    }
+                }
                 return obj;
             });
+            $scope.tasks = tasks;
             $scope.loadAssociations();
             $scope.loadTags();
         });
@@ -118,12 +140,9 @@ angular.module( 'conexus.tasks', [
         $scope.associations = $scope.tasks.map(function(obj){
             if (obj.project){return obj.project.title;}
         });
-
         $scope.associations = [].concat.apply([], $scope.associations);
         $scope.associations = $scope.associations.filter(function(e){return e});
-         
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-
         $scope.sortedAssociationArray = [];
         for (x in $scope.associations){
             var amount = countInArray($scope.associations, $scope.associations[x]);

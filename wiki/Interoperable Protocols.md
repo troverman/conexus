@@ -31,20 +31,23 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 # Layered Adaptability
 
 # Core protocols
+
+	CONGRUENCE
 	Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
-	//Market Bets.. +FUTURE+[TIME]
 
+	MANIFOLDS
 	+[] SPACE
-
 	+ONMINT SPACE
 
+	CREDIT
 	+CREDIT+[INTEREST] SPACE
 		+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE
 
-
+	FUTURES
 	+FUTURE+[DATE] SPACE
 		//PUT IN ESKROW?
 
+	OPTIONS
 	+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE
 		//STRIKE DELTA, OR STRIKE DATE.
 		//PUT, CALL TYPE
@@ -55,6 +58,8 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 	The set of logic is driven by the organization
 	the manifold defined 'PROJECT+{ID}' 
 	PROJECT+{ID} || CUSTOM STRING SPACE IE NOVO; 
+
+	//SUB PROJECT PROTOCOLS --> IE MOTIONS
 
 ## Member Protocol
 	MEMBER+{ID} || CUSTOM STRING SPACE IE TROVERMAN; 

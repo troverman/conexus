@@ -27,6 +27,7 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
+			.populate('project')
 			.populate('user')
 			.then(function(models) {
 				Task.subscribe(req, models);
