@@ -87,6 +87,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('login').close();
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
+        $mdSidenav('renderValidation').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
         $mdSidenav('validation').close();
@@ -160,14 +161,34 @@ angular.module( 'conexus.nav', [
         console.log(query);
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
-        UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(searchModels){
-            console.log(searchModels);
-            searchModels.map(function(obj){
-                obj.title = obj.text;
-                return obj.text;
+
+        //MM | YIKES
+        //$scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].address});
+
+        //BASED ON TYPE AND MODELS.. UHG
+        /*UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(userSearchModels){
+            userSearchModels.map(function(obj){
+                obj.text = obj.username
+                return obj;
+            }); */
+            ProjectModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(projectSearchModels){
+                projectSearchModels.map(function(obj){
+                    obj.text = obj.title
+                    return obj;
+                });
+                TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
+                    taskSearchModels.map(function(obj){
+                        obj.text = obj.title
+                        return obj;
+                    });
+                    //searchModels = [].concat.apply([], [userSearchModels, projectSearchModels, taskSearchModels]);
+                    searchModels = [].concat.apply([], [projectSearchModels, taskSearchModels])
+                    console.log(searchModels);
+                    deferred.resolve(searchModels);
+                });
             });
-            deferred.resolve(searchModels);
-        });
+           //deferred.resolve(userSearchModels);
+        //});
         return deferred.promise;
     };
 
@@ -368,13 +389,21 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.renderReputationToggle = function(item){
+
         $scope.item = item;
         if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
         if (item.user){$scope.reputation = item.user.reputation}
+
         //BUG
         console.log(item);
         if (item.follower){$scope.reputation = item.follower.reputation;$scope.item.user = item.follower}
         if (item.followed){$scope.reputation = item.followed.reputation;$scope.item.user = item.followed}
+
+        //DEPRECIATE
+        if ($scope.item.project){
+            $scope.reputationFilter = [{text:$scope.item.project.title+'+'}];
+        }
+
         $scope.chart = {
             chart: {zoomType: 'x'},
             series: [{
@@ -437,7 +466,18 @@ angular.module( 'conexus.nav', [
 
     //TODO: CHANGE FROM ADDRESS TO ID
     $rootScope.validationToggle = function(item){
-        //association anatomy . . 
+
+        //associations vs associatedModels 
+        //ie binary validation?
+        //m assocations is . .. . 
+        //b
+        //start
+        //task -> am: [{},{},{}]
+        //m 
+        //task -> am: [{[],}],{[],},{[],}]
+        //--> DONT MAKE THIS HARDER THAN IT NEEDS TO BE. --> DO BINARY ASSOCATION TO START; 
+
+        //association anatom    y . . 
         //[{
         //    type:'TASK',
         //    address:item.id, 
@@ -465,7 +505,7 @@ angular.module( 'conexus.nav', [
                 if ($scope.item.project){
                     $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, type:'PROJECT',address:$scope.item.project.id, model:$scope.item.project}];
                 }
-                $scope.newValidation.associatedModels = [{type:'TASK',address:item.id, connections:{}}];
+                $scope.newValidation.associatedModels = [{type:'TASK',address:item.id}];
             }
 
             if ($scope.item.model == 'TIME'){
@@ -482,14 +522,15 @@ angular.module( 'conexus.nav', [
                 $scope.newValidation.associatedModels = [{type:'VALIDATION',address:item.id}];
             }
 
-            $scope.newValidation.associatedModels.concat($scope.newValidation.associatedModel);
-     
             if ($scope.item.model == 'CONTENT'){} //--> PROJ
             if ($scope.item.model == 'ITEM'){} //--> PROJ
             if ($scope.item.model == 'MEMBER'){} //--> PROJ
             if ($scope.item.model == 'ORDER'){} //--> PROJ
             if ($scope.item.model == 'PROJECT'){} //--> PROJ
             if ($scope.item.model == 'TRANSACTION'){} //--> PROJ
+
+            $scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].address});
+            console.log($scope.newValidation)
         
             //TODO: SPLIT OPERATIONS CONTAINED IN CTRL
             $scope.tags = [];
@@ -753,12 +794,14 @@ angular.module( 'conexus.nav', [
         if ($scope.currentUser){
             //TODO 
             $scope.newValidation.user = $scope.currentUser.id;
+
             //PATCH!!! DEPREC
             if ($scope.newValidation.associatedModels){
                 for (x in $scope.newValidation.associatedModels){
                    $scope.newValidation[$scope.newValidation.associatedModels[x].type.toLowerCase()] = $scope.newValidation.associatedModels[x].address;
                 }
             }
+
             console.log($scope.newValidation);
             ValidationModel.create($scope.newValidation).then(function(model) {
                 $scope.confirm = $scope.newValidation;

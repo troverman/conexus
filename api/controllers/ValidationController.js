@@ -2,8 +2,8 @@ module.exports = {
 
 	getSome: function(req, res) {
 
-		var limit = req.query.limit;
-		var skip = req.query.skip;
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
 		var project = req.query.project;
 		var task = req.query.task;
@@ -25,17 +25,27 @@ module.exports = {
 			});
 		}
 
-		//DO BOTH task and proj
 		else if (req.query.task){
-			Validation.find({task:task})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Validation.subscribe(req, models);
-				res.json(models);
+
+			//WORK HERE
+			//THIS IS DEPRECIATED
+			Validation.native(function(err, validation) {
+				validation.find({"associatedModels.address":{$in :[task]}})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+					//JOIN TO USER
+					console.log(models);
+					Validation.subscribe(req, models);
+					res.json(models);
+				});
 			});
+
 		}
 
 		else if(req.query.user){
@@ -104,32 +114,19 @@ module.exports = {
 
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
 		User.find({id:model.user}).then(function(userModel){
-
 			var reputation = {};
-
 			//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
 			//FIND DIMENSIONS .. MATCH WITH FRONTEND INPUT
-
 			for (x in Object.keys(model.validation)){
-
 				//TODO | BETTER..
 				if (userModel[0].reputation[Object.keys(model.validation)[x]]){
-					//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPINGS
-					//WIP
-					if (Object.keys(model.validation)[x] == 'general'){
-						reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;
-					}
+					//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPIN | WIP
+					if (Object.keys(model.validation)[x] == 'general'){reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;}
 					else{reputation[Object.keys(model.validation)[x]] = userModel[0].reputation[Object.keys(model.validation)[x]]}
 				}
-
-				else{
-					reputation[Object.keys(model.validation)[x]] = 0;
-				}
-
+				else{reputation[Object.keys(model.validation)[x]] = 0;}
 			}
-
 			model.reputation = reputation;
-
 			Validation.create(model)
 			.exec(function(err, validation) {
 				if (err) {return console.log(err);}
@@ -137,6 +134,42 @@ module.exports = {
 					console.log(validation);
 					Validation.publishCreate(validation);
 					res.json(validation);
+
+					//THEN CREATE OR UPDATE ASSOCIATION
+
+					//COULD JUST STORE IN MODEL..? ?
+
+
+					//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
+					//TODO: FIND
+					Association.find().then((associationModels)=>{
+
+
+						if (associationModels.length == 0){
+
+							Association.create().then((associationModel)=>{
+								Association.publishCreate(associationModel);
+								console.log('CREATE ASSOCIATION',associationModel)
+							});
+
+						}
+
+						else{
+
+							//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
+							var updatedModel = associationModels[0];//{}; //AVERAGE OF VALIDATIONS
+
+							Association.update({id:associationModels[0].id}, updatedModel).then((associationModel)=>{
+								Association.publishUpdate(associationModel);
+								console.log('UPDATE ASSOCIATION', associationModel)
+							});
+
+						}
+
+
+					});
+
+
 				}
 			});
 
