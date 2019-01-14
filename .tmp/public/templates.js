@@ -2757,12 +2757,12 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "<div ui-view=\"member\">\n" +
     "	<div class=\"container\" style=\"padding:0px\">\n" +
-    "		<div class=\"card\">\n" +
+    "		<div class=\"card\" ng-click=\"subNavToggle()\">\n" +
     "			<div style=\"background-image: url('{{member.coverUrl}}')\">\n" +
     "				<div class=\"spacing-100\"></div>\n" +
     "			</div>\n" +
     "			<div class=\"container\">\n" +
-    "				<div class=\"pull-left\"><a href=\"member/{{member.username}}\"><img class=\"avatar\" err-src=\"/images/avatar.png\" ng-src=\"{{member.avatarUrl}}\"/></a></div>\n" +
+    "				<div class=\"pull-left\"><a ng-click=\"$event.stopPropagation()\" href=\"member/{{member.username}}\"><img class=\"avatar\" err-src=\"/images/avatar.png\" ng-src=\"{{member.avatarUrl}}\"/></a></div>\n" +
     "				<div style=\"text-align:right\" class=\"member-tab-container\">\n" +
     "					<ul class=\"member-tabs subNav\">\n" +
     "						<!--\n" +
@@ -2778,13 +2778,13 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "			        	</li>\n" +
     "			        	-->\n" +
     "						<li ng-show=\"currentUser.id != member.id\">\n" +
-    "							<a ng-show=\"!isFollowing\" class=\"btn btn-default\" ng-click=\"follow()\">Follow</a>\n" +
-    "							<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"unfollow()\">UnFollow</a>\n" +
+    "							<a ng-show=\"!isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow()\">Follow</a>\n" +
+    "							<a ng-show=\"isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();unfollow()\">UnFollow</a>\n" +
     "						</li>\n" +
     "						<li ng-show=\"currentUser.id == member.id\"><a class=\"btn btn-default\" href=\"account\">Edit Profile</a></li>\n" +
-    "						<li ng-click=\"subNavToggle()\"><a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a></li>\n" +
+    "						<li><a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "					</ul>\n" +
-    "					<div class=\"nav-toggle\" ng-click=\"subNavToggle()\">\n" +
+    "					<div class=\"nav-toggle\">\n" +
     "						<a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
     "					</div>\n" +
     "				</div>\n" +
@@ -2795,7 +2795,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "					<div class=\"pull-left\" style=\"text-align:left\">\n" +
     "\n" +
     "						<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
-    "						<h5><a href=\"member/{{member.username}}\">@{{member.username}}</a></h5>\n" +
+    "						<h5><a ng-click=\"$event.stopPropagation()\" href=\"member/{{member.username}}\">@{{member.username}}</a></h5>\n" +
     "						<p>{{member.totalWork}} | Total Reputation</p>\n" +
     "						\n" +
     "					</div>\n" +
@@ -2805,7 +2805,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "						<span style=\"color:gray;font-size:10px;float:right\">0x{{member.id}}</span>\n" +
     "						<br>\n" +
     "						<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\">\n" +
-    "						<a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" href=\"#\" ng-click=\"transactionToggle()\">Send Tokens</a>\n" +
+    "						<a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a>\n" +
     "					</div>\n" +
     "					\n" +
     "				</div>\n" +
@@ -3058,6 +3058,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
 
 angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/assets.tpl.html",
+    "<!--\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -3069,11 +3070,12 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "		</ul>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "-->\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
+    "     <div class=\"card\">\n" +
     "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
+    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                <a href=\"#\" role=\"button\">\n" +
     "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
@@ -3083,6 +3085,7 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
@@ -3115,19 +3118,39 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "	   	</div>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "-->\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "	<div class=\"card\">\n" +
+    "		<div style=\"padding:16px;\">\n" +
+    "			<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
+    "	   		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "	        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "	        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "	                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
+    "				</div>\n" +
+    "	    	</form>\n" +
+    "	    	<div ng-show=\"balanceLookupValue !== undefined\">\n" +
+    "	    		<h5><a href=\"market/{{balanceLook}}\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "	    		<!--FOUND TOKEN MODEL.. INFORMATION IE REP OR-->\n" +
+    "	    	</div>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "\n" +
+    "			<!--\n" +
     "			<div>\n" +
     "				<h3>Reputation</h3>\n" +
-    "				<!--<highchart config=\"reputationRadial\"></highchart>-->\n" +
     "				<highchart config=\"reputationColumn\"></highchart>\n" +
     "			</div>\n" +
+    "			-->\n" +
+    "\n" +
     "			<div>\n" +
     "				<h3>Balance</h3>\n" +
-    "				<!--<highchart config=\"balanceRadial\"></highchart>-->\n" +
     "				<highchart config=\"balanceColumn\"></highchart>\n" +
     "				<highchart config=\"balancePie\"></highchart>\n" +
     "			</div>\n" +
@@ -3506,44 +3529,21 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li><a href=\"member/{{member.username}}/assets\">Assets</a></li>\n" +
-    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
-    "		</ul>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                <a href=\"#\" role=\"button\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
     "\n" +
     "	<div class=\"col-xs-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
-    "				<span><b>Tags</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
-    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
-    "                </div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<span><b>Identifiers</b></span>\n" +
     "	            <div ng-repeat=\"asset in sortedTransactionAssets\">\n" +
     "                    <a href=\"#\" ng-click=\"selectAsset(asset.element)\">{{asset.element}}</a>\n" +
+    "                </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Tags</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
     "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -3559,14 +3559,33 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "	<div class=\"col-xs-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
+    "		<!--\n" +
+    "		<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li><a href=\"member/{{member.username}}/assets\">Assets</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
+    "		</ul>\n" +
+    "\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "	            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "	                <a href=\"#\" role=\"button\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                </a>\n" +
+    "	            </div>\n" +
+    "	        </form>\n" +
+    "	    </div>\n" +
+    "		-->\n" +
+    "\n" +
     "		<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
     "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "			<!--TODO-->\n" +
     "			<li style=\"float:right\">\n" +
@@ -3577,9 +3596,18 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "				</a>\n" +
     "			</li>\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "		</ul>\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "	        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "	            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "	            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "	                <a href=\"#\" role=\"button\">\n" +
+    "	                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "	                </a>\n" +
+    "	            </div>\n" +
+    "	        </form>\n" +
+    "	    </div>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
@@ -3663,31 +3691,6 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
 
 angular.module("member/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("member/templates/positions.tpl.html",
-    "<div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "	<div class=\"col-md-6\">\n" +
-    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "			<li><a href=\"member/{{member.username}}/assets\">Assets</a></li>\n" +
-    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
-    "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
-    "		</ul>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
-    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "        	<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                <a href=\"#\" role=\"button\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
     "<div class=\"row\">\n" +
     "\n" +
     "	<div class=\"col-xs-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
@@ -3710,6 +3713,25 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "	</div>\n" +
     "\n" +
     "	<div class=\"col-xs-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "		<!--<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li><a href=\"member/{{member.username}}/assets\">Assets</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/positions\">Positions</a></li>\n" +
+    "			<li><a href=\"member/{{member.username}}/ledger\">Transactions</a></li>\n" +
+    "		</ul>-->\n" +
+    "\n" +
+    "		<div class=\"card\">\n" +
+    "		    <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "		    	<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "		        <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "		            <a href=\"#\" role=\"button\">\n" +
+    "		                <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "		            </a>\n" +
+    "		        </div>\n" +
+    "		    </form>\n" +
+    "		</div>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
@@ -4929,7 +4951,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'CONTENT'\">\n" +
+    "                <div ng-if=\"confirm.model == 'CONTENT'\">\n" +
     "                    <h3>Title: {{confirm.title}}</h3>\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Tags: {{confirm.tags}}</p>\n" +
@@ -4937,11 +4959,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Type: {{confirm.type}}</p>\n" +
     "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'FOLLOW'\">\n" +
+    "                <div ng-if=\"confirm.model == 'FOLLOW'\">\n" +
     "                    <p>Follower: {{confirm.follower}}</p>\n" +
     "                    <p>Following: {{confirm.following}}</p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'ITEM'\">\n" +
+    "                <div ng-if=\"confirm.model == 'ITEM'\">\n" +
     "                    <h3>Title: {{confirm.title}}</h3>\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Tags: {{confirm.tags}}</p>\n" +
@@ -4951,7 +4973,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Identifier Set: {{confirm.identifierSet}}</p>\n" +
     "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'ORDER'\">\n" +
+    "                <div ng-if=\"confirm.model == 'ORDER'\">\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Amount Set Alpha: {{confirm.amountSetAlpha}}</p>\n" +
     "                    <p>Identifier Set Alpha: {{confirm.identifierSetAlpha}}</p>\n" +
@@ -4960,7 +4982,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Type: {{confirm.tags}}</p>\n" +
     "                    <p>Status: {{confirm.status}}</p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'PROJECT'\">\n" +
+    "                <div ng-if=\"confirm.model == 'PROJECT'\">\n" +
     "                    <h3>Title: {{confirm.title}}</h3>\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Tags: {{confirm.tags}}</p>\n" +
@@ -4968,11 +4990,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Location: {{confirm.location}}</p>\n" +
     "                    <p>Description: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.description)\"></span></p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'PROJECTMEMBER'\">\n" +
+    "                <div ng-if=\"confirm.model == 'PROJECTMEMBER'\">\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Project: {{confirm.project}}</p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'TASK'\">\n" +
+    "                <div ng-if=\"confirm.model == 'TASK'\">\n" +
     "                    <h3>Title: {{confirm.title}}</h3>\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Tags: {{confirm.tags}}</p>\n" +
@@ -4980,7 +5002,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Location: {{confirm.location}}</p>\n" +
     "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'TIME'\">\n" +
+    "                <div ng-if=\"confirm.model == 'TIME'\">\n" +
     "                    <p>Amount: {{confirm.amount}}</p>\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Tags: {{confirm.tags}}</p>\n" +
@@ -4988,17 +5010,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Associations: {{confirm.associatedModels}}</p>\n" +
     "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
-    "                <div ng-if=\"confirm.modelType == 'TRANSACTION'\">\n" +
+    "                <div ng-if=\"confirm.model == 'TRANSACTION'\">\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>To: {{confirm.to}}</p>\n" +
     "                    <p>From: {{confirm.from}}</p>\n" +
-    "                    <p>Identifier: {{confirm.identifierSet}}</p>\n" +
-    "                    <p>Amount: {{confirm.amountSet}}</p>\n" +
-    "                    <p>Tags: {{confirm.tags}}</p>\n" +
-    "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "                    <p>{{confirm.tags}}</p>\n" +
+    "\n" +
+    "                    <span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
+    "\n" +
+    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div ng-if=\"confirm.modelType == 'VALIDATION'\">\n" +
+    "                <div ng-if=\"confirm.model == 'VALIDATION'\">\n" +
     "                    <p>User: {{confirm.user}}</p>\n" +
     "                    <p>Content: <span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
     "                </div>\n" +

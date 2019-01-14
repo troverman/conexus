@@ -4,12 +4,12 @@
 
 <div ui-view="member">
 	<div class="container" style="padding:0px">
-		<div class="card">
+		<div class="card" ng-click="subNavToggle()">
 			<div style="background-image: url('{{member.coverUrl}}')">
 				<div class="spacing-100"></div>
 			</div>
 			<div class="container">
-				<div class="pull-left"><a href="member/{{member.username}}"><img class="avatar" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></a></div>
+				<div class="pull-left"><a ng-click="$event.stopPropagation()" href="member/{{member.username}}"><img class="avatar" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></a></div>
 				<div style="text-align:right" class="member-tab-container">
 					<ul class="member-tabs subNav">
 						<!--
@@ -25,13 +25,13 @@
 			        	</li>
 			        	-->
 						<li ng-show="currentUser.id != member.id">
-							<a ng-show="!isFollowing" class="btn btn-default" ng-click="follow()">Follow</a>
-							<a ng-show="isFollowing" class="btn btn-default" ng-click="unfollow()">UnFollow</a>
+							<a ng-show="!isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow()">Follow</a>
+							<a ng-show="isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();unfollow()">UnFollow</a>
 						</li>
 						<li ng-show="currentUser.id == member.id"><a class="btn btn-default" href="account">Edit Profile</a></li>
-						<li ng-click="subNavToggle()"><a style="color:black" href="#"><i class="fa fa-bars"></i></a></li>
+						<li><a style="color:black" href="#"><i class="fa fa-bars"></i></a></li>
 					</ul>
-					<div class="nav-toggle" ng-click="subNavToggle()">
+					<div class="nav-toggle">
 						<a style="color:black" href="#"><i class="fa fa-bars"></i></a>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 					<div class="pull-left" style="text-align:left">
 
 						<h2>{{member.firstName}} {{member.lastName}}</h2>
-						<h5><a href="member/{{member.username}}">@{{member.username}}</a></h5>
+						<h5><a ng-click="$event.stopPropagation()" href="member/{{member.username}}">@{{member.username}}</a></h5>
 						<p>{{member.totalWork}} | Total Reputation</p>
 						
 					</div>
@@ -52,7 +52,7 @@
 						<span style="color:gray;font-size:10px;float:right">0x{{member.id}}</span>
 						<br>
 						<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
-						<a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" href="#" ng-click="transactionToggle()">Send Tokens</a>
+						<a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle()">Send Tokens</a>
 					</div>
 					
 				</div>

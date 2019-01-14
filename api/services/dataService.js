@@ -1,5 +1,5 @@
-//const tf = require('@tensorflow/tfjs');
-//require('@tensorflow/tfjs-node');
+const tf = require('@tensorflow/tfjs');
+require('@tensorflow/tfjs-node');
 var Q = require('q');
 
 //HELPER FXNS
@@ -50,16 +50,15 @@ function generate(model) {
 	return 100//Math.floor(Math.random() * model*100);
 };
 
-
 module.exports = {
 
-	getData: function(){
+	getData: function(network, reflective){
 		
 		//POPULATE A NEW NETWORK
 		//TO CREATE A WELL CONNECTED NETWORK
 		//SAMPLE SPACE | A-H Tokens
 		//A-H + [SAMPLE SPACE]
-		var newNetwork = "ABCD".split("");
+		var newNetwork = network || "ABCD".split("");
 		var positionSet = [];
 	    var powerSet = getAllSubsets(newNetwork);
 	    powerSet.shift();
@@ -101,7 +100,11 @@ module.exports = {
 		//});
 
 	   	//STORED AS A MATRIX; algabraic lattice. 
-		var maximumBinaryRelationship = removeMirrorDuplicates(optim);
+	   	//var maximumBinaryRelationship = removeMirrorDuplicates(optim);
+	   	var maximumBinaryRelationship = [];
+	   	if (reflective){maximumBinaryRelationship = optim;}
+	   	if (!reflective){maximumBinaryRelationship = removeMirrorDuplicates(optim);}
+	   	
 		var newOrderArray = [];
 		for (x in maximumBinaryRelationship){
 			newOrderArray.push({
@@ -1754,23 +1757,50 @@ module.exports = {
 				//console.log(orderModels[x]);
 
 			}
-
 		});
 
 		Token.find().limit(10).then((tokenModels)=>{
-			//console.log(tokenModels)
-
+			
 			//SORT BY ACTIVITY..?
-			//NEED COMB LOGIC.. IE POWERSET IS NOT COMP REAL
+			//NEED COMB LOGIC.. 
 			//SOMEHOW LINK 5 ASSETS SO THERE IS A LATTICE IN THE CONNECTIONS OF COMP ASSETS IE A,B,C,D,E 
 
-			for (x in tokenModels){
-				marketTensor.push({name:tokenModels[x].string, data:[]})
-				for (y in tokenModels){
-					//marketTensor[x].data.push({name:tokenModels[y].string, data:[]});
-					marketTensor[x].data.push({name:tokenModels[y].string, bids:[], asks:[]})
+			var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
+			//var tokenSet = ['a','b','c','d','e','f'];
+			var maximumBinaryRelationship = dataService.getData(tokenSet, true);
+
+			for (x in maximumBinaryRelationship){
+				var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
+				if (tensorIndex == -1){
+					marketTensor.push({name:maximumBinaryRelationship[x][0].join(','), data:[]});
+					var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
+					marketTensor[tensorIndex].data.push({
+						name:maximumBinaryRelationship[x][1].join(','), 
+						bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
+						asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
+					})
 				}
+				else{
+					marketTensor[tensorIndex].data.push({
+						name:maximumBinaryRelationship[x][1].join(','), 
+						bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
+						asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
+					})
+				}
+
 			}
+			//console.log(marketTensor);
+			console.dir(marketTensor, { depth: null });
+
+			//powerset x powerset
+
+			//for (x in tokenModels){
+			//	marketTensor.push({name:tokenModels[x].string, data:[]})
+			//	for (y in tokenModels){
+			//		//marketTensor[x].data.push({name:tokenModels[y].string, data:[]});
+			//		marketTensor[x].data.push({name:tokenModels[y].string, bids:[], asks:[]})
+			//	}
+			//}
 
 			//TENSOR
 			//ASSETS x ASSETS
@@ -1808,7 +1838,11 @@ module.exports = {
 			//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS | BRAID
 			//this is getting hyper complex. break lel.. let's go back to create.capital . . --> perform operations with one exchange.. tensor
 
-			var maximumBinaryRelationship = dataService.getData();
+			var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
+			var maximumBinaryRelationship = dataService.getData(tokenSet, false);
+			//console.log(maximumBinaryRelationship);
+
+
 			var relationShipTensor = [];
 			//OBtensor
 
@@ -1846,16 +1880,15 @@ module.exports = {
 			}
 			//console.log(relationShipTensor)
 			const multiMarketRelationship = tf.tensor(relationShipTensor);
-			console.log(multiMarketRelationship)
-			multiMarketRelationship.print();
+			//console.log(multiMarketRelationship)
+			//multiMarketRelationship.print();
 
 			//const lattice =  tf.ones([8,8,8,8,8,8,8,8]);
 			//console.log(lattice)
 			//lattice.print();
-			const lattice =  tf.ones([4,4,4,4]);
-			console.log(lattice)
-			lattice.print();
-
+			//const lattice =  tf.ones([4,4,4,4]);
+			//console.log(lattice)
+			//lattice.print();
 
 			//GET ORDER BOOKS..
 			//BUILD 1st ORDER 1st 

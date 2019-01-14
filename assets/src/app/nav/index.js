@@ -589,11 +589,11 @@ angular.module( 'conexus.nav', [
             console.log($scope.newContent);
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.confirm = $scope.newContent;
-                $scope.confirm.modelType = 'CONTENT';
+                $scope.confirm.model = 'CONTENT';
                 $scope.newContent = {};
                 $mdSidenav('content').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -615,11 +615,11 @@ angular.module( 'conexus.nav', [
             }
             ItemModel.create($scope.newItem).then(function(model) {
                 $scope.confirm = $scope.newItem;
-                $scope.confirm.modelType = 'ITEM';
+                $scope.confirm.model = 'ITEM';
                 $scope.newItem = {};
                 $mdSidenav('item').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -656,11 +656,11 @@ angular.module( 'conexus.nav', [
 
             OrderModel.create($scope.newOrder).then(function(model) {
                 $scope.confirm = $scope.newOrder;
-                $scope.confirm.modelType = 'ORDER';
+                $scope.confirm.model = 'ORDER';
                 $mdSidenav('order').close();
                 $scope.newOrder = {};
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -687,11 +687,11 @@ angular.module( 'conexus.nav', [
             console.log($scope.newProject);
             ProjectModel.create($scope.newProject).then(function(model) {
                 $scope.confirm = $scope.newProject;
-                $scope.confirm.modelType = 'PROJECT';
+                $scope.confirm.model = 'PROJECT';
                 $scope.newProject = {};
                 $mdSidenav('project').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
 
         }
@@ -728,11 +728,11 @@ angular.module( 'conexus.nav', [
             console.log($scope.newTask);
             TaskModel.create($scope.newTask).then(function(model) {
                 $scope.confirm = $scope.newTask;
-                $scope.confirm.modelType = 'TASK';
+                $scope.confirm.model = 'TASK';
                 $scope.newTask = {};
                 $mdSidenav('task').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -756,11 +756,11 @@ angular.module( 'conexus.nav', [
             console.log($scope.newTime);
             TimeModel.create($scope.newTime).then(function(model){
                 $scope.confirm = $scope.newTime;
-                $scope.confirm.modelType = 'TIME';
+                $scope.confirm.model = 'TIME';
                 $scope.newTime = {};
                 $mdSidenav('time').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -780,11 +780,11 @@ angular.module( 'conexus.nav', [
             //information in amountset
             TransactionModel.create($scope.newTransaction).then(function(model){
                 $scope.confirm = $scope.newTransaction;
-                $scope.confirm.modelType = 'TRANSACTION';
+                $scope.confirm.model = 'TRANSACTION';
                 $scope.newTransaction = {};
                 $mdSidenav('transaction').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
@@ -805,11 +805,11 @@ angular.module( 'conexus.nav', [
             console.log($scope.newValidation);
             ValidationModel.create($scope.newValidation).then(function(model) {
                 $scope.confirm = $scope.newValidation;
-                $scope.confirm.modelType = 'VALIDATION';
+                $scope.confirm.model = 'VALIDATION';
                 $scope.newValidation = {};
                 $mdSidenav('validation').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
         }
         else{$mdSidenav('login').toggle()}

@@ -6,7 +6,7 @@ module.exports.bootstrap = function(cb) {
 	//dataService.getData();
 	//dataService.traverse();
 	
-	//dataService.tensorBuild();
+	dataService.tensorBuild();
 
 	//DEF PRE ALPHA. 
 	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);

@@ -21,7 +21,7 @@ angular.module( 'conexus.item', [
 	});
 }])
 
-.controller( 'ItemCtrl', ['$location', '$mdSidenav', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $location, $mdSidenav, $sce, $scope, $stateParams, config, contentList, item, OrderModel, ReactionModel, titleService ) {
+.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $rootScope, $location, $mdSidenav, $sce, $scope, $stateParams, config, contentList, item, OrderModel, ReactionModel, titleService ) {
    
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
@@ -29,6 +29,11 @@ angular.module( 'conexus.item', [
     $scope.item = item;
     $scope.item.model = 'ITEM';
     if ($scope.item.tags){$scope.item.tags = item.tags.split(',')}
+
+    $rootScope.associatedModels = [{
+        address: $scope.item.id,
+        type: 'MARKET',
+    }];
 
     titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');
 

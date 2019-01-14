@@ -21,10 +21,16 @@ angular.module( 'conexus.market', [
 	});
 }])
 
-.controller( 'MarketCtrl', ['$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $scope, $stateParams, config, OrderModel, orders, titleService, token ) {
+.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, config, OrderModel, orders, titleService, token ) {
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
+
+    $rootScope.associatedModels = [{
+        address: $stateParams.id,
+        type: 'MARKET',
+    }];
+
     //$scope.market = {
     //    title: $scope.stateParams.id,
     //    circulation: Math.floor(Math.random()*1000000),

@@ -1,28 +1,3 @@
-<div class="spacing-5"></div>
-
-<div class="row">
-	<div class="col-md-6">
-		<ul style="padding:0px;" class="member-tabs">
-			<li><a href="member/{{member.username}}/assets">Assets</a></li>
-			<li><a href="member/{{member.username}}/positions">Positions</a></li>
-			<li><a href="member/{{member.username}}/ledger">Transactions</a></li>
-		</ul>
-	</div>
-</div>
-
-<div class="row">
-    <div class="card">
-        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-        	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
-            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                <a href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
-
 <div class="row">
 
 	<div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
@@ -45,6 +20,25 @@
 	</div>
 
 	<div class="col-xs-10" style="padding-left:0px;padding-right:0px;">
+
+		<!--<div class="spacing-5"></div>
+
+		<ul style="padding:0px;" class="member-tabs">
+			<li><a href="member/{{member.username}}/assets">Assets</a></li>
+			<li><a href="member/{{member.username}}/positions">Positions</a></li>
+			<li><a href="member/{{member.username}}/ledger">Transactions</a></li>
+		</ul>-->
+
+		<div class="card">
+		    <form ng-submit="search()" style="display:flex;flex-direction:row;">
+		    	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+		        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
+		            <a href="#" role="button">
+		                <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+		            </a>
+		        </div>
+		    </form>
+		</div>
 
 		<div class="card">
 			<div style="padding:16px;">

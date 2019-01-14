@@ -1,3 +1,4 @@
+<!--
 <div class="spacing-5"></div>
 
 <div class="row">
@@ -9,11 +10,12 @@
 		</ul>
 	</div>
 </div>
+-->
 
 <div class="row">
-    <div class="card">
+     <div class="card">
         <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
             <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
                 <a href="#" role="button">
                     <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
@@ -23,6 +25,7 @@
     </div>
 </div>
 
+<!--
 <div class="row">
 	<div class="card">
 		<div style="padding:16px;">
@@ -55,19 +58,39 @@
 	   	</div>
 	</div>
 </div>
+-->
+
+<div class="row">
+	<div class="card">
+		<div style="padding:16px;">
+			<h5>Balance Lookup <span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
+	   		<form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
+	        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
+	        	<div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
+	                <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
+				</div>
+	    	</form>
+	    	<div ng-show="balanceLookupValue !== undefined">
+	    		<h5><a href="market/{{balanceLook}}">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
+	    		<!--FOUND TOKEN MODEL.. INFORMATION IE REP OR-->
+	    	</div>
+	    </div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="card">
 		<div style="padding:16px;">
 
+			<!--
 			<div>
 				<h3>Reputation</h3>
-				<!--<highchart config="reputationRadial"></highchart>-->
 				<highchart config="reputationColumn"></highchart>
 			</div>
+			-->
+
 			<div>
 				<h3>Balance</h3>
-				<!--<highchart config="balanceRadial"></highchart>-->
 				<highchart config="balanceColumn"></highchart>
 				<highchart config="balancePie"></highchart>
 			</div>
