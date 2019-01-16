@@ -74,6 +74,31 @@ angular.module( 'conexus.discover', [
         credits:{enabled:false},
     };
 
+
+    $scope.chart1 = {
+        chart: {zoomType: 'x',},
+        series: [{
+            id: 'Expenses',
+            type: 'column',
+            name: 'Expenses USD',
+            data: []
+        },{
+            id: 'Revenue',
+            type: 'spline',
+            name: 'Revenue USD',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+
+    for (var i = 0;i<40;i++){
+        $scope.chart1.series[0].data.push(100*Math.random());
+        $scope.chart1.series[1].data.push(100*Math.random());
+    }
+
 	$scope.map = {
 		center: {latitude: 35.902023, longitude: -84.1507067 },
 		zoom: 9
