@@ -271,6 +271,13 @@ angular.module( 'conexus.project', [
 
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id}
 
+    //$scope.clickering = function(location) {
+    //    $state.go(location);
+    //    console.log($state)
+    //    $rootScope.$state.go = $state;
+    //    console.log('location')
+    //};
+
     $scope.createMember = function(){
         if($scope.currentUser){
             $scope.newMember.user = config.currentUser.id;
@@ -987,7 +994,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectItemsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+.controller( 'ProjectItemsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, items, lodash, project, titleService) {
     titleService.setTitle(project.title + ' | Items | CRE8.XYZ');
 
     $scope.items = items;

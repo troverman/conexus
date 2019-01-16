@@ -1279,7 +1279,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
     "                    <li><a href=\"/content\">Content</a></li>\n" +
     "                    <li><a href=\"/marketplace\">Items</a></li>\n" +
-    "                    <li><a href=\"/market\">Positions</a></li>\n" +
+    "                    <li><a href=\"/market\">Market</a></li>\n" +
     "                    <li><a href=\"/projects\">Projects</a></li>\n" +
     "                    <li><a href=\"/tasks\">Tasks</a></li>\n" +
     "                    <li style=\"float:right;font-size:14px;\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
@@ -1641,12 +1641,12 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
     "                        <li><a href=\"/content\">Content</a></li>\n" +
     "                        <li><a href=\"/marketplace\">Items</a></li>\n" +
-    "                        <li><a href=\"/market\">Orders</a></li>\n" +
+    "                        <li><a href=\"/market\">Market</a></li>\n" +
     "                        <li><a href=\"/projects\">Projects</a></li>\n" +
     "                        <li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "\n" +
     "                        <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "                        <!--<li style=\"float:right\">\n" +
+    "                        <!--\n" +
+    "                        <li style=\"float:right\">\n" +
     "                            <div class=\"dropdown sort-dropdown noselect\">\n" +
     "                                <a href=\"#\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
     "                                    <h4 style=\"\" class=\"noselect\">Sort By Recent <i class=\"fa fa-angle-down\"></i></h4>\n" +
@@ -1659,10 +1659,13 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                                    <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
     "                                </ul>\n" +
     "                            </div>\n" +
-    "                        </li>-->\n" +
+    "                        </li>\n" +
+    "                        -->\n" +
     "                    </ul>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
