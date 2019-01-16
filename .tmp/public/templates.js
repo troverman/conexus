@@ -914,7 +914,8 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "<div class=\"container\">\n" +
     "    \n" +
     "    <div class=\"row\">\n" +
-    "        <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        <!--TODO FILTER BUTTON-->\n" +
+    "        <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <span><b>Tags</b></span>\n" +
@@ -941,14 +942,11 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
-    "            <!--<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "            </ul>-->\n" +
-    "\n" +
-    "            <div class=\"card\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
-    "            </div>\n" +
+    "    \n" +
+    "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            </ul>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -959,6 +957,10 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                        </a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"card\">\n" +
+    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Content</button>\n" +
     "            </div>\n" +
     "\n" +
     "            <div ng-repeat=\"item in contentList\">\n" +
@@ -1045,8 +1047,16 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		<li><a href=\"/market\">Orders</a></li>\n" +
     "		<li><a href=\"/projects\">Projects</a></li>\n" +
     "		<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "        <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "	</ul>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "	    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "	    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "	    <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "	</ul>\n" +
+    "	<div style=\"clear:both\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<!--TODO: FILTER / SEARCH -->\n" +
@@ -5335,7 +5345,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("project/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/index.tpl.html",
-    "<style>.angular-google-map-container { height: 200px;}</style>\n" +
+    "<style>.angular-google-map-container { height: 200px;} </style>\n" +
     "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\" ng-click=\"subNavToggle()\">\n" +
@@ -5390,8 +5400,8 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                    <li style=\"float:right;margin:5px\"><a style=\"color:black\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "                    <li ng-click=\"$event.stopPropagation();filterToggle();\" style=\"float:left;margin:5px\"><a style=\"color:black\"><i class=\"fa fa-filter\"></i></a></li>\n" +
     "                    <li>\n" +
-    "                        <form ng-click=\"$event.stopPropagation();\" style=\"display:flex;flex-direction:row;float:left;margin-top: -5px;margin-bottom: 3px;width:80%\">\n" +
-    "                            <tags-input class=\"\" style=\"border:0px;flex-grow:2;height:40px;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "                        <form ng-click=\"$event.stopPropagation();\" style=\"display:flex;flex-direction:row;float:left;width:80%\">\n" +
+    "                            <tags-input class=\"\" style=\"border:0px;flex-grow:2;height:40px;margin-top: -7px;margin-bottom: 3px;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "                        </form>\n" +
     "                    </li>\n" +
     "                </ul>\n" +
@@ -6448,7 +6458,9 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h2>Projects</h2></div>\n" +
+    "            <div class=\"col-xs-6\">\n" +
+    "                <h2>Projects</h2>\n" +
+    "            </div>\n" +
     "            <div class=\"col-xs-6\">\n" +
     "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
@@ -6474,9 +6486,11 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
-    "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"projectToggle()\">+ project</button>\n" +
-    "        </div>\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "        </ul>\n" +
+    "        <div style=\"clear:both\"></div>\n" +
     "\n" +
     "        <div class=\"card\">\n" +
     "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -6489,7 +6503,6 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            </form>\n" +
     "        </div>\n" +
     "\n" +
-    "        <!--\n" +
     "        <div class=\"card\">\n" +
     "            <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
@@ -6500,7 +6513,10 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                </ui-gmap-marker>\n" +
     "            </ui-gmap-google-map>\n" +
     "        </div>\n" +
-    "        -->\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"projectToggle()\">+ project</button>\n" +
+    "        </div>\n" +
     "\n" +
     "        <div ng-repeat=\"project in projects\">\n" +
     "            <div class=\"card\" ng-click=\"\">\n" +
@@ -7291,7 +7307,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "<!--TODO: TOKEN OUPUT FILTERS-->\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "			<!--TODO: MOBILE-->\n" +
     "			<!--TODO: URL-->\n" +
     "			<!--TODO: FILTER RENDER-->\n" +
@@ -7323,9 +7339,11 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "	    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
-    "	    	<div class=\"card\">\n" +
-    "		        <button class=\"btn btn-default log-btn\" ng-click=\"taskToggle()\">+ Task</button>\n" +
-    "		    </div>\n" +
+    "		    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "            </ul>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -7341,6 +7359,11 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	        <div class=\"card\">\n" +
     "				<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "			</div>\n" +
+    "\n" +
+    "			<div class=\"card\">\n" +
+    "		        <button class=\"btn btn-default log-btn\" ng-click=\"taskToggle()\">+ Task</button>\n" +
+    "		    </div>\n" +
+    "\n" +
     "\n" +
     "			<!--TODO: MARKET LOOKUP-->\n" +
     "			<!--TODO: ASSOCIATIONS-->\n" +

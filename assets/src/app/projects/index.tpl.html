@@ -2,7 +2,9 @@
     <div class="container"> 
         <div class="spacing-25"></div>
         <div class="row">
-            <div class="col-xs-6"><h2>Projects</h2></div>
+            <div class="col-xs-6">
+                <h2>Projects</h2>
+            </div>
             <div class="col-xs-6">
                 <div class="dropdown sort-dropdown noselect" style="float:right">
                     <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -28,9 +30,11 @@
 
     <div class="row">
 
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="projectToggle()">+ project</button>
-        </div>
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-map-marker"></i> Location</a></li>
+        </ul>
+        <div style="clear:both"></div>
 
         <div class="card">
             <form ng-submit="search()" style="display:flex;flex-direction:row;">
@@ -43,7 +47,6 @@
             </form>
         </div>
 
-        <!--
         <div class="card">
             <style type="text/css">.angular-google-map-container{height: 200px;}</style>
             <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
@@ -54,7 +57,10 @@
                 </ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
-        -->
+
+        <div class="card">
+            <button class="btn btn-default log-btn" ng-click="projectToggle()">+ project</button>
+        </div>
 
         <div ng-repeat="project in projects">
             <div class="card" ng-click="">

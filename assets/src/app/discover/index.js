@@ -84,7 +84,7 @@ angular.module( 'conexus.discover', [
 	$scope.projects = projects;
 	$scope.tasks = tasks;
     $scope.tasks.map(function(obj){
-        obj.tags = obj.tags.split(',');
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.time = time;

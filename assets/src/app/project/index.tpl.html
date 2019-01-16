@@ -1,4 +1,4 @@
-<style>.angular-google-map-container { height: 200px;}</style>
+<style>.angular-google-map-container { height: 200px;} </style>
 
 <div class="container" style="padding:0px">
     <div class="card" ng-click="subNavToggle()">
@@ -53,8 +53,8 @@
                     <li style="float:right;margin:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
                     <li ng-click="$event.stopPropagation();filterToggle();" style="float:left;margin:5px"><a style="color:black"><i class="fa fa-filter"></i></a></li>
                     <li>
-                        <form ng-click="$event.stopPropagation();" style="display:flex;flex-direction:row;float:left;margin-top: -5px;margin-bottom: 3px;width:80%">
-                            <tags-input class="" style="border:0px;flex-grow:2;height:40px;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+                        <form ng-click="$event.stopPropagation();" style="display:flex;flex-direction:row;float:left;width:80%">
+                            <tags-input class="" style="border:0px;flex-grow:2;height:40px;margin-top: -7px;margin-bottom: 3px;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
                         </form>
                     </li>
                 </ul>
