@@ -45,7 +45,7 @@
         </div>
     </md-sidenav>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="filter" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="filter" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
             <div class="page-heading">
@@ -596,8 +596,8 @@
                 <div ng-if="member">
                     <h1 class="nav-links"><a href="member/{{member.username}}">{{member.username}}</a></h1>
                     <h4 class="nav-links"><a href="member/{{member.username}}/about">About</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/consumption">Actions</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/assets">Assets</a></h4>
-                    <h4 class="nav-links"><a href="member/{{member.username}}/consumption">Consumption</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/content">Content</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/following">{{member.followingCount}} Following</a></h4>

@@ -1,15 +1,22 @@
 <style>.angular-google-map-container { height: 200px;}</style>
 
 <div class="container" style="padding:0px">
-    <div class="card">
+    <div class="card" ng-click="subNavToggle()">
         <div class="imageContainerSmall">
             <div class="imageContainerSmallDiv">  
+
+
                 <h1 style="text-align:left;" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/>
                     {{project.title}}
                     <span ng-show="project.parent"> | 
-                        <a style="color:white" href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a>
+                        <a ng-click="$event.stopPropagation();" style="color:white" href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a>
+                    </span> 
+                    <span ng-show="projectNavigation" style="color:white;text-transform:capitalize;"> | 
+                       {{projectNavigation}}
                     </span> 
                 </h1>
+
+
             </div>
         </div>
         <div ng-show="project.location">
@@ -17,7 +24,7 @@
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
                     <ui-gmap-window options="windowOptions" closeClick="closeClick()">
                         <div>
-                            <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+                            <div style="font-size: 15px;"><a ng-click="$event.stopPropagation();" href="#">{{marker.content}}</a></div>
                         </div>
                     </ui-gmap-window>
                 </ui-gmap-marker>
@@ -27,30 +34,31 @@
             <div class="member-tab-container container" style="padding-left:0px">
                 <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs subNav">
-                        <li><a href="project/{{project.urlTitle}}">Activity</a></li>
-                        <li><a href="project/{{project.urlTitle}}/content">Content</a></li>
-                        <li><a href="project/{{project.urlTitle}}/ledger">Ledger</a></li>
-                        <li><a href="project/{{project.urlTitle}}/members">Members</a></li>
-                        <li><a href="project/{{project.urlTitle}}/projects">Projects</a></li>
-                        <li><a href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
-                        <li><a href="project/{{project.urlTitle}}/time">Time</a></li>
-                        <li style=""><a class="btn btn-default" ng-click="transactionToggle()">Send Tokens</a></li>
-                        <li style=""><a class="btn btn-default" ng-show="isProjectCreator()" ng-click="editProjectToggle()">Edit</a></li>
-                        <li style=""><a class="btn btn-default" ng-click="createMember()">Join</a></li>
-                        <li ng-click="subNavToggle()"><a style="color:black"><i class="fa fa-bars"></i></a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}">Activity</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/content">Content</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/ledger">Ledger</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/members">Members</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/projects">Projects</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/time">Time</a></li>
+                        <li style=""><a class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle()">Send Tokens</a></li>
+                        <li style=""><a class="btn btn-default" ng-show="$event.stopPropagation();isProjectCreator()" ng-click="editProjectToggle()">Edit</a></li>
+                        <li style=""><a class="btn btn-default" ng-click="$event.stopPropagation();createMember()">Join</a></li>
+                        <li style="float:right;margin-top:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
                     </ul>
                 </div>
             </div>
-            <div class="nav-toggle" ng-click="subNavToggle()">
-                <a style="color:black" href="#"><i class="fa fa-bars"></i></a>
+            <div class="nav-toggle" style="padding:0px">
+                <ul style="padding:10px 5px;" class="member-tabs">
+                    <li style="float:right;margin:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
+                    <li ng-click="$event.stopPropagation();filterToggle();" style="float:left;margin:5px"><a style="color:black"><i class="fa fa-filter"></i></a></li>
+                    <li>
+                        <form ng-click="$event.stopPropagation();" style="display:flex;flex-direction:row;float:left;margin-top: -5px;margin-bottom: 3px;width:80%">
+                            <tags-input class="" style="border:0px;flex-grow:2;height:40px;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+                        </form>
+                    </li>
+                </ul>
             </div>
-            <!--<li><a class="btn btn-default" ng-click="transactionToggle()">Send Tokens</a></li>-->
-            <!--SEARCH-->
-            <!--<div class="card">
-                <form style="display:flex;flex-direction:row;">
-                    <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery" ng-keyup="keyPress(searchQuery)">
-                </form>
-            </div>-->
         </div>
     </div>
 </div>

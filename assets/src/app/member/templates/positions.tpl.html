@@ -30,6 +30,10 @@
 		</ul>-->
 
 		<div class="card">
+			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
+		</div>
+
+		<div class="card">
 		    <form ng-submit="search()" style="display:flex;flex-direction:row;">
 		    	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
 		        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
@@ -51,10 +55,6 @@
 
 			</div>
 		</div>	
-
-		<div class="card">
-			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
-		</div>
 
 	    <div ng-repeat="order in orders">
 	        <div class="card" ng-click="renderToggle(order)">

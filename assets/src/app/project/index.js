@@ -222,11 +222,13 @@ angular.module( 'conexus.project', [
     })
 }])
 
-.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, config, MemberModel, project, titleService, TransactionModel ) {
+.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, config, MemberModel, project, titleService, TransactionModel ) {
     titleService.setTitle(project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
     $scope.newTransaction = {};
+    $scope.projectNavigation = $state.current.url.substring(1);
+
 
     //TODO
     //$ROOTSCOPE --> PASS TO NAV

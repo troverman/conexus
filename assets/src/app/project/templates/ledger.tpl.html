@@ -1,39 +1,19 @@
-<div class="spacing-5"></div>
-
 <div class="row">
-	<div class="col-md-6">
-		<ul style="padding:0px;" class="member-tabs">
-			<li><a href="project/{{project.urlTitle}}/assets">Assets</a></li>
-			<li><a href="project/{{project.urlTitle}}/positions">Positions</a></li>
-			<li><a href="project/{{project.urlTitle}}/ledger">Transactions</a></li>
-		</ul>
-	</div>
-</div>
-
-<div class="row">
-	<div class="card">
+	<div class="card mobileFix">
 	    <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
-            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                <a href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
+	        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+	        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
+	            <a href="#" role="button">
+	                <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+	            </a>
+	        </div>
+	    </form>
 	</div>
 </div>
 
 <div class="row">
 
-	<div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
-		<div class="card">
-			<div style="padding:16px;">
-				<span><b>Tags</b></span>
-	            <div ng-repeat="tag in sortedTransactionTags">
-	                <a href="#" ng-click="selectTag(tag.element)">{{tag.element}}</a>
-	            </div>
-			</div>
-		</div>
+	<div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card">
 			<div style="padding:16px;">
 				<span><b>Assets</b></span>
@@ -42,9 +22,17 @@
 	            </div>
 			</div>
 		</div>
+		<div class="card">
+			<div style="padding:16px;">
+				<span><b>Tags</b></span>
+	            <div ng-repeat="tag in sortedTransactionTags">
+	                <a href="#" ng-click="selectTag(tag.element)">{{tag.element}}</a>
+	            </div>
+			</div>
+		</div>
 	</div>
 
-	<div class="col-xs-10" style="padding-left:0px;padding-right:0px;">
+	<div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
 		<div class="spacing-5"></div>
 
@@ -52,8 +40,6 @@
 			<li ng-click="selectOverview()"><a href="">Overview</a></li>
 			<li ng-click="selectExpense()"><a href="">Expense</a></li>
 			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
-
-
 
 			<!--TODO-->
 			<li style="float:right">
@@ -63,9 +49,11 @@
 					<i class="fa fa-question-circle"></i>
 				</a>
 			</li>
-
-
 		</ul>
+
+		<div class="card">
+			<button class="btn btn-default log-btn" ng-click="transactionToggle()">+ Transaction</button>
+		</div>
 
 		<div class="card">
 			<div style="padding:16px;">
@@ -78,16 +66,12 @@
 
 					</div>
 
-					
-
 					<!--TODO-->
 					<div style="text-align:right;" class="col-xs-6">
 						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
 						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
 						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
 					</div>
-
-
 
 				</div>
 
@@ -102,32 +86,15 @@
 				</div>
 
 				<!--TODO TABLE-->
-				<!--
-				<div class="col-xs-12">
-					<div style="text-align:right;" class="col-xs-6">
-						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
-						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
-						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
-					</div>
-				</div>
-				-->
 
 			</div>
 		</div>
 
-		<div class="card">
-			<button class="btn btn-default log-btn" ng-click="transactionToggle()">+ Transaction</button>
-		</div>
-
-		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(item)">
+		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(transaction)">
 			<div style="padding:16px">
 				<p style="font-weight:800">From: <a ng-click="$event.stopPropagation();" href="">{{transaction.from}}</a> To: <a ng-click="$event.stopPropagation();" href="">{{transaction.to}}</a></p>
-
-
 				<span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p></span>
 				<p style="font-weight:800">{{transaction.amount}} <a ng-click="$event.stopPropagation();" href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
-
-
 				<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 				<p>{{transaction.content}}</p>
 				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
