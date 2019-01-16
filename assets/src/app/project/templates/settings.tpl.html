@@ -1,11 +1,22 @@
-<div class="spacing-5"></div>
-
 <div class="row">
+
+	<div class="card">
+        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Motion to Edit</button>
+    </div>
+
 	<div class="card">
 		<div style="padding:16px;">
+
             <h1>Settings</h1>
+
+            <h3>{{project.title}}</h3>
+			<p>{{project.description}}</p>
+			<p>Protocols</p>
+
+			<p>Manifolds</p>
             <p>Token Manifolds: '{{project.title}}+'</p>
-            <!--Create new Manifold-->
+
         </div>
     </div>
+    
 </div>

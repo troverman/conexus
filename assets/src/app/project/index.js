@@ -502,11 +502,21 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Content | CRE8.XYZ');
     $scope.contentList = contentList;
     $scope.newContent = {};
-    $scope.project = project;
-
     $scope.newContent.parent = project.id;
-    //$scope.newContent.tags = project.title+','
-    $scope.selectedType = 'POST';
+
+    if ($scope.contentList.length == 0){
+        $scope.contentList = [];
+        for(var i=0;i < 50;i++){
+            $scope.contentList.push({
+                id:i,
+                title:'sup',
+                content:'sup :)',
+                tags: 'some,tags,here',
+                reactions:{plus:0,minus:0},
+                user:{username:'troverman'}
+            })
+        }
+    }
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
@@ -536,40 +546,12 @@ angular.module( 'conexus.project', [
     }
     $scope.loadTags();
 
-    //DEPRECIATE
-    $scope.createContent = function(content) {
-        if ($scope.currentUser){
-            if(content){$scope.newContent.contentModel = content.id;}
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.project = $scope.project.id;
-            $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
-                return obj.text
-            }).join(",");
-            $scope.newContent.type = $scope.selectedType;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-                $scope.contentList.unshift(model);
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.loadTags = function(query) {
-        //return $http.get('/tags?query=' + query);
-    };
-
     $scope.reply = function(activity){
         if ($scope.currentUser){
             var index = $scope.content.map(function(obj){return obj.id}).indexOf(activity.id);
             $scope.content[index].showReply = !$scope.content[index].showReply;
         }
         else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.search = function(){};
-
-    $scope.selectType = function(type){
-        $scope.selectedType = type;
     };
 
 }])
@@ -998,6 +980,25 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Items | CRE8.XYZ');
 
     $scope.items = items;
+
+    if ($scope.items.length == 0){
+        $scope.items = [];
+        for(var i=0;i < 50;i++){
+            $scope.items.push({
+                id:i,
+                title:'sup',
+                tags: 'some,tags,here',
+                reactions:{plus:0,minus:0},
+                user:{username:'troverman'}
+            })
+        }
+    }
+
+    $scope.items.map(function(obj){
+        if(obj.tags){obj.tags=obj.tags.split(',')}
+        return obj;
+    });
+
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -1005,7 +1006,23 @@ angular.module( 'conexus.project', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    $scope.search = function(){};
+    $scope.loadTags = function(){
+        $scope.tags = $scope.items.map(function(obj){
+            return obj.tags;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    }
+    $scope.loadTags();
 
 }])
 
@@ -1188,6 +1205,13 @@ angular.module( 'conexus.project', [
     $scope.project = project;
     $scope.projects = projects;
 
+    if ($scope.projects.length == 0){
+        $scope.projects = [];
+        for(var i=0;i < 10;i++){
+            //$scope.projects.push({title:'Project1'});
+        }
+    }
+
     $scope.createProject = function(newProject) {
         if ($scope.currentUser){
             $scope.newProject.user = $scope.currentUser.id;
@@ -1228,6 +1252,45 @@ angular.module( 'conexus.project', [
     $scope.newTask = {};
     $scope.tasks = tasks;
     $scope.project = project;
+
+    if ($scope.tasks.length == 0){
+        $scope.tasks = [];
+        for(var i=0;i < 50;i++){
+
+            //ORG CRYSTAL
+            var canvas = {
+                id:i,
+                title:'Canvas and Organize Participants',
+                content:'Community Evangelist, doing the leg work of engaging and growing the community! Let\'s Go Door to Door!',
+                tags: 'canvas, organize, register, campaign, community',
+                reactions:{plus:0,minus:0},
+                user:{username:'troverman'}
+            };
+
+            var attend = {
+                id:i,
+                title:'Attend Community Events',
+                content:'Attend Community Events, Come out and join us!',
+                tags: 'attend, community, event, presence',
+                reactions:{plus:0,minus:0},
+                user:{username:'troverman'}
+            };
+
+            var organize = {
+                id:i,
+                title:'Organize Community Event',
+                content:'Help Cocreate Community Events, Let\'s Collab!',
+                tags: 'create, content, presence',
+                reactions:{plus:0,minus:0},
+                user:{username:'troverman'}
+            };
+
+            if (i % 2){$scope.tasks.push(canvas)}
+            else if (i % 3){$scope.tasks.push(attend)}
+            else{$scope.tasks.push(organize)}
+        }
+    }
+
 
     $scope.tasks.map(function(obj){
 
