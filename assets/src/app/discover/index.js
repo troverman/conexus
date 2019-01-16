@@ -109,6 +109,7 @@ angular.module( 'conexus.discover', [
 	$scope.projects = projects;
 	$scope.tasks = tasks;
     $scope.tasks.map(function(obj){
+        obj.model='TASK';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });

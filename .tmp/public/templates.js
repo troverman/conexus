@@ -1153,8 +1153,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			<div ng-repeat=\"item in tasks.slice(0,10)\">\n" +
     "				<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "					<div style=\"padding:16px;\">\n" +
-    "						<div style=\"float:right\">\n" +
-    "		                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "						<div style=\"float:right;text-align:right\">\n" +
+    "		                    <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "							<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "		                </div>\n" +
     "\n" +
     "						<h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
@@ -1265,8 +1266,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				<div ng-repeat=\"item in tasks.slice(0,5)\">\n" +
     "					<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "						<div style=\"padding:16px;\">\n" +
-    "							<div style=\"float:right\">\n" +
-    "			                    <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "							<div style=\"float:right;text-align:right\">\n" +
+    "			                    <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "								<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "			                </div>\n" +
     "\n" +
     "							<h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
