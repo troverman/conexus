@@ -110,7 +110,7 @@ angular.module( 'conexus.projects', [
     //IMPROVE :)
 
 
-    $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:sortedLocationArray}
+    $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
 
 
     $scope.createProject = function(newProject) {
