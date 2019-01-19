@@ -54,7 +54,7 @@
 	        <div class="card">
 	            <div style="padding:16px;">
 	                <span><b>Locations</b></span>
-	                <div ng-repeat="location in locations">
+	                <div ng-repeat="location in sortedLocationsArray">
 	                    <a href="#" ng-click="filterContent(tag.element)">{{location}}</a>
 	                </div>
 	            </div>
@@ -64,8 +64,8 @@
 	    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
 		    <ul style="padding:0px;" class="member-tabs">
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-filter"></i> Filter</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-map-marker"></i> Location</a></li>
+                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>
             </ul>
             <div style="clear:both"></div>
 

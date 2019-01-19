@@ -32,28 +32,16 @@ angular.module( 'conexus.contentList', [
 
     $scope.sortedLocationArray = ['Knoxville', 'Chapel Hill', 'New York City']
     
-    //TODO: BETTER
-    //TODO: MANY TO MANY
-    //TODO: SET | FACTOR
-    //$scope.associations = $scope.tasks.map(function(obj){
-    //    return obj.project.title;
-    //});
-
     //TODO: PROPER ASSOCIATIONS
     $scope.loadAssociations = function(){
-
         $scope.associations = $scope.contentList.map(function(obj){
-            console.log(obj)
             if (obj.project){return obj.project.title;}
             if (obj.task){return obj.task.title;}
         });
-
         $scope.associations = [].concat.apply([], $scope.associations);
         $scope.associations = $scope.associations.filter(function(e){return e});
         console.log($scope.associations)
-
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-
         $scope.sortedAssociationArray = [];
         for (x in $scope.associations){
             var amount = countInArray($scope.associations, $scope.associations[x]);
@@ -73,14 +61,9 @@ angular.module( 'conexus.contentList', [
             returnObj = obj.tags;
             return returnObj;
         });
-
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-         
-        function countInArray(array, value) {
-            return array.reduce(function(n, x){ return n + (x === value)}, 0);
-        }
-
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -91,6 +74,8 @@ angular.module( 'conexus.contentList', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
+
+    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, location:$scope.sortedLocationArray}
 
     //DEPCRECIATE TO GLOBAL
     $scope.createContent = function(content) {

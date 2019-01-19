@@ -34,6 +34,7 @@
             <div class="member-tab-container container" style="padding-left:0px">
                 <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs subNav">
+                        <!--<li ng-click="$event.stopPropagation();filterToggle('DISCOVER');" style="float:left;margin:5px"><a style="color:black"><i class="fa fa-filter"></i></a></li>-->
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}">Activity</a></li>
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/content">Content</a></li>
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/ledger">Ledger</a></li>
@@ -51,7 +52,7 @@
             <div class="nav-toggle" style="padding:0px">
                 <ul style="padding:10px 5px;" class="member-tabs">
                     <li style="float:right;margin:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
-                    <li ng-click="$event.stopPropagation();filterToggle();" style="float:left;margin:5px"><a style="color:black"><i class="fa fa-filter"></i></a></li>
+                    <li ng-click="$event.stopPropagation();filterToggle('DISCOVER');" style="float:left;margin:5px"><a style="color:black"><i class="fa fa-filter"></i></a></li>
                     <li>
                         <form ng-click="$event.stopPropagation();" style="display:flex;flex-direction:row;float:left;width:80%">
                             <tags-input class="" style="border:0px;flex-grow:2;height:40px;margin-top: -7px;margin-bottom: 3px;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>

@@ -103,6 +103,7 @@ angular.module( 'conexus.discover', [
 		center: {latitude: 35.902023, longitude: -84.1507067 },
 		zoom: 9
 	};
+    
     $scope.markers = [];
 	$scope.members = members;
 	$scope.options = {scrollwheel: false};

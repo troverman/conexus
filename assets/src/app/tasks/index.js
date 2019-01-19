@@ -48,10 +48,8 @@ angular.module( 'conexus.tasks', [
         return obj;
     });
 
-    console.log($scope.tasks)
-
     //TODO: ALL
-    $scope.locations = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+    $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
 
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];
@@ -71,33 +69,6 @@ angular.module( 'conexus.tasks', [
             }         
         }
         else{$mdSidenav('login').toggle();}
-    };
-
-    $scope.loadMore = function() {
-        $scope.skip = $scope.skip + 20;
-        $rootScope.stateIsLoading = true;
-        TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
-            $rootScope.stateIsLoading = false;
-            tasks.map(function(obj){
-                obj.model = 'TASK';
-                //TEMP HARDCODE -- MOVE TO PROTOCOL
-                obj.tokens = [];
-                obj.tokens.push('CRE8');
-                obj.tokens.push('CRE8+TIME');
-                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
-                if (obj.tags){
-                    obj.tags = obj.tags.split(',');
-                    for (x in obj.tags){
-                        obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
-                        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
-                    }
-                }
-                return obj;
-            });
-            Array.prototype.push.apply($scope.tasks, tasks);
-            $scope.loadAssociations();
-            $scope.loadTags();
-        });
     };
 
     $scope.filterContent = function(filter) {
@@ -129,12 +100,32 @@ angular.module( 'conexus.tasks', [
         });
     };
 
-    //TODO: BETTER
-    //TODO: MANY TO MANY
-    //TODO: SET | FACTOR
-    //$scope.associations = $scope.tasks.map(function(obj){
-    //    return obj.project.title;
-    //});
+    $scope.loadMore = function() {
+        $scope.skip = $scope.skip + 20;
+        $rootScope.stateIsLoading = true;
+        TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
+            $rootScope.stateIsLoading = false;
+            tasks.map(function(obj){
+                obj.model = 'TASK';
+                //TEMP HARDCODE -- MOVE TO PROTOCOL
+                obj.tokens = [];
+                obj.tokens.push('CRE8');
+                obj.tokens.push('CRE8+TIME');
+                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
+                if (obj.tags){
+                    obj.tags = obj.tags.split(',');
+                    for (x in obj.tags){
+                        obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
+                        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
+                    }
+                }
+                return obj;
+            });
+            Array.prototype.push.apply($scope.tasks, tasks);
+            $scope.loadAssociations();
+            $scope.loadTags();
+        });
+    };
 
     $scope.loadAssociations = function(){
         $scope.associations = $scope.tasks.map(function(obj){
@@ -173,6 +164,8 @@ angular.module( 'conexus.tasks', [
         
     }
     $scope.loadTags();
+
+    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray}
 
     $scope.reply = function(item){
         if ($scope.currentUser){

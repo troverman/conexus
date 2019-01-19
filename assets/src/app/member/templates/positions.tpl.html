@@ -1,6 +1,6 @@
 <div class="row">
 
-	<div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
+	<div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card">
 			<div style="padding:16px;">
 				<span><b>Base Markets</b></span>
@@ -19,19 +19,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-10" style="padding-left:0px;padding-right:0px;">
-
-		<!--<div class="spacing-5"></div>
-
-		<ul style="padding:0px;" class="member-tabs">
-			<li><a href="member/{{member.username}}/assets">Assets</a></li>
-			<li><a href="member/{{member.username}}/positions">Positions</a></li>
-			<li><a href="member/{{member.username}}/ledger">Transactions</a></li>
-		</ul>-->
-
-		<div class="card">
-			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
-		</div>
+	<div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
 		<div class="card">
 		    <form ng-submit="search()" style="display:flex;flex-direction:row;">
@@ -42,6 +30,10 @@
 		            </a>
 		        </div>
 		    </form>
+		</div>
+
+		<div class="card">
+			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
 		</div>
 
 		<div class="card">

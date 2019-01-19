@@ -16,6 +16,11 @@ angular.module( 'conexus.nav', [
     $scope.validationColumnRender = {};
     //$rootScope.currentUser = config.currentUser;
 
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+
     if ($scope.currentUser){
         $scope.newContent = {};
         $scope.newItem = {};
@@ -228,11 +233,60 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.filterToggle = function(type){
+    $rootScope.filterToggle = function(type, item){
+
+        $scope.selectedTags = [];
+        $scope.selectedAssets = [];
+        $scope.selectedAssociations = [];
+        $scope.selectedLocations = [];
+        $scope.selectedTags = [];
+
+        //TODO
+        $scope.locationFilter = {};
+        $scope.locationFilter.distance = 0;
+
+        //WATCHERS
+
+        $scope.selectAsset = function(item){
+            if ($scope.selectedAssets.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $scope.selectedAssets.push({text:item});
+                $scope.item.assets = $scope.item.assets.filter(function(obj) { 
+                    return obj.element !== item
+                });
+            }
+        };
+
+         $scope.selectAssociation = function(item){
+            if ($scope.selectedAssociations.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $scope.selectedAssociations.push({text:item});
+                $scope.item.associations = $scope.item.associations.filter(function(obj) { 
+                    return obj.element !== item
+                });
+            }
+        };
+
+        $scope.selectLocation = function(item){
+            if ($scope.selectedLocations.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $scope.selectedLocations.push({text:item});
+            }
+        };
+
+        $scope.selectTag = function(item){
+            if ($scope.selectedTags.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $scope.selectedTags.push({text:item});
+                $scope.item.tags = $scope.item.tags.filter(function(obj) { 
+                    return obj.element !== item
+                });
+            }
+        };
+
         //POSTIONS / MARKETS
         //LEDGER
+        $scope.item = item;
         $scope.type = type;
+
         console.log($rootScope.baseMarkets);
+
         $mdSidenav('filter').toggle()
 
     };

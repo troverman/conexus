@@ -49,6 +49,70 @@ angular.module( 'conexus.projects', [
         }
     }
 
+    //IMPROVE :)
+    $scope.loadLocations = function(){
+        $scope.tags = $scope.projects.map(function(obj){
+            return obj.location;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedLocationArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedLocationArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedLocationArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedLocationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadLocations();
+
+    $scope.loadAssociations = function(){
+        $scope.associations = $scope.projects.map(function(obj){
+            if (obj.parent){return obj.parent;}
+        });
+        $scope.associations = [].concat.apply([], $scope.associations);
+        $scope.associations = $scope.associations.filter(function(e){return e});
+        console.log($scope.associations)
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadAssociations();
+
+    $scope.loadTags = function(){
+        $scope.tags = $scope.projects.map(function(obj){
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadTags();
+    //IMPROVE :)
+
+
+    $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:sortedLocationArray}
+
+
     $scope.createProject = function(newProject) {
         if ($scope.currentUser){
             $scope.newProject.user = $scope.currentUser.id;

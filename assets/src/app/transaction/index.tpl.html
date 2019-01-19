@@ -12,8 +12,9 @@
             <h2>Transaction {{transaction.id}}</h2>
             
             <p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
-            <p style="font-weight:800">{{transaction.amount}} <a href="market/{{transaction.identifier}}">{{transaction.identifier}}</a></p>
-           
+                        
+            <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
+
             <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
             <p>{{transaction.content}}</p>
             <p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>

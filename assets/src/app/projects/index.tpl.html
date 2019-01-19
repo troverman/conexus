@@ -31,8 +31,8 @@
     <div class="row">
 
         <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-filter"></i> Filter</a></li>
-            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-map-marker"></i> Location</a></li>
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>
         </ul>
         <div style="clear:both"></div>
 
@@ -70,14 +70,23 @@
                             <a href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a>
                         </div>
                         <div class="col-sm-11 col-xs-10">
-                            <h3 style="margin-top:0px">
-                                <a href="/project/{{project.urlTitle}}">
-                                    {{project.title}}
-                                </a>
+
+                            <p style="float:right;text-align:right">
+                                <span ng-if="project.location">{{project.location}} <i class="fa fa-map-marker"></i></span>
+                                <!--<br>
+                                <span ng-repeat="tag in project.tags">{{tag}} </span> <i class="fa fa-tags"></i>-->
+                            </p>
+
+                            <h3 style="float:left;margin-top:0px">
+                                <a href="/project/{{project.urlTitle}}">{{project.title}}</a>
                             </h3>
+
+                            <div style="clear:both"></div>
+
                             <div style="max-height:500px;overflow:scroll">
                                 <span ng-bind-html="renderContent(project.description)"></span>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,7 @@
 	<div class="row">
 
 		<div class="spacing-10"></div>
+
 		<!--<div class="spacing-10"></div>
 		<ul style="padding:0px;" class="member-tabs">
 			<li class="active"><a href="#">Activity</a></li>
@@ -26,8 +27,8 @@
 		</ul>-->
 
 	    <ul style="padding:0px;" class="member-tabs">
-		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-filter"></i> Filter</a></li>
-		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle()"><i class="fa fa-map-marker"></i> Location</a></li>
+		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER')"><i class="fa fa-filter"></i> Filter</a></li>
+		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER')"><i class="fa fa-map-marker"></i> Location</a></li>
 		    <li style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
 		</ul>
 		<div style="clear:both"></div>
@@ -111,13 +112,11 @@
 		            <div ng-repeat="location in sortedLocationArray">
 		                <a href="#" ng-click="filterContent(tag.element)">{{location}}</a>
 		            </div>
-
 			        <div layout="">
 	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">Distance (km)</span></div>
 	                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
 	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}}</span></div>
 	                </div>
-
 		        </div>
 		    </div>
 
@@ -184,6 +183,47 @@
     </div>
 </div>-->
 
+<div class="container">
+    <div class="card" ng-click="">
+    	<div style="max-height:200px;overflow:hidden">
+    		<img src="https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
+    	</div>
+		<div style="padding:16px;">
+			<h1>Members</h1>
+			<p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>
+			<p>222 Members span 432 coutries and 3241 self organized desiplines.</p>
+			<p>CRE8's Commmunity has participated in 2013 organizing events and is emdeded in local governments globally.</p>
+
+
+			<p>Think about how we can do anything together. Think about our community. Think about our shared identitiy. Think about food and water.</p>
+
+			<p>the human story;</p>
+			<div class="row">
+		        <div class="col-md-6">
+		        	<p><b>Title</b></p>
+					<highchart config="chart"></highchart>
+				</div>
+
+				<div class="col-md-6">
+					<p><b>Title</b></p>
+					<highchart config="chart1"></highchart>
+				</div>
+			</div>
+			<div class="col-sm-6" ng-repeat="item in members.slice(0,10)">
+				<div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
+				    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
+				        <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+				    </div>
+				    <div class="member-card-info">
+				        <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
+				        <p style="color:gray">{{item.status}} offline</p>
+				        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
+				    </div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
 
 <div class="container">
     <div class="card" ng-click="">
@@ -192,7 +232,8 @@
     	</div>
 		<div style="padding:16px;">
 			<h1>Projects</h1>
-			<p>Globally Present. The CRE8 Spans. Coordinating Around All Types. Get Involved.</p>
+			<p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>
+			
 			<div class="row">
 		        <div class="col-md-6">
 					<highchart config="chart"></highchart>
@@ -280,43 +321,5 @@
 	-->
 </div>
 
-<div class="container">
-    <div class="card" ng-click="">
-    	<div style="max-height:200px;overflow:hidden">
-    		<img src="https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
-    	</div>
-		<div style="padding:16px;">
-			<h1>Members</h1>
-			<p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a></p>
-			<p>the human story;</p>
-			<div class="row">
-		        <div class="col-md-6">
-					<highchart config="chart"></highchart>
-				</div>
-				<div class="col-md-6">
-					<highchart config="chart1"></highchart>
-				</div>
-			</div>
-			<div class="col-sm-6" ng-repeat="item in members.slice(0,10)">
-				<div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
-				    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
-				        <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
-				    </div>
-				    <div class="member-card-info">
-				        <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
-				        <p style="color:gray">{{item.status}} offline</p>
-				        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
-				    </div>
-				</div>
-			</div>
-		</div>
-    </div>
-</div>
-
-<div class="container">
-	<div class="card" style="text-align:center" ng-click="loadMore()">
-	    <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
-	</div>
-</div>
 
 <div class="spacing-50"></div>

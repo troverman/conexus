@@ -632,8 +632,6 @@ angular.module( 'conexus.project', [
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
 
-    console.log($scope.transactions);
-
     $scope.chart = {
         chart: {
             zoomType: 'x',
@@ -805,6 +803,8 @@ angular.module( 'conexus.project', [
         $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
     $scope.loadTags();
+
+    $scope.filterSet = {assets:$scope.sortedTransactionAssets, tags:$scope.sortedTransactionTags}
 
     //DO BY TAGS! SAME ..
     function sumFunction(obj){
