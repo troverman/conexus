@@ -462,13 +462,19 @@
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
 
-                <!--CONTENT, TASK, TIME, TRANSACTION ORDER -->
-
-                <p ng-click="tokenToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
+                <div style="text-align:right;float:right">
+                    <p ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
+                    <p ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></p>
+                </div>
 
                 <!--TITLE-->
+
                 <div ng-if="item.model == 'CONTENT'">
                     <h2><a href="content/{{item.id}}">{{item.title}}</a></h2>
+                </div>
+
+                <div ng-if="item.model == 'ITEM'">
+                    <h1>ITEM</h1>
                 </div>
 
                 <div ng-if="item.model == 'ORDER'">
@@ -481,27 +487,29 @@
 
                 <div ng-if="item.model == 'TIME'">
                     <h2><a href="time/{{item.id}}">{{item.amount}}</a></h2>
+                    <h4 ng-if="item.task.title"><a href="task/{{item.task.id}}">{{item.task.title}}</a></h4>
                 </div>
 
                 <div ng-if="item.model == 'TRANSACTION'">
                     <h1>TRANSACTION</h1>
                 </div>
 
-
-                <h4>Associations</h5>
-                <h4 ng-if="item.task.title"><a href="task/{{item.task.id}}">{{item.task.title}}</a></h4>
-
                 <!--TAGS-->
-                <p ng-if="item.task.tags"><a ng-repeat="tag in item.task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                 <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
+
+                <p ng-if="item.task.tags"><a ng-repeat="tag in item.task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
 
                 <!--LOCATION-->
                 <p ng-if="item.location"><a>{{item.location}}</a></p>
 
-                <div class="spacing-10"></div>
+                <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
+                    <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                    {{item.user.username}}
+                </a>
+                
+                <div class="spacing-5"></div>
 
-                <img ng-if="item.user" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
+                <span style="color:gray" am-time-ago="item.createdAt"></span>
 
                 <div class="spacing-10"></div>
 
@@ -509,7 +517,7 @@
 
             </div>
 
-            <div style="background-color:#f9f9f9;min-height:100%">
+            <div style="background-color:#f9f9f9;min-height:70%">
                 <div class="card-footer">
                     <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a href="#" ng-click="createReaction(item, 'minus')"><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
@@ -635,7 +643,7 @@
 
                     <!--SET-->
                     <p ng-repeat="model in associatedModels">{{model.type}}, {{model.address}}</p>
-                    
+
                     <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>
                     <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>
                     <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>

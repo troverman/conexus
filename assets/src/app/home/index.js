@@ -89,6 +89,7 @@ angular.module( 'conexus.home', [
 .controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -196,9 +197,12 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-    $scope.createReaction = function(item, type){
-        $mdSidenav('login').toggle();
+    //TODO
+    $scope.loadMore = function(){
+        console.log('TODO: LOAD MORE')
     };
+
+    $scope.createReaction = function(item, type){$mdSidenav('login').toggle()};
 
     //TODO: BETTER
     $scope.filterContent = function(filter) {
@@ -229,45 +233,12 @@ angular.module( 'conexus.home', [
         });
     };
 
-    //VALUE MAP CTA
-    $scope.newMember = {};
-    $scope.newOrder = [];
-    $scope.showIntro = true;
-    $scope.showValue = false;
-    $scope.showDaily = false;
-    $scope.showPersonal = false;
-    $scope.showFinal = false;
-    $scope.tasks = tasks;
-
-    $scope.continue = function(page){
-        console.log(page)
-        if (page === 1){
-            $scope.showIntro = !$scope.showIntro;
-            $scope.showValue = !$scope.showValue;
-        }
-        if (page === 2){
-            $scope.showValue = !$scope.showValue;
-            $scope.showDaily = !$scope.showDaily;
-        }
-        if (page === 3){
-            $scope.showDaily = !$scope.showDaily;
-            $scope.showPersonal = !$scope.showPersonal;
-        }
-        if (page === 4){
-            $scope.showPersonal = !$scope.showPersonal;
-            $scope.showFinal = !$scope.showFinal;
-        }
-
-    };
-
-    $scope.createPosition = function(model){
-        $scope.newOrder.push([model,'1 UNIVERSALTOKEN+ONMINT']);
-    };
 
 }])
 
 .controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
-	titleService.setTitle('CRE8.XYZ');
+	
+    titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
 
     $rootScope.associatedModel = {
@@ -275,27 +246,31 @@ angular.module( 'conexus.home', [
         type: 'PROFILE',
     };
 
-    //REORGANIZE
-    UserModel.getByUsername($scope.currentUser.username).then(function(model){
-        $scope.currentUser = model;
-    });
-    
-    $scope.map = {
-        center: {latitude: 35.902023, longitude: -84.1507067 },
-        zoom: 9
-    };
-    $scope.markers = [];
 
+
+    //REORGANIZE
+    UserModel.getByUsername($scope.currentUser.username).then(function(member){
+        $scope.currentUser = member;
+        $scope.member = member;
+        $scope.balance = member.balance;
+        $scope.reputation = member.reputation;
+    });
+
+    //GET NOTIFICATIONS.. IN NAV CTRL :)
+    //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
+  
 	$scope.contentList = contentList;
 	$scope.projects = projects;
+    $scope.newContent = {};
 	$scope.newReaction = {};
 	$scope.searchResults = [];
     $scope.tasks = tasks;
 	$scope.time = time;
+    $scope.transactions = transactions;
 
+    //TEMP HARDCODE -- MOVE TO PROTOCOL
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+CONTENT');
@@ -309,7 +284,6 @@ angular.module( 'conexus.home', [
     });
     $scope.tasks = $scope.tasks.map(function(obj){
         obj.model = 'TASK';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TASK');
@@ -319,7 +293,6 @@ angular.module( 'conexus.home', [
     });
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TIME');
@@ -331,6 +304,10 @@ angular.module( 'conexus.home', [
                 obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
             }
         }
+        return obj;
+    });
+    $scope.transactions = $scope.transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
         return obj;
     });
     
@@ -385,72 +362,32 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-	UserModel.getByUsername($scope.currentUser.username).then(function(member){
-		$scope.member = member;
-        $scope.balance = member.balance;
-        $scope.reputation = member.reputation;
-	});
 
-    //IF VALUE MAP | REFACTOR 
-    $scope.newOrder = [];
-    $scope.newContent = {};
-    $scope.transactions = transactions;
-    //tags
-    //orders, tasks, transactions
-    //$scope.orderTags = orders;
-    $scope.tasks = $scope.tasks.map(function(obj){
-        obj.model = 'TASK';
-        return obj;
-    });
-    $scope.transactions = $scope.transactions.map(function(obj){
-        obj.model = 'TRANSACTION';
-        return obj;
-    });
-    $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
-    //VALUE MAP ^^
-
-
-    //TEMP | TODO: FIX
-    $scope.discover = $scope.discover.map(function(obj){
-        var returnObj = {};
-        if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
-        if (obj.model == 'TASK'){
-            returnObj = obj.tags;
-        }
-        if (obj.model == 'TRANSACTION'){
-            if(obj.ledger){obj.ledger = obj.ledger.split(',')}
-            returnObj = obj.ledger;
-        }
-        return returnObj;
-    });
-
-    $scope.discover = [].concat.apply([], $scope.discover);
-    $scope.discover = $scope.discover.filter(function(e){return e}); 
-
-    function countInArray(array, value) {
-        return array.reduce(function(n, x){ return n + (x === value)}, 0);
-    }
-
-    $scope.finalArray = [];
-    for (x in $scope.discover){
-        var amount = countInArray($scope.discover, $scope.discover[x]);
-        if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
-            $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
-        }
-    }
-    $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
-    $scope.addToOrder = function(model){
-        $scope.newOrder.push([model,'0.1 UNIVERSAL TOKEN']);
-    };
-
-    $scope.contentToggle = function(){
-        $mdSidenav('content').toggle();
-    };
-
-    $scope.createOrder = function(){
+    //TODO
+    $scope.loadValueMap = function(){
         $scope.newOrder = [];
-    };
+        $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
+        $scope.discover = $scope.discover.map(function(obj){
+            var returnObj = {};
+            if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
+            if (obj.model == 'TASK'){returnObj = obj.tags;}
+            if (obj.model == 'TRANSACTION'){returnObj = obj.tags;}
+            return returnObj;
+        });
+        $scope.discover = [].concat.apply([], $scope.discover);
+        $scope.discover = $scope.discover.filter(function(e){return e}); 
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.finalArray = [];
+        for (x in $scope.discover){
+            var amount = countInArray($scope.discover, $scope.discover[x]);
+            if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
+                $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
+            }
+        }
+        $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
+    }
+    //$scope.loadValueMap();
+
 
     //TODO: MODEL | CREATE | NESTED?
     $scope.createContent = function(content){
@@ -473,9 +410,17 @@ angular.module( 'conexus.home', [
     };
 
     //TODO
-    $scope.locations = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+    $scope.loadMore = function(){
+        console.log('TODO: LOAD MORE')
+    };
 
-    //TODO: BETTER | TAG STORAGE
+    //TODO
+    $scope.sortedLocationArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+
+
+
+    //FILTERSET
+    //TODO: BETTER
     $scope.loadAssociations = function(){
         $scope.associations = $scope.contentList.map(function(obj){
             var returnObj = {};
@@ -497,7 +442,7 @@ angular.module( 'conexus.home', [
     }
     //$scope.loadAssociations();
 
-    //TODO: BETTER | TAG STORAGE
+    //TODO: BETTER
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
             var returnObj = {};
@@ -519,10 +464,11 @@ angular.module( 'conexus.home', [
     }
     $scope.loadTags();
     $scope.sortedAssociationArray = $scope.sortedTagArray;
+    $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+    //FILTERSET
 
-    $scope.loginToggle = function(){
-        $mdSidenav('login').toggle();
-    };
+
+
 
     //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
@@ -567,14 +513,6 @@ angular.module( 'conexus.home', [
                 return obj;
             });
         });
-    };
-
-    $scope.sideNavToggle = function(){
-        $mdSidenav('nav').toggle();
-    };
-
-    $scope.transactionToggle = function(){
-        $mdSidenav('transaction').toggle();
     };
 
 }]);
