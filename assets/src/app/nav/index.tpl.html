@@ -522,8 +522,7 @@
                     <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a href="#" ng-click="createReaction(item, 'minus')"><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a ng-if="item.model == 'TASK'" href="#" href="task/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
-                    <a ng-if="item.model == 'TIME'" href="#" href="time/{{item.id}}" ng-click=""><i class="fa fa-check"></i> validate </a>
+                    <a ng-if="item.model == 'TASK'|| item.model == 'TIME'" href="#" ng-click="validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                 </div>
 
                 <div class="card-footer" ng-show="item.showReply">

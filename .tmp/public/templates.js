@@ -1154,12 +1154,11 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "					<div style=\"padding:16px;\">\n" +
     "						<div style=\"float:right;text-align:right\">\n" +
-    "		                    <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "		                    <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "							<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "		                </div>\n" +
     "\n" +
     "						<h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
-    "						<p><a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
     "						<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "		            	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "						<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
@@ -1477,18 +1476,26 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "        <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "            <div style=\"\">\n" +
-    "                <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                    <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
-    "                    <li><a href=\"/content\">Content</a></li>\n" +
-    "                    <li><a href=\"/marketplace\">Items</a></li>\n" +
-    "                    <li><a href=\"/market\">Market</a></li>\n" +
-    "                    <li><a href=\"/projects\">Projects</a></li>\n" +
-    "                    <li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "                    <li style=\"float:right;font-size:14px;\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "                </ul>\n" +
+    "\n" +
+    "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "                <!--<li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
+    "                <li><a href=\"/content\">Content</a></li>\n" +
+    "                <li><a href=\"/marketplace\">Items</a></li>\n" +
+    "                <li><a href=\"/market\">Market</a></li>\n" +
+    "                <li><a href=\"/projects\">Projects</a></li>\n" +
+    "                <li><a href=\"/tasks\">Tasks</a></li>-->\n" +
+    "                <li><a href=\"/discover\">Discover</a></li>\n" +
+    "            </ul>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "                <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
-    "            </div>\n" +
+    "            </ul>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -1839,12 +1846,13 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
+    "                <!--<li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
     "                <li><a href=\"/content\">Content</a></li>\n" +
     "                <li><a href=\"/marketplace\">Items</a></li>\n" +
     "                <li><a href=\"/market\">Market</a></li>\n" +
     "                <li><a href=\"/projects\">Projects</a></li>\n" +
-    "                <li><a href=\"/tasks\">Tasks</a></li>\n" +
+    "                <li><a href=\"/tasks\">Tasks</a></li>-->\n" +
+    "                <li><a href=\"/discover\">Discover</a></li>\n" +
     "            </ul>\n" +
     "\n" +
     "            <div class=\"spacing-5\"></div>\n" +
@@ -2755,8 +2763,8 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "		<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER',filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER',filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
@@ -4656,8 +4664,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\"><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a ng-if=\"item.model == 'TASK'\" href=\"#\" href=\"task/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "                    <a ng-if=\"item.model == 'TIME'\" href=\"#\" href=\"time/{{item.id}}\" ng-click=\"\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                    <a ng-if=\"item.model == 'TASK'|| item.model == 'TIME'\" href=\"#\" ng-click=\"validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"card-footer\" ng-show=\"item.showReply\">\n" +

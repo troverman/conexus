@@ -30,6 +30,9 @@ angular.module( 'conexus.marketPlace', [
     $scope.selectedTag = '';
     $scope.skip = 0;
 
+    $scope.sortedLocationArray = ['Knoxville, TN', 'New York City', 'Chapel Hill'];
+
+
     //TODO: BETTER
     $scope.loadAssets = function(){
         $scope.assets = $scope.items.map(function(obj){
@@ -72,6 +75,11 @@ angular.module( 'conexus.marketPlace', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
     $scope.loadTags();
+
+    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, location:$scope.sortedLocationArray}
+
+
+
 
     $scope.createItem = function () {
     	if ($scope.currentUser){
