@@ -70,6 +70,20 @@ angular.module( 'conexus.item', [
 
     //Shape by %s || sets of discritized tokens
 
+
+
+    //$scope.tokens | input; output | outputVector (by weights)
+    //TODO RECURSIVE TRAVERSE THAT FINDS PATHS FROM ONE [] TO ANOTHER [];
+    //HAVE A SET OF KNOWN a[] = b[]
+    //DEFINE THE FORMAL MATH 
+    //MULTIDIMENSIONAL VALUE MATRIX THAT ALLOWS FOR SET EQUALITIES IN A TOKENIZED SPACE
+    $scope.marketTraverse = function(input, output){
+        for (x in $scope.outputVector.split(',')){
+            $scope.marketOutput.push([Math.random(),$scope.outputVector.split(',')[x]])
+        } 
+    };
+
+
      $scope.createReaction = function(item, type){
         if ($scope.currentUser){
             $scope.newReaction.amount = 1;

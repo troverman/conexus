@@ -17,19 +17,29 @@
 				<div>
 					<!--TODO!-->
 					<div style="float:right;text-align:right">
-						<h5 style="text-align:right;float:right" ng-click="tokenToggle(content)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
-						<br><br>
-						<h5 style="margin-top:0px;margin-bottom:0px">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{content.minusCount+1}}</h5>
-						<h5 style="margin-top:0px;margin-bottom:0px">Reactions | Like: {{content.plusCount}} | Dislike: {{content.minusCount}}</h5>
-						<h5 style="margin-top:0px;margin-bottom:0px">
-							Tokens | {{0.04+0.00232*24*viewTime}} CRE8
-						</h5>
+
+						<h5 ng-click="tokensToggle(content)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
+						<h5 ng-click="renderValidationToggle(content)"><a href="#">Associations <i class="fa fa-question-circle"></i></a></h5>
+						
+						<!--
+						TODO: NAV
 						<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>
+						-->
+
 					</div>
 
 					<h3 ng-show="content.title">{{content.title}}</h3>
+					
+					<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
 
-					<h4>Associations</h4>
+					<div>
+						<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
+						<a style="display:inline" href="member/{{content.user.username}}"><span style="font-weight:800">{{content.user.username}}</span></a>
+					</div>
+
+					<br>
+
+					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
 
 					<!--
 					<span ng-repeat="association in content.associatedModels">
@@ -37,29 +47,9 @@
 					</span>
 					-->
 
-					<!--DEPRECIATE-->
-					<h4>
-						<a href="market/{{content.market}}">{{content.market}}</a>
-						<a href="order/{{content.order}}">{{content.order}}</a>
-						<a href="content/{{content.contentModel}}">{{content.contentModel}}</a>
-						<a href="project/{{content.project.urlTitle}}">{{content.project.title}}</a>
-						<a href="member/{{content.profile.username}}">{{content.profile.username}}</a>
-						<a href="task/{{content.task.id}}">{{content.task.title}}</a>
-						<a href="transaction/{{content.transaction}}">{{content.transaction}}</a>
-						<a href="time/{{content.time.id}}">{{content.time.amount}}</a>
-					</h4>
-
-		    		<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
-
-		    		<br>
-
-		    		<div>
-						<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
-						<a style="display:inline" href="member/{{content.user.username}}"><span style="font-weight:800">{{content.user.username}}</span></a>
-					</div>
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
-
-					<!--<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->
+					<!--
+					<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>
+					-->
 
 					<div style="clear:both"></div>
 				</div>
@@ -75,6 +65,7 @@
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fa fa-angle-up"></i> {{content.reactions.plus}} like </a> 
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fa fa-angle-down"></i> {{content.reactions.minus}} dislike </a>
 		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(content)"><i class="fa fa-comment-o"></i> comment </a>
+				<a style="color:grey" class="pull-right" href="content/{{content.id}}">Tokens: {{tokenFilter}}CRE8 | watchTime: {{viewTime*content.reactions.plus+1+33121}} | viewTime: {{viewTime}} | Live: {{content.reactions.plus+1}}</a>
 		    </div>
 		    <div ng-show="content.showReply" class="card-footer">
 				<form role="form" ng-submit="createContent(content)">

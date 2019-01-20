@@ -41,6 +41,8 @@ angular.module( 'conexus.content', [
 
     if(!$scope.content){$location.path('/')}
     $scope.reactions = reactions;
+
+    $scope.tokenFilter = 0;
     $scope.toggleTokenVar = false;
     $scope.viewTime = 0;
 
@@ -53,8 +55,10 @@ angular.module( 'conexus.content', [
         });
     }
 
+    $scope.content.tokens = [];
+
     //+Addative Manifolds --> Extra dimensional 
-    $scope.tokens = [
+    $scope.content.tokens = [
         'Content+Create',
         'Content+[type]',
         'Content+Create+[type]',
@@ -69,11 +73,10 @@ angular.module( 'conexus.content', [
         'Reaction+[type]+userId',
     ]; 
  
-    $scope.outputVector = 'CRE8,BTC,ETH';
-
     $scope.updateCount = function() {
         //plug in for validation
         $scope.viewTime++;
+        $scope.tokenFilter = (0.04+0.00232*24*$scope.viewTime).toFixed(4);
         $scope.$apply();
     };
     
@@ -81,22 +84,6 @@ angular.module( 'conexus.content', [
     setInterval($scope.updateCount, 1000);
     //clearInterval($scope.interval);
     //viewToken Mechanism
-
-
-    //$scope.tokens | input; output | outputVector (by weights)
-    //TODO RECURSIVE TRAVERSE THAT FINDS PATHS FROM ONE [] TO ANOTHER [];
-    //HAVE A SET OF KNOWN a[] = b[]
-    //DEFINE THE FORMAL MATH 
-
-    //MULTIDIMENSIONAL VALUE MATRIX THAT ALLOWS FOR SET EQUALITIES IN A TOKENIZED SPACE
-
-    $scope.marketTraverse = function(input, output){
-
-        for (x in $scope.outputVector.split(',')){
-            $scope.marketOutput.push([Math.random(),$scope.outputVector.split(',')[x]])
-        } 
-
-    };
 
     //TODO: FINALIZE.. WORKS ON FRONTEND
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED
@@ -163,51 +150,30 @@ angular.module( 'conexus.content', [
     };
 
     $scope.createReaction = function(content, type){
-
         if($scope.currentUser){
-
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:'CONTENT', id:content.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $scope.currentUser.id;
-
             var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
-            
             console.log(location[0]);
-  
             location[0].value.reactions[type]++;
-            
             ReactionModel.create($scope.newReaction);
-
             //updateObject($scope.content, location[0].value, location[0].path);
-
         }
         else{$mdSidenav('login').toggle()}
     };
  
     $scope.reply = function(content){
-
         var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
         location[0].value.showReply = !location[0].value.showReply;
         updateObject($scope.content, location[0].value, location[0].path);
-
     };
 
     $scope.toggleThread = function(content){
-
         var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
         location[0].value.showThread = !location[0].value.showThread;
         updateObject($scope.content, location[0].value, location[0].path);
-
-    };
-
-    $scope.toggleToken = function(){
-        $scope.toggleTokenVar =!$scope.toggleTokenVar
-    };
-
-    $scope.tokenToggle = function(item){
-        $mdSidenav('tokens').toggle();
-        $rootScope.globalTokens = $scope.tokens;
     };
 
     $sailsSocket.subscribe('content', function (envelope) {

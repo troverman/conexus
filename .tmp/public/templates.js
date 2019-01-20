@@ -757,19 +757,29 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "				<div>\n" +
     "					<!--TODO!-->\n" +
     "					<div style=\"float:right;text-align:right\">\n" +
-    "						<h5 style=\"text-align:right;float:right\" ng-click=\"tokenToggle(content)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "						<br><br>\n" +
-    "						<h5 style=\"margin-top:0px;margin-bottom:0px\">Metrics | watchTime: {{24*viewTime+11230}} | Live: {{content.minusCount+1}}</h5>\n" +
-    "						<h5 style=\"margin-top:0px;margin-bottom:0px\">Reactions | Like: {{content.plusCount}} | Dislike: {{content.minusCount}}</h5>\n" +
-    "						<h5 style=\"margin-top:0px;margin-bottom:0px\">\n" +
-    "							Tokens | {{0.04+0.00232*24*viewTime}} CRE8\n" +
-    "						</h5>\n" +
+    "\n" +
+    "						<h5 ng-click=\"tokensToggle(content)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "						<h5 ng-click=\"renderValidationToggle(content)\"><a href=\"#\">Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "						\n" +
+    "						<!--\n" +
+    "						TODO: NAV\n" +
     "						<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>\n" +
+    "						-->\n" +
+    "\n" +
     "					</div>\n" +
     "\n" +
     "					<h3 ng-show=\"content.title\">{{content.title}}</h3>\n" +
+    "					\n" +
+    "					<p ng-show=\"content.tags\"><a style=\"color:gray;\" ng-repeat=\"tag in content.tags.split(',')\" href=\"content\">{{tag}} </a></p>\n" +
     "\n" +
-    "					<h4>Associations</h4>\n" +
+    "					<div>\n" +
+    "						<img class=\"card-avatar\" ng-src=\"{{content.user.avatarUrl}}\" src=\"{{content.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "						<a style=\"display:inline\" href=\"member/{{content.user.username}}\"><span style=\"font-weight:800\">{{content.user.username}}</span></a>\n" +
+    "					</div>\n" +
+    "\n" +
+    "					<br>\n" +
+    "\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"content.createdAt\"></p>\n" +
     "\n" +
     "					<!--\n" +
     "					<span ng-repeat=\"association in content.associatedModels\">\n" +
@@ -777,29 +787,9 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "					</span>\n" +
     "					-->\n" +
     "\n" +
-    "					<!--DEPRECIATE-->\n" +
-    "					<h4>\n" +
-    "						<a href=\"market/{{content.market}}\">{{content.market}}</a>\n" +
-    "						<a href=\"order/{{content.order}}\">{{content.order}}</a>\n" +
-    "						<a href=\"content/{{content.contentModel}}\">{{content.contentModel}}</a>\n" +
-    "						<a href=\"project/{{content.project.urlTitle}}\">{{content.project.title}}</a>\n" +
-    "						<a href=\"member/{{content.profile.username}}\">{{content.profile.username}}</a>\n" +
-    "						<a href=\"task/{{content.task.id}}\">{{content.task.title}}</a>\n" +
-    "						<a href=\"transaction/{{content.transaction}}\">{{content.transaction}}</a>\n" +
-    "						<a href=\"time/{{content.time.id}}\">{{content.time.amount}}</a>\n" +
-    "					</h4>\n" +
-    "\n" +
-    "		    		<p ng-show=\"content.tags\"><a style=\"color:gray;\" ng-repeat=\"tag in content.tags.split(',')\" href=\"content\">{{tag}} </a></p>\n" +
-    "\n" +
-    "		    		<br>\n" +
-    "\n" +
-    "		    		<div>\n" +
-    "						<img class=\"card-avatar\" ng-src=\"{{content.user.avatarUrl}}\" src=\"{{content.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "						<a style=\"display:inline\" href=\"member/{{content.user.username}}\"><span style=\"font-weight:800\">{{content.user.username}}</span></a>\n" +
-    "					</div>\n" +
-    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"content.createdAt\"></p>\n" +
-    "\n" +
-    "					<!--<span ng-repeat=\"reaction in reactions\"><br><a href=\"reaction/{{reaction.id}}\">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>-->\n" +
+    "					<!--\n" +
+    "					<span ng-repeat=\"reaction in reactions\"><br><a href=\"reaction/{{reaction.id}}\">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>\n" +
+    "					-->\n" +
     "\n" +
     "					<div style=\"clear:both\"></div>\n" +
     "				</div>\n" +
@@ -815,6 +805,7 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(content, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{content.reactions.plus}} like </a> \n" +
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(content, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{content.reactions.minus}} dislike </a>\n" +
     "		       	<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(content)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "				<a style=\"color:grey\" class=\"pull-right\" href=\"content/{{content.id}}\">Tokens: {{tokenFilter}}CRE8 | watchTime: {{viewTime*content.reactions.plus+1+33121}} | viewTime: {{viewTime}} | Live: {{content.reactions.plus+1}}</a>\n" +
     "		    </div>\n" +
     "		    <div ng-show=\"content.showReply\" class=\"card-footer\">\n" +
     "				<form role=\"form\" ng-submit=\"createContent(content)\">\n" +
