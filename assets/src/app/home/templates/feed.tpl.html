@@ -97,12 +97,6 @@
         <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
             <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-                <!--<li class="active"><a href="/">Activity</a></li>
-                <li><a href="/content">Content</a></li>
-                <li><a href="/marketplace">Items</a></li>
-                <li><a href="/market">Market</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/tasks">Tasks</a></li>-->
                 <li><a href="/discover">Discover</a></li>
             </ul>
             <div style="clear:both"></div>
@@ -118,7 +112,7 @@
 
             <div class="card">
                 <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                    <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
                     <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
                         <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
                     </div>

@@ -109,9 +109,7 @@ angular.module( 'conexus.projects', [
     $scope.loadTags();
     //IMPROVE :)
 
-
     $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
-
 
     $scope.createProject = function(newProject) {
         if ($scope.currentUser){
@@ -156,6 +154,15 @@ angular.module( 'conexus.projects', [
             $scope.projects = projects;
         });
     };
+
+    $rootScope.$watch('searchQuery' ,function(){
+        $scope.searchQuery = [];
+        for(x in Object.keys($rootScope.searchQuery)){
+            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
+                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+            }
+        }
+    }, true);
 
     $sailsSocket.subscribe('project', function (envelope) {
         switch(envelope.verb) {

@@ -8,6 +8,19 @@
 	<div class="spacing-100"></div>
 </div>
 
+<div ng-if="content.title && content.type!='video'" class="page-heading">
+    <div class="spacing-25"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{{content.title}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="spacing-25"></div>
+</div>
+
+
 <div class="container">
 
 	<div class="row">
@@ -28,13 +41,15 @@
 
 					</div>
 
-					<h3 ng-show="content.title">{{content.title}}</h3>
+					<!--<h3 ng-show="content.title">{{content.title}}</h3>-->
 					
 					<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
 
 					<div>
-						<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
-						<a style="display:inline" href="member/{{content.user.username}}"><span style="font-weight:800">{{content.user.username}}</span></a>
+						<a style="display:inline" href="member/{{content.user.username}}">
+							<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
+							<span style="font-weight:800">{{content.user.username}}</span>
+						</a>
 					</div>
 
 					<br>

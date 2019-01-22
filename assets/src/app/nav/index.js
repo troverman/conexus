@@ -21,6 +21,20 @@ angular.module( 'conexus.nav', [
         zoom: 9
     };
 
+    $rootScope.searchQuery = {
+        assetsInput:[],
+        assetsOutput:[],
+        associations:[],
+        locations:[],
+        query:[],
+        tags:[],
+    };
+
+    $rootScope.selectedTags = [];
+    $rootScope.selectedAssets = [];
+    $rootScope.selectedAssociations = [];
+    $rootScope.selectedLocations = [];
+
     if ($scope.currentUser){
         $scope.newContent = {};
         $scope.newItem = {};
@@ -35,7 +49,6 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction.from = [{text:$scope.currentUser.username, id:$scope.currentUser.id}];
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
         $scope.notificationCount = 0;
-        //$scope.notifications = 0;
         //TODO: BETTER
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
             $scope.memberValidate = member;
@@ -235,30 +248,23 @@ angular.module( 'conexus.nav', [
 
     $rootScope.filterToggle = function(type, item){
 
-        $scope.selectedTags = [];
-        $scope.selectedAssets = [];
-        $scope.selectedAssociations = [];
-        $scope.selectedLocations = [];
-        $scope.selectedTags = [];
-
         //TODO
         $scope.locationFilter = {};
-        $scope.locationFilter.distance = 0;
+        $scope.locationFilter.distance = 10;
 
         //WATCHERS
-
         $scope.selectAsset = function(item){
-            if ($scope.selectedAssets.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $scope.selectedAssets.push({text:item});
+            if ($rootScope.selectedAssets.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.selectedAssets.push({text:item});
                 $scope.item.assets = $scope.item.assets.filter(function(obj) { 
                     return obj.element !== item
                 });
             }
         };
 
-         $scope.selectAssociation = function(item){
-            if ($scope.selectedAssociations.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $scope.selectedAssociations.push({text:item});
+        $scope.selectAssociation = function(item){
+            if ($rootScope.searchQuery.associations.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.searchQuery.associations.push({text:'Assocation | '+item, query:item});
                 $scope.item.associations = $scope.item.associations.filter(function(obj) { 
                     return obj.element !== item
                 });
@@ -266,14 +272,17 @@ angular.module( 'conexus.nav', [
         };
 
         $scope.selectLocation = function(item){
-            if ($scope.selectedLocations.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $scope.selectedLocations.push({text:item});
+            if ($rootScope.searchQuery.locations.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.searchQuery.locations.push({text:'Location, '+$scope.locationFilter.distance+' | '+item, query:item});
+                $scope.item.locations = $scope.item.locations.filter(function(obj) { 
+                    return obj.element !== item
+                });
             }
         };
 
         $scope.selectTag = function(item){
-            if ($scope.selectedTags.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $scope.selectedTags.push({text:item});
+            if ($rootScope.searchQuery.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.searchQuery.tags.push({text:'Tag | '+item, query:item});
                 $scope.item.tags = $scope.item.tags.filter(function(obj) { 
                     return obj.element !== item
                 });
@@ -284,9 +293,6 @@ angular.module( 'conexus.nav', [
         //LEDGER
         $scope.item = item;
         $scope.type = type;
-
-        console.log($rootScope.baseMarkets);
-
         $mdSidenav('filter').toggle()
 
     };

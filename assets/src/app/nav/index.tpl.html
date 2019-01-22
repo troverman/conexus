@@ -130,7 +130,7 @@
                     -->
 
                     <p><b>Tags</b></p>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="selectedTags">
+                    <tags-input min-length="1" placeholder="Tags" ng-model="searchQuery.tags">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="asset in item.tags.slice(0,10)">
@@ -139,7 +139,7 @@
                     <div class="spacing-10"></div>
 
                     <p><b>Associations</b></p>
-                    <tags-input min-length="1" placeholder="Associations" ng-model="selectedAssociations">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="searchQuery.associations">
                         <auto-complete source="loadAssociation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="asset in item.associations.slice(0,10)">
@@ -148,7 +148,7 @@
                     <div class="spacing-10"></div>
 
                     <p><b>Locations</b></p>
-                    <tags-input min-length="1" placeholder="Locations" ng-model="selectedLocations">
+                    <tags-input min-length="1" placeholder="Locations" ng-model="searchQuery.locations">
                         <auto-complete source="loadLocation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="asset in item.locations.slice(0,10)">
@@ -474,7 +474,7 @@
                 </div>
 
                 <div ng-if="item.model == 'ITEM'">
-                    <h1>ITEM</h1>
+                    <h2><a href="content/{{item.id}}">{{item.title}}</a></h2>
                 </div>
 
                 <div ng-if="item.model == 'ORDER'">
@@ -623,17 +623,13 @@
                     </div>
 
                     <div ng-if="item.model=='TASK'">
-
                         <h3>{{item.title}} <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></h3>
-                        
                         <br>
-
                         <h4>
                             {{item.title.toUpperCase()}} 
                             <i class="fa fa-arrows-h"></i> 
                             {{item.project.title.toUpperCase()}}
                         </h4>
-
                     </div>
 
                     <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
@@ -641,11 +637,9 @@
                     </tags-input>
 
                     <!--SET-->
-                    <p ng-repeat="model in associatedModels">{{model.type}}, {{model.address}}</p>
-
+                    <h3 ng-repeat="model in associatedModels">{{model.type}}, {{model.address}}</h3>
                     <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>
-                    <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>
-                    <h3><a href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></h3>
+                    <h3><a href="project/{{item.task.id}}">{{item.task.title}}</a></h3>
 
                     <div class="spacing-15"></div>
                     <div style="text-align:center"><img src="https://i.stack.imgur.com/V8zQK.png"/></div>
@@ -843,6 +837,8 @@
                     <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Validation</a></li>
                 </ul>-->
 
+
+                <!--Token Space-->
                 <tags-input min-length="1" ng-model="tokenFilter" placeholder="Token Manifold"></tags-input>
 
                 <table class="table table-striped table-hover">
@@ -855,6 +851,12 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="spacing-10"></div>
+               
+                <h3 style="">Tokens Earned</h3>
+                <!--<highchart config="tokensEarned"></highchart>-->
+
 
                 <div class="spacing-10"></div>
 

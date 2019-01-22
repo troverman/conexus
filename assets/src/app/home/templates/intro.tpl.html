@@ -184,12 +184,6 @@
         <div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
 
             <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-                <!--<li class="active"><a href="/">Activity</a></li>
-                <li><a href="/content">Content</a></li>
-                <li><a href="/marketplace">Items</a></li>
-                <li><a href="/market">Market</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/tasks">Tasks</a></li>-->
                 <li><a href="/discover">Discover</a></li>
             </ul>
 
@@ -204,7 +198,7 @@
 
             <div class="card">
                 <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                    <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
                     <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
                         <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
                     </div>
@@ -278,7 +272,6 @@
                             <h5 ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
                         </div>
                         <h4 ng-click="$event.stopPropagation()"><a href="task/{{item.id}}">{{item.title}}</a></h4>
-                        <!--<p><a ng-click="$event.stopPropagation()" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>-->
                         <p ng-click="$event.stopPropagation()"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                         <p ng-click="$event.stopPropagation()"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                         <span style="color:gray" am-time-ago="item.createdAt"></span>

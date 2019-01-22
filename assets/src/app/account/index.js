@@ -19,9 +19,10 @@ angular.module( 'conexus.account', [
     $scope.editAccountToggleVar = false;
     $scope.newAccountInformation = $scope.currentUser;
 
-    $scope.gpsTracking = true; //LOCATION MAPPING
+    $scope.gpsTracking = true;
     $scope.notifications = true;
     $scope.browserMining = true;
+    $scope.recordAttention = true;
 
 	if(!$scope.currentUser){$location.path('/')}
 

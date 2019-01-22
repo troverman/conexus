@@ -97,12 +97,12 @@
 	    </div>
 	</div>
 
-	<div class="row">
+	<!--<div class="row">
 	    <div class="card">
 	        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
 	        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
 	    </div>
-   	</div>
+   	</div>-->
 
     <div class="row">
 		<div class="card">
@@ -146,9 +146,13 @@
 		<div class="card">
 			<div style="padding:16px">
 				<h3>Settings</h3>
-				<p>GPS Tracking <md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>
-				<p>Notifications <md-switch ng-model="notifications" aria-label="Notifications"></md-switch></p>
-				<p>Continuous / Browser Mining <md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch></p>
+				<!--SETTING DESCRIP-->
+				<p>Record Attention <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Attention Tokenization</span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
+				<!--<p>GPS Tracking <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Location Tokenization</span><md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>-->
+				<p>Client Mining <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch></p>
+
+				<p>Notifications <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><md-switch ng-model="notifications" aria-label="Notifications"></md-switch></p>
+
 			</div>
 	    </div>
     </div>

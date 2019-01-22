@@ -1024,6 +1024,11 @@ angular.module( 'conexus.project', [
     }
     $scope.loadTags();
 
+    $scope.sortedAssociationArray = $scope.sortedTagArray;
+    $scope.sortedAssociationArray = $scope.sortedLocationsArray;
+    
+    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray}
+
 }])
 
 .controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', 'config', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $scope, config, MemberModel, members, project, titleService ) {

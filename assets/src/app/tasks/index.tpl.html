@@ -47,7 +47,7 @@
 	            <div style="padding:16px;">
 	                <span><b>Associations</b></span>
 	                <div ng-repeat="association in sortedAssociationArray">
-	                    <a href="#" ng-click="filterContent(tag.element)">{{association.element}}</a>
+	                    <a href="#" ng-click="filterContent(association.element)">{{association.element}}</a>
 	                </div>
 	            </div>
 	        </div>
@@ -55,7 +55,7 @@
 	            <div style="padding:16px;">
 	                <span><b>Locations</b></span>
 	                <div ng-repeat="location in sortedLocationsArray">
-	                    <a href="#" ng-click="filterContent(tag.element)">{{location}}</a>
+	                    <a href="#" ng-click="filterContent(location.element)">{{location}}</a>
 	                </div>
 	            </div>
 	        </div>

@@ -189,7 +189,6 @@ angular.module( 'conexus.tasks', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        //TODO: COMPLEX QUERY.. 
         var search = $scope.searchQuery.map(function(obj){
             return obj.text;
         })[0];
@@ -202,6 +201,15 @@ angular.module( 'conexus.tasks', [
             });
         });
     };
+
+    $rootScope.$watch('searchQuery' ,function(){
+        $scope.searchQuery = [];
+        for(x in Object.keys($rootScope.searchQuery)){
+            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
+                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+            }
+        }
+    }, true);
 
     $sailsSocket.subscribe('task', function (envelope) {
         switch(envelope.verb) {

@@ -781,20 +781,95 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberItemsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'items', 'lodash', 'titleService', function MemberItemsController($sailsSocket, $scope, $stateParams, config, items, lodash, titleService) {
+.controller( 'MemberItemsCtrl', ['$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'lodash', 'titleService', function MemberItemsController($rootScope, $sailsSocket, $scope, $stateParams, config, ItemModel, items, lodash, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Items | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.items = items;
 
-    //TODO: BETTER | TAG STORAGE
-    $scope.loadTags = function(){
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.tags = $scope.items.map(function(obj){
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            return obj.tags;
+    $scope.items = items;
+    $scope.items = $scope.items.map(function(obj){
+        if(obj.tags){obj.tags = obj.tags.split(',')}
+        obj.model = 'ITEM';
+        return obj;
+    });
+
+    $scope.filterContent = function(filter) {
+
+        $scope.searchQuery.push({text:filter})
+        $rootScope.stateIsLoading = true;
+        
+        //TODO: COMPLEX QUERY
+
+        ItemModel.getSome('user',$scope.member.id, 100, 0, 'createdAt DESC').then(function(items){
+        //ItemModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(items){
+
+            $rootScope.stateIsLoading = false;
+            $scope.selectedTag = filter;
+
+            items = items.map(function(obj){
+                if(obj.tags){obj.tags = obj.tags.split(',')}
+                obj.model = 'ITEM';
+                return obj;
+            });
+
+            $scope.items = items;
+            $scope.loadTags();
+
         });
+
+    };
+
+    $scope.loadMore = function() {
+
+        $scope.skip = $scope.skip + 20;
+        $rootScope.stateIsLoading = true;
+
+        ItemModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
+
+            $rootScope.stateIsLoading = false;
+
+            items = items.map(function(obj){
+                if(obj.tags){obj.tags = obj.tags.split(',')}
+                obj.model = 'ITEM';
+                return obj;
+            });
+
+            Array.prototype.push.apply($scope.items, items);
+            $scope.loadTags();
+
+        });
+
+    };
+
+    $scope.loadAssociations = function(){
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.tags = $scope.items.map(function(obj){return obj.tags;});
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadAssociations();
+
+    $scope.loadLocations = function(){
+        $scope.sortedLocationsArray = [{element:'Knoxville'}, {element:'New York City'}, {element:'Durham'}]
+    };
+    $scope.loadLocations();
+
+    $scope.loadTags = function(){
+
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+
+        $scope.tags = $scope.items.map(function(obj){return obj.tags;});
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -802,9 +877,26 @@ angular.module( 'conexus.member', [
                 $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
             }
         }
+
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
+
+    };
     $scope.loadTags();
+
+    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray};
+
+    //$scope.$watch('searchQuery' ,function(){
+    //    $scope.searchQuery.push('aosdoa');
+    //});
+
+    $rootScope.$watch('searchQuery' ,function(){
+        $scope.searchQuery = [];
+        for(x in Object.keys($rootScope.searchQuery)){
+            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
+                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+            }
+        }
+    }, true);
 
 }])
 
@@ -1365,16 +1457,12 @@ angular.module( 'conexus.member', [
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
-    $scope.search = function(){};
-
 }])
 
 .controller( 'MemberProjectsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'projects', 'titleService', function MemberProjectsController($sailsSocket, $scope, $stateParams, config, lodash, projects, titleService) {
     titleService.setTitle($scope.member.username + ' | Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.projects = projects;
-
-    $scope.search = function(){};
 
     /*
     $sailsSocket.subscribe('projectMember', function (envelope) {
@@ -1433,8 +1521,6 @@ angular.module( 'conexus.member', [
         }
         else{$mdSidenav('login').toggle()}
     };
-
-    $scope.search = function(){};
 
     $sailsSocket.subscribe('task', function (envelope) {
         switch(envelope.verb) {

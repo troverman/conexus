@@ -197,22 +197,11 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-    //TODO
     $scope.loadMore = function(){
         console.log('TODO: LOAD MORE')
     };
 
     $scope.createReaction = function(item, type){$mdSidenav('login').toggle()};
-
-    //TODO: BETTER
-    $scope.filterContent = function(filter) {
-        $rootScope.stateIsLoading = true;
-        ContentModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
-            $rootScope.stateIsLoading = false;
-            $scope.activity = contentList;
-            $scope.loadTags();
-        });
-    };
 
     $scope.reply = function(item){
         if($scope.currentUser){
@@ -222,6 +211,8 @@ angular.module( 'conexus.home', [
         else{$mdSidenav('login').toggle()}
     };
 
+    //TODO
+    $scope.searchQuery = [];
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
@@ -232,7 +223,6 @@ angular.module( 'conexus.home', [
             });
         });
     };
-
 
 }])
 
