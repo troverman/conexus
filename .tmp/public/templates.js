@@ -1676,8 +1676,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                CREATE IS UNITY\n" +
     "                -->\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">From time and intetion to work and organization, information is income.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. Inclusivity Maximalism. Have everything you could ever want.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">From time and intention to work and organization, information is income.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. With inclusivity maximalism, have everything you could ever want.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -1730,11 +1730,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
-    "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>COOORDINATE INTENTIONALLY</h3>\n" +
+    "                <h3>COORDINATE INTENTIONALLY</h3>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">From Projects to Governance, group organization naturally flourishes.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation Mechanisms assert earned reputation.</p>\n" +
     "            </div>\n" +
@@ -1743,44 +1741,39 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h4>WHERE WE WILL GO & WHAT WE WILL CREATE</h4>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
+    "                <h4>WHERE WE WILL GO & WHAT WE WILL CREATE</h4>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>\n" +
+    "                <h5><a href=\"https://www.github.com/troverman/conexus\">APIs, Apps, & Developers</a></h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50 mobileHide\"></div>\n" +
-    "\n" +
-    "        <!--TRANSPARENCY ETHOS-->\n" +
-    "        <!--\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "    \n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>TRANSPARENCY ETHOS</h3>\n" +
+    "                <h4>Artifical Intelligence & Transparency</h4>\n" +
+    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Live Stream to tokenize</p>-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Transparency Ethos and Consensus on Context-specific Time, Intent, and Creation.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        -->\n" +
     "\n" +
-    "        <!--AI | API | DATA INTELOCK-->\n" +
-    "        <!--\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "            </div>\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "                <h3>AI</h3>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        -->\n" +
+    "        <!--PEERS; NOVEL MOBILE CONNECTION ; THE NETWORK IS YOU-->\n" +
+    "\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
     "    </div>\n" +
-    "\n" +
     "    \n" +
-    "    <div class=\"container\">\n" +
+    "    <div ng-show=\"false\" class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-lg-12 col-md-12\">\n" +
     "                <h3><b>Join Our Community</b></h3><hr>\n" +
