@@ -1489,13 +1489,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "        <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
-    "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                <li><a href=\"/discover\">Discover</a></li>\n" +
-    "            </ul>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
@@ -1675,10 +1668,16 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <!--INTO-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>CRE8 MULTIDIMENSIONAL VALUE</h3>\n" +
+    "                <!--<h3>CRE8 MULTIDIMENSIONAL VALUE</h3>-->\n" +
+    "                <h3>EVERYTHING IS VALUE</h3>\n" +
+    "                <!--\n" +
+    "                CREATE IS EMPOWERMENT\n" +
+    "                CREATE IS INCLUSIVITY\n" +
+    "                CREATE IS UNITY\n" +
+    "                -->\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Create and participate in transparent, crowdsourced, organizations.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Create value through tokenized actions.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">From time and intetion to work and organization, information is income.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. Inclusivity Maximalism. Have everything you could ever want.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -1692,7 +1691,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
-    "        <!--MULTI MARKET-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <div class=\"block\">\n" +
@@ -1719,40 +1717,43 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>BUILD THE VALUE MATRIX</h3>\n" +
+    "                <!--<h3>BUILD THE VALUE MATRIX</h3>-->\n" +
+    "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Manifest pluralism.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Create Liquidity in the Market and Create your Dimensional Vote.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Relationally map your value to a set of tokenized potiental.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. Show us your worth. Create.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us, what do you think is valuable?</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the market</a>\n" +
+    "                <!--<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the market</a>-->\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">Join Our Community</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <!--TASKS-->\n" +
-    "        <!--COOORDINATE INTENTIONALLY-->\n" +
-    "        <!--\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "                <h3>TASKS</h3>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        -->\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
-    "        <!--PROJECTS-->\n" +
-    "        <!--\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
+    "                <h3>COOORDINATE INTENTIONALLY</h3>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">From Projects to Governance, group organization naturally flourishes.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation Mechanisms assert earned reputation.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>PROJECTS</h3>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        -->\n" +
+    "\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h4>WHERE WE WILL GO & WHAT WE WILL CREATE</h4>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
     "        <!--TRANSPARENCY ETHOS-->\n" +
     "        <!--\n" +
@@ -1766,7 +1767,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        -->\n" +
     "\n" +
     "        <!--AI | API | DATA INTELOCK-->\n" +
-    "        <!--<div class=\"row\">\n" +
+    "        <!--\n" +
+    "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -1850,10 +1852,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "\n" +
     "        <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
-    "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                <li><a href=\"/discover\">Discover</a></li>\n" +
-    "            </ul>\n" +
     "\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "\n" +
@@ -6947,19 +6945,14 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "                    <div class=\"\">\n" +
     "                        <h2>Create Your Value Map</h2>\n" +
+    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:10px\">*Orders on the MultiDimensional Token Market.</p>\n" +
     "                    </div>\n" +
     "  \n" +
-    "                    <p style=\"font-style:italic;color:gray;margin:0px\">*Create Orders on the MultiDimensional Token Market.</p>\n" +
-    "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete the better, the more intentional your dimensional vote the better.</p>\n" +
+    "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete and intetional your dimensional vote the better.</p>\n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h3>What is a Value Map?</h3>\n" +
-    "                    <p style=\"font-style:italic;color:gray;margin:0px\">A Value Map is a definition; a set of statements of relational value.</p>\n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -6978,8 +6971,8 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div ng-show=\"showValue\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <h3>What is Your Personal Value?</h3>\n" +
-    "                    <h4>I believe the following concepts and specific actions are valuable.</h4>\n" +
+    "                    <h3>Your Personal Value</h3>\n" +
+    "                    <h5>Check what you believe is worthwile. What is valuable?</h5>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6995,9 +6988,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in tags track by $index\">\n" +
-    "\n" +
     "                        <a href=\"#\" ng-click=\"createPosition(item)\">{{item}}</a> <br>\n" +
-    "                        \n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -7005,7 +6996,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <!--PROJECTS-->\n" +
     "            <!--TASKS-->\n" +
     "            <!--VARIOUS PROTOCOLS-->\n" +
-    "\n" +
     "            <!--\n" +
     "            <div ng-repeat=\"task in tasks\">\n" +
     "                <div class=\"card\">\n" +
@@ -7018,14 +7008,12 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                </div>\n" +
     "            </div>\n" +
     "            -->\n" +
-    "\n" +
     "            <!--\n" +
     "            <div class=\"card\">\n" +
     "                <input placeholder=\"Keyword\" ng-model=\"keyword\" type=\"text\" class=\"form-control\">\n" +
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"createPosition()\" class=\"btn btn-default log-btn\">Add</button>\n" +
     "            </div>\n" +
     "            -->\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
     "            </div>\n" +
@@ -7037,7 +7025,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>A Valuable Day</h3>\n" +
-    "                    <h4>I believe an Ideal day is structured like this.</h4>\n" +
+    "                    <h5>How would an ideal day look to you?</h5>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for universal adapation and reflectivity, your dimensional vote can be incompassing of all aspects of the human experience.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -7082,7 +7070,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>Personal Information</h3>\n" +
-    "                    <h4>Who Are You?</h4>\n" +
+    "                    <h5>What would you like us all to know about you?</h5>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Transparency as a principle -- Give as much information as you would like.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
