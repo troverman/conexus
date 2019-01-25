@@ -6972,7 +6972,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "                    <div class=\"col-md-2\" style=\"max-height:100vh;overflow:scroll\">\n" +
     "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                            <button class=\"btn btn-default\"><a href=\"#\" ng-click=\"createPosition(item.element)\">{{item.element}}</a></button>\n" +
+    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default\"><a href=\"#\">{{item.element}}</a></button>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
@@ -6986,6 +6986,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                        <!--TAGS CONTENT TASKS-->\n" +
     "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                        <highchart config=\"pieTotal\"></highchart>\n" +
     "                    </div>\n" +
     "\n" +
     "                </div>\n" +

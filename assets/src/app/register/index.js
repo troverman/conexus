@@ -149,28 +149,60 @@ angular.module( 'conexus.register', [
         type: 'area',
         name: 'UNIVERSAL',
         pointPlacement: 'on',
-        data: [],
+        data: [1,1,1,1],
         fillOpacity: 0.3,
     });
+    $scope.chartMapTotal.xAxis.categories = ['LOVE', 'ART', 'PEACE', 'SHELTER']
 
-    for (x in $scope.dailyTimeValue){
-        $scope.chartMapTotal.xAxis.categories = $scope.dailyTimeValue.map(function(obj){return obj.text});
-        $scope.chartMapTotal.series[0].data = $scope.dailyTimeValue.map(function(obj){return obj.percentage});
-    }
-    
     //PERFORMANCE....
     $scope.updateChartTotal = function(){
         $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]});
         $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
     };
 
+    $scope.pieTotal = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [{
+                name: 'Assets',
+                y: [],
+            }]
+        }],
+        
+        title: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+    };
+
+     $scope.updatePieTotal = function(){
+        var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[0], y:obj[0].amount}})
+        $scope.pieTotal.series[0].data = data;
+        console.log( $scope.pieTotal)
+    }
+
     //lol
     //do absolute
     $scope.$watch('newOrder', function(newValue, oldValue){
         $scope.updateChartTotal();
+        $scope.updatePieTotal();
     }, true);
-    
 
+    
     //lol
 	$scope.continue = function(page){
 		if (page === 1){

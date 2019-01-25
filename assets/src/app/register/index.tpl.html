@@ -65,7 +65,7 @@
 
                     <div class="col-md-2" style="max-height:100vh;overflow:scroll">
                         <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
-                            <button class="btn btn-default"><a href="#" ng-click="createPosition(item.element)">{{item.element}}</a></button>
+                            <button ng-click="createPosition(item.element)" class="btn btn-default"><a href="#">{{item.element}}</a></button>
                         </div>
                     </div>
 
@@ -79,6 +79,7 @@
                         </div>
                         <!--TAGS CONTENT TASKS-->
                         <highchart config="chartMapTotal"></highchart>
+                        <highchart config="pieTotal"></highchart>
                     </div>
 
                 </div>
