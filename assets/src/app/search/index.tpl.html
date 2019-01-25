@@ -86,14 +86,7 @@
 	            <div style="clear:both"></div>
 
 				<div class="card">
-			        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-			            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery.search">
-			            <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-			                <a role="button">
-			                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-			                </a>
-			            </div>
-			        </form>
+		            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
 			    </div>
 
 				<div ng-if="searchResults.length > 0" class="card">

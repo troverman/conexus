@@ -222,13 +222,13 @@ angular.module( 'conexus.project', [
     })
 }])
 
-.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'config', 'MemberModel', 'project', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, config, MemberModel, project, titleService, TransactionModel ) {
+.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'config', 'MemberModel', 'project', 'SearchModel', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, config, MemberModel, project, SearchModel, titleService, TransactionModel ) {
     titleService.setTitle(project.title + ' | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.newMember = {};
     $scope.newTransaction = {};
     $scope.projectNavigation = $state.current.url.substring(1);
-
+    $scope.searchQuery = [];
 
     //TODO
     //$ROOTSCOPE --> PASS TO NAV
@@ -278,6 +278,15 @@ angular.module( 'conexus.project', [
     //    console.log('location')
     //};
 
+    $scope.$watch('searchQuery' ,function(){
+        console.log('sup', $scope.searchQuery);
+        var query = $scope.searchQuery.map(function(obj){return obj.text}).join(',')
+        SearchModel.search(query).then(function(models){
+            console.log(models)
+            $rootScope.activity = models;
+        });
+    },true);
+
     $scope.createMember = function(){
         if($scope.currentUser){
             $scope.newMember.user = config.currentUser.id;
@@ -317,7 +326,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $sce, $scope, $stateParams, config, lodash, project, titleService) {
+.controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'project', 'titleService', function ProjectAboutController( $location, $sailsSocket, $sce, $scope, $stateParams, config, lodash, project, titleService) {
     titleService.setTitle(project.title + ' | About | CRE8.XYZ');
 }])
 
@@ -328,9 +337,9 @@ angular.module( 'conexus.project', [
     $scope.newReaction = {};
     $scope.contentList = contentList;
     $scope.project = project;
+    $scope.searchQuery = [];
     $scope.tasks = tasks;
     $scope.time = time;
-
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
@@ -358,6 +367,8 @@ angular.module( 'conexus.project', [
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks, $scope.time, $scope.transactions]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
+
+    //watch earch query and search
 
     $scope.createContent = function(content) {
         if ($scope.currentUser){

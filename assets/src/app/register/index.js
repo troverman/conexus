@@ -238,8 +238,6 @@ angular.module( 'conexus.register', [
 
     };
 
-
-
     //MAIN ARE PROTOCOLS
     //CREate
     //TIME

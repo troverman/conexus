@@ -100,6 +100,7 @@ angular.module( 'conexus.home', [
     $scope.projects = projects;
     $scope.newReaction = {};
     $scope.searchResults = [];
+    $scope.searchQuery = [];
     $scope.tasks = tasks;
     $scope.time = time;
 
@@ -212,7 +213,18 @@ angular.module( 'conexus.home', [
     };
 
     //TODO
-    $scope.searchQuery = [];
+    $scope.$watch('searchQuery' ,function(){
+        //$rootScope.stateIsLoading = true;
+        var query = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+        ContentModel.getSome('search', query, 0, 20, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = models.map(function(obj){
+                obj.model = 'CONTENT';
+                return obj;
+            });
+        });
+    }, true);
+
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
@@ -254,6 +266,7 @@ angular.module( 'conexus.home', [
     $scope.newContent = {};
 	$scope.newReaction = {};
 	$scope.searchResults = [];
+    $scope.searchQuery = [];
     $scope.tasks = tasks;
 	$scope.time = time;
     $scope.transactions = transactions;
@@ -493,6 +506,19 @@ angular.module( 'conexus.home', [
     	}
         else{$mdSidenav('login').toggle()}
     };
+
+    $scope.$watch('searchQuery' ,function(){
+        $rootScope.stateIsLoading = true;
+        var query = {}
+        query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+        ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.activity = models.map(function(obj){
+                obj.model = 'CONTENT';
+                return obj;
+            });
+        });
+    }, true);
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;

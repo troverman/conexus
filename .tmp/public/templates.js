@@ -1497,18 +1497,15 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </ul>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "                    <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                    </div>\n" +
-    "                </form>\n" +
+    "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--<div class=\"card\">\n" +
+    "            <!--\n" +
+    "            <div class=\"card\">\n" +
     "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "            </div>-->\n" +
+    "            </div>\n" +
+    "            -->\n" +
     "\n" +
     "            <div ng-repeat=\"item in activity\">\n" +
     "\n" +
@@ -1677,7 +1674,11 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                -->\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">From time and intention to work and organization, information is income.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. With inclusivity maximalism, have everything you could ever want.</p><!--everything is yours; time will tell-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. With inclusivity maximalism, you get what you give.</p>\n" +
+    "\n" +
+    "                    <!--have everything you could ever want.</p>-->\n" +
+    "                    <!--everything is yours; time will tell-->\n" +
+    "\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -1717,18 +1718,18 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <!--<h3>BUILD THE VALUE MATRIX</h3>-->\n" +
     "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. Show us your worth. Create.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us, what do you think is valuable?</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <!--<a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">explore the market</a>-->\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">Join Our Community</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -1758,7 +1759,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "    \n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h4>Artifical Intelligence & Transparency</h4>\n" +
+    "                <h4>ARTIFICAL INTELLIGENCE & TRANSPARENCY</h4>\n" +
     "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Live Stream to tokenize</p>-->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Transparency Ethos and Consensus on Context-specific Time, Intent, and Creation.</p>\n" +
     "            </div>\n" +
@@ -1856,12 +1857,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </ul>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "                    <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                    </div>\n" +
-    "                </form>\n" +
+    "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "            </div>\n" +
     "            \n" +
     "            <div ng-repeat=\"item in activity\">\n" +
@@ -5626,7 +5622,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                    <li ng-click=\"$event.stopPropagation();filterToggle('DISCOVER');\" style=\"float:left;margin:5px\"><a style=\"color:black\"><i class=\"fa fa-filter\"></i></a></li>\n" +
     "                    <li>\n" +
     "                        <form ng-click=\"$event.stopPropagation();\" style=\"display:flex;flex-direction:row;float:left;width:80%\">\n" +
-    "                            <tags-input class=\"\" style=\"border:0px;flex-grow:2;height:40px;margin-top: -7px;margin-bottom: 3px;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "                            <tags-input style=\"border:0px;flex-grow:2;height:40px;margin-top: -7px;margin-bottom: 3px;\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "                        </form>\n" +
     "                    </li>\n" +
     "                </ul>\n" +
@@ -5690,7 +5686,8 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "     <div ng-show=\"activity.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <!--\n" +
+    "    <div ng-show=\"activity.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
@@ -5708,23 +5705,17 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    -->\n" +
     "\n" +
-    "    <div ng-show=\"activity.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
+    "    <div ng-show=\"activity.length > 0\" class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li class=\"mobileFix\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "            <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "\n" +
     "        <div class=\"card mobileFix\">\n" +
-    "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach | Filter\" ng-model=\"searchQuery\">\n" +
-    "                <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                    <a href=\"#\" role=\"button\">\n" +
-    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "            </form>\n" +
+    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>    \n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\">\n" +
@@ -6970,25 +6961,30 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                    <div class=\"col-md-2\" style=\"max-height:100vh;overflow:scroll\">\n" +
-    "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default\"><a href=\"#\">{{item.element}}</a></button>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"col-md-10\">\n" +
-    "                        <div ng-repeat=\"item in newOrder\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[0]}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-2\" style=\"max-height:100vh;overflow:scroll\">\n" +
+    "                            <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
+    "                                <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default\"><a href=\"#\">{{item.element}}</a></button>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                        <highchart config=\"pieTotal\"></highchart>\n" +
-    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is all of this?</b></p>\n" +
-    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Tutorial -- ethos area</p>\n" +
-    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What are projects, what are tasks, what is content, what are protocols, what is the token language</p>\n" +
+    "\n" +
+    "                        <div class=\"col-md-10\">\n" +
+    "                            <div ng-repeat=\"item in newOrder\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[0]}}</span></div>\n" +
+    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                            <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                            <highchart config=\"pieTotal\"></highchart>\n" +
+    "\n" +
+    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is all of this?</b></p>\n" +
+    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Tutorial -- ethos area</p>\n" +
+    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What are projects, what are tasks, what is content, what are protocols, what is the token language</p>\n" +
+    "\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
     "                </div>\n" +
@@ -7277,14 +7273,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "				<div class=\"card\">\n" +
-    "			        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "			            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery.search\">\n" +
-    "			            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "			                <a role=\"button\">\n" +
-    "			                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "			                </a>\n" +
-    "			            </div>\n" +
-    "			        </form>\n" +
+    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
     "			    </div>\n" +
     "\n" +
     "				<div ng-if=\"searchResults.length > 0\" class=\"card\">\n" +

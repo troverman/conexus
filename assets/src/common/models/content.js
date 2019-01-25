@@ -29,6 +29,7 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
 
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('content');
+        console.log(query);
         return $sailsSocket.get(url, query).then(success, error);
         
     };
