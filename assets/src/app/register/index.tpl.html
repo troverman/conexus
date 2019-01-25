@@ -47,13 +47,13 @@
             <div class="card">
                 <div style="padding:16px;">
                     <h3>Your Personal Value</h3>
-                    <h5>Check what you believe is worthwile. What is valuable?</h5>
+                    <h5>Select what you believe is worthwile. What is valuable?</h5>
                     <p style="color:gray;font-size:12px;font-style:italic">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>
                 </div>
             </div>
             <div class="card">
                 <form style="display:flex;flex-direction:row;">
-                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQueryArray"></tags-input>
                     <div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
                         <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
                     </div>
@@ -62,19 +62,28 @@
 
             <div class="card">
                 <div style="padding:16px;">
-                    <div style="font-size:14px;font-weight:bold" ng-repeat="item in tags.slice(0,10) track by $index">
-                        <a href="#" ng-click="createPosition(item)">{{item}}</a> <br>
+
+                    <div class="col-md-2" style="max-height:100vh;overflow:scroll">
+                        <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
+                            <button class="btn btn-default"><a href="#" ng-click="createPosition(item.element)">{{item.element}}</a></button>
+                        </div>
                     </div>
+
+                    <div class="col-md-10">
+                        <div ng-repeat="item in newOrder">
+                            <div layout="">
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[0]}}</span></div>
+                                <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[0].amount || 0}}</span></div>
+                            </div>
+                        </div>
+                        <!--TAGS CONTENT TASKS-->
+                        <highchart config="chartMapTotal"></highchart>
+                    </div>
+
                 </div>
             </div>
 
-            <div ng-repeat="item in newOrder">
-                <div layout="">
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.text}}</span></div>
-                    <md-slider step="0.1" flex="" md-discrete="" ng-model="item.percentage" step="1" min="0" max="100" aria-label="{{tag.text}}"></md-slider>
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.percentage.toFixed(3) || 0}}%</span></div>
-                </div>
-            </div>
             <div class="card">
                 <button type="submit" style="width:100%" ng-click="continue(2)" class="btn btn-default log-btn">Continue</button>
             </div>
@@ -112,7 +121,7 @@
                             <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.percentage.toFixed(3) || 0}}%</span></div>
                         </div>
                     </div>
-                    <highchart config="chartMap"></highchart>
+                    <highchart config="chartMapTime"></highchart>
                 </div>
             </div>
 
@@ -188,7 +197,7 @@
                 <div style="padding:16px;">
                     <h3>Value Map</h3>
 
-                    <highchart config="chartMap"></highchart>
+                    <highchart config="chartMapTotal"></highchart>
 
                     <div class="" ng-repeat="order in newOrder">
                         <span style="color:gray">{{order[0].amount}} <a href="/market/{{order[0].identifier}}">{{order[0].identifier}}</a> | <a href="/market/{{order[1].identifier}}">{{order[1].identifier}}</a> | <a href="/market/{{order[0].identifier}}/{{order[1].identifier}}">MarketPair</a></span>

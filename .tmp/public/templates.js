@@ -6954,13 +6954,13 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>Your Personal Value</h3>\n" +
-    "                    <h5>Check what you believe is worthwile. What is valuable?</h5>\n" +
+    "                    <h5>Select what you believe is worthwile. What is valuable?</h5>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"card\">\n" +
     "                <form style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQueryArray\"></tags-input>\n" +
     "                    <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
     "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
     "                    </div>\n" +
@@ -6969,19 +6969,28 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in tags.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"createPosition(item)\">{{item}}</a> <br>\n" +
+    "\n" +
+    "                    <div class=\"col-md-2\" style=\"max-height:100vh;overflow:scroll\">\n" +
+    "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
+    "                            <button class=\"btn btn-default\"><a href=\"#\" ng-click=\"createPosition(item.element)\">{{item.element}}</a></button>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"col-md-10\">\n" +
+    "                        <div ng-repeat=\"item in newOrder\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[0]}}</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <!--TAGS CONTENT TASKS-->\n" +
+    "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div ng-repeat=\"item in newOrder\">\n" +
-    "                <div layout=\"\">\n" +
-    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.text}}</span></div>\n" +
-    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item.percentage\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.percentage.toFixed(3) || 0}}%</span></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
     "            <div class=\"card\">\n" +
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
     "            </div>\n" +
@@ -7019,7 +7028,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.percentage.toFixed(3) || 0}}%</span></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <highchart config=\"chartMap\"></highchart>\n" +
+    "                    <highchart config=\"chartMapTime\"></highchart>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
@@ -7095,7 +7104,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "                    <h3>Value Map</h3>\n" +
     "\n" +
-    "                    <highchart config=\"chartMap\"></highchart>\n" +
+    "                    <highchart config=\"chartMapTotal\"></highchart>\n" +
     "\n" +
     "                    <div class=\"\" ng-repeat=\"order in newOrder\">\n" +
     "                        <span style=\"color:gray\">{{order[0].amount}} <a href=\"/market/{{order[0].identifier}}\">{{order[0].identifier}}</a> | <a href=\"/market/{{order[1].identifier}}\">{{order[1].identifier}}</a> | <a href=\"/market/{{order[0].identifier}}/{{order[1].identifier}}\">MarketPair</a></span>\n" +

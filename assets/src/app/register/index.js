@@ -11,10 +11,10 @@ angular.module( 'conexus.register', [
 		},
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return ContentModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -45,7 +45,7 @@ angular.module( 'conexus.register', [
 		{text:'UNIVERSAL'}
 	];
 
-	$scope.chartMap = {
+	$scope.chartMapTime = {
         chart: {
             polar: true,
             margin: [30, 30, 30, 30]
@@ -76,7 +76,7 @@ angular.module( 'conexus.register', [
         credits:{enabled:false},
     };
 
-    $scope.chartMap.series.push({
+    $scope.chartMapTime.series.push({
         id: 'values',
         type: 'area',
         name: 'UNIVERSAL',
@@ -86,35 +86,93 @@ angular.module( 'conexus.register', [
     });
     
     //PERFORMANCE....
-    $scope.updateChart = function(){
-    	$scope.chartMap.xAxis.categories = $scope.dailyTimeValue.map(function(obj){return obj.text});
-	    $scope.chartMap.series[0].data = $scope.dailyTimeValue.map(function(obj){return obj.percentage});
+    $scope.updateChartTime = function(){
+        $scope.chartMapTime.xAxis.categories = $scope.dailyTimeValue.map(function(obj){return obj.text});
+        $scope.chartMapTime.series[0].data = $scope.dailyTimeValue.map(function(obj){return obj.percentage});
     };
- 	$scope.updateChart();
-    
+    $scope.updateChartTime();
+
+    //lol
+    //do absolute
     $scope.$watch('dailyTimeValue', function(newValue, oldValue){
-
-    	if (newValue != oldValue){
-    		$scope.dailyTimeValue.map(function(obj){if(!obj.percentage){obj.percentage=0} return obj});
-	    	var sum = 0;
-	    	for (x in $scope.dailyTimeValue){sum+=$scope.dailyTimeValue[x].percentage;}
-	    	var offset = 0;
-	    	if (sum > 100){
-	    		offset = (sum-100)/$scope.dailyTimeValue.length;
-				for (x in $scope.dailyTimeValue){
-					if ($scope.dailyTimeValue[x].percentage-offset > 0){
-						$scope.dailyTimeValue[x].percentage = $scope.dailyTimeValue[x].percentage-offset;
-					}
-					else{$scope.dailyTimeValue[x].percentage = 0}
-				}
-			}
-			$scope.updateChart();
-		}
-
+        if (newValue != oldValue){
+            $scope.dailyTimeValue.map(function(obj){if(!obj.percentage){obj.percentage=0} return obj});
+            var sum = 0;
+            for (x in $scope.dailyTimeValue){sum+=$scope.dailyTimeValue[x].percentage;}
+            var offset = 0;
+            if (sum > 100){
+                offset = (sum-100)/$scope.dailyTimeValue.length;
+                for (x in $scope.dailyTimeValue){
+                    if ($scope.dailyTimeValue[x].percentage-offset > 0){
+                        $scope.dailyTimeValue[x].percentage = $scope.dailyTimeValue[x].percentage-offset;
+                    }
+                    else{$scope.dailyTimeValue[x].percentage = 0}
+                }
+            }
+            $scope.updateChartTime();
+        }
     }, true);
 
+    $scope.chartMapTotal = {
+        chart: {
+            polar: true,
+            margin: [30, 30, 30, 30]
+        },
+        series: [],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: [],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+        legend:false,
+        tooltip:{shared: true,},
+        credits:{enabled:false},
+    };
+
+    $scope.chartMapTotal.series.push({
+        id: 'values',
+        type: 'area',
+        name: 'UNIVERSAL',
+        pointPlacement: 'on',
+        data: [],
+        fillOpacity: 0.3,
+    });
+
+    for (x in $scope.dailyTimeValue){
+        $scope.chartMapTotal.xAxis.categories = $scope.dailyTimeValue.map(function(obj){return obj.text});
+        $scope.chartMapTotal.series[0].data = $scope.dailyTimeValue.map(function(obj){return obj.percentage});
+    }
+    
+    //PERFORMANCE....
+    $scope.updateChartTotal = function(){
+        $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]});
+        $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
+    };
+
+    //lol
+    //do absolute
+    $scope.$watch('newOrder', function(newValue, oldValue){
+        $scope.updateChartTotal();
+    }, true);
+    
+
+    //lol
 	$scope.continue = function(page){
-		console.log(page)
 		if (page === 1){
 			$scope.showIntro = !$scope.showIntro;
 			$scope.showValue = !$scope.showValue;
@@ -134,13 +192,36 @@ angular.module( 'conexus.register', [
 	};
 
 	$scope.createPosition = function(model){
-		//$scope.newOrder.push([setAlpha:{amount:1, identifier:'UNIVERSALTOKEN'}, setBeta:{amount:null, identifier:model+'+ONMINT'}]);
-    	$scope.newOrder.push([{amount:1, identifier:'UNIVERSALTOKEN'}, {amount:null, identifier:model+'+ONMINT'}]);
+
+        if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]}).indexOf(model) == -1){
+            //1 per hour
+        	$scope.newOrder.push(
+                [
+                    {amount:1, identifier:'UNIVERSALTOKEN'}, 
+                    {amount:3600, identifier:model+'+ADDR+SPONSOR'}
+                ]
+            );
+        }
+
+
     };
 
+
+
+    //MAIN ARE PROTOCOLS
+    //CREate
+    //TIME
+    //TIME+TAG
+    //TASK
+    //TASK+TAG?
 	//TODO: BETTER | TAG STORAGE
+
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks]);
+
+    //TASK --> TIME ARTECTYPE --> PROJECT --> TASK ARTE
+
     $scope.loadTags = function(){
-        $scope.tags = $scope.contentList.map(function(obj){
+        $scope.tags = $scope.activity.map(function(obj){
             var returnObj = {};
             if(obj.tags){obj.tags = obj.tags.split(',')}
             returnObj = obj.tags;
