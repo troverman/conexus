@@ -6986,9 +6986,9 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
     "                        <highchart config=\"pieTotal\"></highchart>\n" +
-    "                        <p>What is all of this? </p>\n" +
-    "                        <p>Tutorial -- ethos area</p>\n" +
-    "                        <p>What are projects, what are tasks, what is content, what are protocols, what is the token language</p>\n" +
+    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is all of this?</b></p>\n" +
+    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Tutorial -- ethos area</p>\n" +
+    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What are projects, what are tasks, what is content, what are protocols, what is the token language</p>\n" +
     "                    </div>\n" +
     "\n" +
     "                </div>\n" +
@@ -7032,7 +7032,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <highchart config=\"chartMapTime\"></highchart>\n" +
-    "                    <p>What is all of this? what is time? </p>\n" +
+    "                    <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What is all of this? what is time? </p>\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
