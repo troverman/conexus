@@ -1367,7 +1367,8 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
   $templateCache.put("footer/index.tpl.html",
     "<div style=\"padding-left:0px;padding-right:0px;\" class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	<div class=\"container\">\n" +
-    "		<div class=\"footer-links\" style=\"padding:3px;\">\n" +
+    "		<div class=\"footer-links\" style=\"padding:3px;float:none\">\n" +
+    "			<div style=\"float:right\"><a href=\"/\"><img src=\"images/hyper.gif\"></a></div>\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\">CRE8.XYZ</a>\n" +
     "			<br>\n" +
     "			<a href=\"/about\">about</a>\n" +
@@ -1377,7 +1378,11 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "			<a href=\"/tasks\">tasks</a>\n" +
     "			<a href=\"/transparency\">transparency</a>\n" +
     "		</div>\n" +
-    "		<div><a href=\"/\"><img src=\"images/hyper.gif\"></a></div>\n" +
+    "		<!--\n" +
+    "		<div class=\"sub-footer\">\n" +
+    "			Terms Privacy Social etc\n" +
+    "		</div>\n" +
+    "		-->\n" +
     "	</div>	\n" +
     "</div>");
 }]);
@@ -1729,7 +1734,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -1741,8 +1746,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -1754,8 +1759,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
     "    \n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -1769,8 +1774,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <!--PEERS; NOVEL MOBILE CONNECTION ; THE NETWORK IS YOU-->\n" +
     "\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
-    "        <div class=\"spacing-50 mobileHide\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "    </div>\n" +
     "    \n" +
