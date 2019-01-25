@@ -1669,7 +1669,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <!--<h3>CRE8 MULTIDIMENSIONAL VALUE</h3>-->\n" +
-    "                <h3>EVERYTHING IS VALUEABLE</h3>\n" +
+    "                <h3>EVERYTHING IS VALUE</h3>\n" +
     "                <!--\n" +
     "                CREATE IS EMPOWERMENT\n" +
     "                CREATE IS INCLUSIVITY\n" +

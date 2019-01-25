@@ -234,8 +234,8 @@ angular.module( 'conexus.nav', [
             $scope.newContent = {};
             $scope.newContent.associatedModels = $rootScope.associatedModels;
             console.log($scope.newContent);
-            //if ($scope.newContent.associatedModels){$scope.newContent.associatedModels.push({text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id});}
-            //else{$scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id}];}
+            if ($scope.newContent.associatedModels){$scope.newContent.associatedModels.push({text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id});}
+            else{$scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', address:$scope.currentUser.id}];}
             $scope.newContent.associatedModels = $scope.newContent.associatedModels.map(function(obj){
                 obj.text = obj.type+' | '+obj.address;
                 return obj;
