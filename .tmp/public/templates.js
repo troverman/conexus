@@ -1669,7 +1669,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <!--<h3>CRE8 MULTIDIMENSIONAL VALUE</h3>-->\n" +
-    "                <h3>EVERYTHING IS VALUE</h3>\n" +
+    "                <h3>EVERYTHING IS VALUABLE</h3>\n" +
     "                <!--\n" +
     "                CREATE IS EMPOWERMENT\n" +
     "                CREATE IS INCLUSIVITY\n" +
@@ -6984,9 +6984,11 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <!--TAGS CONTENT TASKS-->\n" +
     "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
     "                        <highchart config=\"pieTotal\"></highchart>\n" +
+    "                        <p>What is all of this? </p>\n" +
+    "                        <p>Tutorial -- ethos area</p>\n" +
+    "                        <p>What are projects, what are tasks, what is content, what are protocols, what is the token language</p>\n" +
     "                    </div>\n" +
     "\n" +
     "                </div>\n" +
@@ -7030,6 +7032,8 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <highchart config=\"chartMapTime\"></highchart>\n" +
+    "                    <p>What is all of this? what is time? </p>\n" +
+    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
