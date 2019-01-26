@@ -100,7 +100,6 @@ angular.module( 'conexus.home', [
     $scope.projects = projects;
     $scope.newReaction = {};
     $scope.searchResults = [];
-    $scope.searchQuery = [];
     $scope.tasks = tasks;
     $scope.time = time;
 
@@ -215,6 +214,7 @@ angular.module( 'conexus.home', [
     //TODO
     $scope.$watch('searchQuery' ,function(){
         //$rootScope.stateIsLoading = true;
+        console.log($scope.searchQuery)
         var query = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
         ContentModel.getSome('search', query, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
@@ -266,7 +266,6 @@ angular.module( 'conexus.home', [
     $scope.newContent = {};
 	$scope.newReaction = {};
 	$scope.searchResults = [];
-    $scope.searchQuery = [];
     $scope.tasks = tasks;
 	$scope.time = time;
     $scope.transactions = transactions;

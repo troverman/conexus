@@ -176,7 +176,7 @@ angular.module( 'conexus.nav', [
 
     //TODO! IMPORTANT
     $scope.loadAssociations = function(query){
-        console.log(query);
+
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
 
