@@ -90,6 +90,10 @@ angular.module( 'conexus.home', [
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
+
+    //LOCAL SEARCH QUERY FORMAT...
+    
+
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -213,8 +217,6 @@ angular.module( 'conexus.home', [
 
     //TODO
     $scope.$watch('searchQuery' ,function(){
-        //$rootScope.stateIsLoading = true;
-        console.log($scope.searchQuery)
         var query = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
         ContentModel.getSome('search', query, 0, 20, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
@@ -507,7 +509,6 @@ angular.module( 'conexus.home', [
     };
 
     $scope.$watch('searchQuery' ,function(){
-        $rootScope.stateIsLoading = true;
         var query = {}
         query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
         ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){

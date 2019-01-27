@@ -50,6 +50,18 @@ angular.module( 'conexus.projects', [
     }
 
     //IMPROVE :)
+    $scope.loadAssociations = function(){        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadAssociations();
+
     $scope.loadLocations = function(){
         $scope.tags = $scope.projects.map(function(obj){
             return obj.location;
@@ -67,25 +79,6 @@ angular.module( 'conexus.projects', [
         $scope.sortedLocationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
     $scope.loadLocations();
-
-    $scope.loadAssociations = function(){
-        $scope.associations = $scope.projects.map(function(obj){
-            if (obj.parent){return obj.parent;}
-        });
-        $scope.associations = [].concat.apply([], $scope.associations);
-        $scope.associations = $scope.associations.filter(function(e){return e});
-        console.log($scope.associations)
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedAssociationArray = [];
-        for (x in $scope.associations){
-            var amount = countInArray($scope.associations, $scope.associations[x]);
-            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
-                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
-            }
-        }
-        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
-    $scope.loadAssociations();
 
     $scope.loadTags = function(){
         $scope.tags = $scope.projects.map(function(obj){
@@ -155,6 +148,11 @@ angular.module( 'conexus.projects', [
         });
     };
 
+
+
+
+
+    //FIX THIS
     $rootScope.$watch('searchQuery' ,function(){
         $scope.searchQuery = [];
         for(x in Object.keys($rootScope.searchQuery)){
@@ -163,6 +161,26 @@ angular.module( 'conexus.projects', [
             }
         }
     }, true);
+
+    $scope.$watch('searchQuery' ,function(){
+        $scope.searchQuery.map(function(obj){if (!obj.type){obj.type = 'QUERY'} return obj })
+        console.log($scope.searchQuery);
+
+        //if ($scope.searchQuery){}
+        //$rootScope.stateIsLoading = true;
+        //var query = {}
+        //query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+        //ProjectModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(projects){
+        //    $rootScope.stateIsLoading = false;
+        //    $scope.projects = models;
+        //    $scope.loadAssociations();
+        //    $scope.loadLocations();
+        //    $scope.loadTags();
+        //});
+    }, true);
+
+
+
 
     $sailsSocket.subscribe('project', function (envelope) {
         switch(envelope.verb) {

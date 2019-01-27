@@ -21,14 +21,14 @@ angular.module( 'conexus.nav', [
         zoom: 9
     };
 
-    $rootScope.searchQuery = {
-        assetsInput:[],
-        assetsOutput:[],
-        associations:[],
-        locations:[],
-        query:[],
-        tags:[],
-    };
+   // $rootScope.searchQuery = {
+   //     assetsInput:[],
+   //     assetsOutput:[],
+   //     associations:[],
+   //     locations:[],
+   //     query:[],
+   //     tags:[],
+   // };
 
     $rootScope.selectedTags = [];
     $rootScope.selectedAssets = [];
