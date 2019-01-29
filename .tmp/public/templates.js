@@ -1728,7 +1728,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. Show us your worth. Create.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us, what do you think is valuable?</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">Join Our Community</a>\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/register\">Join Our Community</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
@@ -2005,7 +2005,8 @@ angular.module("intro/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CRE8 MULTIDIMENSIONAL VALUE</text> \n" +
+    "                <!--<text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CRE8 MULTIDIMENSIONAL VALUE</text>-->\n" +
+    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">WE CRE8 MULTIDIMENSIONAL VALUE</text>\n" +
     "            </symbol>  \n" +
     "\n" +
     "            <div class=\"intro-shade\"></div>  \n" +
