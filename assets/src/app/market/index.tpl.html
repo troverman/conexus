@@ -17,76 +17,59 @@
 
 	<div class="row">
 
-		<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-            <li class="active"><a href="#">Activity</a></li>
-            <li><a href="#">Trade Postions</a></li>
-            <li><a href="#">onMint Actions</a></li>
-            <li><a href="#">Information</a></li>
-            <li><a href="#">Content</a></li>
-        </ul>
-
-		<div class="spacing-5"></div>
-
 		<ul style="padding:0px;" class="member-tabs">
-		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER')"><i class="fa fa-filter"></i> Filter</a></li>
+		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET')"><i class="fa fa-filter"></i> Filter</a></li>
 		</ul>
 		<div style="clear:both"></div>
 
 		<div class="card">
 			<form ng-submit="search()" style="display:flex;flex-direction:row;">
 		    	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
-		        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-		            <a href="#" role="button">
-		                <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-		            </a>
+		        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default"><a href="#" role="button"><h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5></a>
 		        </div>
 		    </form>
 		</div>
 
-		 <!--MANIFOLD FILTER-->
-		<!--IS TRANSFERRABLE; FUNCTIONS TO ACT ON THE TOKEN BALANCE-->
-		<!--MANIFOLD SORTING-->
-		<!--POPULAT MANIFOLDS-->
-		<!--PROTOCOLPLUGINS-->
-		<!--FUTURES, OPTIONS, PROJECT, WORK, CONTENT, ETC-->
-		<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->
-		<!--+FUTURE+TIME-->
-		<!--+OPTION+TIME-->
+	</div>
 
-	    <!--NG REPEAT-->
-	    <div class="card">
-			<div style="padding:16px">
-	    		<p><b>Tokens</b></p>
+	<div class="row">
 
-	    		<h4><a href="token/{{token.spring}}">{{token.string}}</a></h4>	
-
-				<p><b>Information <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-				<p>AssociatedModels: <a href="time/id">TIME</a></p>
-				<p>In Circulation: {{token.information.inCirculation}}</p>
-				<div class="spacing-5"></div>
-
-	    		<p><b>Protocols <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-	    		<p><span ng-repeat="protocol in token.protocols"><a href="protocol/base">{{protocol}}</a></span></p>
-				<div class="spacing-5"></div>
-
-	    		<p><b>Logic <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-	    		<p>Transferrable: {{token.logic.transferrable}}</p>
-	    		<p>Mint: {{token.logic.mint}}</p>
-				<div class="spacing-5"></div>
-
-    		</div>
-    	</div>
-
-	    <div class="card">
-			<div style="padding:16px">
-	    		<p><b>Market</b></p>
-	    		<p>Velocity</p>
-	    		<p>Connections</p>
-	    		<p>Lattice Analysis</p>
-				<!--VALUE VECTOR-->
-				<!--1ST DEGREE-->
+    	<div class="col-sm-6" style="padding-left:0px;padding-right:0px;">
+    		<!--MANIFOLD FILTER-->
+			<!--IS TRANSFERRABLE; FUNCTIONS TO ACT ON THE TOKEN BALANCE-->
+			<!--MANIFOLD SORTING-->
+			<!--POPULAT MANIFOLDS-->
+			<!--PROTOCOLPLUGINS-->
+			<!--FUTURES, OPTIONS, PROJECT, WORK, CONTENT, ETC-->
+			<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->
+			<!--+FUTURE+TIME-->
+			<!--+OPTION+TIME-->
+		    <!--NG REPEAT-->
+		    <div class="card">
+				<div style="padding:16px">
+		    		<p><b>Tokens</b></p>
+		    		<h4><a href="token/{{token.spring}}">{{token.string}}</a></h4>	
+					<p><b>Information <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
+					<p>AssociatedModels: <a href="time/id">TIME</a></p>
+					<p>In Circulation: {{token.information.inCirculation}}</p>
+					<div class="spacing-5"></div>
+		    		<p><b>Protocols <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
+		    		<p><span ng-repeat="protocol in token.protocols"><a href="protocol/base">{{protocol}}</a></span></p>
+					<div class="spacing-5"></div>
+		    		<p><b>Logic <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
+		    		<p>Transferrable: {{token.logic.transferrable}}</p>
+		    		<p>Mint: {{token.logic.mint}}</p>
+					<div class="spacing-5"></div>
+	    		</div>
+	    	</div>
+			<div class="card">
 				<div style="padding:16px;">
-					<h2>Value Vector</h2>
+					<highchart config="chartMap"></highchart>
+				</div>
+			</div>
+			<div class="card">
+				<div style="padding:16px;">
+					<h4>Value Vector</h4>
 				    <table class="table table-striped table-hover">
 			            <thead>
 			                <tr><th>Asset</th><th>Value</th></tr>
@@ -98,82 +81,57 @@
 			                </tr>
 			            </tbody>
 			        </table>
-			    </div>
-			    <!--VALUE MATRIX-->
-				<!--
-				<div class="row">
-					<div class="card">
-						<div style="padding:16px;">
-							<h2>Value Matrix</h2>
-					    </div>
-					</div>
 				</div>
-				-->
-				<!--VALUE TENSOR-->
-				<!--VALUE TENSOR NETWORK-->
-    		</div>
-    	</div>
-
-		<div class="card">
-			<div class="row">
-				<div class="col-md-7">
-					<div style="padding:16px;">
-
-						<span ng-repeat="dimension in markets"><a href="market/{{dimension}}">{{dimension}}</a> | </span>
-						<br>
-						<highchart config="chartMap"></highchart>
-
-					</div>
-				</div>
-				<div class="col-md-5" style="max-height:750px;overflow:scroll">
-
-				    <div class="card" ng-repeat="market in markets">
-				    	<div style="padding:16px;">
-							<div class="row">
-
-					    		<div class="col-sm-6">
-					    			<a href="market/{{stateParams.id}}/{{market}}">
-										<!--<img style="height:50px" src="images/loading.gif">-->
-					    				<h4>{{market}}</h4>
-					    			</a>
-					    		</div>
-
-								<div class="col-sm-6" style="text-align:right">
-									<p style="color:gray;font-size:10px">0.2042 {{stateParams.id}}/{{market}}</p>
-									<p style="color:gray;font-size:10px">8% 24HR Change</p>
-									<p style="color:gray;font-size:10px">2031{{stateParams.id}} 24HR Volume</p>
-									<p style="color:gray;font-size:10px">21231{{stateParams.id}} Depth</p>
-					    		</div>
-
-							</div>
-						</div>
-
-				    </div>
-
-			    </div>
-		    </div>
-		</div>
-
-		<div class="card">
-			<div style="padding:16px">
-				<p><b>Related Assets</b></p>
 			</div>
+			<div class="card">
+				<div style="padding:16px">
+					<h4>Analysis</h4>
+		    		<p>Connections</p>
+		    		<p>Lattice Analysis</p>
+		    		<p>Computed Lattice Neighborhood</p>
+					<!--VALUE VECTOR-->
+					<!--1ST DEGREE-->
+				    <!--VALUE MATRIX-->
+					<!--VALUE TENSOR-->
+					<!--VALUE TENSOR NETWORK-->
+	    		</div>
+	    	</div>
 		</div>
 
-		<div class="card">
-	        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Market Content</button>
-	    </div>
-
-		<!--
-		<div class="card" ng-repeat="market in markets">
-		    <div style="padding:16px;">
-		    	<a href="market/{{stateParams.id}}/{{market}}"><h4>{{market}}</h4></a>
-		    	<p style="color:gray">{{stateParams.id}}/{{market}} markets; information</p>
+		<div class="col-md-6" style="max-height:100vh;overflow:scroll;padding-left:0px;padding-right:0px;">
+			<div class="spacing-5"></div>
+			<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+	            <li><a href="#">Content</a></li>
+				<li><a href="#">Markets</a></li>
+	            <li><a href="#">Manifold Actions</a></li>
+	            <li><a href="#">Trade Postions</a></li>
+	        </ul>
+			<div class="card">
+		        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Market Order</button>
+		    </div>
+		    <div class="card" ng-repeat="market in markets">
+		    	<div style="padding:16px;">
+					<div class="row">
+			    		<div class="col-sm-6">
+			    			<a href="market/{{stateParams.id}}/{{market}}">
+			    				<h5>{{market}}</h5>
+			    			</a>
+			    		</div>
+						<div class="col-sm-6" style="text-align:right">
+							<span style="text-align:right;float:right">0.21 {{stateParams.id}}</span>
+			    		</div>
+					</div>
+					<div class="row">
+			    		<div class="col-sm-12">
+							<highchart config="bidAskChart"></highchart>
+			    			<p style="color:gray;font-size:10px">%-0.32 24/hr Change</p>
+							<p style="color:gray;font-size:10px">4423 {{stateParams.id}} Depth</p>
+						</div>
+			    	</div>
+				</div>
 		    </div>
 	    </div>
-		-->
-
-	</div>
+    </div>
 
 	<!--TRANSACTIONS, TRADES-->
 	<div class="row">

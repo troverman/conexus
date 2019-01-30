@@ -77,8 +77,7 @@ angular.module( 'conexus.marketPair', [
         },
         legend:{enabled:true},
         title: {text: null},
-        xAxis: {title: {text: null}
-        },
+        xAxis: {title: {text: null}},
         yAxis: {title: {text: null}},
         plotOptions: {
             column: {

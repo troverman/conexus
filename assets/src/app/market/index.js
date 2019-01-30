@@ -48,31 +48,53 @@ angular.module( 'conexus.market', [
     });
     $scope.token = token[0];
     $scope.trades = {};
-    console.log(token)
-	$scope.chart = {
+    console.log(token);
+
+    //PLUAR 2 COME :)
+    $scope.bidAskChart = {
         chart: {
             zoomType: 'x',
+            height:250,
         },
+        legend:{enabled:true},
+        title: {text: null},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            type: 'area',
+            id: 'asks',
+            name: 'Asks',
+            color: '#14b794',
+            data: []
+        },{
+            type: 'area',
+            id:  'bids',
+            name: 'Bids',
+            color: '#a94442',
+            data: []
+        }],
+        credits:{enabled:false},
+    };
+
+	$scope.chart = {
+        chart: {zoomType: 'x',},
         series: [{
             id: 'ExchangePrice',
             type: 'spline',
             name: 'Exchange Price' + $stateParams.id,
             data: [65, 59, 80, 81, 56, 55, 40]
         }],
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
-        credits:{enabled:false},
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        legend: {enabled:false},
+        credits: {enabled:false},
     };
 
     $scope.chartMap = {
@@ -81,7 +103,7 @@ angular.module( 'conexus.market', [
             margin: [30, 30, 30, 30]
         },
         series: [],
-        title: {text: ''},
+        title: {text: 'Value Vector'},
         xAxis: {
             title: {text: null},
             categories: [],
@@ -101,21 +123,18 @@ angular.module( 'conexus.market', [
             y: 70,
             layout: 'vertical'
         },
-        tooltip: {
-            shared: true,
-        },
+        tooltip: {shared: true},
         credits:{enabled:false},
+        legend: {enabled:false},
     };
 
     $scope.baseMarkets = [$scope.stateParams.id]
-    $scope.markets = ['USD', 'ETH', 'BTC', 'CRE8', 'STEEM', 'LTC', 'Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency', 'onTime', 'onTimeStream', 'onReact', 'onPost','onOrder','onVote','onView','onValidate','onMine','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    $scope.markets = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'CRE8+TIME', 'CRE8+TIME+EDUCATION', 'CRE8+TIME+SHELTER', 'CRE8+TIME+FOOD', 'CRE8+TIME+CREATION', 'CRE8+TIME+HEALTH', 'CRE8+TIME+SECURITY', 'CRE8+TIME+REST', 'CRE8+STREAM', 'CRE8+REACT','CRE8+REACT+LIKE','CRE8+REACT+DISLIKE','CRE8+POST','CRE8+VALIDATE','CRE8+VIEW','CRE8+MINE','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
     
     for (x in $scope.baseMarkets){
-
         var random1 = Math.floor(255*Math.random());
         var random2 = Math.floor(255*Math.random());
         var random3 = Math.floor(255*Math.random());
-
         $scope.chartMap.series.push({
             id: 'values'+x,
             type: 'area',
@@ -138,6 +157,11 @@ angular.module( 'conexus.market', [
         for (y in $scope.baseMarkets){
             $scope.chartMap.series[y].data.push((1+1*Math.random())/2);
         }
+    }
+
+    for(var i=-1000;i<1000;i++){
+        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
+        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
     }
     
     //TODO: FILTER NAV

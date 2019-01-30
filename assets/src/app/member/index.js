@@ -70,12 +70,12 @@ angular.module( 'conexus.member', [
         },
         resolve: {}
     })
-    .state( 'member.consumption', {
-        url: '/consumption',
+    .state( 'member.actions', {
+        url: '/actions',
         views: {
-            "memberConsumption": {
-                controller: 'MemberConsumptionCtrl',
-                templateUrl: 'member/templates/consumption.tpl.html'
+            "memberActions": {
+                controller: 'MemberActionsCtrl',
+                templateUrl: 'member/templates/actions.tpl.html'
             }
         },
         resolve: {}
@@ -301,6 +301,13 @@ angular.module( 'conexus.member', [
 
 .controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberAboutController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
     titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
+
+}])
+
+
+.controller( 'MemberActionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberActionsController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
+    titleService.setTitle($scope.member.username + ' | Actions | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
 }])
@@ -643,12 +650,6 @@ angular.module( 'conexus.member', [
         if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
         if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
     };
-
-}])
-
-.controller( 'MemberConsumptionCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberConsumptionController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
-    titleService.setTitle($scope.member.username + ' | Consumption | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
 
 }])
 

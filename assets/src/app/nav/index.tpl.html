@@ -56,51 +56,6 @@
                 <div class="spacing-25"></div>
             </div>
             <div style="padding:16px;">
-            
-
-                <!--LEDGER-->
-                <div ng-if="type=='LEDGER'">
-
-                    <p><b>Asset Set</b></p>
-                    <tags-input min-length="1" placeholder="Asset Set" ng-model="selectedAssets">
-                        <auto-complete source="loadAsset($query)"></auto-complete>
-                    </tags-input>
-                    <div ng-repeat="asset in item.assets.slice(0,10)">
-                        <a href="#" ng-click="selectAsset(asset.element)">{{asset.element}}</a>
-                    </div>
-                    <div class="spacing-10"></div>
-
-                    <!--RELATED-->
-                    <p><b>Tags</b></p>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="selectedTags">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-                    </tags-input>
-                    <div ng-repeat="asset in item.tags.slice(0,10)">
-                        <a href="#" ng-click="selectTag(asset.element)">{{asset.element}}</a>
-                    </div>
-                    <div class="spacing-10"></div>
-
-                    <p><b>Associations</b></p>
-                    <tags-input min-length="1" placeholder="Associations" ng-model="selectedAssociations">
-                        <auto-complete source="loadAssociation($query)"></auto-complete>
-                    </tags-input>
-                    <div ng-repeat="asset in item.associations.slice(0,10)">
-                        <a href="#" ng-click="selectTag(asset.element)">{{asset.element}}</a>
-                    </div>
-                    <div class="spacing-10"></div>
-
-                </div>
-
-                <!--POSTIONS | MAP-->
-                <div ng-if="type=='POSITIONS'">
-                    <p><b>Positions</b></p>
-                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
-                        <auto-complete source="loadAsset($query)"></auto-complete>
-                    </tags-input>
-                    <tags-input min-length="1" placeholder="Asset" ng-model="markets">
-                        <auto-complete source="loadAsset($query)"></auto-complete>
-                    </tags-input>
-                </div>
 
                 <!--DISCOVER-->
                 <div ng-if="type=='DISCOVER'">
@@ -170,8 +125,84 @@
                             </ui-gmap-window>
                         </ui-gmap-marker>
                     </ui-gmap-google-map>
+                </div>
+            
+                <!--LEDGER-->
+                <div ng-if="type=='LEDGER'">
+
+                    <p><b>Asset Set</b></p>
+                    <tags-input min-length="1" placeholder="Asset Set" ng-model="selectedAssets">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+                    <div ng-repeat="asset in item.assets.slice(0,10)">
+                        <a href="#" ng-click="selectAsset(asset.element)">{{asset.element}}</a>
+                    </div>
+                    <div class="spacing-10"></div>
+
+                    <!--RELATED-->
+                    <p><b>Tags</b></p>
+                    <tags-input min-length="1" placeholder="Tags" ng-model="selectedTags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+                    <div ng-repeat="asset in item.tags.slice(0,10)">
+                        <a href="#" ng-click="selectTag(asset.element)">{{asset.element}}</a>
+                    </div>
+                    <div class="spacing-10"></div>
+
+                    <p><b>Associations</b></p>
+                    <tags-input min-length="1" placeholder="Associations" ng-model="selectedAssociations">
+                        <auto-complete source="loadAssociation($query)"></auto-complete>
+                    </tags-input>
+                    <div ng-repeat="asset in item.associations.slice(0,10)">
+                        <a href="#" ng-click="selectTag(asset.element)">{{asset.element}}</a>
+                    </div>
+                    <div class="spacing-10"></div>
+                </div>
+
+                <!--MARKET-->
+                <div ng-if="type=='MARKET'">
+
+
+
+                    <!--
+                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+                    -->
+
+                    <tags-input min-length="1" placeholder="Asset" ng-model="markets">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+
+
+                    <!--IDK-->
+                    <div layout="">
+                        <div flex="12" layout="" layout-align="center center"><span class="md-body-1" style="font-size:10px">Volume</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="locationFilter.distance" step="1" min="0" max="100" aria-label="general"></md-slider>
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1"></span></div>
+                    </div>
+
+                    <!--IDK-->
+                    <div layout="">
+                        <div flex="12" layout="" layout-align="center center"><span class="md-body-1" style="font-size:10px">Combinitorial</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="locationFilter.distance" step="1" min="0" max="100" aria-label="general"></md-slider>
+                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1"></span></div>
+                    </div>
+
 
                 </div>
+
+                <!--POSTIONS | MAP-->
+                <div ng-if="type=='POSITIONS'">
+                    <p><b>Positions</b></p>
+                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+                    <tags-input min-length="1" placeholder="Asset" ng-model="markets">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+                </div>
+
             </div>
         </div>
     </md-sidenav>
@@ -707,7 +738,7 @@
                 <div ng-if="member">
                     <h1 class="nav-links"><a href="member/{{member.username}}">{{member.username}}</a></h1>
                     <h4 class="nav-links"><a href="member/{{member.username}}/about">About</a></h4>
-                    <h4 class="nav-links"><a href="member/{{member.username}}/consumption">Actions</a></h4>
+                    <h4 class="nav-links"><a href="member/{{member.username}}/actions">Actions</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/assets">Assets</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/content">Content</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/followers">{{member.followerCount}} Followers</a></h4>
@@ -716,7 +747,7 @@
                     <h4 class="nav-links"><a href="member/{{member.username}}/ledger">Ledger</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/positions">Positions</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/projects">{{member.projectCount}} Projects</a></h4>
-                    <!--<h4 class="nav-links"><a href="member/{{member.username}}/time">Tasks</a></h4>-->
+                    <h4 class="nav-links"><a href="member/{{member.username}}/tasks">Tasks</a></h4>
                     <h4 class="nav-links"><a href="member/{{member.username}}/time">Time</a></h4>
                 </div>
 
