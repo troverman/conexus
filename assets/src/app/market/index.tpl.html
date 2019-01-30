@@ -54,7 +54,7 @@
 					<p>In Circulation: {{token.information.inCirculation}}</p>
 					<div class="spacing-5"></div>
 		    		<p><b>Protocols <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-		    		<p><span ng-repeat="protocol in token.protocols"><a href="protocol/base">{{protocol}}</a></span></p>
+		    		<p><span ng-repeat="protocol in token.protocols"><a href="protocol/{{protocol}}">{{protocol}}</a></span></p>
 					<div class="spacing-5"></div>
 		    		<p><b>Logic <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
 		    		<p>Transferrable: {{token.logic.transferrable}}</p>
