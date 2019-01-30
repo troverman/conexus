@@ -103,7 +103,7 @@ angular.module( 'conexus.market', [
             margin: [30, 30, 30, 30]
         },
         series: [],
-        title: {text: 'Value Vector'},
+        title: {text: ''},
         xAxis: {
             title: {text: null},
             categories: [],

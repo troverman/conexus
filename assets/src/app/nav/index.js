@@ -384,8 +384,11 @@ angular.module( 'conexus.nav', [
 
         $scope.item = item;
 
+        //DEPRECIATE .modelType
         if (item.model == 'TASK'){
-            $scope.assoicationFilter = [{text:'PROJECT | '+$scope.item.project.title}];
+            if ($scope.item.project){
+                $scope.assoicationFilter = [{text:'PROJECT | '+$scope.item.project.title}];
+            }
         }
         if (item.model == 'TIME'){
             $scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];

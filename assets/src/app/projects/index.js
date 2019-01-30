@@ -50,7 +50,8 @@ angular.module( 'conexus.projects', [
     }
 
     //IMPROVE :)
-    $scope.loadAssociations = function(){        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+    $scope.loadAssociations = function(){        
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedAssociationArray = [];
         for (x in $scope.associations){
             var amount = countInArray($scope.associations, $scope.associations[x]);
@@ -150,33 +151,33 @@ angular.module( 'conexus.projects', [
 
 
 
-
-
     //FIX THIS
     $rootScope.$watch('searchQuery' ,function(){
+
         $scope.searchQuery = [];
         for(x in Object.keys($rootScope.searchQuery)){
             for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
                 $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
             }
         }
+
     }, true);
 
     $scope.$watch('searchQuery' ,function(){
+
         $scope.searchQuery.map(function(obj){if (!obj.type){obj.type = 'QUERY'} return obj })
         console.log($scope.searchQuery);
+        $rootScope.stateIsLoading = true;
+        var query = {}
+        query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+        ProjectModel.getSome('search', query.search, 20, 0, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            $scope.projects = models;
+            $scope.loadAssociations();
+            $scope.loadLocations();
+            $scope.loadTags();
+        });
 
-        //if ($scope.searchQuery){}
-        //$rootScope.stateIsLoading = true;
-        //var query = {}
-        //query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        //ProjectModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(projects){
-        //    $rootScope.stateIsLoading = false;
-        //    $scope.projects = models;
-        //    $scope.loadAssociations();
-        //    $scope.loadLocations();
-        //    $scope.loadTags();
-        //});
     }, true);
 
 

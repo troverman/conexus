@@ -69,6 +69,7 @@
             </ul>
             <div style="clear:both"></div>
 
+            <!--
             <div class="card">
                 <form ng-submit="search()" style="display:flex;flex-direction:row;">
                     <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
@@ -79,6 +80,11 @@
                     </div>
                 </form>
             </div>
+        	-->
+
+            <div class="card">
+				<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+			</div>
 
 	        <div class="card">
 				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
@@ -125,7 +131,7 @@
 				</div>
 			</div>
 
-			<div ng-show="true" class="card" style="text-align:center" ng-click="loadMore()">
+			<div ng-show="tasks.length > 0" class="card" style="text-align:center" ng-click="loadMore()">
                 <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
             </div>
 

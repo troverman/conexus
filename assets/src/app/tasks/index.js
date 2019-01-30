@@ -145,6 +145,10 @@ angular.module( 'conexus.tasks', [
     };
     $scope.loadAssociations();
 
+    $scope.loadLocations = function(){
+        $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+    };
+
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.tasks.map(function(obj){
@@ -202,13 +206,40 @@ angular.module( 'conexus.tasks', [
         });
     };
 
+    //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
+    //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
     $rootScope.$watch('searchQuery' ,function(){
+
         $scope.searchQuery = [];
         for(x in Object.keys($rootScope.searchQuery)){
             for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
                 $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
             }
         }
+
+    }, true);
+
+    $scope.$watch('searchQuery' ,function(){
+
+        //$scope.searchQuery.map(function(obj){if (!obj.type){obj.type = 'QUERY'} return obj })
+        //console.log($scope.searchQuery);
+        $rootScope.stateIsLoading = true;
+        var query = {}
+        query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+        TaskModel.getSome('search', query.search, 20, 0, 'createdAt DESC').then(function(models){
+            $rootScope.stateIsLoading = false;
+            console.log(models)
+            $rootScope.stateIsLoading = false;
+            $scope.tasks = models.map(function(obj){
+                obj.model = 'TASK';
+                if (obj.tags){obj.tags = obj.tags.split(',')}
+                return obj;
+            });
+            $scope.loadAssociations();
+            $scope.loadLocations();
+            $scope.loadTags();
+        });
+
     }, true);
 
     $sailsSocket.subscribe('task', function (envelope) {
@@ -216,6 +247,7 @@ angular.module( 'conexus.tasks', [
             case 'created':
                 $scope.tasks.unshift(envelope.data);
                 $scope.tasks.map(function(obj){
+                    obj.model = 'TASK';
                     if (obj.tags){obj.tags = obj.tags.split(',')}
                     return obj;
                 });

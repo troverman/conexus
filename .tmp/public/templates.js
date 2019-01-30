@@ -2259,7 +2259,6 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "        <div class=\"row\">\n" +
     "            <div class=\"col-xs-12\">\n" +
     "				<h1>{{token.string}}</h1>\n" +
-    "				<p style=\"color:white\">{{token.string}} | {{token.information.markets}} markets | {{token.information.inCirculation}} tokens in circulation </p>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-25\"></div>\n" +
@@ -2276,7 +2275,8 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('MARKET')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "		</ul>\n" +
     "		<div style=\"clear:both\"></div>\n" +
-    "\n" +
+    "    	<!--MANIFOLD FILTER-->\n" +
+    "		<!--MANIFOLD SORTING-->\n" +
     "		<div class=\"card\">\n" +
     "			<form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "		    	<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
@@ -2290,57 +2290,60 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	<div class=\"row\">\n" +
     "\n" +
     "    	<div class=\"col-sm-6\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "    		<!--MANIFOLD FILTER-->\n" +
-    "			<!--IS TRANSFERRABLE; FUNCTIONS TO ACT ON THE TOKEN BALANCE-->\n" +
-    "			<!--MANIFOLD SORTING-->\n" +
-    "			<!--POPULAT MANIFOLDS-->\n" +
-    "			<!--PROTOCOLPLUGINS-->\n" +
-    "			<!--FUTURES, OPTIONS, PROJECT, WORK, CONTENT, ETC-->\n" +
     "			<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->\n" +
-    "			<!--+FUTURE+TIME-->\n" +
-    "			<!--+OPTION+TIME-->\n" +
-    "		    <!--NG REPEAT-->\n" +
+    "\n" +
     "		    <div class=\"card\">\n" +
     "				<div style=\"padding:16px\">\n" +
+    "		    		\n" +
+    "		    		<!--TOOD: MARKET: {{token.string}}-->\n" +
+    "\n" +
     "		    		<p><b>Tokens</b></p>\n" +
+    "					<!--NG REPEAT-->\n" +
     "		    		<h4><a href=\"token/{{token.spring}}\">{{token.string}}</a></h4>	\n" +
+    "					<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "					<p><b>Information <a ng-click=\"informationToggle()\" href=\"\"><i class=\"fa fa-question-circle\"></i></a></b></p>\n" +
     "					<p>AssociatedModels: <a href=\"time/id\">TIME</a></p>\n" +
     "					<p>In Circulation: {{token.information.inCirculation}}</p>\n" +
+    "					<p>Markets: {{markets.length}}</p>\n" +
     "					<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "					<!--FUTURES, OPTIONS, PROJECT, WORK, CONTENT, ETC-->\n" +
     "		    		<p><b>Protocols <a ng-click=\"informationToggle()\" href=\"\"><i class=\"fa fa-question-circle\"></i></a></b></p>\n" +
-    "		    		<p><span ng-repeat=\"protocol in token.protocols\"><a href=\"protocol/base\">{{protocol}}</a></span></p>\n" +
+    "		    		<p>\n" +
+    "		    			<span ng-repeat=\"protocol in token.protocols\"><a href=\"protocol/{{protocol}}\">{{protocol}}</a>,</span>\n" +
+    "\n" +
+    "						<a href=\"protocol/manifold\">MANIFOLD</a>,\n" +
+    "						<a href=\"protocol/manifold\">SPONSOR</a>,\n" +
+    "		    			<a href=\"protocol/future\">FUTURE</a>,\n" +
+    "						<a href=\"protocol/option\">OPTION</a>\n" +
+    "\n" +
+    "		    		</p>\n" +
     "					<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "					<!--FUNCTIONS TO ACT ON THE TOKEN BALANCE-->\n" +
     "		    		<p><b>Logic <a ng-click=\"informationToggle()\" href=\"\"><i class=\"fa fa-question-circle\"></i></a></b></p>\n" +
     "		    		<p>Transferrable: {{token.logic.transferrable}}</p>\n" +
     "		    		<p>Mint: {{token.logic.mint}}</p>\n" +
     "					<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "		    		<p><b>Manifold Actions <a ng-click=\"informationToggle()\" href=\"\"><i class=\"fa fa-question-circle\"></i></a></b></p>\n" +
+    "		    		<p>+SPONSOR</p>\n" +
+    "		    		<p>+FUTURE+TIME</p>\n" +
+    "		    		<p>+OPTION+TIME</p>\n" +
+    "\n" +
+    "\n" +
     "	    		</div>\n" +
     "	    	</div>\n" +
     "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px;\">\n" +
+    "					<h4>Value Vector</h4>\n" +
     "					<highchart config=\"chartMap\"></highchart>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			<div class=\"card\">\n" +
-    "				<div style=\"padding:16px;\">\n" +
-    "					<h4>Value Vector</h4>\n" +
-    "				    <table class=\"table table-striped table-hover\">\n" +
-    "			            <thead>\n" +
-    "			                <tr><th>Asset</th><th>Value</th></tr>\n" +
-    "			            </thead>\n" +
-    "			            <tbody>\n" +
-    "			                <tr ng-repeat=\"market in markets\">\n" +
-    "			                    <td><a href=\"market/{{market}}\">{{market}}</a></td>\n" +
-    "								<td>3</td>\n" +
-    "			                </tr>\n" +
-    "			            </tbody>\n" +
-    "			        </table>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px\">\n" +
-    "					<h4>Analysis</h4>\n" +
+    "					<h4>Market Analysis</h4>\n" +
     "		    		<p>Connections</p>\n" +
     "		    		<p>Lattice Analysis</p>\n" +
     "		    		<p>Computed Lattice Neighborhood</p>\n" +
@@ -2359,10 +2362,10 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	            <li><a href=\"#\">Content</a></li>\n" +
     "				<li><a href=\"#\">Markets</a></li>\n" +
     "	            <li><a href=\"#\">Manifold Actions</a></li>\n" +
-    "	            <li><a href=\"#\">Trade Postions</a></li>\n" +
+    "	            <!--<li><a href=\"#\">Trade Postions</a></li>-->\n" +
     "	        </ul>\n" +
     "			<div class=\"card\">\n" +
-    "		        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Market Order</button>\n" +
+    "		        <button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button>\n" +
     "		    </div>\n" +
     "		    <div class=\"card\" ng-repeat=\"market in markets\">\n" +
     "		    	<div style=\"padding:16px;\">\n" +
@@ -2389,6 +2392,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "    </div>\n" +
     "\n" +
     "	<!--TRANSACTIONS, TRADES-->\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\" ng-repeat=\"item in contentList\">\n" +
     "		    <div style=\"padding:16px\">\n" +
@@ -2405,7 +2409,6 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "		        <a style=\"color:grey\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "		    </div>\n" +
-    "		    <!--TODO: NESTED -->\n" +
     "		    <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "		        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
     "		            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
@@ -2672,36 +2675,24 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "	<div style=\"row\">\n" +
-    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "            <li class=\"active\"><a href=\"/\">Activity</a></li>\n" +
-    "            <li><a href=\"#\">Trade Postions</a></li>\n" +
-    "            <li><a href=\"#\">onMint Actions</a></li>\n" +
-    "            <li><a href=\"#\">Information</a></li>\n" +
+    "	<div class=\"row\">\n" +
+    "		<ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "            <li><a href=\"#\">Content</a></li>\n" +
+    "            <li><a href=\"#\">Manifold Actions</a></li>\n" +
+    "            <li><a href=\"#\">Trade Postions</a></li>\n" +
     "        </ul>\n" +
-    "    </div>\n" +
-    "\n" +
-    "	<div class=\"row\" ng-show=\"true\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"row\" ng-show=\"pluralistic\">\n" +
-    "		<div class=\"card\">\n" +
+    "		<div class=\"card\" ng-show=\"pluralistic\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Pluralistic Market</h2>\n" +
     "				<div class=\"col-md-6\"><highchart config=\"chartMap\"></highchart></div>\n" +
     "				<div class=\"col-md-6\"><highchart config=\"chartMap\"></highchart></div>\n" +
-    "\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Order Book</h2>\n" +
@@ -2710,89 +2701,25 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"\">\n" +
-    "				<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
+    "	<!--TODO: ARRAY-->\n" +
+    "	<!--combinatorial market string-->\n" +
+    "	<!--MANIFOLDS ARE NESTED. . . -> INSTRUMENTS IN PROTOCOL.. SPONSOR, DERIVITATIVES-->\n" +
+    "	<!--option tokens string inferance+time+option-->\n" +
     "\n" +
-    "	<div class=\"row\" ng-show=\"newOrderToggleVar\">\n" +
-    "		<div class=\"card\">\n" +
-    "		    <div style=\"padding:16px;\">\n" +
-    "				<form role=\"form\" ng-submit=\"createOrder()\">\n" +
-    "\n" +
-    "					<div class=\"col-sm-12\" style=\"padding:20px;\">\n" +
-    "						<p ng-show=\"!inverted\" style=\"font-weight:800;\">Sell {{market}} for {{market1}} | Buy {{market1}} with {{market}}</p>\n" +
-    "						<p ng-show=\"inverted\" style=\"font-weight:800;\">Buy {{market}} with {{market1}} | Sell {{market1}} with {{market}}</p>\n" +
-    "					</div>\n" +
-    "\n" +
-    "					<!--invert | buy-->\n" +
-    "					<!--<p style=\"font-weight:800;padding:20px\">Buy {{stateParams.id}} with {{stateParams.id1}}</p>-->\n" +
-    "					<!--TODO: actual array-->\n" +
-    "					<!--combinatorial market string-->\n" +
-    "\n" +
-    "					<div class=\"col-sm-6 form-group\"><input placeholder=\"{{market}}\" type=\"text\" ng-disabled=\"true\" ng-model=\"newOrder.identiferSet\" class=\"form-control\"></div>\n" +
-    "					<div class=\"col-sm-6 form-group\">\n" +
-    "						<div class=\"col-sm-6\"><input placeholder=\"{{market}} Amount\" type=\"number\" ng-model=\"newOrder.amountSet\" class=\"form-control\"></div>\n" +
-    "						<div class=\"col-sm-6\"><input placeholder=\"{{market1}} / {{market}} Price\" type=\"text\" ng-model=\"newOrder.amountSet1Price\" class=\"form-control\"></div>\n" +
-    "					</div>\n" +
-    "\n" +
-    "					<!--THIS SUBMITES FORM?-->\n" +
-    "					<div style=\"text-align:center;margin-bottom:15px\" class=\"col-sm-12\">\n" +
-    "						<button ng-click=\"invertMarket()\" style=\"width:100px\" class=\"btn btn-default log-btn\"><i class=\"fa fa-refresh\"></i> Invert</button>\n" +
-    "					</div>\n" +
-    "\n" +
-    "					<div class=\"col-sm-6 form-group\"><input placeholder=\"{{market1}}\" ng-disabled=\"true\" type=\"text\" ng-model=\"newOrder.identiferSet1\" class=\"form-control\"></div>\n" +
-    "					<div class=\"col-sm-6 form-group\">\n" +
-    "						<div class=\"col-sm-6\"><input placeholder=\"{{market1}} Amount\" type=\"number\" ng-model=\"newOrder.amountSet1\" class=\"form-control\"></div>\n" +
-    "						<div class=\"col-sm-6\"><input placeholder=\"{{market}} / {{market1}} Price\" type=\"text\" ng-model=\"newOrder.amountSet1Price\" class=\"form-control\"></div>\n" +
-    "					</div>\n" +
-    "\n" +
-    "					<!--option tokens string inferance+time+option-->\n" +
-    "					<!--DERIVITATIVES; ON MINT TYPE | IE UNIVERSAL TRADE ON MINT; one way-->\n" +
-    "\n" +
-    "					<!--\n" +
-    "					Market Orders;@ price | fok; ioc; onbook;\n" +
-    "					Limit Orders; sell no lower than, buy no higher than price\n" +
-    "					-->\n" +
-    "\n" +
-    "					<!--array based;; so multiD stops.. a gradiation in dimesnions-->\n" +
-    "					<div class=\"col-sm-12\" style=\"marking:10px\">\n" +
-    "						<!--on books; partial fill-->\n" +
-    "						<!--all or nothing at price-->\n" +
-    "						<!--partial fill at price-->\n" +
-    "						<!--sell no lower than, buy no higher than; up to price-->\n" +
-    "						<ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                            <li ng-class=\"{active: selectedType=='ONBOOKS'}\" ng-click=\"selectType('ONBOOKS')\"><a href=\"#\">Market onBooks <i ng-click=\"questionToggle()\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='FILLORKILL'}\" ng-click=\"selectType('FILLORKILL')\"><a href=\"#\">Market Market Fill Or Kill <i ng-click=\"questionToggle()\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='IMMEDIATEORCANCEL'}\" ng-click=\"selectType('IMMEDIATEORCANCEL')\"><a href=\"#\">Immediate or Cancel <i ng-click=\"questionToggle()\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            <li ng-class=\"{active: selectedType=='LIMIT'}\" ng-click=\"selectType('LIMIT')\"><a href=\"#\"> Limit <i ng-click=\"questionToggle()\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                        </ul>\n" +
-    "					</div>\n" +
-    "\n" +
-    "					<!--array based; this loops-->\n" +
-    "					<div class=\"col-sm-12\" style=\"padding:20px\">\n" +
-    "						<p style=\"font-weight:800;\">\n" +
-    "							<span>Sell {{newOrder.amountSet}} {{market}} for {{newOrder.amountSet1}} {{market1}} @ {{newOrder.amountSet1 / newOrder.amountSet}} {{market}} / {{market1}}</span>\n" +
-    "							<span> | </span>\n" +
-    "							<span>Buy {{newOrder.amountSet1}} {{market1}} for {{newOrder.amountSet}} {{market}} @ {{newOrder.amountSet / newOrder.amountSet1}} {{market1}} / {{market}}</span>\n" +
-    "						</p>\n" +
-    "					</div>\n" +
-    "\n" +
-    "					<button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.amountSet\">create</button>\n" +
-    "\n" +
-    "				</form>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
+    "	<!--\n" +
+    "	Market Orders;@ price | fok; ioc; onbook;\n" +
+    "	Limit Orders; sell no lower than, buy no higher than price\n" +
+    "	array based; so multiD stops.. a gradiation in dimesnions\n" +
+    "	-->\n" +
     "\n" +
     "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button>\n" +
+    "		</div>\n" +
+    "		<!--TODO: Partially Filled Orders | TRADES-->\n" +
     "		<div ng-repeat=\"order in orders\">\n" +
     "	        <div class=\"card\">\n" +
     "	            <div style=\"padding:16px\">\n" +
-    "\n" +
     "					<!--<p>Type</p>-->\n" +
     "	            	<div class=\"row\">\n" +
     "		            	<div class=\"col-md-2\">\n" +
@@ -2802,9 +2729,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "							</span>\n" +
     "						</div>\n" +
     "		            	<div class=\"col-md-1\"><i class=\"fa fa-exchange\"></i></div>\n" +
-    "\n" +
     "						<!--<span> | </span>-->\n" +
-    "\n" +
     "		            	<div class=\"col-md-2\">\n" +
     "							<a style=\"font-weight:bold\" href=\"market/{{order.identiferSet1.join(',')}}\">{{order.identiferSet1.join(',')}}</a><br><br>\n" +
     "							<span style=\"\" ng-repeat=\"item in order.amountSet1 track by $index\">\n" +
@@ -2813,7 +2738,6 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "						</div>\n" +
     "					</div>\n" +
     "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "\n" +
     "	            </div>\n" +
     "	            <div class=\"card-footer\">\n" +
     "	                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
@@ -2825,24 +2749,11 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<!--TODO: Partially Filled Orders -->\n" +
     "	<!--\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
-    "				<h2>Recent Trades</h2>\n" +
-    "		    </div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	-->\n" +
-    "\n" +
-    "	<div class=\"row\">\n" +
-    "	    <div class=\"card\">\n" +
     "	        <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ {{market}} | {{market1}} Content</button>\n" +
     "	    </div>\n" +
-    "	</div>\n" +
-    "	\n" +
-    "	<div class=\"row\">\n" +
     "		<div class=\"card\" ng-repeat=\"item in contentList\">\n" +
     "		    <div style=\"padding:16px\">\n" +
     "		        <div>\n" +
@@ -2858,7 +2769,6 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "		        <a style=\"color:grey\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "		    </div>\n" +
-    "		    <!--TODO: NESTED -->\n" +
     "		    <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "		        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
     "		            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
@@ -2867,6 +2777,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "	-->\n" +
     "\n" +
     "</div>\n" +
     "\n" +
@@ -7038,7 +6949,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-click=\"loadMore()\" class=\"card\">\n" +
+    "        <div ng-show=\"projects.length > 0\" ng-click=\"loadMore()\" class=\"card\">\n" +
     "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "        </div>\n" +
     "\n" +
@@ -7870,6 +7781,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "            </ul>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "\n" +
+    "            <!--\n" +
     "            <div class=\"card\">\n" +
     "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
@@ -7880,6 +7792,11 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
+    "        	-->\n" +
+    "\n" +
+    "            <div class=\"card\">\n" +
+    "				<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "			</div>\n" +
     "\n" +
     "	        <div class=\"card\">\n" +
     "				<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
@@ -7926,7 +7843,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				</div>\n" +
     "			</div>\n" +
     "\n" +
-    "			<div ng-show=\"true\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "			<div ng-show=\"tasks.length > 0\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
     "\n" +

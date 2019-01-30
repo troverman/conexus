@@ -215,28 +215,55 @@ angular.module( 'conexus.home', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO
-    $scope.$watch('searchQuery' ,function(){
-        var query = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        ContentModel.getSome('search', query, 0, 20, 'createdAt DESC').then(function(models){
-            $rootScope.stateIsLoading = false;
-            $scope.activity = models.map(function(obj){
-                obj.model = 'CONTENT';
-                return obj;
-            });
-        });
+    
+    //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
+    //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
+    $rootScope.$watch('searchQuery' ,function(){
+        console.log($scope.searchQuery);
+
+        //NEW VALUE VS OLD VALUE VS BLANK
+        if ($scope.searchQuery!=''){
+            $scope.searchQuery = [];
+            for(x in Object.keys($rootScope.searchQuery)){
+                for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
+                    $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+                }
+            }
+        }
+
     }, true);
 
-    $scope.search = function(){
-        $rootScope.stateIsLoading = true;
-        ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
-            $rootScope.stateIsLoading = false;
-            $scope.activity = models.map(function(obj){
-                obj.model = 'CONTENT';
-                return obj;
+    $scope.$watch('searchQuery' ,function(){
+
+        //NEW VALUE VS OLD VALUE VS BLANK
+        if ($scope.searchQuery!=''){
+
+            var query = {}
+            query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+            $rootScope.stateIsLoading = true;
+
+            //TODO: REMOVE BASED 64 STRING SEARCH
+            SearchModel.search(query.search).then(function(models){
+                $rootScope.stateIsLoading = false;
+                $scope.activity = models;
+                $scope.activity.map(function(obj){
+                    if (obj.tags){obj.tags = obj.tags.split(',');}
+                });
             });
-        });
-    };
+
+
+            /*
+            ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+                $rootScope.stateIsLoading = false;
+                $scope.activity = models.map(function(obj){
+                    obj.model = 'CONTENT';
+                    return obj;
+                });
+            });
+            */
+        }
+
+    }, true);
 
 }])
 
@@ -508,27 +535,53 @@ angular.module( 'conexus.home', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.$watch('searchQuery' ,function(){
-        var query = {}
-        query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
-            $rootScope.stateIsLoading = false;
-            $scope.activity = models.map(function(obj){
-                obj.model = 'CONTENT';
-                return obj;
-            });
-        });
+    //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
+    //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
+    $rootScope.$watch('searchQuery' ,function(){
+        console.log($scope.searchQuery);
+
+        //NEW VALUE VS OLD VALUE VS BLANK
+        if ($scope.searchQuery!=''){
+            $scope.searchQuery = [];
+            for(x in Object.keys($rootScope.searchQuery)){
+                for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
+                    $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+                }
+            }
+        }
+
     }, true);
 
-    $scope.search = function(){
-        $rootScope.stateIsLoading = true;
-        ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
-            $rootScope.stateIsLoading = false;
-            $scope.activity = models.map(function(obj){
-                obj.model = 'CONTENT';
-                return obj;
+    $scope.$watch('searchQuery' ,function(){
+
+        //NEW VALUE VS OLD VALUE VS BLANK
+        if ($scope.searchQuery!=''){
+
+            var query = {}
+            query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+            $rootScope.stateIsLoading = true;
+
+            //TODO: REMOVE BASED 64 STRING SEARCH
+            SearchModel.search(query.search).then(function(models){
+                $rootScope.stateIsLoading = false;
+                $scope.activity = models;
+                $scope.activity.map(function(obj){
+                    if (obj.tags){obj.tags = obj.tags.split(',');}
+                });
             });
-        });
-    };
+
+
+            /*
+            ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
+                $rootScope.stateIsLoading = false;
+                $scope.activity = models.map(function(obj){
+                    obj.model = 'CONTENT';
+                    return obj;
+                });
+            });
+            */
+        }
+
+    }, true);
 
 }]);
