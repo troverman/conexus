@@ -6,8 +6,10 @@
     
 	<div class="card">
 		<div style="padding:16px;">
+			<p><b>Description</b></p>
             <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
-            <p>Members: {{project.memberCount}} | Tasks: {{project.taskCount}} | Time: {{project.timeCount}}</p>
+            <p><b>Address</b>: {{project.id}}</p>
+            <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>
         </div>
     </div>
 

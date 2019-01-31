@@ -382,6 +382,17 @@ angular.module( 'conexus.nav', [
 
     $rootScope.renderValidationToggle = function(item){
 
+        //POWER SET
+        function getAllSubsets(theArray) {
+          return theArray.reduce(function (subsets, value) {
+            return subsets.concat(subsets.map(function (set) {
+              return [value].concat(set);
+            }));
+          }, [[]]);
+        };
+
+
+        console.log(item);
         $scope.item = item;
 
         //DEPRECIATE .modelType
@@ -393,6 +404,76 @@ angular.module( 'conexus.nav', [
         if (item.model == 'TIME'){
             $scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
         }
+
+        $scope.graphData = {
+            nodes:[{name:$scope.item.id}], 
+            links:[]
+        };
+
+        for (x in $scope.item.associatedModels){
+            //HACK?
+            var length = $scope.graphData.nodes.length
+            //*
+            $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})//$scope.item.associatedModels[x].address});
+            $scope.graphData.links.push({value:1, source:0, target:length});
+        }
+
+
+        //TODO: GROUP STUDY -- FACTOR INFORMATION IN DATASERVICE TO GRAPH THEORETIC FORM TO DISCOVER GROUP PROPS
+        //$scope.graphData = {
+        //    nodes:[], 
+        //    links:[]
+        //};
+        //var powerSet = getAllSubsets(['A','B','C','D','E','F','G','H']);
+        var powerSet = getAllSubsets(['A','B','C','D']);
+        powerSet.shift();
+
+        for (x in powerSet){$scope.graphData.nodes.push({name:powerSet[x]})}
+        
+        //$scope.graphData.links.push({value:1, source:0, target:1});
+        //$scope.graphData.links.push({value:1, source:0, target:2});
+        //$scope.graphData.links.push({value:1, source:0, target:3});
+        //$scope.graphData.links.push({value:1, source:0, target:14});
+
+        for (x in powerSet){
+            //var length = $scope.graphData.nodes.length;
+            //$scope.item.associatedModels[x].address});
+            var step = parseInt(x)+1;
+            if (step < powerSet.length){
+                //$scope.graphData.links.push({value:1, source:0, target:step});
+                for (y in powerSet){
+                    var step2 = parseInt(y)+1;
+                    if (step < powerSet.length){
+                        //$scope.graphData.links.push({value:1, source:x, target:step2});
+                    }
+                }
+
+            }
+            //if (x > 0){
+            //    $scope.graphData.links.push({value:1, source:x, target:0});
+            //}
+        }
+
+        //TEST!
+        $scope.graphOptions = {
+            chart: {
+                type: 'forceDirectedGraph',
+                height: 450,
+                //width: (function(){ return nv.utils.windowSize().width })(),
+                margin:{top: 0, right: 0, bottom: 0, left: 0},
+                color: function(d){
+                    return  d3.scale.category20()(d.group)
+                },
+                nodeExtras: function(node) {
+                    node && node
+                      .append("text")
+                      .attr("dx", 8)
+                      .attr("dy", ".35em")
+                      .text(function(d) { return d.name })
+                      .style('font-size', '10px');
+                }
+            }
+        };
 
         //TODO: ASSOCIATION MODEL
         ValidationModel.getSome(item.model.toLowerCase(), item.id, 100, 0, 'createdAt DESC').then(function(validationModels){

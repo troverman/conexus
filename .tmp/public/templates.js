@@ -4793,7 +4793,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:80%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div class=\"page-heading\">\n" +
@@ -4824,7 +4824,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <h4>\n" +
     "                            {{item.task.title.toUpperCase()}} \n" +
     "                            <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                            {{item.project.title.toUpperCase()}}\n" +
+    "                            <a href=\"project/{{item.task.id}}\">{{item.project.title.toUpperCase()}}</a>\n" +
     "                        </h4>\n" +
     "\n" +
     "                        <h4>\n" +
@@ -4837,28 +4837,26 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                    <div ng-if=\"item.model=='TASK'\">\n" +
     "                        <h3>{{item.title}} <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h3>\n" +
-    "                        <br>\n" +
     "                        <h4>\n" +
     "                            {{item.title.toUpperCase()}} \n" +
     "                            <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                            {{item.project.title.toUpperCase()}}\n" +
+    "                            <a href=\"project/{{item.project.urlTitle}}\">{{item.project.title.toUpperCase()}}</a>\n" +
     "                        </h4>\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <!--SET-->\n" +
+    "                    <h5 ng-repeat=\"model in item.associatedModels\">{{model.type}}, {{model.address}}</h5>\n" +
     "\n" +
     "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
-    "                    <!--SET-->\n" +
-    "                    <h3 ng-repeat=\"model in associatedModels\">{{model.type}}, {{model.address}}</h3>\n" +
-    "                    <h3><a href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></h3>\n" +
-    "                    <h3><a href=\"project/{{item.task.id}}\">{{item.task.title}}</a></h3>\n" +
     "\n" +
     "                    <div class=\"spacing-15\"></div>\n" +
-    "                    <div style=\"text-align:center\"><img src=\"https://i.stack.imgur.com/V8zQK.png\"/></div>\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "                    <br><br>\n" +
+    "                    <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "\n" +
+    "                    <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -5753,8 +5751,10 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "    \n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
+    "			<p><b>Description</b></p>\n" +
     "            <p><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
-    "            <p>Members: {{project.memberCount}} | Tasks: {{project.taskCount}} | Time: {{project.timeCount}}</p>\n" +
+    "            <p><b>Address</b>: {{project.id}}</p>\n" +
+    "            <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -7608,7 +7608,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "    <div style=\"row\">\n" +
     "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "            <li class=\"active\"><a href=\"#\">Activity</a></li>\n" +
     "            <li><a href=\"#\">Content</a></li>\n" +
     "            <li><a href=\"#\">Time</a></li>\n" +
     "        </ul>\n" +

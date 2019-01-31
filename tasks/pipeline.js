@@ -4,6 +4,7 @@
  */
 
 var cssFilesToInject = [
+  'bower_components/nvd3/build/nv.d3.css',
   'bower_components/bootstrap/dist/css/bootstrap.min.css',
   'bower_components/angular-material/angular-material.css',
   'bower_components/textAngular/dist/textAngular.css',
@@ -28,6 +29,11 @@ var jsFilesToInject = [
   'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
   'bower_components/angular-google-maps/dist/angular-google-maps.js',
   'bower_components/angular-moment/angular-moment.js',
+
+  'bower_components/d3/d3.js',
+  'bower_components/nvd3/build/nv.d3.js',
+  'bower_components/angular-nvd3/dist/angular-nvd3.js',
+
   'bower_components/Chart.js/Chart.min.js',
   'bower_components/angular-chart.js/dist/angular-chart.js',
   'bower_components/angular-animate/angular-animate.min.js',
@@ -38,7 +44,6 @@ var jsFilesToInject = [
   'bower_components/textAngular/dist/textAngular-sanitize.min.js',
   'bower_components/textAngular/dist/textAngular.min.js',
   'bower_components/ng-tags-input/ng-tags-input.js',
-  'bower_components/angular-slider/dist/rzslider.min.js',
   'bower_components/angular-fullcalendar/dist/angular-fullcalendar.min.js',
   'bower_components/web3/dist/web3.min.js',
 
