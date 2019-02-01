@@ -412,8 +412,7 @@ angular.module( 'conexus.nav', [
 
         for (x in $scope.item.associatedModels){
             //HACK?
-            var length = $scope.graphData.nodes.length
-            //*
+            var length = $scope.graphData.nodes.length;
             $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})//$scope.item.associatedModels[x].address});
             $scope.graphData.links.push({value:1, source:0, target:length});
         }
@@ -424,35 +423,15 @@ angular.module( 'conexus.nav', [
         //    nodes:[], 
         //    links:[]
         //};
-        //var powerSet = getAllSubsets(['A','B','C','D','E','F','G','H']);
-        var powerSet = getAllSubsets(['A','B','C','D']);
-        powerSet.shift();
-
-        for (x in powerSet){$scope.graphData.nodes.push({name:powerSet[x]})}
-        
-        //$scope.graphData.links.push({value:1, source:0, target:1});
-        //$scope.graphData.links.push({value:1, source:0, target:2});
-        //$scope.graphData.links.push({value:1, source:0, target:3});
-        //$scope.graphData.links.push({value:1, source:0, target:14});
-
-        for (x in powerSet){
-            //var length = $scope.graphData.nodes.length;
-            //$scope.item.associatedModels[x].address});
-            var step = parseInt(x)+1;
-            if (step < powerSet.length){
-                //$scope.graphData.links.push({value:1, source:0, target:step});
-                for (y in powerSet){
-                    var step2 = parseInt(y)+1;
-                    if (step < powerSet.length){
-                        //$scope.graphData.links.push({value:1, source:x, target:step2});
-                    }
-                }
-
-            }
-            //if (x > 0){
-            //    $scope.graphData.links.push({value:1, source:x, target:0});
-            //}
-        }
+        //var powerSet = getAllSubsets(['A','B','C','D','E','F']);
+        //var powerSet = getAllSubsets(['A','B','C','D']);
+        //powerSet.shift();
+        //for (x in powerSet){
+        //    $scope.graphData.nodes.push({name:powerSet[x]})
+        //    for (y in powerSet){
+        //        $scope.graphData.links.push({value:1, source:parseInt(x), target:parseInt(y)});
+        //    }
+        //}
 
         //TEST!
         $scope.graphOptions = {
