@@ -1680,7 +1680,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"spacing-5\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">From time and intention to work and organization, information is income.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. With inclusivity maximalism, you get what you give.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Consensually share with us.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us.</p>\n" +
     "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance; you get what you give. Consentually share with us.</p>-->\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
@@ -1737,10 +1737,12 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <h3>COORDINATE INTENTIONALLY</h3>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">From Projects to Governance, group organization naturally flourishes.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation Mechanisms assert earned reputation.</p>\n" +
+    "                <h5>Motions, Voting, and Governance alongside Peer based decision mechanisms</h5>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work; Reputation Weighted Voting Mechanism</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation Mechanisms assert earned reputation; group organization naturally flourishes.</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-md-6\">\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "                <img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -1749,12 +1751,15 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "            </div>\n" +
-    "            <div class=\"col-md-6\">\n" +
     "                <h3>WE CREATE THE FUTURE TODAY</h3>\n" +
     "                <!--<h4>WHERE WE WILL GO & WHAT WE WILL CREATE</h4>-->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>\n" +
-    "                <h5><a href=\"https://www.github.com/troverman/conexus\">APIs, Apps, & Developers</a></h5>\n" +
+    "                <h5><a href=\"https://www.github.com/troverman/conexus\">Developer Documentation</a></h5>\n" +
+    "                <h5><a href=\"https://www.github.com/troverman/conexus\">App Ecosystem</a></h5>\n" +
+    "                <h5><a href=\"https://www.github.com/troverman/conexus\">APIs</a></h5>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <!--<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>-->\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -1766,13 +1771,18 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <!--THE FUTURE-->\n" +
     "                <h3>ARTIFICAL INTELLIGENCE & TRANSPARENCY</h3>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Transparency Ethos and Consensus on Context-specific Time, Intent, and Creation.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Inclusivity as income.</p>\n" +
+    "                <!--<img style=\"height:50px;\" src=\"images/hyper.gif\">-->\n" +
+    "                <!---->\n" +
+    "                <!--inclusivity as income-->\n" +
+    "                <!--<p>The next wave of -->\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
+    "                <!--<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>-->\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <!--PEERS; NOVEL MOBILE CONNECTION ; THE NETWORK IS YOU-->\n" +
-    "\n" +
     "        <!--WHO WE ARE; WHAT WE DO; WHAT WE CREATE-->\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
@@ -2285,6 +2295,10 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		    </form>\n" +
     "		</div>\n" +
     "\n" +
+    "		<div class=\"card\">\n" +
+    "			<nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "	    </div>\n" +
+    "\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\">\n" +
@@ -2345,13 +2359,18 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "				<div style=\"padding:16px\">\n" +
     "					<h4>Market Analysis</h4>\n" +
     "		    		<p>Connections</p>\n" +
+    "\n" +
     "		    		<p>Lattice Analysis</p>\n" +
     "		    		<p>Computed Lattice Neighborhood</p>\n" +
+    "\n" +
+    "		    		<!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->\n" +
+    "\n" +
     "					<!--VALUE VECTOR-->\n" +
     "					<!--1ST DEGREE-->\n" +
     "				    <!--VALUE MATRIX-->\n" +
     "					<!--VALUE TENSOR-->\n" +
     "					<!--VALUE TENSOR NETWORK-->\n" +
+    "\n" +
     "	    		</div>\n" +
     "	    	</div>\n" +
     "		</div>\n" +
@@ -2389,7 +2408,12 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "				</div>\n" +
     "		    </div>\n" +
     "	    </div>\n" +
+    "\n" +
+    "		\n" +
+    "\n" +
     "    </div>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "	<!--TRANSACTIONS, TRADES-->\n" +
     "\n" +
