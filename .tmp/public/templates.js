@@ -1757,6 +1757,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <h5><a href=\"https://www.github.com/troverman/conexus\">Developer Documentation</a></h5>\n" +
     "                <h5><a href=\"https://www.github.com/troverman/conexus\">App Ecosystem</a></h5>\n" +
     "                <h5><a href=\"https://www.github.com/troverman/conexus\">APIs</a></h5>\n" +
+    "\n" +
+    "                <!--Inspiring Tasks and Projects-->\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <!--<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>-->\n" +
@@ -2358,13 +2360,17 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px\">\n" +
     "					<h4>Market Analysis</h4>\n" +
-    "		    		<p>Connections</p>\n" +
+    "					<p>Rank: {{stateParams.id.split(',').length}}\n" +
+    "					<p>Highest Dimension: 7</p>\n" +
+    "					<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>\n" +
+    "					<nvd3 options=\"graphOptions\" data=\"graphDataPower\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
     "\n" +
     "		    		<p>Lattice Analysis</p>\n" +
     "		    		<p>Computed Lattice Neighborhood</p>\n" +
     "\n" +
+    "		    		<!--COMBINITORIALS SERVED FIRST-->\n" +
+    "		    		<!--DEPTH OF THE COMBINITORIAL SPACES-->\n" +
     "		    		<!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->\n" +
-    "\n" +
     "					<!--VALUE VECTOR-->\n" +
     "					<!--1ST DEGREE-->\n" +
     "				    <!--VALUE MATRIX-->\n" +

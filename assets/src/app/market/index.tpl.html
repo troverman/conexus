@@ -93,13 +93,17 @@
 			<div class="card">
 				<div style="padding:16px">
 					<h4>Market Analysis</h4>
-		    		<p>Connections</p>
+					<p>Rank: {{stateParams.id.split(',').length}}
+					<p>Highest Dimension: 7</p>
+					<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>
+					<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
 
 		    		<p>Lattice Analysis</p>
 		    		<p>Computed Lattice Neighborhood</p>
 
+		    		<!--COMBINITORIALS SERVED FIRST-->
+		    		<!--DEPTH OF THE COMBINITORIAL SPACES-->
 		    		<!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->
-
 					<!--VALUE VECTOR-->
 					<!--1ST DEGREE-->
 				    <!--VALUE MATRIX-->

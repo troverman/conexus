@@ -144,28 +144,28 @@ angular.module( 'conexus.market', [
         links:[]
     };
 
-    var powerSet = getAllSubsets(['A','B','C','D','E']);
+    $scope.graphDataPower = {
+        nodes:[],
+        links:[]
+    };
+
+    //var powerSet = getAllSubsets(['A','B','C','D','E']);
+    var powerSet = getAllSubsets(['USD','ETH','BTC','LTC','CRE8']);
     powerSet.shift();
     for (x in powerSet){
-        //$scope.graphData.nodes.push({name:powerSet[x]})
-        for (y in powerSet){
-            //if (!poweSet[x] is in powerSet[y]){
-            //$scope.graphData.links.push({value:1, source:parseInt(x), target:parseInt(y)});
-            //}
+        $scope.graphDataPower.nodes.push({name:powerSet[x]})
+        for (y in powerSet){            
+            if (powerSet[x].filter(function (value) {return -1 !== powerSet[y].indexOf(value)}).length == 0){
+                var value = 1 + Math.abs(powerSet[x].length - powerSet[y].length);
+                $scope.graphDataPower.links.push({value:value, source:parseInt(x), target:parseInt(y)});
+            }
         }
     }
-
-    //for (x in $scope.markets){
-    //    var length = $scope.graphData.nodes.length;
-    //    $scope.graphData.nodes.push({name:$scope.markets[x]});
-    //    $scope.graphData.links.push({value:1, source:0, target:length});
-    //}
 
     //RECURSIVE TRAVERSAL
     function traverse(n, depth){
         n++;
         if (n < depth){
-
             //var length = $scope.graphData.nodes.length;
             //$scope.graphData.nodes.push({name:n});
             //$scope.graphData.links.push({value:1, source:0, target:length});
@@ -192,6 +192,11 @@ angular.module( 'conexus.market', [
             margin:{top: 0, right: 0, bottom: 0, left: 0},
             color: function(d){
                 return  d3.scale.category20()(d.group)
+            },
+            tooltip: {
+                contentGenerator: function(d){
+                    return ""; 
+                }
             },
             nodeExtras: function(node) {
                 node && node
