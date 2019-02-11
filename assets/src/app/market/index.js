@@ -174,11 +174,8 @@ angular.module( 'conexus.market', [
                 $scope.graphData.nodes.push({name:$scope.markets[x]});
                 $scope.graphData.links.push({value:1, source:n, target:length});
             }
-
             traverse(n, depth);
-
         }
-
     };
     traverse(0, $scope.markets.length);
 

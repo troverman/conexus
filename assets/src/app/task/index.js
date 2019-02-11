@@ -28,7 +28,7 @@ angular.module( 'conexus.task', [
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, validations) {
+.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'toaster', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, toaster, validations) {
     $scope.currentUser = config.currentUser;
     $scope.task = task;
 
@@ -71,8 +71,25 @@ angular.module( 'conexus.task', [
     $scope.working = false;
     $scope.validations = validations;
     $scope.verification = {};
-    $scope.taskTime = 0;
+    $rootScope.taskTime = 0;
     $scope.time = time;
+
+    $scope.pop = function(){
+        toaster.pop({
+            type:'success',//info, wait, success, warning
+            title: $scope.task.title,
+            body: 'You\'re gonna earn some tokens',
+            onShowCallback: function (toast) { 
+                //PLAY SOUND
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log(audio)})
+                .catch(function(err){console.log(err)})
+            }
+        });
+    }
+
+    //TODO: VIEW IN NAV.. GLOBAL.. :) NOT FIXED ON TASK -- MOVE THESE FUNCTIONS AND VIEWS
 
     //TODO: STORE IN DATA
     $scope.time.map(function(obj){
@@ -182,6 +199,7 @@ angular.module( 'conexus.task', [
             }
             if($scope.working === true) return false;
             $scope.working = true;
+            $scope.pop();
             $scope.interval = setInterval($scope.updateCount, 1000);
         }
         else{$mdSidenav('login').toggle();}
@@ -194,7 +212,7 @@ angular.module( 'conexus.task', [
         if($scope.working === false) return false;
         $scope.working = false; $scope.question = false; $scope.streaming = false;
         var timeModel = {
-            amount: $scope.taskTime,
+            amount: $rootScope.taskTime,
             content: $scope.timeContent,
             identifier: $scope.timeIdentifier,
             project: $scope.task.project,
@@ -237,14 +255,17 @@ angular.module( 'conexus.task', [
             }
         }); 
         
-        $scope.taskTime=0;
+        $rootScope.taskTime=0;
         clearInterval($scope.interval);
     };
 
     //TODO: BACKEND COUNTER..... 
     $scope.updateCount = function() {
-        $scope.taskTime++;
+        console.log('hello')
+        $rootScope.taskTime++;
         $scope.$apply();
+        //toaster.toast.title = $scope.taskTime;
+        //console.log( toaster.toast)
     };
 
     //TODO: STREAM??

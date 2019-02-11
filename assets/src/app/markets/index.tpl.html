@@ -18,6 +18,7 @@
 
 		<ul style="padding:0px;" class="member-tabs">
 		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET')"><i class="fa fa-filter"></i> Filter</a></li>
+			<li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Connection <i class="fa fa-angle-down"></i></a></li>
 		</ul>
 		<div style="clear:both"></div>
 
@@ -31,7 +32,7 @@
 	    </div>
 
 	    <div class="card">
-	    	<!--DISCOVER AREA-->
+			<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
 	    </div>
 
 	    <div ng-repeat="token in tokens track by $index" style="padding:0px">

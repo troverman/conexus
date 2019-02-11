@@ -2968,6 +2968,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('MARKET')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "			<li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Connection <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "		</ul>\n" +
     "		<div style=\"clear:both\"></div>\n" +
     "\n" +
@@ -2981,7 +2982,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	    </div>\n" +
     "\n" +
     "	    <div class=\"card\">\n" +
-    "	    	<!--DISCOVER AREA-->\n" +
+    "			<nvd3 options=\"graphOptions\" data=\"graphDataPower\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
     "	    </div>\n" +
     "\n" +
     "	    <div ng-repeat=\"token in tokens track by $index\" style=\"padding:0px\">\n" +
@@ -5466,9 +5467,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "\n" +
+    "\n" +
+    "    <!--TODO: UNIFY MOBILE AND NON; TODO; TIME CTRL-->\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"navbar-header\">\n" +
+    "\n" +
     "                <!--TODO: NOTIFICATIONS-->\n" +
     "                <button class=\"navbar-toggle\" type=\"button\" ng-click=\"sideNavToggle()\">\n" +
     "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
@@ -5476,10 +5481,21 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <span class=\"icon-bar\"></span>\n" +
     "                    <span class=\"icon-bar\"></span>\n" +
     "                </button>\n" +
+    "\n" +
+    "                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
+    "                <div ng-show=\"false\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
+    "                    <a ng-show=\"taskTime == 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
+    "                    <a ng-show=\"taskTime > 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
+    "                    <a ng-show=\"taskTime > 0\" href=\"#\">{{taskTime}}</a>\n" +
+    "                </div>\n" +
+    "\n" +
     "                <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
+    "\n" +
     "            </div>\n" +
+    "\n" +
     "            <!--TODO: DEPRECIATE-->\n" +
     "            <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
+    "\n" +
     "                <ul class=\"nav navbar-nav\">\n" +
     "                    <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link1').value; return false;\">\n" +
     "                        <div class=\"form-group\">\n" +
@@ -5488,11 +5504,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    </form>\n" +
     "                </ul>\n" +
     "                <ul class=\"nav navbar-nav navbar-right\">\n" +
-    "                    <!--\n" +
-    "                    <li ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\"></i>About</a></li>\n" +
-    "                    <li class=\"nav-links\"><a href=\"/discover\">Discover</a></li>\n" +
-    "                    <li class=\"nav-links\"><a href=\"/market\">Market</a></li>\n" +
-    "                    -->\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
     "                    <li ng-click=\"sideNavToggle()\">\n" +
@@ -5505,9 +5516,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        </button>\n" +
     "                    </li>\n" +
     "                </ul>\n" +
+    "            \n" +
     "            </div>\n" +
+    "\n" +
     "        </div>\n" +
-    "        <md-progress-linear ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
+    "        <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "    </div>\n" +
     "\n" +
     "</div>");
@@ -7533,6 +7546,11 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("task/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("task/index.tpl.html",
+    "<style>\n" +
+    ".toast-success {\n" +
+    "  background-color: #002c54;\n" +
+    "}\n" +
+    "</style>\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
@@ -7559,6 +7577,8 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <h5 ng-click=\"renderValidationToggle(task)\"><a href=\"#\">Associations & Validations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "                    <h3>{{task.title}}</h3>\n" +
+    "\n" +
+    "                    <!--<button ng-click=\"pop()\">test</button>-->\n" +
     "\n" +
     "                    <!--ASSOCIATION && VALIDATION-->\n" +
     "                    <!--TAGS & SHARED ASSOCIATION CONTEXT-->\n" +

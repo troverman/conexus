@@ -17,6 +17,8 @@ angular.module( 'conexus', [
     'ngTagsInput',
     'angular-fullcalendar',
     'textAngular',
+    'toaster',
+    'ngAnimate',
     'conexus.about',
     'conexus.account',
     //'conexus.association',

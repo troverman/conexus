@@ -26,8 +26,13 @@ html {
 
 img{max-width:100%;}
 
+
 md-progress-linear .md-container {background-color: rgba(36,36,46, 1)!important;}
-md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {background-color: #084b73!important;}
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {background-color: #ffd56d!important;}//4bb140,f99731,ffd56d,f45d07  084b73,2ab996
+
+md-progress-linear {height:2px!important;}
+md-progress-linear .md-container {height: 3px;}
+md-progress-linear .md-container .md-bar {height: 3px;}
 
 md-sidenav.md-closed-add,
 md-sidenav.md-closed-remove {

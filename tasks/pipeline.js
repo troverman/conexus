@@ -12,6 +12,7 @@ var cssFilesToInject = [
   'bower_components/ng-tags-input/ng-tags-input.css',
   'bower_components/angular-slider/dist/rzslider.css',
   'bower_components/fullcalendar/dist/fullcalendar.css',
+  'bower_components/angularjs-toaster/toaster.min.css',
   'styles/**/*.css',
 ];
 
@@ -46,6 +47,8 @@ var jsFilesToInject = [
   'bower_components/ng-tags-input/ng-tags-input.js',
   'bower_components/angular-fullcalendar/dist/angular-fullcalendar.min.js',
   'bower_components/web3/dist/web3.min.js',
+
+  'bower_components/angularjs-toaster/toaster.min.js',
 
   'bower_components/highcharts/highstock.js',
   'bower_components/highcharts/highcharts-more.js',

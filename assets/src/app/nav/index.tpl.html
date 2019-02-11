@@ -1254,9 +1254,13 @@
         </div>
     </md-sidenav>
 
+
+
+    <!--TODO: UNIFY MOBILE AND NON; TODO; TIME CTRL-->
     <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
         <div class="container">
             <div class="navbar-header">
+
                 <!--TODO: NOTIFICATIONS-->
                 <button class="navbar-toggle" type="button" ng-click="sideNavToggle()">
                     <span class="sr-only">Toggle navigation</span>
@@ -1264,10 +1268,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
+                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->
+                <div ng-show="false" class="nav-links" style="float:left;margin-top:13px;margin-right:10px;font-size:18px">
+                    <a ng-show="taskTime == 0" href="#"><i style="color:red" class="fa fa-circle"></i></a>
+                    <a ng-show="taskTime > 0" href="#"><i style="color:red" class="fa fa-pause"></i></a>
+                    <a ng-show="taskTime > 0" href="#">{{taskTime}}</a>
+                </div>
+
                 <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
+
             </div>
+
             <!--TODO: DEPRECIATE-->
             <div class="collapse navbar-collapse" style="text-align:center">
+
                 <ul class="nav navbar-nav">
                     <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link1').value; return false;">
                         <div class="form-group">
@@ -1276,11 +1291,6 @@
                     </form>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <!--
-                    <li ng-show="!currentUser" class="nav-links"><a href="/about"></i>About</a></li>
-                    <li class="nav-links"><a href="/discover">Discover</a></li>
-                    <li class="nav-links"><a href="/market">Market</a></li>
-                    -->
                     <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
                     <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
                     <li ng-click="sideNavToggle()">
@@ -1293,9 +1303,11 @@
                         </button>
                     </li>
                 </ul>
+            
             </div>
+
         </div>
-        <md-progress-linear ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
+        <md-progress-linear style="height:2px" ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
     </div>
 
 </div>
