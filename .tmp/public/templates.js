@@ -1396,11 +1396,115 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/templates/feed.tpl.html",
+    "<style type=\"text/css\">.angular-google-map-container{height: 400px;}</style>\n" +
     "<div class=\"container\">\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        \n" +
+    "        <div ng-show=\"showProjects\" class=\"card\" ng-click=\"\">\n" +
+    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
+    "                <div style=\"color:white;padding:15px;\">\n" +
+    "                    <h1>Projects</h1>\n" +
+    "                    <p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                \n" +
+    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "                    <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </ul>\n" +
+    "\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-md-6\">\n" +
+    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "                        <highchart config=\"chart\"></highchart>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-6\">\n" +
+    "                        <div ng-repeat=\"item in projects.slice(0,10)\">\n" +
+    "                            <div class=\"card\" ng-click=\"\">\n" +
+    "                                <div style=\"padding:16px;\">\n" +
+    "                                    <div class=\"row\">\n" +
+    "                                        <div class=\"col-sm-1 col-xs-2\"><a href=\"/project/{{item.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{item.avatarUrl}}\"></a></div>\n" +
+    "                                        <div class=\"col-sm-11 col-xs-10\">\n" +
+    "                                            <h3 style=\"margin-top:0px\"><a href=\"/project/{{item.urlTitle}}\">{{item.title}}</a></h3>\n" +
+    "                                            <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-show=\"showTasks\" class=\"card\" ng-click=\"\">\n" +
+    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1481732582370-0445455c5ba1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2271&q=80');\">\n" +
+    "                <div style=\"color:white;padding:15px;\">\n" +
+    "                    <h1>Tasks</h1>\n" +
+    "                    <p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "                    <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </ul>\n" +
+    "\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-md-6\">\n" +
+    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "                        <highchart config=\"chart\"></highchart>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-6\">\n" +
+    "                        <div ng-repeat=\"item in tasks.slice(0,5)\">\n" +
+    "                            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
+    "                                <div style=\"padding:16px;\">\n" +
+    "                                    <div style=\"float:right;text-align:right\">\n" +
+    "                                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                        <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                    </div>\n" +
+    "\n" +
+    "                                    <h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "                                    <p><a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
+    "                                    <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
+    "                                    <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
+    "\n" +
+    "                                </div>\n" +
+    "                                <div class=\"card-footer\">\n" +
+    "                                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                                    <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                                    <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" style=\"padding:0px\" class=\"pull-right\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE</button>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-show=\"value\" class=\"card\" ng-click=\"\">\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-show=\"!isTutorial\">\n" +
     "        <div class=\"col-md-3 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"member-card\" style=\"margin-left:-5px;margin-right:-10px;margin-bottom:0px\">\n" +
     "                <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
@@ -1464,7 +1568,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "    <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "    <!--TODO: MOBILE FILTER-->\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-show=\"!isTutorial\">\n" +
     "        <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
@@ -5139,7 +5243,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                    <div style=\"text-align:center\"><img src=\"https://i.stack.imgur.com/PnXIo.png\"/></div>\n" +
     "\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
+    "                    <div class=\"spacing-15\"></div>-->\n" +
     "\n" +
     "                    <table class=\"table table-striped table-hover\">\n" +
     "                        <thead>\n" +
@@ -5259,9 +5363,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
+    "                <!--<div class=\"spacing-15\"></div>\n" +
     "                <div style=\"text-align:center\"><img src=\"https://i.stack.imgur.com/PnXIo.png\"/></div>\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
+    "                <div class=\"spacing-15\"></div>-->\n" +
     "\n" +
     "                <div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
@@ -5277,10 +5381,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
-    "                <!--ADD CONTEXT TO VALIDATION-->\n" +
     "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"tags\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
+    "\n" +
+    "                <!--TODO: RENDER GRAPH? ;; VALUE MAP GRAPH;; SPIDER/RADIAL-->\n" +
     "\n" +
     "                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
     "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
@@ -5483,7 +5588,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </button>\n" +
     "\n" +
     "                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
-    "                <div ng-show=\"false\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
+    "                <div ng-show=\"true\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
     "                    <a ng-show=\"taskTime == 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
     "                    <a ng-show=\"taskTime > 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
     "                    <a ng-show=\"taskTime > 0\" href=\"#\">{{taskTime}}</a>\n" +

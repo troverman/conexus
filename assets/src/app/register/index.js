@@ -118,11 +118,18 @@ angular.module( 'conexus.register', [
             polar: true,
             margin: [30, 30, 30, 30]
         },
-        series: [],
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'UNIVERSAL',
+            pointPlacement: 'on',
+            fillOpacity: 0.3,
+            data:[1,1,1,1],
+        }],
         title: {text: ''},
         xAxis: {
             title: {text: null},
-            categories: [],
+            categories: ['LOVE', 'ART', 'PEACE', 'SHELTER'],
             tickmarkPlacement: 'on',
             lineWidth: 0,
         },
@@ -144,20 +151,13 @@ angular.module( 'conexus.register', [
         credits:{enabled:false},
     };
 
-    $scope.chartMapTotal.series.push({
-        id: 'values',
-        type: 'area',
-        name: 'UNIVERSAL',
-        pointPlacement: 'on',
-        data: [1,1,1,1],
-        fillOpacity: 0.3,
-    });
-    $scope.chartMapTotal.xAxis.categories = ['LOVE', 'ART', 'PEACE', 'SHELTER']
-
+    console.log($scope.chartMapTotal)
     //PERFORMANCE....
     $scope.updateChartTotal = function(){
         $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]});
         $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
+        console.log( $scope.chartMapTotal)
+
     };
 
     $scope.pieTotal = {
@@ -198,8 +198,11 @@ angular.module( 'conexus.register', [
     //lol
     //do absolute
     $scope.$watch('newOrder', function(newValue, oldValue){
-        $scope.updateChartTotal();
-        $scope.updatePieTotal();
+        if (oldValue != newValue){
+            console.log('fire!')
+            $scope.updateChartTotal();
+            $scope.updatePieTotal();
+        }
     }, true);
 
     
