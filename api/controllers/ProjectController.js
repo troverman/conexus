@@ -82,22 +82,34 @@ module.exports = {
 			tags: req.param('tags'),
 			location: req.param('location'),
 			description: req.param('description'),
-			//DEPRECIATE
 			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
 			user: req.param('user'),
 			parent: req.param('parent'),
 		};
 
-		//TODO: GEOCODE
-
 		Project.create(model)
 		.exec(function(err, project) {
-			if (err) {
-				return console.log(err);
-			}
+			if (err) {return console.log(err);}
 			else {
-				Project.publishCreate(project);
-				res.json(project);
+				const googleMapsClient = require('@google/maps').createClient({
+					key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+				});
+				//TODO: AS A SERVICE / UTIL / CONTRACT
+				googleMapsClient.geocode({address: project.location}, function(err, response) {
+					if (!err) {
+						var location = {
+							address:response.json.results[0].formatted_address,
+							lat:response.json.results[0].geometry.location.lat,
+							lng:response.json.results[0].geometry.location.lng,
+						};
+						console.log(location, project.id);
+						Project.update({id:project.id}, {location:location}).then(function(model){
+							console.log('update');
+							Project.publishCreate(model);
+							res.json(model);
+						});
+					}
+				});
 			}
 		});
 	},

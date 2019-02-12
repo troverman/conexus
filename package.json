@@ -5,6 +5,7 @@
   "description": "a transparent network",
   "keywords": [],
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "@tensorflow/tfjs-node": "^0.1.19",
     "async": "^2.6.1",
     "balanced-match": "^1.0.0",

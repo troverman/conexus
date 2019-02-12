@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sce, $scope, $state, config, ContentModel, ItemModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, config, ContentModel, ItemModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
@@ -15,6 +15,52 @@ angular.module( 'conexus.nav', [
     $scope.selectedType = 'POST';
     $scope.validationColumnRender = {};
     //$rootScope.currentUser = config.currentUser;
+
+
+
+
+    // TODO: NOTIFICATIONS
+    // REQUEST TO VALIDATE (ON SUB TIME TO SUBD PROJECTS ((--> TASKS)), 
+    // REQUEST TO VALIDATE (JOIN), 
+    // NEW FOLLOWER(?), 
+    // POSTED ON PROFILE / REQUEST TO POST TO PROF, 
+    // NEW MESSAGE ?
+    // NEW CONTENT IN SUBD PROJECT
+    // NEW VALIDATATION ON TIME (MEMBER VALIDATED YOU)
+    // ORDER PROCESSED / ACTIVITY
+    // TRANSACTION (TO YOU (IF SUBD))
+    // NEW ORDER (ITEM PURCHASED)
+    // X IS LIVE NOW ( FOLLOWING (SUB) )
+    // INVITATION TO JOIN?
+
+    $scope.pop = function(){
+        toaster.pop({
+            type:'success',//info, wait, success, warning
+            title: 'REQUEST TO VALIDATE',
+            body: 'TROVERMAN SUBMITTED NEW TIME TO {TASK}', // VALIDATE X POST
+            onShowCallback: function (toast) { 
+                //PLAY SOUND
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log(audio)})
+                .catch(function(err){console.log(err)})
+            }
+        });
+    };
+
+    //TODO: WEBSOCKETS | WEB3
+    $sailsSocket.subscribe('notification', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+            //if logged in user
+            $scope.pop();
+        }
+    });
+
+
+
+
+
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -939,6 +985,9 @@ angular.module( 'conexus.nav', [
     };
 
     $scope.loginToggle = function(){
+
+        //$scope.pop();
+
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();

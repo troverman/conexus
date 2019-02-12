@@ -7076,7 +7076,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                        <div class=\"col-sm-11 col-xs-10\">\n" +
     "\n" +
     "                            <p style=\"float:right;text-align:right\">\n" +
-    "                                <span ng-if=\"project.location\">{{project.location}} <i class=\"fa fa-map-marker\"></i></span>\n" +
+    "                                <span ng-if=\"project.location\">{{project.location.address}} <i class=\"fa fa-map-marker\"></i></span>\n" +
     "                                <!--<br>\n" +
     "                                <span ng-repeat=\"tag in project.tags\">{{tag}} </span> <i class=\"fa fa-tags\"></i>-->\n" +
     "                            </p>\n" +
@@ -7200,23 +7200,34 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-md-2\" style=\"max-height:100vh;overflow:scroll\">\n" +
+    "                        <div class=\"col-md-2\" style=\"max-height:50vh;overflow:scroll\">\n" +
     "                            <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
     "                                <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default\"><a href=\"#\">{{item.element}}</a></button>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "\n" +
     "                        <div class=\"col-md-10\">\n" +
-    "                            <div ng-repeat=\"item in newOrder\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[0]}}</span></div>\n" +
-    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
+    "\n" +
+    "                            <div class=\"row\">\n" +
+    "                                <div class=\"col-sm-12\">\n" +
+    "                                    <div ng-repeat=\"item in newOrder\">\n" +
+    "                                        <div layout=\"\">\n" +
+    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[0]}}</span></div>\n" +
+    "                                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "\n" +
-    "                            <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                            <highchart config=\"pieTotal\"></highchart>\n" +
+    "                            <div class=\"row\">\n" +
+    "                                <div class=\"col-sm-6\">\n" +
+    "                                    <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                                </div>\n" +
+    "                                <div class=\"col-sm-6\">\n" +
+    "                                    <highchart config=\"pieTotal\"></highchart>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
     "\n" +
     "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is all of this?</b></p>\n" +
     "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Tutorial -- ethos area</p>\n" +
@@ -7258,19 +7269,31 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"item in dailyTimeValue\">\n" +
-    "                        <div layout=\"\">\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.text}}</span></div>\n" +
-    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item.percentage\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.percentage.toFixed(3) || 0}}%</span></div>\n" +
+    "\n" +
+    "                    <div class=\"row\">\n" +
+    "                        \n" +
+    "                        <div class=\"col-sm-6\">\n" +
+    "                            <div ng-repeat=\"item in dailyTimeValue\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.text}}</span></div>\n" +
+    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item.percentage\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item.percentage.toFixed(3) || 0}}%</span></div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
+    "\n" +
+    "                        <div class=\"col-sm-6\">\n" +
+    "                            <highchart config=\"chartMapTime\"></highchart>\n" +
+    "                        </div>\n" +
+    "\n" +
     "                    </div>\n" +
-    "                    <highchart config=\"chartMapTime\"></highchart>\n" +
+    "\n" +
     "                    <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What is all of this? what is time? </p>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "\n" +
     "\n" +
     "            <div class=\"card\">\n" +

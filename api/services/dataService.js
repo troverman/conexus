@@ -1712,6 +1712,39 @@ module.exports = {
 
 		};
 
+		Project.find().limit(5000).skip(0).then(function(projectModels){
+			for (x in projectModels){
+
+				//GEOCODE THEN
+				//GEOCODE ON CREATE.. UTIL
+				if (projectModels[x].location){
+					if (typeof projectModels[x].location === 'string' || projectModels[x].location instanceof String){
+						const googleMapsClient = require('@google/maps').createClient({
+						  key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+						});
+						(function(x, projectModels){
+							googleMapsClient.geocode({address: projectModels[x].location}, function(err, response) {
+								if (!err) {
+									var location = {
+										address:response.json.results[0].formatted_address,
+										lat:response.json.results[0].geometry.location.lat,
+										lng:response.json.results[0].geometry.location.lng,
+									};
+									console.log(location, projectModels[x].id);
+									Project.update({id:projectModels[x].id}, {location:location}).then(function(model){
+										console.log('update')
+									});
+								}
+							});
+						})(x, projectModels);
+					}
+					else{}
+				}
+				else{}
+
+			}
+		});
+
 		//associationModification();
 
 		//generateStringSpace();

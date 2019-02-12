@@ -64,23 +64,34 @@
                 <div style="padding:16px;">
 
                     <div class="row">
-                        <div class="col-md-2" style="max-height:100vh;overflow:scroll">
+                        <div class="col-md-2" style="max-height:50vh;overflow:scroll">
                             <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
                                 <button ng-click="createPosition(item.element)" class="btn btn-default"><a href="#">{{item.element}}</a></button>
                             </div>
                         </div>
 
                         <div class="col-md-10">
-                            <div ng-repeat="item in newOrder">
-                                <div layout="">
-                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[0]}}</span></div>
-                                    <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
-                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[0].amount || 0}}</span></div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div ng-repeat="item in newOrder">
+                                        <div layout="">
+                                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[0]}}</span></div>
+                                            <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[0].amount || 0}}</span></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <highchart config="chartMapTotal"></highchart>
-                            <highchart config="pieTotal"></highchart>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <highchart config="chartMapTotal"></highchart>
+                                </div>
+                                <div class="col-sm-6">
+                                    <highchart config="pieTotal"></highchart>
+                                </div>
+                            </div>
 
                             <p style="font-style:italic;color:gray;margin:0px;font-size:12px"><b>What is all of this?</b></p>
                             <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Tutorial -- ethos area</p>
@@ -122,19 +133,31 @@
 
             <div class="card">
                 <div style="padding:16px;">
-                    <div ng-repeat="item in dailyTimeValue">
-                        <div layout="">
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.text}}</span></div>
-                            <md-slider step="0.1" flex="" md-discrete="" ng-model="item.percentage" step="1" min="0" max="100" aria-label="{{tag.text}}"></md-slider>
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.percentage.toFixed(3) || 0}}%</span></div>
+
+                    <div class="row">
+                        
+                        <div class="col-sm-6">
+                            <div ng-repeat="item in dailyTimeValue">
+                                <div layout="">
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.text}}</span></div>
+                                    <md-slider step="0.1" flex="" md-discrete="" ng-model="item.percentage" step="1" min="0" max="100" aria-label="{{tag.text}}"></md-slider>
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.percentage.toFixed(3) || 0}}%</span></div>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="col-sm-6">
+                            <highchart config="chartMapTime"></highchart>
+                        </div>
+
                     </div>
-                    <highchart config="chartMapTime"></highchart>
+
                     <p style="font-style:italic;color:gray;margin:0px;font-size:12px">What is all of this? what is time? </p>
+
+
 
                 </div>
             </div>
-
 
 
             <div class="card">

@@ -87,7 +87,7 @@ angular.module( 'conexus.task', [
                 .catch(function(err){console.log(err)})
             }
         });
-    }
+    };
 
     //TODO: VIEW IN NAV.. GLOBAL.. :) NOT FIXED ON TASK -- MOVE THESE FUNCTIONS AND VIEWS
 

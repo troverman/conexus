@@ -99,6 +99,11 @@ module.exports.routes = {
   'delete /api/item/:id': 'ItemController.destroy',
 
   /**
+   * Notification routes
+   */
+  'get /api/notification': 'NotificationController.getSome',
+
+  /**
    * Order routes
    */
   'get /api/order': 'OrderController.getSome',
