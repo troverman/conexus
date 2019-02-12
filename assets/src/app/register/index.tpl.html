@@ -46,9 +46,13 @@
 
         <div ng-show="showValue">
             <div class="card">
+                <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');">
+                    <div style="color:white;padding:15px;">
+                        <h1>Your Personal Value</h1>
+                        <p>Select what you believe is worthwile. What is valuable?</p>
+                    </div>
+                </div>
                 <div style="padding:16px;">
-                    <h3>Your Personal Value</h3>
-                    <h5>Select what you believe is worthwile. What is valuable?</h5>
                     <p style="color:gray;font-size:12px;font-style:italic">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>
                 </div>
             </div>
@@ -113,9 +117,13 @@
         <div ng-show="showDaily">
 
             <div class="card">
+                <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');">
+                    <div style="color:white;padding:15px;">
+                        <h1>A Valuable Day</h1>
+                        <p>How would an ideal day look to you?</p>
+                    </div>
+                </div>
                 <div style="padding:16px;">
-                    <h3>A Valuable Day</h3>
-                    <h5>How would an ideal day look to you?</h5>
                     <p style="color:gray;font-size:12px;font-style:italic">Striving for universal adapation and reflectivity, your dimensional vote can be incompassing of all aspects of the human experience.</p>
                 </div>
             </div>
@@ -170,15 +178,14 @@
         <div ng-show="showPersonal">
 
             <div class="card">
-                <div style="padding:16px;">
-                    <h3>Personal Information</h3>
-                    <h5>What would you like us all to know about you?</h5>
-                    <p style="color:gray;font-size:12px;font-style:italic">Transparency as a principle -- Give as much information as you would like.</p>
+                <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');">
+                    <div style="color:white;padding:15px;">
+                        <h1>Personal Information</h1>
+                        <p>What would you like us all to know about you?</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card">
                 <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">Transparency as a principle -- Give as much information as you would like.</p>
                     <img style="max-height:200px" src="http://68.media.tumblr.com/4dde88fc96aa2bdda54559c36e5ad870/tumblr_ng5jy9JzPn1s5h88so1_1280.jpg">
                     <img style="max-height:200px" src="http://68.media.tumblr.com/9daaa4e19ea6660b429d64c0ae417418/tumblr_n7dp7oF5DC1r1arpmo1_r1_1280.png">
                     <img style="max-height:200px" src="http://68.media.tumblr.com/bcce94fa8d074789e52ac8c177120683/tumblr_oldnu3SSfR1r1arpmo1_1280.png">
@@ -207,15 +214,16 @@
         <div ng-show="showFinal">
 
             <div class="card">
-                <div style="padding:16px;">
-                    <h3>Let's Go!</h3>
-                    <h4>It's time to create a more egalitarian world.</h4>
-                    <p style="color:gray;font-size:12px;font-style:italic">We Are Excited to have you as a memeber</p>
+                <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');">
+                    <div style="color:white;padding:15px;">
+                        <h1>Let's Go!</h1>
+                        <p>It's time to create a more egalitarian world.</p>
+                    </div>
                 </div>
-            </div>
 
-             <div class="card">
                 <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">We Are Excited to have you as a memeber</p>
+                    
                     <h3>Information</h3>
                     <img style="height:64px;width:64px" class="card-avatar" src="images/avatar.png">
                     <h4 ng-show="newMember.firstName">First Name: {{newMember.firstName}}</h4>
@@ -224,24 +232,18 @@
                     <h5 ng-show="newMember.dateOfBirth">Date Of Birth: {{newMember.dateOfBirth}}</h5>
                     <h5 ng-show="newMember.height">Height: {{newMember.height}}</h5>
                     <h5 ng-show="newMember.eyeColor">Eye Color: {{newMember.eyeColor}}</h5>
-                </div>
-            </div>
+                    <div class="spacing-5"></div>
 
-            <div class="card">
-                <div style="padding:16px;">
                     <h3>Value Map</h3>
-
                     <highchart config="chartMapTotal"></highchart>
-
+                    <div class="spacing-5"></div>
+                    
                     <div class="" ng-repeat="order in newOrder">
                         <span style="color:gray">{{order[0].amount}} <a href="/market/{{order[0].identifier}}">{{order[0].identifier}}</a> | <a href="/market/{{order[1].identifier}}">{{order[1].identifier}}</a> | <a href="/market/{{order[0].identifier}}/{{order[1].identifier}}">MarketPair</a></span>
                     </div>
 
-                    <div class="card">
-                        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="selectedMarket"></tags-input>
-                    </div>
-
                     <button type="submit" style="width:100%" ng-click="continue(2)" class="btn btn-default log-btn">Keep Going?</button>
+
                 </div>
             </div>
 
