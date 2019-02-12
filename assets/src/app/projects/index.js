@@ -34,6 +34,26 @@ angular.module( 'conexus.projects', [
     };
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
+
+    $scope.getLatLng = function() {
+        if (navigator.geolocation) {
+            $rootScope.stateIsLoading = true;
+            console.log(navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log(position)
+                $rootScope.stateIsLoading = false;
+                lat = position.coords.latitude; 
+                lng = position.coords.longitude;
+                $scope.map = {
+                    center: {latitude: lat, longitude: lng},
+                    zoom: 12
+                };
+                $scope.$apply();
+            });
+        }
+    };
+
+    $scope.getLatLng();
     
     //TODO: BETTER | BETTER QUERIES
     for (x in projects){

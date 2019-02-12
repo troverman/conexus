@@ -272,17 +272,6 @@ angular.module( 'conexus.home', [
     titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
 
-
-    $scope.isTutorial = true
-    if ($scope.isTutorial){
-        $scope.showProjects = true;
-        $scope.showTasks = false;
-        $scope.change = function(){
-            $scope.showProjects = !$scope.showProjects
-            $scope.showTasks = !$scope.showTasks
-        }
-    }
-
     $rootScope.associatedModel = {
         address: $scope.currentUser.id,
         type: 'PROFILE',
@@ -293,6 +282,36 @@ angular.module( 'conexus.home', [
         zoom: 9
     };
 
+    $scope.isTutorial = true
+    if ($scope.isTutorial){
+        $scope.showProjects = true;
+        $scope.showTasks = false;
+        $scope.change = function(){
+            $scope.showProjects = !$scope.showProjects
+            $scope.showTasks = !$scope.showTasks
+        }
+
+        $scope.getLatLng = function() {
+            if (navigator.geolocation) {
+                $rootScope.stateIsLoading = true;
+                console.log(navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    console.log(position)
+                    $rootScope.stateIsLoading = false;
+                    lat = position.coords.latitude; 
+                    lng = position.coords.longitude;
+                    $scope.map = {
+                        center: {latitude: lat, longitude: lng},
+                        zoom: 5
+                    };
+                    $scope.$apply();
+                });
+            }
+        };
+
+        $scope.getLatLng();
+
+    }
 
     //REORGANIZE
     UserModel.getByUsername($scope.currentUser.username).then(function(member){
