@@ -191,6 +191,7 @@ angular.module( 'conexus.projects', [
         console.log($scope.searchQuery);
         $rootScope.stateIsLoading = true;
         var query = {}
+        //query = [{type:'query', value:'searchQuery'},{type:'location', value:{}, distance:10}, type:'tag',value:'cool'}];
         query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
         ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;

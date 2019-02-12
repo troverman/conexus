@@ -1519,11 +1519,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
-    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE</button>\n" +
+    "        <div ng-show=\"value\" class=\"card\" ng-click=\"\">\n" +
+    "            <h1></h1>  \n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-show=\"value\" class=\"card\" ng-click=\"\">\n" +
+    "        <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE</button>\n" +
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
@@ -2969,7 +2970,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	<!--FILTER BY CURRENCIES / PRICES I WANT TO PAY BASED ON MM.. RECURSIVE LIQUIDITY TRACE-->\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "		<div class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "			\n" +
     "			 <div class=\"card\">\n" +
     "	            <div style=\"padding:16px;\">\n" +
@@ -7162,7 +7163,7 @@ angular.module("reaction/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("register/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("register/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1468070454955-c5b6932bd08d?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80')\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
@@ -7178,11 +7179,9 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
-    "\n" +
     "        <div ng-show=\"!showFinal\" style=\"float:right\">\n" +
     "            <br>\n" +
     "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>UNIVERSAL <i class=\"fa fa-question-circle\"></i></a></span>\n" +
-    "            <!--<span ng-click=\"informationToggle('The CRE8 onMint Market Postion Signifies that the creator of the instrument will sponsor CRE8 onMint of the specified asset.')\"><a>CRE8 onMint <i class=\"fa fa-question-circle\"></i></a></span>-->\n" +
     "            <br>\n" +
     "        </div>\n" +
     "\n" +
@@ -7191,17 +7190,20 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div ng-show=\"showIntro\">\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div class=\"\">\n" +
-    "                        <h2>Create Your Value Map</h2>\n" +
-    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">*Orders on the MultiDimensional Token Market.</p>\n" +
+    "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
+    "                    <div style=\"color:white;padding:15px;\">\n" +
+    "                        <h1>Create Your Value Map</h1>\n" +
+    "                        <p>*Orders on the MultiDimensional Token Market.</p>\n" +
     "                    </div>\n" +
+    "                </div>\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "\n" +
     "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete and intentional your dimensional vote the better.</p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "                    <img style=\"max-height:200px\" src=\"http://78.media.tumblr.com/a8e7e98f8328eb6ddbbb88a73010da06/tumblr_nu2mntog0W1qkbpm3o1_1280.jpg\">\n" +
-    "                    <img style=\"max-height:200px\" src=\"https://78.media.tumblr.com/0fa31b6b17306e2572e1b5c6682de073/tumblr_norszqkxEt1tmwenbo1_1280.jpg\">\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
+    "                    \n" +
+    "                    <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "\n" +
     "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(1)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
