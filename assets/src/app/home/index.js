@@ -281,6 +281,20 @@ angular.module( 'conexus.home', [
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
     };
+    $scope.markers = [];
+    $scope.options = {scrollwheel: false};
+
+    //GET NOTIFICATIONS.. IN NAV CTRL :)
+    //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
+  
+    $scope.contentList = contentList;
+    $scope.projects = projects;
+    $scope.newContent = {};
+    $scope.newReaction = {};
+    $scope.searchResults = [];
+    $scope.tasks = tasks;
+    $scope.time = time;
+    $scope.transactions = transactions;
 
     $scope.isTutorial = true
     if ($scope.isTutorial){
@@ -302,7 +316,7 @@ angular.module( 'conexus.home', [
                     lng = position.coords.longitude;
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
-                        zoom: 5
+                        zoom: 13
                     };
                     $scope.$apply();
                 });
@@ -310,6 +324,20 @@ angular.module( 'conexus.home', [
         };
 
         $scope.getLatLng();
+
+        for (x in projects){
+            if (projects[x].location){
+                $scope.markers.push({
+                    id:projects[x].id,
+                    content:projects[x].title,
+                    url:projects[x].urlTitle,
+                    coords:{
+                        latitude:projects[x].location.lat,
+                        longitude:projects[x].location.lng
+                    }
+                });
+            }
+        }
 
     }
 
@@ -320,18 +348,6 @@ angular.module( 'conexus.home', [
         $scope.balance = member.balance;
         $scope.reputation = member.reputation;
     });
-
-    //GET NOTIFICATIONS.. IN NAV CTRL :)
-    //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
-  
-	$scope.contentList = contentList;
-	$scope.projects = projects;
-    $scope.newContent = {};
-	$scope.newReaction = {};
-	$scope.searchResults = [];
-    $scope.tasks = tasks;
-	$scope.time = time;
-    $scope.transactions = transactions;
 
     //TEMP HARDCODE -- MOVE TO PROTOCOL
     $scope.contentList = $scope.contentList.map(function(obj){

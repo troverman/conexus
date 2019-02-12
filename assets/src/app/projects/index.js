@@ -58,9 +58,11 @@ angular.module( 'conexus.projects', [
     //TODO: BETTER | BETTER QUERIES
     for (x in projects){
         if (projects[x].location){
+            console.log(projects[x].title, projects[x].location)
             $scope.markers.push({
                 id:projects[x].id,
                 content:projects[x].title,
+                url:projects[x].urlTitle,
                 coords:{
                     latitude:projects[x].location.lat,
                     longitude:projects[x].location.lng
@@ -190,7 +192,7 @@ angular.module( 'conexus.projects', [
         $rootScope.stateIsLoading = true;
         var query = {}
         query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        ProjectModel.getSome('search', query.search, 20, 0, 'createdAt DESC').then(function(models){
+        ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.projects = models;
             $scope.loadAssociations();

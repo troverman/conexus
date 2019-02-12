@@ -9,6 +9,7 @@
 			<p><b>Description</b></p>
             <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
             <p><b>Address</b>: {{project.id}}</p>
+            <p><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
             <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>
         </div>
     </div>

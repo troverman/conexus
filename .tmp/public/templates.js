@@ -1419,8 +1419,21 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-md-6\">\n" +
-    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "                        <highchart config=\"chart\"></highchart>\n" +
+    "\n" +
+    "                        <div class=\"card\">\n" +
+    "                            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                                        <div style=\"font-size: 15px;\"><a href=\"project/{{marker.url}}\">{{marker.content}}</a></div>\n" +
+    "                                    </ui-gmap-window>\n" +
+    "                                </ui-gmap-marker>\n" +
+    "                            </ui-gmap-google-map>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div class=\"card\">\n" +
+    "                            <highchart config=\"chart\"></highchart>\n" +
+    "                        </div>\n" +
+    "\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-6\">\n" +
     "                        <div ng-repeat=\"item in projects.slice(0,10)\">\n" +
@@ -1460,8 +1473,21 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-md-6\">\n" +
-    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "                        <highchart config=\"chart\"></highchart>\n" +
+    "                        \n" +
+    "                        <div class=\"card\">\n" +
+    "                            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                                        <div style=\"font-size: 15px;\"><a href=\"task/{{marker.url}}\">{{marker.content}}</a></div>\n" +
+    "                                    </ui-gmap-window>\n" +
+    "                                </ui-gmap-marker>\n" +
+    "                            </ui-gmap-google-map>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div class=\"card\">\n" +
+    "                            <highchart config=\"chart\"></highchart>\n" +
+    "                        </div>\n" +
+    "\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-6\">\n" +
     "                        <div ng-repeat=\"item in tasks.slice(0,5)\">\n" +
@@ -5822,6 +5848,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
     "        <div ng-show=\"project.location\">\n" +
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
@@ -5902,6 +5929,7 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "			<p><b>Description</b></p>\n" +
     "            <p><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
     "            <p><b>Address</b>: {{project.id}}</p>\n" +
+    "            <p><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>\n" +
     "            <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -7056,7 +7084,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
     "                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "                        <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "                        <div style=\"font-size: 15px;\"><a href=\"project/{{marker.url}}\">{{marker.content}}</a></div>\n" +
     "                    </ui-gmap-window>\n" +
     "                </ui-gmap-marker>\n" +
     "            </ui-gmap-google-map>\n" +

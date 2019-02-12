@@ -21,8 +21,21 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-                        <highchart config="chart"></highchart>
+
+                        <div class="card">
+                            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                                        <div style="font-size: 15px;"><a href="project/{{marker.url}}">{{marker.content}}</a></div>
+                                    </ui-gmap-window>
+                                </ui-gmap-marker>
+                            </ui-gmap-google-map>
+                        </div>
+
+                        <div class="card">
+                            <highchart config="chart"></highchart>
+                        </div>
+
                     </div>
                     <div class="col-md-6">
                         <div ng-repeat="item in projects.slice(0,10)">
@@ -62,8 +75,21 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-                        <highchart config="chart"></highchart>
+                        
+                        <div class="card">
+                            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                                        <div style="font-size: 15px;"><a href="task/{{marker.url}}">{{marker.content}}</a></div>
+                                    </ui-gmap-window>
+                                </ui-gmap-marker>
+                            </ui-gmap-google-map>
+                        </div>
+
+                        <div class="card">
+                            <highchart config="chart"></highchart>
+                        </div>
+
                     </div>
                     <div class="col-md-6">
                         <div ng-repeat="item in tasks.slice(0,5)">

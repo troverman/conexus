@@ -52,7 +52,7 @@
             <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
                     <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-                        <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+                        <div style="font-size: 15px;"><a href="project/{{marker.url}}">{{marker.content}}</a></div>
                     </ui-gmap-window>
                 </ui-gmap-marker>
             </ui-gmap-google-map>

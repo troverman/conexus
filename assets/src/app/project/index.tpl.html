@@ -19,6 +19,7 @@
 
             </div>
         </div>
+
         <div ng-show="project.location">
             <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
