@@ -267,7 +267,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 	
     titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
@@ -289,6 +289,7 @@ angular.module( 'conexus.home', [
   
     $scope.contentList = contentList;
     $scope.projects = projects;
+    $scope.members = members;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.searchResults = [];
@@ -296,24 +297,44 @@ angular.module( 'conexus.home', [
     $scope.time = time;
     $scope.transactions = transactions;
 
-    $scope.isTutorial = true
+    //IF NO PROJECTS OR W.E TUTORIAL IS TRUE
+    $scope.isTutorial = true;
     if ($scope.isTutorial){
+
         $scope.showProjects = true;
         $scope.showTasks = false;
+        $scope.showMembers = false;
+        $scope.showValue = false;
+
         $scope.change = function(){
-            $scope.showProjects = !$scope.showProjects
-            $scope.showTasks = !$scope.showTasks
-        }
+            if ($scope.showProjects){
+                $scope.showProjects = !$scope.showProjects;
+                $scope.showTasks = !$scope.showTasks;
+            }
+            else if ($scope.showTasks){
+                $scope.showTasks = !$scope.showTasks;
+                $scope.showMembers = !$scope.showMembers;
+            }
+            else if ($scope.showMembers){
+                $scope.showMembers = !$scope.showMembers;
+                $scope.showValue = !$scope.showValue;
+            }
+            else if ($scope.showValue){
+                $scope.showValue = !$scope.showValue;
+                $scope.isTutorial = !$scope.isTutorial;
+            }
+        };
 
         $scope.getLatLng = function() {
             if (navigator.geolocation) {
                 $rootScope.stateIsLoading = true;
-                console.log(navigator.geolocation)
+                console.log(navigator.geolocation);
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    console.log(position)
+                    console.log(position);
                     $rootScope.stateIsLoading = false;
                     lat = position.coords.latitude; 
                     lng = position.coords.longitude;
+                    $scope.searchQuery.push({text:'CURRENT LOCATION: '+lat+', '+lng});
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
                         zoom: 13
@@ -322,8 +343,44 @@ angular.module( 'conexus.home', [
                 });
             }
         };
-
         $scope.getLatLng();
+
+
+
+        //TODO: ROOTSCOPE
+        $scope.join = function(project){
+            //if not already in .. for next page anyway. --> ASSOCIATION 'FILTER' vs search query master. 
+            $scope.searchQuery.push({text:project.title});
+            $scope.pop(project.title, 'You requested to join.. pending validation');
+        };
+
+        $scope.follow = function(member){
+            $scope.pop('Followed!', 'You\'re now following '+member.username);
+        };
+
+        $scope.pop = function(title, body){
+            toaster.pop({
+                type:'success',//info, wait, success, warning
+                title: title,
+                body: body,
+                onShowCallback: function (toast) { 
+                    //PLAY SOUND
+                    var audio = new Audio('audio/ping.mp3');
+                    audio.play()
+                    .then(function(audio){console.log(audio)})
+                    .catch(function(err){console.log(err)})
+                }
+            });
+        };
+
+        $scope.skip = function(){
+            $scope.showProjects = false;
+            $scope.showTasks = false;
+            $scope.showMembers = false;
+            $scope.showValue = false;
+            $scope.isTutorial = false;
+        };
+
 
         for (x in projects){
             if (projects[x].location){

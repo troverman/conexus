@@ -189,11 +189,11 @@ angular.module( 'conexus.register', [
         credits:{enabled:false},
     };
 
-     $scope.updatePieTotal = function(){
+    $scope.updatePieTotal = function(){
         var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[0], y:obj[0].amount}})
         $scope.pieTotal.series[0].data = data;
         console.log( $scope.pieTotal)
-    }
+    };
 
     //lol
     //do absolute
@@ -204,7 +204,6 @@ angular.module( 'conexus.register', [
             $scope.updatePieTotal();
         }
     }, true);
-
     
     //lol
 	$scope.continue = function(page){
@@ -237,8 +236,6 @@ angular.module( 'conexus.register', [
                 ]
             );
         }
-
-
     };
 
     //MAIN ARE PROTOCOLS

@@ -1399,7 +1399,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "<style type=\"text/css\">.angular-google-map-container{height: 400px;}</style>\n" +
     "<div class=\"container\">\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-show=\"isTutorial\">\n" +
     "        \n" +
     "        <div ng-show=\"showProjects\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
@@ -1420,6 +1420,11 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-md-6\">\n" +
     "\n" +
+    "                        <!--ACTIVE FILTERS-->\n" +
+    "                        <div class=\"card\">\n" +
+    "                            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "                        </div>\n" +
+    "\n" +
     "                        <div class=\"card\">\n" +
     "                            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "                                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
@@ -1435,17 +1440,22 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-6\">\n" +
+    "                    <div class=\"col-md-6\" style=\"max-height:100vh;overflow:scroll\">\n" +
     "                        <div ng-repeat=\"item in projects.slice(0,10)\">\n" +
     "                            <div class=\"card\" ng-click=\"\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
-    "                                    <div class=\"row\">\n" +
-    "                                        <div class=\"col-sm-1 col-xs-2\"><a href=\"/project/{{item.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{item.avatarUrl}}\"></a></div>\n" +
-    "                                        <div class=\"col-sm-11 col-xs-10\">\n" +
-    "                                            <h3 style=\"margin-top:0px\"><a href=\"/project/{{item.urlTitle}}\">{{item.title}}</a></h3>\n" +
-    "                                            <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "\n" +
+    "                                        <div style=\"float:right\">\n" +
+    "                                            <button class=\"btn btn-default\" ng-click=\"join(item);\">Join</button>\n" +
     "                                        </div>\n" +
-    "                                    </div>\n" +
+    "\n" +
+    "                                        <a href=\"/project/{{item.urlTitle}}\">\n" +
+    "                                            <img style=\"height:64px\" src=\"{{item.avatarUrl}}\">\n" +
+    "                                            <h3 style=\"margin-top:0px\">{{item.title}}</h3>\n" +
+    "                                        </a>\n" +
+    "\n" +
+    "                                        <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                        \n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -1489,12 +1499,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-6\">\n" +
+    "                    <div class=\"col-md-6\" style=\"max-height:100vh;overflow:scroll\">\n" +
     "                        <div ng-repeat=\"item in tasks.slice(0,5)\">\n" +
     "                            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
     "                                    <div style=\"float:right;text-align:right\">\n" +
-    "                                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                                        <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                                    </div>\n" +
     "\n" +
@@ -1519,17 +1529,50 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-show=\"value\" class=\"card\" ng-click=\"\">\n" +
-    "            <h1></h1>  \n" +
+    "        <div ng-show=\"showMembers\" class=\"card\" ng-click=\"\">\n" +
+    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
+    "                <div style=\"color:white;padding:15px;\">\n" +
+    "                    <h1>Membes</h1>  \n" +
+    "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\" style=\"max-height:100vh;overflow:scroll\">\n" +
+    "                <div class=\"col-sm-6\" ng-repeat=\"item in members.slice(0,10)\">\n" +
+    "                    <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
+    "                        <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"member-card-info\">\n" +
+    "                            <button class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
+    "                            <h4><a href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
+    "                            <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-show=\"showValue\" class=\"card\" ng-click=\"\">\n" +
+    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
+    "                <div style=\"color:white;padding:15px;\">\n" +
+    "                    <h1>Update Value Map</h1>  \n" +
+    "                    <p>Now that we know more about you, want to update?</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <highchart config=\"chart\"></highchart>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
     "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE</button>\n" +
     "        </div>\n" +
     "\n" +
-    "    </div>\n" +
+    "        <div class=\"card\" ng-click=\"skip()\" style=\"text-align:center\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">SKIP</button>\n" +
+    "        </div>\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
+    "    </div>\n" +
     "\n" +
     "    <div class=\"row\" ng-show=\"!isTutorial\">\n" +
     "        <div class=\"col-md-3 col-sm-12 col-xs-12\">\n" +
@@ -7193,7 +7236,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
     "                    <div style=\"color:white;padding:15px;\">\n" +
     "                        <h1>Create Your Value Map</h1>\n" +
-    "                        <p>*Orders on the MultiDimensional Token Market.</p>\n" +
+    "                        <p>Participate in creating the mechanism of value.</p>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
