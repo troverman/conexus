@@ -34,7 +34,25 @@ module.exports = {
 		//	}
 		//});
 
-		if(req.query.location){
+		//ASSOCIATION
+		if(req.query.association){
+			Project.native(function(err, project) {
+				project.find({"associatedModels.address": {
+					$in :[req.query.association]}
+				})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){obj.id = obj._id; return obj;});
+					Project.subscribe(req, models);
+					res.json(models);
+				});
+			});
+		}
+
+		//LOCATION
+		else if(req.query.location){
 			var location = req.query.location.map(function(obj){return parseFloat(obj)})
 			Project.native(function(err, project) {
 				project.find({
@@ -53,17 +71,14 @@ module.exports = {
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){
-						obj.id = obj._id;
-						return obj;
-					});
+					models = models.map(function(obj){obj.id = obj._id; return obj;});
 					console.log(err, models, req.query, location);
-					//Project.subscribe(req, models);
 					res.json(models);
 				});
 			});
 		}
 
+		//QUERY
 		else if(req.query.query){
 			var query = req.query.query;
 			Project.find()
@@ -81,6 +96,45 @@ module.exports = {
 				Project.subscribe(req, models);
 				res.json(models);
 			});	
+		}
+
+		//TAG
+		else if(req.query.tag){
+			var tag = req.query.tag;
+			Project.find({tags:{contains: tag}})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Project.subscribe(req, models);
+				res.json(models);
+			});
+		}
+
+		//FILTER
+		else if(req.query.filter){
+
+			//COMPOUND
+			//ASSOCIATIONS
+			//{"associatedModels.address": {
+			//	$in :[req.query.association]}
+			//}
+			//LOCATIONS
+			//"location.coordinates": {
+			//	$near:{
+			//		$geometry: {
+		    //      	type: "Point" ,
+		    //      	coordinates: location,
+		    //   	},
+			//		$maxDistance: 1600,
+			//		$minDistance: 0,
+		    //   }
+		    //}
+			//QUERIES
+			//{title: {contains: query}}
+			//TAGS
+			//tags:{contains: tag}
+			
 		}
 
 		else{

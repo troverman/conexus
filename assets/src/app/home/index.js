@@ -90,7 +90,6 @@ angular.module( 'conexus.home', [
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
-
     //LOCAL SEARCH QUERY FORMAT...
     
     $scope.map = {
@@ -98,7 +97,6 @@ angular.module( 'conexus.home', [
         zoom: 9
     };
     $scope.markers = [];
-
     $scope.contentList = contentList;
     $scope.projects = projects;
     $scope.newReaction = {};
@@ -338,14 +336,11 @@ angular.module( 'conexus.home', [
                         center: {latitude: lat, longitude: lng},
                         zoom: 12
                     };
-
-                    //{latitude: 35.902023, longitude: -84.1507067 },
                     ProjectModel.getSome('location', [lng,lat], 1000, 0, 'createdAt DESC').then(function(projects){
-
                         $scope.projects = projects;
+                        $scope.markers = [];
                         for (x in projects){
                             if (projects[x].location){
-                                console.log(projects[x].title, projects[x].location)
                                 $scope.markers.push({
                                     id:projects[x].id,
                                     content:projects[x].title,
@@ -358,7 +353,6 @@ angular.module( 'conexus.home', [
                             }
                         }
                     });
-
                     $scope.$apply();
                 });
             }

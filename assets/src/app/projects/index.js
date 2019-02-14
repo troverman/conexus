@@ -48,14 +48,12 @@ angular.module( 'conexus.projects', [
                     center: {latitude: lat, longitude: lng},
                     zoom: 12
                 };
-
                 //TODO: DISTANCE
                 ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
-
                     $scope.projects = projects;
+                    $scope.markers = [];
                     for (x in projects){
                         if (projects[x].location){
-                            console.log(projects[x].title, projects[x].location)
                             $scope.markers.push({
                                 id:projects[x].id,
                                 content:projects[x].title,
@@ -67,9 +65,7 @@ angular.module( 'conexus.projects', [
                             });
                         }
                     }
-
                  });
-
                 $scope.$apply();
             });
         }
