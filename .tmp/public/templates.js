@@ -5004,58 +5004,65 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <div>\n" +
-    "                        \n" +
-    "                    <div ng-if=\"item.model=='TIME'\">\n" +
     "\n" +
-    "                        <h3>{{item.amount}} <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h3>\n" +
-    "                        <h3><a href=\"task/{{item.task.id}}\">{{item.task.title}}</a></h3>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms by which data is associated given relation. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                        <!--WIP-->\n" +
-    "                        <h4>\n" +
-    "                            {{item.amount}}\n" +
-    "                            <i class=\"fa fa-angle-double-left\"></i>\n" +
-    "                            {{validationSumObj.general/validations.length}}\n" +
-    "                            <i class=\"fa fa-angle-double-right\"></i>\n" +
-    "                            {{item.task.title.toUpperCase()}}\n" +
-    "                        </h4>\n" +
+    "                <div class=\"row\">\n" +
     "\n" +
-    "                        <h4>\n" +
-    "                            {{item.task.title.toUpperCase()}} \n" +
-    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                            <a href=\"project/{{item.task.id}}\">{{item.project.title.toUpperCase()}}</a>\n" +
-    "                        </h4>\n" +
+    "                    <div class=\"col-md-6\">\n" +
     "\n" +
-    "                        <h4>\n" +
-    "                            {{item.amount}} \n" +
-    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                            {{item.project.title}}\n" +
-    "                        </h4>\n" +
+    "                        <div ng-if=\"item.model=='TIME'\">\n" +
+    "\n" +
+    "                            <h3>{{item.amount}} <a href=\"task/{{item.task.id}}\">{{item.task.title}}</a></h3>\n" +
+    "\n" +
+    "                            <!--WIP-->\n" +
+    "                            <h4>\n" +
+    "                                {{item.amount}}\n" +
+    "                                <i class=\"fa fa-angle-double-left\"></i>\n" +
+    "                                {{validationSumObj.general/validations.length}}\n" +
+    "                                <i class=\"fa fa-angle-double-right\"></i>\n" +
+    "                                {{item.task.title.toUpperCase()}}\n" +
+    "                            </h4>\n" +
+    "\n" +
+    "                            <h4>\n" +
+    "                                {{item.task.title.toUpperCase()}} \n" +
+    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                                <a href=\"project/{{item.task.id}}\">{{item.project.title.toUpperCase()}}</a>\n" +
+    "                            </h4>\n" +
+    "\n" +
+    "                            <h4>\n" +
+    "                                {{item.amount}} \n" +
+    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                                {{item.project.title}}\n" +
+    "                            </h4>\n" +
+    "\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div ng-if=\"item.model=='TASK'\">\n" +
+    "                            <h4>\n" +
+    "                                {{item.title.toUpperCase()}} \n" +
+    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                                <a href=\"project/{{item.project.urlTitle}}\">{{item.project.title.toUpperCase()}}</a>\n" +
+    "                            </h4>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
+    "                            <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                        <h5 ng-repeat=\"model in item.associatedModels\">{{model.type}}, {{model.address}}</h5>\n" +
+    "\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "                        <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <div ng-if=\"item.model=='TASK'\">\n" +
-    "                        <h3>{{item.title}} <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h3>\n" +
-    "                        <h4>\n" +
-    "                            {{item.title.toUpperCase()}} \n" +
-    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                            <a href=\"project/{{item.project.urlTitle}}\">{{item.project.title.toUpperCase()}}</a>\n" +
-    "                        </h4>\n" +
+    "                    <div class=\"col-md-6\">\n" +
     "                    </div>\n" +
-    "\n" +
-    "                    <!--SET-->\n" +
-    "                    <h5 ng-repeat=\"model in item.associatedModels\">{{model.type}}, {{model.address}}</h5>\n" +
-    "\n" +
-    "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                    <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
-    "\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -8098,6 +8105,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "						<a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "						<a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "						<a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "						<a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "						<a style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "					</div>\n" +
     "					<div ng-show=\"task.showReply\" class=\"card-footer\">\n" +

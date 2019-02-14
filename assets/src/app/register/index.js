@@ -238,6 +238,23 @@ angular.module( 'conexus.register', [
         }
     };
 
+
+
+
+
+
+    //ACTUALLY PACKAGE AND CREATE THE ORDER.. NEED TO UPDATE AUTH REGISTRATION PROCESS.....
+
+
+
+
+
+
+
+
+
+
+
     //MAIN ARE PROTOCOLS
     //CREate
     //TIME
