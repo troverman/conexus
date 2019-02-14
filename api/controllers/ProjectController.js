@@ -13,14 +13,58 @@ module.exports = {
 	},
 
 	getSome: function(req, res) {
-		var limit = req.query.limit;
-		var skip = req.query.skip;
+		var limit = parseInt(req.query.limit);
+		var skip = parseInt(req.query.skip);
 		var sort = req.query.sort;
 		Project.watch(req);
 
-		console.log(req.query)
 		//WEIRD BUG 
-		if(req.query.query){
+
+		//Project.find().limit(10000000).then(function(projects){
+		//	for (x in projects){
+		//		if (projects[x].location){
+		//			projects[x].location.coordinates = [parseFloat(projects[x].location.lng), parseFloat(projects[x].location.lat)];
+		//			projects[x].location.lat = parseFloat(projects[x].location.lat);
+		//			projects[x].location.lng = parseFloat(projects[x].location.lng);
+		//			//projects[x].location.type = 'Point';
+		//			delete projects[x].location.type;
+		//			console.log(projects[x])
+		//			Project.update({id:projects[x].id},{location:projects[x].location}).then(function(){console.log('updated')})
+		//		}
+		//	}
+		//});
+
+		if(req.query.location){
+			var location = req.query.location.map(function(obj){return parseFloat(obj)})
+			Project.native(function(err, project) {
+				project.find({
+					"location.coordinates": {
+						$near:{
+							$geometry: {
+				          		type: "Point" ,
+				          		coordinates: location,
+				       		},
+							$maxDistance: 1600,
+							$minDistance: 0,
+				       	}
+				     }
+				})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+					console.log(err, models, req.query, location);
+					//Project.subscribe(req, models);
+					res.json(models);
+				});
+			});
+		}
+
+		else if(req.query.query){
 			var query = req.query.query;
 			Project.find()
 			.where({
@@ -38,6 +82,7 @@ module.exports = {
 				res.json(models);
 			});	
 		}
+
 		else{
 			Project.find({})
 			.limit(limit)
@@ -99,8 +144,8 @@ module.exports = {
 					if (!err) {
 						var location = {
 							address:response.json.results[0].formatted_address,
-							lat:response.json.results[0].geometry.location.lat,
-							lng:response.json.results[0].geometry.location.lng,
+							lat:parseFloat(response.json.results[0].geometry.location.lat),
+							lng:parseFloat(response.json.results[0].geometry.location.lng),
 						};
 						console.log(location, project.id);
 						Project.update({id:project.id}, {location:location}).then(function(model){

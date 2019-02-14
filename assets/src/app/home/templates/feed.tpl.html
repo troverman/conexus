@@ -134,11 +134,12 @@
         <div ng-show="showMembers" class="card" ng-click="">
             <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');">
                 <div style="color:white;padding:15px;">
-                    <h1>Membes</h1>  
+                    <h1>Members</h1>  
                     <p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>
                 </div>
             </div>
             <div style="padding:16px;" style="max-height:100vh;overflow:scroll">
+                <highchart config="totalMap"></highchart>
                 <div class="col-sm-6" ng-repeat="item in members.slice(0,10)">
                     <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
                         <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">

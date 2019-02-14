@@ -10,7 +10,13 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
     this.getSome = function(type, filter, limit, skip, sort) {
         var url = utils.prepareUrl('project');
         var query = {params:{limit:limit,skip:skip,sort:sort}};
+
+
         if (type=='search'){query = {params:{query:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='location'){query = {params:{location:filter,limit:limit,skip:skip,sort:sort}};}
+
+
+
         return $sailsSocket.get(url, query).then(success, error);
     };
 

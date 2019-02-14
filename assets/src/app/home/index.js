@@ -57,7 +57,7 @@ angular.module( 'conexus.home', [
                 return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return UserModel.getSome('', '', 30, 0, 'createdAt DESC');
             }],
             orders: ['OrderModel', function(OrderModel) {
                 return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
@@ -93,7 +93,6 @@ angular.module( 'conexus.home', [
 
     //LOCAL SEARCH QUERY FORMAT...
     
-
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -267,7 +266,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 	
     titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
@@ -334,11 +333,32 @@ angular.module( 'conexus.home', [
                     $rootScope.stateIsLoading = false;
                     lat = position.coords.latitude; 
                     lng = position.coords.longitude;
-                    $scope.searchQuery.push({text:'CURRENT LOCATION: '+lat+', '+lng});
+                    //$scope.searchQuery.push({text:'CURRENT LOCATION: '+lat+', '+lng});
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
-                        zoom: 13
+                        zoom: 12
                     };
+
+                    //{latitude: 35.902023, longitude: -84.1507067 },
+                    ProjectModel.getSome('location', [lng,lat], 1000, 0, 'createdAt DESC').then(function(projects){
+
+                        $scope.projects = projects;
+                        for (x in projects){
+                            if (projects[x].location){
+                                console.log(projects[x].title, projects[x].location)
+                                $scope.markers.push({
+                                    id:projects[x].id,
+                                    content:projects[x].title,
+                                    url:projects[x].urlTitle,
+                                    coords:{
+                                        latitude:projects[x].location.lat,
+                                        longitude:projects[x].location.lng
+                                    }
+                                });
+                            }
+                        }
+                    });
+
                     $scope.$apply();
                 });
             }
@@ -381,6 +401,54 @@ angular.module( 'conexus.home', [
             $scope.isTutorial = false;
         };
 
+        $scope.totalMap = {
+            chart: {zoomType: 'x'},
+            series: [{
+                id: 'Reputation',
+                type: 'bar',
+                name: 'Reputation',
+                data: []
+            }],
+            title: {text: ''},
+            xAxis: {
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey',
+                title: {text: null},
+                categories: [],
+            },
+            legend: {enabled: false},
+            yAxis: {title: {text: null}},
+            credits:{enabled:false},
+        };
+
+        for (x in $scope.members){
+            for (y in Object.keys($scope.members[x].reputation)){
+
+                //Object.keys($scope.members[x].reputation)[y]
+                //$scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
+            
+                if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
+
+                    //if not in category
+                    var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
+                    if (index == -1){
+                        $scope.totalMap.series[0].data.push($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
+                        $scope.totalMap.xAxis.categories.push(Object.keys($scope.members[x].reputation)[y]);
+                    }
+                    else{
+                        $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
+                    }
+
+
+                    //else find index and ++
+
+                }
+
+            }
+
+        }
+        
 
         for (x in projects){
             if (projects[x].location){

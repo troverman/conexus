@@ -1532,11 +1532,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <div ng-show=\"showMembers\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
     "                <div style=\"color:white;padding:15px;\">\n" +
-    "                    <h1>Membes</h1>  \n" +
+    "                    <h1>Members</h1>  \n" +
     "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\" style=\"max-height:100vh;overflow:scroll\">\n" +
+    "                <highchart config=\"totalMap\"></highchart>\n" +
     "                <div class=\"col-sm-6\" ng-repeat=\"item in members.slice(0,10)\">\n" +
     "                    <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
     "                        <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +

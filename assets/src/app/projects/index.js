@@ -12,7 +12,7 @@ angular.module( 'conexus.projects', [
 		},
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return ProjectModel.getSome('location', [0,0], 100, 0, 'createdAt DESC');
             }]
         }
 	});
@@ -48,6 +48,28 @@ angular.module( 'conexus.projects', [
                     center: {latitude: lat, longitude: lng},
                     zoom: 12
                 };
+
+                //TODO: DISTANCE
+                ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
+
+                    $scope.projects = projects;
+                    for (x in projects){
+                        if (projects[x].location){
+                            console.log(projects[x].title, projects[x].location)
+                            $scope.markers.push({
+                                id:projects[x].id,
+                                content:projects[x].title,
+                                url:projects[x].urlTitle,
+                                coords:{
+                                    latitude:projects[x].location.lat,
+                                    longitude:projects[x].location.lng
+                                }
+                            });
+                        }
+                    }
+
+                 });
+
                 $scope.$apply();
             });
         }
@@ -193,13 +215,13 @@ angular.module( 'conexus.projects', [
         var query = {}
         //query = [{type:'query', value:'searchQuery'},{type:'location', value:{}, distance:10}, type:'tag',value:'cool'}];
         query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
-            $rootScope.stateIsLoading = false;
-            $scope.projects = models;
-            $scope.loadAssociations();
-            $scope.loadLocations();
-            $scope.loadTags();
-        });
+        //ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
+        //    $rootScope.stateIsLoading = false;
+        //    $scope.projects = models;
+        //    $scope.loadAssociations();
+        //    $scope.loadLocations();
+        //    $scope.loadTags();
+        //});
 
     }, true);
 
