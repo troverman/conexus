@@ -1,15 +1,15 @@
-
+<div class="page-heading">
+    <div class="container"> 
+        <div class="spacing-25"></div>
+        <div class="row">
+            <div class="col-xs-12">
+            	<h1>Notifications</h1>
+            </div>
+        </div>
+        <div class="spacing-25"></div>
+    </div>
+</div>
 <div class="container">
-
-	<div class="spacing-10"></div>
-
-	<div class="row">
-		<div class="card">
-			<div style="padding:16px">
-				<h1>Notifications</h1>
-			</div>
-		</div>
-	</div>
 
 	<div class="row" ng-show="notifications.length == 0">
 	    <div class="card">
@@ -18,7 +18,26 @@
 	        </div>
 	    </div>
 	</div>
-	
+
+	<div class="row" ng-show="notifications.length > 0">
+
+		<!--
+		<h4>Today</h4>
+		<h4>Yesterday</h4>
+		<h4>This Week</h4>
+		<h4>Earlier</h4>
+		-->
+
+		<div ng-repeat="notification in notifications" class="card" ng-click="">
+	        <div style="padding:16px;">
+	            <h5>{{notification.title}}</h5>
+	            <p><span style="color:gray">{{notification.description}}</span></p>
+
+	        </div>
+	    </div>
+
+	</div>
+
 	<div class="spacing-50"></div>
 
 </div>

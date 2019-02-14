@@ -401,7 +401,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "				<h3>Settings</h3>\n" +
     "				<!--SETTING DESCRIP-->\n" +
     "				<p>Record Attention <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Attention Tokenization</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
-    "				<!--<p>GPS Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>-->\n" +
+    "				<p>Location Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>\n" +
     "				<p>Client Mining <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model=\"browserMining\" aria-label=\"Browser Mining\"></md-switch></p>\n" +
     "\n" +
     "				<p>Notifications <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><md-switch ng-model=\"notifications\" aria-label=\"Notifications\"></md-switch></p>\n" +
@@ -1112,10 +1112,10 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "					<li><a href=\"/members\">Members</a></li>\n" +
     "					<li><a href=\"/market\">Orders</a></li>\n" +
     "					<li><a href=\"/projects\">Projects</a></li>\n" +
-    "					<!--<li><a href=\"/projects\">Reactions</a></li>-->\n" +
+    "					<!--<li><a href=\"\">Reactions</a></li>-->\n" +
     "					<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "					<li><a href=\"/tasks\">Time</a></li>\n" +
-    "					<li><a href=\"/projects\">Transactions</a></li>\n" +
+    "					<li><a href=\"\">Time</a></li>\n" +
+    "					<li><a href=\"\">Transactions</a></li>\n" +
     "				</ul>\n" +
     "\n" +
     "		    </div>\n" +
@@ -1190,7 +1190,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
+    "<!--\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "		<div style=\"padding:16px;\">\n" +
@@ -1200,13 +1200,15 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			<div class=\"col-md-6\">\n" +
     "				<highchart config=\"chart1\"></highchart>\n" +
     "			</div>\n" +
-    "			<h1>Tokens</h1>\n" +
+    "			<h1>Tokens / Market</h1>\n" +
     "			<p>Lorem Ipsum</p>\n" +
     "		</div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "-->\n" +
     "\n" +
-    "<!--<div class=\"container\">\n" +
+    "<!--\n" +
+    "<div class=\"container\">\n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "		<div style=\"padding:16px;\">\n" +
     "	        <div class=\"col-md-6\">\n" +
@@ -1219,8 +1221,10 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			<p>Lorem Ipsum</p>\n" +
     "		</div>\n" +
     "    </div>\n" +
-    "</div>-->\n" +
+    "</div>\n" +
+    "-->\n" +
     "\n" +
+    "<!--\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "    	<div style=\"max-height:200px;overflow:hidden\">\n" +
@@ -1343,21 +1347,8 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "		</div>\n" +
     "    </div>\n" +
-    "    <!--\n" +
-    "    <div class=\"card\" ng-click=\"\">\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "	        <div class=\"col-md-6\">\n" +
-    "				<highchart config=\"chart\"></highchart>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"chart1\"></highchart>\n" +
-    "			</div>\n" +
-    "			<h1>Time</h1>\n" +
-    "			<p>Lorem Ipsum</p>\n" +
-    "		</div>\n" +
-    "    </div>\n" +
-    "	-->\n" +
     "</div>\n" +
+    "-->\n" +
     "\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>");
@@ -1533,7 +1524,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
     "                <div style=\"color:white;padding:15px;\">\n" +
     "                    <h1>Members</h1>  \n" +
-    "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>\n" +
+    "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and codified beliefs.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\" style=\"max-height:100vh;overflow:scroll\">\n" +
@@ -1574,6 +1565,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "    <div class=\"row\" ng-show=\"!isTutorial\">\n" +
     "        <div class=\"col-md-3 col-sm-12 col-xs-12\">\n" +
@@ -5704,17 +5697,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
 
 angular.module("notifications/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("notifications/index.tpl.html",
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"container\"> \n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "            	<h1>Notifications</h1>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "<div class=\"container\">\n" +
-    "\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "	<div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px\">\n" +
-    "				<h1>Notifications</h1>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
     "\n" +
     "	<div class=\"row\" ng-show=\"notifications.length == 0\">\n" +
     "	    <div class=\"card\">\n" +
@@ -5723,7 +5717,26 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	        </div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
-    "	\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"notifications.length > 0\">\n" +
+    "\n" +
+    "		<!--\n" +
+    "		<h4>Today</h4>\n" +
+    "		<h4>Yesterday</h4>\n" +
+    "		<h4>This Week</h4>\n" +
+    "		<h4>Earlier</h4>\n" +
+    "		-->\n" +
+    "\n" +
+    "		<div ng-repeat=\"notification in notifications\" class=\"card\" ng-click=\"\">\n" +
+    "	        <div style=\"padding:16px;\">\n" +
+    "	            <h5>{{notification.title}}</h5>\n" +
+    "	            <p><span style=\"color:gray\">{{notification.description}}</span></p>\n" +
+    "\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
+    "\n" +
+    "	</div>\n" +
+    "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "</div>\n" +

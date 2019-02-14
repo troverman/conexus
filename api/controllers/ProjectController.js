@@ -200,6 +200,7 @@ module.exports = {
 							address:response.json.results[0].formatted_address,
 							lat:parseFloat(response.json.results[0].geometry.location.lat),
 							lng:parseFloat(response.json.results[0].geometry.location.lng),
+							coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
 						};
 						console.log(location, project.id);
 						Project.update({id:project.id}, {location:location}).then(function(model){
