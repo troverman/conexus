@@ -858,8 +858,13 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "	<!--TRAVERSAL PARAMETERS-->\n" +
     "	<!--COMBINITRONICS-->\n" +
     "	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->\n" +
+    "\n" +
     "	\n" +
     "	<div class=\"row\">\n" +
+    "		<ul ng-show=\"content.children.length > 0\" style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li style=\"float:right;font-size:14px\"><a>Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "		</ul>\n" +
+    "		<div style=\"clear:both\"></div>\n" +
     "		<div ng-include=\"'content/content.tpl.html'\" ng-repeat=\"content in content.children track by content.id\"></div>\n" +
     "	</div>\n" +
     "\n" +
@@ -1535,7 +1540,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "                        </div>\n" +
     "                        <div class=\"member-card-info\">\n" +
-    "                            <button class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
+    "                            <button ng-show=\"true\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
+    "                            <button ng-show=\"false\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
+    "\n" +
     "                            <h4><a href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
     "                            <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
     "                        </div>\n" +
@@ -5938,7 +5945,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/time\">Time</a></li>\n" +
     "                        <li style=\"\"><a class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a></li>\n" +
-    "                        <li style=\"\"><a class=\"btn btn-default\" ng-show=\"$event.stopPropagation();isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a></li>\n" +
+    "                        <!--<li style=\"\"><a class=\"btn btn-default\" ng-show=\"$event.stopPropagation();isProjectCreator()\" ng-click=\"editProjectToggle()\">Edit</a></li>-->\n" +
     "                        <li style=\"\"><a class=\"btn btn-default\" ng-click=\"$event.stopPropagation();createMember()\">Join</a></li>\n" +
     "                        <li style=\"float:right;margin-top:5px\"><a style=\"color:black\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "                    </ul>\n" +
@@ -6545,18 +6552,7 @@ angular.module("project/templates/items.tpl.html", []).run(["$templateCache", fu
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
-    "\n" +
-    "            <div class=\"card\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item</button>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <!--\n" +
-    "            <div class=\"card\">\n" +
-    "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "\n" +
+    "            \n" +
     "            <div ng-repeat=\"item in items\">\n" +
     "                <div class=\"card\" style=\"\">\n" +
     "                    <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
@@ -6901,7 +6897,7 @@ angular.module("project/templates/settings.tpl.html", []).run(["$templateCache",
     "            <h1>Settings</h1>\n" +
     "\n" +
     "            <h3>{{project.title}}</h3>\n" +
-    "			<p>{{project.description}}</p>\n" +
+    "            <p><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
     "			<p>Protocols</p>\n" +
     "\n" +
     "			<p>Manifolds</p>\n" +
@@ -7630,7 +7626,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "				<div class=\"card\">\n" +
-    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
+    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery.search\">\n" +
     "			    </div>\n" +
     "\n" +
     "				<div ng-if=\"searchResults.length > 0\" class=\"card\">\n" +

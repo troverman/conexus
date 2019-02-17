@@ -146,7 +146,9 @@
                             <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                         </div>
                         <div class="member-card-info">
-                            <button class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
+                            <button ng-show="true" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
+                            <button ng-show="false" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Unfollow</button>
+
                             <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
                             <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
                         </div>

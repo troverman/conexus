@@ -995,12 +995,24 @@ angular.module( 'conexus.project', [
     if ($scope.items.length == 0){
         $scope.items = [];
         for(var i=0;i < 50;i++){
+            var items = [
+                {title:'Random Thing', tags:'random,thing,what', content:'This is a random thing', user:{username:'troverman'}},
+                {title:'Eight Print', tags:'eight,symbolism,ethos', content:'This is an eight', user:{username:'troverman'}},
+                {title:'Rare Item', tags:'rare,item,create', content:'This is a Rare Item', user:{username:'troverman'}},
+                {title:'Rare Book', tags:'rare,book,reading,literature', content:'This is a Rare Book', user:{username:'troverman'}},
+                {title:'Rare Cloth', tags:'rare,cloth,supplies,art', content:'This is a Rare Cloth', user:{username:'troverman'}},
+                {title:'Rare Shirt', tags:'rare,clothes,cloth,apparal,shirt', content:'This is a Rare Shit', user:{username:'troverman'}},
+
+            ];
+            var item = items[Math.floor(Math.random()*items.length)];
+
             $scope.items.push({
                 id:i,
-                title:'sup',
-                tags: 'some,tags,here',
+                title: item.title,
+                content: item.content,
+                tags: item.tags,
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'}
+                user:item.user
             })
         }
     }

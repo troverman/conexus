@@ -264,7 +264,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'MemberModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, FollowerModel, MemberModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 	
     titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
@@ -283,6 +283,53 @@ angular.module( 'conexus.home', [
 
     //GET NOTIFICATIONS.. IN NAV CTRL :)
     //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
+
+    $scope.chart = {
+        chart: {polar: true},
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
+            color: 'rgba(153,0,0,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values1',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.15],
+            color: 'rgba(0,0,153,0.3)',
+            fillOpacity: 0.3,
+        },{
+            id: 'values2',
+            type: 'area',
+            name: 'Values',
+            pointPlacement: 'on',
+            data: [0.15, 0.1, 0.20, 0.2, 0.20, 0.05, 0.1],
+            color: 'rgba(0,153,0,0.3)',
+            fillOpacity: 0.3,
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {},
+        credits:{enabled:false},
+    };
   
     $scope.contentList = contentList;
     $scope.projects = projects;
@@ -359,17 +406,51 @@ angular.module( 'conexus.home', [
         };
         $scope.getLatLng();
 
-
-
         //TODO: ROOTSCOPE
+        //$scope.createMember = function(){
         $scope.join = function(project){
             //if not already in .. for next page anyway. --> ASSOCIATION 'FILTER' vs search query master. 
             $scope.searchQuery.push({text:project.title});
+            
+            //$scope.chart.series = [{
+            //    id: 'values',
+            //    type: 'area',
+            //    name: 'Values',
+            //    pointPlacement: 'on',
+            //    data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
+            //    color: 'rgba(153,0,0,0.3)',
+            //    fillOpacity: 0.3,
+            //}
+            //$scope.chart.xAxis.categories = [];
+
             $scope.pop(project.title, 'You requested to join.. pending validation');
+
+            //project, project+task,project+category
+            //$scope.newMember.user = config.currentUser.id;
+            //$scope.newMember.project = project.id;
+            //MemberModel.create($scope.newMember).then(function(model) {
+            //    $rootScope.confirm = $scope.newMember;
+            //    $rootScope.confirm.modelType = 'PROJECTMEMBER';
+            //    $scope.newMember = {};
+            //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+            //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            //});
+
         };
 
         $scope.follow = function(member){
             $scope.pop('Followed!', 'You\'re now following '+member.username);
+
+            //$scope.newFollower.followed = member.id;
+            //$scope.newFollower.follower = $scope.currentUser.id;
+            //FollowerModel.create($scope.newFollower).then(function(model) {
+            //    $rootScope.confirm = $scope.newFollower;
+            //    $rootScope.confirm.modelType = 'FOLLOW';
+            //    $scope.newFollower = {};
+            //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+            //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+            //});
+
         };
 
         $scope.pop = function(title, body){
@@ -418,12 +499,9 @@ angular.module( 'conexus.home', [
 
         for (x in $scope.members){
             for (y in Object.keys($scope.members[x].reputation)){
-
                 //Object.keys($scope.members[x].reputation)[y]
                 //$scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
-            
                 if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
-
                     //if not in category
                     var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
                     if (index == -1){
@@ -433,16 +511,10 @@ angular.module( 'conexus.home', [
                     else{
                         $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
                     }
-
-
                     //else find index and ++
-
                 }
-
             }
-
         }
-        
 
         for (x in projects){
             if (projects[x].location){
@@ -515,53 +587,6 @@ angular.module( 'conexus.home', [
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
     
-	$scope.chart = {
-        chart: {polar: true},
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values1',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.15],
-            color: 'rgba(0,0,153,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values2',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.15, 0.1, 0.20, 0.2, 0.20, 0.05, 0.1],
-            color: 'rgba(0,153,0,0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {
-            enabled: false,
-        },
-        tooltip: {},
-        credits:{enabled:false},
-    };
-
 
     //TODO
     $scope.loadValueMap = function(){

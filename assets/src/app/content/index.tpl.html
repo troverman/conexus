@@ -114,8 +114,13 @@
 	<!--TRAVERSAL PARAMETERS-->
 	<!--COMBINITRONICS-->
 	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
+
 	
 	<div class="row">
+		<ul ng-show="content.children.length > 0" style="padding:0px;" class="member-tabs">
+			<li style="float:right;font-size:14px"><a>Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+		</ul>
+		<div style="clear:both"></div>
 		<div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
 	</div>
 
