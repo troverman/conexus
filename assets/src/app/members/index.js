@@ -12,7 +12,7 @@ angular.module( 'conexus.members', [
 		},
 		resolve: {
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return UserModel.getSome('', '', 1000, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -28,18 +28,67 @@ angular.module( 'conexus.members', [
     //DEPRECIATE 'TOTAL WORK'
     $scope.sortText = {'totalWork DESC':'Total Reputation','createdAt DESC':'Date Joined'}
 
+    $scope.totalMap = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Reputation',
+            type: 'column',
+            name: 'Reputation',
+            data: []
+        }],
+        title: {text: 'Total Reputation'},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+
+    $scope.updateChart = function(){
+        $scope.totalMap.series = [{
+            id: 'Reputation',
+            type: 'column',
+            name: 'Reputation',
+            data: [],
+            turboThreshold: 10000,
+        }];
+        $scope.totalMap.xAxis.categories = [];
+        for (x in $scope.members){
+            for (y in Object.keys($scope.members[x].reputation)){
+                if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
+                    var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
+                    if (index == -1){
+                        $scope.totalMap.series[0].data.push($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
+                        $scope.totalMap.xAxis.categories.push(Object.keys($scope.members[x].reputation)[y]);
+                    }
+                    else{
+                        $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
+                    }
+                }
+            }
+        }
+    };
+    $scope.updateChart();
+
     $scope.loadMore = function() {
-        $scope.skip = $scope.skip + 100;
+        $scope.skip = $scope.skip + 1000;
         $rootScope.stateIsLoading = true;
-        UserModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(members) {
+        UserModel.getSome(1000, $scope.skip, $scope.selectedSort).then(function(members) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.members, members);
+            $scope.updateChart();
         });
     };
 
     $scope.search = function(){
-        UserModel.getSome('search', $scope.searchQuery, 100, 0, 'createdAt DESC').then(function(models){
+        UserModel.getSome('search', $scope.searchQuery, 1000, 0, 'createdAt DESC').then(function(models){
             $scope.members = models;
+            $scope.updateChart();
         });
     };
 
@@ -49,6 +98,7 @@ angular.module( 'conexus.members', [
         UserModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(members) {
             $rootScope.stateIsLoading = false;
             $scope.members = members;
+            $scope.updateChart();
         });
     };
 

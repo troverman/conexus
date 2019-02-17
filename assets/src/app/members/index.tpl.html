@@ -1,4 +1,4 @@
-<div class="page-heading">
+<div class="page-heading" style="background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')">
     <div class="container"> 
         <div class="spacing-25"></div>
         <div class="row">
@@ -22,35 +22,48 @@
 
 <div class="container">
     <div class="spacing-15"></div>
-    <div class="card">
-        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
-            <!--<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>-->
-            <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-                <a  href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
+    <div class="row">
 
-<div class="container">
-    <div class="col-lg-4 col-sm-6" ng-repeat="member in members">
-        <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(member)">
-            <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
-                <a ng-click="$event.stopPropagation();" href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
-            </div>
-            <div class="member-card-info">
-                <h4><a ng-click="$event.stopPropagation();" href="member/{{member.username}}">{{member.username}}</a></h4>
-                <p style="color:gray">{{member.status}} offline</p>
-                <p style="color:gray">Total Reputation | {{member.totalWork}}</p>
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <div style="clear:both"></div>
+        </ul>
+
+        <div class="card">
+            <form ng-submit="search()" style="display:flex;flex-direction:row;">
+                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
+                <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
+                    <a  href="#" role="button">
+                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="card">
+            <div style="padding:16px;">
+                <highchart config="totalMap"></highchart>
             </div>
         </div>
     </div>
-</div>
 
-<div class="spacing-10"></div>
+    <div class="row">
+        <div class="col-lg-4 col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
+            <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(member)">
+                <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
+                    <a ng-click="$event.stopPropagation();" href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
+                </div>
+                <div class="member-card-info">
+                    <h4><a ng-click="$event.stopPropagation();" href="member/{{member.username}}">{{member.username}}</a></h4>
+                    <p style="color:gray">{{member.status}} offline</p>
+                    <p style="color:gray">Total Reputation | {{member.totalWork}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacing-10"></div>
+
+</div>
 
 <div ng-click="loadMore()" class="container" style="text-align:center">
     <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>

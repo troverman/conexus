@@ -907,7 +907,7 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("contentList/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("contentList/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -2440,7 +2440,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("market/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("market/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -2859,7 +2859,7 @@ angular.module("market/templates/content.tpl.html", []).run(["$templateCache", f
 
 angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("marketPair/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -2997,7 +2997,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	.card tags-input .host{margin:0px;border:0px;}\n" +
     "</style>\n" +
     "\n" +
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -3123,7 +3123,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
 
 angular.module("markets/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("markets/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -4323,7 +4323,7 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
 
 angular.module("members/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("members/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -4347,35 +4347,48 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-15\"></div>\n" +
-    "    <div class=\"card\">\n" +
-    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
-    "            <!--<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>-->\n" +
-    "            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                <a  href=\"#\" role=\"button\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "    <div class=\"row\">\n" +
     "\n" +
-    "<div class=\"container\">\n" +
-    "    <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
-    "        <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(member)\">\n" +
-    "            <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
-    "                <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.username}}\"><img ng-src=\"{{member.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "            </div>\n" +
-    "            <div class=\"member-card-info\">\n" +
-    "                <h4><a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.username}}\">{{member.username}}</a></h4>\n" +
-    "                <p style=\"color:gray\">{{member.status}} offline</p>\n" +
-    "                <p style=\"color:gray\">Total Reputation | {{member.totalWork}}</p>\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
+    "                <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
+    "                    <a  href=\"#\" role=\"button\">\n" +
+    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <highchart config=\"totalMap\"></highchart>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "            <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(member)\">\n" +
+    "                <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
+    "                    <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.username}}\"><img ng-src=\"{{member.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "                </div>\n" +
+    "                <div class=\"member-card-info\">\n" +
+    "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.username}}\">{{member.username}}</a></h4>\n" +
+    "                    <p style=\"color:gray\">{{member.status}} offline</p>\n" +
+    "                    <p style=\"color:gray\">Total Reputation | {{member.totalWork}}</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "</div>\n" +
     "\n" +
     "<div ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
     "    <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
@@ -7091,7 +7104,7 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("projects/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"container\"> \n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -7235,7 +7248,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"container\">\n" +
+    "<div class=\"container\" ng-show=\"true\">\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
@@ -7259,9 +7272,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete and intentional your dimensional vote the better.</p>\n" +
-    "                    \n" +
     "                    <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "\n" +
     "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(1)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
     "\n" +
     "                </div>\n" +
@@ -7983,7 +7994,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	.angular-google-map-container{height: 200px;}\n" +
     "</style>\n" +
     "\n" +
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "	<div class=\"container\"> \n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
