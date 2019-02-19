@@ -62,6 +62,9 @@ angular.module( 'conexus.projects', [
                     center: {latitude: lat, longitude: lng},
                     zoom: 12
                 };
+
+                //TODO: SIMPLY UPDATE QUERY :)
+                //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                 //TODO: DISTANCE
                 ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
                     $scope.projects = projects;
@@ -69,7 +72,9 @@ angular.module( 'conexus.projects', [
                     $scope.populateMap();
                     $scope.init();
                  });
+
                 $scope.$apply();
+
             });
         }
     };
@@ -138,7 +143,7 @@ angular.module( 'conexus.projects', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
-        ProjectModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(projects) {
+        ProjectModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(projects) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.projects, projects);
         });
@@ -177,9 +182,10 @@ angular.module( 'conexus.projects', [
 
     //SHOULD BE ROOT?
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
-
+    
+        //HAK!!!!
         if (newValue !== oldValue) {
-
+            console.log(newValue)
             $rootScope.stateIsLoading = true;
             var query = {}
             query.search = $scope.searchQuery.map(function(obj){
@@ -203,19 +209,12 @@ angular.module( 'conexus.projects', [
 
             //GENERALIZED SEARCH QUERY.. AKA IN SEARCH BAR
 
+            //TODO: AGNOSTIC SEARCH
             ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
                 $rootScope.stateIsLoading = false;
                 $scope.projects = models;
                 $scope.init();
             });
-
-            //BAD TEST
-            //console.log($rootScope.searchQueryNav);
-            //ProjectModel.getSome('location', $rootScope.searchQueryNav.locations[0].query.coordinates, 100, 0, 'createdAt DESC').then(function(models){
-            //    $rootScope.stateIsLoading = false;
-            //    $scope.projects = models;
-            //    $scope.init();
-            //});
 
         }
 

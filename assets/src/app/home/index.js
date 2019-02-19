@@ -212,11 +212,70 @@ angular.module( 'conexus.home', [
         else{$mdSidenav('login').toggle()}
     };
 
-    
+
+
+
+
+    //FILTERSET
+    //TODO: BETTER // DEPRECIATE!!!
+    $scope.loadAssociations = function(){
+        $scope.associations = $scope.tasks.map(function(obj){
+            if (obj.project){return obj.project.title;}
+            if (obj.task){return obj.project.title;}
+            if (obj.user){return obj.user.username;}
+            if (obj.item){return obj.item.title;}
+            if (obj.order){return obj.order}
+        });
+        $scope.associations = [].concat.apply([], $scope.associations);
+        $scope.associations = $scope.associations.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadLocations = function(){
+        $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+    };
+    $scope.loadTags = function(){
+        $scope.tags = $scope.contentList.map(function(obj){
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    //IMPROVE :)
+    $scope.init = function(){
+        $scope.loadAssociations();
+        $scope.loadLocations();
+        $scope.loadTags();
+        $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+    };
+    $scope.init();
+    //FILTERSET
+
+
+
+    //WATCHERS
     //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
     $rootScope.$watch('searchQueryNav' ,function(newValue, oldValue){
         console.log($scope.searchQuery);
-
         if (newValue !== oldValue) {
             $scope.searchQuery = [];
             for(x in Object.keys($rootScope.searchQuery)){
@@ -225,17 +284,13 @@ angular.module( 'conexus.home', [
                 }
             }
         }
-
     }, true);
 
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
-
         if (newValue !== oldValue) {
-
             var query = {}
             query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
             $rootScope.stateIsLoading = true;
-
             //TODO: REMOVE BASED 64 STRING SEARCH
             SearchModel.search(query.search).then(function(models){
                 $rootScope.stateIsLoading = false;
@@ -244,8 +299,6 @@ angular.module( 'conexus.home', [
                     if (obj.tags){obj.tags = obj.tags.split(',');}
                 });
             });
-
-
             /*
             ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
                 $rootScope.stateIsLoading = false;
@@ -256,8 +309,10 @@ angular.module( 'conexus.home', [
             });
             */
         }
-
     }, true);
+    //WATCHERS
+
+
 
 }])
 
@@ -339,6 +394,7 @@ angular.module( 'conexus.home', [
     $scope.transactions = transactions;
 
     //IF NO PROJECTS OR W.E TUTORIAL IS TRUE
+    //NEW CONTROLLER
     $scope.isTutorial = true;
     if ($scope.isTutorial){
 
@@ -639,59 +695,6 @@ angular.module( 'conexus.home', [
     //TODO
     $scope.sortedLocationArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
 
-
-
-    //FILTERSET
-    //TODO: BETTER
-    $scope.loadAssociations = function(){
-        $scope.associations = $scope.contentList.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-        $scope.associations = [].concat.apply([], $scope.associations);
-        $scope.associations = $scope.associations.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedAssociationArray = [];
-        for (x in $scope.associations){
-            var amount = countInArray($scope.associations, $scope.associations[x]);
-            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
-                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
-            }
-        }
-        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    //$scope.loadAssociations();
-
-    //TODO: BETTER
-    $scope.loadTags = function(){
-        $scope.tags = $scope.contentList.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadTags();
-    $scope.sortedAssociationArray = $scope.sortedTagArray;
-    $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
-    //FILTERSET
-
-
-
-
     //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
         //$scope.balanceLook = $scope.balanceLook.toLowerCase();
@@ -726,11 +729,70 @@ angular.module( 'conexus.home', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
-    //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
+
+
+
+
+    //FILTERSET
+    //TODO: BETTER // DEPRECIATE!!!
+    $scope.loadAssociations = function(){
+        $scope.associations = $scope.tasks.map(function(obj){
+            if (obj.project){return obj.project.title;}
+            if (obj.task){return obj.project.title;}
+            if (obj.user){return obj.user.username;}
+            if (obj.item){return obj.item.title;}
+            if (obj.order){return obj.order}
+        });
+        $scope.associations = [].concat.apply([], $scope.associations);
+        $scope.associations = $scope.associations.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+            }
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    $scope.loadLocations = function(){
+        $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
+    };
+    $scope.loadTags = function(){
+        $scope.tags = $scope.contentList.map(function(obj){
+            var returnObj = {};
+            if(obj.tags){obj.tags = obj.tags.split(',')}
+            returnObj = obj.tags;
+            return returnObj;
+        });
+        $scope.tags = [].concat.apply([], $scope.tags);
+        $scope.tags = $scope.tags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedTagArray = [];
+        for (x in $scope.tags){
+            var amount = countInArray($scope.tags, $scope.tags[x]);
+            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+            }
+        }
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    };
+    //IMPROVE :)
+    $scope.init = function(){
+        $scope.loadAssociations();
+        $scope.loadLocations();
+        $scope.loadTags();
+        $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+    };
+    $scope.init();
+    //FILTERSET
+
+
+
+
+    //WATCHERS
     $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
         console.log($scope.searchQuery);
-
         if (newValue !== oldValue) {
             $scope.searchQuery = [];
             for(x in Object.keys($rootScope.searchQueryNav)){
@@ -739,17 +801,13 @@ angular.module( 'conexus.home', [
                 }
             }
         }
-
     }, true);
 
     $scope.$watch('searchQuery', function(newValue, oldValue){
-
         if (newValue !== oldValue) {
-
             var query = {}
             query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
             $rootScope.stateIsLoading = true;
-
             //TODO: REMOVE BASED 64 STRING SEARCH
             SearchModel.search(query.search).then(function(models){
                 $rootScope.stateIsLoading = false;
@@ -758,8 +816,6 @@ angular.module( 'conexus.home', [
                     if (obj.tags){obj.tags = obj.tags.split(',');}
                 });
             });
-
-
             /*
             ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
                 $rootScope.stateIsLoading = false;
@@ -770,7 +826,10 @@ angular.module( 'conexus.home', [
             });
             */
         }
-
     }, true);
+    //WATCHERS
+
+
+
 
 }]);

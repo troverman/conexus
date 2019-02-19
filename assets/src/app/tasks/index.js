@@ -138,7 +138,6 @@ angular.module( 'conexus.tasks', [
         $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
     $scope.loadLocations = function(){
-
         $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
     };
     $scope.loadTags = function(){
