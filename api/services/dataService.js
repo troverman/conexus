@@ -474,17 +474,14 @@ module.exports = {
 		};
 
 		function path(start, finish){
-
 		};
 
 		//VECTOR
 		function valueMatrix(amount, identiferSet){
 
 			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-
 				var dimObj = {identiferSet:identiferSet, amountSet:amount, rank:identiferSet.split(',').length, data:[]};
 				var matrix = amount;
-
 				for (x in orderModels){
 					if (orderModels[x].identiferSet1.split(',').length==1){
 						//var data = [];
@@ -501,7 +498,6 @@ module.exports = {
 						//dimObj.data.push(data);
 					}
 				}
-
 				console.log(dimObj);
 
 				//TODO: ENCODE ORDER BOOK GRADIENT | AMOUNT --> THE VECTOR IS FUNCTIONAL --> DISCRITIZED FXN
@@ -511,7 +507,6 @@ module.exports = {
 				//valueMatrixTensor.print();
 
 			});
-
 		};
 
 		//TENSOR CONNECTIONS --> SHIFT IN DIMENSIONALITY --> NOT GOING TO DO CONVERSIONS --> USED FOR RESHAPING (IE TENSOR PRODUCT)
@@ -570,15 +565,11 @@ module.exports = {
 						if (recursion < depth){
 							valueTensor(orderModels[x].identiferSet1, totalDimObj, recursion, depth, x);
 						}
-
 					}
-
 				}
-
 				totalDimObj.push(dimObj);
 				console.log(totalDimObj)
 				//console.log(dimObj, totalDimObj);
-
 			});
 		};
 
@@ -625,10 +616,8 @@ module.exports = {
 		function generateStringSpace(){
 
 			console.log('GENERATE STRING SPACE!');
-
 			//WALK THE THE ASSOCIATIONS :) 
 			//LET'S START! 
-
 			//PROJECTMEMBER
 			var promises = [
 				Content.find().limit(100000).skip(0).sort('createdAt DESC'),
@@ -641,7 +630,6 @@ module.exports = {
 				Transaction.find().limit(100000).skip(0).sort('createdAt DESC'),
 				Validation.find().limit(100000).skip(0).sort('createdAt DESC')
 			];
-
 			Q.all(promises)
 			.then(function(data){
 
@@ -1521,7 +1509,6 @@ module.exports = {
 
 				//ASSOCIATIONS ARE THE CHALLANGE
 
-
 				var onMintList = JSON.parse(JSON.stringify(tokenSet));
 				for (n in onMintList){
 					onMintList[n].string = onMintList[n].string+'+ONMINT';
@@ -1558,7 +1545,7 @@ module.exports = {
 		};
 
 		//WERKIN
-		function associationModification(){
+		function modification(){
 
 			//Project.find().limit(10000).then(function(models){
 			//	for (x in models){
@@ -1710,66 +1697,59 @@ module.exports = {
 			//	}
 			//});
 
-		};
+			/*
+			Project.find().limit(5000).skip(0).then(function(projectModels){
+				for (x in projectModels){
 
-		Project.find().limit(5000).skip(0).then(function(projectModels){
-			for (x in projectModels){
-
-				//GEOCODE THEN
-				//GEOCODE ON CREATE.. UTIL
-				if (projectModels[x].location){
-					if (typeof projectModels[x].location === 'string' || projectModels[x].location instanceof String){
-						const googleMapsClient = require('@google/maps').createClient({
-						  key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-						});
-						(function(x, projectModels){
-							googleMapsClient.geocode({address: projectModels[x].location}, function(err, response) {
-								if (!err) {
-									var location = {
-										address:response.json.results[0].formatted_address,
-										lat:response.json.results[0].geometry.location.lat,
-										lng:response.json.results[0].geometry.location.lng,
-									};
-									console.log(location, projectModels[x].id);
-									Project.update({id:projectModels[x].id}, {location:location}).then(function(model){
-										console.log('update')
-									});
-								}
+					//GEOCODE THEN
+					//GEOCODE ON CREATE.. UTIL
+					if (projectModels[x].location){
+						if (typeof projectModels[x].location === 'string' || projectModels[x].location instanceof String){
+							const googleMapsClient = require('@google/maps').createClient({
+							  key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
 							});
-						})(x, projectModels);
+							(function(x, projectModels){
+								googleMapsClient.geocode({address: projectModels[x].location}, function(err, response) {
+									if (!err) {
+										var location = {
+											address:response.json.results[0].formatted_address,
+											lat:response.json.results[0].geometry.location.lat,
+											lng:response.json.results[0].geometry.location.lng,
+										};
+										console.log(location, projectModels[x].id);
+										Project.update({id:projectModels[x].id}, {location:location}).then(function(model){
+											console.log('update')
+										});
+									}
+								});
+							})(x, projectModels);
+						}
+						else{}
 					}
 					else{}
 				}
-				else{}
+			});
+			*/
 
-			}
-		});
+		};
 
-		//associationModification();
-
+		//modification();
 		//generateStringSpace();
 
 		//train('A', 0, 8);
 		//train('A', 0, 3);
-
 		//VALUE MATRIX | 2ND ORDER
 		//valueMatrix([1], 'A');
 		//valueMatrix([1,1], 'B,A');
-
 		//YES
 		//valueTensor('A', [], 0, 2)
-
 		//tensorTesting('B,A');
-
 		//PUZZLE
 		//[a,b]->[c,d]
-
 		//powersetDecompose(['A','B','C', ['A','B'], ['B','C'], ['A','C'], ['A','B','C']], {});
 		//identityWalk('A', 0, 3);
-
 		//path('A','C,D');
 		//traverse('A');
-
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
 
@@ -1928,7 +1908,6 @@ module.exports = {
 			//STRUCTURE AS RECURSIVE.
 
 		})
-
 	},
 
 	//TO BE REPLACED BY LATTICE OPERATIONS

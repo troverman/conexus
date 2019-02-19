@@ -48,9 +48,6 @@ angular.module( 'conexus.tasks', [
         return obj;
     });
 
-    //TODO: ALL
-    $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
-
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
@@ -94,9 +91,7 @@ angular.module( 'conexus.tasks', [
                 }
                 return obj;
             });
-            $scope.tasks = tasks;
-            $scope.loadAssociations();
-            $scope.loadTags();
+            $scope.init();
         });
     };
 
@@ -122,8 +117,7 @@ angular.module( 'conexus.tasks', [
                 return obj;
             });
             Array.prototype.push.apply($scope.tasks, tasks);
-            $scope.loadAssociations();
-            $scope.loadTags();
+            $scope.init();
         });
     };
 
@@ -143,13 +137,10 @@ angular.module( 'conexus.tasks', [
         }
         $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
-    $scope.loadAssociations();
-
     $scope.loadLocations = function(){
+
         $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
     };
-
-    //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.tasks.map(function(obj){
             return obj.tags;
@@ -164,12 +155,17 @@ angular.module( 'conexus.tasks', [
                 $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
             }
         }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        
-    }
-    $scope.loadTags();
+        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});     
+    };
 
-    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray}
+    //IMPROVE :)
+    $scope.init = function(){
+        $scope.loadAssociations();
+        $scope.loadLocations();
+        $scope.loadTags();
+        $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+    };
+    $scope.init();
 
     $scope.reply = function(item){
         if ($scope.currentUser){
@@ -208,37 +204,43 @@ angular.module( 'conexus.tasks', [
 
     //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
     //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
-    $rootScope.$watch('searchQuery' ,function(){
+    $rootScope.$watch('searchQueryNav' ,function(){
 
         $scope.searchQuery = [];
-        for(x in Object.keys($rootScope.searchQuery)){
-            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
-                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+        for(x in Object.keys($rootScope.searchQueryNav)){
+            for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+                if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
+                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y]);
+                }
             }
         }
 
     }, true);
 
-    $scope.$watch('searchQuery' ,function(){
+    $scope.$watch('searchQuery' ,function(newValue, oldValue){
 
-        //$scope.searchQuery.map(function(obj){if (!obj.type){obj.type = 'QUERY'} return obj })
-        //console.log($scope.searchQuery);
-        $rootScope.stateIsLoading = true;
-        var query = {}
-        query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        TaskModel.getSome('search', query.search, 20, 0, 'createdAt DESC').then(function(models){
-            $rootScope.stateIsLoading = false;
-            console.log(models)
-            $rootScope.stateIsLoading = false;
-            $scope.tasks = models.map(function(obj){
-                obj.model = 'TASK';
-                if (obj.tags){obj.tags = obj.tags.split(',')}
-                return obj;
+        if (newValue !== oldValue) {
+
+            //LOCATION IS BY ASSOCIATED PROJECT(S)
+            $rootScope.stateIsLoading = true;
+            var query = {}
+            query.search = $scope.searchQuery.map(function(obj){
+                if (!obj.query && obj.text){obj.query = obj.text}
+                return obj.query
+            }).join(',');
+            console.log(query.search)
+            TaskModel.getSome('search', query.search, 20, 0, 'createdAt DESC').then(function(models){
+                console.log(models)
+                $rootScope.stateIsLoading = false;
+                $scope.tasks = models.map(function(obj){
+                    obj.model = 'TASK';
+                    if (obj.tags){obj.tags = obj.tags.split(',')}
+                    return obj;
+                });
+                $scope.init();
             });
-            $scope.loadAssociations();
-            $scope.loadLocations();
-            $scope.loadTags();
-        });
+
+        }
 
     }, true);
 

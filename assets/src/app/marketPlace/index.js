@@ -29,9 +29,21 @@ angular.module( 'conexus.marketPlace', [
     $scope.selectedSort = 'createdAt DESC';
     $scope.selectedTag = '';
     $scope.skip = 0;
+    $scope.sortedLocationArray = [{element:'Knoxville, TN'}, {element:'New York City'}, {element:'Chapel Hill'}];
 
-    $scope.sortedLocationArray = ['Knoxville, TN', 'New York City', 'Chapel Hill'];
+    $rootScope.$watch('searchQueryNav' ,function(){
 
+        //NEW VALUE VS OLD VALUE VS BLANK
+        //if ($scope.searchQuery!=''){
+            $scope.searchQuery = [];
+            for(x in Object.keys($rootScope.searchQueryNav)){
+                for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
+                }
+            }
+        //}
+
+    }, true);
 
     //TODO: BETTER
     $scope.loadAssets = function(){
@@ -76,20 +88,7 @@ angular.module( 'conexus.marketPlace', [
     };
     $scope.loadTags();
 
-    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, location:$scope.sortedLocationArray}
-
-
-
-
-    $scope.createItem = function () {
-    	if ($scope.currentUser){
-    		$scope.newItem.user = $scope.currentUser.id;
-	    	ItemModel.create($scope.newItem).then(function(){
-	    		$scope.newItem = {};
-	    	});
-	    }
-        else{$mdSidenav('login').toggle()}
-    };
+    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationArray}
 
     $scope.createReaction = function(item, type){
         if($scope.currentUser){
@@ -106,9 +105,7 @@ angular.module( 'conexus.marketPlace', [
     };
 
     $scope.filterContent = function(filter) {
-
         $scope.searchQuery.push({text:filter})
-
         $rootScope.stateIsLoading = true;
         ItemModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(items){
             $rootScope.stateIsLoading = false;

@@ -214,26 +214,23 @@ angular.module( 'conexus.home', [
 
     
     //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
-    //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
-    $rootScope.$watch('searchQuery' ,function(){
+    $rootScope.$watch('searchQueryNav' ,function(newValue, oldValue){
         console.log($scope.searchQuery);
 
-        //NEW VALUE VS OLD VALUE VS BLANK
-        if ($scope.searchQuery!=''){
+        if (newValue !== oldValue) {
             $scope.searchQuery = [];
             for(x in Object.keys($rootScope.searchQuery)){
-                for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
-                    $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+                for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
                 }
             }
         }
 
     }, true);
 
-    $scope.$watch('searchQuery' ,function(){
+    $scope.$watch('searchQuery' ,function(newValue, oldValue){
 
-        //NEW VALUE VS OLD VALUE VS BLANK
-        if ($scope.searchQuery!=''){
+        if (newValue !== oldValue) {
 
             var query = {}
             query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
@@ -731,25 +728,23 @@ angular.module( 'conexus.home', [
 
     //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
     //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
-    $rootScope.$watch('searchQuery' ,function(){
+    $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
         console.log($scope.searchQuery);
 
-        //NEW VALUE VS OLD VALUE VS BLANK
-        if ($scope.searchQuery!=''){
+        if (newValue !== oldValue) {
             $scope.searchQuery = [];
-            for(x in Object.keys($rootScope.searchQuery)){
-                for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
-                    $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+            for(x in Object.keys($rootScope.searchQueryNav)){
+                for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
                 }
             }
         }
 
     }, true);
 
-    $scope.$watch('searchQuery' ,function(){
+    $scope.$watch('searchQuery', function(newValue, oldValue){
 
-        //NEW VALUE VS OLD VALUE VS BLANK
-        if ($scope.searchQuery!=''){
+        if (newValue !== oldValue) {
 
             var query = {}
             query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');

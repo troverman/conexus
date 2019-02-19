@@ -4486,29 +4486,29 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    -->\n" +
     "\n" +
     "                    <p><b>Tags</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"searchQuery.tags\">\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"searchQueryNav.tags\">\n" +
     "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"asset in item.tags.slice(0,10)\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectTag(asset.element)\">{{asset.element}}</a>\n" +
+    "                    <div ng-repeat=\"item in item.tags.slice(0,10)\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(item.element)\">{{item.element}}</a>\n" +
     "                    </div>\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <p><b>Associations</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"searchQuery.associations\">\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"searchQueryNav.associations\">\n" +
     "                        <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"asset in item.associations.slice(0,10)\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectAssociation(asset.element)\">{{asset.element}}</a>\n" +
+    "                    <div ng-repeat=\"item in item.associations.slice(0,10)\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectAssociation(item.element)\">{{item.element}}</a>\n" +
     "                    </div>\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <p><b>Locations</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Locations\" ng-model=\"searchQuery.locations\">\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Locations\" ng-model=\"searchQueryNav.locations\">\n" +
     "                        <auto-complete source=\"loadLocation($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"asset in item.locations.slice(0,10)\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectLocation(asset.element)\">{{asset.element}}</a>\n" +
+    "                    <div ng-repeat=\"item in item.locations.slice(0,10)\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectLocation(item.element)\">{{item.element.address}}</a>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div layout=\"\">\n" +
@@ -4636,7 +4636,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                    <h5>Location</h5>\n" +
-    "                    <input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
+    "                    <input placeholder=\"Location\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
     "                    <h5>Tradable</h5>\n" +
     "                    <md-switch ng-model=\"tradable\" aria-label=\"GPS Tracking\"></md-switch>\n" +
     "                    <h5>Identifer Set <a ng-click=\"informationToggle('IDENTIFERSET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +

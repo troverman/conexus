@@ -12,7 +12,7 @@ angular.module( 'conexus.projects', [
 		},
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome('location', [0,0], 100, 0, 'createdAt DESC');
+                return ProjectModel.getSome('', '', 100, 0, 'createdAt DESC');
             }]
         }
 	});
@@ -21,12 +21,12 @@ angular.module( 'conexus.projects', [
 .controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
 	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.newProject = {};
-    $scope.newProjectToggleVar = false;
+    $scope.projects = projects;
+
     $scope.selectedSort = 'createdAt DESC';
+    $scope.searchQuery = [];
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','memberCount DESC': 'Member Count'}
-    $scope.projects = projects;
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -35,12 +35,26 @@ angular.module( 'conexus.projects', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
+    $scope.populateMap = function(){
+        for (x in projects){
+            if (projects[x].location){
+                $scope.markers.push({
+                    id:projects[x].id,
+                    content:projects[x].title,
+                    url:projects[x].urlTitle,
+                    coords:{
+                        latitude:projects[x].location.lat,
+                        longitude:projects[x].location.lng
+                    }
+                });
+            }
+        }
+    };
+
     $scope.getLatLng = function() {
         if (navigator.geolocation) {
             $rootScope.stateIsLoading = true;
-            console.log(navigator.geolocation)
             navigator.geolocation.getCurrentPosition(function (position) {
-                console.log(position)
                 $rootScope.stateIsLoading = false;
                 lat = position.coords.latitude; 
                 lng = position.coords.longitude;
@@ -52,42 +66,16 @@ angular.module( 'conexus.projects', [
                 ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
                     $scope.projects = projects;
                     $scope.markers = [];
-                    for (x in projects){
-                        if (projects[x].location){
-                            $scope.markers.push({
-                                id:projects[x].id,
-                                content:projects[x].title,
-                                url:projects[x].urlTitle,
-                                coords:{
-                                    latitude:projects[x].location.lat,
-                                    longitude:projects[x].location.lng
-                                }
-                            });
-                        }
-                    }
+                    $scope.populateMap();
+                    $scope.init();
                  });
                 $scope.$apply();
             });
         }
     };
-
     $scope.getLatLng();
-    
     //TODO: BETTER | BETTER QUERIES
-    for (x in projects){
-        if (projects[x].location){
-            console.log(projects[x].title, projects[x].location)
-            $scope.markers.push({
-                id:projects[x].id,
-                content:projects[x].title,
-                url:projects[x].urlTitle,
-                coords:{
-                    latitude:projects[x].location.lat,
-                    longitude:projects[x].location.lng
-                }
-            });
-        }
-    }
+    $scope.populateMap();
 
     //IMPROVE :)
     $scope.loadAssociations = function(){        
@@ -101,8 +89,6 @@ angular.module( 'conexus.projects', [
         }
         $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
-    $scope.loadAssociations();
-
     $scope.loadLocations = function(){
         $scope.tags = $scope.projects.map(function(obj){
             return obj.location;
@@ -119,8 +105,6 @@ angular.module( 'conexus.projects', [
         }
         $scope.sortedLocationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
-    $scope.loadLocations();
-
     $scope.loadTags = function(){
         $scope.tags = $scope.projects.map(function(obj){
             var returnObj = {};
@@ -140,20 +124,16 @@ angular.module( 'conexus.projects', [
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
-    $scope.loadTags();
+
     //IMPROVE :)
-
-    $scope.filterSet = {associations:$scope.sortedTransactionAssets, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
-
-    $scope.createProject = function(newProject) {
-        if ($scope.currentUser){
-            $scope.newProject.user = $scope.currentUser.id;
-            ProjectModel.create($scope.newProject).then(function(model) {
-                $scope.newProject = {};
-            });
-        }
-        else{$mdSidenav('login').toggle()}
+    $scope.init = function(){
+        $scope.loadAssociations();
+        $scope.loadLocations();
+        $scope.loadTags();
+        $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
     };
+    $scope.init();
+
 
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
@@ -162,13 +142,6 @@ angular.module( 'conexus.projects', [
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.projects, projects);
         });
-    };
-
-    $scope.newProjectToggle = function () {
-        if ($scope.currentUser){
-            $scope.newProjectToggleVar = $scope.newProjectToggleVar ? false : true;
-        }
-        else{$mdSidenav('login').toggle()}
     };
 
     $scope.search = function(){
@@ -189,40 +162,66 @@ angular.module( 'conexus.projects', [
         });
     };
 
-
-
     //FIX THIS
-    $rootScope.$watch('searchQuery' ,function(){
-
-        $scope.searchQuery = [];
-        for(x in Object.keys($rootScope.searchQuery)){
-            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
-                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+    $rootScope.$watch('searchQueryNav' ,function(){
+        for(x in Object.keys($rootScope.searchQueryNav)){
+            for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+                if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
+                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
+                }
             }
+        }
+    }, true);
+
+    //UNIFY^v .. //compute ^^^ in NAV FROM OBJ --> THEN ROOT
+
+    //SHOULD BE ROOT?
+    $scope.$watch('searchQuery' ,function(newValue, oldValue){
+
+        if (newValue !== oldValue) {
+
+            $rootScope.stateIsLoading = true;
+            var query = {}
+            query.search = $scope.searchQuery.map(function(obj){
+                if (!obj.query && obj.text){obj.query = obj.text}
+                if (!obj.type){obj.type='STRING'}
+                return obj.query
+            }).join(',');
+
+            console.log(query.search);
+
+            //TODO SEARCH.. :o
+            var searchModel = {};
+            searchModel.model = 'PROJECT';
+            searchModel.limit = 100;
+            searchModel.skip = 0;
+            searchModel.sort = 'createdAt DESC';
+            searchModel.query = $scope.searchQuery;
+            //SearchModel.search(searchModel).then(function(models){
+            //    console.log(models);
+            //});
+
+            //GENERALIZED SEARCH QUERY.. AKA IN SEARCH BAR
+
+            ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
+                $rootScope.stateIsLoading = false;
+                $scope.projects = models;
+                $scope.init();
+            });
+
+            //BAD TEST
+            //console.log($rootScope.searchQueryNav);
+            //ProjectModel.getSome('location', $rootScope.searchQueryNav.locations[0].query.coordinates, 100, 0, 'createdAt DESC').then(function(models){
+            //    $rootScope.stateIsLoading = false;
+            //    $scope.projects = models;
+            //    $scope.init();
+            //});
+
         }
 
     }, true);
 
-    $scope.$watch('searchQuery' ,function(){
-
-        $scope.searchQuery.map(function(obj){if (!obj.type){obj.type = 'QUERY'} return obj })
-        console.log($scope.searchQuery);
-        $rootScope.stateIsLoading = true;
-        var query = {}
-        //query = [{type:'query', value:'searchQuery'},{type:'location', value:{}, distance:10}, type:'tag',value:'cool'}];
-        query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        //ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
-        //    $rootScope.stateIsLoading = false;
-        //    $scope.projects = models;
-        //    $scope.loadAssociations();
-        //    $scope.loadLocations();
-        //    $scope.loadTags();
-        //});
-
-    }, true);
-
-
-
+    //FOR PROJECTS.. WATCH THE ROOT.. UNIFY WITH IT
 
     $sailsSocket.subscribe('project', function (envelope) {
         switch(envelope.verb) {

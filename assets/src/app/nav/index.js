@@ -67,14 +67,14 @@ angular.module( 'conexus.nav', [
         zoom: 9
     };
 
-   // $rootScope.searchQuery = {
-   //     assetsInput:[],
-   //     assetsOutput:[],
-   //     associations:[],
-   //     locations:[],
-   //     query:[],
-   //     tags:[],
-   // };
+    $rootScope.searchQueryNav = {
+        assetsInput:[],
+        assetsOutput:[],
+        associations:[],
+        locations:[],
+        query:[],
+        tags:[],
+    };
 
     $rootScope.selectedTags = [];
     $rootScope.selectedAssets = [];
@@ -294,6 +294,78 @@ angular.module( 'conexus.nav', [
 
     $rootScope.filterToggle = function(type, item){
 
+        //TODO: CONTAIN IN NAV -- > AS ROOT SCOPE.. 
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.loadAssociations = function(){        
+            $scope.sortedAssociationArray = [];
+            for (x in $scope.associations){
+                var amount = countInArray($scope.associations, $scope.associations[x]);
+                if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
+                    $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+                }
+            }
+            $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        };
+        $scope.loadLocations = function(){
+            $scope.tags = $scope.projects.map(function(obj){
+                return obj.location;
+            });
+            $scope.tags = [].concat.apply([], $scope.tags);
+            $scope.tags = $scope.tags.filter(function(e){return e});
+            $scope.sortedLocationArray = [];
+            for (x in $scope.tags){
+                var amount = countInArray($scope.tags, $scope.tags[x]);
+                if ($scope.sortedLocationArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                    $scope.sortedLocationArray.push({amount:amount, element:$scope.tags[x]})
+                }
+            }
+            $scope.sortedLocationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        };
+        $scope.loadTags = function(){
+            $scope.tags = $scope.projects.map(function(obj){
+                var returnObj = {};
+                if(obj.tags){obj.tags = obj.tags.split(',')}
+                returnObj = obj.tags;
+                return returnObj;
+            });
+            $scope.tags = [].concat.apply([], $scope.tags);
+            $scope.tags = $scope.tags.filter(function(e){return e});
+            $scope.sortedTagArray = [];
+            for (x in $scope.tags){
+                var amount = countInArray($scope.tags, $scope.tags[x]);
+                if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
+                    $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+                }
+            }
+            $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        };
+        //IMPROVE :)
+        $scope.init = function(){
+            $scope.loadAssociations();
+            $scope.loadLocations();
+            $scope.loadTags();
+            $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+        };
+        //$scope.init();
+
+        //TODO
+        $scope.populateMap = function(){
+            for (x in projects){
+                if (projects[x].location){
+                    $scope.markers.push({
+                        id:projects[x].id,
+                        content:projects[x].title,
+                        url:projects[x].urlTitle,
+                        coords:{
+                            latitude:projects[x].location.lat,
+                            longitude:projects[x].location.lng
+                        }
+                    });
+                }
+            }
+        };
+        //$scope.populateMap();
+
         //TODO
         $scope.locationFilter = {};
         $scope.locationFilter.distance = 10;
@@ -308,9 +380,25 @@ angular.module( 'conexus.nav', [
             }
         };
 
+        //TEST
+        //$scope.$watch('$root.searchQueryNav.associations', function(newValue, oldValue) {
+        //    console.log('yo')
+        //    if (newValue !== oldValue) {
+                //console.log(newValue);
+                //$rootScope.searchQueryNav.associations.indexOf
+        //    }
+        //});
+
         $scope.selectAssociation = function(item){
-            if ($rootScope.searchQuery.associations.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $rootScope.searchQuery.associations.push({text:'Assocation | '+item, query:item});
+            if ($rootScope.searchQueryNav.associations.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.searchQueryNav.associations.push({
+                    text:'Assocation | '+item, 
+                    query:item, 
+                    type:'ASSOCIATION'
+                });
+
+                //$scope.init();
+
                 $scope.item.associations = $scope.item.associations.filter(function(obj) { 
                     return obj.element !== item
                 });
@@ -318,8 +406,16 @@ angular.module( 'conexus.nav', [
         };
 
         $scope.selectLocation = function(item){
-            if ($rootScope.searchQuery.locations.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $rootScope.searchQuery.locations.push({text:'Location, '+$scope.locationFilter.distance+' | '+item, query:item});
+            if ($rootScope.searchQueryNav.locations.map(function(obj){return obj.text}).indexOf(item)==-1){
+                item.distance = $scope.locationFilter.distance;
+                $rootScope.searchQueryNav.locations.push({
+                    text:'Location, '+$scope.locationFilter.distance+' | '+item.address, 
+                    query:item, 
+                    type:'LOCATION'
+                });
+
+                //$scope.init();
+
                 $scope.item.locations = $scope.item.locations.filter(function(obj) { 
                     return obj.element !== item
                 });
@@ -327,19 +423,52 @@ angular.module( 'conexus.nav', [
         };
 
         $scope.selectTag = function(item){
-            if ($rootScope.searchQuery.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $rootScope.searchQuery.tags.push({text:'Tag | '+item, query:item});
+            //DO A FILTER OF SEARCHQUERY OF TYPE TAGS
+            if ($rootScope.searchQueryNav.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.searchQueryNav.tags.push({
+                    text:'Tag | '+item, 
+                    query:item, 
+                    type:'TAG'
+                });
+
+                //$scope.init();
+
                 $scope.item.tags = $scope.item.tags.filter(function(obj) { 
                     return obj.element !== item
                 });
             }
         };
 
+        //$rootScope.$watch('searchQueryNav' ,function(){
+        //    $rootScope.searchQuery = [];
+        //    for(x in Object.keys($rootScope.searchQueryNav)){
+        //        for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+        //            if ($rootScope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
+        //                $rootScope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
+        //            }
+        //        }
+        //    }
+        //    console.log($rootScope.searchQuery);
+            //REFACTOR SEARCH MODEL
+            //if project
+                //ProjectModel.search
+            //if items
+                //ItemModel.search
+            //if content
+                //ContentModel.search
+            //if tasks
+                //TaskModel.search
+            //else{}
+                //SearchModel.search
+            //$rootScope.projects = [];
+            //console.log('we here');
+        //}, true);
+
         //POSTIONS / MARKETS
         //LEDGER
         $scope.item = item;
         $scope.type = type;
-        $mdSidenav('filter').toggle()
+        $mdSidenav('filter').toggle();
 
     };
 
