@@ -15,7 +15,7 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
         if (type=='search'){query = {params:{query:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='location'){query = {params:{location:filter,limit:limit,skip:skip,sort:sort}};}
 
-
+        
 
         return $sailsSocket.get(url, query).then(success, error);
     };

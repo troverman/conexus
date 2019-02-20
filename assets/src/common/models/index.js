@@ -3,6 +3,7 @@ angular.module('models', [
 	'models.follower',
 	'models.item',
 	'models.member',
+	'models.notification',
 	'models.order',
 	'models.project',
 	'models.reaction',

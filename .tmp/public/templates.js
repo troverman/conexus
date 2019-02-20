@@ -3298,7 +3298,8 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
   $templateCache.put("member/templates/activity.tpl.html",
     "<div class=\"row\">\n" +
     "\n" +
-    "     <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <!--\n" +
+    "    <div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
@@ -3316,8 +3317,9 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    -->\n" +
     "\n" +
-    "    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "        <!--\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
@@ -4705,16 +4707,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </form>\n" +
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
     "                <h2 class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
-    "                <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/content\">Content</a></h2>-->\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/projects\">Projects</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
-    "                <!--<h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/transparency\">Transparency</a></h2>-->\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/notifications\">Notifications</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/notifications\"><!--<span class=\"label label-danger\">5</span>--> Notifications</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/account\">Settings</a></h2>\n" +
-    "                <!--<h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/\">Vote</a></h2>-->\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/logout\">Logout</a></h2>\n" +
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
     "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
@@ -5106,7 +5105,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                    </a>\n" +
     "                                </td>\n" +
     "                                <!--<td>{{item.task.title.toUpperCase()}} <i class=\"fa fa-arrows-h\"></i>{{item.project.title.toUpperCase()}}</td>-->\n" +
-    "                                <td>{{validation.associatedModels[0].address}} <i class=\"fa fa-arrows-h\"></i>{{validation.associatedModels[1].address}}</td>\n" +
+    "                                <td>{{validation.associatedModels[0].address}} <i class=\"fa fa-arrows-h\"></i> {{validation.associatedModels[1].address}}</td>\n" +
     "                                <td>General</td>\n" +
     "                                <td>{{validation.validation.general}}</td>\n" +
     "                                <td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
@@ -5677,6 +5676,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <span class=\"icon-bar\"></span>\n" +
     "                    <span class=\"icon-bar\"></span>\n" +
     "                </button>\n" +
+    "                <!--<span class=\"\" style=\"\"><span class=\"label label-danger\">5</span></span>-->\n" +
+    "\n" +
     "\n" +
     "                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
     "                <div ng-show=\"true\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
@@ -5704,6 +5705,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
     "                    <li ng-click=\"sideNavToggle()\">\n" +
     "                        <!--TODO: NOTIFICATIONS-->\n" +
+    "                        <!--<span style=\"float:left:margin-top:14px;\"><span class=\"label label-danger\">5</span></span>-->\n" +
     "                        <button class=\"navIcon\" type=\"button\" style=\"margin-top:4px;\">\n" +
     "                            <span class=\"sr-only\">Toggle navigation</span>\n" +
     "                            <span class=\"icon-bar\"></span>\n" +
@@ -5748,13 +5750,23 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	<div class=\"row\" ng-show=\"notifications.length > 0\">\n" +
     "\n" +
     "		<!--\n" +
+    "		<h4>x Unread</h4>\n" +
     "		<h4>Today</h4>\n" +
     "		<h4>Yesterday</h4>\n" +
     "		<h4>This Week</h4>\n" +
     "		<h4>Earlier</h4>\n" +
     "		-->\n" +
     "\n" +
+    "		<!--if unread-->\n" +
     "		<div ng-repeat=\"notification in notifications\" class=\"card\" ng-click=\"\">\n" +
+    "	        <div style=\"padding:16px;\">\n" +
+    "	            <h5>{{notification.type}}</h5>\n" +
+    "	            <p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
+    "	            <!--if type is new follower; follow btn-->\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
+    "\n" +
+    "		<div ng-repeat=\"notification in notificationsStatic\" class=\"card\" ng-click=\"\">\n" +
     "	        <div style=\"padding:16px;\">\n" +
     "	            <h5>{{notification.title}}</h5>\n" +
     "	            <p><span style=\"color:gray\">{{notification.description}}</span></p>\n" +
@@ -8490,7 +8502,12 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "					<h5 style=\"text-align:right\" ng-click=\"renderValidationToggle(validation)\"><a>Associations & Validations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "				</div>\n" +
     "\n" +
-    "				<h3> MODEL A <i class=\"fa fa-arrows-h\"></i> MODEL B</h3>\n" +
+    "				<!--TODO-->\n" +
+    "				<h3> \n" +
+    "					<span><a href=\"{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.task.title}}</a></span> \n" +
+    "					<i class=\"fa fa-arrows-h\"></i> \n" +
+    "					<span><a href=\"{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}\">{{validation.associatedModels[1].info.project.title}}</a></span>\n" +
+    "				</h3>\n" +
     "\n" +
     "				<a href=\"member/{{validation.user.username}}\">\n" +
     "					<img class=\"card-avatar\" src=\"{{validation.user.avatarUrl}}\"/>\n" +
@@ -8501,9 +8518,14 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "				<!--TODO: ABSTRACT MODEL | POPULATE VALIDATIONS-->\n" +
     "				<!--ERR-->\n" +
+    "				\n" +
+    "				<!--\n" +
     "				<p ng-repeat=\"model in validation.associatedModels\">\n" +
-    "					<a href=\"{{model.type.toLowerCase()}}/{{model.address}}\">{{model.type}} | {{model.address}}</a>\n" +
+    "					<a href=\"{{model.type.toLowerCase()}}/{{model.address}}\">\n" +
+    "						{{model.type}} | {{model.address}}\n" +
+    "					</a>\n" +
     "				</p>\n" +
+    "				-->\n" +
     "				\n" +
     "				<!--TAGS ARE ASSOCIATIONS. . -->\n" +
     "				<!--\n" +

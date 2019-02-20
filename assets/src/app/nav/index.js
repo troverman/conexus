@@ -16,28 +16,12 @@ angular.module( 'conexus.nav', [
     $scope.validationColumnRender = {};
     //$rootScope.currentUser = config.currentUser;
 
-
-
-
-    // TODO: NOTIFICATIONS
-    // REQUEST TO VALIDATE (ON SUB TIME TO SUBD PROJECTS ((--> TASKS)), 
-    // REQUEST TO VALIDATE (JOIN), 
-    // NEW FOLLOWER(?), 
-    // POSTED ON PROFILE / REQUEST TO POST TO PROF, 
-    // NEW MESSAGE ?
-    // NEW CONTENT IN SUBD PROJECT
-    // NEW VALIDATATION ON TIME (MEMBER VALIDATED YOU)
-    // ORDER PROCESSED / ACTIVITY
-    // TRANSACTION (TO YOU (IF SUBD))
-    // NEW ORDER (ITEM PURCHASED)
-    // X IS LIVE NOW ( FOLLOWING (SUB) )
-    // INVITATION TO JOIN?
-
-    $scope.pop = function(){
+    //TODO: NOTIFICATIONS
+    $scope.pop = function(title, body){
         toaster.pop({
-            type:'success',//info, wait, success, warning
-            title: 'REQUEST TO VALIDATE',
-            body: 'TROVERMAN SUBMITTED NEW TIME TO {TASK}', // VALIDATE X POST
+            type:'success', //info, wait, success, warning
+            title: title,
+            body: body,//'TROVERMAN SUBMITTED NEW TIME TO {TASK}', // VALIDATE X POST
             onShowCallback: function (toast) { 
                 //PLAY SOUND
                 var audio = new Audio('audio/ping.mp3');
@@ -53,13 +37,12 @@ angular.module( 'conexus.nav', [
         switch(envelope.verb) {
             case 'created':
             //if logged in user
-            $scope.pop();
+            //HAS TO BE BETTER THAN SOCKET CHECK --> THIS IS RED HOT AT SCALE ,, lol ,, personal notification room vs whole -- TODO: REDO !
+            //$scope.currentUser.id
+            console.log(envelope)
+            $scope.pop('New Follower', envelope);
         }
     });
-
-
-
-
 
 
     $scope.map = {

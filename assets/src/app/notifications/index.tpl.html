@@ -22,13 +22,23 @@
 	<div class="row" ng-show="notifications.length > 0">
 
 		<!--
+		<h4>x Unread</h4>
 		<h4>Today</h4>
 		<h4>Yesterday</h4>
 		<h4>This Week</h4>
 		<h4>Earlier</h4>
 		-->
 
+		<!--if unread-->
 		<div ng-repeat="notification in notifications" class="card" ng-click="">
+	        <div style="padding:16px;">
+	            <h5>{{notification.type}}</h5>
+	            <p><span style="color:gray">{{notification.content}}</span></p>
+	            <!--if type is new follower; follow btn-->
+	        </div>
+	    </div>
+
+		<div ng-repeat="notification in notificationsStatic" class="card" ng-click="">
 	        <div style="padding:16px;">
 	            <h5>{{notification.title}}</h5>
 	            <p><span style="color:gray">{{notification.description}}</span></p>

@@ -9,8 +9,8 @@ module.exports = {
 	getSome: function(req, res) {},
 
 	getFollowers: function(req, res) {
-		var FollowedId = req.param('id');
-		Follower.getFollowers(FollowedId)
+		var followedId = req.param('id');
+		Follower.getFollowers(followedId)
 		.spread(function(models) {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
@@ -19,8 +19,8 @@ module.exports = {
 	},
 
 	getFollowing: function(req, res) {
-		var FollowerId = req.param('id');
-		Follower.getFollowing(FollowerId)
+		var followerId = req.param('id');
+		Follower.getFollowing(followerId)
 		.spread(function(models) {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
@@ -29,11 +29,11 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-		var FollowedId = req.param('followed');
-		var FollowerId = req.param('follower');
+		var followedId = req.param('followed');
+		var followerId = req.param('follower');
 		var model = {
-			followed: FollowedId,
-			follower: FollowerId,
+			followed: followedId,
+			follower: followerId,
 		};
 		Follower.create(model)
 		.exec(function(err, follower) {
@@ -43,12 +43,26 @@ module.exports = {
 
 					//MEH
 					User.find({id:model.followed}).then(function(userModel){
-						userModel.followerCount++;
-						User.update({id:model.followed}, {followerCount:userModel.followerCount}).then(function(user){});
+						userModel[0].followerCount++;
+						User.update({id:model.followed}, {followerCount:userModel[0].followerCount}).then(function(user){});
 					});
 					User.find({id:model.follower}).then(function(userModel){
-						userModel.followingCount++;
-						User.update({id:model.follower}, {followingCount:userModel.followingCount}).then(function(user){});
+						userModel[0].followingCount++;
+						User.update({id:model.follower}, {followingCount:userModel[0].followingCount}).then(function(user){});
+
+						//MB REFACTOR THIS BLOCK
+						//WHATS THE DATA?
+						var notificationModel = {
+							user: followedId,
+							type: 'New Follower',
+							content:userModel[0].username+' started following you',
+							info:userModel[0],
+						};
+						Notification.create(notificationModel).then(function(notification){
+							Notification.publishCreate(notification);
+						});
+						
+
 					});
 
 					Follower.publishCreate(follower[0]);

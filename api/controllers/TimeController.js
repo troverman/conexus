@@ -116,6 +116,25 @@ module.exports = {
 				User.find({id:model.user}).then(function(userModel){
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
+
+					//TODO: REQUEST TO VALIDATE NOTIFICATION
+					//for (x in time.associatedModels){
+					//	if (time.associatedModels[x].type == 'PROJECT'){
+					//		ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
+					//			for (x in projectMembers){
+									//var notificationModel = {
+									//	user: projectMembers[x],
+									//	type: 'Request to Validate',
+									//	content:'New Time, '+userModel.username +' is requesting validation for '+time,
+									//};
+									//Notification.create(notificationModel).then(function(notification){
+									//	Notification.publishCreate(follower[0]);
+									//});
+					//			}
+					//		});
+					//	}
+					//}
+
 				});
 
 				/*

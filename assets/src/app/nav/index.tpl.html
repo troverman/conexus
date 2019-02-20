@@ -304,16 +304,13 @@
                 </form>
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
                 <h2 class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
-                <!--<h2 class="nav-links" style="padding:16px;"><a href="/content">Content</a></h2>-->
                 <h2 class="nav-links" style="padding:16px;"><a href="/discover">Discover</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/market">Market</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/marketplace">Marketplace</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/projects">Projects</a></h2>
                 <h2 class="nav-links" style="padding:16px;"><a href="/tasks">Tasks</a></h2>
-                <!--<h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/transparency">Transparency</a></h2>-->
-                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/notifications">Notifications</a></h2>
+                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/notifications"><!--<span class="label label-danger">5</span>--> Notifications</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/account">Settings</a></h2>
-                <!--<h2 class="nav-links" style="padding:16px;"><a href="/">Vote</a></h2>-->
                 <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/logout">Logout</a></h2>
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/login">Login</a></h2>
                 <h2 ng-show="!currentUser"class="nav-links" style="padding:16px;"><a href="/register">Register</a></h2>
@@ -705,7 +702,7 @@
                                     </a>
                                 </td>
                                 <!--<td>{{item.task.title.toUpperCase()}} <i class="fa fa-arrows-h"></i>{{item.project.title.toUpperCase()}}</td>-->
-                                <td>{{validation.associatedModels[0].address}} <i class="fa fa-arrows-h"></i>{{validation.associatedModels[1].address}}</td>
+                                <td>{{validation.associatedModels[0].address}} <i class="fa fa-arrows-h"></i> {{validation.associatedModels[1].address}}</td>
                                 <td>General</td>
                                 <td>{{validation.validation.general}}</td>
                                 <td><a href="validation/{{validation.id}}">{{validation.id}}</a></td>
@@ -1276,6 +1273,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <!--<span class="" style=""><span class="label label-danger">5</span></span>-->
+
 
                 <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->
                 <div ng-show="true" class="nav-links" style="float:left;margin-top:13px;margin-right:10px;font-size:18px">
@@ -1303,6 +1302,7 @@
                     <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
                     <li ng-click="sideNavToggle()">
                         <!--TODO: NOTIFICATIONS-->
+                        <!--<span style="float:left:margin-top:14px;"><span class="label label-danger">5</span></span>-->
                         <button class="navIcon" type="button" style="margin-top:4px;">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>

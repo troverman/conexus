@@ -69,14 +69,30 @@ module.exports = {
 				//DO ++
 				//CREATE MOTION.. VALIDATE?????????
 
+				//TODO: REQUEST TO VALIDATE MEMBER JOIN
+				//for (x in time.associatedModels){
+				//	if (time.associatedModels[x].type == 'PROJECT'){
+				//		ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
+				//			for (x in projectMembers){
+								//var notificationModel = {
+								//	user: projectMembers[x],
+								//	type: 'Request to Validate',
+								//	content:'New Time, '+userModel.username +' is requesting validation for '+time,
+								//};
+								//Notification.create(notificationModel).then(function(notification){
+								//	Notification.publishCreate(follower[0]);
+								//});
+				//			}
+				//		});
+				//	}
+				//}
+
 				ProjectMember.find({user:model.user}).then(function(projectMemberModel){
 					var projectCount = 0;
 					projectCount = projectMemberModel.length;
 					User.update({id:model.user}, {projectCount:projectCount}).then(function(user){});
-
 					ProjectMember.publishCreate(member);
 					res.json(member);
-
 				});
 
 			}

@@ -12,7 +12,12 @@
 					<h5 style="text-align:right" ng-click="renderValidationToggle(validation)"><a>Associations & Validations <i class="fa fa-question-circle"></i></a></h5>
 				</div>
 
-				<h3> MODEL A <i class="fa fa-arrows-h"></i> MODEL B</h3>
+				<!--TODO-->
+				<h3> 
+					<span><a href="{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}">{{validation.associatedModels[0].info.task.title}}</a></span> 
+					<i class="fa fa-arrows-h"></i> 
+					<span><a href="{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}">{{validation.associatedModels[1].info.project.title}}</a></span>
+				</h3>
 
 				<a href="member/{{validation.user.username}}">
 					<img class="card-avatar" src="{{validation.user.avatarUrl}}"/>
@@ -23,9 +28,14 @@
 
 				<!--TODO: ABSTRACT MODEL | POPULATE VALIDATIONS-->
 				<!--ERR-->
+				
+				<!--
 				<p ng-repeat="model in validation.associatedModels">
-					<a href="{{model.type.toLowerCase()}}/{{model.address}}">{{model.type}} | {{model.address}}</a>
+					<a href="{{model.type.toLowerCase()}}/{{model.address}}">
+						{{model.type}} | {{model.address}}
+					</a>
 				</p>
+				-->
 				
 				<!--TAGS ARE ASSOCIATIONS. . -->
 				<!--

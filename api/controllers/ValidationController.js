@@ -1,3 +1,5 @@
+var Q = require('q');
+
 module.exports = {
 
 	getSome: function(req, res) {
@@ -39,10 +41,29 @@ module.exports = {
 						obj.id = obj._id;
 						return obj;
 					});
+
 					//JOIN TO USER
-					console.log(models);
-					Validation.subscribe(req, models);
-					res.json(models);
+					var promises = [];
+					for (x in models){
+						promises.push(
+							User.find({
+								id:models[x].user.toString()
+							})
+						);
+					}
+					Q.all(promises).then((populatedModels)=>{
+						for (x in populatedModels){
+							models[x].user = populatedModels[x][0];
+						}
+
+						//THEN JOIN TO MODELS
+
+						Validation.subscribe(req, models);
+						res.json(models);
+
+
+					});
+
 				});
 			});
 
@@ -79,8 +100,45 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Validation.subscribe(req, models);
-				res.json(models);
+
+				//POPULATE
+				//TODO: FRESHEN
+				var promises = [];
+				for (x in models[0].associatedModels){
+					if (models[0].associatedModels[x].type == 'PROJECT'){
+						promises.push(Project.find({id:models[0].associatedModels[x].address}).then(function(projectModels){return {project:projectModels[0]}}))
+					}
+					if (models[0].associatedModels[x].type == 'TASK'){
+						promises.push(Task.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {task:taskModels[0]}}))
+					}
+					if (models[0].associatedModels[x].type == 'TIME'){
+						promises.push(Time.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {time:taskModels[0]}}))
+					}
+				}
+
+				Q.all(promises).then((populatedModels)=>{
+
+					console.log(populatedModels);
+
+					for (x in models[0].associatedModels){
+						if (models[0].associatedModels[x].type == 'PROJECT'){
+							var project = populatedModels.filter(function(obj){return obj.project})
+							models[0].associatedModels[x].info = project[0];
+						}
+						if (models[0].associatedModels[x].type == 'TASK'){
+							var task = populatedModels.filter(function(obj){return obj.task});
+							models[0].associatedModels[x].info = task[0];
+						}
+						if (models[0].associatedModels[x].type == 'Time'){
+							var time = populatedModels.filter(function(obj){return obj.time});
+							models[0].associatedModels[x].info = time[0];
+						}
+					}
+
+					Validation.subscribe(req, models);
+					res.json(models);
+
+				});
 			});
 		}
 
@@ -89,27 +147,22 @@ module.exports = {
 	},
 
 	//TODO | SECURITY
+	//KINF OF A MESS
 	create: function (req, res) {
 		var model = {
-
 			content: req.param('content'),
 			reputation: req.param('reputation'), //SAVED USER REP
 			user: req.param('user'),
 			validation: req.param('validation'), //ACTUAL 'VOTE'
-
 			//ASSOICATED MODEL {BINARY -- }
 			associatedModels: req.param('associatedModels'),
-
 			//DEPRECIATE
 			task: req.param('task'),
 			project: req.param('project'),
 			time: req.param('time'),
 			validation: req.param('validation'),
-
 			//PATCH
 			reactions: {plus:0,minus:0},
-
-
 		};
 
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
@@ -135,47 +188,35 @@ module.exports = {
 					Validation.publishCreate(validation);
 					res.json(validation);
 
+					//TODO: VALIDATION NOTIFICATION
+					//Notification.create(notificationModel).then(function(notification){
+					//	Notification.publishCreate(follower[0]);
+					//});
+
 					//THEN CREATE OR UPDATE ASSOCIATION
-
 					//COULD JUST STORE IN MODEL..? ?
-
 
 					//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
 					//TODO: FIND
 					Association.find().then((associationModels)=>{
-
-
 						if (associationModels.length == 0){
-
 							Association.create().then((associationModel)=>{
 								Association.publishCreate(associationModel);
-								console.log('CREATE ASSOCIATION',associationModel)
+								console.log('CREATE ASSOCIATION', associationModel)
 							});
-
 						}
-
 						else{
-
 							//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
 							var updatedModel = associationModels[0];//{}; //AVERAGE OF VALIDATIONS
-
 							Association.update({id:associationModels[0].id}, updatedModel).then((associationModel)=>{
 								Association.publishUpdate(associationModel);
 								console.log('UPDATE ASSOCIATION', associationModel)
 							});
-
 						}
-
-
 					});
-
-
 				}
 			});
-
 		});
-
-
 	},
 
 };

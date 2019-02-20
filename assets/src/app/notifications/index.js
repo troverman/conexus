@@ -11,18 +11,17 @@ angular.module( 'conexus.notifications', [
             }
         },
         resolve: {
-            notifications: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
-                //return TimeModel.getOne($stateParams.id);
-                return null
+            notifications: ['config', 'NotificationModel', function(config, NotificationModel){
+                return NotificationModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
             }],
         }
     });
 }])
 
 .controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'notifications', 'titleService', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, notifications, titleService) {
-    titleService.setTitle('View | CRE8.XYZ');
+    titleService.setTitle('Notifications | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.notifications = [];
+    $scope.notifications = notifications;
 
     //TODO: NOTIFICATIONS
     //REQUEST TO VALIDATE (ON SUB TIME TO SUBD PROJECTS ((--> TASKS)), 
@@ -37,10 +36,9 @@ angular.module( 'conexus.notifications', [
     //NEW ORDER (ITEM PURCHASED)
     //X IS LIVE NOW ( FOLLOWING (SUB) )
     //INVITATION TO JOIN?
+    //REQUEST TO VALIDATE (TIME; JOIN REQUEST);
 
-    //REQUEST TO VALIDATE (TIME; JOIN REQUEST)
-
-    $scope.notifications = [
+    $scope.notificationsStatic = [
         {title:'Request to Validate Time for Task in Project', description:'Troverman is requesting you validate time 141312 for task 12312 with respect to project 4131'},
         {title:'Request to Join', description:'Troverman is requesting to Join Conexus'},
         {title:'New Follower', description:'Troverman'},

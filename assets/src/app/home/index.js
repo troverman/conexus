@@ -463,7 +463,7 @@ angular.module( 'conexus.home', [
         //$scope.createMember = function(){
         $scope.join = function(project){
             //if not already in .. for next page anyway. --> ASSOCIATION 'FILTER' vs search query master. 
-            $scope.searchQuery.push({text:project.title});
+            //$scope.searchQuery.push({text:project.title});
             
             //$scope.chart.series = [{
             //    id: 'values',

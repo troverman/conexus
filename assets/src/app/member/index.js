@@ -220,7 +220,7 @@ angular.module( 'conexus.member', [
     })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'TransactionModel', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, member, seoService, titleService, TransactionModel) {
+.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'toaster', 'TransactionModel', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, member, seoService, titleService, toaster, TransactionModel) {
 	$scope.currentUser = config.currentUser;
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
@@ -243,21 +243,6 @@ angular.module( 'conexus.member', [
 
     //TODO: seoService
 
-    $scope.createTransaction = function(){
-        if($scope.currentUser){
-            $scope.newTransaction.to = $scope.member.id;
-            TransactionModel.create($scope.newTransaction).then(function(model){
-                $scope.newTransaction = {};
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.contentToggle = function(){
-        if($scope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle()}
-    };
-
     $scope.follow = function() {
         if ($scope.currentUser){
             $scope.newFollower.followed = $scope.member.id;
@@ -267,24 +252,31 @@ angular.module( 'conexus.member', [
                 $rootScope.confirm = $scope.newFollower;
                 $rootScope.confirm.modelType = 'FOLLOW';
 
+                toaster.pop({
+                    type:'success',
+                    title: 'Following',
+                    body: 'You are now follwing '+ $scope.member.username , 
+                    onShowCallback: function (toast) { 
+                        var audio = new Audio('audio/ping.mp3');
+                        audio.play()
+                        .then(function(audio){console.log(audio)})
+                        .catch(function(err){console.log(err)})
+                    }
+                });
+
+                //ERR?
                 $scope.newFollower = {};
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+
             });
 
         }
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.search = function(){};
-
     $scope.subNavToggle = function(){
         $mdSidenav('subNav').toggle();
-    };
-
-    $scope.transactionToggle = function(){
-        if($scope.currentUser){$mdSidenav('transaction').toggle();}
-        else{$mdSidenav('login').toggle()}
     };
 
     //TODO: FXNS

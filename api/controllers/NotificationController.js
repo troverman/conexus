@@ -12,8 +12,8 @@ module.exports = {
 
 		Notification.watch(req);
 
-		if (req.query.string){
-			Notification.find({string:req.query.string})
+		if (req.query.user){
+			Notification.find({user:req.query.user})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
