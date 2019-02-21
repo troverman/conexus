@@ -701,11 +701,28 @@
                                         <span style="font-weight:700">{{validation.user.username}}</span>
                                     </a>
                                 </td>
-                                <!--<td>{{item.task.title.toUpperCase()}} <i class="fa fa-arrows-h"></i>{{item.project.title.toUpperCase()}}</td>-->
-                                <td>{{validation.associatedModels[0].address}} <i class="fa fa-arrows-h"></i> {{validation.associatedModels[1].address}}</td>
+
+
+
+
+                                <td>
+
+                                    <span ng-if="validation.associatedModels[0].type=='PROJECT'"><a href="project/{{validation.associatedModels[0].info.urlTitle}}">{{validation.associatedModels[0].info.title}}</a></span>
+                                    <span ng-if="validation.associatedModels[0].type=='TASK'"><a href="task/{{validation.associatedModels[0].address}}">{{validation.associatedModels[0].info.title}}</a></span>
+                                    <span ng-if="validation.associatedModels[0].type=='TIME'"><a href="time/{{validation.associatedModels[0].address}}">{{validation.associatedModels[0].info.amount}}</a></span>
+
+                                    <i class="fa fa-arrows-h"></i> 
+
+                                    <span ng-if="validation.associatedModels[1].type=='PROJECT'"><a href="project/{{validation.associatedModels[0].info.urlTitle}}">{{validation.associatedModels[1].info.title}}</a></span>
+                                    <span ng-if="validation.associatedModels[1].type=='TASK'"><a href="task/{{validation.associatedModels[0].address}}">{{validation.associatedModels[1].info.title}}</a></span>
+                                    <span ng-if="validation.associatedModels[1].type=='TIME'"><a href="time/{{validation.associatedModels[0].address}}">{{validation.associatedModels[1].info.amount}}</a></span>
+
+                                </td>
                                 <td>General</td>
                                 <td>{{validation.validation.general}}</td>
                                 <td><a href="validation/{{validation.id}}">{{validation.id}}</a></td>
+
+
                             </tr>
                         </tbody>
                     </table>

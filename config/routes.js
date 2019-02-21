@@ -167,7 +167,6 @@ module.exports.routes = {
    * Transaction routes
    */
   'get /api/transaction': 'TransactionController.getSome',
-  'get /api/transaction/:id': 'TransactionController.getOne',
   'post /api/transaction': 'TransactionController.create',
   'delete /api/transaction/:id': 'TransactionController.destroy',
 

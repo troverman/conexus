@@ -135,7 +135,14 @@
 
 		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(transaction)">
 			<div style="padding:16px">
-				<p style="font-weight:800">From: <a ng-click="$event.stopPropagation()" href="">{{transaction.from}}</a> To: <a ng-click="$event.stopPropagation()" href="">{{transaction.to}}</a></p>
+
+				<p style="font-weight:800">
+                    <span ng-if="transaction.from.username">From: <a ng-click="$event.stopPropagation()" href="member/{{transaction.from.username}}">{{transaction.from.username}}</a></span>
+                    <span ng-if="transaction.from.title">From: <a ng-click="$event.stopPropagation()" href="project/{{transaction.from.title}}">{{transaction.from.title}}</a></span>
+                    <span ng-if="transaction.to.username">To: <a ng-click="$event.stopPropagation()" href="member/{{transaction.to.username}}">{{transaction.to.username}}</a></span>
+                    <span ng-if="transaction.to.title">To: <a ng-click="$event.stopPropagation()" href="project/{{transaction.to.urlTitle}}">{{transaction.to.title}}</a></span>
+                </p>
+
 				<span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}">{{key}}</a></p></span>
 				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 				<p>{{transaction.content}}</p>

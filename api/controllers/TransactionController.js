@@ -1,14 +1,34 @@
 /**
  * TransactionController
  */
+var Q = require('q');
 
 module.exports = {
 
 	getSome: function(req, res) {
-		
+
+		function getTo(model){
+			var deferred = Q.defer();
+			User.find({id:model.to}).then(function(userModels){
+				if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
+				else{deferred.resolve(userModels[0])}
+			})
+			return deferred.promise;
+		};
+
+		function getFrom(model){
+			var deferred = Q.defer();
+			User.find({id:model.from}).then(function(userModels){
+				if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
+				else{deferred.resolve(userModels[0])}
+			});
+			return deferred.promise;
+		};
+
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
+		
 		Transaction.watch(req);
 
 		if(req.query.project){
@@ -37,6 +57,32 @@ module.exports = {
 			});
 		}
 
+		if(req.query.id){
+			var id = req.query.id;
+			Transaction.find({id:id})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				var promises = [];
+				for (x in models){
+					promises.push(getTo(models[x]));
+					promises.push(getFrom(models[x]));
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						models[x].to = populatedModels[sum];
+						sum++
+						models[x].from = populatedModels[sum];
+						sum++;
+					}
+					res.json(models);
+				});
+			});
+		}
+
+		//TO, FROM AS ASSOCIATED MODELS.. ? 
 		else if(req.query.to){
 			var to = req.query.to;
 			Transaction.find({to:to})
@@ -44,11 +90,21 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				//Project.find({id:to})
-				//User.find({id:to})
-				//Project.find({id:from})
-				//User.find({id:from})
-				res.json(models)
+				var promises = [];
+				for (x in models){
+					promises.push(getTo(models[x]));
+					promises.push(getFrom(models[x]));
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						models[x].to = populatedModels[sum];
+						sum++
+						models[x].from = populatedModels[sum];
+						sum++;
+					}
+					res.json(models);
+				});
 			});
 		}
 
@@ -59,7 +115,21 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				res.json(models);
+				var promises = [];
+				for (x in models){
+					promises.push(getTo(models[x]));
+					promises.push(getFrom(models[x]));
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						models[x].to = populatedModels[sum];
+						sum++
+						models[x].from = populatedModels[sum];
+						sum++;
+					}
+					res.json(models);
+				});
 			});
 		}
 
@@ -68,20 +138,10 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
-			.populate('project')
 			.then(function(models) {
 				res.json(models);
 			});
 		}
-	},
-
-	getOne: function(req, res) {
-		Transaction.find({id:req.param('id')})
-		.then(function(model) {
-			Transaction.subscribe(req, model[0]);
-			res.json(model[0]);
-		});
 	},
 
 	create: function (req, res) {

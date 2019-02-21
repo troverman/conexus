@@ -45,23 +45,46 @@ module.exports = {
 					//JOIN TO USER
 					var promises = [];
 					for (x in models){
+
 						promises.push(
 							User.find({
 								id:models[x].user.toString()
-							})
+							}).then(function(userModels){return {user:userModels[0]}})
 						);
-					}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in populatedModels){
-							models[x].user = populatedModels[x][0];
+
+						for (y in models[x].associatedModels){
+							if (models[x].associatedModels[y].type == 'PROJECT'){
+								promises.push(Project.find({id:models[x].associatedModels[y].address}).then(function(projectModels){return {project:projectModels[0]}}))
+							}
+							if (models[x].associatedModels[y].type == 'TASK'){
+								promises.push(Task.find({id:models[x].associatedModels[y].address}).then(function(taskModels){return {task:taskModels[0]}}))
+							}
+							if (models[x].associatedModels[y].type == 'TIME'){
+								promises.push(Time.find({id:models[x].associatedModels[y].address}).then(function(timeModels){return {time:timeModels[0]}}))
+							}
 						}
 
-						//THEN JOIN TO MODELS
+					}
+					Q.all(promises).then((populatedModels)=>{
+						var sum = 0;
+						for (x in models){
+							models[x].user = populatedModels[sum].user;
+							sum++;
+							for (y in models[x].associatedModels){
+								if (models[x].associatedModels[y].type == 'PROJECT'){
+									models[x].associatedModels[y].info = populatedModels[sum].project;
+								}
+								if (models[x].associatedModels[y].type == 'TASK'){
+									models[x].associatedModels[y].info = populatedModels[sum].task;
+								}
+								if (models[x].associatedModels[y].type == 'TIME'){
+									models[x].associatedModels[y].info = populatedModels[sum].time;
+								}
+								sum++;
+							}
 
-						Validation.subscribe(req, models);
+						}
 						res.json(models);
-
-
 					});
 
 				});
@@ -129,7 +152,7 @@ module.exports = {
 							var task = populatedModels.filter(function(obj){return obj.task});
 							models[0].associatedModels[x].info = task[0];
 						}
-						if (models[0].associatedModels[x].type == 'Time'){
+						if (models[0].associatedModels[x].type == 'TIME'){
 							var time = populatedModels.filter(function(obj){return obj.time});
 							models[0].associatedModels[x].info = time[0];
 						}

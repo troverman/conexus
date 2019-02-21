@@ -12,10 +12,10 @@ angular.module( 'conexus.transaction', [
         },
         resolve: {
             transaction: ['$stateParams', 'TransactionModel', function($stateParams, TransactionModel){
-                return TransactionModel.getOne($stateParams.id);
+                return TransactionModel.getSome('id', $stateParams.id, 1, 0, 'createdAt DESC');
             }],
             contentList: ['ContentModel', 'transaction', function(ContentModel, transaction){
-                return ContentModel.getSome('transaction', transaction.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome('transaction', transaction[0].id, 100, 0, 'createdAt DESC');
             }],
         }
     });
@@ -27,7 +27,9 @@ angular.module( 'conexus.transaction', [
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.contentList = contentList;
-    $scope.transaction = transaction;
+    $scope.transaction = transaction[0];
+
+    console.log(transaction)
 
     //PACKAGE | NESTED RENDERING
     $scope.createContent = function(content) {

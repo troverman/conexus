@@ -1027,15 +1027,6 @@ angular.module( 'conexus.member', [
         
     }
 
-    //PATCH TIL FORM COMPELTE OBJECT
-    else{
-        $scope.transactions.map(function(obj){
-            obj.to = {id:obj.to};
-            obj.from = {id:obj.from};
-            return obj;
-        });
-    }
-
     //TAGS
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
 
@@ -1128,6 +1119,10 @@ angular.module( 'conexus.member', [
 
     //CONCAT | sumTransactions
     $scope.transactions.reduce(function(a,b,i) {
+
+        if (!b.from){b.from = {id:null}}
+        if (!b.to){b.to = {id:null}}
+
         if(b.from.id == $scope.member.id){
             return $scope.sumTransactions[i] = [
                 new Date(b.createdAt).getTime(), 
@@ -1147,6 +1142,7 @@ angular.module( 'conexus.member', [
 
     //CONCAT | sumTo
     $scope.transactions.reduce(function(a,b,i) {
+        console.log(a,b,i)
         if(b.to.id == $scope.member.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
         else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
     },[0,0]);

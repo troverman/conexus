@@ -160,7 +160,13 @@
                         <h5 style="text-align:right" ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 
-                    <p style="font-weight:800">From: <a ng-click="$event.stopPropagation();" href="">{{item.from}}</a> To: <a href="">{{item.to}}</a></p>
+                    <p style="font-weight:800">
+                        <span ng-if="item.from.username">From: <a ng-click="$event.stopPropagation()" href="member/{{item.from.username}}">{{item.from.username}}</a></span>
+                        <span ng-if="item.from.title">From: <a ng-click="$event.stopPropagation()" href="project/{{item.from.title}}">{{item.from.title}}</a></span>
+                        <span ng-if="item.to.username">To: <a ng-click="$event.stopPropagation()" href="member/{{item.to.username}}">{{item.to.username}}</a></span>
+                        <span ng-if="item.to.title">To: <a ng-click="$event.stopPropagation()" href="project/{{item.to.urlTitle}}">{{item.to.title}}</a></span>
+                    </p>
+                    
                     <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                     <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p>{{item.content}}</p>

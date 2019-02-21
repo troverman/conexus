@@ -754,15 +754,6 @@ angular.module( 'conexus.project', [
 
     }
 
-    //PATCH TIL FORM COMPELTE OBJECT
-    else{
-        $scope.transactions.map(function(obj){
-            obj.to = {id:obj.to};
-            obj.from = {id:obj.from};
-            return obj;
-        });
-    }
-
     //MD VS ABSOLUTE USAGE..
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
 
@@ -843,6 +834,10 @@ angular.module( 'conexus.project', [
 
     //CONCAT
     $scope.transactions.reduce(function(a,b,i) {
+        
+        if (!b.from){b.from = {id:null}}
+        if (!b.to){b.to = {id:null}}
+
         if(b.from.id == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
         if(b.to.id == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
     },[0,0]);

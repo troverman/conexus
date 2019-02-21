@@ -3464,8 +3464,13 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "                    \n" +
-    "                    <p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{item.from}}</a> To: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{item.to}}</a></p>\n" +
-    "\n" +
+    "                    <p style=\"font-weight:800\">\n" +
+    "                        <span ng-if=\"item.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.from.username}}\">{{item.from.username}}</a></span>\n" +
+    "                        <span ng-if=\"item.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.from.title}}\">{{item.from.title}}</a></span>\n" +
+    "                        <span ng-if=\"item.to.username\">To: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.to.username}}\">{{item.to.username}}</a></span>\n" +
+    "                        <span ng-if=\"item.to.title\">To: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.to.urlTitle}}\">{{item.to.title}}</a></span>\n" +
+    "                    </p>\n" +
+    "                    \n" +
     "                    <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                    \n" +
     "                    <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
@@ -4052,7 +4057,14 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"renderToggle(transaction)\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "				<p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{transaction.from}}</a> To: <a ng-click=\"$event.stopPropagation()\" href=\"\">{{transaction.to}}</a></p>\n" +
+    "\n" +
+    "				<p style=\"font-weight:800\">\n" +
+    "                    <span ng-if=\"transaction.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.from.username}}\">{{transaction.from.username}}</a></span>\n" +
+    "                    <span ng-if=\"transaction.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.from.title}}\">{{transaction.from.title}}</a></span>\n" +
+    "                    <span ng-if=\"transaction.to.username\">To: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.to.username}}\">{{transaction.to.username}}</a></span>\n" +
+    "                    <span ng-if=\"transaction.to.title\">To: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.to.urlTitle}}\">{{transaction.to.title}}</a></span>\n" +
+    "                </p>\n" +
+    "\n" +
     "				<span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation()\"  href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "				<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in transaction.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "				<p>{{transaction.content}}</p>\n" +
@@ -5104,11 +5116,28 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                        <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
     "                                    </a>\n" +
     "                                </td>\n" +
-    "                                <!--<td>{{item.task.title.toUpperCase()}} <i class=\"fa fa-arrows-h\"></i>{{item.project.title.toUpperCase()}}</td>-->\n" +
-    "                                <td>{{validation.associatedModels[0].address}} <i class=\"fa fa-arrows-h\"></i> {{validation.associatedModels[1].address}}</td>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                <td>\n" +
+    "\n" +
+    "                                    <span ng-if=\"validation.associatedModels[0].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                                    <span ng-if=\"validation.associatedModels[0].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                                    <span ng-if=\"validation.associatedModels[0].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.amount}}</a></span>\n" +
+    "\n" +
+    "                                    <i class=\"fa fa-arrows-h\"></i> \n" +
+    "\n" +
+    "                                    <span ng-if=\"validation.associatedModels[1].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                                    <span ng-if=\"validation.associatedModels[1].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                                    <span ng-if=\"validation.associatedModels[1].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.amount}}</a></span>\n" +
+    "\n" +
+    "                                </td>\n" +
     "                                <td>General</td>\n" +
     "                                <td>{{validation.validation.general}}</td>\n" +
     "                                <td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
+    "\n" +
+    "\n" +
     "                            </tr>\n" +
     "                        </tbody>\n" +
     "                    </table>\n" +
@@ -6197,7 +6226,13 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{item.from}}</a> To: <a href=\"\">{{item.to}}</a></p>\n" +
+    "                    <p style=\"font-weight:800\">\n" +
+    "                        <span ng-if=\"item.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.from.username}}\">{{item.from.username}}</a></span>\n" +
+    "                        <span ng-if=\"item.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.from.title}}\">{{item.from.title}}</a></span>\n" +
+    "                        <span ng-if=\"item.to.username\">To: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.to.username}}\">{{item.to.username}}</a></span>\n" +
+    "                        <span ng-if=\"item.to.title\">To: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.to.urlTitle}}\">{{item.to.title}}</a></span>\n" +
+    "                    </p>\n" +
+    "                    \n" +
     "                    <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                    <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p>{{item.content}}</p>\n" +
@@ -6734,9 +6769,15 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"renderToggle(transaction)\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "				<p style=\"font-weight:800\">From: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{transaction.from}}</a> To: <a ng-click=\"$event.stopPropagation();\" href=\"\">{{transaction.to}}</a></p>\n" +
+    "			\n" +
+    "				<p style=\"font-weight:800\">\n" +
+    "                    <span ng-if=\"transaction.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.from.username}}\">{{transaction.from.username}}</a></span>\n" +
+    "                    <span ng-if=\"transaction.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.from.title}}\">{{transaction.from.title}}</a></span>\n" +
+    "                    <span ng-if=\"transaction.to.username\">To: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.to.username}}\">{{transaction.to.username}}</a></span>\n" +
+    "                    <span ng-if=\"transaction.to.title\">To: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.to.urlTitle}}\">{{transaction.to.title}}</a></span>\n" +
+    "                </p>\n" +
+    "\n" +
     "				<span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
-    "				<p style=\"font-weight:800\">{{transaction.amount}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{transaction.identifier}}\">{{transaction.identifier}}</a></p>\n" +
     "				<p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in transaction.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "				<p>{{transaction.content}}</p>\n" +
     "				<p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"transaction.createdAt\"></span> | {{transaction.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
@@ -8318,8 +8359,13 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "            </div>\n" +
     "\n" +
     "            <h2>Transaction {{transaction.id}}</h2>\n" +
-    "            \n" +
-    "            <p style=\"font-weight:800\">From: <a href=\"member/{{transaction.from}}\">{{transaction.from}}</a> To: <a href=\"member/{{transaction.to}}\">{{transaction.to}}</a></p>\n" +
+    "\n" +
+    "            <p style=\"font-weight:800\">\n" +
+    "                <span ng-if=\"transaction.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.from.username}}\">{{transaction.from.username}}</a></span>\n" +
+    "                <span ng-if=\"transaction.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.from.title}}\">{{transaction.from.title}}</a></span>\n" +
+    "                <span ng-if=\"transaction.to.username\">To: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.to.username}}\">{{transaction.to.username}}</a></span>\n" +
+    "                <span ng-if=\"transaction.to.title\">To: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.to.urlTitle}}\">{{transaction.to.title}}</a></span>\n" +
+    "            </p>\n" +
     "                        \n" +
     "            <span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "\n" +

@@ -10,8 +10,13 @@
             </div>
 
             <h2>Transaction {{transaction.id}}</h2>
-            
-            <p style="font-weight:800">From: <a href="member/{{transaction.from}}">{{transaction.from}}</a> To: <a href="member/{{transaction.to}}">{{transaction.to}}</a></p>
+
+            <p style="font-weight:800">
+                <span ng-if="transaction.from.username">From: <a ng-click="$event.stopPropagation()" href="member/{{transaction.from.username}}">{{transaction.from.username}}</a></span>
+                <span ng-if="transaction.from.title">From: <a ng-click="$event.stopPropagation()" href="project/{{transaction.from.title}}">{{transaction.from.title}}</a></span>
+                <span ng-if="transaction.to.username">To: <a ng-click="$event.stopPropagation()" href="member/{{transaction.to.username}}">{{transaction.to.username}}</a></span>
+                <span ng-if="transaction.to.title">To: <a ng-click="$event.stopPropagation()" href="project/{{transaction.to.urlTitle}}">{{transaction.to.title}}</a></span>
+            </p>
                         
             <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
 
