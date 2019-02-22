@@ -39,12 +39,12 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-sm-6\"></div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h3>CREATE A SHARED WORLD</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create.</p>\n" +
     "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
     "			</div>\n" +
+    "			<div class=\"col-sm-6\"></div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
@@ -106,7 +106,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				</div>-->\n" +
     "				<h5>Human Validated Proof of Work</h5>\n" +
     "				<!--VALIDATION MECHANISM-->\n" +
-    "\n" +
     "			</div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
@@ -120,9 +119,40 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p>Our Value Infrastructure</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-25\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<highchart config=\"create\"></highchart>\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
+    "				<h2>Information as Income</h2>\n" +
+    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information as Universal Income</h5>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "				<h3>Complete Transparency</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Systems and Task Verification</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Finance and Contribution</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
+    "				<div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "				<h3>Complete Tokenization</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto-economic data structre and means of account.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
+    "\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-25\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
     "\n" +
     "<div id=\"about-section2\">\n" +
     "	<div class=\"container\">\n" +
@@ -130,7 +160,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-8\">\n" +
     "				<h2>MultiDimensional Tokenization</h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
     "				<a href=\"/\"><img  style=\"height:88px;float:right\" src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a>\n" +
@@ -167,9 +197,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<!--<h5>View Tokenization Protocol</h5>-->\n" +
     "				<h5>Validation Tokenization Protocol</h5>\n" +
     "				<!--CRE8; RECIEVE; PROJECT.. USER-->\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "		<div class=\"spacing-25\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -179,6 +209,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-8\">\n" +
     "				<h2><a style=\"color:white;margin:0px\" href=\"/market\">MultiDimensional Token Market</a></h2>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">The Moment of Liquidity is Combinatorial.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
     "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
@@ -213,37 +244,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "            </div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"about-section4\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"create\"></highchart>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "				<h2>Information as Income</h2>\n" +
-    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information as Universal Income</h5>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "				<h3>Complete Transparency</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Systems and Task Verification</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Finance and Contribution</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "				<h3>Complete Tokenization</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto-economic data structre and means of account.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
-    "\n" +
-    "			</div>\n" +
-    "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
