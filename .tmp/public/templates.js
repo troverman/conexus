@@ -30,12 +30,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
-    "\n" +
     "				<h3>CREATE THE NEXT WAVE</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">We Create a 24/7 continual hackathon.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Connect with new collaborators and build together.</p>\n" +
-    "\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\"></div>\n" +
     "		</div>\n" +
@@ -58,7 +56,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Sharing Creates Abundance.</p>\n" +
     "					</div>\n" +
     "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "					<div style=\"padding:16px;\">\n" +
+    "					<!--<div style=\"padding:16px;\">\n" +
     "						<h3><a href=\"https://www.youtube.com/embed/jUQ_3kCcG_U\">open eye</a></h3>\n" +
     "						<p>\n" +
     "							<a href=\"member/troverman\">\n" +
@@ -67,8 +65,59 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "							</a>\n" +
     "							<span am-time-ago=\"\" style=\"color:gray\"> • 30 Minutes Ago</span>\n" +
     "						</p>\n" +
-    "					</div>\n" +
+    "					</div>-->\n" +
     "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section2\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-8\">\n" +
+    "				<h2>Collaborative Governance</h2>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;margin:0px\">Context Specific Reputation Protocols give us a fair shot at accountable representation.</p>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-4\">\n" +
+    "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"about-section4\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h3>What We're Building</h3>\n" +
+    "				<p>The mechanism of value gets its start from consensus on agreed up and shared value</p>\n" +
+    "				<!--SELECT PROJECTS-->\n" +
+    "				<!--<div class=\"row\">\n" +
+    "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
+    "						<div class=\"padding:16px\">\n" +
+    "							<h5><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></h5>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "				</div>-->\n" +
+    "				<h5>Human Validated Proof of Work</h5>\n" +
+    "				<!--VALIDATION MECHANISM-->\n" +
+    "\n" +
+    "			</div>\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<h3><a href=\"/transparency\">The Peer Network</a></h3>\n" +
+    "				<p>Our Value Infrastructure</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -84,7 +133,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
-    "				<a href=\"/\"><img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a>\n" +
+    "				<a href=\"/\"><img  style=\"height:88px;float:right\" src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -100,15 +149,22 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocols act as plugins to the string space.</p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
+    "				<!--<h5>Action Tokenization Protocol</h5>-->\n" +
+    "				<!--<h5>Manifold Tokenization Protocol</h5>-->\n" +
     "				<h5>Association Tokenization Protocol</h5>\n" +
     "				<h5>Content Tokenization Protocol</h5>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">+[TYPE]+[ADDRESS]</p>\n" +
-    "				<h5>Reaction Tokenization Protocol</h5>\n" +
+    "				<!--<h5>Follow Tokenization Protocol</h5>-->\n" +
+    "				<h5>Item Tokenization Protocol</h5>\n" +
+    "				<h5>Location Tokenization Protocol</h5>\n" +
+    "				<h5>Member Tokenization Protocol</h5>\n" +
     "				<h5>Order Tokenization Protocol</h5>\n" +
     "				<h5>Project Tokenization Protocol</h5>\n" +
+    "				<h5>Reaction Tokenization Protocol</h5>\n" +
     "				<h5>Task Tokenization Protocol</h5>\n" +
     "				<h5>Time Tokenization Protocol</h5>\n" +
     "				<h5>Transaction Tokenization Protocol</h5>\n" +
+    "				<!--<h5>View Tokenization Protocol</h5>-->\n" +
     "				<h5>Validation Tokenization Protocol</h5>\n" +
     "				<!--CRE8; RECIEVE; PROJECT.. USER-->\n" +
     "				<div class=\"spacing-50\"></div>\n" +
@@ -158,58 +214,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"about-section2\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-8\">\n" +
-    "				<h2>Collaborative Governance</h2>\n" +
-    "				<p style=\"color:#a8a8a8;font-style:italic;margin:0px\">Context Specific Reputation Protocols give us a fair shot at accountable representation.</p>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-4\">\n" +
-    "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"about-section4\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<h3>What We're Building</h3>\n" +
-    "				<p>The mechanism of value gets its start from consensus on agreed up and shared value</p>\n" +
-    "				<!--SELECT PROJECTS-->\n" +
-    "				<!--<div class=\"row\">\n" +
-    "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
-    "						<div class=\"padding:16px\">\n" +
-    "							<h5><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></h5>\n" +
-    "						</div>\n" +
-    "					</div>\n" +
-    "				</div>-->\n" +
-    "				<h5>Human Validated Proof of Work</h5>\n" +
-    "				<!--VALIDATION MECHANISM-->\n" +
-    "\n" +
-    "			</div>\n" +
-    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
-    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<h3><a href=\"/transparency\">The Peer Network</a></h3>\n" +
-    "				<p>Our Value Infrastructure</p>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -1975,8 +1979,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Shared Information as Income.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
-    "\n" +
-    "\n" +
+    "                \n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
     "\n" +
