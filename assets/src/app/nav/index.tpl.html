@@ -630,30 +630,16 @@
                     <div class="col-md-6">
 
                         <div ng-if="item.model=='TIME'">
-
-                            <h3>{{item.amount}} <a href="task/{{item.task.id}}">{{item.task.title}}</a></h3>
-
-                            <!--WIP-->
                             <h4>
                                 {{item.amount}}
+                                <!--
                                 <i class="fa fa-angle-double-left"></i>
                                 {{validationSumObj.general/validations.length}}
                                 <i class="fa fa-angle-double-right"></i>
-                                {{item.task.title.toUpperCase()}}
+                                -->
+                                <i class="fa fa-arrows-h"></i>
+                                <a href="task/{{item.task.id}}">{{item.task.title.toUpperCase()}}</a>
                             </h4>
-
-                            <h4>
-                                {{item.task.title.toUpperCase()}} 
-                                <i class="fa fa-arrows-h"></i> 
-                                <a href="project/{{item.task.id}}">{{item.project.title.toUpperCase()}}</a>
-                            </h4>
-
-                            <h4>
-                                {{item.amount}} 
-                                <i class="fa fa-arrows-h"></i> 
-                                {{item.project.title}}
-                            </h4>
-
                         </div>
 
                         <div ng-if="item.model=='TASK'">
@@ -667,6 +653,7 @@
                         <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
                             <auto-complete source="loadAssociations($query)"></auto-complete>
                         </tags-input>
+                        
                         <h5 ng-repeat="model in item.associatedModels">{{model.type}}, {{model.address}}</h5>
 
                         <div class="spacing-15"></div>

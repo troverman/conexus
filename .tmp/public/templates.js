@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "association/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/about.tpl.html", "market/templates/activity.tpl.html", "market/templates/content.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/activity.tpl.html", "task/templates/content.tpl.html", "task/templates/time.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "association/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/about.tpl.html", "market/templates/activity.tpl.html", "market/templates/content.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/activity.tpl.html", "task/templates/content.tpl.html", "task/templates/time.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -1365,6 +1365,7 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "	<div class=\"container\">\n" +
     "		<div class=\"footer-links\" style=\"padding:3px;float:none\">\n" +
     "			<div style=\"float:right\"><a href=\"/\"><img src=\"images/hyper.gif\"></a></div>\n" +
+    "			<!--<div style=\"float:right\"><a href=\"/\"><img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a></div>-->\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\">CRE8.XYZ</a>\n" +
     "			<br>\n" +
     "			<a href=\"/about\">about</a>\n" +
@@ -1929,15 +1930,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "                <h3>WE CREATE THE FUTURE TODAY</h3>\n" +
     "                <!--<h4>WHERE WE WILL GO & WHAT WE WILL CREATE</h4>-->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>\n" +
-    "                <h5><a href=\"https://www.github.com/troverman/conexus\">Developer Documentation</a></h5>\n" +
-    "                <h5><a href=\"https://www.github.com/troverman/conexus\">App Ecosystem</a></h5>\n" +
-    "                <h5><a href=\"https://www.github.com/troverman/conexus\">APIs</a></h5>\n" +
+    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, help cocreate our shared vision.</p>\n" +
     "\n" +
+    "                <h5><a href=\"https://www.github.com/troverman/conexus\">Application Ecosystem</a></h5>\n" +
+    "                <h5><a href=\"https://www.github.com/troverman/conexus\">Developer Documentation</a></h5>\n" +
     "                <!--Inspiring Tasks and Projects-->\n" +
     "            </div>\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "                <!--<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>-->\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -1948,15 +1948,27 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "                <!--THE FUTURE-->\n" +
     "                <h3>ARTIFICAL INTELLIGENCE & TRANSPARENCY</h3>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Transparency Ethos and Consensus on Context-specific Time, Intent, and Creation.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Inclusivity as income.</p>\n" +
-    "                <!--<img style=\"height:50px;\" src=\"images/hyper.gif\">-->\n" +
-    "                <!---->\n" +
-    "                <!--inclusivity as income-->\n" +
-    "                <!--<p>The next wave of -->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Information and Intelligence with Transparency and Consensus on Time, Intention, and Creation.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Shared Information; Inclusivity; Income.</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "                <!--<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>-->\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "\n" +
+    "\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/91vj.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://media.giphy.com/media/sNz7ODDP6lsRy/giphy.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://data.whicdn.com/images/324606380/original.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://groupexplorer.sourceforge.net/images/cd-s5-transpo.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://media3.giphy.com/media/1du0JID03v4ZO/giphy.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2013/vxcngfhvj.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
+    "                -->\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -3293,6 +3305,26 @@ angular.module("member/templates/about.tpl.html", []).run(["$templateCache", fun
     "\n" +
     "<div class=\"spacing-50\"></div>\n" +
     "");
+}]);
+
+angular.module("member/templates/actions.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("member/templates/actions.tpl.html",
+    "<div class=\"row\">\n" +
+    "\n" +
+    "    <div class=\"card\">\n" +
+    "        <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Action</button>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"card\">\n" +
+    "        <!--CONSUMPTION; human tasks.. -->\n" +
+    "        <!--VERBS-->\n" +
+    "        <!--CREATION, REACTION, VALIDATION, JOIN?, -->\n" +
+    "        <!--LOCATION IS ON TIME-->\n" +
+    "    </div>\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -5046,30 +5078,16 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div class=\"col-md-6\">\n" +
     "\n" +
     "                        <div ng-if=\"item.model=='TIME'\">\n" +
-    "\n" +
-    "                            <h3>{{item.amount}} <a href=\"task/{{item.task.id}}\">{{item.task.title}}</a></h3>\n" +
-    "\n" +
-    "                            <!--WIP-->\n" +
     "                            <h4>\n" +
     "                                {{item.amount}}\n" +
+    "                                <!--\n" +
     "                                <i class=\"fa fa-angle-double-left\"></i>\n" +
     "                                {{validationSumObj.general/validations.length}}\n" +
     "                                <i class=\"fa fa-angle-double-right\"></i>\n" +
-    "                                {{item.task.title.toUpperCase()}}\n" +
+    "                                -->\n" +
+    "                                <i class=\"fa fa-arrows-h\"></i>\n" +
+    "                                <a href=\"task/{{item.task.id}}\">{{item.task.title.toUpperCase()}}</a>\n" +
     "                            </h4>\n" +
-    "\n" +
-    "                            <h4>\n" +
-    "                                {{item.task.title.toUpperCase()}} \n" +
-    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                                <a href=\"project/{{item.task.id}}\">{{item.project.title.toUpperCase()}}</a>\n" +
-    "                            </h4>\n" +
-    "\n" +
-    "                            <h4>\n" +
-    "                                {{item.amount}} \n" +
-    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                                {{item.project.title}}\n" +
-    "                            </h4>\n" +
-    "\n" +
     "                        </div>\n" +
     "\n" +
     "                        <div ng-if=\"item.model=='TASK'\">\n" +
@@ -5083,6 +5101,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
     "                            <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                        </tags-input>\n" +
+    "                        \n" +
     "                        <h5 ng-repeat=\"model in item.associatedModels\">{{model.type}}, {{model.address}}</h5>\n" +
     "\n" +
     "                        <div class=\"spacing-15\"></div>\n" +
