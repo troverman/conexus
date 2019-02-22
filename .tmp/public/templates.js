@@ -1437,7 +1437,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-6\" style=\"max-height:100vh;overflow:scroll\">\n" +
-    "                        <div ng-repeat=\"item in projects.slice(0,10)\">\n" +
+    "                        <div ng-repeat=\"item in projects\">\n" +
     "                            <div class=\"card\" ng-click=\"\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
     "\n" +
@@ -1496,7 +1496,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-6\" style=\"max-height:100vh;overflow:scroll\">\n" +
-    "                        <div ng-repeat=\"item in tasks.slice(0,5)\">\n" +
+    "                        <div ng-repeat=\"item in tasks\">\n" +
     "                            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
     "                                    <div style=\"float:right;text-align:right\">\n" +
@@ -1913,8 +1913,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "                <h3>COORDINATE INTENTIONALLY</h3>\n" +
     "                <h5>Motions, Voting, and Governance alongside Peer based decision mechanisms</h5>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work; Reputation Weighted Voting Mechanism</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation Mechanisms assert earned reputation; group organization naturally flourishes.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work discovered though a Reputation Weighted Voting Mechanism</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation with group organization naturally flourishing.</p>\n" +
+    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation naturally organizating group dynamics.</p>-->\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
@@ -7606,25 +7607,8 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	<div class=\"page-heading\">\n" +
     "		<div class=\"container\"> \n" +
     "			<div class=\"spacing-25\"></div>\n" +
-    "			<h1>{{searchQuery.search}}</h1>\n" +
+    "			<h1>{{searchQueryString}}</h1>\n" +
     "			<div class=\"spacing-25\"></div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<!--MODEL FILTERS-->\n" +
-    "	<div ng-if=\"searchResults.length > 0\" class=\"container\">\n" +
-    "		<div class=\"spacing-10\"></div>\n" +
-    "		<div class=\"spacing-10\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "				<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
-    "				<li><a href=\"/content\">Content</a></li>\n" +
-    "				<li><a href=\"/marketplace\">Items</a></li>\n" +
-    "				<li><a href=\"/members\">Members</a></li>\n" +
-    "				<li><a href=\"/market\">Orders</a></li>\n" +
-    "				<li><a href=\"/projects\">Projects</a></li>\n" +
-    "				<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "			</ul>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	\n" +
@@ -7679,8 +7663,24 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "		        </div>\n" +
     "		    </div>\n" +
     "\n" +
-    "\n" +
     "			<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "				<!--MODEL FILTERS-->\n" +
+    "				<div ng-if=\"searchResults.length > 0\" class=\"container\">\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "					<div class=\"row\">\n" +
+    "						<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "							<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
+    "							<li><a href=\"/content\">Content</a></li>\n" +
+    "							<li><a href=\"/marketplace\">Items</a></li>\n" +
+    "							<li><a href=\"/members\">Members</a></li>\n" +
+    "							<li><a href=\"/market\">Orders</a></li>\n" +
+    "							<li><a href=\"/projects\">Projects</a></li>\n" +
+    "							<li><a href=\"/tasks\">Tasks</a></li>\n" +
+    "						</ul>\n" +
+    "					</div>\n" +
+    "					<div class=\"spacing-10\"></div>\n" +
+    "				</div>\n" +
     "\n" +
     "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "	                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
@@ -7690,7 +7690,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "				<div class=\"card\">\n" +
-    "		            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery.search\">\n" +
+    "	                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "			    </div>\n" +
     "\n" +
     "				<div ng-if=\"searchResults.length > 0\" class=\"card\">\n" +
@@ -7894,14 +7894,22 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--TODO: VALIDATION RENDER-->\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "    <!--TODO: STREAM | IFPS-->\n" +
-    "    <div class=\"row\">\n" +
+    "    <div style=\"row\">\n" +
+    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "            <li><a ng-click=\"showContentToggle()\" href=\"#\">Content</a></li>\n" +
+    "            <li><a ng-click=\"showTimeToggle()\" href=\"#\">Time</a></li>\n" +
+    "        </ul>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--RESTYLE-->\n" +
+    "    <div class=\"row\" ng-show=\"showTime\">\n" +
+    "        <!--TODO: STREAM | IFPS-->\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div ng-show=\"!working\">\n" +
-    "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Start Work</button>\n" +
+    "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Start Work <!--+ Time--></button>\n" +
     "                    <div ng-show=\"question && !streaming\">\n" +
     "                        <h3>Streaming?</h3>\n" +
     "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</button>\n" +
@@ -7936,19 +7944,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "    <div style=\"row\">\n" +
-    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "            <li><a href=\"#\">Content</a></li>\n" +
-    "            <li><a href=\"#\">Time</a></li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <!--RESTYLE-->\n" +
-    "    <div class=\"row\">\n" +
     "        <div class=\"card\" ng-repeat=\"item in time\" ng-click=\"\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div>\n" +
@@ -7985,14 +7980,13 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Task Content</button>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
     "    <!--TODO: NESTED RENDER -->\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-show=\"showContent\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Task Content</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "        <div ng-repeat=\"item in contentList\"  ng-click=\"\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +

@@ -48,6 +48,21 @@ angular.module( 'conexus.task', [
     //TODO: STORE IN DATA
     $scope.task.model = 'TASK';
 
+    $scope.showTimeToggle = function(){
+        //$scope.showTime = !$scope.showTime;
+        $scope.showContent = false;
+        $scope.showTime = true;
+    };
+
+    $scope.showContentToggle = function(){
+        $scope.showContent = true;
+        $scope.showTime = false;
+        //$scope.showContent = !$scope.showContent;
+    };
+
+    $scope.showContent = false;
+    $scope.showTime = true;
+
     //TEMP HARDCODE -- MOVE TO PROTOCOL
     $scope.task.tokens = [];
     $scope.task.tokens.push('CRE8');

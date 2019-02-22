@@ -288,11 +288,17 @@ angular.module( 'conexus.home', [
 
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
         if (newValue !== oldValue) {
-            var query = {}
-            query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
             $rootScope.stateIsLoading = true;
             //TODO: REMOVE BASED 64 STRING SEARCH
-            SearchModel.search(query.search).then(function(models){
+
+            var searchModel = {
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC',
+                model: null,
+                query: $scope.searchQuery.map(function(obj){return obj.text}).join(',')
+            };
+            SearchModel.search(searchModel).then(function(models){
                 $rootScope.stateIsLoading = false;
                 $scope.activity = models;
                 $scope.activity.map(function(obj){
@@ -805,11 +811,14 @@ angular.module( 'conexus.home', [
 
     $scope.$watch('searchQuery', function(newValue, oldValue){
         if (newValue !== oldValue) {
-            var query = {}
-            query.search = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-            $rootScope.stateIsLoading = true;
-            //TODO: REMOVE BASED 64 STRING SEARCH
-            SearchModel.search(query.search).then(function(models){
+            var searchModel = {
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC',
+                model: null,
+                query: $scope.searchQuery.map(function(obj){return obj.text}).join(',')
+            };
+            SearchModel.search(searchModel).then(function(models){
                 $rootScope.stateIsLoading = false;
                 $scope.activity = models;
                 $scope.activity.map(function(obj){

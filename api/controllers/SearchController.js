@@ -6,7 +6,9 @@ module.exports = {
 
 	search: function (req, res) {
 
-		var searchQuery = req.query.search;
+		console.log(req.query)
+
+		var searchQuery = req.query.query;
 		var tag = req.query.tag;
 		var limit = req.query.limit;
 		var skip = req.query.skip;
@@ -18,7 +20,7 @@ module.exports = {
 		if (req.query.model = 'ORDER'){}
 
 		//TAKE A BREAK
-		if (req.query.model = 'PROJECT'){
+		if (req.query.model == 'PROJECT'){
 
 			var query = JSON.parse(JSON.stringify(req.query.query));
 			console.log(query);
@@ -56,10 +58,10 @@ module.exports = {
 
 		}
 
-		if (req.query.model = 'TASK'){}
-		if (req.query.model = 'TOKEN'){}
-		if (req.query.model = 'TRANSACTION'){}
-		if (req.query.model = 'TIME'){}
+		if (req.query.model == 'TASK'){}
+		if (req.query.model == 'TOKEN'){}
+		if (req.query.model == 'TRANSACTION'){}
+		if (req.query.model == 'TIME'){}
 
 		//YIKES
 		//OLD, COMBO

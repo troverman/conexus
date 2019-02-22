@@ -117,6 +117,8 @@ module.exports = {
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
 
+					//TODO: IMPLICIT VALIDATION ! --> TO TASK  (FOR ALL TASK DIMENSIONS && SELF DEF)
+
 					//TODO: REQUEST TO VALIDATE NOTIFICATION
 					//for (x in time.associatedModels){
 					//	if (time.associatedModels[x].type == 'PROJECT'){

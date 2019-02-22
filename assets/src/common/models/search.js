@@ -3,7 +3,6 @@ angular.module('models.search', ['lodash', 'services', 'sails.io',])
 .service('SearchModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
     
     this.search = function(model) {
-
         var url = utils.prepareUrl('search');
         var query = {
             params:{
@@ -14,7 +13,6 @@ angular.module('models.search', ['lodash', 'services', 'sails.io',])
                 query:model.query
             }
         };
-
         return $sailsSocket.get(url, query).then(success, error);
     };
 

@@ -62,14 +62,22 @@
         </div>
     </div>
 
-    <!--TODO: VALIDATION RENDER-->
+    <div class="spacing-5"></div>
 
-    <!--TODO: STREAM | IFPS-->
-    <div class="row">
+    <div style="row">
+        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+            <li><a ng-click="showContentToggle()" href="#">Content</a></li>
+            <li><a ng-click="showTimeToggle()" href="#">Time</a></li>
+        </ul>
+    </div>
+
+    <!--RESTYLE-->
+    <div class="row" ng-show="showTime">
+        <!--TODO: STREAM | IFPS-->
         <div class="card">
             <div style="padding:16px">
                 <div ng-show="!working">
-                    <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Start Work</button>
+                    <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Start Work <!--+ Time--></button>
                     <div ng-show="question && !streaming">
                         <h3>Streaming?</h3>
                         <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
@@ -104,19 +112,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="spacing-5"></div>
-
-    <div style="row">
-        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-            <li><a href="#">Content</a></li>
-            <li><a href="#">Time</a></li>
-        </ul>
-    </div>
-
-    <!--RESTYLE-->
-    <div class="row">
         <div class="card" ng-repeat="item in time" ng-click="">
             <div style="padding:16px;">
                 <div>
@@ -153,14 +148,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="card">
-            <button style="width:100%;" class="btn btn-default log-btn" ng-click="contentToggle()">+ Task Content</button>
-        </div>
-    </div>
-
     <!--TODO: NESTED RENDER -->
-    <div class="row">
+    <div class="row" ng-show="showContent">
+        <div class="card">
+            <div style="padding:16px;">
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="contentToggle()">+ Task Content</button>
+            </div>
+        </div>
         <div ng-repeat="item in contentList"  ng-click="">
             <div class="card">
                 <div style="padding:16px;">

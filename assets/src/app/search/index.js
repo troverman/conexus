@@ -21,7 +21,14 @@ angular.module( 'conexus.search', [
         },
         resolve: {
             searchResults: ['SearchModel', function(SearchModel) {
-                return SearchModel.search('');
+                var searchModel = {
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC',
+                    model: null,
+                    query: '',
+                };
+                return SearchModel.search(searchModel);
             }]
         }
     })
@@ -35,7 +42,14 @@ angular.module( 'conexus.search', [
         },
         resolve: {
             searchResults: ['$stateParams','SearchModel', function($stateParams, SearchModel) {
-                return SearchModel.search($stateParams.searchQuery);
+                var searchModel = {
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC',
+                    model: null,
+                    query: $stateParams.searchQuery,
+                };
+                return SearchModel.search(searchModel);
             }]
          }
     });
@@ -43,8 +57,8 @@ angular.module( 'conexus.search', [
 
 .controller( 'SearchController', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
     $scope.searchResults = searchResults;
-    $scope.searchQuery = {};
-    $scope.searchQuery.search = $stateParams.searchQuery;
+    $scope.searchQuery = [{text:$stateParams.searchQuery}];
+    $scope.searchQueryString = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
 
     $scope.tags = [];
     $scope.searchResults.map(function(obj){
@@ -52,7 +66,7 @@ angular.module( 'conexus.search', [
         return obj;
     });
 
-    titleService.setTitle($scope.searchQuery.search + ' | CRE8.XYZ');
+    titleService.setTitle($scope.searchQueryString + ' | CRE8.XYZ');
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -63,7 +77,6 @@ angular.module( 'conexus.search', [
     $scope.options = {scrollwheel: false};
 
     //IF LOCATION
-
     $scope.createReaction = function(item, type){
         if($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -98,14 +111,44 @@ angular.module( 'conexus.search', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        SearchModel.search($scope.searchQuery.search).then(function(models){
+        var searchModel = {
+            limit:100,
+            skip:0,
+            sort:'createdAt DESC',
+            model: null,
+            query: $scope.searchQueryString
+        };
+        SearchModel.search(searchModel).then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.searchResults = models;
             $scope.searchResults.map(function(obj){
                 if (obj.tags){$scope.tags.concat(obj.tags.split(','));}
             });
-            $location.path('search/'+$scope.searchQuery.search, false);
+            $location.path('search/'+$scope.searchQueryString, false);
         });
     };
+
+    //WATCHERS
+    $scope.$watch('searchQuery', function(newValue, oldValue){
+        if (newValue !== oldValue) {
+           $rootScope.stateIsLoading = true;
+            $scope.searchQueryString = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
+            var searchModel = {
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC',
+                model: null,
+                query: $scope.searchQueryString
+            };
+            SearchModel.search(searchModel).then(function(models){
+                $rootScope.stateIsLoading = false;
+                $scope.activity = models;
+                $scope.activity.map(function(obj){
+                    if (obj.tags){obj.tags = obj.tags.split(',');}
+                });
+            });
+        }
+    }, true);
+    //WATCHERS
  
 }]);
