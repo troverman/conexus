@@ -19,6 +19,7 @@ angular.module( 'conexus', [
     'textAngular',
     'toaster',
     'ngAnimate',
+    'hljs',
     'conexus.about',
     'conexus.account',
     'conexus.apps',

@@ -48,17 +48,13 @@
                 <h4>Conex API</h4>
                 <h5>Filter & Search Parameters</h5>
                 <p>Every model can be filtered by each model param: {DESC, ASC}</p>
-                <span>
-                    var query = {};
-                </span>
+                 <div hljs hljs-language="javascript">var query = {};</div>
 
                 <h5>Models & Endpoints</h5>
                 <p><b>Assoication</b></p>
                 <div>
                     <p>This is the Association Model</p>
-                    <span>
-                        var associationModel = {};
-                    </span>
+                    <div hljs hljs-language="javascript">var associationModel = {};</div>
                     <p>get /api/assoication</p>
                     <p>post /api/assoication</p>
                 </div>
@@ -90,25 +86,22 @@
 
                 <h4>Interoperable Protocol Architecture</h4>
                 <p>Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>
-                <span>
-                    contract Protocol {}
-                </span>
-                <span>
-                    var humanReadableValidationNFTModel = {
-                        string: 'VALIDATION+'+data[x][y].id,
-                        information:{
-                            inCirculation:1,
-                            markets:0,
-                        },
-                        protocols:[
-                            'BASE',
-                        ],
-                        logic:{
-                            transferrable:true, 
-                            mint:'ONCREATEVALIDATION'
-                        }
-                    };
-                </span>
+                <div hljs hljs-language="javascript">contract Protocol {}</div>
+                <div hljs hljs-language="javascript">
+var humanReadableValidationNFTModel = {
+    string: 'VALIDATION+'+data[x][y].id,
+    information:{
+        inCirculation:1,
+        markets:0,
+    },
+    protocols:[
+        'BASE',
+    ],
+    logic:{
+        transferrable:true, 
+        mint:'ONCREATEVALIDATION'
+    }
+};</div>
 
                 <h5>Core Protocols</h5>
                 <p>Layered Adaptability</p>

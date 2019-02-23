@@ -13,6 +13,7 @@ var cssFilesToInject = [
   'bower_components/angular-slider/dist/rzslider.css',
   'bower_components/fullcalendar/dist/fullcalendar.css',
   'bower_components/angularjs-toaster/toaster.min.css',
+  'bower_components/highlight/styles/github.css',
   'styles/**/*.css',
 ];
 
@@ -30,6 +31,9 @@ var jsFilesToInject = [
   'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
   'bower_components/angular-google-maps/dist/angular-google-maps.js',
   'bower_components/angular-moment/angular-moment.js',
+  'bower_components/highlight/highlight.pack.js',
+  'bower_components/angular-highlightjs/angular-highlightjs.min.js',
+
 
   'bower_components/d3/d3.js',
   'bower_components/nvd3/build/nv.d3.js',

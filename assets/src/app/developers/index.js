@@ -1,7 +1,7 @@
 angular.module( 'conexus.developers', [
 ])
 
-.config(['$stateProvider', function config( $stateProvider ) {
+.config(['$stateProvider', 'hljsServiceProvider', function config( $stateProvider, hljsServiceProvider) {
     $stateProvider.state( 'developers', {
         url: '/developers',
         views: {
@@ -11,9 +11,12 @@ angular.module( 'conexus.developers', [
             }
         }
     });
+    hljsServiceProvider.setOptions({
+        //tabReplace: '    '
+    });
 }])
 
-.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, ReactionModel, titleService, transaction ) {
+.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, ReactionModel, titleService, transaction ) {
     titleService.setTitle('Developers | CRE8.XYZ');
     
 }]);
