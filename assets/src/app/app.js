@@ -23,6 +23,7 @@ angular.module( 'conexus', [
     'conexus.account',
     'conexus.apps',
     //'conexus.association',
+    'conexus.block',
     'conexus.content',
     'conexus.contentList',
     'conexus.developers',
@@ -52,6 +53,7 @@ angular.module( 'conexus', [
     'conexus.time',
     'conexus.transaction',
     'conexus.transparency',
+    'conexus.tx',
     'conexus.validation',
     'conexus.view'
 ])
