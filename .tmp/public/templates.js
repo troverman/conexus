@@ -807,6 +807,61 @@ angular.module("block/index.tpl.html", []).run(["$templateCache", function($temp
     "    </div>\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-xs-12\">\n" +
+    "			<div class=\"card\">\n" +
+    "				<div style=\"padding:16px;\">\n" +
+    "					<h3>Summary</h3>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Number Of Transactions 2930</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Height 564366 (Mainchain)</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Block Reward	12.5 BTC</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Timestamp Feb 23, 2019 4:38:23 PM</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Mined by	</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Merkle Root b2b5ba7db4ecbec6c69df58982bc76f8b0bb745a838ddcc3dfec67022b83519c</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Previous Block <a href=\"block/564365\">564365</a></p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Bits	172e6f88</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Size (bytes)	904469</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Version 536870912</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Nonce 1221514036</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Next Block <a href=\"block/564367\">564367</a></p>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-xs-12\">\n" +
+    "			<div class=\"card\">\n" +
+    "				<div style=\"padding:16px;\">\n" +
+    "					<h3>Transactions</h3>\n" +
+    "					<table class=\"table table-striped table-hover\">\n" +
+    "		                <thead>\n" +
+    "		                    <tr>\n" +
+    "		                    	<th>ID</th>\n" +
+    "								<th>Data</th>\n" +
+    "		                    	<th>Address</th>\n" +
+    "		                    	<th>Address</th>\n" +
+    "\n" +
+    "							</tr>\n" +
+    "		                </thead>\n" +
+    "		                <tbody>\n" +
+    "		                    <tr ng-repeat=\"tx in transactions\">\n" +
+    "		                        <td><a href=\"tx/{{tx.id}}\">{{tx.id}}</a></td>\n" +
+    "								<td>{{tx.data}}</td>\n" +
+    "		                        <td><a href=\"tx/{{tx.id}}\">{{tx.id}}</a></td>\n" +
+    "		                        <td><a href=\"tx/{{tx.id}}\">{{tx.id}}</a></td>\n" +
+    "		                    </tr>\n" +
+    "		                </tbody>\n" +
+    "		            </table>\n" +
+    "		        </div>\n" +
+    "	        </div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
     "");
 }]);
 
@@ -8970,6 +9025,26 @@ angular.module("tx/index.tpl.html", []).run(["$templateCache", function($templat
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-25\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "	<div class=\"spacing-10\"></div>\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"col-xs-12\">\n" +
+    "			<div class=\"card\">\n" +
+    "				<div style=\"padding:16px;\">\n" +
+    "					<h3>Summary</h3>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Block <a href=\"block/564365\">564365</a></p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Address <a href=\"block/564365\">eqerq5s64365</a></p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Address <a href=\"block/564365\">564sffad365</a></p>\n" +
+    "\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Height 564366 (Mainchain)</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Data 564366a564366564366a564366ad3diebujdd564366a564366ad3564366a564366564366a564366ad3diebujdd564366a564366ad3diebujdd3diebujd3diebujdad3diebujdd564366a564366ad3diebujdd3diebu564366a564366564366a564366ad3diebujdd564366a564366ad3diebujdd3diebujd3diebujdad3diebujdd564366a564366ad3diebujdd3diebujd3diebujd37177123341jd3diebujddiebujdd3diebujd3diebujdad3diebujdd564366a564366ad3diebujdd3diebujd3diebujd</p>\n" +
+    "\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
     "</div>");
 }]);
 

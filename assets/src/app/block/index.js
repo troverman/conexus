@@ -13,7 +13,13 @@ angular.module( 'conexus.block', [
 	});
 }])
 
-.controller( 'BlockCtrl', ['$sce', '$scope', 'contentList', 'titleService', function BlockCtrl( $sce, $scope, contentList, titleService ) {
+.controller( 'BlockCtrl', ['$sce', '$scope', 'titleService', function BlockCtrl( $sce, $scope, titleService ) {
 	titleService.setTitle('Block | CRE8.XYZ');
+
+	$scope.transactions = [];
+
+    for(var i=0;i<1000;i++){
+		$scope.transactions.push({id:'1241312341',data:'HASHasdjhasdjahsdkjasdhjashdkjhjh2ekj3dvjik 3j k3jeajksdjadkjah'});
+	}
 
 }]);
