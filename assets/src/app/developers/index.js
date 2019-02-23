@@ -16,5 +16,4 @@ angular.module( 'conexus.developers', [
 .controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, ReactionModel, titleService, transaction ) {
     titleService.setTitle('Developers | CRE8.XYZ');
     
-
 }]);

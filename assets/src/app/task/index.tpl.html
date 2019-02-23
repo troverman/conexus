@@ -30,6 +30,9 @@
                     </div>
                     <h3>{{task.title}}</h3>
 
+                    <!--..motion to edit..?-->
+                    <div ng-if="currentUser.id == task.user.id">edit</div>
+
                     <!--<button ng-click="pop()">test</button>-->
 
                     <!--ASSOCIATION && VALIDATION-->

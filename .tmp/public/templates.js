@@ -1134,11 +1134,133 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div id=\"about-section1\">\n" +
     "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-6\">\n" +
-    "                <h3>DEVELOP</h3>\n" +
+    "                <h3>DEVELOPERS</h3>\n" +
     "                <!--<a href=\"https://www.github.com/troverman/conexus\">conexus github repository</a>-->\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\"></div>\n" +
+    "        </div>\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                \n" +
+    "                <h3>Documentation</h3>\n" +
+    "\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>Conex API</h4>\n" +
+    "                <h5>Filter & Search Parameters</h5>\n" +
+    "                <p>Every model can be filtered by each model param: {DESC, ASC}</p>\n" +
+    "                <span>\n" +
+    "                    var query = {};\n" +
+    "                </span>\n" +
+    "\n" +
+    "                <h5>Models & Endpoints</h5>\n" +
+    "                <p><b>Assoication</b></p>\n" +
+    "                <div>\n" +
+    "                    <p>This is the Association Model</p>\n" +
+    "                    <span>\n" +
+    "                        var associationModel = {};\n" +
+    "                    </span>\n" +
+    "                    <p>get /api/assoication</p>\n" +
+    "                    <p>post /api/assoication</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <p><b>Action</b></p>\n" +
+    "                <p><b>Assoication</b></p>\n" +
+    "                <p><b>Content</b></p>\n" +
+    "                <p><b>Follower</b></p>\n" +
+    "                <p><b>Item</b></p>\n" +
+    "                <p><b>Location</b></p>\n" +
+    "                <p><b>Member</b></p>\n" +
+    "                <p><b>Notification</b></p>\n" +
+    "                <p><b>Order</b></p>\n" +
+    "                <p><b>Passport</b></p>\n" +
+    "                <p><b>Project</b></p>\n" +
+    "                <p><b>ProjectMember</b></p>\n" +
+    "                <p><b>Protocol</b></p>\n" +
+    "                <p><b>Reaction</b></p>\n" +
+    "                <p><b>Search</b></p>\n" +
+    "                <p><b>Task</b></p>\n" +
+    "                <p><b>Time</b></p>\n" +
+    "                <p><b>Token</b></p>\n" +
+    "                <p><b>Transaction</b></p>\n" +
+    "                <p><b>Validation</b></p>\n" +
+    "\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>Interoperable Protocol Architecture</h4>\n" +
+    "                <p>Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "                <span>\n" +
+    "                    contract Protocol {}\n" +
+    "                </span>\n" +
+    "                <span>\n" +
+    "                    var humanReadableValidationNFTModel = {\n" +
+    "                        string: 'VALIDATION+'+data[x][y].id,\n" +
+    "                        information:{\n" +
+    "                            inCirculation:1,\n" +
+    "                            markets:0,\n" +
+    "                        },\n" +
+    "                        protocols:[\n" +
+    "                            'BASE',\n" +
+    "                        ],\n" +
+    "                        logic:{\n" +
+    "                            transferrable:true, \n" +
+    "                            mint:'ONCREATEVALIDATION'\n" +
+    "                        }\n" +
+    "                    };\n" +
+    "                </span>\n" +
+    "\n" +
+    "                <h5>Core Protocols</h5>\n" +
+    "                <p>Layered Adaptability</p>\n" +
+    "                <p>Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
+    "\n" +
+    "                <p><b>STRUCTURE</b></p>\n" +
+    "                <p>Defining operations such as transferrable, the ability to create: meta defination</p>\n" +
+    "\n" +
+    "                <p><b>LANUGAGE</b></p>\n" +
+    "                <p>Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "\n" +
+    "                <p><b>CONGRUENCE</b></p>\n" +
+    "                <p>Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "\n" +
+    "                <!--<p><b>PROTOCOL . . . CONTRACT</b></p>-->\n" +
+    "\n" +
+    "                <p><b>MANIFOLD</b></p>\n" +
+    "                <p>+[] SPACE</p>\n" +
+    "\n" +
+    "                <p><b>+CREDIT</b></p>\n" +
+    "                <p>+CREDIT+[INTEREST] SPACE</p>\n" +
+    "                <p>+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
+    "\n" +
+    "                <p><b>+FUTURE</b></p>\n" +
+    "                <p>+FUTURE+[DATE] SPACE</p>\n" +
+    "\n" +
+    "                <p><b>+OPTION</b></p>\n" +
+    "                <p>+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "\n" +
+    "                <p><b>DATA</b></p>\n" +
+    "                <!--<p><b>CRE8</b></p>-->\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <p><b>MEMBER<b></p>\n" +
+    "                <p><b>PROJECT<b></p>\n" +
+    "                <p><b>TASK<b></p>\n" +
+    "                <p><b>TIME<b></p>\n" +
+    "                <p><b>VALIDATION<b></p>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <!--/block, /tx, /address-->\n" +
+    "            \n" +
+    "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\"></div>\n" +
     "        </div>\n" +
@@ -7986,6 +8108,9 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <h5 ng-click=\"renderValidationToggle(task)\"><a href=\"#\">Associations & Validations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "                    <h3>{{task.title}}</h3>\n" +
+    "\n" +
+    "                    <!--..motion to edit..?-->\n" +
+    "                    <div ng-if=\"currentUser.id == task.user.id\">edit</div>\n" +
     "\n" +
     "                    <!--<button ng-click=\"pop()\">test</button>-->\n" +
     "\n" +
