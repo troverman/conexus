@@ -13,6 +13,6 @@ angular.module( 'conexus.tx', [
 	});
 }])
 
-.controller( 'TxCtrl', ['$sce', '$scope', 'contentList', 'titleService', function TxCtrl( $sce, $scope, contentList, titleService ) {
+.controller( 'TxCtrl', ['$sce', '$scope', 'titleService', function TxCtrl( $sce, $scope, titleService ) {
 	titleService.setTitle('Transaction | CRE8.XYZ');
 }]);

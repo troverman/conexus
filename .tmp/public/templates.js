@@ -164,7 +164,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
-    "				<a href=\"/\"><img  style=\"height:88px;float:right\" src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a>\n" +
+    "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -191,6 +191,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<h5>Member Tokenization Protocol</h5>\n" +
     "				<h5>Order Tokenization Protocol</h5>\n" +
     "				<h5>Project Tokenization Protocol</h5>\n" +
+    "				<h5>Project Charter Protocol</h5>\n" +
     "				<h5>Reaction Tokenization Protocol</h5>\n" +
     "				<h5>Task Tokenization Protocol</h5>\n" +
     "				<h5>Time Tokenization Protocol</h5>\n" +
@@ -1277,48 +1278,264 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h3>Documentation</h3>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "                <h4>Conex API</h4>\n" +
-    "                <h5>Filter & Search Parameters</h5>\n" +
-    "                <p>Every model can be filtered by each model param: {DESC, ASC}</p>\n" +
-    "                 <div hljs hljs-language=\"javascript\">var query = {};</div>\n" +
-    "\n" +
-    "                <h5>Models & Endpoints</h5>\n" +
-    "                <p><b>Assoication</b></p>\n" +
     "                <div>\n" +
-    "                    <p>This is the Association Model</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var associationModel = {};</div>\n" +
-    "                    <p>get /api/assoication</p>\n" +
-    "                    <p>post /api/assoication</p>\n" +
+    "                    <h4>Conex API</h4>\n" +
+    "                    <h5>Filter & Search Parameters</h5>\n" +
+    "                    <p>Every model can be filtered by each model param: {DESC, ASC}</p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var query = {};</div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <h4>Models & Endpoints</h4>\n" +
     "                </div>\n" +
     "\n" +
-    "                <p><b>Action</b></p>\n" +
+    "                <div>\n" +
+    "                    <p><b>Action</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>App</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the App Model</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
     "                <p><b>Assoication</b></p>\n" +
-    "                <p><b>Content</b></p>\n" +
-    "                <p><b>Follower</b></p>\n" +
-    "                <p><b>Item</b></p>\n" +
-    "                <p><b>Location</b></p>\n" +
-    "                <p><b>Member</b></p>\n" +
-    "                <p><b>Notification</b></p>\n" +
-    "                <p><b>Order</b></p>\n" +
-    "                <p><b>Passport</b></p>\n" +
-    "                <p><b>Project</b></p>\n" +
-    "                <p><b>ProjectMember</b></p>\n" +
-    "                <p><b>Protocol</b></p>\n" +
-    "                <p><b>Reaction</b></p>\n" +
-    "                <p><b>Search</b></p>\n" +
-    "                <p><b>Task</b></p>\n" +
-    "                <p><b>Time</b></p>\n" +
-    "                <p><b>Token</b></p>\n" +
-    "                <p><b>Transaction</b></p>\n" +
-    "                <p><b>Validation</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Association Model</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the models relationships of Projects, Tasks, & Time (Project <--> Task <--> Time).<br> Associations are computed though validation traversal.</p>\n" +
+    "                    <p><b>get /api/assoication</b></p>\n" +
+    "                    <img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var associationModel = {\n" +
+    "    associatedModels: [\n" +
+    "        {type:'MODELTYPE', address:ADDRESS},\n" +
+    "        {type:'MODELTYPE', address:ADDRESS}\n" +
+    "    ],\n" +
+    "    context: {\n" +
+    "        [title]:weight\n" +
+    "    }\n" +
+    "};\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Block</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Blocks are machiene verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequental validated blocks of information.</p>\n" +
+    "                    <p><b>get /api/block</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var blockModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Content</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Content is information.</p>\n" +
+    "                    <p><b>get /api/content, post /api/content</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var contentModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Data</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Data is information.</p>\n" +
+    "                    <p><b>get /api/data, post /api/data</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Follower</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Followers are .. </p>\n" +
+    "                    <p><b>[get, post] /api/follower</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var followerModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Item</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Items are .. </p>\n" +
+    "                    <p><b>[get, post] /api/item</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var itemModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Location</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Location Model</p>\n" +
+    "                    <p><b>[get, post] /api/location</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var locationModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Member</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Member Model</p>\n" +
+    "                    <p><b>[get, post] /api/member</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var memberModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Notification</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model</p>\n" +
+    "                    <p><b>[get, post] /api/notification</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var notificationModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Order</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>\n" +
+    "                    <p><b>[get, post] /api/order</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var orderModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Passport</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model</p>\n" +
+    "                    <p><b>[get, post] /api/passport</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var passportModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Project</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
+    "                    <p><b>[get, post] /api/project</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var projectModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>ProjectCharter</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">ProjectCharter is .. </p>\n" +
+    "                    <p><b>[get, post] /api/projectcharter</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var projectCharterModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>ProjectMember</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. </p>\n" +
+    "                    <p><b>[get, post] /api/projectmember</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var projectMemberModel = {};</div>\n" +
+    "                </div>\n" +
+    "                \n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Protocol</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Protocol is .. </p>\n" +
+    "                    <p><b>[get, post] /api/protocol</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var protocolModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Reaction</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Reaction is .. </p>\n" +
+    "                    <p><b>[get, post] /api/reaction</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var reactionModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Search</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Search is .. </p>\n" +
+    "                    <p><b>[get, post] /api/search</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var searchModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Task</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Tasks are a relay of context. Layers of validation intention create connection to time. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>\n" +
+    "                    <p><b>[get, post] /api/task</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var taskModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Time</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Time & intention is the foundation of energy. Time is the base of CRE8.</p>\n" +
+    "                    <p><b>[get, post] /api/time</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var timeModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Token</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">A token is a discrete piece of information with the following properties:</p>\n" +
+    "                    <p><b>get /api/token</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var tokenModel = {};</div>\n" +
+    "                </div>\n" +
+    "                \n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Transaction</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
+    "                    <p><b>[get, post] /api/transaction</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var transactionModel = {\n" +
+    "    to: address,\n" +
+    "    from: address,\n" +
+    "    amountSet: {\"ASSETSTRING\": 10, \"CRE8\":1},\n" +
+    "    tags: 'comma,seperated,tag,string',\n" +
+    "    content: 'transation content'\n" +
+    "};\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Tx</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Every state update in the CRE8 virtual machine is represented by a transaction or tx. Blocks are machine verified bundles of txs.</p>\n" +
+    "                    <p><b>get /api/tx</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var txModel = {};</div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Validation</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Every state update in the CRE8 virtual machine is represented by a transaction or tx. Blocks are machine verified bundles of txs.</p>\n" +
+    "                    <p><b>[get, post] /api/validation</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var validationModel = {};</div>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <!--TOKEN STRING MAPPING-->\n" +
     "\n" +
     "                <h4>Interoperable Protocol Architecture</h4>\n" +
-    "                <p>Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
     "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
     "var humanReadableValidationNFTModel = {\n" +
@@ -1334,53 +1551,73 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        transferrable:true, \n" +
     "        mint:'ONCREATEVALIDATION'\n" +
     "    }\n" +
-    "};</div>\n" +
+    "};\n" +
+    "                </div>\n" +
     "\n" +
-    "                <h5>Core Protocols</h5>\n" +
-    "                <p>Layered Adaptability</p>\n" +
-    "                <p>Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Core Protocols</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>STRUCTURE</b></p>\n" +
-    "                <p>Defining operations such as transferrable, the ability to create: meta defination</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>LANUGAGE</b></p>\n" +
-    "                <p>Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>CONGRUENCE</b></p>\n" +
-    "                <p>Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <!--<p><b>PROTOCOL . . . CONTRACT</b></p>-->\n" +
     "\n" +
     "                <p><b>MANIFOLD</b></p>\n" +
-    "                <p>+[] SPACE</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">+[] SPACE</p>\n" +
     "\n" +
     "                <p><b>+CREDIT</b></p>\n" +
-    "                <p>+CREDIT+[INTEREST] SPACE</p>\n" +
-    "                <p>+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
     "\n" +
     "                <p><b>+FUTURE</b></p>\n" +
-    "                <p>+FUTURE+[DATE] SPACE</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
     "\n" +
     "                <p><b>+OPTION</b></p>\n" +
-    "                <p>+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>DATA</b></p>\n" +
     "                <!--<p><b>CRE8</b></p>-->\n" +
     "\n" +
-    "                <!--\n" +
-    "                <p><b>MEMBER<b></p>\n" +
-    "                <p><b>PROJECT<b></p>\n" +
-    "                <p><b>TASK<b></p>\n" +
-    "                <p><b>TIME<b></p>\n" +
-    "                <p><b>VALIDATION<b></p>\n" +
-    "                <p><b>ORDER<b></p>\n" +
-    "                -->\n" +
-    "\n" +
+    "                <p><b>MEMBER</b></p>\n" +
+    "                <p><b>PROJECT</b></p>\n" +
+    "                <p><b>TASK</b></p>\n" +
+    "                <p><b>TIME</b></p>\n" +
+    "                <p><b>VALIDATION</b></p>\n" +
+    "                <p><b>ORDER</b></p>\n" +
+    "                \n" +
     "                <!--/block, /tx, /address-->\n" +
-    "\n" +
     "                <!--ORDER BOOK STRING MAPPING-->\n" +
     "                <!--MAPPING OF ALL POSITIONS-->\n" +
-    "            \n" +
+    "\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>Tokenization</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Tokenization from protocols</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>CRE8 VM</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
+    "                <!--blocks, tx, mining, connected, transparency-->\n" +
     "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\"></div>\n" +
