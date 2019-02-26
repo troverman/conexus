@@ -1338,7 +1338,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Content</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Content is information.</p>\n" +
-    "                    <p><b>get /api/content, post /api/content</b></p>\n" +
+    "                    <p><b>[get, post] /api/content</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var contentModel = {};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1347,7 +1347,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Data</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Data is information.</p>\n" +
-    "                    <p><b>get /api/data, post /api/data</b></p>\n" +
+    "                    <p><b>[get, post] /api/data</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1392,7 +1392,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Notification</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model</p>\n" +
-    "                    <p><b>[get, post] /api/notification</b></p>\n" +
+    "                    <p><b>get /api/notification</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var notificationModel = {};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1464,7 +1464,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Search</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Search is .. </p>\n" +
-    "                    <p><b>[get, post] /api/search</b></p>\n" +
+    "                    <p><b>get /api/search</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var searchModel = {};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1611,7 +1611,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <h4>Tokenization</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Tokenization from protocols</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Tokenization from protocols.</p>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
@@ -4739,8 +4739,6 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "	      				<div style=\"padding-left:0px;padding-right:0px;\" class=\"col-sm-6\"><md-datepicker ng-model=\"endDate\" md-placeholder=\"End date\"></md-datepicker></div>\n" +
     "					</div>\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "					<!--TODO-->\n" +
     "					<div style=\"text-align:right;\" class=\"col-xs-6\">\n" +
     "						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet[0].element}}</a> Balance</h5>\n" +
@@ -4748,14 +4746,12 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href=\"#\">{{assetSet[0].element}}</a> Expense</h5>\n" +
     "					</div>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "				</div>\n" +
     "\n" +
     "				<div class=\"col-xs-12\">\n" +
-    "					<highchart config=\"chart\"></highchart>\n" +
+    "					<div ng-if=\"selectedState == 'OVERVIEW'\"><highchart config=\"chart\"></highchart></div>\n" +
+    "					<div ng-if=\"selectedState == 'EXPENSE' || selectedState == 'REVENUE'\"><highchart config=\"tagChart\"></highchart></div>\n" +
+    "					<div ng-if=\"selectedState == 'EXPENSE' || selectedState == 'REVENUE'\"><highchart config=\"assetChart\"></highchart></div>\n" +
     "				</div>\n" +
     "\n" +
     "				<div class=\"col-xs-12\">\n" +
@@ -6423,7 +6419,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "\n" +
     "                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
-    "                <div ng-show=\"true\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
+    "                <div ng-if=\"taskTime\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
     "                    <a ng-show=\"taskTime == 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
     "                    <a ng-show=\"taskTime > 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
     "                    <a ng-show=\"taskTime > 0\" href=\"#\">{{taskTime}}</a>\n" +

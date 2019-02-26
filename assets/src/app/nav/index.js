@@ -1062,7 +1062,9 @@ angular.module( 'conexus.nav', [
             TransactionModel.create($scope.newTransaction).then(function(model){
                 $scope.confirm = $scope.newTransaction;
                 $scope.confirm.model = 'TRANSACTION';
-                $scope.newTransaction = {};
+                $scope.newTransaction.amoundSet = {};
+                $scope.newTransaction.tags = '';
+                $scope.newTransaction.content = '';
                 $mdSidenav('transaction').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 25000);

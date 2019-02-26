@@ -754,16 +754,37 @@ angular.module( 'conexus.project', [
 
     }
 
-    //MD VS ABSOLUTE USAGE..
-    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
+    $scope.createReaction = function(item, type){
+        if ($scope.currentUser){
+            $scope.newReaction.amount = 1;
+            $scope.newReaction.type = type;
+            $scope.newReaction.user = $scope.currentUser.id;
+            var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            if (timeIndex != -1){
+                $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
+                $scope.transactions[transactionIndex].reactions[type]++;
+                ReactionModel.create($scope.newReaction);
+            }
+        }
+        else{$mdSidenav('login').toggle();}
+    };
 
-    //INTERPRET MD OBJ
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
+            $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+    //MD VS ABSOLUTE USAGE..
+    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)};
     function amountInArray(array, value) {
         return array.reduce(function(n, x){
             if (x.tag == value.tag){n+=parseFloat(x.amount)}
             return n;
         },0);
-    }
+    };
 
     $scope.loadAssets = function(){
         $scope.transactionAssets = $scope.transactions.map(function(obj){            
@@ -778,10 +799,7 @@ angular.module( 'conexus.project', [
             }
         }
         $scope.sortedTransactionAssets.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadAssets();
-
-    $scope.assetSet = $scope.sortedTransactionAssets;
+    };
 
     //TAGS
     $scope.loadTags = function(){
@@ -804,26 +822,14 @@ angular.module( 'conexus.project', [
         }
         $scope.sortedTransactionTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
-    $scope.loadTags();
 
-    $scope.filterSet = {assets:$scope.sortedTransactionAssets, tags:$scope.sortedTransactionTags}
-
-    //DO BY TAGS! SAME ..
-    function sumFunction(obj){
-        var sumArray = [];
-        obj.reduce(function(a,b,i) {
-            return $scope.sumArray[i] = parseFloat(a) + parseFloat(b.amount);
-        }, 0);
-        return sumArray;
-    }
-
-
-
-
-
-
-
-
+    $scope.init = function(){
+        $scope.loadAssets();
+        $scope.loadTags();
+        $scope.assetSet = $scope.sortedTransactionAssets;
+        $scope.filterSet = {assets:$scope.sortedTransactionAssets, tags:$scope.sortedTransactionTags}
+    };
+    $scope.init();
 
 
     $scope.sumFlow = [];
@@ -832,32 +838,129 @@ angular.module( 'conexus.project', [
     $scope.sumTransactions = [];
     $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
 
-    //CONCAT
+    //DO BY TAGS! SAME ..
+    function sumFunction(obj){
+        var sumArray = [];
+        obj.reduce(function(a,b,i) {
+            return $scope.sumArray[i] = parseFloat(a) + parseFloat(b.amount);
+        }, 0);
+        return sumArray;
+    };
+
+
+    //FXN TO CHANGE ASSETS --> ||| DEFAUT ASSET SERIES ARE BASED ON RECENT HISTORY... SORTED BY AMOUNT, MAGNITUDE IS RELATIVE
+    console.log($scope.sortedTransactionAssets)
+
+    //SERIES FOR EACH ASSET
+    //$scope.transactions.reduce(function(a,b,i) {
+    //    for (x in Object.keys(b.amountSet)){
+    //       Object.keys(b.amountSet)[x];
+    //    }
+    //},[0,0]);
+
+    //series for tag, series for asset.. axis in in asset amount.. 
+
+    console.log($scope.transactions);
+
+    //get total asset set 
+    //sortedTransactionAssets
+    //combin atorial filter
+
+    //by asset by tag
+
+    $scope.transactionsByIdentifier = {};
+    $scope.transactions.map(function(obj){
+
+        for (y in Object.keys(obj.amountSet)){
+            if (!$scope.transactionsByIdentifier[Object.keys(obj.amountSet)]){$scope.transactionsByIdentifier[Object.keys(obj.amountSet)]=[obj];}
+            else{$scope.transactionsByIdentifier[Object.keys(obj.amountSet)].push(obj)}   
+        }
+
+    });
+
+    $scope.transactionsByTags = {};
+    $scope.transactions.map(function(obj){
+
+        for (y in obj.tags){
+            if (!$scope.transactionsByTags[obj.tags[y]]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
+            else{$scope.transactionsByTags[obj.tags[y]].push(obj)}   
+        }
+
+    });
+
+    console.log($scope.transactionsByIdentifier);
+    console.log($scope.transactionsByTags);
+
     $scope.transactions.reduce(function(a,b,i) {
-        
+
         if (!b.from){b.from = {id:null}}
         if (!b.to){b.to = {id:null}}
 
-        if(b.from.id == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])-parseFloat(b.amount)];}
-        if(b.to.id == $scope.project.id){return $scope.sumTransactions[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+        if(b.from.id == $scope.project.id){
+            var amount = b.amountSet['USD'] || 0;
+            var diff =  parseFloat(a[1])-parseFloat(amount)
+            var data = [new Date(b.createdAt).getTime(), diff];
+            return $scope.sumTransactions[i] = data;
+        }
+
+        if(b.to.id == $scope.project.id){
+            var amount = b.amountSet['USD'] || 0;
+            var sum =  parseFloat(a[1])+parseFloat(amount)
+            var data = [new Date(b.createdAt).getTime(), sum];
+            return $scope.sumTransactions[i] = data;
+        }
+
     },[0,0]);
 
-    //CONCAT
+    //CONCAT | sumFrom
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from.id == $scope.project.id){return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
-        else{return $scope.sumFrom[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
+
+        if(b.from.id == $scope.project.id){
+            var amount = b.amountSet['USD'] || 0;
+            var sum =  parseFloat(a[1])+parseFloat(amount)
+            var data = [new Date(b.createdAt).getTime(), sum];
+            return $scope.sumFrom[i] = data
+
+        }
+        else{
+            var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
+            return $scope.sumFrom[i] = data;
+        }
+
     },[0,0]);
 
-     //CONCAT
+    //CONCAT | sumTo
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.to.id == $scope.project.id){return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
-        else{return $scope.sumTo[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])];}
+
+        if(b.to.id == $scope.project.id){
+            var amount = b.amountSet['USD'] || 0;
+            var sum =  parseFloat(a[1])+parseFloat(amount)
+            var data = [new Date(b.createdAt).getTime(), sum];
+            return $scope.sumTo[i] = data;
+        }
+        else{
+            var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
+            return $scope.sumTo[i] = data;
+        }
+
     },[0,0]);
 
-    //CONCAT
+    //CONCAT | sumFlow
     $scope.transactions.reduce(function(a,b,i) {
-        if(b.from.id == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
-        if(b.to.id == $scope.project.id){return $scope.sumFlow[i] = [new Date(b.createdAt).getTime(), parseFloat(a[1])+parseFloat(b.amount)];}
+
+        if(b.from.id == $scope.project.id){
+            var amount = b.amountSet['USD'] || 0;
+            var sum =  parseFloat(a[1])+parseFloat(amount)
+            var data = [new Date(b.createdAt).getTime(), sum];
+            return $scope.sumFrom[i] = data
+        }
+        if(b.to.id == $scope.project.id){
+            var amount = b.amountSet['USD'] || 0;
+            var sum =  parseFloat(a[1])+parseFloat(amount)
+            var data = [new Date(b.createdAt).getTime(), sum];
+            return $scope.sumFrom[i] = data
+        }
+
     },[0,0]);
 
     $scope.chart.series[0].data = $scope.sumTransactions;
@@ -865,20 +968,10 @@ angular.module( 'conexus.project', [
     $scope.chart.series[2].data = $scope.sumTo;
     $scope.chart.series[3].data = $scope.sumFlow;
 
-    //BAD
+    //REDO
     $scope.startDate = new Date($scope.transactions[0].createdAt);
     $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
-
     $scope.transactions = $scope.transactions.reverse();
-
-
-
-
-
-
-
-
-
 
 
 
@@ -887,7 +980,8 @@ angular.module( 'conexus.project', [
     $scope.selectExpense = function(){
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
             var returnArray = [];
-            if(obj.tags){for (x in obj.tags){returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})}}
+            var amount = obj.amountSet['USD'] || 0;
+            if(obj.tags){for (x in obj.tags){returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:amount})}}
             return returnArray;
         });
         $scope.transactionTags = [].concat.apply([], $scope.transactionTags);
@@ -906,6 +1000,7 @@ angular.module( 'conexus.project', [
                 y: $scope.sortedTransactionTags[x].amount,
             });
         }
+        console.log($scope.pie.series[0].data)
     };
 
     $scope.selectOverview = function(){
@@ -928,14 +1023,16 @@ angular.module( 'conexus.project', [
         TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
             $scope.transactions = transactions;
         });
+
     };
 
     //TODO: TAGS
     $scope.selectRevenue = function(){
         $scope.transactionTags = $scope.transactionsTo.map(function(obj){
             var returnArray = [];
+            var amount = obj.amountSet['USD'] || 0;
             if(obj.tags){
-                for (x in obj.tags){returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:obj.amount})}
+                for (x in obj.tags){returnArray.push({tag:obj.tags[x].trim().toLowerCase(),amount:amount})}
             }
             return returnArray;
         });
@@ -955,29 +1052,7 @@ angular.module( 'conexus.project', [
                 y: $scope.sortedTransactionTags[x].amount,
             });
         }
-    };
-    
-    $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
-            var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-            if (timeIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
-                $scope.transactions[transactionIndex].reactions[type]++;
-                ReactionModel.create($scope.newReaction);
-            }
-        }
-        else{$mdSidenav('login').toggle();}
-    };
-
-    $scope.reply = function(activity){
-        if ($scope.currentUser){
-            var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
-            $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
-        }
-        else{$mdSidenav('login').toggle()}
+        console.log($scope.pie.series[0].data)
     };
 
 }])

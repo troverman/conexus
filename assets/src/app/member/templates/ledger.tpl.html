@@ -90,8 +90,6 @@
 	      				<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker ng-model="endDate" md-placeholder="End date"></md-datepicker></div>
 					</div>
 
-
-
 					<!--TODO-->
 					<div style="text-align:right;" class="col-xs-6">
 						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
@@ -99,14 +97,12 @@
 						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
 					</div>
 
-
-
-
-
 				</div>
 
 				<div class="col-xs-12">
-					<highchart config="chart"></highchart>
+					<div ng-if="selectedState == 'OVERVIEW'"><highchart config="chart"></highchart></div>
+					<div ng-if="selectedState == 'EXPENSE' || selectedState == 'REVENUE'"><highchart config="tagChart"></highchart></div>
+					<div ng-if="selectedState == 'EXPENSE' || selectedState == 'REVENUE'"><highchart config="assetChart"></highchart></div>
 				</div>
 
 				<div class="col-xs-12">
