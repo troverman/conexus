@@ -1123,6 +1123,29 @@ angular.module( 'conexus.member', [
         $scope.sortedTransactionAssets.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
 
+    $scope.loadAssociations = function(){
+        $scope.transactionAssociations = $scope.transactions.map(function(obj){
+            var returnArray = [];
+            if (obj.from){
+                returnArray.push({association:obj.from.id, amount:obj.amountSet['USD'], obj:obj.from})
+            }
+            if (obj.to){
+                returnArray.push({association:obj.to.id, amount:obj.amountSet['USD'], obj:obj.to})
+            }
+            return returnArray;
+        });
+        $scope.transactionAssociations = [].concat.apply([], $scope.transactionAssociations);
+        $scope.sortedTransactionAssociations = [];
+        for (x in $scope.transactionAssociations){
+            var amount = amountInArray($scope.transactionAssociations, $scope.transactionAssociations[x]);
+            if ($scope.sortedTransactionAssociations.map(function(obj){return obj.element}).indexOf($scope.transactionAssociations[x].association) == -1){
+                $scope.sortedTransactionAssociations.push({amount:amount, element:$scope.transactionAssociations[x].association, obj:$scope.transactionAssociations[x].obj})
+            }
+        }
+        $scope.sortedTransactionAssociations.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});
+    };
+
+    //amount..
     $scope.loadTags = function(){
         $scope.transactionTags = $scope.transactions.map(function(obj){
             var returnArray = [];
@@ -1147,9 +1170,10 @@ angular.module( 'conexus.member', [
 
     $scope.init = function(){
         $scope.loadAssets();
+        $scope.loadAssociations();
         $scope.loadTags();
         $scope.assetSet = $scope.sortedTransactionAssets;
-        //$scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+        $scope.filterSet = {associations:$scope.sortedTransactionAssociations, tags:$scope.sortedTransactionTags, assets:$scope.sortedTransactionAssets}
     };
     $scope.init();
 
@@ -1296,13 +1320,13 @@ angular.module( 'conexus.member', [
             var amount = b.amountSet['USD'] || 0;
             var sum =  parseFloat(a[1])+parseFloat(amount)
             var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumFrom[i] = data
+            return $scope.sumFlow[i] = data
         }
         if(b.to.id == $scope.member.id){
             var amount = b.amountSet['USD'] || 0;
             var sum =  parseFloat(a[1])+parseFloat(amount)
             var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumFrom[i] = data
+            return $scope.sumFlow[i] = data
         }
 
     },[0,0]);
@@ -1319,8 +1343,8 @@ angular.module( 'conexus.member', [
 
     $scope.selectExpense = function(){
         $scope.selectedState = 'EXPENSE';
-
-
+        $scope.assetChart.series = [];
+        //SERIES FOR EACH ASSET
         $scope.transactionsByIdentifier = {};
         $scope.transactionsFrom.map(function(obj){
             for (y in Object.keys(obj.amountSet)){
@@ -1329,30 +1353,6 @@ angular.module( 'conexus.member', [
             }
         });
 
-        $scope.transactionsByTags = {};
-        $scope.transactionsFrom.map(function(obj){
-            for (y in obj.tags){
-                if (!$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
-                else{$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()].push(obj)}   
-            }
-        });
-
-        //SERIES FOR EACH TAG
-        for (x in Object.keys($scope.transactionsByTags)){
-            $scope.tagChart.series.push({
-                id: 'Tags '+x,
-                type: 'area',
-                name: Object.keys($scope.transactionsByTags)[x],
-                data: [],
-            });
-            for (y in $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]]){
-                var amount = $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].amountSet['USD'] || 0;
-                var data = [new Date($scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].createdAt).getTime(), amount];
-                $scope.tagChart.series[x].data.push(data);
-            }
-        }
-
-        //SERIES FOR EACH ASSET
         for (x in Object.keys($scope.transactionsByIdentifier)){
             $scope.assetChart.series.push({
                 id: 'Identifer '+x,
@@ -1367,6 +1367,28 @@ angular.module( 'conexus.member', [
             }
         }
 
+        //SERIES FOR EACH TAG
+        $scope.transactionsByTags = {};
+        $scope.transactionsFrom.map(function(obj){
+            for (y in obj.tags){
+                if (!$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
+                else{$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()].push(obj)}   
+            }
+        });
+
+        for (x in Object.keys($scope.transactionsByTags)){
+            $scope.tagChart.series.push({
+                id: 'Tags '+x,
+                type: 'area',
+                name: Object.keys($scope.transactionsByTags)[x],
+                data: [],
+            });
+            for (y in $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]]){
+                var amount = $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].amountSet['USD'] || 0;
+                var data = [new Date($scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].createdAt).getTime(), amount];
+                $scope.tagChart.series[x].data.push(data);
+            }
+        }
 
         $scope.transactionTags = $scope.transactionsFrom.map(function(obj){
             var returnArray = [];
@@ -1391,7 +1413,6 @@ angular.module( 'conexus.member', [
             });
         }
     };
-
     $scope.selectOverview = function(){
         $scope.selectedState = 'OVERVIEW';
         $scope.pie.series[0].data = [];
@@ -1403,12 +1424,11 @@ angular.module( 'conexus.member', [
             y: $scope.sumTo[$scope.sumTo.length-1][1],
         }];
     };
-    $scope.selectOverview();
-
     $scope.selectRevenue = function(){
         $scope.selectedState = 'REVENUE';
+        $scope.assetChart.series = [];
 
-
+        //SERIES FOR EACH ASSET
         $scope.transactionsByIdentifier = {};
         $scope.transactionsTo.map(function(obj){
             for (y in Object.keys(obj.amountSet)){
@@ -1417,30 +1437,6 @@ angular.module( 'conexus.member', [
             }
         });
 
-        $scope.transactionsByTags = {};
-        $scope.transactionsTo.map(function(obj){
-            for (y in obj.tags){
-                if (!$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
-                else{$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()].push(obj)}   
-            }
-        });
-
-        //SERIES FOR EACH TAG
-        for (x in Object.keys($scope.transactionsByTags)){
-            $scope.tagChart.series.push({
-                id: 'Tags '+x,
-                type: 'area',
-                name: Object.keys($scope.transactionsByTags)[x],
-                data: [],
-            });
-            for (y in $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]]){
-                var amount = $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].amountSet['USD'] || 0;
-                var data = [new Date($scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].createdAt).getTime(), amount];
-                $scope.tagChart.series[x].data.push(data);
-            }
-        }
-
-        //SERIES FOR EACH ASSET
         for (x in Object.keys($scope.transactionsByIdentifier)){
             $scope.assetChart.series.push({
                 id: 'Identifer '+x,
@@ -1455,7 +1451,14 @@ angular.module( 'conexus.member', [
             }
         }
 
-
+        //SERIES FOR EACH TAG
+        $scope.transactionsByTags = {};
+        $scope.transactionsTo.map(function(obj){
+            for (y in obj.tags){
+                if (!$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
+                else{$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()].push(obj)}   
+            }
+        });
 
         $scope.transactionTags = $scope.transactionsTo.map(function(obj){
             var returnArray = [];
@@ -1506,6 +1509,8 @@ angular.module( 'conexus.member', [
         });
 
     };
+
+    $scope.selectOverview();
 
 
 

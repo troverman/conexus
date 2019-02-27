@@ -5,9 +5,17 @@
 	<div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card">
 			<div style="padding:16px;">
-				<span><b>Identifiers</b></span>
+				<span><b>Assets</b></span>
 	            <div ng-repeat="asset in sortedTransactionAssets">
                     <a href="#" ng-click="selectAsset(asset.element)">{{asset.element}}</a>
+                </div>
+			</div>
+		</div>
+		<div class="card">
+			<div style="padding:16px;">
+				<span><b>Associations</b></span>
+                <div ng-repeat="association in sortedTransactionAssociations">
+                    <a href="#" ng-click="selectAssociation(association.element)">{{association.obj.username || association.obj.title}}</a>
                 </div>
 			</div>
 		</div>
@@ -16,14 +24,6 @@
 				<span><b>Tags</b></span>
                 <div ng-repeat="tag in sortedTransactionTags">
                     <a href="#" ng-click="selectTag(tag.element)">{{tag.element}}</a>
-                </div>
-			</div>
-		</div>
-		<div class="card">
-			<div style="padding:16px;">
-				<span><b>Associations</b></span>
-                <div ng-repeat="tag in sortedTransactionTags">
-                    <a href="#" ng-click="selectAssociation(tag.element)">{{tag.element}}</a>
                 </div>
 			</div>
 		</div>

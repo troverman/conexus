@@ -4654,9 +4654,17 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "	<div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<span><b>Identifiers</b></span>\n" +
+    "				<span><b>Assets</b></span>\n" +
     "	            <div ng-repeat=\"asset in sortedTransactionAssets\">\n" +
     "                    <a href=\"#\" ng-click=\"selectAsset(asset.element)\">{{asset.element}}</a>\n" +
+    "                </div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px;\">\n" +
+    "				<span><b>Associations</b></span>\n" +
+    "                <div ng-repeat=\"association in sortedTransactionAssociations\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectAssociation(association.element)\">{{association.obj.username || association.obj.title}}</a>\n" +
     "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -4665,14 +4673,6 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "				<span><b>Tags</b></span>\n" +
     "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
     "                    <a href=\"#\" ng-click=\"selectTag(tag.element)\">{{tag.element}}</a>\n" +
-    "                </div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
-    "				<span><b>Associations</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTransactionTags\">\n" +
-    "                    <a href=\"#\" ng-click=\"selectAssociation(tag.element)\">{{tag.element}}</a>\n" +
     "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
