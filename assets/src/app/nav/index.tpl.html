@@ -620,54 +620,56 @@
             </div>
             <div style="padding:16px;">
 
-
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms by which data is associated given relation. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
+
+                <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
+               
+                <div class="spacing-10"></div>
+
+                <div>
+
+                    <h5>Filter</h5>
+                    <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
+
+                    <div class="spacing-10"></div>
+
+                   <!--DEPRECIATE TASK TITLE-->
+                    <div ng-if="item.model=='TIME'">
+                        <h4>
+                            {{item.amount}}
+                            <i class="fa fa-arrows-h"></i>
+                            <a href="task/{{item.task.id}}">{{item.task.title.toUpperCase()}}</a>
+                        </h4>
+                    </div>
+
+                    <div ng-if="item.model=='TASK'">
+                        <h4>
+                            {{item.title.toUpperCase()}} 
+                            <i class="fa fa-arrows-h"></i> 
+                            <a href="project/{{item.project.urlTitle}}">{{item.project.title.toUpperCase()}}</a>
+                        </h4>
+                    </div>
+
+                    <div class="spacing-10"></div>
+
+                    {{item.associatedModels}}
+                    <h5 ng-repeat="model in item.associatedModels">{{model.type}}, {{model.address}}</h5>
+
+                </div>
+
                 <div class="spacing-10"></div>
 
                 <div class="row">
-
                     <div class="col-md-6">
-
-                        <div ng-if="item.model=='TIME'">
-                            <h4>
-                                {{item.amount}}
-                                <!--
-                                <i class="fa fa-angle-double-left"></i>
-                                {{validationSumObj.general/validations.length}}
-                                <i class="fa fa-angle-double-right"></i>
-                                -->
-                                <i class="fa fa-arrows-h"></i>
-                                <a href="task/{{item.task.id}}">{{item.task.title.toUpperCase()}}</a>
-                            </h4>
-                        </div>
-
-                        <div ng-if="item.model=='TASK'">
-                            <h4>
-                                {{item.title.toUpperCase()}} 
-                                <i class="fa fa-arrows-h"></i> 
-                                <a href="project/{{item.project.urlTitle}}">{{item.project.title.toUpperCase()}}</a>
-                            </h4>
-                        </div>
-
-                        <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
-                            <auto-complete source="loadAssociations($query)"></auto-complete>
-                        </tags-input>
-                        
-                        <h5 ng-repeat="model in item.associatedModels">{{model.type}}, {{model.address}}</h5>
-
-                        <div class="spacing-15"></div>
-
                         <nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
-
-                        <div class="spacing-15"></div>
-
                     </div>
-
                     <div class="col-md-6">
+                        <highchart config="validationColumnRender"></highchart>
                     </div>
-
                 </div>
+
 
                 <div>
                     <table class="table table-striped table-hover">
@@ -689,9 +691,6 @@
                                     </a>
                                 </td>
 
-
-
-
                                 <td>
 
                                     <span ng-if="validation.associatedModels[0].type=='PROJECT'"><a href="project/{{validation.associatedModels[0].info.urlTitle}}">{{validation.associatedModels[0].info.title}}</a></span>
@@ -705,6 +704,7 @@
                                     <span ng-if="validation.associatedModels[1].type=='TIME'"><a href="time/{{validation.associatedModels[0].address}}">{{validation.associatedModels[1].info.amount}}</a></span>
 
                                 </td>
+
                                 <td>General</td>
                                 <td>{{validation.validation.general}}</td>
                                 <td><a href="validation/{{validation.id}}">{{validation.id}}</a></td>
@@ -713,7 +713,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <highchart config="validationColumnRender"></highchart>
                 </div>
 
             </div>
@@ -1026,37 +1025,48 @@
             </div>
 
             <div style="padding:16px">
+
                 <div class="spacing-15"></div>
+                
+                <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                
+                <div class="spacing-10"></div>
 
-                <div ng-if="item.model == 'TASK'">
-                    <h5>
-                        <i class="fa fa-check"></i> Validate {{item.title}} 
-                        <i class="fa fa-arrows-h"></i> 
-                        {{newValidation.associatedModel[0].text}}
-                    </h5>
-                </div>
-
-                <div ng-if="item.model == 'TIME'">
-                    <h5>
-                        <i class="fa fa-check"></i> Validate {{item.amount}} Time 
-                        <i class="fa fa-arrows-h"></i> 
-                        {{newValidation.associatedModel[0].model.title}}
-                    </h5>
-                </div>
-
-                <div ng-if="item.model == 'VALIDATION'">
-                    <h5>
-                        Validate Validation <i class="fa fa-check"></i>
-                    </h5>
-                </div>
-
+                <h5>Connection</h5>
                 <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModel">
                     <auto-complete source="loadAssociations($query)"></auto-complete>
                 </tags-input>
 
-                <!--<div class="spacing-15"></div>
-                <div style="text-align:center"><img src="https://i.stack.imgur.com/PnXIo.png"/></div>
-                <div class="spacing-15"></div>-->
+                <div class="spacing-10"></div>
+
+                <div ng-if="item.model == 'TASK'">
+                    <h4>
+                        <i class="fa fa-check"></i> Validate {{item.title}} 
+                        <i class="fa fa-arrows-h"></i> 
+                        {{newValidation.associatedModel[0].text}}
+                    </h4>
+                </div>
+
+                <div ng-if="item.model == 'TIME'">
+                    <h4>
+                        <i class="fa fa-check"></i> Validate {{item.amount}} Time 
+                        <i class="fa fa-arrows-h"></i> 
+                        {{newValidation.associatedModel[0].model.title}}
+                    </h4>
+                </div>
+
+                <div ng-if="item.model == 'VALIDATION'">
+                    <h4>
+                        Validate Validation <i class="fa fa-check"></i>
+                    </h4>
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <h5>Context</h5>
+                <tags-input min-length="1" placeholder="Context" ng-model="tags">
+                    <auto-complete source="loadAssociations($query)"></auto-complete>
+                </tags-input>
 
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
@@ -1072,13 +1082,13 @@
                     </div>
                 </div>
 
-                <tags-input min-length="1" placeholder="Context" ng-model="tags">
-                    <auto-complete source="loadAssociations($query)"></auto-complete>
-                </tags-input>
+                <div class="spacing-10"></div>
 
-                <!--TODO: RENDER GRAPH? ;; VALUE MAP GRAPH;; SPIDER/RADIAL-->
-
+                <h5>Content</h5>
                 <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+
+                <div class="spacing-10"></div>
+
                 <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
 
             </div>
@@ -1195,68 +1205,112 @@
                 <div class="spacing-25"></div>
 
                 <div ng-if="informationType == 'CREATECONTENT'">
-                    CREATE CONTENT
+
+                    <p>CREATE CONTENT</p>
+                    <p>Content is art; content can funnel attention, energy, and value. You can CREATE content. Content can be associated recursivly. Triggering Motions to validate where appropiate.</p>
+
                 </div>
+
                 <div ng-if="informationType == 'CREATEITEM'">
-                    CREATE ITEM
+
+                    <p>CREATE ITEM</p>
+                    <p>Items are moments of information. They convey complex information, transend the string domain, and carry within them the ability of application input. Providing more functionality and carrying with them additional ancillar protocol inputs. Creating rich ownership of (items as) assets and liabilities[defined by protocol]. The Marketplace is supported by Deventalized Physically Validated Delivery (PVD) Protocols.</p>
+
                 </div>
+
                 <div ng-if="informationType == 'CREATEORDER'">
-                    CREATE ORDER
-                    Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.
+
+                    <p>CREATE ORDER</p>
+                    <p>Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.</p>
+
                 </div>
+
                 <div ng-if="informationType == 'CREATEPROJECT'">
-                    CREATE PROJECT
 
-                    Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.
+                    <p>CREATE PROJECT</p>
+                    <p>Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.</p>
 
                 </div>
+
                 <div ng-if="informationType == 'CREATETASK'">
-                    CREATE TASK
-                    Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility. 
+
+                    <p>CREATE TASK</p>
+                    <p>Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility.</p>
+
                 </div>
+
                 <div ng-if="informationType == 'CREATETIME'">
-                    CREATE TIME
-                    Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.
+
+                    <p>CREATE TIME</p>
+                    <p>Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.</p>
+
                 </div>
+
                 <div ng-if="informationType == 'CREATETRANSACTION'">
-                    CREATE TRANSACTION
+
+                    <p>CREATE TRANSACTION</p>
+                    <p>Transactions allow for the exchange and transfer of tokens. They contain tags, content, and and amountSet. Transaction logic is governed by the TRANSACTION protocol.</p>
+
                 </div>
+
                 <div ng-if="informationType == 'CREATEVALIDATION'">
-                    CREATE VALIDATION
+
+                    <p>CREATE VALIDATION</p>
+
                 </div>
 
                 <div ng-if="informationType == 'TOKEN'">
+
                     <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>
-                    <p>PROTOCOL SPECIFICATION</p>
                     <p>Each Memeber is given 1 Universal Token per second</p>
+
                 </div>  
 
                 <div ng-if="informationType == 'IDENTIFERSET'">
-                    IDENTIFER SET
+
+                    <p>IDENTIFER SET</p>
+
                 </div>
 
                 <!--DEP-->
                 <div ng-if="informationType == 'IDENTIFERALPHA'">
-                    IDENTIFER SET ALPHA
+
+                    <p>IDENTIFER SET ALPHA</p>
+
                 </div>
+
                 <div ng-if="informationType == 'IDENTIFERSETBETA'">
-                    IDENTIFER SET BETA
+
+                    <p>IDENTIFER SET BETA</p>
+
                 </div>
 
                 <div ng-if="informationType == 'ASSOCIATIONS'">
-                    ASSOCIATIONS
+
+                    <p>Associations are computed though validation traversal.</p>
+
                 </div>
 
                 <div ng-if="informationType == 'PROTOCOLS'">
-                    PROTOCOL
+
+                    <p>PROTOCOL</p>
+                    <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>
+                    <p>A bundle of protocols create an Application.</p>
+
                 </div>
 
                 <div ng-if="informationType == 'VALUEMAP'">
+
                     <p>Value Map Controls</p>
+
                 </div>
 
                 <div ng-if="informationType == 'VALIDATION'">
-                    VALIDATION
+
+                    <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple valistion types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>
+                    <!--VALIDATION IMAGE-->
+                    <p>Associations are computed though validation traversal.</p>
+
                 </div>
 
             </div>

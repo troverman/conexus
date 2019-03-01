@@ -173,36 +173,44 @@ module.exports = {
 	//KINF OF A MESS
 	create: function (req, res) {
 		var model = {
+			
 			content: req.param('content'),
 			reputation: req.param('reputation'), //SAVED USER REP
 			user: req.param('user'),
+
 			validation: req.param('validation'), //ACTUAL 'VOTE'
+
 			//ASSOICATED MODEL {BINARY -- }
 			associatedModels: req.param('associatedModels'),
-			//DEPRECIATE
-			task: req.param('task'),
-			project: req.param('project'),
-			time: req.param('time'),
-			validation: req.param('validation'),
+			
 			//PATCH
 			reactions: {plus:0,minus:0},
+
 		};
 
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
 		User.find({id:model.user}).then(function(userModel){
 			var reputation = {};
+
 			//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
 			//FIND DIMENSIONS .. MATCH WITH FRONTEND INPUT
 			for (x in Object.keys(model.validation)){
+
 				//TODO | BETTER..
 				if (userModel[0].reputation[Object.keys(model.validation)[x]]){
+
 					//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPIN | WIP
 					if (Object.keys(model.validation)[x] == 'general'){reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;}
 					else{reputation[Object.keys(model.validation)[x]] = userModel[0].reputation[Object.keys(model.validation)[x]]}
+
 				}
+
 				else{reputation[Object.keys(model.validation)[x]] = 0;}
+
 			}
+
 			model.reputation = reputation;
+
 			Validation.create(model)
 			.exec(function(err, validation) {
 				if (err) {return console.log(err);}

@@ -220,12 +220,14 @@ angular.module( 'conexus.nav', [
             }); */
             ProjectModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(projectSearchModels){
                 projectSearchModels.map(function(obj){
-                    obj.text = obj.title
+                    obj.type='PROJECT';
+                    obj.text = 'PROJECT | '+obj.title;
                     return obj;
                 });
                 TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
                     taskSearchModels.map(function(obj){
-                        obj.text = obj.title
+                        obj.type='TASK';
+                        obj.text = 'TASK | '+obj.title;
                         return obj;
                     });
                     //searchModels = [].concat.apply([], [userSearchModels, projectSearchModels, taskSearchModels]);
@@ -549,24 +551,34 @@ angular.module( 'conexus.nav', [
           }, [[]]);
         };
 
-
         console.log(item);
+
         $scope.item = item;
 
         //DEPRECIATE .modelType
         if (item.model == 'TASK'){
+
+            $scope.graphData = {
+                nodes:[{name:$scope.item.title}], 
+                links:[]
+            };
             if ($scope.item.project){
                 $scope.assoicationFilter = [{text:'PROJECT | '+$scope.item.project.title}];
             }
+
         }
         if (item.model == 'TIME'){
+
+            $scope.graphData = {
+                nodes:[{name:$scope.item.amount}], 
+                links:[]
+            };
+
             $scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
+
         }
 
-        $scope.graphData = {
-            nodes:[{name:$scope.item.id}], 
-            links:[]
-        };
+        //TODO BUILD THESE --> LOAD ASSOCIATION
 
         for (x in $scope.item.associatedModels){
             //HACK?
@@ -574,7 +586,6 @@ angular.module( 'conexus.nav', [
             $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})//$scope.item.associatedModels[x].address});
             $scope.graphData.links.push({value:1, source:0, target:length});
         }
-
 
         //TODO: GROUP STUDY -- FACTOR INFORMATION IN DATASERVICE TO GRAPH THEORETIC FORM TO DISCOVER GROUP PROPS
         //$scope.graphData = {
@@ -745,98 +756,95 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: CHANGE FROM ADDRESS TO ID
     $rootScope.validationToggle = function(item){
 
-        //associations vs associatedModels 
-        //ie binary validation?
-        //m assocations is . .. . 
-        //b
-        //start
-        //task -> am: [{},{},{}]
-        //m 
-        //task -> am: [{[],}],{[],},{[],}]
-        //--> DONT MAKE THIS HARDER THAN IT NEEDS TO BE. --> DO BINARY ASSOCATION TO START; 
-
-        //association anatom    y . . 
-        //[{
-        //    type:'TASK',
-        //    address:item.id, 
-        //    context:{}
-        //}];
-        //TIME TO FINALLY DEPRECIATE ALL THE ISH! >:)
-        //VALIDATIONS ARE BINARY!
         if($scope.currentUser){
 
             $scope.item = item;
-            console.log($scope.item);
-
-            //DOESNT REALLY WORK.. 
             $scope.newValidation = {};
             $scope.newValidation.validation = {};
             $scope.newValidation.validation.general = 0;
-            console.log($scope.newValidation);
+
+            console.log($scope.item);
 
             //SELF CREATED VALIDATION ON CREATE --> COOL
-            //TODO, TIME <--> TASK FROM ON TIME CREATE
+            //TIME <--> TASK FROM ON TIME CREATE
+            //TASK <--> PROJ FROM ON TASK CREATE
 
             if ($scope.item.model == 'TASK'){
-                //PATCH --> WE WILL CHANGE
-                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TASK
-                if ($scope.item.project){
-                    $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, type:'PROJECT',address:$scope.item.project.id, model:$scope.item.project}];
-                }
-                $scope.newValidation.associatedModels = [{type:'TASK',address:item.id}];
-            }
 
-            if ($scope.item.model == 'TIME'){
-                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TIME
-                if ($scope.item.task){
-                    $scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, type:'TASK',address:$scope.item.task.id, model:$scope.item.task}];
-                }
-                $scope.newValidation.associatedModels = [{type:'TIME',address:item.id}];
-            }
+                //TODO
+                //WHAT CONTEXT ARE WE LOOKING AT THE MODEL
+                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TASK | DYNAMIC FILTER
 
-            //PREVIOUS VALIDATION CONTEXT.. 
-            if ($scope.item.model == 'VALIDATION'){
-                $scope.newValidation.associatedModel = [{text:'VALIDATION | '+$scope.item.id, type:'VALIDATION',address:$scope.item.id}];
-                $scope.newValidation.associatedModels = [{type:'VALIDATION',address:item.id}];
-            }
+                //DEPRECIATE .project && .task
+                $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'PROJECT'}];
 
-            if ($scope.item.model == 'CONTENT'){} //--> PROJ
-            if ($scope.item.model == 'ITEM'){} //--> PROJ
-            if ($scope.item.model == 'MEMBER'){} //--> PROJ
-            if ($scope.item.model == 'ORDER'){} //--> PROJ
-            if ($scope.item.model == 'PROJECT'){} //--> PROJ
-            if ($scope.item.model == 'TRANSACTION'){} //--> PROJ
+                $scope.newValidation.associatedModels = [{type:'TASK', address:item.id}];
 
-            $scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].address});
-            console.log($scope.newValidation)
-        
-            //TODO: SPLIT OPERATIONS CONTAINED IN CTRL
-            $scope.tags = [];
-            if ($scope.item.model == 'TASK'){
                 $scope.tags = item.tags;
                 for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
-            }
-            //TODO: WATCH TAGS
 
-            //TEMP | TODO: ASSOCIATIONS | BASED ON THE ASSOCIATION
+            }
+
             if ($scope.item.model == 'TIME'){
+
+                //TODO
+                //WHAT CONTEXT ARE WE LOOKING AT THE MODEL
+                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TIME
+
+                //DEPRECIATE .project && .task
+                $scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'TASK'}];
+
+                $scope.newValidation.associatedModels = [{type:'TIME', address:item.id}];
+
                 if($scope.item.task.tags){
                     $scope.tags = item.task.tags;
                     for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
                 }
+
                 //SELF DEFINED CONTEXT IN TIME
-                //BRIDGE BTW TASK CONTEXT (SELF EFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
+                //BRIDGE BTW TASK CONTEXT (SELF DEFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
                     //IF NOT CONTEXT VALIDATED IN TASK <-> PROJ IT IS 0. 
                 if($scope.item.tags){
                     $scope.tags = Array.from(new Set($scope.tags.concat(item.tags)));
                     for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
                 }
+
             }
 
+            //TODO: WATCH TAGS
 
+            //TODO PREVIOUS VALIDATION CONTEXT.. 
+            if ($scope.item.model == 'VALIDATION'){
+                $scope.newValidation.associatedModel = [{text:'VALIDATION | '+$scope.item.id, type:'VALIDATION',address:$scope.item.id}];
+                $scope.newValidation.associatedModels = [{type:'VALIDATION', address:item.id}];
+            }
+
+            if ($scope.item.model == 'CONTENT'){
+                $scope.newValidation.associatedModels = [{type:'CONTENT', address:item.id}];
+            } //--> PROJ
+
+            if ($scope.item.model == 'ITEM'){
+                $scope.newValidation.associatedModels = [{type:'ITEM', address:item.id}];
+            } //--> PROJ
+
+            if ($scope.item.model == 'MEMBER'){
+                $scope.newValidation.associatedModels = [{type:'MEMBER', address:item.id}];
+            } //--> PROJ
+
+            if ($scope.item.model == 'ORDER'){
+                $scope.newValidation.associatedModels = [{type:'ORDER', address:item.id}];
+            } //--> PROJ
+
+            if ($scope.item.model == 'PROJECT'){
+                $scope.newValidation.associatedModels = [{type:'PROJECT', address:item.id}];
+            } //--> PROJ
+
+            if ($scope.item.model == 'TRANSACTION'){
+                $scope.newValidation.associatedModels = [{type:'TRANSACTION', address:item.id}];
+            } //--> PROJ
+                     
             $mdSidenav('validation').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1075,25 +1083,32 @@ angular.module( 'conexus.nav', [
 
     $scope.createValidation = function(){
         if ($scope.currentUser){
-            //TODO 
+
             $scope.newValidation.user = $scope.currentUser.id;
 
-            //PATCH!!! DEPREC
-            if ($scope.newValidation.associatedModels){
-                for (x in $scope.newValidation.associatedModels){
-                   $scope.newValidation[$scope.newValidation.associatedModels[x].type.toLowerCase()] = $scope.newValidation.associatedModels[x].address;
-                }
+            console.log($scope.newValidation);
+
+            if ($scope.newValidation.associatedModel){
+
+                console.log($scope.newValidation.associatedModel)
+
+                $scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({
+                    type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].id,
+                });
+
+                console.log($scope.newValidation);
+                //if$scope.newValidation.associatedModels.length 
+                ValidationModel.create($scope.newValidation).then(function(model) {
+                    $scope.confirm = $scope.newValidation;
+                    $scope.confirm.model = 'VALIDATION';
+                    $scope.newValidation = {};
+                    $mdSidenav('validation').close();
+                    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                    setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                });
+
             }
 
-            console.log($scope.newValidation);
-            ValidationModel.create($scope.newValidation).then(function(model) {
-                $scope.confirm = $scope.newValidation;
-                $scope.confirm.model = 'VALIDATION';
-                $scope.newValidation = {};
-                $mdSidenav('validation').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
-            });
         }
         else{$mdSidenav('login').toggle()}
     };
