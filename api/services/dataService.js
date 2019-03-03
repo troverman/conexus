@@ -660,18 +660,19 @@ module.exports = {
 
 						//MINIMIZE NFTS PER CREATE
 						//THINK OF LATERING.. && INFO ENCODING
-
+						//CREATE PREFIX.. 
 						if (type[x] == 'CONTENT'){
 
 							//CONTENT
 							var contentBaseModel = {
-								string: 'CONTENT',
+								string: 'CRE8+CONTENT',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'CONTENT'
 								],
 								logic:{
 									transferrable:true, 
@@ -687,7 +688,8 @@ module.exports = {
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'CONTENT'
 								],
 								logic:{
 									transferrable:true, 
@@ -697,13 +699,14 @@ module.exports = {
 
 							//DEPRECIATE?
 							var humanReadableContentNFTModel = {
-								string: 'CONTENT+'+data[x][y].id,
+								string: 'CRE8+CONTENT+'+data[x][y].id,
 								information:{
 									inCirculation:1,
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'CONTENT'
 								],
 								logic:{
 									transferrable:true, 
@@ -720,7 +723,7 @@ module.exports = {
 								//CONTENT TYPE
 								//CONTENT+TYPE
 								var contentTypeModel = {
-									string: 'CONTENT+'+data[x][y].type.toUpperCase(),
+									string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase(),
 									information:{
 										inCirculation:Math.floor(1000*Math.random()),
 										markets: 0,
@@ -738,13 +741,14 @@ module.exports = {
 								//DEPRECIATE?
 								//CONTENT+TYPE+ID
 								var humanReadableContentTypeNFTModel = {
-									string: 'CONTENT+'+data[x][y].type.toUpperCase()+'+'+data[x][y].id,
+									string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase()+'+'+data[x][y].id,
 									information:{
 										inCirculation:1,
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'BASE',
+										'CONTENT'
 									],
 									logic:{
 										transferrable:true,
@@ -766,7 +770,7 @@ module.exports = {
 
 							//ITEM
 							var itemBaseModel = {
-								string: 'ITEM',
+								string: 'CRE8+ITEM',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -781,6 +785,7 @@ module.exports = {
 							};
 
 							//DEPRECIATE? || IE TITLE.ID --> FOR READABLE
+							//CRE8+
 							var humanReadableItemNFTModel = {
 								string: 'ITEM+'+data[x][y].id,
 								information:{
@@ -807,13 +812,15 @@ module.exports = {
 
 							//ORDER
 							var orderBaseModel = {
-								string: 'ORDER',
+								string: 'CRE8+ORDER',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'CRE8',
+									'ORDER',
 								],
 								logic:{
 									transferrable:true, 
@@ -823,13 +830,15 @@ module.exports = {
 
 							//ORDER NFT
 							var humanReadableOrderNFTModel = {
-								string: 'ORDER+'+data[x][y].id,
+								string: 'CRE8+ORDER+'+data[x][y].id,
 								information:{
 									inCirculation:1,
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'CRE8',
+									'ORDER',
 								],
 								logic:{
 									transferrable:true, 
@@ -851,13 +860,14 @@ module.exports = {
 						if (type[x] == 'PROJECT'){
 
 							var projectBaseModel = {
-								string: 'PROJECT',
+								string: 'CRE8+PROJECT',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'PROJECT'
 								],
 								logic:{
 									transferrable:true, 
@@ -873,7 +883,8 @@ module.exports = {
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'PROJECT'
 								],
 								logic:{
 									transferrable:true, 
@@ -889,7 +900,8 @@ module.exports = {
 									markets: 0,
 								},
 								protocols:[
-									'BASE'
+									'BASE',
+									'PROJECT'
 								],
 								logic:{
 									transferrable:true, 
@@ -909,6 +921,7 @@ module.exports = {
 
 							//STRUCURE INTO PROMISE TO RETURN
 							projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
+								
 								//console.log(projectModel);
 								var projectAssociationModel = {
 									string: 'PROJECT+'+projectModel.toUpperCase(),
@@ -939,6 +952,7 @@ module.exports = {
 										});
 									}
 								});
+
 							});
 
 						}
@@ -965,7 +979,7 @@ module.exports = {
 							};
 
 							var reactionCreateModel = {
-								string: 'REACTION+CREATE',
+								string: 'CRE8+REACTION',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -980,7 +994,7 @@ module.exports = {
 							};
 
 							var reactionReceiveModel = {
-								string: 'REACTION+RECEIVE',
+								string: 'RECEIVE+REACTION',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -1734,7 +1748,7 @@ module.exports = {
 		};
 
 		//modification();
-		//generateStringSpace();
+		generateStringSpace();
 
 		//train('A', 0, 8);
 		//train('A', 0, 3);

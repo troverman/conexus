@@ -190,9 +190,12 @@ module.exports = {
 		.exec(function(err, project) {
 			if (err) {return console.log(err);}
 			else {
+
+				//TODO: SECURITY! HIDE THIS
 				const googleMapsClient = require('@google/maps').createClient({
 					key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
 				});
+
 				//TODO: AS A SERVICE / UTIL / CONTRACT
 				googleMapsClient.geocode({address: project.location}, function(err, response) {
 					if (!err) {
@@ -210,6 +213,32 @@ module.exports = {
 						});
 					}
 				});
+
+				//LINKAGE.. ? ASSOCIATED MODELS
+				//AS VALIDATION?????
+				//ON PROJECT CREATE, CREATE VALIDATION WITH ASSOCIATED MODELS OF USER AND PROJECT
+				var validationModel = {
+					associatedModels: [
+						{type:'PROJECT', address:project.id},
+						{type:'MEMBER', address:model.user},
+					],
+					validation: {general:1}
+				};
+
+				//Validation.create(validationModel).then(function(){
+					//console.log('VALIDATIONCREATE')
+				//});
+
+				var projectMemberModel = {
+					project: project.id,
+					user: model.user,
+					validation: {general:1}
+				};
+
+				ProjectMember.create(projectMemberModel).then(function(){
+					console.log('PROJECTMEMBERCREATE')
+				});
+
 			}
 		});
 	},

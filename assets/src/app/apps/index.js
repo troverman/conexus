@@ -17,7 +17,22 @@ angular.module( 'conexus.apps', [
     titleService.setTitle('Apps | CRE8.XYZ');
     $scope.apps = [
 
-        //{title:'CRE8 CORE', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:[]},
+        {title:'CRE8 CORE MAPPING', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:[]},
+        {title:'CRE8 CORE ASSOCIATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE CONTENT', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE ITEM', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE FOLLOWER', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE MEMBER', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE NOTIFICATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE ORDER', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE PASSPORT', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE PROJECT', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE PROJECT PROTOCOL', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE REACTION  ', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE TIME', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE TRANSACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+        {title:'CRE8 CORE VALIDATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
 
         {title:'Fitbit', description:'Fitbit Activity Tokenization, namespace: DATA+FITBIT+', protocols:''},
 

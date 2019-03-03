@@ -5,7 +5,7 @@ module.exports.bootstrap = function(cb) {
 	//intervalService.getData();
 	//dataService.getData();
 	
-	//dataService.traverse();
+	dataService.traverse();
 	
 	//dataService.tensorBuild();
 

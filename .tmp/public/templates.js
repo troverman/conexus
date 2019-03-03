@@ -280,6 +280,19 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("account/index.tpl.html",
+    "<div class=\"page-heading\">\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <h1>Account Settings</h1>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-25\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"spacing-15\"></div>\n" +
     "	\n" +
@@ -327,7 +340,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "                    <p><a href=\"/member/{{currentUser.username}}/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "\n" +
     "					<div class=\"row\">\n" +
-    "						<div class=\"col-sm-6\">\n" +
+    "						<div class=\"col-sm-12\">\n" +
     "							<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x8f50FB12E80E788cC0141b06e84a4a02357431d0</span></h5>\n" +
     "				       		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
     "					        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
@@ -341,7 +354,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "					    	</div>\n" +
     "\n" +
     "				        </div>\n" +
-    "				        <div class=\"col-sm-6\">\n" +
+    "				        <div class=\"col-sm-12\">\n" +
     "							<h5>Reputation Lookup <span style=\"font-size:11px;color:gray\">0x90C11Cd017582766A89155B7b90f11aF67fD2A2A</span> </h5>\n" +
     "				       		<form ng-click=\"lookupReputation()\" style=\"display:flex;flex-direction:row;\">\n" +
     "					        	<input ng-model=\"reputationLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
@@ -355,43 +368,16 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "					    	</div>\n" +
     "				        </div>\n" +
     "					</div>\n" +
-    "\n" +
-    "					<!--TODO-->\n" +
-    "					<h5>Peer Contrubution</h5>\n" +
-    "					<p style=\"font-size:11px\">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>\n" +
-    "					<p style=\"font-size:11px\">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>\n" +
-    "\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<!--TODO: ACCOUNT HISTORY | LIKE LOGINS ALL POSTS | DETAILED AUDIT OF ACCOUNT EVENTS -->\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px\">\n" +
-    "				<h3>Information</h3>\n" +
-    "				<h4>{{currentUser.email}}</h4>\n" +
-    "				<p>Human Proof ID | ON</p>\n" +
-    "				<p>Verification | Goverment ID | Social Accounts | BioMetric Data</p>\n" +
-    "			</div>\n" +
-    "	    </div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<!--<div class=\"row\">\n" +
-    "	    <div class=\"card\">\n" +
-    "	        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "	        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "	    </div>\n" +
-    "   	</div>-->\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"\">\n" +
-    "				<button class=\"btn btn-default log-btn\" ng-click=\"editAccountToggle()\">Edit Account</button>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
+    " 	<div class=\"row\">\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Edit Account</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\" ng-show=\"editAccountToggleVar\">\n" +
@@ -427,8 +413,60 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "    <div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "				<h3>Settings</h3>\n" +
-    "				<!--SETTING DESCRIP-->\n" +
+    "				<h3>Identification</h3>\n" +
+    "				<h4 style=\"color:gray;\">{{currentUser.email}}</h4>\n" +
+    "				<p style=\"color:gray;font-size:12px;\">Human Proof ID | ON</p>\n" +
+    "				<p style=\"color:gray;font-size:12px;\">Verification | Goverment ID | Social Accounts | BioMetric Data</p>\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Apps</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">History</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Mining</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Passports</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Wallets</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "	</div>\n" +
+    "\n" +
+    "  	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h5>Peer Contrubution</h5>\n" +
+    "				<p style=\"font-size:11px\">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>\n" +
+    "				<p style=\"font-size:11px\">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h5>Account History</h5>\n" +
+    "				<p style=\"font-size:11px\">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>\n" +
+    "				<p style=\"font-size:11px\">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<!--\n" +
+    "	<div class=\"row\">\n" +
+    "	    <div class=\"card\">\n" +
+    "	        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "	        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "	    </div>\n" +
+    "   	</div>\n" +
+    "    -->\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "\n" +
     "				<p>Record Attention <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Attention Tokenization</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
     "				<p>Location Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>\n" +
     "				<p>Client Mining <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model=\"browserMining\" aria-label=\"Browser Mining\"></md-switch></p>\n" +
@@ -440,18 +478,47 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "    </div>\n" +
     "\n" +
     "	<!--TODO: tokenized apps.. connect in..-->\n" +
+    "	<div class=\"row\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "\n" +
+    "				<h3>Connected Applications</h3>\n" +
+    "				<p>CRE8 <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\"></span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "				<p>BTC <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">ADDRESS</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "				<p>ETH <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">ADDRESS</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
+    "    </div>\n" +
+    "\n" +
     "    <div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<h3>Connected Accounts & Wallets</h3>\n" +
+    "\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/twitter\">Twitter</a></button>\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/facebook\">Facebook</a></button>\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/fitbit\">Fitbit</a></button>\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">Steemit</a></button>\n" +
-    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">BTC</a></button>\n" +
-    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">ETH</a></button>\n" +
-    "				<button class=\"btn btn-default\"><a href=\"/auth/steemit\">LTC</a></button>\n" +
+    "\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<!--AS AN APP?-->\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/btc\">BTC</a></button>\n" +
+    "				<!--WALLET INPUT.. ; ADDRESS; -->\n" +
+    "				<input placeholder=\"Address\" type=\"text\"  ng-model=\"walletAddress\" class=\"form-control\">\n" +
+    "				<input placeholder=\"Secret\" type=\"text\"  ng-model=\"walletAddress\" class=\"form-control\">\n" +
+    "\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/eth\">ETH</a></button>\n" +
+    "				<input placeholder=\"Address\" type=\"text\"  ng-model=\"walletAddress\" class=\"form-control\">\n" +
+    "				<input placeholder=\"Secret\" type=\"text\"  ng-model=\"walletAddress\" class=\"form-control\">\n" +
+    "\n" +
+    "				<button class=\"btn btn-default\"><a href=\"/auth/ltc\">LTC</a></button>\n" +
+    "				<input placeholder=\"Address\" type=\"text\"  ng-model=\"walletAddress\" class=\"form-control\">\n" +
+    "				<input placeholder=\"Secret\" type=\"text\"  ng-model=\"walletAddress\" class=\"form-control\">\n" +
+    "\n" +
+    "\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "    </div>\n" +
@@ -2104,7 +2171,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                \n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                    <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </ul>\n" +
@@ -2168,7 +2234,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                    <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </ul>\n" +
@@ -2367,7 +2432,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
@@ -2541,7 +2605,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <!--INTO-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <!--<h3>CRE8 MULTIDIMENSIONAL VALUE</h3>-->\n" +
+    "\n" +
     "                <h3>EVERYTHING IS VALUABLE</h3>\n" +
     "                <!--\n" +
     "                CREATE IS EMPOWERMENT\n" +
@@ -2549,10 +2613,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                CREATE IS UNITY\n" +
     "                -->\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">From time and intention to work and organization, information is income.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance. With inclusivity maximalism, you get what you give.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us.</p>\n" +
-    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates abundance; you get what you give. Consentually share with us.</p>-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">From imagination and intention to work and organization, shared information is value.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">We all benefit when you share with us.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -2604,14 +2667,30 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>MULTIDIMENSIONALITY</h3>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Multidimensionality & the Gestalt Princple</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Tokenization & Pluralism in a Market Space</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Token Language Defined by Interoperable Protocol Architecture</p>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <h3>COORDINATE INTENTIONALLY</h3>\n" +
-    "                <h5>Motions, Voting, and Governance alongside Peer based decision mechanisms</h5>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work discovered though a Reputation Weighted Voting Mechanism</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation with group organization naturally flourishing.</p>\n" +
-    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation naturally organizating group dynamics.</p>-->\n" +
+    "                <h5>Decentralized Peer Governance</h5>\n" +
+    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation with group organization naturally flourishing.</p>-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation which naturally organizes group dynamics. Interoperable Organization Protocols give rise to diverse operant frameworks.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work is discovered though a voting mechanism weighted by <i>context-specific</i> reputation.</p>\n" +
+    "\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
@@ -2619,31 +2698,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div> \n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>WE CREATE THE FUTURE TODAY</h3>\n" +
-    "                <!--<h4>WHERE WE WILL GO & WHAT WE WILL CREATE</h4>-->\n" +
-    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, our shared vision is the future we create today.</p>-->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, help cocreate our shared vision.</p>\n" +
-    "\n" +
-    "                <h5><a href=\"/apps\">Application Ecosystem</a></h5>\n" +
-    "                <h5><a href=\"/developers\">Developer Documentation</a></h5>\n" +
-    "                <!--Inspiring Tasks and Projects-->\n" +
-    "            </div>\n" +
-    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "    \n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "                <!--THE FUTURE-->\n" +
-    "                <h3>ARTIFICAL INTELLIGENCE & TRANSPARENCY</h3>\n" +
+    "                <h3>EMERGENT INTELLIGENCE WITH TRANSPARENCY</h3>\n" +
+    "                <!--INTEROPERABLE VALIDATION PROTOCOLS-->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Information and Intelligence with Consensus on Time, Intention, and Creation.</p>\n" +
+    "                <!--PEERS; NOVEL MOBILE CONNECTION ; THE NETWORK IS YOU-->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Shared Information as Income.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
@@ -2666,8 +2728,35 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <!--PEERS; NOVEL MOBILE CONNECTION ; THE NETWORK IS YOU-->\n" +
-    "        <!--WHO WE ARE; WHAT WE DO; WHAT WE CREATE-->\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>WE CREATE THE FUTURE TODAY</h3>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, help cocreate our shared vision.</p>\n" +
+    "                <h5><a href=\"/apps\">Application Ecosystem</a></h5>\n" +
+    "                <h5><a href=\"/developers\">Developer Documentation</a></h5>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "    \n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-md-6\">\n" +
+    "                <h3>CRE8</h3>\n" +
+    "                <!--Inspiring Tasks and Projects-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Wanna Collab? Get Involved in your Local Community.</p>\n" +
+    "                <h5><a href=\"/project/cre8\">CRE8 META</a></h5>\n" +
+    "                <!--WHO WE ARE; WHAT WE DO; WHAT WE CREATE-->\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"spacing-50\"></div>\n" +
@@ -2751,7 +2840,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
@@ -7248,6 +7336,14 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <span><b>Associations</b></span>\n" +
+    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "\n" +
     "    <div ng-show=\"contentList.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
@@ -7363,7 +7459,6 @@ angular.module("project/templates/items.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
@@ -7774,6 +7869,12 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "    </div>\n" +
     "\n" +
     "    <div ng-show=\"tasks.length > 0\" class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "    	<ul style=\"padding:0px;\" class=\"member-tabs mobileFix\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
     "\n" +
     "	    <div class=\"card mobileFix\">\n" +
     "	        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
@@ -8868,24 +8969,12 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "	    <div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
+    "	    	<!--STATIC BUTTON FOR CURRENT LOCATION FILTER-->\n" +
     "		    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "                <!--<li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>-->\n" +
     "            </ul>\n" +
     "            <div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "            <!--\n" +
-    "            <div class=\"card\">\n" +
-    "                <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "                    <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                        <a  href=\"#\" role=\"button\">\n" +
-    "                            <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                        </a>\n" +
-    "                    </div>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        	-->\n" +
     "\n" +
     "            <div class=\"card\">\n" +
     "				<tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +

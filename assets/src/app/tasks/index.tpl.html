@@ -63,24 +63,12 @@
 
 	    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
 
+	    	<!--STATIC BUTTON FOR CURRENT LOCATION FILTER-->
 		    <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>
+                <!--<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>-->
             </ul>
             <div style="clear:both"></div>
-
-            <!--
-            <div class="card">
-                <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
-                    <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-                        <a  href="#" role="button">
-                            <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                        </a>
-                    </div>
-                </form>
-            </div>
-        	-->
 
             <div class="card">
 				<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>

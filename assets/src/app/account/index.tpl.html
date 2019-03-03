@@ -1,3 +1,16 @@
+<div class="page-heading">
+    <div class="spacing-25"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Account Settings</h1>
+            </div>
+        </div>
+    </div>
+    <div class="spacing-25"></div>
+</div>
+
+
 <div class="container">
 	<div class="spacing-15"></div>
 	
@@ -45,7 +58,7 @@
                     <p><a href="/member/{{currentUser.username}}/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
 
 					<div class="row">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h5>Balance Lookup <span style="font-size:11px;color:gray">0x8f50FB12E80E788cC0141b06e84a4a02357431d0</span></h5>
 				       		<form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
 					        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
@@ -59,7 +72,7 @@
 					    	</div>
 
 				        </div>
-				        <div class="col-sm-6">
+				        <div class="col-sm-12">
 							<h5>Reputation Lookup <span style="font-size:11px;color:gray">0x90C11Cd017582766A89155B7b90f11aF67fD2A2A</span> </h5>
 				       		<form ng-click="lookupReputation()" style="display:flex;flex-direction:row;">
 					        	<input ng-model="reputationLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
@@ -73,43 +86,16 @@
 					    	</div>
 				        </div>
 					</div>
-
-					<!--TODO-->
-					<h5>Peer Contrubution</h5>
-					<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
-					<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
-
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!--TODO: ACCOUNT HISTORY | LIKE LOGINS ALL POSTS | DETAILED AUDIT OF ACCOUNT EVENTS -->
-
-    <div class="row">
-		<div class="card">
-			<div style="padding:16px">
-				<h3>Information</h3>
-				<h4>{{currentUser.email}}</h4>
-				<p>Human Proof ID | ON</p>
-				<p>Verification | Goverment ID | Social Accounts | BioMetric Data</p>
-			</div>
-	    </div>
-	</div>
-
-	<!--<div class="row">
-	    <div class="card">
-	        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
-	        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-	    </div>
-   	</div>-->
-
-    <div class="row">
-		<div class="card">
-			<div style="">
-				<button class="btn btn-default log-btn" ng-click="editAccountToggle()">Edit Account</button>
-			</div>
-		</div>
+ 	<div class="row">
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#" ng-click="editAccountToggle()">Edit Account</a></li>
+            <div style="clear:both"></div>
+        </ul>
 	</div>
 
 	<div class="row" ng-show="editAccountToggleVar">
@@ -145,8 +131,60 @@
     <div class="row">
 		<div class="card">
 			<div style="padding:16px">
-				<h3>Settings</h3>
-				<!--SETTING DESCRIP-->
+				<h3>Identification</h3>
+				<h4 style="color:gray;">{{currentUser.email}}</h4>
+				<p style="color:gray;font-size:12px;">Human Proof ID | ON</p>
+				<p style="color:gray;font-size:12px;">Verification | Goverment ID | Social Accounts | BioMetric Data</p>
+			</div>
+	    </div>
+	</div>
+
+	<div class="spacing-5"></div>
+
+	<div class="row">
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="font-size:14px"><a href="#" ng-click="editAccountToggle()">Apps</a></li>
+            <li style="font-size:14px"><a href="#" ng-click="editAccountToggle()">History</a></li>
+            <li style="font-size:14px"><a href="#" ng-click="editAccountToggle()">Mining</a></li>
+            <li style="font-size:14px"><a href="#" ng-click="editAccountToggle()">Passports</a></li>
+            <li style="font-size:14px"><a href="#" ng-click="editAccountToggle()">Wallets</a></li>
+            <div style="clear:both"></div>
+        </ul>
+	</div>
+
+  	<div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<h5>Peer Contrubution</h5>
+				<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
+				<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
+			</div>
+	    </div>
+	</div>
+
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px">
+				<h5>Account History</h5>
+				<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
+				<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
+			</div>
+	    </div>
+	</div>
+
+	<!--
+	<div class="row">
+	    <div class="card">
+	        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+	        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+	    </div>
+   	</div>
+    -->
+
+    <div class="row">
+		<div class="card">
+			<div style="padding:16px">
+
 				<p>Record Attention <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Attention Tokenization</span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
 				<p>Location Tracking <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Location Tokenization</span><md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>
 				<p>Client Mining <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch></p>
@@ -158,18 +196,47 @@
     </div>
 
 	<!--TODO: tokenized apps.. connect in..-->
+	<div class="row">
+		<div class="card">
+			<div style="padding:16px">
+
+				<h3>Connected Applications</h3>
+				<p>CRE8 <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px"></span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
+				<p>BTC <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">ADDRESS</span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
+				<p>ETH <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">ADDRESS</span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
+
+			</div>
+	    </div>
+    </div>
+
     <div class="row">
 		<div class="card">
 			<div style="padding:16px">
 				<h3>Connected Accounts & Wallets</h3>
+
 				<button class="btn btn-default"><a href="/auth/google">Google</a></button>
 				<button class="btn btn-default"><a href="/auth/twitter">Twitter</a></button>
 				<button class="btn btn-default"><a href="/auth/facebook">Facebook</a></button>
 				<button class="btn btn-default"><a href="/auth/fitbit">Fitbit</a></button>
 				<button class="btn btn-default"><a href="/auth/steemit">Steemit</a></button>
-				<button class="btn btn-default"><a href="/auth/steemit">BTC</a></button>
-				<button class="btn btn-default"><a href="/auth/steemit">ETH</a></button>
-				<button class="btn btn-default"><a href="/auth/steemit">LTC</a></button>
+
+				<br>
+
+				<!--AS AN APP?-->
+				<button class="btn btn-default"><a href="/auth/btc">BTC</a></button>
+				<!--WALLET INPUT.. ; ADDRESS; -->
+				<input placeholder="Address" type="text"  ng-model="walletAddress" class="form-control">
+				<input placeholder="Secret" type="text"  ng-model="walletAddress" class="form-control">
+
+				<button class="btn btn-default"><a href="/auth/eth">ETH</a></button>
+				<input placeholder="Address" type="text"  ng-model="walletAddress" class="form-control">
+				<input placeholder="Secret" type="text"  ng-model="walletAddress" class="form-control">
+
+				<button class="btn btn-default"><a href="/auth/ltc">LTC</a></button>
+				<input placeholder="Address" type="text"  ng-model="walletAddress" class="form-control">
+				<input placeholder="Secret" type="text"  ng-model="walletAddress" class="form-control">
+
+
 			</div>
 	    </div>
     </div>
