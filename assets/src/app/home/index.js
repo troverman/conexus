@@ -91,7 +91,6 @@ angular.module( 'conexus.home', [
     $scope.currentUser = config.currentUser;
 
     //LOCAL SEARCH QUERY FORMAT...
-    
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -104,8 +103,36 @@ angular.module( 'conexus.home', [
     $scope.tasks = tasks;
     $scope.time = time;
 
-    //TAGS TO ASSOCIATION | VALIDATION CONTEXT
+    $scope.getLatLng = function() {
+        if (navigator.geolocation) {
+            $rootScope.stateIsLoading = true;
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $rootScope.stateIsLoading = false;
+                lat = position.coords.latitude; 
+                lng = position.coords.longitude;
+                $scope.map = {
+                    center: {latitude: lat, longitude: lng},
+                    zoom: 12
+                };
 
+                //TODO: SIMPLY UPDATE QUERY :)
+                //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
+                //TODO: DISTANCE
+                ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
+                    $scope.projects = projects;
+                    $scope.markers = [];
+                    $scope.populateMap();
+                    $scope.init();
+                 });
+
+                $scope.$apply();
+
+            });
+        }
+    };
+    //$scope.getLatLng();
+
+    //TAGS TO ASSOCIATION | VALIDATION CONTEXT
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
         //TEMP HARDCODE -- MOVE TO PROTOCOL

@@ -2606,14 +2606,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "\n" +
-    "                <h3>EVERYTHING IS VALUABLE</h3>\n" +
+    "                <h3>INFORMATION IS VALUABLE</h3>\n" +
     "                <!--\n" +
     "                CREATE IS EMPOWERMENT\n" +
     "                CREATE IS INCLUSIVITY\n" +
     "                CREATE IS UNITY\n" +
     "                -->\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">From imagination and intention to work and organization, shared information is value.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">From imagination and intention to work and organization, sharing creates value.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">We all benefit when you share with us.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
@@ -2657,8 +2657,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. Show us your worth. Create.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us, what do you think is valuable?</p>\n" +
+    "                <!--EGLATARIAN TO US MEANS YOUR VOICE IS HEARD-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. <!--Show us your worth.--> Tell us your Story Create.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us, what do you believe is valuable?</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/register\">Join Our Community</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -2667,14 +2668,19 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
+    "\n" +
     "                <h3>MULTIDIMENSIONALITY</h3>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Multidimensionality & the Gestalt Princple</p>\n" +
+    "                <!--<h5>Value is ranked by its dimension of connectivity. The Moment of Liquidity is Combinatorial.</h5>-->\n" +
+    "                <h5>The Moment of Liquidity is Combinatorial</h5>\n" +
+    "\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Multidimensionality & Gestalt Princples</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Tokenization & Pluralism in a Market Space</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Token Language Defined by Interoperable Protocol Architecture</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Token Language Defined by An Interoperable Application Ecosystem</p>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">EXPLORE THE MARKET</a>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
@@ -2685,11 +2691,15 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>COORDINATE INTENTIONALLY</h3>\n" +
-    "                <h5>Decentralized Peer Governance</h5>\n" +
+    "                <!--<h3>COORDINATE INTENTIONALLY</h3>\n" +
+    "                <h5>Decentralized Peer Governance</h5>-->\n" +
+    "                <h3>INTENTIONALITY</h3>\n" +
+    "                <h5>Coordination through Decentralized Peer Governance</h5>\n" +
     "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation with group organization naturally flourishing.</p>-->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation which naturally organizes group dynamics. Interoperable Organization Protocols give rise to diverse operant frameworks.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work is discovered though a voting mechanism weighted by <i>context-specific</i> reputation.</p>\n" +
+    "                <!--<div class=\"spacing-15\"></div>\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/projects\">PROJECTS</a>-->\n" +
     "\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
@@ -2702,11 +2712,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>EMERGENT INTELLIGENCE WITH TRANSPARENCY</h3>\n" +
+    "                <h3>TRANSPARENCY</h3>\n" +
+    "                <h5>The Creation of Emergent Intelligence</h5>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though emergent & codified intelligence. Information and Intention creates emergent intelligence in programatic value.</p>\n" +
+    "                <!--<h3>TRANSPARENCY CREATES EMERGENT INTELLIGENCE</h3>-->\n" +
     "                <!--INTEROPERABLE VALIDATION PROTOCOLS-->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Information and Intelligence with Consensus on Time, Intention, and Creation.</p>\n" +
-    "                <!--PEERS; NOVEL MOBILE CONNECTION ; THE NETWORK IS YOU-->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Shared Information as Income.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">The Decentralized Network is you. Mobile peers support the network - striving to find congruence with human and machine consensus.</p>\n" +
+    "                <!--<div class=\"spacing-15\"></div>\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/transparency\">THE NETWORK</a>-->\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                \n" +
@@ -2733,8 +2746,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>WE CREATE THE FUTURE TODAY</h3>\n" +
+    "                <h3>CREATE THE FUTURE TODAY</h3>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, help cocreate our shared vision.</p>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
     "                <h5><a href=\"/apps\">Application Ecosystem</a></h5>\n" +
     "                <h5><a href=\"/developers\">Developer Documentation</a></h5>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -2746,20 +2760,32 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "    \n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-6\">\n" +
+    "        <!--<div class=\"row\" ng-show=\"true\">\n" +
+    "            <div class=\"col-md-12\">\n" +
     "                <h3>CRE8</h3>\n" +
-    "                <!--Inspiring Tasks and Projects-->\n" +
+    "                <!-WHO WE ARE; WHAT WE DO; WHAT WE CREATE :Inspiring Tasks, Member, & Projects->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Wanna Collab? Get Involved in your Local Community.</p>\n" +
     "                <h5><a href=\"/project/cre8\">CRE8 META</a></h5>\n" +
-    "                <!--WHO WE ARE; WHAT WE DO; WHAT WE CREATE-->\n" +
+    "                <div ng-repeat=\"item in projects.slice(0,10)\">\n" +
+    "                    <div class=\"card col-md-4\" ng-click=\"\">\n" +
+    "                        <div style=\"padding:16px;\">\n" +
+    "                            <div class=\"row\">\n" +
+    "                                <div class=\"col-sm-1 col-xs-2\"><a href=\"/project/{{item.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{item.avatarUrl}}\"></a></div>\n" +
+    "                                <div class=\"col-sm-11 col-xs-10\">\n" +
+    "                                    <h3 style=\"margin-top:0px\"><a href=\"/project/{{item.urlTitle}}\">{{item.title}}</a></h3>\n" +
+    "                                    <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-50\"></div>-->\n" +
     "\n" +
     "    </div>\n" +
     "    \n" +
@@ -8184,7 +8210,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
     "                    <div style=\"color:white;padding:15px;\">\n" +
     "                        <h1>Create Your Value Map</h1>\n" +
-    "                        <p>Participate in creating the mechanism of value.</p>\n" +
+    "                        <p>Participate in creating a mechanism of value.</p>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
@@ -8203,11 +8229,11 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
     "                    <div style=\"color:white;padding:15px;\">\n" +
     "                        <h1>Your Personal Value</h1>\n" +
-    "                        <p>Select what you believe is worthwile. What is valuable?</p>\n" +
+    "                        <p>What do you believe is valuable?</p>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for completness, the more intentional your dimensional vote the stronger the effect.</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile. The more detailed your dimensional vote the stronger the effect.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"card\">\n" +
@@ -8252,9 +8278,9 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                </div>\n" +
     "                            </div>\n" +
     "\n" +
-    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is all of this?</b></p>\n" +
-    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Tutorial -- ethos area</p>\n" +
-    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What are projects, what are tasks, what is content, what are protocols, what is the token language</p>\n" +
+    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is this?</b></p>\n" +
+    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We begin to define your value map by understanding statements of preference which are used to coordinate and factor various orders on CRE8's Multi Dimensional Token Market.</p>\n" +
+    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We promote a context of discovery for projects, tasks, time, content, and a variety of other protocol actions represented within on CRE8's network.</p>\n" +
     "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -8278,7 +8304,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Striving for universal adapation and reflectivity, your dimensional vote can be incompassing of all aspects of the human experience.</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">A day well spent. Striving for universal adaptation and reflectivity, your dimensional vote can be encompassing of all aspects of the human experience.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
@@ -8315,9 +8341,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">What is all of this? what is time? </p>\n" +
-    "\n" +
-    "\n" +
+    "                    <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -8339,7 +8363,8 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Transparency as a principle -- Give as much information as you would like.</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">We Promote Consentual Sharing</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Give as much information as you would like.</p>\n" +
     "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/4dde88fc96aa2bdda54559c36e5ad870/tumblr_ng5jy9JzPn1s5h88so1_1280.jpg\">\n" +
     "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/9daaa4e19ea6660b429d64c0ae417418/tumblr_n7dp7oF5DC1r1arpmo1_r1_1280.png\">\n" +
     "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/bcce94fa8d074789e52ac8c177120683/tumblr_oldnu3SSfR1r1arpmo1_1280.png\">\n" +
@@ -8397,6 +8422,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    </div>\n" +
     "\n" +
     "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Keep Going?</button>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Do you want to keep working on your value map?</p>\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
