@@ -108,6 +108,24 @@ module.exports = {
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
 			else {
+
+				//TODO:IMPLICIT VALIDATION
+				//ASSOCIATED MOELS ... ? 
+				var validationModel = {
+					conntent:'IMPLICIT VALIDATION ON TASK CREATE',
+					validation:{}, //model.tags
+					reputation:{}, //user.rep based on ^
+					associatedModels: [
+						//{type:'PROJECT',address:model.id},
+						{type:'TASK',address:task.id}
+					],
+					reactions: {plus:0,minus:0},
+					user: req.param('user'),
+				};
+				//Validate.create(validationModel).then(function(validation){
+				//	console.log('CREATED IMPLICIT VALIDATION', validation);
+				//});
+
 				Task.publishCreate(task);
 				res.json(task);
 			}

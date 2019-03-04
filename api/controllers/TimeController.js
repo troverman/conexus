@@ -95,7 +95,7 @@ module.exports = {
 			//RETROACTIVE | VS CREATED AT
 			startTime: req.param('startTime'),
 			//source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
-			//HOOK IN APIS --> FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
+			//FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
 
 			//TODO
 			associatedModels: req.param('associatedModels'),
@@ -117,11 +117,31 @@ module.exports = {
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
 
-					//TODO: IMPLICIT VALIDATION ! --> TO TASK  (FOR ALL TASK DIMENSIONS && SELF DEF)
+					//TODO:IMPLICIT VALIDATION
+					//ASSOCIATED MOELS ... ? 
+
+					var validationModel = {
+						conntent:'IMPLICIT VALIDATION ON TIME CREATE',
+						validation:{}, //model.tags + tags of task ? 
+						reputation:{}, //user.rep based on ^
+						associatedModels: [
+							//WHAT TASK.. WHAT CONTEXT?? ALL ? THAT'S A SET OF VALIDATIONS.. --> EMBED THIS IN UI
+							//{type:'TASK',address:model.id},
+							{type:'TIME',address:time.id}
+						],
+						reactions: {plus:0,minus:0},
+						user: req.param('user'),
+					};
+				
+					//Validate.create(validationModel).then(function(validation){
+					//	console.log('CREATED IMPLICIT VALIDATION', validation);
+					//});
 
 					//TODO: REQUEST TO VALIDATE NOTIFICATION
-					//for (x in time.associatedModels){
-					//	if (time.associatedModels[x].type == 'PROJECT'){
+
+					for (x in time.associatedModels){
+						if (time.associatedModels[x].type == 'PROJECT'){
+
 					//		ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
 					//			for (x in projectMembers){
 									//var notificationModel = {
@@ -134,8 +154,10 @@ module.exports = {
 									//});
 					//			}
 					//		});
-					//	}
-					//}
+
+						}
+					}
+
 
 				});
 

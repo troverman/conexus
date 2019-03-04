@@ -29,6 +29,8 @@ module.exports = {
 
 		else if (req.query.task){
 
+			//Association.find({"associatedModels.address":{$in :[task]}})
+
 			//WORK HERE
 			//THIS IS DEPRECIATED
 			Validation.native(function(err, validation) {

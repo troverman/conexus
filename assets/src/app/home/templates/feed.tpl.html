@@ -384,6 +384,11 @@
 
                         <div>
 
+                            <div style="float:right;text-align:right">
+                                <h5 ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                                <h5 ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
+                            </div>
+
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
@@ -391,15 +396,7 @@
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                             <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
-
-                            <p style="display:inline;float:right">
-                                <a ng-click="$event.stopPropagation();tokensToggle(item)">Tokens <i class="fa fa-question-circle"></i></a>
-                                <!--<br>
-                                <a ng-click="renderValidationToggle(item)">Associations <i class="fa fa-question-circle"></i></a>-->
-                            </p>
-                            
-                            <div style="clear:both"></div>
-
+                
                         </div>
 
                         <p ng-show="item.task.tags > 0" style="margin-left:42px">
