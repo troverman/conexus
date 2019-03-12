@@ -229,6 +229,7 @@ angular.module( 'conexus.project', [
     $scope.newTransaction = {};
     $scope.projectNavigation = $state.current.url.substring(1);
     $scope.searchQuery = [];
+    $rootScope.markers = [];
 
     //TODO
     //$ROOTSCOPE --> PASS TO NAV
@@ -252,19 +253,19 @@ angular.module( 'conexus.project', [
     $rootScope.member = null;
 
     if ($scope.project.location){ 
-        $scope.map = {
-            center: {latitude: project.location.lat, longitude: project.location.lng },
+        $rootScope.map = {
+            center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng },
             zoom: 13
         };
-        $scope.markers = [{
+        $rootScope.markers = [{
             id:project.id,
-            content:project.title,
+            content:$scope.project.title,
             coords:{
-                latitude:project.location.lat,
-                longitude:project.location.lng
+                latitude:$scope.project.location.lat,
+                longitude:$scope.project.location.lng
             }
         }];
-        $scope.options = {
+        $rootScope.options = {
            disableDefaultUI: true
         };
     }
@@ -292,7 +293,6 @@ angular.module( 'conexus.project', [
             $scope.newMember.user = config.currentUser.id;
             $scope.newMember.project = project.id;
             MemberModel.create($scope.newMember).then(function(model) {
-
                 $rootScope.confirm = $scope.newMember;
                 $rootScope.confirm.modelType = 'PROJECTMEMBER';
 
@@ -375,7 +375,6 @@ angular.module( 'conexus.project', [
             if (content){$scope.newContent.contentModel = content.id;}
             $scope.newContent.user = $scope.currentUser.id;
             $scope.newContent.project = $scope.project.id;
-
 
             //TODO
             $scope.newContent.model = 'CONTENT';
@@ -1297,7 +1296,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
+.controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, project, ProjectModel, projects, titleService ) {
     titleService.setTitle(project.title + ' | Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.project = project;
@@ -1307,6 +1306,40 @@ angular.module( 'conexus.project', [
         $scope.projects = [];
         for(var i=0;i < 10;i++){
             //$scope.projects.push({title:'Project1'});
+        }
+    }
+
+    //LOL
+    if ($scope.projects.length > 0){
+        var locationProjects = $scope.projects.map(function(obj){if(obj.location){return obj}}).filter(Boolean);
+        console.log(locationProjects);
+        if (locationProjects.length > 0){
+            if($scope.project.location){
+                $rootScope.map = {
+                    center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng },
+                    zoom: 13
+                };
+            }
+            else{
+                $rootScope.map = {
+                    center: {latitude: locationProjects[0].location.lat, longitude: locationProjects[0].location.lng },
+                    zoom: 13
+                };
+            }
+            $rootScope.options = {
+               disableDefaultUI: true
+            };
+            for (x in locationProjects){
+                $rootScope.markers.push({
+                    id:locationProjects[x].id,
+                    content:locationProjects[x].title,
+                    coords:{
+                        latitude:locationProjects[x].location.lat,
+                        longitude:locationProjects[x].location.lng
+                    }
+                });
+            }
+            console.log($rootScope.markers)
         }
     }
 

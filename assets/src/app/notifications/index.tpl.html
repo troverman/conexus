@@ -3,7 +3,7 @@
         <div class="spacing-25"></div>
         <div class="row">
             <div class="col-xs-12">
-            	<h1>Notifications</h1>
+            	<h1>Notifications <span style="float:right">{{notifications.length}}</span></h1>
             </div>
         </div>
         <div class="spacing-25"></div>
@@ -21,6 +21,18 @@
 
 	<div class="row" ng-show="notifications.length > 0">
 
+        <div class="spacing-5"></div>
+
+		<ul style="padding:0px;" class="member-tabs">
+			<!--
+			<li><a href="/content">Read</a></li>
+			-->
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+			<!--<li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>-->
+            <div style="clear:both"></div>
+		</ul>
+
+
 		<!--
 		<h4>x Unread</h4>
 		<h4>Today</h4>
@@ -29,20 +41,33 @@
 		<h4>Earlier</h4>
 		-->
 
-		<!--if unread-->
+		<!--if unread; read flag etc-->
 		<div ng-repeat="notification in notifications" class="card" ng-click="">
 	        <div style="padding:16px;">
+
+	        	<div style="float:right">
+		            <span><button class="btn btn-default" ng-click="markRead(notification)"><i class="fa fa-check"></i></button></span>
+		            <i class="fa fa-ellipsis-v"></i>
+	        	</div>
+
 	            <h5>{{notification.type}}</h5>
 	            <p><span style="color:gray">{{notification.content}}</span></p>
-	            <!--if type is new follower; follow btn-->
+
+	            <!--if type is new follower; follow btn; embeded function-->
+	            <div ng-if="notification.type='Follow'">
+	            	<button class="btn btn-default">Follow</button>
+	            </div>
+
 	        </div>
 	    </div>
 
 		<div ng-repeat="notification in notificationsStatic" class="card" ng-click="">
 	        <div style="padding:16px;">
+	        	<div style="float:right">
+		            <i class="fa fa-ellipsis-v"></i>
+	        	</div>
 	            <h5>{{notification.title}}</h5>
 	            <p><span style="color:gray">{{notification.description}}</span></p>
-
 	        </div>
 	    </div>
 

@@ -243,6 +243,9 @@ angular.module( 'conexus.member', [
 
     //TODO: seoService
 
+    //TODO: isFollowing
+    $scope.isFollowing = false;
+
     $scope.follow = function() {
         if ($scope.currentUser){
             $scope.newFollower.followed = $scope.member.id;
@@ -251,6 +254,8 @@ angular.module( 'conexus.member', [
 
                 $rootScope.confirm = $scope.newFollower;
                 $rootScope.confirm.modelType = 'FOLLOW';
+
+                $scope.isFollowing = true;
 
                 toaster.pop({
                     type:'success',

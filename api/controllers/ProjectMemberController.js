@@ -65,7 +65,6 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-
 				//DO ++
 				//CREATE MOTION.. VALIDATE?????????
 

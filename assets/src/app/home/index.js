@@ -583,22 +583,27 @@ angular.module( 'conexus.home', [
             credits:{enabled:false},
         };
 
+        console.log($scope.members);
         for (x in $scope.members){
-            for (y in Object.keys($scope.members[x].reputation)){
-                //Object.keys($scope.members[x].reputation)[y]
-                //$scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
-                if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
-                    //if not in category
-                    var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
-                    if (index == -1){
-                        $scope.totalMap.series[0].data.push($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
-                        $scope.totalMap.xAxis.categories.push(Object.keys($scope.members[x].reputation)[y]);
+            if ($scope.members[x].reputation){
+            
+                for (y in Object.keys($scope.members[x].reputation)){
+                    //Object.keys($scope.members[x].reputation)[y]
+                    //$scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
+                    if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
+                        //if not in category
+                        var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
+                        if (index == -1){
+                            $scope.totalMap.series[0].data.push($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
+                            $scope.totalMap.xAxis.categories.push(Object.keys($scope.members[x].reputation)[y]);
+                        }
+                        else{
+                            $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
+                        }
+                        //else find index and ++
                     }
-                    else{
-                        $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
-                    }
-                    //else find index and ++
                 }
+                
             }
         }
 

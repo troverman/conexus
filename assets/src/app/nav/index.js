@@ -1,11 +1,21 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, config, ContentModel, ItemModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, config, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
     $scope.currentUser = config.currentUser;
     $scope.chart = {};
     $scope.confirm = {};
     $scope.inputVector = [];
+    $scope.newContent = {};
+    $scope.newItem = {};
+    $scope.newOrder = {};
+    $scope.newProject = {};
+    $scope.newReaction = {};
+    $scope.newTask = {};
+    $scope.newTime = {};
+    $scope.newTransaction = {};
+    $scope.newTransaction = {};
+    $scope.newValidation = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
     $scope.item = {};
@@ -14,36 +24,10 @@ angular.module( 'conexus.nav', [
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedType = 'POST';
     $scope.validationColumnRender = {};
+
     //$rootScope.currentUser = config.currentUser;
 
-    //TODO: NOTIFICATIONS
-    $scope.pop = function(title, body){
-        toaster.pop({
-            type:'success', //info, wait, success, warning
-            title: title,
-            body: body,//'TROVERMAN SUBMITTED NEW TIME TO {TASK}', // VALIDATE X POST
-            onShowCallback: function (toast) { 
-                //PLAY SOUND
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log(audio)})
-                .catch(function(err){console.log(err)})
-            }
-        });
-    };
-
-    //TODO: WEBSOCKETS | WEB3
-    $sailsSocket.subscribe('notification', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-            //if logged in user
-            //HAS TO BE BETTER THAN SOCKET CHECK --> THIS IS RED HOT AT SCALE ,, lol ,, personal notification room vs whole -- TODO: REDO !
-            //$scope.currentUser.id
-            console.log(envelope)
-            $scope.pop('New Follower', envelope);
-        }
-    });
-
+   
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -65,25 +49,64 @@ angular.module( 'conexus.nav', [
     $rootScope.selectedLocations = [];
 
     if ($scope.currentUser){
-        $scope.newContent = {};
-        $scope.newItem = {};
-        $scope.newOrder = {};
-        $scope.newProject = {};
-        $scope.newReaction = {};
-        $scope.newTask = {};
-        $scope.newTime = {};
-        $scope.newTransaction = {};
-        $scope.newTransaction = {};
-        $scope.newValidation = {};
+
         $scope.newTransaction.from = [{text:$scope.currentUser.username, id:$scope.currentUser.id}];
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
         $scope.notificationCount = 0;
+
+        //TODO: NOTIFICATIONS
+        $scope.pop = function(title, body){
+            toaster.pop({
+                type:'success', //info, wait, success, warning
+                title: title,
+                body: body,//'TROVERMAN SUBMITTED NEW TIME TO {TASK}', // VALIDATE X POST
+                onShowCallback: function (toast) { 
+                    //PLAY SOUND
+                    var audio = new Audio('audio/ping.mp3');
+                    audio.play()
+                    .then(function(audio){console.log(audio)})
+                    .catch(function(err){console.log(err)})
+                }
+            });
+        };
+
+        //GET UNREAD NOTIFICATIONS.. POPEM
+        NotificationModel.getSome('user', $scope.currentUser.id, 100, 0, 'createdAt DESC').then(function(notifications){
+            $scope.notifications = notifications;
+            
+            //$scope.notifications = {};
+            console.log(notifications);
+
+            $scope.notificationCount = $scope.notifications.length;
+            for (x in $scope.notifications){
+                var titleText='';
+                var bodyText='';
+                $scope.pop($scope.notifications[x].type, $scope.notifications[x].content);
+            }
+
+        });
+
         //TODO: BETTER
         UserModel.getByUsername($scope.currentUser.username).then(function(member){
             $scope.memberValidate = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
         });
+
+        //TODO: WEBSOCKETS | WEB3
+        $sailsSocket.subscribe('notification', function (envelope) {
+            switch(envelope.verb) {
+                case 'created':
+                //if logged in user
+                //HAS TO BE BETTER THAN SOCKET CHECK 
+                //--> THIS IS RED HOT AT SCALE ,, lol 
+                //,, personal notification room vs whole -- TODO: REDO !
+                //$scope.currentUser.id
+                console.log(envelope)
+                $scope.pop('New Follower', envelope.data.user.username);
+            }
+        });
+
     }
 
     //TODO: FACTOR LOADING HERE

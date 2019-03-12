@@ -15,6 +15,7 @@ module.exports = {
 
 		Validation.watch(req);
 
+		//DEPRECIATE?
 		if (req.query.project){
 			Validation.find({project:project})
 			.limit(limit)
@@ -27,6 +28,7 @@ module.exports = {
 			});
 		}
 
+		//DEPRECIATE?
 		else if (req.query.task){
 
 			//Association.find({"associatedModels.address":{$in :[task]}})
@@ -94,6 +96,7 @@ module.exports = {
 
 		}
 
+		//DEPRECIATE?
 		else if(req.query.user){
 			Validation.find({user:user})
 			.limit(limit)
