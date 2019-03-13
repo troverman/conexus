@@ -1911,6 +1911,25 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
     "\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>MultiMarket Traversal</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The Multidimensional Token Market</p>\n" +
+    "                <p>N-size combinatorial objects</p>\n" +
+    "                <p>For every n-object there exists nCm objects of rank m</p>\n" +
+    "\n" +
+    "                <p>N Objects and their inverted facets</p>\n" +
+    "\n" +
+    "                <p>Combinatorial 3</p>\n" +
+    "                <p>Cominatorial 4</p>\n" +
+    "                <p>Cominatorial 5</p>\n" +
+    "                <p>Higher Dimensional Combinatorials</p>\n" +
+    "                <a href=\"https://www.instagram.com/cre8pluralism\">Instagram</a>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>Association Traversal</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
+    "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\"></div>\n" +
     "        </div>\n" +
