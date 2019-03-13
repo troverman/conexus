@@ -911,7 +911,6 @@ angular.module("block/index.tpl.html", []).run(["$templateCache", function($temp
     "								<th>Data</th>\n" +
     "		                    	<th>Address</th>\n" +
     "		                    	<th>Address</th>\n" +
-    "\n" +
     "							</tr>\n" +
     "		                </thead>\n" +
     "		                <tbody>\n" +
@@ -1397,7 +1396,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Block</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Blocks are machiene verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequental validated blocks of information.</p>\n" +
     "                    <p><b>get /api/block</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var blockModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var blockModel = {\n" +
+    "    txCount: {type: 'string'},\n" +
+    "    height: {type: 'string'},\n" +
+    "    minedBy: {type: 'string'},\n" +
+    "    timeStamp: {type: 'string'},\n" +
+    "    merkleRoot {type: 'string'},\n" +
+    "    previousBlock: {type: 'string'},\n" +
+    "    nextBlock: {type: 'string'},\n" +
+    "    size: {type: 'string'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1406,7 +1415,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Content</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Content is information.</p>\n" +
     "                    <p><b>[get, post] /api/content</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var contentModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var contentModel = {\n" +
+    "    title: {type: 'string'},\n" +
+    "    content: {type: 'string'},\n" +
+    "    tags: {type: 'string'},\n" +
+    "    type: {type: 'string', defaultsTo: 'POST'},\n" +
+    "    location: {type: 'json'},\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "    reactions: {type: 'json'},\n" +
+    "    user: {model: 'user', required: true}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1424,7 +1443,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Follower</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Followers are .. </p>\n" +
     "                    <p><b>[get, post] /api/follower</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var followerModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var followerModel = {\n" +
+    "    followed: {\n" +
+    "        model: 'user',\n" +
+    "        required: true\n" +
+    "    },\n" +
+    "    follower: {\n" +
+    "        model: 'user',\n" +
+    "        required: true\n" +
+    "    }\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1433,7 +1462,38 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Item</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Items are .. </p>\n" +
     "                    <p><b>[get, post] /api/item</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var itemModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var itemModel = {\n" +
+    "    //MAIN\n" +
+    "    title: {type: 'string'},\n" +
+    "    content: {type: 'string'},\n" +
+    "\n" +
+    "    //TAGS\n" +
+    "    tags: {type: 'string'},\n" +
+    "\n" +
+    "    //ASSOCIATIONS\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "\n" +
+    "    //LOCATION\n" +
+    "    location: {type: 'json'},\n" +
+    "\n" +
+    "    //INFO\n" +
+    "    //FORSALE, TYPE?\n" +
+    "    //FORLEASE,\n" +
+    "    info: {type: 'json'},\n" +
+    "\n" +
+    "    //PRICE, LEASE TIME.. .ETC\n" +
+    "    identifierSet: {type: 'string'},\n" +
+    "    amountSet: {type: 'string'},\n" +
+    "\n" +
+    "    //REACTIONS\n" +
+    "    reactions: {type: 'json'},\n" +
+    "\n" +
+    "    //DEPRECIATE\n" +
+    "    user: {model: 'user'},\n" +
+    "\n" +
+    "    owner: {type: 'json'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1451,7 +1511,70 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Member</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Member Model</p>\n" +
     "                    <p><b>[get, post] /api/member</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var memberModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var memberModel = {\n" +
+    "    avatarUrl: {type: 'string',},\n" +
+    "    coverUrl: {type: 'string'},\n" +
+    "    email: {\n" +
+    "        type: 'email',\n" +
+    "        required: true,\n" +
+    "        unique: true\n" +
+    "    },\n" +
+    "    username: {\n" +
+    "        type: 'string',\n" +
+    "        required: true,\n" +
+    "        unique: true\n" +
+    "    },\n" +
+    "\n" +
+    "    //INFO\n" +
+    "    firstName: {type: 'string'},\n" +
+    "    lastName: {type: 'string'},\n" +
+    "    dateOfBirth: {type: 'string'},\n" +
+    "    address: {type: 'string'},\n" +
+    "\n" +
+    "    //STATUS\n" +
+    "    loggedIn: {\n" +
+    "        type: 'boolean',\n" +
+    "        defaultsTo: false\n" +
+    "    },\n" +
+    "    isWorking: {\n" +
+    "        type: 'boolean',\n" +
+    "        defaultsTo: false\n" +
+    "    },\n" +
+    "    isLive: {\n" +
+    "        type: 'boolean',\n" +
+    "        defaultsTo: false\n" +
+    "    },\n" +
+    "\n" +
+    "    //COUNTS\n" +
+    "    followingCount: {\n" +
+    "        type: 'integer',\n" +
+    "        defaultsTo: 0\n" +
+    "    },\n" +
+    "    followerCount: {\n" +
+    "        type: 'integer',\n" +
+    "        defaultsTo: 0\n" +
+    "    },\n" +
+    "    notificationCount: {\n" +
+    "        type: 'integer',\n" +
+    "        defaultsTo: 0\n" +
+    "    },\n" +
+    "    projectCount: {\n" +
+    "        type: 'integer',\n" +
+    "        defaultsTo: 0\n" +
+    "    },\n" +
+    "    totalWork: {\n" +
+    "        type: 'integer',\n" +
+    "        defaultsTo: 0\n" +
+    "    },\n" +
+    "\n" +
+    "    //MAPPINGS\n" +
+    "    reputation: {type: 'json'},\n" +
+    "    balance: {type: 'json'},\n" +
+    "    locationTime: {type: 'json'},\n" +
+    "    //PASSPORT\n" +
+    "    passports: { collection: 'Passport', via: 'user' }\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1460,7 +1583,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Notification</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model</p>\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var notificationModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var notificationModel = {\n" +
+    "    user: {model: 'user'},\n" +
+    "    type: {type: 'string'},\n" +
+    "    content: {type: 'string'},\n" +
+    "    associations: {type: 'json'},\n" +
+    "    priority: { type: 'string'},\n" +
+    "    isRead: { type: 'boolean', defaultsTo: false}}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1469,7 +1600,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Order</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>\n" +
     "                    <p><b>[get, post] /api/order</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var orderModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var orderModel = {\n" +
+    "    creator: {type: 'string'},\n" +
+    "    user: {model: 'user'},\n" +
+    "    type: {type: 'string'},\n" +
+    "    setAlpha: {type:'json'},\n" +
+    "    setBeta: {type:'json'},\n" +
+    "    status: {type: 'string'},\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1478,7 +1617,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Passport</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model</p>\n" +
     "                    <p><b>[get, post] /api/passport</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var passportModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var passportModel = {\n" +
+    "    protocol: { type: 'alphanumeric', required: true },\n" +
+    "    password: { type: 'string', minLength: 8 },\n" +
+    "    provider: { type: 'alphanumericdashed' },\n" +
+    "    identifier: { type: 'string' },\n" +
+    "    tokens: { type: 'json' },\n" +
+    "    user: { model: 'User', required: true }\n" +
+    "};\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1487,14 +1635,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Project</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
     "                    <p><b>[get, post] /api/project</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var projectModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var projectModel = {\n" +
+    "    title: {type: 'string'},\n" +
+    "    description: {type: 'string'},\n" +
+    "    avatarUrl: {type: 'string'},\n" +
+    "    urlTitle: {type: 'string'},\n" +
+    "    stringManifold: {type: 'string'},\n" +
+    "    tags: {type: 'string'},\n" +
+    "    location: {type: 'json'},\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "    user: {model: 'user'},\n" +
+    "    info: {type: 'json'},\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <p><b>ProjectCharter</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">ProjectCharter is .. </p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations from initial conditions to reputationatation decay.</p>\n" +
     "                    <p><b>[get, post] /api/projectcharter</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var projectCharterModel = {};</div>\n" +
     "                </div>\n" +
@@ -1503,18 +1663,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <p><b>ProjectMember</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. </p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
     "                    <p><b>[get, post] /api/projectmember</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var projectMemberModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var projectMemberModel = {\n" +
+    "    project: {model: 'project'},\n" +
+    "    user: {model: 'user'},\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "                \n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <p><b>Protocol</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Protocol is .. </p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>\n" +
     "                    <p><b>[get, post] /api/protocol</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var protocolModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "//ABSTRACTION OF ABSTRACTION WORKING WITH CRE8 DECENTRALIZED VM\n" +
+    "var protocolModel = {\n" +
+    "    //ANY COMPILABLE CODE\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1523,7 +1691,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Reaction</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Reaction is .. </p>\n" +
     "                    <p><b>[get, post] /api/reaction</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var reactionModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var reactionModel = {\n" +
+    "    amount: {type: 'string'},\n" +
+    "    type: {type: 'string', required: true},\n" +
+    "    user: {model: 'user'},\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "    reactions: {type: 'json'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1541,7 +1716,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Task</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Tasks are a relay of context. Layers of validation intention create connection to time. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>\n" +
     "                    <p><b>[get, post] /api/task</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var taskModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var taskModel = {\n" +
+    "    title: {type: 'string', required: true,},\n" +
+    "    content: {type: 'string'},\n" +
+    "    status: {type: 'string', defaultsTo: 'Pending'},\n" +
+    "    location: {type: 'json'},\n" +
+    "    tags: {type: 'string'},\n" +
+    "    user: {model: 'user', required: true},\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "    reactions: {type: 'json'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1550,7 +1735,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Time</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Time & intention is the foundation of energy. Time is the base of CRE8.</p>\n" +
     "                    <p><b>[get, post] /api/time</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var timeModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var timeModel = {;\n" +
+    "    amount: {type: 'string'},\n" +
+    "    content: {type: 'string'},\n" +
+    "    startTime: {type: 'string'},\n" +
+    "    tags: {type: 'string'},\n" +
+    "    user: {model: 'user'},\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "    location: {type: 'json'},\n" +
+    "    reactions: {type: 'json'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1559,7 +1754,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Token</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A token is a discrete piece of information with the following properties:</p>\n" +
     "                    <p><b>get /api/token</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var tokenModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "//--> BALANCE MAPPING\n" +
+    "//--> INFORMATION MAPPING\n" +
+    "//--> PROTOCOL MAPPING\n" +
+    "var tokenModel = {\n" +
+    "    string: {type: 'string'},\n" +
+    "    protocols:{type:'json'},\n" +
+    "    logic:{type:'json'},\n" +
+    "    information:{type:'json'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "                \n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1585,16 +1789,36 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Tx</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every state update in the CRE8 virtual machine is represented by a transaction or tx. Blocks are machine verified bundles of txs.</p>\n" +
     "                    <p><b>get /api/tx</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var txModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var txModel = {\n" +
+    "    addressFrom: {type: 'string'},\n" +
+    "    addressTo: {type: 'string'},\n" +
+    "    data: {type: 'string'}\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <p><b>Validation</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\"></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Like Votes, the building block for group agreement - consensus and decision making. \n" +
+    "                    <p>PROJECT - ITEM</p>\n" +
+    "                    <p>PROJECT - CONTENT</p>\n" +
+    "                    <p>PROJECT - MEMBER</p>\n" +
+    "                    <p>PROJECT - ORDER</p>\n" +
+    "                    <p>PROJECT - TASK</p>\n" +
+    "                    <p>TASK - TIME</p>\n" +
+    "                    <p>VALIDATION - VALIDATION</p>\n" +
+    "                    </p>\n" +
     "                    <p><b>[get, post] /api/validation</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var validationModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var validationModel = {\n" +
+    "    content: {type: 'string'},\n" +
+    "    reputation: {type: 'json'},\n" +
+    "    user: {model: 'user'},\n" +
+    "    validation: {type: 'json'},\n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -1602,6 +1826,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <!--TOKEN STRING MAPPING-->\n" +
     "\n" +
     "                <h4>Interoperable Protocol Architecture</h4>\n" +
+    "                <h4>Application Design</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
     "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +

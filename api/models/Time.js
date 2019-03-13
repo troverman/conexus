@@ -24,6 +24,7 @@ module.exports = {
 
         //TODO: STREAM RELATIONSHIP?
         //TODO: LOCATION ?
+        location: {type: 'json'},
 
         //TODO: TYPE
         //RETROACTIVE | TRACKED | STREAM | APP
