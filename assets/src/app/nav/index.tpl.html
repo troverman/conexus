@@ -1320,56 +1320,53 @@
 
     <!--TODO: UNIFY MOBILE AND NON; TODO; TIME CTRL-->
     <div class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
+
         <div class="container">
 
-            <div class="navbar-header">
+            <span style="float:right;margin-top:3px;margin-left:-6px;" ng-if="notificationCount > 0"><span class="label label-danger">{{notificationCount}}</span></span>
+            <button style="margin-right:0px;border:0px solid transparent;" class="navIcon" type="button" ng-click="sideNavToggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-                <!--TODO: NOTIFICATIONS-->
-                <span ng-if="notificationCount > 0" class="navbar-toggle"><span class="label label-danger">{{notificationCount}}</span></span>
-                <button class="navbar-toggle" type="button" ng-click="sideNavToggle()">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
 
-                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->
-                <div ng-if="taskTime" class="nav-links" style="float:left;margin-top:13px;margin-right:10px;font-size:18px">
-                    <a ng-show="taskTime == 0" href="#"><i style="color:red" class="fa fa-circle"></i></a>
-                    <a ng-show="taskTime > 0" href="#"><i style="color:red" class="fa fa-pause"></i></a>
-                    <a ng-show="taskTime > 0" href="#">{{taskTime}}</a>
-                </div>
+            <!--<ul class="nav navbar-nav navbar-right">
+                <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
+                <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
+                <li ng-click="sideNavToggle()">
+                    <span ng-if="notificationCount > 0" style="float:left:margin-top:14px;"><span class="label label-danger">{{notificationCount}}</span></span>
+                    <button class="navIcon" type="button" style="margin-top:4px;">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </li>
+            </ul>-->
 
-                <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
-                
+            <!--<ul class="nav navbar-nav">
+                <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link1').value; return false;">
+                    <div class="form-group">
+                        <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link1" size="40" type="text" placeholder="">
+                    </div>
+                </form>
+            </ul>-->
+
+            <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->
+            <div ng-if="taskTime" class="nav-links" style="float:left;margin-top:13px;margin-right:10px;font-size:18px">
+                <a ng-show="taskTime == 0" href="#"><i style="color:red" class="fa fa-circle"></i></a>
+                <a ng-show="taskTime > 0" href="#"><i style="color:red" class="fa fa-pause"></i></a>
+                <a ng-show="taskTime > 0" href="#">{{taskTime}}</a>
             </div>
 
-            <!--TODO: DEPRECIATE-->
-            <div class="collapse navbar-collapse" style="text-align:center">
-                <ul class="nav navbar-nav">
-                    <form class="navbar-form" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link1').value; return false;">
-                        <div class="form-group">
-                            <input style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link1" size="40" type="text" placeholder="">
-                        </div>
-                    </form>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-links" ng-show="!currentUser"><a href="/register">Register</a></li>
-                    <li class="nav-links" ng-show="!currentUser"><a ng-click="loginToggle()" href="#">Login</a></li>
-                    <li ng-click="sideNavToggle()">
-                        <span ng-if="notificationCount > 0" style="float:left:margin-top:14px;"><span class="label label-danger">{{notificationCount}}</span></span>
-                        <button class="navIcon" type="button" style="margin-top:4px;">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
 
         </div>
+
         <md-progress-linear style="height:2px" ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
+
     </div>
 
 </div>

@@ -34,16 +34,22 @@ angular.module( 'conexus.account', [
 
     //TODO: BETTER
     UserModel.getByUsername($scope.currentUser.username).then(function(member){
-        $scope.newAccountInformation = member
+        $scope.newAccountInformation = member;
         $scope.currentUser = member;
         $scope.balance = member.balance;
         $scope.reputation = member.reputation;
     });
 
+    $scope.selectedTab = 'APPS';
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+    };
+
     $scope.editAccount = function () {
-        //UserModel.update($scope.newAccountInformation).then(function(){
-            //DONE
-        //});
+        UserModel.update($scope.newAccountInformation).then(function(model){
+            console.log(model);
+            $scope.editAccountToggleVar = false;
+        });
     };
 
     $scope.editAccountToggle = function () {
@@ -73,7 +79,14 @@ angular.module( 'conexus.account', [
         .then(function(response){
             $scope.avatarLoading = false;
 			$scope.currentUser.avatarUrl = response.data.amazonUrl;
-            accountSave();
+            
+            $scope.saving = true;
+            var model = {
+                id: $scope.currentUser.id,
+                avatarUrl: $scope.currentUser.avatarUrl,
+            };
+            UserModel.update(model);
+
         },
         function(err){
             $scope.avatarLoading = false;
@@ -81,15 +94,6 @@ angular.module( 'conexus.account', [
         function (evt) {
             $scope.avatarPercentage = parseInt(100.0 * evt.loaded / evt.total);;
         })
-    };
-
-    function accountSave(){
-        $scope.saving = true;
-        var model = {
-            id: $scope.currentUser.id,
-            avatarUrl: $scope.currentUser.avatarUrl,
-        };
-        return UserModel.update(model);
     };
 
 }]);

@@ -280,7 +280,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("account/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
+    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
@@ -312,8 +312,8 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "			    <div class=\"member-card-info\" style=\"height:auto\">\n" +
     "			        <h4><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h4>\n" +
-    "			        <p style=\"color:gray\">{{currentUser.status}} online</p>\n" +
-    "			        <p style=\"color:gray\">total reputation | {{currentUser.totalWork}}</p>\n" +
+    "			        <p style=\"color:gray\"> <i style=\"color:#30b257\" class=\"fa fa-circle\"></i> {{currentUser.status}} Editing Account</p>\n" +
+    "			        <p style=\"color:gray\">Total Reputation | {{currentUser.totalWork}}</p>\n" +
     "\n" +
     "			        <br><br>\n" +
     "			        <a href=\"#\">\n" +
@@ -335,8 +335,8 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div class=\"card\">\n" +
     "				<div style=\"padding:16px\">\n" +
     "\n" +
-    "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{currentUser.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></a></span>\n" +
-    "					<h4>{{currentUser.email}}</h4>\n" +
+    "					<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">8x{{currentUser.id}}</span><img style=\"height:50px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></a></span>\n" +
+    "					<h4>{{currentUser.username}}</h4>\n" +
     "                    <p><a href=\"/member/{{currentUser.username}}/projects\">{{currentUser.projectCount || 0}} Projects</a> | <a href=\"/member/{{currentUser.username}}/followers\">{{currentUser.followerCount || 0}} Followers</a> | <a href=\"/member/{{currentUser.username}}/following\">{{currentUser.followingCount || 0}} Following</a>\n" +
     "\n" +
     "					<div class=\"row\">\n" +
@@ -384,27 +384,29 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "		<div class=\"card\">\n" +
     "		    <div style=\"padding:16px;\">\n" +
     "				<form role=\"form\" ng-submit=\"editAccount()\">\n" +
-    "					<h5>Username</h5>\n" +
-    "					<input placeholder=\"Username\" type=\"text\" ng-model=\"newAccountInformation.username\" class=\"form-control\">\n" +
-    "					<h5>Email</h5>\n" +
-    "					<input placeholder=\"Email\" type=\"text\" ng-model=\"newAccountInformation.email\" class=\"form-control\">\n" +
-    "					<h5>First Name</h5>\n" +
-    "					<input placeholder=\"First Name\" type=\"text\"  ng-model=\"newAccountInformation.firstName\" class=\"form-control\">\n" +
-    "					<h5>Last Name</h5>\n" +
-    "					<input placeholder=\"Last Name\" type=\"text\" ng-model=\"newAccountInformation.lastName\" class=\"form-control\">\n" +
-    "					<h5>Address</h5>\n" +
-    "					<input placeholder=\"Address\" type=\"text\" ng-model=\"newAccountInformation.address\" class=\"form-control\">\n" +
-    "					<h5>Date of Birth</h5>\n" +
-    "					<input placeholder=\"Date of Birth\" type=\"date\" ng-model=\"newAccountInformation.dob\" class=\"form-control\">\n" +
-    "					<h5>Sex</h5>\n" +
-    "					<input placeholder=\"Sex\" type=\"text\" ng-model=\"newAccountInformation.sex\" class=\"form-control\">\n" +
-    "					<h5>Height</h5>\n" +
-    "					<input placeholder=\"Height\" type=\"text\" ng-model=\"newAccountInformation.height\" class=\"form-control\">\n" +
-    "					<h5>Eye Color</h5>\n" +
-    "					<input placeholder=\"Eye Color\" type=\"text\" ng-model=\"newAccountInformation.eyecolor\" class=\"form-control\">\n" +
-    "					<h5>23&Me</h5>\n" +
-    "					<input placeholder=\"23&Me\" type=\"text\" ng-model=\"newAccountInformation.geneticsequence\" class=\"form-control\">\n" +
+    "                  	\n" +
+    "                  	<div style=\"padding:0px\" class=\"col-xs-12\"><h5>Username</h5><input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Address\" class=\"form-control\"></div>\n" +
+    "                	\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-6\"><h5>Email</h5><input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Address\" class=\"form-control\"></div>\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-6\"><h5>Phone Number</h5><input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Address\" class=\"form-control\"></div>\n" +
+    "					\n" +
+    "					<div style=\"padding:0px\" class=\"col-xs-6\"><h5>First Name</h5><input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
+    "					<div style=\"padding:0px\" class=\"col-xs-6\"><h5>Last Name</h5><input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
+    "                	\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-12\"><h5>Address</h5><input type=\"text\" ng-model=\"newAccountInformation.address\" placeholder=\"Address\" class=\"form-control\"></div>\n" +
+    "                	\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Date Of Birth</h5><input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Height</h5><input type=\"text\" ng-model=\"newAccountInformation.height\" placeholder=\"Height\" class=\"form-control\"></div>\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Eye Color</h5><input type=\"text\" ng-model=\"newAccountInformation.eyeColor\" placeholder=\"Eye Color\" class=\"form-control\"></div>\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Sex</h5><input type=\"text\" ng-model=\"newAccountInformation.sex\" placeholder=\"Sex\" class=\"form-control\"></div>\n" +
+    "                	\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>DNA</h5><input type=\"upload\" ng-model=\"newAccountInformation.dna\" placeholder=\"DNA\" class=\"form-control\"></div>\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>Iris</h5><input type=\"upload\" ng-model=\"newAccountInformation.iris\" placeholder=\"Iris\" class=\"form-control\"></div>\n" +
+    "                	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>Finger Print</h5><input type=\"upload\" ng-model=\"newAccountInformation.dna\" placeholder=\"Finger Print\" class=\"form-control\"></div>\n" +
+    "\n" +
     "					<button type=\"submit\" class=\"btn btn-default log-btn\">Save</button>\n" +
+    "	                <div style=\"clear:both\"></div>\n" +
+    "\n" +
     "				</form>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -415,39 +417,58 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div style=\"padding:16px\">\n" +
     "				<h3>Identification</h3>\n" +
     "				<h4 style=\"color:gray;\">{{currentUser.email}}</h4>\n" +
-    "				<p style=\"color:gray;font-size:12px;\">Human Proof ID | ON</p>\n" +
-    "				<p style=\"color:gray;font-size:12px;\">Verification | Goverment ID | Social Accounts | BioMetric Data</p>\n" +
+    "				<p style=\"color:gray;font-size:12px;\">Phone Number | 2FA</p>\n" +
+    "				<p style=\"color:gray;font-size:12px;\">Human Proof ID <i style=\"color:#b23030\" class=\"fa fa-circle\"></i></p>\n" +
+    "				<p style=\"color:gray;font-size:12px;\">Verification: <a href=\"#\">Goverment ID</a> | <a href=\"#\">Social Accounts</a> | <a href=\"#\">BioMetric Data</a></p>\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-5\"></div>\n" +
     "\n" +
+    "	<!--TODO: APPS; PASSPORTS; WALLETS; UNIFIY-->\n" +
+    "\n" +
     "	<div class=\"row\">\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Apps</a></li>\n" +
-    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">History</a></li>\n" +
-    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Mining</a></li>\n" +
-    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Passports</a></li>\n" +
-    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"editAccountToggle()\">Wallets</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"selectTab('APPS')\">Apps</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"selectTab('HISTORY')\">History</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"selectTab('MINING')\">Mining</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"selectTab('PASSPORTS')\">Passports</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"selectTab('PRIVACY')\">Privacy</a></li>\n" +
+    "            <li style=\"font-size:14px\"><a href=\"#\" ng-click=\"selectTab('WALLETS')\">Wallets</a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "	</div>\n" +
     "\n" +
-    "  	<div class=\"row\">\n" +
+    "	<!--TODO: tokenized apps.. connect in..-->\n" +
+    "	<div class=\"row\" ng-show=\"selectedTab=='APPS'\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "				<h5>Peer Contrubution</h5>\n" +
+    "\n" +
+    "				<h3>Connected Applications</h3>\n" +
+    "				<p>CRE8 <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\"></span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "				<p>BTC <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">ADDRESS</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "				<p>ETH <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">ADDRESS</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "\n" +
+    "			</div>\n" +
+    "	    </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"selectedTab=='HISTORY'\">\n" +
+    "		<div class=\"card\">\n" +
+    "			<div style=\"padding:16px\">\n" +
+    "				<h5>Account History</h5>\n" +
     "				<p style=\"font-size:11px\">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>\n" +
     "				<p style=\"font-size:11px\">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"row\">\n" +
+    "  	<div class=\"row\" ng-show=\"selectedTab=='MINING'\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "				<h5>Account History</h5>\n" +
+    "				<h5>Peer Contrubution</h5>\n" +
+    "				<p>Client Mining <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model=\"browserMining\" aria-label=\"Browser Mining\"></md-switch></p>\n" +
     "				<p style=\"font-size:11px\">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>\n" +
     "				<p style=\"font-size:11px\">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>\n" +
     "			</div>\n" +
@@ -463,37 +484,21 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "   	</div>\n" +
     "    -->\n" +
     "\n" +
-    "    <div class=\"row\">\n" +
+    "    <div class=\"row\" ng-show=\"selectedTab=='PRIVACY'\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "\n" +
     "				<p>Record Attention <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Attention Tokenization</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
     "				<p>Location Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>\n" +
-    "				<p>Client Mining <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model=\"browserMining\" aria-label=\"Browser Mining\"></md-switch></p>\n" +
-    "\n" +
     "				<p>Notifications <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><md-switch ng-model=\"notifications\" aria-label=\"Notifications\"></md-switch></p>\n" +
-    "\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "    </div>\n" +
     "\n" +
-    "	<!--TODO: tokenized apps.. connect in..-->\n" +
-    "	<div class=\"row\">\n" +
+    "\n" +
+    "	<div class=\"row\" ng-show=\"selectedTab=='WALLETS' || selectedTab=='PASSPORTS'\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "\n" +
-    "				<h3>Connected Applications</h3>\n" +
-    "				<p>CRE8 <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\"></span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
-    "				<p>BTC <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">ADDRESS</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
-    "				<p>ETH <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">ADDRESS</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
-    "\n" +
-    "			</div>\n" +
-    "	    </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px\">\n" +
     "				<h3>Connected Accounts & Wallets</h3>\n" +
     "\n" +
     "				<button class=\"btn btn-default\"><a href=\"/auth/google\">Google</a></button>\n" +
@@ -2536,7 +2541,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div style=\"padding:16px;\">\n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ CONTENT</button>\n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">SEND TOKENS</button>\n" +
-    "                    <a href=\"notifications\"><button class=\"btn btn-default log-btn\" ng-click=\"\">NOTIFICATIONS</button>\n" +
+    "                    <a href=\"notifications\"><button class=\"btn btn-default log-btn\"><!--<span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span>--> NOTIFICATIONS</button>\n" +
     "                    <a href=\"account\"><button class=\"btn btn-default log-btn\" ng-click=\"\">SETTINGS</button></a>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6697,56 +6702,53 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <!--TODO: UNIFY MOBILE AND NON; TODO; TIME CTRL-->\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
+    "\n" +
     "        <div class=\"container\">\n" +
     "\n" +
-    "            <div class=\"navbar-header\">\n" +
+    "            <span style=\"float:right;margin-top:3px;margin-left:-6px;\" ng-if=\"notificationCount > 0\"><span class=\"label label-danger\">{{notificationCount}}</span></span>\n" +
+    "            <button style=\"margin-right:0px;border:0px solid transparent;\" class=\"navIcon\" type=\"button\" ng-click=\"sideNavToggle()\">\n" +
+    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "            </button>\n" +
     "\n" +
-    "                <!--TODO: NOTIFICATIONS-->\n" +
-    "                <span ng-if=\"notificationCount > 0\" class=\"navbar-toggle\"><span class=\"label label-danger\">{{notificationCount}}</span></span>\n" +
-    "                <button class=\"navbar-toggle\" type=\"button\" ng-click=\"sideNavToggle()\">\n" +
-    "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                </button>\n" +
     "\n" +
-    "                <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
-    "                <div ng-if=\"taskTime\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
-    "                    <a ng-show=\"taskTime == 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
-    "                    <a ng-show=\"taskTime > 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
-    "                    <a ng-show=\"taskTime > 0\" href=\"#\">{{taskTime}}</a>\n" +
-    "                </div>\n" +
+    "            <!--<ul class=\"nav navbar-nav navbar-right\">\n" +
+    "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
+    "                <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
+    "                <li ng-click=\"sideNavToggle()\">\n" +
+    "                    <span ng-if=\"notificationCount > 0\" style=\"float:left:margin-top:14px;\"><span class=\"label label-danger\">{{notificationCount}}</span></span>\n" +
+    "                    <button class=\"navIcon\" type=\"button\" style=\"margin-top:4px;\">\n" +
+    "                        <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                        <span class=\"icon-bar\"></span>\n" +
+    "                        <span class=\"icon-bar\"></span>\n" +
+    "                        <span class=\"icon-bar\"></span>\n" +
+    "                    </button>\n" +
+    "                </li>\n" +
+    "            </ul>-->\n" +
     "\n" +
-    "                <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
-    "                \n" +
+    "            <!--<ul class=\"nav navbar-nav\">\n" +
+    "                <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link1').value; return false;\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link1\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
+    "            </ul>-->\n" +
+    "\n" +
+    "            <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
+    "            <div ng-if=\"taskTime\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
+    "                <a ng-show=\"taskTime == 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
+    "                <a ng-show=\"taskTime > 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
+    "                <a ng-show=\"taskTime > 0\" href=\"#\">{{taskTime}}</a>\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--TODO: DEPRECIATE-->\n" +
-    "            <div class=\"collapse navbar-collapse\" style=\"text-align:center\">\n" +
-    "                <ul class=\"nav navbar-nav\">\n" +
-    "                    <form class=\"navbar-form\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link1').value; return false;\">\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <input style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link1\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                </ul>\n" +
-    "                <ul class=\"nav navbar-nav navbar-right\">\n" +
-    "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a href=\"/register\">Register</a></li>\n" +
-    "                    <li class=\"nav-links\" ng-show=\"!currentUser\"><a ng-click=\"loginToggle()\" href=\"#\">Login</a></li>\n" +
-    "                    <li ng-click=\"sideNavToggle()\">\n" +
-    "                        <span ng-if=\"notificationCount > 0\" style=\"float:left:margin-top:14px;\"><span class=\"label label-danger\">{{notificationCount}}</span></span>\n" +
-    "                        <button class=\"navIcon\" type=\"button\" style=\"margin-top:4px;\">\n" +
-    "                            <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "                            <span class=\"icon-bar\"></span>\n" +
-    "                            <span class=\"icon-bar\"></span>\n" +
-    "                            <span class=\"icon-bar\"></span>\n" +
-    "                        </button>\n" +
-    "                    </li>\n" +
-    "                </ul>\n" +
-    "            </div>\n" +
+    "            <a class=\"navbar-brand\" href=\"/\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
     "\n" +
     "        </div>\n" +
+    "\n" +
     "        <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoading\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
+    "\n" +
     "    </div>\n" +
     "\n" +
     "</div>");

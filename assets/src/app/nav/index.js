@@ -52,7 +52,7 @@ angular.module( 'conexus.nav', [
 
         $scope.newTransaction.from = [{text:$scope.currentUser.username, id:$scope.currentUser.id}];
         $scope.newContent.associatedModels = [{text: $scope.currentUser.username, type:'PROFILE', id:$scope.currentUser.id}];
-        $scope.notificationCount = 0;
+        $rootScope.notificationCount = 0;
 
         //TODO: NOTIFICATIONS
         $scope.pop = function(title, body){
@@ -77,7 +77,7 @@ angular.module( 'conexus.nav', [
             //$scope.notifications = {};
             console.log(notifications);
 
-            $scope.notificationCount = $scope.notifications.length;
+            $rootScope.notificationCount = $scope.notifications.length;
             for (x in $scope.notifications){
                 var titleText='';
                 var bodyText='';
