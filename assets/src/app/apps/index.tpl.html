@@ -27,8 +27,10 @@
         <div class="row">
             <div class="col-sm-7">
                 <h3>APPS</h3>
-                <p style="color:gray;font-style:italic">Apps are plugins to the string space; how can we create an eglatarian world through tokenization?<br> See the <a href="/developers">documentation</a> to learn more.</p>
-                <p style="color:gray;font-style:italic">Apps as a bundle of protocols.</p>
+                <p style="color:gray;font-style:italic">Apps are plugins to the string space and add to the domain of tokenized systems of intention; how can we create an eglatarian world through tokenization?</p>
+                <p style="color:gray;font-style:italic">By openeing up the intention of system design, we capture a larger design space.</p>
+                <p style="color:gray;font-style:italic">Apps are a bundle of protocols. App design is modular.</p>
+                <p style="color:gray;font-style:italic">See the <a href="/developers">documentation</a> to learn more.</p>
             </div>
             <div class="col-sm-5">
                 <img src="https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif">
@@ -45,8 +47,10 @@
 
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
+
         <div class="card">
             <form ng-submit="search()" style="display:flex;flex-direction:row;">
                 <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
@@ -65,7 +69,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4 col-sm-6" ng-repeat="app in apps" style="padding-left:10px;padding-right:10px;">
+        <div class="col-lg-4 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
             <div class="card" ng-click="render(app)">
                 <div style="padding:16px;">
                     <h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>
@@ -75,9 +79,12 @@
         </div>
     </div>
 
-    <div class="spacing-10"></div>
-    <div ng-click="loadMore()">
-        <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+    <div class="spacing-5"></div>
+
+    <div class="row">
+        <div class="card" ng-click="loadMore()">
+            <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
+        </div>
     </div>
 
 

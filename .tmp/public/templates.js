@@ -567,8 +567,10 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-7\">\n" +
     "                <h3>APPS</h3>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Apps are plugins to the string space; how can we create an eglatarian world through tokenization?<br> See the <a href=\"/developers\">documentation</a> to learn more.</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Apps as a bundle of protocols.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Apps are plugins to the string space and add to the domain of tokenized systems of intention; how can we create an eglatarian world through tokenization?</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">By openeing up the intention of system design, we capture a larger design space.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Apps are a bundle of protocols. App design is modular.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">See the <a href=\"/developers\">documentation</a> to learn more.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-5\">\n" +
     "                <img src=\"https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif\">\n" +
@@ -585,8 +587,10 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
+    "\n" +
     "        <div class=\"card\">\n" +
     "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
@@ -605,7 +609,7 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "    </div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"app in apps\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\" ng-click=\"render(app)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"app/{{app.title}}\">{{app.title}}</a></h4>\n" +
@@ -615,9 +619,12 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
-    "    <div ng-click=\"loadMore()\">\n" +
-    "        <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\" ng-click=\"loadMore()\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "\n" +
     "\n" +
@@ -1995,6 +2002,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h5>Group Theoretic Properties</h5>\n" +
     "                <p><b>Substitution</b></p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
+    "                <p><b>Combination</b></p>\n" +
+    "                <p><b>Reduction</b></p>\n" +
     "\n" +
     "                <h5>Layered Deep Learning</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Combinatorials</p>\n" +
