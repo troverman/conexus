@@ -36,6 +36,17 @@ angular.module( 'conexus.market', [
     //    circulation: Math.floor(Math.random()*1000000),
     //    marketCount: Math.floor(Math.random()*10000),
     //};
+
+
+    $scope.manifolds = [
+        {title:'+CREDIT', manifolds:'+INTEREST'},
+        {title:'+DEBT', manifolds:'+TIME'},
+        {title:'+FUTURE', manifolds:'+TIME'},
+        {title:'+OPTION', manifolds:'+TIME'},
+        {title:'+SPONSOR', manifolds:'+ADDRESS'},
+    ];
+
+
     $scope.newMarket = {};
     $scope.newOrder = {};
     $scope.newOrder.identiferSet = $scope.stateParams.id;
@@ -48,6 +59,11 @@ angular.module( 'conexus.market', [
     });
     $scope.token = token[0];
     $scope.trades = {};
+
+    $scope.selectedTab = 'MARKET';
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+    };
 
     //PLUAR 2 COME :)
     $scope.bidAskChart = {
