@@ -26,7 +26,7 @@ angular.module( 'conexus.notifications', [
     //TODO
     FollowerModel.getFollowing($scope.currentUser).then(function(following){
         $scope.notifications.map(function(obj){
-            if (obj.type == 'Follow' && obj.info){
+            if (obj.type == 'FOLLOW' && obj.info){
                 var index = following.map(function(obj1){return obj1.followed.id}).indexOf(obj.info.id)
                 console.log(index);
                 if (index != -1){obj.isFollowing = true;}
@@ -40,6 +40,16 @@ angular.module( 'conexus.notifications', [
         type:['FOLLOW','REACT','CONTENT','VALIDATE','TRANSACTION','STATUS','INVITE'], 
         //tags:['troverman','follow'],
     };
+
+    //VALIDATION IS THE MOTION;; VALIDATION vs MOTION
+
+    //CREATE FOLLOW (ED),
+    //CREATE REACT (MY CONTENT),
+    //CREATE CONTENT (MY FOLLOWERS, MY CONTENT, MY PROJECT), 
+    //CREATE TIME (MY FOLLOWERS), //REQUEST VALIDATION || (( CREATE MOTION )) (CREATE TIME PROJECT MEMBERS)
+    //CREATE STATUS CHANGE (LIVE; MY FOLLOWERS)
+    //CREATE TRANSACTION (RECIEVE) //CREATE ORDER PROCESS / CREATE TRANSACTION
+    //CREATE VALIDATION (RECIEVE)
 
     //REQUEST TO VALIDATE (ON SUB TIME TO SUBD PROJECTS ((--> TASKS)), 
     //REQUEST TO VALIDATE (JOIN),

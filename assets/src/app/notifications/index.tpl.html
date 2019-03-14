@@ -67,7 +67,6 @@
 	                	<img class="card-avatar" ng-src="{{notification.info.avatarUrl}}" src="{{notification.info.avatarUrl}}" err-src="/images/avatar.png">
 	                	{{notification.info.username}}
 	                </a>
-
 	            	<button ng-if="!notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Follow</button>
 	            	<button ng-if="notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Unfollow</button>
 
@@ -84,21 +83,25 @@
                 	<a href="content/{{notification.info.content.id}}">{{notification.info.content.title}}:{{notification.info.content.id}}</a>
 	            </div>
 
+	            <div ng-if="notification.type=='VALIDATION'">
+		            <div layout="">
+	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+	                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
+	                </div>
+	                <div class="spacing-10"></div>
+	                <h5>Content</h5>
+	                <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+	                <div class="spacing-10"></div>
+	                <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+	            </div>
+
+
                 <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="notification.createdAt"></p>
 
-
 	        </div>
 	    </div>
 
-		<div ng-repeat="notification in notificationsStatic" class="card" ng-click="">
-	        <div style="padding:16px;">
-	        	<div style="float:right">
-		            <i class="fa fa-ellipsis-v"></i>
-	        	</div>
-	            <h5>{{notification.title}}</h5>
-	            <p><span style="color:gray">{{notification.description}}</span></p>
-	        </div>
-	    </div>
 
 	</div>
 

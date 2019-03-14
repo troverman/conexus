@@ -5613,7 +5613,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <auto-complete source=\"loadType($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                    <div ng-repeat=\"item in item.type.slice(0,10)\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectType(item)\">{{item}}</a>\n" +
+    "                        <a href=\"#\" ng-click=\"selectTypeFilter(item)\">{{item}}</a>\n" +
     "                    </div>\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -6876,7 +6876,6 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.avatarUrl}}\" src=\"{{notification.info.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "	                	{{notification.info.username}}\n" +
     "	                </a>\n" +
-    "\n" +
     "	            	<button ng-if=\"!notification.isFollowing\" ng-click=\"follow(notification)\" class=\"btn btn-default\">Follow</button>\n" +
     "	            	<button ng-if=\"notification.isFollowing\" ng-click=\"follow(notification)\" class=\"btn btn-default\">Unfollow</button>\n" +
     "\n" +
@@ -6893,21 +6892,25 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "                	<a href=\"content/{{notification.info.content.id}}\">{{notification.info.content.title}}:{{notification.info.content.id}}</a>\n" +
     "	            </div>\n" +
     "\n" +
+    "	            <div ng-if=\"notification.type=='VALIDATION'\">\n" +
+    "		            <div layout=\"\">\n" +
+    "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
+    "	                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
+    "	                </div>\n" +
+    "	                <div class=\"spacing-10\"></div>\n" +
+    "	                <h5>Content</h5>\n" +
+    "	                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "	                <div class=\"spacing-10\"></div>\n" +
+    "	                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "	            </div>\n" +
+    "\n" +
+    "\n" +
     "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"notification.createdAt\"></p>\n" +
     "\n" +
-    "\n" +
     "	        </div>\n" +
     "	    </div>\n" +
     "\n" +
-    "		<div ng-repeat=\"notification in notificationsStatic\" class=\"card\" ng-click=\"\">\n" +
-    "	        <div style=\"padding:16px;\">\n" +
-    "	        	<div style=\"float:right\">\n" +
-    "		            <i class=\"fa fa-ellipsis-v\"></i>\n" +
-    "	        	</div>\n" +
-    "	            <h5>{{notification.title}}</h5>\n" +
-    "	            <p><span style=\"color:gray\">{{notification.description}}</span></p>\n" +
-    "	        </div>\n" +
-    "	    </div>\n" +
     "\n" +
     "	</div>\n" +
     "\n" +

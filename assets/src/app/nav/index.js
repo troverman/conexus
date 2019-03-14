@@ -82,7 +82,7 @@ angular.module( 'conexus.nav', [
             for (x in $scope.notifications){
                 var titleText='';
                 var bodyText='';
-                $scope.pop($scope.notifications[x].type, $scope.notifications[x].content);
+                $scope.pop($scope.notifications[x].title, $scope.notifications[x].content);
             }
 
         });
