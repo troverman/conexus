@@ -9,7 +9,7 @@ angular.module('models.notification', ['lodash', 'services', 'sails.io',])
             params:{
                 limit:model.limit,
                 skip:model.skip,
-                sort:model.skip,
+                sort:model.sort,
                 isRead:model.isRead,
                 user:model.user
             }

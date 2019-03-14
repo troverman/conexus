@@ -37,9 +37,11 @@ angular.module( 'conexus.nav', [
         assetsInput:[],
         assetsOutput:[],
         associations:[],
+        model:[],
         locations:[],
         query:[],
         tags:[],
+        type:[],
     };
 
     $rootScope.selectedTags = [];
@@ -102,7 +104,9 @@ angular.module( 'conexus.nav', [
                 //,, personal notification room vs whole -- TODO: REDO !
                 //$scope.currentUser.id
                 console.log(envelope)
-                $scope.pop('New Follower', envelope.data.user.username);
+                //if type
+                $scope.pop(envelope.data.title, envelope.data.info.user.username);
+                $rootScope.notificationCount++;
             }
         });
 
@@ -446,6 +450,20 @@ angular.module( 'conexus.nav', [
             }
         };
 
+        $scope.selectTypeFilter = function(item){
+            if ($rootScope.searchQueryNav.type.map(function(obj){return obj.text}).indexOf(item)==-1){
+                $rootScope.searchQueryNav.type.push({
+                    text:'Type | '+item, 
+                    query:item, 
+                    type:'TYPE'
+                });
+                $scope.item.type = $scope.item.type.filter(function(obj) { 
+                    return obj.element !== item
+                });
+            }
+        };
+
+
         //$rootScope.$watch('searchQueryNav' ,function(){
         //    $rootScope.searchQuery = [];
         //    for(x in Object.keys($rootScope.searchQueryNav)){
@@ -475,6 +493,13 @@ angular.module( 'conexus.nav', [
         //LEDGER
         $scope.item = item;
         $scope.type = type;
+
+        console.log(type,item)
+
+        //NOTIFICATIONS
+        $scope.selectedType = 'ALL';
+
+
         $mdSidenav('filter').toggle();
 
     };

@@ -192,6 +192,41 @@
 
                 </div>
 
+                <div ng-if="type=='NOTIFICATION'">
+
+                    <ul class="nav nav-pills nav-justified contentTyle">
+                        <li ng-class="{active: selectedType=='ALL'}" ng-click="selectType('ALL')"><a href="#">All</a></li>
+                        <li ng-class="{active: selectedType=='READ'}" ng-click="selectType('READ')"><a href="#">Read</a></li>
+                        <li ng-class="{active: selectedType=='UNREAD'}" ng-click="selectType('UNREAD')"><a href="#">Unread</a></li>
+                    </ul>
+                    <div class="spacing-10"></div>
+
+                    <p><b>Tags</b></p>
+                    <tags-input min-length="1" placeholder="Tags" ng-model="searchQueryNav.tags">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+                    <div ng-repeat="item in item.tags.slice(0,10)">
+                        <a href="#" ng-click="selectTag(item)">{{item}}</a>
+                    </div>
+                    <div class="spacing-10"></div>
+
+                    <p><b>Type</b></p>
+                    <tags-input min-length="1" placeholder="Type" ng-model="searchQueryNav.type">
+                        <auto-complete source="loadType($query)"></auto-complete>
+                    </tags-input>
+                    <div ng-repeat="item in item.type.slice(0,10)">
+                        <a href="#" ng-click="selectType(item)">{{item}}</a>
+                    </div>
+                    <div class="spacing-10"></div>
+
+                    <p><b>Priority</b></p>
+                    <div layout="">
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="priorityFilter.priority" step="1" min="0" max="100" aria-label="general"></md-slider>
+                    </div>
+                    <div class="spacing-10"></div>
+
+                </div>
+
                 <!--POSTIONS | MAP-->
                 <div ng-if="type=='POSITIONS'">
                     <p><b>Positions</b></p>

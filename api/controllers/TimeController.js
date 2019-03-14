@@ -120,6 +120,9 @@ module.exports = {
 					//TODO:IMPLICIT VALIDATION
 					//ASSOCIATED MOELS ... ? 
 
+
+
+
 					var validationModel = {
 						conntent:'IMPLICIT VALIDATION ON TIME CREATE',
 						validation:{}, //model.tags + tags of task ? 
@@ -136,6 +139,12 @@ module.exports = {
 					//Validate.create(validationModel).then(function(validation){
 					//	console.log('CREATED IMPLICIT VALIDATION', validation);
 					//});
+
+
+
+
+
+
 
 					//TODO: REQUEST TO VALIDATE NOTIFICATION
 
@@ -157,6 +166,12 @@ module.exports = {
 
 						}
 					}
+
+
+
+
+
+
 
 
 				});

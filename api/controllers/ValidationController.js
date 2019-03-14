@@ -224,10 +224,23 @@ module.exports = {
 					Validation.publishCreate(validation);
 					res.json(validation);
 
+					
+				
 					//TODO: VALIDATION NOTIFICATION
+					var notificationModel = {
+						user: userModel[0].user,
+						type: 'VALIDATION',
+						title: 'New Validation',
+						content:'New Validation for associatedModels',
+						info:{user: userModel[0], associationModels:[]},
+						priority:75,
+					};
 					//Notification.create(notificationModel).then(function(notification){
 					//	Notification.publishCreate(follower[0]);
 					//});
+
+
+
 
 					//THEN CREATE OR UPDATE ASSOCIATION
 					//COULD JUST STORE IN MODEL..? ?

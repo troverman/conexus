@@ -5590,6 +5590,41 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                </div>\n" +
     "\n" +
+    "                <div ng-if=\"type=='NOTIFICATION'\">\n" +
+    "\n" +
+    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                        <li ng-class=\"{active: selectedType=='ALL'}\" ng-click=\"selectType('ALL')\"><a href=\"#\">All</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='READ'}\" ng-click=\"selectType('READ')\"><a href=\"#\">Read</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='UNREAD'}\" ng-click=\"selectType('UNREAD')\"><a href=\"#\">Unread</a></li>\n" +
+    "                    </ul>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Tags</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"searchQueryNav.tags\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.tags.slice(0,10)\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(item)\">{{item}}</a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Type</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Type\" ng-model=\"searchQueryNav.type\">\n" +
+    "                        <auto-complete source=\"loadType($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.type.slice(0,10)\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectType(item)\">{{item}}</a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Priority</b></p>\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"priorityFilter.priority\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
     "                <!--POSTIONS | MAP-->\n" +
     "                <div ng-if=\"type=='POSITIONS'\">\n" +
     "                    <p><b>Positions</b></p>\n" +
@@ -6801,7 +6836,7 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "			<!--\n" +
     "			<li><a href=\"/content\">Read</a></li>\n" +
     "			-->\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('NOTIFICATION', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "			<!--<li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>-->\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "		</ul>\n" +
@@ -6819,28 +6854,47 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "		<div ng-repeat=\"notification in notifications\" class=\"card\" ng-click=\"\">\n" +
     "	        <div style=\"padding:16px;\">\n" +
     "\n" +
-    "	        	<div style=\"float:right\">\n" +
-    "		            <span>\n" +
-    "		            	<button ng-if=\"notification.isRead\" class=\"btn btn-default\" ng-click=\"markUnread(notification)\"><i class=\"fa fa-check-square\"></i></button>\n" +
-    "		            	<button ng-if=\"!notification.isRead\" class=\"btn btn-default\" ng-click=\"markRead(notification)\"><i class=\"fa fa-check\"></i></button>\n" +
+    "	        	<div style=\"float:right;text-align:center\">\n" +
+    "		            <!--<i style=\"float:right\" ng-click=\"$event.stopPropagation();tokensToggle(notification);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
+    "		            <span ng-if=\"notification.isRead\">\n" +
+    "		            	<button class=\"btn btn-default\" ng-click=\"markRead(notification, false)\"><i class=\"fa fa-envelope-o\"></i></button>\n" +
+    "						<br><span style=\"color:gray;font-size:10px;\">Read</span>\n" +
     "		            </span>\n" +
-    "		            <i class=\"fa fa-ellipsis-v\"></i>\n" +
+    "    		        <span ng-if=\"!notification.isRead\">\n" +
+    "						<button ng-if=\"!notification.isRead\" class=\"btn btn-default\" ng-click=\"markRead(notification, true)\"><i style=\"color:red\" class=\"fa fa-envelope-o\"></i></button>\n" +
+    "						<br><span style=\"color:gray;font-size:10px;\">Unread</span>\n" +
+    "		            </span>\n" +
     "	        	</div>\n" +
     "\n" +
-    "	            <h5>{{notification.type}}</h5>\n" +
+    "	        	 <h5>{{notification.title}}</h5>\n" +
     "	            <p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
-    "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"notification.createdAt\"></p>\n" +
-    "                <br><br>\n" +
-    "	            <!--if type is new follower; follow btn; embeded function-->\n" +
-    "	            <div ng-if=\"notification.type='Follow'\">\n" +
     "\n" +
+    "	            <!--if type is new follower; follow btn; embeded function-->\n" +
+    "	            <div ng-if=\"notification.type=='FOLLOW'\">\n" +
+    "		          \n" +
     "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.username}}\">\n" +
     "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.avatarUrl}}\" src=\"{{notification.info.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "	                	{{notification.info.username}}\n" +
     "	                </a>\n" +
     "\n" +
-    "	            	<button class=\"btn btn-default\">Follow</button>\n" +
+    "	            	<button ng-if=\"!notification.isFollowing\" ng-click=\"follow(notification)\" class=\"btn btn-default\">Follow</button>\n" +
+    "	            	<button ng-if=\"notification.isFollowing\" ng-click=\"follow(notification)\" class=\"btn btn-default\">Unfollow</button>\n" +
+    "\n" +
     "	            </div>\n" +
+    "\n" +
+    "	            <div ng-if=\"notification.type=='REACTION'\">\n" +
+    "\n" +
+    "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.user.username}}\">\n" +
+    "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.user.avatarUrl}}\" src=\"{{notification.info.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "	                	{{notification.info.user.username}}\n" +
+    "	                </a>\n" +
+    "					<p>{{notification.info.type}}</p>\n" +
+    "	                <!--ASSOCIATED MODELS.. LOL-->\n" +
+    "                	<a href=\"content/{{notification.info.content.id}}\">{{notification.info.content.title}}:{{notification.info.content.id}}</a>\n" +
+    "	            </div>\n" +
+    "\n" +
+    "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"notification.createdAt\"></p>\n" +
+    "\n" +
     "\n" +
     "	        </div>\n" +
     "	    </div>\n" +
@@ -8255,7 +8309,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "            <!--<li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>-->\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "\n" +

@@ -90,6 +90,7 @@ module.exports = {
 
 				//REACT TO ACTIVITY.. IE FOLLOW AND PROJECTMEMBER :P
 
+				//ASSOCIATION.. AND COUNTS; reaction mappings.. id / address
 				for (x in model.associatedModels){
 					if (model.associatedModels[x].type == 'CONTENT'){
 						Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
@@ -101,7 +102,28 @@ module.exports = {
 								console.log('UPDATE');
 								res.json(reaction);
 							});
+
+							//DO USER BY ASSOCIATION? || UPDATE OTHER MODELS.. 
+							User.find({id:model.user}).then(function(userModel){
+								userModel[0].balance = {};
+								userModel[0].reputation = {};
+								var notificationModel = {
+									user: contentModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+contentModel[0].id,
+									info:{user: userModel[0], content:contentModel[0], type:model.type},
+									priority:50,
+								};
+								//console.log(notificationModel)
+								Notification.create(notificationModel).then(function(notificationModel){
+									console.log('created');
+									Notification.publishCreate(notificationModel);
+								});
+							});
+
 						});
+
 					}
 					if (model.associatedModels[x].type == 'ITEM'){
 						Item.find({id:model.associatedModels[x].id}).then(function(itemModel){
@@ -188,7 +210,6 @@ module.exports = {
 						});
 					}
 				}
-
 			}
 		});
 

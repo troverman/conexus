@@ -27,7 +27,7 @@
 			<!--
 			<li><a href="/content">Read</a></li>
 			-->
-            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('NOTIFICATION', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
 			<!--<li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>-->
             <div style="clear:both"></div>
 		</ul>
@@ -45,28 +45,47 @@
 		<div ng-repeat="notification in notifications" class="card" ng-click="">
 	        <div style="padding:16px;">
 
-	        	<div style="float:right">
-		            <span>
-		            	<button ng-if="notification.isRead" class="btn btn-default" ng-click="markUnread(notification)"><i class="fa fa-check-square"></i></button>
-		            	<button ng-if="!notification.isRead" class="btn btn-default" ng-click="markRead(notification)"><i class="fa fa-check"></i></button>
+	        	<div style="float:right;text-align:center">
+		            <!--<i style="float:right" ng-click="$event.stopPropagation();tokensToggle(notification);" class="fa fa-ellipsis-v"></i>-->
+		            <span ng-if="notification.isRead">
+		            	<button class="btn btn-default" ng-click="markRead(notification, false)"><i class="fa fa-envelope-o"></i></button>
+						<br><span style="color:gray;font-size:10px;">Read</span>
 		            </span>
-		            <i class="fa fa-ellipsis-v"></i>
+    		        <span ng-if="!notification.isRead">
+						<button ng-if="!notification.isRead" class="btn btn-default" ng-click="markRead(notification, true)"><i style="color:red" class="fa fa-envelope-o"></i></button>
+						<br><span style="color:gray;font-size:10px;">Unread</span>
+		            </span>
 	        	</div>
 
-	            <h5>{{notification.type}}</h5>
+	        	 <h5>{{notification.title}}</h5>
 	            <p><span style="color:gray">{{notification.content}}</span></p>
-                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="notification.createdAt"></p>
-                <br><br>
-	            <!--if type is new follower; follow btn; embeded function-->
-	            <div ng-if="notification.type='Follow'">
 
+	            <!--if type is new follower; follow btn; embeded function-->
+	            <div ng-if="notification.type=='FOLLOW'">
+		          
 	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.username}}">
 	                	<img class="card-avatar" ng-src="{{notification.info.avatarUrl}}" src="{{notification.info.avatarUrl}}" err-src="/images/avatar.png">
 	                	{{notification.info.username}}
 	                </a>
 
-	            	<button class="btn btn-default">Follow</button>
+	            	<button ng-if="!notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Follow</button>
+	            	<button ng-if="notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Unfollow</button>
+
 	            </div>
+
+	            <div ng-if="notification.type=='REACTION'">
+
+	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.user.username}}">
+	                	<img class="card-avatar" ng-src="{{notification.info.user.avatarUrl}}" src="{{notification.info.user.avatarUrl}}" err-src="/images/avatar.png">
+	                	{{notification.info.user.username}}
+	                </a>
+					<p>{{notification.info.type}}</p>
+	                <!--ASSOCIATED MODELS.. LOL-->
+                	<a href="content/{{notification.info.content.id}}">{{notification.info.content.title}}:{{notification.info.content.id}}</a>
+	            </div>
+
+                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="notification.createdAt"></p>
+
 
 	        </div>
 	    </div>

@@ -46,6 +46,7 @@ module.exports = {
 						userModel[0].followerCount++;
 						User.update({id:model.followed}, {followerCount:userModel[0].followerCount}).then(function(user){});
 					});
+					
 					User.find({id:model.follower}).then(function(userModel){
 						userModel[0].followingCount++;
 						User.update({id:model.follower}, {followingCount:userModel[0].followingCount}).then(function(user){});
@@ -54,15 +55,16 @@ module.exports = {
 						//WHATS THE DATA?
 						var notificationModel = {
 							user: followedId,
-							type: 'New Follower',
+							type: 'FOLLOW',
+							title: 'New Follower',
 							content:userModel[0].username+' started following you',
 							info:userModel[0],
+							priority:70,
 						};
 						Notification.create(notificationModel).then(function(notification){
 							Notification.publishCreate(notification);
 						});
 						
-
 					});
 
 					Follower.publishCreate(follower[0]);

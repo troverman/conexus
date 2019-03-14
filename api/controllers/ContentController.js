@@ -258,9 +258,18 @@ module.exports = {
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
+				
 				//TODO: POPULATE USER
 				Content.publishCreate(model);
 				res.json(model);
+
+
+				//<-- ASSOCIATIONS -->
+				//SEND NOTIFICATIONS TO FOLLOWERS
+				//SEND NOTIFICATIONS TO PROJECT MEMBERS
+				//SEND NOTIFICATION TO MEMBER
+
+
 			}
 		});
 	},
