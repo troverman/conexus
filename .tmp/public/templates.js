@@ -30,7 +30,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
-    "				<h3>CREATE THE NEXT WAVE</h3>\n" +
+    "				<h3>THE NEXT WAVE</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">We Create a 24/7 continual hackathon.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Connect with new collaborators and build together.</p>\n" +
@@ -40,7 +40,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3>CREATE A SHARED WORLD</h3>\n" +
+    "				<h3>A SHARED WORLD</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">From shared items to space and time, sharing networks are reflective of our commitment.</p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
@@ -612,6 +612,7 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\" ng-click=\"render(app)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
+    "                    <div style=\"float:right\"><i class=\"fa fa-ellipsis-v\"></i></div>\n" +
     "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"app/{{app.title}}\">{{app.title}}</a></h4>\n" +
     "                    <p style=\"color:gray\">{{app.description}}</p>\n" +
     "                </div>\n" +
@@ -1338,10 +1339,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-6\">\n" +
-    "                <h3>Developers</h3>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers CRE8 CRE8. </p>\n" +
+    "                <h2>Developers</h2>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
+    "            <div class=\"col-sm-6\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1609,6 +1610,22 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "};</div>\n" +
     "                </div>\n" +
     "\n" +
+    "\n" +
+    "                 <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>Motion</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization</p>\n" +
+    "                    <p><b>[get,post] /api/motion</b></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var motionModel = {\n" +
+    "    string: {type: 'string'},\n" +
+    "    protocols:{type:'json'},\n" +
+    "    logic:{type:'json'},\n" +
+    "    information:{type:'json'}\n" +
+    "};</div>\n" +
+    "                </div>\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -1860,7 +1877,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h4>Interoperable Protocol Architecture</h4>\n" +
     "                <h4>Application Design</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "                <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
     "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
+    "                <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
     "var humanReadableValidationNFTModel = {\n" +
     "    string: 'VALIDATION+'+data[x][y].id,\n" +
@@ -2010,6 +2029,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <h4>Association Traversal</h4>\n" +
+    "                <h4>Validation Traversal</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <h4>Project Charters and Group Coordination</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -3006,7 +3031,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
     "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                            \n" +
-    "                            <p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-qrcode\"></i></a></p>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "                        </div>\n" +
     "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
@@ -6795,15 +6820,25 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	        <div style=\"padding:16px;\">\n" +
     "\n" +
     "	        	<div style=\"float:right\">\n" +
-    "		            <span><button class=\"btn btn-default\" ng-click=\"markRead(notification)\"><i class=\"fa fa-check\"></i></button></span>\n" +
+    "		            <span>\n" +
+    "		            	<button ng-if=\"notification.isRead\" class=\"btn btn-default\" ng-click=\"markUnread(notification)\"><i class=\"fa fa-check-square\"></i></button>\n" +
+    "		            	<button ng-if=\"!notification.isRead\" class=\"btn btn-default\" ng-click=\"markRead(notification)\"><i class=\"fa fa-check\"></i></button>\n" +
+    "		            </span>\n" +
     "		            <i class=\"fa fa-ellipsis-v\"></i>\n" +
     "	        	</div>\n" +
     "\n" +
     "	            <h5>{{notification.type}}</h5>\n" +
     "	            <p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
-    "\n" +
+    "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"notification.createdAt\"></p>\n" +
+    "                <br><br>\n" +
     "	            <!--if type is new follower; follow btn; embeded function-->\n" +
     "	            <div ng-if=\"notification.type='Follow'\">\n" +
+    "\n" +
+    "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.username}}\">\n" +
+    "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.avatarUrl}}\" src=\"{{notification.info.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "	                	{{notification.info.username}}\n" +
+    "	                </a>\n" +
+    "\n" +
     "	            	<button class=\"btn btn-default\">Follow</button>\n" +
     "	            </div>\n" +
     "\n" +

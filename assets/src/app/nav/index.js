@@ -28,7 +28,6 @@ angular.module( 'conexus.nav', [
     //$rootScope.currentUser = config.currentUser;
 
    
-
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -71,7 +70,7 @@ angular.module( 'conexus.nav', [
         };
 
         //GET UNREAD NOTIFICATIONS.. POPEM
-        NotificationModel.getSome('user', $scope.currentUser.id, 100, 0, 'createdAt DESC').then(function(notifications){
+        NotificationModel.getSome({user:$scope.currentUser.id, isRead:false, limit:100, skip:0, sort:'createdAt DESC'}).then(function(notifications){
             $scope.notifications = notifications;
             
             //$scope.notifications = {};

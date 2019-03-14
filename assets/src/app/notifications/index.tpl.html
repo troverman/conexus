@@ -46,15 +46,25 @@
 	        <div style="padding:16px;">
 
 	        	<div style="float:right">
-		            <span><button class="btn btn-default" ng-click="markRead(notification)"><i class="fa fa-check"></i></button></span>
+		            <span>
+		            	<button ng-if="notification.isRead" class="btn btn-default" ng-click="markUnread(notification)"><i class="fa fa-check-square"></i></button>
+		            	<button ng-if="!notification.isRead" class="btn btn-default" ng-click="markRead(notification)"><i class="fa fa-check"></i></button>
+		            </span>
 		            <i class="fa fa-ellipsis-v"></i>
 	        	</div>
 
 	            <h5>{{notification.type}}</h5>
 	            <p><span style="color:gray">{{notification.content}}</span></p>
-
+                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="notification.createdAt"></p>
+                <br><br>
 	            <!--if type is new follower; follow btn; embeded function-->
 	            <div ng-if="notification.type='Follow'">
+
+	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.username}}">
+	                	<img class="card-avatar" ng-src="{{notification.info.avatarUrl}}" src="{{notification.info.avatarUrl}}" err-src="/images/avatar.png">
+	                	{{notification.info.username}}
+	                </a>
+
 	            	<button class="btn btn-default">Follow</button>
 	            </div>
 

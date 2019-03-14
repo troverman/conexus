@@ -72,6 +72,7 @@
         <div class="col-lg-4 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
             <div class="card" ng-click="render(app)">
                 <div style="padding:16px;">
+                    <div style="float:right"><i class="fa fa-ellipsis-v"></i></div>
                     <h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>
                     <p style="color:gray">{{app.description}}</p>
                 </div>

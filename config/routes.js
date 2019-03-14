@@ -106,6 +106,7 @@ module.exports.routes = {
    * Notification routes
    */
   'get /api/notification': 'NotificationController.getSome',
+  'post /api/notification/:id': 'NotificationController.update',
 
   /**
    * Order routes

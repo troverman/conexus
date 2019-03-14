@@ -12,13 +12,13 @@ angular.module( 'conexus.notifications', [
         },
         resolve: {
             notifications: ['config', 'NotificationModel', function(config, NotificationModel){
-                return NotificationModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+                return NotificationModel.getSome({user:config.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
 }])
 
-.controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'notifications', 'titleService', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, notifications, titleService) {
+.controller( 'NotificationsController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'NotificationModel', 'notifications', 'titleService', function NotificationsController( $location, $sailsSocket, $sce, $scope, config, NotificationModel, notifications, titleService) {
     titleService.setTitle('Notifications | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.notifications = notifications;
@@ -54,5 +54,13 @@ angular.module( 'conexus.notifications', [
         {title:'Troverman submitted Content!', description:'Content Summary...'},
         {title:'Troverman invited you to join project!', description:'Project NOVO'},
     ];
+
+
+    $scope.markRead = function(model){
+        model.isRead = true;
+        NotificationModel.update(model);
+    };
+
+
 
 }]);

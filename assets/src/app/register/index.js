@@ -151,7 +151,7 @@ angular.module( 'conexus.register', [
         credits:{enabled:false},
     };
 
-    console.log($scope.chartMapTotal)
+    console.log($scope.chartMapTotal);
     //PERFORMANCE....
     $scope.updateChartTotal = function(){
         $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]});
@@ -171,21 +171,10 @@ angular.module( 'conexus.register', [
                 name: 'Assets',
                 y: [],
             }]
-        }],
-        
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        }],  
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -199,7 +188,6 @@ angular.module( 'conexus.register', [
     //do absolute
     $scope.$watch('newOrder', function(newValue, oldValue){
         if (oldValue != newValue){
-            console.log('fire!')
             $scope.updateChartTotal();
             $scope.updatePieTotal();
         }
@@ -240,19 +228,7 @@ angular.module( 'conexus.register', [
 
 
 
-
-
-
     //ACTUALLY PACKAGE AND CREATE THE ORDER.. NEED TO UPDATE AUTH REGISTRATION PROCESS.....
-
-
-
-
-
-
-
-
-
 
 
     //MAIN ARE PROTOCOLS
@@ -287,7 +263,5 @@ angular.module( 'conexus.register', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
-    $scope.search = function(model){};
 
 }]);

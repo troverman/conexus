@@ -2,13 +2,25 @@ angular.module('models.notification', ['lodash', 'services', 'sails.io',])
 
 .service('NotificationModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(type, filter, limit, skip, sort) {
-        var query = {};
-        if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
-        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+    this.getSome = function(model) {
+  
         var url = utils.prepareUrl('notification');
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.skip,
+                isRead:model.isRead,
+                user:model.user
+            }
+        };
+
         return $sailsSocket.get(url, query).then(success, error);
+    };
+
+    this.update = function(newModel){
+        var url = utils.prepareUrl('notification/' + newModel.id);
+        return $sailsSocket.post(url, newModel).then(success, error);
     };
 
 	var success = function(response) {
