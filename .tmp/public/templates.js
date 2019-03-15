@@ -7622,6 +7622,10 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                        <span am-time-ago=\"item.createdAt\"></span>\n" +
     "                    </div>\n" +
     "\n" +
+    "                    <h4 ng-show=\"item.title\"><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "\n" +
+    "                    <p style=\"margin-top:0px;margin-bottom:10px;\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}} </a></p>\n" +
+    "\n" +
     "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
     "                    \n" +
     "                </div>\n" +

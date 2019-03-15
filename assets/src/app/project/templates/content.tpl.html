@@ -68,6 +68,10 @@
                         <span am-time-ago="item.createdAt"></span>
                     </div>
 
+                    <h4 ng-show="item.title"><a href="content/{{item.id}}">{{item.title}}</a></h4>
+
+                    <p style="margin-top:0px;margin-bottom:10px;"><a ng-repeat="tag in item.tags track by $index" href="#"  ng-click="filterContent(tag)">{{tag}} </a></p>
+
                     <div ng-bind-html="renderContent(item.content)"></div>
                     
                 </div>

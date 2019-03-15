@@ -514,24 +514,39 @@ angular.module( 'conexus.project', [
     $scope.newContent = {};
     $scope.newContent.parent = project.id;
 
+
     if ($scope.contentList.length == 0){
         $scope.contentList = [];
         for(var i=0;i < 50;i++){
+
+            var words =["The sky", "above", "the port","was", "the color of television", "tuned", "to", "a dead channel", ".", "All", "this happened", "more or less","." ,"I", "had", "the story", "bit by bit", "from various people", "and", "as generally", "happens", "in such cases", "each time", "it", "was", "a different story","." ,"It", "was", "a pleasure", "to", "burn"];
+            var title = [];
+            var content = [];
+            var tags = [];
+
+            var x = 7;
+            while(--x) title.push(words[Math.floor(Math.random() * words.length)]);
+            
+            var y = 100;
+            while(--y) content.push(words[Math.floor(Math.random() * words.length)]);
+            
+            var z = 10;
+            while(--z) tags.push(words[Math.floor(Math.random() * words.length)]);
+
             $scope.contentList.push({
                 id:i,
-                title:'sup',
-                content:'sup :)',
-                tags: 'some,tags,here',
+                title:title.join(' '),
+                content:content.join(' '),
+                tags: tags.join(','),
                 reactions:{plus:0,minus:0},
                 user:{username:'troverman'}
-            })
+            });
         }
     }
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
-            console.log(obj);
             var returnObj = {};
             if(obj.tags){obj.tags = obj.tags.split(',')}
             returnObj = obj.tags;

@@ -164,11 +164,28 @@ module.exports = {
 			
 		};
 		Transaction.create(model)
-		.exec(function(err, task) {
+		.exec(function(err, transaction) {
 			if (err) {return console.log(err);}
 			else {
-				Transaction.publishCreate(task);
-				res.json(task);
+
+				Transaction.publishCreate(transaction);
+				res.json(transaction);
+
+
+				//COULD BE LISTENER..? MM . . NOTIFICATION SERVICE
+				var notificationModel = {
+					user: model.to,
+					type: 'TRANSACTION',
+					title: 'New Transaction',
+					content:model.from+' sent you '+model.amountSet,
+					info:{transaction:transaction},
+					priority:77,
+				};
+
+				Notification.create(notificationModel).then(function(){
+					Notification.publishCreate(notification);
+				});
+
 			}
 		});
 	},
