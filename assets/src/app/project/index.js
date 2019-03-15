@@ -539,7 +539,9 @@ angular.module( 'conexus.project', [
                 content:content.join(' '),
                 tags: tags.join(','),
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'}
+                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
+                createdAt:new Date(),
+                user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}
             });
         }
     }
@@ -1410,7 +1412,8 @@ angular.module( 'conexus.project', [
                 content:'Community Evangelist, doing the leg work of engaging and growing the community! Let\'s Go Door to Door!',
                 tags: 'canvas, organize, register, campaign, community',
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'}
+                user:{username:'troverman'},
+                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
             };
 
             var attend = {
@@ -1419,7 +1422,8 @@ angular.module( 'conexus.project', [
                 content:'Attend Community Events, Come out and join us!',
                 tags: 'attend, community, event, presence',
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'}
+                user:{username:'troverman'},
+                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
             };
 
             var organize = {
@@ -1428,7 +1432,8 @@ angular.module( 'conexus.project', [
                 content:'Help Cocreate Community Events, Let\'s Collab!',
                 tags: 'create, content, presence',
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'}
+                user:{username:'troverman'},
+                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
             };
 
             if (i % 2){$scope.tasks.push(canvas)}

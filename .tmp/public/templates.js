@@ -1359,6 +1359,57 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h3>Documentation</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
     "\n" +
+    "\n" +
+    "                <p>Conex API: Models & Endpoints</p>\n" +
+    "                <div ng-show=\"false\">\n" +
+    "                    <p>Action</p>\n" +
+    "                    <p>App</p>\n" +
+    "                    <p>Assoication</p>\n" +
+    "                    <p>Block</p>\n" +
+    "                    <p>Content</p>\n" +
+    "                    <p>Data</p>\n" +
+    "                    <p>Event</p>\n" +
+    "                    <p>Follower</p>\n" +
+    "                    <p>Item</p>\n" +
+    "                    <p>Location</p>\n" +
+    "                    <p>Member</p>\n" +
+    "                    <p>Motion</p>\n" +
+    "                    <p>Notification</p>\n" +
+    "                    <p>Order</p>\n" +
+    "                    <p>Passport</p>\n" +
+    "                    <p>Project</p>\n" +
+    "                    <p>ProjectCharter</p>\n" +
+    "                    <p>ProjectMember</p>\n" +
+    "                    <p>Protocol</p>\n" +
+    "                    <p>Reaction</p>\n" +
+    "                    <p>Search</p>\n" +
+    "                    <p>Task</p>\n" +
+    "                    <p>Time</p>\n" +
+    "                    <p>Transaction</p>\n" +
+    "                    <p>Tx</p>\n" +
+    "                    <p>Validation</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <p>Interoperable Protocol Design Architecture</p>\n" +
+    "\n" +
+    "                <p>CRE8 CORE Protocols</p>\n" +
+    "\n" +
+    "                <p>Tokenization Principles & String Interpolation</p>\n" +
+    "\n" +
+    "                <p>The CRE8 Decentralized Peer Network & Virtual Machine</p>\n" +
+    "\n" +
+    "                <p>MultiMarket Exploration & Traversal</p>\n" +
+    "\n" +
+    "                <!--<div>\n" +
+    "                    <p>Market Objects and their Traversal Character</p>\n" +
+    "                </div>-->\n" +
+    "\n" +
+    "                <p>Validation & Association Traversals</p>\n" +
+    "\n" +
+    "                <p>Project Charters and Group Coordination</p>\n" +
+    "\n" +
+    "                <p>Tokenization & Pattern Recognition</p>\n" +
+    "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "                <div>\n" +
     "                    <h4>Conex API</h4>\n" +
@@ -1394,8 +1445,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <!--VALIDATION WITH RESPECT TO TAGS ETC--> \n" +
+    "\n" +
     "                <div>\n" +
-    "                <p><b>Assoication</b></p>\n" +
+    "                    <p><b>Assoication</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Association Model</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time (Project <--> Task <--> Time).<br> Associations are computed though validation traversal.</p>\n" +
     "                    <p><b>get /api/assoication</b></p>\n" +
@@ -1437,18 +1490,20 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <p><b>Content</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Content is information.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
     "                    <p><b>[get, post] /api/content</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var contentModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    title: {type: 'string'},\n" +
     "    content: {type: 'string'},\n" +
-    "    tags: {type: 'string'},\n" +
-    "    type: {type: 'string', defaultsTo: 'POST'},\n" +
+    "    tags: {type: 'string'}, \n" +
+    "    type: {type: 'string'}, //LINK, IMAGE, MOTION, POST, VIDEO\n" +
     "    location: {type: 'json'},\n" +
-    "    associatedModels: {type: 'json'},\n" +
+    "    associatedModels: {type: 'json'}, // [{type:'PROJECT',address:$scope.project.id}],\n" +
     "    reactions: {type: 'json'},\n" +
-    "    user: {model: 'user', required: true}\n" +
+    "    user: {model: 'user'},\n" +
+    "    createdAt: {type: 'datetime'},\n" +
     "};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1578,6 +1633,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        type: 'boolean',\n" +
     "        defaultsTo: false\n" +
     "    },\n" +
+    "    status: {\n" +
+    "        type: 'string',\n" +
+    "    },\n" +
     "\n" +
     "    //COUNTS\n" +
     "    followingCount: {\n" +
@@ -1605,8 +1663,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    reputation: {type: 'json'},\n" +
     "    balance: {type: 'json'},\n" +
     "    locationTime: {type: 'json'},\n" +
+    "\n" +
     "    //PASSPORT\n" +
     "    passports: { collection: 'Passport', via: 'user' }\n" +
+    "\n" +
     "};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1615,7 +1675,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <p><b>Motion</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action.</p>\n" +
     "                    <p><b>[get,post] /api/motion</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var motionModel = {\n" +
@@ -1630,7 +1690,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <p><b>Notification</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model. Notifications have privacy permission qualifiers.</p>\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var notificationModel = {\n" +
@@ -1664,7 +1724,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <p><b>Passport</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are .. </p>\n" +
     "                    <p><b>[get, post] /api/passport</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var passportModel = {\n" +
@@ -1769,7 +1829,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "var taskModel = {\n" +
     "    title: {type: 'string', required: true,},\n" +
     "    content: {type: 'string'},\n" +
-    "    status: {type: 'string', defaultsTo: 'Pending'},\n" +
     "    location: {type: 'json'},\n" +
     "    tags: {type: 'string'},\n" +
     "    user: {model: 'user', required: true},\n" +
@@ -1851,6 +1910,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Validation</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Like Votes, the building block for group agreement - consensus and decision making. \n" +
+    "                    <p style=\"color:gray;font-style:italic\">The Anatomy of a Validation</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Layered Recursion (Validation-Validation)</p>\n" +
+    "\n" +
     "                    <p>PROJECT - ITEM</p>\n" +
     "                    <p>PROJECT - CONTENT</p>\n" +
     "                    <p>PROJECT - MEMBER</p>\n" +
@@ -1872,15 +1934,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <!--TOKEN STRING MAPPING-->\n" +
+    "            </div>\n" +
     "\n" +
-    "                <h4>Interoperable Protocol Architecture</h4>\n" +
-    "                <h4>Application Design</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
-    "                <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
-    "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
-    "                <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
-    "                <div hljs hljs-language=\"javascript\">\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "\n" +
+    "            <!--TOKEN STRING MAPPING-->\n" +
+    "\n" +
+    "            <h2>Interoperable Protocol Architecture Design</h2>\n" +
+    "            <h4>Application Design</h4>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "            <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
+    "            <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
+    "            <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
+    "            <div hljs hljs-language=\"javascript\">\n" +
     "var humanReadableValidationNFTModel = {\n" +
     "    string: 'VALIDATION+'+data[x][y].id,\n" +
     "    information:{\n" +
@@ -1895,14 +1968,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        mint:'ONCREATEVALIDATION'\n" +
     "    }\n" +
     "};\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"col-sm-4\">\n" +
-    "            </div>\n" +
+    "            <div class=\"spacing-10\"></div> \n" +
+    "\n" +
     "\n" +
     "        </div>\n" +
     "\n" +
@@ -1911,6 +1980,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "\n" +
     "            <div class=\"col-sm-12\">\n" +
+    "                <h2>CRE8</h2>          \n" +
     "                <h3>Core Protocols</h3>          \n" +
     "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
@@ -1958,6 +2028,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>CRE8 CORE as a Manifold</b></p>\n" +
+    "                <p>Defining Verbs</p>\n" +
     "                <p><b>CRE8</b></p>\n" +
     "                <p><b>MEMBER</b></p>\n" +
     "                <p><b>PROJECT</b></p>\n" +
@@ -1965,7 +2036,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><b>TIME</b></p>\n" +
     "                <p><b>VALIDATION</b></p>\n" +
     "                <p><b>ORDER</b></p>\n" +
-    "                \n" +
     "                <!--/block, /tx, /address-->\n" +
     "                <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
@@ -2017,7 +2087,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <a href=\"https://www.instagram.com/cre8pluralism\">Instagram</a>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "\n" +
     "                <h5>Group Theoretic Properties</h5>\n" +
     "                <p><b>Substitution</b></p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -2048,6 +2117,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -2918,33 +2989,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"spacing-50\"></div>\n" +
-    "    \n" +
-    "        <div ng-if=\"false\" class=\"row\" ng-show=\"true\">\n" +
-    "            <div class=\"col-md-12\">\n" +
-    "                <h3>CRE8</h3>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">WHO WE ARE; WHAT WE DO; WHAT WE CREATE: Inspiring Tasks, Member, & Projects</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Wanna Collab? Get Involved in your Local Community.</p>\n" +
-    "                <h5><a href=\"/project/cre8\">CRE8 META</a></h5>\n" +
-    "                <div ng-if=\"false\" ng-repeat=\"item in projects.slice(0,5)\">\n" +
-    "                    <div class=\"card col-md-6\" ng-click=\"\">\n" +
-    "                        <div style=\"padding:16px;\">\n" +
-    "                            <div class=\"row\">\n" +
-    "                                <div class=\"col-sm-1 col-xs-2\"><a href=\"/project/{{item.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{item.avatarUrl}}\"></a></div>\n" +
-    "                                <div class=\"col-sm-11 col-xs-10\">\n" +
-    "                                    <h3 style=\"margin-top:0px\"><a href=\"/project/{{item.urlTitle}}\">{{item.title}}</a></h3>\n" +
-    "                                    <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "    </div>\n" +
     "    \n" +
@@ -2978,6 +3022,33 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"selfClear\"></div>\n" +
     "            </div>   \n" +
     "        </div>\n" +
+    "    \n" +
+    "        <div ng-if=\"false\" class=\"row\">\n" +
+    "            <div class=\"spacing-50\"></div>\n" +
+    "            <div class=\"spacing-50\"></div>\n" +
+    "            <div class=\"col-md-12\">\n" +
+    "                <h3>CRE8</h3>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">WHO WE ARE; WHAT WE DO; WHAT WE CREATE</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Inspiring Tasks, Member, & Projects</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Wanna Collab? Get Involved in your Local Community.</p>\n" +
+    "                <div ng-if=\"false\" ng-repeat=\"item in projects.slice(0,5)\">\n" +
+    "                    <div class=\"card col-md-6\" ng-click=\"\">\n" +
+    "                        <div style=\"padding:16px;\">\n" +
+    "                            <div class=\"row\">\n" +
+    "                                <div class=\"col-sm-1 col-xs-2\"><a href=\"/project/{{item.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{item.avatarUrl}}\"></a></div>\n" +
+    "                                <div class=\"col-sm-11 col-xs-10\">\n" +
+    "                                    <h3 style=\"margin-top:0px\"><a href=\"/project/{{item.urlTitle}}\">{{item.title}}</a></h3>\n" +
+    "                                    <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "    \n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -6168,7 +6239,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/settings\">Settings</a></h4>\n" +
+    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/settings\">Settings</a></h4>-->\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
     "                </div>\n" +
@@ -7163,9 +7234,10 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "		<div style=\"padding:16px;\">\n" +
     "			<p><b>Description</b></p>\n" +
     "            <p><span style=\"display:inline\" ng-bind-html=\"renderContent(project.description)\"></span></p>\n" +
-    "            <p><b>Address</b>: {{project.id}}</p>\n" +
-    "            <p><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>\n" +
+    "            <p><b>Wallet Address</b>:<a ng-click=\"transactionToggle()\" href=\"#\"><img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}\"> {{project.id}}</a></p>\n" +
+    "            <p ng-if=\"project.location\"><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>\n" +
     "            <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>\n" +
+    "            <p><b>Manifolds</b>: '{{project.urlTitle.toUpperCase()}}+'</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -7632,6 +7704,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "\n" +
     "                    <div style=\"float:right\">\n" +
     "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div style=\"\">\n" +
@@ -7649,8 +7722,8 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                    \n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
-    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.plusCount}} like </a> \n" +
-    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.minusCount}} dislike </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                    <a style=\"color:gray\"> • created <span am-time-ago=\"item.createdAt\"></span></a>\n" +
     "                    <a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"content/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +

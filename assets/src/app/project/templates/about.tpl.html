@@ -8,9 +8,10 @@
 		<div style="padding:16px;">
 			<p><b>Description</b></p>
             <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
-            <p><b>Address</b>: {{project.id}}</p>
-            <p><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+            <p><b>Wallet Address</b>:<a ng-click="transactionToggle()" href="#"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
+            <p ng-if="project.location"><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
             <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>
+            <p><b>Manifolds</b>: '{{project.urlTitle.toUpperCase()}}+'</p>
         </div>
     </div>
 

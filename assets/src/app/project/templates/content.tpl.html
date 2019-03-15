@@ -59,6 +59,7 @@
 
                     <div style="float:right">
                         <h5 style="text-align:right" ng-click="$event.stopPropagation();tokenToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                        <h5 style="text-align:right" ng-click="$event.stopPropagation();renderValidationToggle(item)"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
                     </div>
 
                     <div style="">
@@ -76,8 +77,8 @@
                     
                 </div>
                 <div class="card-footer">
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.plusCount}} like </a> 
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.minusCount}} dislike </a>
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                     <a style="color:gray"> • created <span am-time-ago="item.createdAt"></span></a>
                     <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
