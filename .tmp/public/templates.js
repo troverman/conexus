@@ -13,7 +13,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "        </svg> \n" +
     "        <div class=\"box-with-text\">\n" +
     "            <div class=\"text-fill\">\n" +
-    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://www.bidio.co/videos/cube.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"{{selectedVideo}}\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
     "            </div>\n" +
     "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
@@ -1358,7 +1358,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                \n" +
     "                <h3>Documentation</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
-    "\n" +
     "\n" +
     "                <p>Conex API: Models & Endpoints</p>\n" +
     "                <div ng-show=\"false\">\n" +

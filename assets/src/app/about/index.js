@@ -27,6 +27,10 @@ angular.module( 'conexus.about', [
 .controller( 'AboutCtrl', ['$sce', '$scope', 'contentList', 'titleService', 'projects', 'tasks', function AboutController( $sce, $scope, contentList, titleService, projects, tasks ) {
 	titleService.setTitle('About | CRE8.XYZ');
 
+    $scope.videos = ['videos/rocket.webm','videos/cube.mp4','videos/energy.mp4', 'videos/galaxies.mp4','videos/geometry.mp4', 'videos/video.mp4']//, 'https://s3-us-west-2.amazonaws.com/voetr/washington.mp4'];
+    $scope.selectedVideo = $scope.videos[Math.floor(Math.random()*$scope.videos.length)];
+    $scope.selectedVideo = 'videos/cube.webm';//$scope.videos[Math.floor(Math.random()*$scope.videos.length)];
+
     //TODO
     $scope.contentList = contentList;
     $scope.projects = projects;
