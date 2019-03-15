@@ -90,6 +90,27 @@ angular.module( 'conexus.home', [
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
+    $scope.introObj = [
+        {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
+        {title:'WE ARE ALL IN THIS TOGETHER'},
+        {title:'SHARING IS VALUABLE'},
+        {title:'GUIDING GROUP INTENTIONALITY'},
+        {title:'UNITY THOUGH TRANSPARENCY'},
+        //{title:'YOU GIVE WHAT YOU GET'},
+        {title:'EMPOWERING LOCAL COMMUNITIES'},
+        {title:'THE TIME TO CREATE IS NOW'},
+        {title:'NOW IS THE TIME TO CREATE'},
+        {title:'BUILDING AN EGALITARIAN SOCIETY'},
+    ];
+
+    var vid = angular.element('#introVideo');
+
+    //$scope.selectedIntro = $scope.introObj[1];
+    $scope.selectedIntro = $scope.introObj[Math.floor(Math.random()*$scope.introObj.length)];
+    
+    $scope.selectedTime = Math.floor(Math.random()*92);
+    vid[0].currentTime = $scope.selectedTime;
+
     //LOCAL SEARCH QUERY FORMAT...
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },

@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=prohibition+Web:400,300,600,700);
 
 svg {
 	max-width:100%;
@@ -98,11 +99,11 @@ svg {
 
 /* media queries */
 @media only screen and (max-width: 1024px) {
-	video {display:none}
-	.intro-mobile {
-		visibility:visible;
-		height:100%
-	}
+	//video {display:none}
+	//.intro-mobile {
+	//	visibility:visible;
+	//	height:100%
+	//}
 }
 
 @media only screen and (max-width: 920px) {
@@ -142,7 +143,7 @@ svg {
 	//.intro-container {zoom: 0.55}
 	.main-container{zoom:0.75;}
 }
-@media only screen and (max-width: 788px) {
-	.desktop {visibility:hidden}
-	.mobile {visibility:visible}
-}
+//@media only screen and (max-width: 788px) {
+//	.desktop {visibility:hidden}
+//	.mobile {visibility:visible}
+//}

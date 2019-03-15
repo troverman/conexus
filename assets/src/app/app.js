@@ -38,7 +38,6 @@ angular.module( 'conexus', [
     'conexus.notifications',
     'conexus.nav',
     'conexus.home',
-    'conexus.intro',
     'conexus.item',
     'conexus.login',
     'conexus.member',

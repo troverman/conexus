@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "block/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "intro/index.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/about.tpl.html", "market/templates/activity.tpl.html", "market/templates/content.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/activity.tpl.html", "task/templates/content.tpl.html", "task/templates/time.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "block/index.tpl.html", "content/content.tpl.html", "content/index.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/about.tpl.html", "market/templates/activity.tpl.html", "market/templates/content.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/activity.tpl.html", "task/templates/content.tpl.html", "task/templates/time.tpl.html", "tasks/index.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -2747,7 +2747,27 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
 
 angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/templates/intro.tpl.html",
-    "<div ng-include=\"'intro/index.tpl.html'\"></div>\n" +
+    "<div class=\"intro\" style=\"\">\n" +
+    "    <div class=\"intro-container\">\n" +
+    "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "            <symbol id=\"intro-desktop-text\">\n" +
+    "                <text style=\"font-size:108px;font-weight:bold;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
+    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">{{selectedIntro.title}}</text>\n" +
+    "            </symbol>  \n" +
+    "            <div class=\"intro-shade\"></div>  \n" +
+    "        </svg> \n" +
+    "        <div class=\"box-with-text\">\n" +
+    "            <div class=\"text-fill\">\n" +
+    "                <video id=\"introVideo\" itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\" autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "            </div>\n" +
+    "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
+    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
+    "            </svg> \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"intro-mobile\"></div>\n" +
+    "</div>\n" +
     "\n" +
     "<div style=\"background-color:white\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -2758,13 +2778,15 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "\n" +
     "                <h3>INFORMATION IS VALUABLE</h3>\n" +
+    "                <!--SHARING CREATES VALUE-->\n" +
+    "                <!--SHARING IS VALUABLE-->\n" +
     "                <!--\n" +
     "                CREATE IS EMPOWERMENT\n" +
     "                CREATE IS INCLUSIVITY\n" +
     "                CREATE IS UNITY\n" +
     "                -->\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">From imagination and intention to work and organization, sharing creates value.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">From imagination and intention to work and organization, sharing creates value.</p><!--sharing creates income; information is income.. -->\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">We all benefit when you share with us.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
@@ -3136,46 +3158,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>");
-}]);
-
-angular.module("intro/index.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("intro/index.tpl.html",
-    "<div class=\"intro\" style=\"max-height:500px\">\n" +
-    "\n" +
-    "    <div class=\"intro-container\">\n" +
-    "\n" +
-    "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-    "\n" +
-    "            <symbol id=\"intro-desktop-text\">\n" +
-    "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <!--<text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CRE8 MULTIDIMENSIONAL VALUE</text>-->\n" +
-    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">WE CRE8 MULTIDIMENSIONAL VALUE</text>\n" +
-    "            </symbol>  \n" +
-    "\n" +
-    "            <div class=\"intro-shade\"></div>  \n" +
-    "\n" +
-    "        </svg> \n" +
-    "\n" +
-    "        <div class=\"box-with-text\">\n" +
-    "\n" +
-    "            <div class=\"text-fill\">\n" +
-    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-    "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
-    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-text\" class=\"text--transparent\"></use>\n" +
-    "                <use xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"#intro-desktop-novo\" class=\"text--transparent\"></use>\n" +
-    "            </svg> \n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"intro-mobile\"></div>\n" +
-    "\n" +
-    "</div>\n" +
-    "");
 }]);
 
 angular.module("item/index.tpl.html", []).run(["$templateCache", function($templateCache) {
