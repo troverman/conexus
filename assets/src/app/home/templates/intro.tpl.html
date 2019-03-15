@@ -293,6 +293,9 @@
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
+                           
+
+
                             <!--TODO: POST PARENT TYPES-->
                             <a ng-click="$event.stopPropagation()" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
@@ -302,9 +305,21 @@
                             <a ng-click="$event.stopPropagation()" ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
+
+
+
+
+
                             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                             
-                            <p ng-click="tokensToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-qrcode"></i></a></p>
+
+                            <p ng-click="tokensToggle(item);$event.stopPropagation()" style="display:inline;float:right">
+                                <a>Tokens <i class="fa fa-qrcode"></i></a>
+                                <!--<i style="" class="fa fa-ellipsis-v"></i>-->
+                            </p>
+
+
+
                             <div style="clear:both"></div>
                         </div>
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
@@ -345,11 +360,14 @@
                 </div>
 
                 <div class="card" ng-if="item.model=='TASK'" ng-click="renderToggle(item)">
-                    <div style="padding:16px;">                            
+                    <div style="padding:16px;"> 
+
                         <div style="float:right;text-align:right">
                             <h5 ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                             <h5 ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
+                            <!--<i style="" ng-click="$event.stopPropagation();renderValidationToggle(item);" class="fa fa-ellipsis-v"></i>-->
                         </div>
+
                         <h4 ng-click="$event.stopPropagation()"><a href="task/{{item.id}}">{{item.title}}</a></h4>
                         <p ng-click="$event.stopPropagation()"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                         <p ng-click="$event.stopPropagation()"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
@@ -371,6 +389,7 @@
                             <div style="float:right;text-align:right">
                                 <h5 ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                                 <h5 ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
+                                <!--<i style="" ng-click="$event.stopPropagation();renderValidationToggle(item);" class="fa fa-ellipsis-v"></i>-->
                             </div>
 
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">

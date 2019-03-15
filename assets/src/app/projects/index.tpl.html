@@ -73,9 +73,12 @@
 
                             <p style="float:right;text-align:right">
                                 <span ng-if="project.location">{{project.location.address}} <i class="fa fa-map-marker"></i></span>
+                                <!--<i style="" ng-click="$event.stopPropagation();tokensToggle(notification);" class="fa fa-ellipsis-v"></i>-->
                                 <!--<br>
                                 <span ng-repeat="tag in project.tags">{{tag}} </span> <i class="fa fa-tags"></i>-->
                             </p>
+
+
 
                             <h3 style="float:left;margin-top:0px">
                                 <a href="/project/{{project.urlTitle}}">{{project.title}}</a>

@@ -7,13 +7,13 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING NEW VALUE\n" +
+    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING NEW VALUE\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
     "        </svg> \n" +
     "        <div class=\"box-with-text\">\n" +
     "            <div class=\"text-fill\">\n" +
-    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://www.bidio.co/videos/cube.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
     "            </div>\n" +
     "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
@@ -543,13 +543,13 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">APPS\n" +
+    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">APPLICATION ECOSYSTEM\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
     "        </svg> \n" +
     "        <div class=\"box-with-text\">\n" +
     "            <div class=\"text-fill\">\n" +
-    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://www.bidio.co/videos/energy.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
     "            </div>\n" +
     "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
@@ -1316,13 +1316,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:28px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">DEVELOPERS\n" +
+    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">DEVELOPERS\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
     "        </svg> \n" +
     "        <div class=\"box-with-text\">\n" +
     "            <div class=\"text-fill\">\n" +
-    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://s3-us-west-2.amazonaws.com/voetr/washington.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
+    "                <video itemscope itemtype=\"VideoObject\" class=\"video\" src=\"https://www.bidio.co/videos/cube.mp4\" preload=\"auto\"autoplay=\"autoplay\" loop=\"loop\" muted=\"muted\"></video>\n" +
     "            </div>\n" +
     "            <svg class=\"svg-inverted-mask\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                <rect width=\"100%\" height=\"100%\" mask=\"url(#intro-desktop-mask)\" class=\"shape--fill\"/>\n" +
@@ -3042,6 +3042,9 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "\n" +
+    "                           \n" +
+    "\n" +
+    "\n" +
     "                            <!--TODO: POST PARENT TYPES-->\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.market\" style=\"display:inline;font-weight:600\" href=\"market/{{item.market}}\">market {{item.market}}</a>\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.order\" style=\"display:inline;font-weight:600\" href=\"order/{{item.order}}\">order {{item.order}}</a>\n" +
@@ -3051,9 +3054,21 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.time\" style=\"display:inline;font-weight:600\" href=\"time/{{item.time}}\">time {{item.time}}</a>\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.task\" style=\"display:inline;font-weight:600\" href=\"task/{{item.task}}\">task {{item.task}}</a>\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" ng-show=\"item.transaction\" style=\"display:inline;font-weight:600\" href=\"transaction/{{item.transaction}}\">transaction {{item.transaction}}</a>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                            \n" +
-    "                            <p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-qrcode\"></i></a></p>\n" +
+    "\n" +
+    "                            <p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\">\n" +
+    "                                <a>Tokens <i class=\"fa fa-qrcode\"></i></a>\n" +
+    "                                <!--<i style=\"\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
+    "                            </p>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                            <div style=\"clear:both\"></div>\n" +
     "                        </div>\n" +
     "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
@@ -3094,11 +3109,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                </div>\n" +
     "\n" +
     "                <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"renderToggle(item)\">\n" +
-    "                    <div style=\"padding:16px;\">                            \n" +
+    "                    <div style=\"padding:16px;\"> \n" +
+    "\n" +
     "                        <div style=\"float:right;text-align:right\">\n" +
     "                            <h5 ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                            <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <!--<i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
     "                        </div>\n" +
+    "\n" +
     "                        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                        <p ng-click=\"$event.stopPropagation()\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                        <p ng-click=\"$event.stopPropagation()\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
@@ -3120,6 +3138,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <div style=\"float:right;text-align:right\">\n" +
     "                                <h5 ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                                <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                <!--<i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
     "                            </div>\n" +
     "\n" +
     "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -8339,9 +8358,12 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "                            <p style=\"float:right;text-align:right\">\n" +
     "                                <span ng-if=\"project.location\">{{project.location.address}} <i class=\"fa fa-map-marker\"></i></span>\n" +
+    "                                <!--<i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(notification);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
     "                                <!--<br>\n" +
     "                                <span ng-repeat=\"tag in project.tags\">{{tag}} </span> <i class=\"fa fa-tags\"></i>-->\n" +
     "                            </p>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "                            <h3 style=\"float:left;margin-top:0px\">\n" +
     "                                <a href=\"/project/{{project.urlTitle}}\">{{project.title}}</a>\n" +
