@@ -74,6 +74,20 @@ angular.module( 'conexus.home', [
             transactions: ['TransactionModel', function(TransactionModel) {
                 return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
             }],
+
+            followers: ['FollowerModel', 'config', function(FollowerModel, config) {
+                return FollowerModel.getFollowing(config.currentUser);
+            }],
+
+            memberProjects: ['MemberModel', 'config', function(MemberModel, config) {
+                return  MemberModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+            }],
+
+            positions: ['OrderModel', 'config', function(OrderModel, config) {
+                return  OrderModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+            }],
+
+
         }
     })
 
@@ -370,7 +384,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'MemberModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, FollowerModel, MemberModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 	
     titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
@@ -387,8 +401,107 @@ angular.module( 'conexus.home', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    //GET NOTIFICATIONS.. IN NAV CTRL :)
+    $scope.contentList = contentList;
+    $scope.projects = projects;
+    $scope.members = members;
+    $scope.newContent = {};
+    $scope.newReaction = {};
+    $scope.searchResults = [];
+    $scope.tasks = tasks;
+    $scope.time = time;
+    $scope.transactions = transactions;
+
+
+    //LOOK AT MY FOLLOWERS
+    $scope.followers = followers;
+
+    //LOOK AT MY PROJECTS
+    $scope.memberProjects = memberProjects;
+
+    //INFORMATION ABOUT FOLLOWERS & PROJECTS
+    //LOOK AT THE PEOPLE I FOLLOW
+    $scope.followers = $scope.followers.map(function(obj){return obj.followed});
+
+    //LOOK AY MY PROJECTS
+    $scope.memberProjects = $scope.memberProjects.map(function(obj){return obj.project});
+
+    //TODO: IMPROVE
+    console.log($scope.followers);
+
+    $scope.members.map(function(obj){
+        var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+        if (index != -1){obj.isFollowing = true;}
+        if (index == -1){obj.isFollowing = false;}
+        return obj;
+    });
+
+    $scope.projects.map(function(obj){
+        var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+        if (index != -1){obj.isMember = true;}
+        if (index == -1){obj.isMember = false;}
+        return obj;
+    });
+
+    //LOOK AT MY TIME
+    //LOOK AT MY TASKS
+    //LOOK AT MY ACTIONS (RE)
+    //LOOK AT MY ORDERS (CURRENT MAPS)
+
+    //LOOK AT THE PEOPLE I FOLLOW
+
+    //LOOK AT THE PEOPLE I FOLLOW'S PROJECTS
+    //console.log($scope.followers, $scope.memberProjects);
+
+    //LOOK AT THE PEOPLE I FOLLOW'S REPUTATION && SKILLS
+
     //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
+    //BUILD QUERY
+
+    //potientally compute some,
+    $scope.positions = positions;
+
+    //TEMP
+    $scope.suggestedTokens = [];
+    //TAGS AND CATIGORIZATION
+
+    //FOLLOWERS .. VERBS
+    for (x in $scope.followers){
+        $scope.suggestedTokens.push({token:'CRE8+FOLLOW+'+$scope.followers[x].id})
+    }
+
+    for (x in $scope.memberProjects){
+        $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})
+    }
+
+
+    //FACTOR
+    $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){
+        var returnObj = {};
+        if(obj.tags){obj.tags = obj.tags.split(',')}
+        returnObj = obj.tags;
+        return returnObj;
+    });
+    $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
+    $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
+    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+    $scope.sortedsuggestedTokenTags = [];
+    for (x in $scope.suggestedTokenTags){
+        var amount = countInArray($scope.suggestedTokenTags, $scope.suggestedTokenTags[x]);
+        if ($scope.sortedsuggestedTokenTags.map(function(obj){return obj.element}).indexOf($scope.suggestedTokenTags[x]) == -1){
+            $scope.sortedsuggestedTokenTags.push({amount:amount, element:$scope.suggestedTokenTags[x]})
+        }
+    }
+    $scope.sortedsuggestedTokenTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+    //FACTOR
+
+
+    for (x in $scope.memberProjects){
+        $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
+    }
+
+    for (x in $scope.suggestedTokenTags){
+        //$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
+    }
 
     $scope.chart = {
         chart: {polar: true},
@@ -436,16 +549,32 @@ angular.module( 'conexus.home', [
         tooltip: {},
         credits:{enabled:false},
     };
-  
-    $scope.contentList = contentList;
-    $scope.projects = projects;
-    $scope.members = members;
-    $scope.newContent = {};
-    $scope.newReaction = {};
-    $scope.searchResults = [];
-    $scope.tasks = tasks;
-    $scope.time = time;
-    $scope.transactions = transactions;
+
+   
+   
+
+
+    //IF NON ZERO
+    $scope.chart.series = [{
+        id: 'values',
+        type: 'area',
+        name: 'Values',
+        pointPlacement: 'on',
+        data: [],
+        color: 'rgba(153,0,0,0.3)',
+        fillOpacity: 0.3,
+    }];
+
+    $scope.chart.xAxis.categories = [];
+
+    for (x in $scope.sortedsuggestedTokenTags){
+        $scope.chart.series[0].data.push($scope.sortedsuggestedTokenTags[x].amount);
+        $scope.chart.xAxis.categories.push($scope.sortedsuggestedTokenTags[x].element)
+    }
+    //IF NON ZERO
+
+
+
 
     //IF NO PROJECTS OR W.E TUTORIAL IS TRUE
     //NEW CONTROLLER
@@ -476,6 +605,7 @@ angular.module( 'conexus.home', [
             }
         };
 
+        //TODO
         $scope.getLatLng = function() {
             if (navigator.geolocation) {
                 $rootScope.stateIsLoading = true;
@@ -506,6 +636,12 @@ angular.module( 'conexus.home', [
                                 });
                             }
                         }
+                        $scope.projects.map(function(obj){
+                            var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                            if (index != -1){obj.isMember = true;}
+                            if (index == -1){obj.isMember = false;}
+                            return obj;
+                        });
                     });
                     $scope.$apply();
                 });
@@ -515,10 +651,45 @@ angular.module( 'conexus.home', [
 
         //TODO: ROOTSCOPE
         //$scope.createMember = function(){
-        $scope.join = function(project){
-            //if not already in .. for next page anyway. --> ASSOCIATION 'FILTER' vs search query master. 
-            //$scope.searchQuery.push({text:project.title});
+        $scope.join = function(model){
             
+            $scope.newMember = {
+                user:config.currentUser.id,
+                project:model.id,
+            };
+
+            var index = $scope.projects.map(function(obj){return obj.id}).indexOf($scope.newMember.project);
+
+            //NEW MEMBER PROJECT ASSOCIATION
+            //NEW MOTION TO VALIDATE MEMBER ASSOCIATION
+            console.log(model.isMember);
+
+            if (model.isMember == false){
+                //MemberModel.create($scope.newMember).then(function(model) {
+                //    $rootScope.confirm = $scope.newMember;
+                //    $rootScope.confirm.modelType = 'PROJECTMEMBER';
+                    $scope.projects[index].isMember = 'PENDING'; // TRUE; FALSE
+                    $scope.newMember = {};
+                    $scope.pop('Request to Join','You requested to join.. ' +model.title+' .. pending validation');
+                //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                //});
+            }
+
+            else if (model.isMember == 'PENDING'){
+                $scope.projects[index].isMember = false;
+                $scope.pop('Request canceled','You canceled your request to join.. ' +model.title);
+            }
+
+            else if (model.isMember == true){
+                $scope.pop('Project Left','You left ' +model.title);
+                $scope.projects[index].isMember = false;
+            }
+            
+            //if not already in .. for next page anyway. --> ASSOCIATION 'FILTER' vs search query master. 
+            //$scope.searchQuery.push({text:model.title});
+            //project, project+task,project+category
+
             //$scope.chart.series = [{
             //    id: 'values',
             //    type: 'area',
@@ -529,35 +700,47 @@ angular.module( 'conexus.home', [
             //    fillOpacity: 0.3,
             //}
             //$scope.chart.xAxis.categories = [];
-
-            $scope.pop(project.title, 'You requested to join.. pending validation');
-
-            //project, project+task,project+category
-            //$scope.newMember.user = config.currentUser.id;
-            //$scope.newMember.project = project.id;
-            //MemberModel.create($scope.newMember).then(function(model) {
-            //    $rootScope.confirm = $scope.newMember;
-            //    $rootScope.confirm.modelType = 'PROJECTMEMBER';
-            //    $scope.newMember = {};
-            //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-            //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
-            //});
-
         };
 
-        $scope.follow = function(member){
-            $scope.pop('Followed!', 'You\'re now following '+member.username);
+       
+        $scope.interested = function(model){
+            $scope.pop('Associated Task!', 'You are now associated with '+ model.title + '. Schedule some intentional time!');
+        };
 
-            //$scope.newFollower.followed = member.id;
-            //$scope.newFollower.follower = $scope.currentUser.id;
-            //FollowerModel.create($scope.newFollower).then(function(model) {
-            //    $rootScope.confirm = $scope.newFollower;
-            //    $rootScope.confirm.modelType = 'FOLLOW';
-            //    $scope.newFollower = {};
-            //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-            //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
-            //});
+        $scope.follow = function(model){
 
+            $scope.newFollower = {
+                followed:model.id,
+                follower:$scope.currentUser.id,
+            };
+
+            console.log(model, $scope.newFollower);
+
+            if (!model.isFollowing){
+                FollowerModel.create($scope.newFollower).then(function(followerModel) {
+                    //$rootScope.confirm = $scope.newFollower;
+                    //$rootScope.confirm.modelType = 'FOLLOW';
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    $scope.members[index].isFollowing = true;
+                    $scope.pop('Following!', 'You are now follwing '+ model.username);
+                    $scope.newFollower = {};
+                    //RECOMPUTE VALUE MAP POPULATION //  SMART FILTERS ETC
+                   // setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                   // setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
+                });
+            }
+
+            //UNFOLLOW
+            if (model.isFollowing){
+                //DROP BY ID; GET FOLLOWER MODEL ID // DELETE JUST //UPDATES A BINARY FLAG
+                //FollowerModel.delete($scope.newFollower).then(function(followerModel){
+                    $scope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    $scope.members[index].isFollowing = false;
+                //});
+            }
+
+            //UPDATE GRAPH
         };
 
         $scope.pop = function(title, body){
@@ -566,10 +749,9 @@ angular.module( 'conexus.home', [
                 title: title,
                 body: body,
                 onShowCallback: function (toast) { 
-                    //PLAY SOUND
                     var audio = new Audio('audio/ping.mp3');
                     audio.play()
-                    .then(function(audio){console.log(audio)})
+                    .then(function(audio){console.log('dingdong')})
                     .catch(function(err){console.log(err)})
                 }
             });
@@ -587,7 +769,7 @@ angular.module( 'conexus.home', [
             chart: {zoomType: 'x'},
             series: [{
                 id: 'Reputation',
-                type: 'bar',
+                type: 'column',
                 name: 'Reputation',
                 data: []
             }],

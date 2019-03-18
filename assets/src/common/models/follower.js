@@ -27,6 +27,7 @@ angular.module('models.follower', ['lodash', 'services', 'sails.io',])
     };
 
     var success = function(response) {
+        console.log(response)
         return response.data;
     };
 

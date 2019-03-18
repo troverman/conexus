@@ -105,7 +105,9 @@ angular.module( 'conexus.nav', [
                 //$scope.currentUser.id
                 console.log(envelope)
                 //if type
-                $scope.pop(envelope.data.title, envelope.data.info.user.username);
+                //$scope.pop(envelope.data.title, envelope.data.info.user.username);
+                //$scope.pop(envelope.data.title, envelope.data.info.username);
+
                 $rootScope.notificationCount++;
             }
         });

@@ -178,6 +178,21 @@ var blockModel = {
                     <p><b>Content</b></p>
                     <p style="color:gray;font-style:italic">Content is information. (with context)</p>
                     <p><b>[get, post] /api/content</b></p>
+
+                    <div>
+
+                        <div hljs hljs-language="javascript">
+var query = {
+    limit: 10,
+    skip:0,
+    sort:'createdAt DESC',
+};                      </div>
+                        <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default">Get Content</button>
+
+                        <div hljs hljs-language="javascript" hljs-source="results"></div>
+
+                    </div>
+
                     <div hljs hljs-language="javascript">
 var contentModel = {
     id: {type: 'string'},
@@ -221,11 +236,9 @@ var contentModel = {
 var followerModel = {
     followed: {
         model: 'user',
-        required: true
     },
     follower: {
         model: 'user',
-        required: true
     }
 };</div>
                 </div>
@@ -238,34 +251,21 @@ var followerModel = {
                     <p><b>[get, post] /api/item</b></p>
                     <div hljs hljs-language="javascript">
 var itemModel = {
-    //MAIN
     title: {type: 'string'},
     content: {type: 'string'},
-
-    //TAGS
     tags: {type: 'string'},
 
-    //ASSOCIATIONS
     associatedModels: {type: 'json'},
-
-    //LOCATION
-    location: {type: 'json'},
-
-    //INFO
-    //FORSALE, TYPE?
-    //FORLEASE,
-    info: {type: 'json'},
-
-    //PRICE, LEASE TIME.. .ETC
-    identifierSet: {type: 'string'},
-    amountSet: {type: 'string'},
-
-    //REACTIONS
     reactions: {type: 'json'},
 
-    //DEPRECIATE
-    user: {model: 'user'},
+    location: {type: 'json'},
 
+    info: {type: 'json'}, //FORSALE, FORLEASE
+        //PRICE, LEASE TIME.. .ETC
+        //identifierSet: {type: 'string'},
+        //amountSet: {type: 'string'},
+
+    user: {model: 'user'},
     owner: {type: 'json'}
 };</div>
                 </div>
@@ -287,18 +287,11 @@ var itemModel = {
                     <p><b>[get, post] /api/member</b></p>
                     <div hljs hljs-language="javascript">
 var memberModel = {
+
     avatarUrl: {type: 'string',},
     coverUrl: {type: 'string'},
-    email: {
-        type: 'email',
-        required: true,
-        unique: true
-    },
-    username: {
-        type: 'string',
-        required: true,
-        unique: true
-    },
+    email: {type: 'email',},
+    username: {type: 'string',},
 
     //INFO
     firstName: {type: 'string'},
@@ -307,43 +300,17 @@ var memberModel = {
     address: {type: 'string'},
 
     //STATUS
-    loggedIn: {
-        type: 'boolean',
-        defaultsTo: false
-    },
-    isWorking: {
-        type: 'boolean',
-        defaultsTo: false
-    },
-    isLive: {
-        type: 'boolean',
-        defaultsTo: false
-    },
-    status: {
-        type: 'string',
-    },
+    loggedIn: {type: 'boolean'},
+    isWorking: {type: 'boolean'},
+    isLive: {type: 'boolean'},
+    status: {type: 'string'},
 
     //COUNTS
-    followingCount: {
-        type: 'integer',
-        defaultsTo: 0
-    },
-    followerCount: {
-        type: 'integer',
-        defaultsTo: 0
-    },
-    notificationCount: {
-        type: 'integer',
-        defaultsTo: 0
-    },
-    projectCount: {
-        type: 'integer',
-        defaultsTo: 0
-    },
-    totalWork: {
-        type: 'integer',
-        defaultsTo: 0
-    },
+    followingCount: {type: 'integer'},
+    followerCount: {type: 'integer'},
+    notificationCount: {type: 'integer'},
+    projectCount: {type: 'integer'},
+    totalWork: {type: 'integer'},
 
     //MAPPINGS
     reputation: {type: 'json'},
@@ -385,7 +352,7 @@ var notificationModel = {
     content: {type: 'string'},
     associations: {type: 'json'},
     priority: { type: 'string'},
-    isRead: { type: 'boolean', defaultsTo: false}}
+    isRead: { type: 'boolean'}
 };</div>
                 </div>
 
@@ -523,6 +490,8 @@ var taskModel = {
 };</div>
                 </div>
 
+
+
                 <div class="spacing-10"></div>
 
                 <div>
@@ -566,6 +535,23 @@ var tokenModel = {
                     <p><b>Transaction</b></p>
                     <p style="color:gray;font-style:italic">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>
                     <p><b>[get, post] /api/transaction</b></p>
+
+
+                    <div>
+
+                        <div hljs hljs-language="javascript">
+var query = {
+    limit: 10,
+    skip:0,
+    sort:'createdAt DESC',
+};                      </div>
+                        <button ng-click="apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default">Get Transaction</button>
+
+                        <div hljs hljs-language="javascript" hljs-source="results"></div>
+
+                    </div>
+
+
                     <div hljs hljs-language="javascript">
 var transactionModel = {
     to: address,
@@ -749,6 +735,16 @@ var humanReadableValidationNFTModel = {
                 <div class="spacing-25"></div>
 
                 <h4>MultiMarket Traversal</h4>
+                <p style="color:gray;font-style:italic">An Immutable Object Structure</p>
+                <div hljs hljs-language="javascript">
+orderBookTensor = [{
+    name: 'BTC',
+    data:[
+        {name:'LTC', bids:[], asks:[]},
+        {name:'XMR', bids:[], asks:[]},
+        {name:'XRP', bids:[], asks:[]},
+    ],
+}];</div>
                 <p style="color:gray;font-style:italic">The Multidimensional Token Market</p>
                 
                 <!--<a href="/content/5c438e2090a86f150004ebda">INFO</a>

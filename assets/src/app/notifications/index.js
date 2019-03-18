@@ -104,7 +104,7 @@ angular.module( 'conexus.notifications', [
             FollowerModel.create($scope.newFollower).then(function(followerModel) {
                 $rootScope.confirm = $scope.newFollower;
                 $rootScope.confirm.modelType = 'FOLLOW';
-                var index = $scope.notifications.map(function(obj){return obj.info.id}).indexOf(newFollower.followed);
+                var index = $scope.notifications.map(function(obj){return obj.info.id}).indexOf($scope.newFollower.followed);
                 $scope.notifications[index].isFollowing = true;
                 toaster.pop({
                     type:'success',

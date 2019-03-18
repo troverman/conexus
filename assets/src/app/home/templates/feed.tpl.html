@@ -7,7 +7,7 @@
             <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');">
                 <div style="color:white;padding:15px;">
                     <h1>Projects</h1>
-                    <p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>
+                    <p>The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>
                 </div>
             </div>
             <div style="padding:16px;">
@@ -47,7 +47,11 @@
                                 <div style="padding:16px;">
 
                                         <div style="float:right">
-                                            <button class="btn btn-default" ng-click="join(item);">Join</button>
+
+                                            <button ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
+                                            <button ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
+                                            <button ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
+
                                         </div>
 
                                         <a href="/project/{{item.urlTitle}}">
@@ -70,7 +74,7 @@
             <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1481732582370-0445455c5ba1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2271&q=80');">
                 <div style="color:white;padding:15px;">
                     <h1>Tasks</h1>
-                    <p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>
+                    <p>Coordinate with Intention. Get Involved.</p>
                 </div>
             </div>
             <div style="padding:16px;">
@@ -103,6 +107,7 @@
                         <div ng-repeat="item in tasks">
                             <div class="card" ng-click="renderToggle(item)">
                                 <div style="padding:16px;">
+
                                     <div style="float:right;text-align:right">
                                         <h5 ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
                                         <h5 ng-click="$event.stopPropagation();renderValidationToggle(item)"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
@@ -113,6 +118,10 @@
                                     <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                                     <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                                     <span style="color:gray" am-time-ago="item.createdAt"></span>
+
+                                    <br><br>
+
+                                    <button ng-if="true" class="btn btn-default" ng-click="$event.stopPropagation();interested(item)"><i class="fa fa-check"></i> Interested</button>
 
                                 </div>
                                 <div class="card-footer">
@@ -133,7 +142,7 @@
             <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');">
                 <div style="color:white;padding:15px;">
                     <h1>Members</h1>  
-                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and codified beliefs.</p>
+                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>
                 </div>
             </div>
             <div style="padding:16px;" style="max-height:100vh;overflow:scroll">
@@ -144,11 +153,12 @@
                             <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                         </div>
                         <div class="member-card-info">
-                            <button ng-show="true" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
-                            <button ng-show="false" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Unfollow</button>
-
                             <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
                             <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
+
+                            <button ng-show="!item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
+                            <button ng-show="item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Unfollow</button>
+
                         </div>
                     </div>
                 </div>
@@ -159,11 +169,32 @@
             <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');">
                 <div style="color:white;padding:15px;">
                     <h1>Update Value Map</h1>  
-                    <p>Now that we know more about you, want to update?</p>
+                    <p>Now that we know more about you, let's update.</p>
                 </div>
             </div>
             <div style="padding:16px;">
+
+                <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>
                 <highchart config="chart"></highchart>
+
+                <p>My Current Positions & Value Map</p>
+
+                <!--MAKE AS MAP..-->
+                <div ng-repeat="position in positions">
+                    <span>{{position.setAlpha}} || {{position.setBeta}}</span>
+                </div>
+                <div class="spacing-10"></div>
+
+                <p>Suggestions and information</p>
+
+                <!--
+                {{followers}}
+                {{memberProjects}}
+                -->
+
+                {{sortedsuggestedTokenTags}}
+                <div class="spacing-10"></div>
+
             </div>
         </div>
 

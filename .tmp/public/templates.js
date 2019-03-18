@@ -95,8 +95,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3>What We're Building</h3>\n" +
-    "				<p>The mechanism of value gets its start from consensus on agreed up and shared value</p>\n" +
+    "				<h3>What We CRE8</h3>\n" +
+    "				<p>Our mechanism of value is created from consensus upon the relation of shared value</p>\n" +
     "				<!--SELECT PROJECTS-->\n" +
     "				<!--<div class=\"row\">\n" +
     "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
@@ -106,7 +106,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					</div>\n" +
     "				</div>-->\n" +
     "				<h5>Human Validated Proof of Work</h5>\n" +
-    "				<!--VALIDATION MECHANISM-->\n" +
+    "				<h5>Interoperable Governance Mechanisms</h5>\n" +
+    "				<h5>Group Coordination and the designation of interrelation token networking.</h5>\n" +
+    "				<h5>Token Market Traversal</h5>\n" +
+    "\n" +
     "			</div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
@@ -116,8 +119,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3><a href=\"/transparency\">The Peer Network</a></h3>\n" +
-    "				<p>Our Value Infrastructure</p>\n" +
+    "				<h3>The Peer Network</h3>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;\">Our Value Infrastructure</p>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transarency\">Transparency</a></p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -180,12 +184,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocols act as plugins to the string space.</p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
-    "				<!--<h5>Action Tokenization Protocol</h5>-->\n" +
-    "				<!--<h5>Manifold Tokenization Protocol</h5>-->\n" +
+    "				<h5>Action Tokenization Protocol</h5>\n" +
+    "				<h5>Manifold Tokenization Protocol</h5>\n" +
     "				<h5>Association Tokenization Protocol</h5>\n" +
     "				<h5>Content Tokenization Protocol</h5>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">+[TYPE]+[ADDRESS]</p>\n" +
-    "				<!--<h5>Follow Tokenization Protocol</h5>-->\n" +
+    "				<h5>Follow Tokenization Protocol</h5>\n" +
     "				<h5>Item Tokenization Protocol</h5>\n" +
     "				<h5>Location Tokenization Protocol</h5>\n" +
     "				<h5>Member Tokenization Protocol</h5>\n" +
@@ -196,7 +199,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<h5>Task Tokenization Protocol</h5>\n" +
     "				<h5>Time Tokenization Protocol</h5>\n" +
     "				<h5>Transaction Tokenization Protocol</h5>\n" +
-    "				<!--<h5>View Tokenization Protocol</h5>-->\n" +
+    "				<h5>View Tokenization Protocol</h5>\n" +
     "				<h5>Validation Tokenization Protocol</h5>\n" +
     "				<!--CRE8; RECIEVE; PROJECT.. USER-->\n" +
     "			</div>\n" +
@@ -1491,6 +1494,21 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Content</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
     "                    <p><b>[get, post] /api/content</b></p>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "\n" +
+    "                        <div hljs hljs-language=\"javascript\">\n" +
+    "var query = {\n" +
+    "    limit: 10,\n" +
+    "    skip:0,\n" +
+    "    sort:'createdAt DESC',\n" +
+    "};                      </div>\n" +
+    "                        <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default\">Get Content</button>\n" +
+    "\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var contentModel = {\n" +
     "    id: {type: 'string'},\n" +
@@ -1534,11 +1552,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "var followerModel = {\n" +
     "    followed: {\n" +
     "        model: 'user',\n" +
-    "        required: true\n" +
     "    },\n" +
     "    follower: {\n" +
     "        model: 'user',\n" +
-    "        required: true\n" +
     "    }\n" +
     "};</div>\n" +
     "                </div>\n" +
@@ -1551,34 +1567,21 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>[get, post] /api/item</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var itemModel = {\n" +
-    "    //MAIN\n" +
     "    title: {type: 'string'},\n" +
     "    content: {type: 'string'},\n" +
-    "\n" +
-    "    //TAGS\n" +
     "    tags: {type: 'string'},\n" +
     "\n" +
-    "    //ASSOCIATIONS\n" +
     "    associatedModels: {type: 'json'},\n" +
-    "\n" +
-    "    //LOCATION\n" +
-    "    location: {type: 'json'},\n" +
-    "\n" +
-    "    //INFO\n" +
-    "    //FORSALE, TYPE?\n" +
-    "    //FORLEASE,\n" +
-    "    info: {type: 'json'},\n" +
-    "\n" +
-    "    //PRICE, LEASE TIME.. .ETC\n" +
-    "    identifierSet: {type: 'string'},\n" +
-    "    amountSet: {type: 'string'},\n" +
-    "\n" +
-    "    //REACTIONS\n" +
     "    reactions: {type: 'json'},\n" +
     "\n" +
-    "    //DEPRECIATE\n" +
-    "    user: {model: 'user'},\n" +
+    "    location: {type: 'json'},\n" +
     "\n" +
+    "    info: {type: 'json'}, //FORSALE, FORLEASE\n" +
+    "        //PRICE, LEASE TIME.. .ETC\n" +
+    "        //identifierSet: {type: 'string'},\n" +
+    "        //amountSet: {type: 'string'},\n" +
+    "\n" +
+    "    user: {model: 'user'},\n" +
     "    owner: {type: 'json'}\n" +
     "};</div>\n" +
     "                </div>\n" +
@@ -1600,18 +1603,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>[get, post] /api/member</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var memberModel = {\n" +
+    "\n" +
     "    avatarUrl: {type: 'string',},\n" +
     "    coverUrl: {type: 'string'},\n" +
-    "    email: {\n" +
-    "        type: 'email',\n" +
-    "        required: true,\n" +
-    "        unique: true\n" +
-    "    },\n" +
-    "    username: {\n" +
-    "        type: 'string',\n" +
-    "        required: true,\n" +
-    "        unique: true\n" +
-    "    },\n" +
+    "    email: {type: 'email',},\n" +
+    "    username: {type: 'string',},\n" +
     "\n" +
     "    //INFO\n" +
     "    firstName: {type: 'string'},\n" +
@@ -1620,43 +1616,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    address: {type: 'string'},\n" +
     "\n" +
     "    //STATUS\n" +
-    "    loggedIn: {\n" +
-    "        type: 'boolean',\n" +
-    "        defaultsTo: false\n" +
-    "    },\n" +
-    "    isWorking: {\n" +
-    "        type: 'boolean',\n" +
-    "        defaultsTo: false\n" +
-    "    },\n" +
-    "    isLive: {\n" +
-    "        type: 'boolean',\n" +
-    "        defaultsTo: false\n" +
-    "    },\n" +
-    "    status: {\n" +
-    "        type: 'string',\n" +
-    "    },\n" +
+    "    loggedIn: {type: 'boolean'},\n" +
+    "    isWorking: {type: 'boolean'},\n" +
+    "    isLive: {type: 'boolean'},\n" +
+    "    status: {type: 'string'},\n" +
     "\n" +
     "    //COUNTS\n" +
-    "    followingCount: {\n" +
-    "        type: 'integer',\n" +
-    "        defaultsTo: 0\n" +
-    "    },\n" +
-    "    followerCount: {\n" +
-    "        type: 'integer',\n" +
-    "        defaultsTo: 0\n" +
-    "    },\n" +
-    "    notificationCount: {\n" +
-    "        type: 'integer',\n" +
-    "        defaultsTo: 0\n" +
-    "    },\n" +
-    "    projectCount: {\n" +
-    "        type: 'integer',\n" +
-    "        defaultsTo: 0\n" +
-    "    },\n" +
-    "    totalWork: {\n" +
-    "        type: 'integer',\n" +
-    "        defaultsTo: 0\n" +
-    "    },\n" +
+    "    followingCount: {type: 'integer'},\n" +
+    "    followerCount: {type: 'integer'},\n" +
+    "    notificationCount: {type: 'integer'},\n" +
+    "    projectCount: {type: 'integer'},\n" +
+    "    totalWork: {type: 'integer'},\n" +
     "\n" +
     "    //MAPPINGS\n" +
     "    reputation: {type: 'json'},\n" +
@@ -1698,7 +1668,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    content: {type: 'string'},\n" +
     "    associations: {type: 'json'},\n" +
     "    priority: { type: 'string'},\n" +
-    "    isRead: { type: 'boolean', defaultsTo: false}}\n" +
+    "    isRead: { type: 'boolean'}\n" +
     "};</div>\n" +
     "                </div>\n" +
     "\n" +
@@ -1836,6 +1806,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "};</div>\n" +
     "                </div>\n" +
     "\n" +
+    "\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -1879,6 +1851,23 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Transaction</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
     "                    <p><b>[get, post] /api/transaction</b></p>\n" +
+    "\n" +
+    "\n" +
+    "                    <div>\n" +
+    "\n" +
+    "                        <div hljs hljs-language=\"javascript\">\n" +
+    "var query = {\n" +
+    "    limit: 10,\n" +
+    "    skip:0,\n" +
+    "    sort:'createdAt DESC',\n" +
+    "};                      </div>\n" +
+    "                        <button ng-click=\"apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default\">Get Transaction</button>\n" +
+    "\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "\n" +
+    "\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var transactionModel = {\n" +
     "    to: address,\n" +
@@ -2062,6 +2051,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <h4>MultiMarket Traversal</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure</p>\n" +
+    "                <div hljs hljs-language=\"javascript\">\n" +
+    "orderBookTensor = [{\n" +
+    "    name: 'BTC',\n" +
+    "    data:[\n" +
+    "        {name:'LTC', bids:[], asks:[]},\n" +
+    "        {name:'XMR', bids:[], asks:[]},\n" +
+    "        {name:'XRP', bids:[], asks:[]},\n" +
+    "    ],\n" +
+    "}];</div>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Multidimensional Token Market</p>\n" +
     "                \n" +
     "                <!--<a href=\"/content/5c438e2090a86f150004ebda\">INFO</a>\n" +
@@ -2388,7 +2387,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
     "                <div style=\"color:white;padding:15px;\">\n" +
     "                    <h1>Projects</h1>\n" +
-    "                    <p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>\n" +
+    "                    <p>The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -2428,7 +2427,11 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                                        <div style=\"float:right\">\n" +
-    "                                            <button class=\"btn btn-default\" ng-click=\"join(item);\">Join</button>\n" +
+    "\n" +
+    "                                            <button ng-if=\"(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true\" class=\"btn btn-default\" ng-click=\"join(item);\">Join</button>\n" +
+    "                                            <button ng-if=\"item.isMember == 'PENDING'\" class=\"btn btn-default\" ng-click=\"join(item);\">Cancel Request</button>\n" +
+    "                                            <button ng-if=\"item.isMember == true\" class=\"btn btn-default\" ng-click=\"join(item);\">Leave</button>\n" +
+    "\n" +
     "                                        </div>\n" +
     "\n" +
     "                                        <a href=\"/project/{{item.urlTitle}}\">\n" +
@@ -2451,7 +2454,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1481732582370-0445455c5ba1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2271&q=80');\">\n" +
     "                <div style=\"color:white;padding:15px;\">\n" +
     "                    <h1>Tasks</h1>\n" +
-    "                    <p>Globally Present. The CRE8 Netowrk spans. Coordinating Around All Types. Get Involved.</p>\n" +
+    "                    <p>Coordinate with Intention. Get Involved.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -2484,6 +2487,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        <div ng-repeat=\"item in tasks\">\n" +
     "                            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
+    "\n" +
     "                                    <div style=\"float:right;text-align:right\">\n" +
     "                                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                                        <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
@@ -2494,6 +2498,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                    <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "                                    <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
+    "\n" +
+    "                                    <br><br>\n" +
+    "\n" +
+    "                                    <button ng-if=\"true\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();interested(item)\"><i class=\"fa fa-check\"></i> Interested</button>\n" +
     "\n" +
     "                                </div>\n" +
     "                                <div class=\"card-footer\">\n" +
@@ -2514,7 +2522,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
     "                <div style=\"color:white;padding:15px;\">\n" +
     "                    <h1>Members</h1>  \n" +
-    "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and codified beliefs.</p>\n" +
+    "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\" style=\"max-height:100vh;overflow:scroll\">\n" +
@@ -2525,11 +2533,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "                        </div>\n" +
     "                        <div class=\"member-card-info\">\n" +
-    "                            <button ng-show=\"true\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
-    "                            <button ng-show=\"false\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
-    "\n" +
     "                            <h4><a href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
     "                            <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
+    "\n" +
+    "                            <button ng-show=\"!item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
+    "                            <button ng-show=\"item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
+    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -2540,11 +2549,32 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
     "                <div style=\"color:white;padding:15px;\">\n" +
     "                    <h1>Update Value Map</h1>  \n" +
-    "                    <p>Now that we know more about you, want to update?</p>\n" +
+    "                    <p>Now that we know more about you, let's update.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>\n" +
     "                <highchart config=\"chart\"></highchart>\n" +
+    "\n" +
+    "                <p>My Current Positions & Value Map</p>\n" +
+    "\n" +
+    "                <!--MAKE AS MAP..-->\n" +
+    "                <div ng-repeat=\"position in positions\">\n" +
+    "                    <span>{{position.setAlpha}} || {{position.setBeta}}</span>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p>Suggestions and information</p>\n" +
+    "\n" +
+    "                <!--\n" +
+    "                {{followers}}\n" +
+    "                {{memberProjects}}\n" +
+    "                -->\n" +
+    "\n" +
+    "                {{sortedsuggestedTokenTags}}\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -2847,6 +2877,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "\n" +
+    "                <!--<h3>WE ARE ALL VALUABLE</h3>-->\n" +
     "                <h3>INFORMATION IS VALUABLE</h3>\n" +
     "                <!--SHARING CREATES VALUE-->\n" +
     "                <!--SHARING IS VALUABLE-->\n" +

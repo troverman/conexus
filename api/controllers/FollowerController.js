@@ -29,48 +29,50 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-		var followedId = req.param('followed');
-		var followerId = req.param('follower');
+
 		var model = {
-			followed: followedId,
-			follower: followerId,
+			followed: req.param('followed'),
+			follower: req.param('follower'),
 		};
+
+		console.log(model);
+
 		Follower.create(model)
 		.exec(function(err, follower) {
 			if (err) {return console.log(err);}
 			else {
-				Follower.find({follower:follower.id}).then(function(follower){
+				console.log(follower);
 
-					//MEH
-					User.find({id:model.followed}).then(function(userModel){
-						userModel[0].followerCount++;
-						User.update({id:model.followed}, {followerCount:userModel[0].followerCount}).then(function(user){});
+				//MEH
+				User.find({id:model.followed}).then(function(userModel){
+					userModel[0].followerCount++;
+					User.update({id:model.followed}, {followerCount:userModel[0].followerCount}).then(function(user){});
+				});
+				
+				User.find({id:model.follower}).then(function(userModel){
+					userModel[0].followingCount++;
+					User.update({id:model.follower}, {followingCount:userModel[0].followingCount}).then(function(user){});
+
+					//MB REFACTOR THIS BLOCK
+					//WHATS THE DATA?
+					var notificationModel = {
+						user: model.followed,
+						type: 'FOLLOW',
+						title: 'New Follower',
+						content:userModel[0].username+' started following you',
+						info:userModel[0],
+						priority:70,
+					};
+
+					Notification.create(notificationModel).then(function(notification){
+						Notification.publishCreate(notification);
 					});
 					
-					User.find({id:model.follower}).then(function(userModel){
-						userModel[0].followingCount++;
-						User.update({id:model.follower}, {followingCount:userModel[0].followingCount}).then(function(user){});
-
-						//MB REFACTOR THIS BLOCK
-						//WHATS THE DATA?
-						var notificationModel = {
-							user: followedId,
-							type: 'FOLLOW',
-							title: 'New Follower',
-							content:userModel[0].username+' started following you',
-							info:userModel[0],
-							priority:70,
-						};
-						Notification.create(notificationModel).then(function(notification){
-							Notification.publishCreate(notification);
-						});
-						
-					});
-
-					Follower.publishCreate(follower[0]);
-					res.json(follower[0]);
-
 				});
+
+				Follower.publishCreate(follower);
+				res.json(follower);
+
 			}
 		});
 	},
