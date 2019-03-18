@@ -31,7 +31,7 @@
 		</div>
 
 		<div class="card">
-			<nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
+			<!--<nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>-->
 	    </div>
 
 	</div>
@@ -135,19 +135,19 @@
 			    	<div style="padding:16px;">
 						<div class="row">
 				    		<div class="col-sm-6">
-				    			<a href="market/{{stateParams.id}}/{{market}}">
-				    				<h5>{{market}}</h5>
+				    			<a href="market/{{stateParams.id}}/{{market.string}}">
+				    				<h5>{{market.string}}</h5>
 				    			</a>
 				    		</div>
 							<div class="col-sm-6" style="text-align:right">
-								<span style="text-align:right;float:right">0.21 {{stateParams.id}}</span>
+								<span style="text-align:right;">{{market.info.rate}} {{stateParams.id}}</span>
 				    		</div>
 						</div>
 						<div class="row">
 				    		<div class="col-sm-12">
 								<!--<highchart config="bidAskChart"></highchart>-->
-				    			<p style="color:gray;font-size:10px">%-0.32 24/hr Change</p>
-								<p style="color:gray;font-size:10px">4423 {{stateParams.id}} Depth</p>
+				    			<p style="color:gray;font-size:10px">{{market.info.dailyChange}} 24/hr Change</p>
+								<p style="color:gray;font-size:10px">{{market.info.marketDepth}} {{stateParams.id}} Depth</p>
 							</div>
 				    	</div>
 					</div>

@@ -551,7 +551,7 @@ angular.module( 'conexus.home', [
     };
 
    
-   
+
 
 
     //IF NON ZERO
@@ -615,7 +615,9 @@ angular.module( 'conexus.home', [
                     $rootScope.stateIsLoading = false;
                     lat = position.coords.latitude; 
                     lng = position.coords.longitude;
-                    //$scope.searchQuery.push({text:'CURRENT LOCATION: '+lat+', '+lng});
+
+                    $scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
+                    
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
                         zoom: 12
@@ -665,7 +667,7 @@ angular.module( 'conexus.home', [
             console.log(model.isMember);
 
             if (model.isMember == false){
-                //MemberModel.create($scope.newMember).then(function(model) {
+                MemberModel.create($scope.newMember).then(function(model) {
                 //    $rootScope.confirm = $scope.newMember;
                 //    $rootScope.confirm.modelType = 'PROJECTMEMBER';
                     $scope.projects[index].isMember = 'PENDING'; // TRUE; FALSE
@@ -673,7 +675,7 @@ angular.module( 'conexus.home', [
                     $scope.pop('Request to Join','You requested to join.. ' +model.title+' .. pending validation');
                 //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
-                //});
+                });
             }
 
             else if (model.isMember == 'PENDING'){

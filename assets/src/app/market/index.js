@@ -31,6 +31,9 @@ angular.module( 'conexus.market', [
         type: 'MARKET',
     }];
 
+    $scope.baseMarkets = [$scope.stateParams.id];
+
+
     //$scope.market = {
     //    title: $scope.stateParams.id,
     //    circulation: Math.floor(Math.random()*1000000),
@@ -46,20 +49,91 @@ angular.module( 'conexus.market', [
         {title:'+SPONSOR', manifolds:'+ADDRESS'},
     ];
 
-
+    $scope.markets = [];
     $scope.newMarket = {};
     $scope.newOrder = {};
     $scope.newOrder.identiferSet = $scope.stateParams.id;
     $scope.orders = orders;
-    $scope.orders.forEach(function(part, index) {
-        //if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
-        //if ($scope.orders[index].amountSet){$scope.orders[index].amountSet = $scope.orders[index].amountSet.split(',');}
-        //if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
-        //if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
-    });
     $scope.token = token[0];
     $scope.trades = {};
 
+
+
+
+    //COMPUTATION 
+    //SOME COMPUTATION.. (COMPUTE TO LATTICE IMMUTABLE STRUCT)
+    //COMBO ORDER VS + AND ARRAY OF ORDERS;
+
+    //COMBINATORIAL OPTION IN MARKET TYPE (INTERLINK IN POOLS)
+
+    //COMBO VS PLURAL VS COMPUTED COMB
+    //(DIRECT SINGULAR ASSETS, DIRECT PLUR ASSETS, COMP PLUR ASSETS)
+    console.log($scope.orders);
+
+    //UGH NEED TO SORT ORDER FETCH OR PROCESS DIFFERENTLY //--> STATIC DATA ON CREATE
+    //WHATS THE ORT ON MARKETS?
+
+
+    //ORDER MATHCHING.. HIGHEST DIM ORDERS 1ST
+
+    //TRAVERSAL TENSORS
+    //ROTATIONAL ETNSORS
+    //MODULATIONS OF IMMUTABLE
+
+    //GET SETS --> SORT BY NUMBER OF SETBETA OBJKEY COUNT
+
+
+    for (x in $scope.orders){
+
+        //$scope.orders[x].setAlpha
+        if ($scope.orders[x].setBeta){
+
+
+        //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
+        //HIGH DIMS IMMEDIATLY DECOMPOSE 
+        if (Object.keys($scope.orders[x].setBeta).length > 1){
+            console.log('HIIIIII');
+
+
+            if ($scope.markets.indexOf(assetIdentifier) == -1){
+                $scope.markets.push({
+                    string:Object.keys($scope.orders[x].setBeta).join(','), 
+                    info:{
+                        rate:Math.random(),
+                        dailyChange:Math.random(),
+                        marketDepth:Math.random(),
+                    }
+                });
+            }
+
+
+        }
+
+
+        for (y in Object.keys($scope.orders[x].setBeta)){
+            var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
+            console.log(assetIdentifier);
+            if ($scope.markets.indexOf(assetIdentifier) == -1){
+                $scope.markets.push({
+                    string:assetIdentifier, 
+                    info:{
+                        rate:Math.random(),
+                        dailyChange:Math.random(),
+                        marketDepth:Math.random(),
+                    }
+                });
+            }
+        }
+
+
+
+
+        }
+
+    }
+
+
+    
     $scope.selectedTab = 'MARKET';
     $scope.selectTab = function(model){
         $scope.selectedTab = model;
@@ -143,8 +217,20 @@ angular.module( 'conexus.market', [
         legend: {enabled:false},
     };
 
-    $scope.baseMarkets = [$scope.stateParams.id];
-    $scope.markets = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'CRE8+TIME', 'CRE8+TIME+EDUCATION', 'CRE8+TIME+SHELTER', 'CRE8+TIME+FOOD', 'CRE8+TIME+CREATION', 'CRE8+TIME+HEALTH', 'CRE8+TIME+SECURITY', 'CRE8+TIME+REST', 'CRE8+STREAM', 'CRE8+REACT','CRE8+REACT+LIKE','CRE8+REACT+DISLIKE','CRE8+POST','CRE8+VALIDATE','CRE8+VIEW','CRE8+MINE','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+    //DEFAULT GENERATOR
+    if ($scope.orders.length == 0){
+        $scope.marketString = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'CRE8+TIME', 'CRE8+TIME+EDUCATION', 'CRE8+TIME+SHELTER', 'CRE8+TIME+FOOD', 'CRE8+TIME+CREATION', 'CRE8+TIME+HEALTH', 'CRE8+TIME+SECURITY', 'CRE8+TIME+REST', 'CRE8+STREAM', 'CRE8+REACT','CRE8+REACT+LIKE','CRE8+REACT+DISLIKE','CRE8+POST','CRE8+VALIDATE','CRE8+VIEW','CRE8+MINE','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
+        for (x in $scope.marketString){
+            $scope.markets.push({
+                string:$scope.marketString[x], 
+                info:{
+                    rate:Math.random(),
+                    dailyChange:Math.random(),
+                    marketDepth:Math.random(),
+                }
+            });
+        }
+    }
     
     //POWER SET
     function getAllSubsets(theArray) {

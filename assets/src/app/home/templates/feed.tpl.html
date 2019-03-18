@@ -12,13 +12,14 @@
             </div>
             <div style="padding:16px;">
                 
-                <ul style="padding:0px;" class="member-tabs">
+                <ul style="padding:0px;margin-bottom:0px" class="member-tabs">
                     <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
                     <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
                     <div style="clear:both"></div>
                 </ul>
 
                 <div class="row">
+
                     <div class="col-md-6">
 
                         <!--ACTIVE FILTERS-->
@@ -41,30 +42,30 @@
                         </div>
 
                     </div>
+
                     <div class="col-md-6" style="max-height:100vh;overflow:scroll">
                         <div ng-repeat="item in projects">
                             <div class="card" ng-click="">
                                 <div style="padding:16px;">
 
-                                        <div style="float:right">
+                                    <div style="float:right">
+                                        <button ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
+                                        <button ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
+                                        <button ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
+                                    </div>
 
-                                            <button ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
-                                            <button ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
-                                            <button ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
+                                    <a href="/project/{{item.urlTitle}}">
+                                        <img style="height:64px" src="{{item.avatarUrl}}">
+                                        <h3 style="margin-top:0px">{{item.title}}</h3>
+                                    </a>
 
-                                        </div>
-
-                                        <a href="/project/{{item.urlTitle}}">
-                                            <img style="height:64px" src="{{item.avatarUrl}}">
-                                            <h3 style="margin-top:0px">{{item.title}}</h3>
-                                        </a>
-
-                                        <div style="max-height:500px;overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
-                                        
+                                    <div style="max-height:500px;overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -87,6 +88,11 @@
 
                 <div class="row">
                     <div class="col-md-6">
+
+                         <!--ACTIVE FILTERS-->
+                        <div class="card">
+                            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+                        </div>
                         
                         <div class="card">
                             <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
@@ -146,16 +152,28 @@
                 </div>
             </div>
             <div style="padding:16px;" style="max-height:100vh;overflow:scroll">
+
+                <ul style="padding:0px;" class="member-tabs">
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                    <div style="clear:both"></div>
+                </ul>
+
+                <div class="card">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+                </div>
+
                 <highchart config="totalMap"></highchart>
+
                 <div class="col-sm-6" ng-repeat="item in members.slice(0,10)">
                     <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
                         <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
                             <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                         </div>
-                        <div class="member-card-info">
+                        <div class="member-card-info" style="padding:16px;height:auto">
                             <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
+                            <p style="font-size:13px;"><a href="/member/{{item.username}}/projects">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following">{{item.followingCount || 0}} Following</a>
                             <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
-
+                            <p style="color:gray">{{currentUser.status}} Offline</p>
                             <button ng-show="!item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
                             <button ng-show="item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Unfollow</button>
 
@@ -174,25 +192,36 @@
             </div>
             <div style="padding:16px;">
 
-                <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>
-                <highchart config="chart"></highchart>
 
-                <p>My Current Positions & Value Map</p>
+                <p><b>My Current Positions & Value Map</b></p>
 
                 <!--MAKE AS MAP..-->
                 <div ng-repeat="position in positions">
                     <span>{{position.setAlpha}} || {{position.setBeta}}</span>
                 </div>
+
                 <div class="spacing-10"></div>
 
-                <p>Suggestions and information</p>
+                <highchart config="chart"></highchart>
+
+                <div class="spacing-10"></div>
+
+                <p><b>Suggestions and Information</b></p>
+                <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>
 
                 <!--
                 {{followers}}
                 {{memberProjects}}
                 -->
 
-                {{sortedsuggestedTokenTags}}
+                <div class="row">
+                    <div class="col-md-2" style="max-height:50vh;overflow:scroll">
+                        <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedsuggestedTokenTags track by $index">
+                            <button ng-click="createPosition(item.element)" class="btn btn-default"><a href="#">{{item.element}}</a></button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="spacing-10"></div>
 
             </div>
@@ -330,6 +359,13 @@
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
+
+
+
+
+
+
+
                             <!--TODO: DEPRECIATE-->
                             <!--ASSOCIATIONS-->
                             <a ng-click="$event.stopPropagation()" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
@@ -340,6 +376,13 @@
                             <a ng-click="$event.stopPropagation()" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
                             <!--TODO-->
+
+
+
+
+
+
+
 
                             <a ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}" ng-click="$event.stopPropagation()" >time {{item.time}}</a>
                             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
@@ -371,6 +414,11 @@
                                 <a href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
                             <div class="col-sm-11 col-xs-10">
+
+                                <p style="float:right;text-align:right">
+                                    <span ng-if="item.location">{{item.location.address}} <i class="fa fa-map-marker"></i></span>
+                                </p>
+                                
                                 <h3 style="margin-top:0px">
                                     <a href="project/{{item.urlTitle}}">
                                         {{item.title}}
