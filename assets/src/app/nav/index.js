@@ -1170,8 +1170,8 @@ angular.module( 'conexus.nav', [
             //MEG
             config.currentUser = newModel.data;
             $rootScope.currentUser = newModel.data;
-            $location.path('/');
             $window.location.reload();
+            $location.path('/');
         });
     };
 

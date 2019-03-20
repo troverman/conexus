@@ -568,14 +568,14 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-7\">\n" +
+    "            <div class=\"col-xs-12 col-sm-7\">\n" +
     "                <h3>APPS</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Apps are plugins to the string space and add to the domain of tokenized systems of intention; how can we create an eglatarian world through tokenization?</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">By openeing up the intention of system design, we capture a larger design space.</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Apps are a bundle of protocols. App design is modular.</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">See the <a href=\"/developers\">documentation</a> to learn more.</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-5\">\n" +
+    "            <div class=\"col-xs-5 col-sm-5\">\n" +
     "                <img src=\"https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -616,7 +616,8 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"card\" ng-click=\"render(app)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <div style=\"float:right\"><i class=\"fa fa-ellipsis-v\"></i></div>\n" +
-    "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"app/{{app.title}}\">{{app.title}}</a></h4>\n" +
+    "                    <!--<h4><a ng-click=\"$event.stopPropagation();\" href=\"app/{{app.title}}\">{{app.title}}</a></h4>-->\n" +
+    "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"https://www.github.com/troverman/conexus\">{{app.title}}</a></h4>\n" +
     "                    <p style=\"color:gray\">{{app.description}}</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -1417,15 +1418,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <h4>Conex API</h4>\n" +
     "                    <h5>Filter & Search Parameters</h5>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered by each model param: {DESC, ASC}</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var query = {\n" +
-    "    limit: 10,\n" +
-    "    skip: 10,\n" +
-    "    sort: 'modelParam '+'DESC' || 'ASC',\n" +
     "    filter:{\n" +
     "        obj: param\n" +
-    "    }\n" +
+    "    },\n" +
+    "    limit: 10,\n" +
+    "    skip: 10,\n" +
+    "    sort: 'modelParam '+'DESC' || 'ASC'\n" +
     "};</div>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1453,10 +1454,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Assoication</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Association Model</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time (Project <--> Task <--> Time).<br> Associations are computed though validation traversal.</p>\n" +
-    "                    <p><b>get /api/assoication</b></p>\n" +
-    "                    <img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time (Project <--> Task <--> Time).<br> Associations are computed though <a href=\"#\">validation traversal</a>.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var associationModel = {\n" +
     "    associatedModels: [\n" +
@@ -1466,8 +1464,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    context: {\n" +
     "        [title]:weight\n" +
     "    }\n" +
-    "};\n" +
-    "                    </div>\n" +
+    "};</div>\n" +
+    "\n" +
+    "                    <img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
+    "                    <p>A =V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    \n" +
+    "                    <p><b>get /api/assoication</b></p>\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1495,21 +1501,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Content</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
     "                    <p><b>[get, post] /api/content</b></p>\n" +
-    "\n" +
-    "                    <div>\n" +
-    "\n" +
-    "                        <div hljs hljs-language=\"javascript\">\n" +
-    "var query = {\n" +
-    "    limit: 10,\n" +
-    "    skip:0,\n" +
-    "    sort:'createdAt DESC',\n" +
-    "};                      </div>\n" +
-    "                        <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default\">Get Content</button>\n" +
-    "\n" +
-    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var contentModel = {\n" +
     "    id: {type: 'string'},\n" +
@@ -1523,6 +1514,47 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    user: {model: 'user'},\n" +
     "    createdAt: {type: 'datetime'},\n" +
     "};</div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>Title:</b> Title of Content is a String</p>\n" +
+    "                        <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>\n" +
+    "                        <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>\n" +
+    "                        <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>\n" +
+    "                        <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>\n" +
+    "                        <p><b>Associated Models:</b> Computed aia Association Traversal</p>\n" +
+    "                        <p><b>Reactions:</b> TBD </p>\n" +
+    "                        <p><b>Creator:</b> Address, Member or Project, who created Content</p>\n" +
+    "                        <p><b>CreatedAt:</b> Timestamp of Creation</p>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
+    "\n" +
+    "                        <div hljs hljs-language=\"javascript\">\n" +
+    "var query = {\n" +
+    "    filter:{\n" +
+    "        id: is:,\n" +
+    "        title: contains:{},\n" +
+    "        tags: contains:{},\n" +
+    "        type: is:,\n" +
+    "        location:[lat,lng,distance],\n" +
+    "        associatedModels:contains:{},\n" +
+    "        reactions:contains:{},\n" +
+    "        createdAt:'lessThan':today,\n" +
+    "    },\n" +
+    "    limit: 1,\n" +
+    "    skip:0,\n" +
+    "    sort:'createdAt DESC',\n" +
+    "};</div>\n" +
+    "                        <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1786,9 +1818,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <p><b>Search</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Search is .. </p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>\n" +
     "                    <p><b>get /api/search</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var searchModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var searchModel = {\n" +
+    "    filter:{\n" +
+    "        obj: param\n" +
+    "        model: 'CONTENT' //MEMBER,TASK,TIME,PROJECT...//model information is stored in model. \n" +
+    "    },\n" +
+    "    limit: 10,\n" +
+    "    skip: 0,\n" +
+    "    sort: 'createdAt DESC'\n" +
+    "};</div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1853,8 +1894,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Transaction</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
-    "                    <p><b>[get, post] /api/transaction</b></p>\n" +
-    "                    curl https://www.cre8.xyz/api/transaction?limit=1&skip=0\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var transactionModel = {\n" +
+    "    to: address,\n" +
+    "    from: address,\n" +
+    "    amountSet: {\"ASSETSTRING\": 10, \"CRE8\":1},\n" +
+    "    tags: 'comma,seperated,tag,string',\n" +
+    "    content: 'transation content'\n" +
+    "};</div>\n" +
+    "\n" +
+    "\n" +
+    "                     <p><b>[get, post] /api/transaction</b></p>\n" +
+    "                    <p>curl https://www.cre8.xyz/api/transaction?limit=1&skip=0</p>\n" +
     "\n" +
     "                    <div>\n" +
     "\n" +
@@ -1863,23 +1914,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    limit: 10,\n" +
     "    skip:0,\n" +
     "    sort:'createdAt DESC',\n" +
-    "};                      </div>\n" +
-    "                        <button ng-click=\"apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default\">Get Transaction</button>\n" +
+    "};</div>\n" +
+    "                        <button ng-click=\"apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Transaction</button>\n" +
+    "                        \n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
     "\n" +
     "                    </div>\n" +
     "\n" +
     "\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var transactionModel = {\n" +
-    "    to: address,\n" +
-    "    from: address,\n" +
-    "    amountSet: {\"ASSETSTRING\": 10, \"CRE8\":1},\n" +
-    "    tags: 'comma,seperated,tag,string',\n" +
-    "    content: 'transation content'\n" +
-    "};\n" +
-    "                    </div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1902,25 +1946,41 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Validation</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Like Votes, the building block for group agreement - consensus and decision making. \n" +
     "                    <p style=\"color:gray;font-style:italic\">The Anatomy of a Validation</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Layered Recursion (Validation-Validation)</p>\n" +
     "\n" +
-    "                    <p>PROJECT - ITEM</p>\n" +
-    "                    <p>PROJECT - CONTENT</p>\n" +
-    "                    <p>PROJECT - MEMBER</p>\n" +
-    "                    <p>PROJECT - ORDER</p>\n" +
-    "                    <p>PROJECT - TASK</p>\n" +
-    "                    <p>TASK - TIME</p>\n" +
-    "                    <p>VALIDATION - VALIDATION</p>\n" +
-    "                    </p>\n" +
-    "                    <p><b>[get, post] /api/validation</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "                   <div hljs hljs-language=\"javascript\">\n" +
     "var validationModel = {\n" +
     "    content: {type: 'string'},\n" +
     "    reputation: {type: 'json'},\n" +
     "    user: {model: 'user'},\n" +
     "    validation: {type: 'json'},\n" +
     "    associatedModels: {type: 'json'},\n" +
+    "    type: {type: 'json'},\n" +
     "};</div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>Reputation:</b> {context:reputationInt}, Reputation is used as a multiplier for association computation via the Project Charter</p>\n" +
+    "                        <p><b>Validation:</b> {context:validationInt}</p>\n" +
+    "                        <p><b>Type:</b> Human (CRE8), Machine (CRE8), APP</p>\n" +
+    "                        <p><b>Associated Models:</b> Binary relation of Two Models to be associated</p>\n" +
+    "                        <p><b>Creator:</b> Address of Member who created Validation</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <p>Interoperable Validation Types</p>\n" +
+    "                    <p>Composite Validation (CRE8), Human Validated Proof of Work, Machine Validation, and App Specific Validation</p>\n" +
+    "\n" +
+    "                    <!--CONTEXT-SPECIFIC x-->\n" +
+    "                    <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Layered Recursion (Validation-Validation)</p>\n" +
+    "\n" +
+    "                    <p>Templates</p>\n" +
+    "                    <p>PROJECT - ITEM: DISCRETE, PROJECT - MEMBER: DISCRETE, PROJECT - ORDER: DISCRETE</p>\n" +
+    "                    <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>\n" +
+    "                    <p>PROJECT - TASK - TIME</p>\n" +
+    "\n" +
+    "                    <p>Project - Task</p>\n" +
+    "\n" +
+    "                    <p><b>[get, post] /api/validation</b></p>\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -2052,7 +2112,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <h4>Association Traversal</h4>\n" +
-    "                <h4>Validation Traversal</h4>\n" +
+    "                <h5>Validation Traversal</h5>\n" +
+    "                <p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals (and protocols)</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +

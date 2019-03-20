@@ -25,14 +25,14 @@
     <div class="container">
         <div class="spacing-50"></div>
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-xs-12 col-sm-7">
                 <h3>APPS</h3>
                 <p style="color:gray;font-style:italic">Apps are plugins to the string space and add to the domain of tokenized systems of intention; how can we create an eglatarian world through tokenization?</p>
                 <p style="color:gray;font-style:italic">By openeing up the intention of system design, we capture a larger design space.</p>
                 <p style="color:gray;font-style:italic">Apps are a bundle of protocols. App design is modular.</p>
                 <p style="color:gray;font-style:italic">See the <a href="/developers">documentation</a> to learn more.</p>
             </div>
-            <div class="col-sm-5">
+            <div class="col-xs-5 col-sm-5">
                 <img src="https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif">
             </div>
         </div>
@@ -73,7 +73,8 @@
             <div class="card" ng-click="render(app)">
                 <div style="padding:16px;">
                     <div style="float:right"><i class="fa fa-ellipsis-v"></i></div>
-                    <h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>
+                    <!--<h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>-->
+                    <h4><a ng-click="$event.stopPropagation();" href="https://www.github.com/troverman/conexus">{{app.title}}</a></h4>
                     <p style="color:gray">{{app.description}}</p>
                 </div>
             </div>
