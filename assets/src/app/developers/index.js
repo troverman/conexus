@@ -18,7 +18,13 @@ angular.module( 'conexus.developers', [
 
 .controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', 'TransactionModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, ReactionModel, titleService, TransactionModel ) {
     titleService.setTitle('Developers | CRE8.XYZ');
+
+
     $scope.results = '[{}]';
+
+    $scope.newQuery = {};
+
+
     $scope.apiCall = function(query){
         if (query.model == 'CONTENT'){
             ContentModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){

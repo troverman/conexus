@@ -21,6 +21,8 @@
     <div class="intro-mobile"></div>
 </div>
 
+<div class="spacing-100"></div>
+
 <div id="about-section1">
     <div class="container">
         <div class="spacing-25"></div>
@@ -37,8 +39,10 @@
     </div>
 </div>
 
+<div class="spacing-100"></div>
 
 <div id="about-section1">
+    <div class="spacing-50"></div>
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
@@ -46,13 +50,15 @@
                 <h3>Documentation</h3>
                 <p style="color:gray;font-style:italic">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>
 
-                <p>The CRE8 Decentralized Peer Network & Virtual Machine</p>
+                <div class="spacing-25"></div>
 
-                <p>Interoperable Protocol & Application Design Architecture</p>
+                <p><a href="#CRE8VM">The CRE8 Decentralized Peer Network & Virtual Machine</a></p>
 
-                <p>CRE8 CORE Protocols</p>
+                <p><a href="#APPDESIGN">Interoperable Protocol & Application Design Architecture</a></p>
 
-                <p>Conex API: Models & Endpoints</p>
+                <p><a href="#CRE8">CRE8 CORE Protocols</a></p>
+
+                <p><a href="#CONEXAPI">Conex API: Models & Endpoints</a></p>
                 <div ng-show="false">
                     <p>Action</p>
                     <p>App</p>
@@ -82,61 +88,88 @@
                     <p>Validation</p>
                 </div>
 
-                <p>Tokenization Principles & String Interpolation</p>
+                <p><a href="#TOKENIZATION">Tokenization Principles & String Interpolation</a></p>
 
-                <p>MultiMarket Exploration & Traversal</p>
+                <p><a href="#MULTIMARKET">MultiMarket Exploration & Traversal</a></p>
 
                 <!--<div>
                     <p>Market Objects and their Traversal Character</p>
                 </div>-->
 
-                <p>Validation & Association Traversals</p>
+                <p><a href="#VALIDATION">Validation & Association Traversals</a></p>
                 <!--<p>Protocols for tokenization action potientals</p>-->
 
-                <p>Project Charters and Group Coordination</p>
+                <p><a href="#GROUPINTENTION">Project Charters and Group Coordination</a></p>
 
-                <p>Tokenization & Pattern Recognition</p>
+                <p><a href="#SYNTHETICTOKENIZATION">Tokenization & Pattern Recognition</a></p>
 
-                <div class="spacing-25"></div>
+            </div>
+        </div>
+    </div>
+    <div class="spacing-50"></div>
+</div>
+
+<div class="spacing-100"></div>
+
+<div id="about-section1">
+    <div class="spacing-50" id="CONEXAPI"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+
+
+
                 <div>
-                    <h4>Conex API</h4>
+                    <h4><b>Conex API</b></h4>
                     <h5>Filter & Search Parameters</h5>
                     <p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>
                     <div hljs hljs-language="javascript">
 var query = {
-    filter:{
+    filter:[{
         obj: param
-    },
+    }],
     limit: 10,
     skip: 10,
     sort: 'modelParam '+'DESC' || 'ASC'
 };</div>
                 </div>
-                <div class="spacing-10"></div>
+
+                <div class="spacing-25"></div>
 
                 <div>
                     <h4>Models & Endpoints</h4>
                 </div>
 
                 <div>
-                    <p><b>Action</b></p>
-                    <p style="color:gray;font-style:italic">This is the Action Model</p>
+                    <h4><b>Action</b></h4>
+                    <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model.</p>
+                    <div hljs hljs-language="javascript">
+var actionModel = {
+    address: {type: 'string'},
+    information: {type: 'json'}
+};</div>
+                    <p><b>get /api/action</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>App</b></p>
-                    <p style="color:gray;font-style:italic">This is the App Model</p>
+                    <h4><b>App</b></h4>
+                    <p style="color:gray;font-style:italic">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>
+                    <div hljs hljs-language="javascript">
+var appModel = {
+    address: {type: 'string'},
+    protocols: {}
+};</div>
+                    <p><b>get /api/app</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <!--VALIDATION WITH RESPECT TO TAGS ETC--> 
 
                 <div>
-                    <p><b>Assoication</b></p>
-                    <p style="color:gray;font-style:italic">This is the Association Model</p>
+                    <h4><b>Assoication</b></h4>
                     <p style="color:gray;font-style:italic">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time (Project <--> Task <--> Time).<br> Associations are computed though <a href="#">validation traversal</a>.</p>
                     <div hljs hljs-language="javascript">
 var associationModel = {
@@ -151,20 +184,15 @@ var associationModel = {
 
                     <img src="https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711">
                     <p>A =V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>
-
-                    <div class="spacing-10"></div>
-
-                    
                     <p><b>get /api/assoication</b></p>
 
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Block</b></p>
+                    <h4><b>Block</b></h4>
                     <p style="color:gray;font-style:italic">Blocks are machiene verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequental validated blocks of information.</p>
-                    <p><b>get /api/block</b></p>
                     <div hljs hljs-language="javascript">
 var blockModel = {
     txCount: {type: 'string'},
@@ -176,14 +204,14 @@ var blockModel = {
     nextBlock: {type: 'string'},
     size: {type: 'string'}
 };</div>
+                    <p><b>get /api/block</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Content</b></p>
+                    <h4><b>Content</b></h4>
                     <p style="color:gray;font-style:italic">Content is information. (with context)</p>
-                    <p><b>[get, post] /api/content</b></p>
                     <div hljs hljs-language="javascript">
 var contentModel = {
     id: {type: 'string'},
@@ -204,32 +232,42 @@ var contentModel = {
                         <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>
                         <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>
                         <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>
-                        <p><b>Associated Models:</b> Computed aia Association Traversal</p>
+                        <p><b>Associated Models:</b> Computed via Association Traversal</p>
                         <p><b>Reactions:</b> TBD </p>
                         <p><b>Creator:</b> Address, Member or Project, who created Content</p>
                         <p><b>CreatedAt:</b> Timestamp of Creation</p>
-
                     </div>
 
                     <div>
                         <p style="color:gray;font-style:italic">Creating a Content Query</p>
-
                         <div hljs hljs-language="javascript">
 var query = {
-    filter:{
-        id: is:,
-        title: contains:{},
-        tags: contains:{},
-        type: is:,
-        location:[lat,lng,distance],
-        associatedModels:contains:{},
-        reactions:contains:{},
-        createdAt:'lessThan':today,
-    },
+    filter:[{
+        id: 'equals': '',
+        title: 'contains': '',
+        tags: 'contains': '',
+        type: 'equals' : '',
+        location: [lat,lng,distance],
+        associatedModels: 'contains': {},
+        reactions: 'contains': {},
+        createdAt: 'lessThan': today,
+    }],
     limit: 1,
     skip:0,
     sort:'createdAt DESC',
 };</div>
+                        <p><b>[get, post] /api/content</b></p>
+                        <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
+
+                        <form role="form" ng-show="false">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
+                                <input class="form-control" ng-model="newQuery.limit" placeholder="Limit" type="number"> 
+                                <input class="form-control" ng-model="newQuery.skip" placeholder="Skip" type="number"> 
+                                <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
+                            </div>
+                        </form>
+
                         <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
                         <div class="spacing-5"></div>
 
@@ -240,30 +278,34 @@ var query = {
 
                 </div>
 
-                <div class="spacing-10"></div>
+
+
+                <!--TODO: DATA AND EVENTS
+
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Data</b></p>
+                    <h4><b>Data</b></h4>
                     <p style="color:gray;font-style:italic">Data is information. Data and Events information to information mapping.</p>
-                    <p><b>[get, post] /api/data</b></p>
                     <div hljs hljs-language="javascript">var dataModel = {};</div>
+                    <p><b>[get, post] /api/data</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Event</b></p>
+                    <h4><b>Event</b></h4>
                     <p style="color:gray;font-style:italic">This is the Event Model</p>
-                    <p><b>[get, post] /api/event</b></p>
                     <div hljs hljs-language="javascript">var eventModel = {};</div>
+                    <p><b>[get, post] /api/event</b></p>
                 </div>
+                -->
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Follower</b></p>
+                    <h4><b>Follower</b></h4>
                     <p style="color:gray;font-style:italic">Followers are .. </p>
-                    <p><b>[get, post] /api/follower</b></p>
                     <div hljs hljs-language="javascript">
 var followerModel = {
     followed: {
@@ -273,14 +315,14 @@ var followerModel = {
         model: 'user',
     }
 };</div>
+                    <p><b>[get, post] /api/follower</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Item</b></p>
+                    <h4><b>Item</b></h4>
                     <p style="color:gray;font-style:italic">Items are .. </p>
-                    <p><b>[get, post] /api/item</b></p>
                     <div hljs hljs-language="javascript">
 var itemModel = {
     title: {type: 'string'},
@@ -299,24 +341,27 @@ var itemModel = {
 
     user: {model: 'user'},
     owner: {type: 'json'}
-};</div>
+};</div>    
+                    <p><b>[get, post] /api/item</b></p>
+
                 </div>
 
-                <div class="spacing-10"></div>
-
+                <!--
+                <div class="spacing-50"></div>
                 <div>
-                    <p><b>Location</b></p>
+
+                    <h4><b>Location</b></h4>
                     <p style="color:gray;font-style:italic">This is the Location Model</p>
-                    <p><b>[get, post] /api/location</b></p>
                     <div hljs hljs-language="javascript">var locationModel = {};</div>
+                    <p><b>[get, post] /api/location</b></p>
                 </div>
+                -->
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Member</b></p>
+                    <h4><b>Member</b></h4>
                     <p style="color:gray;font-style:italic">This is the Member Model</p>
-                    <p><b>[get, post] /api/member</b></p>
                     <div hljs hljs-language="javascript">
 var memberModel = {
 
@@ -353,28 +398,28 @@ var memberModel = {
     passports: { collection: 'Passport', via: 'user' }
 
 };</div>
+                    <p><b>[get, post] /api/member</b></p>
                 </div>
 
-
-                 <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Motion</b></p>
+                    <h4><b>Motion</b></h4>
                     <p style="color:gray;font-style:italic">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action.</p>
-                    <p><b>[get,post] /api/motion</b></p>
                     <div hljs hljs-language="javascript">
 var motionModel = {
     string: {type: 'string'},
     protocols:{type:'json'},
     logic:{type:'json'},
     information:{type:'json'}
-};</div>
+};</div>        
+                    <p><b>[get,post] /api/motion</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Notification</b></p>
+                    <h4><b>Notification</b></h4>
                     <p style="color:gray;font-style:italic">This is the Notification Model. Notifications have privacy permission qualifiers.</p>
                     <p><b>get /api/notification</b></p>
                     <div hljs hljs-language="javascript">
@@ -386,33 +431,37 @@ var notificationModel = {
     priority: { type: 'string'},
     isRead: { type: 'boolean'}
 };</div>
+                    <p><b>get /api/notification</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Order</b></p>
+                    <h4><b>Order</b></h4>
                     <p style="color:gray;font-style:italic">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>
                     <p style="color:gray;font-style:italic">The Anatomy of an Order</p>
-                    <p><b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>
-                    <p><b>[get, post] /api/order</b></p>
                     <div hljs hljs-language="javascript">
 var orderModel = {
     creator: {type: 'string'},
-    user: {model: 'user'},
     type: {type: 'string'},
     setAlpha: {type:'json'},
     setBeta: {type:'json'},
     status: {type: 'string'},
 };</div>
+                    <div>
+                        <p><b>setAlpha</b>: [{assetIdentifier: amount}, ...]</p>
+                        <p><b>setBeta</b>: [{assetIdentifier: amount}, ...]</p>
+                        <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>
+                        <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>
+                    </div>
+                    <p><b>[get, post] /api/order</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Passport</b></p>
+                    <h4><b>Passport</b></h4>
                     <p style="color:gray;font-style:italic">This is the Passport Model. Passports are .. </p>
-                    <p><b>[get, post] /api/passport</b></p>
                     <div hljs hljs-language="javascript">
 var passportModel = {
     protocol: { type: 'alphanumeric', required: true },
@@ -421,16 +470,15 @@ var passportModel = {
     identifier: { type: 'string' },
     tokens: { type: 'json' },
     user: { model: 'User', required: true }
-};
-                    </div>
+};</div>
+                    <p><b>[get, post] /api/passport</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Project</b></p>
+                    <h4><b>Project</b></h4>
                     <p style="color:gray;font-style:italic">Projects are organized groups of members with self governing principles; a charter.</p>
-                    <p><b>[get, post] /api/project</b></p>
                     <div hljs hljs-language="javascript">
 var projectModel = {
     title: {type: 'string'},
@@ -444,49 +492,49 @@ var projectModel = {
     user: {model: 'user'},
     info: {type: 'json'},
 };</div>
+                    <p><b>[get, post] /api/project</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>ProjectCharter</b></p>
+                    <h4><b>ProjectCharter</b></h4>
                     <p style="color:gray;font-style:italic">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations from initial conditions to reputationatation decay.</p>
-                    <p><b>[get, post] /api/projectcharter</b></p>
                     <div hljs hljs-language="javascript">var projectCharterModel = {};</div>
+                    <p><b>[get, post] /api/projectcharter</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
                     <p><b>ProjectMember</b></p>
                     <p style="color:gray;font-style:italic">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>
-                    <p><b>[get, post] /api/projectmember</b></p>
                     <div hljs hljs-language="javascript">
 var projectMemberModel = {
     project: {model: 'project'},
     user: {model: 'user'},
 };</div>
+                    <p><b>[get, post] /api/projectmember</b></p>
                 </div>
                 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Protocol</b></p>
+                    <h4><b>Protocol</b></h4>
                     <p style="color:gray;font-style:italic">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>
-                    <p><b>[get, post] /api/protocol</b></p>
                     <div hljs hljs-language="javascript">
 //ABSTRACTION OF ABSTRACTION WORKING WITH CRE8 DECENTRALIZED VM
 var protocolModel = {
     //ANY COMPILABLE CODE
 };</div>
+                    <p><b>[get, post] /api/protocol</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Reaction</b></p>
+                    <h4><b>Reaction</b></h4>
                     <p style="color:gray;font-style:italic">Reaction is .. </p>
-                    <p><b>[get, post] /api/reaction</b></p>
                     <div hljs hljs-language="javascript">
 var reactionModel = {
     amount: {type: 'string'},
@@ -495,32 +543,50 @@ var reactionModel = {
     associatedModels: {type: 'json'},
     reactions: {type: 'json'}
 };</div>
+                    <p><b>[get, post] /api/reaction</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
                     <p><b>Search</b></p>
                     <p style="color:gray;font-style:italic">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>
-                    <p><b>get /api/search</b></p>
                     <div hljs hljs-language="javascript">
 var searchModel = {
-    filter:{
+    filter:[{
         obj: param
         model: 'CONTENT' //MEMBER,TASK,TIME,PROJECT...//model information is stored in model. 
-    },
+    }],
     limit: 10,
     skip: 0,
     sort: 'createdAt DESC'
 };</div>
+
+
+
+    <!--
+    $rootScope.searchQueryNav = {
+        assetsInput:[],
+        assetsOutput:[],
+        associations:[],
+        model:[],
+        locations:[],
+        query:[],
+        tags:[],
+        type:[],
+    };
+    -->
+
+
+
+                    <p><b>get /api/search</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Task</b></p>
+                    <h4><b>Task</b></h4>
                     <p style="color:gray;font-style:italic">Tasks are a relay of context. Layers of validation intention create connection to time. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>
-                    <p><b>[get, post] /api/task</b></p>
                     <div hljs hljs-language="javascript">
 var taskModel = {
     title: {type: 'string', required: true,},
@@ -531,16 +597,14 @@ var taskModel = {
     associatedModels: {type: 'json'},
     reactions: {type: 'json'}
 };</div>
+                    <p><b>[get, post] /api/task</b></p>
                 </div>
 
-
-
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Time</b></p>
+                    <h4><b>Time</b></h4>
                     <p style="color:gray;font-style:italic">Time & intention is the foundation of energy. Time is the base of CRE8.</p>
-                    <p><b>[get, post] /api/time</b></p>
                     <div hljs hljs-language="javascript">
 var timeModel = {;
     amount: {type: 'string'},
@@ -552,14 +616,14 @@ var timeModel = {;
     location: {type: 'json'},
     reactions: {type: 'json'}
 };</div>
+                    <p><b>[get, post] /api/time</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Token</b></p>
+                    <h4><b>Token</b></h4>
                     <p style="color:gray;font-style:italic">A token is a discrete piece of information with the following properties:</p>
-                    <p><b>get /api/token</b></p>
                     <div hljs hljs-language="javascript">
 //--> BALANCE MAPPING
 //--> INFORMATION MAPPING
@@ -570,12 +634,13 @@ var tokenModel = {
     logic:{type:'json'},
     information:{type:'json'}
 };</div>
+                    <p><b>get /api/token</b></p>
                 </div>
                 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Transaction</b></p>
+                    <h4><b>Transaction</b></h4>
                     <p style="color:gray;font-style:italic">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>
                     <div hljs hljs-language="javascript">
 var transactionModel = {
@@ -586,8 +651,7 @@ var transactionModel = {
     content: 'transation content'
 };</div>
 
-
-                     <p><b>[get, post] /api/transaction</b></p>
+                    <p><b>[get, post] /api/transaction</b></p>
                     <p>curl https://www.cre8.xyz/api/transaction?limit=1&skip=0</p>
 
                     <div>
@@ -609,24 +673,24 @@ var query = {
 
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Tx</b></p>
+                    <h4><b>Tx</b></h4>
                     <p style="color:gray;font-style:italic">Every state update in the CRE8 virtual machine is represented by a transaction or tx. Blocks are machine verified bundles of txs.</p>
-                    <p><b>get /api/tx</b></p>
                     <div hljs hljs-language="javascript">
 var txModel = {
     addressFrom: {type: 'string'},
     addressTo: {type: 'string'},
     data: {type: 'string'}
 };</div>
+                    <p><b>get /api/tx</b></p>
                 </div>
 
-                <div class="spacing-10"></div>
+                <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Validation</b></p>
+                    <h4><b>Validation</b></h4>
                     <p style="color:gray;font-style:italic">Like Votes, the building block for group agreement - consensus and decision making. 
                     <p style="color:gray;font-style:italic">The Anatomy of a Validation</p>
 
@@ -648,10 +712,16 @@ var validationModel = {
                         <p><b>Creator:</b> Address of Member who created Validation</p>
                     </div>
 
+                    <p>Reputation & Validation</p>
+
+                    <p></p>
+
+
                     <p>Interoperable Validation Types</p>
                     <p>Composite Validation (CRE8), Human Validated Proof of Work, Machine Validation, and App Specific Validation</p>
 
                     <!--CONTEXT-SPECIFIC x-->
+                    <p>Association Space</p>
                     <nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
                     <p style="color:gray;font-style:italic">Layered Recursion (Validation-Validation)</p>
 
@@ -713,7 +783,7 @@ var humanReadableValidationNFTModel = {
 
         <div class="row">
 
-            <div class="col-sm-12">
+            <div id="CRE8" class="col-sm-12">
                 <h2>CRE8</h2>          
                 <h3>Core Protocols</h3>          
                 <p style="color:gray;font-style:italic">Layered Adaptability</p>
@@ -774,35 +844,31 @@ var humanReadableValidationNFTModel = {
                 <p style="color:gray;font-style:italic">Order Book String Mapping</p>
                 <p style="color:gray;font-style:italic">Mapping of all positions</p>
 
-                <div class="spacing-25"></div>
-
+                <div id="TOKENIZATION" class="spacing-25"></div>
                 <h4>Tokenization</h4>
                 <p style="color:gray;font-style:italic">Tokenization from protocols.</p>
 
-                <div class="spacing-25"></div>
-
-                <h4>The Decentralized CRE8 Virtual Machine</h4>
+                <div id="CRE8VM" class="spacing-25"></div>
+                <h4 id="CRE8VM">The Decentralized CRE8 Virtual Machine</h4>
                 <p style="color:gray;font-style:italic">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>
                 <!--blocks, tx, mining, connected, transparency-->
 
                 <div class="spacing-25"></div>
-
                 <h4>The Peer Network & Transparency</h4>
                 <p style="color:gray;font-style:italic">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>
                 <a href="/blocks">Blocks</p>
                 <a href="/transparency">Peers</a>
                 <!--blocks, tx, mining, connected, transparency-->
-                <div class="spacing-25"></div>
 
+                <div id="VALIDATION" class="spacing-25"></div>
                 <h4>Association Traversal</h4>
                 <h5>Validation Traversal</h5>
                 <p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>
 
                 <p style="color:gray;font-style:italic">The Token Action Potientals (and protocols)</p>
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
-                <div class="spacing-25"></div>
-
-
+                
+                <div id="MULTIMARKET" class="spacing-25"></div>
                 <h4>MultiMarket Exploration & Traversal</h4>
                 <p style="color:gray;font-style:italic">The Multidimensional Token Market</p>
 
@@ -911,13 +977,13 @@ var orderBookTensor = {
 
                 <h5>Layered Deep Learning</h5>
                 <p style="color:gray;font-style:italic">Computed Higher Dimensional Combinatorials</p>
-                <div class="spacing-25"></div>
-
+                
+                <div id="GROUPINTENTION" class="spacing-25"></div>
                 <h4>Project Charters and Group Coordination</h4>
                 <p style="color:gray;font-style:italic">The Token Action Potientals</p>
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
-                <div class="spacing-25"></div>
-
+                
+                <div id="SYNTHETICTOKENIZATION" class="spacing-25"></div>
                 <h4>Tokenization and Pattern Recognition | Modular Validation</h4>
                 <p style="color:gray;font-style:italic">Deep Learning and video feeds to discreetly tokenize time</p>
                 <p style="color:gray;font-style:italic">Tokenization with a high degree of consensus on context through multidimensional validation</p>

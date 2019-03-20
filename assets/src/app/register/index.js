@@ -26,6 +26,7 @@ angular.module( 'conexus.register', [
 	if ($scope.currentUser){$location.path('/')}
 	$scope.newMember = {};
 	$scope.newOrder = [];
+    $scope.newOrderNEW = [];
 	$scope.showIntro = true;
 	$scope.showValue = false;
 	$scope.showDaily = false;
@@ -91,27 +92,6 @@ angular.module( 'conexus.register', [
         $scope.chartMapTime.series[0].data = $scope.dailyTimeValue.map(function(obj){return obj.percentage});
     };
     $scope.updateChartTime();
-
-    //lol
-    //do absolute
-    $scope.$watch('dailyTimeValue', function(newValue, oldValue){
-        if (newValue != oldValue){
-            $scope.dailyTimeValue.map(function(obj){if(!obj.percentage){obj.percentage=0} return obj});
-            var sum = 0;
-            for (x in $scope.dailyTimeValue){sum+=$scope.dailyTimeValue[x].percentage;}
-            var offset = 0;
-            if (sum > 100){
-                offset = (sum-100)/$scope.dailyTimeValue.length;
-                for (x in $scope.dailyTimeValue){
-                    if ($scope.dailyTimeValue[x].percentage-offset > 0){
-                        $scope.dailyTimeValue[x].percentage = $scope.dailyTimeValue[x].percentage-offset;
-                    }
-                    else{$scope.dailyTimeValue[x].percentage = 0}
-                }
-            }
-            $scope.updateChartTime();
-        }
-    }, true);
 
     $scope.chartMapTotal = {
         chart: {
@@ -191,6 +171,28 @@ angular.module( 'conexus.register', [
             $scope.updatePieTotal();
         }
     }, true);
+
+
+    //lol
+    //do absolute
+    $scope.$watch('dailyTimeValue', function(newValue, oldValue){
+        if (newValue != oldValue){
+            $scope.dailyTimeValue.map(function(obj){if(!obj.percentage){obj.percentage=0} return obj});
+            var sum = 0;
+            for (x in $scope.dailyTimeValue){sum+=$scope.dailyTimeValue[x].percentage;}
+            var offset = 0;
+            if (sum > 100){
+                offset = (sum-100)/$scope.dailyTimeValue.length;
+                for (x in $scope.dailyTimeValue){
+                    if ($scope.dailyTimeValue[x].percentage-offset > 0){
+                        $scope.dailyTimeValue[x].percentage = $scope.dailyTimeValue[x].percentage-offset;
+                    }
+                    else{$scope.dailyTimeValue[x].percentage = 0}
+                }
+            }
+            $scope.updateChartTime();
+        }
+    }, true);
     
     //lol
 	$scope.continue = function(page){
@@ -212,19 +214,52 @@ angular.module( 'conexus.register', [
 		}
 	};
 
+    //WORK!
 	$scope.createPosition = function(model){
         if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]}).indexOf(model) == -1){
-            //1 per hour
-        	$scope.newOrder.push(
+
+            //OBJ OR ARRAY?
+
+            var setAlpha = {
+                'UNIVERSALTOKEN':1
+            };
+            var setBeta = {};
+            setBeta[model+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
+
+            //var setAlpha = [
+            //    {name:'UNIVERSALTOKEN', amount:1}
+            //];
+            //var setBeta = [
+            //    {name:model+'+[ADDRESS]+SPONSOR', amount:3600}
+            //];
+
+        	$scope.newOrderNEW.push({
+                setAlpha:setAlpha,
+                setBeta:setBeta,
+                type:'ONBOOK',
+                status:'CONTINUAL'
+            });
+
+            //$scope.newOrderLIST.push({
+            //    order:[
+            //        [{string:'UNIVERSALTOKEN',amount:1}],
+            //        [{string:model+'+[ADDRESS]+SPONSOR',amount:3600}]
+            //    ],
+            //    type:'ONBOOK',
+            //    status:'CONTINUAL'
+            //});
+
+            $scope.newOrder.push(
                 [
                     {amount:1, identifier:'UNIVERSALTOKEN'}, 
-                    {amount:3600, identifier:model+'+ADDR+SPONSOR'}
+                    {amount:3600, identifier:model+'+ONMINT+SPONSOR+[ADDRESS]'}
                 ]
             );
+
         }
     };
 
-    //LEL
+    //LEL | WORK!
     $scope.registerUser = function(){
         $scope.newMember.order = $scope.newOrder;
         var data = JSON.stringify($scope.newMember);
@@ -243,20 +278,7 @@ angular.module( 'conexus.register', [
         });
     }
 
-    //ACTUALLY PACKAGE AND CREATE THE ORDER.. NEED TO UPDATE AUTH REGISTRATION PROCESS.....
-
-
-    //MAIN ARE PROTOCOLS
-    //CREate
-    //TIME
-    //TIME+TAG
-    //TASK
-    //TASK+TAG?
-	//TODO: BETTER | TAG STORAGE
-
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks]);
-
-    //TASK --> TIME ARTECTYPE --> PROJECT --> TASK ARTE
 
     $scope.loadTags = function(){
         $scope.tags = $scope.activity.map(function(obj){
@@ -276,7 +298,7 @@ angular.module( 'conexus.register', [
             }
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
+    };
     $scope.loadTags();
 
 }]);

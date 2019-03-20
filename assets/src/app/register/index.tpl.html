@@ -234,7 +234,13 @@
                     <h3>Value Map</h3>
                     <highchart config="chartMapTotal"></highchart>
                     <div class="spacing-5"></div>
-                    
+
+                    <div class="" ng-repeat="order in newOrderNEW">
+                        <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
+                        <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
+                    </div>
+
+
                     <div class="" ng-repeat="order in newOrder">
                         <span style="color:gray">{{order[0].amount}} <a href="/market/{{order[0].identifier}}">{{order[0].identifier}}</a> | <a href="/market/{{order[1].identifier}}">{{order[1].identifier}}</a> | <a href="/market/{{order[0].identifier}}/{{order[1].identifier}}">MarketPair</a></span>
                     </div>
@@ -263,6 +269,12 @@
         <div class="card" ng-show="newOrder.length > 0 && !showFinal">
             <div style="padding:16px;">
                 <h3>Value Map</h3>
+
+                <div class="" ng-repeat="order in newOrderNEW">
+                    <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
+                    <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
+                </div>
+
                 <div class="" ng-repeat="order in newOrder">
                     <span style="color:gray">{{order[0].amount}} <a href="/market/{{order[0].identifier}}">{{order[0].identifier}}</a> | <a href="/market/{{order[1].identifier}}">{{order[1].identifier}}</a> | <a href="/market/{{order[0].identifier}}/{{order[1].identifier}}">MarketPair</a></span>
                 </div>
