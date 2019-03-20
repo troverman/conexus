@@ -62,7 +62,15 @@ passport.protocols = require('./protocols');
  * @param {Object}   profile
  * @param {Function} next
  */
+
+
+
+
+//THIS IS OVERWRITTEN BY MODULAR PROTOCOLS IE LOCAL.JS
 passport.connect = function (req, query, profile, next) {
+
+  console.log('CONNECT', query, profile);
+
   var user = {}
     , provider;
 
@@ -106,42 +114,40 @@ passport.connect = function (req, query, profile, next) {
     return next(new Error('Neither a username nor email was available'));
   }
 
-  Passport.findOne({
-    provider   : provider
-  , identifier : query.identifier.toString()
-  }, function (err, passport) {
-    if (err) {
-      return next(err);
-    }
-    console.log(passport.tokens)
+  Passport.findOne({provider: provider, identifier: query.identifier.toString()}, function (err, passport) {
+
+    if (err) {return next(err);}
+
+    console.log(passport.tokens);
+
     if (!req.user) {
       // Scenario: A new user is attempting to sign up using a third-party
       //           authentication provider.
       // Action:   Create a new user and assign them a passport.
       if (!passport) {
+
         User.create(user, function (err, user) {
           if (err) {
             if (err.code === 'E_VALIDATION') {
-              if (err.invalidAttributes.email) {
-                req.flash('error', 'Error.Passport.Email.Exists');
-              }
-              else {
-                req.flash('error', 'Error.Passport.User.Exists');
-              }
+              if (err.invalidAttributes.email) {req.flash('error', 'Error.Passport.Email.Exists');}
+              else {req.flash('error', 'Error.Passport.User.Exists');}
             }
-
             return next(err);
           }
 
           query.user = user.id;
 
+          console.log('USER CREATED! OKAY')
+
           Passport.create(query, function (err, passport) {
             // If a passport wasn't created, bail out
-            if (err) {
-              return next(err);
-            }
+            if (err) {return next(err);}
+
+            console.log('PASSPORT CREATED! OKAY')
 
             next(err, user);
+
+
           });
         });
       }
@@ -249,6 +255,7 @@ passport.endpoint = function (req, res) {
  * @param {Function} next
  */
 passport.callback = function (req, res, next) {
+  console.log('CALLBACK')
   var provider = req.param('provider', 'local')
     , action   = req.param('action');
 
@@ -256,9 +263,11 @@ passport.callback = function (req, res, next) {
   // having it tied into everything else.
   if (provider === 'local' && action !== undefined) {
     if (action === 'register' && !req.user) {
+      console.log('REGISTER')
       this.protocols.local.register(req, res, next);
     }
     else if (action === 'connect' && req.user) {
+      console.log('CONNECT')
       this.protocols.local.connect(req, res, next);
     }
     else if (action === 'disconnect' && req.user) {

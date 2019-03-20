@@ -19,7 +19,7 @@ angular.module( 'conexus.register', [
         }
 	});
 }])
-.controller( 'RegisterCtrl', ['$location', '$scope', 'config', 'contentList', 'tasks', 'titleService', function RegisterController( $location, $scope, config, contentList, tasks, titleService ) {
+.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'config', 'contentList', 'tasks', 'titleService', function RegisterController( $http, $location, $rootScope, $scope, config, contentList, tasks, titleService ) {
 	titleService.setTitle('Register | CRE8.XYZ');
 	$scope.contentList = contentList;
 	$scope.currentUser = config.currentUser;
@@ -157,7 +157,6 @@ angular.module( 'conexus.register', [
         $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]});
         $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
         console.log( $scope.chartMapTotal)
-
     };
 
     $scope.pieTotal = {
@@ -214,7 +213,6 @@ angular.module( 'conexus.register', [
 	};
 
 	$scope.createPosition = function(model){
-
         if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]}).indexOf(model) == -1){
             //1 per hour
         	$scope.newOrder.push(
@@ -226,7 +224,24 @@ angular.module( 'conexus.register', [
         }
     };
 
+    //LEL
+    $scope.registerUser = function(){
+        $scope.newMember.order = $scope.newOrder;
+        var data = JSON.stringify($scope.newMember);
+        console.log($scope.newMember);
+        $rootScope.stateIsLoading = true;
+        $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
+            
+            console.log(newModel.data);
 
+            //MEG
+            config.currentUser = newModel.data;
+            $rootScope.currentUser = newModel.data;
+
+            $location.path('/');
+
+        });
+    }
 
     //ACTUALLY PACKAGE AND CREATE THE ORDER.. NEED TO UPDATE AUTH REGISTRATION PROCESS.....
 

@@ -1362,6 +1362,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h3>Documentation</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
     "\n" +
+    "                <p>The CRE8 Decentralized Peer Network & Virtual Machine</p>\n" +
+    "\n" +
+    "                <p>Interoperable Protocol & Application Design Architecture</p>\n" +
+    "\n" +
+    "                <p>CRE8 CORE Protocols</p>\n" +
+    "\n" +
     "                <p>Conex API: Models & Endpoints</p>\n" +
     "                <div ng-show=\"false\">\n" +
     "                    <p>Action</p>\n" +
@@ -1392,13 +1398,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Validation</p>\n" +
     "                </div>\n" +
     "\n" +
-    "                <p>Interoperable Protocol Design Architecture</p>\n" +
-    "\n" +
-    "                <p>CRE8 CORE Protocols</p>\n" +
-    "\n" +
     "                <p>Tokenization Principles & String Interpolation</p>\n" +
-    "\n" +
-    "                <p>The CRE8 Decentralized Peer Network & Virtual Machine</p>\n" +
     "\n" +
     "                <p>MultiMarket Exploration & Traversal</p>\n" +
     "\n" +
@@ -1407,6 +1407,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>-->\n" +
     "\n" +
     "                <p>Validation & Association Traversals</p>\n" +
+    "                <!--<p>Protocols for tokenization action potientals</p>-->\n" +
     "\n" +
     "                <p>Project Charters and Group Coordination</p>\n" +
     "\n" +
@@ -1677,6 +1678,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p><b>Order</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">The Anatomy of an Order</p>\n" +
+    "                    <p><b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>\n" +
     "                    <p><b>[get, post] /api/order</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var orderModel = {\n" +
@@ -1851,7 +1854,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>Transaction</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
     "                    <p><b>[get, post] /api/transaction</b></p>\n" +
-    "\n" +
+    "                    curl https://www.cre8.xyz/api/transaction?limit=1&skip=0\n" +
     "\n" +
     "                    <div>\n" +
     "\n" +
@@ -2035,39 +2038,109 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <h4>CRE8 VM</h4>\n" +
+    "                <h4>The Decentralized CRE8 Virtual Machine</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <h4>Peer Traversal</h4>\n" +
+    "                <h4>The Peer Network & Transparency</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
-    "                <!--<a href=\"/blocks\">Blocks</p>\n" +
-    "                <a href=\"/transparency\">Peers</p>-->\n" +
-    "\n" +
+    "                <a href=\"/blocks\">Blocks</p>\n" +
+    "                <a href=\"/transparency\">Peers</a>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
-    "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <h4>MultiMarket Traversal</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure</p>\n" +
+    "                <h4>Association Traversal</h4>\n" +
+    "                <h4>Validation Traversal</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals (and protocols)</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "\n" +
+    "                <h4>MultiMarket Exploration & Traversal</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The Multidimensional Token Market</p>\n" +
+    "\n" +
+    "                <!--VALUE MAP STRUCUTRE-->\n" +
+    "                <p style=\"color:gray;font-style:italic\">Discrete Order Structure / Value Map</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Sets Equalities & Statements of Exchange</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The Anatomy of an Order</p>\n" +
+    "                <!--SET VS DISCRETE; VS TYPES; VS CONTINUOUS ETC-->\n" +
+    "\n" +
+    "                <!-- AUTOMATICALLY SELL ONMANIFOLD TOKENS-->\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "orderBookTensor = [{\n" +
+    "var newOrder = [\n" +
+    "    {\n" +
+    "        setAlpha:{UNIVERSALTOKEN:1},\n" +
+    "        setBeta:{CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS:1}, \n" +
+    "        type:'ONBOOK', \n" +
+    "        status:'CONTINUAL'\n" +
+    "    },\n" +
+    "    {\n" +
+    "        setAlpha:{UNIVERSALTOKEN:20},\n" +
+    "        setBeta:{CRE8+TIME+REST+ONMINT+SPONSOR+ADDRESS:0.1}, \n" +
+    "        type:'ONBOOK', \n" +
+    "        status:'CONTINUAL'\n" +
+    "    },\n" +
+    "    {\n" +
+    "        setAlpha:{UNIVERSALTOKEN:15},\n" +
+    "        setBeta:{\n" +
+    "            CRE8+TIME+CHILL+ONMINT+SPONSOR+ADDRESS:2, \n" +
+    "            CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS:1\n" +
+    "        }, \n" +
+    "        type:'ONBOOK', \n" +
+    "        status:'CONTINUAL'\n" +
+    "    },\n" +
+    "...];</div>\n" +
+    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Matching Engine</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Priority of Prefrence for Higher Dimensional Orders; types</p>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <p style=\"color:gray;font-style:italic\">From Σ({}={}) --compute--> </p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure</p>\n" +
+    "                <!--<div hljs hljs-language=\"javascript\">\n" +
+    "var orderBookTensor = [{\n" +
     "    name: 'BTC',\n" +
     "    data:[\n" +
     "        {name:'LTC', bids:[], asks:[]},\n" +
     "        {name:'XMR', bids:[], asks:[]},\n" +
     "        {name:'XRP', bids:[], asks:[]},\n" +
     "    ],\n" +
-    "}];</div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The Multidimensional Token Market</p>\n" +
-    "                \n" +
+    "},\n" +
+    "...];</div>-->\n" +
+    "<!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->\n" +
+    "            <div hljs hljs-language=\"javascript\">\n" +
+    "var orderBookTensor = {\n" +
+    "    CRE8:{\n" +
+    "        BTC:{orderBook:[]},\n" +
+    "        ETH:{orderBook:[]},\n" +
+    "        LTC:{orderBook:[]},\n" +
+    "        XRP:{orderBook:[]},\n" +
+    "        ...\n" +
+    "    },\n" +
+    "    BTC:{\n" +
+    "        CRE8:{orderBook:[]},\n" +
+    "        ETH:{orderBook:[]},\n" +
+    "        LTC:{orderBook:[]},\n" +
+    "        XRP:{orderBook:[]},\n" +
+    "        ...\n" +
+    "    },\n" +
+    "    ...\n" +
+    "};</div>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <p style=\"color:gray;font-style:italic\">Tensor Structure of Assets; Layering and Braiding</p>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "                <!--<a href=\"/content/5c438e2090a86f150004ebda\">INFO</a>\n" +
     "                <iframe width=\"692\" height=\"389\" src=\"/content/5c438e2090a86f150004ebda\" frameborder=\"0\"></iframe>-->\n" +
     "\n" +
     "                <h5>Market Objects and their Traversal Character</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">For every n-object there exists nCm objects of rank m</p>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "                <p><b>Combinatorial 3</b></p>\n" +
     "                <img style=\"height:150px;\" src=\"images/comb3.png\">\n" +
     "                <img style=\"height:150px;\" src=\"images/comb3a.png\">\n" +
@@ -2095,18 +2168,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Combinatorials</p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <h4>Association Traversal</h4>\n" +
-    "                <h4>Validation Traversal</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "\n" +
     "                <h4>Project Charters and Group Coordination</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <h4>Tokenization and Pattern Recognition</h4>\n" +
+    "                <h4>Tokenization and Pattern Recognition | Modular Validation</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">Deep Learning and video feeds to discreetly tokenize time</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization with a high degree of consensus on context through multidimensional validation</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">TOKENIZING PUBLIC SPACES THOUGH AI</p>\n" +
@@ -3524,17 +3591,17 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
-    "                <form role=\"form\" method=\"post\" action=\"/auth/local\">\n" +
+    "                <form role=\"form\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\"> \n" +
+    "                        <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\" ng-model=\"newLogin.identifier\"> \n" +
     "                        <i class=\"fa fa-user\"></i>\n" +
     "                    </div>\n" +
     "                    <div class=\"form-group log-status\">\n" +
-    "                        <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\"> \n" +
+    "                        <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\" ng-model=\"newLogin.password\"> \n" +
     "                        <i class=\"fa fa-lock\"></i>\n" +
     "                    </div>\n" +
     "                    <div class=\"align-right\">\n" +
-    "                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign in</button>\n" +
+    "                        <button class=\"btn btn-default log-btn\" ng-click=\"login()\">Sign in</button>\n" +
     "                    </div>\n" +
     "                    <br><br>\n" +
     "                    <div class=\"social-log\">\n" +
@@ -3632,7 +3699,6 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		    		<p>+SPONSOR</p>\n" +
     "		    		<p>+FUTURE+TIME</p>\n" +
     "		    		<p>+OPTION+TIME</p>\n" +
-    "\n" +
     "\n" +
     "	    		</div>\n" +
     "	    	</div>\n" +
@@ -5627,17 +5693,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"row\">\n" +
     "                <div class=\"col-xs-10 col-xs-offset-1\">\n" +
     "                    <div class=\"login-form\">\n" +
-    "                        <form role=\"form\" method=\"post\" action=\"/auth/local\">\n" +
+    "                        <form role=\"form\">\n" +
     "                            <div class=\"form-group\">\n" +
-    "                                <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\"> \n" +
+    "                                <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\" ng-model=\"newLogin.identifier\"> \n" +
     "                                <i class=\"fa fa-user\"></i>\n" +
     "                            </div>\n" +
     "                            <div class=\"form-group log-status\">\n" +
-    "                                <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\"> \n" +
+    "                                <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\" ng-model=\"newLogin.password\"> \n" +
     "                                <i class=\"fa fa-lock\"></i>\n" +
     "                            </div>\n" +
     "                            <div class=\"align-right\">\n" +
-    "                                <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign in</button>\n" +
+    "                                <button class=\"btn btn-default log-btn\" ng-click=\"login()\">Sign in</button>\n" +
     "                            </div>\n" +
     "                            <br><br>\n" +
     "                            <div class=\"social-log\">\n" +
@@ -5654,24 +5720,34 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div style=\"text-align:center\">\n" +
     "                <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
+    "                \n" +
+    "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "                <div ng-show=\"currentUser\" ng-if=\"false\">\n" +
+    "                    <div class=\"spacing-25\"></div>\n" +
+    "                    <img style=\"height:75px;width:75px;border-radius:100%\" ng-src=\"{{currentUser.avatarUrl}}\">\n" +
+    "                    <h3 class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h3>\n" +
+    "                </div>\n" +
+    "\n" +
     "                <form style=\"padding:15px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "                    <div class=\"form-group\">\n" +
     "                        <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
     "                    </div>\n" +
     "                </form>\n" +
+    "\n" +
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
-    "                <h2 class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/discover\">Discover</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/market\">Market</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/projects\">Projects</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:16px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/notifications\"><span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/account\">Settings</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/logout\">Logout</a></h2>\n" +
-    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/login\">Login</a></h2>\n" +
-    "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:16px;\"><a href=\"/register\">Register</a></h2>\n" +
+    "                <h2 ng-if=\"true\" class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/discover\">Discover</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/projects\">Projects</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/notifications\"><span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/account\">Settings</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/logout\">Logout</a></h2>\n" +
+    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/login\">Login</a></h2>\n" +
+    "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:12px;\"><a href=\"/register\">Register</a></h2>\n" +
     "                <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
     "\n" +
     "            </div>\n" +
@@ -8593,12 +8669,12 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
+    "                    <form role=\"form\">\n" +
     "                        <div class=\"form-group\">\n" +
     "                            <input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
     "                            <input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
     "                            <input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
-    "                            <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
+    "                            <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
     "                        </div>\n" +
     "                    </form>\n" +
     "                </div>\n" +
@@ -8624,22 +8700,11 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
-    "                <form role=\"form\" method=\"post\" action=\"/auth/local/register\">\n" +
-    "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" name=\"email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
-    "                        <i class=\"fa fa-user\"></i>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" name=\"username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
-    "                        <i class=\"fa fa-user\"></i>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"form-group log-status\">\n" +
-    "                        <input class=\"form-control\" name=\"password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
-    "                        <i class=\"fa fa-lock\"></i>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"align-right\">\n" +
-    "                        <button class=\"btn btn-default log-btn\" type=\"submit\" value=\"submit\">Sign up</button>\n" +
-    "                    </div>\n" +
+    "                <form role=\"form\">\n" +
+    "                    <input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"> \n" +
+    "                    <input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\"> \n" +
+    "                    <input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
     "                    <br><br>\n" +
     "                    <div class=\"social-log\">\n" +
     "                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +

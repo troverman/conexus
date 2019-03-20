@@ -1,13 +1,13 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', 'config', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, config, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
-    $scope.currentUser = config.currentUser;
+.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'config', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, config, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
     $scope.chart = {};
     $scope.confirm = {};
     $scope.inputVector = [];
     $scope.newContent = {};
     $scope.newItem = {};
+    $scope.newLogin = {};
     $scope.newOrder = {};
     $scope.newProject = {};
     $scope.newReaction = {};
@@ -26,8 +26,8 @@ angular.module( 'conexus.nav', [
     $scope.validationColumnRender = {};
 
     //$rootScope.currentUser = config.currentUser;
+    //$scope.currentUser = config.currentUser;
 
-   
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -749,7 +749,7 @@ angular.module( 'conexus.nav', [
             chart: {zoomType: 'x'},
             series: [{
                 id: 'Reputation',
-                type: 'bar',
+                type: 'column',
                 name: 'Reputation',
                 data: []
             }],
@@ -1160,6 +1160,19 @@ angular.module( 'conexus.nav', [
 
         }
         else{$mdSidenav('login').toggle()}
+    };
+
+    $scope.login = function(){
+        var data = JSON.stringify($scope.newLogin);
+        console.log($scope.newLogin)
+        $http({method:'POST', url:'/auth/local', data:data}).then(function(newModel){
+            console.log(newModel.data);
+            //MEG
+            config.currentUser = newModel.data;
+            $rootScope.currentUser = newModel.data;
+            $location.path('/');
+            $window.location.reload();
+        });
     };
 
     $scope.loginToggle = function(){

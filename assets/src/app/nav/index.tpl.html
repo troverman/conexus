@@ -304,17 +304,17 @@
             <div class="row">
                 <div class="col-xs-10 col-xs-offset-1">
                     <div class="login-form">
-                        <form role="form" method="post" action="/auth/local">
+                        <form role="form">
                             <div class="form-group">
-                                <input class="form-control" name="identifier" placeholder="Email or Username" title="Username" type="text"> 
+                                <input class="form-control" name="identifier" placeholder="Email or Username" title="Username" type="text" ng-model="newLogin.identifier"> 
                                 <i class="fa fa-user"></i>
                             </div>
                             <div class="form-group log-status">
-                                <input class="form-control" type="password" name="password" placeholder="Password" title="password"> 
+                                <input class="form-control" type="password" name="password" placeholder="Password" title="password" ng-model="newLogin.password"> 
                                 <i class="fa fa-lock"></i>
                             </div>
                             <div class="align-right">
-                                <button class="btn btn-default log-btn" type="submit" value="submit">Sign in</button>
+                                <button class="btn btn-default log-btn" ng-click="login()">Sign in</button>
                             </div>
                             <br><br>
                             <div class="social-log">
@@ -331,24 +331,34 @@
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div style="text-align:center">
                 <!--<i ng-click="sideNavToggle()" class="fa fa-cross"></i>-->
+                
+
                 <div class="spacing-25"></div>
+
+                <div ng-show="currentUser" ng-if="false">
+                    <div class="spacing-25"></div>
+                    <img style="height:75px;width:75px;border-radius:100%" ng-src="{{currentUser.avatarUrl}}">
+                    <h3 class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h3>
+                </div>
+
                 <form style="padding:15px;" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
                     <div class="form-group">
                         <input class="form-control" style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="">
                     </div>
                 </form>
+
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
-                <h2 class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
-                <h2 class="nav-links" style="padding:16px;"><a href="/discover">Discover</a></h2>
-                <h2 class="nav-links" style="padding:16px;"><a href="/market">Market</a></h2>
-                <h2 class="nav-links" style="padding:16px;"><a href="/marketplace">Marketplace</a></h2>
-                <h2 class="nav-links" style="padding:16px;"><a href="/projects">Projects</a></h2>
-                <h2 class="nav-links" style="padding:16px;"><a href="/tasks">Tasks</a></h2>
-                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/notifications"><span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a></h2>
-                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/account">Settings</a></h2>
-                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="/logout">Logout</a></h2>
-                <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/login">Login</a></h2>
-                <h2 ng-show="!currentUser"class="nav-links" style="padding:16px;"><a href="/register">Register</a></h2>
+                <h2 ng-if="true" class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/discover">Discover</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/market">Market</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/marketplace">Marketplace</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/projects">Projects</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/tasks">Tasks</a></h2>
+                <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/notifications"><span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a></h2>
+                <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/account">Settings</a></h2>
+                <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/logout">Logout</a></h2>
+                <h2 ng-show="!currentUser" class="nav-links" style="padding:12px;"><a href="/login">Login</a></h2>
+                <h2 ng-show="!currentUser"class="nav-links" style="padding:12px;"><a href="/register">Register</a></h2>
                 <a href="/"><img style="width:200px" src="images/hyper.gif"></a>
 
             </div>

@@ -82,7 +82,6 @@ angular.module( 'conexus.market', [
 
     //GET SETS --> SORT BY NUMBER OF SETBETA OBJKEY COUNT
 
-
     for (x in $scope.orders){
 
         //$scope.orders[x].setAlpha

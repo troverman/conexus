@@ -11,8 +11,19 @@ angular.module( 'conexus.login', [
 		}
 	});
 }])
-.controller( 'LoginCtrl', ['$location', '$scope', 'config', 'titleService', function LoginController( $location, $scope, config, titleService ) {
+.controller( 'LoginCtrl', ['$http','$location', '$rootScope', '$scope', 'config', 'titleService', function LoginController( $http, $location, $rootScope, $scope, config, titleService ) {
 	titleService.setTitle('Login | CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
 	if ($scope.currentUser){$location.path('/')}
+	//CRAETES SESSION WITH SERVER
+	$scope.login = function(){
+		var data = JSON.stringify($scope.newLogin);
+		$http({method:'POST', url:'/auth/local', data:data}).then(function(newModel){
+            console.log(newModel.data);
+            //MEG
+            config.currentUser = newModel.data;
+            $rootScope.currentUser = newModel.data;
+            $location.path('/');
+        });
+	};
 }]);

@@ -22,30 +22,59 @@ var validator = require('validator');
  * @param {Object}   res
  * @param {Function} next
  */
-exports.register = function (req, res, next) {
-  var email    = req.param('email')
-    , username = req.param('username')
-    , password = req.param('password')
 
-  if (!email) {
+ //TODO: YEAH.. A LOT
+exports.register = function (req, res, next) {
+
+  console.log('LOCAL REGISTER');
+
+  var newMember = {
+    email:req.param('email'),
+    username:req.param('username'),
+  };
+
+  if (req.param('firstName')){
+    newMember.firstName = req.param('firstName');
+  }
+  if (req.param('firstName')){
+    newMember.lastName = req.param('lastName');
+  }
+  if (req.param('dateOfBirth')){
+    newMember.dateOfBirth  = req.param('dateOfBirth');
+  }
+  if (req.param('height')){
+    newMember.height = req.param('height');
+  }
+  if (req.param('eyeColor')){
+    newMember.eyeColor = req.param('eyeColor');
+  }
+  if (req.param('address')){
+    newMember.address = req.param('address');
+  }
+  if (req.param('dna')){
+    newMember.dna = req.param('dna');
+  }
+
+
+  //HAK
+  newMember.balance = {cre8:8, UNIVERSALTOKEN:1};
+  newMember.reputation = {cre8:8, UNIVERSALTOKEN:1};
+
+
+  if (!newMember.email) {
     req.flash('error', 'Error.Passport.Email.Missing');
     return next(new Error('No email was entered.'));
   }
-
-  if (!username) {
+  if (!newMember.username) {
     req.flash('error', 'Error.Passport.Username.Missing');
     return next(new Error('No username was entered.'));
   }
-
-  if (!password) {
+  if (!req.param('password')) {
     req.flash('error', 'Error.Passport.Password.Missing');
     return next(new Error('No password was entered.'));
   }
 
-  User.create({
-    username : username
-  , email    : email
-  }, function (err, user) {
+  User.create(newMember, function (err, user) {
     if (err) {
       if (err.code === 'E_VALIDATION') {
         if (err.invalidAttributes.email) {
@@ -54,17 +83,19 @@ exports.register = function (req, res, next) {
           req.flash('error', 'Error.Passport.User.Exists');
         }
       }
-
       return next(err);
     }
 
+    console.log('CREATE USER LOCAL')
+
     Passport.create({
       protocol : 'local'
-    , password : password
+    , password : req.param('password')
     , user     : user.id
     }, function (err, passport) {
       if (err) {
         if (err.code === 'E_VALIDATION') {
+          console.log('PASSWORD')
           req.flash('error', 'Error.Passport.Password.Invalid');
         }
 
@@ -73,7 +104,23 @@ exports.register = function (req, res, next) {
         });
       }
 
-      next(null, user);
+      console.log('CREATE PASSPORT LOCAL');
+
+      if (req.body.order && req.body.order.length > 0){
+        console.log('THERE IS AN ORDER!', req.body.order)
+
+        //UPDATE ORDER.. VALUE MAP SPECIFICATIONS
+        //
+        var orderModel = {};
+        //Order.create(orderModel).then(function(){
+          next(null, user);
+        //});
+      }
+      else{
+        next(null, user);
+      }
+      
+
     });
   });
 };
@@ -100,6 +147,8 @@ exports.connect = function (req, res, next) {
     if (err) {
       return next(err);
     }
+
+    console.log('THE TRUE CONNECT')
 
     if (!passport) {
       Passport.create({

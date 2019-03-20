@@ -182,7 +182,7 @@ module.exports = {
 					priority:77,
 				};
 
-				Notification.create(notificationModel).then(function(){
+				Notification.create(notificationModel).then(function(notification){
 					Notification.publishCreate(notification);
 				});
 

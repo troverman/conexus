@@ -46,6 +46,12 @@
                 <h3>Documentation</h3>
                 <p style="color:gray;font-style:italic">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>
 
+                <p>The CRE8 Decentralized Peer Network & Virtual Machine</p>
+
+                <p>Interoperable Protocol & Application Design Architecture</p>
+
+                <p>CRE8 CORE Protocols</p>
+
                 <p>Conex API: Models & Endpoints</p>
                 <div ng-show="false">
                     <p>Action</p>
@@ -76,13 +82,7 @@
                     <p>Validation</p>
                 </div>
 
-                <p>Interoperable Protocol Design Architecture</p>
-
-                <p>CRE8 CORE Protocols</p>
-
                 <p>Tokenization Principles & String Interpolation</p>
-
-                <p>The CRE8 Decentralized Peer Network & Virtual Machine</p>
 
                 <p>MultiMarket Exploration & Traversal</p>
 
@@ -91,6 +91,7 @@
                 </div>-->
 
                 <p>Validation & Association Traversals</p>
+                <!--<p>Protocols for tokenization action potientals</p>-->
 
                 <p>Project Charters and Group Coordination</p>
 
@@ -361,6 +362,8 @@ var notificationModel = {
                 <div>
                     <p><b>Order</b></p>
                     <p style="color:gray;font-style:italic">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>
+                    <p style="color:gray;font-style:italic">The Anatomy of an Order</p>
+                    <p><b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>
                     <p><b>[get, post] /api/order</b></p>
                     <div hljs hljs-language="javascript">
 var orderModel = {
@@ -535,7 +538,7 @@ var tokenModel = {
                     <p><b>Transaction</b></p>
                     <p style="color:gray;font-style:italic">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>
                     <p><b>[get, post] /api/transaction</b></p>
-
+                    curl https://www.cre8.xyz/api/transaction?limit=1&skip=0
 
                     <div>
 
@@ -719,39 +722,109 @@ var humanReadableValidationNFTModel = {
 
                 <div class="spacing-25"></div>
 
-                <h4>CRE8 VM</h4>
+                <h4>The Decentralized CRE8 Virtual Machine</h4>
                 <p style="color:gray;font-style:italic">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>
                 <!--blocks, tx, mining, connected, transparency-->
 
                 <div class="spacing-25"></div>
 
-                <h4>Peer Traversal</h4>
+                <h4>The Peer Network & Transparency</h4>
                 <p style="color:gray;font-style:italic">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>
-                <!--<a href="/blocks">Blocks</p>
-                <a href="/transparency">Peers</p>-->
-
+                <a href="/blocks">Blocks</p>
+                <a href="/transparency">Peers</a>
                 <!--blocks, tx, mining, connected, transparency-->
-
                 <div class="spacing-25"></div>
 
-                <h4>MultiMarket Traversal</h4>
-                <p style="color:gray;font-style:italic">An Immutable Object Structure</p>
+                <h4>Association Traversal</h4>
+                <h4>Validation Traversal</h4>
+                <p style="color:gray;font-style:italic">The Token Action Potientals (and protocols)</p>
+                <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
+                <div class="spacing-25"></div>
+
+
+                <h4>MultiMarket Exploration & Traversal</h4>
+                <p style="color:gray;font-style:italic">The Multidimensional Token Market</p>
+
+                <!--VALUE MAP STRUCUTRE-->
+                <p style="color:gray;font-style:italic">Discrete Order Structure / Value Map</p>
+                <p style="color:gray;font-style:italic">Sets Equalities & Statements of Exchange</p>
+                <p style="color:gray;font-style:italic">The Anatomy of an Order</p>
+                <!--SET VS DISCRETE; VS TYPES; VS CONTINUOUS ETC-->
+
+                <!-- AUTOMATICALLY SELL ONMANIFOLD TOKENS-->
                 <div hljs hljs-language="javascript">
-orderBookTensor = [{
+var newOrder = [
+    {
+        setAlpha:{UNIVERSALTOKEN:1},
+        setBeta:{CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS:1}, 
+        type:'ONBOOK', 
+        status:'CONTINUAL'
+    },
+    {
+        setAlpha:{UNIVERSALTOKEN:20},
+        setBeta:{CRE8+TIME+REST+ONMINT+SPONSOR+ADDRESS:0.1}, 
+        type:'ONBOOK', 
+        status:'CONTINUAL'
+    },
+    {
+        setAlpha:{UNIVERSALTOKEN:15},
+        setBeta:{
+            CRE8+TIME+CHILL+ONMINT+SPONSOR+ADDRESS:2, 
+            CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS:1
+        }, 
+        type:'ONBOOK', 
+        status:'CONTINUAL'
+    },
+...];</div>
+
+                <div class="spacing-5"></div>
+                <p style="color:gray;font-style:italic">Matching Engine</p>
+                <p style="color:gray;font-style:italic">Priority of Prefrence for Higher Dimensional Orders; types</p>
+                <div class="spacing-5"></div>
+
+                <p style="color:gray;font-style:italic">From Σ({}={}) --compute--> </p>
+                <p style="color:gray;font-style:italic">An Immutable Object Structure</p>
+                <!--<div hljs hljs-language="javascript">
+var orderBookTensor = [{
     name: 'BTC',
     data:[
         {name:'LTC', bids:[], asks:[]},
         {name:'XMR', bids:[], asks:[]},
         {name:'XRP', bids:[], asks:[]},
     ],
-}];</div>
-                <p style="color:gray;font-style:italic">The Multidimensional Token Market</p>
-                
+},
+...];</div>-->
+<!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->
+            <div hljs hljs-language="javascript">
+var orderBookTensor = {
+    CRE8:{
+        BTC:{orderBook:[]},
+        ETH:{orderBook:[]},
+        LTC:{orderBook:[]},
+        XRP:{orderBook:[]},
+        ...
+    },
+    BTC:{
+        CRE8:{orderBook:[]},
+        ETH:{orderBook:[]},
+        LTC:{orderBook:[]},
+        XRP:{orderBook:[]},
+        ...
+    },
+    ...
+};</div>
+                <div class="spacing-5"></div>
+
+                <p style="color:gray;font-style:italic">Tensor Structure of Assets; Layering and Braiding</p>
+                <div class="spacing-5"></div>
+
                 <!--<a href="/content/5c438e2090a86f150004ebda">INFO</a>
                 <iframe width="692" height="389" src="/content/5c438e2090a86f150004ebda" frameborder="0"></iframe>-->
 
                 <h5>Market Objects and their Traversal Character</h5>
                 <p style="color:gray;font-style:italic">For every n-object there exists nCm objects of rank m</p>
+                <div class="spacing-5"></div>
+
                 <p><b>Combinatorial 3</b></p>
                 <img style="height:150px;" src="images/comb3.png">
                 <img style="height:150px;" src="images/comb3a.png">
@@ -779,18 +852,12 @@ orderBookTensor = [{
                 <p style="color:gray;font-style:italic">Computed Higher Dimensional Combinatorials</p>
                 <div class="spacing-25"></div>
 
-                <h4>Association Traversal</h4>
-                <h4>Validation Traversal</h4>
-                <p style="color:gray;font-style:italic">The Token Action Potientals</p>
-                <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
-                <div class="spacing-25"></div>
-
                 <h4>Project Charters and Group Coordination</h4>
                 <p style="color:gray;font-style:italic">The Token Action Potientals</p>
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
                 <div class="spacing-25"></div>
 
-                <h4>Tokenization and Pattern Recognition</h4>
+                <h4>Tokenization and Pattern Recognition | Modular Validation</h4>
                 <p style="color:gray;font-style:italic">Deep Learning and video feeds to discreetly tokenize time</p>
                 <p style="color:gray;font-style:italic">Tokenization with a high degree of consensus on context through multidimensional validation</p>
                 <p style="color:gray;font-style:italic">TOKENIZING PUBLIC SPACES THOUGH AI</p>
