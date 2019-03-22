@@ -738,7 +738,11 @@ angular.module( 'conexus.member', [
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {
     titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.followers = followers;
+    //HAK
+    $scope.followers = followers.map(function(obj){
+        obj.user = obj.follower;
+        return obj;
+    });
 
     $scope.search = function(){};
 
@@ -760,7 +764,11 @@ angular.module( 'conexus.member', [
 .controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'following', 'FollowerModel', 'lodash', 'titleService', function MemberFollowingController($sailsSocket, $scope, $stateParams, config, following, FollowerModel, lodash, titleService) {
     titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.following = following;
+    //HAK
+    $scope.following = following.map(function(obj){
+        obj.user = obj.followed;
+        return obj;
+    });
 
     $scope.search = function(){};
 

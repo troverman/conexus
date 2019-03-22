@@ -224,7 +224,7 @@ angular.module( 'conexus.register', [
                 'UNIVERSALTOKEN':1
             };
             var setBeta = {};
-            setBeta[model+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
+            setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
 
             //var setAlpha = [
             //    {name:'UNIVERSALTOKEN', amount:1}
@@ -252,7 +252,7 @@ angular.module( 'conexus.register', [
             $scope.newOrder.push(
                 [
                     {amount:1, identifier:'UNIVERSALTOKEN'}, 
-                    {amount:3600, identifier:model+'+ONMINT+SPONSOR+[ADDRESS]'}
+                    {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'}
                 ]
             );
 
@@ -261,7 +261,7 @@ angular.module( 'conexus.register', [
 
     //LEL | WORK!
     $scope.registerUser = function(){
-        $scope.newMember.order = $scope.newOrder;
+        $scope.newMember.order = $scope.newOrderNEW;
         var data = JSON.stringify($scope.newMember);
         console.log($scope.newMember);
         $rootScope.stateIsLoading = true;

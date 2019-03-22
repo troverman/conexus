@@ -14,6 +14,9 @@ angular.module( 'conexus.members', [
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome('', '', 1000, 0, 'createdAt DESC');
             }],
+            //followers: ['FollowerModel', 'config', function(FollowerModel, config) {
+            //    return FollowerModel.getFollowing(config.currentUser);
+            //}],
         }
 	});
 }])
@@ -24,6 +27,15 @@ angular.module( 'conexus.members', [
     $scope.members = members;
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;
+
+    //$scope.followers = $scope.followers.map(function(obj){return obj.followed});
+    $scope.members.map(function(obj){
+        //var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+        //if (index != -1){obj.isFollowing = true;}
+        //if (index == -1){obj.isFollowing = false;}
+        obj.isFollowing = false;
+        return obj;
+    });
     
     //DEPRECIATE 'TOTAL WORK'
     $scope.sortText = {'totalWork DESC':'Total Reputation','createdAt DESC':'Date Joined'}

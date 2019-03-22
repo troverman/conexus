@@ -15,11 +15,17 @@ module.exports = {
 
 	getSome: function(req, res) {
 
-		var limit = req.query.limit;
-		var skip = req.query.skip;
-		var sort = req.query.sort;
-		
+		var limit = req.query.limit || 10;
+		var skip = req.query.skip || 0;
+		var sort = req.query.sort || 'createdAt DESC';
+
+		//var filter = req.query.filter;
+
 		Order.watch(req);
+
+		console.log(req.query)
+
+		//IDSET DEPRECIATE...
 
 		if(req.query.identiferSet && req.query.identiferSet1){
 			var identiferSet = req.query.identiferSet;
@@ -72,38 +78,34 @@ module.exports = {
 		}
 
 		else{
-			res.json({});
-			/*Order.find({})
+			Order.find({})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
 			.then(function(models) {
 				res.json(models);
-			});*/
+			});
 		}
 		
 	},
 
 	create: function (req, res) {
+		
 		var model = {
 
 			setAlpha: req.param('setAlpha'),
 			setBeta: req.param('setBeta'),
 
-			amountSet: req.param('amountSet'),
-			identiferSet: req.param('identiferSet'),
-			amountSet1: req.param('amountSet1'),
-			identiferSet1: req.param('identiferSet1'),
-
+			status: req.param('status'),
 			type: req.param('type'),
 
-			creator: req.param('creator'), //TODO: CHANGE TO CREATOR | ADDRESS | IE ORGS MAKING ORDERS
-			user: req.param('user'), //TODO: CHANGE TO CREATOR | ADDRESS | IE ORGS MAKING ORDERS
+			creator: req.param('creator'),
+			user: req.param('user'),
+
+			reactions:{plus:0,minus:0},
 
 		};
-		//PATCH
-		model.reactions = {plus:0,minus:0};
+
 		Order.create(model)
 		.exec(function(err, order) {
 			if (err) {return console.log(err);}

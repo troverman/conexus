@@ -6,7 +6,7 @@ module.exports = {
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort;
+		var sort = req.query.sort || 'createdAt DESC';
 		var project = req.query.project;
 		var task = req.query.task;
 		var user = req.query.user;
@@ -170,7 +170,18 @@ module.exports = {
 			});
 		}
 
-		else{res.json();}
+		else{
+
+			Validation.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Validation.subscribe(req, models);
+				res.json(models);
+			});
+
+		}
 
 	},
 

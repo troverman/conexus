@@ -47,17 +47,30 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4 col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
-            <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(member)">
-                <div class="member-card-image" style="background-image: url('{{member.coverUrl}}')">
-                    <a ng-click="$event.stopPropagation();" href="member/{{member.username}}"><img ng-src="{{member.avatarUrl}}" err-src="/images/avatar.png"></a>
+
+        <div class="col-lg-4 col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
+
+            <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
+                <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
+                    <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                 </div>
-                <div class="member-card-info">
-                    <h4><a ng-click="$event.stopPropagation();" href="member/{{member.username}}">{{member.username}}</a></h4>
-                    <p style="color:gray">{{member.status}} offline</p>
-                    <p style="color:gray">Total Reputation | {{member.totalWork}}</p>
+                <div class="member-card-info" style="padding:16px;height:auto">
+                    
+                    <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
+                    
+                    <p style="font-size:13px;"><a href="/member/{{item.username}}/projects">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following">{{item.followingCount || 0}} Following</a>
+                    
+                    <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
+                    <p style="color:gray">{{currentUser.status}} Offline</p>
+                    
+                    <button class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Send Tokens</button>
+
+                    <button ng-show="!item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
+                    <button ng-show="item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Unfollow</button>
+
                 </div>
             </div>
+
         </div>
     </div>
 

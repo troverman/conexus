@@ -5,10 +5,11 @@
 		    <div class="member-card-image" style="background-image: url('{{member.followed.coverUrl}}')">
 		        <a ng-click="$event.stopPropagation();" href="member/{{member.followed.username}}"><img ng-src="{{member.followed.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
-		    <div class="member-card-info">
+            <div class="member-card-info" style="padding:16px;height:auto">
 		        <h4><a ng-click="$event.stopPropagation();" href="member/{{member.followed.username}}">{{member.followed.username}}</a></h4>
-		        <p style="color:gray">{{member.followed.status}} offline</p>
+		        <p style="font-size:13px;"><a href="/member/{{member.followed.username}}/projects">{{member.followed.projectCount || 0}} Projects</a> | <a href="/member/{{member.followed.username}}/followers">{{member.followed.followerCount || 0}} Followers</a> | <a href="/member/{{member.followed.username}}/following">{{member.followed.followingCount || 0}} Following</a>
 		        <p style="color:gray">Total Reputation | {{member.followed.totalWork}}</p>
+		        <p style="color:gray">{{member.followed.status}} Offline</p>
 		    </div>
 		</div>
 	</div>

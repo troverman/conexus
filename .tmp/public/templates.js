@@ -1347,6 +1347,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            <div class=\"col-sm-6\">\n" +
     "                <h2>Developers</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
+    "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
@@ -1423,7 +1427,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "     <div class=\"spacing-50\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
@@ -1449,9 +1453,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    skip: 10,\n" +
     "    sort: 'modelParam '+'DESC' || 'ASC'\n" +
     "};</div>\n" +
+    "\n" +
+    "\n" +
+    "                <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
+    "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4>Models & Endpoints</h4>\n" +
@@ -1487,7 +1495,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Assoication</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time (Project <--> Task <--> Time).<br> Associations are computed though <a href=\"#\">validation traversal</a>.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
+    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#\">validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var associationModel = {\n" +
     "    associatedModels: [\n" +
@@ -1500,7 +1510,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "};</div>\n" +
     "\n" +
     "                    <img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
-    "                    <p>A =V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
     "                    <p><b>get /api/assoication</b></p>\n" +
     "\n" +
     "                </div>\n" +
@@ -1509,7 +1519,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Block</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Blocks are machiene verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequental validated blocks of information.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequential validated blocks of information.</p>\n" +
+    "                    <p>MERKLE ROOT INFORMATION HERE!</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var blockModel = {\n" +
     "    txCount: {type: 'string'},\n" +
@@ -1521,6 +1532,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    nextBlock: {type: 'string'},\n" +
     "    size: {type: 'string'}\n" +
     "};</div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "\n" +
+    "                       <p><b>txCount:</b> 'integer' the number of transactions in the block</p> \n" +
+    "                       <p><b>height:</b> 'integer' </p> \n" +
+    "                       <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> \n" +
+    "                       <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> \n" +
+    "                       <p><b>merkleRoot:</b> 'integer' TBD</p> \n" +
+    "                       <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> \n" +
+    "                       <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> \n" +
+    "                       <p><b>size:</b> 'integer' the data size of the block</p> \n" +
+    "\n" +
+    "                    </div>\n" +
     "                    <p><b>get /api/block</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1625,6 +1649,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">Followers are .. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var followerModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    followed: {\n" +
     "        model: 'user',\n" +
     "    },\n" +
@@ -1632,6 +1657,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        model: 'user',\n" +
     "    }\n" +
     "};</div>\n" +
+    "                    <div>\n" +
+    "                        <p><b>Followed:</b> TBD</p> \n" +
+    "                        <p><b>Follower:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/follower</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1639,26 +1669,34 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Item</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Items are .. </p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Items .. provide depth to the capibilities of string based tokenization </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var itemModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    title: {type: 'string'},\n" +
     "    content: {type: 'string'},\n" +
     "    tags: {type: 'string'},\n" +
-    "\n" +
     "    associatedModels: {type: 'json'},\n" +
     "    reactions: {type: 'json'},\n" +
-    "\n" +
     "    location: {type: 'json'},\n" +
-    "\n" +
     "    info: {type: 'json'}, //FORSALE, FORLEASE\n" +
     "        //PRICE, LEASE TIME.. .ETC\n" +
     "        //identifierSet: {type: 'string'},\n" +
     "        //amountSet: {type: 'string'},\n" +
-    "\n" +
     "    user: {model: 'user'},\n" +
     "    owner: {type: 'json'}\n" +
     "};</div>    \n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>Title:</b> TBD</p> \n" +
+    "                        <p><b>Content:</b> TBD</p> \n" +
+    "                        <p><b>Tags:</b> TBD</p> \n" +
+    "                        <p><b>associatedModels:</b> TBD</p> \n" +
+    "                        <p><b>Location:</b> TBD</p> \n" +
+    "                        <p><b>Info:</b> TBD</p> \n" +
+    "                        <p><b>Owner:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/item</b></p>\n" +
     "\n" +
     "                </div>\n" +
@@ -1681,6 +1719,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">This is the Member Model</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var memberModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "\n" +
     "    avatarUrl: {type: 'string',},\n" +
     "    coverUrl: {type: 'string'},\n" +
@@ -1715,7 +1754,34 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    passports: { collection: 'Passport', via: 'user' }\n" +
     "\n" +
     "};</div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>avatarUrl:</b> TBD</p> \n" +
+    "                        <p><b>coverUrl:</b> TBD</p> \n" +
+    "                        <p><b>Username:</b> TBD</p> \n" +
+    "                        <p><b>Status:</b> TBD</p> \n" +
+    "                        <p><b>Information:</b> TBD</p> \n" +
+    "                        <p><b>Balance:</b> TBD</p> \n" +
+    "                        <p><b>Reputation:</b> TBD</p> \n" +
+    "                        <p><b>Location:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/member</b></p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <h4><b>Market</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens</a></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var motionModel = {\n" +
+    "    string: {type: 'string'},\n" +
+    "    protocols:{type:'json'},\n" +
+    "    logic:{type:'json'},\n" +
+    "    information:{type:'json'}\n" +
+    "};</div>        \n" +
+    "                    <p><b>get /api/market</b></p>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -1725,6 +1791,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var motionModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    string: {type: 'string'},\n" +
     "    protocols:{type:'json'},\n" +
     "    logic:{type:'json'},\n" +
@@ -1741,13 +1808,22 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>get /api/notification</b></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var notificationModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    user: {model: 'user'},\n" +
     "    type: {type: 'string'},\n" +
     "    content: {type: 'string'},\n" +
-    "    associations: {type: 'json'},\n" +
     "    priority: { type: 'string'},\n" +
     "    isRead: { type: 'boolean'}\n" +
     "};</div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>Priority:</b> TBD</p> \n" +
+    "                        <p><b>Type:</b> TBD</p> \n" +
+    "                        <p><b>Content:</b> TBD</p> \n" +
+    "                        <p><b>isRead:</b> TBD</p> \n" +
+    "                        <p><b>User:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1759,11 +1835,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">The Anatomy of an Order</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var orderModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    creator: {type: 'string'},\n" +
+    "    status: {type: 'string'},\n" +
     "    type: {type: 'string'},\n" +
     "    setAlpha: {type:'json'},\n" +
     "    setBeta: {type:'json'},\n" +
-    "    status: {type: 'string'},\n" +
+    "    createdAt: {type: 'string'},\n" +
     "};</div>\n" +
     "                    <div>\n" +
     "                        <p><b>setAlpha</b>: [{assetIdentifier: amount}, ...]</p>\n" +
@@ -1771,23 +1849,47 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>\n" +
     "                        <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>\n" +
     "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/order</b></p>\n" +
+    "                    <p>curl https://www.cre8.xyz/api/order?limit=1&skip=0</p>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <div hljs hljs-language=\"javascript\">\n" +
+    "var query = {\n" +
+    "    limit: 10,\n" +
+    "    skip:0,\n" +
+    "    sort:'createdAt DESC',\n" +
+    "};</div>\n" +
+    "                        <button ng-click=\"apiCall({model:'ORDER',limit:1,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Order</button>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Passport</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are .. </p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var passportModel = {\n" +
-    "    protocol: { type: 'alphanumeric', required: true },\n" +
+    "    id: {type: 'string'},\n" +
+    "    protocol: { type: 'alphanumeric'},\n" +
     "    password: { type: 'string', minLength: 8 },\n" +
     "    provider: { type: 'alphanumericdashed' },\n" +
     "    identifier: { type: 'string' },\n" +
     "    tokens: { type: 'json' },\n" +
-    "    user: { model: 'User', required: true }\n" +
+    "    user: { model: 'User',}\n" +
     "};</div>\n" +
+    "                    <div>\n" +
+    "                        <p><b>protocol:</b> TBD</p> \n" +
+    "                        <p><b>password:</b> TBD</p> \n" +
+    "                        <p><b>provider:</b> TBD</p> \n" +
+    "                        <p><b>identifier:</b> TBD</p> \n" +
+    "                        <p><b>tokens:</b> TBD</p> \n" +
+    "                        <p><b>user:</b> TBD</p> \n" +
+    "                    </div>\n" +
     "                    <p><b>[get, post] /api/passport</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1798,6 +1900,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var projectModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    title: {type: 'string'},\n" +
     "    description: {type: 'string'},\n" +
     "    avatarUrl: {type: 'string'},\n" +
@@ -1809,6 +1912,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    user: {model: 'user'},\n" +
     "    info: {type: 'json'},\n" +
     "};</div>\n" +
+    "                    <div>\n" +
+    "                        <p><b>title:</b> TBD</p> \n" +
+    "                        <p><b>description:</b> TBD</p> \n" +
+    "                        <p><b>avatarUrl:</b> TBD</p> \n" +
+    "                        <p><b>urlTitle:</b> TBD</p> \n" +
+    "                        <p><b>stringManifold:</b> TBD</p> \n" +
+    "                        <p><b>tags:</b> TBD</p> \n" +
+    "                        <p><b>location:</b> TBD</p> \n" +
+    "                        <p><b>associatedModels:</b> TBD</p> \n" +
+    "                        <p><b>user:</b> TBD</p> \n" +
+    "                        <p><b>info:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/project</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1817,7 +1933,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <h4><b>ProjectCharter</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations from initial conditions to reputationatation decay.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var projectCharterModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\">\n" +
+    "var projectCharterModel = {\n" +
+    "    //TBD\n" +
+    "    //ASSOCIATED PROPERTY FOR PROJECT.. CORE MOTION CONFIG..? // a Computed Validation interaction\n" +
+    "    id: {type: 'string'},\n" +
+    "    project: {type: 'string'},\n" +
+    "    info: {type: 'json'},\n" +
+    "};</div>\n" +
     "                    <p><b>[get, post] /api/projectcharter</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1828,6 +1951,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var projectMemberModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    project: {model: 'project'},\n" +
     "    user: {model: 'user'},\n" +
     "};</div>\n" +
@@ -1854,12 +1978,21 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">Reaction is .. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var reactionModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    amount: {type: 'string'},\n" +
-    "    type: {type: 'string', required: true},\n" +
+    "    type: {type: 'string'},\n" +
     "    user: {model: 'user'},\n" +
     "    associatedModels: {type: 'json'},\n" +
     "    reactions: {type: 'json'}\n" +
     "};</div>\n" +
+    "                    <div>\n" +
+    "                        <p><b>amount:</b> TBD</p> \n" +
+    "                        <p><b>type:</b> TBD</p> \n" +
+    "                        <p><b>user:</b> TBD</p> \n" +
+    "                        <p><b>associatedModels:</b> TBD</p> \n" +
+    "                        <p><b>reactions:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/reaction</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1879,7 +2012,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    sort: 'createdAt DESC'\n" +
     "};</div>\n" +
     "\n" +
-    "\n" +
+    "                    <div>\n" +
+    "                        <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>\n" +
+    "                    </div>\n" +
     "\n" +
     "    <!--\n" +
     "    $rootScope.searchQueryNav = {\n" +
@@ -1903,17 +2038,30 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Task</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Tasks are a relay of context. Layers of validation intention create connection to time. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Tasks are a relay of context. Layers of validation intention create association. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var taskModel = {\n" +
-    "    title: {type: 'string', required: true,},\n" +
+    "    id: {type: 'string'},\n" +
+    "    title: {type: 'string'},\n" +
     "    content: {type: 'string'},\n" +
     "    location: {type: 'json'},\n" +
     "    tags: {type: 'string'},\n" +
-    "    user: {model: 'user', required: true},\n" +
+    "    user: {model: 'user'},\n" +
     "    associatedModels: {type: 'json'},\n" +
     "    reactions: {type: 'json'}\n" +
     "};</div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>title:</b> TBD</p> \n" +
+    "                        <p><b>content:</b> TBD</p> \n" +
+    "                        <p><b>location:</b> TBD</p> \n" +
+    "                        <p><b>tags:</b> TBD</p> \n" +
+    "                        <p><b>user:</b> TBD</p> \n" +
+    "                        <p><b>associatedModels:</b> TBD</p> \n" +
+    "                        <p><b>reactions:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/task</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1923,7 +2071,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <h4><b>Time</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Time & intention is the foundation of energy. Time is the base of CRE8.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var timeModel = {;\n" +
+    "var timeModel = {\n" +
+    "    id: {type: 'string'},\n" +
     "    amount: {type: 'string'},\n" +
     "    content: {type: 'string'},\n" +
     "    startTime: {type: 'string'},\n" +
@@ -1933,6 +2082,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    location: {type: 'json'},\n" +
     "    reactions: {type: 'json'}\n" +
     "};</div>\n" +
+    "                    <div>\n" +
+    "\n" +
+    "                        <p><b>amount:</b> TBD</p> \n" +
+    "                        <p><b>startTime:</b> TBD</p> \n" +
+    "                        \n" +
+    "                        <p><b>content:</b> TBD</p> \n" +
+    "                        <p><b>tags:</b> TBD</p> \n" +
+    "                        <p><b>associatedModels:</b> TBD</p> \n" +
+    "                        <p><b>location:</b> TBD</p> \n" +
+    "                        <p><b>reactions:</b> TBD</p> \n" +
+    "\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/time</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1961,6 +2123,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var transactionModel = {\n" +
+    "    id: string\n" +
     "    to: address,\n" +
     "    from: address,\n" +
     "    amountSet: {\"ASSETSTRING\": 10, \"CRE8\":1},\n" +
@@ -1968,11 +2131,20 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    content: 'transation content'\n" +
     "};</div>\n" +
     "\n" +
+    "                    <div>\n" +
+    "                        <p><b>to:</b> TBD</p> \n" +
+    "                        <p><b>from:</b> TBD</p> \n" +
+    "                        <p><b>amountSet:</b> TBD</p> \n" +
+    "                        <p><b>tags:</b> TBD</p> \n" +
+    "                        <p><b>content:</b> TBD</p> \n" +
+    "                        <p><b>location:</b> TBD</p> \n" +
+    "                        <p><b>reactions:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/transaction</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/transaction?limit=1&skip=0</p>\n" +
     "\n" +
     "                    <div>\n" +
-    "\n" +
     "                        <div hljs hljs-language=\"javascript\">\n" +
     "var query = {\n" +
     "    limit: 10,\n" +
@@ -1980,11 +2152,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    sort:'createdAt DESC',\n" +
     "};</div>\n" +
     "                        <button ng-click=\"apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Transaction</button>\n" +
-    "                        \n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "\n" +
     "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
-    "\n" +
     "                    </div>\n" +
     "\n" +
     "\n" +
@@ -2001,6 +2170,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    addressTo: {type: 'string'},\n" +
     "    data: {type: 'string'}\n" +
     "};</div>\n" +
+    "                    <div>\n" +
+    "\n" +
+    "                        <p>VERY IMPORTANT</p>\n" +
+    "                        <p>CREATE VM HERE.. THE STATE IS KEPT BY DATA IN TX.. (TX - BLOCK)</p>\n" +
+    "\n" +
+    "                        <p><b>addressFrom:</b> TBD</p> \n" +
+    "                        <p><b>addressTo:</b> TBD</p> \n" +
+    "\n" +
+    "                        <p><b>Data:</b> TBD</p> \n" +
+    "\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>get /api/tx</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2013,19 +2194,23 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                   <div hljs hljs-language=\"javascript\">\n" +
     "var validationModel = {\n" +
+    "    id: {type: 'string'},\n" +
+    "    associatedModels: {type: 'json'},\n" +
     "    content: {type: 'string'},\n" +
+    "    createdAt: {type: 'string'},\n" +
     "    reputation: {type: 'json'},\n" +
+    "    type: {type: 'json'},\n" +
     "    user: {model: 'user'},\n" +
     "    validation: {type: 'json'},\n" +
-    "    associatedModels: {type: 'json'},\n" +
-    "    type: {type: 'json'},\n" +
+    "    validationModels: {type: 'json'},\n" +
     "};</div>\n" +
     "\n" +
     "                    <div>\n" +
     "                        <p><b>Reputation:</b> {context:reputationInt}, Reputation is used as a multiplier for association computation via the Project Charter</p>\n" +
     "                        <p><b>Validation:</b> {context:validationInt}</p>\n" +
     "                        <p><b>Type:</b> Human (CRE8), Machine (CRE8), APP</p>\n" +
-    "                        <p><b>Associated Models:</b> Binary relation of Two Models to be associated</p>\n" +
+    "                        <p><b>Associated Models:</b> TODO: REPLACE CONTENT.. SHARED DATA ATTRIBUTE.. </p>\n" +
+    "                        <p><b>Validation Models:</b> Binary relation of Two Models to be associated.</p>\n" +
     "                        <p><b>Creator:</b> Address of Member who created Validation</p>\n" +
     "                    </div>\n" +
     "\n" +
@@ -2050,6 +2235,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Project - Task</p>\n" +
     "\n" +
     "                    <p><b>[get, post] /api/validation</b></p>\n" +
+    "                    <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <div hljs hljs-language=\"javascript\">\n" +
+    "var query = {\n" +
+    "    limit: 10,\n" +
+    "    skip:0,\n" +
+    "    sort:'createdAt DESC',\n" +
+    "};</div>\n" +
+    "                        <button ng-click=\"apiCall({model:'VALIDATION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Validation</button>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                    </div>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -2101,55 +2299,70 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "\n" +
     "            <div id=\"CRE8\" class=\"col-sm-12\">\n" +
-    "                <h2>CRE8</h2>          \n" +
-    "                <h3>Core Protocols</h3>          \n" +
+    "                <h2>CRE8</h2>    \n" +
+    "\n" +
+    "                <h3>Core Protocols</h3>   \n" +
+    "\n" +
     "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>STRUCTURE</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
+    "                <div>\n" +
+    "                    <p><b>STRUCTURE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>LANUGAGE</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "                <div>\n" +
+    "                    <p><b>LANUGAGE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>CONGRUENCE</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "                <div>\n" +
+    "                    <p><b>CONGRUENCE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>MANIFOLD</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
+    "                <div>\n" +
+    "                    <p><b>MANIFOLD</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
     "\n" +
-    "                <p><b>+[] SPACE</b></p>\n" +
+    "                    <!--\n" +
+    "                    <p><b>+[] SPACE</b></p>\n" +
     "\n" +
-    "                <p><b>Application Specific</b></p>\n" +
-    "                <p><b>+CREDIT</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
+    "                    <p><b>Application Specific</b></p>\n" +
+    "                    <p><b>+CREDIT</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
     "\n" +
-    "                <p><b>+FUTURE</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
+    "                    <p><b>+FUTURE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
     "\n" +
-    "                <p><b>+OPTION</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "                    <p><b>+OPTION</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
     "\n" +
-    "                <p><b>+SPONSOR</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
+    "                    <p><b>+SPONSOR</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
+    "                    -->\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>DATA</b></p>\n" +
+    "                <div>\n" +
+    "                    <p><b>CONNECTION</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>CRE8 CORE as a Manifold</b></p>\n" +
-    "                <p>Defining Verbs</p>\n" +
+    "                <p>Defining Verbs in a string space</p>\n" +
     "                <p><b>CRE8</b></p>\n" +
     "                <p><b>MEMBER</b></p>\n" +
     "                <p><b>PROJECT</b></p>\n" +
@@ -2161,21 +2374,45 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
     "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "\n" +
+    "            <div id=\"CRE8\" class=\"col-sm-12\">\n" +
+    "\n" +
+    "                \n" +
+    "\n" +
     "                <div id=\"TOKENIZATION\" class=\"spacing-25\"></div>\n" +
     "                <h4>Tokenization</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization from protocols.</p>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
+    "                \n" +
     "                <div id=\"CRE8VM\" class=\"spacing-25\"></div>\n" +
     "                <h4 id=\"CRE8VM\">The Decentralized CRE8 Virtual Machine</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
+    "            \n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "                <h4>The Peer Network & Transparency</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
     "                <a href=\"/blocks\">Blocks</p>\n" +
     "                <a href=\"/transparency\">Peers</a>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "\n" +
+    "                <div id=\"IDENTITY\" class=\"spacing-25\"></div>\n" +
+    "                <h4>Identity</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Protocols to manage user operations</p>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
     "\n" +
     "                <div id=\"VALIDATION\" class=\"spacing-25\"></div>\n" +
     "                <h4>Association Traversal</h4>\n" +
@@ -2184,7 +2421,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals (and protocols)</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
-    "                \n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "        \n" +
+    "\n" +
     "                <div id=\"MULTIMARKET\" class=\"spacing-25\"></div>\n" +
     "                <h4>MultiMarket Exploration & Traversal</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Multidimensional Token Market</p>\n" +
@@ -2288,24 +2527,31 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h5>Group Theoretic Properties</h5>\n" +
     "                <p><b>Substitution</b></p>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "                <p><b>Combination</b></p>\n" +
     "                <p><b>Reduction</b></p>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <h5>Layered Deep Learning</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Combinatorials</p>\n" +
-    "                \n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "               \n" +
     "                <div id=\"GROUPINTENTION\" class=\"spacing-25\"></div>\n" +
     "                <h4>Project Charters and Group Coordination</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
-    "                \n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "\n" +
     "                <div id=\"SYNTHETICTOKENIZATION\" class=\"spacing-25\"></div>\n" +
     "                <h4>Tokenization and Pattern Recognition | Modular Validation</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">Deep Learning and video feeds to discreetly tokenize time</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization with a high degree of consensus on context through multidimensional validation</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">TOKENIZING PUBLIC SPACES THOUGH AI</p>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
     "\n" +
     "            </div>\n" +
     "\n" +
@@ -4890,10 +5136,11 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.follower.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.follower.username}}\"><img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		    </div>\n" +
-    "		    <div class=\"member-card-info\">\n" +
+    "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
     "		        <h4><a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.follower.username}}\">{{member.follower.username}}</a></h4>\n" +
-    "		        <p style=\"color:gray\">{{member.follower.status}} offline</p>\n" +
-    "		        <p style=\"color:gray\">Total Reputation | {{member.follower.totalWork}}</p>\n" +
+    "		        <p style=\"font-size:13px;\"><a href=\"/member/{{member.follower.username}}/projects\">{{member.follower.projectCount || 0}} Projects</a> | <a href=\"/member/{{member.follower.username}}/followers\">{{member.follower.followerCount || 0}} Followers</a> | <a href=\"/member/{{member.follower.username}}/following\">{{member.follower.followingCount || 0}} Following</a>\n" +
+    "		        <p style=\"color:gray\">Total Reputation | {{member.followed.totalWork}}</p>\n" +
+    "		        <p style=\"color:gray\">{{member.followed.status}} Offline</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -4910,10 +5157,11 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.followed.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.followed.username}}\"><img ng-src=\"{{member.followed.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		    </div>\n" +
-    "		    <div class=\"member-card-info\">\n" +
+    "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
     "		        <h4><a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.followed.username}}\">{{member.followed.username}}</a></h4>\n" +
-    "		        <p style=\"color:gray\">{{member.followed.status}} offline</p>\n" +
+    "		        <p style=\"font-size:13px;\"><a href=\"/member/{{member.followed.username}}/projects\">{{member.followed.projectCount || 0}} Projects</a> | <a href=\"/member/{{member.followed.username}}/followers\">{{member.followed.followerCount || 0}} Followers</a> | <a href=\"/member/{{member.followed.username}}/following\">{{member.followed.followingCount || 0}} Following</a>\n" +
     "		        <p style=\"color:gray\">Total Reputation | {{member.followed.totalWork}}</p>\n" +
+    "		        <p style=\"color:gray\">{{member.followed.status}} Offline</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -5488,17 +5736,30 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "    </div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
-    "            <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(member)\">\n" +
-    "                <div class=\"member-card-image\" style=\"background-image: url('{{member.coverUrl}}')\">\n" +
-    "                    <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.username}}\"><img ng-src=\"{{member.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "\n" +
+    "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"item in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "\n" +
+    "            <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
+    "                <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
+    "                    <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "                </div>\n" +
-    "                <div class=\"member-card-info\">\n" +
-    "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.username}}\">{{member.username}}</a></h4>\n" +
-    "                    <p style=\"color:gray\">{{member.status}} offline</p>\n" +
-    "                    <p style=\"color:gray\">Total Reputation | {{member.totalWork}}</p>\n" +
+    "                <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
+    "                    \n" +
+    "                    <h4><a href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
+    "                    \n" +
+    "                    <p style=\"font-size:13px;\"><a href=\"/member/{{item.username}}/projects\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\">{{item.followingCount || 0}} Following</a>\n" +
+    "                    \n" +
+    "                    <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
+    "                    <p style=\"color:gray\">{{currentUser.status}} Offline</p>\n" +
+    "                    \n" +
+    "                    <button class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Send Tokens</button>\n" +
+    "\n" +
+    "                    <button ng-show=\"!item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
+    "                    <button ng-show=\"item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
+    "\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -6131,6 +6392,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "    <!--RENDER MEMBER...-->\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderReputation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:90%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
@@ -6138,32 +6400,38 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div class=\"page-heading\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "                <div style=\"padding:16px\">\n" +
-    "                    <h1>Reputation</h1>\n" +
+    "                    <h1>\n" +
+    "                        <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\">\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            {{item.user.username}}\n" +
+    "                            <br>\n" +
+    "                            <span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span>\n" +
+    "                            <ng-if=\"item.project\" span style=\"color:gray;font-size:10px;\">0x{{item.id}}</span>\n" +
+    "\n" +
+    "                        </a>\n" +
+    "                    </h1>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
+    "                <p style=\"font-size:13px;\"><a href=\"/member/{{item.user.username}}/projects\">{{item.user.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.user.username}}/followers\">{{item.user.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.user.username}}/following\">{{item.user.followingCount || 0}} Following</a>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
-    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                    {{item.user.username}}\n" +
-    "                </a>\n" +
+    "                <img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}\">\n" +
+    "                <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a>\n" +
+    "                <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Follow</button></a>\n" +
     "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                <h3>{{item.project.title}}</h3>\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                \n" +
+    "                <h3>Reputation</h3>\n" +
+    "                <h4>{{item.project.title}}</h4>\n" +
     "                <!--<tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Manifold Filter\" ng-model=\"reputationFilter\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>-->\n" +
-    "\n" +
+    "                </tags-input>-->\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                \n" +
     "                <highchart config=\"chart\"></highchart>\n" +
     "                \n" +
     "            </div>\n" +
@@ -6558,7 +6826,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <div style=\"clear:both\"></div>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <h5>Tags</h5>\n" +
+    "                    <h5>Tags</h5> <!--VECTOR.. ie... tags -->\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTransaction.tags\">\n" +
     "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
@@ -8063,20 +8331,26 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\">\n" +
-    "		<div class=\"member-card\" ng-click=\"renderReputationToggle(member)\">\n" +
+    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "		<div class=\"member-card\" ng-click=\"renderReputationToggle(member)\" style=\"margin-bottom:10px\">\n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{member.user.username}}\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "		    </div>\n" +
-    "		    <div class=\"member-card-info\">\n" +
+    "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
     "		        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
-    "		        <!--<p style=\"color:gray\">{{member.status}} offline</p>-->\n" +
-    "		        <p style=\"color:gray\">Total Reputation | {{member.user.totalWork}}</p>\n" +
+    "		        <p style=\"font-size:13px;\"><a href=\"/member/{{member.user.username}}/projects\">{{member.user.projectCount || 0}} Projects</a> | <a href=\"/member/{{member.user.username}}/followers\">{{member.user.followerCount || 0}} Followers</a> | <a href=\"/member/{{member.user.username}}/following\">{{member.user.followingCount || 0}} Following</a>\n" +
+    "\n" +
+    "		       	<p style=\"color:gray\">Total Reputation | {{member.user.totalWork || 0}}</p>\n" +
     "		        <p style=\"color:gray\">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>\n" +
+    "                <p style=\"color:gray\">{{member.user.status}} Offline</p>\n" +
+    "\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "</div>");
+    "</div>\n" +
+    "                \n" +
+    "                \n" +
+    "              ");
 }]);
 
 angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {

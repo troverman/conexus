@@ -107,14 +107,26 @@ exports.register = function (req, res, next) {
       console.log('CREATE PASSPORT LOCAL');
 
       if (req.body.order && req.body.order.length > 0){
-        console.log('THERE IS AN ORDER!', req.body.order)
+        console.log('THERE IS AN ORDER!', req.body.order);
+
+        var order = req.body.order;
+        //PROTECT FROM MALFORMED REQUESTS.. 
+
+
+        order.map(function(obj){
+          obj.user = user.id;
+          delete obj.$$hashKey;
+          //obj.setBeta.map(function(obj1){
+            //REPLACE KEYS.. ADDRESS.. ETC
+          //  obj1.replace('[ADDRESS]')
+          //});
+          return obj;
+        })
 
         //UPDATE ORDER.. VALUE MAP SPECIFICATIONS
-        //
-        var orderModel = {};
-        //Order.create(orderModel).then(function(){
+        Order.create(order).then(function(){
           next(null, user);
-        //});
+        });
       }
       else{
         next(null, user);

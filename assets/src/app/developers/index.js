@@ -16,7 +16,7 @@ angular.module( 'conexus.developers', [
     });
 }])
 
-.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', 'TransactionModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, ReactionModel, titleService, TransactionModel ) {
+.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'OrderModel', 'ReactionModel', 'titleService', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, OrderModel, ReactionModel, titleService, TransactionModel, ValidationModel ) {
     titleService.setTitle('Developers | CRE8.XYZ');
 
 
@@ -31,8 +31,19 @@ angular.module( 'conexus.developers', [
                 $scope.results = JSON.stringify(models, null, 2);
             });
         }
+        if (query.model == 'ORDER'){
+            //TODO..
+            OrderModel.getSome('', '', '', 1, 0, 'createdAt DESC').then(function(models){
+                $scope.results = JSON.stringify(models, null, 2);
+            });
+        }
         if (query.model == 'TRANSACTION'){
             TransactionModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
+                $scope.results = JSON.stringify(models, null, 2);
+            });
+        }
+        if (query.model == 'VALIDATION'){
+            ValidationModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results = JSON.stringify(models, null, 2);
             });
         }

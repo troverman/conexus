@@ -729,20 +729,19 @@ angular.module( 'conexus.nav', [
 
     };
 
+
+    //MEMBER CARD TOGGLE
     $rootScope.renderReputationToggle = function(item){
+
+
 
         $scope.item = item;
         if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
         if (item.user){$scope.reputation = item.user.reputation}
 
-        //BUG
-        console.log(item);
-        if (item.follower){$scope.reputation = item.follower.reputation;$scope.item.user = item.follower}
-        if (item.followed){$scope.reputation = item.followed.reputation;$scope.item.user = item.followed}
-
         //DEPRECIATE
         if ($scope.item.project){
-            $scope.reputationFilter = [{text:$scope.item.project.title+'+'}];
+            $scope.reputationFilter = [{text:$scope.item.project.title}];
         }
 
         $scope.chart = {
