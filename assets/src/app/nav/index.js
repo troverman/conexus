@@ -800,7 +800,13 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.transactionToggle = function(item){
-        if($scope.currentUser){$mdSidenav('transaction').toggle();}
+        if($scope.currentUser){
+            if (item){
+                //TODO!
+                $scope.newTransaction.to = [{text:item.username,address:item.id,id:item.id}];
+            }
+            $mdSidenav('transaction').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 

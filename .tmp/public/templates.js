@@ -32,7 +32,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-sm-6\">\n" +
     "				<h3>THE NEXT WAVE</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">We Create a 24/7 continual hackathon.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create a 24/7 continual hackathon.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Connect with new collaborators and build together.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\"></div>\n" +
@@ -53,8 +53,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"card\">\n" +
     "				    <div style=\"padding:16px;\">\n" +
     "						<h3>TRANSPARENCY MAXIMALISM</h3>\n" +
-    "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming and Complete Inclusivity create more connected paradigms.</p>\n" +
-    "						<p style=\"font-style:italic;color:gray;margin:0px\">Sharing Creates Abundance.</p>\n" +
+    "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming & Complete Inclusivity create more connected paradigms.</p>\n" +
+    "						<p style=\"font-style:italic;color:gray;margin:0px\">Transparency through Sharing Creates Abundance.</p>\n" +
     "					</div>\n" +
     "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "					<!--<div style=\"padding:16px;\">\n" +
@@ -95,8 +95,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<h3>What We CRE8</h3>\n" +
-    "				<p>Our mechanism of value is created from consensus upon the relation of shared value</p>\n" +
+    "				<h3>We CRE8</h3>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;\">Our mechanism of value is created from consensus upon the relation of shared value</p>\n" +
     "				<!--SELECT PROJECTS-->\n" +
     "				<!--<div class=\"row\">\n" +
     "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
@@ -105,9 +105,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						</div>\n" +
     "					</div>\n" +
     "				</div>-->\n" +
-    "				<h5>Human Validated Proof of Work</h5>\n" +
+    "				<!--<h5>Human Validated Proof of Work</h5>-->\n" +
     "				<h5>Interoperable Governance Mechanisms</h5>\n" +
-    "				<h5>Group Coordination and the designation of interrelation token networking.</h5>\n" +
+    "				<h5>Group Coordination and the designation of interrelated token networking.</h5>\n" +
     "				<h5>Token Market Traversal</h5>\n" +
     "\n" +
     "			</div>\n" +
@@ -121,7 +121,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-md-6\">\n" +
     "				<h3>The Peer Network</h3>\n" +
     "				<p style=\"color:#a8a8a8;font-style:italic;\">Our Value Infrastructure</p>\n" +
-    "				<p style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transarency\">Transparency</a></p>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transarency\">Transparency in action</a></p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -132,8 +132,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"create\"></highchart>\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
     "				<h2>Information as Income</h2>\n" +
@@ -141,20 +139,19 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"spacing-15\"></div>\n" +
     "\n" +
     "				<h3>Complete Transparency</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Reputation Systems and Task Verification</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Finance and Contribution</p>\n" +
+    "				<!--<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>-->\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Financal Systems and Ledgers</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "\n" +
     "				<h3>Complete Tokenization</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A crypto-economic data structre and means of account.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <a href=\"/developers\">developer</a> creativity, the CRE8 <a href=\"/apps\">Application Ecosystem</a> facilitates progression towards complete cryptoeconomic tokenization.</p>\n" +
+    "				<!--<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>-->\n" +
     "\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -179,31 +176,25 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-12\">\n" +
+    "			<div class=\"col-xs-5 col-sm-5\">\n" +
+    "                <img src=\"https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif\">\n" +
+    "            </div>\n" +
+    "			<div class=\"col-xs-12 col-sm-7\">\n" +
+    "				<h4>The Application Ecosystem</h4>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Mapping address to data to balance. An infinite token playground.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocols act as plugins to the string space.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Apps are a bundle of protocols. App design is modular.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocol Design, <a href=\"/apps\">Application Ecosystem</a></p>\n" +
+    "				\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "				<h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
-    "				<h5>Action Tokenization Protocol</h5>\n" +
-    "				<h5>Manifold Tokenization Protocol</h5>\n" +
-    "				<h5>Association Tokenization Protocol</h5>\n" +
-    "				<h5>Content Tokenization Protocol</h5>\n" +
-    "				<h5>Follow Tokenization Protocol</h5>\n" +
-    "				<h5>Item Tokenization Protocol</h5>\n" +
-    "				<h5>Location Tokenization Protocol</h5>\n" +
-    "				<h5>Member Tokenization Protocol</h5>\n" +
-    "				<h5>Order Tokenization Protocol</h5>\n" +
-    "				<h5>Project Tokenization Protocol</h5>\n" +
-    "				<h5>Project Charter Protocol</h5>\n" +
-    "				<h5>Reaction Tokenization Protocol</h5>\n" +
-    "				<h5>Task Tokenization Protocol</h5>\n" +
-    "				<h5>Time Tokenization Protocol</h5>\n" +
-    "				<h5>Transaction Tokenization Protocol</h5>\n" +
-    "				<h5>View Tokenization Protocol</h5>\n" +
-    "				<h5>Validation Tokenization Protocol</h5>\n" +
-    "				<!--CRE8; RECIEVE; PROJECT.. USER-->\n" +
+    "\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/developers\">learn more</a>\n" +
+    "\n" +
+    "				<div class=\"spacing-50\"></div>\n" +
+    "			\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
@@ -234,14 +225,15 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-md-6\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<h3>Your Dimensional Vote</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create dimensional liquidity for transparent and reputationally validated work.</p> \n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create relationships in the multidimensional token market. Transparent and reputationally validated work is one application in CRE8's ecosystem.</p> \n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-8\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<h3>Create Value Relationships</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value to create  intention in the market</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value. This process creates intention in the market.</p>\n" +
     "				<h5>Create Interlocked Networks of Value</h5>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Through a variety of intentional techniques we can establish <i>more</i> true value intent</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p>\n" +
     "			</div>\n" +
     "            <div class=\"col-md-4 mobileHide\" style=\"text-align:center\">\n" +
@@ -257,16 +249,18 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-xs-12 col-sm-9 col-md-7\">\n" +
+    "				\n" +
     "				<h2>Value Mapping and Dimensional Voting</h2>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value. It starts with you.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our intentional value mechanism comes from stating what we believe is valuable. An empowering call to action.</p>\n" +
-    "				<br>\n" +
+    "				\n" +
+    "				<h3>It starts with you.</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our value mechanism is intentional. It is sourced from stating what we believe is valuable.</p>\n" +
+    "				\n" +
+    "				<h4>An empowering call to action.</h4>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px;\">Create Empowerment by clearly and distinctly elucidating your value map.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give rise to an emergent gestalt.</p>\n" +
     "\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create Empowerment by clearly and distinctly elucidating your value map.</p>\n" +
-    "				<br>\n" +
     "\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Everything has Value. Let's come to consensus and create an emergent gestalt.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give dimensional value to sets of actions.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-xs-12 col-sm-3 col-md-5\" style=\"text-align:center\">\n" +
     "				<img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
@@ -1409,6 +1403,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Validation</p>\n" +
     "                </div>\n" +
     "\n" +
+    "                <!--MEMBER DOCS; PROJECT DOCS-->\n" +
+    "\n" +
     "                <p><a href=\"#TOKENIZATION\">Tokenization Principles & String Interpolation</a></p>\n" +
     "\n" +
     "                <p><a href=\"#MULTIMARKET\">MultiMarket Exploration & Traversal</a></p>\n" +
@@ -2301,7 +2297,28 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            <div id=\"CRE8\" class=\"col-sm-12\">\n" +
     "                <h2>CRE8</h2>    \n" +
     "\n" +
-    "                <h3>Core Protocols</h3>   \n" +
+    "                <h3>Core Protocols</h3>  \n" +
+    "\n" +
+    "\n" +
+    "                <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
+    "                <h5>Action Tokenization Protocol</h5>\n" +
+    "                <h5>Manifold Tokenization Protocol</h5>\n" +
+    "                <h5>Association Tokenization Protocol</h5>\n" +
+    "                <h5>Content Tokenization Protocol</h5>\n" +
+    "                <h5>Follow Tokenization Protocol</h5>\n" +
+    "                <h5>Item Tokenization Protocol</h5>\n" +
+    "                <h5>Location Tokenization Protocol</h5>\n" +
+    "                <h5>Member Tokenization Protocol</h5>\n" +
+    "                <h5>Order Tokenization Protocol</h5>\n" +
+    "                <h5>Project Tokenization Protocol</h5>\n" +
+    "                <h5>Project Charter Protocol</h5>\n" +
+    "                <h5>Reaction Tokenization Protocol</h5>\n" +
+    "                <h5>Task Tokenization Protocol</h5>\n" +
+    "                <h5>Time Tokenization Protocol</h5>\n" +
+    "                <h5>Transaction Tokenization Protocol</h5>\n" +
+    "                <h5>View Tokenization Protocol</h5>\n" +
+    "                <h5>Validation Tokenization Protocol</h5>\n" +
+    "                <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
@@ -3048,12 +3065,17 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
-    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE</button>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"card\" ng-click=\"skip()\" style=\"text-align:center\">\n" +
-    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">SKIP</button>\n" +
+    "        <div class=\"\">\n" +
+    "            <div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "                <div class=\"card\" ng-click=\"skip()\" style=\"text-align:center\">\n" +
+    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\"><i class=\"fa fa-arrow-left\"></i> SKIP</button>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-xs-9\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "                <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
+    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE <i class=\"fa fa-arrow-right\"></i></button>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
@@ -3170,6 +3192,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
     "            </div>\n" +
     "            -->\n" +
+    "\n" +
+    "            <div class=\"card\" ng-show=\"activity.length == 0\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <span style=\"color:gray\" >There's nothing here..</span>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "\n" +
     "            <div ng-repeat=\"item in activity\">\n" +
     "\n" +
@@ -5747,15 +5775,15 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "                    \n" +
     "                    <h4><a href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
     "                    \n" +
-    "                    <p style=\"font-size:13px;\"><a href=\"/member/{{item.username}}/projects\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\">{{item.followingCount || 0}} Following</a>\n" +
+    "                    <p style=\"font-size:11px;\"><a href=\"/member/{{item.username}}/projects\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\">{{item.followingCount || 0}} Following</a>\n" +
     "                    \n" +
     "                    <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
     "                    <p style=\"color:gray\">{{currentUser.status}} Offline</p>\n" +
     "                    \n" +
-    "                    <button class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Send Tokens</button>\n" +
-    "\n" +
-    "                    <button ng-show=\"!item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
-    "                    <button ng-show=\"item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
+    "                    <img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
+    "                    <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(item)\">Send Tokens</a>\n" +
+    "                    <a ng-show=\"!item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Follow</button></a>\n" +
+    "                    <a ng-show=\"item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Unfollow</button></a>\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6397,7 +6425,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
+    "            <div class=\"page-heading\" style=\"background-image: url('{{item.user.coverUrl}}')\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "                <div style=\"padding:16px\">\n" +
     "                    <h1>\n" +
@@ -6406,7 +6434,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                            {{item.user.username}}\n" +
     "                            <br>\n" +
     "                            <span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span>\n" +
-    "                            <ng-if=\"item.project\" span style=\"color:gray;font-size:10px;\">0x{{item.id}}</span>\n" +
+    "                            <span ng-if=\"item.project\" span style=\"color:gray;font-size:10px;\">0x{{item.id}}</span>\n" +
     "\n" +
     "                        </a>\n" +
     "                    </h1>\n" +
@@ -9282,10 +9310,11 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "								    <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
     "								        <a ng-click=\"$event.stopPropagation();\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "								    </div>\n" +
-    "								    <div class=\"member-card-info\">\n" +
+    "            						<div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
     "								        <h4><a ng-click=\"$event.stopPropagation();\" href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
-    "								        <p style=\"color:gray\">{{item.status}} offline</p>\n" +
+    "		        						<p style=\"font-size:13px;\"><a href=\"/member/{item.username}}/projects\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\">{{item.followingCount || 0}} Following</a>\n" +
     "								        <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
+    "								        <p style=\"color:gray\">{{item.status}} Offline</p>\n" +
     "								    </div>\n" +
     "								</div>\n" +
     "							</div>\n" +

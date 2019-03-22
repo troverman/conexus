@@ -80,11 +80,11 @@ angular.module( 'conexus.home', [
             }],
 
             memberProjects: ['MemberModel', 'config', function(MemberModel, config) {
-                return  MemberModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+                return MemberModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
             }],
 
             positions: ['OrderModel', 'config', function(OrderModel, config) {
-                return  OrderModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
             }],
 
 
@@ -379,13 +379,11 @@ angular.module( 'conexus.home', [
         }
     }, true);
     //WATCHERS
-
-
-
 }])
 
 .controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 	
+    //TODO.. PERMANTLY SET IN NAV
     titleService.setTitle('CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
 

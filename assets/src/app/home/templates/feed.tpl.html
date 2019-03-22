@@ -227,12 +227,17 @@
             </div>
         </div>
 
-        <div class="card" ng-click="change()" style="text-align:center">
-            <button style="width:100%" class="btn btn-default log-btn">CONTINUE</button>
-        </div>
-
-        <div class="card" ng-click="skip()" style="text-align:center">
-            <button style="width:100%" class="btn btn-default log-btn">SKIP</button>
+        <div class="">
+            <div class="col-xs-3" style="padding-left:0px;padding-right:0px">
+                <div class="card" ng-click="skip()" style="text-align:center">
+                    <button style="width:100%" class="btn btn-default log-btn"><i class="fa fa-arrow-left"></i> SKIP</button>
+                </div>
+            </div>
+            <div class="col-xs-9" style="padding-left:0px;padding-right:0px">
+                <div class="card" ng-click="change()" style="text-align:center">
+                    <button style="width:100%" class="btn btn-default log-btn">CONTINUE <i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -349,6 +354,12 @@
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
             </div>
             -->
+
+            <div class="card" ng-show="activity.length == 0">
+                <div style="padding:16px;">
+                    <span style="color:gray" >There's nothing here..</span>
+                </div>
+            </div>
 
             <div ng-repeat="item in activity">
 

@@ -619,7 +619,7 @@
         <div class="md-list-item-text" layout="column" style="height:100%;">
 
             <div class="spacing-25"></div>
-            <div class="page-heading">
+            <div class="page-heading" style="background-image: url('{{item.user.coverUrl}}')">
                 <div class="spacing-25"></div>
                 <div style="padding:16px">
                     <h1>
@@ -628,7 +628,7 @@
                             {{item.user.username}}
                             <br>
                             <span style="color:gray;font-size:10px;">0x{{item.user.id}}</span>
-                            <ng-if="item.project" span style="color:gray;font-size:10px;">0x{{item.id}}</span>
+                            <span ng-if="item.project" span style="color:gray;font-size:10px;">0x{{item.id}}</span>
 
                         </a>
                     </h1>
