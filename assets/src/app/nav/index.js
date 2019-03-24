@@ -44,6 +44,14 @@ angular.module( 'conexus.nav', [
         type:[],
     };
 
+    //filter:[
+
+        //{type:'TAG', tag:tag},
+        //{type:'LOCATION', location:location, distance:distance},
+        //{type:'ASSOCIATION', association:association},
+
+    //]
+
     $rootScope.selectedTags = [];
     $rootScope.selectedAssets = [];
     $rootScope.selectedAssociations = [];
@@ -989,12 +997,7 @@ angular.module( 'conexus.nav', [
                 $scope.newOrder.identiferSet1.push(Object.keys($scope.newOrder.setBeta)[x]);
                 $scope.newOrder.amountSet1.push($scope.newOrder.setBeta[Object.keys($scope.newOrder.setBeta)[x]]);
             }
-
-            $scope.newOrder.identiferSet = $scope.newOrder.identiferSet.join(",");
-            $scope.newOrder.identiferSet1 = $scope.newOrder.identiferSet1.join(",");
-            $scope.newOrder.amountSet = $scope.newOrder.amountSet.join(",");
-            $scope.newOrder.amountSet1 = $scope.newOrder.amountSet1.join(",");
-
+            
             console.log($scope.newOrder);
 
             OrderModel.create($scope.newOrder).then(function(model) {
@@ -1137,19 +1140,13 @@ angular.module( 'conexus.nav', [
 
     $scope.createValidation = function(){
         if ($scope.currentUser){
-
             $scope.newValidation.user = $scope.currentUser.id;
-
             console.log($scope.newValidation);
-
             if ($scope.newValidation.associatedModel){
-
                 console.log($scope.newValidation.associatedModel)
-
                 $scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({
                     type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].id,
                 });
-
                 console.log($scope.newValidation);
                 //if$scope.newValidation.associatedModels.length 
                 ValidationModel.create($scope.newValidation).then(function(model) {
@@ -1160,19 +1157,14 @@ angular.module( 'conexus.nav', [
                     setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                     setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
                 });
-
             }
-
         }
         else{$mdSidenav('login').toggle()}
     };
 
     $scope.login = function(){
         var data = JSON.stringify($scope.newLogin);
-        console.log($scope.newLogin)
         $http({method:'POST', url:'/auth/local', data:data}).then(function(newModel){
-            console.log(newModel.data);
-            //MEG
             config.currentUser = newModel.data;
             $rootScope.currentUser = newModel.data;
             $window.location.reload();
@@ -1181,9 +1173,7 @@ angular.module( 'conexus.nav', [
     };
 
     $scope.loginToggle = function(){
-
         //$scope.pop();
-
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('content').close();

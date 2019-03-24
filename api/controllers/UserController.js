@@ -17,7 +17,7 @@ module.exports = {
 
 		User.watch(req);
 
-		console.log(req.query);
+		console.log(req.query)
 
 		//SEARCH
 		if (req.query.query){

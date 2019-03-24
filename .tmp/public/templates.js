@@ -33,7 +33,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<h3>THE NEXT WAVE</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Create a 24/7 continual hackathon.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Connect with new collaborators and build together.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Connect with collaborators and build together.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\"></div>\n" +
     "		</div>\n" +
@@ -155,7 +155,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	</div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
     "<div id=\"about-section2\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -184,11 +183,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Mapping address to data to balance. An infinite token playground.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocols act as plugins to the string space.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Apps are a bundle of protocols. App design is modular.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocol Design, <a href=\"/apps\">Application Ecosystem</a></p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocol Design, <a href=\"/developers\">Developer Documentation</a></p>\n" +
     "				\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/developers\">learn more</a>\n" +
+    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/apps\">learn more</a>\n" +
     "\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "			\n" +
@@ -220,7 +219,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<highchart config=\"chartMap\"></highchart>\n" +
+    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
@@ -1544,6 +1543,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>get /api/block</b></p>\n" +
     "                </div>\n" +
     "\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -1637,6 +1639,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>[get, post] /api/event</b></p>\n" +
     "                </div>\n" +
     "                -->\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -1769,14 +1773,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Market</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens</a></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var motionModel = {\n" +
-    "    string: {type: 'string'},\n" +
-    "    protocols:{type:'json'},\n" +
-    "    logic:{type:'json'},\n" +
-    "    information:{type:'json'}\n" +
-    "};</div>        \n" +
+    "                    <p style=\"color:gray;font-style:italic\">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var marketModel = {};</div>        \n" +
     "                    <p><b>get /api/market</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1824,6 +1822,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Order</b></h4>\n" +
@@ -1863,6 +1863,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                </div>\n" +
     "\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -1887,6 +1889,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>user:</b> TBD</p> \n" +
     "                    </div>\n" +
     "                    <p><b>[get, post] /api/passport</b></p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <h4><b>Peers</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Peers are ..</p>\n" +
+    "                    <div hljs hljs-language=\"javascript\">var peerModel = {};</div>\n" +
+    "                    <p><b>[get, post] /api/peer</b></p>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -1943,7 +1954,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
-    "                    <p><b>ProjectMember</b></p>\n" +
+    "                    <h4><b>ProjectMember</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var projectMemberModel = {\n" +
@@ -1995,7 +2006,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
-    "                    <p><b>Search</b></p>\n" +
+    "                    <h4><b>Search</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var searchModel = {\n" +
@@ -2113,6 +2124,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                \n" +
     "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Transaction</b></h4>\n" +
@@ -2130,7 +2143,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <div>\n" +
     "                        <p><b>to:</b> TBD</p> \n" +
     "                        <p><b>from:</b> TBD</p> \n" +
-    "                        <p><b>amountSet:</b> TBD</p> \n" +
+    "                        <p><b>amountSet:</b> Set Transactions</p> \n" +
     "                        <p><b>tags:</b> TBD</p> \n" +
     "                        <p><b>content:</b> TBD</p> \n" +
     "                        <p><b>location:</b> TBD</p> \n" +
@@ -2154,6 +2167,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "\n" +
     "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -2182,6 +2198,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Validation</b></h4>\n" +
@@ -2247,7 +2265,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "            </div>\n" +
     "\n" +
@@ -2295,10 +2315,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "\n" +
     "            <div id=\"CRE8\" class=\"col-sm-12\">\n" +
+    "\n" +
     "                <h2>CRE8</h2>    \n" +
-    "\n" +
     "                <h3>Core Protocols</h3>  \n" +
+    "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
     "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
     "                <h5>Action Tokenization Protocol</h5>\n" +
@@ -2319,9 +2342,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h5>View Tokenization Protocol</h5>\n" +
     "                <h5>Validation Tokenization Protocol</h5>\n" +
     "                <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
-    "\n" +
-    "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -6044,6 +6064,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    </tags-input>\n" +
     "                </div>\n" +
     "\n" +
+    "                <div ng-if=\"type=='VALUEMAP'\">\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
@@ -8868,7 +8895,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div ng-show=\"!showFinal\" style=\"float:right\">\n" +
     "            <br>\n" +
-    "            <span ng-click=\"informationToggle('TOKEN','VALUEMAP')\"><a>UNIVERSAL <i class=\"fa fa-question-circle\"></i></a></span>\n" +
+    "            <span ng-click=\"filterToggle('VALUEMAP')\"><a>UNIVERSALTOKEN <i class=\"fa fa-question-circle\"></i></a></span>\n" +
     "            <br>\n" +
     "        </div>\n" +
     "\n" +
@@ -9049,7 +9076,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Height</h5><input type=\"text\" ng-model=\"newMember.Height\" placeholder=\"Height\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Eye Color</h5><input type=\"text\" ng-model=\"newMember.eyeColor\" placeholder=\"Eye Color\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Address</h5><input type=\"text\" ng-model=\"newMember.address\" placeholder=\"Address\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>DNA</h5><input type=\"text\" ng-model=\"newMember.dna\" placeholder=\"DNA UPLOAD\" class=\"form-control\"></div>\n" +
+    "                    <!--<div style=\"padding:0px\" class=\"col-xs-12\"><h5>DNA</h5><input type=\"text\" ng-model=\"newMember.dna\" placeholder=\"DNA UPLOAD\" class=\"form-control\"></div>-->\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </div>\n" +
     "            </div>\n" +

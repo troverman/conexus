@@ -19,6 +19,9 @@ module.exports = {
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
+
+		console.log(req.query);
+
 		Task.watch(req);
 
 		if (req.query.project){

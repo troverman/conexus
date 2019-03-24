@@ -33,6 +33,7 @@
 		<div class="card" ng-show="pluralistic">
 			<div style="padding:16px;">
 				<h2>Pluralistic Market</h2>
+				<h4>Value Vector x Value Vector</h5>
 				<div class="col-md-6"><highchart config="chartMap"></highchart></div>
 				<div class="col-md-6"><highchart config="chartMap"></highchart></div>
 			</div>
@@ -60,6 +61,8 @@
 		<div class="card">
 			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button>
 		</div>
+		<h2>Activity Feed</h2>
+
 		<!--TODO: Partially Filled Orders | TRADES-->
 		<div ng-repeat="order in orders">
 	        <div class="card">

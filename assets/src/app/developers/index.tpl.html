@@ -152,11 +152,19 @@ var query = {
 
                 <div>
                     <h4><b>Action</b></h4>
-                    <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model.</p>
+                    <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>
                     <div hljs hljs-language="javascript">
 var actionModel = {
     address: {type: 'string'},
-    information: {type: 'json'}
+    information: {type: 'json'},
+    createdAt: {type: 'datetime'},
+    action: {type: 'string'},
+    
+    associatedModels: {type: 'json'},
+    location: {type: 'json'},
+    tags: {type: 'json'},
+    creator: {type: 'string'},
+
 };</div>
                     <p><b>get /api/action</b></p>
                 </div>
@@ -232,6 +240,9 @@ var blockModel = {
                     </div>
                     <p><b>get /api/block</b></p>
                 </div>
+
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
 
                 <div class="spacing-50"></div>
 
@@ -326,6 +337,8 @@ var query = {
                     <p><b>[get, post] /api/event</b></p>
                 </div>
                 -->
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
 
                 <div class="spacing-50"></div>
 
@@ -458,14 +471,8 @@ var memberModel = {
 
                 <div>
                     <h4><b>Market</b></h4>
-                    <p style="color:gray;font-style:italic">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens</a></p>
-                    <div hljs hljs-language="javascript">
-var motionModel = {
-    string: {type: 'string'},
-    protocols:{type:'json'},
-    logic:{type:'json'},
-    information:{type:'json'}
-};</div>        
+                    <p style="color:gray;font-style:italic">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>
+                    <div hljs hljs-language="javascript">var marketModel = {};</div>        
                     <p><b>get /api/market</b></p>
                 </div>
 
@@ -513,6 +520,8 @@ var notificationModel = {
                 </div>
 
                 <div class="spacing-50"></div>
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
 
                 <div>
                     <h4><b>Order</b></h4>
@@ -552,6 +561,8 @@ var query = {
 
                 </div>
 
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
                 <div class="spacing-50"></div>
 
                 <div>
@@ -576,6 +587,15 @@ var passportModel = {
                         <p><b>user:</b> TBD</p> 
                     </div>
                     <p><b>[get, post] /api/passport</b></p>
+                </div>
+
+                <div class="spacing-50"></div>
+
+                <div>
+                    <h4><b>Peers</b></h4>
+                    <p style="color:gray;font-style:italic">Peers are ..</p>
+                    <div hljs hljs-language="javascript">var peerModel = {};</div>
+                    <p><b>[get, post] /api/peer</b></p>
                 </div>
 
                 <div class="spacing-50"></div>
@@ -632,7 +652,7 @@ var projectCharterModel = {
                 <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>ProjectMember</b></p>
+                    <h4><b>ProjectMember</b></h4>
                     <p style="color:gray;font-style:italic">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>
                     <div hljs hljs-language="javascript">
 var projectMemberModel = {
@@ -684,7 +704,7 @@ var reactionModel = {
                 <div class="spacing-50"></div>
 
                 <div>
-                    <p><b>Search</b></p>
+                    <h4><b>Search</b></h4>
                     <p style="color:gray;font-style:italic">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>
                     <div hljs hljs-language="javascript">
 var searchModel = {
@@ -802,6 +822,8 @@ var tokenModel = {
                 </div>
                 
                 <div class="spacing-50"></div>
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
 
                 <div>
                     <h4><b>Transaction</b></h4>
@@ -819,7 +841,7 @@ var transactionModel = {
                     <div>
                         <p><b>to:</b> TBD</p> 
                         <p><b>from:</b> TBD</p> 
-                        <p><b>amountSet:</b> TBD</p> 
+                        <p><b>amountSet:</b> Set Transactions</p> 
                         <p><b>tags:</b> TBD</p> 
                         <p><b>content:</b> TBD</p> 
                         <p><b>location:</b> TBD</p> 
@@ -843,6 +865,9 @@ var query = {
 
 
                 </div>
+
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
 
                 <div class="spacing-50"></div>
 
@@ -871,6 +896,8 @@ var txModel = {
                 </div>
 
                 <div class="spacing-50"></div>
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
 
                 <div>
                     <h4><b>Validation</b></h4>
@@ -936,7 +963,9 @@ var query = {
 
                 </div>
 
-                <div class="spacing-25"></div>
+                <div class="spacing-100"></div>
+                <div class="spacing-100"></div>
+                <div class="spacing-50"></div>
 
             </div>
 
@@ -984,10 +1013,13 @@ var humanReadableValidationNFTModel = {
         <div class="row">
 
             <div id="CRE8" class="col-sm-12">
+
                 <h2>CRE8</h2>    
-
                 <h3>Core Protocols</h3>  
+                <p style="color:gray;font-style:italic">Layered Adaptability</p>
+                <p style="color:gray;font-style:italic">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>
 
+                <div class="spacing-10"></div>
 
                 <h4>Conex Base Protocol Tokenization Layer</h4><hr>
                 <h5>Action Tokenization Protocol</h5>
@@ -1008,9 +1040,6 @@ var humanReadableValidationNFTModel = {
                 <h5>View Tokenization Protocol</h5>
                 <h5>Validation Tokenization Protocol</h5>
                 <!--CRE8; RECIEVE; PROJECT.. USER--> 
-
-                <p style="color:gray;font-style:italic">Layered Adaptability</p>
-                <p style="color:gray;font-style:italic">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>
 
                 <div class="spacing-10"></div>
 

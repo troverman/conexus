@@ -13,6 +13,8 @@ module.exports = {
 		var time = req.query.time;
 		var id = req.query.id;
 
+		console.log(req.query)
+
 		Validation.watch(req);
 
 		//DEPRECIATE?

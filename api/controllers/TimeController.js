@@ -21,6 +21,8 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 
+		console.log(req.query);
+
 		if (req.query.task){
 			var task = req.query.task;
 			Time.find({task:task})

@@ -12,6 +12,8 @@ module.exports = {
 		var project = req.query.project;
 		var user = req.query.user;
 
+		console.log(req.query);
+
 		ProjectMember.watch(req);
 		if (req.query.project){
 			ProjectMember.find({project:project})

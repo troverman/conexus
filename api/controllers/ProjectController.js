@@ -16,6 +16,9 @@ module.exports = {
 		var limit = parseInt(req.query.limit);
 		var skip = parseInt(req.query.skip);
 		var sort = req.query.sort;
+
+		console.log(req.query);
+
 		Project.watch(req);
 
 		//WEIRD BUG 

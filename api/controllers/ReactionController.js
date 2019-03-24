@@ -18,6 +18,8 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 
+		console.log(req.query);
+
 		Reaction.watch(req);
 
 		//TODO

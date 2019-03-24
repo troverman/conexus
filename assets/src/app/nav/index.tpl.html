@@ -238,6 +238,13 @@
                     </tags-input>
                 </div>
 
+                <div ng-if="type=='VALUEMAP'">
+                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+                </div>
+
+
             </div>
         </div>
     </md-sidenav>

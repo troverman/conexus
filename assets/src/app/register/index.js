@@ -11,10 +11,10 @@ angular.module( 'conexus.register', [
 		},
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -34,16 +34,14 @@ angular.module( 'conexus.register', [
 	$scope.showFinal = false;
 	$scope.tasks = tasks;
 
+    $rootScope.baseMarkets = [{text:'UNIVERSALTOKEN'}];
+
 	$scope.dailyTimeValue = [
 		{text:'Rest', percentage: 33.333},
 		{text:'Work', percentage: 25},
 		{text:'Fun', percentage: 25},
 		{text:'Learning', percentage: 8.333},
 		{text:'Exercise', percentage: 8.333},
-	];
-
-	$scope.selectedMarket = [
-		{text:'UNIVERSAL'}
 	];
 
 	$scope.chartMapTime = {

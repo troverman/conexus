@@ -23,7 +23,7 @@ module.exports = {
 
 		Order.watch(req);
 
-		console.log(req.query)
+		console.log(req.query);
 
 		//IDSET DEPRECIATE...
 
