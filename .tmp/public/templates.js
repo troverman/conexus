@@ -1462,11 +1462,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Action</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var actionModel = {\n" +
     "    address: {type: 'string'},\n" +
-    "    information: {type: 'json'}\n" +
+    "    information: {type: 'json'},\n" +
+    "    createdAt: {type: 'datetime'},\n" +
+    "    action: {type: 'string'},\n" +
+    "    \n" +
+    "    associatedModels: {type: 'json'},\n" +
+    "    location: {type: 'json'},\n" +
+    "    tags: {type: 'json'},\n" +
+    "    creator: {type: 'string'},\n" +
+    "\n" +
     "};</div>\n" +
     "                    <p><b>get /api/action</b></p>\n" +
     "                </div>\n" +
@@ -3086,14 +3094,14 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "        <div class=\"\">\n" +
-    "            <div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "                <div class=\"card\" ng-click=\"skip()\" style=\"text-align:center\">\n" +
-    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\"><i class=\"fa fa-arrow-left\"></i> SKIP</button>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
     "            <div class=\"col-xs-9\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "                <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
     "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE <i class=\"fa fa-arrow-right\"></i></button>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "                <div class=\"card\" ng-click=\"skip()\" style=\"text-align:center\">\n" +
+    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\"><i class=\"fa fa-angle-double-right\"></i> SKIP</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -3369,7 +3377,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"card\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
+    "            <div ng-if=\"activity.length > 0\" class=\"card\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
@@ -4275,6 +4283,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		<div class=\"card\" ng-show=\"pluralistic\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Pluralistic Market</h2>\n" +
+    "				<h4>Value Vector x Value Vector</h5>\n" +
     "				<div class=\"col-md-6\"><highchart config=\"chartMap\"></highchart></div>\n" +
     "				<div class=\"col-md-6\"><highchart config=\"chartMap\"></highchart></div>\n" +
     "			</div>\n" +
@@ -4302,6 +4311,8 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		<div class=\"card\">\n" +
     "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button>\n" +
     "		</div>\n" +
+    "		<h2>Activity Feed</h2>\n" +
+    "\n" +
     "		<!--TODO: Partially Filled Orders | TRADES-->\n" +
     "		<div ng-repeat=\"order in orders\">\n" +
     "	        <div class=\"card\">\n" +
@@ -9501,7 +9512,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div ng-show=\"!working\">\n" +
-    "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Start Work <!--+ Time--></button>\n" +
+    "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Create Time</button>\n" +
     "                    <div ng-show=\"question && !streaming\">\n" +
     "                        <h3>Streaming?</h3>\n" +
     "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</button>\n" +

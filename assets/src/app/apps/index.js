@@ -35,6 +35,8 @@ angular.module( 'conexus.apps', [
         //{title:'CRE8 CORE TRANSACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
         //{title:'CRE8 CORE VALIDATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
 
+        //ITEM APPS UTILITIZE THE ACTION MODEL.. HAVE MANIFOLDS SUCH AS WEAR, USE, CONSUME --> WATER AS ITEM :) YAY :)) +
+
         {title:'UNIVERSAL TOKEN', description:'Universal Token, an eglatarian initalization for value map creation, namespace: UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
 
         {title:'Consumption', description:'Comsumption Tracking Tokenization, namespace: CRE8+CONSUMPTION+', tags:'CRE8,consumption'},
@@ -58,6 +60,7 @@ angular.module( 'conexus.apps', [
         {title:'TRON Tokenization', description:'TRON Tokenization, manages custodial relationships, namespace: TRON', tags:'TRON,crypto,finance'},
 
         {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration, namespace: DATA+STEEM+', tags:'STEEM,activity,app,authentication'},
+
 
     ];
 
