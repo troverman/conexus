@@ -109,7 +109,7 @@ angular.module( 'conexus.home', [
         {title:'WE ARE ALL IN THIS TOGETHER'},
         {title:'SHARING IS VALUABLE'},
         {title:'GUIDING GROUP INTENTIONALITY'},
-        {title:'UNITY THOUGH TRANSPARENCY'},
+        {title:'UNITY THROUGH TRANSPARENCY'},
         //{title:'YOU GIVE WHAT YOU GET'},
         {title:'EMPOWERING LOCAL COMMUNITIES'},
         {title:'THE TIME TO CREATE IS NOW'},

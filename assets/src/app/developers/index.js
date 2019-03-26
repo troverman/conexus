@@ -18,12 +18,8 @@ angular.module( 'conexus.developers', [
 
 .controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'OrderModel', 'ReactionModel', 'titleService', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, OrderModel, ReactionModel, titleService, TransactionModel, ValidationModel ) {
     titleService.setTitle('Developers | CRE8.XYZ');
-
-
     $scope.results = '[{}]';
-
     $scope.newQuery = {};
-
 
     $scope.apiCall = function(query){
         if (query.model == 'CONTENT'){
@@ -49,8 +45,6 @@ angular.module( 'conexus.developers', [
         }
     };
     //$scope.apiCall();
-
-
 
     //VALIDATION GRAPH
     $scope.graphOptions = {
@@ -171,6 +165,61 @@ angular.module( 'conexus.developers', [
     //    $scope.graphData.links.push({value:1, source:0, target:length});
     //}
 
+
+
+    //DATA MODELS
+
+    $scope.humanReadableValidationNFTModel = JSON.stringify({ 
+        string: 'MODEL+ADDRESS',
+        information:{
+            inCirculation:1,
+            markets:0,
+        },
+        protocols:[
+            'BASE',
+        ],
+        logic:{
+            transferrable:true, 
+            mint:'ONCREATEVALIDATION'
+        }
+    }, null, 4);
+
+
+    $scope.newOrderModel = JSON.stringify([{
+            setAlpha:{UNIVERSALTOKEN:1},
+            setBeta:{'CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS':1}, 
+            type:'ONBOOK', 
+            status:'CONTINUAL'
+        },{
+            setAlpha:{UNIVERSALTOKEN:20},
+            setBeta:{'CRE8+TIME+REST+ONMINT+SPONSOR+ADDRESS':0.1}, 
+            type:'ONBOOK', 
+            status:'CONTINUAL'
+        },{
+            setAlpha:{UNIVERSALTOKEN:15},
+            setBeta:{
+                'CRE8+TIME+CHILL+ONMINT+SPONSOR+ADDRESS':2, 
+                'CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS':1
+            }, 
+            type:'ONBOOK', 
+            status:'CONTINUAL'
+        },
+    ], null, 4);
+
+    $scope.orderBookTensor = JSON.stringify({
+        CRE8:{
+            BTC:{orderBook:[]},
+            ETH:{orderBook:[]},
+            LTC:{orderBook:[]},
+            XRP:{orderBook:[]},
+        },
+        BTC:{
+            CRE8:{orderBook:[]},
+            ETH:{orderBook:[]},
+            LTC:{orderBook:[]},
+            XRP:{orderBook:[]},
+        },
+    }, null, 4);
 
 
 }]);

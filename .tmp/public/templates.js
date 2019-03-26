@@ -1333,29 +1333,28 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\">\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
     "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
+    "            <div class=\"col-sm-7\">\n" +
     "                <h2>Developers</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Building Applications that further the promise of shared prosperity is a great public service.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value.Change the world, participate in the development of tokenization protocols & applications.</p>\n" +
     "\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-6\" style=\"text-align:right\">\n" +
+    "            <div class=\"col-sm-5\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\">\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
@@ -1420,6 +1419,158 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><a href=\"#SYNTHETICTOKENIZATION\">Tokenization & Pattern Recognition</a></p>\n" +
     "\n" +
     "            </div>\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"spacing-50\" id=\"CRE8VM\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "\n" +
+    "                <h4>The Decentralized CRE8 Virtual Machine</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
+    "                <p>MERKLE ROOT INFORMATION HERE!</p>\n" +
+    "                <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
+    "                <!--blocks, tx, mining, connected, transparency-->\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"spacing-50\" id=\"APPDESIGN\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <!--TOKEN STRING MAPPING-->\n" +
+    "            <h2>Interoperable Protocol Architecture Design</h2>\n" +
+    "            <h4>Application Design</h4>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "            <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
+    "            <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
+    "            <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
+    "            <div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>\n" +
+    "            <div class=\"spacing-50\"></div> \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"spacing-50\" id=\"CRE8\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "\n" +
+    "                <h2>CRE8</h2>    \n" +
+    "                <h3>Core Protocols</h3>  \n" +
+    "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
+    "                <h5>Action Tokenization Protocol</h5>\n" +
+    "                <h5>Manifold Tokenization Protocol</h5>\n" +
+    "                <h5>Association Tokenization Protocol</h5>\n" +
+    "                <h5>Content Tokenization Protocol</h5>\n" +
+    "                <h5>Follow Tokenization Protocol</h5>\n" +
+    "                <h5>Item Tokenization Protocol</h5>\n" +
+    "                <h5>Location Tokenization Protocol</h5>\n" +
+    "                <h5>Member Tokenization Protocol</h5>\n" +
+    "                <h5>Order Tokenization Protocol</h5>\n" +
+    "                <h5>Project Tokenization Protocol</h5>\n" +
+    "                <h5>Project Charter Protocol</h5>\n" +
+    "                <h5>Reaction Tokenization Protocol</h5>\n" +
+    "                <h5>Task Tokenization Protocol</h5>\n" +
+    "                <h5>Time Tokenization Protocol</h5>\n" +
+    "                <h5>Transaction Tokenization Protocol</h5>\n" +
+    "                <h5>View Tokenization Protocol</h5>\n" +
+    "                <h5>Validation Tokenization Protocol</h5>\n" +
+    "                <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>STRUCTURE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>LANUGAGE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>CONGRUENCE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>MANIFOLD</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
+    "\n" +
+    "                    <!--\n" +
+    "                    <p><b>+[] SPACE</b></p>\n" +
+    "\n" +
+    "                    <p><b>Application Specific</b></p>\n" +
+    "                    <p><b>+CREDIT</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
+    "\n" +
+    "                    <p><b>+FUTURE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
+    "\n" +
+    "                    <p><b>+OPTION</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "\n" +
+    "                    <p><b>+SPONSOR</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
+    "                    -->\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <p><b>CONNECTION</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>CRE8 CORE as a Manifold</b></p>\n" +
+    "                <p>Defining Verbs in a string space</p>\n" +
+    "                <p><b>CRE8</b></p>\n" +
+    "                <p><b>MEMBER</b></p>\n" +
+    "                <p><b>PROJECT</b></p>\n" +
+    "                <p><b>TASK</b></p>\n" +
+    "                <p><b>TIME</b></p>\n" +
+    "                <p><b>VALIDATION</b></p>\n" +
+    "                <p><b>ORDER</b></p>\n" +
+    "                <!--/block, /tx, /address-->\n" +
+    "                <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
+    "\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -1433,10 +1584,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "                <div>\n" +
-    "                    <h4><b>Conex API</b></h4>\n" +
+    "                    <h3><b>Conex API</b></h3>\n" +
     "                    <h5>Filter & Search Parameters</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -1457,7 +1606,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
-    "                    <h4>Models & Endpoints</h4>\n" +
+    "                    <h3>Models & Endpoints</h3>\n" +
     "                </div>\n" +
     "\n" +
     "                <div>\n" +
@@ -1500,7 +1649,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <h4><b>Assoication</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
-    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#\">validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\">validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var associationModel = {\n" +
     "    associatedModels: [\n" +
@@ -1523,7 +1672,34 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <h4><b>Block</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequential validated blocks of information.</p>\n" +
-    "                    <p>MERKLE ROOT INFORMATION HERE!</p>\n" +
+    "\n" +
+    "                    <!--\n" +
+    "                    BLOCK HEADERS ETH\n" +
+    "                    parentHash\n" +
+    "                    ommersHash\n" +
+    "                    beneficiary\n" +
+    "                    stateRoot\n" +
+    "                    transactionsRoot\n" +
+    "                    Hash of the root node of the transactions trie. This trie contains all transactions in the block body.\n" +
+    "\n" +
+    "                    receiptsRoot\n" +
+    "                    Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.\n" +
+    "\n" +
+    "                    logsBloom\n" +
+    "                    difficulty\n" +
+    "                    number\n" +
+    "                    gasLimit\n" +
+    "                    gasUsed\n" +
+    "                    timestamp\n" +
+    "                    extraData\n" +
+    "                    mixHash\n" +
+    "                    nonce\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <img style=\"height:200px;\" style=\"\" src=\"https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png\">\n" +
+    "                    <img style=\"height:200px;\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png\">\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var blockModel = {\n" +
     "    txCount: {type: 'string'},\n" +
@@ -1550,9 +1726,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p><b>get /api/block</b></p>\n" +
     "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -1647,9 +1820,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>[get, post] /api/event</b></p>\n" +
     "                </div>\n" +
     "                -->\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "\n" +
+    "               \n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -1830,8 +2001,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Order</b></h4>\n" +
@@ -1871,8 +2040,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -2026,7 +2193,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    skip: 0,\n" +
     "    sort: 'createdAt DESC'\n" +
     "};</div>\n" +
-    "\n" +
     "                    <div>\n" +
     "                        <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>\n" +
     "                    </div>\n" +
@@ -2043,9 +2209,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        type:[],\n" +
     "    };\n" +
     "    -->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "                    <p><b>get /api/search</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2132,8 +2295,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                \n" +
     "                <div class=\"spacing-50\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Transaction</b></h4>\n" +
@@ -2176,9 +2337,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -2206,8 +2364,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <h4><b>Validation</b></h4>\n" +
@@ -2238,9 +2394,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                    <p>Reputation & Validation</p>\n" +
     "\n" +
-    "                    <p></p>\n" +
-    "\n" +
-    "\n" +
     "                    <p>Interoperable Validation Types</p>\n" +
     "                    <p>Composite Validation (CRE8), Human Validated Proof of Work, Machine Validation, and App Specific Validation</p>\n" +
     "\n" +
@@ -2253,8 +2406,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>PROJECT - ITEM: DISCRETE, PROJECT - MEMBER: DISCRETE, PROJECT - ORDER: DISCRETE</p>\n" +
     "                    <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>\n" +
     "                    <p>PROJECT - TASK - TIME</p>\n" +
-    "\n" +
-    "                    <p>Project - Task</p>\n" +
+    "                    <p>PROJECT - TASK</p>\n" +
     "\n" +
     "                    <p><b>[get, post] /api/validation</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>\n" +
@@ -2273,10 +2425,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"col-sm-4\">\n" +
@@ -2286,192 +2434,100 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div> \n" +
+    "\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\" id=\"TOKENIZATION\"></div>\n" +
+    "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "\n" +
-    "            <!--TOKEN STRING MAPPING-->\n" +
-    "\n" +
-    "            <h2>Interoperable Protocol Architecture Design</h2>\n" +
-    "            <h4>Application Design</h4>\n" +
-    "            <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
-    "            <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
-    "            <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
-    "            <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
-    "            <div hljs hljs-language=\"javascript\">\n" +
-    "var humanReadableValidationNFTModel = {\n" +
-    "    string: 'VALIDATION+'+data[x][y].id,\n" +
-    "    information:{\n" +
-    "        inCirculation:1,\n" +
-    "        markets:0,\n" +
-    "    },\n" +
-    "    protocols:[\n" +
-    "        'BASE',\n" +
-    "    ],\n" +
-    "    logic:{\n" +
-    "        transferrable:true, \n" +
-    "        mint:'ONCREATEVALIDATION'\n" +
-    "    }\n" +
-    "};\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"spacing-10\"></div> \n" +
-    "\n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "        <div class=\"row\">\n" +
-    "\n" +
-    "            <div id=\"CRE8\" class=\"col-sm-12\">\n" +
-    "\n" +
-    "                <h2>CRE8</h2>    \n" +
-    "                <h3>Core Protocols</h3>  \n" +
-    "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
-    "                <h5>Action Tokenization Protocol</h5>\n" +
-    "                <h5>Manifold Tokenization Protocol</h5>\n" +
-    "                <h5>Association Tokenization Protocol</h5>\n" +
-    "                <h5>Content Tokenization Protocol</h5>\n" +
-    "                <h5>Follow Tokenization Protocol</h5>\n" +
-    "                <h5>Item Tokenization Protocol</h5>\n" +
-    "                <h5>Location Tokenization Protocol</h5>\n" +
-    "                <h5>Member Tokenization Protocol</h5>\n" +
-    "                <h5>Order Tokenization Protocol</h5>\n" +
-    "                <h5>Project Tokenization Protocol</h5>\n" +
-    "                <h5>Project Charter Protocol</h5>\n" +
-    "                <h5>Reaction Tokenization Protocol</h5>\n" +
-    "                <h5>Task Tokenization Protocol</h5>\n" +
-    "                <h5>Time Tokenization Protocol</h5>\n" +
-    "                <h5>Transaction Tokenization Protocol</h5>\n" +
-    "                <h5>View Tokenization Protocol</h5>\n" +
-    "                <h5>Validation Tokenization Protocol</h5>\n" +
-    "                <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>STRUCTURE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>LANUGAGE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>CONGRUENCE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>MANIFOLD</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
-    "\n" +
-    "                    <!--\n" +
-    "                    <p><b>+[] SPACE</b></p>\n" +
-    "\n" +
-    "                    <p><b>Application Specific</b></p>\n" +
-    "                    <p><b>+CREDIT</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
-    "\n" +
-    "                    <p><b>+FUTURE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
-    "\n" +
-    "                    <p><b>+OPTION</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
-    "\n" +
-    "                    <p><b>+SPONSOR</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
-    "                    -->\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>CONNECTION</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <p><b>CRE8 CORE as a Manifold</b></p>\n" +
-    "                <p>Defining Verbs in a string space</p>\n" +
-    "                <p><b>CRE8</b></p>\n" +
-    "                <p><b>MEMBER</b></p>\n" +
-    "                <p><b>PROJECT</b></p>\n" +
-    "                <p><b>TASK</b></p>\n" +
-    "                <p><b>TIME</b></p>\n" +
-    "                <p><b>VALIDATION</b></p>\n" +
-    "                <p><b>ORDER</b></p>\n" +
-    "                <!--/block, /tx, /address-->\n" +
-    "                <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "        <div class=\"row\">\n" +
-    "\n" +
-    "            <div id=\"CRE8\" class=\"col-sm-12\">\n" +
-    "\n" +
-    "                \n" +
-    "\n" +
+    "            <div class=\"col-sm-8\">\n" +
     "                <div id=\"TOKENIZATION\" class=\"spacing-25\"></div>\n" +
-    "                <h4>Tokenization</h4>\n" +
+    "                <h3>Tokenization</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization from protocols.</p>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
+    "</div>\n" +
     "\n" +
-    "                \n" +
-    "                <div id=\"CRE8VM\" class=\"spacing-25\"></div>\n" +
-    "                <h4 id=\"CRE8VM\">The Decentralized CRE8 Virtual Machine</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
-    "                <!--blocks, tx, mining, connected, transparency-->\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
+    "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "            \n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <h4>The Peer Network & Transparency</h4>\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\" id=\"PEER\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">  \n" +
+    "                <h3>The Peer Network & Transparency</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
     "                <a href=\"/blocks\">Blocks</p>\n" +
     "                <a href=\"/transparency\">Peers</a>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
+    "</div>\n" +
     "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "                <div id=\"IDENTITY\" class=\"spacing-25\"></div>\n" +
-    "                <h4>Identity</h4>\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\" id=\"IDENTITY\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">  \n" +
+    "                <h3>Identity & Interoperability</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Protocols to manage user operations</p>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
+    "                <a href=\"\">Passport model</a>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
+    "</div>\n" +
     "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "                <div id=\"VALIDATION\" class=\"spacing-25\"></div>\n" +
-    "                <h4>Association Traversal</h4>\n" +
-    "                <h5>Validation Traversal</h5>\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\" id=\"VALIDATION\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "                <h2>The Organizational Complex</p>\n" +
+    "                <h3>Association Traversal</h3>\n" +
+    "                <h4>Validation Traversal</h4>\n" +
     "                <p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
-    "\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals (and protocols)</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "        \n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
+    "</div>\n" +
     "\n" +
-    "                <div id=\"MULTIMARKET\" class=\"spacing-25\"></div>\n" +
-    "                <h4>MultiMarket Exploration & Traversal</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The Multidimensional Token Market</p>\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"spacing-50\" id=\"MULTIMARKET\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "\n" +
+    "                <h3>MultiMarket Exploration & Traversal</h3>\n" +
+    "                <p><b>The Multidimensional Token Market</b></p>\n" +
     "\n" +
     "                <!--VALUE MAP STRUCUTRE-->\n" +
     "                <p style=\"color:gray;font-style:italic\">Discrete Order Structure / Value Map</p>\n" +
@@ -2479,68 +2535,20 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">The Anatomy of an Order</p>\n" +
     "                <!--SET VS DISCRETE; VS TYPES; VS CONTINUOUS ETC-->\n" +
     "\n" +
-    "                <!-- AUTOMATICALLY SELL ONMANIFOLD TOKENS-->\n" +
-    "                <div hljs hljs-language=\"javascript\">\n" +
-    "var newOrder = [\n" +
-    "    {\n" +
-    "        setAlpha:{UNIVERSALTOKEN:1},\n" +
-    "        setBeta:{CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS:1}, \n" +
-    "        type:'ONBOOK', \n" +
-    "        status:'CONTINUAL'\n" +
-    "    },\n" +
-    "    {\n" +
-    "        setAlpha:{UNIVERSALTOKEN:20},\n" +
-    "        setBeta:{CRE8+TIME+REST+ONMINT+SPONSOR+ADDRESS:0.1}, \n" +
-    "        type:'ONBOOK', \n" +
-    "        status:'CONTINUAL'\n" +
-    "    },\n" +
-    "    {\n" +
-    "        setAlpha:{UNIVERSALTOKEN:15},\n" +
-    "        setBeta:{\n" +
-    "            CRE8+TIME+CHILL+ONMINT+SPONSOR+ADDRESS:2, \n" +
-    "            CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS:1\n" +
-    "        }, \n" +
-    "        type:'ONBOOK', \n" +
-    "        status:'CONTINUAL'\n" +
-    "    },\n" +
-    "...];</div>\n" +
+    "                <!-- AUTOMATICALLY SELL ONMANIFOLD TOKENS -->\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"newOrderModel\"></div>\n" +
     "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Matching Engine</p>\n" +
+    "                <p><b>Matching Engine</b></p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Priority of Prefrence for Higher Dimensional Orders; types</p>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">From Σ({}={}) --compute--> </p>\n" +
     "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure</p>\n" +
-    "                <!--<div hljs hljs-language=\"javascript\">\n" +
-    "var orderBookTensor = [{\n" +
-    "    name: 'BTC',\n" +
-    "    data:[\n" +
-    "        {name:'LTC', bids:[], asks:[]},\n" +
-    "        {name:'XMR', bids:[], asks:[]},\n" +
-    "        {name:'XRP', bids:[], asks:[]},\n" +
-    "    ],\n" +
-    "},\n" +
-    "...];</div>-->\n" +
-    "<!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->\n" +
-    "            <div hljs hljs-language=\"javascript\">\n" +
-    "var orderBookTensor = {\n" +
-    "    CRE8:{\n" +
-    "        BTC:{orderBook:[]},\n" +
-    "        ETH:{orderBook:[]},\n" +
-    "        LTC:{orderBook:[]},\n" +
-    "        XRP:{orderBook:[]},\n" +
-    "        ...\n" +
-    "    },\n" +
-    "    BTC:{\n" +
-    "        CRE8:{orderBook:[]},\n" +
-    "        ETH:{orderBook:[]},\n" +
-    "        LTC:{orderBook:[]},\n" +
-    "        XRP:{orderBook:[]},\n" +
-    "        ...\n" +
-    "    },\n" +
-    "    ...\n" +
-    "};</div>\n" +
+    "                \n" +
+    "                <!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"orderBookTensor\"></div>\n" +
+    "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">Tensor Structure of Assets; Layering and Braiding</p>\n" +
@@ -2578,34 +2586,51 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h5>Layered Deep Learning</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Combinatorials</p>\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "\n" +
     "               \n" +
-    "                <div id=\"GROUPINTENTION\" class=\"spacing-25\"></div>\n" +
-    "                <h4>Project Charters and Group Coordination</h4>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"spacing-50\" id=\"GROUPINTENTION\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "                <h3>Project Charters and Group Coordination</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "                <div id=\"SYNTHETICTOKENIZATION\" class=\"spacing-25\"></div>\n" +
-    "                <h4>Tokenization and Pattern Recognition | Modular Validation</h4>\n" +
+    "<div id=\"about-section1\">\n" +
+    "    <div class=\"spacing-50\" id=\"SYNTHETICTOKENIZATION\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "                <h3>Tokenization and Pattern Recognition | Modular Validation</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Deep Learning and video feeds to discreetly tokenize time</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization with a high degree of consensus on context through multidimensional validation</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">TOKENIZING PUBLIC SPACES THOUGH AI</p>\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "\n" +
     "            </div>\n" +
-    "\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
     "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
     "");
 }]);
 
@@ -3101,7 +3126,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "            <div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "                <div class=\"card\" ng-click=\"skip()\" style=\"text-align:center\">\n" +
-    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\"><i class=\"fa fa-angle-double-right\"></i> SKIP</button>\n" +
+    "                    <button style=\"width:100%\" class=\"btn btn-default log-btn\">SKIP <i class=\"fa fa-angle-double-right\"></i></button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
