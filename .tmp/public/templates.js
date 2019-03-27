@@ -6590,22 +6590,24 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\" style=\"background-image: url('{{item.user.coverUrl}}')\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>\n" +
-    "                        <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\">\n" +
-    "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                            {{item.user.username}}\n" +
-    "                            <br>\n" +
-    "                            <span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span>\n" +
-    "                            <span ng-if=\"item.project\" span style=\"color:gray;font-size:10px;\">0x{{item.id}}</span>\n" +
     "\n" +
-    "                        </a>\n" +
-    "                    </h1>\n" +
+    "            <div style=\"background-image: url('{{item.user.coverUrl}}')\" class=\"imageContainerSmall\">\n" +
+    "            <!--<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">-->\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "\n" +
+    "                        <h1>\n" +
+    "                            <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{item.user.username}}\n" +
+    "                           </a>\n" +
+    "                        </h1>\n" +
+    "                        <h5 style=\"color:white\"><span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span></h5>\n" +
+    "                        <h5 ng-if=\"item.project\" style=\"color:white\"><span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span></h5>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
+    "\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
