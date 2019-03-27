@@ -1341,7 +1341,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h2>Developers</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Building Applications that further the promise of shared prosperity is a great public service.</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value.Change the world, participate in the development of tokenization protocols & applications.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value. Change the world, participate in the development of tokenization protocols & applications.</p>\n" +
     "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-5\" style=\"text-align:right\">\n" +
@@ -1360,12 +1360,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "                \n" +
-    "                <h3>Documentation</h3>\n" +
+    "                <h2>Documentation</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <p><a href=\"#CRE8VM\">The CRE8 Decentralized Peer Network & Virtual Machine</a></p>\n" +
+    "\n" +
+    "                <!--<p><a href=\"#PEER\">The Peer Network & Transparency</a></p>-->\n" +
     "\n" +
     "                <p><a href=\"#APPDESIGN\">Interoperable Protocol & Application Design Architecture</a></p>\n" +
     "\n" +
@@ -1435,7 +1437,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "\n" +
-    "                <h4>The Decentralized CRE8 Virtual Machine</h4>\n" +
+    "                <h2>The Decentralized CRE8 Virtual Machine</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
     "                <p>MERKLE ROOT INFORMATION HERE!</p>\n" +
     "                <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
@@ -1446,6 +1448,27 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\" id=\"PEER\"></div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-8\">  \n" +
+    "                <h2>The Peer Network & Transparency</h2>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
+    "                <a href=\"/blocks\">Blocks</p>\n" +
+    "                <a href=\"/transparency\">Peers</a>\n" +
+    "                <!--blocks, tx, mining, connected, transparency-->\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
@@ -2459,27 +2482,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
     "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\" id=\"PEER\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">  \n" +
-    "                <h3>The Peer Network & Transparency</h3>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
-    "                <a href=\"/blocks\">Blocks</p>\n" +
-    "                <a href=\"/transparency\">Peers</a>\n" +
-    "                <!--blocks, tx, mining, connected, transparency-->\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
     "    <div class=\"spacing-50\" id=\"IDENTITY\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
@@ -2590,6 +2592,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
@@ -2608,6 +2611,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
@@ -2617,7 +2621,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <h3>Tokenization and Pattern Recognition | Modular Validation</h3>\n" +
+    "                <h3>Tokenization and Pattern Recognition</h3>\n" +
+    "                <h5>Modular Validation</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">Deep Learning and video feeds to discreetly tokenize time</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization with a high degree of consensus on context through multidimensional validation</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">TOKENIZING PUBLIC SPACES THOUGH AI</p>\n" +
@@ -2627,6 +2632,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
@@ -2895,16 +2901,21 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "    <div class=\"row\" ng-show=\"isTutorial\">\n" +
     "        \n" +
     "        <div ng-show=\"showProjects\" class=\"card\" ng-click=\"\">\n" +
-    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
-    "                <div style=\"color:white;padding:15px;\">\n" +
-    "                    <h1>Projects</h1>\n" +
-    "                    <p>The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>\n" +
+    "\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Projects</h1>\n" +
+    "                        <p style=\"color:white;\">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                \n" +
     "                <ul style=\"padding:0px;margin-bottom:0px\" class=\"member-tabs\">\n" +
     "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                    <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </ul>\n" +
@@ -2946,12 +2957,14 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                    </div>\n" +
     "\n" +
     "                                    <a href=\"/project/{{item.urlTitle}}\">\n" +
-    "                                        <img style=\"height:64px\" src=\"{{item.avatarUrl}}\">\n" +
+    "                                        <img style=\"height:64px;float:left;margin-right:10px;\" src=\"{{item.avatarUrl}}\">\n" +
     "                                        <h3 style=\"margin-top:0px\">{{item.title}}</h3>\n" +
     "                                    </a>\n" +
     "\n" +
     "                                    <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
     "                                    \n" +
+    "                                    <div style=\"clear:both\"></div>\n" +
+    "\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -2963,12 +2976,15 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"showTasks\" class=\"card\" ng-click=\"\">\n" +
-    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1481732582370-0445455c5ba1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2271&q=80');\">\n" +
-    "                <div style=\"color:white;padding:15px;\">\n" +
-    "                    <h1>Tasks</h1>\n" +
-    "                    <p>Coordinate with Intention. Get Involved.</p>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tasks</h1>\n" +
+    "                        <p style=\"color:white;\">Coordinate with Intention. Get Involved.</p>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "            \n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
@@ -3005,9 +3021,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
     "\n" +
+    "                                    <!--TODO: CARD ACTION-->\n" +
     "                                    <div style=\"float:right;text-align:right\">\n" +
-    "                                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                                        <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                        <p ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                                        <p ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                                    </div>\n" +
     "\n" +
     "                                    <h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
@@ -3036,10 +3053,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"showMembers\" class=\"card\" ng-click=\"\">\n" +
-    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
-    "                <div style=\"color:white;padding:15px;\">\n" +
-    "                    <h1>Members</h1>  \n" +
-    "                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?friendship,skills,engineering,code,computer,technology,value,fintech')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Members</h1>\n" +
+    "                        <p style=\"color:white;\">CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\" style=\"max-height:100vh;overflow:scroll\">\n" +
@@ -3075,10 +3094,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"showValue\" class=\"card\" ng-click=\"\">\n" +
-    "            <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');\">\n" +
-    "                <div style=\"color:white;padding:15px;\">\n" +
-    "                    <h1>Update Value Map</h1>  \n" +
-    "                    <p>Now that we know more about you, let's update.</p>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Update Value Map</h1>\n" +
+    "                        <p style=\"color:white;\">Now that we know more about you, let's update.</p>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -3696,6 +3717,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "                <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
@@ -4030,17 +4052,15 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("login/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("login/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1\">\n" +
-    "                <h1>Login | Welcome back!</h1>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Login</h1>\n" +
+    "            <h5 style=\"color:white\">Welcome back!</h5>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"row\">\n" +
@@ -5864,6 +5884,36 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <!--TODO: NG-IF-->\n" +
     "\n" +
+    "     <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"action\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div class=\"page-heading\">\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <div style=\"padding:16px\">\n" +
+    "                    <h1>+ Action</h1>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Create action.. <a ng-click=\"informationToggle('CREATECONTENT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                    <h5>Action</h5>\n" +
+    "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                    <h5>Accociated Models</h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
+    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
@@ -6125,7 +6175,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Items connect with Token Protocols and 2nd Stage delivery applications. <a ng-click=\"informationToggle('CREATEITEM')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click=\"informationToggle('CREATEITEM')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <form role=\"form\" ng-submit=\"createItem()\">\n" +
     "                    <h5>Title</h5>\n" +
@@ -6140,14 +6190,30 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    </tags-input>\n" +
     "                    <h5>Location</h5>\n" +
     "                    <input placeholder=\"Location\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                    <h5>Tradable</h5>\n" +
     "                    <md-switch ng-model=\"tradable\" aria-label=\"GPS Tracking\"></md-switch>\n" +
+    "\n" +
     "                    <h5>Identifer Set <a ng-click=\"informationToggle('IDENTIFERSET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.identiferSet\" class=\"form-control\">\n" +
     "                    <h5>Amount Set <a ng-click=\"informationToggle('AMOUNTSET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <input placeholder=\"Amount Set\" type=\"text\" ng-model=\"newItem.amountSet\" class=\"form-control\">\n" +
+    "\n" +
     "                    <h5>Delivery Protocol <a ng-click=\"informationToggle('DELIVERYPROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <text-angular ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.title\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -6219,10 +6285,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
     "                <h2 ng-if=\"true\" class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/discover\">Discover</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
+    "                <!--<h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/projects\">Projects</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/tasks\">Tasks</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/tasks\">Tasks</a></h2>-->\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/notifications\"><span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/account\">Settings</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/logout\">Logout</a></h2>\n" +
@@ -8812,7 +8878,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "            <!--<li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>-->\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "\n" +
@@ -8913,17 +8979,14 @@ angular.module("reaction/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("register/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("register/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1468070454955-c5b6932bd08d?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80')\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <h1>Join Our Community</h1>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Join Our Community</h1>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
+    "\n" +
     "\n" +
     "<div class=\"container\" ng-show=\"true\">\n" +
     "\n" +
@@ -8940,17 +9003,21 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div ng-show=\"showIntro\">\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
-    "                    <div style=\"color:white;padding:15px;\">\n" +
-    "                        <h1>Create Your Value Map</h1>\n" +
-    "                        <p>Participate in creating a mechanism of value.</p>\n" +
+    "               \n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Create Your Value Map</h1>\n" +
+    "                            <p style=\"color:white;\">Participate in creating a mechanism of value.</p>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete and intentional your dimensional vote the better.</p>\n" +
     "                    <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(1)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(1)\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -8959,12 +9026,16 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div ng-show=\"showValue\">\n" +
     "            <div class=\"card\">\n" +
-    "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
-    "                    <div style=\"color:white;padding:15px;\">\n" +
-    "                        <h1>Your Personal Value</h1>\n" +
-    "                        <p>What do you believe is valuable?</p>\n" +
+    "                \n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Your Personal Value</h1>\n" +
+    "                            <p style=\"color:white;\">What do you believe is valuable?</p>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile. The more detailed your dimensional vote the stronger the effect.</p>\n" +
     "                </div>\n" +
@@ -9022,7 +9093,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -9030,19 +9101,19 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div ng-show=\"showDaily\">\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
-    "                    <div style=\"color:white;padding:15px;\">\n" +
-    "                        <h1>A Valuable Day</h1>\n" +
-    "                        <p>How would an ideal day look to you?</p>\n" +
+    "           \n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">A Valuable Day</h1>\n" +
+    "                            <p style=\"color:white;\">How would an ideal day look to you?</p>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">A day well spent. Striving for universal adaptation and reflectivity, your dimensional vote can be encompassing of all aspects of the human experience.</p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
     "\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
     "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1531502774286-5e4e8e94879f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
     "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
     "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1504246979673-176ed6740840?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
@@ -9079,9 +9150,8 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
-    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(3)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(3)\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -9089,12 +9159,16 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div ng-show=\"showPersonal\">\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
-    "                    <div style=\"color:white;padding:15px;\">\n" +
-    "                        <h1>Personal Information</h1>\n" +
-    "                        <p>What would you like us all to know about you?</p>\n" +
+    "            \n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?information,genetics,dna,human,personal,passport,identity')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Personal Information</h1>\n" +
+    "                            <p style=\"color:white;\">What would you like us all to know about you?</p>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">We Promote Consentual Sharing</p>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Give as much information as you would like.</p>\n" +
@@ -9118,7 +9192,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(4)\" class=\"btn btn-default log-btn\">Continue</button>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(4)\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -9126,10 +9200,13 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        <div ng-show=\"showFinal\">\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <div style=\"max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');\">\n" +
-    "                    <div style=\"color:white;padding:15px;\">\n" +
-    "                        <h1>Let's Go!</h1>\n" +
-    "                        <p>It's time to create a more egalitarian world.</p>\n" +
+    "\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?egalitarian,sharing,love,creative,world,community,awesome')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Let's Go!</h1>\n" +
+    "                            <p style=\"color:white;\">It's time to create a more egalitarian world.</p>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +

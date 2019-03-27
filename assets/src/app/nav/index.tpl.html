@@ -2,6 +2,36 @@
 
     <!--TODO: NG-IF-->
 
+     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="action" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+        <div ng-if="newContent" class="md-list-item-text" layout="column" style="height:100%;">
+
+            <div class="spacing-25"></div>
+            <div class="page-heading">
+                <div class="spacing-25"></div>
+                <div style="padding:16px">
+                    <h1>+ Action</h1>
+                </div>
+                <div class="spacing-25"></div>
+            </div>
+
+            <div style="padding:16px">
+                <div class="spacing-15"></div>
+                <p style="color:gray;font-style:italic">Create action.. <a ng-click="informationToggle('CREATECONTENT')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <div class="spacing-10"></div>
+                <form role="form" ng-submit="createContent()">
+                    <h5>Action</h5>
+                    <input type="text" placeholder="Title" ng-model="newContent.title" class="form-control">
+                    <h5>Accociated Models</h5>
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newContent.tags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+                </form>
+            </div>
+
+        </div>
+    </md-sidenav>
+
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="content" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div ng-if="newContent" class="md-list-item-text" layout="column" style="height:100%;">
 
@@ -263,7 +293,7 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Items connect with Token Protocols and 2nd Stage delivery applications. <a ng-click="informationToggle('CREATEITEM')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click="informationToggle('CREATEITEM')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createItem()">
                     <h5>Title</h5>
@@ -278,14 +308,30 @@
                     </tags-input>
                     <h5>Location</h5>
                     <input placeholder="Location" type="text" ng-model="newItem.location" class="form-control">
+
+
+
+
+
+
                     <h5>Tradable</h5>
                     <md-switch ng-model="tradable" aria-label="GPS Tracking"></md-switch>
+
                     <h5>Identifer Set <a ng-click="informationToggle('IDENTIFERSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
                     <h5>Amount Set <a ng-click="informationToggle('AMOUNTSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
+
                     <h5>Delivery Protocol <a ng-click="informationToggle('DELIVERYPROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <text-angular ng-model="newItem.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
+
+
+
+
+
+
+
+
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newItem.title">create</button>
                 </form>
             </div>
@@ -357,10 +403,10 @@
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
                 <h2 ng-if="true" class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/discover">Discover</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/market">Market</a></h2>
+                <!--<h2 class="nav-links" style="padding:12px;"><a href="/market">Market</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/marketplace">Marketplace</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/projects">Projects</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/tasks">Tasks</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/tasks">Tasks</a></h2>-->
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/notifications"><span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/account">Settings</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/logout">Logout</a></h2>

@@ -4,16 +4,21 @@
     <div class="row" ng-show="isTutorial">
         
         <div ng-show="showProjects" class="card" ng-click="">
-            <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1852&q=80');">
-                <div style="color:white;padding:15px;">
-                    <h1>Projects</h1>
-                    <p>The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>
+
+            <div style="background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Projects</h1>
+                        <p style="color:white;">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>
+                    </div>
                 </div>
             </div>
+
             <div style="padding:16px;">
                 
                 <ul style="padding:0px;margin-bottom:0px" class="member-tabs">
                     <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="getLatLng()"><i class="fa fa-map-marker"></i> Location</a></li>
                     <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
                     <div style="clear:both"></div>
                 </ul>
@@ -55,12 +60,14 @@
                                     </div>
 
                                     <a href="/project/{{item.urlTitle}}">
-                                        <img style="height:64px" src="{{item.avatarUrl}}">
+                                        <img style="height:64px;float:left;margin-right:10px;" src="{{item.avatarUrl}}">
                                         <h3 style="margin-top:0px">{{item.title}}</h3>
                                     </a>
 
                                     <div style="max-height:500px;overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
                                     
+                                    <div style="clear:both"></div>
+
                                 </div>
                             </div>
                         </div>
@@ -72,12 +79,15 @@
         </div>
 
         <div ng-show="showTasks" class="card" ng-click="">
-            <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1481732582370-0445455c5ba1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2271&q=80');">
-                <div style="color:white;padding:15px;">
-                    <h1>Tasks</h1>
-                    <p>Coordinate with Intention. Get Involved.</p>
+            <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tasks</h1>
+                        <p style="color:white;">Coordinate with Intention. Get Involved.</p>
+                    </div>
                 </div>
             </div>
+            
             <div style="padding:16px;">
 
                 <ul style="padding:0px;" class="member-tabs">
@@ -114,9 +124,10 @@
                             <div class="card" ng-click="renderToggle(item)">
                                 <div style="padding:16px;">
 
+                                    <!--TODO: CARD ACTION-->
                                     <div style="float:right;text-align:right">
-                                        <h5 ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                                        <h5 ng-click="$event.stopPropagation();renderValidationToggle(item)"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
+                                        <p ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
+                                        <p ng-click="$event.stopPropagation();renderValidationToggle(item)"><a>Associations <i class="fa fa-question-circle"></i></a></p>
                                     </div>
 
                                     <h4><a ng-click="$event.stopPropagation()" href="task/{{item.id}}">{{item.title}}</a></h4>
@@ -145,10 +156,12 @@
         </div>
 
         <div ng-show="showMembers" class="card" ng-click="">
-            <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');">
-                <div style="color:white;padding:15px;">
-                    <h1>Members</h1>  
-                    <p>CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>
+            <div style="background:url('https://source.unsplash.com/1600x900/?friendship,skills,engineering,code,computer,technology,value,fintech')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Members</h1>
+                        <p style="color:white;">CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>
+                    </div>
                 </div>
             </div>
             <div style="padding:16px;" style="max-height:100vh;overflow:scroll">
@@ -184,10 +197,12 @@
         </div>
 
         <div ng-show="showValue" class="card" ng-click="">
-            <div style="max-height:200px;overflow:hidden;background:url('https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');">
-                <div style="color:white;padding:15px;">
-                    <h1>Update Value Map</h1>  
-                    <p>Now that we know more about you, let's update.</p>
+            <div style="background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Update Value Map</h1>
+                        <p style="color:white;">Now that we know more about you, let's update.</p>
+                    </div>
                 </div>
             </div>
             <div style="padding:16px;">

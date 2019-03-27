@@ -50,6 +50,7 @@ angular.module( 'conexus.projects', [
             }
         }
     };
+    $scope.populateMap();
 
     $scope.getLatLng = function() {
         if (navigator.geolocation) {
@@ -63,8 +64,11 @@ angular.module( 'conexus.projects', [
                     zoom: 12
                 };
 
+                //TODO: INCOVERATE WITH NAV
                 //TODO: SIMPLY UPDATE QUERY :)
                 //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
+
+                
                 //TODO: DISTANCE
                 ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
                     $scope.projects = projects;
@@ -78,9 +82,6 @@ angular.module( 'conexus.projects', [
             });
         }
     };
-    $scope.getLatLng();
-    //TODO: BETTER | BETTER QUERIES
-    $scope.populateMap();
 
     //IMPROVE :)
     $scope.loadAssociations = function(){        

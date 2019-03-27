@@ -138,6 +138,7 @@ angular.module( 'conexus.home', [
     $scope.tasks = tasks;
     $scope.time = time;
 
+    //TODO: DEPRECIATE --> PUT IN NAV
     $scope.getLatLng = function() {
         if (navigator.geolocation) {
             $rootScope.stateIsLoading = true;
@@ -165,7 +166,6 @@ angular.module( 'conexus.home', [
             });
         }
     };
-    //$scope.getLatLng();
 
     //TAGS TO ASSOCIATION | VALIDATION CONTEXT
     $scope.contentList = $scope.contentList.map(function(obj){
@@ -409,22 +409,15 @@ angular.module( 'conexus.home', [
     $scope.time = time;
     $scope.transactions = transactions;
 
-
-    //LOOK AT MY FOLLOWERS
-    $scope.followers = followers;
+    
 
     //LOOK AT MY PROJECTS
     $scope.memberProjects = memberProjects;
-
-    //INFORMATION ABOUT FOLLOWERS & PROJECTS
-    //LOOK AT THE PEOPLE I FOLLOW
-    $scope.followers = $scope.followers.map(function(obj){return obj.followed});
-
-    //LOOK AY MY PROJECTS
     $scope.memberProjects = $scope.memberProjects.map(function(obj){return obj.project});
-
-    //TODO: IMPROVE
-    console.log($scope.followers);
+    //LOOK AT MY FOLLOWERS
+    $scope.followers = followers;
+    //LOOK AT THE PEOPLE I FOLLOW
+    $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
 
     $scope.members.map(function(obj){
         var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
@@ -439,6 +432,39 @@ angular.module( 'conexus.home', [
         if (index == -1){obj.isMember = false;}
         return obj;
     });
+
+
+
+    //TODO!:
+    //QUERY WORK -- FEED BUILDER
+    //IS THERE A MAX..? 100
+    //DONT DO ON FRONTEND?
+    $scope.searchQueryFeed = [];
+    for (x in $scope.followers){
+        //hmm
+        $scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})
+        //returns member feeds
+    }
+
+    for (x in $scope.memberProjects){
+        $scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})
+        //returns project feeds
+    }
+
+
+    console.log($scope.followers,$scope.searchQueryFeed);
+
+    //projects(validation tags are tokens, 
+    //tasks(validation tags), 
+    //members(following) --> members reputation(projects,tasks,..)
+
+    //time(validation tags), reaction
+
+    //ORDERS
+
+
+
+
 
     //LOOK AT MY TIME
     //LOOK AT MY TASKS
@@ -470,6 +496,12 @@ angular.module( 'conexus.home', [
     for (x in $scope.memberProjects){
         $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})
     }
+
+
+
+
+
+
 
 
     //FACTOR
@@ -548,9 +580,6 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-   
-
-
 
     //IF NON ZERO
     $scope.chart.series = [{
@@ -603,19 +632,19 @@ angular.module( 'conexus.home', [
             }
         };
 
-        //TODO
+        //TODO DEPRECIATE.. PUT IN NAV
+        //TODO: CONTAINERIZE.. IE WE ALWAYS WANT THE MAP ZOOMED ON USER
         $scope.getLatLng = function() {
+
             if (navigator.geolocation) {
                 $rootScope.stateIsLoading = true;
-                console.log(navigator.geolocation);
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    console.log(position);
                     $rootScope.stateIsLoading = false;
                     lat = position.coords.latitude; 
                     lng = position.coords.longitude;
 
-                    $scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
-                    
+                    //TODO: QUERY UPDATE ~~~~~~ OUTSIDE OF FXN ?? USE QUERY?.. made model parameter
+                    //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
                         zoom: 12
@@ -623,6 +652,8 @@ angular.module( 'conexus.home', [
                     ProjectModel.getSome('location', [lng,lat], 1000, 0, 'createdAt DESC').then(function(projects){
                         $scope.projects = projects;
                         $scope.markers = [];
+
+                        //TODO: HELPER CONTAINER FUNCTIONS
                         for (x in projects){
                             if (projects[x].location){
                                 $scope.markers.push({
@@ -636,18 +667,21 @@ angular.module( 'conexus.home', [
                                 });
                             }
                         }
+
                         $scope.projects.map(function(obj){
                             var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
                             if (index != -1){obj.isMember = true;}
                             if (index == -1){obj.isMember = false;}
                             return obj;
                         });
+
+
                     });
                     $scope.$apply();
+
                 });
             }
         };
-        $scope.getLatLng();
 
         //TODO: ROOTSCOPE
         //$scope.createMember = function(){

@@ -24,6 +24,8 @@ module.exports = {
         //FORLEASE,
         info: {type: 'json'},
 
+        //staus.. 
+
         //PRICE, LEASE TIME.. .ETC
         identifierSet: {type: 'string'},
         amountSet: {type: 'string'},
