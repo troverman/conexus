@@ -260,8 +260,30 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
+
+    //TODO: LOAD MORE --> SIMPLIFY QUERY! :)
+    //COMBO QUERY TO 'SEARCH'
+    //DECOMPOSE FOR FEED DOCUMENTATION
+    //QUERY STRUCUTRE
     $scope.loadMore = function(){
-        console.log('TODO: LOAD MORE')
+        //query = [
+            //{
+                //model:'CONTENT', 
+                //limit:100,skip:0,
+                //sort:'createdAt DESC, 
+                //filter:{
+                    //id:id,
+                    //associatedModels: model,
+                //},
+            //},
+            //{model:'ITEM', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
+            //{model:'TASK', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
+            //{model:'TIME', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
+            //{model:'PROJECT', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
+            //{model:'USER', limit:100,skip:0,sort:'createdAt DESC, filter:{}}
+        //];
+
+        console.log('TODO: LOAD MORE');
     };
 
     $scope.createReaction = function(item, type){$mdSidenav('login').toggle()};
@@ -613,6 +635,8 @@ angular.module( 'conexus.home', [
         $scope.showTasks = false;
         $scope.showMembers = false;
         $scope.showValue = false;
+        $scope.showSettings = false;
+        $scope.showCreate = false;
 
         $scope.change = function(){
             if ($scope.showProjects){
@@ -629,6 +653,16 @@ angular.module( 'conexus.home', [
             }
             else if ($scope.showValue){
                 $scope.showValue = !$scope.showValue;
+                $scope.showSettings = !$scope.showSettings;
+            }
+            else if ($scope.showSettings){
+                $scope.showSettings = !$scope.showSettings;
+                //$scope.showCreate = !$scope.showCreate;
+                $scope.isTutorial = !$scope.isTutorial;
+
+            }
+            else if ($scope.showCreate){
+                $scope.showCreate = !$scope.showCreate;
                 $scope.isTutorial = !$scope.isTutorial;
             }
         };

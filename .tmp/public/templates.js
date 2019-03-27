@@ -3138,6 +3138,36 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
+    "        <div ng-show=\"showSettings\" class=\"card\" ng-click=\"\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?settings')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Settings</h1>\n" +
+    "                        <p style=\"color:white;\">About your experience.</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <p>AVATAR UPLOAD..? ETC</p>\n" +
+    "                <p>About you</p>\n" +
+    "                <p>Apps?</p>\n" +
+    "                <p>PRIVACY; PRIVACY DISCOLSURE; CONSENT; RECORD ATTENTION; INFORMATION GENERALLLY</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-show=\"showCreate\" class=\"card\" ng-click=\"\">\n" +
+    "\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Let's Create!</h1>\n" +
+    "                        <p style=\"color:white;\">My First Post</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
     "        <div class=\"\">\n" +
     "            <div class=\"col-xs-9\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "                <div class=\"card\" ng-click=\"change()\" style=\"text-align:center\">\n" +
@@ -3357,8 +3387,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"renderToggle(item)\">\n" +
     "                    <div style=\"padding:16px;\">\n" +
     "                        <div style=\"float:right;text-align:right\">\n" +
-    "                            <h5 ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                            <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <p ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                        </div>\n" +
     "                        <h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                        <!--<p><a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>-->\n" +
@@ -3386,8 +3416,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        <div>\n" +
     "\n" +
     "                            <div style=\"float:right;text-align:right\">\n" +
-    "                                <h5 ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                                <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                <p ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                                <p ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            </div>\n" +
     "\n" +
     "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -3809,8 +3839,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                    <div style=\"padding:16px;\"> \n" +
     "\n" +
     "                        <div style=\"float:right;text-align:right\">\n" +
-    "                            <h5 ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                            <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <p ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                            <p ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                            <!--<i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
     "                        </div>\n" +
     "\n" +
@@ -3833,8 +3863,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        <div>\n" +
     "\n" +
     "                            <div style=\"float:right;text-align:right\">\n" +
-    "                                <h5 ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                                <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                                <p ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                                <p ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                                <!--<i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
     "                            </div>\n" +
     "\n" +

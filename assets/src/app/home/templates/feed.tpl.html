@@ -242,6 +242,36 @@
             </div>
         </div>
 
+        <div ng-show="showSettings" class="card" ng-click="">
+            <div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Settings</h1>
+                        <p style="color:white;">About your experience.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:16px;">
+                <p>AVATAR UPLOAD..? ETC</p>
+                <p>About you</p>
+                <p>Apps?</p>
+                <p>PRIVACY; PRIVACY DISCOLSURE; CONSENT; RECORD ATTENTION; INFORMATION GENERALLLY</p>
+            </div>
+        </div>
+
+        <div ng-show="showCreate" class="card" ng-click="">
+
+            <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Let's Create!</h1>
+                        <p style="color:white;">My First Post</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="">
             <div class="col-xs-9" style="padding-left:0px;padding-right:0px">
                 <div class="card" ng-click="change()" style="text-align:center">
@@ -461,8 +491,8 @@
                 <div class="card" ng-if="item.model=='TASK'" ng-click="renderToggle(item)">
                     <div style="padding:16px;">
                         <div style="float:right;text-align:right">
-                            <h5 ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                            <h5 ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
+                            <p ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
+                            <p ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></p>
                         </div>
                         <h4><a ng-click="$event.stopPropagation()" href="task/{{item.id}}">{{item.title}}</a></h4>
                         <!--<p><a ng-click="$event.stopPropagation()" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>-->
@@ -490,8 +520,8 @@
                         <div>
 
                             <div style="float:right;text-align:right">
-                                <h5 ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                                <h5 ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
+                                <p ng-click="$event.stopPropagation();tokensToggle(item);"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
+                                <p ng-click="$event.stopPropagation();renderValidationToggle(item);"><a>Associations <i class="fa fa-question-circle"></i></a></p>
                             </div>
 
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
