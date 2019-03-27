@@ -1,22 +1,22 @@
-<div class="page-heading" style="background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')">
-    <div class="container"> 
-        <div class="spacing-25"></div>
-        <div class="row">
-            <div class="col-xs-6"><h1>Members</h1></div>
-            <div class="col-xs-6">
-                <div class="dropdown sort-dropdown noselect" style="float:right">
-                    <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <h4 style="text-align:right;margin-top:20px" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h4>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" class="sort-a" ng-click="selectSort('totalWork DESC')"><h5>Total Reputation</h5></a></li>
-                        <hr class="sort-hr">
-                        <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Joined</h5></a></li>
-                    </ul>
+<div style="background:url('https://source.unsplash.com/1600x900/?community');overflow:visible" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div class="container" style="margin-top: auto;margin-bottom: auto;">
+            <div class="row">
+                <div class="col-xs-6"><h1>Members</h1></div>
+                <div class="col-xs-6">
+                    <div class="dropdown sort-dropdown noselect" style="float:right">
+                        <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <h4 style="text-align:right;margin-top:20px" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h4>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="sort-a" ng-click="selectSort('totalWork DESC')"><h5>Total Reputation</h5></a></li>
+                            <hr class="sort-hr">
+                            <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Joined</h5></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="spacing-25"></div>
     </div>
 </div>
 

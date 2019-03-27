@@ -385,6 +385,7 @@ angular.module( 'conexus.home', [
 	
     //TODO.. PERMANTLY SET IN NAV
     titleService.setTitle('CRE8.XYZ');
+    
 	$scope.currentUser = config.currentUser;
 
     $rootScope.associatedModel = {

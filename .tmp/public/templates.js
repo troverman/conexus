@@ -1173,27 +1173,28 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("contentList/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("contentList/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Content <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
-    "            <div class=\"col-xs-6\">\n" +
-    "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                        <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                    </a>\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "                        <hr class=\"sort-hr\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
-    "                        <hr class=\"sort-hr\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('plusCount DESC')\"><h5>Rating</h5></a></li>\n" +
-    "                    </ul>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                    <h1>Content</h1>\n" +
+    "                    <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                        <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                            <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                        </a>\n" +
+    "                        <ul class=\"dropdown-menu\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "                            <hr class=\"sort-hr\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Work</h5></a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -2644,13 +2645,11 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
   $templateCache.put("discover/index.tpl.html",
     "<style type=\"text/css\">.angular-google-map-container{height:300px;}</style>\n" +
     "\n" +
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1512850183-6d7990f42385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Discover</h1></div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -4092,17 +4091,14 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("market/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("market/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "				<h1>{{token.string}}</h1>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{token.string}}</h1>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "\n" +
@@ -4293,20 +4289,29 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("marketPair/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-10\">\n" +
-    "            	<h1><a style=\"color:white\" href=\"market/{{market}}\">{{market}}</a> | <a style=\"color:white\"  href=\"market/{{market1}}\">{{market1}}</a></h1>\n" +
-    "				<p style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>\n" +
-    "				<p style=\"color:white\">Last Trade Price: {{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | Highest Bid {{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}} | Lowest Ask {{bidAskChart.series[1].data[0][0].toFixed(2)}}</p>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-xs-2\" style=\"padding:16px;text-align:right\">\n" +
-    "				<a style=\"color:white\" href=\"market/{{market1}}/{{market}}\"><i class=\"fa fa-refresh\"></i></a>\n" +
-    "			</div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?scenic')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"row\">\n" +
+    "            	<div class=\"col-xs-10\">\n" +
+    "		            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"market/{{market}}\">{{market}}</a> | <a style=\"color:white\"  href=\"market/{{market1}}\">{{market1}}</a></h1>\n" +
+    "		        	<h5 style=\"color:white\">\n" +
+    "		        		<span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
+    "		        		<span style=\"color:green\">{{percentChange.toFixed(2)}}%</span> Daily Change | \n" +
+    "		        		<span style=\"color:red\">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | \n" +
+    "		        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth\n" +
+    "		        	</h5>\n" +
+    "		            <h5 style=\"color:white\">\n" +
+    "		            	Last Trade Price: <span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
+    "		            	Highest Bid <span style=\"color:white\">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | \n" +
+    "		            	Lowest Ask <span style=\"color:white\">{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>\n" +
+    "		            </h5>\n" +
+    "			    </div>\n" +
+    "				<div class=\"col-xs-2\" style=\"padding:16px;text-align:right\">\n" +
+    "					<a style=\"color:white\" href=\"market/{{market1}}/{{market}}\"><i class=\"fa fa-refresh\"></i></a>\n" +
+    "				</div>\n" +
+    "        	</div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -4320,11 +4325,13 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "            <li><a href=\"#\">Manifold Actions</a></li>\n" +
     "            <li><a href=\"#\">Trade Postions</a></li>\n" +
     "        </ul>\n" +
+    "\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div class=\"card\" ng-show=\"pluralistic\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Pluralistic Market</h2>\n" +
@@ -4333,9 +4340,11 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "				<div class=\"col-md-6\"><highchart config=\"chartMap\"></highchart></div>\n" +
     "			</div>\n" +
     "		</div>\n" +
+    "\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<h2>Order Book</h2>\n" +
+    "				<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>\n" +
     "				<highchart config=\"bidAskChart\"></highchart>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -4356,6 +4365,8 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "		<div class=\"card\">\n" +
     "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button>\n" +
     "		</div>\n" +
+    "\n" +
+    "		<br><br>\n" +
     "		<h2>Activity Feed</h2>\n" +
     "\n" +
     "		<!--TODO: Partially Filled Orders | TRADES-->\n" +
@@ -4434,13 +4445,12 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "	.card tags-input .host{margin:0px;border:0px;}\n" +
     "</style>\n" +
     "\n" +
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Marketplace <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Marketplace</h1>\n" +
+    "            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -4559,16 +4569,12 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
 
 angular.module("markets/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("markets/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "            	<h1>Markets</h1>\n" +
-    "				<p style=\"color:white\">833423 tokens in circulation </p>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Markets</h1>\n" +
+    "            <h5 style=\"color:white\">833423 tokens in circulation </h5>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -5791,25 +5797,25 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
 
 angular.module("members/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("members/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
-    "            <div class=\"col-xs-6\">\n" +
-    "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                        <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                    </a>\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('totalWork DESC')\"><h5>Total Reputation</h5></a></li>\n" +
-    "                        <hr class=\"sort-hr\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Joined</h5></a></li>\n" +
-    "                    </ul>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                        <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                            <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                        </a>\n" +
+    "                        <ul class=\"dropdown-menu\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('totalWork DESC')\"><h5>Total Reputation</h5></a></li>\n" +
+    "                            <hr class=\"sort-hr\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Joined</h5></a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -8844,31 +8850,32 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
 
 angular.module("projects/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("projects/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-6\">\n" +
-    "                <h2>Projects</h2>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-xs-6\">\n" +
-    "                <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                        <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                    </a>\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "                        <hr class=\"sort-hr\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
-    "                        <hr class=\"sort-hr\">\n" +
-    "                        <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
-    "                    </ul>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                    <h1>Projects</h1>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                        <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                            <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                        </a>\n" +
+    "                        <ul class=\"dropdown-menu\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "                            <hr class=\"sort-hr\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
+    "                            <hr class=\"sort-hr\">\n" +
+    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "\n" +
@@ -9305,14 +9312,15 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("search/index.tpl.html",
     "<div ui-view=\"search\">\n" +
-    "	<div class=\"page-heading\">\n" +
-    "		<div class=\"container\"> \n" +
-    "			<div class=\"spacing-25\"></div>\n" +
-    "			<h1>{{searchQueryString}}</h1>\n" +
-    "			<div class=\"spacing-25\"></div>\n" +
-    "		</div>\n" +
+    "\n" +
+    "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')\" class=\"imageContainerSmall\">\n" +
+    "	    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "	        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{searchQueryString}}</h1>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
     "	</div>\n" +
-    "	\n" +
+    "\n" +
     "	<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "	<!--LOCATION FILTERS-->\n" +
@@ -9746,29 +9754,33 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	.angular-google-map-container{height: 200px;}\n" +
     "</style>\n" +
     "\n" +
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "	<div class=\"container\"> \n" +
-    "		<div class=\"spacing-25\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\"><h1>Tasks <span ng-show=\"selectedTag!=''\"> | {{selectedTag}}</span></h1></div>\n" +
-    "			<div class=\"col-xs-6\">\n" +
-    "			    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "			            <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "			        </a>\n" +
-    "			        <ul class=\"dropdown-menu\">\n" +
-    "			            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "			            <hr class=\"sort-hr\">\n" +
-    "			            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('workCount DESC')\"><h5>Total Work</h5></a></li>\n" +
-    "			            <hr class=\"sort-hr\">\n" +
-    "			            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
-    "			        </ul>\n" +
-    "			    </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "	        <div class=\"row\">\n" +
+    "				<div class=\"col-xs-6\">\n" +
+    "					<h1>Tasks</h1>\n" +
+    "		            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "				</div>\n" +
+    "				<div class=\"col-xs-6\">\n" +
+    "				    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "	                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "				            <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "				        </a>\n" +
+    "				        <ul class=\"dropdown-menu\">\n" +
+    "				            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "				            <hr class=\"sort-hr\">\n" +
+    "				            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('workCount DESC')\"><h5>Total Work</h5></a></li>\n" +
+    "				            <hr class=\"sort-hr\">\n" +
+    "				            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "				        </ul>\n" +
+    "				    </div>\n" +
+    "				</div>\n" +
     "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
-    "	</div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>\n" +
+    "\n" +
     "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -10120,17 +10132,15 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "    .angular-google-map-container { height: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }\n" +
     "</style>\n" +
     "\n" +
-    "<div class=\"page-heading\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <h1>THE CRE8 NETWORK</h1>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?network')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">THE CRE8 NETWORK</h1>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +

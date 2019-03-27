@@ -1,17 +1,26 @@
-<div class="page-heading" style="background-image: url('')">
-    <div class="container"> 
-        <div class="spacing-25"></div>
-        <div class="row">
-            <div class="col-xs-10">
-            	<h1><a style="color:white" href="market/{{market}}">{{market}}</a> | <a style="color:white"  href="market/{{market1}}">{{market1}}</a></h1>
-				<p style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | {{percentChange.toFixed(2)}}% Daily Change | {{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}} Daily Trade Volume | {{marketDepth.toFixed(2)}} Total Market Depth</p>
-				<p style="color:white">Last Trade Price: {{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}} | Highest Bid {{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}} | Lowest Ask {{bidAskChart.series[1].data[0][0].toFixed(2)}}</p>
-            </div>
-            <div class="col-xs-2" style="padding:16px;text-align:right">
-				<a style="color:white" href="market/{{market1}}/{{market}}"><i class="fa fa-refresh"></i></a>
-			</div>
+<div style="background:url('https://source.unsplash.com/1600x900/?scenic')" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div class="container" style="margin-top: auto;margin-bottom: auto;">
+        	<div class="row">
+            	<div class="col-xs-10">
+		            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{market}}">{{market}}</a> | <a style="color:white"  href="market/{{market1}}">{{market1}}</a></h1>
+		        	<h5 style="color:white">
+		        		<span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
+		        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
+		        		<span style="color:red">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | 
+		        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth
+		        	</h5>
+		            <h5 style="color:white">
+		            	Last Trade Price: <span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
+		            	Highest Bid <span style="color:white">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | 
+		            	Lowest Ask <span style="color:white">{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>
+		            </h5>
+			    </div>
+				<div class="col-xs-2" style="padding:16px;text-align:right">
+					<a style="color:white" href="market/{{market1}}/{{market}}"><i class="fa fa-refresh"></i></a>
+				</div>
+        	</div>
         </div>
-        <div class="spacing-25"></div>
     </div>
 </div>
 
@@ -25,11 +34,13 @@
             <li><a href="#">Manifold Actions</a></li>
             <li><a href="#">Trade Postions</a></li>
         </ul>
+
 		<div class="card">
 			<div style="padding:16px;">
 				<highchart config="chart"></highchart>
 			</div>
 		</div>
+
 		<div class="card" ng-show="pluralistic">
 			<div style="padding:16px;">
 				<h2>Pluralistic Market</h2>
@@ -38,9 +49,11 @@
 				<div class="col-md-6"><highchart config="chartMap"></highchart></div>
 			</div>
 		</div>
+
 		<div class="card">
 			<div style="padding:16px;">
 				<h2>Order Book</h2>
+				<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>
 				<highchart config="bidAskChart"></highchart>
 			</div>
 		</div>
@@ -61,6 +74,8 @@
 		<div class="card">
 			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button>
 		</div>
+
+		<br><br>
 		<h2>Activity Feed</h2>
 
 		<!--TODO: Partially Filled Orders | TRADES-->
