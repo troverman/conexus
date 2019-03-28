@@ -187,6 +187,9 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 
 .header{background-color:black;}
 
+
+
+
 .imageContainer {
     background:#33312d;
     overflow:hidden;
@@ -226,6 +229,14 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 }
 
 .imageContainerSmallDiv h1 {
+    color: rgba(255,255,255,0.9);
+    font-size: 50px;
+    font-weight: 400;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.imageContainerSmallDivH1 {
     color: rgba(255,255,255,0.9);
     font-size: 50px;
     font-weight: 400;
@@ -504,7 +515,10 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .member-tabs li{font-size:14px;}
     .member-tabs > li > a{padding:5px 10px;}
     .imageContainerSmallDiv h1 {
-        font-size: 1.5em;
+        font-size: 2.5em;
+    }
+    .imageContainerSmallDivH1{
+        font-size: 2.5em;
     }
     .member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}
 
@@ -539,6 +553,9 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .member-tabs li{font-size:20px;}
     .member-tabs > li > a{padding:10px 15px;}
     .imageContainerSmallDiv h1 {
+        font-size: 2.8em;
+    }
+    .imageContainerSmallDivH1{
         font-size: 2.8em;
     }
     .member-tabs.subNav{display:block;}.nav-toggle{display:none;}

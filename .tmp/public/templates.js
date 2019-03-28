@@ -276,17 +276,16 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("account/index.tpl.html",
-    "<div class=\"page-heading\" style=\"background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <h1>Account Settings</h1>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Account Settings</h1>\n" +
+    "	        </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
+    "\n" +
     "\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -1173,24 +1172,26 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("contentList/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("contentList/index.tpl.html",
-    "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <div class=\"row\">\n" +
-    "                <div class=\"col-xs-6\">\n" +
-    "                    <h1>Content</h1>\n" +
-    "                    <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
-    "                </div>\n" +
-    "                <div class=\"col-xs-6\">\n" +
-    "                    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                        <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                            <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                        </a>\n" +
-    "                        <ul class=\"dropdown-menu\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "                            <hr class=\"sort-hr\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Work</h5></a></li>\n" +
-    "                        </ul>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-6\">\n" +
+    "                        <h1>Content</h1>\n" +
+    "                        <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-xs-6\">\n" +
+    "                        <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                            <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                                <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                            </a>\n" +
+    "                            <ul class=\"dropdown-menu\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "                                <hr class=\"sort-hr\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Work</h5></a></li>\n" +
+    "                            </ul>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -2643,12 +2644,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
 
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("discover/index.tpl.html",
-    "<style type=\"text/css\">.angular-google-map-container{height:300px;}</style>\n" +
+    "<style type=\"text/css\">\n" +
+    ".angular-google-map-container{height:300px;}\n" +
+    "</style>\n" +
     "\n" +
-    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore')\" class=\"imageContainerSmall\">\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -4081,11 +4086,13 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("login/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("login/index.tpl.html",
-    "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Login</h1>\n" +
-    "            <h5 style=\"color:white\">Welcome back!</h5>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Login</h1>\n" +
+    "                <h5 style=\"color:white\">Welcome back!</h5>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -4123,8 +4130,10 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
   $templateCache.put("market/index.tpl.html",
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{token.string}}</h1>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{token.string}}</h1>\n" +
+    "	        </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -4321,25 +4330,27 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
   $templateCache.put("marketPair/index.tpl.html",
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?scenic')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "        	<div class=\"row\">\n" +
-    "            	<div class=\"col-xs-10\">\n" +
-    "		            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"market/{{market}}\">{{market}}</a> | <a style=\"color:white\"  href=\"market/{{market1}}\">{{market1}}</a></h1>\n" +
-    "		        	<h5 style=\"color:white\">\n" +
-    "		        		<span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
-    "		        		<span style=\"color:green\">{{percentChange.toFixed(2)}}%</span> Daily Change | \n" +
-    "		        		<span style=\"color:red\">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | \n" +
-    "		        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth\n" +
-    "		        	</h5>\n" +
-    "		            <h5 style=\"color:white\">\n" +
-    "		            	Last Trade Price: <span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
-    "		            	Highest Bid <span style=\"color:white\">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | \n" +
-    "		            	Lowest Ask <span style=\"color:white\">{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>\n" +
-    "		            </h5>\n" +
-    "			    </div>\n" +
-    "				<div class=\"col-xs-2\" style=\"padding:16px;text-align:right\">\n" +
-    "					<a style=\"color:white\" href=\"market/{{market1}}/{{market}}\"><i class=\"fa fa-refresh\"></i></a>\n" +
-    "				</div>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	        	<div class=\"row\">\n" +
+    "	            	<div class=\"col-xs-10\">\n" +
+    "			            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"market/{{market}}\">{{market}}</a> | <a style=\"color:white\"  href=\"market/{{market1}}\">{{market1}}</a></h1>\n" +
+    "			        	<h5 style=\"color:white\">\n" +
+    "			        		<span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
+    "			        		<span style=\"color:green\">{{percentChange.toFixed(2)}}%</span> Daily Change | \n" +
+    "			        		<span style=\"color:red\">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | \n" +
+    "			        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth\n" +
+    "			        	</h5>\n" +
+    "			            <h5 style=\"color:white\">\n" +
+    "			            	Last Trade Price: <span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
+    "			            	Highest Bid <span style=\"color:white\">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | \n" +
+    "			            	Lowest Ask <span style=\"color:white\">{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>\n" +
+    "			            </h5>\n" +
+    "				    </div>\n" +
+    "					<div class=\"col-xs-2\" style=\"padding:16px;text-align:right\">\n" +
+    "						<a style=\"color:white\" href=\"market/{{market1}}/{{market}}\"><i class=\"fa fa-refresh\"></i></a>\n" +
+    "					</div>\n" +
+    "	        	</div>\n" +
     "        	</div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -4477,10 +4488,12 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "\n" +
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Marketplace</h1>\n" +
-    "            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
-    "        </div>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Marketplace</h1>\n" +
+    "	            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -4601,9 +4614,11 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
   $templateCache.put("markets/index.tpl.html",
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Markets</h1>\n" +
-    "            <h5 style=\"color:white\">833423 tokens in circulation </h5>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Markets</h1>\n" +
+    "	            <h5 style=\"color:white\">833423 tokens in circulation </h5>\n" +
+    "	        </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -5829,19 +5844,21 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
   $templateCache.put("members/index.tpl.html",
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <div class=\"row\">\n" +
-    "                <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
-    "                <div class=\"col-xs-6\">\n" +
-    "                    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                        <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                            <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                        </a>\n" +
-    "                        <ul class=\"dropdown-menu\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('totalWork DESC')\"><h5>Total Reputation</h5></a></li>\n" +
-    "                            <hr class=\"sort-hr\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Joined</h5></a></li>\n" +
-    "                        </ul>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
+    "                    <div class=\"col-xs-6\">\n" +
+    "                        <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                            <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                                <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                            </a>\n" +
+    "                            <ul class=\"dropdown-menu\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('totalWork DESC')\"><h5>Total Reputation</h5></a></li>\n" +
+    "                                <hr class=\"sort-hr\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Joined</h5></a></li>\n" +
+    "                            </ul>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6321,10 +6338,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
     "                <h2 ng-if=\"true\" class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/discover\">Discover</a></h2>\n" +
-    "                <!--<h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
+    "                <!--<h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\">Marketplace</a></h2>-->\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/projects\">Projects</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/tasks\">Tasks</a></h2>-->\n" +
+    "                <!--<h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/tasks\">Tasks</a></h2>-->\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/notifications\"><span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/account\">Settings</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/logout\">Logout</a></h2>\n" +
@@ -7399,17 +7416,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
 
 angular.module("notifications/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("notifications/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "            	<h1>Notifications <span style=\"float:right\">{{notifications.length}}</span></h1>\n" +
-    "            </div>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Notifications <span style=\"float:right\">{{notifications.length}}</span></h1>\n" +
+    "	        </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "	<div class=\"row\" ng-show=\"notifications.length == 0\">\n" +
@@ -8884,23 +8901,25 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
   $templateCache.put("projects/index.tpl.html",
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <div class=\"row\">\n" +
-    "                <div class=\"col-xs-6\">\n" +
-    "                    <h1>Projects</h1>\n" +
-    "                </div>\n" +
-    "                <div class=\"col-xs-6\">\n" +
-    "                    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                        <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                            <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                        </a>\n" +
-    "                        <ul class=\"dropdown-menu\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "                            <hr class=\"sort-hr\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
-    "                            <hr class=\"sort-hr\">\n" +
-    "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
-    "                        </ul>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-6\">\n" +
+    "                        <h1>Projects</h1>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-xs-6\">\n" +
+    "                        <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "                            <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "                                <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "                            </a>\n" +
+    "                            <ul class=\"dropdown-menu\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "                                <hr class=\"sort-hr\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('memberCount DESC')\"><h5>Member Count</h5></a></li>\n" +
+    "                                <hr class=\"sort-hr\">\n" +
+    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "                            </ul>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -9020,8 +9039,10 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
   $templateCache.put("register/index.tpl.html",
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Join Our Community</h1>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <h1 class=\"imageContainerSmallDivH1\">Join Our Community</h1>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -9033,7 +9054,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div ng-show=\"!showFinal\" style=\"float:right\">\n" +
     "            <br>\n" +
-    "            <span ng-click=\"filterToggle('VALUEMAP')\"><a>UNIVERSALTOKEN <i class=\"fa fa-question-circle\"></i></a></span>\n" +
+    "            <span ng-click=\"filterToggle('VALUEMAP')\"><a>UNIVERSALTOKEN <i class=\"fa fa-eye\"></i></a></span>\n" +
     "            <br>\n" +
     "        </div>\n" +
     "\n" +
@@ -9045,7 +9066,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "               \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Create Your Value Map</h1>\n" +
     "                            <p style=\"color:white;\">Participate in creating a mechanism of value.</p>\n" +
     "                        </div>\n" +
@@ -9068,7 +9089,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Your Personal Value</h1>\n" +
     "                            <p style=\"color:white;\">What do you believe is valuable?</p>\n" +
     "                        </div>\n" +
@@ -9092,39 +9113,34 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-md-2\" style=\"max-height:50vh;overflow:scroll\">\n" +
+    "                        <div class=\"col-xs-3\" style=\"max-height:50vh;overflow:scroll\">\n" +
     "                            <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                                <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default\"><a href=\"#\">{{item.element}}</a></button>\n" +
+    "                                <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
-    "                        <div class=\"col-md-10\">\n" +
-    "\n" +
+    "                        <div class=\"col-xs-9\">\n" +
     "                            <div class=\"row\">\n" +
-    "                                <div class=\"col-sm-12\">\n" +
+    "                                <div class=\"col-xs-12\">\n" +
+    "                                    <p style=\"color:gray;margin:0px;font-size:12px\"><b>What is this?</b></p>\n" +
+    "                                    <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We begin to define your value map by understanding statements of preference which are used to coordinate and factor various orders on CRE8's Multi Dimensional Token Market.</p>\n" +
+    "                                    <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We promote a context of discovery for projects, tasks, time, content, and a variety of other protocol actions represented within on CRE8's network.</p>\n" +
     "                                    <div ng-repeat=\"item in newOrder\">\n" +
     "                                        <div layout=\"\">\n" +
-    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[0]}}</span></div>\n" +
+    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[2]}}</span></div>\n" +
     "                                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
     "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
-    "\n" +
     "                            <div class=\"row\">\n" +
-    "                                <div class=\"col-sm-6\">\n" +
+    "                                <div class=\"col-xs-6\">\n" +
     "                                    <highchart config=\"chartMapTotal\"></highchart>\n" +
     "                                </div>\n" +
-    "                                <div class=\"col-sm-6\">\n" +
+    "                                <div class=\"col-xs-6\">\n" +
     "                                    <highchart config=\"pieTotal\"></highchart>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
-    "\n" +
-    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\"><b>What is this?</b></p>\n" +
-    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We begin to define your value map by understanding statements of preference which are used to coordinate and factor various orders on CRE8's Multi Dimensional Token Market.</p>\n" +
-    "                            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We promote a context of discovery for projects, tasks, time, content, and a variety of other protocol actions represented within on CRE8's network.</p>\n" +
-    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
@@ -9143,7 +9159,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "           \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">A Valuable Day</h1>\n" +
     "                            <p style=\"color:white;\">How would an ideal day look to you?</p>\n" +
     "                        </div>\n" +
@@ -9201,7 +9217,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?information,genetics,dna,human,personal,passport,identity')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Personal Information</h1>\n" +
     "                            <p style=\"color:white;\">What would you like us all to know about you?</p>\n" +
     "                        </div>\n" +
@@ -9242,7 +9258,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?egalitarian,sharing,love,creative,world,community,awesome')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Let's Go!</h1>\n" +
     "                            <p style=\"color:white;\">It's time to create a more egalitarian world.</p>\n" +
     "                        </div>\n" +
@@ -9276,8 +9292,10 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        <span style=\"color:gray\">{{order[0].amount}} <a href=\"/market/{{order[0].identifier}}\">{{order[0].identifier}}</a> | <a href=\"/market/{{order[1].identifier}}\">{{order[1].identifier}}</a> | <a href=\"/market/{{order[0].identifier}}/{{order[1].identifier}}\">MarketPair</a></span>\n" +
     "                    </div>\n" +
     "\n" +
+    "\n" +
     "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"continue(2)\" class=\"btn btn-default log-btn\">Keep Going?</button>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Do you want to keep working on your value map?</p>\n" +
+    "                    \n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -9347,8 +9365,10 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')\" class=\"imageContainerSmall\">\n" +
     "	    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "	        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{searchQueryString}}</h1>\n" +
+    "	        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "	        	<div class=\"container\">\n" +
+    "	            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{searchQueryString}}</h1>\n" +
+    "	        	</div>\n" +
     "	        </div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
@@ -9788,27 +9808,29 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "	        <div class=\"row\">\n" +
-    "				<div class=\"col-xs-6\">\n" +
-    "					<h1>Tasks</h1>\n" +
-    "		            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "		        <div class=\"row\">\n" +
+    "					<div class=\"col-xs-6\">\n" +
+    "						<h1>Tasks</h1>\n" +
+    "			            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "					</div>\n" +
+    "					<div class=\"col-xs-6\">\n" +
+    "					    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
+    "		                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+    "					            <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
+    "					        </a>\n" +
+    "					        <ul class=\"dropdown-menu\">\n" +
+    "					            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
+    "					            <hr class=\"sort-hr\">\n" +
+    "					            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('workCount DESC')\"><h5>Total Work</h5></a></li>\n" +
+    "					            <hr class=\"sort-hr\">\n" +
+    "					            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
+    "					        </ul>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "				</div>\n" +
-    "				<div class=\"col-xs-6\">\n" +
-    "				    <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "	                    <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "				            <h4 style=\"text-align:right;margin-top:20px;\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "				        </a>\n" +
-    "				        <ul class=\"dropdown-menu\">\n" +
-    "				            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
-    "				            <hr class=\"sort-hr\">\n" +
-    "				            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('workCount DESC')\"><h5>Total Work</h5></a></li>\n" +
-    "				            <hr class=\"sort-hr\">\n" +
-    "				            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Created</h5></a></li>\n" +
-    "				        </ul>\n" +
-    "				    </div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
+    "        	</div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -10166,8 +10188,10 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "\n" +
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?network')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">THE CRE8 NETWORK</h1>\n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">THE CRE8 NETWORK</h1>\n" +
+    "	        </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +

@@ -132,7 +132,7 @@ angular.module( 'conexus.register', [
     console.log($scope.chartMapTotal);
     //PERFORMANCE....
     $scope.updateChartTotal = function(){
-        $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]});
+        $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
         $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
         console.log( $scope.chartMapTotal)
     };
@@ -156,7 +156,7 @@ angular.module( 'conexus.register', [
     };
 
     $scope.updatePieTotal = function(){
-        var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[0], y:obj[0].amount}})
+        var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
         $scope.pieTotal.series[0].data = data;
         console.log( $scope.pieTotal)
     };
@@ -214,7 +214,7 @@ angular.module( 'conexus.register', [
 
     //WORK!
 	$scope.createPosition = function(model){
-        if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[0]}).indexOf(model) == -1){
+        if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
 
             //OBJ OR ARRAY?
 

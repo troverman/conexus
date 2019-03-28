@@ -403,10 +403,10 @@
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
                 <h2 ng-if="true" class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/discover">Discover</a></h2>
-                <!--<h2 class="nav-links" style="padding:12px;"><a href="/market">Market</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/marketplace">Marketplace</a></h2>
+                <h2 class="nav-links" style="padding:12px;"><a href="/market">Market</a></h2>
+                <!--<h2 class="nav-links" style="padding:12px;"><a href="/marketplace">Marketplace</a></h2>-->
                 <h2 class="nav-links" style="padding:12px;"><a href="/projects">Projects</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/tasks">Tasks</a></h2>-->
+                <!--<h2 class="nav-links" style="padding:12px;"><a href="/tasks">Tasks</a></h2>-->
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/notifications"><span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/account">Settings</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/logout">Logout</a></h2>
