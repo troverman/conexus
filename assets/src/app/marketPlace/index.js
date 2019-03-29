@@ -24,7 +24,10 @@ angular.module( 'conexus.marketPlace', [
     $scope.newItem = {};
     $scope.newReaction = {};
     $scope.stateParams = $stateParams;
-    $scope.items = items;
+    $scope.items = items.map(function(obj){
+        obj.model = 'ITEM';
+        return obj;
+    });
     $scope.searchQuery = [];
     $scope.selectedSort = 'createdAt DESC';
     $scope.selectedTag = '';

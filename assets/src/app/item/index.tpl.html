@@ -1,13 +1,11 @@
-<div class="page-heading">
-    <div class="spacing-25"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>{{item.title}}</h1>
+<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div style="margin-top: auto;margin-bottom: auto;">
+            <div class="container">
+                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.title}}</h1>
             </div>
         </div>
     </div>
-    <div class="spacing-25"></div>
 </div>
 
 <div class="container">
@@ -18,14 +16,22 @@
 		<div class="card">
 			<div style="padding:16px;">
 
-                <div style="float:right;text-align:right">
-                    <h5 ng-click="tokensToggle(item)"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
-                    <h5 ng-click="renderValidationToggle(item)"><a href="#">Associations & Validations <i class="fa fa-question-circle"></i></a></h5>
-                </div>
 
-                <!--
-                <h1>{{item.title}}</h1>
-                -->
+                <div style="float:right;text-align:right">
+
+                    <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-qrcode"></i>
+                    <i style="" ng-click="$event.stopPropagation();actionToggle(item);" class="fa fa-eye"></i>
+                    <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-tags"></i>
+                    <i style="" ng-click="$event.stopPropagation();orderToggle(item);" class="fas fa-heart"></i>
+                    <i style="" ng-click="$event.stopPropagation();orderToggle(item);" class="fa fa-shopping-cart"></i>
+
+                    <i style="" ng-click="$event.stopPropagation();orderToggle(item);" class="fas fa-share-alt"></i>
+                    <i style="" ng-click="$event.stopPropagation();renderValidationToggle(item);" class="fas fa-bezier-curve"></i>
+                    <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fas fa-coins"></i>
+
+                    <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-ellipsis-v"></i>
+
+                </div>
 
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -36,9 +42,16 @@
                 <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
                 <div class="spacing-10"></div>
 
-		        <div style="max-height:500px;overflow:scroll">
+
+                <!--EMBEDED CONTENT-->
+                <!--ASSOCIATED MODEL-->
+                <!--CONTENT SOULD BE TEMPLATE OR SOMETHING?-->
+                <!--VT PLUGIN..-->
+		        <div>
 					<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
 				</div>
+
+
 				<div class="spacing-10"></div>
 				<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>
 
@@ -99,6 +112,7 @@
             <div style="padding:16px">
                 <div class="">
                 
+                    <h3>Liquidity</h3>
                     <div ng-repeat="input in inputVector">
                         <div layout="">
                             <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{input.text}}</span></div>
@@ -129,17 +143,20 @@
         </div>
     </div>
 
+    <!--TODO-->
+
 	<!--Delivery | Fuilfillment-->
 
-	<div class="row">
+    <!--CONTENT?-->
+	<!--<div class="row">
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Item Content</button>
         </div>
-    </div>
+    </div>-->
+
 
     <!--LIST REACTIONS-->
-
-    <div class="row">
+    <!--<div class="row">
         <div class="card" ng-repeat="item in contentList">
             <div style="padding:16px">
                 <div>
@@ -162,7 +179,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="spacing-50"></div>
 

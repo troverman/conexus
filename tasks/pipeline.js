@@ -14,6 +14,7 @@ var cssFilesToInject = [
   'bower_components/fullcalendar/dist/fullcalendar.css',
   'bower_components/angularjs-toaster/toaster.min.css',
   'bower_components/highlight/styles/github.css',
+  'bower_components/fontawesome/css/all.min.css',
   'styles/**/*.css',
 ];
 

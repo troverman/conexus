@@ -196,8 +196,7 @@
                         </div>
                         <br><br>
                         <div style="text-align:center">
-
-                            <a href="/login"><h5 stlye="color: gray;font-style: italic;">Already A Member?</h5></a>
+                            <a href="/login"><h5 style="color: gray;font-style: italic;">Already A Member?</h5></a>
                         </div>
                     </form>
                 </div>
@@ -283,7 +282,6 @@
 
                 <li style="float:right;font-size:14px">
                     <a ng-click="expandSort()" href="#">Sort By Recent <i class="fa fa-angle-down"></i></a>
-                     <div ng-if="sorting">BRUV</div>
                     <div ng-if="sorting" class="dropdown sort-dropdown" style="float:right">
                         <ul class="dropdown-menu">
                             <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>Trending</h5></a></li>
@@ -361,7 +359,7 @@
                             <div class="col-sm-11 col-xs-10">
 
                                 <p style="float:right;text-align:right">
-                                    <span ng-if="item.location">{{item.location.address}} <i class="fa fa-map-marker"></i></span>
+                                    <span ng-if="item.location" style="color:gray">{{item.location.address}} <i class="fa fa-map-marker"></i></span>
                                 </p>
                                 
                                 <h3 style="margin-top:0px">

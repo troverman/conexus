@@ -1465,7 +1465,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>view:function()</b></p>\n" +
     "\n" +
     "                    <h5>Content Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation on content (and its applications on cre8's api)</p>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation on content (and its applications on cre8's api) (edit rep and balance manifolds etc)</p>\n" +
     "\n" +
     "                    <h5>Follow Tokenization Protocol</h5>\n" +
     "                    <p><b>create:function()</b> the operations and permission structure around the creation of follows (and its applications on cre8's api)</p>\n" +
@@ -3696,8 +3696,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        </div>\n" +
     "                        <br><br>\n" +
     "                        <div style=\"text-align:center\">\n" +
-    "\n" +
-    "                            <a href=\"/login\"><h5 stlye=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "                            <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
     "                        </div>\n" +
     "                    </form>\n" +
     "                </div>\n" +
@@ -3783,7 +3782,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "                <li style=\"float:right;font-size:14px\">\n" +
     "                    <a ng-click=\"expandSort()\" href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a>\n" +
-    "                     <div ng-if=\"sorting\">BRUV</div>\n" +
     "                    <div ng-if=\"sorting\" class=\"dropdown sort-dropdown\" style=\"float:right\">\n" +
     "                        <ul class=\"dropdown-menu\">\n" +
     "                            <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('trendingScore DESC')\"><h5>Trending</h5></a></li>\n" +
@@ -3861,7 +3859,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <div class=\"col-sm-11 col-xs-10\">\n" +
     "\n" +
     "                                <p style=\"float:right;text-align:right\">\n" +
-    "                                    <span ng-if=\"item.location\">{{item.location.address}} <i class=\"fa fa-map-marker\"></i></span>\n" +
+    "                                    <span ng-if=\"item.location\" style=\"color:gray\">{{item.location.address}} <i class=\"fa fa-map-marker\"></i></span>\n" +
     "                                </p>\n" +
     "                                \n" +
     "                                <h3 style=\"margin-top:0px\">\n" +
@@ -3950,16 +3948,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
 
 angular.module("item/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("item/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <h1>{{item.title}}</h1>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -3970,14 +3966,22 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <div style=\"float:right;text-align:right\">\n" +
-    "                    <h5 ng-click=\"tokensToggle(item)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <h5 ng-click=\"renderValidationToggle(item)\"><a href=\"#\">Associations & Validations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                </div>\n" +
     "\n" +
-    "                <!--\n" +
-    "                <h1>{{item.title}}</h1>\n" +
-    "                -->\n" +
+    "                <div style=\"float:right;text-align:right\">\n" +
+    "\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-qrcode\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();actionToggle(item);\" class=\"fa fa-eye\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-tags\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fas fa-heart\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fa fa-shopping-cart\"></i>\n" +
+    "\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fas fa-share-alt\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fas fa-coins\"></i>\n" +
+    "\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
+    "\n" +
+    "                </div>\n" +
     "\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -3988,9 +3992,16 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                <p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "		        <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "\n" +
+    "                <!--EMBEDED CONTENT-->\n" +
+    "                <!--ASSOCIATED MODEL-->\n" +
+    "                <!--CONTENT SOULD BE TEMPLATE OR SOMETHING?-->\n" +
+    "                <!--VT PLUGIN..-->\n" +
+    "		        <div>\n" +
     "					<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "				</div>\n" +
+    "\n" +
+    "\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h4>{{item.amountSet}} <a href=\"market/{{item.identiferSet}}\">{{item.identiferSet}}</a></h4>\n" +
     "\n" +
@@ -4051,6 +4062,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"\">\n" +
     "                \n" +
+    "                    <h3>Liquidity</h3>\n" +
     "                    <div ng-repeat=\"input in inputVector\">\n" +
     "                        <div layout=\"\">\n" +
     "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{input.text}}</span></div>\n" +
@@ -4081,17 +4093,20 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
+    "    <!--TODO-->\n" +
+    "\n" +
     "	<!--Delivery | Fuilfillment-->\n" +
     "\n" +
-    "	<div class=\"row\">\n" +
+    "    <!--CONTENT?-->\n" +
+    "	<!--<div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item Content</button>\n" +
     "        </div>\n" +
-    "    </div>\n" +
+    "    </div>-->\n" +
+    "\n" +
     "\n" +
     "    <!--LIST REACTIONS-->\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
+    "    <!--<div class=\"row\">\n" +
     "        <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div>\n" +
@@ -4114,7 +4129,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                </form>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "    </div>\n" +
+    "    </div>-->\n" +
     "\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -4610,10 +4625,15 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "			<div ng-repeat=\"item in items\">\n" +
     "		        <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "		            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                        <div style=\"float:right;padding-left:5px;\">\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </div>\n" +
+    "\n" +
     "	                	<a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
     "						<p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
-    "	                	<div style=\"max-height:500px;overflow:scroll\">\n" +
-    "							<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
+    "	                	<div style=\"\">\n" +
+    "							<span style=\"display:inline;height:100%\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "						</div>\n" +
     "                    	<h5>{{item.amountSet}} <span ng-repeat=\"asset in item.identiferSet\"><a ng-click=\"$event.stopPropagation();\" href=\"market/{{asset}}\">{{asset}}</a></h5>\n" +
     "		            </div>\n" +
@@ -5970,12 +5990,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Action</h1>\n" +
+    "\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Action</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
@@ -6000,12 +6023,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Content</h1>\n" +
+    "\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?create,code,paint')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Content</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
@@ -6042,13 +6068,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"filter\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>Filter</h1>\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?sort,code,filter,paint')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
+    "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
     "                <!--DISCOVER-->\n" +
@@ -6247,12 +6277,16 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div ng-if=\"newItem\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Item</h1>\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern,scrap,assortment,clothes')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Item</h1>\n" +
+    "                            <h5 style=\"color:white\">Sharing Creates Abundance</h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
@@ -6306,18 +6340,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"login\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"!currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-10 col-xs-offset-1\">\n" +
-    "                            <h1>Login | Welcome back!</h1>\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Login</h1>\n" +
+    "                            <h5 style=\"color:white\">Welcome back!</h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
+    "\n" +
     "            <div class=\"row\">\n" +
     "                <div class=\"col-xs-10 col-xs-offset-1\">\n" +
     "                    <div class=\"login-form\">\n" +
@@ -6349,7 +6383,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div style=\"text-align:center\">\n" +
     "                <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
     "                \n" +
-    "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <div ng-show=\"currentUser\" ng-if=\"false\">\n" +
@@ -6385,12 +6418,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"order\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newOrder\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Order</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connections,network,pattern')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Order</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px\">\n" +
     "\n" +
@@ -6512,12 +6547,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"project\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newProject\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Project</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,coordination,government')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Project</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px\">\n" +
     "\n" +
@@ -6553,8 +6590,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <div style=\"text-align:right;float:right\">\n" +
-    "                    <p ng-click=\"$event.stopPropagation();tokensToggle(item);\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                    <p ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fa fa-eye\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fas fa-coins\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
     "                </div>\n" +
     "\n" +
     "                <!--TITLE-->\n" +
@@ -6564,7 +6603,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'ITEM'\">\n" +
-    "                    <h2><a href=\"content/{{item.id}}\">{{item.title}}</a></h2>\n" +
+    "                    <h2><a href=\"item/{{item.id}}\">{{item.title}}</a></h2>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'ORDER'\">\n" +
@@ -6682,13 +6721,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:80%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>Associations & Validations</h1>\n" +
+    "        \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations & Validations</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
+    "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
     "                <div class=\"spacing-15\"></div>\n" +
@@ -6832,14 +6875,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"task\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newTask\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Task</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Task</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
@@ -6869,14 +6913,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"time\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newTime\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "           \n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Time</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Time</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
@@ -6908,14 +6953,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
+    "            \n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>Tokens</h1>\n" +
+    "\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokens</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -7029,14 +7077,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"transaction\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:50%;max-width:100%\">\n" +
     "        <div ng-if=\"newTransaction\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            \n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Transaction</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?transaction,trade')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Transaction</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -7085,15 +7134,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"validation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newValidation\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div style=\"padding:16px\">\n" +
-    "                    <h1>+ Validation</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,consensus')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Validation</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
+    "\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
     "\n" +
@@ -7262,15 +7313,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <!--TODO: PROPER COLLAPSE ORDER-->\n" +
     "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"information\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%;\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
-    "                    <h1>Information</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Information</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
+    "\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"spacing-25\"></div>\n" +
@@ -7388,9 +7441,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "    <!--TODO: UNIFY MOBILE AND NON; TODO; TIME CTRL-->\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "\n" +
     "        <div class=\"container\">\n" +
@@ -7426,8 +7476,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </form>\n" +
     "            </ul>-->\n" +
     "\n" +
+    "            <!--VIEW TOKEN.. RECORIND ACTIONS ON CREATE-->\n" +
+    "            <div ng-if=\"recordActions\" style=\"float:left;margin-top:13px;margin-right:15px;font-size:18px\">\n" +
+    "                <i style=\"color:white\" ng-click=\"$event.stopPropagation();actionToggle(item);\" class=\"fa fa-eye\"></i>\n" +
+    "            </div>\n" +
+    "\n" +
     "            <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
-    "            <div ng-if=\"taskTime\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:10px;font-size:18px\">\n" +
+    "            <div ng-if=\"taskTime\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:15px;font-size:18px\">\n" +
     "                <a ng-show=\"taskTime == 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
     "                <a ng-show=\"taskTime > 0\" href=\"#\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
     "                <a ng-show=\"taskTime > 0\" href=\"#\">{{taskTime}}</a>\n" +
@@ -7505,12 +7560,11 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "		            </span>\n" +
     "	        	</div>\n" +
     "\n" +
-    "	        	 <h5>{{notification.title}}</h5>\n" +
-    "	            <p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
+    "	        	<h5>{{notification.title}}</h5>\n" +
     "\n" +
     "	            <!--if type is new follower; follow btn; embeded function-->\n" +
     "	            <div ng-if=\"notification.type=='FOLLOW'\">\n" +
-    "		          \n" +
+    "		          	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
     "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.username}}\">\n" +
     "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.avatarUrl}}\" src=\"{{notification.info.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "	                	{{notification.info.username}}\n" +
@@ -7521,17 +7575,24 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	            </div>\n" +
     "\n" +
     "	            <div ng-if=\"notification.type=='REACTION'\">\n" +
-    "\n" +
+    "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
     "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.user.username}}\">\n" +
     "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.user.avatarUrl}}\" src=\"{{notification.info.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "	                	{{notification.info.user.username}}\n" +
     "	                </a>\n" +
-    "					<p>{{notification.info.type}}</p>\n" +
+    "\n" +
     "	                <!--ASSOCIATED MODELS.. LOL-->\n" +
-    "                	<a href=\"content/{{notification.info.content.id}}\">{{notification.info.content.title}}:{{notification.info.content.id}}</a>\n" +
+    "                	<p>{{notification.info.type}} <a href=\"content/{{notification.info.content.id}}\">{{notification.info.content.title}}:{{notification.info.content.id}}</a></p>\n" +
+    "\n" +
+    "	            </div>\n" +
+    "\n" +
+    "	            <div ng-if=\"notification.type=='TRANSACTION'\">\n" +
+    "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
+    "					<span ng-repeat=\"(key, value) in notification.info.transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation()\"  href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "	            </div>\n" +
     "\n" +
     "	            <div ng-if=\"notification.type=='VALIDATION'\">\n" +
+    "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
     "		            <div layout=\"\">\n" +
     "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "	                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
@@ -7543,7 +7604,6 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	                <div class=\"spacing-10\"></div>\n" +
     "	                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
     "	            </div>\n" +
-    "\n" +
     "\n" +
     "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"notification.createdAt\"></p>\n" +
     "\n" +
@@ -7868,7 +7928,10 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
     "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <p style=\"text-align:right\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                            <a ng-click=\"$event.stopPropagation();tokensToggle(item);\"><i style=\"\" class=\"fa fa-ellipsis-v\"></i>\n" +
+    "                        </p>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div>\n" +
@@ -7903,9 +7966,11 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "            <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"$event.stopPropagation();renderToggle(item)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                    <div style=\"float:right;text-align:right\">\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right\">\n" +
+    "                        <p style=\"text-align:right\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                            <a ng-click=\"$event.stopPropagation();tokensToggle(item);\"><i style=\"\" class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </p>\n" +
     "                    </div>\n" +
     "                   \n" +
     "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
@@ -7933,7 +7998,10 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <p style=\"text-align:right\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                            <a ng-click=\"$event.stopPropagation();tokensToggle(item);\"><i style=\"\" class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </p>\n" +
     "                    </div>\n" +
     "                    \n" +
     "                    <div>\n" +
@@ -7971,7 +8039,10 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                <div style=\"padding:16px\">\n" +
     "\n" +
     "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <p style=\"text-align:right\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                            <a ng-click=\"$event.stopPropagation();tokensToggle(item);\"><i style=\"\" class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </p>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <p style=\"font-weight:800\">\n" +
@@ -8802,8 +8873,10 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "			<div class=\"card\" ng-click=\"renderToggle(task)\">\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<div style=\"float:right;text-align:right\">\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(task)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "						<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(task)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <p>\n" +
+    "                        	<a ng-click=\"$event.stopPropagation();renderValidationToggle(task);\"><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                        	<a ng-click=\"$event.stopPropagation();tokensToggle(task)\"><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </p>\n" +
     "                    </div>\n" +
     "					<h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "					<!--<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>-->\n" +
