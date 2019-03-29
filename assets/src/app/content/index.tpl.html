@@ -14,67 +14,43 @@
         <div class="row">
             <div class="col-xs-12">
                 <h1>{{content.title}}</h1>
+                <!--<h5>viewTime: {{tokenFilter}}</h4>-->
+				<!--<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>-->
             </div>
         </div>
     </div>
     <div class="spacing-25"></div>
 </div>
 
-
 <div class="container">
-
 	<div class="row">
 		<div class="card" style="background-color:#f9f9f9">
 		    <div style="padding:16px;background-color:white">
-
-				<div>
-
-					<div style="float:right;text-align:right">
-
-						<h5 ng-click="tokensToggle(content)"><a href="#">Tokens <i class="fa fa-question-circle"></i></a></h5>
-						<h5 ng-click="renderValidationToggle(content)"><a href="#">Associations <i class="fa fa-question-circle"></i></a></h5>
-						
-						<!--
-						TODO: NAV
-						<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>
-						-->
-
-					</div>
-
-					<!--<h3 ng-show="content.title">{{content.title}}</h3>-->
-					
-					<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
-
-					<div>
-						<a style="display:inline" href="member/{{content.user.username}}">
-							<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
-							<span style="font-weight:800">{{content.user.username}}</span>
-						</a>
-					</div>
-
-					<br>
-
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
-
-					<!--
-					<span ng-repeat="association in content.associatedModels">
-						<a href="{{association.address}}">{{association.address}}</a>
-					</span>
-					-->
-
-					<!--
-					<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>
-					-->
-
-					<div style="clear:both"></div>
+				<div style="float:right;text-align:right">
+                    <i style="" ng-click="$event.stopPropagation();tokensToggle(content);" class="fa fa-ellipsis-v"></i>
 				</div>
-
+				<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
+				<div>
+					<a style="display:inline" href="member/{{content.user.username}}">
+						<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
+						<span style="font-weight:800">{{content.user.username}}</span>
+					</a>
+				</div>
+				<div class="spacing-5"></div>
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
+				<!--
+				<span ng-repeat="association in content.associatedModels">
+					<a href="{{association.address}}">{{association.address}}</a>
+				</span>
+				-->
+				<!--
+				<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>
+				-->
+				<div style="clear:both"></div>
 				<div class="spacing-10"></div>
-
 				<div style="max-height:5000px;overflow:scroll" ng-show="content.type!='video'">
 					<span style="display:inline" ng-bind-html="renderContent(content.content)"></span>
 				</div>
-				
 		    </div>
 		    <div class="card-footer">
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fa fa-angle-up"></i> {{content.reactions.plus}} like </a> 
@@ -97,7 +73,6 @@
 	<div class="row" ng-show="content.type == 'MOTION'">
 		<div class="card">
 		    <div style="padding:16px">
-
 		    	MOTION VALIDATION
 		    	<div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
@@ -106,7 +81,6 @@
                 </div>
                 <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
 				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-
 		    </div>
 		</div>
 	</div>
@@ -114,8 +88,6 @@
 	<!--TRAVERSAL PARAMETERS-->
 	<!--COMBINITRONICS-->
 	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
-
-	
 	<div class="row">
 		<ul ng-show="content.children.length > 0" style="padding:0px;" class="member-tabs">
 			<li style="float:right;font-size:14px"><a>Sort By Recent <i class="fa fa-angle-down"></i></a></li>
@@ -123,38 +95,5 @@
 		<div style="clear:both"></div>
 		<div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
 	</div>
-
-	<!--
-	<div class="row" ng-show="content.type!='video'">
-		<div class="card" style="background-color:#f9f9f9">
-	        <div style="padding:16px;background-color:white">
-
-				<div>
-					<img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
-					<a style="display:inline" href="/member/{{content.user.username}}"><span style="font-weight:800">{{content.user.username}}</span></a>
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
-				</div>
-				<br>
-				<div style="max-height:500px;overflow:scroll">
-					<span style="display:inline" ng-bind-html="renderContent(content.content)"></span>
-				</div>
-			</div>
-			<div class="card-footer">
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fa fa-angle-up"></i> {{content.plusCount}} like </a> 
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fa fa-angle-down"></i> {{content.minusCount}} dislike </a>
-		        <a style="padding:5px;color:grey" href="#" ng-click="reply(content)"><i class="fa fa-comment-o"></i> comment </a>
-		        <a style="color:grey" class="pull-right" href="content/{{content.id}}"><i class="fa fa-link grey"></i></a>
-		    </div>
-			<div ng-show="content.showReply" class="card-footer">
-				<form role="form" ng-submit="createContent(content)">
-					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-				</form>
-			</div>
-			<div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
-		</div>
-	</div>
-	-->
-	
 </div>
 <div class="spacing-50"></div>

@@ -293,7 +293,11 @@ angular.module( 'conexus.nav', [
         return deferred.promise;
     };
 
-    //OVERKILL
+    $rootScope.actionToggle = function(){
+        if($scope.currentUser){$mdSidenav('action').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
     $rootScope.contentToggle = function(){
         if($scope.currentUser){
             //TODO: ASSOCIATED 

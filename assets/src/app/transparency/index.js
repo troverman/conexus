@@ -29,6 +29,11 @@ angular.module( 'conexus.transparency', [
     $scope.transactionVelocity = Math.round(Math.random()*10000);
     $scope.tokens = 100000+Math.round(Math.random()*10000);
 
+    $scope.selectedTab = 'PEERNETWORK';
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+    };
+
 	$scope.chart = {
         chart:{zoomType: 'x',},
         series: [{

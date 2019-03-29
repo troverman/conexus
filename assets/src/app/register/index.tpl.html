@@ -13,14 +13,6 @@
 
     <div class="row">
 
-        <div ng-show="!showFinal" style="float:right">
-            <br>
-            <span ng-click="filterToggle('VALUEMAP')"><a>UNIVERSALTOKEN <i class="fa fa-eye"></i></a></span>
-            <br>
-        </div>
-
-        <div style="clear:both"></div>
-
         <div ng-show="showIntro">
 
             <div class="card">
@@ -61,6 +53,12 @@
                     <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile. The more detailed your dimensional vote the stronger the effect.</p>
                 </div>
             </div>
+            <ul style="padding:0px;" class="member-tabs">
+                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
+                <div style="clear:both"></div>
+            </ul>
+
             <div class="card">
                 <form style="display:flex;flex-direction:row;">
                     <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQueryArray"></tags-input>
@@ -83,8 +81,8 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p style="color:gray;margin:0px;font-size:12px"><b>What is this?</b></p>
-                                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We begin to define your value map by understanding statements of preference which are used to coordinate and factor various orders on CRE8's Multi Dimensional Token Market.</p>
-                                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We promote a context of discovery for projects, tasks, time, content, and a variety of other protocol actions represented within on CRE8's network.</p>
+                                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We start defining your value map though understanding statements of preference. This is used to coordinate orders on CRE8's Multi Dimensional Token Market.</p>
+                                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We present a context of discovery for tokenization actions. Actions are manifest though projects, tasks, time, content, and a variety of other protocol actions are represented on CRE8's network.</p>
                                     <div ng-repeat="item in newOrder">
                                         <div layout="">
                                             <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[2]}}</span></div>
@@ -240,23 +238,32 @@
                     <div class="spacing-5"></div>
 
                     <h3>Value Map</h3>
-                    <highchart config="chartMapTotal"></highchart>
-                    <div class="spacing-5"></div>
 
-                    <div class="" ng-repeat="order in newOrderNEW">
-                        <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
-                        <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
+                    <div class="row">
+
+                        <div class="col-xs-6">
+
+                            <div class="" ng-repeat="order in newOrderNEW">
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
+                            </div>
+
+                            <!--<div class="" ng-repeat="order in newOrder">
+                                <span style="color:gray">{{order[0].amount}} <a href="/market/{{order[0].identifier}}">{{order[0].identifier}}</a> | <a href="/market/{{order[1].identifier}}">{{order[1].identifier}}</a> | <a href="/market/{{order[0].identifier}}/{{order[1].identifier}}">MarketPair</a></span>
+                            </div>-->
+
+                            <div class="spacing-5"></div>
+
+                            <button type="submit" style="width:100%" ng-click="continue(2)" class="btn btn-default log-btn">Keep Going?</button>
+                            <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
+
+                        </div>
+
+                        <div class="col-xs-6">
+                            <highchart config="chartMapTotal"></highchart>
+                        </div>
+
                     </div>
-
-
-                    <div class="" ng-repeat="order in newOrder">
-                        <span style="color:gray">{{order[0].amount}} <a href="/market/{{order[0].identifier}}">{{order[0].identifier}}</a> | <a href="/market/{{order[1].identifier}}">{{order[1].identifier}}</a> | <a href="/market/{{order[0].identifier}}/{{order[1].identifier}}">MarketPair</a></span>
-                    </div>
-
-
-                    <button type="submit" style="width:100%" ng-click="continue(2)" class="btn btn-default log-btn">Keep Going?</button>
-                    <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
-                    
 
                 </div>
             </div>

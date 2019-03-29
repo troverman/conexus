@@ -2,6 +2,19 @@
 <div class="container">
 
     <div class="row" ng-show="isTutorial">
+
+
+        <!--IF NO ORDERS | VALUE MAP-->
+        <div ng-show="showOrders && positions.length == 0" class="card" ng-click="">
+
+
+            <!--TODO!-->
+
+
+
+
+
+        </div>
         
         <div ng-show="showProjects" class="card" ng-click="">
 
@@ -208,16 +221,15 @@
             <div style="padding:16px;">
 
 
+
+                <!--IF YOU HAVE ANY ORDERS!!!-->
+
                 <p><b>My Current Positions & Value Map</b></p>
 
                 <!--MAKE AS MAP..-->
                 <div ng-repeat="position in positions">
                     <span>{{position.setAlpha}} || {{position.setBeta}}</span>
                 </div>
-
-                <div class="spacing-10"></div>
-
-                <highchart config="chart"></highchart>
 
                 <div class="spacing-10"></div>
 
@@ -229,11 +241,36 @@
                 {{memberProjects}}
                 -->
 
+                <!--IF YOU HAVE ANY ORDERS!!!-->
+
+
+
+
                 <div class="row">
-                    <div class="col-md-2" style="max-height:50vh;overflow:scroll">
+                    <div class="col-xs-3" style="max-height:50vh;overflow:scroll">
                         <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedsuggestedTokenTags track by $index">
-                            <button ng-click="createPosition(item.element)" class="btn btn-default"><a href="#">{{item.element}}</a></button>
+                            <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
                         </div>
+                    </div>
+                    <div class="col-xs-9">
+
+                        <!--<div class="row">
+                            <div class="col-xs-12">
+                                <div ng-repeat="item in newOrder">
+                                    
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <highchart config="chart"></highchart>
+
+                        <!--<div class="row">
+                            <div class="col-xs-6">
+                            </div>
+                            <div class="col-xs-6">
+                            </div>
+                        </div>-->
+
                     </div>
                 </div>
 

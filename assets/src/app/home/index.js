@@ -104,6 +104,11 @@ angular.module( 'conexus.home', [
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
+    $scope.sorting = false;
+    $scope.expandSort = function(){
+        $scope.sorting = true;
+    };
+
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
         {title:'WE ARE ALL IN THIS TOGETHER'},

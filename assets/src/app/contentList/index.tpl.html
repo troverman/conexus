@@ -15,7 +15,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>Trending</h5></a></li>
                                 <hr class="sort-hr">
-                                <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Work</h5></a></li>
+                                <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Created</h5></a></li>
                             </ul>
                         </div>
                     </div>
@@ -60,9 +60,9 @@
         <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
     
             <ul style="padding:0px;" class="member-tabs">
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>   
+                <div style="clear:both"></div>
             </ul>
-            <div style="clear:both"></div>
 
             <div class="card">
                 <form ng-submit="search()" style="display:flex;flex-direction:row;">

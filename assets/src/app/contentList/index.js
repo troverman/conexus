@@ -30,7 +30,12 @@ angular.module( 'conexus.contentList', [
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
 
-    $scope.sortedLocationArray = ['Knoxville', 'Chapel Hill', 'New York City']
+    $scope.sortedLocationArray = ['Knoxville', 'Chapel Hill', 'New York City'];
+
+    $scope.sorting = false;
+    $scope.expandSort = function(){
+        $scope.sorting = true;
+    };
     
     //TODO: PROPER ASSOCIATIONS
     $scope.loadAssociations = function(){

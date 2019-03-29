@@ -19,24 +19,32 @@
 <div class="container">
 
 	<div class="row">
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="font-size:14px"><a ng-click="selectTab('METAGOVERNANCE')" href="#">Meta Governance</a></li>
+            <li style="font-size:14px"><a ng-click="selectTab('PEERNETWORK')" href="#">Peer Network</a></li>
+            <li style="font-size:14px"><a ng-click="selectTab('STATS')" href="#">Stats</a></li>
+            <div style="clear:both"></div>
+        </ul>
+	</div>
 
-		<!--
+	<div class="row" ng-if="selectedTab == 'METAGOVERNANCE'">
 		<div class="card">
 			<div style="padding:16px;">
-				<p>information</p>
+				<h3>Meta Governance</h3>
+				<h5><a href="project/conexus">conexus project</a></h5>
 			</div>
 		</div>
-		-->
+	</div>
 
+	<div class="row" ng-if="selectedTab == 'PEERNETWORK'">
 		<div class="card">
 			<div style="padding:16px;">
 				<div class="col-md-12">
-					
+
 					<h3>Peer Network</h3>
-					<p style="color:gray;font-style:italic;">{{peers.length}} Peers</p>
-					<p style="color:gray;font-style:italic;">{{transactionVelocity}} Txs per second</p>
 
 					<div class="spacing-10"></div>
+
 					<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
 					    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
 					        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
@@ -44,6 +52,7 @@
 					        </ui-gmap-window>
 					    </ui-gmap-marker>
 					</ui-gmap-google-map>
+
 					<div class="spacing-10"></div>
 
 					<table class="table table-striped table-hover">
@@ -70,27 +79,20 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" ng-if="selectedTab == 'STATS'">
 		<div class="card">
 			<div style="padding:16px;">
 				<div class="col-md-12">
 					<h3>Stats</h3>
 					<p style="color:gray;font-style:italic;">
+						{{chart.series[0].data[chart.series[0].data.length-1][1]}} Peers, 
 						{{chart.series[0].data[chart.series[0].data.length-1][1]}} Projects, 
 						{{chart.series[1].data[chart.series[1].data.length-1][1]}} Members, 
-						{{chart.series[3].data[chart.series[3].data.length-1][1]}} Daily Transactions, 
+						{{chart.series[3].data[chart.series[3].data.length-1][1]}} Transactions Velocity, 
 						{{chart.series[4].data[chart.series[4].data.length-1][1]}} Assets
 					</p>
 					<highchart config="chart"></highchart>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="card">
-			<div style="padding:16px;">
-				<h2><a href="project/conexus">Meta</a></h2>
 			</div>
 		</div>
 	</div>

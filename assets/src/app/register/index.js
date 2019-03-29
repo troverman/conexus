@@ -129,12 +129,11 @@ angular.module( 'conexus.register', [
         credits:{enabled:false},
     };
 
-    console.log($scope.chartMapTotal);
     //PERFORMANCE....
     $scope.updateChartTotal = function(){
         $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
         $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
-        console.log( $scope.chartMapTotal)
+        console.log($scope.chartMapTotal)
     };
 
     $scope.pieTotal = {
@@ -144,10 +143,15 @@ angular.module( 'conexus.register', [
             type: 'pie',
             name: 'Pie',
             colorByPoint: true,
-            data: [{
-                name: 'Assets',
-                y: [],
-            }]
+            data: [
+                {name:'LOVE',y:1},
+                {name:'ART',y:1},
+                {name:'PEACE',y:1},
+                {name:'SHELTER',y:1},
+                {name:'EXPERIENCE',y:1},
+                {name:'HEALTH',y:1},
+                {name:'HUMAN',y:1},
+            ]
         }],  
         title: {text: ''},
         xAxis: {title: {text: null}},
@@ -160,6 +164,8 @@ angular.module( 'conexus.register', [
         $scope.pieTotal.series[0].data = data;
         console.log( $scope.pieTotal)
     };
+
+    console.log($scope.chartMapTotal, $scope.pieTotal);
 
     //lol
     //do absolute
