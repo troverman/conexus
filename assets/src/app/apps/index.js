@@ -44,9 +44,14 @@ angular.module( 'conexus.apps', [
 
         {title:'Fitbit Activity Tokenization', description:'Fitbit Activity Tokenization, authentication and app integration, namespace: APP+FITBIT+', tags:'fitbit,data,exercise,health,authentication'},
 
+
         {title:'CRE8 Capital', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances.', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
         {title:'Voetr', description:'Consensus Building on Legislation & Political Representation, namespace: APP+VOETR+', tags:'voetr,voting,politics,legislation,representation'},
         {title:'Inspiro', description:'Tokenization of Inspiration https://www.inspiro.care, namespace: APP+INSPIRO+', tags:'medicine,medical,hardware,device'},
+
+
+        {title:'CRE8.NYC', description:'CRE8 Partnership with New York City .NYC', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+
 
         {title:'USD Tokenization', description:'USD Tokenization, manages custodial relationships with affiliate banks and institutions. namespace: USD', tags:'USD,bank,finance,fiat,authentication'},
 

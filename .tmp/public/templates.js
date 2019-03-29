@@ -30,18 +30,24 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
-    "				<h3>THE NEXT WAVE</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and Create the Future.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create a 24/7 continual hackathon.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Connect with collaborators and build together.</p>\n" +
+    "				<!--SHIFT FROM FUTURE TO NOW-->\n" +
+    "				<!--<h3>THE NEXT WAVE</h3>-->\n" +
+    "				<h3>VALUE WE CRE8</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and create value.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Creation never stops. It's a 24/7 continual hackathon.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Explore the diversity of the network.</p>\n" +
     "			</div>\n" +
-    "			<div class=\"col-sm-6\"></div>\n" +
+    "			<div class=\"col-sm-6\" style=\"text-align:right\">\n" +
+    "				<img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<h3>A SHARED WORLD</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">From shared items to space and time, sharing networks are reflective of our commitment.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supporative of sharing culture.</p>\n" +
+    "				<p><a href=\"/marketplace\">Marketplace</a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
     "			</div>\n" +
@@ -251,7 +257,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				\n" +
     "				<h2>Value Mapping and Dimensional Voting</h2>\n" +
     "				\n" +
-    "				<h3>It starts with you.</h3>\n" +
+    "				<h4>It starts with you.</h4>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our value mechanism is intentional. It is sourced from stating what we believe is valuable.</p>\n" +
     "				\n" +
@@ -1423,6 +1429,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            <h4>Application Design</h4>\n" +
     "            <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
     "            <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
+    "            <p>balanceOf:</p>\n" +
     "            <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
     "            <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
     "            <div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>\n" +
@@ -1437,104 +1444,146 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\" id=\"CRE8\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">\n" +
     "\n" +
-    "                <h2>CRE8</h2>    \n" +
-    "                <h3>Core Protocols</h3>  \n" +
-    "                <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <div class=\"container\">\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                    <h2>CRE8</h2>    \n" +
+    "                    <h3>Core Protocols</h3>  \n" +
+    "                    <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
     "\n" +
-    "                <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
-    "                <h5>Action Tokenization Protocol</h5>\n" +
-    "                <h5>Manifold Tokenization Protocol</h5>\n" +
-    "                <h5>Association Tokenization Protocol</h5>\n" +
-    "                <h5>Content Tokenization Protocol</h5>\n" +
-    "                <h5>Follow Tokenization Protocol</h5>\n" +
-    "                <h5>Item Tokenization Protocol</h5>\n" +
-    "                <h5>Location Tokenization Protocol</h5>\n" +
-    "                <h5>Member Tokenization Protocol</h5>\n" +
-    "                <h5>Order Tokenization Protocol</h5>\n" +
-    "                <h5>Project Tokenization Protocol</h5>\n" +
-    "                <h5>Project Charter Protocol</h5>\n" +
-    "                <h5>Reaction Tokenization Protocol</h5>\n" +
-    "                <h5>Task Tokenization Protocol</h5>\n" +
-    "                <h5>Time Tokenization Protocol</h5>\n" +
-    "                <h5>Transaction Tokenization Protocol</h5>\n" +
-    "                <h5>View Tokenization Protocol</h5>\n" +
-    "                <h5>Validation Tokenization Protocol</h5>\n" +
-    "                <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                    <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
+    "                    <h5>Action Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of action (and its applications on cre8's api)</p>\n" +
     "\n" +
-    "                <div>\n" +
-    "                    <p><b>STRUCTURE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
+    "                    <h5>Manifold Tokenization Protocol</h5>\n" +
+    "\n" +
+    "                    <h5>Association Tokenization Protocol</h5>\n" +
+    "                    <p><b>view:function()</b></p>\n" +
+    "\n" +
+    "                    <h5>Content Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation on content (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Follow Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of follows (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Item Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of an <a>Item</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Location Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b>\n" +
+    "\n" +
+    "                    <h5>Member Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Member</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Order Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of an <a>Order</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Project Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Project</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Project Charter Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Project Charter</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Reaction Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Reaction</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Task Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Task</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Time Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of <a>Time</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Transaction Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Transaction</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>View Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>View</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <h5>Validation Tokenization Protocol</h5>\n" +
+    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Validation</a> (and its applications on cre8's api)</p>\n" +
+    "\n" +
+    "                    <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <!--TOKENS-->\n" +
+    "                    <div>\n" +
+    "                        <p><b>STRUCTURE</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
+    "                        <p>transfer:</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>LANUGAGE</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>CONGRUENCE</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>MANIFOLD</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
+    "\n" +
+    "                        <!--\n" +
+    "                        <p><b>+[] SPACE</b></p>\n" +
+    "\n" +
+    "                        <p><b>Application Specific</b></p>\n" +
+    "                        <p><b>+CREDIT</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
+    "\n" +
+    "                        <p><b>+FUTURE</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
+    "\n" +
+    "                        <p><b>+OPTION</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "\n" +
+    "                        <p><b>+SPONSOR</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
+    "                        -->\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <p><b>CONNECTION</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>CRE8 CORE as a Manifold</b></p>\n" +
+    "                    <p>Defining Verbs in a string space</p>\n" +
+    "                    <p><b>CRE8</b></p>\n" +
+    "                    <p><b>MEMBER</b></p>\n" +
+    "                    <p><b>PROJECT</b></p>\n" +
+    "                    <p><b>TASK</b></p>\n" +
+    "                    <p><b>TIME</b></p>\n" +
+    "                    <p><b>VALIDATION</b></p>\n" +
+    "                    <p><b>ORDER</b></p>\n" +
+    "                    <!--/block, /tx, /address-->\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
+    "\n" +
     "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>LANUGAGE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>CONGRUENCE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>MANIFOLD</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
-    "\n" +
-    "                    <!--\n" +
-    "                    <p><b>+[] SPACE</b></p>\n" +
-    "\n" +
-    "                    <p><b>Application Specific</b></p>\n" +
-    "                    <p><b>+CREDIT</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
-    "\n" +
-    "                    <p><b>+FUTURE</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
-    "\n" +
-    "                    <p><b>+OPTION</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
-    "\n" +
-    "                    <p><b>+SPONSOR</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
-    "                    -->\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                    <p><b>CONNECTION</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <p><b>CRE8 CORE as a Manifold</b></p>\n" +
-    "                <p>Defining Verbs in a string space</p>\n" +
-    "                <p><b>CRE8</b></p>\n" +
-    "                <p><b>MEMBER</b></p>\n" +
-    "                <p><b>PROJECT</b></p>\n" +
-    "                <p><b>TASK</b></p>\n" +
-    "                <p><b>TIME</b></p>\n" +
-    "                <p><b>VALIDATION</b></p>\n" +
-    "                <p><b>ORDER</b></p>\n" +
-    "                <!--/block, /tx, /address-->\n" +
-    "                <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
-    "\n" +
     "            </div>\n" +
+    "\n" +
+    "            <!--<div style=\"background-color:black;height:100vh\" class=\"col-sm-4\">\n" +
+    "            </div>-->\n" +
+    "\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -2592,6 +2641,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "        	<div class=\"container\">\n" +
     "            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
+    "            	<h5 ng-if=\"false\" style=\"color:white\"></h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2652,8 +2702,8 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "					<li><a href=\"/projects\">Projects</a></li>\n" +
     "					<!--<li><a href=\"\">Reactions</a></li>-->\n" +
     "					<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "					<li><a href=\"\">Time</a></li>\n" +
-    "					<li><a href=\"\">Transactions</a></li>\n" +
+    "					<!--<li><a href=\"\">Time</a></li>\n" +
+    "					<li><a href=\"\">Transactions</a></li>-->\n" +
     "				</ul>\n" +
     "\n" +
     "		    </div>\n" +
@@ -3646,7 +3696,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        </div>\n" +
     "                        <br><br>\n" +
     "                        <div style=\"text-align:center\">\n" +
-    "                            <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
+    "\n" +
+    "                            <a href=\"/login\"><h5 stlye=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
     "                        </div>\n" +
     "                    </form>\n" +
     "                </div>\n" +
@@ -4102,7 +4153,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "                    </div>\n" +
     "                    <br><br>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a style=\"text-align:center\" href=\"/register\"><h4>Need an Account?</h4></a>\n" +
+    "                        <a style=\"text-align:center\" href=\"/register\"><h5 style=\"color:gray;font-style:italic\">Not A Member Yet?</h5></a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -5365,7 +5416,7 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\" ng-show=\"currentUser.id == member.id\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item</button>\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"itemToggle()\">+ Item</button>\n" +
     "        </div>\n" +
     "\n" +
     "        <div ng-repeat=\"item in items\">\n" +
@@ -9331,15 +9382,15 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    <input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\"> \n" +
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
     "                    <br><br>\n" +
+    "\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a href=\"/login\"><h4>Already Have an Account?</h4></a>\n" +
+    "                        <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
     "            <div class=\"selfClear\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>");
