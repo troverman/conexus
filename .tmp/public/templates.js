@@ -1448,135 +1448,149 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            <div class=\"col-xs-12\">\n" +
     "                <div class=\"container\">\n" +
     "\n" +
-    "                    <h2>CRE8</h2>    \n" +
-    "                    <h3>Core Protocols</h3>  \n" +
-    "                    <p style=\"color:gray;font-style:italic\">Layered Adaptability</p>\n" +
+    "                    <h2>CRE8 Core Protocols</h2>  \n" +
+    "                    <h5>Layered Adaptability</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Conex Base Protocol Tokenization Layer</h4><hr>\n" +
-    "                    <h5>Action Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of action (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Manifold Tokenization Protocol</h5>\n" +
-    "\n" +
-    "                    <h5>Association Tokenization Protocol</h5>\n" +
-    "                    <p><b>view:function()</b></p>\n" +
-    "\n" +
-    "                    <h5>Content Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation on content (and its applications on cre8's api) (edit rep and balance manifolds etc)</p>\n" +
-    "\n" +
-    "                    <h5>Follow Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of follows (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Item Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of an <a>Item</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Location Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b>\n" +
-    "\n" +
-    "                    <h5>Member Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Member</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Order Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of an <a>Order</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Project Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Project</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Project Charter Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Project Charter</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Reaction Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Reaction</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Task Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Task</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Time Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of <a>Time</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Transaction Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Transaction</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>View Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>View</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <h5>Validation Tokenization Protocol</h5>\n" +
-    "                    <p><b>create:function()</b> the operations and permission structure around the creation of a <a>Validation</a> (and its applications on cre8's api)</p>\n" +
-    "\n" +
-    "                    <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <!--TOKENS-->\n" +
     "                    <div>\n" +
-    "                        <p><b>STRUCTURE</b></p>\n" +
+    "                        <h4><b>STRUCTURE</b></h4>\n" +
     "                        <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
     "                        <p>transfer:</p>\n" +
+    "                        <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
+    "\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <div>\n" +
-    "                        <p><b>LANUGAGE</b></p>\n" +
+    "                        <h4><b>LANUGAGE</b></h4>\n" +
     "                        <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <div>\n" +
-    "                        <p><b>CONGRUENCE</b></p>\n" +
+    "                        <h4><b>CONGRUENCE</b></h4>\n" +
     "                        <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <div>\n" +
-    "                        <p><b>MANIFOLD</b></p>\n" +
+    "                        <p><b>MANIFOLD</b></h4>\n" +
     "                        <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
-    "\n" +
     "                        <!--\n" +
     "                        <p><b>+[] SPACE</b></p>\n" +
-    "\n" +
     "                        <p><b>Application Specific</b></p>\n" +
     "                        <p><b>+CREDIT</b></p>\n" +
     "                        <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
     "                        <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
-    "\n" +
     "                        <p><b>+FUTURE</b></p>\n" +
     "                        <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
-    "\n" +
     "                        <p><b>+OPTION</b></p>\n" +
     "                        <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
-    "\n" +
     "                        <p><b>+SPONSOR</b></p>\n" +
     "                        <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
     "                        -->\n" +
+    "\n" +
+    "                        <p><b>CRE8 CORE as a Manifold</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Defining Verbs in a string space; application(s)</p>\n" +
+    "                        <p><b>CRE8</b></p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">MEMBER, PROJECT, TASK, TIME, VALIDATION, ORDER</p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Order Book String Mapping; Mapping of all positions</p>\n" +
+    "\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                    <div>\n" +
-    "                        <p><b>CONNECTION</b></p>\n" +
+    "                        <h4><b>CONNECTION</b></h4>\n" +
     "                        <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
+    "                        <p>a+b+c+d+.....+n+i+....</p>\n" +
     "                    </div>\n" +
     "\n" +
+    "                    <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "                    <h4>Action Tokenization Protocol</h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\"><a href=\"#action\">API</a></p>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of action (and its applications on cre8's api)</span></p>\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                    <p><b>CRE8 CORE as a Manifold</b></p>\n" +
-    "                    <p>Defining Verbs in a string space</p>\n" +
-    "                    <p><b>CRE8</b></p>\n" +
-    "                    <p><b>MEMBER</b></p>\n" +
-    "                    <p><b>PROJECT</b></p>\n" +
-    "                    <p><b>TASK</b></p>\n" +
-    "                    <p><b>TIME</b></p>\n" +
-    "                    <p><b>VALIDATION</b></p>\n" +
-    "                    <p><b>ORDER</b></p>\n" +
-    "                    <!--/block, /tx, /address-->\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Order Book String Mapping</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Mapping of all positions</p>\n" +
+    "                    <h4>Manifold Tokenization Protocol</h4>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Association Tokenization Protocol</h4>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Content Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation on content (and its applications on cre8's api) (edit rep and balance manifolds etc)</span></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h5>Follow Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of follows (and its applications on cre8's api)</p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Item Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a>Item</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Location Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Member Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Member</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Order Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a>Order</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Project Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Project</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Project Charter Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Project Charter</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Reaction Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Reaction</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Task Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Task</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Time Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of <a>Time</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Transaction Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Transaction</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>View Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>View</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h4>Validation Tokenization Protocol</h4>\n" +
+    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Validation</a> (and its applications on cre8's api)</span></p>\n" +
+    "                    <p><b>getSome:function()</b></p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
