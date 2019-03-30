@@ -4042,11 +4042,21 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "    <div style=\"row\">\n" +
     "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "            <li><a href=\"#\">Content</a></li>\n" +
-    "            <li><a href=\"#\">Reactions</a></li>\n" +
+    "            <li><a href=\"#\">Orders</a></li>\n" +
     "        </ul>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"row\" ng-if=\"item.identiferSet\">\n" +
+    "    <!--IF LIQDUID OR NOT .. AKA IF FORE SALE..-->\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->\n" +
+    "\n" +
+    "    <div class=\"row\" ng-if=\"false\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"\">\n" +
     "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"purchaseToggle()\">Purchase</button>\n" +
@@ -4118,9 +4128,16 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>-->\n" +
     "\n" +
-    "\n" +
     "    <!--LIST REACTIONS-->\n" +
-    "    <!--<div class=\"row\">\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "\n" +
+    "        <div class=\"card\" ng-if=\"contentList.length == 0\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <p style=\"color:gray;font-style:italic\">There is nothing here...</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
     "        <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div>\n" +
@@ -4143,7 +4160,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                </form>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "    </div>-->\n" +
+    "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -6366,29 +6383,30 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"row\">\n" +
-    "                <div class=\"col-xs-10 col-xs-offset-1\">\n" +
-    "                    <div class=\"login-form\">\n" +
-    "                        <form role=\"form\">\n" +
-    "                            <div class=\"form-group\">\n" +
-    "                                <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\" ng-model=\"newLogin.identifier\"> \n" +
-    "                                <i class=\"fa fa-user\"></i>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"form-group log-status\">\n" +
-    "                                <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\" ng-model=\"newLogin.password\"> \n" +
-    "                                <i class=\"fa fa-lock\"></i>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"align-right\">\n" +
-    "                                <button class=\"btn btn-default log-btn\" ng-click=\"login()\">Sign in</button>\n" +
-    "                            </div>\n" +
-    "                            <br><br>\n" +
-    "                            <div class=\"social-log\">\n" +
-    "                                <a style=\"text-align:center\" href=\"/register\"><h4>Need an Account?</h4></a>\n" +
-    "                            </div>\n" +
-    "                        </form>\n" +
-    "                    </div>\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <div class=\"login-form\">\n" +
+    "                    <form role=\"form\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\" ng-model=\"newLogin.identifier\"> \n" +
+    "                            <i class=\"fa fa-user\"></i>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group log-status\">\n" +
+    "                            <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\" ng-model=\"newLogin.password\"> \n" +
+    "                            <i class=\"fa fa-lock\"></i>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"align-right\">\n" +
+    "                            <button class=\"btn btn-default log-btn\" ng-click=\"login()\">Sign in</button>\n" +
+    "                        </div>\n" +
+    "                        <br><br>\n" +
+    "                        <div class=\"social-log\">\n" +
+    "                            <a style=\"text-align:center\" href=\"/register\"><h4>Need an Account?</h4></a>\n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "            \n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +

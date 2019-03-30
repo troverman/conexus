@@ -78,11 +78,21 @@
     <div style="row">
         <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
             <li><a href="#">Content</a></li>
-            <li><a href="#">Reactions</a></li>
+            <li><a href="#">Orders</a></li>
         </ul>
     </div>
 
-    <div class="row" ng-if="item.identiferSet">
+    <!--IF LIQDUID OR NOT .. AKA IF FORE SALE..-->
+
+    <div class="row">
+        <div class="card">
+            <button type="submit" class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
+        </div>
+    </div>
+
+    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->
+
+    <div class="row" ng-if="false">
         <div class="card">
             <div style="">
                 <button type="submit" class="btn btn-default log-btn" ng-click="purchaseToggle()">Purchase</button>
@@ -154,9 +164,16 @@
         </div>
     </div>-->
 
-
     <!--LIST REACTIONS-->
-    <!--<div class="row">
+
+    <div class="row">
+
+        <div class="card" ng-if="contentList.length == 0">
+            <div style="padding:16px;">
+                <p style="color:gray;font-style:italic">There is nothing here...</p>
+            </div>
+        </div>
+
         <div class="card" ng-repeat="item in contentList">
             <div style="padding:16px">
                 <div>
@@ -179,7 +196,7 @@
                 </form>
             </div>
         </div>
-    </div>-->
+    </div>
 
     <div class="spacing-50"></div>
 
