@@ -1347,7 +1347,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "<div id=\"DEVELOPERS\" style=\"background-color:white;min-height:70vh\">\n" +
     "    <div class=\"container\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -1368,7 +1368,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
+    "<div id=\"DOCUMENTATION\" style=\"background-color:white;min-height:70vh\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
@@ -1445,29 +1445,27 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"CRE8VM\"></div>\n" +
+    "<div id=\"CRE8VM\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "\n" +
     "                <h2>The Decentralized CRE8 Virtual Machine</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
     "                <p>MERKLE ROOT INFORMATION HERE!</p>\n" +
     "                <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
     "                <div class=\"spacing-100\"></div>\n" +
-    "\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\" id=\"PEER\"></div>\n" +
+    "<div id=\"PEER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">  \n" +
@@ -1487,12 +1485,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"APPDESIGN\"></div>\n" +
+    "<div id=\"APPDESIGN\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">  \n" +
-    "\n" +
     "                <!--TOKEN STRING MAPPING-->\n" +
     "                <h2>Interoperable Protocol Architecture Design</h2>\n" +
     "                <h4>Application Design</h4>\n" +
@@ -1510,14 +1507,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"CRE8\"></div>\n" +
+    "<div id=\"CRE8\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "\n" +
     "            <div class=\"col-xs-12\">\n" +
     "                <div class=\"container\">\n" +
-    "\n" +
     "                    <h2>CRE8 Core Protocols</h2>  \n" +
     "                    <h5>Layered Adaptability</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
@@ -1675,14 +1670,25 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"CONEXAPI\"></div>\n" +
+    "<div id=\"CONEXAPI\" style=\"background-color:white;min-height:70vh\">\n" +
+    "\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Conex API</h1>\n" +
+    "                    <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "\n" +
     "                <div>\n" +
-    "                    <h3><b>Conex API</b></h3>\n" +
     "                    <h5>Filter & Search Parameters</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2524,7 +2530,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -2536,16 +2542,24 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "<div class=\"spacing-100\"></div> \n" +
     "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\" id=\"TOKENIZATION\"></div>\n" +
+    "<div id=\"TOKENIZATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokenization</h1>\n" +
+    "                    <h5 style=\"color:white\">Tokenization from protocols.</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <div id=\"TOKENIZATION\" class=\"spacing-25\"></div>\n" +
-    "                <h3>Tokenization</h3>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization from protocols.</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2553,18 +2567,37 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\" id=\"IDENTITY\"></div>\n" +
+    "<div id=\"IDENTITY\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Identity & Interoperability</h1>\n" +
+    "                    <h5 style=\"color:white\">Protocols to manage user operations</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">  \n" +
-    "                <h3>Identity & Interoperability</h3>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Protocols to manage user operations</p>\n" +
-    "                <a href=\"\">Passport model</a>\n" +
+    "                <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>\n" +
+    "                <div hljs hljs-language=\"javascript\">\n" +
+    "var passportModel = {\n" +
+    "    id: {type: 'string'},\n" +
+    "    protocol: { type: 'alphanumeric'},\n" +
+    "    password: { type: 'string', minLength: 8 },\n" +
+    "    provider: { type: 'alphanumericdashed' },\n" +
+    "    identifier: { type: 'string' },\n" +
+    "    tokens: { type: 'json' },\n" +
+    "    user: { model: 'User',}\n" +
+    "};</div>\n" +
+    "\n" +
+    "                <p><b>[get, post] /api/passport</b></p>\n" +
+    "                <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2572,21 +2605,30 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "<div id=\"about-section1\" style=\"min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\" id=\"VALIDATION\"></div>\n" +
+    "<div id=\"VALIDATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Association Exploration & Traversal</h1>\n" +
+    "                    <h5 style=\"color:white\">The Organizational Complex</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <h2>The Organizational Complex</p>\n" +
-    "                <h3>Association Traversal</h3>\n" +
+    "                <!--MULTI ORG LATTICE-->\n" +
     "                <h4>Validation Traversal</h4>\n" +
     "                <p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">From Set Obj{} Score --compute--> </p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure; RECURISIVE.. TOPOLOGY MAP OF VALIDATIONS (HIGHER ORDER)</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals (and protocols)</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2594,16 +2636,21 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"MULTIMARKET\"></div>\n" +
+    "<div id=\"MULTIMARKET\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">MultiMarket Exploration & Traversal</h1>\n" +
+    "                    <h5 style=\"color:white\">The Multidimensional Token Market</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "\n" +
-    "                <h3>MultiMarket Exploration & Traversal</h3>\n" +
-    "                <p><b>The Multidimensional Token Market</b></p>\n" +
     "\n" +
     "                <!--VALUE MAP STRUCUTRE-->\n" +
     "                <p style=\"color:gray;font-style:italic\">Discrete Order Structure / Value Map</p>\n" +
@@ -2669,18 +2716,24 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"GROUPINTENTION\"></div>\n" +
+    "<div id=\"GROUPINTENTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Project Charters and Group Coordination</h1>\n" +
+    "                    <h5 style=\"color:white\">The Token Action Potientals</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <h3>Project Charters and Group Coordination</h3>\n" +
-    "                <p style=\"color:gray;font-style:italic\">The Token Action Potientals</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2688,28 +2741,32 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
-    "<div id=\"about-section1\">\n" +
-    "    <div class=\"spacing-50\" id=\"SYNTHETICTOKENIZATION\"></div>\n" +
+    "<div id=\"SYNTHETICTOKENIZATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokenization and Pattern Recognition</h1>\n" +
+    "                    <h5 style=\"color:white\">Modular Validation</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <h3>Tokenization and Pattern Recognition</h3>\n" +
-    "                <h5>Modular Validation</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">Deep Learning and video feeds to discreetly tokenize time</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Tokenization with a high degree of consensus on context through multidimensional validation</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">TOKENIZING PUBLIC SPACES THOUGH AI</p>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
     "\n" +
     "");
 }]);

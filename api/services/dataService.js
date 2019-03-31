@@ -56,6 +56,9 @@ module.exports = {
 	//BUILD ASSOCIATIONS (FROM VALIDATIONS)
 
 	//SET OF VALIDATIONS [] --> SET ASSOCIATED MODELS PER MODEL
+	//ON CREATE VALIDATION --> BUILD ASSOCIATION
+		//-->BUILD NETWORK
+			//--> BUILD TOKENIZATION ACTION POTIENTALS
 	buildAssociatedModels:function(model){
 
 		//VALIDATION TRAVERSAL!
@@ -68,7 +71,6 @@ module.exports = {
 		//LOL THIS IS RECURSIVE :0
 
 		//GOTTA DOCUMENT THIS ALG NICELY 
-
 
 
 		//MEH
@@ -94,7 +96,6 @@ module.exports = {
 
 						//LOOKING AT VALIDATION MODELS // BINARY RELATIONSHIP
 						for (y in validationModels[x].associatedModels){
-
 							if (!associationTree[validationModels[x].associatedModels[y].address]){
 								associationTree[validationModels[x].associatedModels[y].address] = []
 							}
@@ -129,7 +130,7 @@ module.exports = {
 
 	                var associatedModels = [];
 	                //BUILD ASSOCIATED MODELS FROM AVERAGE VALIDATIONS ////BASED ON CHARTERS OF RESPECTIVE LINKAGES
-	                for (x in Object.keys($scope.validationSumObj)){
+	                for (x in Object.keys(validationSumObj)){
 	                    associatedModels.push(validationSumObj[Object.keys(validationSumObj)[x]]/validationModels.length);
 	                    associatedModels.push(Object.keys(validationSumObj)[x]);
 	                }
