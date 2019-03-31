@@ -52,6 +52,113 @@ function generate(model) {
 
 module.exports = {
 
+
+	//BUILD ASSOCIATIONS (FROM VALIDATIONS)
+
+	//SET OF VALIDATIONS [] --> SET ASSOCIATED MODELS PER MODEL
+	buildAssociatedModels:function(model){
+
+		//VALIDATION TRAVERSAL!
+
+		//WARNING: THIS IS DEPRECIATED
+		//GET VALIDATIONS
+
+
+
+		//LOL THIS IS RECURSIVE :0
+
+		//GOTTA DOCUMENT THIS ALG NICELY 
+
+
+
+		//MEH
+		Validation.native(function(err, validation) {
+			validation.find({"associatedModels.address":{$in :[model]}})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, validationModels) {
+					validationModels = validationModels.map(function(obj){
+						obj.id = obj._id;
+						//PROTOCOL. CHARTER.?
+						return obj;
+					});
+
+					//SET OF VALIDATIONS
+					//GET ALL BINARY CONNECTIONS; UNIQUE CONNECTIONS
+					var associationTree = {};
+					for (x in validationModels){
+
+						//IF VALIDATION HAS VALIDATION.. GO 
+							//RECURSION
+
+						//LOOKING AT VALIDATION MODELS // BINARY RELATIONSHIP
+						for (y in validationModels[x].associatedModels){
+
+							if (!associationTree[validationModels[x].associatedModels[y].address]){
+								associationTree[validationModels[x].associatedModels[y].address] = []
+							}
+
+							//AVERAGE SCORE --> PER DIMENSION..
+							//for z in dimension 
+
+							associationTree[validationModels[x].associatedModels[y].address].push('THE SCORE')
+	
+						}
+
+					}
+
+					//SUM VALIDATIONS.. 
+					//WE ARE NOT RESTRICTING ON ON BOTH VALIDATION DIMENSIONS THO : > )
+					var validationSumObj = {};
+
+					//SET OF VALIDATIONS
+					for (y in validationModels){
+
+						//PER DIMENSION IN EACH VALIDATION
+	                    for (x in Object.keys(validationModels[y].validation)){
+	                        if(!validationSumObj[Object.keys(validationModels[y].validation)[x]]){
+	                        	validationSumObj[Object.keys(validationModels[y].validation)[x]]=validationModels[y].validation[Object.keys(validationModels[y].validation)[x]]
+	                        }
+	                        else{
+	                        	validationSumObj[Object.keys(validationModels[y].validation)[x]]+=validationModels[y].validation[Object.keys(validationModels[y].validation)[x]]
+	                        }
+	                    }
+
+	                }
+
+	                var associatedModels = [];
+	                //BUILD ASSOCIATED MODELS FROM AVERAGE VALIDATIONS ////BASED ON CHARTERS OF RESPECTIVE LINKAGES
+	                for (x in Object.keys($scope.validationSumObj)){
+	                    associatedModels.push(validationSumObj[Object.keys(validationSumObj)[x]]/validationModels.length);
+	                    associatedModels.push(Object.keys(validationSumObj)[x]);
+	                }
+
+
+				});
+			});
+		});
+
+		//GET VALIDATIONS
+		//Validation.find({}).limit(1000).then(function(validationModels){
+		//	for (x in validationModels){
+		//	}
+		//});	
+
+		//EDIT associatedModels on Models
+
+	},
+
+	//(MODEL []) ASSOCIATED MODELS [] --> {}COMPUTED GRAPH STRUCTURE 
+	buildAssociationNetwork:function(model){
+
+		//BUILD ASSOCIATION OBJECT --> TRAVERSAL OF associatedModels
+										//TRAVERSAL --> LONG TAIL
+		//RETURN JSON OBJECT
+
+	},
+
+
 	getData: function(network, reflective){
 		
 		//POPULATE A NEW NETWORK

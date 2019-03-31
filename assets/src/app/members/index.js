@@ -48,7 +48,7 @@ angular.module( 'conexus.members', [
             name: 'Reputation',
             data: []
         }],
-        title: {text: 'Total Reputation'},
+        title: {text: ''},
         xAxis: {
             crosshair: true,
             gridLineWidth: 0.5,

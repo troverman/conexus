@@ -23,6 +23,10 @@ angular.module( 'conexus.projects', [
     $scope.currentUser = config.currentUser;
     $scope.projects = projects;
 
+    if ($scope.currentUser){
+        //get my projects
+    }
+
     $scope.selectedSort = 'createdAt DESC';
     $scope.searchQuery = [];
     $scope.skip = 0;

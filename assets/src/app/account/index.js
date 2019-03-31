@@ -14,7 +14,7 @@ angular.module( 'conexus.account', [
 }])
 
 .controller( 'AccountCtrl', ['$location', '$scope', 'config', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $scope, config, titleService, Upload, UserModel ) {
-	titleService.setTitle('Account | CRE8.XYZ');
+	titleService.setTitle('Account Settings | CRE8.XYZ');
 	$scope.currentUser = config.currentUser;
     $scope.editAccountToggleVar = false;
     $scope.newAccountInformation = $scope.currentUser;
@@ -56,7 +56,7 @@ angular.module( 'conexus.account', [
         $scope.editAccountToggleVar = $scope.editAccountToggleVar ? false : true;
     };
 
-     //TODO SERVER | CHAIN
+    //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
         //$scope.balanceLook = $scope.balanceLook.toLowerCase();
         if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
