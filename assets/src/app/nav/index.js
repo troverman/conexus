@@ -603,6 +603,8 @@ angular.module( 'conexus.nav', [
 
     $rootScope.renderValidationToggle = function(item){
 
+
+
         //POWER SET
         function getAllSubsets(theArray) {
           return theArray.reduce(function (subsets, value) {
@@ -644,6 +646,7 @@ angular.module( 'conexus.nav', [
         for (x in $scope.item.associatedModels){
             //HACK?
             var length = $scope.graphData.nodes.length;
+            console.log($scope.item.associatedModels[x])
             $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})//$scope.item.associatedModels[x].address});
             $scope.graphData.links.push({value:1, source:0, target:length});
         }
@@ -823,6 +826,8 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.validationToggle = function(item){
+
+        console.log(item)
 
         if($scope.currentUser){
 

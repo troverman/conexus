@@ -50,21 +50,12 @@
             </div>
         </div>
 
-        <!--
-        <div class="row">
-            <div class="card">
-                <style type="text/css">.angular-google-map-container{height: 200px;}</style>
-                <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-            </div>
-        </div>
-        -->
-
         <div ng-repeat="item in time">
             <div class="card" ng-click="renderToggle(item)">
                 <div style="padding:16px">
-                    <div style="float:right">
-                        <h5 ng-click="$event.stopPropagation();tokenToggle(task)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                    </div>
+                    <div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                    </div>  
     				<h4>{{item.startTime | date:"h:mma | MM/dd/yyyy"}} - {{item.endTime | date:"h:mma | MM/dd/yyyy"}}</h4>
     				<span><a ng-click="$event.stopPropagation()" href="task/{{item.task.id}}">{{item.task.title}}</a> | <a ng-click="$event.stopPropagation()" href="member/{{item.user.username}}">{{item.user.username}}</a></span>
                 </div>

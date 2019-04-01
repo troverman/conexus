@@ -6,8 +6,8 @@
         <div class="card" ng-click="">
             <div style="padding:16px">
 
-                <div style="float:right">
-                    <h5 ng-click="tokensToggle()"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
+                <div style="float:right;text-align:right">
+                    <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(order)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                 </div>
 
             	<h4><a href="market/{{order.identiferSet}}/{{order.identiferSet1}}">{{order.identiferSet}} | {{order.identiferSet1}}</a></h4>

@@ -1,3 +1,5 @@
+
+<!--GRAPH REPRESENTATION IN THE COMPUTERD ASSOCIATION NETWORK..-->
 <div ng-show="project.parent">
 	<div class="spacing-5"></div>
 	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
@@ -10,6 +12,7 @@
     </div>
 </div>
 
+<!--ASSOCIATIONS FOR TRAVERSAL-->
 <div class="row">
 	<div ng-repeat="project in projects">
 		<div class="card">

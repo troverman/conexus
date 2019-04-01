@@ -21,19 +21,25 @@
 
     <div class="row">
 
+        <!--TODO:..motion to edit..?-->
+        <div style="row" ng-if="currentUser.id == task.user">
+            <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+                <li><a ng-click="" href="#">Current</a></li>
+                <li><a ng-click="" href="#">History</a></li>
+                <li><a ng-click="" href="#">Motions</a></li>
+            </ul>
+        </div>
+
         <div class="card" ng-click="">
             <div class="padding:16px">
                 <div class="col-sm-12" style="padding:16px">
+
                     <div style="float:right;text-align:right">
-                        <h5 ng-click="tokensToggle(task)"><a href="">Tokens <i class="fa fa-question-circle"></i></a></h5>
-                        <h5 ng-click="renderValidationToggle(task)"><a href="#">Associations & Validations <i class="fa fa-question-circle"></i></a></h5>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(task)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(task)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
+
                     <h3>{{task.title}}</h3>
-
-                    <!--..motion to edit..?-->
-                    <div ng-if="currentUser.id == task.user.id">edit</div>
-
-                    <!--<button ng-click="pop()">test</button>-->
 
                     <!--ASSOCIATION && VALIDATION-->
                     <!--TAGS & SHARED ASSOCIATION CONTEXT-->
@@ -117,17 +123,16 @@
         </div>
         <div class="card" ng-repeat="item in time" ng-click="">
             <div style="padding:16px;">
+                <div style="float:right;text-align:right">
+                    <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
+                    <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                </div>
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                     <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                     <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                     <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
-                    <span style="text-align:right;float:right">
-                        <a ng-click="tokensToggle(item)" href="#">Tokens <i class="fa fa-question-circle"></i></a>
-                        <br>
-                        <a ng-click="renderValidationToggle(item)" href="#">Associations <i class="fa fa-question-circle"></i></a>
-                    </span>
                     <div style="clear:both"></div>
                 </div>
                 <p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>

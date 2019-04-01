@@ -18,6 +18,9 @@
         <div ng-repeat="item in contentList">
             <div class="card">
                 <div style="padding:16px;">
+                    <div style="float:right;text-align:right">
+                        <a ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
+                    </div>
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>

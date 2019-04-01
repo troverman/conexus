@@ -87,12 +87,18 @@ module.exports = {
 	update: function(req,res){
 		var id = req.param('id');
 		var model = {
+			description : req.param('description'),
+			username : req.param('username'),
 			email: req.param('email'),
-			//username : req.param('username'),
 			avatarUrl: req.param('avatarUrl'),
+			coverUrl: req.param('coverUrl'),
 			firstName: req.param('firstName'),
 			lastName: req.param('lastName'),
 			address: req.param('address'),
+			dateOfBirth: req.param('dateOfBirth'),
+			eyeColor: req.param('eyeColor'),
+			gender: req.param('gender'),
+			height: req.param('height'),
 		};
 		User.update({id: id}, model)
 		.then(function(model){

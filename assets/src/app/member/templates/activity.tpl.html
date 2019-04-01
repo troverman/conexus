@@ -51,8 +51,8 @@
             <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
                 <div style="padding:16px;overflow:scroll;max-height:500px">
 
-                    <div style="float:right">
-                        <h5 style="text-align:right" ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
                     <div>
@@ -98,8 +98,8 @@
             <div class="card" ng-if="item.model=='ORDER'" ng-click="renderToggle(item)">
                 <div style="padding:16px">
 
-                    <div style="float:right">
-                        <h5 style="text-align:right" ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
                     <div ng-click="$event.stopPropagation()">
@@ -125,9 +125,10 @@
             <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
                 <div style="padding:16px;">
 
-                    <div style="float:right">
-                        <h5 style="text-align:right" ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
+
 
                     <div ng-click="$event.stopPropagation()">
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -163,10 +164,10 @@
             <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="renderToggle(item)">
                 <div style="padding:16px">
 
-                    <div style="float:right">
-                        <h5 style="text-align:right" ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+                    <div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
-                    
+
                     <p style="font-weight:800">
                         <span ng-if="item.from.username">From: <a ng-click="$event.stopPropagation()" href="member/{{item.from.username}}">{{item.from.username}}</a></span>
                         <span ng-if="item.from.title">From: <a ng-click="$event.stopPropagation()" href="project/{{item.from.title}}">{{item.from.title}}</a></span>
@@ -177,7 +178,6 @@
                     <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                     
                     <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-
 
                     <p>{{item.content}}</p>
                     <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>

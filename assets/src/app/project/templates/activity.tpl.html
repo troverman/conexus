@@ -100,7 +100,7 @@
                     </div>
                    
                     <h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>
-                    <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                    <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                     <span style="color:gray" am-time-ago="item.createdAt"></span>
                         
@@ -109,7 +109,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a ng-click="$event.stopPropagation();validationToggle(task)"><i class="fa fa-check"></i> validate </a>
+                    <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                     <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
@@ -140,8 +140,8 @@
                         <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
                     </div>
 
-                    <p ng-click="$event.stopPropagation();" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px">
-                        <a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a>
+                    <p ng-click="$event.stopPropagation();" ng-show="item.task.tags > 0" style="margin-left:42px">
+                        <a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag}} </a>
                     </p>
                     <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 
@@ -150,7 +150,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a ng-click="$event.stopPropagation();validationToggle(task)"><i class="fa fa-check"></i> validate </a>
+                    <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                     <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
@@ -179,7 +179,7 @@
                     </p>
                     
                     <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
-                    <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                    <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p>{{item.content}}</p>
                     <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
                     <a ng-click="$event.stopPropagation();" href="transaction/{{item.id}}"></a>

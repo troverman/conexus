@@ -62,9 +62,9 @@
                 <div class="card" style="">
                     <div style="padding:16px;overflow:scroll;max-height:500px">
 
-                        <div style="float:right">
-                            <h5 style="text-align:right" ng-click="tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                        </div>
+                        <div style="float:right;text-align:right">
+                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        </div>  
 
                         <a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
 

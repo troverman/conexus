@@ -82,15 +82,10 @@
             <div ng-repeat="item in contentList">
                 <div class="card" ng-click="renderToggle(item)">
                     <div style="padding:16px">
-                        <!--
-                        <div style="float:right;padding-left:5px;">
-                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><i class="fa fa-ellipsis-v"></i></a>
-                        </div>
-                        -->
-                        <div style="float:right">
-                            <h5 style="text-align:right" ng-click="$event.stopPropagation();tokensToggle(item)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
-                            <h5 style="text-align:right" ng-click="$event.stopPropagation();renderValidationToggle(item)"><a>Associations <i class="fa fa-question-circle"></i></a></h5>
-                        </div>
+                        <div style="float:right;text-align:right">
+                            <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
+                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        </div>  
                         <h4 ng-show="item.title"><a href="content/{{item.id}}">{{item.title}}</a></h4>
                         <p style="margin-top:0px;margin-bottom:0px;"><a style="color:gray;" ng-repeat="tag in item.tags" href="#"  ng-click="filterContent(tag)">{{tag}} </a></p>
                         <div class="spacing-5"></div>

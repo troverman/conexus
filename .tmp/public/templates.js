@@ -1090,18 +1090,17 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "	<div class=\"spacing-100\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div ng-if=\"content.title && content.type!='video'\" class=\"page-heading\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <h1>{{content.title}}</h1>\n" +
-    "                <!--<h5>viewTime: {{tokenFilter}}</h4>-->\n" +
+    "<div ng-if=\"content.title && content.type!='video'\" style=\"background:url('https://source.unsplash.com/1600x900/?{{content.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "        	<div class=\"container\">\n" +
+    "	            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{content.title}}</h1>\n" +
+    "	            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "	            <!--<h5>viewTime: {{tokenFilter}}</h4>-->\n" +
     "				<!--<p>{{viewTime}} View+{{currentUser.id}}, {{viewTime}} View+[Tags]</p>-->\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "	        </div>\n" +
+    "	    </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
@@ -1268,15 +1267,10 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "            <div ng-repeat=\"item in contentList\">\n" +
     "                <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                    <div style=\"padding:16px\">\n" +
-    "                        <!--\n" +
-    "                        <div style=\"float:right;padding-left:5px;\">\n" +
-    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
-    "                        </div>\n" +
-    "                        -->\n" +
-    "                        <div style=\"float:right\">\n" +
-    "                            <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                            <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        </div>\n" +
+    "                        <div style=\"float:right;text-align:right\">\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </div>  \n" +
     "                        <h4 ng-show=\"item.title\"><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                        <p style=\"margin-top:0px;margin-bottom:0px;\"><a style=\"color:gray;\" ng-repeat=\"tag in item.tags\" href=\"#\"  ng-click=\"filterContent(tag)\">{{tag}} </a></p>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
@@ -1348,6 +1342,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
     "<div id=\"DEVELOPERS\" style=\"background-color:white;min-height:70vh\">\n" +
+    "\n" +
+    "    <!--<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Developers</h1>\n" +
+    "                    <h5 style=\"color:white\">Developers CRE8. Developers Build. Developers Win.</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>-->\n" +
+    "\n" +
     "    <div class=\"container\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"row\">\n" +
@@ -1369,25 +1375,29 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
     "<div id=\"DOCUMENTATION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Documentation</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                \n" +
-    "                <h2>Documentation</h2>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <p><a href=\"#CRE8VM\">The CRE8 Decentralized Peer Network & Virtual Machine</a></p>\n" +
-    "\n" +
+    "                <p><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Decentralized Peer Network & Virtual Machine</a></p>\n" +
     "                <!--<p><a href=\"#PEER\">The Peer Network & Transparency</a></p>-->\n" +
-    "\n" +
-    "                <p><a href=\"#APPDESIGN\">Interoperable Protocol & Application Design Architecture</a></p>\n" +
-    "\n" +
-    "                <p><a href=\"#CRE8\">CRE8 CORE Protocols</a></p>\n" +
-    "\n" +
-    "                <p><a href=\"#CONEXAPI\">Conex API: Models & Endpoints</a></p>\n" +
+    "                <p><a href=\"#APPDESIGN\" du-smooth-scroll>Interoperable Protocol & Application Design Architecture</a></p>\n" +
+    "                <p><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></p>\n" +
+    "                <p><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></p>\n" +
     "                <div ng-show=\"false\">\n" +
     "                    <p>Action</p>\n" +
     "                    <p>App</p>\n" +
@@ -1419,23 +1429,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <!--MEMBER DOCS; PROJECT DOCS-->\n" +
     "\n" +
-    "                <p><a href=\"#TOKENIZATION\">Tokenization Principles & String Interpolation</a></p>\n" +
-    "\n" +
-    "                <p><a href=\"#MULTIMARKET\">MultiMarket Exploration & Traversal</a></p>\n" +
-    "\n" +
-    "                <!--<div>\n" +
-    "                    <p>Market Objects and their Traversal Character</p>\n" +
-    "                </div>-->\n" +
-    "\n" +
-    "                <p><a href=\"#VALIDATION\">Validation & Association Traversals</a></p>\n" +
+    "                <p><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpolation</a></p>\n" +
+    "                <p><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></p>\n" +
+    "                <!--<div><p>Market Objects and their Traversal Character</p></div>-->\n" +
+    "                <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation & Association Traversals</a></p>\n" +
     "                <!--<p>Protocols for tokenization action potientals</p>-->\n" +
-    "\n" +
-    "                <p><a href=\"#GROUPINTENTION\">Project Charters and Group Coordination</a></p>\n" +
-    "\n" +
-    "                <p><a href=\"#SYNTHETICTOKENIZATION\">Tokenization & Pattern Recognition</a></p>\n" +
-    "\n" +
+    "                <p><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters and Group Coordination</a></p>\n" +
+    "                <p><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1446,13 +1449,21 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "<div class=\"spacing-100\"></div>\n" +
     "\n" +
     "<div id=\"CRE8VM\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?virtual,network')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Decentralized CRE8 Virtual Machine</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <h2>The Decentralized CRE8 Virtual Machine</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
-    "                <p>MERKLE ROOT INFORMATION HERE!</p>\n" +
+    "                <!--<p>MERKLE ROOT INFORMATION HERE!</p>-->\n" +
     "                <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
     "                <div class=\"spacing-100\"></div>\n" +
@@ -1462,20 +1473,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
     "<div id=\"PEER\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?nodes,peer,analysis,code')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Peer Network & Transparency</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">  \n" +
-    "                <h2>The Peer Network & Transparency</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
     "                <a href=\"/blocks\">Blocks</p>\n" +
     "                <a href=\"/transparency\">Peers</a>\n" +
     "                <!--blocks, tx, mining, connected, transparency-->\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-4\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1483,195 +1500,244 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
+    "<style>\n" +
+    "    body {overflow-x:hidden}\n" +
+    "    .bootstrapHack {\n" +
+    "        z-index: 3;\n" +
+    "        border: 0px;\n" +
+    "        background: #1E2224;\n" +
+    "        position: relative;\n" +
+    "        height:100vh;\n" +
+    "    }\n" +
+    "    .bootstrapHack:after {\n" +
+    "        content: '';\n" +
+    "        position: absolute;\n" +
+    "        top: 0;\n" +
+    "        bottom: 0;\n" +
+    "        left:80%;\n" +
+    "        right:-3000px;\n" +
+    "        background: #1E2224;\n" +
+    "        z-index: -1;\n" +
+    "    }\n" +
+    "    pre{padding:0px;}\n" +
+    "</style>\n" +
     "\n" +
     "<div id=\"APPDESIGN\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">  \n" +
-    "                <!--TOKEN STRING MAPPING-->\n" +
-    "                <h2>Interoperable Protocol Architecture Design</h2>\n" +
-    "                <h4>Application Design</h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
-    "                <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
-    "                <p>balanceOf:</p>\n" +
-    "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
-    "                <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
-    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>\n" +
+    "\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <!--Interoperable Protocols-->\n" +
+    "                    <!--Application Design Architecture-->\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Application Design</h1>\n" +
+    "                    <h5 style=\"color:white\">Interoperable Protocol Architecture</h5>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-50\"></div> \n" +
-    "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
+    "    <div class=\"container\" style=\"padding-left:0px;max-width: none;\">\n" +
     "\n" +
-    "<div id=\"CRE8\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
-    "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <div class=\"container\">\n" +
-    "                    <h2>CRE8 Core Protocols</h2>  \n" +
-    "                    <h5>Layered Adaptability</h5>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
     "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
+    "            <div class=\"col-sm-6 col-xs-12\">  \n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "                    <!--TOKENS-->\n" +
-    "                    <div>\n" +
-    "                        <h4><b>STRUCTURE</b></h4>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
-    "                        <p>transfer:</p>\n" +
-    "                        <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
+    "                <!--TOKEN STRING MAPPING-->\n" +
+    "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "                <div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
     "\n" +
-    "                    </div>\n" +
+    "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
     "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
+    "                <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>\n" +
     "\n" +
-    "                    <div>\n" +
-    "                        <h4><b>LANUGAGE</b></h4>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
-    "                    </div>\n" +
+    "                <p>Mapping <b>balanceOf</b>:</p>\n" +
     "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
+    "            </div>\n" +
     "\n" +
-    "                    <div>\n" +
-    "                        <h4><b>CONGRUENCE</b></h4>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <div>\n" +
-    "                        <p><b>MANIFOLD</b></h4>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
-    "                        <!--\n" +
-    "                        <p><b>+[] SPACE</b></p>\n" +
-    "                        <p><b>Application Specific</b></p>\n" +
-    "                        <p><b>+CREDIT</b></p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
-    "                        <p><b>+FUTURE</b></p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
-    "                        <p><b>+OPTION</b></p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
-    "                        <p><b>+SPONSOR</b></p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
-    "                        -->\n" +
-    "\n" +
-    "                        <p><b>CRE8 CORE as a Manifold</b></p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Defining Verbs in a string space; application(s)</p>\n" +
-    "                        <p><b>CRE8</b></p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">MEMBER, PROJECT, TASK, TIME, VALIDATION, ORDER</p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Order Book String Mapping; Mapping of all positions</p>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <div>\n" +
-    "                        <h4><b>CONNECTION</b></h4>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
-    "                        <p>a+b+c+d+.....+n+i+....</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                    <h4>Action Tokenization Protocol</h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\"><a href=\"#action\">API</a></p>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of action (and its applications on cre8's api)</span></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Manifold Tokenization Protocol</h4>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Association Tokenization Protocol</h4>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Content Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation on content (and its applications on cre8's api) (edit rep and balance manifolds etc)</span></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Follow Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of follows (and its applications on cre8's api)</p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Item Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a>Item</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Location Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Member Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Member</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Order Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a>Order</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Project Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Project</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Project Charter Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Project Charter</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Reaction Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Reaction</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Task Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Task</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Time Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of <a>Time</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Transaction Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Transaction</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>View Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>View</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h4>Validation Tokenization Protocol</h4>\n" +
-    "                    <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Validation</a> (and its applications on cre8's api)</span></p>\n" +
-    "                    <p><b>getSome:function()</b></p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
+    "            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                <div class=\"bootstrapHack\">\n" +
+    "                    <img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
+    "                    <!--<div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>-->\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--<div style=\"background-color:black;height:100vh\" class=\"col-sm-4\">\n" +
-    "            </div>-->\n" +
+    "        </div>\n" +
     "\n" +
+    "    </div>\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"CRE8\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,protocol,code,programming')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">CRE8 Core Protocols</h1>\n" +
+    "                    <h5 style=\"color:white\">Layered Adaptability</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <!--TOKENS-->\n" +
+    "                <div id=\"STRUCTURE\">\n" +
+    "                    <h4><b>STRUCTURE</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
+    "                    <p>transfer:</p>\n" +
+    "                    <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div id=\"LANUGAGE\">\n" +
+    "                    <h4><b>LANUGAGE</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div id=\"CONGRUENCE\">\n" +
+    "                    <h4><b>CONGRUENCE</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div id=\"MANIFOLD\">\n" +
+    "                    <p><b>MANIFOLD</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
+    "                    <!--\n" +
+    "                    <p><b>+[] SPACE</b></p>\n" +
+    "                    <p><b>Application Specific</b></p>\n" +
+    "                    <p><b>+CREDIT</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[INTEREST] SPACE</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET] SPACE</p>\n" +
+    "                    <p><b>+FUTURE</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+FUTURE+[DATE] SPACE</p>\n" +
+    "                    <p><b>+OPTION</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] SPACE</p>\n" +
+    "                    <p><b>+SPONSOR</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">+SPONSOR+[ADDRESS] SPACE</p>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <p><b>CRE8 CORE as a Manifold</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Defining Verbs in a string space; application(s)</p>\n" +
+    "                    <p><b>CRE8</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">MEMBER, PROJECT, TASK, TIME, VALIDATION, ORDER</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Order Book String Mapping; Mapping of all positions</p>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div id=\"CONNECTION\">\n" +
+    "                    <h4><b>CONNECTION</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
+    "                    <p>a+b+c+d+.....+n+i+....</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "                <h4>Action Tokenization Protocol</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\"><a href=\"#ACTION\" du-smooth-scroll>API</a></p>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of action (and its applications on cre8's api)</span></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Manifold Tokenization Protocol</h4>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Association Tokenization Protocol</h4>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Content Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation on content (and its applications on cre8's api) (edit rep and balance manifolds etc)</span></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Follow Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of follows (and its applications on cre8's api)</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Item Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a>Item</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Location Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Member Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Member</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Order Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a>Order</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Project Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Project</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Project Charter Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Project Charter</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Reaction Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Reaction</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Task Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Task</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Time Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of <a>Time</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Transaction Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Transaction</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>View Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>View</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Validation Tokenization Protocol</h4>\n" +
+    "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a>Validation</a> (and its applications on cre8's api)</span></p>\n" +
+    "                <p><b>getSome:function()</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <!--<div class=\"bootstrapHack\">\n" +
+    "                    \n" +
+    "                </div>-->\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-100\"></div>\n" +
-    "\n" +
     "<div id=\"CONEXAPI\" style=\"background-color:white;min-height:70vh\">\n" +
-    "\n" +
     "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1684,63 +1750,44 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    </div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
-    "\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
     "\n" +
     "                <div>\n" +
     "                    <h5>Filter & Search Parameters</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var query = {\n" +
-    "    filter:[{\n" +
-    "        obj: param\n" +
-    "    }],\n" +
-    "    limit: 10,\n" +
-    "    skip: 10,\n" +
-    "    sort: 'modelParam '+'DESC' || 'ASC'\n" +
-    "};</div>\n" +
-    "\n" +
-    "\n" +
-    "                <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
-    "\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
+    "                    <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
-    "                    <h3>Models & Endpoints</h3>\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Models & Endpoints</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div class=\"spacing-50\"></div>\n" +
+    "\n" +
+    "                <div id=\"ACTION\">\n" +
     "                    <h4><b>Action</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var actionModel = {\n" +
-    "    address: {type: 'string'},\n" +
-    "    information: {type: 'json'},\n" +
-    "    createdAt: {type: 'datetime'},\n" +
-    "    action: {type: 'string'},\n" +
-    "    \n" +
-    "    associatedModels: {type: 'json'},\n" +
-    "    location: {type: 'json'},\n" +
-    "    tags: {type: 'json'},\n" +
-    "    creator: {type: 'string'},\n" +
-    "\n" +
-    "};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
     "                    <p><b>get /api/action</b></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"APP\">\n" +
     "                    <h4><b>App</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var appModel = {\n" +
-    "    address: {type: 'string'},\n" +
-    "    protocols: {}\n" +
-    "};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"appModel\"></div>\n" +
     "                    <p><b>get /api/app</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -1748,11 +1795,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <!--VALIDATION WITH RESPECT TO TAGS ETC--> \n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"ASSOCIATION\">\n" +
     "                    <h4><b>Assoication</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
-    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\">validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
+    "\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
     "var associationModel = {\n" +
     "    associatedModels: [\n" +
@@ -1772,7 +1821,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"BLOCK\">\n" +
     "                    <h4><b>Block</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of txs. All data for the decentralized CRE8 VM is stored as sequential validated blocks of information.</p>\n" +
     "\n" +
@@ -1802,18 +1851,20 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <img style=\"height:200px;\" style=\"\" src=\"https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png\">\n" +
     "                    <img style=\"height:200px;\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"blockModel\"></div>\n" +
     "\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var blockModel = {\n" +
-    "    txCount: {type: 'string'},\n" +
-    "    height: {type: 'string'},\n" +
-    "    minedBy: {type: 'string'},\n" +
-    "    timeStamp: {type: 'string'},\n" +
-    "    merkleRoot {type: 'string'},\n" +
-    "    previousBlock: {type: 'string'},\n" +
-    "    nextBlock: {type: 'string'},\n" +
-    "    size: {type: 'string'}\n" +
-    "};</div>\n" +
+    "                    <!--parentHash: {type: 'string'},\n" +
+    "                    ommersHash: {type: 'string'},\n" +
+    "                    beneficiary: {type: 'string'},\n" +
+    "                    stateRoot: {type: 'string'},\n" +
+    "                    transactionsRoot: {type: 'string'},\n" +
+    "                    receiptsRoot: {type: 'string'},\n" +
+    "                    difficulty: {type: 'string'},\n" +
+    "                    number: {type: 'string'},\n" +
+    "                    timestamp: {type: 'string'},\n" +
+    "                    extraData: {type: 'string'},\n" +
+    "                    mixHash: {type: 'string'},\n" +
+    "                    nonce: {type: 'string'},-->\n" +
     "\n" +
     "                    <div>\n" +
     "\n" +
@@ -1832,22 +1883,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"CONTENT\">\n" +
     "                    <h4><b>Content</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var contentModel = {\n" +
-    "    id: {type: 'string'},\n" +
-    "    title: {type: 'string'},\n" +
-    "    content: {type: 'string'},\n" +
-    "    tags: {type: 'string'}, \n" +
-    "    type: {type: 'string'}, //LINK, IMAGE, MOTION, POST, VIDEO\n" +
-    "    location: {type: 'json'},\n" +
-    "    associatedModels: {type: 'json'}, // [{type:'PROJECT',address:$scope.project.id}],\n" +
-    "    reactions: {type: 'json'},\n" +
-    "    user: {model: 'user'},\n" +
-    "    createdAt: {type: 'datetime'},\n" +
-    "};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
     "\n" +
     "                    <div>\n" +
     "                        <p><b>Title:</b> Title of Content is a String</p>\n" +
@@ -1897,8 +1936,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
     "\n" +
     "                    </div>\n" +
-    "\n" +
-    "\n" +
     "                </div>\n" +
     "\n" +
     "\n" +
@@ -1926,7 +1963,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "               \n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"FOLLOWER\">\n" +
     "                    <h4><b>Follower</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Followers are .. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -1949,7 +1986,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"ITEM\">\n" +
     "                    <h4><b>Item</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Items .. provide depth to the capibilities of string based tokenization </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -1996,7 +2033,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"MEMBER\">\n" +
     "                    <h4><b>Member</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Member Model</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2053,7 +2090,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"MARKET\">\n" +
     "                    <h4><b>Market</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var marketModel = {};</div>        \n" +
@@ -2062,7 +2099,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"MOTION\">\n" +
     "                    <h4><b>Motion</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2078,7 +2115,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"NOTIFICATION\">\n" +
     "                    <h4><b>Notification</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model. Notifications have privacy permission qualifiers.</p>\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
@@ -2105,7 +2142,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"ORDER\">\n" +
     "                    <h4><b>Order</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">The Anatomy of an Order</p>\n" +
@@ -2145,7 +2182,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"PASSPORT\">\n" +
     "                    <h4><b>Passport</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2171,8 +2208,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
-    "                    <h4><b>Peers</b></h4>\n" +
+    "                <div id=\"PEER\"> \n" +
+    "                    <h4><b>Peer</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Peers are ..</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var peerModel = {};</div>\n" +
     "                    <p><b>[get, post] /api/peer</b></p>\n" +
@@ -2180,7 +2217,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"PROJECT\">\n" +
     "                    <h4><b>Project</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2215,7 +2252,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"PROJECTCHARTER\">\n" +
     "                    <h4><b>ProjectCharter</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations from initial conditions to reputationatation decay.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2231,7 +2268,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"PROJECTMEMBER\">\n" +
     "                    <h4><b>ProjectMember</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2245,7 +2282,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                \n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"PROTOCOL\">\n" +
     "                    <h4><b>Protocol</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2258,7 +2295,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"REACTION\">\n" +
     "                    <h4><b>Reaction</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Reaction is .. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2283,7 +2320,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"SEARCH\">\n" +
     "                    <h4><b>Search</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2317,7 +2354,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"TASK\">\n" +
     "                    <h4><b>Task</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Tasks are a relay of context. Layers of validation intention create association. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>\n" +
@@ -2348,7 +2385,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"TIME\">\n" +
     "                    <h4><b>Time</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Time & intention is the foundation of energy. Time is the base of CRE8.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2381,7 +2418,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"TOKEN\">\n" +
     "                    <h4><b>Token</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A token is a discrete piece of information with the following properties:</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2399,7 +2436,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                \n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"TRANSACTION\">\n" +
     "                    <h4><b>Transaction</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2442,7 +2479,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"TX\">\n" +
     "                    <h4><b>Tx</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every state update in the CRE8 virtual machine is represented by a transaction or tx. Blocks are machine verified bundles of txs.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">\n" +
@@ -2453,12 +2490,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "};</div>\n" +
     "                    <div>\n" +
     "\n" +
-    "                        <p>VERY IMPORTANT</p>\n" +
-    "                        <p>CREATE VM HERE.. THE STATE IS KEPT BY DATA IN TX.. (TX - BLOCK)</p>\n" +
+    "                        <!--<p>VERY IMPORTANT</p>\n" +
+    "                        <p>CREATE VM HERE.. THE STATE IS KEPT BY DATA IN TX.. (TX - BLOCK)</p>-->\n" +
     "\n" +
     "                        <p><b>addressFrom:</b> TBD</p> \n" +
     "                        <p><b>addressTo:</b> TBD</p> \n" +
-    "\n" +
     "                        <p><b>Data:</b> TBD</p> \n" +
     "\n" +
     "                    </div>\n" +
@@ -2468,7 +2504,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"VALIDATION\">\n" +
     "                    <h4><b>Validation</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Like Votes, the building block for group agreement - consensus and decision making. \n" +
     "                    <p style=\"color:gray;font-style:italic\">The Anatomy of a Validation</p>\n" +
@@ -2543,7 +2579,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "<div class=\"spacing-100\"></div> \n" +
     "\n" +
     "<div id=\"TOKENIZATION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?token,code')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
@@ -2568,7 +2604,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "</div>\n" +
     "\n" +
     "<div id=\"IDENTITY\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?identity,connection')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
@@ -2606,7 +2642,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "</div>\n" +
     "\n" +
     "<div id=\"VALIDATION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?code,validate')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
@@ -2637,7 +2673,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "</div>\n" +
     "\n" +
     "<div id=\"MULTIMARKET\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?market,graph,liquidity')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
@@ -2717,7 +2753,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "</div>\n" +
     "\n" +
     "<div id=\"GROUPINTENTION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?community,planning,coordination')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
@@ -2742,7 +2778,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "</div>\n" +
     "\n" +
     "<div id=\"SYNTHETICTOKENIZATION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?artifical,intelligence,ai,robot')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
@@ -2894,11 +2930,10 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			<div ng-repeat=\"item in tasks.slice(0,10)\">\n" +
     "				<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "					<div style=\"padding:16px;\">\n" +
-    "						<div style=\"float:right;text-align:right\">\n" +
-    "		                    <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "							<h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "		                <div style=\"float:right;text-align:right\">\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "		                </div>\n" +
-    "\n" +
     "						<h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "						<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "		            	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
@@ -3170,9 +3205,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                                    <!--TODO: CARD ACTION-->\n" +
     "                                    <div style=\"float:right;text-align:right\">\n" +
-    "                                        <p ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                                        <p ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                                    </div>\n" +
+    "                                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                                    </div>  \n" +
     "\n" +
     "                                    <h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                                    <p><a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
@@ -4953,7 +4988,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "						<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
     "						<h5><a ng-click=\"$event.stopPropagation()\" href=\"member/{{member.username}}\">@{{member.username}}</a></h5>\n" +
-    "						<p>{{member.totalWork}} | Total Reputation</p>\n" +
+    "						<p><b>Total Reputation</b>: {{member.totalWork}}</p>\n" +
     "						\n" +
     "					</div>\n" +
     "\n" +
@@ -5089,8 +5124,8 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            <div class=\"card\" ng-if=\"item.model=='CONTENT'\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div>\n" +
@@ -5136,8 +5171,8 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            <div class=\"card\" ng-if=\"item.model=='ORDER'\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px\">\n" +
     "\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div ng-click=\"$event.stopPropagation()\">\n" +
@@ -5163,9 +5198,10 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            <div class=\"card\" ng-if=\"item.model=='TIME'\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
+    "\n" +
     "\n" +
     "                    <div ng-click=\"$event.stopPropagation()\">\n" +
     "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -5201,10 +5237,10 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "            <div class=\"card\" ng-if=\"item.model=='TRANSACTION'\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px\">\n" +
     "\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
-    "                    \n" +
+    "\n" +
     "                    <p style=\"font-weight:800\">\n" +
     "                        <span ng-if=\"item.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.from.username}}\">{{item.from.username}}</a></span>\n" +
     "                        <span ng-if=\"item.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.from.title}}\">{{item.from.title}}</a></span>\n" +
@@ -5215,7 +5251,6 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                    <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                    \n" +
     "                    <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "\n" +
     "\n" +
     "                    <p>{{item.content}}</p>\n" +
     "                    <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
@@ -5366,7 +5401,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "<div class=\"row\" ng-show=\"contentList.length > 0\">\n" +
     "\n" +
     "    <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "        <div class=\"card\">\n" +
+    "        <div class=\"card\" ng-if=\"sortedTagArray.length > 0\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Tags</b></span>\n" +
     "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
@@ -5374,7 +5409,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"card\">\n" +
+    "        <div class=\"card\" ng-if=\"sortedTagArray.length > 0\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Associations</b></span>\n" +
     "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
@@ -5382,7 +5417,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"card\">\n" +
+    "        <div class=\"card\" ng-if=\"sortedTagArray.length > 0\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <span><b>Locations</b></span>\n" +
     "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
@@ -5444,9 +5479,11 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <h3 ng-if=\"item.title\"><a href=\"content/{{item.id}}\">{{item.title}}</a></h3>\n" +
     "\n" +
     "                    <p style=\"display:inline;\" ng-click=\"$event.stopPropagation()\">\n" +
     "                        <a style=\"font-weight:700\"  href=\"member/{{item.user.username}}\">\n" +
@@ -5456,7 +5493,9 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "                    </p>\n" +
     "\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "                    \n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
     "\n" +
     "                </div>\n" +
@@ -5482,35 +5521,6 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
-    "\n" +
-    "    <!--\n" +
-    "    <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-2\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <span><b>Tags</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <span><b>Associations</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <span><b>Locations</b></span>\n" +
-    "                <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    -->\n" +
     "\n" +
     "</div>");
 }]);
@@ -5621,15 +5631,15 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <a ng-click=\"$event.stopPropagation()\" href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
     "\n" +
     "                    <p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
     "\n" +
-    "                    <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                    <div>\n" +
     "                        <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "                    </div>  \n" +
     "\n" +
@@ -5796,6 +5806,10 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"renderToggle(transaction)\">\n" +
     "			<div style=\"padding:16px\">\n" +
     "\n" +
+    "				<div style=\"float:right;text-align:right\">\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(transaction)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                </div>  \n" +
+    "\n" +
     "				<p style=\"font-weight:800\">\n" +
     "                    <span ng-if=\"transaction.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.from.username}}\">{{transaction.from.username}}</a></span>\n" +
     "                    <span ng-if=\"transaction.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.from.title}}\">{{transaction.from.title}}</a></span>\n" +
@@ -5869,40 +5883,48 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "		</div>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
-    "\n" +
-    "				<h3>Value Map</h3>\n" +
-    "				\n" +
+    "		 	<div style=\"background:url('https://source.unsplash.com/1600x900/?code,finance')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Value Map</h1>\n" +
+    "                        <p style=\"color:white;\">Your Personal Value</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "			<div style=\"padding:16px;\">				\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "			</div>\n" +
     "		</div>	\n" +
     "\n" +
-    "	    <div ng-repeat=\"order in orders\">\n" +
-    "	        <div class=\"card\" ng-click=\"renderToggle(order)\">\n" +
+    "	    <div ng-repeat=\"item in orders\">\n" +
+    "	        <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "	        	\n" +
     "	            <div style=\"padding:16px\">\n" +
     "\n" +
-    "	            	<span ng-repeat=\"item in order.amountSet track by $index\">\n" +
-    "						{{order.amountSet[$index]}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
+    "	            	<div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                    </div>  \n" +
+    "\n" +
+    "	            	<span ng-repeat=\"asset in item.amountSet track by $index\">\n" +
+    "						{{item.amountSet[$index]}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{item.identiferSet[$index]}}\">{{item.identiferSet[$index]}}</a> \n" +
     "					</span>\n" +
     "					<span> | </span>\n" +
-    "					<span ng-repeat=\"item in order.amountSet1 track by $index\">\n" +
-    "						{{order.amountSet1[$index]}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a> \n" +
+    "					<span ng-repeat=\"asset in item.amountSet1 track by $index\">\n" +
+    "						{{item.amountSet1[$index]}} <a ng-click=\"$event.stopPropagation()\" href=\"market/{{item.identiferSet1[$index]}}\">{{item.identiferSet1[$index]}}</a> \n" +
     "					</span>\n" +
     "\n" +
-    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
+    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "	            </div>\n" +
     "	            <div class=\"card-footer\">\n" +
-    "	                <a ng-click=\"$event.stopPropagation();createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
-    "	                <a ng-click=\"$event.stopPropagation();createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
-    "	                <a ng-click=\"$event.stopPropagation();reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "	                <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "	                <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "	                <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "	                <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "	                <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "	            </div>\n" +
     "\n" +
-    "	            <div ng-click=\"$event.stopPropagation()\" ng-show=\"order.showReply\" class=\"card-footer\">\n" +
+    "	            <div ng-click=\"$event.stopPropagation()\" ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "			        <form role=\"form\" ng-submit=\"createPost(post)\">\n" +
     "			            <text-angular ng-model=\"newPost.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "			            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newPost.content\">create</button>\n" +
@@ -5990,9 +6012,10 @@ angular.module("member/templates/tasks.tpl.html", []).run(["$templateCache", fun
     "		<div ng-repeat=\"task in tasks\">\n" +
     "			<div class=\"card\" ng-click=\"renderToggle(task)\">\n" +
     "				<div style=\"padding:16px;\">\n" +
-    "					<div style=\"float:right\">\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();tokensToggle(task)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    </div>\n" +
+    "					<div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(task)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(task)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                    </div>  \n" +
     "					<h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "					<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
@@ -6033,16 +6056,12 @@ angular.module("member/templates/time.tpl.html", []).run(["$templateCache", func
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--\n" +
-    "    <div class=\"card\">\n" +
-    "        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "    </div>\n" +
-    "    -->\n" +
-    "\n" +
     "    <div ng-repeat=\"item in time\">\n" +
     "        <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "            <div style=\"padding:16px\">\n" +
+    "                <div style=\"float:right;text-align:right\">\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                </div>  \n" +
     "				<h4>{{item.startTime | date:\"h:mma | MM/dd/yyyy\"}} - {{item.endTime | date:\"h:mma | MM/dd/yyyy\"}}</h4>\n" +
     "				<a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a>\n" +
     "            </div>\n" +
@@ -6764,8 +6783,22 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            \n" +
+    "\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "                <div style=\"text-align:right;float:right\">\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fa fa-eye\"></i>\n" +
@@ -6774,37 +6807,30 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
     "                </div>\n" +
     "\n" +
-    "                <!--TITLE-->\n" +
-    "\n" +
     "                <div ng-if=\"item.model == 'CONTENT'\">\n" +
-    "                    <h2><a href=\"content/{{item.id}}\">{{item.title}}</a></h2>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'ITEM'\">\n" +
-    "                    <h2><a href=\"item/{{item.id}}\">{{item.title}}</a></h2>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'ORDER'\">\n" +
-    "                    <h1>ORDER</h1>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'TASK'\">\n" +
-    "                    <h2><a href=\"task/{{item.id}}\">{{item.title}}</a></h2>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'TIME'\">\n" +
     "                    <h2><a href=\"time/{{item.id}}\">{{item.amount}}</a></h2>\n" +
-    "                    <h4 ng-if=\"item.task.title\"><a href=\"task/{{item.task.id}}\">{{item.task.title}}</a></h4>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'TRANSACTION'\">\n" +
-    "                    <h1>TRANSACTION</h1>\n" +
     "                </div>\n" +
     "\n" +
     "                <!--TAGS-->\n" +
     "                <p ng-if=\"item.tags\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "\n" +
     "                <p ng-if=\"item.task.tags\"><a ng-repeat=\"tag in item.task.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                <!--LOCATION-->\n" +
     "                <p ng-if=\"item.location\"><a>{{item.location}}</a></p>\n" +
@@ -6824,7 +6850,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "            </div>\n" +
     "\n" +
-    "            <div style=\"background-color:#f9f9f9;min-height:70%\">\n" +
+    "            <div style=\"background-color:#f9f9f9;height:100%\">\n" +
     "                <div class=\"card-footer\">\n" +
     "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\"><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
@@ -7808,8 +7834,8 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "        <div class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "\n" +
-    "                <div style=\"float:right\">\n" +
-    "                    <h5 ng-click=\"tokensToggle()\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                <div style=\"float:right;text-align:right\">\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(order)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                </div>\n" +
     "\n" +
     "            	<h4><a href=\"market/{{order.identiferSet}}/{{order.identiferSet1}}\">{{order.identiferSet}} | {{order.identiferSet1}}</a></h4>\n" +
@@ -8153,7 +8179,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                    </div>\n" +
     "                   \n" +
     "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
-    "                    <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                    <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "                    <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "                        \n" +
@@ -8162,7 +8188,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a ng-click=\"$event.stopPropagation();validationToggle(task)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation()\" style=\"padding:0px\" class=\"pull-right\" href=\"task/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                </div>\n" +
     "                <div ng-click=\"$event.stopPropagation();\" ng-show=\"item.showReply\" class=\"card-footer\">\n" +
@@ -8193,8 +8219,8 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                        <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <p ng-click=\"$event.stopPropagation();\" ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\">\n" +
-    "                        <a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a>\n" +
+    "                    <p ng-click=\"$event.stopPropagation();\" ng-show=\"item.task.tags > 0\" style=\"margin-left:42px\">\n" +
+    "                        <a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag}} </a>\n" +
     "                    </p>\n" +
     "                    <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "\n" +
@@ -8203,7 +8229,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a ng-click=\"$event.stopPropagation();validationToggle(task)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "                    <a ng-click=\"$event.stopPropagation()\" style=\"padding:0px\" class=\"pull-right\" href=\"time/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                </div>\n" +
     "                <div ng-click=\"$event.stopPropagation();\" ng-show=\"item.showReply\" class=\"card-footer\">\n" +
@@ -8232,7 +8258,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                    </p>\n" +
     "                    \n" +
     "                    <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
-    "                    <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                    <p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                    <p>{{item.content}}</p>\n" +
     "                    <p style=\"color:gray\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
     "                    <a ng-click=\"$event.stopPropagation();\" href=\"transaction/{{item.id}}\"></a>\n" +
@@ -8329,6 +8355,9 @@ angular.module("project/templates/channels.tpl.html", []).run(["$templateCache",
     "        <div ng-repeat=\"item in contentList\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
+    "                    </div>\n" +
     "                    <div>\n" +
     "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"images/avatar.png\">\n" +
     "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
@@ -8407,6 +8436,11 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "        <div ng-repeat=\"item in enactedMotions\">\n" +
     "            <div class=\"card\" ng-click=\"\">\n" +
     "                <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
+    "                    </div>\n" +
+    "                    \n" +
     "                    <h4><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                    <p><a>{{item.type}}</a></p>\n" +
     "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
@@ -8430,6 +8464,11 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "        <div ng-repeat=\"item in motions\">\n" +
     "            <div class=\"card\" ng-click=\"\">\n" +
     "                <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                 	<h4><a href=\"content/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "                    <p><a>{{item.type}}</a></p>\n" +
     "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
@@ -8519,11 +8558,11 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokenToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><a>Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><span style=\"color:gray\"><i class=\"fas fa-bezier-curve\"></i></span></a>\n" +
+    "                        <a ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
     "                    </div>\n" +
-    "\n" +
+    "                    \n" +
     "                    <div style=\"\">\n" +
     "                        <a ng-click=\"$event.stopPropagation()\" style=\"font-weight:700\" href=\"member/{{item.user.username}}\">\n" +
     "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\"> {{item.user.username}}\n" +
@@ -8627,9 +8666,9 @@ angular.module("project/templates/items.tpl.html", []).run(["$templateCache", fu
     "                <div class=\"card\" style=\"\">\n" +
     "                    <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
     "\n" +
-    "                        <div style=\"float:right\">\n" +
-    "                            <h5 style=\"text-align:right\" ng-click=\"tokensToggle(item)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        </div>\n" +
+    "                        <div style=\"float:right;text-align:right\">\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                        </div>  \n" +
     "\n" +
     "                        <a href=\"item/{{item.id}}\"><h4>{{item.title}}</h4></a>\n" +
     "\n" +
@@ -8779,7 +8818,11 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "\n" +
     "		<div class=\"card\" ng-repeat=\"transaction in transactions\" ng-click=\"renderToggle(transaction)\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "			\n" +
+    "\n" +
+    "				<div style=\"float:right;text-align:right\">\n" +
+    "                	<a ng-click=\"$event.stopPropagation();tokensToggle(task)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
+    "                </div>\n" +
+    "		\n" +
     "				<p style=\"font-weight:800\">\n" +
     "                    <span ng-if=\"transaction.from.username\">From: <a ng-click=\"$event.stopPropagation()\" href=\"member/{{transaction.from.username}}\">{{transaction.from.username}}</a></span>\n" +
     "                    <span ng-if=\"transaction.from.title\">From: <a ng-click=\"$event.stopPropagation()\" href=\"project/{{transaction.from.title}}\">{{transaction.from.title}}</a></span>\n" +
@@ -8910,6 +8953,9 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "		<div ng-repeat=\"order in orders\">\n" +
     "	        <div class=\"card\">\n" +
     "	            <div style=\"padding:16px\">\n" +
+    "	            	<div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(order)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                    </div> \n" +
     "	            	<span ng-repeat=\"item in order.amountSet\">\n" +
     "						{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a> \n" +
     "					</span>\n" +
@@ -8936,6 +8982,7 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
 
 angular.module("project/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/projects.tpl.html",
+    "<!--GRAPH REPRESENTATION IN THE COMPUTERD ASSOCIATION NETWORK..-->\n" +
     "<div ng-show=\"project.parent\">\n" +
     "	<div class=\"spacing-5\"></div>\n" +
     "	<h3><a href=\"project/{{project.urlTitle}}\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"> <a href=\"project/{{project.parent.urlTitle}}\">{{project.parent.title}}</a></h3>\n" +
@@ -8948,6 +8995,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--ASSOCIATIONS FOR TRAVERSAL-->\n" +
     "<div class=\"row\">\n" +
     "	<div ng-repeat=\"project in projects\">\n" +
     "		<div class=\"card\">\n" +
@@ -9052,10 +9100,8 @@ angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", fu
     "			<div class=\"card\" ng-click=\"renderToggle(task)\">\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<div style=\"float:right;text-align:right\">\n" +
-    "                        <p>\n" +
-    "                        	<a ng-click=\"$event.stopPropagation();renderValidationToggle(task);\"><i class=\"fas fa-bezier-curve\"></i></a>\n" +
-    "                        	<a ng-click=\"$event.stopPropagation();tokensToggle(task)\"><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
-    "                        </p>\n" +
+    "                    	<a ng-click=\"$event.stopPropagation();renderValidationToggle(task);\"><span style=\"color:gray\"><i class=\"fas fa-bezier-curve\"></i></span></a>\n" +
+    "                    	<a ng-click=\"$event.stopPropagation();tokensToggle(task)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
     "                    </div>\n" +
     "					<h4 ng-click=\"$event.stopPropagation()\"><a href=\"task/{{task.id}}\">{{task.title}}</a></h4>\n" +
     "					<!--<p ng-click=\"$event.stopPropagation()\"><a href=\"project/{{task.project.urlTitle}}\">{{task.project.title}}</a></p>-->\n" +
@@ -9138,21 +9184,12 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <!--\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"card\">\n" +
-    "                <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        -->\n" +
-    "\n" +
     "        <div ng-repeat=\"item in time\">\n" +
     "            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "                <div style=\"padding:16px\">\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <h5 ng-click=\"$event.stopPropagation();tokenToggle(task)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    </div>\n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                    </div>  \n" +
     "    				<h4>{{item.startTime | date:\"h:mma | MM/dd/yyyy\"}} - {{item.endTime | date:\"h:mma | MM/dd/yyyy\"}}</h4>\n" +
     "    				<span><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.task.id}}\">{{item.task.title}}</a> | <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a></span>\n" +
     "                </div>\n" +
@@ -9219,6 +9256,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"\"><i class=\"fa fa-project-diagram\"></i> My Projects</a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "\n" +
@@ -9759,6 +9797,11 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "					<div ng-if=\"item.model=='CONTENT'\" class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "				        <div style=\"padding:16px;\">\n" +
     "				            <div>\n" +
+    "\n" +
+    "					        	<div style=\"float:right;text-align:right\">\n" +
+    "		                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "				                </div>\n" +
+    "\n" +
     "				                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"images/avatar.png\">\n" +
     "				                <a ng-click=\"$event.stopPropagation();\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "				                <div style=\"display:inline;\" ng-show=\"item.profile != item.user.id && item.profile != member.id\">\n" +
@@ -9772,10 +9815,9 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "				                    <a ng-click=\"$event.stopPropagation();\" ng-show=\"item.time\" style=\"display:inline;font-weight:600\" href=\"time/{{item.time}}\">time {{item.time}}</a>\n" +
     "				                </div>\n" +
     "				                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "								\n" +
-    "								<p ng-click=\"tokensToggle(item);$event.stopPropagation()\" style=\"display:inline;float:right\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "\n" +
+    "				                \n" +
     "				            </div>\n" +
+    "\n" +
     "				            <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "				        </div>\n" +
     "				        <div class=\"card-footer\">\n" +
@@ -9833,18 +9875,14 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "					<div ng-if=\"item.model=='TASK'\" class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "						<div style=\"padding:16px;\">\n" +
-    "							<div class=\"row\">\n" +
-    "								<div class=\"col-sm-10\">\n" +
-    "									<h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
-    "									<p><a ng-click=\"$event.stopPropagation();\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>\n" +
-    "									<p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "									<p><span ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
-    "									<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
-    "								</div>\n" +
-    "								<div class=\"col-sm-2\" style=\"text-align:right\">\n" +
-    "									<p ng-click=\"$event.stopPropagation();tokensToggle(item)\"><a >Tokens <i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "								</div>\n" +
-    "							</div>\n" +
+    "							<div style=\"float:right;text-align:right\">\n" +
+    "	                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "	                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "			                </div>\n" +
+    "							<h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
+    "							<p><a ng-click=\"$event.stopPropagation();\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "	                    	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
+    "							<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "						</div>\n" +
     "						<div class=\"card-footer\">\n" +
     "							<a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -9904,19 +9942,25 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
+    "        <!--TODO:..motion to edit..?-->\n" +
+    "        <div style=\"row\" ng-if=\"currentUser.id == task.user\">\n" +
+    "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "                <li><a ng-click=\"\" href=\"#\">Current</a></li>\n" +
+    "                <li><a ng-click=\"\" href=\"#\">History</a></li>\n" +
+    "                <li><a ng-click=\"\" href=\"#\">Motions</a></li>\n" +
+    "            </ul>\n" +
+    "        </div>\n" +
+    "\n" +
     "        <div class=\"card\" ng-click=\"\">\n" +
     "            <div class=\"padding:16px\">\n" +
     "                <div class=\"col-sm-12\" style=\"padding:16px\">\n" +
+    "\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
-    "                        <h5 ng-click=\"tokensToggle(task)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <h5 ng-click=\"renderValidationToggle(task)\"><a href=\"#\">Associations & Validations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(task)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(task)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
+    "\n" +
     "                    <h3>{{task.title}}</h3>\n" +
-    "\n" +
-    "                    <!--..motion to edit..?-->\n" +
-    "                    <div ng-if=\"currentUser.id == task.user.id\">edit</div>\n" +
-    "\n" +
-    "                    <!--<button ng-click=\"pop()\">test</button>-->\n" +
     "\n" +
     "                    <!--ASSOCIATION && VALIDATION-->\n" +
     "                    <!--TAGS & SHARED ASSOCIATION CONTEXT-->\n" +
@@ -10000,17 +10044,16 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "        <div class=\"card\" ng-repeat=\"item in time\" ng-click=\"\">\n" +
     "            <div style=\"padding:16px;\">\n" +
+    "                <div style=\"float:right;text-align:right\">\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                </div>\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
     "                    <a style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
     "                    <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "                    <span style=\"text-align:right;float:right\">\n" +
-    "                        <a ng-click=\"tokensToggle(item)\" href=\"#\">Tokens <i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                        <br>\n" +
-    "                        <a ng-click=\"renderValidationToggle(item)\" href=\"#\">Associations <i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                    </span>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </div>\n" +
     "                <p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a></p>\n" +
@@ -10258,48 +10301,62 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "	<!--TODO: NESTED RENDER-->\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "        <div class=\"card\" ng-click=\"\">\n" +
+    "        <div class=\"card\" ng-click=\"tokensToggle(time)\">\n" +
+    "        	<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "			        	<div class=\"container\">\n" +
+    "			            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{time.amount}} Seconds</h1>\n" +
+    "			            	<h5 style=\"color:white\"><span style=\"font-size:10px;color:gray\">{{(time.amount/60).toFixed(2)}} minutes, <span style=\"font-size:10px;color:gray\">{{(time.amount/3600).toFixed(2)}} hours</span></h5>\n" +
+    "			            	<!--<h5 style=\"color:white\"><span style=\"\" am-time-ago=\"time.createdAt\"></span></h5>-->\n" +
+    "			            </div>\n" +
+    "			        </div>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
     "			<div style=\"padding:16px\" class=\"col-sm-12\">\n" +
+    "\n" +
     "				<div style=\"float:right;text-align:right\">\n" +
-    "					<h5 ng-click=\"tokensToggle(time)\"><a href=\"\">Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "					<h5 ng-click=\"renderValidationToggle(time)\"><a href=\"#\">Validations & Associations <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<!--<h3>Associations</h3>\n" +
-    "				<h3><a href=\"task/{{time.task.id}}\">{{time.task.title}}</a></h3>-->\n" +
-    "\n" +
-    "				<h4>{{time.amount}}, <span style=\"font-size:10px;color:gray\">{{(time.amount/60).toFixed(2)}} minutes, <span style=\"font-size:10px;color:gray\">{{(time.amount/3600).toFixed(2)}} hours</span></h4>\n" +
-    "                \n" +
-    "                <p><a ng-repeat=\"tag in time.task.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
-    "\n" +
-    "				<p><a ng-repeat=\"tag in time.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(time)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(time)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                </div>\n" +
     "\n" +
     "				<a style=\"font-weight:700\" href=\"member/{{time.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{time.user.avatarUrl}}\" src=\"{{time.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "					{{time.user.username}}\n" +
     "				</a>\n" +
+    "                \n" +
+    "                <!--TODO-->\n" +
+    "                <p><a ng-repeat=\"tag in time.task.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
+    "				<p><a ng-repeat=\"tag in time.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}}<span ng-show=\"!$last\">,</span> </a></p>\n" +
+    "\n" +
     "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"time.createdAt\"></p>\n" +
+    "\n" +
+    "				<!--TODO: CONTENT UNITY // EMBED // ASSOCIATED CONTENT-->\n" +
     "				<div>\n" +
     "					<div class=\"spacing-10\"></div>\n" +
     "	                <span style=\"display:inline\" ng-bind-html=\"renderContent(time.content)\"></span>\n" +
     "					<div class=\"spacing-10\"></div>\n" +
     "				</div>\n" +
+    "\n" +
     "			</div>\n" +
     "			<div style=\"clear:both\"></div>\n" +
     "			<div class=\"card-footer\">\n" +
-    "				<a ng-click=\"createReaction(time, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{time.reactions.plus}} like </a> \n" +
-    "				<a ng-click=\"createReaction(time, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{time.reactions.minus}} dislike </a>\n" +
-    "				<a ng-click=\"reply(time)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "		       	<a ng-click=\"validationToggle(time)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "				<a ng-click=\"$event.stopPropagation();createReaction(time, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{time.reactions.plus}} like </a> \n" +
+    "				<a ng-click=\"$event.stopPropagation();createReaction(time, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{time.reactions.minus}} dislike </a>\n" +
+    "				<a ng-click=\"$event.stopPropagation();reply(time)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "		       	<a ng-click=\"$event.stopPropagation();validationToggle(time)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
     "			</div>\n" +
-    "			<div ng-show=\"time.showReply\" class=\"card-footer\">\n" +
+    "			<div ng-click=\"$event.stopPropagation();\" ng-show=\"time.showReply\" class=\"card-footer\">\n" +
     "				<form role=\"form\" ng-submit=\"newContent(item)\">\n" +
+    "					<!--<textarea froala=\"{toolbarButtons:['html']}\" ng-model=\"newContent.content\"></textarea>-->\n" +
     "					<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "					<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "				</form>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "\n" +
+    "	<!--{toolbarButtons:['bold', 'italic', 'underline', 'formatOL', 'htmlUntouched', 'colorsText', 'fileUploadURL', 'videoUploadtable', 'InsertMaxSize']}-->\n" +
     "\n" +
     "    <!--\n" +
     "    <div class=\"spacing-5\"></div>\n" +
@@ -10330,13 +10387,15 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "				</div>\n" +
     "				<div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
     "					<form role=\"form\" ng-submit=\"newContent(item)\">\n" +
-    "						<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "						<textarea froala=\"froalaOptions\" ng-model=\"newContent.content\"></textarea>\n" +
+    "						<!--<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>-->\n" +
     "						<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "					</form>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
+    "\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -10395,9 +10454,10 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "    \n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "        <div style=\"padding:16px\">\n" +
-    "\n" +
-    "            <div style=\"float:right\">\n" +
-    "                <h5 style=\"text-align:right\" ng-click=\"$event.stopPropagation();tokensToggle(transaction)\"><a>Tokens <i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "            \n" +
+    "            <div style=\"float:right;text-align:right\">\n" +
+    "                <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(transaction)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
+    "                <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(transaction)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "            </div>\n" +
     "\n" +
     "            <h2>Transaction {{transaction.id}}</h2>\n" +
@@ -10502,22 +10562,36 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "\n" +
     "	<div class=\"row\" ng-if=\"selectedTab == 'METAGOVERNANCE'\">\n" +
     "		<div class=\"card\">\n" +
+    "			<div style=\"background:url('https://source.unsplash.com/1600x900/?network')\" class=\"imageContainerSmall\">\n" +
+    "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "			        	<div class=\"container\">\n" +
+    "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Meta Governance</h1>\n" +
+    "				        </div>\n" +
+    "			        </div>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "				<h3>Meta Governance</h3>\n" +
-    "				<h5><a href=\"project/conexus\">conexus project</a></h5>\n" +
+    "				<h5><a href=\"project/conexus\">Conexus Project</a></h5>\n" +
+    "				<p style=\"color:gray;\">Conex API v0.001a</p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"row\" ng-if=\"selectedTab == 'PEERNETWORK'\">\n" +
     "		<div class=\"card\">\n" +
+    "			<div style=\"background:url('https://source.unsplash.com/1600x900/?network')\" class=\"imageContainerSmall\">\n" +
+    "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "			        	<div class=\"container\">\n" +
+    "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Peer Network</h1>\n" +
+    "				            <h5 style=\"color:white\">3423 Live Peers</h5>\n" +
+    "				        </div>\n" +
+    "			        </div>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<div class=\"col-md-12\">\n" +
-    "\n" +
-    "					<h3>Peer Network</h3>\n" +
-    "\n" +
-    "					<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "					<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "					    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
     "					        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
@@ -10525,9 +10599,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "					        </ui-gmap-window>\n" +
     "					    </ui-gmap-marker>\n" +
     "					</ui-gmap-google-map>\n" +
-    "\n" +
     "					<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "					<table class=\"table table-striped table-hover\">\n" +
     "		                <thead>\n" +
     "		                    <tr>\n" +
@@ -10546,7 +10618,6 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "		                    </tr>\n" +
     "		                </tbody>\n" +
     "		            </table>\n" +
-    "\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -10554,16 +10625,26 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "\n" +
     "	<div class=\"row\" ng-if=\"selectedTab == 'STATS'\">\n" +
     "		<div class=\"card\">\n" +
+    "\n" +
+    "			<div style=\"background:url('https://source.unsplash.com/1600x900/?network')\" class=\"imageContainerSmall\">\n" +
+    "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "			        	<div class=\"container\">\n" +
+    "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Stats</h1>\n" +
+    "				            <h5 style=\"color:white\">\n" +
+    "						        {{chart.series[0].data[chart.series[0].data.length-1][1]}} Peers, \n" +
+    "								{{chart.series[0].data[chart.series[0].data.length-1][1]}} Projects, \n" +
+    "								{{chart.series[1].data[chart.series[1].data.length-1][1]}} Members, \n" +
+    "								{{chart.series[3].data[chart.series[3].data.length-1][1]}} Transactions Velocity, \n" +
+    "								{{chart.series[4].data[chart.series[4].data.length-1][1]}} Assets\n" +
+    "							</h5>\n" +
+    "				        </div>\n" +
+    "			        </div>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "\n" +
     "			<div style=\"padding:16px;\">\n" +
     "				<div class=\"col-md-12\">\n" +
-    "					<h3>Stats</h3>\n" +
-    "					<p style=\"color:gray;font-style:italic;\">\n" +
-    "						{{chart.series[0].data[chart.series[0].data.length-1][1]}} Peers, \n" +
-    "						{{chart.series[0].data[chart.series[0].data.length-1][1]}} Projects, \n" +
-    "						{{chart.series[1].data[chart.series[1].data.length-1][1]}} Members, \n" +
-    "						{{chart.series[3].data[chart.series[3].data.length-1][1]}} Transactions Velocity, \n" +
-    "						{{chart.series[4].data[chart.series[4].data.length-1][1]}} Assets\n" +
-    "					</p>\n" +
     "					<highchart config=\"chart\"></highchart>\n" +
     "				</div>\n" +
     "			</div>\n" +

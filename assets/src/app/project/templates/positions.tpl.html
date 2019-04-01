@@ -61,6 +61,9 @@
 		<div ng-repeat="order in orders">
 	        <div class="card">
 	            <div style="padding:16px">
+	            	<div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(order)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                    </div> 
 	            	<span ng-repeat="item in order.amountSet">
 						{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a> 
 					</span>

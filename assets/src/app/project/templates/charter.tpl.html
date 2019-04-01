@@ -47,6 +47,11 @@
         <div ng-repeat="item in enactedMotions">
             <div class="card" ng-click="">
                 <div style="padding:16px;">
+
+                    <div style="float:right;text-align:right">
+                        <a ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
+                    </div>
+                    
                     <h4><a href="content/{{item.id}}">{{item.title}}</a></h4>
                     <p><a>{{item.type}}</a></p>
                     <div ng-bind-html="renderContent(item.content)"></div>
@@ -70,6 +75,11 @@
         <div ng-repeat="item in motions">
             <div class="card" ng-click="">
                 <div style="padding:16px;">
+
+                    <div style="float:right;text-align:right">
+                        <a ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
+                    </div>
+
                  	<h4><a href="content/{{item.id}}">{{item.title}}</a></h4>
                     <p><a>{{item.type}}</a></p>
                     <div ng-bind-html="renderContent(item.content)"></div>

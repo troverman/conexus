@@ -98,7 +98,11 @@
 
 		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(transaction)">
 			<div style="padding:16px">
-			
+
+				<div style="float:right;text-align:right">
+                	<a ng-click="$event.stopPropagation();tokensToggle(task)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
+                </div>
+		
 				<p style="font-weight:800">
                     <span ng-if="transaction.from.username">From: <a ng-click="$event.stopPropagation()" href="member/{{transaction.from.username}}">{{transaction.from.username}}</a></span>
                     <span ng-if="transaction.from.title">From: <a ng-click="$event.stopPropagation()" href="project/{{transaction.from.title}}">{{transaction.from.title}}</a></span>

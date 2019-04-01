@@ -107,6 +107,11 @@
 					<div ng-if="item.model=='CONTENT'" class="card" ng-click="renderToggle(item)">
 				        <div style="padding:16px;">
 				            <div>
+
+					        	<div style="float:right;text-align:right">
+		                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+				                </div>
+
 				                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
 				                <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
 				                <div style="display:inline;" ng-show="item.profile != item.user.id && item.profile != member.id">
@@ -120,10 +125,9 @@
 				                    <a ng-click="$event.stopPropagation();" ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
 				                </div>
 				                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-								
-								<p ng-click="tokensToggle(item);$event.stopPropagation()" style="display:inline;float:right"><a>Tokens <i class="fa fa-question-circle"></i></a></p>
-
+				                
 				            </div>
+
 				            <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 				        </div>
 				        <div class="card-footer">
@@ -181,18 +185,14 @@
 
 					<div ng-if="item.model=='TASK'" class="card" ng-click="renderToggle(item)">
 						<div style="padding:16px;">
-							<div class="row">
-								<div class="col-sm-10">
-									<h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>
-									<p><a ng-click="$event.stopPropagation();" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>
-									<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-									<p><span ng-bind-html="renderContent(item.content)"></span></p>
-									<span style="color:gray" am-time-ago="item.createdAt"></span>
-								</div>
-								<div class="col-sm-2" style="text-align:right">
-									<p ng-click="$event.stopPropagation();tokensToggle(item)"><a >Tokens <i class="fa fa-question-circle"></i></a></p>
-								</div>
-							</div>
+							<div style="float:right;text-align:right">
+	                            <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
+	                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+			                </div>
+							<h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>
+							<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+	                    	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+							<span style="color:gray" am-time-ago="item.createdAt"></span>
 						</div>
 						<div class="card-footer">
 							<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 

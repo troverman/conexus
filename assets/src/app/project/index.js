@@ -348,18 +348,22 @@ angular.module( 'conexus.project', [
     //CONTENT, TIME, TASK CREATE, VALIDATION (VOTE)
     //TODO
     $scope.contentList = $scope.contentList.map(function(obj){
+        obj.tags = obj.tags.split(',');
         obj.model = 'CONTENT';
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
+        obj.tags = obj.tags.split(',');
         obj.model = 'TASK';
         return obj;
     });
     $scope.time = $scope.time.map(function(obj){
+        obj.tags = obj.tags.split(',');
         obj.model = 'TIME';
         return obj;
     });
     $scope.transactions = $scope.transactions.map(function(obj){
+        obj.tags = obj.tags.split(',')//.trim()
         obj.model = 'TRANSACTION';
         return obj;
     });

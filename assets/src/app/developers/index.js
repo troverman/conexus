@@ -169,7 +169,7 @@ angular.module( 'conexus.developers', [
 
     //DATA MODELS
 
-    $scope.humanReadableValidationNFTModel = JSON.stringify({ 
+    $scope.humanReadableValidationNFTModel = 'var humanReadableValidationNFTModel = '+JSON.stringify({ 
         string: 'MODEL+ADDRESS',
         information:{
             inCirculation:1,
@@ -185,7 +185,7 @@ angular.module( 'conexus.developers', [
     }, null, 4);
 
 
-    $scope.newOrderModel = JSON.stringify([{
+    $scope.newOrderModel = 'var newOrderModel = '+JSON.stringify([{
             setAlpha:{UNIVERSALTOKEN:1},
             setBeta:{'CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS':1}, 
             type:'ONBOOK', 
@@ -206,7 +206,7 @@ angular.module( 'conexus.developers', [
         },
     ], null, 4);
 
-    $scope.orderBookTensor = JSON.stringify({
+    $scope.orderBookTensor = 'var orderBookTensor = '+JSON.stringify({
         CRE8:{
             BTC:{orderBook:[]},
             ETH:{orderBook:[]},
@@ -219,6 +219,67 @@ angular.module( 'conexus.developers', [
             LTC:{orderBook:[]},
             XRP:{orderBook:[]},
         },
+    }, null, 4);
+
+
+
+
+    //MODELS..
+
+    //HEADERS IN HTML.. GENERATE TOKEN.. PASSPORT.. 
+    
+    $scope.metaModel = 'var filter = '+JSON.stringify({
+        filter:[{
+            'obj': 'param'
+        }],
+        limit: 10,
+        skip: 10,
+        sort: 'modelParam DESC || ASC'
+    }, null, 4);
+
+    $scope.actionModel = 'var actionModel = '+JSON.stringify({
+        address: {type: 'string'},
+        information: {type: 'json'},
+        createdAt: {type: 'datetime'},
+        action: {type: 'string'},
+        associatedModels: {type: 'json'},
+        location: {type: 'json'},
+        tags: {type: 'json'},
+        creator: {type: 'string'},
+    }, null, 4);
+
+    $scope.appModel = 'var appModel = '+JSON.stringify({
+        address: {type: 'string'},
+        protocols: {},
+    }, null, 4);
+
+    $scope.associationModel = 'var associationModel = '+JSON.stringify({
+        address: {type: 'string'},
+        protocols: {},
+    }, null, 4);
+
+    $scope.blockModel = 'var blockModel = '+JSON.stringify({
+        txCount: {type: 'string'},
+        height: {type: 'string'},
+        minedBy: {type: 'string'},
+        timeStamp: {type: 'string'},
+        merkleRoot: {type: 'string'},
+        previousBlock: {type: 'string'},
+        nextBlock: {type: 'string'},
+        size: {type: 'string'},
+    }, null, 4);
+
+    $scope.contentModel = 'var contentModel = '+JSON.stringify({
+        id: {type: 'string'},
+        title: {type: 'string'},
+        content: {type: 'string'},
+        tags: {type: 'string'}, 
+        type: {type: 'string'},
+        location: {type: 'json'},
+        associatedModels: {type: 'json'},
+        reactions: {type: 'json'},
+        user: {model: 'user'},
+        createdAt: {type: 'datetime'},
     }, null, 4);
 
 

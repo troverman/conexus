@@ -1,21 +1,35 @@
 /**
 * Validation.js
+VALIDATIONS ARE TRAVERSED TO CREATE ASSOCIATIONS WHICH CREATES TOKEN POTIENTAL.
+VALIDATION CREATES TOKEN POTIENTAL
 */
 
 module.exports = {
 
 	attributes: {
-        
+
+        //ASSOCIATED CONTENT
         content: {type: 'string'},
+
+        //CREATOR
+        user: {model: 'user'}, //MOTION (CONTAINER ACTION) W PROJ
+
+        //WEIGHT
         reputation: {type: 'json'},
-        user: {model: 'user'},
+
+        //VOTE
         validation: {type: 'json'},
-        
-        //ASSOCIATIONS
+
+        //HUMAN, AI, APP.. ETC,
+        type: {type: 'type'},
+
+        //FROM CHARTER INPUT IE TYPES OF RELATION
+        parameters: {type: 'json'},
+
+        //BINARY ASSOCIATION
         associatedModels: {type: 'json'},
 
-        //TOO MUCH RE: VERBS
-
+        //VERBS
         //CREATE VERB
         //[{type: 'PROJECT', id: 1}, {type:'ITEM', id:1}]
         //[{type: 'PROJECT', id: 1}, {type:'CONTENT', id:1}]
@@ -25,15 +39,9 @@ module.exports = {
         //[{type: 'TASK', id: 1}, {type:'TIME', id:1}]
         //[{type: 'TIME', id: 1}, {type:'VALIDATION', id:1}]
         //[{type: 'VALIDATION', id: 1}, {type:'VALIDATION', id:1}] // it chains.? 
-
         //MODIFY VERB
         //[{type: 'PROJECT', id: 1}]
         //[{type: 'PROJECT', id: 1}, {type:'MEMBER', id:1}]
-
-        //TODO: DEPRECIATE
-        project: {type: 'string'},
-        task: {type: 'string'},
-        time: {type: 'string'},
 
     },
     
