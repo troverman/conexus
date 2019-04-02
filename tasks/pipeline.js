@@ -15,8 +15,6 @@ var cssFilesToInject = [
   'bower_components/angularjs-toaster/toaster.min.css',
   'bower_components/highlight/styles/atom-one-dark-reasonable.css',//a11y-dark, agate, tomorrow-night, railscasts, kimbie.dark, atom-one-dark-reasonable
   'bower_components/fontawesome/css/all.min.css',
-  'bower_components/froala/css/froala_editor.min.css',
-  'bower_components/froala/css/plugins/*.css',
   'styles/**/*.css',
 ];
 
@@ -37,10 +35,6 @@ var jsFilesToInject = [
   'bower_components/angular-moment/angular-moment.js',
   'bower_components/highlight/highlight.pack.js',
   'bower_components/angular-highlightjs/angular-highlightjs.min.js',
-
-  'bower_components/angular-froala/angular-froala.js',
-  'bower_components/froala/js/froala_editor.min.js',
-  'bower_components/froala/js/plugins/*.js',
 
   'bower_components/d3/d3.js',
   'bower_components/nvd3/build/nv.d3.js',

@@ -96,7 +96,7 @@ angular.module( 'conexus.validation', [
         $scope.validationColumn.xAxis.categories.push($scope.validationList[x][0]);
     }
 
-    //TODO
+    //DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -116,10 +116,9 @@ angular.module( 'conexus.validation', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO
+    //DEPRECIATE
     $scope.createValidation = function(){
         if ($scope.currentUser){
-            //ASSOCIATIONS
             $scope.newValidation.validation = $scope.validation.id;
             $scope.newValidation.user = $scope.currentUser.id;
             ValidationModel.create($scope.newValidation).then(function(model){
@@ -132,12 +131,13 @@ angular.module( 'conexus.validation', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO
+    //DEPRECIATE
     $scope.reply = function(item){
         if ($scope.currentUser){
-            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
-            else{$scope.validation.showReply = !$scope.validation.showReply;}
+            //var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            //if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
+            //else{$scope.validation.showReply = !$scope.validation.showReply;}
+            $mdSidenav('content').toggle()
         }
         else{$mdSidenav('login').toggle();}
     };

@@ -16,7 +16,9 @@
 
     <div style="padding:16px;background-color:white">
 
-        <h5 style="text-align:right;float:right" ng-click="tokenToggle(content)"><a>Tokens <i class="fa fa-question-circle"></i></a></h5>
+        <div style="float:right;text-align:right">
+            <i style="" ng-click="$event.stopPropagation();tokensToggle(content);" class="fa fa-ellipsis-v"></i>
+        </div>
 
         <div>
             <img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">

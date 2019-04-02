@@ -21,7 +21,6 @@ angular.module( 'conexus', [
     'toaster',
     'ngAnimate',
     'hljs',
-    'froala',
     'conexus.about',
     'conexus.account',
     'conexus.apps',

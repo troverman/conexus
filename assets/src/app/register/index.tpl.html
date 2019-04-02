@@ -80,9 +80,11 @@
                         <div class="col-xs-9">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <p style="color:gray;margin:0px;font-size:12px"><b>What is this?</b></p>
-                                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We start defining your value map though understanding statements of preference. This is used to coordinate orders on CRE8's Multi Dimensional Token Market.</p>
-                                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We present a context of discovery for tokenization actions. Actions are manifest though projects, tasks, time, content, and a variety of other protocol actions are represented on CRE8's network.</p>
+                                    <div ng-show="false">
+                                        <p style="color:gray;margin:0px;font-size:12px"><b>What is this?</b></p>
+                                        <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We start defining your value map though understanding statements of preference. This is used to coordinate orders on CRE8's Multi Dimensional Token Market.</p>
+                                        <p style="font-style:italic;color:gray;margin:0px;font-size:12px">We present a context of discovery for tokenization actions. Actions are manifest though projects, tasks, time, content, and a variety of other protocol actions are represented on CRE8's network.</p>
+                                    </div>
                                     <div ng-repeat="item in newOrder">
                                         <div layout="">
                                             <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[2]}}</span></div>
@@ -142,8 +144,10 @@
                 <div style="padding:16px;">
 
                     <div class="row">
-                        
                         <div class="col-sm-6">
+                            <div ng-show="false">
+                                <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>
+                            </div>
                             <div ng-repeat="item in dailyTimeValue">
                                 <div layout="">
                                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.text}}</span></div>
@@ -158,8 +162,6 @@
                         </div>
 
                     </div>
-
-                    <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>
 
                 </div>
             </div>

@@ -12,8 +12,9 @@ angular.module( 'conexus.member', [
 			}
 		},
 		resolve: {
-            //TODO: REFACTOR // TODO ALLOW FOR ADDRESS LOOKUP
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
+                //TODO: REFACTOR // TODO ALLOW FOR ADDRESS LOOKUP TOO username || OR ADDRESS IN FILTER
+                //GETSOME return UserModel.getSome({username:'username', filter:$stateParams.path, limit:1,skip:0,sort:'createdAt DESC'})
                 return UserModel.getByUsername($stateParams.path);
             }],
         }
@@ -30,15 +31,12 @@ angular.module( 'conexus.member', [
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
-
-            //TODO | BETTER....
             contentList: ['ContentModel', 'member', function(ContentModel, member) {
                 return ContentModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
             profileContent: ['ContentModel', 'member', function(ContentModel, member) {
                 return ContentModel.getSome('profile', member.id, 20, 0, 'createdAt DESC');
             }],
-
             time: ['member', 'TimeModel', function(member, TimeModel) {
                 return TimeModel.getSome('user', member.id, 20, 0, 'createdAt DESC');
             }],
@@ -104,7 +102,7 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            //TODO: REFACTOR
+            //TODO: REFACTOR GETSOME
             followers: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getFollowers(member);
             }],
@@ -119,7 +117,7 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            //TODO: REFACTOR
+            //TODO: REFACTOR GETSOME FILTER QUERY
             following: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getFollowing(member);
             }],
@@ -221,31 +219,38 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'lodash', 'member', 'seoService', 'titleService', 'toaster', 'TransactionModel', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, FollowerModel, lodash, member, seoService, titleService, toaster, TransactionModel) {
-	$scope.currentUser = config.currentUser;
+    
+    //ERR CHECK
+    //TODO: IMPROVE
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
+
+    //TODO: SEOSERVICE NAV
+
+    //INITALIZE LOCAL
+    //TODO: GLOBALIZE
+    $scope.currentUser = config.currentUser;
+    titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
+
+    //TODO: isFollowing
+    $scope.isFollowing = false;
+
     $scope.newFollower = {};
     $scope.newTransaction = {};
     $scope.newTransaction.identifier = 'CRE8';
     $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
-    titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
     if($scope.currentUser){$scope.newTransaction.from = $scope.currentUser.id;}
 
+    //INITALIZE GLOBAL
     $rootScope.to = $scope.member.id;
     $rootScope.associatedModels = [{
         address: $scope.member.id,
         type: 'PROFILE',
     }];
-
-    //TODO: BETTER?
     $rootScope.member = $scope.member;
     $rootScope.project = null;
-
-    //TODO: seoService
-
-    //TODO: isFollowing
-    $scope.isFollowing = false;
-
+   
+    //TODO: FACTOR
     $scope.follow = function() {
         if ($scope.currentUser){
             $scope.newFollower.followed = $scope.member.id;
@@ -280,15 +285,9 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.subNavToggle = function(){
-        $mdSidenav('subNav').toggle();
-    };
-
     //TODO: FXNS
     $scope.unfollow = function(member) {
-        if ($scope.currentUser){
-            FollowerModel.delete(member);
-        }
+        if ($scope.currentUser){FollowerModel.delete(member);}
         else{$mdSidenav('login').toggle()}
     };
 
@@ -297,6 +296,7 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberAboutController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
@@ -304,14 +304,17 @@ angular.module( 'conexus.member', [
 
 
 .controller( 'MemberActionsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'titleService', function MemberActionsController($sailsSocket, $scope, $stateParams, config, lodash, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Actions | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
 }])
 
 .controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'lodash', 'member', 'orders', 'profileContent', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, FollowerModel, lodash, member, orders, profileContent, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
+   
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    
     $scope.newContent = {};
     $scope.newReaction = {};
 
@@ -406,12 +409,13 @@ angular.module( 'conexus.member', [
     }
     $scope.loadTags();
 
+    //DEPRECIATE
     $scope.reply = function(item){
-        var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.activity[index].showReply = !$scope.activity[index].showReply
+        //var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+        //$scope.activity[index].showReply = !$scope.activity[index].showReply;
+        if ($scope.currentUser){$mdSidenav('content').toggle();}
+        else{$mdSidenav('login').toggle()}
     };
-
-    $scope.search = function(){};
 
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
@@ -427,6 +431,7 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberAssetsCtrl', ['$scope', 'config', 'titleService', function MemberAssetsCtrl( $scope, config, titleService ) {
+    
     titleService.setTitle($scope.member.username + ' | Assets | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
@@ -651,7 +656,9 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'ContentModel', 'lodash', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, config, contentList, ContentModel, lodash, titleService) {
+   
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
+    
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
     $scope.newContent = {};
@@ -736,15 +743,15 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'FollowerModel', 'followers', 'lodash', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, config, FollowerModel, followers, lodash, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    
     //HAK
     $scope.followers = followers.map(function(obj){
         obj.user = obj.follower;
         return obj;
     });
-
-    $scope.search = function(){};
 
     /*
     $sailsSocket.subscribe('follower', function (envelope) {
@@ -762,15 +769,15 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'following', 'FollowerModel', 'lodash', 'titleService', function MemberFollowingController($sailsSocket, $scope, $stateParams, config, following, FollowerModel, lodash, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    
     //HAK
     $scope.following = following.map(function(obj){
         obj.user = obj.followed;
         return obj;
     });
-
-    $scope.search = function(){};
 
     /*
     $sailsSocket.subscribe('follower', function (envelope) {
@@ -798,6 +805,15 @@ angular.module( 'conexus.member', [
         obj.model = 'ITEM';
         return obj;
     });
+
+    $rootScope.$watch('searchQuery' ,function(){
+        $scope.searchQuery = [];
+        for(x in Object.keys($rootScope.searchQuery)){
+            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
+                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
+            }
+        }
+    }, true);
 
     $scope.filterContent = function(filter) {
 
@@ -891,22 +907,10 @@ angular.module( 'conexus.member', [
 
     $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray};
 
-    //$scope.$watch('searchQuery' ,function(){
-    //    $scope.searchQuery.push('aosdoa');
-    //});
-
-    $rootScope.$watch('searchQuery' ,function(){
-        $scope.searchQuery = [];
-        for(x in Object.keys($rootScope.searchQuery)){
-            for (y in Object.keys($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]])){
-                $scope.searchQuery.push($rootScope.searchQuery[Object.keys($rootScope.searchQuery)[x]][y])
-            }
-        }
-    }, true);
-
 }])
 
 .controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, titleService, transactionsFrom, transactionsTo) {
+    
     titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
@@ -1108,8 +1112,9 @@ angular.module( 'conexus.member', [
 
     $scope.reply = function(activity){
         if ($scope.currentUser){
-            var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
-            $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
+            //var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
+            //$scope.transactions[index].showReply = !$scope.transactions[index].showReply;
+            $mdSidenav('content').toggle()
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1530,9 +1535,10 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, config, lodash, member, OrderModel, orders, ReactionModel, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
-
     $scope.currentUser = config.currentUser;
+
     $scope.newReaction = {};
     $scope.orders = orders;
 
@@ -1695,17 +1701,22 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle()}
     };
 
-
-    $scope.reply = function(item){
-        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.orders[index].showReply = !$scope.orders[index].showReply
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            //var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+            //$scope.orders[index].showReply = !$scope.orders[index].showReply
+            $mdSidenav('content').toggle();
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
 }])
 
 .controller( 'MemberProjectsCtrl', ['$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'projects', 'titleService', function MemberProjectsController($sailsSocket, $scope, $stateParams, config, lodash, projects, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    
     $scope.projects = projects;
 
     /*
@@ -1724,16 +1735,14 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberTasksCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'tasks', 'TaskModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, tasks, TaskModel, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Tasks | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
+    
     $scope.tasks = tasks;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newTask = {};
-
-    $scope.createContent = function() {};
-    $scope.createReaction = function() {};
-    $scope.createTask = function() {};
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
@@ -1758,10 +1767,12 @@ angular.module( 'conexus.member', [
     }
     $scope.loadTags();
 
+    //DEPRECIATE
     $scope.reply = function(activity){
         if ($scope.currentUser){
-            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
-            $scope.tasks[index].showReply = !$scope.tasks[index].showReply;
+            //var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
+            //$scope.tasks[index].showReply = !$scope.tasks[index].showReply;
+            $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1780,6 +1791,7 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', '$stateParams', 'config', 'lodash', 'member', 'ReactionModel', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $sailsSocket, $scope, $stateParams, config, lodash, member, ReactionModel, time, TimeModel, titleService) {
+    
     titleService.setTitle($scope.member.username + ' | Time | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     
@@ -1859,9 +1871,7 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    //TODO
-    $scope.createContent = function(content, type){};
-
+    //DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -1877,6 +1887,7 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //DEPRECIATE
     $scope.createTime = function(){
         if($scope.currentUser){
             $scope.newTime.user = $scope.currentUser.id;
@@ -1893,11 +1904,14 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.reply = function(item){
-        var index = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.time[index].showReply = !$scope.time[index].showReply
+    //DEPRECAITE
+    $scope.reply = function(activity){
+        if ($scope.currentUser){
+            //var index = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            //$scope.time[index].showReply = !$scope.time[index].showReply
+            $mdSidenav('content').toggle();
+        }
+        else{$mdSidenav('login').toggle()}
     };
-
-    $scope.search = function(){};
 
 }]);

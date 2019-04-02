@@ -6,12 +6,38 @@
     
 	<div class="card">
 		<div style="padding:16px;">
-			<p><b>Description</b></p>
+
+            <p><b>Title</b></p>
+            <p>{{project.title}}</p>
+            <div class="spacing-5"></div>
+			
+            <p><b>Description</b></p>
             <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
-            <p><b>Wallet Address</b>:<a ng-click="transactionToggle()" href="#"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
-            <p ng-if="project.location"><b>Location</b>: <b>Address</b>: {{project.location.address}}, <b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+            <div class="spacing-5"></div>
+
+            <p><b>Wallet Address</b></p>
+            <p><a ng-click="transactionToggle()"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
+            <div class="spacing-5"></div>
+
+            <p ng-if="project.location"><b>Location</b></p>
+            <p><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+            <p><b>Address</b>: {{project.location.address}}</p>
+            <div class="spacing-5"></div>
+
+            <p><b>Associations</b></p>
             <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>
-            <p><b>Manifolds</b>: '{{project.urlTitle.toUpperCase()}}+'</p>
+            <div class="spacing-5"></div>
+
+            <!--TODO-->
+            <p><b>Project Charter</b></p>
+            <p>Reputation & Verification Dimensions</p>
+            <p>Validation Types</p>
+            <div class="spacing-5"></div>
+
+            <p><b>Manifolds</b></p> 
+            <p>'<a href="market/project/project.urlTitle.toUpperCase()">{{project.urlTitle.toUpperCase()}}+</a>, <a href="market/project/project.urlTitle.toUpperCase()+TASK+">{{project.urlTitle.toUpperCase()}}+TASK+</a>, <a href="market/project/project.urlTitle.toUpperCase()+TIME+">{{project.urlTitle.toUpperCase()}}+TIME+</a>'</p>
+            <div class="spacing-5"></div>
+
         </div>
     </div>
 

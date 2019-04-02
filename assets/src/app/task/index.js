@@ -29,41 +29,11 @@ angular.module( 'conexus.task', [
 }])
 
 .controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'toaster', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, toaster, validations) {
-    $scope.currentUser = config.currentUser;
+
     $scope.task = task;
-
-    //TODO: FIX
-    if(!$scope.task){$location.path('/')}
-
-    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',')}
-
-    titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
-
-    //PATCH!!!
-    $rootScope.associatedModels = [{
-        address: $scope.task.id,
-        type: 'TASK',
-    }];
-   
-    //TODO: STORE IN DATA
     $scope.task.model = 'TASK';
 
-    $scope.showTimeToggle = function(){
-        //$scope.showTime = !$scope.showTime;
-        $scope.showContent = false;
-        $scope.showTime = true;
-    };
-
-    $scope.showContentToggle = function(){
-        $scope.showContent = true;
-        $scope.showTime = false;
-        //$scope.showContent = !$scope.showContent;
-    };
-
-    $scope.showContent = false;
-    $scope.showTime = true;
-
-    //TEMP HARDCODE -- MOVE TO PROTOCOL
+     //TEMP HARDCODE -- MOVE TO PROTOCOL
     $scope.task.tokens = [];
     $scope.task.tokens.push('CRE8');
     $scope.task.tokens.push('CRE8+TASK');
@@ -75,10 +45,20 @@ angular.module( 'conexus.task', [
         }
     }
 
+    //TODO: FIX
+    if(!$scope.task){$location.path('/')}
+    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',')}
+
+    //DEPRECIATE -- MOVE TO NAV
+    titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
+    $scope.currentUser = config.currentUser;
+   
     $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.question = false;
+    $scope.showContent = false;
+    $scope.showTime = true;
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
@@ -88,25 +68,6 @@ angular.module( 'conexus.task', [
     $scope.verification = {};
     $rootScope.taskTime = 0;
     $scope.time = time;
-
-    $scope.pop = function(){
-        toaster.pop({
-            type:'success',//info, wait, success, warning
-            title: $scope.task.title,
-            body: 'You\'re gonna earn some tokens',
-            onShowCallback: function (toast) { 
-                //PLAY SOUND
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log(audio)})
-                .catch(function(err){console.log(err)})
-            }
-        });
-    };
-
-    //TODO: VIEW IN NAV.. GLOBAL.. :) NOT FIXED ON TASK -- MOVE THESE FUNCTIONS AND VIEWS
-
-    //TODO: STORE IN DATA
     $scope.time.map(function(obj){
         obj.model = 'TIME';
         //TEMP HARDCODE -- MOVE TO PROTOCOL
@@ -126,23 +87,19 @@ angular.module( 'conexus.task', [
         return obj;
     });
 
+    $rootScope.associatedModels = [{
+        address: $scope.task.id,
+        text: $scope.task.title,
+        type: 'TASK',
+    }];
+
+    //TODO: VIEW IN NAV.. GLOBAL.. :) NOT FIXED ON TASK -- MOVE THESE FUNCTIONS AND VIEWS .. LIKE TIME TRACKING ETC
     $scope.askQuestion = function() {
         if ($scope.currentUser){$scope.question = true;}
         else{$mdSidenav('login').toggle();}
     };
 
-    $scope.createContent = function(content) {
-        if ($scope.currentUser){
-            $scope.newContent.contentModel = content.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.task = $scope.task.id;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
-        }
-        else{$mdSidenav('login').toggle();}
-    };
-
+    //DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($scope.currentUser){
             $scope.newReaction.amount = 1;
@@ -168,20 +125,49 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //DEPRECIATE.. MOVE TO NAV
+    $scope.pop = function(){
+        toaster.pop({
+            type:'success',//info, wait, success, warning
+            title: $scope.task.title,
+            body: 'You\'re gonna earn some tokens',
+            onShowCallback: function (toast) { 
+                //PLAY SOUND
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log(audio)})
+                .catch(function(err){console.log(err)})
+            }
+        });
+    };
+
+    //DEPRECIATE?
     $scope.renderStream = function(stream){
         var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
         return $sce.trustAsHtml(html);
     };
 
+    //DEPRECIATE
     $scope.reply = function(item){
         if ($scope.currentUser){
-            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-            if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
-            else if (timeIndex != -1){$scope.time[timeIndex].showReply = !$scope.time[timeIndex].showReply;}
-            else{$scope.task.showReply = !$scope.task.showReply;}
+            //var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            //var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            //if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
+            //else if (timeIndex != -1){$scope.time[timeIndex].showReply = !$scope.time[timeIndex].showReply;}
+            //else{$scope.task.showReply = !$scope.task.showReply;}
+            $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
+    };
+
+    $scope.showTimeToggle = function(){
+        $scope.showContent = false;
+        $scope.showTime = true;
+    };
+
+    $scope.showContentToggle = function(){
+        $scope.showContent = true;
+        $scope.showTime = false;
     };
 
     //REWORK THE FLOW
@@ -191,7 +177,7 @@ angular.module( 'conexus.task', [
             //startStream(); INIT          
         }
         else{$mdSidenav('login').toggle();}
-    }
+    };
 
     $scope.startWork = function() {
         if ($scope.currentUser){
@@ -276,16 +262,12 @@ angular.module( 'conexus.task', [
 
     //TODO: BACKEND COUNTER..... 
     $scope.updateCount = function() {
-        console.log('hello')
         $rootScope.taskTime++;
         $scope.$apply();
-        //toaster.toast.title = $scope.taskTime;
-        //console.log( toaster.toast)
     };
 
-    //TODO: STREAM??
+    //TODO: BROWSER STREAM . . .
     $scope.startStream = function(){
-
         var cameraPreview = document.getElementById('camera-preview');
         //testing out streaming! :D
         function initializeRecorder(stream) {
@@ -331,7 +313,7 @@ angular.module( 'conexus.task', [
         navigator.getUserMedia(session, initializeRecorder, onError);
     };
 
-    //TODO: WEBSOCKETS | WEB3
+    //TODO: WEBSOCKETS
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':

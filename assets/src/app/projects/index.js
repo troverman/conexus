@@ -145,6 +145,14 @@ angular.module( 'conexus.projects', [
     $scope.init();
 
 
+
+
+
+
+
+
+
+    //HMM
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
@@ -172,50 +180,58 @@ angular.module( 'conexus.projects', [
         });
     };
 
-    //FIX THIS
-    $rootScope.$watch('searchQueryNav' ,function(){
-        for(x in Object.keys($rootScope.searchQueryNav)){
-            for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-                if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
-                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
-                }
-            }
-        }
-    }, true);
 
+    //TODO FILTER!
     //UNIFY^v .. //compute ^^^ in NAV FROM OBJ --> THEN ROOT
 
-    //SHOULD BE ROOT?
+    $rootScope.$watch('searchQueryNav' ,function(){
+
+        for(x in Object.keys($rootScope.searchQueryNav)){
+
+            for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
+
+                if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
+
+                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
+
+                }
+
+            }
+
+        }
+
+        console.log($scope.searchQuery, $rootScope.searchQuery, $rootScope.searchQueryNav);
+
+    }, true);
+
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
     
-        //HAK!!!!
         if (newValue !== oldValue) {
-            console.log(newValue)
+
+            console.log(newValue);
+
             $rootScope.stateIsLoading = true;
-            var query = {}
-            query.search = $scope.searchQuery.map(function(obj){
+   
+            $scope.searchQuery = $scope.searchQuery.map(function(obj){
                 if (!obj.query && obj.text){obj.query = obj.text}
                 if (!obj.type){obj.type='STRING'}
                 return obj.query
             }).join(',');
 
-            console.log(query.search);
+            $scope.searchModel = [{
+                model:'PROJECT',
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC',
+                query: $scope.searchQuery, //ARRAY? 
+            }];
 
-            //TODO SEARCH.. :o
-            var searchModel = {};
-            searchModel.model = 'PROJECT';
-            searchModel.limit = 100;
-            searchModel.skip = 0;
-            searchModel.sort = 'createdAt DESC';
-            searchModel.query = $scope.searchQuery;
-            //SearchModel.search(searchModel).then(function(models){
+            //TODO: AGNOSTIC SEARCH
+            //SearchModel.search($scope.searchModel[0]).then(function(models){
             //    console.log(models);
             //});
 
-            //GENERALIZED SEARCH QUERY.. AKA IN SEARCH BAR
-
-            //TODO: AGNOSTIC SEARCH
-            ProjectModel.getSome('search', query.search, 100, 0, 'createdAt DESC').then(function(models){
+            ProjectModel.getSome('search', $scope.searchModel[0].query, 100, 0, 'createdAt DESC').then(function(models){
                 $rootScope.stateIsLoading = false;
                 $scope.projects = models;
                 $scope.init();
@@ -225,15 +241,10 @@ angular.module( 'conexus.projects', [
 
     }, true);
 
-    //FOR PROJECTS.. WATCH THE ROOT.. UNIFY WITH IT
-
     $sailsSocket.subscribe('project', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.projects.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.projects, {id: envelope.id});
                 break;
         }
     });
