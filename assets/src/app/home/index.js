@@ -415,6 +415,8 @@ angular.module( 'conexus.home', [
     
 	$scope.currentUser = config.currentUser;
 
+    $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
+
     $rootScope.associatedModel = {
         address: $scope.currentUser.id,
         type: 'PROFILE',
@@ -1038,8 +1040,9 @@ angular.module( 'conexus.home', [
 
     $scope.reply = function(item){
     	if($scope.currentUser){
-    		var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-    		$scope.activity[index].showReply = !$scope.activity[index].showReply;
+            $mdSidenav('content').toggle()
+    		//var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+    		//$scope.activity[index].showReply = !$scope.activity[index].showReply;
     	}
         else{$mdSidenav('login').toggle()}
     };

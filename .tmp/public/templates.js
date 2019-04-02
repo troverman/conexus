@@ -1559,7 +1559,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "            <div class=\"col-sm-6 col-xs-12\">\n" +
     "                <div class=\"bootstrapHack\">\n" +
-    "                    <img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">\n" +
+    "                    <!--<img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\">-->\n" +
     "                    <!--<div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>-->\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -3581,7 +3581,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    </div>\n" +
     "                    <div ng-show=\"item.showReply\" class=\"card-footer\" ng-click=\"$event.stopPropagation()\">\n" +
     "                        <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
-    "                            <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <textarea froala=\"toolBarSettings\" ng-model=\"newContent.content\"></textarea>\n" +
     "                            <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                        </form>\n" +
     "                    </div>\n" +
@@ -6253,8 +6253,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
     "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
     "                    </ul>\n" +
-    "                    <textarea froala=\"toolBarSettings\" ng-model=\"newContent.content\"></textarea>-\n" +
-    "                    <!--<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>-->\n" +
+    "                    <textarea froala=\"toolBarSettings\" ng-model=\"newContent.content\"></textarea>\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -6861,7 +6860,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div class=\"card-footer\" ng-show=\"item.showReply\">\n" +
     "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                        <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <textarea froala=\"toolBarSettings\" ng-model=\"newContent.content\"></textarea>\n" +
     "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                    </form>\n" +
     "                </div>\n" +
