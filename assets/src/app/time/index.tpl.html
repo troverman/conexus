@@ -71,8 +71,7 @@
 			</div>
 			<div ng-click="$event.stopPropagation();" ng-show="time.showReply" class="card-footer">
 				<form role="form" ng-submit="newContent(item)">
-					<!--<textarea froala="{toolbarButtons:['html']}" ng-model="newContent.content"></textarea>-->
-					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+					<textarea froala="toolBarSettings" ng-model="newContent.content"></textarea>-
 					<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 				</form>
 			</div>

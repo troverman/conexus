@@ -32,6 +32,7 @@ angular.module( 'conexus.time', [
     titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
     //TODO: STORE IN DATA
     $scope.time.model = 'TIME';
+    $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
     //TODO: BETTER
     $scope.member = {};

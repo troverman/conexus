@@ -25,6 +25,8 @@ angular.module( 'conexus.nav', [
     $scope.selectedType = 'POST';
     $scope.validationColumnRender = {};
 
+    $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
+
     //$rootScope.currentUser = config.currentUser;
     //$scope.currentUser = config.currentUser;
 

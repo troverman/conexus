@@ -6253,7 +6253,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
     "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
     "                    </ul>\n" +
-    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <textarea froala=\"toolBarSettings\" ng-model=\"newContent.content\"></textarea>-\n" +
+    "                    <!--<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>-->\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -10348,8 +10349,7 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "			</div>\n" +
     "			<div ng-click=\"$event.stopPropagation();\" ng-show=\"time.showReply\" class=\"card-footer\">\n" +
     "				<form role=\"form\" ng-submit=\"newContent(item)\">\n" +
-    "					<!--<textarea froala=\"{toolbarButtons:['html']}\" ng-model=\"newContent.content\"></textarea>-->\n" +
-    "					<text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "					<textarea froala=\"toolBarSettings\" ng-model=\"newContent.content\"></textarea>-\n" +
     "					<button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "				</form>\n" +
     "			</div>\n" +

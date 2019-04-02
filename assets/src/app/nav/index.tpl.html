@@ -73,7 +73,8 @@
                         <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
                         <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
                     </ul>
-                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
+                    <textarea froala="toolBarSettings" ng-model="newContent.content"></textarea>-
+                    <!--<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>-->
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
