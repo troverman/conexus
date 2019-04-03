@@ -7,11 +7,7 @@
         <!--IF NO ORDERS | VALUE MAP-->
         <div ng-show="showOrders && positions.length == 0" class="card" ng-click="">
 
-
             <!--TODO!-->
-
-
-
 
 
         </div>
@@ -77,7 +73,7 @@
                                         <h3 style="margin-top:0px">{{item.title}}</h3>
                                     </a>
 
-                                    <div style="max-height:500px;overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
+                                    <div style="overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
                                     
                                     <div style="clear:both"></div>
 
@@ -462,7 +458,7 @@
             <div ng-repeat="item in activity">
 
                 <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
-                    <div style="padding:16px;overflow:scroll;max-height:500px">
+                    <div style="padding:16px;overflow:scroll;">
                         <div>
                             <img ng-click="$event.stopPropagation()" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
@@ -505,7 +501,11 @@
                             <div style="clear:both"></div>
 
                         </div>
-                        <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+                        <div style="margin-left:42px">
+                            <!--<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>-->
+                            <!--mmm-->
+                            <div ta-bind ng-model="item.content"></div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
@@ -539,7 +539,7 @@
                                         {{item.title}}
                                     </a>
                                 </h3>
-                                <div style="max-height:500px;overflow:scroll">
+                                <div style="overflow:scroll">
                                     <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
                                 </div>
                             </div>
@@ -548,13 +548,22 @@
                 </div>
 
                 <div class="card" ng-if="item.model=='TASK'" ng-click="renderToggle(item)">
+
+                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.title}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div style="padding:16px;">
                         <div style="float:right;text-align:right">
                             <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
                             <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>
-                        <h4><a ng-click="$event.stopPropagation()" href="task/{{item.id}}">{{item.title}}</a></h4>
-                        <!--<p><a ng-click="$event.stopPropagation()" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a></p>-->
                         <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                         <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                         <span style="color:gray" am-time-ago="item.createdAt"></span>

@@ -2814,7 +2814,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("discover/index.tpl.html",
     "<style type=\"text/css\">\n" +
-    ".angular-google-map-container{height:300px;}\n" +
+    "	.angular-google-map-container{height:300px;}\n" +
     "</style>\n" +
     "\n" +
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
@@ -3077,11 +3077,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <!--IF NO ORDERS | VALUE MAP-->\n" +
     "        <div ng-show=\"showOrders && positions.length == 0\" class=\"card\" ng-click=\"\">\n" +
     "\n" +
-    "\n" +
     "            <!--TODO!-->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "\n" +
     "        </div>\n" +
@@ -3147,7 +3143,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                        <h3 style=\"margin-top:0px\">{{item.title}}</h3>\n" +
     "                                    </a>\n" +
     "\n" +
-    "                                    <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                    <div style=\"overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
     "                                    \n" +
     "                                    <div style=\"clear:both\"></div>\n" +
     "\n" +
@@ -3532,7 +3528,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div ng-repeat=\"item in activity\">\n" +
     "\n" +
     "                <div class=\"card\" ng-if=\"item.model=='CONTENT'\" ng-click=\"renderToggle(item)\">\n" +
-    "                    <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                    <div style=\"padding:16px;overflow:scroll;\">\n" +
     "                        <div>\n" +
     "                            <img ng-click=\"$event.stopPropagation()\" class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
@@ -3575,7 +3571,11 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <div style=\"clear:both\"></div>\n" +
     "\n" +
     "                        </div>\n" +
-    "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
+    "                        <div style=\"margin-left:42px\">\n" +
+    "                            <!--<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>-->\n" +
+    "                            <!--mmm-->\n" +
+    "                            <div ta-bind ng-model=\"item.content\"></div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"card-footer\">\n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -3609,7 +3609,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                        {{item.title}}\n" +
     "                                    </a>\n" +
     "                                </h3>\n" +
-    "                                <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                                <div style=\"overflow:scroll\">\n" +
     "                                    <span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -3618,13 +3618,22 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </div>\n" +
     "\n" +
     "                <div class=\"card\" ng-if=\"item.model=='TASK'\" ng-click=\"renderToggle(item)\">\n" +
+    "\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <div style=\"padding:16px;\">\n" +
     "                        <div style=\"float:right;text-align:right\">\n" +
     "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
     "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                        </div>\n" +
-    "                        <h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
-    "                        <!--<p><a ng-click=\"$event.stopPropagation()\" href=\"project/{{item.project.urlTitle}}\">{{item.project.title}}</a></p>-->\n" +
     "                        <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "                        <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "                        <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
@@ -3918,7 +3927,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                                <div class=\"col-sm-1 col-xs-2\"><a href=\"/project/{{item.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{item.avatarUrl}}\"></a></div>\n" +
     "                                <div class=\"col-sm-11 col-xs-10\">\n" +
     "                                    <h3 style=\"margin-top:0px\"><a href=\"/project/{{item.urlTitle}}\">{{item.title}}</a></h3>\n" +
-    "                                    <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                    <div style=\"overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -4000,7 +4009,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div ng-repeat=\"item in activity\">\n" +
     "\n" +
     "                <div class=\"card\" ng-if=\"item.model=='CONTENT'\" ng-click=\"renderToggle(item)\">\n" +
-    "                    <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                    <div style=\"padding:16px;overflow:scroll\">\n" +
     "                        <div>\n" +
     "                            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
@@ -4066,7 +4075,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                                        {{item.title}}\n" +
     "                                    </a>\n" +
     "                                </h3>\n" +
-    "                                <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                                <div style=\"overflow:scroll\">\n" +
     "                                    <span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -4980,9 +4989,6 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "						<li ng-show=\"currentUser.id == member.id\"><a class=\"btn btn-default\" href=\"account\">Edit Profile</a></li>\n" +
     "						<li><a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "					</ul>\n" +
-    "					<div class=\"nav-toggle\">\n" +
-    "						<a style=\"color:black\" href=\"#\"><i class=\"fa fa-bars\"></i></a>\n" +
-    "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			<md-divider style=\"color:gray\"></md-divider>\n" +
@@ -5949,7 +5955,7 @@ angular.module("member/templates/positions.tpl.html", []).run(["$templateCache",
     "		    </form>\n" +
     "		</div>\n" +
     "\n" +
-    "		<div class=\"card\">\n" +
+    "		<div ng-if=\"currentUser.id == member.id\" class=\"card\">\n" +
     "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
     "		</div>\n" +
     "\n" +
@@ -6347,7 +6353,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
     "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
     "                    </ul>\n" +
-    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'insertImage', 'insertLink', 'insertVideo', 'html']]\"></text-angular>\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +

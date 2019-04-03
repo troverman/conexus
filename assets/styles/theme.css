@@ -520,7 +520,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .imageContainerSmallDivH1{
         font-size: 2.5em;
     }
-    .member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}
 
     .navbar-header {float: none;}
     .navbar-left, .navbar-right {float: none !important;}
@@ -558,7 +557,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .imageContainerSmallDivH1{
         font-size: 2.8em;
     }
-    .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
 }
 
 

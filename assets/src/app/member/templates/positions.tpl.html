@@ -32,7 +32,7 @@
 		    </form>
 		</div>
 
-		<div class="card">
+		<div ng-if="currentUser.id == member.id" class="card">
 			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
 		</div>
 
