@@ -2257,17 +2257,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div id=\"PROJECTCHARTER\">\n" +
+    "\n" +
     "                    <h4><b>ProjectCharter</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations from initial conditions to reputationatation decay.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">\n" +
-    "var projectCharterModel = {\n" +
-    "    //TBD\n" +
-    "    //ASSOCIATED PROPERTY FOR PROJECT.. CORE MOTION CONFIG..? // a Computed Validation interaction\n" +
-    "    id: {type: 'string'},\n" +
-    "    project: {type: 'string'},\n" +
-    "    info: {type: 'json'},\n" +
-    "};</div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations. from initial conditions to reputationatation decay.</p>\n" +
+    "\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Reputation & Verification Dimensions</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Validation Types</p>\n" +
+    "\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectCharterModel\"></div>\n" +
+    "\n" +
     "                    <p><b>[get, post] /api/projectcharter</b></p>\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +

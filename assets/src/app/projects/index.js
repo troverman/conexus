@@ -39,6 +39,8 @@ angular.module( 'conexus.projects', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
+    $rootScope.associatedModels = [];
+
     $scope.populateMap = function(){
         for (x in projects){
             if (projects[x].location){

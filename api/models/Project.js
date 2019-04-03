@@ -39,30 +39,30 @@ module.exports = {
         //TODO: INFO
         //COUNTS
         info: {type: 'json'},
-
-        //contentCount
-        //memberCount
-        //taskCount
-        //timeCount
-        //liveCount
-
-        memberCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        taskCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        timeCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        liveCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-
+            contentCount: {
+                type: 'integer',
+                defaultsTo: 0
+            },
+            itemCount: {
+                type: 'integer',
+                defaultsTo: 0
+            },
+            memberCount: {
+                type: 'integer',
+                defaultsTo: 0
+            },
+            taskCount: {
+                type: 'integer',
+                defaultsTo: 0
+            },
+            timeCount: {
+                type: 'integer',
+                defaultsTo: 0
+            },
+            liveCount: {
+                type: 'integer',
+                defaultsTo: 0
+            },
 
     },
     afterCreate: function (model, next) {

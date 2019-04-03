@@ -234,7 +234,7 @@ angular.module( 'conexus.developers', [
         }],
         limit: 10,
         skip: 10,
-        sort: 'modelParam DESC || ASC'
+        sort: 'param DESC || ASC'
     }, null, 4);
 
     $scope.actionModel = 'var actionModel = '+JSON.stringify({
@@ -280,6 +280,12 @@ angular.module( 'conexus.developers', [
         reactions: {type: 'json'},
         user: {model: 'user'},
         createdAt: {type: 'datetime'},
+    }, null, 4);
+
+    $scope.projectCharterModel = 'var projectCharterModel = '+JSON.stringify({
+        id: {type: 'string'},
+        project: {type: 'string'},
+        info: {type: 'json'},
     }, null, 4);
 
 
