@@ -158,6 +158,12 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    $rootScope.cardDetailToggle = function(item){
+        $scope.closeAllNav();
+        $scope.item = item;
+        $mdSidenav('cardDetail').toggle();
+    };
+
     $rootScope.cre8Toggle = function(){
         $scope.closeAllNav();
         if($scope.currentUser){
