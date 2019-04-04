@@ -785,6 +785,7 @@ angular.module( 'conexus.nav', [
     //LOCAL FUNCTIONS
     $scope.closeAllNav = function(){
         $mdSidenav('action').close();
+        $mdSidenav('cardDetail').close();
         $mdSidenav('content').close();
         $mdSidenav('cre8').close();
         $mdSidenav('login').close();

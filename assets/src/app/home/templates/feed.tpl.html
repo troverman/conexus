@@ -477,10 +477,12 @@
                             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 
 
-
-                            <p ng-click="tokensToggle(item);$event.stopPropagation()" style="display:inline;float:right">
-                                <a style="color:gray;"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                            </p>
+                            <!--TODO: TOGGLE MENU-->
+                            <div style="float:right;text-align:right">
+                                <!--<i class="fa fa-angle-down"></i>-->
+                                <!--<a>Tokens <i class="fa fa-qrcode"></i></a>-->
+                                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                            </div>
 
                             <div style="clear:both"></div>
 
@@ -545,8 +547,9 @@
 
                     <div style="padding:16px;">
                         <div style="float:right;text-align:right">
-                            <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                            <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
+                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fas fa-coins"></i></a>-->
+                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>
                         <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                         <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
@@ -571,8 +574,9 @@
 
                         <div>
                             <div style="float:right;text-align:right">
-                                <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                                <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                                <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
+                                <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fas fa-coins"></i></a>-->
+                                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
