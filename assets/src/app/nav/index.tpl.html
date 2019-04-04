@@ -466,8 +466,8 @@
                 <h2 ng-show="currentUser"ng-click="timeToggle()" class="nav-links" style="padding:16px;"><a>+ Time</a></h2>-->
 
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about">About</a></h2>
-                <h2 ng-if="true" class="nav-links" ng-show="currentUser" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
-                <h2 ng-click="cre8Toggle()" class="nav-links" style="padding:12px;"><a>CRE8</a></h2>
+                <h2 ng-show="currentUser" class="nav-links" style="padding:16px;"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h2>
+                <h2 ng-show="currentUser" ng-click="cre8Toggle()" class="nav-links" style="padding:12px;"><a>CRE8</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/discover">Discover</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/market">Market</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/marketplace">Marketplace</a></h2>

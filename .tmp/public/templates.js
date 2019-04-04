@@ -3530,7 +3530,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "\n" +
     "\n" +
-    "\n" +
     "                            <!--TODO: TOGGLE MENU-->\n" +
     "                            <div style=\"float:right;text-align:right\">\n" +
     "                                <!--<i class=\"fa fa-angle-down\"></i>-->\n" +
@@ -6708,8 +6707,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h2 ng-show=\"currentUser\"ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:16px;\"><a>+ Time</a></h2>-->\n" +
     "\n" +
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
-    "                <h2 ng-if=\"true\" class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
-    "                <h2 ng-click=\"cre8Toggle()\" class=\"nav-links\" style=\"padding:12px;\"><a>CRE8</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" ng-click=\"cre8Toggle()\" class=\"nav-links\" style=\"padding:12px;\"><a>CRE8</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/discover\">Discover</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
