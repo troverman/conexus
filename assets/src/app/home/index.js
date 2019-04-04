@@ -430,6 +430,7 @@ angular.module( 'conexus.home', [
     $scope.options = {scrollwheel: false};
 
     $scope.contentList = contentList;
+    $scope.ifCRE8 = false;
     $scope.projects = projects;
     $scope.members = members;
     $scope.newContent = {};
@@ -957,6 +958,10 @@ angular.module( 'conexus.home', [
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
     
+    
+    $scope.CRE8 = function(){
+        $scope.ifCRE8 = !$scope.ifCRE8
+    };
 
     //TODO
     $scope.loadValueMap = function(){

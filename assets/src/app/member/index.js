@@ -1739,7 +1739,10 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Tasks | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     
-    $scope.tasks = tasks;
+    $scope.tasks = tasks.map(function(obj){
+        obj.model = 'TASK';
+        return obj;
+    });
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.newTask = {};

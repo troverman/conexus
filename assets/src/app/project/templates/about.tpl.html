@@ -19,13 +19,15 @@
             <p><a ng-click="transactionToggle()"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
             <div class="spacing-5"></div>
 
-            <p ng-if="project.location"><b>Location</b></p>
-            <p><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
-            <p><b>Address</b>: {{project.location.address}}</p>
+            <div ng-if="project.location">
+                <p><b>Location</b></p>
+                <p><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+                <p><b>Address</b>: {{project.location.address}}</p>
+            </div>
             <div class="spacing-5"></div>
 
             <p><b>Associations</b></p>
-            <p><b>Members</b>: {{project.memberCount}} | <b>Tasks</b>: {{project.taskCount}} | <b>Time</b>: {{project.timeCount}}</p>
+            <p><b>Members</b>: <a>{{project.memberCount || 0}}</a> | <b>Tasks</b>: <a>{{project.taskCount || 0}}</a> | <b>Time</b>: <a>{{project.timeCount||0 }}</a></p>
             <div class="spacing-5"></div>
 
             <!--TODO-->

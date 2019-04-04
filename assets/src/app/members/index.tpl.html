@@ -62,13 +62,13 @@
                     
                     <p style="font-size:11px;"><a href="/member/{{item.username}}/projects">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following">{{item.followingCount || 0}} Following</a>
                     
-                    <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
-                    <p style="color:gray">{{currentUser.status}} Offline</p>
+                    <p style="color:gray">Total Reputation | {{item.totalWork || 0}}</p>
+                    <p style="color:gray">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i> Offline</p>
                     
-                    <img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}">
-                    <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(item)">Send Tokens</a>
                     <a ng-show="!item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Follow</button></a>
                     <a ng-show="item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Unfollow</button></a>
+                    <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(item)">Send Tokens</a>
+                    <img ng-click="$event.stopPropagation();transactionToggle(item)" style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}">
 
                 </div>
             </div>

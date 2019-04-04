@@ -11,18 +11,24 @@ angular.module( 'conexus.nav', [
         $rootScope.associatedModel = null;
         $rootScope.market = null;
         $rootScope.market1 = null;
-
-        $scope.closeAllNav();
+                $scope.closeAllNav();
 
         //VIEW GENERATION
         //$scope.createView();
     
     });
     
-    $rootScope.$on("$stateChangeSuccess", function() {window.scrollTo(0, 0)});
+    $rootScope.$on("$stateChangeSuccess", function() {
+        window.scrollTo(0, 0);
+        //$rootScope.projectNavigation = $state.current.url.substring(1);
+        //console.log($state.current.url.substring(1))
+        //TITLE HERE
+        //SEO HERE
+    });
     
     //INITALIZE ROOT VARIABLES
     $rootScope.notificationCount = 0;
+    $rootScope.projectNavigation = $state.current.url.substring(1);
     $rootScope.selectedTags = [];
     $rootScope.selectedAssets = [];
     $rootScope.selectedAssociations = [];
@@ -127,11 +133,13 @@ angular.module( 'conexus.nav', [
 
     //ROOT FUNCTIONS
     $rootScope.actionToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){$mdSidenav('action').toggle();}
         else{$mdSidenav('login').toggle();}
     };
 
     $rootScope.contentToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){
             //TODO: ASSOCIATED 
             //HM!
@@ -150,7 +158,16 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    $rootScope.cre8Toggle = function(){
+        $scope.closeAllNav();
+        if($scope.currentUser){
+            $mdSidenav('cre8').toggle();
+        }
+        else{$mdSidenav('login').toggle();}
+    };
+
     $rootScope.filterToggle = function(type, item){
+        $scope.closeAllNav();
 
         $scope.locationFilter = {};
         $scope.locationFilter.distance = 10;
@@ -344,6 +361,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.itemToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){
             $scope.newItem = {};
             $mdSidenav('item').toggle();
@@ -358,6 +376,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.orderToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){
             $scope.newOrder = {};
             $mdSidenav('order').toggle();
@@ -366,6 +385,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.projectToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){
             $scope.newProject = {};
             $scope.newProject.associatedModels = $rootScope.associatedModels;
@@ -376,6 +396,7 @@ angular.module( 'conexus.nav', [
 
     //TODO
     $rootScope.renderToggle = function(item){
+        $scope.closeAllNav();
         console.log(item);
         $scope.item = item;
         $scope.content = item;
@@ -428,6 +449,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.renderValidationToggle = function(item){
+        $scope.closeAllNav();
 
 
 
@@ -571,6 +593,7 @@ angular.module( 'conexus.nav', [
 
     //MEMBER CARD TOGGLE | TODO RENAME
     $rootScope.renderReputationToggle = function(item){
+        $scope.closeAllNav();
 
         $scope.item = item;
         if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
@@ -617,6 +640,7 @@ angular.module( 'conexus.nav', [
     $rootScope.subNavToggle = function(){$mdSidenav('subNav').toggle()};
 
     $rootScope.taskToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){
             $scope.newTask = {};
             $scope.newTask.associatedModels = $rootScope.associatedModels;
@@ -626,6 +650,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.timeToggle = function(){
+        $scope.closeAllNav();
         if($scope.currentUser){
             $scope.newTime = {};
             $scope.newTime.startTime = new Date();
@@ -643,6 +668,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.transactionToggle = function(item){
+        $scope.closeAllNav();
         if($scope.currentUser){
             if (item){
                 //TODO!
@@ -654,6 +680,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.validationToggle = function(item){
+        $scope.closeAllNav();
 
         console.log(item)
 
@@ -751,14 +778,16 @@ angular.module( 'conexus.nav', [
 
     //LOCAL FUNCTIONS
     $scope.closeAllNav = function(){
-        $mdSidenav('nav').close();
-        $mdSidenav('subNav').close();
+        $mdSidenav('action').close();
         $mdSidenav('content').close();
+        $mdSidenav('cre8').close();
         $mdSidenav('login').close();
+        $mdSidenav('nav').close();
         $mdSidenav('project').close();
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
         $mdSidenav('renderValidation').close();
+        $mdSidenav('subNav').close();
         $mdSidenav('task').close();
         $mdSidenav('time').close();
         $mdSidenav('tokens').close();

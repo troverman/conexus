@@ -242,9 +242,9 @@ angular.module( 'conexus.project', [
     $scope.newTransaction.identifier = 'CRE8';
     $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
 
-    $scope.projectNavigation = $state.current.url.substring(1);
-    $scope.searchQuery = [];
+    //$scope.projectNavigation
 
+    $scope.searchQuery = [];
 
     //GLOBAL VARIABLES
     $rootScope.markers = [];
@@ -1200,14 +1200,6 @@ angular.module( 'conexus.project', [
     $rootScope.baseMarkets = [
         {text:'UNIVERSAL'},
         {text:'CRE8'},
-        //{text:'ETH'},
-        //{text:'BTC'},
-        //{text:'USD'},
-        //{text:'LTC'},
-        //{text:'SHELTER'},
-        //{text:'FOOD'},
-        //{text:'REST'},
-        //{text:'REST,FOOD'},
     ];
 
     //MULTIORDER MANIFOLDS
@@ -1259,16 +1251,8 @@ angular.module( 'conexus.project', [
             lineWidth: 0,
             min: 0,
         },
-        legend: {
-            enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
-        },
-        tooltip: {
-        //    shared: true,
-        },
+        legend: {enabled: false,},
+        tooltip: {shared: true,},
         credits:{enabled:false},
     };
 
