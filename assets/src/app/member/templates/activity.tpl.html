@@ -1,46 +1,7 @@
 
 <div class="row">
 
-    <!--
-    <div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
-        <div class="card">
-            <div style="padding:16px;">
-                <span><b>Tags</b></span>
-                <div ng-repeat="tag in sortedTagArray">
-                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div style="padding:16px;">
-                <span><b>Associations</b></span>
-                <div ng-repeat="tag in sortedTagArray">
-                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-
     <div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
-
-        <!--
-        <ul style="padding:0px;" class="member-tabs">
-            <li style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-            <div style="clear:both"></div>
-        </ul>
-
-        <div class="card">
-            <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach | Filter" ng-model="searchQuery">
-                <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                    <a href="#" role="button">
-                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                    </a>
-                </div>
-            </form>
-        </div>
-        -->
 
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
@@ -52,7 +13,7 @@
                 <div style="padding:16px;overflow:scroll;max-height:500px">
 
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
                     <div>
@@ -99,7 +60,7 @@
                 <div style="padding:16px">
 
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
                     <div ng-click="$event.stopPropagation()">
@@ -126,7 +87,7 @@
                 <div style="padding:16px;">
 
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
 
@@ -165,7 +126,7 @@
                 <div style="padding:16px">
 
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
                     <div style="display:inline">

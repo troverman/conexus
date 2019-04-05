@@ -21,8 +21,10 @@ angular.module( 'conexus.projects', [
 .controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
 	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
-    $scope.projects = projects;
-
+    $scope.projects = projects.map(function(obj){
+        obj.model = 'PROJECT';
+        return obj;
+    });
     if ($scope.currentUser){
         //get my projects
     }

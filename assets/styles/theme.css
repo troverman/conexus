@@ -26,7 +26,6 @@ html {
 
 img{max-width:100%;}
 
-
 md-progress-linear .md-container {background-color: rgba(36,36,46, 1)!important;}
 md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {background-color: #ffd56d!important;}//4bb140,f99731,ffd56d,f45d07  084b73,2ab996
 
@@ -49,10 +48,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 
 #about-section1{background-color:white}
 #about-section2{color:white;background-color:black;}
-#about-section3{color:white;background-color:black;}
-#about-section4{background-color:white}
-#about-section5{background-color:white}
-#title-container{color:white;background-color:black;}
 
 .avatar {
     position:absolute;
@@ -560,7 +555,3 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     }
     .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
 }
-
-
-
-

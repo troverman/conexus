@@ -50,9 +50,10 @@
             </div>
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <h4 ng-click="renderToggle(item)" class="nav-links"><a>Information</a></h4>
-                <h4 ng-click="renderValidationToggle(item)" class="nav-links"><a>Associations</a></h4>
-                <h4 ng-click="tokensToggle(item)" class="nav-links"><a>Tokens</a></h4>
+                <h4 ng-click="renderToggle(item)" class="nav-links"><a>Information <i style="float:right" class="fas fa-info"></i></a></h4>
+                <h4 ng-click="renderValidationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>
+                <!--<h4 ng-click="" class="nav-links"><a>Attention <i style="float:right" class="fa fa-eye"></i></a></h4>-->
+                <h4 ng-click="tokensToggle(item)" class="nav-links"><a>Tokens <i style="float:right" class="fas fa-coins"></i></a></h4>
             </div>
         </div>
     </md-sidenav>
@@ -95,7 +96,7 @@
                         <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
                         <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
                     </ul>
-                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'insertImage', 'insertLink', 'insertVideo', 'html']]"></text-angular>
+                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
@@ -655,7 +656,7 @@
             
 
             <div class="spacing-25"></div>
-            <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
+            <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
@@ -665,7 +666,8 @@
                                 <a ng-if="item.model == 'ORDER'" href="order/{{item.id}} style="color:white"">{{item.title}}</a>
                                 <a ng-if="item.model == 'PROJECT'" href="project/{{item.urlTitle}}" style="color:white">{{item.title}}</a>
                                 <a ng-if="item.model == 'TASK'" href="task/{{item.id}}" style="color:white">{{item.title}}</a>
-                                <a ng-if="item.model == 'TRANSACTION'" href="transaction/{{item.id}}" style="color:white">{{item.title}}</a>
+                                <a ng-if="item.model == 'TIME'" href="time/{{item.id}}" style="color:white">{{item.amount}}</a>
+                                <a ng-if="item.model == 'TRANSACTION'" href="transaction/{{item.id}}" style="color:white">{{item.id}}</a>
                             </h1>
                         </div>
                     </div>
@@ -673,56 +675,96 @@
             </div>
 
             <div style="padding:16px;">
-                <div class="spacing-15"></div>
 
                 <div style="text-align:right;float:right">
-                    <i style="" ng-click="$event.stopPropagation();renderValidationToggle(item);" class="fa fa-eye"></i>
+                    <i style="" ng-click="$event.stopPropagation();" class="fa fa-eye"></i>
                     <i style="" ng-click="$event.stopPropagation();renderValidationToggle(item);" class="fas fa-bezier-curve"></i>
                     <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fas fa-coins"></i>
-                    <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-ellipsis-v"></i>
+                    <i style="" ng-click="$event.stopPropagation();cardDetailToggle(item);" class="fa fa-ellipsis-v"></i>
                 </div>
 
+                <div class="spacing-15"></div>
+
                 <div ng-if="item.model == 'CONTENT'">
+                    <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                        {{item.user.username}}
+                    </a>
                 </div>
 
                 <div ng-if="item.model == 'ITEM'">
+                    <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                        {{item.user.username}}
+                    </a>
                 </div>
 
                 <div ng-if="item.model == 'ORDER'">
+                    <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                        {{item.user.username}}
+                    </a>
                 </div>
 
                 <div ng-if="item.model == 'TASK'">
+                    <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                        {{item.user.username}}
+                    </a>
                 </div>
 
                 <div ng-if="item.model == 'TIME'">
-                    <h2><a href="time/{{item.id}}">{{item.amount}}</a></h2>
+                    <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                        {{item.user.username}}
+                    </a>
                 </div>
 
                 <div ng-if="item.model == 'TRANSACTION'">
+                    <div style="display:inline">
+                        <span ng-if="item.from.username">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                                <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
+                                {{item.from.username}}
+                            </a>
+                        </span>
+                        <span ng-if="item.from.title">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                                <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
+                                {{item.from.title}}
+                            </a>
+                        </span>
+                    </div>
+                    <div style="display:inline;padding-left:5px;padding-right:5px;">
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <div style="display:inline">
+                        <span ng-if="item.to.username">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
+                                <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
+                                {{item.to.username}}
+                            </a>
+                        </span>
+                        <span ng-if="item.to.title">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
+                                <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
+                                {{item.to.title}}
+                            </a>
+                        </span>
+                    </div>
+                    <div class="spacing-5"></div>
+                    <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                 </div>
-
                 <!--TAGS-->
                 <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                 <p ng-if="item.task.tags"><a ng-repeat="tag in item.task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
-
                 <div class="spacing-5"></div>
-
                 <!--LOCATION-->
-                <p ng-if="item.location"><a>{{item.location}}</a></p>
-
-                <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
-                    <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    {{item.user.username}}
-                </a>
-                
+                <p ng-if="item.location"><a>{{item.location.address}}, {{item.location.lat}}, {{item.location.lng}}</a></p> 
                 <div class="spacing-5"></div>
-
                 <span style="color:gray" am-time-ago="item.createdAt"></span>
-
                 <div class="spacing-10"></div>
-
                 <span ng-if="item.content" style="display:inline" ng-bind-html="renderContent(item.content)"></span>
-
             </div>
 
             <div style="background-color:#f9f9f9;height:100%">
@@ -1011,20 +1053,28 @@
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createTime()">
 
-                    <h5>Amount</h5>
-                    <input type="number" step="1" placeholder="Amount" ng-model="newTime.amount" class="form-control">
-                    <h5>Start Time</h5>
-                    <input type="datetime-local" step="1" placeholder="Start Time" ng-model="newTime.startTime" class="form-control">
-                    <h5>Tags</h5>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-                    </tags-input>
                     <h5>Associations (Task) <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
-                    <h5>Content</h5>
 
+                    <h5>Context (Tags)</h5>
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+
+                    <!--TYPE?-->
+                    <!--START TIMER UI UX??-->
+                    <h5>Type</h5>
+                    <p>RetroActive, Live</p>
+
+                    <h5>Start Time</h5>
+                    <input type="datetime-local" step="1" placeholder="Start Time" ng-model="newTime.startTime" class="form-control">
+
+                    <h5>Amount</h5>
+                    <input type="number" step="1" placeholder="Amount" ng-model="newTime.amount" class="form-control">
+
+                    <h5>Content</h5>
                     <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTime.amount">create</button>
 

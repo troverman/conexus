@@ -84,7 +84,6 @@ module.exports = {
 
 		//GET SESSION --> RN FRONTEND BAD SECURITY LEL
 		//MASSIVE AUDIT NEEDED 
-
 		var model = {
 			amount: req.param('amount'),
 			content: req.param('content'),

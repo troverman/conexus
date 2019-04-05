@@ -668,6 +668,7 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.tokensToggle = function(item){
+        $scope.closeAllNav();
         $scope.tokens = []
         if (item.tokens){$scope.tokens = item.tokens;}
         $mdSidenav('tokens').toggle();

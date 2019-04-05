@@ -20,7 +20,7 @@ angular.module( 'conexus.developers', [
     titleService.setTitle('Developers | CRE8.XYZ');
     $scope.results = '[{}]';
     $scope.newQuery = {};
-
+  
     $scope.apiCall = function(query){
         if (query.model == 'CONTENT'){
             ContentModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
@@ -164,11 +164,9 @@ angular.module( 'conexus.developers', [
     //    $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})
     //    $scope.graphData.links.push({value:1, source:0, target:length});
     //}
-
-
+    
 
     //DATA MODELS
-
     $scope.humanReadableValidationNFTModel = 'var humanReadableValidationNFTModel = '+JSON.stringify({ 
         string: 'MODEL+ADDRESS',
         information:{
@@ -184,6 +182,10 @@ angular.module( 'conexus.developers', [
         }
     }, null, 4);
 
+    $scope.protocolStructureModel = JSON.stringify({
+        create: "function(){return true}",
+        getSome: "function(){return true}"
+    }, null, 4);
 
     $scope.newOrderModel = 'var newOrderModel = '+JSON.stringify([{
             setAlpha:{UNIVERSALTOKEN:1},
@@ -492,5 +494,7 @@ angular.module( 'conexus.developers', [
         skip:0,
         sort:'createdAt DESC',
     }, null, 4);
+
+
 
 }]);

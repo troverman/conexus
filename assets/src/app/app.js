@@ -82,7 +82,7 @@ angular.module( 'conexus', [
     moment.locale('en');
 })
 .controller( 'AppCtrl', ['$rootScope', '$scope', 'config', function AppCtrl ( $rootScope, $scope, config ) {
-    
+
     config.currentUser = window.currentUser;
     $rootScope.currentUser = window.currentUser;
 

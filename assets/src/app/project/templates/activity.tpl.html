@@ -12,27 +12,6 @@
         </div>
     </div>
 
-    <!--
-    <div ng-show="activity.length > 0" class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
-        <div class="card">
-            <div style="padding:16px;">
-                <span><b>Tags</b></span>
-                <div ng-repeat="tag in sortedTagArray">
-                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div style="padding:16px;">
-                <span><b>Associations</b></span>
-                <div ng-repeat="tag in sortedTagArray">
-                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-
     <div ng-show="activity.length > 0" class="col-sm-12" style="padding-left:0px;padding-right:0px;">
         <ul style="padding:0px;" class="member-tabs mobileFix">
             <li class="mobileFix" style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
@@ -55,8 +34,8 @@
 
                     <div style="float:right">
                         <p style="text-align:right">
-                            <a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>
-                            <a ng-click="$event.stopPropagation();tokensToggle(item);"><i style="" class="fa fa-ellipsis-v"></i>
+                            <!--<a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>-->
+                            <a style="color:gray" ng-click="$event.stopPropagation();cardDetailToggle(item);"><i class="fa fa-ellipsis-v"></i></a>
                         </p>
                     </div>
 
@@ -105,8 +84,8 @@
 
                     <div style="float:right">
                         <p style="text-align:right">
-                            <a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>
-                            <a ng-click="$event.stopPropagation();tokensToggle(item);"><i style="" class="fa fa-ellipsis-v"></i></a>
+                            <!--<a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>-->
+                            <a style="color:gray" ng-click="$event.stopPropagation();cardDetailToggle(item);"><i class="fa fa-ellipsis-v"></i></a>
                         </p>
                     </div>
                    
@@ -135,7 +114,8 @@
 
                     <div style="float:right">
                         <p style="text-align:right">
-                            <a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>
+                            <!--<a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>-->
+                            <a style="color:gray" ng-click="$event.stopPropagation();cardDetailToggle(item);"><i class="fa fa-ellipsis-v"></i></a>
                             <a ng-click="$event.stopPropagation();tokensToggle(item);"><i style="" class="fa fa-ellipsis-v"></i></a>
                         </p>
                     </div>
@@ -176,8 +156,8 @@
 
                     <div style="float:right">
                         <p style="text-align:right">
-                            <a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>
-                            <a ng-click="$event.stopPropagation();tokensToggle(item);"><i style="" class="fa fa-ellipsis-v"></i></a>
+                            <!--<a ng-click="$event.stopPropagation();renderValidationToggle(item);"><i class="fas fa-bezier-curve"></i></a>-->
+                            <a style="color:gray" ng-click="$event.stopPropagation();cardDetailToggle(item);"><i class="fa fa-ellipsis-v"></i>
                         </p>
                     </div>
 
@@ -238,8 +218,8 @@
                 </div>
             </div>
 
-        </div>
-        
+        </div>  
+           
     </div>
 
 </div>
