@@ -277,7 +277,6 @@
                     <p style="color:gray;font-style:italic">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>
                     <p>transfer:</p>
                     <!--CRE8; RECIEVE; PROJECT.. USER--> 
-
                 </div>
 
                 <div class="spacing-10"></div>
@@ -299,6 +298,7 @@
                 <div id="MANIFOLD">
                     <p><b>MANIFOLD</b></h4>
                     <p style="color:gray;font-style:italic">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>
+                    
                     <!--
                     <p><b>+[] SPACE</b></p>
                     <p><b>Application Specific</b></p>
@@ -411,7 +411,6 @@
             </div>
             <div class="col-sm-6">
                 <!--<div class="bootstrapHack">
-                    
                 </div>-->
             </div>
         </div>
@@ -483,22 +482,9 @@
                     <p style="color:gray;font-style:italic">Project <--> Task <--> Time
                     <p style="color:gray;font-style:italic"> Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
                     <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
-
-                    <div hljs hljs-language="javascript">
-var associationModel = {
-    associatedModels: [
-        {type:'MODELTYPE', address:ADDRESS},
-        {type:'MODELTYPE', address:ADDRESS}
-    ],
-    context: {
-        [title]:weight
-    }
-};</div>
-
                     <img src="https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711">
                     <p style="color:gray;font-style:italic">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>
                     <p><b>get /api/assoication</b></p>
-
                 </div>
 
                 <div class="spacing-50"></div>
@@ -549,7 +535,6 @@ var associationModel = {
                     nonce: {type: 'string'},-->
 
                     <div>
-
                        <p><b>txCount:</b> 'integer' the number of transactions in the block</p> 
                        <p><b>height:</b> 'integer' </p> 
                        <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> 
@@ -558,7 +543,6 @@ var associationModel = {
                        <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> 
                        <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> 
                        <p><b>size:</b> 'integer' the data size of the block</p> 
-
                     </div>
                     <p><b>get /api/block</b></p>
                 </div>
@@ -569,7 +553,6 @@ var associationModel = {
                     <h4><b>Content</b></h4>
                     <p style="color:gray;font-style:italic">Content is information. (with context)</p>
                     <div hljs hljs-language="javascript"  hljs-source="contentModel"></div>
-
                     <div>
                         <p><b>Title:</b> Title of Content is a String</p>
                         <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>
@@ -581,25 +564,9 @@ var associationModel = {
                         <p><b>Creator:</b> Address, Member or Project, who created Content</p>
                         <p><b>CreatedAt:</b> Timestamp of Creation</p>
                     </div>
-
                     <div>
                         <p style="color:gray;font-style:italic">Creating a Content Query</p>
-                        <div hljs hljs-language="javascript">
-var query = {
-    filter:[{
-        id: 'equals': '',
-        title: 'contains': '',
-        tags: 'contains': '',
-        type: 'equals' : '',
-        location: [lat,lng,distance],
-        associatedModels: 'contains': {},
-        reactions: 'contains': {},
-        createdAt: 'lessThan': today,
-    }],
-    limit: 1,
-    skip:0,
-    sort:'createdAt DESC',
-};</div>
+                        <div hljs hljs-language="javascript"  hljs-source="contentQuery"></div>
                         <p><b>[get, post] /api/content</b></p>
                         <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
 
@@ -611,19 +578,14 @@ var query = {
                                 <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
                             </div>
                         </form>
-
                         <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
                         <div class="spacing-5"></div>
-
                         <div hljs hljs-language="javascript" hljs-source="results"></div>
-
                     </div>
                 </div>
 
-
-
-                <!--TODO: DATA AND EVENTS
-
+                <!--TODO: DATA AND EVENTS-->
+                <!--
                 <div class="spacing-50"></div>
 
                 <div>
@@ -648,21 +610,11 @@ var query = {
                 <div id="FOLLOWER">
                     <h4><b>Follower</b></h4>
                     <p style="color:gray;font-style:italic">Followers are .. </p>
-                    <div hljs hljs-language="javascript">
-var followerModel = {
-    id: {type: 'string'},
-    followed: {
-        model: 'user',
-    },
-    follower: {
-        model: 'user',
-    }
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="followerModel"></div>
                     <div>
                         <p><b>Followed:</b> TBD</p> 
                         <p><b>Follower:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/follower</b></p>
                 </div>
 
@@ -671,23 +623,7 @@ var followerModel = {
                 <div id="ITEM">
                     <h4><b>Item</b></h4>
                     <p style="color:gray;font-style:italic">Items .. provide depth to the capibilities of string based tokenization </p>
-                    <div hljs hljs-language="javascript">
-var itemModel = {
-    id: {type: 'string'},
-    title: {type: 'string'},
-    content: {type: 'string'},
-    tags: {type: 'string'},
-    associatedModels: {type: 'json'},
-    reactions: {type: 'json'},
-    location: {type: 'json'},
-    info: {type: 'json'}, //FORSALE, FORLEASE
-        //PRICE, LEASE TIME.. .ETC
-        //identifierSet: {type: 'string'},
-        //amountSet: {type: 'string'},
-    user: {model: 'user'},
-    owner: {type: 'json'}
-};</div>    
-
+                    <div hljs hljs-language="javascript"  hljs-source="itemModel"></div>
                     <div>
                         <p><b>Title:</b> TBD</p> 
                         <p><b>Content:</b> TBD</p> 
@@ -697,11 +633,10 @@ var itemModel = {
                         <p><b>Info:</b> TBD</p> 
                         <p><b>Owner:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/item</b></p>
-
                 </div>
 
+                <!--TODO: LOCATION-->
                 <!--
                 <div class="spacing-50"></div>
                 <div>
@@ -718,44 +653,7 @@ var itemModel = {
                 <div id="MEMBER">
                     <h4><b>Member</b></h4>
                     <p style="color:gray;font-style:italic">This is the Member Model</p>
-                    <div hljs hljs-language="javascript">
-var memberModel = {
-    id: {type: 'string'},
-
-    avatarUrl: {type: 'string',},
-    coverUrl: {type: 'string'},
-    email: {type: 'email',},
-    username: {type: 'string',},
-
-    //INFO
-    firstName: {type: 'string'},
-    lastName: {type: 'string'},
-    dateOfBirth: {type: 'string'},
-    address: {type: 'string'},
-
-    //STATUS
-    loggedIn: {type: 'boolean'},
-    isWorking: {type: 'boolean'},
-    isLive: {type: 'boolean'},
-    status: {type: 'string'},
-
-    //COUNTS
-    followingCount: {type: 'integer'},
-    followerCount: {type: 'integer'},
-    notificationCount: {type: 'integer'},
-    projectCount: {type: 'integer'},
-    totalWork: {type: 'integer'},
-
-    //MAPPINGS
-    reputation: {type: 'json'},
-    balance: {type: 'json'},
-    locationTime: {type: 'json'},
-
-    //PASSPORT
-    passports: { collection: 'Passport', via: 'user' }
-
-};</div>
-
+                    <div hljs hljs-language="javascript"  hljs-source="memberModel"></div>
                     <div>
                         <p><b>avatarUrl:</b> TBD</p> 
                         <p><b>coverUrl:</b> TBD</p> 
@@ -766,7 +664,6 @@ var memberModel = {
                         <p><b>Reputation:</b> TBD</p> 
                         <p><b>Location:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/member</b></p>
                 </div>
 
@@ -786,14 +683,7 @@ var memberModel = {
                     <p style="color:gray;font-style:italic">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action. A Motion is a Nested Validation .. in creating a motion one is validating an action. On Validation of a Motion (Nested Validation) an Action is created.</p>
                     <!--COMBINE MOTION AND VALIDATION..-->
                     <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->
-                    <div hljs hljs-language="javascript">
-var motionModel = {
-    id: {type: 'string'},
-    string: {type: 'string'},
-    protocols:{type:'json'},
-    logic:{type:'json'},
-    information:{type:'json'}
-};</div>        
+                    <div hljs hljs-language="javascript">var motionModel = {};</div>        
                     <p><b>[get,post] /api/motion</b></p>
                 </div>
 
@@ -803,16 +693,7 @@ var motionModel = {
                     <h4><b>Notification</b></h4>
                     <p style="color:gray;font-style:italic">This is the Notification Model. Notifications have privacy permission qualifiers.</p>
                     <p><b>get /api/notification</b></p>
-                    <div hljs hljs-language="javascript">
-var notificationModel = {
-    id: {type: 'string'},
-    user: {model: 'user'},
-    type: {type: 'string'},
-    content: {type: 'string'},
-    priority: { type: 'string'},
-    isRead: { type: 'boolean'}
-};</div>
-
+                    <div hljs hljs-language="javascript"  hljs-source="notificationModel"></div>
                     <div>
                         <p><b>Priority:</b> TBD</p> 
                         <p><b>Type:</b> TBD</p> 
@@ -820,7 +701,6 @@ var notificationModel = {
                         <p><b>isRead:</b> TBD</p> 
                         <p><b>User:</b> TBD</p> 
                     </div>
-
                     <p><b>get /api/notification</b></p>
                 </div>
 
@@ -830,38 +710,21 @@ var notificationModel = {
                     <h4><b>Order</b></h4>
                     <p style="color:gray;font-style:italic">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>
                     <p style="color:gray;font-style:italic">The Anatomy of an Order</p>
-                    <div hljs hljs-language="javascript">
-var orderModel = {
-    id: {type: 'string'},
-    creator: {type: 'string'},
-    status: {type: 'string'},
-    type: {type: 'string'},
-    setAlpha: {type:'json'},
-    setBeta: {type:'json'},
-    createdAt: {type: 'string'},
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="orderModel"></div>
                     <div>
                         <p><b>setAlpha</b>: [{assetIdentifier: amount}, ...]</p>
                         <p><b>setBeta</b>: [{assetIdentifier: amount}, ...]</p>
                         <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>
                         <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>
                     </div>
-
                     <p><b>[get, post] /api/order</b></p>
                     <p>curl https://www.cre8.xyz/api/order?limit=1&skip=0</p>
-
                     <div>
-                        <div hljs hljs-language="javascript">
-var query = {
-    limit: 10,
-    skip:0,
-    sort:'createdAt DESC',
-};</div>
+                        <div hljs hljs-language="javascript"  hljs-source="orderQuery"></div>
                         <button ng-click="apiCall({model:'ORDER',limit:1,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Order</button>
                         <div class="spacing-5"></div>
                         <div hljs hljs-language="javascript" hljs-source="results"></div>
                     </div>
-
                 </div>
 
                 <div class="spacing-50"></div>
@@ -869,16 +732,7 @@ var query = {
                 <div id="PASSPORT">
                     <h4><b>Passport</b></h4>
                     <p style="color:gray;font-style:italic">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>
-                    <div hljs hljs-language="javascript">
-var passportModel = {
-    id: {type: 'string'},
-    protocol: { type: 'alphanumeric'},
-    password: { type: 'string', minLength: 8 },
-    provider: { type: 'alphanumericdashed' },
-    identifier: { type: 'string' },
-    tokens: { type: 'json' },
-    user: { model: 'User',}
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
                     <div>
                         <p><b>protocol:</b> TBD</p> 
                         <p><b>password:</b> TBD</p> 
@@ -904,20 +758,7 @@ var passportModel = {
                 <div id="PROJECT">
                     <h4><b>Project</b></h4>
                     <p style="color:gray;font-style:italic">Projects are organized groups of members with self governing principles; a charter.</p>
-                    <div hljs hljs-language="javascript">
-var projectModel = {
-    id: {type: 'string'},
-    title: {type: 'string'},
-    description: {type: 'string'},
-    avatarUrl: {type: 'string'},
-    urlTitle: {type: 'string'},
-    stringManifold: {type: 'string'},
-    tags: {type: 'string'},
-    location: {type: 'json'},
-    associatedModels: {type: 'json'},
-    user: {model: 'user'},
-    info: {type: 'json'},
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="projectModel"></div>
                     <div>
                         <p><b>title:</b> TBD</p> 
                         <p><b>description:</b> TBD</p> 
@@ -930,24 +771,18 @@ var projectModel = {
                         <p><b>user:</b> TBD</p> 
                         <p><b>info:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/project</b></p>
                 </div>
 
                 <div class="spacing-50"></div>
 
                 <div id="PROJECTCHARTER">
-
                     <h4><b>ProjectCharter</b></h4>
                     <p style="color:gray;font-style:italic">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations. from initial conditions to reputationatation decay.</p>
-
                     <p style="color:gray;font-style:italic">Reputation & Verification Dimensions</p>
                     <p style="color:gray;font-style:italic">Validation Types</p>
-
                     <div hljs hljs-language="javascript"  hljs-source="projectCharterModel"></div>
-
                     <p><b>[get, post] /api/projectcharter</b></p>
-
                 </div>
 
                 <div class="spacing-50"></div>
@@ -955,12 +790,7 @@ var projectModel = {
                 <div id="PROJECTMEMBER">
                     <h4><b>ProjectMember</b></h4>
                     <p style="color:gray;font-style:italic">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>
-                    <div hljs hljs-language="javascript">
-var projectMemberModel = {
-    id: {type: 'string'},
-    project: {model: 'project'},
-    user: {model: 'user'},
-};</div>
+                    <div hljs hljs-language="javascript">var projectMemberModel = {id: {type: 'string'},project: {model: 'project'},user: {model: 'user'}};</div>
                     <p><b>[get, post] /api/projectmember</b></p>
                 </div>
                 
@@ -970,10 +800,9 @@ var projectMemberModel = {
                     <h4><b>Protocol</b></h4>
                     <p style="color:gray;font-style:italic">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>
                     <div hljs hljs-language="javascript">
-//ABSTRACTION OF ABSTRACTION WORKING WITH CRE8 DECENTRALIZED VM
-var protocolModel = {
-    //ANY COMPILABLE CODE
-};</div>
+                        //ABSTRACTION OF ABSTRACTION WORKING WITH CRE8 DECENTRALIZED VM
+                        var protocolModel = {//ANY COMPILABLE CODE};
+                    </div>
                     <p><b>[get, post] /api/protocol</b></p>
                 </div>
 
@@ -982,15 +811,7 @@ var protocolModel = {
                 <div id="REACTION">
                     <h4><b>Reaction</b></h4>
                     <p style="color:gray;font-style:italic">Reaction is .. </p>
-                    <div hljs hljs-language="javascript">
-var reactionModel = {
-    id: {type: 'string'},
-    amount: {type: 'string'},
-    type: {type: 'string'},
-    user: {model: 'user'},
-    associatedModels: {type: 'json'},
-    reactions: {type: 'json'}
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="reactionModel"></div>
                     <div>
                         <p><b>amount:</b> TBD</p> 
                         <p><b>type:</b> TBD</p> 
@@ -998,7 +819,6 @@ var reactionModel = {
                         <p><b>associatedModels:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/reaction</b></p>
                 </div>
 
@@ -1007,32 +827,22 @@ var reactionModel = {
                 <div id="SEARCH">
                     <h4><b>Search</b></h4>
                     <p style="color:gray;font-style:italic">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>
-                    <div hljs hljs-language="javascript">
-var searchModel = {
-    filter:[{
-        obj: param
-        model: 'CONTENT' //MEMBER,TASK,TIME,PROJECT...//model information is stored in model. 
-    }],
-    limit: 10,
-    skip: 0,
-    sort: 'createdAt DESC'
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="searchModel"></div>
                     <div>
                         <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>
                     </div>
-
-    <!--
-    $rootScope.searchQueryNav = {
-        assetsInput:[],
-        assetsOutput:[],
-        associations:[],
-        model:[],
-        locations:[],
-        query:[],
-        tags:[],
-        type:[],
-    };
-    -->
+                    <!--
+                    $rootScope.searchQueryNav = {
+                        assetsInput:[],
+                        assetsOutput:[],
+                        associations:[],
+                        model:[],
+                        locations:[],
+                        query:[],
+                        tags:[],
+                        type:[],
+                    };
+                    -->
                     <p><b>get /api/search</b></p>
                 </div>
 
@@ -1042,18 +852,7 @@ var searchModel = {
                     <h4><b>Task</b></h4>
                     <p style="color:gray;font-style:italic">Tasks are a relay of context. Layers of validation intention create association. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>
                     <p style="color:gray;font-style:italic">crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>
-                    <div hljs hljs-language="javascript">
-var taskModel = {
-    id: {type: 'string'},
-    title: {type: 'string'},
-    content: {type: 'string'},
-    location: {type: 'json'},
-    tags: {type: 'string'},
-    user: {model: 'user'},
-    associatedModels: {type: 'json'},
-    reactions: {type: 'json'}
-};</div>
-
+                    <div hljs hljs-language="javascript"  hljs-source="taskModel"></div>
                     <div>
                         <p><b>title:</b> TBD</p> 
                         <p><b>content:</b> TBD</p> 
@@ -1063,7 +862,6 @@ var taskModel = {
                         <p><b>associatedModels:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/task</b></p>
                 </div>
 
@@ -1072,31 +870,16 @@ var taskModel = {
                 <div id="TIME">
                     <h4><b>Time</b></h4>
                     <p style="color:gray;font-style:italic">Time & intention is the foundation of energy. Time is the base of CRE8.</p>
-                    <div hljs hljs-language="javascript">
-var timeModel = {
-    id: {type: 'string'},
-    amount: {type: 'string'},
-    content: {type: 'string'},
-    startTime: {type: 'string'},
-    tags: {type: 'string'},
-    user: {model: 'user'},
-    associatedModels: {type: 'json'},
-    location: {type: 'json'},
-    reactions: {type: 'json'}
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="timeModel"></div>
                     <div>
-
                         <p><b>amount:</b> TBD</p> 
                         <p><b>startTime:</b> TBD</p> 
-                        
                         <p><b>content:</b> TBD</p> 
                         <p><b>tags:</b> TBD</p> 
                         <p><b>associatedModels:</b> TBD</p> 
                         <p><b>location:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
-
                     </div>
-
                     <p><b>[get, post] /api/time</b></p>
                 </div>
 
@@ -1105,16 +888,7 @@ var timeModel = {
                 <div id="TOKEN">
                     <h4><b>Token</b></h4>
                     <p style="color:gray;font-style:italic">A token is a discrete piece of information with the following properties:</p>
-                    <div hljs hljs-language="javascript">
-//--> BALANCE MAPPING
-//--> INFORMATION MAPPING
-//--> PROTOCOL MAPPING
-var tokenModel = {
-    string: {type: 'string'},
-    protocols:{type:'json'},
-    logic:{type:'json'},
-    information:{type:'json'}
-};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="tokenModel"></div>
                     <p><b>get /api/token</b></p>
                 </div>
                 
@@ -1123,16 +897,7 @@ var tokenModel = {
                 <div id="TRANSACTION">
                     <h4><b>Transaction</b></h4>
                     <p style="color:gray;font-style:italic">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>
-                    <div hljs hljs-language="javascript">
-var transactionModel = {
-    id: string
-    to: address,
-    from: address,
-    amountSet: {"ASSETSTRING": 10, "CRE8":1},
-    tags: 'comma,seperated,tag,string',
-    content: 'transation content'
-};</div>
-
+                    <div hljs hljs-language="javascript"  hljs-source="transactionModel"></div>
                     <div>
                         <p><b>to:</b> TBD</p> 
                         <p><b>from:</b> TBD</p> 
@@ -1142,23 +907,14 @@ var transactionModel = {
                         <p><b>location:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
                     </div>
-
                     <p><b>[get, post] /api/transaction</b></p>
                     <p>curl https://www.cre8.xyz/api/transaction?limit=1&skip=0</p>
-
                     <div>
-                        <div hljs hljs-language="javascript">
-var query = {
-    limit: 10,
-    skip:0,
-    sort:'createdAt DESC',
-};</div>
+                        <div hljs hljs-language="javascript"  hljs-source="transactionQuery"></div>
                         <button ng-click="apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Transaction</button>
                         <div class="spacing-5"></div>
                         <div hljs hljs-language="javascript" hljs-source="results"></div>
                     </div>
-
-
                 </div>
 
                 <div class="spacing-50"></div>
@@ -1166,23 +922,13 @@ var query = {
                 <div id="TX">
                     <h4><b>Tx</b></h4>
                     <p style="color:gray;font-style:italic">Every state update in the CRE8 virtual machine is represented by a transaction or tx. Blocks are machine verified bundles of txs.</p>
-                    <div hljs hljs-language="javascript">
-var txModel = {
-    addressFrom: {type: 'string'},
-    addressTo: {type: 'string'},
-    data: {type: 'string'}
-};</div>
-                    <div>
-
+                        <div hljs hljs-language="javascript"  hljs-source="txModel"></div>
                         <!--<p>VERY IMPORTANT</p>
                         <p>CREATE VM HERE.. THE STATE IS KEPT BY DATA IN TX.. (TX - BLOCK)</p>-->
-
                         <p><b>addressFrom:</b> TBD</p> 
                         <p><b>addressTo:</b> TBD</p> 
                         <p><b>Data:</b> TBD</p> 
-
                     </div>
-
                     <p><b>get /api/tx</b></p>
                 </div>
 
@@ -1192,20 +938,7 @@ var txModel = {
                     <h4><b>Validation</b></h4>
                     <p style="color:gray;font-style:italic">Like Votes, the building block for group agreement - consensus and decision making. 
                     <p style="color:gray;font-style:italic">The Anatomy of a Validation</p>
-
-                   <div hljs hljs-language="javascript">
-var validationModel = {
-    id: {type: 'string'},
-    associatedModels: {type: 'json'},
-    content: {type: 'string'},
-    createdAt: {type: 'string'},
-    reputation: {type: 'json'},
-    type: {type: 'json'},
-    user: {model: 'user'},
-    validation: {type: 'json'},
-    validationModels: {type: 'json'},
-};</div>
-
+                    <div hljs hljs-language="javascript"  hljs-source="validationModel"></div>
                     <div>
                         <p><b>Reputation:</b> {context:reputationInt}, Reputation is used as a multiplier for association computation via the Project Charter</p>
                         <p><b>Validation:</b> {context:validationInt}</p>
@@ -1216,7 +949,6 @@ var validationModel = {
                     </div>
 
                     <p>Reputation & Validation</p>
-
                     <p>Interoperable Validation Types</p>
                     <p>Composite Validation (CRE8), Human Validated Proof of Work, Machine Validation, and App Specific Validation</p>
 
@@ -1233,19 +965,12 @@ var validationModel = {
 
                     <p><b>[get, post] /api/validation</b></p>
                     <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>
-
                     <div>
-                        <div hljs hljs-language="javascript">
-var query = {
-    limit: 10,
-    skip:0,
-    sort:'createdAt DESC',
-};</div>
+                        <div hljs hljs-language="javascript"  hljs-source="validationQuery"></div>
                         <button ng-click="apiCall({model:'VALIDATION',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Validation</button>
                         <div class="spacing-5"></div>
                         <div hljs hljs-language="javascript" hljs-source="results"></div>
                     </div>
-
                 </div>
 
             </div>
@@ -1303,17 +1028,7 @@ var query = {
         <div class="row">
             <div class="col-sm-8">  
                 <p style="color:gray;font-style:italic">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>
-                <div hljs hljs-language="javascript">
-var passportModel = {
-    id: {type: 'string'},
-    protocol: { type: 'alphanumeric'},
-    password: { type: 'string', minLength: 8 },
-    provider: { type: 'alphanumericdashed' },
-    identifier: { type: 'string' },
-    tokens: { type: 'json' },
-    user: { model: 'User',}
-};</div>
-
+                <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
                 <p><b>[get, post] /api/passport</b></p>
                 <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>
             </div>

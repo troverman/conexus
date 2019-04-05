@@ -225,9 +225,8 @@ angular.module( 'conexus.developers', [
 
 
     //MODELS..
-
     //HEADERS IN HTML.. GENERATE TOKEN.. PASSPORT.. 
-    
+
     $scope.metaModel = 'var filter = '+JSON.stringify({
         filter:[{
             'obj': 'param'
@@ -254,8 +253,13 @@ angular.module( 'conexus.developers', [
     }, null, 4);
 
     $scope.associationModel = 'var associationModel = '+JSON.stringify({
-        address: {type: 'string'},
-        protocols: {},
+        associatedModels: [
+            {type:"MODELTYPE", address:"ADDRESS"},
+            {type:"MODELTYPE", address:"ADDRESS"}
+        ],
+        context: {
+            "dimension":"weight",
+        }
     }, null, 4);
 
     $scope.blockModel = 'var blockModel = '+JSON.stringify({
@@ -282,11 +286,211 @@ angular.module( 'conexus.developers', [
         createdAt: {type: 'datetime'},
     }, null, 4);
 
+    $scope.contentQuery = 'var query = '+JSON.stringify({
+        filter:[{
+            id: {'equals': ''},
+            title: {'contains': ''},
+            tags: {'contains': ''},
+            type: {'equals' : ''},
+            location: ['lat','lng','distance'],
+            associatedModels: {'contains': {}},
+            reactions: {'contains': {}},
+            createdAt: {'lessThan': 'today'},
+        }],
+        limit: 1,
+        skip:0,
+        sort:'createdAt DESC',
+    }, null, 4);
+
+    $scope.followerModel = 'var followerModel = '+JSON.stringify({
+        id: {type: 'string'},
+        followed: {
+            model: 'user',
+        },
+        follower: {
+            model: 'user',
+        }
+    }, null, 4);
+
+    $scope.itemModel = 'var itemModel = '+JSON.stringify({
+        id: {type: 'string'},
+        title: {type: 'string'},
+        content: {type: 'string'},
+        tags: {type: 'string'},
+        associatedModels: {type: 'json'},
+        reactions: {type: 'json'},
+        location: {type: 'json'},
+        info: {type: 'json'},
+        user: {model: 'user'},
+        owner: {type: 'json'}
+    }, null, 4);
+
+    $scope.memberModel = 'var memberModel = '+JSON.stringify({
+        id: {type: 'string'},
+        avatarUrl: {type: 'string',},
+        coverUrl: {type: 'string'},
+        email: {type: 'email',},
+        username: {type: 'string',},
+        firstName: {type: 'string'},
+        lastName: {type: 'string'},
+        dateOfBirth: {type: 'string'},
+        address: {type: 'string'},
+        loggedIn: {type: 'boolean'},
+        isWorking: {type: 'boolean'},
+        isLive: {type: 'boolean'},
+        status: {type: 'string'},
+        followingCount: {type: 'integer'},
+        followerCount: {type: 'integer'},
+        notificationCount: {type: 'integer'},
+        projectCount: {type: 'integer'},
+        totalWork: {type: 'integer'},
+        reputation: {type: 'json'},
+        balance: {type: 'json'},
+        locationTime: {type: 'json'},
+        passports: { collection: 'Passport', via: 'user' }
+    }, null, 4);
+
+    $scope.notificationModel = 'var notificationModel = '+JSON.stringify({
+        id: {type: 'string'},
+        user: {model: 'user'},
+        type: {type: 'string'},
+        content: {type: 'string'},
+        priority: { type: 'string'},
+        isRead: { type: 'boolean'}
+    }, null, 4);
+
+    $scope.orderModel = 'var orderModel = '+JSON.stringify({
+        id: {type: 'string'},
+        creator: {type: 'string'},
+        status: {type: 'string'},
+        type: {type: 'string'},
+        setAlpha: {type:'json'},
+        setBeta: {type:'json'},
+        createdAt: {type: 'string'},
+    }, null, 4);
+
+     $scope.orderQuery = 'var query = '+JSON.stringify({
+        limit: 10,
+        skip:0,
+        sort:'createdAt DESC',
+    }, null, 4);
+
+    $scope.passportModel = 'var passportModel = '+JSON.stringify({
+        id: {type: 'string'},
+        protocol: { type: 'alphanumeric'},
+        password: { type: 'string', minLength: 8 },
+        provider: { type: 'alphanumericdashed' },
+        identifier: { type: 'string' },
+        tokens: { type: 'json' },
+        user: { model: 'User',}
+    }, null, 4);
+
+     $scope.projectModel = 'var projectModel = '+JSON.stringify({
+        id: {type: 'string'},
+        title: {type: 'string'},
+        description: {type: 'string'},
+        avatarUrl: {type: 'string'},
+        urlTitle: {type: 'string'},
+        stringManifold: {type: 'string'},
+        tags: {type: 'string'},
+        location: {type: 'json'},
+        associatedModels: {type: 'json'},
+        user: {model: 'user'},
+        info: {type: 'json'},
+    }, null, 4);
+
     $scope.projectCharterModel = 'var projectCharterModel = '+JSON.stringify({
         id: {type: 'string'},
         project: {type: 'string'},
         info: {type: 'json'},
     }, null, 4);
 
+    $scope.reactionModel = 'var reactionModel = '+JSON.stringify({
+        id: {type: 'string'},
+        amount: {type: 'string'},
+        type: {type: 'string'},
+        user: {model: 'user'},
+        associatedModels: {type: 'json'},
+        reactions: {type: 'json'}
+    }, null, 4);
+
+    $scope.searchModel = 'var searchModel = '+JSON.stringify({
+        filter:[{
+            obj: 'param',
+            model: 'CONTENT'
+        }],
+        limit: 10,
+        skip: 0,
+        sort: 'createdAt DESC'
+    }, null, 4);
+
+    $scope.taskModel = 'var taskModel = '+JSON.stringify({
+        id: {type: 'string'},
+        title: {type: 'string'},
+        content: {type: 'string'},
+        location: {type: 'json'},
+        tags: {type: 'string'},
+        user: {model: 'user'},
+        associatedModels: {type: 'json'},
+        reactions: {type: 'json'}
+    }, null, 4);
+
+    $scope.timeModel = 'var timeModel = '+JSON.stringify({
+        id: {type: 'string'},
+        amount: {type: 'string'},
+        content: {type: 'string'},
+        startTime: {type: 'string'},
+        tags: {type: 'string'},
+        user: {model: 'user'},
+        associatedModels: {type: 'json'},
+        location: {type: 'json'},
+        reactions: {type: 'json'}
+    }, null, 4);
+
+    $scope.tokenModel = 'var tokenModel = '+JSON.stringify({
+        string: {type: 'string'},
+        protocols:{type:'json'},
+        logic:{type:'json'},
+        information:{type:'json'}
+    }, null, 4);
+
+    $scope.transactionModel = 'var transactionModel = '+JSON.stringify({
+        id: 'string',
+        to: 'address',
+        from: 'address',
+        amountSet: {"ASSETSTRING": 10, "CRE8":1},
+        tags: 'comma,seperated,tag,string',
+        content: 'transation content'
+    }, null, 4);
+
+    $scope.transactionQuery = 'var query = '+JSON.stringify({
+        limit: 10,
+        skip:0,
+        sort:'createdAt DESC',
+    }, null, 4);
+
+    $scope.txModel = 'var txModel = '+JSON.stringify({
+        addressFrom: {type: 'string'},
+        addressTo: {type: 'string'},
+        data: {type: 'string'}
+    }, null, 4);
+
+    $scope.validationModel = 'var validationModel = '+JSON.stringify({
+        id: {type: 'string'},
+        associatedModels: {type: 'json'},
+        content: {type: 'string'},
+        createdAt: {type: 'string'},
+        reputation: {type: 'json'},
+        type: {type: 'json'},
+        user: {model: 'user'},
+        validation: {type: 'json'},
+        validationModels: {type: 'json'},
+    }, null, 4);
+
+    $scope.validationQuery = 'var query = '+JSON.stringify({
+        limit: 10,
+        skip:0,
+        sort:'createdAt DESC',
+    }, null, 4);
 
 }]);
