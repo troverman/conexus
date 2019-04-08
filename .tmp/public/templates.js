@@ -7,6 +7,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
+    "                <!--HIGHER DIMENSIONAL PERSPECTIVES-->\n" +
     "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING NEW VALUE\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
@@ -2670,7 +2671,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			</div>\n" +
     "\n" +
     "			<div class=\"card\">\n" +
-    "		        <!--\n" +
     "		        <div style=\"padding:16px;\">\n" +
     "		            <span><b>Models</b></span>\n" +
     "				    <b><a href=\"/content\">Content</a></b>\n" +
@@ -2678,23 +2678,14 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "					<b><a href=\"/members\">Members</a></b>\n" +
     "					<b><a href=\"/market\">Orders</a></b>\n" +
     "					<b><a href=\"/projects\">Projects</a></b>\n" +
+    "					<!--\n" +
+    "					<li><a href=\"\">Reactions</a></li>\n" +
+    "					<li><a href=\"\">Time</a></li>\n" +
+    "					<li><a href=\"\">Transactions</a></li>\n" +
+    "					-->\n" +
     "					<b><a href=\"/tasks\">Tasks</a></b>\n" +
     "		        </div>\n" +
-    "		    	-->\n" +
-    "		        <ul style=\"padding:16px;\" class=\"member-tabs\">\n" +
-    "					<li><a href=\"/content\">Content</a></li>\n" +
-    "					<li><a href=\"/marketplace\">Items</a></li>\n" +
-    "					<li><a href=\"/members\">Members</a></li>\n" +
-    "					<li><a href=\"/market\">Orders</a></li>\n" +
-    "					<li><a href=\"/projects\">Projects</a></li>\n" +
-    "					<!--<li><a href=\"\">Reactions</a></li>-->\n" +
-    "					<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "					<!--<li><a href=\"\">Time</a></li>\n" +
-    "					<li><a href=\"\">Transactions</a></li>-->\n" +
-    "				</ul>\n" +
-    "\n" +
     "		    </div>\n" +
-    "\n" +
     "			<div class=\"card\">\n" +
     "		        <div style=\"padding:16px;\">\n" +
     "		            <span><b>Tags</b></span>\n" +
@@ -2739,16 +2730,22 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "    	<div class=\"col-md-6\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "			<div ng-repeat=\"item in tasks.slice(0,10)\">\n" +
     "				<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
+    "					<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "	                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "	                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "	                            <div class=\"container\">\n" +
+    "	                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "	                            </div>\n" +
+    "	                        </div>\n" +
+    "	                    </div>\n" +
+    "	                </div>\n" +
     "					<div style=\"padding:16px;\">\n" +
     "		                <div style=\"float:right;text-align:right\">\n" +
-    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>\n" +
-    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "		                </div>\n" +
-    "						<h4><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +
     "						<p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
     "		            	<p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "						<span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
-    "\n" +
     "					</div>\n" +
     "					<div class=\"card-footer\">\n" +
     "						<a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -2765,7 +2762,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "</div>\n" +
     "\n" +
     "<!--\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "		<div style=\"padding:16px;\">\n" +
@@ -2780,7 +2776,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		</div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "		<div style=\"padding:16px;\">\n" +
@@ -2795,7 +2790,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		</div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"card\" ng-click=\"\">\n" +
     "    	<div style=\"max-height:200px;overflow:hidden\">\n" +
@@ -2833,10 +2827,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		</div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "-->\n" +
-    "\n" +
-    "\n" +
     "<div class=\"spacing-50\"></div>");
 }]);
 
@@ -7080,7 +7071,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                    <h5>Associations (Task) <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
     "                    <h5>Context (Tags)</h5>\n" +

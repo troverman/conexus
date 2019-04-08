@@ -1143,8 +1143,8 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO! IMPORTANT
-    $scope.loadAssociations = function(query){
 
+    $scope.loadAssociationsOld = function(query){
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
 
@@ -1157,6 +1157,8 @@ angular.module( 'conexus.nav', [
                 obj.text = obj.username
                 return obj;
             }); */
+
+            console.log(query)
             ProjectModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(projectSearchModels){
                 projectSearchModels.map(function(obj){
                     obj.type='PROJECT';
@@ -1177,6 +1179,20 @@ angular.module( 'conexus.nav', [
             });
            //deferred.resolve(userSearchModels);
         //});
+        return deferred.promise;
+    };
+
+    $scope.loadAssociationsTask = function(query){
+        var deferred = $q.defer();
+        console.log(query);
+        TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
+            taskSearchModels = taskSearchModels.map(function(obj){
+                obj.type='TASK';
+                obj.text=obj.title;
+                return obj;
+            });
+            deferred.resolve(taskSearchModels);
+        });
         return deferred.promise;
     };
 
