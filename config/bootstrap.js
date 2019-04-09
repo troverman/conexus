@@ -5,8 +5,9 @@ module.exports.bootstrap = function(cb) {
 	//intervalService.getData();
 	//dataService.getData();
 	
-	dataService.traverse();
-	
+	//POPULATE TOKENZ
+	setInterval(dataService.traverse, 8640000);
+
 	//dataService.tensorBuild();
 
 	//DEF PRE ALPHA. 

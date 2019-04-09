@@ -603,7 +603,6 @@
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="render" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             
-
             <div class="spacing-25"></div>
             <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -612,6 +611,7 @@
                             <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">
                                 <a ng-if="item.model == 'CONTENT'" href="content/{{item.id}}" style="color:white">{{item.title}}</a>
                                 <a ng-if="item.model == 'ITEM'" href="item/{{item.id}}" style="color:white">{{item.title}}</a>
+                                <a ng-if="item.model == 'MARKET'" href="market/{{item.string}}" style="color:white">{{item.string}}</a>
                                 <a ng-if="item.model == 'ORDER'" href="order/{{item.id}} style="color:white"">{{item.title}}</a>
                                 <a ng-if="item.model == 'PROJECT'" href="project/{{item.urlTitle}}" style="color:white">{{item.title}}</a>
                                 <a ng-if="item.model == 'TASK'" href="task/{{item.id}}" style="color:white">{{item.title}}</a>
@@ -646,6 +646,10 @@
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                         {{item.user.username}}
                     </a>
+                </div>
+
+                <div ng-if="item.model == 'MARKET'">
+                    <highchart config="bidAskChart"></highchart>
                 </div>
 
                 <div ng-if="item.model == 'ORDER'">

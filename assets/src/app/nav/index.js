@@ -402,9 +402,48 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO
-    $rootScope.renderToggle = function(item){
+    $rootScope.renderToggle = function(item, type){
         $scope.closeAllNav();
         console.log(item);
+
+        if (item.model == 'MARKET'){
+            $scope.bidAskChart = {
+                chart: {
+                    zoomType: 'x',
+                    height:250,
+                },
+                legend:{enabled:true},
+                title: {text: null},
+                xAxis: {title: {text: null}},
+                yAxis: {title: {text: null}},
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    type: 'area',
+                    id: 'asks',
+                    name: 'Asks',
+                    color: '#14b794',
+                    data: []
+                },{
+                    type: 'area',
+                    id:  'bids',
+                    name: 'Bids',
+                    color: '#a94442',
+                    data: []
+                }],
+                credits:{enabled:false},
+            };
+            for(var i=-1000;i<1000;i++){
+                if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
+                if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
+            }
+        }
+
+
         $scope.item = item;
         $scope.content = item;
         //PATCH

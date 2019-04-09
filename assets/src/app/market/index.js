@@ -33,13 +33,11 @@ angular.module( 'conexus.market', [
 
     $scope.baseMarkets = [$scope.stateParams.id];
 
-
     //$scope.market = {
     //    title: $scope.stateParams.id,
     //    circulation: Math.floor(Math.random()*1000000),
     //    marketCount: Math.floor(Math.random()*10000),
     //};
-
 
     $scope.manifolds = [
         {title:'+CREDIT', manifolds:'+INTEREST'},
@@ -56,8 +54,6 @@ angular.module( 'conexus.market', [
     $scope.orders = orders;
     $scope.token = token[0];
     $scope.trades = {};
-
-
 
     $scope.stringInterpreter = function(model){
         var sentence = model.split('+');
@@ -83,7 +79,6 @@ angular.module( 'conexus.market', [
     //UGH NEED TO SORT ORDER FETCH OR PROCESS DIFFERENTLY //--> STATIC DATA ON CREATE
     //WHATS THE ORT ON MARKETS?
 
-
     //ORDER MATHCHING.. HIGHEST DIM ORDERS 1ST
 
     //TRAVERSAL TENSORS
@@ -91,57 +86,42 @@ angular.module( 'conexus.market', [
     //MODULATIONS OF IMMUTABLE
 
     //GET SETS --> SORT BY NUMBER OF SETBETA OBJKEY COUNT
-
     for (x in $scope.orders){
-
         //$scope.orders[x].setAlpha
         if ($scope.orders[x].setBeta){
-
-
-        //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
-        //HIGH DIMS IMMEDIATLY DECOMPOSE 
-        if (Object.keys($scope.orders[x].setBeta).length > 1){
-            console.log('HIIIIII');
-
-
-            if ($scope.markets.indexOf(assetIdentifier) == -1){
-                $scope.markets.push({
-                    string:Object.keys($scope.orders[x].setBeta).join(','), 
-                    info:{
-                        rate:Math.random(),
-                        dailyChange:Math.random(),
-                        marketDepth:Math.random(),
-                    }
-                });
+            //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
+            //HIGH DIMS IMMEDIATLY DECOMPOSE 
+            if (Object.keys($scope.orders[x].setBeta).length > 1){
+                console.log('HIIIIII');
+                if ($scope.markets.indexOf(assetIdentifier) == -1){
+                    $scope.markets.push({
+                        string:Object.keys($scope.orders[x].setBeta).join(','), 
+                        info:{
+                            rate:Math.random(),
+                            dailyChange:Math.random(),
+                            marketDepth:Math.random(),
+                        },
+                        model:'MARKET',
+                    });
+                }
             }
-
-
-        }
-
-
-        for (y in Object.keys($scope.orders[x].setBeta)){
-            var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
-            console.log(assetIdentifier);
-            if ($scope.markets.indexOf(assetIdentifier) == -1){
-                $scope.markets.push({
-                    string:assetIdentifier, 
-                    info:{
-                        rate:Math.random(),
-                        dailyChange:Math.random(),
-                        marketDepth:Math.random(),
-                    }
-                });
+            for (y in Object.keys($scope.orders[x].setBeta)){
+                var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
+                console.log(assetIdentifier);
+                if ($scope.markets.indexOf(assetIdentifier) == -1){
+                    $scope.markets.push({
+                        string:assetIdentifier, 
+                        info:{
+                            rate:Math.random(),
+                            dailyChange:Math.random(),
+                            marketDepth:Math.random(),
+                        },
+                        model:'MARKET',
+                    });
+                }
             }
         }
-
-
-
-
-        }
-
     }
-
-
     
     $scope.selectedTab = 'MARKET';
     $scope.selectTab = function(model){
@@ -236,7 +216,8 @@ angular.module( 'conexus.market', [
                     rate:Math.random(),
                     dailyChange:Math.random(),
                     marketDepth:Math.random(),
-                }
+                },
+                model:'MARKET'
             });
         }
     }
@@ -290,22 +271,13 @@ angular.module( 'conexus.market', [
     };
     traverse(0, $scope.markets.length);
 
-
-    //TEST!
     $scope.graphOptions = {
         chart: {
             type: 'forceDirectedGraph',
             height: 250,
-            //width: (function(){ return nv.utils.windowSize().width })(),
             margin:{top: 0, right: 0, bottom: 0, left: 0},
-            color: function(d){
-                return  d3.scale.category20()(d.group)
-            },
-            tooltip: {
-                contentGenerator: function(d){
-                    return ""; 
-                }
-            },
+            color: function(d){return  d3.scale.category20()(d.group)},
+            tooltip: {contentGenerator: function(d){return ""; }},
             nodeExtras: function(node) {
                 node && node
                   .append("text")

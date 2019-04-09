@@ -4226,7 +4226,6 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
@@ -4323,12 +4322,11 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "				    			</a>\n" +
     "				    		</div>\n" +
     "							<div class=\"col-sm-6\" style=\"text-align:right\">\n" +
-    "								<span style=\"text-align:right;\">{{market.info.rate}} {{stateParams.id}}</span>\n" +
+    "								<span style=\"text-align:right;\">{{market.info.rate}}</span>\n" +
     "				    		</div>\n" +
     "						</div>\n" +
     "						<div class=\"row\">\n" +
     "				    		<div class=\"col-sm-12\">\n" +
-    "								<!--<highchart config=\"bidAskChart\"></highchart>-->\n" +
     "				    			<p style=\"color:gray;font-size:10px\">{{market.info.dailyChange}} 24/hr Change</p>\n" +
     "								<p style=\"color:gray;font-size:10px\">{{market.info.marketDepth}} {{stateParams.id}} Depth</p>\n" +
     "							</div>\n" +
@@ -6600,7 +6598,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            \n" +
-    "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -6609,6 +6606,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
     "                                <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
     "                                <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'MARKET'\" href=\"market/{{item.string}}\" style=\"color:white\">{{item.string}}</a>\n" +
     "                                <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
     "                                <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
     "                                <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
@@ -6643,6 +6641,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                        {{item.user.username}}\n" +
     "                    </a>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"item.model == 'MARKET'\">\n" +
+    "                    <highchart config=\"bidAskChart\"></highchart>\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"item.model == 'ORDER'\">\n" +
@@ -10315,16 +10317,13 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("token/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("token/index.tpl.html",
-    "<div class=\"page-heading\">\n" +
-    "    <div class=\"container\"> \n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "				<h1>{{token.string}}</h1>\n" +
-    "				<p style=\"color:white\">{{token.string}} | {{token.information.markets}} markets | {{token.information.inCirculation}} tokens in circulation </p>\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{token.string}}</h1>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
