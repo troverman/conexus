@@ -59,6 +59,16 @@ angular.module( 'conexus.market', [
 
 
 
+    $scope.stringInterpreter = function(model){
+        var sentence = model.split('+');
+        var selectedModel = sentence.filter(function(n) {
+            return ['CONTENT','ITEM','ORDER','PROJECT','TASK','TIME','TRANSACTION','VALIDATION'].indexOf(n) !== -1;
+        })[0];
+        //MODELS
+        //if sentence.contains()
+        return {model:selectedModel, id:sentence[sentence.length-1]};
+    }
+    if ($scope.token){$scope.modelToken = $scope.stringInterpreter($scope.token.string);}
 
     //COMPUTATION 
     //SOME COMPUTATION.. (COMPUTE TO LATTICE IMMUTABLE STRUCT)
@@ -285,7 +295,7 @@ angular.module( 'conexus.market', [
     $scope.graphOptions = {
         chart: {
             type: 'forceDirectedGraph',
-            height: 450,
+            height: 250,
             //width: (function(){ return nv.utils.windowSize().width })(),
             margin:{top: 0, right: 0, bottom: 0, left: 0},
             color: function(d){

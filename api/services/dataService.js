@@ -1,7 +1,8 @@
 //const tf = require('@tensorflow/tfjs');
 //require('@tensorflow/tfjs-node');
 var Q = require('q');
-
+var async = require('async');
+var _ = require('lodash');
 //HELPER FXNS
 
 //POWER SET
@@ -727,47 +728,41 @@ module.exports = {
 			//LET'S START! 
 			//PROJECTMEMBER
 			var promises = [
-				Content.find().limit(100000).skip(0).sort('createdAt DESC'),
-				Item.find().limit(100000).skip(0).sort('createdAt DESC'),
-				Order.find().limit(1000).skip(0).sort('createdAt DESC'),
-				Project.find().limit(100000).skip(0).sort('createdAt DESC'),
-				Reaction.find().limit(100000).skip(0).sort('createdAt DESC'),
-				Task.find().limit(100000).skip(0).sort('createdAt DESC').populate('project'),
-				Time.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'),
-				Transaction.find().limit(100000).skip(0).sort('createdAt DESC'),
-				Validation.find().limit(100000).skip(0).sort('createdAt DESC')
+				//ACTION
+				Content.find().limit(100).skip(0).sort('createdAt DESC'),
+				//FOLLOW
+				Item.find().limit(100).skip(0).sort('createdAt DESC'),
+				Order.find().limit(100).skip(0).sort('createdAt DESC'),
+				Project.find().limit(1000).skip(0).sort('createdAt DESC'),
+				//Reaction.find().limit(100).skip(0).sort('createdAt DESC'),
+				Task.find().limit(100).skip(0).sort('createdAt DESC').populate('project'),
+				Time.find().limit(100).skip(0).sort('createdAt DESC').populate('task'),
+				Transaction.find().limit(100).skip(0).sort('createdAt DESC'),
+				User.find().limit(100).skip(0).sort('createdAt DESC'),
+				Validation.find().limit(100).skip(0).sort('createdAt DESC')
+			];
+			var type = [
+				//ACTION
+				'CONTENT',
+				'ITEM',
+				//FOLLOW
+				'ORDER',
+				'PROJECT',
+				//'REACTION',
+				'TASK',
+				'TIME',
+				'TRANSACTION',
+				'USER',
+				'VALIDATION',
 			];
 			Q.all(promises)
 			.then(function(data){
-
 				console.log('LOAD!');
-
-				var type = [
-					'CONTENT',
-					'ITEM',
-					'ORDER',
-					'PROJECT',
-					'REACTION',
-					'TASK',
-					'TIME',
-					'TRANSACTION',
-					'VALIDATION',
-				];
-
 				var tokenSet = [];
-
 				for (x in data){
 					for (y in data[x]){
+						console.log(x,y)
 
-						//LOL BETTER
-
-						//TODO: PROTOCOL SET..
-						//THINK IT SHOULD LAYER
-						//IE BASE+
-
-						//MINIMIZE NFTS PER CREATE
-						//THINK OF LATERING.. && INFO ENCODING
-						//CREATE PREFIX.. 
 						if (type[x] == 'CONTENT'){
 
 							//CONTENT
@@ -875,8 +870,22 @@ module.exports = {
 
 						if (type[x] == 'ITEM'){
 
-							//ITEM
 							var itemBaseModel = {
+								string: 'ITEM',
+								information:{
+									inCirculation:Math.floor(10000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATEITEM'
+								}
+							};
+
+							var createItemBaseModel = {
 								string: 'CRE8+ITEM',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
@@ -891,8 +900,6 @@ module.exports = {
 								}
 							};
 
-							//DEPRECIATE? || IE TITLE.ID --> FOR READABLE
-							//CRE8+
 							var humanReadableItemNFTModel = {
 								string: 'ITEM+'+data[x][y].id,
 								information:{
@@ -909,9 +916,8 @@ module.exports = {
 							};
 
 							tokenSet.push(itemBaseModel);
+							tokenSet.push(createItemBaseModel);
 							tokenSet.push(humanReadableItemNFTModel);
-
-							//OTHER DATA
 
 						}
 
@@ -1318,7 +1324,7 @@ module.exports = {
 						if (type[x] == 'TASK'){
 							//TASK
 							var taskBaseModel = {
-								string: 'TASK',
+								string: 'CRE8+TASK',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -1332,9 +1338,8 @@ module.exports = {
 								}
 							};
 
-							//REACTION NFT
-							var humanReadableReactionNFTModel = {
-								string: 'TASK+'+data[x][y].id,
+							var humanReadableTaskNFTModel = {
+								string: 'CRE8+TASK+'+data[x][y].id,
 								information:{
 									inCirculation:1,
 									markets: 0,
@@ -1349,7 +1354,7 @@ module.exports = {
 							};
 
 							tokenSet.push(taskBaseModel);
-							tokenSet.push(humanReadableReactionNFTModel);
+							tokenSet.push(humanReadableTaskNFTModel);
 
 							//TODO ASSOCIATION . . .
 							//NOT YET !
@@ -1361,7 +1366,7 @@ module.exports = {
 
 							//TIME
 							var timeBaseModel = {
-								string: 'TIME',
+								string: 'CRE8+TIME',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -1377,7 +1382,7 @@ module.exports = {
 
 							//TIME NFT
 							var humanReadableTimeNFTModel = {
-								string: 'TIME+'+data[x][y].id,
+								string: 'CRE8+TIME+'+data[x][y].id,
 								information:{
 									inCirculation:1,
 									markets: 0,
@@ -1418,16 +1423,16 @@ module.exports = {
 								}
 							};
 
-							//TEST
-							var transactionBaseModelSend = {
-								string: 'TRANSACTION+SEND',
+							//TRANSACTION
+							var createTransactionBaseModel = {
+								string: 'CRE8+TRANSACTION',
 								information:{
-									inCirculation:Math.floor(10000*Math.random())	,
+									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
 								},
 								protocols:[
 									'BASE'
-								],
+									],
 								logic:{
 									transferrable:true, 
 									mint:'ONCREATETRANSACTION'
@@ -1435,8 +1440,8 @@ module.exports = {
 							};
 
 							//TEST
-							var transactionBaseModelRecieve = {
-								string: 'TRANSACTION+RECIEVE',
+							var recieveTransactionBaseModel = {
+								string: 'RECIEVE+TRANSACTION',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -1450,9 +1455,8 @@ module.exports = {
 								}
 							};
 
-							//ASSET - DEPRECIATE
 							var transactionBaseModelAsset = {
-								string: 'TRANSACTION+'+data[x][y].asset,
+								string: 'CRE8+TRANSACTION+'+data[x][y].asset,
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -1466,26 +1470,8 @@ module.exports = {
 								}
 							};
 
-							//ASSET - DEPRECIATE
-							var transactionBaseModelAssetSend = {
-								string: 'TRANSACTION+SEND+'+data[x][y].asset,
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-
-							//ASSET - DEPRECIATE
 							var transactionBaseModelAssetRecieve = {
-								string: 'TRANSACTION+RECIEVE+'+data[x][y].asset,
+								string: 'RECIEVE+TRANSACTION+'+data[x][y].asset,
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets: 0,
@@ -1500,7 +1486,7 @@ module.exports = {
 							};
 
 							var humanReadableTransactionNFTModel = {
-								string: 'TRANSACTION+'+data[x][y].id,
+								string: 'CRE8+TRANSACTION+'+data[x][y].id,
 								information:{
 									inCirculation:1,
 									markets: 0,
@@ -1514,6 +1500,20 @@ module.exports = {
 								}
 							};
 
+							var humanReadableTransactionRecieveNFTModel = {
+								string: 'RECIEVE+TRANSACTION+'+data[x][y].id,
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATETRANSACTION'
+								}
+							};
 
 							//TODO: TAGS
 							//TODO: ASSETS
@@ -1522,16 +1522,13 @@ module.exports = {
 							//TODO: CREATOR
 
 							tokenSet.push(transactionBaseModel);
-							tokenSet.push(humanReadableTransactionNFTModel);
-
-							tokenSet.push(transactionBaseModelSend);
-							tokenSet.push(transactionBaseModelRecieve);
+							tokenSet.push(createTransactionBaseModel);
+							tokenSet.push(recieveTransactionBaseModel);
 							tokenSet.push(transactionBaseModelAsset);
-
-							tokenSet.push(transactionBaseModelAssetSend);
 							tokenSet.push(transactionBaseModelAssetRecieve);
+							tokenSet.push(humanReadableTransactionNFTModel);
+							tokenSet.push(humanReadableTransactionRecieveNFTModel);
 
-							
 						}
 
 						if (type[x] == 'VALIDATION'){
@@ -1539,7 +1536,7 @@ module.exports = {
 
 							//VALIDATION
 							var validationBaseModel = {
-								string: 'VALIDATION',
+								string: 'CRE8+VALIDATION',
 								information:{
 									inCirculation:Math.floor(10000*Math.random()),
 									markets:0,
@@ -1555,7 +1552,7 @@ module.exports = {
 
 							//VALIDATION NFT
 							var humanReadableValidationNFTModel = {
-								string: 'VALIDATION+'+data[x][y].id,
+								string: 'CRE8+VALIDATION+'+data[x][y].id,
 								information:{
 									inCirculation:1,
 									markets:0,
@@ -1571,38 +1568,39 @@ module.exports = {
 
 							tokenSet.push(validationBaseModel);
 							tokenSet.push(humanReadableValidationNFTModel);
-
 							//ASSOCIATIONS
 							//TYPE
 							//COMPOUND
 							//TAGS..??
-
 						}
 
-						//ASSOCIATIONS
-						//if (data[x][y].associatedModels){
-							//if recursive and not circular
-							//console.log(data[x][y].associatedModels)
-						//}
-
+						if (type[x] == 'USER'){
+							var humanReadableUserNFTModel = {
+								string: data[x][y].id,
+								information:{
+									inCirculation:0,
+									markets:0,
+								},
+								protocols:[
+									'BASE',
+									'MEMBER'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONMEMBERCREATE'
+								}
+							};
+							tokenSet.push(humanReadableUserNFTModel);
+						}
 					}
 				}
 
-				//MB DONT HAVE TO SAVE.. JUST IMPLIED  -- IE
-				//MB DONT NEED THIS REP AREA
-				//var repList = JSON.parse(JSON.stringify(tokenSet));
-				//for (n in repList){
-				//	repList[n].string = 'REPUTATION+'+repList[n].string;
-				//	repList[n].logic.transferrable = false;
-				//}
-
-
+				//LOAD APPS 
+				//MANIFOLDS??
 				//SPECIAL CASE.. LOAD IN EXTRA PROTOCOLS
+				
+				//TOKEN VS MARKET (COMBINATORIAL TOKEN)
 
-				//..MARKETS CAN BE COMBINITORIAL.. :|
-				//IE TOKEN VS MARKET --> RE VISIT 
-
-				//CREATE COIN AND UT UNITY
 				var universalTokenModel = {
 					string: 'UNIVERSALTOKEN',
 					information:{
@@ -1617,33 +1615,27 @@ module.exports = {
 						mint:'DAILY'
 					}
 				};
-				//tokenSet.push(universalTokenModel)
+				tokenSet.push(universalTokenModel);
 
 				//PROTOCOLS
 				//BASE, CONTENT, TIME, PROJECT, MEMBER
-				//MEMBER
-					//Address+
-					//on create of token string --> look up appropiate protocol;
-					//simple search pattern match 
-					//mint operations for address & address+ 
-						//address == creator, transferrable, true
+					//MEMBER
+						//Address+
+						//on create of token string --> look up appropiate protocol;
+							//tokenstring --> protocol mapping
+						//simple search pattern match 
+						//mint operations for address & address+ 
+							//address == creator, transferrable, true
 
-				//ASSOCIATIONS ARE THE CHALLANGE
-
-				var onMintList = JSON.parse(JSON.stringify(tokenSet));
-				for (n in onMintList){
-					onMintList[n].string = onMintList[n].string+'+ONMINT';
-				}
-				var superSet = [].concat.apply([], [tokenSet, onMintList])//, repList])
+				//ASSOCIATIONS ARE A CHALLANGE
+					//TOKEN LINKAGE -- LING STRING
 
 				//remove dups
-				var _ = require('lodash');
-				var tokenSet_uniq = _.uniq(superSet, 'string'); 
+				var tokenSet_uniq = _.uniq(tokenSet, 'string'); 
 
 				//REPUTATION MANIFOLD
-				console.log(tokenSet_uniq.length);
-				
-				var async = require('async');
+				console.log(tokenSet_uniq)
+
 				async.eachSeries(tokenSet_uniq, function (token, nextIteration){ 
 					Token.find({string:token.string}).then(function(aTokenModel){
 						if (aTokenModel.length == 0){
@@ -1660,9 +1652,8 @@ module.exports = {
 						}
 					});
 				});	
-				
-			});
 
+			});
 		};
 
 		//WERKIN

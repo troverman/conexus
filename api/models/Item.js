@@ -5,40 +5,18 @@
 module.exports = {
 
 	attributes: {
-
-        //MAIN
         title: {type: 'string'},
-        content: {type: 'string'},
-
-        //TAGS
+        owner: {type: 'json'},
         tags: {type: 'string'},
-
-        //ASSOCIATIONS
-        associatedModels: {type: 'json'},
-
-        //LOCATION
         location: {type: 'json'},
-
-        //INFO
-        //FORSALE, TYPE?
-        //FORLEASE,
+        content: {type: 'string'},
+        associatedModels: {type: 'json'},
+            //ITEMS META 
         info: {type: 'json'},
-
-        //staus.. 
-
-        //PRICE, LEASE TIME.. .ETC
-        identifierSet: {type: 'string'},
-        amountSet: {type: 'string'},
-
-        //REACTIONS
+        isGenerator:{type:'boolean'},
         reactions: {type: 'json'},
-
         //DEPRECIATE
         user: {model: 'user'},
-
-        owner: {type: 'json'},
-
     },
-
 };
 

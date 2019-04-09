@@ -14,13 +14,11 @@
 	<div class="spacing-10"></div>
 
 	<div class="row">
-
 		<ul style="padding:0px;" class="member-tabs">
 		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET')"><i class="fa fa-filter"></i> Filter</a></li>
+            <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
 		</ul>
 		<div style="clear:both"></div>
-    	<!--MANIFOLD FILTER-->
-		<!--MANIFOLD SORTING-->
 		<div class="card">
 			<form ng-submit="search()" style="display:flex;flex-direction:row;">
 		    	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
@@ -28,113 +26,82 @@
 		        </div>
 		    </form>
 		</div>
-
-		<div class="card">
-			<!--<nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>-->
+		<div ng-if="false" class="card">
+			<nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
 	    </div>
-
 	</div>
 
 	<div class="row">
 
-    	<div class="col-sm-5" style="padding-left:0px;padding-right:0px;">
+    	<div class="col-sm-4" style="padding-left:0px;padding-right:0px;">
 			<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->
 
 		    <div class="card">
 				<div style="padding:16px">
-		    		
-		    		<!--TOOD: MARKET: {{token.string}}-->
 
-		    		<h4>Tokens</h4>
-					<!--NG REPEAT-->
-		    		<p><b><a href="token/{{token.spring}}">{{token.string}}</a></b></p>	
+					<!--NG REPEAT | MULTIPLE CARDS-->
+		    		<p><b><a href="token/{{token.string}}">{{token.string}}</a></b></p>	
+
 					<div class="spacing-5"></div>
 
-					<p><b>Information <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-					<p>AssociatedModels: <a href="time/id">TIME</a></p>
-					<p>In Circulation: {{token.information.inCirculation}}</p>
-					<p>Markets: {{markets.length}}</p>
+		    		<!--<p><b>Action</b></p>
+		    		<p><a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model.toUpperCase()}}</a></p>
+					<div class="spacing-5"></div>-->
+
+					<p><b>Information</b></p>
+
+					<p style="font-style:italic;color:gray">Associated Action: <a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model}}</a></p>
+					<p style="font-style:italic;color:gray">In Circulation: {{token.information.inCirculation}}</p>
+					<p style="font-style:italic;color:gray">Markets: {{markets.length}}</p>
 					<div class="spacing-5"></div>
 
 					<!--FUTURES, OPTIONS, PROJECT, WORK, CONTENT, ETC-->
 		    		<p><b>Protocols <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-		    		<p>
+		    		<p style="font-style:italic;color:gray">{{markets.protocols}}</p>
+		    		<!--<p>
 		    			<span ng-repeat="protocol in token.protocols"><a href="protocol/{{protocol}}">{{protocol}}</a>,</span>
-
 						<a href="protocol/manifold">MANIFOLD</a>,
 						<a href="protocol/manifold">SPONSOR</a>,
 		    			<a href="protocol/future">FUTURE</a>,
 						<a href="protocol/option">OPTION</a>
-
 		    		</p>
+		    		-->
 					<div class="spacing-5"></div>
 
 					<!--FUNCTIONS TO ACT ON THE TOKEN BALANCE-->
 		    		<p><b>Logic <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-		    		<p>Transferrable: {{token.logic.transferrable}}</p>
-		    		<p>Mint: {{token.logic.mint}}</p>
+		    		<p style="font-style:italic;color:gray">Transferrable: {{token.logic.transferrable}}</p>
+		    		<p style="font-style:italic;color:gray">Mint: {{token.logic.mint}}</p>
 					<div class="spacing-5"></div>
 
 		    		<p><b>Manifold Actions <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-		    		<p>+SPONSOR</p>
-		    		<p>+FUTURE+TIME</p>
-		    		<p>+OPTION+TIME</p>
+		    		<!--<p style="font-style:italic;color:gray">+SPONSOR</p>
+		    		<p style="font-style:italic;color:gray">+FUTURE+TIME</p>
+		    		<p style="font-style:italic;color:gray">+OPTION+TIME</p>-->
 
 	    		</div>
-	    	</div>
-			<!--<div class="card">
-				<div style="padding:16px;">
-					<h4>Value Vector</h4>
-					<highchart config="chartMap"></highchart>
-				</div>
-			</div>-->
-			<div class="card">
-				<div style="padding:16px">
-					<h4>Market Analysis</h4>
-					<p>Size: {{markets.length}}</p>
-					<p>Rank: {{stateParams.id.split(',').length}}
-					<p>Highest Dimension: 7</p>
-					<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>
-
-					<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
-
-	    		</div>
-	    	</div>
-
-	    	<div class="card">
-				<div style="padding:16px">
-					<h4>Lattice Analysis</h4>
-		    		<p>Computed Lattice Neighborhood</p>
-		    		<!--COMBINITORIALS SERVED FIRST-->
-		    		<!--DEPTH OF THE COMBINITORIAL SPACES-->
-		    		<!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->
-					<!--VALUE VECTOR-->
-					<!--1ST DEGREE-->
-				    <!--VALUE MATRIX-->
-					<!--VALUE TENSOR-->
-					<!--VALUE TENSOR NETWORK-->
-				</div>
-	    	</div>
+	    	</div>	
 		</div>
 
-		<div class="col-md-7" style="max-height:110vh;overflow:scroll;padding-left:0px;padding-right:0px;">
+		<div class="col-md-8" style="max-height:110vh;overflow:scroll;padding-left:0px;padding-right:0px;">
+
 			<div class="spacing-5"></div>
 			<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-	            <li><a href="#" ng-click="selectTab('CONTENT')">Content</a></li>
+	            <!--<li><a href="#" ng-click="selectTab('CONTENT')">Content</a></li>-->
 				<li><a href="#" ng-click="selectTab('MARKET')">Markets</a></li>
 	            <li><a href="#" ng-click="selectTab('MANIFOLD')">Manifold Actions</a></li>
+	            <li><a href="#" ng-click="selectTab('ANALYSIS')">Market Analysis</a></li>
 	        </ul>
 			
-
 			<!--MARKETS-->
 			<div ng-show="selectedTab=='MARKET'">
 		        <div class="card"><button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button></div>
-			    <div class="card" ng-repeat="market in markets">
+			    <div class="card" ng-repeat="market in markets" ng-click="renderToggle(market)">
 			    	<div style="padding:16px;">
 						<div class="row">
 				    		<div class="col-sm-6">
-				    			<a href="market/{{stateParams.id}}/{{market.string}}">
-				    				<h5>{{market.string}}</h5>
+				    			<a ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}">
+				    				<h4>{{market.string}}</h4>
 				    			</a>
 				    		</div>
 							<div class="col-sm-6" style="text-align:right">
@@ -183,14 +150,48 @@
 			<div ng-show="selectedTab=='MANIFOLD'">
 				<div class="card" ng-repeat="item in manifolds">
 				    <div style="padding:16px">
-				    	{{item}}
+				    	<h4>{{item.title}}</h4>
+				    	<p>{{item.manifolds}}</p>
 				    </div> 
 				</div>
 			</div>
 
+			<!--ANALYSIS-->
+			<div ng-show="selectedTab=='ANALYSIS'">
+
+				<div class="card">
+					<div style="padding:16px">
+						<h4>Market Analysis</h4>
+						<p>Size: {{markets.length}}</p>
+						<p>Rank: {{stateParams.id.split(',').length}}
+						<p>Highest Dimension: 7</p>
+						<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>
+						<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
+		    		</div>
+		    	</div>
+		    	<div class="card">
+					<div style="padding:16px">
+						<h4>Lattice Analysis</h4>
+			    		<p>Computed Lattice Neighborhood</p>
+			    		<!--COMBINITORIALS SERVED FIRST-->
+			    		<!--DEPTH OF THE COMBINITORIAL SPACES-->
+			    		<!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->
+						<!--VALUE VECTOR-->
+						<!--1ST DEGREE-->
+					    <!--VALUE MATRIX-->
+						<!--VALUE TENSOR-->
+						<!--VALUE TENSOR NETWORK-->
+					</div>
+		    	</div>
+			    <!--<div class="card">
+					<div style="padding:16px;">
+						<h4>Value Vector</h4>
+						<highchart config="chartMap"></highchart>
+					</div>
+				</div>-->
+			</div>
+
 	    </div>
-
     </div>
-
 </div>
 <div class="spacing-50"></div>

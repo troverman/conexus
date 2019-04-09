@@ -77,11 +77,10 @@
 
                             <p style="float:right;text-align:right">
                                 <span style="color:gray" ng-if="project.location">{{project.location.address}} <i class="fa fa-map-marker"></i></span>
-                                <!--<i style="" ng-click="$event.stopPropagation();tokensToggle(notification);" class="fa fa-ellipsis-v"></i>-->
                             </p>
 
                             <h3 style="float:left;margin-top:0px">
-                                <a href="/project/{{project.urlTitle}}">{{project.title}}</a>
+                                <a ng-click="$event.stopPropagation()" href="/project/{{project.urlTitle}}">{{project.title}}</a>
                             </h3>
 
                             <div style="clear:both"></div>

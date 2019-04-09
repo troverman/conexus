@@ -60,6 +60,7 @@ angular.module( 'conexus.nav', [
     $scope.confirm = {};
     $scope.inputVector = [];
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
+    //$scope.manifolds = ['CONTENT','ITEM','ORDER','PROJECT','TASK','TIME','TRANSACTION','VALIDATION'];
     $scope.newContent = {};
     $scope.newItem = {};
     $scope.newLogin = {};
@@ -1000,7 +1001,7 @@ angular.module( 'conexus.nav', [
             //PATCH!!!
             if ($scope.newTime.associatedModels){
                 for (x in $scope.newTime.associatedModels){
-                    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address
+                    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address;
                 }
             }
             console.log($scope.newTime);
@@ -1188,6 +1189,7 @@ angular.module( 'conexus.nav', [
         TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
             taskSearchModels = taskSearchModels.map(function(obj){
                 obj.type='TASK';
+                obj.address=obj.id;
                 obj.text=obj.title;
                 return obj;
             });

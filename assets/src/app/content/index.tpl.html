@@ -26,7 +26,7 @@
 		<div class="card" style="background-color:#f9f9f9">
 		    <div style="padding:16px;background-color:white">
 				<div style="float:right;text-align:right">
-                    <i style="" ng-click="$event.stopPropagation();tokensToggle(content);" class="fa fa-ellipsis-v"></i>
+                    <i style="" ng-click="$event.stopPropagation();cardDetailToggle(content);" class="fa fa-ellipsis-v"></i>
 				</div>
 				<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')" href="content">{{tag}} </a></p>
 				<div>

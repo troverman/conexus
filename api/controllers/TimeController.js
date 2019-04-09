@@ -82,32 +82,23 @@ module.exports = {
 
 	create: function (req, res) {
 
-		//GET SESSION --> RN FRONTEND BAD SECURITY LEL
-		//MASSIVE AUDIT NEEDED 
+		//TODO: SECURITY
 		var model = {
 			amount: req.param('amount'),
-			content: req.param('content'),
-			tags: req.param('tags'),
+			//creator
 			user: req.param('user'),
-
-			stream: req.param('stream'),
-			verificationScore: req.param('verificationScore'),
-
-			//RETROACTIVE | VS CREATED AT
+			type: req.param('type'), //RETROACTIVE | VS CREATED AT
 			startTime: req.param('startTime'),
-			//source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
+			source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
 			//FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
-
-			//TODO
+			content: req.param('content'),
+			tags: req.param('tags'), // computed validations
 			associatedModels: req.param('associatedModels'),
-
-			//PATCH
 			reactions: {plus:0,minus:0},
-			
 			//DEPRECIATE
 			project: req.param('project'),
 			task: req.param('task'),
-
+			stream: req.param('stream'),
 		};
 
 		Time.create(model)
@@ -115,14 +106,12 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 				User.find({id:model.user}).then(function(userModel){
+					
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
 
 					//TODO:IMPLICIT VALIDATION
 					//ASSOCIATED MOELS ... ? 
-
-
-
 
 					var validationModel = {
 						conntent:'IMPLICIT VALIDATION ON TIME CREATE',
@@ -140,12 +129,6 @@ module.exports = {
 					//Validate.create(validationModel).then(function(validation){
 					//	console.log('CREATED IMPLICIT VALIDATION', validation);
 					//});
-
-
-
-
-
-
 
 					//TODO: REQUEST TO VALIDATE NOTIFICATION
 
@@ -167,13 +150,6 @@ module.exports = {
 
 						}
 					}
-
-
-
-
-
-
-
 
 				});
 
@@ -201,8 +177,7 @@ module.exports = {
 
 	update: function(req, res) {
 		var id = req.param('id');
-		//AND CREATE VERIFICATION..
-		var model = {verificationScore: 100};
+		var model = {};
 		Time.update({id: id}, model).exec(function afterwards(err, updated){
 		  if (err) {return;}
 		});

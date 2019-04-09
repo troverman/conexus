@@ -29,14 +29,14 @@
 	        </form>
 	    </div>
 
-	    <div class="card">
+	    <div class="card" ng-if="false">
 			<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
 	    </div>
 
 	    <div ng-repeat="token in tokens track by $index" style="padding:0px">
-	    	<div class="card" ng-click="">
+	    	<div class="card" ng-click="renderToggle(token)">
 			    <div style="padding:16px;">
-			    	<a style="white-space: nowrap;" href="market/{{token.string}}"><h4>{{token.string}}</h4></a>
+			    	<a ng-click="$event.stopPropagation();" style="white-space: nowrap;" href="market/{{token.string}}"><h4>{{token.string}}</h4></a>
 			    	<p style="white-space: nowrap;color:gray">{{token.string}} markets</p>
 
 			    	<!--

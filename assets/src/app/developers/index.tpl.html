@@ -25,17 +25,6 @@
 
 <div id="DEVELOPERS" style="background-color:white;min-height:70vh">
 
-    <!--<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
-        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-            <div style="margin-top: auto;margin-bottom: auto;">
-                <div class="container">
-                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Developers</h1>
-                    <h5 style="color:white">Developers CRE8. Developers Build. Developers Win.</h5>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
     <div class="container">
     <div class="spacing-50"></div>
         <div class="row">
@@ -44,7 +33,6 @@
                 <p style="color:gray;font-style:italic">Developers CRE8. Developers Build. Developers Win. </p>
                 <p style="color:gray;font-style:italic">Building Applications that further the promise of shared prosperity is a great public service.</p>
                 <p style="color:gray;font-style:italic">Create the universe of tokenization. Build New Value. Change the world, participate in the development of tokenization protocols & applications.</p>
-
             </div>
             <div class="col-sm-5" style="text-align:right">
                 <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
@@ -352,7 +340,7 @@
                 <div class="spacing-10"></div>
 
                 <div hljs hljs-language="javascript"  hljs-source="protocolStructureModel"></div>
-
+         
                 <div class="spacing-10"></div>
                 <div class="spacing-10"></div>
 
@@ -423,13 +411,16 @@ getSome:function(newQuery){}</div>
 
                 <h4>Order Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newOrder){},
+create:function(newOrder){
+    //BUILD ORDER BOOK
+},
 getSome:function(newQuery){}</div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of an <a href="#ORDER" du-smooth-scroll>Order</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Project Tokenization Protocol</h4>
+                <!--<p>Perform Association walk</p>-->
                 <div hljs hljs-language="javascript">
 create:function(newProject){},
 getSome:function(newQuery){}</div>
@@ -447,7 +438,18 @@ getSome:function(newQuery){}</div>
 
                 <h4>Reaction Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newReaction){},
+create:function(newReaction){
+    
+    //GENERALIZE ... REPUTATION AS IMMUTATBLE MAPPING IN GREATER MAPPING 
+    wallet[newReaction.creator]['CRE8+REACTION']++
+    wallet[newReaction.creator]['CRE8+REACTION'+newReaction.id]++
+    wallet[newReaction.creator]['CRE8+REACTION'+newReaction.type]++
+
+    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION']++
+    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.id]]++
+    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.type]]++
+
+},
 getSome:function(newQuery){}</div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#REACTION" du-smooth-scroll>Reaction</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
@@ -464,10 +466,10 @@ getSome:function(newQuery){}</div>
                 <h4>Time Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
 create:function(newTime){
-    wallet[member.id]['time'] += time.amount
-    wallet[member.id][time.id] += time.amount
-    for (x in time.tags){
-        wallet[member.id][time.tags[x]] += time.amount
+    wallet[newReaction.creator]['CRE8+TIME'] += newTime.amount
+    wallet[newReaction.creator]['CRE8+TIME'+newTime.id] += newTime.amount
+    for (x in newTime.tags){
+        wallet[newReaction.creator][newTime.tags[x]] += newTime.amount
     }
 },
 getSome:function(newQuery){}</div>
@@ -477,7 +479,26 @@ getSome:function(newQuery){}</div>
 
                 <h4>Transaction Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newTransaction){},
+create:function(newTransaction){
+    
+
+    //CREATE PROTOCOL .... --> WIKI
+    wallet[newTransaction.from]['CRE8+TRANSACTION']++
+    wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++
+
+    wallet[newTransaction.to]['RECIEVE+TRANSACTION']++
+    wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++
+
+
+    //TRANSFER THE TOKENS
+    for (x in newTransaction.assetSet){
+        wallet[newTransaction.from][newTransaction.assetSet[x].name]-=newTransaction.assetSet[x].amount
+        wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount
+    }
+
+
+
+},
 getSome:function(newQuery){}</div>
                 <p><b>create:function()</b> 
                 <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#TRANSACTION" du-smooth-scroll>Transaction</a> (and its applications on cre8's api)</span>
@@ -723,21 +744,20 @@ getSome:function(newQuery){}</div>
                         <p><b>Location:</b> TBD</p> 
                         <p><b>Info:</b> TBD</p> 
                         <p><b>Owner:</b> TBD</p> 
+                        <p><b>isGenerator:</b> TBD<!--If an item is a generator, on purchase an item--></p> 
                     </div>
                     <p><b>[get, post] /api/item</b></p>
                 </div>
 
                 <!--TODO: LOCATION-->
-                <!--
                 <div class="spacing-50"></div>
+                
                 <div>
-
                     <h4><b>Location</b></h4>
                     <p style="color:gray;font-style:italic">This is the Location Model</p>
                     <div hljs hljs-language="javascript">var locationModel = {};</div>
                     <p><b>[get, post] /api/location</b></p>
                 </div>
-                -->
 
                 <div class="spacing-50"></div>
 
@@ -1301,7 +1321,9 @@ getSome:function(newQuery){}</div>
             <div class="col-sm-8">
                 <p style="color:gray;font-style:italic">Deep Learning and video feeds to discreetly tokenize time</p>
                 <p style="color:gray;font-style:italic">Tokenization with a high degree of consensus on context through multidimensional validation</p>
+                <p>
                 <p style="color:gray;font-style:italic">TOKENIZING PUBLIC SPACES THOUGH AI</p>
+                <img src="https://i.pinimg.com/originals/0c/33/8e/0c338ef522a8759f5f0ba34822e70d78.gif">
             </div>
             <div class="col-sm-4" style="text-align:right">
                 <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">

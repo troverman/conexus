@@ -203,12 +203,14 @@ angular.module( 'conexus.home', [
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TIME');
-        obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
-        if (obj.task.tags){
-            obj.task.tags = obj.task.tags.split(',');
-            for (x in obj.task.tags){
-                obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
-                obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+        if (obj.task){
+            obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
+            if (obj.task.tags){
+                obj.task.tags = obj.task.tags.split(',');
+                for (x in obj.task.tags){
+                    obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
+                    obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+                }
             }
         }
         return obj;
@@ -939,12 +941,14 @@ angular.module( 'conexus.home', [
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TIME');
-        obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
-        if (obj.task.tags){
-            obj.task.tags = obj.task.tags.split(',');
-            for (x in obj.task.tags){
-                obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
-                obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+        if (obj.task){
+            obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
+            if (obj.task.tags){
+                obj.task.tags = obj.task.tags.split(',');
+                for (x in obj.task.tags){
+                    obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
+                    obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+                }
             }
         }
         return obj;

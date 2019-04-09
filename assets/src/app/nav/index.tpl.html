@@ -177,7 +177,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="searchQueryNav.tags">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="item in item.tags.slice(0,10)">
+                    <div ng-repeat="item in item.tags.slice(0,10) track by $index">
                         <a href="#" ng-click="selectTag(item.element)">{{item.element}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -186,7 +186,7 @@
                     <tags-input min-length="1" placeholder="Associations" ng-model="searchQueryNav.associations">
                         <auto-complete source="loadAssociation($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="item in item.associations.slice(0,10)">
+                    <div ng-repeat="item in item.associations.slice(0,10) track by $index">
                         <a href="#" ng-click="selectAssociation(item.element)">{{item.element}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -195,7 +195,7 @@
                     <tags-input min-length="1" placeholder="Locations" ng-model="searchQueryNav.locations">
                         <auto-complete source="loadLocation($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="item in item.locations.slice(0,10)">
+                    <div ng-repeat="item in item.locations.slice(0,10) track by $index">
                         <a href="#" ng-click="selectLocation(item.element)">{{item.element.address}}</a>
                     </div>
 
@@ -206,7 +206,7 @@
                     </div>
 
                     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-                        <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                        <ui-gmap-marker ng-repeat="marker in markers track by $index" coords="marker.coords" options="marker.options" idkey="marker.id">
                             <ui-gmap-window options="windowOptions" closeClick="closeClick()">
                                 <div>
                                     <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
@@ -223,7 +223,7 @@
                     <tags-input min-length="1" placeholder="Asset Set" ng-model="selectedAssets">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="asset in item.assets.slice(0,10)">
+                    <div ng-repeat="asset in item.assets.slice(0,10) track by $index">
                         <a href="#" ng-click="selectAsset(asset.element)">{{asset.element}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -233,7 +233,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="selectedTags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="asset in item.tags.slice(0,10)">
+                    <div ng-repeat="asset in item.tags.slice(0,10) track by $index">
                         <a href="#" ng-click="selectTag(asset.element)">{{asset.element}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -242,7 +242,7 @@
                     <tags-input min-length="1" placeholder="Associations" ng-model="selectedAssociations">
                         <auto-complete source="loadAssociation($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="asset in item.associations.slice(0,10)">
+                    <div ng-repeat="asset in item.associations.slice(0,10) track by $index">
                         <a href="#" ng-click="selectTag(asset.element)">{{asset.element}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -251,18 +251,20 @@
                 <!--MARKET-->
                 <div ng-if="type=='MARKET'">
 
-
-
                     <!--
                     <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
                     -->
 
+                    <p><b>Models</b></p>
+                    <p ng-repeat="manifold in manifolds">
+                        <a ng-click="">{{manifold}}</a>
+                    </p>
+
                     <tags-input min-length="1" placeholder="Asset" ng-model="markets">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
-
 
                     <!--IDK-->
                     <div layout="">
@@ -294,7 +296,7 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="searchQueryNav.tags">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="item in item.tags.slice(0,10)">
+                    <div ng-repeat="item in item.tags.slice(0,10) track by $index">
                         <a href="#" ng-click="selectTag(item)">{{item}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -303,7 +305,7 @@
                     <tags-input min-length="1" placeholder="Type" ng-model="searchQueryNav.type">
                         <auto-complete source="loadType($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="item in item.type.slice(0,10)">
+                    <div ng-repeat="item in item.type.slice(0,10) track by $index">
                         <a href="#" ng-click="selectTypeFilter(item)">{{item}}</a>
                     </div>
                     <div class="spacing-10"></div>
@@ -365,35 +367,26 @@
                     <tags-input min-length="1" placeholder="Tags" ng-model="newItem.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
+                    <h5>Location</h5>
+                    <input placeholder="Location" type="text" ng-model="newItem.location" class="form-control">
                     <h5>Associations <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
-                    <h5>Location</h5>
-                    <input placeholder="Location" type="text" ng-model="newItem.location" class="form-control">
 
+                    <h5>Is Tradable?</h5>
+                    <md-switch ng-model="tradable" aria-label="tradable"></md-switch>
+                    <div ng-if="tradable">
+                        <!--ORDER MODEL-->
+                        <h5>Is Generator? <a ng-click="informationToggle('ITEMGENERATOR')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                        <md-switch ng-model="generator" aria-label="generator"></md-switch>
+                        <h5>Identifier <a ng-click="informationToggle('IDENTIFERSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                        <input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
+                        <h5>Delivery Protocol <a ng-click="informationToggle('DELIVERYPROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                        <input type="text" placeholder="Title" ng-model="newItem.delivery" class="form-control">
+                    </div>
 
-
-
-
-
-                    <h5>Tradable</h5>
-                    <md-switch ng-model="tradable" aria-label="GPS Tracking"></md-switch>
-
-                    <h5>Identifer Set <a ng-click="informationToggle('IDENTIFERSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
-                    <h5>Amount Set <a ng-click="informationToggle('AMOUNTSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <input placeholder="Amount Set" type="text" ng-model="newItem.amountSet" class="form-control">
-
-                    <h5>Delivery Protocol <a ng-click="informationToggle('DELIVERYPROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <text-angular ng-model="newItem.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
-
-
-
-
-
-
-
 
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newItem.title">create</button>
                 </form>
@@ -495,21 +488,16 @@
                 </div>
             </div>
             <div style="padding:16px">
-
                 <div class="spacing-15"></div>
                 <p style="color:gray;font-style:italic">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click="informationToggle('CREATEORDER')" href="#"><i class="fa fa-question-circle"></i></a></p>
-
                 <div class="spacing-10"></div>
-               
                 <div class="spacing-10"></div>
-
                 <form role="form" ng-submit="createOrder()">
                     <div class="row">
-
                         <div class="col-sm-6 form-group">
                             <h5>
                                 <span ng-show="!identiferSetAlpha">Asset Identifer Set α</span>
-                                <span ng-repeat="market in identiferSetAlpha">{{market.text}} </span> 
+                                <span ng-repeat="market in identiferSetAlpha track by $index">{{market.text}} </span> 
                                 <a ng-click="informationToggle('IDENTIFERSETALPHA')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
                             <tags-input min-length="1" placeholder="Asset Identifer Set α" ng-model="identiferSetAlpha">
@@ -517,24 +505,20 @@
                             </tags-input>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <div ng-repeat="market in identiferSetAlpha">
-
+                            <div ng-repeat="market in identiferSetAlpha track by $index">
                                 <div class="col-sm-12">
                                     <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>
                                     <input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.setAlpha[market.text]" class="form-control">
                                 </div>
-
                             </div>
                         </div>
-
                         <div style="text-align:left;margin-bottom:15px" class="col-sm-12">
                             <a ng-click="invertMarket()" style="width:100px" class="btn btn-default log-btn"><i class="fa fa-refresh"></i> Invert</a>
                         </div>
-
                         <div class="col-sm-6 form-group">
                             <h5>
                                 <span ng-show="!identiferSetBeta">Asset Identifer Set β</span>
-                                <span ng-repeat="market in identiferSetBeta">{{market.text}} </span> 
+                                <span ng-repeat="market in identiferSetBeta track by $index">{{market.text}} </span> 
                                 <a ng-click="informationToggle('IDENTIFERSETBETA')" href="#"><i class="fa fa-question-circle"></i></a>
                             </h5>
                             <tags-input min-length="1" placeholder="Asset Identifer Set β" ng-model="identiferSetBeta">
@@ -542,13 +526,10 @@
                             </tags-input>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <div ng-repeat="market in identiferSetBeta">
-
+                            <div ng-repeat="market in identiferSetBeta track by $index">
                                 <div class="col-sm-12"><h5>{{market.text}} Amount</h5><input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.setBeta[[market.text]]" class="form-control"></div>
-
                             </div>
                         </div>
-
                         <div class="col-sm-12" style="padding:20px;">
                             <p ng-show="!inverted" style="font-weight:800;">
                                 Sell <span ng-repeat="market in identiferSetAlpha">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> 
@@ -563,7 +544,6 @@
                                 for <span ng-repeat="market in identiferSetAlpha">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>
                             </p>
                         </div>
-
                         <div class="col-sm-12" style="marking:10px">
                             <ul class="nav nav-pills nav-justified contentTyle">
                                 <li ng-class="{active: selectedOrderType=='ONBOOKS'}" ng-click="selectOrderType('ONBOOKS')"><a href="#">Market onBooks <i ng-click="informationToggle('ONBOOKSORDER')" class="fa fa-question-circle"></i></a></li>
@@ -572,41 +552,10 @@
                                 <li ng-class="{active: selectedOrderType=='LIMIT'}" ng-click="selectOrderType('LIMIT')"><a href="#"> Limit <i ng-click="informationToggle('LIMIT')" class="fa fa-question-circle"></i></a></li>
                             </ul>
                         </div>
-
-
-                        <!--
-                        <div class="col-sm-12" style="padding:20px">
-                            <p style="font-weight:800;">
-                                <span>
-                                    Sell <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}}, </span> 
-                                    for <span ng-repeat="market in identiferSet1"> {{newOrder.amountSetBeta[market.text]}} {{market.text}}, </span> 
-
-                                    Create a matrix
-                                    @ {{newOrder.amountSetBeta / newOrder.amountSet}} <span ng-repeat="market in identiferSet">{{market.text}}, </span>  / <span ng-repeat="market in identiferSet1">{{market.text}}</span>
-
-                                </span>
-                                <span> | </span>
-                                <span>
-                                    Buy <span ng-repeat="market in identiferSet1">{{newOrder.amountSetBeta[market.text]}} {{market.text}}, </span> 
-                                    with <span ng-repeat="market in identiferSet">{{newOrder.amountSet[market.text]}} {{market.text}}, </span> 
-
-                                    Create a matrix
-                                    @ {{newOrder.amountSet / newOrder.amountSetBeta}} <span ng-repeat="market in identiferSet1">{{market.text}}</span> / <span ng-repeat="market in identiferSet">{{market.text}}</span>
-
-                                </span>
-                            </p>
-                        </div>
-                        -->
-
-
                         <div class="spacing-10"></div>
-
                         <button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.setAlpha">create</button>
-                        
                     </div>
-
                 </form>
-                    
             </div>
         </div>
     </md-sidenav>
@@ -753,7 +702,7 @@
                         </span>
                     </div>
                     <div class="spacing-5"></div>
-                    <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
+                    <span ng-repeat="(key, value) in item.amountSet track by $index"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                 </div>
                 <!--TAGS-->
                 <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
@@ -1177,7 +1126,7 @@
                     <!--TODO MOBILE-->
                     <table class="table table-striped table-hover">
                         <tbody>
-                            <tr ng-repeat="token in inputVector">
+                            <tr ng-repeat="token in inputVector track by $index">
                                 <td><a href="market/{{token.text}}">{{token.text}}</a></td>
                             </tr>
                         </tbody>
@@ -1332,7 +1281,7 @@
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
                 </div>
 
-                <div ng-repeat="tag in tags">
+                <div ng-repeat="tag in tags track by $index">
                     <div layout="">
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
                         <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>

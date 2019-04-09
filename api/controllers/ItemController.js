@@ -6,9 +6,9 @@ module.exports = {
 
 	getSome: function(req, res) {
 		
-		var limit = req.query.limit;
-		var skip = req.query.skip;
-		var sort = req.query.sort;
+		var limit = req.query.limit || 1;
+		var skip = req.query.skip || 0;
+		var sort = req.query.sort || 'createdAt DESC';
 		
 		console.log(req.query);
 
@@ -45,7 +45,7 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
+			.populate('user')  //TODO: OWNER
 			.then(function(models){
 				res.json(models)
 			});

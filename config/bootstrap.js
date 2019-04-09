@@ -5,7 +5,7 @@ module.exports.bootstrap = function(cb) {
 	//intervalService.getData();
 	//dataService.getData();
 	
-	//dataService.traverse();
+	dataService.traverse();
 	
 	//dataService.tensorBuild();
 
@@ -13,6 +13,7 @@ module.exports.bootstrap = function(cb) {
 	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
 	//intervalService.universalTokenProtocolPreAlpha();
 	setInterval(intervalService.reputationBuild, 8640000);
+	
 	//intervalService.reputationBuild();
 
 	cb();
