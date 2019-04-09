@@ -1551,7 +1551,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div id=\"STRUCTURE\">\n" +
     "                    <h4><b>STRUCTURE</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>\n" +
-    "                    <p>transfer:</p>\n" +
+    "                    <!--<p>transfer:</p>-->\n" +
     "                    <!--CRE8; RECIEVE; PROJECT.. USER--> \n" +
     "                </div>\n" +
     "\n" +
@@ -1574,7 +1574,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div id=\"MANIFOLD\">\n" +
     "                    <p><b>MANIFOLD</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
-    "                    \n" +
+    "\n" +
     "                    <!--\n" +
     "                    <p><b>+[] SPACE</b></p>\n" +
     "                    <p><b>Application Specific</b></p>\n" +
@@ -1594,6 +1594,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>CRE8</b></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">MEMBER, PROJECT, TASK, TIME, VALIDATION, ORDER</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order Book String Mapping; Mapping of all positions</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">BALANCE AND REPUTATION</p>\n" +
+    "\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -1602,7 +1604,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div id=\"CONNECTION\">\n" +
     "                    <h4><b>CONNECTION</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Traversals and Token Action Potientals; long form token string</p>\n" +
-    "                    <p>a+b+c+d+.....+n+i+....</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">a+b+c+d+.....+n+i+....</p>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1895,7 +1897,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                \n" +
     "                <h4><b>Action</b></h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
-    "               \n" +
+    "\n" +
+    "                <p>Websocket Subscribe</p>\n" +
     "                <p><b>get /api/action</b></p>\n" +
     "                <p><b>getSome</b></p>\n" +
     "                <p><b>post /api/action</b></p>\n" +
@@ -1934,6 +1937,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
+    "                <p>Websocket Subscribe</p>\n" +
     "                <p><b>get /api/app</b></p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\">\n" +
@@ -1967,6 +1971,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
     "                <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
     "                <p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "                <p>Websocket Subscribe</p>\n" +
     "                <p><b>get /api/assoication</b></p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\">\n" +
@@ -2058,6 +2063,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                   <p><b>size:</b> 'integer' the data size of the block</p> \n" +
     "                </div>\n" +
     "\n" +
+    "                <p>Websocket Subscribe</p>\n" +
     "                <p><b>get /api/block</b></p>\n" +
     "\n" +
     "            </div>\n" +
@@ -2088,7 +2094,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                </div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
-    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
     "                <div>\n" +
     "                    <p><b>Title:</b> Title of Content is a String</p>\n" +
     "                    <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>\n" +
@@ -2103,6 +2108,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/content</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
     "                    <form role=\"form\" ng-show=\"false\">\n" +
@@ -2115,33 +2121,46 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </form>\n" +
     "                    <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
-    "                    <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                    <div style=\"max-height:100vh;overflow:scroll\" hljs hljs-language=\"javascript\" hljs-source=\"results.content\"></div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-6\" ng-if=\"false\">\n" +
-    "                <div class=\"bootstrapHack\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                    <div style=\"margin-left:15px;\">\n" +
     "                        <div class=\"spacing-15\"></div>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
-    "                        <div>\n" +
-    "                            <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
-    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
-    "                            <p><b>[get, post] /api/content</b></p>\n" +
-    "                            <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
-    "                            <form role=\"form\" ng-show=\"false\">\n" +
-    "                                <div class=\"form-group\">\n" +
-    "                                    <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
-    "                                    <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
-    "                                    <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
-    "                                    <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
-    "                                </div>\n" +
-    "                            </form>\n" +
-    "                            <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
-    "                            <div class=\"spacing-5\"></div>\n" +
-    "                            <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
-    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "                <!--\n" +
+    "                <div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
+    "                </div>\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;min-height:auto\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div>\n" +
+    "                    <p><b>[get, post] /api/content</b></p>\n" +
+    "                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
+    "                    <form role=\"form\" ng-show=\"false\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
+    "                    <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                </div>\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;min-height:auto\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                -->\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2187,6 +2206,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                <p style=\"color:gray;font-style:italic\">This is the Event Model</p>\n" +
     "                <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
+    "                <p>Websocket Subscribe</p>\n" +
     "                <p><b>[get, post] /api/event</b></p>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2207,6 +2227,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Followed:</b> TBD</p> \n" +
     "                        <p><b>Follower:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/follower</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2226,6 +2247,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Owner:</b> TBD</p> \n" +
     "                        <p><b>isGenerator:</b> TBD<!--If an item is a generator, on purchase an item--></p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/item</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2254,6 +2276,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Reputation:</b> TBD</p> \n" +
     "                        <p><b>Location:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/member</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2263,6 +2286,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <h4><b>Market</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var marketModel = {};</div>        \n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/market</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2274,6 +2298,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <!--COMBINE MOTION AND VALIDATION..-->\n" +
     "                    <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->\n" +
     "                    <div hljs hljs-language=\"javascript\">var motionModel = {};</div>        \n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get,post] /api/motion</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2291,6 +2316,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>isRead:</b> TBD</p> \n" +
     "                        <p><b>User:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2307,13 +2333,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>\n" +
     "                        <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>\n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/order</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/order?limit=1&skip=0</p>\n" +
     "                    <div>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"orderQuery\"></div>\n" +
     "                        <button ng-click=\"apiCall({model:'ORDER',limit:1,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Order</button>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results.order\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -2340,6 +2367,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <h4><b>Peer</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Peers are ..</p>\n" +
     "                    <div hljs hljs-language=\"javascript\">var peerModel = {};</div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/peer</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2365,6 +2393,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>user:</b> TBD</p> \n" +
     "                        <p><b>info:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/project</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2376,6 +2405,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">Reputation & Verification Dimensions</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Validation Types</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectCharterModel\"></div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/projectcharter</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2384,7 +2414,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div id=\"PROJECTMEMBER\">\n" +
     "                    <h4><b>ProjectMember</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var projectMemberModel = {id: {type: 'string'},project: {model: 'project'},user: {model: 'user'}};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectMemberModel\"></div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/projectmember</b></p>\n" +
     "                </div>\n" +
     "                \n" +
@@ -2393,7 +2424,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div id=\"PROTOCOL\">\n" +
     "                    <h4><b>Protocol</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">//ABSTRACTION OF ABSTRACTION WORKING WITH CRE8 DECENTRALIZED VM var protocolModel = {//ANY COMPILABLE CODE};</div>\n" +
+    "                    <p>Abstraction of {Language Abstraction} working with the <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 virtual machine</a></p>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"protocolModel\"></div>\n" +
     "                    <p><b>[get, post] /api/protocol</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2453,6 +2485,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>associatedModels:</b> TBD</p> \n" +
     "                        <p><b>reactions:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/task</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2471,6 +2504,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>location:</b> TBD</p> \n" +
     "                        <p><b>reactions:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/time</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2480,6 +2514,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <h4><b>Token</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A token is a discrete piece of information with the following properties:</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"tokenModel\"></div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/token</b></p>\n" +
     "                </div>\n" +
     "                \n" +
@@ -2498,13 +2533,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>location:</b> TBD</p> \n" +
     "                        <p><b>reactions:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/transaction</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/transaction?limit=1&skip=0</p>\n" +
     "                    <div>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"transactionQuery\"></div>\n" +
     "                        <button ng-click=\"apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Transaction</button>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results.transaction\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -2521,6 +2557,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>addressTo:</b> TBD</p> \n" +
     "                        <p><b>Data:</b> TBD</p> \n" +
     "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/tx</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2551,13 +2588,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>\n" +
     "                    <p>PROJECT - TASK - TIME</p>\n" +
     "                    <p>PROJECT - TASK</p>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/validation</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>\n" +
     "                    <div>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"validationQuery\"></div>\n" +
     "                        <button ng-click=\"apiCall({model:'VALIDATION',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Validation</button>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results.validation\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -6183,10 +6221,12 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-10\"></div>\n" +
     "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
     "                    <h5>Action</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    <h5>Accociated Models</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    <input type=\"text\" placeholder=\"Action\" ng-model=\"newContent.action\" class=\"form-control\">\n" +
+    "                    <h5>Amount</h5>\n" +
+    "                    <input type=\"text\" placeholder=\"Amount\" ng-model=\"newContent.amount\" class=\"form-control\">\n" +
+    "                    <h5>Accociated Models (Item)</h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Item\" ng-model=\"newContent.tags\">\n" +
+    "                        <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
     "                </form>\n" +
@@ -7084,9 +7124,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
-    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/settings\">Settings</a></h4>-->\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
+    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Validations</a></h4>-->\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"member\">\n" +
@@ -7170,6 +7210,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
+    "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
     "\n" +
     "                    <h5>Context (Tags)</h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
@@ -7179,7 +7220,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <!--TYPE?-->\n" +
     "                    <!--START TIMER UI UX??-->\n" +
     "                    <h5>Type</h5>\n" +
-    "                    <p>RetroActive, Live</p>\n" +
+    "                    <!--<p>RetroActive, Live</p>-->\n" +
+    "                    <input step=\"1\" placeholder=\"Type\" ng-model=\"newTime.type\" class=\"form-control\">\n" +
     "\n" +
     "                    <h5>Start Time</h5>\n" +
     "                    <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
@@ -8072,6 +8114,11 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "    \n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <p><b>Avatar</b></p>\n" +
+    "            <img style=\"height:50px;width:50px\" src=\"{{project.avatarUrl}}\">\n" +
+    "            <p>{{project.avatarUrl}}</p>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "            <p><b>Title</b></p>\n" +
     "            <p>{{project.title}}</p>\n" +

@@ -6,13 +6,25 @@ module.exports = {
 
 	getSome: function(req, res) {
 		
-		var limit = req.query.limit || 1;
-		var skip = req.query.skip || 0;
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		
 		console.log(req.query);
+		if(req.query.id){
+			var id = req.query.id;
+			Item.find({id:id})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')  //TODO: OWNER
+			.then(function(models){
+				Item.subscribe(req, models);
+				res.json(models)
+			});
+		}
 
-		if (req.query.tag){
+		else if (req.query.tag){
 			var tag = req.query.tag;
 			Item.find({tags:{contains: tag}})
 			.limit(limit)
@@ -26,7 +38,7 @@ module.exports = {
 		}
 
 		//TODO: OWNER
-		if (req.query.user){
+		else if (req.query.user){
 			var user = req.query.user;
 			console.log(req.query)
 			Item.find({user:user}) //TODO: OWNER
@@ -53,36 +65,24 @@ module.exports = {
 		
 	},
 
-	//DEPRECIATE
-	getOne: function(req, res) {
-		Item.find({id:req.param('id')})
-		.populate('user')
-		.then(function(model) {
-			console.log(model[0])
-			Item.subscribe(req, model[0]);
-			res.json(model[0]);
-		});
-	},
-
 	create: function (req, res) {
 		var model = {
-
 			title: req.param('title'),
+			//owner: req.param('owner'),
 			tags: req.param('tags'),
-			content: req.param('content'),
 			location: req.param('location'),
+			content: req.param('content'),
+			associatedModels: req.param('associatedModels'),
 
+			//info: req.param('info'),
 			amountSet: req.param('amountSet'),
 			identiferSet: req.param('identiferSet'),
+			isGenerator: req.param('isGenerator'),
+
 			user: req.param('user'),
-
-			//TODO INFO, FORSALE.. 
-
-			associatedModels: req.param('associatedModels'),
 
 			//PATCH
 			reactions: {plus:0,minus:0},
-
 		};
 		Item.create(model)
 		.exec(function(err, task) {

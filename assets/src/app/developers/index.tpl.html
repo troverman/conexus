@@ -247,7 +247,7 @@
                 <div id="STRUCTURE">
                     <h4><b>STRUCTURE</b></h4>
                     <p style="color:gray;font-style:italic">Defining operations such as transferrable, the ability to create: meta defination. Effecient and congruent mappings for core data organization.</p>
-                    <p>transfer:</p>
+                    <!--<p>transfer:</p>-->
                     <!--CRE8; RECIEVE; PROJECT.. USER--> 
                 </div>
 
@@ -270,7 +270,7 @@
                 <div id="MANIFOLD">
                     <p><b>MANIFOLD</b></h4>
                     <p style="color:gray;font-style:italic">The manifold property, combined with LANGUAGE string interpolation, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>
-                    
+
                     <!--
                     <p><b>+[] SPACE</b></p>
                     <p><b>Application Specific</b></p>
@@ -290,6 +290,8 @@
                     <p><b>CRE8</b></p>
                     <p style="color:gray;font-style:italic">MEMBER, PROJECT, TASK, TIME, VALIDATION, ORDER</p>
                     <p style="color:gray;font-style:italic">Order Book String Mapping; Mapping of all positions</p>
+                    <p style="color:gray;font-style:italic">BALANCE AND REPUTATION</p>
+
 
                 </div>
 
@@ -298,7 +300,7 @@
                 <div id="CONNECTION">
                     <h4><b>CONNECTION</b></h4>
                     <p style="color:gray;font-style:italic">Traversals and Token Action Potientals; long form token string</p>
-                    <p>a+b+c+d+.....+n+i+....</p>
+                    <p style="color:gray;font-style:italic">a+b+c+d+.....+n+i+....</p>
                 </div>
 
                 <div class="spacing-10"></div>
@@ -591,7 +593,8 @@ getSome:function(newQuery){}</div>
                 
                 <h4><b>Action</b></h4>
                 <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>
-               
+
+                <p>Websocket Subscribe</p>
                 <p><b>get /api/action</b></p>
                 <p><b>getSome</b></p>
                 <p><b>post /api/action</b></p>
@@ -630,6 +633,7 @@ getSome:function(newQuery){}</div>
                 </div>
                 <div class="spacing-15"></div>
                 <p style="color:gray;font-style:italic">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>
+                <p>Websocket Subscribe</p>
                 <p><b>get /api/app</b></p>
             </div>
             <div class="col-sm-6">
@@ -663,6 +667,7 @@ getSome:function(newQuery){}</div>
                 <p style="color:gray;font-style:italic"> Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
                 <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> 
                 <p style="color:gray;font-style:italic">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>
+                <p>Websocket Subscribe</p>
                 <p><b>get /api/assoication</b></p>
             </div>
             <div class="col-sm-6">
@@ -754,6 +759,7 @@ getSome:function(newQuery){}</div>
                    <p><b>size:</b> 'integer' the data size of the block</p> 
                 </div>
 
+                <p>Websocket Subscribe</p>
                 <p><b>get /api/block</b></p>
 
             </div>
@@ -784,7 +790,6 @@ getSome:function(newQuery){}</div>
                     </div>
                 </div>
                 <p style="color:gray;font-style:italic">Content is information. (with context)</p>
-                <div hljs hljs-language="javascript"  hljs-source="contentModel"></div>
                 <div>
                     <p><b>Title:</b> Title of Content is a String</p>
                     <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>
@@ -799,6 +804,7 @@ getSome:function(newQuery){}</div>
                 <div>
                     <p style="color:gray;font-style:italic">Creating a Content Query</p>
                     <div hljs hljs-language="javascript"  hljs-source="contentQuery"></div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/content</b></p>
                     <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
                     <form role="form" ng-show="false">
@@ -811,33 +817,46 @@ getSome:function(newQuery){}</div>
                     </form>
                     <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
                     <div class="spacing-5"></div>
-                    <div hljs hljs-language="javascript" hljs-source="results"></div>
+                    <div style="max-height:100vh;overflow:scroll" hljs hljs-language="javascript" hljs-source="results.content"></div>
                 </div>
             </div>
-            <div class="col-sm-6" ng-if="false">
-                <div class="bootstrapHack">
+            <div class="col-sm-6">
+                <div class="bootstrapHack" style="z-index:auto;">
                     <div style="margin-left:15px;">
                         <div class="spacing-15"></div>
                         <div hljs hljs-language="javascript"  hljs-source="contentModel"></div>
-                        <div>
-                            <p style="color:gray;font-style:italic">Creating a Content Query</p>
-                            <div hljs hljs-language="javascript"  hljs-source="contentQuery"></div>
-                            <p><b>[get, post] /api/content</b></p>
-                            <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
-                            <form role="form" ng-show="false">
-                                <div class="form-group">
-                                    <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
-                                    <input class="form-control" ng-model="newQuery.limit" placeholder="Limit" type="number"> 
-                                    <input class="form-control" ng-model="newQuery.skip" placeholder="Skip" type="number"> 
-                                    <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
-                                </div>
-                            </form>
-                            <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
-                            <div class="spacing-5"></div>
-                            <div hljs hljs-language="javascript" hljs-source="results"></div>
-                        </div>
                     </div>
                 </div>
+                <!--
+                <div>
+                    <p style="color:gray;font-style:italic">Creating a Content Query</p>
+                </div>
+                <div class="bootstrapHack" style="z-index:auto;min-height:auto">
+                    <div style="margin-left:15px;">
+                        <div class="spacing-15"></div>
+                        <div hljs hljs-language="javascript"  hljs-source="contentQuery"></div>
+                    </div>
+                </div>
+                <div>
+                    <p><b>[get, post] /api/content</b></p>
+                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
+                    <form role="form" ng-show="false">
+                        <div class="form-group">
+                            <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
+                            <input class="form-control" ng-model="newQuery.limit" placeholder="Limit" type="number"> 
+                            <input class="form-control" ng-model="newQuery.skip" placeholder="Skip" type="number"> 
+                            <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
+                        </div>
+                    </form>
+                    <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
+                    <div class="spacing-5"></div>
+                </div>
+                <div class="bootstrapHack" style="z-index:auto;min-height:auto">
+                    <div style="margin-left:15px;">
+                        <div hljs hljs-language="javascript" hljs-source="results"></div>
+                    </div>
+                </div>
+                -->
             </div>
         </div>
     </div>
@@ -883,6 +902,7 @@ getSome:function(newQuery){}</div>
                 </div>
                 <p style="color:gray;font-style:italic">This is the Event Model</p>
                 <div hljs hljs-language="javascript">var eventModel = {};</div>
+                <p>Websocket Subscribe</p>
                 <p><b>[get, post] /api/event</b></p>
             </div>
         </div>
@@ -903,6 +923,7 @@ getSome:function(newQuery){}</div>
                         <p><b>Followed:</b> TBD</p> 
                         <p><b>Follower:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/follower</b></p>
                 </div>
 
@@ -922,6 +943,7 @@ getSome:function(newQuery){}</div>
                         <p><b>Owner:</b> TBD</p> 
                         <p><b>isGenerator:</b> TBD<!--If an item is a generator, on purchase an item--></p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/item</b></p>
                 </div>
 
@@ -950,6 +972,7 @@ getSome:function(newQuery){}</div>
                         <p><b>Reputation:</b> TBD</p> 
                         <p><b>Location:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/member</b></p>
                 </div>
 
@@ -959,6 +982,7 @@ getSome:function(newQuery){}</div>
                     <h4><b>Market</b></h4>
                     <p style="color:gray;font-style:italic">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>
                     <div hljs hljs-language="javascript">var marketModel = {};</div>        
+                    <p>Websocket Subscribe</p>
                     <p><b>get /api/market</b></p>
                 </div>
 
@@ -970,6 +994,7 @@ getSome:function(newQuery){}</div>
                     <!--COMBINE MOTION AND VALIDATION..-->
                     <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->
                     <div hljs hljs-language="javascript">var motionModel = {};</div>        
+                    <p>Websocket Subscribe</p>
                     <p><b>[get,post] /api/motion</b></p>
                 </div>
 
@@ -987,6 +1012,7 @@ getSome:function(newQuery){}</div>
                         <p><b>isRead:</b> TBD</p> 
                         <p><b>User:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>get /api/notification</b></p>
                 </div>
 
@@ -1003,13 +1029,14 @@ getSome:function(newQuery){}</div>
                         <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>
                         <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/order</b></p>
                     <p>curl https://www.cre8.xyz/api/order?limit=1&skip=0</p>
                     <div>
                         <div hljs hljs-language="javascript"  hljs-source="orderQuery"></div>
                         <button ng-click="apiCall({model:'ORDER',limit:1,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Order</button>
                         <div class="spacing-5"></div>
-                        <div hljs hljs-language="javascript" hljs-source="results"></div>
+                        <div hljs hljs-language="javascript" hljs-source="results.order"></div>
                     </div>
                 </div>
 
@@ -1036,6 +1063,7 @@ getSome:function(newQuery){}</div>
                     <h4><b>Peer</b></h4>
                     <p style="color:gray;font-style:italic">Peers are ..</p>
                     <div hljs hljs-language="javascript">var peerModel = {};</div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/peer</b></p>
                 </div>
 
@@ -1061,6 +1089,7 @@ getSome:function(newQuery){}</div>
                         <p><b>user:</b> TBD</p> 
                         <p><b>info:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/project</b></p>
                 </div>
 
@@ -1072,6 +1101,7 @@ getSome:function(newQuery){}</div>
                     <p style="color:gray;font-style:italic">Reputation & Verification Dimensions</p>
                     <p style="color:gray;font-style:italic">Validation Types</p>
                     <div hljs hljs-language="javascript"  hljs-source="projectCharterModel"></div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/projectcharter</b></p>
                 </div>
 
@@ -1080,7 +1110,8 @@ getSome:function(newQuery){}</div>
                 <div id="PROJECTMEMBER">
                     <h4><b>ProjectMember</b></h4>
                     <p style="color:gray;font-style:italic">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>
-                    <div hljs hljs-language="javascript">var projectMemberModel = {id: {type: 'string'},project: {model: 'project'},user: {model: 'user'}};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="projectMemberModel"></div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/projectmember</b></p>
                 </div>
                 
@@ -1089,7 +1120,8 @@ getSome:function(newQuery){}</div>
                 <div id="PROTOCOL">
                     <h4><b>Protocol</b></h4>
                     <p style="color:gray;font-style:italic">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>
-                    <div hljs hljs-language="javascript">//ABSTRACTION OF ABSTRACTION WORKING WITH CRE8 DECENTRALIZED VM var protocolModel = {//ANY COMPILABLE CODE};</div>
+                    <p>Abstraction of {Language Abstraction} working with the <a href="#CRE8VM" du-smooth-scroll>CRE8 virtual machine</a></p>
+                    <div hljs hljs-language="javascript"  hljs-source="protocolModel"></div>
                     <p><b>[get, post] /api/protocol</b></p>
                 </div>
 
@@ -1149,6 +1181,7 @@ getSome:function(newQuery){}</div>
                         <p><b>associatedModels:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/task</b></p>
                 </div>
 
@@ -1167,6 +1200,7 @@ getSome:function(newQuery){}</div>
                         <p><b>location:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/time</b></p>
                 </div>
 
@@ -1176,6 +1210,7 @@ getSome:function(newQuery){}</div>
                     <h4><b>Token</b></h4>
                     <p style="color:gray;font-style:italic">A token is a discrete piece of information with the following properties:</p>
                     <div hljs hljs-language="javascript"  hljs-source="tokenModel"></div>
+                    <p>Websocket Subscribe</p>
                     <p><b>get /api/token</b></p>
                 </div>
                 
@@ -1194,13 +1229,14 @@ getSome:function(newQuery){}</div>
                         <p><b>location:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/transaction</b></p>
                     <p>curl https://www.cre8.xyz/api/transaction?limit=1&skip=0</p>
                     <div>
                         <div hljs hljs-language="javascript"  hljs-source="transactionQuery"></div>
                         <button ng-click="apiCall({model:'TRANSACTION',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Transaction</button>
                         <div class="spacing-5"></div>
-                        <div hljs hljs-language="javascript" hljs-source="results"></div>
+                        <div hljs hljs-language="javascript" hljs-source="results.transaction"></div>
                     </div>
                 </div>
 
@@ -1217,6 +1253,7 @@ getSome:function(newQuery){}</div>
                         <p><b>addressTo:</b> TBD</p> 
                         <p><b>Data:</b> TBD</p> 
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>get /api/tx</b></p>
                 </div>
 
@@ -1247,13 +1284,14 @@ getSome:function(newQuery){}</div>
                     <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>
                     <p>PROJECT - TASK - TIME</p>
                     <p>PROJECT - TASK</p>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/validation</b></p>
                     <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>
                     <div>
                         <div hljs hljs-language="javascript"  hljs-source="validationQuery"></div>
                         <button ng-click="apiCall({model:'VALIDATION',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Validation</button>
                         <div class="spacing-5"></div>
-                        <div hljs hljs-language="javascript" hljs-source="results"></div>
+                        <div hljs hljs-language="javascript" hljs-source="results.validation"></div>
                     </div>
                 </div>
 

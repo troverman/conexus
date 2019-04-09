@@ -2,14 +2,10 @@ angular.module('models.item', ['lodash', 'services', 'sails.io',])
 
 .service('ItemModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getOne = function(model) {
-        var url = utils.prepareUrl('item/'+model);
-        return $sailsSocket.get(url).then(success, error);
-    };
-
     this.getSome = function(type, filter, limit, skip, sort) {
         var query = {};
-        if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
+        if (type=='id'){query = {params:{id:filter,limit:limit,skip:skip,sort:sort}};}
+        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='identiferSet'){query = {params:{identiferSet:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}

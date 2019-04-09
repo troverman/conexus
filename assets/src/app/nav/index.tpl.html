@@ -23,10 +23,12 @@
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createContent()">
                     <h5>Action</h5>
-                    <input type="text" placeholder="Title" ng-model="newContent.title" class="form-control">
-                    <h5>Accociated Models</h5>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="newContent.tags">
-                        <auto-complete source="loadTags($query)"></auto-complete>
+                    <input type="text" placeholder="Action" ng-model="newContent.action" class="form-control">
+                    <h5>Amount</h5>
+                    <input type="text" placeholder="Amount" ng-model="newContent.amount" class="form-control">
+                    <h5>Accociated Models (Item)</h5>
+                    <tags-input min-length="1" placeholder="Item" ng-model="newContent.tags">
+                        <auto-complete source="loadItems($query)"></auto-complete>
                     </tags-input>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
@@ -924,9 +926,9 @@
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Motions</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/positions">Positions</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/projects">Projects</a></h4>
-                    <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}/settings">Settings</a></h4>-->
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/tasks">Tasks</a></h4>
                     <h4 class="nav-links"><a href="project/{{project.urlTitle}}/time">Time</a></h4>
+                    <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Validations</a></h4>-->
                 </div>
 
                 <div ng-if="member">
@@ -1010,6 +1012,7 @@
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
                         <auto-complete source="loadAssociationsTask($query)"></auto-complete>
                     </tags-input>
+                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->
 
                     <h5>Context (Tags)</h5>
                     <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
@@ -1019,7 +1022,8 @@
                     <!--TYPE?-->
                     <!--START TIMER UI UX??-->
                     <h5>Type</h5>
-                    <p>RetroActive, Live</p>
+                    <!--<p>RetroActive, Live</p>-->
+                    <input step="1" placeholder="Type" ng-model="newTime.type" class="form-control">
 
                     <h5>Start Time</h5>
                     <input type="datetime-local" step="1" placeholder="Start Time" ng-model="newTime.startTime" class="form-control">

@@ -11,7 +11,7 @@ angular.module( 'conexus.nav', [
         $rootScope.associatedModel = null;
         $rootScope.market = null;
         $rootScope.market1 = null;
-                $scope.closeAllNav();
+        $scope.closeAllNav();
 
         //VIEW GENERATION
         //$scope.createView();
@@ -1183,7 +1183,6 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO! IMPORTANT
-
     $scope.loadAssociationsOld = function(query){
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
@@ -1228,6 +1227,20 @@ angular.module( 'conexus.nav', [
         TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
             taskSearchModels = taskSearchModels.map(function(obj){
                 obj.type='TASK';
+                obj.address=obj.id;
+                obj.text=obj.title;
+                return obj;
+            });
+            deferred.resolve(taskSearchModels);
+        });
+        return deferred.promise;
+    };
+
+    $scope.loadItems = function(query){
+        var deferred = $q.defer();
+        ItemModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(itemModels){
+            itemModels = itemModels.map(function(obj){
+                obj.type='ITEM';
                 obj.address=obj.id;
                 obj.text=obj.title;
                 return obj;

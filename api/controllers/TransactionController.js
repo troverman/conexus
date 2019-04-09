@@ -59,7 +59,7 @@ module.exports = {
 			});
 		}
 
-		if(req.query.id){
+		else if(req.query.id){
 			var id = req.query.id;
 			Transaction.find({id:id})
 			.limit(limit)

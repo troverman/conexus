@@ -80,6 +80,7 @@ module.exports.routes = {
    * Content routes
    */
   'get /api/content': 'ContentController.getSome',
+  //DEPRECIATE
   'get /api/content/:id': 'ContentController.getOne',
   'post /api/content': 'ContentController.create',
   'post /api/content/:id': 'ContentController.update',
@@ -98,7 +99,6 @@ module.exports.routes = {
    * Item routes
    */
   'get /api/item': 'ItemController.getSome',
-  'get /api/item/:id': 'ItemController.getOne',
   'post /api/item': 'ItemController.create',
   'delete /api/item/:id': 'ItemController.destroy',
 
@@ -112,6 +112,7 @@ module.exports.routes = {
    * Order routes
    */
   'get /api/order': 'OrderController.getSome',
+  //DEPRECIATE
   'get /api/order/:id': 'OrderController.getOne',
   'post /api/order': 'OrderController.create',
   'delete /api/post/:id': 'OrderController.destroy',
@@ -128,6 +129,7 @@ module.exports.routes = {
    * Project routes
    */
   'get /api/project': 'ProjectController.getSome',
+  //DEPRECIATE
   'get /api/project/:id': 'ProjectController.getOne',
   'get /api/project/children/:id': 'ProjectController.getChildren',
   'get /api/project/url/:path': 'ProjectController.getByUrl',
@@ -151,6 +153,7 @@ module.exports.routes = {
    * Task routes
    */
   'get /api/task': 'TaskController.getSome',
+  //DEPRECIATE
   'get /api/task/:id': 'TaskController.getOne',
   'post /api/task/:id': 'TaskController.update',
   'post /api/task': 'TaskController.create',
@@ -160,6 +163,7 @@ module.exports.routes = {
    * Time routes
    */
   'get /api/time': 'TimeController.getSome',
+  //DEPRECIATE
   'get /api/time/:id': 'TimeController.getOne',
   'post /api/time': 'TimeController.create',
 
@@ -179,6 +183,7 @@ module.exports.routes = {
    * User routes
    */
   'get /api/user': 'UserController.getSome',
+  //DEPRECIATE
   'get /api/user/:id': 'UserController.getOne',
   'get /api/user/username/:path': 'UserController.getByUsername',
   'post /api/user': 'UserController.create',

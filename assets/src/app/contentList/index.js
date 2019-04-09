@@ -147,8 +147,13 @@ angular.module( 'conexus.contentList', [
     };
     
     $scope.reply = function(content){
-        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-        $scope.contentList[index].showReply = !$scope.contentList[index].showReply;
+        if ($scope.currentUser){
+            $mdSidenav('content').toggle();
+            //var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
+            //$scope.contentList[index].showReply = !$scope.contentList[index].showReply;
+        }
+        else{$mdSidenav('login').toggle();}
+
     };
 
     $scope.search = function(){

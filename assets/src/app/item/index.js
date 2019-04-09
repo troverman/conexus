@@ -12,10 +12,10 @@ angular.module( 'conexus.item', [
 		},
         resolve:{
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
-                return ItemModel.getOne($stateParams.id);
+                return ItemModel.getSome('id', $stateParams.id, 1, 0, 'createdAt DESC');
             }],
             contentList: ['ContentModel', 'item', function(ContentModel, item) {
-                return ContentModel.getSome('item', item.id, 20, 0, 'createdAt DESC');
+                return ContentModel.getSome('item', item[0].id, 20, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -25,10 +25,9 @@ angular.module( 'conexus.item', [
    
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
-
-    $scope.item = item;
+    $scope.item = item[0];
     $scope.item.model = 'ITEM';
-    if ($scope.item.tags){$scope.item.tags = item.tags.split(',')}
+    if ($scope.item.tags){$scope.item.tags = $scope.item.tags.split(',')}
 
     $rootScope.associatedModels = [{
         address: $scope.item.id,

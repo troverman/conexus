@@ -18,29 +18,81 @@ angular.module( 'conexus.developers', [
 
 .controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'OrderModel', 'ReactionModel', 'titleService', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, OrderModel, ReactionModel, titleService, TransactionModel, ValidationModel ) {
     titleService.setTitle('Developers | CRE8.XYZ');
-    $scope.results = '[{}]';
+    $scope.results = {
+        action:'[{}]',
+        app:'[{}]',
+        association:'[{}]',
+        block:'[{}]',
+        content:'[{}]',
+        //data:'[{}]',
+        //event:'[{}]',
+        follower:'[{}]',
+        item:'[{}]',
+        location:'[{}]',
+        member:'[{}]',
+        market:'[{}]',
+        motion:'[{}]',
+        notification:'[{}]',
+        order:'[{}]',
+        passport:'[{}]',
+        project:'[{}]',
+        projectCharter:'[{}]',
+        projectMember:'[{}]',
+        protocol:'[{}]',
+        reaction:'[{}]',
+        search:'[{}]',
+        task:'[{}]',
+        token:'[{}]',
+        time:'[{}]',
+        transaction:'[{}]',
+        tx:'[{}]',
+        validation:'[{}]',
+    };
     $scope.newQuery = {};
   
+    //FACTOR IN GLOBAL SERCH MODEL FOR API CALLS :P
     $scope.apiCall = function(query){
+        //if (query.model == 'ACTION'){}
+        //if (query.model == 'APP'){}
+        //if (query.model == 'ASSOCIATION'){}
+        //if (query.model == 'BLOCK'){}
         if (query.model == 'CONTENT'){
             ContentModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
-                $scope.results = JSON.stringify(models, null, 2);
+                $scope.results.content = JSON.stringify(models, null, 2);
             });
         }
+        //if (query.model == 'DATA'){}
+        //if (query.model == 'EVENT'){}
+        //if (query.model == 'FOLLOWER'){}
+        //if (query.model == 'ITEM'){}
+        //if (query.model == 'LOCATION'){}
+        //if (query.model == 'MEMBER'){}
+        //if (query.model == 'MARKET'){}
+        //if (query.model == 'MOTION'){}
+        //if (query.model == 'NOTIFICATION'){}
         if (query.model == 'ORDER'){
-            //TODO..
             OrderModel.getSome('', '', '', 1, 0, 'createdAt DESC').then(function(models){
-                $scope.results = JSON.stringify(models, null, 2);
+                $scope.results.order = JSON.stringify(models, null, 2);
             });
         }
+        //if (query.model == 'PROJECT'){}
+        //if (query.model == 'PROJECTCHARTER'){}
+        //if (query.model == 'PROJECTMEMBER'){}
+        //if (query.model == 'PROTOCOL'){}
+        //if (query.model == 'REACTION'){}
+        //if (query.model == 'SEARCH'){}
+        //if (query.model == 'TASK'){}
+        //if (query.model == 'TOKEN'){}
+        //if (query.model == 'TIME'){}
         if (query.model == 'TRANSACTION'){
             TransactionModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
-                $scope.results = JSON.stringify(models, null, 2);
+                $scope.results.transaction = JSON.stringify(models, null, 2);
             });
         }
+        //if (query.model == 'TX'){}
         if (query.model == 'VALIDATION'){
             ValidationModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
-                $scope.results = JSON.stringify(models, null, 2);
+                $scope.results.validation = JSON.stringify(models, null, 2);
             });
         }
     };
@@ -418,6 +470,14 @@ angular.module( 'conexus.developers', [
         project: {type: 'string'},
         info: {type: 'json'},
     }, null, 4);
+
+    $scope.projectMemberModel = 'var projectMemberModel = '+JSON.stringify({
+        id: {type: 'string'},
+        project: {model: 'project'},
+        user: {model: 'user'},
+    }, null, 4);
+
+    $scope.protocolModel = 'var protocolModel = '+JSON.stringify({"protocol":"function(){}"}, null, 4);
 
     $scope.reactionModel = 'var reactionModel = '+JSON.stringify({
         id: {type: 'string'},

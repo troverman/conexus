@@ -11,7 +11,6 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
         var query = {};
 
         //TODO COMPOUND
-
         if (type=='contentModel'){query = {params:{contentModel:filter,limit:limit,skip:skip,sort:sort}};}
         else if (type=='item'){query = {params:{item:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='market'){query = {params:{market:filter,limit:limit,skip:skip,sort:sort}};}
@@ -26,10 +25,8 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
         else if (type=='transaction'){query = {params:{transaction:filter, limit:limit,skip:skip,sort:sort}};}
         else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
 
-
         else{query = {params:{limit:limit,skip:skip,sort:sort}};}
         var url = utils.prepareUrl('content');
-        console.log(query);
         return $sailsSocket.get(url, query).then(success, error);
         
     };
