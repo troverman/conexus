@@ -1302,6 +1302,29 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
 
 angular.module("developers/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("developers/index.tpl.html",
+    "<style>\n" +
+    "    body {overflow-x:hidden}\n" +
+    "    pre{padding:0px;background-color:#282c34;border:0px;}\n" +
+    "    .bootstrapHack {\n" +
+    "        z-index: 3;\n" +
+    "        border: 0px;\n" +
+    "        background: #282c34;\n" +
+    "        position: relative;\n" +
+    "        min-height:100vh;\n" +
+    "    }\n" +
+    "    .bootstrapHack:after {\n" +
+    "        content: '';\n" +
+    "        position: absolute;\n" +
+    "        top: 0;\n" +
+    "        bottom: 0;\n" +
+    "        left:80%;\n" +
+    "        right:-3000px;\n" +
+    "        background: #282c34;\n" +
+    "        z-index: -1;\n" +
+    "    }\n" +
+    "    .modelList p {margin:0px;font-weight:700;}\n" +
+    "</style>\n" +
+    "\n" +
     "<div class=\"intro\" style=\"max-height:720px\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
@@ -1362,25 +1385,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
-    "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "\n" +
     "                <p><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Decentralized Peer Network & Virtual Machine</a></b></p>\n" +
-    "                <!--<p><b><a href=\"#PEER\">The Peer Network & Transparency</a></b></p>-->\n" +
     "                <p><b><a href=\"#APPDESIGN\" du-smooth-scroll>Interoperable Protocol & Application Design Architecture</a></b></p>\n" +
     "                <p><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></p>\n" +
     "                <p><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>\n" +
-    "               \n" +
-    "\n" +
-    "                <!--MEMBER DOCS; PROJECT DOCS-->\n" +
-    "\n" +
     "                <p><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpolation</a></b></p>\n" +
     "                <p><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></p>\n" +
-    "                <!--<div><p>Market Objects and their Traversal Character</p></div>-->\n" +
     "                <p><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Validation & Association Traversals</a></b></p>\n" +
-    "                <!--<p>Protocols for tokenization action potientals</p>-->\n" +
     "                <p><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters and Group Coordination</a></b></p>\n" +
     "                <p><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></p>\n" +
     "            </div>\n" +
@@ -1410,22 +1423,28 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network</p>\n" +
-    "                <!--<p>MERKLE ROOT INFORMATION HERE!</p>-->\n" +
-    "                <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
-    "                <!--blocks, tx, mining, connected, transparency-->\n" +
+    "                <img style=\"width:49%\"  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
+    "                <img style=\"width:49%\"  src=\"images/mining.jpg\">\n" +
     "\n" +
-    "                <a href=\"#TX\" du-smooth-scroll>Tx</a>\n" +
-    "                <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a>\n" +
-    "                <a href=\"#PEERMODEL\" du-smooth-scroll>PEERS</a>\n" +
+    "                <p><b>Information in a Patricia Tree</b></p>\n" +
+    "                <img style=\"width:49%\" src=\"images/patricia-trie.png\">\n" +
+    "                <img style=\"width:49%\" src=\"images/patricia-trie-insert.png\">\n" +
     "\n" +
+    "                <h5><a href=\"#TX\" du-smooth-scroll>Txs</a></h5>\n" +
+    "                <h5><a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></h5>\n" +
+    "                <h5><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a></h5>\n" +
+    "\n" +
+    "                <!--\n" +
     "                <h2>Title 2</h2>\n" +
     "                <h3>Title 3</h3>\n" +
     "                <h4>Title 4</h4>\n" +
     "                <h5>Title 5</h5>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <a class=\"btn btn-default log-btn\" href=\"https://www.github.com/troverman/conexus\">Github Peer Client</a>\n" +
     "\n" +
-    "                <div class=\"spacing-100\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -1449,40 +1468,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
     "                <a href=\"#BLOCKS\">Blocks</a>\n" +
     "                <a class=\"btn btn-default log-btn\" href=\"/transparency\">Peers</a>\n" +
-    "                <p>tx, blocks, mining, connections & transparency</p>\n" +
+    "                <p style=\"color:gray;fint-style:italic\">tx, blocks, mining, connections & transparency</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<style>\n" +
-    "    body {overflow-x:hidden}\n" +
-    "    .bootstrapHack {\n" +
-    "        z-index: 3;\n" +
-    "        border: 0px;\n" +
-    "        background: #282c34;\n" +
-    "        position: relative;\n" +
-    "        height:100vh;\n" +
-    "    }\n" +
-    "    .bootstrapHack:after {\n" +
-    "        content: '';\n" +
-    "        position: absolute;\n" +
-    "        top: 0;\n" +
-    "        bottom: 0;\n" +
-    "        left:80%;\n" +
-    "        right:-3000px;\n" +
-    "        background: #282c34;\n" +
-    "        z-index: -1;\n" +
-    "    }\n" +
-    "    pre{padding:0px;background-color:#282c34;border:0px;}\n" +
-    "</style>\n" +
-    "\n" +
     "<div id=\"APPDESIGN\" style=\"background-color:white;min-height:70vh\">\n" +
-    "\n" +
     "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1495,30 +1490,30 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "\n" +
     "    <div class=\"container\" style=\"padding-left:0px;max-width: none;\">\n" +
-    "\n" +
     "        <div class=\"row\">\n" +
-    "\n" +
     "            <div class=\"col-sm-6 col-xs-12\">  \n" +
+    "                \n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <!--TOKEN STRING MAPPING-->\n" +
+    "\n" +
     "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
+    "\n" +
     "                <!--<div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
     "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>-->\n" +
     "                <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
     "                <!--<div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>-->\n" +
-    "                <p>Mapping <b>balanceOf</b>:</p>\n" +
+    "                <!--<p>Mapping <b>balanceOf</b>:</p>-->\n" +
     "                \n" +
-    "                <a class=\"btn btn-default log-btn\" href=\"/apps\">Applicaion Ecosystem</a>\n" +
+    "                <a class=\"btn btn-default log-btn\" href=\"/apps\">Application Ecosystem</a>\n" +
     "\n" +
+    "                <!--\n" +
     "                <h2>Title 2</h2>\n" +
     "                <h3>Title 3</h3>\n" +
     "                <h4>Title 4</h4>\n" +
     "                <h5>Title 5</h5>\n" +
+    "                -->\n" +
     "\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"col-sm-6 col-xs-12\">\n" +
     "                <div class=\"bootstrapHack\">\n" +
     "                    <div style=\"margin-left:15px;\">\n" +
@@ -1529,11 +1524,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
-    "\n" +
     "</div>\n" +
     "\n" +
     "<div id=\"CRE8\" style=\"background-color:white;min-height:70vh\">\n" +
@@ -1821,8 +1813,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-2\">\n" +
-    "                 <div>\n" +
+    "            <div class=\"col-sm-1\">\n" +
+    "                <div class=\"modelList\">\n" +
     "                    <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
     "                    <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
     "                    <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
@@ -1851,11 +1843,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
+    "            <div class=\"col-sm-5\">\n" +
     "                <div>\n" +
     "                    <h5>Filter & Search Parameters</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
     "                    <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
     "                </div>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -1872,35 +1863,51 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "                -->\n" +
     "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
     "<div id=\"ACTION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Action</h1>\n" +
-    "                    <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                \n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Action</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                \n" +
     "                <div class=\"spacing-15\"></div>\n" +
+    "                \n" +
     "                <h4><b>Action</b></h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
+    "               \n" +
     "                <p><b>get /api/action</b></p>\n" +
+    "                <p><b>getSome</b></p>\n" +
+    "                <p><b>post /api/action</b></p>\n" +
+    "                <p><b>create</b></p>\n" +
+    "\n" +
     "                <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
+    "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                <div class=\"bootstrapHack\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                    <div style=\"margin-left:15px;\">\n" +
     "                        <div class=\"spacing-15\"></div>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
@@ -1912,159 +1919,287 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "</div>\n" +
     "\n" +
     "<div id=\"APP\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">App</h1>\n" +
-    "                    <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,application,grow,nature,technology')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">App</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
+    "                <p><b>get /api/app</b></p>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"ASSOCIATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?connection,code,association,symbiotic')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Association</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
+    "                <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
+    "                <p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "                <p><b>get /api/assoication</b></p>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"BLOCK\" style=\"background-color:white;min-height:70vh\">\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-6\">\n" +
     "\n" +
-    "                <div id=\"APP1\">\n" +
-    "                    <h4><b>App</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"appModel\"></div>\n" +
-    "                    <p><b>get /api/app</b></p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"ASSOCIATION\">\n" +
-    "                    <h4><b>Assoication</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
-    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
-    "                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
-    "                    <p><b>get /api/assoication</b></p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"BLOCK\">\n" +
-    "                    <h4><b>Block</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of <a href=\"#TX\" du-smooth-scroll>txs</a>. All data for the decentralized <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href=\"#\">Peer Coordination</a>.</p>\n" +
-    "\n" +
-    "                    <p>BLOCK HEADERS</p>\n" +
-    "                    <div>\n" +
-    "                        <p>parentHash</p>\n" +
-    "                        <p>ommersHash</p>\n" +
-    "                        <p>beneficiary</p>\n" +
-    "                        <p>stateRoot</p>\n" +
-    "                        <p>transactionsRoot</p>\n" +
-    "                        <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>\n" +
-    "                        <p>receiptsRoot\n" +
-    "                        <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
-    "                        <p>logsBloom</p>\n" +
-    "                        <p>difficulty</p>\n" +
-    "                        <p>number</p>\n" +
-    "                        <p>peerAttention</p>\n" +
-    "                        <p>timestamp</p>\n" +
-    "                        <p>extraData</p>\n" +
-    "                        <p>mixHash</p>\n" +
-    "                        <p>nonce</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <img style=\"height:200px;\" style=\"\" src=\"https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png\">\n" +
-    "                    <img style=\"height:200px;\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png\">\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "                    <div hljs hljs-language=\"javascript\" hljs-source=\"blockModel\"></div>\n" +
-    "\n" +
-    "                    <div>\n" +
-    "                        <p>parentHash: {type: 'string'},</p>\n" +
-    "                        <p>ommersHash: {type: 'string'},</p>\n" +
-    "                        <p>beneficiary: {type: 'string'},</p>\n" +
-    "                        <p>stateRoot: {type: 'string'},</p>\n" +
-    "                        <p>transactionsRoot: {type: 'string'},</p>\n" +
-    "                        <p>receiptsRoot: {type: 'string'},</p>\n" +
-    "                        difficulty: {type: 'string'},</p>\n" +
-    "                        <p><p>number: {type: 'string'},</p>\n" +
-    "                        <p>timestamp: {type: 'string'},</p>\n" +
-    "                        <p>extraData: {type: 'string'},</p>\n" +
-    "                        <p>mixHash: {type: 'string'},</p>\n" +
-    "                        <p>nonce: {type: 'string'}</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div>\n" +
-    "                       <p><b>txCount:</b> 'integer' the number of transactions in the block</p> \n" +
-    "                       <p><b>height:</b> 'integer' </p> \n" +
-    "                       <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> \n" +
-    "                       <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> \n" +
-    "                       <p><b>merkleRoot:</b> 'integer' TBD</p> \n" +
-    "                       <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> \n" +
-    "                       <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> \n" +
-    "                       <p><b>size:</b> 'integer' the data size of the block</p> \n" +
-    "                    </div>\n" +
-    "                    <p><b>get /api/block</b></p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"CONTENT\">\n" +
-    "                    <h4><b>Content</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
-    "                    <div>\n" +
-    "                        <p><b>Title:</b> Title of Content is a String</p>\n" +
-    "                        <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>\n" +
-    "                        <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>\n" +
-    "                        <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>\n" +
-    "                        <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>\n" +
-    "                        <p><b>Associated Models:</b> Computed via Association Traversal</p>\n" +
-    "                        <p><b>Reactions:</b> TBD </p>\n" +
-    "                        <p><b>Creator:</b> Address, Member or Project, who created Content</p>\n" +
-    "                        <p><b>CreatedAt:</b> Timestamp of Creation</p>\n" +
-    "                    </div>\n" +
-    "                    <div>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
-    "                        <p><b>[get, post] /api/content</b></p>\n" +
-    "                        <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
-    "\n" +
-    "                        <form role=\"form\" ng-show=\"false\">\n" +
-    "                            <div class=\"form-group\">\n" +
-    "                                <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
-    "                                <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
-    "                                <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
-    "                                <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?blockchain,technology,network,code,information,data')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Block</h1>\n" +
     "                            </div>\n" +
-    "                        </form>\n" +
-    "                        <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
-    "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
-    "                <!--TODO: DATA AND EVENTS-->\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of <a href=\"#TX\" du-smooth-scroll>txs</a>. All data for the decentralized <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href=\"#\">Peer Coordination</a>.</p>\n" +
     "\n" +
-    "                <div>\n" +
-    "                    <h4><b>Data</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Data is information. Data and Events information to information mapping.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
-    "                    <p><b>[get, post] /api/data</b></p>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <p><b>BLOCK HEADERS</b></p>\n" +
+    "                \n" +
+    "                <img style=\"\" src=\"images/block-header-temp.jpg\">\n" +
+    "                <img style=\"height:200px;\" style=\"\" src=\"https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png\">\n" +
+    "                <img style=\"height:200px;\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png\">\n" +
+    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <div class=\"\">\n" +
+    "                    <p><b>parentHash</b></p>\n" +
+    "                    <p><b>ommersHash</b></p>\n" +
+    "                    <p><b>beneficiary</b></p>\n" +
+    "                    <p><b>stateRoot</b></p>\n" +
+    "                    <p><b>transactionsRoot</b></p>\n" +
+    "                    <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>\n" +
+    "                    <p><b>receiptsRoot</b></p>\n" +
+    "                    <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
+    "                    <p><b>logsBloom</b></p>\n" +
+    "                    <p><b>difficulty</b></p>\n" +
+    "                    <p><b>number</b></p>\n" +
+    "                    <p><b>peerAttention</b></p>\n" +
+    "                    <p><b>timestamp</b></p>\n" +
+    "                    <p><b>extraData</b></p>\n" +
+    "                    <p><b>mixHash</b></p>\n" +
+    "                    <p><b>nonce</b></p>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <div class=\"\">\n" +
+    "                    <p>parentHash: {type: 'string'},</p>\n" +
+    "                    <p>ommersHash: {type: 'string'},</p>\n" +
+    "                    <p>beneficiary: {type: 'string'},</p>\n" +
+    "                    <p>stateRoot: {type: 'string'},</p>\n" +
+    "                    <p>transactionsRoot: {type: 'string'},</p>\n" +
+    "                    <p>receiptsRoot: {type: 'string'},</p>\n" +
+    "                    <p>difficulty: {type: 'string'},</p>\n" +
+    "                    <p>number: {type: 'string'},</p>\n" +
+    "                    <p>timestamp: {type: 'string'},</p>\n" +
+    "                    <p>extraData: {type: 'string'},</p>\n" +
+    "                    <p>mixHash: {type: 'string'},</p>\n" +
+    "                    <p>nonce: {type: 'string'}</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                <div>\n" +
-    "                    <h4><b>Event</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Event Model</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
-    "                    <p><b>[get, post] /api/event</b></p>\n" +
+    "                   <p><b>txCount:</b> 'integer' the number of transactions in the block</p> \n" +
+    "                   <p><b>height:</b> 'integer' </p> \n" +
+    "                   <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> \n" +
+    "                   <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> \n" +
+    "                   <p><b>merkleRoot:</b> 'integer' TBD</p> \n" +
+    "                   <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> \n" +
+    "                   <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> \n" +
+    "                   <p><b>size:</b> 'integer' the data size of the block</p> \n" +
     "                </div>\n" +
+    "\n" +
+    "                <p><b>get /api/block</b></p>\n" +
+    "\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"blockModel\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"CONTENT\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,paint,splash,technology,code,content,music')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Content</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
+    "                <div>\n" +
+    "                    <p><b>Title:</b> Title of Content is a String</p>\n" +
+    "                    <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>\n" +
+    "                    <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>\n" +
+    "                    <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>\n" +
+    "                    <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>\n" +
+    "                    <p><b>Associated Models:</b> Computed via Association Traversal</p>\n" +
+    "                    <p><b>Reactions:</b> TBD </p>\n" +
+    "                    <p><b>Creator:</b> Address, Member or Project, who created Content</p>\n" +
+    "                    <p><b>CreatedAt:</b> Timestamp of Creation</p>\n" +
+    "                </div>\n" +
+    "                <div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
+    "                    <p><b>[get, post] /api/content</b></p>\n" +
+    "                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
+    "                    <form role=\"form\" ng-show=\"false\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
+    "                            <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
+    "                    <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                    <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\" ng-if=\"false\">\n" +
+    "                <div class=\"bootstrapHack\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
+    "                        <div>\n" +
+    "                            <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
+    "                            <p><b>[get, post] /api/content</b></p>\n" +
+    "                            <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
+    "                            <form role=\"form\" ng-show=\"false\">\n" +
+    "                                <div class=\"form-group\">\n" +
+    "                                    <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
+    "                                    <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
+    "                                    <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
+    "                                    <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
+    "                                </div>\n" +
+    "                            </form>\n" +
+    "                            <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--TODO: DATA-->\n" +
+    "<div id=\"DATA\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,information,data')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Data</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Data is information. Data and Events information to information mapping.</p>\n" +
+    "                <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
+    "                <p><b>[get, post] /api/data</b></p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--TODO: EVENT-->\n" +
+    "<div id=\"EVENT\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?event,information,data')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Event</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">This is the Event Model</p>\n" +
+    "                <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
+    "                <p><b>[get, post] /api/event</b></p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div id=\"FOLLOWER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
     "               \n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"FOLLOWER\">\n" +
+    "                <div>\n" +
     "                    <h4><b>Follower</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Followers are .. </p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"followerModel\"></div>\n" +
@@ -2096,7 +2231,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <div>\n" +
+    "                <div id=\"LOCATION\">\n" +
     "                    <h4><b>Location</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Location Model</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"locationModel\"></div>\n" +
@@ -2211,11 +2346,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div id=\"PROJECT\">\n" +
-    "\n" +
     "                    <h4><b>Project</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectModel\"></div>\n" +
-    "                    \n" +
     "                    <div>\n" +
     "                         <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#PROJECT\" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>\n" +
     "                        <p><b>getSome:function()</b></p>\n" +
@@ -2233,7 +2366,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>info:</b> TBD</p> \n" +
     "                    </div>\n" +
     "                    <p><b>[get, post] /api/project</b></p>\n" +
-    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -2290,7 +2422,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <div>\n" +
     "                        <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>\n" +
     "                    </div>\n" +
-    "\n" +
     "                    <div>\n" +
     "                        {\n" +
     "                            assetsInput:[],\n" +
@@ -2303,7 +2434,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                            type:[],\n" +
     "                        }\n" +
     "                    </div>\n" +
-    "\n" +
     "                    <p><b>get /api/search</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2409,22 +2539,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Validation Models:</b> Binary relation of Two Models to be associated.</p>\n" +
     "                        <p><b>Creator:</b> Address of Member who created Validation</p>\n" +
     "                    </div>\n" +
-    "\n" +
     "                    <p>Reputation & Validation</p>\n" +
     "                    <p>Interoperable Validation Types</p>\n" +
     "                    <p>Composite Validation (CRE8), Human Validated Proof of Work, Machine Validation, and App Specific Validation</p>\n" +
-    "\n" +
     "                    <!--CONTEXT-SPECIFIC x-->\n" +
     "                    <p>Association Space</p>\n" +
     "                    <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Layered Recursion (Validation-Validation)</p>\n" +
-    "\n" +
     "                    <p>Templates</p>\n" +
     "                    <p>PROJECT - ITEM: DISCRETE, PROJECT - MEMBER: DISCRETE, PROJECT - ORDER: DISCRETE</p>\n" +
     "                    <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>\n" +
     "                    <p>PROJECT - TASK - TIME</p>\n" +
     "                    <p>PROJECT - TASK</p>\n" +
-    "\n" +
     "                    <p><b>[get, post] /api/validation</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>\n" +
     "                    <div>\n" +
@@ -2436,10 +2562,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "            </div>\n" +
-    "\n" +
-    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
