@@ -130,8 +130,9 @@ angular.module( 'conexus.marketPlace', [
 
     $scope.reply = function(item){
         if($scope.currentUser){
-            var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.items[index].showReply = !$scope.items[index].showReply;
+            //var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
+            //$scope.items[index].showReply = !$scope.items[index].showReply;
+            $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle()}
     };

@@ -55,17 +55,6 @@
           ga('send', 'pageview');
         </script>
         <!--ANALYTICS END-->
-
-        <!--HMM-->
-        <!--
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-              skipStartupTypeset: true
-            });
-            MathJax.Hub.Configured();
-        </script>
-        -->
-
     </head>
 <body>
     
@@ -88,6 +77,7 @@
     <script src="/bower_components/angular-moment/angular-moment.js"></script>
     <script src="/bower_components/highlight/highlight.pack.js"></script>
     <script src="/bower_components/angular-highlightjs/angular-highlightjs.min.js"></script>
+    <script src="/bower_components/ASCIIMathML/ASCIIMathML.js"></script>
     <script src="/bower_components/d3/d3.js"></script>
     <script src="/bower_components/nvd3/build/nv.d3.js"></script>
     <script src="/bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
@@ -172,6 +162,16 @@
     <!--CDNS-->
     <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
     <!--CDNS END-->
+
+    <!--CONFIGURE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            jax: ["input/AsciiMath","output/commonHTML"]
+        });
+        MathJax.Hub.Configured();
+    </script>
+    <!--CONFIGURE END-->
 
     <!--TEMPLATES-->
     <script type="text/javascript" src="/templates.js"></script>

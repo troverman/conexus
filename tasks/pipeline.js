@@ -36,9 +36,7 @@ var jsFilesToInject = [
   'bower_components/highlight/highlight.pack.js',
   'bower_components/angular-highlightjs/angular-highlightjs.min.js',
 
-  //hmm
-  //'bower_components/mathjax/MathJax.js',
-  //'bower_components/ASCIIMathML/ASCIIMathML.js',
+  'bower_components/ASCIIMathML/ASCIIMathML.js',
 
   'bower_components/d3/d3.js',
   'bower_components/nvd3/build/nv.d3.js',

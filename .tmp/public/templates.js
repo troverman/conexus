@@ -1970,7 +1970,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
     "                <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
     "                <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
-    "                <p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "                <!--<p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
+    "                <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
+    "\n" +
     "                <p>Websocket Subscribe</p>\n" +
     "                <p><b>get /api/assoication</b></p>\n" +
     "            </div>\n" +
@@ -2686,10 +2688,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            <div class=\"col-sm-8\">\n" +
     "                <!--MULTI ORG LATTICE-->\n" +
     "                <h4>Validation Traversal</h4>\n" +
-    "                <p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
+    "                <!--<p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
+    "                <p>`Association | A = sum_(i=0)^n {V_N}_[a-z]`</p>\n" +
+    "                <p>`Validation | {V_N} = sum_(i=0)^n {V_{V_i}}_[a-z]`</p>\n" +
+    "                <p>`Association | A = sum_(i=0)^n sum_(i=0)^n V_[a-z]`</p>\n" +
     "\n" +
-    "                <p>A = sum_(i=0)^n V_[a-z]</p>\n" +
-    "                <p>V = sum_(i=0)^n (V_V)_[a-z]</p>\n" +
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">From Set Obj{} Score --compute--> </p>\n" +
     "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure; RECURISIVE.. TOPOLOGY MAP OF VALIDATIONS (HIGHER ORDER)</p>\n" +
@@ -2736,6 +2739,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">From Σ({}={}) --compute--> </p>\n" +
     "                <p style=\"color:gray;font-style:italic\">An Immutable Object Structure</p>\n" +
+    "\n" +
+    "                `[[a,b],[c,d]]`\n" +
+    "                \n" +
+    "                `((a),(b))`\n" +
     "                \n" +
     "                <!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->\n" +
     "                <div hljs hljs-language=\"javascript\"  hljs-source=\"orderBookTensor\"></div>\n" +
@@ -2750,6 +2757,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h5>Market Objects and their Traversal Character</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">For every n-object there exists nCm objects of rank m</p>\n" +
+    "                \n" +
+    "                `((n),(m)) = (n!)/(m!(n-m)!)`\n" +
+    "\n" +
+    "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                <p><b>Combinatorial 3</b></p>\n" +
