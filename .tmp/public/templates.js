@@ -1372,34 +1372,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><b><a href=\"#APPDESIGN\" du-smooth-scroll>Interoperable Protocol & Application Design Architecture</a></b></p>\n" +
     "                <p><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></p>\n" +
     "                <p><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>\n" +
-    "                <div ng-show=\"false\">\n" +
-    "                    <p>Action</p>\n" +
-    "                    <p>App</p>\n" +
-    "                    <p>Assoication</p>\n" +
-    "                    <p>Block</p>\n" +
-    "                    <p>Content</p>\n" +
-    "                    <p>Data</p>\n" +
-    "                    <p>Event</p>\n" +
-    "                    <p>Follower</p>\n" +
-    "                    <p>Item</p>\n" +
-    "                    <p>Location</p>\n" +
-    "                    <p>Member</p>\n" +
-    "                    <p>Motion</p>\n" +
-    "                    <p>Notification</p>\n" +
-    "                    <p>Order</p>\n" +
-    "                    <p>Passport</p>\n" +
-    "                    <p>Project</p>\n" +
-    "                    <p>ProjectCharter</p>\n" +
-    "                    <p>ProjectMember</p>\n" +
-    "                    <p>Protocol</p>\n" +
-    "                    <p>Reaction</p>\n" +
-    "                    <p>Search</p>\n" +
-    "                    <p>Task</p>\n" +
-    "                    <p>Time</p>\n" +
-    "                    <p>Transaction</p>\n" +
-    "                    <p>Tx</p>\n" +
-    "                    <p>Validation</p>\n" +
-    "                </div>\n" +
+    "               \n" +
     "\n" +
     "                <!--MEMBER DOCS; PROJECT DOCS-->\n" +
     "\n" +
@@ -1649,9 +1622,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Action Tokenization Protocol</h4>\n" +
-    "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newAction){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"actionTokenization\"></div>\n" +
+    "\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a href=\"#ACTION\" du-smooth-scroll>action</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1849,17 +1821,45 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-2\">\n" +
+    "                 <div>\n" +
+    "                    <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
+    "                    <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
+    "                    <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
+    "                    <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
+    "                    <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
+    "                    <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
+    "                    <p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>\n" +
+    "                    <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
+    "                    <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
+    "                    <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
+    "                    <p><a href=\"#MEMBER\" du-smooth-scroll>Member</a></p>\n" +
+    "                    <p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>\n" +
+    "                    <p><a href=\"#NOTIFICATION\" du-smooth-scroll>Notification</a></p>\n" +
+    "                    <p><a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
+    "                    <p><a href=\"#PASSPORT\" du-smooth-scroll>Passport</a></p>\n" +
+    "                    <p><a href=\"#PROJECT\" du-smooth-scroll>Project</a></p>\n" +
+    "                    <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll>ProjectCharter</a></p>\n" +
+    "                    <p><a href=\"#PROJECTMEMBER\" du-smooth-scroll>ProjectMember</a></p>\n" +
+    "                    <p><a href=\"#PROTOCOL\" du-smooth-scroll>Protocol</a></p>\n" +
+    "                    <p><a href=\"#REACTION\" du-smooth-scroll>Reaction</a></p>\n" +
+    "                    <p><a href=\"#SEARCH\" du-smooth-scroll>Search</a></p>\n" +
+    "                    <p><a href=\"#TASK\" du-smooth-scroll>Task</a></p>\n" +
+    "                    <p><a href=\"#TIME\" du-smooth-scroll>Time</a></p>\n" +
+    "                    <p><a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a></p>\n" +
+    "                    <p><a href=\"#TX\" du-smooth-scroll>Tx</a></p>\n" +
+    "                    <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "            <div class=\"col-sm-6\">\n" +
-    "\n" +
     "                <div>\n" +
     "                    <h5>Filter & Search Parameters</h5>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
     "                    <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
     "                </div>\n" +
-    "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
+    "                <!--\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1869,20 +1869,65 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
+    "                -->\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "\n" +
-    "                <div id=\"ACTION\">\n" +
-    "                    <h4><b>Action</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
-    "                    <p><b>get /api/action</b></p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
+    "\n" +
+    "<div id=\"ACTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Action</h1>\n" +
+    "                    <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
     "                </div>\n" +
-    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <h4><b>Action</b></h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
+    "                <p><b>get /api/action</b></p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                <div class=\"bootstrapHack\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "\n" +
-    "                <div id=\"APP\">\n" +
+    "<div id=\"APP\" style=\"background-color:white;min-height:70vh\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">App</h1>\n" +
+    "                    <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "\n" +
+    "                <div id=\"APP1\">\n" +
     "                    <h4><b>App</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"appModel\"></div>\n" +
@@ -1891,13 +1936,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "                <!--VALIDATION WITH RESPECT TO TAGS ETC--> \n" +
-    "\n" +
     "                <div id=\"ASSOCIATION\">\n" +
     "                    <h4><b>Assoication</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
     "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>\n" +
     "                    <p><b>get /api/assoication</b></p>\n" +
@@ -1909,46 +1953,45 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <h4><b>Block</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of <a href=\"#TX\" du-smooth-scroll>txs</a>. All data for the decentralized <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href=\"#\">Peer Coordination</a>.</p>\n" +
     "\n" +
-    "                    <!--\n" +
-    "                    BLOCK HEADERS ETH\n" +
-    "                    parentHash\n" +
-    "                    ommersHash\n" +
-    "                    beneficiary\n" +
-    "                    stateRoot\n" +
-    "                    transactionsRoot\n" +
-    "                    Hash of the root node of the transactions trie. This trie contains all transactions in the block body.\n" +
-    "\n" +
-    "                    receiptsRoot\n" +
-    "                    Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.\n" +
-    "\n" +
-    "                    logsBloom\n" +
-    "                    difficulty\n" +
-    "                    number\n" +
-    "                    gasLimit\n" +
-    "                    gasUsed\n" +
-    "                    timestamp\n" +
-    "                    extraData\n" +
-    "                    mixHash\n" +
-    "                    nonce\n" +
-    "                    -->\n" +
+    "                    <p>BLOCK HEADERS</p>\n" +
+    "                    <div>\n" +
+    "                        <p>parentHash</p>\n" +
+    "                        <p>ommersHash</p>\n" +
+    "                        <p>beneficiary</p>\n" +
+    "                        <p>stateRoot</p>\n" +
+    "                        <p>transactionsRoot</p>\n" +
+    "                        <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>\n" +
+    "                        <p>receiptsRoot\n" +
+    "                        <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
+    "                        <p>logsBloom</p>\n" +
+    "                        <p>difficulty</p>\n" +
+    "                        <p>number</p>\n" +
+    "                        <p>peerAttention</p>\n" +
+    "                        <p>timestamp</p>\n" +
+    "                        <p>extraData</p>\n" +
+    "                        <p>mixHash</p>\n" +
+    "                        <p>nonce</p>\n" +
+    "                    </div>\n" +
     "\n" +
     "                    <img style=\"height:200px;\" style=\"\" src=\"https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png\">\n" +
     "                    <img style=\"height:200px;\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png\">\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <div hljs hljs-language=\"javascript\" hljs-source=\"blockModel\"></div>\n" +
     "\n" +
-    "                    <!--parentHash: {type: 'string'},\n" +
-    "                    ommersHash: {type: 'string'},\n" +
-    "                    beneficiary: {type: 'string'},\n" +
-    "                    stateRoot: {type: 'string'},\n" +
-    "                    transactionsRoot: {type: 'string'},\n" +
-    "                    receiptsRoot: {type: 'string'},\n" +
-    "                    difficulty: {type: 'string'},\n" +
-    "                    number: {type: 'string'},\n" +
-    "                    timestamp: {type: 'string'},\n" +
-    "                    extraData: {type: 'string'},\n" +
-    "                    mixHash: {type: 'string'},\n" +
-    "                    nonce: {type: 'string'},-->\n" +
+    "                    <div>\n" +
+    "                        <p>parentHash: {type: 'string'},</p>\n" +
+    "                        <p>ommersHash: {type: 'string'},</p>\n" +
+    "                        <p>beneficiary: {type: 'string'},</p>\n" +
+    "                        <p>stateRoot: {type: 'string'},</p>\n" +
+    "                        <p>transactionsRoot: {type: 'string'},</p>\n" +
+    "                        <p>receiptsRoot: {type: 'string'},</p>\n" +
+    "                        difficulty: {type: 'string'},</p>\n" +
+    "                        <p><p>number: {type: 'string'},</p>\n" +
+    "                        <p>timestamp: {type: 'string'},</p>\n" +
+    "                        <p>extraData: {type: 'string'},</p>\n" +
+    "                        <p>mixHash: {type: 'string'},</p>\n" +
+    "                        <p>nonce: {type: 'string'}</p>\n" +
+    "                    </div>\n" +
     "\n" +
     "                    <div>\n" +
     "                       <p><b>txCount:</b> 'integer' the number of transactions in the block</p> \n" +
@@ -2001,7 +2044,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "                <!--TODO: DATA AND EVENTS-->\n" +
-    "                <!--\n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div>\n" +
@@ -2019,7 +2061,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
     "                    <p><b>[get, post] /api/event</b></p>\n" +
     "                </div>\n" +
-    "                -->\n" +
     "               \n" +
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
@@ -2053,13 +2094,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>[get, post] /api/item</b></p>\n" +
     "                </div>\n" +
     "\n" +
-    "                <!--TODO: LOCATION-->\n" +
     "                <div class=\"spacing-50\"></div>\n" +
-    "                \n" +
+    "\n" +
     "                <div>\n" +
     "                    <h4><b>Location</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Location Model</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var locationModel = {};</div>\n" +
+    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"locationModel\"></div>\n" +
     "                    <p><b>[get, post] /api/location</b></p>\n" +
     "                </div>\n" +
     "\n" +
@@ -2171,15 +2211,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "                <div id=\"PROJECT\">\n" +
+    "\n" +
     "                    <h4><b>Project</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
     "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectModel\"></div>\n" +
-    "                    <!--\n" +
+    "                    \n" +
     "                    <div>\n" +
     "                         <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#PROJECT\" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>\n" +
     "                        <p><b>getSome:function()</b></p>\n" +
     "                    </div>\n" +
-    "                    -->\n" +
     "                    <div>\n" +
     "                        <p><b>title:</b> TBD</p> \n" +
     "                        <p><b>description:</b> TBD</p> \n" +
@@ -2193,6 +2233,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>info:</b> TBD</p> \n" +
     "                    </div>\n" +
     "                    <p><b>[get, post] /api/project</b></p>\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -2249,18 +2290,20 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <div>\n" +
     "                        <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>\n" +
     "                    </div>\n" +
-    "                    <!--\n" +
-    "                    $rootScope.searchQueryNav = {\n" +
-    "                        assetsInput:[],\n" +
-    "                        assetsOutput:[],\n" +
-    "                        associations:[],\n" +
-    "                        model:[],\n" +
-    "                        locations:[],\n" +
-    "                        query:[],\n" +
-    "                        tags:[],\n" +
-    "                        type:[],\n" +
-    "                    };\n" +
-    "                    -->\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        {\n" +
+    "                            assetsInput:[],\n" +
+    "                            assetsOutput:[],\n" +
+    "                            associations:[],\n" +
+    "                            model:[],\n" +
+    "                            locations:[],\n" +
+    "                            query:[],\n" +
+    "                            tags:[],\n" +
+    "                            type:[],\n" +
+    "                        }\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <p><b>get /api/search</b></p>\n" +
     "                </div>\n" +
     "\n" +

@@ -68,34 +68,7 @@
                 <p><b><a href="#APPDESIGN" du-smooth-scroll>Interoperable Protocol & Application Design Architecture</a></b></p>
                 <p><b><a href="#CRE8" du-smooth-scroll>CRE8 CORE Protocols</a></b></p>
                 <p><b><a href="#CONEXAPI" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>
-                <div ng-show="false">
-                    <p>Action</p>
-                    <p>App</p>
-                    <p>Assoication</p>
-                    <p>Block</p>
-                    <p>Content</p>
-                    <p>Data</p>
-                    <p>Event</p>
-                    <p>Follower</p>
-                    <p>Item</p>
-                    <p>Location</p>
-                    <p>Member</p>
-                    <p>Motion</p>
-                    <p>Notification</p>
-                    <p>Order</p>
-                    <p>Passport</p>
-                    <p>Project</p>
-                    <p>ProjectCharter</p>
-                    <p>ProjectMember</p>
-                    <p>Protocol</p>
-                    <p>Reaction</p>
-                    <p>Search</p>
-                    <p>Task</p>
-                    <p>Time</p>
-                    <p>Transaction</p>
-                    <p>Tx</p>
-                    <p>Validation</p>
-                </div>
+               
 
                 <!--MEMBER DOCS; PROJECT DOCS-->
 
@@ -345,9 +318,8 @@
                 <div class="spacing-10"></div>
 
                 <h4>Action Tokenization Protocol</h4>
-                <div hljs hljs-language="javascript">
-create:function(newAction){},
-getSome:function(newQuery){}</div>
+                <div hljs hljs-language="javascript"  hljs-source="actionTokenization"></div>
+
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of an <a href="#ACTION" du-smooth-scroll>action</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
@@ -545,17 +517,45 @@ getSome:function(newQuery){}</div>
     <div class="container">
         <div class="spacing-15"></div>
         <div class="row">
+            <div class="col-sm-2">
+                 <div>
+                    <p><a href="#ACTION" du-smooth-scroll>Action</a></p>
+                    <p><a href="#APP" du-smooth-scroll>App</a></p>
+                    <p><a href="#ASSOCIATION" du-smooth-scroll>Assoication</a></p>
+                    <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
+                    <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
+                    <p><a href="#DATA" du-smooth-scroll>Data</a></p>
+                    <p><a href="#EVENT" du-smooth-scroll>Event</a></p>
+                    <p><a href="#FOLLOWER" du-smooth-scroll>Follower</a></p>
+                    <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
+                    <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
+                    <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
+                    <p><a href="#MOTION" du-smooth-scroll>Motion</a></p>
+                    <p><a href="#NOTIFICATION" du-smooth-scroll>Notification</a></p>
+                    <p><a href="#ORDER" du-smooth-scroll>Order</a></p>
+                    <p><a href="#PASSPORT" du-smooth-scroll>Passport</a></p>
+                    <p><a href="#PROJECT" du-smooth-scroll>Project</a></p>
+                    <p><a href="#PROJECTCHARTER" du-smooth-scroll>ProjectCharter</a></p>
+                    <p><a href="#PROJECTMEMBER" du-smooth-scroll>ProjectMember</a></p>
+                    <p><a href="#PROTOCOL" du-smooth-scroll>Protocol</a></p>
+                    <p><a href="#REACTION" du-smooth-scroll>Reaction</a></p>
+                    <p><a href="#SEARCH" du-smooth-scroll>Search</a></p>
+                    <p><a href="#TASK" du-smooth-scroll>Task</a></p>
+                    <p><a href="#TIME" du-smooth-scroll>Time</a></p>
+                    <p><a href="#TRANSACTION" du-smooth-scroll>Transaction</a></p>
+                    <p><a href="#TX" du-smooth-scroll>Tx</a></p>
+                    <p><a href="#VALIDATION" du-smooth-scroll>Validation</a></p>
+                </div>
+            </div>
             <div class="col-sm-6">
-
                 <div>
                     <h5>Filter & Search Parameters</h5>
                     <p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>
                     <div hljs hljs-language="javascript"  hljs-source="metaModel"></div>
                     <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->
                 </div>
-
                 <div class="spacing-50"></div>
-
+                <!--
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
@@ -565,20 +565,65 @@ getSome:function(newQuery){}</div>
                         </div>
                     </div>
                 </div>
-
                 <div class="spacing-50"></div>
+                -->
+            </div>
+        </div>
+        <div class="spacing-15"></div>
+    </div>
+</div>
 
-                <div id="ACTION">
-                    <h4><b>Action</b></h4>
-                    <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>
-                    <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
-                    <p><b>get /api/action</b></p>
-                    <p style="color:gray;font-style:italic">Permissions.. Authentatication.. etc</p>
+
+<div id="ACTION" style="background-color:white;min-height:70vh">
+    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div class="container">
+                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Action</h1>
+                    <h5 style="color:white">CRE8 CORE Peer Models</h5>
                 </div>
-
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="spacing-15"></div>
+                <h4><b>Action</b></h4>
+                <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>
+                <p><b>get /api/action</b></p>
+                <p style="color:gray;font-style:italic">Permissions.. Authentatication.. etc</p>
                 <div class="spacing-50"></div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="bootstrapHack">
+                    <div style="margin-left:15px;">
+                        <div class="spacing-15"></div>
+                        <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <div id="APP">
+<div id="APP" style="background-color:white;min-height:70vh">
+    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div class="container">
+                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">App</h1>
+                    <h5 style="color:white">CRE8 CORE Peer Models</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="spacing-15"></div>
+        <div class="row">
+            <div class="col-sm-6">
+
+                <div id="APP1">
                     <h4><b>App</b></h4>
                     <p style="color:gray;font-style:italic">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>
                     <div hljs hljs-language="javascript"  hljs-source="appModel"></div>
@@ -587,13 +632,12 @@ getSome:function(newQuery){}</div>
 
                 <div class="spacing-50"></div>
 
-                <!--VALIDATION WITH RESPECT TO TAGS ETC--> 
-
                 <div id="ASSOCIATION">
                     <h4><b>Assoication</b></h4>
                     <p style="color:gray;font-style:italic">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>
                     <p style="color:gray;font-style:italic">Project <--> Task <--> Time
                     <p style="color:gray;font-style:italic"> Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
+                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> 
                     <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
                     <p style="color:gray;font-style:italic">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>
                     <p><b>get /api/assoication</b></p>
@@ -605,46 +649,45 @@ getSome:function(newQuery){}</div>
                     <h4><b>Block</b></h4>
                     <p style="color:gray;font-style:italic">Blocks are machine verified bundles of <a href="#TX" du-smooth-scroll>txs</a>. All data for the decentralized <a href="#CRE8VM" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href="#">Peer Coordination</a>.</p>
 
-                    <!--
-                    BLOCK HEADERS ETH
-                    parentHash
-                    ommersHash
-                    beneficiary
-                    stateRoot
-                    transactionsRoot
-                    Hash of the root node of the transactions trie. This trie contains all transactions in the block body.
-
-                    receiptsRoot
-                    Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.
-
-                    logsBloom
-                    difficulty
-                    number
-                    gasLimit
-                    gasUsed
-                    timestamp
-                    extraData
-                    mixHash
-                    nonce
-                    -->
+                    <p>BLOCK HEADERS</p>
+                    <div>
+                        <p>parentHash</p>
+                        <p>ommersHash</p>
+                        <p>beneficiary</p>
+                        <p>stateRoot</p>
+                        <p>transactionsRoot</p>
+                        <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>
+                        <p>receiptsRoot
+                        <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>
+                        <p>logsBloom</p>
+                        <p>difficulty</p>
+                        <p>number</p>
+                        <p>peerAttention</p>
+                        <p>timestamp</p>
+                        <p>extraData</p>
+                        <p>mixHash</p>
+                        <p>nonce</p>
+                    </div>
 
                     <img style="height:200px;" style="" src="https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png">
                     <img style="height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png">
                     <div class="spacing-5"></div>
                     <div hljs hljs-language="javascript" hljs-source="blockModel"></div>
 
-                    <!--parentHash: {type: 'string'},
-                    ommersHash: {type: 'string'},
-                    beneficiary: {type: 'string'},
-                    stateRoot: {type: 'string'},
-                    transactionsRoot: {type: 'string'},
-                    receiptsRoot: {type: 'string'},
-                    difficulty: {type: 'string'},
-                    number: {type: 'string'},
-                    timestamp: {type: 'string'},
-                    extraData: {type: 'string'},
-                    mixHash: {type: 'string'},
-                    nonce: {type: 'string'},-->
+                    <div>
+                        <p>parentHash: {type: 'string'},</p>
+                        <p>ommersHash: {type: 'string'},</p>
+                        <p>beneficiary: {type: 'string'},</p>
+                        <p>stateRoot: {type: 'string'},</p>
+                        <p>transactionsRoot: {type: 'string'},</p>
+                        <p>receiptsRoot: {type: 'string'},</p>
+                        difficulty: {type: 'string'},</p>
+                        <p><p>number: {type: 'string'},</p>
+                        <p>timestamp: {type: 'string'},</p>
+                        <p>extraData: {type: 'string'},</p>
+                        <p>mixHash: {type: 'string'},</p>
+                        <p>nonce: {type: 'string'}</p>
+                    </div>
 
                     <div>
                        <p><b>txCount:</b> 'integer' the number of transactions in the block</p> 
@@ -697,7 +740,6 @@ getSome:function(newQuery){}</div>
                 </div>
 
                 <!--TODO: DATA AND EVENTS-->
-                <!--
                 <div class="spacing-50"></div>
 
                 <div>
@@ -715,7 +757,6 @@ getSome:function(newQuery){}</div>
                     <div hljs hljs-language="javascript">var eventModel = {};</div>
                     <p><b>[get, post] /api/event</b></p>
                 </div>
-                -->
                
                 <div class="spacing-50"></div>
 
@@ -749,13 +790,12 @@ getSome:function(newQuery){}</div>
                     <p><b>[get, post] /api/item</b></p>
                 </div>
 
-                <!--TODO: LOCATION-->
                 <div class="spacing-50"></div>
-                
+
                 <div>
                     <h4><b>Location</b></h4>
                     <p style="color:gray;font-style:italic">This is the Location Model</p>
-                    <div hljs hljs-language="javascript">var locationModel = {};</div>
+                    <div hljs hljs-language="javascript"  hljs-source="locationModel"></div>
                     <p><b>[get, post] /api/location</b></p>
                 </div>
 
@@ -867,15 +907,15 @@ getSome:function(newQuery){}</div>
                 <div class="spacing-50"></div>
 
                 <div id="PROJECT">
+
                     <h4><b>Project</b></h4>
                     <p style="color:gray;font-style:italic">Projects are organized groups of members with self governing principles; a charter.</p>
                     <div hljs hljs-language="javascript"  hljs-source="projectModel"></div>
-                    <!--
+                    
                     <div>
                          <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#PROJECT" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>
                         <p><b>getSome:function()</b></p>
                     </div>
-                    -->
                     <div>
                         <p><b>title:</b> TBD</p> 
                         <p><b>description:</b> TBD</p> 
@@ -889,6 +929,7 @@ getSome:function(newQuery){}</div>
                         <p><b>info:</b> TBD</p> 
                     </div>
                     <p><b>[get, post] /api/project</b></p>
+
                 </div>
 
                 <div class="spacing-50"></div>
@@ -945,18 +986,20 @@ getSome:function(newQuery){}</div>
                     <div>
                         <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>
                     </div>
-                    <!--
-                    $rootScope.searchQueryNav = {
-                        assetsInput:[],
-                        assetsOutput:[],
-                        associations:[],
-                        model:[],
-                        locations:[],
-                        query:[],
-                        tags:[],
-                        type:[],
-                    };
-                    -->
+
+                    <div>
+                        {
+                            assetsInput:[],
+                            assetsOutput:[],
+                            associations:[],
+                            model:[],
+                            locations:[],
+                            query:[],
+                            tags:[],
+                            type:[],
+                        }
+                    </div>
+
                     <p><b>get /api/search</b></p>
                 </div>
 

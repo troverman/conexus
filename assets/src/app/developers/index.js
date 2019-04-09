@@ -229,6 +229,13 @@ angular.module( 'conexus.developers', [
     //MODELS..
     //HEADERS IN HTML.. GENERATE TOKEN.. PASSPORT.. 
 
+    $scope.actionTokenization = JSON.stringify({
+        create:'function(newFollow){}',
+        getSome:'function(newQuery){}'
+    }, null, 4);
+
+    console.log($scope.actionTokenization)
+
     $scope.metaModel = 'var filter = '+JSON.stringify({
         filter:[{
             'obj': 'param'
@@ -325,6 +332,11 @@ angular.module( 'conexus.developers', [
         info: {type: 'json'},
         user: {model: 'user'},
         owner: {type: 'json'}
+    }, null, 4);
+
+    $scope.locationModel = 'var locationModel = '+JSON.stringify({
+        creator: {type: 'string'},
+        location: {type: 'json'},
     }, null, 4);
 
     $scope.memberModel = 'var memberModel = '+JSON.stringify({
