@@ -159,7 +159,6 @@ module.exports = {
 
 	},
 
-
 	getData: function(network, reflective){
 		
 		//POPULATE A NEW NETWORK

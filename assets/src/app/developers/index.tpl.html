@@ -1,12 +1,12 @@
 <style>
     body {overflow-x:hidden}
-    pre{padding:0px;background-color:#282c34;border:0px;}
+    pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;}
     .bootstrapHack {
         z-index: 3;
         border: 0px;
         background: #282c34;
         position: relative;
-        min-height:100vh;
+        ..min-height:100vh;
     }
     .bootstrapHack:after {
         content: '';
@@ -58,7 +58,7 @@
                 <p style="color:gray;font-style:italic">Create the universe of tokenization. Build New Value. Change the world, participate in the development of tokenization protocols & applications.</p>
             </div>
             <div class="col-sm-5" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     <div class="spacing-50"></div>
@@ -95,7 +95,7 @@
             </div>
             <div class="col-sm-4" style="text-align:right">
                 <div class="spacing-15"></div>
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>
@@ -118,9 +118,12 @@
         <div class="spacing-15"></div>
         <div class="row">
             <div class="col-sm-8">
-                <p style="color:gray;font-style:italic">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network: EWASM</p>
+                <p style="color:gray;font-style:italic">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network: WASM</p>
                 <p>The peer code compiles to Web Assembly to run inbrowser natively</p>
                 <p>Virtual Machiene vs Assembly</p>
+                <p>IPFS NODE; ETC</p>
+                <p>InterPlanetary File System Protocol</p>
+                <img src="images/ifps.svg">
 
                 <!--WEBASM -> BYTECODE (OF COMP)-->
                 <!--MECHIENE HAS OP CODES.. DECENT MACH CAN ONLY RUN OPCODES MORE OPIN-->
@@ -129,7 +132,7 @@
                 <!--VM IS VERY SPECIFIC -> CONTRACT COMPILES TO BYTECODE (OF VM) -->
                 <!--VM TRANSLATES BYTE CODE (RN ON A DECENTRALIZED M)-->
 
-                <img style="width:49%"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png">
+                <img style="width:49%"  src="images/hashtree.png">
                 <img style="width:49%"  src="images/mining.jpg">
 
                 <p><b>Information in a Patricia Tree</b></p>
@@ -177,7 +180,7 @@
                 <p style="color:gray;fint-style:italic">tx, blocks, mining, connections & transparency</p>
             </div>
             <div class="col-sm-4" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>
@@ -472,8 +475,6 @@ create:function(newTransaction){
         wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount
     }
 
-
-
 },
 getSome:function(newQuery){}</div>
                 <p><b>create:function()</b> 
@@ -507,430 +508,418 @@ getSome:function(newQuery){}</div>
     <div class="spacing-50"></div>
 </div>
 
-<div id="CONEXAPI" style="background-color:white;min-height:70vh">
-    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
-        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-            <div style="margin-top: auto;margin-bottom: auto;">
-                <div class="container">
-                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Conex API</h1>
-                    <h5 style="color:white">CRE8 CORE Peer Models</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-1">
-                <div class="modelList">
-                    <p><a href="#ACTION" du-smooth-scroll>Action</a></p>
-                    <p><a href="#APP" du-smooth-scroll>App</a></p>
-                    <p><a href="#ASSOCIATION" du-smooth-scroll>Assoication</a></p>
-                    <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
-                    <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
-                    <p><a href="#DATA" du-smooth-scroll>Data</a></p>
-                    <p><a href="#EVENT" du-smooth-scroll>Event</a></p>
-                    <p><a href="#FOLLOWER" du-smooth-scroll>Follower</a></p>
-                    <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
-                    <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
-                    <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
-                    <p><a href="#MOTION" du-smooth-scroll>Motion</a></p>
-                    <p><a href="#NOTIFICATION" du-smooth-scroll>Notification</a></p>
-                    <p><a href="#ORDER" du-smooth-scroll>Order</a></p>
-                    <p><a href="#PASSPORT" du-smooth-scroll>Passport</a></p>
-                    <p><a href="#PROJECT" du-smooth-scroll>Project</a></p>
-                    <p><a href="#PROJECTCHARTER" du-smooth-scroll>ProjectCharter</a></p>
-                    <p><a href="#PROJECTMEMBER" du-smooth-scroll>ProjectMember</a></p>
-                    <p><a href="#PROTOCOL" du-smooth-scroll>Protocol</a></p>
-                    <p><a href="#REACTION" du-smooth-scroll>Reaction</a></p>
-                    <p><a href="#SEARCH" du-smooth-scroll>Search</a></p>
-                    <p><a href="#TASK" du-smooth-scroll>Task</a></p>
-                    <p><a href="#TIME" du-smooth-scroll>Time</a></p>
-                    <p><a href="#TRANSACTION" du-smooth-scroll>Transaction</a></p>
-                    <p><a href="#TX" du-smooth-scroll>Tx</a></p>
-                    <p><a href="#VALIDATION" du-smooth-scroll>Validation</a></p>
-                </div>
-            </div>
-            <div class="col-sm-5">
-                <div>
-                    <h5>Filter & Search Parameters</h5>
-                    <p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>
-                    <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->
-                </div>
-                <div class="spacing-50"></div>
-                <!--
-                <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Models & Endpoints</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="spacing-50"></div>
-                -->
-            </div>
-            <div class="col-sm-6">
-                <div class="bootstrapHack" style="z-index:auto;">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
-                    <div hljs hljs-language="javascript"  hljs-source="metaModel"></div>
+<div id="CONEXAPI" style="background-color:white;">
+
+    <div id="CONEXAPIHEADER">
+        <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div class="container">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Conex API</h1>
+                        <h5 style="color:white">CRE8 CORE Peer Models</h5>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="spacing-15"></div>
-    </div>
-</div>
-
-<div id="ACTION" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-xs-12">
-                
-                <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Action</h1>
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="modelList">
+                        <p><a href="#ACTION" du-smooth-scroll>Action</a></p>
+                        <p><a href="#APP" du-smooth-scroll>App</a></p>
+                        <p><a href="#ASSOCIATION" du-smooth-scroll>Assoication</a></p>
+                        <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
+                        <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
+                        <p><a href="#DATA" du-smooth-scroll>Data</a></p>
+                        <p><a href="#EVENT" du-smooth-scroll>Event</a></p>
+                        <p><a href="#FOLLOWER" du-smooth-scroll>Follower</a></p>
+                        <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
+                        <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
+                        <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
+                        <p><a href="#MOTION" du-smooth-scroll>Motion</a></p>
+                        <p><a href="#NOTIFICATION" du-smooth-scroll>Notification</a></p>
+                        <p><a href="#ORDER" du-smooth-scroll>Order</a></p>
+                        <p><a href="#PASSPORT" du-smooth-scroll>Passport</a></p>
+                        <p><a href="#PROJECT" du-smooth-scroll>Project</a></p>
+                        <p><a href="#PROJECTCHARTER" du-smooth-scroll>ProjectCharter</a></p>
+                        <p><a href="#PROJECTMEMBER" du-smooth-scroll>ProjectMember</a></p>
+                        <p><a href="#PROTOCOL" du-smooth-scroll>Protocol</a></p>
+                        <p><a href="#REACTION" du-smooth-scroll>Reaction</a></p>
+                        <p><a href="#SEARCH" du-smooth-scroll>Search</a></p>
+                        <p><a href="#TASK" du-smooth-scroll>Task</a></p>
+                        <p><a href="#TIME" du-smooth-scroll>Time</a></p>
+                        <p><a href="#TRANSACTION" du-smooth-scroll>Transaction</a></p>
+                        <p><a href="#TX" du-smooth-scroll>Tx</a></p>
+                        <p><a href="#VALIDATION" du-smooth-scroll>Validation</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div>
+                        <h5>Filter & Search Parameters</h5>
+                        <p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>
+                        <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->
+                    </div>
+                    <div class="spacing-50"></div>
+                    <!--
+                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Models & Endpoints</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="spacing-50"></div>
+                    -->
                 </div>
-                
-                <div class="spacing-15"></div>
-                
-                <h4><b>Action</b></h4>
-                <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>
-
-                <p>Websocket Subscribe</p>
-                <p><b>get /api/action</b></p>
-                <p><b>getSome</b></p>
-                <p><b>post /api/action</b></p>
-                <p><b>create</b></p>
-
-                <p style="color:gray;font-style:italic">Permissions.. Authentatication.. etc</p>
-
-                <div class="spacing-50"></div>
-
-            </div>
-            <div class="col-sm-6 col-xs-12">
-                <div class="bootstrapHack" style="z-index:auto;">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
-                        <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                        <div hljs hljs-language="javascript"  hljs-source="metaModel"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="spacing-15"></div>
         </div>
     </div>
-</div>
 
-<div id="APP" style="background-color:white;min-height:70vh">
-    <div class="container">
+    <div id="ACTION" style="background-color:white;min-height:70vh">
+        <div class="container">
         <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div style="background:url('https://source.unsplash.com/1600x900/?code,application,grow,nature,technology')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">App</h1>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    
+                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Action</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>
-                <p>Websocket Subscribe</p>
-                <p><b>get /api/app</b></p>
-            </div>
-            <div class="col-sm-6">
-                <div class="bootstrapHack" style="z-index:auto;">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
-                        <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    
+                    <div class="spacing-15"></div>
+                    
+                    <h4><b>Action</b></h4>
+                    <p style="color:gray;font-style:italic">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>
 
-<div id="ASSOCIATION" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div style="background:url('https://source.unsplash.com/1600x900/?connection,code,association,symbiotic')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Association</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p style="color:gray;font-style:italic">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>
-                <p style="color:gray;font-style:italic">Project <--> Task <--> Time
-                <p style="color:gray;font-style:italic"> Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
-                <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> 
-                <!--<p style="color:gray;font-style:italic">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->
-                <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>
-
-                <p>Websocket Subscribe</p>
-                <p><b>get /api/assoication</b></p>
-            </div>
-            <div class="col-sm-6">
-                <div class="bootstrapHack" style="z-index:auto;">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
-                        <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="BLOCK" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-
-                <div style="background:url('https://source.unsplash.com/1600x900/?blockchain,technology,network,code,information,data')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Block</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p style="color:gray;font-style:italic">Blocks are machine verified bundles of <a href="#TX" du-smooth-scroll>txs</a>. All data for the decentralized <a href="#CRE8VM" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href="#">Peer Coordination</a>.</p>
-
-                <div class="spacing-5"></div>
-
-                <p><b>BLOCK HEADERS</b></p>
-                
-                <img style="" src="images/block-header-temp.jpg">
-                <img style="height:200px;" style="" src="https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png">
-                <img style="height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png">
-
-                <div class="spacing-5"></div>
-
-                <div class="">
-                    <p><b>parentHash</b></p>
-                    <p><b>ommersHash</b></p>
-                    <p><b>beneficiary</b></p>
-                    <p><b>stateRoot</b></p>
-                    <p><b>transactionsRoot</b></p>
-                    <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>
-                    <p><b>receiptsRoot</b></p>
-                    <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>
-                    <p><b>logsBloom</b></p>
-                    <p><b>difficulty</b></p>
-                    <p><b>number</b></p>
-                    <p><b>peerAttention</b></p>
-                    <p><b>timestamp</b></p>
-                    <p><b>extraData</b></p>
-                    <p><b>mixHash</b></p>
-                    <p><b>nonce</b></p>
-                </div>
-
-                <div class="spacing-5"></div>
-
-                <div class="">
-                    <p>parentHash: {type: 'string'},</p>
-                    <p>ommersHash: {type: 'string'},</p>
-                    <p>beneficiary: {type: 'string'},</p>
-                    <p>stateRoot: {type: 'string'},</p>
-                    <p>transactionsRoot: {type: 'string'},</p>
-                    <p>receiptsRoot: {type: 'string'},</p>
-                    <p>difficulty: {type: 'string'},</p>
-                    <p>number: {type: 'string'},</p>
-                    <p>timestamp: {type: 'string'},</p>
-                    <p>extraData: {type: 'string'},</p>
-                    <p>mixHash: {type: 'string'},</p>
-                    <p>nonce: {type: 'string'}</p>
-                </div>
-
-                <div class="spacing-5"></div>
-
-                <div>
-                   <p><b>txCount:</b> 'integer' the number of transactions in the block</p> 
-                   <p><b>height:</b> 'integer' </p> 
-                   <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> 
-                   <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> 
-                   <p><b>merkleRoot:</b> 'integer' TBD</p> 
-                   <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> 
-                   <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> 
-                   <p><b>size:</b> 'integer' the data size of the block</p> 
-                </div>
-
-                <p>Websocket Subscribe</p>
-                <p><b>get /api/block</b></p>
-
-            </div>
-            <div class="col-sm-6">
-                <div class="bootstrapHack" style="z-index:auto;">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
-                        <div hljs hljs-language="javascript"  hljs-source="blockModel"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="CONTENT" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div style="background:url('https://source.unsplash.com/1600x900/?creative,paint,splash,technology,code,content,music')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Content</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p style="color:gray;font-style:italic">Content is information. (with context)</p>
-                <div>
-                    <p><b>Title:</b> Title of Content is a String</p>
-                    <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>
-                    <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>
-                    <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>
-                    <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>
-                    <p><b>Associated Models:</b> Computed via Association Traversal</p>
-                    <p><b>Reactions:</b> TBD </p>
-                    <p><b>Creator:</b> Address, Member or Project, who created Content</p>
-                    <p><b>CreatedAt:</b> Timestamp of Creation</p>
-                </div>
-                <div>
-                    <p style="color:gray;font-style:italic">Creating a Content Query</p>
-                    <div hljs hljs-language="javascript"  hljs-source="contentQuery"></div>
                     <p>Websocket Subscribe</p>
-                    <p><b>[get, post] /api/content</b></p>
-                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
-                    <form role="form" ng-show="false">
-                        <div class="form-group">
-                            <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
-                            <input class="form-control" ng-model="newQuery.limit" placeholder="Limit" type="number"> 
-                            <input class="form-control" ng-model="newQuery.skip" placeholder="Skip" type="number"> 
-                            <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
-                        </div>
-                    </form>
-                    <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
-                    <div class="spacing-5"></div>
-                    <div style="max-height:100vh;overflow:scroll" hljs hljs-language="javascript" hljs-source="results.content"></div>
+                    <p><b>get /api/action</b></p>
+                    <p><b>getSome</b></p>
+                    <p><b>post /api/action</b></p>
+                    <p><b>create</b></p>
+
+                    <p style="color:gray;font-style:italic">Permissions.. Authentatication.. etc</p>
+
+                    <div class="spacing-50"></div>
+
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="bootstrapHack" style="z-index:auto;">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
-                        <div hljs hljs-language="javascript"  hljs-source="contentModel"></div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
+                        </div>
                     </div>
                 </div>
-                <!--
-                <div>
-                    <p style="color:gray;font-style:italic">Creating a Content Query</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="APP" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?code,application,grow,nature,technology')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">App</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacing-15"></div>
+                    <p style="color:gray;font-style:italic">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>
+                    <p>Websocket Subscribe</p>
+                    <p><b>get /api/app</b></p>
                 </div>
-                <div class="bootstrapHack" style="z-index:auto;min-height:auto">
-                    <div style="margin-left:15px;">
-                        <div class="spacing-15"></div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ASSOCIATION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?connection,code,association,symbiotic')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Association</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:gray;font-style:italic">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>
+                    <p style="color:gray;font-style:italic">Project <--> Task <--> Time
+                    <p style="color:gray;font-style:italic"> Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
+                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> 
+                    <!--<p style="color:gray;font-style:italic">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->
+                    <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>
+
+                    <p>Websocket Subscribe</p>
+                    <p><b>get /api/assoication</b></p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="BLOCK" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?blockchain,technology,network,code,information,data')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Block</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:gray;font-style:italic">Blocks are machine verified bundles of <a href="#TX" du-smooth-scroll>txs</a>. All data for the decentralized <a href="#CRE8VM" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href="#">Peer Coordination</a>.</p>
+
+                    <div class="spacing-5"></div>
+
+                    <p><b>BLOCK HEADERS</b></p>
+                    
+                    <img style="" src="images/block-header-temp.jpg">
+                    <img style="height:200px;" style="" src="images/blockheader.png">
+                    <img style="height:200px;" src="images/blockchain.png">
+
+                    <div class="spacing-5"></div>
+
+                    <div class="">
+                        <p><b>parentHash</b></p>
+                        <p><b>ommersHash</b></p>
+                        <p><b>beneficiary</b></p>
+                        <p><b>stateRoot</b></p>
+                        <p><b>transactionsRoot</b></p>
+                        <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>
+                        <p><b>receiptsRoot</b></p>
+                        <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>
+                        <p><b>logsBloom</b></p>
+                        <p><b>difficulty</b></p>
+                        <p><b>number</b></p>
+                        <p><b>peerAttention</b></p>
+                        <p><b>timestamp</b></p>
+                        <p><b>extraData</b></p>
+                        <p><b>mixHash</b></p>
+                        <p><b>nonce</b></p>
+                    </div>
+
+                    <div class="spacing-5"></div>
+
+                    <div class="">
+                        <p>parentHash: {type: 'string'},</p>
+                        <p>ommersHash: {type: 'string'},</p>
+                        <p>beneficiary: {type: 'string'},</p>
+                        <p>stateRoot: {type: 'string'},</p>
+                        <p>transactionsRoot: {type: 'string'},</p>
+                        <p>receiptsRoot: {type: 'string'},</p>
+                        <p>difficulty: {type: 'string'},</p>
+                        <p>number: {type: 'string'},</p>
+                        <p>timestamp: {type: 'string'},</p>
+                        <p>extraData: {type: 'string'},</p>
+                        <p>mixHash: {type: 'string'},</p>
+                        <p>nonce: {type: 'string'}</p>
+                    </div>
+
+                    <div class="spacing-5"></div>
+
+                    <div>
+                       <p><b>txCount:</b> 'integer' the number of transactions in the block</p> 
+                       <p><b>height:</b> 'integer' </p> 
+                       <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> 
+                       <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> 
+                       <p><b>merkleRoot:</b> 'integer' TBD</p> 
+                       <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> 
+                       <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> 
+                       <p><b>size:</b> 'integer' the data size of the block</p> 
+                    </div>
+
+                    <p>Websocket Subscribe</p>
+                    <p><b>get /api/block</b></p>
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="blockModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="CONTENT" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?creative,paint,splash,technology,code,content,music')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Content</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:gray;font-style:italic">Content is information. (with context)</p>
+                    <div>
+                        <p><b>Title:</b> Title of Content is a String</p>
+                        <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>
+                        <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>
+                        <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>
+                        <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>
+                        <p><b>Associated Models:</b> Computed via Association Traversal</p>
+                        <p><b>Reactions:</b> TBD </p>
+                        <p><b>Creator:</b> Address, Member or Project, who created Content</p>
+                        <p><b>CreatedAt:</b> Timestamp of Creation</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="contentModel"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <p style="color:gray;font-style:italic">Creating a Content Query</p>
                         <div hljs hljs-language="javascript"  hljs-source="contentQuery"></div>
+                        <p>Websocket Subscribe</p>
+                        <p><b>[get, post] /api/content</b></p>
+                        <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
+                        <form role="form" ng-show="false">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
+                                <input class="form-control" ng-model="newQuery.limit" placeholder="Limit" type="number"> 
+                                <input class="form-control" ng-model="newQuery.skip" placeholder="Skip" type="number"> 
+                                <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
+                            </div>
+                        </form>
+                        <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
+                        <div class="spacing-5"></div>
+                        <div style="max-height:100vh;overflow:scroll" hljs hljs-language="javascript" hljs-source="results.content"></div>
                     </div>
                 </div>
-                <div>
-                    <p><b>[get, post] /api/content</b></p>
-                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
-                    <form role="form" ng-show="false">
-                        <div class="form-group">
-                            <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
-                            <input class="form-control" ng-model="newQuery.limit" placeholder="Limit" type="number"> 
-                            <input class="form-control" ng-model="newQuery.skip" placeholder="Skip" type="number"> 
-                            <input class="form-control" ng-model="newQuery.sort" placeholder="Sort" type="text"> 
-                        </div>
-                    </form>
-                    <button ng-click="apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get Content</button>
-                    <div class="spacing-5"></div>
-                </div>
-                <div class="bootstrapHack" style="z-index:auto;min-height:auto">
-                    <div style="margin-left:15px;">
-                        <div hljs hljs-language="javascript" hljs-source="results"></div>
-                    </div>
-                </div>
-                -->
             </div>
         </div>
     </div>
-</div>
 
-<!--TODO: DATA-->
-<div id="DATA" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div style="background:url('https://source.unsplash.com/1600x900/?code,information,data')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Data</h1>
+    <div id="DATA" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?code,information,data')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Data</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <p style="color:gray;font-style:italic">Data is information. Data and Events information to information mapping.</p>
+                    <p><b>[get, post] /api/data</b></p>
                 </div>
-                <p style="color:gray;font-style:italic">Data is information. Data and Events information to information mapping.</p>
-                <div hljs hljs-language="javascript">var dataModel = {};</div>
-                <p><b>[get, post] /api/data</b></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--TODO: EVENT-->
-<div id="EVENT" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div style="background:url('https://source.unsplash.com/1600x900/?event,information,data')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Event</h1>
-                            </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript">var dataModel = {};</div>
                         </div>
                     </div>
                 </div>
-                <p style="color:gray;font-style:italic">This is the Event Model</p>
-                <div hljs hljs-language="javascript">var eventModel = {};</div>
-                <p>Websocket Subscribe</p>
-                <p><b>[get, post] /api/event</b></p>
             </div>
         </div>
     </div>
-</div>
 
-<div id="FOLLOWER" style="background-color:white;min-height:70vh">
-    <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-6">
-               
-                <div>
-                    <h4><b>Follower</b></h4>
+    <div id="EVENT" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?event,information,data')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Event</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:gray;font-style:italic">This is the Event Model</p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript">var eventModel = {};</div>
+                        </div>
+                    </div>
+                    <p>Websocket Subscribe</p>
+                    <p><b>[get, post] /api/event</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="FOLLOWER" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?realationship,follower,community')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Follower</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Followers are .. </p>
-                    <div hljs hljs-language="javascript"  hljs-source="followerModel"></div>
                     <div>
                         <p><b>Followed:</b> TBD</p> 
                         <p><b>Follower:</b> TBD</p> 
@@ -938,13 +927,33 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/follower</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="followerModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="ITEM">
-                    <h4><b>Item</b></h4>
+    <div id="ITEM" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?item,inventory,stuff,things')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Item</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Items .. provide depth to the capibilities of string based tokenization </p>
-                    <div hljs hljs-language="javascript"  hljs-source="itemModel"></div>
                     <div>
                         <p><b>Title:</b> TBD</p> 
                         <p><b>Content:</b> TBD</p> 
@@ -958,22 +967,62 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/item</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="itemModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="LOCATION">
-                    <h4><b>Location</b></h4>
+    <div id="LOCATION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?map,globe,spacetime,location')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Location</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">This is the Location Model</p>
-                    <div hljs hljs-language="javascript"  hljs-source="locationModel"></div>
                     <p><b>[get, post] /api/location</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="locationModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="MEMBER">
-                    <h4><b>Member</b></h4>
+    <div id="MEMBER" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?human,person,member,community')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Member</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">This is the Member Model</p>
-                    <div hljs hljs-language="javascript"  hljs-source="memberModel"></div>
                     <div>
                         <p><b>avatarUrl:</b> TBD</p> 
                         <p><b>coverUrl:</b> TBD</p> 
@@ -987,36 +1036,96 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/member</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="memberModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="MARKET">
-                    <h4><b>Market</b></h4>
+    <div id="MARKET" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?node,market,connection,community,value')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Market</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>
-                    <div hljs hljs-language="javascript">var marketModel = {};</div>        
                     <p>Websocket Subscribe</p>
                     <p><b>get /api/market</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript">var marketModel = {};</div>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="MOTION">
-                    <h4><b>Motion</b></h4>
+    <div id="MOTION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?government,parliment,decision,creation')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Motion</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action. A Motion is a Nested Validation .. in creating a motion one is validating an action. On Validation of a Motion (Nested Validation) an Action is created.</p>
                     <!--COMBINE MOTION AND VALIDATION..-->
                     <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->
-                    <div hljs hljs-language="javascript">var motionModel = {};</div>        
                     <p>Websocket Subscribe</p>
                     <p><b>[get,post] /api/motion</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript">var motionModel = {};</div>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="NOTIFICATION">
-                    <h4><b>Notification</b></h4>
+    <div id="NOTIFICATION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?notification,attention,hi,awesome')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Notification</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">This is the Notification Model. Notifications have privacy permission qualifiers.</p>
                     <p><b>get /api/notification</b></p>
-                    <div hljs hljs-language="javascript"  hljs-source="notificationModel"></div>
                     <div>
                         <p><b>Priority:</b> TBD</p> 
                         <p><b>Type:</b> TBD</p> 
@@ -1027,19 +1136,47 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>get /api/notification</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="notificationModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="ORDER">
-                    <h4><b>Order</b></h4>
+    <div id="ORDER" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?marketplace,order,finace,bid,ask')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Order</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>
                     <p style="color:gray;font-style:italic">The Anatomy of an Order</p>
-                    <div hljs hljs-language="javascript"  hljs-source="orderModel"></div>
                     <div>
                         <p><b>setAlpha</b>: [{assetIdentifier: amount}, ...]</p>
                         <p><b>setBeta</b>: [{assetIdentifier: amount}, ...]</p>
                         <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>
                         <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="orderModel"></div>
+                        </div>
                     </div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/order</b></p>
@@ -1051,13 +1188,27 @@ getSome:function(newQuery){}</div>
                         <div hljs hljs-language="javascript" hljs-source="results.order"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="PASSPORT">
-                    <h4><b>Passport</b></h4>
+    <div id="PASSPORT" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?passport,validate,auth,authentication,conenesus,connection')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Passport</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>
-                    <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
+                    <p>2FA authentication protocols etc</p>
+                    <a href="#IDENTITY" du-smooth-scroll>Identity management</a>
                     <div>
                         <p><b>protocol:</b> TBD</p> 
                         <p><b>password:</b> TBD</p> 
@@ -1068,23 +1219,63 @@ getSome:function(newQuery){}</div>
                     </div>
                     <p><b>[get, post] /api/passport</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="PEERMODEL"> 
-                    <h4><b>Peer</b></h4>
+    <div id="PEERMODEL" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?community,peer,member,network,conenesus,decentralized,mesh')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Peer</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Peers are ..</p>
-                    <div hljs hljs-language="javascript">var peerModel = {};</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/peer</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript">var peerModel = {};</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="PROJECT">
-                    <h4><b>Project</b></h4>
+    <div id="PROJECT" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?project,group,community,connenction,conenesus,coordination,voting,government')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Project</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Projects are organized groups of members with self governing principles; a charter.</p>
-                    <div hljs hljs-language="javascript"  hljs-source="projectModel"></div>
                     <div>
                          <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#PROJECT" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>
                         <p><b>getSome:function()</b></p>
@@ -1104,45 +1295,126 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/project</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="projectModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="PROJECTCHARTER">
-                    <h4><b>ProjectCharter</b></h4>
+    <div id="PROJECTCHARTER" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?vote,validate,create,government,conenesus,charter,constution,rules,code')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Project Charter</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations. from initial conditions to reputationatation decay.</p>
                     <p style="color:gray;font-style:italic">Reputation & Verification Dimensions</p>
                     <p style="color:gray;font-style:italic">Validation Types</p>
-                    <div hljs hljs-language="javascript"  hljs-source="projectCharterModel"></div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/projectcharter</b></p>
                 </div>
-
-                <div class="spacing-50"></div>
-
-                <div id="PROJECTMEMBER">
-                    <h4><b>ProjectMember</b></h4>
-                    <p style="color:gray;font-style:italic">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>
-                    <div hljs hljs-language="javascript"  hljs-source="projectMemberModel"></div>
-                    <p>Websocket Subscribe</p>
-                    <p><b>[get, post] /api/projectmember</b></p>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="projectCharterModel"></div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="spacing-50"></div>
+            </div>
+        </div>
+    </div>
 
-                <div id="PROTOCOL">
-                    <h4><b>Protocol</b></h4>
+    <div id="PROJECTMEMBER" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?project,community,validate,connenction,member,group,intentional')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Project Member</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:gray;font-style:italic">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>
+                    <p>Websocket Subscribe</p>
+                    <p><b>[get, post] /api/projectmember</b></p>                
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="projectMemberModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="PROTOCOL" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Protocol</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>
+                    <p>immutable structure; json; smart contract language</p>
                     <p>Abstraction of {Language Abstraction} working with the <a href="#CRE8VM" du-smooth-scroll>CRE8 virtual machine</a></p>
-                    <div hljs hljs-language="javascript"  hljs-source="protocolModel"></div>
                     <p><b>[get, post] /api/protocol</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="protocolModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="REACTION">
-                    <h4><b>Reaction</b></h4>
+    <div id="REACTION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?like,dislike,react,love,create,action,reaction')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Reaction</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Reaction is .. </p>
-                    <div hljs hljs-language="javascript"  hljs-source="reactionModel"></div>
                     <div>
                         <p><b>amount:</b> TBD</p> 
                         <p><b>type:</b> TBD</p> 
@@ -1152,13 +1424,33 @@ getSome:function(newQuery){}</div>
                     </div>
                     <p><b>[get, post] /api/reaction</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="reactionModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="SEARCH">
-                    <h4><b>Search</b></h4>
+    <div id="SEARCH" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?search,filter,find,code,discover,order,crystal,connection,lattice')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Search</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>
-                    <div hljs hljs-language="javascript"  hljs-source="searchModel"></div>
                     <div>
                         <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>
                     </div>
@@ -1176,14 +1468,34 @@ getSome:function(newQuery){}</div>
                     </div>
                     <p><b>get /api/search</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="searchModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="TASK">
-                    <h4><b>Task</b></h4>
+    <div id="TASK" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?time,intention,responsibility,planning,calendar,coordination,shared,goals')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Task</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Tasks are a relay of context. Layers of validation intention create association. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>
-                    <p style="color:gray;font-style:italic">crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>
-                    <div hljs hljs-language="javascript"  hljs-source="taskModel"></div>
+                    <p style="color:gray;font-style:italic">Crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>
                     <div>
                         <p><b>title:</b> TBD</p> 
                         <p><b>content:</b> TBD</p> 
@@ -1196,13 +1508,33 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/task</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="taskModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="TIME">
-                    <h4><b>Time</b></h4>
+    <div id="TIME" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?clock,time,spacetime,physics,universe,mystery,intention')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Time</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Time & intention is the foundation of energy. Time is the base of CRE8.</p>
-                    <div hljs hljs-language="javascript"  hljs-source="timeModel"></div>
                     <div>
                         <p><b>amount:</b> TBD</p> 
                         <p><b>startTime:</b> TBD</p> 
@@ -1215,23 +1547,63 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/time</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="timeModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="TOKEN">
-                    <h4><b>Token</b></h4>
+    <div id="TOKEN" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?value,validate,token,conenesus,money,cash')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Token</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">A token is a discrete piece of information with the following properties:</p>
-                    <div hljs hljs-language="javascript"  hljs-source="tokenModel"></div>
                     <p>Websocket Subscribe</p>
                     <p><b>get /api/token</b></p>
                 </div>
-                
-                <div class="spacing-50"></div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="tokenModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div id="TRANSACTION">
-                    <h4><b>Transaction</b></h4>
+    <div id="TRANSACTION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?transaction,send,money,value,conenesus')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Transaction</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>
-                    <div hljs hljs-language="javascript"  hljs-source="transactionModel"></div>
                     <div>
                         <p><b>to:</b> TBD</p> 
                         <p><b>from:</b> TBD</p> 
@@ -1240,6 +1612,14 @@ getSome:function(newQuery){}</div>
                         <p><b>content:</b> TBD</p> 
                         <p><b>location:</b> TBD</p> 
                         <p><b>reactions:</b> TBD</p> 
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="transactionModel"></div>
+                        </div>
                     </div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/transaction</b></p>
@@ -1251,13 +1631,25 @@ getSome:function(newQuery){}</div>
                         <div hljs hljs-language="javascript" hljs-source="results.transaction"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="TX">
-                    <h4><b>Tx</b></h4>
+    <div id="TX" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?block,transaction,data,code,discrete,blockchain')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tx</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Every state update in the <a href="#CRE8VM" du-smooth-scroll>CRE8 virtual machine</a> is represented by a transaction or tx. <a href="#BLOCK" du-smooth-scroll>Blocks</a> are machine verified bundles of txs.</p>
-                    <div hljs hljs-language="javascript"  hljs-source="txModel"></div>
                     <!--<p>VERY IMPORTANT</p>
                     <p>CREATE VM HERE.. THE STATE IS KEPT BY DATA IN TX.. (TX - BLOCK)</p>-->
                     <div>
@@ -1268,14 +1660,34 @@ getSome:function(newQuery){}</div>
                     <p>Websocket Subscribe</p>
                     <p><b>get /api/tx</b></p>
                 </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="txModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="spacing-50"></div>
-
-                <div id="VALIDATION">
-                    <h4><b>Validation</b></h4>
+    <div id="VALIDATION" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?vote,validate,create,connenction,conenesus')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Validation</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p style="color:gray;font-style:italic">Like Votes, the building block for group agreement - consensus and decision making. 
                     <p style="color:gray;font-style:italic">The Anatomy of a Validation</p>
-                    <div hljs hljs-language="javascript"  hljs-source="validationModel"></div>
                     <div>
                         <p><b>Reputation:</b> {context:reputationInt}, Reputation is used as a multiplier for association computation via the Project Charter</p>
                         <p><b>Validation:</b> {context:validationInt}</p>
@@ -1291,11 +1703,18 @@ getSome:function(newQuery){}</div>
                     <p>Association Space</p>
                     <nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
                     <p style="color:gray;font-style:italic">Layered Recursion (Validation-Validation)</p>
-                    <p>Templates</p>
                     <p>PROJECT - ITEM: DISCRETE, PROJECT - MEMBER: DISCRETE, PROJECT - ORDER: DISCRETE</p>
                     <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>
                     <p>PROJECT - TASK - TIME</p>
                     <p>PROJECT - TASK</p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-15"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="validationModel"></div>
+                        </div>
+                    </div>
                     <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/validation</b></p>
                     <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>
@@ -1306,13 +1725,10 @@ getSome:function(newQuery){}</div>
                         <div hljs hljs-language="javascript" hljs-source="results.validation"></div>
                     </div>
                 </div>
-
             </div>
         </div>
-
-        <div class="spacing-50"></div>
-
     </div>
+
 </div>
 
 <div class="spacing-100"></div> 
@@ -1338,11 +1754,11 @@ getSome:function(newQuery){}</div>
 
                 <div class="spacing-15"></div>
 
-                <img style="height:200px;" src="https://cdn.pixabay.com/photo/2017/05/16/02/07/dna-icon-2316641_960_720.png">
+                <img style="height:200px;" src="images/dna.png">
 
             </div>
             <div class="col-sm-4" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>
@@ -1368,9 +1784,10 @@ getSome:function(newQuery){}</div>
                 <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
                 <p><b>[get, post] /api/passport</b></p>
                 <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>
+                <p>Biometric Authentication -- CRE8 Reccomends</p>
             </div>
             <div class="col-sm-4" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>
@@ -1408,7 +1825,7 @@ getSome:function(newQuery){}</div>
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
             </div>
             <div class="col-sm-4" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>
@@ -1531,7 +1948,7 @@ getSome:function(newQuery){}</div>
                 <p style="color:gray;font-style:italic">Action Potiental From Protocol.</p>
             </div>
             <div class="col-sm-4" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>
@@ -1557,10 +1974,10 @@ getSome:function(newQuery){}</div>
                 <p style="color:gray;font-style:italic">Tokenization with a high degree of consensus on context through multidimensional validation</p>
                 <p>
                 <p style="color:gray;font-style:italic">TOKENIZING PUBLIC SPACES THOUGH AI</p>
-                <img src="https://i.pinimg.com/originals/0c/33/8e/0c338ef522a8759f5f0ba34822e70d78.gif">
+                <img src="images/aitoken.gif">
             </div>
             <div class="col-sm-4" style="text-align:right">
-                <img style="height:200px;" src="http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif">
+                <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
     </div>

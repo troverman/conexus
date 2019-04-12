@@ -33,7 +33,9 @@
                 <p style="color:gray;font-style:italic">See the <a href="/developers">documentation</a> to learn more.</p>
             </div>
             <div class="col-xs-5 col-sm-5">
-                <img src="https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif">
+                <!--<img src="images/app.gif">
+                <img src="images/app2.gif">-->
+                <img src="images/app4.gif">
             </div>
         </div>
         <div class="spacing-50"></div>
@@ -70,9 +72,11 @@
 
     <div class="row">
         <div class="col-lg-4 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
-            <div class="card" ng-click="render(app)">
+            <div class="card" ng-click="renderToggle(app)" style="height:150px">
                 <div style="padding:16px;">
-                    <div style="float:right"><i class="fa fa-ellipsis-v"></i></div>
+                    <div style="float:right">
+                        <i ng-click="cardDetailToggle()" class="fa fa-ellipsis-v"></i>
+                    </div>
                     <!--<h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>-->
                     <h4><a ng-click="$event.stopPropagation();" href="https://www.github.com/troverman/conexus">{{app.title}}</a></h4>
                     <p style="color:gray">{{app.description}}</p>

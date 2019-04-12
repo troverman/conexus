@@ -39,7 +39,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Explore the diversity of the network.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\" style=\"text-align:right\">\n" +
-    "				<img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -50,7 +50,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supporative of sharing culture.</p>\n" +
     "				<p><a href=\"/marketplace\">Marketplace</a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "				<img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/76cbc26d8010ca3faad8428891aba21d/tumblr_ohzc3fnNUL1qg20oho1_1280.jpg\">\n" +
+    "				<img style=\"max-height:200px\" src=\"images/space.jpg\">\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\"></div>\n" +
     "		</div>\n" +
@@ -119,8 +119,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "			</div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
-    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/dna.gif\">\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -171,7 +171,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
-    "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a>\n" +
+    "				<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hypercube.gif\"></a>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -183,7 +183,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-xs-5 col-sm-5\">\n" +
-    "                <img src=\"https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif\">\n" +
+    "                <img src=\"images/app.gif\">\n" +
     "            </div>\n" +
     "			<div class=\"col-xs-12 col-sm-7\">\n" +
     "				<h4>The Application Ecosystem</h4>\n" +
@@ -226,7 +226,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/dna.gif\">\n" +
     "			</div>\n" +
     "			<div class=\"col-md-6\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
@@ -243,7 +243,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p>\n" +
     "			</div>\n" +
     "            <div class=\"col-md-4 mobileHide\" style=\"text-align:center\">\n" +
-    "                <img style=\"height:200px;\" src=\"https://data.whicdn.com/images/324606380/original.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/network.gif\">\n" +
     "            </div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -624,7 +624,9 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "                <p style=\"color:gray;font-style:italic\">See the <a href=\"/developers\">documentation</a> to learn more.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-xs-5 col-sm-5\">\n" +
-    "                <img src=\"https://media.giphy.com/media/8VkgrPdxMh0oo/giphy.gif\">\n" +
+    "                <!--<img src=\"images/app.gif\">\n" +
+    "                <img src=\"images/app2.gif\">-->\n" +
+    "                <img src=\"images/app4.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"spacing-50\"></div>\n" +
@@ -661,9 +663,11 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "            <div class=\"card\" ng-click=\"render(app)\">\n" +
+    "            <div class=\"card\" ng-click=\"renderToggle(app)\" style=\"height:150px\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div style=\"float:right\"><i class=\"fa fa-ellipsis-v\"></i></div>\n" +
+    "                    <div style=\"float:right\">\n" +
+    "                        <i ng-click=\"cardDetailToggle()\" class=\"fa fa-ellipsis-v\"></i>\n" +
+    "                    </div>\n" +
     "                    <!--<h4><a ng-click=\"$event.stopPropagation();\" href=\"app/{{app.title}}\">{{app.title}}</a></h4>-->\n" +
     "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"https://www.github.com/troverman/conexus\">{{app.title}}</a></h4>\n" +
     "                    <p style=\"color:gray\">{{app.description}}</p>\n" +
@@ -1304,13 +1308,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
   $templateCache.put("developers/index.tpl.html",
     "<style>\n" +
     "    body {overflow-x:hidden}\n" +
-    "    pre{padding:0px;background-color:#282c34;border:0px;}\n" +
+    "    pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;}\n" +
     "    .bootstrapHack {\n" +
     "        z-index: 3;\n" +
     "        border: 0px;\n" +
     "        background: #282c34;\n" +
     "        position: relative;\n" +
-    "        min-height:100vh;\n" +
+    "        ..min-height:100vh;\n" +
     "    }\n" +
     "    .bootstrapHack:after {\n" +
     "        content: '';\n" +
@@ -1362,7 +1366,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value. Change the world, participate in the development of tokenization protocols & applications.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-5\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -1399,7 +1403,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -1422,9 +1426,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network: EWASM</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network: WASM</p>\n" +
     "                <p>The peer code compiles to Web Assembly to run inbrowser natively</p>\n" +
     "                <p>Virtual Machiene vs Assembly</p>\n" +
+    "                <p>IPFS NODE; ETC</p>\n" +
+    "                <p>InterPlanetary File System Protocol</p>\n" +
+    "                <img src=\"images/ifps.svg\">\n" +
     "\n" +
     "                <!--WEBASM -> BYTECODE (OF COMP)-->\n" +
     "                <!--MECHIENE HAS OP CODES.. DECENT MACH CAN ONLY RUN OPCODES MORE OPIN-->\n" +
@@ -1433,7 +1440,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <!--VM IS VERY SPECIFIC -> CONTRACT COMPILES TO BYTECODE (OF VM) -->\n" +
     "                <!--VM TRANSLATES BYTE CODE (RN ON A DECENTRALIZED M)-->\n" +
     "\n" +
-    "                <img style=\"width:49%\"  src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/1920px-Hash_Tree.svg.png\">\n" +
+    "                <img style=\"width:49%\"  src=\"images/hashtree.png\">\n" +
     "                <img style=\"width:49%\"  src=\"images/mining.jpg\">\n" +
     "\n" +
     "                <p><b>Information in a Patricia Tree</b></p>\n" +
@@ -1481,7 +1488,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;fint-style:italic\">tx, blocks, mining, connections & transparency</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -1776,8 +1783,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount\n" +
     "    }\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "},\n" +
     "getSome:function(newQuery){}</div>\n" +
     "                <p><b>create:function()</b> \n" +
@@ -1811,430 +1816,418 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div id=\"CONEXAPI\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Conex API</h1>\n" +
-    "                    <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-1\">\n" +
-    "                <div class=\"modelList\">\n" +
-    "                    <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
-    "                    <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
-    "                    <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
-    "                    <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
-    "                    <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
-    "                    <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
-    "                    <p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>\n" +
-    "                    <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
-    "                    <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
-    "                    <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
-    "                    <p><a href=\"#MEMBER\" du-smooth-scroll>Member</a></p>\n" +
-    "                    <p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>\n" +
-    "                    <p><a href=\"#NOTIFICATION\" du-smooth-scroll>Notification</a></p>\n" +
-    "                    <p><a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
-    "                    <p><a href=\"#PASSPORT\" du-smooth-scroll>Passport</a></p>\n" +
-    "                    <p><a href=\"#PROJECT\" du-smooth-scroll>Project</a></p>\n" +
-    "                    <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll>ProjectCharter</a></p>\n" +
-    "                    <p><a href=\"#PROJECTMEMBER\" du-smooth-scroll>ProjectMember</a></p>\n" +
-    "                    <p><a href=\"#PROTOCOL\" du-smooth-scroll>Protocol</a></p>\n" +
-    "                    <p><a href=\"#REACTION\" du-smooth-scroll>Reaction</a></p>\n" +
-    "                    <p><a href=\"#SEARCH\" du-smooth-scroll>Search</a></p>\n" +
-    "                    <p><a href=\"#TASK\" du-smooth-scroll>Task</a></p>\n" +
-    "                    <p><a href=\"#TIME\" du-smooth-scroll>Time</a></p>\n" +
-    "                    <p><a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a></p>\n" +
-    "                    <p><a href=\"#TX\" du-smooth-scroll>Tx</a></p>\n" +
-    "                    <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-5\">\n" +
-    "                <div>\n" +
-    "                    <h5>Filter & Search Parameters</h5>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
-    "                    <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
-    "                </div>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "                <!--\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Models & Endpoints</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "                -->\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
+    "<div id=\"CONEXAPI\" style=\"background-color:white;\">\n" +
+    "\n" +
+    "    <div id=\"CONEXAPIHEADER\">\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div class=\"container\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Conex API</h1>\n" +
+    "                        <h5 style=\"color:white\">CRE8 CORE Peer Models</h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"ACTION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                \n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Action</h1>\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-1\">\n" +
+    "                    <div class=\"modelList\">\n" +
+    "                        <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
+    "                        <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
+    "                        <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
+    "                        <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
+    "                        <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
+    "                        <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
+    "                        <p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>\n" +
+    "                        <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
+    "                        <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
+    "                        <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
+    "                        <p><a href=\"#MEMBER\" du-smooth-scroll>Member</a></p>\n" +
+    "                        <p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>\n" +
+    "                        <p><a href=\"#NOTIFICATION\" du-smooth-scroll>Notification</a></p>\n" +
+    "                        <p><a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
+    "                        <p><a href=\"#PASSPORT\" du-smooth-scroll>Passport</a></p>\n" +
+    "                        <p><a href=\"#PROJECT\" du-smooth-scroll>Project</a></p>\n" +
+    "                        <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll>ProjectCharter</a></p>\n" +
+    "                        <p><a href=\"#PROJECTMEMBER\" du-smooth-scroll>ProjectMember</a></p>\n" +
+    "                        <p><a href=\"#PROTOCOL\" du-smooth-scroll>Protocol</a></p>\n" +
+    "                        <p><a href=\"#REACTION\" du-smooth-scroll>Reaction</a></p>\n" +
+    "                        <p><a href=\"#SEARCH\" du-smooth-scroll>Search</a></p>\n" +
+    "                        <p><a href=\"#TASK\" du-smooth-scroll>Task</a></p>\n" +
+    "                        <p><a href=\"#TIME\" du-smooth-scroll>Time</a></p>\n" +
+    "                        <p><a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a></p>\n" +
+    "                        <p><a href=\"#TX\" du-smooth-scroll>Tx</a></p>\n" +
+    "                        <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-5\">\n" +
+    "                    <div>\n" +
+    "                        <h5>Filter & Search Parameters</h5>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
+    "                        <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-50\"></div>\n" +
+    "                    <!--\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Models & Endpoints</h1>\n" +
+    "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
+    "                    <div class=\"spacing-50\"></div>\n" +
+    "                    -->\n" +
     "                </div>\n" +
-    "                \n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                \n" +
-    "                <h4><b>Action</b></h4>\n" +
-    "                <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
-    "\n" +
-    "                <p>Websocket Subscribe</p>\n" +
-    "                <p><b>get /api/action</b></p>\n" +
-    "                <p><b>getSome</b></p>\n" +
-    "                <p><b>post /api/action</b></p>\n" +
-    "                <p><b>create</b></p>\n" +
-    "\n" +
-    "                <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
-    "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div id=\"APP\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
+    "    <div id=\"ACTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,application,grow,nature,technology')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">App</h1>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                    \n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Action</h1>\n" +
+    "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
-    "                <p>Websocket Subscribe</p>\n" +
-    "                <p><b>get /api/app</b></p>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "                    \n" +
+    "                    <div class=\"spacing-15\"></div>\n" +
+    "                    \n" +
+    "                    <h4><b>Action</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
     "\n" +
-    "<div id=\"ASSOCIATION\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?connection,code,association,symbiotic')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Association</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
-    "                <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
-    "                <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
-    "                <!--<p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
-    "                <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
-    "\n" +
-    "                <p>Websocket Subscribe</p>\n" +
-    "                <p><b>get /api/assoication</b></p>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"BLOCK\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?blockchain,technology,network,code,information,data')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Block</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of <a href=\"#TX\" du-smooth-scroll>txs</a>. All data for the decentralized <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href=\"#\">Peer Coordination</a>.</p>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <p><b>BLOCK HEADERS</b></p>\n" +
-    "                \n" +
-    "                <img style=\"\" src=\"images/block-header-temp.jpg\">\n" +
-    "                <img style=\"height:200px;\" style=\"\" src=\"https://www.lucassaldanha.com/content/images/2018/12/ethereum-block-diagram.png\">\n" +
-    "                <img style=\"height:200px;\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blockchain.svg/300px-Blockchain.svg.png\">\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <div class=\"\">\n" +
-    "                    <p><b>parentHash</b></p>\n" +
-    "                    <p><b>ommersHash</b></p>\n" +
-    "                    <p><b>beneficiary</b></p>\n" +
-    "                    <p><b>stateRoot</b></p>\n" +
-    "                    <p><b>transactionsRoot</b></p>\n" +
-    "                    <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>\n" +
-    "                    <p><b>receiptsRoot</b></p>\n" +
-    "                    <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
-    "                    <p><b>logsBloom</b></p>\n" +
-    "                    <p><b>difficulty</b></p>\n" +
-    "                    <p><b>number</b></p>\n" +
-    "                    <p><b>peerAttention</b></p>\n" +
-    "                    <p><b>timestamp</b></p>\n" +
-    "                    <p><b>extraData</b></p>\n" +
-    "                    <p><b>mixHash</b></p>\n" +
-    "                    <p><b>nonce</b></p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <div class=\"\">\n" +
-    "                    <p>parentHash: {type: 'string'},</p>\n" +
-    "                    <p>ommersHash: {type: 'string'},</p>\n" +
-    "                    <p>beneficiary: {type: 'string'},</p>\n" +
-    "                    <p>stateRoot: {type: 'string'},</p>\n" +
-    "                    <p>transactionsRoot: {type: 'string'},</p>\n" +
-    "                    <p>receiptsRoot: {type: 'string'},</p>\n" +
-    "                    <p>difficulty: {type: 'string'},</p>\n" +
-    "                    <p>number: {type: 'string'},</p>\n" +
-    "                    <p>timestamp: {type: 'string'},</p>\n" +
-    "                    <p>extraData: {type: 'string'},</p>\n" +
-    "                    <p>mixHash: {type: 'string'},</p>\n" +
-    "                    <p>nonce: {type: 'string'}</p>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <div>\n" +
-    "                   <p><b>txCount:</b> 'integer' the number of transactions in the block</p> \n" +
-    "                   <p><b>height:</b> 'integer' </p> \n" +
-    "                   <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> \n" +
-    "                   <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> \n" +
-    "                   <p><b>merkleRoot:</b> 'integer' TBD</p> \n" +
-    "                   <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> \n" +
-    "                   <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> \n" +
-    "                   <p><b>size:</b> 'integer' the data size of the block</p> \n" +
-    "                </div>\n" +
-    "\n" +
-    "                <p>Websocket Subscribe</p>\n" +
-    "                <p><b>get /api/block</b></p>\n" +
-    "\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"blockModel\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"CONTENT\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,paint,splash,technology,code,content,music')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Content</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
-    "                <div>\n" +
-    "                    <p><b>Title:</b> Title of Content is a String</p>\n" +
-    "                    <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>\n" +
-    "                    <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>\n" +
-    "                    <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>\n" +
-    "                    <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>\n" +
-    "                    <p><b>Associated Models:</b> Computed via Association Traversal</p>\n" +
-    "                    <p><b>Reactions:</b> TBD </p>\n" +
-    "                    <p><b>Creator:</b> Address, Member or Project, who created Content</p>\n" +
-    "                    <p><b>CreatedAt:</b> Timestamp of Creation</p>\n" +
-    "                </div>\n" +
-    "                <div>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
-    "                    <p><b>[get, post] /api/content</b></p>\n" +
-    "                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
-    "                    <form role=\"form\" ng-show=\"false\">\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                    <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "                    <div style=\"max-height:100vh;overflow:scroll\" hljs hljs-language=\"javascript\" hljs-source=\"results.content\"></div>\n" +
+    "                    <p><b>get /api/action</b></p>\n" +
+    "                    <p><b>getSome</b></p>\n" +
+    "                    <p><b>post /api/action</b></p>\n" +
+    "                    <p><b>create</b></p>\n" +
+    "\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
+    "\n" +
+    "                    <div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
+    "                <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <!--\n" +
-    "                <div>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"APP\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?code,application,grow,nature,technology')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">App</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-15\"></div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Apps are bundles of protocols that follow modular design patterns. Apps work within an APP+ Token Manifold.</p>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>get /api/app</b></p>\n" +
     "                </div>\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;min-height:auto\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div class=\"spacing-15\"></div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"ASSOCIATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?connection,code,association,symbiotic')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Association</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Project <--> Task <--> Time\n" +
+    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
+    "                    <!--<p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
+    "                    <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
+    "\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>get /api/assoication</b></p>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"BLOCK\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?blockchain,technology,network,code,information,data')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Block</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Blocks are machine verified bundles of <a href=\"#TX\" du-smooth-scroll>txs</a>. All data for the decentralized <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 VM</a> is stored as sequential validated blocks of information. Consensus on block information is obtained through <a href=\"#\">Peer Coordination</a>.</p>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <p><b>BLOCK HEADERS</b></p>\n" +
+    "                    \n" +
+    "                    <img style=\"\" src=\"images/block-header-temp.jpg\">\n" +
+    "                    <img style=\"height:200px;\" style=\"\" src=\"images/blockheader.png\">\n" +
+    "                    <img style=\"height:200px;\" src=\"images/blockchain.png\">\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <div class=\"\">\n" +
+    "                        <p><b>parentHash</b></p>\n" +
+    "                        <p><b>ommersHash</b></p>\n" +
+    "                        <p><b>beneficiary</b></p>\n" +
+    "                        <p><b>stateRoot</b></p>\n" +
+    "                        <p><b>transactionsRoot</b></p>\n" +
+    "                        <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>\n" +
+    "                        <p><b>receiptsRoot</b></p>\n" +
+    "                        <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
+    "                        <p><b>logsBloom</b></p>\n" +
+    "                        <p><b>difficulty</b></p>\n" +
+    "                        <p><b>number</b></p>\n" +
+    "                        <p><b>peerAttention</b></p>\n" +
+    "                        <p><b>timestamp</b></p>\n" +
+    "                        <p><b>extraData</b></p>\n" +
+    "                        <p><b>mixHash</b></p>\n" +
+    "                        <p><b>nonce</b></p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <div class=\"\">\n" +
+    "                        <p>parentHash: {type: 'string'},</p>\n" +
+    "                        <p>ommersHash: {type: 'string'},</p>\n" +
+    "                        <p>beneficiary: {type: 'string'},</p>\n" +
+    "                        <p>stateRoot: {type: 'string'},</p>\n" +
+    "                        <p>transactionsRoot: {type: 'string'},</p>\n" +
+    "                        <p>receiptsRoot: {type: 'string'},</p>\n" +
+    "                        <p>difficulty: {type: 'string'},</p>\n" +
+    "                        <p>number: {type: 'string'},</p>\n" +
+    "                        <p>timestamp: {type: 'string'},</p>\n" +
+    "                        <p>extraData: {type: 'string'},</p>\n" +
+    "                        <p>mixHash: {type: 'string'},</p>\n" +
+    "                        <p>nonce: {type: 'string'}</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                       <p><b>txCount:</b> 'integer' the number of transactions in the block</p> \n" +
+    "                       <p><b>height:</b> 'integer' </p> \n" +
+    "                       <p><b>minedBy:</b> 'address' the address of the peers who contributed in consensus in a block || TBD</p> \n" +
+    "                       <p><b>timeStamp:</b> 'integer' datetime when a block is created</p> \n" +
+    "                       <p><b>merkleRoot:</b> 'integer' TBD</p> \n" +
+    "                       <p><b>previousBlock:</b> 'integer' the number of the next previous in the chain</p> \n" +
+    "                       <p><b>nextBlock:</b> 'integer' the number of the next block in the chain</p> \n" +
+    "                       <p><b>size:</b> 'integer' the data size of the block</p> \n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>get /api/block</b></p>\n" +
+    "\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"blockModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"CONTENT\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,paint,splash,technology,code,content,music')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Content</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Content is information. (with context)</p>\n" +
+    "                    <div>\n" +
+    "                        <p><b>Title:</b> Title of Content is a String</p>\n" +
+    "                        <p><b>Content:</b> Content is a minified string of parsable markup language such as <i>sanatized</i> html, markdown, or bbcode, .. etc,</p>\n" +
+    "                        <p><b>Tags:</b> Tags provide informational context, they are both a computed property via validation traversal and created by the content creator.</p>\n" +
+    "                        <p><b>Type:</b> Type of Content is: 'AUDIO, IMAGE, LINK, MOTION, POST, VIDEO'</p>\n" +
+    "                        <p><b>Location:</b> Location is a JSON obj with respective location information such as lat,lng and address.</p>\n" +
+    "                        <p><b>Associated Models:</b> Computed via Association Traversal</p>\n" +
+    "                        <p><b>Reactions:</b> TBD </p>\n" +
+    "                        <p><b>Creator:</b> Address, Member or Project, who created Content</p>\n" +
+    "                        <p><b>CreatedAt:</b> Timestamp of Creation</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Creating a Content Query</p>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"contentQuery\"></div>\n" +
+    "                        <p>Websocket Subscribe</p>\n" +
+    "                        <p><b>[get, post] /api/content</b></p>\n" +
+    "                        <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
+    "                        <form role=\"form\" ng-show=\"false\">\n" +
+    "                            <div class=\"form-group\">\n" +
+    "                                <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
+    "                                <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
+    "                                <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
+    "                                <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                        <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <div style=\"max-height:100vh;overflow:scroll\" hljs hljs-language=\"javascript\" hljs-source=\"results.content\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div>\n" +
-    "                    <p><b>[get, post] /api/content</b></p>\n" +
-    "                    <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
-    "                    <form role=\"form\" ng-show=\"false\">\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.limit\" placeholder=\"Limit\" type=\"number\"> \n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.skip\" placeholder=\"Skip\" type=\"number\"> \n" +
-    "                            <input class=\"form-control\" ng-model=\"newQuery.sort\" placeholder=\"Sort\" type=\"text\"> \n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                    <button ng-click=\"apiCall({model:'CONTENT',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get Content</button>\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "                </div>\n" +
-    "                <div class=\"bootstrapHack\" style=\"z-index:auto;min-height:auto\">\n" +
-    "                    <div style=\"margin-left:15px;\">\n" +
-    "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                -->\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<!--TODO: DATA-->\n" +
-    "<div id=\"DATA\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,information,data')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Data</h1>\n" +
+    "    <div id=\"DATA\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?code,information,data')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Data</h1>\n" +
+    "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Data is information. Data and Events information to information mapping.</p>\n" +
+    "                    <p><b>[get, post] /api/data</b></p>\n" +
     "                </div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Data is information. Data and Events information to information mapping.</p>\n" +
-    "                <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
-    "                <p><b>[get, post] /api/data</b></p>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<!--TODO: EVENT-->\n" +
-    "<div id=\"EVENT\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?event,information,data')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Event</h1>\n" +
-    "                            </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">This is the Event Model</p>\n" +
-    "                <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
-    "                <p>Websocket Subscribe</p>\n" +
-    "                <p><b>[get, post] /api/event</b></p>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "\n" +
-    "<div id=\"FOLLOWER\" style=\"background-color:white;min-height:70vh\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "               \n" +
-    "                <div>\n" +
-    "                    <h4><b>Follower</b></h4>\n" +
+    "    <div id=\"EVENT\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?event,information,data')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Event</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Event Model</p>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>[get, post] /api/event</b></p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"FOLLOWER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?realationship,follower,community')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Follower</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Followers are .. </p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"followerModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>Followed:</b> TBD</p> \n" +
     "                        <p><b>Follower:</b> TBD</p> \n" +
@@ -2242,13 +2235,33 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/follower</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"followerModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"ITEM\">\n" +
-    "                    <h4><b>Item</b></h4>\n" +
+    "    <div id=\"ITEM\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?item,inventory,stuff,things')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Item</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Items .. provide depth to the capibilities of string based tokenization </p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"itemModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>Title:</b> TBD</p> \n" +
     "                        <p><b>Content:</b> TBD</p> \n" +
@@ -2262,22 +2275,62 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/item</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"itemModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"LOCATION\">\n" +
-    "                    <h4><b>Location</b></h4>\n" +
+    "    <div id=\"LOCATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?map,globe,spacetime,location')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Location</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Location Model</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"locationModel\"></div>\n" +
     "                    <p><b>[get, post] /api/location</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"locationModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"MEMBER\">\n" +
-    "                    <h4><b>Member</b></h4>\n" +
+    "    <div id=\"MEMBER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?human,person,member,community')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Member</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Member Model</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"memberModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>avatarUrl:</b> TBD</p> \n" +
     "                        <p><b>coverUrl:</b> TBD</p> \n" +
@@ -2291,36 +2344,96 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/member</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"memberModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"MARKET\">\n" +
-    "                    <h4><b>Market</b></h4>\n" +
+    "    <div id=\"MARKET\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?node,market,connection,community,value')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Market</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A market is a computed immutable structure based on filtered orders. Markets represent a combinatorial space of <a>tokens.</a></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var marketModel = {};</div>        \n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/market</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\">var marketModel = {};</div>        \n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"MOTION\">\n" +
-    "                    <h4><b>Motion</b></h4>\n" +
+    "    <div id=\"MOTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?government,parliment,decision,creation')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Motion</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action. A Motion is a Nested Validation .. in creating a motion one is validating an action. On Validation of a Motion (Nested Validation) an Action is created.</p>\n" +
     "                    <!--COMBINE MOTION AND VALIDATION..-->\n" +
     "                    <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->\n" +
-    "                    <div hljs hljs-language=\"javascript\">var motionModel = {};</div>        \n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get,post] /api/motion</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\">var motionModel = {};</div>        \n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"NOTIFICATION\">\n" +
-    "                    <h4><b>Notification</b></h4>\n" +
+    "    <div id=\"NOTIFICATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?notification,attention,hi,awesome')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Notification</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Notification Model. Notifications have privacy permission qualifiers.</p>\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"notificationModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>Priority:</b> TBD</p> \n" +
     "                        <p><b>Type:</b> TBD</p> \n" +
@@ -2331,19 +2444,47 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/notification</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"notificationModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"ORDER\">\n" +
-    "                    <h4><b>Order</b></h4>\n" +
+    "    <div id=\"ORDER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?marketplace,order,finace,bid,ask')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Order</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order is a position in the Multidimensional Token Market. Establises connections between tokens relationally and with manifold logic based on protocol.</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">The Anatomy of an Order</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"orderModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>setAlpha</b>: [{assetIdentifier: amount}, ...]</p>\n" +
     "                        <p><b>setBeta</b>: [{assetIdentifier: amount}, ...]</p>\n" +
     "                        <p><b>Status</b>: <b>PENDING</b>,<b>CONTINUAL</b>,<b>COMPLETE</b></p>\n" +
     "                        <p><b>Type</b>: <b>FoK</b>: Fill or Kill, <b>onBooks</b>: On the Books, <b>Limit</b>: Limit Order</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"orderModel\"></div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/order</b></p>\n" +
@@ -2355,13 +2496,27 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results.order\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"PASSPORT\">\n" +
-    "                    <h4><b>Passport</b></h4>\n" +
+    "    <div id=\"PASSPORT\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?passport,validate,auth,authentication,conenesus,connection')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Passport</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"passportModel\"></div>\n" +
+    "                    <p>2FA authentication protocols etc</p>\n" +
+    "                    <a href=\"#IDENTITY\" du-smooth-scroll>Identity management</a>\n" +
     "                    <div>\n" +
     "                        <p><b>protocol:</b> TBD</p> \n" +
     "                        <p><b>password:</b> TBD</p> \n" +
@@ -2372,23 +2527,63 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p><b>[get, post] /api/passport</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"passportModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"PEERMODEL\"> \n" +
-    "                    <h4><b>Peer</b></h4>\n" +
+    "    <div id=\"PEERMODEL\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?community,peer,member,network,conenesus,decentralized,mesh')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Peer</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Peers are ..</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\">var peerModel = {};</div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/peer</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\">var peerModel = {};</div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"PROJECT\">\n" +
-    "                    <h4><b>Project</b></h4>\n" +
+    "    <div id=\"PROJECT\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?project,group,community,connenction,conenesus,coordination,voting,government')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Project</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Projects are organized groups of members with self governing principles; a charter.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectModel\"></div>\n" +
     "                    <div>\n" +
     "                         <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#PROJECT\" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>\n" +
     "                        <p><b>getSome:function()</b></p>\n" +
@@ -2408,45 +2603,126 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/project</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"projectModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"PROJECTCHARTER\">\n" +
-    "                    <h4><b>ProjectCharter</b></h4>\n" +
+    "    <div id=\"PROJECTCHARTER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?vote,validate,create,government,conenesus,charter,constution,rules,code')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Project Charter</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations. from initial conditions to reputationatation decay.</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Reputation & Verification Dimensions</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Validation Types</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectCharterModel\"></div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/projectcharter</b></p>\n" +
     "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"PROJECTMEMBER\">\n" +
-    "                    <h4><b>ProjectMember</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"projectMemberModel\"></div>\n" +
-    "                    <p>Websocket Subscribe</p>\n" +
-    "                    <p><b>[get, post] /api/projectmember</b></p>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"projectCharterModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                \n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div id=\"PROTOCOL\">\n" +
-    "                    <h4><b>Protocol</b></h4>\n" +
+    "    <div id=\"PROJECTMEMBER\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?project,community,validate,connenction,member,group,intentional')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Project Member</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">ProjectMember is .. a Computed Validation interaction with a Project Charter</p>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>[get, post] /api/projectmember</b></p>                \n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"projectMemberModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"PROTOCOL\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Protocol</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Protocol is .. a contract - a piece of code - that transacts with information in Txs on the CRE8 VM. In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>\n" +
+    "                    <p>immutable structure; json; smart contract language</p>\n" +
     "                    <p>Abstraction of {Language Abstraction} working with the <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 virtual machine</a></p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"protocolModel\"></div>\n" +
     "                    <p><b>[get, post] /api/protocol</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"protocolModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"REACTION\">\n" +
-    "                    <h4><b>Reaction</b></h4>\n" +
+    "    <div id=\"REACTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?like,dislike,react,love,create,action,reaction')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Reaction</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Reaction is .. </p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"reactionModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>amount:</b> TBD</p> \n" +
     "                        <p><b>type:</b> TBD</p> \n" +
@@ -2456,13 +2732,33 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p><b>[get, post] /api/reaction</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"reactionModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"SEARCH\">\n" +
-    "                    <h4><b>Search</b></h4>\n" +
+    "    <div id=\"SEARCH\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?search,filter,find,code,discover,order,crystal,connection,lattice')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Search</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"searchModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>\n" +
     "                    </div>\n" +
@@ -2480,14 +2776,34 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p><b>get /api/search</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"searchModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"TASK\">\n" +
-    "                    <h4><b>Task</b></h4>\n" +
+    "    <div id=\"TASK\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?time,intention,responsibility,planning,calendar,coordination,shared,goals')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Task</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Tasks are a relay of context. Layers of validation intention create association. The principles of responsibility sets. Shared crystalized responsibility; validated intention of time.</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"taskModel\"></div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Crystalized responsibility; tasks with high connectivity and associativity via associatedModels</p>\n" +
     "                    <div>\n" +
     "                        <p><b>title:</b> TBD</p> \n" +
     "                        <p><b>content:</b> TBD</p> \n" +
@@ -2500,13 +2816,33 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/task</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"taskModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"TIME\">\n" +
-    "                    <h4><b>Time</b></h4>\n" +
+    "    <div id=\"TIME\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?clock,time,spacetime,physics,universe,mystery,intention')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Time</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Time & intention is the foundation of energy. Time is the base of CRE8.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"timeModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>amount:</b> TBD</p> \n" +
     "                        <p><b>startTime:</b> TBD</p> \n" +
@@ -2519,23 +2855,63 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/time</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"timeModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"TOKEN\">\n" +
-    "                    <h4><b>Token</b></h4>\n" +
+    "    <div id=\"TOKEN\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?value,validate,token,conenesus,money,cash')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Token</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A token is a discrete piece of information with the following properties:</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"tokenModel\"></div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/token</b></p>\n" +
     "                </div>\n" +
-    "                \n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"tokenModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div id=\"TRANSACTION\">\n" +
-    "                    <h4><b>Transaction</b></h4>\n" +
+    "    <div id=\"TRANSACTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?transaction,send,money,value,conenesus')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Transaction</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Transactions are core to transferable value. Contains a sender and reciever address, as well as an asset weighted struct.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"transactionModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>to:</b> TBD</p> \n" +
     "                        <p><b>from:</b> TBD</p> \n" +
@@ -2544,6 +2920,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>content:</b> TBD</p> \n" +
     "                        <p><b>location:</b> TBD</p> \n" +
     "                        <p><b>reactions:</b> TBD</p> \n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"transactionModel\"></div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/transaction</b></p>\n" +
@@ -2555,13 +2939,25 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results.transaction\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"TX\">\n" +
-    "                    <h4><b>Tx</b></h4>\n" +
+    "    <div id=\"TX\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?block,transaction,data,code,discrete,blockchain')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tx</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Every state update in the <a href=\"#CRE8VM\" du-smooth-scroll>CRE8 virtual machine</a> is represented by a transaction or tx. <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a> are machine verified bundles of txs.</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"txModel\"></div>\n" +
     "                    <!--<p>VERY IMPORTANT</p>\n" +
     "                    <p>CREATE VM HERE.. THE STATE IS KEPT BY DATA IN TX.. (TX - BLOCK)</p>-->\n" +
     "                    <div>\n" +
@@ -2572,14 +2968,34 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/tx</b></p>\n" +
     "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"txModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "\n" +
-    "                <div id=\"VALIDATION\">\n" +
-    "                    <h4><b>Validation</b></h4>\n" +
+    "    <div id=\"VALIDATION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?vote,validate,create,connenction,conenesus')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Validation</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Like Votes, the building block for group agreement - consensus and decision making. \n" +
     "                    <p style=\"color:gray;font-style:italic\">The Anatomy of a Validation</p>\n" +
-    "                    <div hljs hljs-language=\"javascript\"  hljs-source=\"validationModel\"></div>\n" +
     "                    <div>\n" +
     "                        <p><b>Reputation:</b> {context:reputationInt}, Reputation is used as a multiplier for association computation via the Project Charter</p>\n" +
     "                        <p><b>Validation:</b> {context:validationInt}</p>\n" +
@@ -2595,11 +3011,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Association Space</p>\n" +
     "                    <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Layered Recursion (Validation-Validation)</p>\n" +
-    "                    <p>Templates</p>\n" +
     "                    <p>PROJECT - ITEM: DISCRETE, PROJECT - MEMBER: DISCRETE, PROJECT - ORDER: DISCRETE</p>\n" +
     "                    <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>\n" +
     "                    <p>PROJECT - TASK - TIME</p>\n" +
     "                    <p>PROJECT - TASK</p>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"validationModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>[get, post] /api/validation</b></p>\n" +
     "                    <p>curl https://www.cre8.xyz/api/validation?limit=1&skip=0</p>\n" +
@@ -2610,13 +3033,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <div hljs hljs-language=\"javascript\" hljs-source=\"results.validation\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "\n" +
     "    </div>\n" +
+    "\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-100\"></div> \n" +
@@ -2642,11 +3062,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "                <img style=\"height:200px;\" src=\"https://cdn.pixabay.com/photo/2017/05/16/02/07/dna-icon-2316641_960_720.png\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/dna.png\">\n" +
     "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2672,9 +3092,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div hljs hljs-language=\"javascript\"  hljs-source=\"passportModel\"></div>\n" +
     "                <p><b>[get, post] /api/passport</b></p>\n" +
     "                <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>\n" +
+    "                <p>Biometric Authentication -- CRE8 Reccomends</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2712,7 +3133,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2835,7 +3256,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Action Potiental From Protocol.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -2861,10 +3282,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Tokenization with a high degree of consensus on context through multidimensional validation</p>\n" +
     "                <p>\n" +
     "                <p style=\"color:gray;font-style:italic\">TOKENIZING PUBLIC SPACES THOUGH AI</p>\n" +
-    "                <img src=\"https://i.pinimg.com/originals/0c/33/8e/0c338ef522a8759f5f0ba34822e70d78.gif\">\n" +
+    "                <img src=\"images/aitoken.gif\">\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -3884,8 +4305,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                \n" +
-    "                <img style=\"height:200px;\" src=\"http://blogs.ams.org/visualinsight/files/2015/09/free_modular_lattice_on_3_generators.gif\">\n" +
-    "                <img style=\"height:200px;\" src=\"https://i.gifer.com/origin/8a/8a2995ffe0cbeb198582feb3cc3cc154_w200.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
+    "                <img style=\"height:200px;\" src=\"images/dna.gif\">\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +

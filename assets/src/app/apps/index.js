@@ -51,7 +51,10 @@ angular.module( 'conexus.apps', [
 
 
         {title:'CRE8.NYC', description:'CRE8 Partnership with New York City .NYC', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+        {title:'CRE8.CITY', description:'CRE8 Partnership with CITY', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
 
+
+        {title:'Delivery', description:'2nd Stage Delivery Protocol', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
 
         {title:'USD Tokenization', description:'USD Tokenization, manages custodial relationships with affiliate banks and institutions. namespace: USD', tags:'USD,bank,finance,fiat,authentication'},
 
@@ -65,7 +68,6 @@ angular.module( 'conexus.apps', [
         {title:'TRON Tokenization', description:'TRON Tokenization, manages custodial relationships, namespace: TRON', tags:'TRON,crypto,finance'},
 
         {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration, namespace: DATA+STEEM+', tags:'STEEM,activity,app,authentication'},
-
 
     ];
 
