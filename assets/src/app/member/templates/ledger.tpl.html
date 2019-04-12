@@ -135,14 +135,6 @@
 				<div style="float:right;text-align:right">
                     <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(transaction)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                 </div>  
-
-				<!--<p style="font-weight:800">
-                    <span ng-if="transaction.from.username"><a ng-click="$event.stopPropagation()" href="member/{{transaction.from.username}}">{{transaction.from.username}}</a> <i class="fa fa-arrow-right"></i></span>
-                    <span ng-if="transaction.from.title"><a ng-click="$event.stopPropagation()" href="project/{{transaction.from.title}}">{{transaction.from.title}}</a> <i class="fa fa-arrow-right"></i></span>
-                    <span ng-if="transaction.to.username"> <a ng-click="$event.stopPropagation()" href="member/{{transaction.to.username}}">{{transaction.to.username}}</a></span>
-                    <span ng-if="transaction.to.title"> <a ng-click="$event.stopPropagation()" href="project/{{transaction.to.urlTitle}}">{{transaction.to.title}}</a></span>
-                </p>-->
-
                 <div style="display:inline">
                     <span ng-if="item.from.username">
                         <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
@@ -151,18 +143,16 @@
                         </a>
                     </span>
                     <span ng-if="item.from.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.title}}">
                             <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.from.title}}
                         </a>
                     </span>
                 </div>
-
                 <div style="display:inline;padding-left:5px;padding-right:5px;">
                     <i class="fa fa-arrow-right"></i>
                 </div>
-
-					<div style="display:inline">
+				<div style="display:inline">
                     <span ng-if="item.to.username">
                         <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
                             <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
@@ -170,13 +160,13 @@
                         </a>
                     </span>
                     <span ng-if="item.to.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.title}}">
                             <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.to.title}}
                         </a>
                     </span>
                 </div>
-
+                
                 <div class="spacing-5"></div>
 
 

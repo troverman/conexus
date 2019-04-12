@@ -1,7 +1,50 @@
-<div class="row" ng-if="member.description">
+<div class="row">
     <div class="card">
         <div style="padding:16px">
+			
 			<div ng-bind-html="renderContent(member.description)"></div>
+           	
+           	<!--<div>
+				<p><b>Avatar</b></p>
+	            <img style="height:50px;width:50px" src="{{member.avatarUrl}}">
+	            <p>{{member.avatarUrl}}</p>
+            </div>
+
+            <div class="spacing-5"></div>
+
+            <div>
+	            <p><b>Email</b></p>
+	            <p>{{member.email}}</p>
+	            <p><b>First Name</b></p>
+	            <p>{{member.firstName}}</p>
+	            <p><b>Last Name</b></p>
+	            <p>{{member.lastName}}</p>
+            </div>
+
+            <div class="spacing-5"></div>
+
+            <div>
+	            <p><b>Wallet Address</b></p>
+	            <p><a ng-click="transactionToggle()"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}"> {{member.id}}</a></p>
+            </div>
+
+	        <div class="spacing-5"></div>
+
+            <div>
+                <p><b>Location</b></p>
+                <p><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+                <p><b>Address</b>: {{project.location.address}}</p>
+            </div>
+
+            <div class="spacing-5"></div>
+
+            <div>
+            	<p><b>Manifolds</b></p> 
+            	<p>'<a href="market/project/project.urlTitle.toUpperCase()">{{member.username.toUpperCase()}}+</a>, <a href="market/project/project.urlTitle.toUpperCase()+TASK+">{{member.username.toUpperCase()}}+TASK+</a>, <a href="market/project/project.urlTitle.toUpperCase()+TIME+">{{member.username.toUpperCase()}}+TIME+</a>'</p>
+            </div>
+
+            <div class="spacing-5"></div>-->
+
         </div>
     </div>
 </div>

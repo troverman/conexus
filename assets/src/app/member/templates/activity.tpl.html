@@ -1,14 +1,9 @@
-
 <div class="row">
-
     <div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
-
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
         </div>
-
         <div ng-repeat="item in activity">
-
             <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
                 <div style="padding:16px;overflow:scroll;max-height:500px">
 
@@ -137,7 +132,7 @@
                             </a>
                         </span>
                         <span ng-if="item.from.title">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.title}}">
                                 <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.from.title}}
                             </a>
@@ -146,7 +141,6 @@
 
                     <div style="display:inline;padding-left:5px;padding-right:5px;">
                         <i class="fa fa-arrow-right"></i>
-                        <!--<span ng-repeat="(key, value) in item.amountSet"><span style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></span></span>-->
                     </div>
 
                     <div style="display:inline">
@@ -157,7 +151,7 @@
                             </a>
                         </span>
                         <span ng-if="item.to.title">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.title}}">
                                 <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.to.title}}
                             </a>
@@ -188,5 +182,4 @@
     </div>
 
 </div>
-
 <div class="spacing-10"></div>

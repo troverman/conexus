@@ -453,8 +453,6 @@
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
 
-
-
                             <!--TODO: DEPRECIATE-->
                             <!--ASSOCIATIONS-->
                             <a ng-click="$event.stopPropagation()" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
@@ -465,12 +463,6 @@
                             <a ng-click="$event.stopPropagation()" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
                             <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
                             <!--TODO-->
-
-
-
-
-
-
 
 
                             <a ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}" ng-click="$event.stopPropagation()" >time {{item.time}}</a>
@@ -488,9 +480,7 @@
 
                         </div>
                         <div style="margin-left:42px">
-                            <!--<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>-->
-                            <!--mmm-->
-                            <div ta-bind ng-model="item.content"></div>
+                            <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
                         </div>
                     </div>
                     <div class="card-footer">
