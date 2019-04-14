@@ -71,24 +71,18 @@
                 <div style="padding:16px;">
                     <div class="row">
                         <div class="col-sm-1 col-xs-2">
-                            <a href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a>
+                            <a ng-click="$event.stopPropagation()" href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a>
                         </div>
                         <div class="col-sm-11 col-xs-10">
-
                             <p style="float:right;text-align:right">
-                                <span style="color:gray" ng-if="project.location">{{project.location.address}} <i class="fa fa-map-marker"></i></span>
+                                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(project)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                                <span style="color:gray" ng-if="project.location"><!--{{project.location.address}} <i class="fa fa-map-marker"></i>--></span>
                             </p>
-
-                            <h3 style="float:left;margin-top:0px">
-                                <a ng-click="$event.stopPropagation()" href="/project/{{project.urlTitle}}">{{project.title}}</a>
-                            </h3>
-
+                            <h3 style="float:left;margin-top:0px"><a ng-click="$event.stopPropagation()" href="/project/{{project.urlTitle}}">{{project.title}}</a></h3>
                             <div style="clear:both"></div>
-
                             <div style="max-height:500px;overflow:scroll">
                                 <span ng-bind-html="renderContent(project.description)"></span>
                             </div>
-
                         </div>
                     </div>
                 </div>

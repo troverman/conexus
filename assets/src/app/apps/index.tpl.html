@@ -20,7 +20,6 @@
     </div>
     <div class="intro-mobile"></div>
 </div>
-
 <div id="about-section1">
     <div class="container">
         <div class="spacing-50"></div>
@@ -31,28 +30,25 @@
                 <p style="color:gray;font-style:italic">By openeing up the intention of system design, we capture a larger design space.</p>
                 <p style="color:gray;font-style:italic">Apps are a bundle of protocols. App design is modular.</p>
                 <p style="color:gray;font-style:italic">See the <a href="/developers">documentation</a> to learn more.</p>
+                <!--<a class="btn btn-default log-btn" href="/developers">documentation</a>-->
             </div>
             <div class="col-xs-5 col-sm-5">
-                <!--<img src="images/app.gif">
-                <img src="images/app2.gif">-->
-                <img src="images/app4.gif">
+                <img src="images/app.gif">
+                <!--<img src="images/app2.gif">
+                <img src="images/app4.gif">-->
             </div>
         </div>
         <div class="spacing-50"></div>
     </div>
 </div>
-
-
 <div class="container">
     <div class="spacing-15"></div>
     <div class="row">
-
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
             <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
-
         <div class="card">
             <form ng-submit="search()" style="display:flex;flex-direction:row;">
                 <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
@@ -63,13 +59,10 @@
                 </div>
             </form>
         </div>
-
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="projectToggle()">+ App</button>
         </div>
-
     </div>
-
     <div class="row">
         <div class="col-lg-4 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
             <div class="card" ng-click="renderToggle(app)" style="height:150px">
@@ -77,23 +70,17 @@
                     <div style="float:right">
                         <i ng-click="cardDetailToggle()" class="fa fa-ellipsis-v"></i>
                     </div>
-                    <!--<h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>-->
                     <h4><a ng-click="$event.stopPropagation();" href="https://www.github.com/troverman/conexus">{{app.title}}</a></h4>
                     <p style="color:gray">{{app.description}}</p>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="spacing-5"></div>
-
     <div class="row">
         <div class="card" ng-click="loadMore()">
             <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
         </div>
     </div>
-
-
 </div>
-
 <div class="spacing-50"></div>

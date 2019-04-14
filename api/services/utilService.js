@@ -102,4 +102,37 @@ module.exports = {
 		});
 	},
 
+	getGeoNames: function(model){
+
+		var requestModel = {json: true};
+
+		//ByLatLng, feature code.. PRK
+		if (model.type == 'latlng'){
+			requestModel.url='http://api.geonames.org/findNearbyJSON?ormatted=true&lat='+model.lat+'&lng='+model.lng+'&featureCode='+model.featureCode+'&radius='+model.radius+'&maxRows=10000&username=troverman'
+		}
+
+		//BY PARTENT
+		if (model.type == 'parent'){
+			requestModel.url='http://api.geonames.org/childrenJSON?geonameId='+model.parentId+'&username='+model.username+'&maxRows=1000000'
+		}
+
+		request(requestModel, function (error, response, body) {
+			var data = body.geonames
+			for (x in data){
+				//console.log(data[x]);
+				var projectModel = {
+					title:data[x].name,
+					//urlTitle:data[x].name.replace(),
+					tags:'parks',
+					description:data[x].toponymName,
+					creator:'CRE8',
+					location:{address:'',lat:data[x].lat, lng:data[x].lng}
+				};
+				console.log(projectModel)
+
+			}
+		});
+
+	}
+
 };

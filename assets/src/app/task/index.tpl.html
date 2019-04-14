@@ -45,8 +45,7 @@
                 <div class="col-sm-12" style="padding:16px">
 
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(task)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(task)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(task)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
                     <!--ASSOCIATION && VALIDATION-->
@@ -132,8 +131,7 @@
         <div class="card" ng-repeat="item in time" ng-click="">
             <div style="padding:16px;">
                 <div style="float:right;text-align:right">
-                    <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                    <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(time)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                 </div>
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">

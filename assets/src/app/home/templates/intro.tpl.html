@@ -347,23 +347,18 @@
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='PROJECT'" ng-click="">
+                <div class="card" ng-if="item.model=='PROJECT'" ng-click="renderToggle(item)">
                     <div style="padding:16px;">
                         <div class="row">
                             <div class="col-sm-1 col-xs-2">
-                                <a href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+                                <a ng-click="$event.stopPropagation()" href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
                             <div class="col-sm-11 col-xs-10">
-
                                 <p style="float:right;text-align:right">
-                                    <span ng-if="item.location" style="color:gray">{{item.location.address}} <i class="fa fa-map-marker"></i></span>
+                                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                                    <span ng-if="item.location" style="color:gray"><!--{{item.location.address}} <i class="fa fa-map-marker"></i>--></span>
                                 </p>
-                                
-                                <h3 style="margin-top:0px">
-                                    <a href="project/{{item.urlTitle}}">
-                                        {{item.title}}
-                                    </a>
-                                </h3>
+                                <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation()" href="project/{{item.urlTitle}}">{{item.title}}</a></h3>
                                 <div style="overflow:scroll">
                                     <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
                                 </div>
@@ -385,8 +380,6 @@
                     <div style="padding:16px;"> 
 
                         <div style="float:right;text-align:right">
-                            <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fas fa-coins"></i></a>-->
                             <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>
 
@@ -408,8 +401,6 @@
                         <div>
 
                             <div style="float:right;text-align:right">
-                                <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                                <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fas fa-coins"></i></a>-->
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
 
