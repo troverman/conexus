@@ -12,9 +12,9 @@
 			        	<div class="container">
         					<!--TODO-->
 			            	<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">
-								<span><a href="{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}">{{validation.associatedModels[0].info.task.title}}</a></span> 
+								<span><a style="color:white" href="{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}">{{validation.associatedModels[0].info.task.title}}</a></span> 
 								<i class="fa fa-arrows-h"></i> 
-								<span><a href="{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}">{{validation.associatedModels[1].info.project.title}}</a></span>
+								<span><a style="color:white" href="{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}">{{validation.associatedModels[1].info.project.title}}</a></span>
 			            	</h1>
 			            </div>
 			        </div>
@@ -24,8 +24,7 @@
 			<div style="padding:16px">
 
 				<div style="float:right;text-align:right">
-	                <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(validation)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-	                <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(validation)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+	                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(validation)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
 	            </div>
 
 				<!--TODO-->
@@ -39,7 +38,7 @@
 
 				<a href="member/{{validation.user.username}}">
 					<img class="card-avatar" src="{{validation.user.avatarUrl}}"/>
-					{{validation.user.username}}
+					<b>{{validation.user.username}}</b>
 				</a>
 
 				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="validation.createdAt"></p>

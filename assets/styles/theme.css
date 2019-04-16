@@ -182,8 +182,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 
 .header{background-color:black;}
 
-
-
+.hljs{border-radius: 0px}
 
 .imageContainer {
     background:#33312d;
@@ -475,6 +474,10 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 .spacing-150 {padding:150px;}
 .spacing-200 {padding:200px;}
 .spacing-250 {padding:250px;}
+
+.tags-input .tags .input{
+    width:100%;
+}
 
 .title {
     margin:0;

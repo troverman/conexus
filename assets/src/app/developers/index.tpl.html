@@ -1,6 +1,6 @@
 <style>
     body {overflow-x:hidden}
-    pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;margin:0px;}
+    pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;margin:0px;border-radius:0px;}
     .bootstrapHack {
         z-index: 3;
         border: 0px;
@@ -257,6 +257,9 @@
 
                     <!--<p>transfer:</p>-->
                     <!--CRE8; RECIEVE; PROJECT.. USER--> 
+
+                    <!--VERB+MODEL+..+-->
+                    <!--CRE8+CONTENT+VIDEO-->
 
                 </div>
 
@@ -1488,18 +1491,10 @@ getSome:function(newQuery){}</div>
                     <p style="color:gray;font-style:italic">Search is .. model agnostic query endpoint... unify with examples? .. unify with query</p>
                     <div>
                         <p>CONTENT ABOUT COMPLEX SEARCH QUERIES.. IE FINISH FILTER & DOCUMENT</p>
+                        <p><b>Filter</b>: Obj Types -- TAGS;QUERY;LOCATION;MODEL;TYPE;ASSETINPUT;ASSETOUTPUT;ASSOCIATIONS...</p>
                     </div>
                     <div>
-                        {
-                            assetsInput:[],
-                            assetsOutput:[],
-                            associations:[],
-                            model:[],
-                            locations:[],
-                            query:[],
-                            tags:[],
-                            type:[],
-                        }
+                        <p>QUERY BUILDER</p>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -1510,6 +1505,14 @@ getSome:function(newQuery){}</div>
                         </div>
                     </div>
                     <p><b>get /api/search</b></p>
+                    <p>curl https://www.cre8.xyz/api/search?limit=1&skip=0&Model='TRANSACTION'&...</p>
+
+                    <button ng-click="apiCall({model:'SEARCH',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get</button>
+                    <div class="spacing-5"></div>
+                    <div style="max-height:100vh;overflow:scroll" hljs hljs-language="javascript" hljs-source="results.search"></div>
+
+
+
                 </div>
             </div>
         </div>
@@ -1737,12 +1740,30 @@ getSome:function(newQuery){}</div>
                     <!--CONTEXT-SPECIFIC x-->
                     <p>Association Space</p>
                     <nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
-                    <p style="color:gray;font-style:italic">Layered / Nested Recursion (Validation-Validation)</p>
                     <p>`Validation | {V_N} = sum_(i=0)^n {V_{V_i}}_[a-z]`</p>
-                    <p>PROJECT - ITEM: DISCRETE, PROJECT - MEMBER: DISCRETE, PROJECT - ORDER: DISCRETE</p>
-                    <p>PROJECT - CONTENT:SMOOTH, PROJECT - TASK: SMOOTH</p>
-                    <p>PROJECT - TASK - TIME</p>
-                    <p>PROJECT - TASK</p>
+                    <p style="color:gray;font-style:italic">Layered / Nested Recursion (Validation-Validation)</p>
+                    <p>VALIDATION `hArr_D` VALIDATION</p>
+                    <div class="spacing-5"></div>
+
+                    <p><b>DISCRETE</b></p>
+                    <p>Project Charter Protocols</p>
+                    <p>PROJECT `hArr` ITEM</p>
+                    <p>PROJECT `hArr` MEMBER</p>
+                    <p>PROJECT `hArr` ORDER</p>
+                    <div class="spacing-5"></div>
+
+                    <p><b>SMOOTH</b></p>
+                    <p>PROJECT `hArr_D` ITEM</p>
+                    <p>PROJECT `hArr_D` CONTENT</p>
+                    <p>PROJECT `hArr_D` TASK</p>
+                    <p>PROJECT `hArr_D` TASK `hArr_D` TIME</p>
+                    <p>VALIDATION `hArr_D` VALIDATION</p>
+                    <div class="spacing-5"></div>
+
+                    `hArr_D` 
+                    <p>Dimensional Validations are Tags<p> 
+                    `Tag = V_D`
+
                 </div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
@@ -1764,10 +1785,9 @@ getSome:function(newQuery){}</div>
             </div>
         </div>
     </div>
+    <div class="spacing-100"></div> 
 
 </div>
-
-<div class="spacing-100"></div> 
 
 <div id="TOKENIZATION" style="background-color:white;min-height:70vh">
     <div style="background:url('https://source.unsplash.com/1600x900/?token,code')" class="imageContainerSmall">
@@ -1850,17 +1870,16 @@ getSome:function(newQuery){}</div>
             <div class="col-sm-8">
                 <!--MULTI ORG LATTICE-->
                 <h4>Validation Traversal</h4>
+                <p style="color:gray;font-style:italic">From a Set of Validations Compute the Association `A_{D_{1-n}` </p>
                 <!--<p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->
                 <p>`Association | A = sum_(i=0)^n {V_N}_[a-z]`</p>
                 <p>`Validation | {V_N} = sum_(i=0)^n {V_{V_i}}_[a-z]`</p>
                 <p>`Association | A = sum_(i=0)^n sum_(i=0)^n V_[a-z]`</p>
 
                 <h5>Topology</h5>
-
-
-                <p style="color:gray;font-style:italic">From Set Obj{} Score --compute--> </p>
                 <p style="color:gray;font-style:italic">An Immutable Object Structure; RECURISIVE.. TOPOLOGY MAP OF VALIDATIONS (HIGHER ORDER)</p>
-                <p style="color:gray;font-style:italic">The Token Action Potientals (and protocols)</p>
+
+                <h5>Token Action Potientals & Protocols</h5>
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
             </div>
             <div class="col-sm-4" style="text-align:right">
@@ -1901,15 +1920,21 @@ getSome:function(newQuery){}</div>
 
                 <h4><b>Matching Engine</b></h4>
                 <p>An Immutable Object Structure</p>
-                <p style="color:gray;font-style:italic">Given a set of equations, we formalize an immputatbble Structure to define a Multidimensional order book</p>
+                <p style="color:gray;font-style:italic">Given a set of equations, we formalize an immutable Structure to define a Multidimensional order book</p>
                 <p>Discussion of market types</p>
                 <p style="color:gray;font-style:italic">Commentary on binary books --> to multi books; logic encoded</p>
                 <p style="color:gray;font-style:italic">Priority of Prefrence for Higher Dimensional Orders; types</p>
                 <p>The rank of connection n by size of the market m -- degress of connection -- the moment of liquidity is combinatorial</p>
-                
+
                 <div class="spacing-10"></div>
 
-                `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`
+
+                <!--BINARY-->
+                <!--`{(alpha_1A,=,beta_1B),(alpha_2A, =, beta_2B),(vdots,,),(delta_nA,=,epsilon_nB):}`-->
+
+
+                <!--just questioning the +--> 
+                `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`
 
                 <div class="spacing-10"></div>
 
@@ -1980,10 +2005,31 @@ getSome:function(newQuery){}</div>
 
                 <div class="spacing-10"></div>
 
-                <h5>Group Theoretic Properties</h5>
+                <h4>Group Theoretic Properties</h4>
+                <p>A group G is a finite or infinite set of elements together with a binary operation (called the group operation) that together satisfy the four fundamental properties of closure, associativity, the identity property, and the inverse property. The operation with respect to which a group is defined is often called the "group operation," and a set is said to be a group "under" this operation.</p>
+                <p>A permutation group is a finite group G whose elements are permutations of a given set and whose group operation is composition of permutations in G. Permutation groups have orders dividing  n!.</p>
+                <p>A Lie group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>
+
                 <p><b>Substitution</b></p>
+                `f(MARKET) = G(zeta)`
+                <br>
+                `where`
+                <br>
+                `ABC = (A=BC-B=AC-C=AB)`
+                <br>
+                `f(ABCD) = A.....`
+                <div class="spacing-10"></div>
+
                 <p><b>Combination</b></p>
+                `G(ABC+DFG)`
+                <div class="spacing-10"></div>
+
                 <p><b>Reduction</b></p>
+                `SIMPLIFICATION`
+                `f(g(x))` `f o g`
+
+                <div class="spacing-10"></div>
+
 
                 <div class="spacing-25"></div>
 
@@ -1999,6 +2045,8 @@ getSome:function(newQuery){}</div>
                 <p>Capital Asset Pricing Model..</p>
                 `E(R_i)=R_f+beta_i(E(R_m)-R_f)`
 
+                <!--PROBABILITY DENSITY ANALYSIS-->
+                
                 <div class="spacing-5"></div>
 
                 <a href="https://www.cre8.capital/api/data/marketImage">Market Image</a>

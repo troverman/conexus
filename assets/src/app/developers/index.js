@@ -80,7 +80,16 @@ angular.module( 'conexus.developers', [
         //if (query.model == 'PROJECTMEMBER'){}
         //if (query.model == 'PROTOCOL'){}
         //if (query.model == 'REACTION'){}
-        //if (query.model == 'SEARCH'){}
+
+
+        //EVERY API REQUEST COULD GO THOUGH SEARCH.. LOL SHOUD IT ?
+        if (query.model == 'SEARCH'){
+            TransactionModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
+                $scope.results.search = JSON.stringify(models, null, 2);
+            });
+        }
+
+
         //if (query.model == 'TASK'){}
         //if (query.model == 'TOKEN'){}
         //if (query.model == 'TIME'){}

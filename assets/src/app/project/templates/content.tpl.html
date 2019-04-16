@@ -1,5 +1,4 @@
 <div class="row">
-
     <div ng-show="contentList.length == 0">
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
@@ -12,7 +11,7 @@
     </div>
 
     <div ng-show="contentList.length > 0" class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
-        <div class="card">
+        <div class="card" ng-if="sortedTagArray.length > 0">
             <div style="padding:16px;">
                 <span><b>Tags</b></span>
                 <div ng-repeat="tag in sortedTagArray">
@@ -20,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="card" ng-if="sortedTagArray.length > 0:=">
             <div style="padding:16px;">
                 <span><b>Associations</b></span>
                 <div ng-repeat="tag in sortedTagArray">
@@ -49,12 +48,24 @@
             </form>
         </div>
 
+        <!--TODO-->
         <div class="card">
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
         </div>
 
         <div ng-repeat="item in contentList">
             <div class="card" ng-click="renderToggle(item)">
+
+                <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div class="container">
+                                <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}">{{item.title}}</a></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div style="padding:16px;">
 
                     <div style="float:right;text-align:right">
@@ -68,8 +79,6 @@
                         </a>
                         <span am-time-ago="item.createdAt"></span>
                     </div>
-
-                    <h4 ng-show="item.title"><a href="content/{{item.id}}">{{item.title}}</a></h4>
 
                     <p style="margin-top:0px;margin-bottom:10px;"><a ng-repeat="tag in item.tags track by $index" href="#"  ng-click="filterContent(tag)">{{tag}} </a></p>
 

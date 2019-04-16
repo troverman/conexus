@@ -14,29 +14,34 @@ angular.module( 'conexus.members', [
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome('', '', 1000, 0, 'createdAt DESC');
             }],
-            //followers: ['FollowerModel', 'config', function(FollowerModel, config) {
-            //    return FollowerModel.getFollowing(config.currentUser);
-            //}],
+            //ROOTSCOPE..
+            followers: ['FollowerModel', 'config', function(FollowerModel, config) {
+                console.log(config)
+                if (!config.currentUser){null}
+                else{return FollowerModel.getFollowing(config.currentUser);}
+            }],
         }
 	});
 }])
 
-.controller( 'MembersCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'members', 'SearchModel', 'titleService', 'UserModel', function MembersController( $rootScope, $sailsSocket, $sce, $scope, config, lodash, members, SearchModel, titleService, UserModel ) {
+.controller( 'MembersCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'FollowerModel', 'followers', 'lodash', 'members', 'SearchModel', 'titleService', 'toaster', 'UserModel', function MembersController( $rootScope, $sailsSocket, $sce, $scope, config, FollowerModel, followers, lodash, members, SearchModel, titleService, toaster, UserModel ) {
 	titleService.setTitle('Members | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.members = members;
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;
 
-    //$scope.followers = $scope.followers.map(function(obj){return obj.followed});
-    $scope.members.map(function(obj){
-        //var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
-        //if (index != -1){obj.isFollowing = true;}
-        //if (index == -1){obj.isFollowing = false;}
-        obj.isFollowing = false;
-        return obj;
-    });
-    
+    //if logged in
+    if (followers){
+        $scope.followers = followers.map(function(obj){return obj.followed});
+        $scope.members.map(function(obj){
+            var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+            if (index != -1){obj.isFollowing = true;}
+            if (index == -1){obj.isFollowing = false;}
+            return obj;
+        });
+    }
+
     //DEPRECIATE 'TOTAL WORK'
     $scope.sortText = {'totalWork DESC':'Total Reputation','createdAt DESC':'Date Joined'}
 
@@ -59,6 +64,43 @@ angular.module( 'conexus.members', [
         legend: {enabled: false},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
+    };
+
+    $scope.follow = function(model){
+        $scope.newFollower = {
+            followed:model.id,
+            follower:$scope.currentUser.id,
+        };
+        if (!model.isFollowing){
+            FollowerModel.create($scope.newFollower).then(function(followerModel) {
+                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                $scope.members[index].isFollowing = true;
+                $scope.pop('Following!', 'You are now follwing '+ model.username);
+                $scope.newFollower = {};
+            });
+        }
+        if (model.isFollowing){
+            //FollowerModel.delete($scope.newFollower).then(function(followerModel){
+                $scope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
+                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                $scope.members[index].isFollowing = false;
+            //});
+        }
+    };
+
+    //ROOT
+    $scope.pop = function(title, body){
+        toaster.pop({
+            type:'success',//info, wait, success, warning
+            title: title,
+            body: body,
+            onShowCallback: function (toast) { 
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log('dingdong')})
+                .catch(function(err){console.log(err)})
+            }
+        });
     };
 
     $scope.updateChart = function(){
