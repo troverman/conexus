@@ -2072,7 +2072,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>transactionsRoot</b></p>\n" +
     "                        <p>Hash of the root node of the transactions trie. This trie contains all transactions in the block body.</p>\n" +
     "                        <p><b>receiptsRoot</b></p>\n" +
-    "                        <p>Every time a transactions is executed, Ethereum generates a transaction receipt that contains information about the transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
+    "                        <p>A transaction receipt contains information about transaction execution. This field is the hash of the root node of the transactions receipt trie.</p>\n" +
     "                        <p><b>logsBloom</b></p>\n" +
     "                        <p><b>difficulty</b></p>\n" +
     "                        <p><b>number</b></p>\n" +
@@ -2304,6 +2304,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><b>Owner:</b> TBD</p> \n" +
     "                        <p><b>isGenerator:</b> TBD<!--If an item is a generator, on purchase an item--></p> \n" +
     "                    </div>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Relationship with <a href=\"#ACTION\" du-smooth-scroll>Actions</a>; You can act upon an item via a verb / action type;<br> Consume Water, Wear Shirt, ...,  Actions are a vector with Type and Quantity</p>\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
@@ -2334,6 +2335,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">This is the Location Model</p>\n" +
+    "                    <p>Location Tokenization via Lat Lng Member Sharing --> Suggested Tasks to tokenize.. 'experience tasks' .. some protocol.. geobounded Proj, Task.., Validation... </p>\n" +
+    "                    <p>Hanging at the Park; shaing location.. space and time --> Auto Task --> Time (--> Proj) with Task Location..</p>\n" +
+    "                    <p>`(\\l\\a\\t,\\l\\n\\g) mapsto Task` : `(\\l\\a\\t,\\l\\n\\g) mapsto Project` </p>\n" +
+    "                    <p>Location Context of Time</p>\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
@@ -3308,19 +3313,20 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <a href=\"#\">Explorer</a>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                <h4>Group Theoretic Properties</h4>\n" +
     "                <p>A group G is a finite or infinite set of elements together with a binary operation (called the group operation) that together satisfy the four fundamental properties of closure, associativity, the identity property, and the inverse property. The operation with respect to which a group is defined is often called the \"group operation,\" and a set is said to be a group \"under\" this operation.</p>\n" +
-    "                <p>A permutation group is a finite group G whose elements are permutations of a given set and whose group operation is composition of permutations in G. Permutation groups have orders dividing  n!.</p>\n" +
-    "                <p>A Lie group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>\n" +
+    "                <p>A permutation group is a finite group `G` whose elements are permutations of a given set and whose group operation is composition of permutations in `G`. Permutation groups have orders dividing `n!`.</p>\n" +
+    "                <p>A `Lie` group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>\n" +
     "\n" +
     "                <p><b>Substitution</b></p>\n" +
-    "                `f(MARKET) = G(zeta)`\n" +
+    "                `f(MARKET) = G(zeta) | alpha = beta_1+beta_2+ ... `\n" +
     "                <br>\n" +
-    "                `where`\n" +
+    "                `f(ABCD) = ... | ABC = (A=BC-B=AC-C=AB)`\n" +
     "                <br>\n" +
-    "                `ABC = (A=BC-B=AC-C=AB)`\n" +
-    "                <br>\n" +
-    "                `f(ABCD) = A.....`\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p><b>Combination</b></p>\n" +
@@ -3329,7 +3335,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p><b>Reduction</b></p>\n" +
     "                `SIMPLIFICATION`\n" +
-    "                `f(g(x))` `f o g`\n" +
+    "                `f(g(x))`\n" +
+    "                `(f o g)(x)`\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +

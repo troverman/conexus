@@ -23,14 +23,16 @@ module.exports.bootstrap = function(cb) {
 	//utilService.getGeoNamesByParent(2635167, '', 'voetr5', -1);
 
 
-	//35.9606, -83.9207
+	//35.9606, -83.9207 // knox
+	//35.996948, -78.899017 // durham
+	//40.730610, -73.935242 // nyc; bushwick
 	var geoModel = {
 		username:'troverman',
-		lat:'35.9606',//'40.730610',
-		lng:'-83.9207',//'-73.935242',
-		featureCode:'PRK',
+		lat:'35.9606',//'40.730610', 35.996948
+		lng:'-83.9207',//'-73.935242', -78.899017
+		featureCode:'PRK', //PRK, CH, CTRCM, CMN
 		type:'latlng', //parent
-		radius:'50',
+		radius:'30',
 		parentId:'4482348'
 	};
 	//utilService.getGeoNames(geoModel);
@@ -51,6 +53,8 @@ module.exports.bootstrap = function(cb) {
 		//COMMUNITY EVENT
 			//MOVIE NIGHT
 				//I AM THE CM THE MAYOR THE X THE Y THE Z 
+
+	//BREAK OUT THE TASKS ETC INTO CONTENT FOR THE CREATES
 
 	//POPULATE TOKENZ
 	setInterval(dataService.traverse, 8640000);

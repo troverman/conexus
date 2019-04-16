@@ -102,6 +102,8 @@ module.exports = {
 		});
 	},
 
+	//POPULATION ++ CRYSTAL IS ++ 
+	//DO MULTI VALIDATION
 	getGeoNames: function(model){
 
 		var requestModel = {json: true};
@@ -117,20 +119,42 @@ module.exports = {
 		}
 
 		request(requestModel, function (error, response, body) {
-			var data = body.geonames
-			for (x in data){
-				//console.log(data[x]);
+			var dataSeries = body.geonames
+			console.log(dataSeries.length)
+			async.eachSeries(dataSeries, function (data, next){
 				var projectModel = {
-					title:data[x].name,
-					//urlTitle:data[x].name.replace(),
-					tags:'parks',
-					description:data[x].toponymName,
+					title:data.name,
+					urlTitle:data.name.replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
+					//A COMPUTED VALUE.. .. IMPLICIT MOTION TO .. ? META VALIDATION PROJ_a - PROJ_a
+					tags:'park,community,tennessee,tn,recreation,parksandrec',
+					description:data.toponymName,
+					location:{address:'', lat:parseFloat(data.lat), lng:parseFloat(data.lng), coordinates:[parseFloat(data.lng), parseFloat(data.lat)]},
 					creator:'CRE8',
-					location:{address:'',lat:data[x].lat, lng:data[x].lng}
+					//DEPRECIATE
+					user:'57ab77fa804f7c11002a78db',
+					parent:'5cb6387e2da4371500e46bf2'
 				};
-				console.log(projectModel)
+				Project.find({urlTitle:projectModel.urlTitle}).then(function(selectedProjectModel){
+					if (selectedProjectModel.length == 0){
+						//Project.create(projectModel).then(function(){
+						//	console.log('PARK CREATED!')
+						//});
+					}
+					process.nextTick(next);
+				});
 
-			}
+				//TASK FIND
+					//IMPLICIT VALIDATION
+					//MULTIASSOCIATION
+				//TASK CREATE
+					//CHILL AT X PARK
+					//CLEAN UP X PARK
+					//IMPLICIT VALIDATION
+					//MULTIASSOCIATION
+
+				//console.log(projectModel);
+
+			});
 		});
 
 	}
