@@ -206,6 +206,8 @@ module.exports = {
 
 		};
 
+
+
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
 		User.find({id:model.user}).then(function(userModel){
 			var reputation = {};
@@ -237,8 +239,6 @@ module.exports = {
 					Validation.publishCreate(validation);
 					res.json(validation);
 
-					
-				
 					//TODO: VALIDATION NOTIFICATION
 					var notificationModel = {
 						user: userModel[0].user,
@@ -248,18 +248,19 @@ module.exports = {
 						info:{user: userModel[0], associationModels:[]},
 						priority:75,
 					};
+					
 					//Notification.create(notificationModel).then(function(notification){
 					//	Notification.publishCreate(follower[0]);
 					//});
 
-
-
+					//TODO: MAINTAINCE FXN TO CALC ASSOCIATION FROM VALIDATIONS --> ON CREATE VALIDATION
 
 					//THEN CREATE OR UPDATE ASSOCIATION
-					//COULD JUST STORE IN MODEL..? ?
+					//COULD JUST STORE IN MODEL..? ? --> PROB BEST THAT IT IS DEPRECIATED FROM MODEL STORAGE AND NEED TO JOIN --> REFACTOR AT SOME POINT --> WE JUST HAVE TO KEEP RUNNING --> MAY SEEM OVERWHELIMG RGIHT NOW -- WITH CONTINUAL MOVMENT WE WILL CLIMB 
 
 					//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
 					//TODO: FIND
+
 					Association.find().then((associationModels)=>{
 						if (associationModels.length == 0){
 							Association.create().then((associationModel)=>{

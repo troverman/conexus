@@ -11,6 +11,7 @@ module.exports = {
 		var sort = req.query.sort || 'createdAt DESC';
 		
 		console.log(req.query);
+
 		if(req.query.id){
 			var id = req.query.id;
 			Item.find({id:id})
@@ -20,7 +21,7 @@ module.exports = {
 			.populate('user')  //TODO: OWNER
 			.then(function(models){
 				Item.subscribe(req, models);
-				res.json(models)
+				res.json(models[0])
 			});
 		}
 

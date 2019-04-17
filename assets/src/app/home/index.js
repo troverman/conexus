@@ -22,25 +22,25 @@ angular.module( 'conexus.home', [
         },
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return UserModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
+                return OrderModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome('', '', 15, 0, 'createdAt DESC');
+                return ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }], 
             tasks: ['TaskModel', function(TaskModel) {
-                return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             time: ['TimeModel', function(TimeModel) {
-                return TimeModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return TimeModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             transactions: ['TransactionModel', function(TransactionModel) {
-                return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
+                return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -54,40 +54,35 @@ angular.module( 'conexus.home', [
         },
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome('', '', 30, 0, 'createdAt DESC');
+                return UserModel.getSome({limit:30, skip:0, sort:'createdAt DESC'});
             }],
             orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome('', '', '', 10, 0, 'createdAt DESC');
+                return OrderModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome('', '', 15, 0, 'createdAt DESC');
+                return ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             tasks: ['TaskModel', function(TaskModel) {
-                return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             time: ['TimeModel', function(TimeModel) {
-                return TimeModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return TimeModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             transactions: ['TransactionModel', function(TransactionModel) {
-                return TransactionModel.getSome('','', 10, 0, 'createdAt DESC');
+                return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
-
             followers: ['FollowerModel', 'config', function(FollowerModel, config) {
                 return FollowerModel.getFollowing(config.currentUser);
             }],
-
             memberProjects: ['MemberModel', 'config', function(MemberModel, config) {
-                return MemberModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+                return MemberModel.getSome({user:config.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-
             positions: ['OrderModel', 'config', function(OrderModel, config) {
-                return OrderModel.getSome('user', config.currentUser.id, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome({user:config.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-
-
         }
     })
 
@@ -159,7 +154,7 @@ angular.module( 'conexus.home', [
                 //TODO: SIMPLY UPDATE QUERY :)
                 //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                 //TODO: DISTANCE
-                ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
+                ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
                     $scope.projects = projects;
                     $scope.markers = [];
                     $scope.populateMap();
@@ -417,6 +412,14 @@ angular.module( 'conexus.home', [
     
 	$scope.currentUser = config.currentUser;
 
+     //REORGANIZE
+    UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
+        $scope.currentUser = member;
+        $scope.member = member;
+        $scope.balance = member.balance;
+        $scope.reputation = member.reputation;
+    });
+
     $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
     $rootScope.associatedModel = {
@@ -494,9 +497,6 @@ angular.module( 'conexus.home', [
     //time(validation tags), reaction
 
     //ORDERS
-
-
-
 
 
     //LOOK AT MY TIME
@@ -694,7 +694,7 @@ angular.module( 'conexus.home', [
                         center: {latitude: lat, longitude: lng},
                         zoom: 12
                     };
-                    ProjectModel.getSome('location', [lng,lat], 1000, 0, 'createdAt DESC').then(function(projects){
+                    ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
                         $scope.projects = projects;
                         $scope.markers = [];
 
@@ -905,14 +905,6 @@ angular.module( 'conexus.home', [
 
     }
 
-    //REORGANIZE
-    UserModel.getByUsername($scope.currentUser.username).then(function(member){
-        $scope.currentUser = member;
-        $scope.member = member;
-        $scope.balance = member.balance;
-        $scope.reputation = member.reputation;
-    });
-
     //TEMP HARDCODE -- MOVE TO PROTOCOL
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
@@ -1006,7 +998,7 @@ angular.module( 'conexus.home', [
     //TODO: BETTER
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+        ContentModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.activity = contentList;
             $scope.loadTags();

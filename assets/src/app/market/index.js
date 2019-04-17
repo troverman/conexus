@@ -12,10 +12,10 @@ angular.module( 'conexus.market', [
 		},
         resolve:{
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome('market', $stateParams.id, '', 100, 0, 'createdAt DESC');
+                return OrderModel.getSome({market:$stateParams.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
-                return TokenModel.getSome('string', $stateParams.id, 1, 0, 'createdAt DESC');
+                return TokenModel.getSome({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});

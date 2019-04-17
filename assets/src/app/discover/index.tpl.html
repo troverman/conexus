@@ -35,7 +35,7 @@
 
 	<div class="row">
 
-    	<div class="col-md-6" style="padding-left:0px;padding-right:0px;">
+    	<div class="col-md-5" style="padding-left:0px;padding-right:0px;">
 			<div class="card">
 				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
 				    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
@@ -104,7 +104,7 @@
 
 		</div>
 		
-    	<div class="col-md-6" style="padding-left:0px;padding-right:0px;">
+    	<div class="col-md-7" style="padding-left:0px;padding-right:0px;">
 			<div ng-repeat="item in tasks.slice(0,10)">
 				<div class="card" ng-click="renderToggle(item)">
 					<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">

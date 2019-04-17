@@ -12,7 +12,7 @@ angular.module( 'conexus.contentList', [
 		},
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});
@@ -125,7 +125,7 @@ angular.module( 'conexus.contentList', [
 
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(contentList){
+        ContentModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.contentList = contentList;
@@ -137,8 +137,7 @@ angular.module( 'conexus.contentList', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(contentList) {
-        //ContentModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(posts) {
+        ContentModel.getSome({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(contentList) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.contentList, contentList);
             $scope.loadAssociations();
@@ -158,7 +157,7 @@ angular.module( 'conexus.contentList', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(models){
+        ContentModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.contentList = models;
         });
@@ -167,7 +166,7 @@ angular.module( 'conexus.contentList', [
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome(20, $scope.skip, $scope.selectedSort).then(function(contentList) {
+        ContentModel.getSome({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(contentList) {
             $rootScope.stateIsLoading = false;
             $scope.contentList = contentList;
         });

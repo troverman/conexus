@@ -68,20 +68,14 @@
                     </div>
                 </div>
                 <div style="padding:16px;overflow:scroll;max-height:500px">
-
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
-
                     <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
-
                     <div>
                         <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
                     </div>  
-
                     <h5>{{item.amountSet}} <a ng-click="$event.stopPropagation()" href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h5>
-
                 </div>
                 <div class="card-footer">
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 

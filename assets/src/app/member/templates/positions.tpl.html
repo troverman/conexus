@@ -54,22 +54,48 @@
 
 	    <div ng-repeat="item in orders">
 	        <div class="card" ng-click="renderToggle(item)">
+
+	        	<div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
+	                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+	                    <div style="margin-top: auto;margin-bottom: auto;">
+	                        <div class="container">
+	                            <span ng-repeat="(key, value) in item.setAlpha">
+	                                <a style="color:white" href="market/{{key}}">{{key}}</a>
+	                            </span>
+	                            <br>
+	                            <span ng-repeat="(key, value) in item.setBeta">
+	                                <a style="color:white" href="market/{{key}}">{{key}}</a>
+	                            </span>
+	                            <h5 style="color:white"><span style="font-size:10px">{{item.type}}</span></h5>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
 	        	
 	            <div style="padding:16px">
-
+	            	
 	            	<div style="float:right;text-align:right">
                         <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>  
 
-	            	<span ng-repeat="asset in item.amountSet track by $index">
-						{{item.amountSet[$index]}} <a ng-click="$event.stopPropagation()" href="market/{{item.identiferSet[$index]}}">{{item.identiferSet[$index]}}</a> 
-					</span>
-					<span> | </span>
-					<span ng-repeat="asset in item.amountSet1 track by $index">
-						{{item.amountSet1[$index]}} <a ng-click="$event.stopPropagation()" href="market/{{item.identiferSet1[$index]}}">{{item.identiferSet1[$index]}}</a> 
-					</span>
+                    <div class="row">
+	                    <div class="col-xs-2">
+	                        <span ng-repeat="(key, value) in item.setAlpha">
+	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+	                        </span>
+	                    </div>
+
+	                    <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
+
+	                    <div class="col-xs-2">
+	                        <span ng-repeat="(key, value) in item.setBeta">
+	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+	                        </span>
+	                    </div>
+	                </div>
 
 					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
+
 	            </div>
 	            <div class="card-footer">
 	                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 

@@ -1,29 +1,31 @@
-
 module.exports = {
 	
-	getOne: function(req, res) {
-		Content.findOne(req.param('id'))
-        .populate('user')
-        .populate('project')
-        .populate('profile')
-        .populate('task')
-        .populate('time')
-        .then(function (model) {
-			res.json(model);
-        });
-	},
-
 	getSome: function(req, res) {
-
-		var limit = req.query.limit;
-		var skip = req.query.skip;
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
+		var id = req.query.id;
 
 		console.log(req.query);
 
 		Content.watch(req);
 
-		if(req.query.item){
+		if(req.query.id){
+			Content.find({id:id})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+        	.populate('project')
+        	.populate('profile')
+        	.populate('task')
+        	.populate('time')
+        	.then(function(models) {
+				res.json(models[0]);
+			});
+		}
+
+		else if(req.query.item){
 			var item = req.query.item;
 			Content.find({item:item})
 			.limit(limit)
@@ -36,7 +38,7 @@ module.exports = {
 			});
 		}
 
-		if(req.query.market){
+		else if(req.query.market){
 			var market = req.query.market;
 			Content.find({market:market})
 			.limit(limit)

@@ -3,7 +3,7 @@ angular.module( 'conexus.marketPair', [
 
 .config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'marketPair', {
-		url: '/market/:id/:id1',
+		url: '/market/:setAlpha/:setBeta',
 		views: {
 			"main": {
 				controller: 'MarketPairCtrl',
@@ -12,13 +12,13 @@ angular.module( 'conexus.marketPair', [
 		},
         resolve:{
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 400, 0, 'createdAt DESC');
+                return OrderModel.getSome({setAlpha:$stateParams.setAlpha, setBeta:$stateParams.setBeta, limit:400, skip:0, sort:'createdAt DESC'});
             }],
             mirrorOrders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome('marketPair', $stateParams.id1, $stateParams.id, 400, 0, 'createdAt DESC');
+                return OrderModel.getSome({setAlpha:$stateParams.setBeta, setBeta:$stateParams.setAlpha, limit:400, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['$stateParams', 'ContentModel', function($stateParams, ContentModel) {
-                return ContentModel.getSome('marketPair', $stateParams.id, $stateParams.id1, 400, 0, 'createdAt DESC');
+                return ContentModel.getSome('marketPair', $stateParams.setAlpha, $stateParams.setBeta, 400, 0, 'createdAt DESC');
             }],
         }
 	});
@@ -28,15 +28,15 @@ angular.module( 'conexus.marketPair', [
     
     $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
-    titleService.setTitle('Market | ' + $stateParams.id + ' | ' +  $stateParams.id1  + ' | CRE8.XYZ');
+    titleService.setTitle('Market | ' + $stateParams.setAlpha + ' | ' +  $stateParams.setBeta  + ' | CRE8.XYZ');
 
     $scope.contentList = contentList;
 
-    $scope.market = $stateParams.id;
-    $scope.market1 = $stateParams.id1;
+    $scope.market = $stateParams.setAlpha;
+    $scope.market1 = $stateParams.setBeta;
 
-    $rootScope.market = $stateParams.id;
-    $rootScope.market1 = $stateParams.id1;
+    $rootScope.market = $stateParams.setAlpha;
+    $rootScope.market1 = $stateParams.setBeta;
     
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -49,7 +49,7 @@ angular.module( 'conexus.marketPair', [
     $scope.selectedType = 'ONBOOKS';
 
     //HMM
-    $rootScope.associatedModels = [{type:'MARKETPAIR',address:$stateParams.id+' | '+$stateParams.id1}]
+    $rootScope.associatedModels = [{type:'MARKETPAIR',address:$stateParams.setAlpha+' | '+$stateParams.setBeta}]
 
     //coordinates on the quasicrystal 
     //100Transparency + 50education + 75universal = 0.01CRE8 + 0.05novo 
@@ -214,13 +214,13 @@ angular.module( 'conexus.marketPair', [
         $scope.chart.series = [{
             id: 'ExchangePrice',
             type: 'spline',
-            name: 'Exchange Price ' + $stateParams.id + ' | ' + $stateParams.id1,
+            name: 'Exchange Price ' + $stateParams.setAlpha + ' | ' + $stateParams.setBeta,
             data: []
         },
         {
             id: 'ExchangeVolume',
             type: 'column',
-            name: 'Volume ' + $stateParams.id + ' | ' + $stateParams.id1,
+            name: 'Volume ' + $stateParams.setAlpha + ' | ' + $stateParams.setBeta,
             data: []
         }, {
             type: 'sma',
@@ -305,8 +305,8 @@ angular.module( 'conexus.marketPair', [
         if ($scope.orders[index].identiferSet1){$scope.orders[index].identiferSet1 = $scope.orders[index].identiferSet1.split(',');}
         if ($scope.orders[index].amountSet1){ $scope.orders[index].amountSet1 = $scope.orders[index].amountSet1.split(',');}
     });
-    $scope.newOrder.identiferSet = $scope.stateParams.id;
-    $scope.newOrder.identiferSet1 = $scope.stateParams.id1;
+    $scope.newOrder.identiferSet = $scope.stateParams.setAlpha;
+    $scope.newOrder.identiferSet1 = $scope.stateParams.setBeta;
     $scope.trades = {};
 
     //TODO | COLOR FLIP?

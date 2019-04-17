@@ -2,33 +2,31 @@ angular.module('models.content', ['lodash', 'services', 'sails.io',])
 
 .service('ContentModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getOne = function(model) {
-        var url = utils.prepareUrl('content/' + model);
-        return $sailsSocket.get(url).then(success, error);
-    };
-
-    this.getSome = function(type, filter, limit, skip, sort) {
-        var query = {};
-
+    this.getSome = function(model) {
+        var url = utils.prepareUrl('content'); 
         //TODO COMPOUND
-        if (type=='contentModel'){query = {params:{contentModel:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='item'){query = {params:{item:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='market'){query = {params:{market:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='order'){query = {params:{order:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='profile'){query = {params:{profile:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='tag'){query = {params:{tag:filter, limit:limit,skip:skip,sort:sort}};}
         //MULTIPLE
-        else if (type=='search'){query = {params:{search:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='task'){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='time'){query = {params:{time:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='transaction'){query = {params:{transaction:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
-
-        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
-        var url = utils.prepareUrl('content');
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.sort,
+                id:model.id,
+                contentModel:model.contentModel,
+                item:model.item,
+                market:model.market,
+                order:model.order,
+                profile:model.profile,
+                project:model.project,
+                tag:model.tag,
+                search: model.search,
+                task: model.task,
+                time: model.time,
+                transaction: model.transaction,
+                user: model.user,
+            }
+        };
         return $sailsSocket.get(url, query).then(success, error);
-        
     };
 
     this.create = function(newModel) {

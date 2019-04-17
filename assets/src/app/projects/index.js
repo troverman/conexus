@@ -12,7 +12,7 @@ angular.module( 'conexus.projects', [
 		},
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return ProjectModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
 	});
@@ -78,7 +78,7 @@ angular.module( 'conexus.projects', [
 
                 
                 //TODO: DISTANCE
-                ProjectModel.getSome('location', [lng,lat], 100, 0, 'createdAt DESC').then(function(projects){
+                ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
                     $scope.projects = projects;
                     $scope.markers = [];
                     $scope.populateMap();
@@ -160,7 +160,7 @@ angular.module( 'conexus.projects', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
-        ProjectModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(projects) {
+        ProjectModel.getSome({ProjectModellimit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.projects, projects);
         });
@@ -169,7 +169,7 @@ angular.module( 'conexus.projects', [
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         console.log($scope.searchQuery)
-        ProjectModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(projects){
+        ProjectModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(projects){
             $rootScope.stateIsLoading = false;
             $scope.projects = projects;
         });
@@ -178,7 +178,7 @@ angular.module( 'conexus.projects', [
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
-        ProjectModel.getSome('search', $scope.searchQuery, 20, $scope.skip, $scope.selectedSort).then(function(projects){
+        ProjectModel.getSome({search:$scope.searchQuery, limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects){
             $rootScope.stateIsLoading = false;
             $scope.projects = projects;
         });
@@ -235,7 +235,7 @@ angular.module( 'conexus.projects', [
             //    console.log(models);
             //});
 
-            ProjectModel.getSome('search', $scope.searchModel[0].query, 100, 0, 'createdAt DESC').then(function(models){
+            ProjectModel.getSome({search:$scope.searchModel[0].query, limit:100, skip:0, sort:'createdAt DESC'}).then(function(models){
                 $rootScope.stateIsLoading = false;
                 $scope.projects = models;
                 $scope.init();

@@ -220,6 +220,45 @@ angular.module( 'conexus.developers', [
         ]
     };
 
+    $scope.graphExploreData = {
+        nodes:[
+            {name:'VALIDATION 1'},
+            {name:'VALIDATION 1a'},
+            {name:'VALIDATION 1b'},
+        ],
+        links:[
+            {value:1, source:1, target:0},
+            {value:1, source:1, target:2},
+        ]
+    };
+
+    $scope.graphExploreData = {
+        nodes:[], 
+        links:[]
+    };
+
+    $scope.explore = function(){
+        //POWER SET
+        function getAllSubsets(theArray) {
+          return theArray.reduce(function (subsets, value) {
+            return subsets.concat(subsets.map(function (set) {
+              return [value].concat(set);
+            }));
+          }, [[]]);
+        };        
+        var powerSet = getAllSubsets(['A','B','C','D']);
+        powerSet.shift();
+        powerSet.pop();
+
+        for (x in powerSet){
+        $scope.graphExploreData.nodes.push({name:powerSet[x]})
+           for (y in powerSet){
+                $scope.graphExploreData.links.push({value:1, source:parseInt(x), target:parseInt(y)});
+            }
+        }
+    };
+    $scope.explore();
+
     //for (x in $scope.item.associatedModels){
     //    var length = $scope.graphData.nodes.length;
     //    $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})

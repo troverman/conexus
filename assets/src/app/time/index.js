@@ -12,14 +12,14 @@ angular.module( 'conexus.time', [
         },
         resolve: {
             time: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
-                return TimeModel.getOne($stateParams.id);
+                return TimeModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'time', function(ContentModel, time){
-                return ContentModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({time:time.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             //association is sum of validation
             validations: ['ValidationModel', 'time', function(ValidationModel, time){
-                return ValidationModel.getSome('time', time.id, 100, 0, 'createdAt DESC');
+                return ValidationModel.getSome({time:time.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -35,9 +35,11 @@ angular.module( 'conexus.time', [
     $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
     //TODO: BETTER
+    //GLOBAL..
+    //DEPRECIATE
     $scope.member = {};
     if($scope.currentUser){
-        UserModel.getByUsername($scope.currentUser.username).then(function(member){
+        UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
             $scope.member = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
@@ -74,17 +76,17 @@ angular.module( 'conexus.time', [
     //NAKED TAGS? --> REP?
 
     //VALIDATION IS THE CORE.. 
-    if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id)}
-    if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id)}
+    //if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id)}
+    //if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id)}
 
-    if ($scope.time.task.tags){
-        for (x in $scope.time.task.tags){
-            $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.tags[x].trim().toUpperCase());
-            $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
-            if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());}
-            if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());}
-        }
-    }
+    //if ($scope.time.task.tags){
+    //    for (x in $scope.time.task.tags){
+    //        $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.tags[x].trim().toUpperCase());
+    //        $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
+    //        if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());}
+    //        if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());}
+    //    }
+    //}
    
     //DEPRECIATE
     $scope.createContent = function(content) {

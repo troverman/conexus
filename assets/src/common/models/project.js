@@ -2,30 +2,27 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
 
 .service('ProjectModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getOne = function(id) {
-        var url = utils.prepareUrl('project/' + id);
-        return $sailsSocket.get(url).then(success, error);
-    };
-
-    this.getSome = function(type, filter, limit, skip, sort) {
+    this.getSome = function(model) {
         var url = utils.prepareUrl('project');
-        var query = {params:{limit:limit,skip:skip,sort:sort}};
-
-
-        if (type=='search'){query = {params:{query:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='location'){query = {params:{location:filter,limit:limit,skip:skip,sort:sort}};}
-
-        
-
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.sort,
+                id:model.id,
+                search:model.search,
+                location:model.location,
+                urlTitle:model.urlTitle
+            }
+        };
         return $sailsSocket.get(url, query).then(success, error);
     };
 
-    this.getByUrl = function(model) {
-        var url = utils.prepareUrl('project/url/' + model);
-        return $sailsSocket.get(url).then(success, error);
-    };
+    //PROJECTMEMBER[TYPE]
+    //PROJECTCHARTER
 
-     this.getChildren = function(model) {
+    //DEPRECIATE
+    this.getChildren = function(model) {
         var url = utils.prepareUrl('project/children/' + model.id);
         return $sailsSocket.get(url).then(success, error);
     };
@@ -35,9 +32,8 @@ angular.module('models.project', ['lodash', 'services', 'sails.io',])
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
-    this.delete = function(model) {
-        var url = utils.prepareUrl('project/' + model.id);
-        return $sailsSocket.delete(url).then(success, error);
+    this.update = function(model) {
+
     };
 
     var success = function(response) {

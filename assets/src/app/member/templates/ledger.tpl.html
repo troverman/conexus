@@ -129,11 +129,11 @@
 			<button class="btn btn-default log-btn" ng-click="transactionToggle()">+ Transaction</button>
 		</div>
 
-		<div class="card" ng-repeat="transaction in transactions" ng-click="renderToggle(transaction)">
+		<div class="card" ng-repeat="item in transactions" ng-click="renderToggle(item)">
 			<div style="padding:16px">
 
 				<div style="float:right;text-align:right">
-                    <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(transaction)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                 </div>  
                 <div style="display:inline">
                     <span ng-if="item.from.username">
@@ -170,20 +170,20 @@
                 <div class="spacing-5"></div>
 
 
-				<span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}">{{key}}</a></p></span>
-				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-				<p>{{transaction.content}}</p>
-				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-				<a ng-click="$event.stopPropagation()" href="transaction/{{transaction.id}}"></a>
+				<span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}">{{key}}</a></p></span>
+				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+				<p>{{item.content}}</p>
+				<p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+				<a ng-click="$event.stopPropagation()" href="transaction/{{item.id}}"></a>
 			</div>
 			<div class="card-footer">
-				<a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fa fa-angle-up"></i> {{transaction.reactions.plus}} like </a> 
-				<a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fa fa-angle-down"></i> {{transaction.reactions.minus}} dislike </a>
-				<a ng-click="$event.stopPropagation();reply(transaction)"><i class="fa fa-comment-o"></i> comment </a>
-				<a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}"><i class="fa fa-link grey"></i></a>
+				<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+				<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+				<a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+				<a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
 			</div>
-			<div ng-click="$event.stopPropagation()" ng-show="transaction.showReply" class="card-footer">
-	            <form role="form" ng-submit="createContent(transaction)">
+			<div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
+	            <form role="form" ng-submit="createContent(item)">
 	                <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 	                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 	            </form>

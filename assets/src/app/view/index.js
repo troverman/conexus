@@ -12,7 +12,7 @@ angular.module( 'conexus.view', [
         },
         resolve: {
             view: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
-                return TimeModel.getOne($stateParams.id);
+                return TimeModel.getSome({id:$stateParams.id});
             }],
         }
     });

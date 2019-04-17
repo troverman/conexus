@@ -110,6 +110,18 @@
                     </div>
                 </div>
                 <div ng-show="working">
+
+
+
+
+
+
+
+
+                    <!--VALIDATION HERE!!!!!!!!!-->
+
+
+
                     <h3>{{taskTime}}</h3>
                     <div ng-show="!streaming">
                         <!--
@@ -122,13 +134,38 @@
                     <div ng-show="streaming"> <div ng-bind-html="renderStream(streamUrl)">></div></div>
                     <div class="spacing-5"></div>
                     <tags-input ng-model="timeTags" placeholder="Tags"></tags-input>
-                    <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+
+                    <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->
+                    <a href="#"><b>Validation(s)</b></a>
                     <div class="spacing-5"></div>
-                    <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit work</button>
+
+                    <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+
+
+
+                    <!--SELECT PROJECT CONTEXT.. IMPLICILY VALIDATE YOU TAGS BY A DETAIL EXPAND-->
+
+
+                    <div class="spacing-5"></div>
+                    <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit Time</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>
-        <div class="card" ng-repeat="item in time" ng-click="">
+        <div class="card" ng-repeat="item in time" ng-click="renderToggle(item)">
             <div style="padding:16px;">
                 <div style="float:right;text-align:right">
                     <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(time)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>

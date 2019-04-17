@@ -59,14 +59,21 @@
             </div>
             
             <div ng-repeat="item in items">
-                <div class="card" style="">
-                    <div style="padding:16px;overflow:scroll;max-height:500px">
+                <div class="card" ng-click="renderToggle(item)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.title}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
 
                         <div style="float:right;text-align:right">
-                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>  
-
-                        <a href="item/{{item.id}}"><h4>{{item.title}}</h4></a>
 
                         <p><a ng-repeat="tag in item.tags track by $index" ng-click="filterContent(tag)">{{tag.trim()}} </a></p>
 

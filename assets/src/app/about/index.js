@@ -12,13 +12,13 @@ angular.module( 'conexus.about', [
 		},
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             projects: ['ProjectModel', function(ProjectModel){
-                return ProjectModel.getSome('','', 10, 0, 'createdAt DESC');
+                return ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 10, 0, 'createdAt DESC');
+                return TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});

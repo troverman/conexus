@@ -12,19 +12,19 @@ angular.module( 'conexus.discover', [
 		},
         resolve: {
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         	members: ['UserModel', function(UserModel){
-                return UserModel.getSome(18, 0, 'createdAt DESC');
+                return UserModel.getSome({limit:18, skip:0, sort:'createdAt DESC'});
             }],
         	projects: ['ProjectModel', function(ProjectModel){
-                return ProjectModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return ProjectModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return TaskModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
             time: ['TimeModel', function(TimeModel){
-                return TimeModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return TimeModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
 

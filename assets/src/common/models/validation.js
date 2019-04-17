@@ -2,20 +2,20 @@ angular.module('models.validation', ['lodash', 'services', 'sails.io',])
 
 .service('ValidationModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
 
-   this.getOne = function(model) {
-        var url = utils.prepareUrl('validation/' + model);
-        return $sailsSocket.get(url).then(success, error);    
-    };
-
-    this.getSome = function(type, filter, limit, skip, sort) {
-        var query = {};
-        if (type=='id'){query = {params:{id:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='project'){query = {params:{project:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='task'){query = {params:{task:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='time'){query = {params:{time:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='user'){query = {params:{user:filter, limit:limit,skip:skip,sort:sort}};}
-        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+    this.getSome = function(model) {
         var url = utils.prepareUrl('validation');
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.sort,
+                id:model.id,
+                project:model.project,
+                task:model.task,
+                time:model.time,
+                user:model.user,
+            }
+        };
         return $sailsSocket.get(url, query).then(success, error);
     };
     

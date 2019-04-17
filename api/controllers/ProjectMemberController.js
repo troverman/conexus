@@ -56,11 +56,14 @@ module.exports = {
 
 	},
 
+
+
 	create: function (req, res) {
 		var model = {
 			project: req.param('project'),
 			user: req.param('user'),
 			//validation: 0
+			//TYPE --> HERE'S YA LIQUID DEMOCRACy --> VOTER 
 		};
 		ProjectMember.create(model)
 		.exec(function(err, member) {

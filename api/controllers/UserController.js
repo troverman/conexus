@@ -1,26 +1,33 @@
 module.exports = {
 
-	getOne: function(req, res) {
-		User.findOne(req.param('id'))
-		.populate('passports')
-		.then(function(model) {
-			User.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	getSome: function(req, res) {
 
-		var limit = req.query.limit || 0;
-		var skip = req.query.skip;
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
+		var id = req.query.id;
+		var username = req.query.username;
 
 		User.watch(req);
 
 		console.log(req.query)
 
+		if (req.query.id){
+			User.find({id:id}).then(function(){
+				User.subscribe(req, models);
+				res.json(models[0]);
+			});
+		}
+
+		else if (req.query.username){
+			User.find({username:username}).then(function(models){
+				User.subscribe(req, models);
+				res.json(models[0]);
+			});
+		}
+
 		//SEARCH
-		if (req.query.query){
+		else if (req.query.query){
 			User.find()
 			.where({
 				or: [

@@ -6,7 +6,10 @@
 //TODO: RELATIONSHIP?
 module.exports = {
 
-	getSome: function(req, res) {},
+	getSome: function(req, res) {
+		//var follower;
+		//var followed;
+	},
 
 	getFollowers: function(req, res) {
 		var followedId = req.param('id');

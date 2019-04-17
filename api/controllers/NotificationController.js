@@ -9,12 +9,10 @@ module.exports = {
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
+		
+		console.log(req.query);
 
 		Notification.watch(req);
-
-		//BUILD UP
-
-		console.log(req.query);
 		
 		if (req.query.user){
 

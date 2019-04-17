@@ -12,7 +12,7 @@ angular.module( 'conexus.tasks', [
 		},
         resolve: {
             tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome('', '', 20, 0, 'createdAt DESC');
+                return TaskModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});
@@ -134,7 +134,7 @@ angular.module( 'conexus.tasks', [
     $scope.selectSort = function(sort){
 		$scope.selectedSort = sort;
 		$rootScope.stateIsLoading = true;
-        TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
+        TaskModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
 			$rootScope.stateIsLoading = false;
 			$scope.tasks = tasks.map(function(obj){
                 if (obj.tags){obj.tags = obj.tags.split(',')}
@@ -148,7 +148,7 @@ angular.module( 'conexus.tasks', [
         var search = $scope.searchQuery.map(function(obj){
             return obj.text;
         })[0];
-        TaskModel.getSome('search', search, 20, 0, 'createdAt DESC').then(function(tasks){
+        TaskModel.getSome({search:search, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             console.log(tasks)
             $rootScope.stateIsLoading = false;
             $scope.tasks = tasks.map(function(obj){
@@ -160,9 +160,10 @@ angular.module( 'conexus.tasks', [
 
     $scope.filterContent = function(filter) {
         //TODO: COMPLEX QUERY
+        //$scope.searchQuery = [];
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
-        TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
+        TaskModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             tasks.map(function(obj){
@@ -188,7 +189,7 @@ angular.module( 'conexus.tasks', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        TaskModel.getSome('', '', 100, $scope.skip, $scope.selectedSort).then(function(tasks) {
+        TaskModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
             $rootScope.stateIsLoading = false;
             tasks.map(function(obj){
                 obj.model = 'TASK';
@@ -248,7 +249,7 @@ angular.module( 'conexus.tasks', [
                 return obj.query
             }).join(',');
 
-            TaskModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(models){
+            TaskModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
                 console.log(models)
                 $rootScope.stateIsLoading = false;
                 $scope.tasks = models.map(function(obj){

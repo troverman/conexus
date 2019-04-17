@@ -2,15 +2,20 @@ angular.module('models.transaction', ['lodash', 'services', 'sails.io',])
 
 .service('TransactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(type, filter, limit, skip, sort) {
-        var query = {};
-        if (type=='id'){query = {params:{id:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='from'){query = {params:{from:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='project'){query = {params:{project:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='to'){query = {params:{to:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
-        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+    this.getSome = function(model) {
         var url = utils.prepareUrl('transaction');
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.sort,
+                id:model.id,
+                from:model.from,
+                project:model.project,
+                to:model.to,
+                user:model.user,
+            }
+        };
         return $sailsSocket.get(url, query).then(success, error);
     };
 

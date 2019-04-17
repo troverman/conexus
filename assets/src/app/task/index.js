@@ -12,18 +12,17 @@ angular.module( 'conexus.task', [
         },
         resolve: {
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
-                return TaskModel.getOne($stateParams.path);
+                return TaskModel.getSome({id:$stateParams.path, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'task', function(ContentModel, task){
-                return ContentModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             time: ['TimeModel', 'task', function(TimeModel, task){
-                return TimeModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
+                return TimeModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             validations: ['ValidationModel', 'task', function(ValidationModel, task){
-                return ValidationModel.getSome('task', task.id, 100, 0, 'createdAt DESC');
+                return ValidationModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            //associations
         }
     });
 }])
@@ -37,13 +36,13 @@ angular.module( 'conexus.task', [
     $scope.task.tokens = [];
     $scope.task.tokens.push('CRE8');
     $scope.task.tokens.push('CRE8+TASK');
-    $scope.task.tokens.push('CRE8+TASK+'+$scope.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.task.id);
-    if ($scope.task.tags){
-        for (x in $scope.task.tags){
-            $scope.task.tokens.push('CRE8+TASK+'+$scope.task.tags[x].trim().toUpperCase())
-            $scope.task.tokens.push('CRE8+TASK+'+$scope.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.task.id+'+'+$scope.task.tags[x].trim().toUpperCase())
-        }
-    }
+    //$scope.task.tokens.push('CRE8+TASK+'+$scope.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.task.id);
+   // if ($scope.task.tags){
+   //     for (x in $scope.task.tags){
+   //         $scope.task.tokens.push('CRE8+TASK+'+$scope.task.tags[x].trim().toUpperCase())
+            //$scope.task.tokens.push('CRE8+TASK+'+$scope.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.task.id+'+'+$scope.task.tags[x].trim().toUpperCase())
+   //     }
+   // }
 
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
@@ -74,15 +73,16 @@ angular.module( 'conexus.task', [
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TIME');
-        obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
+        //obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
         //CONTEXT!
-        if (obj.task.tags){
-            obj.task.tags = obj.task.tags.split(',');
-            for (x in obj.task.tags){
-                obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
-                obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
-            }
-        }
+        //REMOVE TASK..
+        //if (obj.task.tags){
+        //    obj.task.tags = obj.task.tags.split(',');
+        //    for (x in obj.task.tags){
+        //        obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
+                //obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
+        //    }
+        //}
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });

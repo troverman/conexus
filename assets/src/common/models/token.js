@@ -1,18 +1,19 @@
 angular.module('models.token', ['lodash', 'services', 'sails.io',])
 
 .service('TokenModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
-
-    this.getOne = function(model) {
-        var url = utils.prepareUrl('token/' + model);
-        return $sailsSocket.get(url).then(success, error);    
-    };
     
-    this.getSome = function(type, filter, limit, skip, sort) {
-        var query = {};
-        if (type=='search'){query = {params:{query:filter, limit:limit,skip:skip,sort:sort}};}
-        else if (type=='string'){query = {params:{string:filter, limit:limit,skip:skip,sort:sort}};}
-        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+    this.getSome = function(model) {
         var url = utils.prepareUrl('token');
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.sort,
+                id:model.id,
+                search:model.search,
+                string:model.string,
+            }
+        };
         return $sailsSocket.get(url, query).then(success, error);
     };
 

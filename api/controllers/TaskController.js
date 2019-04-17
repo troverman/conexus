@@ -1,46 +1,60 @@
-/**
- * TaskController
- */
-
+var Q = require('q');
 module.exports = {
-
-	getOne: function(req, res) {
-		Task.watch(req);
-		Task.findOne(req.param('id'))
-		.populate('project')
-		.then(function(model) {
-			Task.subscribe(req, model);
-			res.json(model);
-		});
-	},
 
 	getSome: function(req, res) {
 
-		var limit = req.query.limit;
-		var skip = req.query.skip;
+		var limit = parseInt(req.query.limit);
+		var skip = parseInt(req.query.skip);
 		var sort = req.query.sort;
+		var project = req.query.project;
+		var search = req.query.search;
+		var tag = req.query.tag;
+		var id = req.query.id;
+		var user = req.query.user;
 
 		console.log(req.query);
 
-		Task.watch(req);
-
-		if (req.query.project){
-			var project = req.query.project;
-			Task.find({project:project})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
+		if(req.query.id){
+			Task.find({id:id})
 			.populate('project')
-			.populate('user')
 			.then(function(models) {
-				Task.subscribe(req, models);
-				res.json(models);
+				res.json(models[0]);
 			});
 		}
 
+		else if (req.query.project){
+
+			Task.native(function(err, task) {
+
+				task.find({"associatedModels.address":{$in :[project]}})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+
+					//JOIN TO USER --> HMMM.. VALIDATION BASKET.
+					var promises = [];
+					for (x in models){
+						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
+					}
+
+					Q.all(promises).then((populatedModels)=>{
+						for (x in models){models[x].user = populatedModels[x].user;}
+						res.json(models);
+					});
+
+				});
+
+			});
+
+		}
+
 		else if(req.query.search){
-			var search = req.query.search;
-			console.log(search, limit,skip,sort)
+			//console.log(search,limit,skip,sort)
 			Task.find()
 			.where({
 				or: [
@@ -62,7 +76,6 @@ module.exports = {
 		}
 
 		else if (req.query.tag){
-			var tag = req.query.tag;
 			Task.find({tags:{contains: tag}})
 			.limit(limit)
 			.skip(skip)

@@ -20,7 +20,7 @@ angular.module( 'conexus.login', [
 		var data = JSON.stringify($scope.newLogin);
 		$http({method:'POST', url:'/auth/local', data:data}).then(function(newModel){
             console.log(newModel.data);
-            //MEG
+            //MEH
             config.currentUser = newModel.data;
             $rootScope.currentUser = newModel.data;
             $location.path('/');

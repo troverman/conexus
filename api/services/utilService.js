@@ -139,8 +139,21 @@ module.exports = {
 						//Project.create(projectModel).then(function(){
 						//	console.log('PARK CREATED!')
 						//});
+						process.nextTick(next);
 					}
-					process.nextTick(next);
+					else{
+						//MULTIASSOCIATION TEST
+						Task.find({id:'5cb7751fb965794d37dbaf2f'}).then(function(taskModel){
+							if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(taskModel[0].id) == -1){
+								taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
+							}
+							console.log(taskModel[0].associatedModels);
+							Task.update({id:'5cb7751fb965794d37dbaf2f'},{associatedModels:taskModel[0].associatedModels}).then(function(){
+								process.nextTick(next);
+							});
+						});
+
+					}
 				});
 
 				//TASK FIND

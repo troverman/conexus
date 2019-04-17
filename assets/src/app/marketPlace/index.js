@@ -12,7 +12,7 @@ angular.module( 'conexus.marketPlace', [
 		},
         resolve:{
             items: ['ItemModel', function(ItemModel) {
-                return ItemModel.getSome('', '', 100, 0, 'createdAt DESC');
+                return ItemModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});
@@ -110,7 +110,7 @@ angular.module( 'conexus.marketPlace', [
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
-        ItemModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(items){
+        ItemModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(items){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.items = items;
@@ -121,7 +121,7 @@ angular.module( 'conexus.marketPlace', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        ItemModel.getSome('', '', 20, $scope.skip, $scope.selectedSort).then(function(items) {
+        ItemModel.getSome({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(items) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.items, items);
             $scope.loadTags();

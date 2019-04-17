@@ -106,7 +106,7 @@ angular.module( 'conexus.nav', [
         });
         //USER INFO
         //DO THIS IN APP.JS --> ROOTSCOPE --> DEPRECIATE CONFIG
-        UserModel.getByUsername($scope.currentUser.username).then(function(member){
+        UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
             $scope.memberValidate = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
@@ -463,7 +463,7 @@ angular.module( 'conexus.nav', [
         //GET CHILDREN && || TIME... ASSOCIATIONS.. NEED TO FINISH ASSOCIATED SO I DONT KEEP REWRITING.. 
         function populateChildren(contentList, depth, limit){
             contentList.forEach(function(content) {
-                ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
+                ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
                     console.log(contentList)
                     if (contentList.length > 0){
                         depth++ 
@@ -475,7 +475,7 @@ angular.module( 'conexus.nav', [
             });
         }
         //TODO TYPE.. 
-        ContentModel.getSome('contentModel', item.id, 100, 0, 'createdAt DESC').then(function(contentList){
+        ContentModel.getSome({contentModel:item.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             console.log(contentList)
             populateChildren(contentList, 0, 5);
         });
@@ -582,7 +582,14 @@ angular.module( 'conexus.nav', [
         };
 
         //TODO: ASSOCIATION MODEL
-        ValidationModel.getSome(item.model.toLowerCase(), item.id, 100, 0, 'createdAt DESC').then(function(validationModels){
+        var validationQueryModel = {
+            limit:100,
+            skip:0,
+            sort:'createdAt DESC',
+        };
+        validationQueryModel[item.model.toLowerCase()] = item.id;
+
+        ValidationModel.getSome(validationQueryModel).then(function(validationModels){
 
             $scope.validationColumnRender = {
                 chart: {zoomType: 'x'},
@@ -1149,7 +1156,7 @@ angular.module( 'conexus.nav', [
     $scope.loadAddress = function(query){
         var deferred = $q.defer();
         //TODO: PROJECT AND MEMBER .. 
-        UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(userModels){
+        UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(userModels){
             console.log(userModels);
             userModels.map(function(obj){
                 obj.text = obj.username;
@@ -1198,13 +1205,13 @@ angular.module( 'conexus.nav', [
             }); */
 
             console.log(query)
-            ProjectModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(projectSearchModels){
+            ProjectModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(projectSearchModels){
                 projectSearchModels.map(function(obj){
                     obj.type='PROJECT';
                     obj.text = 'PROJECT | '+obj.title;
                     return obj;
                 });
-                TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
+                TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(taskSearchModels){
                     taskSearchModels.map(function(obj){
                         obj.type='TASK';
                         obj.text = 'TASK | '+obj.title;
@@ -1224,7 +1231,7 @@ angular.module( 'conexus.nav', [
     $scope.loadAssociationsTask = function(query){
         var deferred = $q.defer();
         console.log(query);
-        TaskModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(taskSearchModels){
+        TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(taskSearchModels){
             taskSearchModels = taskSearchModels.map(function(obj){
                 obj.type='TASK';
                 obj.address=obj.id;
@@ -1238,7 +1245,7 @@ angular.module( 'conexus.nav', [
 
     $scope.loadItems = function(query){
         var deferred = $q.defer();
-        ItemModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(itemModels){
+        ItemModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
             itemModels = itemModels.map(function(obj){
                 obj.type='ITEM';
                 obj.address=obj.id;
@@ -1255,7 +1262,7 @@ angular.module( 'conexus.nav', [
         console.log(query);
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
-        UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(searchModels){
+        UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
             console.log(searchModels);
             searchModels.map(function(obj){
                 obj.title = obj.text;

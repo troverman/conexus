@@ -4,57 +4,34 @@
 
 module.exports = {
 
-	getOne: function(req, res) {
-		Order.findOne(req.param('id'))
-		.populate('user')
-		.then(function(model) {
-			Order.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	getSome: function(req, res) {
 
-		var limit = req.query.limit || 10;
-		var skip = req.query.skip || 0;
+		var limit = parseInt(req.query.limit) || 1;
+		var skip =  parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-
-		//var filter = req.query.filter;
-
-		Order.watch(req);
+		var id = req.query.id;
+		var setAlpha = req.query.setAlpha;
+		var setBeta = req.query.setBeta;
+		var user = req.query.user;
+		var project = req.query.user;
+		var order = req.query.order;
 
 		console.log(req.query);
 
-		//IDSET DEPRECIATE...
+		Order.watch(req);
 
-		if(req.query.identiferSet && req.query.identiferSet1){
-			var identiferSet = req.query.identiferSet;
-			var identiferSet1 = req.query.identiferSet1;
-			Order.find({identiferSet:{contains: identiferSet}, identiferSet1:{contains: identiferSet1}})
+		if(req.query.id){
+			Order.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				res.json(models);
-			});
-		}
-
-		else if(req.query.identiferSet && !req.query.identiferSet1){
-			var identiferSet = req.query.identiferSet;
-			//Order.find({identiferSet:{contains: identiferSet}})
-			Order.find({identiferSet:identiferSet})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				res.json(models);
+				res.json(models[0]);
 			});
 		}
 
 		else if(req.query.user){
-			var user = req.query.user;
 			Order.find({user:user})
 			.limit(limit)
 			.skip(skip)
@@ -66,8 +43,44 @@ module.exports = {
 		}
 
 		else if(req.query.project){
-			var project = req.query.user;
 			Order.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		//TODO
+		else if(req.query.order){
+			Order.find({order:order})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		//TODO
+		else if(req.query.setAlpha && req.query.setBeta){
+			//DEPRECIATE ID SET
+			Order.find({identiferSet:{contains: setAlpha}, identiferSet1:{contains: setBeta}})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		//TODO
+		else if(req.query.setAlpha && !req.query.setBeta){
+			//DEPRECIATE ID SET
+			Order.find({identiferSet:setAlpha})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)

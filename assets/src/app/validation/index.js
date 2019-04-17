@@ -12,11 +12,10 @@ angular.module( 'conexus.validation', [
         },
         resolve: {
             validation: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
-                return ValidationModel.getSome('id', $stateParams.id, 1, 0, 'createdAt DESC');
+                return ValidationModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
-            //TODO
             contentList: ['validation', 'ContentModel', function(validation, ContentModel){
-                return ContentModel.getSome('validation', validation.id, 20, 0, 'createdAt DESC');
+                return ContentModel.getSome({validation:validation.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
     });

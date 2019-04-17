@@ -12,7 +12,7 @@ angular.module( 'conexus.token', [
 		},
         resolve:{
             token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
-                return TokenModel.getSome('string', $stateParams.id, 1, 0, 'createdAt DESC');
+                return TokenModel.getSome({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});

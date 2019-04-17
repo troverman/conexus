@@ -2,18 +2,22 @@ angular.module('models.order', ['lodash', 'services', 'sails.io',])
 
 .service('OrderModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getOne = function(model) {
-        var url = utils.prepareUrl('order/' + model);
-        return $sailsSocket.get(url).then(success, error);
-    };
-
-    this.getSome = function(type, filter, filter1, limit, skip, sort) {
-        var query = {};
-        if (type=='market'){query = {params:{identiferSet:filter,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='marketPair'){query = {params:{identiferSet:filter,identiferSet1:filter1,limit:limit,skip:skip,sort:sort}};}
-        else if (type=='user'){query = {params:{user:filter,limit:limit,skip:skip,sort:sort}};}
-        else{query = {params:{limit:limit,skip:skip,sort:sort}};}
+    this.getSome = function(model) {
         var url = utils.prepareUrl('order');
+        var query = {
+            params:{
+                limit:model.limit,
+                skip:model.skip,
+                sort:model.sort,
+                id:model.id,
+                market:model.market,
+                order:model.order,
+                project:model.project,
+                setAlpha:model.setAlpha,
+                setBeta:model.setBeta,
+                user: model.user,
+            }
+        };
         return $sailsSocket.get(url, query).then(success, error);
     };
 

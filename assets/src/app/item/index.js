@@ -12,10 +12,10 @@ angular.module( 'conexus.item', [
 		},
         resolve:{
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
-                return ItemModel.getSome('id', $stateParams.id, 1, 0, 'createdAt DESC');
+                return ItemModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'item', function(ContentModel, item) {
-                return ContentModel.getSome('item', item[0].id, 20, 0, 'createdAt DESC');
+                return ContentModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});
@@ -25,7 +25,7 @@ angular.module( 'conexus.item', [
    
     $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
-    $scope.item = item[0];
+    $scope.item = item;
     $scope.item.model = 'ITEM';
     if ($scope.item.tags){$scope.item.tags = $scope.item.tags.split(',')}
 
@@ -104,7 +104,7 @@ angular.module( 'conexus.item', [
 
     //SETS OF UNIQUE IDENTIFIERS
     function getOrderTraverse(identifer){
-        OrderModel.getSome('market',identifer,0,100,'price DESC').then(function(orders){
+        OrderModel.getSome({market:identifer,limit:100,skip:0,sort:'price DESC'}).then(function(orders){
             //GET SET OF SETS AT PRICE --> GRADIENT POTINETAL --> ORDER BOOK 
             //SORT TO BEST PRICE CONTAINED WITHIN ABSOLUTE CONSTRINT (% IS FUNCTIONAL RESULT.. | ABSOLUTE CONSTRAINT NOW)
             //DOES THE ORER SUM CONTAIN THE AMOUNT AND DO THE ORDER TYPES CHECK OUT? 

@@ -12,13 +12,13 @@ angular.module( 'conexus.order', [
         },
         resolve: {
             order: ['$stateParams', 'OrderModel', function($stateParams, OrderModel){
-                return OrderModel.getOne($stateParams.id);
+                return OrderModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             orders:['order', 'OrderModel', function(order, OrderModel){
-                return OrderModel.getSome('order', order, 100, 0, 'createdAt DESC');
+                return OrderModel.getSome({order:order.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            contentList: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
-                return ContentModel.getSome('order', $stateParams.id, 100, 0, 'createdAt DESC');
+            contentList: ['ContentModel', 'order', function(ContentModel, order){
+                return ContentModel.getSome({order:order.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });

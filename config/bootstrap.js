@@ -5,6 +5,8 @@ module.exports.bootstrap = function(cb) {
 	//intervalService.getData();
 	//dataService.getData();
 
+	//dataService.traverse();
+	
 	//PROJECT POPULATION
 	//WORLD
 	//utilService.getNamesWorld();

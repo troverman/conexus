@@ -12,10 +12,10 @@ angular.module( 'conexus.transaction', [
         },
         resolve: {
             transaction: ['$stateParams', 'TransactionModel', function($stateParams, TransactionModel){
-                return TransactionModel.getSome('id', $stateParams.id, 1, 0, 'createdAt DESC');
+                return TransactionModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'transaction', function(ContentModel, transaction){
-                return ContentModel.getSome('transaction', transaction[0].id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({transaction:transaction[0].id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });

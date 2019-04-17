@@ -1,44 +1,68 @@
 /**
  * TimeController
  */
+var Q = require('q');
 
 module.exports = {
 
-	getOne: function(req, res) {
-		Time.findOne(req.param('id'))
-        .populate('user')
-        .populate('project')
-        .populate('task')
-        .populate('stream')
-        .then(function (model) {
-			res.json(model);
-        });
-	},
-
 	getSome: function(req, res) {
 
-		var limit = req.query.limit;
-		var skip = req.query.skip;
-		var sort = req.query.sort;
+		//TODO: COMPLEX QUERIES..
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
+		var sort = req.query.sort || 'createdAt DESC';
+		var task = req.query.task;
+		var project = req.query.project;
+		var user = req.query.user;
+		var id = req.query.id;
 
-		console.log(req.query);
-
-		if (req.query.task){
-			var task = req.query.task;
-			Time.find({task:task})
+		if (req.query.id){
+			Time.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
 			.populate('task')
-			.populate('project')
 			.then(function(models) {
-				res.json(models);
+				console.log(models[0])
+				res.json(models[0]);
 			});
 		}
 
+		else if (req.query.task){
+
+			//ASSOCIATEDMODLES IS A COMPUTED VALUE VIA VAIDATION
+			//BRIDGE THOUGH ASSOCIATES TO GET THIS '''CLEAN'''
+
+			Time.native(function(err, time) {			
+				time.find({"associatedModels.address":{$in :[task]}})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+
+					//JOIN TO USER
+					var promises = [];
+					for (x in models){
+						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
+					}
+
+					Q.all(promises).then((populatedModels)=>{
+						for (x in models){models[x].user = populatedModels[x].user;}
+						res.json(models);
+					});
+
+				});
+			});
+
+		}
+
+		//OKAY --> HMM 
 		else if(req.query.project){
-			var project = req.query.project;
 			Time.find({project:project})
 			.limit(limit)
 			.skip(skip)
@@ -51,8 +75,8 @@ module.exports = {
 			});
 		}
 
+		//OKAY.. CREATOR? 
 		else if(req.query.user){
-			var user = req.query.user;
 			Time.find({user:user})
 			.limit(limit)
 			.skip(skip)
@@ -77,9 +101,9 @@ module.exports = {
 				res.json(models);
 			});
 		}
-
 	},
 
+	//IM GOING TO TAKE A BREAK AND COME BACK TO THE IMPLICT VALIDATION
 	create: function (req, res) {
 
 		//TODO: SECURITY
@@ -89,12 +113,16 @@ module.exports = {
 			user: req.param('user'),
 			type: req.param('type'), //RETROACTIVE | VS CREATED AT
 			startTime: req.param('startTime'),
+
 			source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
+
 			//FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
 			content: req.param('content'),
+
 			tags: req.param('tags'), // computed validations
 			associatedModels: req.param('associatedModels'),
 			reactions: {plus:0,minus:0},
+
 			//DEPRECIATE
 			project: req.param('project'),
 			task: req.param('task'),
@@ -111,15 +139,29 @@ module.exports = {
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
 
 					//TODO:IMPLICIT VALIDATION
-					//ASSOCIATED MOELS ... ? 
+
+					//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
+					//for (x in Object.keys(model.validation)){
+						//TODO | BETTER..
+					//	if (userModel[0].reputation[Object.keys(model.validation)[x]]){
+							//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPIN | WIP
+					//		if (Object.keys(model.validation)[x] == 'general'){reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;}
+					//		else{reputation[Object.keys(model.validation)[x]] = userModel[0].reputation[Object.keys(model.validation)[x]]}
+					//	}
+					//	else{reputation[Object.keys(model.validation)[x]] = 0;}
+					//}
+					model.reputation = reputation;
 
 					var validationModel = {
-						conntent:'IMPLICIT VALIDATION ON TIME CREATE',
+						conntent:'IMPLICIT VALIDATION ON TIME CREATE' + time.id,
 						validation:{}, //model.tags + tags of task ? 
-						reputation:{}, //user.rep based on ^
+						reputation:{
+
+						}, //user.rep based on ^
 						associatedModels: [
 							//WHAT TASK.. WHAT CONTEXT?? ALL ? THAT'S A SET OF VALIDATIONS.. --> EMBED THIS IN UI
 							//{type:'TASK',address:model.id},
+							//FRONTEND INPUT .. SELECT TASK.. AND CONTEXT.. MULTIPLE IF YA WANT!
 							{type:'TIME',address:time.id}
 						],
 						reactions: {plus:0,minus:0},

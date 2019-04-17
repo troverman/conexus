@@ -3,7 +3,6 @@ angular.module('models.notification', ['lodash', 'services', 'sails.io',])
 .service('NotificationModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
     this.getSome = function(model) {
-  
         var url = utils.prepareUrl('notification');
         var query = {
             params:{
@@ -14,7 +13,6 @@ angular.module('models.notification', ['lodash', 'services', 'sails.io',])
                 user:model.user
             }
         };
-
         return $sailsSocket.get(url, query).then(success, error);
     };
 

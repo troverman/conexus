@@ -4,41 +4,47 @@
 
 module.exports = {
 
-	getOne: function(req, res) {
-		Project.findOne(req.param('id'))
-		.then(function(model) {
-			Project.subscribe(req, model);
-			res.json(model);
-		})
-	},
 
 	getSome: function(req, res) {
 		var limit = parseInt(req.query.limit);
 		var skip = parseInt(req.query.skip);
 		var sort = req.query.sort;
+		var urlTitle = req.query.urlTitle;
+		var id = req.query.id;
 
 		console.log(req.query);
 
 		Project.watch(req);
 
-		//WEIRD BUG 
+		if (req.query.id){
+			Project.find({id:id})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Project.find({id:models[0].parent}).then(function(parentModel){
+					models[0].parent = parentModel[0];
+					res.json(models[0]);
+				});
+			});
+		}
 
-		//Project.find().limit(10000000).then(function(projects){
-		//	for (x in projects){
-		//		if (projects[x].location){
-		//			projects[x].location.coordinates = [parseFloat(projects[x].location.lng), parseFloat(projects[x].location.lat)];
-		//			projects[x].location.lat = parseFloat(projects[x].location.lat);
-		//			projects[x].location.lng = parseFloat(projects[x].location.lng);
-		//			//projects[x].location.type = 'Point';
-		//			delete projects[x].location.type;
-		//			console.log(projects[x])
-		//			Project.update({id:projects[x].id},{location:projects[x].location}).then(function(){console.log('updated')})
-		//		}
-		//	}
-		//});
+		else if (req.query.urlTitle){
+			Project.find({urlTitle:urlTitle})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				Project.find({id:models[0].parent}).then(function(parentModel){
+					models[0].parent = parentModel[0];
+					res.json(models[0]);
+				});
+			});
+		}
 
 		//ASSOCIATION
-		if(req.query.association){
+		else if(req.query.association){
+			var location = req.query.location.map(function(obj){return parseFloat(obj)});
 			Project.native(function(err, project) {
 				project.find({"associatedModels.address": {
 					$in :[req.query.association]}
@@ -56,7 +62,6 @@ module.exports = {
 
 		//LOCATION
 		else if(req.query.location){
-			var location = req.query.location.map(function(obj){return parseFloat(obj)})
 			Project.native(function(err, project) {
 				project.find({
 					"location.coordinates": {
@@ -171,8 +176,7 @@ module.exports = {
 	},
 
 	getChildren: function(req, res) {
-		Project.find()
-		.where({parent: req.param('id').toString()})
+		Project.find({parent: req.param('id').toString()})
 		.then(function(model) {
 			res.json(model);
 		})

@@ -13,7 +13,8 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
-                return ProjectModel.getByUrl($stateParams.path);
+                //MMM
+                return ProjectModel.getSome({urlTitle:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'});
             }]
         }
     })
@@ -36,19 +37,19 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return TaskModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             time: ['project', 'TimeModel', function(project, TimeModel){
-                return TimeModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return TimeModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -75,7 +76,7 @@ angular.module( 'conexus.project', [
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
             contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -89,7 +90,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],            
         }
     })
@@ -103,7 +104,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             motions: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }], 
         }
     })
@@ -117,13 +118,13 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             transactions: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('from', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome('to', project.id, 100, 0, 'createdAt DESC');
+                return TransactionModel.getSome({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -151,7 +152,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             members: ['MemberModel', 'project', function(MemberModel, project) {
-                return MemberModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return MemberModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -165,7 +166,9 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             orders: ['OrderModel', 'project', function(OrderModel, project){
-                return OrderModel.getSome('project', project.id, 10, 0, 'createdAt DESC');
+                //return OrderModel.getSome({project:project.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return OrderModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
+
             }],
         }
     })
@@ -179,6 +182,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             projects: ['project', 'ProjectModel', function(project, ProjectModel){
+                //DEPRECIATE
                 return ProjectModel.getChildren(project);
             }],
         }
@@ -202,7 +206,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getSome('project', project.id, 100, 0, 'createdAt DESC');
+                return TaskModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -216,7 +220,7 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             time: ['project', 'TimeModel', function(project, TimeModel) {
-                return TimeModel.getSome('project', project.id, 200, 0, 'createdAt DESC');
+                return TimeModel.getSome({project:project.id, limit:200, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -545,7 +549,7 @@ angular.module( 'conexus.project', [
                 reactions:{plus:0,minus:0},
                 associatedModels:[{type:'PROJECT',address:$scope.project.id}],
                 createdAt:new Date(),
-                user:{username:'troverman', avatarUrl:'https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg'}
+                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
             });
         }
     }
@@ -1387,6 +1391,8 @@ angular.module( 'conexus.project', [
     $scope.tasks = tasks;
     $scope.project = project;
 
+
+    //TODO REAL IDS
     if ($scope.tasks.length == 0){
         $scope.tasks = [];
         for(var i=0;i < 50;i++){
@@ -1398,7 +1404,7 @@ angular.module( 'conexus.project', [
                 content:'Community Evangelist, doing the leg work of engaging and growing the community! Let\'s Go Door to Door!',
                 tags: 'canvas, organize, register, campaign, community',
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'},
+                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
                 associatedModels:[{type:'PROJECT',address:$scope.project.id}],
             };
 
@@ -1408,7 +1414,7 @@ angular.module( 'conexus.project', [
                 content:'Attend Community Events, Come out and join us!',
                 tags: 'attend, community, event, presence',
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'},
+                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
                 associatedModels:[{type:'PROJECT',address:$scope.project.id}],
             };
 
@@ -1418,10 +1424,9 @@ angular.module( 'conexus.project', [
                 content:'Help Cocreate Community Events, Let\'s Collab!',
                 tags: 'create, content, presence',
                 reactions:{plus:0,minus:0},
-                user:{username:'troverman'},
+                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
                 associatedModels:[{type:'PROJECT',address:$scope.project.id}],
             };
-
             if (i % 2){$scope.tasks.push(canvas)}
             else if (i % 3){$scope.tasks.push(attend)}
             else{$scope.tasks.push(organize)}

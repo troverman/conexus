@@ -1665,6 +1665,7 @@ module.exports = {
 			//		});
 			//	}
 			//});
+
 			/*
 			Transaction.find().limit(10000).then(function(models){
 				for (x in models){
@@ -1687,22 +1688,22 @@ module.exports = {
 				}
 			});
 			*/
-			//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
 
-			/*
+			//RETROACTIVE VALIDATIONS TO CREATE ASSOCIATIONS.. IMPLICIT VALIDATION
+			//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
+			//TAGS ARE ASSOCIATIED. 
 			Time.find().limit(10000).then(function(models){
 				for (x in models){
 
 					//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
 					//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
 					//console.log('associatedModels', models[x].associatedModels);
-
 					//console.log('PROJECT', models[x].project);
 					//console.log('TASK', dmodels[x].task);
 					//console.log('STREAM', models[x].stream);
 
-					models[x].associatedModels = [];
-
+					//models[x].associatedModels = [];
+					/*
 					if (models[x].project){
 						models[x].associatedModels.push({
 							type:'PROJECT', 
@@ -1761,17 +1762,18 @@ module.exports = {
 
 					//REMOVE NULL AND VERIFICATION SCORE
 					//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
+					*/
 
-					console.log(models[x]);
-
-					//Time.update({id:models[x].id}, models[x]).then(function(){
-					//	console.log('update')
-					//});
+					if (!models[x].associatedModels){
+						models[x].associatedModels = [{type:'TASK', address:models[x].task}];
+						Time.update({id:models[x].id}, {associatedModels:models[x].associatedModels}).then(function(){
+							console.log('update')
+						});
+					}
 
 				}
 			});
-			*/
-
+			
 			//Validation.find().limit(10000).then(function(postModels){
 			//	for (x in postModels){
 			//		var reactions = {plus:0,minus:0};
@@ -1785,33 +1787,34 @@ module.exports = {
 			//	}
 			//});
 
-			//Post.find().limit(700).skip(0).then(function(postModels){
-			///	for (x in postModels){
-			//		if (postModels[x].work){postModels[x].time = postModels[x].work }
-			//		if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
-			//		if (!postModels[x].associatedModels){
-			//			postModels[x].associatedModels = [];
-			//			if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
-			//			if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
-			//			if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
-			//			if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
-			//			if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
-			//			if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
-			//			if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
-			//			if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
-			//		}
-			//		Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
-			//		console.log(x, postModels[x]);
-			//		Post.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel}).then(function(model){
+			//CREATE RETRO VALIDS
+
+			Content.find().limit(700).skip(0).then(function(postModels){
+				for (x in postModels){
+					if (postModels[x].work){postModels[x].time = postModels[x].work }
+					if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
+					if (!postModels[x].associatedModels){
+						postModels[x].associatedModels = [];
+						if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
+						if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
+						if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
+						if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
+						if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
+						if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
+						if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
+						if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
+					}
+					//Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
+					//console.log(x, postModels[x]);
+			//		Content.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel}).then(function(model){
 			//			console.log('update')
 			//		});
-			//	}
-			//});
+				}
+			});
 
 			/*
 			Project.find().limit(5000).skip(0).then(function(projectModels){
 				for (x in projectModels){
-
 					//GEOCODE THEN
 					//GEOCODE ON CREATE.. UTIL
 					if (projectModels[x].location){
@@ -1842,10 +1845,24 @@ module.exports = {
 			});
 			*/
 
+			//Task.find().limit(10000).skip(0).then(function(taskModels){
+				//for (x in taskModels){
+					//THIS IS A COMPUTED VALUE..  LOL 
+					//console.log(taskModels[x]);
+					//if(!taskModels[x].associatedModels){
+					//	taskModels[x].associatedModels = [{type:'PROJECT', address:taskModels[x].project}]
+					//}
+					//console.log(taskModels[x].associatedModels,taskModels[x].project)
+					//Task.update({id:taskModels[x].id}, {associatedModels:taskModels[x].associatedModels}).then(function(){
+					//	console.log('update')
+					//});
+				//}
+			//});
+
 		};
 
 		//modification();
-		generateStringSpace();
+		//generateStringSpace();
 
 		//train('A', 0, 8);
 		//train('A', 0, 3);

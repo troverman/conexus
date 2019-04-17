@@ -12,10 +12,10 @@ angular.module( 'conexus.content', [
         },
         resolve: {
             content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
-                return ContentModel.getOne($stateParams.id);
+                return ContentModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList:['content', 'ContentModel', function(content, ContentModel) {
-                return ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC');
+                return ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             //MAPPING LOOKUPS
             reactions: ['content', 'ReactionModel', function(content, ReactionModel){
@@ -47,8 +47,9 @@ angular.module( 'conexus.content', [
     $scope.viewTime = 0;
 
     //TODO | BETTER
+    //WHY IS THIS HERE?
     if($scope.currentUser){
-        UserModel.getByUsername($scope.currentUser.username).then(function(member){
+        UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
             $scope.member = member;
             $scope.balance = member.balance;
             $scope.reputation = member.reputation;
@@ -91,7 +92,7 @@ angular.module( 'conexus.content', [
 
     function populateChildren(contentList, depth, limit){
         contentList.forEach(function(content) {
-            ContentModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC').then(function(contentList){
+            ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
                 if (contentList.length > 0){
                     depth++ 
                     content.children = contentList;

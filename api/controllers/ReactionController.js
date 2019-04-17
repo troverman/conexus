@@ -4,14 +4,6 @@
 
 module.exports = {
 
-	getOne: function(req, res) {
-		Reaction.findOne(req.param('id'))
-		.then(function(model) {
-			Reaction.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	getSome: function(req, res) {
 
 		var limit = req.query.limit;

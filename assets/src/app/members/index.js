@@ -12,7 +12,7 @@ angular.module( 'conexus.members', [
 		},
 		resolve: {
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome('', '', 1000, 0, 'createdAt DESC');
+                return UserModel.getSome({limit:1000, skip:0, sort:'createdAt DESC'});
             }],
             //ROOTSCOPE..
             followers: ['FollowerModel', 'config', function(FollowerModel, config) {
@@ -132,7 +132,7 @@ angular.module( 'conexus.members', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 1000;
         $rootScope.stateIsLoading = true;
-        UserModel.getSome(1000, $scope.skip, $scope.selectedSort).then(function(members) {
+        UserModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(members) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.members, members);
             $scope.updateChart();
@@ -140,7 +140,7 @@ angular.module( 'conexus.members', [
     };
 
     $scope.search = function(){
-        UserModel.getSome('search', $scope.searchQuery, 1000, 0, 'createdAt DESC').then(function(models){
+        UserModel.getSome({search:$scope.searchQuery, limit:100, skip:0, sort:'createdAt DESC'}).then(function(models){
             $scope.members = models;
             $scope.updateChart();
         });
@@ -149,7 +149,7 @@ angular.module( 'conexus.members', [
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
-        UserModel.getSome(100, $scope.skip, $scope.selectedSort).then(function(members) {
+        UserModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(members) {
             $rootScope.stateIsLoading = false;
             $scope.members = members;
             $scope.updateChart();

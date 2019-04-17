@@ -4,15 +4,16 @@
 
 module.exports = {
 
+	//CAN HANDLE ALL API CALLS..
 	search: function (req, res) {
-
-		console.log(req.query)
 
 		var searchQuery = req.query.query;
 		var tag = req.query.tag;
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
+
+		console.log(req.query)
 
 		if (req.query.model = 'CONTENT'){}
 		if (req.query.model = 'ITEM'){}

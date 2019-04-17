@@ -33,7 +33,7 @@ angular.module( 'conexus.account', [
     $scope.markers = [];
 
     //TODO: BETTER
-    UserModel.getByUsername($scope.currentUser.username).then(function(member){
+    UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
         $scope.newAccountInformation = member;
         $scope.currentUser = member;
         $scope.balance = member.balance;

@@ -12,7 +12,7 @@ angular.module( 'conexus.markets', [
 		},
         resolve:{
             tokens: ['TokenModel', function(TokenModel) {
-                return TokenModel.getSome('', '', 1000, 0, 'createdAt DESC');
+                return TokenModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});
@@ -31,7 +31,7 @@ angular.module( 'conexus.markets', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        TokenModel.getSome('search', $scope.searchQuery, 20, $scope.skip, 'createdAt DESC').then(function(tokens){
+        TokenModel.getSome({search:$scope.searchQuery, limit:20, skip:$scope.skip, sort:'createdAt DESC'}).then(function(tokens){
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.tokens, tokens);
         });
@@ -45,7 +45,7 @@ angular.module( 'conexus.markets', [
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         $scope.searchQuery = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
-        TokenModel.getSome('search', $scope.searchQuery, 20, 0, 'createdAt DESC').then(function(tokens){
+        TokenModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tokens){
             $rootScope.stateIsLoading = false;
             $scope.tokens = tokens;
         });
