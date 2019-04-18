@@ -170,6 +170,10 @@ angular.module( 'conexus.task', [
         $scope.showTime = false;
     };
 
+    $scope.showValidationImplicitToggle = function(){
+        $scope.showValidationImplicitToggleVar = !$scope.showValidationImplicitToggleVar;
+    };
+
     //REWORK THE FLOW
     $scope.startStreaming = function() {
         if ($scope.currentUser){

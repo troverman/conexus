@@ -44,7 +44,6 @@ module.exports = {
 
 		//ASSOCIATION
 		else if(req.query.association){
-			var location = req.query.location.map(function(obj){return parseFloat(obj)});
 			Project.native(function(err, project) {
 				project.find({"associatedModels.address": {
 					$in :[req.query.association]}
@@ -62,6 +61,7 @@ module.exports = {
 
 		//LOCATION
 		else if(req.query.location){
+			var location = req.query.location.map(function(obj){return parseFloat(obj)});
 			Project.native(function(err, project) {
 				project.find({
 					"location.coordinates": {
@@ -70,7 +70,7 @@ module.exports = {
 				          		type: "Point" ,
 				          		coordinates: location,
 				       		},
-							$maxDistance: 1600,
+							$maxDistance: 5000,
 							$minDistance: 0,
 				       	}
 				     }
@@ -79,8 +79,10 @@ module.exports = {
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){obj.id = obj._id; return obj;});
-					console.log(err, models, req.query, location);
+					if (models){
+						models = models.map(function(obj){obj.id = obj._id; return obj;});
+					}
+					//console.log(err, models, req.query, location);
 					res.json(models);
 				});
 			});

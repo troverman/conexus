@@ -143,7 +143,7 @@
                         </a>
                     </span>
                     <span ng-if="item.from.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.title}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}">
                             <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.from.title}}
                         </a>
@@ -160,7 +160,7 @@
                         </a>
                     </span>
                     <span ng-if="item.to.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.title}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}">
                             <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.to.title}}
                         </a>

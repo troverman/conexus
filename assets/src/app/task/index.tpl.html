@@ -102,61 +102,69 @@
                     </div>
                     <div ng-show="streaming">
                         <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
-                        <!--
-                        <input type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
-                        <input type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
-                        -->
+                        <input ng-show="false" type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
+                        <input ng-show="false" type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
                         <button style="width:100%;" class="btn btn-default log-btn" ng-click="startWork()">Start Stream</button>
                     </div>
                 </div>
                 <div ng-show="working">
 
-
-
-
-
-
-
-
-                    <!--VALIDATION HERE!!!!!!!!!-->
-
-
-
                     <h3>{{taskTime}}</h3>
-                    <div ng-show="!streaming">
-                        <!--
+                    <!--IF NOT STREAM AND YA WANT TO STREAM-->
+                    <!--<div ng-show="!streaming">-->
+                    <div ng-show="false">
                         <input type="text" placeholder="Link" ng-model="timeContent" class="form-control">
                         <input type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
                         <input type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
                         <button style="width:100%;" class="btn btn-default log-btn" ng-click="startStream()">Start Stream</button>
-                        -->
                     </div>
+
                     <div ng-show="streaming"> <div ng-bind-html="renderStream(streamUrl)">></div></div>
                     <div class="spacing-5"></div>
                     <tags-input ng-model="timeTags" placeholder="Tags"></tags-input>
 
+                    <a ng-click="showValidationImplicitToggle()" href="#"><b>Associations (Implicit Validation)</b></a>
+
+
+
                     <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->
-                    <a href="#"><b>Validation(s)</b></a>
+                    <!--VALIDATION HERE!!!!!!!!!-->
+                    <!--SELECT PROJECT CONTEXT.. IMPLICILY VALIDATE YOU TAGS BY A DETAIL EXPAND-->
+                    <!--HVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->
+                    <!--UNIVERSAL UX FOR THIS IS IN NAV-->
+                    <!--STARTS THE TIMER MODE || ALLOWANCE FOR MULTI -->
+                    <!--DEPRECIATE AND MOVE TO NAV-->
+
+                    <div ng-show="showValidationImplicitToggleVar">
+
+                        <!--{{task.associatedModels}}-->
+                        <!--div ng-repeat="association in associatedModels"></div>-->
+                        <!--ALL 100-->
+                        <!--ALL ASSOCIATIONS? -->
+
+                        <div layout="">
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
+                            <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
+                        </div>
+
+                        <div ng-repeat="tag in timeTags track by $index">
+                            <div layout="">
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
+                                <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
+                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                     <div class="spacing-5"></div>
 
                     <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
 
-
-
-                    <!--SELECT PROJECT CONTEXT.. IMPLICILY VALIDATE YOU TAGS BY A DETAIL EXPAND-->
-
-
                     <div class="spacing-5"></div>
                     <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit Time</button>
-
-
-
-
-
-
-
-
-
 
 
 

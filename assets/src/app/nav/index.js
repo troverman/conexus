@@ -703,6 +703,10 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.timeToggle = function(){
+
+        $scope.newTime.type = 'LIVE';
+        $scope.selectTypeTime = function(type){$scope.newTime.type = type};
+
         $scope.closeAllNav();
         if($scope.currentUser){
             $scope.newTime = {};
@@ -710,6 +714,14 @@ angular.module( 'conexus.nav', [
             $scope.newTime.startTime.setMilliseconds(0);
             $scope.newTime.associatedModels = $rootScope.associatedModels;
             $mdSidenav('time').toggle();
+        }
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.timerToggle = function(){
+        $scope.closeAllNav();
+        if($scope.currentUser){
+            $mdSidenav('timer').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };
@@ -845,6 +857,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('subNav').close();
         $mdSidenav('task').close();
         $mdSidenav('time').close();
+        $mdSidenav('timer').close();
         $mdSidenav('tokens').close();
         $mdSidenav('transaction').close();
         $mdSidenav('validation').close();

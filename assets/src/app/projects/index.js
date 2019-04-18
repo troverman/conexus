@@ -18,15 +18,22 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, config, lodash, ProjectModel, projects, SearchModel, titleService ) {
+.controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, config, lodash, MemberModel, ProjectModel, projects, SearchModel, titleService ) {
 	titleService.setTitle('Projects | CRE8.XYZ');
     $scope.currentUser = config.currentUser;
     $scope.projects = projects.map(function(obj){
         obj.model = 'PROJECT';
         return obj;
     });
+
+    //BETTER | ROOTSCOPE. //get my projects
     if ($scope.currentUser){
-        //get my projects
+        MemberModel.getSome({user:$scope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+            $scope.memberProjects = memberProjects.map(function(obj){
+                obj.project.model = 'PROJECT';
+                return obj.project
+            });
+        });
     }
 
     $scope.selectedSort = 'createdAt DESC';
@@ -44,15 +51,15 @@ angular.module( 'conexus.projects', [
     $rootScope.associatedModels = [];
 
     $scope.populateMap = function(){
-        for (x in projects){
-            if (projects[x].location){
+        for (x in $scope.projects){
+            if ($scope.projects[x].location){
                 $scope.markers.push({
-                    id:projects[x].id,
-                    content:projects[x].title,
-                    url:projects[x].urlTitle,
+                    id:$scope.projects[x].id,
+                    content:$scope.projects[x].title,
+                    url:$scope.projects[x].urlTitle,
                     coords:{
-                        latitude:projects[x].location.lat,
-                        longitude:projects[x].location.lng
+                        latitude:$scope.projects[x].location.lat,
+                        longitude:$scope.projects[x].location.lng
                     }
                 });
             }
@@ -76,10 +83,12 @@ angular.module( 'conexus.projects', [
                 //TODO: SIMPLY UPDATE QUERY :)
                 //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
 
-                
                 //TODO: DISTANCE
                 ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
-                    $scope.projects = projects;
+                    $scope.projects = projects.map(function(obj){
+                        obj.model = 'PROJECT';
+                        return obj;
+                    });
                     $scope.markers = [];
                     $scope.populateMap();
                     $scope.init();
@@ -87,6 +96,20 @@ angular.module( 'conexus.projects', [
 
                 $scope.$apply();
 
+            });
+        }
+    };
+
+    $scope.getMyProjects = function(){
+        if ($scope.currentUser){
+            $rootScope.stateIsLoading = true;
+            MemberModel.getSome({user:$scope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+                $rootScope.stateIsLoading = false;
+                $scope.projects = memberProjects.map(function(obj){
+                    obj.project.model = 'PROJECT';
+                    return obj.project
+                });
+                $scope.populateMap();
             });
         }
     };
@@ -156,13 +179,16 @@ angular.module( 'conexus.projects', [
 
 
 
+
+
+
     //HMM
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
         ProjectModel.getSome({ProjectModellimit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects) {
             $rootScope.stateIsLoading = false;
-            Array.prototype.push.apply($scope.projects, projects);
+            Array.prototype.push.apply($scope.projects, projects.map(function(obj){obj.model='PROJECT';return obj}));
         });
     };
 
@@ -171,7 +197,10 @@ angular.module( 'conexus.projects', [
         console.log($scope.searchQuery)
         ProjectModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(projects){
             $rootScope.stateIsLoading = false;
-            $scope.projects = projects;
+            $scope.projects = projects.map(function(obj){
+                obj.model = 'PROJECT';
+                return obj;
+            });
         });
     };
 
@@ -180,7 +209,10 @@ angular.module( 'conexus.projects', [
         $rootScope.stateIsLoading = true;
         ProjectModel.getSome({search:$scope.searchQuery, limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects){
             $rootScope.stateIsLoading = false;
-            $scope.projects = projects;
+            $scope.projects = projects.map(function(obj){
+                obj.model = 'PROJECT';
+                return obj;
+            });
         });
     };
 

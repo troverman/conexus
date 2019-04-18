@@ -503,8 +503,6 @@
 
                     <div style="padding:16px;">
                         <div style="float:right;text-align:right">
-                            <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                            <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fas fa-coins"></i></a>-->
                             <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>
                         <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
@@ -515,6 +513,7 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                     <div ng-show="item.showReply" class="card-footer">
@@ -530,8 +529,6 @@
 
                         <div>
                             <div style="float:right;text-align:right">
-                                <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>
-                                <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fas fa-coins"></i></a>-->
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -553,6 +550,7 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
                     </div>
                     <div ng-show="item.showReply" class="card-footer">

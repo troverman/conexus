@@ -30,7 +30,7 @@
                     </a>
                 </span>
                 <span ng-if="transaction.from.title">
-                    <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.from.title}}">
+                    <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.from.urlTitle}}">
                         <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
                         {{transaction.from.title}}
                     </a>
@@ -47,7 +47,7 @@
                     </a>
                 </span>
                 <span ng-if="transaction.to.title">
-                    <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.to.title}}">
+                    <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.to.urlTitle}}">
                         <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
                         {{transaction.to.title}}
                     </a>
