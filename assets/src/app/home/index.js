@@ -649,6 +649,7 @@ angular.module( 'conexus.home', [
         $scope.showCreate = false;
 
         $scope.change = function(){
+            window.scrollTo(0, 0);
             if ($scope.showProjects){
                 $scope.showProjects = !$scope.showProjects;
                 $scope.showTasks = !$scope.showTasks;

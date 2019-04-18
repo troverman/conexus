@@ -3726,7 +3726,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <highchart config=\"chart\"></highchart>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-7\" style=\"max-height:100vh;overflow:scroll;padding:0px\">\n" +
+    "                    <div class=\"col-md-7\" style=\"\">\n" +
     "                        <div ng-repeat=\"item in projects\">\n" +
     "                            <div class=\"card\" ng-click=\"\">\n" +
     "                                <div style=\"padding:16px;\">\n" +
@@ -3783,7 +3783,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            <highchart config=\"chart\"></highchart>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-7\" style=\"max-height:100vh;overflow:scroll;padding:0px\">\n" +
+    "                    <div class=\"col-md-7\" style=\"\">\n" +
     "                        <div ng-repeat=\"item in tasks\">\n" +
     "                            <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
     "\n" +
@@ -3830,7 +3830,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div style=\"padding:16px;\" style=\"max-height:100vh;overflow:scroll\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
