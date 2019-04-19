@@ -4242,7 +4242,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            </div>\n" +
     "\n" +
-    "            <div ng-if=\"activity.length > 0\" class=\"card\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
+    "            <div ng-show=\"false\" ng-if=\"activity.length > 0\" class=\"card\" ng-click=\"loadMore()\" style=\"text-align:center\">\n" +
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
@@ -4686,7 +4686,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                \n" +
     "            </div>\n" +
     "\n" +
-    "            <div ng-show=\"true\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "            <div ng-show=\"false\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
     "\n" +
@@ -7793,18 +7793,19 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-10\"></div>\n" +
     "                <form role=\"form\" ng-submit=\"createTime()\">\n" +
     "\n" +
+    "                    <!--SELF CONTEXT-->\n" +
+    "                    <div>\n" +
+    "                        <h5>Context (Tags)</h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
+    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                    </div>\n" +
+    "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
+    "\n" +
     "                    <h5>Associations (Task) <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "\n" +
-    "                    <!--SELF CONTEXT-->\n" +
-    "                    <h5>Context (Tags)</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
     "\n" +
     "\n" +
     "                    <!--TODO-->\n" +
@@ -7817,7 +7818,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
     "\n" +
-    "                            <a href=\"#\"><b>Validation(s)</b></a>\n" +
+    "                            <!--<a href=\"#\"><b>Validation(s)</b></a>-->\n" +
     "                            <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                            <div layout=\"\">\n" +
@@ -7844,34 +7845,54 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                    <div ng-if=\"newTime.type == 'LIVE'\">\n" +
     "\n" +
-    "                        <!--START TIMER UI UX??-->\n" +
-    "                        <!--YEE-->\n" +
-    "                        <h3>Streaming?</h3>\n" +
-    "                        <a class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</a>\n" +
-    "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <a class=\"btn btn-default log-btn\" ng-click=\"startWork()\">No</a>\n" +
-    "\n" +
-    "                        <!--<h5>Content</h5>-->\n" +
-    "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
-    "\n" +
+    "                        <div ng-show=\"!recordingTime\">\n" +
+    "                            <div ng-show=\"!streaming\">\n" +
+    "                                <h3>Streaming?</h3>\n" +
+    "                                <a class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</a>\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "                                <a class=\"btn btn-default log-btn\" ng-click=\"startTime()\">No</a>\n" +
+    "                            </div>\n" +
+    "                            <div ng-show=\"streaming\">\n" +
+    "                                <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
+    "                                <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
+    "                                <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
+    "                                <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">Start Stream</a>\n" +
+    "                                <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"cancelStreaming()\">Back</a>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div ng-show=\"recordingTime\">\n" +
+    "                            <h3>{{taskTime}}</h3>\n" +
+    "                            <div ng-show=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <a ng-click=\"submit()\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</a>\n" +
+    "                        </div>            \n" +
     "\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div ng-if=\"newTime.type == 'RETROACTIVE'\">\n" +
     "\n" +
-    "                        <h5>Start Time</h5>\n" +
-    "                        <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <div class=\"col-sm-6\">\n" +
+    "                                <h5>Start Time</h5>\n" +
+    "                                <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-6\">     \n" +
+    "                                <h5>End Time</h5>\n" +
+    "                                <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.endTime\" class=\"form-control\">\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
     "                        <h5>Amount</h5>\n" +
     "                        <input type=\"number\" step=\"1\" placeholder=\"Amount\" ng-model=\"newTime.amount\" class=\"form-control\">\n" +
     "                        \n" +
-    "                        <!--<h5>Content</h5>-->\n" +
     "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
     "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
     "\n" +
     "                    </div>\n" +
     "\n" +
-    "                   \n" +
     "\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -7879,7 +7900,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"timer\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"timer\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newTime\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
@@ -7896,7 +7917,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Multi-D Time</p>\n" +
     "                <p>Here is what you are doing now</p>\n" +
-    "                <p>Watching -- Spending Time / attenetion</p>\n" +
+    "                <p>Watching -- Spending Time / attention</p>\n" +
     "                <p>Working on CONTEXT; TASK</p>\n" +
     "                <h4>{{taskTime}}</h4>\n" +
     "                <div class=\"spacing-10\"></div>\n" +

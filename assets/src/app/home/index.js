@@ -95,7 +95,7 @@ angular.module( 'conexus.home', [
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
+.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
     titleService.setTitle('CRE8.XYZ');
     $scope.currentUser = config.currentUser;
 
@@ -155,7 +155,10 @@ angular.module( 'conexus.home', [
                 //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                 //TODO: DISTANCE
                 ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
-                    $scope.projects = projects;
+                    $scope.activity = projects.map(function(obj){
+                        obj.model = 'PROJECT';
+                        return obj;
+                    });;
                     $scope.markers = [];
                     $scope.populateMap();
                     $scope.init();
@@ -167,47 +170,24 @@ angular.module( 'conexus.home', [
         }
     };
 
-    //TAGS TO ASSOCIATION | VALIDATION CONTEXT
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+CONTENT');
-        obj.tokens.push('CRE8+CONTENT+'+obj.id);
-        obj.tokens.push('CRE8+CONTENT+'+obj.type.toUpperCase());
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.projects = $scope.projects.map(function(obj){
         obj.model = 'PROJECT';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
         obj.model = 'TASK';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TASK');
-        obj.tokens.push('CRE8+TASK+'+obj.id);
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TIME');
-        if (obj.task){
-            obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
-            if (obj.task.tags){
-                obj.task.tags = obj.task.tags.split(',');
-                for (x in obj.task.tags){
-                    obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
-                    obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
-                }
-            }
-        }
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     
@@ -262,29 +242,28 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
-
     //TODO: LOAD MORE --> SIMPLIFY QUERY! :)
     //COMBO QUERY TO 'SEARCH'
     //DECOMPOSE FOR FEED DOCUMENTATION
     //QUERY STRUCUTRE
     $scope.loadMore = function(){
-        //query = [
-            //{
-                //model:'CONTENT', 
-                //limit:100,skip:0,
-                //sort:'createdAt DESC, 
-                //filter:{
-                    //id:id,
-                    //associatedModels: model,
-                //},
-            //},
-            //{model:'ITEM', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
-            //{model:'TASK', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
-            //{model:'TIME', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
-            //{model:'PROJECT', limit:100,skip:0,sort:'createdAt DESC, filter:{}},
-            //{model:'USER', limit:100,skip:0,sort:'createdAt DESC, filter:{}}
-        //];
-
+        var query = [
+            {
+                model:'CONTENT', 
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC', 
+                filter:{
+                    id:'id',
+                    associatedModels: 'model',
+                },
+            },
+            {model:'ITEM', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
+            {model:'TASK', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
+            {model:'TIME', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
+            {model:'PROJECT', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
+            {model:'USER', limit:100,skip:0,sort:'createdAt DESC', filter:{}}
+        ];
         console.log('TODO: LOAD MORE');
     };
 
@@ -297,9 +276,6 @@ angular.module( 'conexus.home', [
         }
         else{$mdSidenav('login').toggle()}
     };
-
-
-
 
 
     //FILTERSET
@@ -329,10 +305,7 @@ angular.module( 'conexus.home', [
     };
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
+            return obj.tags;;
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
@@ -449,7 +422,11 @@ angular.module( 'conexus.home', [
 
     //LOOK AT MY PROJECTS
     $scope.memberProjects = memberProjects;
-    $scope.memberProjects = $scope.memberProjects.map(function(obj){return obj.project});
+    $scope.memberProjects = $scope.memberProjects.map(function(obj){
+        obj.project.model = 'PROJECT';
+        if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
+        return obj.project
+    });
     //LOOK AT MY FOLLOWERS
     $scope.followers = followers;
     //LOOK AT THE PEOPLE I FOLLOW
@@ -539,10 +516,7 @@ angular.module( 'conexus.home', [
 
     //FACTOR
     $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){
-        var returnObj = {};
-        if(obj.tags){obj.tags = obj.tags.split(',')}
-        returnObj = obj.tags;
-        return returnObj;
+        return obj.tags;
     });
     $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
     $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
@@ -632,9 +606,6 @@ angular.module( 'conexus.home', [
         $scope.chart.xAxis.categories.push($scope.sortedsuggestedTokenTags[x].element)
     }
     //IF NON ZERO
-
-
-
 
     //IF NO PROJECTS OR W.E TUTORIAL IS TRUE
     //NEW CONTROLLER
@@ -909,41 +880,22 @@ angular.module( 'conexus.home', [
     //TEMP HARDCODE -- MOVE TO PROTOCOL
     $scope.contentList = $scope.contentList.map(function(obj){
         obj.model = 'CONTENT';
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+CONTENT');
-        obj.tokens.push('CRE8+CONTENT+'+obj.id);
-        obj.tokens.push('CRE8+CONTENT+'+obj.type.toUpperCase());
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.projects = $scope.projects.map(function(obj){
         obj.model = 'PROJECT';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.tasks = $scope.tasks.map(function(obj){
         obj.model = 'TASK';
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TASK');
-        obj.tokens.push('CRE8+TASK+'+obj.id);
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TIME');
-        if (obj.task){
-            obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id);
-            if (obj.task.tags){
-                obj.task.tags = obj.task.tags.split(',');
-                for (x in obj.task.tags){
-                    obj.tokens.push('CRE8+TIME+'+obj.task.tags[x].trim().toUpperCase());
-                    obj.tokens.push('CRE8+TIME+'+obj.task.title.toUpperCase().replace(/ /g, '-')+'.'+obj.task.id+'+'+obj.task.tags[x].trim().toUpperCase());
-                }
-            }
-        }
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
     $scope.transactions = $scope.transactions.map(function(obj){
@@ -954,7 +906,6 @@ angular.module( 'conexus.home', [
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100);
-    
     
     $scope.CRE8 = function(){
         $scope.ifCRE8 = !$scope.ifCRE8
@@ -1080,10 +1031,7 @@ angular.module( 'conexus.home', [
     };
     $scope.loadTags = function(){
         $scope.tags = $scope.contentList.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
+            return obj.tags;
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
@@ -1106,9 +1054,6 @@ angular.module( 'conexus.home', [
     };
     $scope.init();
     //FILTERSET
-
-
-
 
     //WATCHERS
     $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
@@ -1151,8 +1096,5 @@ angular.module( 'conexus.home', [
         }
     }, true);
     //WATCHERS
-
-
-
 
 }]);

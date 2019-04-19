@@ -3,6 +3,8 @@ angular.module( 'conexus.nav', [
 
 .controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'config', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, config, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
+    //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
+
     //STATE CHANGE LOGIC
     $rootScope.$on("$stateChangeStart", function() {
         
@@ -20,10 +22,10 @@ angular.module( 'conexus.nav', [
     
     $rootScope.$on("$stateChangeSuccess", function() {
         window.scrollTo(0, 0);
+        //titleService
+        //seoService
         //$rootScope.projectNavigation = $state.current.url.substring(1);
         //console.log($state.current.url.substring(1))
-        //TITLE HERE
-        //SEO HERE
     });
     
     //INITALIZE ROOT VARIABLES
@@ -43,6 +45,9 @@ angular.module( 'conexus.nav', [
         tags:[],
         type:[],
     };
+
+    $rootScope.taskTime = 0;
+
     //$rootScope.currentUser = config.currentUser;
     //$scope.currentUser = config.currentUser;
     //filter:[
@@ -703,16 +708,95 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.timeToggle = function(){
-
-        $scope.selectTypeTime = function(type){$scope.newTime.type = type};
-
         $scope.closeAllNav();
         if($scope.currentUser){
-            $scope.newTime = {};
-            $scope.newTime.startTime = new Date();
-            $scope.newTime.startTime.setMilliseconds(0);
-            $scope.newTime.type = 'LIVE';
-            $scope.newTime.associatedModels = $rootScope.associatedModels;
+
+            if (!$scope.newTime.recordingTime){
+
+                $scope.newTime = {};
+                $scope.newTime.startTime = new Date();
+                $scope.newTime.startTime.setMilliseconds(0);
+                $scope.newTime.endTime = new Date();
+                $scope.newTime.endTime.setHours($scope.newTime.endTime.getHours() + 1);
+                $scope.newTime.endTime.setMilliseconds(0);
+                $scope.newTime.amount = 3600;
+
+                $scope.newTime.type = 'LIVE';
+                $scope.newTime.associatedModels = $rootScope.associatedModels;
+
+                $scope.recordingTime = false;
+                $scope.streaming = false;
+
+            }
+
+            $scope.selectTypeTime = function(type){$scope.newTime.type = type};
+            $scope.startStreaming = function() {$scope.streaming = true;};
+            $scope.cancelStreaming = function() {$scope.streaming = false;};
+
+            $scope.renderStream = function(stream){
+                var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
+                return $sce.trustAsHtml(html);
+            };
+            $scope.startTime = function() {
+                if ($scope.streaming){
+                    $scope.newContent = {
+                        type:'video',
+                        title: $scope.task.title,
+                        tags: $scope.task.title + ',stream,work,' + $scope.task.project.title,
+                        content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
+                        user: $scope.currentUser.id,
+                    };
+                    ContentModel.create($scope.newContent).then(function(contentModel){
+                        console.log('create', contentModel)
+                        $scope.streamingId = contentModel.id;
+                    });
+                }
+                if($scope.recordingTime === true) return false;
+                $scope.recordingTime = true;
+                clearInterval($scope.interval);
+                $scope.interval = setInterval($scope.updateCount, 1000);
+            };
+
+            //HMM VS CREATE TIME
+            $scope.submit = function() {
+                if($scope.recordingTime === false) return false;
+                $scope.recordingTime = false; $scope.streaming = false;
+                var timeModel = {
+                    amount: $rootScope.taskTime,
+                    content: $scope.timeContent,
+                    identifier: $scope.timeIdentifier,
+                    user: $scope.currentUser.id,
+                    stream: $scope.streamingId,
+                    type:'LIVE',
+                };
+                if ($scope.timeTags){
+                    timeModel.tags = $scope.timeTags.map(function(obj){
+                        return obj.text
+                    }).join(",");
+                }
+                TimeModel.create(timeModel).then(function(model){
+                    $scope.time.unshift(model);
+                    $scope.timeContent = '';
+                    if ($scope.streamingId){
+                        var update = {};
+                        update.id = $scope.streamingId;
+                        update.time = model.id;
+                        update.parent = model.id;
+                        update.parentModel = 'time';
+                        ContentModel.update(update).then(function(contentModel){
+                            consooe.log(contentModel)
+                        });
+                    }
+                }); 
+                $rootScope.taskTime=0;
+                clearInterval($scope.interval);
+            };
+
+            $scope.updateCount = function() {
+                $rootScope.taskTime++;
+                $scope.$apply();
+            };
+
             $mdSidenav('time').toggle();
         }
         else{$mdSidenav('login').toggle();}

@@ -113,7 +113,6 @@ module.exports = {
 			user: req.param('user'),
 			type: req.param('type'), //RETROACTIVE | VS CREATED AT
 			startTime: req.param('startTime'),
-
 			source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
 
 			//FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
