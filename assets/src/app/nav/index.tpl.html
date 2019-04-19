@@ -1026,6 +1026,13 @@
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
                         <auto-complete source="loadAssociationsTask($query)"></auto-complete>
                     </tags-input>
+
+                    <!--SELF CONTEXT-->
+                    <h5>Context (Tags)</h5>
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+
                     <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->
 
 
@@ -1059,12 +1066,9 @@
                         </div>
                     </div>
 
-                    <h5>Type</h5>
                     <ul class="nav nav-pills nav-justified contentTyle">
                         <li ng-class="{active: newTime.type=='RETROACTIVE'}" ng-click="selectTypeTime('RETROACTIVE')"><a href="#">RETROACTIVE OR PLANNED</a></li>
                         <li ng-class="{active: newTime.type=='LIVE'}" ng-click="selectTypeTime('LIVE')"><a href="#">LIVE</a></li>
-                        <!--<li ng-class="{active: newTime.type=='PLANNED'}" ng-click="selectTypeTime('PLANNED')"><a href="#">PLANNED</a></li>-->
-                        <!--<li ng-class="{active: selectedType=='APP'}" ng-click="selectType('APP')"><a href="#">APP</a></li>-->
                     </ul>
 
                     <div ng-if="newTime.type == 'LIVE'">
@@ -1072,11 +1076,11 @@
                         <!--START TIMER UI UX??-->
                         <!--YEE-->
                         <h3>Streaming?</h3>
-                        <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
+                        <a class="btn btn-default log-btn" ng-click="startStreaming()">Yes</a>
                         <div class="spacing-5"></div>
-                        <button type="submit" class="btn btn-default log-btn" ng-click="startWork()">No</button>
+                        <a class="btn btn-default log-btn" ng-click="startWork()">No</a>
 
-                        <h5>Content</h5>
+                        <!--<h5>Content</h5>-->
                         <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                         <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTime.amount">create</button>
 
@@ -1089,7 +1093,8 @@
                         <input type="datetime-local" step="1" placeholder="Start Time" ng-model="newTime.startTime" class="form-control">
                         <h5>Amount</h5>
                         <input type="number" step="1" placeholder="Amount" ng-model="newTime.amount" class="form-control">
-                        <h5>Content</h5>
+                        
+                        <!--<h5>Content</h5>-->
                         <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                         <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTime.amount">create</button>
 
@@ -1163,14 +1168,6 @@
 
                 <div class="spacing-5"></div>
 
-                <!--<ul class="nav nav-pills nav-justified contentTyle">
-                    <li ng-class="{active: selectedType=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Content</a></li>
-                    <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Task</a></li>
-                    <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Time</a></li>
-                    <li ng-class="{active: selectedType=='MOTION'}" ng-click="selectType('MOTION')"><a href="#">Validation</a></li>
-                </ul>-->
-
-
                 <!--Token Space-->
                 <tags-input min-length="1" ng-model="tokenFilter" placeholder="Token Manifold"></tags-input>
 
@@ -1189,7 +1186,6 @@
                 <!--<div class="spacing-10"></div>
                 <h3 style="">Tokens Earned</h3>-->
                 <!--<highchart config="tokensEarned"></highchart>-->
-
 
                 <div class="spacing-10"></div>
 

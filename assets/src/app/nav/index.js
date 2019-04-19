@@ -704,7 +704,6 @@ angular.module( 'conexus.nav', [
 
     $rootScope.timeToggle = function(){
 
-        $scope.newTime.type = 'LIVE';
         $scope.selectTypeTime = function(type){$scope.newTime.type = type};
 
         $scope.closeAllNav();
@@ -712,6 +711,7 @@ angular.module( 'conexus.nav', [
             $scope.newTime = {};
             $scope.newTime.startTime = new Date();
             $scope.newTime.startTime.setMilliseconds(0);
+            $scope.newTime.type = 'LIVE';
             $scope.newTime.associatedModels = $rootScope.associatedModels;
             $mdSidenav('time').toggle();
         }
@@ -1091,7 +1091,7 @@ angular.module( 'conexus.nav', [
             TransactionModel.create($scope.newTransaction).then(function(model){
                 $scope.confirm = $scope.newTransaction;
                 $scope.confirm.model = 'TRANSACTION';
-                $scope.newTransaction.amoundSet = {};
+                $scope.newTransaction.amountSet = {};
                 $scope.newTransaction.tags = '';
                 $scope.newTransaction.content = '';
                 $mdSidenav('transaction').close();

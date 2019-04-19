@@ -7797,6 +7797,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
+    "\n" +
+    "                    <!--SELF CONTEXT-->\n" +
+    "                    <h5>Context (Tags)</h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
+    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
     "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
     "\n" +
     "\n" +
@@ -7830,12 +7837,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <h5>Type</h5>\n" +
     "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
     "                        <li ng-class=\"{active: newTime.type=='RETROACTIVE'}\" ng-click=\"selectTypeTime('RETROACTIVE')\"><a href=\"#\">RETROACTIVE OR PLANNED</a></li>\n" +
     "                        <li ng-class=\"{active: newTime.type=='LIVE'}\" ng-click=\"selectTypeTime('LIVE')\"><a href=\"#\">LIVE</a></li>\n" +
-    "                        <!--<li ng-class=\"{active: newTime.type=='PLANNED'}\" ng-click=\"selectTypeTime('PLANNED')\"><a href=\"#\">PLANNED</a></li>-->\n" +
-    "                        <!--<li ng-class=\"{active: selectedType=='APP'}\" ng-click=\"selectType('APP')\"><a href=\"#\">APP</a></li>-->\n" +
     "                    </ul>\n" +
     "\n" +
     "                    <div ng-if=\"newTime.type == 'LIVE'\">\n" +
@@ -7843,11 +7847,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <!--START TIMER UI UX??-->\n" +
     "                        <!--YEE-->\n" +
     "                        <h3>Streaming?</h3>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</button>\n" +
+    "                        <a class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</a>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">No</button>\n" +
+    "                        <a class=\"btn btn-default log-btn\" ng-click=\"startWork()\">No</a>\n" +
     "\n" +
-    "                        <h5>Content</h5>\n" +
+    "                        <!--<h5>Content</h5>-->\n" +
     "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
     "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
     "\n" +
@@ -7860,7 +7864,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
     "                        <h5>Amount</h5>\n" +
     "                        <input type=\"number\" step=\"1\" placeholder=\"Amount\" ng-model=\"newTime.amount\" class=\"form-control\">\n" +
-    "                        <h5>Content</h5>\n" +
+    "                        \n" +
+    "                        <!--<h5>Content</h5>-->\n" +
     "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
     "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
     "\n" +
@@ -7934,14 +7939,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                <!--<ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                    <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Content</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Task</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Time</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Validation</a></li>\n" +
-    "                </ul>-->\n" +
-    "\n" +
-    "\n" +
     "                <!--Token Space-->\n" +
     "                <tags-input min-length=\"1\" ng-model=\"tokenFilter\" placeholder=\"Token Manifold\"></tags-input>\n" +
     "\n" +
@@ -7960,7 +7957,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <!--<div class=\"spacing-10\"></div>\n" +
     "                <h3 style=\"\">Tokens Earned</h3>-->\n" +
     "                <!--<highchart config=\"tokensEarned\"></highchart>-->\n" +
-    "\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
