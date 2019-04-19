@@ -502,17 +502,6 @@ angular.module( 'conexus.nav', [
     $rootScope.renderValidationToggle = function(item){
         $scope.closeAllNav();
 
-
-
-        //POWER SET
-        function getAllSubsets(theArray) {
-          return theArray.reduce(function (subsets, value) {
-            return subsets.concat(subsets.map(function (set) {
-              return [value].concat(set);
-            }));
-          }, [[]]);
-        };
-
         console.log(item);
 
         $scope.item = item;
@@ -530,18 +519,14 @@ angular.module( 'conexus.nav', [
 
         }
         if (item.model == 'TIME'){
-
             $scope.graphData = {
                 nodes:[{name:$scope.item.amount}], 
                 links:[]
             };
-
             $scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
-
         }
 
         //TODO BUILD THESE --> LOAD ASSOCIATION
-
         for (x in $scope.item.associatedModels){
             //HACK?
             var length = $scope.graphData.nodes.length;
@@ -549,21 +534,6 @@ angular.module( 'conexus.nav', [
             $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})//$scope.item.associatedModels[x].address});
             $scope.graphData.links.push({value:1, source:0, target:length});
         }
-
-        //TODO: GROUP STUDY -- FACTOR INFORMATION IN DATASERVICE TO GRAPH THEORETIC FORM TO DISCOVER GROUP PROPS
-        //$scope.graphData = {
-        //    nodes:[], 
-        //    links:[]
-        //};
-        //var powerSet = getAllSubsets(['A','B','C','D','E','F']);
-        //var powerSet = getAllSubsets(['A','B','C','D']);
-        //powerSet.shift();
-        //for (x in powerSet){
-        //    $scope.graphData.nodes.push({name:powerSet[x]})
-        //    for (y in powerSet){
-        //        $scope.graphData.links.push({value:1, source:parseInt(x), target:parseInt(y)});
-        //    }
-        //}
 
         //TEST!
         $scope.graphOptions = {
@@ -870,9 +840,8 @@ angular.module( 'conexus.nav', [
                 //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TIME
 
                 //DEPRECIATE .project && .task
-                $scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'TASK'}];
-
-                $scope.newValidation.associatedModels = [{type:'TIME', address:item.id}];
+                //$scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'TASK'}];
+                //$scope.newValidation.associatedModels = [{type:'TIME', address:item.id}];
 
                 if($scope.item.task.tags){
                     $scope.tags = item.task.tags;
