@@ -126,29 +126,39 @@ module.exports = {
 					title:data.name,
 					urlTitle:data.name.replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
 					//A COMPUTED VALUE.. .. IMPLICIT MOTION TO .. ? META VALIDATION PROJ_a - PROJ_a
-					tags:'park,community,tennessee,tn,recreation,parksandrec',
+					tags:'school,community,tn,tennessee,education,learning,'+data.name,
 					description:data.toponymName,
 					location:{address:'', lat:parseFloat(data.lat), lng:parseFloat(data.lng), coordinates:[parseFloat(data.lng), parseFloat(data.lat)]},
 					creator:'CRE8',
 					//DEPRECIATE
 					user:'57ab77fa804f7c11002a78db',
-					parent:'5cb6387e2da4371500e46bf2'
+					parent:'5cbcdb00b8a6cb15001da063'
 				};
+				//CHRUCH 5cbcd778b8a6cb15001da060
+				//PARKS 5cb6387e2da4371500e46bf2
+				//SCHOOL 5cbcdb00b8a6cb15001da063
+
+				console.log('hi')
 				Project.find({urlTitle:projectModel.urlTitle}).then(function(selectedProjectModel){
 					if (selectedProjectModel.length == 0){
-						//Project.create(projectModel).then(function(){
-						//	console.log('PARK CREATED!')
-						//});
+						Project.create(projectModel).then(function(){
+							console.log('PARK CREATED!')
+						});
 						process.nextTick(next);
 					}
 					else{
 						//MULTIASSOCIATION TEST
-						Task.find({id:'5cb7751fb965794d37dbaf2f'}).then(function(taskModel){
+
+						//CHURCH 5cbcd809b8a6cb15001da062
+						//PARK 5cb7751fb965794d37dbaf2f
+						//SCHOOL 5cbcdb5db8a6cb15001da065
+
+						Task.find({id:'5cbcdb5db8a6cb15001da065'}).then(function(taskModel){
 							if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(taskModel[0].id) == -1){
 								taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
 							}
 							console.log(taskModel[0].associatedModels);
-							Task.update({id:'5cb7751fb965794d37dbaf2f'},{associatedModels:taskModel[0].associatedModels}).then(function(){
+							Task.update({id:'5cbcdb5db8a6cb15001da065'},{associatedModels:taskModel[0].associatedModels}).then(function(){
 								process.nextTick(next);
 							});
 						});
@@ -170,6 +180,20 @@ module.exports = {
 			});
 		});
 
+	},
+
+	purge: function(model){
+		console.log(model)
+		Project.find({title:{contains:model}}).then(function(models){
+			console.log(models)
+			if (models.length > 0){
+				var idArray = models.map(function(obj){return obj.id});
+				console.log(idArray)
+				//Project.destroy(idArray, function(err, model) {
+				//	console.log(model);
+				//});
+			}
+		});
 	}
 
 };

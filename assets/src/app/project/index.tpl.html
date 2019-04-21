@@ -21,7 +21,7 @@
                 <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
                     <ui-gmap-window options="windowOptions" closeClick="closeClick()">
                         <div>
-                            <div style="font-size: 15px;"><a ng-click="$event.stopPropagation();" href="#">{{marker.content}}</a></div>
+                            <div style="font-size: 15px;"><a ng-click="$event.stopPropagation();" href="project/{{market.urlTitle}}">{{marker.content}}</a></div>
                         </div>
                     </ui-gmap-window>
                 </ui-gmap-marker>

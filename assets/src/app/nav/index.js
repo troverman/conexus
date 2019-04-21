@@ -1,9 +1,15 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'config', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, config, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'config', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'titleService', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, config, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, titleService, toaster, TransactionModel, ValidationModel, UserModel ) {
 
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
+
+    //CREATE TIME .. 
+    //UPDATE EVERY 10 SECONDS 
+    //--> THATS THE FRONT END TIMER
+    //.. CALC THE TIME SINCE CREATE TO ENSURE TIMER
+    //.. NOT FRONTEND
 
     //STATE CHANGE LOGIC
     $rootScope.$on("$stateChangeStart", function() {
@@ -24,8 +30,12 @@ angular.module( 'conexus.nav', [
         window.scrollTo(0, 0);
         //titleService
         //seoService
+        if ($state.current.url.substring(1) !== ''){
+            titleService.setTitle($state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }) +' | CRE8.XYZ');
+        }
+        else{titleService.setTitle('CRE8.XYZ');}
         //$rootScope.projectNavigation = $state.current.url.substring(1);
-        //console.log($state.current.url.substring(1))
+        console.log($state.current.url.substring(1))
     });
     
     //INITALIZE ROOT VARIABLES
@@ -35,6 +45,8 @@ angular.module( 'conexus.nav', [
     $rootScope.selectedAssets = [];
     $rootScope.selectedAssociations = [];
     $rootScope.selectedLocations = [];
+
+
     $rootScope.searchQueryNav = {
         assetsInput:[],
         assetsOutput:[],

@@ -28,18 +28,22 @@ module.exports.bootstrap = function(cb) {
 	//35.9606, -83.9207 // knox
 	//35.996948, -78.899017 // durham
 	//40.730610, -73.935242 // nyc; bushwick
+	//37.773972, -122.431297 // BAY AREA
+	//37.5483, -121.9886 //FREEMONT
 	var geoModel = {
 		username:'troverman',
-		lat:'35.9606',//'40.730610', 35.996948
-		lng:'-83.9207',//'-73.935242', -78.899017
-		featureCode:'PRK', //PRK, CH, CTRCM, CMN
-		type:'latlng', //parent
+		lat:'35.9606',
+		lng:'-83.9207',
+		//PRK, CH, CTRCM, CMN, S.CAFE, S.SCH, LIBR
+		featureCode:'LIBR',
+		//parent, latlng
+		type:'latlng',
 		radius:'30',
 		parentId:'4482348'
 	};
 	//utilService.getGeoNames(geoModel);
-
-	//getGeoNames
+	//PURGE HISTORICAL
+	//utilService.purge('(historical)');
 
 	//COFFEE DB
 	//VENUE DB

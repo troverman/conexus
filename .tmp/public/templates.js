@@ -8730,7 +8730,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
     "                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
     "                        <div>\n" +
-    "                            <div style=\"font-size: 15px;\"><a ng-click=\"$event.stopPropagation();\" href=\"#\">{{marker.content}}</a></div>\n" +
+    "                            <div style=\"font-size: 15px;\"><a ng-click=\"$event.stopPropagation();\" href=\"project/{{market.urlTitle}}\">{{marker.content}}</a></div>\n" +
     "                        </div>\n" +
     "                    </ui-gmap-window>\n" +
     "                </ui-gmap-marker>\n" +
@@ -9347,8 +9347,7 @@ angular.module("project/templates/content.tpl.html", []).run(["$templateCache", 
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
-    "                        <a ng-click=\"$event.stopPropagation();renderValidationToggle(item);\"><span style=\"color:gray\"><i class=\"fas fa-bezier-curve\"></i></span></a>\n" +
-    "                        <a ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
+    "                        <a ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
     "                    </div>\n" +
     "                    \n" +
     "                    <div style=\"\">\n" +

@@ -543,6 +543,7 @@ angular.module( 'conexus.project', [
 
             $scope.contentList.push({
                 id:i,
+                model:'CONTENT',
                 title:title.join(' '),
                 content:content.join(' '),
                 tags: tags.join(','),
@@ -734,17 +735,17 @@ angular.module( 'conexus.project', [
         var timeObject = new Date(); 
 
         var exampleSetExpense = [
-            {to:'Trevor Overman', tags:'PAYROLL,HUMAN', content:'PAY TREVOR', amountSet:{'USD':500,'CRE8':1}},
-            {to:'Hot Shot Programmer', content:'PAY PROGRAMMER', tags:'PAYROLL,HUMAN'},
-            {to:'Sarah Human', content:'PAY SARAH',  tags:'PAYROLL,HUMAN'},
-            {to:'David Create', content:'PAY DAVID',  tags:'PAYROLL,HUMAN'},
-            {to:'OFFICE SUPPLIES INC', content:'PURCHASE SUPPLIES', tags:'SUPPLIES,HARDWARE,BUSINESS,INFRASTRUCTURE'},
-            {to:'COMPUTER SERVICES INC', content:'PURCHASE TECHNOLOGY', tags:'SERVER,COMPUTER,CLOUD,SERVICES'}
+            {to:{title:'Trevor Overman', id:project.id, avatarUrl:project.avatarUrl}, tags:'PAYROLL,HUMAN', content:'PAY TREVOR'},
+            {to:{title:'Hot Shot Programmer', id:project.id, avatarUrl:project.avatarUrl}, content:'PAY PROGRAMMER', tags:'PAYROLL,HUMAN'},
+            {to:{title:'Sarah Human', id:project.id, avatarUrl:project.avatarUrl}, content:'PAY SARAH',  tags:'PAYROLL,HUMAN'},
+            {to:{title:'David Create', id:project.id, avatarUrl:project.avatarUrl}, content:'PAY DAVID',  tags:'PAYROLL,HUMAN'},
+            {to:{title:'OFFICE SUPPLIES INC', id:project.id, avatarUrl:project.avatarUrl}, content:'PURCHASE SUPPLIES', tags:'SUPPLIES,HARDWARE,BUSINESS,INFRASTRUCTURE'},
+            {to:{title:'COMPUTER SERVICES INC', id:project.id, avatarUrl:project.avatarUrl}, content:'PURCHASE TECHNOLOGY', tags:'SERVER,COMPUTER,CLOUD,SERVICES'}
         ];
 
         var exampleSetRevenue = [
-            {from:'CUSTOMER', content:'PAYMENT FOR PRODUCTS', tags:'CUSTOMER,EXAMPLE'},
-            {from:'CLIENT', content:'PAYMENT FOR SERVICES',  tags:'CLIENT,SEVICES,DELIVERABLE'},
+            {from:{title:'CUSTOMER', id:project.id, avatarUrl:project.avatarUrl}, content:'PAYMENT FOR PRODUCTS', tags:'CUSTOMER,EXAMPLE'},
+            {from:{title:'CUSTOMER', id:project.id, avatarUrl:project.avatarUrl}, content:'PAYMENT FOR SERVICES', tags:'CLIENT,SEVICES,DELIVERABLE'},
         ];
 
         for (var i=0, t=88; i<t; i++) {
@@ -754,8 +755,7 @@ angular.module( 'conexus.project', [
 
             $scope.transactionsFrom.push({
                 to: exampleSetExpense[randomIndexExpense].to, 
-                from: {id:project.id, title:project.title}, 
-                identifier:'CRE8', 
+                from: {id:project.id, title:project.title, avatarUrl:project.avatarUrl}, 
                 amountSet:{
                     CRE8: 10*Math.round(0.5*Math.random() * t)
                 }, 
@@ -766,9 +766,8 @@ angular.module( 'conexus.project', [
                 reactions:{plus:Math.round(Math.random()*10), minus:Math.round(Math.random()*2)}
             })
             $scope.transactionsTo.push({
-                to: {id:project.id, title:project.title}, 
+                to: {id:project.id, title:project.title, avatarUrl:project.avatarUrl}, 
                 from: exampleSetRevenue[randomIndexRevenue].from, 
-                identifier:'CRE8', 
                 amountSet:{
                     CRE8: 10*Math.round(0.5*Math.random() * t)
                 },
@@ -1349,6 +1348,7 @@ angular.module( 'conexus.project', [
                 $rootScope.markers.push({
                     id:locationProjects[x].id,
                     content:locationProjects[x].title,
+                    urlTitle:locationProjects[x].urlTitle,
                     coords:{
                         latitude:locationProjects[x].location.lat,
                         longitude:locationProjects[x].location.lng

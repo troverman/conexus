@@ -189,13 +189,9 @@
             </div>
             <div style="padding:16px;">
 
-
-
-                <!--IF YOU HAVE ANY ORDERS!!!-->
-
                 <p><b>My Current Positions & Value Map</b></p>
 
-                <!--MAKE AS MAP..-->
+                <!--
                 <div ng-repeat="position in positions">
                     <span>{{position.setAlpha}} || {{position.setBeta}}</span>
                 </div>
@@ -205,15 +201,8 @@
                 <p><b>Suggestions and Information</b></p>
                 <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>
 
-                <!--
                 {{followers}}
                 {{memberProjects}}
-                -->
-
-                <!--IF YOU HAVE ANY ORDERS!!!-->
-
-
-
 
                 <div class="row">
                     <div class="col-xs-3" style="max-height:50vh;overflow:scroll">
@@ -222,26 +211,22 @@
                         </div>
                     </div>
                     <div class="col-xs-9">
-
-                        <!--<div class="row">
+                        <div class="row">
                             <div class="col-xs-12">
                                 <div ng-repeat="item in newOrder">
-                                    
                                 </div>
                             </div>
-                        </div>-->
-
+                        </div>
                         <highchart config="chart"></highchart>
-
-                        <!--<div class="row">
+                        <div class="row">
                             <div class="col-xs-6">
                             </div>
                             <div class="col-xs-6">
                             </div>
-                        </div>-->
-
+                        </div>
                     </div>
                 </div>
+                -->
 
                 <div class="spacing-10"></div>
 
@@ -259,6 +244,7 @@
             </div>
             <div style="padding:16px;">
 
+                <!--
                 <h4>About You</h4>
                 <form role="form" ng-submit="editAccount()">
                     <div style="padding:0px" class="col-xs-12"><h5>Description</h5><input type="text" ng-model="newAccountInformation.description" placeholder="Description" class="form-control"></div>
@@ -277,6 +263,7 @@
                 <p>Location Tracking <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Location Tokenization</span><md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>
 
                 <a class="btn btn-default log-btn" href="/account">Account Settings</a>
+                -->
 
             </div>
         </div>
