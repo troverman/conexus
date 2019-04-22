@@ -77,7 +77,7 @@ module.exports = {
 				})
 				.limit(limit)
 				.skip(skip)
-				.sort({'createdAt':-1})
+				//.sort({'dist':-1})
 				.toArray(function (err, models) {
 					if (models){
 						models = models.map(function(obj){obj.id = obj._id; return obj;});

@@ -2016,7 +2016,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Project `hArr` Task `hArr` Time\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Project`hArr`Task`hArr`Time\n" +
     "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
     "                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
     "                    <!--<p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
@@ -3203,6 +3203,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
+    "                    <!--<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Multidimensional Token Market Exploration & Traversal</h1>-->\n" +
     "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">MultiMarket Exploration & Traversal</h1>\n" +
     "                    <h5 style=\"color:white\">The Multidimensional Token Market</h5>\n" +
     "                </div>\n" +
@@ -3289,6 +3290,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p><b>Combinatorial 3</b></p>\n" +
     "                <p>A fully Connected 3-3-Combinatorial-Market</p>\n" +
+    "                <!--6 nodes-->\n" +
+    "                <!--15 edges; links-->\n" +
+    "\n" +
     "                <span>Figure A</span>\n" +
     "                <img style=\"height:150px;\" src=\"images/comb3.png\">\n" +
     "\n" +
@@ -3299,6 +3303,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p><b>Combinatorial 4</b></p>\n" +
     "                <p>4 Asset MultiMarket Connection Lattice(s)﻿</p>\n" +
+    "                <!--16 nodes-->\n" +
+    "                <!---->\n" +
     "                <img style=\"height:150px;\" src=\"images/comb4.png\">\n" +
     "                <img style=\"height:150px;\" src=\"images/comb4a.png\">\n" +
     "                <img style=\"height:150px;\" src=\"images/comb4b.png\">\n" +
@@ -3309,6 +3315,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <!--<p><b>Combinatorial 5</b></p>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>-->\n" +
+    "\n" +
+    "                <!--MAP COMP 5 -> COMP 7-->\n" +
+    "                <!--EXPLORE MORE-->\n" +
     "\n" +
     "                <p><b>Combinatorial N</b></p>\n" +
     "                <p>Higher Dimensional Combinatorials</p>\n" +
@@ -3356,9 +3365,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <!--TODO..-->\n" +
     "\n" +
-    "                <p><b>Investment and Generalized Portfolio Allocation</b></p>\n" +
+    "                <!--<p><b>Investment and Generalized Portfolio Allocation</b></p>\n" +
     "                <p>Capital Asset Pricing Model..</p>\n" +
-    "                `E(R_i)=R_f+beta_i(E(R_m)-R_f)`\n" +
+    "                `E(R_i)=R_f+beta_i(E(R_m)-R_f)`-->\n" +
     "\n" +
     "                <!--PROBABILITY DENSITY ANALYSIS-->\n" +
     "                \n" +
@@ -3868,13 +3877,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "                <!--IF YOU HAVE ANY ORDERS!!!-->\n" +
-    "\n" +
     "                <p><b>My Current Positions & Value Map</b></p>\n" +
     "\n" +
-    "                <!--MAKE AS MAP..-->\n" +
+    "                <!--\n" +
     "                <div ng-repeat=\"position in positions\">\n" +
     "                    <span>{{position.setAlpha}} || {{position.setBeta}}</span>\n" +
     "                </div>\n" +
@@ -3884,15 +3889,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <p><b>Suggestions and Information</b></p>\n" +
     "                <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>\n" +
     "\n" +
-    "                <!--\n" +
     "                {{followers}}\n" +
     "                {{memberProjects}}\n" +
-    "                -->\n" +
-    "\n" +
-    "                <!--IF YOU HAVE ANY ORDERS!!!-->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-xs-3\" style=\"max-height:50vh;overflow:scroll\">\n" +
@@ -3901,26 +3899,22 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-xs-9\">\n" +
-    "\n" +
-    "                        <!--<div class=\"row\">\n" +
+    "                        <div class=\"row\">\n" +
     "                            <div class=\"col-xs-12\">\n" +
     "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "                                    \n" +
     "                                </div>\n" +
     "                            </div>\n" +
-    "                        </div>-->\n" +
-    "\n" +
+    "                        </div>\n" +
     "                        <highchart config=\"chart\"></highchart>\n" +
-    "\n" +
-    "                        <!--<div class=\"row\">\n" +
+    "                        <div class=\"row\">\n" +
     "                            <div class=\"col-xs-6\">\n" +
     "                            </div>\n" +
     "                            <div class=\"col-xs-6\">\n" +
     "                            </div>\n" +
-    "                        </div>-->\n" +
-    "\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "                -->\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -3938,6 +3932,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
+    "                <!--\n" +
     "                <h4>About You</h4>\n" +
     "                <form role=\"form\" ng-submit=\"editAccount()\">\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Description</h5><input type=\"text\" ng-model=\"newAccountInformation.description\" placeholder=\"Description\" class=\"form-control\"></div>\n" +
@@ -3956,6 +3951,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <p>Location Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>\n" +
     "\n" +
     "                <a class=\"btn btn-default log-btn\" href=\"/account\">Account Settings</a>\n" +
+    "                -->\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -4174,7 +4170,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                                <div class=\"container\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" ng-click=\"$event.stopPropagation()\"href=\"task/{{item.id}}\">{{item.title}}</h1>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -4628,7 +4624,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                                <div class=\"container\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" ng-click=\"$event.stopPropagation()\"href=\"task/{{item.id}}\">{{item.title}}</h1>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
