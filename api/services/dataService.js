@@ -67,12 +67,9 @@ module.exports = {
 		//WARNING: THIS IS DEPRECIATED
 		//GET VALIDATIONS
 
-
-
 		//LOL THIS IS RECURSIVE :0
 
 		//GOTTA DOCUMENT THIS ALG NICELY 
-
 
 		//MEH
 		Validation.native(function(err, validation) {
@@ -1766,11 +1763,10 @@ module.exports = {
 
 					if (!models[x].associatedModels){
 						models[x].associatedModels = [{type:'TASK', address:models[x].task}];
-						Time.update({id:models[x].id}, {associatedModels:models[x].associatedModels}).then(function(){
-							console.log('update')
-						});
+						//Time.update({id:models[x].id}, {associatedModels:models[x].associatedModels}).then(function(){
+						//	console.log('update')
+						//});
 					}
-
 				}
 			});
 			
@@ -1788,6 +1784,66 @@ module.exports = {
 			//});
 
 			//CREATE RETRO VALIDS
+			Time.find().limit(10000).then(function(models){
+
+				async.eachSeries(models, function (model, nextIteration){ 
+
+					console.log(model.task, model.project, model.stream);
+
+					var validationModels = [];
+
+					var validationModel = {
+						reputation:{},
+						context:{
+							general:100
+						},
+						user:model.user,
+						creator:model.user,
+						parameters:{
+							charter:'GENERAL'
+						},
+						type:'HUMAN'
+					};
+					
+					if (model.tags){
+						var context = model.tags.split(',');
+						for (x in context){
+							validationModel.context[context[x]] = 100;
+						}
+						if (model.user){
+							for (x in context){
+								validationModel.reputation[context[x]] = 0;
+							}
+						}
+					}
+					
+					if (model.task){
+						validationModel.associatedModels = [
+							{type:'TIME', address:model.id},
+							{type:'TASK', address:model.task}
+						];
+						validationModels.push(validationModel);
+					}
+					if (model.project){
+						validationModel.associatedModels = [
+							{type:'TIME', address:model.id},
+							{type:'PROJECT', address:model.project}
+						];
+						validationModels.push(validationModel);
+					}
+
+					console.log(validationModels);
+
+					process.nextTick(nextIteration);
+					//Validation.create().then(function(){
+						//UPDATE TIME TO COMPUTED VALIDATION
+						//VALIDATION.FIND()
+					//});
+
+
+				});	
+
+			});
 
 			Content.find().limit(700).skip(0).then(function(postModels){
 				for (x in postModels){
@@ -1861,7 +1917,7 @@ module.exports = {
 
 		};
 
-		//modification();
+		modification();
 		//generateStringSpace();
 
 		//train('A', 0, 8);

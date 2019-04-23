@@ -72,6 +72,20 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction.to = [{text:$rootScope.to, id:$rootScope.to}];
     });
 
+
+    //WATCHERS
+    $rootScope.$watch('searchQueryNav', function(){
+
+        //REFACTOR SEARCH MODEL
+        //SearchModel.search
+
+    }, true);
+
+    $rootScope.$watch(function(){
+      MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+      return true;
+    });
+
     //INITALIZE LOCAL VARIABLES
     $scope.chart = {};
     $scope.confirm = {};
@@ -360,26 +374,6 @@ angular.module( 'conexus.nav', [
             console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
-
-        //WATCHERS
-        $rootScope.$watch('searchQueryNav', function(){
-
-            //need results to populate tags.. --> send results
-
-        //    $rootScope.searchQuery = [];
-        //    for(x in Object.keys($rootScope.searchQueryNav)){
-        //        for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-        //            if ($rootScope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
-        //                $rootScope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
-        //            }
-        //        }
-        //    }
-        //  console.log($rootScope.searchQuery);
-
-            //REFACTOR SEARCH MODEL
-            //SearchModel.search
-
-        }, true);
 
         $mdSidenav('filter').toggle();
     };

@@ -6,11 +6,131 @@ module.exports = {
 
 
 	getSome: function(req, res) {
+
+
+	    //QUERY LANGAUAGE. 
+	    var query = {
+	    	filter:[{
+	    		association:'association',
+	    		id:'id',
+	    		location: {coordinates:['long', 'lat'], distance:'distance'},
+	    		query:'stringLookup',
+	    		tag:'tag',
+	    		urlTitle: 'urlTitle',
+	    	}],
+	    	limit:'limit',
+	    	skip:'skip',
+	    	sort:'sort'
+	    };
+
+	    //-->
+	    //Cool cool this has depth. 
+	    var query = [{
+	    	filter:[
+		    	{
+		    		association:'association',
+		    		limit:'limit',
+			    	skip:'skip',
+			    	sort:'sort',
+			    	chain:'OR',
+		    	},
+		    	{
+		    		id:'id',
+			    	chain:'OR',
+		    	},
+		    	{
+		    		location:{coordinates:['long', 'lat'], distance:'distance'},
+		    		limit:'limit',
+			    	skip:'skip',
+			    	sort:'sort',
+		    		chain:'OR',
+		    	},
+		    	{
+		    		query:'query',
+		    		limit:'limit',
+			    	skip:'skip',
+			    	sort:'sort',
+		    		chain:'OR',
+		    	},
+		    	{
+		    		tag:'tag',
+		    		limit:'limit',
+			    	skip:'skip',
+			    	sort:'sort',
+					chain:'OR',
+		    	},
+		    	{
+		    		urlTitle:'urlTitle',
+		    		chain:'OR',
+		    	}
+	    	],
+	    	limit:'limit',
+	    	skip:'skip',
+	    	sort:'sort',
+	    	chain:'OR'
+	    }];
+
+	    //^^ this seems less complex.. 
+
+	    //for the exercise.. 
+	    //i belive recursion oqueries ~= list 
+	    //recursion decomposes to list . 
+	    //LOL ITS THE CLASSIC LIST VS RECURSION OBJ.. HA! .. okAY THEY THE SAME
+
+	    var query = {
+	    	filter:[
+		    	{
+		    		filter:[
+		    			{
+			    			association:'association',
+			    			limit:'limit',
+				    		skip:'skip',
+				    		sort:'sort',
+				    	},
+				    	{
+				    		tag:'tag',
+				    		limit:'limit',
+					    	skip:'skip',
+					    	sort:'sort',
+				    	}
+		    		],
+	    			limit:'limit',
+		    		skip:'skip',
+		    		sort:'sort',
+		    		chain:'OR',
+		    	},
+		    	{
+		    		filter:[
+			    		{
+			    			id:'id',
+			    		},
+			    		{
+				    		urlTitle:'urlTitle',
+				    	}
+		    		],
+		    		chain:'OR',
+					limit:'limit',
+		    		skip:'skip',
+		    		sort:'sort',
+		    	}
+	    	],
+	    	limit:'limit',
+	    	skip:'skip',
+	    	sort:'sort',
+    		chain:'OR',
+	    };
+
+	    //BUILDER..
+	    //PARSE THE INPUT
+	    //for (x in query){}
+
 		var limit = parseInt(req.query.limit);
 		var skip = parseInt(req.query.skip);
 		var sort = req.query.sort;
 		var urlTitle = req.query.urlTitle;
 		var id = req.query.id;
+		var query = req.query.query;
+		var tag = req.query.tag;
 
 		console.log(req.query);
 
@@ -62,6 +182,8 @@ module.exports = {
 		//LOCATION
 		else if(req.query.location){
 			var location = req.query.location.map(function(obj){return parseFloat(obj)});
+			var distance = req.query.distance || 5000;
+
 			Project.native(function(err, project) {
 				project.find({
 					"location.coordinates": {
@@ -70,7 +192,7 @@ module.exports = {
 				          		type: "Point" ,
 				          		coordinates: location,
 				       		},
-							$maxDistance: 5000,
+							$maxDistance: distance,
 							$minDistance: 0,
 				       	}
 				     }
@@ -90,7 +212,6 @@ module.exports = {
 
 		//QUERY
 		else if(req.query.query){
-			var query = req.query.query;
 			Project.find()
 			.where({
 				or: [
@@ -110,7 +231,6 @@ module.exports = {
 
 		//TAG
 		else if(req.query.tag){
-			var tag = req.query.tag;
 			Project.find({tags:{contains: tag}})
 			.limit(limit)
 			.skip(skip)

@@ -617,6 +617,7 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"row\">\n" +
     "            <div class=\"col-xs-12 col-sm-7\">\n" +
     "                <h3>APPS</h3>\n" +
+    "                <h5>Apps and Token Protocols</h5>\n" +
     "                <p style=\"color:gray;font-style:italic\">Apps are plugins to the string space and add to the domain of tokenized systems of intention; how can we create an eglatarian world through tokenization?</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">By openeing up the intention of system design, we capture a larger design space.</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Apps are a bundle of protocols. App design is modular.</p>\n" +
@@ -1781,14 +1782,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div hljs hljs-language=\"javascript\">\n" +
     "create:function(newTransaction){\n" +
     "    \n" +
-    "\n" +
-    "    //CREATE PROTOCOL .... --> WIKI\n" +
+    "    //CREATE PROTOCOL ... WIKI\n" +
     "    wallet[newTransaction.from]['CRE8+TRANSACTION']++\n" +
     "    wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++\n" +
     "\n" +
     "    wallet[newTransaction.to]['RECIEVE+TRANSACTION']++\n" +
     "    wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++\n" +
-    "\n" +
     "\n" +
     "    //TRANSFER THE TOKENS\n" +
     "    for (x in newTransaction.assetSet){\n" +
@@ -1796,8 +1795,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount\n" +
     "    }\n" +
     "\n" +
+    "    //Create Data \n" +
+    "    Data.create(newTransaction)\n" +
+    "\n" +
     "},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "\n" +
+    "getSome:function(newQuery){\n" +
+    "\n" +
+    "    //DATA AS TOKENS? .. LOOK VIA MANIFOLDS .. DATA+FILTER+.. (INFO MAPPING TO INFO) \n" +
+    "    return Data.find(newQuery)\n" +
+    "\n" +
+    "}</div>\n" +
     "                <p><b>create:function()</b> \n" +
     "                <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a> (and its applications on cre8's api)</span>\n" +
     "                </p>\n" +
@@ -1898,7 +1906,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"metaModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -1945,7 +1953,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6 col-xs-12\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -1990,7 +1998,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2017,7 +2025,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Project`hArr`Task`hArr`Time\n" +
-    "                    <p style=\"color:gray;font-style:italic\"> Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "\n" +
+    "                    <p>\n" +
+    "                        <span style=\"color:gray;font-style:italic\">Associations are functions of peer validation & Assocation Governace Rules.</span> \n" +
+    "                        `f(V_D, CC_C)` \n" +
+    "                    </p>\n" +
+    "\n" +
+    "                    <p>`f(V_D, CC_C, RR_D)`</p>\n" +
+    "                    <p>`CC_c=f(V_D,RR_D)`</p>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
     "                    <!--<p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
     "                    <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
@@ -2026,7 +2045,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"associationModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2118,7 +2137,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"blockModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2159,7 +2178,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"contentModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2169,6 +2188,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p>Websocket Subscribe</p>\n" +
     "                        <p><b>[get, post] /api/content</b></p>\n" +
     "                        <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>\n" +
+    "                        <!--http://localhost:1337/api/content?query=[{limit:10,skip:10},{limit:10,skip:10}]-->\n" +
     "                        <form role=\"form\" ng-show=\"false\">\n" +
     "                            <div class=\"form-group\">\n" +
     "                                <input class=\"form-control\" ng-model=\"newQuery.filter\" placeholder=\"Filter\" type=\"text\"> \n" +
@@ -2205,7 +2225,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\">var dataModel = {};</div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2234,7 +2254,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\">var eventModel = {};</div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2268,7 +2288,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"followerModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2309,7 +2329,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"itemModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2343,7 +2363,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"locationModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2382,7 +2402,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"memberModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2413,7 +2433,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\">var marketModel = {};</div>        \n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2445,7 +2465,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\">var motionModel = {};</div>        \n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2483,7 +2503,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"notificationModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2567,7 +2587,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"passportModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2596,8 +2616,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
-    "                            <div hljs hljs-language=\"javascript\">var peerModel = {};</div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\">var peerModel = {\"url\":\"string\", \"ip\":\"string\", \"network\":\"string\", \"info\":\"json\"};</div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
@@ -2642,7 +2662,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"projectModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2674,7 +2694,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"projectCharterModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2704,7 +2724,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"projectMemberModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2736,7 +2756,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"protocolModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2772,7 +2792,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"reactionModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2808,8 +2828,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
-    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"searchModel\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"queryModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <p><b>get /api/search</b></p>\n" +
@@ -2818,9 +2838,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <button ng-click=\"apiCall({model:'SEARCH',limit:10,skip:0,sort:'createdAt DESC'})\" class=\"btn btn-default log-btn\">Get</button>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <div style=\"max-height:100vh;overflow:scroll\" hljs hljs-language=\"javascript\" hljs-source=\"results.search\"></div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2855,7 +2872,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"taskModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2894,7 +2911,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"timeModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2924,7 +2941,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"tokenModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -2963,7 +2980,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"transactionModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -3007,7 +3024,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"txModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -3076,7 +3093,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
-    "                            <div class=\"spacing-15\"></div>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"validationModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +

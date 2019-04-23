@@ -478,14 +478,12 @@ getSome:function(newQuery){}</div>
                 <div hljs hljs-language="javascript">
 create:function(newTransaction){
     
-
-    //CREATE PROTOCOL .... --> WIKI
+    //CREATE PROTOCOL ... WIKI
     wallet[newTransaction.from]['CRE8+TRANSACTION']++
     wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++
 
     wallet[newTransaction.to]['RECIEVE+TRANSACTION']++
     wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++
-
 
     //TRANSFER THE TOKENS
     for (x in newTransaction.assetSet){
@@ -493,8 +491,17 @@ create:function(newTransaction){
         wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount
     }
 
+    //Create Data 
+    Data.create(newTransaction)
+
 },
-getSome:function(newQuery){}</div>
+
+getSome:function(newQuery){
+
+    //DATA AS TOKENS? .. LOOK VIA MANIFOLDS .. DATA+FILTER+.. (INFO MAPPING TO INFO) 
+    return Data.find(newQuery)
+
+}</div>
                 <p><b>create:function()</b> 
                 <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#TRANSACTION" du-smooth-scroll>Transaction</a> (and its applications on cre8's api)</span>
                 </p>
@@ -595,7 +602,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                         <div hljs hljs-language="javascript"  hljs-source="metaModel"></div>
                         </div>
                     </div>
@@ -642,7 +649,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6 col-xs-12">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
                         </div>
                     </div>
@@ -687,7 +694,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
                         </div>
                     </div>
@@ -714,7 +721,18 @@ getSome:function(newQuery){}</div>
                     </div>
                     <p style="color:gray;font-style:italic">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>
                     <p style="color:gray;font-style:italic">Project`hArr`Task`hArr`Time
-                    <p style="color:gray;font-style:italic"> Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
+                    <p style="color:gray;font-style:italic">Associations are computed though <a href="#VALIDATION" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>
+
+                    <p>
+                        <span style="color:gray;font-style:italic">Associations are functions of peer validation & Assocation Governace Rules.</span> 
+                        `f(V_D, CC_C)` 
+                    </p>
+
+                    <p>`f(V_D, CC_C, RR_D)`</p>
+                    <p>`CC_c=f(V_D,RR_D)`</p>
+
+
+
                     <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> 
                     <!--<p style="color:gray;font-style:italic">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->
                     <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>
@@ -723,7 +741,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="associationModel"></div>
                         </div>
                     </div>
@@ -815,7 +833,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="blockModel"></div>
                         </div>
                     </div>
@@ -856,7 +874,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="contentModel"></div>
                         </div>
                     </div>
@@ -866,6 +884,7 @@ getSome:function(newQuery){}</div>
                         <p>Websocket Subscribe</p>
                         <p><b>[get, post] /api/content</b></p>
                         <p>curl https://www.cre8.xyz/api/content?limit=1&skip=0</p>
+                        <!--http://localhost:1337/api/content?query=[{limit:10,skip:10},{limit:10,skip:10}]-->
                         <form role="form" ng-show="false">
                             <div class="form-group">
                                 <input class="form-control" ng-model="newQuery.filter" placeholder="Filter" type="text"> 
@@ -902,7 +921,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript">var dataModel = {};</div>
                         </div>
                     </div>
@@ -931,7 +950,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript">var eventModel = {};</div>
                         </div>
                     </div>
@@ -965,7 +984,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="followerModel"></div>
                         </div>
                     </div>
@@ -1006,7 +1025,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="itemModel"></div>
                         </div>
                     </div>
@@ -1040,7 +1059,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="locationModel"></div>
                         </div>
                     </div>
@@ -1079,7 +1098,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="memberModel"></div>
                         </div>
                     </div>
@@ -1110,7 +1129,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript">var marketModel = {};</div>        
                         </div>
                     </div>
@@ -1142,7 +1161,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript">var motionModel = {};</div>        
                         </div>
                     </div>
@@ -1180,7 +1199,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="notificationModel"></div>
                         </div>
                     </div>
@@ -1264,7 +1283,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
                         </div>
                     </div>
@@ -1293,8 +1312,8 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
-                            <div hljs hljs-language="javascript">var peerModel = {};</div>
+                            <div class="spacing-5"></div>
+                            <div hljs hljs-language="javascript">var peerModel = {"url":"string", "ip":"string", "network":"string", "info":"json"};</div>
                         </div>
                     </div>
                     <p>Websocket Subscribe</p>
@@ -1339,7 +1358,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="projectModel"></div>
                         </div>
                     </div>
@@ -1371,7 +1390,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="projectCharterModel"></div>
                         </div>
                     </div>
@@ -1401,7 +1420,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="projectMemberModel"></div>
                         </div>
                     </div>
@@ -1433,7 +1452,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="protocolModel"></div>
                         </div>
                     </div>
@@ -1469,7 +1488,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="reactionModel"></div>
                         </div>
                     </div>
@@ -1505,8 +1524,8 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
-                            <div hljs hljs-language="javascript"  hljs-source="searchModel"></div>
+                            <div class="spacing-5"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="queryModel"></div>
                         </div>
                     </div>
                     <p><b>get /api/search</b></p>
@@ -1515,9 +1534,6 @@ getSome:function(newQuery){}</div>
                     <button ng-click="apiCall({model:'SEARCH',limit:10,skip:0,sort:'createdAt DESC'})" class="btn btn-default log-btn">Get</button>
                     <div class="spacing-5"></div>
                     <div style="max-height:100vh;overflow:scroll" hljs hljs-language="javascript" hljs-source="results.search"></div>
-
-
-
                 </div>
             </div>
         </div>
@@ -1552,7 +1568,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="taskModel"></div>
                         </div>
                     </div>
@@ -1591,7 +1607,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="timeModel"></div>
                         </div>
                     </div>
@@ -1621,7 +1637,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="tokenModel"></div>
                         </div>
                     </div>
@@ -1660,7 +1676,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="transactionModel"></div>
                         </div>
                     </div>
@@ -1704,7 +1720,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="txModel"></div>
                         </div>
                     </div>
@@ -1773,7 +1789,7 @@ getSome:function(newQuery){}</div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
-                            <div class="spacing-15"></div>
+                            <div class="spacing-5"></div>
                             <div hljs hljs-language="javascript"  hljs-source="validationModel"></div>
                         </div>
                     </div>
