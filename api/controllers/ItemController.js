@@ -69,18 +69,18 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			title: req.param('title'),
-			//owner: req.param('owner'),
-			tags: req.param('tags'),
-			location: req.param('location'),
-			content: req.param('content'),
 			associatedModels: req.param('associatedModels'),
+			content: req.param('content'),
+			tags: req.param('tags'),
 
 			//info: req.param('info'),
+			location: req.param('location'),
 			amountSet: req.param('amountSet'),
-			identiferSet: req.param('identiferSet'),
 			isGenerator: req.param('isGenerator'),
 
+			//creator
 			user: req.param('user'),
+			//owner: req.param('owner'),
 
 			//PATCH
 			reactions: {plus:0,minus:0},

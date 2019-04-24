@@ -9,15 +9,14 @@ module.exports = {
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
-		
 		console.log(req.query);
+		console.log('GET NOTIFICATION', req.query);
 
 		Notification.watch(req);
 		
 		if (req.query.user){
 
 			if (req.query.isRead){
-
 				Notification.find({user:req.query.user, isRead:req.query.isRead})
 				.limit(limit)
 				.skip(skip)
@@ -26,11 +25,9 @@ module.exports = {
 					Notification.subscribe(req, models);
 					res.json(models);
 				});
-
 			}
 
 			else{
-
 				Notification.find({user:req.query.user})
 				.limit(limit)
 				.skip(skip)
@@ -39,7 +36,6 @@ module.exports = {
 					Notification.subscribe(req, models);
 					res.json(models);
 				});
-
 			}
 
 		}
@@ -64,6 +60,7 @@ module.exports = {
 		var model = {
 			isRead: req.param('isRead'),
 		};
+		console.log('UPDATE NOTIFICATION', id, model);
 		Notification.update({id: id}, model)
 		.then(function(model){
 			console.log(model);

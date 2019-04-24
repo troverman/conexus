@@ -731,6 +731,24 @@ getSome:function(newQuery){}</div>
                     <p>`f(V_D, CC_C, RR_D)`</p>
                     <p>`CC_c=f(V_D,RR_D)`</p>
 
+                    <!--
+                    Undirected multigraph (edges with own identity)
+                    A multigraph G is an ordered triple G:=(V, E, r) with
+
+                    V a set of vertices or nodes,
+                    E a set of edges or lines,
+                    r : E → {{x,y} : x, y ∈ V}, assigning to each edge an unordered pair of endpoint nodes.
+                    -->
+                    
+
+                    <!--Degree
+                    In a non-interconnected multidimensional network, where interlayer links are absent, the degree of a node is represented by a vector of length {\displaystyle |D|:\mathbf {k} =(k_{i}^{1},\dots k_{i}^{|D|})} {\displaystyle |D|:\mathbf {k} =(k_{i}^{1},\dots k_{i}^{|D|})}. Here {\displaystyle |D|} |D| is an alternative way to denote the number of layers {\displaystyle L} L in multilayer networks. However, for some computations it may be more useful to simply sum the number of links adjacent to a node across all dimensions.[2][38] This is the overlapping degree:[3] {\displaystyle \sum _{\alpha =1}^{|D|}k_{i}^{\alpha }} \sum _{\alpha =1}^{|D|}k_{i}^{\alpha }. As with unidimensional networks, distinction may similarly be drawn between incoming links and outgoing links. If interlayer links are present, the above definition must be adapted to account for them, and the multilayer degree is given by
+
+                    {\displaystyle k^{i}=M_{j\beta }^{i\alpha }U_{\alpha }^{\beta }u^{j}=\sum _{\alpha ,\beta =1}^{L}\sum _{j=1}^{N}M_{j\beta }^{i\alpha }} {\displaystyle k^{i}=M_{j\beta }^{i\alpha }U_{\alpha }^{\beta }u^{j}=\sum _{\alpha ,\beta =1}^{L}\sum _{j=1}^{N}M_{j\beta }^{i\alpha }}
+
+                    where the tensors {\displaystyle U_{\alpha }^{\beta }} {\displaystyle U_{\alpha }^{\beta }} and {\displaystyle u^{j}} {\displaystyle u^{j}} have all components equal to 1. The heterogeneity in the number of connections of a node across the different layers can be taken into account through the participation coefficient.
+                    -->
+
 
 
                     <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> 
@@ -922,7 +940,7 @@ getSome:function(newQuery){}</div>
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
                             <div class="spacing-5"></div>
-                            <div hljs hljs-language="javascript">var dataModel = {};</div>
+                            <div hljs hljs-language="javascript">var dataModel = {id:'string', data:'binary'};</div>
                         </div>
                     </div>
                     <p><b>[get, post] /api/data</b></p>
@@ -1012,13 +1030,18 @@ getSome:function(newQuery){}</div>
                     <p style="color:gray;font-style:italic">Items .. provide depth to the capibilities of string based tokenization </p>
                     <div>
                         <p><b>Title:</b> TBD</p> 
-                        <p><b>Content:</b> TBD</p> 
-                        <p><b>Tags:</b> TBD</p> 
-                        <p><b>associatedModels:</b> TBD</p> 
-                        <p><b>Location:</b> TBD</p> 
-                        <p><b>Info:</b> TBD</p> 
-                        <p><b>Owner:</b> TBD</p> 
-                        <p><b>isGenerator:</b> TBD<!--If an item is a generator, on purchase an item--></p> 
+                        <p><b>associatedModels:</b> TBD <!--When the item string token is sent in a transaction, item ownership is transferred.--></p> 
+                        <p><b>compontentItems:</b> Recursive nesting structure. Useful for transparent supply chains.</p> 
+                        <p><b>Tags:</b> Computed from associated Models and self Associated Context.</p> 
+                        <p><b>Content:</b> Associated Content -- Item Description. Same as content (attention protocol)</p> 
+                        <p><b>Location:</b> Associated Item Location</p> 
+                        <p><b>Info:</b> TBD -- For Sale? Physical? Delivery? .. ETC</p> 
+                            <p><b>Status:</b> Status Linkage to Action (CONSUMED.. TRANSFORMED.. CLEAN.. ETC)</p> 
+                            <p><b>isGenerator:</b>If an item is a generator, on purchase or transfer, a new item is created. Useful for Inventory.</p> 
+                    
+                        <p><b>Creator:</b> The Creator of the item. Can be Generated.</p> 
+                        <p><b>Owner:</b> The Owner of the item. Can be franctional.</p> 
+                        <!--ASSOCIATED MODELS && CONTENT; TRANFERRANCE OF ITEMS-->
                     </div>
                     <p style="color:gray;font-style:italic">Relationship with <a href="#ACTION" du-smooth-scroll>Actions</a>; You can act upon an item via a verb / action type;<br> Consume Water, Wear Shirt, ...,  Actions are a vector with Type and Quantity</p>
                 </div>
@@ -1130,7 +1153,7 @@ getSome:function(newQuery){}</div>
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
                             <div class="spacing-5"></div>
-                            <div hljs hljs-language="javascript">var marketModel = {};</div>        
+                            <div hljs hljs-language="javascript">var marketModel = {tokens:[],info:{}};</div>        
                         </div>
                     </div>
                     <p>Websocket Subscribe</p>
@@ -1386,6 +1409,7 @@ getSome:function(newQuery){}</div>
                     <p style="color:gray;font-style:italic">ProjectCharters are .. modular adaptions with governance and decision making. Specific protocols that dynamically adjust project configurations. from initial conditions to reputationatation decay.</p>
                     <p style="color:gray;font-style:italic">Reputation & Verification Dimensions</p>
                     <p style="color:gray;font-style:italic">Validation Types</p>
+                    <p style="color:gray;font-style:italic">Member Types</p>
                 </div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
@@ -1492,6 +1516,7 @@ getSome:function(newQuery){}</div>
                             <div hljs hljs-language="javascript"  hljs-source="reactionModel"></div>
                         </div>
                     </div>
+                    <p>Websocket Subscribe</p>
                     <p><b>[get, post] /api/reaction</b></p>
                 </div>
             </div>

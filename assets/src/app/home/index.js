@@ -53,6 +53,8 @@ angular.module( 'conexus.home', [
             }
         },
         resolve:{
+
+            //GET FEED
             contentList: ['ContentModel', function(ContentModel){
                 return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
@@ -74,35 +76,32 @@ angular.module( 'conexus.home', [
             transactions: ['TransactionModel', function(TransactionModel) {
                 return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
-            followers: ['FollowerModel', 'config', function(FollowerModel, config) {
-                return FollowerModel.getFollowing(config.currentUser);
+
+            //GET FEED CUSTOMIZED// 
+
+            followers: ['$rootScope', 'FollowerModel', function($rootScope, FollowerModel) {
+                return FollowerModel.getFollowing($rootScope.currentUser);
             }],
-            memberProjects: ['MemberModel', 'config', function(MemberModel, config) {
-                return MemberModel.getSome({user:config.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+            memberProjects: ['$rootScope', 'MemberModel', function($rootScope, MemberModel) {
+                return MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            positions: ['OrderModel', 'config', function(OrderModel, config) {
-                return OrderModel.getSome({user:config.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+            positions: ['$rootScope', 'OrderModel', function($rootScope, OrderModel) {
+                return OrderModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
 
 }])
 
-.controller( 'HomeCtrl', ['$scope', '$state', 'config', 'titleService', function HomeController( $scope, $state, config, titleService ) {
-    titleService.setTitle('CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
-    if($scope.currentUser){$state.go('home.feed')}
+.controller( 'HomeCtrl', ['$rootScope', '$state', function HomeController( $rootScope, $state ) {
+    if($rootScope.currentUser){$state.go('home.feed')}
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
-    titleService.setTitle('CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
 
     $scope.sorting = false;
-    $scope.expandSort = function(){
-        $scope.sorting = true;
-    };
+    $scope.expandSort = function(){$scope.sorting = true;};
 
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
@@ -110,22 +109,17 @@ angular.module( 'conexus.home', [
         {title:'SHARING IS VALUABLE'},
         {title:'GUIDING GROUP INTENTIONALITY'},
         {title:'UNITY THROUGH TRANSPARENCY'},
-        //{title:'YOU GIVE WHAT YOU GET'},
         {title:'EMPOWERING LOCAL COMMUNITIES'},
         {title:'THE TIME TO CREATE IS NOW'},
         {title:'NOW IS THE TIME TO CREATE'},
         {title:'BUILDING AN EGALITARIAN SOCIETY'},
     ];
-
     var vid = angular.element('#introVideo');
-
     //$scope.selectedIntro = $scope.introObj[1];
     $scope.selectedIntro = $scope.introObj[Math.floor(Math.random()*$scope.introObj.length)];
-    
     $scope.selectedTime = Math.floor(Math.random()*92);
     vid[0].currentTime = $scope.selectedTime;
 
-    //LOCAL SEARCH QUERY FORMAT...
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -379,21 +373,8 @@ angular.module( 'conexus.home', [
     //WATCHERS
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, config, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 	
-    //TODO.. PERMANTLY SET IN NAV
-    titleService.setTitle('CRE8.XYZ');
-    
-	$scope.currentUser = config.currentUser;
-
-     //REORGANIZE
-    UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
-        $scope.currentUser = member;
-        $scope.member = member;
-        $scope.balance = member.balance;
-        $scope.reputation = member.reputation;
-    });
-
     $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
     $rootScope.associatedModel = {
@@ -407,7 +388,7 @@ angular.module( 'conexus.home', [
     };
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
-
+    $scope.consentAgreement = false;
     $scope.contentList = contentList;
     $scope.ifCRE8 = false;
     $scope.projects = projects;
@@ -419,235 +400,205 @@ angular.module( 'conexus.home', [
     $scope.time = time;
     $scope.transactions = transactions;
 
-    
+    $scope.discover = function(){
+        //LOOK AT MY PROJECTS
+        $scope.memberProjects = memberProjects;
+        $scope.memberProjects = $scope.memberProjects.map(function(obj){
+            obj.project.model = 'PROJECT';
+            if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
+            return obj.project
+        });
+        //LOOK AT MY FOLLOWERS
+        $scope.followers = followers;
+        //LOOK AT THE PEOPLE I FOLLOW
+        $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
 
-    //LOOK AT MY PROJECTS
-    $scope.memberProjects = memberProjects;
-    $scope.memberProjects = $scope.memberProjects.map(function(obj){
-        obj.project.model = 'PROJECT';
-        if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
-        return obj.project
-    });
-    //LOOK AT MY FOLLOWERS
-    $scope.followers = followers;
-    //LOOK AT THE PEOPLE I FOLLOW
-    $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
+        $scope.members.map(function(obj){
+            var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+            if (index != -1){obj.isFollowing = true;}
+            if (index == -1){obj.isFollowing = false;}
+            return obj;
+        });
 
-    $scope.members.map(function(obj){
-        var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
-        if (index != -1){obj.isFollowing = true;}
-        if (index == -1){obj.isFollowing = false;}
-        return obj;
-    });
+        $scope.projects.map(function(obj){
+            var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+            if (index != -1){obj.isMember = true;}
+            if (index == -1){obj.isMember = false;}
+            return obj;
+        });
 
-    $scope.projects.map(function(obj){
-        var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
-        if (index != -1){obj.isMember = true;}
-        if (index == -1){obj.isMember = false;}
-        return obj;
-    });
-
-
-
-    //TODO!:
-    //QUERY WORK -- FEED BUILDER
-    //IS THERE A MAX..? 100
-    //DONT DO ON FRONTEND?
-    $scope.searchQueryFeed = [];
-    for (x in $scope.followers){
-        //hmm
-        $scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})
-        //returns member feeds
-    }
-
-    for (x in $scope.memberProjects){
-        $scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})
-        //returns project feeds
-    }
-
-
-    console.log($scope.followers,$scope.searchQueryFeed);
-
-    //projects(validation tags are tokens, 
-    //tasks(validation tags), 
-    //members(following) --> members reputation(projects,tasks,..)
-
-    //time(validation tags), reaction
-
-    //ORDERS
-
-
-    //LOOK AT MY TIME
-    //LOOK AT MY TASKS
-    //LOOK AT MY ACTIONS (RE)
-    //LOOK AT MY ORDERS (CURRENT MAPS)
-
-    //LOOK AT THE PEOPLE I FOLLOW
-
-    //LOOK AT THE PEOPLE I FOLLOW'S PROJECTS
-    //console.log($scope.followers, $scope.memberProjects);
-
-    //LOOK AT THE PEOPLE I FOLLOW'S REPUTATION && SKILLS
-
-    //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
-    //BUILD QUERY
-
-    //potientally compute some,
-    $scope.positions = positions;
-
-    //TEMP
-    $scope.suggestedTokens = [];
-    //TAGS AND CATIGORIZATION
-
-    //FOLLOWERS .. VERBS
-    for (x in $scope.followers){
-        $scope.suggestedTokens.push({token:'CRE8+FOLLOW+'+$scope.followers[x].id})
-    }
-
-    for (x in $scope.memberProjects){
-        $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})
-    }
-
-
-
-
-
-
-
-
-    //FACTOR
-    $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){
-        return obj.tags;
-    });
-    $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
-    $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
-    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-    $scope.sortedsuggestedTokenTags = [];
-    for (x in $scope.suggestedTokenTags){
-        var amount = countInArray($scope.suggestedTokenTags, $scope.suggestedTokenTags[x]);
-        if ($scope.sortedsuggestedTokenTags.map(function(obj){return obj.element}).indexOf($scope.suggestedTokenTags[x]) == -1){
-            $scope.sortedsuggestedTokenTags.push({amount:amount, element:$scope.suggestedTokenTags[x]})
+        //TODO!:
+        //QUERY WORK -- FEED BUILDER
+        //IS THERE A MAX..? 100
+        //DONT DO ON FRONTEND?
+        $scope.searchQueryFeed = [];
+        for (x in $scope.followers){
+            //hmm
+            $scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})
+            //returns member feeds
         }
-    }
-    $scope.sortedsuggestedTokenTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    //FACTOR
 
+        for (x in $scope.memberProjects){
+            $scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})
+            //returns project feeds
+        }
 
-    for (x in $scope.memberProjects){
-        $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
-    }
+        //console.log($scope.followers,$scope.searchQueryFeed);
 
-    for (x in $scope.suggestedTokenTags){
-        //$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
-    }
+        //projects(validation tags are tokens, 
+        //tasks(validation tags), 
+        //members(following) --> members reputation(projects,tasks,..)
 
-    $scope.chart = {
-        chart: {polar: true},
-        series: [{
+        //time(validation tags), reaction
+
+        //ORDERS
+
+        //LOOK AT MY TIME
+        //LOOK AT MY TASKS
+        //LOOK AT MY ACTIONS (RE)
+        //LOOK AT MY ORDERS (CURRENT MAPS)
+
+        //LOOK AT THE PEOPLE I FOLLOW
+
+        //LOOK AT THE PEOPLE I FOLLOW'S PROJECTS
+        //console.log($scope.followers, $scope.memberProjects);
+
+        //LOOK AT THE PEOPLE I FOLLOW'S REPUTATION && SKILLS
+
+        //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
+        //BUILD QUERY
+
+        //potientally compute some,
+        $scope.positions = positions;
+
+        //TEMP
+        $scope.suggestedTokens = [];
+        //TAGS AND CATIGORIZATION
+
+        //FOLLOWERS .. VERBS
+        for (x in $scope.followers){
+            $scope.suggestedTokens.push({token:'CRE8+FOLLOW+'+$scope.followers[x].id})
+        }
+
+        for (x in $scope.memberProjects){
+            $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})
+        }
+
+        //FACTOR
+        $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){
+            return obj.tags;
+        });
+        $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
+        $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
+        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        $scope.sortedsuggestedTokenTags = [];
+        for (x in $scope.suggestedTokenTags){
+            var amount = countInArray($scope.suggestedTokenTags, $scope.suggestedTokenTags[x]);
+            if ($scope.sortedsuggestedTokenTags.map(function(obj){return obj.element}).indexOf($scope.suggestedTokenTags[x]) == -1){
+                $scope.sortedsuggestedTokenTags.push({amount:amount, element:$scope.suggestedTokenTags[x]})
+            }
+        }
+        $scope.sortedsuggestedTokenTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        //FACTOR
+
+        for (x in $scope.memberProjects){
+            $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
+        }
+
+        for (x in $scope.suggestedTokenTags){
+            //$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
+        }
+
+        $scope.chart = {
+            chart: {polar: true},
+            series: [{
+                id: 'values',
+                type: 'area',
+                name: 'Values',
+                pointPlacement: 'on',
+                data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
+                color: 'rgba(153,0,0,0.3)',
+                fillOpacity: 0.3,
+            },{
+                id: 'values1',
+                type: 'area',
+                name: 'Values',
+                pointPlacement: 'on',
+                data: [0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.15],
+                color: 'rgba(0,0,153,0.3)',
+                fillOpacity: 0.3,
+            },{
+                id: 'values2',
+                type: 'area',
+                name: 'Values',
+                pointPlacement: 'on',
+                data: [0.15, 0.1, 0.20, 0.2, 0.20, 0.05, 0.1],
+                color: 'rgba(0,153,0,0.3)',
+                fillOpacity: 0.3,
+            }],
+            title: {text: ''},
+            xAxis: {
+                title: {text: null},
+                categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
+                tickmarkPlacement: 'on',
+                lineWidth: 0,
+            },
+            yAxis: {
+                title: {text: null},
+                gridLineInterpolation: 'polygon',
+                lineWidth: 0,
+                min: 0,
+            },
+            legend: {
+                enabled: false,
+            },
+            tooltip: {},
+            credits:{enabled:false},
+        };
+
+        //IF NON ZERO
+        $scope.chart.series = [{
             id: 'values',
             type: 'area',
             name: 'Values',
             pointPlacement: 'on',
-            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
+            data: [],
             color: 'rgba(153,0,0,0.3)',
             fillOpacity: 0.3,
-        },{
-            id: 'values1',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.15],
-            color: 'rgba(0,0,153,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values2',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.15, 0.1, 0.20, 0.2, 0.20, 0.05, 0.1],
-            color: 'rgba(0,153,0,0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {
-            enabled: false,
-        },
-        tooltip: {},
-        credits:{enabled:false},
+        }];
+
+        $scope.chart.xAxis.categories = [];
+
+        for (x in $scope.sortedsuggestedTokenTags){
+            $scope.chart.series[0].data.push($scope.sortedsuggestedTokenTags[x].amount);
+            $scope.chart.xAxis.categories.push($scope.sortedsuggestedTokenTags[x].element)
+        }
+        //IF NON ZERO
+
     };
-
-
-    //IF NON ZERO
-    $scope.chart.series = [{
-        id: 'values',
-        type: 'area',
-        name: 'Values',
-        pointPlacement: 'on',
-        data: [],
-        color: 'rgba(153,0,0,0.3)',
-        fillOpacity: 0.3,
-    }];
-
-    $scope.chart.xAxis.categories = [];
-
-    for (x in $scope.sortedsuggestedTokenTags){
-        $scope.chart.series[0].data.push($scope.sortedsuggestedTokenTags[x].amount);
-        $scope.chart.xAxis.categories.push($scope.sortedsuggestedTokenTags[x].element)
-    }
-    //IF NON ZERO
+    $scope.discover();
 
     //IF NO PROJECTS OR W.E TUTORIAL IS TRUE
     //NEW CONTROLLER
     $scope.isTutorial = true;
     if ($scope.isTutorial){
 
-        $scope.showProjects = true;
-        $scope.showTasks = false;
-        $scope.showMembers = false;
-        $scope.showValue = false;
-        $scope.showSettings = false;
-        $scope.showCreate = false;
+        $scope.pageNumber = 0;
+        $scope.newAccountInformation = $rootScope.currentUser;
+        console.log($scope.newAccountInformation, $rootScope.currentUser)
 
-        $scope.change = function(){
+        $scope.changePage = function(page){
             window.scrollTo(0, 0);
-            if ($scope.showProjects){
-                $scope.showProjects = !$scope.showProjects;
-                $scope.showTasks = !$scope.showTasks;
-            }
-            else if ($scope.showTasks){
-                $scope.showTasks = !$scope.showTasks;
-                $scope.showMembers = !$scope.showMembers;
-            }
-            else if ($scope.showMembers){
-                $scope.showMembers = !$scope.showMembers;
-                $scope.showValue = !$scope.showValue;
-            }
-            else if ($scope.showValue){
-                $scope.showValue = !$scope.showValue;
-                $scope.showSettings = !$scope.showSettings;
-            }
-            else if ($scope.showSettings){
-                $scope.showSettings = !$scope.showSettings;
-                //$scope.showCreate = !$scope.showCreate;
-                $scope.isTutorial = !$scope.isTutorial;
+            if (page){$scope.pageNumber = page}
+            else{$scope.pageNumber++}
+            if ($scope.pageNumber<0 || $scope.pageNumber>5){$scope.isTutorial = !$scope.isTutorial}
+        };
 
-            }
-            else if ($scope.showCreate){
-                $scope.showCreate = !$scope.showCreate;
-                $scope.isTutorial = !$scope.isTutorial;
-            }
+       $scope.editAccount = function () {
+            UserModel.update($scope.newAccountInformation).then(function(model){
+                console.log(model);
+            });
+            $scope.pop('Saved!', 'Account Updated');
         };
 
         //TODO DEPRECIATE.. PUT IN NAV
@@ -665,7 +616,7 @@ angular.module( 'conexus.home', [
                     //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
-                        zoom: 12
+                        zoom: 14
                     };
                     ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
                         $scope.projects = projects;
@@ -706,7 +657,7 @@ angular.module( 'conexus.home', [
         $scope.join = function(model){
             
             $scope.newMember = {
-                user:config.currentUser.id,
+                user:$rootScope.currentUser.id,
                 project:model.id,
             };
 
@@ -809,14 +760,6 @@ angular.module( 'conexus.home', [
             });
         };
 
-        $scope.skip = function(){
-            $scope.showProjects = false;
-            $scope.showTasks = false;
-            $scope.showMembers = false;
-            $scope.showValue = false;
-            $scope.isTutorial = false;
-        };
-
         $scope.totalMap = {
             chart: {zoomType: 'x'},
             series: [{
@@ -838,7 +781,8 @@ angular.module( 'conexus.home', [
             credits:{enabled:false},
         };
 
-        console.log($scope.members);
+        //console.log($scope.members);
+        
         for (x in $scope.members){
             if ($scope.members[x].reputation){
             

@@ -7,35 +7,22 @@
 //mapping from slngleton 
 //id, address mapping; string language; id
 //string to string 
-//
 
 module.exports = {
 
 	attributes: {
-
-        //BASIC
         amount: {type: 'string'},
         identifier: {type: 'string'},
         to: {type: 'string'},
         from: {type: 'string'},
-
-        //EXTRA
+        associatedModels: {type: 'json'}, //linked items
         content: {type: 'string'},
         tags: {type: 'string'},
-
-        //ASSOCIATIONS
-        //associations: {type: 'json'},
-
-        //TODO: CREATOR
-
-        //REACTIONS
+        creator: {type: 'string'},
+        //REACTIONS \\ info
         reactions: {type: 'json'},
-
         //TODO:DEPRECIATE
-        project: {model: 'project'},
         user: {model: 'user'},
-
-
     },
 
 };

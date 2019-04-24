@@ -5,18 +5,25 @@
 module.exports = {
 
 	attributes: {
+
         title: {type: 'string'},
-        owner: {type: 'json'},
+        associatedModels: {type: 'json'}, //ITEMS META .. PROTOCOL TO SEND ITEMS.. WHEN YOU SEND THE 'NFT' STRING TOKEN YOU SEND THE ITEM ~~ ASSOCIATED MODEL ON TOKEN? VS TX ? BOTH
+        compontentItems: {type: 'json'},
         tags: {type: 'string'},
-        location: {type: 'json'},
         content: {type: 'string'},
-        associatedModels: {type: 'json'},
-            //ITEMS META 
+
         info: {type: 'json'},
+        location: {type: 'json'},
+        status: {type: 'string'},
         isGenerator:{type:'boolean'},
         reactions: {type: 'json'},
+
+        owner: {type: 'string'},
+        creator: {type: 'string'},
+
         //DEPRECIATE
         user: {model: 'user'},
+
     },
 };
 

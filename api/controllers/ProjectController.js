@@ -132,7 +132,7 @@ module.exports = {
 		var query = req.query.query;
 		var tag = req.query.tag;
 
-		console.log(req.query);
+		console.log('GET PROJECT', req.query);
 
 		Project.watch(req);
 

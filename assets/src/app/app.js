@@ -69,9 +69,7 @@ angular.module( 'conexus', [
             return newPath; 
         } 
     });
-    if (window.location.hash && window.location.hash == '#_=_') {
-        window.location.hash = '';
-    }
+    if (window.location.hash && window.location.hash == '#_=_') {window.location.hash = '';}
     $urlRouterProvider.otherwise(function ($injector, $location) {
         if ($location.$$url === '/') {window.location = '/';}
         else {window.location = $location.$$absUrl;}
@@ -81,12 +79,16 @@ angular.module( 'conexus', [
 .run( function run () {
     moment.locale('en');
 })
-.controller( 'AppCtrl', ['$rootScope', '$scope', 'config', function AppCtrl ( $rootScope, $scope, config ) {
+.controller( 'AppCtrl', ['$rootScope', '$scope', 'UserModel', function AppCtrl ( $rootScope, $scope, UserModel ) {
 
-    config.currentUser = window.currentUser;
     $rootScope.currentUser = window.currentUser;
-
-    //ROOTSCOPE DEPRECIATE CONFIG
+    if ($rootScope.currentUser){
+        UserModel.getSome({id:$rootScope.currentUser.id}).then(function(member){
+            $rootScope.currentUser = member;
+            $rootScope.balance = member.balance;
+            $rootScope.reputation = member.reputation;
+        });
+    }
 
     $rootScope.$on('$stateChangeStart',function(){
         $rootScope.stateIsLoading = true;

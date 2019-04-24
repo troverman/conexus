@@ -7,14 +7,11 @@ module.exports = {
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
 		var username = req.query.username;
-
-		User.watch(req);
-
-		console.log(req.query)
+		console.log('GET USER', req.query);
 
 		if (req.query.id){
-			User.find({id:id}).then(function(){
-				User.subscribe(req, models);
+			User.find({id:id}).then(function(models){
+				User.subscribe(req, models[0]);
 				res.json(models[0]);
 			});
 		}
@@ -59,20 +56,6 @@ module.exports = {
 
 	},
 
-	//KINDA HACKY
-	getByUsername: function(req, res) {
-		User.find()
-		.where({
-		  or: [
-		    {username: req.param('path')},
-		    {id: req.param('path')}
-		]})
-		.spread(function(model) {
-			User.subscribe(req, model);
-			res.json(model);
-		});
-	},
-
 	create: function (req, res) {
 		var model = {
 			username: req.param('username'),
@@ -81,6 +64,7 @@ module.exports = {
 			lastName: req.param('lastName'),
 			address: req.param('address'),
 		};
+		console.log('CREATE USER', model);
 		User.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
@@ -94,19 +78,21 @@ module.exports = {
 	update: function(req,res){
 		var id = req.param('id');
 		var model = {
-			description : req.param('description'),
-			username : req.param('username'),
-			email: req.param('email'),
-			avatarUrl: req.param('avatarUrl'),
-			coverUrl: req.param('coverUrl'),
-			firstName: req.param('firstName'),
-			lastName: req.param('lastName'),
-			address: req.param('address'),
+			username:req.param('username'),
+			email:req.param('email'),
+			phoneNumber:req.param('phoneNumber'),
+			avatarUrl:req.param('avatarUrl'),
+			coverUrl:req.param('coverUrl'),
+			firstName:req.param('firstName'),
+			lastName:req.param('lastName'),
 			dateOfBirth: req.param('dateOfBirth'),
-			eyeColor: req.param('eyeColor'),
-			gender: req.param('gender'),
-			height: req.param('height'),
+			//address: req.param('address'),
+			//eyeColor: req.param('eyeColor'),
+			//gender: req.param('gender'),
+			//height: req.param('height'),
 		};
+		if (req.param('description')){model.description = req.param('description')}
+		console.log('UPDATE USER', id, model);
 		User.update({id: id}, model)
 		.then(function(model){
 			User.publishUpdate(id, model);
@@ -114,50 +100,8 @@ module.exports = {
 		});
 	},
 
-	//TODO: RESET KEYS
+	//TODO: IPFS BLOB / PEER UPLOAD
 	upload: function(req,res){
-		res.setTimeout(0)
-		var options = {
-			adapter: require("skipper-s3"),
-			key: sails.config.secret.AMAZON.key,
-		 	secret: sails.config.secret.AMAZON.secret,
-		 	bucket: sails.config.secret.AMAZON.bucket,
-		}
-		var byteCount = req.file('picture')._files[0].stream.byteCount
-		req.file('picture')
-		.on('progress', function (event){
-			//why is this doubled
-			//server processing --> to s3. 
-			//need to programatically delete s3 chunks if fail / and on delete
-			var percentageUploaded = event.written/byteCount
-			console.log(percentageUploaded)
-			//File.publishUpdate(newFile.id, event)
-		})
-		.upload(options, function response(err,uploadedFiles){
-			console.log('we are in the code')
-			if (err) {
-		    	return res.negotiate(err);
-		    	console.log(err)
-		    }
-		    if (uploadedFiles.length === 0){
-		    	return res.badRequest('No file was uploaded');
-		    }
-		    console.log(uploadedFiles)
-		    var amazonUrl = uploadedFiles[0].extra.Location;
-		    return res.json({amazonUrl: amazonUrl});
-		});
-
 	},
 
-	subscribe: function(req, res) {
-    	//Find all current users in the user model
-	    //User.find(function foundUsers(err, users) {
-	      //if (err) return next(err);
-	      // subscribe this socket to the user instance rooms
-		  //console.log('----')
-	      //User.subscribe(req, users);
-	      //console.log('----')
-	    //});
-  	}
-  	
 };

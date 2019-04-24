@@ -148,18 +148,15 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
-
 			amountSet: req.param('amountSet'),
 			to: req.param('to'),
 			from: req.param('from'),
-			
 			tags: req.param('tags'),
 			content: req.param('content'),
 			user: req.param('user'),
-
+			associatedModels: req.param('associatedModels'),
 			//PATCH
 			reactions:{plus:0,minus:0},
-			
 		};
 		Transaction.create(model)
 		.exec(function(err, transaction) {
@@ -168,7 +165,6 @@ module.exports = {
 
 				Transaction.publishCreate(transaction);
 				res.json(transaction);
-
 
 				//COULD BE LISTENER..? MM . . NOTIFICATION SERVICE
 				var notificationModel = {

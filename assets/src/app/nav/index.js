@@ -135,14 +135,7 @@ angular.module( 'conexus.nav', [
                 $scope.pop($scope.notifications[x].title, $scope.notifications[x].content);
             }
         });
-        //USER INFO
-        //DO THIS IN APP.JS --> ROOTSCOPE --> DEPRECIATE CONFIG
-        UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
-            $scope.memberValidate = member;
-            $scope.balance = member.balance;
-            $scope.reputation = member.reputation;
-        });
-
+     
         //SOCKETS SUBSCRIPTIONS
         //TODO: WEBSOCKETS
         $sailsSocket.subscribe('notification', function (envelope) {
@@ -1348,7 +1341,6 @@ angular.module( 'conexus.nav', [
     $scope.login = function(){
         var data = JSON.stringify($scope.newLogin);
         $http({method:'POST', url:'/auth/local', data:data}).then(function(newModel){
-            config.currentUser = newModel.data;
             $rootScope.currentUser = newModel.data;
             $window.location.reload();
             $location.path('/');

@@ -12,7 +12,7 @@ module.exports = {
 		var id = req.query.id;
 		var user = req.query.user;
 
-		console.log(req.query);
+		console.log('GET TASK', req.query);
 
 		if(req.query.id){
 			Task.find({id:id})
@@ -120,6 +120,7 @@ module.exports = {
 			reactions: {plus:0,minus:0},
 
 		};
+		console.log('CREATE TASK', model);
 		Task.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
@@ -148,19 +149,8 @@ module.exports = {
 		});
 	},
 
-	destroy: function (req, res) {
-		var id = req.param('id');
-		if (!id) {return res.badRequest('No id provided.');}
-		Task.findOne(id).exec(function(err, model) {
-			if (err) {return res.serverError(err);}
-			if (!model) {return res.notFound();}
-			Task.destroy(id, function(err) {
-				if (err) {return res.serverError(err);}
-				Task.publishDestroy(model.id);
-				return res.json(model);
-			});
-		});
-	}
-	
+	//TODO
+	update:function (req, res) {},
+
 };
 
