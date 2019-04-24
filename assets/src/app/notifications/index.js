@@ -11,16 +11,15 @@ angular.module( 'conexus.notifications', [
             }
         },
         resolve: {
-            notifications: ['config', 'NotificationModel', function(config, NotificationModel){
-                return NotificationModel.getSome({user:config.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+            notifications: ['$rootScope', 'NotificationModel', function(&rootScope, NotificationModel){
+                return NotificationModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
 }])
 
-.controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'FollowerModel', 'NotificationModel', 'notifications', 'titleService', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, FollowerModel, NotificationModel, notifications, titleService, toaster) {
+.controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'NotificationModel', 'notifications', 'titleService', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, NotificationModel, notifications, titleService, toaster) {
     titleService.setTitle('Notifications | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
     $scope.notifications = notifications;
 
     //TODO

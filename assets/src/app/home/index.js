@@ -651,7 +651,8 @@ angular.module( 'conexus.home', [
                 });
             }
         };
-
+        $scope.getLatLng();
+        
         //TODO: ROOTSCOPE
         //$scope.createMember = function(){
         $scope.join = function(model){
