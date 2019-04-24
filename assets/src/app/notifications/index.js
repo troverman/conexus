@@ -11,7 +11,7 @@ angular.module( 'conexus.notifications', [
             }
         },
         resolve: {
-            notifications: ['$rootScope', 'NotificationModel', function(&rootScope, NotificationModel){
+            notifications: ['$rootScope', 'NotificationModel', function($rootScope, NotificationModel){
                 return NotificationModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
