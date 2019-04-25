@@ -100,9 +100,6 @@ angular.module( 'conexus.home', [
 
 .controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
 
-    $scope.sorting = false;
-    $scope.expandSort = function(){$scope.sorting = true;};
-
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
         {title:'WE ARE ALL IN THIS TOGETHER'},
@@ -129,6 +126,7 @@ angular.module( 'conexus.home', [
     $scope.projects = projects;
     $scope.newReaction = {};
     $scope.searchResults = [];
+    $scope.sorting = false;
     $scope.tasks = tasks;
     $scope.time = time;
 
@@ -237,6 +235,8 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
 
+    $scope.expandSort = function(){$scope.sorting = true;};
+
     //TODO: LOAD MORE --> SIMPLIFY QUERY! :)
     //COMBO QUERY TO 'SEARCH'
     //DECOMPOSE FOR FEED DOCUMENTATION
@@ -263,15 +263,6 @@ angular.module( 'conexus.home', [
     };
 
     $scope.createReaction = function(item, type){$mdSidenav('login').toggle()};
-
-    $scope.reply = function(item){
-        if($scope.currentUser){
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].showReply = !$scope.activity[index].showReply;
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
 
     //FILTERSET
     //TODO: BETTER // DEPRECIATE!!!
@@ -323,6 +314,16 @@ angular.module( 'conexus.home', [
     };
     $scope.init();
     //FILTERSET
+
+
+    $scope.reply = function(item){
+        if($rootScope.currentUser){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.activity[index].showReply = !$scope.activity[index].showReply;
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
 
 
 
@@ -378,7 +379,7 @@ angular.module( 'conexus.home', [
     $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
     $rootScope.associatedModel = {
-        address: $scope.currentUser.id,
+        address: $rootScope.currentUser.id,
         type: 'PROFILE',
     };
 
@@ -715,7 +716,7 @@ angular.module( 'conexus.home', [
 
             $scope.newFollower = {
                 followed:model.id,
-                follower:$scope.currentUser.id,
+                follower:$rootScope.currentUser.id,
             };
 
             console.log(model, $scope.newFollower);
@@ -887,8 +888,8 @@ angular.module( 'conexus.home', [
     //TODO: MODEL | CREATE | NESTED?
     $scope.createContent = function(content){
         $scope.newContent.contentModel = content.id;
-        $scope.newContent.user = $scope.currentUser.id;
-        $scope.newContent.profile = $scope.currentUser.id;
+        $scope.newContent.user = $rootScope.currentUser.id;
+        $scope.newContent.profile = $rootScope.currentUser.id;
         ContentModel.create($scope.newContent).then(function(model) {
             $scope.newContent = {};
         });
@@ -926,11 +927,11 @@ angular.module( 'conexus.home', [
     };
 
     $scope.createReaction = function(item, type){
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].reactions[type]++;
             ReactionModel.create($scope.newReaction);
@@ -939,17 +940,9 @@ angular.module( 'conexus.home', [
     };
 
     $scope.reply = function(item){
-    	if($scope.currentUser){
-            $mdSidenav('content').toggle()
-    		//var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-    		//$scope.activity[index].showReply = !$scope.activity[index].showReply;
-    	}
+    	if($rootScope.currentUser){$mdSidenav('content').toggle()}
         else{$mdSidenav('login').toggle()}
     };
-
-
-
-
 
     //FILTERSET
     //TODO: BETTER // DEPRECIATE!!!

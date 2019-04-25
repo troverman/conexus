@@ -6,7 +6,7 @@ module.exports = {
 		var sort = req.query.sort;
 		var id = req.query.id;
 
-		console.log(req.query);
+		console.log('GET CONTENT', req.query);
 
 		Content.watch(req);
 
@@ -242,6 +242,7 @@ module.exports = {
 			associatedModels: req.param('associatedModels'),
 
 			//DEPRECIATE
+			//LOL
 			market: req.param('market'),
 			order: req.param('order'),
 			parent: req.param('parent'),
@@ -257,6 +258,8 @@ module.exports = {
 			reactions: {plus:0, minus:0},
 
 		};
+
+		console.log('CREATE CONTENT', model);
 
 		Content.create(model)
 		.exec(function(err, model) {
@@ -291,20 +294,6 @@ module.exports = {
 		.then(function(model){
 			Content.publishUpdate(id, model[0]);
 			res.json(model);
-		});
-	},
-
-	destroy: function (req, res) {
-		var id = req.param('id');
-		if (!id) {return res.badRequest('No id provided.');}
-		Content.findOne(id).exec(function(err, model) {
-			if (err) {return res.serverError(err);}
-			if (!model) {return res.notFound();}
-			Content.destroy(id, function(err) {
-				if (err) {return res.serverError(err);}
-				Content.publishDestroy(model.id);
-				return res.json(model);
-			});
 		});
 	}
 

@@ -16,6 +16,8 @@ module.exports = {
 		var user = req.query.user;
 		var id = req.query.id;
 
+		console.log('GET TIME', req.query)
+
 		if (req.query.id){
 			Time.find({id:id})
 			.limit(limit)
@@ -24,7 +26,6 @@ module.exports = {
 			.populate('user')
 			.populate('task')
 			.then(function(models) {
-				console.log(models[0])
 				res.json(models[0]);
 			});
 		}
@@ -127,6 +128,8 @@ module.exports = {
 			task: req.param('task'),
 			stream: req.param('stream'),
 		};
+
+		console.log('CREATE TIME', model)
 
 		Time.create(model)
 		.exec(function(err, time) {

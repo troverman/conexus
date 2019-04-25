@@ -143,7 +143,7 @@
                 <!--ACTIVE FILTERS-->
                 <div class="row" style="margin:0px">
                     <div ng-repeat="item in tasks" class="col-md-12 col-sm-12 col-xs-12" style="padding:0px">
-                        <div class="card" ng-click="renderToggle(item)">
+                        <div class="card" ng-click="cardDetailToggle(item)">
 
                             <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -418,7 +418,7 @@
 
             <div ng-repeat="item in activity">
 
-                <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
+                <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
                     <div style="padding:16px;overflow:scroll;">
                         <div>
                             <img ng-click="$event.stopPropagation()" class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -470,7 +470,7 @@
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='PROJECT'" ng-click="renderToggle(item)">
+                <div class="card" ng-if="item.model=='PROJECT'" ng-click="cardDetailToggle(item)">
                     <div style="padding:16px;">
                         <div class="row">
                             <div class="col-sm-1 col-xs-2">
@@ -479,7 +479,7 @@
                             <div class="col-sm-11 col-xs-10">
                                 <p style="float:right;text-align:right">
                                     <a  style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                                    <span ng-if="item.location" style="color:gray"><!--{{item.location.address}} <i class="fa fa-map-marker"></i>--></span>
+                                    <span ng-if="item.location" style="color:gray"></span>
                                 </p>
                                 <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}">{{item.title}}</a></h3>
                                 <div style="overflow:scroll">
@@ -490,7 +490,7 @@
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='TASK'" ng-click="renderToggle(item)">
+                <div class="card" ng-if="item.model=='TASK'" ng-click="cardDetailToggle(item)">
 
                     <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -525,9 +525,8 @@
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
+                <div class="card" ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)">
                     <div style="padding:16px;">
-
                         <div>
                             <div style="float:right;text-align:right">
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
@@ -540,12 +539,10 @@
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
                             <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
                         </div>
-
                         <p ng-show="item.task.tags > 0" style="margin-left:42px">
                             <a ng-click="$event.stopPropagation()" ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a>
                         </p>
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
-
                     </div>
                     <div class="card-footer">
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 

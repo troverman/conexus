@@ -10,7 +10,7 @@ module.exports = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		
-		console.log(req.query);
+		console.log('GET ITEM', req.query);
 
 		if(req.query.id){
 			var id = req.query.id;
@@ -72,19 +72,17 @@ module.exports = {
 			associatedModels: req.param('associatedModels'),
 			content: req.param('content'),
 			tags: req.param('tags'),
-
 			//info: req.param('info'),
 			location: req.param('location'),
 			amountSet: req.param('amountSet'),
 			isGenerator: req.param('isGenerator'),
-
 			//creator
 			user: req.param('user'),
 			//owner: req.param('owner'),
-
 			//PATCH
 			reactions: {plus:0,minus:0},
 		};
+		console.log('CREATE ITEM', model);
 		Item.create(model)
 		.exec(function(err, task) {
 			if (err) {return console.log(err);}
@@ -96,21 +94,6 @@ module.exports = {
 	},
 
 	update: function (req, res) {},
-
-	//NO DELETE.. ONLY UPDATE.. --> OVERWRITE
-	destroy: function (req, res) {
-		var id = req.param('id');
-		if (!id) {return res.badRequest('No id provided.');}
-		Item.findOne(id).exec(function(err, model) {
-			if (err) {return res.serverError(err);}
-			if (!model) {return res.notFound();}
-			Item.destroy(id, function(err) {
-				if (err) {return res.serverError(err);}
-				Item.publishDestroy(model.id);
-				return res.json(model);
-			});
-		});
-	}
 	
 };
 

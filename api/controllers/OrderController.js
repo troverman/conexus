@@ -16,7 +16,7 @@ module.exports = {
 		var project = req.query.user;
 		var order = req.query.order;
 
-		console.log(req.query);
+		console.log('GET ORDER', req.query);
 
 		Order.watch(req);
 
@@ -103,22 +103,16 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-		
 		var model = {
-
 			setAlpha: req.param('setAlpha'),
 			setBeta: req.param('setBeta'),
-
 			status: req.param('status'),
 			type: req.param('type'),
-
 			creator: req.param('creator'),
 			user: req.param('user'),
-
 			reactions:{plus:0,minus:0},
-
 		};
-
+		console.log('CREATE ORDER', model);
 		Order.create(model)
 		.exec(function(err, order) {
 			if (err) {return console.log(err);}

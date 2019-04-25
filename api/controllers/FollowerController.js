@@ -7,10 +7,14 @@
 module.exports = {
 
 	getSome: function(req, res) {
+		
 		//var follower;
 		//var followed;
+		console.log('GET FOLLOWERS', req.query);
+
 	},
 
+	//DEPRECIATE
 	getFollowers: function(req, res) {
 		var followedId = req.param('id');
 		Follower.getFollowers(followedId)
@@ -38,7 +42,7 @@ module.exports = {
 			follower: req.param('follower'),
 		};
 
-		console.log(model);
+		console.log('CREATE FOLLOWER', model);
 
 		Follower.create(model)
 		.exec(function(err, follower) {

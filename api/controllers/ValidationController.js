@@ -13,7 +13,7 @@ module.exports = {
 		var time = req.query.time;
 		var id = req.query.id;
 
-		console.log(req.query)
+		console.log('GET VALIDATION', req.query)
 
 		Validation.watch(req);
 
@@ -211,25 +211,22 @@ module.exports = {
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
 		User.find({id:model.user}).then(function(userModel){
 			var reputation = {};
-
 			//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
 			//FIND DIMENSIONS .. MATCH WITH FRONTEND INPUT
 			for (x in Object.keys(model.validation)){
-
 				//TODO | BETTER..
 				if (userModel[0].reputation[Object.keys(model.validation)[x]]){
-
 					//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPIN | WIP
 					if (Object.keys(model.validation)[x] == 'general'){reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;}
 					else{reputation[Object.keys(model.validation)[x]] = userModel[0].reputation[Object.keys(model.validation)[x]]}
 
 				}
-
 				else{reputation[Object.keys(model.validation)[x]] = 0;}
-
 			}
 
 			model.reputation = reputation;
+
+			console.log('CREATE VALIDATION', model)
 
 			Validation.create(model)
 			.exec(function(err, validation) {
@@ -248,7 +245,9 @@ module.exports = {
 						info:{user: userModel[0], associationModels:[]},
 						priority:75,
 					};
-					
+
+					//console.log('CREATE NOTIFICATION', notificationModel)
+
 					//Notification.create(notificationModel).then(function(notification){
 					//	Notification.publishCreate(follower[0]);
 					//});

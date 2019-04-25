@@ -29,7 +29,7 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 
-		console.log(req.query)
+		console.log('GET TRANSACTION',req.query)
 		
 		Transaction.watch(req);
 
@@ -158,6 +158,7 @@ module.exports = {
 			//PATCH
 			reactions:{plus:0,minus:0},
 		};
+		console.log('CREATE TRANSACTION', model)
 		Transaction.create(model)
 		.exec(function(err, transaction) {
 			if (err) {return console.log(err);}
@@ -185,20 +186,6 @@ module.exports = {
 	},
 
 	update: function (req, res) {},
-
-	destroy: function (req, res) {
-		var id = req.param('id');
-		if (!id) {return res.badRequest('No id provided.');}
-		Transaction.findOne(id).exec(function(err, model) {
-			if (err) {return res.serverError(err);}
-			if (!model) {return res.notFound();}
-			Transaction.destroy(id, function(err) {
-				if (err) {return res.serverError(err);}
-				Transaction.publishDestroy(model.id);
-				return res.json(model);
-			});
-		});
-	}
 	
 };
 
