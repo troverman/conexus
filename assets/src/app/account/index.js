@@ -13,87 +13,53 @@ angular.module( 'conexus.account', [
 	});
 }])
 
-.controller( 'AccountCtrl', ['$location', '$scope', 'config', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $scope, config, titleService, Upload, UserModel ) {
-	titleService.setTitle('Account Settings | CRE8.XYZ');
-	$scope.currentUser = config.currentUser;
-    $scope.editAccountToggleVar = false;
-    $scope.newAccountInformation = $scope.currentUser;
+.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, titleService, Upload, UserModel ) {
+	
+    titleService.setTitle('Account Settings | CRE8.XYZ');
+    if(!$rootScope.currentUser){$location.path('/')}
 
+    $scope.editAccountToggleVar = false;
+    $scope.newAccountInformation = $rootScope.currentUser;
     $scope.gpsTracking = true;
     $scope.notifications = true;
     $scope.browserMining = true;
     $scope.recordAttention = true;
-
-	if(!$scope.currentUser){$location.path('/')}
-
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
     };
     $scope.markers = [];
-
-    //TODO: BETTER
-    UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
-        $scope.newAccountInformation = member;
-        $scope.currentUser = member;
-        $scope.balance = member.balance;
-        $scope.reputation = member.reputation;
-    });
-
     $scope.selectedTab = 'APPS';
-    $scope.selectTab = function(model){
-        $scope.selectedTab = model;
-    };
 
-    $scope.editAccount = function () {
-        UserModel.update($scope.newAccountInformation).then(function(model){
-            console.log(model);
-            $scope.editAccountToggleVar = false;
-        });
-    };
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+    $scope.editAccount = function () {UserModel.update($scope.newAccountInformation).then(function(model){$scope.editAccountToggleVar = false;});};
+    $scope.editAccountToggle = function () {$scope.editAccountToggleVar = $scope.editAccountToggleVar ? false : true;};
 
-    $scope.editAccountToggle = function () {
-        $scope.editAccountToggleVar = $scope.editAccountToggleVar ? false : true;
-    };
-
-    //TODO SERVER | CHAIN
+    //TODO: SERVER | CHAIN
     $scope.lookupBalance = function(){
         //$scope.balanceLook = $scope.balanceLook.toLowerCase();
         if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
         if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
     };
 
+    //TODO: SERVER | CHAIN
     $scope.lookupReputation = function(){
         //$scope.reputationLook = $scope.reputationLook.toLowerCase();
         if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
         if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
     };
-		
+
+    //TODO: IPFS LINKIN
 	$scope.uploadAvatar = function(file){
-        $scope.avatarLoading = true;
-        Upload.upload({
-            url: '/api/user/upload',
-            method: 'POST',
-            data: {picture: file}
-        })
-        .then(function(response){
-            $scope.avatarLoading = false;
+        Upload.upload({url: '/api/user/upload', method: 'POST', data: {picture: file}}).then(function(response){
 			$scope.currentUser.avatarUrl = response.data.amazonUrl;
-            
-            $scope.saving = true;
             var model = {
                 id: $scope.currentUser.id,
                 avatarUrl: $scope.currentUser.avatarUrl,
             };
             UserModel.update(model);
-
         },
-        function(err){
-            $scope.avatarLoading = false;
-        },
-        function (evt) {
-            $scope.avatarPercentage = parseInt(100.0 * evt.loaded / evt.total);;
-        })
+        function (evt) {$scope.avatarPercentage = parseInt(100.0 * evt.loaded / evt.total)})
     };
 
 }]);

@@ -1,5 +1,4 @@
 <div class="row">
-
 	<div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card">
 			<div style="padding:16px;">
@@ -18,9 +17,7 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
-
 		<div class="card">
 		    <form ng-submit="search()" style="display:flex;flex-direction:row;">
 		    	<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
@@ -31,11 +28,9 @@
 		        </div>
 		    </form>
 		</div>
-
 		<div ng-if="currentUser.id == member.id" class="card">
 			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
 		</div>
-
 		<div class="card">
 		 	<div style="background:url('https://source.unsplash.com/1600x900/?code,finance')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -51,10 +46,8 @@
 				<div class="spacing-10"></div>
 			</div>
 		</div>	
-
 	    <div ng-repeat="item in orders">
-	        <div class="card" ng-click="renderToggle(item)">
-
+	        <div class="card" ng-click="renderCardDetail(item)">
 	        	<div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
 	                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 	                    <div style="margin-top: auto;margin-bottom: auto;">
@@ -71,31 +64,24 @@
 	                    </div>
 	                </div>
 	            </div>
-	        	
 	            <div style="padding:16px">
-	            	
 	            	<div style="float:right;text-align:right">
                         <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>  
-
                     <div class="row">
 	                    <div class="col-xs-2">
 	                        <span ng-repeat="(key, value) in item.setAlpha">
 	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
 	                        </span>
 	                    </div>
-
 	                    <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
-
 	                    <div class="col-xs-2">
 	                        <span ng-repeat="(key, value) in item.setBeta">
 	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
 	                        </span>
 	                    </div>
 	                </div>
-
 					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-
 	            </div>
 	            <div class="card-footer">
 	                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
@@ -103,17 +89,7 @@
 	                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 	                <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
 	            </div>
-
-	            <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
-			        <form role="form" ng-submit="createPost(post)">
-			            <text-angular ng-model="newPost.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-			            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newPost.content">create</button>
-			        </form>
-			    </div>
-
 	        </div>
 		</div>
-
 	</div>
-
 </div>	

@@ -10,6 +10,8 @@ angular.module( 'conexus.marketPair', [
 				templateUrl: 'marketPair/index.tpl.html'
 			}
 		},
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
                 return OrderModel.getSome({setAlpha:$stateParams.setAlpha, setBeta:$stateParams.setBeta, limit:400, skip:0, sort:'createdAt DESC'});
@@ -24,9 +26,8 @@ angular.module( 'conexus.marketPair', [
 	});
 }])
 
-.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'config', 'contentList', 'mirrorOrders', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, config, contentList, mirrorOrders, OrderModel, orders, ReactionModel, titleService ) {
+.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'contentList', 'mirrorOrders', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, contentList, mirrorOrders, OrderModel, orders, ReactionModel, titleService ) {
     
-    $scope.currentUser = config.currentUser;
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.setAlpha + ' | ' +  $stateParams.setBeta  + ' | CRE8.XYZ');
 
@@ -391,24 +392,11 @@ angular.module( 'conexus.marketPair', [
 
     console.log($scope.bidAskChart.series[0].data, $scope.bidAskChart.series[1].data);
 
-    $scope.createContent = function(content) {
-        if($scope.currentUser){
-            //TODO
-            $scope.newContent.contentModel = content.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            $scope.newContent.marketPair = 'CRE8/USD';
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];

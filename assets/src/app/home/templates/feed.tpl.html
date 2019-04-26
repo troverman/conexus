@@ -7,7 +7,7 @@
             <div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div class="container" style="margin-top: auto;margin-bottom: auto;">
-                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Account Settings</h1>
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Information & Settings</h1>
                         <p style="color:white;">About your experience.</p>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                 <p style="color:gray;font-style:italic">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style="float:right;height:auto;margin:0px" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
                 <div class="row">
                     <div class="col-md-5 col-xs-12" style="padding-right:5px;padding-left:10px">
-                        <div class="member-card">
+                        <div class="member-card" ng-click="renderReputationToggle(currentUser)">
                             <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                                 <a href="#">
                                     <img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png">
@@ -25,18 +25,20 @@
                             </div>
                             <div style="clear:both"></div>
                             <div class="member-card-info" style="height:auto;padding-left:0%">
-                                <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
+                                <h4 ng-click="$event.stopPropagation()"><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
                                 <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> {{currentUser.status}} Creating Account</p>
                                 <p style="color:gray"><b>Total Reputation</b>: {{currentUser.totalWork}}</p>
+                                <p style="color:gray">{{currentUser.id}}<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></p>
+
                             </div>
-                            <div class="member-card-social">
-                                <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
-                                <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-instagram"></i></a>
-                                <a ng-show="false" href="{{currentUser.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
-                                <a ng-show="false" href="{{currentUser.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
+                            <div ng-show="false" class="member-card-social">
+                                <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}" target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
+                                <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a ng-show="false" href="{{currentUser.socialAccounts.twitter.profileUrl}}" target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
+                                <a ng-show="false" href="{{currentUser.socialAccounts.google.profileUrl}}" target="_blank"><i class="fa fa-google google-icon"></i></a>
                             </div>
                         </div>
-                        <p><a style="color:gray" href="/account"><i class="fas fa-passport"></i> Full Settings</a></p>
+                        <p><a style="color:gray" href="/account"><i class="fas fa-passport"></i> Account Settings</a></p>
                     </div>
                     <div class="col-md-7 col-xs-12" style="padding-right:5px;padding-left:10px">
                         <div class="card" style="margin-top:0px;">
@@ -225,7 +227,6 @@
 
                 <p><b>My Current Positions & Value Map</b></p>
 
-
                 <!--
                 <table>
                     <thead>
@@ -314,7 +315,7 @@
 
     <div class="row" ng-if="!isTutorial">
         <div class="col-md-4 col-sm-12 col-xs-12">
-            <div class="member-card" style="margin-left:-5px;margin-right:-10px;margin-bottom:0px" ng-click="renderReputationToggle(member)">
+            <div class="member-card" style="margin-left:-5px;margin-right:-10px;margin-bottom:0px" ng-click="renderReputationToggle(currentUser)">
                 <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                     <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
                 </div>

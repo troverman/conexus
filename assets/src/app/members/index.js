@@ -10,23 +10,22 @@ angular.module( 'conexus.members', [
 				templateUrl: 'members/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
 		resolve: {
             members: ['UserModel', function(UserModel){
                 return UserModel.getSome({limit:1000, skip:0, sort:'createdAt DESC'});
             }],
-            //ROOTSCOPE..
-            followers: ['FollowerModel', 'config', function(FollowerModel, config) {
-                console.log(config)
-                if (!config.currentUser){null}
-                else{return FollowerModel.getFollowing(config.currentUser);}
+            followers: ['$rootScope', 'FollowerModel', function($rootScope, FollowerModel) {
+                if (!$rootScope.currentUser){return null}
+                else{return FollowerModel.getFollowing($rootScope.currentUser)}
             }],
         }
 	});
 }])
 
-.controller( 'MembersCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'FollowerModel', 'followers', 'lodash', 'members', 'SearchModel', 'titleService', 'toaster', 'UserModel', function MembersController( $rootScope, $sailsSocket, $sce, $scope, config, FollowerModel, followers, lodash, members, SearchModel, titleService, toaster, UserModel ) {
-	titleService.setTitle('Members | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'MembersCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'followers', 'members', 'SearchModel', 'toaster', 'UserModel', function MembersController( $rootScope, $sailsSocket, $sce, $scope, FollowerModel, followers, members, SearchModel, toaster, UserModel ) {
+	
     $scope.members = members;
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;
@@ -69,7 +68,7 @@ angular.module( 'conexus.members', [
     $scope.follow = function(model){
         $scope.newFollower = {
             followed:model.id,
-            follower:$scope.currentUser.id,
+            follower:$rootScope.currentUser.id,
         };
         if (!model.isFollowing){
             FollowerModel.create($scope.newFollower).then(function(followerModel) {

@@ -20,7 +20,12 @@ angular.module( 'conexus.home', [
                 templateUrl: 'home/templates/intro.tpl.html'
             }
         },
+
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
+
+            //TODO: GET FEED
+            //TODO: COMPLEX QUERY
             contentList: ['ContentModel', function(ContentModel){
                 return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
@@ -52,9 +57,12 @@ angular.module( 'conexus.home', [
                 templateUrl: 'home/templates/feed.tpl.html'
             }
         },
+
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
 
-            //GET FEED
+            //TODO: GET FEED
+            //TODO: COMPLEX QUERY
             contentList: ['ContentModel', function(ContentModel){
                 return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
@@ -77,8 +85,8 @@ angular.module( 'conexus.home', [
                 return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
 
-            //GET FEED CUSTOMIZED// 
-
+            //TODO: GET FEED CUSTOMIZED
+            //TODO: COMPLEX QUERY
             followers: ['$rootScope', 'FollowerModel', function($rootScope, FollowerModel) {
                 return FollowerModel.getFollowing($rootScope.currentUser);
             }],
@@ -98,7 +106,7 @@ angular.module( 'conexus.home', [
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
+.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
 
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
@@ -111,6 +119,7 @@ angular.module( 'conexus.home', [
         {title:'NOW IS THE TIME TO CREATE'},
         {title:'BUILDING AN EGALITARIAN SOCIETY'},
     ];
+    
     var vid = angular.element('#introVideo');
     //$scope.selectedIntro = $scope.introObj[1];
     $scope.selectedIntro = $scope.introObj[Math.floor(Math.random()*$scope.introObj.length)];
@@ -129,6 +138,25 @@ angular.module( 'conexus.home', [
     $scope.sorting = false;
     $scope.tasks = tasks;
     $scope.time = time;
+
+    //NEED TO REDUCE QUERIES
+    var promises = [
+        //ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //UserModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //OrderModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //TimeModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+    ];
+
+    //var results = await Promise.all(promises);
+
+    //GET FEED
+    //SEARCH
+    //SearchModel.find().then(function(searchModel){
+    //});
+
 
     //TODO: DEPRECIATE --> PUT IN NAV
     $scope.getLatLng = function() {
@@ -316,6 +344,30 @@ angular.module( 'conexus.home', [
     //FILTERSET
 
 
+    //TODO: ROOTSCOPE
+    $scope.registerUser = function(){
+
+        //$scope.newMember.order = $scope.newOrderNEW;
+
+        //TODO: FORM VALIDATION
+        if ($scope.newMember.password.length < 8){
+
+        }
+        //....
+
+        var data = JSON.stringify($scope.newMember);
+        if (true){ //valid
+            $rootScope.stateIsLoading = true;
+            $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
+                $rootScope.currentUser = newModel.data;
+                $location.path('/');
+            });
+        }
+
+    };
+
+
+    //TODO: DEPRECIATE
     $scope.reply = function(item){
         if($rootScope.currentUser){
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
@@ -382,6 +434,26 @@ angular.module( 'conexus.home', [
         address: $rootScope.currentUser.id,
         type: 'PROFILE',
     };
+
+    //NEED TO REDUCE QUERIES
+    var promises = [
+        //ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //UserModel.getSome({limit:30, skip:0, sort:'createdAt DESC'}),
+        //OrderModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //TimeModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'}),
+        //FollowerModel.getFollowing($rootScope.currentUser),
+        //MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}),
+        //OrderModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}),
+    ];
+            
+    //GET FEED
+    //SEARCH
+    //SearchModel.find().then(function(searchModel){
+    //});
+
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },

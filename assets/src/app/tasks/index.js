@@ -10,6 +10,8 @@ angular.module( 'conexus.tasks', [
 				templateUrl: 'tasks/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             tasks: ['TaskModel', function(TaskModel){
                 return TaskModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
@@ -18,11 +20,8 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function TasksController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ReactionModel, TaskModel, tasks, titleService ) {
+.controller( 'TasksCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'TaskModel', 'tasks', function TasksController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, TaskModel, tasks ) {
 	
-    $scope.currentUser = config.currentUser;
-    titleService.setTitle('Tasks | CRE8.XYZ');
-    
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
@@ -35,7 +34,7 @@ angular.module( 'conexus.tasks', [
 
     $scope.tasks = tasks.map(function(obj){
         obj.model = 'TASK';
-        //TEMP HARDCODE -- MOVE TO PROTOCOL
+        //TODO: DEPRECIATE -- MOVE TO PROTOCOL
         obj.tokens = [];
         obj.tokens.push('CRE8');
         obj.tokens.push('CRE8+TIME');
@@ -50,11 +49,12 @@ angular.module( 'conexus.tasks', [
         return obj;
     });
 
+    //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
             var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
             if (taskIndex != -1){
@@ -66,6 +66,18 @@ angular.module( 'conexus.tasks', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //TODO: DEPRECIATE
+    $scope.reply = function(item){
+        if ($scope.currentUser){$mdSidenav('content').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+
+
+
+
+    //COMPLEX QUERIES && POPULATION
+    //TODO: BETTER
     $scope.loadAssociations = function(){
         $scope.associations = $scope.tasks.map(function(obj){
             if (obj.project){return obj.project.title;}
@@ -101,8 +113,6 @@ angular.module( 'conexus.tasks', [
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});     
     };
-
-    //IMPROVE :)
     $scope.init = function(){
         $scope.loadAssociations();
         $scope.loadLocations();
@@ -110,27 +120,13 @@ angular.module( 'conexus.tasks', [
         $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
     };
     $scope.init();
+    //TODO: BETTER
+    //COMPLEX QUERIES && POPULATION
 
 
 
 
-
-
-
-
-
-    //HMMM
-
-    //DEPRECIATE
-    $scope.reply = function(item){
-        if ($scope.currentUser){
-            //var taskIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            //if (contentIndex != -1){$scope.tasks[taskIndex].showReply = !$scope.tasks[taskIndex].showReply;}
-            $mdSidenav('content').toggle();
-        }
-        else{$mdSidenav('login').toggle();}
-    };
-
+    //TODO: COMPLEX QUERY && FILTER
     $scope.selectSort = function(sort){
 		$scope.selectedSort = sort;
 		$rootScope.stateIsLoading = true;
@@ -142,7 +138,6 @@ angular.module( 'conexus.tasks', [
             });
 		});
 	};
-
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         var search = $scope.searchQuery.map(function(obj){
@@ -157,98 +152,45 @@ angular.module( 'conexus.tasks', [
             });
         });
     };
-
     $scope.filterContent = function(filter) {
-        //TODO: COMPLEX QUERY
-        //$scope.searchQuery = [];
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
         TaskModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
-            tasks.map(function(obj){
-                obj.model = 'TASK';
-                //TEMP HARDCODE -- MOVE TO PROTOCOL
-                obj.tokens = [];
-                obj.tokens.push('CRE8');
-                obj.tokens.push('CRE8+TIME');
-                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
-                if (obj.tags){
-                    obj.tags = obj.tags.split(',');
-                    for (x in obj.tags){
-                        obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
-                        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
-                    }
-                }
-                return obj;
-            });
+            tasks.map(function(obj){obj.model = 'TASK'});
             $scope.init();
         });
     };
-
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
         TaskModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
             $rootScope.stateIsLoading = false;
-            tasks.map(function(obj){
-                obj.model = 'TASK';
-                //TEMP HARDCODE -- MOVE TO PROTOCOL
-                obj.tokens = [];
-                obj.tokens.push('CRE8');
-                obj.tokens.push('CRE8+TIME');
-                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
-                if (obj.tags){
-                    obj.tags = obj.tags.split(',');
-                    for (x in obj.tags){
-                        obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
-                        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
-                    }
-                }
-                return obj;
-            });
+            tasks.map(function(obj){obj.model = 'TASK'});
             Array.prototype.push.apply($scope.tasks, tasks);
             $scope.init();
         });
     };
-
-
-    //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
-    //TODO: PREVENT DOUBLE LOAD.. NAV CHANGES THIS
     $rootScope.$watch('searchQueryNav' ,function(){
-
         $scope.searchQuery = [];
-
         for(x in Object.keys($rootScope.searchQueryNav)){
-
             for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-
                 if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
-
                     $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y]);
-
                 }
-
             }
-
         }
-
         console.log($scope.searchQuery)
-
     }, true);
-
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
-
         if (newValue !== oldValue) {
-
             //LOCATION IS BY ASSOCIATED PROJECT(S)
             $rootScope.stateIsLoading = true;
-
             $scope.searchQuery = $scope.searchQuery.map(function(obj){
                 if (!obj.query && obj.text){obj.query = obj.text}
                 return obj.query
             }).join(',');
-
             TaskModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
                 console.log(models)
                 $rootScope.stateIsLoading = false;
@@ -259,11 +201,18 @@ angular.module( 'conexus.tasks', [
                 });
                 $scope.init();
             });
-
         }
-
     }, true);
+    //TODO: COMPLEX QUERY && FILTER
 
+
+
+
+
+
+
+
+    //TODO: SOCKET
     $sailsSocket.subscribe('task', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -273,9 +222,6 @@ angular.module( 'conexus.tasks', [
                     if (obj.tags){obj.tags = obj.tags.split(',')}
                     return obj;
                 });
-                break;
-            case 'destroyed':
-                lodash.remove($scope.tasks, {id: envelope.id});
                 break;
         }
     });

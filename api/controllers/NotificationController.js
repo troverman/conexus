@@ -9,7 +9,6 @@ module.exports = {
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
-		console.log(req.query);
 		console.log('GET NOTIFICATION', req.query);
 
 		Notification.watch(req);
@@ -57,9 +56,7 @@ module.exports = {
 
 	update: function(req,res){
 		var id = req.param('id');
-		var model = {
-			isRead: req.param('isRead'),
-		};
+		var model = {isRead: req.param('isRead')};
 		console.log('UPDATE NOTIFICATION', id, model);
 		Notification.update({id: id}, model)
 		.then(function(model){

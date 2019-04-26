@@ -10,6 +10,8 @@ angular.module( 'conexus.marketPlace', [
 				templateUrl: 'marketPlace/index.tpl.html'
 			}
 		},
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             items: ['ItemModel', function(ItemModel) {
                 return ItemModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
@@ -18,9 +20,8 @@ angular.module( 'conexus.marketPlace', [
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'ItemModel', 'items', 'ReactionModel', 'titleService', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, ItemModel, items, ReactionModel, titleService ) {
-    titleService.setTitle('Marketplace | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'ItemModel', 'items', 'ReactionModel', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, ItemModel, items, ReactionModel ) {
+
     $scope.newItem = {};
     $scope.newReaction = {};
     $scope.stateParams = $stateParams;
@@ -33,20 +34,6 @@ angular.module( 'conexus.marketPlace', [
     $scope.selectedTag = '';
     $scope.skip = 0;
     $scope.sortedLocationArray = [{element:'Knoxville, TN'}, {element:'New York City'}, {element:'Chapel Hill'}];
-
-    $rootScope.$watch('searchQueryNav' ,function(){
-
-        //NEW VALUE VS OLD VALUE VS BLANK
-        //if ($scope.searchQuery!=''){
-            $scope.searchQuery = [];
-            for(x in Object.keys($rootScope.searchQueryNav)){
-                for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
-                }
-            }
-        //}
-
-    }, true);
 
     //TODO: BETTER
     $scope.loadAssets = function(){
@@ -94,12 +81,12 @@ angular.module( 'conexus.marketPlace', [
     $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationArray}
 
     $scope.createReaction = function(item, type){
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:'ITEM', id:item.id}];
             //TODO: FIVE STAR ETC
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
             if (index != -1){$scope.items[index].reactions[type]++;}
             ReactionModel.create($scope.newReaction);
@@ -129,11 +116,7 @@ angular.module( 'conexus.marketPlace', [
     };
 
     $scope.reply = function(item){
-        if($scope.currentUser){
-            //var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
-            //$scope.items[index].showReply = !$scope.items[index].showReply;
-            $mdSidenav('content').toggle();
-        }
+        if($rootScope.currentUser){$mdSidenav('content').toggle();}
         else{$mdSidenav('login').toggle()}
     };
 

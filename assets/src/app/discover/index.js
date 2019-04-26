@@ -10,7 +10,12 @@ angular.module( 'conexus.discover', [
 				templateUrl: 'discover/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
+
+            //TODO: GET FEED ...
+            //TODO: COMPLEX QUERY
             contentList: ['ContentModel', function(ContentModel){
                 return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
@@ -27,8 +32,9 @@ angular.module( 'conexus.discover', [
                 return TimeModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
-
 	});
+
+    //TODO: DEPRECIATE?
 	uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
         v: '3.20',
@@ -36,9 +42,8 @@ angular.module( 'conexus.discover', [
     });
 }])
 
-.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'members', 'tasks', 'time', 'titleService', 'projects', 'uiGmapGoogleMapApi', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, contentList, members, tasks, time, titleService, projects, uiGmapGoogleMapApi ) {
+.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'members', 'tasks', 'time', 'projects', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, contentList, members, tasks, time, projects ) {
 	
-    titleService.setTitle('Discover | CRE8.XYZ');
     $scope.contentList = contentList;
     $scope.chart = {
         chart: {
@@ -73,8 +78,6 @@ angular.module( 'conexus.discover', [
         tooltip: {},
         credits:{enabled:false},
     };
-
-
     $scope.chart1 = {
         chart: {zoomType: 'x',},
         series: [{
@@ -93,17 +96,14 @@ angular.module( 'conexus.discover', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-
     for (var i = 0;i<40;i++){
         $scope.chart1.series[0].data.push(100*Math.random());
         $scope.chart1.series[1].data.push(100*Math.random());
     }
-
 	$scope.map = {
 		center: {latitude: 35.902023, longitude: -84.1507067 },
 		zoom: 9
 	};
-    
     $scope.markers = [];
 	$scope.members = members;
 	$scope.options = {scrollwheel: false};
@@ -132,18 +132,16 @@ angular.module( 'conexus.discover', [
     }
 
     $scope.createReaction = function(item, type){
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.contentList[contentIndex].reactions[type]++;
             ReactionModel.create($scope.newReaction);
         }
         else{$mdSidenav('login').toggle()}
     };
-
-    $scope.search = function(){};
 
 }]);

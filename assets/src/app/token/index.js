@@ -10,6 +10,8 @@ angular.module( 'conexus.token', [
 				templateUrl: 'token/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
                 return TokenModel.getSome({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -18,12 +20,7 @@ angular.module( 'conexus.token', [
 	});
 }])
 
-//MARKETS, VS TOKENS, VS MARKET, VS TOKEN
-
-.controller( 'TokenCtrl', ['$scope', '$stateParams', 'config', 'titleService', 'token', function MarketController( $scope, $stateParams, config, titleService, token ) {
-    $scope.currentUser = config.currentUser;
-    $scope.token = token[0];
-
-    titleService.setTitle('Token | ' + $scope.token.string + ' | CRE8.XYZ');
-    
+//TODO: MARKET, VS TOKEN
+.controller( 'TokenCtrl', ['$scope', 'token', function MarketController( $scope, token ) {
+    $scope.token = token[0];    
 }]);

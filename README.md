@@ -1,10 +1,8 @@
 ![conexus](https://www.conex.us/images/conexus-black.png "conex.us")
 # Conexus
 ## [Wiki](wiki)
-## Create A Transparent Network | Connect Collab Create
-## CRE8coin
-### Peer Setup Procedure
-> Future in app mining scheduled. 
+## Create A Transparent Network
+> Connect Collab Create
 
 ```
 // in "/path/to/folder" copy https://pastebin.com/JfQtY8hw as geneis.json 
@@ -40,19 +38,32 @@ contract MultidimensionalToken {
 }
 ```
 
-## API
+## [API](https://www.cre8.xyz/developers)
 ### Filters
-> Every endpoint can be filtered by each model param: {DESC, ASC}
 ```javascript
-//req.params.query
-var query = {
-    limit: 10,
-    skip: 10,
-    sort: 'createdAt DESC', // modelParam | {'DESC', 'ASC'}
-    filter:{
-    	obj: param
-    }
-};
+var query = [{
+    filter:[{
+        model:'Association, Task, Project',
+        modelParam:'association, id, location, query, tag, ...',
+        query:'query',
+        association:{
+            population:'boolean',
+            depth:'integer',
+        },
+        params:{
+            limit:'integer',
+            skip:'integer',
+            sort:'modelParam sortParam',
+        },
+        chain:'logic [\'AND\',\'OR\']',
+    }],
+    params:{
+        limit:'integer',
+        skip:'integer',
+        sort:'modelParam sortParam',
+    },
+    chain:'logic [\'AND\',\'OR\']'
+}]
 ```
 
 ### Models | Endpoints
@@ -64,8 +75,8 @@ var associationModel = {
 
 };
 ```
-##### get /api/assoication
-##### post /api/assoication
+> get /api/assoication
+> post /api/assoication
 
 #### Content
 > This is the Content Model
@@ -82,8 +93,8 @@ var contentModel = {
     user: userObj
 };
 ```
-##### get /api/content
-##### post /api/content
+> get /api/content
+> post /api/content
 
 #### Follower
 > This is the Follower Model
@@ -94,8 +105,8 @@ var followerModel = {
     follower: userObj
 };
 ```
-##### get /api/follower
-##### post /api/follower
+> get /api/follower
+> post /api/follower
 
 #### Item
 > This is the Item Model
@@ -114,8 +125,8 @@ var itemModel = {
     user: userObj
 };
 ```
-##### get /api/item
-##### post /api/item
+> get /api/item
+> post /api/item
 
 #### Location
 > This is the Location Model
@@ -127,8 +138,8 @@ var location = {
     lng: string
 };
 ```
-##### get /api/location
-##### post /api/location
+> get /api/location
+> post /api/location
 
 #### Motion
 > This is the Motion Model
@@ -137,8 +148,8 @@ var motionModel = {
 
 };
 ```
-##### get /api/motion
-##### post /api/motion
+> get /api/motion
+> post /api/motion
 
 #### Notification
 > This is the Notification Model
@@ -149,7 +160,7 @@ var notificationModel = {
     user: userObj
 };
 ```
-##### get /api/notification
+> get /api/notification
 
 #### Order
 > This is the Order Model
@@ -163,8 +174,8 @@ var orderModel = {
     user: userObj
 };
 ```
-##### get /api/order
-##### post /api/order
+> get /api/order
+> post /api/order
 
 #### Passport
 > This is the Passport Model
@@ -177,8 +188,8 @@ var passportModel = {
     user: userObj
 };
 ```
-##### get /api/passport
-##### post /api/passport
+> get /api/passport
+> post /api/passport
 
 #### Project
 > This is the Project Model
@@ -195,8 +206,8 @@ var projectModel = {
     user: userObj
 };
 ```
-##### get /api/project
-##### post /api/project
+> get /api/project
+> post /api/project
 
 #### ProjectMember
 > This is the ProjectMember Model
@@ -206,8 +217,8 @@ var projectMemberModel = {
     user: userObj
 };
 ```
-##### get /api/projectmember
-##### post /api/projectmember
+> get /api/projectmember
+> post /api/projectmember
 
 #### Reaction
 > This is the Reaction Model
@@ -220,8 +231,8 @@ var reactionModel = {
     user: userObj
 };
 ```
-##### get /api/reaction
-##### post /api/reaction
+> get /api/reaction
+> post /api/reaction
 
 #### Task
 > This is the Task Model
@@ -236,8 +247,8 @@ var taskModel = {
     user: userObj //CREATOR
 };
 ```
-##### get /api/task
-##### post /api/task
+> get /api/task
+> post /api/task
 
 #### Time
 > This is the Time Model
@@ -249,8 +260,8 @@ var timeModel = {
     user: userObj
 };
 ```
-##### get /api/time
-##### post /api/time
+> get /api/time
+> post /api/time
 
 #### Token
 > This is the Token Model
@@ -262,8 +273,8 @@ var tokenModel = {
     info: infoObj
 };
 ```
-##### get /api/token
-##### post /api/token
+> get /api/token
+> post /api/token
 
 #### Transaction
 > This is the Transaction Model
@@ -288,8 +299,8 @@ amountSet = {
 }
 ```
 
-##### get /api/transaction
-##### post /api/transaction
+> get /api/transaction
+> post /api/transaction
 
 #### User
 > This is the User Model
@@ -305,8 +316,8 @@ var userModel = {
     walletAddress: string
 };
 ```
-##### get /api/user
-##### post /api/user
+> get /api/user
+> post /api/user
 
 #### Validation
 > This is the Validation Model
@@ -319,5 +330,5 @@ var validationModel = {
     user: userObj
 };
 ```
-##### get /api/validation
-##### post /api/validation
+> get /api/validation
+> post /api/validation

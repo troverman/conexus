@@ -18,8 +18,8 @@ angular.module( 'conexus.association', [
 	});
 }])
 
-.controller( 'AssociationCtrl', ['$sce', '$scope', 'titleService', 'validations', function AssociationController( $sce, $scope, titleService, validations ) {
-	titleService.setTitle('Association | CRE8.XYZ');
+.controller( 'AssociationCtrl', ['$sce', '$scope', 'validations', function AssociationController( $sce, $scope, validations ) {
+
     $scope.validations = validations;
     //ASSOCIATION IS JSON CONTEXT + AVG SCORE && SET OF ASSOCIATED MODELS
 

@@ -1,19 +1,84 @@
 /**
  * SearchController
- */
+
+	var query = [{
+	    filter:[{
+	        model:'Association, Task, Project',
+	        modelParam:'association, id, location, query, tag, ...',
+	        query:'query',
+	        association:{
+	            population:'boolean',
+	            depth:'integer',
+	        },
+	        params:{
+	            limit:'integer',
+	            skip:'integer',
+	            sort:'modelParam sortParam',
+	        },
+	        chain:'logic [\'AND\',\'OR\']',
+	    }],
+	    params:{
+	        limit:'integer',
+	        skip:'integer',
+	        sort:'modelParam sortParam',
+	    },
+	    chain:'logic [\'AND\',\'OR\']'
+	}];
+
+*/
 
 module.exports = {
 
 	//CAN HANDLE ALL API CALLS..
 	search: function (req, res) {
 
+
+		//TODO: COMPLEX QUERY
+		console.log(req.query);
+		var querySet = JSON.parse(JSON.stringify(req.query));
+		//console.log(query);
+
+		//REDUCTION LOGIC
+
+		for (x in querySet){
+
+			var query = JSON.parse(querySet[x]);
+
+			//console.log(query.params);
+
+			console.log('query.filter')
+
+			if (query.chain){
+				console.log(query.chain);
+			}
+
+
+			for (y in query.filter){
+
+				console.log(query.filter[y])	
+
+				//console.log(query.filter[y].association)
+				//console.log(query.filter[y].params)
+
+				if (query.filter[y].chain){
+					console.log(query.filter[y].chain)
+				}
+
+				console.log(query.filter[y].params)
+
+			}
+
+		}
+
+	
+
+
+
 		var searchQuery = req.query.query;
 		var tag = req.query.tag;
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
-
-		console.log(req.query)
 
 		if (req.query.model = 'CONTENT'){}
 		if (req.query.model = 'ITEM'){}
@@ -24,24 +89,13 @@ module.exports = {
 		if (req.query.model == 'PROJECT'){
 
 			var query = JSON.parse(JSON.stringify(req.query.query));
-			console.log(query);
+			//console.log(query);
 
 			query.map(function(obj){
 				obj = JSON.parse(JSON.stringify(obj))
 			});
 
-			console.log(query)
-
-			//TAGS
-			//var tags = query.filter(function(obj){
-			//	obj.type = 'TAG';
-			//});
-			//console.log(tags)
-			//COMPLEX QUERY..
-			//ASSOCIATION
-			//LOCATION
-			//STRING
-			//TAG
+			//console.log(query);
 
 			Project.find({tags:{contains: tag}})
 			.limit(limit)

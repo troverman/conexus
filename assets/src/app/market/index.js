@@ -10,6 +10,8 @@ angular.module( 'conexus.market', [
 				templateUrl: 'market/index.tpl.html'
 			}
 		},
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
                 return OrderModel.getSome({market:$stateParams.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -21,8 +23,8 @@ angular.module( 'conexus.market', [
 	});
 }])
 
-.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'config', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, config, OrderModel, orders, titleService, token ) {
-    $scope.currentUser = config.currentUser;
+.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, OrderModel, orders, titleService, token ) {
+   
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 

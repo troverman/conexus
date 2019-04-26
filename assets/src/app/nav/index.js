@@ -649,6 +649,7 @@ angular.module( 'conexus.nav', [
             yAxis: {title: {text: null}},
             credits:{enabled:false},
         };
+
         for (x in Object.keys($scope.reputation)){
             if ($scope.reputation[Object.keys($scope.reputation)[x]]){
                 $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
@@ -661,6 +662,78 @@ angular.module( 'conexus.nav', [
     //TODO: RENDER PROJECT TOGGLE
 
     //$rootScope.reply = function(){};
+
+    $rootScope.statsToggle = function(){
+
+        $scope.closeAllNav();
+
+        $scope.chart = {
+            chart: {
+                zoomType: 'x',
+            },
+            series: [],
+            title: {text: ''},
+            xAxis: {
+                type: 'datetime',
+                currentMin: 0,
+                currentMax: 20,
+                title: null,
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey'
+            },
+            yAxis: [{
+                title: {text: null},
+            }],
+            credits:{enabled:false},
+        };
+        $scope.chart.series = [{
+            id: 'attentionTokenization',
+            type: 'spline',
+            name: 'Attention',
+            data: []
+        },{
+            id: 'reactionTokenization',
+            type: 'spline',
+            name: 'Reaction',
+            data: []
+        }, {
+            type: 'sma',
+            id: 'sma1',
+            linkedTo: 'attentionTokenization',
+            params: {period: 24},
+            showInLegend: true,
+        },{
+            type: 'sma',
+            id: 'sma2',
+            linkedTo: 'attentionTokenization',
+            params: {period: 24*7},
+            showInLegend: true,
+        }];
+        for(var i=0;i<100;i++){
+            var date = new Date();
+            date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+            if (i == 0){
+                $scope.chart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
+                $scope.chart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
+            }
+            else{
+                var random = 1.21*Math.random();
+                var random1 = Math.random();
+                if (random > random1){
+                    $scope.chart.series[0].data.push([date.getTime(),$scope.chart.series[0].data[i-1][1]+3*Math.random()])
+                    $scope.chart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+                else{
+                    $scope.chart.series[0].data.push([date.getTime(),$scope.chart.series[0].data[i-1][1]-3*Math.random()])
+                    $scope.chart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+            }
+        }
+
+        $mdSidenav('stats').toggle();
+
+    };
 
     $rootScope.subNavToggle = function(){$mdSidenav('subNav').toggle()};
 
@@ -904,6 +977,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
         $mdSidenav('renderValidation').close();
+        $mdSidenav('stats').close();
         $mdSidenav('subNav').close();
         $mdSidenav('task').close();
         $mdSidenav('time').close();

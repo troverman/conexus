@@ -18,8 +18,7 @@ angular.module( 'conexus.transparency', [
     });
 }])
 
-.controller( 'TransparencyCtrl', ['$scope', 'titleService', function TransparencyController( $scope, titleService ) {
-	titleService.setTitle('Transparency | CRE8.XYZ');
+.controller( 'TransparencyCtrl', ['$scope', function TransparencyController( $scope, titleService ) {
     
     //TODO: REAL DATA
     $scope.peers = [];

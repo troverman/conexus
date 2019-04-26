@@ -10,6 +10,8 @@ angular.module( 'conexus.about', [
 				templateUrl: 'about/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             contentList: ['ContentModel', function(ContentModel){
                 return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
@@ -24,18 +26,19 @@ angular.module( 'conexus.about', [
 	});
 }])
 
-.controller( 'AboutCtrl', ['$sce', '$scope', 'contentList', 'titleService', 'projects', 'tasks', function AboutController( $sce, $scope, contentList, titleService, projects, tasks ) {
-	//titleService.setTitle('About | CRE8.XYZ');
+.controller( 'AboutCtrl', ['$sce', '$scope', 'contentList', 'projects', 'tasks', function AboutController( $sce, $scope, contentList, projects, tasks ) {
 
-    $scope.videos = ['videos/rocket.webm','videos/cube.mp4','videos/energy.mp4', 'videos/galaxies.mp4','videos/geometry.mp4', 'videos/video.mp4']//, 'https://s3-us-west-2.amazonaws.com/voetr/washington.mp4'];
+    $scope.videos = ['videos/rocket.webm','videos/cube.mp4','videos/energy.mp4', 'videos/galaxies.mp4','videos/geometry.mp4', 'videos/video.mp4']
     $scope.selectedVideo = $scope.videos[Math.floor(Math.random()*$scope.videos.length)];
-    $scope.selectedVideo = 'videos/cube.mp4';//$scope.videos[Math.floor(Math.random()*$scope.videos.length)];
+    $scope.selectedVideo = 'videos/cube.mp4';
+    //$scope.videos[Math.floor(Math.random()*$scope.videos.length)];
 
-    //TODO
+    //TODO: COMPLEX QUERY..
     $scope.contentList = contentList;
     $scope.projects = projects;
     $scope.tasks = tasks;
 
+    //TODO: REAL CHARTS
 	$scope.chart = {
         chart: {zoomType: 'x',},
         series: [{
@@ -75,7 +78,6 @@ angular.module( 'conexus.about', [
         var random1 = Math.floor(255*Math.random());
         var random2 = Math.floor(255*Math.random());
         var random3 = Math.floor(255*Math.random());
-
         $scope.create.series.push({
             id: 'bar'+x,
             type: 'column',
@@ -85,13 +87,10 @@ angular.module( 'conexus.about', [
             color: 'rgba('+random1+','+random2+','+random3+',1)',
             fillOpacity: 0.3,
         });
-
     }
 
     for (x in $scope.marketsChart){
-        for (y in $scope.marketsChart){
-            $scope.create.series[y].data.push((1+1*Math.random())/2);
-        }
+        for (y in $scope.marketsChart){$scope.create.series[y].data.push((1+1*Math.random())/2);}
     }
 
     $scope.chartMap = {
@@ -166,13 +165,10 @@ angular.module( 'conexus.about', [
         {text:'VALIDATE'},
     ];
 
-
     for (x in $scope.baseMarkets){
-
         var random1 = Math.floor(255*Math.random());
         var random2 = Math.floor(255*Math.random());
         var random3 = Math.floor(255*Math.random());
-
         $scope.chartMap.series.push({
             id: 'values'+x,
             type: 'area',
@@ -182,7 +178,6 @@ angular.module( 'conexus.about', [
             color: 'rgba('+random1+','+random2+','+random3+',0.3)',
             fillOpacity: 0.3,
         });
-
     }
 
     for (x in $scope.markets){
@@ -194,10 +189,8 @@ angular.module( 'conexus.about', [
 
 
 
-
-
-
-
+    //TODO: BETTER
+    //TODO: CONTAIN VALUE MAP!!!
     //VALUE MAP CTA
     $scope.newMember = {};
     $scope.newOrder = [];
@@ -425,7 +418,7 @@ angular.module( 'conexus.about', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
+    //TODO: WORK ON IT ^^^
 
 
 }]);

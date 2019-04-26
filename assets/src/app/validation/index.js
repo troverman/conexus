@@ -10,6 +10,8 @@ angular.module( 'conexus.validation', [
                 templateUrl: 'validation/index.tpl.html'
             }
         },
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             validation: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
                 return ValidationModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -21,27 +23,29 @@ angular.module( 'conexus.validation', [
     });
 }])
 
-.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ReactionModel', 'titleService', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ReactionModel, titleService, validation, ValidationModel) {
-    titleService.setTitle('Validation | CRE8.XYZ');
+.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ReactionModel', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, contentList, ReactionModel, validation, ValidationModel) {
+    
+
+    $scope.validation = validation[0];
+    $scope.validation.model = 'VALIDATION';
+    
+    //TODO: FIX
+    $rootScope.associatedModels = [{type:'VALIDATION', address:$scope.validation.id}];
+
     $scope.contentList = contentList;
-    $scope.currentUser = config.currentUser;
     $scope.newContent = {};
     $scope.newReaction = {};
     
-    //CAN IMPROVE EFFIC 
+    //TODO: CAN IMPROVE EFFIC 
     $scope.reputationList = [];
     $scope.reputationWeightedList = []
-    $scope.validation = validation[0];
-    //TODO: STORE IN DATA
-    $scope.validation.model = 'VALIDATION';
-    //nested context.. ie content.. think --> profile = member; association always 100;
-    //FIX?
-    $rootScope.associatedModels = [{type:'VALIDATION', address:$scope.validation.id}];
+
     $scope.validationList = [];
     for (x in Object.keys($scope.validation.validation)){
         $scope.validationList.push([Object.keys($scope.validation.validation)[x], $scope.validation.validation[Object.keys($scope.validation.validation)[x]]]);
         $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);
-        //SOME WEIGHING PROTOCL HERE -- CAN BE FUNCTIONAL.. SIMPLE MULTIPLICATION NOW
+        
+        //TODO: CHARTER: SOME WEIGHING PROTOCL HERE -- CAN BE FUNCTIONAL.. SIMPLE MULTIPLICATION NOW
         $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.validation[Object.keys($scope.validation.validation)[x]]]);
     }
 
@@ -84,7 +88,7 @@ angular.module( 'conexus.validation', [
         plotOptions: {column: {minPointLength: 3}},
     };
 
-    //CAN IMRPOVE
+    //TODO: CAN IMRPOVE
     for (x in $scope.validationList){
         $scope.validationColumn.series[0].data.push($scope.validationList[x][1]);
         $scope.validationColumn.series[1].data.push($scope.reputationList[x][1]);
@@ -95,12 +99,12 @@ angular.module( 'conexus.validation', [
         $scope.validationColumn.xAxis.categories.push($scope.validationList[x][0]);
     }
 
-    //DEPRECIATE
+    //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (index != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
@@ -115,11 +119,11 @@ angular.module( 'conexus.validation', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //DEPRECIATE
+    //TODO: DEPRECIATE
     $scope.createValidation = function(){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newValidation.validation = $scope.validation.id;
-            $scope.newValidation.user = $scope.currentUser.id;
+            $scope.newValidation.user = $rootScope.currentUser.id;
             ValidationModel.create($scope.newValidation).then(function(model){
                 $scope.newValidation = {};
                 for (x in $scope.tags){
@@ -130,14 +134,9 @@ angular.module( 'conexus.validation', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //DEPRECIATE
+    //TODO: DEPRECIATE
     $scope.reply = function(item){
-        if ($scope.currentUser){
-            //var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            //if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
-            //else{$scope.validation.showReply = !$scope.validation.showReply;}
-            $mdSidenav('content').toggle()
-        }
+        if ($rootScope.currentUser){$mdSidenav('content').toggle()}
         else{$mdSidenav('login').toggle();}
     };
 

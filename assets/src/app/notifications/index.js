@@ -10,6 +10,8 @@ angular.module( 'conexus.notifications', [
                 templateUrl: 'notifications/index.tpl.html'
             }
         },
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             notifications: ['$rootScope', 'NotificationModel', function($rootScope, NotificationModel){
                 return NotificationModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -18,8 +20,8 @@ angular.module( 'conexus.notifications', [
     });
 }])
 
-.controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'NotificationModel', 'notifications', 'titleService', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, NotificationModel, notifications, titleService, toaster) {
-    titleService.setTitle('Notifications | CRE8.XYZ');
+.controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'NotificationModel', 'notifications', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, NotificationModel, notifications, toaster) {
+
     $scope.notifications = notifications;
 
     //TODO
@@ -135,7 +137,5 @@ angular.module( 'conexus.notifications', [
         }
 
     };
-
-
 
 }]);

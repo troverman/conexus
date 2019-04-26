@@ -10,6 +10,8 @@ angular.module( 'conexus.item', [
 				templateUrl: 'item/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
                 return ItemModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -21,9 +23,8 @@ angular.module( 'conexus.item', [
 	});
 }])
 
-.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$sce', '$scope', '$stateParams', 'config', 'contentList', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $rootScope, $location, $mdSidenav, $sce, $scope, $stateParams, config, contentList, item, OrderModel, ReactionModel, titleService ) {
+.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$sce', '$scope', '$stateParams', 'contentList', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $rootScope, $location, $mdSidenav, $sce, $scope, $stateParams, contentList, item, OrderModel, ReactionModel, titleService ) {
    
-    $scope.currentUser = config.currentUser;
     $scope.contentList = contentList;
     $scope.item = item;
     $scope.item.model = 'ITEM';
@@ -34,6 +35,7 @@ angular.module( 'conexus.item', [
         type: 'MARKET',
     }];
 
+    //TODO: DEPRECIATE
     titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');
 
     $scope.inputVector = []; 
@@ -84,10 +86,10 @@ angular.module( 'conexus.item', [
 
 
      $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
@@ -134,7 +136,7 @@ angular.module( 'conexus.item', [
     $scope.purchaseToggle = function() {$scope.purchaseToggleVar = !$scope.purchaseToggleVar};
 
     $scope.reply = function(item){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
             else{$scope.item.showReply = !$scope.item.showReply;}

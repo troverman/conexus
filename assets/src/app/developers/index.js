@@ -11,13 +11,13 @@ angular.module( 'conexus.developers', [
             }
         }
     });
-    hljsServiceProvider.setOptions({
-        //tabReplace: '    '
-    });
+
+    //TODO
+    hljsServiceProvider.setOptions({});
 }])
 
-.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'ContentModel', 'lodash', 'OrderModel', 'ReactionModel', 'titleService', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, ContentModel, lodash, OrderModel, ReactionModel, titleService, TransactionModel, ValidationModel ) {
-    titleService.setTitle('Developers | CRE8.XYZ');
+.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'OrderModel', 'ReactionModel', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ContentModel, OrderModel, ReactionModel, TransactionModel, ValidationModel ) {
+
     $scope.results = {
         action:'[{}]',
         app:'[{}]',

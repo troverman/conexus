@@ -40,6 +40,8 @@ angular.module( 'conexus.search', [
                 templateUrl: 'search/index.tpl.html'
             }
         },
+
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             searchResults: ['$stateParams','SearchModel', function($stateParams, SearchModel) {
                 var searchModel = {
@@ -55,7 +57,8 @@ angular.module( 'conexus.search', [
     });
 }])
 
-.controller( 'SearchController', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'config', 'lodash', 'titleService', 'SearchModel', 'searchResults', function SearchController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, config, lodash, titleService, SearchModel, searchResults ) {
+.controller( 'SearchController', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'titleService', 'SearchModel', 'searchResults', function SearchController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, titleService, SearchModel, searchResults ) {
+    
     $scope.searchResults = searchResults;
     $scope.searchQuery = [{text:$stateParams.searchQuery}];
     $scope.searchQueryString = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
@@ -76,13 +79,13 @@ angular.module( 'conexus.search', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    //IF LOCATION
+    //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.searchResults.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.searchResults[index].reactions[type]++;
             ReactionModel.create($scope.newReaction);
@@ -109,6 +112,8 @@ angular.module( 'conexus.search', [
     }
     $scope.loadTags();
 
+
+    //TODO:.. COMPLEX QUERY
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         var searchModel = {
@@ -128,7 +133,7 @@ angular.module( 'conexus.search', [
         });
     };
 
-    //WATCHERS
+    //TODO:.. COMPLEX QUERY
     $scope.$watch('searchQuery', function(newValue, oldValue){
         if (newValue !== oldValue) {
            $rootScope.stateIsLoading = true;
@@ -149,6 +154,6 @@ angular.module( 'conexus.search', [
             });
         }
     }, true);
-    //WATCHERS
+    //TODO:.. COMPLEX QUERY
  
 }]);

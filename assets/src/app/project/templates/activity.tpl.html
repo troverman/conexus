@@ -29,7 +29,7 @@
 
         <div ng-repeat="item in activity">
 
-            <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
                 <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="card" ng-if="item.model=='TASK'" ng-click="$event.stopPropagation();renderToggle(item)">
+            <div class="card" ng-if="item.model=='TASK'" ng-click="$event.stopPropagation();cardDetailToggle(item)">
 
                 <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)">
                 <div style="padding:16px;">
                     <div style="float:right">
                         <p style="text-align:right">
@@ -145,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="cardDetailToggle(item)">
                 <div style="padding:16px">
                     <div style="float:right">
                         <p style="text-align:right">

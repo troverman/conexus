@@ -10,6 +10,8 @@ angular.module( 'conexus.view', [
                 templateUrl: 'view/index.tpl.html'
             }
         },
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             view: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
                 return TimeModel.getSome({id:$stateParams.id});
@@ -18,7 +20,5 @@ angular.module( 'conexus.view', [
     });
 }])
 
-.controller( 'ViewController', ['$location', '$sailsSocket', '$sce', '$scope', 'config', 'titleService', 'view', function ViewController( $location, $sailsSocket, $sce, $scope, config, titleService, view) {
-    titleService.setTitle('View | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'ViewController', ['$scope', 'view', function ViewController( $scope, view) {
 }]);

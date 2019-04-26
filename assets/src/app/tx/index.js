@@ -1,6 +1,5 @@
 angular.module( 'conexus.tx', [
 ])
-
 .config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'tx', {
 		url: '/tx/:id',
@@ -12,7 +11,5 @@ angular.module( 'conexus.tx', [
 		}
 	});
 }])
-
-.controller( 'TxCtrl', ['$sce', '$scope', 'titleService', function TxCtrl( $sce, $scope, titleService ) {
-	titleService.setTitle('Transaction | CRE8.XYZ');
+.controller( 'TxCtrl', ['$scope', 'titleService', function TxCtrl( $scope ) {
 }]);

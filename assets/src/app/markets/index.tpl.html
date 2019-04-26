@@ -3,23 +3,19 @@
         <div style="margin-top: auto;margin-bottom: auto;">
         	<div class="container">
 	            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Markets</h1>
-	            <h5 style="color:white">833423 tokens in circulation </h5>
+	            <h5 style="color:white">{{tokensInCirculation}} tokens in circulation </h5>
 	        </div>
         </div>
     </div>
 </div>
-
 <div class="spacing-10"></div>
-
 <div class="container">
 	<div class="row">
-
 		<ul style="padding:0px;" class="member-tabs">
 		    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET')"><i class="fa fa-filter"></i> Filter</a></li>
 			<li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Connection <i class="fa fa-angle-down"></i></a></li>
 		</ul>
 		<div style="clear:both"></div>
-
 	    <div class="card">
 	        <form ng-submit="search()" style="display:flex;flex-direction:row;">
 	            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
@@ -28,31 +24,24 @@
 	            </div>
 	        </form>
 	    </div>
-
 	    <div class="card" ng-if="false">
 			<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
 	    </div>
-
 	    <div ng-repeat="token in tokens track by $index" style="padding:0px">
-	    	<div class="card" ng-click="renderToggle(token)">
+	    	<div class="card" ng-click="cardDetailToggle(token)">
 			    <div style="padding:16px;">
 			    	<a ng-click="$event.stopPropagation();" style="white-space: nowrap;" href="market/{{token.string}}"><h4>{{token.string}}</h4></a>
 			    	<p style="white-space: nowrap;color:gray">{{token.string}} markets</p>
-
 			    	<!--
 			    	<a style="white-space: nowrap;" href="market/{{market.string}}"><h4>{{market.string}}</h4></a>
 			    	<p style="white-space: nowrap;color:gray">{{market.string}} markets</p>
 			    	-->
-
 			    </div>
 			</div>
 	    </div>
-
 	    <div ng-show="true" class="card" style="text-align:center" ng-click="loadMore()">
 	        <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
 	    </div>
-
 	</div>
 </div>
-
 <div class="spacing-50"></div>

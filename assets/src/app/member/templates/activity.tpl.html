@@ -4,7 +4,7 @@
             <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
         </div>
         <div ng-repeat="item in activity">
-            <div class="card" ng-if="item.model=='CONTENT'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
 
                 <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -61,34 +61,51 @@
                 </div>
             </div>
 
-            <div class="card" ng-if="item.model=='ORDER'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='ORDER'" ng-click="cardDetailToggle(item)">
+                <div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div class="container">
+                                <span ng-repeat="(key, value) in item.setAlpha">
+                                    <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                </span>
+                                <br>
+                                <span ng-repeat="(key, value) in item.setBeta">
+                                    <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                </span>
+                                <h5 style="color:white"><span style="font-size:10px">{{item.type}}</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div style="padding:16px">
-
                     <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                    </div>  
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <span ng-repeat="(key, value) in item.setAlpha">
+                                <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                            </span>
+                        </div>
+                        <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
+                        <div class="col-xs-2">
+                            <span ng-repeat="(key, value) in item.setBeta">
+                                <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                            </span>
+                        </div>
                     </div>
-
-                    <div ng-click="$event.stopPropagation()">
-                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
-                        <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-                    </div> 
-
-                    <div style="margin-left:42px">
-                        <p>{{item.amountSet}} <a>{{item.identiferSet}}</a></p>
-                        <p>{{item.amountSet1}} <a>{{item.identiferSet1}}</a></p>
-                    </div>
-
+                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div>
                 <div class="card-footer">
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
-                </div>
+                    <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                </div>        
             </div>
 
-            <div class="card" ng-if="item.model=='TIME'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)">
                 <div style="padding:16px;">
 
                     <div style="float:right;text-align:right">
@@ -127,7 +144,7 @@
                 </div>
             </div>
 
-            <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="renderToggle(item)">
+            <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="cardDetailToggle(item)">
                 <div style="padding:16px">
 
                     <div style="float:right;text-align:right">

@@ -10,6 +10,8 @@ angular.module( 'conexus.content', [
                 templateUrl: 'content/index.tpl.html'
             }
         },
+
+        //TODO: DEPRECIATE RESOLVE.. 
         resolve: {
             content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
                 return ContentModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -26,35 +28,12 @@ angular.module( 'conexus.content', [
     });
 }])
 
-.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'content', 'contentList', 'ContentModel', 'lodash', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, content, contentList, ContentModel, lodash, ReactionModel, reactions, titleService, UserModel ) {
-    $scope.currentUser = config.currentUser;
-    $scope.marketOutput = [];
-    $scope.newContent = {};
-    $scope.newReaction = {};
-    $scope.newValidation = {};
-    $scope.newValidation.validation = {};
-    $scope.newValidation.validation.general = 0;
-    $scope.content = content;
+.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'content', 'contentList', 'ContentModel', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, content, contentList, ContentModel, ReactionModel, reactions, titleService, UserModel ) {
     
+    $scope.content = content;
+    if(!$scope.content){$location.path('/')}
     if ($scope.content.title){titleService.setTitle($scope.content.title + ' | Content | CRE8.XYZ')}
     else{titleService.setTitle('Content | CRE8.XYZ')}
-
-    if(!$scope.content){$location.path('/')}
-    $scope.reactions = reactions;
-
-    $scope.tokenFilter = 0;
-    $scope.toggleTokenVar = false;
-    $scope.viewTime = 0;
-
-    //TODO | BETTER
-    //WHY IS THIS HERE?
-    if($scope.currentUser){
-        UserModel.getSome({username:$scope.currentUser.username}).then(function(member){
-            $scope.member = member;
-            $scope.balance = member.balance;
-            $scope.reputation = member.reputation;
-        });
-    }
 
     $scope.content.tokens = [];
 
@@ -73,22 +52,33 @@ angular.module( 'conexus.content', [
         'Reaction+[type]',
         'Reaction+[type]+userId',
     ]; 
- 
+
+    $scope.marketOutput = [];
+    $scope.newContent = {};
+    $scope.newReaction = {};
+    $scope.newValidation = {};
+    $scope.newValidation.validation = {};
+    $scope.newValidation.validation.general = 0;
+
+    $scope.reactions = reactions;
+
+    $scope.tokenFilter = 0;
+    $scope.toggleTokenVar = false;
+    $scope.viewTime = 0;
+
+    //TODO: VIEWCOUNTER ALL .. plug in for validation
+    //viewToken Mechanism.. OnClick
     $scope.updateCount = function() {
-        //plug in for validation
         $scope.viewTime++;
         $scope.tokenFilter = (0.04+0.00232*24*$scope.viewTime).toFixed(4);
         $scope.$apply();
     };
     
-    //OnClick
     setInterval($scope.updateCount, 1000);
-    //clearInterval($scope.interval);
-    //viewToken Mechanism
 
-    //TODO: FINALIZE.. WORKS ON FRONTEND
+    //TODO: FINALIZE..
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED
-    //TODO??? ASSOCIATED TYPE.. CHILD?? DETAILS.. 
+    //TODO: ASSOCIATED TYPE.. CHILD.. DETAILS.. 
 
     function populateChildren(contentList, depth, limit){
         contentList.forEach(function(content) {
@@ -128,7 +118,7 @@ angular.module( 'conexus.content', [
         return result;
     }
 
-    //Cannot read property 'children' of undefined
+    //ERROR: Cannot read property 'children' of undefined
     function updateObject(object, newValue, path){
         var stack = path.split('.');
         while(stack.length>1){
@@ -137,25 +127,23 @@ angular.module( 'conexus.content', [
         object[stack.shift()] = newValue;
     }
 
-    //TODO
+    //TODO: DEPRECIATE
     $scope.createContent = function(content) {
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newContent.contentModel = content.id;
-            $scope.newContent.user = $scope.currentUser.id;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-                //ADD TO LIST
-            });
+            $scope.newContent.user = $rootScope.currentUser.id;
+            ContentModel.create($scope.newContent).then(function(model) {$scope.newContent = {}});
         }
         else{$mdSidenav('login').toggle()}
     };
 
+    //TODO: DEPRECIATE.. ? IN GLOBAL
     $scope.createReaction = function(content, type){
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:'CONTENT', id:content.id}];
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
             console.log(location[0]);
             location[0].value.reactions[type]++;
@@ -165,6 +153,7 @@ angular.module( 'conexus.content', [
         else{$mdSidenav('login').toggle()}
     };
  
+    //TODO: GLOBAL..
     $scope.reply = function(content){
         var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
         location[0].value.showReply = !location[0].value.showReply;
@@ -177,13 +166,11 @@ angular.module( 'conexus.content', [
         updateObject($scope.content, location[0].value, location[0].path);
     };
 
+    //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });

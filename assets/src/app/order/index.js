@@ -10,6 +10,8 @@ angular.module( 'conexus.order', [
                 templateUrl: 'order/index.tpl.html'
             }
         },
+
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             order: ['$stateParams', 'OrderModel', function($stateParams, OrderModel){
                 return OrderModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -24,9 +26,8 @@ angular.module( 'conexus.order', [
     });
 }])
 
-.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'order', 'orders', 'ReactionModel', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, order, orders, ReactionModel, titleService ) {
-    titleService.setTitle('Order | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'lodash', 'order', 'orders', 'ReactionModel', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, lodash, order, orders, ReactionModel ) {
+    
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.order = order;
@@ -42,14 +43,15 @@ angular.module( 'conexus.order', [
         $scope.order.id,
     ];
 
-    //FIX?
+    //TODO: FIX
     $rootScope.associatedModels = [{type:'ORDER', address:order.id}];
 
+    //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
@@ -64,18 +66,17 @@ angular.module( 'conexus.order', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //TODO: DEPRECIATE
     $scope.reply = function(item){
         var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.contentList[index].showReply = !$scope.contentList[index].showReply
     };
 
+    //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });

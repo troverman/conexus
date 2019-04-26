@@ -10,17 +10,15 @@ angular.module( 'conexus.contentList', [
 				templateUrl: 'contentList/index.tpl.html'
 			}
 		},
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
-            contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
-            }],
+            contentList: ['ContentModel', function(ContentModel){return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'})}],
         }
 	});
 }])
 
-.controller( 'ContentListCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'ReactionModel', 'titleService', function ContentListController( $location, $mdSidenav, $rootScope, $sce, $scope, config, contentList, ContentModel, ReactionModel, titleService ) {
-	titleService.setTitle('Content | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'ContentListCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', function ContentListController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, ReactionModel ) {
+
     $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -29,15 +27,13 @@ angular.module( 'conexus.contentList', [
     $scope.selectedType = 'POST';
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','plusCount DESC': 'Rating'}
-
     $scope.sortedLocationArray = ['Knoxville', 'Chapel Hill', 'New York City'];
-
     $scope.sorting = false;
-    $scope.expandSort = function(){
-        $scope.sorting = true;
-    };
-    
+    $scope.expandSort = function(){$scope.sorting = true;};
+
+
     //TODO: PROPER ASSOCIATIONS
+    //TODO: COMPLEX QUERIES .. ETC
     $scope.loadAssociations = function(){
         $scope.associations = $scope.contentList.map(function(obj){
             if (obj.project){return obj.project.title;}
@@ -79,40 +75,37 @@ angular.module( 'conexus.contentList', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
     $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, location:$scope.sortedLocationArray}
+    //TODO: COMPLEX QUERIES .. ETC
+    //TODO: COMPLEX QUERIES .. ETC
 
-    //DEPCRECIATE TO GLOBAL
+
+
+    //TODO: DEPCRECIATE
     $scope.createContent = function(content) {
-
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             if(content){$scope.newContent.contentModel = content.id;}
-            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.user = $rootScope.currentUser.id;
             $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                 return obj.text;
             }).join(",");
             $scope.newContent.type = $scope.selectedType;
-
             $scope.newContent.associatedModels = [];
-
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
-
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
                 $scope.content.unshift(model);
             });
-
         }
-
         else{$mdSidenav('login').toggle()}
-
     };
 
+    //TODO: DEPCRECIATE
     $scope.createReaction = function(item, type){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
@@ -123,6 +116,13 @@ angular.module( 'conexus.contentList', [
         else{$mdSidenav('login').toggle();}
     };
 
+
+
+
+
+
+
+    //TODO: COMPLEX QUERIES..
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
         ContentModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
@@ -146,13 +146,8 @@ angular.module( 'conexus.contentList', [
     };
     
     $scope.reply = function(content){
-        if ($scope.currentUser){
-            $mdSidenav('content').toggle();
-            //var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-            //$scope.contentList[index].showReply = !$scope.contentList[index].showReply;
-        }
+        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
         else{$mdSidenav('login').toggle();}
-
     };
 
     $scope.search = function(){
@@ -171,9 +166,21 @@ angular.module( 'conexus.contentList', [
             $scope.contentList = contentList;
         });
     };
+    //TODO: COMPLEX QUERIES..
 
-    $scope.selectType = function(type){
-        $scope.selectedType = type;
-    };
+
+
+
+
+
+
+
+
+
+    //TODO: DEPCRECIATE
+    $scope.selectType = function(type){$scope.selectedType = type;};
+
+
+
 
 }]);

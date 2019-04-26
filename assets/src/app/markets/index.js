@@ -10,6 +10,8 @@ angular.module( 'conexus.markets', [
 				templateUrl: 'markets/index.tpl.html'
 			}
 		},
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve:{
             tokens: ['TokenModel', function(TokenModel) {
                 return TokenModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
@@ -18,12 +20,13 @@ angular.module( 'conexus.markets', [
 	});
 }])
 
-.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'config', 'titleService', 'TokenModel', 'tokens', function MarketsController( $rootScope, $scope, config, titleService, TokenModel, tokens ) {
-	titleService.setTitle('Market | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'MarketsCtrl', ['$rootScope', '$scope', 'TokenModel', 'tokens', function MarketsController( $rootScope, $scope, TokenModel, tokens ) {
+    
     $scope.skip = 0;
     $scope.selectedSort = 'createdAt DESC';
     $scope.tokens = tokens;
+
+    $scope.tokensInCirculation = 100000+Math.round(Math.random()*10000);
 
     //STRING CROSS CHAIN
     //https://api.coinmarketcap.com/v2/listings/
@@ -119,9 +122,6 @@ angular.module( 'conexus.markets', [
         }
     };
     traverse(0, 4);
-
-
-
 
 
 

@@ -19,22 +19,30 @@ angular.module( 'conexus.register', [
         }
 	});
 }])
-.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'config', 'contentList', 'tasks', 'titleService', function RegisterController( $http, $location, $rootScope, $scope, config, contentList, tasks, titleService ) {
-	titleService.setTitle('Register | CRE8.XYZ');
-	$scope.contentList = contentList;
-	$scope.currentUser = config.currentUser;
-	if ($scope.currentUser){$location.path('/')}
+.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'contentList', 'tasks', function RegisterController( $http, $location, $rootScope, $scope, contentList, tasks ) {
+	
+    if ($rootScope.currentUser){$location.path('/')}
+    $rootScope.baseMarkets = [{text:'UNIVERSALTOKEN'}];
+
+    //var promises = [
+        //ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'})
+        //TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'})
+    //];
+    //var query = ...
+
+    $scope.contentList = contentList;
 	$scope.newMember = {};
+    $scope.newMember.avatarUrl = 'https://source.unsplash.com/256x256/?community,sharing,new,code';
+
 	$scope.newOrder = [];
     $scope.newOrderNEW = [];
+    $scope.pageNumber = 0; //-1
 	$scope.showIntro = true;
 	$scope.showValue = false;
 	$scope.showDaily = false;
 	$scope.showPersonal = false;
 	$scope.showFinal = false;
 	$scope.tasks = tasks;
-
-    $rootScope.baseMarkets = [{text:'UNIVERSALTOKEN'}];
 
 	$scope.dailyTimeValue = [
 		{text:'Rest', percentage: 33.333},
@@ -198,25 +206,14 @@ angular.module( 'conexus.register', [
         }
     }, true);
     
-    //lol
-	$scope.continue = function(page){
-		if (page === 1){
-			$scope.showIntro = !$scope.showIntro;
-			$scope.showValue = !$scope.showValue;
-		}
-		if (page === 2){
-			$scope.showValue = !$scope.showValue;
-			$scope.showDaily = !$scope.showDaily;
-		}
-		if (page === 3){
-			$scope.showDaily = !$scope.showDaily;
-			$scope.showPersonal = !$scope.showPersonal;
-		}
-		if (page === 4){
-			$scope.showPersonal = !$scope.showPersonal;
-			$scope.showFinal = !$scope.showFinal;
-		}
-	};
+    $scope.changePage = function(model){
+        window.scrollTo(0, 0);
+        if (typeof model === 'number'){$scope.pageNumber = model;} 
+        else if (model == 'FORWARD'){$scope.pageNumber++;}
+        else if (model == 'BACK'){$scope.pageNumber--;}
+        else{$scope.pageNumber++}
+    };
+
 
     //WORK!
 	$scope.createPosition = function(model){
@@ -263,24 +260,15 @@ angular.module( 'conexus.register', [
         }
     };
 
-    //LEL | WORK!
     $scope.registerUser = function(){
         $scope.newMember.order = $scope.newOrderNEW;
         var data = JSON.stringify($scope.newMember);
-        console.log($scope.newMember);
         $rootScope.stateIsLoading = true;
         $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
-            
-            console.log(newModel.data);
-
-            //MEG
-            config.currentUser = newModel.data;
             $rootScope.currentUser = newModel.data;
-
             $location.path('/');
-
         });
-    }
+    };
 
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks]);
 

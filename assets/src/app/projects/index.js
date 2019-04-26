@@ -10,6 +10,8 @@ angular.module( 'conexus.projects', [
 				templateUrl: 'projects/index.tpl.html'
 			}
 		},
+
+        //TODO: DEPRECIATE RESOLVE
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
@@ -18,17 +20,15 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'config', 'lodash', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', 'titleService', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, config, lodash, MemberModel, ProjectModel, projects, SearchModel, titleService ) {
-	titleService.setTitle('Projects | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
-    $scope.projects = projects.map(function(obj){
-        obj.model = 'PROJECT';
-        return obj;
-    });
+.controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'lodash', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, lodash, MemberModel, ProjectModel, projects, SearchModel ) {
 
-    //BETTER | ROOTSCOPE. //get my projects
-    if ($scope.currentUser){
-        MemberModel.getSome({user:$scope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+    $scope.projects = projects.map(function(obj){obj.model = 'PROJECT'; return obj;});
+
+    $rootScope.associatedModels = [];
+
+    //TODO: BETTER | ROOTSCOPE
+    if ($rootScope.currentUser){
+        MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
             $scope.memberProjects = memberProjects.map(function(obj){
                 obj.project.model = 'PROJECT';
                 return obj.project
@@ -40,7 +40,6 @@ angular.module( 'conexus.projects', [
     $scope.searchQuery = [];
     $scope.skip = 0;
     $scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','memberCount DESC': 'Member Count'}
-
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
@@ -48,8 +47,8 @@ angular.module( 'conexus.projects', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
-    $rootScope.associatedModels = [];
 
+    //TODO
     $scope.populateMap = function(){
         for (x in $scope.projects){
             if ($scope.projects[x].location){
@@ -67,6 +66,7 @@ angular.module( 'conexus.projects', [
     };
     $scope.populateMap();
 
+    //TODO: NAV?
     $scope.getLatLng = function() {
         if (navigator.geolocation) {
             $rootScope.stateIsLoading = true;
@@ -100,10 +100,11 @@ angular.module( 'conexus.projects', [
         }
     };
 
+    //TODO:
     $scope.getMyProjects = function(){
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             $rootScope.stateIsLoading = true;
-            MemberModel.getSome({user:$scope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+            MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
                 $rootScope.stateIsLoading = false;
                 $scope.projects = memberProjects.map(function(obj){
                     obj.project.model = 'PROJECT';
@@ -114,7 +115,12 @@ angular.module( 'conexus.projects', [
         }
     };
 
-    //IMPROVE :)
+
+
+
+
+
+    //TODO: IMPROVE :)
     $scope.loadAssociations = function(){        
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedAssociationArray = [];
@@ -161,8 +167,6 @@ angular.module( 'conexus.projects', [
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
-
-    //IMPROVE :)
     $scope.init = function(){
         $scope.loadAssociations();
         $scope.loadLocations();
@@ -170,6 +174,95 @@ angular.module( 'conexus.projects', [
         $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
     };
     $scope.init();
+    //TODO: IMPROVE :)
+
+
+
+
+
+
+
+    //TODO: COMPLEX QUERY :)
+    var query = [
+        {
+            filter:[
+                {
+                    model:'PROJECT',
+                    association:{
+                        population:true,
+                        depth:1,
+                    },
+                    params:{
+                        limit:100,
+                        skip:0,
+                        sort:'createdAt DESC',
+                    },
+                    chain:'OR',
+                },
+                {
+                    model:'PROJECT',
+                    modelParam:'tags',
+                    query:'TAG QUERY',
+                    association:{
+                        population:true,
+                        depth:1,
+                    },
+                    params:{
+                        limit:100,
+                        skip:0,
+                        sort:'createdAt DESC',
+                    }
+                }
+            ],
+            params:{
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC',
+            },
+            chain:'OR'
+        },{
+            filter:[
+                {
+                    model:'TASK',
+                    modelParam:'associatedModels',
+                    query:'{"type":"PROJECT"}',
+                    association:{
+                        population:true,
+                        depth:1,
+                    },
+                    params:{
+                        limit:100,
+                        skip:0,
+                        sort:'createdAt DESC',
+                    },
+                    chain:'OR',
+                },
+                {
+                    model:'TASK',
+                    modelParam:'tag',
+                    query:'create',
+                    association:{
+                        population:true,
+                        depth:1,
+                    },
+                    params:{
+                        limit:100,
+                        skip:0,
+                        sort:'createdAt DESC',
+                    },
+                }
+            ],
+            params:{
+                limit:100,
+                skip:0,
+                sort:'createdAt DESC',
+            }
+        }
+    ];
+
+    SearchModel.getSome(query).then(function(searchResults){
+        console.log(searchResults)
+    }); 
 
 
 
@@ -179,10 +272,7 @@ angular.module( 'conexus.projects', [
 
 
 
-
-
-
-    //HMM
+    //TODO: FILTER!
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
@@ -191,7 +281,6 @@ angular.module( 'conexus.projects', [
             Array.prototype.push.apply($scope.projects, projects.map(function(obj){obj.model='PROJECT';return obj}));
         });
     };
-
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         console.log($scope.searchQuery)
@@ -203,7 +292,6 @@ angular.module( 'conexus.projects', [
             });
         });
     };
-
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
@@ -216,44 +304,26 @@ angular.module( 'conexus.projects', [
         });
     };
 
-
-    //TODO FILTER!
-    //UNIFY^v .. //compute ^^^ in NAV FROM OBJ --> THEN ROOT
-
+    //TODO: FILTER!
     $rootScope.$watch('searchQueryNav' ,function(){
-
         for(x in Object.keys($rootScope.searchQueryNav)){
-
             for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-
                 if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
-
                     $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
-
                 }
-
             }
-
         }
-
         console.log($scope.searchQuery, $rootScope.searchQuery, $rootScope.searchQueryNav);
-
     }, true);
-
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
-    
         if (newValue !== oldValue) {
-
             console.log(newValue);
-
             $rootScope.stateIsLoading = true;
-   
             $scope.searchQuery = $scope.searchQuery.map(function(obj){
                 if (!obj.query && obj.text){obj.query = obj.text}
                 if (!obj.type){obj.type='STRING'}
                 return obj.query
             }).join(',');
-
             $scope.searchModel = [{
                 model:'PROJECT',
                 limit:100,
@@ -261,22 +331,24 @@ angular.module( 'conexus.projects', [
                 sort:'createdAt DESC',
                 query: $scope.searchQuery, //ARRAY? 
             }];
-
             //TODO: AGNOSTIC SEARCH
             //SearchModel.search($scope.searchModel[0]).then(function(models){
             //    console.log(models);
             //});
-
             ProjectModel.getSome({search:$scope.searchModel[0].query, limit:100, skip:0, sort:'createdAt DESC'}).then(function(models){
                 $rootScope.stateIsLoading = false;
                 $scope.projects = models;
                 $scope.init();
             });
-
         }
-
     }, true);
+    //TODO: FILTER!
 
+
+
+
+
+    //TODO: WEBSOCKET
     $sailsSocket.subscribe('project', function (envelope) {
         switch(envelope.verb) {
             case 'created':

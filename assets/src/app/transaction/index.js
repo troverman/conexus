@@ -10,6 +10,8 @@ angular.module( 'conexus.transaction', [
                 templateUrl: 'transaction/index.tpl.html'
             }
         },
+        
+        //TODO: DEPRECIATE RESOLVE
         resolve: {
             transaction: ['$stateParams', 'TransactionModel', function($stateParams, TransactionModel){
                 return TransactionModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -21,21 +23,19 @@ angular.module( 'conexus.transaction', [
     });
 }])
 
-.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'config', 'contentList', 'ContentModel', 'lodash', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, config, contentList, ContentModel, lodash, ReactionModel, titleService, transaction ) {
-    titleService.setTitle('Transaction | CRE8.XYZ');
-    $scope.currentUser = config.currentUser;
+.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, ReactionModel, transaction ) {
+    
+    $scope.transaction = transaction[0];
+    $scope.contentList = contentList;
+
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.contentList = contentList;
-    $scope.transaction = transaction[0];
-
-    console.log(transaction)
 
     //PACKAGE | NESTED RENDERING
     $scope.createContent = function(content) {
-        if ($scope.currentUser){
+        if ($rootScope.currentUser){
             if(content){$scope.newContent.contentModel = content.id;}
-            $scope.newContent.user = $scope.currentUser.id;
+            $scope.newContent.user = $rootScope.currentUser.id;
             $scope.newContent.transaction = $scope.transaction.id;
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.newContent = {};
@@ -44,13 +44,13 @@ angular.module( 'conexus.transaction', [
         else{}
     };
 
-    //TODO
+    //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if($scope.currentUser){
+        if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
             $scope.newReaction.type = type;
-            $scope.newReaction.user = $scope.currentUser.id;
+            $scope.newReaction.user = $rootScope.currentUser.id;
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){$scope.contentList[index].reactions[type]++;}
             else{$scope.transaction.reactions[type]++;}
@@ -59,19 +59,18 @@ angular.module( 'conexus.transaction', [
         else{$mdSidenav('login').toggle()}
     };
 
+    //TODO: DEPRECIATE
     $scope.reply = function(item){
         var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
         if (contentIndex!=-1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply}
         else{$scope.transaction.showReply = !$scope.transaction.showReply}
     };
     
+    //TODO: SOCKETS
     $sailsSocket.subscribe('post', function (envelope) {
         switch(envelope.verb) {
             case 'created':
                 $scope.contentList.unshift(envelope.data);
-                break;
-            case 'destroyed':
-                lodash.remove($scope.contentList, {id: envelope.id});
                 break;
         }
     });
