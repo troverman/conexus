@@ -8,15 +8,11 @@
     </div>
 </div>
 
-
 <div class="container" ng-show="true">
-
     <div class="row">
 
         <div ng-show="pageNumber == 0">
-
             <div class="card">
-               
                 <div style="background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
@@ -25,21 +21,22 @@
                         </div>
                     </div>
                 </div>
-
                 <div style="padding:16px;">
-
                     <p style="font-style:italic;color:gray;margin:0px">The more complete and intentional your dimensional vote the better.</p>
                     <highchart config="chartMapTotal"></highchart>
+                    <!--
+                    <p style="color:gray;font-style:italic">
+                        <span>All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b></span>
+                        <md-switch style="float:right;height:auto;margin:0px" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch>
+                    </p>
+                    -->
                     <button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
-
                 </div>
             </div>
-
         </div>
 
         <div ng-show="pageNumber == 1">
             <div class="card">
-                
                 <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
@@ -48,9 +45,9 @@
                         </div>
                     </div>
                 </div>
-
                 <div style="padding:16px;">
-                    <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile. The more detailed your dimensional vote the stronger the effect.</p>
+                    <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
+                    <p style="color:gray;font-size:12px;font-style:italic">The more detailed your dimensional vote the stronger the effect.</p>
                 </div>
             </div>
             <ul style="padding:0px;" class="member-tabs">
@@ -58,7 +55,6 @@
                 <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
                 <div style="clear:both"></div>
             </ul>
-
             <div class="card">
                 <form style="display:flex;flex-direction:row;">
                     <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQueryArray"></tags-input>
@@ -67,17 +63,15 @@
                     </div>
                 </form>
             </div>
-
             <div class="card">
                 <div style="padding:16px;">
-
                     <div class="row">
-                        <div class="col-xs-3" style="max-height:50vh;overflow:scroll">
+                        <div class="col-sm-3 col-xs-12" style="max-height:50vh;overflow:scroll">
                             <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
                                 <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
                             </div>
                         </div>
-                        <div class="col-xs-9">
+                        <div class="col-sm-9 col-xs-12">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-show="false">
@@ -95,29 +89,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-sm-6 col-xs-12">
                                     <highchart config="chartMapTotal"></highchart>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-sm-6 col-xs-12">
                                     <highchart config="pieTotal"></highchart>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <div class="card">
                 <button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
             </div>
-
         </div>
 
         <div ng-show="false">
-
             <div class="card">
-           
                 <div style="background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
@@ -126,23 +115,18 @@
                         </div>
                     </div>
                 </div>
-
                 <div style="padding:16px;">
                     <p style="color:gray;font-size:12px;font-style:italic">A day well spent. Striving for universal adaptation and reflectivity, your dimensional vote can be encompassing of all aspects of the human experience.</p>
-
                     <img style="max-height:200px" src="https://images.unsplash.com/photo-1531502774286-5e4e8e94879f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
                     <img style="max-height:200px" src="https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
                     <img style="max-height:200px" src="https://images.unsplash.com/photo-1504246979673-176ed6740840?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
                 </div>
             </div>
-
             <div class="card">
                 <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="dailyTimeValue"></tags-input>
             </div>
-
             <div class="card">
                 <div style="padding:16px;">
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div ng-show="false">
@@ -156,26 +140,19 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-6">
                             <highchart config="chartMapTime"></highchart>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
             <div class="card">
                 <button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
             </div>
-
         </div>
 
         <div ng-show="pageNumber == 2">
-
             <div class="card">
-            
                 <div style="background:url('https://source.unsplash.com/1600x900/?information,genetics,dna,human,personal,passport,identity')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
@@ -184,7 +161,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div style="padding:16px;">
                     <p style="color:gray;font-size:12px;font-style:italic">We Promote Consentual Sharing. Give as much information as you would like.</p>
                     <p style="color:gray;font-style:italic">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style="float:right;height:auto;margin:0px" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
@@ -193,47 +169,32 @@
                     <img style="max-height:200px" src="http://68.media.tumblr.com/bcce94fa8d074789e52ac8c177120683/tumblr_oldnu3SSfR1r1arpmo1_1280.png">
                 </div>
             </div>
-
             <div class="card">
                 <div style="padding:16px;">
-
+                    <!--
+                    <div style="padding:0px" class="col-xs-12"><h5>Avatar Url</h5><input type="text" ng-model="newMember.avatarUrl" placeholder="Avatar Url" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-12"><h5>Cover Url</h5><input type="text" ng-model="newMember.coverUrl" placeholder="Cover Url" class="form-control"></div>
+                    -->
                     <div style="padding:0px" class="col-xs-4"><h5>First Name</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.firstName" placeholder="First Name" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Last Name</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.lastName" placeholder="Last Name" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Date Of Birth</h5><input type="date" ng-disabled="!consentAgreement" ng-model="newMember.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
-                    
                     <div style="padding:0px" class="col-xs-4"><h5>Username</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.email" placeholder="Email" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Email</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.email" placeholder="Email" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Phone Number</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.phoneNumber" placeholder="Phone Number" class="form-control"></div>
-
                     <div style="padding:0px" class="col-xs-12"><h5>Description</h5><text-angular ng-disabled="!consentAgreement" ng-model="newMember.description" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular></div>
-
                     <div style="clear:both"></div>
-
-                    <!--<div style="padding:0px" class="col-xs-12"><h5>Avatar Url</h5><input type="text" ng-model="newMember.avatarUrl" placeholder="Avatar Url" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-12"><h5>Cover Url</h5><input type="text" ng-model="newMember.coverUrl" placeholder="Cover Url" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-12"><h5>Username</h5><input type="text" ng-model="newMember.username" placeholder="Username" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-6"><h5>Email</h5><input type="text" ng-model="newMember.email" placeholder="Email" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-6"><h5>Phone Number</h5><input type="text" ng-model="newMember.phoneNumber" placeholder="Phone Number" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-4"><h5>First Name</h5><input type="text" ng-model="newMember.firstName" placeholder="First Name" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-4"><h5>Last Name</h5><input type="text" ng-model="newMember.lastName" placeholder="Last Name" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-4"><h5>Date Of Birth</h5><input type="date" ng-model="newMember.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
-                    <div style="clear:both"></div>-->
-
-
                 </div>
             </div>
 
             <div class="card">
-                <button type="submit" style="width:9%" ng-click="changePage('BACK')" class="btn btn-default log-btn"><i class="fa fa-arrow-left"></i> Back</button>
-                <button type="submit" style="width:90%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
+                <div class="col-md-2 col-sm-2 col-xs-3"  style="padding:0px"><button type="submit" style="width:100%" ng-click="changePage('BACK')" class="btn btn-default log-btn"><i class="fa fa-arrow-left"></i> Back</button></div>
+                <div class="col-md-10 col-sm-10 col-xs-9" style="padding:0px"><button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button></div>
             </div>
 
         </div>
 
         <div ng-show="pageNumber == 3">
-
             <div class="card">
-
                 <div style="background:url('https://source.unsplash.com/1600x900/?egalitarian,sharing,love,creative,world,community,awesome')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
@@ -242,17 +203,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div style="padding:16px;">   
-
                     <div class="row">
-
                         <div class="col-xs-12 col-sm-6 col-md-6" style="padding-right:5px;padding-left:10px">
                             <div class="member-card">
                                 <div class="member-card-image" style="background-image: url('https://source.unsplash.com/1600x900/?sharing,love,creative,world,community')">
-                                    <a href="#">
-                                        <img ng-src="{{newMember.avatarUrl}}" err-src="/images/avatar.png">
-                                    </a>
+                                    <a href="#"><img ng-src="{{newMember.avatarUrl}}" err-src="/images/avatar.png"></a>
                                 </div>
                                 <div style="clear:both"></div>
                                 <div class="member-card-info" style="height:auto;padding-left:0%">
@@ -262,7 +218,9 @@
                                     <h5 ng-show="newMember.dateOfBirth">{{newMember.dateOfBirth}}</h5>
                                     <h5 ng-show="newMember.email"><i class="fas fa-envelope"></i> {{newMember.email}}</h5>
                                     <h5 ng-show="newMember.phoneNumber"><i class="fas fa-phone"></i> {{newMember.phoneNumber}}</h5>
-                                    <!--<p style="color:gray">{{currentUser.id}}<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></p>-->
+                                    <!--
+                                    <p style="color:gray">{{currentUser.id}}<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></p>
+                                    -->
                                 </div>
                                 <div ng-show="false" class="member-card-social">
                                     <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}" target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
@@ -272,27 +230,25 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <highchart config="chartMapTotal"></highchart>
                         </div>
-
                         <div class="col-xs-12">
                             <div>
                                 <h3>Value Map</h3>
-                                <a ng-click="changePage(1)" class="btn btn-default log-btn"><b>Keep Creating?</b></a>
                                 <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
+                                <a ng-click="changePage(1)" class="btn btn-default"><b>Keep Creating?</b></a>
                                 <div class="" ng-repeat="order in newOrderNEW">
                                     <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
                                     <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 

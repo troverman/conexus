@@ -10259,15 +10259,11 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
     "<div class=\"container\" ng-show=\"true\">\n" +
-    "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
     "        <div ng-show=\"pageNumber == 0\">\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
-    "               \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
@@ -10276,21 +10272,22 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "\n" +
     "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete and intentional your dimensional vote the better.</p>\n" +
     "                    <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                    <!--\n" +
+    "                    <p style=\"color:gray;font-style:italic\">\n" +
+    "                        <span>All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b></span>\n" +
+    "                        <md-switch style=\"float:right;height:auto;margin:0px\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch>\n" +
+    "                    </p>\n" +
+    "                    -->\n" +
     "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"pageNumber == 1\">\n" +
     "            <div class=\"card\">\n" +
-    "                \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
@@ -10299,9 +10296,9 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile. The more detailed your dimensional vote the stronger the effect.</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
+    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
@@ -10309,7 +10306,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <form style=\"display:flex;flex-direction:row;\">\n" +
     "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQueryArray\"></tags-input>\n" +
@@ -10318,17 +10314,15 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-3\" style=\"max-height:50vh;overflow:scroll\">\n" +
+    "                        <div class=\"col-sm-3 col-xs-12\" style=\"max-height:50vh;overflow:scroll\">\n" +
     "                            <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
     "                                <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <div class=\"col-xs-9\">\n" +
+    "                        <div class=\"col-sm-9 col-xs-12\">\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-xs-12\">\n" +
     "                                    <div ng-show=\"false\">\n" +
@@ -10346,29 +10340,24 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +
-    "                                <div class=\"col-xs-6\">\n" +
+    "                                <div class=\"col-sm-6 col-xs-12\">\n" +
     "                                    <highchart config=\"chartMapTotal\"></highchart>\n" +
     "                                </div>\n" +
-    "                                <div class=\"col-xs-6\">\n" +
+    "                                <div class=\"col-sm-6 col-xs-12\">\n" +
     "                                    <highchart config=\"pieTotal\"></highchart>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"false\">\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
-    "           \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
@@ -10377,23 +10366,18 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">A day well spent. Striving for universal adaptation and reflectivity, your dimensional vote can be encompassing of all aspects of the human experience.</p>\n" +
-    "\n" +
     "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1531502774286-5e4e8e94879f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
     "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
     "                    <img style=\"max-height:200px\" src=\"https://images.unsplash.com/photo-1504246979673-176ed6740840?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60\">\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"dailyTimeValue\"></tags-input>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-6\">\n" +
     "                            <div ng-show=\"false\">\n" +
@@ -10407,26 +10391,19 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
     "                        <div class=\"col-sm-6\">\n" +
     "                            <highchart config=\"chartMapTime\"></highchart>\n" +
     "                        </div>\n" +
-    "\n" +
     "                    </div>\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"pageNumber == 2\">\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
-    "            \n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?information,genetics,dna,human,personal,passport,identity')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
@@ -10435,7 +10412,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">We Promote Consentual Sharing. Give as much information as you would like.</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style=\"float:right;height:auto;margin:0px\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
@@ -10444,47 +10420,32 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/bcce94fa8d074789e52ac8c177120683/tumblr_oldnu3SSfR1r1arpmo1_1280.png\">\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "\n" +
+    "                    <!--\n" +
+    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Avatar Url</h5><input type=\"text\" ng-model=\"newMember.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\"></div>\n" +
+    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Cover Url</h5><input type=\"text\" ng-model=\"newMember.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
+    "                    -->\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>First Name</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Last Name</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Date Of Birth</h5><input type=\"date\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
-    "                    \n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Username</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Email</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Phone Number</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\"></div>\n" +
-    "\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Description</h5><text-angular ng-disabled=\"!consentAgreement\" ng-model=\"newMember.description\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular></div>\n" +
-    "\n" +
     "                    <div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "                    <!--<div style=\"padding:0px\" class=\"col-xs-12\"><h5>Avatar Url</h5><input type=\"text\" ng-model=\"newMember.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Cover Url</h5><input type=\"text\" ng-model=\"newMember.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Username</h5><input type=\"text\" ng-model=\"newMember.username\" placeholder=\"Username\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5>Email</h5><input type=\"text\" ng-model=\"newMember.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5>Phone Number</h5><input type=\"text\" ng-model=\"newMember.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>First Name</h5><input type=\"text\" ng-model=\"newMember.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Last Name</h5><input type=\"text\" ng-model=\"newMember.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Date Of Birth</h5><input type=\"date\" ng-model=\"newMember.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"clear:both\"></div>-->\n" +
-    "\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"card\">\n" +
-    "                <button type=\"submit\" style=\"width:9%\" ng-click=\"changePage('BACK')\" class=\"btn btn-default log-btn\"><i class=\"fa fa-arrow-left\"></i> Back</button>\n" +
-    "                <button type=\"submit\" style=\"width:90%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
+    "                <div class=\"col-md-2 col-sm-2 col-xs-3\"  style=\"padding:0px\"><button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('BACK')\" class=\"btn btn-default log-btn\"><i class=\"fa fa-arrow-left\"></i> Back</button></div>\n" +
+    "                <div class=\"col-md-10 col-sm-10 col-xs-9\" style=\"padding:0px\"><button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button></div>\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
     "\n" +
     "        <div ng-show=\"pageNumber == 3\">\n" +
-    "\n" +
     "            <div class=\"card\">\n" +
-    "\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?egalitarian,sharing,love,creative,world,community,awesome')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
@@ -10493,17 +10454,12 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div style=\"padding:16px;\">   \n" +
-    "\n" +
     "                    <div class=\"row\">\n" +
-    "\n" +
     "                        <div class=\"col-xs-12 col-sm-6 col-md-6\" style=\"padding-right:5px;padding-left:10px\">\n" +
     "                            <div class=\"member-card\">\n" +
     "                                <div class=\"member-card-image\" style=\"background-image: url('https://source.unsplash.com/1600x900/?sharing,love,creative,world,community')\">\n" +
-    "                                    <a href=\"#\">\n" +
-    "                                        <img ng-src=\"{{newMember.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                    </a>\n" +
+    "                                    <a href=\"#\"><img ng-src=\"{{newMember.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
     "                                </div>\n" +
     "                                <div style=\"clear:both\"></div>\n" +
     "                                <div class=\"member-card-info\" style=\"height:auto;padding-left:0%\">\n" +
@@ -10513,7 +10469,9 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                    <h5 ng-show=\"newMember.dateOfBirth\">{{newMember.dateOfBirth}}</h5>\n" +
     "                                    <h5 ng-show=\"newMember.email\"><i class=\"fas fa-envelope\"></i> {{newMember.email}}</h5>\n" +
     "                                    <h5 ng-show=\"newMember.phoneNumber\"><i class=\"fas fa-phone\"></i> {{newMember.phoneNumber}}</h5>\n" +
-    "                                    <!--<p style=\"color:gray\">{{currentUser.id}}<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></p>-->\n" +
+    "                                    <!--\n" +
+    "                                    <p style=\"color:gray\">{{currentUser.id}}<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></p>\n" +
+    "                                    -->\n" +
     "                                </div>\n" +
     "                                <div ng-show=\"false\" class=\"member-card-social\">\n" +
     "                                    <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
@@ -10523,27 +10481,25 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
     "                        <div class=\"col-xs-12 col-sm-6 col-md-6\">\n" +
     "                            <highchart config=\"chartMapTotal\"></highchart>\n" +
     "                        </div>\n" +
-    "\n" +
     "                        <div class=\"col-xs-12\">\n" +
     "                            <div>\n" +
     "                                <h3>Value Map</h3>\n" +
-    "                                <a ng-click=\"changePage(1)\" class=\"btn btn-default log-btn\"><b>Keep Creating?</b></a>\n" +
     "                                <p style=\"color:gray;font-size:12px;font-style:italic\">Do you want to keep working on your value map?</p>\n" +
+    "                                <a ng-click=\"changePage(1)\" class=\"btn btn-default\"><b>Keep Creating?</b></a>\n" +
     "                                <div class=\"\" ng-repeat=\"order in newOrderNEW\">\n" +
     "                                    <span style=\"color:gray\" ng-repeat=\"(asset, value) in order.setAlpha\">{{value}} <a href=\"market/{{asset}}\">{{asset}}</a>, </span> | \n" +
     "                                    <span style=\"color:gray\" ng-repeat=\"(asset, value) in order.setBeta\">{{value}} <a href=\"market/{{asset}}\">{{asset}}</a>, </span>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
