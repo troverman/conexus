@@ -104,16 +104,16 @@
                 </div>
                 <div class="row">
                     <div ng-repeat="item in projects">
-                        <div class="card" ng-click="">
+                        <div class="card" ng-click="cardDetailToggle()">
                             <div style="padding:16px;">
-                                <div style="float:right">
-                                    <button ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
-                                    <button ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
-                                    <button ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
+                                <div ng-click="$event.stopPropagation()"style="float:right">
+                                    <button ng-click="$event.stopPropagation()" ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
+                                    <button ng-click="$event.stopPropagation()" ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
+                                    <button ng-click="$event.stopPropagation()" ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
                                 </div>
-                                <a href="/project/{{item.urlTitle}}">
-                                    <img style="height:64px;float:left;margin-right:10px;" src="{{item.avatarUrl}}">
-                                    <h3 style="margin-top:0px">{{item.title}}</h3>
+                                <a ng-click="$event.stopPropagation()"  href="/project/{{item.urlTitle}}">
+                                    <img ng-click="$event.stopPropagation()" style="height:64px;float:left;margin-right:10px;" src="{{item.avatarUrl}}">
+                                    <h3 ng-click="$event.stopPropagation()" style="margin-top:0px">{{item.title}}</h3>
                                 </a>
                                 <div style="overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
                                 <div style="clear:both"></div>

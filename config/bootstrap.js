@@ -32,13 +32,13 @@ module.exports.bootstrap = function(cb) {
 	//37.5483, -121.9886 //FREEMONT
 	var geoModel = {
 		username:'troverman',
-		lat:'35.9606',
-		lng:'-83.9207',
+		lat:'40.730610',
+		lng:'-73.935242',
 		//PRK, CH, CTRCM, CMN, S.CAFE, S.SCH, LIBR
-		featureCode:'LIBR',
+		featureCode:'PRK',
 		//parent, latlng
 		type:'latlng',
-		radius:'30',
+		radius:'10',
 		parentId:'4482348'
 	};
 	//utilService.getGeoNames(geoModel);

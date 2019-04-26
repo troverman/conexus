@@ -317,7 +317,7 @@ angular.module( 'conexus.project', [
         };
     }
 
-    if($rootScope.currentUser){$scope.newTransaction.from = $scope.currentUser.id}
+    if($rootScope.currentUser){$scope.newTransaction.from = $rootScope.currentUser.id}
 
     //TOOD: COMPLEX QUERY
     $scope.$watch('searchQuery' ,function(){

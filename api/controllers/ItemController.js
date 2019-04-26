@@ -84,11 +84,11 @@ module.exports = {
 		};
 		console.log('CREATE ITEM', model);
 		Item.create(model)
-		.exec(function(err, task) {
+		.exec(function(err, item) {
 			if (err) {return console.log(err);}
 			else {
-				Item.publishCreate(task);
-				res.json(task);
+				Item.publishCreate(item);
+				res.json(item);
 			}
 		});
 	},

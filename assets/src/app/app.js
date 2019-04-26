@@ -81,6 +81,7 @@ angular.module( 'conexus', [
 })
 .controller( 'AppCtrl', ['$rootScope', '$scope', 'UserModel', function AppCtrl ( $rootScope, $scope, UserModel ) {
 
+    //TODO: BETTER
     $rootScope.currentUser = window.currentUser;
     if ($rootScope.currentUser){
         UserModel.getSome({id:$rootScope.currentUser.id}).then(function(member){
@@ -93,9 +94,13 @@ angular.module( 'conexus', [
     $rootScope.$on('$stateChangeStart',function(){
         $rootScope.stateIsLoading = true;
     });
+    
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
     });
+
+    //TODO: ALL GLOBAL VERIABLES
+
 }])
 .directive('errSrc', function() {
   return {

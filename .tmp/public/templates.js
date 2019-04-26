@@ -52,7 +52,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"spacing-10\"></div>\n" +
     "				<img style=\"max-height:200px\" src=\"images/space.jpg\">\n" +
     "			</div>\n" +
-    "			<div class=\"col-sm-6\"></div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
@@ -3827,16 +3826,16 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </div>\n" +
     "                <div class=\"row\">\n" +
     "                    <div ng-repeat=\"item in projects\">\n" +
-    "                        <div class=\"card\" ng-click=\"\">\n" +
+    "                        <div class=\"card\" ng-click=\"cardDetailToggle()\">\n" +
     "                            <div style=\"padding:16px;\">\n" +
-    "                                <div style=\"float:right\">\n" +
-    "                                    <button ng-if=\"(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true\" class=\"btn btn-default\" ng-click=\"join(item);\">Join</button>\n" +
-    "                                    <button ng-if=\"item.isMember == 'PENDING'\" class=\"btn btn-default\" ng-click=\"join(item);\">Cancel Request</button>\n" +
-    "                                    <button ng-if=\"item.isMember == true\" class=\"btn btn-default\" ng-click=\"join(item);\">Leave</button>\n" +
+    "                                <div ng-click=\"$event.stopPropagation()\"style=\"float:right\">\n" +
+    "                                    <button ng-click=\"$event.stopPropagation()\" ng-if=\"(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true\" class=\"btn btn-default\" ng-click=\"join(item);\">Join</button>\n" +
+    "                                    <button ng-click=\"$event.stopPropagation()\" ng-if=\"item.isMember == 'PENDING'\" class=\"btn btn-default\" ng-click=\"join(item);\">Cancel Request</button>\n" +
+    "                                    <button ng-click=\"$event.stopPropagation()\" ng-if=\"item.isMember == true\" class=\"btn btn-default\" ng-click=\"join(item);\">Leave</button>\n" +
     "                                </div>\n" +
-    "                                <a href=\"/project/{{item.urlTitle}}\">\n" +
-    "                                    <img style=\"height:64px;float:left;margin-right:10px;\" src=\"{{item.avatarUrl}}\">\n" +
-    "                                    <h3 style=\"margin-top:0px\">{{item.title}}</h3>\n" +
+    "                                <a ng-click=\"$event.stopPropagation()\"  href=\"/project/{{item.urlTitle}}\">\n" +
+    "                                    <img ng-click=\"$event.stopPropagation()\" style=\"height:64px;float:left;margin-right:10px;\" src=\"{{item.avatarUrl}}\">\n" +
+    "                                    <h3 ng-click=\"$event.stopPropagation()\" style=\"margin-top:0px\">{{item.title}}</h3>\n" +
     "                                </a>\n" +
     "                                <div style=\"overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
     "                                <div style=\"clear:both\"></div>\n" +
