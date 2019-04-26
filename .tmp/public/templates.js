@@ -64,16 +64,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Transparency through Sharing Creates Abundance.</p>\n" +
     "					</div>\n" +
     "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
-    "					<!--<div style=\"padding:16px;\">\n" +
-    "						<h3><a href=\"https://www.youtube.com/embed/jUQ_3kCcG_U\">open eye</a></h3>\n" +
-    "						<p>\n" +
-    "							<a href=\"member/troverman\">\n" +
-    "								<img class=\"card-avatar\" ng-src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" src=\"https://conexus8.s3.amazonaws.com/ee70ffa4-03b9-4637-b160-c0131e4f880b.jpg\" err-src=\"images/avatar.png\">\n" +
-    "								<b>troverman</b>\n" +
-    "							</a>\n" +
-    "							<span am-time-ago=\"\" style=\"color:gray\"> • 30 Minutes Ago</span>\n" +
-    "						</p>\n" +
-    "					</div>-->\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -105,13 +95,15 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<h3>We CRE8</h3>\n" +
     "				<p style=\"color:#a8a8a8;font-style:italic;\">Our mechanism of value is created from consensus upon the relation of shared value</p>\n" +
     "				<!--SELECT PROJECTS-->\n" +
-    "				<!--<div class=\"row\">\n" +
+    "				<!--\n" +
+    "				<div class=\"row\">\n" +
     "					<div class=\"card col-sm-4\" ng-repeat=\"project in projects\">\n" +
     "						<div class=\"padding:16px\">\n" +
     "							<h5><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></h5>\n" +
     "						</div>\n" +
     "					</div>\n" +
-    "				</div>-->\n" +
+    "				</div>\n" +
+    "				-->\n" +
     "				<!--<h5>Human Validated Proof of Work</h5>-->\n" +
     "				<h5>Interoperable Governance Mechanisms</h5>\n" +
     "				<h5>Group Coordination and the designation of interrelated token networking.</h5>\n" +
@@ -186,17 +178,18 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "                <img src=\"images/app.gif\">\n" +
     "            </div>\n" +
     "			<div class=\"col-xs-12 col-sm-7\">\n" +
-    "				<h4>The Application Ecosystem</h4>\n" +
+    "\n" +
+    "				<h3>The Application Ecosystem</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Mapping address to data to balance. An infinite token playground.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocols act as plugins to the string space.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Apps are a bundle of protocols. App design is modular.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocol Design, <a href=\"/developers\">Developer Documentation</a></p>\n" +
     "				\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
+    "				<div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/apps\">learn more</a>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "				<div class=\"spacing-50\"></div>\n" +
     "			\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -225,14 +218,13 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "                <img style=\"height:200px;\" src=\"images/dna.gif\">\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "			<div class=\"col-md-8\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<h3>Your Dimensional Vote</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Create relationships in the multidimensional token market. Transparent and reputationally validated work is one application in CRE8's ecosystem.</p> \n" +
     "				<div class=\"spacing-50\"></div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-4\">\n" +
     "			</div>\n" +
     "			<div class=\"col-md-8\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
@@ -243,7 +235,6 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p>\n" +
     "			</div>\n" +
     "            <div class=\"col-md-4 mobileHide\" style=\"text-align:center\">\n" +
-    "                <img style=\"height:200px;\" src=\"images/network.gif\">\n" +
     "            </div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
@@ -256,12 +247,17 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-xs-12 col-sm-9 col-md-7\">\n" +
     "				\n" +
-    "				<h2>Value Mapping and Dimensional Voting</h2>\n" +
-    "				\n" +
+    "				<h2>Value Mapping</h2>\n" +
+    "				<h5>Your Dimensional Vote</h5>\n" +
+    "\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "				<h4>It starts with you.</h4>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">It is our responsibility to create an awakening of depth in collective value.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">The source of our value mechanism is intentional. It is sourced from stating what we believe is valuable.</p>\n" +
-    "				\n" +
+    "\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "				<h4>An empowering call to action.</h4>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px;\">Create Empowerment by clearly and distinctly elucidating your value map.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Register to vote, map your value, and give rise to an emergent gestalt.</p>\n" +
@@ -4748,74 +4744,44 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"container\">\n" +
-    "\n" +
     "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "\n" +
-    "\n" +
     "                <div style=\"float:right;text-align:right\">\n" +
-    "\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-qrcode\"></i>\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();actionToggle(item);\" class=\"fa fa-eye\"></i>\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-tags\"></i>\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fas fa-heart\"></i>\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fa fa-shopping-cart\"></i>\n" +
-    "\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fas fa-share-alt\"></i>\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fas fa-coins\"></i>\n" +
-    "\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
-    "\n" +
     "                </div>\n" +
-    "\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline\" href=\"member/{{item.user.username}}\"><span style=\"font-weight:800\">{{item.user.username}}</span></a>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <p><a ng-repeat=\"tag in item.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "\n" +
-    "                <!--EMBEDED CONTENT-->\n" +
-    "                <!--ASSOCIATED MODEL-->\n" +
-    "                <!--CONTENT SOULD BE TEMPLATE OR SOMETHING?-->\n" +
-    "                <!--VT PLUGIN..-->\n" +
-    "		        <div>\n" +
-    "					<span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
-    "				</div>\n" +
-    "\n" +
-    "\n" +
+    "                <!--TODO: EMBEDED CONTENT-ASSOCIATED MODEL-->\n" +
+    "                <!--TODO: VT PLUGIN..-->\n" +
+    "		        <div><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h4>{{item.amountSet}} <a href=\"market/{{item.identiferSet}}\">{{item.identiferSet}}</a></h4>\n" +
-    "\n" +
     "			</div>\n" +
-    "\n" +
     "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "            </div>\n" +
-    "\n" +
-    "            <div ng-show=\"item.showReply\" class=\"card-footer\">\n" +
-    "                <form role=\"form\" ng-submit=\"createContent(item)\">\n" +
-    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
     "		</div>\n" +
     "    </div>\n" +
-    "\n" +
     "    <div class=\"spacing-5\"></div>\n" +
-    "	\n" +
+    "\n" +
     "    <div style=\"row\">\n" +
     "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "            <li><a href=\"#\">Content</a></li>\n" +
@@ -4823,37 +4789,16 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        </ul>\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--IF LIQDUID OR NOT .. AKA IF FORE SALE..-->\n" +
+    "    \n" +
+    "    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->\n" +
+    "    <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->\n" +
+    "    <!--ORDER FUILFILMENT COMES FROM LINKED INFO IN ORDER-->\n" +
+    "    <!--ADDRESS.. NAME PARAM-->\n" +
+    "    <!--URCHASE NEEDS TO BE VERY.. EASY..-->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
     "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->\n" +
-    "\n" +
-    "    <div class=\"row\" ng-if=\"false\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"\">\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"purchaseToggle()\">Purchase</button>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"row\" ng-show=\"purchaseToggleVar\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <h3 style=\"text-align:left;margin-left:15px;margin-bottom:15px;\">Purchase {{item.title}}</h3>\n" +
-    "                <form role=\"form\" ng-submit=\"createTask(newTask)\">\n" +
-    "                    <div class=\"form-group\">\n" +
-    "                        <input placeholder=\"Name\" type=\"text\" ng-model=\"newPurchase.name\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "                        <input placeholder=\"Address\" type=\"text\" ng-model=\"newPurchase.address\" class=\"form-control\" id=\"taskTitle\">\n" +
-    "                        <text-angular placeholder=\"Content\" ng-model=\"newPurchase.content\" ta-toolbar=\"''\"></text-angular>\n" +
-    "                    </div>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -4862,7 +4807,6 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"\">\n" +
-    "                \n" +
     "                    <h3>Liquidity</h3>\n" +
     "                    <div ng-repeat=\"input in inputVector\">\n" +
     "                        <div layout=\"\">\n" +
@@ -4871,50 +4815,32 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{inputVectorWeight}}</span></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "\n" +
     "                    <h5>InputVector: <span ng-repeat=\"input in inputVector\"><a href=\"market/{{input}}\">{{input.text}}</a> </span>\n" +
-    "                    <h5>Dimensional Object</h5>\n" +
+    "                    <h5>Multidimensional Relation Object</h5>\n" +
+    "                    <!--NEED TO DO HIGH DIMENSIONAL TRANING.. LEARNING SETS ARE REAL TRAVERSALS.. JUST DO INPUT OUTPUT VECTORS: BULK TRAIN--> \n" +
     "                    <h5>OutputVector: {{item.amountSet}} <span ng-repeat=\"output in outputVector\"><a href=\"market/{{output}}\">{{output.text}}</a> </span>\n" +
-    "\n" +
     "                    <form ng-submit=\"marketTraverse(tokens, outputVector)\">\n" +
-    "                        \n" +
     "                        <tags-input min-length=\"1\" placeholder=\"Input Vector\" ng-model=\"inputVector\"></tags-input>\n" +
     "                        <tags-input min-length=\"1\" placeholder=\"Output Vector\" ng-model=\"outputVector\"></tags-input>\n" +
-    "\n" +
     "                    </form>\n" +
-    "\n" +
     "                    <!--TRAVERSAL PARAMETERS-->\n" +
     "                    <p ng-repeat=\"result in marketOutput\" style=\"color:gray;font-style:italic;font-size:10px\">\n" +
     "                        <span>[tokens] = {{result[0]}} <a href=\"market/{{result[1]}}\">{{result[1]}}</a></span>\n" +
     "                        <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->\n" +
     "                    </p>\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--TODO-->\n" +
-    "\n" +
-    "	<!--Delivery | Fuilfillment-->\n" +
-    "\n" +
-    "    <!--CONTENT?-->\n" +
-    "	<!--<div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Item Content</button>\n" +
-    "        </div>\n" +
-    "    </div>-->\n" +
-    "\n" +
-    "    <!--LIST REACTIONS-->\n" +
+    "    <!--TODO: LIST REACTIONS.. IE RATINGS IF GENERATOR-->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
-    "\n" +
     "        <div class=\"card\" ng-if=\"contentList.length == 0\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <p style=\"color:gray;font-style:italic\">There is nothing here...</p>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div class=\"card\" ng-repeat=\"item in contentList\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div>\n" +
@@ -10259,7 +10185,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"container\" ng-show=\"true\">\n" +
+    "<div class=\"container\" ng-if=\"showMap\">\n" +
     "    <div class=\"row\">\n" +
     "\n" +
     "        <div ng-show=\"pageNumber == 0\">\n" +
@@ -10299,6 +10225,11 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
@@ -10415,9 +10346,11 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">We Promote Consentual Sharing. Give as much information as you would like.</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style=\"float:right;height:auto;margin:0px\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
-    "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/4dde88fc96aa2bdda54559c36e5ad870/tumblr_ng5jy9JzPn1s5h88so1_1280.jpg\">\n" +
-    "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/9daaa4e19ea6660b429d64c0ae417418/tumblr_n7dp7oF5DC1r1arpmo1_r1_1280.png\">\n" +
-    "                    <img style=\"max-height:200px\" src=\"http://68.media.tumblr.com/bcce94fa8d074789e52ac8c177120683/tumblr_oldnu3SSfR1r1arpmo1_1280.png\">\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?personal\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?human\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?joy\"></div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"card\">\n" +

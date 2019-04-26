@@ -1,8 +1,9 @@
 ![conexus](https://www.conex.us/images/conexus-black.png "conex.us")
 # Conexus
-## [Wiki](wiki)
+## [DEVELOPERS](https://www.cre8.xyz/developers)
+> ### [Wiki](wiki)
 ## Create A Transparent Network
-> Connect Collab Create
+> ### Connect Collab Create
 
 ```
 // in "/path/to/folder" copy https://pastebin.com/JfQtY8hw as geneis.json 
@@ -76,6 +77,7 @@ var associationModel = {
 };
 ```
 > get /api/assoication
+
 > post /api/assoication
 
 #### Content
@@ -94,6 +96,7 @@ var contentModel = {
 };
 ```
 > get /api/content
+
 > post /api/content
 
 #### Follower
@@ -106,6 +109,7 @@ var followerModel = {
 };
 ```
 > get /api/follower
+
 > post /api/follower
 
 #### Item
@@ -126,6 +130,7 @@ var itemModel = {
 };
 ```
 > get /api/item
+
 > post /api/item
 
 #### Location
@@ -139,6 +144,7 @@ var location = {
 };
 ```
 > get /api/location
+
 > post /api/location
 
 #### Motion
@@ -149,6 +155,7 @@ var motionModel = {
 };
 ```
 > get /api/motion
+
 > post /api/motion
 
 #### Notification
@@ -175,6 +182,7 @@ var orderModel = {
 };
 ```
 > get /api/order
+
 > post /api/order
 
 #### Passport
@@ -189,6 +197,7 @@ var passportModel = {
 };
 ```
 > get /api/passport
+
 > post /api/passport
 
 #### Project
@@ -207,6 +216,7 @@ var projectModel = {
 };
 ```
 > get /api/project
+
 > post /api/project
 
 #### ProjectMember
@@ -218,6 +228,7 @@ var projectMemberModel = {
 };
 ```
 > get /api/projectmember
+
 > post /api/projectmember
 
 #### Reaction
@@ -232,6 +243,7 @@ var reactionModel = {
 };
 ```
 > get /api/reaction
+
 > post /api/reaction
 
 #### Task
@@ -248,6 +260,7 @@ var taskModel = {
 };
 ```
 > get /api/task
+
 > post /api/task
 
 #### Time
@@ -261,6 +274,7 @@ var timeModel = {
 };
 ```
 > get /api/time
+
 > post /api/time
 
 #### Token
@@ -274,6 +288,7 @@ var tokenModel = {
 };
 ```
 > get /api/token
+
 > post /api/token
 
 #### Transaction
@@ -300,6 +315,7 @@ amountSet = {
 ```
 
 > get /api/transaction
+
 > post /api/transaction
 
 #### User
@@ -317,6 +333,7 @@ var userModel = {
 };
 ```
 > get /api/user
+
 > post /api/user
 
 #### Validation
@@ -331,4 +348,5 @@ var validationModel = {
 };
 ```
 > get /api/validation
+
 > post /api/validation

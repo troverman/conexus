@@ -20,7 +20,7 @@ mapping (address => mapping (string => uint)) balances;
 
 	Protocol Interpretation
 
-# Orginization Principles
+# Organization Principles
 
 	Validation 
 	Reputation

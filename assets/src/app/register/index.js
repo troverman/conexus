@@ -23,6 +23,7 @@ angular.module( 'conexus.register', [
 	
     if ($rootScope.currentUser){$location.path('/')}
     $rootScope.baseMarkets = [{text:'UNIVERSALTOKEN'}];
+    $rootScope.showMap = true;
 
     //var promises = [
         //ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'})

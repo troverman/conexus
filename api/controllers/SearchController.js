@@ -33,6 +33,8 @@ module.exports = {
 	search: function (req, res) {
 
 
+
+		if (!req.query.query){
 		//TODO: COMPLEX QUERY
 		console.log(req.query);
 		var querySet = JSON.parse(JSON.stringify(req.query));
@@ -69,7 +71,7 @@ module.exports = {
 			}
 
 		}
-
+		}
 	
 
 

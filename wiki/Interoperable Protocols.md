@@ -33,7 +33,7 @@ Protocols define logic and create 'logic manifolds' nested within a token strucu
 # Core protocols
 
 	CONGRUENCE
-	Rotational Equalities via language interperlation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
+	Rotational Equalities via language interpolation & algebra(s) | a+b+c is congruent (≅) to c+b+a is congruent (≅) to b+c+a)
 
 	MANIFOLDS
 	+[] SPACE

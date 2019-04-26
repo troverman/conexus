@@ -7,74 +7,44 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-
 	<div class="spacing-10"></div>
-
 	<div class="row">
 		<div class="card">
 			<div style="padding:16px;">
-
-
                 <div style="float:right;text-align:right">
-
                     <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-qrcode"></i>
                     <i style="" ng-click="$event.stopPropagation();actionToggle(item);" class="fa fa-eye"></i>
                     <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-tags"></i>
                     <i style="" ng-click="$event.stopPropagation();orderToggle(item);" class="fas fa-heart"></i>
                     <i style="" ng-click="$event.stopPropagation();orderToggle(item);" class="fa fa-shopping-cart"></i>
-
                     <i style="" ng-click="$event.stopPropagation();orderToggle(item);" class="fas fa-share-alt"></i>
                     <i style="" ng-click="$event.stopPropagation();renderValidationToggle(item);" class="fas fa-bezier-curve"></i>
                     <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fas fa-coins"></i>
-
                     <i style="" ng-click="$event.stopPropagation();tokensToggle(item);" class="fa fa-ellipsis-v"></i>
-
                 </div>
-
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline" href="member/{{item.user.username}}"><span style="font-weight:800">{{item.user.username}}</span></a>
                 </div>
-
                 <div class="spacing-10"></div>
                 <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
                 <div class="spacing-10"></div>
-
-
-                <!--EMBEDED CONTENT-->
-                <!--ASSOCIATED MODEL-->
-                <!--CONTENT SOULD BE TEMPLATE OR SOMETHING?-->
-                <!--VT PLUGIN..-->
-		        <div>
-					<span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
-				</div>
-
-
+                <!--TODO: EMBEDED CONTENT-ASSOCIATED MODEL-->
+                <!--TODO: VT PLUGIN..-->
+		        <div><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 				<div class="spacing-10"></div>
 				<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>
-
 			</div>
-
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                 <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
             </div>
-
-            <div ng-show="item.showReply" class="card-footer">
-                <form role="form" ng-submit="createContent(item)">
-                    <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                </form>
-            </div>
-
 		</div>
     </div>
-
     <div class="spacing-5"></div>
-	
+
     <div style="row">
         <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
             <li><a href="#">Content</a></li>
@@ -82,37 +52,16 @@
         </ul>
     </div>
 
-    <!--IF LIQDUID OR NOT .. AKA IF FORE SALE..-->
+    
+    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->
+    <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->
+    <!--ORDER FUILFILMENT COMES FROM LINKED INFO IN ORDER-->
+    <!--ADDRESS.. NAME PARAM-->
+    <!--URCHASE NEEDS TO BE VERY.. EASY..-->
 
     <div class="row">
         <div class="card">
             <button type="submit" class="btn btn-default log-btn" ng-click="orderToggle()">+ Order</button>
-        </div>
-    </div>
-
-    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->
-
-    <div class="row" ng-if="false">
-        <div class="card">
-            <div style="">
-                <button type="submit" class="btn btn-default log-btn" ng-click="purchaseToggle()">Purchase</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="row" ng-show="purchaseToggleVar">
-        <div class="card">
-            <div style="padding:16px;">
-                <h3 style="text-align:left;margin-left:15px;margin-bottom:15px;">Purchase {{item.title}}</h3>
-                <form role="form" ng-submit="createTask(newTask)">
-                    <div class="form-group">
-                        <input placeholder="Name" type="text" ng-model="newPurchase.name" class="form-control" id="taskTitle">
-                        <input placeholder="Address" type="text" ng-model="newPurchase.address" class="form-control" id="taskTitle">
-                        <text-angular placeholder="Content" ng-model="newPurchase.content" ta-toolbar="''"></text-angular>
-                    </div>
-                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
-                </form>
-            </div>
         </div>
     </div>
 
@@ -121,7 +70,6 @@
         <div class="card">
             <div style="padding:16px">
                 <div class="">
-                
                     <h3>Liquidity</h3>
                     <div ng-repeat="input in inputVector">
                         <div layout="">
@@ -130,50 +78,32 @@
                             <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{inputVectorWeight}}</span></div>
                         </div>
                     </div>
-
                     <h5>InputVector: <span ng-repeat="input in inputVector"><a href="market/{{input}}">{{input.text}}</a> </span>
-                    <h5>Dimensional Object</h5>
+                    <h5>Multidimensional Relation Object</h5>
+                    <!--NEED TO DO HIGH DIMENSIONAL TRANING.. LEARNING SETS ARE REAL TRAVERSALS.. JUST DO INPUT OUTPUT VECTORS: BULK TRAIN--> 
                     <h5>OutputVector: {{item.amountSet}} <span ng-repeat="output in outputVector"><a href="market/{{output}}">{{output.text}}</a> </span>
-
                     <form ng-submit="marketTraverse(tokens, outputVector)">
-                        
                         <tags-input min-length="1" placeholder="Input Vector" ng-model="inputVector"></tags-input>
                         <tags-input min-length="1" placeholder="Output Vector" ng-model="outputVector"></tags-input>
-
                     </form>
-
                     <!--TRAVERSAL PARAMETERS-->
                     <p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
                         <span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
                         <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
                     </p>
-
                 </div>
             </div>
         </div>
     </div>
 
-    <!--TODO-->
-
-	<!--Delivery | Fuilfillment-->
-
-    <!--CONTENT?-->
-	<!--<div class="row">
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Item Content</button>
-        </div>
-    </div>-->
-
-    <!--LIST REACTIONS-->
+    <!--TODO: LIST REACTIONS.. IE RATINGS IF GENERATOR-->
 
     <div class="row">
-
         <div class="card" ng-if="contentList.length == 0">
             <div style="padding:16px;">
                 <p style="color:gray;font-style:italic">There is nothing here...</p>
             </div>
         </div>
-
         <div class="card" ng-repeat="item in contentList">
             <div style="padding:16px">
                 <div>

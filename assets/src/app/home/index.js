@@ -174,7 +174,7 @@ angular.module( 'conexus.home', [
                 //TODO: SIMPLY UPDATE QUERY :)
                 //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                 //TODO: DISTANCE
-                ProjectModel.getSome({location:[lng,lat], limit:100, skip:0, sort:'createdAt DESC'}).then(function(projects){
+                ProjectModel.getSome({location:[lng,lat], limit:10, skip:0, sort:'createdAt DESC'}).then(function(projects){
                     $scope.activity = projects.map(function(obj){
                         obj.model = 'PROJECT';
                         return obj;

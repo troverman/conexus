@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="container" ng-show="true">
+<div class="container" ng-if="showMap">
     <div class="row">
 
         <div ng-show="pageNumber == 0">
@@ -48,6 +48,11 @@
                 <div style="padding:16px;">
                     <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
                     <p style="color:gray;font-size:12px;font-style:italic">The more detailed your dimensional vote the stronger the effect.</p>
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                    </div>
                 </div>
             </div>
             <ul style="padding:0px;" class="member-tabs">
@@ -164,9 +169,11 @@
                 <div style="padding:16px;">
                     <p style="color:gray;font-size:12px;font-style:italic">We Promote Consentual Sharing. Give as much information as you would like.</p>
                     <p style="color:gray;font-style:italic">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style="float:right;height:auto;margin:0px" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
-                    <img style="max-height:200px" src="http://68.media.tumblr.com/4dde88fc96aa2bdda54559c36e5ad870/tumblr_ng5jy9JzPn1s5h88so1_1280.jpg">
-                    <img style="max-height:200px" src="http://68.media.tumblr.com/9daaa4e19ea6660b429d64c0ae417418/tumblr_n7dp7oF5DC1r1arpmo1_r1_1280.png">
-                    <img style="max-height:200px" src="http://68.media.tumblr.com/bcce94fa8d074789e52ac8c177120683/tumblr_oldnu3SSfR1r1arpmo1_1280.png">
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?personal"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?human"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?joy"></div>
+                    </div>
                 </div>
             </div>
             <div class="card">
