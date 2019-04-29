@@ -181,7 +181,7 @@
 			                    </div>
 			                    <div class="col-sm-11 col-xs-10">
 			                        <h3 style="margin-top:0px">
-			                            <a href="/project/{{item.urlTitle}}">
+			                            <a ng-click="$event.stopPropagation();" href="/project/{{item.urlTitle}}">
 			                                {{item.title}}
 			                            </a>
 			                        </h3>
@@ -197,14 +197,13 @@
 		                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 		                        <div style="margin-top: auto;margin-bottom: auto;">
 		                            <div class="container">
-		                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}">{{item.title}}</h1>
+		                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}"><a ng-click="$event.stopPropagation();" href="task/{{item.id}}" style="color:white">{{item.title}}</h1>
 		                            </div>
 		                        </div>
 		                    </div>
 		                </div>
 						<div style="padding:16px;">
 							<div style="float:right;text-align:right">
-	                            <!--<a style="color:gray;" ng-click="$event.stopPropagation();renderValidationToggle(item)"><span style="color:gray"></span><i class="fas fa-bezier-curve"></i></a>-->
 	                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
 			                </div>
 							<h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>

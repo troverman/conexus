@@ -76,10 +76,8 @@ angular.module( 'conexus', [
     });
     $locationProvider.html5Mode(true);
 }])
-.run( function run () {
-    moment.locale('en');
-})
-.controller( 'AppCtrl', ['$rootScope', '$scope', 'UserModel', function AppCtrl ( $rootScope, $scope, UserModel ) {
+.run(function run(){moment.locale('en')})
+.controller( 'AppCtrl', ['$rootScope', '$scope', '$state', 'titleService', 'UserModel', function AppCtrl ( $rootScope, $scope, $state, titleService, UserModel ) {
 
     //TODO: BETTER
     $rootScope.currentUser = window.currentUser;
@@ -94,22 +92,43 @@ angular.module( 'conexus', [
     $rootScope.$on('$stateChangeStart',function(){
         $rootScope.stateIsLoading = true;
     });
-    
+
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
+        window.scrollTo(0, 0);
+        //titleService | seoService
+        if ($state.current.url.substring(1) !== ''){
+            titleService.setTitle($state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }) +' | CRE8.XYZ');
+            $rootScope.projectNavigation = $state.current.url.substring(1);
+        }
+        else{titleService.setTitle('CRE8.XYZ');}
     });
 
-    //TODO: ALL GLOBAL VERIABLES
+    $rootScope.$watch(function(){
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        return true;
+    });
+
+    //INITALIZE ROOT VARIABLES
+    $rootScope.notificationCount = 0;
+
+    //TODO:DEPRECIATE
+    $rootScope.selectedTags = [];
+    $rootScope.selectedAssets = [];
+    $rootScope.selectedAssociations = [];
+    $rootScope.selectedLocations = [];
+    
+    //TODO:DEPRECIATE
+    $rootScope.searchQueryNav = {
+        assetsInput:[],
+        assetsOutput:[],
+        associations:[],
+        model:[],
+        locations:[],
+        query:[],
+        tags:[],
+        type:[],
+    };
+    $rootScope.taskTime = 0;
 
 }])
-.directive('errSrc', function() {
-  return {
-    link: function(scope, element, attrs) {
-      element.bind('error', function() {
-        if (attrs.src != attrs.errSrc) {
-          attrs.$set('src', attrs.errSrc);
-        }
-      });
-    }
-  }
-});

@@ -265,31 +265,19 @@ angular.module( 'conexus.project', [
     //TODO: DEPRECIATE --> MOVE TO NAV
     titleService.setTitle(project.title + ' | CRE8.XYZ');
 
-    //ERR CATCH 
-    //TODO:IMPROVE
     $scope.project = project;
     if(!$scope.project){$location.path('/')}
+    $scope.project.model = 'PROJECT';
 
     //LOCAL VARIABLES
     $scope.newMember = {};
-
     $scope.newTransaction = {};
-
-    //TODO.. $ROOTSCOPE --> PASS TO NAV
-    $scope.newTransaction.identifier = 'CRE8';
-    $scope.newTransaction.content = project.title + ' here\'s some '+$scope.newTransaction.identifier;
-
-    //$scope.projectNavigation
-
+    $scope.newTransaction.to = $scope.project.id;
     $scope.searchQuery = [];
 
-    //GLOBAL VARIABLES
+
+    //TODO: GLOBAL VARIABLES.. HMM
     $rootScope.markers = [];
-
-    //TODO: BETTER
-    $rootScope.to = $scope.project.id;
-
-    //TODO.. UX FOR TYPE.. MOTION TO ASSOCIATE.. MOTION TO PARENT ETC
     $rootScope.associatedModels = [{
         address: $scope.project.id,
         type: 'PROJECT',
@@ -297,7 +285,11 @@ angular.module( 'conexus.project', [
         text: 'Parent | '+$scope.project.title,
     }];
     $rootScope.project = $scope.project;
-    $rootScope.member = null;
+
+
+    //TODO: SMOOTH STATE CHANGE
+
+
 
     if ($scope.project.location){ 
         $scope.map = {
@@ -317,18 +309,8 @@ angular.module( 'conexus.project', [
         };
     }
 
-    if($rootScope.currentUser){$scope.newTransaction.from = $rootScope.currentUser.id}
 
-    //TOOD: COMPLEX QUERY
-    $scope.$watch('searchQuery' ,function(){
-        var query = $scope.searchQuery.map(function(obj){return obj.text}).join(',')
-        SearchModel.search(query).then(function(models){
-            console.log(models)
-            $rootScope.activity = models;
-        });
-    },true);
-
-    //TODO
+    //TODO: ROOT
     $scope.createMember = function(){
         if($scope.currentUser){
             $scope.newMember.user = $rootScope.currentUser.id;
@@ -344,8 +326,6 @@ angular.module( 'conexus.project', [
         }
         else{$mdSidenav('login').toggle()}
     };
-
-    //TODO: SMOOTH STATE CHANGE
 
     //TODO: BETTER
     $scope.isProjectCreator = function() {
@@ -679,10 +659,7 @@ angular.module( 'conexus.project', [
     //INITALIZE LOCAL VARIABLES 
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.newTransaction = {};
     $scope.project = project;
-    $scope.newTransaction.to = $scope.project.id;
-    if($rootScope.currentUser){$scope.newTransaction.from = $rootScope.currentUser.id;}
     $scope.searchQuery = [];
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;

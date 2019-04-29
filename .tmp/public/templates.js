@@ -2,7 +2,8 @@ angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<div class=\"intro\" style=\"max-height:720px\">\n" +
+    "<!--<div class=\"intro\" style=\"max-height:720px\">-->\n" +
+    "<div class=\"intro\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
@@ -30,7 +31,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-sm-6\">\n" +
+    "			<div class=\"col-sm-7\">\n" +
     "				<!--SHIFT FROM FUTURE TO NOW-->\n" +
     "				<!--<h3>THE NEXT WAVE</h3>-->\n" +
     "				<h3>VALUE WE CRE8</h3>\n" +
@@ -44,7 +45,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "			<div class=\"col-md-7\">\n" +
     "				<h3>A SHARED WORLD</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">From shared items to space and time, sharing networks are reflective of our commitment.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supporative of sharing culture.</p>\n" +
@@ -57,8 +58,17 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6 col-xs-12\">\n" +
     "				<div class=\"card\">\n" +
+    "					<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover');min-height:auto\" class=\"imageContainerSmall\">\n" +
+    "					    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "					        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "					        	<div class=\"container\">\n" +
+    "					            	<h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">TRANSPARENCY MAXIMALISM</h1>\n" +
+    "					            </div>\n" +
+    "					        </div>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "				    <div style=\"padding:16px;\">\n" +
-    "						<h3>TRANSPARENCY MAXIMALISM</h3>\n" +
+    "						<!--<h3>TRANSPARENCY MAXIMALISM</h3>-->\n" +
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming & Complete Inclusivity create more connected paradigms.</p>\n" +
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Transparency through Sharing Creates Abundance.</p>\n" +
     "					</div>\n" +
@@ -584,7 +594,8 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apps/index.tpl.html",
-    "<div class=\"intro\" style=\"max-height:720px\">\n" +
+    "<!--<div class=\"intro\" style=\"max-height:720px\">-->\n" +
+    "<div class=\"intro\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
@@ -1347,9 +1358,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-7\">\n" +
     "                <h2>Developers</h2>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Developers CRE8. Developers Build. Developers Win. </p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Building Applications that further the promise of shared prosperity is a great public service.</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value. Change the world, participate in the development of tokenization protocols & applications.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value & Change the world. Participate in the development of tokenization protocols & applications.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-5\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
@@ -1408,36 +1418,50 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene, peer connection, and state of the network: WASM</p>\n" +
-    "                <p>The peer code compiles to Web Assembly to run inbrowser natively</p>\n" +
-    "                <p>Virtual Machiene vs Assembly</p>\n" +
-    "                <p>IPFS NODE; ETC</p>\n" +
-    "                <p>InterPlanetary File System Protocol</p>\n" +
-    "                <p>The State Machine</p>\n" +
-    "                <img src=\"images/ifps.svg\">\n" +
     "\n" +
-    "                <!--WEBASM -> BYTECODE (OF COMP)-->\n" +
-    "                <!--MECHIENE HAS OP CODES.. DECENT MACH CAN ONLY RUN OPCODES MORE OPIN-->\n" +
-    "                <!--ASSEMBLY CONVERTS TO BYTECODE-->\n" +
-    "\n" +
-    "                <!--VM IS VERY SPECIFIC -> CONTRACT COMPILES TO BYTECODE (OF VM) -->\n" +
-    "                <!--VM TRANSLATES BYTE CODE (RN ON A DECENTRALIZED M)-->\n" +
-    "\n" +
-    "                <img style=\"width:49%\"  src=\"images/hashtree.png\">\n" +
-    "                <img style=\"width:49%\"  src=\"images/mining.jpg\">\n" +
-    "\n" +
-    "                <p><b>Information in a Patricia Tree</b></p>\n" +
-    "                <img style=\"width:49%\" src=\"images/patricia-trie.png\">\n" +
-    "                <img style=\"width:49%\" src=\"images/patricia-trie-insert.png\">\n" +
-    "\n" +
-    "                <h5><a href=\"#TX\" du-smooth-scroll>Txs</a></h5>\n" +
-    "                <h5><a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></h5>\n" +
-    "                <h5><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a></h5>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene and peer network</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Peer code compiles to WebAssembly to run inbrowser natively</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Virtual Machiene vs Assembly</p>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <a class=\"btn btn-default log-btn\" href=\"https://www.github.com/troverman/conexus\">Github Peer Client</a>\n" +
+    "                <h5>The State Machine</h5>\n" +
+    "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
     "\n" +
+    "                <!--WEBASM -> BYTECODE (OF COMP)-->\n" +
+    "                <!--MECHIENE HAS OP CODES.. DECENTRALIZED MACHINE CAN ONLY RUN OPCODES: MORE OPINIATED-->\n" +
+    "                <!--ASSEMBLY CONVERTS TO BYTECODE-->\n" +
+    "                <!--VM IS VERY SPECIFIC -> CONTRACT COMPILES TO BYTECODE (OF VM) -->\n" +
+    "                <!--VM TRANSLATES BYTE CODE (RUN ON A DECENTRALIZED MACHINE)-->\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h5>Data Storage & High-bandwith delivery</h5>\n" +
+    "                <p style=\"color:gray;font-style:italic\">InterPlanetary File System Protocol</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Live Peer Based Transcoding Services</p>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <!--FRONT END CLIENTS... ANGULAR 1.5, VUE, REACT -->\n" +
+    "                <!--PEER CLIENTS.. WEBASSEMBLY (RUST), SWIFT, JAVA, PYTHON, GO .. -->\n" +
+    "                <div>\n" +
+    "                    <p><b>Front End Clients</b></p>\n" +
+    "                    <p><a href=\"https://www.github.com/troverman/conexus\">Angular 1.X (1.7.8), <a href=\"#\">Vue (v2.6.1), <a href=\"#\">React (16.8)</a></p>\n" +
+    "                    <p><b>Peer Clients</b></p>\n" +
+    "                    <p><a href=\"#\">In-Browser WebAssembly (RUST)</a>, <a href=\"#\">Python</a>, <a href=\"#\">Go</a></p>\n" +
+    "                    <!--<p>Native Applications</p>\n" +
+    "                    <p><a href=\"#\">Android</a>, <a href=\"#\">iOS</a>, <a href=\"#\">In-Browser</a></p>-->\n" +
+    "                    <a class=\"btn btn-default log-btn\" href=\"https://www.github.com/troverman/conexus\">Github Peer Client</a>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <img src=\"images/ifps.svg\">\n" +
+    "                <img style=\"width:49%\"  src=\"images/hashtree.png\">\n" +
+    "                <img style=\"width:49%\"  src=\"images/mining.jpg\">\n" +
+    "                <p><b>Information in a Patricia Tree</b></p>\n" +
+    "                <img style=\"width:49%\" src=\"images/patricia-trie.png\">\n" +
+    "                <img style=\"width:49%\" src=\"images/patricia-trie-insert.png\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -1458,15 +1482,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">  \n" +
-    "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network is the decenetralized state machiene coordinated though peer connection, and state of the network</p>\n" +
+    "\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network creates a decenetralized state machiene, and coordinates though peer connection.</p>\n" +
     "                \n" +
     "                <p><b>Networking Protocols</b></p>\n" +
-    "                <h5><a href=\"#BLOCK\" du-smooth-scroll>Block</a></h5>\n" +
-    "                <h5><a href=\"#TX\" du-smooth-scroll>Tx</a></h5>\n" +
-    "                <h5><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a></h5>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Block Chain Principles</p>\n" +
+    "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
+    "\n" +
+    "                <p>Running a Peer</p>\n" +
+    "                <p>What is WebAssembly?</p>\n" +
     "\n" +
     "                <a class=\"btn btn-default log-btn\" href=\"/transparency\">Peers</a>\n" +
-    "                <p style=\"color:gray;fint-style:italic\">tx, blocks, mining, connections & transparency</p>\n" +
     "\n" +
     "\n" +
     "            </div>\n" +
@@ -3479,7 +3505,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "<style type=\"text/css\">\n" +
     "	.angular-google-map-container{height:300px;}\n" +
     "</style>\n" +
-    "\n" +
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -3493,26 +3518,20 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"row\">\n" +
-    "\n" +
     "		<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "	    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "		    <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "		</ul>\n" +
     "		<div style=\"clear:both\"></div>\n" +
-    "\n" +
     "		<div class=\"card\">\n" +
     "	        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
     "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "                <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\"><a  href=\"#\" role=\"button\"><h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5></a></div>\n" +
     "            </form>\n" +
     "	    </div>\n" +
-    "\n" +
     "	</div>\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
-    "\n" +
     "    	<div class=\"col-md-5\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "			<div class=\"card\">\n" +
     "				<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
@@ -3525,7 +3544,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				    </ui-gmap-marker>\n" +
     "				</ui-gmap-google-map>\n" +
     "			</div>\n" +
-    "\n" +
     "			<div class=\"card\">\n" +
     "		        <div style=\"padding:16px;\">\n" +
     "				    <b><a href=\"/content\">Content</a></b>\n" +
@@ -3579,9 +3597,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	                </div>\n" +
     "		        </div>\n" +
     "		    </div>\n" +
-    "\n" +
     "		</div>\n" +
-    "		\n" +
     "    	<div class=\"col-md-7\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "			<div ng-repeat=\"item in tasks.slice(0,10)\">\n" +
     "				<div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
@@ -3611,9 +3627,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "\n" +
     "	</div>\n" +
-    "\n" +
     "</div>\n" +
     "\n" +
     "<!--\n" +
@@ -5463,7 +5477,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "						<span style=\"color:gray;font-size:10px;float:right\">0x{{member.id}}</span>\n" +
     "						<br>\n" +
     "						<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\">\n" +
-    "						<a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a>\n" +
+    "						<a style=\"padding:10px 15px;color:rgb(125,125,125)\"class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(member)\">Send Tokens</a>\n" +
     "					</div>\n" +
     "				</div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
@@ -6285,7 +6299,7 @@ angular.module("member/templates/ledger.tpl.html", []).run(["$templateCache", fu
     "		</div>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
-    "			<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">+ Transaction</button>\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle(member)\">+ Transaction</button>\n" +
     "		</div>\n" +
     "\n" +
     "		<div class=\"card\" ng-repeat=\"item in transactions\" ng-click=\"cardDetailToggle(item)\">\n" +
@@ -8682,7 +8696,6 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\" ng-click=\"subNavToggle()\">\n" +
-    "\n" +
     "        <div class=\"imageContainerSmall\">\n" +
     "            <div class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -8718,7 +8731,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/projects\">Projects</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/time\">Time</a></li>\n" +
-    "                        <li><a ng-click=\"$event.stopPropagation();transactionToggle()\" class=\"btn btn-default\">Send Tokens</a></li>\n" +
+    "                        <li><a ng-click=\"$event.stopPropagation();transactionToggle(project)\" class=\"btn btn-default\">Send Tokens</a></li>\n" +
     "                        <li style=\"float:right;margin-top:5px\"><a style=\"color:black\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
@@ -8897,12 +8910,11 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "                                <h1 ng-click=\"$event.stopPropagation()\" style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"task/{{item.id}}\">{{item.title}}</a></h1>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <div style=\"float:right\">\n" +
     "                        <p style=\"text-align:right\">\n" +
@@ -9539,7 +9551,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		</div>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
-    "			<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle()\">+ Transaction</button>\n" +
+    "			<button class=\"btn btn-default log-btn\" ng-click=\"transactionToggle(project)\">+ Transaction</button>\n" +
     "		</div>\n" +
     "\n" +
     "		<div class=\"card\">\n" +
@@ -10644,7 +10656,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "			                    </div>\n" +
     "			                    <div class=\"col-sm-11 col-xs-10\">\n" +
     "			                        <h3 style=\"margin-top:0px\">\n" +
-    "			                            <a href=\"/project/{{item.urlTitle}}\">\n" +
+    "			                            <a ng-click=\"$event.stopPropagation();\" href=\"/project/{{item.urlTitle}}\">\n" +
     "			                                {{item.title}}\n" +
     "			                            </a>\n" +
     "			                        </h3>\n" +
@@ -10660,14 +10672,13 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "		                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "		                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "		                            <div class=\"container\">\n" +
-    "		                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"task/{{item.id}}\">{{item.title}}</h1>\n" +
+    "		                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"task/{{item.id}}\"><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</h1>\n" +
     "		                            </div>\n" +
     "		                        </div>\n" +
     "		                    </div>\n" +
     "		                </div>\n" +
     "						<div style=\"padding:16px;\">\n" +
     "							<div style=\"float:right;text-align:right\">\n" +
-    "	                            <!--<a style=\"color:gray;\" ng-click=\"$event.stopPropagation();renderValidationToggle(item)\"><span style=\"color:gray\"></span><i class=\"fas fa-bezier-curve\"></i></a>-->\n" +
     "	                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "			                </div>\n" +
     "							<h4><a ng-click=\"$event.stopPropagation();\" href=\"task/{{item.id}}\">{{item.title}}</a></h4>\n" +

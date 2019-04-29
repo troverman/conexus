@@ -30,18 +30,19 @@ module.exports.bootstrap = function(cb) {
 	//40.730610, -73.935242 // nyc; bushwick
 	//37.773972, -122.431297 // BAY AREA
 	//37.5483, -121.9886 //FREEMONT
+	//35.7578° N, 81.8888° //LAKE JAMES STATE PARK
 	var geoModel = {
 		username:'troverman',
-		lat:'40.730610',
-		lng:'-73.935242',
+		lat:'35.7578',
+		lng:'-81.8888',
 		//PRK, CH, CTRCM, CMN, S.CAFE, S.SCH, LIBR
 		featureCode:'PRK',
 		//parent, latlng
 		type:'latlng',
-		radius:'10',
+		radius:'35',
 		parentId:'4482348'
 	};
-	//utilService.getGeoNames(geoModel);
+	//utilService.getGeoNames(geoModel);	
 	//PURGE HISTORICAL
 	//utilService.purge('(historical)');
 
@@ -61,6 +62,7 @@ module.exports.bootstrap = function(cb) {
 				//I AM THE CM THE MAYOR THE X THE Y THE Z 
 
 	//BREAK OUT THE TASKS ETC INTO CONTENT FOR THE CREATES
+	//TODO:utilService.googleMaps(model)
 
 	//POPULATE TOKENZ
 	setInterval(dataService.traverse, 8640000);

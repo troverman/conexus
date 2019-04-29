@@ -1,57 +1,26 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'titleService', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, titleService, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$window', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $window, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
+
+    //TODO: ALL!
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
-
     //CREATE TIME .. 
     //UPDATE EVERY 10 SECONDS 
     //--> THATS THE FRONT END TIMER
     //.. CALC THE TIME SINCE CREATE TO ENSURE TIMER
     //.. NOT FRONTEND
 
+
+    //TODO: IN APP.JS
     //STATE CHANGE LOGIC
     $rootScope.$on("$stateChangeStart", function() {
-        $scope.closeAllNav();
         //VIEW GENERATION
         //$scope.createView();
+        $scope.closeAllNav();
     });
     
-    $rootScope.$on("$stateChangeSuccess", function() {
-        window.scrollTo(0, 0);
-        //titleService | seoService
-        if ($state.current.url.substring(1) !== ''){
-            titleService.setTitle($state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }) +' | CRE8.XYZ');
-        }
-        else{titleService.setTitle('CRE8.XYZ');}
-        //$rootScope.projectNavigation = $state.current.url.substring(1);
-        //console.log($state.current.url.substring(1))
-    });
-    
-    //INITALIZE ROOT VARIABLES
-    $rootScope.notificationCount = 0;
-    $rootScope.projectNavigation = $state.current.url.substring(1);
-    $rootScope.selectedTags = [];
-    $rootScope.selectedAssets = [];
-    $rootScope.selectedAssociations = [];
-    $rootScope.selectedLocations = [];
-    $rootScope.searchQueryNav = {
-        assetsInput:[],
-        assetsOutput:[],
-        associations:[],
-        model:[],
-        locations:[],
-        query:[],
-        tags:[],
-        type:[],
-    };
-    $rootScope.taskTime = 0;
-    $rootScope.$watch(function(){
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-        return true;
-    });
-
     //INITALIZE LOCAL VARIABLES
     $scope.chart = {};
     $scope.confirm = {};
@@ -75,25 +44,16 @@ angular.module( 'conexus.nav', [
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedType = 'POST';
     $scope.validationColumnRender = {};
-    $scope.$watch('tokens', function() {
-        $scope.inputVector = $scope.tokens;
-        $scope.outputMatix = [];
-        $scope.outputVector = [];
-    });
-
-
-    
 
     //TODO: REFACTOR SOON
     if ($rootScope.currentUser){
         $scope.newContent.associatedModels = [{text: $rootScope.currentUser.username, type:'PROFILE', id:$rootScope.currentUser.id}];
 
-         //KINDA HACY
+        //TODO: KINDA HACY
         $rootScope.$watch('currentUser', function(){
             $scope.newTransaction.from = [{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}];
         }, true);
 
-        //NOTIFICATIONS
         //TODO:BETTER
         NotificationModel.getSome({user:$rootScope.currentUser.id, isRead:false, limit:100, skip:0, sort:'createdAt DESC'}).then(function(notifications){
             $scope.notifications = notifications;
@@ -104,20 +64,15 @@ angular.module( 'conexus.nav', [
                 $scope.pop($scope.notifications[x].title, $scope.notifications[x].content);
             }
         });
-        //SOCKETS SUBSCRIPTIONS
+
         //TODO: WEBSOCKETS
         $sailsSocket.subscribe('notification', function (envelope) {
             switch(envelope.verb) {
                 case 'created':
                 //if logged in user
                 //HAS TO BE BETTER THAN SOCKET CHECK 
-                //--> THIS IS RED HOT AT SCALE ,, lol 
-                //,, personal notification room vs whole -- TODO: REDO !
-                //$scope.currentUser.id
-                console.log(envelope)
-                //if type
-                //$scope.pop(envelope.data.title, envelope.data.info.user.username);
                 //$scope.pop(envelope.data.title, envelope.data.info.username);
+                console.log(envelope)
                 $rootScope.notificationCount++;
             }
         });
@@ -631,7 +586,6 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: RENDER PROJECT TOGGLE
-
     //$rootScope.reply = function(){};
 
     $rootScope.statsToggle = function(){
@@ -827,15 +781,34 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.transactionToggle = function(item){
+
         $scope.closeAllNav();
+
+        console.log(item, $scope.newTransaction);
+
         if($rootScope.currentUser){
+
             if (item){
-                //TODO!
-                $scope.newTransaction.to = [{text:item.username,address:item.id,id:item.id}];
+                if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, address:item.id, id:item.id}];}
+                else{$scope.newTransaction.to = [{text:item.username, address:item.id, id:item.id}];}
             }
+
+            //if (!$scope.newTransaction.content){$scope.newTransaction.content = 'TEST'}
+
+            //TODO:
+            if (!$scope.newTransaction.identifierSet){
+                //$scope.newTransaction.identifierSet = [{text:'CRE8'}];
+                //$scope.newTransaction.amountSet = {};
+                //$scope.newTransaction.amountSet['CRE8'] = 1;
+                //$scope.newTransaction.tags = [{text:'tag'},{text:'tag1'}];
+            }
+
             $mdSidenav('transaction').toggle();
+
         }
+
         else{$mdSidenav('login').toggle();}
+
     };
 
     $rootScope.validationToggle = function(item){
@@ -1171,16 +1144,19 @@ angular.module( 'conexus.nav', [
 
     $scope.createTransaction = function(){
         if ($rootScope.currentUser){
+
             $scope.newTransaction.user = $rootScope.currentUser.id
             if ($scope.newTransaction.tags){
                 $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
                     return obj.text
                 }).join(",");
             }
+
             $scope.newTransaction.from = $scope.newTransaction.from[0].id;
             $scope.newTransaction.to = $scope.newTransaction.to[0].id;
+
             console.log($scope.newTransaction);
-            //information in amountset
+
             TransactionModel.create($scope.newTransaction).then(function(model){
                 $scope.confirm = $scope.newTransaction;
                 $scope.confirm.model = 'TRANSACTION';
@@ -1191,6 +1167,7 @@ angular.module( 'conexus.nav', [
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
             });
+
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
@@ -1281,7 +1258,7 @@ angular.module( 'conexus.nav', [
             {text:'BCH'},
             {text:'ETH'},
             {text:'LTC'},
-            {text:'USD'}, // STRIPE??--> TALK ABOUT HIS
+            {text:'USD'},
             {text:'STEEM'},
             {text:'NOVO'},
             {text:'TIME'},
@@ -1368,14 +1345,11 @@ angular.module( 'conexus.nav', [
         console.log(query);
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
-        UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
-            console.log(searchModels);
-            searchModels.map(function(obj){
-                obj.title = obj.text;
-                return obj.text;
-            });
+        //UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
+        //    console.log(searchModels);
+            searchModels = [{text:'TAG'}, {text:'TAG2'}]
             deferred.resolve(searchModels);
-        });
+        //});
         return deferred.promise;
     };
 

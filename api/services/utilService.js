@@ -130,7 +130,7 @@ module.exports = {
 						urlTitle:data.name.replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
 
 						//A COMPUTED VALUE.. .. IMPLICIT MOTION TO .. ? META VALIDATION PROJ_a - PROJ_a
-						tags:'park,community,newyork,nyc,space,outdoor,fun,'+data.name,
+						tags:'park,community,nc,northcarolina,outdoor,fun,'+data.name,
 
 						description:data.toponymName,
 						location:{address:'', lat:parseFloat(data.lat), lng:parseFloat(data.lng), coordinates:[parseFloat(data.lng), parseFloat(data.lat)]},
@@ -153,11 +153,11 @@ module.exports = {
 						if (selectedProjectModel.length == 0){
 							Project.create(projectModel).then(function(newProjectModel){
 								console.log('PROJECT CREATED!');
-								Task.find({id:'5cb7751fb965794d37dbaf2f'}).then(function(taskModel){
+								Task.find({id:'5cc359b75b2c881500738619'}).then(function(taskModel){
 									if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(newProjectModel.id) == -1){
 										taskModel[0].associatedModels.push({type:'PROJECT', address:newProjectModel.id});
 										console.log(taskModel[0].associatedModels);
-										Task.update({id:'5cb7751fb965794d37dbaf2f'},{associatedModels:taskModel[0].associatedModels}).then(function(){
+										Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels}).then(function(){
 											process.nextTick(next);
 										});
 									}
@@ -184,11 +184,11 @@ module.exports = {
 							//	process.nextTick(next);
 							//});
 
-							Task.find({id:'5cb7751fb965794d37dbaf2f'}).then(function(taskModel){
+							Task.find({id:'5cc359b75b2c881500738619'}).then(function(taskModel){
 								if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(selectedProjectModel[0].id) == -1){
 									taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
 									console.log(taskModel[0].associatedModels);
-									Task.update({id:'5cb7751fb965794d37dbaf2f'},{associatedModels:taskModel[0].associatedModels}).then(function(){
+									Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels}).then(function(){
 										process.nextTick(next);
 									});
 								}

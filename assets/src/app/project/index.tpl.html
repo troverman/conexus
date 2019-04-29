@@ -2,7 +2,6 @@
 
 <div class="container" style="padding:0px">
     <div class="card" ng-click="subNavToggle()">
-
         <div class="imageContainerSmall">
             <div class="imageContainerSmallDiv">  
                 <div style="margin-top: auto;margin-bottom: auto;">
@@ -38,7 +37,7 @@
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/projects">Projects</a></li>
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/time">Time</a></li>
-                        <li><a ng-click="$event.stopPropagation();transactionToggle()" class="btn btn-default">Send Tokens</a></li>
+                        <li><a ng-click="$event.stopPropagation();transactionToggle(project)" class="btn btn-default">Send Tokens</a></li>
                         <li style="float:right;margin-top:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
                     </ul>
                 </div>
