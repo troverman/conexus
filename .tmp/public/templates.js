@@ -7779,19 +7779,19 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <form role=\"form\" ng-submit=\"createTime()\">\n" +
     "\n" +
     "                    <!--SELF CONTEXT-->\n" +
-    "                    <div>\n" +
-    "                        <h5>Context (Tags)</h5>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
-    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "                    </div>\n" +
     "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
-    "\n" +
     "                    <h5>Associations (Task) <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
+    "                    <div ng-if=\"!newTime.associatedModels.length\">\n" +
+    "                        <h5>Context (Tags)</h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
+    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                    </div>\n" +
+    "                    \n" +
     "\n" +
     "                    <!--TODO-->\n" +
     "                    <!--FOR X IN TAGS-->\n" +
@@ -7804,13 +7804,16 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                            </tags-input>\n" +
     "\n" +
     "                            <!--<a href=\"#\"><b>Validation(s)</b></a>-->\n" +
+    "\n" +
     "                            <div class=\"spacing-5\"></div>\n" +
     "\n" +
+    "                            <!--\n" +
     "                            <div layout=\"\">\n" +
     "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
     "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
     "                            </div>\n" +
+    "                            -->\n" +
     "\n" +
     "                            <div ng-repeat=\"tag in newTime.tags track by $index\">\n" +
     "                                <div layout=\"\">\n" +
@@ -8143,11 +8146,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
+    "                <!--THINK ABOUT THIS MATHMATICALLY-->\n" +
+    "                <!--\n" +
     "                <div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
     "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
     "                </div>\n" +
+    "                -->\n" +
     "\n" +
     "                <div ng-repeat=\"tag in tags track by $index\">\n" +
     "                    <div layout=\"\">\n" +
@@ -8274,6 +8280,16 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div class=\"container\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Information</h1>\n" +
+    "                            <h5 style=\"color:white\">{{informationType}}</h5>\n" +
+    "\n" +
+    "                            <!--<h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>-->\n" +
+    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -8285,56 +8301,48 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-if=\"informationType == 'CREATECONTENT'\">\n" +
     "\n" +
-    "                    <p>CREATE CONTENT</p>\n" +
     "                    <p>Content is art; content can funnel attention, energy, and value. You can CREATE content. Content can be associated recursivly. Triggering Motions to validate where appropiate.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATEITEM'\">\n" +
     "\n" +
-    "                    <p>CREATE ITEM</p>\n" +
     "                    <p>Items are moments of information. They convey complex information, transend the string domain, and carry within them the ability of application input. Providing more functionality and carrying with them additional ancillar protocol inputs. Creating rich ownership of (items as) assets and liabilities[defined by protocol]. The Marketplace is supported by Deventalized Physically Validated Delivery (PVD) Protocols.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATEORDER'\">\n" +
     "\n" +
-    "                    <p>CREATE ORDER</p>\n" +
     "                    <p>Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATEPROJECT'\">\n" +
     "\n" +
-    "                    <p>CREATE PROJECT</p>\n" +
     "                    <p>Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATETASK'\">\n" +
     "\n" +
-    "                    <p>CREATE TASK</p>\n" +
     "                    <p>Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATETIME'\">\n" +
     "\n" +
-    "                    <p>CREATE TIME</p>\n" +
     "                    <p>Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATETRANSACTION'\">\n" +
     "\n" +
-    "                    <p>CREATE TRANSACTION</p>\n" +
     "                    <p>Transactions allow for the exchange and transfer of tokens. They contain tags, content, and and amountSet. Transaction logic is governed by the TRANSACTION protocol.</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'CREATEVALIDATION'\">\n" +
     "\n" +
-    "                    <p>CREATE VALIDATION</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -8347,20 +8355,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-if=\"informationType == 'IDENTIFERSET'\">\n" +
     "\n" +
-    "                    <p>IDENTIFER SET</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <!--DEP-->\n" +
     "                <div ng-if=\"informationType == 'IDENTIFERALPHA'\">\n" +
     "\n" +
-    "                    <p>IDENTIFER SET ALPHA</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"informationType == 'IDENTIFERSETBETA'\">\n" +
     "\n" +
-    "                    <p>IDENTIFER SET BETA</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -8372,9 +8377,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-if=\"informationType == 'PROTOCOLS'\">\n" +
     "\n" +
-    "                    <p>PROTOCOL</p>\n" +
     "                    <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>\n" +
     "                    <p>A bundle of protocols create an Application.</p>\n" +
+    "                    \n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -8389,6 +8394,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple valistion types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>\n" +
     "                    <!--VALIDATION IMAGE-->\n" +
     "                    <p>Associations are computed though validation traversal.</p>\n" +
+    "\n" +
+    "                    <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -10889,7 +10896,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <div style=\"float:right;text-align:right\">\n" +
     "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(time)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                </div>\n" +
-    "                <div>\n" +
+    "                <div ng-click=\"$event.stopPropagation();\">\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">{{item.user.username}}</a>\n" +
     "                    <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
@@ -10903,11 +10910,11 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"card-footer\">\n" +
-    "                <a ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "                <a ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "                <a ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                <a  ng-click=\"validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "                <a style=\"padding:0px\" class=\"pull-right\" href=\"time/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"time/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -11512,18 +11519,41 @@ angular.module("tx/index.tpl.html", []).run(["$templateCache", function($templat
     "	<div class=\"row\">\n" +
     "		<div class=\"col-xs-12\">\n" +
     "			<div class=\"card\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?transaction,explore,code,chain,nature,blockchian,programming,finance')\" class=\"imageContainerSmall\">\n" +
+    "				    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "				        	<div class=\"container\">\n" +
+    "				            	<h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Summary</h1>\n" +
+    "				            </div>\n" +
+    "				        </div>\n" +
+    "				    </div>\n" +
+    "				</div>\n" +
     "				<div style=\"padding:16px;\">\n" +
-    "					<h3>Summary</h3>\n" +
-    "					<p style=\"font-style:italic;color:gray;margin:0px\">Block <a href=\"block/564365\">564365</a></p>\n" +
-    "					<p style=\"font-style:italic;color:gray;margin:0px\">Address <a href=\"block/564365\">eqerq5s64365</a></p>\n" +
-    "					<p style=\"font-style:italic;color:gray;margin:0px\">Address <a href=\"block/564365\">564sffad365</a></p>\n" +
-    "					<p style=\"font-style:italic;color:gray;margin:0px\">Height 564366 (Mainchain)</p>\n" +
-    "					<p style=\"font-style:italic;color:gray;margin:0px\">Data 000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Chain ID:</b> <a>1</a>(Main Chain)</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Block Height:</b> 564366</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Block Number:</b> <a href=\"block/564365\">564365</a></p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Address:</b> <a href=\"\">caf644ab582c42a56759764a15226ed2a1fa</a></p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Verification Type:</b> <a href=\"\">Proof Of Work</a> (PoeT 141.112)</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Peer(s):</b> <a href=\"member/troverman\">caf644ab582c42a56759764a15226ed2a1fa</a></p>\n" +
+    "\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">\n" +
+    "						<b>Data</b> <br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
+    "					</p>\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\">Function Calls, State Modification</p>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "</div>");
+    "</div>\n" +
+    "<div class=\"spacing-50\"></div>");
 }]);
 
 angular.module("validation/index.tpl.html", []).run(["$templateCache", function($templateCache) {

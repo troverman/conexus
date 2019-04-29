@@ -829,78 +829,82 @@ angular.module( 'conexus.nav', [
             //TIME <--> TASK FROM ON TIME CREATE
             //TASK <--> PROJ FROM ON TASK CREATE
 
-            if ($scope.item.model == 'TASK'){
+            if ($scope.item){
 
-                //TODO
-                //WHAT CONTEXT ARE WE LOOKING AT THE MODEL
-                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TASK | DYNAMIC FILTER
+                if ($scope.item.model == 'TASK'){
 
-                //DEPRECIATE .project && .task
-                $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'PROJECT'}];
+                    //TODO
+                    //WHAT CONTEXT ARE WE LOOKING AT THE MODEL
+                    //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TASK | DYNAMIC FILTER
 
-                $scope.newValidation.associatedModels = [{type:'TASK', address:item.id}];
+                    //DEPRECIATE .project && .task
+                    $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'PROJECT'}];
 
-                $scope.tags = item.tags;
-                for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                    $scope.newValidation.associatedModels = [{type:'TASK', address:item.id}];
 
-            }
-
-            if ($scope.item.model == 'TIME'){
-
-                //TODO
-                //WHAT CONTEXT ARE WE LOOKING AT THE MODEL
-                //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TIME
-
-                //DEPRECIATE .project && .task
-                //$scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'TASK'}];
-                //$scope.newValidation.associatedModels = [{type:'TIME', address:item.id}];
-
-                if($scope.item.task.tags){
-                    $scope.tags = item.task.tags;
+                    $scope.tags = item.tags;
                     for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+
                 }
 
-                //SELF DEFINED CONTEXT IN TIME
-                //BRIDGE BTW TASK CONTEXT (SELF DEFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
-                    //IF NOT CONTEXT VALIDATED IN TASK <-> PROJ IT IS 0. 
-                if($scope.item.tags){
-                    $scope.tags = Array.from(new Set($scope.tags.concat(item.tags)));
-                    for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                if ($scope.item.model == 'TIME'){
+
+                    //TODO
+                    //WHAT CONTEXT ARE WE LOOKING AT THE MODEL
+                    //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TIME
+
+                    //DEPRECIATE .project && .task
+                    //$scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'TASK'}];
+                    //$scope.newValidation.associatedModels = [{type:'TIME', address:item.id}];
+
+                    if($scope.item.task.tags){
+                        $scope.tags = item.task.tags;
+                        for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                    }
+
+                    //SELF DEFINED CONTEXT IN TIME
+                    //BRIDGE BTW TASK CONTEXT (SELF DEFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
+                        //IF NOT CONTEXT VALIDATED IN TASK <-> PROJ IT IS 0. 
+                    if($scope.item.tags){
+                        $scope.tags = Array.from(new Set($scope.tags.concat(item.tags)));
+                        for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                    }
+
                 }
 
+                //TODO: WATCH TAGS
+
+                //TODO PREVIOUS VALIDATION CONTEXT.. 
+                if ($scope.item.model == 'VALIDATION'){
+                    $scope.newValidation.associatedModel = [{text:'VALIDATION | '+$scope.item.id, type:'VALIDATION',address:$scope.item.id}];
+                    $scope.newValidation.associatedModels = [{type:'VALIDATION', address:item.id}];
+                }
+
+                if ($scope.item.model == 'CONTENT'){
+                    $scope.newValidation.associatedModels = [{type:'CONTENT', address:item.id}];
+                } //--> PROJ
+
+                if ($scope.item.model == 'ITEM'){
+                    $scope.newValidation.associatedModels = [{type:'ITEM', address:item.id}];
+                } //--> PROJ
+
+                if ($scope.item.model == 'MEMBER'){
+                    $scope.newValidation.associatedModels = [{type:'MEMBER', address:item.id}];
+                } //--> PROJ
+
+                if ($scope.item.model == 'ORDER'){
+                    $scope.newValidation.associatedModels = [{type:'ORDER', address:item.id}];
+                } //--> PROJ
+
+                if ($scope.item.model == 'PROJECT'){
+                    $scope.newValidation.associatedModels = [{type:'PROJECT', address:item.id}];
+                } //--> PROJ
+
+                if ($scope.item.model == 'TRANSACTION'){
+                    $scope.newValidation.associatedModels = [{type:'TRANSACTION', address:item.id}];
+                } //--> PROJ
+
             }
-
-            //TODO: WATCH TAGS
-
-            //TODO PREVIOUS VALIDATION CONTEXT.. 
-            if ($scope.item.model == 'VALIDATION'){
-                $scope.newValidation.associatedModel = [{text:'VALIDATION | '+$scope.item.id, type:'VALIDATION',address:$scope.item.id}];
-                $scope.newValidation.associatedModels = [{type:'VALIDATION', address:item.id}];
-            }
-
-            if ($scope.item.model == 'CONTENT'){
-                $scope.newValidation.associatedModels = [{type:'CONTENT', address:item.id}];
-            } //--> PROJ
-
-            if ($scope.item.model == 'ITEM'){
-                $scope.newValidation.associatedModels = [{type:'ITEM', address:item.id}];
-            } //--> PROJ
-
-            if ($scope.item.model == 'MEMBER'){
-                $scope.newValidation.associatedModels = [{type:'MEMBER', address:item.id}];
-            } //--> PROJ
-
-            if ($scope.item.model == 'ORDER'){
-                $scope.newValidation.associatedModels = [{type:'ORDER', address:item.id}];
-            } //--> PROJ
-
-            if ($scope.item.model == 'PROJECT'){
-                $scope.newValidation.associatedModels = [{type:'PROJECT', address:item.id}];
-            } //--> PROJ
-
-            if ($scope.item.model == 'TRANSACTION'){
-                $scope.newValidation.associatedModels = [{type:'TRANSACTION', address:item.id}];
-            } //--> PROJ
                      
             $mdSidenav('validation').toggle();
         }
@@ -913,8 +917,11 @@ angular.module( 'conexus.nav', [
         $mdSidenav('cardDetail').close();
         $mdSidenav('content').close();
         $mdSidenav('cre8').close();
+        $mdSidenav('information').close();
+        $mdSidenav('item').close();
         $mdSidenav('login').close();
         $mdSidenav('nav').close();
+        $mdSidenav('order').close();
         $mdSidenav('project').close();
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
@@ -1125,9 +1132,13 @@ angular.module( 'conexus.nav', [
             }
             //PATCH!!!
             if ($scope.newTime.associatedModels){
-                for (x in $scope.newTime.associatedModels){
-                    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address;
-                }
+
+
+                //for (x in $scope.newTime.associatedModels){
+                //    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address;
+                //}
+
+
             }
             console.log($scope.newTime);
             TimeModel.create($scope.newTime).then(function(model){
@@ -1366,7 +1377,10 @@ angular.module( 'conexus.nav', [
     $scope.loginToggle = function(){
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
+        $mdSidenav('action').close();
         $mdSidenav('content').close();
+        $mdSidenav('item').close();
+        $mdSidenav('order').close();
         $mdSidenav('project').close();
         $mdSidenav('render').close();
         $mdSidenav('tokens').close();
@@ -1418,8 +1432,12 @@ angular.module( 'conexus.nav', [
     //IMPROVE
     $scope.sideNavToggle = function(){
         $mdSidenav('subNav').close();
+        $mdSidenav('action').close();
         $mdSidenav('content').close();
+        $mdSidenav('information').close();
+        $mdSidenav('item').close();
         $mdSidenav('login').close();
+        $mdSidenav('order').close();
         $mdSidenav('project').close();
         $mdSidenav('render').close();
         $mdSidenav('tokens').close();

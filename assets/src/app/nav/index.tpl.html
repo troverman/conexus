@@ -1050,19 +1050,19 @@
                 <form role="form" ng-submit="createTime()">
 
                     <!--SELF CONTEXT-->
-                    <div>
-                        <h5>Context (Tags)</h5>
-                        <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
-                            <auto-complete source="loadTags($query)"></auto-complete>
-                        </tags-input>
-                    </div>
                     <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->
-
                     <h5>Associations (Task) <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
                         <auto-complete source="loadAssociationsTask($query)"></auto-complete>
                     </tags-input>
 
+                    <div ng-if="!newTime.associatedModels.length">
+                        <h5>Context (Tags)</h5>
+                        <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
+                            <auto-complete source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+                    
 
                     <!--TODO-->
                     <!--FOR X IN TAGS-->
@@ -1075,13 +1075,16 @@
                             </tags-input>
 
                             <!--<a href="#"><b>Validation(s)</b></a>-->
+
                             <div class="spacing-5"></div>
 
+                            <!--
                             <div layout="">
                                 <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                                 <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
                                 <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
                             </div>
+                            -->
 
                             <div ng-repeat="tag in newTime.tags track by $index">
                                 <div layout="">
@@ -1414,11 +1417,14 @@
                     <auto-complete source="loadAssociations($query)"></auto-complete>
                 </tags-input>
 
+                <!--THINK ABOUT THIS MATHMATICALLY-->
+                <!--
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
                 </div>
+                -->
 
                 <div ng-repeat="tag in tags track by $index">
                     <div layout="">
@@ -1545,6 +1551,16 @@
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
                             <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Information</h1>
+                            <h5 style="color:white">{{informationType}}</h5>
+
+                            <!--<h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>
+                            <h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>
+                            <h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>
+                            <h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>
+                            <h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>
+                            <h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>
+                            <h5 ng-if="informationType == 'CREATECONTENT'" style="color:white"></h5>-->
+
                         </div>
                     </div>
                 </div>
@@ -1556,56 +1572,48 @@
 
                 <div ng-if="informationType == 'CREATECONTENT'">
 
-                    <p>CREATE CONTENT</p>
                     <p>Content is art; content can funnel attention, energy, and value. You can CREATE content. Content can be associated recursivly. Triggering Motions to validate where appropiate.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATEITEM'">
 
-                    <p>CREATE ITEM</p>
                     <p>Items are moments of information. They convey complex information, transend the string domain, and carry within them the ability of application input. Providing more functionality and carrying with them additional ancillar protocol inputs. Creating rich ownership of (items as) assets and liabilities[defined by protocol]. The Marketplace is supported by Deventalized Physically Validated Delivery (PVD) Protocols.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATEORDER'">
 
-                    <p>CREATE ORDER</p>
                     <p>Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATEPROJECT'">
 
-                    <p>CREATE PROJECT</p>
                     <p>Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATETASK'">
 
-                    <p>CREATE TASK</p>
                     <p>Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATETIME'">
 
-                    <p>CREATE TIME</p>
                     <p>Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATETRANSACTION'">
 
-                    <p>CREATE TRANSACTION</p>
                     <p>Transactions allow for the exchange and transfer of tokens. They contain tags, content, and and amountSet. Transaction logic is governed by the TRANSACTION protocol.</p>
 
                 </div>
 
                 <div ng-if="informationType == 'CREATEVALIDATION'">
 
-                    <p>CREATE VALIDATION</p>
 
                 </div>
 
@@ -1618,20 +1626,17 @@
 
                 <div ng-if="informationType == 'IDENTIFERSET'">
 
-                    <p>IDENTIFER SET</p>
 
                 </div>
 
                 <!--DEP-->
                 <div ng-if="informationType == 'IDENTIFERALPHA'">
 
-                    <p>IDENTIFER SET ALPHA</p>
 
                 </div>
 
                 <div ng-if="informationType == 'IDENTIFERSETBETA'">
 
-                    <p>IDENTIFER SET BETA</p>
 
                 </div>
 
@@ -1643,9 +1648,9 @@
 
                 <div ng-if="informationType == 'PROTOCOLS'">
 
-                    <p>PROTOCOL</p>
                     <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>
                     <p>A bundle of protocols create an Application.</p>
+                    
 
                 </div>
 
@@ -1660,6 +1665,8 @@
                     <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple valistion types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>
                     <!--VALIDATION IMAGE-->
                     <p>Associations are computed though validation traversal.</p>
+
+                    <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>
 
                 </div>
 

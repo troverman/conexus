@@ -23,12 +23,14 @@ angular.module( 'conexus.validation', [
     });
 }])
 
-.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ReactionModel', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, contentList, ReactionModel, validation, ValidationModel) {
+.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ReactionModel', 'titleService', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, contentList, ReactionModel, titleService, validation, ValidationModel) {
     
 
     $scope.validation = validation[0];
     $scope.validation.model = 'VALIDATION';
-    
+
+    titleService.setTitle('Validation | ' + $scope.validation.id + ' | CRE8.XYZ');
+
     //TODO: FIX
     $rootScope.associatedModels = [{type:'VALIDATION', address:$scope.validation.id}];
 
