@@ -258,9 +258,9 @@ angular.module( 'conexus.projects', [
         }
     ];
 
-    SearchModel.getSome(query).then(function(searchResults){
-        console.log(searchResults)
-    }); 
+    //SearchModel.getSome(query).then(function(searchResults){
+    //    console.log(searchResults)
+    //}); 
 
 
 
@@ -303,41 +303,84 @@ angular.module( 'conexus.projects', [
     };
 
     //TODO: FILTER!
-    $rootScope.$watch('searchQueryNav' ,function(){
-        for(x in Object.keys($rootScope.searchQueryNav)){
-            for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-                if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
-                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y])
-                }
-            }
-        }
-        console.log($scope.searchQuery, $rootScope.searchQuery, $rootScope.searchQueryNav);
-    }, true);
-    $scope.$watch('searchQuery' ,function(newValue, oldValue){
+    //$rootScope.$watch('searchQueryNav', function(newValue, oldValue){
+    //    if (newValue !== oldValue) {
+    //        console.log(newValue);
+    //    }
+    //}, true);
+
+
+    //DEFAULT SEARCH BAR DOES A COMPLEX BROAD CONTAIN QUERY
+    $scope.$watch('searchQuery', function(newValue, oldValue){
         if (newValue !== oldValue) {
-            console.log(newValue);
+            $scope.searchModel = [];
+
             $rootScope.stateIsLoading = true;
-            $scope.searchQuery = $scope.searchQuery.map(function(obj){
-                if (!obj.query && obj.text){obj.query = obj.text}
-                if (!obj.type){obj.type='STRING'}
-                return obj.query
-            }).join(',');
-            $scope.searchModel = [{
-                model:'PROJECT',
-                limit:100,
-                skip:0,
-                sort:'createdAt DESC',
-                query: $scope.searchQuery, //ARRAY? 
-            }];
-            //TODO: AGNOSTIC SEARCH
-            //SearchModel.search($scope.searchModel[0]).then(function(models){
-            //    console.log(models);
-            //});
-            ProjectModel.getSome({search:$scope.searchModel[0].query, limit:100, skip:0, sort:'createdAt DESC'}).then(function(models){
-                $rootScope.stateIsLoading = false;
-                $scope.projects = models;
-                $scope.init();
+
+            var searchQueryTemp = $scope.searchQuery.map(function(obj){
+                return obj.text
             });
+
+            for (x in searchQueryTemp){
+                $scope.searchModel.push({
+                    filter:[
+                        {
+                            model:'PROJECT', //ASSOCIATION.. :)
+                            modelParam:'tags',
+                            query: searchQueryTemp[x],
+                            queryParam:'contains',
+                            params:{
+                                limit:100,
+                                skip:0,
+                                sort:'createdAt DESC',
+                            },
+                            chain: 'OR',
+                        },{
+                            model:'PROJECT',
+                            modelParam:'title',
+                            query: searchQueryTemp[x],
+                            queryParam:'contains',
+                            params:{
+                                limit:100,
+                                skip:0,
+                                sort:'createdAt DESC',
+                            },
+                            chain: 'OR',
+                        },{
+                            model:'PROJECT',
+                            modelParam:'description',
+                            query: searchQueryTemp[x],
+                            queryParam:'contains',
+                            params:{
+                                limit:100,
+                                skip:0,
+                                sort:'createdAt DESC',
+                            },
+                            chain: 'OR',
+                        }
+                    ],
+                    params:{
+                        limit:100,
+                        skip:0,
+                        sort:'createdAt DESC',
+                    },
+                    chain:'OR'
+                });
+            }
+
+            console.log($scope.searchModel)
+
+            //TODO:
+            SearchModel.getSome($scope.searchModel).then(function(projects){
+                
+                console.log(projects);
+
+                $rootScope.stateIsLoading = false;
+
+                $scope.projects = projects.map(function(obj){obj.model = 'PROJECT'; return obj;});
+
+            });
+
         }
     }, true);
     //TODO: FILTER!

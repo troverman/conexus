@@ -39,7 +39,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Creation never stops. It's a 24/7 continual hackathon.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Explore the diversity of the network.</p>\n" +
     "			</div>\n" +
-    "			<div class=\"col-sm-6\" style=\"text-align:right\">\n" +
+    "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -8379,7 +8379,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                    <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>\n" +
     "                    <p>A bundle of protocols create an Application.</p>\n" +
-    "                    \n" +
+    "\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -8391,7 +8391,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-if=\"informationType == 'VALIDATION'\">\n" +
     "\n" +
-    "                    <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple valistion types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>\n" +
+    "                    <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple validation types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>\n" +
     "                    <!--VALIDATION IMAGE-->\n" +
     "                    <p>Associations are computed though validation traversal.</p>\n" +
     "\n" +

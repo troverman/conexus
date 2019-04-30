@@ -4,6 +4,7 @@ angular.module('models.search', ['lodash', 'services', 'sails.io',])
     
     this.getSome = function(model) {
         var url = utils.prepareUrl('search');
+        console.log(model)
         return $sailsSocket.get(url, {params:model}).then(success, error);
     };
 

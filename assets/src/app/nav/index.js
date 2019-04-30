@@ -121,7 +121,14 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+
+
+    //TODO!!!
     $rootScope.filterToggle = function(type, item){
+
+
+        $scope.updatedQuery = [];
+
         $scope.closeAllNav();
 
         $scope.locationFilter = {};
@@ -257,6 +264,42 @@ angular.module( 'conexus.nav', [
         };
 
         $scope.selectTag = function(item){
+
+
+            console.log(item);
+            var selectedLimit = 100;
+            var selectedSkip = 0;
+            var selectedSort = 'createdAt DESC';
+
+            var query = {
+                filter:[
+                    {
+                        model:null,
+                        modelParam:'tag',
+                        query: item,
+                        associaton:{
+                            populate:true,
+                            depth:2,
+                            search:true,
+                        },
+                        params:{
+                            limit:selectedLimit,
+                            skip:selectedSkip,
+                            sort:selectedSort,
+                            chain:null
+                        }
+                    }
+                ],
+                params:{
+                    limit:selectedLimit,
+                    skip:selectedSkip,
+                    sort:selectedSort
+                },
+                chain:'AND'
+            };
+            $scope.updatedQuery.push(query);
+
+
             //DO A FILTER OF SEARCHQUERY OF TYPE TAGS
             if ($rootScope.searchQueryNav.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
                 $rootScope.searchQueryNav.tags.push({
@@ -271,6 +314,9 @@ angular.module( 'conexus.nav', [
                     return obj.element !== item
                 });
             }
+
+
+
 
             console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 

@@ -32,170 +32,233 @@ module.exports = {
 	//CAN HANDLE ALL API CALLS..
 	search: function (req, res) {
 
-
-
 		if (!req.query.query){
-		//TODO: COMPLEX QUERY
-		console.log(req.query);
-		var querySet = JSON.parse(JSON.stringify(req.query));
-		//console.log(query);
 
-		//REDUCTION LOGIC
+			var mongoQuery = {};
+			mongoQuery.$or = [];
 
-		for (x in querySet){
-
-			var query = JSON.parse(querySet[x]);
-
-			//console.log(query.params);
-
-			console.log('query.filter')
-
-			if (query.chain){
-				console.log(query.chain);
-			}
+			var querySet = Object.values(req.query);
+			for (x in querySet){querySet[x] = JSON.parse(querySet[x])}
+			console.log(querySet);
 
 
-			for (y in query.filter){
+			//REDUCTION LOGIC HERE.. --> TO MONGO ?? QUERY CHAIN..>
+			function parseQuery(querySet){
+				console.log('QUERY LEGNTH', querySet.length);
 
-				console.log(query.filter[y])	
+				for (x in querySet){
+					var query = querySet[x];
 
-				//console.log(query.filter[y].association)
-				//console.log(query.filter[y].params)
+					if (query.chain){
+						if (query.chain == 'AND'){
+							//mongoQuery.$and = [];
+						}
+						if (query.chain == 'OR'){
+							//mongoQuery.$or = [];
+						}
+					}
 
-				if (query.filter[y].chain){
-					console.log(query.filter[y].chain)
+					if (query.filter){parseQuery(query.filter)}
+
+					if (!query.filter){
+
+						//if different model and AND == null
+						//console.log(query.model, query.modelParam, query.query, query.queryParam);
+
+						var mongoObj = {};
+						var queryDecoration = '';
+
+						if (query.queryParam == 'contains'){
+							var queryDecoration = new RegExp(".* " + query.query + ".*i");
+						}
+
+						if (query.queryParam == 'equals'){
+							queryDecoration = query.query;
+						}
+
+						mongoObj[query.modelParam] = queryDecoration;
+						mongoQuery.$or.push(mongoObj);
+						//console.log(mongoQuery)
+
+					}
+
 				}
 
-				console.log(query.filter[y].params)
+				//cb(mongoQuery);
 
 			}
 
-		}
-		}
-	
+			parseQuery(querySet);
 
+			//parseQuery(querySet, function(mongoQuery){
+			
+			//REDUCE MODELS
+			//REDUCE MODEL PARAMS
+			//REDUCE TO DISCRETE AND OR
 
+			//QUERY
+			//{
+			//	or: [
+			//		{title: {contains: 'searchQuery'}},
+			//		{urlTitle: {contains: 'searchQuery'}},
+			//	]
+			//}
 
-		var searchQuery = req.query.query;
-		var tag = req.query.tag;
-		var limit = req.query.limit;
-		var skip = req.query.skip;
-		var sort = req.query.sort;
+			//DEPRECIATE
+			Project.native(function(err, project) {
 
-		if (req.query.model = 'CONTENT'){}
-		if (req.query.model = 'ITEM'){}
-		if (req.query.model = 'MEMBER'){}
-		if (req.query.model = 'ORDER'){}
-
-		//TAKE A BREAK
-		if (req.query.model == 'PROJECT'){
-
-			var query = JSON.parse(JSON.stringify(req.query.query));
-			//console.log(query);
-
-			query.map(function(obj){
-				obj = JSON.parse(JSON.stringify(obj))
-			});
-
-			//console.log(query);
-
-			Project.find({tags:{contains: tag}})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				var projectModels = models.map(function(obj){
-			        obj.model = 'PROJECT';
-			        return obj;
-			    });
-			    console.log(projectModels)
-				Project.subscribe(req, projectModels);
-				res.json(projectModels);
-			});
-
-		}
-
-		if (req.query.model == 'TASK'){}
-		if (req.query.model == 'TOKEN'){}
-		if (req.query.model == 'TRANSACTION'){}
-		if (req.query.model == 'TIME'){}
-
-		//YIKES
-		//OLD, COMBO
-		//PROJECT | CONTENT | TASK | USER
-		else{
-			Project.find()
-			.where({
-				or: [
-					{title: {contains: searchQuery}},
-					{urlTitle: {contains: searchQuery}},
-				]
-			})
-			.then(function(models) {
-				var projectModels = models.map(function(obj){
-			        obj.model = 'PROJECT';
-			        return obj;
-			    });
-				Project.watch(req);
-				Project.subscribe(req, models);
-				//TODO UNIFY CONTENT MODEL
-				Content.find()
-				.where({
-					or: [
-						{content: {contains: searchQuery}},
-						{user: {contains: searchQuery}}
+				var query = {
+					$or: [
+						{"title": /.*create.*/i},
+						{"description": /.*create.*/i},
+						{"tags": /.*create.*/i},
 					]
-				})
-				.populate('user')
+				};
+
+				console.log(mongoQuery);
+
+				project.find(mongoQuery)
+				//.limit(limit)
+				//.skip(skip)
+				//.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					if (models){
+						console.log(models.length)
+						models = models.map(function(obj){obj.id = obj._id; obj.model='PROJECT'; return obj;});
+					}
+					res.json(models);
+				});
+
+			});
+
+			//});
+
+		}
+
+		else{
+
+			var searchQuery = req.query.query;
+			var tag = req.query.tag;
+			var limit = req.query.limit;
+			var skip = req.query.skip;
+			var sort = req.query.sort;
+
+			if (req.query.model = 'CONTENT'){}
+			if (req.query.model = 'ITEM'){}
+			if (req.query.model = 'MEMBER'){}
+			if (req.query.model = 'ORDER'){}
+
+			//TAKE A BREAK
+			if (req.query.model == 'PROJECT'){
+
+				var query = JSON.parse(JSON.stringify(req.query.query));
+				//console.log(query);
+
+				query.map(function(obj){
+					obj = JSON.parse(JSON.stringify(obj))
+				});
+
+				//console.log(query);
+
+				Project.find({tags:{contains: tag}})
+				.limit(limit)
+				.skip(skip)
+				.sort(sort)
 				.then(function(models) {
-					var contentModels = models.map(function(obj){
-				        obj.model = 'CONTENT';
+					var projectModels = models.map(function(obj){
+				        obj.model = 'PROJECT';
 				        return obj;
 				    });
-					var combinedModels = [].concat.apply([], [projectModels, contentModels]);
-	    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-					Content.watch(req);
-					Content.subscribe(req, models);
+				    console.log(projectModels)
+					Project.subscribe(req, projectModels);
+					res.json(projectModels);
+				});
 
+			}
+
+			if (req.query.model == 'TASK'){}
+			if (req.query.model == 'TOKEN'){}
+			if (req.query.model == 'TRANSACTION'){}
+			if (req.query.model == 'TIME'){}
+
+			//YIKES
+			//OLD, COMBO
+			//PROJECT | CONTENT | TASK | USER
+			else{
+				Project.find()
+				.where({
+					or: [
+						{title: {contains: searchQuery}},
+						{urlTitle: {contains: searchQuery}},
+					]
+				})
+				.then(function(models) {
+					var projectModels = models.map(function(obj){
+				        obj.model = 'PROJECT';
+				        return obj;
+				    });
+					Project.watch(req);
+					Project.subscribe(req, models);
 					//TODO UNIFY CONTENT MODEL
-					Task.find()
+					Content.find()
 					.where({
 						or: [
 							{content: {contains: searchQuery}},
-							{title: {contains: searchQuery}}
+							{user: {contains: searchQuery}}
 						]
 					})
 					.populate('user')
 					.then(function(models) {
-						var taskModels = models.map(function(obj){
-					        obj.model = 'TASK';
+						var contentModels = models.map(function(obj){
+					        obj.model = 'CONTENT';
 					        return obj;
 					    });
-					    var superCombinedModels = [].concat.apply([], [taskModels, combinedModels]);
-	    				superCombinedModels = superCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-	    				Task.watch(req);
-						Task.subscribe(req, models);
-						User.find()
+						var combinedModels = [].concat.apply([], [projectModels, contentModels]);
+		    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+						Content.watch(req);
+						Content.subscribe(req, models);
+
+						//TODO UNIFY CONTENT MODEL
+						Task.find()
 						.where({
 							or: [
-								{username: {contains: searchQuery}},
+								{content: {contains: searchQuery}},
+								{title: {contains: searchQuery}}
 							]
 						})
+						.populate('user')
 						.then(function(models) {
-							var userModels = models.map(function(obj){
-						        obj.model = 'MEMBER';
+							var taskModels = models.map(function(obj){
+						        obj.model = 'TASK';
 						        return obj;
 						    });
-						    var superSuperCombinedModels = [].concat.apply([], [userModels, superCombinedModels]);
-	    					superSuperCombinedModels = superSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-							User.watch(req);
-							User.subscribe(req, models);
-							console.log(superSuperCombinedModels)
-							res.json(superSuperCombinedModels);
+						    var superCombinedModels = [].concat.apply([], [taskModels, combinedModels]);
+		    				superCombinedModels = superCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+		    				Task.watch(req);
+							Task.subscribe(req, models);
+							User.find()
+							.where({
+								or: [
+									{username: {contains: searchQuery}},
+								]
+							})
+							.then(function(models) {
+								var userModels = models.map(function(obj){
+							        obj.model = 'MEMBER';
+							        return obj;
+							    });
+							    var superSuperCombinedModels = [].concat.apply([], [userModels, superCombinedModels]);
+		    					superSuperCombinedModels = superSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+								User.watch(req);
+								User.subscribe(req, models);
+								console.log(superSuperCombinedModels)
+								res.json(superSuperCombinedModels);
+							});
 						});
 					});
 				});
-			});
+			}
+
 		}
 
 	},
