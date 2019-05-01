@@ -265,7 +265,6 @@ angular.module( 'conexus.nav', [
 
         $scope.selectTag = function(item){
 
-
             console.log(item);
             var selectedLimit = 100;
             var selectedSkip = 0;
@@ -297,11 +296,15 @@ angular.module( 'conexus.nav', [
                 },
                 chain:'AND'
             };
+
             $scope.updatedQuery.push(query);
 
 
             //DO A FILTER OF SEARCHQUERY OF TYPE TAGS
+
+
             if ($rootScope.searchQueryNav.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
+                
                 $rootScope.searchQueryNav.tags.push({
                     text:'Tag | '+item, 
                     query:item, 
@@ -657,6 +660,7 @@ angular.module( 'conexus.nav', [
                 title: {text: null},
             }],
             credits:{enabled:false},
+            plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
         };
         $scope.chart.series = [{
             id: 'attentionTokenization',
@@ -668,17 +672,66 @@ angular.module( 'conexus.nav', [
             type: 'spline',
             name: 'Reaction',
             data: []
-        }, {
+        },
+        {
+            id: 'action',
+            type: 'spline',
+            name: 'Actions',
+            data: []
+        },
+        {
+            id: 'content',
+            type: 'spline',
+            name: 'Content',
+            data: []
+        },
+        {
+            id: 'item',
+            type: 'spline',
+            name: 'Items',
+            data: []
+        },
+        {
+            id: 'member',
+            type: 'spline',
+            name: 'Members',
+            data: []
+        },
+        {
+            id: 'motion',
+            type: 'spline',
+            name: 'Montions',
+            data: []
+        },
+        {
+            id: 'task',
+            type: 'spline',
+            name: 'Tasks',
+            data: []
+        },
+        {
+            id: 'time',
+            type: 'spline',
+            name: 'Time',
+            data: []
+        },
+        {
+            id: 'transaction',
+            type: 'spline',
+            name: 'Transactions',
+            data: []
+        },
+        {
+            id: 'validation',
+            type: 'spline',
+            name: 'Validations',
+            data: []
+        },
+        {
             type: 'sma',
             id: 'sma1',
             linkedTo: 'attentionTokenization',
             params: {period: 24},
-            showInLegend: true,
-        },{
-            type: 'sma',
-            id: 'sma2',
-            linkedTo: 'attentionTokenization',
-            params: {period: 24*7},
             showInLegend: true,
         }];
         for(var i=0;i<100;i++){

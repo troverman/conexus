@@ -41,7 +41,6 @@ module.exports = {
 			for (x in querySet){querySet[x] = JSON.parse(querySet[x])}
 			console.log(querySet);
 
-
 			//REDUCTION LOGIC HERE.. --> TO MONGO ?? QUERY CHAIN..>
 			function parseQuery(querySet){
 				console.log('QUERY LEGNTH', querySet.length);
@@ -49,6 +48,7 @@ module.exports = {
 				for (x in querySet){
 					var query = querySet[x];
 
+					//LAYER AND / OR LOGIC.. 
 					if (query.chain){
 						if (query.chain == 'AND'){
 							//mongoQuery.$and = [];
@@ -69,16 +69,18 @@ module.exports = {
 						var queryDecoration = '';
 
 						if (query.queryParam == 'contains'){
-							var queryDecoration = new RegExp(".* " + query.query + ".*i");
+							queryDecoration = new RegExp(".*" + query.query + ".*i");
 						}
 
 						if (query.queryParam == 'equals'){
 							queryDecoration = query.query;
 						}
 
+						console.log(query.modelParam);
+
 						mongoObj[query.modelParam] = queryDecoration;
 						mongoQuery.$or.push(mongoObj);
-						//console.log(mongoQuery)
+						console.log(mongoQuery)
 
 					}
 
@@ -109,9 +111,8 @@ module.exports = {
 
 				var query = {
 					$or: [
-						{"title": /.*create.*/i},
-						{"description": /.*create.*/i},
-						{"tags": /.*create.*/i},
+						{"title": /.*starbuck.*/i},
+						{"tags": /.*coffee.*/i},
 					]
 				};
 

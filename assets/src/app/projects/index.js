@@ -14,7 +14,7 @@ angular.module( 'conexus.projects', [
         //TODO: DEPRECIATE RESOLVE
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
+                return ProjectModel.getSome({limit:100, skip:0, sort:'createdAt DESC', filter:[]});
             }]
         }
 	});
@@ -303,13 +303,17 @@ angular.module( 'conexus.projects', [
     };
 
     //TODO: FILTER!
-    //$rootScope.$watch('searchQueryNav', function(newValue, oldValue){
-    //    if (newValue !== oldValue) {
-    //        console.log(newValue);
-    //    }
-    //}, true);
+    $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
+        if (newValue !== oldValue) {
+            console.log(newValue);
+            $scope.searchQuery = $rootScope.searchQueryNav.tags.map(function(obj){
+                return obj.query
+            });
+        }
+    }, true);
 
 
+    //FLAG IF COMING FROM NAV OR SEARCH
     //DEFAULT SEARCH BAR DOES A COMPLEX BROAD CONTAIN QUERY
     $scope.$watch('searchQuery', function(newValue, oldValue){
         if (newValue !== oldValue) {
@@ -372,7 +376,7 @@ angular.module( 'conexus.projects', [
 
             //TODO:
             SearchModel.getSome($scope.searchModel).then(function(projects){
-                
+
                 console.log(projects);
 
                 $rootScope.stateIsLoading = false;
