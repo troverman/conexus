@@ -1,23 +1,14 @@
-<style>.toast-success {background-color: #002c54;}</style>
 <div class="container">
 
     <div class="spacing-10"></div>
 
-    <!--TODO: ASSOCIATION-->
-    <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->
-
-    <!--TODO: STREAM | IFPS-->
-    <!--TODO: VALIDATION RENDER-->
-    <!--TODO: NESTED RENDER -->
-
-    <!--TOKENS MINTING PER ACTION-->
-    <!--TOKENS MINTED TOTAL-->
-
-    <!--ASSOCIATION SORTED BY MOST VALIDATIONS.. AKA CANT SCALE BY LISTING THEM ALL-->
+    <!--TODO: ELUCIDATE TOKENS MINTING PER ACTION, TOKENS MINTED TOTAL-->
+    <!--TODO: ASSOCIATION SORTED BY MOST VALIDATIONS-->
+    <!--TODO: ATTENTION MODEL-->
 
     <div class="row">
 
-        <!--TODO:..motion to edit..?-->
+        <!--TODO: MOTION TO EDIT-->
         <div style="row" ng-if="currentUser.id == task.user">
             <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
                 <li><a ng-click="" href="#">Current</a></li>
@@ -25,7 +16,6 @@
                 <li><a ng-click="" href="#">Motions</a></li>
             </ul>
         </div>
-
         <div class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -38,16 +28,12 @@
             </div>
             <div class="padding:16px">
                 <div class="col-sm-12" style="padding:16px">
-
                     <div style="float:right;text-align:right">
                         <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(task)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
-
                     <p><a ng-repeat="tag in task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
-
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="task.createdAt"></p>
-
                 </div>
             </div>
 
@@ -84,7 +70,10 @@
         <!--TODO: STREAM | IFPS-->
         <div class="card">
             <div style="padding:16px">
-                <div ng-show="!working">
+
+                <!--STARTS THE LIVE TIMER MODE || ALLOWANCE FOR MULTI -->
+
+                <div ng-show="!recordingTime">
                     <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Create Time</button>
                     <div ng-show="question && !streaming">
                         <h3>Streaming?</h3>
@@ -99,73 +88,100 @@
                         <button style="width:100%;" class="btn btn-default log-btn" ng-click="startWork()">Start Stream</button>
                     </div>
                 </div>
-                <div ng-show="working">
+
+                <div ng-show="recordingTime">
 
                     <h3>{{taskTime}}</h3>
 
-                    <!--IF NOT STREAM AND YA WANT TO STREAM-->
-                    <!--<div ng-show="!streaming">-->
-                    <div ng-show="false">
+                    <!--TODO: IF NOT STREAM AND YA WANT TO STREAM-->
+                    <div ng-show="false"><!--<div ng-show="!streaming">-->
                         <input type="text" placeholder="Link" ng-model="timeContent" class="form-control">
                         <input type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
                         <input type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
                         <button style="width:100%;" class="btn btn-default log-btn" ng-click="startStream()">Start Stream</button>
                     </div>
+                    <div ng-show="streaming"> <div ng-bind-html="renderStream(streamUrl)"></div></div>
 
-                    <div ng-show="streaming"> <div ng-bind-html="renderStream(streamUrl)">></div></div>
                     <div class="spacing-5"></div>
-                    <tags-input ng-model="timeTags" placeholder="Tags"></tags-input>
 
-                    
-                    <!--REALLY NEED TO DO ASSOCIATION COMPUTATION AND APPROPITAE QUERY-->
-
+                    <!--TODO: ASSOCIATION COMPUTATION AND QUERY-->
+                    <!--TODO: PROJECT SELECTION-->
                     <!--IF MULTIPLE??-->
                     <div ng-if="false">
                         <h5>Selected Projects</h5>
                         <tags-input ng-model="selectedProjects" placeholder="Selected Projects"></tags-input>
+        
+                        <!--TODO: ASSOCIATED MODELS ARE COMPUTED; JOIN-->
                         <div ng-repeat="model in task.associatedModels">
                             <p><a href="#" ng-click="selectProject(model.address)">Select {{model}}</a></p>
                         </div>
                     </div>
 
-                    <a ng-click="showValidationImplicitToggle()" href="#"><b>Task Validation</b></a>
-
-                    <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->
-                    <!--HAVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->
+                    <!--TODO: TASK SELECTION (UNIVERSAL UX .. LOCK IN TASK)-->
+                    <!--IE IT'S HIDDEN HERE BUT WOULD BE OPEN ON +TIME GLOBAL-->
                     <!--UNIVERSAL UX FOR THIS IS IN NAV-->
-                    <!--STARTS THE TIMER MODE || ALLOWANCE FOR MULTI -->
-                    <!--DEPRECIATE AND MOVE TO NAV-->
+                    <!--DEPRECIATE AND MOVE TO NAV - ALL IN NAV?-->
+                    <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->
+
+                    <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->
+
+                    <!--TODO: TOKEN STRING PROTOCOL.. IE COMBINATORIAL CONTEXT - IT WILL COME SOON . . PROJECT+... TASK+.. WE ARE ONLY NAKE CONTEXT RN -->
+
+                    <!--TODO: AUTO POPULATE TIME CONTEXT BASED ON COMPUTED TASK VALIDATION :)-->
+                    <tags-input min-length="1" ng-model="timeTags" placeholder="Tags"></tags-input>
+
+                    <div class="spacing-5"></div>
+
+                    <a ng-click="showValidationImplicitToggle()" href="#"><b>Time Validation</b></a>
+
+                    <div class="spacing-5"></div>
 
                     <div ng-show="showValidationImplicitToggleVar">
 
-                        <!--{{task.associatedModels}}-->
-                        <!--div ng-repeat="association in associatedModels"></div>-->
-                        <!--ALL 100-->
-                        <!--ALL ASSOCIATIONS? -->
+                        <div class="spacing-5"></div>
 
                         <div layout="">
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-                            <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
+                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1"><b>Context</b></span></div>
+                            <div flex="70" layout="" layout-align="center center"></div>
+                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1"><b>Validation</b> | <b>Reputation</b></span></div>
+                        </div>
+
+                        <div class="spacing-5"></div>
+
+                        <!--TODO: REMOVE GENERAL? HMM-->
+                        <div layout="">
+                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">General</span></div>
+                            <md-slider step="0.1" flex="" md-discrete="" ng-model="newTime.validationModels.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{newTime.validationModels.validation.general}} | {{currentUser.totalWork}}</span></div>
                         </div>
 
                         <div ng-repeat="tag in timeTags track by $index">
                             <div layout="">
-                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
-                                <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
-                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
+                                <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{tag.text}}</span></div>
+                                <md-slider step="0.1" flex="" md-discrete="" ng-model="newTime.validationModels.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
+                                <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{newTime.validationModels.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
                             </div>
                         </div>
-
                     </div>
+
                     <div class="spacing-5"></div>
+
                     <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+
                     <div class="spacing-5"></div>
+
                     <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit Time</button>
+
                 </div>
+
             </div>
         </div>
         <div class="card" ng-repeat="item in time" ng-click="renderToggle(item)">
+
+            <!--TODO: TEMPLATE TIME CARD-->
+            <!--TODO: REMOVE INLINE STYLE-->
+            <!--<div ng-include="'cards/time.tpl.html'"></div>-->
+
             <div style="padding:16px;">
                 <div style="float:right;text-align:right">
                     <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(time)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
@@ -221,7 +237,5 @@
             </div>
         </div>
     </div>
-    
     <div class="spacing-50"></div>
-
 </div>

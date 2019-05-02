@@ -57,8 +57,6 @@ angular.module( 'conexus.nav', [
             $scope.notifications = notifications;
             $rootScope.notificationCount = $scope.notifications.length;
             for (x in $scope.notifications){
-                var titleText='';
-                var bodyText='';
                 $scope.pop($scope.notifications[x].title, $scope.notifications[x].content);
             }
         });
@@ -67,11 +65,15 @@ angular.module( 'conexus.nav', [
         $sailsSocket.subscribe('notification', function (envelope) {
             switch(envelope.verb) {
                 case 'created':
-                //if logged in user
-                //HAS TO BE BETTER THAN SOCKET CHECK 
-                //$scope.pop(envelope.data.title, envelope.data.info.username);
-                console.log(envelope)
-                $rootScope.notificationCount++;
+
+                    console.log(envelope)
+                    //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
+                    if ($rootScope.currentUser.id == envelope.data.user){
+                        $rootScope.notificationCount++;
+                        $scope.pop(envelope.data.title, envelope.data.info.username);
+                    }
+                    $rootScope.notificationCount++;
+                    
             }
         });
     }
@@ -813,8 +815,27 @@ angular.module( 'conexus.nav', [
                 if($scope.recordingTime === true) return false;
                 $scope.recordingTime = true;
 
+
+
+
                 //TODO: CREATE TIME HERE
                 $scope.startTime = new Date();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 clearInterval($scope.interval);
                 $scope.interval = setInterval($scope.updateCount, 1000);

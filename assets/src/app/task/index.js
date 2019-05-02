@@ -45,16 +45,19 @@ angular.module( 'conexus.task', [
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
    
     $scope.contentList = contentList;
+
     $scope.newContent = {};
     $scope.newReaction = {};
+    $scope.newTime = {};
+
     $scope.question = false;
+    $scope.recordingTime = false;
     $scope.showContent = false;
     $scope.showTime = true;
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
     $scope.taskVerification = [];
-    $scope.working = false;
     $scope.validations = validations;
     $scope.verification = {};
     $rootScope.taskTime = 0;
@@ -121,8 +124,8 @@ angular.module( 'conexus.task', [
             onShowCallback: function (toast) { 
                 var audio = new Audio('audio/ping.mp3');
                 audio.play()
-                .then(function(audio){console.log(audio)})
-                .catch(function(err){console.log(err)})
+                .then(function(audio){})
+                .catch(function(err){})
             }
         });
     };
@@ -158,6 +161,13 @@ angular.module( 'conexus.task', [
 
     $scope.showValidationImplicitToggle = function(){$scope.showValidationImplicitToggleVar = !$scope.showValidationImplicitToggleVar};
 
+
+
+
+
+
+
+
     //TODO: REWORK THE FLOW
     $scope.startStreaming = function() {
         if ($rootScope.currentUser){
@@ -169,6 +179,7 @@ angular.module( 'conexus.task', [
 
     //TODO: REWORK FLOW
     $scope.startTime = function() {
+
         if ($rootScope.currentUser){
 
             if ($scope.streaming){
@@ -189,68 +200,90 @@ angular.module( 'conexus.task', [
                     $scope.streamingId = contentModel.id;
                 });
 
-
             }
 
             //TODO: CREATE TIME HERE
+            //FILL OUT FORM BEFORE YOU START? HM
             $scope.startTime = new Date();
 
-            if($scope.working === true) return false;
-            $scope.working = true;
+            $scope.newTime = {
+                amount: 0,
+                type:'LIVE',
+
+                //DEPRECIATE
+                stream: null,
+                content: null,
+                user: $rootScope.currentUser.id,
+                creator: $rootScope.currentUser.id,
+
+                //TODO: THINK
+                associatedModels: [
+                    {type:'TASK', address:$scope.task.id, id:$scope.task.id},
+
+                    //user: $rootScope.currentUser.id,
+                    //stream: $scope.streamingId,
+                    //content: null,
+
+                ],
+
+                //TODO: NEEDS TO BE ARRAY FOR MULTI PROJ SELECTION 
+                //validationModels:[{validation:{general:0}}]
+                validationModels:{validation:{general:100}}
+
+            };
+
+            //TODO: DO IT
+            //TimeModel.create($scope.newTime).then(function(timeModel){
+                //GET TIME ID
+                //$scope.newTime.id = timeModel.id;
+                //
+                //$scope.startTime = new Date(timeModel.createdAt);
+
+            //}); 
+
+            if($scope.recordingTime === true) return false;
+            $scope.recordingTime = true;
             $scope.pop();
             $scope.interval = setInterval($scope.updateCount, 1000);
+
         }
+
         else{$mdSidenav('login').toggle();}
+
     };
+
+    //TODO: HMMMMMMMMMMMM.. a 'handhold' --> !!!
+    $scope.$watch('timeTags', function(newValue, oldValue){
+        if (newValue !== oldValue) {for (x in $scope.timeTags){$scope.newTime.validationModels.validation[$scope.timeTags[x].text] = 100;}}
+    }, true);
+
 
     //TODO: REWORK FLOW.
     $scope.submit = function() {
-        if($scope.working === false) return false;
-        $scope.working = false; $scope.question = false; $scope.streaming = false;
 
+        if($scope.recordingTime === false) return false;
+        $scope.recordingTime = false; $scope.question = false; $scope.streaming = false;
 
-        var timeModel = {
-            amount: $rootScope.taskTime,
-            content: $scope.timeContent,
-            project: $scope.task.project,
-            task: $scope.task.id,
-            user: $rootScope.currentUser.id,
-            stream: $scope.streamingId,
-            type:'LIVE',
-            associatedModels: [
-                {type:'TASK', address:$scope.task.id, id:$scope.task.id},
-                //{type:'PROJECT', address:$scope.task.id, id:$scope.task.id},
-            ],
+        //TODO: FLOW 
+        $scope.newTime.amount = $rootScope.taskTime;
+        $scope.newTime.content = $scope.timeContent;
+        $scope.newTime.stream = $scope.streamingId;
 
-            validationModel:[
-
-            ]
-
-        };
-
-        //$scope.newValidation = {};
-        //$scope.newValidation.validation = {};
-        //$scope.newValidation.validation.general = 0;
-        //for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
-
+        //TODO: DEPRECIATE
         if ($scope.timeTags){
-            timeModel.tags = $scope.timeTags.map(function(obj){
+            $scope.newTime.tags = $scope.timeTags.map(function(obj){
                 return obj.text
             }).join(",");
         }
 
-        //REWORK
-        //UPDATE ON SUBMIT
-        TimeModel.create(timeModel).then(function(model){
+        //TODO: UPDATE ON SUBMIT
+        //TimeModel.update($scope.newTime)
+        TimeModel.create($scope.newTime).then(function(model){
+
             $scope.time.unshift(model);
             $scope.timeContent = '';
             
-
-
-            //UPDATE TO HAVE PARENT AS TIME MODEL
-            //REFACTOR | DOING BOTH HERE
-            //TODO: ASSOCIATED MODELS --> TIME TO TASKS ONE TO MANY
-            //TODO: TIME TYPE.. TIMER INPUT
+            //TODO: FLOW REWORK.. ASSOCIATED MODEL LINKAGES
             if ($scope.streamingId){
                 var update = {};
                 update.id = $scope.streamingId;
@@ -263,12 +296,11 @@ angular.module( 'conexus.task', [
                 });
             }
 
-
-
-
         }); 
+
         $rootScope.taskTime=0;
         clearInterval($scope.interval);
+
     };
 
     //TODO: CREATE LIVE AT START
@@ -276,8 +308,27 @@ angular.module( 'conexus.task', [
         //TODO: CREATED AT
         var currentTime = new Date();
         $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startTime.getTime()) / 1000);
+
+        //COULD UPDATE HERE? --> DONT WANT TO OVERLOAD WITH CALLS. FINE? 
+
+        //TimeModel.update()? --> PERHAPS BACKEND TIMER .. ? SUBMIT KILLS THE TIMER ? 
+
         $scope.$apply();
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //TODO: BROWSER STREAM WEBRTC
     $scope.startStream = function(){
@@ -303,6 +354,13 @@ angular.module( 'conexus.task', [
         var recordRTC = null;
         navigator.getUserMedia(session, initializeRecorder, onError);
     };
+
+
+
+
+
+
+
 
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {

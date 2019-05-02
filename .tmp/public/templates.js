@@ -10742,26 +10742,17 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
 
 angular.module("task/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("task/index.tpl.html",
-    "<style>.toast-success {background-color: #002c54;}</style>\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "    <!--TODO: ASSOCIATION-->\n" +
-    "    <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->\n" +
-    "\n" +
-    "    <!--TODO: STREAM | IFPS-->\n" +
-    "    <!--TODO: VALIDATION RENDER-->\n" +
-    "    <!--TODO: NESTED RENDER -->\n" +
-    "\n" +
-    "    <!--TOKENS MINTING PER ACTION-->\n" +
-    "    <!--TOKENS MINTED TOTAL-->\n" +
-    "\n" +
-    "    <!--ASSOCIATION SORTED BY MOST VALIDATIONS.. AKA CANT SCALE BY LISTING THEM ALL-->\n" +
+    "    <!--TODO: ELUCIDATE TOKENS MINTING PER ACTION, TOKENS MINTED TOTAL-->\n" +
+    "    <!--TODO: ASSOCIATION SORTED BY MOST VALIDATIONS-->\n" +
+    "    <!--TODO: ATTENTION MODEL-->\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
-    "        <!--TODO:..motion to edit..?-->\n" +
+    "        <!--TODO: MOTION TO EDIT-->\n" +
     "        <div style=\"row\" ng-if=\"currentUser.id == task.user\">\n" +
     "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "                <li><a ng-click=\"\" href=\"#\">Current</a></li>\n" +
@@ -10769,7 +10760,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                <li><a ng-click=\"\" href=\"#\">Motions</a></li>\n" +
     "            </ul>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -10782,16 +10772,12 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            </div>\n" +
     "            <div class=\"padding:16px\">\n" +
     "                <div class=\"col-sm-12\" style=\"padding:16px\">\n" +
-    "\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
     "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(task)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
-    "\n" +
     "                    <p><a ng-repeat=\"tag in task.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
     "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"task.createdAt\"></p>\n" +
-    "\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
@@ -10828,7 +10814,10 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        <!--TODO: STREAM | IFPS-->\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
-    "                <div ng-show=\"!working\">\n" +
+    "\n" +
+    "                <!--STARTS THE LIVE TIMER MODE || ALLOWANCE FOR MULTI -->\n" +
+    "\n" +
+    "                <div ng-show=\"!recordingTime\">\n" +
     "                    <button ng-show=\"!question\" type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"askQuestion()\">Create Time</button>\n" +
     "                    <div ng-show=\"question && !streaming\">\n" +
     "                        <h3>Streaming?</h3>\n" +
@@ -10843,73 +10832,100 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">Start Stream</button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div ng-show=\"working\">\n" +
+    "\n" +
+    "                <div ng-show=\"recordingTime\">\n" +
     "\n" +
     "                    <h3>{{taskTime}}</h3>\n" +
     "\n" +
-    "                    <!--IF NOT STREAM AND YA WANT TO STREAM-->\n" +
-    "                    <!--<div ng-show=\"!streaming\">-->\n" +
-    "                    <div ng-show=\"false\">\n" +
+    "                    <!--TODO: IF NOT STREAM AND YA WANT TO STREAM-->\n" +
+    "                    <div ng-show=\"false\"><!--<div ng-show=\"!streaming\">-->\n" +
     "                        <input type=\"text\" placeholder=\"Link\" ng-model=\"timeContent\" class=\"form-control\">\n" +
     "                        <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
     "                        <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
     "                        <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startStream()\">Start Stream</button>\n" +
     "                    </div>\n" +
+    "                    <div ng-show=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
     "\n" +
-    "                    <div ng-show=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\">></div></div>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
-    "                    <tags-input ng-model=\"timeTags\" placeholder=\"Tags\"></tags-input>\n" +
     "\n" +
-    "                    \n" +
-    "                    <!--REALLY NEED TO DO ASSOCIATION COMPUTATION AND APPROPITAE QUERY-->\n" +
-    "\n" +
+    "                    <!--TODO: ASSOCIATION COMPUTATION AND QUERY-->\n" +
+    "                    <!--TODO: PROJECT SELECTION-->\n" +
     "                    <!--IF MULTIPLE??-->\n" +
     "                    <div ng-if=\"false\">\n" +
     "                        <h5>Selected Projects</h5>\n" +
     "                        <tags-input ng-model=\"selectedProjects\" placeholder=\"Selected Projects\"></tags-input>\n" +
+    "        \n" +
+    "                        <!--TODO: ASSOCIATED MODELS ARE COMPUTED; JOIN-->\n" +
     "                        <div ng-repeat=\"model in task.associatedModels\">\n" +
     "                            <p><a href=\"#\" ng-click=\"selectProject(model.address)\">Select {{model}}</a></p>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <a ng-click=\"showValidationImplicitToggle()\" href=\"#\"><b>Task Validation</b></a>\n" +
-    "\n" +
-    "                    <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->\n" +
-    "                    <!--HAVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->\n" +
+    "                    <!--TODO: TASK SELECTION (UNIVERSAL UX .. LOCK IN TASK)-->\n" +
+    "                    <!--IE IT'S HIDDEN HERE BUT WOULD BE OPEN ON +TIME GLOBAL-->\n" +
     "                    <!--UNIVERSAL UX FOR THIS IS IN NAV-->\n" +
-    "                    <!--STARTS THE TIMER MODE || ALLOWANCE FOR MULTI -->\n" +
-    "                    <!--DEPRECIATE AND MOVE TO NAV-->\n" +
+    "                    <!--DEPRECIATE AND MOVE TO NAV - ALL IN NAV?-->\n" +
+    "                    <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->\n" +
+    "\n" +
+    "                    <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->\n" +
+    "\n" +
+    "                    <!--TODO: TOKEN STRING PROTOCOL.. IE COMBINATORIAL CONTEXT - IT WILL COME SOON . . PROJECT+... TASK+.. WE ARE ONLY NAKE CONTEXT RN -->\n" +
+    "\n" +
+    "                    <!--TODO: AUTO POPULATE TIME CONTEXT BASED ON COMPUTED TASK VALIDATION :)-->\n" +
+    "                    <tags-input min-length=\"1\" ng-model=\"timeTags\" placeholder=\"Tags\"></tags-input>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <a ng-click=\"showValidationImplicitToggle()\" href=\"#\"><b>Time Validation</b></a>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                    <div ng-show=\"showValidationImplicitToggleVar\">\n" +
     "\n" +
-    "                        <!--{{task.associatedModels}}-->\n" +
-    "                        <!--div ng-repeat=\"association in associatedModels\"></div>-->\n" +
-    "                        <!--ALL 100-->\n" +
-    "                        <!--ALL ASSOCIATIONS? -->\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                        <div layout=\"\">\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
-    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
+    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\"><b>Context</b></span></div>\n" +
+    "                            <div flex=\"70\" layout=\"\" layout-align=\"center center\"></div>\n" +
+    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\"><b>Validation</b> | <b>Reputation</b></span></div>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                        <!--TODO: REMOVE GENERAL? HMM-->\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">General</span></div>\n" +
+    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTime.validationModels.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{newTime.validationModels.validation.general}} | {{currentUser.totalWork}}</span></div>\n" +
     "                        </div>\n" +
     "\n" +
     "                        <div ng-repeat=\"tag in timeTags track by $index\">\n" +
     "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                                <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{tag.text}}</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTime.validationModels.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                                <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{newTime.validationModels.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
     "                    </div>\n" +
+    "\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "                    <text-angular ng-model=\"timeContent\" ta-toolbar=\"[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "                    <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"submit()\">Submit Time</button>\n" +
+    "\n" +
     "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"card\" ng-repeat=\"item in time\" ng-click=\"renderToggle(item)\">\n" +
+    "\n" +
+    "            <!--TODO: TEMPLATE TIME CARD-->\n" +
+    "            <!--TODO: REMOVE INLINE STYLE-->\n" +
+    "            <!--<div ng-include=\"'cards/time.tpl.html'\"></div>-->\n" +
+    "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div style=\"float:right;text-align:right\">\n" +
     "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(time)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
@@ -10965,9 +10981,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    \n" +
     "    <div class=\"spacing-50\"></div>\n" +
-    "\n" +
     "</div>");
 }]);
 

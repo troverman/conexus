@@ -475,6 +475,12 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 .spacing-200 {padding:200px;}
 .spacing-250 {padding:250px;}
 
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    vertical-align:middle;
+    padding:3px;
+    min-width:100px;
+}
+
 .tags-input .tags .input{
     width:100%;
 }
@@ -491,11 +497,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     font-weight: bold;
 }
 
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-    vertical-align:middle;
-    padding:3px;
-    min-width:100px;
-}
+.toast-success {background-color: #002c54;}
 
 @media (max-width: 768px) {
     .mobileFix{display:none;}
