@@ -58,36 +58,9 @@ angular.module( 'conexus.time', [
     $scope.time.tokens.push('CRE8+TIME');
     $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id);
 
-    //HUMAN VALIDATED AI VERIFY? 
-    //VALID VS VERIFY
-    //UNIFY CONTENT AND TIME??
-    //NAKED TAGS? --> REP?
-
     //VALIDATION IS THE CORE.. 
     //if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id)}
     //if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id)}
-
-    //if ($scope.time.task.tags){
-    //    for (x in $scope.time.task.tags){
-    //        $scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.tags[x].trim().toUpperCase());
-    //        $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());
-    //        if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());}
-    //        if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id+'+'+$scope.time.task.tags[x].trim().toUpperCase());}
-    //    }
-    //}
-   
-    //TODO: DEPRECIATE
-    $scope.createContent = function(content) {
-        if ($rootScope.currentUser){
-            if (content){$scope.newContent.contentModel = content.id}
-            $scope.newContent.user = $rootScope.currentUser.id;
-            $scope.newContent.time = $scope.time.id;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
@@ -112,11 +85,7 @@ angular.module( 'conexus.time', [
 
     //TODO: DEPRECIATE
     $scope.reply = function(item){
-        if ($rootScope.currentUser){
-            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            if (contentIndex != -1){$scope.contentList[contentIndex].showReply = !$scope.contentList[contentIndex].showReply;}
-            else{$scope.time.showReply = !$scope.time.showReply;}
-        }
+        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
         else{$mdSidenav('login').toggle();}
     };
 

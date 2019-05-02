@@ -3,7 +3,6 @@ angular.module( 'conexus.nav', [
 
 .controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$window', 'ContentModel', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $window, ContentModel, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
-
     //TODO: ALL!
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
     //CREATE TIME .. 
@@ -11,7 +10,6 @@ angular.module( 'conexus.nav', [
     //--> THATS THE FRONT END TIMER
     //.. CALC THE TIME SINCE CREATE TO ENSURE TIMER
     //.. NOT FRONTEND
-
 
     //TODO: IN APP.JS
     //STATE CHANGE LOGIC
@@ -77,9 +75,6 @@ angular.module( 'conexus.nav', [
             }
         });
     }
-
-
-
 
 
     //ROOT FUNCTIONS
@@ -817,6 +812,10 @@ angular.module( 'conexus.nav', [
                 }
                 if($scope.recordingTime === true) return false;
                 $scope.recordingTime = true;
+
+                //TODO: CREATE TIME HERE
+                $scope.startTime = new Date();
+
                 clearInterval($scope.interval);
                 $scope.interval = setInterval($scope.updateCount, 1000);
             };
@@ -857,9 +856,12 @@ angular.module( 'conexus.nav', [
             };
 
             $scope.updateCount = function() {
-                $rootScope.taskTime++;
+                //TODO: CREATED AT
+                var currentTime = new Date();
+                $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startTime.getTime()) / 1000);
                 $scope.$apply();
             };
+
 
             $mdSidenav('time').toggle();
         }
@@ -1291,8 +1293,7 @@ angular.module( 'conexus.nav', [
                 $scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({
                     type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].id,
                 });
-                console.log($scope.newValidation);
-                //if$scope.newValidation.associatedModels.length 
+                //console.log($scope.newValidation);
                 ValidationModel.create($scope.newValidation).then(function(model) {
                     $scope.confirm = $scope.newValidation;
                     $scope.confirm.model = 'VALIDATION';

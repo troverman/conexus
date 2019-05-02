@@ -34,10 +34,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-sm-7\">\n" +
     "				<!--SHIFT FROM FUTURE TO NOW-->\n" +
     "				<!--<h3>THE NEXT WAVE</h3>-->\n" +
-    "				<h3>VALUE WE CRE8</h3>\n" +
+    "				<h3>DIGITAL VALUE WE CRE8</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Share with us and create value.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Creation never stops. It's a 24/7 continual hackathon.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Watch the World Create. Explore the diversity of the network.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Creation never stops. Watch the World Create.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Explore the diversity of the network.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
@@ -47,10 +47,24 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-7\">\n" +
     "				<h3>A SHARED WORLD</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">From shared items to space and time, sharing networks are reflective of our commitment.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">From sharing items to space and time, sharing networks reflect our commitment.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supporative of sharing culture.</p>\n" +
     "				<p><a href=\"/marketplace\">Marketplace</a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-7\">\n" +
+    "				<h3>CREATING INTENTIONAL COMMUNITY</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Coordinating around all goals, together we create a shared reality. Organized though intentionality that is context specific, participants create reputation - though the interaction with token protocols. </p>\n" +
+    "				<p><a href=\"/projects\">Projects</a></p>\n" +
+    "				<p><a href=\"/projects\">Tasks</a></p>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
     "				<img style=\"max-height:200px\" src=\"images/space.jpg\">\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -72,7 +86,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Live Streaming & Complete Inclusivity create more connected paradigms.</p>\n" +
     "						<p style=\"font-style:italic;color:gray;margin:0px\">Transparency through Sharing Creates Abundance.</p>\n" +
     "					</div>\n" +
-    "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jUQ_3kCcG_U\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "					<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/uB4rItpM6k0\" frameborder=\"0\" allowfullscreen></iframe>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -168,7 +182,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-8\">\n" +
-    "				<h2>MultiDimensional Tokenization</h2>\n" +
+    "				<h2>Information as Income</h2>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
@@ -212,7 +226,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-8\">\n" +
-    "				<h2><a style=\"color:white;margin:0px\" href=\"/market\">MultiDimensional Token Market</a></h2>\n" +
+    "				<h2><a style=\"color:white;margin:0px\" href=\"/market\">MultiDimensional Value Exchange</a></h2>\n" +
+    "				<!--<h2><a style=\"color:white;margin:0px\" href=\"/market\">MultiDimensional Token Market</a></h2>-->\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">The Moment of Liquidity is Combinatorial.</p>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
@@ -239,7 +254,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"spacing-50\"></div>\n" +
     "				<h3>Create Value Relationships</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value. This process creates intention in the market.</p>\n" +
-    "				<h5>Create Interlocked Networks of Value</h5>\n" +
+    "				<h5>Create Connected Networks of Value</h5>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Through a variety of intentional techniques we can establish <i>more</i> true value intent</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p>\n" +
     "			</div>\n" +
@@ -1874,6 +1889,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-1\">\n" +
     "                    <div class=\"modelList\">\n" +
     "                        <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
+    "                        <!--<p><a href=\"#ATTENTION\" du-smooth-scroll>Attention</a></p>-->\n" +
     "                        <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
     "                        <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
     "                        <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
@@ -2043,7 +2059,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Associations map the relationships between model types in the CRE8 ecosystem. Associations are of particular value in governance relating the model relationships of Projects, Tasks, & Time</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Project`hArr`Task`hArr`Time\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connectiontion.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Associations are computed though <a href=\"#VALIDATION\" du-smooth-scroll>validation traversal</a> and provide a dimensional context of connection.</p>\n" +
     "\n" +
     "                    <p>\n" +
     "                        <span style=\"color:gray;font-style:italic\">Associations are functions of peer validation & Assocation Governace Rules.</span> \n" +
@@ -2070,8 +2086,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                    where the tensors {\\displaystyle U_{\\alpha }^{\\beta }} {\\displaystyle U_{\\alpha }^{\\beta }} and {\\displaystyle u^{j}} {\\displaystyle u^{j}} have all components equal to 1. The heterogeneity in the number of connections of a node across the different layers can be taken into account through the participation coefficient.\n" +
     "                    -->\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "                    <!--VALIDATION WITH RESPECT TO TAGS & THE IDEA OF CONTEXT--> \n" +
     "                    <!--<p style=\"color:gray;font-style:italic\">A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->\n" +
@@ -10757,27 +10771,21 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "\n" +
     "        <div class=\"card\" ng-click=\"\">\n" +
-    "\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div class=\"container\">\n" +
     "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{task.title}}</h1>\n" +
-    "                            <!--<h5 style=\"color:white\"><span style=\"font-size:10px;color:gray\"></span></h5>-->\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "\n" +
     "            <div class=\"padding:16px\">\n" +
     "                <div class=\"col-sm-12\" style=\"padding:16px\">\n" +
     "\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
     "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(task)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
-    "\n" +
-    "                    <!--ASSOCIATION && VALIDATION-->\n" +
-    "                    <!--TAGS & SHARED ASSOCIATION CONTEXT-->\n" +
     "\n" +
     "                    <p><a ng-repeat=\"tag in task.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
     "\n" +
@@ -10826,7 +10834,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <h3>Streaming?</h3>\n" +
     "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</button>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">No</button>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">No</button>\n" +
     "                    </div>\n" +
     "                    <div ng-show=\"streaming\">\n" +
     "                        <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
@@ -10852,12 +10860,22 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <tags-input ng-model=\"timeTags\" placeholder=\"Tags\"></tags-input>\n" +
     "\n" +
+    "                    \n" +
+    "                    <!--REALLY NEED TO DO ASSOCIATION COMPUTATION AND APPROPITAE QUERY-->\n" +
+    "\n" +
+    "                    <!--IF MULTIPLE??-->\n" +
+    "                    <div ng-if=\"false\">\n" +
+    "                        <h5>Selected Projects</h5>\n" +
+    "                        <tags-input ng-model=\"selectedProjects\" placeholder=\"Selected Projects\"></tags-input>\n" +
+    "                        <div ng-repeat=\"model in task.associatedModels\">\n" +
+    "                            <p><a href=\"#\" ng-click=\"selectProject(model.address)\">Select {{model}}</a></p>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <a ng-click=\"showValidationImplicitToggle()\" href=\"#\"><b>Task Validation</b></a>\n" +
     "\n" +
     "                    <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->\n" +
-    "                    <!--VALIDATION HERE!!!!!!!!!-->\n" +
-    "                    <!--SELECT PROJECT CONTEXT.. IMPLICILY VALIDATE YOU TAGS BY A DETAIL EXPAND-->\n" +
-    "                    <!--HVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->\n" +
+    "                    <!--HAVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->\n" +
     "                    <!--UNIVERSAL UX FOR THIS IS IN NAV-->\n" +
     "                    <!--STARTS THE TIMER MODE || ALLOWANCE FOR MULTI -->\n" +
     "                    <!--DEPRECIATE AND MOVE TO NAV-->\n" +

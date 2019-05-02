@@ -27,27 +27,21 @@
         </div>
 
         <div class="card" ng-click="">
-
             <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
                             <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{task.title}}</h1>
-                            <!--<h5 style="color:white"><span style="font-size:10px;color:gray"></span></h5>-->
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="padding:16px">
                 <div class="col-sm-12" style="padding:16px">
 
                     <div style="float:right;text-align:right">
                         <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(task)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
-
-                    <!--ASSOCIATION && VALIDATION-->
-                    <!--TAGS & SHARED ASSOCIATION CONTEXT-->
 
                     <p><a ng-repeat="tag in task.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
 
@@ -96,7 +90,7 @@
                         <h3>Streaming?</h3>
                         <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
                         <div class="spacing-5"></div>
-                        <button type="submit" class="btn btn-default log-btn" ng-click="startWork()">No</button>
+                        <button type="submit" class="btn btn-default log-btn" ng-click="startTime()">No</button>
                     </div>
                     <div ng-show="streaming">
                         <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
@@ -122,12 +116,22 @@
                     <div class="spacing-5"></div>
                     <tags-input ng-model="timeTags" placeholder="Tags"></tags-input>
 
+                    
+                    <!--REALLY NEED TO DO ASSOCIATION COMPUTATION AND APPROPITAE QUERY-->
+
+                    <!--IF MULTIPLE??-->
+                    <div ng-if="false">
+                        <h5>Selected Projects</h5>
+                        <tags-input ng-model="selectedProjects" placeholder="Selected Projects"></tags-input>
+                        <div ng-repeat="model in task.associatedModels">
+                            <p><a href="#" ng-click="selectProject(model.address)">Select {{model}}</a></p>
+                        </div>
+                    </div>
+
                     <a ng-click="showValidationImplicitToggle()" href="#"><b>Task Validation</b></a>
 
                     <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->
-                    <!--VALIDATION HERE!!!!!!!!!-->
-                    <!--SELECT PROJECT CONTEXT.. IMPLICILY VALIDATE YOU TAGS BY A DETAIL EXPAND-->
-                    <!--HVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->
+                    <!--HAVE THE DOUBLE LOOP IF YOU WANT.. IE SUBMIT TASK-> PROJ CONTEXT..?-->
                     <!--UNIVERSAL UX FOR THIS IS IN NAV-->
                     <!--STARTS THE TIMER MODE || ALLOWANCE FOR MULTI -->
                     <!--DEPRECIATE AND MOVE TO NAV-->

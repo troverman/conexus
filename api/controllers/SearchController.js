@@ -80,7 +80,7 @@ module.exports = {
 
 						mongoObj[query.modelParam] = queryDecoration;
 						mongoQuery.$or.push(mongoObj);
-						console.log(mongoQuery)
+						console.log(mongoQuery);
 
 					}
 
@@ -106,6 +106,24 @@ module.exports = {
 			//	]
 			//}
 
+
+			//ASSOCIATED QUERIES
+			//db.orders.aggregate([
+			//   {
+			//     $lookup:
+			//       {
+			//         from: "inventory",
+			//         localField: "item",
+			////         foreignField: "sku",
+			//        as: "inventory_docs"
+			//       }
+			//  }
+			//])
+
+			//bigchaindb???
+			//https://interledger.org/
+			//https://github.com/bigchaindb/ilp-plugin-bigchaindb ??
+
 			//DEPRECIATE
 			Project.native(function(err, project) {
 
@@ -119,9 +137,12 @@ module.exports = {
 				console.log(mongoQuery);
 
 				project.find(mongoQuery)
-				//.limit(limit)
-				//.skip(skip)
+
+				.limit(200)
+				.skip(0)
+
 				//.sort({'createdAt':-1})
+
 				.toArray(function (err, models) {
 					if (models){
 						console.log(models.length)

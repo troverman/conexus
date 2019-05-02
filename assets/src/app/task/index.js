@@ -75,6 +75,11 @@ angular.module( 'conexus.task', [
         type: 'TASK',
     }];
 
+    $scope.newValidation = {};
+    $scope.newValidation.validation = {};
+    $scope.newValidation.validation.general = 0;
+
+
     //TODO: VIEW IN NAV.. GLOBAL.. :)
     $scope.askQuestion = function() {
         if ($rootScope.currentUser){$scope.question = true;}
@@ -134,6 +139,11 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
+    $scope.selectedProjects = [];
+    $scope.selectProject = function(model){
+        $scope.selectedProjects.push({text:model});
+    };
+
     //TODO:..HMM
     $scope.showTimeToggle = function(){
         $scope.showContent = false;
@@ -157,12 +167,16 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: REWORK THE FLOW
-    $scope.startWork = function() {
+    //TODO: REWORK FLOW
+    $scope.startTime = function() {
         if ($rootScope.currentUser){
+
             if ($scope.streaming){
-                //TODO.. INIT STREAM HERE ~~~~
+
+                //TODO: INIT STREAM
+                //TODO: IPFS STREAM
                 //startStream();
+
                 $scope.newContent = {
                     type:'video',
                     title: $scope.task.title,
@@ -174,7 +188,13 @@ angular.module( 'conexus.task', [
                     console.log('create', contentModel)
                     $scope.streamingId = contentModel.id;
                 });
+
+
             }
+
+            //TODO: CREATE TIME HERE
+            $scope.startTime = new Date();
+
             if($scope.working === true) return false;
             $scope.working = true;
             $scope.pop();
@@ -183,10 +203,12 @@ angular.module( 'conexus.task', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: REWORK.. ASSOICATIONS.. TIME --> STREAM --> CONTENT
+    //TODO: REWORK FLOW.
     $scope.submit = function() {
         if($scope.working === false) return false;
         $scope.working = false; $scope.question = false; $scope.streaming = false;
+
+
         var timeModel = {
             amount: $rootScope.taskTime,
             content: $scope.timeContent,
@@ -195,7 +217,21 @@ angular.module( 'conexus.task', [
             user: $rootScope.currentUser.id,
             stream: $scope.streamingId,
             type:'LIVE',
+            associatedModels: [
+                {type:'TASK', address:$scope.task.id, id:$scope.task.id},
+                //{type:'PROJECT', address:$scope.task.id, id:$scope.task.id},
+            ],
+
+            validationModel:[
+
+            ]
+
         };
+
+        //$scope.newValidation = {};
+        //$scope.newValidation.validation = {};
+        //$scope.newValidation.validation.general = 0;
+        //for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
 
         if ($scope.timeTags){
             timeModel.tags = $scope.timeTags.map(function(obj){
@@ -204,9 +240,13 @@ angular.module( 'conexus.task', [
         }
 
         //REWORK
+        //UPDATE ON SUBMIT
         TimeModel.create(timeModel).then(function(model){
             $scope.time.unshift(model);
             $scope.timeContent = '';
+            
+
+
             //UPDATE TO HAVE PARENT AS TIME MODEL
             //REFACTOR | DOING BOTH HERE
             //TODO: ASSOCIATED MODELS --> TIME TO TASKS ONE TO MANY
@@ -219,17 +259,23 @@ angular.module( 'conexus.task', [
                 update.parent = model.id;
                 update.parentModel = 'time';
                 ContentModel.update(update).then(function(contentModel){
-                    consooe.log(contentModel)
+                    console.log(contentModel)
                 });
             }
+
+
+
+
         }); 
         $rootScope.taskTime=0;
         clearInterval($scope.interval);
     };
 
-    //TODO: BACKEND COUNTER..... 
+    //TODO: CREATE LIVE AT START
     $scope.updateCount = function() {
-        $rootScope.taskTime++;
+        //TODO: CREATED AT
+        var currentTime = new Date();
+        $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startTime.getTime()) / 1000);
         $scope.$apply();
     };
 

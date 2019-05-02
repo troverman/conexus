@@ -104,29 +104,42 @@ module.exports = {
 		}
 	},
 
-	//IM GOING TO TAKE A BREAK AND COME BACK TO THE IMPLICT VALIDATION
 	create: function (req, res) {
 
 		//TODO: SECURITY
 		var model = {
-			amount: req.param('amount'),
-			//creator
-			user: req.param('user'),
-			type: req.param('type'), //RETROACTIVE | VS CREATED AT
-			startTime: req.param('startTime'),
-			source: req.param('source'), //TIME TRACK | STREAM + TIME TRACK | RETORACTIVE | API
 
-			//FITBIT FOR REST | YOUTUBE FOR STREAM? | ETC --> NEED TO IMPORT YOUTUBE STREAM CONTENT
+			amount: req.param('amount'),
+
+			user: req.param('user'),
+			creator: req.param('creator'),
+
 			content: req.param('content'),
 
-			tags: req.param('tags'), // computed validations
+			type: req.param('type'),
+			source: req.param('source'), 
+			startTime: req.param('startTime'),
+
 			associatedModels: req.param('associatedModels'),
+
+
+
+
+			validationModel: req.param('validationModel'),
+			tags: req.param('tags'),
+
+
+
+
+
+			//TODO: BETTER
 			reactions: {plus:0,minus:0},
 
 			//DEPRECIATE
 			project: req.param('project'),
 			task: req.param('task'),
 			stream: req.param('stream'),
+
 		};
 
 		console.log('CREATE TIME', model)
@@ -135,36 +148,49 @@ module.exports = {
 		.exec(function(err, time) {
 			if (err) {return console.log(err);}
 			else {
+
+				Time.publishCreate(time);
+				res.json(time);
+
 				User.find({id:model.user}).then(function(userModel){
 					
+					//UPDATE TOTAL WORK
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
 
-					//TODO:IMPLICIT VALIDATION
+					console.log('associatedModels', model.associatedModels);
 
-					//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
-					//for (x in Object.keys(model.validation)){
-						//TODO | BETTER..
-					//	if (userModel[0].reputation[Object.keys(model.validation)[x]]){
-							//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPIN | WIP
-					//		if (Object.keys(model.validation)[x] == 'general'){reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;}
-					//		else{reputation[Object.keys(model.validation)[x]] = userModel[0].reputation[Object.keys(model.validation)[x]]}
-					//	}
-					//	else{reputation[Object.keys(model.validation)[x]] = 0;}
-					//}
-					model.reputation = reputation;
+
+					//BINARY RELATION BRUH
+					//MB VALIDATIONMODELS
+
+					//SELF TAGS IN TIME
+					for (x in time.tags.split(',')){
+						console.log('self dimension', time.tags.split(',')[x]);
+					}
+
+					//TAGS IN ASSOCIATED MODEL.. TASK . . . 
+					for (x in time.associatedModels){
+						console.log('association time', time.associatedModels[x]);
+					}
+
+
+				
+
+					//WHAT ARE THE DIMENSIONS?
+					//COMPUTE THIS FROM THE ASSOCIATION MODELS.. --> TIME <--> TASK <--> PROJECT
 
 					var validationModel = {
-						conntent:'IMPLICIT VALIDATION ON TIME CREATE' + time.id,
-						validation:{}, //model.tags + tags of task ? 
+						conntent:'TIME '+ time.id + ' VALIDATION',
+						validation:{
+
+						},
 						reputation:{
 
-						}, //user.rep based on ^
+						},
 						associatedModels: [
-							//WHAT TASK.. WHAT CONTEXT?? ALL ? THAT'S A SET OF VALIDATIONS.. --> EMBED THIS IN UI
-							//{type:'TASK',address:model.id},
-							//FRONTEND INPUT .. SELECT TASK.. AND CONTEXT.. MULTIPLE IF YA WANT!
-							{type:'TIME',address:time.id}
+							{type:'TIME', address:time.id},
+
 						],
 						reactions: {plus:0,minus:0},
 						user: req.param('user'),
@@ -172,15 +198,21 @@ module.exports = {
 				
 					//Validate.create(validationModel).then(function(validation){
 					//	console.log('CREATED IMPLICIT VALIDATION', validation);
+
+
+						//COMPUTE ASSOCIATION HERE
+
+
+
 					//});
 
-					//TODO: REQUEST TO VALIDATE NOTIFICATION
-
+					//REQUEST TO VALIDATE NOTIFICATION
+					//CREATE NOTIFICATION
+					//WHICH PROJECTS FOR MULTI ASSOCIATION
 					for (x in time.associatedModels){
 						if (time.associatedModels[x].type == 'PROJECT'){
-
-					//		ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
-					//			for (x in projectMembers){
+							//ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
+								//for (x in projectMembers){
 									//var notificationModel = {
 									//	user: projectMembers[x],
 									//	type: 'Request to Validate',
@@ -189,42 +221,23 @@ module.exports = {
 									//Notification.create(notificationModel).then(function(notification){
 									//	Notification.publishCreate(follower[0]);
 									//});
-					//			}
-					//		});
-
+								//}
+							//});
 						}
 					}
 
 				});
 
-				/*
-				User.find().then(function(userModel){
-					for (x in userModel){
-						Time.find({user:userModel[x].id})
-						.then(function(models) {
-							if (models.length > 0){
-								var sum = 0;
-								for (y in models){sum += parseInt(models[y].amount)}
-								User.update({id:models[0].user}, {totalWork:sum}).then(function(user){});
-								console.log(sum);
-							}
-						});
-					}
-				});
-				*/
-
-				Time.publishCreate(time);
-				res.json(time);
 			}
 		});
 	},
 
 	update: function(req, res) {
 		var id = req.param('id');
-		var model = {};
-		Time.update({id: id}, model).exec(function afterwards(err, updated){
-		  if (err) {return;}
-		});
+		//var model = {};
+		//Time.update({id: id}, model).exec(function afterwards(err, updated){
+		//  if (err) {return;}
+		//});
 	},
 	
 };
