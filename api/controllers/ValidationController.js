@@ -17,7 +17,7 @@ module.exports = {
 
 		Validation.watch(req);
 
-		//DEPRECIATE?
+		//TODO: DEPRECIATE
 		if (req.query.project){
 			Validation.find({project:project})
 			.limit(limit)
@@ -30,7 +30,7 @@ module.exports = {
 			});
 		}
 
-		//DEPRECIATE?
+		//TODO: DEPRECIATE
 		else if (req.query.task){
 
 			//Association.find({"associatedModels.address":{$in :[task]}})
@@ -98,7 +98,7 @@ module.exports = {
 
 		}
 
-		//DEPRECIATE?
+		//TODO: DEPRECIATE
 		else if(req.query.user){
 			Validation.find({user:user})
 			.limit(limit)
@@ -175,12 +175,33 @@ module.exports = {
 		else{
 
 			Validation.find({})
-			.limit(limit)
+			.limit(10)
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Validation.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){
+					promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
+					for (y in models[x].associatedModels){
+						if (models[x].associatedModels[y].type == 'PROJECT'){promises.push(Project.find({id:models[x].associatedModels[y].address}).then(function(projectModels){return {project:projectModels[0]}}))}
+						if (models[x].associatedModels[y].type == 'TASK'){promises.push(Task.find({id:models[x].associatedModels[y].address}).then(function(taskModels){return {task:taskModels[0]}}))}
+						if (models[x].associatedModels[y].type == 'TIME'){promises.push(Time.find({id:models[x].associatedModels[y].address}).then(function(timeModels){return {time:timeModels[0]}}))}
+					}
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						models[x].user = populatedModels[sum].user;
+						sum++;
+						for (y in models[x].associatedModels){
+							if (models[x].associatedModels[y].type == 'PROJECT'){models[x].associatedModels[y].info = populatedModels[sum].project;}
+							if (models[x].associatedModels[y].type == 'TASK'){models[x].associatedModels[y].info = populatedModels[sum].task;}
+							if (models[x].associatedModels[y].type == 'TIME'){models[x].associatedModels[y].info = populatedModels[sum].time;}
+							sum++;
+						}
+					}
+					res.json(models);
+				});				
 			});
 
 		}

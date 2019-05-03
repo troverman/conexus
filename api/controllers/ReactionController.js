@@ -28,10 +28,8 @@ module.exports = {
 			});
 		}
 
-		//TODO 
+		//TODO
 		if(req.query.associatedModels){
-			//&& type
-			//MEH!
 			Reaction.find({associatedModels: {contains: req.query.associatedModels}})
 			.limit(limit)
 			.skip(skip)
@@ -83,6 +81,12 @@ module.exports = {
 				Reaction.publishCreate(reaction);
 
 				//REACT TO ACTIVITY.. IE FOLLOW AND PROJECTMEMBER :P
+
+
+				//for (x in model.validationModels) // AUTO 100 --> DISCRET NO CONTEXT JUST TYPE 
+
+
+
 
 				//ASSOCIATION.. AND COUNTS; reaction mappings.. id / address
 				for (x in model.associatedModels){

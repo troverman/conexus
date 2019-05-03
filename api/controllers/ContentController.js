@@ -52,28 +52,7 @@ module.exports = {
 		}
 
 		else if(req.query.order){
-
 			var order = req.query.order;
-			console.log(order)
-
-			//MB BAD 
-			/*
-			Content.native(function(err, content) {
-				//{limit:limit, skip:skip, sort:sort}
-				content.find({"associatedModels.address":{$in :[order]}}).toArray(function (err, models) {
-					models = models.map(function(obj){
-						obj.id = obj._id;
-						return obj;
-					});
-					//ZZZ
-					console.log(models)
-					Content.subscribe(req, models);
-					res.json(models);
-				});
-
-			});
-			*/
-
 			Content.find({order:order})
 			.limit(limit)
 			.skip(skip)
@@ -83,7 +62,6 @@ module.exports = {
 				Content.subscribe(req, models);
 				res.json(models);
 			});
-
 		}
 
 		else if (req.query.contentModel){
@@ -238,11 +216,14 @@ module.exports = {
 			type: req.param('type'),
 			content: req.param('content'),
 			user: req.param('user'),
+			//creator: req.param('creator'),
 
 			associatedModels: req.param('associatedModels'),
 
-			//DEPRECIATE
-			//LOL
+			//REMOVE FROM MODEL
+			validationModels: req.param('validationModels'),
+
+			//TODO: DEPRECIATE
 			market: req.param('market'),
 			order: req.param('order'),
 			parent: req.param('parent'),
@@ -270,12 +251,15 @@ module.exports = {
 				Content.publishCreate(model);
 				res.json(model);
 
+				for (x in validationModels){
+					//VALIDATION CREATE
+					//ASSOICATION CREATE (RESPECT GOVERNANCE RULES (CHARTER))
+				}
 
 				//<-- ASSOCIATIONS -->
 				//SEND NOTIFICATIONS TO FOLLOWERS
 				//SEND NOTIFICATIONS TO PROJECT MEMBERS
 				//SEND NOTIFICATION TO MEMBER
-
 
 			}
 		});
@@ -283,18 +267,10 @@ module.exports = {
 
 	//IS UPDATING REAL ONCHAIN? | NEW TYPE? NAH
 	//IT'S A NEW 'CREATE' THAT OVERLAPS. 
-	update: function(req,res){
-		var id = req.param('id');
-		var model = {
-			parent: req.param('parent'),
-			parentModel: req.param('parentModel'),
-			time: req.param('time'),
-		};
-		Content.update({id: id}, {parent:model.parent,parentModel:model.parentModel,time:model.time})
-		.then(function(model){
-			Content.publishUpdate(id, model[0]);
-			res.json(model);
-		});
+	update: function(req, res){
+
+		//UPDATE HISTORY IN MODEL
+
 	}
 
 };

@@ -3146,6 +3146,21 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p>Dimensional Validations are Tags<p> \n" +
     "                    `Tag = V_D`\n" +
     "\n" +
+    "\n" +
+    "                    <p>Compound Associations</p> \n" +
+    "                    `(A hArr B) hArr C`\n" +
+    "                    `A hArr (B hArr C)`\n" +
+    "                    <p>Decompose PROJECT `hArr_D` TASK `hArr_D` TIME</p>\n" +
+    "                    `(Project hArr Task) hArr Time`\n" +
+    "                    `Project hArr (Task hArr Time)`\n" +
+    "                    Pluralism says ALL!\n" +
+    "\n" +
+    "                    <p>Token Interactions from Assoications</o>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
@@ -11618,6 +11633,7 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        	<div class=\"container\">\n" +
+    "\n" +
     "			            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
     "			            		<span ng-repeat=\"model in validation.associatedModels track by $index\">\n" +
     "\n" +
@@ -11635,6 +11651,9 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "			            		</span>\n" +
     "			            	</h1>\n" +
+    "\n" +
+    "			            	<h5 style=\"color:white\">Validation</h5>\n" +
+    "\n" +
     "			            </div>\n" +
     "			        </div>\n" +
     "			    </div>\n" +
@@ -11646,53 +11665,23 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "	                <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(validation)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "	            </div>\n" +
     "\n" +
-    "				<!--TODO-->\n" +
-    "				<!--\n" +
-    "				<h3> \n" +
-    "					<span><a href=\"{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.task.title}}</a></span> \n" +
-    "					<i class=\"fa fa-arrows-h\"></i> \n" +
-    "					<span><a href=\"{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}\">{{validation.associatedModels[1].info.project.title}}</a></span>\n" +
-    "				</h3>\n" +
-    "				-->\n" +
-    "\n" +
     "				<a href=\"member/{{validation.user.username}}\">\n" +
     "					<img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\"/>\n" +
     "					<b>{{validation.user.username}}</b>\n" +
     "				</a>\n" +
     "\n" +
     "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"validation.createdAt\"></p>\n" +
+    "				\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "				<!--TODO: ABSTRACT MODEL | POPULATE VALIDATIONS-->\n" +
-    "				<!--ERR-->\n" +
-    "				<!--\n" +
-    "				<p ng-repeat=\"model in validation.associatedModels\">\n" +
-    "					<a href=\"{{model.type.toLowerCase()}}/{{model.address}}\">\n" +
-    "						{{model.type}} | {{model.address}}\n" +
-    "					</a>\n" +
-    "				</p>\n" +
-    "				-->\n" +
-    "				<!--TAGS ARE ASSOCIATIONS. . -->\n" +
-    "				<!--\n" +
-    "				<p>time | <a href=\"time/{{validation.time}}\">{{validation.time}}</a></p>\n" +
-    "				<p>task | <a href=\"time/{{validation.task}}\">{{validation.task}}</a></p>\n" +
-    "				<p>project |</p>\n" +
-    "				<p>member | </p>\n" +
-    "				<p>item | </p>\n" +
-    "				<p>order | </p>\n" +
-    "				<p>transaction | </p>\n" +
-    "				<p>content | </p>\n" +
-    "				<p>validation | </p>\n" +
-    "				<p>validation (recursion) </p>\n" +
-    "				-->\n" +
-    "				<!--ASSOCIATION.. -->\n" +
-    "				<!--TODO: MANIFOLD-->\n" +
-    "				<!--MANIFOLD-->\n" +
-    "				<!--<p>Manifold | Project+</p>-->\n" +
-    "\n" +
-    "				<span ng-bind-html=\"renderContent(validation.content)\"></span>\n" +
+    "				<div>\n" +
+    "					<span ng-bind-html=\"renderContent(validation.content)\"></span>\n" +
+    "				</div>\n" +
     "\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "				<p>Project Charter | <a ng-click=\"informationToggle()\">Multipliticative Reputation Weight</a></p>\n" +
+    "\n" +
+    "				<p>Project Charter | <a ng-click=\"informationToggle('VOTINGPROTOCOL')\">Multipliticative Reputation Weight</a></p>\n" +
+    "\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<table class=\"table table-striped table-hover\">\n" +
@@ -11701,8 +11690,8 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "							<th>Dimension</th>\n" +
     "							<th>Validation Score</th>\n" +
     "							<th>Reputation</th>\n" +
-    "							<th>Project Charter <a ng-click=\"informationToggle()\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
-    "							<th>Reputation Weighted Validation Score <a ng-click=\"informationToggle()\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
+    "							<th>Project Charter <a ng-click=\"informationToggle('PROJECTCHARTER')\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
+    "							<th>Reputation Weighted Validation Score <a ng-click=\"informationToggle('REPUTATIONWEIGHTEDVALIDATIONSCORE')\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
     "						</tr>\n" +
     "					</thead>\n" +
     "					<tbody>\n" +
@@ -11710,11 +11699,12 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "							<td>{{validation[0]}}</td>\n" +
     "							<td>{{validationList[$index][1]}}</td>\n" +
     "							<td>{{reputationList[$index][1]}}</td>\n" +
-    "							<td><a ng-click=\"informationToggle()\">Multipliticative </a></td>\n" +
+    "							<td><a ng-click=\"informationToggle('VOTINGPROTOCOL - MULTIPLICATIVE')\">Multipliticative </a></td>\n" +
     "							<td>{{reputationWeightedList[$index][1]}}</td>\n" +
     "						</tr>\n" +
     "					</tbody>\n" +
     "				</table>\n" +
+    "\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<highchart config=\"validationColumn\"></highchart>\n" +
@@ -11738,8 +11728,7 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "		\n" +
     "	<div class=\"spacing-50\"></div>\n" +
     "\n" +
-    "</div>\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("view/index.tpl.html", []).run(["$templateCache", function($templateCache) {

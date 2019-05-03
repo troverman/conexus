@@ -1,11 +1,10 @@
-//TODO: CONTENT
-//TODO: DEPRECIATE
 
 module.exports = {
     attributes: {
 
         title: {type: 'string'},
         content: {type: 'string'},
+        
         tags: {type: 'string'},
         type: {type: 'string', defaultsTo: 'POST'},
 

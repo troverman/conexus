@@ -23,38 +23,27 @@ module.exports = {
 		}
 
 		else if (req.query.project){
-
 			Task.native(function(err, task) {
-
 				task.find({"associatedModels.address":{$in :[project]}})
 				.limit(limit)
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){
-						obj.id = obj._id;
-						return obj;
-					});
-
-					//JOIN TO USER --> HMMM.. VALIDATION BASKET.
+					models = models.map(function(obj){ obj.id = obj._id; return obj;});
 					var promises = [];
 					for (x in models){
 						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
 					}
-
 					Q.all(promises).then((populatedModels)=>{
 						for (x in models){models[x].user = populatedModels[x].user;}
 						res.json(models);
 					});
-
 				});
-
 			});
-
 		}
 
+		//TODO: DEPRECIATE
 		else if(req.query.search){
-			//console.log(search,limit,skip,sort)
 			Task.find()
 			.where({
 				or: [
@@ -111,6 +100,8 @@ module.exports = {
 			tags: req.param('tags'),
 			location: req.param('location'),
 			associatedModels: req.param('associatedModels'),
+			validationModels: req.param('validationModels'),
+
 			user: req.param('user'),
 
 			//DEPRECIATE
@@ -126,25 +117,53 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				//TODO:IMPLICIT VALIDATION
-				//ASSOCIATED MOELS ... ? 
-				var validationModel = {
-					conntent:'IMPLICIT VALIDATION ON TASK CREATE',
-					validation:{}, //model.tags
-					reputation:{}, //user.rep based on ^
-					associatedModels: [
-						//{type:'PROJECT',address:model.id},
-						{type:'TASK',address:task.id}
-					],
-					reactions: {plus:0,minus:0},
-					user: req.param('user'),
-				};
-				//Validate.create(validationModel).then(function(validation){
-				//	console.log('CREATED IMPLICIT VALIDATION', validation);
-				//});
+				User.find({id:model.user}).then(function(userModel){
 
-				Task.publishCreate(task);
-				res.json(task);
+					Task.publishCreate(task);
+					res.json(task);
+
+					//ALWAYS ASSOCIATED TO SELF 
+					//for (x in model.validationModels){
+						//model.validationModels[x].content = 'TASK '+ task.id + ' VALIDATION';
+						//model.validationModels[x].reputation = {};
+						//model.validationModels[x].associatedModels.push({type:'TASK', address:task.id});
+						//model.validationModels[x].type = 'MULTIPLICATIVE';
+						//model.validationModels[x].parameters = 'STANDARD';
+						//model.validationModels[x].user = userModel[0].id;
+						//model.validationModels[x].creator = userModel[0].id;
+						//model.validationModels[x].reactions = {plus:0,minus:0};
+						//for (y in Object.keys(model.validationModels[x].validation)){
+							//var context = Object.keys(model.validationModels[x].validation)[y];
+							//model.validationModels[x].reputation[context] = userModel[0].reputation[context] || 0;
+						//}
+						//Validation.create(model.validationModels[x]).then(function(validation){
+						//	console.log('CREATED IMPLICIT VALIDATION', validation);
+						//	var newAssociationModel = {};
+						//});
+					//}
+
+					//console.log(model.validationModels);
+
+					//REQUEST TO VALIDATE NOTIFICATION
+					//for (x in task.associatedModels){
+						//if (task.associatedModels[x].type == 'PROJECT'){
+							//ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
+								//for (x in projectMembers){
+									//var notificationModel = {
+									//	user: projectMembers[x],
+									//	type: 'Request to Validate',
+									//	content:'New Time, '+userModel.username +' is requesting validation for '+time,
+									//};
+									//Notification.create(notificationModel).then(function(notification){
+									//	Notification.publishCreate(follower[0]);
+									//});
+								//}
+							//});
+						//}
+					//}
+
+				});
+
 			}
 		});
 	},

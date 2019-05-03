@@ -763,7 +763,18 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newTask = {};
+
+            //CONTEXT TO AN ASSOCIATION IS A TAG
+            //UX KEEP CONTEXT THE SAME UNLESS CHECKED
             $scope.newTask.associatedModels = $rootScope.associatedModels;
+
+            $scope.newTask.validationModels = [{
+                validation:{general:100},
+                associatedModels:[]
+            }];
+
+            //WATCHER .. TAGS .. ASSOCIATED MODEL.. BUILD validationModels
+
             $mdSidenav('task').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -772,7 +783,6 @@ angular.module( 'conexus.nav', [
     $rootScope.timeToggle = function(){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-
 
             if (!$scope.newTime.recordingTime){
                 $scope.newTime = {};
@@ -1236,17 +1246,23 @@ angular.module( 'conexus.nav', [
     $scope.createTask = function(content) {
         if ($rootScope.currentUser){
             $scope.newTask.user = $rootScope.currentUser.id;
+
+            //DEPRECIATE
             if ($scope.newTask.tags){
                 $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
+
+
             //PATCH!!!
             if ($scope.newTask.associatedModels){
                 for (x in $scope.newTask.associatedModels){
-                    $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].address
+                    $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].address;
                 }
             }
+
+
             console.log($scope.newTask);
             TaskModel.create($scope.newTask).then(function(model) {
                 $scope.confirm = $scope.newTask;
