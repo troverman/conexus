@@ -1,4 +1,4 @@
-angular.module('models.reaction', ['lodash', 'services', 'sails.io',])
+angular.module('models.reaction', ['services', 'sails.io',])
 
 .service('ReactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

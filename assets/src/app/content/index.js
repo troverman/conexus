@@ -68,10 +68,18 @@ angular.module( 'conexus.content', [
 
     //TODO: VIEWCOUNTER ALL .. plug in for validation
     //viewToken Mechanism.. OnClick
+
+    //SIMILAR TO CREATE TIME
+    //TODO: STORE IN NAV.. 
+    //REPRESENT AS EYE ICON
+    $scope.startDateTime = new Date();
     $scope.updateCount = function() {
-        $scope.viewTime++;
-        $scope.tokenFilter = (0.04+0.00232*24*$scope.viewTime).toFixed(4);
+
+        var currentTime = new Date();
+        $rootScope.viewTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
+        $scope.tokenFilter = (0.04+0.00232*24*$rootScope.viewTime).toFixed(4);
         $scope.$apply();
+
     };
     
     setInterval($scope.updateCount, 1000);

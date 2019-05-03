@@ -125,10 +125,8 @@ module.exports = {
 
 
 
-			validationModel: req.param('validationModel'),
+			validationModels: req.param('validationModels'),
 			tags: req.param('tags'),
-
-
 
 
 
@@ -159,6 +157,18 @@ module.exports = {
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
 
 					console.log('associatedModels', model.associatedModels);
+
+
+
+
+					//THIS!
+					console.log(model.validationModels);
+					//for (x in model.validationModels){
+
+					//}
+
+
+
 
 
 					//BINARY RELATION BRUH

@@ -1,6 +1,6 @@
-angular.module('models.time', ['lodash', 'services', 'sails.io',])
+angular.module('models.time', ['services', 'sails.io',])
 
-.service('TimeModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
+.service('TimeModel',['utils', '$sailsSocket', function(utils, $sailsSocket) {
     
     this.getSome = function(model) {
         var url = utils.prepareUrl('time');

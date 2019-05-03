@@ -1,4 +1,4 @@
-angular.module('models.content', ['lodash', 'services', 'sails.io',])
+angular.module('models.content', ['services', 'sails.io',])
 
 .service('ContentModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

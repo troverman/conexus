@@ -46,7 +46,7 @@
             <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
         </form>
     </div>
-    <div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
+    <div ng-include="'content/templates/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
     <!--<button ng-click="loadMore(content)" class="btn btn-primary">LOAD MORE</button>-->
 </div>
 

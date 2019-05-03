@@ -1,4 +1,4 @@
-angular.module('models.notification', ['lodash', 'services', 'sails.io',])
+angular.module('models.notification', ['services', 'sails.io',])
 
 .service('NotificationModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

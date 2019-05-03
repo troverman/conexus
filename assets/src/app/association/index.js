@@ -11,8 +11,8 @@ angular.module( 'conexus.association', [
 			}
 		},
         resolve:{
-            validations: ['ValidationModel', function(ValidationModel){
-                return ValidationModel.getSome('', '', 10, 0, 'createdAt DESC');
+            validations: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
+                return ValidationModel.getSome({association:$stateParams.id, limit:10, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});

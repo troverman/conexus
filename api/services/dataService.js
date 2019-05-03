@@ -74,8 +74,6 @@ module.exports = {
 		//MEH
 		Validation.native(function(err, validation) {
 
-
-			
 			validation.find({"associatedModels.address":{$in :[model]}})
 			.limit(limit)
 			.skip(skip)

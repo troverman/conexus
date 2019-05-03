@@ -1,9 +1,5 @@
-angular.module( 'services.config', ['lodash'])
-.service('config',['lodash', function(lodash) {
-	return {
-		siteName: 'conexus',
-		siteUrl: '/',
-		apiUrl: '/api',
-		currentUser: false
-	};
+//TODO: DEPRECIATE
+angular.module( 'services.config', [])
+.service('config',[function(lodash) {
+	return {apiUrl: '/api'};
 }]);

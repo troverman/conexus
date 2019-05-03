@@ -11,5 +11,4 @@ angular.module( 'conexus.tx', [
 		}
 	});
 }])
-.controller( 'TxCtrl', ['$scope', 'titleService', function TxCtrl( $scope ) {
-}]);
+.controller( 'TxCtrl', ['$scope', 'titleService', function TxCtrl( $scope ) {}]);

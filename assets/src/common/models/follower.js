@@ -1,4 +1,4 @@
-angular.module('models.follower', ['lodash', 'services', 'sails.io',])
+angular.module('models.follower', ['services', 'sails.io',])
 
 .service('FollowerModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

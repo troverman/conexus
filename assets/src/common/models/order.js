@@ -1,4 +1,4 @@
-angular.module('models.order', ['lodash', 'services', 'sails.io',])
+angular.module('models.order', ['services', 'sails.io',])
 
 .service('OrderModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

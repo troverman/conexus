@@ -1,4 +1,4 @@
-angular.module('models.transaction', ['lodash', 'services', 'sails.io',])
+angular.module('models.transaction', ['services', 'sails.io',])
 
 .service('TransactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

@@ -1,4 +1,4 @@
-angular.module('models.task', ['lodash', 'services', 'sails.io',])
+angular.module('models.task', ['services', 'sails.io',])
 
 .service('TaskModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

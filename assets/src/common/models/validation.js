@@ -1,6 +1,6 @@
-angular.module('models.validation', ['lodash', 'services', 'sails.io',])
+angular.module('models.validation', ['services', 'sails.io',])
 
-.service('ValidationModel',['lodash', 'utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
+.service('ValidationModel',['utils', '$sailsSocket', function(utils, $sailsSocket) {
 
     this.getSome = function(model) {
         var url = utils.prepareUrl('validation');

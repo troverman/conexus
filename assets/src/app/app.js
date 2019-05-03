@@ -4,7 +4,6 @@ angular.module( 'conexus', [
     'angularMoment',
     'duScroll',
     'chart.js',
-    'lodash',
     'ui.bootstrap',
     'nemLogging',
     'uiGmapgoogle-maps',
@@ -77,7 +76,13 @@ angular.module( 'conexus', [
     $locationProvider.html5Mode(true);
 }])
 .run(function run(){moment.locale('en')})
-.controller( 'AppCtrl', ['$rootScope', '$scope', '$state', 'titleService', 'UserModel', function AppCtrl ( $rootScope, $scope, $state, titleService, UserModel ) {
+.controller( 'AppCtrl', ['$rootScope', '$scope', '$state', 'seoService', 'titleService', 'UserModel', function AppCtrl ( $rootScope, $scope, $state, seoService, titleService, UserModel ) {
+
+    //titleService.setTitle('CRE8.XYZ')
+    //seoService.setDescription('LET\'s CRE8');
+    //seoService.setKeywords('CRE8,love,unification,universal,income,eglatarian');
+    
+    //TODO: LOCAL STORAGE
 
     //TODO: BETTER
     $rootScope.currentUser = window.currentUser;
@@ -98,8 +103,14 @@ angular.module( 'conexus', [
         window.scrollTo(0, 0);
         //titleService | seoService
         if ($state.current.url.substring(1) !== ''){
+
             titleService.setTitle($state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }) +' | CRE8.XYZ');
+
+            //seoService.setDescription('LET\'s CRE8');
+            //seoService.setKeywords('CRE8,love,unification,universal,income,eglatarian');
+
             $rootScope.projectNavigation = $state.current.url.substring(1);
+
         }
         else{titleService.setTitle('CRE8.XYZ');}
     });

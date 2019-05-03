@@ -1,4 +1,4 @@
-angular.module('models.search', ['lodash', 'services', 'sails.io',])
+angular.module('models.search', ['services', 'sails.io',])
 
 .service('SearchModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
     

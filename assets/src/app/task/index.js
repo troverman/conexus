@@ -204,7 +204,7 @@ angular.module( 'conexus.task', [
 
             //TODO: CREATE TIME HERE
             //FILL OUT FORM BEFORE YOU START? HM
-            $scope.startTime = new Date();
+            $scope.startDateTime = new Date();
 
             $scope.newTime = {
                 amount: 0,
@@ -237,7 +237,7 @@ angular.module( 'conexus.task', [
                 //GET TIME ID
                 //$scope.newTime.id = timeModel.id;
                 //
-                //$scope.startTime = new Date(timeModel.createdAt);
+                //$scope.startDateTime = new Date(timeModel.createdAt);
 
             //}); 
 
@@ -307,7 +307,7 @@ angular.module( 'conexus.task', [
     $scope.updateCount = function() {
         //TODO: CREATED AT
         var currentTime = new Date();
-        $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startTime.getTime()) / 1000);
+        $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
 
         //COULD UPDATE HERE? --> DONT WANT TO OVERLOAD WITH CALLS. FINE? 
 

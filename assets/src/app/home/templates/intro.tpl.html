@@ -206,7 +206,7 @@
                     <div class="card col-md-6" ng-click="">
                         <div style="padding:16px;">
                             <div class="row">
-                                <div class="col-sm-1 col-xs-2"><a href="/project/{{item.urlTitle}}"><img style="width:100%;height:100%" src="{{item.avatarUrl}}"></a></div>
+                                <div class="col-sm-1 col-xs-2"><a href="/project/{{item.urlTitle}}"><img style="width:100%;height:100%" ng-src="{{item.avatarUrl}}"></a></div>
                                 <div class="col-sm-11 col-xs-10">
                                     <h3 style="margin-top:0px"><a href="/project/{{item.urlTitle}}">{{item.title}}</a></h3>
                                     <div style="overflow:scroll"><span ng-bind-html="renderContent(item.description)"></span></div>
@@ -288,7 +288,7 @@
                 <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
                     <div style="padding:16px;overflow:scroll">
                         <div>
-                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
 
@@ -338,7 +338,7 @@
                     <div style="padding:16px;">
                         <div class="row">
                             <div class="col-sm-1 col-xs-2">
-                                <a ng-click="$event.stopPropagation()" href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+                                <a ng-click="$event.stopPropagation()" href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
                             <div class="col-sm-11 col-xs-10">
                                 <p style="float:right;text-align:right">
@@ -392,7 +392,7 @@
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
 
-                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>

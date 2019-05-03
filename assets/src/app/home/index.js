@@ -208,7 +208,7 @@ angular.module( 'conexus.home', [
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
         if (obj.tags){obj.tags = obj.tags.split(',')}
-        if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}
+        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
         return obj;
     });
     
@@ -915,7 +915,7 @@ angular.module( 'conexus.home', [
     $scope.time = $scope.time.map(function(obj){
         obj.model = 'TIME';
         if (obj.tags){obj.tags = obj.tags.split(',')}
-        if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}
+        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
         return obj;
     });
     $scope.transactions = $scope.transactions.map(function(obj){

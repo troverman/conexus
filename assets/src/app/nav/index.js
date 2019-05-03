@@ -24,16 +24,7 @@ angular.module( 'conexus.nav', [
     $scope.confirm = {};
     $scope.inputVector = [];
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
-    $scope.newContent = {};
-    $scope.newItem = {};
     $scope.newLogin = {};
-    $scope.newOrder = {};
-    $scope.newProject = {};
-    $scope.newReaction = {};
-    $scope.newTask = {};
-    $scope.newTime = {};
-    $scope.newTransaction = {};
-    $scope.newValidation = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
     $scope.item = {};
@@ -45,6 +36,15 @@ angular.module( 'conexus.nav', [
 
     //TODO: REFACTOR SOON
     if ($rootScope.currentUser){
+        $scope.newContent = {};
+        $scope.newItem = {};
+        $scope.newOrder = {};
+        $scope.newProject = {};
+        $scope.newReaction = {};
+        $scope.newTask = {};
+        $scope.newTime = {};
+        $scope.newTransaction = {};
+        $scope.newValidation = {};
         $scope.newContent.associatedModels = [{text: $rootScope.currentUser.username, type:'PROFILE', id:$rootScope.currentUser.id}];
 
         //TODO: KINDA HACY
@@ -772,8 +772,8 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
-            if (!$scope.newTime.recordingTime){
 
+            if (!$scope.newTime.recordingTime){
                 $scope.newTime = {};
                 $scope.newTime.startTime = new Date();
                 $scope.newTime.startTime.setMilliseconds(0);
@@ -781,13 +781,10 @@ angular.module( 'conexus.nav', [
                 $scope.newTime.endTime.setHours($scope.newTime.endTime.getHours() + 1);
                 $scope.newTime.endTime.setMilliseconds(0);
                 $scope.newTime.amount = 3600;
-
                 $scope.newTime.type = 'LIVE';
                 $scope.newTime.associatedModels = $rootScope.associatedModels;
-
                 $scope.recordingTime = false;
                 $scope.streaming = false;
-
             }
 
             $scope.selectTypeTime = function(type){$scope.newTime.type = type};
@@ -798,6 +795,7 @@ angular.module( 'conexus.nav', [
                 var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
                 return $sce.trustAsHtml(html);
             };
+
             $scope.startTime = function() {
                 if ($scope.streaming){
                     $scope.newContent = {
@@ -819,7 +817,7 @@ angular.module( 'conexus.nav', [
 
 
                 //TODO: CREATE TIME HERE
-                $scope.startTime = new Date();
+                $scope.startDateTime = new Date();
 
 
 
@@ -879,18 +877,34 @@ angular.module( 'conexus.nav', [
             $scope.updateCount = function() {
                 //TODO: CREATED AT
                 var currentTime = new Date();
-                $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startTime.getTime()) / 1000);
+                $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
                 $scope.$apply();
             };
-
 
             $mdSidenav('time').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };
 
+
+    //TODO: IMPROVE
     $rootScope.timerToggle = function(){
-        $scope.closeAllNav();
+
+        $mdSidenav('subNav').close();
+        $mdSidenav('action').close();
+        $mdSidenav('content').close();
+        $mdSidenav('information').close();
+        $mdSidenav('item').close();
+        $mdSidenav('login').close();
+        $mdSidenav('order').close();
+        $mdSidenav('project').close();
+        $mdSidenav('render').close();
+        $mdSidenav('tokens').close();
+        $mdSidenav('task').close();
+        $mdSidenav('time').close();
+        $mdSidenav('transaction').close();
+        $mdSidenav('validation').close();
+
         if($rootScope.currentUser){$mdSidenav('timer').toggle();}
         else{$mdSidenav('login').toggle();}
     };

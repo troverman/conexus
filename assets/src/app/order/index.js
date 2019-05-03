@@ -26,7 +26,7 @@ angular.module( 'conexus.order', [
     });
 }])
 
-.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'lodash', 'order', 'orders', 'ReactionModel', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, lodash, order, orders, ReactionModel ) {
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'order', 'orders', 'ReactionModel', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, order, orders, ReactionModel ) {
     
     $scope.newContent = {};
     $scope.newReaction = {};
