@@ -10896,20 +10896,33 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                        <!--TODO: REMOVE GENERAL? HMM-->\n" +
-    "                        <div layout=\"\">\n" +
-    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">General</span></div>\n" +
-    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTime.validationModels.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{newTime.validationModels.validation.general}} | {{currentUser.totalWork}}</span></div>\n" +
+    "\n" +
+    "\n" +
+    "                        <!--FIXED TASK VALIDATION-->\n" +
+    "\n" +
+    "\n" +
+    "                        <div ng-repeat=\"validationModel in newTime.validationModels\">\n" +
+    "\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">General</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validationModel.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                                <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{validationModel.validation.general}} | {{currentUser.totalWork}}</span></div>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                            <div ng-repeat=\"tag in timeTags track by $index\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{tag.text}}</span></div>\n" +
+    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validationModel.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                                    <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{validationModel.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "\n" +
     "                        </div>\n" +
     "\n" +
-    "                        <div ng-repeat=\"tag in timeTags track by $index\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTime.validationModels.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{newTime.validationModels.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
@@ -11161,7 +11174,7 @@ angular.module("time/index.tpl.html", []).run(["$templateCache", function($templ
     "	<!--TODO: NESTED RENDER-->\n" +
     "\n" +
     "	<div class=\"row\">\n" +
-    "        <div class=\"card\" ng-click=\"tokensToggle(time)\">\n" +
+    "        <div class=\"card\" ng-click=\"cardDetailToggle(time)\">\n" +
     "        	<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -11605,11 +11618,22 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        	<div class=\"container\">\n" +
-    "        					<!--TODO-->\n" +
     "			            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "								<span><a style=\"color:white\" href=\"{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.task.title}}</a></span> \n" +
-    "								<i class=\"fa fa-arrows-h\"></i> \n" +
-    "								<span><a style=\"color:white\" href=\"{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}\">{{validation.associatedModels[1].info.project.title}}</a></span>\n" +
+    "			            		<span ng-repeat=\"model in validation.associatedModels track by $index\">\n" +
+    "\n" +
+    "			            			<span ng-if=\"model.type == 'TASK'\">\n" +
+    "										<a style=\"color:white\" href=\"{{model.type.toLowerCase()}}/{{model.address}}\">{{model.info[model.type.toLowerCase()].title}}</a>\n" +
+    "									</span>\n" +
+    "									<span ng-if=\"model.type == 'TIME'\">\n" +
+    "										<a style=\"color:white\" href=\"{{model.type.toLowerCase()}}/{{model.address}}\">{{model.info[model.type.toLowerCase()].amount}}</a>\n" +
+    "									</span>\n" +
+    "									<span ng-if=\"model.type == 'PROJECT'\">\n" +
+    "										<a style=\"color:white\" href=\"{{model.type.toLowerCase()}}/{{model.info[model.type.toLowerCase()].urlTitle}}\">{{model.info[model.type.toLowerCase()].title}}</a>\n" +
+    "									</span>\n" +
+    "\n" +
+    "									<i ng-show=\"!$last\" class=\"fa fa-arrows-h\"></i> \n" +
+    "\n" +
+    "			            		</span>\n" +
     "			            	</h1>\n" +
     "			            </div>\n" +
     "			        </div>\n" +

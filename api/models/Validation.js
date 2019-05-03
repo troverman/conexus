@@ -13,6 +13,7 @@ module.exports = {
 
         //CREATOR
         user: {model: 'user'}, //MOTION (CONTAINER ACTION) W PROJ
+        creator: {type: 'string'},
 
         //WEIGHT
         reputation: {type: 'json'},
@@ -21,13 +22,16 @@ module.exports = {
         validation: {type: 'json'},
 
         //HUMAN, AI, APP.. ETC,
-        type: {type: 'type'},
+        type: {type: 'string'},
 
         //FROM CHARTER INPUT IE TYPES OF RELATION
         parameters: {type: 'json'},
 
         //BINARY ASSOCIATION
         associatedModels: {type: 'json'},
+
+        reactions: {type: 'json'},
+
 
         //VERBS
         //CREATE VERB

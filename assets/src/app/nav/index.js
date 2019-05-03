@@ -492,7 +492,9 @@ angular.module( 'conexus.nav', [
                 nodes:[{name:$scope.item.amount}], 
                 links:[]
             };
-            $scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
+            //DEPRECIATE .modelType 
+            //APPRECIATE ASSOCIATIONS GET
+            //$scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
         }
 
         //TODO BUILD THESE --> LOAD ASSOCIATION
@@ -531,7 +533,6 @@ angular.module( 'conexus.nav', [
             skip:0,
             sort:'createdAt DESC',
         };
-        validationQueryModel[item.model.toLowerCase()] = item.id;
 
         ValidationModel.getSome(validationQueryModel).then(function(validationModels){
 
@@ -993,16 +994,18 @@ angular.module( 'conexus.nav', [
                     //$scope.newValidation.associatedModel = [{text:'TASK | '+$scope.item.task.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'TASK'}];
                     //$scope.newValidation.associatedModels = [{type:'TIME', address:item.id}];
 
-                    if($scope.item.task.tags){
-                        $scope.tags = item.task.tags;
-                        for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
-                    }
+                    //if($scope.item.task.tags){
+                    //    $scope.tags = item.task.tags;
+                    //    for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
+                    //}
 
                     //SELF DEFINED CONTEXT IN TIME
                     //BRIDGE BTW TASK CONTEXT (SELF DEFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
                         //IF NOT CONTEXT VALIDATED IN TASK <-> PROJ IT IS 0. 
+
+                    $scope.tags = $scope.item.tags;
                     if($scope.item.tags){
-                        $scope.tags = Array.from(new Set($scope.tags.concat(item.tags)));
+                        //$scope.tags = Array.from(new Set($scope.tags.concat(item.tags)));
                         for (x in $scope.tags){$scope.newValidation.validation[$scope.tags[x]] = 0;}
                     }
 

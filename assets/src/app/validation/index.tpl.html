@@ -10,11 +10,22 @@
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 			        <div style="margin-top: auto;margin-bottom: auto;">
 			        	<div class="container">
-        					<!--TODO-->
 			            	<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">
-								<span><a style="color:white" href="{{validation.associatedModels[0].type.toLowerCase()}}/{{validation.associatedModels[0].address}}">{{validation.associatedModels[0].info.task.title}}</a></span> 
-								<i class="fa fa-arrows-h"></i> 
-								<span><a style="color:white" href="{{validation.associatedModels[1].type.toLowerCase()}}/{{validation.associatedModels[1].info.project.urlTitle}}">{{validation.associatedModels[1].info.project.title}}</a></span>
+			            		<span ng-repeat="model in validation.associatedModels track by $index">
+
+			            			<span ng-if="model.type == 'TASK'">
+										<a style="color:white" href="{{model.type.toLowerCase()}}/{{model.address}}">{{model.info[model.type.toLowerCase()].title}}</a>
+									</span>
+									<span ng-if="model.type == 'TIME'">
+										<a style="color:white" href="{{model.type.toLowerCase()}}/{{model.address}}">{{model.info[model.type.toLowerCase()].amount}}</a>
+									</span>
+									<span ng-if="model.type == 'PROJECT'">
+										<a style="color:white" href="{{model.type.toLowerCase()}}/{{model.info[model.type.toLowerCase()].urlTitle}}">{{model.info[model.type.toLowerCase()].title}}</a>
+									</span>
+
+									<i ng-show="!$last" class="fa fa-arrows-h"></i> 
+
+			            		</span>
 			            	</h1>
 			            </div>
 			        </div>

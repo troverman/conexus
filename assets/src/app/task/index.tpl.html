@@ -148,20 +148,33 @@
 
                         <div class="spacing-5"></div>
 
-                        <!--TODO: REMOVE GENERAL? HMM-->
-                        <div layout="">
-                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">General</span></div>
-                            <md-slider step="0.1" flex="" md-discrete="" ng-model="newTime.validationModels.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{newTime.validationModels.validation.general}} | {{currentUser.totalWork}}</span></div>
+
+
+                        <!--FIXED TASK VALIDATION-->
+
+
+                        <div ng-repeat="validationModel in newTime.validationModels">
+
+                            <div layout="">
+                                <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">General</span></div>
+                                <md-slider step="0.1" flex="" md-discrete="" ng-model="validationModel.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                                <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{validationModel.validation.general}} | {{currentUser.totalWork}}</span></div>
+                            </div>
+
+                            <div ng-repeat="tag in timeTags track by $index">
+                                <div layout="">
+                                    <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{tag.text}}</span></div>
+                                    <md-slider step="0.1" flex="" md-discrete="" ng-model="validationModel.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
+                                    <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{validationModel.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div ng-repeat="tag in timeTags track by $index">
-                            <div layout="">
-                                <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{tag.text}}</span></div>
-                                <md-slider step="0.1" flex="" md-discrete="" ng-model="newTime.validationModels.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
-                                <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{newTime.validationModels.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
-                            </div>
-                        </div>
+
+
+
+
                     </div>
 
                     <div class="spacing-5"></div>

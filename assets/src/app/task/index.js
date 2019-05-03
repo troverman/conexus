@@ -39,7 +39,9 @@ angular.module( 'conexus.task', [
 
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
-    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',')}
+    if($scope.task.tags){
+        $scope.task.tags = $scope.task.tags.split(',');
+    }
 
     //TODO: DEPRECIATE -- MOVE TO NAV
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
@@ -145,6 +147,10 @@ angular.module( 'conexus.task', [
     $scope.selectedProjects = [];
     $scope.selectProject = function(model){
         $scope.selectedProjects.push({text:model});
+        $scope.newTime.validationModels.push({
+            validation:{general:100},
+            associatedModels:[{type:'PROJECT', address:model.id}]
+        });
     };
 
     //TODO:..HMM
@@ -218,19 +224,21 @@ angular.module( 'conexus.task', [
 
                 //TODO: THINK
                 associatedModels: [
-                    {type:'TASK', address:$scope.task.id, id:$scope.task.id},
-
+                    {type:'TASK', address:$scope.task.id},
                     //user: $rootScope.currentUser.id,
                     //stream: $scope.streamingId,
                     //content: null,
-
                 ],
 
                 //TODO: NEEDS TO BE ARRAY FOR MULTI PROJ SELECTION 
-                //validationModels:[{validation:{general:0}}]
-                validationModels:{validation:{general:100}}
+                validationModels:[{
+                    validation:{general:100},
+                    associatedModels:[{type:'TASK', address:$scope.task.id}]
+                }],
 
             };
+
+            $scope.timeTags = $scope.task.tags.map(function(obj){return {text:obj}});
 
             //TODO: DO IT
             //TimeModel.create($scope.newTime).then(function(timeModel){
@@ -254,7 +262,17 @@ angular.module( 'conexus.task', [
 
     //TODO: HMMMMMMMMMMMM.. a 'handhold' --> !!!
     $scope.$watch('timeTags', function(newValue, oldValue){
-        if (newValue !== oldValue) {for (x in $scope.timeTags){$scope.newTime.validationModels.validation[$scope.timeTags[x].text] = 100;}}
+        if (newValue !== oldValue) {
+
+            for (x in $scope.newTime.validationModels){
+                for (y in $scope.timeTags){
+                    $scope.newTime.validationModels[x].validation[$scope.timeTags[y].text] = 100;
+                }
+            }
+
+            console.log( $scope.newTime.validationModels)
+
+        }
     }, true);
 
 

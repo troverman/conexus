@@ -43,7 +43,6 @@ angular.module( 'conexus.time', [
 
     //TODO: DEPRECIATE | AS ASSOCIATIONS!
     if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
-    if ($scope.time.task.tags){$scope.time.task.tags = $scope.time.task.tags.split(',')}
 
     $scope.contentList = contentList;
     $scope.newContent = {};

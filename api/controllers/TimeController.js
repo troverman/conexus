@@ -107,6 +107,8 @@ module.exports = {
 	create: function (req, res) {
 
 		//TODO: SECURITY
+		//PERMISSIONS.. AUTH
+
 		var model = {
 
 			amount: req.param('amount'),
@@ -122,20 +124,15 @@ module.exports = {
 
 			associatedModels: req.param('associatedModels'),
 
-
-
-
 			validationModels: req.param('validationModels'),
 			tags: req.param('tags'),
-
-
 
 			//TODO: BETTER
 			reactions: {plus:0,minus:0},
 
 			//DEPRECIATE
-			project: req.param('project'),
-			task: req.param('task'),
+			//project: req.param('project'),
+			//task: req.param('task'),
 			stream: req.param('stream'),
 
 		};
@@ -155,66 +152,76 @@ module.exports = {
 					//UPDATE TOTAL WORK
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
+					
+					for (x in model.validationModels){
 
-					console.log('associatedModels', model.associatedModels);
+						model.validationModels[x].content = 'TIME '+ time.id + ' VALIDATION';
 
+						//BASED ON PROJECT.. LOOK UP CHARTER.. AND TYPE OF REP CONTEXT INTERACTION
+						//LOOK UP FOR TOKEN STRINGS.. LONG FORM
+						//BINARY MODELS VS ASSOCIATED MODELS? --> META VALIDATION MODE
+						//ASSOCIATION BETWEEEN ASSOCIATION AND MODEL
+						//(TIME <--> TASK) <~~> PROJ . . .association chains
 
+						//SELF VALIDATION (TIME <--> TIME)
+						//for (x in time.tags.split(',')){
+						//	console.log('self dimension', time.tags.split(',')[x]);
+						//}
 
+						model.validationModels[x].reputation = {};
+						//console.log(model.validationModels[x])
+						//console.log(model.validationModels[x].associatedModels)
 
-					//THIS!
+						model.validationModels[x].associatedModels.push({type:'TIME', address:time.id});
+
+						// = [
+						//	{type:'TIME', address:time.id},
+							//{type:'TASK', address:time.id},
+							//{type:'PROJECT', address:time.id},
+						//];
+
+						model.validationModels[x].type = 'MULTIPLICATIVE';
+						model.validationModels[x].parameters = 'STANDARD';
+
+						model.validationModels[x].user = userModel[0].id;
+						model.validationModels[x].creator = userModel[0].id;
+						model.validationModels[x].reactions = {plus:0,minus:0};
+
+						for (y in Object.keys(model.validationModels[x].validation)){
+							var context = Object.keys(model.validationModels[x].validation)[y];
+							model.validationModels[x].reputation[context] = userModel[0].reputation[context] || 0;
+						}
+
+						Validation.create(model.validationModels[x]).then(function(validation){
+							
+							console.log('CREATED IMPLICIT VALIDATION', validation);
+							//COMPUTE ASSOCIATION HERE
+							var newAssociationModel = {};
+
+							//Validation.find({associationModels:{}).then(function(){
+							//});
+
+							//Association.find().then(function(associationModels){
+
+								//if (associationModels.length == 0){
+									//Association.create(newAssociationModel).then(function(association){
+										//Association.publishCreate(association);
+									//});
+								//}
+
+								//else{
+									//Association.update({id:associationModels[0].id, newAssociationModel}).then(function(association){
+										//Association.publishCreate(association);
+									//});
+								//}
+
+							//});
+
+						});
+
+					}
+
 					console.log(model.validationModels);
-					//for (x in model.validationModels){
-
-					//}
-
-
-
-
-
-					//BINARY RELATION BRUH
-					//MB VALIDATIONMODELS
-
-					//SELF TAGS IN TIME
-					for (x in time.tags.split(',')){
-						console.log('self dimension', time.tags.split(',')[x]);
-					}
-
-					//TAGS IN ASSOCIATED MODEL.. TASK . . . 
-					for (x in time.associatedModels){
-						console.log('association time', time.associatedModels[x]);
-					}
-
-
-				
-
-					//WHAT ARE THE DIMENSIONS?
-					//COMPUTE THIS FROM THE ASSOCIATION MODELS.. --> TIME <--> TASK <--> PROJECT
-
-					var validationModel = {
-						conntent:'TIME '+ time.id + ' VALIDATION',
-						validation:{
-
-						},
-						reputation:{
-
-						},
-						associatedModels: [
-							{type:'TIME', address:time.id},
-
-						],
-						reactions: {plus:0,minus:0},
-						user: req.param('user'),
-					};
-				
-					//Validate.create(validationModel).then(function(validation){
-					//	console.log('CREATED IMPLICIT VALIDATION', validation);
-
-
-						//COMPUTE ASSOCIATION HERE
-
-
-
-					//});
 
 					//REQUEST TO VALIDATE NOTIFICATION
 					//CREATE NOTIFICATION
