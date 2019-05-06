@@ -78,7 +78,6 @@ angular.module( 'conexus.nav', [
         });
     }
 
-
     //ROOT FUNCTIONS
     $rootScope.actionToggle = function(){
         $scope.closeAllNav();
@@ -122,7 +121,6 @@ angular.module( 'conexus.nav', [
 
     //TODO!!!
     $rootScope.filterToggle = function(type, item){
-
 
         $scope.updatedQuery = [];
 

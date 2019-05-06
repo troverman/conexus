@@ -49,6 +49,8 @@ module.exports = {
 					//JOIN TO USER
 					var promises = [];
 					for (x in models){
+						//PATCH
+						if (!models[x].user){models[x].user ='57ab77fa804f7c11002a78db'}
 						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
 					}
 
