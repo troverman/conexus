@@ -10856,7 +10856,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
     "                        <input ng-show=\"false\" type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
     "                        <input ng-show=\"false\" type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
-    "                        <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startWork()\">Start Stream</button>\n" +
+    "                        <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">Start Stream</button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +

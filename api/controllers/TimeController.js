@@ -114,16 +114,15 @@ module.exports = {
 		var model = {
 
 			amount: req.param('amount'),
-
 			user: req.param('user'),
 			creator: req.param('creator'),
 
 			content: req.param('content'),
+			stream: req.param('stream'),
 
-			type: req.param('type'),
+			type: req.param('type'), // HUMAN ETC 
 			source: req.param('source'), 
 			startTime: req.param('startTime'),
-
 			associatedModels: req.param('associatedModels'),
 
 			validationModels: req.param('validationModels'),
@@ -131,12 +130,6 @@ module.exports = {
 
 			//TODO: BETTER
 			reactions: {plus:0,minus:0},
-
-			//DEPRECIATE
-			//project: req.param('project'),
-			//task: req.param('task'),
-			stream: req.param('stream'),
-
 		};
 
 		console.log('CREATE TIME', model)
@@ -171,9 +164,6 @@ module.exports = {
 						//}
 
 						model.validationModels[x].reputation = {};
-						//console.log(model.validationModels[x])
-						//console.log(model.validationModels[x].associatedModels)
-
 						model.validationModels[x].associatedModels.push({type:'TIME', address:time.id});
 
 						// = [
@@ -182,8 +172,8 @@ module.exports = {
 							//{type:'PROJECT', address:time.id},
 						//];
 
-						model.validationModels[x].type = 'MULTIPLICATIVE';
-						model.validationModels[x].parameters = 'STANDARD';
+						model.validationModels[x].type = 'HUMAN'//'MULTIPLICATIVE';
+						model.validationModels[x].charterParams = 'STANDARD MULTIPLICATIVE';
 
 						model.validationModels[x].user = userModel[0].id;
 						model.validationModels[x].creator = userModel[0].id;
@@ -194,31 +184,124 @@ module.exports = {
 							model.validationModels[x].reputation[context] = userModel[0].reputation[context] || 0;
 						}
 
-						Validation.create(model.validationModels[x]).then(function(validation){
+						Validation.create(model.validationModels[x]).then(function(validationModel){
 							
-							console.log('CREATED IMPLICIT VALIDATION', validation);
+							console.log('CREATED IMPLICIT VALIDATION', validationModel);
+
 							//COMPUTE ASSOCIATION HERE
-							var newAssociationModel = {};
+							var newAssociationModel = {}; 
 
-							//Validation.find({associationModels:{}).then(function(){
-							//});
+							//FIND ALL VALIDATIONS FOR SPECIFIC ASSOCIATED MODELS
+							Validation.native(function(err, validation) {
 
-							//Association.find().then(function(associationModels){
+								//{ type: 'TASK', address: '5ba1cf2f3196c813001703d9' },
+     							//{ type: 'TIME', address: '5cd04c968a9ee163d906048f' },
 
-								//if (associationModels.length == 0){
-									//Association.create(newAssociationModel).then(function(association){
-										//Association.publishCreate(association);
-									//});
-								//}
+     							//META ASSOCIATION IS COMPUTED THOUGH VALIDATION WALK.. 
+     							//IE ASSOCIATION <--> VALIDATION
+     							//CREATE ASSOCIATION FOR VALIDATION
+     							//IE ASSOCIAED MODLES ARE an ASSOCIATION ID
+     								//I THINK ILL GET TO THIS ON NEXT ITERATION
+     										//CATEGORY THEORY 
+     									//Association.find({})
+     									//RECURSIVE ASSOCIATIONS
 
-								//else{
-									//Association.update({id:associationModels[0].id, newAssociationModel}).then(function(association){
-										//Association.publishCreate(association);
-									//});
-								//}
+     							console.log(validationModel);
 
-							//});
 
+     							//DEPRECIATE ASSOCIATED MODELS FOR ASSOCIATIONS :)
+								//WE ARE LEARNING PATIENCE AND THE ABILITY TO NOT BE OVERWHELMED
+
+								validation.find({
+									$and : [
+										{"associatedModels.address": {$in :[validationModel.associatedModels[0].address]}},
+										{"associatedModels.address": {$in :[validationModel.associatedModels[1].address]}},
+									]
+								})
+								.limit(1000)
+								.skip(0)
+								.sort({'createdAt':-1})
+								.toArray(function (err, validationModels) {
+
+									console.log('in it', validationModels.length);
+									
+									Association.native(function(err, association) {
+
+										association.find({
+											$and : [
+												{"associatedModels.address": {$in :[validationModels[0].associatedModels[0].address]}},
+												{"associatedModels.address": {$in :[validationModels[0].associatedModels[1].address]}},
+											]
+										})
+										.limit(1000)
+										.skip(0)
+										.sort({'createdAt':-1})
+										.toArray(function (err, associationModels) {
+
+											if (associationModels.length == 0){
+
+												//COMPUTE ASSOCIATION MODEL...
+												//NEEDS TO BE RECURSIVE . LOL THIS WONT BE YET. :) 
+												//THERE IS !!! NO PROBLEM WITH REWRITING !!
+
+												//COMPUTE 
+												var newAssociationModel = {
+													associatedModels: validationModels[0].associatedModels,
+													type: validationModels[0].type,
+													charterParams: validationModels[0].charterParams,
+													creator: validationModels[0].creator,
+
+													reactions: validationModels[0].reactions,
+													user: validationModels[0].user,
+												};
+
+												for (x in validationModels){
+													newAssociationModel.context = validationModels[x].validation;
+													//DO AVERAGE --> AND RECURSIVE .. LET's CATEGORY THEORY THIS BITCH 
+												}
+
+												Association.create(newAssociationModel).then(function(association){
+													console.log('CREATED ASSOCIATION', association);
+													Association.publishCreate(association);
+
+													//UPDATE ASSOCIATE MODELS WITH THE ASSOCIATION ID !! 
+
+												});
+
+											}
+
+											else{
+
+												var newAssociationModel = {
+													associatedModels: validationModels[0].associatedModels,
+													type: validationModels[0].type,
+													charterParams: validationModels[0].charterParams,
+													creator: validationModels[0].creator,
+
+													reactions: validationModels[0].reactions,
+													user: validationModels[0].user,
+												};
+
+												//COMPUTE 
+												for (x in validationModels){
+													newAssociationModel.context = validationModels[x].validation;
+												}
+
+												Association.update({id:associationModels[0]._id, newAssociationModel}).then(function(association){
+													console.log('UPDATED ASSOCIATION', association);
+													Association.publishCreate(association);
+												});
+
+											}
+
+										});
+
+									});
+									
+								});
+
+							});
+							
 						});
 
 					}
