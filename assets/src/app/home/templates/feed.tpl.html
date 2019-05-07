@@ -104,7 +104,7 @@
                 </div>
                 <div class="row">
                     <div ng-repeat="item in projects">
-                        <div class="card" ng-click="cardDetailToggle()">
+                        <div class="card" ng-click="cardDetailToggle(item)">
                             <div style="padding:16px;">
                                 <div ng-click="$event.stopPropagation()"style="float:right">
                                     <button ng-click="$event.stopPropagation()" ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
@@ -226,31 +226,62 @@
             <div style="padding:16px;">
 
                 <p><b>My Current Positions & Value Map</b></p>
-
-                <!--
-                <table>
-                    <thead>
-                        <th>Set Alpha</th>
-                        <th>Set Beta</th>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="position in positions">
-                            <td>{{position.setAlpha}}</td>
-                            <td>{{position.setBeta}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                -->
+                <!--WIP-->
+                <div class="row" style="max-height:500px;overflow:scroll">
+                    <div ng-repeat="item in positions">
+                        <div class="col-sm-6" style="padding:0px">
+                            <div class="card" ng-click="cardDetailToggle(item)">
+                                <div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
+                                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                                        <div style="margin-top: auto;margin-bottom: auto;">
+                                            <div class="container">
+                                                <span ng-repeat="(key, value) in item.setAlpha">
+                                                    <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                                </span>
+                                                <br>
+                                                <span ng-repeat="(key, value) in item.setBeta">
+                                                    <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                                </span>
+                                                <h5 style="color:white"><span style="font-size:10px">{{item.type}}</span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding:16px">
+                                    <div style="float:right;text-align:right">
+                                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                                    </div>  
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <span ng-repeat="(key, value) in item.setAlpha">
+                                                <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
+                                        <div class="col-xs-2">
+                                            <span ng-repeat="(key, value) in item.setBeta">
+                                                <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
+                                </div>
+                                <div class="card-footer">
+                                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                                    <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                                    <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="spacing-10"></div>
 
-                <!--
                 <p><b>Suggestions and Information</b></p>
-                <p>Looking at Followers, Projects, Tags, Reputation, Skills..</p>
 
-                {{followers}}
-                {{memberProjects}}
-                -->
+                <highchart config="chart"></highchart>
 
                 <div class="row">
                     <div class="col-xs-3" style="max-height:50vh;overflow:scroll">
@@ -266,10 +297,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-6">
-                                <highchart config="chart"></highchart>
+                            <div class="col-xs-12">
+                                <div ng-repeat="item in newOrder">
+                                    <div layout="">
+                                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[2]}}</span></div>
+                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[0].amount || 0}}</span></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-sm-6 col-xs-12">
+                                <highchart config="chartMapTotal"></highchart>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <highchart config="pieTotal"></highchart>
                             </div>
                         </div>
                     </div>

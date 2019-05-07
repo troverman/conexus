@@ -176,8 +176,6 @@ angular.module( 'conexus.register', [
 
     console.log($scope.chartMapTotal, $scope.pieTotal);
 
-    //lol
-    //do absolute
     $scope.$watch('newOrder', function(newValue, oldValue){
         if (oldValue != newValue){
             $scope.updateChartTotal();
@@ -185,9 +183,6 @@ angular.module( 'conexus.register', [
         }
     }, true);
 
-
-    //lol
-    //do absolute
     $scope.$watch('dailyTimeValue', function(newValue, oldValue){
         if (newValue != oldValue){
             $scope.dailyTimeValue.map(function(obj){if(!obj.percentage){obj.percentage=0} return obj});

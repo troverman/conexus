@@ -26,11 +26,14 @@ angular.module( 'conexus.order', [
     });
 }])
 
-.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'order', 'orders', 'ReactionModel', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, order, orders, ReactionModel ) {
+.controller( 'OrderController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'order', 'orders', 'ReactionModel', 'titleService', function OrderController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, order, orders, ReactionModel, titleService ) {
     
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.order = order;
+
+    titleService.setTitle('Order | ' + $scope.order.id + ' | CRE8.XYZ');
+
     $scope.orders = orders;
     $scope.contentList = contentList;
 

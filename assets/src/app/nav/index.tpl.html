@@ -828,7 +828,7 @@
                                         {{item.amount}} seconds {{(item.amount/60).toFixed(2)}} minutes, {{(item.amount/3600).toFixed(2)}} hours
                                     </span>
                                 </span>
-                                
+
                             </h5>
                         </div>
                     </div>
@@ -1505,13 +1505,11 @@
                     <p>Identifier Set Alpha: {{confirm.identifierSetAlpha}}</p>
                     <p>Amount Set Beta: {{confirm.amountSetBeta}}</p>
                     <p>Identifier Set Beta: {{confirm.identifierSetBeta}}</p>
-                    <p>Type: {{confirm.tags}}</p>
                     <p>Status: {{confirm.status}}</p>
                 </div>
                 <div ng-if="confirm.model == 'PROJECT'">
                     <h3>Title: {{confirm.title}}</h3>
                     <p>User: {{confirm.user}}</p>
-                    <!--<p>Tags: {{confirm.tags}}</p>-->
                     <p>Associations: {{confirm.associatedModels}}</p>
                     <p>Location: {{confirm.location}}</p>
                     <p>Description: <span style="display:inline" ng-bind-html="renderContent(confirm.description)"></span></p>
@@ -1523,7 +1521,6 @@
                 <div ng-if="confirm.model == 'TASK'">
                     <h3>Title: {{confirm.title}}</h3>
                     <p>User: {{confirm.user}}</p>
-                    <p>Tags: {{confirm.tags}}</p>
                     <p>Associations: {{confirm.associatedModels}}</p>
                     <p>Location: {{confirm.location}}</p>
                     <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
@@ -1531,7 +1528,6 @@
                 <div ng-if="confirm.model == 'TIME'">
                     <p>Amount: {{confirm.amount}}</p>
                     <p>User: {{confirm.user}}</p>
-                    <p>Tags: {{confirm.tags}}</p>
                     <p>Type: {{confirm.type}}</p>
                     <p>Associations: {{confirm.associatedModels}}</p>
                     <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
@@ -1541,9 +1537,7 @@
                     <p>To: {{confirm.to}}</p>
                     <p>From: {{confirm.from}}</p>
                     <p>{{confirm.tags}}</p>
-
                     <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p></span>
-
                     <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
 

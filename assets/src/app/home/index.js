@@ -347,14 +347,10 @@ angular.module( 'conexus.home', [
     //TODO: ROOTSCOPE
     $scope.registerUser = function(){
 
-        //$scope.newMember.order = $scope.newOrderNEW;
-
         //TODO: FORM VALIDATION
         if ($scope.newMember.password.length < 8){
 
         }
-        //....
-
         var data = JSON.stringify($scope.newMember);
         if (true){ //valid
             $rootScope.stateIsLoading = true;
@@ -462,16 +458,39 @@ angular.module( 'conexus.home', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
     $scope.consentAgreement = false;
-    $scope.contentList = contentList;
-    $scope.ifCRE8 = false;
-    $scope.projects = projects;
+    $scope.contentList = contentList.map(function(obj){
+        obj.model = 'CONTENT';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
+    $scope.projects = projects.map(function(obj){
+        obj.model = 'PROJECT';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
     $scope.members = members;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.searchResults = [];
-    $scope.tasks = tasks;
-    $scope.time = time;
-    $scope.transactions = transactions;
+    $scope.tasks = tasks.map(function(obj){
+        obj.model = 'TASK';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
+    $scope.time = time.map(function(obj){
+        obj.model = 'TIME';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
+        return obj;
+    });
+    $scope.transactions = transactions.map(function(obj){
+        obj.model = 'TRANSACTION';
+        return obj;
+    });
+
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
+    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+    $scope.activity = $scope.activity.slice(0,100); 
 
     $scope.discover = function(){
         //LOOK AT MY PROJECTS
@@ -647,12 +666,11 @@ angular.module( 'conexus.home', [
             $scope.chart.xAxis.categories.push($scope.sortedsuggestedTokenTags[x].element)
         }
         //IF NON ZERO
-
     };
     $scope.discover();
 
-    //IF NO PROJECTS OR W.E TUTORIAL IS TRUE
-    //NEW CONTROLLER
+    //TODO: IF NO PROJECTS OR W.E TUTORIAL IS TRUE
+    //TODO: NEW CONTROLLER
     $scope.isTutorial = true;
     if ($scope.isTutorial){
 
@@ -667,7 +685,7 @@ angular.module( 'conexus.home', [
             if ($scope.pageNumber<0 || $scope.pageNumber>5){$scope.isTutorial = !$scope.isTutorial}
         };
 
-       $scope.editAccount = function () {
+        $scope.editAccount = function () {
             UserModel.update($scope.newAccountInformation).then(function(model){
                 console.log(model);
             });
@@ -780,7 +798,6 @@ angular.module( 'conexus.home', [
             //$scope.chart.xAxis.categories = [];
         };
 
-       
         $scope.interested = function(model){
             $scope.pop('Associated Task!', 'You are now associated with '+ model.title + '. Schedule some intentional time!');
         };
@@ -855,12 +872,9 @@ angular.module( 'conexus.home', [
             yAxis: {title: {text: null}},
             credits:{enabled:false},
         };
-
-        //console.log($scope.members);
         
         for (x in $scope.members){
             if ($scope.members[x].reputation){
-            
                 for (y in Object.keys($scope.members[x].reputation)){
                     //Object.keys($scope.members[x].reputation)[y]
                     //$scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
@@ -877,7 +891,6 @@ angular.module( 'conexus.home', [
                         //else find index and ++
                     }
                 }
-                
             }
         }
 
@@ -895,44 +908,14 @@ angular.module( 'conexus.home', [
             }
         }
 
-    }
+    }   
+    
 
-    //TEMP HARDCODE -- MOVE TO PROTOCOL
-    $scope.contentList = $scope.contentList.map(function(obj){
-        obj.model = 'CONTENT';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.projects = $scope.projects.map(function(obj){
-        obj.model = 'PROJECT';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.tasks = $scope.tasks.map(function(obj){
-        obj.model = 'TASK';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.time = $scope.time.map(function(obj){
-        obj.model = 'TIME';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
-        return obj;
-    });
-    $scope.transactions = $scope.transactions.map(function(obj){
-        obj.model = 'TRANSACTION';
-        return obj;
-    });
-    
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
-    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = $scope.activity.slice(0,100);
-    
-    $scope.CRE8 = function(){
-        $scope.ifCRE8 = !$scope.ifCRE8
-    };
+
+
 
     //TODO
+    //VALUE MAP ETC
     $scope.loadValueMap = function(){
         $scope.newOrder = [];
         $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
@@ -956,6 +939,113 @@ angular.module( 'conexus.home', [
         $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
     }
     //$scope.loadValueMap();
+
+    $scope.chartMapTotal = {
+        chart: {
+            polar: true,
+            margin: [30, 30, 30, 30]
+        },
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'UNIVERSAL',
+            pointPlacement: 'on',
+            fillOpacity: 0.3,
+            data:[1,1,1,1,1,1,1,1],
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['LOVE', 'ART', 'PEACE', 'SHELTER', 'REST', 'EXPERIENCE', 'HEALTH', 'HUMAN'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+        legend:false,
+        tooltip:{shared: true,},
+        credits:{enabled:false},
+    };
+
+    //PERFORMANCE....
+    $scope.updateChartTotal = function(){
+        $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
+        $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
+        console.log($scope.chartMapTotal)
+    };
+
+    $scope.pieTotal = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [
+                {name:'LOVE',y:1},
+                {name:'ART',y:1},
+                {name:'PEACE',y:1},
+                {name:'SHELTER',y:1},
+                {name:'EXPERIENCE',y:1},
+                {name:'HEALTH',y:1},
+                {name:'HUMAN',y:1},
+            ]
+        }],  
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+
+    $scope.updatePieTotal = function(){
+        var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
+        $scope.pieTotal.series[0].data = data;
+        console.log( $scope.pieTotal)
+    };
+
+    //TODO: VM CONTROLS ETC
+    //PREPOPULATE ? GENERATOR FROM SUGGESTIONS IS THE WAY - IS THE KEY
+    $scope.newOrder = [];
+    $scope.newOrderNEW = [];
+    $scope.createPosition = function(model){
+        if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
+            var setAlpha = {'UNIVERSALTOKEN':1};
+            var setBeta = {};
+            setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
+            $scope.newOrderNEW.push({
+                setAlpha:setAlpha,
+                setBeta:setBeta,
+                type:'ONBOOK',
+                status:'CONTINUAL'
+            });
+            $scope.newOrder.push([
+                {amount:1, identifier:'UNIVERSALTOKEN'}, 
+                {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id}
+            ]);
+        }
+    };
+
+    $scope.$watch('newOrder', function(newValue, oldValue){
+        if (oldValue != newValue){
+            $scope.updateChartTotal();
+            $scope.updatePieTotal();
+        }
+    }, true);
+    //VALUE MAP ETC
+
+
+
 
 
     //TODO: MODEL | CREATE | NESTED?

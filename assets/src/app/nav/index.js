@@ -117,8 +117,6 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-
-
     //TODO!!!
     $rootScope.filterToggle = function(type, item){
 
