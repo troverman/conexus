@@ -121,19 +121,14 @@
 		                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
 				                </div>
 
-				                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
-				                <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
-				                <div style="display:inline;" ng-show="item.profile != item.user.id && item.profile != member.id">
-				                    <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.contentModel" style="display:inline;font-weight:600" href="content/{{item.contentModel}}">content {{item.contentModel}}</a>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile}}">profile {{item.profile}}</a>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
-				                    <a ng-click="$event.stopPropagation();" ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
-				                </div>
-				                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
+				                <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">
+					                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
+				                	{{item.user.username}}
+				                </a>
+
+				               	<!--TODO: ASSOCIATIONS-->
+
+				                <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
 				                
 				            </div>
 
@@ -162,7 +157,7 @@
 								    </div>
             						<div class="member-card-info" style="padding:16px;height:auto">
 								        <h4><a ng-click="$event.stopPropagation();" href="member/{{item.username}}">{{item.username}}</a></h4>
-		        						<p style="font-size:13px;"><a href="/member/{item.username}}/projects">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following">{{item.followingCount || 0}} Following</a>
+		        						<p style="font-size:13px;"><a href="member/{item.username}}/projects">{{item.projectCount || 0}} Projects</a> | <a href="member/{{item.username}}/followers">{{item.followerCount || 0}} Followers</a> | <a href="member/{{item.username}}/following">{{item.followingCount || 0}} Following</a>
 								        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
 								        <p style="color:gray">{{item.status}} Offline</p>
 								    </div>
@@ -187,7 +182,6 @@
 			                        </h3>
 		                        	<p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p>
 			                    </div>
-			                
 			                </div>
 			            </div>
 					</div>
@@ -198,6 +192,7 @@
 		                        <div style="margin-top: auto;margin-bottom: auto;">
 		                            <div class="container">
 		                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}"><a ng-click="$event.stopPropagation();" href="task/{{item.id}}" style="color:white">{{item.title}}</h1>
+                                        <h5 style="color:white">Task</h5>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -206,7 +201,6 @@
 							<div style="float:right;text-align:right">
 	                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
 			                </div>
-							<h4><a ng-click="$event.stopPropagation();" href="task/{{item.id}}">{{item.title}}</a></h4>
 							<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 	                    	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 							<span style="color:gray" am-time-ago="item.createdAt"></span>
@@ -225,8 +219,8 @@
 						</div>
 					</div>
 
-					<!--TODO-->
-					<div ng-if="item.model=='TIME'" class="card"></div>
+					<div ng-if="item.model=='TIME'" class="card">
+					</div>
 
 				</div>
 

@@ -101,6 +101,19 @@ module.exports = {
 			.populate('task')
 			.populate('project')
 			.then(function(models) {
+				//var promises = [];
+				//for (x in models){
+				//	Association.native(function(err, association) {
+				//		association.find({"associatedModels.address":{$in :[models[x].id]}})
+				//		.limit(1000)
+				//		.skip(0)
+				//		.sort({'createdAt':-1})
+				//		.toArray(function (err, associationModels) {
+				//			return associatedModels
+				//			console.log(associationModels);
+				//		});
+				//	});
+				//}
 				res.json(models);
 			});
 		}

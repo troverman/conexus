@@ -820,6 +820,16 @@
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
                             <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Associations & Validations</h1>
+                            <h5 style="color:white">
+
+                                <span ng-if="item.model != 'TIME'">{{item.title}}</span>
+                                <span ng-if="item.model == 'TIME'">
+                                    <span style="font-size:10px;color:white"> 
+                                        {{item.amount}} seconds {{(item.amount/60).toFixed(2)}} minutes, {{(item.amount/3600).toFixed(2)}} hours
+                                    </span>
+                                </span>
+                                
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -842,7 +852,8 @@
 
                     <div class="spacing-10"></div>
 
-                   <!--DEPRECIATE TASK TITLE-->
+                    <!--DEPRECIATE TASK TITLE-->
+                    <!--
                     <div ng-if="item.model=='TIME'">
                         <h4>
                             {{item.amount}}
@@ -858,11 +869,7 @@
                             <a href="project/{{item.project.urlTitle}}">{{item.project.title.toUpperCase()}}</a>
                         </h4>
                     </div>
-
-                    <!--<div class="spacing-10"></div>
-
-                    {{item.associatedModels}}
-                    <h5 ng-repeat="model in item.associatedModels">{{model.type}}, {{model.address}}</h5>-->
+                    -->
 
                 </div>
 

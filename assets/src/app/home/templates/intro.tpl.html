@@ -180,9 +180,9 @@
                 <h3><b>Join Our Community</b></h3><hr>
                 <div class="login-form">
                     <form role="form">
-                        <div class="form-group"><input class="form-control" name="email" ng-model="newMember.email" placeholder="Email" title="email" type="email"><i class="fa fa-envelope"></i></div>
-                        <div class="form-group"><input class="form-control" name="username" ng-model="newMember.username" placeholder="Username" title="username" type="text"><i class="fa fa-user"></i></div>
-                        <div class="form-group"><input class="form-control" name="password" ng-model="newMember.password" placeholder="Password" title="password" type="password"><i class="fa fa-lock"></i></div>
+                        <div class="form-group"><input class="form-control" name="email" ng-model="newMember.email" placeholder="Email" title="email" type="email"><i class="fa fa-envelope" autocomplete="email"></i></div>
+                        <div class="form-group"><input class="form-control" name="username" ng-model="newMember.username" placeholder="Username" title="username" type="text" autocomplete="username"><i class="fa fa-user"></i></div>
+                        <div class="form-group"><input class="form-control" name="password" ng-model="newMember.password" placeholder="Password" title="password" type="password" autocomplete="new-password"><i class="fa fa-lock"></i></div>
                         <button class="btn btn-default log-btn" ng-click="registerUser()">Sign up</button>    
                         <br><br>
                         <div class="social-log">
@@ -260,9 +260,7 @@
         </div>
 
         <div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
-
             <div class="spacing-5"></div>
-
             <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
                 <li style="float:left;font-size:14px"><a href="#" ng-click="getLatLng()"><i class="fa fa-map-marker"></i> Location</a></li>
@@ -278,46 +276,34 @@
                 </li>
                 <div style="clear:both"></div>
             </ul>
-
             <div class="card">
                 <tags-input class="" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
             </div>
-            
             <div ng-repeat="item in activity">
-
                 <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
+                    <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}">{{item.title}}</a></h1>
+                                    <!--<h5 style="color:white">Content</h5>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div style="padding:16px;overflow:scroll">
                         <div>
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
-                            <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-
-
-
-
-                            <!--TODO: .. ASSOCIATIONS-->
-                            <a ng-click="$event.stopPropagation()" ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.contentModel" style="display:inline;font-weight:600" href="content/{{item.contentModel}}">content {{item.contentModel}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile}}">profile {{item.profile}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
-                            <a ng-click="$event.stopPropagation()" ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
-
-
-
-
-
-                            <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-                        
+                            <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
+                            <!--TODO: ASSOCIATION AREA-->
                             <div style="float:right;text-align:right">
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
-
-                            <div style="clear:both"></div>
                         </div>
-                        <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+                        <div style="margin-left:42px">
+                            <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
@@ -360,16 +346,15 @@
                             <div style="margin-top: auto;margin-bottom: auto;">
                                 <div class="container">
                                     <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}">{{item.title}}</h1>
+                                    <!--<h5 style="color:white">Task</h5>-->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div style="padding:16px;"> 
-
                         <div style="float:right;text-align:right">
                             <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>
-
                         <p ng-click="$event.stopPropagation()"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                         <p ng-click="$event.stopPropagation()"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                         <span style="color:gray" am-time-ago="item.createdAt"></span>
@@ -384,6 +369,20 @@
                 </div>
 
                 <div class="card" ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)">
+
+                    <!--
+                    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}">{{item.amount}}</h1>
+                                    <h5 style="color:white" am-time-ago="item.createdAt"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+
                     <div style="padding:16px;">
 
                         <div>
@@ -392,17 +391,25 @@
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
 
-                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">
+                                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                                {{item.user.username}}
+                            </a>
+
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
-                            <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
-                            <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
+
+                            <!--TODO: ASSOCIATION AREA-->
+
+                            <p style="color:gray;font-size:10px;margin-left:42px" am-time-ago="item.createdAt"></p>
                             
                         </div>
 
-                        <p ng-click="$event.stopPropagation()" ng-show="item.task.tags > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+                        <p ng-click="$event.stopPropagation()" ng-show="item.task.tags > 0" style="margin-left:42px">
+                            <a ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a>
+                        </p>
+
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 
                     </div>

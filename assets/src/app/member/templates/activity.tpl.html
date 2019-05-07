@@ -25,21 +25,8 @@
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
-
-                        <!--TODO: PARENT TYPES-->
-                        <!--DEPRECIATE-->
-                        <div ng-click="$event.stopPropagation()" style="display:inline;" ng-show="item.profile != item.user.id && item.profile != member.id">
-                            <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a ng-show="item.market" style="display:inline;font-weight:600" href="market/{{item.market}}">market {{item.market}}</a>
-                            <a ng-show="item.order" style="display:inline;font-weight:600" href="order/{{item.order}}">order {{item.order}}</a>
-                            <a ng-show="item.contentModel" style="display:inline;font-weight:600" href="content/{{item.contentModel}}">content {{item.contentModel}}</a>
-                            <a ng-show="item.profile" style="display:inline;font-weight:600" href="member/{{item.profile.username}}"><span ng-show="item.profile.username">{{item.profile.username}}</span><span ng-show="!item.profile.username">profile {{item.profile}}</span></a>
-                            <a ng-show="item.project" style="display:inline;font-weight:600" href="project/{{item.project.urlTitle}}">{{item.project.title}}</a>
-                            <a ng-show="item.task" style="display:inline;font-weight:600" href="task/{{item.task}}">task {{item.task}}</a>
-                            <a ng-show="item.transaction" style="display:inline;font-weight:600" href="transaction/{{item.transaction}}">transaction {{item.transaction}}</a>
-                            <a ng-show="item.time" style="display:inline;font-weight:600" href="time/{{item.time}}">time {{item.time}}</a>
-                        </div>
-                        <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
+                        <!--TODO: ASSOCIATIONS-->
+                        <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
                     </div>
 
                     <div style="margin-left:42px">
@@ -112,18 +99,21 @@
                         <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                     </div>
 
-
                     <div ng-click="$event.stopPropagation()">
-                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
-                        <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                        <a style="display:inline;font-weight:600" href="task/{{item.task.id}}">{{item.task.title}}</a>
+
+                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">
+                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                            {{item.user.username}}
+                        </a>
+
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                         <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
-                        <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
+
+                        <p style="color:gray;font-size:10px;margin-left:42px" am-time-ago="item.createdAt"></p>
+
                     </div>
 
-                    <p ng-click="$event.stopPropagation()" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a></p>
+                    <p ng-click="$event.stopPropagation()" ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 
                     <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
                     
@@ -191,9 +181,11 @@
                     
                     <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 
-                    <p>{{item.content}}</p>
-                    <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-                    <a href="transaction/{{item.id}}"></a>
+                    <p>
+                        <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
+                    </p>
+
+                    <p style="color:gray;font-size:10px"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
 
                 </div>
                 <div class="card-footer">

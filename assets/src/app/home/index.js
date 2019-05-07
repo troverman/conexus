@@ -711,6 +711,7 @@ angular.module( 'conexus.home', [
                         }
 
                         $scope.projects.map(function(obj){
+                            obj.model='PROJECT';
                             var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
                             if (index != -1){obj.isMember = true;}
                             if (index == -1){obj.isMember = false;}
