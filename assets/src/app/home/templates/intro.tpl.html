@@ -284,7 +284,7 @@
                     <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
-                                <div class="container">
+                                <div class="container" style="width:100%">
                                     <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}">{{item.title}}</a></h1>
                                     <!--<h5 style="color:white">Content</h5>-->
                                 </div>
@@ -293,13 +293,14 @@
                     </div>
                     <div style="padding:16px;overflow:scroll">
                         <div>
+                            <div style="float:right;text-align:right">
+                                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                            </div>
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
                             <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
                             <!--TODO: ASSOCIATION AREA-->
-                            <div style="float:right;text-align:right">
-                                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                            </div>
+                            
                         </div>
                         <div style="margin-left:42px">
                             <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
@@ -344,7 +345,7 @@
                     <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
-                                <div class="container">
+                                <div class="container" style="width:100%">
                                     <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}">{{item.title}}</h1>
                                     <!--<h5 style="color:white">Task</h5>-->
                                 </div>

@@ -145,21 +145,19 @@
 
             <div class="card" ng-if="item.model=='TRANSACTION'" ng-click="cardDetailToggle(item)">
                 <div style="padding:16px">
-                    <div style="float:right">
-                        <p style="text-align:right">
-                            <a style="color:gray" ng-click="$event.stopPropagation();cardDetailToggle(item);"><i class="fa fa-ellipsis-v"></i>
-                        </p>
+                    <div style="float:right;text-align:right">
+                        <a ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
                     </div>
                     <div style="display:inline">
                         <span ng-if="item.from.username">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
-                                <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                                <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.from.username}}
                             </a>
                         </span>
                         <span ng-if="item.from.title">
                             <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}">
-                                <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
+                                <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.from.title}}
                             </a>
                         </span>
@@ -170,13 +168,13 @@
                     <div style="display:inline">
                         <span ng-if="item.to.username">
                             <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
-                                <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
+                                <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.to.username}}
                             </a>
                         </span>
                         <span ng-if="item.to.title">
                             <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}">
-                                <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
+                                <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.to.title}}
                             </a>
                         </span>

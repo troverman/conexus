@@ -631,7 +631,9 @@ angular.module( 'conexus.nav', [
     //TODO: RENDER PROJECT TOGGLE
     //$rootScope.reply = function(){};
 
-    $rootScope.statsToggle = function(){
+    $rootScope.statsToggle = function(item){
+
+        $scope.item = item;
 
         $scope.closeAllNav();
 
@@ -656,78 +658,177 @@ angular.module( 'conexus.nav', [
             credits:{enabled:false},
             plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
         };
-        $scope.chart.series = [{
-            id: 'attentionTokenization',
-            type: 'spline',
-            name: 'Attention',
-            data: []
-        },{
-            id: 'reactionTokenization',
-            type: 'spline',
-            name: 'Reaction',
-            data: []
-        },
-        {
-            id: 'action',
-            type: 'spline',
-            name: 'Actions',
-            data: []
-        },
-        {
-            id: 'content',
-            type: 'spline',
-            name: 'Content',
-            data: []
-        },
-        {
-            id: 'item',
-            type: 'spline',
-            name: 'Items',
-            data: []
-        },
-        {
-            id: 'member',
-            type: 'spline',
-            name: 'Members',
-            data: []
-        },
-        {
-            id: 'motion',
-            type: 'spline',
-            name: 'Montions',
-            data: []
-        },
-        {
-            id: 'task',
-            type: 'spline',
-            name: 'Tasks',
-            data: []
-        },
-        {
-            id: 'time',
-            type: 'spline',
-            name: 'Time',
-            data: []
-        },
-        {
-            id: 'transaction',
-            type: 'spline',
-            name: 'Transactions',
-            data: []
-        },
-        {
-            id: 'validation',
-            type: 'spline',
-            name: 'Validations',
-            data: []
-        },
-        {
-            type: 'sma',
-            id: 'sma1',
-            linkedTo: 'attentionTokenization',
-            params: {period: 24},
-            showInLegend: true,
-        }];
+
+        $scope.chart.series = [];
+
+        //TODO: MODEL BASED STATS
+        if ($scope.item.model == 'CONTENT'){
+            $scope.chart.series.push({
+                id: 'atttention',
+                type: 'spline',
+                name: 'Attention',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'reaction',
+                type: 'spline',
+                name: 'Reaction',
+                data: []
+            });
+            $scope.chart.series.push({
+                type: 'sma',
+                id: 'sma1',
+                linkedTo: 'attention',
+                params: {period: 24},
+                showInLegend: true,
+            });   
+        }
+
+        if ($scope.item.model == 'ITEM'){
+            $scope.chart.series.push({
+                id: 'atttention',
+                type: 'spline',
+                name: 'Attention',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'reaction',
+                type: 'spline',
+                name: 'Reaction',
+                data: []
+            });
+            $scope.chart.series.push({
+                type: 'sma',
+                id: 'sma1',
+                linkedTo: 'attention',
+                params: {period: 24},
+                showInLegend: true,
+            });   
+        }
+
+        if ($scope.item.model == 'TASK'){
+            $scope.chart.series.push({
+                id: 'atttention',
+                type: 'spline',
+                name: 'Attention',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'reaction',
+                type: 'spline',
+                name: 'Reaction',
+                data: []
+            });
+            $scope.chart.series.push({
+                type: 'sma',
+                id: 'sma1',
+                linkedTo: 'attention',
+                params: {period: 24},
+                showInLegend: true,
+            });   
+        }
+
+        if ($scope.item.model == 'TIME'){
+            $scope.chart.series.push({
+                id: 'atttention',
+                type: 'spline',
+                name: 'Attention',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'reaction',
+                type: 'spline',
+                name: 'Reaction',
+                data: []
+            });
+            $scope.chart.series.push({
+                type: 'sma',
+                id: 'sma1',
+                linkedTo: 'attention',
+                params: {period: 24},
+                showInLegend: true,
+            });   
+        }
+
+        if ($scope.item.model == 'TRANSACTION'){
+            $scope.chart.series.push({
+                id: 'atttention',
+                type: 'spline',
+                name: 'Attention',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'reaction',
+                type: 'spline',
+                name: 'Reaction',
+                data: []
+            });
+            $scope.chart.series.push({
+                type: 'sma',
+                id: 'sma1',
+                linkedTo: 'attention',
+                params: {period: 24},
+                showInLegend: true,
+            });   
+        }
+
+        if ($scope.item.model == 'PROJECT'){
+            $scope.chart.series.push({
+                id: 'content',
+                type: 'spline',
+                name: 'Content',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'item',
+                type: 'spline',
+                name: 'Items',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'action',
+                type: 'spline',
+                name: 'Actions',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'motion',
+                type: 'spline',
+                name: 'Motions',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'member',
+                type: 'spline',
+                name: 'Members',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'task',
+                type: 'spline',
+                name: 'Tasks',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'time',
+                type: 'spline',
+                name: 'Time',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'transaction',
+                type: 'spline',
+                name: 'Transactions',
+                data: []
+            });
+            $scope.chart.series.push({
+                id: 'validation',
+                type: 'spline',
+                name: 'Validations',
+                data: []
+            });
+        }
+
         for(var i=0;i<100;i++){
             var date = new Date();
             date.setTime(date.getTime() - (60*60*1000*(1000-i)));

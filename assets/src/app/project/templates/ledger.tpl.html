@@ -100,10 +100,9 @@
 			<div style="padding:16px">
 
 				<div style="float:right;text-align:right">
-                	<a ng-click="$event.stopPropagation();tokensToggle(task)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
+                	<a ng-click="$event.stopPropagation();cardDetailToggle(task)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
                 </div>
 		
-				
                 <div style="display:inline">
                     <span ng-if="transaction.from.username">
                         <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.from.username}}">

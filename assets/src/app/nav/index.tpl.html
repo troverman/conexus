@@ -54,8 +54,18 @@
             <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
-                        <div class="container">
-                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Detail</h1>
+                        <div class="container" style="width:100%">
+                            <h1 style="text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
+                                <span ng-if="item.model != 'TIME'">
+                                    <span style="font-size:24px;color:white" ng-if="item.title">{{item.title}}</span>
+                                    <span style="font-size:24px;color:white" ng-if="!item.title">{{item.model}}</span>
+                                </span>
+                                <span ng-if="item.model == 'TIME'">
+                                    <span style="font-size:24px;color:white">{{item.amount}} seconds</span>
+                                </span>
+                                <br>
+                                <span style="font-size:10px;color:white">{{item.id}}</span>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -923,7 +933,6 @@
                                 <td>{{validation.validation.general}}</td>
                                 <td><a href="validation/{{validation.id}}">{{validation.id}}</a></td>
 
-
                             </tr>
                         </tbody>
                     </table>
@@ -943,7 +952,17 @@
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
                             <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Stats</h1>
-                            <h5 style="color:white">Item Information</h5>
+                            <h5 style="text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
+                                <span ng-if="item.model != 'TIME'">
+                                    <span style="font-size:16px;color:white" ng-if="item.title">{{item.title}}</span>
+                                    <span style="font-size:16px;color:white" ng-if="!item.title">{{item.model}}</span>
+                                </span>
+                                <span ng-if="item.model == 'TIME'">
+                                    <span style="font-size:16px;color:white">{{item.amount}} seconds</span>
+                                </span>
+                                <br>
+                                <span style="font-size:10px;color:white">{{item.id}}</span>
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -1200,6 +1219,7 @@
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
                             <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tokens</h1>
+                            <h5 style="color:white">{{item.id}}</h5>
                         </div>
                     </div>
                 </div>
@@ -1246,8 +1266,8 @@
 
                 <div class="spacing-10"></div>
 
-                <h3 style="">Market Liquidity and Equality Traverse</h3>
-                <p style="color:gray;font-style:italic">Enter your desired output for tokens based on liquidy <!--/ various order types-->in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps.</p>
+                <h3 style="">Market Liquidity<h3>
+                <h5>Equality Traverse <a ng-click="informationToggle('MARKETLIQUIDITY')" href="#"><i class="fa fa-question-circle"></i></a></h5>
 
                 <div class="spacing-15"></div>
 
@@ -1645,6 +1665,14 @@
 
                 <div ng-if="informationType == 'IDENTIFERSETBETA'">
 
+
+                </div>
+
+                <div ng-if="informationType == 'MARKETLIQUIDITY'">
+
+                    <p style="color:gray;font-style:italic">Enter your desired output for tokens based on liquidy in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps.</p>
+
+                    `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`
 
                 </div>
 
