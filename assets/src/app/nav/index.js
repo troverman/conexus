@@ -20,6 +20,7 @@ angular.module( 'conexus.nav', [
     });
     
     //INITALIZE LOCAL VARIABLES
+    $scope.associationsAreExpanded = false;
     $scope.chart = {};
     $scope.confirm = {};
     $scope.inputVector = [];
@@ -116,6 +117,8 @@ angular.module( 'conexus.nav', [
         if($rootScope.currentUser){$mdSidenav('cre8').toggle();}
         else{$mdSidenav('login').toggle();}
     };
+
+    $scope.expandAssociations = function(){$scope.associationsAreExpanded = !$scope.associationsAreExpanded;};
 
     //TODO!!!
     $rootScope.filterToggle = function(type, item){
@@ -479,7 +482,7 @@ angular.module( 'conexus.nav', [
                 links:[]
             };
             if ($scope.item.project){
-                $scope.assoicationFilter = [{text:'PROJECT | '+$scope.item.project.title}];
+                $scope.assoicationFilter = [{text:$scope.item.project.title}];
             }
 
         }
@@ -664,7 +667,7 @@ angular.module( 'conexus.nav', [
         //TODO: MODEL BASED STATS
         if ($scope.item.model == 'CONTENT'){
             $scope.chart.series.push({
-                id: 'atttention',
+                id: 'attention',
                 type: 'spline',
                 name: 'Attention',
                 data: []
@@ -686,7 +689,7 @@ angular.module( 'conexus.nav', [
 
         if ($scope.item.model == 'ITEM'){
             $scope.chart.series.push({
-                id: 'atttention',
+                id: 'attention',
                 type: 'spline',
                 name: 'Attention',
                 data: []
@@ -708,7 +711,7 @@ angular.module( 'conexus.nav', [
 
         if ($scope.item.model == 'TASK'){
             $scope.chart.series.push({
-                id: 'atttention',
+                id: 'attention',
                 type: 'spline',
                 name: 'Attention',
                 data: []
@@ -730,7 +733,7 @@ angular.module( 'conexus.nav', [
 
         if ($scope.item.model == 'TIME'){
             $scope.chart.series.push({
-                id: 'atttention',
+                id: 'attention',
                 type: 'spline',
                 name: 'Attention',
                 data: []
@@ -752,7 +755,7 @@ angular.module( 'conexus.nav', [
 
         if ($scope.item.model == 'TRANSACTION'){
             $scope.chart.series.push({
-                id: 'atttention',
+                id: 'attention',
                 type: 'spline',
                 name: 'Attention',
                 data: []
@@ -1082,7 +1085,7 @@ angular.module( 'conexus.nav', [
                     //PREVIOUS VALIDATIONS.. WHAT CONTEXT ARE WE VIEWING THE TASK | DYNAMIC FILTER
 
                     //DEPRECIATE .project && .task
-                    $scope.newValidation.associatedModel = [{text:'PROJECT | '+$scope.item.project.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'PROJECT'}];
+                    $scope.newValidation.associatedModel = [{text:$scope.item.project.title, id:$scope.item.project.id, title:$scope.item.project.title, type:'PROJECT'}];
 
                     $scope.newValidation.associatedModels = [{type:'TASK', address:item.id}];
 
@@ -1559,7 +1562,7 @@ angular.module( 'conexus.nav', [
                 TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(taskSearchModels){
                     taskSearchModels.map(function(obj){
                         obj.type='TASK';
-                        obj.text = 'TASK | '+obj.title;
+                        obj.text = obj.title;
                         return obj;
                     });
                     //searchModels = [].concat.apply([], [userSearchModels, projectSearchModels, taskSearchModels]);

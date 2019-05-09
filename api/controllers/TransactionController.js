@@ -164,6 +164,25 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
+				//for (x in Object.keys(amountSet)){
+
+				//}
+
+				//for (x in associatedModels){
+				//	if (associatedModels[x].type == 'ITEM'){
+						//ASSOCIATED AND SEND
+						//FIND OWNER IS SENDER // owner: transaction.from
+				//		Item.find({id:associatedModels[x].address}).then(function(itemModels){
+							//if > 0
+				//			itemModels[0].owner = transaction.to;
+				//			Item.update({id:itemModels[0].id},{owner:itemModels[0].owner}).then(function(itemModel){
+				//				console.log('ITEM OWNER UPDATED');
+				//				Item.publishUpdate(itemModel);
+				//			});
+				//		});
+				//	}	
+				//}
+
 				Transaction.publishCreate(transaction);
 				res.json(transaction);
 

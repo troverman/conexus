@@ -6880,7 +6880,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div class=\"container\" style=\"width:100%\">\n" +
+    "\n" +
     "                            <h1 style=\"text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "\n" +
     "                                <span ng-if=\"item.model != 'TIME'\">\n" +
     "                                    <span style=\"font-size:24px;color:white\" ng-if=\"item.title\">{{item.title}}</span>\n" +
     "                                    <span style=\"font-size:24px;color:white\" ng-if=\"!item.title\">{{item.model}}</span>\n" +
@@ -6889,8 +6891,22 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                    <span style=\"font-size:24px;color:white\">{{item.amount}} seconds</span>\n" +
     "                                </span>\n" +
     "                                <br>\n" +
-    "                                <span style=\"font-size:10px;color:white\">{{item.id}}</span>\n" +
+    "                                <span style=\"font-size:10px;color:white\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.id}}</a></span>\n" +
+    "\n" +
+    "                                <!--\n" +
+    "                                <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'MARKET'\" href=\"market/{{item.string}}\" style=\"color:white\">{{item.string}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}} Seconds</a>\n" +
+    "                                <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">Transaction</a>\n" +
+    "                                -->\n" +
+    "\n" +
     "                            </h1>\n" +
+    "\n" +
+    "                        \n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -6928,14 +6944,44 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
     "                    <h5>Title</h5>\n" +
     "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    <h5>Tags</h5>\n" +
+    "                    <!--TAGS ARE SELF ASSOCIATION - IMPLICT-->\n" +
+    "                    <h5>Tags <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
     "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <div ng-if=\"associationsAreExpanded\">\n" +
+    "                        <div ng-repeat=\"tag in newContent.tags track by $index\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                            </div>\n" +
+    "                         </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
+    "\n" +
+    "                    <div ng-if=\"associationsAreExpanded\">\n" +
+    "                        <div style=\"padding:16px\">\n" +
+    "                            <div ng-repeat=\"association in newContent.associatedModels track by $index\">\n" +
+    "                                <h5>{{association.text}}</h5>\n" +
+    "                                <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
+    "                                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                                </tags-input>                               \n" +
+    "                                <div ng-repeat=\"tag in newContent.tags track by $index\">\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
+    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
     "                        <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
     "                        <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
@@ -7211,18 +7257,20 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <form role=\"form\" ng-submit=\"createItem()\">\n" +
     "                    <h5>Title</h5>\n" +
     "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
-    "                    <h5>Tags</h5>\n" +
+    "                    <h5>Tags <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newItem.tags\">\n" +
     "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <h5>Location</h5>\n" +
-    "                    <input placeholder=\"Location\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newItem.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "\n" +
-    "                    <h5>Is Tradable?</h5>\n" +
+    "                    <h5>Location <a ng-click=\"informationToggle('LOCATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-map-marker-alt\"></i></h5>\n" +
+    "                    <input placeholder=\"Location\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
+    "                    <h5>Status <a ng-click=\"informationToggle('STATUS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <input placeholder=\"Status\" type=\"text\" ng-model=\"newItem.status\" class=\"form-control\">\n" +
+    "            \n" +
+    "                    <h5>Expand</h5>\n" +
     "                    <md-switch ng-model=\"tradable\" aria-label=\"tradable\"></md-switch>\n" +
     "                    \n" +
     "                    <div ng-if=\"tradable\">\n" +
@@ -7287,26 +7335,37 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    </md-sidenav>\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"nav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div style=\"text-align:center\">\n" +
-    "                <!--<i ng-click=\"sideNavToggle()\" class=\"fa fa-cross\"></i>-->\n" +
-    "                \n" +
-    "                <div class=\"spacing-25\"></div>\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center\">\n" +
+    "            \n" +
+    "            <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "                <div ng-show=\"currentUser\" ng-if=\"false\">\n" +
-    "                    <div class=\"spacing-25\"></div>\n" +
-    "                    <img style=\"height:75px;width:75px;border-radius:100%\" ng-src=\"{{currentUser.avatarUrl}}\">\n" +
-    "                    <h3 class=\"nav-links\" ng-show=\"currentUser\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h3>\n" +
+    "            <div ng-if=\"currentUser\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\" style=\"width:100%\">\n" +
+    "                                <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                    <img src=\"{{currentUser.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                    <div class=\"spacing-5\"></div>\n" +
+    "                                    <a style=\"font-size:24px;color:white\" href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a>\n" +
+    "                                </h1>\n" +
+    "                                <h5 style=\"color:white\">{{currentUser.id}}</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
+    "            </div>\n" +
     "\n" +
+    "            <div>\n" +
     "                <form style=\"padding:15px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "                    <div class=\"form-group\">\n" +
     "                        <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
     "                    </div>\n" +
     "                </form>\n" +
+    "            </div>\n" +
     "\n" +
+    "            <div>\n" +
     "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a></h2>\n" +
     "                <h2 ng-show=\"currentUser\" ng-click=\"cre8Toggle()\" class=\"nav-links\" style=\"padding:12px;\"><a>CRE8</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/discover\">Discover</a></h2>\n" +
     "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
@@ -7319,8 +7378,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h2 ng-click=\"loginToggle()\" ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a>Login</a></h2>\n" +
     "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:12px;\"><a href=\"/register\">Register</a></h2>\n" +
     "                <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
-    "\n" +
     "            </div>\n" +
+    "\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
@@ -7449,14 +7508,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:95%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            \n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div ng-hide=\"item.model == 'CONTENT' && !item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div class=\"container\">\n" +
+    "                        <div style=\"width:100%;padding:15px\">\n" +
     "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
     "                                <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
     "                                <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
@@ -7464,23 +7523,17 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
     "                                <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
     "                                <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">{{item.id}}</a>\n" +
+    "                                <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}} Seconds</a>\n" +
+    "                                <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">Transaction</a>\n" +
     "                            </h1>\n" +
-    "                            <h5 style=\"color:white\"><span am-time-ago=\"item.createdAt\"></span></h5>\n" +
+    "                            <h5 style=\"color:white\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.id}}</a></h5>\n" +
+    "                            <!--<h5 style=\"color:white\"><span am-time-ago=\"item.createdAt\"></span></h5>-->\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <div style=\"text-align:right;float:right\">\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();\" class=\"fa fa-eye\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fas fa-coins\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
-    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
@@ -7558,16 +7611,21 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <span ng-repeat=\"(key, value) in item.amountSet track by $index\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                </div>\n" +
+    "\n" +
+    "\n" +
     "                <!--TAGS-->\n" +
     "                <p ng-if=\"item.tags\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "                <p ng-if=\"item.task.tags\"><a ng-repeat=\"tag in item.task.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
+    "                \n" +
     "                <!--LOCATION-->\n" +
     "                <p ng-if=\"item.location\"><a>{{item.location.address}}, {{item.location.lat}}, {{item.location.lng}}</a></p> \n" +
     "                <div class=\"spacing-5\"></div>\n" +
+    "                \n" +
     "                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "                \n" +
     "                <span ng-if=\"item.content\" style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"background-color:#f9f9f9;height:100%\">\n" +
@@ -7646,15 +7704,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%;overflow-x:hidden\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:90%;max-width:100%;overflow-x:hidden\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "        \n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div class=\"container\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations & Validations</h1>\n" +
+    "                        <div style=\"padding:15px;width:100%\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
     "                            <h5 style=\"color:white\">\n" +
     "\n" +
     "                                <span ng-if=\"item.model != 'TIME'\">{{item.title}}</span>\n" +
@@ -7802,12 +7860,35 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"subNav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div style=\"text-align:center;\">\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\" style=\"width:100%\">\n" +
+    "                            <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                <span ng-if=\"project\">\n" +
+    "                                    <img src=\"{{project.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                    <div class=\"spacing-5\"></div>\n" +
+    "                                    <span style=\"font-size:24px;color:white\">{{project.title}}</span>\n" +
+    "                                </span>\n" +
+    "                                <span ng-if=\"member\">\n" +
+    "                                    <img src=\"{{member.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                    <div class=\"spacing-5\"></div>\n" +
+    "                                    <span style=\"font-size:24px;color:white\">{{member.username}}</span>\n" +
+    "                                </span>\n" +
+    "                            </h1>\n" +
+    "                            <!--TODO: ITEM && MODELTYPE -->\n" +
+    "                            <h5 style=\"color:white\" ng-if=\"project\">{{project.id}}</h5>\n" +
+    "                            <h5 style=\"color:white\" ng-if=\"member\">{{member.id}}</h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "                <div ng-if=\"project\">\n" +
-    "                    <h1 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}\">{{project.title}}</a></h1>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/about\">About</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
@@ -7821,9 +7902,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
     "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Validations</a></h4>-->\n" +
     "                </div>\n" +
-    "\n" +
     "                <div ng-if=\"member\">\n" +
-    "                    <h1 class=\"nav-links\"><a href=\"member/{{member.username}}\">{{member.username}}</a></h1>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/about\">About</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/actions\">Actions</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/assets\">Assets</a></h4>\n" +
@@ -7837,7 +7916,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/tasks\">Tasks</a></h4>\n" +
     "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/time\">Time</a></h4>\n" +
     "                </div>\n" +
-    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
@@ -7901,13 +7979,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                    <!--SELF CONTEXT-->\n" +
     "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
-    "                    <h5>Associations (Task) <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5>Task <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
     "                    <div ng-if=\"!newTime.associatedModels.length\">\n" +
-    "                        <h5>Context (Tags)</h5>\n" +
+    "                        <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
     "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                        </tags-input>\n" +
@@ -7919,7 +7997,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div ng-repeat=\"model in newTime.associatedModels\">\n" +
     "                        <div class=\"col-sm-12\">\n" +
     "\n" +
-    "                            <h5>Context (Tags)</h5>\n" +
+    "                            <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                            <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
@@ -8244,6 +8322,9 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModel\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
+    "\n" +
+    "                <!--TODO: FACTOR-->\n" +
+    "                <!--Connection ALepha - Connection Beta -->\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -10988,7 +11069,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                    <a ng-click=\"showValidationImplicitToggle()\" href=\"#\"><b>Time Validation</b></a>\n" +
+    "                    <a ng-click=\"showValidationImplicitToggle()\" href=\"#\"><i class=\"fas fa-bezier-curve\"></i><b> Expand</b></a>\n" +
     "\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "\n" +
