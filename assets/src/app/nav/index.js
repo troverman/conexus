@@ -469,14 +469,10 @@ angular.module( 'conexus.nav', [
 
     $rootScope.renderValidationToggle = function(item){
         $scope.closeAllNav();
-
-        console.log(item);
-
         $scope.item = item;
 
         //DEPRECIATE .modelType
         if (item.model == 'TASK'){
-
             $scope.graphData = {
                 nodes:[{name:$scope.item.title}], 
                 links:[]
@@ -484,37 +480,30 @@ angular.module( 'conexus.nav', [
             if ($scope.item.project){
                 $scope.assoicationFilter = [{text:$scope.item.project.title}];
             }
-
         }
         if (item.model == 'TIME'){
             $scope.graphData = {
                 nodes:[{name:$scope.item.amount}], 
                 links:[]
             };
-            //DEPRECIATE .modelType 
-            //APPRECIATE ASSOCIATIONS GET
-            //$scope.assoicationFilter = [{text:'TASK | '+$scope.item.task.title}];
         }
+
 
         //TODO BUILD THESE --> LOAD ASSOCIATION
         for (x in $scope.item.associatedModels){
-            //HACK?
+            //HACK
             var length = $scope.graphData.nodes.length;
             console.log($scope.item.associatedModels[x])
             $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})//$scope.item.associatedModels[x].address});
             $scope.graphData.links.push({value:1, source:0, target:length});
         }
 
-        //TEST!
         $scope.graphOptions = {
             chart: {
                 type: 'forceDirectedGraph',
                 height: 450,
-                //width: (function(){ return nv.utils.windowSize().width })(),
                 margin:{top: 0, right: 0, bottom: 0, left: 0},
-                color: function(d){
-                    return  d3.scale.category20()(d.group)
-                },
+                color: function(d){return  d3.scale.category20()(d.group)},
                 nodeExtras: function(node) {
                     node && node
                       .append("text")
@@ -526,6 +515,8 @@ angular.module( 'conexus.nav', [
             }
         };
 
+        //TODO: IMPROVE QUERY
+        //TODO: GET ASSOCIATIONS
         //TODO: ASSOCIATION MODEL
         var validationQueryModel = {
             limit:100,
@@ -564,9 +555,11 @@ angular.module( 'conexus.nav', [
 
             $scope.validations = validationModels;
 
-            //TODO: SHOULD STORE COUNT AT SCALE.. AKA 1000 VALIDAIONS WILL CRASH --> SORED IN ASSOCIATION
+            //TODO: SORED IN ASSOCIATION
             $scope.validationSumObj = {};
 
+            //TODO: THIS IS DONW ON BACKEND
+            //TODO: ASSOCIATION
             if ($scope.validations.length > 0){
                 for (y in $scope.validations){
                     console.log($scope.validations[y].validation);
@@ -574,9 +567,7 @@ angular.module( 'conexus.nav', [
                         if(!$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]){$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
                         else{$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
                     }
-
                 }
-                console.log($scope.validationSumObj);
                 for (x in Object.keys($scope.validationSumObj)){
                     $scope.validationColumnRender.series[0].data.push($scope.validationSumObj[Object.keys($scope.validationSumObj)[x]]/$scope.validations.length);
                     $scope.validationColumnRender.xAxis.categories.push(Object.keys($scope.validationSumObj)[x]);
@@ -857,7 +848,10 @@ angular.module( 'conexus.nav', [
 
     };
 
-    $rootScope.subNavToggle = function(){$mdSidenav('subNav').toggle()};
+    $rootScope.subNavToggle = function(item){
+        $scope.item = item;
+        $mdSidenav('subNav').toggle();
+    };
 
     $rootScope.taskToggle = function(){
         $scope.closeAllNav();

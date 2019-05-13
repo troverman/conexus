@@ -3351,7 +3351,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p style=\"color:gray;font-style:italic\">Tensor Structure of Assets; Layering and Braiding</p>\n" +
     "\n" +
-    "                <p>Tensor Assets; and immputable Structure</p>\n" +
+    "                <p>Tensor Assets; and immutable Structure</p>\n" +
     "\n" +
     "                <!--\n" +
     "                <p>Tensor Market</p>\n" +
@@ -4854,6 +4854,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "            <div class=\"container\">\n" +
     "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "                <h5 style=\"color:white\">{{item.id}}</h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -4864,15 +4865,19 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "                <div style=\"float:right;text-align:right\">\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-qrcode\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();actionToggle(item);\" class=\"fa fa-eye\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-tags\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fas fa-heart\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fa fa-shopping-cart\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();orderToggle(item);\" class=\"fas fa-share-alt\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();renderValidationToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fas fa-coins\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();tokensToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
+    "                    \n" +
+    "                    <!--\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-qrcode\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-eye\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-tags\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-heart\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-shopping-cart\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-share-alt\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-coins\"></i>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -4886,6 +4891,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "		        <div><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h4>{{item.amountSet}} <a href=\"market/{{item.identiferSet}}\">{{item.identiferSet}}</a></h4>\n" +
+    "                <!--<p>{{item.createdAt}}</p>-->\n" +
     "			</div>\n" +
     "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -4903,7 +4909,6 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        </ul>\n" +
     "    </div>\n" +
     "\n" +
-    "    \n" +
     "    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->\n" +
     "    <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->\n" +
     "    <!--ORDER FUILFILMENT COMES FROM LINKED INFO IN ORDER-->\n" +
@@ -5536,7 +5541,7 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "<div ui-view=\"member\">\n" +
     "	<div class=\"container\" style=\"padding:0px\">\n" +
-    "		<div class=\"card\" ng-click=\"subNavToggle()\">\n" +
+    "		<div class=\"card\" ng-click=\"subNavToggle(member)\">\n" +
     "			<div style=\"background-image: url('{{member.coverUrl}}')\">\n" +
     "				<div class=\"spacing-100\"></div>\n" +
     "			</div>\n" +
@@ -7861,26 +7866,25 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"subNav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center;\">\n" +
+    "            \n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div class=\"container\" style=\"width:100%\">\n" +
     "                            <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                                <span ng-if=\"project\">\n" +
-    "                                    <img src=\"{{project.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                <span ng-if=\"item.title\">\n" +
+    "                                    <img src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <span style=\"font-size:24px;color:white\">{{project.title}}</span>\n" +
     "                                </span>\n" +
-    "                                <span ng-if=\"member\">\n" +
-    "                                    <img src=\"{{member.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                <span ng-if=\"item.username\">\n" +
+    "                                    <img src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
     "                                    <div class=\"spacing-5\"></div>\n" +
-    "                                    <span style=\"font-size:24px;color:white\">{{member.username}}</span>\n" +
+    "                                    <span style=\"font-size:24px;color:white\">{{item.username}}</span>\n" +
     "                                </span>\n" +
     "                            </h1>\n" +
-    "                            <!--TODO: ITEM && MODELTYPE -->\n" +
-    "                            <h5 style=\"color:white\" ng-if=\"project\">{{project.id}}</h5>\n" +
-    "                            <h5 style=\"color:white\" ng-if=\"member\">{{member.id}}</h5>\n" +
+    "                            <h5 style=\"color:white\">{{item.id}}</h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -7888,34 +7892,35 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <div ng-if=\"project\">\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/about\">About</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/assets\">Assets</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/content\">Content</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/items\">Items</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/ledger\">Ledger</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/members\">{{project.memberCount}} Members</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Motions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/positions\">Positions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/projects\">Projects</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/tasks\">Tasks</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/time\">Time</a></h4>\n" +
+    "                <div ng-if=\"item.title\">\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/about\">About</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/assets\">Assets</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/content\">Content</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/items\">Items</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/ledger\">Ledger</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/members\">{{item.memberCount}} Members</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/charter\">Motions</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/positions\">Positions</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/projects\">Projects</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/tasks\">Tasks</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/time\">Time</a></h4>\n" +
     "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Validations</a></h4>-->\n" +
     "                </div>\n" +
-    "                <div ng-if=\"member\">\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/about\">About</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/actions\">Actions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/assets\">Assets</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/content\">Content</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/followers\">{{member.followerCount}} Followers</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/following\">{{member.followingCount}} Following</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/items\">Items</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/ledger\">Ledger</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/positions\">Positions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/projects\">{{member.projectCount}} Projects</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/tasks\">Tasks</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{member.username}}/time\">Time</a></h4>\n" +
+    "                <div ng-if=\"item.username\">\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/about\">About</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/actions\">Actions</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/assets\">Assets</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/content\">Content</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/followers\">{{item.followerCount}} Followers</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/following\">{{item.followingCount}} Following</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/items\">Items</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/ledger\">Ledger</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/positions\">Positions</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/projects\">{{item.projectCount}} Projects</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/tasks\">Tasks</a></h4>\n" +
+    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/time\">Time</a></h4>\n" +
     "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
@@ -8304,6 +8309,10 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div class=\"container\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Validation</h1>\n" +
+    "                            <h5 style=\"color:white\">\n" +
+    "                                <span ng-if=\"item.model=='TIME'\">{{item.amount}}</span>\n" +
+    "                                <span>{{item.title}}</psna>\n" +
+    "                            </h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -8324,31 +8333,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </tags-input>\n" +
     "\n" +
     "                <!--TODO: FACTOR-->\n" +
-    "                <!--Connection ALepha - Connection Beta -->\n" +
+    "                <!--Connection Alpha - Connection Beta -->\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div ng-if=\"item.model == 'TASK'\">\n" +
-    "                    <h4>\n" +
-    "                        <i class=\"fa fa-check\"></i> Validate {{item.title}} \n" +
-    "                        <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                        {{newValidation.associatedModel[0].text}}\n" +
-    "                    </h4>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'TIME'\">\n" +
-    "                    <h4>\n" +
-    "                        <i class=\"fa fa-check\"></i> Validate {{item.amount}} Time \n" +
-    "                        <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                        {{newValidation.associatedModel[0].model.title}}\n" +
-    "                    </h4>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'VALIDATION'\">\n" +
-    "                    <h4>\n" +
-    "                        Validate Validation <i class=\"fa fa-check\"></i>\n" +
-    "                    </h4>\n" +
-    "                </div>\n" +
+    "                {{newValidation.associatedModel[0].model.title}}\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -8357,7 +8346,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
-    "                <!--THINK ABOUT THIS MATHMATICALLY-->\n" +
+    "                <!--TODO: THINK ABOUT THIS MATHMATICALLY-->\n" +
     "                <!--\n" +
     "                <div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
@@ -8393,12 +8382,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        <div mg-if=\"confirm\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            <div class=\"page-heading\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div class=\"container\">\n" +
-    "                    <h1>Success!</h1>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{confirm.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Success!</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -8919,7 +8910,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "<style>.angular-google-map-container { height: 200px;} </style>\n" +
     "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
-    "    <div class=\"card\" ng-click=\"subNavToggle()\">\n" +
+    "    <div class=\"card\" ng-click=\"subNavToggle(project)\">\n" +
     "        <div class=\"imageContainerSmall\">\n" +
     "            <div class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
