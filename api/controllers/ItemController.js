@@ -67,6 +67,11 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+
+		//TODO: SECURITY
+
+		
 		var model = {
 			title: req.param('title'),
 			associatedModels: req.param('associatedModels'),
@@ -83,6 +88,7 @@ module.exports = {
 			reactions: {plus:0,minus:0},
 		};
 		console.log('CREATE ITEM', model);
+		console.log(req)
 		Item.create(model)
 		.exec(function(err, item) {
 			if (err) {return console.log(err);}
@@ -91,6 +97,9 @@ module.exports = {
 				res.json(item);
 			}
 		});
+
+
+
 	},
 
 	update: function (req, res) {},

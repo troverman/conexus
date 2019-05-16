@@ -65,7 +65,7 @@ module.exports.bootstrap = function(cb) {
 	//TODO:utilService.googleMaps(model)
 
 	//POPULATE TOKENZ
-	setInterval(dataService.traverse, 8640000);
+	//setInterval(dataService.traverse, 8640000);
 
 	//dataService.tensorBuild();
 
