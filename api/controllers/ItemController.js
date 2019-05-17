@@ -104,9 +104,9 @@ module.exports = {
 	update: function (req, res) {
 
 		//ENCAPSULATED BY MOTION
-		Item.update({id:req.query.id}, {content: req.query.content)}).then(function(itemModel){
-			console.log('UPDATED ITEM', itemModel)
-		});
+		//Item.update({id:req.query.id}, {content: req.query.content)}).then(function(itemModel){
+		//	console.log('UPDATED ITEM', itemModel)
+		//});
 
 	},
 	
