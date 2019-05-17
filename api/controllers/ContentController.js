@@ -251,10 +251,10 @@ module.exports = {
 				Content.publishCreate(model);
 				res.json(model);
 
-				for (x in validationModels){
+				//for (x in validationModels){
 					//VALIDATION CREATE
 					//ASSOICATION CREATE (RESPECT GOVERNANCE RULES (CHARTER))
-				}
+				//}
 
 				//<-- ASSOCIATIONS -->
 				//SEND NOTIFICATIONS TO FOLLOWERS
