@@ -68,27 +68,28 @@ module.exports = {
 
 	create: function (req, res) {
 
-
 		//TODO: SECURITY
 
-		
 		var model = {
 			title: req.param('title'),
 			associatedModels: req.param('associatedModels'),
 			content: req.param('content'),
+			data: req.param('data'),
+			dataHash: req.param('dataHash'),
 			tags: req.param('tags'),
-			//info: req.param('info'),
 			location: req.param('location'),
+			//associatedValidations: req.param('associatedValidations'),
+			info: req.param('info'),
 			amountSet: req.param('amountSet'),
 			isGenerator: req.param('isGenerator'),
-			//creator
 			user: req.param('user'),
-			//owner: req.param('owner'),
+			owner: req.param('owner'),
 			//PATCH
 			reactions: {plus:0,minus:0},
 		};
+
 		console.log('CREATE ITEM', model);
-		console.log(req)
+
 		Item.create(model)
 		.exec(function(err, item) {
 			if (err) {return console.log(err);}
@@ -98,11 +99,16 @@ module.exports = {
 			}
 		});
 
-
-
 	},
 
-	update: function (req, res) {},
+	update: function (req, res) {
+
+		//ENCAPSULATED BY MOTION
+		Item.update({id:req.query.id}, {content: req.query.content)}).then(function(itemModel){
+			console.log('UPDATED ITEM', itemModel)
+		});
+
+	},
 	
 };
 

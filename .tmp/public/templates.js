@@ -4902,12 +4902,14 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "    </div>\n" +
     "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
+    "    <!--\n" +
     "    <div style=\"row\">\n" +
     "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "            <li><a href=\"#\">Content</a></li>\n" +
     "            <li><a href=\"#\">Orders</a></li>\n" +
     "        </ul>\n" +
     "    </div>\n" +
+    "    -->\n" +
     "\n" +
     "    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->\n" +
     "    <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->\n" +
@@ -4915,14 +4917,16 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "    <!--ADDRESS.. NAME PARAM-->\n" +
     "    <!--URCHASE NEEDS TO BE VERY.. EASY..-->\n" +
     "\n" +
+    "    <!--PURCHASE.. CLAIM.. ORDER-->\n" +
+    "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"card\">\n" +
-    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Order</button>\n" +
+    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">Purchase (+ Order)</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
     "    <!--MARKET | TRAVERSAL-->\n" +
-    "    <div class=\"row\" ng-if=\"item.identiferSet\">\n" +
+    "    <div class=\"row\" ng-if=\"true\">\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"\">\n" +
@@ -6919,6 +6923,12 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <h4 ng-click=\"renderToggle(item)\" class=\"nav-links\"><a>Information <i style=\"float:right\" class=\"fas fa-info\"></i></a></h4>\n" +
+    "                \n" +
+    "                <!--<h4 ng-if=\"item.model=='ITEM'\" ng-click=\"\" class=\"nav-links\">\n" +
+    "                    <a ng-if=\"currentUser.id == item.user\">Send Item <i style=\"float:right\" class=\"fas fa-paper-plane\"></i></a>\n" +
+    "                    <a ng-if=\"currentUser.id != item.user\" ng-if=\"\">Purchase Item <i style=\"float:right\" class=\"fas fa-shopping-card\"></i></a></h4>\n" +
+    "                </h4>-->\n" +
+    "\n" +
     "                <h4 ng-if=\"item.model=='PROJECT'\" ng-click=\"\" class=\"nav-links\"><a>Request To Join <i style=\"float:right\" class=\"fas fa-users\"></i></a></h4>\n" +
     "                <h4 ng-click=\"renderValidationToggle(item)\" class=\"nav-links\"><a>Associations <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></a></h4>\n" +
     "                <h4 ng-click=\"statsToggle(item)\" class=\"nav-links\"><a>Stats <i style=\"float:right\" class=\"fa fa-eye\"></i></a></h4>\n" +
