@@ -88,7 +88,7 @@ angular.module( 'conexus.task', [
     //TODO: VIEW IN NAV.. GLOBAL.. :)
     $scope.askQuestion = function() {
         if ($rootScope.currentUser){$scope.question = true;}
-        else{$mdSidenav('login').toggle();}
+        else{$mdSidenav('register').toggle();}
     };
 
     //TODO: DEPRECIATE

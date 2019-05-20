@@ -1289,7 +1289,7 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                            </a>\n" +
     "                        </div>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                        <div>\n" +
     "                            <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -4915,15 +4915,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "    <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->\n" +
     "    <!--ORDER FUILFILMENT COMES FROM LINKED INFO IN ORDER-->\n" +
     "    <!--ADDRESS.. NAME PARAM-->\n" +
-    "    <!--URCHASE NEEDS TO BE VERY.. EASY..-->\n" +
-    "\n" +
-    "    <!--PURCHASE.. CLAIM.. ORDER-->\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">Purchase (+ Order)</button>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "    <!--PURCHASE NEEDS TO BE VERY.. EASY..-->\n" +
     "\n" +
     "    <!--MARKET | TRAVERSAL-->\n" +
     "    <div class=\"row\" ng-if=\"true\">\n" +
@@ -4955,6 +4947,17 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <!--PURCHASE.. CLAIM.. ORDER-->\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <!--REGISTER POPUP 1ST THEN LOGIN -->\n" +
+    "            <!--ONBOARD FROM ITEM.. IE PURCHASE.. 2ND STAGE DELIVERY-->\n" +
+    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">Purchase Order</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
     "\n" +
     "    <!--TODO: LIST REACTIONS.. IE RATINGS IF GENERATOR-->\n" +
     "\n" +
@@ -6239,7 +6242,7 @@ angular.module("member/templates/items.tpl.html", []).run(["$templateCache", fun
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
     "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                    </div>\n" +
@@ -7522,6 +7525,43 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
+    "\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"register\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div ng-if=\"!currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Register</h1>\n" +
+    "                            <h5 style=\"color:white\">Welcome to our Community!</h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <div class=\"login-form\">\n" +
+    "                    <form role=\"form\">\n" +
+    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"><i class=\"fa fa-envelope\" autocomplete=\"email\"></i></div>\n" +
+    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\" autocomplete=\"username\"><i class=\"fa fa-user\"></i></div>\n" +
+    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\" autocomplete=\"new-password\"><i class=\"fa fa-lock\"></i></div>\n" +
+    "                        <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
+    "                        <br><br>\n" +
+    "                        <div class=\"social-log\">\n" +
+    "                            <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "                        </div>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "                <div class=\"selfClear\"></div>\n" +
+    "            </div>\n" +
+    "            \n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:95%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +

@@ -454,6 +454,24 @@ angular.module( 'conexus.nav', [
         });
         $mdSidenav('render').toggle();
     };
+
+     //ROOT FUNCTIONS
+    $rootScope.registerToggle = function(){
+        $scope.closeAllNav();
+        if($rootScope.currentUser){$mdSidenav('action').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+    //TODO GLOBAL
+    $scope.registerUser = function(){
+        $scope.newMember.order = $scope.newOrderNEW;
+        var data = JSON.stringify($scope.newMember);
+        $rootScope.stateIsLoading = true;
+        $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
+            $rootScope.currentUser = newModel.data;
+            $location.path('/');
+        });
+    };
     
     //IMPROVE
     $rootScope.renderContent = function(item){
