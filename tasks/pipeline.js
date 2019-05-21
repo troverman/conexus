@@ -36,6 +36,9 @@ var jsFilesToInject = [
   'bower_components/highlight/highlight.pack.js',
   'bower_components/angular-highlightjs/angular-highlightjs.min.js',
 
+  'bower_components/cytoscape/dist/cytoscape.min.js',
+  'bower_components/ngCytoscape/dist/ngCytoscape.js',
+
   //'bower_components/MathJax/MathJax.js',
   'bower_components/ASCIIMathML/ASCIIMathML.js',
 

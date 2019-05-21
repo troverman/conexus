@@ -2112,10 +2112,16 @@ getSome:function(newQuery){}</div>
                 <p>Higher Dimensional Combinatorials</p>
 
                 <div class="spacing-10"></div>
+            
+                <style>
+                    .ngCytoscape{
+                        height: 80vh;
+                        width:100%;
+                    }
+                </style>
 
-                <a href="#">Explorer</a>
-                <!--MARKET TRAVERSE-->
-                <nvd3 options="graphOptions" data="graphExploreData" class="with-3d-shadow with-transitions"></nvd3>
+
+                <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="cy_graph_ready"></cytoscape>
 
 
                 <div class="spacing-10"></div>

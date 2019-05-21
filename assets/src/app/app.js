@@ -20,6 +20,7 @@ angular.module( 'conexus', [
     'toaster',
     'ngAnimate',
     'hljs',
+    'ngCytoscape',
     'conexus.about',
     'conexus.account',
     'conexus.apps',

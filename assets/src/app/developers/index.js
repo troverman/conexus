@@ -237,6 +237,572 @@ angular.module( 'conexus.developers', [
         links:[]
     };
 
+    
+
+    $scope.options = {
+        textureOnViewport:true,
+        pixelRatio: 'auto',
+        motionBlur: false,
+        hideEdgesOnViewport:true
+    };
+
+    $scope.layout = {name: 'grid'}
+
+    $scope.cy_graph_ready = function(evt){
+        console.log('graph ready to be interacted with: ', evt);
+    };
+
+
+    //COMBINATORIAL 3
+    $scope.elements = {
+        "nodes": [
+            {"data": {"id": "A"}},
+            {"data": {"id": "B"}},
+            {"data": {"id": "C"}},
+            {"data": {"id": "AB"}},
+            {"data": {"id": "AC"}},
+            {"data": {"id": "BC"}},
+        ],
+        "edges": [
+            {
+                "data": {
+                    "id": "edgeA-B",
+                    "source": "A",
+                    "target": "B",
+                    "dimension": 1
+                }
+            },
+            //{
+            //    "data": {
+            //        "id": "edgeB-A",
+            //        "source": "B",
+            //        "target": "A",
+            //        "dimension": 1
+            //    }
+            //},
+            {
+                "data": {
+                    "id": "edgeA-C",
+                    "source": "A",
+                    "target": "C",
+                    "dimension": 1
+                }
+            },
+            //{
+            //    "data": {
+            //        "id": "edgeC-A",
+            //        "source": "C",
+            //        "target": "A",
+            //        "dimension": 1
+            //    }
+            //},
+            {
+                "data": {
+                    "id": "edgeB-C",
+                    "source": "B",
+                    "target": "C",
+                    "dimension": 1
+                }
+            },
+            //{
+            //    "data": {
+            //        "id": "edgeC-B",
+            //        "source": "C",
+            //        "target": "B",
+            //        "dimension": 1
+            //    }
+            //},
+            {
+                "data": {
+                    "id": "edgeA-BC",
+                    "source": "A",
+                    "target": "BC",
+                    "dimension": 2
+                }
+            },
+            //{
+            //    "data": {
+            //        "id": "edgeBC-B-A",
+            //        "source": "BC",
+            //        "target": "A",
+            //        "dimension": 2
+            //    }
+            //},
+            //{
+            //    "data": {
+            //        "id": "edgeBC-C-A",
+            //         "source": "BC",
+            //          "target": "A",
+            //          "dimension": 2
+            //      }
+            //  },
+            {
+                "data": {
+                    "id": "edgeB-AC",
+                    "source": "B",
+                    "target": "AC",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeC-AB",
+                    "source": "C",
+                    "target": "AB",
+                    "dimension": 2
+                }
+            }
+        ]
+    };
+
+    //COMBINATORIAL 4
+    $scope.elements = {
+        "nodes": [
+            {"data": {"id": "A"}},
+            {"data": {"id": "B"}},
+            {"data": {"id": "C"}},
+            {"data": {"id": "D"}},
+            {"data": {"id": "AB"}},
+            {"data": {"id": "AC"}},
+            {"data": {"id": "AD"}},
+            {"data": {"id": "BC"}},
+            {"data": {"id": "BD"}},
+            {"data": {"id": "CD"}},
+            {"data": {"id": "ABC"}},
+            {"data": {"id": "ACD"}},
+            {"data": {"id": "BCD"}},
+            {"data": {"id": "ABD"}}
+        ],
+        "edges": [
+            {
+                "data": {
+                    "id": "edgeA-B",
+                    "source": "A",
+                    "target": "B",
+                    "dimension": 1
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeA-C",
+                    "source": "A",
+                    "target": "C",
+                    "dimension": 1
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeA-D",
+                    "source": "A",
+                    "target": "D",
+                    "dimension": 1
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeB-C",
+                    "source": "B",
+                    "target": "C",
+                    "dimension": 1
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeC-D",
+                    "source": "C",
+                    "target": "D",
+                    "dimension": 1
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeA-BC",
+                    "source": "A",
+                    "target": "BC",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeA-BD",
+                    "source": "A",
+                    "target": "BD",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeA-CD",
+                    "source": "A",
+                    "target": "CD",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeB-AC",
+                    "source": "B",
+                    "target": "AC",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeB-CD",
+                    "source": "B",
+                    "target": "CD",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeB-AD",
+                    "source": "B",
+                    "target": "AD",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeC-AB",
+                    "source": "C",
+                    "target": "AB",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeC-AD",
+                    "source": "C",
+                    "target": "AD",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeC-BD",
+                    "source": "C",
+                    "target": "BD",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeD-AB",
+                    "source": "D",
+                    "target": "AB",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeD-AC",
+                    "source": "D",
+                    "target": "AC",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeD-BC",
+                    "source": "D",
+                    "target": "BC",
+                    "dimension": 2
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeAB-CD",
+                    "source": "AB",
+                    "target": "CD",
+                    "dimension": 4
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeAC-BD",
+                    "source": "AC",
+                    "target": "BD",
+                    "dimension": 4
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeAD-BC",
+                    "source": "AD",
+                    "target": "BC",
+                    "dimension": 4
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeA-BCD",
+                    "source": "A",
+                    "target": "BCD",
+                    "dimension": 3
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeB-ACD",
+                    "source": "B",
+                    "target": "ACD",
+                    "dimension": 3
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeC-ABD",
+                    "source": "C",
+                    "target": "ABD",
+                    "dimension": 3
+                }
+            },
+            {
+                "data": {
+                    "id": "edgeD-ABC",
+                    "source": "D",
+                    "target": "ABC",
+                    "dimension": 3
+                }
+            }
+        ]
+    };
+
+    $scope.style = [
+        {
+            "selector": "node",
+            "style": {
+                "shape": "ellipse",
+                "border-width": 0,
+                "background-color": "green"
+            },
+        },
+        {
+          "selector": "node[?flipLabel]",
+          "style": {
+            "text-halign": "right"
+          }
+        }, {
+          "selector": "node[type]",
+          "style": {
+            "label": "data(type)"
+          }
+        }, {
+          "selector": "edge",
+          "style": {
+            "width": 3
+          }
+        }, {
+          "selector": "edge.bezier",
+          "style": {
+            "curve-style": "bezier",
+            "control-point-step-size": 40
+          }
+        }, {
+          "selector": "edge.unbundled-bezier",
+          "style": {
+            "curve-style": "unbundled-bezier",
+            "control-point-distances": 120,
+            "control-point-weights": 0.1
+          }
+        }, {
+          "selector": "edge.multi-unbundled-bezier",
+          "style": {
+            "curve-style": "unbundled-bezier",
+            "control-point-distances": [40, -40],
+            "control-point-weights": [0.250, 0.75]
+          }
+        }, {
+          "selector": "edge.haystack",
+          "style": {
+            "curve-style": "haystack",
+            "haystack-radius": 0.5
+          }
+        }, {
+          "selector": "edge.segments",
+          "style": {
+            "curve-style": "segments",
+            "segment-distances": [ 40, -40 ],
+            "segment-weights": [0.250 , 0.75]
+          }
+        }, {
+          "selector": "edge.taxi",
+          "style": {
+            "curve-style": "taxi",
+            "taxi-direction": "downward",
+            "taxi-turn": 20,
+            "taxi-turn-min-distance": 5
+          }
+        }
+    ];
+
+    $scope.style = [
+        {
+          "selector": "core",
+          "style": {
+            "selection-box-color": "#AAD8FF",
+            "selection-box-border-color": "#8BB0D0",
+            "selection-box-opacity": "0.5"
+          }
+        }, {
+          "selector": "node",
+          "style": {
+            "width": "mapData(score, 0, 0.006769776522008331, 20, 60)",
+            "height": "mapData(score, 0, 0.006769776522008331, 20, 60)",
+            "content": "data(name)",
+            "font-size": "12px",
+            "text-valign": "center",
+            "text-halign": "center",
+            "background-color": "#555",
+            "text-outline-color": "#555",
+            "text-outline-width": "2px",
+            "color": "#fff",
+            "overlay-padding": "6px",
+            "z-index": "10"
+          }
+        }, {
+          "selector": "node[?attr]",
+          "style": {
+            "shape": "rectangle",
+            "background-color": "#aaa",
+            "text-outline-color": "#aaa",
+            "width": "16px",
+            "height": "16px",
+            "font-size": "6px",
+            "z-index": "1"
+          }
+        }, {
+          "selector": "node[?query]",
+          "style": {
+            "background-clip": "none",
+            "background-fit": "contain"
+          }
+        }, {
+          "selector": "node:selected",
+          "style": {
+            "border-width": "6px",
+            "border-color": "#AAD8FF",
+            "border-opacity": "0.5",
+            "background-color": "#77828C",
+            "text-outline-color": "#77828C"
+          }
+        }, {
+          "selector": "edge",
+          "style": {
+            "curve-style": "haystack",
+            "haystack-radius": "0.5",
+            "opacity": "0.4",
+            "line-color": "#bbb",
+            "width": "mapData(weight, 0, 1, 1, 8)",
+            "overlay-padding": "3px"
+          }
+        }, {
+          "selector": "node.unhighlighted",
+          "style": {
+            "opacity": "0.2"
+          }
+        }, {
+          "selector": "edge.unhighlighted",
+          "style": {
+            "opacity": "0.05"
+          }
+        }, {
+          "selector": ".highlighted",
+          "style": {
+            "z-index": "999999"
+          }
+        }, {
+          "selector": "node.highlighted",
+          "style": {
+            "border-width": "6px",
+            "border-color": "#AAD8FF",
+            "border-opacity": "0.5",
+            "background-color": "#394855",
+            "text-outline-color": "#394855"
+          }
+        }, {
+          "selector": "edge.filtered",
+          "style": {
+            "opacity": "0"
+          }
+        }, {
+          "selector": "edge[group=\"coexp\"]",
+          "style": {
+            "line-color": "#d0b7d5"
+          }
+        }, {
+          "selector": "edge[group=\"coloc\"]",
+          "style": {
+            "line-color": "#a0b3dc"
+          }
+        }, {
+          "selector": "edge[group=\"gi\"]",
+          "style": {
+            "line-color": "#90e190"
+          }
+        }, {
+          "selector": "edge[group=\"path\"]",
+          "style": {
+            "line-color": "#9bd8de"
+          }
+        }, {
+          "selector": "edge[group=\"pi\"]",
+          "style": {
+            "line-color": "#eaa2a2"
+          }
+        }, {
+          "selector": "edge[group=\"predict\"]",
+          "style": {
+            "line-color": "#f6c384"
+          }
+        }, {
+          "selector": "edge[group=\"spd\"]",
+          "style": {
+            "line-color": "#dad4a2"
+          }
+        }, {
+          "selector": "edge[group=\"spd_attr\"]",
+          "style": {
+            "line-color": "#D0D0D0"
+          }
+        }, {
+          "selector": "edge[group=\"reg\"]",
+          "style": {
+            "line-color": "#D0D0D0"
+          }
+        }, {
+          "selector": "edge[group=\"reg_attr\"]",
+          "style": {
+            "line-color": "#D0D0D0"
+          }
+        }, {
+          "selector": "edge[group=\"user\"]",
+          "style": {
+            "line-color": "#f0ec86"
+          }
+        }
+    ];
+
+    $scope.elementsObj = {};
+    for (x in $scope.elements.nodes){
+        var model = {
+            group:'nodes',
+            //data:$scope.elements.nodes[x].data
+            data:{id:$scope.elements.nodes[x].data.id, type:$scope.elements.nodes[x].data.id, name:$scope.elements.nodes[x].data.id}
+        };
+        $scope.elementsObj[$scope.elements.nodes[x].data.id] = model;
+    }
+    for (x in $scope.elements.edges){
+        var model = {
+            group:'edges',
+            classes:'unbundled-bezier',
+            data:$scope.elements.edges[x].data
+        };
+        $scope.elementsObj[$scope.elements.edges[x].data.id] = model;
+    }
+
+
     $scope.explore = function(){
         //POWER SET
         function getAllSubsets(theArray) {
@@ -251,13 +817,25 @@ angular.module( 'conexus.developers', [
         powerSet.pop();
 
         for (x in powerSet){
-        $scope.graphExploreData.nodes.push({name:powerSet[x]})
-           for (y in powerSet){
+
+
+            //$scope.elements.push({}[$scope.elements])
+
+            $scope.graphExploreData.nodes.push({name:powerSet[x]})
+            for (y in powerSet){
                 $scope.graphExploreData.links.push({value:1, source:parseInt(x), target:parseInt(y)});
             }
+
+
+
         }
     };
     $scope.explore();
+
+
+
+
+
 
     //for (x in $scope.item.associatedModels){
     //    var length = $scope.graphData.nodes.length;

@@ -3433,10 +3433,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p>Higher Dimensional Combinatorials</p>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "            \n" +
+    "                <style>\n" +
+    "                    .ngCytoscape{\n" +
+    "                        height: 80vh;\n" +
+    "                        width:100%;\n" +
+    "                    }\n" +
+    "                </style>\n" +
     "\n" +
-    "                <a href=\"#\">Explorer</a>\n" +
-    "                <!--MARKET TRAVERSE-->\n" +
-    "                <nvd3 options=\"graphOptions\" data=\"graphExploreData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "\n" +
+    "                <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\" graph-ready=\"cy_graph_ready\"></cytoscape>\n" +
     "\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
