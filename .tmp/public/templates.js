@@ -6795,7 +6795,10 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "        </div>\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "                <highchart config=\"totalMap\"></highchart>\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-sm-12\"><highchart config=\"totalMap\"></highchart></div>\n" +
+    "                    <div class=\"col-sm-12\"><highchart config=\"pieMap\"></highchart></div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +

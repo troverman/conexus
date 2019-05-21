@@ -69,6 +69,21 @@ angular.module( 'conexus.members', [
         credits:{enabled:false},
     };
 
+    $scope.pieMap = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [{name: 'Reputation',y: []}]
+        }], 
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+
     $scope.follow = function(model){
         $scope.newFollower = {
             followed:model.id,
@@ -107,6 +122,7 @@ angular.module( 'conexus.members', [
     };
 
     $scope.updateChart = function(){
+        
         $scope.totalMap.series = [{
             id: 'Reputation',
             type: 'column',
@@ -114,21 +130,42 @@ angular.module( 'conexus.members', [
             data: [],
             turboThreshold: 10000,
         }];
+
         $scope.totalMap.xAxis.categories = [];
+
+        var groupObject = {};
         for (x in $scope.members){
             for (y in Object.keys($scope.members[x].reputation)){
-                if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
-                    var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
-                    if (index == -1){
-                        $scope.totalMap.series[0].data.push($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
-                        $scope.totalMap.xAxis.categories.push(Object.keys($scope.members[x].reputation)[y]);
-                    }
-                    else{
-                        $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
-                    }
+                if(isNaN($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]])){
+                    console.log('HELLOOOOOOO')
+                    groupObject[Object.keys($scope.members[x].reputation)[y]] = 0
+                }
+                else{
+                    if (!groupObject[Object.keys($scope.members[x].reputation)[y]]){groupObject[Object.keys($scope.members[x].reputation)[y]] = 0}
+                    groupObject[Object.keys($scope.members[x].reputation)[y]] += parseFloat($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
                 }
             }
         }
+
+        console.log(groupObject);
+
+        var sortable = [];
+        for (var dimension in groupObject) {sortable.push([dimension, groupObject[dimension]])}
+        sortable.sort(function(a, b) {return b[1] - a[1]});
+
+        for (x in sortable){
+            if (x < 100){
+                $scope.pieMap.series[0].data.push({
+                    name: sortable[x][0],
+                    y: sortable[x][1],
+                });
+            }
+            if (x < 250){
+                $scope.totalMap.xAxis.categories.push(sortable[x][0]);
+                $scope.totalMap.series[0].data.push(sortable[x][1]);
+            }
+        }
+
     };
     $scope.updateChart();
 
