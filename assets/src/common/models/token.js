@@ -1,6 +1,6 @@
 angular.module('models.token', ['services', 'sails.io',])
 
-.service('TokenModel',['utils', '$sailsSocket', function(lodash, utils, $sailsSocket) {
+.service('TokenModel',['utils', '$sailsSocket', function(utils, $sailsSocket) {
     
     this.getSome = function(model) {
         var url = utils.prepareUrl('token');

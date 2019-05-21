@@ -10,7 +10,7 @@ module.exports = {
 		var skip = req.query.skip;
 		var sort = req.query.sort;
 
-		console.log(req.query)
+		console.log('GET TOKEN', req.query)
 
 		Token.watch(req);
 
