@@ -631,12 +631,16 @@ angular.module( 'conexus.nav', [
             credits:{enabled:false},
         };
 
+        //TODO: SORT
         for (x in Object.keys($scope.reputation)){
             if ($scope.reputation[Object.keys($scope.reputation)[x]]){
-                $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
-                $scope.chart.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+                if (x < 250){
+                    $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
+                    $scope.chart.xAxis.categories.push(Object.keys($scope.reputation)[x]);
+                }
             }
         }
+        
         $mdSidenav('renderReputation').toggle();
     };
 

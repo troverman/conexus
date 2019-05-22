@@ -3423,14 +3423,23 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <!--<p><b>Combinatorial 5</b></p>\n" +
-    "\n" +
     "                <div class=\"spacing-10\"></div>-->\n" +
-    "\n" +
-    "                <!--MAP COMP 5 -> COMP 7-->\n" +
-    "                <!--EXPLORE MORE-->\n" +
     "\n" +
     "                <p><b>Combinatorial N</b></p>\n" +
     "                <p>Higher Dimensional Combinatorials</p>\n" +
+    "\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B'])\">2</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C'])\">3</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D'])\">4</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E'])\">5</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F'])\">6</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F','G'])\">7</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F','G','H'])\">8</a>\n" +
+    "                <br><br>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B'])\">2</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C'])\">3</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D'])\">4</a>\n" +
+    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D','E'])\">5</a>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "            \n" +
@@ -3441,8 +3450,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    }\n" +
     "                </style>\n" +
     "\n" +
+    "                <!--MAP COMP 5 -> COMP 7-->\n" +
+    "                <!--HOW MANY 5 in 7?-->\n" +
+    "                <!--PASCAL-->\n" +
     "\n" +
-    "                <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\" graph-ready=\"cy_graph_ready\"></cytoscape>\n" +
+    "                <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\" graph-ready=\"graphReady\"></cytoscape>\n" +
     "\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +

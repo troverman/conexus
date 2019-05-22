@@ -137,7 +137,6 @@ angular.module( 'conexus.members', [
         for (x in $scope.members){
             for (y in Object.keys($scope.members[x].reputation)){
                 if(isNaN($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]])){
-                    console.log('HELLOOOOOOO')
                     groupObject[Object.keys($scope.members[x].reputation)[y]] = 0
                 }
                 else{

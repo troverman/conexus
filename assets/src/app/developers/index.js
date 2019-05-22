@@ -16,7 +16,7 @@ angular.module( 'conexus.developers', [
     hljsServiceProvider.setOptions({});
 }])
 
-.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'OrderModel', 'ReactionModel', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ContentModel, OrderModel, ReactionModel, TransactionModel, ValidationModel ) {
+.controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'cytoData', 'OrderModel', 'ReactionModel', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ContentModel, cytoData, OrderModel, ReactionModel, TransactionModel, ValidationModel ) {
 
     $scope.results = {
         action:'[{}]',
@@ -246,15 +246,19 @@ angular.module( 'conexus.developers', [
         hideEdgesOnViewport:true
     };
 
-    $scope.layout = {name: 'grid'}
+    $scope.layout = {name: 'cose', coolingFactor: 0, animate: true}; //cose, breadthfirst, concentric
+    $scope.layout = {name: 'random'};
 
-    $scope.cy_graph_ready = function(evt){
-        console.log('graph ready to be interacted with: ', evt);
+    $scope.graphReady = function(evt){
+        //cytoData.getGraph().then(function(graph){
+        //    $scope.graph = graph;
+        //    $scope.graph.fit();
+        //});
     };
 
 
     //COMBINATORIAL 3
-    $scope.elements = {
+    $scope.elementsThree = {
         "nodes": [
             {"data": {"id": "A"}},
             {"data": {"id": "B"}},
@@ -569,7 +573,7 @@ angular.module( 'conexus.developers', [
         ]
     };
 
-    $scope.style = [
+    $scope.style1 = [
         {
             "selector": "node",
             "style": {
@@ -648,8 +652,8 @@ angular.module( 'conexus.developers', [
         }, {
           "selector": "node",
           "style": {
-            "width": "mapData(score, 0, 0.006769776522008331, 20, 60)",
-            "height": "mapData(score, 0, 0.006769776522008331, 20, 60)",
+            "width": "mapData(score, 0, 0.006769776522008331, 10, 30)",
+            "height": "mapData(score, 0, 0.006769776522008331, 10, 30)",
             "content": "data(name)",
             "font-size": "12px",
             "text-valign": "center",
@@ -658,7 +662,7 @@ angular.module( 'conexus.developers', [
             "text-outline-color": "#555",
             "text-outline-width": "2px",
             "color": "#fff",
-            "overlay-padding": "6px",
+            "overlay-padding": "3px",
             "z-index": "10"
           }
         }, {
@@ -667,9 +671,9 @@ angular.module( 'conexus.developers', [
             "shape": "rectangle",
             "background-color": "#aaa",
             "text-outline-color": "#aaa",
-            "width": "16px",
-            "height": "16px",
-            "font-size": "6px",
+            "width": "8px",
+            "height": "8px",
+            "font-size": "3px",
             "z-index": "1"
           }
         }, {
@@ -681,7 +685,7 @@ angular.module( 'conexus.developers', [
         }, {
           "selector": "node:selected",
           "style": {
-            "border-width": "6px",
+            "border-width": "3px",
             "border-color": "#AAD8FF",
             "border-opacity": "0.5",
             "background-color": "#77828C",
@@ -692,9 +696,9 @@ angular.module( 'conexus.developers', [
           "style": {
             "curve-style": "haystack",
             "haystack-radius": "0.5",
-            "opacity": "0.4",
+            "opacity": "0.9",
             "line-color": "#bbb",
-            "width": "mapData(weight, 0, 1, 1, 8)",
+            "width": "mapData(weight, 0, 1, 1, 1)",
             "overlay-padding": "3px"
           }
         }, {
@@ -715,7 +719,7 @@ angular.module( 'conexus.developers', [
         }, {
           "selector": "node.highlighted",
           "style": {
-            "border-width": "6px",
+            "border-width": "3px",
             "border-color": "#AAD8FF",
             "border-opacity": "0.5",
             "background-color": "#394855",
@@ -776,61 +780,155 @@ angular.module( 'conexus.developers', [
           "style": {
             "line-color": "#D0D0D0"
           }
-        }, {
+        }, 
+        {
           "selector": "edge[group=\"user\"]",
           "style": {
             "line-color": "#f0ec86"
+          }
+        },
+        {
+          "selector": "highlighted",
+          "style": {
+            "background-color": "#61bffc",
+            "line-color": "#61bffc",
+            "target-arrow-color": "#61bffc",
+            "transition-property": "background-color, line-color, target-arrow-color",
+            "transition-duration": "0.5s"
           }
         }
     ];
 
     $scope.elementsObj = {};
-    for (x in $scope.elements.nodes){
-        var model = {
-            group:'nodes',
-            //data:$scope.elements.nodes[x].data
-            data:{id:$scope.elements.nodes[x].data.id, type:$scope.elements.nodes[x].data.id, name:$scope.elements.nodes[x].data.id}
-        };
-        $scope.elementsObj[$scope.elements.nodes[x].data.id] = model;
-    }
-    for (x in $scope.elements.edges){
-        var model = {
-            group:'edges',
-            classes:'unbundled-bezier',
-            data:$scope.elements.edges[x].data
-        };
-        $scope.elementsObj[$scope.elements.edges[x].data.id] = model;
-    }
-
-
-    $scope.explore = function(){
-        //POWER SET
-        function getAllSubsets(theArray) {
-          return theArray.reduce(function (subsets, value) {
-            return subsets.concat(subsets.map(function (set) {
-              return [value].concat(set);
-            }));
-          }, [[]]);
-        };        
-        var powerSet = getAllSubsets(['A','B','C','D']);
-        powerSet.shift();
-        powerSet.pop();
-
-        for (x in powerSet){
-
-
-            //$scope.elements.push({}[$scope.elements])
-
-            $scope.graphExploreData.nodes.push({name:powerSet[x]})
-            for (y in powerSet){
-                $scope.graphExploreData.links.push({value:1, source:parseInt(x), target:parseInt(y)});
-            }
-
-
-
+    $scope.populateElement = function(){
+        for (x in $scope.elements.nodes){
+            var model = {
+                group:'nodes',
+                data:{id:$scope.elements.nodes[x].data.id, type:$scope.elements.nodes[x].data.id, name:$scope.elements.nodes[x].data.id}
+            };
+            $scope.elementsObj[$scope.elements.nodes[x].data.id] = model;
+        }
+        for (x in $scope.elements.edges){
+            var model = {
+                group:'edges',
+                classes:'unbundled-bezier',
+                data:$scope.elements.edges[x].data
+            };
+            $scope.elementsObj[$scope.elements.edges[x].data.id] = model;
         }
     };
-    $scope.explore();
+    //$scope.populateElement();
+
+    function getAllSubsets(theArray) {
+      return theArray.reduce(function (subsets, value) {
+        return subsets.concat(subsets.map(function (set) {
+          return [value].concat(set);
+        }));
+      }, [[]]);
+    };  
+
+    $scope.combinatorialGenerator = function(model){
+        $scope.elementsObj = {};
+        var powerSet = [];
+        if (model){powerSet = getAllSubsets(model);}
+        else{powerSet = getAllSubsets(['A','B','C'])}
+        powerSet.shift();
+        powerSet.pop();
+        //GENERATE NODES
+        for (x in powerSet){
+            var stringX = powerSet[x].join('');
+            var modelNode = {
+                group:'nodes',
+                data:{id:stringX, type:stringX, name:stringX}
+            };
+            $scope.elementsObj[stringX] = modelNode;
+            //GENERATE EDGES
+            for (y in powerSet){
+                //if for more refine
+                var stringY = powerSet[y].join('');
+                var found = stringY.split('').some(function(obj){
+                    return stringX.split('').includes(obj);
+                });
+                if (!found){
+                    var modelEdge = {
+                        group:'edges',
+                        data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+                    };
+                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                }
+            }
+        }
+        console.log($scope.elementsObj);
+        cytoData.getGraph().then(function(graph){
+            $scope.graph = graph;
+            //$scope.graph.fit();
+            $scope.graph.layout({
+                //name: 'cose', coolingFactor: 0, animate: 'end',  //numIter: 100000000,
+                name: 'cola',
+                infinite: true,
+                fit: false
+            }).run();
+
+            var bfs =  $scope.graph.elements().bfs('#A', function(){}, true);
+            console.log(bfs);
+
+            var i = 0;
+            var highlightNextEle = function(){
+              if( i < bfs.path.length ){
+                bfs.path[i].addClass('highlighted');
+                i++;
+                setTimeout(highlightNextEle, 10000);
+              }
+            };
+            highlightNextEle();
+
+        });
+
+    };
+    $scope.combinatorialGenerator();
+
+    $scope.inverseFacetGenerator = function(model){
+        $scope.elementsObj = {};
+        var powerSet = [];
+        if (model){powerSet = getAllSubsets(model);}
+        else{powerSet = getAllSubsets(['A','B','C'])}
+        powerSet.shift();
+        //GENERATE NODES
+        for (x in powerSet){
+            var stringX = powerSet[x].join('');
+            var modelNode = {
+                group:'nodes',
+                data:{id:stringX, type:stringX, name:stringX}
+            };
+            $scope.elementsObj[stringX] = modelNode;
+            //GENERATE EDGES
+            for (y in powerSet){
+                //if for more refine
+                var stringY = powerSet[y].join('');
+                var found = stringY.split('').some(function(obj){
+                    return stringX.split('').includes(obj);
+                });
+                if (found){
+                    var modelEdge = {
+                        group:'edges',
+                        data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+                    };
+                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                }
+            }
+        }
+
+        cytoData.getGraph().then(function(graph){
+            $scope.graph = graph;
+            $scope.graph.layout({
+                //name:'grid',
+                //name: 'cose', coolingFactor: 0, animate: 'end', // numIter: 10000,
+                name: 'cola',
+                infinite: true,
+                fit: false
+            }).run();
+        });
+    };
 
 
 

@@ -2102,14 +2102,23 @@ getSome:function(newQuery){}</div>
                 <div class="spacing-10"></div>
 
                 <!--<p><b>Combinatorial 5</b></p>
-
                 <div class="spacing-10"></div>-->
-
-                <!--MAP COMP 5 -> COMP 7-->
-                <!--EXPLORE MORE-->
 
                 <p><b>Combinatorial N</b></p>
                 <p>Higher Dimensional Combinatorials</p>
+
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B'])">2</a>
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C'])">3</a>
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D'])">4</a>
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E'])">5</a>
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F'])">6</a>
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F','G'])">7</a>
+                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F','G','H'])">8</a>
+                <br><br>
+                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B'])">2</a>
+                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C'])">3</a>
+                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D'])">4</a>
+                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D','E'])">5</a>
 
                 <div class="spacing-10"></div>
             
@@ -2120,8 +2129,12 @@ getSome:function(newQuery){}</div>
                     }
                 </style>
 
+                <!--MAP COMP 5 -> COMP 7-->
+                
+                <!--HOW MANY 5 in 7?-->
+                <!--PASCAL-->
 
-                <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="cy_graph_ready"></cytoscape>
+                <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
 
 
                 <div class="spacing-10"></div>
