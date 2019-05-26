@@ -237,8 +237,6 @@ angular.module( 'conexus.developers', [
         links:[]
     };
 
-    
-
     $scope.options = {
         textureOnViewport:true,
         pixelRatio: 'auto',
@@ -248,14 +246,6 @@ angular.module( 'conexus.developers', [
 
     $scope.layout = {name: 'cose', coolingFactor: 0, animate: true}; //cose, breadthfirst, concentric
     $scope.layout = {name: 'random'};
-
-    $scope.graphReady = function(evt){
-        //cytoData.getGraph().then(function(graph){
-        //    $scope.graph = graph;
-        //    $scope.graph.fit();
-        //});
-    };
-
 
     //COMBINATORIAL 3
     $scope.elementsThree = {
@@ -573,6 +563,8 @@ angular.module( 'conexus.developers', [
         ]
     };
 
+    console.log($scope.elements.edges.length);
+
     $scope.style1 = [
         {
             "selector": "node",
@@ -863,27 +855,12 @@ angular.module( 'conexus.developers', [
             $scope.graph = graph;
             //$scope.graph.fit();
             $scope.graph.layout({
-                //name: 'cose', coolingFactor: 0, animate: 'end',  //numIter: 100000000,
-                name: 'cola',
+                name: 'cola', //name: 'cose', coolingFactor: 0, animate: 'end',  //numIter: 100000000,
                 infinite: true,
                 fit: false
             }).run();
 
-            var bfs =  $scope.graph.elements().bfs('#A', function(){}, true);
-            console.log(bfs);
-
-            var i = 0;
-            var highlightNextEle = function(){
-              if( i < bfs.path.length ){
-                bfs.path[i].addClass('highlighted');
-                i++;
-                setTimeout(highlightNextEle, 10000);
-              }
-            };
-            highlightNextEle();
-
         });
-
     };
     $scope.combinatorialGenerator();
 

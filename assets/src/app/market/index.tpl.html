@@ -36,9 +36,21 @@
 			<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->
 
 		    <div class="card">
+
+		    	<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Market</h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
+
 				<div style="padding:16px">
 
 					<!--NG REPEAT | MULTIPLE CARDS-->
+					<p><b>Tokens</b></p>
 		    		<p><b><a href="token/{{token.string}}">{{token.string}}</a></b></p>	
 
 					<div class="spacing-5"></div>
@@ -49,7 +61,7 @@
 
 					<p><b>Information</b></p>
 
-					<p style="font-style:italic;color:gray">Associated Action: <a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model}}</a></p>
+					<p style="font-style:italic;color:gray" ng-if="{{modelToken.model}}">Associated Action: <a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model}}</a></p>
 					<p style="font-style:italic;color:gray">In Circulation: {{token.information.inCirculation}}</p>
 					<p style="font-style:italic;color:gray">Markets: {{markets.length}}</p>
 					<div class="spacing-5"></div>
@@ -82,7 +94,8 @@
 	    	</div>	
 		</div>
 
-		<div class="col-md-8" style="max-height:110vh;overflow:scroll;padding-left:0px;padding-right:0px;">
+		<!--<div class="col-md-8" style="max-height:110vh;overflow:scroll;padding-left:0px;padding-right:0px;">-->
+		<div class="col-md-8" style="padding-left:0px;padding-right:0px;">
 
 			<div class="spacing-5"></div>
 			<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
@@ -96,19 +109,19 @@
 			<div ng-show="selectedTab=='MARKET'">
 		        <div class="card"><button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button></div>
 			    <div class="card" ng-repeat="market in markets" ng-click="renderToggle(market)">
+				    <div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px" class="imageContainerSmall">
+				    	<div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+					        <div style="margin-top: auto;margin-bottom: auto;">
+					        	<div class="container">
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}">{{market.string}}</a></h1>
+						        </div>
+					        </div>
+					    </div>
+					</div>
 			    	<div style="padding:16px;">
 						<div class="row">
-				    		<div class="col-sm-6">
-				    			<a ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}">
-				    				<h4>{{market.string}}</h4>
-				    			</a>
-				    		</div>
-							<div class="col-sm-6" style="text-align:right">
-								<span style="text-align:right;">{{market.info.rate}}</span>
-				    		</div>
-						</div>
-						<div class="row">
 				    		<div class="col-sm-12">
+								<p style="color:gray;font-size:10px">{{market.info.rate}}</p>
 				    			<p style="color:gray;font-size:10px">{{market.info.dailyChange}} 24/hr Change</p>
 								<p style="color:gray;font-size:10px">{{market.info.marketDepth}} {{stateParams.id}} Depth</p>
 							</div>
@@ -147,8 +160,16 @@
 			<!--MANIFOLD-->
 			<div ng-show="selectedTab=='MANIFOLD'">
 				<div class="card" ng-repeat="item in manifolds">
+					<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px" class="imageContainerSmall">
+				    	<div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+					        <div style="margin-top: auto;margin-bottom: auto;">
+					        	<div class="container">
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.title}}</h1>
+						        </div>
+					        </div>
+					    </div>
+					</div>
 				    <div style="padding:16px">
-				    	<h4>{{item.title}}</h4>
 				    	<p>{{item.manifolds}}</p>
 				    </div> 
 				</div>
@@ -158,18 +179,38 @@
 			<div ng-show="selectedTab=='ANALYSIS'">
 
 				<div class="card">
+					<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code')" class="imageContainerSmall">
+					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+					        <div style="margin-top: auto;margin-bottom: auto;">
+					        	<div class="container">
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Market Analysis</h1>
+						        </div>
+					        </div>
+					    </div>
+					</div>
 					<div style="padding:16px">
-						<h4>Market Analysis</h4>
 						<p>Size: {{markets.length}}</p>
 						<p>Rank: {{stateParams.id.split(',').length}}
 						<p>Highest Dimension: 7</p>
 						<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>
 						<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
+
+						<style>.ngCytoscape{height: 500px;width:100%;}</style>
+                		<cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
+
 		    		</div>
 		    	</div>
 		    	<div class="card">
+		    		<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code')" class="imageContainerSmall">
+					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+					        <div style="margin-top: auto;margin-bottom: auto;">
+					        	<div class="container">
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Lattice Analysis</h1>
+						        </div>
+					        </div>
+					    </div>
+					</div>
 					<div style="padding:16px">
-						<h4>Lattice Analysis</h4>
 			    		<p>Computed Lattice Neighborhood</p>
 			    		<!--COMBINITORIALS SERVED FIRST-->
 			    		<!--DEPTH OF THE COMBINITORIAL SPACES-->
@@ -181,12 +222,7 @@
 						<!--VALUE TENSOR NETWORK-->
 					</div>
 		    	</div>
-			    <!--<div class="card">
-					<div style="padding:16px;">
-						<h4>Value Vector</h4>
-						<highchart config="chartMap"></highchart>
-					</div>
-				</div>-->
+		
 			</div>
 
 	    </div>

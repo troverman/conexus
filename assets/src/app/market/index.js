@@ -23,9 +23,10 @@ angular.module( 'conexus.market', [
 	});
 }])
 
-.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, OrderModel, orders, titleService, token ) {
+.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'cytoData', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, cytoData, OrderModel, orders, titleService, token ) {
    
     $scope.stateParams = $stateParams;
+    
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 
     $rootScope.associatedModels = [{
@@ -34,12 +35,6 @@ angular.module( 'conexus.market', [
     }];
 
     $scope.baseMarkets = [$scope.stateParams.id];
-
-    //$scope.market = {
-    //    title: $scope.stateParams.id,
-    //    circulation: Math.floor(Math.random()*1000000),
-    //    marketCount: Math.floor(Math.random()*10000),
-    //};
 
     $scope.manifolds = [
         {title:'+CREDIT', manifolds:'+INTEREST'},
@@ -54,47 +49,45 @@ angular.module( 'conexus.market', [
     $scope.newOrder = {};
     $scope.newOrder.identiferSet = $scope.stateParams.id;
     $scope.orders = orders;
+    $scope.selectedTab = 'MARKET';
     $scope.token = token[0];
     $scope.trades = {};
 
+    //TODO: BUILD LOGIC FOR STING LANGUAGE // MANIFOLD ENCODING .. HASH
     $scope.stringInterpreter = function(model){
         var sentence = model.split('+');
         var selectedModel = sentence.filter(function(n) {
             return ['CONTENT','ITEM','ORDER','PROJECT','TASK','TIME','TRANSACTION','VALIDATION'].indexOf(n) !== -1;
         })[0];
-        //MODELS
         //if sentence.contains()
         return {model:selectedModel, id:sentence[sentence.length-1]};
-    }
+    };
+
     if ($scope.token){$scope.modelToken = $scope.stringInterpreter($scope.token.string);}
 
+
+    //TODO: RESEARCH & CODE
     //COMPUTATION 
     //SOME COMPUTATION.. (COMPUTE TO LATTICE IMMUTABLE STRUCT)
     //COMBO ORDER VS + AND ARRAY OF ORDERS;
-
     //COMBINATORIAL OPTION IN MARKET TYPE (INTERLINK IN POOLS)
-
     //COMBO VS PLURAL VS COMPUTED COMB
     //(DIRECT SINGULAR ASSETS, DIRECT PLUR ASSETS, COMP PLUR ASSETS)
-    console.log($scope.orders);
 
-    //UGH NEED TO SORT ORDER FETCH OR PROCESS DIFFERENTLY //--> STATIC DATA ON CREATE
-    //WHATS THE ORT ON MARKETS?
-
+    //TODO: DOCUMENT ALGS!
     //ORDER MATHCHING.. HIGHEST DIM ORDERS 1ST
-
     //TRAVERSAL TENSORS
     //ROTATIONAL ETNSORS
     //MODULATIONS OF IMMUTABLE
-
     //GET SETS --> SORT BY NUMBER OF SETBETA OBJKEY COUNT
     for (x in $scope.orders){
         //$scope.orders[x].setAlpha
         if ($scope.orders[x].setBeta){
+
+
             //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
             //HIGH DIMS IMMEDIATLY DECOMPOSE 
             if (Object.keys($scope.orders[x].setBeta).length > 1){
-                console.log('HIIIIII');
                 if ($scope.markets.indexOf(assetIdentifier) == -1){
                     $scope.markets.push({
                         string:Object.keys($scope.orders[x].setBeta).join(','), 
@@ -109,7 +102,6 @@ angular.module( 'conexus.market', [
             }
             for (y in Object.keys($scope.orders[x].setBeta)){
                 var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
-                console.log(assetIdentifier);
                 if ($scope.markets.indexOf(assetIdentifier) == -1){
                     $scope.markets.push({
                         string:assetIdentifier, 
@@ -124,13 +116,7 @@ angular.module( 'conexus.market', [
             }
         }
     }
-    
-    $scope.selectedTab = 'MARKET';
-    $scope.selectTab = function(model){
-        $scope.selectedTab = model;
-    };
 
-    //PLUAR 2 COME :)
     $scope.bidAskChart = {
         chart: {
             zoomType: 'x',
@@ -208,6 +194,33 @@ angular.module( 'conexus.market', [
         legend: {enabled:false},
     };
 
+    //TODO: HMM
+    //GENERATE
+    for(var i=-1000;i<1000;i++){
+        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
+        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
+    }
+    for (x in $scope.baseMarkets){
+        var random1 = Math.floor(255*Math.random());
+        var random2 = Math.floor(255*Math.random());
+        var random3 = Math.floor(255*Math.random());
+        $scope.chartMap.series.push({
+            id: 'values'+x,
+            type: 'area',
+            name: $scope.baseMarkets[x],
+            pointPlacement: 'on',
+            data: [],
+            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
+            fillOpacity: 0.3,
+        });
+    }
+    for (x in $scope.markets){
+        $scope.chartMap.xAxis.categories.push($scope.markets[x]);
+        for (y in $scope.baseMarkets){
+            $scope.chartMap.series[y].data.push((1+1*Math.random())/2);
+        }
+    }
+
     //DEFAULT GENERATOR
     if ($scope.orders.length == 0){
         $scope.marketString = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'CRE8+TIME', 'CRE8+TIME+EDUCATION', 'CRE8+TIME+SHELTER', 'CRE8+TIME+FOOD', 'CRE8+TIME+CREATION', 'CRE8+TIME+HEALTH', 'CRE8+TIME+SECURITY', 'CRE8+TIME+REST', 'CRE8+STREAM', 'CRE8+REACT','CRE8+REACT+LIKE','CRE8+REACT+DISLIKE','CRE8+POST','CRE8+VALIDATE','CRE8+VIEW','CRE8+MINE','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
@@ -223,55 +236,50 @@ angular.module( 'conexus.market', [
             });
         }
     }
+
+    //TODO: FILTER NAV
+    $scope.addMarket = function(type, market){
+        if (type="baseMarket"){$scope.baseMarkets.push($scope.newMarket.baseMarket)}
+        if (type="market"){$scope.markets.push($scope.newMarket.market)}
+    };
+    
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+
+    $scope.reply = function(item){
+        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
+        $scope.orders[index].showReply = !$scope.orders[index].showReply
+    };
+
+
+
+
+
+
+
+
+
+
+
+    //GRAPH HERE
+
+    //TODO: LATTICE NEIGHBORHOOD..
+    //TENSOR BRAID
+    //TRAVERSAL
+    //MATCHING RULES
     
     //POWER SET
     function getAllSubsets(theArray) {
-      return theArray.reduce(function (subsets, value) {
-        return subsets.concat(subsets.map(function (set) {
-          return [value].concat(set);
-        }));
-      }, [[]]);
+        return theArray.reduce(function (subsets, value) {
+            return subsets.concat(subsets.map(function (set) {
+                return [value].concat(set);
+            }));
+        }, [[]]);
     };
 
     $scope.graphData = {
         nodes:[{name:$stateParams.id}], 
         links:[]
     };
-
-    $scope.graphDataPower = {
-        nodes:[],
-        links:[]
-    };
-
-    //var powerSet = getAllSubsets(['A','B','C','D','E']);
-    var powerSet = getAllSubsets(['USD','ETH','BTC','LTC','CRE8']);
-    powerSet.shift();
-    for (x in powerSet){
-        $scope.graphDataPower.nodes.push({name:powerSet[x]})
-        for (y in powerSet){            
-            if (powerSet[x].filter(function (value) {return -1 !== powerSet[y].indexOf(value)}).length == 0){
-                var value = 1 + Math.abs(powerSet[x].length - powerSet[y].length);
-                $scope.graphDataPower.links.push({value:value, source:parseInt(x), target:parseInt(y)});
-            }
-        }
-    }
-
-    //RECURSIVE TRAVERSAL
-    function traverse(n, depth){
-        n++;
-        if (n < depth){
-            //var length = $scope.graphData.nodes.length;
-            //$scope.graphData.nodes.push({name:n});
-            //$scope.graphData.links.push({value:1, source:0, target:length});
-            for (x in $scope.markets){
-                var length = $scope.graphData.nodes.length;
-                $scope.graphData.nodes.push({name:$scope.markets[x]});
-                $scope.graphData.links.push({value:1, source:n, target:length});
-            }
-            traverse(n, depth);
-        }
-    };
-    traverse(0, $scope.markets.length);
 
     $scope.graphOptions = {
         chart: {
@@ -291,48 +299,262 @@ angular.module( 'conexus.market', [
         }
     };
 
-    for (x in $scope.baseMarkets){
-        var random1 = Math.floor(255*Math.random());
-        var random2 = Math.floor(255*Math.random());
-        var random3 = Math.floor(255*Math.random());
-        $scope.chartMap.series.push({
-            id: 'values'+x,
-            type: 'area',
-            name: $scope.baseMarkets[x],
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
-            fillOpacity: 0.3,
-        });
-    }
+    $scope.graphDataPower = {
+        nodes:[],
+        links:[]
+    };
 
-    for (x in $scope.markets){
-        var length = $scope.markets.length;
-        //$scope.markets.push($scope.markets[x]+'+5b0b34c1d0f57258271d8b17');
-        //$scope.markets.push($scope.markets[$scope.markets.length - length]+','+$scope.markets[$scope.markets.length - 1]);
-    }
-   
-    for (x in $scope.markets){
-        $scope.chartMap.xAxis.categories.push($scope.markets[x]);
-        for (y in $scope.baseMarkets){
-            $scope.chartMap.series[y].data.push((1+1*Math.random())/2);
+
+
+
+
+
+
+    $scope.options = {
+        textureOnViewport:true,
+        pixelRatio: 'auto',
+        motionBlur: false,
+        hideEdgesOnViewport:true
+    };
+    $scope.layout = {name: 'random'};
+    $scope.style1 = [
+        {
+          "selector": "core",
+          "style": {
+            "selection-box-color": "#AAD8FF",
+            "selection-box-border-color": "#8BB0D0",
+            "selection-box-opacity": "0.5"
+          }
+        }, {
+          "selector": "node",
+          "style": {
+            "width": "mapData(score, 0, 0.006769776522008331, 10, 30)",
+            "height": "mapData(score, 0, 0.006769776522008331, 10, 30)",
+            "content": "data(name)",
+            "font-size": "12px",
+            "text-valign": "center",
+            "text-halign": "center",
+            "background-color": "#555",
+            "text-outline-color": "#555",
+            "text-outline-width": "2px",
+            "color": "#fff",
+            "overlay-padding": "3px",
+            "z-index": "10"
+          }
+        }, {
+          "selector": "node[?attr]",
+          "style": {
+            "shape": "rectangle",
+            "background-color": "#aaa",
+            "text-outline-color": "#aaa",
+            "width": "8px",
+            "height": "8px",
+            "font-size": "3px",
+            "z-index": "1"
+          }
+        }, {
+          "selector": "node[?query]",
+          "style": {
+            "background-clip": "none",
+            "background-fit": "contain"
+          }
+        }, {
+          "selector": "node:selected",
+          "style": {
+            "border-width": "3px",
+            "border-color": "#AAD8FF",
+            "border-opacity": "0.5",
+            "background-color": "#77828C",
+            "text-outline-color": "#77828C"
+          }
+        }, {
+          "selector": "edge",
+          "style": {
+            "curve-style": "haystack",
+            "haystack-radius": "0.5",
+            "opacity": "0.9",
+            "line-color": "#bbb",
+            "width": "mapData(weight, 0, 1, 1, 1)",
+            "overlay-padding": "3px"
+          }
+        }, {
+          "selector": "node.unhighlighted",
+          "style": {
+            "opacity": "0.2"
+          }
+        }, {
+          "selector": "edge.unhighlighted",
+          "style": {
+            "opacity": "0.05"
+          }
+        }, {
+          "selector": ".highlighted",
+          "style": {
+            "z-index": "999999"
+          }
+        }, {
+          "selector": "node.highlighted",
+          "style": {
+            "border-width": "3px",
+            "border-color": "#AAD8FF",
+            "border-opacity": "0.5",
+            "background-color": "#394855",
+            "text-outline-color": "#394855"
+          }
+        }, {
+          "selector": "edge.filtered",
+          "style": {
+            "opacity": "0"
+          }
+        }, {
+          "selector": "edge[group=\"coexp\"]",
+          "style": {
+            "line-color": "#d0b7d5"
+          }
+        }, {
+          "selector": "edge[group=\"coloc\"]",
+          "style": {
+            "line-color": "#a0b3dc"
+          }
+        }, {
+          "selector": "edge[group=\"gi\"]",
+          "style": {
+            "line-color": "#90e190"
+          }
+        }, {
+          "selector": "edge[group=\"path\"]",
+          "style": {
+            "line-color": "#9bd8de"
+          }
+        }, {
+          "selector": "edge[group=\"pi\"]",
+          "style": {
+            "line-color": "#eaa2a2"
+          }
+        }, {
+          "selector": "edge[group=\"predict\"]",
+          "style": {
+            "line-color": "#f6c384"
+          }
+        }, {
+          "selector": "edge[group=\"spd\"]",
+          "style": {
+            "line-color": "#dad4a2"
+          }
+        }, {
+          "selector": "edge[group=\"spd_attr\"]",
+          "style": {
+            "line-color": "#D0D0D0"
+          }
+        }, {
+          "selector": "edge[group=\"reg\"]",
+          "style": {
+            "line-color": "#D0D0D0"
+          }
+        }, {
+          "selector": "edge[group=\"reg_attr\"]",
+          "style": {
+            "line-color": "#D0D0D0"
+          }
+        }, 
+        {
+          "selector": "edge[group=\"user\"]",
+          "style": {
+            "line-color": "#f0ec86"
+          }
+        },
+        {
+          "selector": "highlighted",
+          "style": {
+            "background-color": "#61bffc",
+            "line-color": "#61bffc",
+            "target-arrow-color": "#61bffc",
+            "transition-property": "background-color, line-color, target-arrow-color",
+            "transition-duration": "0.5s"
+          }
         }
-    }
+    ];
 
-    for(var i=-1000;i<1000;i++){
-        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
-        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
-    }
-    
-    //TODO: FILTER NAV
-    $scope.addMarket = function(type, market){
-        if (type="baseMarket"){$scope.baseMarkets.push($scope.newMarket.baseMarket)}
-        if (type="market"){$scope.markets.push($scope.newMarket.market)}
+    $scope.elementsObj = {};
+    $scope.combinatorialGenerator = function(model){
+        $scope.elementsObj = {};
+        var powerSet = [];
+        if (model){powerSet = getAllSubsets(model);}
+        else{powerSet = getAllSubsets(['A','B','C'])}
+        powerSet.shift();powerSet.pop();
+        for (x in powerSet){
+            var stringX = powerSet[x].join('');
+            var modelNode = {
+                group:'nodes',
+                data:{id:stringX, type:stringX, name:stringX}
+            };
+            $scope.elementsObj[stringX] = modelNode;
+            for (y in powerSet){
+                var stringY = powerSet[y].join('');
+                var found = stringY.split('').some(function(obj){
+                    return stringX.split('').includes(obj);
+                });
+                if (!found){
+                    var modelEdge = {
+                        group:'edges',
+                        data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+                    };
+                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                }
+            }
+        }
+        //cytoData.getGraph().then(function(graph){
+        //    $scope.graph.layout({
+        //    }).run();
+        //});
     };
+    $scope.combinatorialGenerator();
 
-    $scope.reply = function(item){
-        var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.orders[index].showReply = !$scope.orders[index].showReply
+    $scope.powerSetGenerator = function(model){
+        var powerSet = getAllSubsets(['USD','ETH','BTC','LTC','CRE8']);
+        powerSet.shift();powerSet.pop();
+        for (x in powerSet){
+            $scope.graphDataPower.nodes.push({name:powerSet[x]})
+            //var modelNode = {
+            //    group:'nodes',
+            //    data:{id:parseInt(x), type:powerSet[x], name:powerSet[x]}
+            //};
+            //$scope.elementsObj[parseInt(x)] = modelNode;
+            for (y in powerSet){            
+                if (powerSet[x].filter(function (value) {return -1 !== powerSet[y].indexOf(value)}).length == 0){
+                    var value = 1 + Math.abs(powerSet[x].length - powerSet[y].length);
+                    $scope.graphDataPower.links.push({value:value, source:parseInt(x), target:parseInt(y)});
+                    //var modelEdge = {
+                    //    group:'edges',
+                    //    data:{id:parseInt(x)+'-'+parseInt(y), source:parseInt(x), target:parseInt(y)}
+                    //};
+                    //$scope.elementsObj[parseInt(x)+'-'+parseInt(y)] = modelEdge;
+                }
+            }
+        }
     };
+    $scope.powerSetGenerator();
+
+    //RECURSIVE TRAVERSAL
+    function traverse(n, depth){
+        n++;
+        if (n < depth){
+            //var length = $scope.graphData.nodes.length;
+            //$scope.graphData.nodes.push({name:n});
+            //$scope.graphData.links.push({value:1, source:0, target:length});
+            for (x in $scope.markets){
+                var length = $scope.graphData.nodes.length;
+                $scope.graphData.nodes.push({name:$scope.markets[x]});
+                $scope.graphData.links.push({value:1, source:n, target:length});
+            }
+            traverse(n, depth);
+        }
+    };
+    traverse(0, $scope.markets.length);
+
+
+
+
+
 
 }]);

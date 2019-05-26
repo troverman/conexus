@@ -24,9 +24,19 @@
 	            </div>
 	        </form>
 	    </div>
+
 	    <div class="card" ng-if="false">
 			<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
+			<nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>
+			<style>
+                .ngCytoscape{
+                    height: 80vh;
+                    width:100%;
+                }
+            </style>
+            <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
 	    </div>
+	    
 	    <div ng-repeat="token in tokens track by $index" style="padding:0px">
 	    	<div class="card" ng-click="cardDetailToggle(token)">
 			    <div style="padding:16px;">

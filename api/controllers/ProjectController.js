@@ -7,7 +7,6 @@ module.exports = {
 
 	getSome: function(req, res) {
 
-
 	    //QUERY LANGAUAGE. 
 	    var query = {
 	    	filter:[{

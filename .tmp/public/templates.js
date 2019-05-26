@@ -3397,11 +3397,48 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p>Connection Lattice and the Traversal Facet (inverted Facet)</p>\n" +
     "\n" +
+    "                <!--TOTAL ASSETS SPACE.. N SIZE MARKET.. TRAVERSAL PATHS-->\n" +
+    "\n" +
+    "                <!--NODES.. ASSETS.. OR COMBINAROTIALS-->\n" +
+    "                <!--EDGES.. GENERALIZED CONNECTIONS-->\n" +
+    "                <!--LINKS.. NUMBER OF 1D CONNECTIONS-->\n" +
+    "                    <!--AB-C: 1 EDGE; 3 LINKS; 2 FORWARD; 1 BACK-->\n" +
+    "\n" +
+    "                <!--'UNIT' VS MARKET-->\n" +
+    "                <!--<p><b>Combinatorial 2</b></p>-->\n" +
+    "                <!--2 nodes-->\n" +
+    "                <!--1 edge-->\n" +
+    "\n" +
+    "                <!--N-2-Combinatorial Market-->\n" +
+    "                <!--N nodes-->\n" +
+    "                <!--N(N−1)/2 Edges-->\n" +
+    "                <!--LINKS == EDGES-->\n" +
+    "\n" +
+    "                <!--(M COMBINATORIAL OF MARKET SIZE N)-->\n" +
+    "                <!--M-N-Combinatorial Market-->\n" +
+    "                <!--(NxM)/2 Nodes--> <!--WHAT IS THIS?? GENERALIZE IT :)-->\n" +
+    "                <!--STUDY-->\n" +
     "\n" +
     "                <p><b>Combinatorial 3</b></p>\n" +
     "                <p>A fully Connected 3-3-Combinatorial-Market</p>\n" +
+    "\n" +
+    "                <!--3-3-->\n" +
     "                <!--6 nodes-->\n" +
-    "                <!--15 edges; links-->\n" +
+    "                <!--15 edges--> \n" +
+    "                <!--links-->\n" +
+    "\n" +
+    "                <!--TODO!!!-->\n" +
+    "                <!--3-4-->\n" +
+    "                <!--HOW IS THIS RELATED TO 4 DECOMPOSE-->\n" +
+    "                <!--COMB 4 HAS 4-D CONNECTION-->\n" +
+    "                <!--4 combinatorial 3s-->\n" +
+    "                <!--...symmetry-->\n" +
+    "                <!--??? 24 NODES-->\n" +
+    "                <!--??? 60 EDGES-->\n" +
+    "\n" +
+    "                <!--3-5-->\n" +
+    "\n" +
+    "                <!--3-n-->\n" +
     "\n" +
     "                <span>Figure A</span>\n" +
     "                <img style=\"height:150px;\" src=\"images/comb3.png\">\n" +
@@ -3413,8 +3450,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <p><b>Combinatorial 4</b></p>\n" +
     "                <p>4 Asset MultiMarket Connection Lattice(s)﻿</p>\n" +
+    "\n" +
+    "                <!--4-4-->\n" +
     "                <!--16 nodes-->\n" +
-    "                <!---->\n" +
+    "                <!--24 edges-->\n" +
+    "                <!--links-->\n" +
+    "\n" +
+    "                <!--4-5-->\n" +
+    "                <!--4-n-->\n" +
+    "\n" +
     "                <img style=\"height:150px;\" src=\"images/comb4.png\">\n" +
     "                <img style=\"height:150px;\" src=\"images/comb4a.png\">\n" +
     "                <img style=\"height:150px;\" src=\"images/comb4b.png\">\n" +
@@ -3422,11 +3466,30 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <!--<p><b>Combinatorial 5</b></p>\n" +
-    "                <div class=\"spacing-10\"></div>-->\n" +
+    "                <!--\n" +
+    "                <p><b>Combinatorial 5</b></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <!--5-5-->        \n" +
+    "                <!--nodes-->\n" +
+    "                <!--edges-->\n" +
+    "                <!--links-->\n" +
+    "\n" +
+    "                <!--5-6-->   \n" +
+    "\n" +
+    "                <!--HMMMMM!!! GOALS-->     \n" +
+    "                <!--5-7-->   \n" +
+    "\n" +
+    "                <!--5-N-->        \n" +
     "\n" +
     "                <p><b>Combinatorial N</b></p>\n" +
     "                <p>Higher Dimensional Combinatorials</p>\n" +
+    "\n" +
+    "                <!--(M COMBINATORIAL OF MARKET SIZE N)-->\n" +
+    "                <!--M-N-Combinatorial Market-->\n" +
+    "                <!--(NxM)/2 Nodes--> <!--WHAT IS THIS?? GENERALIZE IT :)-->\n" +
+    "                <!--STUDY-->\n" +
     "\n" +
     "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B'])\">2</a>\n" +
     "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C'])\">3</a>\n" +
@@ -3449,6 +3512,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        width:100%;\n" +
     "                    }\n" +
     "                </style>\n" +
+    "\n" +
+    "                <!--SINGLE COMBINATORIAL EXPLORATIONS-->\n" +
+    "                <!--SET OF COMB OBJECTS IN N SPACE-->\n" +
     "\n" +
     "                <!--MAP COMP 5 -> COMP 7-->\n" +
     "                <!--HOW MANY 5 in 7?-->\n" +
@@ -3482,7 +3548,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "                <h5>Layered Deep Learning</h5>\n" +
@@ -3490,12 +3555,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "\n" +
     "                <!--TODO..-->\n" +
     "\n" +
-    "                <!--<p><b>Investment and Generalized Portfolio Allocation</b></p>\n" +
+    "                <!--\n" +
+    "                <p><b>Investment and Generalized Portfolio Allocation</b></p>\n" +
     "                <p>Capital Asset Pricing Model..</p>\n" +
-    "                `E(R_i)=R_f+beta_i(E(R_m)-R_f)`-->\n" +
+    "                `E(R_i)=R_f+beta_i(E(R_m)-R_f)`\n" +
+    "                -->\n" +
     "\n" +
     "                <!--PROBABILITY DENSITY ANALYSIS-->\n" +
     "                \n" +
@@ -4266,9 +4332,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    <div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div class=\"container\" style=\"width:100%\">>\n" +
+    "                                <div class=\"container\" style=\"width:100%\">\n" +
     "                                    <h1 ng-click=\"$event.stopPropagation();\" style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"content/{{item.id}}\">{{item.title}}</a></h1>\n" +
-    "                                    <!--<h5 style=\"color:white\">Content</h5>-->\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -5096,9 +5161,21 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<!--PLURALIST POSTIONS ON A 'SINGLE' ASSET | [a, a+future+time, a+etc]-->\n" +
     "\n" +
     "		    <div class=\"card\">\n" +
+    "\n" +
+    "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "				    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "				        	<div class=\"container\">\n" +
+    "					            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Market</h1>\n" +
+    "					        </div>\n" +
+    "				        </div>\n" +
+    "				    </div>\n" +
+    "				</div>\n" +
+    "\n" +
     "				<div style=\"padding:16px\">\n" +
     "\n" +
     "					<!--NG REPEAT | MULTIPLE CARDS-->\n" +
+    "					<p><b>Tokens</b></p>\n" +
     "		    		<p><b><a href=\"token/{{token.string}}\">{{token.string}}</a></b></p>	\n" +
     "\n" +
     "					<div class=\"spacing-5\"></div>\n" +
@@ -5109,7 +5186,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "					<p><b>Information</b></p>\n" +
     "\n" +
-    "					<p style=\"font-style:italic;color:gray\">Associated Action: <a href=\"{{modelToken.model.toLowerCase()}}/{{modelToken.id}}\">{{modelToken.model}}</a></p>\n" +
+    "					<p style=\"font-style:italic;color:gray\" ng-if=\"{{modelToken.model}}\">Associated Action: <a href=\"{{modelToken.model.toLowerCase()}}/{{modelToken.id}}\">{{modelToken.model}}</a></p>\n" +
     "					<p style=\"font-style:italic;color:gray\">In Circulation: {{token.information.inCirculation}}</p>\n" +
     "					<p style=\"font-style:italic;color:gray\">Markets: {{markets.length}}</p>\n" +
     "					<div class=\"spacing-5\"></div>\n" +
@@ -5142,7 +5219,8 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "	    	</div>	\n" +
     "		</div>\n" +
     "\n" +
-    "		<div class=\"col-md-8\" style=\"max-height:110vh;overflow:scroll;padding-left:0px;padding-right:0px;\">\n" +
+    "		<!--<div class=\"col-md-8\" style=\"max-height:110vh;overflow:scroll;padding-left:0px;padding-right:0px;\">-->\n" +
+    "		<div class=\"col-md-8\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "			<div class=\"spacing-5\"></div>\n" +
     "			<ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
@@ -5156,19 +5234,19 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div ng-show=\"selectedTab=='MARKET'\">\n" +
     "		        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button></div>\n" +
     "			    <div class=\"card\" ng-repeat=\"market in markets\" ng-click=\"renderToggle(market)\">\n" +
+    "				    <div style=\"background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "				    	<div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "					        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "					        	<div class=\"container\">\n" +
+    "						            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" ng-click=\"$event.stopPropagation();\" href=\"market/{{stateParams.id}}/{{market.string}}\">{{market.string}}</a></h1>\n" +
+    "						        </div>\n" +
+    "					        </div>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "			    	<div style=\"padding:16px;\">\n" +
     "						<div class=\"row\">\n" +
-    "				    		<div class=\"col-sm-6\">\n" +
-    "				    			<a ng-click=\"$event.stopPropagation();\" href=\"market/{{stateParams.id}}/{{market.string}}\">\n" +
-    "				    				<h4>{{market.string}}</h4>\n" +
-    "				    			</a>\n" +
-    "				    		</div>\n" +
-    "							<div class=\"col-sm-6\" style=\"text-align:right\">\n" +
-    "								<span style=\"text-align:right;\">{{market.info.rate}}</span>\n" +
-    "				    		</div>\n" +
-    "						</div>\n" +
-    "						<div class=\"row\">\n" +
     "				    		<div class=\"col-sm-12\">\n" +
+    "								<p style=\"color:gray;font-size:10px\">{{market.info.rate}}</p>\n" +
     "				    			<p style=\"color:gray;font-size:10px\">{{market.info.dailyChange}} 24/hr Change</p>\n" +
     "								<p style=\"color:gray;font-size:10px\">{{market.info.marketDepth}} {{stateParams.id}} Depth</p>\n" +
     "							</div>\n" +
@@ -5207,8 +5285,16 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<!--MANIFOLD-->\n" +
     "			<div ng-show=\"selectedTab=='MANIFOLD'\">\n" +
     "				<div class=\"card\" ng-repeat=\"item in manifolds\">\n" +
+    "					<div style=\"background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "				    	<div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "					        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "					        	<div class=\"container\">\n" +
+    "						            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "						        </div>\n" +
+    "					        </div>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "				    <div style=\"padding:16px\">\n" +
-    "				    	<h4>{{item.title}}</h4>\n" +
     "				    	<p>{{item.manifolds}}</p>\n" +
     "				    </div> \n" +
     "				</div>\n" +
@@ -5218,18 +5304,38 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div ng-show=\"selectedTab=='ANALYSIS'\">\n" +
     "\n" +
     "				<div class=\"card\">\n" +
+    "					<div style=\"background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code')\" class=\"imageContainerSmall\">\n" +
+    "					    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "					        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "					        	<div class=\"container\">\n" +
+    "						            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Market Analysis</h1>\n" +
+    "						        </div>\n" +
+    "					        </div>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "					<div style=\"padding:16px\">\n" +
-    "						<h4>Market Analysis</h4>\n" +
     "						<p>Size: {{markets.length}}</p>\n" +
     "						<p>Rank: {{stateParams.id.split(',').length}}\n" +
     "						<p>Highest Dimension: 7</p>\n" +
     "						<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>\n" +
     "						<nvd3 options=\"graphOptions\" data=\"graphDataPower\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "\n" +
+    "						<style>.ngCytoscape{height: 500px;width:100%;}</style>\n" +
+    "                		<cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\" graph-ready=\"graphReady\"></cytoscape>\n" +
+    "\n" +
     "		    		</div>\n" +
     "		    	</div>\n" +
     "		    	<div class=\"card\">\n" +
+    "		    		<div style=\"background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code')\" class=\"imageContainerSmall\">\n" +
+    "					    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "					        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "					        	<div class=\"container\">\n" +
+    "						            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Lattice Analysis</h1>\n" +
+    "						        </div>\n" +
+    "					        </div>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "					<div style=\"padding:16px\">\n" +
-    "						<h4>Lattice Analysis</h4>\n" +
     "			    		<p>Computed Lattice Neighborhood</p>\n" +
     "			    		<!--COMBINITORIALS SERVED FIRST-->\n" +
     "			    		<!--DEPTH OF THE COMBINITORIAL SPACES-->\n" +
@@ -5241,12 +5347,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "						<!--VALUE TENSOR NETWORK-->\n" +
     "					</div>\n" +
     "		    	</div>\n" +
-    "			    <!--<div class=\"card\">\n" +
-    "					<div style=\"padding:16px;\">\n" +
-    "						<h4>Value Vector</h4>\n" +
-    "						<highchart config=\"chartMap\"></highchart>\n" +
-    "					</div>\n" +
-    "				</div>-->\n" +
+    "		\n" +
     "			</div>\n" +
     "\n" +
     "	    </div>\n" +
@@ -5535,9 +5636,19 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	            </div>\n" +
     "	        </form>\n" +
     "	    </div>\n" +
+    "\n" +
     "	    <div class=\"card\" ng-if=\"false\">\n" +
     "			<nvd3 options=\"graphOptions\" data=\"graphDataPower\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "			<nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "			<style>\n" +
+    "                .ngCytoscape{\n" +
+    "                    height: 80vh;\n" +
+    "                    width:100%;\n" +
+    "                }\n" +
+    "            </style>\n" +
+    "            <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\"></cytoscape>\n" +
     "	    </div>\n" +
+    "	    \n" +
     "	    <div ng-repeat=\"token in tokens track by $index\" style=\"padding:0px\">\n" +
     "	    	<div class=\"card\" ng-click=\"cardDetailToggle(token)\">\n" +
     "			    <div style=\"padding:16px;\">\n" +

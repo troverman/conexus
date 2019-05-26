@@ -32,33 +32,13 @@ angular.module( 'conexus.marketPair', [
     titleService.setTitle('Market | ' + $stateParams.setAlpha + ' | ' +  $stateParams.setBeta  + ' | CRE8.XYZ');
 
     $scope.contentList = contentList;
-
     $scope.market = $stateParams.setAlpha;
     $scope.market1 = $stateParams.setBeta;
-
-    $rootScope.market = $stateParams.setAlpha;
-    $rootScope.market1 = $stateParams.setBeta;
-    
     $scope.newContent = {};
     $scope.newReaction = {};
-
     $scope.pluralistic = false;
-    if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){
-        $scope.pluralistic = true;
-    }
-
+    if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){$scope.pluralistic = true;}
     $scope.selectedType = 'ONBOOKS';
-
-    //HMM
-    $rootScope.associatedModels = [{type:'MARKETPAIR',address:$stateParams.setAlpha+' | '+$stateParams.setBeta}]
-
-    //coordinates on the quasicrystal 
-    //100Transparency + 50education + 75universal = 0.01CRE8 + 0.05novo 
-    //100Transparency + 35education + 85universal = 0.01CRE8 + 0.05novo 
-    //[]=[]
-    //easy postion is an equation
-    //set of postions / equations 
-    //TRANSLATE SETS OF EQUATIONS TO DIMENSIOANL OBJ
 
     //TODO: BETTER
     $scope.mirrorOrders = mirrorOrders;
@@ -69,13 +49,17 @@ angular.module( 'conexus.marketPair', [
         if ($scope.mirrorOrders[index].amountSet1){$scope.mirrorOrders[index].amountSet1 = $scope.mirrorOrders[index].amountSet1.split(',');}
     });
 
+    //TODO: MARKETPAIROBJ
     $scope.percentChange = Math.random()*10;
     $scope.marketDepth = Math.random()*100000;
 
+    //TODO: BETTER
+    $rootScope.associatedModels = [{type:'MARKETPAIR',address:$stateParams.setAlpha+' | '+$stateParams.setBeta}]
+    $rootScope.market = $stateParams.setAlpha;
+    $rootScope.market1 = $stateParams.setBeta;
+
     $scope.bidAskChart = {
-        chart: {
-            zoomType: 'x',
-        },
+        chart: {zoomType: 'x'},
         legend:{enabled:true},
         title: {text: null},
         xAxis: {title: {text: null}},
@@ -103,9 +87,7 @@ angular.module( 'conexus.marketPair', [
     };
 
 	$scope.chart = {
-        chart: {
-            zoomType: 'x',
-        },
+        chart: {zoomType: 'x'},
         series: [],
         title: {text: ''},
         xAxis: {
@@ -117,9 +99,7 @@ angular.module( 'conexus.marketPair', [
             gridLineWidth: 0.5,
             gridLineColor: 'grey'
         },
-        yAxis: [{
-            title: {text: null},
-        }],
+        yAxis: [{title: {text: null}}],
         credits:{enabled:false},
     };
 
@@ -163,54 +143,46 @@ angular.module( 'conexus.marketPair', [
             lineWidth: 0,
             min: 0,
         },
-        legend: {
-            enabled: false,
-            //align: 'right',
-            //verticalAlign: 'top',
-            //y: 70,
-            //layout: 'vertical'
-        },
-        tooltip: {
-        //    shared: true,
-        },
+        legend: {enabled: false},
+        tooltip: {},
         credits:{enabled:false},
     };
 
+
+
+
+
+
+
+
     //POPULATE CHART MAP MARKET PLURALITY
-    //POPULATE MULTID SPIDER IF PAIRS ARE SETS
     $scope.markets = $scope.market.split(',');
     $scope.markets1 = $scope.market1.split(',');
-    console.log($scope.markets,$scope.markets1);
+    
+    //TODO: REAL ORDERS
+    //TODO: PLURALISTIC
     if ($scope.markets.length>1){
-        //need real market orders
         for (x in $scope.markets){
             $scope.chartMap.xAxis[0].categories.push($scope.markets[x]);
             $scope.chartMap.series[0].data.push(Math.random()*1);
         }
-
     }
     if ($scope.markets1.length>1){
        for (x in $scope.markets1){
-        console.log($scope.markets1[x])
             $scope.chartMap.xAxis[1].categories.push($scope.markets1[x]);
             $scope.chartMap.series[1].data.push(Math.random()*1);
         }
     }
-    console.log($scope.chartMap)
 
     //POPULATE ORDER BOOK
     if (orders.length == 0){
         for(var i=-1000;i<1000;i++){
-            if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}//$scope.bidAskChart.series[0].data.push([i+100000,0])}
-            if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}//$scope.bidAskChart.series[1].data.push([i+100000,0])}
-
-            //[1000,1000000],[100,10000],[10,1000],[1,100],[200,2],[220,1],[30,1]
-            //$scope.bidAskChart.series[0].data.push([i,i*i])
-            //$scope.bidAskChart.series[1].data.push([i,i*i])
+            if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
+            if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
         }
     }
 
-    //POPULATE PRICE CHART
+    //TODO: PLURALISM VIZULATION
     if (!$scope.pluralistic){
         $scope.chart.series = [{
             id: 'ExchangePrice',
@@ -261,12 +233,10 @@ angular.module( 'conexus.marketPair', [
             }
         }
     }
-
     if ($scope.pluralistic){
         for (x in $scope.markets1){
 
-            //POWER SET NOT JUST INDIV MARKETS
-            //for (y in $scope.markets){}
+            //TODO: POWER SET NOT JUST INDIV MARKETS
             $scope.chart.series.push({
                 id: 'ExchangePrice'+x,
                 type: 'spline',
@@ -276,27 +246,26 @@ angular.module( 'conexus.marketPair', [
             for(var i=0;i<1000;i++){
                 var date = new Date();
                 date.setTime(date.getTime() - (60*60*1000*(1000-i)));
-                if (i == 0){
-                    $scope.chart.series[x].data.push([date.getTime(),Math.floor(150*Math.random())])
-                }
+                if (i == 0){$scope.chart.series[x].data.push([date.getTime(),Math.floor(150*Math.random())])}
                 else{
                     var random = 1.21*Math.random();
                     var random1 = Math.random();
-                    if (random > random1){
-                        $scope.chart.series[x].data.push([date.getTime(),$scope.chart.series[x].data[i-1][1]+3*Math.random()])
-                    }
-                    else{
-                        $scope.chart.series[x].data.push([date.getTime(),$scope.chart.series[x].data[i-1][1]-3*Math.random()])
-                    }
+                    if (random > random1){$scope.chart.series[x].data.push([date.getTime(),$scope.chart.series[x].data[i-1][1]+3*Math.random()])}
+                    else{$scope.chart.series[x].data.push([date.getTime(),$scope.chart.series[x].data[i-1][1]-3*Math.random()])}
                 }
             }
             
         }
     }
-    if ($scope.market.split(',').length > 1 && $scope.market1.split(',').length > 1){
-        //COORDINATES
+    if ($scope.market.split(',').length > 1 && $scope.market1.split(',').length > 1){}
 
-    }
+
+
+
+
+
+
+
 
     $scope.newOrder = {};
     $scope.orders = orders;
@@ -310,7 +279,8 @@ angular.module( 'conexus.marketPair', [
     $scope.newOrder.identiferSet1 = $scope.stateParams.setBeta;
     $scope.trades = {};
 
-    //TODO | COLOR FLIP?
+
+
     //TODO | REFACTOR INTO orderBook {} | .bids, .asks
 
     //OrderBook ~ []
@@ -319,17 +289,18 @@ angular.module( 'conexus.marketPair', [
     //['CRE8']['USD']['8888.8888'] = Positions Array []
     //bracket? ^ faces a query problem | event sorting? -- limit the query by event logs. good. 
     //bidAskChart[price][amount]
+
     var orderObj = {}
     if (orders.length > 0){
         for (x in orders){
+
             //TODO: MULTI D SET | Price
             //[a,b,c] = [d,e,f]
             //[1,2,3] = [4,5,6]
             //[1a,2b,3c] = [4d,5e,6f] --> what manifolds does this create? 
             //(1a+2b+3c) = (4d+5e+6f) | a = 4d+5e+6f-2b-3c.., b = (4d+5e+6f-a-3c)/2.., c = (4d+5e+6f-a-2b)/3
             //MD IS THE MANIFORLD CREATOR.. WHY PPL SHOULD BE EXCITED ABOUT ARRAY EXCHANGE. IT IS FUNCTIONAL | MANIFOLD
-            //ITS HUGE TO STAKE YOU VALUE MAPS IN TERMS OTHERS | EQUALITY DOMINA IS VASTLY EXPONENTIATED | HIGHER DIMENSIONAL POSITIONS
-
+            //ITS HUGE TO STAKE YOUR VALUE MAPS IN TERMS OTHERS | EQUALITY DOMAIN IS VASTLY EXPONENTIATED | HIGHER DIMENSIONAL POSITIONS
             //[a,b,c] = [d,e,f]
             //[2,2,3] = [5,5,6]
             //SCALABLE ALGEBRA | INTERWOVEN | SETS OF EQUATIONS | MD SET MARKETS AS SYSTEMS OF EQUATIONS
@@ -340,6 +311,21 @@ angular.module( 'conexus.marketPair', [
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //TODO: REFACTOR && REDUCE
     var mirrorOrderObj = {};
     if (mirrorOrders.length > 0){
         for (x in mirrorOrders){
@@ -349,49 +335,30 @@ angular.module( 'conexus.marketPair', [
         }
     }
 
+    //TODO: REFACTOR && REDUCE
     var orderArray = [];
-    for (var item in orderObj) {
-        orderArray.push([parseFloat(item), orderObj[item]]);
-    }
-
+    for (var item in orderObj) {orderArray.push([parseFloat(item), orderObj[item]]);}
     var mirrorOrderArray = [];
-    for (var item in mirrorOrderObj) {
-        mirrorOrderArray.push([parseFloat(item), mirrorOrderObj[item]]);
-    }
+    for (var item in mirrorOrderObj) {mirrorOrderArray.push([parseFloat(item), mirrorOrderObj[item]]);}
 
-    //TODO SUM RENDER
-    //TODO SORT OBJECTS
-
+    //TODO: SUM RENDER
+    //TODO: SORT OBJECTS
+    //TODO: REFACTOR && REDUCE
     orderArray = orderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
     mirrorOrderArray = mirrorOrderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
 
-    console.log(mirrorOrderArray)
-
     $scope.sumOrders = [];
-    orderArray.reduce(function(a,b,i) {
-        return $scope.sumOrders[i] = parseFloat(a) + parseFloat(b[1]);
-    }, 0);
-
+    orderArray.reduce(function(a,b,i) {return $scope.sumOrders[i] = parseFloat(a) + parseFloat(b[1]);}, 0);
     $scope.sumMirrorOrders = [];
-    mirrorOrderArray.reverse().reduce(function(a,b,i) {
-        return $scope.sumMirrorOrders[i] = parseFloat(a) + parseFloat(b[1]);
-    }, 0);
+    mirrorOrderArray.reverse().reduce(function(a,b,i) {return $scope.sumMirrorOrders[i] = parseFloat(a) + parseFloat(b[1]);}, 0);
 
-    console.log(mirrorOrderArray, $scope.sumMirrorOrders)
-
-    for(x in orderArray){
-        $scope.bidAskChart.series[0].data.push([parseFloat(orderArray[x][0]), $scope.sumOrders[x]]);
-    }
-
-    for(x in mirrorOrderArray){
-        $scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);
-    }
-
+    for(x in orderArray){$scope.bidAskChart.series[0].data.push([parseFloat(orderArray[x][0]), $scope.sumOrders[x]]);}
+    for(x in mirrorOrderArray){$scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);}
     $scope.bidAskChart.series[1].data.reverse();
     $scope.bidAskChart.series.reverse();
 
-    console.log($scope.bidAskChart.series[0].data, $scope.bidAskChart.series[1].data);
 
+    //TODO: DEPRECIATE -- MOVE TO NAV
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
@@ -412,23 +379,20 @@ angular.module( 'conexus.marketPair', [
         else{$mdSidenav('login').toggle();}
     };
    
+    //TODO: DEPRECIATE -- MOVE TO NAV
     $scope.invertMarket = function() {
-        //$scope.market = [$scope.market, $scope.market = $scope.market1][0];
         var temp = $scope.newOrder.identiferSet;
         $scope.newOrder.identiferSet = $scope.newOrder.identiferSet1;
         $scope.newOrder.identiferSet1 = temp;
-        console.log($scope.newOrder)
         $scope.inverted = !$scope.inverted;
-        //$scope.$apply();
     };
 
+    //TODO: DEPRECIATE
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
-    $scope.selectType = function(type){
-        $scope.selectedType = type;
-    };
+    $scope.selectType = function(type){$scope.selectedType = type;};
     
 }]);
