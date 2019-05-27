@@ -26,19 +26,29 @@
         <div class="spacing-50"></div>
         <div class="row">
             <div class="col-xs-12 col-sm-7">
-                <h3>APPS</h3>
-                <h5>Apps and Token Protocols</h5>
-                <p style="color:gray;font-style:italic">Apps are plugins to the string space and add to the domain of tokenized systems of intention; how can we create an eglatarian world through tokenization?</p>
-                <p style="color:gray;font-style:italic">By openeing up the intention of system design, we capture a larger design space.</p>
-                <p style="color:gray;font-style:italic">Apps are a bundle of protocols. App design is modular.</p>
-                <p style="color:gray;font-style:italic">See the <a href="/developers">documentation</a> to learn more.</p>
-                <!--<a class="btn btn-default log-btn" href="/developers">documentation</a>-->
+                <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div class="container">
+                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">APPS</h1>
+                                <h5 style="color:white">Apps and Token Protocols</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="spacing-25"></div>
+                <!--<p style="color:gray;font-style:italic">Apps are a set of modular protocols and add to a domain of intentional tokenized systems.</p>-->
+                <!--<p style="color:gray;font-style:italic">Apps are plugins to the string space and add to the domain of intentional tokenized systems.</p>-->
+                <p style="color:gray;font-style:italic">Apps are a set of modular protocols and plugins to the string space. Apps add to the domain of tokenized systems of intention.</p>
+                <p style="color:gray;font-style:italic">By allowing for application design, we capture a larger design space.</p>
+                <p style="color:gray;font-style:italic">How can we create an eglatarian world through tokenization?</p>
+                <!--<p style="color:gray;font-style:italic">Apps are a set of modular protocols in which app design itself is modular.</p>-->
+                <p style="color:gray;font-style:italic">See the <a href="/developers"><b>documentation</b></a> to learn more.</p>
             </div>
             <div class="col-xs-5 col-sm-5">
                 <img src="images/app.gif">
-                <!--<img src="images/app2.gif">
-                <img src="images/app4.gif">-->
             </div>
+
         </div>
         <div class="spacing-50"></div>
     </div>
@@ -62,12 +72,12 @@
             </form>
         </div>
         <div class="card">
-            <button class="btn btn-default log-btn" ng-click="projectToggle()">+ App</button>
+            <button class="btn btn-default log-btn" ng-click="appToggle()">+ App</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
-            <div class="card" ng-click="renderToggle(app)" style="height:150px">
+        <div class="col-lg-6 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
+            <div class="card" ng-click="cardDetailToggle(app)" style="height:150px">
                 <div style="padding:16px;">
                     <div style="float:right">
                         <i ng-click="cardDetailToggle()" class="fa fa-ellipsis-v"></i>

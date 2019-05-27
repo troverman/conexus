@@ -86,6 +86,21 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //ROOT FUNCTIONS
+    $rootScope.appToggle = function(){
+        $scope.closeAllNav();
+
+        $scope.newApp = {};
+
+        $scope.newProtocol = {};
+        $scope.newProtocol.associatedProtocols = [{text:'888 STRUCTURE'},{text:'TOKEN LANGUAGE STRUCTURE'},{text:'CRE8 MEMBER'}];
+        $scope.newProtocol.title = 'New Protocol';
+        $scope.newProtocol.code = 'function sampleCode(sampleParameter){}';
+
+        if($rootScope.currentUser){$mdSidenav('app').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
     $rootScope.contentToggle = function(){
         $scope.closeAllNav();
         if($rootScope.currentUser){

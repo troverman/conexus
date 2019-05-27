@@ -317,7 +317,7 @@ angular.module( 'conexus.market', [
         hideEdgesOnViewport:true
     };
     $scope.layout = {name: 'random'};
-    $scope.style1 = [
+    $scope.style = [
         {
           "selector": "core",
           "style": {
@@ -499,14 +499,21 @@ angular.module( 'conexus.market', [
                         group:'edges',
                         data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
                     };
-                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                    //$scope.elementsObj[stringX+'-'+stringY] = modelEdge;
                 }
             }
         }
-        //cytoData.getGraph().then(function(graph){
-        //    $scope.graph.layout({
-        //    }).run();
-        //});
+        cytoData.getGraph().then(function(graph){
+            console.log(graph)
+            $scope.graph = graph;
+            $scope.graph.layout({
+                name: 'cola',
+                infinite: true,
+                fit: false
+            }).run();
+        });
+        console.log($scope.elementsObj);
+
     };
     $scope.combinatorialGenerator();
 
@@ -533,7 +540,7 @@ angular.module( 'conexus.market', [
             }
         }
     };
-    $scope.powerSetGenerator();
+    //$scope.powerSetGenerator();
 
     //RECURSIVE TRAVERSAL
     function traverse(n, depth){
@@ -550,7 +557,7 @@ angular.module( 'conexus.market', [
             traverse(n, depth);
         }
     };
-    traverse(0, $scope.markets.length);
+    //traverse(0, $scope.markets.length);
 
 
 
