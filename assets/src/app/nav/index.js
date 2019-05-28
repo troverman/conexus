@@ -500,7 +500,16 @@ angular.module( 'conexus.nav', [
         }
     };
 
+
+
+    //TODO!!!
     $rootScope.renderValidationToggle = function(item){
+        
+
+
+
+
+
         $scope.closeAllNav();
         $scope.item = item;
 
@@ -610,7 +619,20 @@ angular.module( 'conexus.nav', [
         });
     
         $mdSidenav('renderValidation').toggle();
+
+
+
+
+
+
+        
     };
+
+
+
+
+
+
 
     //MEMBER CARD TOGGLE | TODO RENAME
     $rootScope.renderReputationToggle = function(item){

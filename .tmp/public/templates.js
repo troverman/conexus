@@ -3978,8 +3978,19 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "<div style=\"padding-left:0px;padding-right:0px;\" class=\"footer\" ng-controller=\"FooterCtrl\">\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"footer-links\" style=\"padding:3px;float:none\">\n" +
+    "\n" +
+    "			<!--\n" +
+    "			<div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div>\n" +
+    "            </div>\n" +
+    "        	-->\n" +
+    "\n" +
     "			<div style=\"float:right\"><a href=\"/\"><img src=\"images/hyper.gif\"></a></div>\n" +
-    "			<!--<div style=\"float:right\"><a href=\"/\"><img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a></div>-->\n" +
+    "\n" +
+    "			<!--\n" +
+    "			<div style=\"float:right\"><a href=\"/\"><img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a></div>\n" +
+    "			-->\n" +
+    "\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\">CRE8.XYZ</a>\n" +
     "			<br>\n" +
     "			<a href=\"/about\">about</a>\n" +
@@ -5685,7 +5696,7 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "\n" +
     "			<div ng-repeat=\"item in items\">\n" +
     "		        <div class=\"card\" ng-click=\"renderToggle(item)\">\n" +
-    "		        	<div ng-click=\"$event.stopPropagation();cardDetailToggle(item)\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "		        	<div ng-click=\"$event.stopPropagation();cardDetailToggle(item)\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');\" class=\"imageContainerSmall\">\n" +
     "		                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "		                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "		                        <div class=\"container\">\n" +
@@ -5764,16 +5775,16 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "	        </form>\n" +
     "	    </div>\n" +
     "\n" +
-    "	    <div class=\"card\" ng-if=\"false\">\n" +
-    "			<nvd3 options=\"graphOptions\" data=\"graphDataPower\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
-    "			<nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "	    <div class=\"card\" ng-if=\"true\">\n" +
+    "			<!--<nvd3 options=\"graphOptions\" data=\"graphDataPower\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "			<nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>-->\n" +
     "			<style>\n" +
     "                .ngCytoscape{\n" +
-    "                    height: 80vh;\n" +
+    "                    height: 500px;\n" +
     "                    width:100%;\n" +
     "                }\n" +
     "            </style>\n" +
-    "            <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\"></cytoscape>\n" +
+    "            <!--<cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\"></cytoscape>-->\n" +
     "	    </div>\n" +
     "	    \n" +
     "	    <div ng-repeat=\"token in tokens track by $index\" style=\"padding:0px\">\n" +
@@ -7055,7 +7066,7 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "            <div style=\"padding:16px;\">\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-sm-12\"><highchart config=\"totalMap\"></highchart></div>\n" +
-    "                    <div class=\"col-sm-12\"><highchart config=\"pieMap\"></highchart></div>\n" +
+    "                    <!--<div class=\"col-sm-12\"><highchart config=\"pieMap\"></highchart></div>-->\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -7672,7 +7683,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <a style=\"font-size:24px;color:white\" href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a>\n" +
     "                                </h1>\n" +
-    "                                <h5 style=\"color:white\">{{currentUser.id}}</h5>\n" +
+    "                                <h5 style=\"color:white;font-size:12px;\"><a href=\"#\" ng-click=\"\" style=\"color:white\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -7682,25 +7693,30 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div>\n" +
     "                <form style=\"padding:15px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
     "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"\">\n" +
+    "                        <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\">\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div>\n" +
-    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\">About</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" ng-click=\"cre8Toggle()\" class=\"nav-links\" style=\"padding:12px;\"><a>CRE8</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/discover\">Discover</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\">Market</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\">Marketplace</a></h2>\n" +
-    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/projects\">Projects</a></h2>\n" +
+    "            <div style=\"max-height:100vh;overflow:hidden\">\n" +
+    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:16px;\"><a href=\"/about\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-plus\"></i> About</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" ng-click=\"cre8Toggle()\" class=\"nav-links\" style=\"padding:12px;\"><a><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-plus\"></i> CRE8</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-globe\"></i> <a href=\"/discover\">Discover</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/market\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-poll-h\"></i> Market</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/marketplace\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-circle-notch\"></i> Marketplace</a></h2>\n" +
+    "                <h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/projects\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-users\"></i> Projects</a></h2>\n" +
     "                <!--<h2 class=\"nav-links\" style=\"padding:12px;\"><a href=\"/tasks\">Tasks</a></h2>-->\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/notifications\"><span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/account\">Settings</a></h2>\n" +
-    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/logout\">Logout</a></h2>\n" +
-    "                <h2 ng-click=\"loginToggle()\" ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a>Login</a></h2>\n" +
-    "                <h2 ng-show=\"!currentUser\"class=\"nav-links\" style=\"padding:12px;\"><a href=\"/register\">Register</a></h2>\n" +
-    "                <a href=\"/\"><img style=\"width:200px\" src=\"images/hyper.gif\"></a>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/notifications\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-envelope\"></i> <span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/account\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-cogs\"></i> Settings</a></h2>\n" +
+    "                <h2 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/logout\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-sign-out-alt\"></i> Logout</a></h2>\n" +
+    "                <h2 ng-click=\"loginToggle()\" ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-sign-in-alt\"></i> Login</a></h2>\n" +
+    "                <h2 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:12px;\"><a href=\"/register\"><i ng-if=\"false\" style=\"color:white\" class=\"fas fa-user-plus\"></i> Register</a></h2>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div>\n" +
+    "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -8146,6 +8162,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <!--TODO: GRAPH-->\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-md-6\">\n" +
     "                        <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +

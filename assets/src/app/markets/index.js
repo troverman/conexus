@@ -270,6 +270,8 @@ angular.module( 'conexus.markets', [
         }
     }
 
+
+    //DO A RECURSIVE MAPPING SOON
     $scope.populateElement = function(){
         for (x in $scope.tokens){
             var model = {
@@ -287,7 +289,55 @@ angular.module( 'conexus.markets', [
             }).run();
         });
     };
-    $scope.populateElement();
+    //$scope.populateElement();
+
+    $scope.elementsObj = {};
+    $scope.combinatorialGenerator = function(model){
+        $scope.elementsObj = {};
+        var powerSet = [];
+        if (model){powerSet = getAllSubsets(model);}
+        else{powerSet = getAllSubsets(['A','B','C','D','E'])}
+        powerSet.shift();powerSet.pop();
+        for (x in powerSet){
+            var stringX = powerSet[x].join('');
+            var modelNode = {
+                group:'nodes',
+                data:{id:stringX, type:stringX, name:stringX}
+            };
+            $scope.elementsObj[stringX] = modelNode;
+            for (y in powerSet){
+                var stringY = powerSet[y].join('');
+                var found = stringY.split('').some(function(obj){
+                    return stringX.split('').includes(obj);
+                });
+                if (!found){
+                    var modelEdge = {
+                        group:'edges',
+                        data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+                    };
+                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                }
+            }
+        }
+        cytoData.getGraph().then(function(graph){
+            $scope.graph = graph;
+            $scope.graph.layout({
+                name: 'grid',
+                infinite: true,
+                fit: false
+            }).run();
+        });
+    };
+    //$scope.combinatorialGenerator(['USD','ETH','BTC','CRE8']);
+
+
+
+
+
+
+
+
+
 
 
     //RECURSIVE TRAVERSAL
