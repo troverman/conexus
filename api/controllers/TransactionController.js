@@ -141,7 +141,21 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				res.json(models);
+				var promises = [];
+				for (x in models){
+					promises.push(getTo(models[x]));
+					promises.push(getFrom(models[x]));
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						models[x].to = populatedModels[sum];
+						sum++
+						models[x].from = populatedModels[sum];
+						sum++;
+					}
+					res.json(models);
+				});
 			});
 		}
 	},

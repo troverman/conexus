@@ -291,7 +291,7 @@
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.tags.slice(0,10) track by $index">
-                        <a href="#" ng-click="selectTag(item.element)">{{item.element}}</a>
+                        <a href="#" ng-click="selectTag(item.element)"><b>{{item.element}}</b></a>
                     </div>
                     <div class="spacing-10"></div>
 
@@ -300,7 +300,7 @@
                         <auto-complete source="loadAssociation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.associations.slice(0,10) track by $index">
-                        <a href="#" ng-click="selectAssociation(item.element)">{{item.element}}</a>
+                        <a href="#" ng-click="selectAssociation(item.element)"><b>{{item.element}}</b></a>
                     </div>
                     <div class="spacing-10"></div>
 
@@ -309,7 +309,7 @@
                         <auto-complete source="loadLocation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.locations.slice(0,10) track by $index">
-                        <a href="#" ng-click="selectLocation(item.element)">{{item.element.address}}</a>
+                        <a href="#" ng-click="selectLocation(item.element)"><b>{{item.element.address}}</b></a>
                     </div>
 
                     <div layout="">
