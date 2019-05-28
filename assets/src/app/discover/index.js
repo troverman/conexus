@@ -76,17 +76,19 @@ angular.module( 'conexus.discover', [
         return obj;
     });
 
-    function shuffle(a) {
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
+    function shuffleArray(d) {
+        for (var c = d.length - 1; c > 0; c--) {
+            var b = Math.floor(Math.random() * (c + 1));
+            var a = d[c];
+            d[c] = d[b];
+            d[b] = a;
         }
-        return a;
-    }
-
+        return d
+    };
+    
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time, $scope.transactions]);
     //$scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = shuffle($scope.activity);
+    $scope.activity = shuffleArray($scope.activity);
     $scope.activity = $scope.activity.slice(0,100);
     
     $scope.map = {
