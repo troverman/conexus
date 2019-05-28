@@ -45,77 +45,38 @@ angular.module( 'conexus.discover', [
 .controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'members', 'tasks', 'time', 'projects', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, contentList, members, tasks, time, projects ) {
 	
     $scope.contentList = contentList;
-    $scope.chart = {
-        chart: {
-            polar: true,
-            margin: [30, 30, 30, 30]
-        },
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {
-            enabled: false,
-        },
-        tooltip: {},
-        credits:{enabled:false},
-    };
-    $scope.chart1 = {
-        chart: {zoomType: 'x',},
-        series: [{
-            id: 'Expenses',
-            type: 'column',
-            name: 'Expenses USD',
-            data: []
-        },{
-            id: 'Revenue',
-            type: 'spline',
-            name: 'Revenue USD',
-            data: []
-        }],
-        title: {text: ''},
-        xAxis: {title: {text: null}},
-        yAxis: {title: {text: null}},
-        credits:{enabled:false},
-    };
-    for (var i = 0;i<40;i++){
-        $scope.chart1.series[0].data.push(100*Math.random());
-        $scope.chart1.series[1].data.push(100*Math.random());
-    }
 	$scope.map = {
 		center: {latitude: 35.902023, longitude: -84.1507067 },
 		zoom: 9
 	};
     $scope.markers = [];
 	$scope.members = members;
+    $scope.newLocation = {distance:0};
 	$scope.options = {scrollwheel: false};
 	$scope.projects = projects;
-	$scope.tasks = tasks;
+	
+    $scope.tasks = tasks;
     $scope.tasks.map(function(obj){
         obj.model='TASK';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
+
     $scope.time = time;
 	$scope.windowOptions = {visible: false};
+
+    $scope.searchQuery = {
+        associations:[
+            {text:'CRE8'}
+        ],
+        locations:[
+            {text:'My Location - 5 km'}
+        ],
+        tags:[
+            {text:'Art'},
+            {text:'City'}
+        ]
+    };
 
     //TODO: BETTER | BETTER QUERIES
     for (x in projects){

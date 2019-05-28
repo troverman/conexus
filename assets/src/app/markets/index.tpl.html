@@ -39,8 +39,16 @@
 	    
 	    <div ng-repeat="token in tokens track by $index" style="padding:0px">
 	    	<div class="card" ng-click="cardDetailToggle(token)">
+	    		<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" href="market/{{token.string}}" style="color:white">{{token.string}}</a></h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
 			    <div style="padding:16px;">
-			    	<a ng-click="$event.stopPropagation();" style="white-space: nowrap;" href="market/{{token.string}}"><h4>{{token.string}}</h4></a>
 			    	<p style="white-space: nowrap;color:gray">{{token.string}} markets</p>
 			    	<!--
 			    	<a style="white-space: nowrap;" href="market/{{market.string}}"><h4>{{market.string}}</h4></a>

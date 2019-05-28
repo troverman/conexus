@@ -374,8 +374,8 @@
                     <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
                     <p style="font-size:13px;"><a href="/member/{{currentUser.username}}/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
                     <div class="row">
-                        <div class="col-xs-6">
-                            <h5>Balance Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
+                        <div class="col-xs-12">
+                            <h5>Balance Mapping Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
                             <form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
                                 <input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
                                 <div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
@@ -386,6 +386,7 @@
                                 <h5><a href="market/{{balanceLook}}">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
                             </div>
                         </div>
+                        <!--
                         <div class="col-xs-6">
                             <h5>Reputation Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
                             <form ng-click="lookupReputation()" style="display:flex;flex-direction:row;">
@@ -398,6 +399,7 @@
                                 <h5><a href="market/{{reputationLook}}">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>
                             </div>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>

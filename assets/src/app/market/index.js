@@ -243,7 +243,10 @@ angular.module( 'conexus.market', [
         if (type="market"){$scope.markets.push($scope.newMarket.market)}
     };
     
-    $scope.selectTab = function(model){$scope.selectedTab = model;};
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+        //$scope.combinatorialGenerator();
+    };
 
     $scope.reply = function(item){
         var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
@@ -316,6 +319,7 @@ angular.module( 'conexus.market', [
         motionBlur: false,
         hideEdgesOnViewport:true
     };
+    $scope.layout = {name: 'grid', coolingFactor: 0, animate: true}; //cose, breadthfirst, concentric
     $scope.layout = {name: 'random'};
     $scope.style = [
         {
@@ -480,7 +484,7 @@ angular.module( 'conexus.market', [
         $scope.elementsObj = {};
         var powerSet = [];
         if (model){powerSet = getAllSubsets(model);}
-        else{powerSet = getAllSubsets(['A','B','C'])}
+        else{powerSet = getAllSubsets(['A','B','C','D','E'])}
         powerSet.shift();powerSet.pop();
         for (x in powerSet){
             var stringX = powerSet[x].join('');
@@ -499,15 +503,16 @@ angular.module( 'conexus.market', [
                         group:'edges',
                         data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
                     };
-                    //$scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
                 }
             }
         }
         cytoData.getGraph().then(function(graph){
             console.log(graph)
             $scope.graph = graph;
+            //$scope.graph.json($scope.elementsObj);
             $scope.graph.layout({
-                name: 'cola',
+                name: 'grid',
                 infinite: true,
                 fit: false
             }).run();
@@ -515,7 +520,7 @@ angular.module( 'conexus.market', [
         console.log($scope.elementsObj);
 
     };
-    $scope.combinatorialGenerator();
+    $scope.combinatorialGenerator(['USD','ETH','BTC','CRE8']);
 
     $scope.powerSetGenerator = function(model){
         var powerSet = getAllSubsets(['USD','ETH','BTC','LTC','CRE8']);

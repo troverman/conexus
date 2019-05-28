@@ -185,7 +185,7 @@
                     <div style="padding:0px" class="col-xs-4"><h5>First Name</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.firstName" placeholder="First Name" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Last Name</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.lastName" placeholder="Last Name" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Date Of Birth</h5><input type="date" ng-disabled="!consentAgreement" ng-model="newMember.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
-                    <div style="padding:0px" class="col-xs-4"><h5>Username</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.email" placeholder="Email" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-4"><h5>Username</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.username" placeholder="Email" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Email</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.email" placeholder="Email" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-4"><h5>Phone Number</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.phoneNumber" placeholder="Phone Number" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-12"><h5>Description</h5><text-angular ng-disabled="!consentAgreement" ng-model="newMember.description" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular></div>
@@ -236,20 +236,20 @@
                                     <a ng-show="false" href="{{currentUser.socialAccounts.google.profileUrl}}" target="_blank"><i class="fa fa-google google-icon"></i></a>
                                 </div>
                             </div>
+                            <div class="spacing-15"></div>
+                            <p style="color:gray;font-size:12px;font-style:italic">Is this correct?</p>
+                            <a ng-click="changePage(2)" class="btn btn-default log-btn"><b>Edit Information</b></a>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
+                            <h3>Value Map</h3>
                             <highchart config="chartMapTotal"></highchart>
-                        </div>
-                        <div class="col-xs-12">
-                            <div>
-                                <h3>Value Map</h3>
-                                <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
-                                <a ng-click="changePage(1)" class="btn btn-default"><b>Keep Creating?</b></a>
-                                <div class="" ng-repeat="order in newOrderNEW">
-                                    <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
-                                    <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
-                                </div>
+                            <div class="" ng-repeat="order in newOrderNEW">
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
                             </div>
+                            <div class="spacing-15"></div>
+                            <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
+                            <a ng-click="changePage(1)" class="btn btn-default log-btn"><b>Keep Creating</b></a>
                         </div>
                     </div>
                 </div>
