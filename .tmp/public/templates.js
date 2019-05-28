@@ -3670,12 +3670,13 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"spacing-10\"></div>\n" +
     "	    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "		    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "		   	<li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
+    "            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
     "		    <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "		</ul>\n" +
     "		<div style=\"clear:both\"></div>\n" +
@@ -3685,34 +3686,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "                <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\"><a  href=\"#\" role=\"button\"><h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5></a></div>\n" +
     "            </form>\n" +
     "	    </div>\n" +
-    "	    <div class=\"card\">\n" +
-    "			<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "			    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "			        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "			            <div>\n" +
-    "			                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
-    "			            </div>\n" +
-    "			        </ui-gmap-window>\n" +
-    "			    </ui-gmap-marker>\n" +
-    "			</ui-gmap-google-map>\n" +
-    "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"row\">\n" +
     "    	<div class=\"col-md-4\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "			\n" +
-    "			<!--\n" +
-    "			<div class=\"card\">\n" +
-    "		        <div style=\"padding:16px;\">\n" +
-    "				    <b><a href=\"/content\">Content</a></b>\n" +
-    "					<b><a href=\"/marketplace\">Items</a></b>\n" +
-    "					<b><a href=\"/members\">Members</a></b>\n" +
-    "					<b><a href=\"/market\">Orders</a></b>\n" +
-    "					<b><a href=\"/projects\">Projects</a></b>\n" +
-    "					<b><a href=\"/tasks\">Tasks</a></b>\n" +
-    "		        </div>\n" +
-    "		    </div>\n" +
-    "			-->\n" +
-    "\n" +
     "			<!--\n" +
     "			<div class=\"card\">\n" +
     "				<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
@@ -3726,9 +3702,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				</div>\n" +
     "			</div>\n" +
     "			-->\n" +
-    "\n" +
     "			<div class=\"card\">\n" +
-    "		    	<!--\n" +
     "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -3738,9 +3712,8 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				        </div>\n" +
     "				    </div>\n" +
     "				</div>\n" +
-    "				-->\n" +
     "		        <div style=\"padding:16px;\">\n" +
-    "		            <span><b>Tags</b></span>\n" +
+    "	        		<!--<span><b>Tags</b></span>-->\n" +
     "	                <tags-input style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery.tags\"></tags-input>\n" +
     "			        <div style=\"padding:16px;\">\n" +
     "			            <div ng-repeat=\"tag in sortedTagArray.slice(0,10) track by $index\">\n" +
@@ -3750,7 +3723,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		        </div>\n" +
     "		    </div>\n" +
     "		    <div class=\"card\">\n" +
-    "		    	<!--\n" +
     "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -3760,17 +3732,17 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				        </div>\n" +
     "				    </div>\n" +
     "				</div>\n" +
-    "				-->\n" +
     "		        <div style=\"padding:16px;\">\n" +
-    "		            <span><b>Associations</b></span>\n" +
+    "		            <!--<span><b>Associations</b></span>-->\n" +
     "	                <tags-input style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery.associations\"></tags-input>\n" +
-    "		            <div ng-repeat=\"association in sortedAssociationArray track by $index\">\n" +
-    "		                <a href=\"#\" ng-click=\"filterContent(association.element)\"><b>{{association.element}}</b></a>\n" +
+    "        			<div style=\"padding:16px;\">\n" +
+    "			            <div ng-repeat=\"association in sortedAssociationArray track by $index\">\n" +
+    "			                <a href=\"#\" ng-click=\"filterContent(association.element.text)\"><b>{{association.element.text}}</b></a>\n" +
+    "			            </div>\n" +
     "		            </div>\n" +
     "		        </div>\n" +
     "		    </div>\n" +
     "		    <div class=\"card\">\n" +
-    "		    	<!--\n" +
     "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?city,mountain,forest');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -3780,27 +3752,37 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				        </div>\n" +
     "				    </div>\n" +
     "				</div>\n" +
-    "				-->\n" +
     "		        <div style=\"padding:16px;\">\n" +
-    "			        <span><b>Locations</b></span>\n" +
+    "			        <!--<span><b>Locations</b></span>-->\n" +
     "	                <tags-input style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery.locations\"></tags-input>\n" +
-    "		            <div ng-repeat=\"location in sortedLocationArray track by $index\">\n" +
-    "		                <a href=\"#\" ng-click=\"filterContent(location.element)\"><b>{{location}}</b></a>\n" +
-    "		            </div>\n" +
-    "			        <div layout=\"\">\n" +
+    "	                <div layout=\"\">\n" +
     "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">Distance (km)</span></div>\n" +
     "	                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newLocation.distance\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "	                </div>\n" +
+    "        			<div style=\"padding:16px;\">\n" +
+    "			            <div ng-repeat=\"location in sortedLocationArray track by $index\">\n" +
+    "			                <a href=\"#\" ng-click=\"filterContent(location.element)\"><b>{{location}}</b></a>\n" +
+    "			            </div>\n" +
     "	                </div>\n" +
     "		        </div>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "    	<div class=\"col-md-8\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "	    	<div class=\"card\">\n" +
+    "				<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "				    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "				        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "				            <div>\n" +
+    "				                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "				            </div>\n" +
+    "				        </ui-gmap-window>\n" +
+    "				    </ui-gmap-marker>\n" +
+    "				</ui-gmap-google-map>\n" +
+    "			</div>\n" +
     "			<div ng-repeat=\"item in activity\">\n" +
-    "\n" +
-    "\n" +
     "				<div ng-if=\"item.model=='CONTENT'\" class=\"card\" ng-click=\"renderToggle(item)\">\n" +
-    "					<div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "	                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "					<div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "	                    <div style=\"background:rgba(0,0,0,0.75);height:100px;\" class=\"imageContainerSmallDiv\">  \n" +
     "	                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "	                            <div class=\"container\">\n" +
     "	                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"content/{{item.id}}\">{{item.title}}</h1>\n" +
@@ -3810,22 +3792,15 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	                </div>\n" +
     "			        <div style=\"padding:16px;\">\n" +
     "			            <div>\n" +
-    "\n" +
     "				        	<div style=\"float:right;text-align:right\">\n" +
     "	                            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "			                </div>\n" +
-    "\n" +
     "			                <a ng-click=\"$event.stopPropagation();\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">\n" +
     "				                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"images/avatar.png\">\n" +
     "			                	{{item.user.username}}\n" +
     "			                </a>\n" +
-    "\n" +
-    "			               	<!--TODO: ASSOCIATIONS-->\n" +
-    "\n" +
     "			                <p style=\"font-size:10px;color:gray;margin-left:42px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "			                \n" +
     "			            </div>\n" +
-    "\n" +
     "			            <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "			        </div>\n" +
     "			        <div class=\"card-footer\">\n" +
@@ -3841,8 +3816,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			            </form>\n" +
     "			        </div>\n" +
     "		    	</div>\n" +
-    "\n" +
-    "		    	<div class=\"card\" ng-if=\"item.model=='PROJECT'\" ng-click=\"cardDetailToggle(item)\">\n" +
+    "		    	<div ng-if=\"item.model=='PROJECT'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "                    <div style=\"padding:16px;\">\n" +
     "                        <div class=\"row\">\n" +
     "                            <div class=\"col-sm-1 col-xs-2\">\n" +
@@ -3861,13 +3835,13 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "				<div ng-if=\"item.model=='TASK'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "					<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "	                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "					<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "	                    <div style=\"background:rgba(0,0,0,0.75);height:100px;\" class=\"imageContainerSmallDiv\">  \n" +
     "	                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "	                            <div class=\"container\">\n" +
     "	                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.title}}</h1>\n" +
+    "	                                <h5 ng-if=\"false\" style=\"font-size:10px;\"><a style=\"color:white\" href=\"task/{{item.id}}\">{{item.id}}</a></h5>\n" +
     "	                            </div>\n" +
     "	                        </div>\n" +
     "	                    </div>\n" +
@@ -3887,14 +3861,11 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "						<a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" style=\"padding:0px\" class=\"pull-right\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "\n" +
     "				<div ng-if=\"item.model=='TRANSACTION'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "	                <div style=\"padding:16px\">\n" +
-    "\n" +
     "	                    <div style=\"float:right;text-align:right\">\n" +
     "	                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "	                    </div>\n" +
-    "\n" +
     "	                    <div style=\"display:inline\">\n" +
     "	                        <span ng-if=\"item.from.username\">\n" +
     "	                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.from.username}}\">\n" +
@@ -3909,11 +3880,9 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	                            </a>\n" +
     "	                        </span>\n" +
     "	                    </div>\n" +
-    "\n" +
     "	                    <div style=\"display:inline;padding-left:5px;padding-right:5px;\">\n" +
     "	                        <i class=\"fa fa-arrow-right\"></i>\n" +
     "	                    </div>\n" +
-    "\n" +
     "	                    <div style=\"display:inline\">\n" +
     "	                        <span ng-if=\"item.to.username\">\n" +
     "	                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.to.username}}\">\n" +
@@ -3928,19 +3897,11 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	                            </a>\n" +
     "	                        </span>\n" +
     "	                    </div>\n" +
-    "\n" +
     "	                    <div class=\"spacing-5\"></div>\n" +
-    "	                    \n" +
     "	                    <span ng-repeat=\"(key, value) in item.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
-    "	                    \n" +
     "	                    <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
-    "\n" +
-    "	                    <p>\n" +
-    "	                        <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
-    "	                    </p>\n" +
-    "\n" +
+    "	                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "	                    <p style=\"color:gray;font-size:10px\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
-    "\n" +
     "	                </div>\n" +
     "	                <div class=\"card-footer\">\n" +
     "	                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -3949,7 +3910,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "	                    <a class=\"pull-right\" style=\"padding:0px;\" href=\"transaction/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
-    "\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -7962,6 +7922,27 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    </a>\n" +
     "                </div>\n" +
     "\n" +
+    "                <div ng-if=\"item.model == 'PROJECT'\">\n" +
+    "\n" +
+    "                    <div ng-if=\"item.location\">\n" +
+    "                        <p><b>Location</b></p>\n" +
+    "                        <p ng-if=\"item.location.address\"><b>Address</b>: {{item.location.address}}</p>\n" +
+    "                        <p ng-if=\"item.location.lat\"><b>Latitude</b>: {{item.location.lat}}, <b>Longitude</b>: {{item.location.lng}}</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <p><b>Associations</b></p>\n" +
+    "                    <p><b>Members</b>: <a>{{item.memberCount || 0}}</a>, <b>Tasks</b>: <a>{{item.taskCount || 0}}</a>, <b>Time</b>: <a>{{item.timeCount||0 }}</a></p>\n" +
+    "                    \n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                    <p><b>Manifolds</b></p> \n" +
+    "                    <p><a href=\"market/{{item.urlTitle.toUpperCase()}}\">{{item.urlTitle.toUpperCase()}}+</a>, <a href=\"{{market/item.urlTitle.toUpperCase()}}+TASK+\">{{item.urlTitle.toUpperCase()}}+TASK+</a>, <a href=\"market/project/{{item.urlTitle.toUpperCase()}}+TIME+\">{{item.urlTitle.toUpperCase()}}+TIME+</a></p>\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
     "                <div ng-if=\"item.model == 'TASK'\">\n" +
     "                    <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
     "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -8012,16 +7993,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <span ng-repeat=\"(key, value) in item.amountSet track by $index\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "                </div>\n" +
     "\n" +
-    "\n" +
-    "                <!--TAGS-->\n" +
+    "                <p ng-if=\"item.tags\"><b>Tags</b></p> \n" +
     "                <p ng-if=\"item.tags\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
     "                \n" +
-    "                <!--LOCATION-->\n" +
-    "                <p ng-if=\"item.location\"><a>{{item.location.address}}, {{item.location.lat}}, {{item.location.lng}}</a></p> \n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "                \n" +
     "                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
+    "                \n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                \n" +
     "                <span ng-if=\"item.content\" style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
@@ -9430,7 +9408,7 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "            <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "            <p><b>Manifolds</b></p> \n" +
-    "            <p>'<a href=\"market/project/project.urlTitle.toUpperCase()\">{{project.urlTitle.toUpperCase()}}+</a>, <a href=\"market/project/project.urlTitle.toUpperCase()+TASK+\">{{project.urlTitle.toUpperCase()}}+TASK+</a>, <a href=\"market/project/project.urlTitle.toUpperCase()+TIME+\">{{project.urlTitle.toUpperCase()}}+TIME+</a>'</p>\n" +
+    "            <p><a href=\"market/{{project.urlTitle.toUpperCase()}}\">{{project.urlTitle.toUpperCase()}}+</a>, <a href=\"market/{{project.urlTitle.toUpperCase()}}+TASK+\">{{project.urlTitle.toUpperCase()}}+TASK+</a>, <a href=\"{{market/project.urlTitle.toUpperCase()}}+TIME+\">{{project.urlTitle.toUpperCase()}}+TIME+</a></p>\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "        </div>\n" +
@@ -10474,7 +10452,7 @@ angular.module("project/templates/settings.tpl.html", []).run(["$templateCache",
     "			<p>Protocols</p>\n" +
     "\n" +
     "			<p>Manifolds</p>\n" +
-    "            <p>Token Manifolds: '{{project.title}}+'</p>\n" +
+    "            <p>Token Manifolds: {{project.title}}+</p>\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -11079,6 +11057,8 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("search/index.tpl.html",
+    "<!--TODO: UNITY IN SEARCH MODEL; QUERY && DISCOVERABILITY..-->\n" +
+    "\n" +
     "<div ui-view=\"search\">\n" +
     "\n" +
     "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')\" class=\"imageContainerSmall\">\n" +
@@ -11092,35 +11072,42 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "	<!--LOCATION FILTERS-->\n" +
-    "	<!--SEARCH FILTERS-->\n" +
-    "\n" +
-    "	<!--TAG FILTERS-->\n" +
-    "	<!--{{tags}}-->\n" +
     "	\n" +
     "	<!--TOKEN FILTERS-->\n" +
     "	<!--Protocol | Context-->\n" +
     "	<!--Market Discoverability-->\n" +
     "	<!--Orders-->\n" +
     "\n" +
-    "	<!--RESULTS-->\n" +
-    "\n" +
-    "	<!--SORT-->\n" +
-    "\n" +
     "	<div class=\"container\">\n" +
-    "\n" +
+    "		<div class=\"spacing-10\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "	            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "	            <!--<li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-map-marker\"></i> Location</a></li>-->\n" +
+    "				<li style=\"float:right;font-size:14px\"><a>Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "	        </ul>\n" +
+    "	        <div style=\"clear:both\"></div>\n" +
+    "			<div class=\"card\">\n" +
+    "	            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "		    </div>\n" +
+    "		</div>\n" +
     "		<div class=\"row\">\n" +
     "\n" +
-    "			<div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "				<!--TODO: MOBILE-->\n" +
-    "				<!--TODO: URL-->\n" +
-    "				<!--TODO: FILTER RENDER-->\n" +
+    "			<!--TODO!!!!-->\n" +
+    "			<div ng-if=\"false \"class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "		        <div class=\"card\" ng-if=\"sortedTagArray.length > 0\">\n" +
+    "			        <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder');height:100px;min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "					    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "					        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "					        	<div class=\"container\">\n" +
+    "						            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Tags</h1>\n" +
+    "						        </div>\n" +
+    "					        </div>\n" +
+    "					    </div>\n" +
+    "					</div>\n" +
     "		            <div style=\"padding:16px;\">\n" +
-    "						<span><b>Tags</b></span>\n" +
     "		                <div ng-repeat=\"tag in sortedTagArray\">\n" +
-    "		                    <a href=\"#\" ng-click=\"filterContent(tag.element)\">{{tag.element}}</a>\n" +
+    "		                    <a href=\"#\" ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
     "		                </div>\n" +
     "		            </div>\n" +
     "		        </div>\n" +
@@ -11142,39 +11129,18 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "		        </div>\n" +
     "		    </div>\n" +
     "\n" +
-    "			<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
-    "				<!--MODEL FILTERS-->\n" +
-    "				<div ng-if=\"searchResults.length > 0\" class=\"container\">\n" +
-    "					<div class=\"spacing-10\"></div>\n" +
-    "					<div class=\"row\">\n" +
-    "						<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "							<li class=\"active\"><a href=\"\">Activity</a></li>\n" +
-    "							<li><a href=\"/content\">Content</a></li>\n" +
-    "							<li><a href=\"/marketplace\">Items</a></li>\n" +
-    "							<li><a href=\"/members\">Members</a></li>\n" +
-    "							<li><a href=\"/market\">Orders</a></li>\n" +
-    "							<li><a href=\"/projects\">Projects</a></li>\n" +
-    "							<li><a href=\"/tasks\">Tasks</a></li>\n" +
-    "						</ul>\n" +
-    "					</div>\n" +
-    "					<div class=\"spacing-10\"></div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "	                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "	                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
-    "					<li style=\"float:right;font-size:14px\"><a>Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "	            </ul>\n" +
-    "	            <div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "				<div class=\"card\">\n" +
-    "	                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "			    </div>\n" +
+    "			<div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "				<div ng-if=\"searchResults.length > 0\" class=\"card\">\n" +
     "			        <style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "			        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>\n" +
+    "			        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "		                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "		                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "		                        <div style=\"font-size: 15px;\"><a href=\"project/{{marker.url}}\">{{marker.content}}</a></div>\n" +
+    "		                    </ui-gmap-window>\n" +
+    "		                </ui-gmap-marker>\n" +
+    "		            </ui-gmap-google-map>\n" +
     "			    </div>\n" +
     "\n" +
     "				<div ng-if=\"searchResults.length == 0\" class=\"card\">\n" +
@@ -11305,7 +11271,8 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "				</div>\n" +
     "\n" +
-    "				<div ng-if=\"searchResults.length > 0\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
+    "				<!--TODO: MORE-->\n" +
+    "				<div ng-if=\"false\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
     "	                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "	            </div>\n" +
     "\n" +
@@ -11316,6 +11283,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "	</div>\n" +
     "\n" +
     "	<div class=\"spacing-50\"></div>\n" +
+    "\n" +
     "</div>");
 }]);
 

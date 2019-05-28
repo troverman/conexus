@@ -136,8 +136,19 @@ angular.module( 'conexus.discover', [
 
     //TODO: BETTER | TAG STORAGE
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+    $scope.loadAssociations = function(){
+        $scope.associations = $scope.activity.map(function(obj){return obj.associatedModels});
+        $scope.associations = [].concat.apply([], $scope.associations);
+        $scope.associations = $scope.associations.filter(function(e){return e});
+        $scope.sortedAssociationArray = [];
+        for (x in $scope.associations){
+            var amount = countInArray($scope.associations, $scope.associations[x]);
+            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){$scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})}
+        }
+        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
+    };
     $scope.loadTags = function(){
-        $scope.tags = $scope.tasks.map(function(obj){return obj.tags});
+        $scope.tags = $scope.activity.map(function(obj){return obj.tags});
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
         $scope.sortedTagArray = [];
@@ -146,9 +157,60 @@ angular.module( 'conexus.discover', [
             if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){$scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})}
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
-    }
+    };
+    $scope.loadAssociations();
     $scope.loadTags();
-    $scope.filterSet = {associations:[], tags:$scope.sortedTagArray, locations:[]};
+    $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:[]};
+
+    $scope.selectTag = function(item){
+        if ($rootScope.searchQueryNav.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
+            $rootScope.searchQueryNav.tags.push({
+                text:'Tag | '+item, 
+                query:item, 
+                type:'TAG'
+            });
+            $scope.item.tags = $scope.item.tags.filter(function(obj) { 
+                return obj.element !== item
+            });
+        }
+    };
+
+
+
+    //TODO: FILTER!
+    $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
+        if (newValue !== oldValue) {
+            console.log('searchQueryNav', $rootScope.searchQueryNav);
+            $scope.searchQuery.tags = $rootScope.searchQueryNav.tags.map(function(obj){
+                return {text:obj.query}
+            });
+        }
+    }, true);
+
+    $scope.$watch('searchQuery', function(newValue, oldValue){
+        if (newValue !== oldValue) {
+            console.log('searchQuery', $scope.searchQuery);
+            $scope.searchModel = [];
+            //$rootScope.stateIsLoading = true;
+            //TODO:
+            //SearchModel.getSome($scope.searchModel).then(function(projects){
+            //    console.log(projects);
+            //    $rootScope.stateIsLoading = false;
+            //    $scope.projects = projects.map(function(obj){obj.model = 'PROJECT'; return obj;});
+            //});
+        }
+    }, true);
+
+
+
+
+
+
+
+
+
+
+
 
 
 

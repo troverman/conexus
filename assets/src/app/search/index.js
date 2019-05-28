@@ -60,10 +60,12 @@ angular.module( 'conexus.search', [
 .controller( 'SearchController', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'titleService', 'SearchModel', 'searchResults', function SearchController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, titleService, SearchModel, searchResults ) {
     
     $scope.searchResults = searchResults;
+    
     $scope.searchQuery = [{text:$stateParams.searchQuery}];
     $scope.searchQueryString = $scope.searchQuery.map(function(obj){return obj.text}).join(',');
 
     $scope.tags = [];
+    
     $scope.searchResults.map(function(obj){
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
@@ -79,19 +81,15 @@ angular.module( 'conexus.search', [
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
 
+
+
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.searchResults.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.searchResults[index].reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-        }
+        if($rootScope.currentUser){}
         else{$mdSidenav('login').toggle()}   
     };
+
+
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
@@ -111,6 +109,30 @@ angular.module( 'conexus.search', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
     }
     $scope.loadTags();
+
+
+
+    //TODO
+    $scope.populateMap = function(){
+        for (x in $scope.searchResults){
+            if ($scope.searchResults[x].location){
+                $scope.markers.push({
+                    id:$scope.searchResults[x].id,
+                    content:$scope.searchResults[x].title,
+                    url:$scope.searchResults[x].urlTitle,
+                    coords:{
+                        latitude:$scope.searchResults[x].location.lat,
+                        longitude:$scope.searchResults[x].location.lng
+                    }
+                });
+            }
+        }
+        $scope.map = {
+            center: {latitude: $scope.markers[0].coords.latitude, longitude: $scope.markers[0].coords.longitude},
+            zoom: 10
+        };
+    };
+    $scope.populateMap();
 
 
     //TODO:.. COMPLEX QUERY

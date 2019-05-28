@@ -818,6 +818,27 @@
                     </a>
                 </div>
 
+                <div ng-if="item.model == 'PROJECT'">
+
+                    <div ng-if="item.location">
+                        <p><b>Location</b></p>
+                        <p ng-if="item.location.address"><b>Address</b>: {{item.location.address}}</p>
+                        <p ng-if="item.location.lat"><b>Latitude</b>: {{item.location.lat}}, <b>Longitude</b>: {{item.location.lng}}</p>
+                    </div>
+
+                    <div class="spacing-5"></div>
+
+                    <p><b>Associations</b></p>
+                    <p><b>Members</b>: <a>{{item.memberCount || 0}}</a>, <b>Tasks</b>: <a>{{item.taskCount || 0}}</a>, <b>Time</b>: <a>{{item.timeCount||0 }}</a></p>
+                    
+                    <div class="spacing-5"></div>
+
+                    <p><b>Manifolds</b></p> 
+                    <p><a href="market/{{item.urlTitle.toUpperCase()}}">{{item.urlTitle.toUpperCase()}}+</a>, <a href="{{market/item.urlTitle.toUpperCase()}}+TASK+">{{item.urlTitle.toUpperCase()}}+TASK+</a>, <a href="market/project/{{item.urlTitle.toUpperCase()}}+TIME+">{{item.urlTitle.toUpperCase()}}+TIME+</a></p>
+                    <div class="spacing-5"></div>
+
+                </div>
+
                 <div ng-if="item.model == 'TASK'">
                     <a ng-if="item.user" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
@@ -868,16 +889,13 @@
                     <span ng-repeat="(key, value) in item.amountSet track by $index"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                 </div>
 
-
-                <!--TAGS-->
+                <p ng-if="item.tags"><b>Tags</b></p> 
                 <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
-                <div class="spacing-5"></div>
                 
-                <!--LOCATION-->
-                <p ng-if="item.location"><a>{{item.location.address}}, {{item.location.lat}}, {{item.location.lng}}</a></p> 
                 <div class="spacing-5"></div>
                 
                 <span style="color:gray" am-time-ago="item.createdAt"></span>
+                
                 <div class="spacing-10"></div>
                 
                 <span ng-if="item.content" style="display:inline" ng-bind-html="renderContent(item.content)"></span>
