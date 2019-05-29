@@ -92,7 +92,7 @@
 
 				<div ng-if="searchResults.length > 0" ng-repeat="item in searchResults">
 
-					<div ng-if="item.model=='CONTENT'" class="card" ng-click="renderToggle(item)">
+					<div ng-if="item.model=='CONTENT'" class="card" ng-click="cardDetailToggle(item)">
 						<div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
 		                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 		                        <div style="margin-top: auto;margin-bottom: auto;">
@@ -136,7 +136,7 @@
 				        </div>
 			    	</div>
 
-					<div ng-if="item.model=='MEMBER'">
+					<div ng-if="item.model=='MEMBER'" ng-click="renderReputationToggle(item)">
 						<div class="row" style="margin:0px">
 							<div class="col-xs-12" style="padding:0px">
 								<div class="member-card card" style="margin-bottom:0px" ng-click="renderReputationToggle(item)">
@@ -154,9 +154,9 @@
 						</div>
 					</div>
 
-					<div ng-if="item.model=='ORDER'" class="card" ng-click="renderToggle(item)"></div>
+					<div ng-if="item.model=='ORDER'" class="card" ng-click="cardDetailToggle(item)"></div>
 
-					<div ng-if="item.model=='PROJECT'" class="card" ng-click="renderToggle(item)">
+					<div ng-if="item.model=='PROJECT'" class="card" ng-click="cardDetailToggle(item)">
 			            <div style="padding:16px;">
 			                <div class="row">
 			                    <div class="col-sm-1 col-xs-2">
@@ -174,7 +174,7 @@
 			            </div>
 					</div>
 
-					<div ng-if="item.model=='TASK'" class="card" ng-click="renderToggle(item)">
+					<div ng-if="item.model=='TASK'" class="card" ng-click="cardDetailToggle(item)">
 						<div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
 		                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 		                        <div style="margin-top: auto;margin-bottom: auto;">
@@ -207,7 +207,7 @@
 						</div>
 					</div>
 
-					<div ng-if="item.model=='TIME'" class="card">
+					<div ng-if="item.model=='TIME'" class="card" ng-click="cardDetailToggle(item)">
 					</div>
 
 				</div>

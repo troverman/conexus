@@ -8130,91 +8130,75 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "               \n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div>\n" +
-    "\n" +
-    "                    <h5>Filter</h5>\n" +
-    "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <!--DEPRECIATE TASK TITLE-->\n" +
-    "                    <!--\n" +
-    "                    <div ng-if=\"item.model=='TIME'\">\n" +
-    "                        <h4>\n" +
-    "                            {{item.amount}}\n" +
-    "                            <i class=\"fa fa-arrows-h\"></i>\n" +
-    "                            <a href=\"task/{{item.task.id}}\">{{item.task.title.toUpperCase()}}</a>\n" +
-    "                        </h4>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div ng-if=\"item.model=='TASK'\">\n" +
-    "                        <h4>\n" +
-    "                            {{item.title.toUpperCase()}} \n" +
-    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
-    "                            <a href=\"project/{{item.project.urlTitle}}\">{{item.project.title.toUpperCase()}}</a>\n" +
-    "                        </h4>\n" +
-    "                    </div>\n" +
-    "                    -->\n" +
-    "\n" +
-    "                </div>\n" +
+    "                <h5>Filter</h5>\n" +
+    "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <!--TODO: GRAPH-->\n" +
+    "                <!--TODO-->\n" +
     "                <div class=\"row\">\n" +
-    "                    <div class=\"col-md-6\">\n" +
-    "                        <nvd3 options=\"graphOptions\" data=\"graphData\" class=\"with-3d-shadow with-transitions\"></nvd3>\n" +
+    "                    <div class=\"col-sm-3\">\n" +
+    "                        <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                            <div ng-repeat=\"association in item.associatedModels\">\n" +
+    "                                <p ng-click=\"filterAssociation()\"><b>{{association.address}}</b></p>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-6\">\n" +
-    "                        <highchart config=\"validationColumnRender\"></highchart>\n" +
+    "                    <div class=\"col-sm-9\">\n" +
+    "                        <style>.ngCytoscape{height: 500px;width:100%;}</style>\n" +
+    "                        <cytoscape graph-ready=\"graphReady\" graph-options=\"directedGraph.options\" graph-elements=\"directedGraph.elements\" graph-layout=\"directedGraph.layout\" graph-style=\"directedGraph.style\"></cytoscape>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "                \n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div>\n" +
-    "                    <!--TODO MOBILE-->\n" +
-    "                    <table class=\"table table-striped table-hover\">\n" +
-    "                        <thead>\n" +
-    "                            <tr>\n" +
-    "                                <th>Member</th>\n" +
-    "                                <th>Models</th>\n" +
-    "                                <th>Dimension</th>\n" +
-    "                                <th>Validation Score</th>\n" +
-    "                                <th>Id</th>\n" +
-    "                            </tr>\n" +
-    "                        <thead>\n" +
-    "                        <tbody>\n" +
-    "                            <tr ng-repeat=\"validation in validations\">\n" +
-    "                                <td>\n" +
-    "                                    <a href=\"member/{{validation.user.username}}\">\n" +
-    "                                        <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                        <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
-    "                                    </a>\n" +
-    "                                </td>\n" +
+    "                <highchart config=\"validationColumnRender\"></highchart>\n" +
     "\n" +
-    "                                <td>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                                    <span ng-if=\"validation.associatedModels[0].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
-    "                                    <span ng-if=\"validation.associatedModels[0].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
-    "                                    <span ng-if=\"validation.associatedModels[0].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.amount}} Seconds</a></span>\n" +
+    "                <!--TODO MOBILE-->\n" +
+    "                <table class=\"table table-striped table-hover\">\n" +
+    "                    <thead>\n" +
+    "                        <tr>\n" +
+    "                            <th>Member</th>\n" +
+    "                            <th>Models</th>\n" +
+    "                            <th>Dimension</th>\n" +
+    "                            <th>Validation Score</th>\n" +
+    "                            <th>Id</th>\n" +
+    "                        </tr>\n" +
+    "                    <thead>\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"validation in validations\">\n" +
+    "                            <td>\n" +
+    "                                <a href=\"member/{{validation.user.username}}\">\n" +
+    "                                    <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                    <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
+    "                                </a>\n" +
+    "                            </td>\n" +
     "\n" +
-    "                                    <i class=\"fa fa-arrows-h\"></i> \n" +
+    "                            <td>\n" +
     "\n" +
-    "                                    <span ng-if=\"validation.associatedModels[1].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
-    "                                    <span ng-if=\"validation.associatedModels[1].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
-    "                                    <span ng-if=\"validation.associatedModels[1].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.amount}} Seconds</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[0].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[0].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[0].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.amount}} Seconds</a></span>\n" +
     "\n" +
-    "                                </td>\n" +
+    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
     "\n" +
-    "                                <td>General</td>\n" +
-    "                                <td>{{validation.validation.general}}</td>\n" +
-    "                                <td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
+    "                                <span ng-if=\"validation.associatedModels[1].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[1].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[1].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.amount}} Seconds</a></span>\n" +
     "\n" +
-    "                            </tr>\n" +
-    "                        </tbody>\n" +
-    "                    </table>\n" +
-    "                </div>\n" +
+    "                            </td>\n" +
+    "\n" +
+    "                            <td>General</td>\n" +
+    "                            <td>{{validation.validation.general}}</td>\n" +
+    "                            <td><a href=\"validation/{{validation.id}}\">{{validation.id}}</a></td>\n" +
+    "\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
+    "                </table>\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -11168,7 +11152,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "				<div ng-if=\"searchResults.length > 0\" ng-repeat=\"item in searchResults\">\n" +
     "\n" +
-    "					<div ng-if=\"item.model=='CONTENT'\" class=\"card\" ng-click=\"renderToggle(item)\">\n" +
+    "					<div ng-if=\"item.model=='CONTENT'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "						<div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "		                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "		                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -11212,7 +11196,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "				        </div>\n" +
     "			    	</div>\n" +
     "\n" +
-    "					<div ng-if=\"item.model=='MEMBER'\">\n" +
+    "					<div ng-if=\"item.model=='MEMBER'\" ng-click=\"renderReputationToggle(item)\">\n" +
     "						<div class=\"row\" style=\"margin:0px\">\n" +
     "							<div class=\"col-xs-12\" style=\"padding:0px\">\n" +
     "								<div class=\"member-card card\" style=\"margin-bottom:0px\" ng-click=\"renderReputationToggle(item)\">\n" +
@@ -11230,9 +11214,9 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "						</div>\n" +
     "					</div>\n" +
     "\n" +
-    "					<div ng-if=\"item.model=='ORDER'\" class=\"card\" ng-click=\"renderToggle(item)\"></div>\n" +
+    "					<div ng-if=\"item.model=='ORDER'\" class=\"card\" ng-click=\"cardDetailToggle(item)\"></div>\n" +
     "\n" +
-    "					<div ng-if=\"item.model=='PROJECT'\" class=\"card\" ng-click=\"renderToggle(item)\">\n" +
+    "					<div ng-if=\"item.model=='PROJECT'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "			            <div style=\"padding:16px;\">\n" +
     "			                <div class=\"row\">\n" +
     "			                    <div class=\"col-sm-1 col-xs-2\">\n" +
@@ -11250,7 +11234,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "			            </div>\n" +
     "					</div>\n" +
     "\n" +
-    "					<div ng-if=\"item.model=='TASK'\" class=\"card\" ng-click=\"renderToggle(item)\">\n" +
+    "					<div ng-if=\"item.model=='TASK'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "						<div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "		                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "		                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -11283,7 +11267,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "						</div>\n" +
     "					</div>\n" +
     "\n" +
-    "					<div ng-if=\"item.model=='TIME'\" class=\"card\">\n" +
+    "					<div ng-if=\"item.model=='TIME'\" class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "					</div>\n" +
     "\n" +
     "				</div>\n" +

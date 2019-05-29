@@ -34,18 +34,7 @@ angular.module( 'conexus.tasks', [
 
     $scope.tasks = tasks.map(function(obj){
         obj.model = 'TASK';
-        //TODO: DEPRECIATE -- MOVE TO PROTOCOL
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TIME');
-        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
-        if (obj.tags){
-            obj.tags = obj.tags.split(',');
-            for (x in obj.tags){
-                obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
-                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
-            }
-        }
+        if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
 
@@ -77,10 +66,11 @@ angular.module( 'conexus.tasks', [
 
 
     //COMPLEX QUERIES && POPULATION
+
     //TODO: BETTER
     $scope.loadAssociations = function(){
         $scope.associations = $scope.tasks.map(function(obj){
-            if (obj.project){return obj.project.title;}
+            //if (obj.project){return obj.project.title;}
         });
         $scope.associations = [].concat.apply([], $scope.associations);
         $scope.associations = $scope.associations.filter(function(e){return e});
@@ -94,9 +84,11 @@ angular.module( 'conexus.tasks', [
         }
         $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     };
+
     $scope.loadLocations = function(){
         $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
     };
+
     $scope.loadTags = function(){
         $scope.tags = $scope.tasks.map(function(obj){
             return obj.tags;
@@ -138,13 +130,14 @@ angular.module( 'conexus.tasks', [
             });
 		});
 	};
+
+
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         var search = $scope.searchQuery.map(function(obj){
             return obj.text;
         })[0];
         TaskModel.getSome({search:search, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
-            console.log(tasks)
             $rootScope.stateIsLoading = false;
             $scope.tasks = tasks.map(function(obj){
                 if (obj.tags){obj.tags = obj.tags.split(',')}
@@ -152,6 +145,8 @@ angular.module( 'conexus.tasks', [
             });
         });
     };
+
+
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
@@ -162,35 +157,39 @@ angular.module( 'conexus.tasks', [
             $scope.init();
         });
     };
+
+
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
         TaskModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
             $rootScope.stateIsLoading = false;
-            tasks.map(function(obj){obj.model = 'TASK'});
+            tasks.map(function(obj){ 
+                obj.model = 'TASK' 
+                //if (obj.tags){obj.tags = obj.tags.split(',')}
+            });
             Array.prototype.push.apply($scope.tasks, tasks);
-            $scope.init();
+            //$scope.init();
         });
     };
-    $rootScope.$watch('searchQueryNav' ,function(){
-        $scope.searchQuery = [];
-        for(x in Object.keys($rootScope.searchQueryNav)){
-            for (y in Object.keys($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]])){
-                if ($scope.searchQuery.map(function(obj){return obj.query}).indexOf($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y].query)==-1){
-                    $scope.searchQuery.push($rootScope.searchQueryNav[Object.keys($rootScope.searchQueryNav)[x]][y]);
-                }
-            }
-        }
-        console.log($scope.searchQuery)
-    }, true);
+
+
+
+
+
+
+
+
+
     $scope.$watch('searchQuery' ,function(newValue, oldValue){
         if (newValue !== oldValue) {
-            //LOCATION IS BY ASSOCIATED PROJECT(S)
+
             $rootScope.stateIsLoading = true;
             $scope.searchQuery = $scope.searchQuery.map(function(obj){
                 if (!obj.query && obj.text){obj.query = obj.text}
                 return obj.query
             }).join(',');
+
             TaskModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
                 console.log(models)
                 $rootScope.stateIsLoading = false;
@@ -201,9 +200,9 @@ angular.module( 'conexus.tasks', [
                 });
                 $scope.init();
             });
+
         }
     }, true);
-    //TODO: COMPLEX QUERY && FILTER
 
 
 
