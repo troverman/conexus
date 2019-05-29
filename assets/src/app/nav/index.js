@@ -500,14 +500,17 @@ angular.module( 'conexus.nav', [
         }
     };
 
-    //$scope.graphReady = function(){
-    //    cytoData.getGraph().then(function(graph){
-    //        $scope.graph = graph;
-    //        $scope.graph.layout({
-    //            name: 'grid',
-    //        }).run();
-    //    });
-    //};
+    $scope.renderGraph  = function(model){
+        if (!model){model = 'circle'}
+        cytoData.getGraph().then(function(graph){
+            console.log($scope.directedGraphElements)
+            $scope.graph = graph;
+            $scope.graph.json($scope.directedGraphElements);
+            $scope.graph.layout({
+                name: model,
+            }).run();
+        });
+    };
 
     //TODO!!!
     $rootScope.renderValidationToggle = function(item){
@@ -518,260 +521,250 @@ angular.module( 'conexus.nav', [
         //$scope.assoicationFilter = [{text:$scope.item.title || $scope.item.id}];
         $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].address}];
 
-        cytoData.getGraph().then(function(graph){
+        $scope.directedGraphElements = {};
+        $scope.directedGraphOptions = {
+            textureOnViewport:true,
+            pixelRatio: 'auto',
+            motionBlur: false,
+            hideEdgesOnViewport:true
+        };
+        $scope.directedGraphLayout = {name: 'circle'};
+        $scope.directedGraphStyle = [
+            {
+              "selector": "core",
+              "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+              }
+            }, {
+              "selector": "node",
+              "style": {
+                "width": "mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "height": "mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "content": "data(name)",
+                "font-size": "12px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#555",
+                "text-outline-color": "#555",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+              }
+            }, {
+              "selector": "node[?attr]",
+              "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+              }
+            }, {
+              "selector": "node[?query]",
+              "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+              }
+            }, {
+              "selector": "node:selected",
+              "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+              }
+            }, {
+              "selector": "edge",
+              "style": {
+                "curve-style": "haystack",
+                "haystack-radius": "0.5",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "mapData(weight, 0, 1, 1, 1)",
+                "overlay-padding": "3px"
+              }
+            }, {
+              "selector": "node.unhighlighted",
+              "style": {
+                "opacity": "0.2"
+              }
+            }, {
+              "selector": "edge.unhighlighted",
+              "style": {
+                "opacity": "0.05"
+              }
+            }, {
+              "selector": ".highlighted",
+              "style": {
+                "z-index": "999999"
+              }
+            }, {
+              "selector": "node.highlighted",
+              "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+              }
+            }, {
+              "selector": "edge.filtered",
+              "style": {
+                "opacity": "0"
+              }
+            }, {
+              "selector": "edge[group=\"coexp\"]",
+              "style": {
+                "line-color": "#d0b7d5"
+              }
+            }, {
+              "selector": "edge[group=\"coloc\"]",
+              "style": {
+                "line-color": "#a0b3dc"
+              }
+            }, {
+              "selector": "edge[group=\"gi\"]",
+              "style": {
+                "line-color": "#90e190"
+              }
+            }, {
+              "selector": "edge[group=\"path\"]",
+              "style": {
+                "line-color": "#9bd8de"
+              }
+            }, {
+              "selector": "edge[group=\"pi\"]",
+              "style": {
+                "line-color": "#eaa2a2"
+              }
+            }, {
+              "selector": "edge[group=\"predict\"]",
+              "style": {
+                "line-color": "#f6c384"
+              }
+            }, {
+              "selector": "edge[group=\"spd\"]",
+              "style": {
+                "line-color": "#dad4a2"
+              }
+            }, {
+              "selector": "edge[group=\"spd_attr\"]",
+              "style": {
+                "line-color": "#D0D0D0"
+              }
+            }, {
+              "selector": "edge[group=\"reg\"]",
+              "style": {
+                "line-color": "#D0D0D0"
+              }
+            }, {
+              "selector": "edge[group=\"reg_attr\"]",
+              "style": {
+                "line-color": "#D0D0D0"
+              }
+            }, 
+            {
+              "selector": "edge[group=\"user\"]",
+              "style": {
+                "line-color": "#f0ec86"
+              }
+            }
+        ];
 
-            $scope.graph = graph;
-
-            $scope.directedGraph = {};
-            $scope.directedGraph.elements = {};
-            $scope.directedGraph.options = {
-                textureOnViewport:true,
-                pixelRatio: 'auto',
-                motionBlur: false,
-                hideEdgesOnViewport:true
-            };
-            $scope.directedGraph.layout = {name: 'cola', infinite: true, fit: false};
-            $scope.style = [
-                {
-                  "selector": "core",
-                  "style": {
-                    "selection-box-color": "#AAD8FF",
-                    "selection-box-border-color": "#8BB0D0",
-                    "selection-box-opacity": "0.5"
-                  }
-                }, {
-                  "selector": "node",
-                  "style": {
-                    "width": "mapData(score, 0, 0.006769776522008331, 10, 30)",
-                    "height": "mapData(score, 0, 0.006769776522008331, 10, 30)",
-                    "content": "data(name)",
-                    "font-size": "12px",
-                    "text-valign": "center",
-                    "text-halign": "center",
-                    "background-color": "#555",
-                    "text-outline-color": "#555",
-                    "text-outline-width": "2px",
-                    "color": "#fff",
-                    "overlay-padding": "3px",
-                    "z-index": "10"
-                  }
-                }, {
-                  "selector": "node[?attr]",
-                  "style": {
-                    "shape": "rectangle",
-                    "background-color": "#aaa",
-                    "text-outline-color": "#aaa",
-                    "width": "8px",
-                    "height": "8px",
-                    "font-size": "3px",
-                    "z-index": "1"
-                  }
-                }, {
-                  "selector": "node[?query]",
-                  "style": {
-                    "background-clip": "none",
-                    "background-fit": "contain"
-                  }
-                }, {
-                  "selector": "node:selected",
-                  "style": {
-                    "border-width": "3px",
-                    "border-color": "#AAD8FF",
-                    "border-opacity": "0.5",
-                    "background-color": "#77828C",
-                    "text-outline-color": "#77828C"
-                  }
-                }, {
-                  "selector": "edge",
-                  "style": {
-                    "curve-style": "haystack",
-                    "haystack-radius": "0.5",
-                    "opacity": "0.9",
-                    "line-color": "#bbb",
-                    "width": "mapData(weight, 0, 1, 1, 1)",
-                    "overlay-padding": "3px"
-                  }
-                }, {
-                  "selector": "node.unhighlighted",
-                  "style": {
-                    "opacity": "0.2"
-                  }
-                }, {
-                  "selector": "edge.unhighlighted",
-                  "style": {
-                    "opacity": "0.05"
-                  }
-                }, {
-                  "selector": ".highlighted",
-                  "style": {
-                    "z-index": "999999"
-                  }
-                }, {
-                  "selector": "node.highlighted",
-                  "style": {
-                    "border-width": "3px",
-                    "border-color": "#AAD8FF",
-                    "border-opacity": "0.5",
-                    "background-color": "#394855",
-                    "text-outline-color": "#394855"
-                  }
-                }, {
-                  "selector": "edge.filtered",
-                  "style": {
-                    "opacity": "0"
-                  }
-                }, {
-                  "selector": "edge[group=\"coexp\"]",
-                  "style": {
-                    "line-color": "#d0b7d5"
-                  }
-                }, {
-                  "selector": "edge[group=\"coloc\"]",
-                  "style": {
-                    "line-color": "#a0b3dc"
-                  }
-                }, {
-                  "selector": "edge[group=\"gi\"]",
-                  "style": {
-                    "line-color": "#90e190"
-                  }
-                }, {
-                  "selector": "edge[group=\"path\"]",
-                  "style": {
-                    "line-color": "#9bd8de"
-                  }
-                }, {
-                  "selector": "edge[group=\"pi\"]",
-                  "style": {
-                    "line-color": "#eaa2a2"
-                  }
-                }, {
-                  "selector": "edge[group=\"predict\"]",
-                  "style": {
-                    "line-color": "#f6c384"
-                  }
-                }, {
-                  "selector": "edge[group=\"spd\"]",
-                  "style": {
-                    "line-color": "#dad4a2"
-                  }
-                }, {
-                  "selector": "edge[group=\"spd_attr\"]",
-                  "style": {
-                    "line-color": "#D0D0D0"
-                  }
-                }, {
-                  "selector": "edge[group=\"reg\"]",
-                  "style": {
-                    "line-color": "#D0D0D0"
-                  }
-                }, {
-                  "selector": "edge[group=\"reg_attr\"]",
-                  "style": {
-                    "line-color": "#D0D0D0"
-                  }
-                }, 
-                {
-                  "selector": "edge[group=\"user\"]",
-                  "style": {
-                    "line-color": "#f0ec86"
-                  }
+        //TODO: GET ASSOCIATIONS
+        //TODO: ASSOCIATION MODEL
+        for (x in $scope.item.associatedModels){
+            var nodeModel = {
+                group:'nodes',
+                data:{
+                    id:$scope.item.associatedModels[x].address,
+                    type:$scope.item.associatedModels[x].address,
+                    name:$scope.item.associatedModels[x].address
                 }
-            ];
-
-            //TODO: GET ASSOCIATIONS
-            //TODO: ASSOCIATION MODEL
-            for (x in $scope.item.associatedModels){
-                var nodeModel = {
-                    group:'nodes',
+            }; 
+            $scope.directedGraphElements[$scope.item.associatedModels[x].address] = nodeModel;
+            if (x > 0){
+                var edgeModel = {
+                    group:'edges',
+                    classes:'unbundled-bezier',
                     data:{
-                        id:$scope.item.associatedModels[x].address,
-                        type:$scope.item.associatedModels[x].address,
-                        name:$scope.item.associatedModels[x].address
+                        id:$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address,
+                        source:$scope.item.associatedModels[0].address,
+                        target:$scope.item.associatedModels[x].address
                     }
-                }; 
-                $scope.directedGraph.elements[$scope.item.associatedModels[x].address] = nodeModel;
-                if (x > 0){
-                    var edgeModel = {
-                        group:'edges',
-                        classes:'unbundled-bezier',
-                        data:{
-                            id:$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address,
-                            source:$scope.item.associatedModels[0].address,
-                            target:$scope.item.associatedModels[x].address
-                        }
-                    };
-                    $scope.directedGraph.elements[$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address] = edgeModel;
+                };
+                $scope.directedGraphElements[$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address] = edgeModel;
+            }
+        }
+
+        //TODO: QUERY
+        var validationQueryModel = {
+            limit:100,
+            skip:0,
+            sort:'createdAt DESC',
+            //associatedModels:[]
+        };
+
+        ValidationModel.getSome(validationQueryModel).then(function(validationModels){
+
+            $scope.validationColumnRender = {
+                chart: {zoomType: 'x'},
+                series: [{
+                    id: 'validation',
+                    type: 'column',
+                    name: 'Validation',
+                    data: [],
+                    yAxis: 0
+                }],
+                title: {text: ''},
+                xAxis: {
+                    crosshair: true,
+                    gridLineWidth: 0.5,
+                    gridLineColor: 'grey',
+                    title: {text: null},
+                    categories: [],
+                },
+                yAxis: [
+                    {title: {text: null}},
+                    {title: {text: null}},
+                    {title: {text: null}}
+                ],
+                legend: {enabled: false},
+                credits:{enabled:false},
+                plotOptions: {column: {minPointLength: 3}},
+            };
+
+            $scope.validations = validationModels;
+
+            //TODO: SORED IN ASSOCIATION
+            $scope.validationSumObj = {};
+
+            //TODO: THIS IS DONE ON BACKEND
+            //TODO: ASSOCIATION
+            if ($scope.validations.length > 0){
+                for (y in $scope.validations){
+                    for (x in Object.keys($scope.validations[y].validation)){
+                        if(!$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]){$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+                        else{$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
+                    }
+                }
+                for (x in Object.keys($scope.validationSumObj)){
+                    $scope.validationColumnRender.series[0].data.push($scope.validationSumObj[Object.keys($scope.validationSumObj)[x]]/$scope.validations.length);
+                    $scope.validationColumnRender.xAxis.categories.push(Object.keys($scope.validationSumObj)[x]);
                 }
             }
 
-            $scope.graph.json($scope.directedGraph.elements);
-            $scope.graph.layout({name: 'cola', infinite: true, fit: false}).run();
-
-            //TODO: QUERY
-            var validationQueryModel = {
-                limit:100,
-                skip:0,
-                sort:'createdAt DESC',
-                //associatedModels:[]
-            };
-
-            ValidationModel.getSome(validationQueryModel).then(function(validationModels){
-
-                $scope.validationColumnRender = {
-                    chart: {zoomType: 'x'},
-                    series: [{
-                        id: 'validation',
-                        type: 'column',
-                        name: 'Validation',
-                        data: [],
-                        yAxis: 0
-                    }],
-                    title: {text: ''},
-                    xAxis: {
-                        crosshair: true,
-                        gridLineWidth: 0.5,
-                        gridLineColor: 'grey',
-                        title: {text: null},
-                        categories: [],
-                    },
-                    yAxis: [
-                        {title: {text: null}},
-                        {title: {text: null}},
-                        {title: {text: null}}
-                    ],
-                    legend: {enabled: false},
-                    credits:{enabled:false},
-                    plotOptions: {column: {minPointLength: 3}},
-                };
-
-                $scope.validations = validationModels;
-
-                //TODO: SORED IN ASSOCIATION
-                $scope.validationSumObj = {};
-
-                //TODO: THIS IS DONE ON BACKEND
-                //TODO: ASSOCIATION
-                if ($scope.validations.length > 0){
-                    for (y in $scope.validations){
-                        for (x in Object.keys($scope.validations[y].validation)){
-                            if(!$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]){$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-                            else{$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-                        }
-                    }
-                    for (x in Object.keys($scope.validationSumObj)){
-                        $scope.validationColumnRender.series[0].data.push($scope.validationSumObj[Object.keys($scope.validationSumObj)[x]]/$scope.validations.length);
-                        $scope.validationColumnRender.xAxis.categories.push(Object.keys($scope.validationSumObj)[x]);
-                    }
-                }
-
-            });
-
         });
-
     
-        $mdSidenav('renderValidation').toggle();
-
+        $mdSidenav('renderValidation').toggle().then(function(){
+            $scope.renderGraph('circle');
+        });
 
     };
 

@@ -7,7 +7,9 @@
     //bottom: 0;
     //transform: translate3d(0,100%,0);
 }
+.ngCytoscape{height: 500px;width:100%;}
 </style>
+
 <div ng-controller="NavCtrl">
 
     <!--TODO: NG-IF-->
@@ -576,7 +578,7 @@
             </div>
 
             <div>
-                <form style="padding:15px;" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
+                <form style="padding:16px;" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
                     <div class="form-group">
                         <input class="form-control" style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search">
                     </div>
@@ -584,18 +586,34 @@
             </div>
 
             <div style="max-height:100vh;overflow:hidden">
+
+                <h4 ng-show="!currentUser" class="nav-links"><a href="/about">About</a></h4>
+                <h4 ng-show="currentUser" class="nav-links" ng-click="cre8Toggle()"><a>CRE8</a></h4>
+                <h4 class="nav-links"><a href="/disover">Discover</a></h4>
+                <h4 class="nav-links"><a href="/market">Market</a></h4>
+                <h4 class="nav-links"><a href="/marketplace">Marketplace</a></h4>
+                <h4 class="nav-links"><a href="/projects">Projects</a></h4>
+                <h4 ng-show="currentUser" class="nav-links">
+                    <a href="/notifications"> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a>
+                </h4>
+                <h4 ng-show="currentUser" class="nav-links"><a href="/account">Settings</a></h4>
+                <h4 ng-show="currentUser" class="nav-links"><a href="/logout">Logout</a></h4>
+                <h4 ng-show="!currentUser" ng-click="loginToggle()" class="nav-links"><a>Login</a></h4>
+                <h4 ng-show="!currentUser" class="nav-links"><a href="/register">Register</a></h4>
+
+                <!--
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about"><i ng-if="false" style="color:white" class="fas fa-plus"></i> About</a></h2>
                 <h2 ng-show="currentUser" ng-click="cre8Toggle()" class="nav-links" style="padding:12px;"><a><i ng-if="false" style="color:white" class="fas fa-plus"></i> CRE8</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><i ng-if="false" style="color:white" class="fas fa-globe"></i> <a href="/discover">Discover</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/market"><i ng-if="false" style="color:white" class="fas fa-poll-h"></i> Market</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/marketplace"><i ng-if="false" style="color:white" class="fas fa-circle-notch"></i> Marketplace</a></h2>
                 <h2 class="nav-links" style="padding:12px;"><a href="/projects"><i ng-if="false" style="color:white" class="fas fa-users"></i> Projects</a></h2>
-                <!--<h2 class="nav-links" style="padding:12px;"><a href="/tasks">Tasks</a></h2>-->
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/notifications"><i ng-if="false" style="color:white" class="fas fa-envelope"></i> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/account"><i ng-if="false" style="color:white" class="fas fa-cogs"></i> Settings</a></h2>
                 <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/logout"><i ng-if="false" style="color:white" class="fas fa-sign-out-alt"></i> Logout</a></h2>
                 <h2 ng-click="loginToggle()" ng-show="!currentUser" class="nav-links" style="padding:12px;"><a><i ng-if="false" style="color:white" class="fas fa-sign-in-alt"></i> Login</a></h2>
                 <h2 ng-show="!currentUser" class="nav-links" style="padding:12px;"><a href="/register"><i ng-if="false" style="color:white" class="fas fa-user-plus"></i> Register</a></h2>
+                -->
 
                 <div class="spacing-15"></div>
                 <div style="background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh" class="imageContainerSmall">
@@ -1032,8 +1050,15 @@
                         </div>
                     </div>
                     <div class="col-sm-9">
-                        <style>.ngCytoscape{height: 500px;width:100%;}</style>
-                        <cytoscape graph-ready="graphReady" graph-options="directedGraph.options" graph-elements="directedGraph.elements" graph-layout="directedGraph.layout" graph-style="directedGraph.style"></cytoscape>
+
+                        <button class="btn btn-raised btn-default" ng-click="renderGraph('random')">Random</button>
+                        <button class="btn btn-raised btn-default" ng-click="renderGraph('circle')">Circle</button>
+                        <button class="btn btn-raised btn-default" ng-click="renderGraph('concentric')">Concentric</button>
+                        <button class="btn btn-raised btn-default" ng-click="renderGraph('grid')">Grid</button>
+                        <button class="btn btn-raised btn-default" ng-click="renderGraph('cose')">Cose</button>
+                        <button class="btn btn-raised btn-default" ng-click="renderGraph('breadthfirst')">Breadth First</button>
+
+                        <cytoscape graph-ready="graphReady" graph-options="directedGraphOptions" graph-elements="directedGraphElements" graph-layout="directedGraphLayout" graph-style="directedGraphStyle"></cytoscape>
                     </div>
                 </div>
                 

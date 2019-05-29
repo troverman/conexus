@@ -245,7 +245,7 @@ angular.module( 'conexus.market', [
     
     $scope.selectTab = function(model){
         $scope.selectedTab = model;
-        //$scope.combinatorialGenerator();
+        $scope.renderGraph('grid');
     };
 
     $scope.reply = function(item){
@@ -311,7 +311,15 @@ angular.module( 'conexus.market', [
 
 
 
-
+    $scope.renderGraph  = function(model){
+        if (!model){model = 'circle'}
+        cytoData.getGraph().then(function(graph){
+            $scope.graph = graph;
+            $scope.graph.layout({
+                name: model,
+            }).run();
+        });
+    };
 
     $scope.options = {
         textureOnViewport:true,
@@ -507,18 +515,7 @@ angular.module( 'conexus.market', [
                 }
             }
         }
-        cytoData.getGraph().then(function(graph){
-            console.log(graph)
-            $scope.graph = graph;
-            //$scope.graph.json($scope.elementsObj);
-            $scope.graph.layout({
-                name: 'grid',
-                infinite: true,
-                fit: false
-            }).run();
-        });
-        console.log($scope.elementsObj);
-
+        $scope.renderGraph('grid');
     };
     $scope.combinatorialGenerator(['USD','ETH','BTC','CRE8']);
 

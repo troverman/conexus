@@ -244,7 +244,6 @@ angular.module( 'conexus.developers', [
         hideEdgesOnViewport:true
     };
 
-    $scope.layout = {name: 'cose', coolingFactor: 0, animate: true}; //cose, breadthfirst, concentric
     $scope.layout = {name: 'random'};
 
     //COMBINATORIAL 3
