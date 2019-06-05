@@ -560,6 +560,23 @@
             
             <div class="spacing-25"></div>
 
+            <div ng-if="!currentUser && false">
+                <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div class="container" style="width:100%">
+                                <h1 style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
+                                    <img src="images/3.gif" style="height:50px;width:50px;border-radius:100%">
+                                    <div class="spacing-5"></div>
+                                    <a style="font-size:24px;color:white" href="/">CRE8.XYZ</a>
+                                </h1>
+                                <h5 style="color:white;font-size:12px;">EMPOWERING LOCAL COMMUNITIES</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div ng-if="currentUser">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -585,7 +602,7 @@
                 </form>
             </div>
 
-            <div style="min-height:700px;max-height:100vh;overflow:hidden">
+            <div style="min-height:500px;max-height:100vh;overflow:hidden">
 
                 <h4 ng-show="!currentUser" class="nav-links"><a href="/about">About</a></h4>
                 <h4 ng-show="currentUser" class="nav-links" ng-click="cre8Toggle()"><a>CRE8</a></h4>
@@ -593,6 +610,7 @@
                 <h4 class="nav-links"><a href="/market">Market</a></h4>
                 <h4 class="nav-links"><a href="/marketplace">Marketplace</a></h4>
                 <h4 class="nav-links"><a href="/projects">Projects</a></h4>
+
                 <h4 ng-show="currentUser" class="nav-links">
                     <a href="/notifications"> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a>
                 </h4>

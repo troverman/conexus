@@ -48,7 +48,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-md-7\">\n" +
     "				<h3>A SHARED WORLD</h3>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">From sharing items to space and time, sharing networks reflect our commitment.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supporative of sharing culture.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supportive of sharing culture.</p>\n" +
     "				<p><a href=\"/marketplace\">Marketplace</a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
@@ -143,7 +143,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-md-6\">\n" +
     "				<h3>The Peer Network</h3>\n" +
     "				<p style=\"color:#a8a8a8;font-style:italic;\">Our Value Infrastructure</p>\n" +
-    "				<p style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transarency\">Transparency in action</a></p>\n" +
+    "				<p style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transparency\">Transparency in action</a></p>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -256,7 +256,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value. This process creates intention in the market.</p>\n" +
     "				<h5>Create Connected Networks of Value</h5>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Through a variety of intentional techniques we can establish <i>more</i> true value intent</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Postions; Trade Postions; Futures Postions; Derivative Positions</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Positions; Trade Positions; Futures Positions; Derivative Positions</p>\n" +
     "			</div>\n" +
     "            <div class=\"col-md-4 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
@@ -4485,8 +4485,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
-    "                <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
+    "                <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
+    "                <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
     "                <li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
@@ -7701,6 +7701,23 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            \n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "\n" +
+    "            <div ng-if=\"!currentUser && false\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\" style=\"width:100%\">\n" +
+    "                                <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                    <img src=\"images/3.gif\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                    <div class=\"spacing-5\"></div>\n" +
+    "                                    <a style=\"font-size:24px;color:white\" href=\"/\">CRE8.XYZ</a>\n" +
+    "                                </h1>\n" +
+    "                                <h5 style=\"color:white;font-size:12px;\">EMPOWERING LOCAL COMMUNITIES</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
     "            <div ng-if=\"currentUser\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -7726,14 +7743,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </form>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div style=\"max-height:100vh;overflow:hidden\">\n" +
+    "            <div style=\"min-height:500px;max-height:100vh;overflow:hidden\">\n" +
     "\n" +
     "                <h4 ng-show=\"!currentUser\" class=\"nav-links\"><a href=\"/about\">About</a></h4>\n" +
     "                <h4 ng-show=\"currentUser\" class=\"nav-links\" ng-click=\"cre8Toggle()\"><a>CRE8</a></h4>\n" +
-    "                <h4 class=\"nav-links\"><a href=\"/disover\">Discover</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"/discover\">Discover</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"/market\">Market</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"/marketplace\">Marketplace</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"/projects\">Projects</a></h4>\n" +
+    "\n" +
     "                <h4 ng-show=\"currentUser\" class=\"nav-links\">\n" +
     "                    <a href=\"/notifications\"> <span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a>\n" +
     "                </h4>\n" +

@@ -127,10 +127,12 @@ angular.module( 'conexus.search', [
                 });
             }
         }
-        $scope.map = {
-            center: {latitude: $scope.markers[0].coords.latitude, longitude: $scope.markers[0].coords.longitude},
-            zoom: 10
-        };
+        if ($scope.markers.length > 0){
+            $scope.map = {
+                center: {latitude: $scope.markers[0].coords.latitude, longitude: $scope.markers[0].coords.longitude},
+                zoom: 10
+            };
+        }
     };
     $scope.populateMap();
 
