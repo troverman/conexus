@@ -351,11 +351,11 @@
 
     </div>
 
-    <div class="spacing-15"></div>
+    <div class="spacing-10"></div>
 
     <div class="row" ng-if="!isTutorial">
-        <div class="col-md-4 col-sm-12 col-xs-12">
-            <div class="member-card" style="margin-left:-5px;margin-right:-10px;margin-bottom:0px" ng-click="renderReputationToggle(currentUser)">
+        <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
+            <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="renderReputationToggle(currentUser)">
                 <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                     <a href="member/{{currentUser.username}}"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
                 </div>
@@ -367,15 +367,15 @@
                 </div> 
             </div>
         </div>
-        <div class="col-md-8 col-sm-12 col-xs-12" style="padding-left:0px;margin-right:-5px">
-            <div class="card" style="min-width:100%;margin-top:0px">
+        <div class="col-md-8 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
+            <div class="card" style="margin-top:0px">
                 <div style="padding:16px;">
                     <span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span><img style="height:50px;" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>
                     <h4><a href="member/{{currentUser.username}}">{{currentUser.username}}</a></h4>
                     <p style="font-size:13px;"><a href="/member/{{currentUser.username}}/projects">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following">{{currentUser.followingCount || 0}} Following</a>
                     <div class="row">
                         <div class="col-xs-12">
-                            <h5>Balance Mapping Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
+                            <h5>Balance Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
                             <form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
                                 <input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
                                 <div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
@@ -386,27 +386,13 @@
                                 <h5><a href="market/{{balanceLook}}">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
                             </div>
                         </div>
-                        <!--
-                        <div class="col-xs-6">
-                            <h5>Reputation Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
-                            <form ng-click="lookupReputation()" style="display:flex;flex-direction:row;">
-                                <input ng-model="reputationLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
-                                <div ng-click="lookupReputation()" style="border:0px;float:right" class="btn btn-default">
-                                    <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
-                                </div>
-                            </form>
-                            <div ng-show="reputationLookupValue !== undefined">
-                                <h5><a href="market/{{reputationLook}}">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>
-                            </div>
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="spacing-15"></div>
+    <div class="spacing-5"></div>
 
     <!--TODO: MOBILE FILTER-->
     <div class="row" ng-show="!isTutorial">
