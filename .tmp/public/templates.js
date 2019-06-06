@@ -4237,15 +4237,127 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Update Value Map</h1>\n" +
-    "                        <p style=\"color:white;\">Now that we know more about you, let's update.</p>\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Update Your Value Map</h1>\n" +
+    "                        <p style=\"color:white;\">Now that we know more about you</p>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <p><b>My Current Positions & Value Map</b></p>\n" +
-    "                <!--WIP-->\n" +
+    "                <p><b>My Current Positions & Value Map</b> <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Select and rank what you believe is of value to create positions/orders on the Market</p>\n" +
+    "\n" +
+    "                <!--BASE DIMENSION VIEWER.. -->\n" +
+    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "\n" +
+    "                    <!--VARIABLE TOKEN MANIFOLD.. SPONSORSHIP TOKEN TRADE-->\n" +
+    "                    <li style=\"float:left;font-size:14px\">\n" +
+    "                        <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
+    "                        <br>\n" +
+    "                        <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>\n" +
+    "                    </li>\n" +
+    "\n" +
+    "                    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
+    "                    <!--\n" +
+    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
+    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
+    "                    -->\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </ul>\n" +
+    "\n" +
+    "\n" +
+    "                <!--DISCOVE MODULE-->\n" +
+    "                <!--VALUE MAP PACKAGES-->\n" +
+    "\n" +
+    "                <!--\n" +
+    "                PREPOPULATED FILTER   \n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                FOLLOWING.. TASKS.. PROJECTS.. ALL CONTEXT.. ASSOCIATIONS\n" +
+    "                <p><b>Suggestions and Information</b></p>\n" +
+    "                <highchart config=\"chart\"></highchart>\n" +
+    "                -->\n" +
+    "                <!--SKETCH UI of this on paper.. analog..-->\n" +
+    "\n" +
+    "                <!--WITH UT VM.. TOTAL OF 1-->\n" +
+    "                <!--ALWAYS DO RELATIVE VALUE? -->\n" +
+    "                <!--BULK ORDER INTERFACE-->\n" +
+    "                <!--GENERALIZE TO CREATING ORDERS... more info-->\n" +
+    "\n" +
+    "                <!--MANIFOLD BUILDER.. VERB.. MAIN VERBS.. APPS-->\n" +
+    "                <!--APPS AS TOKEN VERBS-->\n" +
+    "                <!--CREATE+TIME+CHILL-->\n" +
+    "                <!--CREATE+TRANSACTION+CHILL-->\n" +
+    "\n" +
+    "                <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->\n" +
+    "\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-sm-3 col-xs-12\" style=\"max-height:50vh;overflow:scroll\">\n" +
+    "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedsuggestedTokenTags track by $index\">\n" +
+    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-9 col-xs-12\">\n" +
+    "\n" +
+    "                        <!--INFO ABOUT SELECTED BASE TOKEN-->\n" +
+    "                        <!--UT STATIC-->\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Universal Token Manifold Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.</p>\n" +
+    "\n" +
+    "                        <!--VARIABLE PER SLIDER. 4-->\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                            <div flex=\"70\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                        </div>\n" +
+    "                        \n" +
+    "                        <div class=\"row\">\n" +
+    "                            <div class=\"col-xs-12\">\n" +
+    "                                <div ng-repeat=\"item in newOrder\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                    <!--TODO: TWO ROWS-->\n" +
+    "                                    <div layout=\"\">\n" +
+    "\n" +
+    "                                        <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">3600</div>\n" +
+    "\n" +
+    "                                        <!--SPONSORSHIP MANIFOLD SELECTED..-->\n" +
+    "                                        <div flex=\"20\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
+    "                                            <br><br>\n" +
+    "                                            <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>\n" +
+    "                                        </div>\n" +
+    "\n" +
+    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                    \n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">{{item[0].amount || 0}}</div>\n" +
+    "\n" +
+    "                                        <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
+    "\n" +
+    "                                        <div flex=\"20\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
+    "\n" +
+    "                                    </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                                <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                                <highchart config=\"pieTotal\"></highchart>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "                <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->\n" +
+    "                <!--\n" +
     "                <div class=\"row\" style=\"max-height:500px;overflow:scroll\">\n" +
     "                    <div ng-repeat=\"item in positions\">\n" +
     "                        <div class=\"col-sm-6\" style=\"padding:0px\">\n" +
@@ -4295,45 +4407,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "                -->\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>Suggestions and Information</b></p>\n" +
-    "\n" +
-    "                <highchart config=\"chart\"></highchart>\n" +
-    "\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-3\" style=\"max-height:50vh;overflow:scroll\">\n" +
-    "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedsuggestedTokenTags track by $index\">\n" +
-    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-xs-9\">\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-xs-12\">\n" +
-    "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-xs-12\">\n" +
-    "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[2]}}</span></div>\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                                <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                                <highchart config=\"pieTotal\"></highchart>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -5382,9 +5458,9 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<div class=\"spacing-5\"></div>\n" +
     "			<ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "	            <!--<li><a href=\"#\" ng-click=\"selectTab('CONTENT')\">Content</a></li>-->\n" +
-    "				<li><a href=\"#\" ng-click=\"selectTab('MARKET')\">Markets</a></li>\n" +
-    "	            <li><a href=\"#\" ng-click=\"selectTab('MANIFOLD')\">Manifold Actions</a></li>\n" +
-    "	            <li><a href=\"#\" ng-click=\"selectTab('ANALYSIS')\">Market Analysis</a></li>\n" +
+    "				<li><a href=\"#\" ng-click=\"selectTab('MARKET')\"><i class=\"fa fa-exchange\"></i> Markets</a></li>\n" +
+    "	            <li><a href=\"#\" ng-click=\"selectTab('MANIFOLD')\"><i class=\"fas fa-infinity\"></i> Manifold Actions</a></li>\n" +
+    "	            <li><a href=\"#\" ng-click=\"selectTab('ANALYSIS')\"><i class=\"fas fa-chart-bar\"></i> Market Analysis</a></li>\n" +
     "	        </ul>\n" +
     "\n" +
     "			<!--MARKETS-->\n" +

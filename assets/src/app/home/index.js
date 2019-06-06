@@ -1019,6 +1019,8 @@ angular.module( 'conexus.home', [
     $scope.newOrder = [];
     $scope.newOrderNEW = [];
     $scope.createPosition = function(model){
+
+
         if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
             var setAlpha = {'UNIVERSALTOKEN':1};
             var setBeta = {};
@@ -1034,6 +1036,8 @@ angular.module( 'conexus.home', [
                 {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id}
             ]);
         }
+
+        
     };
 
     $scope.$watch('newOrder', function(newValue, oldValue){

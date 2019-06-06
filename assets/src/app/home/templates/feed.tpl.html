@@ -217,15 +217,130 @@
             <div style="background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div class="container" style="margin-top: auto;margin-bottom: auto;">
-                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Update Value Map</h1>
-                        <p style="color:white;">Now that we know more about you, let's update.</p>
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Update Your Value Map</h1>
+                        <p style="color:white;">Now that we know more about you</p>
                     </div>
                 </div>
             </div>
             <div style="padding:16px;">
 
-                <p><b>My Current Positions & Value Map</b></p>
-                <!--WIP-->
+                <p><b>My Current Positions & Value Map</b> <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Select and rank what you believe is of value to create positions/orders on the Market</p>
+
+                <!--BASE DIMENSION VIEWER.. -->
+                <ul style="padding:0px;" class="member-tabs">
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+
+                    <!--VARIABLE TOKEN MANIFOLD.. SPONSORSHIP TOKEN TRADE-->
+                    <li style="float:left;font-size:14px">
+                        <a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-infinity"></i> Manifold</a>
+                        <br>
+                        <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>
+                    </li>
+
+                    <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
+                    <!--
+                    <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/followers" ng-click="getMyFollowers()"><i class="fa fa-users"></i> Following</a></li>
+                    <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-project-diagram"></i> My Projects</a></li>
+                    -->
+                    <div style="clear:both"></div>
+                </ul>
+
+
+                <!--DISCOVE MODULE-->
+                <!--VALUE MAP PACKAGES-->
+
+                <!--
+                PREPOPULATED FILTER   
+                <div class="spacing-10"></div>
+                FOLLOWING.. TASKS.. PROJECTS.. ALL CONTEXT.. ASSOCIATIONS
+                <p><b>Suggestions and Information</b></p>
+                <highchart config="chart"></highchart>
+                -->
+                <!--SKETCH UI of this on paper.. analog..-->
+
+                <!--WITH UT VM.. TOTAL OF 1-->
+                <!--ALWAYS DO RELATIVE VALUE? -->
+                <!--BULK ORDER INTERFACE-->
+                <!--GENERALIZE TO CREATING ORDERS... more info-->
+
+                <!--MANIFOLD BUILDER.. VERB.. MAIN VERBS.. APPS-->
+                <!--APPS AS TOKEN VERBS-->
+                <!--CREATE+TIME+CHILL-->
+                <!--CREATE+TRANSACTION+CHILL-->
+
+                <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->
+
+                <div class="row">
+                    <div class="col-sm-3 col-xs-12" style="max-height:50vh;overflow:scroll">
+                        <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedsuggestedTokenTags track by $index">
+                            <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-xs-12">
+
+                        <!--INFO ABOUT SELECTED BASE TOKEN-->
+                        <!--UT STATIC-->
+                        <p style="color:gray;font-style:italic">Universal Token Manifold Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.</p>
+
+                        <!--VARIABLE PER SLIDER. 4-->
+                        <div layout="">
+                            <div flex="15" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                            <div flex="70" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-repeat="item in newOrder">
+
+
+
+
+
+                                    <!--TODO: TWO ROWS-->
+                                    <div layout="">
+
+                                        <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
+                                        <div flex="10" layout="" layout-align="center center">3600</div>
+
+                                        <!--SPONSORSHIP MANIFOLD SELECTED..-->
+                                        <div flex="20" layout="" layout-align="center center">
+                                            <a>{{item[1].identifier.split('+')[2]}}</a>
+                                            <br><br>
+                                            <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>
+                                        </div>
+
+                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                    
+                                        <div flex="10" layout="" layout-align="center center">{{item[0].amount || 0}}</div>
+
+                                        <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
+                                        <div flex="10" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</span></div>
+
+                                        <div flex="20" layout="" layout-align="center center"><a>Universal Token</a></div>
+
+                                    </div>
+
+
+                                    
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <highchart config="chartMapTotal"></highchart>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <highchart config="pieTotal"></highchart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->
+                <!--
                 <div class="row" style="max-height:500px;overflow:scroll">
                     <div ng-repeat="item in positions">
                         <div class="col-sm-6" style="padding:0px">
@@ -275,45 +390,9 @@
                         </div>
                     </div>
                 </div>
+                -->
 
-                <div class="spacing-10"></div>
 
-                <p><b>Suggestions and Information</b></p>
-
-                <highchart config="chart"></highchart>
-
-                <div class="row">
-                    <div class="col-xs-3" style="max-height:50vh;overflow:scroll">
-                        <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedsuggestedTokenTags track by $index">
-                            <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
-                        </div>
-                    </div>
-                    <div class="col-xs-9">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div ng-repeat="item in newOrder">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div ng-repeat="item in newOrder">
-                                    <div layout="">
-                                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[1].identifier.split('+')[2]}}</span></div>
-                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
-                                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item[0].amount || 0}}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <highchart config="chartMapTotal"></highchart>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <highchart config="pieTotal"></highchart>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="spacing-10"></div>
 

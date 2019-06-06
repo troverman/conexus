@@ -216,19 +216,12 @@ angular.module( 'conexus.register', [
         if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
 
             //OBJ OR ARRAY?
-
+            console.log(model, $scope.newOrder)
             var setAlpha = {
                 'UNIVERSALTOKEN':1
             };
             var setBeta = {};
             setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
-
-            //var setAlpha = [
-            //    {name:'UNIVERSALTOKEN', amount:1}
-            //];
-            //var setBeta = [
-            //    {name:model+'+[ADDRESS]+SPONSOR', amount:3600}
-            //];
 
         	$scope.newOrderNEW.push({
                 setAlpha:setAlpha,
