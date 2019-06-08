@@ -122,7 +122,6 @@ angular.module( 'conexus.members', [
     };
 
     $scope.updateChart = function(){
-        
         $scope.totalMap.series = [{
             id: 'Reputation',
             type: 'column',
@@ -130,9 +129,7 @@ angular.module( 'conexus.members', [
             data: [],
             turboThreshold: 10000,
         }];
-
         $scope.totalMap.xAxis.categories = [];
-
         var groupObject = {};
         for (x in $scope.members){
             for (y in Object.keys($scope.members[x].reputation)){
@@ -145,13 +142,9 @@ angular.module( 'conexus.members', [
                 }
             }
         }
-
-        console.log(groupObject);
-
         var sortable = [];
         for (var dimension in groupObject) {sortable.push([dimension, groupObject[dimension]])}
         sortable.sort(function(a, b) {return b[1] - a[1]});
-
         for (x in sortable){
             if (x < 100){
                 $scope.pieMap.series[0].data.push({
@@ -164,7 +157,6 @@ angular.module( 'conexus.members', [
                 $scope.totalMap.series[0].data.push(sortable[x][1]);
             }
         }
-
     };
     $scope.updateChart();
 

@@ -174,6 +174,11 @@ angular.module( 'conexus.register', [
         console.log( $scope.pieTotal)
     };
 
+    $scope.removePosition = function(model){
+        var index = $scope.newOrder.map(function(obj){return obj[0].identifier}).indexOf(model[0].identifier);
+        if (index != -1){$scope.newOrder.splice(index, 1)}
+    };
+
     console.log($scope.chartMapTotal, $scope.pieTotal);
 
     $scope.$watch('newOrder', function(newValue, oldValue){
@@ -221,7 +226,7 @@ angular.module( 'conexus.register', [
                 'UNIVERSALTOKEN':1
             };
             var setBeta = {};
-            setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
+            setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 86400;
 
         	$scope.newOrderNEW.push({
                 setAlpha:setAlpha,
@@ -242,7 +247,7 @@ angular.module( 'conexus.register', [
             $scope.newOrder.push(
                 [
                     {amount:1, identifier:'UNIVERSALTOKEN'}, 
-                    {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'}
+                    {amount:86400, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'}
                 ]
             );
 

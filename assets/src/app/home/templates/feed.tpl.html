@@ -6,17 +6,24 @@
         <div ng-show="pageNumber == 0" class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                    <div style="margin-top: auto;margin-bottom: auto;padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Information & Settings</h1>
-                        <p style="color:white;">About your experience.</p>
+                        <h5 ng-if="false">
+                            <a style="color:white;" ng-disabled="!consentAgreement" ng-click="changePage()">
+                                CONTINUE <i class="fa fa-arrow-right"></i>
+                            </a>
+                            <a style="color:white;" ng-disabled="!consentAgreement" ng-click="changePage(-1)">
+                                SKIP <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </h5>
                     </div>
                 </div>
             </div>
 
             <div style="padding:16px;">
-                <p style="color:gray;font-style:italic">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style="float:right;height:auto;margin:0px" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
                 <div class="row">
                     <div class="col-md-5 col-xs-12" style="padding-right:5px;padding-left:10px">
+
                         <div class="member-card" ng-click="renderReputationToggle(currentUser)">
                             <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                                 <a href="#">
@@ -37,20 +44,36 @@
                                 <a ng-show="false" href="{{currentUser.socialAccounts.google.profileUrl}}" target="_blank"><i class="fa fa-google google-icon"></i></a>
                             </div>
                         </div>
-                        <p><a style="color:gray" href="/account"><i class="fas fa-passport"></i> Account Settings</a></p>
+                   
+                        <p style="color:gray;font-style:italic">All information given to the CRE8 NETWORK comes from a place of mutual consent.</p> 
+                        <p><md-switch style="" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
+                        <p><b>I agree.</b></p>
+
                     </div>
                     <div class="col-md-7 col-xs-12" style="padding-right:5px;padding-left:10px">
                         <div class="card" style="margin-top:0px;">
+                            <div style="background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')" class="imageContainerSmall">
+                                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">
+                                            <a style="color:white" href="/account"><i class="fas fa-passport"></i> Account Settings</a>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
                             <div style="padding:16px;">
                                 <form role="form" ng-submit="editAccount()">
-                                    <div style="padding:0px" class="col-xs-12"><h5>Avatar Url</h5><input type="text" ng-model="newAccountInformation.avatarUrl" placeholder="Avatar Url" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-12"><h5>Cover Url</h5><input type="text" ng-model="newAccountInformation.coverUrl" placeholder="Cover Url" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-12"><h5>Username</h5><input type="text" ng-model="newAccountInformation.username" placeholder="Username" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-6"><h5>Email</h5><input type="text" ng-model="newAccountInformation.email" placeholder="Email" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-6"><h5>Phone Number</h5><input type="text" ng-model="newAccountInformation.phoneNumber" placeholder="Phone Number" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-4"><h5>First Name</h5><input type="text" ng-model="newAccountInformation.firstName" placeholder="First Name" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-4"><h5>Last Name</h5><input type="text" ng-model="newAccountInformation.lastName" placeholder="Last Name" class="form-control"></div>
-                                    <div style="padding:0px" class="col-xs-4"><h5>Date Of Birth</h5><input type="date" ng-model="newAccountInformation.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-6">
+                                        <h5><i class="fas fa-link"></i> Avatar URL</h5>
+                                        <input type="text" ng-model="newAccountInformation.avatarUrl" placeholder="Avatar Url" class="form-control">
+                                    </div>
+                                    <div style="padding:0px" class="col-xs-6"><h5><i class="fas fa-link"></i> Cover URL</h5><input type="text" ng-model="newAccountInformation.coverUrl" placeholder="Cover Url" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-12"><h5><i class="fas fa-user"></i> Username</h5><input type="text" ng-model="newAccountInformation.username" placeholder="Username" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-6"><h5><i class="fas fa-envelope"></i> Email</h5><input type="text" ng-model="newAccountInformation.email" placeholder="Email" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-6"><h5><i class="fas fa-phone"></i> Phone Number</h5><input type="text" ng-model="newAccountInformation.phoneNumber" placeholder="Phone Number" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-4"><h5><i class="fas fa-info"></i> First Name</h5><input type="text" ng-model="newAccountInformation.firstName" placeholder="First Name" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-4"><h5><i class="fas fa-info"></i> Last Name</h5><input type="text" ng-model="newAccountInformation.lastName" placeholder="Last Name" class="form-control"></div>
+                                    <div style="padding:0px" class="col-xs-4"><h5><i class="fas fa-birthday-cake"></i> Date Of Birth</h5><input type="date" ng-model="newAccountInformation.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
                                     <button type="submit" class="btn btn-default log-btn" ng-disabled="!consentAgreement">Save</button>
                                     <div style="clear:both"></div>
                                 </form>
@@ -58,8 +81,10 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <!--<p>Record Attention <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Attention Tokenization</span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
-                        <p>Location Tracking <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Location Tokenization</span><md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>-->
+                        <!--
+                        <p>Record Attention <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Attention Tokenization</span><md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch></p>
+                        <p>Location Tracking <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Required for Location Tokenization</span><md-switch ng-model="gpsTracking" aria-label="GPS Tracking"></md-switch></p>
+                        -->
                     </div>
                 </div>
             </div>
@@ -73,9 +98,17 @@
         <div ng-if="pageNumber == 1" class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                    <div style="margin-top: auto;margin-bottom: auto;padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Projects</h1>
                         <p style="color:white;">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>
+                        <h5 style="color:white;" ng-if="false">
+                            <p ng-disabled="!consentAgreement"  ng-click="changePage()">
+                                CONTINUE <i class="fa fa-arrow-right"></i>
+                            </p>
+                             <p ng-disabled="!consentAgreement"  ng-click="changePage(-1)">
+                                SKIP <i class="fa fa-angle-double-right"></i>
+                            </p>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -126,7 +159,7 @@
         <div ng-if="pageNumber == 2" class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                    <div style="margin-top: auto;margin-bottom: auto;padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tasks</h1>
                         <p style="color:white;">Coordinate with Intention. Get Involved.</p>
                     </div>
@@ -180,7 +213,7 @@
         <div ng-if="pageNumber == 3" class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?friendship,skills,engineering,code,computer,technology,value,fintech')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                    <div style="margin-top: auto;margin-bottom: auto;padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Members</h1>
                         <p style="color:white;">CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>
                     </div>
@@ -195,7 +228,7 @@
                     <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
                 </div>
                 <highchart config="totalMap"></highchart>
-                <div class="col-sm-6" ng-repeat="item in members.slice(0,10)">
+                <div class="col-sm-6" ng-repeat="item in members">
                     <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
                         <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
                             <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
@@ -213,10 +246,12 @@
             </div>
         </div>
 
+
+
         <div ng-if="pageNumber == 4" class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                    <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                    <div style="margin-top: auto;margin-bottom: auto;padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Update Your Value Map</h1>
                         <p style="color:white;">Now that we know more about you</p>
                     </div>
@@ -228,35 +263,37 @@
                 <p style="color:gray;font-style:italic">Select and rank what you believe is of value to create positions/orders on the Market</p>
 
                 <!--BASE DIMENSION VIEWER.. -->
+                <!--SUGGESTED MANIFOLDS..-->
                 <ul style="padding:0px;" class="member-tabs">
                     <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-
-                    <!--VARIABLE TOKEN MANIFOLD.. SPONSORSHIP TOKEN TRADE-->
                     <li style="float:left;font-size:14px">
-                        <a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-infinity"></i> Manifold</a>
+                        <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold</a>
                         <br>
                         <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>
                     </li>
-
                     <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
-                    <!--
-                    <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/followers" ng-click="getMyFollowers()"><i class="fa fa-users"></i> Following</a></li>
-                    <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-project-diagram"></i> My Projects</a></li>
-                    -->
                     <div style="clear:both"></div>
                 </ul>
-
+      
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><b>Suggestions and Information</b></p>
+                        <!--<highchart config="chart"></highchart>-->
+                        <ul style="padding:0px;" class="member-tabs">
+                            <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/followers" ng-click="getMyFollowers()"><i class="fa fa-users"></i> Following</a></li>
+                            <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-project-diagram"></i> My Projects</a></li>
+                            <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-list-ol"></i> Tasks</a></li>
+                            <div style="clear:both"></div>
+                        </ul>
+                        <div class="card">
+                            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="valueMapQuery"></tags-input>
+                        </div>
+                    </div>
+                </div>
 
                 <!--DISCOVE MODULE-->
-                <!--VALUE MAP PACKAGES-->
+                <!--VALUE MAP PACKAGES-->  
 
-                <!--
-                PREPOPULATED FILTER   
-                <div class="spacing-10"></div>
-                FOLLOWING.. TASKS.. PROJECTS.. ALL CONTEXT.. ASSOCIATIONS
-                <p><b>Suggestions and Information</b></p>
-                <highchart config="chart"></highchart>
-                -->
                 <!--SKETCH UI of this on paper.. analog..-->
 
                 <!--WITH UT VM.. TOTAL OF 1-->
@@ -271,6 +308,7 @@
 
                 <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->
 
+
                 <div class="row">
                     <div class="col-sm-3 col-xs-12" style="max-height:50vh;overflow:scroll">
                         <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedsuggestedTokenTags track by $index">
@@ -282,50 +320,38 @@
                         <!--INFO ABOUT SELECTED BASE TOKEN-->
                         <!--UT STATIC-->
                         <p style="color:gray;font-style:italic">Universal Token Manifold Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.</p>
+                        
+                        <div class="spacing-10"></div>
 
                         <!--VARIABLE PER SLIDER. 4-->
                         <div layout="">
-                            <div flex="15" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
-                            <div flex="70" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                            <div flex="35" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                            <div flex="65" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
                         </div>
+
+                        <div class="spacing-10"></div>
                         
                         <div class="row">
                             <div class="col-xs-12">
                                 <div ng-repeat="item in newOrder">
-
-
-
-
-
                                     <!--TODO: TWO ROWS-->
                                     <div layout="">
-
                                         <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
                                         <div flex="10" layout="" layout-align="center center">3600</div>
-
                                         <!--SPONSORSHIP MANIFOLD SELECTED..-->
-                                        <div flex="20" layout="" layout-align="center center">
+                                        <div flex="25" layout="" layout-align="center center">
                                             <a>{{item[1].identifier.split('+')[2]}}</a>
-                                            <br><br>
-                                            <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>
+                                            <!--<p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>-->
                                         </div>
-
-                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
-                                    
-                                        <div flex="10" layout="" layout-align="center center">{{item[0].amount || 0}}</div>
-
+                                        <!--<div flex="15" layout="" layout-align="center center">{{item[0].amount || 0}}</div>-->
                                         <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
-                                        <div flex="10" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</span></div>
-
-                                        <div flex="20" layout="" layout-align="center center"><a>Universal Token</a></div>
-
+                                        <div flex="30" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</span></div>
+                                        <div flex="30" layout="" layout-align="center center"><a>Universal Token</a></div>
+                                        <div flex="5" layout="" layout-align="center center"><a ng-click="removePosition(item)"><i class="fas fa-remove"></i></a></div>
                                     </div>
-
-
-                                    
-
-
-
+                                    <div layout="">
+                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-12">
@@ -340,11 +366,13 @@
 
 
                 <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->
-                <!--
                 <div class="row" style="max-height:500px;overflow:scroll">
+                    
                     <div ng-repeat="item in positions">
-                        <div class="col-sm-6" style="padding:0px">
+                        <div class="col-sm-12" style="padding:0px">
+                            
                             <div class="card" ng-click="cardDetailToggle(item)">
+                                <!--
                                 <div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
                                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                                         <div style="margin-top: auto;margin-bottom: auto;">
@@ -361,6 +389,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                -->
                                 <div style="padding:16px">
                                     <div style="float:right;text-align:right">
                                         <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
@@ -387,10 +416,10 @@
                                     <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                -->
 
 
 
@@ -398,6 +427,9 @@
 
             </div>
         </div>
+
+
+
 
         <div ng-if="pageNumber == 5" class="card" ng-click="">
             <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">

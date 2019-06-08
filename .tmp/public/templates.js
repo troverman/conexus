@@ -4026,17 +4026,24 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <div ng-show=\"pageNumber == 0\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?settings')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Information & Settings</h1>\n" +
-    "                        <p style=\"color:white;\">About your experience.</p>\n" +
+    "                        <h5 ng-if=\"false\">\n" +
+    "                            <a style=\"color:white;\" ng-disabled=\"!consentAgreement\" ng-click=\"changePage()\">\n" +
+    "                                CONTINUE <i class=\"fa fa-arrow-right\"></i>\n" +
+    "                            </a>\n" +
+    "                            <a style=\"color:white;\" ng-disabled=\"!consentAgreement\" ng-click=\"changePage(-1)\">\n" +
+    "                                SKIP <i class=\"fa fa-angle-double-right\"></i>\n" +
+    "                            </a>\n" +
+    "                        </h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "                <p style=\"color:gray;font-style:italic\">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style=\"float:right;height:auto;margin:0px\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-md-5 col-xs-12\" style=\"padding-right:5px;padding-left:10px\">\n" +
+    "\n" +
     "                        <div class=\"member-card\" ng-click=\"renderReputationToggle(currentUser)\">\n" +
     "                            <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
     "                                <a href=\"#\">\n" +
@@ -4057,20 +4064,36 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.google.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <p><a style=\"color:gray\" href=\"/account\"><i class=\"fas fa-passport\"></i> Account Settings</a></p>\n" +
+    "                   \n" +
+    "                        <p style=\"color:gray;font-style:italic\">All information given to the CRE8 NETWORK comes from a place of mutual consent.</p> \n" +
+    "                        <p><md-switch style=\"\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
+    "                        <p><b>I agree.</b></p>\n" +
+    "\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-7 col-xs-12\" style=\"padding-right:5px;padding-left:10px\">\n" +
     "                        <div class=\"card\" style=\"margin-top:0px;\">\n" +
+    "                            <div style=\"background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')\" class=\"imageContainerSmall\">\n" +
+    "                                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                            <a style=\"color:white\" href=\"/account\"><i class=\"fas fa-passport\"></i> Account Settings</a>\n" +
+    "                                        </h1>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
     "                            <div style=\"padding:16px;\">\n" +
     "                                <form role=\"form\" ng-submit=\"editAccount()\">\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Avatar Url</h5><input type=\"text\" ng-model=\"newAccountInformation.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Cover Url</h5><input type=\"text\" ng-model=\"newAccountInformation.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Username</h5><input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Username\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5>Email</h5><input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5>Phone Number</h5><input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>First Name</h5><input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Last Name</h5><input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
-    "                                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Date Of Birth</h5><input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                                        <h5><i class=\"fas fa-link\"></i> Avatar URL</h5>\n" +
+    "                                        <input type=\"text\" ng-model=\"newAccountInformation.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\">\n" +
+    "                                    </div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-link\"></i> Cover URL</h5><input type=\"text\" ng-model=\"newAccountInformation.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5><i class=\"fas fa-user\"></i> Username</h5><input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Username\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-envelope\"></i> Email</h5><input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-phone\"></i> Phone Number</h5><input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-info\"></i> First Name</h5><input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-info\"></i> Last Name</h5><input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
+    "                                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-birthday-cake\"></i> Date Of Birth</h5><input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
     "                                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!consentAgreement\">Save</button>\n" +
     "                                    <div style=\"clear:both\"></div>\n" +
     "                                </form>\n" +
@@ -4078,8 +4101,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-xs-12\">\n" +
-    "                        <!--<p>Record Attention <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Attention Tokenization</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
-    "                        <p>Location Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>-->\n" +
+    "                        <!--\n" +
+    "                        <p>Record Attention <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Attention Tokenization</span><md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch></p>\n" +
+    "                        <p>Location Tracking <a ng-click=\"informationToggle()\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><br><span style=\"font-size:10px\">Required for Location Tokenization</span><md-switch ng-model=\"gpsTracking\" aria-label=\"GPS Tracking\"></md-switch></p>\n" +
+    "                        -->\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -4093,9 +4118,17 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <div ng-if=\"pageNumber == 1\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Projects</h1>\n" +
     "                        <p style=\"color:white;\">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>\n" +
+    "                        <h5 style=\"color:white;\" ng-if=\"false\">\n" +
+    "                            <p ng-disabled=\"!consentAgreement\"  ng-click=\"changePage()\">\n" +
+    "                                CONTINUE <i class=\"fa fa-arrow-right\"></i>\n" +
+    "                            </p>\n" +
+    "                             <p ng-disabled=\"!consentAgreement\"  ng-click=\"changePage(-1)\">\n" +
+    "                                SKIP <i class=\"fa fa-angle-double-right\"></i>\n" +
+    "                            </p>\n" +
+    "                        </h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -4146,7 +4179,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <div ng-if=\"pageNumber == 2\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tasks</h1>\n" +
     "                        <p style=\"color:white;\">Coordinate with Intention. Get Involved.</p>\n" +
     "                    </div>\n" +
@@ -4200,7 +4233,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        <div ng-if=\"pageNumber == 3\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?friendship,skills,engineering,code,computer,technology,value,fintech')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Members</h1>\n" +
     "                        <p style=\"color:white;\">CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>\n" +
     "                    </div>\n" +
@@ -4215,7 +4248,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\"></tags-input>\n" +
     "                </div>\n" +
     "                <highchart config=\"totalMap\"></highchart>\n" +
-    "                <div class=\"col-sm-6\" ng-repeat=\"item in members.slice(0,10)\">\n" +
+    "                <div class=\"col-sm-6\" ng-repeat=\"item in members\">\n" +
     "                    <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
     "                        <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
@@ -4233,10 +4266,12 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
+    "\n" +
+    "\n" +
     "        <div ng-if=\"pageNumber == 4\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Update Your Value Map</h1>\n" +
     "                        <p style=\"color:white;\">Now that we know more about you</p>\n" +
     "                    </div>\n" +
@@ -4248,35 +4283,37 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                <p style=\"color:gray;font-style:italic\">Select and rank what you believe is of value to create positions/orders on the Market</p>\n" +
     "\n" +
     "                <!--BASE DIMENSION VIEWER.. -->\n" +
+    "                <!--SUGGESTED MANIFOLDS..-->\n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "\n" +
-    "                    <!--VARIABLE TOKEN MANIFOLD.. SPONSORSHIP TOKEN TRADE-->\n" +
     "                    <li style=\"float:left;font-size:14px\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
+    "                        <a href=\"#\" ng-click=\"filterToggle('MANIFOLD', 'UNIVERSALTOKEN')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
     "                        <br>\n" +
     "                        <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>\n" +
     "                    </li>\n" +
-    "\n" +
     "                    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
-    "                    <!--\n" +
-    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
-    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
-    "                    -->\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </ul>\n" +
-    "\n" +
+    "      \n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-12\">\n" +
+    "                        <p><b>Suggestions and Information</b></p>\n" +
+    "                        <!--<highchart config=\"chart\"></highchart>-->\n" +
+    "                        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
+    "                            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
+    "                            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-list-ol\"></i> Tasks</a></li>\n" +
+    "                            <div style=\"clear:both\"></div>\n" +
+    "                        </ul>\n" +
+    "                        <div class=\"card\">\n" +
+    "                            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"valueMapQuery\"></tags-input>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "\n" +
     "                <!--DISCOVE MODULE-->\n" +
-    "                <!--VALUE MAP PACKAGES-->\n" +
+    "                <!--VALUE MAP PACKAGES-->  \n" +
     "\n" +
-    "                <!--\n" +
-    "                PREPOPULATED FILTER   \n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                FOLLOWING.. TASKS.. PROJECTS.. ALL CONTEXT.. ASSOCIATIONS\n" +
-    "                <p><b>Suggestions and Information</b></p>\n" +
-    "                <highchart config=\"chart\"></highchart>\n" +
-    "                -->\n" +
     "                <!--SKETCH UI of this on paper.. analog..-->\n" +
     "\n" +
     "                <!--WITH UT VM.. TOTAL OF 1-->\n" +
@@ -4291,6 +4328,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->\n" +
     "\n" +
+    "\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-sm-3 col-xs-12\" style=\"max-height:50vh;overflow:scroll\">\n" +
     "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedsuggestedTokenTags track by $index\">\n" +
@@ -4302,47 +4340,38 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        <!--INFO ABOUT SELECTED BASE TOKEN-->\n" +
     "                        <!--UT STATIC-->\n" +
     "                        <p style=\"color:gray;font-style:italic\">Universal Token Manifold Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.</p>\n" +
+    "                        \n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                        <!--VARIABLE PER SLIDER. 4-->\n" +
     "                        <div layout=\"\">\n" +
-    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
-    "                            <div flex=\"70\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                            <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                            <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
     "                        </div>\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
     "                        \n" +
     "                        <div class=\"row\">\n" +
     "                            <div class=\"col-xs-12\">\n" +
     "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "                                    <!--TODO: TWO ROWS-->\n" +
     "                                    <div layout=\"\">\n" +
-    "\n" +
     "                                        <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
     "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">3600</div>\n" +
-    "\n" +
     "                                        <!--SPONSORSHIP MANIFOLD SELECTED..-->\n" +
-    "                                        <div flex=\"20\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                        <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
     "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                            <br><br>\n" +
-    "                                            <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>\n" +
+    "                                            <!--<p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>-->\n" +
     "                                        </div>\n" +
-    "\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                    \n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">{{item[0].amount || 0}}</div>\n" +
-    "\n" +
+    "                                        <!--<div flex=\"15\" layout=\"\" layout-align=\"center center\">{{item[0].amount || 0}}</div>-->\n" +
     "                                        <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
-    "\n" +
-    "                                        <div flex=\"20\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
-    "\n" +
+    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
+    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
+    "                                        <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
     "                                    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"col-sm-6 col-xs-12\">\n" +
@@ -4357,11 +4386,13 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "\n" +
     "                <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->\n" +
-    "                <!--\n" +
     "                <div class=\"row\" style=\"max-height:500px;overflow:scroll\">\n" +
+    "                    \n" +
     "                    <div ng-repeat=\"item in positions\">\n" +
-    "                        <div class=\"col-sm-6\" style=\"padding:0px\">\n" +
+    "                        <div class=\"col-sm-12\" style=\"padding:0px\">\n" +
+    "                            \n" +
     "                            <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
+    "                                <!--\n" +
     "                                <div style=\"background:url('https://source.unsplash.com/1600x900/?')\" class=\"imageContainerSmall\">\n" +
     "                                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -4378,6 +4409,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                        </div>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
+    "                                -->\n" +
     "                                <div style=\"padding:16px\">\n" +
     "                                    <div style=\"float:right;text-align:right\">\n" +
     "                                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
@@ -4404,10 +4436,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                    <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
+    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                -->\n" +
     "\n" +
     "\n" +
     "\n" +
@@ -4415,6 +4447,9 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "        <div ng-if=\"pageNumber == 5\" class=\"card\" ng-click=\"\">\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
@@ -7581,6 +7616,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div class=\"spacing-10\"></div>\n" +
     "                </div>\n" +
     "\n" +
+    "                <div ng-if=\"type=='MANIFOLD'\">\n" +
+    "\n" +
+    "                    <h5>+SPONSOR+(ADDRESS)</h5>\n" +
+    "                    <h5>+CREDIT+(TIME)</h5>\n" +
+    "                    <h5>+FUTURE+(TIME)</h5>\n" +
+    "                    <h5>+OPTION+(TIME)</h5>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
     "                <!--MARKET-->\n" +
     "                <div ng-if=\"type=='MARKET'\">\n" +
     "\n" +
@@ -7663,9 +7707,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"type=='VALUEMAP'\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
     "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
     "\n" +
@@ -10828,6 +10878,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "<div class=\"container\" ng-if=\"showMap\">\n" +
     "    <div class=\"row\">\n" +
     "\n" +
+    "        <!--DEPRECIATE?-->\n" +
     "        <div ng-show=\"pageNumber == 0\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')\" class=\"imageContainerSmall\">\n" +
@@ -10841,17 +10892,12 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "                    <p style=\"font-style:italic;color:gray;margin:0px\">The more complete and intentional your dimensional vote the better.</p>\n" +
     "                    <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                    <!--\n" +
-    "                    <p style=\"color:gray;font-style:italic\">\n" +
-    "                        <span>All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b></span>\n" +
-    "                        <md-switch style=\"float:right;height:auto;margin:0px\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch>\n" +
-    "                    </p>\n" +
-    "                    -->\n" +
     "                    <button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
+    "        <!--TODO: REORDER? - MOVE TO TUTORIAL-->\n" +
     "        <div ng-show=\"pageNumber == 1\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
@@ -10874,16 +10920,15 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\">\n" +
+    "                    <a href=\"#\" ng-click=\"filterToggle('MANIFOLD')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
+    "                    <span style=\"font-size:9px;color:gray;maring:0px\">+ONMINT+SPONSOR+(address)</span>\n" +
+    "                </li>\n" +
     "                <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
     "            <div class=\"card\">\n" +
-    "                <form style=\"display:flex;flex-direction:row;\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQueryArray\"></tags-input>\n" +
-    "                    <div style=\"border:0px\" class=\"btn btn-default dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                    </div>\n" +
-    "                </form>\n" +
+    "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search | Filter\" ng-model=\"searchQueryArray\"></tags-input>\n" +
     "            </div>\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
@@ -10894,13 +10939,26 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-9 col-xs-12\">\n" +
+    "\n" +
+    "\n" +
+    "                             <!--VARIABLE PER SLIDER. 4-->\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                                <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-xs-12\">\n" +
-    "                                    <div ng-show=\"false\">\n" +
+    "                                    <!--\n" +
+    "                                    <div>\n" +
     "                                        <p style=\"color:gray;margin:0px;font-size:12px\"><b>What is this?</b></p>\n" +
     "                                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We start defining your value map though understanding statements of preference. This is used to coordinate orders on CRE8's Multi Dimensional Token Market.</p>\n" +
     "                                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We present a context of discovery for tokenization actions. Actions are manifest though projects, tasks, time, content, and a variety of other protocol actions are represented on CRE8's network.</p>\n" +
     "                                    </div>\n" +
+    "                                    -->\n" +
+    "                                    <!--\n" +
     "                                    <div ng-repeat=\"item in newOrder\">\n" +
     "                                        <div layout=\"\">\n" +
     "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[2]}}</span></div>\n" +
@@ -10908,6 +10966,27 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
+    "                                    -->\n" +
+    "\n" +
+    "                                    <div ng-repeat=\"item in newOrder\">\n" +
+    "                                        <div layout=\"\">\n" +
+    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\">86400</div>\n" +
+    "                                            <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                                <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
+    "                                                <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+(address)</p>\n" +
+    "                                            </div>\n" +
+    "\n" +
+    "                                            <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a href=\"#\" ng-click=\"informationToggle('MANIFOLD LOGIC')\"><i class=\"fa fa-exchange\"></i>*</a></div>\n" +
+    "\n" +
+    "                                            <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</div>\n" +
+    "                                            <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
+    "                                            <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a href=\"#\" ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
+    "                                        </div>\n" +
+    "                                        <div layout=\"\">\n" +
+    "                                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +

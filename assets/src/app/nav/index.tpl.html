@@ -378,6 +378,15 @@
                     <div class="spacing-10"></div>
                 </div>
 
+                <div ng-if="type=='MANIFOLD'">
+
+                    <h5>+SPONSOR+(ADDRESS)</h5>
+                    <h5>+CREDIT+(TIME)</h5>
+                    <h5>+FUTURE+(TIME)</h5>
+                    <h5>+OPTION+(TIME)</h5>
+
+                </div>
+
                 <!--MARKET-->
                 <div ng-if="type=='MARKET'">
 
@@ -460,9 +469,15 @@
                 </div>
 
                 <div ng-if="type=='VALUEMAP'">
+
+
+
                     <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
+
+
+
                 </div>
 
 

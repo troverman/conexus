@@ -873,26 +873,45 @@ angular.module( 'conexus.home', [
             credits:{enabled:false},
         };
         
-        for (x in $scope.members){
-            if ($scope.members[x].reputation){
+        $scope.updateChart = function(){
+            $scope.totalMap.series = [{
+                id: 'Reputation',
+                type: 'column',
+                name: 'Reputation',
+                data: [],
+                turboThreshold: 10000,
+            }];
+            $scope.totalMap.xAxis.categories = [];
+            var groupObject = {};
+            for (x in $scope.members){
                 for (y in Object.keys($scope.members[x].reputation)){
-                    //Object.keys($scope.members[x].reputation)[y]
-                    //$scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
-                    if ($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]){
-                        //if not in category
-                        var index = $scope.totalMap.xAxis.categories.indexOf(Object.keys($scope.members[x].reputation)[y])
-                        if (index == -1){
-                            $scope.totalMap.series[0].data.push($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
-                            $scope.totalMap.xAxis.categories.push(Object.keys($scope.members[x].reputation)[y]);
-                        }
-                        else{
-                            $scope.totalMap.series[0].data[index] += $scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]
-                        }
-                        //else find index and ++
+                    if(isNaN($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]])){
+                        groupObject[Object.keys($scope.members[x].reputation)[y]] = 0
+                    }
+                    else{
+                        if (!groupObject[Object.keys($scope.members[x].reputation)[y]]){groupObject[Object.keys($scope.members[x].reputation)[y]] = 0}
+                        groupObject[Object.keys($scope.members[x].reputation)[y]] += parseFloat($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]]);
                     }
                 }
             }
-        }
+            var sortable = [];
+            for (var dimension in groupObject) {sortable.push([dimension, groupObject[dimension]])}
+            sortable.sort(function(a, b) {return b[1] - a[1]});
+            for (x in sortable){
+                if (x < 100){
+                    //$scope.pieMap.series[0].data.push({
+                    //    name: sortable[x][0],
+                    //    y: sortable[x][1],
+                    //});
+                }
+                if (x < 250){
+                    $scope.totalMap.xAxis.categories.push(sortable[x][0]);
+                    $scope.totalMap.series[0].data.push(sortable[x][1]);
+                }
+            }
+        };
+        $scope.updateChart();
+
 
         for (x in projects){
             if (projects[x].location){
@@ -908,145 +927,167 @@ angular.module( 'conexus.home', [
             }
         }
 
+        $scope.valueMapQuery = [
+            {text:'create'},
+            {text:'bright'},
+            {text:'futures'},
+        ];
+
+         //TODO
+        //VALUE MAP ETC
+        $scope.loadValueMap = function(){
+            $scope.newOrder = [];
+            $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
+            $scope.discover = $scope.discover.map(function(obj){
+                var returnObj = {};
+                if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
+                if (obj.model == 'TASK'){returnObj = obj.tags;}
+                if (obj.model == 'TRANSACTION'){returnObj = obj.tags;}
+                return returnObj;
+            });
+            $scope.discover = [].concat.apply([], $scope.discover);
+            $scope.discover = $scope.discover.filter(function(e){return e}); 
+            function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+            $scope.finalArray = [];
+            for (x in $scope.discover){
+                var amount = countInArray($scope.discover, $scope.discover[x]);
+                if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
+                    $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
+                }
+            }
+            $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
+        }
+        //$scope.loadValueMap();
+
+        $scope.chartMapTotal = {
+            chart: {
+                polar: true,
+                margin: [30, 30, 30, 30]
+            },
+            series: [{
+                id: 'values',
+                type: 'area',
+                name: 'UNIVERSAL',
+                pointPlacement: 'on',
+                fillOpacity: 0.3,
+                data:[1,1,1,1,1,1,1,1],
+            }],
+            title: {text: ''},
+            xAxis: {
+                title: {text: null},
+                categories: ['LOVE', 'ART', 'PEACE', 'SHELTER', 'REST', 'EXPERIENCE', 'HEALTH', 'HUMAN'],
+                tickmarkPlacement: 'on',
+                lineWidth: 0,
+            },
+            yAxis: {
+                title: {text: null},
+                gridLineInterpolation: 'polygon',
+                lineWidth: 0,
+                min: 0,
+            },
+            legend: {
+                enabled: true,
+                align: 'left',
+                verticalAlign: 'top',
+                y: 70,
+                layout: 'vertical'
+            },
+            legend:false,
+            tooltip:{shared: true,},
+            credits:{enabled:false},
+        };
+
+        //PERFORMANCE....
+        $scope.updateChartTotal = function(){
+            $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
+            $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
+            console.log($scope.chartMapTotal)
+        };
+
+        $scope.pieTotal = {
+            chart: {},
+            series: [{
+                id: 'Pie',
+                type: 'pie',
+                name: 'Pie',
+                colorByPoint: true,
+                data: [
+                    {name:'LOVE',y:1},
+                    {name:'ART',y:1},
+                    {name:'PEACE',y:1},
+                    {name:'SHELTER',y:1},
+                    {name:'EXPERIENCE',y:1},
+                    {name:'HEALTH',y:1},
+                    {name:'HUMAN',y:1},
+                ]
+            }],  
+            title: {text: ''},
+            xAxis: {title: {text: null}},
+            yAxis: {title: {text: null}},
+            credits:{enabled:false},
+        };
+
+        $scope.updatePieTotal = function(){
+            var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
+            $scope.pieTotal.series[0].data = data;
+            console.log( $scope.pieTotal)
+        };
+
+        //TODO: VM CONTROLS ETC
+        //PREPOPULATE ? GENERATOR FROM SUGGESTIONS IS THE WAY - IS THE KEY
+        $scope.newOrder = [];
+        $scope.newOrderNEW = [];
+        $scope.createPosition = function(model){
+
+
+            if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
+                var setAlpha = {'UNIVERSALTOKEN':1};
+                var setBeta = {};
+                setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
+                $scope.newOrderNEW.push({
+                    setAlpha:setAlpha,
+                    setBeta:setBeta,
+                    type:'ONBOOK',
+                    status:'CONTINUAL'
+                });
+                $scope.newOrder.push([
+                    {amount:1, identifier:'UNIVERSALTOKEN'}, 
+                    {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id}
+                ]);
+            }
+
+            
+        };
+
+        $scope.removePosition = function(model){
+            var index = $scope.newOrder.map(function(obj){return obj[0].identifier}).indexOf(model[0].identifier);
+            if (index != -1){$scope.newOrder.splice(index, 1)}
+        };
+
+        $scope.$watch('newOrder', function(newValue, oldValue){
+            if (oldValue != newValue){
+                $scope.updateChartTotal();
+                $scope.updatePieTotal();
+            }
+        }, true);
+        //VALUE MAP ETC
+
     }   
     
 
 
 
 
-    //TODO
-    //VALUE MAP ETC
-    $scope.loadValueMap = function(){
-        $scope.newOrder = [];
-        $scope.discover = [].concat.apply([], [$scope.tasks, $scope.transactions]);
-        $scope.discover = $scope.discover.map(function(obj){
-            var returnObj = {};
-            if (obj.model == 'ORDER'){returnObj = obj.identiferSet;}
-            if (obj.model == 'TASK'){returnObj = obj.tags;}
-            if (obj.model == 'TRANSACTION'){returnObj = obj.tags;}
-            return returnObj;
-        });
-        $scope.discover = [].concat.apply([], $scope.discover);
-        $scope.discover = $scope.discover.filter(function(e){return e}); 
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.finalArray = [];
-        for (x in $scope.discover){
-            var amount = countInArray($scope.discover, $scope.discover[x]);
-            if ($scope.finalArray.map(function(obj){return obj.element}).indexOf($scope.discover[x]) == -1){
-                $scope.finalArray.push({amount:amount, element:$scope.discover[x]})
-            }
-        }
-        $scope.finalArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
-    }
-    //$scope.loadValueMap();
-
-    $scope.chartMapTotal = {
-        chart: {
-            polar: true,
-            margin: [30, 30, 30, 30]
-        },
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'UNIVERSAL',
-            pointPlacement: 'on',
-            fillOpacity: 0.3,
-            data:[1,1,1,1,1,1,1,1],
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: ['LOVE', 'ART', 'PEACE', 'SHELTER', 'REST', 'EXPERIENCE', 'HEALTH', 'HUMAN'],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {
-            enabled: true,
-            align: 'left',
-            verticalAlign: 'top',
-            y: 70,
-            layout: 'vertical'
-        },
-        legend:false,
-        tooltip:{shared: true,},
-        credits:{enabled:false},
-    };
-
-    //PERFORMANCE....
-    $scope.updateChartTotal = function(){
-        $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
-        $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
-        console.log($scope.chartMapTotal)
-    };
-
-    $scope.pieTotal = {
-        chart: {},
-        series: [{
-            id: 'Pie',
-            type: 'pie',
-            name: 'Pie',
-            colorByPoint: true,
-            data: [
-                {name:'LOVE',y:1},
-                {name:'ART',y:1},
-                {name:'PEACE',y:1},
-                {name:'SHELTER',y:1},
-                {name:'EXPERIENCE',y:1},
-                {name:'HEALTH',y:1},
-                {name:'HUMAN',y:1},
-            ]
-        }],  
-        title: {text: ''},
-        xAxis: {title: {text: null}},
-        yAxis: {title: {text: null}},
-        credits:{enabled:false},
-    };
-
-    $scope.updatePieTotal = function(){
-        var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
-        $scope.pieTotal.series[0].data = data;
-        console.log( $scope.pieTotal)
-    };
-
-    //TODO: VM CONTROLS ETC
-    //PREPOPULATE ? GENERATOR FROM SUGGESTIONS IS THE WAY - IS THE KEY
-    $scope.newOrder = [];
-    $scope.newOrderNEW = [];
-    $scope.createPosition = function(model){
+   
 
 
-        if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
-            var setAlpha = {'UNIVERSALTOKEN':1};
-            var setBeta = {};
-            setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
-            $scope.newOrderNEW.push({
-                setAlpha:setAlpha,
-                setBeta:setBeta,
-                type:'ONBOOK',
-                status:'CONTINUAL'
-            });
-            $scope.newOrder.push([
-                {amount:1, identifier:'UNIVERSALTOKEN'}, 
-                {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id}
-            ]);
-        }
 
-        
-    };
 
-    $scope.$watch('newOrder', function(newValue, oldValue){
-        if (oldValue != newValue){
-            $scope.updateChartTotal();
-            $scope.updatePieTotal();
-        }
-    }, true);
-    //VALUE MAP ETC
+
+
+
+
+
 
 
 
