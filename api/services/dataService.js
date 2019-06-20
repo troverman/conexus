@@ -1707,7 +1707,6 @@ module.exports = {
 							type:'PROJECT', 
 							address:models[x].project, 
 							validation:{
-
 							}, 
 							//VALIDATION NEST VS POPULATION
 							associatedModels:[],
@@ -1720,14 +1719,12 @@ module.exports = {
 							type:'TASK', 
 							address:models[x].task, 
 							validation:{
-
 							}, 
 							//VALIDATION NEST VS POPULATION
 							associatedModels:[{
 								type:'PROJECT', 
 								address:models[x].project, 
 								validation:{
-
 								}, 
 								//VALIDATION NEST VS POPULATION
 								associatedModels:[],
@@ -1736,28 +1733,23 @@ module.exports = {
 							assoiatedValidations:[],
 						});
 					}
-
 					if (models[x].stream){
 						models[x].associatedModels.push({
 							type:'STREAM', 
 							address:models[x].stream, 
 							validation:{
-
 							}, 
 							//VALIDATION NEST VS POPULATION
 							associatedModels:[],
 							assoiatedValidations:[],
 						});
 					}
-
 					if (models[x].startTime){
 						models[x].type = 'RETROACTIVE';
 					}
-
 					else{
 						models[x].type = 'TIMER';
 					}
-
 					//REMOVE NULL AND VERIFICATION SCORE
 					//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
 					*/
@@ -2126,5 +2118,4 @@ module.exports = {
 			//}
 		});
 	},
-
 };

@@ -90,6 +90,7 @@ angular.module( 'conexus', [
     if ($rootScope.currentUser){
         UserModel.getSome({id:$rootScope.currentUser.id}).then(function(member){
             $rootScope.currentUser = member;
+            if($rootScope.currentUser.dateOfBirth){$rootScope.currentUser.dateOfBirth = new Date($rootScope.currentUser.dateOfBirth)}
             $rootScope.balance = member.balance;
             $rootScope.reputation = member.reputation;
         });

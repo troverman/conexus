@@ -906,6 +906,64 @@ angular.module( 'conexus.developers', [
         });
     };
 
+    $scope.pureMarketGenerator = function(combinatorialRank, marketSize){
+
+        $scope.elementsObj = {};
+        var powerSet = [];
+        powerSet = getAllSubsets(marketSize);
+        powerSet.shift();
+        powerSet.pop();
+
+        for (x in powerSet){
+            if(powerSet[x].length > combinatorialRank){
+                powerSet.splice(x, 1);
+            }
+        }
+
+        console.log(powerSet)
+
+
+
+
+
+        //GENERATE NODES
+        for (x in powerSet){
+            var stringX = powerSet[x].join('');
+            var modelNode = {
+                group:'nodes',
+                data:{id:stringX, type:stringX, name:stringX}
+            };
+            $scope.elementsObj[stringX] = modelNode;
+            
+            //for (y in powerSet){
+            //    var stringY = powerSet[y].join('');
+            //    var found = stringY.split('').some(function(obj){
+            //        return stringX.split('').includes(obj);
+            //    });
+            //    if (!found){
+            //        var modelEdge = {
+            //            group:'edges',
+            //            data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+            //        };
+            //        $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+            //    }
+            //}
+
+        }
+
+        console.log($scope.elementsObj);
+
+        cytoData.getGraph().then(function(graph){
+            $scope.graph = graph;
+            $scope.graph.layout({
+                name: 'cose',
+                infinite: true,
+                fit: false
+            }).run();
+        });
+
+    };
+
 
 
 

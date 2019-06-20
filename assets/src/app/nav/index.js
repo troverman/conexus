@@ -133,6 +133,7 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    $scope.expandAssets = function(){$scope.assetsAreExpanded = !$scope.assetsAreExpanded;};
     $scope.expandAssociations = function(){$scope.associationsAreExpanded = !$scope.associationsAreExpanded;};
 
     //TODO!!!
@@ -1220,31 +1221,55 @@ angular.module( 'conexus.nav', [
         $mdSidenav('tokens').toggle();
     };
 
-    $rootScope.transactionToggle = function(item){
+    $rootScope.transactionToggle = function(item, asset){
+
+        $scope.addAssetToTransaction = function(model){
+            if($scope.newTransaction.identifierSet){$scope.newTransaction.identifierSet.push({text:model})}
+            else{
+                $scope.newTransaction.identifierSet = [];
+                $scope.newTransaction.identifierSet.push({text:model})
+            }
+        };
 
         $scope.closeAllNav();
-
-        console.log(item, $scope.newTransaction);
-
+       
         if($rootScope.currentUser){
-
             if (item){
                 if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, address:item.id, id:item.id}];}
                 else{$scope.newTransaction.to = [{text:item.username, address:item.id, id:item.id}];}
             }
 
-            //if (!$scope.newTransaction.content){$scope.newTransaction.content = 'TEST'}
+            console.log(item, $scope.newTransaction);
 
+            if (!$scope.newTransaction){
+                $scope.newTransaction = {
+                    identifierSet:{}
+                }
+            }
+            if (asset){
+                $scope.newTransaction.identifierSet.push({text:asset});
+            }
+
+            $scope.sortedBalances = [];
+            for (var key in $rootScope.balance) {
+                if(!isNaN($rootScope.balance[key])){$scope.sortedBalances.push([key, $rootScope.balance[key]]);}
+            }
+            $scope.sortedBalances.sort(function(a, b) {
+                return b[1] - a[1];
+            });
+
+
+
+
+            //if (!$scope.newTransaction.content){$scope.newTransaction.content = 'TEST'}
             //TODO:
-            if (!$scope.newTransaction.identifierSet){
+            //if (!$scope.newTransaction.identifierSet){
                 //$scope.newTransaction.identifierSet = [{text:'CRE8'}];
                 //$scope.newTransaction.amountSet = {};
                 //$scope.newTransaction.amountSet['CRE8'] = 1;
                 //$scope.newTransaction.tags = [{text:'tag'},{text:'tag1'}];
-            }
-
+            //}
             $mdSidenav('transaction').toggle();
-
         }
 
         else{$mdSidenav('login').toggle();}
@@ -1697,7 +1722,8 @@ angular.module( 'conexus.nav', [
     $scope.loadAddress = function(query){
         var deferred = $q.defer();
         //TODO: PROJECT AND MEMBER .. 
-        UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(userModels){
+        //TOOD: SEARCH QUERY .. 
+        UserModel.getSome({search:query, limit:1000, skip:0, sort:'createdAt DESC'}).then(function(userModels){
             console.log(userModels);
             userModels.map(function(obj){
                 obj.text = obj.username;
@@ -1710,24 +1736,62 @@ angular.module( 'conexus.nav', [
 
     //TODO! IMPORTANT
     $scope.loadAsset = function(query){
-        return [
-            {text:'CRE8'},
-            {text:'BTC'},
-            {text:'BCH'},
-            {text:'ETH'},
-            {text:'LTC'},
-            {text:'USD'},
-            {text:'STEEM'},
-            {text:'NOVO'},
-            {text:'TIME'},
-            {text:'TIME+ATTENTION'},
-            {text:'CONTENT'},
-            {text:'CONSUMPTION'},
-            {text:'REST'},
-            {text:'MARKETING'},
-            {text:'SHELTER'},
-            {text:'UNIVERSAL'},
-        ];
+        var deferred = $q.defer();
+        //SEND ITEMS? --> SEND CONTENT OWNERSHIP? DIFFERENCE.. HMM
+        //CONTENT HAS RIGHTS TO VIEW TOKEN
+        //PROTOCOL SPECIFIC IDENTIFER SEARCH
+        //GET MY ITEMS TO SEND
+
+        //SHOULD BE TOP ASSETS THAT YOU HAVE
+        //return [
+        //    {text:'CRE8'},
+        //    {text:'BTC'},
+        //    {text:'BCH'},
+        //    {text:'ETH'},
+        //    {text:'LTC'},
+        //    {text:'USD'},
+        //    {text:'STEEM'},
+        //    {text:'NOVO'},
+        //    {text:'TIME'},
+        //    {text:'TIME+ATTENTION'},
+        //    {text:'CONTENT'},
+        //    {text:'CONSUMPTION'},
+        //    {text:'REST'},
+        //    {text:'MARKETING'},
+        //    {text:'SHELTER'},
+        //    {text:'UNIVERSAL'},
+        //];
+
+        $scope.balance = $rootScope.balance;
+        console.log($rootScope.balance, $scope.balance);
+
+        ItemModel.getSome({user:$rootScope.currentUser.id, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
+            console.log(itemModels)
+            
+            //TODO: ALLOW FOR TITLE.. ETC.. USE TOKEN DATA MODEL HERE.. 
+            itemModels.map(function(obj){
+                obj.type='ITEM';
+                //obj.text=obj.title+' '+obj.id;
+                obj.text=obj.id;
+                return obj;
+            });
+
+            for (x in Object.keys($rootScope.balance)){
+                itemModels.push({text:Object.keys($rootScope.balance)[x]});
+            }
+
+            deferred.resolve(itemModels);
+        });
+        return deferred.promise;
+
+
+        //var itemModels = []
+        //for (x in Object.keys($rootScope.balance)){
+        //    itemModels.push({text:Object.keys($rootScope.balance)[x]});
+        //}
+        //return itemModels;
+
+
     };
 
     //TODO! IMPORTANT
@@ -1793,7 +1857,7 @@ angular.module( 'conexus.nav', [
                 obj.text=obj.title;
                 return obj;
             });
-            deferred.resolve(taskSearchModels);
+            deferred.resolve(itemModels);
         });
         return deferred.promise;
     };

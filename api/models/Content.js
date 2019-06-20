@@ -23,6 +23,9 @@ module.exports = {
         //CREATOR
         user: {model: 'user', required: true},
 
+        //ITEM vs CONTENT
+        owner: {model: 'user'},
+
         //TODO: DEPRECIATE
         contentModel: {model: 'content'},
         market: {type: 'string'},

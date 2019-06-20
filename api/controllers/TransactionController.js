@@ -177,6 +177,30 @@ module.exports = {
 		.exec(function(err, transaction) {
 			if (err) {return console.log(err);}
 			else {
+				console.log(transaction)
+
+				//WIP
+				//TODO: OWNER
+				//IF ITEM MODEL...... FRONTENT SHOULD HANDLE THIS? ... HM 
+				//ALSO ASSOCIATEDMODELS
+
+				for (x in Object.keys(transaction.amountSet)){
+					console.log( Object.keys(transaction.amountSet)[x])
+					Item.find({id:Object.keys(transaction.amountSet)[x]}).then(function(itemModels){
+						if (itemModels.length!=0){
+							//REMOVE USER
+							Item.update({id:itemModels[0].id}, {user:transaction.to, owner:transaction.to}).then(function(updatedItemModel){
+								//GENERATOR ON TRANSACTION :^)
+								console.log('UPDATED: ITEM OWNERSHIP TRANSFERRED', updatedItemModel);
+							});
+						}
+					});
+
+					//CONTENT OWNERSHIP? --> CONTENT AND ITEM .. VIEWTOKEN RIGHTS.. 
+						//CONTENT AS ITEM.. ADD VIEWOWNER? .. mm
+						//Content.find()
+				}
+				
 
 				//for (x in Object.keys(amountSet)){
 
