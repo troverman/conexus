@@ -371,10 +371,31 @@ angular.module( 'conexus.nav', [
         $scope.isInformation = true;
     };
 
-    $rootScope.orderToggle = function(){
+    //TODO: RENDER REPUTATION TOGGLE..
+    $rootScope.memberToggle = function(item){
+
+    };
+
+    $rootScope.memberQRToggle = function(item){
+        $scope.closeAllNav();
+        $scope.item = item;
+        $mdSidenav('memberQR').toggle();
+    };
+
+
+    $rootScope.orderToggle = function(identiferSetAlpha, identiferSetBeta){
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newOrder = {};
+            console.log(identiferSetAlpha,identiferSetBeta.id)
+            if (identiferSetAlpha){$scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];}
+            if (identiferSetBeta){
+                $scope.identiferSetBeta = [{text:identiferSetBeta.id}];
+                $scope.newOrder.identiferSetBeta = [{text:identiferSetBeta.id}];
+                $scope.newOrder.setBeta = {};
+                $scope.newOrder.setBeta[identiferSetBeta.id] = 1
+            }
+            console.log($scope.identiferSetBeta);
             $mdSidenav('order').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1242,12 +1263,14 @@ angular.module( 'conexus.nav', [
             console.log(item, $scope.newTransaction);
 
             if (!$scope.newTransaction){
-                $scope.newTransaction = {
-                    identifierSet:{}
-                }
+                $scope.newTransaction = {}
             }
             if (asset){
+                $scope.newTransaction.identifierSet = [];
                 $scope.newTransaction.identifierSet.push({text:asset});
+                $scope.newTransaction.amountSet = {};
+                $scope.newTransaction.amountSet[asset] = 1;
+
             }
 
             $scope.sortedBalances = [];

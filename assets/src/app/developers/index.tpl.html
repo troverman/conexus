@@ -19,6 +19,7 @@
         z-index: -1;
     }
     .modelList p {margin:0px;font-weight:700;}
+    .ngCytoscape{height: 80vh;width:100%;}
 </style>
 
 <div class="intro" style="">
@@ -84,6 +85,16 @@
                 <p><b><a href="#CONEXAPI" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>
                 <p><b><a href="#TOKENIZATION" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></p>
                 <p><b><a href="#MULTIMARKET" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></p>
+                <!--Matching Engine
+                    Market Objects & Traversal Character
+                        Combinatorial 3
+                        Combinatorial 4
+                        Combinatorial N
+                    Combinatorial Market Spaces
+
+                    Group Theoretic Properties
+                -->
+
                 <p><b><a href="#VALIDATIONTRAVERSAL" du-smooth-scroll>Validation & Association Traversals</a></b></p>
                 <p><b><a href="#GROUPINTENTION" du-smooth-scroll>Project Charters & Group Coordination</a></b></p>
                 <p><b><a href="#SYNTHETICTOKENIZATION" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></p>
@@ -1915,15 +1926,15 @@ getSome:function(newQuery){}</div>
     <div class="container">
         <div class="spacing-15"></div>
         <div class="row">
-            <div class="col-sm-8">  
+            <div class="col-sm-6">  
                 <p style="color:gray;font-style:italic">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>
-                <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
                 <p><b>[get, post] /api/passport</b></p>
                 <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>
                 <p>Biometric Authentication -- CRE8 Reccomends</p>
-            </div>
-            <div class="col-sm-4" style="text-align:right">
                 <img style="height:200px;" src="images/latticespin.gif">
+            </div>
+            <div class="col-sm-6">
+                <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
             </div>
         </div>
     </div>
@@ -1980,56 +1991,79 @@ getSome:function(newQuery){}</div>
         </div>
     </div>
     <div class="container">
-        <div class="spacing-15"></div>
-        <div class="row">
-            <div class="col-sm-12">
 
-                <!--VALUE MAP STRUCUTRE-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="spacing-15"></div>
                 <p style="color:gray;font-style:italic">Discrete Order Structure / Value Map</p>
                 <p style="color:gray;font-style:italic">Sets Equalities & Statements of Exchange</p>
-                
                 <p>The Anatomy of an <a href="#ORDER" du-smooth-scroll>Order</a></p>
-                <!--SET VS DISCRETE; VS TYPES; VS CONTINUOUS ETC-->
-
-                <!-- AUTOMATICALLY SELL ONMANIFOLD TOKENS -->
+                <p>Set vs discrete, types: continuous order</p>
+                <p>Manifold action tokens and staked positions</p>
+            </div>
+            <!--<div class="col-sm-6 bootstrapHack">-->
+            <div class="col-sm-6">
+                <div class="spacing-15"></div>
                 <div hljs hljs-language="javascript"  hljs-source="newOrderModel"></div>
+            </div>
+        </div>  
 
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="spacing-10"></div>
+                <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div class="container">
+                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Matching Engine</h1>
+                                <h5 style="color:white">An Immutable Object Structure</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <h4><b>Matching Engine</b></h4>
-                <p>An Immutable Object Structure</p>
-                <p style="color:gray;font-style:italic">Given a set of equations, we formalize an immutable Structure to define a Multidimensional order book</p>
-                <p>Discussion of market types</p>
-                <p style="color:gray;font-style:italic">Commentary on binary books --> to multi books; logic encoded</p>
-                <p style="color:gray;font-style:italic">Priority of Prefrence for Higher Dimensional Orders; types</p>
-                <p>The rank of connection n by size of the market m -- degress of connection -- the moment of liquidity is combinatorial</p>
+                <div>
+                    <div class="spacing-10"></div>
+                    <!--
+                    <h4><b>Matching Engine</b></h4>
+                    <p>An Immutable Object Structure</p>
+                    -->
 
-                <div class="spacing-10"></div>
+                    <!--FUILFILMENT VS TESNOR REPRESENTATION
 
+                    <p style="color:gray;font-style:italic">Given a set of equations, we formalize an immutable Structure to define a Multidimensional order book</p>
+                    <p>Discussion of market types</p>
+                    <p style="color:gray;font-style:italic">Commentary on binary books --> to multi books; logic encoded</p>
+                    <p style="color:gray;font-style:italic">Priority of Prefrence for Higher Dimensional Orders; types</p>
+                    <p>The rank of connection n by size of the market m -- degress of connection -- the moment of liquidity is combinatorial</p>
 
-                <!--BINARY-->
-                <!--`{(alpha_1A,=,beta_1B),(alpha_2A, =, beta_2B),(vdots,,),(delta_nA,=,epsilon_nB):}`-->
+                    <div class="spacing-10"></div>
 
-                <!--just questioning the +--> 
-                `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`
+                    <!--BINARY-->
+                    <!--`{(alpha_1A,=,beta_1B),(alpha_2A, =, beta_2B),(vdots,,),(delta_nA,=,epsilon_nB):}`-->
 
-                <div class="spacing-10"></div>
+                    <!--just questioning the +--> 
+                    `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`
 
-                `sum_({}_1)^n `
+                    <div class="spacing-10"></div>
 
-                <div class="spacing-10"></div>
+                    `sum_({}_1)^n `
 
-                `alpha_1 = ((beta_1),(vdots),(beta_n)) circ [[a_11,cdots,a_m1],[vdots, ddots, vdots],[a_1n,cdots,a_mn]]`
+                    <div class="spacing-10"></div>
 
-                <div class="spacing-10"></div>
+                    `alpha_1 = ((beta_1),(vdots),(beta_n)) circ [[a_11,cdots,a_m1],[vdots, ddots, vdots],[a_1n,cdots,a_mn]]`
+                </div>
 
+            </div>
+        </div>
+
+        <div class="spacing-10"></div>
+
+        <div class="row">
+            <div class="col-sm-6">
                 <!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->
-                <div hljs hljs-language="javascript"  hljs-source="orderBookTensor"></div>
-
                 <div class="spacing-10"></div>
-
                 <p style="color:gray;font-style:italic">Tensor Structure of Assets; Layering and Braiding</p>
-
                 <p>Tensor Assets; and immutable Structure</p>
 
                 <!--
@@ -2041,13 +2075,10 @@ getSome:function(newQuery){}</div>
                 `A otimes B = A,B`
                 `A otimes B = A -> B` 
                 -->
-
                 <div class="spacing-10"></div>
 
                 <p>Tensor Product, Tensor Permuting, Assets as tensors, Layered Tensors as encoded traversals</p>
-
                 <!-- in building out the tensor braid.. powerset-->
-
                 <p>To Generate a Lattice</p>
 
                 <!--
@@ -2062,205 +2093,337 @@ getSome:function(newQuery){}</div>
                 <div class="spacing-10"></div>
 
                 `((a_(11), cdots , a_(1n)),(vdots, ddots, vdots),(a_(m1), cdots , a_(mn)))`
-
-                <a href="/content/5c438e2090a86f150004ebda">INFO</a>
                 
                 <div class="spacing-10"></div>
 
-                <h5>Market Objects and their Traversal Character</h5>
-                <p style="color:gray;font-style:italic">For every n-object there exists nCm objects of rank m</p>
+            </div>
+            <div class="col-sm-6">
+                <div hljs hljs-language="javascript"  hljs-source="orderBookTensor"></div>
+            </div>
+        </div>
+
+        <div class="spacing-10"></div>
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Market Objects & Traversal Character</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <!--TODO: TITLE-->
+                        <h5>Market Objects and their Traversal Character</h5>
+                        <p style="color:gray;font-style:italic">For every n-object there exists nCm objects of rank m</p>
+                        
+                        `((n),(m)) = (n!)/(m!(n-m)!)`
+                        <br><br><br>
+                        `a_(n1_m) otimes b_(n2_m) = a,b_((n1+n2)_m)`
+                        <!--DOWNWARD TRAVERSAL PROPAGATION-->
+
+                        <div class="spacing-10"></div>
+                        <p>Connection Lattice and the Traversal Facet (inverted Facet)</p>
+                        <p>Direction of connection & Asset flow</p>
+                        <p>Asset Space, N Size Market, Traversal Logic</p>
+                        <p>'Assets' Vs Markets</p>
+                        <div class="spacing-10"></div>
+
+                        <p><b>Market Graph Object</b></p>
+                        <p>Nodes: Assets or Markets (Combinatorials)</p>
+                        <p>Edges: Generalized Absolute Graph Connections</p>
+                        <p>Links: Number of 1D Connections</p>
+                        <p style="color:gray;font-style:italic">AB-C: 1 Edge; 3 Links; 2 Forward; 1 Back</p>
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <div>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">2 Space</h1>
+                                    <h5 style="color:white">Binary Market Space</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <p><b>2-2 "Combinatorial 2"</b></p>
+                        <p>A Binary Market</p>
+                        <p>2 nodes</p>
+                        <p>1 edge</p>
+
+                        <p><b>2-3</b></p>
+                        <p><b>2-4</b></p>
+                        <p><b>2-5</b></p>
+
+                        <p><n>2-N Market</b></p>
+                        <p>N nodes</p>
+                        <p>N(N−1)/2 Edges</p>
+                        <p>Links == Edges</p>
+                        <p>Classic Market</p>
+
+                        <!--<p>M COMBINATORIAL OF MARKET SIZE N</p>
+                        <p>M-N-Combinatorial Market</p>
+                        <p>(NxM)/2 Nodes</p>--> <!--WHAT IS THIS?? GENERALIZE IT :)-->
+
+                        <!--<p><b>Combinatorial 3</b></p>
+                        <p>A fully Connected 3-3-Combinatorial-Market</p>-->
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
                 
-                `((n),(m)) = (n!)/(m!(n-m)!)`
+                <div>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">3 Space</h1>
+                                    <h5 style="color:white">Markets with a third combinatorial dimensions</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <!--Category.. CONNECT TO THE CONNECT-->
+
+                        <p><b>3-3 "Combinatorial 3"</b></p>
+                        <p>A fully Connected 3-3-Combinatorial-Market</p>
+                        <p>6 nodes</p>
+                        <p>15 edges - links</p>
+
+                        <img style="height:150px;" src="images/comb3.png">
+                        <span>Connection Lattice</span>
+
+                        <img style="height:150px;" src="images/comb3a.png">
+                        <span>Traversal Facet</span>
+
+                        <div class="spacing-10"></div>
+
+                        <p><b>3-4</b></p>
+                        <p>Fully 3-linked 4 market</p>
+                        <p>Related to 4 Decompose</p>
+                        <p>4 combinatorial 3 Objects</p>
+                        <p>Symmetry</p>
+                        <p>??? 24 NODES</p>
+                        <p>??? 60 EDGES</p>
+
+                        <p><b>3-5</b></p>
+                        <p><b>3-N</b></p>
+                    </div>
+                </div>
 
                 <div class="spacing-10"></div>
 
-                <p>Connection Lattice and the Traversal Facet (inverted Facet)</p>
-
-                <!--TOTAL ASSETS SPACE.. N SIZE MARKET.. TRAVERSAL PATHS-->
-
-                <!--NODES.. ASSETS.. OR COMBINAROTIALS-->
-                <!--EDGES.. GENERALIZED CONNECTIONS-->
-                <!--LINKS.. NUMBER OF 1D CONNECTIONS-->
-                    <!--AB-C: 1 EDGE; 3 LINKS; 2 FORWARD; 1 BACK-->
-
-                <!--'UNIT' VS MARKET-->
-                <!--<p><b>Combinatorial 2</b></p>-->
-                <!--2 nodes-->
-                <!--1 edge-->
-
-                <!--N-2-Combinatorial Market-->
-                <!--N nodes-->
-                <!--N(N−1)/2 Edges-->
-                <!--LINKS == EDGES-->
-
-                <!--(M COMBINATORIAL OF MARKET SIZE N)-->
-                <!--M-N-Combinatorial Market-->
-                <!--(NxM)/2 Nodes--> <!--WHAT IS THIS?? GENERALIZE IT :)-->
-                <!--STUDY-->
-
-                <p><b>Combinatorial 3</b></p>
-                <p>A fully Connected 3-3-Combinatorial-Market</p>
-
-                <!--3-3-->
-                <!--6 nodes-->
-                <!--15 edges--> 
-                <!--links-->
-
-                <!--TODO!!!-->
-                <!--3-4-->
-                <!--HOW IS THIS RELATED TO 4 DECOMPOSE-->
-                <!--COMB 4 HAS 4-D CONNECTION-->
-                <!--4 combinatorial 3s-->
-                <!--...symmetry-->
-                <!--??? 24 NODES-->
-                <!--??? 60 EDGES-->
-
-                <!--Fully 3-liked 4 market-->
-
-
-                <!--3-5-->
-
-                <!--3-n-->
-
-                <span>Figure A</span>
-                <img style="height:150px;" src="images/comb3.png">
-
-                <span>Figure B</span>
-                <img style="height:150px;" src="images/comb3a.png">
+                <div>
+                    <!--<p><b>Combinatorial 4</b></p>
+                    <p>4 Asset MultiMarket Connection Lattice(s)﻿</p>-->
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">4 Space</h1>
+                                    <h5 style="color:white">4 Asset MultiMarket Connection Lattice(s)﻿</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <p><b>4-4 "Combinatorial 4"</b></o>
+                        <p>16 nodes</p>
+                        <p>24 edges</p>
+                        <p>links</p>
+                        <img style="height:150px;" src="images/comb4.png">
+                        <img style="height:150px;" src="images/comb4a.png">
+                        <img style="height:150px;" src="images/comb4b.png">
+                        <img style="height:150px;" src="images/comb4c.png">
+                        <p><b>4-5</b></p>
+                        <p><b>4-N</b></p>
+                    </div>
+                </div>
 
                 <div class="spacing-10"></div>
 
-                <p><b>Combinatorial 4</b></p>
-                <p>4 Asset MultiMarket Connection Lattice(s)﻿</p>
-
-                <!--4-4-->
-                <!--16 nodes-->
-                <!--24 edges-->
-                <!--links-->
-
-                <!--4-5-->
-                <!--4-n-->
-
-                <img style="height:150px;" src="images/comb4.png">
-                <img style="height:150px;" src="images/comb4a.png">
-                <img style="height:150px;" src="images/comb4b.png">
-                <img style="height:150px;" src="images/comb4c.png">
-
-                <div class="spacing-10"></div>
-
-                <!--
-                <p><b>Combinatorial 5</b></p>
-                <div class="spacing-10"></div>
-                -->
-
-                <!--5-5-->        
-                <!--nodes-->
-                <!--edges-->
-                <!--links-->
-
-                <!--5-6-->   
-
-                <!--HMMMMM!!! GOALS-->     
-                <!--5-7-->   
-
-                <!--5-N-->        
-
-                <p><b>Combinatorial N</b></p>
-                <p>Higher Dimensional Combinatorials</p>
-
-                <!--(M COMBINATORIAL OF MARKET SIZE N)-->
-                <!--M-N-Combinatorial Market-->
-                <!--(NxM)/2 Nodes--> <!--WHAT IS THIS?? GENERALIZE IT :)-->
-                <!--STUDY-->
-
-                <p>Combinatorial</p>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B'])">2</a>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C'])">3</a>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D'])">4</a>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E'])">5</a>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F'])">6</a>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F','G'])">7</a>
-                <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F','G','H'])">8</a>
-                <br><br>
-                
-                <p>Facet</p>
-                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B'])">2</a>
-                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C'])">3</a>
-                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D'])">4</a>
-                <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D','E'])">5</a>
-                <br><br>
-                
-                <p>Pure Market Generator</p>
-                <a class="btn btn" href="#" ng-click="pureMarketGenerator(3, ['A','B','C','D'])">3-4</a>
-                <a class="btn btn" href="#" ng-click="pureMarketGenerator(3, ['A','B','C','D','E'])">3-5</a>
-
-                <div class="spacing-10"></div>
-            
-                <style>
-                    .ngCytoscape{
-                        height: 80vh;
-                        width:100%;
-                    }
-                </style>
-
+                <!--<p><b>Combinatorial 5</b></p>-->
                 <!--SINGLE COMBINATORIAL EXPLORATIONS-->
                 <!--SET OF COMB OBJECTS IN N SPACE-->
-
                 <!--MAP COMP 5 -> COMP 7-->
                 <!--HOW MANY 5 in 7?-->
                 <!--PASCAL-->
-
-                <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
-
-
+                <!--<div>
+                    <p>5-5</p>        
+                    <p>nodes</p>
+                    <p>edges</p>
+                    <p>links</p>
+                    <p>5-6</p>  
+                    <p>5-7</p>  
+                    <p>5-N</p>  
+                </div>
                 <div class="spacing-10"></div>
-
-                <h4>Group Theoretic Properties</h4>
-                <p>A group G is a finite or infinite set of elements together with a binary operation (called the group operation) that together satisfy the four fundamental properties of closure, associativity, the identity property, and the inverse property. The operation with respect to which a group is defined is often called the "group operation," and a set is said to be a group "under" this operation.</p>
-                <p>A permutation group is a finite group `G` whose elements are permutations of a given set and whose group operation is composition of permutations in `G`. Permutation groups have orders dividing `n!`.</p>
-                <p>A `Lie` group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>
-
-                <p><b>Substitution</b></p>
-                `f(MARKET) = G(zeta) | alpha = beta_1+beta_2+ ... `
-                <br>
-                `f(ABCD) = ... | ABC = (A=BC-B=AC-C=AB)`
-                <br>
-                <div class="spacing-10"></div>
-
-                <p><b>Combination</b></p>
-                `G(ABC+DFG)`
-                <div class="spacing-10"></div>
-
-                <p><b>Reduction</b></p>
-                `SIMPLIFICATION`
-                `f(g(x))`
-                `(f o g)(x)`
-
-                <div class="spacing-10"></div>
-
-                <div class="spacing-25"></div>
-
-                <h5>Layered Deep Learning</h5>
-                <p style="color:gray;font-style:italic">Computed Higher Dimensional Combinatorials</p>
-
-                <div class="spacing-25"></div>
-
-                <!--TODO..-->
-
-                <!--
-                <p><b>Investment and Generalized Portfolio Allocation</b></p>
-                <p>Capital Asset Pricing Model..</p>
-                `E(R_i)=R_f+beta_i(E(R_m)-R_f)`
                 -->
 
-                <!--PROBABILITY DENSITY ANALYSIS-->
-                
-                <div class="spacing-5"></div>
+                <div>
+                    <!--<p><b>Combinatorial N</b></p>
+                    <p>Higher Dimensional Combinatorials</p>-->
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">N Space</h1>
+                                    <h5 style="color:white">Higher Dimensional Combinatorials</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <a href="https://www.cre8.capital/api/data/marketImage">Market Image</a>
+                    <div style="padding:16px;">
+
+                        <p><b>Combinatorial Rank</b></p>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B'])">2</a>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C'])">3</a>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D'])">4</a>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E'])">5</a>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F'])">6</a>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F','G'])">7</a>
+                        <a class="btn btn" href="#" ng-click="combinatorialGenerator(['A','B','C','D','E','F','G','H'])">8</a>
+                        <br><br>
+                        
+                        <p><b>Traversal Facet</b></p>
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B'])">2</a>
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C'])">3</a>
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D'])">4</a>
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D','E'])">5</a>
+                        <!--
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D','E','F'])">6</a>
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D','E','F','G'])">7</a>
+                        <a class="btn btn" href="#" ng-click="inverseFacetGenerator(['A','B','C','D','E','F','G','H'])">8</a>
+                        -->
+
+                        <!--
+                        <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                            <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                                <div style="margin-top: auto;margin-bottom: auto;">
+                                    <div class="container">
+                                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Combinatorial Market Space</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+
+                        <div class="spacing-10"></div>
+                        
+                        <p><b>Pure Market Generator</b></p>
+                        <a class="btn btn" href="#" ng-click="pureMarketGenerator(3, ['A','B','C','D'])">3-4</a>
+                        <a class="btn btn" href="#" ng-click="pureMarketGenerator(3, ['A','B','C','D','E'])">3-5</a>
+
+                        <div class="spacing-10"></div>
+                    
+                        <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <div>
+                    <!--<h4>Group Theoretic Properties</h4>-->
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Group Theoretic Properties</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+
+                        <p>A group G is a finite or infinite set of elements together with a binary operation (called the group operation) that together satisfy the four fundamental properties of closure, associativity, the identity property, and the inverse property. The operation with respect to which a group is defined is often called the "group operation," and a set is said to be a group "under" this operation.</p>
+                        <p>A permutation group is a finite group `G` whose elements are permutations of a given set and whose group operation is composition of permutations in `G`. Permutation groups have orders dividing `n!`.</p>
+                        <p>A `Lie` group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>
+
+                        <p><b>Substitution</b></p>
+                        `f(M_1) = G(zeta) | alpha = beta_1+beta_2+ ... `
+                        <br>
+                        `f(ABCD) = ...[..., ABC = (A->BC->B->AC->C->AB)]`
+                        <br>
+                        `G(S)`
+                        <div class="spacing-10"></div>
+
+                        <p><b>Combination</b></p>
+                        `f(ABC+DFG)`
+                        <br>
+                        `G(C)`
+                        <div class="spacing-10"></div>
+
+                        <p><b>Reduction</b></p>
+                        `f(g(x))`
+                        <br>
+                        `(f o g)(x)`
+                        <br>
+                        `G(R)`
+
+                        <div class="spacing-10"></div>
+
+                        <p><b>Graph C*-algebras & Graphic operations</b></p>
+                        `A = sum([B->C,B->D, B<=>CD])`
+
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <div>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Layered Deep Learning</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <p style="color:gray;font-style:italic">Computed Higher Dimensional Combinatorials</p>
+                        <p style="color:gray;font-style:italic">Computed Higher Dimensional Pathways</p>
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+                
+                <div>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Contextualized Portfolio Allocation</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <p><b>Investment and Generalized Portfolio Allocation</b></p>
+                        <p>Capital Asset Pricing Model..</p>
+                        `E(R_i)=R_f+beta_i(E(R_m)-R_f)`
+                        <br>
+                        <p>PROBABILITY DENSITY ANALYSIS</p>
+                        <div class="spacing-5"></div>
+                        <a href="https://www.cre8.capital/api/data/marketImage">Immutable Computed Market Image</a>
+                    </div>
+                </div>
 
             </div>
         </div>
+
     </div>
     <div class="spacing-50"></div>
 </div>
@@ -2270,7 +2433,7 @@ getSome:function(newQuery){}</div>
         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div class="container">
-                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Project Charters and Group Coordination</h1>
+                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Project Charters & Group Coordination</h1>
                     <h5 style="color:white">The Token Action Potientals</h5>
                 </div>
             </div>
@@ -2297,7 +2460,7 @@ getSome:function(newQuery){}</div>
         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div class="container">
-                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tokenization and Pattern Recognition</h1>
+                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tokenization & Pattern Recognition</h1>
                     <h5 style="color:white">Modular Validation</h5>
                 </div>
             </div>

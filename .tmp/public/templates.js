@@ -1351,6 +1351,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        z-index: -1;\n" +
     "    }\n" +
     "    .modelList p {margin:0px;font-weight:700;}\n" +
+    "    .ngCytoscape{height: 80vh;width:100%;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"intro\" style=\"\">\n" +
@@ -1416,6 +1417,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>\n" +
     "                <p><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></p>\n" +
     "                <p><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></p>\n" +
+    "                <!--Matching Engine\n" +
+    "                    Market Objects & Traversal Character\n" +
+    "                        Combinatorial 3\n" +
+    "                        Combinatorial 4\n" +
+    "                        Combinatorial N\n" +
+    "                    Combinatorial Market Spaces\n" +
+    "\n" +
+    "                    Group Theoretic Properties\n" +
+    "                -->\n" +
+    "\n" +
     "                <p><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Validation & Association Traversals</a></b></p>\n" +
     "                <p><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters & Group Coordination</a></b></p>\n" +
     "                <p><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></p>\n" +
@@ -3247,15 +3258,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">  \n" +
+    "            <div class=\"col-sm-6\">  \n" +
     "                <p style=\"color:gray;font-style:italic\">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>\n" +
-    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"passportModel\"></div>\n" +
     "                <p><b>[get, post] /api/passport</b></p>\n" +
     "                <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>\n" +
     "                <p>Biometric Authentication -- CRE8 Reccomends</p>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"passportModel\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -3312,56 +3323,79 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"container\">\n" +
-    "        <div class=\"spacing-15\"></div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-12\">\n" +
     "\n" +
-    "                <!--VALUE MAP STRUCUTRE-->\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Discrete Order Structure / Value Map</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Sets Equalities & Statements of Exchange</p>\n" +
-    "                \n" +
     "                <p>The Anatomy of an <a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
-    "                <!--SET VS DISCRETE; VS TYPES; VS CONTINUOUS ETC-->\n" +
-    "\n" +
-    "                <!-- AUTOMATICALLY SELL ONMANIFOLD TOKENS -->\n" +
+    "                <p>Set vs discrete, types: continuous order</p>\n" +
+    "                <p>Manifold action tokens and staked positions</p>\n" +
+    "            </div>\n" +
+    "            <!--<div class=\"col-sm-6 bootstrapHack\">-->\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "                <div hljs hljs-language=\"javascript\"  hljs-source=\"newOrderModel\"></div>\n" +
+    "            </div>\n" +
+    "        </div>  \n" +
     "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-12\">\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Matching Engine</h1>\n" +
+    "                                <h5 style=\"color:white\">An Immutable Object Structure</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "\n" +
-    "                <h4><b>Matching Engine</b></h4>\n" +
-    "                <p>An Immutable Object Structure</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Given a set of equations, we formalize an immutable Structure to define a Multidimensional order book</p>\n" +
-    "                <p>Discussion of market types</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Commentary on binary books --> to multi books; logic encoded</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Priority of Prefrence for Higher Dimensional Orders; types</p>\n" +
-    "                <p>The rank of connection n by size of the market m -- degress of connection -- the moment of liquidity is combinatorial</p>\n" +
+    "                <div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "                    <!--\n" +
+    "                    <h4><b>Matching Engine</b></h4>\n" +
+    "                    <p>An Immutable Object Structure</p>\n" +
+    "                    -->\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                    <!--FUILFILMENT VS TESNOR REPRESENTATION\n" +
     "\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Given a set of equations, we formalize an immutable Structure to define a Multidimensional order book</p>\n" +
+    "                    <p>Discussion of market types</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Commentary on binary books --> to multi books; logic encoded</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Priority of Prefrence for Higher Dimensional Orders; types</p>\n" +
+    "                    <p>The rank of connection n by size of the market m -- degress of connection -- the moment of liquidity is combinatorial</p>\n" +
     "\n" +
-    "                <!--BINARY-->\n" +
-    "                <!--`{(alpha_1A,=,beta_1B),(alpha_2A, =, beta_2B),(vdots,,),(delta_nA,=,epsilon_nB):}`-->\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <!--just questioning the +--> \n" +
-    "                `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`\n" +
+    "                    <!--BINARY-->\n" +
+    "                    <!--`{(alpha_1A,=,beta_1B),(alpha_2A, =, beta_2B),(vdots,,),(delta_nA,=,epsilon_nB):}`-->\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                    <!--just questioning the +--> \n" +
+    "                    `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`\n" +
     "\n" +
-    "                `sum_({}_1)^n `\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                    `sum_({}_1)^n `\n" +
     "\n" +
-    "                `alpha_1 = ((beta_1),(vdots),(beta_n)) circ [[a_11,cdots,a_m1],[vdots, ddots, vdots],[a_1n,cdots,a_mn]]`\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                    `alpha_1 = ((beta_1),(vdots),(beta_n)) circ [[a_11,cdots,a_m1],[vdots, ddots, vdots],[a_1n,cdots,a_mn]]`\n" +
+    "                </div>\n" +
     "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
     "                <!--ELEMENT ORDER IN TENSOR ANALYSIS.. MAY BE IMPROTANT.. :/-->\n" +
-    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"orderBookTensor\"></div>\n" +
-    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "                <p style=\"color:gray;font-style:italic\">Tensor Structure of Assets; Layering and Braiding</p>\n" +
-    "\n" +
     "                <p>Tensor Assets; and immutable Structure</p>\n" +
     "\n" +
     "                <!--\n" +
@@ -3373,13 +3407,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                `A otimes B = A,B`\n" +
     "                `A otimes B = A -> B` \n" +
     "                -->\n" +
-    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <p>Tensor Product, Tensor Permuting, Assets as tensors, Layered Tensors as encoded traversals</p>\n" +
-    "\n" +
     "                <!-- in building out the tensor braid.. powerset-->\n" +
-    "\n" +
     "                <p>To Generate a Lattice</p>\n" +
     "\n" +
     "                <!--\n" +
@@ -3394,205 +3425,337 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                `((a_(11), cdots , a_(1n)),(vdots, ddots, vdots),(a_(m1), cdots , a_(mn)))`\n" +
-    "\n" +
-    "                <a href=\"/content/5c438e2090a86f150004ebda\">INFO</a>\n" +
     "                \n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <h5>Market Objects and their Traversal Character</h5>\n" +
-    "                <p style=\"color:gray;font-style:italic\">For every n-object there exists nCm objects of rank m</p>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div hljs hljs-language=\"javascript\"  hljs-source=\"orderBookTensor\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-12\">\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Market Objects & Traversal Character</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <!--TODO: TITLE-->\n" +
+    "                        <h5>Market Objects and their Traversal Character</h5>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">For every n-object there exists nCm objects of rank m</p>\n" +
+    "                        \n" +
+    "                        `((n),(m)) = (n!)/(m!(n-m)!)`\n" +
+    "                        <br><br><br>\n" +
+    "                        `a_(n1_m) otimes b_(n2_m) = a,b_((n1+n2)_m)`\n" +
+    "                        <!--DOWNWARD TRAVERSAL PROPAGATION-->\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "                        <p>Connection Lattice and the Traversal Facet (inverted Facet)</p>\n" +
+    "                        <p>Direction of connection & Asset flow</p>\n" +
+    "                        <p>Asset Space, N Size Market, Traversal Logic</p>\n" +
+    "                        <p>'Assets' Vs Markets</p>\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <p><b>Market Graph Object</b></p>\n" +
+    "                        <p>Nodes: Assets or Markets (Combinatorials)</p>\n" +
+    "                        <p>Edges: Generalized Absolute Graph Connections</p>\n" +
+    "                        <p>Links: Number of 1D Connections</p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">AB-C: 1 Edge; 3 Links; 2 Forward; 1 Back</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">2 Space</h1>\n" +
+    "                                    <h5 style=\"color:white\">Binary Market Space</h5>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <p><b>2-2 \"Combinatorial 2\"</b></p>\n" +
+    "                        <p>A Binary Market</p>\n" +
+    "                        <p>2 nodes</p>\n" +
+    "                        <p>1 edge</p>\n" +
+    "\n" +
+    "                        <p><b>2-3</b></p>\n" +
+    "                        <p><b>2-4</b></p>\n" +
+    "                        <p><b>2-5</b></p>\n" +
+    "\n" +
+    "                        <p><n>2-N Market</b></p>\n" +
+    "                        <p>N nodes</p>\n" +
+    "                        <p>N(N−1)/2 Edges</p>\n" +
+    "                        <p>Links == Edges</p>\n" +
+    "                        <p>Classic Market</p>\n" +
+    "\n" +
+    "                        <!--<p>M COMBINATORIAL OF MARKET SIZE N</p>\n" +
+    "                        <p>M-N-Combinatorial Market</p>\n" +
+    "                        <p>(NxM)/2 Nodes</p>--> <!--WHAT IS THIS?? GENERALIZE IT :)-->\n" +
+    "\n" +
+    "                        <!--<p><b>Combinatorial 3</b></p>\n" +
+    "                        <p>A fully Connected 3-3-Combinatorial-Market</p>-->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "                \n" +
-    "                `((n),(m)) = (n!)/(m!(n-m)!)`\n" +
+    "                <div>\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">3 Space</h1>\n" +
+    "                                    <h5 style=\"color:white\">Markets with a third combinatorial dimensions</h5>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <!--Category.. CONNECT TO THE CONNECT-->\n" +
+    "\n" +
+    "                        <p><b>3-3 \"Combinatorial 3\"</b></p>\n" +
+    "                        <p>A fully Connected 3-3-Combinatorial-Market</p>\n" +
+    "                        <p>6 nodes</p>\n" +
+    "                        <p>15 edges - links</p>\n" +
+    "\n" +
+    "                        <img style=\"height:150px;\" src=\"images/comb3.png\">\n" +
+    "                        <span>Connection Lattice</span>\n" +
+    "\n" +
+    "                        <img style=\"height:150px;\" src=\"images/comb3a.png\">\n" +
+    "                        <span>Traversal Facet</span>\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <p><b>3-4</b></p>\n" +
+    "                        <p>Fully 3-linked 4 market</p>\n" +
+    "                        <p>Related to 4 Decompose</p>\n" +
+    "                        <p>4 combinatorial 3 Objects</p>\n" +
+    "                        <p>Symmetry</p>\n" +
+    "                        <p>??? 24 NODES</p>\n" +
+    "                        <p>??? 60 EDGES</p>\n" +
+    "\n" +
+    "                        <p><b>3-5</b></p>\n" +
+    "                        <p><b>3-N</b></p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p>Connection Lattice and the Traversal Facet (inverted Facet)</p>\n" +
-    "\n" +
-    "                <!--TOTAL ASSETS SPACE.. N SIZE MARKET.. TRAVERSAL PATHS-->\n" +
-    "\n" +
-    "                <!--NODES.. ASSETS.. OR COMBINAROTIALS-->\n" +
-    "                <!--EDGES.. GENERALIZED CONNECTIONS-->\n" +
-    "                <!--LINKS.. NUMBER OF 1D CONNECTIONS-->\n" +
-    "                    <!--AB-C: 1 EDGE; 3 LINKS; 2 FORWARD; 1 BACK-->\n" +
-    "\n" +
-    "                <!--'UNIT' VS MARKET-->\n" +
-    "                <!--<p><b>Combinatorial 2</b></p>-->\n" +
-    "                <!--2 nodes-->\n" +
-    "                <!--1 edge-->\n" +
-    "\n" +
-    "                <!--N-2-Combinatorial Market-->\n" +
-    "                <!--N nodes-->\n" +
-    "                <!--N(N−1)/2 Edges-->\n" +
-    "                <!--LINKS == EDGES-->\n" +
-    "\n" +
-    "                <!--(M COMBINATORIAL OF MARKET SIZE N)-->\n" +
-    "                <!--M-N-Combinatorial Market-->\n" +
-    "                <!--(NxM)/2 Nodes--> <!--WHAT IS THIS?? GENERALIZE IT :)-->\n" +
-    "                <!--STUDY-->\n" +
-    "\n" +
-    "                <p><b>Combinatorial 3</b></p>\n" +
-    "                <p>A fully Connected 3-3-Combinatorial-Market</p>\n" +
-    "\n" +
-    "                <!--3-3-->\n" +
-    "                <!--6 nodes-->\n" +
-    "                <!--15 edges--> \n" +
-    "                <!--links-->\n" +
-    "\n" +
-    "                <!--TODO!!!-->\n" +
-    "                <!--3-4-->\n" +
-    "                <!--HOW IS THIS RELATED TO 4 DECOMPOSE-->\n" +
-    "                <!--COMB 4 HAS 4-D CONNECTION-->\n" +
-    "                <!--4 combinatorial 3s-->\n" +
-    "                <!--...symmetry-->\n" +
-    "                <!--??? 24 NODES-->\n" +
-    "                <!--??? 60 EDGES-->\n" +
-    "\n" +
-    "                <!--Fully 3-liked 4 market-->\n" +
-    "\n" +
-    "\n" +
-    "                <!--3-5-->\n" +
-    "\n" +
-    "                <!--3-n-->\n" +
-    "\n" +
-    "                <span>Figure A</span>\n" +
-    "                <img style=\"height:150px;\" src=\"images/comb3.png\">\n" +
-    "\n" +
-    "                <span>Figure B</span>\n" +
-    "                <img style=\"height:150px;\" src=\"images/comb3a.png\">\n" +
+    "                <div>\n" +
+    "                    <!--<p><b>Combinatorial 4</b></p>\n" +
+    "                    <p>4 Asset MultiMarket Connection Lattice(s)﻿</p>-->\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">4 Space</h1>\n" +
+    "                                    <h5 style=\"color:white\">4 Asset MultiMarket Connection Lattice(s)﻿</h5>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <p><b>4-4 \"Combinatorial 4\"</b></o>\n" +
+    "                        <p>16 nodes</p>\n" +
+    "                        <p>24 edges</p>\n" +
+    "                        <p>links</p>\n" +
+    "                        <img style=\"height:150px;\" src=\"images/comb4.png\">\n" +
+    "                        <img style=\"height:150px;\" src=\"images/comb4a.png\">\n" +
+    "                        <img style=\"height:150px;\" src=\"images/comb4b.png\">\n" +
+    "                        <img style=\"height:150px;\" src=\"images/comb4c.png\">\n" +
+    "                        <p><b>4-5</b></p>\n" +
+    "                        <p><b>4-N</b></p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <p><b>Combinatorial 4</b></p>\n" +
-    "                <p>4 Asset MultiMarket Connection Lattice(s)﻿</p>\n" +
-    "\n" +
-    "                <!--4-4-->\n" +
-    "                <!--16 nodes-->\n" +
-    "                <!--24 edges-->\n" +
-    "                <!--links-->\n" +
-    "\n" +
-    "                <!--4-5-->\n" +
-    "                <!--4-n-->\n" +
-    "\n" +
-    "                <img style=\"height:150px;\" src=\"images/comb4.png\">\n" +
-    "                <img style=\"height:150px;\" src=\"images/comb4a.png\">\n" +
-    "                <img style=\"height:150px;\" src=\"images/comb4b.png\">\n" +
-    "                <img style=\"height:150px;\" src=\"images/comb4c.png\">\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <!--\n" +
-    "                <p><b>Combinatorial 5</b></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                -->\n" +
-    "\n" +
-    "                <!--5-5-->        \n" +
-    "                <!--nodes-->\n" +
-    "                <!--edges-->\n" +
-    "                <!--links-->\n" +
-    "\n" +
-    "                <!--5-6-->   \n" +
-    "\n" +
-    "                <!--HMMMMM!!! GOALS-->     \n" +
-    "                <!--5-7-->   \n" +
-    "\n" +
-    "                <!--5-N-->        \n" +
-    "\n" +
-    "                <p><b>Combinatorial N</b></p>\n" +
-    "                <p>Higher Dimensional Combinatorials</p>\n" +
-    "\n" +
-    "                <!--(M COMBINATORIAL OF MARKET SIZE N)-->\n" +
-    "                <!--M-N-Combinatorial Market-->\n" +
-    "                <!--(NxM)/2 Nodes--> <!--WHAT IS THIS?? GENERALIZE IT :)-->\n" +
-    "                <!--STUDY-->\n" +
-    "\n" +
-    "                <p>Combinatorial</p>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B'])\">2</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C'])\">3</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D'])\">4</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E'])\">5</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F'])\">6</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F','G'])\">7</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F','G','H'])\">8</a>\n" +
-    "                <br><br>\n" +
-    "                \n" +
-    "                <p>Facet</p>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B'])\">2</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C'])\">3</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D'])\">4</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D','E'])\">5</a>\n" +
-    "                <br><br>\n" +
-    "                \n" +
-    "                <p>Pure Market Generator</p>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"pureMarketGenerator(3, ['A','B','C','D'])\">3-4</a>\n" +
-    "                <a class=\"btn btn\" href=\"#\" ng-click=\"pureMarketGenerator(3, ['A','B','C','D','E'])\">3-5</a>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "            \n" +
-    "                <style>\n" +
-    "                    .ngCytoscape{\n" +
-    "                        height: 80vh;\n" +
-    "                        width:100%;\n" +
-    "                    }\n" +
-    "                </style>\n" +
-    "\n" +
+    "                <!--<p><b>Combinatorial 5</b></p>-->\n" +
     "                <!--SINGLE COMBINATORIAL EXPLORATIONS-->\n" +
     "                <!--SET OF COMB OBJECTS IN N SPACE-->\n" +
-    "\n" +
     "                <!--MAP COMP 5 -> COMP 7-->\n" +
     "                <!--HOW MANY 5 in 7?-->\n" +
     "                <!--PASCAL-->\n" +
-    "\n" +
-    "                <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\" graph-ready=\"graphReady\"></cytoscape>\n" +
-    "\n" +
-    "\n" +
+    "                <!--<div>\n" +
+    "                    <p>5-5</p>        \n" +
+    "                    <p>nodes</p>\n" +
+    "                    <p>edges</p>\n" +
+    "                    <p>links</p>\n" +
+    "                    <p>5-6</p>  \n" +
+    "                    <p>5-7</p>  \n" +
+    "                    <p>5-N</p>  \n" +
+    "                </div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h4>Group Theoretic Properties</h4>\n" +
-    "                <p>A group G is a finite or infinite set of elements together with a binary operation (called the group operation) that together satisfy the four fundamental properties of closure, associativity, the identity property, and the inverse property. The operation with respect to which a group is defined is often called the \"group operation,\" and a set is said to be a group \"under\" this operation.</p>\n" +
-    "                <p>A permutation group is a finite group `G` whose elements are permutations of a given set and whose group operation is composition of permutations in `G`. Permutation groups have orders dividing `n!`.</p>\n" +
-    "                <p>A `Lie` group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>\n" +
-    "\n" +
-    "                <p><b>Substitution</b></p>\n" +
-    "                `f(MARKET) = G(zeta) | alpha = beta_1+beta_2+ ... `\n" +
-    "                <br>\n" +
-    "                `f(ABCD) = ... | ABC = (A=BC-B=AC-C=AB)`\n" +
-    "                <br>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <p><b>Combination</b></p>\n" +
-    "                `G(ABC+DFG)`\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <p><b>Reduction</b></p>\n" +
-    "                `SIMPLIFICATION`\n" +
-    "                `f(g(x))`\n" +
-    "                `(f o g)(x)`\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "                <h5>Layered Deep Learning</h5>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Combinatorials</p>\n" +
-    "\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "                <!--TODO..-->\n" +
-    "\n" +
-    "                <!--\n" +
-    "                <p><b>Investment and Generalized Portfolio Allocation</b></p>\n" +
-    "                <p>Capital Asset Pricing Model..</p>\n" +
-    "                `E(R_i)=R_f+beta_i(E(R_m)-R_f)`\n" +
     "                -->\n" +
     "\n" +
-    "                <!--PROBABILITY DENSITY ANALYSIS-->\n" +
-    "                \n" +
-    "                <div class=\"spacing-5\"></div>\n" +
+    "                <div>\n" +
+    "                    <!--<p><b>Combinatorial N</b></p>\n" +
+    "                    <p>Higher Dimensional Combinatorials</p>-->\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">N Space</h1>\n" +
+    "                                    <h5 style=\"color:white\">Higher Dimensional Combinatorials</h5>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "\n" +
-    "                <a href=\"https://www.cre8.capital/api/data/marketImage\">Market Image</a>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                        <p><b>Combinatorial Rank</b></p>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B'])\">2</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C'])\">3</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D'])\">4</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E'])\">5</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F'])\">6</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F','G'])\">7</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"combinatorialGenerator(['A','B','C','D','E','F','G','H'])\">8</a>\n" +
+    "                        <br><br>\n" +
+    "                        \n" +
+    "                        <p><b>Traversal Facet</b></p>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B'])\">2</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C'])\">3</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D'])\">4</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D','E'])\">5</a>\n" +
+    "                        <!--\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D','E','F'])\">6</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D','E','F','G'])\">7</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"inverseFacetGenerator(['A','B','C','D','E','F','G','H'])\">8</a>\n" +
+    "                        -->\n" +
+    "\n" +
+    "                        <!--\n" +
+    "                        <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                    <div class=\"container\">\n" +
+    "                                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Combinatorial Market Space</h1>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        -->\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "                        \n" +
+    "                        <p><b>Pure Market Generator</b></p>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"pureMarketGenerator(3, ['A','B','C','D'])\">3-4</a>\n" +
+    "                        <a class=\"btn btn\" href=\"#\" ng-click=\"pureMarketGenerator(3, ['A','B','C','D','E'])\">3-5</a>\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "                    \n" +
+    "                        <cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\" graph-ready=\"graphReady\"></cytoscape>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <!--<h4>Group Theoretic Properties</h4>-->\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Group Theoretic Properties</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                        <p>A group G is a finite or infinite set of elements together with a binary operation (called the group operation) that together satisfy the four fundamental properties of closure, associativity, the identity property, and the inverse property. The operation with respect to which a group is defined is often called the \"group operation,\" and a set is said to be a group \"under\" this operation.</p>\n" +
+    "                        <p>A permutation group is a finite group `G` whose elements are permutations of a given set and whose group operation is composition of permutations in `G`. Permutation groups have orders dividing `n!`.</p>\n" +
+    "                        <p>A `Lie` group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>\n" +
+    "\n" +
+    "                        <p><b>Substitution</b></p>\n" +
+    "                        `f(M_1) = G(zeta) | alpha = beta_1+beta_2+ ... `\n" +
+    "                        <br>\n" +
+    "                        `f(ABCD) = ...[..., ABC = (A->BC->B->AC->C->AB)]`\n" +
+    "                        <br>\n" +
+    "                        `G(S)`\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <p><b>Combination</b></p>\n" +
+    "                        `f(ABC+DFG)`\n" +
+    "                        <br>\n" +
+    "                        `G(C)`\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <p><b>Reduction</b></p>\n" +
+    "                        `f(g(x))`\n" +
+    "                        <br>\n" +
+    "                        `(f o g)(x)`\n" +
+    "                        <br>\n" +
+    "                        `G(R)`\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <p><b>Graph C*-algebras & Graphic operations</b></p>\n" +
+    "                        `A = sum([B->C,B->D, B<=>CD])`\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div>\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Layered Deep Learning</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Combinatorials</p>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Computed Higher Dimensional Pathways</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                \n" +
+    "                <div>\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Contextualized Portfolio Allocation</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <p><b>Investment and Generalized Portfolio Allocation</b></p>\n" +
+    "                        <p>Capital Asset Pricing Model..</p>\n" +
+    "                        `E(R_i)=R_f+beta_i(E(R_m)-R_f)`\n" +
+    "                        <br>\n" +
+    "                        <p>PROBABILITY DENSITY ANALYSIS</p>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <a href=\"https://www.cre8.capital/api/data/marketImage\">Immutable Computed Market Image</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
@@ -3602,7 +3765,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Project Charters and Group Coordination</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Project Charters & Group Coordination</h1>\n" +
     "                    <h5 style=\"color:white\">The Token Action Potientals</h5>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -3629,7 +3792,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokenization and Pattern Recognition</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokenization & Pattern Recognition</h1>\n" +
     "                    <h5 style=\"color:white\">Modular Validation</h5>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -5319,7 +5482,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "        <div class=\"card\">\n" +
     "            <!--REGISTER POPUP 1ST THEN LOGIN -->\n" +
     "            <!--ONBOARD FROM ITEM.. IE PURCHASE.. 2ND STAGE DELIVERY-->\n" +
-    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">Purchase Order</button>\n" +
+    "            <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle(null, item)\">Purchase Order</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -7845,6 +8008,29 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"memberQR\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.username}}</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <img style=\"height:500px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
+    "        \n" +
+    "            </div>\n" +
+    "        \n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"nav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center\">\n" +
     "            \n" +
@@ -7877,7 +8063,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <a style=\"font-size:24px;color:white\" href=\"member/{{currentUser.username}}\">{{currentUser.username}}</a>\n" +
     "                                </h1>\n" +
-    "                                <h5 style=\"color:white;font-size:12px;\"><a href=\"#\" ng-click=\"\" style=\"color:white\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></h5>\n" +
+    "                                <h5 style=\"color:white;font-size:12px;\"><a href=\"#\" ng-click=\"memberQRToggle(currentUser)\" style=\"color:white\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -8268,12 +8454,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\">\n" +
     "                                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                                    {{item.user.username}}\n" +
-    "                               </a>\n" +
+    "                                </a>\n" +
+    "                                <a>\n" +
+    "                                    <span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span>\n" +
+    "                                    <span ng-if=\"item.project\" style=\"color:gray;font-size:10px;\">, 0x{{item.id}}</span>\n" +
+    "                                </a>\n" +
     "                            </h1>\n" +
+    "                            <!--\n" +
     "                            <h5 style=\"color:white\">\n" +
     "                                <span style=\"color:gray;font-size:10px;\">0x{{item.user.id}}</span>\n" +
     "                                <span ng-if=\"item.project\" style=\"color:gray;font-size:10px;\">, 0x{{item.id}}</span>\n" +
     "                            </h5>\n" +
+    "                            -->\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -8286,14 +8478,15 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
     "                <div ng-if=\"currentUser.id != item.user.id\">\n" +
-    "                    <img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}\">\n" +
+    "                    <img ng-click=\"memberQRToggle(item.user)\" style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}\">\n" +
     "                    <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a>\n" +
     "                    <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Follow</button></a>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                <h3>Reputation</h3>\n" +
+    "                <!--<h3>Reputation</h3>-->\n" +
+    "                <!--IF PRE SELECTED FILTER-->\n" +
     "                <h4>{{item.project.title}}</h4>\n" +
     "                <!--<tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Manifold Filter\" ng-model=\"reputationFilter\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +

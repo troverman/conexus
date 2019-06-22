@@ -23,9 +23,12 @@ angular.module( 'conexus.transaction', [
     });
 }])
 
-.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, ReactionModel, transaction ) {
+.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, ReactionModel, titleService, transaction ) {
     
     $scope.transaction = transaction[0];
+
+    titleService.setTitle($scope.transaction.id + ' | Transaction | CRE8.XYZ');
+
     $scope.contentList = contentList;
 
     $scope.newContent = {};
