@@ -1416,6 +1416,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></p>\n" +
     "                <p><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>\n" +
     "                <p><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></p>\n" +
+    "                <p><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></p>\n" +
+    "                <p><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></p>\n" +
     "                <p><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></p>\n" +
     "                <!--Matching Engine\n" +
     "                    Market Objects & Traversal Character\n" +
@@ -1426,8 +1428,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                    Group Theoretic Properties\n" +
     "                -->\n" +
-    "\n" +
-    "                <p><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Validation & Association Traversals</a></b></p>\n" +
     "                <p><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters & Group Coordination</a></b></p>\n" +
     "                <p><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></p>\n" +
     "            </div>\n" +
@@ -1558,15 +1558,42 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                \n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "                <p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>\n" +
-    "\n" +
-    "                <!--<div hljs hljs-language=\"php\">mapping (address = mapping (string = uint)) balances;</div>\n" +
-    "                <div hljs hljs-language=\"javascript\">contract Protocol {}</div>-->\n" +
-    "                <!--DEFINE & REFINE MORE & MORE; DEFINE FUNCTIONSAL INPUT-->\n" +
-    "                <!--<div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>-->\n" +
+    "                <!--Universal Data Mapping-->\n" +
+    "                <!--Nested Ownership Mapping-->\n" +
+    "                <!--<p style=\"color:gray;font-style:italic\">Information mapping to a balance; Tokens are data ‘imbued’ as tradable assets</p>-->\n" +
     "                <!--<p>Mapping <b>balanceOf</b>:</p>-->\n" +
-    "                \n" +
+    "\n" +
+    "                <!--INTEROPERABLE-->\n" +
+    "                <div hljs hljs-language=\"javascript\">\n" +
+    "import {'888'}\n" +
+    "import {'Structure'}\n" +
+    "import {'Language'}\n" +
+    "import {'Congruence'}\n" +
+    "import {'Manifold'}\n" +
+    "import {'Connection'}\n" +
+    "import {'Action'}\n" +
+    "import {'Association'}\n" +
+    "...\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <!--DEFINE FUNCTIONAL INPUT-->\n" +
+    "                <div hljs hljs-language=\"javascript\">\n" +
+    "Contract Structure\n" +
+    "\n" +
+    "contract Protocol {}\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div hljs hljs-language=\"javascript\">\n" +
+    "Immutable JSON Connection\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "\n" +
     "                <a class=\"btn btn-default log-btn\" href=\"/apps\">Application Ecosystem</a>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6 col-xs-12\">\n" +
@@ -1580,6 +1607,17 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6 col-xs-12\">  \n" +
+    "\n" +
+    "                <!--APP CREATE TUTORIAL-->\n" +
+    "\n" +
+    "                <!--SAMPLE APPS-->\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -1596,7 +1634,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    </div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-12\">\n" +
+    "            <div class=\"col-xs-12 col-sm-6\">\n" +
     "\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Protocols define logic and create 'logic manifolds' nested within a token strucutre.</p>\n" +
@@ -3444,7 +3482,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                                <div class=\"container\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Market Objects & Traversal Character</h1>\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Market Objects & Character</h1>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -3520,7 +3558,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                                <div class=\"container\">\n" +
     "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">3 Space</h1>\n" +
-    "                                    <h5 style=\"color:white\">Markets with a third combinatorial dimensions</h5>\n" +
+    "                                    <h5 style=\"color:white\">Markets with a third combinatorial dimension</h5>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
