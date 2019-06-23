@@ -5112,7 +5112,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. What is your Story?</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everyone & everything has value. What is your Story?</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">What do you believe is valuable? Sharing your values creates a mechanism of empowerment. We create value in each other.</p> <!--we value each other!-->\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/register\">Join Our Community</a>\n" +
@@ -5191,8 +5191,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <!--\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>\n" +
     "                -->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">The <a href=\"/transparency\"><b>Decentralized Network</b></a> is you! Mobile peers support the network.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Finding congruence with human and machine consensus.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">The <a href=\"/transparency\"><b>Decentralized Network</b></a> is you! Decentralized peers support the network.</p>\n" +
+    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Finding congruence with human and machine consensus.</p>-->\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
@@ -5293,7 +5293,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
+    "\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
