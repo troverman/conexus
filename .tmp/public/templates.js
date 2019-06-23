@@ -5113,7 +5113,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Everyone & everything has value. What is your Story?</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">What do you believe is valuable? Sharing your values creates a mechanism of empowerment. <!--Share your values to create a mechanism of empowerment. --> We create value in each other.</p>--> <!--we value each other!-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">What do you believe is valuable? Sharing your values creates a mechanism of empowerment. <!--Share your values to create a mechanism of empowerment. --> We create value in each other!</p> <!--we value each other!-->\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/register\">Join Our Community</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -5177,17 +5177,29 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
+    "                <!--\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?intelligence,camera,eye,watching,future,city,patterns')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                -->\n" +
+    "                <div class=\"imageContainerSmall\" style=\"background:white\">\n" +
+    "                    <!--\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">\n" +
+    "                    -->\n" +
+    "                    <div class=\"imageContainerSmallDiv\">\n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <!--\n" +
     "                            <div style=\"padding:15px\">\n" +
     "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">TRANSPARENCY</h1>\n" +
     "                                <h5 style=\"color:white\">The Creation of Emergent Intelligence</h5>\n" +
     "                            </div>\n" +
+    "                            -->\n" +
+    "                            <div>\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:black;font-weight:400;\">TRANSPARENCY</h1>\n" +
+    "                                <h5>The Creation of Emergent Intelligence</h5>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                <!--<div class=\"spacing-10\"></div>-->\n" +
     "                <!--\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>\n" +
     "                -->\n" +
