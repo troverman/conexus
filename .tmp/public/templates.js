@@ -1411,10 +1411,43 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <p><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Decentralized Peer Network & Virtual Machine</a></b></p>\n" +
-    "                <p><b><a href=\"#APPDESIGN\" du-smooth-scroll>Interoperable Protocol & Application Design Architecture</a></b></p>\n" +
+    "                <p><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Peer Network & Super Computer</a></b></p>\n" +
+    "                <p><b><a href=\"#APPDESIGN\" du-smooth-scroll>Modular Application Design</a></b></p>\n" +
     "                <p><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></p>\n" +
     "                <p><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <style>.ok p{margin:0px;}</style>\n" +
+    "                <div style=\"padding:16px;font-weight:bold;font-size:12px;\" class=\"ok\">\n" +
+    "                    <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
+    "                    <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
+    "                    <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
+    "                    <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
+    "                    <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
+    "                    <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
+    "                    <p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>\n" +
+    "                    <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
+    "                    <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
+    "                    <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
+    "                    <p><a href=\"#MEMBER\" du-smooth-scroll>Member</a></p>\n" +
+    "                    <p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>\n" +
+    "                    <p><a href=\"#NOTIFICATION\" du-smooth-scroll>Notification</a></p>\n" +
+    "                    <p><a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
+    "                    <p><a href=\"#PASSPORT\" du-smooth-scroll>Passport</a></p>\n" +
+    "                    <p><a href=\"#PROJECT\" du-smooth-scroll>Project</a></p>\n" +
+    "                    <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll>ProjectCharter</a></p>\n" +
+    "                    <p><a href=\"#PROJECTMEMBER\" du-smooth-scroll>ProjectMember</a></p>\n" +
+    "                    <p><a href=\"#PROTOCOL\" du-smooth-scroll>Protocol</a></p>\n" +
+    "                    <p><a href=\"#REACTION\" du-smooth-scroll>Reaction</a></p>\n" +
+    "                    <p><a href=\"#SEARCH\" du-smooth-scroll>Search</a></p>\n" +
+    "                    <p><a href=\"#TASK\" du-smooth-scroll>Task</a></p>\n" +
+    "                    <p><a href=\"#TIME\" du-smooth-scroll>Time</a></p>\n" +
+    "                    <p><a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a></p>\n" +
+    "                    <p><a href=\"#TX\" du-smooth-scroll>Tx</a></p>\n" +
+    "                    <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
+    "                </div>\n" +
+    "                -->\n" +
+    "\n" +
     "                <p><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></p>\n" +
     "                <p><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></p>\n" +
     "                <p><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></p>\n" +
@@ -1445,7 +1478,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Decentralized CRE8 Virtual Machine</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Decentralized CRE8 Super Computer</h1>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1461,6 +1494,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <h4>The Create Computer</h4>\n" +
     "                <h5>The State Machine</h5>\n" +
     "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
     "\n" +
@@ -1485,8 +1519,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><a href=\"https://www.github.com/troverman/conexus\">Angular 1.X (1.7.8), <a href=\"#\">Vue (v2.6.1), <a href=\"#\">React (16.8)</a></p>\n" +
     "                    <p><b>Peer Clients</b></p>\n" +
     "                    <p><a href=\"#\">In-Browser WebAssembly (RUST)</a>, <a href=\"#\">Python</a>, <a href=\"#\">Go</a></p>\n" +
-    "                    <!--<p>Native Applications</p>\n" +
-    "                    <p><a href=\"#\">Android</a>, <a href=\"#\">iOS</a>, <a href=\"#\">In-Browser</a></p>-->\n" +
+    "                    <p><b>Native Applications</b></p>\n" +
+    "                    <p><a href=\"#\">Android</a>, <a href=\"#\">iOS</a>, <a href=\"#\">OSX</a>, <a href=\"#\">Windows</a></p>\n" +
     "                    <a class=\"btn btn-default log-btn\" href=\"https://www.github.com/troverman/conexus\">Github Peer Client</a>\n" +
     "                </div>\n" +
     "\n" +
@@ -1509,7 +1543,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Peer Network & Transparency</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Peer Network</h1>\n" +
+    "                    <h5 style=\"color:white\">Transparency as Principle</h5>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1526,9 +1561,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
     "\n" +
     "                <p>Running a Peer</p>\n" +
+    "                <p>In Browser Connection, consensual contribution</p>\n" +
     "                <p>What is WebAssembly?</p>\n" +
     "\n" +
-    "                <a class=\"btn btn-default log-btn\" href=\"/transparency\">Peers</a>\n" +
+    "                <a class=\"btn btn-default log-btn\" href=\"/transparency\">Peer Network Browser</a>\n" +
     "\n" +
     "\n" +
     "            </div>\n" +
@@ -1565,7 +1601,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <!--INTEROPERABLE-->\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "import {'888'}\n" +
+    "//import {'888'}\n" +
     "import {'Structure'}\n" +
     "import {'Language'}\n" +
     "import {'Congruence'}\n" +
@@ -1577,17 +1613,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <!--DEFINE FUNCTIONAL INPUT-->\n" +
-    "                <div hljs hljs-language=\"javascript\">\n" +
-    "Contract Structure\n" +
-    "\n" +
-    "contract Protocol {}\n" +
-    "                </div>\n" +
+    "                \n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
     "Immutable JSON Connection\n" +
     "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "\n" +
@@ -1600,9 +1635,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"bootstrapHack\">\n" +
     "                    <div style=\"margin-left:15px;\">\n" +
     "                        <div class=\"spacing-15\"></div>\n" +
-    "                        <div hljs hljs-language=\"javascript\">mapping (address = mapping (string = uint)) balances;</div>\n" +
-    "                        <div hljs hljs-language=\"javascript\">contract Protocol {}</div>\n" +
-    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableValidationNFTModel\"></div>\n" +
+    "                        <!--DEFINE FUNCTIONAL INPUT-->\n" +
+    "                        <div hljs hljs-language=\"javascript\">\n" +
+    "Contract Structure\n" +
+    "\n" +
+    "contract Protocol {\n" +
+    "    string:\"New Contract\",\n" +
+    "    onCall:function(){\n" +
+    "\n" +
+    "    },\n" +
+    "    onMyAction:function(){\n" +
+    "\n" +
+    "    },\n" +
+    "    @decorators\n" +
+    "    @isProjectMember\n" +
+    "    idendityFunction:function(){\n" +
+    "\n" +
+    "    }\n" +
+    "}\n" +
+    "                        </div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"humanReadableTokenModel\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -3301,6 +3353,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p><b>[get, post] /api/passport</b></p>\n" +
     "                <p>Facebook, Youtube, Google , Twitter, STEEM, ...</p>\n" +
     "                <p>Biometric Authentication -- CRE8 Reccomends</p>\n" +
+    "                <!--<p>KECCAK-256 Secret encoding into account hashes to create a password known only to the end user.</p>-->\n" +
+    "                <p>Live stream Face Id</p>\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6\">\n" +
@@ -3525,6 +3579,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
+    "\n" +
     "                    <div style=\"padding:16px;\">\n" +
     "                        <p><b>2-2 \"Combinatorial 2\"</b></p>\n" +
     "                        <p>A Binary Market</p>\n" +
@@ -5005,20 +5060,17 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <!--INTO-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "\n" +
-    "                <!--<h3>WE ARE ALL VALUABLE</h3>-->\n" +
-    "                <h3>INFORMATION IS VALUABLE</h3>\n" +
-    "                <!--SHARING CREATES VALUE-->\n" +
-    "                <!--SHARING IS VALUABLE-->\n" +
     "                <!--\n" +
     "                CREATE IS EMPOWERMENT\n" +
     "                CREATE IS INCLUSIVITY\n" +
     "                CREATE IS UNITY\n" +
     "                -->\n" +
+    "                <!--<h3>WE ARE ALL VALUABLE</h3>-->\n" +
+    "                <h3>INFORMATION IS VALUABLE</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">From imagination and intention to work and organization, sharing creates value.</p><!--sharing creates income; information is income.. -->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates value, from imagination and intention to work and organization.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">We all benefit when you share with us.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">We benefit when we share. Sharing information creates value & multidimensional income.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -5060,9 +5112,8 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6\">\n" +
     "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <!--EGLATARIAN TO US MEANS YOUR VOICE IS HEARD-->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. <!--Show us your worth.--> Tell us your Story, Create.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Share with us, what do you believe is valuable?</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Everything has value. What is your Story?</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">What do you believe is valuable? Sharing your values creates a mechanism of empowerment. We create value in each other.</p> <!--we value each other!-->\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/register\">Join Our Community</a>\n" +
     "                <div class=\"spacing-50\"></div>\n" +
@@ -5071,19 +5122,22 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
+    "        <!--\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "\n" +
-    "                <!--<h3>COORDINATE INTENTIONALLY</h3>\n" +
-    "                <h5>Decentralized Peer Governance</h5>-->\n" +
-    "\n" +
-    "                <h3>INTENTIONALITY</h3>\n" +
-    "                <h5>Coordination through Decentralized Peer Governance</h5>\n" +
-    "\n" +
-    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation with group organization naturally flourishing.</p>-->\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?connection,intention,pray')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">INTENTIONALITY</h1>\n" +
+    "                                <h5 style=\"color:white\">Coordination through Decentralized Peer Governance</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Validation asserts earned reputation which naturally organizes group dynamics. Interoperable Organization Protocols give rise to diverse operant frameworks.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Human Validated Proof of Work is a voting mechanism weighted by context-specific reputation.</p>\n" +
-    "\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
@@ -5094,17 +5148,24 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"spacing-50\"></div> \n" +
     "\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "\n" +
-    "                <h3>MULTIDIMENSIONALITY</h3>\n" +
-    "                <!--<h5>Value is ranked by its dimension of connectivity. The Moment of Liquidity is Combinatorial.</h5>-->\n" +
-    "                <h5>The Moment of Liquidity is Combinatorial</h5>\n" +
-    "\n" +
+    "            <div class=\"col-md-12\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?dimension,creating,creation,nature,code')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">MULTIDIMENSIONALITY</h1>\n" +
+    "                                <h5 style=\"color:white\">The Moment of Liquidity is Combinatorial</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Multidimensionality & Gestalt Princples</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Tokenization & Pluralism in a Market Space</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Token Language Defined by An Interoperable Application Ecosystem</p>\n" +
-    "                <!--<div class=\"spacing-15\"></div>\n" +
-    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">EXPLORE THE MARKET</a>-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Asset Relations & The empowering mechanism of creating a value map</p>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <div class=\"row\"><div class=\"col-md-6\"><a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/market\">EXPLORE THE MARKET</a></div></div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
@@ -5112,24 +5173,30 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"spacing-50\"></div>\n" +
+    "        -->\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "\n" +
-    "                <h3>TRANSPARENCY</h3>\n" +
-    "                <h5>The Creation of Emergent Intelligence</h5>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though Machiene Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">The <a href=\"/transparency\"><b>Decentralized Network</b></a> is you. Mobile peers support the network.</p>\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?intelligence,camera,eye,watching,future,city,patterns')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">TRANSPARENCY</h1>\n" +
+    "                                <h5 style=\"color:white\">The Creation of Emergent Intelligence</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <!--\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>\n" +
+    "                -->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">The <a href=\"/transparency\"><b>Decentralized Network</b></a> is you! Mobile peers support the network.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Finding congruence with human and machine consensus.</p>\n" +
-    "                <!--<div class=\"spacing-15\"></div>\n" +
-    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/transparency\">THE NETWORK</a>-->\n" +
-    "\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
-    "                \n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "                <img style=\"height:200px;\" src=\"images/dna.gif\">\n" +
-    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -5137,17 +5204,21 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "        <div class=\"spacing-50\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-md-6\">\n" +
-    "\n" +
-    "                <h3>WE CREATE THE FUTURE TODAY</h3>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Worldwide and always expanding, help cocreate our shared vision.</p>\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
+    "            <div class=\"col-md-12\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,create,collaborate,future,city,awesome,love')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">WE CREATE THE FUTURE TODAY</h1>\n" +
+    "                                <h5 style=\"color:white\">Worldwide and always expanding, help cocreate our shared vision.</h5>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "                <h5><a href=\"/apps\"><b>Application Ecosystem</b></a></h5>\n" +
     "                <h5><a href=\"/developers\"><b>Developer Documentation</b></a></h5>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -5157,48 +5228,38 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "    </div>\n" +
     "    \n" +
     "    <div class=\"container\">\n" +
-    "\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-12 col-md-12\">\n" +
-    "                <h3><b>Join Our Community</b></h3><hr>\n" +
-    "                <div class=\"login-form\">\n" +
-    "                    <form role=\"form\">\n" +
-    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"><i class=\"fa fa-envelope\" autocomplete=\"email\"></i></div>\n" +
-    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\" autocomplete=\"username\"><i class=\"fa fa-user\"></i></div>\n" +
-    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\" autocomplete=\"new-password\"><i class=\"fa fa-lock\"></i></div>\n" +
-    "                        <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
-    "                        <br><br>\n" +
-    "                        <div class=\"social-log\">\n" +
-    "                            <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "            <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div style=\"padding:15px\">\n" +
+    "                                    <h1 class=\"imageContainerSmallDivH1\">Join Our Community</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
-    "                    </form>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "                        <form role=\"form\">\n" +
+    "                            <div class=\"form-group\"><input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"><i class=\"fa fa-envelope\" autocomplete=\"email\"></i></div>\n" +
+    "                            <div class=\"form-group\"><input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\" autocomplete=\"username\"><i class=\"fa fa-user\"></i></div>\n" +
+    "                            <div class=\"form-group\"><input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\" autocomplete=\"new-password\"><i class=\"fa fa-lock\"></i></div>\n" +
+    "                            <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
+    "                            <br><br>\n" +
+    "                            <div class=\"social-log\">\n" +
+    "                                <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                        <div class=\"selfClear\"></div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"selfClear\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
-    "\n" +
-    "<!--\n" +
-    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <div class=\"container\">\n" +
-    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover CRE8</h1>\n" +
-    "                <h5>\n" +
-    "                    <b><a style=\"color:white\" href=\"/content\">Content</a></b>\n" +
-    "                    <b><a style=\"color:white\" href=\"/marketplace\">Items</a></b>\n" +
-    "                    <b><a style=\"color:white\" href=\"/members\">Members</a></b>\n" +
-    "                    <b><a style=\"color:white\" href=\"/market\">Orders</a></b>\n" +
-    "                    <b><a style=\"color:white\" href=\"/projects\">Projects</a></b>\n" +
-    "                    <b><a style=\"color:white\" href=\"/tasks\">Tasks</a></b>\n" +
-    "                </h5>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "-->\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
@@ -5211,27 +5272,28 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <p style=\"font-style:italic;margin:0px;color:gray\">Wanna Collab? Get Involved in your Local Community.</p>\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            -->\n" +
-    "\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div class=\"container\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"/discover\">Discover CRE8</a></h1>\n" +
-    "                            <h5>\n" +
-    "                                <b><a style=\"color:white\" href=\"/content\">Content</a></b>\n" +
-    "                                <b><a style=\"color:white\" href=\"/marketplace\">Items</a></b>\n" +
-    "                                <b><a style=\"color:white\" href=\"/members\">Members</a></b>\n" +
-    "                                <b><a style=\"color:white\" href=\"/market\">Orders</a></b>\n" +
-    "                                <b><a style=\"color:white\" href=\"/projects\">Projects</a></b>\n" +
-    "                                <b><a style=\"color:white\" href=\"/tasks\">Tasks</a></b>\n" +
-    "                            </h5>\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"/discover\">Discover CRE8</a></h1>\n" +
+    "                                <h5>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/content\">Content</a></b>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/marketplace\">Items</a></b>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/members\">Members</a></b>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/market\">Orders</a></b>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/projects\">Projects</a></b>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/tasks\">Tasks</a></b>\n" +
+    "                                </h5>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
     "\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            \n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
@@ -5256,7 +5318,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                    <div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div class=\"container\" style=\"width:100%\">\n" +
+    "                                <div style=\"width:100%;padding:15px\">\n" +
     "                                    <h1 ng-click=\"$event.stopPropagation();\" style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"content/{{item.id}}\">{{item.title}}</a></h1>\n" +
     "                                    <!--<h5 style=\"color:white\">Content</h5>-->\n" +
     "                                </div>\n" +
@@ -5317,7 +5379,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div class=\"container\" style=\"width:100%\">\n" +
+    "                                <div style=\"width:100%;padding:15px\">\n" +
     "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" ng-click=\"$event.stopPropagation()\"href=\"task/{{item.id}}\">{{item.title}}</h1>\n" +
     "                                    <!--<h5 style=\"color:white\">Task</h5>-->\n" +
     "                                </div>\n" +
@@ -5342,12 +5404,11 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                </div>\n" +
     "\n" +
     "                <div class=\"card\" ng-if=\"item.model=='TIME'\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "\n" +
     "                    <!--\n" +
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div class=\"container\">\n" +
+    "                                <div style=\"padding:15px\">\n" +
     "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" ng-click=\"$event.stopPropagation()\"href=\"task/{{item.id}}\">{{item.amount}}</h1>\n" +
     "                                    <h5 style=\"color:white\" am-time-ago=\"item.createdAt\"></h5>\n" +
     "                                </div>\n" +
@@ -5355,36 +5416,24 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        </div>\n" +
     "                    </div>\n" +
     "                    -->\n" +
-    "\n" +
     "                    <div style=\"padding:16px;\">\n" +
-    "\n" +
     "                        <div>\n" +
-    "\n" +
     "                            <div style=\"float:right;text-align:right\">\n" +
     "                                <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
     "                            </div>\n" +
-    "\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{item.user.username}}\">\n" +
     "                                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                                {{item.user.username}}\n" +
     "                            </a>\n" +
-    "\n" +
     "                            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "\n" +
     "                            <a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\">{{item.amount}}</a>\n" +
-    "\n" +
     "                            <!--TODO: ASSOCIATION AREA-->\n" +
-    "\n" +
     "                            <p style=\"color:gray;font-size:10px;margin-left:42px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "                            \n" +
     "                        </div>\n" +
-    "\n" +
     "                        <p ng-click=\"$event.stopPropagation()\" ng-show=\"item.task.tags > 0\" style=\"margin-left:42px\">\n" +
     "                            <a ng-repeat=\"tag in item.task.tags\" href=\"market/{{tag.trim()}}+{{task.id}}\">{{tag.trim()}} </a>\n" +
     "                        </p>\n" +
-    "\n" +
     "                        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
-    "\n" +
     "                    </div>\n" +
     "                    <div class=\"card-footer\">\n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -5395,13 +5444,10 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                    </div>\n" +
     "                </div>             \n" +
     "            </div>\n" +
-    "\n" +
     "            <div ng-show=\"false\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +

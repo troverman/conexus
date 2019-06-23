@@ -977,18 +977,22 @@ angular.module( 'conexus.developers', [
     
 
     //DATA MODELS
-    $scope.humanReadableValidationNFTModel = 'var humanReadableValidationNFTModel = '+JSON.stringify({ 
+    $scope.humanReadableTokenModel = 'var humanReadableTokenModel = '+JSON.stringify({ 
         string: 'MODEL+ADDRESS',
         information:{
             inCirculation:1,
             markets:0,
         },
         protocols:[
-            'BASE',
+            'STRUCTURE',
+            'LANUGAGE',
+            'CONGRUENCE',
+            'MANIFOLD',
         ],
         logic:{
             transferrable:true, 
-            mint:'ONCREATEVALIDATION'
+            onCreate:'function(onCreate){}',
+
         }
     }, null, 4);
 
