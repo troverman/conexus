@@ -5066,7 +5066,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                CREATE IS UNITY\n" +
     "                -->\n" +
     "                <!--<h3>WE ARE ALL VALUABLE</h3>-->\n" +
-    "                <h3>INFORMATION IS VALUABLE</h3>\n" +
+    "                <h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">INFORMATION IS VALUABLE</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates value, from imagination and intention to work and organization.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>\n" +
@@ -5110,7 +5110,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <div class=\"spacing-50\"></div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <h3>BUILD AN EGALITARIAN WORLD</h3>\n" +
+    "                <h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">BUILD AN EGALITARIAN WORLD</h3>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Everyone & everything has value. What is your Story?</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">What do you believe is valuable? Sharing your values creates a mechanism of empowerment. <!--Share your values to create a mechanism of empowerment. --> We create value in each other!</p> <!--we value each other!-->\n" +
@@ -5177,29 +5177,17 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
-    "                <!--\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?intelligence,camera,eye,watching,future,city,patterns')\" class=\"imageContainerSmall\">\n" +
-    "                -->\n" +
-    "                <div class=\"imageContainerSmall\" style=\"background:white\">\n" +
-    "                    <!--\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">\n" +
-    "                    -->\n" +
-    "                    <div class=\"imageContainerSmallDiv\">\n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <!--\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">TRANSPARENCY</h1>\n" +
+    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">TRANSPARENCY</h1>\n" +
     "                                <h5 style=\"color:white\">The Creation of Emergent Intelligence</h5>\n" +
-    "                            </div>\n" +
-    "                            -->\n" +
-    "                            <div>\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:black;font-weight:400;\">TRANSPARENCY</h1>\n" +
-    "                                <h5>The Creation of Emergent Intelligence</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <!--<div class=\"spacing-10\"></div>-->\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "                <!--\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>\n" +
     "                -->\n" +
@@ -5221,7 +5209,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">WE CREATE THE FUTURE TODAY</h1>\n" +
+    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">WE CREATE THE FUTURE TODAY</h1>\n" +
     "                                <h5 style=\"color:white\">Worldwide and always expanding, help cocreate our shared vision.</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
