@@ -33,15 +33,15 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Create action.. <a ng-click="informationToggle('CREATECONTENT')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Create action.. <a ng-click="informationToggle('CREATEACTION')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
                 <form role="form" ng-submit="createContent()">
                     <h5>Action</h5>
-                    <input type="text" placeholder="Action" ng-model="newContent.action" class="form-control">
+                    <input type="text" placeholder="Action" ng-model="newAction.action" class="form-control">
                     <h5>Amount</h5>
-                    <input type="text" placeholder="Amount" ng-model="newContent.amount" class="form-control">
-                    <h5>Accociated Models (Item)</h5>
-                    <tags-input min-length="1" placeholder="Item" ng-model="newContent.tags">
+                    <input type="text" placeholder="Amount" ng-model="newAction.amount" class="form-control">
+                    <h5>Accociated Models</h5>
+                    <tags-input min-length="1" placeholder="Item" ng-model="newAction.associatiedModels">
                         <auto-complete source="loadItems($query)"></auto-complete>
                     </tags-input>
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
@@ -130,14 +130,19 @@
             <div style="padding:16px">
                 <div class="spacing-15"></div>
                 <h4 ng-click="renderToggle(item)" class="nav-links"><a>Information <i style="float:right" class="fas fa-info"></i></a></h4>
+                <h4 ng-if="item.model=='ITEM'" ng-click="actionToggle(item)" class="nav-links">
+                    <!--LOOK AT ITEM ACTION POTIENTAL..-->
+                    <a>Create Action <i style="float:right" class="fas fa-exclamation"></i></a>
+                </h4>
+
+                <!--ACTIONs below..?-->
                 <h4 ng-if="item.model=='ITEM'" ng-click="" class="nav-links">
                     <!--TODO: OWNER-->
                     <a ng-if="currentUser.id == item.user.id" ng-click="transactionToggle(null, item.id)">Send Item <i style="float:right" class="fas fa-paper-plane"></i></a>
-                    <a ng-if="currentUser.id != item.user.id" ng-click="orderToggle()">Purchase Item <i style="float:right" class="fas fa-shopping-cart"></i></a>
+                    <a ng-if="currentUser.id != item.user.id" ng-click="orderToggle(item)">Purchase Item <i style="float:right" class="fas fa-shopping-cart"></i></a>
                 </h4>
                 <h4 ng-if="item.model=='ITEM'" ng-click="" class="nav-links">
                     <a ng-if="currentUser.id == item.user.id">Liquidity <i style="float:right" class="fas fa-exchange-alt"></i></a>
-
                 </h4>
                 <h4 ng-if="item.model=='PROJECT'" ng-click="" class="nav-links"><a>Request To Join <i style="float:right" class="fas fa-users"></i></a></h4>
                 <h4 ng-click="renderValidationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>
@@ -902,6 +907,7 @@
                     </a>
                 </div>
 
+                <!--TODO-->
                 <div ng-if="item.model == 'MARKET'">
                     <highchart config="bidAskChart"></highchart>
                 </div>
@@ -984,6 +990,7 @@
                     <span ng-repeat="(key, value) in item.amountSet track by $index"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
                 </div>
 
+                <div ng-if="item.tags" class="spacing-5"></div>
                 <p ng-if="item.tags"><b>Tags</b></p> 
                 <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                 
@@ -1130,13 +1137,15 @@
                     </div>
                     <div class="col-sm-9">
 
+                        <!--
                         <button class="btn btn-raised btn-default" ng-click="renderGraph('random')">Random</button>
                         <button class="btn btn-raised btn-default" ng-click="renderGraph('circle')">Circle</button>
                         <button class="btn btn-raised btn-default" ng-click="renderGraph('concentric')">Concentric</button>
                         <button class="btn btn-raised btn-default" ng-click="renderGraph('grid')">Grid</button>
                         <button class="btn btn-raised btn-default" ng-click="renderGraph('cose')">Cose</button>
                         <button class="btn btn-raised btn-default" ng-click="renderGraph('breadthfirst')">Breadth First</button>
-
+                        -->
+                        
                         <cytoscape graph-ready="graphReady" graph-options="directedGraphOptions" graph-elements="directedGraphElements" graph-layout="directedGraphLayout" graph-style="directedGraphStyle"></cytoscape>
                     </div>
                 </div>
@@ -1835,6 +1844,9 @@
             </div>
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
+                <div ng-if="informationType == 'CREATEACTION'">
+                    <p>Actions are a verb in the string Language. Actions extend items, and act as verbs upon items. 'USE+ITEM'</p>
+                </div>
                 <div ng-if="informationType == 'CREATECONTENT'">
                     <p>Content is art; content can funnel attention, energy, and value. You can CREATE content. Content can be associated recursivly. Triggering Motions to validate where appropiate.</p>
                 </div>

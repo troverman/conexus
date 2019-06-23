@@ -13,7 +13,7 @@ angular.module( 'conexus.apps', [
     });
 }])
 
-.controller( 'AppsController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', function AppsController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, transaction ) {
+.controller( 'AppsController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', function AppsController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel ) {
     
     $scope.apps = [
         {title:'CRE8 CORE', description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'},
@@ -53,6 +53,9 @@ angular.module( 'conexus.apps', [
         {title:'XRP Tokenization', description:'XRP Tokenization, manages custodial relationships', manifold:'XRP', tags:'XRP,crypto,finance'},
         {title:'TRON Tokenization', description:'TRON Tokenization, manages custodial relationships', manifold:'TRON', tags:'TRON,crypto,finance'},
         {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration', manifold:'DATA+STEEM+', tags:'STEEM,activity,app,authentication'},
+        {title:'Github', description:'Github Activity Tokenization, authentication and app integration', manifold:'DATA+GITHUB+', tags:'github,activity,app,authentication'},
+        {title:'Gitcoin App', description:'Gitcoin Activity Tokenization, authentication and app integration', manifold:'DATA+GITCOIN+', tags:'gitcoin,activity,app,authentication'},
+
     ];
 
     //TODO: BETTER | TAG STORAGE

@@ -80,8 +80,14 @@ angular.module( 'conexus.nav', [
     }
 
     //ROOT FUNCTIONS
-    $rootScope.actionToggle = function(){
+    $rootScope.actionToggle = function(item){
         $scope.closeAllNav();
+        $scope.newAction = {};
+        if (item){
+            $scope.newAction.action = 'USE';
+            $scope.newAction.amount = 1
+            $scope.newAction.associatiedModels = [{text:item.title}];
+        }
         if($rootScope.currentUser){$mdSidenav('action').toggle();}
         else{$mdSidenav('login').toggle();}
     };

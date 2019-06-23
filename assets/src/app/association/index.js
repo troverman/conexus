@@ -20,7 +20,37 @@ angular.module( 'conexus.association', [
 
 .controller( 'AssociationCtrl', ['$sce', '$scope', 'validations', function AssociationController( $sce, $scope, validations ) {
 
+	$scope.association = {};
     $scope.validations = validations;
     //ASSOCIATION IS JSON CONTEXT + AVG SCORE && SET OF ASSOCIATED MODELS
+
+    $scope.associationColumn = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'association',
+            type: 'column',
+            name: 'Validation',
+            data: [],
+            yAxis: 0
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        yAxis: [
+            {title: {text: null}},
+            {title: {text: null}},
+            {title: {text: null}}
+        ],
+        legend: {enabled: false},
+        credits:{enabled:false},
+        plotOptions: {column: {minPointLength: 3}},
+    };
+
+    //MAP VALIDATIONS
 
 }]);
