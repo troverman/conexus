@@ -11,30 +11,16 @@
     </div>
 	<div class="card">
 		<div style="padding:16px;">
-			<div class="row">
-				<div class="col-sm-6">
-					<h5>Asset Balance Lookup <span style="font-size:11px;color:gray">0x{{project.id}}</span></h5>
-			   		<form style="display:flex;flex-direction:row;">
-			        	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Dimension">
-			        	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-			                <a href="#">
-			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-			                </a>
-						</div>
-			    	</form>
-			    </div>
-			    <div class="col-sm-6">
-					<h5>Project Reputation Lookup <span style="font-size:11px;color:gray">0x{{project.id}}</span> </h5>
-			   		<form style="display:flex;flex-direction:row;">
-			        	<input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Dimension">
-			        	<div style="border:0px" class="btn btn-default dropdown sort-dropdown noselect" style="float:right">
-			                <a href="#">
-			                    <h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i> Search</h5>
-			                </a>
-						</div>
-			    	</form>
-			    </div>
-			</div>
-	   	</div>
+			<h5>Balance Lookup <span style="font-size:11px;color:gray">0x{{project.id}}</span></h5>
+	   		<form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
+	        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
+	        	<div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
+	                <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
+				</div>
+	    	</form>
+	    	<div ng-show="balanceLookupValue !== undefined">
+	    		<h5><a href="market/{{balanceLook}}">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
+	    	</div>
+	    </div>
 	</div>
 </div>

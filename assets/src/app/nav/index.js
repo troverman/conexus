@@ -1416,6 +1416,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('information').close();
         $mdSidenav('item').close();
         $mdSidenav('login').close();
+        $mdSidenav('memberQR').close();
         $mdSidenav('nav').close();
         $mdSidenav('order').close();
         $mdSidenav('project').close();

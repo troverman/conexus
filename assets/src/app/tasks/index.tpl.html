@@ -37,37 +37,61 @@
 <!--TODO: TOKEN OUPUT FILTERS-->
 <div class="container">
 	<div class="row">
-		<div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
+		<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
 			<!--TODO: MOBILE-->
 			<!--TODO: URL-->
 			<!--TODO: FILTER RENDER-->
-	        <div class="card">
+	        <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
+			 	<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Tags</h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
 	            <div style="padding:16px;">
-					<span><b>Tags</b></span>
-	                <div ng-repeat="tag in sortedTagArray">
-	                    <a href="#" ng-click="filterContent(tag.element)">{{tag.element}}</a>
+	                <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation()">
+	                    <a href="#" ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
 	                </div>
 	            </div>
 	        </div>
-		    <div class="card">
+		    <div class="card" ng-if="sortedAssociationArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+		    	<div style="background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:100px;min-height:50px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
 	            <div style="padding:16px;">
-	                <span><b>Associations</b></span>
-	                <div ng-repeat="association in sortedAssociationArray">
-	                    <a href="#" ng-click="filterContent(association.element)">{{association.element}}</a>
+	                <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation()">
+	                    <a href="#" ng-click="filterContent(association.element)"><b>{{association.element}}</b></a>
 	                </div>
 	            </div>
 	        </div>
-	        <div class="card">
+	        <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
+	        	<div style="background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:50px;min-height:50px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Locations</h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
 	            <div style="padding:16px;">
-	                <span><b>Locations</b></span>
-	                <div ng-repeat="location in sortedLocationsArray">
-	                    <a href="#" ng-click="filterContent(location.element)">{{location}}</a>
+	                <div ng-repeat="location in sortedLocationsArray" ng-click="$event.stopPropagation()">
+	                    <a href="#" ng-click="filterContent(location.element)"><b>{{location}}</b></a>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
 
-	    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
+	    <div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
 
 	    	<!--STATIC BUTTON FOR CURRENT LOCATION FILTER-->
 		    <ul style="padding:0px;" class="member-tabs">
