@@ -13,7 +13,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "                <!--\n" +
     "                HIGHER DIMENSIONAL PERSPECTIVES\n" +
     "            	-->\n" +
-    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING NEW VALUE\n" +
+    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING VALUE\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
     "        </svg> \n" +
@@ -92,9 +92,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<div class=\"spacing-5\"></div>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Coordinating around all goals, together we create a shared reality. Organized though intentionality that is context specific, participants create reputation - though the interaction with token protocols.</p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "				<p><a href=\"/members\"><b>Memberrs</b></a></p>\n" +
+    "				<p><a href=\"/members\"><b>Members</b></a></p>\n" +
     "				<p><a href=\"/projects\"><b>Projects</b></a></p>\n" +
-    "				<p><a href=\"/projects\"><b>Tasks</b></a></p>\n" +
+    "				<p><a href=\"/tasks\"><b>Tasks</b></a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
     "			<!--\n" +
@@ -211,21 +211,22 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
+    "			<div class=\"col-md-7\">\n" +
     "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "				<h2 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Information as Income</h2>\n" +
-    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information as Universal Income</h5>\n" +
+    "			<div class=\"col-md-5\" style=\"text-align:left\">\n" +
+    "				<h2 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Information is Income</h2>\n" +
+    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information is Universal Income</h5>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Transparency</h3>\n" +
     "				<!--\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contributions and Equitable Representation</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contribution and Equitable Representation</p>\n" +
     "				-->\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Financal Systems and Ledgers</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
     "				<div class=\"spacing-15\"></div>\n" +
     "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Tokenization</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <a href=\"/developers\"><b>developer</b></a> creativity, the CRE8 <a href=\"/apps\"><b>Application Ecosystem</b></a> facilitates progression towards complete cryptoeconomic tokenization.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <a href=\"/developers\"><b>developer</b></a> creativity.</p> \n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">The CRE8 <a href=\"/apps\"><b>Application Ecosystem</b></a> facilitates progression towards complete cryptoeconomic tokenization.</p>\n" +
     "				<!--\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
@@ -244,7 +245,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div class=\"spacing-50\"></div>\n" +
     "					<div class=\"row\">\n" +
     "						<div class=\"col-md-8\">\n" +
-    "							<h2>Information as Income</h2>\n" +
+    "							<h2>Information is Income</h2>\n" +
     "							<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity.</p>\n" +
     "						</div>\n" +
     "						<div class=\"col-md-4\">\n" +
@@ -290,10 +291,10 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "            </div>\n" +
     "			<div class=\"col-xs-12 col-sm-7\">\n" +
     "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">The Application Ecosystem</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Mapping address to data to balance. An infinite token playground.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocols act as plugins to the string space.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Apps are a bundle of protocols. App design is modular.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Protocol Design, <a href=\"/developers\"><b>Developer Documentation</b></a></p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">An infinite token playground. Protocols act as plugins to the string space.</p>\n" +
+    "				<!--Mapping idendity to data to balance.-->\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">App design is modular and are comprised of protocol bundles.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\"><a href=\"/developers\"><b>Developer Documentation</b></a></p>\n" +
     "				<div class=\"spacing-25\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/apps\">learn more</a>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
@@ -1341,6 +1342,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    }\n" +
     "    .modelList p {margin:0px;font-weight:700;}\n" +
     "    .ngCytoscape{height: 80vh;width:100%;}\n" +
+    "    .developersHeader h4 {font-family:'Titillium Web',sans-serif;font-weight:600;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"intro\" style=\"\">\n" +
@@ -1372,7 +1374,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-7\">\n" +
-    "                <h2>Developers</h2>\n" +
+    "                <h2 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Developers</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">Building Applications that further the promise of shared prosperity is a great public service.</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value & Change the world. Participate in the development of tokenization protocols & applications.</p>\n" +
     "            </div>\n" +
@@ -1396,14 +1398,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    </div>\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">\n" +
+    "            <div class=\"col-sm-8 developersHeader\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <p><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Peer Network & Super Computer</a></b></p>\n" +
-    "                <p><b><a href=\"#APPDESIGN\" du-smooth-scroll>Modular Application Design</a></b></p>\n" +
-    "                <p><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></p>\n" +
-    "                <p><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></p>\n" +
+    "                <h4><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Peer Network & Super Computer</a></b></h4>\n" +
+    "                <h4><b><a href=\"#APPDESIGN\" du-smooth-scroll>Modular Application Design</a></b></h4>\n" +
+    "                <h4><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></h4>\n" +
+    "                <h4><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></h4>\n" +
     "\n" +
     "                <!--\n" +
     "                <style>.ok p{margin:0px;}</style>\n" +
@@ -1437,10 +1439,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                -->\n" +
     "\n" +
-    "                <p><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></p>\n" +
-    "                <p><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></p>\n" +
-    "                <p><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></p>\n" +
-    "                <p><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></p>\n" +
+    "                <h4><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></h4>\n" +
+    "                <h4><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></h4>\n" +
+    "                <h4><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></h4>\n" +
+    "                <h4><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></h4>\n" +
     "                <!--Matching Engine\n" +
     "                    Market Objects & Traversal Character\n" +
     "                        Combinatorial 3\n" +
@@ -1450,8 +1452,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                    Group Theoretic Properties\n" +
     "                -->\n" +
-    "                <p><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters & Group Coordination</a></b></p>\n" +
-    "                <p><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></p>\n" +
+    "                <h4><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters & Group Coordination</a></b></h4>\n" +
+    "                <h4><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></h4>\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
@@ -3296,7 +3298,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokenization</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokenization Principles</h1>\n" +
     "                    <h5 style=\"color:white\">Tokenization from protocols.</h5>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -3835,6 +3837,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p>PROBABILITY DENSITY ANALYSIS</p>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
     "                        <a href=\"https://www.cre8.capital/api/data/marketImage\">Immutable Computed Market Image</a>\n" +
+    "                        <a href=\"https://www.cre8.capital\">CRE8.CAPITAL</a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -5050,7 +5053,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "<div style=\"background-color:white\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
-    "\n" +
     "        <!--INTO-->\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
@@ -5068,8 +5070,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Information is valuable. Sharing information creates value & multidimensional income.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/about\">learn more</a>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"max-height:200px\" src=\"/images/loading.gif\">\n" +
@@ -5101,8 +5102,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
-    "                <div class=\"spacing-50\"></div>\n" +
+    "                <div class=\"spacing-100\"></div>\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">BUILD AN EGALITARIAN WORLD</h3>\n" +
@@ -5138,17 +5138,17 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <img style=\"height:200px\" src=\"https://www.voetr.com/images/voetr-about.png\"/>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "        <div class=\"spacing-100\"></div>\n" +
+    "        -->\n" +
     "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div> \n" +
-    "\n" +
+    "        <!--\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-12\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?dimension,creating,creation,nature,code')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">MULTIDIMENSIONALITY</h1>\n" +
+    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">MULTIDIMENSIONALITY</h1>\n" +
     "                                <h5 style=\"color:white\">The Moment of Liquidity is Combinatorial</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -5165,9 +5165,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-100\"></div>\n" +
     "        -->\n" +
     "\n" +
     "        <div class=\"row\">\n" +
@@ -5195,8 +5193,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-12\">\n" +
@@ -5217,8 +5214,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
-    "        <div class=\"spacing-50\"></div>\n" +
+    "        <div class=\"spacing-100\"></div>\n" +
     "\n" +
     "    </div>\n" +
     "    \n" +
@@ -5243,7 +5239,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
     "                            <br><br>\n" +
     "                            <div class=\"social-log\">\n" +
-    "                                <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "                                <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\"><b>Already A Member?</b></h5></a>\n" +
     "                            </div>\n" +
     "                        </form>\n" +
     "                        <div class=\"selfClear\"></div>\n" +
@@ -5638,7 +5634,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "                    </div>\n" +
     "                    <br><br>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a style=\"text-align:center\" href=\"/register\"><h5 style=\"color:gray;font-style:italic\">Not A Member Yet?</h5></a>\n" +
+    "                        <a style=\"text-align:center\" href=\"/register\"><h5 style=\"color:gray;font-style:italic\"><b>Not A Member Yet?</b></h5></a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -9594,7 +9590,7 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "			<li><a href=\"/content\">Read</a></li>\n" +
     "			-->\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('NOTIFICATION', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "			<!--<li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>-->\n" +
+    "			<li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "		</ul>\n" +
     "\n" +
@@ -9608,22 +9604,32 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "		-->\n" +
     "\n" +
     "		<!--if unread; read flag etc-->\n" +
-    "		<div ng-repeat=\"notification in notifications\" class=\"card\" ng-click=\"\">\n" +
-    "	        <div style=\"padding:16px;\">\n" +
+    "		<div ng-repeat=\"notification in notifications\" class=\"card\" ng-click=\"cardDetailToggle(notification)\">\n" +
     "\n" +
+    "	    	<div style=\"background:url('https://source.unsplash.com/1600x900/?code,city,{{notification.content}},notification,{{notification.info.content.title}}');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "			    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "			        	<div style=\"padding:15px;\">\n" +
+    "				            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;text-transform: capitalize;\">{{notification.title}}</h1>\n" +
+    "				        </div>\n" +
+    "			        </div>\n" +
+    "			    </div>\n" +
+    "			</div>\n" +
+    "\n" +
+    "	        <div style=\"padding:16px;\">\n" +
     "	        	<div style=\"float:right;text-align:center\">\n" +
     "		            <!--<i style=\"float:right\" ng-click=\"$event.stopPropagation();tokensToggle(notification);\" class=\"fa fa-ellipsis-v\"></i>-->\n" +
     "		            <span ng-if=\"notification.isRead\">\n" +
-    "		            	<button class=\"btn btn-default\" ng-click=\"markRead(notification, false)\"><i class=\"fa fa-envelope-o\"></i></button>\n" +
+    "		            	<button class=\"btn btn-default\" ng-click=\"$event.stopPropagation();markRead(notification, false)\"><i class=\"fa fa-envelope-o\"></i></button>\n" +
     "						<br><span style=\"color:gray;font-size:10px;\">Read</span>\n" +
     "		            </span>\n" +
     "    		        <span ng-if=\"!notification.isRead\">\n" +
-    "						<button ng-if=\"!notification.isRead\" class=\"btn btn-default\" ng-click=\"markRead(notification, true)\"><i style=\"color:red\" class=\"fa fa-envelope-o\"></i></button>\n" +
+    "						<button ng-if=\"!notification.isRead\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();markRead(notification, true)\"><i style=\"color:red\" class=\"fa fa-envelope-o\"></i></button>\n" +
     "						<br><span style=\"color:gray;font-size:10px;\">Unread</span>\n" +
     "		            </span>\n" +
     "	        	</div>\n" +
     "\n" +
-    "	        	<h5>{{notification.title}}</h5>\n" +
+    "	        	<!--<h5 style=\"text-transform: capitalize;\">{{notification.title}}</h5>-->\n" +
     "\n" +
     "	            <!--if type is new follower; follow btn; embeded function-->\n" +
     "	            <div ng-if=\"notification.type=='FOLLOW'\">\n" +
@@ -9638,20 +9644,25 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	            </div>\n" +
     "\n" +
     "	            <div ng-if=\"notification.type=='REACTION'\">\n" +
-    "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
-    "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.user.username}}\">\n" +
-    "	                	<img class=\"card-avatar\" ng-src=\"{{notification.info.user.avatarUrl}}\" src=\"{{notification.info.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "	                	{{notification.info.user.username}}\n" +
-    "	                </a>\n" +
+    "	            	<p>\n" +
+    "		            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.user.username}}\">\n" +
+    "		                	<img class=\"card-avatar\" ng-src=\"{{notification.info.user.avatarUrl}}\" src=\"{{notification.info.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "		                	{{notification.info.user.username}}\n" +
+    "		                </a>\n" +
+    "		            </p>\n" +
     "\n" +
+    "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
     "	                <!--ASSOCIATED MODELS.. LOL-->\n" +
-    "                	<p>{{notification.info.type}} <a href=\"content/{{notification.info.content.id}}\">{{notification.info.content.title}}:{{notification.info.content.id}}</a></p>\n" +
+    "                	<!--{{notification.info.type}}-->\n" +
+    "                	<p><a ng-click=\"$event.stopPropagation();\" href=\"content/{{notification.info.content.id}}\">{{notification.info.content.title}}</a></p>\n" +
+    "                	<p><a ng-click=\"$event.stopPropagation();\" href=\"content/{{notification.info.content.id}}\">{{notification.info.content.id}}</a></p>\n" +
+    "                	<!--<p><a ng-click=\"$event.stopPropagation();\" href=\"reaction/{{notification.info.id}}\">{{notification.info.id}}</a></p>-->\n" +
     "\n" +
     "	            </div>\n" +
     "\n" +
     "	            <div ng-if=\"notification.type=='TRANSACTION'\">\n" +
     "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
-    "					<span ng-repeat=\"(key, value) in notification.info.transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation()\"  href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
+    "					<span ng-click=\"$event.stopPropagation();\" ng-repeat=\"(key, value) in notification.info.transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation()\"  href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
     "	            </div>\n" +
     "\n" +
     "	            <div ng-if=\"notification.type=='VALIDATION'\">\n" +
@@ -11737,7 +11748,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                    <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "                    <div class=\"social-log\">\n" +
-    "                        <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "                        <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\"><b>Already A Member?</b></h5></a>\n" +
     "                    </div>\n" +
     "                </form>\n" +
     "            </div>\n" +
@@ -12286,7 +12297,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "			 	<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "				        	<div class=\"container\">\n" +
+    "			        		<div style=\"padding:15px;\">\n" +
     "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tags</h1>\n" +
     "					        </div>\n" +
     "				        </div>\n" +
@@ -12302,7 +12313,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:100px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "				        	<div class=\"container\">\n" +
+    "			        		<div style=\"padding:15px;\">\n" +
     "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
     "					        </div>\n" +
     "				        </div>\n" +
@@ -12318,7 +12329,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "	        	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "				        	<div class=\"container\">\n" +
+    "			        		<div style=\"padding:15px;\">\n" +
     "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Locations</h1>\n" +
     "					        </div>\n" +
     "				        </div>\n" +
