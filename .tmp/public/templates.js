@@ -64,7 +64,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "                    </div>\n" +
     "                </div>\n" +
     "				<div class=\"spacing-5\"></div>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Coordinating around all goals, together we create a shared reality. Organized though intentionality that is context specific, participants create reputation - though the interaction with token protocols.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Coordinating around all goals, together we create a shared reality. Organized though intentionality that is context specific, participants create reputation and earn value though the interaction with decentralized protocols.</p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<p><a href=\"/members\"><b>Members</b></a></p>\n" +
     "				<p><a href=\"/projects\"><b>Projects</b></a></p>\n" +
@@ -98,6 +98,27 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-100\"></div>\n" +
+    "\n" +
+    "		<!--\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-12\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry,god,meditate,buddha,zen,tao')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 class=\"imageContainerSmallDivH1\">SHARED VALUE RELATIONSHIPS</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<p><a href=\"/market\"><b>MULTIDIMENSIONAL MARKET</b></a></p>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-100\"></div>\n" +
+    "		-->\n" +
+    "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6 col-xs-12\">\n" +
     "				<div class=\"card\">\n" +
@@ -158,6 +179,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "                </div>\n" +
     "				<div class=\"spacing-5\"></div>\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Interoperable Governance Mechanisms</h5>\n" +
+    "				<!--PROJECTS; PROJECT CHARTERS.. REPUTATION.. DECAY RULES, OWNERSHIP, ETC-->\n" +
+    "				<!--CONTENT VIEW TOKENIZATION, TRANSFERRABLE CONTENT RIGHTS.. vT-->\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Group Coordination and the designation of interrelated token networking.</h5>\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Human Validated Proof of Work</h5>\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Token Market Traversal</h5>\n" +
@@ -271,7 +294,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div class=\"spacing-50\"></div>\n" +
     "					<div class=\"row\">\n" +
     "						<div class=\"col-md-8\">\n" +
-    "							<h2><a style=\"color:white;margin:0px\" href=\"/market\">MultiDimensional Value Exchange</a></h2>\n" +
+    "							<h2><a style=\"color:white;margin:0px\" href=\"/market\">Multidimensional Value Exchange</a></h2>\n" +
     "							<h4 style=\"font-style:italic;color:gray;margin:0px\">TThe Moment of Liquidity is Combinatorial.</h4>\n" +
     "						</div>\n" +
     "						<div class=\"col-md-4\">\n" +
@@ -290,10 +313,11 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			<div class=\"col-md-8\">\n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Create Value Relationships</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value. This process creates intention in the market.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">A powerful approach for defining and stating interrelated value.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create intention in the market and in Multidimensional Value.</p>\n" +
     "				<!--<h5>Create Connected Networks of Value</h5>-->\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Through a variety of intentional techniques we can establish <i>more</i> true value intent</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Positions; Trade Positions; Futures Positions; Derivative Positions</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Through a variety of intentional techniques we establish true value intent.</p>\n" +
+    "				<!--<p style=\"font-style:italic;color:gray;margin:0px\">Market Order types; Manifold Actions; onMint Positions; Trade Positions; Futures Positions; Derivative Positions</p>-->\n" +
     "			</div>\n" +
     "            <div class=\"col-md-4 mobileHide\" style=\"text-align:center\">\n" +
     "            </div>\n" +
@@ -302,7 +326,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "            <div class=\"col-md-8\">\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Your Dimensional Vote</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create relationships in the multidimensional token market. Transparent and reputationally validated work is one application in CRE8's ecosystem.</p> \n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Create relationships in the <a href=\"/market\"><b>Multidimensional Token Market</b></a>.</p> \n" +
     "				<div class=\"spacing-50\"></div>\n" +
     "			</div>\n" +
     "			<div class=\"col-md-4\">\n" +
