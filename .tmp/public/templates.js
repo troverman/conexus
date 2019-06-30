@@ -2,9 +2,6 @@ angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
-    "<!--\n" +
-    "<div class=\"intro\" style=\"max-height:720px\">\n" +
-    "-->\n" +
     "<div class=\"intro\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
@@ -35,12 +32,12 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-sm-7\">\n" +
-    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
+    "			<div class=\"col-sm-9\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry,nature,pattern,creative,paint,aztec')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 class=\"imageContainerSmallDivH1\">SHARED VALUE WE CRE8</h1>\n" +
+    "                                <h1 class=\"imageContainerSmallDivH1\">SHARED VALUE WE CRE8 TOGETHER</h1>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -50,31 +47,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Creation never stops. Watch the World Create.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\"><a href=\"/discover\"><b>Explore</b></a> the diversity of the network.</p>\n" +
     "			</div>\n" +
-    "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
+    "			<div class=\"col-sm-3\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"spacing-100\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-7\">\n" +
-    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 class=\"imageContainerSmallDivH1\">A SHARED WORLD</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">From sharing items to space and time, sharing networks reflect our commitment.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 is supportive of sharing culture.</p>\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "				<p><a href=\"/marketplace\"><b>Marketplace</b></a></p>\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
-    "				<img style=\"max-height:200px\" src=\"images/space.jpg\">\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-100\"></div>\n" +
@@ -97,11 +71,31 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p><a href=\"/tasks\"><b>Tasks</b></a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
-    "			<!--\n" +
-    "			<div class=\"col-sm-5\" style=\"text-align:right\">\n" +
-    "				<img style=\"max-height:200px\" src=\"images/space.jpg\">\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-100\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-9\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry,god,meditate,buddha,zen,tao')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 class=\"imageContainerSmallDivH1\">A SHARED WORLD</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">From time and space to digital and physical items, sharing networks reflect our commitment to one another.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 promulgates sharing culture.</p>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<p><a href=\"/marketplace\"><b>Marketplace</b></a></p>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
-    "			-->\n" +
+    "			<div class=\"col-sm-3\">\n" +
+    "				<div style=\"text-align:center;min-height:200px;background-color:black;position: relative;\">\n" +
+    "					<img style=\"max-height:100%;max-width:100%;width:auto;height:auto;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;\" src=\"images/hypercube.gif\">\n" +
+    "				</div>\n" +
+    "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-100\"></div>\n" +
     "		<div class=\"row\">\n" +
@@ -135,14 +129,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			    <div class=\"container\">\n" +
     "					<div class=\"spacing-50\"></div>\n" +
     "					<div class=\"row\">\n" +
-    "						<div class=\"col-md-8\">\n" +
+    "						<div class=\"col-md-12\">\n" +
     "							<h2>Collaborative Governance</h2>\n" +
-    "							<p style=\"color:#a8a8a8;font-style:italic;margin:0px\">Context Specific Reputation Protocols give us a fair shot at accountable representation.</p>\n" +
-    "						</div>\n" +
-    "						<div class=\"col-md-4\">\n" +
-    "							<!--\n" +
-    "							<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hyper.gif\"></a>\n" +
-    "							-->\n" +
+    "							<h4 style=\"color:#a8a8a8;font-style:italic;margin:0px\">Context Specific Reputation Protocols give us a fair shot at accountable representation.</h4>\n" +
     "						</div>\n" +
     "					</div>\n" +
     "					<div class=\"spacing-50\"></div>\n" +
@@ -157,25 +146,20 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?collaborative,goverment,governance')\" class=\"imageContainerSmall\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?collaborative,goverment,governance,congress,senate,coordination')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 class=\"imageContainerSmallDivH1\">WE CRE8</h1>\n" +
+    "                                <h2 class=\"imageContainerSmallDivH1\" style=\"font-size:30px\">WE CRE8</h2>\n" +
+    "                				<h4 style=\"color:#a8a8a8;font-style:italic;\">A mechanism of value from consensus upon the relation of shared value</h4>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "				<div class=\"spacing-5\"></div>\n" +
-    "				<!--\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">We CRE8</h3>\n" +
-    "				-->\n" +
-    "				<p style=\"color:#a8a8a8;font-style:italic;\">Our mechanism of value is created from consensus upon the relation of shared value</p>\n" +
-    "				<!--\n" +
-    "				<h5>Human Validated Proof of Work</h5>\n" +
-    "				-->\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Interoperable Governance Mechanisms</h5>\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Group Coordination and the designation of interrelated token networking.</h5>\n" +
+    "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Human Validated Proof of Work</h5>\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Token Market Traversal</h5>\n" +
     "			</div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
@@ -186,56 +170,39 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?collaborative,goverment,governance')\" class=\"imageContainerSmall\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?collaborative,goverment,governance,congress,peers,computer,code,iphone,android,robot,cell,natural')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 class=\"imageContainerSmallDivH1\">The Peer Network</h1>\n" +
-    "                                <h5 style=\"color:white\">Our Value Infrastructure</h5>\n" +
+    "                                <h2 class=\"imageContainerSmallDivH1\" style=\"font-size:30px\">The Peer Network</h2>\n" +
+    "                                <h4 style=\"font-style:italic;color:gray;margin:0px\">Our Decentralized Infrastructure</h4>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "				<!--\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">The Peer Network</h3>\n" +
-    "				<p style=\"color:#a8a8a8;font-style:italic;\">Our Value Infrastructure</p>\n" +
-    "				-->\n" +
     "				<div class=\"spacing-5\"></div>\n" +
     "				<p style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transparency\"><b>Transparency in action</b></a></p>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div id=\"about-section1\">\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-7\">\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-5\" style=\"text-align:left\">\n" +
-    "				<h2 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Information is Income</h2>\n" +
-    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information is Universal Income</h5>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Transparency</h3>\n" +
-    "				<!--\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Transparent Contribution and Equitable Representation</p>\n" +
-    "				-->\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Financal Systems and Ledgers</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Tokenization</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <a href=\"/developers\"><b>developer</b></a> creativity.</p> \n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">The CRE8 <a href=\"/apps\"><b>Application Ecosystem</b></a> facilitates progression towards complete cryptoeconomic tokenization.</p>\n" +
-    "				<!--\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Meta Data imbued in the tokenization layer</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Information to a Balance Mapping.</p>\n" +
-    "				-->\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
+    "\n" +
+    "<!--\n" +
+    "<div id=\"about-section1\">\n" +
+    "	<div class=\"container\">\n" +
+    "		<div class=\"spacing-25\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\" style=\"text-align:left\">\n" +
+    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Transparency</h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Financal Systems and Ledgers</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "-->\n" +
     "\n" +
     "<div id=\"about-section2\">\n" +
     "	<div style=\"background:url('https://source.unsplash.com/1600x900/?code,goverment,governance,information,data,database')\" class=\"imageContainerSmall\">\n" +
@@ -244,12 +211,9 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			    <div class=\"container\">\n" +
     "					<div class=\"spacing-50\"></div>\n" +
     "					<div class=\"row\">\n" +
-    "						<div class=\"col-md-8\">\n" +
+    "						<div class=\"col-md-12\">\n" +
     "							<h2>Information is Income</h2>\n" +
-    "							<p style=\"font-style:italic;color:gray;margin:0px\">Turn your creative effort into dimensional tokens with market liquidity.</p>\n" +
-    "						</div>\n" +
-    "						<div class=\"col-md-4\">\n" +
-    "							<!--<a href=\"/\"><img style=\"height:88px;float:right\" src=\"images/hypercube.gif\"></a>-->\n" +
+    "							<h4 style=\"font-style:italic;color:gray;margin:0px\">Turn shared information into value</h4>\n" +
     "						</div>\n" +
     "					</div>\n" +
     "					<div class=\"spacing-50\"></div>\n" +
@@ -261,43 +225,37 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "\n" +
     "<div id=\"about-section1\">\n" +
     "\n" +
-    "	<!--\n" +
     "	<div class=\"container\">\n" +
     "		<div class=\"spacing-25\"></div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "			</div>\n" +
-    "			<div class=\"col-md-6\" style=\"text-align:right\">\n" +
-    "				<h2 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Information as Income</h2>\n" +
-    "				<h5 style=\"font-style:italic;color:gray;margin:0px\">Universal Information as Universal Income</h5>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Transparency</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Open Financal Systems and Ledgers</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Tokenized & Market Liquid Actions</p>\n" +
-    "				<div class=\"spacing-15\"></div>\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Tokenization</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <a href=\"/developers\"><b>developer</b></a> creativity, the CRE8 <a href=\"/apps\"><b>Application Ecosystem</b></a> facilitates progression towards complete cryptoeconomic tokenization.</p>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
-    "	</div>\n" +
-    "	-->\n" +
-    "\n" +
-    "	<div class=\"container\">\n" +
-    "		<div class=\"spacing-25\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-5 col-sm-5\">\n" +
+    "			<div class=\"col-xs-12 col-sm-5\">\n" +
     "                <img src=\"images/app.gif\">\n" +
     "            </div>\n" +
     "			<div class=\"col-xs-12 col-sm-7\">\n" +
-    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">The Application Ecosystem</h3>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">An infinite token playground. Protocols act as plugins to the string space.</p>\n" +
+    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\"><a style=\"color:black\" href=\"/apps\">The Application Ecosystem</a></h3>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">An infinite playground. Create protocols to act as plugins to the token-string space.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Apps are modular and fully interoperable. Comprised of protocol bundles, token applications create an immense and interconnected decision space.</p>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<h4 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Complete Tokenization</h4>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 facilitates progression towards complete cryptoeconomic tokenization.</p>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <b>developer</b> creativity.</p> \n" +
+    "				<div class=\"spacing-5\"></div>\n" +
     "				<!--Mapping idendity to data to balance.-->\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\">App design is modular and are comprised of protocol bundles.</p>\n" +
-    "				<p style=\"font-style:italic;color:gray;margin:0px\"><a href=\"/developers\"><b>Developer Documentation</b></a></p>\n" +
-    "				<div class=\"spacing-25\"></div>\n" +
-    "                <a style=\"width:100%\" class=\"btn btn-default log-btn\" href=\"/apps\">learn more</a>\n" +
+    "				<h4 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Beauty in Simplicity.</h4>\n" +
+    "				<p style=\"font-style:italic;color:gray;margin:0px\">String information is mapped to an identity mapped to an integer. Data is imbued in a tokenization layer.</p>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				`Identity->Data->Balance`\n" +
     "				<div class=\"spacing-10\"></div>\n" +
+    "				<div>\n" +
+    "                	<div class=\"col-sm-6\" style=\"padding:0px\">\n" +
+    "                		<a class=\"btn btn-default log-btn\" href=\"/apps\">Application Ecosystem</a>\n" +
+    "                		<div class=\"spacing-5\"></div>\n" +
+    "                	</div>\n" +
+    "					<div class=\"col-sm-6\" style=\"padding:0px\">\n" +
+    "						<a class=\"btn btn-default log-btn\" href=\"/developers\">Developer Documentation</a>\n" +
+    "						<div class=\"spacing-5\"></div>\n" +
+    "					</div>\n" +
+    "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-25\"></div>\n" +
@@ -314,7 +272,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div class=\"row\">\n" +
     "						<div class=\"col-md-8\">\n" +
     "							<h2><a style=\"color:white;margin:0px\" href=\"/market\">MultiDimensional Value Exchange</a></h2>\n" +
-    "							<p style=\"font-style:italic;color:gray;margin:0px\">TThe Moment of Liquidity is Combinatorial.</p>\n" +
+    "							<h4 style=\"font-style:italic;color:gray;margin:0px\">TThe Moment of Liquidity is Combinatorial.</h4>\n" +
     "						</div>\n" +
     "						<div class=\"col-md-4\">\n" +
     "						</div>\n" +
@@ -362,7 +320,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 class=\"imageContainerSmallDivH1\">Value Mapping</h1>\n" +
+    "                                <h2 class=\"imageContainerSmallDivH1\">Value Mapping</h2>\n" +
     "                                <h5 style=\"color:white\">Your Dimensional Vote</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -385,7 +343,8 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-25\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
-    "<div ng-include=\"'register/index.tpl.html'\"></div>");
+    "<div ng-include=\"'register/index.tpl.html'\"></div>\n" +
+    "");
 }]);
 
 angular.module("account/index.tpl.html", []).run(["$templateCache", function($templateCache) {
