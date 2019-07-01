@@ -76,6 +76,12 @@ angular.module( 'conexus.member', [
                 controller: 'MemberActionsCtrl',
                 templateUrl: 'member/templates/actions.tpl.html'
             }
+        },
+        //TODO: DEPRECIATE RESOLVE
+        resolve: {
+            actions: ['ActionModel', 'member', function(ActionModel, member) {
+                return ActionModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+            }]
         }
     })
     .state( 'member.content', {
@@ -309,9 +315,13 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberActionsCtrl', ['$sailsSocket', '$scope', 'titleService', function MemberActionsController($sailsSocket, $scope, titleService) {
+.controller( 'MemberActionsCtrl', ['$sailsSocket', '$scope', 'ActionModel', 'actions', 'titleService', function MemberActionsController($sailsSocket, $scope, ActionModel, actions, titleService) {
     
+
+    //STORE ACTION DATA... AGNOSTIC.. HM -- CREATE IS AN ACTION. CREATE ITEM. CREATE CONTENT - REDUCTION SOOON IN DUE TIME
     titleService.setTitle($scope.member.username + ' | Actions | CRE8.XYZ');
+
+    $scope.actions = actions;
 
 }])
 

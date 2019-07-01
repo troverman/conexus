@@ -25,8 +25,8 @@ module.exports = {
 			return deferred.promise;
 		};
 
-		var limit = req.query.limit;
-		var skip = req.query.skip;
+		var limit = parseInt(req.query.limit);
+		var skip = parseInt(req.query.skip);
 		var sort = req.query.sort;
 
 		console.log('GET TRANSACTION',req.query)
@@ -84,7 +84,6 @@ module.exports = {
 			});
 		}
 
-		//TO, FROM AS ASSOCIATED MODELS.. ? 
 		else if(req.query.to){
 			var to = req.query.to;
 			Transaction.find({to:to})
@@ -133,6 +132,52 @@ module.exports = {
 					res.json(models);
 				});
 			});
+		}
+
+		//lol
+		else if(req.query.amountSet){
+			var amountSet = req.query.amountSet;
+			
+			//TEMP
+			//var query = {};
+			//for (x in amountSet)
+			//query["amountSet."+req.query.amountSet] = {$gt:0};
+			//console.log(query);
+
+			//LOL WUT. SHOULD TAKE A BREAK THX. 
+			//var queryString = "amountSet."+req.query.amountSet;
+			//queryString = "+queryString+"
+			//console.log(queryString);
+
+			Transaction.native(function(err, transaction) {
+
+				transaction.find({amountSet:{amountSet:{$gt:0}}})
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+					var promises = [];
+					for (x in models){
+						promises.push(getTo(models[x]));
+						promises.push(getFrom(models[x]));
+					}
+					Q.all(promises).then((populatedModels)=>{
+						var sum = 0;
+						for (x in models){
+							models[x].to = populatedModels[sum];
+							sum++
+							models[x].from = populatedModels[sum];
+							sum++;
+						}
+						res.json(models);
+					});
+				});
+			});
+
 		}
 
 		else{

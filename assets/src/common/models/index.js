@@ -1,4 +1,5 @@
 angular.module('models', [
+	'models.action',
 	'models.content',
 	'models.follower',
 	'models.item',

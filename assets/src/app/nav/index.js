@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$window', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $window, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$window', 'ActionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $window, ActionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
     //TODO: ALL!
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
@@ -37,6 +37,8 @@ angular.module( 'conexus.nav', [
 
     //TODO: REFACTOR SOON
     if ($rootScope.currentUser){
+
+        $scope.newAction = {};
         $scope.newContent = {};
         $scope.newItem = {};
         $scope.newOrder = {};
@@ -83,12 +85,15 @@ angular.module( 'conexus.nav', [
     $rootScope.actionToggle = function(item){
         $scope.closeAllNav();
         $scope.newAction = {};
-        if (item){
-            $scope.newAction.action = 'USE';
-            $scope.newAction.amount = 1
-            $scope.newAction.associatiedModels = [{text:item.title}];
+        if($rootScope.currentUser){
+            $scope.newAction.user = $rootScope.currentUser.id;
+            if (item){
+                $scope.newAction.type = 'USE';
+                $scope.newAction.amount = 1
+                $scope.newAction.associatiedModels = [{text:item.title}];
+            }
+            $mdSidenav('action').toggle();
         }
-        if($rootScope.currentUser){$mdSidenav('action').toggle();}
         else{$mdSidenav('login').toggle();}
     };
 
@@ -1145,27 +1150,8 @@ angular.module( 'conexus.nav', [
                 if($scope.recordingTime === true) return false;
                 $scope.recordingTime = true;
 
-
-
-
                 //TODO: CREATE TIME HERE
                 $scope.startDateTime = new Date();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 clearInterval($scope.interval);
                 $scope.interval = setInterval($scope.updateCount, 1000);
@@ -1433,11 +1419,23 @@ angular.module( 'conexus.nav', [
         $mdSidenav('validation').close();
     };
 
+    $scope.createAction = function(item){
+        if ($rootScope.currentUser){
+            ActionModel.create($scope.newAction).then(function(model) {
+                $scope.confirm = $scope.newAction;
+                $scope.confirm.model = 'ACTION';
+                $scope.newAction = {};
+                $mdSidenav('action').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
     //TODO: ASSOCIATED MODELS
     $scope.createContent = function(item) {
         if ($rootScope.currentUser){
-
-
 
             //RENDER | nested Reply
             if(item){$scope.newContent.associatedModels = [{type:'CONTENT', id:content.id}];}
@@ -1449,16 +1447,12 @@ angular.module( 'conexus.nav', [
                 }).join(",");
             }
 
-
-
             //PATCH!!!
             if ($scope.newContent.associatedModels){
                 for (x in $scope.newContent.associatedModels){
                     $scope.newContent[$scope.newContent.associatedModels[x].type.toLowerCase()] = $scope.newContent.associatedModels[x].address
                 }
             }
-
-
 
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
             console.log($scope.newContent);
@@ -1975,6 +1969,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('subNav').close();
         $mdSidenav('action').close();
         $mdSidenav('content').close();
+        $mdSidenav('cre8').close();
         $mdSidenav('information').close();
         $mdSidenav('item').close();
         $mdSidenav('login').close();

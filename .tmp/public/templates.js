@@ -264,7 +264,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">Interoperable protocols allow <b>developer</b> creativity.</p> \n" +
     "				<div class=\"spacing-5\"></div>\n" +
     "				<!--Mapping idendity to data to balance.-->\n" +
-    "				<h4 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Beauty in Simplicity.</h4>\n" +
+    "				<h4 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Beauty in Simplicity</h4>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">String information is mapped to an identity mapped to an integer. Data is imbued in a tokenization layer.</p>\n" +
     "				<div class=\"spacing-5\"></div>\n" +
     "				`Identity->Data->Balance`\n" +
@@ -295,7 +295,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "					<div class=\"row\">\n" +
     "						<div class=\"col-md-8\">\n" +
     "							<h2><a style=\"color:white;margin:0px\" href=\"/market\">Multidimensional Value Exchange</a></h2>\n" +
-    "							<h4 style=\"font-style:italic;color:gray;margin:0px\">TThe Moment of Liquidity is Combinatorial.</h4>\n" +
+    "							<h4 style=\"font-style:italic;color:gray;margin:0px\">The Moment of Liquidity is Combinatorial.</h4>\n" +
     "						</div>\n" +
     "						<div class=\"col-md-4\">\n" +
     "						</div>\n" +
@@ -345,7 +345,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div style=\"padding:15px\">\n" +
     "                                <h2 class=\"imageContainerSmallDivH1\">Value Mapping</h2>\n" +
-    "                                <h5 style=\"color:white\">Your Dimensional Vote</h5>\n" +
+    "                                <h4 style=\"font-style:italic;color:gray;margin:0px\">Your Dimensional Vote</h4>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -700,6 +700,11 @@ angular.module("app/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div style=\"float:right;text-align:right\">\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(app);\" class=\"fa fa-ellipsis-v\"></i>\n" +
     "                </div>\n" +
+    "                <!--PROTOCOLS.. VIEWS.. (REACT ELEMETS RENDERED FROM CHAIN)-->\n" +
+    "                <!--GLOBAL ELEMENTS.. NAV.. MEMBER NAV (ADDITIONAL TABS..).. PROJECT PLUGIN..-->\n" +
+    "                <!--UI EXTENSIONS-->\n" +
+    "                <!--UI INTEROP-->\n" +
+    "                <!--OWN LANGUAGE TO COMPILE TO AGNOSTIC FRONTEND JS.. NATIVE APP?? .. GOTTA-->\n" +
     "                <!--\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{app.user.avatarUrl}}\" src=\"{{app.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -1306,6 +1311,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "<style>\n" +
     "    body {overflow-x:hidden}\n" +
     "    pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;margin:0px;border-radius:0px;}\n" +
+    "    h4, h5{font-family:'Titillium Web',sans-serif;font-weight:600;}\n" +
     "    .bootstrapHack {\n" +
     "        z-index: 3;\n" +
     "        border: 0px;\n" +
@@ -1326,6 +1332,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    .modelList p {margin:0px;font-weight:700;}\n" +
     "    .ngCytoscape{height: 80vh;width:100%;}\n" +
     "    .developersHeader h4 {font-family:'Titillium Web',sans-serif;font-weight:600;}\n" +
+    "    .subContents p{margin:0px;}\n" +
     "</style>\n" +
     "\n" +
     "<div class=\"intro\" style=\"\">\n" +
@@ -1356,12 +1363,41 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-7\">\n" +
+    "            <div class=\"col-sm-8 developersHeader\">\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div class=\"container\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Developers</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                -->\n" +
+    "\n" +
     "                <h2 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Developers</h2>\n" +
     "                <p style=\"color:gray;font-style:italic\">Building Applications that further the promise of shared prosperity is a great public service.</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Create the universe of tokenization. Build New Value & Change the world. Participate in the development of tokenization protocols & applications.</p>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                \n" +
+    "                <!--\n" +
+    "                <div class=\"spacing-25\"></div>\n" +
+    "                <h4><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Peer Network & Super Computer</a></b></h4>\n" +
+    "                <h4><b><a href=\"#APPDESIGN\" du-smooth-scroll>Modular Application Design</a></b></h4>\n" +
+    "                <h4><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></h4>\n" +
+    "                <h4><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></h4>\n" +
+    "                <h4><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></h4>\n" +
+    "                <h4><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></h4>\n" +
+    "                <h4><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></h4>\n" +
+    "                <h4><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></h4>\n" +
+    "                <h4><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters & Group Coordination</a></b></h4>\n" +
+    "                <h4><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></h4>\n" +
+    "                -->\n" +
+    "\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-5\" style=\"text-align:right\">\n" +
+    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1380,7 +1416,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"container\">\n" +
-    "        <div class=\"row\">\n" +
+    "        <div class=\"row\">-->\n" +
     "            <div class=\"col-sm-8 developersHeader\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Information about CRE8, decentralized computation, multidimensionality and pluralism, governance and coordination, and interoperable modular protocols. Token string language is explored.</p>\n" +
@@ -1388,11 +1424,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h4><b><a href=\"#CRE8VM\" du-smooth-scroll>The CRE8 Peer Network & Super Computer</a></b></h4>\n" +
     "                <h4><b><a href=\"#APPDESIGN\" du-smooth-scroll>Modular Application Design</a></b></h4>\n" +
     "                <h4><b><a href=\"#CRE8\" du-smooth-scroll>CRE8 CORE Protocols</a></b></h4>\n" +
+    "                <div style=\"padding:16px;font-weight:bold;font-size:12px;\" class=\"subContents\" ng-if=\"false\">\n" +
+    "                    <p><a href=\"#STRUCTURE\" du-smooth-scroll>STRUCTURE</a></p>\n" +
+    "                    <p><a href=\"#LANGUAGE\" du-smooth-scroll>LANGUAGE</a></p>\n" +
+    "                    <p><a href=\"#CONGRUENCE\" du-smooth-scroll>CONGRUENCE</a></p>\n" +
+    "                    <p><a href=\"#MANIFOLD\" du-smooth-scroll>MANIFOLD</a></p>\n" +
+    "                    <p><a href=\"#CONNECTION\" du-smooth-scroll>Core CRE8 Manifolds</a></p>\n" +
+    "                        <p><a href=\"#CRE8CONNECTION\" du-smooth-scroll>CONNECTION</a></p>\n" +
+    "                        <!--CREATE HERE | CONEX API...-->\n" +
+    "                </div>\n" +
     "                <h4><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></h4>\n" +
     "\n" +
-    "                <!--\n" +
-    "                <style>.ok p{margin:0px;}</style>\n" +
-    "                <div style=\"padding:16px;font-weight:bold;font-size:12px;\" class=\"ok\">\n" +
+    "                <div style=\"padding:16px;font-weight:bold;font-size:12px;\" class=\"subContents\" ng-if=\"false\">\n" +
     "                    <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
     "                    <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
     "                    <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
@@ -1420,21 +1463,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><a href=\"#TX\" du-smooth-scroll>Tx</a></p>\n" +
     "                    <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
     "                </div>\n" +
-    "                -->\n" +
-    "\n" +
     "                <h4><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></h4>\n" +
     "                <h4><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></h4>\n" +
     "                <h4><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></h4>\n" +
     "                <h4><b><a href=\"#MULTIMARKET\" du-smooth-scroll>MultiMarket Exploration & Traversal</a></b></h4>\n" +
-    "                <!--Matching Engine\n" +
-    "                    Market Objects & Traversal Character\n" +
-    "                        Combinatorial 3\n" +
+    "                <div style=\"padding:16px;font-weight:bold;font-size:12px;\" class=\"subContents\" ng-if=\"false\">\n" +
+    "                    <p><a href=\"#MATCHINGENGINE\" du-smooth-scroll>Matching Engine</a></p>\n" +
+    "                    <p><a href=\"#MARKETOBJECTS\" du-smooth-scroll>Market Objects & Traversal Character</a></p>\n" +
+    "                    <p><a href=\"#COMBINATORIALMARKETSPACES\" du-smooth-scroll>Combinatorial Market Spaces</a></p>\n" +
+    "                        <!--Combinatorial 3\n" +
     "                        Combinatorial 4\n" +
-    "                        Combinatorial N\n" +
-    "                    Combinatorial Market Spaces\n" +
-    "\n" +
-    "                    Group Theoretic Properties\n" +
-    "                -->\n" +
+    "                        Combinatorial N-->\n" +
+    "                    <p><a href=\"#GROUPTHEORY\" du-smooth-scroll>Group Theoretic Properties</a></p>\n" +
+    "                </div>\n" +
     "                <h4><b><a href=\"#GROUPINTENTION\" du-smooth-scroll>Project Charters & Group Coordination</a></b></h4>\n" +
     "                <h4><b><a href=\"#SYNTHETICTOKENIZATION\" du-smooth-scroll>Tokenization & Pattern Recognition</a></b></h4>\n" +
     "            </div>\n" +
@@ -1452,7 +1493,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div class=\"container\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The Decentralized CRE8 Super Computer</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">The CRE8 Super Computer</h1>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1462,40 +1503,50 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">\n" +
     "\n" +
-    "                <p style=\"color:gray;font-style:italic\">The CRE8 VM is the decenetralized state machiene and peer network</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Peer code compiles to WebAssembly to run inbrowser natively</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Virtual Machiene vs Assembly</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">The CRE8 Super Computer is formed though a decentralized network of state machienes and the sum of its computational potiental. An interlinked family of collaborative peers (both in their human and artifical elements) formalize gestalt interactions.</p><!--The decenetralized peer network creates gestalt interactions though an interlinked family of collaborative computers. </p>-->\n" +
+    "\n" +
+    "                <p style=\"color:gray;font-style:italic\">In order to maximaize peer contrubition, the CRE8 peer client compiles to WebAssembly to run in-browser natively <a href=\"#\">[ ! ]</a>.</p>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <h4>The Create Computer</h4>\n" +
-    "                <h5>The State Machine</h5>\n" +
+    "                <!--<h4>The CRE8 Super Computer</h4>-->\n" +
+    "                <h4>The State Machine</h4>\n" +
     "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
-    "\n" +
+    "                <h5>TBD</h5>\n" +
     "                <!--WEBASM -> BYTECODE (OF COMP)-->\n" +
     "                <!--MECHIENE HAS OP CODES.. DECENTRALIZED MACHINE CAN ONLY RUN OPCODES: MORE OPINIATED-->\n" +
     "                <!--ASSEMBLY CONVERTS TO BYTECODE-->\n" +
     "                <!--VM IS VERY SPECIFIC -> CONTRACT COMPILES TO BYTECODE (OF VM) -->\n" +
     "                <!--VM TRANSLATES BYTE CODE (RUN ON A DECENTRALIZED MACHINE)-->\n" +
-    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <h5>Data Storage & High-bandwith delivery</h5>\n" +
-    "                <p style=\"color:gray;font-style:italic\">InterPlanetary File System Protocol</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Live Peer Based Transcoding Services</p>\n" +
-    "\n" +
+    "                <h4>Networking Protocols, Data Storage, & High-bandwith Delivery</h4>\n" +
+    "                <!--<p style=\"color:gray;font-style:italic\">InterPlanetary File System Protocol</p>-->\n" +
+    "                <h5>TBD</h5>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <!--FRONT END CLIENTS... ANGULAR 1.5, VUE, REACT -->\n" +
-    "                <!--PEER CLIENTS.. WEBASSEMBLY (RUST), SWIFT, JAVA, PYTHON, GO .. -->\n" +
+    "                <h4>A Methodology of Conesnsus</h4>\n" +
+    "                <h5>TBD</h5>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h4>Forthright Data Organization: Mathmatical Principles</h4>\n" +
+    "                <h5>Cryptographic Provability</h5>\n" +
+    "                <h5>Information in a Patricia Tree</h5>\n" +
+    "                <h5>TBD</h5>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "\n" +
+    "                <h4>Code Base</h4>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Contribution is readily and excitedly accepted. All CRE8 Clients follow transparent governance principles.</p>\n" +
+    "                <!--PEER CLIENTS.. WEBASSEMBLY (RUST), SWIFT, JAVA, PYTHON, GO .. SHOULD BE META CREATE PROJECTS-->\n" +
     "                <div>\n" +
-    "                    <p><b>Front End Clients</b></p>\n" +
-    "                    <p><a href=\"https://www.github.com/troverman/conexus\">Angular 1.X (1.7.8), <a href=\"#\">Vue (v2.6.1), <a href=\"#\">React (16.8)</a></p>\n" +
-    "                    <p><b>Peer Clients</b></p>\n" +
-    "                    <p><a href=\"#\">In-Browser WebAssembly (RUST)</a>, <a href=\"#\">Python</a>, <a href=\"#\">Go</a></p>\n" +
-    "                    <p><b>Native Applications</b></p>\n" +
-    "                    <p><a href=\"#\">Android</a>, <a href=\"#\">iOS</a>, <a href=\"#\">OSX</a>, <a href=\"#\">Windows</a></p>\n" +
-    "                    <a class=\"btn btn-default log-btn\" href=\"https://www.github.com/troverman/conexus\">Github Peer Client</a>\n" +
+    "                    <h5>Front End Clients</h5>\n" +
+    "                    <p><a href=\"https://www.github.com/troverman/conexus\">Angular 1.X (1.7.8), <a href=\"project/cre8client-js-view\">Vue (v2.6.1), <a href=\"project/cre8client-js-react\">React (16.8)</a></p>\n" +
+    "                    <!--APP UI CODE IS  .. REACT-->\n" +
+    "                    <h5>Peer Clients</h5>\n" +
+    "                    <p><a href=\"project/cre8client-rust-webassembly\">In-Browser WebAssembly (RUST)</a>, <a href=\"project/cre8client-python\">Python</a>, <a href=\"project/cre8client-go\">Go</a></p>\n" +
+    "                    <h5>Native Applications</h5>\n" +
+    "                    <p><a href=\"project/cre8client-android\">Android</a>, <a href=\"project/cre8client-ios\">iOS</a>, <a href=\"project/cre8client-osx\">OSX</a>, <a href=\"project/cre8client-windows\">Windows</a></p>\n" +
     "                </div>\n" +
     "\n" +
     "            </div>\n" +
@@ -1503,7 +1554,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <img src=\"images/ifps.svg\">\n" +
     "                <img style=\"width:49%\"  src=\"images/hashtree.png\">\n" +
     "                <img style=\"width:49%\"  src=\"images/mining.jpg\">\n" +
-    "                <p><b>Information in a Patricia Tree</b></p>\n" +
     "                <img style=\"width:49%\" src=\"images/patricia-trie.png\">\n" +
     "                <img style=\"width:49%\" src=\"images/patricia-trie-insert.png\">\n" +
     "            </div>\n" +
@@ -1527,20 +1577,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-8\">  \n" +
-    "\n" +
     "                <p style=\"color:gray;font-style:italic\">The CRE8 Peer Network creates a decenetralized state machiene, and coordinates though peer connection.</p>\n" +
-    "                \n" +
-    "                <p><b>Networking Protocols</b></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Block Chain Principles</p>\n" +
     "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
-    "\n" +
     "                <p>Running a Peer</p>\n" +
-    "                <p>In Browser Connection, consensual contribution</p>\n" +
-    "                <p>What is WebAssembly?</p>\n" +
-    "\n" +
     "                <a class=\"btn btn-default log-btn\" href=\"/transparency\">Peer Network Browser</a>\n" +
-    "\n" +
-    "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
@@ -1716,10 +1756,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">The manifold property, combined with LANGUAGE string interpretation grammer, defines compound token-strings. Recursive in nature, manifolds provide deep intentionality.</p>\n" +
     "                    `nabla,partial,therefore,because,infty,emptyset`\n" +
     "                    `{emptyset,infty}`\n" +
+    "                </div>\n" +
     "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                    <p><b>Core CRE8 Manifolds</b></p>\n" +
+    "                <div id=\"CORE\">\n" +
+    "\n" +
+    "                    <h4><b>Core CRE8 Manifolds</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Defining Verbs in a string space; application(s)</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\"><a href=\"#\">MEMBER</a>, <a href=\"#\">PROJECT</a>, <a href=\"#\">TASK</a>, <a href=\"#\">TIME</a>, <a href=\"#\">VALIDATION</a>, <a href=\"#\">ORDER</a></p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order Book String Mapping; Mapping of all positions</p>\n" +
@@ -1756,6 +1799,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">a+b+c+d+.....+n+i+....</p>\n" +
     "                    `TOKEN_alpha+TOKEN_beta+TOKEN_gamma+cdots+TOKEN_omega+cdots`\n" +
     "                </div>\n" +
+    "\n" +
+    "\n" +
+    "                <!--UNIFY WITH CONEX API? PROB-->\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1981,7 +2027,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
     "                        <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
     "                        <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
-    "                        <p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>\n" +
+    "                        <!--<p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>-->\n" +
     "                        <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
     "                        <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
     "                        <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
@@ -2065,7 +2111,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>             \n" +
     "                    <div class=\"spacing-15\"></div>\n" +
     "                    <h4><b>Action</b></h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Similar to an Event, similar to a Tx. Agnositic Data Model. Supplies Model Inheritance.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Action Model. Agnositic Data Model. Supplies Model Inheritance. Vector actions upon items with direction (type) and quantity. `A_t circ I`</p>\n" +
     "\n" +
     "                    <p style=\"color:gray;font-style:italic\">Permissions.. Authentatication.. etc</p>\n" +
     "                    <div class=\"spacing-50\"></div>\n" +
@@ -2356,7 +2402,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Data is information. Data and Events information to information mapping.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Data is information. Information to information mapping.</p>\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
@@ -2371,6 +2417,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
+    "    <!--\n" +
     "    <div id=\"EVENT\" style=\"background-color:white;min-height:70vh\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"spacing-15\"></div>\n" +
@@ -2400,6 +2447,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    -->\n" +
     "\n" +
     "    <div id=\"FOLLOWER\" style=\"background-color:white;min-height:70vh\">\n" +
     "        <div class=\"container\">\n" +
@@ -3819,8 +3867,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <br>\n" +
     "                        <p>PROBABILITY DENSITY ANALYSIS</p>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <a href=\"https://www.cre8.capital/api/data/marketImage\">Immutable Computed Market Image</a>\n" +
-    "                        <a href=\"https://www.cre8.capital\">CRE8.CAPITAL</a>\n" +
+    "                        <a href=\"https://www.cre8.capital/api/data/marketImage\"><b>Immutable Computed Market Image</b></a>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <a href=\"https://www.cre8.capital\"><b>CRE8.CAPITAL</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -3901,15 +3950,20 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "        	<div class=\"container\">\n" +
     "            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
     "            	<h5 ng-if=\"true\">\n" +
+    "            		<b><a style=\"color:white\" href=\"/apps\">Apps</a></b>\n" +
     "            		<b><a style=\"color:white\" href=\"/content\">Content</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/marketplace\">Items</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/members\">Members</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/market\">Orders</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/projects\">Projects</a></b>\n" +
-    "					<!--<b><a style=\"color:white\" href=\"#\">Reactions</a></b>-->\n" +
+    "					<!--\n" +
+    "					<b><a style=\"color:white\" href=\"#\">Reactions</a></b>\n" +
+    "					-->\n" +
     "					<b><a style=\"color:white\" href=\"/tasks\">Tasks</a></b>\n" +
-    "					<!--<b><a style=\"color:white\" href=\"#\">Time</a></b>\n" +
-    "					<b><a style=\"color:white\" href=\"#\">Transactions</a></b>-->\n" +
+    "					<!--\n" +
+    "					<b><a style=\"color:white\" href=\"#\">Time</a></b>\n" +
+    "					<b><a style=\"color:white\" href=\"#\">Transactions</a></b>\n" +
+    "					-->\n" +
     "            	</h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -4161,61 +4215,6 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<!--TODO: TEMPLATE && DOCUMENT -->\n" +
-    "<!--\n" +
-    "<div class=\"container\">\n" +
-    "    <div class=\"card\" ng-click=\"\">\n" +
-    "    	<div style=\"max-height:200px;overflow:hidden\">\n" +
-    "    		<img src=\"https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80\">\n" +
-    "    	</div>\n" +
-    "		<div style=\"padding:16px;\">\n" +
-    "			<h1>Members</h1>\n" +
-    "			<p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>\n" +
-    "			<p>222 Members span 432 coutries and 3241 self organized desiplines.</p>\n" +
-    "			<p>CRE8's Commmunity has participated in 2013 organizing events and is emdeded in local governments globally.</p>\n" +
-    "			<p>Think about how we can do anything together. Think about our community. Think about our shared identitiy. Think about food and water.</p>\n" +
-    "			<p>the human story;</p>\n" +
-    "			<div class=\"row\">\n" +
-    "		        <div class=\"col-md-6\">\n" +
-    "		        	<p><b>Title</b></p>\n" +
-    "					<highchart config=\"chart\"></highchart>\n" +
-    "				</div>\n" +
-    "				<div class=\"col-md-6\">\n" +
-    "					<p><b>Title</b></p>\n" +
-    "					<highchart config=\"chart1\"></highchart>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-sm-6\" ng-repeat=\"item in members.slice(0,10)\">\n" +
-    "				<div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
-    "				    <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
-    "				        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "				    </div>\n" +
-    "				    <div class=\"member-card-info\">\n" +
-    "				        <h4><a href=\"member/{{item.username}}\">{{item.username}}</a></h4>\n" +
-    "				        <p style=\"color:gray\">{{item.status}} offline</p>\n" +
-    "				        <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
-    "				    </div>\n" +
-    "				</div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "-->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "<div class=\"spacing-50\"></div>");
 }]);
@@ -5447,18 +5446,6 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "		<div class=\"card\">\n" +
     "			<div style=\"padding:16px;\">\n" +
     "                <div style=\"float:right;text-align:right\">\n" +
-    "                    \n" +
-    "                    <!--\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-qrcode\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-eye\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-tags\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-heart\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-shopping-cart\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-share-alt\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-bezier-curve\"></i>\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fas fa-coins\"></i>\n" +
-    "                    -->\n" +
-    "\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(item);\" class=\"fa fa-ellipsis-v\"></i>\n" +
     "                </div>\n" +
     "                <div>\n" +
@@ -5483,6 +5470,85 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "		</div>\n" +
     "    </div>\n" +
     "\n" +
+    "    <div class=\"row\" ng-if=\"true\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,exchange.cash,finance,graphs,explore')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">History</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                <!--CREATOR-->\n" +
+    "                <div ng-repeat=\"transaction in transactions\">\n" +
+    "                    \n" +
+    "                    <div style=\"float:right;text-align:right\">\n" +
+    "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(transaction)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div style=\"display:inline\">\n" +
+    "                        <span ng-if=\"transaction.from.username\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{transaction.from.username}}\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{transaction.from.avatarUrl}}\" src=\"{{transaction.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{transaction.from.username}}\n" +
+    "                            </a>\n" +
+    "                        </span>\n" +
+    "                        <span ng-if=\"transaction.from.title\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{transaction.from.urlTitle}}\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{transaction.from.avatarUrl}}\" src=\"{{transaction.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{transaction.from.title}}\n" +
+    "                            </a>\n" +
+    "                        </span>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"display:inline;padding-left:5px;padding-right:5px;\">\n" +
+    "                        <i class=\"fa fa-arrow-right\"></i>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"display:inline\">\n" +
+    "                        <span ng-if=\"transaction.to.username\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{transaction.to.username}}\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{transaction.to.avatarUrl}}\" src=\"{{transaction.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{transaction.to.username}}\n" +
+    "                            </a>\n" +
+    "                        </span>\n" +
+    "                        <span ng-if=\"transaction.to.title\">\n" +
+    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{transaction.to.urlTitle}}\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{transaction.to.avatarUrl}}\" src=\"{{transaction.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{transaction.to.title}}\n" +
+    "                            </a>\n" +
+    "                        </span>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-5\"></div>\n" +
+    "                                \n" +
+    "                    <span ng-repeat=\"(key, value) in transaction.amountSet\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
+    "\n" +
+    "                    <p><a ng-repeat=\"tag in transaction.ledger.split(',')\" href=\"market/{{tag.trim()}}\">{{tag.trim()}} </a></p>\n" +
+    "                    <p>{{transaction.content}}</p>\n" +
+    "\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "     <div class=\"row\" ng-if=\"false\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,exchange.cash,finance,graphs,explore')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Components</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "                \n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "    <!--\n" +
     "    <div style=\"row\">\n" +
     "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
@@ -7613,16 +7679,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
   $templateCache.put("nav/index.tpl.html",
     "<!--BOTTOM SHEET EXPLORE ESP MOBILE... card detail.. etc - share. ux pattern-->\n" +
     "<style>\n" +
-    ".bottom{\n" +
-    "    //top: auto;\n" +
-    "    //left: 0;\n" +
-    "    //right: 0;\n" +
-    "    //bottom: 0;\n" +
-    "    //transform: translate3d(0,100%,0);\n" +
-    "}\n" +
-    ".ngCytoscape{height: 500px;width:100%;}\n" +
-    "\n" +
-    "\n" +
+    "    .bottom{\n" +
+    "        //top: auto;\n" +
+    "        //left: 0;\n" +
+    "        //right: 0;\n" +
+    "        //bottom: 0;\n" +
+    "        //transform: translate3d(0,100%,0);\n" +
+    "    }\n" +
+    "    .ngCytoscape{height: 500px;width:100%;}\n" +
     "</style>\n" +
     "\n" +
     "<div ng-controller=\"NavCtrl\">\n" +
@@ -7630,10 +7694,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <!--TODO: NG-IF-->\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"action\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
+    "        <div ng-if=\"newAction\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -7646,18 +7708,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Create action.. <a ng-click=\"informationToggle('CREATEACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Create action.. Verbs in our Value Language <a ng-click=\"informationToggle('CREATEACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                <form role=\"form\" ng-submit=\"createAction()\">\n" +
     "                    <h5>Action</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Action\" ng-model=\"newAction.action\" class=\"form-control\">\n" +
+    "                    <input type=\"text\" placeholder=\"Action\" ng-model=\"newAction.type\" class=\"form-control\">\n" +
     "                    <h5>Amount</h5>\n" +
     "                    <input type=\"text\" placeholder=\"Amount\" ng-model=\"newAction.amount\" class=\"form-control\">\n" +
     "                    <h5>Accociated Models</h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Item\" ng-model=\"newAction.associatiedModels\">\n" +
     "                        <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newAction.action\">create</button>\n" +
     "                </form>\n" +
     "            </div>\n" +
     "\n" +
@@ -8857,12 +8919,12 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <div style=\"padding:15px\" style=\"width:100%\">\n" +
     "                            <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
     "                                <span ng-if=\"item.title\">\n" +
-    "                                    <img src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                    <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <span style=\"font-size:24px;color:white\">{{project.title}}</span>\n" +
     "                                </span>\n" +
     "                                <span ng-if=\"item.username\">\n" +
-    "                                    <img src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                    <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <span style=\"font-size:24px;color:white\">{{item.username}}</span>\n" +
     "                                </span>\n" +

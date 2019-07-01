@@ -13,12 +13,20 @@ angular.module( 'conexus.item', [
         resolve:{
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
                 return ItemModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+            }],
+            //COMPONENT ITEMS... ASSOCIATED ITEMS (ITEM-ITEM COMPLEX)
+            actions: ['ActionModel', 'item', function(ActionModel, item) {
+                return ActionModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
+            }],
+            //TODO: ORDERS .. BIDS FOR OWNERSHIP -- UNIFY CONTENT AND ITEM
+            transactions:['TransactionModel', 'item', function(TransactionModel, item) {
+                return TransactionModel.getSome({amountSet:[item.id], limit:20, skip:0, sort:'createdAt DESC'});
             }]
         }
 	});
 }])
 
-.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$scope', 'ContentModel', 'item', 'OrderModel', 'ReactionModel', 'titleService', function ItemController( $rootScope, $location, $mdSidenav, $scope, ContentModel, item, OrderModel, ReactionModel, titleService ) {
+.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$scope', 'actions', 'ContentModel', 'item', 'OrderModel', 'ReactionModel', 'titleService', 'transactions', function ItemController( $rootScope, $location, $mdSidenav, $scope, actions, ContentModel, item, OrderModel, ReactionModel, titleService, transactions ) {
    
     $scope.item = item;
     if(!$scope.item){$location.path('/')}
@@ -26,10 +34,24 @@ angular.module( 'conexus.item', [
     if ($scope.item.tags){$scope.item.tags = $scope.item.tags.split(',')}
     titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');
 
+    //VERBS FOR THE ITEM ARE?? 
+    $scope.actions = actions;
+    $scope.transactions = transactions;
+
+    console.log(actions,transactions)
     //TODO: COMPLEX QUERY
     ContentModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
         $scope.contentList = contentList;
     });
+
+    //TODO: OWNERSHIP HISTORY -- AS ACTION
+    //AS TRANSACTION WITH ITEM ID
+
+    //GENERATORS.. ACTIONS.. (trans)actions
+    //EVERY TRANSACTION TOKEN IS AN ITEM..? EVERY UNIQUE TOKEN IS AN ITEM --> TOKEN AND ITEM UNITY?  .. // /token and /item unity
+        //INTERLINK
+
+        //items owning tokens (usd .. )
 
     //OrderModel.getSome()..
  
@@ -63,8 +85,6 @@ angular.module( 'conexus.item', [
         if ($rootScope.currentUser){$mdSidenav('content').toggle()}
         else{$mdSidenav('login').toggle();}
     };
-
-    
 
 
 
@@ -112,7 +132,7 @@ angular.module( 'conexus.item', [
             //GET SET OF SETS AT PRICE --> GRADIENT POTINETAL --> ORDER BOOK 
             //SORT TO BEST PRICE CONTAINED WITHIN ABSOLUTE CONSTRINT (% IS FUNCTIONAL RESULT.. | ABSOLUTE CONSTRAINT NOW)
             //DOES THE ORER SUM CONTAIN THE AMOUNT AND DO THE ORDER TYPES CHECK OUT? 
-            console.log(orders);
+            //console.log(orders);
             //RETURN PATH (Order 84USD @ 0.00002 CRE8, ORDER 15USD @ 0.00003, [[Order 99USD @ 0.000041NOVO],..])
             //IF SOMETHING
             //if(market.amountSet * price < inputVector || currentIdentifier!=previousIdentifer){
@@ -129,7 +149,7 @@ angular.module( 'conexus.item', [
             //getOrderTraverse(orders[0].identiferSet);
         });
     };
-    getOrderTraverse($scope.item.identiferSet);
+    //getOrderTraverse($scope.item.identiferSet);
     
     
 }]);

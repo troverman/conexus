@@ -52,9 +52,10 @@ angular.module( 'conexus.apps', [
         {title:'LTC Tokenization', description:'LTC Tokenization, manages custodial relationships', manifold:'LTC', tags:'LTC,crypto,finance'},
         {title:'XRP Tokenization', description:'XRP Tokenization, manages custodial relationships', manifold:'XRP', tags:'XRP,crypto,finance'},
         {title:'TRON Tokenization', description:'TRON Tokenization, manages custodial relationships', manifold:'TRON', tags:'TRON,crypto,finance'},
-        {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration', manifold:'DATA+STEEM+', tags:'STEEM,activity,app,authentication'},
-        {title:'Github', description:'Github Activity Tokenization, authentication and app integration', manifold:'DATA+GITHUB+', tags:'github,activity,app,authentication'},
-        {title:'Gitcoin App', description:'Gitcoin Activity Tokenization, authentication and app integration', manifold:'DATA+GITCOIN+', tags:'gitcoin,activity,app,authentication'},
+        {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration', manifold:'STEEM+', tags:'STEEM,activity,app,authentication'},
+        {title:'Github', description:'Github Activity Tokenization, authentication and app integration', manifold:'GITHUB+', tags:'github,activity,app,authentication'},
+        {title:'Gitcoin App', description:'Gitcoin Activity Tokenization, authentication and app integration', manifold:'GITCOIN+', tags:'gitcoin,activity,app,authentication'},
+        {title:'CRATER', description:'virtual; augmented reality; crater uprising', manifold:'CRATER+', tags:'gitcoin,activity,app,authentication'},
 
     ];
 

@@ -5,7 +5,6 @@
 module.exports.routes = {
 
   'get /': 'HomeController.index',
-  'get /home': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /account': 'HomeController.index',
   'get /app/:id': 'HomeController.index',
@@ -76,6 +75,13 @@ module.exports.routes = {
   'get /auth/:provider': 'AuthController.provider',
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
+
+
+  /**
+   * Action routes
+   */
+  'get /api/action': 'ActionController.getSome',
+  'post /api/action': 'ActionController.create',
 
   /**
    * Content routes

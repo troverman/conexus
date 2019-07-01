@@ -7,15 +7,20 @@
         	<div class="container">
             	<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Discover</h1>
             	<h5 ng-if="true">
+            		<b><a style="color:white" href="/apps">Apps</a></b>
             		<b><a style="color:white" href="/content">Content</a></b>
 					<b><a style="color:white" href="/marketplace">Items</a></b>
 					<b><a style="color:white" href="/members">Members</a></b>
 					<b><a style="color:white" href="/market">Orders</a></b>
 					<b><a style="color:white" href="/projects">Projects</a></b>
-					<!--<b><a style="color:white" href="#">Reactions</a></b>-->
+					<!--
+					<b><a style="color:white" href="#">Reactions</a></b>
+					-->
 					<b><a style="color:white" href="/tasks">Tasks</a></b>
-					<!--<b><a style="color:white" href="#">Time</a></b>
-					<b><a style="color:white" href="#">Transactions</a></b>-->
+					<!--
+					<b><a style="color:white" href="#">Time</a></b>
+					<b><a style="color:white" href="#">Transactions</a></b>
+					-->
             	</h5>
             </div>
         </div>
@@ -267,60 +272,5 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-<!--TODO: TEMPLATE && DOCUMENT -->
-<!--
-<div class="container">
-    <div class="card" ng-click="">
-    	<div style="max-height:200px;overflow:hidden">
-    		<img src="https://images.unsplash.com/photo-1532620161677-a1ca7d5d530f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
-    	</div>
-		<div style="padding:16px;">
-			<h1>Members</h1>
-			<p>CRE8's Community encompasses a wide breadth of skill, interests, and <a>codified beliefs</a>.</p>
-			<p>222 Members span 432 coutries and 3241 self organized desiplines.</p>
-			<p>CRE8's Commmunity has participated in 2013 organizing events and is emdeded in local governments globally.</p>
-			<p>Think about how we can do anything together. Think about our community. Think about our shared identitiy. Think about food and water.</p>
-			<p>the human story;</p>
-			<div class="row">
-		        <div class="col-md-6">
-		        	<p><b>Title</b></p>
-					<highchart config="chart"></highchart>
-				</div>
-				<div class="col-md-6">
-					<p><b>Title</b></p>
-					<highchart config="chart1"></highchart>
-				</div>
-			</div>
-			<div class="col-sm-6" ng-repeat="item in members.slice(0,10)">
-				<div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
-				    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
-				        <a ng-click="$event.stopPropagation()" href="member/{{item.username}}"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
-				    </div>
-				    <div class="member-card-info">
-				        <h4><a href="member/{{item.username}}">{{item.username}}</a></h4>
-				        <p style="color:gray">{{item.status}} offline</p>
-				        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
-				    </div>
-				</div>
-			</div>
-		</div>
-    </div>
-</div>
--->
-
-
-
-
-
-
-
 
 <div class="spacing-50"></div>

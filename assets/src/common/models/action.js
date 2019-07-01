@@ -1,19 +1,17 @@
-angular.module('models.transaction', ['services', 'sails.io',])
+angular.module('models.action', ['services', 'sails.io',])
 
-.service('TransactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
+.service('ActionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
     this.getSome = function(model) {
-        var url = utils.prepareUrl('transaction');
+        var url = utils.prepareUrl('action'); 
         var query = {
             params:{
                 limit:model.limit,
                 skip:model.skip,
                 sort:model.sort,
                 id:model.id,
-                from:model.from,
-                project:model.project,
-                to:model.to,
-                amountSet:model.amountSet,
+                type:model.type,
+                item:model.item,
                 user:model.user,
             }
         };
@@ -21,13 +19,8 @@ angular.module('models.transaction', ['services', 'sails.io',])
     };
 
     this.create = function(newModel) {
-        var url = utils.prepareUrl('transaction');
+        var url = utils.prepareUrl('action');
         return $sailsSocket.post(url, newModel).then(success, error);
-    };
-
-    this.delete = function(model) {
-        var url = utils.prepareUrl('transaction/' + model.id);
-        return $sailsSocket.delete(url).then(success, error);
     };
 
     var success = function(response) {

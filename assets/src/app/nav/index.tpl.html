@@ -1,15 +1,13 @@
 <!--BOTTOM SHEET EXPLORE ESP MOBILE... card detail.. etc - share. ux pattern-->
 <style>
-.bottom{
-    //top: auto;
-    //left: 0;
-    //right: 0;
-    //bottom: 0;
-    //transform: translate3d(0,100%,0);
-}
-.ngCytoscape{height: 500px;width:100%;}
-
-
+    .bottom{
+        //top: auto;
+        //left: 0;
+        //right: 0;
+        //bottom: 0;
+        //transform: translate3d(0,100%,0);
+    }
+    .ngCytoscape{height: 500px;width:100%;}
 </style>
 
 <div ng-controller="NavCtrl">
@@ -17,10 +15,8 @@
     <!--TODO: NG-IF-->
 
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="action" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
-        <div ng-if="newContent" class="md-list-item-text" layout="column" style="height:100%;">
-
+        <div ng-if="newAction" class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
-
             <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
@@ -33,18 +29,18 @@
 
             <div style="padding:16px">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Create action.. <a ng-click="informationToggle('CREATEACTION')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <p style="color:gray;font-style:italic">Create action.. Verbs in our Value Language <a ng-click="informationToggle('CREATEACTION')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <div class="spacing-10"></div>
-                <form role="form" ng-submit="createContent()">
+                <form role="form" ng-submit="createAction()">
                     <h5>Action</h5>
-                    <input type="text" placeholder="Action" ng-model="newAction.action" class="form-control">
+                    <input type="text" placeholder="Action" ng-model="newAction.type" class="form-control">
                     <h5>Amount</h5>
                     <input type="text" placeholder="Amount" ng-model="newAction.amount" class="form-control">
                     <h5>Accociated Models</h5>
                     <tags-input min-length="1" placeholder="Item" ng-model="newAction.associatiedModels">
                         <auto-complete source="loadItems($query)"></auto-complete>
                     </tags-input>
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newAction.action">create</button>
                 </form>
             </div>
 
@@ -1244,12 +1240,12 @@
                         <div style="padding:15px" style="width:100%">
                             <h1 style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
                                 <span ng-if="item.title">
-                                    <img src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
+                                    <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                     <div class="spacing-5"></div>
                                     <span style="font-size:24px;color:white">{{project.title}}</span>
                                 </span>
                                 <span ng-if="item.username">
-                                    <img src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
+                                    <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                     <div class="spacing-5"></div>
                                     <span style="font-size:24px;color:white">{{item.username}}</span>
                                 </span>
