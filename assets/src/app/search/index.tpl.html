@@ -92,6 +92,7 @@
 
 				<div ng-if="searchResults.length > 0" ng-repeat="item in searchResults">
 
+					<!-- UNIFY ITEM AND CONTENT -->
 					<div ng-if="item.model=='CONTENT'" class="card" ng-click="cardDetailToggle(item)">
 						<div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
 		                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -135,6 +136,43 @@
 				            </form>
 				        </div>
 			    	</div>
+
+				    <div ng-if="item.model=='ITEM'" class="card" ng-click="cardDetailToggle(item)">
+			        	<div ng-click="$event.stopPropagation();cardDetailToggle(item)" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');" class="imageContainerSmall">
+			                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			                    <div style="margin-top: auto;margin-bottom: auto;">
+			                        <div class="container">
+			                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation();" href="item/{{item.id}}">{{item.title}}</a></h1>
+                                        <h5 style="color:white">Item</h5>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			            <div style="padding:16px">
+
+	                        <div style="float:right;padding-left:5px;">
+	                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+	                        </div>
+
+							<p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
+		                	<div style="">
+								<span style="display:inline;height:100%" ng-bind-html="renderContent(item.content)"></span>
+							</div>
+	                    	<h5>{{item.amountSet}} <span ng-repeat="asset in item.identiferSet"><a ng-click="$event.stopPropagation();" href="market/{{asset}}">{{asset}}</a></h5>
+			            </div>
+			            <div class="card-footer">
+			                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+			                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+			                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+			                <a class="pull-right" style="padding:0px;" href="item/{{item.id}}"><i class="fa fa-link grey"></i></a>
+			            </div>
+			            <div ng-show="item.showReply" class="card-footer">
+				            <form role="form" ng-submit="createContent(item)">
+				                <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+				                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+				            </form>
+				        </div>
+			        </div>
 
 					<div ng-if="item.model=='MEMBER'" ng-click="renderReputationToggle(item)">
 						<div class="row" style="margin:0px">

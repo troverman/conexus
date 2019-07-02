@@ -120,9 +120,8 @@ module.exports = {
 			//  }
 			//])
 
-			//bigchaindb???
-			//https://interledger.org/
-			//https://github.com/bigchaindb/ilp-plugin-bigchaindb ??
+
+			
 
 			//DEPRECIATE
 			Project.native(function(err, project) {
@@ -221,10 +220,12 @@ module.exports = {
 				    });
 					Project.watch(req);
 					Project.subscribe(req, models);
+
 					//TODO UNIFY CONTENT MODEL
 					Content.find()
 					.where({
 						or: [
+							{title: {contains: searchQuery}},
 							{content: {contains: searchQuery}},
 							{user: {contains: searchQuery}}
 						]
@@ -273,16 +274,33 @@ module.exports = {
 		    					superSuperCombinedModels = superSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 								User.watch(req);
 								User.subscribe(req, models);
-								console.log(superSuperCombinedModels)
-								res.json(superSuperCombinedModels);
+
+								//LOL WOT --> HEHEHEHEHEH
+								Item.find()
+								.where({
+									or: [
+										{content: {contains: searchQuery}},
+										{title: {contains: searchQuery}},
+										{user: {contains: searchQuery}}
+									]
+								})
+								.then(function(models) {
+									var itemModels = models.map(function(obj){
+								        obj.model = 'ITEM';
+								        return obj;
+								    });
+								    var superSuperSuperCombinedModels = [].concat.apply([], [itemModels, superSuperCombinedModels]);
+		    						superSuperSuperCombinedModels = superSuperSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+									Item.watch(req);
+									Item.subscribe(req, models);
+									//console.log(superSuperSuperCombinedModels)
+									res.json(superSuperSuperCombinedModels);
+								});
 							});
 						});
 					});
 				});
 			}
-
 		}
-
-	},
-	
+	}
 };

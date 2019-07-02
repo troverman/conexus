@@ -46,14 +46,13 @@ module.exports = {
 			});
 		}
 
-		else if(req.query.user){
+		else if(req.query.user && !req.query.amountSet){
 			var user = req.query.user;
 			Transaction.find({user:user})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('project')
 			.then(function(models) {
 				res.json(models);
 			});
@@ -134,24 +133,14 @@ module.exports = {
 			});
 		}
 
-		//lol
-		else if(req.query.amountSet){
+		//LOL
+		else if(req.query.amountSet && !req.query.user){
 			var amountSet = req.query.amountSet;
-			
-			//TEMP
-			//var query = {};
-			//for (x in amountSet)
-			//query["amountSet."+req.query.amountSet] = {$gt:0};
-			//console.log(query);
-
-			//LOL WUT. SHOULD TAKE A BREAK THX. 
-			//var queryString = "amountSet."+req.query.amountSet;
-			//queryString = "+queryString+"
-			//console.log(queryString);
-
+			//TEMP | TODO COMPLEX
+			var query = {};
+			query[ "amountSet."+req.query.amountSet] = {$gt: 0};
 			Transaction.native(function(err, transaction) {
-
-				transaction.find({amountSet:{amountSet:{$gt:0}}})
+				transaction.find(query)
 				.limit(limit)
 				.skip(skip)
 				.sort({'createdAt':-1})
@@ -177,7 +166,60 @@ module.exports = {
 					});
 				});
 			});
+		}
 
+		//&& FROM , TO
+		else if(req.query.amountSet && req.query.user){
+
+			console.log('dude complex query lol')
+
+			var amountSet = req.query.amountSet;
+			//TEMP | TODO COMPLEX
+			var query = {};
+			query[ "amountSet."+req.query.amountSet] = {$gt: 0};
+			//query.user = req.query.user
+
+			//HAAA! IT WORKED
+			var andQuery = { $and: []};
+			var orQuery = {$or:
+				[
+					{from:req.query.user},
+					{to:req.query.user}
+				]
+			};
+
+			andQuery.$and.push(query)
+			andQuery.$and.push(orQuery)
+
+			console.log(query);
+			Transaction.native(function(err, transaction) {
+				transaction.find(andQuery)
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					models = models.map(function(obj){
+						obj.id = obj._id;
+						return obj;
+					});
+					console.log(models)
+					var promises = [];
+					for (x in models){
+						promises.push(getTo(models[x]));
+						promises.push(getFrom(models[x]));
+					}
+					Q.all(promises).then((populatedModels)=>{
+						var sum = 0;
+						for (x in models){
+							models[x].to = populatedModels[sum];
+							sum++
+							models[x].from = populatedModels[sum];
+							sum++;
+						}
+						res.json(models);
+					});
+				});
+			});
 		}
 
 		else{
@@ -229,6 +271,9 @@ module.exports = {
 				//IF ITEM MODEL...... FRONTENT SHOULD HANDLE THIS? ... HM 
 				//ALSO ASSOCIATEDMODELS
 
+				//TODO: GENERATOR --> IE POS MENU ITEMS
+					//ORRRRRRRRRR --> ACUTAL INVENTOR MANAGEMENT
+						//MB GENERATOR ISNT NEEDED. . . . ?
 				for (x in Object.keys(transaction.amountSet)){
 					console.log( Object.keys(transaction.amountSet)[x])
 					Item.find({id:Object.keys(transaction.amountSet)[x]}).then(function(itemModels){

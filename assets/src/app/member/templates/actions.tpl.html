@@ -4,12 +4,62 @@
         <button class="btn btn-default log-btn" ng-click="actionToggle()">+ Action</button>
     </div>
 
-    <div class="card">
-        <!--CONSUMPTION; human tasks.. -->
-        <!--VERBS-->
-        <!--CREATION, REACTION, VALIDATION, JOIN?, -->
-        <!--LOCATION IS ON TIME-->
-    </div>
+
+    <!--CONSUMPTION; human tasks.. -->
+    <!--VERBS-->
+    <!--CREATION, REACTION, VALIDATION, JOIN?, -->
+    <!--LOCATION IS ON TIME-->
+    <!--TIME AND SPACE AND ITEMS ????-->
+    <!--IT WILL COME -->
+    
+
+    <div ng-repeat="item in actions">
+        <div class="card" ng-click="cardDetailToggle(item)">
+        	<div ng-click="$event.stopPropagation();cardDetailToggle(item)" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div class="container">
+                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation();" href="action/{{item.associatedModels[0].id}}"> {{item.type}} {{item.amount}} {{item.associatedModels[0].title}}</a></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:16px">
+
+                <div style="float:right;padding-left:5px;">
+                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                </div>
+
+                <!--VALIDATE ACTION. Yeh-->
+                <!--ACTUALLY DO VALIDATIONS LOL-->
+
+                <div>
+                    <a ng-click="$event.stopPropagation();renderReputationToggle(item)" style="display:inline"><!-- href="member/{{item.user.username}}">-->
+                        <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                        <span style="font-weight:800">{{item.user.username}}</span>
+                    </a>
+                </div>
+
+                <div class="spacing-5"></div>
+
+                <h5>{{item.type}} | {{item.amount}} | <a href="item/{{item.associatedModels[0].id}}">{{item.associatedModels[0].title}}</a></h5>
+
+            </div>
+            <div class="card-footer">
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a class="pull-right" style="padding:0px;" href="action/{{item.id}}"><i class="fa fa-link grey"></i></a>
+            </div>
+            <div ng-show="item.showReply" class="card-footer">
+	            <form role="form" ng-submit="createContent(item)">
+	                <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
+	                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
+	            </form>
+	        </div>
+        </div>
+	</div>
+
 
 </div>
 

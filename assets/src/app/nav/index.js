@@ -15,7 +15,7 @@ angular.module( 'conexus.nav', [
     //STATE CHANGE LOGIC
     $rootScope.$on("$stateChangeStart", function() {
         //VIEW GENERATION
-        //$scope.createView();
+        $scope.createView();
         $scope.closeAllNav();
     });
     
@@ -90,7 +90,7 @@ angular.module( 'conexus.nav', [
             if (item){
                 $scope.newAction.type = 'USE';
                 $scope.newAction.amount = 1
-                $scope.newAction.associatiedModels = [{text:item.title}];
+                $scope.newAction.associatedModels = [{text:item.title, address:item.id, id:item.id}];
             }
             $mdSidenav('action').toggle();
         }
@@ -562,151 +562,154 @@ angular.module( 'conexus.nav', [
             hideEdgesOnViewport:true
         };
         $scope.directedGraphLayout = {name: 'circle'};
+    
         $scope.directedGraphStyle = [
             {
-              "selector": "core",
-              "style": {
-                "selection-box-color": "#AAD8FF",
-                "selection-box-border-color": "#8BB0D0",
-                "selection-box-opacity": "0.5"
-              }
+                "selector": "core",
+                "style": {
+                    "selection-box-color": "#AAD8FF",
+                    "selection-box-border-color": "#8BB0D0",
+                    "selection-box-opacity": "0.5"
+                }
             }, {
-              "selector": "node",
-              "style": {
-                "width": "mapData(score, 0, 0.006769776522008331, 10, 30)",
-                "height": "mapData(score, 0, 0.006769776522008331, 10, 30)",
-                "content": "data(name)",
-                "font-size": "12px",
-                "text-valign": "center",
-                "text-halign": "center",
-                "background-color": "#555",
-                "text-outline-color": "#555",
-                "text-outline-width": "2px",
-                "color": "#fff",
-                "overlay-padding": "3px",
-                "z-index": "10"
-              }
+                "selector": "node",
+                "style": {
+                    "width": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                    "height": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                    "content": "data(name)",
+                    "font-size": "9px",
+                    "text-valign": "center",
+                    "text-halign": "center",
+                    "background-color": "#77828C",
+                    "text-outline-color": "#77828C",
+                    "text-outline-width": "2px",
+                    "color": "#fff",
+                    "overlay-padding": "3px",
+                    "z-index": "10"
+                }
             }, {
-              "selector": "node[?attr]",
-              "style": {
-                "shape": "rectangle",
-                "background-color": "#aaa",
-                "text-outline-color": "#aaa",
-                "width": "8px",
-                "height": "8px",
-                "font-size": "3px",
-                "z-index": "1"
-              }
+                "selector": "node[?attr]",
+                "style": {
+                    "shape": "rectangle",
+                    "background-color": "#aaa",
+                    "text-outline-color": "#aaa",
+                    "width": "8px",
+                    "height": "8px",
+                    "font-size": "3px",
+                    "z-index": "1"
+                }
             }, {
-              "selector": "node[?query]",
-              "style": {
-                "background-clip": "none",
-                "background-fit": "contain"
-              }
+                "selector": "node[?query]",
+                "style": {
+                    "background-clip": "none",
+                    "background-fit": "contain"
+                }
             }, {
-              "selector": "node:selected",
-              "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C"
-              }
+                "selector": "node:selected",
+                "style": {
+                    "border-width": "3px",
+                    "border-color": "#AAD8FF",
+                    "border-opacity": "0.5",
+                    "background-color": "#77828C",
+                    "text-outline-color": "#77828C"
+                }
             }, {
-              "selector": "edge",
-              "style": {
-                "curve-style": "haystack",
-                "haystack-radius": "0.5",
-                "opacity": "0.9",
-                "line-color": "#bbb",
-                "width": "mapData(weight, 0, 1, 1, 1)",
-                "overlay-padding": "3px"
-              }
+                "selector": "edge",
+                "style": {
+                    "curve-style": "bezier",
+                    "target-arrow-shape": "triangle",
+                    "arrow-scale":"0.75",
+                    "source-arrow-shape": "none",
+                    "opacity": "0.9",
+                    "line-color": "#bbb",
+                    "width": "3",
+                    "overlay-padding": "3px"
+                }
             }, {
-              "selector": "node.unhighlighted",
-              "style": {
-                "opacity": "0.2"
-              }
+                "selector": "node.unhighlighted",
+                "style": {
+                    "opacity": "0.2"
+                }
             }, {
-              "selector": "edge.unhighlighted",
-              "style": {
-                "opacity": "0.05"
-              }
+                "selector": "edge.unhighlighted",
+                "style": {
+                    "opacity": "0.05"
+                }
             }, {
-              "selector": ".highlighted",
-              "style": {
-                "z-index": "999999"
-              }
+                "selector": ".highlighted",
+                "style": {
+                    "z-index": "999999"
+                }
             }, {
-              "selector": "node.highlighted",
-              "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#394855",
-                "text-outline-color": "#394855"
-              }
+                "selector": "node.highlighted",
+                "style": {
+                    "border-width": "3px",
+                    "border-color": "#AAD8FF",
+                    "border-opacity": "0.5",
+                    "background-color": "#394855",
+                    "text-outline-color": "#394855"
+                }
             }, {
-              "selector": "edge.filtered",
-              "style": {
-                "opacity": "0"
-              }
+                "selector": "edge.filtered",
+                "style": {
+                    "opacity": "0"
+                }
             }, {
-              "selector": "edge[group=\"coexp\"]",
-              "style": {
-                "line-color": "#d0b7d5"
-              }
+                "selector": "edge[group=\"coexp\"]",
+                "style": {
+                    "line-color": "#d0b7d5"
+                }
             }, {
-              "selector": "edge[group=\"coloc\"]",
-              "style": {
-                "line-color": "#a0b3dc"
-              }
+                "selector": "edge[group=\"coloc\"]",
+                "style": {
+                    "line-color": "#a0b3dc"
+                }
             }, {
-              "selector": "edge[group=\"gi\"]",
-              "style": {
-                "line-color": "#90e190"
-              }
+                "selector": "edge[group=\"gi\"]",
+                "style": {
+                    "line-color": "#90e190"
+                }
             }, {
-              "selector": "edge[group=\"path\"]",
-              "style": {
-                "line-color": "#9bd8de"
-              }
+                "selector": "edge[group=\"path\"]",
+                "style": {
+                    "line-color": "#9bd8de"
+                }
             }, {
-              "selector": "edge[group=\"pi\"]",
-              "style": {
-                "line-color": "#eaa2a2"
-              }
+                "selector": "edge[group=\"pi\"]",
+                "style": {
+                    "line-color": "#eaa2a2"
+                }
             }, {
-              "selector": "edge[group=\"predict\"]",
-              "style": {
-                "line-color": "#f6c384"
-              }
+                "selector": "edge[group=\"predict\"]",
+                "style": {
+                    "line-color": "#f6c384"
+                }
             }, {
-              "selector": "edge[group=\"spd\"]",
-              "style": {
-                "line-color": "#dad4a2"
-              }
+                "selector": "edge[group=\"spd\"]",
+                "style": {
+                    "line-color": "#dad4a2"
+                }
             }, {
-              "selector": "edge[group=\"spd_attr\"]",
-              "style": {
-                "line-color": "#D0D0D0"
-              }
+                "selector": "edge[group=\"spd_attr\"]",
+                "style": {
+                    "line-color": "#D0D0D0"
+                }
             }, {
-              "selector": "edge[group=\"reg\"]",
-              "style": {
-                "line-color": "#D0D0D0"
-              }
+                "selector": "edge[group=\"reg\"]",
+                "style": {
+                    "line-color": "#D0D0D0"
+                }
             }, {
-              "selector": "edge[group=\"reg_attr\"]",
-              "style": {
-                "line-color": "#D0D0D0"
-              }
+                "selector": "edge[group=\"reg_attr\"]",
+                "style": {
+                    "line-color": "#D0D0D0"
+                }
             }, 
             {
-              "selector": "edge[group=\"user\"]",
-              "style": {
-                "line-color": "#f0ec86"
-              }
+                "selector": "edge[group=\"user\"]",
+                "style": {
+                    "line-color": "#f0ec86"
+                }
             }
         ];
 
@@ -1703,6 +1706,19 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
+
+    //VIEWMODEL.. 
+    $rootScope.timeModel = {};
+     $rootScope.timeModel.amount = 0;
+    //HEARTBEAT FXN FROM FRONTEND.. --> CACL ON BACKEND //BLOCK // PEER
+
+    $scope.timerFunction = function(time){
+        $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
+        console.log($scope.timeModel.amount)
+    };
+    $scope.timer = setInterval(function(){$scope.timerFunction(1)}, 1000);
+
+
     //TODO
     $scope.createView = function(){
         if ($rootScope.currentUser){
@@ -1711,23 +1727,19 @@ angular.module( 'conexus.nav', [
             //AKA CONNECT TO CHAIN WHEN START AND WHEN END NOT FRONTEND TIMER 
             //-- MAKE TWO CALLS WITH TIME STAMP. 
             $scope.timer = {};
-            $scope.timeModel = {
+            $rootScope.timeModel = {
                 type: 'VIEW',
                 user: $rootScope.currentUser.id,
                 associatedModels: [{type: 'URL', id:window.location.href}],
                 amount: 0
             };
-            $scope.timerFunction = function(time){
-                $scope.timeModel.amount = $scope.timeModel.amount + time;
-                console.log($scope.timeModel.amount)
-            }
-            $scope.timer = setInterval(function(){$scope.timerFunction(1)}, 1000);
-            if ($scope.timeModel.amount != 0){
+            
+            if ($rootScope.timeModel.amount != 0){
                 clearInterval($scope.timer);
-                $scope.timeModel.amount = $scope.timeModel.amount/1000
-                console.log($scope.timeModel.amount)
-                //TimeModel.create($scope.timeModel).then(function(){
-                //    $scope.timeModel = {};
+                $rootScope.timeModel.amount = $rootScope.timeModel.amount/1000
+                console.log($rootScope.timeModel.amount)
+                //TimeModel.create($rootScope.timeModel).then(function(){
+                //    $rootScope.timeModel = {};
                 //    console.log('SURE')
                 //});
             }

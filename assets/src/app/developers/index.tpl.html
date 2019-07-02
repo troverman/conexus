@@ -20,7 +20,7 @@
         z-index: -1;
     }
     .modelList p {margin:0px;font-weight:700;}
-    .ngCytoscape{height: 80vh;width:100%;}
+    .ngCytoscape{height: 50vh;width:100%;}
     .developersHeader h4 {font-family:'Titillium Web',sans-serif;font-weight:600;}
     .subContents p{margin:0px;}
 </style>
@@ -2163,18 +2163,15 @@ getSome:function(newQuery){}</div>
 
                 <div>
                     <div class="spacing-10"></div>
-                    <!--
-                    <h4><b>Matching Engine</b></h4>
-                    <p>An Immutable Object Structure</p>
-                    -->
 
-                    <!--FUILFILMENT VS TESNOR REPRESENTATION
-
-                    <p style="color:gray;font-style:italic">Given a set of equations, we formalize an immutable Structure to define a Multidimensional order book</p>
-                    <p>Discussion of market types</p>
-                    <p style="color:gray;font-style:italic">Commentary on binary books --> to multi books; logic encoded</p>
+                    <h4>The moment of liquidity is combinatorial</h4>
                     <p style="color:gray;font-style:italic">Priority of Prefrence for Higher Dimensional Orders; types</p>
-                    <p>The rank of connection n by size of the market m -- degress of connection -- the moment of liquidity is combinatorial</p>
+                    <p style="color:gray;font-style:italic">Set for Set (Logic encoding in multimarket comb positions)</p>
+                    <p style="color:gray;font-style:italic">Given a set of equations, we formalize an Immutable Structure to define a Multidimensional Order Book</p>
+                    
+                    <p>Discussion of Market Types</p>
+                    <p style="color:gray;font-style:italic">Commentary on binary books --> to Multi Books logic encoded</p>
+                    <p>Rank of connection n by size of the market m -- degress of connection</p>
 
                     <div class="spacing-10"></div>
 
@@ -2273,11 +2270,18 @@ getSome:function(newQuery){}</div>
                         <p>'Assets' Vs Markets</p>
                         <div class="spacing-10"></div>
 
-                        <p><b>Market Graph Object</b></p>
+                        <h5>Market Graph Object</h5>
                         <p>Nodes: Assets or Markets (Combinatorials)</p>
                         <p>Edges: Generalized Absolute Graph Connections</p>
                         <p>Links: Number of 1D Connections</p>
                         <p style="color:gray;font-style:italic">AB-C: 1 Edge; 3 Links; 2 Forward; 1 Back</p>
+
+                        <!--
+                        <p>M COMBINATORIAL OF MARKET SIZE N</p>
+                        <p>M-N-Combinatorial Market</p>
+                        <p>(NxM)/2 Nodes</p>--> <!--WHAT IS THIS?? GENERALIZE IT :)
+                        -->
+
                     </div>
                 </div>
 
@@ -2296,28 +2300,41 @@ getSome:function(newQuery){}</div>
                     </div>
 
                     <div style="padding:16px;">
-                        <p><b>2-2 "Combinatorial 2"</b></p>
-                        <p>A Binary Market</p>
-                        <p>2 nodes</p>
-                        <p>1 edge</p>
+                        <div class="row">
+                            <div class="col-md-6">
 
-                        <p><b>2-3</b></p>
-                        <p><b>2-4</b></p>
-                        <p><b>2-5</b></p>
+                                <!--
+                                <p>2 Space Traversal</p>
+                                Depth First Traversal matching 
+                                Breadth First Traversal
+                                https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Tree_edges.svg/540px-Tree_edges.svg.png
+                                -->
+                                <p><b>2-2 "Combinatorial 2"</b></p>
+                                <p>A Binary Market</p>
+                                <p>2 nodes</p>
+                                <p>1 edge</p>
 
-                        <p><n>2-N Market</b></p>
-                        <p>N nodes</p>
-                        <p>N(N−1)/2 Edges</p>
-                        <p>Links == Edges</p>
-                        <p>Classic Market</p>
+                                <p ng-click="classicMarketGenerator(['A','B','C'])"><b>2-3</b></p>
+                                <p ng-click="classicMarketGenerator(['A','B','C','D'])"><b>2-4</b></p>
+                                <p ng-click="classicMarketGenerator(['A','B','C','D','E'])"><b>2-5</b></p>
 
-                        <!--<p>M COMBINATORIAL OF MARKET SIZE N</p>
-                        <p>M-N-Combinatorial Market</p>
-                        <p>(NxM)/2 Nodes</p>--> <!--WHAT IS THIS?? GENERALIZE IT :)-->
+                                <p><n>2-N Market</b></p>
+                                <p>N nodes</p>
+                                <p>N(N−1)/2 Edges</p>
+                                <p>Links == Edges</p>
+                                <p>Classic Market</p>
+                            </div>
 
-                        <!--<p><b>Combinatorial 3</b></p>
-                        <p>A fully Connected 3-3-Combinatorial-Market</p>-->
+                            <div class="col-md-6">
+                                <cytoscape style="height: 300px;width:100%;" graph-options="options" graph-elements="classicElementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
+                            </div>
+                        </div>
+
                     </div>
+
+
+
+
                 </div>
 
                 <div class="spacing-10"></div>
@@ -2333,32 +2350,47 @@ getSome:function(newQuery){}</div>
                             </div>
                         </div>
                     </div>
+                    <!--<p>A fully Connected 3-3-Combinatorial-Market</p>-->
                     <div style="padding:16px;">
                         <!--Category.. CONNECT TO THE CONNECT-->
 
-                        <p><b>3-3 "Combinatorial 3"</b></p>
-                        <p>A fully Connected 3-3-Combinatorial-Market</p>
-                        <p>6 nodes</p>
-                        <p>15 edges - links</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><b>3-3 "Combinatorial 3"</b></p>
+                                <p>A fully Connected 3-3-Combinatorial-Market</p>
+                                <p>6 nodes</p>
+                                <p>15 edges - links</p>
 
-                        <img style="height:150px;" src="images/comb3.png">
-                        <span>Connection Lattice</span>
+                                <p>Connection Lattice</p>
+                                <img style="height:150px;" src="images/comb3.png">
+                                
+                                <p>Traversal Facet</p>
+                                <img style="height:150px;" src="images/comb3a.png">
 
-                        <img style="height:150px;" src="images/comb3a.png">
-                        <span>Traversal Facet</span>
+                                <div class="spacing-10"></div>
 
-                        <div class="spacing-10"></div>
+                                <p><b>3-4</b></p>
+                                <p>Fully 3-linked 4 market</p>
+                                <p>Related to 4 Decompose</p>
+                                <p>4 combinatorial 3 Objects</p>
+                                <p>Symmetry</p>
+                                <p>??? 24 NODES</p>
+                                <p>??? 60 EDGES</p>
 
-                        <p><b>3-4</b></p>
-                        <p>Fully 3-linked 4 market</p>
-                        <p>Related to 4 Decompose</p>
-                        <p>4 combinatorial 3 Objects</p>
-                        <p>Symmetry</p>
-                        <p>??? 24 NODES</p>
-                        <p>??? 60 EDGES</p>
+                                <p><b>3-5</b></p>
+                                <p><b>3-N</b></p>
+                            </div>
+                            <div class="col-md-6">
 
-                        <p><b>3-5</b></p>
-                        <p><b>3-N</b></p>
+                                <cytoscape style="height: 300px;width:100%;" graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
+
+
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 </div>
 
@@ -2469,6 +2501,11 @@ getSome:function(newQuery){}</div>
                         <div class="spacing-10"></div>
                     
                         <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style" graph-ready="graphReady"></cytoscape>
+
+
+                        <p>Goals: 3-Space lattice connections over all assets 3-∞</p> 
+
+
                     </div>
                 </div>
 
@@ -2492,6 +2529,7 @@ getSome:function(newQuery){}</div>
                         <p>A `Lie` group is a smooth manifold obeying the group properties and that satisfies the additional condition that the group operations are differentiable.</p>
 
                         <p><b>Substitution</b></p>
+                        <p>As a traversal step; (alg document.. --> represent as tensor vs graph --> messy in high dims without vis reduction</p>
                         `f(M_1) = G(zeta) | alpha = beta_1+beta_2+ ... `
                         <br>
                         `f(ABCD) = ...[..., ABC = (A->BC->B->AC->C->AB)]`
@@ -2586,8 +2624,8 @@ getSome:function(newQuery){}</div>
         <div class="row">
             <div class="col-sm-8">
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
-                <a href="#PROJECTCHARTER" du-smooth-scroll>Project Charter</a>
                 <p style="color:gray;font-style:italic">Action Potiental From Protocol.</p>
+                <p><a href="#PROJECTCHARTER" du-smooth-scroll><b>Project Charter</b></a></p>
             </div>
             <div class="col-sm-4" style="text-align:right">
                 <img style="height:200px;" src="images/latticespin.gif">

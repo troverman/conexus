@@ -891,7 +891,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, titleService, transactionsFrom, transactionsTo) {
+.controller( 'MemberLedgerCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'titleService', 'transactionsFrom', 'TransactionModel', 'transactionsTo', function MemberLedgerController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, titleService, transactionsFrom, TransactionModel, transactionsTo) {
     
     titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
@@ -913,6 +913,11 @@ angular.module( 'conexus.member', [
         obj.model = 'TRANSACTION';
         return obj;
     });
+
+    //ON ANY TOKEN MOMENT..  FOR LEDGER.. GOTTA SHOW THE INCOME! -- SOME UNITY
+    //QUERY AGNOSITC MODEL.. AND OR ALL SEARCH LOL
+    //SEARHC MODEL TO SEE TOKEN POTIENTAL.. 
+    //CREATE TIME.. --> +++ TIME TOKENS 
 
      //DEPRECIATE IDENTIFIER AND AMOUNT
     if ($scope.transactions.length == 0){
@@ -1180,6 +1185,35 @@ angular.module( 'conexus.member', [
         $scope.filterSet = {associations:$scope.sortedTransactionAssociations, tags:$scope.sortedTransactionTags, assets:$scope.sortedTransactionAssets}
     };
     $scope.init();
+
+    $scope.selectAsset = function(asset){
+
+        $rootScope.stateIsLoading = true;
+
+        //TODO: FILTERS.. 
+
+        //COMPLET FILTER
+        //SEARCH MODEL
+        //SearchModel.search().then(function(transactionModels){
+        //    $scope.transactions = transactionModels;
+        //});
+
+        var query = {
+            limit:100,
+            skip:0,
+            sort:'createdAt DESC',
+            amountSet:asset,
+            user: $scope.member.id
+        };
+
+        console.log(query);
+
+        TransactionModel.getSome(query).then(function(transactionModels){
+            $rootScope.stateIsLoading = false;
+            $scope.transactions = transactionModels;
+        });
+
+    };
 
 
     //WORK HERE!! :) --> YEE SHOW UP

@@ -1,3 +1,5 @@
+var Q = require('q');
+
 module.exports = {
 	
 	getSome: function(req, res) {
@@ -11,6 +13,19 @@ module.exports = {
 
 		Action.watch(req);
 
+
+		//TODO: GENERATOR
+		function getItem(model){
+			var deferred = Q.defer();
+			if (model.associatedModels){
+				Item.find({id:model.associatedModels[0].id}).then(function(itemModels){
+					deferred.resolve(itemModels[0]);
+				});
+			}
+			else{deferred.resolve(null)}
+			return deferred.promise;
+		};
+
 		if(req.query.id){
 			Action.find({id:id})
 			.limit(limit)
@@ -23,6 +38,10 @@ module.exports = {
 		}
 
 		else if(req.query.user){
+
+			//YOU CRAZI
+			//U HAXX0R
+			//OK I GET IT 
 			var user = req.query.user;
 			Action.find({user:user})
 			.limit(limit)
@@ -30,8 +49,22 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Action.subscribe(req, models);
-				res.json(models);
+
+				//console.log(models)
+				var promises = [];
+				for (x in models){
+					promises.push(getItem(models[x]));
+				}
+
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						if (models[x].associatedModels){models[x].associatedModels[0] = populatedModels[sum];}
+						sum++
+					}
+					res.json(models);
+				});
+			
 			});
 		}
 

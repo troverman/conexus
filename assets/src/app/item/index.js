@@ -60,6 +60,12 @@ angular.module( 'conexus.item', [
         type: 'MARKET',
     }];
 
+    //HMM
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+    };
+
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){

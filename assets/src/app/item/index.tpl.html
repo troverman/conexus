@@ -3,7 +3,9 @@
         <div style="margin-top: auto;margin-bottom: auto;">
             <div class="container">
                 <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.title}}</h1>
+                <!--<h5 ng-if="item.isGenerator"><span style="color:green">Generator</span></h5>-->
                 <h5 style="color:white">{{item.id}}</h5>
+                <h5 style="color:white">{{item.createdAt | date}}</h5>
             </div>
         </div>
     </div>
@@ -11,36 +13,51 @@
 <div class="container">
 	<div class="spacing-10"></div>
 	<div class="row">
-		<div class="card">
+
+        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+            <!--CONTENT?-->
+            <li><a ng-click="selectTab('INFORMATION')" href="#">Information</a></li>
+            <li><a ng-click="selectTab('HISTORY')" href="#">History</a></li>
+            <li><a ng-click="selectTab('COMPONENTS')" href="#">Components</a></li>
+            <li><a ng-click="selectTab('LIQUIDITY')" href="#">Liquidity</a></li>
+        </ul>
+
+        <!--INFORMATION-->
+		<div ng-if="selectedTab =='INFORMATION'" class="card" ng-click="cardDetailToggle(item);">
 			<div style="padding:16px;">
                 <div style="float:right;text-align:right">
                     <i style="" ng-click="$event.stopPropagation();cardDetailToggle(item);" class="fa fa-ellipsis-v"></i>
                 </div>
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a style="display:inline" href="member/{{item.user.username}}"><span style="font-weight:800">{{item.user.username}}</span></a>
+                    <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}"><span style="font-weight:800">{{item.user.username}}</span></a>
                 </div>
                 <div class="spacing-10"></div>
                 <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
                 <div class="spacing-10"></div>
+                
                 <!--TODO: EMBEDED CONTENT-ASSOCIATED MODEL-->
                 <!--TODO: VT PLUGIN..-->
-		        <div><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+
+		        <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 				<div class="spacing-10"></div>
-				<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>
-                <!--<p>{{item.createdAt}}</p>-->
+
+
+				<!--<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>-->
+
+                <!--ITEM OWNERSHIP OF TOKENS-->
+
 			</div>
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
             </div>
 		</div>
-    </div>
 
-    <div class="row" ng-if="true">
-        <div class="card">
-            <div style="background:url('https://source.unsplash.com/1600x900/?code,exchange.cash,finance,graphs,explore')" class="imageContainerSmall">
+        <!--HISTORY-->
+        <div ng-if="selectedTab =='HISTORY'"  class="card">
+            <div style="background:url('https://source.unsplash.com/1600x900/?code,exchange,history,item,transaction')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
@@ -50,13 +67,17 @@
                 </div>
             </div>
             <div style="padding:16px">
-                <!--CREATOR-->
-                <div ng-repeat="transaction in transactions">
-                    
-                    <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(transaction)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                    </div>
 
+                <div style="float:right;text-align:right">
+                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(transaction)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                </div>
+
+                <!--CREATOR-->
+                <h5>Item Created: {{item.createdAt | date}}</h5>
+                <div class="spacing-10"></div>
+
+                <div ng-repeat="transaction in transactions">
+    
                     <div style="display:inline">
                         <span ng-if="transaction.from.username">
                             <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.from.username}}">
@@ -97,13 +118,13 @@
                     <p>{{transaction.content}}</p>
 
                 </div>
+
             </div>
         </div>
-    </div>
 
-     <div class="row" ng-if="false">
-        <div class="card">
-            <div style="background:url('https://source.unsplash.com/1600x900/?code,exchange.cash,finance,graphs,explore')" class="imageContainerSmall">
+        <!--COMPONENTS-->
+        <div ng-if="selectedTab =='COMPONENTS'"  class="card">
+            <div style="background:url('https://source.unsplash.com/1600x900/?blueprint,code,parts,components,designs')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
@@ -112,30 +133,23 @@
                     </div>
                 </div>
             </div>
-            <div style="padding:16px">
-                
+            <div style="padding:16px">   
+
+                <h5>Component Graph</h5>
+                <h5>Single Item</h5>
+
             </div>
         </div>
-    </div>
-    <!--
-    <div style="row">
-        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-            <li><a href="#">Content</a></li>
-            <li><a href="#">Orders</a></li>
-        </ul>
-    </div>
-    -->
 
-    <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->
-    <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->
-    <!--ORDER FUILFILMENT COMES FROM LINKED INFO IN ORDER-->
-    <!--ADDRESS.. NAME PARAM-->
-    <!--PURCHASE NEEDS TO BE VERY.. EASY..-->
-
-    <!--MARKET | TRAVERSAL-->
-    <div class="row" ng-if="true">
-        <div class="card">
-            <div style="background:url('https://source.unsplash.com/1600x900/?code,exchange.cash,finance,graphs,explore')" class="imageContainerSmall">
+        <!--LIQUIDITY-->
+        <!--CONNECT PURCHASE TO ORDER FUILFUILMENT AND CONNECTIONG PROTOS > > >-->
+        <!--IF LIQDUID OR NOT .. AKA IF SELL ORDER FOR TOKEN NFT ..-->
+        <!--ORDER FUILFILMENT COMES FROM LINKED INFO IN ORDER-->
+        <!--ADDRESS.. NAME PARAM-->
+        <!--PURCHASE NEEDS TO BE VERY.. EASY..-->
+        <!--MARKET | TRAVERSAL-->
+        <div ng-if="selectedTab =='LIQUIDITY'"  class="card">
+            <div style="background:url('https://source.unsplash.com/1600x900/?code,exchange,cash,finance,graphs,explore')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
@@ -152,44 +166,45 @@
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{inputVectorWeight}}</span></div>
                     </div>
                 </div>
-                <h5>InputVector: <span ng-repeat="input in inputVector"><a href="market/{{input}}">{{input.text}}</a> </span>
-                <h5>Multidimensional Relation Object</h5>
+
+
+
+                <!--<h5>InputVector: <span ng-repeat="input in inputVector"><a href="market/{{input}}">{{input.text}}</a> </span>-->
+
                 <!--NEED TO DO HIGH DIMENSIONAL TRANING.. LEARNING SETS ARE REAL TRAVERSALS.. JUST DO INPUT OUTPUT VECTORS: BULK TRAIN--> 
-                <h5>OutputVector: {{item.amountSet}} <span ng-repeat="output in outputVector"><a href="market/{{output}}">{{output.text}}</a> </span>
+                
+                <!--<h5>OutputVector: {{item.amountSet}} <span ng-repeat="output in outputVector"><a href="market/{{output}}">{{output.text}}</a> </span>-->
+
+
                 <form ng-submit="marketTraverse(tokens, outputVector)">
                     <tags-input min-length="1" placeholder="Input Vector" ng-model="inputVector"></tags-input>
                     <tags-input min-length="1" placeholder="Output Vector" ng-model="outputVector"></tags-input>
                 </form>
+
                 <!--TRAVERSAL PARAMETERS-->
+                
                 <p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
                     <span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
                     <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
                 </p>
             </div>
         </div>
-    </div>
 
-    <!--PURCHASE.. CLAIM.. ORDER-->
+        <!--
+        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+            <li><a href="#">Content</a></li>
+            <li><a href="#">Orders</a></li>
+        </ul>
+        -->
 
-    <div class="row">
+        <!--PURCHASE.. CLAIM.. ORDER-->
         <div class="card">
             <!--REGISTER POPUP 1ST THEN LOGIN -->
             <!--ONBOARD FROM ITEM.. IE PURCHASE.. 2ND STAGE DELIVERY-->
             <button type="submit" class="btn btn-default log-btn" ng-click="orderToggle(null, item)">Purchase Order</button>
         </div>
-    </div>
 
-
-    <!--TODO: LIST REACTIONS.. IE RATINGS IF GENERATOR-->
-
-    <div class="row">
-        <!--
-        <div class="card" ng-if="contentList.length == 0">
-            <div style="padding:16px;">
-                <p style="color:gray;font-style:italic">There is nothing here...</p>
-            </div>
-        </div>
-        -->
+        <!--TODO: LIST REACTIONS.. IE RATINGS IF GENERATOR-->
         <div class="card" ng-repeat="item in contentList">
             <div style="padding:16px">
                 <div>
@@ -200,10 +215,10 @@
                 <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
             </div>
             <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                <a style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="color:grey" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a href="#" style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a href="#" style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a href="#" style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a href="#" style="color:grey" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                 <form role="form" ng-submit="createContent(item)">
@@ -212,6 +227,7 @@
                 </form>
             </div>
         </div>
+
     </div>
 
     <div class="spacing-50"></div>

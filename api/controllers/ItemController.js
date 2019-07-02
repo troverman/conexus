@@ -83,6 +83,7 @@ module.exports = {
 			amountSet: req.param('amountSet'),
 			isGenerator: req.param('isGenerator'),
 			user: req.param('user'),
+			creator: req.param('user'),
 			owner: req.param('owner'),
 			//PATCH
 			reactions: {plus:0,minus:0},

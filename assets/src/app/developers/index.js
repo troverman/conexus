@@ -24,8 +24,6 @@ angular.module( 'conexus.developers', [
         association:'[{}]',
         block:'[{}]',
         content:'[{}]',
-        //data:'[{}]',
-        //event:'[{}]',
         follower:'[{}]',
         item:'[{}]',
         location:'[{}]',
@@ -196,7 +194,6 @@ angular.module( 'conexus.developers', [
 
     $scope.graphData1 = {
         nodes:[
-
             //MEMBER
             {name:'VALIDATION 1'},
             {name:'VALIDATION 1a'},
@@ -206,17 +203,12 @@ angular.module( 'conexus.developers', [
             {name:'VALIDATION 1b'},
             {name:'VALIDATION 1c'},
             {name:'VALIDATION 2'},
-
-
         ],
         links:[
-
             //MEMBER
             {value:1, source:1, target:0},
             {value:1, source:1, target:2},
             {value:1, source:1, target:3},
-
-
         ]
     };
 
@@ -238,10 +230,10 @@ angular.module( 'conexus.developers', [
     };
 
     $scope.options = {
-        textureOnViewport:true,
         pixelRatio: 'auto',
-        motionBlur: false,
-        hideEdgesOnViewport:true
+        maxZoom:10,
+        minZoom:1,
+        //zoom:0.7
     };
 
     $scope.layout = {name: 'cose'};
@@ -562,231 +554,155 @@ angular.module( 'conexus.developers', [
         ]
     };
 
-    console.log($scope.elements.edges.length);
-
-    $scope.style1 = [
-        {
-            "selector": "node",
-            "style": {
-                "shape": "ellipse",
-                "border-width": 0,
-                "background-color": "green"
-            },
-        },
-        {
-          "selector": "node[?flipLabel]",
-          "style": {
-            "text-halign": "right"
-          }
-        }, {
-          "selector": "node[type]",
-          "style": {
-            "label": "data(type)"
-          }
-        }, {
-          "selector": "edge",
-          "style": {
-            "width": 3
-          }
-        }, {
-          "selector": "edge.bezier",
-          "style": {
-            "curve-style": "bezier",
-            "control-point-step-size": 40
-          }
-        }, {
-          "selector": "edge.unbundled-bezier",
-          "style": {
-            "curve-style": "unbundled-bezier",
-            "control-point-distances": 120,
-            "control-point-weights": 0.1
-          }
-        }, {
-          "selector": "edge.multi-unbundled-bezier",
-          "style": {
-            "curve-style": "unbundled-bezier",
-            "control-point-distances": [40, -40],
-            "control-point-weights": [0.250, 0.75]
-          }
-        }, {
-          "selector": "edge.haystack",
-          "style": {
-            "curve-style": "haystack",
-            "haystack-radius": 0.5
-          }
-        }, {
-          "selector": "edge.segments",
-          "style": {
-            "curve-style": "segments",
-            "segment-distances": [ 40, -40 ],
-            "segment-weights": [0.250 , 0.75]
-          }
-        }, {
-          "selector": "edge.taxi",
-          "style": {
-            "curve-style": "taxi",
-            "taxi-direction": "downward",
-            "taxi-turn": 20,
-            "taxi-turn-min-distance": 5
-          }
-        }
-    ];
+    //console.log($scope.elements.edges.length);
 
     $scope.style = [
         {
-          "selector": "core",
-          "style": {
-            "selection-box-color": "#AAD8FF",
-            "selection-box-border-color": "#8BB0D0",
-            "selection-box-opacity": "0.5"
-          }
+            "selector": "core",
+            "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+            }
         }, {
-          "selector": "node",
-          "style": {
-            "width": "mapData(score, 0, 0.006769776522008331, 10, 30)",
-            "height": "mapData(score, 0, 0.006769776522008331, 10, 30)",
-            "content": "data(name)",
-            "font-size": "12px",
-            "text-valign": "center",
-            "text-halign": "center",
-            "background-color": "#555",
-            "text-outline-color": "#555",
-            "text-outline-width": "2px",
-            "color": "#fff",
-            "overlay-padding": "3px",
-            "z-index": "10"
-          }
+            "selector": "node",
+            "style": {
+                "width": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "height": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "content": "data(name)",
+                "font-size": "9px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+            }
         }, {
-          "selector": "node[?attr]",
-          "style": {
-            "shape": "rectangle",
-            "background-color": "#aaa",
-            "text-outline-color": "#aaa",
-            "width": "8px",
-            "height": "8px",
-            "font-size": "3px",
-            "z-index": "1"
-          }
+            "selector": "node[?attr]",
+            "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+            }
         }, {
-          "selector": "node[?query]",
-          "style": {
-            "background-clip": "none",
-            "background-fit": "contain"
-          }
+            "selector": "node[?query]",
+            "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+            }
         }, {
-          "selector": "node:selected",
-          "style": {
-            "border-width": "3px",
-            "border-color": "#AAD8FF",
-            "border-opacity": "0.5",
-            "background-color": "#77828C",
-            "text-outline-color": "#77828C"
-          }
+            "selector": "node:selected",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+            }
         }, {
-          "selector": "edge",
-          "style": {
-            "curve-style": "haystack",
-            "haystack-radius": "0.5",
-            "opacity": "0.9",
-            "line-color": "#bbb",
-            "width": "mapData(weight, 0, 1, 1, 1)",
-            "overlay-padding": "3px"
-          }
+            "selector": "edge",
+            "style": {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale":"0.75",
+                "source-arrow-shape": "none",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "3",
+                "overlay-padding": "3px"
+            }
         }, {
-          "selector": "node.unhighlighted",
-          "style": {
-            "opacity": "0.2"
-          }
+            "selector": "node.unhighlighted",
+            "style": {
+                "opacity": "0.2"
+            }
         }, {
-          "selector": "edge.unhighlighted",
-          "style": {
-            "opacity": "0.05"
-          }
+            "selector": "edge.unhighlighted",
+            "style": {
+                "opacity": "0.05"
+            }
         }, {
-          "selector": ".highlighted",
-          "style": {
-            "z-index": "999999"
-          }
+            "selector": ".highlighted",
+            "style": {
+                "z-index": "999999"
+            }
         }, {
-          "selector": "node.highlighted",
-          "style": {
-            "border-width": "3px",
-            "border-color": "#AAD8FF",
-            "border-opacity": "0.5",
-            "background-color": "#394855",
-            "text-outline-color": "#394855"
-          }
+            "selector": "node.highlighted",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+            }
         }, {
-          "selector": "edge.filtered",
-          "style": {
-            "opacity": "0"
-          }
+            "selector": "edge.filtered",
+            "style": {
+                "opacity": "0"
+            }
         }, {
-          "selector": "edge[group=\"coexp\"]",
-          "style": {
-            "line-color": "#d0b7d5"
-          }
+            "selector": "edge[group=\"coexp\"]",
+            "style": {
+                "line-color": "#d0b7d5"
+            }
         }, {
-          "selector": "edge[group=\"coloc\"]",
-          "style": {
-            "line-color": "#a0b3dc"
-          }
+            "selector": "edge[group=\"coloc\"]",
+            "style": {
+                "line-color": "#a0b3dc"
+            }
         }, {
-          "selector": "edge[group=\"gi\"]",
-          "style": {
-            "line-color": "#90e190"
-          }
+            "selector": "edge[group=\"gi\"]",
+            "style": {
+                "line-color": "#90e190"
+            }
         }, {
-          "selector": "edge[group=\"path\"]",
-          "style": {
-            "line-color": "#9bd8de"
-          }
+            "selector": "edge[group=\"path\"]",
+            "style": {
+                "line-color": "#9bd8de"
+            }
         }, {
-          "selector": "edge[group=\"pi\"]",
-          "style": {
-            "line-color": "#eaa2a2"
-          }
+            "selector": "edge[group=\"pi\"]",
+            "style": {
+                "line-color": "#eaa2a2"
+            }
         }, {
-          "selector": "edge[group=\"predict\"]",
-          "style": {
-            "line-color": "#f6c384"
-          }
+            "selector": "edge[group=\"predict\"]",
+            "style": {
+                "line-color": "#f6c384"
+            }
         }, {
-          "selector": "edge[group=\"spd\"]",
-          "style": {
-            "line-color": "#dad4a2"
-          }
+            "selector": "edge[group=\"spd\"]",
+            "style": {
+                "line-color": "#dad4a2"
+            }
         }, {
-          "selector": "edge[group=\"spd_attr\"]",
-          "style": {
-            "line-color": "#D0D0D0"
-          }
+            "selector": "edge[group=\"spd_attr\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
         }, {
-          "selector": "edge[group=\"reg\"]",
-          "style": {
-            "line-color": "#D0D0D0"
-          }
+            "selector": "edge[group=\"reg\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
         }, {
-          "selector": "edge[group=\"reg_attr\"]",
-          "style": {
-            "line-color": "#D0D0D0"
-          }
+            "selector": "edge[group=\"reg_attr\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
         }, 
         {
-          "selector": "edge[group=\"user\"]",
-          "style": {
-            "line-color": "#f0ec86"
-          }
-        },
-        {
-          "selector": "highlighted",
-          "style": {
-            "background-color": "#61bffc",
-            "line-color": "#61bffc",
-            "target-arrow-color": "#61bffc",
-            "transition-property": "background-color, line-color, target-arrow-color",
-            "transition-duration": "0.5s"
-          }
+            "selector": "edge[group=\"user\"]",
+            "style": {
+                "line-color": "#f0ec86"
+            }
         }
     ];
 
@@ -811,60 +727,112 @@ angular.module( 'conexus.developers', [
     //$scope.populateElement();
 
     function getAllSubsets(theArray) {
-      return theArray.reduce(function (subsets, value) {
-        return subsets.concat(subsets.map(function (set) {
-          return [value].concat(set);
-        }));
-      }, [[]]);
+        return theArray.reduce(function (subsets, value) {
+            return subsets.concat(subsets.map(function (set) {
+                return [value].concat(set);
+            }));
+        }, [[]]);
     };  
 
+    //TODO: STANDARDIZE ALG
+    //FIX UPDATING
     $scope.combinatorialGenerator = function(model){
-        $scope.elementsObj = {};
-        var powerSet = [];
-        if (model){powerSet = getAllSubsets(model);}
-        else{powerSet = getAllSubsets(['A','B','C'])}
-        powerSet.shift();
-        powerSet.pop();
-        //GENERATE NODES
-        for (x in powerSet){
-            var stringX = powerSet[x].join('');
+        
+        //cytoData.getGraph().then(function(graph){
+            //console.log(graph)
+            $scope.elementsObj = {};
+            //$scope.graph = graph;
+            //$scope.graph.layout();
+
+            var powerSet = [];
+            powerSet = getAllSubsets(model)
+            powerSet.shift();
+            powerSet.pop();
+            //GENERATE NODES
+            for (x in powerSet){
+                var stringX = powerSet[x].join('');
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:stringX, type:stringX, name:stringX}
+                };
+                $scope.elementsObj[stringX] = modelNode;
+                //GENERATE EDGES
+                for (y in powerSet){
+                    var stringY = powerSet[y].join('');
+                    var found = stringY.split('').some(function(obj){
+                        return stringX.split('').includes(obj);
+                    });
+                    if (!found){
+                        var combDif = stringX.split('').length - stringY.split('').length
+                        if (combDif > 0){
+                            for(var i = 0; i<=combDif; i++){
+                                var modelEdge = {
+                                    group:'edges',
+                                    data:{id:stringX+i+'-'+stringY, source:stringX, target:stringY}
+                                };
+                                $scope.elementsObj[stringX+i+'-'+stringY] = modelEdge;
+                            }   
+                        }
+                        else{
+                            var modelEdge = {
+                                group:'edges',
+                                data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+                            };
+                            $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                        }
+                    }
+                }
+            }
+            console.log($scope.elementsObj);
+            cytoData.getGraph().then(function(graph){
+                $scope.graph = graph;
+                //$scope.graph.fit();
+                $scope.graph.layout({
+                    name: 'cose',//'cola', //name: 'cose', coolingFactor: 0, animate: 'end',  //numIter: 100000000,
+                //    infinite: false,
+                    //fit: true
+                }).run();
+            });
+        //});
+    };
+    $scope.combinatorialGenerator(['A','B','C']);
+
+    $scope.classicMarketGenerator = function(array){
+        $scope.classicElementsObj = {};
+        for(x in array){
             var modelNode = {
                 group:'nodes',
-                data:{id:stringX, type:stringX, name:stringX}
+                data:{id:array[x], type:array[x], name:array[x]}
             };
-            $scope.elementsObj[stringX] = modelNode;
-            //GENERATE EDGES
-            for (y in powerSet){
-                //if for more refine
-                var stringY = powerSet[y].join('');
-                var found = stringY.split('').some(function(obj){
-                    return stringX.split('').includes(obj);
-                });
-                if (!found){
+            $scope.classicElementsObj[array[x]] = modelNode;
+            for(y in array){
+                if (array[x] != array[y]){
                     var modelEdge = {
                         group:'edges',
-                        data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
+                        data:{id:array[x]+array[y], source:array[x], target:array[y]}
                     };
-                    $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
+                    $scope.classicElementsObj[array[x]+array[y]] = modelEdge;
                 }
             }
         }
-        console.log($scope.elementsObj);
-        cytoData.getGraph().then(function(graph){
-            $scope.graph = graph;
-            //$scope.graph.fit();
-            $scope.graph.layout({
-                name: 'cola', //name: 'cose', coolingFactor: 0, animate: 'end',  //numIter: 100000000,
-                infinite: true,
-                fit: false
-            }).run();
-
-        });
+        //cytoData.getGraph().then(function(graph){
+        //    $scope.graph = graph;
+        //    $scope.graph.layout({name: 'cose'}).run();
+        //});
     };
-    $scope.combinatorialGenerator();
+    $scope.classicMarketGenerator(['A','B']);
 
+    //TODO
     $scope.inverseFacetGenerator = function(model){
         $scope.elementsObj = {};
+        //cytoData.getGraph().then(function(graph){
+        //    $scope.graph = [];
+        //    $scope.graph.layout({
+        //        name: 'cose',
+        //        infinite: true,
+        //        fit: false
+        //    }).run();
+        //});
         var powerSet = [];
         if (model){powerSet = getAllSubsets(model);}
         else{powerSet = getAllSubsets(['A','B','C'])}
@@ -879,7 +847,6 @@ angular.module( 'conexus.developers', [
             $scope.elementsObj[stringX] = modelNode;
             //GENERATE EDGES
             for (y in powerSet){
-                //if for more refine
                 var stringY = powerSet[y].join('');
                 var found = stringY.split('').some(function(obj){
                     return stringX.split('').includes(obj);
@@ -897,11 +864,8 @@ angular.module( 'conexus.developers', [
         cytoData.getGraph().then(function(graph){
             $scope.graph = graph;
             $scope.graph.layout({
-                //name:'grid',
-                //name: 'cose', coolingFactor: 0, animate: 'end', // numIter: 10000,
-                name: 'cola',
+                name: 'cose',
                 infinite: true,
-                fit: false
             }).run();
         });
     };
@@ -913,18 +877,12 @@ angular.module( 'conexus.developers', [
         powerSet = getAllSubsets(marketSize);
         powerSet.shift();
         powerSet.pop();
-
         for (x in powerSet){
             if(powerSet[x].length > combinatorialRank){
                 powerSet.splice(x, 1);
             }
         }
-
         console.log(powerSet)
-
-
-
-
 
         //GENERATE NODES
         for (x in powerSet){
@@ -961,13 +919,7 @@ angular.module( 'conexus.developers', [
                 fit: false
             }).run();
         });
-
     };
-
-
-
-
-
 
     //for (x in $scope.item.associatedModels){
     //    var length = $scope.graphData.nodes.length;
@@ -975,7 +927,6 @@ angular.module( 'conexus.developers', [
     //    $scope.graphData.links.push({value:1, source:0, target:length});
     //}
     
-
     //DATA MODELS
     $scope.humanReadableTokenModel = 'var humanReadableTokenModel = '+JSON.stringify({ 
         string: 'MODEL+ADDRESS',
@@ -1036,9 +987,6 @@ angular.module( 'conexus.developers', [
             XRP:{orderBook:[]},
         },
     }, null, 4);
-
-
-
 
     //MODELS..
     //HEADERS IN HTML.. GENERATE TOKEN.. PASSPORT.. 
