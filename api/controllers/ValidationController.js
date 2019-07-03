@@ -36,7 +36,6 @@ module.exports = {
 			//Association.find({"associatedModels.address":{$in :[task]}})
 
 			//WORK HERE
-			//THIS IS DEPRECIATED
 			Validation.native(function(err, validation) {
 				validation.find({"associatedModels.address":{$in :[task]}})
 				.limit(limit)
@@ -209,30 +208,27 @@ module.exports = {
 	},
 
 	//TODO | SECURITY
-	//KINF OF A MESS
+	//KINF OF A MESS -- true -- haa
+	//DEDICATE the 4th to this .. 
+
 	create: function (req, res) {
 		var model = {
-			
 			content: req.param('content'),
 			reputation: req.param('reputation'), //SAVED USER REP
 			user: req.param('user'),
-
-			validation: req.param('validation'), //ACTUAL 'VOTE'
-
-			//ASSOICATED MODEL {BINARY -- }
+			validation: req.param('validation'),
 			associatedModels: req.param('associatedModels'),
-			
 			//PATCH
 			reactions: {plus:0,minus:0},
-
 		};
-
 
 
 		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
 		User.find({id:model.user}).then(function(userModel){
+
+
 			var reputation = {};
-			//TIME.FIND//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
+			//Time.find({})//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
 			//FIND DIMENSIONS .. MATCH WITH FRONTEND INPUT
 			for (x in Object.keys(model.validation)){
 				//TODO | BETTER..
@@ -247,7 +243,10 @@ module.exports = {
 
 			model.reputation = reputation;
 
-			console.log('CREATE VALIDATION', model)
+			console.log('CREATE VALIDATION', model);
+
+
+
 
 			Validation.create(model)
 			.exec(function(err, validation) {
@@ -256,6 +255,9 @@ module.exports = {
 					console.log(validation);
 					Validation.publishCreate(validation);
 					res.json(validation);
+
+
+
 
 					//TODO: VALIDATION NOTIFICATION
 					var notificationModel = {
@@ -266,6 +268,8 @@ module.exports = {
 						info:{user: userModel[0], associationModels:[]},
 						priority:75,
 					};
+
+
 
 					//console.log('CREATE NOTIFICATION', notificationModel)
 
@@ -280,6 +284,8 @@ module.exports = {
 
 					//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
 					//TODO: FIND
+
+
 
 					Association.find().then((associationModels)=>{
 						if (associationModels.length == 0){

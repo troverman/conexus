@@ -171,7 +171,7 @@ module.exports = {
 		//&& FROM , TO
 		else if(req.query.amountSet && req.query.user){
 
-			console.log('dude complex query lol')
+			console.log('dude complex query lol');
 
 			var amountSet = req.query.amountSet;
 			//TEMP | TODO COMPLEX

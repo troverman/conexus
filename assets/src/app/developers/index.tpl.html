@@ -453,8 +453,26 @@ contract Protocol {
                 <div id="CORE">
 
                     <h4><b>Core CRE8 Manifolds</b></h4>
+
+                    <!--ACTIONS-->
                     <p style="color:gray;font-style:italic">Defining Verbs in a string space; application(s)</p>
-                    <p style="color:gray;font-style:italic"><a href="#">MEMBER</a>, <a href="#">PROJECT</a>, <a href="#">TASK</a>, <a href="#">TIME</a>, <a href="#">VALIDATION</a>, <a href="#">ORDER</a></p>
+
+                    <p style="color:gray;font-style:italic">
+                        <a href="#ACTION" du-smooth-scroll>ACTION</a>, 
+                        <a href="#APP" du-smooth-scroll>APP</a>, 
+                        <a href="#ITEM" du-smooth-scroll>CONTENT</a>,
+                        <a href="#ITEM" du-smooth-scroll>ITEM</a>,
+                        <a href="#LOCATION" du-smooth-scroll>LOCATION</a>,
+                        <a href="#MEMBER" du-smooth-scroll>MEMBER</a>,
+                        <a href="#PROJECT" du-smooth-scroll>PROJECT</a>, 
+                        <a href="#TASK" du-smooth-scroll>TASK</a>, 
+                        <a href="#TIME" du-smooth-scroll>TIME</a>, 
+                        <a href="#TRANSACTION" du-smooth-scroll>TRANSACTION</a>, 
+                        <a href="#VALIDATION" du-smooth-scroll>VALIDATION</a>, 
+                        <a href="#ORDER" du-smooth-scroll>ORDER</a>,
+                        <a href="#REACTION" du-smooth-scroll>REACTION</a>
+                    </p>
+
                     <p style="color:gray;font-style:italic">Order Book String Mapping; Mapping of all positions</p>
                     <p style="color:gray;font-style:italic">BALANCE AND REPUTATION</p>
                     
@@ -478,7 +496,6 @@ contract Protocol {
                     
                     <p><b>+APP.. +DATA..</b></p>
 
-
                 </div>
 
                 <div class="spacing-10"></div>
@@ -491,8 +508,11 @@ contract Protocol {
                 </div>
 
 
+
+                <!--TODO!!-->
                 <!--UNIFY WITH CONEX API? PROB-->
 
+                <!--
                 <div class="spacing-10"></div>
                 <div class="spacing-10"></div>
 
@@ -500,6 +520,7 @@ contract Protocol {
          
                 <div class="spacing-10"></div>
                 <div class="spacing-10"></div>
+
 
                 <h4>Action Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript"  hljs-source="actionTokenization"></div>
@@ -510,8 +531,9 @@ contract Protocol {
 
                 <h4>Manifold Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newToken){},
-getSome:function(newQuery){}</div>
+                    create:function(newToken){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
@@ -519,14 +541,16 @@ getSome:function(newQuery){}</div>
 
                 <h4>Association Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-getSome:function(newQuery){}</div>
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Content Tokenization Protocol</h4>
-               <div hljs hljs-language="javascript">
-create:function(newContent){},
-getSome:function(newQuery){}</div>
+                <div hljs hljs-language="javascript">
+                    create:function(newContent){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> 
                 <span style="color:gray;font-style:italic">The operations and permission structure around the creation on <a href="#CONTENT" du-smooth-scroll>content</a> (and its applications on cre8's api) (edit rep and balance manifolds etc)</span></p>
                 <p><b>getSome:function()</b></p>
@@ -534,16 +558,18 @@ getSome:function(newQuery){}</div>
 
                 <h4>Follow Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newFollow){},
-getSome:function(newQuery){}</div>
+                    create:function(newFollow){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of <a href="#FOLLOWER" du-smooth-scroll>followers</a> (and its applications on cre8's api)</p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Item Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newItem){},
-getSome:function(newQuery){}</div>
+                    create:function(newItem){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of an <a href="#ITEM" du-smooth-scroll>Item</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
 
@@ -551,116 +577,125 @@ getSome:function(newQuery){}</div>
 
                 <h4>Location Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newLocation){},
-getSome:function(newQuery){}</div>
+                    create:function(newLocation){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Member Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newMember){},
-getSome:function(newQuery){}</div>
+                    create:function(newMember){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#MEMBER" du-smooth-scroll>Member</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Order Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newOrder){
-    //BUILD ORDER BOOK
-},
-getSome:function(newQuery){}</div>
+                    create:function(newOrder){
+                        //BUILD ORDER BOOK
+                    },
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of an <a href="#ORDER" du-smooth-scroll>Order</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Project Tokenization Protocol</h4>
-                <!--<p>Perform Association walk</p>-->
+                <p>Perform Association walk</p>
                 <div hljs hljs-language="javascript">
-create:function(newProject){},
-getSome:function(newQuery){}</div>
+                    create:function(newProject){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#PROJECT" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Project Charter Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newProjectCharter){},
-getSome:function(newQuery){}</div>
+                    create:function(newProjectCharter){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#PROJECTCHARTER" du-smooth-scroll>Project Charter</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Reaction Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newReaction){
-    
-    //GENERALIZE ... REPUTATION AS IMMUTATBLE MAPPING IN GREATER MAPPING 
-    wallet[newReaction.creator]['CRE8+REACTION']++
-    wallet[newReaction.creator]['CRE8+REACTION'+newReaction.id]++
-    wallet[newReaction.creator]['CRE8+REACTION'+newReaction.type]++
+                    create:function(newReaction){
+                        
+                        //GENERALIZE ... REPUTATION AS IMMUTATBLE MAPPING IN GREATER MAPPING 
+                        wallet[newReaction.creator]['CRE8+REACTION']++
+                        wallet[newReaction.creator]['CRE8+REACTION'+newReaction.id]++
+                        wallet[newReaction.creator]['CRE8+REACTION'+newReaction.type]++
 
-    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION']++
-    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.id]]++
-    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.type]]++
+                        wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION']++
+                        wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.id]]++
+                        wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.type]]++
 
-},
-getSome:function(newQuery){}</div>
+                    },
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#REACTION" du-smooth-scroll>Reaction</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Task Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newTask){},
-getSome:function(newQuery){}</div>
+                    create:function(newTask){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#TASK" du-smooth-scroll>Task</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Time Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newTime){
-    wallet[newReaction.creator]['CRE8+TIME'] += newTime.amount
-    wallet[newReaction.creator]['CRE8+TIME'+newTime.id] += newTime.amount
-    for (x in newTime.tags){
-        wallet[newReaction.creator][newTime.tags[x]] += newTime.amount
-    }
-},
-getSome:function(newQuery){}</div>
+                    create:function(newTime){
+                        wallet[newReaction.creator]['CRE8+TIME'] += newTime.amount
+                        wallet[newReaction.creator]['CRE8+TIME'+newTime.id] += newTime.amount
+                        for (x in newTime.tags){
+                            wallet[newReaction.creator][newTime.tags[x]] += newTime.amount
+                        }
+                    },
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of <a href="#TIME" du-smooth-scroll>Time</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Transaction Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newTransaction){
-    
-    //CREATE PROTOCOL ... WIKI
-    wallet[newTransaction.from]['CRE8+TRANSACTION']++
-    wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++
+                    create:function(newTransaction){
+                        
+                        //CREATE PROTOCOL ... WIKI
+                        wallet[newTransaction.from]['CRE8+TRANSACTION']++
+                        wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++
 
-    wallet[newTransaction.to]['RECIEVE+TRANSACTION']++
-    wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++
+                        wallet[newTransaction.to]['RECIEVE+TRANSACTION']++
+                        wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++
 
-    //TRANSFER THE TOKENS
-    for (x in newTransaction.assetSet){
-        wallet[newTransaction.from][newTransaction.assetSet[x].name]-=newTransaction.assetSet[x].amount
-        wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount
-    }
+                        //TRANSFER THE TOKENS
+                        for (x in newTransaction.assetSet){
+                            wallet[newTransaction.from][newTransaction.assetSet[x].name]-=newTransaction.assetSet[x].amount
+                            wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount
+                        }
 
-    //Create Data 
-    Data.create(newTransaction)
+                        //Create Data 
+                        Data.create(newTransaction)
 
-},
+                    },
 
-getSome:function(newQuery){
+                    getSome:function(newQuery){
 
-    //DATA AS TOKENS? .. LOOK VIA MANIFOLDS .. DATA+FILTER+.. (INFO MAPPING TO INFO) 
-    return Data.find(newQuery)
+                        //DATA AS TOKENS? .. LOOK VIA MANIFOLDS .. DATA+FILTER+.. (INFO MAPPING TO INFO) 
+                        return Data.find(newQuery)
 
-}</div>
+                    }
+                </div>
                 <p><b>create:function()</b> 
                 <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#TRANSACTION" du-smooth-scroll>Transaction</a> (and its applications on cre8's api)</span>
                 </p>
@@ -669,24 +704,27 @@ getSome:function(newQuery){
 
                 <h4>View Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newView){},
-getSome:function(newQuery){}</div>
+                    create:function(newView){},
+                    getSome:function(newQuery){}<
+                /div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#VIEW" du-smooth-scroll>View</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
 
                 <h4>Validation Tokenization Protocol</h4>
                 <div hljs hljs-language="javascript">
-create:function(newValidation){},
-getSome:function(newQuery){}</div>
+                    create:function(newValidation){},
+                    getSome:function(newQuery){}
+                </div>
                 <p><b>create:function()</b> <span style="color:gray;font-style:italic">the operations and permission structure around the creation of a <a href="#VALIDATION" du-smooth-scroll>Validation</a> (and its applications on cre8's api)</span></p>
                 <p><b>getSome:function()</b></p>
                 <div class="spacing-10"></div>
             </div>
+
             <div class="col-sm-6">
-                <!--<div class="bootstrapHack">
-                </div>-->
+            
             </div>
+            -->
         </div>
     </div>
     <div class="spacing-50"></div>
@@ -741,9 +779,12 @@ getSome:function(newQuery){}</div>
                 </div>
                 <div class="col-sm-5">
                     <div>
+
                         <h5>Filter & Search Parameters</h5>
-                        <p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>
+                        <!--SEARCH MODEL-->
+                        <!--<p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>-->
                         <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->
+
                     </div>
                     <div class="spacing-50"></div>
                     <!--
@@ -1098,7 +1139,7 @@ getSome:function(newQuery){}</div>
                     <div class="bootstrapHack" style="z-index:auto;">
                         <div style="margin-left:15px;">
                             <div class="spacing-5"></div>
-                            <div hljs hljs-language="javascript">var dataModel = {id:'string', data:'binary'};</div>
+                            <div hljs hljs-language="javascript" hljs-source="dataModel"></div>
                         </div>
                     </div>
                     <p><b>[get, post] /api/data</b></p>
@@ -1572,6 +1613,13 @@ getSome:function(newQuery){}</div>
                     <p style="color:gray;font-style:italic">Reputation & Verification Dimensions</p>
                     <p style="color:gray;font-style:italic">Validation Types</p>
                     <p style="color:gray;font-style:italic">Member Types</p>
+
+
+                    <!--HAHAHAHA!-->
+
+                    
+
+
                     <!--relation of relations is multiplicative / defined in the charter-->
                     <!--CATEGORY THEORY 2-CATEGORY .. recursive validation-->
                 </div>
@@ -2622,13 +2670,19 @@ getSome:function(newQuery){}</div>
     <div class="container">
         <div class="spacing-15"></div>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <p style="color:gray;font-style:italic">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>
                 <p style="color:gray;font-style:italic">Action Potiental From Protocol.</p>
                 <p><a href="#PROJECTCHARTER" du-smooth-scroll><b>Project Charter</b></a></p>
-            </div>
-            <div class="col-sm-4" style="text-align:right">
                 <img style="height:200px;" src="images/latticespin.gif">
+            </div>
+            <div class="col-sm-6">
+                <div class="bootstrapHack" style="z-index:auto;">
+                    <div style="margin-left:15px;">
+                        <div class="spacing-5"></div>
+                        <div hljs hljs-language="javascript"  hljs-source="projectCharterModel"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

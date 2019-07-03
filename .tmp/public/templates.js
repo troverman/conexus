@@ -700,32 +700,44 @@ angular.module("app/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div style=\"float:right;text-align:right\">\n" +
     "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(app);\" class=\"fa fa-ellipsis-v\"></i>\n" +
     "                </div>\n" +
+    "\n" +
+    "\n" +
     "                <!--PROTOCOLS.. VIEWS.. (REACT ELEMETS RENDERED FROM CHAIN)-->\n" +
     "                <!--GLOBAL ELEMENTS.. NAV.. MEMBER NAV (ADDITIONAL TABS..).. PROJECT PLUGIN..-->\n" +
     "                <!--UI EXTENSIONS-->\n" +
     "                <!--UI INTEROP-->\n" +
     "                <!--OWN LANGUAGE TO COMPILE TO AGNOSTIC FRONTEND JS.. NATIVE APP?? .. GOTTA-->\n" +
+    "\n" +
+    "\n" +
     "                <!--\n" +
     "                <div>\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{app.user.avatarUrl}}\" src=\"{{app.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    <a style=\"display:inline\" href=\"member/{{app.user.username}}\"><span style=\"font-weight:800\">{{app.user.username}}</span></a>\n" +
     "                </div>\n" +
     "                -->\n" +
+    "\n" +
     "                <!--\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <p><a ng-repeat=\"tag in app.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag}} </a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "                <div><span style=\"display:inline\" ng-bind-html=\"renderContent(app.description)\"></span></div>\n" +
     "                -->\n" +
+    "\n" +
+    "                <!--Fixed for core?-->\n" +
+    "                <p><b>Enable</b></p>\n" +
+    "                <md-switch ng-model=\"recordAttention\" aria-label=\"Record Attention\"></md-switch>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div><span style=\"display:inline\" ng-bind-html=\"renderContent(app.description)\"></span></div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <!--INHERITANCE; VERB APPS REQUIRE ITEMS ETC-->\n" +
     "                <div hljs hljs-language=\"javascript\" hljs-source=\"app.protocols\"></div>\n" +
     "            </div>\n" +
-    "            <!--\n" +
+    "            <!--CONETENT..? -->\n" +
     "            <div class=\"card-footer\">\n" +
     "                <a href=\"#\" ng-click=\"createReaction(app, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{app.reactions.plus}} like </a> \n" +
     "                <a href=\"#\" ng-click=\"createReaction(app, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{app.reactions.minus}} dislike </a>\n" +
     "                <a href=\"#\" ng-click=\"reply(app)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "            </div>\n" +
-    "            -->\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -1763,8 +1775,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div id=\"CORE\">\n" +
     "\n" +
     "                    <h4><b>Core CRE8 Manifolds</b></h4>\n" +
+    "\n" +
+    "                    <!--ACTIONS-->\n" +
     "                    <p style=\"color:gray;font-style:italic\">Defining Verbs in a string space; application(s)</p>\n" +
-    "                    <p style=\"color:gray;font-style:italic\"><a href=\"#\">MEMBER</a>, <a href=\"#\">PROJECT</a>, <a href=\"#\">TASK</a>, <a href=\"#\">TIME</a>, <a href=\"#\">VALIDATION</a>, <a href=\"#\">ORDER</a></p>\n" +
+    "\n" +
+    "                    <p style=\"color:gray;font-style:italic\">\n" +
+    "                        <a href=\"#ACTION\" du-smooth-scroll>ACTION</a>, \n" +
+    "                        <a href=\"#APP\" du-smooth-scroll>APP</a>, \n" +
+    "                        <a href=\"#ITEM\" du-smooth-scroll>CONTENT</a>,\n" +
+    "                        <a href=\"#ITEM\" du-smooth-scroll>ITEM</a>,\n" +
+    "                        <a href=\"#LOCATION\" du-smooth-scroll>LOCATION</a>,\n" +
+    "                        <a href=\"#MEMBER\" du-smooth-scroll>MEMBER</a>,\n" +
+    "                        <a href=\"#PROJECT\" du-smooth-scroll>PROJECT</a>, \n" +
+    "                        <a href=\"#TASK\" du-smooth-scroll>TASK</a>, \n" +
+    "                        <a href=\"#TIME\" du-smooth-scroll>TIME</a>, \n" +
+    "                        <a href=\"#TRANSACTION\" du-smooth-scroll>TRANSACTION</a>, \n" +
+    "                        <a href=\"#VALIDATION\" du-smooth-scroll>VALIDATION</a>, \n" +
+    "                        <a href=\"#ORDER\" du-smooth-scroll>ORDER</a>,\n" +
+    "                        <a href=\"#REACTION\" du-smooth-scroll>REACTION</a>\n" +
+    "                    </p>\n" +
+    "\n" +
     "                    <p style=\"color:gray;font-style:italic\">Order Book String Mapping; Mapping of all positions</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">BALANCE AND REPUTATION</p>\n" +
     "                    \n" +
@@ -1788,7 +1818,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    \n" +
     "                    <p><b>+APP.. +DATA..</b></p>\n" +
     "\n" +
-    "\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1801,8 +1830,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "\n" +
     "\n" +
+    "\n" +
+    "                <!--TODO!!-->\n" +
     "                <!--UNIFY WITH CONEX API? PROB-->\n" +
     "\n" +
+    "                <!--\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -1810,6 +1842,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "         \n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "\n" +
     "                <h4>Action Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\"  hljs-source=\"actionTokenization\"></div>\n" +
@@ -1820,8 +1853,9 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h4>Manifold Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newToken){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newToken){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
@@ -1829,14 +1863,16 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h4>Association Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Content Tokenization Protocol</h4>\n" +
-    "               <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newContent){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                <div hljs hljs-language=\"javascript\">\n" +
+    "                    create:function(newContent){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> \n" +
     "                <span style=\"color:gray;font-style:italic\">The operations and permission structure around the creation on <a href=\"#CONTENT\" du-smooth-scroll>content</a> (and its applications on cre8's api) (edit rep and balance manifolds etc)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
@@ -1844,16 +1880,18 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h4>Follow Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newFollow){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newFollow){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of <a href=\"#FOLLOWER\" du-smooth-scroll>followers</a> (and its applications on cre8's api)</p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Item Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newItem){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newItem){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a href=\"#ITEM\" du-smooth-scroll>Item</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "\n" +
@@ -1861,116 +1899,125 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h4>Location Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newLocation){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newLocation){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Member Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newMember){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newMember){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#MEMBER\" du-smooth-scroll>Member</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Order Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newOrder){\n" +
-    "    //BUILD ORDER BOOK\n" +
-    "},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newOrder){\n" +
+    "                        //BUILD ORDER BOOK\n" +
+    "                    },\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of an <a href=\"#ORDER\" du-smooth-scroll>Order</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Project Tokenization Protocol</h4>\n" +
-    "                <!--<p>Perform Association walk</p>-->\n" +
+    "                <p>Perform Association walk</p>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newProject){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newProject){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#PROJECT\" du-smooth-scroll>Project</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Project Charter Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newProjectCharter){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newProjectCharter){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#PROJECTCHARTER\" du-smooth-scroll>Project Charter</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Reaction Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newReaction){\n" +
-    "    \n" +
-    "    //GENERALIZE ... REPUTATION AS IMMUTATBLE MAPPING IN GREATER MAPPING \n" +
-    "    wallet[newReaction.creator]['CRE8+REACTION']++\n" +
-    "    wallet[newReaction.creator]['CRE8+REACTION'+newReaction.id]++\n" +
-    "    wallet[newReaction.creator]['CRE8+REACTION'+newReaction.type]++\n" +
+    "                    create:function(newReaction){\n" +
+    "                        \n" +
+    "                        //GENERALIZE ... REPUTATION AS IMMUTATBLE MAPPING IN GREATER MAPPING \n" +
+    "                        wallet[newReaction.creator]['CRE8+REACTION']++\n" +
+    "                        wallet[newReaction.creator]['CRE8+REACTION'+newReaction.id]++\n" +
+    "                        wallet[newReaction.creator]['CRE8+REACTION'+newReaction.type]++\n" +
     "\n" +
-    "    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION']++\n" +
-    "    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.id]]++\n" +
-    "    wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.type]]++\n" +
+    "                        wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION']++\n" +
+    "                        wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.id]]++\n" +
+    "                        wallet[newReaction.associatedModels[0].creator]['RECIEVE+REACTION'+newReaction.type]]++\n" +
     "\n" +
-    "},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    },\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#REACTION\" du-smooth-scroll>Reaction</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Task Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newTask){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newTask){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#TASK\" du-smooth-scroll>Task</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Time Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newTime){\n" +
-    "    wallet[newReaction.creator]['CRE8+TIME'] += newTime.amount\n" +
-    "    wallet[newReaction.creator]['CRE8+TIME'+newTime.id] += newTime.amount\n" +
-    "    for (x in newTime.tags){\n" +
-    "        wallet[newReaction.creator][newTime.tags[x]] += newTime.amount\n" +
-    "    }\n" +
-    "},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newTime){\n" +
+    "                        wallet[newReaction.creator]['CRE8+TIME'] += newTime.amount\n" +
+    "                        wallet[newReaction.creator]['CRE8+TIME'+newTime.id] += newTime.amount\n" +
+    "                        for (x in newTime.tags){\n" +
+    "                            wallet[newReaction.creator][newTime.tags[x]] += newTime.amount\n" +
+    "                        }\n" +
+    "                    },\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of <a href=\"#TIME\" du-smooth-scroll>Time</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Transaction Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newTransaction){\n" +
-    "    \n" +
-    "    //CREATE PROTOCOL ... WIKI\n" +
-    "    wallet[newTransaction.from]['CRE8+TRANSACTION']++\n" +
-    "    wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++\n" +
+    "                    create:function(newTransaction){\n" +
+    "                        \n" +
+    "                        //CREATE PROTOCOL ... WIKI\n" +
+    "                        wallet[newTransaction.from]['CRE8+TRANSACTION']++\n" +
+    "                        wallet[newTransaction.from]['CRE8+TRANSACTION'+newTransaction.id]++\n" +
     "\n" +
-    "    wallet[newTransaction.to]['RECIEVE+TRANSACTION']++\n" +
-    "    wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++\n" +
+    "                        wallet[newTransaction.to]['RECIEVE+TRANSACTION']++\n" +
+    "                        wallet[newTransaction.to]['RECIEVE+TRANSACTION'+newTransaction.id]++\n" +
     "\n" +
-    "    //TRANSFER THE TOKENS\n" +
-    "    for (x in newTransaction.assetSet){\n" +
-    "        wallet[newTransaction.from][newTransaction.assetSet[x].name]-=newTransaction.assetSet[x].amount\n" +
-    "        wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount\n" +
-    "    }\n" +
+    "                        //TRANSFER THE TOKENS\n" +
+    "                        for (x in newTransaction.assetSet){\n" +
+    "                            wallet[newTransaction.from][newTransaction.assetSet[x].name]-=newTransaction.assetSet[x].amount\n" +
+    "                            wallet[newTransaction.to][newTransaction.assetSet[x].name]+=newTransaction.assetSet[x].amount\n" +
+    "                        }\n" +
     "\n" +
-    "    //Create Data \n" +
-    "    Data.create(newTransaction)\n" +
+    "                        //Create Data \n" +
+    "                        Data.create(newTransaction)\n" +
     "\n" +
-    "},\n" +
+    "                    },\n" +
     "\n" +
-    "getSome:function(newQuery){\n" +
+    "                    getSome:function(newQuery){\n" +
     "\n" +
-    "    //DATA AS TOKENS? .. LOOK VIA MANIFOLDS .. DATA+FILTER+.. (INFO MAPPING TO INFO) \n" +
-    "    return Data.find(newQuery)\n" +
+    "                        //DATA AS TOKENS? .. LOOK VIA MANIFOLDS .. DATA+FILTER+.. (INFO MAPPING TO INFO) \n" +
+    "                        return Data.find(newQuery)\n" +
     "\n" +
-    "}</div>\n" +
+    "                    }\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> \n" +
     "                <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a> (and its applications on cre8's api)</span>\n" +
     "                </p>\n" +
@@ -1979,24 +2026,27 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <h4>View Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newView){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newView){},\n" +
+    "                    getSome:function(newQuery){}<\n" +
+    "                /div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#VIEW\" du-smooth-scroll>View</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Validation Tokenization Protocol</h4>\n" +
     "                <div hljs hljs-language=\"javascript\">\n" +
-    "create:function(newValidation){},\n" +
-    "getSome:function(newQuery){}</div>\n" +
+    "                    create:function(newValidation){},\n" +
+    "                    getSome:function(newQuery){}\n" +
+    "                </div>\n" +
     "                <p><b>create:function()</b> <span style=\"color:gray;font-style:italic\">the operations and permission structure around the creation of a <a href=\"#VALIDATION\" du-smooth-scroll>Validation</a> (and its applications on cre8's api)</span></p>\n" +
     "                <p><b>getSome:function()</b></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "            </div>\n" +
+    "\n" +
     "            <div class=\"col-sm-6\">\n" +
-    "                <!--<div class=\"bootstrapHack\">\n" +
-    "                </div>-->\n" +
+    "            \n" +
     "            </div>\n" +
+    "            -->\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
@@ -2051,9 +2101,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "                <div class=\"col-sm-5\">\n" +
     "                    <div>\n" +
+    "\n" +
     "                        <h5>Filter & Search Parameters</h5>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>\n" +
+    "                        <!--SEARCH MODEL-->\n" +
+    "                        <!--<p style=\"color:gray;font-style:italic\">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>-->\n" +
     "                        <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->\n" +
+    "\n" +
     "                    </div>\n" +
     "                    <div class=\"spacing-50\"></div>\n" +
     "                    <!--\n" +
@@ -2408,7 +2461,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
     "                        <div style=\"margin-left:15px;\">\n" +
     "                            <div class=\"spacing-5\"></div>\n" +
-    "                            <div hljs hljs-language=\"javascript\">var dataModel = {id:'string', data:'binary'};</div>\n" +
+    "                            <div hljs hljs-language=\"javascript\" hljs-source=\"dataModel\"></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <p><b>[get, post] /api/data</b></p>\n" +
@@ -2882,6 +2935,13 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p style=\"color:gray;font-style:italic\">Reputation & Verification Dimensions</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Validation Types</p>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Member Types</p>\n" +
+    "\n" +
+    "\n" +
+    "                    <!--HAHAHAHA!-->\n" +
+    "\n" +
+    "                    \n" +
+    "\n" +
+    "\n" +
     "                    <!--relation of relations is multiplicative / defined in the charter-->\n" +
     "                    <!--CATEGORY THEORY 2-CATEGORY .. recursive validation-->\n" +
     "                </div>\n" +
@@ -3932,13 +3992,19 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    <div class=\"container\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-8\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
     "                <p style=\"color:gray;font-style:italic\">COMMUNITY PLANNING AROUND THE ORGANIZATION OF LOCALIZED RESPONSIBILITY SETS</p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Action Potiental From Protocol.</p>\n" +
     "                <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll><b>Project Charter</b></a></p>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-sm-4\" style=\"text-align:right\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                    <div style=\"margin-left:15px;\">\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <div hljs hljs-language=\"javascript\"  hljs-source=\"projectCharterModel\"></div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -12015,6 +12081,7 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "		                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "		                            <div class=\"container\">\n" +
     "		                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"content/{{item.id}}\">{{item.title}}</h1>\n" +
+    "                                        <h5 style=\"color:white\">Content</h5>\n" +
     "		                            </div>\n" +
     "		                        </div>\n" +
     "		                    </div>\n" +

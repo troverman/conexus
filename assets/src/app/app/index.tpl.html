@@ -18,32 +18,44 @@
                 <div style="float:right;text-align:right">
                     <i style="" ng-click="$event.stopPropagation();cardDetailToggle(app);" class="fa fa-ellipsis-v"></i>
                 </div>
+
+
                 <!--PROTOCOLS.. VIEWS.. (REACT ELEMETS RENDERED FROM CHAIN)-->
                 <!--GLOBAL ELEMENTS.. NAV.. MEMBER NAV (ADDITIONAL TABS..).. PROJECT PLUGIN..-->
                 <!--UI EXTENSIONS-->
                 <!--UI INTEROP-->
                 <!--OWN LANGUAGE TO COMPILE TO AGNOSTIC FRONTEND JS.. NATIVE APP?? .. GOTTA-->
+
+
                 <!--
                 <div>
                     <img class="card-avatar" ng-src="{{app.user.avatarUrl}}" src="{{app.user.avatarUrl}}" err-src="/images/avatar.png">
                     <a style="display:inline" href="member/{{app.user.username}}"><span style="font-weight:800">{{app.user.username}}</span></a>
                 </div>
                 -->
+
                 <!--
                 <div class="spacing-10"></div>
                 <p><a ng-repeat="tag in app.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag}} </a></p>
                 <div class="spacing-10"></div>
-                <div><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></div>
                 -->
+
+                <!--Fixed for core?-->
+                <p><b>Enable</b></p>
+                <md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch>
+                <div class="spacing-10"></div>
+                <div><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></div>
+                <div class="spacing-10"></div>
+
+                <!--INHERITANCE; VERB APPS REQUIRE ITEMS ETC-->
                 <div hljs hljs-language="javascript" hljs-source="app.protocols"></div>
             </div>
-            <!--
+            <!--CONETENT..? -->
             <div class="card-footer">
                 <a href="#" ng-click="createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.reactions.plus}} like </a> 
                 <a href="#" ng-click="createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.reactions.minus}} dislike </a>
                 <a href="#" ng-click="reply(app)"><i class="fa fa-comment-o"></i> comment </a>
             </div>
-            -->
         </div>
     </div>
     <div class="spacing-50"></div>

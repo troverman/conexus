@@ -952,7 +952,7 @@ angular.module( 'conexus.developers', [
         getSome: "function(){return true}"
     }, null, 4);
 
-    $scope.newOrderModel = 'var newOrderModel = '+JSON.stringify([{
+    $scope.newOrderModel = JSON.stringify([{
             setAlpha:{UNIVERSALTOKEN:1},
             setBeta:{'CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+ADDRESS':1}, 
             type:'ONBOOK', 
@@ -973,7 +973,7 @@ angular.module( 'conexus.developers', [
         },
     ], null, 4);
 
-    $scope.orderBookTensor = 'var orderBookTensor = '+JSON.stringify({
+    $scope.orderBookTensor = JSON.stringify({
         CRE8:{
             BTC:{orderBook:[]},
             ETH:{orderBook:[]},
@@ -998,14 +998,8 @@ angular.module( 'conexus.developers', [
 
     console.log($scope.actionTokenization)
 
-    $scope.metaModel = 'var filter = '+JSON.stringify({
-        filter:[{
-            'obj': 'param'
-        }],
-        limit: 10,
-        skip: 10,
-        sort: 'param DESC || ASC'
-    }, null, 4);
+    //TODO FACTORIZATION OF COMMON MODEL ELEMENTS.. 
+    //$scope.metaModel = JSON.stringify({}, null, 4);
 
 
     //is this it?
@@ -1057,7 +1051,7 @@ angular.module( 'conexus.developers', [
         chain:'OR'
     }];
 
-    $scope.queryModel = 'var queryModel = '+JSON.stringify([{
+    $scope.queryModel = JSON.stringify([{
         filter:[{
             model:'Association, Task, Project',//Association, Task, Project ..
             modelParam:'association, id, location, query, tag, ...',//'association, id, location, query, tag, urlTitle',
@@ -1081,7 +1075,9 @@ angular.module( 'conexus.developers', [
         chain:'logic [\'AND\',\'OR\']'
     }], null, 4);
 
-    $scope.actionModel = 'var actionModel = '+JSON.stringify({
+    $scope.metaModel = $scope.queryModel
+
+    $scope.actionModel = JSON.stringify({
         address: {type: 'string'},
         information: {type: 'json'},
         createdAt: {type: 'datetime'},
@@ -1092,12 +1088,12 @@ angular.module( 'conexus.developers', [
         creator: {type: 'string'},
     }, null, 4);
 
-    $scope.appModel = 'var appModel = '+JSON.stringify({
+    $scope.appModel = JSON.stringify({
         address: {type: 'string'},
         protocols: {},
     }, null, 4);
 
-    $scope.associationModel = 'var associationModel = '+JSON.stringify({
+    $scope.associationModel = JSON.stringify({
         associatedModels: [
             {type:"MODELTYPE", address:"ADDRESS"},
             {type:"MODELTYPE", address:"ADDRESS"}
@@ -1107,7 +1103,7 @@ angular.module( 'conexus.developers', [
         }
     }, null, 4);
 
-    $scope.blockModel = 'var blockModel = '+JSON.stringify({
+    $scope.blockModel = JSON.stringify({
         txCount: {type: 'string'},
         height: {type: 'string'},
         minedBy: {type: 'string'},
@@ -1118,7 +1114,7 @@ angular.module( 'conexus.developers', [
         size: {type: 'string'},
     }, null, 4);
 
-    $scope.contentModel = 'var contentModel = '+JSON.stringify({
+    $scope.contentModel = JSON.stringify({
         id: {type: 'string'},
         title: {type: 'string'},
         content: {type: 'string'},
@@ -1131,7 +1127,7 @@ angular.module( 'conexus.developers', [
         createdAt: {type: 'datetime'},
     }, null, 4);
 
-    $scope.contentQuery = 'var query = '+JSON.stringify({
+    $scope.contentQuery = JSON.stringify({
         filter:[{
             id: {'equals': ''},
             title: {'contains': ''},
@@ -1147,7 +1143,9 @@ angular.module( 'conexus.developers', [
         sort:'createdAt DESC',
     }, null, 4);
 
-    $scope.followerModel = 'var followerModel = '+JSON.stringify({
+    $scope.dataModel = JSON.stringify({id:'string', data:'binary'}, null, 4);
+    
+    $scope.followerModel = JSON.stringify({
         id: {type: 'string'},
         followed: {
             model: 'user',
@@ -1157,7 +1155,7 @@ angular.module( 'conexus.developers', [
         }
     }, null, 4);
 
-    $scope.itemModel = 'var itemModel = '+JSON.stringify({
+    $scope.itemModel = JSON.stringify({
         id: {type: 'string'},
         title: {type: 'string'},
         content: {type: 'string'},
@@ -1170,12 +1168,12 @@ angular.module( 'conexus.developers', [
         owner: {type: 'json'}
     }, null, 4);
 
-    $scope.locationModel = 'var locationModel = '+JSON.stringify({
+    $scope.locationModel = JSON.stringify({
         creator: {type: 'string'},
         location: {type: 'json'},
     }, null, 4);
 
-    $scope.memberModel = 'var memberModel = '+JSON.stringify({
+    $scope.memberModel = JSON.stringify({
         id: {type: 'string'},
         avatarUrl: {type: 'string',},
         coverUrl: {type: 'string'},
@@ -1200,7 +1198,7 @@ angular.module( 'conexus.developers', [
         passports: { collection: 'Passport', via: 'user' }
     }, null, 4);
 
-    $scope.notificationModel = 'var notificationModel = '+JSON.stringify({
+    $scope.notificationModel = JSON.stringify({
         id: {type: 'string'},
         user: {model: 'user'},
         type: {type: 'string'},
@@ -1209,7 +1207,7 @@ angular.module( 'conexus.developers', [
         isRead: { type: 'boolean'}
     }, null, 4);
 
-    $scope.orderModel = 'var orderModel = '+JSON.stringify({
+    $scope.orderModel = JSON.stringify({
         id: {type: 'string'},
         creator: {type: 'string'},
         status: {type: 'string'},
@@ -1219,13 +1217,13 @@ angular.module( 'conexus.developers', [
         createdAt: {type: 'string'},
     }, null, 4);
 
-     $scope.orderQuery = 'var query = '+JSON.stringify({
+     $scope.orderQuery = JSON.stringify({
         limit: 10,
         skip:0,
         sort:'createdAt DESC',
     }, null, 4);
 
-    $scope.passportModel = 'var passportModel = '+JSON.stringify({
+    $scope.passportModel = JSON.stringify({
         id: {type: 'string'},
         protocol: { type: 'alphanumeric'},
         password: { type: 'string', minLength: 8 },
@@ -1235,7 +1233,7 @@ angular.module( 'conexus.developers', [
         user: { model: 'User',}
     }, null, 4);
 
-     $scope.projectModel = 'var projectModel = '+JSON.stringify({
+     $scope.projectModel = JSON.stringify({
         id: {type: 'string'},
         title: {type: 'string'},
         description: {type: 'string'},
@@ -1249,21 +1247,72 @@ angular.module( 'conexus.developers', [
         info: {type: 'json'},
     }, null, 4);
 
-    $scope.projectCharterModel = 'var projectCharterModel = '+JSON.stringify({
-        id: {type: 'string'},
-        project: {type: 'string'},
-        info: {type: 'json'},
+
+    //SIMPLY PART OF THE PROJECT..
+    //DEPRECIATE
+    $scope.projectCharterModel = JSON.stringify({
+        membership:{
+            types:[{
+                title:'Member',
+                permissions:[{reputationMultiplier:1}],
+                requireValidation:true,
+                membershipValidationThreshold:[{
+                    context:'GENERAL', 
+                    amount:'{totalMemberRep}/100',
+                }]
+            },{
+                title:'Creator',
+                permissions:[],
+                requireValidation:true,
+                membershipValidationThreshold:[{context:'{project}', amount:'{totalMemberRep}'}]
+            }],
+        },
+        validation:{
+            self:{},
+            content:{reputationDecayFunction:{}},
+            item:{reputationDecayFunction:{}},
+            member:{},
+            order:{},
+            project:{},
+            task:{},
+            time:{},
+            transaction:{
+                manifolds:[],
+                tokens:[],
+                reputationDecayFunction:[{}],
+                validationThreshold:[{context:'{project}', amount:'{totalMemberRep}'}]
+            },
+            validation:{
+                self:{},
+                content:{},
+                item:{},
+                member:{},
+                order:{},
+                project:{},
+                task:{},
+                time:{},
+                transaction:{},
+                validation:{},
+            },
+            appSpecificModel:{},
+        },
+        manifolds:[{
+            title:'{project}+',
+            description:'',
+            mintingLogic:'{app:id}',
+        }],
+        tokens:[],
     }, null, 4);
 
-    $scope.projectMemberModel = 'var projectMemberModel = '+JSON.stringify({
+    $scope.projectMemberModel = JSON.stringify({
         id: {type: 'string'},
         project: {model: 'project'},
         user: {model: 'user'},
     }, null, 4);
 
-    $scope.protocolModel = 'var protocolModel = '+JSON.stringify({"protocol":"function(){}"}, null, 4);
+    $scope.protocolModel = JSON.stringify({"protocol":"function(){}"}, null, 4);
 
-    $scope.reactionModel = 'var reactionModel = '+JSON.stringify({
+    $scope.reactionModel = JSON.stringify({
         id: {type: 'string'},
         amount: {type: 'string'},
         type: {type: 'string'},
@@ -1272,7 +1321,7 @@ angular.module( 'conexus.developers', [
         reactions: {type: 'json'}
     }, null, 4);
 
-    $scope.searchModel = 'var searchModel = '+JSON.stringify({
+    $scope.searchModel = JSON.stringify({
         filter:[{
             obj: 'param',
             model: 'CONTENT'
@@ -1282,7 +1331,7 @@ angular.module( 'conexus.developers', [
         sort: 'createdAt DESC'
     }, null, 4);
 
-    $scope.taskModel = 'var taskModel = '+JSON.stringify({
+    $scope.taskModel = JSON.stringify({
         id: {type: 'string'},
         title: {type: 'string'},
         content: {type: 'string'},
@@ -1293,7 +1342,7 @@ angular.module( 'conexus.developers', [
         reactions: {type: 'json'}
     }, null, 4);
 
-    $scope.timeModel = 'var timeModel = '+JSON.stringify({
+    $scope.timeModel = JSON.stringify({
         id: {type: 'string'},
         amount: {type: 'string'},
         content: {type: 'string'},
@@ -1305,14 +1354,14 @@ angular.module( 'conexus.developers', [
         reactions: {type: 'json'}
     }, null, 4);
 
-    $scope.tokenModel = 'var tokenModel = '+JSON.stringify({
+    $scope.tokenModel = JSON.stringify({
         string: {type: 'string'},
         protocols:{type:'json'},
         logic:{type:'json'},
         information:{type:'json'}
     }, null, 4);
 
-    $scope.transactionModel = 'var transactionModel = '+JSON.stringify({
+    $scope.transactionModel = JSON.stringify({
         id: 'string',
         to: 'address',
         from: 'address',
@@ -1321,19 +1370,19 @@ angular.module( 'conexus.developers', [
         content: 'transation content'
     }, null, 4);
 
-    $scope.transactionQuery = 'var query = '+JSON.stringify({
+    $scope.transactionQuery = JSON.stringify({
         limit: 10,
         skip:0,
         sort:'createdAt DESC',
     }, null, 4);
 
-    $scope.txModel = 'var txModel = '+JSON.stringify({
+    $scope.txModel = JSON.stringify({
         addressFrom: {type: 'string'},
         addressTo: {type: 'string'},
         data: {type: 'string'}
     }, null, 4);
 
-    $scope.validationModel = 'var validationModel = '+JSON.stringify({
+    $scope.validationModel = JSON.stringify({
         id: {type: 'string'},
         associatedModels: {type: 'json'},
         content: {type: 'string'},
@@ -1345,7 +1394,7 @@ angular.module( 'conexus.developers', [
         validationModels: {type: 'json'},
     }, null, 4);
 
-    $scope.validationQuery = 'var query = '+JSON.stringify({
+    $scope.validationQuery = JSON.stringify({
         limit: 10,
         skip:0,
         sort:'createdAt DESC',

@@ -1714,7 +1714,7 @@ angular.module( 'conexus.nav', [
 
     $scope.timerFunction = function(time){
         $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
-        console.log($scope.timeModel.amount)
+        //console.log($scope.timeModel.amount)
     };
     $scope.timer = setInterval(function(){$scope.timerFunction(1)}, 1000);
 

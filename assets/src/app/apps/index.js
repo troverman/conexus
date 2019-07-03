@@ -15,9 +15,23 @@ angular.module( 'conexus.apps', [
 
 .controller( 'AppsController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', function AppsController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel ) {
     
+
+    //APPS AS PROTOCOLS.. 
     $scope.apps = [
-        {title:'CRE8 CORE', description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'},
-        //{title:'CRE8 CORE MAPPING', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:[]},
+
+        //{title:'CRE8 CORE', description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'},
+        
+        {title:'STRUCTURE', description:'CRE8 CORE STRUCTURE APP', tags:'CRE8,CORE,STRUCTURE'},
+        {title:'LANGUAGE', description:'CRE8 CORE LANGUAGE APP', tags:'CRE8,CORE,LANGUAGE'},
+        {title:'CONGURENCE', description:'CRE8 CORE CONGURENCE APP', tags:'CRE8,CORE,CONGURENCE'},
+        {title:'MANIFOLD', description:'CRE8 CORE MANIFOLD APP', tags:'CRE8,CORE,MANIFOLD'},
+        {title:'CONNECTION', description:'CRE8 CORE CONNECTION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
+
+        {title:'CREDIT', description:'CREDIT MANIFOLD APP', manifold:'+CREDIT+[INTEREST], +CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET]', tags:'CRE8,CORE,MANIFOLD,CREDIT'},
+        {title:'FUTURE', description:'FUTURE MANIFOLD APP', manifold:'+FUTURE+[ASSETSET]+[DATE]', tags:'CRE8,CORE,MANIFOLD,FUTURE'},
+        {title:'OPTION', description:'OPTION MANIFOLD APP', manifold:'+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] ', tags:'CRE8,CORE,MANIFOLD,OPTION'},
+        {title:'SPONSOR', description:'SPONSOR MANIFOLD APP', manifold:'+SPONSOR+[NAMESPACE]', tags:'CRE8,CORE,MANIFOLD,SPONSOR'},
+
         //{title:'CRE8 CORE ASSOCIATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
         //{title:'CRE8 CORE CONTENT', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
         //{title:'CRE8 CORE ITEM', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
@@ -33,6 +47,7 @@ angular.module( 'conexus.apps', [
         //{title:'CRE8 CORE TRANSACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
         //{title:'CRE8 CORE VALIDATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
         //ITEM APPS UTILITIZE THE ACTION MODEL.. HAVE MANIFOLDS SUCH AS WEAR, USE, CONSUME --> WATER AS ITEM :) YAY :)) +
+
         {title:'UNIVERSAL TOKEN', description:'Universal Token, an eglatarian initalization for value map creation', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
         {title:'Machine Learning Tokenization', description:'', tags:'Machine,ai,container,intellligence,pattern'},
         {title:'Location Tokenization', description:'Location Tokenization; A Space Time Mapping', tags:'USD,bank,finance,fiat,authentication'},
