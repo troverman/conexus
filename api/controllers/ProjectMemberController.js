@@ -163,7 +163,7 @@ module.exports = {
 				}],
 				tokens:[],
 
-			},
+			};
 
 			var model = {
 				project: req.param('project'),
