@@ -14,12 +14,9 @@
 		    </div>
             <div class="member-card-info" style="padding:16px;height:auto">
 		        <h4 ng-click="$event.stopPropagation()"><a href="member/{{member.user.username}}">{{member.user.username}}</a></h4>
-		        <p style="font-size:13px;"><a href="/member/{{member.user.username}}/projects">{{member.user.projectCount || 0}} Projects</a> | <a href="/member/{{member.user.username}}/followers">{{member.user.followerCount || 0}} Followers</a> | <a href="/member/{{member.user.username}}/following">{{member.user.followingCount || 0}} Following</a>
-
-		       	<p style="color:gray">Total Reputation | {{member.user.totalWork || 0}}</p>
+		       	<p style="color:gray">{{member.status}} {{member.type}}</p>
 		        <p style="color:gray">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>
                 <p style="color:gray">{{member.user.status}} Offline</p>
-
 		    </div>
 		</div>
 	</div>

@@ -49,6 +49,8 @@
 			        <div style="margin-top: auto;margin-bottom: auto;">
 			        	<div style="padding:15px;">
 				            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;text-transform: capitalize;">{{notification.title}}</h1>
+				            <!--<h5 style="color:white" am-time-ago="notification.createdAt"></h5>-->
+
 				        </div>
 			        </div>
 			    </div>
@@ -70,6 +72,10 @@
 	        	<!--<h5 style="text-transform: capitalize;">{{notification.title}}</h5>-->
 
 	            <!--if type is new follower; follow btn; embeded function-->
+
+				<p style="display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px" am-time-ago="notification.createdAt"></p>
+				<div class="spacing-10"></div>
+
 	            <div ng-if="notification.type=='FOLLOW'">
 		          	<p><span style="color:gray">{{notification.content}}</span></p>
 	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.username}}">
@@ -105,19 +111,22 @@
 
 	            <div ng-if="notification.type=='VALIDATION'">
 	            	<p><span style="color:gray">{{notification.content}}</span></p>
-		            <div layout="">
+		            <div ng-click="$event.stopPropagation();" layout="">
+		            	<!--FOR SPECIIC CONTEXT IN PROJECT CHARTER-->
+		            	<!--DEFATO, UNIDIM NEW MEMBER VALIDATE-->
 	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-	                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>
+	                    <div flex="70" layout="" layout-align="center center"><md-slider step="0.1" flex="" md-discrete="" ng-model="notification.newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider></div>
+	                    <!--TODO INTI notification.newValidation.validation.general-->
+	                    <div flex="20" layout="" layout-align="center center"><span class="md-body-1">{{notification.newValidation.validation.general}} | {{notification.newValidation.reputation || 0}}</span></div>
+	                </div>
+	                <div ng-click="$event.stopPropagation();">
+	                	<div class="spacing-10"></div>
+	                	<h5>Content</h5>
+	                	<text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
 	                </div>
 	                <div class="spacing-10"></div>
-	                <h5>Content</h5>
-	                <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-	                <div class="spacing-10"></div>
-	                <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+	                <button ng-click="createValidation(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
 	            </div>
-
-                <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="notification.createdAt"></p>
 
 	        </div>
 	    </div>

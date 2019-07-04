@@ -39,12 +39,11 @@ angular.module( 'conexus.notifications', [
 
     $scope.filterSet = {
         type:['FOLLOW','REACT','CONTENT','VALIDATE','TRANSACTION','STATUS','INVITE'], 
-        //tags:['troverman','follow'],
-        //isRead:true,
+        tags:['troverman','follow'],
+        isRead:true,
     };
 
     //VALIDATION IS THE MOTION;; VALIDATION vs MOTION
-
     //CREATE FOLLOW (ED),
     //CREATE REACT (MY CONTENT),
     //CREATE CONTENT (MY FOLLOWERS, MY CONTENT, MY PROJECT), 

@@ -350,19 +350,24 @@ module.exports = {
 						{type:'PROJECT', address:project.id},
 						{type:'MEMBER', address:model.user},
 					],
-					validation: {general:1}
+					validation: {general:100}
 				};
 
 				//Validation.create(validationModel).then(function(){
 					//console.log('VALIDATIONCREATE')
 				//});
 
+
+				//...PROJECT MEMBER CAN HAVE DATA CONTAINED AS VALIDATION(PROJ-MEMBER)-VALIDATION? 
+				//(CHARTER) CONTEXT SPECIFIC UX IE TYPE.. 
 				var projectMemberModel = {
 					project: project.id,
 					user: model.user,
-					validation: {general:1}
+					validation: {general:100},
+					type:'Creator'
 				};
 
+				//LOL DEPRECIATE ProjctMember Data Model :0 --> FACTOR TO DO :)
 				ProjectMember.create(projectMemberModel).then(function(){
 					console.log('PROJECTMEMBERCREATE')
 				});

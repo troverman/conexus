@@ -74,21 +74,26 @@ exports.register = function (req, res, next) {
             //WOK ON FLOW :)
             if (req.body.order && req.body.order.length > 0){
                 console.log('THERE IS AN ORDER!', req.body.order);
-                var order = req.body.order;
+                
+                //var order = req.body.order;
                 //PROTECT FROM MALFORMED REQUESTS...
-                order.map(function(obj){
-                    obj.user = user.id;
-                    delete obj.$$hashKey;
-                    obj.setBeta.map(function(obj1){
-                    //REPLACE KEYS.. ADDRESS.. ETC
-                        obj1.replace('[ADDRESS]', user.id);
+
+                if (order.length > 0){
+                    order.map(function(obj){
+                        obj.user = user.id;
+                        delete obj.$$hashKey;
+                        console.log(obj)
+                        obj.setBeta.map(function(obj1){
+                        //REPLACE KEYS.. ADDRESS.. ETC
+                            obj1.replace('[ADDRESS]', user.id);
+                        });
+                        return obj;
                     });
-                    return obj;
-                });
-                //UPDATE ORDER.. VALUE MAP SPECIFICATIONS
-                Order.create(order).then(function(){
-                    next(null, user);
-                });
+                    //UPDATE ORDER.. VALUE MAP SPECIFICATIONS
+                    Order.create(order).then(function(){
+                        next(null, user);
+                    });
+                }
             }
 
             else{next(null, user);}

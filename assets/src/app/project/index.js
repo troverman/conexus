@@ -315,6 +315,8 @@ angular.module( 'conexus.project', [
         if($scope.currentUser){
             $scope.newMember.user = $rootScope.currentUser.id;
             $scope.newMember.project = project.id;
+            //TODO: default type -- charter for ux 
+            $scope.newMember.type = 'Member';
             MemberModel.create($scope.newMember).then(function(model) {
                 $rootScope.confirm = $scope.newMember;
                 $rootScope.confirm.modelType = 'PROJECTMEMBER';
@@ -1185,6 +1187,7 @@ angular.module( 'conexus.project', [
     $sailsSocket.subscribe('projectmember', function (envelope) {
         switch(envelope.verb) {
             case 'created':
+                console.log(envelope)
                 $scope.members.unshift(envelope.data);
                 break;
         }

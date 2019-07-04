@@ -207,105 +207,188 @@ module.exports = {
 
 	},
 
-	//TODO | SECURITY
-	//KINF OF A MESS -- true -- haa
-	//DEDICATE the 4th to this .. 
-
 	create: function (req, res) {
-		var model = {
-			content: req.param('content'),
-			reputation: req.param('reputation'), //SAVED USER REP
-			user: req.param('user'),
-			validation: req.param('validation'),
-			associatedModels: req.param('associatedModels'),
-			//PATCH
-			reactions: {plus:0,minus:0},
-		};
+
+		//SECURITY AND PARSE REQUEST 
+
+		//GET USER IN CALL
+		User.find({id:model.user}).then(function(userModels){
+
+			//TODO: SECURITY
+			//VALIDATE REQUEST...
+			//CHECK IF SECRET IN CALL ETC
+			//CHECK VALIDATED SESSION IN PEER ...
+			//CAN ONLY CREATE VALIDATION FOR MY USER.ID (OFC)
+			//if req.session.id == userModels[0].id
+
+			var model = {
+
+				//BY CHARTER.. ? 
+				type: req.param('type'),
+
+				content: req.param('content'),
+				reputation: req.param('reputation'),
+				user: req.param('user'),
+				validation: req.param('validation'),
+				associatedModels: req.param('associatedModels'),
+				reactions: {plus:0,minus:0},
+
+			};
 
 
-		//SHOULD DO ANOTHER FIND.. NON RELIENT ON FRONTEND DATA
-		User.find({id:model.user}).then(function(userModel){
+			//TODO: ABSTRACT BASED ON ASSOCIATED MODEL TYPES 
 
-
+			//BUILD USER REPUTATION
 			var reputation = {};
+			//TODO: BETTER MAPPING STORAGE.. 
 			//Time.find({})//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
-			//FIND DIMENSIONS .. MATCH WITH FRONTEND INPUT
 			for (x in Object.keys(model.validation)){
-				//TODO | BETTER..
-				if (userModel[0].reputation[Object.keys(model.validation)[x]]){
-					//GENERAL SHOULD BE IN THE MAPPING --> DEPECRIETE THIS / FORMALIZE THE GENERAL REP DIMENSION & OTHER MAPPIN | WIP
-					if (Object.keys(model.validation)[x] == 'general'){reputation[Object.keys(model.validation)[x]] = userModel[0].totalWork;}
-					else{reputation[Object.keys(model.validation)[x]] = userModel[0].reputation[Object.keys(model.validation)[x]]}
+
+				//IF THE USER HAS REP IN THE CONTEXT
+				if (userModels[0].reputation[Object.keys(model.validation)[x]]){
+
+					//TODO: GENERAL REP
+					if (Object.keys(model.validation)[x] == 'general'){
+						reputation[Object.keys(model.validation)[x]] = userModels[0].totalWork;
+					}
+					else{
+						reputation[Object.keys(model.validation)[x]] = userModels[0].reputation[Object.keys(model.validation)[x]];
+					}
 
 				}
+
+				//ELSE THE REPUTATION IS ZERO
 				else{reputation[Object.keys(model.validation)[x]] = 0;}
+
 			}
-
 			model.reputation = reputation;
-
+			
 			console.log('CREATE VALIDATION', model);
 
-
-
-
+			//CREATE VALIDATION..
 			Validation.create(model)
 			.exec(function(err, validation) {
 				if (err) {return console.log(err);}
 				else {
-					console.log(validation);
+
+					//PUBLISH AND RETURN THE NEW VALIDATION
 					Validation.publishCreate(validation);
 					res.json(validation);
 
+					//BUILD AND UPDATE OR CREATE AN ASSOCIATION THAT REFLECT NEW VALIDATION
+					function associationBuild(model){
+						var deferred = Q.defer();
+
+						//TODO: QUERY..
+						//TODO: master getSome.....
+
+						Validation.find({
+							associationModels:[
+								model.associationModels[0],
+								model.associationModels[1]
+							]
+						}).then(function(validationModels){
+
+							var associationModel = {
+								context: {},
+								associationModels: validation.associationModels,
+								//type.. --> charter.. 
+							};
 
 
+
+							for (x in validationModels){
+
+								//TEMP SIMPLE SUM
+								for (y in Object.keys(validationModels[x].validation)){
+									 var context = Object.keys(validationModels[x].validation)[y];
+									 associationModel[context] += validationModels[x].validation[context];
+								}
+
+
+								//TODO: ALL MATH .. ETC CAN BE AFFECTED BY PROJECT CHARTER.. 
+									//IF PROJECT IS IN ASSOCIATED MODELS
+
+								//TODO: MATH! :)
+								//MATH ON VALIDATION-VALIDATION--..-- PROPOGATION
+								//are there any VALIDATIONS???? CONNECTED
+								//DATA-DATA-VALIDATION
+								//Validation.find({associationModel:validationModels[x].id}).then(function(validationModels){
+									//if (validationModels.length == 0){}
+									//else{
+									//	for (x in validationModels){
+									//		associationBuild(validationModels[x])
+									//	}
+									//}
+								//});
+
+								//if (validationModel.type == 'VALIDATION'){
+								//	associationBuild(model).then(function(){
+								//		deferred.resolve(validationModels)
+								//	});
+								//}
+								//else{//deferred.resolve(validationModels)//}
+
+							}
+
+							//TEMP. SIMPLE AVERAGE
+							for (x in Object.keys(associationModel){
+								var context = Object.keys(associationModel)[x];
+						 		associationModel[context] = associationModel[context] / Object.keys(associationModel).length;
+						 	}
+
+						 	deferred.resolve(associationModel)
+
+
+						});
+						return deferred.promise;
+					};
+
+					//associationBuild(validation).then(function(associationModel){
+						//TODO..
+						//assosiatedModels 1 & 2
+						Association.find({}).then((associationModels)=>{
+							if (associationModels.length == 0){
+								Association.create(associationModel).then((newAssociationModel)=>{
+									Association.publishCreate(newAssociationModel);
+									console.log('CREATE ASSOCIATION', newAssociationModel)
+								});
+							}
+							else{
+								var updatedModel = associationModels[0];
+								Association.update({id:associationModels[0].id}, updatedModel).then((newAssociationModel)=>{
+									Association.publishUpdate(newAssociationModel);
+									console.log('UPDATE ASSOCIATION', newAssociationModel)
+								});
+							}
+						});
+					//});
+
+					//SEND NOTIFICATION BASED ON NEW VALIDATION.. 
+
+					//BASED ON RULES ASSOCIATED MODELS .. AND NOTIFICATION SETTINGS 
 
 					//TODO: VALIDATION NOTIFICATION
 					var notificationModel = {
-						user: userModel[0].user,
+						user: userModels[0].user,
 						type: 'VALIDATION',
 						title: 'New Validation',
 						content:'New Validation for associatedModels',
-						info:{user: userModel[0], associationModels:[]},
+						info:{user: userModels[0], associationModels:[]},
 						priority:75,
 					};
 
+					console.log('CREATE NOTIFICATION', notificationModel)
 
-
-					//console.log('CREATE NOTIFICATION', notificationModel)
-
-					//Notification.create(notificationModel).then(function(notification){
-					//	Notification.publishCreate(follower[0]);
-					//});
-
-					//TODO: MAINTAINCE FXN TO CALC ASSOCIATION FROM VALIDATIONS --> ON CREATE VALIDATION
-
-					//THEN CREATE OR UPDATE ASSOCIATION
-					//COULD JUST STORE IN MODEL..? ? --> PROB BEST THAT IT IS DEPRECIATED FROM MODEL STORAGE AND NEED TO JOIN --> REFACTOR AT SOME POINT --> WE JUST HAVE TO KEEP RUNNING --> MAY SEEM OVERWHELIMG RGIHT NOW -- WITH CONTINUAL MOVMENT WE WILL CLIMB 
-
-					//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
-					//TODO: FIND
-
-
-
-					Association.find().then((associationModels)=>{
-						if (associationModels.length == 0){
-							Association.create().then((associationModel)=>{
-								Association.publishCreate(associationModel);
-								console.log('CREATE ASSOCIATION', associationModel)
-							});
-						}
-						else{
-							//ASSOCIATION IS AVERAGE WEIGHTED VALIDATION
-							var updatedModel = associationModels[0];//{}; //AVERAGE OF VALIDATIONS
-							Association.update({id:associationModels[0].id}, updatedModel).then((associationModel)=>{
-								Association.publishUpdate(associationModel);
-								console.log('UPDATE ASSOCIATION', associationModel)
-							});
-						}
+					Notification.create(notificationModel).then(function(notification){
+						Notification.publishCreate(follower[0]);
 					});
+
+
 				}
 			});
 		});
+
 	},
 
 };

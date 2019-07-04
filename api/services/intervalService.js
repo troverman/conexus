@@ -93,6 +93,8 @@ module.exports = {
 
 	//TODO: MOVE OUT OF INTERVAL
 	//TODO: TOKENIZE LOCATION | EXERCISE
+	//TODO: MODULATE TO APP INPUT .. IE INTERVAL CONTRACT.. ON LOGIN OPERAND -- ... 
+	//'''ORACLE''' to APIS -- > CONTINUOUS WEBSOCKET INPUT TO TOKEN LAYER
 	getData: function(req){
 
 		User.findOne(req.id)

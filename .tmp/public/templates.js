@@ -9829,6 +9829,8 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        	<div style=\"padding:15px;\">\n" +
     "				            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;text-transform: capitalize;\">{{notification.title}}</h1>\n" +
+    "				            <!--<h5 style=\"color:white\" am-time-ago=\"notification.createdAt\"></h5>-->\n" +
+    "\n" +
     "				        </div>\n" +
     "			        </div>\n" +
     "			    </div>\n" +
@@ -9850,6 +9852,10 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	        	<!--<h5 style=\"text-transform: capitalize;\">{{notification.title}}</h5>-->\n" +
     "\n" +
     "	            <!--if type is new follower; follow btn; embeded function-->\n" +
+    "\n" +
+    "				<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px\" am-time-ago=\"notification.createdAt\"></p>\n" +
+    "				<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "	            <div ng-if=\"notification.type=='FOLLOW'\">\n" +
     "		          	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
     "	            	<a ng-click=\"$event.stopPropagation()\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"/member/{{notification.info.username}}\">\n" +
@@ -9885,19 +9891,22 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "	            <div ng-if=\"notification.type=='VALIDATION'\">\n" +
     "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
-    "		            <div layout=\"\">\n" +
+    "		            <div ng-click=\"$event.stopPropagation();\" layout=\"\">\n" +
+    "		            	<!--FOR SPECIIC CONTEXT IN PROJECT CHARTER-->\n" +
+    "		            	<!--DEFATO, UNIDIM NEW MEMBER VALIDATE-->\n" +
     "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
-    "	                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
+    "	                    <div flex=\"70\" layout=\"\" layout-align=\"center center\"><md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"notification.newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider></div>\n" +
+    "	                    <!--TODO INTI notification.newValidation.validation.general-->\n" +
+    "	                    <div flex=\"20\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{notification.newValidation.validation.general}} | {{notification.newValidation.reputation || 0}}</span></div>\n" +
+    "	                </div>\n" +
+    "	                <div ng-click=\"$event.stopPropagation();\">\n" +
+    "	                	<div class=\"spacing-10\"></div>\n" +
+    "	                	<h5>Content</h5>\n" +
+    "	                	<text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
     "	                </div>\n" +
     "	                <div class=\"spacing-10\"></div>\n" +
-    "	                <h5>Content</h5>\n" +
-    "	                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
-    "	                <div class=\"spacing-10\"></div>\n" +
-    "	                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "	                <button ng-click=\"createValidation(notification.newValidation)\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
     "	            </div>\n" +
-    "\n" +
-    "                <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"notification.createdAt\"></p>\n" +
     "\n" +
     "	        </div>\n" +
     "	    </div>\n" +
@@ -11135,12 +11144,9 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "		    </div>\n" +
     "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
     "		        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{member.user.username}}\">{{member.user.username}}</a></h4>\n" +
-    "		        <p style=\"font-size:13px;\"><a href=\"/member/{{member.user.username}}/projects\">{{member.user.projectCount || 0}} Projects</a> | <a href=\"/member/{{member.user.username}}/followers\">{{member.user.followerCount || 0}} Followers</a> | <a href=\"/member/{{member.user.username}}/following\">{{member.user.followingCount || 0}} Following</a>\n" +
-    "\n" +
-    "		       	<p style=\"color:gray\">Total Reputation | {{member.user.totalWork || 0}}</p>\n" +
+    "		       	<p style=\"color:gray\">{{member.status}} {{member.type}}</p>\n" +
     "		        <p style=\"color:gray\">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>\n" +
     "                <p style=\"color:gray\">{{member.user.status}} Offline</p>\n" +
-    "\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -11300,6 +11306,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "				<div class=\"row\">\n" +
     "                    <div class=\"col-sm-1 col-xs-2\"><a ng-click=\"$event.stopPropagation();\" href=\"/project/{{project.urlTitle}}\"><img style=\"width:100%;height:100%\" src=\"{{project.avatarUrl}}\"></a></div>\n" +
     "                    <div class=\"col-sm-11 col-xs-10\">\n" +
+    "                    	<!--TODO: ON CLICK RENDER ASSOCIATIONS.. DETAIL.. ETC VALIDATIONS.. SPECIFIC 'ITEM' FILTER THU CARDDETAIL-->\n" +
     "                        <h3 style=\"margin-top:0px\"><a ng-click=\"$event.stopPropagation();\" href=\"/project/{{project.urlTitle}}\">{{project.title}}</a></h3>\n" +
     "                        <div style=\"max-height:500px;overflow:scroll\"><span ng-bind-html=\"renderContent(project.description)\"></span></div>\n" +
     "                    </div>\n" +

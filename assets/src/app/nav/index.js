@@ -68,15 +68,13 @@ angular.module( 'conexus.nav', [
         $sailsSocket.subscribe('notification', function (envelope) {
             switch(envelope.verb) {
                 case 'created':
-
                     console.log(envelope)
                     //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
                     if ($rootScope.currentUser.id == envelope.data.user){
                         $rootScope.notificationCount++;
                         $scope.pop(envelope.data.title, envelope.data.info.username);
+                        $rootScope.notificationCount++;
                     }
-                    $rootScope.notificationCount++;
-                    
             }
         });
     }
@@ -1683,23 +1681,43 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
 
-    $scope.createValidation = function(){
+    //TODO.. creates as rootscope.. 
+    //FOR FRONEND REFACTOR.. EXPOSE GLOBAL CREATE FUNCTIONS..
+        //APP SPECIFIC INPUT AS WELL
+
+    $scope.createValidation = function(item){
         if ($rootScope.currentUser){
+
+            if (item){$scope.newValidation = item;}
+
             $scope.newValidation.user = $rootScope.currentUser.id;
+
             console.log($scope.newValidation);
+           
             if ($scope.newValidation.associatedModel){
+                
                 console.log($scope.newValidation.associatedModel)
+
+                //TODO: APPRECIATE ID VS ADDRESS.. 
                 $scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({
-                    type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].id,
+                    type:$scope.newValidation.associatedModel[0].type, 
+                    address:$scope.newValidation.associatedModel[0].id, 
+                    id:$scope.newValidation.associatedModel[0].id
                 });
-                //console.log($scope.newValidation);
+
+
                 ValidationModel.create($scope.newValidation).then(function(model) {
+
+
+                    //TODO UPDATE CONFIRM POPUP
                     $scope.confirm = $scope.newValidation;
                     $scope.confirm.model = 'VALIDATION';
                     $scope.newValidation = {};
                     $mdSidenav('validation').close();
                     setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                     setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+
+
                 });
             }
         }

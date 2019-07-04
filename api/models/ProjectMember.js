@@ -7,6 +7,8 @@ module.exports = {
 	attributes: {
 
         project: {model: 'project'},
+
+        //TODO: MEMBER.. RENAME
         user: {model: 'user'},
 
         //HOW MUCH OF A MEMBER ARE YOU.. 

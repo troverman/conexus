@@ -57,8 +57,73 @@ module.exports = {
 	},
 
 
+	function getSome(){
+
+	};
+
+
 	create: function (req, res) {
 
+		//RECURSIZE POPULATE..
+		//populateAssociations
+		//TODO.. await...
+		//TODO.. GENERAL GET SOME REQUEST.. COMPLEX QUERY. --> WILL USE SAME QUERY STRUCTURE INTERNALLY US WRITING DIFF CONTEXT SPECIFIC FXNS
+		//master getSome(complexFilter)
+		function getSome(model){
+			var deferred = Q.defer();
+
+			//TODO
+			if (model.type == 'MEMBER'){
+				User.find({id:model.id}).then(function(memberModels){
+					deferred.resolve(userModels[0])
+				});
+			}
+
+			if (model.type == 'PROJECT'){
+				Project.find({id:model.id}).then(function(projectmodles){
+					deferred.resolve(projectmodles[0]);
+				});
+			}
+
+			if (model.type == 'TASK'){
+				Member.find({id:model.id}).then(function(taskModels){
+					deferred.resolve(taskModels[0]);
+				});
+			}
+
+			if (model.type == 'TIME'){
+				Time.find({id:model.id}).then(function(timeModels){
+					deferred.resolve(timeModels[0]);
+				});
+			}
+
+			return deferred.promise;
+		};
+
+
+		//TODO: CREATE VALIDATION
+		//ALLIGN WITH VALIDATION CREATE! 
+		//CREATE ALL MODEL HELPER GET FUNCTIONS AND POPULATE BASED ON THE TWO YOU CAN GET IN THE ASSOCIATION MODELS QUERY ON CREATE VALIDAION
+		//var promises = [];
+		//for (x in newValidation.associatedModels){
+			//promises.push(getSome(newValidation.associatedModels[x].type));
+			//newValidation.associatedModels[x].type == 'PROJECT'
+		//}
+		//var promises = [];
+		//for (x in models){
+		//	promises.push(getTo(models[x]));
+		//	promises.push(getFrom(models[x]));
+		//}
+		//Q.all(promises).then((populatedModels)=>{
+		//	var sum = 0;
+		//	for (x in models){
+		//		models[x].to = populatedModels[sum];
+		//		sum++
+		//		models[x].from = populatedModels[sum];
+		//		sum++;
+		//	}
+		//	res.json(models);
+		//});
 
 		Project.find({id:req.param('project')}).then(function(projectModels){
 
@@ -73,6 +138,8 @@ module.exports = {
 				//PERMISSIONS...
 				membership:{
 					//ARE TYPE NEEDED? FOR FLEXABILITY YOU PLURALIST ! 
+					//BASICALLY.. REQUEST FOR PROJECT PERMISSIONS 
+					//(META VALIDATION CHARTER IS CAN NON REMEMBERS REQUEST SAY PROEJCT-TASK-TIME)
 					types:[
 						{
 							title:'Member',
@@ -168,30 +235,70 @@ module.exports = {
 			var model = {
 				project: req.param('project'),
 				user: req.param('user'),
-				//validation: 0
+
+				//EXTRA INFORMATION IN VALIDATION... TYPE IS A CONTEXT.. ? ---(SELF ORGANIZED BUNDLES OF CONTEXT --> MEMBER TYPE)
 				//TYPE --> HERE'S YA LIQUID DEMOCRACY --> VOTER 
 				type: req.param('type'),
 				//BASED ON CHARTER
 				status: 'PENDING'
 			};
 
-			//ACUTALLY MOTION TO JOIN.. THIS IS JOIN FIRST ASK QUESTIONS LATER.. RATHER A NOTIFICATION TO A NEW MEMBER.. 
+			//Validation.create(model).then(function(validation) {});
+
 			ProjectMember.create(model)
-			.exec(function(err, member) {
+			.exec(function(err, projectMember) {
 				if (err) {return console.log(err);}
 				else {
+
+					console.log('CREATE PROJECT MEMBER', model);
 
 					User.find({id:model.user}).then(function(userModels){
 						//projectModels[0].charter
 						ProjectMember.find({project:model.project}).then(function(projectMembers){
+
+							//TODO: USER --> MEMBER
+							projectMember.user = userModels[0];
+							
+							//REMOVE SELF NOTIFICATION.. LOL
+							projectMembers = projectMembers.filter(function(obj){
+							    return obj.user !== userModels[0].id;
+							});
+
+
+							//NOTIFICATION SETTINGS..
+							//TYPES OF ASSOCIATIONS
+							//MEMBER-PROJECT
+							//TASK-TIME
+							//TASK-PROJECT
+							//TIME-TASK-PROJECT
+							//TIME-TASK-
+							//VALIDATION-VALIDATION
+							//ALL COMBOS. . .
+
+							//NOTIFICATION RULES.. LOL
+							//	if associatedModels[0] || associatedModels[1] type == Member
+							//		-->check member notification settions
+							//	if associatedModels[0] || associatedModels[1] type == Member
+								//--> check project charter
+
+
+
 							for (x in projectMembers){
+
+								//USER.FIND --> IF USER NOTIFICATION PERMISSION
 								var notificationModel = {
-									user: projectMembers[x],
-									type: 'Request to Join',
-									content:'New Member, '+userModels[0].id +'is requesting membership validation for '+projectModels[0].id,
+									user: projectMembers[x].user,
+									type: 'VALIDATION',
+									title: 'Request to Join',
+									content:'New Member, '+userModels[0].username +' is requesting membership validation for '+projectModels[0].title,
+									priority: 100, //BASED ON PERMISSIONS
+									isRead: false,
+									info:{member:userModels[0], project:projectModels[0]},
 								};
+
 								Notification.create(notificationModel).then(function(notification){
-									Notification.publishCreate(notification[0]);
+									console.log('CREATE NOTIFICATION', notification);
+									Notification.publishCreate(notification);
 								});
 							}
 						});
@@ -200,8 +307,8 @@ module.exports = {
 							var projectCount = 0;
 							projectCount = projectMemberModel.length;
 							User.update({id:model.user}, {projectCount:projectCount}).then(function(user){});
-							ProjectMember.publishCreate(member);
-							res.json(member);
+							ProjectMember.publishCreate(projectMember);
+							res.json(projectMember);
 						});
 					});
 				}

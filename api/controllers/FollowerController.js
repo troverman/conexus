@@ -35,6 +35,17 @@ module.exports = {
 		});
 	},
 
+
+
+	//TODO:!!!
+	//MEMBER-MEMBER VALIDATION! 
+
+		//""FRIEND SHIP"" IS REPROCITY 
+		//MEMBER-->MEMBER
+		//MEMBER<--MEMBER
+
+			//MEMBER--MEMBER--VALIDATION
+
 	create: function (req, res) {
 
 		var model = {
@@ -69,9 +80,12 @@ module.exports = {
 						content:userModel[0].username+' started following you',
 						info:userModel[0],
 						priority:70,
+						isRead: false,
 					};
 
+					//USER.FIND --> IF USER NOTIFICATION PERMISSION
 					Notification.create(notificationModel).then(function(notification){
+						console.log('CREATE NOTIFICATION', notification);
 						Notification.publishCreate(notification);
 					});
 					
