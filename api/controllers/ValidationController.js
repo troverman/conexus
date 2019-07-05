@@ -302,7 +302,7 @@ module.exports = {
 								//TEMP SIMPLE SUM
 								for (y in Object.keys(validationModels[x].validation)){
 									 var context = Object.keys(validationModels[x].validation)[y];
-									 associationModel[context] += validationModels[x].validation[context];
+									 associationModel.context[context] += validationModels[x].validation[context];
 								}
 
 
@@ -332,9 +332,9 @@ module.exports = {
 							}
 
 							//TEMP. SIMPLE AVERAGE
-							for (x in Object.keys(associationModel){
-								var context = Object.keys(associationModel)[x];
-						 		associationModel[context] = associationModel[context] / Object.keys(associationModel).length;
+							for (x in Object.keys(associationModel.context)){
+								var context = Object.keys(associationModel.context)[x];
+						 		associationModel.context[context] = associationModel.context[context] / Object.keys(associationModel).length;
 						 	}
 
 						 	deferred.resolve(associationModel)
