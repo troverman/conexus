@@ -474,16 +474,6 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "                   	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>Date Of Birth</h5><input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Description</h5><text-angular ng-model=\"newAccountInformation.description\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular></div>\n" +
     "\n" +
-    "                	<!--\n" +
-    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Height</h5><input type=\"text\" ng-model=\"newAccountInformation.height\" placeholder=\"Height\" class=\"form-control\"></div>\n" +
-    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Eye Color</h5><input type=\"text\" ng-model=\"newAccountInformation.eyeColor\" placeholder=\"Eye Color\" class=\"form-control\"></div>\n" +
-    "                	<div style=\"padding:0px\" class=\"col-xs-3\"><h5>Sex</h5><input type=\"text\" ng-model=\"newAccountInformation.sex\" placeholder=\"Sex\" class=\"form-control\"></div>\n" +
-    "                	\n" +
-    "                	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>DNA</h5><input type=\"upload\" ng-model=\"newAccountInformation.dna\" placeholder=\"DNA\" class=\"form-control\"></div>\n" +
-    "                	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>Iris</h5><input type=\"upload\" ng-model=\"newAccountInformation.iris\" placeholder=\"Iris\" class=\"form-control\"></div>\n" +
-    "                	<div style=\"padding:0px\" class=\"col-xs-4\"><h5>Finger Print</h5><input type=\"upload\" ng-model=\"newAccountInformation.dna\" placeholder=\"Finger Print\" class=\"form-control\"></div>\n" +
-    "                	-->\n" +
-    "\n" +
     "					<button type=\"submit\" class=\"btn btn-default log-btn\">Save</button>\n" +
     "	                <div style=\"clear:both\"></div>\n" +
     "\n" +
@@ -541,7 +531,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?applications,programming,idea')\" class=\"imageContainerSmall\">\n" +
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "			        	<div class=\"container\">\n" +
+    "			        	<div style=\"padding:15px\">\n" +
     "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Connected Applications</h1>\n" +
     "				            <h5 style=\"color:white\">Applications in the CRE8 ecosystem</h5>\n" +
     "				        </div>\n" +
@@ -564,7 +554,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?history,code,logs')\" class=\"imageContainerSmall\">\n" +
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "			        	<div class=\"container\">\n" +
+    "			        	<div style=\"padding:15px\">\n" +
     "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Account History</h1>\n" +
     "				            <h5 style=\"color:white\">Logs of all your account's actions on the CRE8 network with detailed information.</h5>\n" +
     "				        </div>\n" +
@@ -586,7 +576,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?geometry,network,data')\" class=\"imageContainerSmall\">\n" +
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "			        	<div class=\"container\">\n" +
+    "			        	<div style=\"padding:15px\">\n" +
     "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Peer Network Contribution</h1>\n" +
     "				            <h5 style=\"color:white\">Mining & Machine Attention</h5>\n" +
     "				        </div>\n" +
@@ -609,7 +599,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?camera,privacy,watching,tracking,information')\" class=\"imageContainerSmall\">\n" +
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "			        	<div class=\"container\">\n" +
+    "			        	<div style=\"padding:15px\">\n" +
     "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Privacy</h1>\n" +
     "				            <h5 style=\"color:white\">Information Tracking & Notifications</h5>\n" +
     "				        </div>\n" +
@@ -634,7 +624,7 @@ angular.module("account/index.tpl.html", []).run(["$templateCache", function($te
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?passport,airport,travel,account,wallet')\" class=\"imageContainerSmall\">\n" +
     "			    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "			        	<div class=\"container\">\n" +
+    "			        	<div style=\"padding:15px\">\n" +
     "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Connected Accounts, Passports, & Wallets</h1>\n" +
     "				            <h5 style=\"color:white\">Connections</h5>\n" +
     "				        </div>\n" +
@@ -8014,20 +8004,8 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
     "                    <h5>Title</h5>\n" +
     "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    <!--TAGS ARE SELF ASSOCIATION - IMPLICT-->\n" +
-    "                    <h5>Tags <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newContent.tags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <div ng-if=\"associationsAreExpanded\">\n" +
-    "                        <div ng-repeat=\"tag in newContent.tags track by $index\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
-    "                            </div>\n" +
-    "                         </div>\n" +
-    "                    </div>\n" +
+    "                    \n" +
+    "                    <!--TAGS ARE COMPUTED SELF ASSOCATION-->\n" +
     "\n" +
     "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
@@ -9208,8 +9186,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                        </tags-input>\n" +
     "                    </div>\n" +
-    "                    \n" +
-    "\n" +
+    "        \n" +
     "                    <!--TODO-->\n" +
     "                    <!--FOR X IN TAGS-->\n" +
     "                    <div ng-repeat=\"model in newTime.associatedModels\">\n" +
@@ -9220,17 +9197,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
     "\n" +
-    "                            <!--<a href=\"#\"><b>Validation(s)</b></a>-->\n" +
-    "\n" +
     "                            <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                            <!--\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
-    "                            </div>\n" +
-    "                            -->\n" +
     "\n" +
     "                            <div ng-repeat=\"tag in newTime.tags track by $index\">\n" +
     "                                <div layout=\"\">\n" +
@@ -9525,8 +9492,6 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <div style=\"padding:15px\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Validation</h1>\n" +
     "                            <h5 style=\"color:white\">\n" +
-    "                                <span ng-if=\"item.model=='TIME'\">{{item.amount}}</span>\n" +
-    "                                <span>{{item.title}}</psna>\n" +
     "                            </h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -9536,39 +9501,45 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div class=\"spacing-15\"></div>\n" +
     "                <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                <h5>Connection</h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModel\">\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModels\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
-    "                <!--TODO: FACTOR-->\n" +
-    "                <!--Connection Alpha - Connection Beta -->\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
-    "                {{newValidation.associatedModel[0].model.title}}\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                <h5>Context</h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"tags\">\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"context\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
-    "                <!--TODO: THINK ABOUT THIS MATHMATICALLY-->\n" +
-    "                <!--\n" +
-    "                <div layout=\"\">\n" +
-    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
-    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation.general}} | {{memberValidate.totalWork}}</span></div>\n" +
-    "                </div>\n" +
-    "                -->\n" +
-    "                <div ng-repeat=\"tag in tags track by $index\">\n" +
+    "                <div ng-repeat=\"(key, value) in newValidation.validation track by $index\">\n" +
     "                    <div layout=\"\">\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                            <p><b>{{key}}</b></p>\n" +
+    "                        </div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[key]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{key}}\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                            <p class=\"md-body-1\">{{newValidation.validation[key]}}</p>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <!--CHARTER LOGIC HERE-->\n" +
+    "                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
+    "\n" +
+    "\n" +
     "                </div>\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                <h5>Content</h5>\n" +
+    "                <!--AssociatedContent...?-->\n" +
     "                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </md-sidenav>\n" +
@@ -9830,7 +9801,6 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "			        	<div style=\"padding:15px;\">\n" +
     "				            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;text-transform: capitalize;\">{{notification.title}}</h1>\n" +
     "				            <!--<h5 style=\"color:white\" am-time-ago=\"notification.createdAt\"></h5>-->\n" +
-    "\n" +
     "				        </div>\n" +
     "			        </div>\n" +
     "			    </div>\n" +
@@ -9891,13 +9861,36 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "	            <div ng-if=\"notification.type=='VALIDATION'\">\n" +
     "	            	<p><span style=\"color:gray\">{{notification.content}}</span></p>\n" +
-    "		            <div ng-click=\"$event.stopPropagation();\" layout=\"\">\n" +
+    "\n" +
+    "            		<!--DEPENDANT ON CHARTER AND MODELS-->\n" +
+    "			        <div ng-click=\"$event.stopPropagation();\">\n" +
+    "				        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"context\">\n" +
+    "		                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "		                </tags-input>\n" +
+    "	            	</div>\n" +
+    "\n" +
+    "		            <div ng-click=\"$event.stopPropagation();\">\n" +
     "		            	<!--FOR SPECIIC CONTEXT IN PROJECT CHARTER-->\n" +
     "		            	<!--DEFATO, UNIDIM NEW MEMBER VALIDATE-->\n" +
-    "	                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">General</span></div>\n" +
-    "	                    <div flex=\"70\" layout=\"\" layout-align=\"center center\"><md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"notification.newValidation.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider></div>\n" +
-    "	                    <!--TODO INTI notification.newValidation.validation.general-->\n" +
-    "	                    <div flex=\"20\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{notification.newValidation.validation.general}} | {{notification.newValidation.reputation || 0}}</span></div>\n" +
+    "		            	<!--TODO INTI notification.newValidation.validation.general-->\n" +
+    "	                    <!--UX BY CHARTER TOO.. -->\n" +
+    "	                    <!--UX IF ALREADY VALIDATED-->\n" +
+    "	                    <!--PROJECT-PROJECTMEMEBER-MEMBER-->\n" +
+    "\n" +
+    "\n" +
+    "				        <div ng-repeat=\"(key, value) in notification.newValidation.validation track by $index\">\n" +
+    "		                    <div layout=\"\">\n" +
+    "		                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "		                            <p><b>{{key}}</b></p>\n" +
+    "		                            <div class=\"spacing-5\"></div>\n" +
+    "		                        </div>\n" +
+    "		                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"notification.newValidation.validation[key]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{key}}\"></md-slider>\n" +
+    "		                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "		                            <p class=\"md-body-1\">{{notification.newValidation.validation[key]}}</p>\n" +
+    "		                        </div>\n" +
+    "		                    </div>\n" +
+    "                    		<div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
+    "		                </div>\n" +
     "	                </div>\n" +
     "	                <div ng-click=\"$event.stopPropagation();\">\n" +
     "	                	<div class=\"spacing-10\"></div>\n" +
@@ -9905,7 +9898,10 @@ angular.module("notifications/index.tpl.html", []).run(["$templateCache", functi
     "	                	<text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
     "	                </div>\n" +
     "	                <div class=\"spacing-10\"></div>\n" +
-    "	                <button ng-click=\"createValidation(notification.newValidation)\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "	                <div ng-click=\"$event.stopPropagation();\">\n" +
+    "		                <!--<button ng-click=\"validationToggle(notification.newValidation)\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ Validation</button>-->\n" +
+    "		                <button ng-click=\"createValidation(notification.newValidation)\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "		            </div>\n" +
     "	            </div>\n" +
     "\n" +
     "	        </div>\n" +

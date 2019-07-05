@@ -22,7 +22,28 @@ angular.module( 'conexus.notifications', [
 
 .controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'NotificationModel', 'notifications', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, NotificationModel, notifications, toaster) {
 
-    $scope.notifications = notifications;
+    if(!$rootScope.currentUser){$location.path('/')}
+
+    $scope.notifications = notifications.map(function(obj){
+        if (obj.type=='VALIDATION'){
+            var associatedModels = [];
+            for (x in Object.keys(obj.info)){
+                associatedModels.push({
+                    type: Object.keys(obj.info)[x].toUpperCase(),
+                    address:obj.info[Object.keys(obj.info)[x]].id,
+                    id:obj.info[Object.keys(obj.info)[x]].id,
+                    text:Object.keys(obj.info)[x].toUpperCase() + ' ' + obj.info[Object.keys(obj.info)[x]].id
+                });
+            }
+            obj.newValidation = obj.newValidation = {
+                user: $rootScope.currentUser.id,
+                validation:{general:0},
+                associatedModels: associatedModels,
+                content: 'Validation for '+obj.info.member.username+' in '+obj.info.project.title
+            }
+        }
+        return obj;
+    });
 
     //TODO
     FollowerModel.getFollowing($scope.currentUser).then(function(following){
@@ -90,13 +111,14 @@ angular.module( 'conexus.notifications', [
         NotificationModel.update(model);
     };
 
+    //TODO: ROOTSCOPE
+    //TODO: VALIDATE (MEMBER-MEMBER)
     $scope.follow = function(model){
-        
+
         $scope.newFollower = {
             followed:model.info.id,
             follower:$scope.currentUser.id,
         };
-
         console.log(model, $scope.newFollower);
 
         //FOLLOW

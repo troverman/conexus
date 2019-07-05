@@ -123,6 +123,8 @@ angular.module( 'conexus', [
         return true;
     });
 
+    $rootScope.associatedModels = [];
+    
     //INITALIZE ROOT VARIABLES
     $rootScope.notificationCount = 0;
 

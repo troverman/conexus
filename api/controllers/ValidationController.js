@@ -210,6 +210,17 @@ module.exports = {
 	create: function (req, res) {
 
 		//SECURITY AND PARSE REQUEST 
+		var model = {
+			//BY CHARTER.. ? 
+			type: req.param('type'),
+			content: req.param('content'),
+			reputation: req.param('reputation'),
+			user: req.param('user'),
+			validation: req.param('validation'),
+			associatedModels: req.param('associatedModels'),
+			reactions: {plus:0,minus:0},
+
+		};
 
 		//GET USER IN CALL
 		User.find({id:model.user}).then(function(userModels){
@@ -221,46 +232,28 @@ module.exports = {
 			//CAN ONLY CREATE VALIDATION FOR MY USER.ID (OFC)
 			//if req.session.id == userModels[0].id
 
-			var model = {
-
-				//BY CHARTER.. ? 
-				type: req.param('type'),
-
-				content: req.param('content'),
-				reputation: req.param('reputation'),
-				user: req.param('user'),
-				validation: req.param('validation'),
-				associatedModels: req.param('associatedModels'),
-				reactions: {plus:0,minus:0},
-
-			};
-
 
 			//TODO: ABSTRACT BASED ON ASSOCIATED MODEL TYPES 
 
 			//BUILD USER REPUTATION
 			var reputation = {};
-			//TODO: BETTER MAPPING STORAGE.. 
-			//Time.find({})//  --> PREVENTS IRREVELATNT VALIDATION DIMENSIONS | TASK
-			for (x in Object.keys(model.validation)){
 
+			//for (x in Object.keys(model.validation)){
 				//IF THE USER HAS REP IN THE CONTEXT
-				if (userModels[0].reputation[Object.keys(model.validation)[x]]){
-
+				//if (userModels[0].reputation[Object.keys(model.validation)[x]]){
 					//TODO: GENERAL REP
-					if (Object.keys(model.validation)[x] == 'general'){
-						reputation[Object.keys(model.validation)[x]] = userModels[0].totalWork;
-					}
-					else{
-						reputation[Object.keys(model.validation)[x]] = userModels[0].reputation[Object.keys(model.validation)[x]];
-					}
+					//if (Object.keys(model.validation)[x] == 'general'){
+					//	reputation[Object.keys(model.validation)[x]] = userModels[0].totalWork;
+					//}
+					//else{
+					//	reputation[Object.keys(model.validation)[x]] = userModels[0].reputation[Object.keys(model.validation)[x]];
+					//}
 
-				}
-
+				//}
 				//ELSE THE REPUTATION IS ZERO
-				else{reputation[Object.keys(model.validation)[x]] = 0;}
+				//else{reputation[Object.keys(model.validation)[x]] = 0;}
+			//}
 
-			}
 			model.reputation = reputation;
 			
 			console.log('CREATE VALIDATION', model);

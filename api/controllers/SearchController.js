@@ -27,6 +27,8 @@
 
 */
 
+
+//BY THE 7TH... COMPLEX QUERY. ASSOCIATION 
 module.exports = {
 
 	//CAN HANDLE ALL API CALLS..
@@ -34,15 +36,15 @@ module.exports = {
 
 		if (!req.query.query){
 
-			var mongoQuery = {};
-			mongoQuery.$or = [];
-
+			//RENDER QUERY
 			var querySet = Object.values(req.query);
 			for (x in querySet){querySet[x] = JSON.parse(querySet[x])}
-			console.log(querySet);
 
-			//REDUCTION LOGIC HERE.. --> TO MONGO ?? QUERY CHAIN..>
-			function parseQuery(querySet){
+			//TODO
+			var mongoQuery = {};
+			mongoQuery.$or = [];
+			function parseQueryMongo(querySet){
+
 				console.log('QUERY LEGNTH', querySet.length);
 
 				for (x in querySet){
@@ -67,7 +69,6 @@ module.exports = {
 
 						var mongoObj = {};
 						var queryDecoration = '';
-
 						if (query.queryParam == 'contains'){
 							queryDecoration = new RegExp(".*" + query.query + ".*i");
 						}
@@ -75,22 +76,20 @@ module.exports = {
 						if (query.queryParam == 'equals'){
 							queryDecoration = query.query;
 						}
-
 						console.log(query.modelParam);
-
 						mongoObj[query.modelParam] = queryDecoration;
 						mongoQuery.$or.push(mongoObj);
 						console.log(mongoQuery);
-
 					}
 
 				}
 
 				//cb(mongoQuery);
+			};
 
-			}
+			function parseQueryOrbit(querySet){}
 
-			parseQuery(querySet);
+			parseQueryMongo(querySet);
 
 			//parseQuery(querySet, function(mongoQuery){
 			
@@ -98,50 +97,16 @@ module.exports = {
 			//REDUCE MODEL PARAMS
 			//REDUCE TO DISCRETE AND OR
 
-			//QUERY
-			//{
-			//	or: [
-			//		{title: {contains: 'searchQuery'}},
-			//		{urlTitle: {contains: 'searchQuery'}},
-			//	]
-			//}
-
-
-			//ASSOCIATED QUERIES
-			//db.orders.aggregate([
-			//   {
-			//     $lookup:
-			//       {
-			//         from: "inventory",
-			//         localField: "item",
-			////         foreignField: "sku",
-			//        as: "inventory_docs"
-			//       }
-			//  }
-			//])
-
-
-			
-
-			//DEPRECIATE
 			Project.native(function(err, project) {
-
 				var query = {
 					$or: [
 						{"title": /.*starbuck.*/i},
 						{"tags": /.*coffee.*/i},
 					]
 				};
-
-				console.log(mongoQuery);
-
 				project.find(mongoQuery)
-
 				.limit(200)
 				.skip(0)
-
-				//.sort({'createdAt':-1})
-
 				.toArray(function (err, models) {
 					if (models){
 						console.log(models.length)
@@ -149,7 +114,6 @@ module.exports = {
 					}
 					res.json(models);
 				});
-
 			});
 
 			//});

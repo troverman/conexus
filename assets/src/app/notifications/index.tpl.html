@@ -50,7 +50,6 @@
 			        	<div style="padding:15px;">
 				            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;text-transform: capitalize;">{{notification.title}}</h1>
 				            <!--<h5 style="color:white" am-time-ago="notification.createdAt"></h5>-->
-
 				        </div>
 			        </div>
 			    </div>
@@ -111,13 +110,36 @@
 
 	            <div ng-if="notification.type=='VALIDATION'">
 	            	<p><span style="color:gray">{{notification.content}}</span></p>
-		            <div ng-click="$event.stopPropagation();" layout="">
+
+            		<!--DEPENDANT ON CHARTER AND MODELS-->
+			        <div ng-click="$event.stopPropagation();">
+				        <tags-input min-length="1" placeholder="Context" ng-model="context">
+		                    <auto-complete source="loadAssociations($query)"></auto-complete>
+		                </tags-input>
+	            	</div>
+
+		            <div ng-click="$event.stopPropagation();">
 		            	<!--FOR SPECIIC CONTEXT IN PROJECT CHARTER-->
 		            	<!--DEFATO, UNIDIM NEW MEMBER VALIDATE-->
-	                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-	                    <div flex="70" layout="" layout-align="center center"><md-slider step="0.1" flex="" md-discrete="" ng-model="notification.newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider></div>
-	                    <!--TODO INTI notification.newValidation.validation.general-->
-	                    <div flex="20" layout="" layout-align="center center"><span class="md-body-1">{{notification.newValidation.validation.general}} | {{notification.newValidation.reputation || 0}}</span></div>
+		            	<!--TODO INTI notification.newValidation.validation.general-->
+	                    <!--UX BY CHARTER TOO.. -->
+	                    <!--UX IF ALREADY VALIDATED-->
+	                    <!--PROJECT-PROJECTMEMEBER-MEMBER-->
+
+
+				        <div ng-repeat="(key, value) in notification.newValidation.validation track by $index">
+		                    <div layout="">
+		                        <div flex="10" layout="" layout-align="center center">
+		                            <p><b>{{key}}</b></p>
+		                            <div class="spacing-5"></div>
+		                        </div>
+		                        <md-slider step="0.1" flex="" md-discrete="" ng-model="notification.newValidation.validation[key]" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
+		                        <div flex="10" layout="" layout-align="center center">
+		                            <p class="md-body-1">{{notification.newValidation.validation[key]}}</p>
+		                        </div>
+		                    </div>
+                    		<div style="text-align:center"><p style="font-size:9px">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}} | Multiplicative Charter</p></div>
+		                </div>
 	                </div>
 	                <div ng-click="$event.stopPropagation();">
 	                	<div class="spacing-10"></div>
@@ -125,7 +147,10 @@
 	                	<text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
 	                </div>
 	                <div class="spacing-10"></div>
-	                <button ng-click="createValidation(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+	                <div ng-click="$event.stopPropagation();">
+		                <!--<button ng-click="validationToggle(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">+ Validation</button>-->
+		                <button ng-click="createValidation(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+		            </div>
 	            </div>
 
 	        </div>

@@ -289,8 +289,6 @@ angular.module( 'conexus.project', [
 
     //TODO: SMOOTH STATE CHANGE
 
-
-
     if ($scope.project.location){ 
         $scope.map = {
             center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng },
@@ -309,7 +307,6 @@ angular.module( 'conexus.project', [
         };
     }
 
-
     //TODO: ROOT
     $scope.createMember = function(){
         if($scope.currentUser){
@@ -320,7 +317,6 @@ angular.module( 'conexus.project', [
             MemberModel.create($scope.newMember).then(function(model) {
                 $rootScope.confirm = $scope.newMember;
                 $rootScope.confirm.modelType = 'PROJECTMEMBER';
-
                 $scope.newMember = {};
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 5000);

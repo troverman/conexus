@@ -287,6 +287,8 @@ module.exports = {
 									content:'New Member, '+userModels[0].username +' is requesting membership validation for '+projectModels[0].title,
 									priority: 100, //BASED ON PERMISSIONS
 									isRead: false,
+									
+									//TOOD: TOO MUCH TO BE STORED.. ONLY DO ID --> SMART GET IN NOTIFICATION MODEL
 									info:{member:userModels[0], project:projectModels[0]},
 								};
 
