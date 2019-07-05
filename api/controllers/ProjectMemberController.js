@@ -56,12 +56,6 @@ module.exports = {
 
 	},
 
-
-	function getSome(){
-
-	};
-
-
 	create: function (req, res) {
 
 		//RECURSIZE POPULATE..
