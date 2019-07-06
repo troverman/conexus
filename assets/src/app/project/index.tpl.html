@@ -9,7 +9,7 @@
                         <h1 style="text-align:left;" class="container"><img style="height:50px;width:50px" src="{{project.avatarUrl}}"/>
                             {{project.title}}
                         </h1>
-                        <h5 ng-show="project.parent"><a ng-click="$event.stopPropagation();" style="color:white" href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h5>
+                        <h5 ng-show="project.parent"><a ng-click="$event.stopPropagation();" style="color:white" href="project/{{project.parent.urlTitle}}" ui-sref="project.activity">{{project.parent.title}}</a></h5>
                         <!--<h5 ng-show="projectNavigation"><span ng-show="projectNavigation" style="color:white;text-transform:capitalize;">{{projectNavigation}}</span></h5>-->
                     </div>
                 </div>
@@ -30,13 +30,13 @@
             <div class="member-tab-container container" style="padding-left:0px">
                 <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs subNav">
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}">Activity</a></li>
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/content">Content</a></li>
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/ledger">Ledger</a></li>
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/members">Members</a></li>
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/projects">Projects</a></li>
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/tasks">Tasks</a></li>
-                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/time">Time</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}" ui-sref="project.activity">Activity</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/content" ui-sref="project.content">Content</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/ledger" ui-sref="project.ledger">Ledger</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/members" ui-sref="project.members">Members</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/projects" ui-sref="project.projects">Projects</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/tasks" ui-sref="project.tasks">Tasks</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}/time" ui-sref="project.time">Time</a></li>
                         <li><a ng-click="$event.stopPropagation();transactionToggle(project)" class="btn btn-default">Send Tokens</a></li>
                         <li style="float:right;margin-top:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
                     </ul>

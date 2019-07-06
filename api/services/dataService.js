@@ -157,6 +157,122 @@ module.exports = {
 
 	},
 
+
+
+	//NEED TO POULATE TO TEST..
+	//MAP OUT THE RECURSIVE TREE
+
+	//FOR DEVELOPERS
+	//ASSOCIATION IS A REDUCCTION OF SET OF VALIDATION
+
+	//LEVEL1: VALIDATION, VALIDATION, VALIDATION.
+	//			   |           |           |
+	//LEVEL2:	 V-V-V       V-V-V       V-V-V
+	//			 | | |       | | |       | | |
+	//LEVEL3:    v3v3v3      v3v3v3      v3v3v3
+	
+	//...
+	//LELVE_L:...			
+
+	//Compute Association Level L (based on connection rules.. v-v & v-v-n &or defined type)
+
+	//DEFAULT AVERAGE WEIGHTED REP
+	//[A_L] = [Sum(V_DxRep_D)]/N
+	//..V_L-A_(L-1) = (CHARTER RULE..)
+		//=V_LxA_(L-1)
+
+		//do a real example.. 
+
+
+
+	//LEVEL_L:  
+
+	//A-V
+
+	//BE CREATIVE!!
+			//=  charter.. connection.. fxn
+
+	//.. A_(AV) = (CreatorWeight + PeerWeight) / 2 
+		//AVERAGE OF NESTED VALIDATION
+
+	//charter expose formulas..? 
+	//.. A_(AV) = CreatorScore(CreatorWeight) + PeerScore(PeerWeight); CreatorWeight + PeerWeight = 1
+
+
+
+
+	buildAssociationFromValidation: function(model, level){
+		var deferred = Q.defer();
+
+		//TODO: QUERY..
+		//TODO: master getSome.....
+		Validation.find({
+			associationModels:[
+				model.associationModels[0],
+				model.associationModels[1]
+			]
+		}).then(function(validationModels){
+
+			var associationModel = {
+				context: {},
+				associationModels: validationModels[0].associationModels,
+				type:validationModels[0].type,
+			};
+
+			//NESTED VALIDATION RULES AS CHARTER.. DEFACTO MULT.. THIS IS HOW WE WORK WITH LEVEL TRAVERSAL IN VALIDTION-VALIDATION CHAINS 
+
+			for (x in validationModels){
+
+				//TODO: MATH! :)
+				//FIND ANY VALIDATIONS ON THE VALIDATION
+				Validation.find({associationModel:validationModels[x].id}).then(function(validationModels){
+					//IF NOT WE ARE DONE.. WHAT NEST LEVEL ARE WE AT..
+					if (validationModels.length == 0){
+
+						//GOT ASSOCIATION
+						//UPDATE?? .. GO UP THE CHAIN.. 
+
+					}
+
+					//CHECK THE ASSOCIATION OF -VALIDAION CHAIN
+					else{
+						level++
+						for (x in validationModels){
+							associationBuild(validationModels[x], level).then(function(associationModel){
+								deferred.resolve(associationModel);
+							});
+						}
+					}
+
+				});
+
+
+				//TEMP SIMPLE SUM
+				for (y in Object.keys(validationModels[x].validation)){
+					 var context = Object.keys(validationModels[x].validation)[y];
+					 associationModel.context[context] += validationModels[x].validation[context];
+				}
+
+			}
+
+			//TEMP. SIMPLE AVERAGE
+			for (x in Object.keys(associationModel.context)){
+				var context = Object.keys(associationModel.context)[x];
+		 		associationModel.context[context] = associationModel.context[context] / Object.keys(associationModel).length;
+		 	}
+
+		 	deferred.resolve(associationModel)
+
+
+		});
+		return deferred.promise;
+	},
+
+
+
+
+
+
 	getData: function(network, reflective){
 		
 		//POPULATE A NEW NETWORK

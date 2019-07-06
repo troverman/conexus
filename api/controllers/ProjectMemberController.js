@@ -121,12 +121,60 @@ module.exports = {
 
 		Project.find({id:req.param('project')}).then(function(projectModels){
 
-			//projectModels[0].charter
-			//RULES FOR JOIN
 
-			//1st draft -
-			//WE CAN REORGANIZE THIS :)
-	
+			//default connection type -- do this soon.. diff data model.. reorganize to abstract persepctive vs project- 1st person ie Set of connectionA-connectionB
+			//charter is a selection of these -- . connection type creator.. lol extrazzz
+			var defaultCharter = {
+
+
+				validation:{
+					self:{
+						title:{
+							changeApproval:{
+								//variables available.. members.. etc
+								//context:{general:100xmember} //everyone must validtion 100
+								//variable governance.... 
+
+								//relation between approval threshold.. and rep x validation context ....
+
+								reputationWeight:{
+									context:'1-to-1',
+									//variables available
+									functional:'{reputation}x{valicationContext}',
+								},
+								context:{contextString:'Absolute Approval Value'}
+							},
+							//mb in own charter obj
+							//charterChangeApproval:{}
+						},
+						description:{
+
+						},
+						tags:{
+
+						},
+						location:{
+
+						},
+					},
+
+					//logic for 'MEMBERSHIP' -- GIVE IT SPACE
+					//RETURN IN 2 DAY
+					member:{
+
+					}
+
+				}
+
+			};
+			//connection types
+			//to allow for complex - recursive
+
+
+
+
+			//need to take into account validation type 
+			//alpha	
 			var charter = {
 
 				//PERMISSIONS...

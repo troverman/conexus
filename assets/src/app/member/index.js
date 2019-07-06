@@ -20,7 +20,7 @@ angular.module( 'conexus.member', [
             }],
         }
 	})
-    .state( 'member.index', {
+    .state( 'member.activity', {
         url: '',
         views: {
             "memberActivity": {

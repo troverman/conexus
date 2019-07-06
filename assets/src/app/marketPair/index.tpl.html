@@ -4,7 +4,7 @@
         	<div class="container">
 	        	<div class="row">
 	            	<div class="col-xs-10">
-			            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{market}}">{{market}}</a> | <a style="color:white"  href="market/{{market1}}">{{market1}}</a></h1>
+			            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{market}}" ui-sref="market({id:market})">{{market}}</a> | <a style="color:white"  href="market/{{market1}}" ui-sref="market({id:market1})">{{market1}}</a></h1>
 			        	<h5 style="color:white">
 			        		<span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
 			        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
@@ -18,7 +18,7 @@
 			            </h5>
 				    </div>
 					<div class="col-xs-2" style="padding:16px;text-align:right">
-						<a style="color:white" href="market/{{market1}}/{{market}}"><i class="fa fa-refresh"></i></a>
+						<a style="color:white" href="market/{{market1}}/{{market}}" ui-sref="marketPair({setAlpha:market1, setBeta:market})"><i class="fa fa-refresh"></i></a>
 					</div>
 	        	</div>
         	</div>

@@ -2144,12 +2144,41 @@ contract Protocol {
         <div class="row">
             <div class="col-sm-8">
                 <!--MULTI ORG LATTICE-->
+                <h4>Association Types</h4>
+                <p>Association Rules - Project Charter</p>
+                <div class="spacing-5"></div>
+
                 <h4>Validation Traversal</h4>
                 <p style="color:gray;font-style:italic">From a Set of Validations Compute the Association `A_{D_{1-n}` </p>
                 <!--<p>A = V1[a1-aN]~SumV(V*[a1-aN], ..-V**n,..), V2[a1-aN]~..., V3[a1-aN], V4[a1-aN], V5[a1-aN], ...</p>-->
                 <p>`Association | A = sum_(i=0)^n {V_N}_[a-z]`</p>
                 <p>`Validation | {V_N} = sum_(i=0)^n {V_{V_i}}_[a-z]`</p>
                 <p>`Association | A = sum_(i=0)^n sum_(i=0)^n V_[a-z]`</p>
+                <div class="spacing-5"></div>
+
+                <p><b>TBD SAMPLE</b></p>
+                <!--BETTER TENSOR NOTATION-->
+                <p>Associations between data models are computed though sets of recursive validations which are governed though association rules</p>
+                <p>Association: `D_(T1) -> D_(T2)`</p>
+                <p>`L1: V_(((T1,T2)_1)_1), V_(((T1,T2)_2)_1), V_(((T1,T2)_3)_1), ..., V_(((T1,T2)_N)_1)`</p>
+                <p>`L2:`</p>
+                <p>`L3:`</p>
+                <p>`L_L:`</p>
+                <div class="spacing-5"></div>
+
+
+                <p>Compute Association Level L</p>
+                <p>1. Reduce `Set [V_(L_n,k)] -> A_(L_n,k)` by `odot_(A_R)`</p>
+                <p>TBD: `[A_L] = [Sum(V_D otimes_(A_R) Rep_D)]/N`</p>
+                <div class="spacing-5"></div>
+
+                <p>2. Traverse Level by `otimes_(A_R)`</p>
+                <p>`V_L -> A_(L-1) = V_L otimes_(A_R) A_(L-1)`<p>
+                <p>`where otimes_(A_R)` is an Association Rule `R`</p>
+                <div class="spacing-5"></div>
+
+                <p>Go to 1</p>
+                <div class="spacing-5"></div>
 
                 <h5>Topology</h5>
                 <p style="color:gray;font-style:italic">An Immutable Object Structure; RECURISIVE.. TOPOLOGY MAP OF VALIDATIONS (HIGHER ORDER)</p>

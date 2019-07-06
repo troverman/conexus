@@ -645,19 +645,19 @@
             </div>
 
             <div style="min-height:500px;max-height:100vh;overflow:hidden">
-                <h4 ng-show="!currentUser" class="nav-links" style="padding:8px;"><a href="/about">About</a></h4>
+                <h4 ng-show="!currentUser" class="nav-links" style="padding:8px;"><a href="/about" ui-sref="about">About</a></h4>
                 <h4 ng-show="currentUser" class="nav-links" ng-click="cre8Toggle()" style="padding:8px;"><a>CRE8</a></h4>
-                <h4 class="nav-links" style="padding:4px;"><a href="/discover">Discover</a></h4>
-                <h4 class="nav-links" style="padding:4px;"><a href="/market">Market</a></h4>
-                <h4 class="nav-links" style="padding:4px;"><a href="/marketplace">Marketplace</a></h4>
-                <h4 class="nav-links" style="padding:4px;"><a href="/projects">Projects</a></h4>
+                <h4 class="nav-links" style="padding:4px;"><a href="/discover" ui-sref="discover">Discover</a></h4>
+                <h4 class="nav-links" style="padding:4px;"><a href="/market" ui-sref="market">Market</a></h4>
+                <h4 class="nav-links" style="padding:4px;"><a href="/marketplace" ui-sref="marketplace">Marketplace</a></h4>
+                <h4 class="nav-links" style="padding:4px;"><a href="/projects" ui-sref="projects">Projects</a></h4>
                 <h4 ng-show="currentUser" class="nav-links" style="padding:8px;">
-                    <a href="/notifications"> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a>
+                    <a href="/notifications" ui-sref="notifications"> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a>
                 </h4>
-                <h4 ng-show="currentUser" class="nav-links" style="padding:4px;"><a href="/account">Settings</a></h4>
+                <h4 ng-show="currentUser" class="nav-links" style="padding:4px;"><a href="/account" ui-sref="account">Settings</a></h4>
                 <h4 ng-show="currentUser" class="nav-links" style="padding:4px;"><a href="/logout">Logout</a></h4>
                 <h4 ng-show="!currentUser" ng-click="loginToggle()" class="nav-links" style="padding:4px;"><a>Login</a></h4>
-                <h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/register">Register</a></h4>
+                <h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/register" ui-sref="register">Register</a></h4>
 
                 <!--only about, discover, market...-->
                 <!--better for logged in-->
@@ -1227,12 +1227,12 @@
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px" style="width:100%">
                             <h1 style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
-                                <span ng-if="item.title">
+                                <span ng-if="item.title" ui-sref="project.activity">
                                     <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                     <div class="spacing-5"></div>
                                     <span style="font-size:24px;color:white">{{project.title}}</span>
                                 </span>
-                                <span ng-if="item.username">
+                                <span ng-if="item.username" ui-sref="member.activity">
                                     <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                     <div class="spacing-5"></div>
                                     <span style="font-size:24px;color:white">{{item.username}}</span>
@@ -1247,32 +1247,32 @@
             <div style="padding:16px">
                 <div class="spacing-15"></div>
                 <div ng-if="item.title">
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/about">About</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/assets">Assets</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/content">Content</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/items">Items</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/ledger">Ledger</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/members">{{item.memberCount}} Members</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/charter">Motions</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/positions">Positions</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/projects">Projects</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/tasks">Tasks</a></h4>
-                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/time">Time</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/about" ui-sref="project.about">About</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/assets" ui-sref="project.activity">Assets</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/content" ui-sref="project.content">Content</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/items" ui-sref="project.items">Items</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/ledger" ui-sref="project.ledger">Ledger</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/members" ui-sref="project.members">{{item.memberCount}} Members</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/charter" ui-sref="project.charter">Motions</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/positions" ui-sref="project.positions">Positions</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/projects" ui-sref="project.projects">Projects</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/tasks" ui-sref="project.tasks">Tasks</a></h4>
+                    <h4 class="nav-links"><a href="project/{{item.urlTitle}}/time" ui-sref="project.time">Time</a></h4>
                     <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Validations</a></h4>-->
                 </div>
                 <div ng-if="item.username">
-                    <h4 class="nav-links"><a href="member/{{item.username}}/about">About</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/actions">Actions</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/assets">Assets</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/content">Content</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/followers">{{item.followerCount}} Followers</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/following">{{item.followingCount}} Following</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/items">Items</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/ledger">Ledger</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/positions">Positions</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/projects">{{item.projectCount}} Projects</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/tasks">Tasks</a></h4>
-                    <h4 class="nav-links"><a href="member/{{item.username}}/time">Time</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/about" ui-sref="member.about">About</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/actions" ui-sref="member.actions">Actions</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/assets" ui-sref="member.assets">Assets</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/content" ui-sref="member.content">Content</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/followers" ui-sref="member.followers">{{item.followerCount}} Followers</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/following" ui-sref="member.following">{{item.followingCount}} Following</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/items" ui-sref="member.items">Items</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/ledger" ui-sref="member.ledger">Ledger</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/positions" ui-sref="member.positions">Positions</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/projects" ui-sref="member.projects">{{item.projectCount}} Projects</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/tasks" ui-sref="member.tasks">Tasks</a></h4>
+                    <h4 class="nav-links"><a href="member/{{item.username}}/time" ui-sref="member.time">Time</a></h4>
                 </div>
 
             </div>
@@ -1898,11 +1898,9 @@
                 <a ng-if="taskTime > 0">{{taskTime}}</a>
             </div>
 
-            <!--TODO: EYE.. ATTENTIOn.. VIEW ETC-->
+            <!--TODO: EYE.. ATTENTION.. VIEW ETC-->
 
-
-
-            <a style="padding-left:0px" class="navbar-brand" href="/"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
+            <a style="padding-left:0px" class="navbar-brand" href="/" ui-sref="home()"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
         </div>
         <md-progress-linear style="height:2px" ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
     </div>

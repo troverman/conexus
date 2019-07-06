@@ -268,13 +268,20 @@ module.exports = {
 					Validation.publishCreate(validation);
 					res.json(validation);
 
+
+
+
+
+
+
+
+
 					//BUILD AND UPDATE OR CREATE AN ASSOCIATION THAT REFLECT NEW VALIDATION
 					function associationBuild(model){
 						var deferred = Q.defer();
 
 						//TODO: QUERY..
 						//TODO: master getSome.....
-
 						Validation.find({
 							associationModels:[
 								model.associationModels[0],
@@ -357,10 +364,20 @@ module.exports = {
 						});
 					//});
 
+
+
+
+
+
+
+
+
+
+
+
+
 					//SEND NOTIFICATION BASED ON NEW VALIDATION.. 
-
 					//BASED ON RULES ASSOCIATED MODELS .. AND NOTIFICATION SETTINGS 
-
 					//TODO: VALIDATION NOTIFICATION
 					var notificationModel = {
 						user: userModels[0].user,

@@ -78,7 +78,7 @@ angular.module( 'conexus', [
     $locationProvider.html5Mode(true);
 }])
 .run(function run(){moment.locale('en')})
-.controller( 'AppCtrl', ['$rootScope', '$scope', '$state', 'seoService', 'titleService', 'UserModel', function AppCtrl ( $rootScope, $scope, $state, seoService, titleService, UserModel ) {
+.controller( 'AppCtrl', ['$location', '$rootScope', '$scope', '$state', 'seoService', 'titleService', 'UserModel', function AppCtrl ( $location, $rootScope, $scope, $state, seoService, titleService, UserModel ) {
 
     //titleService.setTitle('CRE8.XYZ')
     //seoService.setDescription('LET\'s CRE8');
@@ -122,6 +122,11 @@ angular.module( 'conexus', [
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
         return true;
     });
+
+    $rootScope.goToState = function(state, params){
+        $location.path($state.href(state, params));
+    };
+    
 
     $rootScope.associatedModels = [];
     

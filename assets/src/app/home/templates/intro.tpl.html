@@ -39,7 +39,7 @@
                 <p style="font-style:italic;margin:0px;color:gray">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>
                 <p style="font-style:italic;margin:0px;color:gray">Information is valuable. Sharing information creates value & multidimensional income.</p>
                 <div class="spacing-15"></div>
-                <a style="width:100%" class="btn btn-default log-btn" href="/about">learn more</a>
+                <a style="width:100%" class="btn btn-default log-btn" href="/about" ui-sref="about">learn more</a>
                 <div class="spacing-100"></div>
             </div>
             <div class="col-md-6 mobileHide" style="text-align:center">
@@ -80,7 +80,7 @@
                 <p style="font-style:italic;margin:0px;color:gray">Everyone & everything has value. What is your Story?</p>
                 <p style="font-style:italic;margin:0px;color:gray">What do you believe is valuable? Sharing your values creates a mechanism of empowerment. <!--Share your values to create a mechanism of empowerment. --> We create value in each other!</p> <!--we value each other!-->
                 <div class="spacing-15"></div>
-                <a style="width:100%" class="btn btn-default log-btn" href="/register">Join Our Community</a>
+                <a style="width:100%" class="btn btn-default log-btn" href="/register" ui-sref="register">Join Our Community</a>
                 <div class="spacing-50"></div>
             </div>
         </div>
@@ -154,7 +154,7 @@
                 <!--
                 <p style="font-style:italic;margin:0px;color:gray">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>
                 -->
-                <p style="font-style:italic;margin:0px;color:gray">The <a href="/transparency"><b>Decentralized Network</b></a> is you! Decentralized peers support the network.</p>
+                <p style="font-style:italic;margin:0px;color:gray">The <a href="/transparency" ui-sref="transparency"><b>Decentralized Network</b></a> is you! Decentralized peers support the network.</p>
                 <!--<p style="font-style:italic;margin:0px;color:gray">Finding congruence with human and machine consensus.</p>-->
             </div>
             <div class="col-md-6 mobileHide" style="text-align:center">
@@ -178,8 +178,8 @@
                     </div>
                 </div>
                 <div class="spacing-10"></div>
-                <h5><a href="/apps"><b>Application Ecosystem</b></a></h5>
-                <h5><a href="/developers"><b>Developer Documentation</b></a></h5>
+                <h5><a href="/apps" ui-sref="apps"><b>Application Ecosystem</b></a></h5>
+                <h5><a href="/developers" ui-sref="developers"><b>Developer Documentation</b></a></h5>
                 <div class="spacing-10"></div>
             </div>
         </div>
@@ -209,7 +209,7 @@
                             <button class="btn btn-default log-btn" ng-click="registerUser()">Sign up</button>    
                             <br><br>
                             <div class="social-log">
-                                <a href="/login"><h5 style="color: gray;font-style: italic;"><b>Already A Member?</b></h5></a>
+                                <a href="/login" ui-sref="login"><h5 style="color: gray;font-style: italic;"><b>Already A Member?</b></h5></a>
                             </div>
                         </form>
                         <div class="selfClear"></div>
@@ -238,15 +238,15 @@
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
                             <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="/discover">Discover CRE8</a></h1>
+                                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="/discover" ui-sref="discover">Discover CRE8</a></h1>
                                 <h5>
-                                    <b><a style="color:white" href="/apps">Apps</a></b>
-                                    <b><a style="color:white" href="/content">Content</a></b>
-                                    <b><a style="color:white" href="/marketplace">Items</a></b>
-                                    <b><a style="color:white" href="/members">Members</a></b>
-                                    <b><a style="color:white" href="/market">Orders</a></b>
-                                    <b><a style="color:white" href="/projects">Projects</a></b>
-                                    <b><a style="color:white" href="/tasks">Tasks</a></b>
+                                    <b><a style="color:white" href="/apps" ui-sref="about">Apps</a></b>
+                                    <b><a style="color:white" href="/content" ui-sref="content">Content</a></b>
+                                    <b><a style="color:white" href="/marketplace" ui-sref="marketplace">Items</a></b>
+                                    <b><a style="color:white" href="/members" ui-sref="members">Members</a></b>
+                                    <b><a style="color:white" href="/market" ui-sref="market">Orders</a></b>
+                                    <b><a style="color:white" href="/projects" ui-sref="projects">Projects</a></b>
+                                    <b><a style="color:white" href="/tasks" ui-sref="tasks">Tasks</a></b>
                                 </h5>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
                                 <div style="width:100%;padding:15px">
-                                    <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}">{{item.title}}</a></h1>
+                                    <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</a></h1>
                                     <!--<h5 style="color:white">Content</h5>-->
                                 </div>
                             </div>
@@ -292,8 +292,10 @@
                             <div style="float:right;text-align:right">
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
-                            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">
+                                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                                {{item.user.username}}
+                            </a>
                             <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
                             <!--TODO: ASSOCIATION AREA-->
                             
@@ -306,7 +308,7 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
                     </div>
                     <!--TODO: NESTED -->
                     <div ng-show="item.showReply" class="card-footer" ng-click="$event.stopPropagation()">
@@ -321,14 +323,14 @@
                     <div style="padding:16px;">
                         <div class="row">
                             <div class="col-sm-1 col-xs-2">
-                                <a ng-click="$event.stopPropagation()" href="project/{{item.urlTitle}}"><img style="width:50px;height:50px;max-width:1000%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+                                <a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})"><img style="width:50px;height:50px;max-width:1000%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
                             <div class="col-sm-11 col-xs-10">
                                 <p style="float:right;text-align:right">
                                     <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                                     <span ng-if="item.location" style="color:gray"><!--{{item.location.address}} <i class="fa fa-map-marker"></i>--></span>
                                 </p>
-                                <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation()" href="project/{{item.urlTitle}}">{{item.title}}</a></h3>
+                                <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">{{item.title}}</a></h3>
                                 <div style="overflow:scroll">
                                     <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
                                 </div>
@@ -342,7 +344,7 @@
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
                                 <div style="width:100%;padding:15px">
-                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}">{{item.title}}</h1>
+                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</h1>
                                     <!--<h5 style="color:white">Task</h5>-->
                                 </div>
                             </div>
@@ -352,7 +354,7 @@
                         <div style="float:right;text-align:right">
                             <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                         </div>
-                        <p ng-click="$event.stopPropagation()"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                        <p ng-click="$event.stopPropagation()"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
                         <p ng-click="$event.stopPropagation()"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                         <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
@@ -361,7 +363,7 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
-                        <a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                        <a style="padding:0px" class="pull-right" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="fa fa-link grey"></i></a>
                     </div>
                 </div>
 
@@ -383,17 +385,17 @@
                             <div style="float:right;text-align:right">
                                 <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
                             </div>
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">
                                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.user.username}}
                             </a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
+                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}" ui-sref="time({id:item.id})">{{item.amount}}</a>
                             <!--TODO: ASSOCIATION AREA-->
                             <p style="color:gray;font-size:10px;margin-left:42px" am-time-ago="item.createdAt"></p>
                         </div>
                         <p ng-click="$event.stopPropagation()" ng-show="item.task.tags > 0" style="margin-left:42px">
-                            <a ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}">{{tag.trim()}} </a>
+                            <a ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a>
                         </p>
                         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
                     </div>
@@ -402,7 +404,7 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
-                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}" ui-sref="time({id:item.id})"><i class="fa fa-link grey"></i></a>
                     </div>
                 </div>             
             </div>
