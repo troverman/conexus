@@ -30,7 +30,7 @@
                 </div>
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}"><span style="font-weight:800">{{item.user.username}}</span></a>
+                    <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})"><span style="font-weight:800">{{item.user.username}}</span></a>
                 </div>
                 <div class="spacing-10"></div>
                 <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
@@ -80,13 +80,13 @@
     
                     <div style="display:inline">
                         <span ng-if="transaction.from.username">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.from.username}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.from.username}}" ui-sref="member.activity({path:transaction.from.username})">
                                 <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{transaction.from.username}}
                             </a>
                         </span>
                         <span ng-if="transaction.from.title">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.from.urlTitle}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.from.urlTitle}}" ui-sref="project.activity({path:transaction.from.title})">
                                 <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{transaction.from.title}}
                             </a>
@@ -97,13 +97,13 @@
                     </div>
                     <div style="display:inline">
                         <span ng-if="transaction.to.username">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.to.username}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.to.username}}" ui-sref="member.activity({path:transaction.to.username})">
                                 <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{transaction.to.username}}
                             </a>
                         </span>
                         <span ng-if="transaction.to.title">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.to.urlTitle}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.to.urlTitle}}" ui-sref="project.activity({path:transaction.to.title})">
                                 <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{transaction.to.title}}
                             </a>
@@ -112,9 +112,9 @@
 
                     <div class="spacing-5"></div>
                                 
-                    <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
+                    <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
 
-                    <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+                    <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
                     <p>{{transaction.content}}</p>
 
                 </div>
@@ -184,7 +184,7 @@
                 <!--TRAVERSAL PARAMETERS-->
                 
                 <p ng-repeat="result in marketOutput" style="color:gray;font-style:italic;font-size:10px">
-                    <span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}">{{result[1]}}</a></span>
+                    <span>[tokens] = {{result[0]}} <a href="market/{{result[1]}}" ui-sref="market({id:result[1]})">{{result[1]}}</a></span>
                     <!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
                 </p>
             </div>
@@ -209,16 +209,16 @@
             <div style="padding:16px">
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
+                    <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">{{item.user.username}}</a>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div> 
                 <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
             </div>
             <div class="" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                <a href="#" style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a href="#" style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                <a href="#" style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a href="#" style="color:grey" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a href="#" style="padding:5px;color:grey" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                <a href="#" style="padding:5px;color:grey" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a href="#" style="padding:5px;color:grey" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+                <a style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                 <form role="form" ng-submit="createContent(item)">

@@ -3,11 +3,19 @@
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in followers">
 		<div class="member-card" ng-click="renderReputationToggle(member)">
 		    <div class="member-card-image" style="background-image: url('{{member.follower.coverUrl}}')">
-		        <a ng-click="$event.stopPropagation();" href="member/{{member.follower.username}}"><img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png"></a>
+		        <a ng-click="$event.stopPropagation();" href="member/{{member.follower.username}}" ui-sref="member.activity({path:member.follower.username})">
+		        	<img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png">
+		        </a>
 		    </div>
             <div class="member-card-info" style="padding:16px;height:auto">
-		        <h4><a ng-click="$event.stopPropagation();" href="member/{{member.follower.username}}">{{member.follower.username}}</a></h4>
-		        <p style="font-size:13px;"><a href="/member/{{member.follower.username}}/projects">{{member.follower.projectCount || 0}} Projects</a> | <a href="/member/{{member.follower.username}}/followers">{{member.follower.followerCount || 0}} Followers</a> | <a href="/member/{{member.follower.username}}/following">{{member.follower.followingCount || 0}} Following</a>
+		        <h4>
+		        	<a ng-click="$event.stopPropagation();" href="member/{{member.follower.username}}" ui-sref="member.activity({path:member.follower.username})">{{member.follower.username}}</a>
+		        </h4>
+		        <p style="font-size:13px;">
+		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/projects" ui-sref="member.projects({path:member.follower.username})">{{member.follower.projectCount || 0}} Projects</a> | 
+		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/followers" ui-sref="member.followers({path:member.follower.username})">{{member.follower.followerCount || 0}} Followers</a> | 
+		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/following" ui-sref="member.following({path:member.follower.username})">{{member.follower.followingCount || 0}} Following</a>
+		        </p>
 		        <p style="color:gray">Total Reputation | {{member.followed.totalWork}}</p>
 		        <p style="color:gray">{{member.followed.status}} Offline</p>
 		    </div>

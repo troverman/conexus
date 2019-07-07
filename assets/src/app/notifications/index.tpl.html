@@ -8,7 +8,6 @@
     </div>
 </div>
 
-
 <div class="container">
 
 	<div class="row" ng-show="notifications.length == 0">
@@ -77,7 +76,7 @@
 
 	            <div ng-if="notification.type=='FOLLOW'">
 		          	<p><span style="color:gray">{{notification.content}}</span></p>
-	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.username}}">
+	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.username}}" ui-sref="member.activity({path:notification.info.username})">
 	                	<img class="card-avatar" ng-src="{{notification.info.avatarUrl}}" err-src="/images/avatar.png">
 	                	{{notification.info.username}}
 	                </a>
@@ -88,7 +87,7 @@
 
 	            <div ng-if="notification.type=='REACTION'">
 	            	<p>
-		            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.user.username}}">
+		            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.user.username}}" ui-sref="member.activity({path:notification.info.user.username})">
 		                	<img class="card-avatar" ng-src="{{notification.info.user.avatarUrl}}" err-src="/images/avatar.png">
 		                	{{notification.info.user.username}}
 		                </a>
@@ -97,15 +96,15 @@
 	            	<p><span style="color:gray">{{notification.content}}</span></p>
 	                <!--ASSOCIATED MODELS.. LOL-->
                 	<!--{{notification.info.type}}-->
-                	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.info.content.id}}">{{notification.info.content.title}}</a></p>
-                	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.info.content.id}}">{{notification.info.content.id}}</a></p>
+                	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.info.content.id}}" ui-sref="content({id:notification.info.content.id})">{{notification.info.content.title}}</a></p>
+                	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.info.content.id}}" ui-sref="content({id:notification.info.content.id})">{{notification.info.content.id}}</a></p>
                 	<!--<p><a ng-click="$event.stopPropagation();" href="reaction/{{notification.info.id}}">{{notification.info.id}}</a></p>-->
 
 	            </div>
 
 	            <div ng-if="notification.type=='TRANSACTION'">
 	            	<p><span style="color:gray">{{notification.content}}</span></p>
-					<span ng-click="$event.stopPropagation();" ng-repeat="(key, value) in notification.info.transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}">{{key}}</a></p></span>
+					<span ng-click="$event.stopPropagation();" ng-repeat="(key, value) in notification.info.transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
 	            </div>
 
 	            <div ng-if="notification.type=='VALIDATION'">
@@ -113,14 +112,14 @@
 	            	<!--CHECK KEYS OF OBJECT INFO..-->
     	            <div style="display:inline">
 
-		            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.member.username}}">
+		            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.member.username}}" ui-sref="member.activity({path:notification.info.member.username})">
 		                	<img class="card-avatar" ng-src="{{notification.info.member.avatarUrl}}" err-src="/images/avatar.png">
 		                	{{notification.info.member.username}}
 		                </a>
 		                <div style="display:inline;padding-left:5px;padding-right:5px;">
 			                <i class="fa fa-arrow-right"></i>
 			            </div>
-		                <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.project.title}}">
+		                <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.project.title}}" ui-sref="member.activity({path:notification.info.member.username})">
 		                	<img class="card-avatar" ng-src="{{notification.info.project.avatarUrl}}" err-src="/images/avatar.png">
 		                	{{notification.info.project.title}}
 		                </a>

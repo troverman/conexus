@@ -88,7 +88,7 @@
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
                             <div class="container">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="item/{{item.id}}">{{item.title}}</a></h1>
+                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="item/{{item.id}}" ui-sref="item({id:item.id})">{{item.title}}</a></h1>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a class="pull-right" style="padding:0px;" href="item/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a class="pull-right" style="padding:0px;" href="item/{{item.id}}" ui-sref="item({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-click="$event.stopPropagation()" ng-show="item.showReply" clas="card-footer">
                     <form role="form" ng-submit="createContent(item)">

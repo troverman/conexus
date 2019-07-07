@@ -53,11 +53,11 @@
 	                    <div style="margin-top: auto;margin-bottom: auto;">
 	                        <div class="container">
 	                            <span ng-repeat="(key, value) in item.setAlpha">
-	                                <a style="color:white" href="market/{{key}}">{{key}}</a>
+	                                <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
 	                            </span>
 	                            <br>
 	                            <span ng-repeat="(key, value) in item.setBeta">
-	                                <a style="color:white" href="market/{{key}}">{{key}}</a>
+	                                <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
 	                            </span>
 	                            <h5 style="color:white"><span style="font-size:10px">{{item.type}}</span></h5>
 	                        </div>
@@ -71,13 +71,13 @@
                     <div class="row">
 	                    <div class="col-xs-2">
 	                        <span ng-repeat="(key, value) in item.setAlpha">
-	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
 	                        </span>
 	                    </div>
 	                    <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
 	                    <div class="col-xs-2">
 	                        <span ng-repeat="(key, value) in item.setBeta">
-	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
 	                        </span>
 	                    </div>
 	                </div>
@@ -87,7 +87,7 @@
 	                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
 	                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
 	                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-	                <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
+	                <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
 	            </div>
 	        </div>
 		</div>

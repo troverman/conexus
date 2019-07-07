@@ -98,7 +98,7 @@
                     <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                     <a href="#" ng-click="validationToggle(time)"><i class="fa fa-check"></i> validate </a>
-                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                     <form role="form" ng-submit="createPost(item)">
@@ -132,7 +132,7 @@
                     <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                     <a href="#" ng-click="validationToggle(time)"><i class="fa fa-check"></i> validate </a>
-                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                     <form role="form" ng-submit="createPost(item)">

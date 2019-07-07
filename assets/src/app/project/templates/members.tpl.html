@@ -10,10 +10,10 @@
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
 		<div class="member-card" ng-click="renderReputationToggle(member)" style="margin-bottom:10px">
 		    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
-		        <a ng-click="$event.stopPropagation()" href="member/{{member.user.username}}"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
+		        <a ng-click="$event.stopPropagation()" href="member/{{member.user.username}}" ui-sref="member.activity({path:member.user.username})"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
             <div class="member-card-info" style="padding:16px;height:auto">
-		        <h4 ng-click="$event.stopPropagation()"><a href="member/{{member.user.username}}">{{member.user.username}}</a></h4>
+		        <h4 ng-click="$event.stopPropagation()"><a href="member/{{member.user.username}}" ui-sref="member.activity({path:member.user.username})">{{member.user.username}}</a></h4>
 		       	<p style="color:gray">{{member.status}} {{member.type}}</p>
 		        <p style="color:gray">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>
                 <p style="color:gray">{{member.user.status}} Offline</p>

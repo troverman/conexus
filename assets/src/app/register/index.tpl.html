@@ -255,7 +255,7 @@
                                 </div>
                                 <div style="clear:both"></div>
                                 <div class="member-card-info" style="height:auto;padding-left:0%">
-                                    <h4 ng-click="$event.stopPropagation()"><a href="member/{{newMember.username}}">{{newMember.username}}</a></h4>
+                                    <h4 ng-click="$event.stopPropagation()"><a href="#">{{newMember.username}}</a></h4>
                                     <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> Creating Account</p>     
                                     <h4 ng-show="newMember.firstName">{{newMember.firstName}} {{newMember.lastName}}</h4>
                                     <h5 ng-show="newMember.dateOfBirth">{{newMember.dateOfBirth}}</h5>
@@ -280,8 +280,8 @@
                             <h3>Value Map</h3>
                             <highchart config="chartMapTotal"></highchart>
                             <div class="" ng-repeat="order in newOrderNEW">
-                                <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span> | 
-                                <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="market/{{asset}}">{{asset}}</a>, </span>
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="#">{{asset}}</a>, </span> | 
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="#">{{asset}}</a>, </span>
                             </div>
                             <div class="spacing-15"></div>
                             <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
@@ -307,7 +307,7 @@
                     <button class="btn btn-default log-btn" ng-click="registerUser()">Sign up</button>    
                     <div class="spacing-10"></div>
                     <div class="social-log">
-                        <a href="/login"><h5 style="color: gray;font-style: italic;"><b>Already A Member?</b></h5></a>
+                        <a href="/login" ui-sref="login"><h5 style="color: gray;font-style: italic;"><b>Already A Member?</b></h5></a>
                     </div>
                 </form>
             </div>

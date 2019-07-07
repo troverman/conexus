@@ -10,11 +10,11 @@
                         <div class="container">
                             <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Order</h1>
                             <span ng-repeat="(key, value) in order.setAlpha">
-                                <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
                             </span>
                             <br>
                             <span ng-repeat="(key, value) in order.setBeta">
-                                <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
                             </span>
                             <h5 style="color:white"><span style="font-size:10px">{{order.type}}</span></h5>
                         </div>
@@ -31,7 +31,7 @@
 
                     <div class="col-xs-2">
                         <span ng-repeat="(key, value) in order.setAlpha">
-                            <p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                            <p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
                         </span>
                     </div>
 
@@ -39,13 +39,13 @@
 
                     <div class="col-xs-2">
                         <span ng-repeat="(key, value) in order.setBeta">
-                            <p style="font-weight:800">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                            <p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
                         </span>
                     </div>
 
                 </div>
 
-            	<a href="member/{{order.user.username}}">
+            	<a href="member/{{order.user.username}}" ui-sref="member.activity({path:order.user.username})">
                     <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
                     {{order.user.username}}
                 </a>
@@ -92,7 +92,7 @@
             <div style="padding:16px;">
                 <h4>{{order.amountSet}} {{order.identiferSet}}</h4>
                 <h4>{{order.amountSet1}} {{order.identiferSet1}}</h4>
-                <a href="member/{{order.user.username}}">
+                <a href="member/{{order.user.username}}" ui-sref="member.activity({path:order.user.username})">
                     <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
                     {{order.user.username}}
                 </a>
@@ -101,7 +101,7 @@
                 <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
                 <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
                 <a ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="color:grey" class="pull-right" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="color:grey" class="pull-right" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
             </div>
         </div>
 
@@ -118,7 +118,7 @@
             <div style="padding:16px">
                 <div>
                     <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}">{{item.user.username}}</a>
+                    <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">{{item.user.username}}</a>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
                 </div> 
                 <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
@@ -127,7 +127,7 @@
                 <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                 <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                <a style="color:grey" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                <a style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
             </div>
             <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
                 <form role="form" ng-submit="createContent(item)">

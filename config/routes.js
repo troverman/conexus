@@ -7,6 +7,7 @@ module.exports.routes = {
   'get /': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /account': 'HomeController.index',
+  'get /action/:id': 'HomeController.index',
   'get /app/:id': 'HomeController.index',
   'get /apps': 'HomeController.index',
   'get /association/:id': 'HomeController.index',

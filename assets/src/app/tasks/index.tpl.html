@@ -124,7 +124,7 @@
 	                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 	                        <div style="margin-top: auto;margin-bottom: auto;">
 	                            <div class="container">
-	                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}">{{item.title}}</a></h1>
+	                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</a></h1>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -133,7 +133,7 @@
 						<div style="float:right;text-align:right">
                             <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
 		                </div>
-						<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+						<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
                     	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 						<span style="color:gray" am-time-ago="item.createdAt"></span>
 					</div>
@@ -142,7 +142,7 @@
 						<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
 						<a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
 						<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
-						<a style="padding:0px" class="pull-right" href="task/{{item.id}}"><i class="fa fa-link grey"></i></a>
+						<a style="padding:0px" class="pull-right" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="fa fa-link grey"></i></a>
 					</div>
 					<div ng-show="task.showReply" class="card-footer">
 		                <form role="form" ng-submit="createContent(task)">

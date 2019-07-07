@@ -10,7 +10,7 @@
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
                             <div class="container">
-                                <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}">{{item.title}}</a></h1>
+                                <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</a></h1>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
 
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">{{item.user.username}}</a>
+                        <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">{{item.user.username}}</a>
                         <!--TODO: ASSOCIATIONS-->
                         <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
                     </div>
@@ -38,7 +38,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
                 <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
                     <form role="form" ng-submit="newContent(item)">
@@ -54,11 +54,11 @@
                         <div style="margin-top: auto;margin-bottom: auto;">
                             <div class="container">
                                 <span ng-repeat="(key, value) in item.setAlpha">
-                                    <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
                                 </span>
                                 <br>
                                 <span ng-repeat="(key, value) in item.setBeta">
-                                    <a style="color:white" href="market/{{key}}">{{key}}</a>
+                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
                                 </span>
                                 <h5 style="color:white"><span style="font-size:10px">{{item.type}}</span></h5>
                             </div>
@@ -72,13 +72,13 @@
                     <div class="row">
                         <div class="col-xs-2">
                             <span ng-repeat="(key, value) in item.setAlpha">
-                                <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                                <p style="font-weight:400">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
                             </span>
                         </div>
                         <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
                         <div class="col-xs-2">
                             <span ng-repeat="(key, value) in item.setBeta">
-                                <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
+                                <p style="font-weight:400">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
                             </span>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>        
             </div>
 
@@ -101,13 +101,13 @@
 
                     <div ng-click="$event.stopPropagation()">
 
-                        <a style="display:inline;font-weight:600;margin-left:5px" href="/member/{{item.user.username}}">
+                        <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({id:item.user.username})">
                             <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.user.username}}
                         </a>
 
                         <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                        <a style="display:inline;font-weight:600" href="time/{{item.id}}">{{item.amount}}</a>
+                        <a style="display:inline;font-weight:600" href="time/{{item.id}}" ui-sref="time({id:item.id})">{{item.amount}}</a>
 
                         <p style="color:gray;font-size:10px;margin-left:42px" am-time-ago="item.createdAt"></p>
 
@@ -123,7 +123,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a style="padding:0px" class="pull-right" href="time/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="time/{{item.id}}" ui-sref="time({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
 
                 <div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
@@ -143,13 +143,13 @@
 
                     <div style="display:inline">
                         <span ng-if="item.from.username">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}" ui-sref="member.activity({id:item.from.username})">
                                 <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.from.username}}
                             </a>
                         </span>
                         <span ng-if="item.from.title">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}" ui-sref="project.activity({id:item.from.urlTitle})">
                                 <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.from.title}}
                             </a>
@@ -162,13 +162,13 @@
 
                     <div style="display:inline">
                         <span ng-if="item.to.username">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}" ui-sref="member.activity({id:item.to.username})">
                                 <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.to.username}}
                             </a>
                         </span>
                         <span ng-if="item.to.title">
-                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}">
+                            <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}" ui-sref="project.activity({id:item.to.urlTitle})">
                                 <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.to.title}}
                             </a>
@@ -177,13 +177,11 @@
 
                     <div class="spacing-5"></div>
                     
-                    <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}">{{key}}</a></p></span>
+                    <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
                     
                     <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 
-                    <p>
-                        <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
-                    </p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 
                     <p style="color:gray;font-size:10px"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
 
@@ -192,7 +190,7 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
+                    <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="transaction/{{item.id}}" ui-sref="transaction({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
             </div>
             

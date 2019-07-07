@@ -3,7 +3,7 @@ angular.module( 'conexus.task', [
 
 .config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'task', {
-        url: '/task/:path',
+        url: '/task/:id',
         views: {
             "main": {
                 controller: 'TaskController',
@@ -14,7 +14,7 @@ angular.module( 'conexus.task', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
-                return TaskModel.getSome({id:$stateParams.path, limit:1, skip:0, sort:'createdAt DESC'});
+                return TaskModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'task', function(ContentModel, task){
                 return ContentModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});

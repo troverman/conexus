@@ -23,6 +23,7 @@ angular.module( 'conexus', [
     'ngCytoscape',
     'conexus.about',
     'conexus.account',
+    'conexus.action',
     'conexus.app',
     'conexus.apps',
     'conexus.association',

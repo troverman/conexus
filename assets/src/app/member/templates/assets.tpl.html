@@ -13,15 +13,8 @@
 -->
 
 <div class="row">
-     <div class="card">
-        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
-            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                <a href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
+    <div class="card">
+        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>    
     </div>
 </div>
 
@@ -71,7 +64,7 @@
 				</div>
 	    	</form>
 	    	<div ng-show="balanceLookupValue !== undefined">
-	    		<h5><a href="market/{{balanceLook}}">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
+	    		<h5><a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
 	    		<!--FOUND TOKEN MODEL.. INFORMATION IE REP OR-->
 	    	</div>
 	    </div>

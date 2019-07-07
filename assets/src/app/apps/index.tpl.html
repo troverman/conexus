@@ -43,7 +43,7 @@
                 <!--<p style="color:gray;font-style:italic">By allowing for application design, we capture a larger design space.</p>-->
                 <p style="color:gray;font-style:italic">How can we create an eglatarian world through tokenization?</p>
                 <!--<p style="color:gray;font-style:italic">Apps are a set of modular protocols in which app design itself is modular.</p>-->
-                <p style="color:gray;font-style:italic">See the <a href="/developers"><b>documentation</b></a> to learn more.</p>
+                <p style="color:gray;font-style:italic">See the <a href="/developers" ui-sref="developers"><b>documentation</b></a> to learn more.</p>
             </div>
             <div class="col-xs-5 col-sm-5">
                 <img src="images/app.gif">
@@ -82,7 +82,7 @@
                     <div style="float:right">
                         <i ng-click="cardDetailToggle()" class="fa fa-ellipsis-v"></i>
                     </div>
-                    <h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}">{{app.title}}</a></h4>
+                    <h4><a ng-click="$event.stopPropagation();" href="app/{{app.title}}" ui-sref="app({id:app.title})">{{app.title}}</a></h4>
                     <p style="color:gray">{{app.description}}</p>
                 </div>
             </div>

@@ -42,7 +42,11 @@
             <div class="spacing-5"></div>
 
             <p><b>Manifolds</b></p> 
-            <p><a href="market/{{project.urlTitle.toUpperCase()}}">{{project.urlTitle.toUpperCase()}}+</a>, <a href="market/{{project.urlTitle.toUpperCase()}}+TASK+">{{project.urlTitle.toUpperCase()}}+TASK+</a>, <a href="{{market/project.urlTitle.toUpperCase()}}+TIME+">{{project.urlTitle.toUpperCase()}}+TIME+</a></p>
+            <p>
+                <a href="market/{{project.urlTitle.toUpperCase()}}" ui-sref="market({id:project.urlTitle.toUpperCase()})">{{project.urlTitle.toUpperCase()}}+</a>, 
+                <a href="market/{{project.urlTitle.toUpperCase()}}+TASK+">{{project.urlTitle.toUpperCase()}}+TASK+</a>, 
+                <a href="{{market/project.urlTitle.toUpperCase()}}+TIME+">{{project.urlTitle.toUpperCase()}}+TIME+</a>
+            </p>
             <div class="spacing-5"></div>
 
         </div>

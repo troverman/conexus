@@ -28,12 +28,12 @@
 					<p style="font-style:italic;color:gray;margin:0px">Timestamp Feb 23, 2019 4:38:23 PM</p>
 					<p style="font-style:italic;color:gray;margin:0px">Mined by	</p>
 					<p style="font-style:italic;color:gray;margin:0px">Merkle Root b2b5ba7db4ecbec6c69df58982bc76f8b0bb745a838ddcc3dfec67022b83519c</p>
-					<p style="font-style:italic;color:gray;margin:0px">Previous Block <a href="block/564365">564365</a></p>
+					<p style="font-style:italic;color:gray;margin:0px">Previous Block <a href="block/564365" ui-sref="block({id:564365})">564365</a></p>
 					<p style="font-style:italic;color:gray;margin:0px">Bits	172e6f88</p>
 					<p style="font-style:italic;color:gray;margin:0px">Size (bytes)	904469</p>
 					<p style="font-style:italic;color:gray;margin:0px">Version 536870912</p>
 					<p style="font-style:italic;color:gray;margin:0px">Nonce 1221514036</p>
-					<p style="font-style:italic;color:gray;margin:0px">Next Block <a href="block/564367">564367</a></p>
+					<p style="font-style:italic;color:gray;margin:0px">Next Block <a href="block/564367" ui-sref="block({id:564367})">564367</a></p>
 				</div>
 			</div>
 		</div>
@@ -62,10 +62,10 @@
 		                </thead>
 		                <tbody>
 		                    <tr ng-repeat="tx in transactions">
-		                        <td><a href="tx/{{tx.id}}">{{tx.id}}</a></td>
+		                        <td><a href="tx/{{tx.id}}" ui-sref="tx({id:tx.id})">{{tx.id}}</a></td>
 								<td>{{tx.data}}</td>
-		                        <td><a href="tx/{{tx.id}}">{{tx.id}}</a></td>
-		                        <td><a href="tx/{{tx.id}}">{{tx.id}}</a></td>
+		                        <td><a href="tx/{{tx.id}}" ui-sref="tx({id:tx.id})">{{tx.id}}</a></td>
+		                        <td><a href="tx/{{tx.id}}" ui-sref="tx({id:tx.id})">{{tx.id}}</a></td>
 		                    </tr>
 		                </tbody>
 		            </table>

@@ -1,8 +1,9 @@
 
 <!--GRAPH REPRESENTATION IN THE COMPUTERD ASSOCIATION NETWORK..-->
+<!--TODO-->
 <div ng-show="project.parent">
 	<div class="spacing-5"></div>
-	<h3><a href="project/{{project.urlTitle}}"><img style="height:32px" src="{{project.parent.avatarUrl}}"> <a href="project/{{project.parent.urlTitle}}">{{project.parent.title}}</a></h3>
+	<h3><a href="project/{{project.urlTitle}}" ui-sref="project.activity({path:project.urlTitle})"><img style="height:32px" src="{{project.parent.avatarUrl}}"></a></h3>
 	<div class="spacing-10"></div>
 </div>
 
@@ -18,10 +19,10 @@
 		<div class="card">
 			<div style="padding:16px;">
 				<div class="row">
-                    <div class="col-sm-1 col-xs-2"><a ng-click="$event.stopPropagation();" href="/project/{{project.urlTitle}}"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a></div>
+                    <div class="col-sm-1 col-xs-2"><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}" ui-sref="project.activity({path:project.urlTitle})"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a></div>
                     <div class="col-sm-11 col-xs-10">
                     	<!--TODO: ON CLICK RENDER ASSOCIATIONS.. DETAIL.. ETC VALIDATIONS.. SPECIFIC 'ITEM' FILTER THU CARDDETAIL-->
-                        <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="/project/{{project.urlTitle}}">{{project.title}}</a></h3>
+                        <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}" ui-sref="project.activity({path:project.urlTitle})">{{project.title}}</a></h3>
                         <div style="max-height:500px;overflow:scroll"><span ng-bind-html="renderContent(project.description)"></span></div>
                     </div>
 				</div>

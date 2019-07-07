@@ -159,13 +159,13 @@
                 </div>  
                 <div style="display:inline">
                     <span ng-if="item.from.username">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}" ui-sref="member.activity({path:item.from.username})">
                             <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.from.username}}
                         </a>
                     </span>
                     <span ng-if="item.from.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}" ui-sref="project.activity({path:item.from.urlTitle})">
                             <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.from.title}}
                         </a>
@@ -176,13 +176,13 @@
                 </div>
 				<div style="display:inline">
                     <span ng-if="item.to.username">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}" ui-sref="member.activity({path:item.to.username})">
                             <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.to.username}}
                         </a>
                     </span>
                     <span ng-if="item.to.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}" ui-sref="project.activity({path:item.to.urlTitle})">
                             <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
                             {{item.to.title}}
                         </a>
@@ -192,17 +192,17 @@
                 <div class="spacing-5"></div>
 
 
-				<span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}">{{key}}</a></p></span>
+				<span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
 				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 				<p>{{item.content}}</p>
 				<p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-				<a ng-click="$event.stopPropagation()" href="transaction/{{item.id}}"></a>
+				<a ng-click="$event.stopPropagation()" href="transaction/{{item.id}}" ui-sref="transaction({id:item.id})"></a>
 			</div>
 			<div class="card-footer">
 				<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
 				<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
 				<a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-				<a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="transaction/{{item.id}}"><i class="fa fa-link grey"></i></a>
+				<a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="transaction/{{item.id}}" ui-sref="transaction({id:item.id})"><i class="fa fa-link grey"></i></a>
 			</div>
 			<div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
 	            <form role="form" ng-submit="createContent(item)">

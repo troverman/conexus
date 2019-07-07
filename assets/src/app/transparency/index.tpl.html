@@ -12,8 +12,6 @@
     </div>
 </div>
 
-
-
 <div class="spacing-10"></div>
 
 <div class="container">
@@ -39,7 +37,7 @@
 			    </div>
 			</div>
 			<div style="padding:16px;">
-				<h5><a href="project/conexus">Conexus Project</a></h5>
+				<h5><a href="project/conexus" ui-sref="project.activity({path:'conexus'})">Conexus Project</a></h5>
 				<p style="color:gray;">Conex API v0.001a</p>
 			</div>
 		</div>
@@ -78,7 +76,7 @@
 		                </thead>
 		                <tbody>
 		                    <tr ng-repeat="peer in peers">
-		                        <td><a href="member/{{peer.user.username}}">{{peer.title}} <!--| {{peer.user.username}}--></a></td>
+		                        <td><a href="member/{{peer.user.username}}" ui-sref="member.activity({path:peer.user.username})">{{peer.title}} <!--| {{peer.user.username}}--></a></td>
 								<td><b>lat:</b> {{peer.location.lat}}, <b>lng:</b> {{peer.location.lng}}</td>
 								<td>{{peer.device.title}}, {{peer.device.processor}}</td>
 								<td>{{peer.poet}}</td>

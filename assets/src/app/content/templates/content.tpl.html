@@ -22,7 +22,7 @@
 
         <div>
             <img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
-            <a style="display:inline" href="/member/{{content.user.username}}"><span style="font-weight:800">{{content.user.username}}</span></a>
+            <a style="display:inline" href="member/{{content.user.username}}" ui-sref="member.activity({path:content.user.username})"><span style="font-weight:800">{{content.user.username}}</span></a>
             <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
         </div>
 
@@ -37,7 +37,7 @@
         <a style="padding:5px;color:grey" ng-click="createReaction(content, 'plus')"><i class="fa fa-angle-up"></i> {{content.reactions.plus}} like </a> 
         <a style="padding:5px;color:grey" ng-click="createReaction(content, 'minus')" ><i class="fa fa-angle-down"></i> {{content.reactions.minus}} dislike </a>
         <a style="padding:5px;color:grey" ng-click="reply(content)"><i class="fa fa-comment-o"></i> comment </a>
-        <a style="color:grey;" class="pull-right" href="content/{{content.id}}"><i class="fa fa-link grey"></i></a>
+        <a style="color:grey;" class="pull-right" href="content/{{content.id}}" ui-sref="content({id:content.id})"><i class="fa fa-link grey"></i></a>
     </div>
     <!--TODO: NESTED -->
     <div ng-show="content.showReply" class="card-footer">
@@ -53,7 +53,7 @@
 <div class="card" style="margin:10px;background-color:#f9f9f9;" ng-show="content.showThread">
     <div style="padding:16px;background-color:white;">
         <i ng-click="toggleThread(content)" class="fa fa-plus"></i>
-        <a style="display:inline;padding-left:5px" href="/member/{{content.user.username}}"><span style="font-weight:800">{{content.user.username}}</span></a>
+        <a style="display:inline;padding-left:5px" href="member/{{content.user.username}}" ui-sref="member.activity({path:content.user.username})"><span style="font-weight:800">{{content.user.username}}</span></a>
         <p style="display:inline;font-size:10px;color:gray;margin-left:5px">{{content.reactions.plus-content.reactions.minus}}</p>
         <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
     </div>
