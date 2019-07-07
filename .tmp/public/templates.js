@@ -4116,7 +4116,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "            	<h5 ng-if=\"true\">\n" +
     "            		<b><a style=\"color:white\" href=\"/apps\" ui-sref=\"apps\">Apps</a></b>\n" +
     "            		<b><a style=\"color:white\" href=\"/content\" ui-sref=\"content\">Content</a></b>\n" +
-    "					<b><a style=\"color:white\" href=\"/marketplace\" ui-sref=\"marketplace\">Items</a></b>\n" +
+    "					<b><a style=\"color:white\" href=\"/marketplace\" ui-sref=\"marketPlace\">Items</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/members\" ui-sref=\"members\">Members</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/market\" ui-sref=\"market\">Orders</a></b>\n" +
     "					<b><a style=\"color:white\" href=\"/projects\" ui-sref=\"projects\">Projects</a></b>\n" +
@@ -4405,12 +4405,20 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
     "			<br>\n" +
+    "			<!--TODO: AUDIT-->\n" +
     "			<a href=\"/about\" ui-sref=\"about\">About</a>\n" +
     "			<a href=\"/discover\" ui-sref=\"discover\">Discover</a>\n" +
+    "			\n" +
     "			<a href=\"/market\" ui-sref=\"market\">Market</a>\n" +
+    "			<!--<a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a>-->\n" +
+    "			\n" +
+    "			<!--<a href=\"/members\" ui-sref=\"members\">Members</a>-->\n" +
+    "			<!--<a href=\"/transparency\" ui-sref=\"transparency\">Peers</a>-->\n" +
+    "\n" +
     "			<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
     "			<a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a>\n" +
     "			<a href=\"/transparency\" ui-sref=\"transparency\">Transparency</a>\n" +
+    "\n" +
     "		</div>\n" +
     "		<!--\n" +
     "		<div class=\"sub-footer\">\n" +
@@ -5424,7 +5432,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                                <h5>\n" +
     "                                    <b><a style=\"color:white\" href=\"/apps\" ui-sref=\"about\">Apps</a></b>\n" +
     "                                    <b><a style=\"color:white\" href=\"/content\" ui-sref=\"content\">Content</a></b>\n" +
-    "                                    <b><a style=\"color:white\" href=\"/marketplace\" ui-sref=\"marketplace\">Items</a></b>\n" +
+    "                                    <b><a style=\"color:white\" href=\"/marketplace\" ui-sref=\"marketPlace\">Items</a></b>\n" +
     "                                    <b><a style=\"color:white\" href=\"/members\" ui-sref=\"members\">Members</a></b>\n" +
     "                                    <b><a style=\"color:white\" href=\"/market\" ui-sref=\"market\">Orders</a></b>\n" +
     "                                    <b><a style=\"color:white\" href=\"/projects\" ui-sref=\"projects\">Projects</a></b>\n" +
@@ -8578,7 +8586,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h4 ng-show=\"currentUser\" class=\"nav-links\" ng-click=\"cre8Toggle()\" style=\"padding:8px;\"><a>CRE8</a></h4>\n" +
     "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/discover\" ui-sref=\"discover\">Discover</a></h4>\n" +
     "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/market\" ui-sref=\"market\">Market</a></h4>\n" +
-    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/marketplace\" ui-sref=\"marketplace\">Marketplace</a></h4>\n" +
+    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a></h4>\n" +
     "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/projects\" ui-sref=\"projects\">Projects</a></h4>\n" +
     "                <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:8px;\">\n" +
     "                    <a href=\"/notifications\" ui-sref=\"notifications\"> <span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a>\n" +
