@@ -10372,6 +10372,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                            <div class=\"container\">\n" +
     "                                <h1 ng-click=\"$event.stopPropagation();\" style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">{{item.title}}</a></h1>\n" +
+    "                                <h5 ng-click=\"$event.stopPropagation()\"><a style=\"color:white\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">{{item.id}}</a></h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -10429,6 +10430,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
+    "            <!--UPGRADE-->\n" +
     "            <div class=\"card\" ng-if=\"item.model=='TIME'\" ng-click=\"cardDetailToggle(item)\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "                    <div style=\"float:right\">\n" +

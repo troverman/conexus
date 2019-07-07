@@ -34,6 +34,7 @@
                         <div style="margin-top: auto;margin-bottom: auto;">
                             <div class="container">
                                 <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</a></h1>
+                                <h5 ng-click="$event.stopPropagation()"><a style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.id}}</a></h5>
                             </div>
                         </div>
                     </div>
@@ -91,6 +92,7 @@
                 </div>
             </div>
 
+            <!--UPGRADE-->
             <div class="card" ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)">
                 <div style="padding:16px;">
                     <div style="float:right">
