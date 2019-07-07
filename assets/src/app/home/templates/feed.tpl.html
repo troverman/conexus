@@ -3,11 +3,12 @@
 
     <div class="row" ng-if="isTutorial">
 
-        <div ng-show="pageNumber == 0" class="card" ng-click="">
+        <div ng-show="pageNumber == 0" class="card">
             <div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;padding:15px">
-                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Information & Settings</h1>
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Welcome to CRE8</h1>
+                        <!--<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Information & Settings</h1>-->
                         <h5 ng-if="false">
                             <a style="color:white;" ng-disabled="!consentAgreement" ng-click="changePage()">
                                 CONTINUE <i class="fa fa-arrow-right"></i>
@@ -55,9 +56,8 @@
                             <div style="background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')" class="imageContainerSmall">
                                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                                     <div class="container" style="margin-top: auto;margin-bottom: auto;">
-                                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">
-                                            <a style="color:white" href="/account"  ui-sref="account"><i class="fas fa-passport"></i> Account Settings</a>
-                                        </h1>
+                                        <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Information</h1>
+                                        <h5><a style="color:white" href="/account"  ui-sref="account"><i class="fas fa-passport"></i> Account Settings</a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +101,7 @@
                     <div style="margin-top: auto;margin-bottom: auto;padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Projects</h1>
                         <p style="color:white;">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>
+                        <!--
                         <h5 style="color:white;" ng-if="false">
                             <p ng-disabled="!consentAgreement"  ng-click="changePage()">
                                 CONTINUE <i class="fa fa-arrow-right"></i>
@@ -109,6 +110,7 @@
                                 SKIP <i class="fa fa-angle-double-right"></i>
                             </p>
                         </h5>
+                        -->
                     </div>
                 </div>
             </div>
@@ -179,8 +181,8 @@
                     <div ng-repeat="item in tasks" class="col-md-12 col-sm-12 col-xs-12" style="padding:0px">
                         <div class="card" ng-click="cardDetailToggle(item)">
 
-                            <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-                                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px" class="imageContainerSmall">
+                                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
                                     <div style="margin-top: auto;margin-bottom: auto;">
                                         <div class="container">
                                             <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation()" href="task/{{item.id}}" ui-sref="tasks" style="color:white">{{item.title}}</a></h1>

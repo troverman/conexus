@@ -1,12 +1,14 @@
 <div class="spacing-5"></div>
 <div class="row">
 	<div class="col-lg-4 col-sm-6" ng-repeat="project in projects">
-		<div class="member-card" ng-click="">
+		<!--TODO RENDER PROJECT-MEMBER-->
+		<div class="member-card" ng-click="cardDetailToggle(project.project)">
 			<div class="member-card-image" style="background-color:black">
-		        <a href="project/{{project.project.title}}" ui-sref="project.activity({path:project.project.urlTitle})"><img ng-src="{{project.project.avatarUrl}}" err-src="/images/avatar.png"></a>
+		        <a ng-click="$event.stopPropagation();" href="project/{{project.project.title}}" ui-sref="project.activity({path:project.project.urlTitle})"><img ng-src="{{project.project.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
 		    <div class="member-card-info">
-		        <h4><a href="project/{{project.project.urlTitle}}" ui-sref="project.activity({path:project.project.urlTitle})">{{project.project.title}}</a></h4>
+		        <h4><a ng-click="$event.stopPropagation();" href="project/{{project.project.urlTitle}}" ui-sref="project.activity({path:project.project.urlTitle})">{{project.project.title}}</a></h4>
+		        <p style="color:gray">{{project.status}}</p>
 		        <p style="color:gray">Member | {{project.user.reputation[project.project.title] || 0}}</p>
 		    </div>
 		</div>

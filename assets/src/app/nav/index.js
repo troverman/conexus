@@ -802,11 +802,8 @@ angular.module( 'conexus.nav', [
 
 
 
-
-
-
-
     //MEMBER CARD TOGGLE | TODO RENAME
+    //TODO: REDO REP MAPPING
     $rootScope.renderReputationToggle = function(item){
         $scope.closeAllNav();
 
@@ -840,16 +837,16 @@ angular.module( 'conexus.nav', [
             credits:{enabled:false},
         };
 
-        //TODO: SORT
-        for (x in Object.keys($scope.reputation)){
-            if ($scope.reputation[Object.keys($scope.reputation)[x]]){
-                if (x < 250){
-                    $scope.chart.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
-                    $scope.chart.xAxis.categories.push(Object.keys($scope.reputation)[x]);
-                }
+        var sortable = [];
+        for (var dimension in $scope.reputation) {sortable.push([dimension, $scope.reputation[dimension]])}
+        sortable.sort(function(a, b) {return b[1] - a[1]});
+
+        for (x in sortable){
+            if (x < 100){
+                $scope.chart.xAxis.categories.push(sortable[x][0]);
+                $scope.chart.series[0].data.push(sortable[x][1]);
             }
         }
-        
         $mdSidenav('renderReputation').toggle();
     };
 
