@@ -1,3 +1,9 @@
+<style>
+    .ngCytoscape{
+        height: 500px;
+        width:100%;
+    }
+</style>
 <div style="background:url('https://source.unsplash.com/1600x900/?,geometry')" class="imageContainerSmall">
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
@@ -28,12 +34,6 @@
 	    <div class="card" ng-if="true">
 			<!--<nvd3 options="graphOptions" data="graphDataPower" class="with-3d-shadow with-transitions"></nvd3>
 			<nvd3 options="graphOptions" data="graphData" class="with-3d-shadow with-transitions"></nvd3>-->
-			<style>
-                .ngCytoscape{
-                    height: 500px;
-                    width:100%;
-                }
-            </style>
             <!--<cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>-->
 	    </div>
 	    
@@ -49,7 +49,18 @@
 				    </div>
 				</div>
 			    <div style="padding:16px;">
-			    	<p style="white-space: nowrap;color:gray">{{token.string}} markets</p>
+			    	<div style="float:right;text-align:right">
+                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(order)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                        <div style="clear:both"></div>
+                    </div>  
+
+                    <!--LOL-->
+                    <img style="border-radius:100%;height:64px;padding-right:5px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('')}}?s=8&p=8&f=png">
+                   
+                    <div class="spacing-10"></div>
+			    	<p style="color:gray">Circulating: {{token.information.inCirculation}}</p>
+			    	<p style="color:gray">Market Connections: {{token.information.markets}}</p>
+				    <p style="color:gray">Protocols: {{token.protocols}}</p>
 			    	<!--
 			    	<a style="white-space: nowrap;" href="market/{{market.string}}"><h4>{{market.string}}</h4></a>
 			    	<p style="white-space: nowrap;color:gray">{{market.string}} markets</p>

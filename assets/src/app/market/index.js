@@ -197,9 +197,11 @@ angular.module( 'conexus.market', [
     //TODO: HMM
     //GENERATE
     for(var i=-1000;i<1000;i++){
-        if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
-        if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
+        //if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
+        //if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
     }
+    //$scope.bidAskChart.series[1].data.reverse();
+
     for (x in $scope.baseMarkets){
         var random1 = Math.floor(255*Math.random());
         var random2 = Math.floor(255*Math.random());

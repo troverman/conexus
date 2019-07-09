@@ -58,6 +58,12 @@ angular.module( 'conexus.marketPair', [
     $rootScope.market = $stateParams.setAlpha;
     $rootScope.market1 = $stateParams.setBeta;
 
+    //HMM
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+    };
+
     $scope.bidAskChart = {
         chart: {zoomType: 'x'},
         legend:{enabled:true},
@@ -176,11 +182,12 @@ angular.module( 'conexus.marketPair', [
 
     //POPULATE ORDER BOOK
     if (orders.length == 0){
-        for(var i=-1000;i<1000;i++){
-            if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
+        for(var i=-100;i<100;i++){
             if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
+            if (i>0){$scope.bidAskChart.series[1].data.push([i+100000,i*i]);}
         }
     }
+    $scope.bidAskChart.series[1].data.reverse();
 
     //TODO: PLURALISM VIZULATION
     if (!$scope.pluralistic){

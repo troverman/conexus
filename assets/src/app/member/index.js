@@ -333,10 +333,40 @@ angular.module( 'conexus.member', [
     $scope.newReaction = {};
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
-    $scope.orders = orders;
-    $scope.orders = $scope.orders.map(function(obj){
+    $scope.orders = orders.map(function(obj){
+        var elementsObj = {};
+        for (y in Object.keys(obj.setAlpha)){
+            var modelNode = {
+                group:'nodes',
+                data:{id:Object.keys(obj.setAlpha)[y], name:Object.keys(obj.setAlpha)[y]}
+            };
+            if (Object.keys(elementsObj).indexOf(Object.keys(obj.setAlpha)[y]) == -1){
+                elementsObj[Object.keys(obj.setAlpha)[y]] = modelNode;
+            }
+            for (z in Object.keys(obj.setBeta)){
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:Object.keys(obj.setBeta)[z], name:Object.keys(obj.setBeta)[z]}
+                };
+                if (Object.keys(elementsObj).indexOf(Object.keys(obj.setBeta)[z]) == -1){
+                    elementsObj[Object.keys(obj.setBeta)[z]] = modelNode;
+                    var modelEdge = {
+                        group:'edges',
+                        data:{
+                            id:Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z], 
+                            source:Object.keys(obj.setAlpha)[y], 
+                            target:Object.keys(obj.setBeta)[z],
+                            label: obj.setBeta[Object.keys(obj.setBeta)[z]],
+                        },
+                        classes: 'edgeLabelStyle',
+                    };
+                    elementsObj[Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z]] = modelEdge;
+                }
+            }
+        }
+        obj.directedGraph = elementsObj;
         obj.model = 'ORDER';
-        return obj;
+        return obj
     });
 
     $scope.contentList = contentList;
@@ -359,6 +389,121 @@ angular.module( 'conexus.member', [
         }
         else{return true}
     });
+
+    $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
+    $scope.options = {
+        pixelRatio: 'auto',
+        maxZoom:10,
+        minZoom:0.1,
+    };
+    $scope.style = [
+        {
+            "selector": "core",
+            "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+            }
+        }, {
+            "selector": "node",
+            "style": {
+                "width": "25",
+                "height": "25",
+                "content": "data(name)",
+                "font-size": "12px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+            }
+        }, {
+            "selector": "node[?attr]",
+            "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+            }
+        }, {
+            "selector": "node[?query]",
+            "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+            }
+        }, {
+            "selector": "node:selected",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+            }
+        }, {
+            "selector": "edge",
+            "style": {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale":"0.75",
+                "source-arrow-shape": "none",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "3",
+                "overlay-padding": "3px",
+                'label': 'data(label)'
+            }
+        },
+        {
+            "selector": ".edgeLabelStyle",
+            "style": {
+                 "text-background-opacity": 1,
+                  "color": "#fff",
+                  "font-size": "12px",
+                  "text-background-color": "#77828C",
+                  "text-background-shape": "roundrectangle",
+                  "text-border-color": "#e8e8e8",
+                  "text-border-width": 1,
+                  "text-border-opacity": 1
+            }
+        },
+        {
+            "selector": "node.unhighlighted",
+            "style": {
+                "opacity": "0.2"
+            }
+        }, {
+            "selector": "edge.unhighlighted",
+            "style": {
+                "opacity": "0.05"
+            }
+        }, {
+            "selector": ".highlighted",
+            "style": {
+                "z-index": "999999"
+            }
+        }, {
+            "selector": "node.highlighted",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+            }
+        }, {
+            "selector": "edge.filtered",
+            "style": {
+                "opacity": "0"
+            }
+        }
+    ];
 
     $scope.time = time;
     $scope.time = $scope.time.map(function(obj){
@@ -517,19 +662,9 @@ angular.module( 'conexus.member', [
             }]
         }],
         
-        title: {
-            text: ''
-        },
-        xAxis: {
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
 
@@ -623,8 +758,8 @@ angular.module( 'conexus.member', [
     //COLUMN | BALANCE
     for (x in Object.keys($scope.balance)){
         if ($scope.balance[Object.keys($scope.balance)[x]]){
-            $scope.balanceColumn.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
-            $scope.balanceColumn.xAxis.categories.push(Object.keys($scope.balance)[x]);
+            //$scope.balanceColumn.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
+            //$scope.balanceColumn.xAxis.categories.push(Object.keys($scope.balance)[x]);
         }
     }
 
@@ -632,24 +767,25 @@ angular.module( 'conexus.member', [
     //BAD
     var sortable = [];
     for (x in $scope.balance) {
-        sortable.push([x, $scope.balance[x]]);
+        if(!isNaN($scope.balance[x]) && $scope.balance[x]!=null && $scope.balance[x]!="undefined" && $scope.balance[x]!="NaN"){
+            sortable.push([x, $scope.balance[x]]);
+        }
     }
+    //COULD SORT BY 'WORTH'
     sortable.sort(function(a, b) {
         return b[1] - a[1];
     });
     for (x in sortable){
-        $scope.balancePie.series[0].data.push({
-            name: sortable[x][0],
-            y: sortable[x][1],
-        });
+        if (x < 250){
+            $scope.balancePie.series[0].data.push({
+                name: sortable[x][0],
+                y: sortable[x][1],
+            });
+            $scope.balanceColumn.xAxis.categories.push(sortable[x][0]);
+            $scope.balanceColumn.series[0].data.push(sortable[x][1]);   
+        }
     }
-    //for (x in Object.keys($scope.balance)){
-    //    $scope.balancePie.series[0].data.push({
-    //        name: Object.keys($scope.balance)[x],
-    //        y: $scope.balance[Object.keys($scope.balance)[x]],
-    //    });
-    //}
-
+    
     //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
         //$scope.balanceLook = $scope.balanceLook.toLowerCase();
@@ -1559,6 +1695,156 @@ angular.module( 'conexus.member', [
     $scope.newReaction = {};
     $scope.orders = orders;
 
+    $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
+    $scope.options = {
+        pixelRatio: 'auto',
+        maxZoom:10,
+        minZoom:0.1,
+    };
+    $scope.style = [
+        {
+            "selector": "core",
+            "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+            }
+        }, {
+            "selector": "node",
+            "style": {
+                "width": "25",
+                "height": "25",
+                "content": "data(name)",
+                "font-size": "12px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+            }
+        }, {
+            "selector": "node[?attr]",
+            "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+            }
+        }, {
+            "selector": "node[?query]",
+            "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+            }
+        }, {
+            "selector": "node:selected",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+            }
+        }, {
+            "selector": "edge",
+            "style": {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale":"0.75",
+                "source-arrow-shape": "none",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "3",
+                "overlay-padding": "3px",
+                'label': 'data(label)'
+            }
+        },
+        {
+            "selector": ".edgeLabelStyle",
+            "style": {
+                 "text-background-opacity": 1,
+                  "color": "#fff",
+                  "font-size": "12px",
+                  "text-background-color": "#77828C",
+                  "text-background-shape": "roundrectangle",
+                  "text-border-color": "#e8e8e8",
+                  "text-border-width": 1,
+                  "text-border-opacity": 1
+            }
+        },
+        {
+            "selector": "node.unhighlighted",
+            "style": {
+                "opacity": "0.2"
+            }
+        }, {
+            "selector": "edge.unhighlighted",
+            "style": {
+                "opacity": "0.05"
+            }
+        }, {
+            "selector": ".highlighted",
+            "style": {
+                "z-index": "999999"
+            }
+        }, {
+            "selector": "node.highlighted",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+            }
+        }, {
+            "selector": "edge.filtered",
+            "style": {
+                "opacity": "0"
+            }
+        }
+    ];
+
+    $scope.orders = orders.map(function(obj){
+        var elementsObj = {};
+        for (y in Object.keys(obj.setAlpha)){
+            var modelNode = {
+                group:'nodes',
+                data:{id:Object.keys(obj.setAlpha)[y], name:Object.keys(obj.setAlpha)[y]}
+            };
+            if (Object.keys(elementsObj).indexOf(Object.keys(obj.setAlpha)[y]) == -1){
+                elementsObj[Object.keys(obj.setAlpha)[y]] = modelNode;
+            }
+            for (z in Object.keys(obj.setBeta)){
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:Object.keys(obj.setBeta)[z], name:Object.keys(obj.setBeta)[z]}
+                };
+                if (Object.keys(elementsObj).indexOf(Object.keys(obj.setBeta)[z]) == -1){
+                    elementsObj[Object.keys(obj.setBeta)[z]] = modelNode;
+                    var modelEdge = {
+                        group:'edges',
+                        data:{
+                            id:Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z], 
+                            source:Object.keys(obj.setAlpha)[y], 
+                            target:Object.keys(obj.setBeta)[z],
+                            label: obj.setBeta[Object.keys(obj.setBeta)[z]],
+                        },
+                        classes: 'edgeLabelStyle',
+                    };
+                    elementsObj[Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z]] = modelEdge;
+                }
+            }
+        }
+        obj.directedGraph = elementsObj;
+        return obj
+    });
+
     //DEPRECIATE
     $scope.orders.forEach(function(part, index) {
         if ($scope.orders[index].identiferSet){$scope.orders[index].identiferSet = $scope.orders[index].identiferSet.split(',');}
@@ -1660,6 +1946,11 @@ angular.module( 'conexus.member', [
             {text:'VALIDATE'},
         ];
     }
+
+    $rootScope.types = [
+        {text:'CONTINUAL'},
+        {text:'ONBOOKS'},
+    ];
 
     $scope.searchQuery = $rootScope.baseMarkets;
 

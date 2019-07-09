@@ -40,10 +40,43 @@ angular.module( 'conexus.item', [
 
     //VERBS FOR THE ITEM ARE?? 
     $scope.actions = actions;
-    $scope.orders = orders;
+    $scope.orders = orders.map(function(obj){
+        var elementsObj = {};
+        for (y in Object.keys(obj.setAlpha)){
+            var modelNode = {
+                group:'nodes',
+                data:{id:Object.keys(obj.setAlpha)[y], name:Object.keys(obj.setAlpha)[y]}
+            };
+            if (Object.keys(elementsObj).indexOf(Object.keys(obj.setAlpha)[y]) == -1){
+                elementsObj[Object.keys(obj.setAlpha)[y]] = modelNode;
+            }
+            for (z in Object.keys(obj.setBeta)){
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:Object.keys(obj.setBeta)[z], name:Object.keys(obj.setBeta)[z]}
+                };
+                if (Object.keys(elementsObj).indexOf(Object.keys(obj.setBeta)[z]) == -1){
+                    elementsObj[Object.keys(obj.setBeta)[z]] = modelNode;
+                    var modelEdge = {
+                        group:'edges',
+                        data:{
+                            id:Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z], 
+                            source:Object.keys(obj.setAlpha)[y], 
+                            target:Object.keys(obj.setBeta)[z],
+                            label: obj.setBeta[Object.keys(obj.setBeta)[z]],
+                        },
+                        classes: 'edgeLabelStyle',
+                    };
+                    elementsObj[Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z]] = modelEdge;
+                }
+            }
+        }
+        obj.directedGraph = elementsObj;
+        obj.model = 'ORDER';
+        return obj
+    });
     $scope.transactions = transactions;
 
-    console.log(actions,transactions)
     //TODO: COMPLEX QUERY
     ContentModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
         $scope.contentList = contentList;
@@ -51,15 +84,13 @@ angular.module( 'conexus.item', [
 
     //TODO: OWNERSHIP HISTORY -- AS ACTION
     //AS TRANSACTION WITH ITEM ID
-
     //GENERATORS.. ACTIONS.. (trans)actions
     //EVERY TRANSACTION TOKEN IS AN ITEM..? EVERY UNIQUE TOKEN IS AN ITEM --> TOKEN AND ITEM UNITY?  .. // /token and /item unity
         //INTERLINK
-
         //items owning tokens (usd .. )
-
     //OrderModel.getSome()..
  
+    //HMM.. 
     $rootScope.associatedModels = [{
         address: $scope.item.id,
         type: 'MARKET',
@@ -105,23 +136,13 @@ angular.module( 'conexus.item', [
     $scope.newReaction = {};
     $scope.outputVector = [];
 
-
-
-
-
-
-
-
     //market vs discrete orders
-
-   $scope.options = {
-        textureOnViewport:true,
+    $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
+    $scope.options = {
         pixelRatio: 'auto',
-        motionBlur: false,
-        hideEdgesOnViewport:true
+        maxZoom:10,
+        minZoom:0.1,
     };
-    $scope.layout = {name: 'grid', coolingFactor: 0, animate: true};
-
     $scope.style = [
         {
             "selector": "core",
@@ -133,10 +154,10 @@ angular.module( 'conexus.item', [
         }, {
             "selector": "node",
             "style": {
-                "width": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
-                "height": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "width": "25",
+                "height": "25",
                 "content": "data(name)",
-                "font-size": "9px",
+                "font-size": "12px",
                 "text-valign": "center",
                 "text-halign": "center",
                 "background-color": "#77828C",
@@ -182,9 +203,24 @@ angular.module( 'conexus.item', [
                 "opacity": "0.9",
                 "line-color": "#bbb",
                 "width": "3",
-                "overlay-padding": "3px"
+                "overlay-padding": "3px",
+                'label': 'data(label)'
             }
-        }, {
+        },
+        {
+            "selector": ".edgeLabelStyle",
+            "style": {
+                 "text-background-opacity": 1,
+                  "color": "#fff",
+                  "font-size": "12px",
+                  "text-background-color": "#77828C",
+                  "text-background-shape": "roundrectangle",
+                  "text-border-color": "#e8e8e8",
+                  "text-border-width": 1,
+                  "text-border-opacity": 1
+            }
+        },
+        {
             "selector": "node.unhighlighted",
             "style": {
                 "opacity": "0.2"
@@ -212,62 +248,6 @@ angular.module( 'conexus.item', [
             "selector": "edge.filtered",
             "style": {
                 "opacity": "0"
-            }
-        }, {
-            "selector": "edge[group=\"coexp\"]",
-            "style": {
-                "line-color": "#d0b7d5"
-            }
-        }, {
-            "selector": "edge[group=\"coloc\"]",
-            "style": {
-                "line-color": "#a0b3dc"
-            }
-        }, {
-            "selector": "edge[group=\"gi\"]",
-            "style": {
-                "line-color": "#90e190"
-            }
-        }, {
-            "selector": "edge[group=\"path\"]",
-            "style": {
-                "line-color": "#9bd8de"
-            }
-        }, {
-            "selector": "edge[group=\"pi\"]",
-            "style": {
-                "line-color": "#eaa2a2"
-            }
-        }, {
-            "selector": "edge[group=\"predict\"]",
-            "style": {
-                "line-color": "#f6c384"
-            }
-        }, {
-            "selector": "edge[group=\"spd\"]",
-            "style": {
-                "line-color": "#dad4a2"
-            }
-        }, {
-            "selector": "edge[group=\"spd_attr\"]",
-            "style": {
-                "line-color": "#D0D0D0"
-            }
-        }, {
-            "selector": "edge[group=\"reg\"]",
-            "style": {
-                "line-color": "#D0D0D0"
-            }
-        }, {
-            "selector": "edge[group=\"reg_attr\"]",
-            "style": {
-                "line-color": "#D0D0D0"
-            }
-        }, 
-        {
-            "selector": "edge[group=\"user\"]",
-            "style": {
-                "line-color": "#f0ec86"
             }
         }
     ];

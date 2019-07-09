@@ -241,7 +241,7 @@
                                 <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="/discover" ui-sref="discover">Discover CRE8</a></h1>
                                 <h5>
                                     <b><a style="color:white" href="/apps" ui-sref="about">Apps</a></b>
-                                    <b><a style="color:white" href="/content" ui-sref="content">Content</a></b>
+                                    <b><a style="color:white" href="/content" ui-sref="contentList">Content</a></b>
                                     <b><a style="color:white" href="/marketplace" ui-sref="marketPlace">Items</a></b>
                                     <b><a style="color:white" href="/members" ui-sref="members">Members</a></b>
                                     <b><a style="color:white" href="/market" ui-sref="market">Orders</a></b>
@@ -272,7 +272,7 @@
                 <div style="clear:both"></div>
             </ul>
             <div class="card">
-                <tags-input class="" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+                <tags-input class="" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
             </div>
 
             <div ng-repeat="item in activity">

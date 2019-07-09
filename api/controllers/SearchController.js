@@ -266,5 +266,91 @@ module.exports = {
 				});
 			}
 		}
-	}
+	},
+
+
+	//TODO: QUERY BUILD ...
+	//GET ACTIVITY BASED ON FOLLOWERS
+	//GET ACTIVITY BASED ON PROJECTS
+
+	//GET ACTIVITY BASED ON [CUSTOM]
+
+	//ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
+
+	//GET COMPLEX FILTER
+	workingSearch: function(req, res){
+
+		db.collection.aggregate([
+			{ 
+				"$limit": 1 
+			},
+			{ 
+				"$facet": {
+					"c1": [
+						{ 
+							"$lookup": {
+								"from": Users.collection.name,
+								"pipeline": [
+									{ 
+										"$match": { 
+											"first_name": "your_search_data" 
+										} 
+									}
+								],
+								"as": "collection1"
+							}
+						}
+					],
+					"c2": [
+						{ 
+							"$lookup": {
+								"from": State.collection.name,
+								"pipeline": [
+									{ 
+										"$match": { 
+											"name": "your_search_data" 
+										} 
+									}
+								],
+								"as": "collection2"
+							}
+						}
+					],
+					"c3": [
+						{
+							 "$lookup": {
+								"from": State.collection.name,
+								"pipeline": [
+									{ 
+										"$match": { 
+											"name": "your_search_data" 
+										}
+									 }
+								],
+								"as": "collection3"
+							}
+						}
+					]
+				}
+			},
+			{ 
+				"$project": {
+					"data": {
+						"$concatArrays": [ "$c1", "$c2", "$c3" ]
+					}
+				}
+			},
+			{
+				"$unwind": "$data" 
+			},
+			{ 
+				"$replaceRoot": { 
+					"newRoot": "$data" 
+				}
+			}
+		]);
+
+	},
+
+
 };

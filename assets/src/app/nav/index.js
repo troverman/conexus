@@ -1589,12 +1589,18 @@ angular.module( 'conexus.nav', [
                 }).join(",");
             }
 
-            $scope.newTransaction.from = $scope.newTransaction.from[0].id;
-            $scope.newTransaction.to = $scope.newTransaction.to[0].id;
+            //MULTI TRANSACTION BUG... 
+            //COPY MODEL.. 
+            var newTransaction = $scope.newTransaction;
+            newTransaction.from = newTransaction.from[0].id;
+            newTransaction.to = newTransaction.to[0].id;
+            
+            //$scope.newTransaction.from = $scope.newTransaction.from[0].id;
+            //$scope.newTransaction.to = $scope.newTransaction.to[0].id;
 
             console.log($scope.newTransaction);
 
-            TransactionModel.create($scope.newTransaction).then(function(model){
+            TransactionModel.create(newTransaction).then(function(model){
                 $scope.confirm = $scope.newTransaction;
                 $scope.confirm.model = 'TRANSACTION';
                 $scope.newTransaction.amountSet = {};

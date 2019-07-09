@@ -30,74 +30,129 @@
 	<div class="spacing-10"></div>
 	<div class="row">
 		<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-            <li ng-click=""><a href="#">Manifold Actions</a></li>
-            <li ng-click=""><a href="#">Trade Postions</a></li>
+			<li ng-click="selectTab('INFORMATION')"><a href="#">Information</a></li>
+            <li ng-click="selectTab('MANIFOLDS')"><a href="#">Manifold Actions</a></li><!--ACTIONS ON ITEMS (eyes) protocols .. what manifolds in a market-->
+            <li ng-click="selectTab('ORDERS')"><a href="#">Positions & Trades</a></li>
         </ul>
-		<div class="card">
-			<div style="padding:16px;">
-				<highchart config="chart"></highchart>
+
+        <div ng-if="selectedTab =='INFORMATION'">
+			<div class="card">
+				<!--
+				<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset');min-height:100px" class="imageContainerSmall">
+	                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+	                    <div style="margin-top: auto;margin-bottom: auto;">
+	                        <div style="padding:15px">
+	                            <h2 style="color:white">Price</h2>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        	-->
+				<div style="padding:16px;">
+					<highchart config="chart"></highchart>
+				</div>
+			</div>
+
+			<!--TODO: ARRAY-->
+			<!--combinatorial market string-->
+			<!--MANIFOLDS ARE NESTED. . . -> INSTRUMENTS IN PROTOCOL.. SPONSOR, DERIVITATIVES-->
+			<!--option tokens string inferance+time+option-->
+			<!--
+			Market Orders;@ price | fok; ioc; onbook;
+			Limit Orders; sell no lower than, buy no higher than price
+			array based; so multiD stops.. a gradiation in dimesnions
+			-->
+
+			<div class="card" ng-show="pluralistic">
+				<div style="padding:16px;">
+					<h2>Pluralistic Market</h2>
+					<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>
+				</div>
+			</div>
+			<div class="card">
+				<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset');min-height:100px" class="imageContainerSmall">
+	                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+	                    <div style="margin-top: auto;margin-bottom: auto;">
+	                        <div style="padding:15px">
+	                            <h2 style="color:white">Order Book</h2>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+				<div style="padding:16px;">
+					<highchart config="bidAskChart"></highchart>
+				</div>
 			</div>
 		</div>
-		<div class="card" ng-show="pluralistic">
-			<div style="padding:16px;">
-				<h2>Pluralistic Market</h2>
+
+		<div ng-if="selectedTab =='MANIFOLDS'">
+			<div class="card">
+				<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset');min-height:100px" class="imageContainerSmall">
+	                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+	                    <div style="margin-top: auto;margin-bottom: auto;">
+	                        <div style="padding:15px">
+	                            <h2 style="color:white">Manifold Actions</h2>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+				<div style="padding:16px;">
+				</div>
 			</div>
 		</div>
-		<div class="card">
-			<div style="padding:16px;">
-				<h2>Order Book</h2>
-				<!--<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>-->
-				<highchart config="bidAskChart"></highchart>
-			</div>
-		</div>
-	</div>
 
-	<!--TODO: ARRAY-->
-	<!--combinatorial market string-->
-	<!--MANIFOLDS ARE NESTED. . . -> INSTRUMENTS IN PROTOCOL.. SPONSOR, DERIVITATIVES-->
-	<!--option tokens string inferance+time+option-->
-	<!--
-	Market Orders;@ price | fok; ioc; onbook;
-	Limit Orders; sell no lower than, buy no higher than price
-	array based; so multiD stops.. a gradiation in dimesnions
-	-->
+		<div ng-if="selectedTab =='ORDERS'">
 
-	<div class="row">
-		<div class="card">
-			<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button>
-		</div>
-
-		<!--TODO: Partially Filled Orders | TRADES-->
-		<div ng-repeat="order in orders">
-	        <div class="card">
-	            <div style="padding:16px">
-					<!--<p>Type</p>-->
-	            	<div class="row">
-		            	<div class="col-md-2">
-		            		<a style="font-weight:bold" href="market/{{order.identiferSet.join(',')}}">{{order.identiferSet.join(',')}}</a><br><br>
-		                	<span style="" ng-repeat="item in order.amountSet track by $index">
-								{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a><br>
-							</span>
-						</div>
-		            	<div class="col-md-1"><i class="fa fa-exchange"></i></div>
-						<!--<span> | </span>-->
-		            	<div class="col-md-2">
-							<a style="font-weight:bold" href="market/{{order.identiferSet1.join(',')}}">{{order.identiferSet1.join(',')}}</a><br><br>
-							<span style="" ng-repeat="item in order.amountSet1 track by $index">
-								{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a><br>
-							</span>
-						</div>
+			<div class="card">
+				<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset');min-height:100px" class="imageContainerSmall">
+	                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+	                    <div style="margin-top: auto;margin-bottom: auto;">
+	                        <div style="padding:15px">
+	                            <h2 style="color:white">Positions & Trades</h2>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+				<div style="padding:16px;">
+					<div class="card">
+						<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button>
 					</div>
-					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-	            </div>
-	            <div class="card-footer">
-	                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
-	                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
-	                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
-	                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
-	            </div>
-	        </div>
+				</div>
+			</div>
+			
+			<!--TODO: Partially Filled Orders | TRADES-->
+			<div ng-repeat="order in orders">
+		        <div class="card">
+		            <div style="padding:16px">
+						<!--<p>Type</p>-->
+		            	<div class="row">
+			            	<div class="col-md-2">
+			            		<a style="font-weight:bold" href="market/{{order.identiferSet.join(',')}}">{{order.identiferSet.join(',')}}</a><br><br>
+			                	<span style="" ng-repeat="item in order.amountSet track by $index">
+									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a><br>
+								</span>
+							</div>
+			            	<div class="col-md-1"><i class="fa fa-exchange"></i></div>
+							<!--<span> | </span>-->
+			            	<div class="col-md-2">
+								<a style="font-weight:bold" href="market/{{order.identiferSet1.join(',')}}">{{order.identiferSet1.join(',')}}</a><br><br>
+								<span style="" ng-repeat="item in order.amountSet1 track by $index">
+									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a><br>
+								</span>
+							</div>
+						</div>
+						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
+		            </div>
+		            <div class="card-footer">
+		                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+		                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
+		                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+		                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
+		            </div>
+		        </div>
+			</div>
 		</div>
+
 	</div>
 </div>
 

@@ -1054,9 +1054,9 @@
             <div style="padding:16px;">
 
                 <p style="font-size:13px;">
-                    <a href="/member/{{item.user.username}}/projects" ui-sref="member.projects({path:item.user.username})">{{item.user.projectCount || 0}} Projects</a> | 
-                    <a href="/member/{{item.user.username}}/followers" ui-sref="member.followers({path:item.user.username})">{{item.user.followerCount || 0}} Followers</a> | 
-                    <a href="/member/{{item.user.username}}/following" ui-sref="member.following({path:item.user.username})">{{item.user.followingCount || 0}} Following</a>
+                    <a href="member/{{item.user.username}}/projects" ui-sref="member.projects({path:item.user.username})">{{item.user.projectCount || 0}} Projects</a> | 
+                    <a href="member/{{item.user.username}}/followers" ui-sref="member.followers({path:item.user.username})">{{item.user.followerCount || 0}} Followers</a> | 
+                    <a href="member/{{item.user.username}}/following" ui-sref="member.following({path:item.user.username})">{{item.user.followingCount || 0}} Following</a>
                 </p>
 
                 <div class="spacing-5"></div>
@@ -1627,7 +1627,7 @@
                             <p>
                                 <!--<img style="height:32px;border-radius:100%;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{asset[0]}}">-->
 
-                                <img style="border-radius:100%;height:32px;padding-right:5px;" src="http://identicon-1132.appspot.com/{{asset[0]}}?s=8&p=8&f=png">
+                                <img style="border-radius:100%;height:32px;padding-right:5px;" ng-src="http://identicon-1132.appspot.com/{{asset[0]}}?s=8&p=8&f=png">
                                 <a href="#" ng-click="addAssetToTransaction(asset[0])"><b>{{asset[0]}}</b>: {{asset[1]}}</a>
                             </p>
                         </div>

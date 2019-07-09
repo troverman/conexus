@@ -2,7 +2,7 @@
 
 <div class="row">
 
-	<div class="col-sm-2 mobileFix" style="padding-left:0px;padding-right:0px;">
+	<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
 			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection,asset,finance');height:50px;min-height:50px" class="imageContainerSmall">
 	            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -53,7 +53,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
+	<div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
 
 		<!--
 		<div class="spacing-5"></div>
@@ -76,20 +76,26 @@
 
 		<div class="spacing-5"></div>
 
+		<!--
 		<ul style="padding:0px;" class="member-tabs">
 			<li ng-click="selectOverview()"><a href="">Overview</a></li>
 			<li ng-click="selectExpense()"><a href="">Expense</a></li>
 			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
-
-			<!--TODO-->
 			<li style="float:right">
 				<a ng-click="filterToggle('LEDGER')" href="#">
 					{{assetSet[0].element}}
-					<!--<span ng-repeat="asset in assetSet">{{asset.element}}</span>-->
 					<i class="fa fa-question-circle"></i>
 				</a>
 			</li>
+		</ul>
+		-->
 
+		<ul style="padding:0px;" class="member-tabs">
+			<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('POSITIONS')"><i class="fa fa-filter"></i> Filter</a></li>
+	    	<li style="float:right" ng-click="selectRevenue()"><a href="">Revenue</a></li>
+			<li style="float:right" ng-click="selectExpense()"><a href="">Expense</a></li>
+			<li style="float:right" ng-click="selectOverview()"><a href="">Overview</a></li>
+			<div style="clear:both"></div>
 		</ul>
 
 		<div class="card">

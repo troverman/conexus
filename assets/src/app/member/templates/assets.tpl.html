@@ -13,8 +13,12 @@
 -->
 
 <div class="row">
+	<ul style="padding:0px;" class="member-tabs">
+        <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('POSITIONS')"><i class="fa fa-filter"></i> Filter</a></li>
+       	<div style="clear:both"></div>
+    </ul>
     <div class="card">
-        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>    
+        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>    
     </div>
 </div>
 
@@ -53,9 +57,20 @@
 </div>
 -->
 
+
 <div class="row">
 	<div class="card">
+		<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');min-height:100px" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Balance</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<div style="padding:16px;">
+
 			<h5>Balance Lookup <span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
 	   		<form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
 	        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
@@ -67,23 +82,10 @@
 	    		<h5><a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
 	    		<!--FOUND TOKEN MODEL.. INFORMATION IE REP OR-->
 	    	</div>
-	    </div>
-	</div>
-</div>
 
-<div class="row">
-	<div class="card">
-		<div style="padding:16px;">
-
-			<!--
-			<div>
-				<h3>Reputation</h3>
-				<highchart config="reputationColumn"></highchart>
-			</div>
-			-->
+			<div class="spacing-10"></div>
 
 			<div>
-				<h3>Balance</h3>
 				<highchart config="balanceColumn"></highchart>
 				<highchart config="balancePie"></highchart>
 			</div>
