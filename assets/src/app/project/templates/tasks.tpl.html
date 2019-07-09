@@ -73,11 +73,17 @@
 	
 		<div ng-repeat="item in tasks">
 			<div class="card" ng-click="cardDetailToggle(item)">
-				<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+				<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:200px;" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75);height:200px;" class="imageContainerSmallDiv">  
+                    	<!--
+                    	<div style="float:right;text-align:right;padding:16px">
+	                    	<a style="float:right;text-align:right;padding:16px" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:white"><i class="fa fa-ellipsis-v"></i></span></a>
+	                    </div>
+	                	-->
                         <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
+                            <div style="padding:15px">
                                 <h1 ng-click="$event.stopPropagation()" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</h1>
+                                <h5 ng-click="$event.stopPropagation()"><a style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.id}}</a></h5>
                             </div>
                         </div>
                     </div>
@@ -86,7 +92,9 @@
 					<div style="float:right;text-align:right">
                     	<a ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
                     </div>
-					<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
+					<p>
+						<!--<i class="fas fa-project-diagram"></i>--> <a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}"><b>{{tag.trim()}}</b> </a>
+					</p>
                     <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 					<span style="color:gray" am-time-ago="item.createdAt"></span>
 				</div>

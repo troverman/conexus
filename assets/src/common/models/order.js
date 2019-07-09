@@ -10,6 +10,7 @@ angular.module('models.order', ['services', 'sails.io',])
                 skip:model.skip,
                 sort:model.sort,
                 id:model.id,
+                item:model.item,
                 market:model.market,
                 order:model.order,
                 project:model.project,

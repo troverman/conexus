@@ -394,15 +394,15 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newOrder = {};
-            console.log(identiferSetAlpha,identiferSetBeta.id)
-            if (identiferSetAlpha){$scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];}
+            if (identiferSetAlpha){
+                $scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];
+            }
             if (identiferSetBeta){
                 $scope.identiferSetBeta = [{text:identiferSetBeta.id}];
                 $scope.newOrder.identiferSetBeta = [{text:identiferSetBeta.id}];
                 $scope.newOrder.setBeta = {};
                 $scope.newOrder.setBeta[identiferSetBeta.id] = 1
             }
-            console.log($scope.identiferSetBeta);
             $mdSidenav('order').toggle();
         }
         else{$mdSidenav('login').toggle();}

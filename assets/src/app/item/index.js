@@ -18,15 +18,19 @@ angular.module( 'conexus.item', [
             actions: ['ActionModel', 'item', function(ActionModel, item) {
                 return ActionModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
+            orders: ['OrderModel', 'item', function(OrderModel, item) {
+                return OrderModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
+            }],
             //TODO: ORDERS .. BIDS FOR OWNERSHIP -- UNIFY CONTENT AND ITEM
             transactions:['TransactionModel', 'item', function(TransactionModel, item) {
                 return TransactionModel.getSome({amountSet:[item.id], limit:20, skip:0, sort:'createdAt DESC'});
-            }]
+            }],
+
         }
 	});
 }])
 
-.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$scope', 'actions', 'ContentModel', 'item', 'OrderModel', 'ReactionModel', 'titleService', 'transactions', function ItemController( $rootScope, $location, $mdSidenav, $scope, actions, ContentModel, item, OrderModel, ReactionModel, titleService, transactions ) {
+.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$scope', 'actions', 'ContentModel', 'item', 'OrderModel', 'orders', 'ReactionModel', 'titleService', 'transactions', function ItemController( $rootScope, $location, $mdSidenav, $scope, actions, ContentModel, item, OrderModel, orders, ReactionModel, titleService, transactions ) {
    
     $scope.item = item;
     if(!$scope.item){$location.path('/')}
@@ -36,6 +40,7 @@ angular.module( 'conexus.item', [
 
     //VERBS FOR THE ITEM ARE?? 
     $scope.actions = actions;
+    $scope.orders = orders;
     $scope.transactions = transactions;
 
     console.log(actions,transactions)
@@ -99,6 +104,279 @@ angular.module( 'conexus.item', [
     $scope.inputVectorWeight = [];
     $scope.newReaction = {};
     $scope.outputVector = [];
+
+
+
+
+
+
+
+
+    //market vs discrete orders
+
+   $scope.options = {
+        textureOnViewport:true,
+        pixelRatio: 'auto',
+        motionBlur: false,
+        hideEdgesOnViewport:true
+    };
+    $scope.layout = {name: 'grid', coolingFactor: 0, animate: true};
+
+    $scope.style = [
+        {
+            "selector": "core",
+            "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+            }
+        }, {
+            "selector": "node",
+            "style": {
+                "width": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "height": "25",//"mapData(score, 0, 0.006769776522008331, 10, 30)",
+                "content": "data(name)",
+                "font-size": "9px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+            }
+        }, {
+            "selector": "node[?attr]",
+            "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+            }
+        }, {
+            "selector": "node[?query]",
+            "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+            }
+        }, {
+            "selector": "node:selected",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+            }
+        }, {
+            "selector": "edge",
+            "style": {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale":"0.75",
+                "source-arrow-shape": "none",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "3",
+                "overlay-padding": "3px"
+            }
+        }, {
+            "selector": "node.unhighlighted",
+            "style": {
+                "opacity": "0.2"
+            }
+        }, {
+            "selector": "edge.unhighlighted",
+            "style": {
+                "opacity": "0.05"
+            }
+        }, {
+            "selector": ".highlighted",
+            "style": {
+                "z-index": "999999"
+            }
+        }, {
+            "selector": "node.highlighted",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+            }
+        }, {
+            "selector": "edge.filtered",
+            "style": {
+                "opacity": "0"
+            }
+        }, {
+            "selector": "edge[group=\"coexp\"]",
+            "style": {
+                "line-color": "#d0b7d5"
+            }
+        }, {
+            "selector": "edge[group=\"coloc\"]",
+            "style": {
+                "line-color": "#a0b3dc"
+            }
+        }, {
+            "selector": "edge[group=\"gi\"]",
+            "style": {
+                "line-color": "#90e190"
+            }
+        }, {
+            "selector": "edge[group=\"path\"]",
+            "style": {
+                "line-color": "#9bd8de"
+            }
+        }, {
+            "selector": "edge[group=\"pi\"]",
+            "style": {
+                "line-color": "#eaa2a2"
+            }
+        }, {
+            "selector": "edge[group=\"predict\"]",
+            "style": {
+                "line-color": "#f6c384"
+            }
+        }, {
+            "selector": "edge[group=\"spd\"]",
+            "style": {
+                "line-color": "#dad4a2"
+            }
+        }, {
+            "selector": "edge[group=\"spd_attr\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
+        }, {
+            "selector": "edge[group=\"reg\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
+        }, {
+            "selector": "edge[group=\"reg_attr\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
+        }, 
+        {
+            "selector": "edge[group=\"user\"]",
+            "style": {
+                "line-color": "#f0ec86"
+            }
+        }
+    ];
+
+    $scope.elementsObj = {};
+
+    //SET POSITIONS AS COMBINATORIALS
+    //..//TODO
+    $scope.renderGraph = function(orders){
+        $scope.elementsObj = {};
+
+        for (x in orders){
+
+            for (y in Object.keys(orders[x].setAlpha)){
+
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:Object.keys(orders[x].setAlpha)[y], name:Object.keys(orders[x].setAlpha)[y]}
+                };
+
+                if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setAlpha)[y]) == -1){
+                    $scope.elementsObj[Object.keys(orders[x].setAlpha)[y]] = modelNode;
+                }
+
+                for (z in Object.keys(orders[x].setBeta)){
+
+                    var modelNode = {
+                        group:'nodes',
+                        data:{id:Object.keys(orders[x].setBeta)[z], name:Object.keys(orders[x].setBeta)[z]}
+                    };
+
+                    if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setBeta)[z]) == -1){
+
+                        $scope.elementsObj[Object.keys(orders[x].setBeta)[z]] = modelNode;
+
+                        var modelEdge = {
+                            group:'edges',
+                            data:{id:Object.keys(orders[x].setAlpha)[y]+'-'+Object.keys(orders[x].setBeta)[z], source:Object.keys(orders[x].setAlpha)[y], target:Object.keys(orders[x].setBeta)[z]}
+                        };
+
+                        $scope.elementsObj[Object.keys(orders[x].setAlpha)[y]+'-'+Object.keys(orders[x].setBeta)[z]] = modelEdge;
+
+                        console.log($scope.elementsObj)
+
+                    }
+
+                }
+
+            }
+
+            for (y in Object.keys(orders[x].setBeta)){
+
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:Object.keys(orders[x].setBeta)[y], name:Object.keys(orders[x].setBeta)[y]}
+                };
+
+                if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setBeta)[y]) == -1){
+                    $scope.elementsObj[Object.keys(orders[x].setBeta)[y]] = modelNode;
+                }
+
+                for (z in Object.keys(orders[x].setAlpha)){
+
+                    var modelNode = {
+                        group:'nodes',
+                        data:{id:Object.keys(orders[x].setAlpha)[z], name:Object.keys(orders[x].setAlpha)[z]}
+                    };
+
+                    //if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setAlpha)[z]) == -1){
+
+                        $scope.elementsObj[Object.keys(orders[x].setAlpha)[z]] = modelNode;
+
+                        var modelEdge = {
+                            group:'edges',
+                            data:{id:Object.keys(orders[x].setBeta)[y]+'-'+Object.keys(orders[x].setAlpha)[z], source:Object.keys(orders[x].setBeta)[y], target:Object.keys(orders[x].setAlpha)[z]}
+                        };
+
+                        $scope.elementsObj[Object.keys(orders[x].setBeta)[y]+'-'+Object.keys(orders[x].setAlpha)[z]] = modelEdge;
+
+                        console.log($scope.elementsObj)
+
+                    //}
+
+                }
+
+            }
+
+        }
+
+    };
+    $scope.renderGraph($scope.orders);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //TODO: IF VERIFIED ORDER CAN RATE | TOOMUCH RN

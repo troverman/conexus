@@ -1216,7 +1216,7 @@ angular.module( 'conexus.member', [
     };
 
 
-    //WORK HERE!! :) --> YEE SHOW UP
+    //WORK HERE!! :)
     $scope.sumFlow = [];
     $scope.sumFrom = []
     $scope.sumTo = [];

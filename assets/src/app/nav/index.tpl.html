@@ -654,7 +654,7 @@
                 <h4 ng-show="!currentUser" class="nav-links" style="padding:8px;"><a href="/about" ui-sref="about">About</a></h4>
                 <h4 ng-show="currentUser" class="nav-links" ng-click="cre8Toggle()" style="padding:8px;"><a>CRE8</a></h4>
                 <h4 class="nav-links" style="padding:4px;"><a href="/discover" ui-sref="discover">Discover</a></h4>
-                <h4 class="nav-links" style="padding:4px;"><a href="/market" ui-sref="market">Market</a></h4>
+                <h4 class="nav-links" style="padding:4px;"><a href="/market" ui-sref="markets">Market</a></h4>
                 <h4 class="nav-links" style="padding:4px;"><a href="/marketplace" ui-sref="marketPlace">Marketplace</a></h4>
                 <h4 class="nav-links" style="padding:4px;"><a href="/projects" ui-sref="projects">Projects</a></h4>
                 <h4 ng-show="currentUser" class="nav-links" style="padding:8px;">
@@ -729,9 +729,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align:left;margin-bottom:15px" class="col-sm-12">
-                            <a ng-click="invertMarket()" style="width:100px" class="btn btn-default log-btn"><i class="fa fa-refresh"></i> Invert</a>
-                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6 form-group">
                             <h5>
                                 <span ng-show="!identiferSetBeta">Asset Identifer Set β</span>
@@ -1252,7 +1251,7 @@
                                     <span style="font-size:24px;color:white">{{item.username}}</span>
                                 </span>
                             </h1>
-                            <h5 style="color:white">{{item.id}}</h5>
+                            <h5 style="color:white" ng-click="memberQRToggle(item)"><i style="color:white" class="fas fa-qrcode"></i> {{item.id}}</h5>
                         </div>
                     </div>
                 </div>

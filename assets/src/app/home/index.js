@@ -96,6 +96,7 @@ angular.module( 'conexus.home', [
             positions: ['$rootScope', 'OrderModel', function($rootScope, OrderModel) {
                 return OrderModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
+            
         }
     })
 

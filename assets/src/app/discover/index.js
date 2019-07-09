@@ -34,6 +34,7 @@ angular.module( 'conexus.discover', [
             transactions: ['TransactionModel', function(TransactionModel){
                 return TransactionModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
+            
         }
 	});
 
