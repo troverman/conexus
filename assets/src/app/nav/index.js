@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http','$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$window', 'ActionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $window, ActionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
     //TODO: ALL!
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
@@ -37,6 +37,9 @@ angular.module( 'conexus.nav', [
 
     //TODO: REFACTOR SOON
     if ($rootScope.currentUser){
+
+        //DO BETTER
+        $scope.viewing = true;
 
         $scope.newAction = {};
         $scope.newContent = {};
@@ -1647,16 +1650,100 @@ angular.module( 'conexus.nav', [
 
 
     //VIEWMODEL.. 
-    $rootScope.timeModel = {};
-     $rootScope.timeModel.amount = 0;
+    if (!$rootScope.timeModel){
+        $rootScope.timeModel = {};
+        $rootScope.timeModel.amount = 0;
+    }
     //HEARTBEAT FXN FROM FRONTEND.. --> CACL ON BACKEND //BLOCK // PEER
-
-    $scope.timerFunction = function(time){
-        $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
-        //console.log($scope.timeModel.amount)
+    $rootScope.timeQ = [];
+    //VIEW TIMER.. 
+    $scope.timeChart = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'time',
+            type: 'column',
+            name: 'time',
+            data: [],
+            animation: false
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
     };
-    $scope.timer = setInterval(function(){$scope.timerFunction(1)}, 1000);
 
+    //idle fxn
+    $scope.timerFunction = function(time){
+
+        function amountInArray(array, value) {
+            return array.reduce(function(n, x){
+                if (x.context.string == value){n+=parseFloat(x.amount)}
+                return n;
+            },0);
+        };
+
+        $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
+        //if last value was same context add -
+        //    if  amount > 10 send to backend
+
+        //token string
+        //NEED ROOTSCOPE OF SELECTED MODEL...
+        //NEED MODEL ID
+        //SHOULD BE A ROOTSCOPE.. CAN CHANGE BASED ON MODEL HOVER . GOOD FOR ATTENTION
+
+        //timeQ['general']
+        //timeQ['task']
+
+        //break into lists of context.. overtime.. and current. .. need graph
+        //allow for meta data in auto time .... 
+        //show view time controller. 
+        //bar of each context.
+
+        //$state.params[Object.keys($state.params)[0]]
+
+        //INTENTIONAL TIME
+
+        var string = '';
+        string += $state.current.name.toUpperCase().replace('.','+');
+        if ($state.params[Object.keys($state.params)[0]]){
+            string += '+'+$state.params[Object.keys($state.params)[0]];
+        }
+        string += '+TIME+VIEW';
+
+        $rootScope.timeQ.push({
+            context:{
+                state:$state.current.name, 
+                params:$state.params,
+                string:string,
+            },
+            amount:1
+        });
+
+        //get unique keys
+
+        
+        var index = $scope.timeChart.xAxis.categories.indexOf(string);
+        if (index == -1){
+            $scope.timeChart.xAxis.categories.push(string);
+            $scope.timeChart.series[0].data.push(1);
+        }
+        else{
+            $scope.timeChart.series[0].data[index] = $rootScope.timeModel.amount;
+        }
+
+
+
+    };
+
+    $interval(function(){$scope.timerFunction(1)},1000);
+    //$scope.interval = setInterval($scope.timerFunction, 1000);
 
     //TODO
     $scope.createView = function(){

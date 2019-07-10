@@ -1584,13 +1584,26 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <p style=\"color:gray;font-style:italic\">Contribution is readily and excitedly accepted. All CRE8 Clients follow transparent governance principles.</p>\n" +
     "                <!--PEER CLIENTS.. WEBASSEMBLY (RUST), SWIFT, JAVA, PYTHON, GO .. SHOULD BE META CREATE PROJECTS-->\n" +
     "                <div>\n" +
-    "                    <h5>Front End Clients</h5>\n" +
-    "                    <p><a href=\"https://www.github.com/troverman/conexus\">Angular 1.X (1.7.8), <a href=\"project/cre8client-js-view\">Vue (v2.6.1), <a href=\"project/cre8client-js-react\">React (16.8)</a></p>\n" +
-    "                    <!--APP UI CODE IS  .. REACT-->\n" +
-    "                    <h5>Peer Clients</h5>\n" +
-    "                    <p><a href=\"project/cre8client-rust-webassembly\">In-Browser WebAssembly (RUST)</a>, <a href=\"project/cre8client-python\">Python</a>, <a href=\"project/cre8client-go\">Go</a></p>\n" +
-    "                    <h5>Native Applications</h5>\n" +
-    "                    <p><a href=\"project/cre8client-android\">Android</a>, <a href=\"project/cre8client-ios\">iOS</a>, <a href=\"project/cre8client-osx\">OSX</a>, <a href=\"project/cre8client-windows\">Windows</a></p>\n" +
+    "                    <h5><a href=\"project/cre8-javascript-client\" ui-sref=\"project.activity({path:'cre8-javascript-client'})\">Front Javascript End Clients</a></h5>\n" +
+    "                    <p>\n" +
+    "                        <a href=\"project/cre8-angular-1-javascript-client\" ui-sref=\"project.activity({path:'cre8-rust-peer-client'})\">Angular 1.X (1.7.8)</a>, \n" +
+    "                        <a href=\"project/cre8-vue-javascript-client\" ui-sref=\"project.activity({path:'cre8-rust-peer-client'})\">Vue (v2.6.1)</a>, \n" +
+    "                        <a href=\"project/cre8-react-javascript-client\" ui-sref=\"project.activity({path:'cre8-rust-peer-client'})\">React (16.8)</a>\n" +
+    "                    </p>\n" +
+    "                    <!--APP UI CODE IS  .. REACT &OR CUSTOM FONTEND SPECIFICATIONS ON CHAIN -->\n" +
+    "                    <h5><a href=\"project/cre8-peer-client\" ui-sref=\"project.activity({path:'cre8-peer-client'})\">Peer Clients</a></h5>\n" +
+    "                    <p>\n" +
+    "                        <a href=\"project/cre8-rust-peer-client\" ui-sref=\"project.activity({path:'cre8-rust-peer-client'})\">In-Browser WebAssembly (RUST)</a>, \n" +
+    "                        <a href=\"project/cre8-python-peer-client\" ui-sref=\"project.activity({path:'cre8-python-peer-client'})\">Python</a>, \n" +
+    "                        <a href=\"project/project/cre8-go-peer-client\" ui-sref=\"project.activity({path:'cre8-go-peer-client'})\">Go</a>\n" +
+    "                    </p>\n" +
+    "                    <h5><a href=\"project/cre8-native-client\" ui-sref=\"project.activity({path:'cre8-native-client'})\">Native Applications</a></h5>\n" +
+    "                    <p>\n" +
+    "                        <a href=\"project/cre8-android-native-client\" ui-sref=\"project.activity({path:'cre8-android-native-client'})\">Android</a>, \n" +
+    "                        <a href=\"project/cre8-ios-native-client\" ui-sref=\"project.activity({path:'cre8-ios-native-client'})\">iOS</a>, \n" +
+    "                        <a href=\"project/cre8-osx-native-client\" ui-sref=\"project.activity({path:'cre8-osx-native-client'})\">OSX</a>, \n" +
+    "                        <a href=\"project/cre8-windows-native-client\" ui-sref=\"project.activity({path:'cre8-windows-native-client'})\">Windows</a>\n" +
+    "                    </p>\n" +
     "                </div>\n" +
     "\n" +
     "            </div>\n" +
@@ -9882,19 +9895,23 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Timer</h1>\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Time</h1>\n" +
+    "                            <h5 style=\"color:white\">Pay Attention!</h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div style=\"padding:16px\">\n" +
+    "            <div style=\"padding:16px;overflow:scroll\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Multi-D Time</p>\n" +
-    "                <p>Here is what you are doing now</p>\n" +
-    "                <p>Watching -- Spending Time / attention</p>\n" +
-    "                <p>Working on CONTEXT; TASK</p>\n" +
     "                <h4>{{taskTime}}</h4>\n" +
+    "                <h4>{{timeModel.amount}}</h4>\n" +
+    "\n" +
+    "                <highchart config=\"timeChart\"></highchart>\n" +
+    "\n" +
+    "                <div ng-repeat=\"time in timeQ | orderBy:'-'\">\n" +
+    "                    <p>{{time.context}} : <b>{{time.amount}}</b></p>\n" +
+    "                </div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -10336,6 +10353,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <a ng-if=\"taskTime == 0\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
     "                <a ng-if=\"taskTime > 0\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
     "                <a ng-if=\"taskTime > 0\">{{taskTime}}</a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-click=\"timerToggle()\" ng-if=\"currentUser\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:30px;font-size:18px\">\n" +
+    "                <a><i style=\"color:#2ab995\" class=\"fa fa-eye\"></i></a>\n" +
+    "                <!--<a>{{timeModel.amount}}</a>-->\n" +
     "            </div>\n" +
     "\n" +
     "            <!--TODO: EYE.. ATTENTION.. VIEW ETC-->\n" +
@@ -11138,8 +11160,17 @@ angular.module("project/templates/assets.tpl.html", []).run(["$templateCache", f
     "        </form>\n" +
     "    </div>\n" +
     "	<div class=\"card\">\n" +
+    "		<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Balance</h1>\n" +
+    "                        <h5><span style=\"font-size:11px;color:gray\">0x{{project.id}}</span></h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "			<h5><span style=\"font-size:11px;color:gray\">0x{{project.id}}</span></h5>\n" +
     "	   		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
     "	        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset String\">\n" +
     "	        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
@@ -11994,7 +12025,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "<!--TODO-->\n" +
     "<div ng-show=\"project.parent\">\n" +
     "	<div class=\"spacing-5\"></div>\n" +
-    "	<h3><a href=\"project/{{project.urlTitle}}\" ui-sref=\"project.activity({path:project.urlTitle})\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"></a></h3>\n" +
+    "	<h3><a href=\"project/{{project.parent.urlTitle}}\" ui-sref=\"project.activity({path:project.parent.urlTitle})\"><img style=\"height:32px\" src=\"{{project.parent.avatarUrl}}\"></a></h3>\n" +
     "	<div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
     "\n" +

@@ -1456,19 +1456,23 @@
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
-                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Timer</h1>
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Time</h1>
+                            <h5 style="color:white">Pay Attention!</h5>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="padding:16px">
+            <div style="padding:16px;overflow:scroll">
                 <div class="spacing-15"></div>
-                <p style="color:gray;font-style:italic">Multi-D Time</p>
-                <p>Here is what you are doing now</p>
-                <p>Watching -- Spending Time / attention</p>
-                <p>Working on CONTEXT; TASK</p>
                 <h4>{{taskTime}}</h4>
+                <h4>{{timeModel.amount}}</h4>
+
+                <highchart config="timeChart"></highchart>
+
+                <div ng-repeat="time in timeQ | orderBy:'-'">
+                    <p>{{time.context}} : <b>{{time.amount}}</b></p>
+                </div>
                 <div class="spacing-10"></div>
             </div>
         </div>
@@ -1910,6 +1914,11 @@
                 <a ng-if="taskTime == 0"><i style="color:red" class="fa fa-circle"></i></a>
                 <a ng-if="taskTime > 0"><i style="color:red" class="fa fa-pause"></i></a>
                 <a ng-if="taskTime > 0">{{taskTime}}</a>
+            </div>
+
+            <div ng-click="timerToggle()" ng-if="currentUser" class="nav-links" style="float:left;margin-top:13px;margin-right:30px;font-size:18px">
+                <a><i style="color:#2ab995" class="fa fa-eye"></i></a>
+                <!--<a>{{timeModel.amount}}</a>-->
             </div>
 
             <!--TODO: EYE.. ATTENTION.. VIEW ETC-->

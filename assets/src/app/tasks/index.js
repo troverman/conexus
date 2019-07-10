@@ -147,6 +147,8 @@ angular.module( 'conexus.tasks', [
     };
 
 
+    //TODO.. SMART LOCATION FILTER..
+    //IF ACTIVE LOCATION FILTER -- > MAP RADIUS :) 
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
